@@ -217,13 +217,8 @@ class userModel extends model
             ->get();
         $user->password = $this->createPassword($this->post->password1, $user->account); 
 
-        if((isset($user->admin) and $user->admin == 'super') or !empty($user->realnames))
-        {
-            $user->realnames = helper::jsonEncode($user->realnames);
-        }
-
         $this->dao->insert(TABLE_USER)
-            ->data($user, $skip = 'password1,password2')
+            ->data($user, $skip = 'password1,password2,groups')
             ->autoCheck()
             ->batchCheck($this->config->user->require->register, 'notempty')
             ->check('account', 'unique')

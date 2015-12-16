@@ -83,16 +83,16 @@ class user extends control
      */
     public function create()
     {
-        $this->loadModel('guarder');
+        $okFile = $this->loadModel('common')->verifyAdmin();
+        $pass   = $this->loadModel('guarder')->verify();
+        $this->view->okFile = $okFile;
+        $this->view->pass   = $pass;
+
         if($_POST)
         {
-            $user = $this->user->identify($this->app->user->account, $this->post->password);
-            if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
-
             $this->user->create();
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "user={$this->post->account}")));
-
         }
         $this->view->title = $this->lang->user->create;
         $this->view->groups   = $this->loadModel('group')->getPairs();
