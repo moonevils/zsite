@@ -234,7 +234,7 @@ class uiModel extends model
         $fontsList = array_flip($this->lang->ui->theme->fontList);
         foreach($params as $item => $value)
         {
-            $value = str_replace(array('&gt', '&quot;'), array('>', '"'), $value);
+            $value = str_replace(array('&gt;', '&quot;'), array('>', '"'), $value);
             if(empty($value)) $params[$item] = 0;
             if(isset($fontsList[$value])) $params[$item] = $fontsList[$value];
         }
@@ -270,7 +270,7 @@ class uiModel extends model
         if(!empty($extraCss))
         {
             $css .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
-            $extraCss = str_replace(array('&gt', '&quot;'), array('>', '"'), $extraCss);
+            $extraCss = str_replace(array('&gt;', '&quot;'), array('>', '"'), $extraCss);
             $css .= $lessc->compile($extraCss);
         }
 
