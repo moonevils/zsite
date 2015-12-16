@@ -234,7 +234,7 @@ class uiModel extends model
         $fontsList = array_flip($this->lang->ui->theme->fontList);
         foreach($params as $item => $value)
         {
-            $value = str_replace('&gt;', '>', $value);
+            $value = str_replace(array('&gt', '&quot;'), array('>', '"'), $value);
             if(empty($value)) $params[$item] = 0;
             if(isset($fontsList[$value])) $params[$item] = $fontsList[$value];
         }
@@ -270,6 +270,7 @@ class uiModel extends model
         if(!empty($extraCss))
         {
             $css .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
+            $extraCss = str_replace(array('&gt', '&quot;'), array('>', '"'), $extraCss);
             $css .= $lessc->compile($extraCss);
         }
 
@@ -1027,6 +1028,11 @@ EOT;
         unset($params['js']);
 
         $params = var_export($params, true);
+        
+        $css    = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $css);
+        $js     = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $js);
+        $params = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $params);
+
         $code   = "<?php
 if(!function_exists('get_THEME_CODEFIX_CSS'))
 {
