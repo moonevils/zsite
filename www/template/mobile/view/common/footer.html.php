@@ -57,5 +57,11 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 <div class='block-region region-footer hidden blocks' data-region='all-footer'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 <?php if(commonModel::isAvailable('shop')) include TPL_ROOT . 'common/cart.html.php';?>
 <?php include TPL_ROOT . 'common/log.html.php';?>
+
+<?php
+// execute script of theme
+$baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+  if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
+?>
 </body>
 </html>
