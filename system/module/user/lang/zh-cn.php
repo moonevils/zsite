@@ -83,6 +83,7 @@ $lang->user->deleteHistory   = '删除用户及历史数据';
 $lang->user->question        = '密保问题';
 $lang->user->answer          = '答案';
 
+$lang->user->type         = '账户类型';
 $lang->user->profile      = '个人信息';
 $lang->user->editProfile  = '编辑信息';
 $lang->user->thread       = '我的主题';
@@ -136,6 +137,9 @@ $lang->user->operate             = '操作';
 $lang->user->adminList['super']  = '超级管理员';
 $lang->user->adminList['common'] = '管理员';
 $lang->user->adminList['no']     = '普通会员';
+
+$lang->user->accountTypeList['no']      = '前台账号';
+$lang->user->accountTypeList['common']  = '后台账号';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
