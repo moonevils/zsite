@@ -1560,27 +1560,14 @@ class router
      */
     public function loadLang($moduleName)
     {
+        global $app;
+        $langFiles = array();
+
         $modulePath   = $this->getModulePath($moduleName);
         $mainLangFile = $modulePath . 'lang' . DS . $this->clientLang . '.php';
 
-        /* get ext lang files. */
-        $extLangPath        = $this->getModuleExtPath($moduleName, 'lang');
-        $commonExtLangFiles = helper::ls($extLangPath['common'] . $this->clientLang, '.php');
-        $siteExtLangFiles   = helper::ls($extLangPath['site'] . $this->clientLang, '.php');
-        $extLangFiles       = array_merge($commonExtLangFiles, $siteExtLangFiles);
+        if(file_exists($mainLangFile)) $langFiles[] = $mainLangFile;
 
-        /* Set the files to includ. */
-        if(!is_file($mainLangFile))
-        {
-            if(empty($extLangFiles)) return false;  // also no extension file.
-            $langFiles = $extLangFiles;
-        }
-        else
-        {
-            $langFiles = array_merge(array($mainLangFile), $extLangFiles);
-        }
-
-        global $app;
         if(is_object($app))
         {
             $device = helper::getDevice();
@@ -1589,6 +1576,17 @@ class router
 
             if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;
         }
+
+        /* get ext lang files. */
+        $extLangPath        = $this->getModuleExtPath($moduleName, 'lang');
+        $commonExtLangFiles = helper::ls($extLangPath['common'] . $this->clientLang, '.php');
+        $siteExtLangFiles   = helper::ls($extLangPath['site'] . $this->clientLang, '.php');
+        $extLangFiles       = array_merge($commonExtLangFiles, $siteExtLangFiles);
+
+        $langFiles = array_merge($langFiles, $extLangFiles);
+
+        /* Set the files to includ. */
+        if(empty($langFiles)) return false;
 
         global $lang;
         if(!is_object($lang)) $lang = new language();

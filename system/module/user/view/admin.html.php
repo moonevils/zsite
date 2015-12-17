@@ -30,6 +30,7 @@ js::set('admin', $this->get->admin);
           </span>
         </div>
       </form>
+      <?php echo html::a(inlink('create'), "<i class='icon icon-plus'></i>" .  $lang->user->create, "data-toggle='modal' class='btn btn-primary'");?>
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>
@@ -83,7 +84,7 @@ js::set('admin', $this->get->admin);
           <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
           <?php if(commonModel::isAvailable('score')):?>
           <span class="dropdown">
-            <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->score?><span class="caret"></span></a>
+            <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->score->common?><span class="caret"></span></a>
             <ul class="dropdown-menu pull-right text-center" role="menu">
               <li><?php commonModel::printLink('user', 'addScore', "account=$user->account", $lang->user->addScore, "data-toggle=modal"); ?></li>
               <li><?php commonModel::printLink('user', 'reduceScore', "account=$user->account", $lang->user->reduceScore, "data-toggle=modal"); ?></li>

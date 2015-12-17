@@ -218,7 +218,7 @@ class userModel extends model
         $user->password = $this->createPassword($this->post->password1, $user->account); 
 
         $this->dao->insert(TABLE_USER)
-            ->data($user, $skip = 'password1,password2')
+            ->data($user, $skip = 'password1,password2,groups')
             ->autoCheck()
             ->batchCheck($this->config->user->require->register, 'notempty')
             ->check('account', 'unique')
@@ -232,8 +232,7 @@ class userModel extends model
             $viewType = $this->app->getViewType();
             if(!dao::isError())
             {
-                $this->app->user->account = $this->post->account;
-                $this->loadModel('score')->earn('register', '', '', 'REGISTER');
+                $this->loadModel('score')->earn('register', '', '', 'REGISTER', $user->account);
 
                 if($viewType == 'json') die('success');
             }

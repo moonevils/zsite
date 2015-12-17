@@ -102,7 +102,11 @@ class orderModel extends model
         $goods = new stdclass();
         $goods->orderID = $orderID;
         
-        if(!$this->post->product) return array('result' => 'fail', 'message' => $this->lang->order->noProducts);
+        if(!$this->post->product)
+        {
+            $this->clearOrder($orderID);
+            return array('result' => 'fail', 'message' => $this->lang->order->noProducts);
+        }
 
         /* Save products of the order and compute order amount. */
         $amount = 0;
@@ -157,7 +161,7 @@ class orderModel extends model
         $address->phone   = $this->post->phone;
         $address->zipcode = $this->post->zipcode;
 
-        $this->dao->insert(TABLE_ADDRESS)->data($address)->batchCheck($this->config->address->require->create, 'notempty')->exec();
+        $this->dao->insert(TABLE_ADDRESS)->data($address)->check('phone', 'phone')->batchCheck($this->config->address->require->create, 'notempty')->exec();
         if(dao::isError()) return false;
         return $address;
     }

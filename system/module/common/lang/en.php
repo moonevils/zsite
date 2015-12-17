@@ -58,7 +58,6 @@ $lang->logout           = 'Logout';
 $lang->login            = 'Login';
 $lang->account          = 'Account';
 $lang->password         = 'Password';
-$lang->score            = 'Score';
 $lang->changePassword   = 'Change password';
 $lang->editEmail        = "Email setting";
 $lang->securityQuestion = 'Security question';
@@ -108,6 +107,9 @@ EOT;
 $lang->color       = 'Color';
 $lang->colorTip    = 'HEX color';
 $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
+
+$lang->score = new stdclass();
+$lang->score->common = 'Score';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -247,7 +249,6 @@ $lang->site->menu->contact  = 'Contact|company|setcontact|';
 $lang->site->menu->nav      = 'Navigation|nav|admin|';
 $lang->site->menu->link     = 'Links|links|admin|';
 $lang->site->menu->oauth    = 'OAuth|site|setoauth|';
-$lang->site->menu->yangcong = 'Yangcong Login|site|setyangcong|';
 $lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search   = 'Full text search|search|buildindex|';
@@ -354,6 +355,8 @@ $lang->error->in           = '<strong>%s</strong>must in<strong>%s</strong>。';
 $lang->error->int          = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
 $lang->error->float        = "<strong>%s</strong>should be a interger or float.";
 $lang->error->email        = "<strong>%s</strong>should be email.";
+$lang->error->phone        = "<strong>%s</strong>should be phone number.";
+$lang->error->mobile       = "<strong>%s</strong>should be mobile phone number.";
 $lang->error->URL          = "<strong>%s</strong>should be url.";
 $lang->error->date         = "<strong>%s</strong>should be date";
 $lang->error->account      = "<strong>%s</strong>should be a valid account.";

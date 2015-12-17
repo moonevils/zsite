@@ -58,7 +58,6 @@ $lang->logout           = '退出';
 $lang->login            = '登录';
 $lang->account          = '帐号';
 $lang->password         = '密码';
-$lang->score            = '积分';
 $lang->changePassword   = '修改密码';
 $lang->editEmail        = "邮箱设置";
 $lang->securityQuestion = '密保问题';
@@ -108,6 +107,9 @@ EOT;
 $lang->color       = '颜色';
 $lang->colorTip    = '十六进制颜色值';
 $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
+
+$lang->score = new stdclass();
+$lang->score->common = '积分';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -247,7 +249,6 @@ $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->nav      = '导航设置|nav|admin|';
 $lang->site->menu->link     = '友情链接|links|admin|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
-$lang->site->menu->yangcong = '洋葱登录|site|setyangcong|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
@@ -354,6 +355,8 @@ $lang->error->in           = '<strong>%s</strong>必须为<strong>%s</strong>。
 $lang->error->int          = array('<strong>%s</strong>应当是数字。', '<strong>%s</strong>最小值为%s',  '<strong>%s</strong>应当介于<strong>%s-%s</strong>之间。');
 $lang->error->float        = '<strong>%s</strong>应当是数字，可以是小数。';
 $lang->error->email        = '<strong>%s</strong>应当为合法的EMAIL。';
+$lang->error->phone        = '<strong>%s</strong>应当为合法的电话号码。';
+$lang->error->mobile       = '<strong>%s</strong>应当为合法的手机号码。';
 $lang->error->URL          = '<strong>%s</strong>应当为合法的URL。';
 $lang->error->date         = '<strong>%s</strong>应当为合法的日期。';
 $lang->error->account      = '<strong>%s</strong>应当为字母和数字的组合，至少三位';
