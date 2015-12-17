@@ -1090,3 +1090,21 @@ function isGetUrl()
     if(strpos($_SERVER['REQUEST_URI'], "{$webRoot}index.php/?") === 0) return true;
     return false;
 }
+
+/**
+ * Get file mime type.
+ * 
+ * @param  int    $file 
+ * @access public
+ * @return void
+ */
+function getFileMimeType($file)
+{
+    if(function_exists('mime_content_type')) return mime_content_type($file);
+    if(function_exists('finfo_open'))
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        return finfo_file($finfo, $file); 
+    }
+    return false;
+}
