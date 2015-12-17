@@ -904,9 +904,6 @@ class uiModel extends model
             foreach($slides as $slide) copy($slide, str_replace($slidePath . DS, $this->directories->exportSlidePath, $slide));
         }
 
-        /* Export encrypt files. */
-        $this->exportEncrypt($template, $theme, $code);
-
         /* Upload preview picture. */
         if($_FILES)
         {
@@ -919,6 +916,9 @@ class uiModel extends model
             $previewImage = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'preview.png';
             copy($previewImage, $this->directories->exportLessPath . 'preview.png');
         }
+
+        /* Export encrypt files. */
+        $this->exportEncrypt($template, $theme, $code);
 
         /* Zip theme files. */
         $this->app->loadClass('pclzip', true);
@@ -995,7 +995,8 @@ class uiModel extends model
      */
     public function save2php($file, $target)
     {
-        $contentType = mime_content_type($file);
+        $contentType = getFileMimeType($file);
+        if(!$contentType) return false;
         $content     = var_export(file_get_contents($file), true);
         $phpCodes    = <<<EOT
 <?php\n
