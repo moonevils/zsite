@@ -83,6 +83,7 @@ $lang->user->deleteHistory   = 'Delete user and history data';
 $lang->user->question        = 'Security question';
 $lang->user->answer          = 'Answer';
 
+$lang->user->type         = 'Account Type';
 $lang->user->profile      = 'Profile';
 $lang->user->editProfile  = 'Edit profile';
 $lang->user->thread       = 'My threads';
@@ -136,6 +137,9 @@ $lang->user->operate             = 'Operate';
 $lang->user->adminList['super']  = 'Super administrator';
 $lang->user->adminList['common'] = 'Administrator';
 $lang->user->adminList['no']     = 'Member';
+
+$lang->user->accountTypeList['no']      = 'Visitor Account';
+$lang->user->accountTypeList['common']  = 'Admin Account';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = 'Male';

@@ -1,21 +1,20 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php if($pass):?>
 <form method='post' action='<?php echo inlink('create')?>' id='ajaxForm' class='form form-inline'>
-  <table class='table table-form'>
+  <table class='table table-form form-inline'>
     <tr>
       <th><?php echo $lang->user->account;?></th>
       <td><?php echo html::input('account', '', "class='form-control'")?></td><td></td>
     </tr>  
     <tr>
       <th class='w-100px'><?php echo $lang->user->realname;?></th>
-      <td class='w-p60'><?php echo html::input("realname", '', "class='form-control'")?></td>
-      <td></td>
+      <td><?php echo html::input("realname", '', "class='form-control'")?></td>
     </tr>
     <tr>
-      <th><?php echo $lang->user->admin;?></th>
-      <td><?php echo html::select('admin', $lang->user->adminList, '', "class='form-control'")?></td><td></td>
-    </tr>  
-    <tr class="groups">
+      <th><?php echo $lang->user->type;?></th>
+      <td><?php echo html::radio('admin', $lang->user->accountTypeList, 'no', "class='checkbox'")?></td><td></td>
+    </tr>
+    <tr class="groups" style='display:none'>
       <th><?php echo $lang->user->privilege;?></th>
       <td><?php echo html::checkbox('groups', $groups, '');?></td>
     </tr>
