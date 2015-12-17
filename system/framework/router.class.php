@@ -776,7 +776,7 @@ class router
                 if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
                 if($this->config->requestType != 'GET')
                 {
-                    $pathInfo = $this->getPathInfo('PATH_INFO');
+                    $pathInfo = $this->getPathInfo();
                     foreach($this->config->langsShortcuts as $language => $code)
                     {
                         if(strpos(trim($pathInfo, '/'), $code) === 0) $this->clientLang = $language;
@@ -907,9 +907,7 @@ class router
      */
     public function parsePathInfo()
     {
-        $pathInfo = $this->getPathInfo('PATH_INFO');
-        if(empty($pathInfo)) $pathInfo = $this->getPathInfo('ORIG_PATH_INFO');
-        if(empty($pathInfo)) $pathInfo = $this->getPathInfo('REQUEST_URI');
+        $pathInfo = $this->getPathInfo();
         if(trim($pathInfo, '/') == trim($this->config->webRoot, '/')) $pathInfo = '';
         if(!empty($pathInfo))
         {
@@ -936,19 +934,33 @@ class router
     }
 
     /**
-     * Get $PATH_INFO from $_SERVER or $_ENV by the pathinfo var name.
+     * Get $PATH_INFO from $_SERVER or $_ENV.
      *
-     * Mostly, the var name of PATH_INFO is  PATH_INFO, but may be ORIG_PATH_INFO.
-     * 
-     * @param   string  $varName    PATH_INFO, ORIG_PATH_INFO
      * @access  private
      * @return  string the PATH_INFO
      */
-    public function getPathInfo($varName)
+    public function getPathInfo()
     {
-        $value = @getenv($varName);
-        if(strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
-        if(isset($_SERVER[$varName])) $value = $_SERVER[$varName];
+        if(isset($_SERVER['PATH_INFO']))
+        {
+            $value = $_SERVER['PATH_INFO'];
+        }
+        elseif(isset($_SERVER['ORIG_PATH_INFO']))
+        {
+            $value = $_SERVER['ORIG_PATH_INFO'];
+        }
+        elseif(isset($_SERVER['REQUEST_URI']))
+        {
+            $value = $_SERVER['REQUEST_URI'];
+        }
+        else
+        {
+            $value = @getenv('PATH_INFO');
+            if(empty($value)) $value = @getenv('ORIG_PATH_INFO');
+            if(empty($value)) $value = @getenv('REQUEST_URI');
+            if(strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
+        }
+
         if(strpos($value, '?') === false) return trim($value, '/');
         $value = parse_url($value);
         return trim($value['path'], '/');
@@ -1548,27 +1560,14 @@ class router
      */
     public function loadLang($moduleName)
     {
+        global $app;
+        $langFiles = array();
+
         $modulePath   = $this->getModulePath($moduleName);
         $mainLangFile = $modulePath . 'lang' . DS . $this->clientLang . '.php';
 
-        /* get ext lang files. */
-        $extLangPath        = $this->getModuleExtPath($moduleName, 'lang');
-        $commonExtLangFiles = helper::ls($extLangPath['common'] . $this->clientLang, '.php');
-        $siteExtLangFiles   = helper::ls($extLangPath['site'] . $this->clientLang, '.php');
-        $extLangFiles       = array_merge($commonExtLangFiles, $siteExtLangFiles);
+        if(file_exists($mainLangFile)) $langFiles[] = $mainLangFile;
 
-        /* Set the files to includ. */
-        if(!is_file($mainLangFile))
-        {
-            if(empty($extLangFiles)) return false;  // also no extension file.
-            $langFiles = $extLangFiles;
-        }
-        else
-        {
-            $langFiles = array_merge(array($mainLangFile), $extLangFiles);
-        }
-
-        global $app;
         if(is_object($app))
         {
             $device = helper::getDevice();
@@ -1577,6 +1576,17 @@ class router
 
             if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;
         }
+
+        /* get ext lang files. */
+        $extLangPath        = $this->getModuleExtPath($moduleName, 'lang');
+        $commonExtLangFiles = helper::ls($extLangPath['common'] . $this->clientLang, '.php');
+        $siteExtLangFiles   = helper::ls($extLangPath['site'] . $this->clientLang, '.php');
+        $extLangFiles       = array_merge($commonExtLangFiles, $siteExtLangFiles);
+
+        $langFiles = array_merge($langFiles, $extLangFiles);
+
+        /* Set the files to includ. */
+        if(empty($langFiles)) return false;
 
         global $lang;
         if(!is_object($lang)) $lang = new language();
