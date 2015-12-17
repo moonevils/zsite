@@ -20,12 +20,11 @@ class guarderModel extends model
      */
     public function isEvil($content = '')
     {
-        $isEvil = false;
         if(strpos($content, 'http://') !== false) return true;
 
         $linkCount = preg_match_all('/(?<=href=)([^\>]*)(?=\>)/ ', $content, $out);
-        if($linkCount > 1) $isEvil = true;
         if($linkCount > 5) die();
+        if($linkCount > 1) return true;
 
         if(preg_match('/\[url=.*\].*\[\/url\]/U', $content)) die();
 
@@ -88,7 +87,7 @@ EOT;
 <table class='captcha'>
   <tr class='text-middle'>
     <td class='w-80px text-center'><label for='captcha'>{$this->lang->guarder->captcha}</label></td>
-    <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
+    <td class='text-lg'>{$leftTag}{$guarder}{$rightTag}
     {$equal} 
       <input type='text'  name="{$input}" id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
     </td>
