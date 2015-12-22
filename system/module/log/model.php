@@ -141,6 +141,9 @@ class logModel extends model
      */
     public function saveReport($visitor, $referer)
     {
+        $beforeDay = date('Ymd00', strtotime('-2 day'));
+        $this->dao->delete()->from(TABLE_STATREPORT)->where('timeType')->eq('hour')->andWhere('timeValue')->le($beforeDay)->exec();
+
         $year  = date('Y');
         $month = date('Ym');
         $day   = date('Ymd');
@@ -222,65 +225,71 @@ class logModel extends model
      */
     public function getIpAndUv($type, $item, $timeType, $timeValue, $log, $extra = '')
     {
-        if($type != 'year')
-        {
-            $ipAndUv = $this->dao->select('count(distinct(ip)) as ip, count(distinct(visitor)) as uv')
-                ->from(TABLE_STATLOG)
-                ->where($timeType)->eq($timeValue)
+        $ipAndUv = new stdclass();
+        $ipAndUv->ip = 0;
+        $ipAndUv->uv = 0;
 
-                ->beginIF($type == 'basic' and $item == 'return')
-                ->andWhere('new')->eq(0)
-                ->fi()
+        if($type != 'search') return $ipAndUv;
+        if($timeType == 'year') return $ipAndUv;
 
-                ->beginIF($type == 'basic' and $item == 'mobile')
-                ->andWhere('mobile')->eq(1)
-                ->fi()
+        $ipAndUv = $this->dao->select('count(distinct(ip)) as ip, count(distinct(visitor)) as uv')
+            ->from(TABLE_STATLOG)
+            ->where($timeType)->eq($timeValue)
 
-                ->beginIF($type == 'searchEngine')
-                ->andWhere('searchEngine')->eq($log->searchEngine)
-                ->fi()
+            ->beginIF($type == 'basic' and $item == 'return')
+            ->andWhere('new')->eq(0)
+            ->fi()
 
-                ->beginIF($type == 'keywords')
-                ->andWhere('keywords')->eq($log->keywords)
-                ->andWhere('searchEngine')->eq($extra)
-                ->fi()
+            ->beginIF($type == 'basic' and $item == 'mobile')
+            ->andWhere('mobile')->eq(1)
+            ->fi()
 
-                ->beginIF($type == 'os')
-                ->andWhere('osName')->eq($log->osName)
-                ->fi()
+            ->beginIF($type == 'search')
+            ->andWhere('searchEngine')->eq($log->searchEngine)
+            ->fi()
 
-                ->beginIF($type == 'url')
-                ->andWhere('link')->eq($log->url)
-                ->fi()
+            ->beginIF($type == 'keywords')
+            ->andWhere('keywords')->eq($log->keywords)
+            ->andWhere('searchEngine')->eq($extra)
+            ->fi()
 
-                ->beginIF($type == 'domain')
-                ->andWhere('link')->eq($log->link)
-                ->fi()
+            ->beginIF($type == 'os')
+            ->andWhere('osName')->eq($log->osName)
+            ->fi()
 
-                ->beginIF($type == 'browser')
-                ->andWhere('browserName')->eq($log->browserName)
-                ->fi()
+            ->beginIF($type == 'url')
+            ->andWhere('link')->eq($log->url)
+            ->fi()
 
-                ->beginIF($type == 'from' and $item == 'out')
-                ->andWhere('referer')->ne(0)->andWhere('searchEngine')->eq('')
-                ->fi()
+            ->beginIF($type == 'domain')
+            ->andWhere('link')->eq($log->link)
+            ->fi()
 
-                ->beginIF($type == 'from' and $item == 'self')
-                ->andWhere('referer')->eq(0)
-                ->fi()
+            ->beginIF($type == 'browser')
+            ->andWhere('browserName')->eq($log->browserName)
+            ->fi()
 
-                ->beginIF($type == 'from' and $item == 'search')
-                ->andWhere('searchEngine')->ne('')
-                ->fi()
+            ->beginIF($type == 'from' and $item == 'out')
+            ->andWhere('referer')->ne(0)->andWhere('searchEngine')->eq('')
+            ->fi()
 
-                ->fetch();
-        }
-        else
+            ->beginIF($type == 'from' and $item == 'self')
+            ->andWhere('referer')->eq(0)
+            ->fi()
+
+            ->beginIF($type == 'from' and $item == 'search')
+            ->andWhere('searchEngine')->ne('')
+            ->fi()
+
+            ->fetch();
+
+        if(empty($ipAndUv))
         {
             $ipAndUv = new stdclass();
             $ipAndUv->ip = 0;
             $ipAndUv->uv = 0;
         }
+
         return $ipAndUv;
     }
 
