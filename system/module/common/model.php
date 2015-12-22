@@ -573,7 +573,7 @@ class commonModel extends model
         $moduleName = $this->app->getModuleName();
         $moduleName = $moduleName == 'reply' ? 'thread' : $moduleName;
         $funcName = "print$moduleName";
-        if(method_exists('commonModel', $funcName)) echo $this->$funcName($module, $object, $misc);
+        if(method_exists('commonModel', $funcName) or method_exists('extcommonModel', $funcName)) echo $this->$funcName($module, $object, $misc);
         echo '</ul>';
     }
 
