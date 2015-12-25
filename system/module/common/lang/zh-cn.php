@@ -144,6 +144,7 @@ $lang->company->site      = '网址';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = '站点地图';
 
+
 /* The primary navbar */
 $lang->groups = new stdclass();
 $lang->groups->home     = array('title' => '首页', 'link' => 'admin|index|',               'icon' => 'home');
@@ -157,7 +158,6 @@ $lang->groups->setting  = array('title' => '设置', 'link' => 'site|setbasic|',
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin    = '首页|admin|index|';
 $lang->menu->article  = '文章|article|admin|type=article';
 $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->product  = '产品|product|admin|';

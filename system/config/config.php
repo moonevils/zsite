@@ -153,6 +153,7 @@ if(file_exists($domainConfig))    include $domainConfig;
 if(file_exists($modeConfig))      include $modeConfig;
 if(file_exists($shopConfig))      include $shopConfig;
 if(file_exists($sensitiveConfig)) include $sensitiveConfig;
+if(RUN_MODE == 'admin')           include $configRoot . 'menu.php';
 
 /* The tables. */
 define('TABLE_CONFIG',         $config->db->prefix . 'config');

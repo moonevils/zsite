@@ -410,8 +410,8 @@ class messageModel extends model
             ->exec();
 
         /* Record post number. */
-        $this->loadModel('guarder')->logOperation('ip', 'commentFail');
-        $this->loadModel('guarder')->logOperation('account', 'commentFail');
+        $this->loadModel('guarder')->logOperation('ip', 'commentFail', $message->ip);
+        $this->loadModel('guarder')->logOperation('account', 'commentFail', $message->account);
 
         return !dao::isError();
     }
