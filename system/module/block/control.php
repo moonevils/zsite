@@ -41,6 +41,8 @@ class block extends control
         $template = $this->config->template->{$this->device}->name;
         $this->block->loadTemplateLang($template);
 
+        $this->view->title    = $this->lang->block->browseRegion;
+        $this->view->plans    = $this->block->getPlans($template);
         $this->view->template = $template;
         $this->display();       
     }
@@ -170,5 +172,22 @@ class block extends control
 
         $this->view->type = $type;
         $this->display();
+    }
+
+    /**
+     * Switch layout plan of current theme.
+     * 
+     * @param  string    $plan 
+     * @access public
+     * @return void
+     */
+    public function switchLayout($plan)
+    {
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+
+        $setting["{$template}_{$theme}"] = $plan;
+        $result = $this->loadModel('setting')->setItems('system.common.layout', $setting);
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 }
