@@ -39,10 +39,12 @@ class block extends control
     public function pages()
     {
         $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
         $this->view->title    = $this->lang->block->browseRegion;
         $this->view->plans    = $this->block->getPlans($template);
+        $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
         $this->display();       
     }
@@ -186,8 +188,7 @@ class block extends control
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $setting["{$template}_{$theme}"] = $plan;
-        $result = $this->loadModel('setting')->setItems('system.common.layout', $setting);
+        $result = $this->block->setPlan($plan, $template, $theme);
         if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 }

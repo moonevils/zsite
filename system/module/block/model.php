@@ -53,11 +53,14 @@ class blockModel extends model
     public function getPageBlocks($module, $method)
     {
         $device = helper::getDevice();
-        $pages  = "all,{$module}_{$method}";
+        $template =  $this->config->template->{$device}->name;
+        $theme = $this->config->template->{$device}->theme;
+        $plan  = zget($this->config->layout, "{$template}_{$theme}");
+        $pages = "all,{$module}_{$method}";
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-            ->andWhere('theme')->eq(!empty($this->config->template->{$device}->theme) ? $this->config->template->{$device}->theme : 'default')
+            ->andWhere('plan')->eq($plan)
             ->fetchGroup('page', 'region');
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
@@ -155,7 +158,8 @@ class blockModel extends model
      */
     public function getRegionBlocks($page, $region, $template, $theme)
     {
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch('blocks');
+        $plan = zget($this->config->layout, "{$template}_{$theme}");
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($plan)->fetch('blocks');
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -484,11 +488,11 @@ class blockModel extends model
         $layout->page     = $page;
         $layout->region   = $region;
         $layout->template = $template;
-        $layout->theme    = $theme;
+        $layout->plan     = zget($this->config->layout, $template . '_' . $theme);
 
         if(!$this->post->blocks)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($layout->plan)->exec();
             if(!dao::isError()) return true;
         }
 
@@ -700,9 +704,10 @@ class blockModel extends model
      */
     public function getLayout($template, $theme, $page, $region)
     {
+        $plan = zget($this->config->layout, $template . '_' . $theme);
         return $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('template')->eq($template)
-            ->andWhere('theme')->eq($theme)
+            ->andWhere('plan')->eq($plan)
             ->andWhere('page')->eq($page)
             ->andWhere('region')->eq($region)
             ->fetch();
@@ -864,7 +869,8 @@ class blockModel extends model
      */
     public function sortBlocks($template, $theme, $page, $region, $parent = 0, $orders = '')
     {
-        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch();
+        $plan = zget($this->config->layout, $template . '_' . $theme);
+        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($plan)->fetch();
         $blocks = json_decode($layout->blocks);
         $orders = explode(',', $orders);
         if($parent)
@@ -937,5 +943,32 @@ class blockModel extends model
         if(!isset($this->lang->block->{$template}->pages[$page])) return false;
         if(!isset($this->lang->block->{$template}->regions->{$page}[$region])) return false;
         return true;
+    }
+    
+    /**
+     * Get layout plans.
+     * 
+     * @param  string template
+     * @access public
+     * @return array
+     */
+    public function getPlans($template)
+    {
+        return $this->loadModel('tree')->getPairs(0, 'layout_' . $template);
+    }
+
+    /**
+     * Set layout plan for a theme.
+     * 
+     * @param  int    $plan 
+     * @param  string $template 
+     * @param  string $theme 
+     * @access public
+     * @return void
+     */
+    public function setPlan($plan, $template = '' , $theme = '')
+    {
+        $setting["{$template}_{$theme}"] = $plan;
+        return $this->loadModel('setting')->setItems('system.common.layout', $setting);
     }
 }

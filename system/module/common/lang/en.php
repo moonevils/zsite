@@ -144,20 +144,19 @@ $lang->company->site      = 'Site';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = 'Sitemap';
 
-/* The primary navbar */
-$lang->navbar = new stdclass();
-$lang->navbar->home     = array('title' => 'Home', 'icon' => 'home');
-$lang->navbar->content  = array('title' => 'Content', 'icon' => 'newspaper-o');
-$lang->navbar->mail     = array('title' => 'Mail', 'icon' => 'shopping-cart');
-$lang->navbar->user     = array('title' => 'User', 'icon' => 'group');
-$lang->navbar->promote  = array('title' => 'Promote', 'icon' => 'bullhorn');
-$lang->navbar->designer = array('title' => 'Designer', 'icon' => 'paint-brush');
-$lang->navbar->open     = array('title' => 'Open', 'icon' => 'cloud');
-$lang->navbar->setting  = array('title' => 'Setting', 'icon' => 'cog');
+/* The groups navbar */
+$lang->groups = new stdclass();
+$lang->groups->home     = array('title' => 'Home', 'icon' => 'home');
+$lang->groups->content  = array('title' => 'Content', 'icon' => 'newspaper-o');
+$lang->groups->mail     = array('title' => 'Mail', 'icon' => 'shopping-cart');
+$lang->groups->user     = array('title' => 'User', 'icon' => 'group');
+$lang->groups->promote  = array('title' => 'Promote', 'icon' => 'bullhorn');
+$lang->groups->designer = array('title' => 'Designer', 'icon' => 'paint-brush');
+$lang->groups->open     = array('title' => 'Open', 'icon' => 'cloud');
+$lang->groups->setting  = array('title' => 'Setting', 'icon' => 'cog');
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin    = 'Home|admin|index|';
 $lang->menu->article  = 'Article|article|admin|type=article';
 $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->product  = 'Product|product|admin|';

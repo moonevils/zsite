@@ -67,6 +67,7 @@ $lang->block->edit         = '编辑区块';
 $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 $lang->block->setregion    = '配置布局';
+$lang->block->switchPlan   = '切换布局';
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';
