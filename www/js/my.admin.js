@@ -2,7 +2,17 @@ $(function()
 {
     responsiveNavbar();
     fixCategoryNav();
+    initPrimaryNavbar();
 });
+
+/**
+ * Init primary navbar
+ * @return Void
+ */
+function initPrimaryNavbar()
+{
+    $('#primaryNavbar .nav>li>a').tooltip({placement: 'right', container: 'body'});
+}
 
 /**
  * make the navbar responsivable
