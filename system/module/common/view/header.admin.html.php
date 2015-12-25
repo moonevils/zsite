@@ -8,7 +8,7 @@
   </ul>
   <?php echo commonModel::createManagerMenu('nav nav-stacked fixed-bottom');?>
 </nav>
-<nav class='navbar navbar-inverse navbar-fixed-top' role='navigation' id='mainNavbar'>
+<nav class='navbar navbar-fixed-top' role='navigation' id='mainNavbar'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#mainNavbarCollapse'>
       <span class='icon-bar'></span>
