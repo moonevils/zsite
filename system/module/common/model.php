@@ -442,7 +442,7 @@ class commonModel extends model
         global $app, $lang , $config;
 
         $string  = '<ul class="' . $class . '">';
-        $string .= sprintf('<li data-id="profile" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-user icon-large" data-toggle="tooltip" title="%s"></i><span class="text-username"> %s <b class="caret"></b></span></a>', $app->user->realname, $app->user->realname);
+        $string .= sprintf('<li data-toggle="tooltip" title="%s" data-id="profile" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-user"></i><span class="text-username"> %s <b class="caret"></b></span></a>', $app->user->realname, $app->user->realname);
         $string .= '<ul class="dropdown-menu">';
         $string .= '<li class="heading"><i class="icon icon-user icon-large"></i><strong> ' . $app->user->realname . '</strong></li>';
         $string .= '<li class="divider"></li>';
