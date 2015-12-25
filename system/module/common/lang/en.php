@@ -157,7 +157,6 @@ $lang->groups->setting  = array('title' => 'Setting', 'icon' => 'cog');
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin    = 'Home|admin|index|';
 $lang->menu->article  = 'Article|article|admin|type=article';
 $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->product  = 'Product|product|admin|';
