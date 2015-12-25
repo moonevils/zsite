@@ -2,8 +2,9 @@
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
-  <?php foreach ($lang->navbar as $navbarName => $navbarItem):?>
-    <li data-id='<?php echo $navbarName ?>'><a data-toggle='tooltip' href='###' title='<?php echo $navbarItem['title'] ?>'><i class='icon icon-<?php echo $navbarItem['icon'] ?>'></i></a></li>
+  <?php foreach ($lang->groups as $group => $setting):?>
+  <?php list($module, $method, $params) = explode('|', $setting['link'])?>
+  <li data-id='<?php echo $group ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $setting['title'] ?>'><i class='icon icon-<?php echo $setting['icon'] ?>'></i></a></li>
   <?php endforeach;?>
   </ul>
 </nav>
