@@ -144,16 +144,16 @@ $lang->company->site      = '网址';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = '站点地图';
 
-/* The primary navbar */
-$lang->navbar = new stdclass();
-$lang->navbar->home     = array('title' => '首页', 'icon' => 'home');
-$lang->navbar->content  = array('title' => '内容', 'icon' => 'newspaper-o');
-$lang->navbar->mail     = array('title' => '商城', 'icon' => 'shopping-cart');
-$lang->navbar->user     = array('title' => '会员', 'icon' => 'group');
-$lang->navbar->promote  = array('title' => '推广', 'icon' => 'bullhorn');
-$lang->navbar->designer = array('title' => '设计', 'icon' => 'paint-brush');
-$lang->navbar->open     = array('title' => '平台', 'icon' => 'cloud');
-$lang->navbar->setting  = array('title' => '设置', 'icon' => 'cog');
+/* The groups navbar */
+$lang->groups = new stdclass();
+$lang->groups->home     = array('title' => '首页', 'icon' => 'home');
+$lang->groups->content  = array('title' => '内容', 'icon' => 'newspaper-o');
+$lang->groups->mall     = array('title' => '商城', 'icon' => 'shopping-cart');
+$lang->groups->user     = array('title' => '会员', 'icon' => 'group');
+$lang->groups->promote  = array('title' => '推广', 'icon' => 'bullhorn');
+$lang->groups->designer = array('title' => '设计', 'icon' => 'paint-brush');
+$lang->groups->open     = array('title' => '平台', 'icon' => 'cloud');
+$lang->groups->setting  = array('title' => '设置', 'icon' => 'cog');
 
 /* The main menus. */
 $lang->menu = new stdclass();

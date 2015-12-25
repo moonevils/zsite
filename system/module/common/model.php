@@ -437,14 +437,15 @@ class commonModel extends model
      * @access public
      * @return string
      */
-    public static function createManagerMenu()
+    public static function createManagerMenu($class = 'nav navbar-nav navbar-right')
     {
         global $app, $lang , $config;
 
-        $string  = '<ul class="nav navbar-nav navbar-right">';
-        $string .= sprintf('<li>%s</li>', html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
-        $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
+        $string  = '<ul class="' . $class . '">';
+        $string .= sprintf('<li data-toggle="tooltip" title="%s" data-id="profile" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-user icon-large"></i><span class="text-username"> %s <b class="caret"></b></span></a>', $app->user->realname, $app->user->realname);
         $string .= '<ul class="dropdown-menu">';
+        $string .= '<li class="heading"><i class="icon icon-user icon-large"></i><strong> ' . $app->user->realname . '</strong></li>';
+        $string .= '<li class="divider"></li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'editEmail'), $lang->editEmail, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'securityQuestion'), $lang->securityQuestion, "data-toggle='modal'") . '</li>';

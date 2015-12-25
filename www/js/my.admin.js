@@ -11,7 +11,7 @@ $(function()
  */
 function initPrimaryNavbar()
 {
-    $('#primaryNavbar .nav>li>a').tooltip({placement: 'right', container: 'body'});
+    $('#primaryNavbar [data-toggle=tooltip]').tooltip({placement: 'right', container: 'body'});
 }
 
 /**

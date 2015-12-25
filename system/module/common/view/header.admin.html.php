@@ -2,10 +2,11 @@
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
-  <?php foreach ($lang->navbar as $navbarName => $navbarItem):?>
-    <li data-id='<?php echo $navbarName ?>'><a data-toggle='tooltip' href='###' title='<?php echo $navbarItem['title'] ?>'><i class='icon icon-<?php echo $navbarItem['icon'] ?>'></i></a></li>
+  <?php foreach ($lang->groups as $groupName => $groupItem):?>
+    <li data-id='<?php echo $groupName ?>'><a data-toggle='tooltip' href='###' title='<?php echo $groupItem['title'] ?>'><i class='icon icon-<?php echo $groupItem['icon'] ?>'></i></a></li>
   <?php endforeach;?>
   </ul>
+  <?php echo commonModel::createManagerMenu('nav nav-stacked fixed-bottom');?>
 </nav>
 <nav class='navbar navbar-inverse navbar-fixed-top' role='navigation' id='mainNavbar'>
   <div class='navbar-header'>
@@ -15,15 +16,16 @@
       <span class='icon-bar'></span>
     </button>
     <?php echo html::a($this->createLink($this->config->default->module), $lang->chanzhiEPSx, "class='navbar-brand'");?>
-    <div class='dropdown navbar-header-item'><?php include 'selectlang.html.php';?></div>
-    <div class='navbar-header-divider angle'></div>
   </div>
   <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
     <?php echo commonModel::createMainMenu($this->moduleName);?>
     <ul class='nav navbar-nav' id='navbarSwitcher'>
       <li><a href='###'><i class='icon-chevron-sign-right icon-large'></i></a></li>
     </ul>
-    <?php echo commonModel::createManagerMenu();?>
+    <ul class='nav navbar-nav navbar-right'>
+      <li><?php echo html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'");?></li>
+      <li class='dropdown'><?php include 'selectlang.html.php';?></li>
+    </ul>
   </div>
 </nav>
 
