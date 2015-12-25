@@ -329,17 +329,19 @@ class commonModel extends model
      */
     public static function createMainMenu($currentModule)
     {
-        global $app, $lang;
+        global $config, $app, $lang;
 
         /* Set current module. */
-        if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
+        if(isset($config->menuGroups->$currentModule)) $group = $config->menuGroups->$currentModule;
 
+        $menus  = explode(',', $config->menus->{$group});
         $string = "<ul class='nav navbar-nav'>\n";
 
-        /* Print all main menus. */
-        foreach($lang->menu as $moduleName => $moduleMenu)
+        foreach($menus as $menu)
         {
-            if($moduleName == 'feedback')
+            if(!isset($lang->menu->{$menu})) continue;
+            $moduleMenu = $lang->menu->{$menu};
+            if($menu == 'feedback')
             {
                 list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
@@ -358,7 +360,7 @@ class commonModel extends model
                 }
             }
 
-            $class = $moduleName == $currentModule ? " class='active'" : '';
+            $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
             if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
@@ -374,7 +376,7 @@ class commonModel extends model
                 $string .= "<li$class><a href='$link'>$label</a></li>\n";
             }
         }
-
+        
         $string .= "</ul>\n";
         return $string;
     }
