@@ -360,6 +360,7 @@ class commonModel extends model
                 }
             }
 
+            $currentModule = zget($lang->menuGroups, $currentModule);
             $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
