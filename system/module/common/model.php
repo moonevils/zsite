@@ -331,6 +331,8 @@ class commonModel extends model
     {
         global $config, $app, $lang;
 
+        self::fixGroups();
+
         $currentModule = zget($lang->menuGroups, $currentModule);
 
         /* Set current module. */
@@ -1050,5 +1052,33 @@ class commonModel extends model
     
         $this->config->categoryAlias = array();
         foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
+    }
+
+    /**
+     * Fix link of menu groups.
+     * 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function fixGroups()
+    {
+        global $app, $config, $lang;
+        $modules = $config->site->modules;
+        if(strpos($modules, 'article') === false)
+        {
+            if(strpos($modules, 'page') !== false) $lang->groups->content['link'] = 'article|admin|type=page';
+            if(strpos($modules, 'book') !== false) $lang->groups->content['link'] = 'book|admin|';
+            if(strpos($modules, 'blog') !== false) $lang->groups->content['link'] = 'article|admin|type=blog';
+        }
+
+        if(strpos($modules, 'shop') === false and strpos($modules, 'score') === false)
+        {
+            if(strpos($modules, 'product') !== false) $lang->groups->shop['link'] = 'product|admin|';
+        }
+  
+        if(strpos($modules, 'stat') === false) $lang->groups->promote['link'] = 'tag|admin|';
+              
+        return true;
     }
 }

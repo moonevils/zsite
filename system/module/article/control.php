@@ -86,11 +86,11 @@ class article extends control
      */
     public function admin($type = 'article', $categoryID = 0, $orderBy = '`id` desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
-        if($this->get->tab == 'feedback') 
+        if($this->get->tab == 'user') 
         {
             $type = 'contribution';
-            $this->lang->menuGroups->article = 'feedback';
-            $this->lang->article->menu = $this->lang->feedback->menu;
+            $this->lang->menuGroups->article = 'contribution';
+            unset($this->lang->article->menu);
             $this->view->title = $this->lang->contribution->check;
         }
         else
