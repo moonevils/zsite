@@ -151,8 +151,8 @@ $lang->groups->home     = array('title' => '首页', 'link' => 'admin|index|',  
 $lang->groups->content  = array('title' => '内容', 'link' => 'article|admin|type=article', 'icon' => 'edit');
 $lang->groups->shop     = array('title' => '商城', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => '会员', 'link' => 'user|admin|',                'icon' => 'group');
-$lang->groups->promote  = array('title' => '推广', 'link' => 'stats|traffic|',             'icon' => 'volume-up');
-$lang->groups->designer = array('title' => '设计', 'link' => 'ui|customthem|',             'icon' => 'dashboard');
+$lang->groups->promote  = array('title' => '推广', 'link' => 'stat|traffic|',             'icon' => 'volume-up');
+$lang->groups->designer = array('title' => '设计', 'link' => 'ui|customtheme|',             'icon' => 'dashboard');
 $lang->groups->open     = array('title' => '平台', 'link' => 'package|browse|',            'icon' => 'cloud');
 $lang->groups->setting  = array('title' => '设置', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
@@ -172,13 +172,16 @@ $lang->menu->order    = '订单|order|admin|';
 $lang->menu->feedback = '反馈|message|admin|';
 $lang->menu->stat     = '统计|stat|traffic|';
 $lang->menu->package  = '扩展|package|browse|';
+$lang->menu->block    = '区块|block|admin|';
+$lang->menu->slide    = '幻灯片|slide|admin|';
+$lang->menu->logo     = '标志|ui|setlogo|';
+$lang->menu->tag      = '关键词|tag|admin|';
+$lang->menu->links    = '友情链接|links|admin|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-$lang->menuGroups->tag     = 'site';
 $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
-$lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->block   = 'ui';
@@ -258,12 +261,10 @@ $lang->site->menu->basic    = '站点设置|site|setbasic|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->nav      = '导航设置|nav|admin|';
-$lang->site->menu->link     = '友情链接|links|admin|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
-$lang->site->menu->tag      = '关键词设置|tag|admin|';
 $lang->site->menu->setStat  = '流量统计设置|site|setStat|';
 
 /* Menu of security module. */
@@ -296,10 +297,6 @@ $lang->order->menu->setting = '系统设置|order|setting|';
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
 
-/* Menu of tag module. */
-$lang->tag = new stdclass();
-$lang->tag->menu = $lang->site->menu;
-
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->site->menu;
@@ -328,10 +325,6 @@ $lang->slide->menu = $lang->ui->menu;
 /* Menu of block module. */
 $lang->block = new stdclass();
 $lang->block->menu = $lang->ui->menu;
-
-/* Menu of links module. */
-$lang->links = new stdclass();
-$lang->links->menu = $lang->site->menu;
 
 /* Menu of group module. */
 $lang->group = new stdclass();
