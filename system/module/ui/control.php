@@ -45,6 +45,7 @@ class ui extends control
         $this->view->title           = $this->lang->ui->setTemplate;
         $this->view->templates       = $templates;
         $this->view->installedThemes = $this->ui->getInstalledThemes();
+        $this->view->uiHeader        = true;
         $this->display();
     }
 
@@ -93,6 +94,7 @@ class ui extends control
         $this->view->title      = $this->lang->ui->customtheme;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
+        $this->view->uiHeader   = true;
         $this->view->hasPriv    = true;
 
         if(!is_writable($savePath))

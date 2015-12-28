@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php if($moduleMenu) echo '</div>';?>
+<?php if(isset($uiHeader) and $uiHeader) echo '</div>';?>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-xs" role="navigation">
