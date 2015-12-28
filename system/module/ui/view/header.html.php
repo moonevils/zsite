@@ -3,9 +3,6 @@
 <?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
 <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
 <nav id='menu'>
-  <ul class='nav'>
-    <li class="divider angle"></li>
-  </ul>
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName, '', false);?>
   <?php if($moduleMenu) echo $moduleMenu;?>
   <div class="pull-right">
