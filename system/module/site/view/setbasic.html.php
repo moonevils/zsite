@@ -13,8 +13,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php js::set('closeScoreTip', $lang->site->closeScoreTip);?>
-<?php js::set('setCounts', $lang->site->setCounts);?>
-<?php js::set('score', commonModel::isAvailable('score'));?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setBasic;?></strong></div>
   <div class='panel-body'>

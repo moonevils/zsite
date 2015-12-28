@@ -278,27 +278,6 @@ class site extends control
     }
 
     /**
-     * Set log.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setStat()
-    {
-        if(!empty($_POST))
-        {
-            $setting = fixer::input('post')->get();
-            if(!$setting->saveDays or !validater::checkInt($setting->saveDays)) $this->send(array('result' => 'fail', 'message' => $this->lang->site->saveDaysTip));
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title = $this->lang->site->setStat;
-        $this->display();
-    }
-
-    /**
      * Set filter rule.
      * 
      * @access public

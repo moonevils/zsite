@@ -1,10 +1,11 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+<?php $mainMenu = commonModel::createMainMenu($this->moduleName);?>
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
   <?php foreach ($lang->groups as $group => $setting):?>
   <?php list($module, $method, $params) = explode('|', $setting['link'])?>
-  <li data-id='<?php echo $group ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $setting['title'] ?>'><i class='icon icon-<?php echo $setting['icon'] ?>'></i></a></li>
+  <li <?php if($group == $this->session->currentGroup) echo "class='active'";?> data-id='<?php echo $group ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $setting['title'] ?>'><i class='icon icon-<?php echo $setting['icon'] ?>'></i></a></li>
   <?php endforeach;?>
   </ul>
   <?php echo commonModel::createManagerMenu('nav nav-stacked fixed-bottom');?>
@@ -19,7 +20,7 @@
     <?php echo html::a($this->createLink($this->config->default->module), $lang->chanzhiEPSx, "class='navbar-brand'");?>
   </div>
   <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
-    <?php echo commonModel::createMainMenu($this->moduleName);?>
+    <?php echo $mainMenu;?>
     <ul class='nav navbar-nav' id='navbarSwitcher'>
       <li><a href='###'><i class='icon-chevron-sign-right icon-large'></i></a></li>
     </ul>
@@ -29,7 +30,6 @@
     </ul>
   </div>
 </nav>
-
 <div class="clearfix row-main">
   <?php $moduleName = $this->moduleName; ?>
   <?php $menuGroup  = zget($lang->menuGroups, $moduleName);?>
@@ -71,3 +71,28 @@
   <div class='col-md-10'>
   <?php endif;?>
   <?php endif;?>
+
+<?php if($this->session->currentGroup == 'design'):?>
+<?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
+<?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
+<?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
+<?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
+<ul class='hide'>
+  <li id='deviceNav' class='nav-item-primary'>
+    <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
+    <?php if($mobileTemplate == 'close'):?>
+    <?php echo html::a('javascript:;', $lang->ui->deviceList->desktop);?>
+    <?php else:?>
+    <a href='javascript:;' data-toggle='dropdown'>
+      <?php echo $lang->ui->deviceList->{$currentDevice};?> <i class='icon-caret-down'></i>
+    </a>
+    <ul id='deviceMenu' class='dropdown-menu'>
+      <?php foreach($lang->ui->deviceList as $device => $name):?>
+      <?php $class = $device == $currentDevice ? "class='active'" : '';?>
+      <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
+      <?php endforeach;?>
+    </ul>
+    <?php endif;?>
+  </li>
+</ul>
+<?php endif;?>

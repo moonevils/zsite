@@ -325,6 +325,8 @@ class order extends control
             $return = $this->order->saveSetting();
             $this->send($return);
         }
+
+        $this->lang->menuGroups->order = 'orderSetting';
         $this->display();
     }
 

@@ -332,8 +332,19 @@ class commonModel extends model
         global $config, $app, $lang;
 
         $currentModule = zget($lang->menuGroups, $currentModule);
+
         /* Set current module. */
-        if(isset($config->menuGroups->$currentModule)) $group = $config->menuGroups->$currentModule;
+        $currentGroup = $app->cookie->currentGroup;
+        if($currentGroup and isset($config->menus->{$currentGroup})) 
+        {
+            $group = $currentGroup;
+        }
+        else
+        {
+            if(isset($config->menuGroups->$currentModule)) $group = $config->menuGroups->$currentModule;
+        }
+
+        $app->session->set('currentGroup', $group);
 
         $menus  = explode(',', $config->menus->{$group});
         $string = "<ul class='nav navbar-nav'>\n";
@@ -381,7 +392,7 @@ class commonModel extends model
         $string .= "</ul>\n";
         return $string;
     }
-
+    
     /**
      * Create the module menu.
      *
