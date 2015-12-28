@@ -152,6 +152,7 @@ class file extends control
         $this->view->files     = $this->file->getSourceList($type, $orderBy, $pager);
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->pager     = $pager;
+        $this->view->uiHeader  = true;
         $this->display();
     }
 
