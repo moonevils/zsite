@@ -11,8 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php js::set('score', commonModel::isAvailable('score'));?>
-<?php js::set('setCounts', $lang->site->setCounts);?>
 <div class='row'>
 <?php foreach($lang->user->oauth->providers as $providerCode => $providerName):?>
 <?php isset($this->config->oauth->$providerCode) ? $oauth = json_decode($this->config->oauth->$providerCode) : $oauth = '';?>

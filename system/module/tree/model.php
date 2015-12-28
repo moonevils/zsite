@@ -734,7 +734,8 @@ class treeModel extends model
     {
         $menuGroup = zget($this->config->tree->menuGroups, $type);
 
-        $this->lang->tree->menu       = $this->lang->{$menuGroup}->menu;
+        unset($this->lang->tree->menu);
+        If(isset($this->lang->{$menuGroup}->menu)) $this->lang->tree->menu = $this->lang->{$menuGroup}->menu;
         $this->lang->menuGroups->tree = $menuGroup;
     }
 }

@@ -151,8 +151,8 @@ $lang->groups->home     = array('title' => '首页', 'link' => 'admin|index|',  
 $lang->groups->content  = array('title' => '内容', 'link' => 'article|admin|type=article', 'icon' => 'edit');
 $lang->groups->shop     = array('title' => '商城', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => '会员', 'link' => 'user|admin|',                'icon' => 'group');
-$lang->groups->promote  = array('title' => '推广', 'link' => 'stat|traffic|',             'icon' => 'volume-up');
-$lang->groups->designer = array('title' => '设计', 'link' => 'ui|customtheme|',             'icon' => 'dashboard');
+$lang->groups->promote  = array('title' => '推广', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
+$lang->groups->designer = array('title' => '设计', 'link' => 'ui|customtheme|',            'icon' => 'paint-brush');
 $lang->groups->open     = array('title' => '平台', 'link' => 'package|browse|',            'icon' => 'cloud');
 $lang->groups->setting  = array('title' => '设置', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
@@ -161,36 +161,51 @@ $lang->menu = new stdclass();
 $lang->menu->admin    = '首页|admin|index|';
 $lang->menu->article  = '文章|article|admin|type=article';
 $lang->menu->blog     = '博客|article|admin|type=blog';
-$lang->menu->product  = '产品|product|admin|';
 $lang->menu->book     = '手册|book|admin|';
 $lang->menu->page     = '单页|article|admin|type=page';
-$lang->menu->forum    = '论坛|forum|admin|';
-$lang->menu->site     = '站点|site|setbasic|';
+
+$lang->menu->product      = '产品|product|admin|';
+$lang->menu->order        = '订单|order|admin|';
+$lang->menu->express      = '快递|tree|browse|type=express';
+$lang->menu->orderSetting = '设置|order|setting|';
+
+$lang->menu->user         = '会员|user|admin|';
+$lang->menu->message      = '留言|message|admin|type=message';
+$lang->menu->comment      = '评论|message|admin|type=comment';
+$lang->menu->reply        = '回复|message|admin|type=reply';
+$lang->menu->forum        = '论坛|forum|admin|';
+$lang->menu->thread       = '主题|forum|admin|';
+$lang->menu->forumreply   = '回帖|reply|admin|';
+$lang->menu->contribution = '投稿|article|admin|type=contribution&tab=user';
+$lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
+
+$lang->menu->stat  = '统计|stat|traffic|';
+$lang->menu->tag   = '关键词|tag|admin|';
+$lang->menu->links = '友情链接|links|admin|';
+
 $lang->menu->ui       = '界面|ui|customtheme|';
-$lang->menu->security = '安全|site|setsecurity|';
-$lang->menu->user     = '会员|user|admin|';
-$lang->menu->order    = '订单|order|admin|';
-$lang->menu->feedback = '反馈|message|admin|';
-$lang->menu->stat     = '统计|stat|traffic|';
-$lang->menu->package  = '扩展|package|browse|';
+$lang->menu->logo     = '标志|ui|setlogo|';
+$lang->menu->nav      = '导航|nav|admin|';
 $lang->menu->block    = '区块|block|admin|';
 $lang->menu->slide    = '幻灯片|slide|admin|';
-$lang->menu->logo     = '标志|ui|setlogo|';
-$lang->menu->tag      = '关键词|tag|admin|';
-$lang->menu->links    = '友情链接|links|admin|';
+
+$lang->menu->site     = '站点|site|setbasic|';
+$lang->menu->security = '安全|site|setsecurity|';
+
+$lang->menu->package    = '扩展|package|browse|';
+$lang->menu->themestore = '主题|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
 $lang->menuGroups->mail    = 'site';
-$lang->menuGroups->nav     = 'site';
 $lang->menuGroups->wechat  = 'site';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
-$lang->menuGroups->message = 'feedback';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
+$lang->menuGroups->score   = 'site';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -206,6 +221,8 @@ $lang->blog->menu->browse       = '博客列表|article|admin|type=blog';
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'create, edit');
+
+$lang->express = new stdclass();
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -232,19 +249,7 @@ $lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 
-/* Menu of comment module. */
-$lang->feedback = new stdclass();
-$lang->feedback->menu = new stdclass();
-$lang->feedback->menu->message      = '留言|message|admin|type=message';
-$lang->feedback->menu->comment      = '评论|message|admin|type=comment';
-$lang->feedback->menu->answer       = '回复|message|admin|type=reply';
-$lang->feedback->menu->thread       = '主题|forum|admin|tab=feedback';
-$lang->feedback->menu->reply        = '回帖|reply|admin|order=id_desc&tab=feedback';
-$lang->feedback->menu->contribution = '投稿|article|admin|type=contribution&tab=feedback';
-$lang->feedback->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
-
 $lang->message = new stdclass();
-$lang->message->menu = $lang->feedback->menu;
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
@@ -261,12 +266,11 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
-$lang->site->menu->nav      = '导航设置|nav|admin|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
-$lang->site->menu->setStat  = '流量统计设置|site|setStat|';
+$lang->site->menu->score    = '积分规则|score|setcounts|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -289,11 +293,6 @@ $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
 $lang->address = new stdclass();
 
-$lang->order->menu = new stdclass();
-$lang->order->menu->admin   = '订单管理|order|admin|';
-$lang->order->menu->express = '快递设置|tree|browse|type=express|';
-$lang->order->menu->setting = '系统设置|order|setting|';
-
 /* Menu of tree module. */
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
@@ -310,22 +309,10 @@ $lang->reply->menu = $lang->forum->menu;
 $lang->wechat = new stdclass();
 $lang->wechat->menu = $lang->site->menu;
 
-/* Menu of nav module. */
-$lang->nav = new stdclass();
-$lang->nav->menu = $lang->site->menu;
-
 /* Menu of search module. */
 $lang->search = new stdclass();
 $lang->search->menu   = $lang->site->menu;
 $lang->search->common = '搜索';
-
-/* Menu of slide module. */
-$lang->slide = new stdclass();
-$lang->slide->menu = $lang->ui->menu;
-
-/* Menu of block module. */
-$lang->block = new stdclass();
-$lang->block->menu = $lang->ui->menu;
 
 /* Menu of group module. */
 $lang->group = new stdclass();
@@ -344,6 +331,7 @@ $lang->stat->menu->keywords = '关键词统计|stat|keywords|';
 $lang->stat->menu->domains  = array('link' => '来路域名|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
 $lang->stat->menu->client   = '终端统计|stat|client|type=browser';
 $lang->stat->menu->page     = '页面访问量排名|stat|page|';
+$lang->stat->menu->setStat  = '设置|stat|setting|';
 
 /* The error messages. */
 $lang->error = new stdclass();

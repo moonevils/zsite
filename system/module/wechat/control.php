@@ -285,8 +285,8 @@ class wechat extends control
      */
     public function message($mode = '', $query = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
-        $this->lang->menuGroups->wechat = 'feedback';
-        $this->lang->wechat->menu       = $this->lang->feedback->menu;
+        $this->lang->menuGroups->wechat = 'wechat';
+        unset($this->lang->wechat->menu);
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);

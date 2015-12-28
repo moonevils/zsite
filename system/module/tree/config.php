@@ -7,7 +7,7 @@ $config->tree->menuGroups->forum   = 'forum';
 $config->tree->menuGroups->article = 'article';
 $config->tree->menuGroups->product = 'product';
 $config->tree->menuGroups->blog    = 'blog';
-$config->tree->menuGroups->express = 'order';
+$config->tree->menuGroups->express = 'express';
 
 $config->tree->editableTypes = ",article,product,blog,forum,";
 
