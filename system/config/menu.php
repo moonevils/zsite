@@ -6,7 +6,7 @@ $config->menus->shop    = 'product,order,';
 $config->menus->promote = 'stat,tag,links';
 $config->menus->design  = 'ui,logo,slide,block';
 $config->menus->setting = 'site,company,security';
-$config->menus->user    = 'user,feedback,forum,reply';
+$config->menus->user    = 'user,feedback,message,forum,reply';
 $config->menus->open    = 'package';
 
 $config->menuGroups = new stdclass();
