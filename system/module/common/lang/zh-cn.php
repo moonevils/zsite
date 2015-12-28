@@ -158,6 +158,7 @@ $lang->groups->setting  = array('title' => '设置', 'link' => 'site|setbasic|',
 
 /* The main menus. */
 $lang->menu = new stdclass();
+$lang->menu->admin    = '首页|admin|index|';
 $lang->menu->article  = '文章|article|admin|type=article';
 $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->product  = '产品|product|admin|';

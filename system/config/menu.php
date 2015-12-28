@@ -1,6 +1,6 @@
 <?php
 $config->menus = new stdclass();
-$config->menus->index    = 'admin';
+$config->menus->index   = 'admin';
 $config->menus->content = 'article,blog,book,page';
 $config->menus->shop    = 'product,order,';
 $config->menus->promote = 'stat,tag,links';

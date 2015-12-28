@@ -331,6 +331,7 @@ class commonModel extends model
     {
         global $config, $app, $lang;
 
+        $currentModule = zget($lang->menuGroups, $currentModule);
         /* Set current module. */
         if(isset($config->menuGroups->$currentModule)) $group = $config->menuGroups->$currentModule;
 
@@ -360,7 +361,6 @@ class commonModel extends model
                 }
             }
 
-            $currentModule = zget($lang->menuGroups, $currentModule);
             $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
