@@ -152,7 +152,7 @@ $lang->groups->content  = array('title' => '内容', 'link' => 'article|admin|ty
 $lang->groups->shop     = array('title' => '商城', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => '会员', 'link' => 'user|admin|',                'icon' => 'group');
 $lang->groups->promote  = array('title' => '推广', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
-$lang->groups->designer = array('title' => '设计', 'link' => 'ui|customtheme|',            'icon' => 'paint-brush');
+$lang->groups->designer = array('title' => '设计', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
 $lang->groups->open     = array('title' => '平台', 'link' => 'package|browse|',            'icon' => 'cloud');
 $lang->groups->setting  = array('title' => '设置', 'link' => 'site|setbasic|',             'icon' => 'cog');
 

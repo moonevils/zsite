@@ -3,7 +3,9 @@
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
+  <li <?php if($this->session->currentGroup == 'home') echo "class='active'";?> data-id='home'><?php echo html::a($this->createLink($this->config->default->module), $lang->chanzhiEPSx);?></li>
   <?php foreach ($lang->groups as $group => $setting):?>
+  <?php if($group == 'home') continue;?>
   <?php list($module, $method, $params) = explode('|', $setting['link'])?>
   <li <?php if($group == $this->session->currentGroup) echo "class='active'";?> data-id='<?php echo $group ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $setting['title'] ?>'><i class='icon icon-<?php echo $setting['icon'] ?>'></i></a></li>
   <?php endforeach;?>
@@ -17,7 +19,6 @@
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
-    <?php echo html::a($this->createLink($this->config->default->module), $lang->chanzhiEPSx, "class='navbar-brand'");?>
   </div>
   <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
     <?php echo $mainMenu;?>
@@ -34,44 +35,43 @@
   <?php $moduleName = $this->moduleName; ?>
   <?php $menuGroup  = zget($lang->menuGroups, $moduleName);?>
   <?php if($moduleName != 'ui' && $menuGroup != 'ui'): ?>
-  <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
-  <?php if($moduleMenu or !empty($treeModuleMenu)):?>
-  <div class='col-md-2'>
-    <div class="leftmenu affix hiddden-xs hidden-sm">
-      <?php if($moduleMenu) echo $moduleMenu;?>
-      <?php if(!empty($treeModuleMenu)):?>
-      <div class='panel category-nav'>
-        <div class='panel-body'>
-          <?php echo $treeModuleMenu;?>
-          <?php if(!empty($treeManageLink)):?>
-          <div class='text-right'><?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?></div>
-          <?php endif;?>
+    <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
+    <?php if($moduleMenu or !empty($treeModuleMenu)):?>
+    <div class='col-md-2'>
+      <div class="leftmenu affix hiddden-xs hidden-sm">
+        <?php if($moduleMenu) echo $moduleMenu;?>
+        <?php if(!empty($treeModuleMenu)):?>
+        <div class='panel category-nav'>
+          <div class='panel-body'>
+            <?php echo $treeModuleMenu;?>
+            <?php if(!empty($treeManageLink)):?>
+            <div class='text-right'><?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?></div>
+            <?php endif;?>
+          </div>
         </div>
+        <?php endif;?>
       </div>
-      <?php endif;?>
     </div>
-  </div>
-  <div class='col-md-10'>
-  <?php endif;?>
+    <div class='col-md-10'>
+    <?php endif;?>
   <?php else:?>
-  <?php include '../../ui/view/header.html.php';?>
-  <?php if(!empty($treeModuleMenu)):?>
-  <div class='col-md-2'>
-    <div class="leftmenu affix hiddden-xs hidden-sm">
-      <div class='panel category-nav'>
-        <div class='panel-body'>
-          <?php echo $treeModuleMenu;?>
-          <?php if(!empty($treeManageLink)):?>
-          <div class='text-right'><?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?></div>
-          <?php endif;?>
+    <?php if(isset($uiHeader) and $uiHeader) include '../../ui/view/header.html.php';?>
+    <?php if(!empty($treeModuleMenu)):?>
+    <div class='col-md-2'>
+      <div class="leftmenu affix hiddden-xs hidden-sm">
+        <div class='panel category-nav'>
+          <div class='panel-body'>
+            <?php echo $treeModuleMenu;?>
+            <?php if(!empty($treeManageLink)):?>
+            <div class='text-right'><?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?></div>
+            <?php endif;?>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class='col-md-10'>
+    <div class='col-md-10'>
+    <?php endif;?>
   <?php endif;?>
-  <?php endif;?>
-
 <?php if($this->session->currentGroup == 'design'):?>
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
