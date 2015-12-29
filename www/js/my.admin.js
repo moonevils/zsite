@@ -27,10 +27,19 @@ function initPrimaryNavbar()
  */
 function fixPositionbar()
 {
-   $('#positionBar').append($('#primaryNavbar li.active'));
-   $('#positionBar li.active a').text($('#positionBar li.active a').attr('title'));
-   $('#positionBar').append($('#mainNavbarCollapse li.active'));
-   $('#positionBar li.active').removeClass('active');
+    var $nav = $('#positionBar');
+    var appendItem = function($item)
+    {
+        if($item.length)
+        {
+            $item = $item.first().clone().attr('class', null);
+            if($.trim($item.text()) === '') $item.text($item.attr('title'));
+            $nav.append($('<li>').append($item));
+        }
+    };
+
+    appendItem($('#primaryNavbar > .nav:not(.fixed-bottom) > li.active > a'));
+    appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
 }
 
 /**
