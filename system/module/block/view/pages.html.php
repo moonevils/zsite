@@ -23,7 +23,7 @@
           <?php foreach($plans as $planID => $name):?>
           <li>
             <?php echo html::a(inlink('switchlayout', "plan={$planID}"), $name, "class='pull-left'");?>
-            <?php echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='right'");?>
+            <?php echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='deleter'");?>
           </li>
           <?php endforeach;?>
         </ul>
