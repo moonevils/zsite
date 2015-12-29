@@ -183,25 +183,24 @@ $lang->menu->stat  = '统计|stat|traffic|';
 $lang->menu->tag   = '关键词|tag|admin|';
 $lang->menu->links = '友情链接|links|admin|';
 
-$lang->menu->ui       = '界面|ui|customtheme|';
+$lang->menu->ui       = '界面|ui|settemplate|';
 $lang->menu->logo     = '标志|ui|setlogo|';
 $lang->menu->nav      = '导航|nav|admin|';
 $lang->menu->block    = '区块|block|admin|';
 $lang->menu->slide    = '幻灯片|slide|admin|';
+$lang->menu->visual   = "<i class='icon icon-magic'>可视化编辑</i>|visual|index|";
 
 $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
 
 $lang->menu->package    = '扩展|package|browse|';
-$lang->menu->themestore = '主题|ui|themestore|';
+$lang->menu->themestore = '主题市场|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
 $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->wechat  = 'site';
 $lang->menuGroups->group   = 'security';
-$lang->menuGroups->block   = 'ui';
-$lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
@@ -233,8 +232,10 @@ $lang->product->menu->browse = array('link' => '所有产品|product|admin|', 'a
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->theme   = '主题|ui|settemplate|';
-$lang->ui->menu->custom  = '自定义|ui|customtheme|';
 $lang->ui->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->custom  = '外观|ui|customtheme|';
+$lang->ui->menu->css     = 'css设置|ui|setcss|';
+$lang->ui->menu->js      = 'js设置|ui|setjs|';
 $lang->ui->menu->source  = '素材|file|browsesource|';
 
 /* Menu of user module. */
