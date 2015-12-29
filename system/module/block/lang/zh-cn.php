@@ -54,6 +54,9 @@ $lang->block->style           = '样式';
 $lang->block->sort            = '排序';
 $lang->block->class           = 'css类名';
 $lang->block->subRegion       = '子布局';
+$lang->block->currentLayout   = '当前布局：%s';
+$lang->block->planName        = '方案名称';
+$lang->block->saveLayoutAs    = '复制布局：%s';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局设置";
@@ -68,6 +71,8 @@ $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 $lang->block->setregion    = '配置布局';
 $lang->block->switchPlan   = '切换布局';
+$lang->block->cloneLayout  = '另存为';
+
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';

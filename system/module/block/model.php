@@ -971,4 +971,29 @@ class blockModel extends model
         $setting["{$template}_{$theme}"] = $plan;
         return $this->loadModel('setting')->setItems('system.common.layout', $setting);
     }
+    
+    /**
+     * Clone an layout plan.
+     * 
+     * @param  object    $plan 
+     * @access public
+     * @return void
+     */
+    public function cloneLayout($plan)
+    {
+        $this->app->loadLang('tree');
+        $this->lang->category->name = $this->lang->block->planName;
+        unset($plan->id);
+        unset($plan->pathNames);
+        $plan->name = $this->post->name;  
+
+        $this->dao->insert(TABLE_CATEGORY)
+            ->data($plan)
+            ->check('name', 'notempty')
+            ->check('name', 'unique', "type='{$plan->type}'")
+            ->exec();
+
+        if(dao::isError()) return false;
+        return $this->dao->lastInsertID();
+    }
 }
