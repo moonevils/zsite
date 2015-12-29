@@ -222,4 +222,21 @@ class block extends control
         $this->view->plan  = $plan;
         $this->display();
     }
+
+    /**
+     * Remove a layout.
+     * 
+     * @param  int    $plan 
+     * @access public
+     * @return void
+     */
+    public function removeLayout($plan)
+    {
+        $setting = (array) $this->config->layout;
+        if(array_search($plan, $setting) != false) $this->send(array('result' => 'fail', 'message' => $this->lang->block->planIsUseing));
+        $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($plan)->exec();
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
+
+    }
 }

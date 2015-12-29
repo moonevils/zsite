@@ -72,6 +72,7 @@ $lang->block->setPage      = '配置页面';
 $lang->block->setregion    = '配置布局';
 $lang->block->switchPlan   = '切换布局';
 $lang->block->cloneLayout  = '另存为';
+$lang->block->planIsUseing = '此方案正在使用，不能删除';
 
 
 $lang->block->paddingTop    = '上';
