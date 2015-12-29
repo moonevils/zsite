@@ -13,22 +13,25 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong>
-      <ul>
-        <li class="dropdown">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <i class='icon-columns'></i>
-            <?php echo zget($plans, $plan);?> <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <?php foreach($plans as $planID => $name):?>
-            <?php $class = $planID == $plan ? "class='active'" : '';?>
-            <li <?php echo $class;?>><?php echo html::a(inlink('switchlayout', "plan={$planID}"), $name);?></li>
-            <?php endforeach;?>
-          </ul>
-        </li>
-      </ul>
-    </strong>
+    <strong class='pull-left'> <?php printf($lang->block->currentLayout, $plans[$plan]);?> </strong> &nbsp;
+    <ul class='pull-left'>
+      <li class="dropdown">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+          <?php echo $lang->block->switchPlan;?> <i class="icon icon-chevron-down"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <?php foreach($plans as $planID => $name):?>
+          <li>
+            <?php echo html::a(inlink('switchlayout', "plan={$planID}"), $name, "class='pull-left'");?>
+            <?php echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='right'");?>
+          </li>
+          <?php endforeach;?>
+        </ul>
+      </li>
+    </ul>
+    <div class='panel-actions'>
+      <?php echo html::a(inlink('clonelayout', "plan={$plan}"), $lang->block->cloneLayout, "class='btn btn-sm btn-primary' data-toggle='modal'");?>
+    </div>
   </div>
   <table class='table table-bordered table-hover table-striped'>
     <tr>

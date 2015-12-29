@@ -193,4 +193,33 @@ class block extends control
         $result = $this->block->setPlan($plan, $template, $theme);
         if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
+
+    /**
+     * Clone a layout plan.
+     * 
+     * @param  int    $plan 
+     * @access public
+     * @return void
+     */
+    public function cloneLayout($plan)
+    {
+        $plan = $this->loadModel('tree')->getByID($plan);
+        if($_POST)
+        {
+            $newPlan = $this->block->cloneLayout($plan);
+            if($newPlan) 
+            {
+                $template = $this->config->template->{$this->device}->name;
+                $theme    = $this->config->template->{$this->device}->theme;
+                $result   = $this->block->setPlan($newPlan, $template, $theme);
+                $this->send(array('result' => 'success', 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
+            }
+
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = sprintf($this->lang->block->saveLayoutAs, $plan->name);
+        $this->view->plan  = $plan;
+        $this->display();
+    }
 }
