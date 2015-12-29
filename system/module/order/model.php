@@ -91,7 +91,7 @@ class orderModel extends model
         }
 
         $this->dao->insert(TABLE_ORDER)
-            ->data($order, 'createAddress,deliveryAddress,phone,contact,zipcode,price,count,product')
+            ->data($order, 'createAddress,deliveryAddress,phone,contact,price,count,product')
             ->autocheck()
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();
