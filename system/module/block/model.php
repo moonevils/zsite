@@ -977,7 +977,7 @@ class blockModel extends model
      * 
      * @param  object    $plan 
      * @access public
-     * @return void
+     * @return int|bool
      */
     public function cloneLayout($plan)
     {
@@ -995,5 +995,29 @@ class blockModel extends model
 
         if(dao::isError()) return false;
         return $this->dao->lastInsertID();
+    }
+
+    /**
+     * Rename a layout.
+     * 
+     * @param  object    $plan 
+     * @access public
+     * @return bool
+     */
+    public function renameLayout($plan)
+    {
+        $this->app->loadLang('tree');
+        $this->lang->category->name = $this->lang->block->planName;
+        $type   = $plan->type;
+        $planID = $plan->id;
+
+        $this->dao->update(TABLE_CATEGORY)
+            ->data(array('name' => $this->post->name))
+            ->check('name', 'notempty')
+            ->check('name', 'unique', "type='{$type}'")
+            ->where('id')->eq($planID)
+            ->exec();
+
+        return !dao::isError();
     }
 }
