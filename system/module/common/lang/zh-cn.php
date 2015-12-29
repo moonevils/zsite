@@ -152,7 +152,7 @@ $lang->groups->content  = array('title' => '内容', 'link' => 'article|admin|ty
 $lang->groups->shop     = array('title' => '商城', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => '会员', 'link' => 'user|admin|',                'icon' => 'group');
 $lang->groups->promote  = array('title' => '推广', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
-$lang->groups->designer = array('title' => '设计', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
+$lang->groups->design   = array('title' => '设计', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
 $lang->groups->open     = array('title' => '平台', 'link' => 'package|browse|',            'icon' => 'cloud');
 $lang->groups->setting  = array('title' => '设置', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
@@ -188,7 +188,7 @@ $lang->menu->logo     = '标志|ui|setlogo|';
 $lang->menu->nav      = '导航|nav|admin|';
 $lang->menu->block    = '区块|block|admin|';
 $lang->menu->slide    = '幻灯片|slide|admin|';
-$lang->menu->visual   = "<i class='icon icon-magic'>可视化编辑</i>|visual|index|";
+$lang->menu->visual   = "<i class='icon icon-magic'></i> 可视化编辑|visual|index|";
 
 $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
