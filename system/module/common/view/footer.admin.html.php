@@ -3,7 +3,7 @@
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-xs" role="navigation">
-  <ul class="nav navbar-nav pull-left" id='positionBar'>
+  <ul class='breadcrumb pull-left' id='positionBar'>
     <li><?php echo html::a(helper::createLink('admin', 'index'), $lang->chanzhiEPSx)?></li>
   </ul>
   <div class="collapse navbar-collapse navbar-ex6-collapse">
