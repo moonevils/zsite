@@ -3,7 +3,7 @@
  * The control file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -238,5 +238,27 @@ class block extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
 
+    }
+
+    /**
+     * Rename a layout.
+     * 
+     * @param  int    $plan 
+     * @access public
+     * @return void
+     */
+    public function renameLayout($plan)
+    {
+        $plan = $this->loadModel('tree')->getByID($plan);
+        if($_POST)
+        {
+            $result = $this->block->renameLayout($plan);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = $this->lang->block->renameLayout . $this->lang->colon . $plan->name;
+        $this->view->plan  = $plan;
+        $this->display(); 
     }
 }

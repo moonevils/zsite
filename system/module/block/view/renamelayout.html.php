@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<form method='post' action='<?php echo inlink('clonelayout', "plan={$plan->id}");?>' id='ajaxForm'>
+<form method='post' action='<?php echo inlink('renamelayout', "plan={$plan->id}");?>' id='ajaxForm'>
   <table class='table table-form'>
     <tr>
       <th class='w-100px'><?php echo $lang->block->planName;?></th>
