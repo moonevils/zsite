@@ -118,42 +118,24 @@ class ui extends control
         {
             $setNameResult = false;
             if(!empty($_POST['name'])) $setNameResult = $this->loadModel('setting')->setItem('system.common.site.name', $this->post->name);
+            
+            if(isset($_FILES['logo']))    $logoReturn    = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
+            if(isset($_FILES['favicon'])) $faviconReturn = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
 
-            $return = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
-
-            if($nameResult || $return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
-            if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
+            if($setNameResult || $logoReturn['result'] || $faviconReturn['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->lang->menuGroups->ui = 'logo';
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
         $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
 
         $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
 
-        $this->view->title = $this->lang->ui->setLogo;
-        $this->view->logo  = $logo;
-
-        $this->display();
-    }
-
-    /**
-     * Upload favicon.
-     *
-     * @access public
-     * @return void
-     */
-    public function setFavicon()
-    {
-        if($_SERVER['REQUEST_METHOD'] == 'POST')
-        {
-            $return = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
-
-            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setFavicon')));
-            if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
-         }
-
-        $this->view->title          = $this->lang->ui->setFavicon;
+        $this->view->title          = $this->lang->ui->setLogo;
+        $this->view->logo           = $logo;
+        $this->view->uiHeader       = true;
         $this->view->favicon        = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
         $this->view->defaultFavicon = file_exists($this->app->getWwwRoot() . 'favicon.ico');
 
@@ -175,7 +157,7 @@ class ui extends control
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=favicon");
         if($favicon) $this->loadModel('file')->delete($favicon->fileID);
 
-        $this->locate(inlink('setFavicon'));
+        $this->locate(inlink('setLogo'));
     }
 
     /**

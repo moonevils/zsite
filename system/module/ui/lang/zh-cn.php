@@ -14,7 +14,8 @@ $lang->ui->common = "界面";
 $lang->ui->clientDesktop   = '桌面';
 $lang->ui->clientMobile    = '移动';
 $lang->ui->logo            = 'Logo';
-$lang->ui->setLogo         = "Logo设置";
+$lang->ui->favicon         = '小图标';
+$lang->ui->setLogo         = "标志设置";
 $lang->ui->setTemplate     = '模板设置';
 $lang->ui->manageTemplate  = '模板管理';
 $lang->ui->installTemplate = '导入模板';
@@ -36,7 +37,11 @@ $lang->ui->matchedBlock    = '对应区块';
 $lang->ui->createBlock     = '导入新区块';
 $lang->ui->useOldBlock     = '使用已有区块';
 $lang->ui->themeStore      = '主题市场';
+$lang->ui->help            = "帮助";
+$lang->ui->deleteLogo      = "删除Logo";
 
+$lang->ui->noLogo                 = "未上传Logo";
+$lang->ui->noFavicon              = "未上传小图标";
 $lang->ui->noStyleTag             = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->noJsTag                = "请填写全局JS代码，不需要&lt;script&gt;&lt;/script&gt;标签";
 $lang->ui->setLogoFailed          = "设置Logo失败";
@@ -69,9 +74,6 @@ $lang->ui->deleteThemeList['brightdark'] = '蝉憩';
 $lang->ui->deleteThemeList['flat']       = '清泉';
 $lang->ui->deleteThemeList['tree']       = '蝉之树';
 $lang->ui->deleteThemeList['colorful']   = '缤纷';
-
-$lang->ui->favicon = new stdclass();
-$lang->ui->favicon->help  = "帮助";
 
 $lang->ui->template = new stdclass();
 $lang->ui->template->name            = '名称';

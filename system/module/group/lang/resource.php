@@ -228,7 +228,6 @@ $lang->resource->ui = new stdclass();
 $lang->resource->ui->setTemplate   = 'setTemplate';
 $lang->resource->ui->customTheme   = 'customTheme';
 $lang->resource->ui->setLogo       = 'setLogo';
-$lang->resource->ui->setFavicon    = 'setFavicon';
 $lang->resource->ui->deleteFavicon = 'deleteFavicon';
 $lang->resource->ui->deleteLogo    = 'deleteLogo';
 $lang->resource->ui->others        = 'others';
