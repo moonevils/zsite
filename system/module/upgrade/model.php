@@ -1750,6 +1750,13 @@ class upgradeModel extends model
         $this->dao->delete()->from(TABLE_ORDER)->where('id')->eq($orderID)->exec();
     }
 
+    /**
+     * Fix layout plans.
+     * 
+     * @param  int    $template 
+     * @access public
+     * @return void
+     */
     public function fixLayoutPlans($template)
     {
         $themes = $this->loadModel('ui')->getThemesByTemplate('default');
@@ -1769,7 +1776,6 @@ class upgradeModel extends model
             $this->dao->update(TABLE_LAYOUT)->set('plan')->eq($planID)->where('plan')->eq($code)->exec();
             $this->loadModel('block')->setPlan($planID, $template, $code);
         }
-
     }
 
 }
