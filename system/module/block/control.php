@@ -239,4 +239,26 @@ class block extends control
         $this->send(array('result' => 'success'));
 
     }
+
+    /**
+     * Rename a layout.
+     * 
+     * @param  int    $plan 
+     * @access public
+     * @return void
+     */
+    public function renameLayout($plan)
+    {
+        $plan = $this->loadModel('tree')->getByID($plan);
+        if($_POST)
+        {
+            $result = $this->block->renameLayout($plan);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = $this->lang->block->renameLayout . $this->lang->colon . $plan->name;
+        $this->view->plan  = $plan;
+        $this->display(); 
+    }
 }
