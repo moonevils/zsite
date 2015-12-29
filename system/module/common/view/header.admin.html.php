@@ -3,9 +3,7 @@
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
-  <li <?php if($this->session->currentGroup == 'home') echo "class='active'";?> data-id='home'><?php echo html::a($this->createLink($this->config->default->module), $lang->chanzhiEPSx);?></li>
   <?php foreach ($lang->groups as $group => $setting):?>
-  <?php if($group == 'home') continue;?>
   <?php list($module, $method, $params) = explode('|', $setting['link'])?>
   <li <?php if($group == $this->session->currentGroup) echo "class='active'";?> data-id='<?php echo $group ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $setting['title'] ?>'><i class='icon icon-<?php echo $setting['icon'] ?>'></i></a></li>
   <?php endforeach;?>

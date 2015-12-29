@@ -234,8 +234,7 @@ $lang->ui->menu = new stdclass();
 $lang->ui->menu->theme   = '主题|ui|settemplate|';
 $lang->ui->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->custom  = '外观|ui|customtheme|';
-$lang->ui->menu->css     = 'css设置|ui|setcss|';
-$lang->ui->menu->js      = 'js设置|ui|setjs|';
+$lang->ui->menu->code    = '代码|ui|setcode|';
 $lang->ui->menu->source  = '素材|file|browsesource|';
 
 /* Menu of user module. */
