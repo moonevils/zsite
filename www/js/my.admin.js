@@ -2,6 +2,7 @@ $(function()
 {
     responsiveNavbar();
     fixCategoryNav();
+    fixPositionbar();
     initPrimaryNavbar();
     $('#primaryNavbar a').click(function()
     {
@@ -46,6 +47,20 @@ function responsiveNavbar()
         if(navbar.hasClass('navbar-simple')) navbar.removeClass('navbar-simple');
         else  navbar.addClass('navbar-simple');
     });
+}
+
+/**
+ * Add positionBar.
+ * 
+ * @access public
+ * @return void
+ */
+function fixPositionbar()
+{
+   $('#positionBar').append($('#primaryNavbar li.active'));
+   $('#positionBar li.active a').text($('#positionBar li.active a').attr('title'));
+   $('#positionBar').append($('#mainNavbarCollapse li.active'));
+   $('#positionBar li.active').removeClass('active');
 }
 
 /**
