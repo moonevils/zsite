@@ -206,11 +206,11 @@ class fileModel extends model
      * @access public
      * @return void
      */
-    public function saveUpload($objectType = '', $objectID = '', $extra = '')
+    public function saveUpload($objectType = '', $objectID = '', $extra = '', $htmlTagName = 'files')
     {
         $fileTitles = array();
         $now        = helper::now();
-        $files      = $this->getUpload('files', $objectType);
+        $files      = $this->getUpload($htmlTagName, $objectType);
 
         $imageSize = array('width' => 0, 'height' => 0);
 
