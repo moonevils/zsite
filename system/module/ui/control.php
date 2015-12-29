@@ -132,10 +132,9 @@ class ui extends control
         $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
 
         $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
-
+        unset($this->lang->ui->menu);
         $this->view->title          = $this->lang->ui->setLogo;
         $this->view->logo           = $logo;
-        $this->view->uiHeader       = true;
         $this->view->favicon        = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
         $this->view->defaultFavicon = file_exists($this->app->getWwwRoot() . 'favicon.ico');
 
@@ -534,5 +533,36 @@ class ui extends control
             exit($js);
         }
         exit;
+    }
+
+    /**
+     * Set js and css code for pages.
+     * 
+     * @param  string $page 
+     * @access public
+     * @return void
+     */
+    public function setCode($page = 'all')
+    {
+        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->device}->name;
+
+        if($_POST)
+        {
+            $cssSetting["{$template}_{$theme}_{$page}"] = $this->post->css;
+            $jsSetting["{$template}_{$theme}_{$page}"] = $this->post->js;
+            $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
+            $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->app->loadLang('block');
+        $this->view->title    = $this->lang->ui->setCode;
+        $this->view->page     = $page;
+        $this->view->template = $template;
+        $this->view->theme    = $theme;
+        $this->view->uiHeader = true;
+        $this->view->pageList = $this->lang->block->$template->pages;
+        $this->display();
     }
 }

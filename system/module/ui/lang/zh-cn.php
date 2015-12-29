@@ -39,6 +39,7 @@ $lang->ui->useOldBlock     = '使用已有区块';
 $lang->ui->themeStore      = '主题市场';
 $lang->ui->help            = "帮助";
 $lang->ui->deleteLogo      = "删除Logo";
+$lang->ui->setCode         = "代码设置";
 
 $lang->ui->noLogo                 = "未上传Logo";
 $lang->ui->noFavicon              = "未上传小图标";
