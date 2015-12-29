@@ -117,7 +117,7 @@ class uiModel extends model
     {
         if(empty($_FILES)) return array('result' => false, 'message' => $this->lang->ui->noSelectedFile);
 
-        $fileType = substr($_FILES['files']['name'], strrpos($_FILES['files']['name'], '.') + 1);
+        $fileType = substr($_FILES[$htmlTagName]['name'], strrpos($_FILES[$htmlTagName]['name'], '.') + 1);
         if(strpos($allowedFileType, $fileType) === false) return array('result' => false, 'message' => sprintf($this->lang->ui->notAlloweFileType, $allowedFileType));
 
         $fileModel = $this->loadModel('file');
@@ -130,11 +130,11 @@ class uiModel extends model
             $clientLang = $this->app->getClientLang();
             $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->andWhere('lang')->eq($clientLang)->fetchAll('id');
             foreach($oldFiles as $file) $fileModel->delete($file->id);
-            if(dao::isError()) return array('result' => false, 'message' => $this->lang->fail);
+            if(dao::isError()) return array('result' => false, 'message' => dao::getError());
         }
-
+        
         /* Upload new logo. */
-        $uploadResult = $fileModel->saveUpload($htmlTagName);
+        $uploadResult = $fileModel->saveUpload('', '', '', $htmlTagName);
         if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
 
         $fileIdList = array_keys($uploadResult);
