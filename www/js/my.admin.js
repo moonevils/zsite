@@ -1,6 +1,5 @@
 $(function()
 {
-    responsiveNavbar();
     fixCategoryNav();
     fixPositionbar();
     initPrimaryNavbar();
@@ -9,8 +8,6 @@ $(function()
         group = $(this).parent('li').data('id');
         $.cookie('currentGroup', group, {expires:config.cookieLife, path:config.webRoot});
     })
-
-    $('#deviceNav') && $('#deviceNav').prependTo('#mainNavbarCollapse .mainNavbarNav');
 });
 
 /**
@@ -23,33 +20,6 @@ function initPrimaryNavbar()
 }
 
 /**
- * make the navbar responsivable
- *
- * @access public
- * @return void
- */
-function responsiveNavbar()
-{
-    var lis = $('#mainNavbar .navbar-nav').first().addClass('mainNavbarNav').find('li');
-    var lisSize = lis.length;
-    if(lisSize>5)
-    {
-      var i = 0;
-      lis.each(function()
-      {
-          if(i++>10) $(this).addClass('simple-mode-b'); else $(this).addClass('simple-mode-a');
-      });
-    }
-
-    $('#navbarSwitcher').click(function()
-    {
-        var navbar = $(this).closest('.navbar');
-        if(navbar.hasClass('navbar-simple')) navbar.removeClass('navbar-simple');
-        else  navbar.addClass('navbar-simple');
-    });
-}
-
-/**
  * Add positionBar.
  * 
  * @access public
@@ -57,10 +27,19 @@ function responsiveNavbar()
  */
 function fixPositionbar()
 {
-   $('#positionBar').append($('#primaryNavbar li.active'));
-   $('#positionBar li.active a').text($('#positionBar li.active a').attr('title'));
-   $('#positionBar').append($('#mainNavbarCollapse li.active'));
-   $('#positionBar li.active').removeClass('active');
+    var $nav = $('#positionBar');
+    var appendItem = function($item)
+    {
+        if($item.length)
+        {
+            $item = $item.first().clone().attr('class', null);
+            if($.trim($item.text()) === '') $item.text($item.attr('title'));
+            $nav.append($('<li>').append($item));
+        }
+    };
+
+    appendItem($('#primaryNavbar > .nav:not(.fixed-bottom) > li.active > a'));
+    appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
 }
 
 /**
