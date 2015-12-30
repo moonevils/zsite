@@ -8,6 +8,11 @@ $(function()
         group = $(this).parent('li').data('id');
         $.cookie('currentGroup', group, {expires:config.cookieLife, path:config.webRoot});
     })
+
+    $('#positionRoot').click(function()
+    {
+        $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
+    })
 });
 
 /**
@@ -28,6 +33,7 @@ function initPrimaryNavbar()
 function fixPositionbar()
 {
     var $nav = $('#positionBar');
+    $nav.html($nav.find('li').eq(0));
     var appendItem = function($item)
     {
         if($item.length)
@@ -39,7 +45,8 @@ function fixPositionbar()
     };
 
     appendItem($('#primaryNavbar > .nav:not(.fixed-bottom) > li.active > a'));
-    appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
+    lastLink = $('#mainNavbarCollapse > .nav > li.active > a').attr('href');
+    if($nav.find('[href=' + lastLink  + ']').size() == 0) appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
 }
 
 /**
