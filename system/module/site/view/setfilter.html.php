@@ -27,9 +27,9 @@
           <td>
             <div class='input-group'>
               <?php echo html::input("interval[$item]", zget($this->config->guarder->interval->{$type}, $item), "class='form-control'");?>
-              <span class='input-group-addon'><?php echo $lang->guarder->interval?><?php echo $lang->guarder->exceed?></span>
+              <span class='input-group-addon fix-border'><?php echo $lang->guarder->interval?><?php echo $lang->guarder->exceed?></span>
               <?php echo html::input("limits[interval][{$item}]", $this->config->guarder->limits->{$type}->interval->$item, "class='form-control'");?>
-              <span class='input-group-addon'><?php echo $lang->guarder->times . $lang->guarder->then . $lang->guarder->disable?></span>
+              <span class='input-group-addon fix-border'><?php echo $lang->guarder->times . $lang->guarder->then . $lang->guarder->disable?></span>
               <?php echo html::select("punishment[interval][{$item}]", $lang->guarder->punishOptions, $this->config->guarder->punishment->{$type}->interval->$item, "class='form-control'");?>
             </div>
           </td>
@@ -37,7 +37,7 @@
             <div class='input-group'>
               <span class='input-group-addon'><?php echo $lang->guarder->perDay?></span>
               <?php echo html::input("limits[day][{$item}]", $this->config->guarder->limits->{$type}->day->$item, "class='form-control'");?>
-              <span class='input-group-addon'><?php echo $lang->guarder->times . $lang->guarder->then . $lang->guarder->disable?></span>
+              <span class='input-group-addon fix-border'><?php echo $lang->guarder->times . $lang->guarder->then . $lang->guarder->disable?></span>
               <?php echo html::select("punishment[day][{$item}]",$lang->guarder->punishOptions, $this->config->guarder->punishment->{$type}->day->$item, "class='form-control'");?>
             </div>
           </td>
