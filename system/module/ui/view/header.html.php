@@ -3,7 +3,7 @@
 <?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
 <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
 <nav id='menu' style='padding-left:15px;'>
-  <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName, '', false);?>
+  <?php $moduleMenu = commonModel::createModuleMenu('theme', '', false);?>
   <?php if($moduleMenu) echo $moduleMenu;?>
   <div class="pull-right">
     <ul class="nav">
