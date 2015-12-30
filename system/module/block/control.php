@@ -42,7 +42,6 @@ class block extends control
         $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
-        $this->lang->block->menu = $this->lang->ui->menu;
         $this->view->title    = $this->lang->block->browseRegion;
         $this->view->plans    = $this->block->getPlans($template);
         $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
