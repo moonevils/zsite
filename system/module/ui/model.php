@@ -192,10 +192,6 @@ class uiModel extends model
                 }
             }
         }
-
-        $params['css'] = isset($userSetting['css']) ? $userSetting['css'] : '';
-        $params['js']  = isset($userSetting['js']) ? $userSetting['js'] : '';
-
         return $params;
     }
 
@@ -278,6 +274,25 @@ class uiModel extends model
         file_put_contents($cssFile, $css);
 
         return array('result' => 'success', 'css' => $css);
+    }
+
+    /**
+     * Lessc css with params.
+     * 
+     * @param  array    $params 
+     * @param  string   $css 
+     * @access public
+     * @return string
+     */
+    public function compileCSS($params, $css)
+    {
+        $lessc = $this->app->loadClass('lessc');
+
+        $lessc->setFormatter("compressed");
+        $lessc->setVariables($params);
+
+        $compiledCSS = $lessc->compile($css);
+        return empty($lessc->errors) ? $compiledCSS : $css;
     }
 
     /**
