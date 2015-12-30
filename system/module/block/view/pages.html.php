@@ -19,11 +19,14 @@
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <?php echo $lang->block->switchPlan;?> <i class="icon icon-chevron-down"></i>
         </a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu layout-menu">
           <?php foreach($plans as $planID => $name):?>
-          <li>
-            <?php echo html::a(inlink('switchlayout', "plan={$planID}"), $name, "class='pull-left'");?>
-            <?php echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='deleter'");?>
+          <li<?php if($plan == $planID) echo " class='active'";?>>
+            <?php echo html::a(inlink('switchlayout', "plan={$planID}"), $name);?>
+            <div class='actions'>
+              <?php echo html::a(inlink('renamelayout',   "plan={$planID}"), "<i class='icon icon-pencil'></i>", "");?>
+              <?php echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='deleter'");?>
+            </div>
           </li>
           <?php endforeach;?>
         </ul>

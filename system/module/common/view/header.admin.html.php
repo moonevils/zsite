@@ -19,10 +19,32 @@
     </button>
   </div>
   <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
-    <?php echo $mainMenu;?>
-    <ul class='nav navbar-nav' id='navbarSwitcher'>
-      <li><a href='###'><i class='icon-chevron-sign-right icon-large'></i></a></li>
+    <?php if($this->session->currentGroup == 'design'):?>
+    <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
+    <?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
+    <?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
+    <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
+    <ul class='nav navbar-nav'>
+      <li class='device-nav'>
+        <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
+        <?php if($mobileTemplate == 'close'):?>
+        <?php echo html::a('javascript:;', $lang->ui->deviceList->desktop);?>
+        <?php else:?>
+        <a href='javascript:;' data-toggle='dropdown'>
+          <?php echo $lang->ui->deviceList->{$currentDevice};?> <i class='icon-caret-down'></i>
+        </a>
+        <ul class='dropdown-menu'>
+          <?php foreach($lang->ui->deviceList as $device => $name):?>
+          <?php $class = $device == $currentDevice ? "class='active'" : '';?>
+          <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
+          <?php endforeach;?>
+        </ul>
+        <?php endif;?>
+      </li>
+      <li class='divider'></li>
     </ul>
+    <?php endif;?>
+    <?php echo $mainMenu;?>
     <ul class='nav navbar-nav navbar-right'>
       <li><?php echo html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'");?></li>
       <li class='dropdown'><?php include 'selectlang.html.php';?></li>
@@ -70,27 +92,3 @@
     <div class='col-md-10'>
     <?php endif;?>
   <?php endif;?>
-<?php if($this->session->currentGroup == 'design'):?>
-<?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
-<?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
-<?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
-<?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
-<ul class='hide'>
-  <li id='deviceNav' class='nav-item-primary'>
-    <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
-    <?php if($mobileTemplate == 'close'):?>
-    <?php echo html::a('javascript:;', $lang->ui->deviceList->desktop);?>
-    <?php else:?>
-    <a href='javascript:;' data-toggle='dropdown'>
-      <?php echo $lang->ui->deviceList->{$currentDevice};?> <i class='icon-caret-down'></i>
-    </a>
-    <ul id='deviceMenu' class='dropdown-menu'>
-      <?php foreach($lang->ui->deviceList as $device => $name):?>
-      <?php $class = $device == $currentDevice ? "class='active'" : '';?>
-      <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
-      <?php endforeach;?>
-    </ul>
-    <?php endif;?>
-  </li>
-</ul>
-<?php endif;?>
