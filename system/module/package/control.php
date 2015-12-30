@@ -414,7 +414,7 @@ class package extends control
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
+            if($this->view->canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($lang->guarder->okFileVerify, $this->view->canManage['name'], $this->view->canManage['content'])));
             
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => '' ));
 
