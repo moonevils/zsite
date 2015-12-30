@@ -46,7 +46,7 @@ function fixPositionbar()
 
     appendItem($('#primaryNavbar > .nav:not(.fixed-bottom) > li.active > a'));
     lastLink = $('#mainNavbarCollapse > .nav > li.active > a').attr('href');
-    if($nav.find('[href=' + lastLink  + ']').size() == 0) appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
+    if($nav.find("[href='" + lastLink  + "']").size() == 0) appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
 }
 
 /**
