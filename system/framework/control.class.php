@@ -588,16 +588,22 @@ class control
         /* Get css and js. */
         $css = $this->getCSS($moduleName, $methodName);
         $js  = $this->getJS($moduleName, $methodName);
+
         if(RUN_MODE == 'front')
         {
             $template    = $this->config->template->{$this->device}->name;
             $theme       = $this->config->template->{$this->device}->theme;
-            $customParam = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+            $customParam = $this->loadModel('ui')->getCustomParams($template, $theme);
             $themeHooks  = $this->loadThemeHooks();
+
+            $js .= zget($this->config->js, "{$template}_{$theme}_all");
+            $js .= zget($this->config->js,"{$template}_{$theme}_{$moduleName}_{$methodName}");
+
+            $allPageCSS     = zget($this->config->css, "{$template}_{$theme}_all");
+            $currentPageCSS = zget($this->config->css, "{$template}_{$theme}_{$moduleName}_{$methodName}");
+            $css .= $this->ui->compileCSS($customParam, $allPageCSS . $currentPageCSS);
             if(!empty($themeHooks))
             {
-                $importCode = '@import url(' . helper::createLink('ui', 'getencrypt', "type=css&template={$template}&theme={$theme}") . ');';
-                $css = $importCode . $css;
                 $jsFun = "get{$theme}JS";
                 if(function_exists($jsFun)) 
                 {
