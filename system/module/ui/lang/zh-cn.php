@@ -18,6 +18,7 @@ $lang->ui->favicon         = '小图标';
 $lang->ui->setLogo         = "标志设置";
 $lang->ui->setTemplate     = '模板设置';
 $lang->ui->manageTemplate  = '模板管理';
+$lang->ui->manageTheme     = '主题管理';
 $lang->ui->installTemplate = '导入模板';
 $lang->ui->exportTheme     = '导出主题';
 $lang->ui->setTheme        = '主题设置';
