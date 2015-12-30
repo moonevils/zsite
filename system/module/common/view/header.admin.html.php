@@ -3,9 +3,9 @@
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
-  <?php foreach ($lang->groups as $group => $setting):?>
-  <?php list($module, $method, $params) = explode('|', $setting['link'])?>
-  <li <?php if($group == $this->session->currentGroup) echo "class='active'";?> data-id='<?php echo $group ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $setting['title'] ?>'><i class='icon icon-<?php echo $setting['icon'] ?>'></i></a></li>
+  <?php foreach ($lang->groups as $group => $groupSetting):?>
+  <?php list($module, $method, $params) = explode('|', $groupSetting['link'])?>
+  <li <?php if($group == $this->session->currentGroup) echo "class='active'";?> data-id='<?php echo $group ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $groupSetting['title'] ?>'><i class='icon icon-<?php echo $groupSetting['icon'] ?>'></i></a></li>
   <?php endforeach;?>
   </ul>
   <?php echo commonModel::createManagerMenu('nav nav-stacked fixed-bottom');?>
