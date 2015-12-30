@@ -508,6 +508,7 @@ class userModel extends model
 
         /* Then check the password hash. */
         if(!$user) return false;
+        $account = $user->account;
 
         /* Can not login before ten minutes when user is locked. */
         if($user->locked != '0000-00-00 00:00:00')
