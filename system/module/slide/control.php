@@ -27,7 +27,6 @@ class slide extends control
         }
         $this->view->groups = $groups;
         $this->display();
-        
     }
 
     /**
