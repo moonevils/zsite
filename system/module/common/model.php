@@ -3,7 +3,7 @@
  * The model file of common module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common
  * @version     $Id$
@@ -329,17 +329,33 @@ class commonModel extends model
      */
     public static function createMainMenu($currentModule)
     {
-        global $app, $lang;
+        global $config, $app, $lang;
+
+        self::fixGroups();
+
+        $currentModule = zget($lang->menuGroups, $currentModule);
 
         /* Set current module. */
-        if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
+        $currentGroup = $app->cookie->currentGroup;
+        if($currentGroup and isset($config->menus->{$currentGroup})) 
+        {
+            $group = $currentGroup;
+        }
+        else
+        {
+            if(isset($config->menuGroups->$currentModule)) $group = $config->menuGroups->$currentModule;
+        }
 
+        $app->session->set('currentGroup', $group);
+
+        $menus  = explode(',', $config->menus->{$group});
         $string = "<ul class='nav navbar-nav'>\n";
 
-        /* Print all main menus. */
-        foreach($lang->menu as $moduleName => $moduleMenu)
+        foreach($menus as $menu)
         {
-            if($moduleName == 'feedback')
+            if(!isset($lang->menu->{$menu})) continue;
+            $moduleMenu = $lang->menu->{$menu};
+            if($menu == 'feedback')
             {
                 list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
@@ -358,7 +374,7 @@ class commonModel extends model
                 }
             }
 
-            $class = $moduleName == $currentModule ? " class='active'" : '';
+            $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
             if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
@@ -374,11 +390,11 @@ class commonModel extends model
                 $string .= "<li$class><a href='$link'>$label</a></li>\n";
             }
         }
-
+        
         $string .= "</ul>\n";
         return $string;
     }
-
+    
     /**
      * Create the module menu.
      *
@@ -437,14 +453,15 @@ class commonModel extends model
      * @access public
      * @return string
      */
-    public static function createManagerMenu()
+    public static function createManagerMenu($class = 'nav navbar-nav navbar-right')
     {
         global $app, $lang , $config;
 
-        $string  = '<ul class="nav navbar-nav navbar-right">';
-        $string .= sprintf('<li>%s</li>', html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
-        $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
+        $string  = '<ul class="' . $class . '">';
+        $string .= sprintf('<li data-toggle="tooltip" title="%s" data-id="profile" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-user"></i><span class="text-username"> %s <b class="caret"></b></span></a>', $app->user->realname, $app->user->realname);
         $string .= '<ul class="dropdown-menu">';
+        $string .= '<li class="heading"><i class="icon icon-user icon-large"></i><strong> ' . $app->user->realname . '</strong></li>';
+        $string .= '<li class="divider"></li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'editEmail'), $lang->editEmail, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'securityQuestion'), $lang->securityQuestion, "data-toggle='modal'") . '</li>';
@@ -1035,5 +1052,33 @@ class commonModel extends model
     
         $this->config->categoryAlias = array();
         foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
+    }
+
+    /**
+     * Fix link of menu groups.
+     * 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function fixGroups()
+    {
+        global $app, $config, $lang;
+        $modules = $config->site->modules;
+        if(strpos($modules, 'article') === false)
+        {
+            if(strpos($modules, 'page') !== false) $lang->groups->content['link'] = 'article|admin|type=page';
+            if(strpos($modules, 'book') !== false) $lang->groups->content['link'] = 'book|admin|';
+            if(strpos($modules, 'blog') !== false) $lang->groups->content['link'] = 'article|admin|type=blog';
+        }
+
+        if(strpos($modules, 'shop') === false and strpos($modules, 'score') === false)
+        {
+            if(strpos($modules, 'product') !== false) $lang->groups->shop['link'] = 'product|admin|';
+        }
+  
+        if(strpos($modules, 'stat') === false) $lang->groups->promote['link'] = 'tag|admin|';
+              
+        return true;
     }
 }

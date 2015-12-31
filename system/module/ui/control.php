@@ -3,7 +3,7 @@
  * The control file of ui module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     ui
  * @version     $Id$
@@ -43,8 +43,9 @@ class ui extends control
         }
 
         $this->view->title           = $this->lang->ui->setTemplate;
-        $this->view->templates       = $templates;
+        $this->view->template        = current($templates);
         $this->view->installedThemes = $this->ui->getInstalledThemes();
+        $this->view->uiHeader        = true;
         $this->display();
     }
 
@@ -93,6 +94,7 @@ class ui extends control
         $this->view->title      = $this->lang->ui->customtheme;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
+        $this->view->uiHeader   = true;
         $this->view->hasPriv    = true;
 
         if(!is_writable($savePath))
@@ -116,42 +118,23 @@ class ui extends control
         {
             $setNameResult = false;
             if(!empty($_POST['name'])) $setNameResult = $this->loadModel('setting')->setItem('system.common.site.name', $this->post->name);
+            
+            if(isset($_FILES['logo']))    $logoReturn    = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
+            if(isset($_FILES['favicon'])) $faviconReturn = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
 
-            $return = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
-
-            if($nameResult || $return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
-            if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
+            if($setNameResult || $logoReturn['result'] || $faviconReturn['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->lang->menuGroups->ui = 'logo';
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
         $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
 
         $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
-
-        $this->view->title = $this->lang->ui->setLogo;
-        $this->view->logo  = $logo;
-
-        $this->display();
-    }
-
-    /**
-     * Upload favicon.
-     *
-     * @access public
-     * @return void
-     */
-    public function setFavicon()
-    {
-        if($_SERVER['REQUEST_METHOD'] == 'POST')
-        {
-            $return = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
-
-            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setFavicon')));
-            if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
-         }
-
-        $this->view->title          = $this->lang->ui->setFavicon;
+        unset($this->lang->ui->menu);
+        $this->view->title          = $this->lang->ui->setLogo;
+        $this->view->logo           = $logo;
         $this->view->favicon        = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
         $this->view->defaultFavicon = file_exists($this->app->getWwwRoot() . 'favicon.ico');
 
@@ -173,7 +156,7 @@ class ui extends control
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=favicon");
         if($favicon) $this->loadModel('file')->delete($favicon->fileID);
 
-        $this->locate(inlink('setFavicon'));
+        $this->locate(inlink('setLogo'));
     }
 
     /**
@@ -550,5 +533,36 @@ class ui extends control
             exit($js);
         }
         exit;
+    }
+
+    /**
+     * Set js and css code for pages.
+     * 
+     * @param  string $page 
+     * @access public
+     * @return void
+     */
+    public function setCode($page = 'all')
+    {
+        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->device}->name;
+
+        if($_POST)
+        {
+            $cssSetting["{$template}_{$theme}_{$page}"] = $this->post->css;
+            $jsSetting["{$template}_{$theme}_{$page}"] = $this->post->js;
+            $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
+            $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->app->loadLang('block');
+        $this->view->title    = $this->lang->ui->setCode;
+        $this->view->page     = $page;
+        $this->view->template = $template;
+        $this->view->theme    = $theme;
+        $this->view->uiHeader = true;
+        $this->view->pageList = $this->lang->block->$template->pages;
+        $this->display();
     }
 }

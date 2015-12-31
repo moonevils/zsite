@@ -3,7 +3,7 @@
  * The comment module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     comment
  * @version     $Id$
@@ -114,7 +114,7 @@ $lang->blacklist->type        = '类型';
 $lang->blacklist->title       = '标题';
 $lang->blacklist->identity    = '内容';
 $lang->blacklist->reason      = '原因';
-$lang->blacklist->expiredDate = '禁用时间';
+$lang->blacklist->expiredDate = '解禁时间';
 $lang->blacklist->ip          = 'IP';
 $lang->blacklist->keywords    = '关键词';
 $lang->blacklist->account     = '账户';

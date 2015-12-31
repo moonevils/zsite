@@ -1,5 +1,6 @@
 <?php
 $lang->stat->common        = '统计';
+$lang->stat->setting       = '设置';
 $lang->stat->view          = '查看';
 $lang->stat->traffic       = '概况';
 $lang->stat->report        = '详细报告';

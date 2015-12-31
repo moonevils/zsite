@@ -3,7 +3,7 @@
  * The setbasic view file of site module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      xiying Guang <guanxiying@xirangit.com>
  * @package     site
  * @version     $Id$
@@ -13,8 +13,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php js::set('closeScoreTip', $lang->site->closeScoreTip);?>
-<?php js::set('setCounts', $lang->site->setCounts);?>
-<?php js::set('score', commonModel::isAvailable('score'));?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setBasic;?></strong></div>
   <div class='panel-body'>

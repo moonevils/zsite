@@ -3,7 +3,7 @@
  * The control file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -39,9 +39,14 @@ class block extends control
     public function pages()
     {
         $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
+        $this->view->title    = $this->lang->block->browseRegion;
+        $this->view->plans    = $this->block->getPlans($template);
+        $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
+        $this->view->uiHeader = true;
         $this->display();       
     }
 
@@ -170,5 +175,89 @@ class block extends control
 
         $this->view->type = $type;
         $this->display();
+    }
+
+    /**
+     * Switch layout plan of current theme.
+     * 
+     * @param  string    $plan 
+     * @access public
+     * @return void
+     */
+    public function switchLayout($plan)
+    {
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+
+        $result = $this->block->setPlan($plan, $template, $theme);
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
+
+    /**
+     * Clone a layout plan.
+     * 
+     * @param  int    $plan 
+     * @access public
+     * @return void
+     */
+    public function cloneLayout($plan)
+    {
+        $plan = $this->loadModel('tree')->getByID($plan);
+        if($_POST)
+        {
+            $newPlan = $this->block->cloneLayout($plan);
+            if($newPlan) 
+            {
+                $template = $this->config->template->{$this->device}->name;
+                $theme    = $this->config->template->{$this->device}->theme;
+                $result   = $this->block->setPlan($newPlan, $template, $theme);
+                $this->send(array('result' => 'success', 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
+            }
+
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = sprintf($this->lang->block->saveLayoutAs, $plan->name);
+        $this->view->plan  = $plan;
+        $this->display();
+    }
+
+    /**
+     * Remove a layout.
+     * 
+     * @param  int    $plan 
+     * @access public
+     * @return void
+     */
+    public function removeLayout($plan)
+    {
+        $setting = (array) $this->config->layout;
+        if(array_search($plan, $setting) != false) $this->send(array('result' => 'fail', 'message' => $this->lang->block->planIsUseing));
+        $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($plan)->exec();
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success'));
+
+    }
+
+    /**
+     * Rename a layout.
+     * 
+     * @param  int    $plan 
+     * @access public
+     * @return void
+     */
+    public function renameLayout($plan)
+    {
+        $plan = $this->loadModel('tree')->getByID($plan);
+        if($_POST)
+        {
+            $result = $this->block->renameLayout($plan);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = $this->lang->block->renameLayout . $this->lang->colon . $plan->name;
+        $this->view->plan  = $plan;
+        $this->display(); 
     }
 }

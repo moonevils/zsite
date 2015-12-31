@@ -3,7 +3,7 @@
  * The block module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -54,6 +54,10 @@ $lang->block->style           = '样式';
 $lang->block->sort            = '排序';
 $lang->block->class           = 'css类名';
 $lang->block->subRegion       = '子布局';
+$lang->block->currentLayout   = '当前布局：%s';
+$lang->block->renameLayout    = '方案重命名';
+$lang->block->planName        = '方案名称';
+$lang->block->saveLayoutAs    = '复制布局：%s';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局设置";
@@ -67,6 +71,10 @@ $lang->block->edit         = '编辑区块';
 $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 $lang->block->setregion    = '配置布局';
+$lang->block->switchPlan   = '切换布局';
+$lang->block->cloneLayout  = '方案另存为';
+$lang->block->planIsUseing = '此方案正在使用，不能删除';
+
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';

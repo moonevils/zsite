@@ -3,7 +3,7 @@
  * The model file of ui module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     ui
  * @version     $Id$
@@ -117,7 +117,7 @@ class uiModel extends model
     {
         if(empty($_FILES)) return array('result' => false, 'message' => $this->lang->ui->noSelectedFile);
 
-        $fileType = substr($_FILES['files']['name'], strrpos($_FILES['files']['name'], '.') + 1);
+        $fileType = substr($_FILES[$htmlTagName]['name'], strrpos($_FILES[$htmlTagName]['name'], '.') + 1);
         if(strpos($allowedFileType, $fileType) === false) return array('result' => false, 'message' => sprintf($this->lang->ui->notAlloweFileType, $allowedFileType));
 
         $fileModel = $this->loadModel('file');
@@ -130,11 +130,11 @@ class uiModel extends model
             $clientLang = $this->app->getClientLang();
             $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->andWhere('lang')->eq($clientLang)->fetchAll('id');
             foreach($oldFiles as $file) $fileModel->delete($file->id);
-            if(dao::isError()) return array('result' => false, 'message' => $this->lang->fail);
+            if(dao::isError()) return array('result' => false, 'message' => dao::getError());
         }
-
+        
         /* Upload new logo. */
-        $uploadResult = $fileModel->saveUpload($htmlTagName);
+        $uploadResult = $fileModel->saveUpload('', '', '', $htmlTagName);
         if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
 
         $fileIdList = array_keys($uploadResult);
@@ -192,10 +192,6 @@ class uiModel extends model
                 }
             }
         }
-
-        $params['css'] = isset($userSetting['css']) ? $userSetting['css'] : '';
-        $params['js']  = isset($userSetting['js']) ? $userSetting['js'] : '';
-
         return $params;
     }
 
@@ -278,6 +274,25 @@ class uiModel extends model
         file_put_contents($cssFile, $css);
 
         return array('result' => 'success', 'css' => $css);
+    }
+
+    /**
+     * Lessc css with params.
+     * 
+     * @param  array    $params 
+     * @param  string   $css 
+     * @access public
+     * @return string
+     */
+    public function compileCSS($params, $css)
+    {
+        $lessc = $this->app->loadClass('lessc');
+
+        $lessc->setFormatter("compressed");
+        $lessc->setVariables($params);
+
+        $compiledCSS = $lessc->compile($css);
+        return empty($lessc->errors) ? $compiledCSS : $css;
     }
 
     /**

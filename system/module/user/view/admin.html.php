@@ -3,7 +3,7 @@
  * The admin view file of user module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Yangyang Shi <shiyangyangwork@yahoo.cn>
  * @package     User
  * @version     $Id$
@@ -26,11 +26,11 @@ js::set('admin', $this->get->admin);
           echo html::input('user', $this->get->user, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); 
           ?>
           <span class="input-group-btn">
-            <?php echo html::submitButton($lang->user->searchUser, "btn btn-primary"); ?>
+            <?php echo html::submitButton($lang->user->searchUser, "btn"); ?>
           </span>
         </div>
       </form>
-      <?php echo html::a(inlink('create'), "<i class='icon icon-plus'></i>" .  $lang->user->create, "data-toggle='modal' class='btn btn-primary'");?>
+      <?php echo html::a(inlink('create'), "<i class='icon icon-plus'></i> " .  $lang->user->create, "data-toggle='modal' class='btn btn-primary'");?>
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>

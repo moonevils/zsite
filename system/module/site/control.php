@@ -3,7 +3,7 @@
  * The control file of site module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     site
  * @version     $Id$
@@ -274,27 +274,6 @@ class site extends control
         }
 
         $this->view->title = $this->lang->site->setOauth;
-        $this->display();
-    }
-
-    /**
-     * Set log.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setStat()
-    {
-        if(!empty($_POST))
-        {
-            $setting = fixer::input('post')->get();
-            if(!$setting->saveDays or !validater::checkInt($setting->saveDays)) $this->send(array('result' => 'fail', 'message' => $this->lang->site->saveDaysTip));
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title = $this->lang->site->setStat;
         $this->display();
     }
 

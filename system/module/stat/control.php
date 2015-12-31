@@ -3,7 +3,7 @@
  * The control file of stat of ChanzhiEPS.
  *
  * @copyright   Copyright 2009-2010 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     stat
  * @version     $Id$
@@ -390,5 +390,26 @@ class stat extends control
         $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreKeyword' => true));
         if($result) $this->send(array('result' => 'success', 'locate' => inlink('keywords')));
         $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+    }
+
+    /**
+     * Set log.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+            if(!$setting->saveDays or !validater::checkInt($setting->saveDays)) $this->send(array('result' => 'fail', 'message' => $this->lang->site->saveDaysTip));
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->stat->setting;
+        $this->display();
     }
 }

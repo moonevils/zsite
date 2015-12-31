@@ -3,7 +3,7 @@
  * The model file of message module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     message
  * @version     $Id$
@@ -410,8 +410,8 @@ class messageModel extends model
             ->exec();
 
         /* Record post number. */
-        $this->loadModel('guarder')->logOperation('ip', 'commentFail');
-        $this->loadModel('guarder')->logOperation('account', 'commentFail');
+        $this->loadModel('guarder')->logOperation('ip', 'commentFail', $message->ip);
+        $this->loadModel('guarder')->logOperation('account', 'commentFail', $message->account);
 
         return !dao::isError();
     }

@@ -3,7 +3,7 @@
  * The common simplified chinese file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -144,9 +144,18 @@ $lang->company->site      = 'Site';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = 'Sitemap';
 
+/* The groups navbar */
+$lang->groups->home     = array('title' => 'Home', 'link' => 'admin|index|',               'icon' => 'home');
+$lang->groups->content  = array('title' => 'Content', 'link' => 'article|admin|type=article', 'icon' => 'edit');
+$lang->groups->shop     = array('title' => 'Shop', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
+$lang->groups->user     = array('title' => 'Member', 'link' => 'user|admin|',                'icon' => 'group');
+$lang->groups->promote  = array('title' => 'Promote', 'link' => 'stats|traffic|',             'icon' => 'volume-up');
+$lang->groups->designer = array('title' => 'Designer', 'link' => 'ui|customthem|',             'icon' => 'dashboard');
+$lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',            'icon' => 'cloud');
+$lang->groups->setting  = array('title' => 'Setting', 'link' => 'site|setbasic|',             'icon' => 'cog');
+
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin    = 'Home|admin|index|';
 $lang->menu->article  = 'Article|article|admin|type=article';
 $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->product  = 'Product|product|admin|';

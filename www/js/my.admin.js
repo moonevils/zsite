@@ -1,34 +1,54 @@
 $(function()
 {
-    responsiveNavbar();
     fixCategoryNav();
+    fixPositionbar();
+    initPrimaryNavbar();
+    $('#primaryNavbar a').click(function()
+    {
+        group = $(this).parent('li').data('id');
+        $.cookie('currentGroup', group, {expires:config.cookieLife, path:config.webRoot});
+    })
+
+    $('#positionRoot').click(function()
+    {
+        $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
+    })
 });
 
 /**
- * make the navbar responsivable
- *
+ * Init primary navbar
+ * @return Void
+ */
+function initPrimaryNavbar()
+{
+    $('#primaryNavbar [data-toggle=tooltip]').tooltip({placement: 'right', container: 'body'});
+}
+
+/**
+ * Add positionBar.
+ * 
  * @access public
  * @return void
  */
-function responsiveNavbar()
+function fixPositionbar()
 {
-    var lis = $('#mainNavbar .navbar-nav').first().addClass('mainNavbarNav').find('li');
-    var lisSize = lis.length;
-    if(lisSize>5)
+    var $nav = $('#positionBar');
+    $nav.html($nav.find('li').eq(0));
+    var appendItem = function($item)
     {
-      var i = 0;
-      lis.each(function()
-      {
-          if(i++>10) $(this).addClass('simple-mode-b'); else $(this).addClass('simple-mode-a');
-      });
-    }
+        if($item.length)
+        {
+            $item = $item.first().clone().attr('class', null);
+            if($.trim($item.text()) === '') $item.text($item.attr('title'));
+            $nav.append($('<li>').append($item));
+        }
+    };
 
-    $('#navbarSwitcher').click(function()
-    {
-        var navbar = $(this).closest('.navbar');
-        if(navbar.hasClass('navbar-simple')) navbar.removeClass('navbar-simple');
-        else  navbar.addClass('navbar-simple');
-    });
+    appendItem($('#primaryNavbar > .nav:not(.fixed-bottom) > li.active > a'));
+
+    var $mainNavbarItem = $('#mainNavbarCollapse > .nav > li.active > a');
+    lastLink = $mainNavbarItem.attr('href');
+    if(!$nav.find('[href="' + lastLink  + '"]').length) appendItem($mainNavbarItem);
 }
 
 /**
@@ -138,15 +158,4 @@ $(function()
         return false;
     });
 
-    if(!$('#setCounts').length && v.score)
-    {
-        var setCountsLink = createLink('score', 'setCounts');
-        var setCountsMenu = '<li><a id="setCounts" href="' + setCountsLink + '">';
-        setCountsMenu += v.setCounts + '<i class="icon-chevron-right"></i>';
-        setCountsMenu += '</a></li>';
-        $('.nav-left').append(setCountsMenu);
-        $('#setCounts').modalTrigger();
-    }
-
-    $.setAjaxForm('#setCountsForm');
 });
