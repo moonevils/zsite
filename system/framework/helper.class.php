@@ -174,18 +174,20 @@ class helper
     {
         global $app;
 
-        /* Set the main model file and extension path and files. */
+        /* Set the main model file and extension and hook pathes and files. */
         $mainModelFile = $app->getModulePath($moduleName) . 'model.php';
         $modelExtPaths = $app->getModuleExtPath($moduleName, 'model');
 
-        $extFiles = array();
+        $hookFiles = array();
+        $extFiles  = array();
         foreach($modelExtPaths as $modelExtPath)
         {
-            $extFiles = array_merge($extFiles, helper::ls($modelExtPath, '.php'));
+            $hookFiles = array_merge($hookFiles, helper::ls($modelExtPath . 'hook/', '.php'));
+            $extFiles  = array_merge($extFiles, helper::ls($modelExtPath, '.php'));
         }
 
         /* If no extension file, return the main file directly. */
-        if(empty($extFiles)) return $mainModelFile;
+        if(empty($extFiles) and empty($hookFiles)) return $mainModelFile;
 
         /* Else, judge whether needed update or not .*/
         $mergedModelDir  = $app->getTmpRoot() . 'model' . DS . $app->siteCode{0} . DS . $app->siteCode . DS;
@@ -193,81 +195,139 @@ class helper
         $needUpdate      = false;
         $lastTime        = file_exists($mergedModelFile) ? filemtime($mergedModelFile) : 0;
         if(!is_dir($mergedModelDir)) mkdir($mergedModelDir, 0755, true);
-        foreach($extFiles as $extFile)
+
+        while(!$needUpdate)
         {
-            if(filemtime($extFile) > $lastTime)
-            {
-                $needUpdate = true;
-                break;
-            }
-        }
-        if(filemtime($mainModelFile) > $lastTime) $needUpdate = true;
+            foreach($extFiles  as $extFile) if(filemtime($extFile)  > $lastTime) break 2;
+            foreach($hookFiles as $hookFile) if(filemtime($hookFile) > $lastTime) break 2;
 
-        /* If need'nt update, return the cache file. */
-        if(!$needUpdate) return $mergedModelFile;
-
-        /* Update the cache file. */
-        if($needUpdate)
-        {
-            $modelClass    = $moduleName . 'Model';
-            $extModelClass = 'ext' . $modelClass;
-            $modelLines    = "<?php\n";
-            $modelLines   .= "helper::import('$mainModelFile');\n";
-            $modelLines   .= "class $extModelClass extends $modelClass \n{\n";
-
-            /* Cycle all the extension files. */
-            foreach($extFiles as $extFile)
-            {
-                $extLines = trim(file_get_contents($extFile));
-                if(strpos($extLines, '<?php') !== false) $extLines = ltrim($extLines, "<?php");
-                if(strpos($extLines, "?>")    !== false) $extLines = rtrim($extLines, '?>');
-                $modelLines .= $extLines . "\n";
-            }
-
-            /* Create the merged model file. */
-            $modelLines .= "}";
-
-            /* Unset conflic function for model. */
-            preg_match_all('/.* function\s+(\w+)\s*\(.*\)[^\{]*\{/Ui', $modelLines, $functions);
-            $functions = $functions[1];
-            $conflics  = array_count_values($functions);
-            foreach($conflics as $functionName => $count)
-            {
-                if($count <= 1) unset($conflics[$functionName]);
-            }
-            if($conflics)
-            {
-                $modelLines = explode("\n", $modelLines);
-                $startDel   = false;
-                foreach($modelLines as $line => $code)
-                {
-                    if($startDel and preg_match('/.* function\s+(\w+)\s*\(.*\)/Ui', $code)) $startDel = false;
-                    if($startDel)
-                    {
-                        unset($modelLines[$line]);
-                    }
-                    else
-                    {
-                        foreach($conflics as $functionName => $count)
-                        {
-                            if($count <= 1) continue;
-                            if(preg_match('/.* function\s+' . $functionName . '\s*\(.*\)/Ui', $code)) 
-                            {
-                                $conflics[$functionName] = $count - 1;
-                                $startDel = true;
-                                unset($modelLines[$line]);
-                            }
-                        }
-                    }
-                }
-
-                $modelLines = join("\n", $modelLines);
-            }
-
-            file_put_contents($mergedModelFile, $modelLines);
+            if(filemtime($mainModelFile) > $lastTime) break;
 
             return $mergedModelFile;
         }
+
+        /* Update the cache file. */
+        $modelClass       = $moduleName . 'Model';
+        $extModelClass    = 'ext' . $modelClass;
+        $extTmpModelClass = 'tmpExt' . $modelClass;
+        $modelLines       = "<?php\n";
+        $modelLines      .= "helper::import('$mainModelFile');\n";
+        $modelLines      .= "class $extTmpModelClass extends $modelClass \n{\n";
+
+        /* Cycle all the extension files. */
+        foreach($extFiles as $extFile)
+        {
+            $extLines = self::removeTagsOfPHP($extFile);
+            $modelLines .= $extLines . "\n";
+        }
+        /* Create the merged model file. */
+        $replaceMark = '//**//';    // This mark is for replacing code using.
+        $modelLines .= "$replaceMark\n}";
+
+        /* Unset conflic function for model. */
+        preg_match_all('/.* function\s+(\w+)\s*\(.*\)[^\{]*\{/Ui', $modelLines, $functions);
+        $functions = $functions[1];
+        $conflics  = array_count_values($functions);
+        foreach($conflics as $functionName => $count)
+        {
+            if($count <= 1) unset($conflics[$functionName]);
+        }
+        if($conflics)
+        {
+            $modelLines = explode("\n", $modelLines);
+            $startDel   = false;
+            foreach($modelLines as $line => $code)
+            {
+                if($startDel and preg_match('/.* function\s+(\w+)\s*\(.*\)/Ui', $code)) $startDel = false;
+                if($startDel)
+                {
+                    unset($modelLines[$line]);
+                }
+                else
+                {
+                    foreach($conflics as $functionName => $count)
+                    {
+                        if($count <= 1) continue;
+                        if(preg_match('/.* function\s+' . $functionName . '\s*\(.*\)/Ui', $code)) 
+                        {
+                            $conflics[$functionName] = $count - 1;
+                            $startDel = true;
+                            unset($modelLines[$line]);
+                        }
+                    }
+                }
+            }
+
+            $modelLines = join("\n", $modelLines);
+        }
+
+        $tmpMergedModelFile = $mergedModelDir . 'tmp.' . $app->siteCode . '.' . $moduleName . '.php';
+        if(!@file_put_contents($tmpMergedModelFile, $modelLines))
+        {
+            die("ERROR: $tmpMergedModelFile not writable, please make sure the " . dirname($tmpMergedModelFile) . ' directory exists and writable');
+        }
+        if(!class_exists($extTmpModelClass)) include $tmpMergedModelFile;
+
+        /* Get hook codes need to merge. */
+        $hookCodes = array();
+        foreach($hookFiles as $hookFile)
+        {
+            $fileName = baseName($hookFile);
+            list($method) = explode('.', $fileName);
+            $hookCodes[$method][] = self::removeTagsOfPHP($hookFile);
+        }
+
+        /* Cycle the hook methods and merge hook codes. */
+        $hookedMethods    = array_keys($hookCodes);
+        $mainModelCodes   = file($mainModelFile);
+        $mergedModelCodes = file($tmpMergedModelFile);
+        foreach($hookedMethods as $method)
+        {
+            /* Reflection the hooked method to get it's defined position. */
+            $methodRelfection = new reflectionMethod($extTmpModelClass, $method);
+            $definedFile = $methodRelfection->getFileName();
+            $startLine   = $methodRelfection->getStartLine() . ' ';
+            $endLine     = $methodRelfection->getEndLine() . ' ';
+
+            /* Merge hook codes. */
+            $oldCodes = $definedFile == $tmpMergedModelFile ? $mergedModelCodes : $mainModelCodes;
+            $oldCodes = join("", array_slice($oldCodes, $startLine - 1, $endLine - $startLine + 1));
+            $openBrace = strpos($oldCodes, '{');
+            $newCodes = substr($oldCodes, 0, $openBrace + 1) . "\n" . join("\n", $hookCodes[$method]) . substr($oldCodes, $openBrace + 1);
+
+            /* Replace it. */
+            if($definedFile == $tmpMergedModelFile)
+            {
+                $modelLines = str_replace($oldCodes, $newCodes, $modelLines);
+            }
+            else
+            {
+                $modelLines = str_replace($replaceMark, $newCodes . "\n$replaceMark", $modelLines);
+            }
+        }
+        unlink($tmpMergedModelFile);
+        
+        /* Save it. */
+        $modelLines = str_replace($extTmpModelClass, $extModelClass, $modelLines);
+        file_put_contents($mergedModelFile, $modelLines);
+
+        return $mergedModelFile;
+    }
+
+    /**
+     * Remove tags of PHP 
+     * 
+     * @param  string    $fileName 
+     * @static
+     * @access public
+     * @return string
+     */
+    static public function removeTagsOfPHP($fileName)
+    {
+        $code = trim(file_get_contents($fileName));
+        if(strpos($code, '<?php') === 0)     $code = ltrim($code, '<?php');
+        if(strrpos($code, '?>')   !== false) $code = rtrim($code, '?>');
+        return trim($code);
     }
 
     /**
