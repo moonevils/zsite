@@ -43,7 +43,7 @@ class ui extends control
         }
 
         $this->view->title           = $this->lang->ui->setTemplate;
-        $this->view->templates       = $templates;
+        $this->view->template        = current($templates);
         $this->view->installedThemes = $this->ui->getInstalledThemes();
         $this->view->uiHeader        = true;
         $this->display();

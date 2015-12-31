@@ -26,11 +26,11 @@ js::set('admin', $this->get->admin);
           echo html::input('user', $this->get->user, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); 
           ?>
           <span class="input-group-btn">
-            <?php echo html::submitButton($lang->user->searchUser, "btn btn-primary"); ?>
+            <?php echo html::submitButton($lang->user->searchUser, "btn"); ?>
           </span>
         </div>
       </form>
-      <?php echo html::a(inlink('create'), "<i class='icon icon-plus'></i>" .  $lang->user->create, "data-toggle='modal' class='btn btn-primary'");?>
+      <?php echo html::a(inlink('create'), "<i class='icon icon-plus'></i> " .  $lang->user->create, "data-toggle='modal' class='btn btn-primary'");?>
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>
