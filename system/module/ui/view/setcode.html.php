@@ -5,7 +5,7 @@
   <div class="leftmenu affix hiddden-xs hidden-sm">
     <ul class="nav nav-left nav-primary nav-stacked">
       <?php foreach($pageList as $pageCode => $name):?>
-      <li class="active">
+      <li>
         <?php echo html::a(inlink('setcode', "page={$pageCode}"), $name . "<i class='icon-chevron-right'></i>");?>
       </li>
       <?php endforeach;?>
@@ -17,12 +17,12 @@
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>
-        <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
+        <li class='active'><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
         <li><a href='#jsTab' data-toggle='tab'><?php echo $lang->ui->theme->extraScript; ?></a></li>
       </ul>
     </div>
     <div class='tab-content'>
-      <div class='tab-pane theme-control-tab-pane' id='cssTab'>
+      <div class='tab-pane theme-control-tab-pane active' id='cssTab'>
         <?php echo html::textarea('css', zget($this->config->css, "{$template}_{$theme}_{$page}", ''), "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
       </div>
       <div class='tab-pane theme-control-tab-pane' id='jsTab'>

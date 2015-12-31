@@ -274,6 +274,7 @@ form .star {display: none;}/* hide star */
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 .nav li.active i.icon-chevron-right,.nav li:hover i.icon-chevron-right{opacity: .9;}
 .nav-primary > li.active > a, .nav-primary > li.active > a:hover, .nav-primary > li.active > a:focus {background-color: #ebf2f9; color: #3280fc; border-color: #ddd;}
+.nav-stacked.nav-primary > li:first-child > a, .nav-stacked.nav-primary > li:first-child.nav-heading, .nav-stacked.nav-primary > li:last-child > a {border-radius: 0}
 
 /* captcha */
 .captcha {width: 100%; background-color: #fafafa; padding: 8px 10px; border: 1px solid #CCC; border-radius: 2px;}
@@ -523,7 +524,7 @@ a:hover .icon-chanzhi > i, a:hover .icon-chanzhi > i:before, a:hover .icon-chanz
 
 /* modal with iframe */
 body.body-modal {padding: 20px;}
-body.body-modal #mainNavbar, body.body-modal #menu, body.body-modal .navbar-fixed-bottom {display: none!important;}
+body.body-modal #mainNavbar, body.body-modal #menu, body.body-modal .navbar-fixed-bottom, body.body-modal #primaryNavbar {display: none!important;}
 body.body-modal-ve .row-main .col-md-2 {display: none}
 body.body-modal-ve .row-main .col-md-2 + .col-md-10 {width: 100%; padding: 0}
 
