@@ -45,8 +45,8 @@ function fixPositionbar()
     };
 
     appendItem($('#primaryNavbar > .nav:not(.fixed-bottom) > li.active > a'));
-    lastLink = $('#mainNavbarCollapse > .nav > li.active > a').attr('href');
-    if($nav.find("[href='" + lastLink  + "']").size() == 0) appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
+    linkText = $('#mainNavbarCollapse > .nav > li.active > a').text();
+    if($nav.find('a:last').text() != linkText) appendItem($('#mainNavbarCollapse > .nav > li.active > a'));
 }
 
 /**
