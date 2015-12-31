@@ -3,7 +3,7 @@
  * The model file of order module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     order
  * @version     $Id$
@@ -91,7 +91,7 @@ class orderModel extends model
         }
 
         $this->dao->insert(TABLE_ORDER)
-            ->data($order, 'createAddress,deliveryAddress,phone,contact,zipcode,price,count,product')
+            ->data($order, 'createAddress,deliveryAddress,phone,contact,price,count,product')
             ->autocheck()
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();

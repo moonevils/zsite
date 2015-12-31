@@ -3,7 +3,7 @@
  * The index view file of admin module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Xiying Guan <guanxiyingl@xirangit.com>
  * @package     admin
  * @version     $Id$
@@ -12,6 +12,8 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version);?>
+<?php  $this->loadModel('upgrade')->fixLayoutPlans('default');
+         $this->loadModel('upgrade')->fixLayoutPlans('mobile'); ?>
 <div class='container' id='shortcutBox'>
 
   <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>

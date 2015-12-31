@@ -3,7 +3,7 @@
  * The model file of tree module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
  * @version     $Id$
@@ -734,7 +734,8 @@ class treeModel extends model
     {
         $menuGroup = zget($this->config->tree->menuGroups, $type);
 
-        $this->lang->tree->menu       = $this->lang->{$menuGroup}->menu;
+        unset($this->lang->tree->menu);
+        If(isset($this->lang->{$menuGroup}->menu)) $this->lang->tree->menu = $this->lang->{$menuGroup}->menu;
         $this->lang->menuGroups->tree = $menuGroup;
     }
 }

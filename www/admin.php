@@ -10,7 +10,6 @@
  * @link        http://www.chanzhi.org
  */
 /* Turn off error reporting first. */
-error_reporting(0);
 
 /* Start output buffer. */
 ob_start();

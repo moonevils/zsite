@@ -3,7 +3,7 @@
  * The model file of book module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     book
  * @version     $Id$
@@ -139,29 +139,36 @@ class bookModel extends model
      */
     public function getFrontCatalog($nodeID, $serials)
     {
-        static $catalog = '';
-        
         $node = $this->getNodeByID($nodeID);
-        if(!$node) return $catalog;
+        if(!$node) return '';
 
-        $book   = $this->getBookByNode($node);
-        if($node->type != 'book') $serial = $serials[$node->id];
-
-        if($node->type == 'chapter') $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias");
-        if($node->type == 'article') $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias");
-
-        if($node->type == 'chapter') $catalog .= "<dd class='catalogue chapter'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
-        if($node->type == 'article') $catalog .= "<dd class='catalogue article'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
-
-        $children = $this->getChildren($nodeID);
-        if($children) 
+        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title')->from(TABLE_BOOK)->where('path')->like("{$node->path}%")->orderBy('grade_desc,`order`')->fetchGroup('parent');
+        $book = end($nodeList)[0];
+        foreach($nodeList as $parent => $nodes)
         {
-            $catalog .= '<dl>';
-            foreach($children as $child) $this->getFrontCatalog($child->id, $serials);
+            if($parent === 'catalog') continue;
+
+            $catalog = '<dl>';
+            foreach($nodes as $node)
+            {
+                $serial = $node->type != 'book' ? $serials[$node->id] : '';
+                if($node->type == 'chapter')
+                {
+                    $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias");
+                    $catalog .= "<dd class='catalogue chapter'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
+                }
+                elseif($node->type == 'article')
+                {
+                    $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias");
+                    $catalog .= "<dd class='catalogue article'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
+                }
+                if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog'])) $catalog .= $nodeList[$node->id]['catalog'];
+            }
             $catalog .= '</dl>';
+            $nodeList[$parent]['catalog'] = $catalog;
         }
 
-        return $catalog;
+        return end($nodeList)['catalog'];
     }
 
     /**

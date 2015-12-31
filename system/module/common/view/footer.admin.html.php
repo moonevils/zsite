@@ -1,8 +1,11 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php if($moduleMenu) echo '</div>';?>
+<?php if(isset($uiHeader) and $uiHeader) echo '</div>';?>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-xs" role="navigation">
+  <ul class='breadcrumb pull-left' id='positionBar'>
+    <li><?php echo html::a(helper::createLink('admin', 'index'), $lang->chanzhiEPSx, "id='positionRoot'")?></li>
+  </ul>
   <div class="collapse navbar-collapse navbar-ex6-collapse">
     <div class='navbar-text pull-right'><?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> " . $config->version);?></div>
   </div>

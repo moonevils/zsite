@@ -3,7 +3,7 @@
  * The control file of file module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id: control.php 1042 2010-08-19 09:02:39Z yuren_@126.com $
@@ -140,7 +140,7 @@ class file extends control
     public function browseSource($type = '', $orderBy = 'id_desc', $pageID = 1)
     {
         $this->file->setSavePath('source');
-        $this->lang->file->menu = $this->lang->ui->menu;
+        $this->lang->file->menu = $this->lang->theme->menu;
         $this->lang->menuGroups->file = 'ui';
 
         $this->app->loadClass('pager', $static = true);
@@ -152,6 +152,7 @@ class file extends control
         $this->view->files     = $this->file->getSourceList($type, $orderBy, $pager);
         $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->pager     = $pager;
+        $this->view->uiHeader  = true;
         $this->display();
     }
 

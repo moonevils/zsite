@@ -3,7 +3,7 @@
  * The ui module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     ui
  * @version     $Id$
@@ -16,7 +16,8 @@ $lang->ui->clientMobile  = 'Mobile';
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Set Logo";
 $lang->ui->setTemplate     = 'Set Template';
-$lang->ui->manageTemplate  = 'Manage templates';
+$lang->ui->manageTemplate  = 'Templates';
+$lang->ui->manageTheme     = 'Themes';
 $lang->ui->installTemplate = 'Import Template';
 $lang->ui->exportTheme     = 'Export Theme';
 $lang->ui->setTheme        = 'Set Theme';

@@ -3,7 +3,7 @@
  * The model file of file module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id$
@@ -206,11 +206,11 @@ class fileModel extends model
      * @access public
      * @return void
      */
-    public function saveUpload($objectType = '', $objectID = '', $extra = '')
+    public function saveUpload($objectType = '', $objectID = '', $extra = '', $htmlTagName = 'files')
     {
         $fileTitles = array();
         $now        = helper::now();
-        $files      = $this->getUpload('files', $objectType);
+        $files      = $this->getUpload($htmlTagName, $objectType);
 
         $imageSize = array('width' => 0, 'height' => 0);
 

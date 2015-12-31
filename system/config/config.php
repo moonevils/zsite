@@ -3,7 +3,7 @@
  * The config file of chanzhiEPS
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '5.0.1';             // The version number, don't change.
+$config->version     = '5.0.1';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -153,6 +153,7 @@ if(file_exists($domainConfig))    include $domainConfig;
 if(file_exists($modeConfig))      include $modeConfig;
 if(file_exists($shopConfig))      include $shopConfig;
 if(file_exists($sensitiveConfig)) include $sensitiveConfig;
+if(RUN_MODE == 'admin')           include $configRoot . 'menu.php';
 
 /* The tables. */
 define('TABLE_CONFIG',         $config->db->prefix . 'config');

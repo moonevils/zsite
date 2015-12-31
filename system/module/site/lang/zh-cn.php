@@ -3,7 +3,7 @@
  * The site module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
+ * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     site
  * @version     $Id$
@@ -56,7 +56,7 @@ $lang->site->filterSensitive  = '敏感词过滤';
 $lang->site->setBlacklist     = '黑名单管理';
 $lang->site->mobileTemplate   = '移动模板';
 $lang->site->score            = '积分';
-$lang->site->setCounts        = '设置积分规则';
+$lang->site->setCounts        = '积分规则';
 $lang->site->front            = '网站浏览';
 $lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
 
