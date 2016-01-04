@@ -32,8 +32,37 @@
           <div class="dropdown">
             <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class="caret"></span></button>
             <ul class="dropdown-menu pull-right">
-              <li><a data-icon="icon-pencil" data-title="系统公告" class="edit-block" data-toggle="modal" href="/sys/block-admin-5.html"><i class="icon-pencil"></i> 编辑</a></li>
-              <li><a class="remove-panel" href="javascript:;"><i class="icon-remove"></i> 删除</a></li>
+              <li><?php echo html::a($theme->viewLink, $lang->package->view, 'target="_blank"');?></li>
+              <?php
+              if($currentRelease->public)
+              {
+                  if($theme->type != 'computer' and $theme->type != 'mobile')
+                  {
+                      if(isset($installeds[$theme->code]))
+                      {
+                          if($installeds[$theme->code]->version != $theme->latestRelease->releaseVersion and $this->theme->checkVersion($theme->latestRelease->chanzhiCompatible))
+                          {
+                              echo '<li>';
+                              commonModel::printLink('theme', 'upgrade', "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$theme->type", $lang->theme->upgrade, "data-toggle='modal'");
+                              echo '</li>';
+                          }
+                          else
+                          {
+                              echo '<li>' . html::a('javascript:;', $lang->theme->installed, "class='disabled'") . '</li>';
+                          }
+                      }
+                      else
+                      {
+                          $label = $currentRelease->compatible ? $lang->package->installAuto : $lang->package->installForce;
+                          echo '<li>';
+                          commonModel::printLink('package', 'install',  "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$theme->type&overridePackage=no&ignoreCompitable=yes", $label, "data-toggle='modal'");
+                          echo '</li>';
+                      }
+                  }
+              }
+              echo '<li>' . html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual"') . '</li>';
+              echo '<li>' . html::a($theme->site, $lang->package->site, "target='_blank'") . '</li>';
+              ?>
             </ul>
           </div>
           <div>
@@ -53,9 +82,6 @@
               </div>
             </div>
             <div class="modal-body">
-
-              <?php include 'slides.html.php';?>
-             
               <p class=''><?php echo $theme->abstract;?></p>
               <p>
               <?php
@@ -80,40 +106,37 @@
               }
               ?>
               </p>
-            <div class='text-center'>
-              <div class='btn-group text-center'>
-              <?php
-              echo html::a($theme->viewLink, $lang->package->view, 'class="btn theme" target="_blank"');
-              if($currentRelease->public)
-              {
-                  if($theme->type != 'computer' and $theme->type != 'mobile')
-                  {
-                      if(isset($installeds[$theme->code]))
-                      {
-                          if($installeds[$theme->code]->version != $theme->latestRelease->releaseVersion and $this->theme->checkVersion($theme->latestRelease->chanzhiCompatible))
-                          {
-                              commonModel::printLink('theme', 'upgrade', "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$theme->type", $lang->theme->upgrade, "class='btn' data-toggle='modal'");
-                          }
-                          else
-                          {
-                              echo html::a('javascript:;', $lang->theme->installed, "class='btn disabled'");
-                          }
-                      }
-                      else
-                      {
-                          $label = $currentRelease->compatible ? $lang->package->installAuto : $lang->package->installForce;
-                          commonModel::printLink('package', 'install',  "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$theme->type&overridePackage=no&ignoreCompitable=yes", $label, "data-toggle='modal' class='btn'");
-                      }
-                  }
-              }
-              echo html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual btn"');
-              echo html::a($theme->site, $lang->package->site, "class='btn' target='_blank'");
-              ?>
+              <div class='text-center'>
+                <div class='btn-group text-center'>
+                <?php
+                echo html::a($theme->viewLink, $lang->package->view, 'class="btn theme" target="_blank"');
+                if($currentRelease->public)
+                {
+                    if($theme->type != 'computer' and $theme->type != 'mobile')
+                    {
+                        if(isset($installeds[$theme->code]))
+                        {
+                            if($installeds[$theme->code]->version != $theme->latestRelease->releaseVersion and $this->theme->checkVersion($theme->latestRelease->chanzhiCompatible))
+                            {
+                                commonModel::printLink('theme', 'upgrade', "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$theme->type", $lang->theme->upgrade, "class='btn' data-toggle='modal'");
+                            }
+                            else
+                            {
+                                echo html::a('javascript:;', $lang->theme->installed, "class='btn disabled'");
+                            }
+                        }
+                        else
+                        {
+                            $label = $currentRelease->compatible ? $lang->package->installAuto : $lang->package->installForce;
+                            commonModel::printLink('package', 'install',  "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$theme->type&overridePackage=no&ignoreCompitable=yes", $label, "data-toggle='modal' class='btn'");
+                        }
+                    }
+                }
+                echo html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual btn"');
+                echo html::a($theme->site, $lang->package->site, "class='btn' target='_blank'");
+                ?>
+                </div>
               </div>
-            </div>
-
-
-
 
             </div>
           </div>
