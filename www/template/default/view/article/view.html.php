@@ -86,5 +86,5 @@ js::execute($article->js);
   <div class='col-md-3 col-side'><side class='page-side blocks' data-region='article_view-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></side></div>
 </div>
 <div class='row blocks' data-region='article_view-bottomBanner'><?php $this->block->printRegion($layouts, 'article_view', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

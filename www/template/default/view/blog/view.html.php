@@ -93,5 +93,5 @@ $common->printPositionBar($category, $article, '', $root);
   </div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'blog/footer.html.php';?>

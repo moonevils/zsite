@@ -1,5 +1,15 @@
 $(document).ready(function()
 {
+    $('#typeNav a').click(function()
+    {
+        $('#typeNav li.active').removeClass('active');
+        $(this).parent().addClass('active');
+        $('#internalSection, #storeSection').hide();
+        $('#' + $(this).parent().data('type') + 'Section').show();
+    });
+    $('#typeNav a:first').click();
+
+    $('#storeSection').load(createLink('ui', 'themestore') + '#mainArea');
     $('.theme-img').hover(function()
     {
         var $this = $(this);
@@ -140,5 +150,4 @@ $(document).ready(function()
       });
       return false;
     });
-   
 });
