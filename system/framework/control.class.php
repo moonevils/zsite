@@ -596,11 +596,11 @@ class control
             $customParam = $this->loadModel('ui')->getCustomParams($template, $theme);
             $themeHooks  = $this->loadThemeHooks();
 
-            $js .= zget($this->config->js, "{$template}_{$theme}_all");
-            $js .= zget($this->config->js,"{$template}_{$theme}_{$moduleName}_{$methodName}");
+            $js .= zget($this->config->js, "{$template}_{$theme}_all", '');
+            $js .= zget($this->config->js,"{$template}_{$theme}_{$moduleName}_{$methodName}", '');
 
-            $allPageCSS     = zget($this->config->css, "{$template}_{$theme}_all");
-            $currentPageCSS = zget($this->config->css, "{$template}_{$theme}_{$moduleName}_{$methodName}");
+            $allPageCSS     = zget($this->config->css, "{$template}_{$theme}_all", '');
+            $currentPageCSS = zget($this->config->css, "{$template}_{$theme}_{$moduleName}_{$methodName}". '');
             $css .= $this->ui->compileCSS($customParam, $allPageCSS . $currentPageCSS);
             if(!empty($themeHooks))
             {
