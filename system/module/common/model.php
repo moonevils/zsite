@@ -296,7 +296,7 @@ class commonModel extends model
         if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
 
         $http       = (isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://';
-        $httpHost   = $this->server->http_host;
+        $httpHost   = substr($this->server->http_host, 0, strpos($this->server->http_host, ':'));
         $currentURI = $http . $httpHost . $this->server->request_uri;
         $scheme     = isset($this->config->site->scheme) ? $this->config->site->scheme : 'http';
         $mainDomain = isset($this->config->site->domain) ? $this->config->site->domain : '';

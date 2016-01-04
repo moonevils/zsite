@@ -128,6 +128,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .ul-list > li:before {display: block; position: absolute; top: 3px; left: 0; content: "●"; vertical-align: middle; padding-right: 10px; color: #ccc; transition:all .3s;}
 .ul-list > li:hover:before {color: #999;}
 .ul-list > li > .pull-right {float: none; position: absolute; top: 5px; right: 15px; background: #fff; line-height: 20px; font-size: 12px; text-indent: 1em; color: #808080}
+.ul-list > li > .label {position: relative; top: -1px; padding: 2px 5px;}
 
 /* meta-list */
 .meta-list {display: table; width: 100%;}

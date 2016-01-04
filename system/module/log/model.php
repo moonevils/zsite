@@ -112,7 +112,7 @@ class logModel extends model
         $referer['domain'] = $referer['host'];
         $referer['url']    = $url;
 
-        $this->dao->replace(TABLE_STATREFERER)->data($referer, "host,query,path,scheme")->autoCheck()->exec();
+        $this->dao->replace(TABLE_STATREFERER)->data($referer, "port,host,query,path,scheme")->autoCheck()->exec();
         $referer['id'] = $this->dao->lastInsertId();
 
         $this->session->set('referer', $referer['id']);
