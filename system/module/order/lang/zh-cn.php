@@ -48,6 +48,9 @@ $lang->order->days           = '天';
 $lang->order->deliveryInfo   = '查看详情';
 $lang->order->backToCart     = '返回购物车修改';
 $lang->order->paid           = '我已付款';
+$lang->order->products       = '订单产品';
+$lang->order->selectPayment  = '选择支付方式';
+$lang->order->balance        = '去结算';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->confirmReceived      = '确认收货';
