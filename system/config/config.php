@@ -58,6 +58,9 @@ $config->template->mobile = new stdclass();
 $config->template->mobile->name  = 'mobile';   // Supported themes.
 $config->template->mobile->theme = 'default';   // Supported themes.
 
+$config->css = new stdclass();
+$config->js  = new stdclass();
+
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';
 $config->langs['zh-tw'] = '繁体';
