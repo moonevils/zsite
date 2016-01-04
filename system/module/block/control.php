@@ -47,6 +47,7 @@ class block extends control
         $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
         $this->view->uiHeader = true;
+        $this->lang->block->menu = $this->lang->theme->menu;
         $this->display();       
     }
 
