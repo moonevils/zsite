@@ -694,7 +694,6 @@ class uiModel extends model
 
         $this->clearSources();
         $this->exportDB($template, $theme);
-        $this->createHookFile($template, $theme, $code);
         if(dao::isError()) return false;
 
         $exportedFile = $this->exportFiles($template, $theme, $code);
@@ -781,6 +780,7 @@ class uiModel extends model
         $zdb         = $this->app->loadClass('zdb');
         $dbFile      = $this->directories->exportDbPath  . 'install.sql';
         $encryptFile = $this->directories->encryptDbPath . 'install.sql';
+        $plan        = zget($this->config->layout, "{$template}_{$theme}");
 
         $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE);
 
@@ -794,19 +794,19 @@ class uiModel extends model
 
         $condations = array();
         $condations[TABLE_BLOCK]    = "where template='{$template}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_LAYOUT]   = "where template='{$template}' and theme = '{$theme}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and `key` = 'custom'";
+        $condations[TABLE_LAYOUT]   = "where template='{$template}' and plan = '{$plan}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and section='template' and `key` = 'custom'";
         $condations[TABLE_CATEGORY] = "where type = 'slide'";
         $condations[TABLE_SLIDE]    = "where `group` in ({$groups})";
         $condations[TABLE_FILE]     = "where (objectType = 'source' and objectID = '{$template}_{$theme}') or objectType = 'slide'";
 
         $fields = array();
-        $fields[TABLE_BLOCK]    = "id as originID,`template`,`type`,`title`,`content`,`lang`";
-        $fields[TABLE_LAYOUT]   = "*, 'doing' as import, 'THEME_CODEFIX' as theme";
-        $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, 'imported' as lang";
-        $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'imported' as lang,`order`";
-        $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type";
-        $fields[TABLE_FILE]     = "pathname,title,extension,size,width,height,objectType,addedDate,public,extra, 'IMPORTED' as addedBy,lang,'{$template}_THEME_CODEFIX' as objectID";
+        $fields[TABLE_BLOCK]    = "id as originID,`template`,`type`,`title`,`content`, 'lang' as lang";
+        $fields[TABLE_LAYOUT]   = "*, 'plan' as plan, 'lang' as lang";
+        $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, 'lang' as lang";
+        $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'lang' as lang,`order`";
+        $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type, 'lang' as lang";
+        $fields[TABLE_FILE]     = "pathname,title,extension,size,width,height,objectType,addedDate,public,extra, 'IMPORTED' as addedBy,'lang' as lang,'{$template}_THEME_CODEFIX' as objectID";
 
         $replaces = array();
         $replaces[TABLE_BLOCK]    = true;
@@ -1033,35 +1033,34 @@ EOT;
      */
     public function createHookFile($template, $theme, $code)
     {
-        if(!is_dir($hookPath)) mkdir($hookPath, 0777, true);
         $hookFile = $this->directories->encryptLessPath . helper::createRandomStr(6, $skip = '0-9A-Z') . ".php";
-        $params   = $this->getCustomParams($template, $theme);
 
-        $css = var_export($params['css'], true);
-        $js  = var_export($params['js'],  true);
-
-        unset($params['css']);
-        unset($params['js']);
-
+        $params = $this->getCustomParams($template, $theme);
         $params = var_export($params, true);
-        
-        $css    = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $css);
-        $js     = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $js);
         $params = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $params);
+       
+        foreach($this->config->css as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
+        foreach($this->config->js  as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
 
-        $code   = "<?php
+        $cssCodes = serialize($this->config->css);
+        $jsCodes  = serialize($this->config->js);
+        $cssCode  = var_export($cssCodes, true);
+        $jsCodes  = var_export($jsCodes, true);
+        $code = "<?php
 if(!function_exists('get_THEME_CODEFIX_CSS'))
 {
     function get_THEME_CODEFIX_CSS()
     {
-        return $css;
+        \$css = unserialize($cssCode);
+        return \$css;
     }
 }
 if(!function_exists('get_THEME_CODEFIX_JS'))
 {
     function get_THEME_CODEFIX_JS()
     {
-        return $js;
+        \$js = unserialize($jsCodes);
+        return \$js;
     }
 }
 if(!function_exists('get_THEME_CODEFIX_params'))
