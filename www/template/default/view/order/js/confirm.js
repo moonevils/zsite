@@ -1,6 +1,5 @@
 $(document).ready(function()
 {
-    $('[name=payment]').eq(0).prop('checked', true);
     $('#addressList').load(
          createLink('address', 'browse') + ' .col-md-10 .panel-body',
          function()
@@ -58,30 +57,7 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            if(response.payLink)
-            {
-                $('#payLink').val(response.payLink);
-                $('#payForm .submitBtn').click(function(){$('#payForm').submit();});
-                $('#payForm .submitBtn').click();
-
-                bootbox.dialog(
-                {  
-                    message: v.goToPay,  
-                    buttons:
-                    {  
-                        paySuccess:
-                        {  
-                            label:     v.paid,  
-                            className: 'btn-primary',  
-                            callback:  function() { setTimeout(function(){location.href = createLink('order', 'browse');}, 600); }  
-                        }  
-                    }  
-                });
-            }
-            else
-            {
-                setTimeout(function(){location.href = createLink('order', 'browse');}, 600);
-            }
+            location.href = response.locate;
         }
         else
         {

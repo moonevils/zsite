@@ -80,6 +80,7 @@ $config->rights->guest['cart']['browse']        = 'browse';
 $config->rights->guest['cart']['printtopbar']   = 'printtopbar';
 $config->rights->guest['cart']['count']         = 'count';
 $config->rights->guest['order']['confirm']      = 'confirm';
+$config->rights->guest['order']['check']        = 'check';
 $config->rights->guest['order']['processorder'] = 'processorder';
 
 $config->rights->guest['log']['record'] = 'record';
