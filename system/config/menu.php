@@ -3,7 +3,7 @@ $config->menus = new stdclass();
 $config->menus->home    = 'admin,order,message,comment,reply,thread,forumreply';
 $config->menus->content = 'article,blog,book,page,contribution';
 $config->menus->shop    = 'order,product,express,orderSetting';
-$config->menus->user    = 'user,message,reply,forum,wechat';
+$config->menus->user    = 'user,message,reply,forum,wechat,contribution';
 $config->menus->promote = 'stat,tag,links,setstat,';
 $config->menus->design  = 'ui,logo,slide,nav,block,visual';
 $config->menus->setting = 'site,company,security';
@@ -18,3 +18,14 @@ foreach($config->menus as $group => $modules)
         if($menu) $config->menuGroups->$menu = $group;
     }
 }
+
+$config->menuDependence = new stdclass();
+$config->menuDependence->contribution = 'contribution';
+$config->menuDependence->page         = 'page';
+$config->menuDependence->blog         = 'blog';
+
+$config->menuExtra = new stdclass();
+$config->menuExtra->visual = "target='_blank'";
+
+$config->moduleMenu = new stdclass();
+$config->moduleMenu->site_score = "data-toggle='modal'";
