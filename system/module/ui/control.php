@@ -45,6 +45,7 @@ class ui extends control
         $this->view->title           = $this->lang->ui->setTemplate;
         $this->view->template        = current($templates);
         $this->view->installedThemes = $this->ui->getInstalledThemes();
+        $this->view->currentTheme    = $this->config->template->{$this->device}->theme;
         $this->view->uiHeader        = true;
         $this->display();
     }
@@ -482,13 +483,13 @@ class ui extends control
         {
             $this->app->loadClass('pager', $static = true);
             $pager  = new pager($results->dbPager->recTotal, $results->dbPager->recPerPage, $results->dbPager->pageID);
-            $themes = $results->themes;
         }
 
+        $this->view->themes       = zget($results, 'themes');
         $this->view->title        = $this->lang->ui->themeStore;
         $this->view->position[]   = $this->lang->package->obtain;
+
         $this->view->industryTree = str_replace('/index.php', $this->server->script_name, $this->package->getIndustriesByAPI());
-        $this->view->themes       = $themes;
         $this->view->installeds   = $this->package->getLocalPackages('installed');
         $this->view->pager        = $pager;
         $this->view->tab          = 'obtain';
@@ -550,7 +551,7 @@ class ui extends control
         if($_POST)
         {
             $cssSetting["{$template}_{$theme}_{$page}"] = $this->post->css;
-            $jsSetting["{$template}_{$theme}_{$page}"] = $this->post->js;
+            $jsSetting["{$template}_{$theme}_{$page}"]  = $this->post->js;
             $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
             $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));

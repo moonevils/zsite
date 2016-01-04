@@ -12,39 +12,28 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel panel-heading'>
-    <strong><?php echo $lang->ui->currentTheme . $lang->colon . zget($template['themes'], $this->config->template->{$this->device}->theme);?></strong>
+  <div>
+    <ul class="nav nav-tabs" id='typeNav'>
+        <li data-type='internal'><?php echo html::a('javascript:;', $lang->ui->internalTheme);?></li>
+        <li data-type='store'><?php echo html::a('javascript:;', $lang->ui->themeStore);?></li>
+     </ul>   
   </div>
   <div class='panel-body'>
-    <ul class="nav nav-tabs">
-        <li class="nav-heading">这是标题</li>
-        <li class="active">
-          <a href="###">首页</a>
-        </li>
-        <li>
-          <a href="###">个人资料</a>
-        </li>
-        <li class="disabled">
-          <a href="###">消息</a>
-        </li>
-        <li>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="###">更多 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="">Lorem ipsum.</a>
-            </li>
-            <li>
-              <a href="">Optio, fuga.</a>
-            </li>
-            <li>
-              <a href="">Dicta, vero.</a>
-            </li>
-            <li>
-              <a href="">Doloribus, obcaecati.</a>
-            </li>
-          </ul>
-        </li>
-      </ul>   
+    <section class="cards cards-products cards-borderless" id='internalSection'>
+      <?php foreach($template['themes'] as $code => $theme):?>
+      <?php $url = $this->createLink('ui', 'setTemplate', "template={$template['code']}&theme={$code}&custom=1");?>
+      <?php $templateRoot = $webRoot . 'template/' . $template['code'] . '/';?>
+      <div class="col-sm-2">
+        <div class="card">
+          <?php echo html::a($url, html::image($templateRoot . 'theme/' . $code . '/preview.png'), "class='media-wrapper'");?>
+          <div class="card-heading text-center">
+            <?php echo html::a($url, $theme, "class='btn btn-default btn-block'");?>
+          </div>
+        </div>
+      </div>
+      <?php endforeach;?>
+    </section>
+    <section class="cards cards-products cards-borderless" id='storeSection'> </section>
   </div>
   <div class='panel-footer'>
   </div>
