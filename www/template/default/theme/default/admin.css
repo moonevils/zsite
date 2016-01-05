@@ -355,7 +355,8 @@ body {padding-left: 40px;}
 #primaryNavbar .nav > li.active, #primaryNavbar .nav > li:hover, #primaryNavbar .nav > li:focus, #primaryNavbar .nav > li:active {background-color: #3280fc; background-color: rgba(255,255,255,.2)}
 #primaryNavbar .nav > li > a > .icon {font-size: 20px;}
 #primaryNavbar + .navbar-fixed-top {left: 40px}
-.navbar-fixed-bottom {left: 40px;}
+.navbar-fixed-bottom {left: 40px; border-top: 1px solid #ddd; border-bottom: none}
+.navbar-fixed-bottom .navbar-text {line-height: 20px;}
 #primaryNavbar .nav.fixed-bottom {position: absolute; bottom: 0; left: 0; right: 0}
 #primaryNavbar .nav.fixed-bottom > li {padding: 5px;}
 #primaryNavbar .nav.fixed-bottom > li > a {height: 30px}
