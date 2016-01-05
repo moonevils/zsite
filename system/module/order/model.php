@@ -247,7 +247,7 @@ class orderModel extends model
         $orderID = 0;
         if($mode == 'return')
         {
-            if($alipay->checkNotify($_GET) and ($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS'))
+            if($alipay->checkNotify($_GET) and ($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS' or $this->get->trade_status == 'WAIT_SELLER_SEND_GOODS'))
             {
                 $orderID = $this->get->out_trade_no;
                 $sn      = $this->get->trade_no;
@@ -255,7 +255,7 @@ class orderModel extends model
         }
         elseif($mode == 'notify')
         {
-            if($alipay->checkNotify($_POST) and ($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS'))
+            if($alipay->checkNotify($_POST) and ($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS' or $this->get->trade_status == 'WAIT_SELLER_SEND_GOODS'))
             {
                 $orderID = $this->post->out_trade_no;
                 $sn      = $this->post->trade_no;
