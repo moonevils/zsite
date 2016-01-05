@@ -9,7 +9,7 @@ $(document).ready(function()
     });
     $('#typeNav a:first').click();
 
-    $('#storeSection').load(createLink('ui', 'themestore') + '#mainArea');
+    $('#storeSection').load(createLink('ui', 'themestore') + ' #mainArea');
     $('.theme-img').hover(function()
     {
         var $this = $(this);
