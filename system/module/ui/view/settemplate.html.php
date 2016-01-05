@@ -14,9 +14,9 @@
 <div class='panel'>
   <div>
     <ul class="nav nav-tabs" id='typeNav'>
-        <li data-type='internal'><?php echo html::a('javascript:;', $lang->ui->internalTheme);?></li>
-        <li data-type='store'><?php echo html::a('javascript:;', $lang->ui->themeStore);?></li>
-     </ul>   
+      <li data-type='internal'><?php echo html::a('javascript:;', $lang->ui->internalTheme);?></li>
+      <li data-type='store'><?php echo html::a('javascript:;', $lang->ui->themeStore);?></li>
+    </ul>
   </div>
   <div class='panel-body'>
     <section class="cards cards-products cards-borderless" id='internalSection'>
@@ -33,7 +33,7 @@
       </div>
       <?php endforeach;?>
     </section>
-    <section class="cards cards-products cards-borderless" id='storeSection'> </section>
+    <section class="cards cards-products cards-borderless" id='storeSection'></section>
   </div>
   <div class='panel-footer'>
   </div>
