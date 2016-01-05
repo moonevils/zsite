@@ -20,7 +20,7 @@
     </ul>
   </div>
   <div class='panel-body tab-content'>
-    <section class="cards cards-products cards-borderless themes tab-pane active" id='internalSection'>
+    <section class="cards cards-borderless themes tab-pane active" id='internalSection'>
       <?php foreach($template['themes'] as $code => $theme):?>
       <?php $url = $this->createLink('ui', 'setTemplate', "template={$template['code']}&theme={$code}&custom=1");?>
       <?php $templateRoot = $webRoot . 'template/' . $template['code'] . '/';?>
@@ -35,8 +35,8 @@
       </div>
       <?php endforeach;?>
     </section>
-    <section class="cards cards-products cards-borderless tab-pane" id='storeSection'>
-      <div class='text-center text-muted' style='padding: 50px'><i class='icon icon-2x icon-spinner icon-spin'></i></div>
+    <section class="tab-pane" id='storeSection'>
+      <div class='text-center text-muted load-icon' style='padding: 50px'><i class='icon icon-2x icon-spinner icon-spin'></i></div>
     </section>
   </div>
 </div>

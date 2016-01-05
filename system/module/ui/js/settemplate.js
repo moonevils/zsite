@@ -1,13 +1,26 @@
 $(document).ready(function()
 {
-    var loadStoreContent = false;
+    var loadStoreContent = function(url)
+    {
+        $('#storeSection').load(url + ' #mainArea');
+    }
+
+    var storeContentLoaded = false;
+    var $loader = $('#storeSection > .load-icon').clone();
     $('#typeNav > li > a[href="#storeSection"]').on('shown.zui.tab', function(e)
     {
-        if(!loadStoreContent)
+        if(!storeContentLoaded)
         {
-           $('#storeSection').load(createLink('ui', 'themestore') + ' #mainArea');
-           loadStoreContent = false;
+            loadStoreContent(createLink('ui', 'themestore'));
+            storeContentLoaded = false;
         }
+    });
+
+    $('#storeSection').on('click', '#industryBox a', function(e)
+    {
+        $('#storeSection').empty().append($loader);
+        e.preventDefault();
+        loadStoreContent($(this).attr('href'));
     });
 
     $('.theme').on('click', '.theme-img, .theme-name', function(e)
