@@ -2,7 +2,7 @@
 <?php include '../../common/view/codeeditor.html.php';?>
 <?php js::set('page', $page);?>
 <div class='col-xs-2'>
-  <div class="leftmenu affix hiddden-xs hidden-sm">
+  <div class="leftmenu hiddden-xs hidden-sm">
     <ul class="nav nav-left nav-primary nav-stacked">
       <?php foreach($pageList as $pageCode => $name):?>
       <li>

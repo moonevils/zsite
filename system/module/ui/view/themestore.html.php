@@ -11,26 +11,32 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div class='row' id='mainArea'>
-  <div class='industryBox'><?php echo $industryTree;?></div>
+<div class='panel' id='mainArea'>
+  <div id='industryBox'>
+    <?php echo $industryTree;?>
+  </div>
   <?php if($themes):?>
-  <div class='cards'>
+  <div class='cards cards-borderless themes'>
     <?php foreach($themes as $theme):?>
     <?php 
     $currentRelease = $theme->currentRelease;
     $latestRelease  = isset($theme->latestRelease) ? $theme->latestRelease : '';
     ?>
-    <div class="col-sm-2">
-      <div class="card">
-        <div class='media-wrapper'>
-          <?php if(isset($theme->image)):?><?php echo html::a($url, html::image($this->config->ui->themeSnapRoot . $theme->image), "");?><?php endif;?>
-        </div>  
-        <div class="card-heading">
+    <div class="col-theme">
+      <div class="card theme">
+        <div class='media-wrapper theme-img'>
+          <?php if(isset($theme->image)):?><?php echo html::a($theme->viewLink, html::image($this->config->ui->themeSnapRoot . $theme->image), "data-title='{$theme->name}' data-width='80%' data-height='100%' data-toggle='modal' data-type='iframe'");?><?php endif;?>
+          <div class='theme-info'>
+            <span><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
+            <span><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
+          </div>
+        </div>
+        <div class="theme-name text-ellipsis">
           <strong>
             <?php echo html::a('javascript:;', $theme->name . "($currentRelease->releaseVersion)", "data-toggle='modal' data-target='#{$theme->code}Modal'");?>
           </strong>
-          <div class="dropdown">
-            <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class="caret"></span></button>
+          <div class="dropdown dropup">
+            <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='caret'></span></button>
             <ul class="dropdown-menu pull-right">
               <li><?php echo html::a($theme->viewLink, $lang->package->view, 'target="_blank"');?></li>
               <?php
@@ -65,23 +71,19 @@
               ?>
             </ul>
           </div>
-          <div>
-            <span class='text-info'><i class='icon icon-star'> </i><?php echo $theme->stars?></span>
-            <span class='text-success'><i class='icon icon-download-alt'> </i><?php echo $theme->stars?></span>
-          </div>
         </div>
       </div>
-      <div  class="modal fade"  id="<?php echo $theme->code . 'Modal'?>">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
+      <div  class='modal fade'  id="<?php echo $theme->code . 'Modal'?>">
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
               <strong><?php echo $theme->name;?></strong>
               <div class='pull-right'>
-                <span class='text-info'><i class='icon icon-star'> </i><?php echo $theme->stars?></span>
-                <span class='text-success'><i class='icon icon-download-alt'> </i><?php echo $theme->stars?></span>
+                <span class='text-muted'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
+                <span class='text-muted'><i class='icon icon-download-alt'></i> <?php echo $theme->stars?></span>
               </div>
             </div>
-            <div class="modal-body">
+            <div class='modal-body'>
               <p class=''><?php echo $theme->abstract;?></p>
               <p>
               <?php
