@@ -1,4 +1,5 @@
 .leftmenu.affix {top: 100px;}
+.leftmenu {width: 100%}
 
 #mainPanel .panel-heading {padding: 4px 5px 0 5px}
 #mainPanel .nav-tabs {margin-bottom: -1px}
