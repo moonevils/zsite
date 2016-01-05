@@ -782,7 +782,7 @@ class uiModel extends model
         $encryptFile = $this->directories->encryptDbPath . 'install.sql';
         $plan        = zget($this->config->layout, "{$template}_{$theme}");
 
-        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE);
+        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE, TABLE_CONFIG);
 
         $groups = $this->getUsedSlideGroups($template, $theme);
         $groups = join(",", $groups);
@@ -817,8 +817,11 @@ class uiModel extends model
         $replaces[TABLE_FILE]     = false;
 
         $zdb->dump($encryptFile, $tables, $fields, 'data', $condations, true);
-        $tables[] = TABLE_CONFIG;
+
+        /* Dump whole css and js data. */
+        $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or section in('css','js'))";
         $zdb->dump($dbFile, $tables, $fields, 'data', $condations, true);
+
         $this->fixSqlFile($template, $theme, $encryptFile);
         $this->fixSqlFile($template, $theme, $dbFile);
         return true;
@@ -835,10 +838,10 @@ class uiModel extends model
     public function fixSqlFile($template, $theme, $file)
     {
         $sqls = file_get_contents($file);
-        $sqls = str_replace(TABLE_BLOCK,  "eps_block",  $sqls);
-        $sqls = str_replace(TABLE_LAYOUT, "eps_layout", $sqls);
-        $sqls = str_replace(TABLE_SLIDE,  "eps_slide",  $sqls);
-        $sqls = str_replace(TABLE_CONFIG, "eps_config", $sqls);
+        $sqls = str_replace(TABLE_BLOCK,    "eps_block",  $sqls);
+        $sqls = str_replace(TABLE_LAYOUT,   "eps_layout", $sqls);
+        $sqls = str_replace(TABLE_SLIDE,    "eps_slide",  $sqls);
+        $sqls = str_replace(TABLE_CONFIG,   "eps_config", $sqls);
         $sqls = str_replace(TABLE_CATEGORY, "eps_category", $sqls);
         $sqls = str_replace(TABLE_FILE,     "eps_file", $sqls);
         $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
@@ -847,6 +850,7 @@ class uiModel extends model
         $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("data\/source\/{$template}\/{$theme}\/", "data\/source\/{$template}\/THEME_CODEFIX\/", $sqls);
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
+        $sqls = str_replace("_{$template}_{$theme}_", "_{$template}_THEME_CODEFIX_", $sqls);
         return file_put_contents($file, $sqls);
     }
 
