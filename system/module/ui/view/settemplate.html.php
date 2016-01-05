@@ -11,31 +11,33 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div class='panel'>
-  <div>
+<?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
+<div class='panel' id='mainPanel'>
+  <div class='panel-heading'>
     <ul class="nav nav-tabs" id='typeNav'>
-      <li data-type='internal'><?php echo html::a('javascript:;', $lang->ui->internalTheme);?></li>
-      <li data-type='store'><?php echo html::a('javascript:;', $lang->ui->themeStore);?></li>
+      <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->internalTheme, "data-toggle='tab'");?></li>
+      <li data-type='store'><?php echo html::a('#storeSection', $lang->ui->themeStore, "data-toggle='tab'");?></li>
     </ul>
   </div>
-  <div class='panel-body'>
-    <section class="cards cards-products cards-borderless" id='internalSection'>
+  <div class='panel-body tab-content'>
+    <section class="cards cards-products cards-borderless themes tab-pane active" id='internalSection'>
       <?php foreach($template['themes'] as $code => $theme):?>
       <?php $url = $this->createLink('ui', 'setTemplate', "template={$template['code']}&theme={$code}&custom=1");?>
       <?php $templateRoot = $webRoot . 'template/' . $template['code'] . '/';?>
-      <div class="col-sm-2">
-        <div class="card">
-          <?php echo html::a($url, html::image($templateRoot . 'theme/' . $code . '/preview.png'), "class='media-wrapper'");?>
-          <div class="card-heading text-center">
-            <?php echo html::a($url, $theme, "class='btn btn-default btn-block'");?>
+      <div class="col-theme">
+        <div class="card theme <?php echo $currentTheme === $code ? 'current' : '' ?>" data-url='<?php echo $url?>'>
+          <i class="icon-ok icon"></i>
+          <?php echo html::a($url, html::image($templateRoot . 'theme/' . $code . '/preview.png'), "class='media-wrapper theme-img'");?>
+          <div class="text-center theme-name">
+            <?php echo $theme;?>
           </div>
         </div>
       </div>
       <?php endforeach;?>
     </section>
-    <section class="cards cards-products cards-borderless" id='storeSection'></section>
-  </div>
-  <div class='panel-footer'>
+    <section class="cards cards-products cards-borderless tab-pane" id='storeSection'>
+      <div class='text-center text-muted' style='padding: 50px'><i class='icon icon-2x icon-spinner icon-spin'></i></div>
+    </section>
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
