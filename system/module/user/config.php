@@ -21,3 +21,8 @@ $config->user->level[4] = 10000;
 $config->user->level[5] = 30000;
 $config->user->level[6] = 50000;
 $config->user->level[7] = 200000;
+
+$config->user->navGroups = new stdclass();
+$config->user->navGroups->user    = '10,20,30,40';
+$config->user->navGroups->order   = '25,26';
+$config->user->navGroups->message = '50,60';
