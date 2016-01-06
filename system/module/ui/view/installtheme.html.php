@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('browseLink', inlink('browse'));?>
 <?php if($blocksMerged and empty($error)):?>
-<form method='post' action= '<?php echo inlink('fixTheme');?>' id="ajaxForm">
+<form method='post' action= '<?php echo inlink('fixTheme');?>'>
   <div class='panel matched-blocks'>
     <div class='panel-heading'>
       <strong><?php echo html::a('###', "{$lang->ui->blocks2Merge} <i class='icon icon-caret-down'> </i>");?></strong>
@@ -36,7 +36,7 @@
               <?php endforeach;?>
             </select>
             <span class='input-group-addon'>
-            <?php echo html::checkbox('block2Create[]', array($newBlock->id => $lang->ui->createBlock));?>
+            <?php echo html::checkbox('blocks2Create', array($newBlock->id => $lang->ui->createBlock));?>
             </span>
           </div>
         </td>
@@ -70,7 +70,7 @@
               <?php endforeach;?>
             </select>
             <span class='input-group-addon'>
-            <?php echo html::checkbox('block2Create[]', array($newBlock->id => $lang->ui->createBlock));?>
+            <?php echo html::checkbox('blocks2Create', array($newBlock->id => $lang->ui->createBlock));?>
             </span>
           </div>
         </td>
