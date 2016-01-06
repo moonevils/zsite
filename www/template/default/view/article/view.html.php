@@ -7,8 +7,8 @@ js::set('path', $article->path);
 js::set('articleID', $article->id);
 js::set('categoryID', $category->id);
 js::set('categoryPath', explode(',', trim($category->path, ',')));
-css::internal($article->css);
-js::execute($article->js);
+if(isset($article->css)) css::internal($article->css);
+if(isset($article->js)) js::execute($article->js);
 ?>
 <?php $common->printPositionBar($category, $article);?>
 <div class='row blocks' data-region='article_view-topBanner'><?php $this->block->printRegion($layouts, 'article_view', 'topBanner', true);?></div>
