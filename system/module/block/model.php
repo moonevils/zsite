@@ -954,7 +954,9 @@ class blockModel extends model
      */
     public function getPlans($template)
     {
-        return $this->loadModel('tree')->getPairs(0, 'layout_' . $template);
+        $plans = $this->loadModel('tree')->getPairs(0, 'layout_' . $template);
+        $plans = array(0 => $this->lang->block->defaultPlan) + (array)$plans;   
+        return $plans;
     }
 
     /**
@@ -983,8 +985,10 @@ class blockModel extends model
     {
         $this->app->loadLang('tree');
         $this->lang->category->name = $this->lang->block->planName;
-        unset($plan->id);
-        unset($plan->pathNames);
+
+        if(isset($plan->id)) unset($plan->id);
+        if(isset($plan->pathNames))unset($plan->pathNames);
+
         $plan->name = $this->post->name;  
 
         $this->dao->insert(TABLE_CATEGORY)

@@ -33,7 +33,7 @@
       </li>
     </ul>
     <div class='panel-actions'>
-      <?php echo html::a(inlink('renamelayout', "plan={$plan}"), $lang->block->renameLayout, "class='btn btn-sm btn-default' data-toggle='modal'");?>
+      <?php if($plan != 0) echo html::a(inlink('renamelayout', "plan={$plan}"), $lang->block->renameLayout, "class='btn btn-sm btn-default' data-toggle='modal'");?>
       <?php echo html::a(inlink('clonelayout', "plan={$plan}"), $lang->block->cloneLayout, "class='btn btn-sm btn-primary' data-toggle='modal'");?>
     </div>
   </div>
