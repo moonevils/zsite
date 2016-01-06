@@ -7,6 +7,11 @@ $().ready(function()
 
     $('[name^=blocks2Merge]').change();
 
+    $('.matched-blocks .panel-heading a').click(function()
+    {
+        $(this).parents('.matched-blocks').find('table').toggle();
+    });
+
     $(document).on('click', '.btn-reload', function()
     {
         $.reloadAjaxModal(); 
