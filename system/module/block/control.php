@@ -237,7 +237,6 @@ class block extends control
         $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($plan)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
-
     }
 
     /**
