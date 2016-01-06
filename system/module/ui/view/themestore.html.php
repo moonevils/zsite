@@ -12,11 +12,11 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel' id='mainArea'>
-  <div id='industryBox'>
+  <div id='industryBox' class='panel-heading'>
     <?php echo $industryTree;?>
   </div>
   <?php if($themes):?>
-  <div class='cards cards-borderless themes'>
+  <div id='storeThemes' class='cards cards-borderless themes' data-param='<?php echo $param ?>'>
     <?php foreach($themes as $theme):?>
     <?php 
     $currentRelease = $theme->currentRelease;
@@ -25,7 +25,7 @@
     <div class="col-theme">
       <div class="card theme">
         <div class='media-wrapper theme-img'>
-          <?php if(isset($theme->image)):?><?php echo html::a($theme->viewLink, html::image($this->config->ui->themeSnapRoot . $theme->image), "data-title='{$theme->name}' data-width='80%' data-height='100%' data-toggle='modal' data-type='iframe'");?><?php endif;?>
+          <?php if(isset($theme->image)):?><?php echo html::a('javascript:;', html::image($this->config->ui->themeSnapRoot . $theme->image), "title='{$theme->name}' data-images='http://www.chanzhi.org/data/upload/201512/m_441f9cfde1e0f3fd95528d27848a399d.png, http://www.chanzhi.org/data/upload/201512/m_6d7f3b1d5fd3faa0b415fa8ddec63d10.png' data-width='600' class='preview-theme'");?><?php endif;?>
           <div class='theme-info'>
             <span><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
             <span><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
