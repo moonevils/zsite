@@ -1150,7 +1150,7 @@ class packageModel extends model
                     if(!is_object($old->content)) $old->content = new stdclass();
                     if(!is_object($old->content->custom)) $old->content->custom = new stdclass();
                     $old->content->custom->{$packageInfo->code} = zget($imported->content->custom, $packageInfo->code);
-                    $old->content = json_encode($oid->content);
+                    $old->content = json_encode($old->content);
                     $this->dao->replace(TABLE_BLOCK)->data($imported)->exec();
                 }
             }
@@ -1190,7 +1190,7 @@ class packageModel extends model
         krsort($blockOptions);
         foreach($blockOptions as $originID => $blockID)
         {
-            $this->dao->setAutoLang(false)->update(TABLE_CONFIG)->set("value= replace(value, '#{$originID}', '#{$blockID}')")->where('lang')->eq('lang')->printSQL();
+            $this->dao->setAutoLang(false)->update(TABLE_CONFIG)->set("value= replace(value, '#{$originID}', '#{$blockID}')")->where('lang')->eq('lang')->exec();
         }
         
         return true;
