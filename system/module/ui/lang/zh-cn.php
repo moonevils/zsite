@@ -117,6 +117,9 @@ $lang->ui->themeSaved  = '主题配置已保存';
 $lang->ui->unWritable  = "不能生成样式文件，请检查 %s目录的权限";
 $lang->ui->codeHolder  = "字母加数字组合成的主题代号";
 
+$lang->ui->blocks2Merge  = "可合并区块";
+$lang->ui->blocks2Create = "新创建区块";
+
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置为默认';
 $lang->ui->theme->default                              = '默认';
