@@ -58,6 +58,15 @@ $config->template->mobile = new stdclass();
 $config->template->mobile->name  = 'mobile';   // Supported themes.
 $config->template->mobile->theme = 'default';   // Supported themes.
 
+$config->layout = new stdclass();
+$config->layout->default_default = 0;
+$config->layout->default_tartan  = 0;
+$config->layout->default_wide    = 0;
+$config->layout->default_clean   = 0;
+$config->layout->default_blank   = 0;
+$config->layout->mobile_default  = 0;
+$config->layout->mobile_colorful = 0;
+
 $config->css = new stdclass();
 $config->js  = new stdclass();
 

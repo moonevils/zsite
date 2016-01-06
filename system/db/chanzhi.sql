@@ -227,13 +227,13 @@ CREATE TABLE IF NOT EXISTS `eps_grouppriv` (
 -- DROP TABLE IF EXISTS `eps_layout`;
 CREATE TABLE IF NOT EXISTS `eps_layout` (
   `template` varchar(30) NOT NULL DEFAULT 'default',
-  `theme` varchar(30) NOT NULL DEFAULT 'default',
+  `plan` char(30) NOT NULL DEFAULT 'default',
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
   `import` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `layout` (`template`,`theme`,`page`,`region`,`lang`)
+  UNIQUE KEY `layout` (`template`,`plan`,`page`,`region`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_message`;
@@ -806,26 +806,15 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('page_index', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
 ('page_view', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw');
 
-UPDATE `eps_layout` set `theme` = 'default';
+INSERT INTO `eps_layout` (`template`, `plan`, `page`, `region`, `blocks`, `import`, `lang`) VALUES
+('mobile','0','index_index','top','[{"id":"25","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','0','index_index','middle','[{"id":"31","grid":"0","titleless":"0","borderless":"0"},{"id":"23","grid":"12","titleless":"0","borderless":"0"},{"id":"21","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','0','index_index','top','[{"id":"125","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','0','index_index','middle','[{"id":"131","grid":"0","titleless":"0","borderless":"0"},{"id":"123","grid":"12","titleless":"0","borderless":"0"},{"id":"121","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','0','index_index','top','[{"id":"225","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
+('mobile','0','index_index','middle','[{"id":"231","grid":"0","titleless":"0","borderless":"0"},{"id":"223","grid":"12","titleless":"0","borderless":"0"},{"id":"221","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw');
 
-INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'clean' as theme from `eps_layout` where theme='default';
-
-INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'simple' as theme from `eps_layout` where theme='default';
-
-INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'wide' as theme from `eps_layout` where theme='default';
-
-INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'tartan' as theme from `eps_layout` where theme='default';
-
-INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'blank' as theme from `eps_layout` where theme='default';
-
-
-INSERT INTO `eps_layout` (`template`, `theme`, `page`, `region`, `blocks`, `import`, `lang`) VALUES
-('mobile','default','index_index','top','[{"id":"25","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
-('mobile','default','index_index','middle','[{"id":"31","grid":"0","titleless":"0","borderless":"0"},{"id":"23","grid":"12","titleless":"0","borderless":"0"},{"id":"21","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
-('mobile','default','index_index','top','[{"id":"125","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
-('mobile','default','index_index','middle','[{"id":"131","grid":"0","titleless":"0","borderless":"0"},{"id":"123","grid":"12","titleless":"0","borderless":"0"},{"id":"121","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
-('mobile','default','index_index','top','[{"id":"225","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
-('mobile','default','index_index','middle','[{"id":"231","grid":"0","titleless":"0","borderless":"0"},{"id":"223","grid":"12","titleless":"0","borderless":"0"},{"id":"221","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw');
+UPDATE `eps_layout` SET plan = '0';
 
 -- Insert data into `eps_block`;
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
