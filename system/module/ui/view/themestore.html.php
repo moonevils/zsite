@@ -12,11 +12,11 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel' id='mainArea'>
-  <div id='industryBox'>
+  <div id='industryBox' class='panel-heading'>
     <?php echo $industryTree;?>
   </div>
   <?php if($themes):?>
-  <div class='cards cards-borderless themes'>
+  <div id='storeThemes' class='cards cards-borderless themes' data-param='<?php echo $param ?>'>
     <?php foreach($themes as $theme):?>
     <?php 
     $currentRelease = $theme->currentRelease;

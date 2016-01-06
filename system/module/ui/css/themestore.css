@@ -1,6 +1,12 @@
-#industryBox {position: absolute; left: 0; top: 0; width: 160px; border-right: 1px solid #ddd; bottom: 0; padding: 10px; background-color: #fafafa}
-#mainArea {padding-left: 175px; position: relative;}
+#industryBox {padding: 5px 10px}
+#industryBox > .tree > li {display: inline-block; padding-bottom: 0; margin-right: 10px;}
+#industryBox > .tree > li:before {display: none}
+#industryBox > .tree > li > a {display: inline-block; background-color: transparent; border-radius: 13px; padding: 3px 10px}
+#industryBox > .tree > li > a:hover {background-color: #fff}
+#industryBox > .tree > li.active > a {background-color: #3280FC; color: #fff}
+#mainArea {position: relative;}
 
+.themes {margin: 0; padding: 10px 5px}
 .themes .col-theme {float: left; width: 220px;}
 .themes .theme {width: auto; float: left; cursor: pointer; margin-right: 10px; margin-bottom: 10px; margin-left: 5px; border: 1px solid #ccc; border-radius: 2px; min-width: 200px; position: relative; opacity: 0.9; overflow: visible;}
 .themes .theme-name {padding: 5px; background-color: #f1f1f1; padding-right: 30px; position: relative; overflow: visible;}
