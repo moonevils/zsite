@@ -806,7 +806,7 @@ class uiModel extends model
         $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, 'lang' as lang";
         $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'lang' as lang,`order`";
         $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type, 'lang' as lang";
-        $fields[TABLE_FILE]     = "pathname,title,extension,size,width,height,objectType,addedDate,public,extra, 'IMPORTED' as addedBy,'lang' as lang,'{$template}_THEME_CODEFIX' as objectID";
+        $fields[TABLE_FILE]     = "pathname,title,extension,size,width,height,objectType,addedDate,public,extra, 'IMPORTED' as addedBy,'all' as lang,'{$template}_THEME_CODEFIX' as objectID";
 
         $replaces = array();
         $replaces[TABLE_BLOCK]    = true;

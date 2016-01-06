@@ -1190,7 +1190,10 @@ class packageModel extends model
         krsort($blockOptions);
         foreach($blockOptions as $originID => $blockID)
         {
-            $this->dao->setAutoLang(false)->update(TABLE_CONFIG)->set("value= replace(value, '#{$originID}', '#{$blockID}')")->where('lang')->eq('lang')->exec();
+            $this->dao->setAutoLang(false)->update(TABLE_CONFIG)
+                ->set('lang')->eq($this->app->getClientLang())
+                ->set("value= replace(value, '#{$originID}', '#{$blockID}')")
+                ->where('lang')->eq('lang')->exec();
         }
         
         return true;
@@ -1285,8 +1288,8 @@ class packageModel extends model
             $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("addedBy")->eq($this->app->user->account)->where('addedBy')->eq('IMPORTED')->exec();
         }
 
-        $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('imported')->exec();
-        $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->where('type')->eq('tmpSlide')->exec();
+        $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('lang')->exec();
+        $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->set('lang')->eq($this->app->getClientLang())->where('type')->eq('tmpSlide')->exec();
     }
 
     /**
