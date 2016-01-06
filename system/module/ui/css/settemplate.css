@@ -19,8 +19,14 @@
 .themes .theme:hover {border-color: #145ccd; -moz-box-shadow:0px 0px 6px #145ccd; -webkit-box-shadow:0px 0px 6px #145ccd; box-shadow:0px 0px 6px #145ccd;}
 .themes .theme.current {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
 
-#industryBox {position: absolute; left: 0; top: 0; width: 150px; border: 1px solid #ddd; bottom: 0; padding: 10px; background-color: #fafafa}
-#mainArea {padding-left: 170px; position: relative; border: none; box-shadow: none; margin-bottom: 0;}
+#industryBox {padding: 5px 10px!important; background-color: transparent; margin: -15px -15px 15px}
+#industryBox > .tree > li {display: inline-block; padding-bottom: 0; margin-right: 10px;}
+#industryBox > .tree > li:before {display: none}
+#industryBox > .tree > li > a {display: inline-block; background-color: transparent; border-radius: 11px; padding: 1px 10px; border: 1px solid transparent}
+#industryBox > .tree > li > a:hover {border-color: #ddd;}
+#industryBox > .tree > li.active > a {border-color: #3280FC; color: #3280fc}
+
+#mainArea {position: relative; border: none; box-shadow: none; margin-bottom: 0;}
 #mainArea .cards {padding-top: 0;}
 #mainArea .themes .theme-name {padding: 5px;}
 #mainArea .themes .theme-img > .theme-info {position: absolute; color: #fff; background-color: #888; position: absolute; border-radius: 12px; line-height: 20px; text-align: center; padding: 2px 10px; right: 8px; top: 8px; font-weight: 200; opacity: 0.9}

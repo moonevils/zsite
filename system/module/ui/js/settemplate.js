@@ -2,7 +2,10 @@ $(document).ready(function()
 {
     var loadStoreContent = function(url)
     {
-        $('#storeSection').load(url + ' #mainArea');
+        $('#storeSection').load(url + ' #mainArea', function()
+        {
+            $('#industryBox > .tree > li > a[href*="&param=' + $('#storeThemes').data('param') + '"]').parent().addClass('active');
+        });
     }
 
     var storeContentLoaded = false;
@@ -12,7 +15,7 @@ $(document).ready(function()
         if(!storeContentLoaded)
         {
             loadStoreContent(createLink('ui', 'themestore'));
-            storeContentLoaded = false;
+            storeContentLoaded = true;
         }
     });
 
