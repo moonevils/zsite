@@ -1142,4 +1142,17 @@ if(!function_exists('get_THEME_CODEFIX_params'))
         if(is_dir($sourcePath) and !$zfile->removeDir($sourcePath)) $faildPaths[] = $sourcePath;
         return empty($faildPaths) ? true : $faildPaths;
     }
+    
+    /**
+     * Clear tmp data imported.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function clearTmpData()
+    {
+        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE, TABLE_CONFIG);
+        foreach($tables as $table) $this->dao->setAutoLang(false)->delete()->from($table)->where('lang')->eq('lang')->exec();
+        return !dao::isError();
+    }
 }
