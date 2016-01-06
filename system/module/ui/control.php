@@ -357,10 +357,7 @@ class ui extends control
         $package = $this->package->fixThemeCode($package, $installedThemes);
 
         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
-        if(!empty($packageInfo->customParams))
-        {
-            $this->package->saveCustomParams($package, $packageInfo->customParams);
-        }
+
         /* Save to database. */
         if(!$_POST) $this->package->savePackage($package, $type);
 
@@ -368,6 +365,7 @@ class ui extends control
         $this->view->files = $this->package->copyPackageFiles($package, $type);
 
         /* Execute the install.sql. */
+        $this->ui->clearTmpData();
         $return = $this->package->executeDB($package, 'install', 'theme');
         if($return->result != 'ok')
         {
@@ -376,13 +374,44 @@ class ui extends control
         }
 
         $this->package->fixSlides($package);
-        $this->view->blocksMerged   = false;
+
+        /* Fetch blocks data and show merge */
+        $importedBlocks  = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->andWhere('lang')->eq('lang')->fetchAll('originID');
+        $oldBlocks       = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('type');
+        $matchedBlocks   = array();
+        $unMatchedBlocks = array();
+
+        foreach($importedBlocks as $newBlock)
+        {
+            if(isset($oldBlocks[$newBlock->type]))
+            {
+                if(strpos(',html,htmlcode,php,', ",{$newBlock->type},") === false)
+                {
+                    $matchedBlocks[$newBlock->originID] = $oldBlocks[$newBlock->type]->id;
+                }
+                else
+                {
+                    $block = $this->dao->select('*')->from(TABLE_BLOCK)
+                        ->where('originID')->eq(0)
+                        ->andWhere('type')->eq($newBlock->type)
+                        ->andWhere('content')->eq($newBlock->content)
+                        ->fetch();
+                    if(!empty($block)) $matchedBlocks[$newBlock->originID] = $block->id;
+                }
+            }
+            else
+            {
+                $unMatchedBlocks[$newBlock->originID] = $newBlock;
+            }
+        }
 
         $this->app->loadLang('block');
-        $this->view->importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->fetchAll('originID');
-        $this->view->oldBlocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('id');
-        $this->view->blocksMerged   = true;
-        $this->view->package        = $package;
+        $this->view->matchedBlocks   = $matchedBlocks;
+        $this->view->unMatchedBlocks = $unMatchedBlocks;
+        $this->view->importedBlocks  = $importedBlocks;
+        $this->view->oldBlocks       = $oldBlocks;
+        $this->view->blocksMerged    = true;
+        $this->view->package         = $package;
         $this->display();
     }
 
