@@ -133,6 +133,10 @@ class upgradeModel extends model
             case '4_6':
                 $this->execSQL($this->getUpgradeFile('4.6'));
             case '5_0';
+            case '5_0_1';
+                $this->execSQL($this->getUpgradeFile('5.0.1'));
+                $this->fixLayoutPlans('default');
+                $this->fixLayoutPlans('mobile');
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1777,5 +1781,4 @@ class upgradeModel extends model
             $this->loadModel('block')->setPlan($planID, $template, $code);
         }
     }
-
 }

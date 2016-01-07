@@ -905,10 +905,12 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (231, 'about', '公司簡介', '', 'mobile','zh-tw'),
 (232, 'links', '友情鏈接', '', 'mobile','zh-tw'),
 (233, 'followUs', '關注我們', '', 'mobile','zh-tw');
+
 INSERT INTO `eps_group` (`id`, `name`, `role`, `desc`, `lang`) VALUES
 (1, '管理员', '', '拥有后台所有权限', 'zh-cn'),
 (2, '网站编辑', '', '拥有发布以及编辑权限', 'zh-cn'),
 (3, '客服', '', '管理论坛留言评论的权限', 'zh-cn');
+
 INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (1, 'admin', 'ignore', 'zh-cn'),
 (1, 'admin', 'ignoreupgrade', 'zh-cn'),
@@ -990,10 +992,10 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (1, 'ui', 'customTheme', 'zh-cn'),
 (1, 'ui', 'setLogo', 'zh-cn'),
 (1, 'ui', 'setBaseStyle', 'zh-cn'),
-(1, 'ui', 'setFavicon', 'zh-cn'),
 (1, 'ui', 'deleteFavicon', 'zh-cn'),
 (1, 'ui', 'deleteLogo', 'zh-cn'),
 (1, 'ui', 'others', 'zh-cn'),
+(1, 'ui', 'setCode', 'zh-cn'),
 (1, 'slide', 'admin', 'zh-cn'),
 (1, 'slide', 'create', 'zh-cn'),
 (1, 'slide', 'edit', 'zh-cn'),
@@ -1009,6 +1011,10 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (1, 'block', 'create', 'zh-cn'),
 (1, 'block', 'edit', 'zh-cn'),
 (1, 'block', 'delete', 'zh-cn'),
+(1, 'block', 'switchLayout', 'zh-cn'),
+(1, 'block', 'cloneLayout', 'zh-cn'),
+(1, 'block', 'removeLayout', 'zh-cn'),
+(1, 'block', 'renameLayout', 'zh-cn'),
 (1, 'company', 'setbasic', 'zh-cn'),
 (1, 'company', 'setcontact', 'zh-cn'),
 (1, 'user', 'admin', 'zh-cn'),
@@ -1132,7 +1138,6 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (2, 'ui', 'setBaseStyle', 'zh-cn'),
 (2, 'slide', 'create', 'zh-cn'),
 (2, 'slide', 'admin', 'zh-cn'),
-(2, 'ui', 'setFavicon', 'zh-cn'),
 (2, 'ui', 'deleteLogo', 'zh-cn'),
 (2, 'ui', 'others', 'zh-cn'),
 (2, 'slide', 'edit', 'zh-cn'),
