@@ -25,6 +25,7 @@
       <span class='input-group-addon fix-border'><?php echo $lang->block->recPerRow;?></span>
       <?php echo html::input('params[recPerRow]', isset($block->content->recPerRow) ? $block->content->recPerRow : '', "class='text-4 form-control'");?>
     </div>
+  </td>
 </tr>
 <tr>
   <th><?php echo $lang->block->showCategory;?></th>
