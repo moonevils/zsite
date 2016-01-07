@@ -137,6 +137,7 @@ class upgradeModel extends model
             case '5_0_1';
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
                 $this->fixLayoutPlans('default');
+                $this->moveCodes('default');
                 $this->fixLayoutPlans('mobile');
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -1782,5 +1783,48 @@ class upgradeModel extends model
             $this->dao->update(TABLE_LAYOUT)->set('plan')->eq($planID)->where('plan')->eq($code)->exec();
             $this->loadModel('block')->setPlan($planID, $template, $code);
         }
+    }
+
+    /**
+     * Move codes from custom to css and js.
+     * 
+     * @access public
+     * @return void
+     */
+    public function moveCodes()
+    {
+        $customData = $this->dao->setAutoLang('false')
+            ->select('*')->from(TABLE_CONFIG)
+            ->where('section')->eq('template')
+            ->andWhere('`key`')->eq('custom')
+            ->fetchAll('lang');
+
+        foreach($customData as $lang => $custom)
+        {
+            $settings = json_decode($custom->value, true);
+            foreach($settings as $template => $setting)
+            {
+                $data = $custom;
+                unset($data->id);
+                foreach($setting as $theme => $params)
+                {
+                    $data->key     = "{$template}_{$theme}_all"; 
+                    if(!empty($params['css']))
+                    {
+                       $data->section = 'css';
+                       $data->value   = $params['css'];
+                       $this->dao->insert(TABLE_CONFIG)->data($data)->exec();
+                    }
+
+                    if(!empty($params['js']))
+                    {
+                       $data->section = 'js';
+                       $data->value   = $params['js'];
+                       $this->dao->insert(TABLE_CONFIG)->data($data)->exec();
+                    }
+                }
+            }
+        }
+        return true;
     }
 }
