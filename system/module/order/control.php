@@ -323,30 +323,6 @@ class order extends control
     }
 
     /**
-     * setting function.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setting()
-    {
-        if(!commonModel::isAvailable('shop'))
-        {
-            unset($this->lang->order->menu->express);
-            unset($this->lang->order->paymentList['COD']);
-        }
-
-        if($_POST)
-        {
-            $return = $this->order->saveSetting();
-            $this->send($return);
-        }
-
-        $this->lang->menuGroups->order = 'orderSetting';
-        $this->display();
-    }
-
-    /**
      * Redirect to payLink.
      * 
      * @access public
