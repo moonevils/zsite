@@ -7,8 +7,8 @@
 #mainArea {position: relative;}
 
 .themes {margin: 0; padding: 10px 5px}
-.themes .col-theme {float: left; width: 220px;}
-.themes .theme {width: auto; float: left; cursor: pointer; margin-right: 10px; margin-bottom: 10px; margin-left: 5px; border: 1px solid #ccc; border-radius: 2px; min-width: 200px; position: relative; opacity: 0.9; overflow: visible;}
+.themes .col-theme {float: left;}
+.themes .theme {width: 200px; float: left; cursor: pointer; margin-right: 10px; margin-bottom: 10px; margin-left: 5px; border: 1px solid #ccc; border-radius: 2px; position: relative; opacity: 0.9; overflow: visible;}
 .themes .theme-name {padding: 5px; background-color: #f1f1f1; padding-right: 30px; position: relative; overflow: visible;}
 .themes .theme-img {height: 170px; overflow: hidden; opacity: 0.9; position: relative;}
 .themes .theme:hover .theme-img {opacity: 1;}
