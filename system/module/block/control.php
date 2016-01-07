@@ -191,7 +191,7 @@ class block extends control
         $theme    = $this->config->template->{$this->device}->theme;
 
         $result = $this->block->setPlan($plan, $template, $theme);
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        if($result) $this->locate($this->server->http_referer);
     }
 
     /**
