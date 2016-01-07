@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'><strong><?php echo $lang->product->setting;?></strong></div>
+  <div class='panel-heading'><strong><i class='icon icon-cog'> </i><?php echo $lang->product->setting;?></strong></div>
   <div class='panel-body'>
     <form id='ajaxForm' action="<?php echo inlink('setting');?>" method='post' class='form-inline'>
       <table class="table table-form">
