@@ -28,6 +28,7 @@ $(document).ready(function()
 
     $('.theme').on('click', '.theme-img, .theme-name', function(e)
     {
+        e.preventDefault();
         var $this = $(this).closest('.theme');
         if($this.hasClass('current')) return;
 
@@ -51,7 +52,5 @@ $(document).ready(function()
                 bootbox.alert(data.message);
             }
         });
-
-        e.preventDefault();
     });
 });
