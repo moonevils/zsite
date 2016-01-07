@@ -384,13 +384,6 @@ class threadModel extends model
         $this->dao->delete()->from(TABLE_REPLY)->where('thread')->eq($threadID)->exec();
         if(dao::isError()) return false;
 
-        if(RUN_MODE == 'admin')
-        {
-            /* Record delete number. */
-            $this->loadModel('guarder')->logOperation('ip', 'threadFail', $thread->ip);
-            $this->loadModel('guarder')->logOperation('account', 'threadFail', $thread->author);
-        }
-        
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
         if(commonModel::isAvailable('score')) $this->loadModel('score')->punish($thread->author, 'delThread', $this->config->score->counts->delThread, 'thread', $threadID);
