@@ -23,6 +23,7 @@ $config->menuDependence = new stdclass();
 $config->menuDependence->contribution = 'contribution';
 $config->menuDependence->page         = 'page';
 $config->menuDependence->blog         = 'blog';
+$config->menuDependence->express      = 'shop';
 
 $config->menuExtra = new stdclass();
 $config->menuExtra->visual = "target='_blank'";
