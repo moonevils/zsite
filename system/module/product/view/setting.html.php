@@ -22,12 +22,12 @@
           <td class='w-200px'><?php echo html::select('currency', $lang->product->currencyList, isset($config->product->currency) ? $config->product->currency : '', "class='chosen'");?></td>
           <td></td>
         </tr>
+        <?php if(commonModel::isAvailable('shop')):?>
         <tr>
           <th><?php echo $lang->product->stock;?></th>
           <td class='w-100px'><?php echo html::radio('stock', $lang->product->stockOptions, isset($config->product->stock) ? $config->product->stock : '', "class='checkbox'");?></td>
           <td></td>
         </tr>
-        <?php if(commonModel::isAvailable('shop')):?>
         <tr>
           <th><?php echo $lang->order->confirmLimit;?></th> 
           <td>
