@@ -167,7 +167,7 @@ $lang->menu->page     = '单页|article|admin|type=page';
 $lang->menu->product      = '产品|product|admin|';
 $lang->menu->order        = '订单|order|admin|';
 $lang->menu->express      = '快递|tree|browse|type=express';
-$lang->menu->orderSetting = '设置|order|setting|';
+$lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
 $lang->menu->message      = '留言|message|admin|type=message';
