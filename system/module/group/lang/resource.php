@@ -16,7 +16,6 @@ $lang->moduelGroups = new stdclass();
 $lang->moduelGroups->content = array();
 $lang->moduelGroups->content[] = 'article';
 $lang->moduelGroups->content[] = 'book';
-$lang->moduelGroups->content[] = 'search';
 $lang->moduelGroups->content[] = 'file';
 
 $lang->moduelGroups->shop = array();
@@ -30,7 +29,6 @@ $lang->moduelGroups->user[] = 'forum';
 $lang->moduelGroups->user[] = 'thread';
 $lang->moduelGroups->user[] = 'reply';
 $lang->moduelGroups->user[] = 'wechat';
-$lang->moduelGroups->user[] = 'score';
 
 $lang->moduelGroups->promote = array();
 $lang->moduelGroups->promote[] = 'stat';
@@ -52,6 +50,8 @@ $lang->moduelGroups->setting = array();
 $lang->moduelGroups->setting[] = 'site';
 $lang->moduelGroups->setting[] = 'company';
 $lang->moduelGroups->setting[] = 'guarder';
+$lang->moduelGroups->setting[] = 'search';
+$lang->moduelGroups->setting[] = 'score';
 $lang->moduelGroups->setting[] = 'mail';
 
 $lang->resource = new stdclass();
@@ -78,6 +78,10 @@ $lang->resource->block->setregion = 'setregion';
 $lang->resource->block->create    = 'create';
 $lang->resource->block->edit      = 'edit';
 $lang->resource->block->delete    = 'delete';
+$lang->resource->block->switchLayout = 'switchLayout';
+$lang->resource->block->cloneLayout  = 'cloneLayout';
+$lang->resource->block->removeLayout = 'removeLayout';
+$lang->resource->block->renameLayout = 'renameLayout';
 
 /* Book module. */
 $lang->resource->book = new stdclass();
@@ -246,6 +250,7 @@ $lang->resource->ui->setLogo       = 'setLogo';
 $lang->resource->ui->deleteFavicon = 'deleteFavicon';
 $lang->resource->ui->deleteLogo    = 'deleteLogo';
 $lang->resource->ui->others        = 'others';
+$lang->resource->ui->setcode       = 'setCode';
 $lang->resource->ui->browseSource  = array('module' => 'file', 'method' => 'sourceList');
 $lang->resource->ui->sourceDelete  = array('module' => 'file', 'method' => 'sourceDelete');
 $lang->resource->ui->sourceEdit    = array('module' => 'file', 'method' => 'sourceEdit');
