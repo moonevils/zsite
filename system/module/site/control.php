@@ -195,7 +195,7 @@ class site extends control
             if(count($location) > 3) $location = $locations[0] . ' ' . $locations[1] . ' ' . $locations[2];
         }
 
-        $this->view->title    = $this->lang->site->setBasic;
+        $this->view->title    = $this->lang->site->setSecurity;
         $this->view->location = $location;
         $this->display();
     }
