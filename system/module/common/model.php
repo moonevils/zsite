@@ -280,7 +280,7 @@ class commonModel extends model
         if($module == 'misc' and $method == 'ajaxgetfingerprint') return true;
         if($module == 'wechat' and $method == 'response') return true;
         if($module == 'yangcong') return true;
-        if(RUN_MODE == 'admin' and isset($this->config->rights->admin[$module][$method])) return true;
+        if(RUN_MODE == 'admin' and $this->app->user->account != 'guest' and isset($this->config->rights->admin[$module][$method])) return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
