@@ -11,6 +11,11 @@
  */
 
 $lang->visual->common  = "可视化编辑";
+$lang->visual->editLogo    = "编辑标志";
+$lang->visual->editSlogan  = "编辑口号";
+$lang->visual->appendBlock = "插入区块";
+$lang->visual->removeBlock = "移除区块";
+$lang->visual->sortBlocks  = "移除区块";
 
 $lang->visual->info               = "编辑模式";
 $lang->visual->preview            = "预览";

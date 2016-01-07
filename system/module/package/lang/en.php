@@ -111,3 +111,7 @@ $lang->package->errorConflicts               = 'With plug-in "%s" Conflict!';
 $lang->package->errorDepends                 = 'The following dependency plugin is not installed or the version is incorrect:<br /><br /> %s';
 $lang->package->errorIncompatible            = 'The plug-in with your ZenTao incompatible version';
 $lang->package->errorUninstallDepends        = 'Plugin "%s" relying on the plug-in, can not uninstall';
+
+/* Add theme items.*/
+$lang->theme = new stdclass();
+$lang->theme->common = 'Theme Store';
