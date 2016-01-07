@@ -82,11 +82,7 @@ class forum extends control
         $boards  = $this->loadModel('tree')->getFamily($boardID, 'forum');
         $threads = $boards ? $this->loadModel('thread')->getList($boards, $orderBy, $pager) : array();
 
-        if($this->get->tab == 'feedback')
-        {
-            $this->lang->menuGroups->forum = 'feedback';
-            $this->lang->forum->menu       = $this->lang->feedback->menu;
-        }
+        $this->lang->menuGroups->forum = 'thread';
 
         $this->view->boardID  = $boardID;
         $this->view->orderBy  = $orderBy;
