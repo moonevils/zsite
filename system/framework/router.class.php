@@ -1728,8 +1728,11 @@ class router
 
         if(!file_exists($errorFile)) file_put_contents($errorFile, "<?php die();?> \n");
 
-        $fh = @fopen($errorFile, 'a');
-        if($fh) fwrite($fh, strip_tags($errorLog)) && fclose($fh);
+        if($this->config->debug)
+        {
+            $fh = @fopen($errorFile, 'a');
+            if($fh) fwrite($fh, strip_tags($errorLog)) && fclose($fh);
+        }
 
         /* If the debug > 1, show warning, notice error. */
         if($level == E_NOTICE or $level == E_WARNING or $level == E_STRICT or $level == 8192) // 8192: E_DEPRECATED
@@ -1776,6 +1779,7 @@ class router
      */
     public function saveSQL()
     {
+        if(!$this->config->debug) return true;
         if(!class_exists('dao')) return;
 
         $sqlLog = $this->getLogRoot() . 'sql.' . date('Ymd') . '.php';
