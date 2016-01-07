@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->block->common          = '区块维护';
+$lang->block->common          = '区块布局';
 $lang->block->id              = '编号';
 $lang->block->title           = '名称';
 $lang->block->amount          = '数量';
@@ -73,9 +73,10 @@ $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 $lang->block->setregion    = '配置布局';
 $lang->block->switchPlan   = '切换布局';
-$lang->block->cloneLayout  = '方案另存为';
+$lang->block->cloneLayout  = '布局另存为';
+$lang->block->switchLayout = '切换布局';
+$lang->block->removeLayout = '删除布局方案';
 $lang->block->planIsUseing = '此方案正在使用，不能删除';
-
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';
