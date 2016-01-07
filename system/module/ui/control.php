@@ -470,9 +470,7 @@ class ui extends control
         $setting['theme'] = $template->theme;
         $setting = helper::jsonEncode($setting);
         $result = $this->loadModel('setting')->setItems('system.common.template', array($device => $setting));
-
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        $this->locate($this->server->http_referer);
     }
 
     /**
