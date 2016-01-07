@@ -336,10 +336,12 @@ class product extends control
      */
     public function setting()
     {
+        if(commonModel::isAvailable('shop')) $this->app->loadLang('order');
         if($_POST)
         {
             $result = $this->product->saveSetting();
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(commonModel::isAvailable('shop'))   $this->send($this->loadModel('order')->saveSetting());
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
