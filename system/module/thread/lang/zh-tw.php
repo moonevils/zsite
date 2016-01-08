@@ -66,7 +66,7 @@ $lang->thread->successTransfer = '轉移成功';
 $lang->thread->thanks          = '帖子將在審核通過後顯示';
 
 $lang->thread->score    = '獎勵積分';
-$lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";
+$lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";
 $lang->thread->scores[5]  = '+ 5';
 $lang->thread->scores[10] = '+ 10';
 $lang->thread->scores[50] = '+ 50';

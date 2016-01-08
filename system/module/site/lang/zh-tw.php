@@ -56,11 +56,14 @@ $lang->site->filterSensitive  = '敏感詞過濾';
 $lang->site->setBlacklist     = '黑名單管理';
 $lang->site->mobileTemplate   = '移動模板';
 $lang->site->score            = '積分';
-$lang->site->setCounts        = '設置積分規則';
+$lang->site->setCounts        = '積分規則';
 $lang->site->front            = '網站瀏覽';
 $lang->site->closeScoreTip    = '禁用積分功能後不再記錄積分，會員保持原有積分不變。';
+$lang->site->cdnTip           = 'cdn資源僅在非debug模式下啟用，包含：字型、css和js，不包含附件。';
+$lang->site->useCDN           = '啟用CDN';
 
 $lang->site->setBasic      = "基本信息設置";
+$lang->site->setCDN        = "CDN設置";
 $lang->site->setLang       = "語言設置";
 $lang->site->setFilter     = "過濾設置";
 $lang->site->ipFilter      = "ip過濾";
@@ -144,6 +147,9 @@ $lang->site->mobileTemplateList['close'] = '禁用';
 
 $lang->site->scoreList['open']  = '啟用';
 $lang->site->scoreList['close'] = '禁用';
+
+$lang->site->cdnList['open']  = '啟用';
+$lang->site->cdnList['close'] = '關閉';
 
 $lang->site->filterFunctionList['open']  = '啟用';
 $lang->site->filterFunctionList['close'] = '關閉';
