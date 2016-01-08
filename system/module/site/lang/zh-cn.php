@@ -59,6 +59,7 @@ $lang->site->score            = '积分';
 $lang->site->setCounts        = '积分规则';
 $lang->site->front            = '网站浏览';
 $lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
+$lang->site->cdnTip           = 'cdn资源仅在非debug模式下启用，包含：字体、css和js，不包含附件。';
 $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
