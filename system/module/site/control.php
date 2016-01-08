@@ -344,6 +344,26 @@ class site extends control
     }
    
     /**
+     * set cdb configure.
+     * 
+     * @access public
+     * return void
+     */
+    public function setCDN()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+            $result  = $this->loadModel('setting')->setItems('system.common.cdn', $setting);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setCDN;
+        $this->display();
+    }
+  
+    /**
      * set yangcong configure.
      * 
      * @access public

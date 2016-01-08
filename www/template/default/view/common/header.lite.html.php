@@ -53,8 +53,18 @@ $theme          = $this->config->template->{$this->device}->theme ? $this->confi
   }
   else
   {
-      css::import($themeRoot . 'default/all.css');
-      js::import($jsRoot     . 'all.js');
+      $cdnRoot = ($this->config->cdn->open == 'open') ? $this->config->cdn->host . $this->config->version . '/' : '';
+
+      if($cdnRoot)
+      {
+          css::import($cdnRoot . '/template/default/theme/default/all.css');
+          js::import($cdnRoot  . 'js/all.js');
+      }
+      else
+      {
+          css::import($themeRoot . 'default/all.css');
+          js::import($jsRoot     . 'all.js');
+      }
   }
 
   /* Import customed css file if it exists. */
