@@ -24,8 +24,8 @@
           <li<?php if($plan == $planID) echo " class='active'";?>>
             <?php echo html::a(inlink('switchlayout', "plan={$planID}"), $name);?>
             <div class='actions'>
-              <?php echo html::a(inlink('renamelayout',   "plan={$planID}"), "<i class='icon icon-pencil'></i>", "");?>
-              <?php echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='deleter'");?>
+              <?php if($planID) echo html::a(inlink('renamelayout',   "plan={$planID}"), "<i class='icon icon-pencil'></i>", "data-toggle='modal'");?>
+              <?php if($planID) echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='deleter'");?>
             </div>
           </li>
           <?php endforeach;?>
