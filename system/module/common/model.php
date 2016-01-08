@@ -87,7 +87,6 @@ class commonModel extends model
         $device = helper::getDevice();
         if(isset($this->config->template->desktop) and !is_object($this->config->template->desktop)) $this->config->template->desktop = json_decode($this->config->template->desktop);
         if(isset($this->config->template->mobile) and !is_object($this->config->template->mobile)) $this->config->template->mobile = json_decode($this->config->template->mobile);
-
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
     }
 
