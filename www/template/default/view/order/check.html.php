@@ -50,7 +50,7 @@
     </div>
     <div class='panel-footer text-right'>
       <?php printf($lang->order->totalToPay, $currencySymbol . $order->amount);?>
-      <?php echo html::submitButton($lang->order->balance, 'btn-order-submit'); ?>
+      <?php echo html::submitButton($lang->order->settlement, 'btn-order-submit'); ?>
     </div>
   </form>
   <form class='hide' id='payForm' method='post' action="<?php echo inlink('redirect')?>" target='_blank'>
