@@ -54,6 +54,11 @@ $lang->block->style           = 'Style';
 $lang->block->sort            = 'Sort';
 $lang->block->class           = 'Class selector';
 $lang->block->subRegion       = 'Sub Region';
+$lang->block->currentLayout   = 'Current Theme：%s';
+$lang->block->renameLayout    = 'Rename Plan';
+$lang->block->planName        = 'Plan name';
+$lang->block->saveLayoutAs    = 'Copy plan from %s';
+$lang->block->defaultPlan     = 'Default plan';
 
 $lang->block->admin        = "Block management";
 $lang->block->pages        = "Layout settings";
@@ -67,6 +72,11 @@ $lang->block->edit         = 'Edit';
 $lang->block->view         = 'view';
 $lang->block->setPage      = 'Set page blocks';
 $lang->block->setregion    = 'Set region';
+$lang->block->switchPlan   = 'Switch plan';
+$lang->block->cloneLayout  = 'Copy plan';
+$lang->block->switchLayout = 'Switch Layout';
+$lang->block->removeLayout = 'Remove layout';
+$lang->block->planIsUseing = 'Can not remove useing plan';
 
 $lang->block->paddingTop    = 'Top';
 $lang->block->paddingBottom = 'Bottom';
