@@ -40,6 +40,13 @@ $themeRoot = $webRoot . "template/default/theme/";
   }
   else
   {
+      $jsRoot    = $webRoot . "js/";
+      $themeRoot = $webRoot . "template/default/theme/";
+      if($this->config->cdn->open == 'open')
+      {
+          css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css');
+          js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js');
+      }
       css::import($themeRoot . 'default/all.admin.css');
       js::import($jsRoot     . 'all.admin.js');
   }

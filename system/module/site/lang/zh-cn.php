@@ -59,8 +59,10 @@ $lang->site->score            = '积分';
 $lang->site->setCounts        = '积分规则';
 $lang->site->front            = '网站浏览';
 $lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
+$lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
+$lang->site->setCDN        = "CDN设置";
 $lang->site->setLang       = "语言设置";
 $lang->site->setFilter     = "过滤设置";
 $lang->site->ipFilter      = "ip过滤";
@@ -144,6 +146,9 @@ $lang->site->mobileTemplateList['close'] = '禁用';
 
 $lang->site->scoreList['open']  = '启用';
 $lang->site->scoreList['close'] = '禁用';
+
+$lang->site->cdnList['open']  = '启用';
+$lang->site->cdnList['close'] = '关闭';
 
 $lang->site->filterFunctionList['open']  = '启用';
 $lang->site->filterFunctionList['close'] = '关闭';

@@ -67,6 +67,10 @@ $config->layout->default_blank   = 0;
 $config->layout->mobile_default  = 0;
 $config->layout->mobile_colorful = 0;
 
+$config->cdn = new stdclass();
+$config->cdn->open = 'close';
+$config->cdn->host = 'http://cdn.chanzhi.org/';
+
 $config->css = new stdclass();
 $config->js  = new stdclass();
 
