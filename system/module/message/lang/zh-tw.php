@@ -25,9 +25,8 @@ $lang->message->list              = '留言列表';
 $lang->message->post              = '發表留言';
 $lang->message->viewArticle       = '正文';
 $lang->message->viewComment       = '留言';
-$lang->message->thanks            = '感謝您的留言，通過審核之後才會顯示！';
 $lang->message->noSelectedMessage = '您沒有選擇任何留言。';
-$lang->message->needCheck         = '留言通過審核之後才會顯示。';
+$lang->message->needCheck         = '留言通過審核後顯示。';
 $lang->message->showDetail        = '顯示全部';
 $lang->message->hideDetail        = '收起';
 
@@ -69,8 +68,7 @@ $lang->comment->list         = '評論列表';
 $lang->comment->post         = '發表評論';
 $lang->comment->viewArticle  = '正文';
 $lang->comment->viewComment  = '評論';
-$lang->comment->thanks       = '感謝您的評論，通過審核之後才會顯示！';
-$lang->comment->needCheck    = '評論通過審核之後才會顯示。';
+$lang->comment->needCheck    = '評論通過審核後顯示。';
 $lang->comment->receiveEmail = '接收郵件提醒';
 
 $lang->comment->pass          = '通過';

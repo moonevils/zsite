@@ -8,7 +8,6 @@
  * @version     $Id: zh-tw.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.chanzhi.net
  */
-$lang->score->common      = '積分';
 $lang->score->back        = '返回';
 $lang->score->rankingList = '積分排行榜';
 

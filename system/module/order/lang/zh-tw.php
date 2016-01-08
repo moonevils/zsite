@@ -22,7 +22,7 @@ $lang->order->expressInfo    = '快遞詳情';
 $lang->order->receiver       = '收貨人';
 $lang->order->noRecord       = '無';
 $lang->order->status         = '狀態';
-$lang->order->note           = '備註';
+$lang->order->note           = '買家留言';
 
 $lang->order->admin          = '訂單管理';
 $lang->order->setting        = '系統設置';
@@ -48,6 +48,9 @@ $lang->order->days           = '天';
 $lang->order->deliveryInfo   = '查看詳情';
 $lang->order->backToCart     = '返回購物車修改';
 $lang->order->paid           = '我已付款';
+$lang->order->products       = '訂單產品';
+$lang->order->selectPayment  = '選擇支付方式';
+$lang->order->settlement     = '去結算';
 
 $lang->order->confirmLimit         = '確認收貨周期';
 $lang->order->confirmReceived      = '確認收貨';

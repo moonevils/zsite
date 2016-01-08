@@ -9,8 +9,12 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-
-$lang->visual->common  = "可視化編輯";
+$lang->visual->common      = "可視化編輯";
+$lang->visual->editLogo    = "編輯標誌";
+$lang->visual->editSlogan  = "編輯口號";
+$lang->visual->appendBlock = "插入區塊";
+$lang->visual->removeBlock = "移除區塊";
+$lang->visual->sortBlocks  = "區塊排序";
 
 $lang->visual->info               = "編輯模式";
 $lang->visual->preview            = "預覽";
@@ -66,7 +70,7 @@ $lang->visual->setting->carousel['groupActions']           = array();
 $lang->visual->setting->carousel['groupActions']['add']    = array('text' => '添加一張幻燈片');
 $lang->visual->setting->carousel['itemActions']            = array();
 $lang->visual->setting->carousel['itemActions']['edit']    = array('text' => '編輯', 'title' => '編輯幻燈片');
-$lang->visual->setting->carousel['itemActions']['delete']  = array('text' => '刪除', 'confirm' => '是否刪除此幻燈片？');
+$lang->visual->setting->carousel['itemActions']['delete']  = array('text' => '刪除這一張', 'confirm' => '是否刪除此幻燈片？');
 $lang->visual->setting->carousel['itemActions']['up']      = array('text' => '播放順序提前為 {0}');
 $lang->visual->setting->carousel['itemActions']['down']    = array('text' => '播放順序延後為 {0}');
 $lang->visual->setting->block                              = array('name' => "區塊", 'actions' => array());
