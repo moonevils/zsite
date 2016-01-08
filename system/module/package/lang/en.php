@@ -90,6 +90,11 @@ $lang->package->upgradeExt     = 'Upgrade';
 $lang->package->installExt     = 'Install';
 $lang->package->upgradeVersion = '(Upgrade from %s to %s)';
 
+$lang->package->types = new stdclass();
+$lang->package->types->theme     = 'Theme';
+$lang->package->types->extension = 'Extension';
+$lang->package->types->ext       = 'Extension';
+
 $lang->package->waring = 'Waring';
 
 $lang->package->errorOccurs                  = 'Error:';
