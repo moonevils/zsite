@@ -14,6 +14,7 @@ $lang->ui->common = "Site";
 $lang->ui->clientDesktop = 'Desktop';
 $lang->ui->clientMobile  = 'Mobile';
 $lang->ui->logo            = 'Logo';
+$lang->ui->favicon         = 'Favicon';
 $lang->ui->setLogo         = "Set Logo";
 $lang->ui->setTemplate     = 'Set Template';
 $lang->ui->manageTemplate  = 'Templates';
@@ -30,6 +31,7 @@ $lang->ui->productView     = "Product view";
 $lang->ui->QRCode          = "QR Code";
 $lang->ui->templateName    = "Template Name";
 $lang->ui->currentTheme    = 'Used template&theme';
+$lang->ui->internalTheme   = 'Internal Theme';
 $lang->ui->uploadTheme     = 'Upload Theme';
 $lang->ui->installTheme    = 'Install Theme';
 $lang->ui->importedBlocks  = 'Import Blocks';
@@ -37,7 +39,14 @@ $lang->ui->matchedBlock    = 'Matched Blocks';
 $lang->ui->createBlock     = 'Create Block';
 $lang->ui->useOldBlock     = 'Use Old Blocks';
 $lang->ui->themeStore      = 'Theme store';
+$lang->ui->help            = "Help";
+$lang->ui->deleteLogo      = "Delete Logo";
+$lang->ui->setCode         = "Code setting";
+$lang->ui->enableTheme     = "Use this theme";
+$lang->ui->industry        = "Industry";
 
+$lang->ui->noLogo                 = "Logo not uploaded";
+$lang->ui->noFavicon              = "Favicon not uploaded";
 $lang->ui->noStyleTag             = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->noJsTag                = "Please write base JS file code, No &lt;script&gt;&lt;/script&gt; tag.";
 $lang->ui->setLogoFailed          = "Set logo failed.";
@@ -70,9 +79,6 @@ $lang->ui->deleteThemeList['brightdark'] = 'Brightdark';
 $lang->ui->deleteThemeList['flat']       = 'Flat';
 $lang->ui->deleteThemeList['tree']       = 'Tree';
 $lang->ui->deleteThemeList['colorful']   = 'Colorful';
-
-$lang->ui->favicon = new stdclass();
-$lang->ui->favicon->help  = "Help";
 
 $lang->ui->template = new stdclass();
 $lang->ui->template->name            = 'Name';
@@ -110,6 +116,9 @@ $lang->ui->custom      = 'Custom';
 $lang->ui->themeSaved  = 'Theme settings saved.';
 $lang->ui->unWritable  = "Failed to save css file Please check %s is writable.";
 $lang->ui->codeHolder  = "Code must be a combination of number and letters.";
+
+$lang->ui->blocks2Merge  = "Blocks to merged";
+$lang->ui->blocks2Create = "blocks to created";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = 'Reset';

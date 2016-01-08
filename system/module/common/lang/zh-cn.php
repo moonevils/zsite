@@ -144,7 +144,6 @@ $lang->company->site      = '网址';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = '站点地图';
 
-
 /* The primary navbar */
 $lang->groups = new stdclass();
 $lang->groups->home     = array('title' => '首页', 'link' => 'admin|index|',               'icon' => 'home');
@@ -239,7 +238,6 @@ $lang->theme->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 
 $lang->theme->menu->custom  = '外观|ui|customtheme|';
 $lang->theme->menu->code    = '代码|ui|setcode|';
 $lang->theme->menu->source  = '素材|file|browsesource|';
-
 
 /* Menu of user module. */
 $lang->user = new stdclass();
