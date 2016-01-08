@@ -291,8 +291,16 @@ class uiModel extends model
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
 
-        $compiledCSS = $lessc->compile($css);
-        return empty($lessc->errors) ? $compiledCSS : $css;
+        try
+        {
+            $compiledCSS = $lessc->compile($css);
+        }
+        catch(Exception $error) 
+        {
+            return $css;
+        }
+
+        return $compiledCSS;
     }
 
     /**
