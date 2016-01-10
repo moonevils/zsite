@@ -424,8 +424,12 @@ class ui extends control
     public function fixTheme()
     {
         $packageInfo = $this->loadModel('package')->parsePackageCFG($this->post->package, 'theme');
+
         $this->package->mergeBlocks($packageInfo);
         $this->package->mergeCustom($packageInfo);
+        $this->package->fixLayout($packageInfo);
+        $this->package->fixLang();
+
         $setting = array();
         $setting[$this->device]['name']  = $packageInfo->template;
         $setting[$this->device]['theme'] = $packageInfo->code;
