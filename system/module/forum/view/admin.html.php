@@ -42,12 +42,8 @@
       <?php foreach($threads as $thread):?>
       <tr class='text-center'>
         <td><?php echo $thread->id;?></td>
-        <td class='text-left'>
-          <?php
-          $iconRoot = $themeRoot . 'default/images/forum/';
-          echo $thread->isNew ? "<span class='new-board'>&nbsp;</span>" : "<span class='common-board'>&nbsp;</span>";
-          echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank'");
-          ?>
+        <td class='title text-left'>
+          <?php echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank'"); ?>
         </td>
         <td><?php echo $thread->authorRealname;?></td>
         <td><?php echo substr($thread->addedDate, 5, -3);?></td>
