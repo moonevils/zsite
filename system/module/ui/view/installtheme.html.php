@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('browseLink', inlink('browse'));?>
 <?php if($blocksMerged and empty($error)):?>
-<form method='post' action= '<?php echo inlink('fixTheme');?>'>
+<form method='post' action= '<?php echo inlink('fixTheme');?>' id='ajaxForm'>
   <div class='panel matched-blocks'>
     <div class='panel-heading'>
       <strong><?php echo html::a('###', "{$lang->ui->blocks2Merge} <i class='icon icon-caret-down'> </i>");?></strong>
