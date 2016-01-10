@@ -87,7 +87,6 @@ class commonModel extends model
         $device = helper::getDevice();
         if(isset($this->config->template->desktop) and !is_object($this->config->template->desktop)) $this->config->template->desktop = json_decode($this->config->template->desktop);
         if(isset($this->config->template->mobile) and !is_object($this->config->template->mobile)) $this->config->template->mobile = json_decode($this->config->template->mobile);
-
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
     }
 
@@ -271,14 +270,16 @@ class commonModel extends model
      */
     public function isOpenMethod($module, $method)
     {
+        $module = strtolower($module);
+        $method = strtolower($method);
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey|yangconglogin|oauthbind|', $method)) return true;
         if($module == 'cart' and $method == 'printtopbar') return true;
         if($module == 'mail' and $method == 'sendmailcode') return true;
         if($module == 'guarder' and $method == 'validate') return true;
-        if($module == 'misc' and strtolower($method) == 'ajaxgetfingerprint') return true;
+        if($module == 'misc' and $method == 'ajaxgetfingerprint') return true;
         if($module == 'wechat' and $method == 'response') return true;
         if($module == 'yangcong') return true;
-        if(RUN_MODE == 'admin' and $module == 'misc' and $method == 'ping') return true;
+        if(RUN_MODE == 'admin' and $this->app->user->account != 'guest' and isset($this->config->rights->admin[$module][$method])) return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
@@ -353,26 +354,13 @@ class commonModel extends model
 
         foreach($menus as $menu)
         {
+            $extra = zget($config->menuExtra, $menu, '');
+            if(isset($config->menuDependence->$menu))
+            {
+                if(!commonModel::isAvailable($config->menuDependence->$menu)) continue;
+            }
             if(!isset($lang->menu->{$menu})) continue;
             $moduleMenu = $lang->menu->{$menu};
-            if($menu == 'feedback')
-            {
-                list($label, $module, $method, $vars) = explode('|', $moduleMenu);
-
-                if(!commonModel::isAvailable('message'))
-                {
-                    if(commonModel::isAvailable('forum'))
-                    {
-                        $moduleMenu = "$label|forum|admin|tab=feedback";
-                    }
-                    else
-                    {
-                        $dao = new dao();
-                        $publics = $dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll('id');
-                        if(!empty($publics)) $moduleMenu = "$label|wechat|message|mode=replied&replied=0";
-                    }
-                }
-            }
 
             $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
@@ -383,11 +371,12 @@ class commonModel extends model
             if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
+            if(!commonModel::isAvailable('contribution') && $vars == 'type=contribution') continue;
 
             if(commonModel::hasPriv($module, $method))
             {
                 $link  = helper::createLink($module, $method, $vars);
-                $string .= "<li$class><a href='$link'>$label</a></li>\n";
+                $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
             }
         }
         
@@ -405,7 +394,7 @@ class commonModel extends model
      */
     public static function createModuleMenu($currentModule, $navClass = 'nav-left nav-primary nav-stacked', $chevron = true)
     {
-        global $lang, $app;
+        global $lang, $app, $config;
 
         if(!isset($lang->$currentModule->menu)) return false;
 
@@ -418,6 +407,7 @@ class commonModel extends model
         /* Cycling to print every menus of current module. */
         foreach($moduleMenus as $methodName => $methodMenu)
         {
+            $extra = zget($config->moduleMenu, "{$currentModule}_{$methodName}");
             if(is_array($methodMenu))
             {
                 $methodAlias = $methodMenu['alias'];
@@ -439,7 +429,7 @@ class commonModel extends model
                 $class = '';
                 if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
                 if($module == $currentModule && strpos(",$methodAlias,", ",$currentMethod,") !== false) $class = " class='active'";
-                $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
+                $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label, $extra) . "</li>\n";
             }
         }
 

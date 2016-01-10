@@ -7,8 +7,8 @@ js::set('path', $article->path);
 js::set('articleID', $article->id);
 js::set('categoryID', $category->id);
 js::set('categoryPath', explode(',', trim($category->path, ',')));
-css::internal($article->css);
-js::execute($article->js);
+if(isset($article->css)) css::internal($article->css);
+if(isset($article->js)) js::execute($article->js);
 ?>
 <?php $common->printPositionBar($category, $article);?>
 <div class='row blocks' data-region='article_view-topBanner'><?php $this->block->printRegion($layouts, 'article_view', 'topBanner', true);?></div>
@@ -86,5 +86,5 @@ js::execute($article->js);
   <div class='col-md-3 col-side'><side class='page-side blocks' data-region='article_view-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></side></div>
 </div>
 <div class='row blocks' data-region='article_view-bottomBanner'><?php $this->block->printRegion($layouts, 'article_view', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

@@ -37,5 +37,5 @@ js::execute($page->js);
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='page_view-bottomBanner'><?php $this->block->printRegion($layouts, 'page_view', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php if(strpos($page->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php';?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

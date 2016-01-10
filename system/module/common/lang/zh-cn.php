@@ -144,7 +144,6 @@ $lang->company->site      = '网址';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = '站点地图';
 
-
 /* The primary navbar */
 $lang->groups = new stdclass();
 $lang->groups->home     = array('title' => '首页', 'link' => 'admin|index|',               'icon' => 'home');
@@ -167,7 +166,7 @@ $lang->menu->page     = '单页|article|admin|type=page';
 $lang->menu->product      = '产品|product|admin|';
 $lang->menu->order        = '订单|order|admin|';
 $lang->menu->express      = '快递|tree|browse|type=express';
-$lang->menu->orderSetting = '设置|order|setting|';
+$lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
 $lang->menu->message      = '留言|message|admin|type=message';
@@ -240,7 +239,6 @@ $lang->theme->menu->custom  = '外观|ui|customtheme|';
 $lang->theme->menu->code    = '代码|ui|setcode|';
 $lang->theme->menu->source  = '素材|file|browsesource|';
 
-
 /* Menu of user module. */
 $lang->user = new stdclass();
 $lang->user->menu = new stdclass();
@@ -264,6 +262,7 @@ $lang->forum->menu->setting = '论坛设置|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
+$lang->site->menu->cdn      = 'CDN设置|site|setcdn|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';

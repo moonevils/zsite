@@ -45,6 +45,7 @@ class ui extends control
         $this->view->title           = $this->lang->ui->setTemplate;
         $this->view->template        = current($templates);
         $this->view->installedThemes = $this->ui->getInstalledThemes();
+        $this->view->currentTheme    = $this->config->template->{$this->device}->theme;
         $this->view->uiHeader        = true;
         $this->display();
     }
@@ -356,10 +357,7 @@ class ui extends control
         $package = $this->package->fixThemeCode($package, $installedThemes);
 
         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
-        if(!empty($packageInfo->customParams))
-        {
-            $this->package->saveCustomParams($package, $packageInfo->customParams);
-        }
+
         /* Save to database. */
         if(!$_POST) $this->package->savePackage($package, $type);
 
@@ -367,6 +365,7 @@ class ui extends control
         $this->view->files = $this->package->copyPackageFiles($package, $type);
 
         /* Execute the install.sql. */
+        $this->ui->clearTmpData();
         $return = $this->package->executeDB($package, 'install', 'theme');
         if($return->result != 'ok')
         {
@@ -375,13 +374,44 @@ class ui extends control
         }
 
         $this->package->fixSlides($package);
-        $this->view->blocksMerged   = false;
+
+        /* Fetch blocks data and show merge */
+        $importedBlocks  = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->andWhere('lang')->eq('lang')->fetchAll('originID');
+        $oldBlocks       = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('type');
+        $matchedBlocks   = array();
+        $unMatchedBlocks = array();
+
+        foreach($importedBlocks as $newBlock)
+        {
+            if(isset($oldBlocks[$newBlock->type]))
+            {
+                if(strpos(',html,htmlcode,php,', ",{$newBlock->type},") === false)
+                {
+                    $matchedBlocks[$newBlock->originID] = $oldBlocks[$newBlock->type]->id;
+                }
+                else
+                {
+                    $block = $this->dao->select('*')->from(TABLE_BLOCK)
+                        ->where('originID')->eq(0)
+                        ->andWhere('type')->eq($newBlock->type)
+                        ->andWhere('content')->eq($newBlock->content)
+                        ->fetch();
+                    if(!empty($block)) $matchedBlocks[$newBlock->originID] = $block->id;
+                }
+            }
+            else
+            {
+                $unMatchedBlocks[$newBlock->originID] = $newBlock;
+            }
+        }
 
         $this->app->loadLang('block');
-        $this->view->importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->fetchAll('originID');
-        $this->view->oldBlocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('id');
-        $this->view->blocksMerged   = true;
-        $this->view->package        = $package;
+        $this->view->matchedBlocks   = $matchedBlocks;
+        $this->view->unMatchedBlocks = $unMatchedBlocks;
+        $this->view->importedBlocks  = $importedBlocks;
+        $this->view->oldBlocks       = $oldBlocks;
+        $this->view->blocksMerged    = true;
+        $this->view->package         = $package;
         $this->display();
     }
 
@@ -440,9 +470,7 @@ class ui extends control
         $setting['theme'] = $template->theme;
         $setting = helper::jsonEncode($setting);
         $result = $this->loadModel('setting')->setItems('system.common.template', array($device => $setting));
-
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        $this->locate($this->server->http_referer);
     }
 
     /**
@@ -482,13 +510,13 @@ class ui extends control
         {
             $this->app->loadClass('pager', $static = true);
             $pager  = new pager($results->dbPager->recTotal, $results->dbPager->recPerPage, $results->dbPager->pageID);
-            $themes = $results->themes;
         }
 
+        $this->view->themes       = zget($results, 'themes');
         $this->view->title        = $this->lang->ui->themeStore;
         $this->view->position[]   = $this->lang->package->obtain;
+
         $this->view->industryTree = str_replace('/index.php', $this->server->script_name, $this->package->getIndustriesByAPI());
-        $this->view->themes       = $themes;
         $this->view->installeds   = $this->package->getLocalPackages('installed');
         $this->view->pager        = $pager;
         $this->view->tab          = 'obtain';
@@ -550,7 +578,7 @@ class ui extends control
         if($_POST)
         {
             $cssSetting["{$template}_{$theme}_{$page}"] = $this->post->css;
-            $jsSetting["{$template}_{$theme}_{$page}"] = $this->post->js;
+            $jsSetting["{$template}_{$theme}_{$page}"]  = $this->post->js;
             $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
             $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));

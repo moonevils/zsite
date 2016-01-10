@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->block->common          = '區塊維護';
+$lang->block->common          = '區塊佈局';
 $lang->block->id              = '編號';
 $lang->block->title           = '名稱';
 $lang->block->amount          = '數量';
@@ -54,6 +54,11 @@ $lang->block->style           = '樣式';
 $lang->block->sort            = '排序';
 $lang->block->class           = 'css類名';
 $lang->block->subRegion       = '子佈局';
+$lang->block->currentLayout   = '當前佈局：%s';
+$lang->block->renameLayout    = '方案重命名';
+$lang->block->planName        = '方案名稱';
+$lang->block->saveLayoutAs    = '複製佈局：%s';
+$lang->block->defaultPlan     = '預設方案';
 
 $lang->block->admin        = "區塊管理";
 $lang->block->pages        = "佈局設置";
@@ -67,6 +72,11 @@ $lang->block->edit         = '編輯區塊';
 $lang->block->view         = '查看區塊';
 $lang->block->setPage      = '配置頁面';
 $lang->block->setregion    = '配置佈局';
+$lang->block->switchPlan   = '切換佈局';
+$lang->block->cloneLayout  = '佈局另存為';
+$lang->block->switchLayout = '切換佈局';
+$lang->block->removeLayout = '刪除佈局方案';
+$lang->block->planIsUseing = '此方案正在使用，不能刪除';
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';

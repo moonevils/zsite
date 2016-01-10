@@ -249,3 +249,8 @@ $lang->user->forceYangcong        = '已开启强制洋葱登录，普通登录�
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';
 $lang->user->placeholder->verifyCode = '请输入验证邮件里面收到的验证码';
+
+$lang->user->navGroups = new stdclass();
+$lang->user->navGroups->user    = '个人信息';
+$lang->user->navGroups->order   = '订单信息';
+$lang->user->navGroups->message = '主题消息';

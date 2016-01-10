@@ -5,6 +5,7 @@
 <nav id='menu' style='padding-left:15px;'>
   <?php 
     $lang->ui->menu = $lang->theme->menu;
+    if(!isset($this->config->ui->themes[$currentTemplate][$currentTheme])) unset($lang->ui->menu->custom);
     $moduleMenu = commonModel::createModuleMenu($moduleName, '', false);
   ?>
   <?php if($moduleMenu) echo $moduleMenu;?>

@@ -11,7 +11,7 @@
  */
 $lang->package->common        = '插件管理';
 $lang->package->browse        = '浏览插件';
-$lang->package->install       = '安装插件';
+$lang->package->install       = '安装';
 $lang->package->installAuto   = '自动安装';
 $lang->package->installForce  = '强制安装';
 $lang->package->uninstall     = '卸载';
@@ -23,7 +23,7 @@ $lang->package->download      = '下载插件';
 $lang->package->downloadAB    = '下载';
 $lang->package->upload        = '本地安装';
 $lang->package->erase         = '清除';
-$lang->package->upgrade       = '升级插件';
+$lang->package->upgrade       = '升级';
 $lang->package->agreeLicense  = '我同意该授权';
 $lang->package->settemplate   = '设置模板';
 
@@ -90,6 +90,11 @@ $lang->package->upgradeExt     = '升级';
 $lang->package->installExt     = '安装';
 $lang->package->upgradeVersion = '（从%s升级到%s）';
 
+$lang->package->types = new stdclass();
+$lang->package->types->theme     = '主题';
+$lang->package->types->extension = '插件';
+$lang->package->types->ext       = '插件';
+
 $lang->package->waring = '警告';
 
 $lang->package->errorOccurs                  = '错误：';
@@ -111,3 +116,7 @@ $lang->package->errorConflicts               = '与插件“%s”冲突！';
 $lang->package->errorDepends                 = '以下依赖插件没有安装或版本不正确：<br /><br /> %s';
 $lang->package->errorIncompatible            = '该插件与您的蝉知版本不兼容';
 $lang->package->errorUninstallDepends        = '插件“%s”依赖该插件，不能卸载';
+
+/* Add theme items.*/
+$lang->theme = new stdclass();
+$lang->theme->common = '主题市场';

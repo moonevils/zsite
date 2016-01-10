@@ -1,5 +1,5 @@
 <?php
-$config->ui->systemThemes = array('default.default', 'default.tartan', 'default.wide', 'default.blank');
+$config->ui->systemThemes = array('default.default', 'default.tartan', 'default.wide', 'default.clean', 'default.blank', 'mobile.default', 'mobile.colorful', 'mobile.blank');
 
 $config->ui->themeSnapRoot = 'http://www.chanzhi.org/data/upload/';
 

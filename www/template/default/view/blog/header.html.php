@@ -79,7 +79,14 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
   }
   else
   {
-      js::import($jsRoot . 'all.js');
+      if($this->config->cdn->open == 'open') 
+      {
+          js::import($this->config->cdn->host . $this->config->version . '/js/all.js');
+      } 
+      else
+      {
+          js::import($jsRoot . 'all.js');
+      }
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);

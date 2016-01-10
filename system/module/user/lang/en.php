@@ -249,3 +249,8 @@ $lang->user->forceYangcong        = 'Yangcong has been open, please confirm your
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your website login password';
 $lang->user->placeholder->verifyCode = 'Please enter the code you received.';
+
+$lang->user->navGroups = new stdclass();
+$lang->user->navGroups->user    = 'User profile';
+$lang->user->navGroups->order   = 'Order Info';
+$lang->user->navGroups->message = 'My messages';

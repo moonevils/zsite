@@ -11,53 +11,50 @@
  */
 
 /* Module order. */
-$lang->moduleOrder[0]   = 'admin';
+$lang->moduelGroups = new stdclass();
 
-$lang->moduleOrder[5]   = 'article';
+$lang->moduelGroups->content = array();
+$lang->moduelGroups->content[] = 'article';
+$lang->moduelGroups->content[] = 'book';
+$lang->moduelGroups->content[] = 'file';
 
-$lang->moduleOrder[10]  = 'product';
+$lang->moduelGroups->shop = array();
+$lang->moduelGroups->shop[] = 'product';
+$lang->moduelGroups->shop[] = 'order';
 
-$lang->moduleOrder[15]  = 'book';
+$lang->moduelGroups->user = array();
+$lang->moduelGroups->user[] = 'user';
+$lang->moduelGroups->user[] = 'message';
+$lang->moduelGroups->user[] = 'forum';
+$lang->moduelGroups->user[] = 'thread';
+$lang->moduelGroups->user[] = 'reply';
+$lang->moduelGroups->user[] = 'wechat';
 
-$lang->moduleOrder[20]  = 'forum';
-$lang->moduleOrder[25]  = 'reply';
-$lang->moduleOrder[30]  = 'thread';
+$lang->moduelGroups->promote = array();
+$lang->moduelGroups->promote[] = 'stat';
+$lang->moduelGroups->promote[] = 'tag';
+$lang->moduelGroups->promote[] = 'links';
 
-$lang->moduleOrder[35]  = 'site';
-$lang->moduleOrder[40]  = 'nav';
-$lang->moduleOrder[45]  = 'tag';
-$lang->moduleOrder[50]  = 'links';
-$lang->moduleOrder[55]  = 'mail';
-$lang->moduleOrder[60]  = 'wechat';
-$lang->moduleOrder[65]  = 'group';
+$lang->moduelGroups->design = array();
+$lang->moduelGroups->design[] = 'ui';
+$lang->moduelGroups->design[] = 'block';
+$lang->moduelGroups->design[] = 'slide';
+$lang->moduelGroups->design[] = 'nav';
+$lang->moduelGroups->design[] = 'visual';
 
-$lang->moduleOrder[70]  = 'ui';
-$lang->moduleOrder[75]  = 'slide';
-$lang->moduleOrder[80]  = 'block';
+$lang->moduelGroups->open = array();
+$lang->moduelGroups->open[] = 'package';
+$lang->moduelGroups->open[] = 'theme';
 
-$lang->moduleOrder[85]  = 'company';
-
-$lang->moduleOrder[90]  = 'user';
-
-$lang->moduleOrder[95]  = 'message';
-
-$lang->moduleOrder[100] = 'package';
-
-$lang->moduleOrder[105] = 'tree';
-$lang->moduleOrder[110] = 'file';
-
-$lang->moduleOrder[115] = 'search';
-
-$lang->moduleOrder[120] = 'order';
-$lang->moduleOrder[125] = 'stat';
-$lang->moduleOrder[130] = 'score';
+$lang->moduelGroups->setting = array();
+$lang->moduelGroups->setting[] = 'site';
+$lang->moduelGroups->setting[] = 'company';
+$lang->moduelGroups->setting[] = 'guarder';
+$lang->moduelGroups->setting[] = 'search';
+$lang->moduelGroups->setting[] = 'score';
+$lang->moduelGroups->setting[] = 'mail';
 
 $lang->resource = new stdclass();
-
-/* Admin module. */
-$lang->resource->admin = new stdclass();
-$lang->resource->admin->ignore        = 'ignore';
-$lang->resource->admin->ignoreupgrade = 'ignoreupgrade';
 
 /* Article module. */
 $lang->resource->article = new stdclass();
@@ -81,6 +78,10 @@ $lang->resource->block->setregion = 'setregion';
 $lang->resource->block->create    = 'create';
 $lang->resource->block->edit      = 'edit';
 $lang->resource->block->delete    = 'delete';
+$lang->resource->block->switchLayout = 'switchLayout';
+$lang->resource->block->cloneLayout  = 'cloneLayout';
+$lang->resource->block->removeLayout = 'removeLayout';
+$lang->resource->block->renameLayout = 'renameLayout';
 
 /* Book module. */
 $lang->resource->book = new stdclass();
@@ -96,6 +97,15 @@ $lang->resource->company = new stdclass();
 $lang->resource->company->setbasic   = 'setBasic';
 $lang->resource->company->setcontact = 'setContact';
 
+/* Guarder module. */
+$lang->resource->guarder = new stdclass();
+$lang->resource->guarder->setblacklist = 'setBlacklist';
+$lang->resource->guarder->setwhitelist = 'setWhitelist';
+$lang->resource->guarder->setcaptcha   = 'setCaptcha';
+$lang->resource->guarder->addblacklist = 'addBlacklist';
+$lang->resource->guarder->addcaptcha   = 'addCaptcha';
+$lang->resource->guarder->setFilter    = array('module' => 'site', 'method' => 'setFilter');
+
 /* File module. */
 $lang->resource->file = new stdclass();
 $lang->resource->file->browse       = 'browse';
@@ -106,10 +116,6 @@ $lang->resource->file->edit         = 'edit';
 $lang->resource->file->sort         = 'sort';
 $lang->resource->file->fileManager  = 'fileManager';
 $lang->resource->file->delete       = 'delete';
-$lang->resource->file->browseSource = 'sourceList';
-$lang->resource->file->sourceDelete = 'sourceDelete';
-$lang->resource->file->sourceEdit   = 'sourceEdit';
-$lang->resource->file->selectImage  = 'selectImage';
 
 /* Forum module. */
 $lang->resource->forum = new stdclass();
@@ -150,6 +156,15 @@ $lang->resource->message->delete = 'delete';
 $lang->resource->nav = new stdclass();
 $lang->resource->nav->admin  = 'common';
 
+/* Visual module. */
+$lang->resource->visual = new stdclass();
+$lang->resource->visual->index       = 'common';
+$lang->resource->visual->editlogo    = 'editLogo';
+$lang->resource->visual->editslogan  = 'editSlogan';
+$lang->resource->visual->removeBlock = 'removeBlock';
+$lang->resource->visual->appendBlock = 'appendBlock';
+$lang->resource->visual->sortBlocks  = 'sortBlocks';
+
 /* Package module. */
 $lang->resource->package = new stdclass();
 $lang->resource->package->browse     = 'browse';
@@ -162,6 +177,10 @@ $lang->resource->package->upload     = 'upload';
 $lang->resource->package->erase      = 'erase';
 $lang->resource->package->upgrade    = 'upgrade';
 $lang->resource->package->structure  = 'structure';
+
+/* Theme module. */
+$lang->resource->theme = new stdclass();
+$lang->resource->theme->setFilter    = array('module' => 'ui', 'method' => 'themeStore');
 
 /* Product module. */
 $lang->resource->product = new stdclass();
@@ -231,6 +250,11 @@ $lang->resource->ui->setLogo       = 'setLogo';
 $lang->resource->ui->deleteFavicon = 'deleteFavicon';
 $lang->resource->ui->deleteLogo    = 'deleteLogo';
 $lang->resource->ui->others        = 'others';
+$lang->resource->ui->setcode       = 'setCode';
+$lang->resource->ui->browseSource  = array('module' => 'file', 'method' => 'sourceList');
+$lang->resource->ui->sourceDelete  = array('module' => 'file', 'method' => 'sourceDelete');
+$lang->resource->ui->sourceEdit    = array('module' => 'file', 'method' => 'sourceEdit');
+$lang->resource->ui->selectImage   = array('module' => 'file', 'method' => 'selectImage');
 
 /* User module. */
 $lang->resource->user = new stdclass();
@@ -262,7 +286,6 @@ $lang->resource->order->admin    = 'admin';
 $lang->resource->order->delivery = 'delivery';
 $lang->resource->order->finish   = 'finish';
 $lang->resource->order->pay      = 'pay';
-$lang->resource->order->setting  = 'setting';
 
 /* Stat module. */
 $lang->resource->stat = new stdclass();

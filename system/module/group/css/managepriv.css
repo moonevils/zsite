@@ -1,4 +1,8 @@
 .form-condensed select.form-control {height:250px}
+form .nav-tabs > li.active > a{font-weight:bold;}
+form .nav-tabs > li > a{bold;color:blue;outline:none;}
 form .nav{border-bottom:1px #ddd solid;}
 form .nav > li {float:left}
 .group-item {display:block; width:200px; float:left; font-size: 14px}
+ 
+.panel > .panel {border-left:none; border-right:none;}

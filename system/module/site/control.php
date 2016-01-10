@@ -195,7 +195,7 @@ class site extends control
             if(count($location) > 3) $location = $locations[0] . ' ' . $locations[1] . ' ' . $locations[2];
         }
 
-        $this->view->title    = $this->lang->site->setBasic;
+        $this->view->title    = $this->lang->site->setSecurity;
         $this->view->location = $location;
         $this->display();
     }
@@ -343,6 +343,26 @@ class site extends control
         $this->display();
     }
    
+    /**
+     * set cdb configure.
+     * 
+     * @access public
+     * return void
+     */
+    public function setCDN()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+            $result  = $this->loadModel('setting')->setItems('system.common.cdn', $setting);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setCDN;
+        $this->display();
+    }
+  
     /**
      * set yangcong configure.
      * 

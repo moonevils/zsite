@@ -356,12 +356,12 @@ class threadModel extends model
         unset($newThread->authorRealname);
         unset($newThread->files);
 
-        $this->dao->insert(TABLE_THREAD)->data($newThread)->autoCheck()->exec();
+        $this->dao->insert(TABLE_THREAD)->data($newThread, 'scoreSum')->autoCheck()->exec();
         $newThreadID = $this->dao->lastInsertID();
 
         $oldThread->board = $oldBoard;
         $oldThread->link  = commonModel::createFrontLink('thread', 'view', "threadID=$newThreadID");
-        $this->dao->update(TABLE_THREAD)->data($oldThread)->where('id')->eq($threadID)->exec();
+        $this->dao->update(TABLE_THREAD)->data($oldThread, 'scoreSum')->where('id')->eq($threadID)->exec();
 
         if(dao::isError()) return false;
 
@@ -384,13 +384,6 @@ class threadModel extends model
         $this->dao->delete()->from(TABLE_REPLY)->where('thread')->eq($threadID)->exec();
         if(dao::isError()) return false;
 
-        if(RUN_MODE == 'admin')
-        {
-            /* Record delete number. */
-            $this->loadModel('guarder')->logOperation('ip', 'threadFail', $thread->ip);
-            $this->loadModel('guarder')->logOperation('account', 'threadFail', $thread->author);
-        }
-        
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
         if(commonModel::isAvailable('score')) $this->loadModel('score')->punish($thread->author, 'delThread', $this->config->score->counts->delThread, 'thread', $threadID);

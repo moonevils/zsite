@@ -59,8 +59,11 @@ $lang->site->score            = 'Score';
 $lang->site->setCounts        = 'Set score rule';
 $lang->site->front            = 'Visit website';
 $lang->site->closeScoreTip    = 'After disabling the integral function, CV will not be cummulative and remain unchanged.';
+$lang->site->cdnTip           = 'CDN source take place when debug is closed, Contains css, js, font files. not include uploaded files.';
+$lang->site->useCDN           = 'Enable CDN';
 
 $lang->site->setBasic      = "Baisc";
+$lang->site->setCDN        = "CDN Setting";
 $lang->site->setLang       = "Languages";
 $lang->site->setFilter     = "Filter Settings";
 $lang->site->ipFilter      = "ip Filter";
@@ -144,6 +147,9 @@ $lang->site->mobileTemplateList['close'] = 'Close';
 
 $lang->site->scoreList['open']  = 'Open';
 $lang->site->scoreList['close'] = 'Close';
+
+$lang->site->cdnList['open']  = 'open';
+$lang->site->cdnList['close'] = 'close';
 
 $lang->site->filterFunctionList['open']  = 'open';
 $lang->site->filterFunctionList['close'] = 'close';

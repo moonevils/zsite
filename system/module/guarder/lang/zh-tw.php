@@ -11,6 +11,7 @@
  */
 $lang->guarder = new stdclass();
 
+$lang->guarder->common       = '安全設置';
 $lang->guarder->action       = '操作';
 $lang->guarder->then         = '則';
 $lang->guarder->setBlacklist = '黑名單管理';
@@ -114,7 +115,7 @@ $lang->blacklist->type        = '類型';
 $lang->blacklist->title       = '標題';
 $lang->blacklist->identity    = '內容';
 $lang->blacklist->reason      = '原因';
-$lang->blacklist->expiredDate = '禁用時間';
+$lang->blacklist->expiredDate = '解禁時間';
 $lang->blacklist->ip          = 'IP';
 $lang->blacklist->keywords    = '關鍵詞';
 $lang->blacklist->account     = '賬戶';

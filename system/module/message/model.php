@@ -409,10 +409,6 @@ class messageModel extends model
             ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->andWhere('status')->ne('1')->fi()
             ->exec();
 
-        /* Record post number. */
-        $this->loadModel('guarder')->logOperation('ip', 'commentFail', $message->ip);
-        $this->loadModel('guarder')->logOperation('account', 'commentFail', $message->account);
-
         return !dao::isError();
     }
 

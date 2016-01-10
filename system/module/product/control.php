@@ -15,7 +15,7 @@ class product extends control
     public function __construct()
     {
         parent::__construct();
-        if(RUN_MODE == 'admin')
+        if(RUN_MODE == 'admin' and $this->app->getMethodName() != 'setting')
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
             $this->view->treeManageLink = html::a(helper::createLink('product', 'setting'), $this->lang->product->setting, "data-toggle='modal'");
@@ -336,10 +336,14 @@ class product extends control
      */
     public function setting()
     {
+        unset($this->lang->product->menu);
+        $this->lang->menuGroups->product = 'orderSetting';
+        if(commonModel::isAvailable('shop')) $this->app->loadLang('order');
         if($_POST)
         {
             $result = $this->product->saveSetting();
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(commonModel::isAvailable('shop'))   $this->send($this->loadModel('order')->saveSetting());
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 

@@ -83,6 +83,7 @@ $lang->user->deleteHistory   = '刪除用戶及歷史數據';
 $lang->user->question        = '密保問題';
 $lang->user->answer          = '答案';
 
+$lang->user->type         = '賬戶類型';
 $lang->user->profile      = '個人信息';
 $lang->user->editProfile  = '編輯信息';
 $lang->user->thread       = '我的主題';
@@ -136,6 +137,9 @@ $lang->user->operate             = '操作';
 $lang->user->adminList['super']  = '超級管理員';
 $lang->user->adminList['common'] = '管理員';
 $lang->user->adminList['no']     = '普通會員';
+
+$lang->user->accountTypeList['no']      = '前台賬號';
+$lang->user->accountTypeList['common']  = '後台賬號';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
@@ -245,3 +249,8 @@ $lang->user->forceYangcong        = '已開啟強制洋蔥登錄，普通登錄�
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';
 $lang->user->placeholder->verifyCode = '請輸入驗證郵件裡面收到的驗證碼';
+
+$lang->user->navGroups = new stdclass();
+$lang->user->navGroups->user    = '個人信息';
+$lang->user->navGroups->order   = '訂單信息';
+$lang->user->navGroups->message = '主題消息';

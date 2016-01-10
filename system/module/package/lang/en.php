@@ -90,6 +90,11 @@ $lang->package->upgradeExt     = 'Upgrade';
 $lang->package->installExt     = 'Install';
 $lang->package->upgradeVersion = '(Upgrade from %s to %s)';
 
+$lang->package->types = new stdclass();
+$lang->package->types->theme     = 'Theme';
+$lang->package->types->extension = 'Extension';
+$lang->package->types->ext       = 'Extension';
+
 $lang->package->waring = 'Waring';
 
 $lang->package->errorOccurs                  = 'Error:';
@@ -111,3 +116,7 @@ $lang->package->errorConflicts               = 'With plug-in "%s" Conflict!';
 $lang->package->errorDepends                 = 'The following dependency plugin is not installed or the version is incorrect:<br /><br /> %s';
 $lang->package->errorIncompatible            = 'The plug-in with your ZenTao incompatible version';
 $lang->package->errorUninstallDepends        = 'Plugin "%s" relying on the plug-in, can not uninstall';
+
+/* Add theme items.*/
+$lang->theme = new stdclass();
+$lang->theme->common = 'Theme Store';
