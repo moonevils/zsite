@@ -158,12 +158,6 @@ class order extends control
                 $this->locate($this->order->createPayLink($order));
             }
         }
-
-        $this->view->order       = $order;
-        $this->view->title       = $this->lang->order->return;
-        $this->view->subtitle    = "<span class='text-danger'>$order->account : $order->amount</span>";
-        $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
-        $this->display();
     }
 
     /**
