@@ -1157,7 +1157,7 @@ class packageModel extends model
         }
 
         /* Replace old blockID in layout data with selected old blockID. */
-        $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('plan')->eq('plan')->fetchAll();
+        $layouts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('plan')->eq('plan')->fetchAll();
         foreach($layouts as $layout)
         {
             $blocks = json_decode($layout->blocks);
@@ -1181,9 +1181,7 @@ class packageModel extends model
             $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         }
 
-        $this->fixLayout($packageInfo);
-
-        $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
+        $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->andWhere('originID')->gt(0)->exec();
         $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
 
         /* Fix blockID selector in css and js. */
@@ -1191,11 +1189,10 @@ class packageModel extends model
         foreach($blockOptions as $originID => $blockID)
         {
             $this->dao->setAutoLang(false)->update(TABLE_CONFIG)
-                ->set('lang')->eq($this->app->getClientLang())
                 ->set("value= replace(value, '#{$originID}', '#{$blockID}')")
                 ->where('lang')->eq('lang')->exec();
         }
-        
+
         return true;
     }
 
@@ -1238,6 +1235,33 @@ class packageModel extends model
     }
 
     /**
+     * Fix lang field of data imported.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixLang()
+    {
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_CONFIG)->where('`key`')->eq('custom')->andWhere('lang')->eq('lang')->exec();
+        
+        /* Copy config data to all languages.*/
+        $configs = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('lang')->eq('lang')->fetchAll();
+        foreach($this->config->langs as $lang)
+        {
+            foreach($configs as $config)
+            {
+                unset($config->id);
+                $config->lang = $lang;
+                $this->dao->replace(TABLE_CONFIG)->data($config)->exec();
+            }
+        }
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_CONFIG)->where('lang')->eq('lang')->exec();
+
+        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE);
+        foreach($tables as $table) $this->dao->setAutoLang(false)->update($table)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('lang')->exec();
+    }
+
+    /**
      * Fix layout data.
      * 
      * @param  object    $package 
@@ -1247,17 +1271,21 @@ class packageModel extends model
     public function fixLayout($package)
     {
         $plan = new stdclass();
-        $plan->name = $package->name;
-        $plan->type = 'layout_' . $package->template;
+        $plan->name  = $package->name;
+        $plan->type  = 'layout_' . $package->template;
         $plan->grade = 0;
+
         $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
         $planID = $this->dao->lastInsertID();
-        $this->dao->setAutoLang(false)
-            ->update(TABLE_LAYOUT)
+
+        $this->dao->setAutoLang(false)->update(TABLE_LAYOUT)
             ->set('plan')->eq($planID)
             ->set('lang')->eq($this->app->getClientLang())
-            ->where('lang')->eq('lang')
+            ->where('plan')->eq('plan')
             ->exec();
+
+        $this->loadModel('block')->setPlan($planID, $package->template, $package->code);
+        return true;
     }
 
     /**
@@ -1301,14 +1329,37 @@ class packageModel extends model
      */
     public function mergeCustom($info)
     {
-        $importedCustom = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->fetch('value');
-        $custom = json_decode($importedCustom, true);
+        $template = $info->template;
+        $theme    = $info->theme;
+        $code     = $info->code;
+        /* Merge theme custom param to current lang. */
+        $params = $this->dao->setAutoLang(false)->select('value')
+            ->from(TABLE_CONFIG)
+            ->where('lang')->eq('lang')
+            ->andWhere('`key`')->eq('custom')
+            ->fetch('value');
 
-        $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
-
-        if(isset($custom[$info->template][$info->theme])) $setting[$info->template][$info->code] = $custom[$info->template][$info->theme];
-        $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
-        $this->dao->delete()->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->exec();
+        $params = json_decode($params, true);
+        if(!empty($params[$template][$theme]))
+        {
+            $userCustom =  $this->dao->setAutoLang(false)->select('*')
+                ->from(TABLE_CONFIG)
+                ->where('lang')->ne('lang')
+                ->andWhere('section')->eq('template')
+                ->andWhere('`key`')->eq('custom')
+                ->fetchAll('lang');
+            
+            foreach($userCustom as $lang => $custom)
+            {
+                $setting = json_decode($custom->value, true);
+                if(!isset($setting[$template])) $setting[$template] = array();
+                $setting[$template][$code] = zget($params[$template], $theme, array());
+                $custom->value = helper::jsonEncode($setting);
+                $this->dao->replace(TABLE_CONFIG)->data($custom)->exec();
+            }
+        }
+        
+        return true;
     }
 
     /**

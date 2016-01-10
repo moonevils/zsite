@@ -827,9 +827,9 @@ class uiModel extends model
         $zdb->dump($encryptFile, $tables, $fields, 'data', $condations, true);
 
         /* Dump whole css and js data. */
-        $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or section in('css','js'))";
+        $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or (section in('css','js') and `key` like '{$template}_{$theme}%') )";
         $zdb->dump($dbFile, $tables, $fields, 'data', $condations, true);
-
+       
         $this->fixSqlFile($template, $theme, $encryptFile);
         $this->fixSqlFile($template, $theme, $dbFile);
         return true;
@@ -846,6 +846,7 @@ class uiModel extends model
     public function fixSqlFile($template, $theme, $file)
     {
         $sqls = file_get_contents($file);
+
         $sqls = str_replace(TABLE_BLOCK,    "eps_block",  $sqls);
         $sqls = str_replace(TABLE_LAYOUT,   "eps_layout", $sqls);
         $sqls = str_replace(TABLE_SLIDE,    "eps_slide",  $sqls);
@@ -858,7 +859,12 @@ class uiModel extends model
         $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("data\/source\/{$template}\/{$theme}\/", "data\/source\/{$template}\/THEME_CODEFIX\/", $sqls);
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
-        $sqls = str_replace("_{$template}_{$theme}_", "_{$template}_THEME_CODEFIX_", $sqls);
+        $sqls = str_replace("{$template}_{$theme}_", "{$template}_THEME_CODEFIX_", $sqls);
+
+        $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-cn' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
+        $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-tw' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
+        $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'en' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
+ 
         return file_put_contents($file, $sqls);
     }
 
