@@ -187,6 +187,7 @@ $lang->menu->logo     = 'Logo|ui|setlogo|';
 $lang->menu->nav      = 'Nav|nav|admin|';
 $lang->menu->block    = 'Block|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
+$lang->menu->others   = "Seeing|ui|others|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i> Visual design|visual|index|";
 
 $lang->menu->site     = 'site|site|setbasic|';
