@@ -2,20 +2,30 @@
 <div class='col-md-2'>
   <ul class='nav nav-primary nav-stacked user-control-nav'>
     <li class='nav-heading'><?php echo $lang->user->control->common;?></li>
-    <?php
-    ksort($lang->user->control->menus);
-    foreach($lang->user->control->menus as $menu)
+    <?php foreach($this->config->user->navGroups as $group => $items):?>
+    <li class='nav-parent'>
+    <?php echo html::a('###', $lang->user->navGroups->$group);?>
+    <ul class='nav'>
+    <?php $navs = explode(',', $items);?>
+    <?php foreach($navs as $nav)
     {
         $class = '';
+        $menu = zget($lang->user->control->menus, $nav);
         list($label, $module, $method) = explode('|', $menu);
-
-        if(in_array($method, array('thread', 'reply')) && !commonModel::isAvailable('forum')) continue;
-        if($method == 'message' && !commonModel::isAvailable('message')) continue;
-
+        if(!commonModel::isAvailable($module)) continue;
         if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= 'active';
 
         echo '<li class="' . $class . '">' . html::a($this->createLink($module, $method), $label) . '</li>';
     }
     ?>
   </ul>
+    </li>
+    <?php endforeach;?>
+  </ul>
 </div>
+<style>
+.nav-parent ul.nav{padding:0 20px;border:}
+.nav-primary.nav-stacked > li > a{background-color:#F8F8F8; border:none;}
+li.nav-parent {border: 1px solid #ddd;}
+.nav-primary.nav-stacked > li.nav-heading  {font-weight:bold;}
+</style>

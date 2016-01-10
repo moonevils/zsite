@@ -47,6 +47,7 @@ class block extends control
         $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
         $this->view->uiHeader = true;
+        $this->lang->block->menu = $this->lang->theme->menu;
         $this->display();       
     }
 
@@ -190,7 +191,7 @@ class block extends control
         $theme    = $this->config->template->{$this->device}->theme;
 
         $result = $this->block->setPlan($plan, $template, $theme);
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        if($result) $this->locate($this->server->http_referer);
     }
 
     /**
@@ -202,18 +203,27 @@ class block extends control
      */
     public function cloneLayout($plan)
     {
-        $plan = $this->loadModel('tree')->getByID($plan);
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+
+        if($plan)
+        {
+            $plan = $this->loadModel('tree')->getByID($plan);
+        }
+        else
+        {
+            $plan = new stdclass();
+            $plan->type = "layout_{$template}";
+        }
+
         if($_POST)
         {
             $newPlan = $this->block->cloneLayout($plan);
             if($newPlan) 
             {
-                $template = $this->config->template->{$this->device}->name;
-                $theme    = $this->config->template->{$this->device}->theme;
                 $result   = $this->block->setPlan($newPlan, $template, $theme);
                 $this->send(array('result' => 'success', 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
             }
-
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
@@ -236,7 +246,6 @@ class block extends control
         $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($plan)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
-
     }
 
     /**

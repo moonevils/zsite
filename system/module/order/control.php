@@ -33,14 +33,7 @@ class order extends control
         if($_POST) $product = $this->post->product;
         $this->view->products = $this->order->getPostedProducts($product, $count);
 
-        $paymentList = explode(',', $this->config->shop->payment);
-        foreach($paymentList as $payment)
-        {
-            $paymentOptions[$payment] = $this->lang->order->paymentList[$payment];
-        }
-
         $this->view->title          = $this->lang->order->confirm;
-        $this->view->paymentList    = $paymentOptions;
         $this->view->addresses      = $this->loadModel('address')->getListByAccount($this->app->user->account);
         $this->view->currencySymbol = $this->config->product->currencySymbol;
         $this->view->mobileURL      = $mobileURL;
@@ -65,12 +58,25 @@ class order extends control
         $order = $this->order->getByID($orderID);
 
         if(empty($order)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        if($order->payment != 'COD') 
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('check', "orderID=$orderID")));
+    }
+
+    public function check($orderID)
+    {
+        $order = $this->order->getByID($orderID);
+        $this->app->loadConfig('product');
+
+        $paymentList = explode(',', $this->config->shop->payment);
+        foreach($paymentList as $payment)
         {
-            $this->send(array('result' => 'success', 'payLink' => $this->order->createPayLink($order)));
+            $paymentOptions[$payment] = $this->lang->order->paymentList[$payment];
         }
 
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
+        $this->view->order          = $order;
+        $this->view->products       = $this->order->getOrderProducts($orderID);
+        $this->view->paymentList    = $paymentOptions;
+        $this->view->currencySymbol = $this->config->product->currencySymbol;
+        $this->display();
     }
  
     /**
@@ -138,16 +144,20 @@ class order extends control
  
         if($_POST)
         {
-            $result = $this->order->pay($orderID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-            $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-        }
+            $payment = $this->post->payment;
+            $result = $this->order->setPayment($orderID, $payment);
+            if(!$result) exit;
 
-        $this->view->order       = $order;
-        $this->view->title       = $this->lang->order->return;
-        $this->view->subtitle    = "<span class='text-danger'>$order->account : $order->amount</span>";
-        $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
-        $this->display();
+            if($payment == 'COD')
+            {
+                $this->locate(inlink('browse'));
+            }
+            else
+            {
+                $order->payment = $payment;
+                $this->locate($this->order->createPayLink($order));
+            }
+        }
     }
 
     /**
@@ -304,30 +314,6 @@ class order extends control
         $result = $this->order->finish($orderID);
         if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-    }
-
-    /**
-     * setting function.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setting()
-    {
-        if(!commonModel::isAvailable('shop'))
-        {
-            unset($this->lang->order->menu->express);
-            unset($this->lang->order->paymentList['COD']);
-        }
-
-        if($_POST)
-        {
-            $return = $this->order->saveSetting();
-            $this->send($return);
-        }
-
-        $this->lang->menuGroups->order = 'orderSetting';
-        $this->display();
     }
 
     /**

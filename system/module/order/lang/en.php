@@ -48,6 +48,9 @@ $lang->order->days           = 'Days';
 $lang->order->deliveryInfo   = 'Delivery Information';
 $lang->order->backToCart     = 'Back to Cart for Changing';
 $lang->order->paid           = 'I have paid';
+$lang->order->products       = 'Products';
+$lang->order->selectPayment  = 'Select payment';
+$lang->order->settlement     = 'To the settlement.';
 
 $lang->order->confirmLimit         = 'Confirm Delivery in';
 $lang->order->confirmReceived      = 'Confirm Received';

@@ -16,8 +16,8 @@ $path = !empty($category->pathNames) ? array_keys($category->pathNames) : array(
 js::set('path', $path);
 js::set('categoryID', $category->id);
 js::set('articleID', $article->id);
-css::internal($article->css);
-js::execute($article->js);
+if(isset($article->css)) css::internal($article->css);
+if(isset($article->js))  js::execute($article->js);
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php
@@ -93,5 +93,5 @@ $common->printPositionBar($category, $article, '', $root);
   </div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'blog/footer.html.php';?>

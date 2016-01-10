@@ -124,7 +124,7 @@ class package extends control
         $this->view->error       = '';
         $this->view->installType = $installType;
         $this->view->upgrade     = $upgrade;
-        $this->view->title       = $installTitle . $this->lang->colon . $package;
+        $this->view->title       = $installTitle . $this->lang->package->types->$type . $this->lang->colon . $package;
         $this->view->subtitle    = $this->lang->package->install;
 
         /* Get the package file name. */

@@ -848,6 +848,7 @@ class packageModel extends model
         foreach($sqls as $sql)
         {
             $sql = trim($sql);
+
             if(empty($sql)) continue;
             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
             try
@@ -1112,63 +1113,53 @@ class packageModel extends model
      */
     public function mergeBlocks($packageInfo)
     {
-        $importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
-        foreach($importedBlocks as $block)
-        {
-            $block->content = str_replace("#block{$block->originID} ", "#blocck{$block->id} ", $block->content);
-            $block->content = str_replace("#block{$block->originID}{", "#blocck{$block->id}{", $block->content);
-            $block->content = str_replace("#block{$block->originID},", "#blocck{$block->id},", $block->content);
-            $block->content = str_replace("#block{$block->originID}>", "#blocck{$block->id}>", $block->content);
-            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
-        }
+        $importedBlocks = $this->fixBlocks($packageInfo);
+        $blocks2Merge   = $this->post->blocks2Merge;
+        $blocks2Create  = $this->post->blocks2Create;
 
-        foreach($importedBlocks as $block)
-        {
-            $content = json_decode($block->content);
-            if(!is_object($content)) continue;
-            if(isset($content->category)) $content->category = 0;
-            if(isset($content->custom->{$packageInfo->theme}))
-            { 
-                $custom = $content->custom->{$packageInfo->theme};
-                $content->custom = new stdclass();
-                $content->custom->{$packageInfo->code} = $custom;
-            }
-            $block->content = json_encode($content);
-            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
-        }
-
-        $merged = array();
-        $blocks2Merge  = $this->post->blocks2Merge;
-        $blocks2Create = $this->post->blocks2Create;
-
-        $blockOptions = $this->dao->select('originID, id')->from(TABLE_BLOCK)->where('originID')->in($blocks2Create)->eq($packageInfo->template)->fetchPairs();
-
-        $blocks2Delete = array();
         $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
         $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
+
+        $blocks2Delete = array();
+        $blockOptions  = array();
+
+        /* Merge imported css and js to old block. */
         foreach($blocks2Merge as $originID => $blockID)
         {
+            $imported = zget($importedBlocks, $originID, '');
+            if(empty($imported)) continue;
+            
+            /* Use self id as default target to replace. */
+            $blockOptions[$originID] = $imported->id;
+
             if($blockID == 0) continue;
-            $old = zget($oldBlocks, $blockID);
-            if(!is_object($old->content)) $old->content = json_decode($old->content); 
+            if(!isset($oldBlocks[$blockID])) continue;
 
-            $new = zget($newBlocks, $blockID);
-            if(!is_object($new)) continue;
-            if(!is_object($new->content)) $new->content = json_decode($new->content); 
-            if(!isset($old->content)) $old->content = new stdclass();
-            if(!isset($old->content->custom)) $old->content->custom = new stdclass();
-            $old->content->custom->{$packageInfo->code} = zget($old->content->custom, $packageInfo->code);
+            $old = zget($oldBlocks, $blockID, '');
 
-            $old->content = json_encode($old->content);
-            $this->dao->replace(TABLE_BLOCK)->data($old)->exec();
             $blockOptions[$originID] = $blockID;
             $blocks2Delete[] = $originID;
+
+            if(!is_object($old->content)) $old->content = json_decode($old->content); 
+            if(!is_object($imported->content)) $imported->content = json_decode($imported->content); 
+
+            if(isset($imported->content->custom))
+            {
+                if(isset($imported->content->custom->{$packageInfo->code}))
+                {
+                    if(!is_object($old->content)) $old->content = new stdclass();
+                    if(!is_object($old->content->custom)) $old->content->custom = new stdclass();
+                    $old->content->custom->{$packageInfo->code} = zget($imported->content->custom, $packageInfo->code);
+                    $old->content = json_encode($old->content);
+                    $this->dao->replace(TABLE_BLOCK)->data($imported)->exec();
+                }
+            }
         }
 
-        $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('import')->eq('doing')->fetchAll();
+        /* Replace old blockID in layout data with selected old blockID. */
+        $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('plan')->eq('plan')->fetchAll();
         foreach($layouts as $layout)
         {
-            $layout->import = 'finished';
             $blocks = json_decode($layout->blocks);
 
             if(!empty($blocks))
@@ -1190,28 +1181,83 @@ class packageModel extends model
             $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         }
 
+        $this->fixLayout($packageInfo);
+
         $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
         $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
 
-        $custom = json_decode($this->config->template->custom);
-        $css = $custom->{$packageInfo->template}->{$packageInfo->code}->css;
-        $js  = $custom->{$packageInfo->template}->{$packageInfo->code}->js;
-
+        /* Fix blockID selector in css and js. */
+        krsort($blockOptions);
         foreach($blockOptions as $originID => $blockID)
         {
-            $css = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $css);
-            $css = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $css);
-            $css = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $css);
-
-            $js  = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $js);
-            $js  = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $js);
-            $js  = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $js);
+            $this->dao->setAutoLang(false)->update(TABLE_CONFIG)
+                ->set('lang')->eq($this->app->getClientLang())
+                ->set("value= replace(value, '#{$originID}', '#{$blockID}')")
+                ->where('lang')->eq('lang')->exec();
         }
+        
+        return true;
+    }
 
-        $custom->{$packageInfo->template}->{$packageInfo->code}->css = $css;
-        $custom->{$packageInfo->template}->{$packageInfo->code}->js  = $js;
-        $custom = json_encode($custom);
-        return $this->loadModel('setting')->setItems('system.common.template', array('custom' => $custom));
+    /**
+     * Fix blocks lang and theme codes.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixBlocks($packageInfo)
+    {
+        $importedBlocks = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->where('lang')->eq('lang')->fetchAll('originID');
+
+        /* Fix blockID in css and js. */
+        foreach($importedBlocks as $block)
+        {
+            $block->content = str_replace("#block{$block->originID} ", "#blocck{$block->id} ", $block->content);
+            $block->content = str_replace("#block{$block->originID}{", "#blocck{$block->id}{", $block->content);
+            $block->content = str_replace("#block{$block->originID},", "#blocck{$block->id},", $block->content);
+            $block->content = str_replace("#block{$block->originID}>", "#blocck{$block->id}>", $block->content);
+
+            $content = json_decode($block->content);
+            if(is_object($content))
+            {
+                if(isset($content->category)) $content->category = 0;
+                if(isset($content->custom->{$packageInfo->theme}))
+                { 
+                    $custom = $content->custom->{$packageInfo->theme};
+                    $content->custom = new stdclass();
+                    $content->custom->{$packageInfo->code} = $custom;
+                }
+
+                $block->content = json_encode($content);
+            }
+
+            $block->lang = $this->app->getClientLang();
+            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
+        }
+        return $importedBlocks;
+    }
+
+    /**
+     * Fix layout data.
+     * 
+     * @param  object    $package 
+     * @access public
+     * @return void
+     */
+    public function fixLayout($package)
+    {
+        $plan = new stdclass();
+        $plan->name = $package->name;
+        $plan->type = 'layout_' . $package->template;
+        $plan->grade = 0;
+        $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
+        $planID = $this->dao->lastInsertID();
+        $this->dao->setAutoLang(false)
+            ->update(TABLE_LAYOUT)
+            ->set('plan')->eq($planID)
+            ->set('lang')->eq($this->app->getClientLang())
+            ->where('lang')->eq('lang')
+            ->exec();
     }
 
     /**
@@ -1242,8 +1288,8 @@ class packageModel extends model
             $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("addedBy")->eq($this->app->user->account)->where('addedBy')->eq('IMPORTED')->exec();
         }
 
-        $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('imported')->exec();
-        $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->where('type')->eq('tmpSlide')->exec();
+        $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('lang')->exec();
+        $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->set('lang')->eq($this->app->getClientLang())->where('type')->eq('tmpSlide')->exec();
     }
 
     /**

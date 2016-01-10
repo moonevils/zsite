@@ -108,6 +108,9 @@ $lang->color       = '顏色';
 $lang->colorTip    = '十六進制顏色值';
 $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
+$lang->score = new stdclass();
+$lang->score->common = '積分';
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete    = '您確定要執行刪除操作嗎？';
@@ -141,38 +144,66 @@ $lang->company->site      = '網址';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = '站點地圖';
 
+/* The primary navbar */
+$lang->groups = new stdclass();
+$lang->groups->home     = array('title' => '首頁', 'link' => 'admin|index|',               'icon' => 'home');
+$lang->groups->content  = array('title' => '內容', 'link' => 'article|admin|type=article', 'icon' => 'edit');
+$lang->groups->shop     = array('title' => '商城', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
+$lang->groups->user     = array('title' => '會員', 'link' => 'user|admin|',                'icon' => 'group');
+$lang->groups->promote  = array('title' => '推廣', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
+$lang->groups->design   = array('title' => '設計', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
+$lang->groups->open     = array('title' => '平台', 'link' => 'package|browse|',            'icon' => 'cloud');
+$lang->groups->setting  = array('title' => '設置', 'link' => 'site|setbasic|',             'icon' => 'cog');
+
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin    = '首頁|admin|index|';
 $lang->menu->article  = '文章|article|admin|type=article';
 $lang->menu->blog     = '博客|article|admin|type=blog';
-$lang->menu->product  = '產品|product|admin|';
 $lang->menu->book     = '手冊|book|admin|';
 $lang->menu->page     = '單頁|article|admin|type=page';
-$lang->menu->forum    = '論壇|forum|admin|';
+
+$lang->menu->product      = '產品|product|admin|';
+$lang->menu->order        = '訂單|order|admin|';
+$lang->menu->express      = '快遞|tree|browse|type=express';
+$lang->menu->orderSetting = '設置|product|setting|';
+
+$lang->menu->user         = '會員|user|admin|';
+$lang->menu->message      = '留言|message|admin|type=message';
+$lang->menu->comment      = '評論|message|admin|type=comment';
+$lang->menu->reply        = '回覆|message|admin|type=reply';
+$lang->menu->forum        = '論壇|forum|admin|';
+$lang->menu->thread       = '主題|forum|admin|';
+$lang->menu->forumreply   = '回帖|reply|admin|';
+$lang->menu->contribution = '投稿|article|admin|type=contribution&tab=user';
+$lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
+
+$lang->menu->stat  = '統計|stat|traffic|';
+$lang->menu->tag   = '關鍵詞|tag|admin|';
+$lang->menu->links = '友情連結|links|admin|';
+
+$lang->menu->ui       = '界面|ui|settemplate|';
+$lang->menu->logo     = '標誌|ui|setlogo|';
+$lang->menu->nav      = '導航|nav|admin|';
+$lang->menu->block    = '區塊|block|admin|';
+$lang->menu->slide    = '幻燈片|slide|admin|';
+$lang->menu->visual   = "<i class='icon icon-magic'></i> 可視化編輯|visual|index|";
+
 $lang->menu->site     = '站點|site|setbasic|';
-$lang->menu->ui       = '界面|ui|customtheme|';
 $lang->menu->security = '安全|site|setsecurity|';
-$lang->menu->user     = '會員|user|admin|';
-$lang->menu->order    = '訂單|order|admin|';
-$lang->menu->feedback = '反饋|message|admin|';
-$lang->menu->stat     = '統計|stat|traffic|';
-$lang->menu->package  = '擴展|package|browse|';
+
+$lang->menu->package    = '擴展|package|browse|';
+$lang->menu->themestore = '主題市場|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-$lang->menuGroups->tag     = 'site';
 $lang->menuGroups->mail    = 'site';
-$lang->menuGroups->nav     = 'site';
-$lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
 $lang->menuGroups->group   = 'security';
-$lang->menuGroups->block   = 'ui';
-$lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
-$lang->menuGroups->message = 'feedback';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
+$lang->menuGroups->score   = 'site';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -189,6 +220,8 @@ $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => '單頁列表|article|admin|type=page', 'alias' => 'create, edit');
 
+$lang->express = new stdclass();
+
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -196,15 +229,15 @@ $lang->product->menu->browse = array('link' => '所有產品|product|admin|', 'a
 
 /* Menu of UI module. */
 $lang->ui = new stdclass();
-$lang->ui->menu = new stdclass();
-$lang->ui->menu->custom  = '自定義|ui|customtheme|';
-$lang->ui->menu->logo    = 'Logo|ui|setlogo|';
-$lang->ui->menu->favicon = '小表徵圖|ui|setfavicon|';
-$lang->ui->menu->slide   = '幻燈片|slide|admin|';
-$lang->ui->menu->block   = array('link' => '區塊|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->layout  = array('link' => '佈局|block|pages|', 'alias' => 'setregion');
-$lang->ui->menu->source  = '素材|file|browsesource|';
-$lang->ui->menu->others  = '其他|ui|others|';
+
+/* Menu of theme. */
+$lang->theme = new stdclass();
+$lang->theme->menu = new stdclass();
+$lang->theme->menu->theme   = '主題|ui|settemplate|';
+$lang->theme->menu->layout  = array('link' => '佈局|block|pages|', 'alias' => 'setregion');
+$lang->theme->menu->custom  = '外觀|ui|customtheme|';
+$lang->theme->menu->code    = '代碼|ui|setcode|';
+$lang->theme->menu->source  = '素材|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -214,19 +247,7 @@ $lang->user->menu->sina   = '微博會員|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信會員|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
 
-/* Menu of comment module. */
-$lang->feedback = new stdclass();
-$lang->feedback->menu = new stdclass();
-$lang->feedback->menu->message      = '留言|message|admin|type=message';
-$lang->feedback->menu->comment      = '評論|message|admin|type=comment';
-$lang->feedback->menu->answer       = '回覆|message|admin|type=reply';
-$lang->feedback->menu->thread       = '主題|forum|admin|tab=feedback';
-$lang->feedback->menu->reply        = '回帖|reply|admin|order=id_desc&tab=feedback';
-$lang->feedback->menu->contribution = '投稿|article|admin|type=contribution&tab=feedback';
-$lang->feedback->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
-
 $lang->message = new stdclass();
-$lang->message->menu = $lang->feedback->menu;
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
@@ -241,17 +262,14 @@ $lang->forum->menu->setting = '論壇設置|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站點設置|site|setbasic|';
+$lang->site->menu->cdn      = 'CDN設置|site|setcdn|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '聯繫方式|company|setcontact|';
-$lang->site->menu->nav      = '導航設置|nav|admin|';
-$lang->site->menu->link     = '友情連結|links|admin|';
 $lang->site->menu->oauth    = '開放登錄|site|setoauth|';
-$lang->site->menu->yangcong = '洋蔥登錄|site|setyangcong|';
 $lang->site->menu->mail     = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search   = '全文檢索|search|buildindex|';
-$lang->site->menu->tag      = '關鍵詞設置|tag|admin|';
-$lang->site->menu->setStat  = '流量統計設置|site|setStat|';
+$lang->site->menu->score    = '積分規則|score|setcounts|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -274,18 +292,9 @@ $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
 $lang->address = new stdclass();
 
-$lang->order->menu = new stdclass();
-$lang->order->menu->admin   = '訂單管理|order|admin|';
-$lang->order->menu->express = '快遞設置|tree|browse|type=express|';
-$lang->order->menu->setting = '系統設置|order|setting|';
-
 /* Menu of tree module. */
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
-
-/* Menu of tag module. */
-$lang->tag = new stdclass();
-$lang->tag->menu = $lang->site->menu;
 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
@@ -299,26 +308,10 @@ $lang->reply->menu = $lang->forum->menu;
 $lang->wechat = new stdclass();
 $lang->wechat->menu = $lang->site->menu;
 
-/* Menu of nav module. */
-$lang->nav = new stdclass();
-$lang->nav->menu = $lang->site->menu;
-
 /* Menu of search module. */
 $lang->search = new stdclass();
 $lang->search->menu   = $lang->site->menu;
 $lang->search->common = '搜索';
-
-/* Menu of slide module. */
-$lang->slide = new stdclass();
-$lang->slide->menu = $lang->ui->menu;
-
-/* Menu of block module. */
-$lang->block = new stdclass();
-$lang->block->menu = $lang->ui->menu;
-
-/* Menu of links module. */
-$lang->links = new stdclass();
-$lang->links->menu = $lang->site->menu;
 
 /* Menu of group module. */
 $lang->group = new stdclass();
@@ -337,6 +330,7 @@ $lang->stat->menu->keywords = '關鍵詞統計|stat|keywords|';
 $lang->stat->menu->domains  = array('link' => '來路域名|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
 $lang->stat->menu->client   = '終端統計|stat|client|type=browser';
 $lang->stat->menu->page     = '頁面訪問量排名|stat|page|';
+$lang->stat->menu->setStat  = '設置|stat|setting|';
 
 /* The error messages. */
 $lang->error = new stdclass();
@@ -353,6 +347,8 @@ $lang->error->in           = '<strong>%s</strong>必須為<strong>%s</strong>。
 $lang->error->int          = array('<strong>%s</strong>應當是數字。', '<strong>%s</strong>最小值為%s',  '<strong>%s</strong>應當介於<strong>%s-%s</strong>之間。');
 $lang->error->float        = '<strong>%s</strong>應當是數字，可以是小數。';
 $lang->error->email        = '<strong>%s</strong>應當為合法的EMAIL。';
+$lang->error->phone        = '<strong>%s</strong>應當為合法的電話號碼。';
+$lang->error->mobile       = '<strong>%s</strong>應當為合法的手機號碼。';
 $lang->error->URL          = '<strong>%s</strong>應當為合法的URL。';
 $lang->error->date         = '<strong>%s</strong>應當為合法的日期。';
 $lang->error->account      = '<strong>%s</strong>應當為字母和數字的組合，至少三位';

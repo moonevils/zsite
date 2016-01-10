@@ -12,8 +12,6 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version);?>
-<?php  $this->loadModel('upgrade')->fixLayoutPlans('default');
-         $this->loadModel('upgrade')->fixLayoutPlans('mobile'); ?>
 <div class='container' id='shortcutBox'>
 
   <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>

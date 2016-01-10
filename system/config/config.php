@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '5.0.1';           // The version number, don't change.
+$config->version     = '5.1';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -57,6 +57,22 @@ $config->template->customVersion  = '';
 $config->template->mobile = new stdclass();
 $config->template->mobile->name  = 'mobile';   // Supported themes.
 $config->template->mobile->theme = 'default';   // Supported themes.
+
+$config->layout = new stdclass();
+$config->layout->default_default = 0;
+$config->layout->default_tartan  = 0;
+$config->layout->default_wide    = 0;
+$config->layout->default_clean   = 0;
+$config->layout->default_blank   = 0;
+$config->layout->mobile_default  = 0;
+$config->layout->mobile_colorful = 0;
+
+$config->cdn = new stdclass();
+$config->cdn->open = 'close';
+$config->cdn->host = 'http://cdn.chanzhi.org/';
+
+$config->css = new stdclass();
+$config->js  = new stdclass();
 
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';

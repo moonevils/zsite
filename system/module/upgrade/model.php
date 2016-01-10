@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of upgrade module of chanzhiEPS.
@@ -133,6 +134,11 @@ class upgradeModel extends model
             case '4_6':
                 $this->execSQL($this->getUpgradeFile('4.6'));
             case '5_0';
+            case '5_0_1';
+                $this->execSQL($this->getUpgradeFile('5.0.1'));
+                $this->fixLayoutPlans('default');
+                $this->moveCodes('default');
+                $this->fixLayoutPlans('mobile');
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -187,6 +193,7 @@ class upgradeModel extends model
             case '4_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.2'));
             case '4_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.6'));
             case '5_0';
+            case '5_0_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.0.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1778,4 +1785,46 @@ class upgradeModel extends model
         }
     }
 
+    /**
+     * Move codes from custom to css and js.
+     * 
+     * @access public
+     * @return void
+     */
+    public function moveCodes()
+    {
+        $customData = $this->dao->setAutoLang('false')
+            ->select('*')->from(TABLE_CONFIG)
+            ->where('section')->eq('template')
+            ->andWhere('`key`')->eq('custom')
+            ->fetchAll('lang');
+
+        foreach($customData as $lang => $custom)
+        {
+            $settings = json_decode($custom->value, true);
+            foreach($settings as $template => $setting)
+            {
+                $data = $custom;
+                unset($data->id);
+                foreach($setting as $theme => $params)
+                {
+                    $data->key     = "{$template}_{$theme}_all"; 
+                    if(!empty($params['css']))
+                    {
+                       $data->section = 'css';
+                       $data->value   = $params['css'];
+                       $this->dao->insert(TABLE_CONFIG)->data($data)->exec();
+                    }
+
+                    if(!empty($params['js']))
+                    {
+                       $data->section = 'js';
+                       $data->value   = $params['js'];
+                       $this->dao->insert(TABLE_CONFIG)->data($data)->exec();
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }

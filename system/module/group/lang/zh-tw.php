@@ -10,6 +10,7 @@
  * @link        http://www.ranzhico.com
  */
 $lang->group->common             = '權限分組';
+$lang->group->allGroups          = '所有權限';
 $lang->group->browse             = '瀏覽分組';
 $lang->group->create             = '新增分組';
 $lang->group->edit               = '編輯分組';

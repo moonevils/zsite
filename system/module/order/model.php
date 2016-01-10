@@ -91,7 +91,7 @@ class orderModel extends model
         }
 
         $this->dao->insert(TABLE_ORDER)
-            ->data($order, 'createAddress,deliveryAddress,phone,contact,price,count,product')
+            ->data($order, 'createAddress,deliveryAddress,zipcode,phone,contact,price,count,product')
             ->autocheck()
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();
@@ -247,7 +247,7 @@ class orderModel extends model
         $orderID = 0;
         if($mode == 'return')
         {
-            if($alipay->checkNotify($_GET) and ($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS'))
+            if($alipay->checkNotify($_GET) and ($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS' or $this->get->trade_status == 'WAIT_SELLER_SEND_GOODS'))
             {
                 $orderID = $this->get->out_trade_no;
                 $sn      = $this->get->trade_no;
@@ -255,7 +255,7 @@ class orderModel extends model
         }
         elseif($mode == 'notify')
         {
-            if($alipay->checkNotify($_POST) and ($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS'))
+            if($alipay->checkNotify($_POST) and ($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS' or $this->get->trade_status == 'WAIT_SELLER_SEND_GOODS'))
             {
                 $orderID = $this->post->out_trade_no;
                 $sn      = $this->post->trade_no;
@@ -672,7 +672,36 @@ class orderModel extends model
             ->orderBy('`createdDate` desc')
             ->limit(5)
             ->fetchAll();
-        
+
         return $orders;
+    }
+
+    /**
+     * Get products of order.
+     *
+     * @param  int    $orderID
+     * @access public
+     * @return array
+     */
+    public function getOrderProducts($orderID)
+    {
+        return $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)
+            ->where('orderID')->eq($orderID)
+            ->fetchAll();
+    }
+
+    /**
+     * Set order payment.
+     *
+     * @param  int    $orderID
+     * @param  int    $payment
+     * @access public
+     * @return void
+     */
+    public function setPayment($orderID, $payment)
+    {
+        $this->dao->update(TABLE_ORDER)->set('payment')->eq($payment)->where('id')->eq($orderID)->exec();
+        if(dao::isError()) return false;
+        return true;
     }
 }

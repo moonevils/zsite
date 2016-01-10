@@ -1,39 +1,38 @@
-.panel.panel-templates {box-shadow: none; border: none; padding-left: 10px; padding-right: 10px;}
+#mainPanel .panel-heading {padding: 4px 5px 0 5px}
+#mainPanel .nav-tabs {margin-bottom: -1px}
+#mainPanel .nav-tabs > li > a {padding: 5px 10px 8px}
+#mainPanel .nav-tabs > li > a.active, #mainPanel .nav-tabs > li > a.focus {outline: none;}
+#mainPanel .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
 
-.tab-pane > .editor-wrapper, .tab-pane > .table-form {margin-top: 10px;}
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {color: #333; font-weight: bold;}
+#internalSection {padding: 0;}
 
-.w-222px {width: 222px}
+.themes .col-theme {float: left;}
+.themes .theme {width: 200px; float: left; cursor: pointer; margin-right: 10px; margin-bottom: 10px; margin-left: 5px; border: 1px solid #ccc; border-radius: 2px; min-width: 200px; position: relative; opacity: 0.9; overflow: hidden;}
+.themes .theme-name {padding: 5px 30px 4px; background-color: #f1f1f1;}
+.themes .theme > .actions {position: absolute; bottom: 2px; right: 2px}
+.themes .theme > .actions > a:hover {background-color: #ddd}
+.themes .theme-img {height: 170px; overflow: hidden; opacity: 0.9}
+.themes .theme:hover .theme-img {opacity: 1;}
+.theme > .btn-custom {position: absolute; display: none; opacity: 0; width: 90px; left: 20px; top: 23px; z-index: 10; color: #fff!important}
+.themes .theme.current > .btn-custom {opacity: 1; display: block;}
+.themes .theme > .icon {position: absolute; right: 0; top: 0; display: none; z-index: 10}
+.themes .theme.current > .actions {display: none}
+.themes .theme.current > .icon {position: absolute; right: 0; top: 0; display: block; color: #fff; background: none; width: 0; height: 0; border: 20px solid #229F24; border-left-color: transparent; border-bottom-color: transparent;}
+.themes .theme.current > .icon:before {position: absolute; right: -15px; top: -15px}
+.themes .theme:hover {border-color: #145ccd; -moz-box-shadow:0px 0px 6px #145ccd; -webkit-box-shadow:0px 0px 6px #145ccd; box-shadow:0px 0px 6px #145ccd;}
+.themes .theme.current {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
 
-.cards {padding: 0; margin: 0;}
-.col-card {margin: 0;}
-.card {position: relative; margin-bottom: 20px; overflow: visible; min-height: 302px; padding-right: 350px;}
-.cards > .col-card:last-child .card {margin-bottom: 0;}
-.teamplate-choosed {display: none}
-.card.current .teamplate-choosed {display: block; position: absolute; font-size: 28px; color: #fff; background: #229F24; width: 50px; height: 50px; right: 0; top: 0; text-align: center; padding-left: 10px; line-height: 35px; border-bottom-left-radius: 50px; z-index: 99}
-.card .card-actions {position: absolute; right: 350px; top: 5px; padding: 10px 20px}
-.template-img {width: 350px; position: absolute; right: 0; top: 0; bottom: 0; box-shadow: -1px 0 5px rgba(0,0,0,0.14); background: #f1f1f1; overflow: hidden;}
-.themes-tip {display: inline-block; border-radius: 16px; background: #ddd; padding: 6px 12px; position: relative;}
-.current-theme-tip {display: none}
-.card.current .current-theme-tip {display: inline;}
-.themes-list {padding: 6px; border-top: 1px dashed #ddd}
-.theme {width: 130px; float: left; cursor: pointer; margin: 6px 10px}
-.panel-templates .theme-name {padding: 5px 8px; background-color: #f1f1f1;}
-.theme-card {overflow: visible; border: 1px solid #aaa; border-radius: 4px; border-radius: 4px; opacity: 0.8; position: relative;}
-.theme-card > .icon {position: absolute; right: 0; top: 0; display: none; z-index: 10}
-.theme-img {height: 65px; overflow: hidden; opacity: 0.8}
-.theme:hover .theme-img {opacity: 1;}
-.theme-actions {position: absolute; bottom: 4px; right: 3px;}
-.theme-actions > .btn-link {color: #666}
-.theme-actions .dropdown-menu {min-width: 100px}
-.theme.current .theme-actions {display: none;}
-.card-template.current .theme.current > .theme-name {color: #47A447}
-.card-template.current .theme.current .theme-card > .icon {position: absolute; right: 0; top: 0; display: block; color: #fff; background: none; width: 0; height: 0; border: 20px solid #229F24; border-left-color: transparent; border-bottom-color: transparent;}
-.card-template.current .theme.current .theme-card > .icon:before {position: absolute; right: -15px; top: -15px}
-.card-template.current .theme.current .theme-img {border-color: #47A447; opacity: 1}
-.theme:hover .theme-card {border-color: #145ccd; -moz-box-shadow:0px 0px 6px #145ccd; -webkit-box-shadow:0px 0px 6px #145ccd; box-shadow:0px 0px 6px #145ccd;}
-.card-template.current .theme.current .theme-card {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
-.theme-card:hover > .btn-delete {display: block;}
-.theme-card:hover {opacity: 1}
-.theme.current .theme-card:hover > .btn-delete {display: none;}
-.theme.current .theme-card > .btn-custom {opacity: 1; display: block;}
+#industryBox {padding: 5px 10px!important; background-color: transparent; margin: -15px -15px 15px}
+#industryBox > .tree > li {display: inline-block; padding-bottom: 0; margin-right: 10px;}
+#industryBox > .tree > li:before {display: none}
+#industryBox > .tree > li > a {display: inline-block; background-color: transparent; border-radius: 11px; padding: 1px 10px; border: 1px solid transparent}
+#industryBox > .tree > li > a:hover {border-color: #ddd;}
+#industryBox > .tree > li.active > a {border-color: #3280FC; color: #3280fc}
+
+#mainArea {position: relative; border: none; box-shadow: none; margin-bottom: 0;}
+#mainArea .cards {padding-top: 0;}
+#mainArea .themes .theme-name {padding: 5px;}
+#mainArea .themes .theme-img > .theme-info {position: absolute; color: #fff; background-color: #888; position: absolute; border-radius: 12px; line-height: 20px; text-align: center; padding: 2px 10px; right: 8px; top: 8px; font-weight: 200; opacity: 0.9}
+#mainArea .themes .theme:hover .theme-img > .theme-info {opacity: 1}
+#mainArea .themes .theme-name .dropdown {position: absolute; right: 5px; bottom: 5px;}
+#mainArea .pager {margin: 0 5px 0 0}

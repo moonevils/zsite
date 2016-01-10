@@ -44,9 +44,11 @@ js::set('admin', $this->get->admin);
           <th><?php echo $lang->user->score;?></th>
           <th><?php echo $lang->user->rank;?></th>
           <?php endif;?>
+          <?php if(!$this->get->admin):?>
           <th><?php echo $lang->user->gender;?></th>
           <th class='text-left'><?php echo $lang->user->company;?></th>
           <th><?php echo $lang->user->join;?></th>
+          <?php endif;?>
           <th><?php echo $lang->user->visits;?></th>
           <th><?php echo $lang->user->last;?></th>
           <th><?php echo $lang->user->ip;?></th>
@@ -68,9 +70,11 @@ js::set('admin', $this->get->admin);
         <td><?php echo $user->score;?></td>
         <td><?php echo $user->rank;?></td>
         <?php endif;?>
+        <?php if(!$this->get->admin):?>
         <td><?php $gender = $user->gender; echo zget($lang->user->genderList, $gender);?></td>
         <td><?php echo $user->company;?></td>
         <td><?php echo substr($user->join, 0, 10);?></td>
+        <?php endif;?>
         <td><?php echo $user->visits;?></td>
         <td><?php echo $user->last;?></td>
         <td><?php echo $user->ip;?></td>

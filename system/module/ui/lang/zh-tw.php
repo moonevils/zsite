@@ -14,9 +14,11 @@ $lang->ui->common = "界面";
 $lang->ui->clientDesktop   = '桌面';
 $lang->ui->clientMobile    = '移動';
 $lang->ui->logo            = 'Logo';
-$lang->ui->setLogo         = "Logo設置";
+$lang->ui->favicon         = '小表徵圖';
+$lang->ui->setLogo         = "標誌設置";
 $lang->ui->setTemplate     = '模板設置';
 $lang->ui->manageTemplate  = '模板管理';
+$lang->ui->manageTheme     = '主題管理';
 $lang->ui->installTemplate = '導入模板';
 $lang->ui->exportTheme     = '導出主題';
 $lang->ui->setTheme        = '主題設置';
@@ -28,7 +30,8 @@ $lang->ui->others          = "其他設置";
 $lang->ui->productView     = "產品點擊量";
 $lang->ui->QRCode          = "移動二維碼";
 $lang->ui->templateName    = "模板";
-$lang->ui->currentTheme    = '當前模板主題';
+$lang->ui->currentTheme    = '當前主題';
+$lang->ui->internalTheme   = '內置主題';
 $lang->ui->uploadTheme     = '導入主題';
 $lang->ui->installTheme    = '導入主題';
 $lang->ui->importedBlocks  = '導入區塊';
@@ -36,7 +39,14 @@ $lang->ui->matchedBlock    = '對應區塊';
 $lang->ui->createBlock     = '導入新區塊';
 $lang->ui->useOldBlock     = '使用已有區塊';
 $lang->ui->themeStore      = '主題市場';
+$lang->ui->help            = "幫助";
+$lang->ui->deleteLogo      = "刪除Logo";
+$lang->ui->setCode         = "代碼設置";
+$lang->ui->enableTheme     = "使用此主題";
+$lang->ui->industry        = "行業";
 
+$lang->ui->noLogo                 = "未上傳Logo";
+$lang->ui->noFavicon              = "未上傳小表徵圖";
 $lang->ui->noStyleTag             = "請填寫全局CSS樣式代碼，不需要&lt;style&gt;&lt;/style&gt;標籤";
 $lang->ui->noJsTag                = "請填寫全局JS代碼，不需要&lt;script&gt;&lt;/script&gt;標籤";
 $lang->ui->setLogoFailed          = "設置Logo失敗";
@@ -52,8 +62,8 @@ $lang->ui->packagePathUnwriteable = '上傳目錄：%s 不可寫';
 $lang->ui->selectSourceImage      = '從素材庫選擇';
 
 $lang->ui->deviceList = new stdclass();
-$lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i>桌面";
-$lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i>移動";
+$lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
+$lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i> 移動";
 
 $lang->ui->productViewList[1] = '顯示'; 
 $lang->ui->productViewList[0] = '不顯示'; 
@@ -69,9 +79,6 @@ $lang->ui->deleteThemeList['brightdark'] = '蟬憩';
 $lang->ui->deleteThemeList['flat']       = '清泉';
 $lang->ui->deleteThemeList['tree']       = '蟬之樹';
 $lang->ui->deleteThemeList['colorful']   = '繽紛';
-
-$lang->ui->favicon = new stdclass();
-$lang->ui->favicon->help  = "幫助";
 
 $lang->ui->template = new stdclass();
 $lang->ui->template->name            = '名稱';
@@ -109,6 +116,9 @@ $lang->ui->custom      = '自定義';
 $lang->ui->themeSaved  = '主題配置已保存';
 $lang->ui->unWritable  = "不能生成樣式檔案，請檢查 %s目錄的權限";
 $lang->ui->codeHolder  = "字母加數字組合成的主題代號";
+
+$lang->ui->blocks2Merge  = "可合併區塊";
+$lang->ui->blocks2Create = "新創建區塊";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置為預設';

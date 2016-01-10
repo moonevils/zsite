@@ -9,8 +9,12 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-
-$lang->visual->common  = "Visual edit mode";
+$lang->visual->common      = "Visual edit mode";
+$lang->visual->editLogo    = "Edit logo";
+$lang->visual->editSlogan  = "Edit Slogan";
+$lang->visual->appendBlock = "Append block";
+$lang->visual->removeBlock = "Remove Block";
+$lang->visual->sortBlocks  = "Sort Blocks";
 
 $lang->visual->info               = "Edit mode";
 $lang->visual->preview            = "Preview";

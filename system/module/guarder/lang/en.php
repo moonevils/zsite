@@ -11,6 +11,7 @@
  */
 $lang->guarder = new stdclass();
 
+$lang->guarder->common       = 'Security setting';
 $lang->guarder->action       = 'Action';
 $lang->guarder->then         = 'Then';
 $lang->guarder->setBlacklist = 'Blacklist';

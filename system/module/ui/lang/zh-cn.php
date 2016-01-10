@@ -31,6 +31,7 @@ $lang->ui->productView     = "产品点击量";
 $lang->ui->QRCode          = "移动二维码";
 $lang->ui->templateName    = "模板";
 $lang->ui->currentTheme    = '当前主题';
+$lang->ui->internalTheme   = '内置主题';
 $lang->ui->uploadTheme     = '导入主题';
 $lang->ui->installTheme    = '导入主题';
 $lang->ui->importedBlocks  = '导入区块';
@@ -41,6 +42,8 @@ $lang->ui->themeStore      = '主题市场';
 $lang->ui->help            = "帮助";
 $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->setCode         = "代码设置";
+$lang->ui->enableTheme     = "使用此主题";
+$lang->ui->industry        = "行业";
 
 $lang->ui->noLogo                 = "未上传Logo";
 $lang->ui->noFavicon              = "未上传小图标";
@@ -113,6 +116,9 @@ $lang->ui->custom      = '自定义';
 $lang->ui->themeSaved  = '主题配置已保存';
 $lang->ui->unWritable  = "不能生成样式文件，请检查 %s目录的权限";
 $lang->ui->codeHolder  = "字母加数字组合成的主题代号";
+
+$lang->ui->blocks2Merge  = "可合并区块";
+$lang->ui->blocks2Create = "新创建区块";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置为默认';
