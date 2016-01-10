@@ -94,8 +94,8 @@ class user extends control
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "user={$this->post->account}")));
         }
-        $this->view->title = $this->lang->user->create;
-        $this->view->groups   = $this->loadModel('group')->getPairs();
+        $this->view->title  = $this->lang->user->create;
+        $this->view->groups = $this->loadModel('group')->getPairs();
         $this->display();
     }
 
