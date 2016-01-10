@@ -21,11 +21,12 @@
     <?php 
     $currentRelease = $theme->currentRelease;
     $latestRelease  = isset($theme->latestRelease) ? $theme->latestRelease : '';
+    foreach($theme->images as $image) $images .= $this->config->ui->themeSnapRoot . $image . ', ';
     ?>
     <div class="col-theme">
       <div class="card theme">
         <div class='media-wrapper theme-img'>
-          <?php if(isset($theme->image)):?><?php echo html::a('javascript:;', html::image($this->config->ui->themeSnapRoot . $theme->image), "title='{$theme->name}' data-images='http://www.chanzhi.org/data/upload/201512/m_441f9cfde1e0f3fd95528d27848a399d.png, http://www.chanzhi.org/data/upload/201512/m_6d7f3b1d5fd3faa0b415fa8ddec63d10.png' data-width='600' class='preview-theme'");?><?php endif;?>
+          <?php if(!empty($theme->images)):?><?php echo html::a('javascript:;', html::image($this->config->ui->themeSnapRoot . $theme->images[0]), "title='{$theme->name}' data-images='{$images}' data-width='600' class='preview-theme'");?><?php endif;?>
           <div class='theme-info'>
             <span><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
             <span><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
