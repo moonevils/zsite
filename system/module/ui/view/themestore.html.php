@@ -36,7 +36,7 @@
             <?php echo html::a('javascript:;', $theme->name . "($currentRelease->releaseVersion)", "data-toggle='modal' data-target='#{$theme->code}Modal'");?>
           </strong>
           <div class="dropdown dropup">
-            <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='caret'></span></button>
+            <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='icon icon-cog'></span></button>
             <ul class="dropdown-menu pull-right">
               <li><?php echo html::a($theme->viewLink, $lang->package->view, 'target="_blank"');?></li>
               <?php
@@ -139,7 +139,6 @@
                 ?>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
