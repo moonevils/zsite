@@ -212,9 +212,11 @@ class orderModel extends model
      */
     public function createAlipayLink($order, $type = '')
     {
-        $this->app->loadClass('alipay', true);
+        if($type == 'shop') $type = 'order';
 
+        $this->app->loadClass('alipay', true);
         $alipayConfig = $order->payment == 'alipay' ? $this->config->alipay->direct : $this->config->alipay->secured;
+
         /* Create right link that module is not order in order-browse page, such as score. */
         $notifyURL = empty($type) ? inlink('processorder', "type=alipay&mode=notify") : helper::createLink($type, 'processorder', "type=alipay&mode=notify");
         $returnURL = empty($type) ? inlink('processorder', "type=alipay&mode=return") : helper::createLink($type, 'processorder', "type=alipay&mode=return");
