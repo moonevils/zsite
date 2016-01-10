@@ -582,8 +582,9 @@ class control
     private function parseDefault($moduleName, $methodName)
     {
         /* Set the view file. */
-        $viewFile = $this->setViewFile($moduleName, $methodName);
-        if(is_array($viewFile)) extract($viewFile);
+        $results  = $this->setViewFile($moduleName, $methodName);
+        $viewFile = $results;
+        if(is_array($results)) extract($results);
 
         /* Get css and js. */
         $css = $this->getCSS($moduleName, $methodName);
