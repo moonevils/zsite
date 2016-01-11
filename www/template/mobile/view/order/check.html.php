@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class='panel-footer'>
-      <?php echo html::submitButton($lang->order->balance, 'btn-order-submit btn danger block'); ?>
+      <?php echo html::submitButton($lang->order->settlement, 'btn-order-submit btn danger block'); ?>
     </div>
   </form>
 </div>
