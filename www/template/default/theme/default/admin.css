@@ -54,6 +54,7 @@ ol {padding-left: 20px;}
 .icon-paint-brush:before {content: '\f1fc'}
 .icon-volume-up:before {content: '\e625'}
 .icon-thumbs-o-up:before {content: '\e67d'}
+.icon-mobile:before {content: '\e6e7'}
 
 /* --- LAYOUT SETTING --- */
 /* containers. */
