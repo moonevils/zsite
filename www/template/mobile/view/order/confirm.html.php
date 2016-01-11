@@ -26,12 +26,7 @@
       <div class='alert bg-gray-pale'><strong><?php echo $lang->order->address;?></strong></div>
       <div id='addressListWrapper' class='form-group'><i class='icon icon-spin icon-spinner-indicator'></i></div>
       <button type='button' class='btn default btn-link' data-toggle='modal' data-remote='<?php echo helper::createLink('address', 'create'); ?>'><i class='icon icon-plus'></i> <?php echo $lang->address->create?></button>
-    </div>
-    <div class="panel-body">
-      <div class='alert bg-gray-pale'><strong><?php echo $lang->order->payment;?></strong></div>
-      <div class="form-group">
-        <?php echo html::radio('payment', $paymentList);?>
-      </div>
+      <?php echo html::hidden("createAddress", '');?>
     </div>
     <div class='panel-body'>
       <div class='alert bg-gray-pale'><strong><?php echo $lang->order->productInfo;?> (<?php echo count($products) ?>)</strong></div>
@@ -142,6 +137,15 @@ $(function()
     {
         $('#addressListWrapper').load('<?php echo helper::createLink('address', 'browse') ?> #addressList', function()
         {
+            if($('#addressList').find('.card').size() == 0)
+            {
+                $('#createAddress').val(1);
+                $('[name=address]').prop('checked', false);
+            }
+            else
+            {
+                $('#createAddress').val(0);
+            }
             $('#addressList').find('.card-footer').remove();
         });
     };
@@ -152,15 +156,7 @@ $(function()
     $confirmOrderForm.ajaxform({onResultSuccess: function(response)
     {
         $.messager.success('<?php echo $lang->order->createdSuccess?>');
-        if(response.locate && $('[name=payment][value=alipay]').prop('checked'))
-        {
-            window.open(response.locate, '_blank');
-        }
-        setTimeout(function()
-        {
-            window.location.href = '<?php echo helper::createLink('order', 'browse'); ?>';
-        }, 600);
-        response.locate = false;
+        window.location.href = response.locate ? response.locate : '<?php echo helper::createLink('order', 'browse'); ?>';
     }});
 });
 </script>
