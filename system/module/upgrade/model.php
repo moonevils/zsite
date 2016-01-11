@@ -1,4 +1,5 @@
 <?php if(!defined("RUN_MODE")) die();?>
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of upgrade module of chanzhiEPS.
@@ -136,9 +137,8 @@ class upgradeModel extends model
             case '5_0';
             case '5_0_1';
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
-                $this->fixLayoutPlans('default');
+                $this->fixLayoutPlans();
                 $this->moveCodes('default');
-                $this->fixLayoutPlans('mobile');
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1760,28 +1760,56 @@ class upgradeModel extends model
     /**
      * Fix layout plans.
      * 
-     * @param  int    $template 
      * @access public
      * @return void
      */
-    public function fixLayoutPlans($template)
+    public function fixLayoutPlans()
     {
-        $themes = $this->loadModel('ui')->getThemesByTemplate('default');
-        
-        $plans = $this->loadModel('tree')->getPairs(0, 'layout_' . $template);
-        $plans = array_flip($plans); 
+        $themes = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)->fetchGroup('lang');
+        $plans  = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CATEGORY)->where('type')->like('layout_%')->fetchPairs('name', 'id');
 
-        foreach($themes as $code => $theme)
+        $this->app->loadClass('Spyc', true);
+        $docPath = $this->app->getTplRoot() . '%s'. DS . 'doc' . DS . '%s.yaml';
+
+        foreach($themes as $lang => $themeList)
         {
-            if(isset($plans[$theme])) continue;
-            $plan = new stdclass();   
-            $plan->type = 'layout_' . $template;
-            $plan->name = $theme;
-            $plan->grade = 0;
-            $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
-            $planID = $this->dao->lastInsertID();
-            $this->dao->update(TABLE_LAYOUT)->set('plan')->eq($planID)->where('plan')->eq($code)->exec();
-            $this->loadModel('block')->setPlan($planID, $template, $code);
+            $themeConfig = array();
+            foreach($themeList as $theme)
+            {
+                $template = $theme->template;
+                $theme    = $theme->plan;
+
+                if(isset($themeConfig[$template][$theme]))
+                {
+                    $config = $themeConfig[$template][$theme];
+                }
+                else
+                {
+                    $docFile = sprintf($docPath, $template, $lang);
+                    $config  = Spyc::YAMLLoadString(file_get_contents($docFile));
+                    $themeConfig[$template][$theme] = $config;
+                }
+
+                if(isset($config['themes'][$theme])) 
+                {
+                    $plan = new stdclass();   
+                    $plan->type  = 'layout_' . $template;
+                    $plan->name  = $config['themes'][$theme];
+                    $plan->grade = 0;
+                    $plan->lang  = $lang;
+
+                    if(!isset($plans[$plan->name]) and !in_array($plan->name, $tradedPlans))
+                    {
+                        $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
+                        $planID = $this->dao->lastInsertID();
+                        $this->dao->update(TABLE_LAYOUT)->set('plan')->eq($planID)->where('plan')->eq($theme)->andWhere('lang')->eq($lang)->exec();
+                        $tradedPlans[] = $plan->name;
+                        $setting["{$template}_{$theme}"] = $planID;
+
+                        $this->loadModel('setting')->setItems('system.common.layout', $setting, $lang);
+                    }
+                }
+            }
         }
     }
 
