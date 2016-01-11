@@ -47,8 +47,11 @@ $themeRoot = $webRoot . "template/default/theme/";
           css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css');
           js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js');
       }
-      css::import($themeRoot . 'default/all.admin.css');
-      js::import($jsRoot     . 'all.admin.js');
+      else
+      {
+          css::import($themeRoot . 'default/all.admin.css');
+          js::import($jsRoot     . 'all.admin.js');
+      }
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);
