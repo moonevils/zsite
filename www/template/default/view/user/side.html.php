@@ -10,7 +10,8 @@
     <?php foreach($navs as $nav)
     {
         $class = '';
-        $menu = zget($lang->user->control->menus, $nav);
+        $menu = zget($lang->user->control->menus, $nav, '');
+        if(empty($menu)) continue;
         list($label, $module, $method) = explode('|', $menu);
         if(!commonModel::isAvailable($module)) continue;
         if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= 'active';
