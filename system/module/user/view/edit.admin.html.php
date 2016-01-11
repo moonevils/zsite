@@ -68,7 +68,7 @@ include '../../guarder/view/validate.html.php';
         </tr>  
         <tr>
           <th><?php echo $lang->user->address;?></th>
-          <td colspan="2"><?php echo html::input('address', $user->address, "class='form-control'");?></td>
+          <td><?php echo html::input('address', $user->address, "class='form-control'");?></td>
         </tr>  
         <tr>
           <th><?php echo $lang->user->zipcode;?></th>

@@ -18,11 +18,8 @@
       <table class='table table-form'>
         <tr>
           <th class='w-130px'><?php echo $lang->site->useCDN;?></th>
-          <td><?php echo html::radio('open', $lang->site->cdnList, zget($this->config->cdn, 'open'));?> </td>  
-        </tr>
-        <tr>
-          <td></td>
           <td>
+            <?php echo html::radio('open', $lang->site->cdnList, $this->config->cdn->open, "class='checkbox'");?> &nbsp;
             <?php echo html::submitButton();?>
             <span class='text-important'><?php echo $lang->site->cdnTip?></span>
           </td>
