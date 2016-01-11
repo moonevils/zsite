@@ -229,7 +229,7 @@ class orderModel extends model
         
         $alipay = new alipay($alipayConfig);
 
-        $subject = sprintf($this->lang->order->payInfo, $this->config->site->name, date('Y-m-d'));
+        $subject = $this->getSubject($order->id);
 
         return $alipay->createPayLink($this->getHumanOrder($order->id),  $subject, $order->amount);
     }
@@ -706,4 +706,20 @@ class orderModel extends model
         if(dao::isError()) return false;
         return true;
     }
+
+    /**
+     * Get the subject of order.
+     *
+     * @param  int    $orderID
+     * @access public
+     * @return void
+     */
+    public function getSubject($orderID)
+    {
+        $products = $this->dao->select('id,productName')->from(TABLE_ORDER_PRODUCT)->where('orderID')->eq($orderID)->fetchPairs();
+        if(count($products) == 1) return current($products);
+
+        return sprintf($this->lang->order->payInfo, $this->config->site->name, date('Y-m-d'));
+    }
+
 }
