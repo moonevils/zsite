@@ -71,8 +71,6 @@
     </div>
   </div>
   <?php endforeach;?>
-</div>
-<div class='row'>
   <div class='col-sm-6 panel-box'>
     <div class='panel'>
       <div class='panel-heading'>
