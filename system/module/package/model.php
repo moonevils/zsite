@@ -1182,16 +1182,22 @@ class packageModel extends model
         }
 
         $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->andWhere('originID')->gt(0)->exec();
-        $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
 
         /* Fix blockID selector in css and js. */
         krsort($blockOptions);
         foreach($blockOptions as $originID => $blockID)
         {
+            $this->dao->setAutoLang(false)->update(TABLE_BLOCK)
+                ->set("content = replace(content, '#{$originID}', '#{$blockID}')")
+                ->where('originID')->eq('0')
+                ->exec();
+
             $this->dao->setAutoLang(false)->update(TABLE_CONFIG)
-                ->set("value= replace(value, '#{$originID}', '#{$blockID}')")
+                ->set("value = replace(value, '#{$originID}', '#{$blockID}')")
                 ->where('lang')->eq('lang')->exec();
         }
+
+        $this->dao->setAutoLang(false)->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
 
         return true;
     }
