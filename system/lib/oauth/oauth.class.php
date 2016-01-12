@@ -65,7 +65,7 @@ class OAuth
     {
         $className = $provider;
         $classFile = dirname(__FILE__) . DS . $provider . '.class.php';
-        if(!is_file($classFile)) return trigger_error("thie class file for {$this->provider} OAuth not found");
+        if(!is_file($classFile)) return trigger_error("thie class file for {$provider} OAuth not found");
 
         include $classFile;
 
