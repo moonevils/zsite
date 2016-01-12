@@ -337,6 +337,7 @@ class commonModel extends model
 
         $currentModule = zget($lang->menuGroups, $currentModule);
 
+        $group = 'home';
         /* Set current module. */
         $currentGroup = $app->cookie->currentGroup;
         if($currentGroup and isset($config->menus->{$currentGroup})) 
