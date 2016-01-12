@@ -190,6 +190,20 @@ class messageModel extends model
     }
 
     /**
+     * Get reply of message. 
+     * 
+     * @param  int    $messageID 
+     * @access public
+     * @return bool | object 
+     */
+    public function getReply($messageID)
+    {
+        return $this->dao->select('*')->from(TABLE_MESSAGE)->where('objectID')->eq($messageID)
+            ->andWhere('objectType')->in('message,reply,comment')
+            ->fetch();
+    }
+
+    /**
      * Get object of a message.
      *
      * @param  object  $message
