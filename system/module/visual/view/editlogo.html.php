@@ -9,7 +9,7 @@
       <th>
         <?php echo $lang->ui->logo;?>
       </th>
-      <td><?php echo html::file('files', "class='form-control'");?></td>
+      <td><?php echo html::file('logo', "class='form-control'");?></td>
       <td><?php echo html::select('theme', $lang->ui->logoList, '', "class='form-control'");?></td>
     </tr>
     <tr>
