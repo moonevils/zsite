@@ -578,11 +578,11 @@ class ui extends control
     {
         $theme    = $this->config->template->{$this->device}->theme;
         $template = $this->config->template->{$this->device}->name;
-
         if($_POST)
         {
-            $cssSetting["{$template}_{$theme}_{$page}"] = $this->post->css;
-            $jsSetting["{$template}_{$theme}_{$page}"]  = $this->post->js;
+            $post = fixer::input('post')->stripTags('css,js', $this->config->allowedTags->admin)->get();
+            $cssSetting["{$template}_{$theme}_{$page}"] = $post->css;
+            $jsSetting["{$template}_{$theme}_{$page}"]  = $post->js;
             $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
             $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
