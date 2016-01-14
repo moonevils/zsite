@@ -18,8 +18,7 @@ class product extends control
         if(RUN_MODE == 'admin' and $this->app->getMethodName() != 'setting')
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
-            $this->view->treeManageLink = html::a(helper::createLink('product', 'setting'), $this->lang->product->setting, "data-toggle='modal'");
-            $this->view->treeManageLink .=   '&nbsp;&nbsp;' . html::a(helper::createLink('tree', 'browse', "type=product"), $this->lang->tree->manage);
+            $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type=product"), $this->lang->tree->manage);
         }
     }
 
