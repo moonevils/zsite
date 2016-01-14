@@ -1113,15 +1113,34 @@ class packageModel extends model
      */
     public function mergeBlocks($packageInfo)
     {
-        $importedBlocks = $this->fixBlocks($packageInfo);
-        $blocks2Merge   = $this->post->blocks2Merge;
-        $blocks2Create  = $this->post->blocks2Create;
+        $importedBlocks = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->where('lang')->eq('lang')->fetchAll('originID');
 
+        /* Fix category and theme code. */
+        foreach($importedBlocks as $block)
+        {
+            $content = json_decode($block->content);
+            if(is_object($content))
+            {
+                if(isset($content->category)) $content->category = 0;
+                if(isset($content->custom->{$packageInfo->theme}))
+                { 
+                    $custom = $content->custom->{$packageInfo->theme};
+                    $content->custom = new stdclass();
+                    $content->custom->{$packageInfo->code} = $custom;
+                }
+
+                $block->content = json_encode($content);
+            }
+
+            $this->dao->setAutoLang(false)->replace(TABLE_BLOCK)->data($block)->exec();
+        }
+ 
+        $blocks2Merge  = $this->post->blocks2Merge;
+        $blocks2Create = $this->post->blocks2Create;
         $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
-        $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
 
-        $blocks2Delete = array();
-        $blockOptions  = array();
+        $blocks2Delete  = array();
+        $blockRelations = array();
 
         /* Merge imported css and js to old block. */
         foreach($blocks2Merge as $originID => $blockID)
@@ -1130,15 +1149,15 @@ class packageModel extends model
             if(empty($imported)) continue;
             
             /* Use self id as default target to replace. */
-            $blockOptions[$originID] = $imported->id;
+            $blockRelations[$originID] = $imported->id;
 
             if($blockID == 0) continue;
             if(!isset($oldBlocks[$blockID])) continue;
 
             $old = zget($oldBlocks, $blockID, '');
-
-            $blockOptions[$originID] = $blockID;
-            $blocks2Delete[] = $originID;
+            
+            $blockRelations[$originID] = $blockID;
+            $blocks2Delete[] = $imported->id;
 
             if(!is_object($old->content)) $old->content = json_decode($old->content); 
             if(!is_object($imported->content)) $imported->content = json_decode($imported->content); 
@@ -1148,10 +1167,10 @@ class packageModel extends model
                 if(isset($imported->content->custom->{$packageInfo->code}))
                 {
                     if(!is_object($old->content)) $old->content = new stdclass();
-                    if(!is_object($old->content->custom)) $old->content->custom = new stdclass();
-                    $old->content->custom->{$packageInfo->code} = zget($imported->content->custom, $packageInfo->code);
+                    if(!isset($old->content->custom) or !is_object($old->content->custom)) $old->content->custom = new stdclass();
+                    $old->content->custom->{$packageInfo->code} = zget($imported->content->custom, $packageInfo->theme);
                     $old->content = json_encode($old->content);
-                    $this->dao->replace(TABLE_BLOCK)->data($imported)->exec();
+                    $this->dao->setAutoLang(false)->replace(TABLE_BLOCK)->data($imported)->exec();
                 }
             }
         }
@@ -1168,76 +1187,37 @@ class packageModel extends model
                 {
                     if(!empty($block->children))
                     {
-                        foreach($block->children as $child) $child->id =  zget($blockOptions, $child->id);
+                        foreach($block->children as $child) $child->id =  zget($blockRelations, $child->id);
                     }
                     else
                     {
-                        $block->id = zget($blockOptions, $block->id);
+                        $block->id = zget($blockRelations, $block->id);
                     }
                 }
             }
 
             $layout->blocks = json_encode($blocks);
-            $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+            $this->dao->setAutoLang(false)->replace(TABLE_LAYOUT)->data($layout)->exec();
         }
-
-        $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->andWhere('originID')->gt(0)->exec();
+        if(!empty($blocks2Delete)) $this->dao->setAutoLang(false)->delete()->from(TABLE_BLOCK)->where('id')->in($blocks2Delete)->exec();
 
         /* Fix blockID selector in css and js. */
-        krsort($blockOptions);
-        foreach($blockOptions as $originID => $blockID)
+        krsort($blockRelations);
+        foreach($blockRelations as $originID => $blockID)
         {
             $this->dao->setAutoLang(false)->update(TABLE_BLOCK)
-                ->set("content = replace(content, '#{$originID}', '#{$blockID}')")
-                ->where('originID')->eq('0')
+                ->set("content = replace(content, '#block{$originID}', '#block{$blockID}')")
+                ->where('originID')->ne('0')
                 ->exec();
 
             $this->dao->setAutoLang(false)->update(TABLE_CONFIG)
-                ->set("value = replace(value, '#{$originID}', '#{$blockID}')")
+                ->set("value = replace(value, '#block{$originID}', '#block{$blockID}')")
                 ->where('lang')->eq('lang')->exec();
         }
 
         $this->dao->setAutoLang(false)->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
 
         return true;
-    }
-
-    /**
-     * Fix blocks lang and theme codes.
-     * 
-     * @access public
-     * @return void
-     */
-    public function fixBlocks($packageInfo)
-    {
-        $importedBlocks = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->where('lang')->eq('lang')->fetchAll('originID');
-
-        /* Fix blockID in css and js. */
-        foreach($importedBlocks as $block)
-        {
-            $block->content = str_replace("#block{$block->originID} ", "#blocck{$block->id} ", $block->content);
-            $block->content = str_replace("#block{$block->originID}{", "#blocck{$block->id}{", $block->content);
-            $block->content = str_replace("#block{$block->originID},", "#blocck{$block->id},", $block->content);
-            $block->content = str_replace("#block{$block->originID}>", "#blocck{$block->id}>", $block->content);
-
-            $content = json_decode($block->content);
-            if(is_object($content))
-            {
-                if(isset($content->category)) $content->category = 0;
-                if(isset($content->custom->{$packageInfo->theme}))
-                { 
-                    $custom = $content->custom->{$packageInfo->theme};
-                    $content->custom = new stdclass();
-                    $content->custom->{$packageInfo->code} = $custom;
-                }
-
-                $block->content = json_encode($content);
-            }
-
-            $block->lang = $this->app->getClientLang();
-            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
-        }
-        return $importedBlocks;
     }
 
     /**
