@@ -31,7 +31,7 @@
           <div class='input-group'>
             <select name='blocks2Merge[<?php echo $newBlock->originID?>]' class='form-control'>
               <?php foreach($oldBlocks as $block):?>
-                <?php $selected = $block->id == $id ? 'selected' : '';?>
+                <?php $selected = ($block->id == $id) ? 'selected' : '';?>
                 <option value='<?php echo $block->id?>' <?php echo $selected?>><?php echo $block->title;?></option>
               <?php endforeach;?>
             </select>
