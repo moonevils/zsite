@@ -377,32 +377,30 @@ class ui extends control
 
         /* Fetch blocks data and show merge */
         $importedBlocks  = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->andWhere('lang')->eq('lang')->fetchAll('originID');
-        $oldBlocks       = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('type');
+        $oldBlocks       = $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($packageInfo->template)->fetchAll('id');
         $matchedBlocks   = array();
         $unMatchedBlocks = array();
 
         foreach($importedBlocks as $newBlock)
         {
-            if(isset($oldBlocks[$newBlock->type]))
+            foreach($oldBlocks as $block)
             {
-                if(strpos(',html,htmlcode,php,', ",{$newBlock->type},") === false)
+                if($block->content == $newBlock->content and $block->type == $newBlock->type)
                 {
-                    $matchedBlocks[$newBlock->originID] = $oldBlocks[$newBlock->type]->id;
+                    $matchedBlocks[$newBlock->originID] = $block->id;
+                    continue;
                 }
-                else
+
+                if(strpos(',html,htmlcode,php,', ",{$block->type},") === false)
                 {
-                    $block = $this->dao->select('*')->from(TABLE_BLOCK)
-                        ->where('originID')->eq(0)
-                        ->andWhere('type')->eq($newBlock->type)
-                        ->andWhere('content')->eq($newBlock->content)
-                        ->fetch();
-                    if(!empty($block)) $matchedBlocks[$newBlock->originID] = $block->id;
+                    if($block->type == $newBlock->type)
+                    {
+                        $matchedBlocks[$newBlock->originID] = $block->id;
+                        continue;
+                    }
                 }
             }
-            else
-            {
-                $unMatchedBlocks[$newBlock->originID] = $newBlock;
-            }
+            if(!isset($matchedBlocks[$newBlock->originID])) $unMatchedBlocks[$newBlock->originID] = $newBlock;
         }
 
         $this->app->loadLang('block');
