@@ -616,8 +616,8 @@ class control
             $allPageCSS  = zget($importedCSS, "{$template}_{$theme}_all", '');
             $allPageCSS .= zget($this->config->css, "{$template}_{$theme}_all", '');
 
-            $currentPageCSS  = zget($importedCSS, "{$template}_{$theme}_{$moduleName}_{$methodName}". '');
-            $currentPageCSS .= zget($this->config->css, "{$template}_{$theme}_{$moduleName}_{$methodName}". '');
+            $currentPageCSS  = zget($importedCSS, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
+            $currentPageCSS .= zget($this->config->css, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
             $css .= $this->ui->compileCSS($customParam, $allPageCSS . $currentPageCSS);
         }
 
