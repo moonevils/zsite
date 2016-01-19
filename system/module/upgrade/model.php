@@ -138,7 +138,7 @@ class upgradeModel extends model
             case '5_0_1';
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
                 $this->fixLayoutPlans();
-                $this->moveCodes('default');
+                $this->moveCodes();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1798,6 +1798,7 @@ class upgradeModel extends model
                     $plan->grade = 0;
                     $plan->lang  = $lang;
 
+                    $tradedPlans = array();
                     if(!isset($plans[$plan->name]) and !in_array($plan->name, $tradedPlans))
                     {
                         $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
