@@ -714,6 +714,12 @@ class control
             $this->output = cn2tw::translate($this->output);
         }
 
+        if(RUN_MODE == 'front') 
+        {
+            $this->mergeCSS();
+            $this->mergeJS();
+        }
+
         //if(isset($this->config->site->cdn))
         //{
         //    $cdn = rtrim($this->config->site->cdn, '/');
@@ -721,6 +727,7 @@ class control
         //    $this->output = str_replace("src='/data/upload", "src='" . $cdn . "/data/upload", $this->output);
         //    $this->output = str_replace("url(/data/upload", "url(" . $cdn . "/data/upload", $this->output);
         //}
+        
         echo $this->output;
     }
 
@@ -824,5 +831,44 @@ class control
 
         foreach($hookFiles as $file) include $file;
         return $hookFiles;
+    }
+
+    /**
+     * Merge all css codes of one page. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function mergeCSS()
+    {
+        $pageCSS = '';
+        preg_match_all('/<style>([\s\S]*?)<\/style>/', $this->output, $styles);
+        if(!empty($styles[1])) $pageCSS = join('', $styles[1]);
+        if(!empty($pageCSS))
+        {
+            $this->output = preg_replace('/<style>([\s\S]*?)<\/style>/', '', $this->output);
+            if(strpos($this->output, '</head>') != false) $this->output = str_replace('</head>', "<style>{$pageCSS}</style></head>", $this->output);
+            if(strpos($this->output, '</head>') == false) $this->output = "<style>{$pageCSS}</style>" . $this->output;
+        }
+    }
+
+    /**
+     * Merge all js codes of one page, 
+     * 
+     * @access public
+     * @return void
+     */
+    public function mergeJS()
+    {
+        $pageJS = '';
+        preg_match_all('/<script>([\s\S]*?)<\/script>/', $this->output, $scripts);
+        if(!empty($scripts[1])) $pageJS = join('', $scripts[1]);
+        if(!empty($pageJS))
+        {
+            $this->output = preg_replace('/<script>([\s\S]*?)<\/script>/', '', $this->output);
+            if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "<script>{$pageJS}</script></body>", $this->output);
+            if(strpos($this->output, '</body>') == false) $this->output .= "<script>$pageJS</script>";
+        }
+        return true;
     }
 }
