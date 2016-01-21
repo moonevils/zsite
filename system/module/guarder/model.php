@@ -402,6 +402,8 @@ EOT;
     public function verify($importantValidate = '')
     {
         if($importantValidate == '') $importantValidate = $this->config->site->importantValidate;
+        if(!$importantValidate) return true;
+
         $importantValidate = explode(',', $importantValidate);
         if(empty($importantValidate)) return true;;
 
