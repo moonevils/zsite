@@ -1,5 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of upgrade module of chanzhiEPS.
@@ -138,7 +136,7 @@ class upgradeModel extends model
             case '5_0_1';
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
                 $this->fixLayoutPlans();
-                $this->moveCodes('default');
+                $this->moveCodes();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1774,6 +1772,7 @@ class upgradeModel extends model
         foreach($themes as $lang => $themeList)
         {
             $themeConfig = array();
+            $tradedPlans = array();
             foreach($themeList as $theme)
             {
                 $template = $theme->template;
@@ -1798,12 +1797,12 @@ class upgradeModel extends model
                     $plan->grade = 0;
                     $plan->lang  = $lang;
 
-                    if(!isset($plans[$plan->name]) and !in_array($plan->name, $tradedPlans))
+                    if(!isset($plans[$plan->name]) and !in_array($plan->type . $plan->name, $tradedPlans))
                     {
                         $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
                         $planID = $this->dao->lastInsertID();
                         $this->dao->update(TABLE_LAYOUT)->set('plan')->eq($planID)->where('plan')->eq($theme)->andWhere('lang')->eq($lang)->exec();
-                        $tradedPlans[] = $plan->name;
+                        $tradedPlans[] = $plan->type . $plan->name;
                         $setting["{$template}_{$theme}"] = $planID;
 
                         $this->loadModel('setting')->setItems('system.common.layout', $setting, $lang);

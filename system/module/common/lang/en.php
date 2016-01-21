@@ -146,13 +146,13 @@ $lang->sitemap->common = 'Sitemap';
 
 /* The groups navbar */
 $lang->groups = new stdclass();
-$lang->groups->home     = array('title' => 'Home', 'link' => 'admin|index|',               'icon' => 'home');
+$lang->groups->home     = array('title' => 'Home', 'link' => 'admin|index|',                  'icon' => 'home');
 $lang->groups->content  = array('title' => 'Content', 'link' => 'article|admin|type=article', 'icon' => 'edit');
-$lang->groups->shop     = array('title' => 'Shop', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
-$lang->groups->user     = array('title' => 'Member', 'link' => 'user|admin|',                'icon' => 'group');
-$lang->groups->promote  = array('title' => 'Promote', 'link' => 'stats|traffic|',             'icon' => 'volume-up');
-$lang->groups->design   = array('title' => 'Designer', 'link' => 'ui|settemplate|',        'icon' => 'dashboard');
-$lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',            'icon' => 'cloud');
+$lang->groups->shop     = array('title' => 'Shop', 'link' => 'order|admin|',                  'icon' => 'shopping-cart');
+$lang->groups->user     = array('title' => 'Member', 'link' => 'user|admin|',                 'icon' => 'group');
+$lang->groups->promote  = array('title' => 'Promote', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
+$lang->groups->design   = array('title' => 'Designer', 'link' => 'ui|settemplate|',           'icon' => 'dashboard');
+$lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',               'icon' => 'cloud');
 $lang->groups->setting  = array('title' => 'Setting', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
 /* The main menus. */
@@ -180,7 +180,7 @@ $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = 'Stat|stat|traffic|';
 $lang->menu->tag   = 'Tags|tag|admin|';
-$lang->menu->links = 'Linkslinks|admin|';
+$lang->menu->links = 'Links|links|admin|';
 
 $lang->menu->ui       = 'Ui|ui|settemplate|';
 $lang->menu->logo     = 'Logo|ui|setlogo|';

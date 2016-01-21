@@ -53,12 +53,12 @@ $theme          = $this->config->template->{$this->device}->theme ? $this->confi
   }
   else
   {
-      $cdnRoot = ($this->config->cdn->open == 'open') ? $this->config->cdn->host . $this->config->version . '/' : '';
+      $cdnRoot = ($this->config->cdn->open == 'open') ? $this->config->cdn->host . $this->config->version : '';
 
       if($cdnRoot)
       {
           css::import($cdnRoot . '/template/default/theme/default/all.css');
-          js::import($cdnRoot  . 'js/all.js');
+          js::import($cdnRoot  . '/js/all.js');
       }
       else
       {

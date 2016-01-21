@@ -49,7 +49,7 @@ $(document).ready(function()
             }
             else
             {
-                bootbox.alert(data.message);
+                bootbox.alert(response.message);
             }
         });
     });
