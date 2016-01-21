@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class='panel-body'>
-        <form method='post' id='ajaxForm' class='form-horizontal'>
+      <form method='post' id='ajaxForm' action='<?php echo inlink('setyangcong')?>' class='form-horizontal'>
           <table class="table table-form">
             <tr>
               <th class='w-100px'><?php echo $lang->site->yangcong->appID;?></th>
