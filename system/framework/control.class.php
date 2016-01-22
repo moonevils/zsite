@@ -862,6 +862,10 @@ class control
     {
         $pageJS = '';
         preg_match_all('/<script>([\s\S]*?)<\/script>/', $this->output, $scripts);
+        $configCode = $scripts[1][0] . $scripts[1][1];
+        unset($scripts[1][1]);
+        unset($scripts[1][0]);
+        
         if(!empty($scripts[1])) $pageJS = join('', $scripts[1]);
         if(!empty($pageJS))
         {
@@ -869,6 +873,8 @@ class control
             if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "<script>{$pageJS}</script></body>", $this->output);
             if(strpos($this->output, '</body>') == false) $this->output .= "<script>$pageJS</script>";
         }
+        $pos = strpos($this->output, '<script src=');
+        $this->output = substr_replace($this->output, '<script>' . $configCode . '</script>', $pos) . substr($this->output, $pos);
         return true;
     }
 }
