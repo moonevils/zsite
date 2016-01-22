@@ -773,7 +773,7 @@ class blockModel extends model
         {
             $layout = new stdclass();
             $layout->template = $template;
-            $layout->theme    = $theme;
+            $layout->plan     = zget($this->config->layout, "{$template}_{$theme}");
             $layout->page     = $page;
             $layout->region   = $region;
             $layout->blocks   = json_encode(array());
