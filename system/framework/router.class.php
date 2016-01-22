@@ -356,7 +356,7 @@ class router
         $type = 'html';
         if((strpos($_SERVER['REQUEST_URI'], '.xml') !== false) or (isset($_GET['t']) and $_GET['t'] == 'xml')) $type = 'xml'; 
 
-        header("Content-Type: text/{$type}; Language={$this->config->encoding}; charset={$this->config->encoding}");
+        header("Content-Type: text/{$type}; charset={$this->config->encoding}");
         header("Cache-control: private");
     }
 
