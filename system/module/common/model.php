@@ -117,7 +117,7 @@ class commonModel extends model
     {
         if($this->config->site->filterFunction == 'open')
         {
-            if($this->server->request_method == 'post')$inBlackList = $this->loadModel('guarder')->logOperation('ip', 'post');
+            if($this->server->request_method == 'post') $inBlackList = $this->loadModel('guarder')->logOperation('ip', 'post');
             $inList = $this->loadModel('guarder')->inList();
             if($inList) die('Request Forbidden');
         }
