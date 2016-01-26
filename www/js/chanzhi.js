@@ -291,7 +291,8 @@ $.extend(
         $(document).on('click', selector, function()
         {
             var deleter = $(this);
-            bootbox.confirm(v.lang.confirmDelete, function(result)
+            message = deleter.data('message') ? deleter.data('message') : v.lang.confirmDelete;
+            bootbox.confirm(message, function(result)
             {
                 if(result)
                 {
