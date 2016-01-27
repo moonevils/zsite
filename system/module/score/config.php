@@ -18,3 +18,13 @@ $config->score->buyScore->minAmount = 1;
 
 $config->score->ranking = new stdclass();
 $config->score->ranking->limit = 20;
+
+$config->score->methodOptions = array();
+$config->score->methodOptions['register']            = 'award';
+$config->score->methodOptions['login']               = 'award';
+$config->score->methodOptions['maxLogin']            = '';
+$config->score->methodOptions['thread']              = 'award';
+$config->score->methodOptions['reply']               = 'award';
+$config->score->methodOptions['delThread']           = 'punish';
+$config->score->methodOptions['delReply']            = 'punish';
+$config->score->methodOptions['approveContribution'] = 'award';

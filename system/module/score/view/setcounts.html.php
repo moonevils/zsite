@@ -23,7 +23,7 @@
       <td><?php echo html::input('login', $this->config->score->counts->login, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
-      <th><?php echo $lang->score->methods['maxlogin'];?></th> 
+      <th><?php echo $lang->score->methods['maxLogin'];?></th> 
       <td><?php echo html::input('maxLogin', $this->config->score->counts->maxLogin, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
