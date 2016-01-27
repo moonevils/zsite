@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The action module zh-cn file of ZenTaoCMS.
@@ -10,6 +11,7 @@
  */
 $lang->score->back        = '返回';
 $lang->score->rankingList = '积分排行榜';
+$lang->score->rule        = '积分规则';
 
 $lang->score->id      = '编号';
 $lang->score->account = '用户';
@@ -36,19 +38,19 @@ $lang->score->dayRank   = '日排行榜';
 
 $lang->score->methods['register'] = '注册';
 $lang->score->methods['login']    = '登录';
-$lang->score->methods['maxlogin'] = '每日登录获得积分上限';
+$lang->score->methods['maxLogin'] = '每日登录获得积分上限';
 $lang->score->methods['download'] = '下载';
 
 $lang->score->methods['thread']      = '发贴';
 $lang->score->methods['reply']       = '回贴';
 $lang->score->methods['valuethread'] = '奖励主题';
 $lang->score->methods['valuereply']  = '奖励回复';
-$lang->score->methods['delthread']   = '删主题';
-$lang->score->methods['delreply']    = '删回复';
+$lang->score->methods['delThread']   = '删主题';
+$lang->score->methods['delReply']    = '删回复';
 $lang->score->methods['award']       = '奖励积分';
 $lang->score->methods['punish']      = '扣除积分';
 
-$lang->score->methods['approvecontribution'] = '投稿成功';
+$lang->score->methods['approveContribution'] = '投稿成功';
 
 $lang->score->methods['buyscore']  = '购买积分';
 $lang->score->methods['statement'] = '积分结算';
@@ -59,14 +61,13 @@ $lang->score->methods['co']  = '合作伙伴';
 $lang->score->types['in']    = '增加';
 $lang->score->types['out']   = '减少';
 
-$lang->score->getByThread = '论坛发表主题'; 
-$lang->score->getByReply  = '论坛发表回帖'; 
+$lang->score->getByThread = '论坛发表主题赚积分'; 
+$lang->score->getByReply  = '论坛发表回帖赚积分'; 
 
 $lang->score->lblTotal   = "共有消耗积分：%s, 等级积分：%s ";
 $lang->score->lblNoScore = "抱歉，您的积分不够";
-$lang->score->lblNoScoreReason = "<p>抱歉，您的积分不够。<strong>%s</strong> 需要 <strong class='red'>%s</strong>分，您现在有 <strong class='red'>%s</strong>分。</p>
-                                  您可以通过以下方式增加您的积分。<br />";
-$lang->score->lblDetail        = "详情可参考<a href='http://www.chanzhi.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
+$lang->score->lblNoScoreReason = "抱歉，您的积分不够 %s 需要 <strong class='red'>%s</strong> 分，您现在有 <strong class='red'>%s</strong> 分";
+$lang->score->lblDetail        = "详情可参考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
 
 $lang->score->setAmount   = '充值金额';
 $lang->score->getScore    = '获取积分';

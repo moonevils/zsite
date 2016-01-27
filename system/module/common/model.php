@@ -754,6 +754,17 @@ class commonModel extends model
     }
 
     /**
+     * Print the positon bar of score module.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printScore()
+    {
+        echo '<li>' . $this->lang->score->common . '</li>';
+    }
+
+    /**
      * Print the positon bar of company module.
      *
      * @param  object $module

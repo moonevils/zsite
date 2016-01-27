@@ -862,6 +862,7 @@ class control
     {
         $pageJS = '';
         preg_match_all('/<script>([\s\S]*?)<\/script>/', $this->output, $scripts);
+        if(empty($scripts[1][1])) return true;
         $configCode = $scripts[1][0] . $scripts[1][1];
         unset($scripts[1][1]);
         unset($scripts[1][0]);

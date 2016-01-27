@@ -137,6 +137,18 @@ class score extends control
      * @access public
      * @return void
      */
+    public function rule()
+    {
+        $this->view->title = $this->lang->score->rule;
+        $this->display();
+    }
+
+    /**
+     * Set counts for score.
+     * 
+     * @access public
+     * @return void
+     */
     public function setCounts()
     {
         if($_POST)
