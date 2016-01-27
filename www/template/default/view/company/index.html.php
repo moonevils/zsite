@@ -1,10 +1,8 @@
-<?php
-include TPL_ROOT . 'common/header.html.php';
-?>
+<?php include TPL_ROOT . 'common/header.html.php'; ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div class='row blocks' data-region='company_index-topBanner'><?php $this->block->printRegion($layouts, 'company_index', 'topBanner', true);?></div>
 <div class="row">
-  <?php if(isset($layouts['company_index'])):?>
+  <?php if(isset($layouts['company_index']['side'])):?>
   <div class="col-md-9 col-main">
   <?php else:?>
   <div class="col-md-12">
