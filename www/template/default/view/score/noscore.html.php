@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The html template file of download method of file module of ZenTaoCMS.
@@ -15,8 +14,7 @@
     <h4><?php printf($lang->score->lblNoScoreReason, $lang->score->methods[$method], $score, $app->user->score);?></h4>
     <?php
     echo html::a($this->createLink('score', 'buyScore'), $lang->user->buyScore, "target='_blank' class='btn' ");
-    if(commonModel::isAvailable('forum')) echo html::a($this->createLink('forum', 'index'), $lang->score->getByThread, "target='_blank' class='btn'");
-    if(commonModel::isAvailable('forum')) echo html::a($this->createLink('forum', 'index'), $lang->score->getByReply, "target='_blank'  class='btn'");
+    echo html::a($this->createLink('score', 'rule'), $lang->score->scoreGuider, "target='_blank' class='btn'");
     echo html::a("javascript:history.go(-1)", $lang->goback, "class='btn'");
     ?>
   </div>
