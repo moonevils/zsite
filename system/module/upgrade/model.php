@@ -1788,7 +1788,7 @@ class upgradeModel extends model
                     $config  = Spyc::YAMLLoadString(file_get_contents($docFile));
                     $themeConfig[$template][$theme] = $config;
                 }
-
+                
                 if(isset($config['themes'][$theme])) 
                 {
                     $plan = new stdclass();   
@@ -1801,7 +1801,7 @@ class upgradeModel extends model
                     {
                         $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
                         $planID = $this->dao->lastInsertID();
-                        $this->dao->update(TABLE_LAYOUT)->set('plan')->eq($planID)->where('plan')->eq($theme)->andWhere('lang')->eq($lang)->exec();
+                        $this->dao->update(TABLE_LAYOUT)->set('plan')->eq($planID)->where('plan')->eq($theme)->andWhere('template')->eq($template)->andWhere('lang')->eq($lang)->exec();
                         $tradedPlans[] = $plan->type . $plan->name;
                         $setting["{$template}_{$theme}"] = $planID;
 
