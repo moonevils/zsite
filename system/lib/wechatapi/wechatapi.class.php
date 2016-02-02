@@ -201,9 +201,10 @@ class wechatapi
     {
         $this->rawData = '';
         $this->message = new stdclass();
-        if(isset($GLOBALS["HTTP_RAW_POST_DATA"]))
+        $post = isset($GLOBALS["HTTP_RAW_POST_DATA"]) ? $GLOBALS["HTTP_RAW_POST_DATA"] : file_get_contents('php://input');
+        if($post)
         {
-            $this->rawData = str_replace('&', '&amp;', $GLOBALS["HTTP_RAW_POST_DATA"]);
+            $this->rawData = str_replace('&', '&amp;', $post);
             $message = new simpleXMLElement($this->rawData);
             foreach($message as $key => $value)
             {
