@@ -21,7 +21,13 @@
     <?php 
     $currentRelease = $theme->currentRelease;
     $latestRelease  = isset($theme->latestRelease) ? $theme->latestRelease : '';
-    foreach($theme->images as $image) $images .= $this->config->ui->themeSnapRoot . $image . ', ';
+
+    $images = array();
+    foreach($theme->images as $image)
+    {
+        $images[] = $this->config->ui->themeSnapRoot . $image;
+    }
+    $images = implode(',', $images);
     ?>
     <div class="col-theme">
       <div class="card theme">
