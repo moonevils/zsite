@@ -22,17 +22,17 @@
     $currentRelease = $theme->currentRelease;
     $latestRelease  = isset($theme->latestRelease) ? $theme->latestRelease : '';
 
-    $images = array();
+    $themeImages = array();
     foreach($theme->images as $image)
     {
-        $images[] = $this->config->ui->themeSnapRoot . $image;
+        $themeImages[] = strpos($image, 'http://') === 0 ? $image : $this->config->ui->themeSnapRoot . $image;
     }
-    $images = implode(',', $images);
+    $images = implode(',', $themeImages);
     ?>
     <div class="col-theme">
       <div class="card theme">
         <div class='media-wrapper theme-img'>
-          <?php if(!empty($theme->images)):?><?php echo html::a('javascript:;', html::image($this->config->ui->themeSnapRoot . $theme->images[0]), "title='{$theme->name}' data-images='{$images}' data-width='600' class='preview-theme'");?><?php endif;?>
+          <?php if(!empty($themeImages)):?><?php echo html::a('javascript:;', html::image($themeImages[0]), "title='{$theme->name}' data-images='{$images}' data-width='600' class='preview-theme'");?><?php endif;?>
           <div class='theme-info'>
             <span><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
             <span><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
