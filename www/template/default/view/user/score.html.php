@@ -19,9 +19,9 @@
           <?php foreach($scores as $score):?>
           <tr>
             <th><?php echo $score->id;?></th>
-            <?php $score->time = substr($score->time,0,10);?>
+            <?php $score->time = substr($score->time, 0, 10);?>
             <td><?php echo $score->time;?></td>
-            <td><?php echo $lang->score->methods[$score->method];?></td>
+            <td><?php echo $score->type == 'punish' ? $lang->score->methods[$score->type] : $lang->score->methods[$score->method];?></td>
             <td><?php echo ($score->type == 'in' ? '+' : '-') . $score->count;?></td>
             <td><?php echo $score->before;?></td>
             <td><?php echo $score->after;?></td>
