@@ -113,6 +113,8 @@ class fileModel extends model
         $template = $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
 
+        $this->scanSources($template, $theme);
+
         $files = $this->dao->setAutoLang(false)->select('*')
             ->from(TABLE_FILE)
             ->where('objectType')->eq('slide')
@@ -132,9 +134,47 @@ class fileModel extends model
             $filePathnames[$id] = $objectFiles->pathname;
         }
         $filePathnames = array_unique($filePathnames);
-
-
         return $files;
+    }
+
+    /**
+     * Scan sources and save to file table.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function scanSources($template, $theme)
+    {
+        $fileList = glob($this->app->getDataRoot() . "source/$template/$theme/*");
+        $newFiles = array();
+
+        foreach($fileList as $file)
+        {
+            $info = pathinfo($file);
+            if(!in_array($info['extension'], $this->config->file->imageExtensions)) continue;
+            $file = str_replace($this->app->getDataRoot(), '', $file);
+            $filesCount = $this->dao->select('count(*) as count')->from(TABLE_FILE)->where('pathname')->eq($file)->fetch('count');
+            if($filesCount) continue;
+            $newFiles[] = $file;
+        }
+
+        foreach($newFiles as $path)
+        {
+            $info = pathinfo($path);
+            $file = new stdclass();
+            $file->pathname   = $path;
+            $file->title      = $info['filename'];
+            $file->lang       = 'all';
+            $file->objectType = 'source';
+            $file->objectID   = "{$template}_{$theme}";
+            $file->addedDate  = helper::now();
+            $file->extension  = $info['extension'];
+            $this->dao->insert(TABLE_FILE)->data($file)->exec();
+        }
+
+        return true;
     }
 
     /**
