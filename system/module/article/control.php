@@ -491,7 +491,7 @@ class article extends control
             ->page($pager)
             ->fetchall('id'); 
         
-        $this->view->title    = $this->lang->article->contribution;
+        $this->view->title    = $this->lang->user->contribution;
         $this->view->articles = $articles;
 
         $this->view->pager      = $pager;
