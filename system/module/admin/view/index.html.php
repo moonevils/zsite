@@ -51,13 +51,13 @@
           <?php foreach($orders as $order):?> 
           <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
             <tr>
-              <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
+              <td><?php commonModel::printLink('order', 'admin','', $orderTitle);?></td>
               <td><?php echo substr($order->createdDate, -8);?></td>
             </tr>
           <?php endforeach;?>
           <?php if(count($orders) == 5):?>
             <tr>
-              <td></td><td align='right'><?php commonModel::printLink('order', 'admin', '', $lang->more . '...', "target='_blank'");?></td>
+              <td></td><td align='right'><?php commonModel::printLink('order', 'admin', '', $lang->more . '...');?></td>
             </tr>
           <?php endif;?>
           </table>
@@ -74,13 +74,13 @@
           <?php foreach($threads as $thread):?> 
           <?php $threadTitle = $thread->author . '&nbsp&nbsp' . helper::substr($thread->title, 25);?>
             <tr>
-              <td><?php echo html::a(commonmodel::createFrontLink('thread', 'view', "threadid=$thread->id"), $threadTitle, "target='_blank'");?></td>
+              <td><?php echo html::a(commonmodel::createFrontLink('thread', 'view', "threadid=$thread->id"), $threadTitle);?></td>
               <td><?php echo substr($thread->addedDate, -8);?></td>
             </tr>
           <?php endforeach;?>
           <?php if(count($threads) == 5):?>
             <tr>
-              <td></td><td align='right'><?php commonModel::printLink('forum', 'admin', "tab=feedback", $lang->more . '...', "target='_blank'");?></td>
+              <td></td><td align='right'><?php commonModel::printLink('forum', 'admin', "tab=feedback", $lang->more . '...');?></td>
             </tr>
           <?php endif;?>
           </table>
@@ -97,32 +97,32 @@
           <?php if($message != '0'):?>
           <?php $messageTitle = sprintf($lang->admin->$type, $message);?>
           <tr>
-            <td><?php commonModel::printLink('message', 'admin', "type={$type}", $messageTitle, "target='_blank'");?></td>
+            <td><?php commonModel::printLink('message', 'admin', "type={$type}", $messageTitle);?></td>
           </tr>
           <?php endif;?>
           <?php endforeach;?>
           <?php if(!empty($threadReply) and $threadReply != '0'):?>
           <tr>
             <?php $threadReplyTitle = sprintf($lang->admin->threadReply, $threadReply);?>
-            <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle, "target='_blank'");?></td>
+            <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle);?></td>
           </tr>
           <?php endif;?>
           <?php if(commonModel::isAvailable('contribution') and $contributions != '0'):?>
           <?php $contributionTitle = sprintf($lang->admin->contribution, $contributions);?>
           <tr>
-            <td><?php commonModel::printLink('article', 'admin','type=contribution&tab=feedback', $contributionTitle, "target='_blank'");?></td>
+            <td><?php commonModel::printLink('article', 'admin','type=contribution&tab=feedback', $contributionTitle);?></td>
           </tr>
           <?php endif;?>
           <?php if(!empty($todayReportTitle)):?>
           <tr>
             <?php $todayReportTitle = sprintf($lang->admin->todayReport, $todayReport->pv, $todayReport->uv, $todayReport->ip);?>
-            <td><?php commonModel::printLink('stat', 'traffic', "mode=today", $todayReportTitle, "target='_blank'");?></td>
+            <td><?php commonModel::printLink('stat', 'traffic', "mode=today", $todayReportTitle);?></td>
           </tr>
           <?php endif;?>
           <?php if(!empty($yestodayReportTitle)):?>
           <tr>
             <?php $yestodayReportTitle = sprintf($lang->admin->yestodayReport, $yestodayReport->pv, $yestodayReport->uv, $yestodayReport->ip);?>
-            <td><?php commonModel::printLink('stat', 'traffic', "mode=yestoday", $yestodayReportTitle, "target='_blank'");?></td>
+            <td><?php commonModel::printLink('stat', 'traffic', "mode=yestoday", $yestodayReportTitle);?></td>
           </tr>
           <?php endif;?>
           </table>
