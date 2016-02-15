@@ -21,7 +21,7 @@ class scoreModel extends model
      */
     public function getByUser($account, $pager = null)
     {
-        return $this->dao->setAutoLang(false)->select('*')->from(TABLE_SCORE)->where('account')->eq($account)->orderBy('time_desc')->page($pager)->fetchAll('id');
+        return $this->dao->setAutoLang(false)->select('*')->from(TABLE_SCORE)->where('account')->eq($account)->orderBy('time_desc,id_desc')->page($pager)->fetchAll('id');
     }
 
     /**
