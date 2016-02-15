@@ -271,6 +271,7 @@ class user extends control
     public function profile()
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
+        $this->view->title      = $this->lang->user->profile;
         $this->view->user       = $this->user->getByAccount($this->app->user->account);
         $this->view->mobileURL  = helper::createLink('user', 'profile', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'profile', '', '', 'html');
@@ -294,6 +295,7 @@ class user extends control
         /* Load the forum lang to change the pager lang items. */
         $this->app->loadLang('forum');
 
+        $this->view->title      = $this->lang->user->thread;
         $this->view->threads    = $this->loadModel('thread')->getByUser($this->app->user->account, $pager);
         $this->view->pager      = $pager;
         $this->view->mobileURL  = helper::createLink('user', 'thread', "pageID=$pageID", '', 'mhtml');
@@ -319,6 +321,7 @@ class user extends control
         /* Load the thread lang thus to rewrite the page lang items. */
         $this->app->loadLang('thread');    
 
+        $this->view->title      = $this->lang->user->reply;
         $this->view->replies    = $this->loadModel('reply')->getByUser($this->app->user->account, $pager);
         $this->view->pager      = $pager;
         $this->view->mobileURL  = helper::createLink('user', 'reply', "pageID=$pageID", '', 'mhtml');
@@ -343,6 +346,7 @@ class user extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->view->title      = $this->lang->user->messages;
         $this->view->messages   = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
         $this->view->pager      = $pager;
         $this->view->mobileURL  = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
