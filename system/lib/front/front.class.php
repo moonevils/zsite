@@ -348,7 +348,7 @@ EOT;
         global $lang;
 
         $label = empty($label) ? $lang->save : $label;
-        $misc .= strpos($misc, 'data-loading') === false ? "data-loading='$lang->loading'" : '';
+        $misc .= strpos($misc, 'data-loading') === false ? " data-loading='$lang->loading'" : '';
 
         return " <input type='submit' id='submit' class='$class' value='$label' $misc /> ";
     }
