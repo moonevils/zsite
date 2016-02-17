@@ -54,6 +54,7 @@ class score extends control
             if(!$orderID) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('payOrder', "orderID=$orderID")));
         }
+        $this->view->title = $this->lang->user->buyScore;
         $this->display();
     }
 
@@ -69,6 +70,8 @@ class score extends control
         if($this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login'));
 
         $order = $this->score->getOrderByRawID($orderID);
+
+        $this->view->title   = $this->lang->score->confirm;
         $this->view->payLink = $this->loadModel('order')->createPayLink($order);
         $this->view->order   = $order;
         $this->display();
