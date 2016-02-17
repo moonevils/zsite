@@ -229,7 +229,9 @@ class logModel extends model
         $ipAndUv->ip = 0;
         $ipAndUv->uv = 0;
 
-        if($type != 'search') return $ipAndUv;
+        $allowedTypes = array('basic', 'search', 'keywords', 'os', 'url', 'domain', 'browser', 'from');
+        if(!in_array($type, $allowedTypes)) return $ipAndUv;
+
         if($timeType == 'year') return $ipAndUv;
 
         $ipAndUv = $this->dao->select('count(distinct(ip)) as ip, count(distinct(visitor)) as uv')

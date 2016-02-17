@@ -5,7 +5,7 @@
     <div class='panel'>
       <div class='panel-heading'><strong><?php echo $lang->score->confirm;?></strong></div>
       <table class='table'>
-        <tr> 
+        <tr>
           <th><?php echo $lang->score->id;?></th>
           <th><?php echo $lang->score->product;?></th>
           <?php if(!empty($order->ip)):?>
