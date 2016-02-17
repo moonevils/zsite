@@ -10,7 +10,7 @@
             <tr class='text-center hidden-xxxs'>
               <th><?php echo $lang->thread->title;?></th>
               <th class='hidden-xxs'><?php echo $lang->thread->postedDate;?></th>
-              <?php if($this->config->forum->postReview == 'open'):?>
+              <?php if(isset($this->config->forum) and zget($this->config->forum, 'postReview', '') == 'open'):?>
               <th class='hidden-xxxs'><?php echo $lang->thread->status;?></th>
               <?php endif;?>
               <th class='hidden-xs'><?php echo $lang->thread->views;?></th>
@@ -23,7 +23,7 @@
             <tr class='text-center'>
               <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, "target='_blank'");?></td>
               <td class='w-120px hidden-xxs'><?php echo substr($thread->addedDate, 2, -3);?></td>
-              <?php if($this->config->forum->postReview == 'open'):?>
+              <?php if(isset($this->config->forum->postReview) and $this->config->forum->postReview == 'open'):?>
               <td>
                 <span class="<?php echo $thread->status == 'approved' ? 'text-success' : ''?>">
                   <?php echo zget($lang->thread->statusList, $thread->status);?>
