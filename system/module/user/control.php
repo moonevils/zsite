@@ -69,6 +69,7 @@ class user extends control
             $referer = urlencode($_SERVER['HTTP_REFERER']);
         }
 
+        $this->view->title      = $this->lang->user->register->common;
         $this->view->referer    = $referer;
         $this->view->mobileURL  = helper::createLink('user', 'register', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'register', '', '', 'html');
@@ -259,6 +260,7 @@ class user extends control
         $this->view->desktopURL = helper::createLink('user', 'control', '', '', 'html');
         $this->view->realname   = $this->user->getRealnameByID($this->app->user->id);
 
+        $this->view->title = $this->lang->user->control->common;
         $this->display();
     }
 
@@ -707,6 +709,7 @@ class user extends control
             }
         }
 
+        $this->view->title      = $this->lang->user->resetPassword->common;
         $this->view->mobileURL  = helper::createLink('user', 'resetPassword', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'resetPassword', '', '', 'html');
         $this->display();
@@ -735,6 +738,7 @@ class user extends control
         }
         else
         {
+            $this->view->title = $this->lang->user->resetPassword->common;
             $this->view->reset = $reset;
             $this->view->mobileURL  = helper::createLink('user', 'checkReset', "reset=$reset", '', 'mhtml');
             $this->view->desktopURL = helper::createLink('user', 'checkReset', "reset=$reset", '', 'html');
