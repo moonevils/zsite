@@ -163,8 +163,9 @@ $lang->user->login->welcome = '已有帐号';
 $lang->user->login->why     = '欢迎登陆，享用会员专属服务！';
 
 $lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "密码更改链接已经发送到您的邮箱中";
-$lang->user->resetPassword->failed     = "您的密保邮箱错误，请重新输入";
+$lang->user->resetPassword->common  = "重置密码";
+$lang->user->resetPassword->success = "密码更改链接已经发送到您的邮箱中";
+$lang->user->resetPassword->failed  = "您的密保邮箱错误，请重新输入";
 
 $lang->user->resetMail = new stdclass();
 $lang->user->resetMail->subject  = '重置密码';
