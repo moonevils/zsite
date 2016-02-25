@@ -16,9 +16,11 @@ ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
         $menu = zget($lang->user->control->menus, $nav, '');
         if(empty($menu)) continue;
         list($label, $module, $method) = explode('|', $menu);
+        $menuInfo = explode('|', $menu);
+        $params   = zget($menuInfo, 3 ,''); 
         if(!commonModel::isAvailable($module)) continue;
         if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= 'active';
-        echo '<li class="nav-icon ' . $class . '">' . html::a($this->createLink($module, $method), $label) . '</li>';
+        echo '<li class="nav-icon ' . $class . '">' . html::a($this->createLink($module, $method, $params), $label) . '</li>';
     }
     ?>
     <?php endforeach;?>
