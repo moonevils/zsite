@@ -327,13 +327,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = '概况|stat|traffic|';
-$lang->stat->menu->from     = '来源统计|stat|from|';
-$lang->stat->menu->search   = '搜索引擎统计|stat|search|';
-$lang->stat->menu->keywords = '关键词统计|stat|keywords|';
+$lang->stat->menu->traffic  = '流量概况|stat|traffic|';
+$lang->stat->menu->from     = '来源分类|stat|from|';
 $lang->stat->menu->domains  = array('link' => '来路域名|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
-$lang->stat->menu->client   = '终端统计|stat|client|type=browser';
-$lang->stat->menu->page     = '页面访问量排名|stat|page|';
+$lang->stat->menu->search   = '搜索引擎|stat|search|';
+$lang->stat->menu->keywords = '关键词|stat|keywords|';
+$lang->stat->menu->client   = '用户终端|stat|client|type=browser';
+$lang->stat->menu->page     = '点击排行|stat|page|';
 $lang->stat->menu->setStat  = '设置|stat|setting|';
 
 /* The error messages. */
