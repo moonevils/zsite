@@ -127,12 +127,13 @@ $lang->user->resetSuccess      = '重置密码成功，请用新密码登录';
 
 $lang->user->forbidUser = '禁用管理';
 $lang->user->forbidDate = array();
-$lang->user->forbidDate['1']     = '一天';
-$lang->user->forbidDate['2']     = '两天';
-$lang->user->forbidDate['3']     = '三天';
-$lang->user->forbidDate['7']     = '一周';
-$lang->user->forbidDate['30']    = '一个月';
-$lang->user->operate             = '操作';
+$lang->user->forbidDate['1']    = '一天';
+$lang->user->forbidDate['2']    = '两天';
+$lang->user->forbidDate['3']    = '三天';
+$lang->user->forbidDate['7']    = '一周';
+$lang->user->forbidDate['30']   = '一个月';
+$lang->user->forbidDate['3000'] = '永久';
+$lang->user->operate            = '操作';
 
 $lang->user->adminList['super']  = '超级管理员';
 $lang->user->adminList['common'] = '管理员';

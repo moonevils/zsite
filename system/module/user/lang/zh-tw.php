@@ -127,12 +127,13 @@ $lang->user->resetSuccess      = '重置密碼成功，請用新密碼登錄';
 
 $lang->user->forbidUser = '禁用管理';
 $lang->user->forbidDate = array();
-$lang->user->forbidDate['1']     = '一天';
-$lang->user->forbidDate['2']     = '兩天';
-$lang->user->forbidDate['3']     = '三天';
-$lang->user->forbidDate['7']     = '一周';
-$lang->user->forbidDate['30']    = '一個月';
-$lang->user->operate             = '操作';
+$lang->user->forbidDate['1']    = '一天';
+$lang->user->forbidDate['2']    = '兩天';
+$lang->user->forbidDate['3']    = '三天';
+$lang->user->forbidDate['7']    = '一周';
+$lang->user->forbidDate['30']   = '一個月';
+$lang->user->forbidDate['3000'] = '永久';
+$lang->user->operate            = '操作';
 
 $lang->user->adminList['super']  = '超級管理員';
 $lang->user->adminList['common'] = '管理員';
@@ -163,8 +164,9 @@ $lang->user->login->welcome = '已有帳號';
 $lang->user->login->why     = '歡迎登陸，享用會員專屬服務！';
 
 $lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "密碼更改連結已經發送到您的郵箱中";
-$lang->user->resetPassword->failed     = "您的密保郵箱錯誤，請重新輸入";
+$lang->user->resetPassword->common  = "重置密碼";
+$lang->user->resetPassword->success = "密碼更改連結已經發送到您的郵箱中";
+$lang->user->resetPassword->failed  = "您的密保郵箱錯誤，請重新輸入";
 
 $lang->user->resetMail = new stdclass();
 $lang->user->resetMail->subject  = '重置密碼';
