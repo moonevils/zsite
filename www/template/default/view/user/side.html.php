@@ -16,6 +16,8 @@ ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
         $menu = zget($lang->user->control->menus, $nav, '');
         if(empty($menu)) continue;
         list($label, $module, $method) = explode('|', $menu);
+        $module = strtolower($module);
+        $method = strtolower($method);
         $menuInfo = explode('|', $menu);
         $params   = zget($menuInfo, 3 ,''); 
         if(!commonModel::isAvailable($module)) continue;
