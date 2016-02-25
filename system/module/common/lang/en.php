@@ -324,13 +324,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = 'Summary|stat|traffic|';
-$lang->stat->menu->from     = 'Source Stats|stat|from|';
-$lang->stat->menu->search   = 'Search Engine Stats|stat|search|';
-$lang->stat->menu->keywords = 'Keyswords Stats|stat|keywords|';
-$lang->stat->menu->domains  = 'Antecedents Domains|stat|domainlist|';
-$lang->stat->menu->client   = 'Client Stats|stat|client|type=browser';
-$lang->stat->menu->page     = 'Page Views Ranking|stat|page|';
+$lang->stat->menu->traffic  = 'Traffic Info|stat|traffic|';
+$lang->stat->menu->from     = 'Source|stat|from|';
+$lang->stat->menu->domains  = array('link' => 'Domain|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
+$lang->stat->menu->search   = 'Search engine|stat|search|';
+$lang->stat->menu->keywords = 'Keywords|stat|keywords|';
+$lang->stat->menu->client   = 'Client|stat|client|type=browser';
+$lang->stat->menu->page     = 'Click ranking|stat|page|';
 $lang->stat->menu->setStat  = 'Setting|stat|setting|';
 
 /* Error info. */
