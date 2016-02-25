@@ -289,6 +289,9 @@ $lang->security->menu->log       = '登录日志|user|adminlog|';
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
 
+/* Menu of score module. */
+$lang->score->menu = $lang->site->menu;
+
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
 $lang->address = new stdclass();
