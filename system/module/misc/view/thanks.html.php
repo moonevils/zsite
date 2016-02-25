@@ -11,7 +11,7 @@
   <?php endforeach;?>
 </div>
 <div class="right-footer">
-  <?php printf($lang->misc->thanksFooter, '<a href="http://www.zzsec.com/" style="color: green"><strong>' . $lang->misc->thanksObjectName . '</strong></a>');?>
+  <?php printf($lang->misc->thanksFooter, "<a href='http://www.zzsec.com/' target='_blank' style='color: green'><strong>" . $lang->misc->thanksObjectName . '</strong></a>');?>
 </div>
   
 <?php include '../../common/view/footer.modal.html.php';?>
