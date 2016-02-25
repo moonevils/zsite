@@ -29,4 +29,3 @@ $config->menuExtra = new stdclass();
 $config->menuExtra->visual = "target='_blank'";
 
 $config->moduleMenu = new stdclass();
-$config->moduleMenu->site_score = "data-toggle='modal'";

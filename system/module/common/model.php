@@ -409,7 +409,7 @@ class commonModel extends model
         /* Cycling to print every menus of current module. */
         foreach($moduleMenus as $methodName => $methodMenu)
         {
-            $extra = zget($config->moduleMenu, "{$currentModule}_{$methodName}");
+            $extra = zget($config->moduleMenu, "{$currentModule}_{$methodName}", '');
             if(is_array($methodMenu))
             {
                 $methodAlias = $methodMenu['alias'];
