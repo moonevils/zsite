@@ -187,7 +187,8 @@ $lang->menu->logo     = '標誌|ui|setlogo|';
 $lang->menu->nav      = '導航|nav|admin|';
 $lang->menu->block    = '區塊|block|admin|';
 $lang->menu->slide    = '幻燈片|slide|admin|';
-$lang->menu->visual   = "<i class='icon icon-magic'></i> 可視化編輯|visual|index|";
+$lang->menu->others   = "設置|ui|others|";
+$lang->menu->visual   = "可視化|visual|index|";
 
 $lang->menu->site     = '站點|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
@@ -287,6 +288,9 @@ $lang->security->menu->log       = '登錄日誌|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
+
+/* Menu of score module. */
+$lang->score->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
