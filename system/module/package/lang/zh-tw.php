@@ -11,7 +11,7 @@
  */
 $lang->package->common        = '插件管理';
 $lang->package->browse        = '瀏覽插件';
-$lang->package->install       = '安裝插件';
+$lang->package->install       = '安裝';
 $lang->package->installAuto   = '自動安裝';
 $lang->package->installForce  = '強制安裝';
 $lang->package->uninstall     = '卸載';
@@ -23,7 +23,7 @@ $lang->package->download      = '下載插件';
 $lang->package->downloadAB    = '下載';
 $lang->package->upload        = '本地安裝';
 $lang->package->erase         = '清除';
-$lang->package->upgrade       = '升級插件';
+$lang->package->upgrade       = '升級';
 $lang->package->agreeLicense  = '我同意該授權';
 $lang->package->settemplate   = '設置模板';
 
@@ -89,6 +89,11 @@ $lang->package->backDBFile               = '插件相關數據已經備份到 %s
 $lang->package->upgradeExt     = '升級';
 $lang->package->installExt     = '安裝';
 $lang->package->upgradeVersion = '（從%s升級到%s）';
+
+$lang->package->types = new stdclass();
+$lang->package->types->theme     = '主題';
+$lang->package->types->extension = '插件';
+$lang->package->types->ext       = '插件';
 
 $lang->package->waring = '警告';
 
