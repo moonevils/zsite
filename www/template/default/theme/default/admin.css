@@ -423,11 +423,13 @@ body {padding-left: 40px;}
 #footNav a {display: inline-block; margin-right: 10px; color: #777;}
 #footNav a:hover {color: #145BCC}
 #copyrightInfo,#icpInfo {color: #999; font-size: 12px;}
-#powerby {position: absolute; right: 15px; top: 15px; background-color: #ccc; border: #bbb 1px solid; border-radius: 2px; padding: 5px 10px; overflow: hidden; font-size: 12px; transition: all .5s cubic-bezier(0.175,0.885,0.32,1); text-shadow:-1px -1px 0px rgba(0,0,0,0.2); -moz-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); -webkit-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4);}
-#powerby, #powerby a {color: #fff;}
-#powerby:hover {background-color: #aaa; -moz-box-shadow:0px 1px 2px rgba(0,0,0,0.5); -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.5); box-shadow:0px 1px 2px rgba(0,0,0,0.5);}
-#powerby:before {content: '.'; display: block; position: absolute; width: 100%; height: 120%; left: -120%; top: -20%; background:-webkit-linear-gradient(0deg,rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.7),rgba(255, 255, 255, 0)); -webkit-transform:skewx(-25deg); -webkit-transition:all .5s; transition:all .5s;}
-#powerby:hover:before {left: 120%;}
+#footNav a, #powerby a {display: inline-block; margin-right: 10px; color: #777; position: relative;}
+#footNav a:hover, #powerby a:hover {color: #145BCC}
+#powerby {position: absolute; right: 15px; top: 10px; padding: 0; overflow: hidden;}
+#powerby a {margin: 0; display: block; padding-left: 36px;}
+#powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: #1152b7; text-decoration: none}
+#powerby a > .name {display: block; width: 0; overflow: hidden; position: absolute;}
+#powerby .icon-chanzhi {top: 3px; position: absolute; left: 0}
 
 /* responsive for mobile devices */
 @media (min-width: 992px) {.carousel-caption{left: 12%\0!important}}
@@ -502,7 +504,7 @@ body {padding-left: 40px;}
 
 /* Icon chanzhi */
 .icon-chanzhi {display: inline-block!important; width: 32px; height: 12px; position: relative; top: 1px;}
-.icon-chanzhi > i, .icon-chanzhi > i:before, .icon-chanzhi > i:after {display: block; border: 1px solid #333; position: absolute; content: ''; left: -9999em; top: 0; transition: all .5s cubic-bezier(.175,.885,.32,1);}
+.icon-chanzhi > i, .icon-chanzhi > i:before, .icon-chanzhi > i:after {display: block; border: 1px solid #777; position: absolute; content: ''; left: -9999em; top: 0; transition: all .5s cubic-bezier(.175,.885,.32,1);}
 .icon-chanzhi > .ic1 {width: 5px; height: 5px; left: 0; top: 3px;}
 .icon-chanzhi > .ic1:before {width: 1px; height: 10px; left: 1px; top: -4px; border-right: none}
 .icon-chanzhi > .ic1:after {width: 4px; height: 2px; left: 0; top: 6px; border-top: none}
@@ -568,10 +570,6 @@ h5{font-size: 14px;}
 /* style of footer */
 #footNav .icon-rss-sign{color: #f39800}
 #footNav .icon-rss-sign:hover{text-decoration: none; color: #ED9C28}
-
-#poweredBy .icon-chanzhi {top: 1px; overflow: hidden;}
-#poweredBy .icon-chanzhi > i, #poweredBy .icon-chanzhi > i:before, #poweredBy .icon-chanzhi > i:after {border-color: #0d3d88}
-#poweredBy:hover .icon-chanzhi > i, #poweredBy:hover .icon-chanzhi > i:before, #poweredBy:hover .icon-chanzhi > i:after {border-color: #347aeb}
 
 /* articles */
 #articles .card{background-color: #fff;padding: 5px 5px 0}
