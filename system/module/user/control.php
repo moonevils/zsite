@@ -984,6 +984,7 @@ class user extends control
         
         $this->view->logs  = $logs;
         $this->view->pager = $pager;
+        $this->view->users = $this->user->getPairs();
         $this->view->title = $this->lang->user->log->list;
         $this->display();
     }
