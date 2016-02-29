@@ -61,7 +61,7 @@ $lang->block->saveLayoutAs    = 'Copy plan from %s';
 $lang->block->defaultPlan     = 'Default plan';
 
 $lang->block->admin        = "Block management";
-$lang->block->pages        = "Layout settings";
+$lang->block->pages        = "Layout";
 $lang->block->add          = "Add";
 $lang->block->addChild     = "Add Child";
 $lang->block->template     = "Template";

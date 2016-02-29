@@ -164,8 +164,9 @@ $lang->user->login->welcome = 'Welcome';
 $lang->user->login->why     = 'Login, and use more feature.';
 
 $lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "Password change link has been sent to your mailbox";
-$lang->user->resetPassword->failed     = "Please input your correct mail";
+$lang->user->resetPassword->common  = "Reset Password";
+$lang->user->resetPassword->success = "Password change link has been sent to your mailbox";
+$lang->user->resetPassword->failed  = "Please input your correct mail";
 
 $lang->user->resetMail = new stdclass();
 $lang->user->resetMail->subject  = 'Modify password';

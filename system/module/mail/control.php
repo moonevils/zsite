@@ -46,7 +46,7 @@ class mail extends control
             die(js::locate(inlink('edit'), 'parent'));
         }
 
-        $this->view->title      = $this->lang->mail->common . $this->lang->colon . $this->lang->mail->detect;
+        $this->view->title      = $this->lang->mail->common . $this->lang->minus . $this->lang->mail->detect;
         $this->view->position[] = html::a(inlink('index'), $this->lang->mail->common);
         $this->view->position[] = $this->lang->mail->detect;
 

@@ -36,7 +36,7 @@ class group extends control
         $groupUsers = array();
         foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);
 
-        $this->view->title      = $this->lang->group->browse;
+        $this->view->title      = $this->lang->group->common;
         $this->view->groups     = $groups;
         $this->view->groupUsers = $groupUsers;
 

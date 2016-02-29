@@ -28,6 +28,7 @@ $lang->wechat->create         = 'Create';
 $lang->wechat->edit           = 'Edit';
 $lang->wechat->admin          = 'Admin';
 $lang->wechat->list           = 'List';
+$lang->wechat->set            = 'Set Wechat';
 $lang->wechat->setMenu        = 'Menu';
 $lang->wechat->integrate      = 'Integrate';
 $lang->wechat->adminResponse  = 'Response';

@@ -27,7 +27,7 @@ $lang->score->product = '產品';
 $lang->score->confirm = '確認訂單';
 $lang->score->details = '積分詳情';
 
-$lang->score->setCounts = '設置積分規則';
+$lang->score->setCounts = '積分規則';
 
 $lang->score->totalRank = '總排行榜';
 $lang->score->rank      = '排名';
@@ -64,8 +64,8 @@ $lang->score->types['out']   = '減少';
 $lang->score->getByThread = '論壇發表主題賺積分'; 
 $lang->score->getByReply  = '論壇發表回帖賺積分'; 
 
-$lang->score->lblTotal   = "共有消耗積分：%s, 等級積分：%s ";
-$lang->score->lblNoScore = "抱歉，您的積分不夠";
+$lang->score->lblTotal         = "共有消耗積分：%s, 等級積分：%s ";
+$lang->score->lblNoScore       = "抱歉，您的積分不夠";
 $lang->score->lblNoScoreReason = "抱歉，您的積分不夠 %s 需要 <strong class='red'>%s</strong> 分，您現在有 <strong class='red'>%s</strong> 分";
 $lang->score->lblDetail        = "詳情可參考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何獲得積分》</a><br /><br />";
 

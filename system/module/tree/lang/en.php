@@ -71,7 +71,8 @@ $lang->board->placeholder->setChildren = 'Forum needs tow levels boards.';
 
 /* Lang items for express. */
 $lang->express = new stdclass();
-$lang->express->name = 'Exprees';
+$lang->express->common = 'Express';
+$lang->express->name   = 'Express';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();

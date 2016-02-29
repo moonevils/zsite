@@ -22,7 +22,6 @@ $lang->ui->manageTheme     = '主題管理';
 $lang->ui->installTemplate = '導入模板';
 $lang->ui->exportTheme     = '導出主題';
 $lang->ui->setTheme        = '主題設置';
-$lang->ui->customTheme     = '自定義主題';
 $lang->ui->setFavicon      = "Favicon設置";
 $lang->ui->deleteFavicon   = "不顯示Favicon";
 $lang->ui->deleteLogo      = "刪除Logo";
@@ -41,7 +40,7 @@ $lang->ui->useOldBlock     = '使用已有區塊';
 $lang->ui->themeStore      = '主題市場';
 $lang->ui->help            = "幫助";
 $lang->ui->deleteLogo      = "刪除Logo";
-$lang->ui->setCode         = "代碼設置";
+$lang->ui->setCode         = "代碼";
 $lang->ui->enableTheme     = "使用此主題";
 $lang->ui->industry        = "行業";
 
@@ -111,7 +110,7 @@ $lang->ui->template->qq              = 'QQ';
 $lang->ui->template->email           = 'Email';
 $lang->ui->template->site            = 'site';
 
-$lang->ui->customtheme = '自定義主題';
+$lang->ui->appearance  = '外觀';
 $lang->ui->custom      = '自定義';
 $lang->ui->themeSaved  = '主題配置已保存';
 $lang->ui->unWritable  = "不能生成樣式檔案，請檢查 %s目錄的權限";

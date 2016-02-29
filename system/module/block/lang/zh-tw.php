@@ -61,7 +61,7 @@ $lang->block->saveLayoutAs    = '複製佈局：%s';
 $lang->block->defaultPlan     = '預設方案';
 
 $lang->block->admin        = "區塊管理";
-$lang->block->pages        = "佈局設置";
+$lang->block->pages        = "佈局";
 $lang->block->add          = "添加";
 $lang->block->addChild     = "子區塊";
 $lang->block->template     = "模板";
