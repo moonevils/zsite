@@ -714,6 +714,12 @@ class helper
             $ip = $_SERVER["REMOTE_ADDR"];
         }
 
+        if(strpos($ip, ',') !== false)
+        {
+            $ipList = explode(',', $ip);
+            $ip = $ipList[0];
+        }
+
         return $ip;
     }
 
