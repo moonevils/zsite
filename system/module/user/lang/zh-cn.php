@@ -9,7 +9,7 @@
  * @version     $Id: zh-cn.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.chanzhi.org
  */
-$lang->user->common    = '用户';
+$lang->user->common    = '会员';
 
 $lang->user->id        = '编号';
 $lang->user->account   = '用户名';
@@ -231,7 +231,7 @@ if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->cont
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = '日志';
-$lang->user->log->list   = '管理员登录日志';
+$lang->user->log->list   = '登录日志';
 
 $lang->user->log->id          = 'ID';
 $lang->user->log->account     = '用户';

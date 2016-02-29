@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->article->common      = '文章';
 $lang->article->setting     = '文章设置';
-$lang->article->common      = '文章维护';
 $lang->article->createDraft = '保存草稿';
 $lang->article->post        = '创建投稿';
 $lang->article->check       = '审核投稿';
@@ -49,6 +49,7 @@ $lang->article->selectBoard      = '选择版块';
 $lang->article->confirmReject    = '确认驳回这篇投稿？';
 
 $lang->contribution= new stdclass();
+$lang->contribution->common  = '投稿';
 $lang->contribution->check   = '审核';
 $lang->contribution->list    = '投稿列表';
 $lang->contribution->publish = '发布';
@@ -79,11 +80,13 @@ $lang->article->contributionOptions = new stdclass;
 $lang->article->contributionOptions->open  = '开启';
 $lang->article->contributionOptions->close = '关闭';
 
+$lang->blog->common = '博客';
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';
 $lang->blog->create = '发布博客';
 $lang->blog->edit   = '编辑博客';
 
+$lang->page->common = '单页';
 $lang->page->admin  = '维护单页';
 $lang->page->list   = '单页列表';
 $lang->page->create = '添加单页';

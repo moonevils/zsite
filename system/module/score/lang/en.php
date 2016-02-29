@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The action module English file of ZenTaoCMS.
@@ -10,6 +11,7 @@
  */
 $lang->score->back        = 'Back';
 $lang->score->rankingList = 'Score Ranking';
+$lang->score->rule        = 'Score Rule';
 
 $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
@@ -36,19 +38,19 @@ $lang->score->dayRank   = 'Daily rank';
 
 $lang->score->methods['register']     = 'Register';
 $lang->score->methods['login']        = 'Login';
-$lang->score->methods['maxlogin']     = 'Max Scores of Daily Loging';
+$lang->score->methods['maxLogin']     = 'Max Scores of Daily Loging';
 $lang->score->methods['download']     = 'Download';
 
 $lang->score->methods['thread']      = 'Thread';
 $lang->score->methods['reply']       = 'Reply';
 $lang->score->methods['valuethread'] = 'Valueable thread';
 $lang->score->methods['valuereply']  = 'Valueable reply';
-$lang->score->methods['delthread']   = 'Delete thread';
-$lang->score->methods['delreply']    = 'Delete reply';
+$lang->score->methods['delThread']   = 'Delete thread';
+$lang->score->methods['delReply']    = 'Delete reply';
 $lang->score->methods['award']       = 'Reward Scores';
 $lang->score->methods['punish']      = 'Deduct Scores';
 
-$lang->score->methods['approvecontribution'] = 'Contributors Adoption';
+$lang->score->methods['approveContribution'] = 'Contributors Adoption';
 
 $lang->score->methods['buyscore']  = 'Buy score';
 $lang->score->methods['statement'] = 'Integral Settlement';
@@ -62,11 +64,10 @@ $lang->score->types['out'] = 'Decreate';
 $lang->score->getByThread = 'Published Thread'; 
 $lang->score->getByReply  = 'Replied Thread'; 
 
-$lang->score->lblTotal   = "Consume score：%s, Rank score: %s ";
-$lang->score->lblNoScore = "Sorry, your score isn't enouth.";
-$lang->score->lblNoScoreReason = "<p>Sorry, your scores is not enough.<strong>%s</strong> need <strong class='red'>%s</strong>scores，now you have <strong class='red'>%s</strong> scores.</p>
-                                  You can get scores by the following ways:<br />";
-$lang->score->lblDetail = "You can refer to <a href='http://www.chanzhi.net/thread-view-79915.html' target='_blank'>\"how to get scores\"</a><br /><br />";
+$lang->score->lblTotal         = "Consume score：%s, Rank score: %s ";
+$lang->score->lblNoScore       = "Sorry, your score isn't enouth.";
+$lang->score->lblNoScoreReason = "<p>Sorry, your scores is not enough.<strong>%s</strong> need <strong class='red'>%s</strong>scores，now you have <strong class='red'>%s</strong> scores.</p>";
+$lang->score->lblDetail        = "You can refer to <a href='http://www.chanzhi.net/thread-view-79915.html' target='_blank'>\"how to get scores\"</a><br /><br />";
 
 $lang->score->setAmount   = 'Amount';
 $lang->score->getScore    = 'Get scores';

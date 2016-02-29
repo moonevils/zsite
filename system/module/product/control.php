@@ -109,7 +109,7 @@ class product extends control
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $this->product->getList($families, $orderBy, $pager);
 
-        $this->view->title          = $this->lang->product->admin;
+        $this->view->title          = $this->lang->product->common;
         $this->view->products       = $products;
         $this->view->pager          = $pager;
         $this->view->categoryID     = $categoryID;

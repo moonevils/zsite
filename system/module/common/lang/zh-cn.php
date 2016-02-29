@@ -193,7 +193,7 @@ $lang->menu->visual   = "可视化|visual|index|";
 $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
 
-$lang->menu->package    = '扩展|package|browse|';
+$lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主题市场|ui|themestore|';
 
 /* Menu groups setting. */

@@ -42,7 +42,7 @@ class ui extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title           = $this->lang->ui->setTemplate;
+        $this->view->title           = $this->lang->ui->template->theme;
         $this->view->template        = current($templates);
         $this->view->installedThemes = $this->ui->getInstalledThemes();
         $this->view->currentTheme    = $this->config->template->{$this->device}->theme;
@@ -90,7 +90,7 @@ class ui extends control
 
         $this->view->setting = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
 
-        $this->view->title      = $this->lang->ui->customtheme;
+        $this->view->title      = $this->lang->ui->appearance;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
         $this->view->uiHeader   = true;

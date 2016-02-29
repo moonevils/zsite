@@ -38,7 +38,7 @@ $(document).ready(function()
     <?php $fileBtn = html::a($refUrl, $lang->guarder->created, "class='btn btn-sm btn-primary okFile'")?>
     <table class='table table-form'>
       <tr>
-        <th class='w-100px'><?php echo $lang->guarder->options;?></th>
+        <th class='w-80px'><?php echo $lang->guarder->options;?></th>
         <td colspan='3'>
           <?php
           $types   = array();

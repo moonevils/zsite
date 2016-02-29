@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->message->common            = 'Comments';
+$lang->message->common            = 'Message';
 $lang->message->id                = 'ID';
 $lang->message->type              = 'Type';
 $lang->message->from              = 'Name';
