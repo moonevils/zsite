@@ -3,10 +3,23 @@
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
-  <?php foreach ($lang->groups as $menuGroup => $groupSetting):?>
-  <?php list($module, $method, $params) = explode('|', $groupSetting['link'])?>
-  <li <?php if($menuGroup == $this->session->currentGroup) echo "class='active'";?> data-id='<?php echo $menuGroup ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $groupSetting['title'] ?>'><i class='icon icon-<?php echo $groupSetting['icon'] ?>'></i></a></li>
-  <?php endforeach;?>
+  <?php
+  foreach ($lang->groups as $menuGroup => $groupSetting)
+  {
+      $print = false;
+      $groupMenus = explode(',', $this->config->menus->$menuGroup);
+      foreach($groupMenus as $groupMenu)
+      {
+          if(commonModel::isAvailable($groupMenu)) $print = true;
+      }
+      if(!$print) continue;
+
+      list($module, $method, $params) = explode('|', $groupSetting['link']);
+      $class =  $menuGroup == $this->session->currentGroup ? 'active' : '';
+      $url   = helper::createLink($module, $method, $params);
+      echo "<li class='{$class}' data-id='{$menuGroup}'><a data-toggle='tooltip' href='{$url}' title='{$groupSetting['title']}'><i class='icon icon-{$groupSetting['icon']}'></i></a></li>";
+  }
+  ?>
   </ul>
   <?php echo commonModel::createManagerMenu('nav nav-stacked fixed-bottom');?>
 </nav>
