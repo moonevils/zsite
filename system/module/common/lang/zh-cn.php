@@ -163,9 +163,8 @@ $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->book     = '手册|book|admin|';
 $lang->menu->page     = '单页|article|admin|type=page';
 
-$lang->menu->product      = '产品|product|admin|';
 $lang->menu->order        = '订单|order|admin|';
-$lang->menu->express      = '快递|tree|browse|type=express';
+$lang->menu->product      = '产品|product|admin|';
 $lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
@@ -222,6 +221,11 @@ $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'create, edit');
 
 $lang->express = new stdclass();
+
+$lang->orderSetting = new stdclass();
+$lang->orderSetting->menu = new stdclass();
+$lang->orderSetting->menu->orderSetting = '设置|product|setting|';
+$lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
