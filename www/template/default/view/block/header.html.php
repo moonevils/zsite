@@ -10,7 +10,8 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<header id='header' class='clearfix' data-ve='block' data-id='<?php echo $block->id;?>'>
+<?php $isSearchAvaliable = commonModel::isAvailable('search'); ?>
+<header id='header' class='clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>' data-ve='block' data-id='<?php echo $block->id;?>'>
   <div id='headNav'>
     <div class='wrapper'>
       <nav>
@@ -36,7 +37,7 @@
       <div id='siteSlogan' data-ve='slogan'><span><?php echo $this->config->site->slogan;?></span></div>
     </div>
   </div>
-  <?php if(commonModel::isAvailable('search')):?>
+  <?php if($isSearchAvaliable):?>
   <div id='searchbar' data-ve='search'>
     <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
       <div class='input-group'>
