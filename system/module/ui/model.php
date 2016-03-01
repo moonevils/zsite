@@ -1056,6 +1056,7 @@ EOT;
         $params = $this->getCustomParams($template, $theme);
         $params = var_export($params, true);
         $params = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $params);
+        $params = str_replace("{$template}_{$theme}_", "{$template}__THEME_CODEFIX__", $params);
        
         foreach($this->config->css as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
         foreach($this->config->js  as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
