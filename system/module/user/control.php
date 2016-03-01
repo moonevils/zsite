@@ -397,6 +397,7 @@ class user extends control
         $this->view->token = $this->user->getToken();
         if(RUN_MODE == 'admin') 
         { 
+            $this->loadModel('mail');
             $user->groups = array_keys($this->loadModel('group')->getByAccount($user->account));
             $this->view->groups   = $this->loadModel('group')->getPairs();
             $this->view->siteLang = explode(',', $this->config->site->lang);
