@@ -27,7 +27,7 @@ $lang->score->product = '产品';
 $lang->score->confirm = '确认订单';
 $lang->score->details = '积分详情';
 
-$lang->score->setCounts = '设置积分规则';
+$lang->score->setCounts = '积分规则';
 
 $lang->score->totalRank = '总排行榜';
 $lang->score->rank      = '排名';
@@ -64,8 +64,8 @@ $lang->score->types['out']   = '减少';
 $lang->score->getByThread = '论坛发表主题赚积分'; 
 $lang->score->getByReply  = '论坛发表回帖赚积分'; 
 
-$lang->score->lblTotal   = "共有消耗积分：%s, 等级积分：%s ";
-$lang->score->lblNoScore = "抱歉，您的积分不够";
+$lang->score->lblTotal         = "共有消耗积分：%s, 等级积分：%s ";
+$lang->score->lblNoScore       = "抱歉，您的积分不够";
 $lang->score->lblNoScoreReason = "抱歉，您的积分不够 %s 需要 <strong class='red'>%s</strong> 分，您现在有 <strong class='red'>%s</strong> 分";
 $lang->score->lblDetail        = "详情可参考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
 

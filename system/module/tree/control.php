@@ -39,7 +39,7 @@ class tree extends control
             $this->tree->fixMenu($type);
             if($type == 'express')
             {
-                $this->lang->category->common = $this->lang->express->name;
+                $this->lang->category->common = $this->lang->express->common;
                 $this->lang->category->name   = $this->lang->express->name;
             }
         }

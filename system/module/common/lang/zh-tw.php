@@ -187,12 +187,13 @@ $lang->menu->logo     = '標誌|ui|setlogo|';
 $lang->menu->nav      = '導航|nav|admin|';
 $lang->menu->block    = '區塊|block|admin|';
 $lang->menu->slide    = '幻燈片|slide|admin|';
-$lang->menu->visual   = "<i class='icon icon-magic'></i> 可視化編輯|visual|index|";
+$lang->menu->others   = "設置|ui|others|";
+$lang->menu->visual   = "可視化|visual|index|";
 
 $lang->menu->site     = '站點|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
 
-$lang->menu->package    = '擴展|package|browse|';
+$lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主題市場|ui|themestore|';
 
 /* Menu groups setting. */
@@ -288,6 +289,9 @@ $lang->security->menu->log       = '登錄日誌|user|adminlog|';
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
 
+/* Menu of score module. */
+$lang->score->menu = $lang->site->menu;
+
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
 $lang->address = new stdclass();
@@ -323,13 +327,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = '概況|stat|traffic|';
-$lang->stat->menu->from     = '來源統計|stat|from|';
-$lang->stat->menu->search   = '搜索引擎統計|stat|search|';
-$lang->stat->menu->keywords = '關鍵詞統計|stat|keywords|';
+$lang->stat->menu->traffic  = '流量概況|stat|traffic|';
+$lang->stat->menu->from     = '來源分類|stat|from|';
 $lang->stat->menu->domains  = array('link' => '來路域名|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
-$lang->stat->menu->client   = '終端統計|stat|client|type=browser';
-$lang->stat->menu->page     = '頁面訪問量排名|stat|page|';
+$lang->stat->menu->search   = '搜索引擎|stat|search|';
+$lang->stat->menu->keywords = '關鍵詞|stat|keywords|';
+$lang->stat->menu->client   = '用戶終端|stat|client|type=browser';
+$lang->stat->menu->page     = '點擊排行|stat|page|';
 $lang->stat->menu->setStat  = '設置|stat|setting|';
 
 /* The error messages. */

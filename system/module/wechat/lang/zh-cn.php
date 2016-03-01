@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->wechat->common = '微信设置';
+$lang->wechat->common = '微信';
 
 $lang->wechat->id        = '编号';
 $lang->wechat->type      = '类型';
@@ -28,6 +28,7 @@ $lang->wechat->create         = '添加公众号';
 $lang->wechat->edit           = '编辑公众号';
 $lang->wechat->admin          = '维护公众号';
 $lang->wechat->list           = '公众号列表';
+$lang->wechat->set            = '微信设置';
 $lang->wechat->setMenu        = '菜单';
 $lang->wechat->integrate      = '接入';
 $lang->wechat->adminResponse  = '响应';

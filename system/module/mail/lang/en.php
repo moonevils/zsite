@@ -1,5 +1,5 @@
 <?php
-$lang->mail->common = 'Email setting';
+$lang->mail->common = 'Mail';
 $lang->mail->index  = 'Index';
 $lang->mail->detect = 'Detect';
 $lang->mail->edit   = 'Configure';

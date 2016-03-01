@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->article->setting     = 'Setting';
 $lang->article->common      = 'Article';
+$lang->article->setting     = 'Setting';
 $lang->article->createDraft = 'Create draft';
 $lang->article->post        = 'Post Contribution';
 $lang->article->check       = 'Review post';
@@ -49,6 +49,7 @@ $lang->article->selectBoard      = 'Select board';
 $lang->article->confirmReject    = 'Are you sure to reject this post ?';
 
 $lang->contribution= new stdclass();
+$lang->contribution->common  = 'Contribution';
 $lang->contribution->check   = 'Check';
 $lang->contribution->list    = 'Contribution List';
 $lang->contribution->publish = 'Publish';
@@ -79,11 +80,13 @@ $lang->article->contributionOptions = new stdclass;
 $lang->article->contributionOptions->open  = 'Open';
 $lang->article->contributionOptions->close = 'Close';
 
+$lang->blog->common = 'Blog';
 $lang->blog->admin  = 'Admin';
 $lang->blog->list   = 'List';
 $lang->blog->create = 'Create';
 $lang->blog->edit   = 'Edit';
 
+$lang->page->common = 'Page';
 $lang->page->admin  = 'Admin';
 $lang->page->list   = 'List';
 $lang->page->create = 'Create';

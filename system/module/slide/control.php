@@ -25,6 +25,7 @@ class slide extends control
             $group->slides = $this->slide->getList($group->id);
             $group->slide = $this->slide->getFirstSlide($group->id);
         }
+        $this->view->title  = $this->lang->slide->common;
         $this->view->groups = $groups;
         $this->display();
     }
@@ -77,6 +78,7 @@ class slide extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title = $this->lang->slide->create;
         $this->display(); 
     }
 
@@ -98,6 +100,7 @@ class slide extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title = $this->lang->slide->edit;
         $this->view->id    = $id;
         $this->view->slide = $slide;
         $this->display();

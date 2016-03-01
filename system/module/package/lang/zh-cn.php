@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->package->common        = '插件管理';
+$lang->package->common        = '插件';
 $lang->package->browse        = '浏览插件';
 $lang->package->install       = '安装';
 $lang->package->installAuto   = '自动安装';

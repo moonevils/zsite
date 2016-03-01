@@ -61,7 +61,7 @@ $lang->block->saveLayoutAs    = '复制布局：%s';
 $lang->block->defaultPlan     = '默认方案';
 
 $lang->block->admin        = "区块管理";
-$lang->block->pages        = "布局设置";
+$lang->block->pages        = "布局";
 $lang->block->add          = "添加";
 $lang->block->addChild     = "子区块";
 $lang->block->template     = "模板";

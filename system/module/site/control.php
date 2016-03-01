@@ -56,7 +56,7 @@ class site extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
 
-        $this->view->title = $this->lang->site->setBasic;
+        $this->view->title = $this->lang->site->common;
         $this->display();
     }
 

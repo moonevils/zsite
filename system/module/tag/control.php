@@ -28,7 +28,7 @@ class tag extends control
 
         $tag = $this->post->tag ? $this->post->tag : '';
 
-        $this->view->title   = $this->lang->tag->admin;
+        $this->view->title   = $this->lang->tag->common;
         $this->view->pager   = $pager;
         $this->view->tags    = $this->tag->getList($tag, $orderBy, $pager);
         $this->view->orderBy = $orderBy;

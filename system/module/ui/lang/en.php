@@ -22,7 +22,6 @@ $lang->ui->manageTheme     = 'Themes';
 $lang->ui->installTemplate = 'Import Template';
 $lang->ui->exportTheme     = 'Export Theme';
 $lang->ui->setTheme        = 'Set Theme';
-$lang->ui->customTheme     = 'Custom theme';
 $lang->ui->setFavicon      = "Set favicon";
 $lang->ui->deleteFavicon   = "Not display favicon";
 $lang->ui->deleteLogo      = "Delete logo";
@@ -41,7 +40,7 @@ $lang->ui->useOldBlock     = 'Use Old Blocks';
 $lang->ui->themeStore      = 'Theme store';
 $lang->ui->help            = "Help";
 $lang->ui->deleteLogo      = "Delete Logo";
-$lang->ui->setCode         = "Code setting";
+$lang->ui->setCode         = "Code";
 $lang->ui->enableTheme     = "Use this theme";
 $lang->ui->industry        = "Industry";
 
@@ -111,7 +110,7 @@ $lang->ui->template->qq              = 'QQ';
 $lang->ui->template->email           = 'Email';
 $lang->ui->template->site            = 'site';
 
-$lang->ui->customtheme = 'Custom theme';
+$lang->ui->appearance  = 'Appearance';
 $lang->ui->custom      = 'Custom';
 $lang->ui->themeSaved  = 'Theme settings saved.';
 $lang->ui->unWritable  = "Failed to save css file Please check %s is writable.";

@@ -33,7 +33,7 @@
       </div>
     </form>
      <?php if($type == 'page') commonModel::printLink('article', 'create', "type={$type}", '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?>
-     <?php if($type != 'page') commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->article->create, 'class="btn btn-primary"');?>
+     <?php if($type != 'page') commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->$type->create, 'class="btn btn-primary"');?>
    </div>
   <?php endif;?>
   </div>
