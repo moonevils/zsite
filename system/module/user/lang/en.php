@@ -132,6 +132,7 @@ $lang->user->forbidDate['2']     = '2d';
 $lang->user->forbidDate['3']     = '3d';
 $lang->user->forbidDate['7']     = '7d';
 $lang->user->forbidDate['30']    = '30d';
+$lang->user->forbidDate['3000']  = 'Forever';
 $lang->user->operate             = 'Operate';
 
 $lang->user->adminList['super']  = 'Super administrator';
@@ -163,8 +164,9 @@ $lang->user->login->welcome = 'Welcome';
 $lang->user->login->why     = 'Login, and use more feature.';
 
 $lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "Password change link has been sent to your mailbox";
-$lang->user->resetPassword->failed     = "Please input your correct mail";
+$lang->user->resetPassword->common  = "Reset Password";
+$lang->user->resetPassword->success = "Password change link has been sent to your mailbox";
+$lang->user->resetPassword->failed  = "Please input your correct mail";
 
 $lang->user->resetMail = new stdclass();
 $lang->user->resetMail->subject  = 'Modify password';

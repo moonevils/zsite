@@ -95,7 +95,7 @@ class wechat extends control
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 
-        $this->view->title     = $this->lang->wechat->admin;
+        $this->view->title     = $this->lang->wechat->common;
         $this->view->publics   = $publics;
         $this->view->sslLoaded = extension_loaded('openssl');
         $this->display();
@@ -129,6 +129,7 @@ class wechat extends control
      */
     public function integrate($publicID)
     {
+        $this->view->title  = $this->lang->wechat->integrate;
         $this->view->public = $this->wechat->getByID($publicID);
         $this->display();
     } 
@@ -307,6 +308,7 @@ class wechat extends control
             if(isset($wechatUsers[$message->from])) $message->fromUserName = $wechatUsers[$message->from];
         }
 
+        $this->view->title       = $this->lang->wechat->common;
         $this->view->publicList  = $this->wechat->getList(); 
         $this->view->messageList = $messageList;
         $this->view->pager       = $pager;

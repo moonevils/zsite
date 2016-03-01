@@ -99,9 +99,8 @@ class order extends control
         $this->view->mode    = $mode;
         $this->view->value   = $value;
 
-        $this->view->title          = $this->lang->order->admin;
+        $this->view->title          = $this->lang->order->common;
         $this->view->currencySymbol = $this->config->product->currencySymbol;
-        
         $this->display();
     }
 

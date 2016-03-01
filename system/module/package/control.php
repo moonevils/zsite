@@ -46,12 +46,11 @@ class package extends control
             }
         }
 
-        $this->view->title      = $this->lang->package->browse;
-        $this->view->position[] = $this->lang->package->browse;
-        $this->view->tab        = $status;
-        $this->view->packages   = $packages;
-        $this->view->versions   = $versions;
-        $this->view->status     = $status;
+        $this->view->title    = $this->lang->package->common;
+        $this->view->tab      = $status;
+        $this->view->packages = $packages;
+        $this->view->versions = $versions;
+        $this->view->status   = $status;
         $this->display();
     }
 

@@ -91,13 +91,13 @@ class article extends control
             $type = 'contribution';
             $this->lang->menuGroups->article = 'contribution';
             unset($this->lang->article->menu);
-            $this->view->title = $this->lang->contribution->check;
+            $this->view->title = $this->lang->contribution->common;
         }
         else
         {
             $this->lang->article->menu = $this->lang->$type->menu;
             $this->lang->menuGroups->article = $type;
-            $this->view->title = $this->lang->$type->admin;
+            $this->view->title = $this->lang->$type->common;
         }
 
         $this->app->loadClass('pager', $static = true);
@@ -278,7 +278,7 @@ class article extends control
             $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
 
-        $this->view->title      = $this->lang->article->edit;
+        $this->view->title      = $this->lang->$type->edit;
         $this->view->article    = $article;
         $this->view->categories = $categories;
         $this->view->type       = $type;

@@ -9,7 +9,7 @@
  * @version     $Id: zh-cn.php 824 2010-05-02 15:32:06Z wwccss $
  * @link        http://www.chanzhi.org
  */
-$lang->user->common    = '用户';
+$lang->user->common    = '会员';
 
 $lang->user->id        = '编号';
 $lang->user->account   = '用户名';
@@ -127,12 +127,13 @@ $lang->user->resetSuccess      = '重置密码成功，请用新密码登录';
 
 $lang->user->forbidUser = '禁用管理';
 $lang->user->forbidDate = array();
-$lang->user->forbidDate['1']     = '一天';
-$lang->user->forbidDate['2']     = '两天';
-$lang->user->forbidDate['3']     = '三天';
-$lang->user->forbidDate['7']     = '一周';
-$lang->user->forbidDate['30']    = '一个月';
-$lang->user->operate             = '操作';
+$lang->user->forbidDate['1']    = '一天';
+$lang->user->forbidDate['2']    = '两天';
+$lang->user->forbidDate['3']    = '三天';
+$lang->user->forbidDate['7']    = '一周';
+$lang->user->forbidDate['30']   = '一个月';
+$lang->user->forbidDate['3000'] = '永久';
+$lang->user->operate            = '操作';
 
 $lang->user->adminList['super']  = '超级管理员';
 $lang->user->adminList['common'] = '管理员';
@@ -230,7 +231,7 @@ if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->cont
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = '日志';
-$lang->user->log->list   = '管理员登录日志';
+$lang->user->log->list   = '登录日志';
 
 $lang->user->log->id          = 'ID';
 $lang->user->log->account     = '用户';

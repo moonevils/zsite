@@ -109,7 +109,7 @@ class message extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title    = $this->lang->message->common;
+        $this->view->title    = $type == 'reply' ? $this->lang->message->reply : $this->lang->$type->common;
         $this->view->messages = $this->message->getList($type, $status, $pager);
         $this->view->pager    = $pager;
         $this->view->type     = $type;

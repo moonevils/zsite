@@ -621,7 +621,7 @@ class articleModel extends model
      * @access public
      * @return string
      */
-    public function createPreviewLink($articleID)
+    public function createPreviewLink($articleID, $viewType = '')
     {
         $article = $this->getByID($articleID);
         if(empty($article)) return null;
@@ -638,7 +638,7 @@ class articleModel extends model
             $alias = "name=$article->alias";
         }
 
-        $link = commonModel::createFrontLink($module, 'view', $param, $alias);
+        $link = commonModel::createFrontLink($module, 'view', $param, $alias, $viewType);
         if($article->link) $link = $article->link;
 
         return $link;

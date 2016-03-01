@@ -78,16 +78,17 @@ class forum extends control
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
+        $this->loadModel('thread');
 
         $boards  = $this->loadModel('tree')->getFamily($boardID, 'forum');
-        $threads = $boards ? $this->loadModel('thread')->getList($boards, $orderBy, $pager) : array();
+        $threads = $boards ? $this->thread->getList($boards, $orderBy, $pager) : array();
 
         $this->lang->menuGroups->forum = 'thread';
 
         $this->view->boardID  = $boardID;
         $this->view->orderBy  = $orderBy;
         $this->view->board    = $this->tree->getByID($boardID, 'forum');
-        $this->view->title    = $this->view->board ? $this->view->board->name : $this->lang->forum->admin;
+        $this->view->title    = $this->lang->thread->common;
         $this->view->threads  = $threads;
         $this->view->pager    = $pager;
 

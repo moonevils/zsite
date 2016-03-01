@@ -42,7 +42,7 @@ class block extends control
         $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
-        $this->view->title    = $this->lang->block->browseRegion;
+        $this->view->title    = $this->lang->block->pages;
         $this->view->plans    = $this->block->getPlans($template);
         $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
@@ -73,6 +73,7 @@ class block extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title    = $this->lang->block->create;
         $this->view->type     = $type;
         $this->view->template = $template;
         $this->view->theme    = $theme;
@@ -104,6 +105,7 @@ class block extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title    = $this->lang->block->edit;
         $this->view->template = $template;
         $this->view->theme    = $theme;
         $this->view->block    = $this->block->getByID($blockID);

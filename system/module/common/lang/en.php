@@ -168,7 +168,7 @@ $lang->menu->order        = 'Order|order|admin|';
 $lang->menu->express      = 'Express|tree|browse|type=express';
 $lang->menu->orderSetting = 'Setting|product|setting|';
 
-$lang->menu->user         = 'USer|user|admin|';
+$lang->menu->user         = 'User|user|admin|';
 $lang->menu->message      = 'Message|message|admin|type=message';
 $lang->menu->comment      = 'Comment|message|admin|type=comment';
 $lang->menu->reply        = 'Message Reply|message|admin|type=reply';
@@ -179,7 +179,7 @@ $lang->menu->contribution = 'Contribution|article|admin|type=contribution&tab=us
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = 'Stat|stat|traffic|';
-$lang->menu->tag   = 'Tags|tag|admin|';
+$lang->menu->tag   = 'Keywords|tag|admin|';
 $lang->menu->links = 'Links|links|admin|';
 
 $lang->menu->ui       = 'Ui|ui|settemplate|';
@@ -187,13 +187,13 @@ $lang->menu->logo     = 'Logo|ui|setlogo|';
 $lang->menu->nav      = 'Nav|nav|admin|';
 $lang->menu->block    = 'Block|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
-$lang->menu->others   = "Seeing|ui|others|";
+$lang->menu->others   = "Setting|ui|others|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i> Visual design|visual|index|";
 
 $lang->menu->site     = 'site|site|setbasic|';
 $lang->menu->security = 'Security|site|setsecurity|';
 
-$lang->menu->package    = 'Extension|package|browse|';
+$lang->menu->package    = 'Package|package|browse|';
 $lang->menu->themestore = 'Theme stroe|ui|themestore|';
 
 /* Menu groups setting. */
@@ -234,11 +234,11 @@ $lang->ui = new stdclass();
 /* Menu of theme. */
 $lang->theme = new stdclass();
 $lang->theme->menu = new stdclass();
-$lang->theme->menu->theme   = 'Themes|ui|settemplate|';
+$lang->theme->menu->theme   = 'Theme|ui|settemplate|';
 $lang->theme->menu->layout  = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 $lang->theme->menu->custom  = 'Appearance|ui|customtheme|';
-$lang->theme->menu->code    = 'Codes|ui|setcode|';
-$lang->theme->menu->source  = 'Sources|file|browsesource|';
+$lang->theme->menu->code    = 'Code|ui|setcode|';
+$lang->theme->menu->source  = 'Source|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -253,9 +253,9 @@ $lang->message = new stdclass();
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
-$lang->forum->menu->browse  = 'Threads|forum|admin|';
-$lang->forum->menu->reply   = 'Replies|reply|admin|';
-$lang->forum->menu->tree    = 'Boards|tree|browse|type=forum';
+$lang->forum->menu->browse  = 'Thread|forum|admin|';
+$lang->forum->menu->reply   = 'Reply|reply|admin|';
+$lang->forum->menu->tree    = 'Board|tree|browse|type=forum';
 $lang->forum->menu->update  = 'Update|forum|update|';
 $lang->forum->menu->setting = 'Forum Settings|forum|setting|';
 
@@ -288,6 +288,9 @@ $lang->security->menu->log       = 'Login log|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
+
+/* Menu of score module. */
+$lang->score->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -324,13 +327,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = 'Summary|stat|traffic|';
-$lang->stat->menu->from     = 'Source Stats|stat|from|';
-$lang->stat->menu->search   = 'Search Engine Stats|stat|search|';
-$lang->stat->menu->keywords = 'Keyswords Stats|stat|keywords|';
-$lang->stat->menu->domains  = 'Antecedents Domains|stat|domainlist|';
-$lang->stat->menu->client   = 'Client Stats|stat|client|type=browser';
-$lang->stat->menu->page     = 'Page Views Ranking|stat|page|';
+$lang->stat->menu->traffic  = 'Traffic Info|stat|traffic|';
+$lang->stat->menu->from     = 'Source|stat|from|';
+$lang->stat->menu->domains  = array('link' => 'Domain|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
+$lang->stat->menu->search   = 'Search Engine|stat|search|';
+$lang->stat->menu->keywords = 'Keywords|stat|keywords|';
+$lang->stat->menu->client   = 'Client|stat|client|type=browser';
+$lang->stat->menu->page     = 'Click ranking|stat|page|';
 $lang->stat->menu->setStat  = 'Setting|stat|setting|';
 
 /* Error info. */

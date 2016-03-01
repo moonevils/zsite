@@ -52,6 +52,9 @@
   </div>
 </nav>
 <div class="clearfix row-main">
+  <?php if($this->session->currentGroup == 'home' and strpos('forum,reply', $this->moduleName) !== false and $this->methodName == 'admin'):?>
+  <div class='col-md-12'>
+  <?php else:?>
   <?php $moduleName = $this->moduleName; ?>
   <?php $menuGroup  = zget($lang->menuGroups, $moduleName);?>
   <?php if(!isset($uiHeader) or !$uiHeader): ?>
@@ -91,4 +94,5 @@
     </div>
     <div class='col-md-10'>
     <?php endif;?>
+  <?php endif;?>
   <?php endif;?>

@@ -13,6 +13,15 @@ $(document).ready(function()
         }
     });
 
+    $('#navbar .dropdown-submenu, #blogNav .dropdown-submenu').mouseover(function()
+    {
+        var $menu = $('#navbar ul.navbar-nav > li.dropdown'); 
+        if($menu.offset().left + $menu.find('.dropdown-menu').width() + $menu.find('.dropdown-submenu').find('.dropdown-menu').width() > $(window).width()) 
+        {
+            $(this).addClass('pull-left');
+        }
+    })
+
     setRequiredFields();
 
     $.setAjaxForm('#ajaxForm');

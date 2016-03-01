@@ -553,7 +553,7 @@ class user extends control
         
         $this->view->users = $users;
         $this->view->pager = $pager;
-        $this->view->title = $this->lang->user->list;
+        $this->view->title = $this->lang->user->common;
         $this->display();
     }
 
@@ -984,6 +984,7 @@ class user extends control
         
         $this->view->logs  = $logs;
         $this->view->pager = $pager;
+        $this->view->users = $this->user->getPairs();
         $this->view->title = $this->lang->user->log->list;
         $this->display();
     }

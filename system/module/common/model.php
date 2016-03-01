@@ -935,15 +935,15 @@ class commonModel extends model
      * @param string|array $alias
      * return string
      */
-    public static function createFrontLink($module, $method, $vars = '', $alias = '')
+    public static function createFrontLink($module, $method, $vars = '', $alias = '', $viewType = '')
     {
-        if(RUN_MODE == 'front') return helper::createLink($module, $method, $vars, $alias);
+        if(RUN_MODE == 'front') return helper::createLink($module, $method, $vars, $alias, $viewType);
 
         global $config;
 
         $requestType = $config->requestType;
         $config->requestType = $config->frontRequestType;
-        $link = helper::createLink($module, $method, $vars, $alias, '',  $front = true);
+        $link = helper::createLink($module, $method, $vars, $alias, $viewType);
         $link = str_replace($_SERVER['SCRIPT_NAME'], $config->webRoot . 'index.php', $link);
         $config->requestType = $requestType;
 

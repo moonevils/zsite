@@ -34,26 +34,26 @@ js::set('admin', $this->get->admin);
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>
-    <table class='table table-hover table-striped table-bordered'>
+    <table class='table table-hover table-striped table-bordered table-condensed' id='userList'>
       <thead>
         <tr class='text-center'>
-          <th><?php echo $lang->user->id;?></th>
-          <th><?php echo $lang->user->realname;?></th>
-          <th><?php echo $lang->user->account;?></th>
+          <th class='w-60px'><?php echo $lang->user->id;?></th>
+          <th class='w-100px'><?php echo $lang->user->realname;?></th>
+          <th class='w-100px'><?php echo $lang->user->account;?></th>
           <?php if(commonModel::isAvailable('score')):?>
-          <th><?php echo $lang->user->score;?></th>
-          <th><?php echo $lang->user->rank;?></th>
+          <th class='w-70px'><?php echo $lang->user->score;?></th>
+          <th class='w-70px'><?php echo $lang->user->rank;?></th>
           <?php endif;?>
           <?php if(!$this->get->admin):?>
-          <th><?php echo $lang->user->gender;?></th>
-          <th class='text-left'><?php echo $lang->user->company;?></th>
-          <th><?php echo $lang->user->join;?></th>
+          <th class='w-60px'><?php echo $lang->user->gender;?></th>
+          <th class='text-left visible-lg'><?php echo $lang->user->company;?></th>
+          <th class='w-80px'><?php echo $lang->user->join;?></th>
           <?php endif;?>
-          <th><?php echo $lang->user->visits;?></th>
-          <th><?php echo $lang->user->last;?></th>
-          <th><?php echo $lang->user->ip;?></th>
-          <th><?php echo $lang->user->status;?></th>
-          <th><?php echo $lang->actions;?></th>
+          <th class='w-70px'><?php echo $lang->user->visits;?></th>
+          <th class='w-140px'><?php echo $lang->user->last;?></th>
+          <th class='w-100px'><?php echo $lang->user->ip;?></th>
+          <th class='w-60px'><?php echo $lang->user->status;?></th>
+          <th class='w-160px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -72,7 +72,7 @@ js::set('admin', $this->get->admin);
         <?php endif;?>
         <?php if(!$this->get->admin):?>
         <td><?php $gender = $user->gender; echo zget($lang->user->genderList, $gender);?></td>
-        <td><?php echo $user->company;?></td>
+        <td class='text-left visible-lg'><?php echo $user->company;?></td>
         <td><?php echo substr($user->join, 0, 10);?></td>
         <?php endif;?>
         <td><?php echo $user->visits;?></td>
@@ -83,7 +83,7 @@ js::set('admin', $this->get->admin);
         <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
         <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
         </td>
-        <td class='operate'>
+        <td class='operate text-left'>
           <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
           <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
           <?php if(commonModel::isAvailable('score')):?>
