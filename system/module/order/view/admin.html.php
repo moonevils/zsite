@@ -30,53 +30,32 @@
         <th class='w-80px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th><?php echo $lang->order->productInfo;?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
-        <th class='w-220px'><?php echo $lang->order->life;?></th>
-        <th class='w-200px'><?php echo $lang->order->expressInfo;?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
-        <th class='w-120px'><?php echo $lang->order->note;?></th>
-        <th class='w-80px'><?php echo $lang->actions;?></th>
+        <th><?php echo $lang->order->note;?></th>
+        <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($orders as $order):?>
-      <tr class='text-center text-middle'>
+      <tr class='text-center text-top'>
         <td><?php echo $order->id;?></td>
-        <td class='text-left'><?php echo $order->account;?></td>
+        <td><?php echo zget($users, $order->account);?></td>
         <td>
           <?php if($order->type == 'score'):?>
           <?php echo $lang->order->score;?>
           <?php else:?>
-          <dl>
             <?php foreach($order->products as $product):?>
-            <dd class='text-left'>
+            <div class='text-left'>
               <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
               <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
-            </dd>
+            </div>
             <?php endforeach;?>
-          </dl>
           <?php endif;?>
         </td>
-        <td class='text-center'><?php echo $order->amount;?></td>
-        <td>
-          <?php echo $lang->order->createdDate . $lang->colon .  $order->createdDate . '</br>';?>
-          <?php if($order->payment != 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate . '</br>';?>
-          <?php if($order->deliveriedDate > $order->createdDate) echo $lang->order->deliveriedDate . $lang->colon .  $order->deliveriedDate . '</br>';?>
-          <?php if($order->confirmedDate > $order->deliveriedDate) echo $lang->order->confirmedDate . $lang->colon .  $order->confirmedDate . '</br>';?>
-          <?php if($order->payment == 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate . '</br>';?>
-        </td>
-        <td class = 'text-left'>
-          <?php if($order->deliveryStatus !== 'not_send') 
-                {
-                    echo $lang->order->express . $lang->colon . $this->order->expressInfo($order) . '</br>';
-                    echo $lang->order->waybill . $lang->colon . $order->waybill . '</br>'; 
-                    echo $lang->order->receiver . $lang->colon . json_decode($order->address)->contact . '[' . json_decode($order->address)->phone . ']' . '</br>';
-                }
-                else echo $lang->order->noRecord;
-          ?>
-        </td>
+        <td><?php echo $order->amount;?></td>
         <td><?php echo $this->order->processStatus($order);?></td>
         <td><?php echo $order->note;?></td>
-        <td><?php $this->order->printActions($order);?></td>
+        <td class='text-left'><?php $this->order->printActions($order);?></td>
       </tr>
       <?php endforeach;?>
     </tbody>
