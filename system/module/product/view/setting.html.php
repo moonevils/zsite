@@ -43,15 +43,15 @@
         </tr>
         <tr class='alipay-item'>
           <th><?php echo $lang->order->alipayPid;?></th>
-          <td colspan='2'><?php echo html::input('pid', $this->config->alipay->pid, "class='form-control' placeholder='{$lang->order->placeholder->pid}'" );?>
+          <td colspan='2'><?php echo html::input('pid', isset($this->config->alipay->pid) ? $this->config->alipay->pid : '', "class='form-control' placeholder='{$lang->order->placeholder->pid}'" );?>
         </tr>
         <tr class='alipay-item'>
           <th><?php echo $lang->order->alipayKey;?></th>
-          <td colspan='2'><?php echo html::input('key', $this->config->alipay->key, "class='form-control' placeholder='{$lang->order->placeholder->key}'" );?>
+          <td colspan='2'><?php echo html::input('key', isset($this->config->alipay->key) ? $this->config->alipay->key : '', "class='form-control' placeholder='{$lang->order->placeholder->key}'" );?>
         </tr>
         <tr class='alipay-item'>
           <th><?php echo $lang->order->alipayEmail;?></th>
-          <td colspan='2'><?php echo html::input('email', $this->config->alipay->email, "class='form-control' placeholder='{$lang->order->placeholder->email}'" );?>
+          <td colspan='2'><?php echo html::input('email', isset($this->config->alipay->email) ? $this->config->alipay->email : '', "class='form-control' placeholder='{$lang->order->placeholder->email}'" );?>
         </tr>
         <?php endif;?>
         <tr>
