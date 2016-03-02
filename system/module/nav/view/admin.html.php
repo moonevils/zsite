@@ -15,7 +15,6 @@
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-location-arrow'></i> <?php echo $lang->nav->setNav;?></strong> &nbsp; &nbsp;
     <?php if($this->config->site->type != 'blog'):?>
     <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop, $type == 'desktop_top' ? "class='active'" : '');?>
     <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $type == 'mobile_top' ? "class='active'" : '');?>

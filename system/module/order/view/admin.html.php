@@ -14,18 +14,16 @@
 <?php js::set('finishWarning', $lang->order->finishWarning);?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-list-ul"> </i><?php echo $lang->order->admin;?></strong>
     <?php
-    echo '&nbsp; &nbsp; &nbsp;';
-    echo html::a(inlink('admin', "mode=status&status=normal"), $lang->order->statusList['normal'], $value == 'normal' ? "class='active'" : '');
-    echo html::a(inlink('admin', "mode=status&status=finished"), $lang->order->statusList['finished'], $value == 'finished' ? "class='active'" : '');
-    echo html::a(inlink('admin', "mode=status&status=canceled"), $lang->order->statusList['canceled'], $value == 'canceled' ? "class='active'" : '');
+    echo html::a(inlink('admin', "mode=status&status=normal"), $lang->order->statusList['normal'], $param == 'normal' ? "class='active'" : '');
+    echo html::a(inlink('admin', "mode=status&status=finished"), $lang->order->statusList['finished'], $param == 'finished' ? "class='active'" : '');
+    echo html::a(inlink('admin', "mode=status&status=canceled"), $lang->order->statusList['canceled'], $param == 'canceled' ? "class='active'" : '');
     ?>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <?php $vars = "mode=$mode&value={$value}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+        <?php $vars = "mode=$mode&param={$param}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th><?php echo $lang->order->productInfo;?></th>

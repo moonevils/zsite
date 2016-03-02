@@ -246,11 +246,6 @@ $lang->theme->menu->source  = '素材|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
-$lang->user->menu = new stdclass();
-$lang->user->menu->all    = '全部会员|user|admin|';
-$lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
-$lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
-$lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 
 $lang->message = new stdclass();
 
