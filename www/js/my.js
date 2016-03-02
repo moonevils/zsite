@@ -89,4 +89,13 @@ $(document).ready(function()
     $('.file-md5 a').popover();
 
     fixFooterOfWideTheme(); // Fit footer style of the 'wide' theme
+
+    window.onload = function()
+    {
+        var detective = new Detector();
+        if(!detective.detect('Helvetica Neue') && !detective.detect('Helvetica') && detective.detect('Microsoft Yahei'));
+        {
+            $('#navbar a').css('font-weight', 'normal');
+        }
+    };
 });
