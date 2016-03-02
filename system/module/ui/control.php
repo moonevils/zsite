@@ -212,6 +212,7 @@ class ui extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->lang->menuGroups->ui = 'others';
         $this->view->title = $this->lang->ui->others;
         $this->display();
     }
