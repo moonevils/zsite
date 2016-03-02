@@ -108,7 +108,7 @@ class order extends control
      * @access public
      * @return void
      */
-    public function admin($mode = 'status', $value = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
+    public function admin($mode = 'status', $param = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
     {
         if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
@@ -118,11 +118,11 @@ class order extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->title          = $this->lang->order->common;
-        $this->view->orders         = $this->order->getList($mode, $value, $orderBy, $pager);
+        $this->view->orders         = $this->order->getList($mode, $param, $orderBy, $pager);
         $this->view->pager          = $pager;
         $this->view->orderBy        = $orderBy;
         $this->view->mode           = $mode;
-        $this->view->value          = $value;
+        $this->view->param          = $param;
         $this->view->users          = $this->loadModel('user')->getPairs();
         $this->view->currencySymbol = $this->config->product->currencySymbol;
         $this->display();

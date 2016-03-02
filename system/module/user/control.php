@@ -28,9 +28,6 @@ class user extends control
     public function __construct()
     {
         parent::__construct();
-        if(empty($this->config->oauth->sina)) unset($this->lang->user->menu->sina);
-        if(empty($this->config->oauth->qq))   unset($this->lang->user->menu->qq);
-        if(!($this->loadModel('wechat')->getList())) unset($this->lang->user->menu->wechat);
     }
 
     /**
