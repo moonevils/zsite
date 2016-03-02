@@ -204,6 +204,7 @@ $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
 $lang->menuGroups->score   = 'site';
+$lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
 $lang->article = new stdclass();

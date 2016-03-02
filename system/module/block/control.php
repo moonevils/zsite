@@ -42,12 +42,14 @@ class block extends control
         $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
+        $this->lang->menuGroups->block = 'ui';
+        $this->lang->block->menu = $this->lang->theme->menu;
+
         $this->view->title    = $this->lang->block->pages;
         $this->view->plans    = $this->block->getPlans($template);
         $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
         $this->view->uiHeader = true;
-        $this->lang->block->menu = $this->lang->theme->menu;
         $this->display();       
     }
 
