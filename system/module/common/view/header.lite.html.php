@@ -2,7 +2,7 @@
 <?php
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
+$themeRoot = $webRoot . "theme/default/";
 ?>
 <!DOCTYPE html>
 <html lang='<?php echo $app->getClientLang();?>'>
