@@ -30,7 +30,7 @@
       <?php foreach($replies as $reply):?>
       <tr class='text-center'>
         <td><?php echo $reply->id;?></td>
-        <td class='text-left'>
+        <td class='text-left relpy-content'>
           <?php 
           echo html::a(commonModel::createFrontLink('thread', 'locate', "threadID={$reply->thread}&replyID={$reply->id}"), $reply->content, "target=_blank");
           ?>
