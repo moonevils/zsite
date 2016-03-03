@@ -466,14 +466,18 @@ class js
      * @access public
      * @return string
      */
-    public static function import($url)
+    public static function import($url, $cdn = false)
     {
         global $config;
 
-        $pathInfo = parse_url($url);
-        $mark  = !empty($pathInfo['query']) ? '&' : '?';
+        if(!$cdn)
+        {
+            $pathInfo = parse_url($url);
+            $mark  = !empty($pathInfo['query']) ? '&' : '?';
+            $url = "$url{$mark}v={$config->version}";
+        }
 
-        echo "<script src='$url{$mark}v={$config->version}' type='text/javascript'></script>\n";
+        echo "<script src='$url' type='text/javascript'></script>\n";
     }
 
     /**
@@ -794,11 +798,12 @@ class css
      * @access public
      * @return vod
      */
-    public static function import($url, $attrib = '')
+    public static function import($url, $attrib = '', $cdn = false)
     {
         global $config;
         if(!empty($attrib)) $attrib = ' ' . $attrib;
-        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='screen'{$attrib}/>\n";
+        if(!$cdn) $url = "$url?v={$config->version}";
+        echo "<link rel='stylesheet' href='$url' type='text/css' media='screen'{$attrib}/>\n";
     }
 
     /**
