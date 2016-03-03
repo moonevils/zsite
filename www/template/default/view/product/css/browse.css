@@ -13,6 +13,8 @@
 .cards-products .card-info > .views-count {position: absolute; right: 0; top: 10px; opacity: .8}
 .card > .media-wrapper{background: none;}
 .card:hover > .media-wrapper{background: none;}
+.price{font-size: 20px;}
+.card-heading a{color: #333;}
 
 
 .table-list td{vertical-align:middle;}
