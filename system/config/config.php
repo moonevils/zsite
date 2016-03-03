@@ -128,6 +128,7 @@ $config->dependence->forum[]   = 'user';
 $config->dependence->reply[]   = 'forum';
 $config->dependence->reply[]   = 'user';
 $config->dependence->message[] = 'message';
+$config->dependence->message[] = 'user';
 $config->dependence->shop[]    = 'shop';
 $config->dependence->shop[]    = 'user';
 $config->dependence->cart[]    = 'shop';
@@ -139,6 +140,7 @@ $config->dependence->score[]   = 'user';
 $config->dependence->stat[]    = 'stat';
 $config->dependence->log[]     = 'stat';
 $config->dependence->contribution[] = 'contribution';
+$config->dependence->contribution[] = 'user';
 
 /* Database settings. */
 $config->db = new stdclass();          

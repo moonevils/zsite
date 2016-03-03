@@ -2,7 +2,7 @@
 <?php
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
+$themeRoot = $webRoot . "theme/default/";
 ?>
 <!DOCTYPE html>
 <html lang='<?php echo $app->getClientLang();?>'>
@@ -44,8 +44,8 @@ $themeRoot = $webRoot . "template/default/theme/";
       $themeRoot = $webRoot . "template/default/theme/";
       if($this->config->cdn->open == 'open')
       {
-          css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css');
-          js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js');
+          css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css', '', $cdn = true);
+          js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $cdn = true);
       }
       else
       {

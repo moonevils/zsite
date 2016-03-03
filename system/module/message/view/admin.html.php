@@ -14,24 +14,7 @@
 <?php js::set('type', $type);?>
 <div class="panel">
   <div class="panel-heading">
-    <strong>
-      <?php
-      if($type == 'message')
-      {
-          echo '<i class="icon-comment-alt"></i> ' . $lang->message->common;
-      }
-      else if($type == 'reply')
-      {
-          echo '<i class="icon-comment-alt"></i> ' . $lang->message->reply;
-      }
-      else
-      {
-          echo '<i class="icon-comments-alt"></i> ' . $lang->comment->common;
-      }
-      ?>
-    </strong>
     <?php
-    echo '&nbsp; &nbsp; &nbsp;';
     echo html::a(inlink('admin', "type={$type}&status=0"), $lang->message->statusList[0], $status == 0 ? "class='active'" : '');
     echo html::a(inlink('admin', "type={$type}&status=1"), $lang->message->statusList[1], $status == 1 ? "class='active'" : '');
     ?>

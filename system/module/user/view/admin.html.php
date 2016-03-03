@@ -17,7 +17,12 @@ js::set('admin', $this->get->admin);
 ?>
 <div class="panel">
   <div class="panel-heading">
-    <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
+    <?php
+    echo html::a(inlink('admin'), $lang->user->all, !$this->get->provider ? "class='active'" : '');
+    if(!empty($this->config->oauth->sina))    echo html::a(inlink('admin', "provider=sina", $this->get->provider == 'sina' ? "class='active'" : ''), $lang->user->oauth->typeList['sina']);
+    if(!empty($this->config->oauth->qq))      echo html::a(inlink('admin', "provider=qq"), $lang->user->oauth->typeList['qq'], $this->get->provider == 'qq' ? "class='active'" : '');
+    if($this->loadModel('wechat')->getList()) echo html::a(inlink('admin', "provider=wechat"), $lang->user->oauth->typeList['wechat'], $this->get->provider == 'wechat' ? "class='active'" : '');
+    ?>
     <div class="panel-actions">
       <form method='get' class='form-inline form-search'>
         <?php echo html::hidden('m','user') . html::hidden('f','admin');?>

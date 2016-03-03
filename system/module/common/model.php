@@ -1070,12 +1070,12 @@ class commonModel extends model
         $modules = $config->site->modules;
         if(strpos($modules, 'article') === false)
         {
-            if(strpos($modules, 'page') !== false) $lang->groups->content['link'] = 'article|admin|type=page';
             if(strpos($modules, 'book') !== false) $lang->groups->content['link'] = 'book|admin|';
             if(strpos($modules, 'blog') !== false) $lang->groups->content['link'] = 'article|admin|type=blog';
+            if(strpos($modules, 'page') !== false) $lang->groups->content['link'] = 'article|admin|type=page';
         }
 
-        if(strpos($modules, 'shop') === false and strpos($modules, 'score') === false)
+        if((strpos($modules, 'shop') === false and strpos($modules, 'score') === false) or strpos($modules, 'user') === false)
         {
             if(strpos($modules, 'product') !== false) $lang->groups->shop['link'] = 'product|admin|';
         }
