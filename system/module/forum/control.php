@@ -79,11 +79,10 @@ class forum extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
         $this->loadModel('thread');
+        if($this->session->currentGroup == 'home') $this->lang->menuGroups->forum = 'thread';
 
         $boards  = $this->loadModel('tree')->getFamily($boardID, 'forum');
         $threads = $boards ? $this->thread->getList($boards, $orderBy, $pager) : array();
-
-        $this->lang->menuGroups->forum = 'thread';
 
         $this->view->boardID  = $boardID;
         $this->view->orderBy  = $orderBy;

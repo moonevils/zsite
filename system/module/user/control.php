@@ -28,9 +28,6 @@ class user extends control
     public function __construct()
     {
         parent::__construct();
-        if(empty($this->config->oauth->sina)) unset($this->lang->user->menu->sina);
-        if(empty($this->config->oauth->qq))   unset($this->lang->user->menu->qq);
-        if(!($this->loadModel('wechat')->getList())) unset($this->lang->user->menu->wechat);
     }
 
     /**
@@ -397,6 +394,7 @@ class user extends control
         $this->view->token = $this->user->getToken();
         if(RUN_MODE == 'admin') 
         { 
+            $this->loadModel('mail');
             $user->groups = array_keys($this->loadModel('group')->getByAccount($user->account));
             $this->view->groups   = $this->loadModel('group')->getPairs();
             $this->view->siteLang = explode(',', $this->config->site->lang);
