@@ -57,8 +57,8 @@ $theme          = $this->config->template->{$this->device}->theme ? $this->confi
 
       if($cdnRoot)
       {
-          css::import($cdnRoot . '/template/default/theme/default/all.css');
-          js::import($cdnRoot  . '/js/all.js');
+          css::import($cdnRoot . '/template/default/theme/default/all.css', '', $cdn = true);
+          js::import($cdnRoot  . '/js/all.js', $cdn = true);
       }
       else
       {
