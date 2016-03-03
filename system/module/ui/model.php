@@ -30,7 +30,7 @@ class uiModel extends model
             if(!is_dir($folder)) continue;
 
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
-            $docFile      = $folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml';
+            $docFile      = $folder . DS . '_doc' . DS . $this->app->getClientLang() . '.yaml';
             if(!is_file($docFile)) continue;
 
             $config = Spyc::YAMLLoadString(file_get_contents($docFile));
@@ -98,7 +98,7 @@ class uiModel extends model
         foreach($folders as $folder)
         {
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
-            $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
+            $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . '_doc' . DS . $this->app->getClientLang() . '.yaml'));
             $templates[$templateName] = $config['name'];
         }
 
