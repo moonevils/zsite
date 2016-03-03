@@ -21,6 +21,9 @@
   border-style: solid;
   cursor: default;
 }
+
+.panel-heading .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus{padding: 6px 15px;}
+
 .panel-body .table-bordered{border: 1px solid #DDD; border-bottom:none;}
 
 .table tr td.baidu{background:#FFF0D5;}

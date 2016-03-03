@@ -13,8 +13,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-globe'></i> <?php echo $lang->guarder->setBlacklist;?></strong>
-    <?php echo '&nbsp; &nbsp; &nbsp;';?>
     <?php foreach($lang->guarder->blacklistModes as $code => $modeName):?>
     <?php $class = $mode == $code ? "class='active'" : '';?>
     <?php echo html::a(inlink('setBlacklist', "mode=$code"), $modeName, $class);?>

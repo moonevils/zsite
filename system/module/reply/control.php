@@ -52,8 +52,9 @@ class reply extends control
         $pager   = new pager($recTotal, $recPerPage, $pageID);
         $replies = $this->reply->getList($orderBy, $pager);
 
-        $this->lang->reply->menu       = $this->lang->forum->menu;
-        $this->lang->menuGroups->reply = 'forumreply';
+        $this->lang->reply->menu = $this->lang->forum->menu;
+        if($this->session->currentGroup == 'home') $this->lang->menuGroups->reply = 'forumreply';
+        if($this->session->currentGroup != 'home') $this->lang->menuGroups->reply = 'forum';
 
         $this->view->title   = $this->lang->reply->common;
         $this->view->replies = $replies;
@@ -86,7 +87,7 @@ class reply extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->$captchaInput === false and $this->loadModel('guarder')->isEvil($_POST['content']))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->guarder->create4Thread()));
             }
 
             $return = $this->reply->update($replyID);

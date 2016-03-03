@@ -13,9 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><?php echo $lang->package->common;?></strong>
     <?php
-    echo '&nbsp; &nbsp; &nbsp;';
     echo html::a(inlink('browse', "status=installed"),   $lang->package->installed,   $status == 'installed' ? "class='active'" : '');
     echo html::a(inlink('browse', "status=deactivated"), $lang->package->deactivated, $status == 'deactivated' ? "class='active'" : '');
     echo html::a(inlink('browse', "status=available"), $lang->package->available,   $status == 'available' ? "class='active'" : '');

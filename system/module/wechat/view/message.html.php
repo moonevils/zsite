@@ -14,7 +14,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class="panel-heading">
-    <strong><?php echo '<i class="icon-comment-alt"></i> ' . $lang->wechat->message->list;?></strong>
     <?php
     foreach($lang->wechat->message->tabList as $tab)
     {

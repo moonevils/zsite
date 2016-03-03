@@ -597,19 +597,19 @@ class blockModel extends model
             $device   = helper::getDevice();
             $template = $this->config->template->{$device}->name;
             $theme    = $this->config->template->{$device}->theme;
-            $tplPath  = $this->app->getTplRoot() . $template . DS . 'view' . DS . 'block' . DS;
+            $tplPath  = $this->app->getTplRoot() . $template . DS . 'block' . DS;
 
-            /* First try block/ext/sitecode/view/block/ */
+            /* First try block/ext/sitecode/block/ */
             $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
             $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
-            /* Then try block/ext/view/block/ */
+            /* Then try block/ext//block/ */
             if(!file_exists($blockFile))
             {
                 $extBlockRoot = $tplPath . 'ext' . DS;
                 $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
-                /* No ext file, use the block/view/block/. */
+                /* No ext file, use the block/block/. */
                 if(!file_exists($blockFile))
                 {
                     $blockFile = $tplPath . strtolower($block->type) . '.html.php';

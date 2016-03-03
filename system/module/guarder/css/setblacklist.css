@@ -1,7 +1,7 @@
 .panel-heading{height: 40px;}
 .pd-l0{padding-left:0}
-.panel-heading > a { display: inline-block; margin: -3px 3px; line-height: 26px;padding: 0 10px}
-.panel-heading > a.active { border-radius: 13px; background-color: #3280FC;color: #fff}
+.panel-heading > a { display: inline-block; margin: -3px 3px; line-height: 26px;padding: 0 3px}
+.panel-heading > a.active {font-weight: bold;}
 .panel-heading .nav-tabs{border-bottom: none;}
 .panel-heading .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
 {

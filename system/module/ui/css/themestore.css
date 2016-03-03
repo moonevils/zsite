@@ -1,9 +1,8 @@
 #industryBox {padding: 5px 10px}
 #industryBox > .tree > li {display: inline-block; padding-bottom: 0; margin-right: 10px;}
 #industryBox > .tree > li:before {display: none}
-#industryBox > .tree > li > a {display: inline-block; background-color: transparent; border-radius: 13px; padding: 3px 10px}
-#industryBox > .tree > li > a:hover {background-color: #fff}
-#industryBox > .tree > li.active > a {background-color: #3280FC; color: #fff}
+#industryBox > .tree > li > a {display: inline-block; background-color: transparent; padding: 3px;}
+#industryBox > .tree > li.active > a {font-weight: bold;}
 #mainArea {position: relative;}
 
 .themes {margin: 0; padding: 10px 5px}

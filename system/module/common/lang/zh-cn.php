@@ -204,6 +204,7 @@ $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
 $lang->menuGroups->score   = 'site';
+$lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -246,11 +247,6 @@ $lang->theme->menu->source  = '素材|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
-$lang->user->menu = new stdclass();
-$lang->user->menu->all    = '全部会员|user|admin|';
-$lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
-$lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
-$lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 
 $lang->message = new stdclass();
 
@@ -272,7 +268,7 @@ $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
 $lang->site->menu->score    = '积分规则|score|setcounts|';
 
