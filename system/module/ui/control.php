@@ -212,6 +212,7 @@ class ui extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->lang->menuGroups->ui = 'others';
         $this->view->title = $this->lang->ui->others;
         $this->display();
     }
@@ -511,6 +512,8 @@ class ui extends control
             $this->app->loadClass('pager', $static = true);
             $pager  = new pager($results->dbPager->recTotal, $results->dbPager->recPerPage, $results->dbPager->pageID);
         }
+
+        $this->lang->menuGroups->ui = 'themestore';
 
         $this->view->themes       = zget($results, 'themes');
         $this->view->title        = $this->lang->ui->themeStore;

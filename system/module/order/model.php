@@ -416,6 +416,8 @@ class orderModel extends model
     {
         if(RUN_MODE == 'admin' and $order->status == 'normal')
         {
+            echo html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view);
+
             /* Send link. */
             if($order->payment == 'COD' and $order->deliveryStatus == 'not_send') echo html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal'");
             if($order->payment != 'COD' and $order->payStatus == 'paid' and $order->deliveryStatus == 'not_send') echo html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal'");

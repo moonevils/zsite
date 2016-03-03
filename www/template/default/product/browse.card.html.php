@@ -14,31 +14,28 @@
       }
       ?>
       <div class='card-heading'>
-        <span class='pull-right'>
-          <?php
-          $currencySymbol = $this->config->product->currencySymbol;
-          if(!$product->unsaleable)
-          {
-              if($product->promotion != 0)
-              {
-                  echo "<strong class='text-muted'>"  .'</strong>';
-                  echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>&nbsp;&nbsp;';
-              }
-              else
-              {
-                  if($product->price != 0)
-                  {
-                      echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>&nbsp;&nbsp;';
-                  }
-              }
-          }
-          ?>
+        <?php
+        $currencySymbol = $this->config->product->currencySymbol;
+        if(!$product->unsaleable)
+        {
+            if($product->promotion != 0)
+            {
+                echo "<strong class='text-danger price'>" . $currencySymbol . $product->promotion . '</strong>';
+            }
+            else
+            {
+                if($product->price != 0)
+                {
+                    echo "<strong class='text-danger price'>" . $currencySymbol . $product->price . '</strong>';
+                }
+            }
+        }
+        ?>
+        <div class='text-nowrap text-ellipsis'>
+          <span class='pull-left'><?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $product->name);?></span>
           <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
-          <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span><?php endif;?>
-        </span>
-        <span class='pull-left w-p50 text-nowrap text-ellipsis'>
-        <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
-        </span>
+          <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count pull-right' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span><?php endif;?>
+        </div>
       </div>
     </div>
   </div>

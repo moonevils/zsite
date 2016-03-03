@@ -44,6 +44,7 @@ $lang->user->captcha   = '验证码';
 $lang->user->alert     = '您的帐号已被禁用';
 $lang->user->privilege = '权限';
 
+$lang->user->all             = '全部会员';
 $lang->user->list            = '会员列表';
 $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";

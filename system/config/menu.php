@@ -2,7 +2,7 @@
 $config->menus = new stdclass();
 $config->menus->home    = 'admin,order,message,comment,reply,thread,forumreply';
 $config->menus->content = 'article,page,blog,book,contribution';
-$config->menus->shop    = 'order,product,express,orderSetting';
+$config->menus->shop    = 'order,product,orderSetting';
 $config->menus->user    = 'user,message,comment,reply,forum,wechat,contribution';
 $config->menus->promote = 'stat,tag,links,setstat,';
 $config->menus->design  = 'ui,logo,slide,nav,block,visual,others';
@@ -24,6 +24,7 @@ $config->menuDependence->contribution = 'contribution';
 $config->menuDependence->page         = 'page';
 $config->menuDependence->blog         = 'blog';
 $config->menuDependence->express      = 'shop';
+$config->menuDependence->orderSetting = 'user';
 
 $config->menuExtra = new stdclass();
 $config->menuExtra->visual = "target='_blank'";

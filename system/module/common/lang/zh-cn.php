@@ -163,9 +163,8 @@ $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->book     = '手册|book|admin|';
 $lang->menu->page     = '单页|article|admin|type=page';
 
-$lang->menu->product      = '产品|product|admin|';
 $lang->menu->order        = '订单|order|admin|';
-$lang->menu->express      = '快递|tree|browse|type=express';
+$lang->menu->product      = '产品|product|admin|';
 $lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
@@ -205,6 +204,7 @@ $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
 $lang->menuGroups->score   = 'site';
+$lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -222,6 +222,11 @@ $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'create, edit');
 
 $lang->express = new stdclass();
+
+$lang->orderSetting = new stdclass();
+$lang->orderSetting->menu = new stdclass();
+$lang->orderSetting->menu->orderSetting = '设置|product|setting|';
+$lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -242,11 +247,6 @@ $lang->theme->menu->source  = '素材|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
-$lang->user->menu = new stdclass();
-$lang->user->menu->all    = '全部会员|user|admin|';
-$lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
-$lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
-$lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 
 $lang->message = new stdclass();
 
@@ -268,7 +268,7 @@ $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
 $lang->site->menu->score    = '积分规则|score|setcounts|';
 
