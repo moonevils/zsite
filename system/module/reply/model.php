@@ -228,7 +228,7 @@ class replyModel extends model
         }
 
         $this->dao->update(TABLE_REPLY)
-            ->data($reply, $skip = 'captcha, uid')
+            ->data($reply, $skip = $this->session->captchaInput . ',uid')
             ->autoCheck()
             ->batchCheck($this->config->reply->require->post, 'notempty')
             ->check('captcha', 'captcha')

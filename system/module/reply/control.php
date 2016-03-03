@@ -87,7 +87,7 @@ class reply extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->$captchaInput === false and $this->loadModel('guarder')->isEvil($_POST['content']))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->guarder->create4Thread()));
             }
 
             $return = $this->reply->update($replyID);
