@@ -52,8 +52,9 @@ class reply extends control
         $pager   = new pager($recTotal, $recPerPage, $pageID);
         $replies = $this->reply->getList($orderBy, $pager);
 
-        $this->lang->reply->menu       = $this->lang->forum->menu;
-        $this->lang->menuGroups->reply = 'forumreply';
+        $this->lang->reply->menu = $this->lang->forum->menu;
+        if($this->session->currentGroup == 'home') $this->lang->menuGroups->reply = 'forumreply';
+        if($this->session->currentGroup != 'home') $this->lang->menuGroups->reply = 'forum';
 
         $this->view->title   = $this->lang->reply->common;
         $this->view->replies = $replies;
