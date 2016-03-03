@@ -216,7 +216,7 @@ class uiModel extends model
 
         $savePath = dirname($cssFile);
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
-        $lessTemplateDir = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS;
+        $lessTemplateDir = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS;
 
         foreach($this->config->ui->themes[$template][$theme] as $section => $selector)
         {
