@@ -11,8 +11,8 @@ if(!isset($config->site->mobileTemplate)) $config->site->mobileTemplate = 'close
 
 global $app;
 $config->site->ui = new stdclass();
-if($config->multi)  $config->site->ui->customCssFile = $app->getDataRoot() . 'css/' . $config->site->code . '/%s/%s.css';
-if(!$config->multi) $config->site->ui->customCssFile = $app->getDataRoot() . 'css/%s/%s.css';
+if($config->multi)  $config->site->ui->customCssFile = $app->getDataRoot() . 'css/' . $config->site->code . '/%s_%s.css';
+if(!$config->multi) $config->site->ui->customCssFile = $app->getDataRoot() . 'css/%s_%s.css';
 
 $config->themeSetting = new stdclass();
 $config->themeSetting->primaryColor = '#D1270A' ;
