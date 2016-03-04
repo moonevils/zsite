@@ -200,3 +200,10 @@ $lang->site->yangcong = new stdclass();
 $lang->site->yangcong->appID = 'APP ID';
 $lang->site->yangcong->key   = 'APP KEY';
 $lang->site->yangcong->auth  = 'Auth ID';
+
+$lang->site->api = new stdclass();
+$lang->site->api->common = '集成';
+$lang->site->api->key    = '密钥';
+$lang->site->api->ip     = 'IP列表';
+$lang->site->api->allip  = '无限制';
+$lang->site->api->ipTip  = '允许调用者使用这些IP访问，多个IP使用,隔开。支持IP段，如192.168.1.*';

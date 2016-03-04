@@ -380,4 +380,20 @@ class site extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
     }
+
+    public function setApi()
+    {   
+        if($_POST)
+        {   
+            $setting = array();
+            $setting['key'] = $this->post->key;
+            $setting['ip']  = $this->post->allip ? '' : $this->post->ip;
+
+            $this->loadModel('setting')->setItems('system.site.api', $setting, $lang = 'all');
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+        }   
+
+        $this->view->title = $this->lang->site->api->common;
+        $this->display();
+    }   
 }

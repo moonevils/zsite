@@ -193,7 +193,7 @@ $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
 
 $lang->menu->package    = '插件|package|browse|';
-$lang->menu->themestore = '主题市场|ui|themestore|';
+$lang->menu->themestore = '主题|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
@@ -271,6 +271,7 @@ $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias
 $lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
 $lang->site->menu->score    = '积分规则|score|setcounts|';
+$lang->site->menu->api      = '集成|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();

@@ -322,6 +322,22 @@ class commonModel extends model
     }
 
     /**
+     * Check API.
+     * 
+     * @access public
+     * @return void
+     */
+    public function checkAPI()
+    {
+        $key = '';
+        if($this->post->key) $key = $this->post->key;
+        if($this->get->key) $key = $this->get->key;
+
+        if(!empty($this->config->site->api->key) or $this->config->site->api->key != $key) die('KEY ERROR!');
+        if(!empty($this->config->site->api->ip) && strpos($this->config->site->api->ip, $this->server->remote_addr) === false) die('IP DENIED');
+    }
+
+    /**
      * Create the main menu.
      *
      * @param  string $currentModule
