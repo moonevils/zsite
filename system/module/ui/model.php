@@ -723,8 +723,8 @@ class uiModel extends model
         $this->directories->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->exportDocPath    = $this->directories->exportPath . 'doc' . DS;
         $this->directories->exportDbPath     = $this->directories->exportPath . 'db' . DS;
-        $this->directories->exportCssPath    = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
-        $this->directories->exportLessPath   = $this->directories->exportPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
+        $this->directories->exportCssPath    = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'css' . DS;
+        $this->directories->exportLessPath   = $this->directories->exportPath . 'www' . DS . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->exportSourcePath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->exportSlidePath  = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->directories->exportConfigPath = $this->directories->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
@@ -732,8 +732,8 @@ class uiModel extends model
         $this->directories->encryptPath       = $this->directories->exportPath . 'encrypt' . DS;
         $this->directories->encryptDocPath    = $this->directories->encryptPath . 'doc' . DS;
         $this->directories->encryptDbPath     = $this->directories->encryptPath . 'db'  . DS;
-        $this->directories->encryptCssPath    = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
-        $this->directories->encryptLessPath   = $this->directories->encryptPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
+        $this->directories->encryptCssPath    = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'css' . DS;
+        $this->directories->encryptLessPath   = $this->directories->encryptPath . 'www' . DS . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->encryptSourcePath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->encryptSlidePath  = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->directories->encryptConfigPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
@@ -915,12 +915,12 @@ class uiModel extends model
         $zfile = $this->app->loadClass('zfile');
 
         /* Copy customed css file. */
-        $customCssFile = $this->directories->exportCssPath . 'style.css';
+        $customCssFile = $this->directories->exportCssPath . "{$template}_{$code}.css";
         $originCssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-        copy($originCssFile, $this->directories->exportCssPath . 'style.css');
+        copy($originCssFile, $customCssFile);
 
         /* Copy less file. */
-        $lessFile = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
+        $lessFile = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS . 'style.less';
         if(file_exists($lessFile)) copy($lessFile, $this->directories->exportLessPath . 'style.less');
 
         /* Copy source files. */
@@ -946,7 +946,7 @@ class uiModel extends model
         }
         else
         {
-            $previewImage = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'preview.png';
+            $previewImage = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS . 'preview.png';
             copy($previewImage, $this->directories->exportLessPath . 'preview.png');
         }
 
