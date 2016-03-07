@@ -90,6 +90,11 @@ if($product->brand)
     $attributeHtml .= "<tr><th>" . $lang->product->brand . "</th>";
     $attributeHtml .= "<td>" . $product->brand . " <small>" . $product->model . "</small></td></tr>";
 }
+if(!$product->brand and $product->model)
+{
+    $attributeHtml .= "<tr><th>" . $lang->product->model . "</th>";
+    $attributeHtml .= "<td>" . $product->model . "</td></tr>";
+}
 if($product->color)
 {
   $attributeHtml .= "<tr><th>" . $lang->product->color . "</th>";
