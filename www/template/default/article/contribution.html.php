@@ -10,7 +10,6 @@
         <table class='table table-hover table-striped tablesorter'>
           <thead>
             <tr>
-              <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
               <th class='text-center w-50px'><?php echo $lang->article->id;?></th>
               <th class='text-center'><?php echo $lang->article->title;?></th>
               <th class='text-center w-160px'><?php echo $lang->article->submissionTime;?></th>
@@ -45,7 +44,7 @@
             </tr>
             <?php endforeach;?>
           </tbody>
-          <tfoot><tr><td colspan='7'><?php $pager->show();?></td></tr></tfoot>
+          <tfoot><tr><td colspan='6'><?php $pager->show();?></td></tr></tfoot>
         </table>
       </div>
     </div>
