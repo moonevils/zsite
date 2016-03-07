@@ -513,7 +513,8 @@ class ui extends control
             $pager  = new pager($results->dbPager->recTotal, $results->dbPager->recPerPage, $results->dbPager->pageID);
         }
 
-        $this->lang->menuGroups->ui = 'themestore';
+        if($this->session->currentGroup != 'design') $this->lang->menuGroups->ui = 'themestore';
+        if($this->session->currentGroup == 'design') $this->view->uiHeader = true;
 
         $this->view->themes       = zget($results, 'themes');
         $this->view->title        = $this->lang->ui->themeStore;
