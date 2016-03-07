@@ -95,6 +95,11 @@ js::execute($product->js);
                   $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->brand . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>";
               }
+              if(!$product->brand and $product->model)
+              {
+                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->model . "</span>";
+                  $attributeHtml .= "<span class='meta-value'>" . $product->model . "</span></li>";
+              }
               if($product->color)
               {
                 $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->color . "</span>";
