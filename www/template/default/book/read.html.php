@@ -41,7 +41,9 @@
     </ul>
   </footer>
 </div>
+<?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?></div>
+<?php endif;?>
 <div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>
