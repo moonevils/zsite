@@ -184,6 +184,13 @@ $lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
 $lang->ui->theme->underlineList['none']                = '无';
 $lang->ui->theme->underlineList['underline']           = '带下划线';
 
+$lang->ui->theme->searchLabels = new stdclass();
+$lang->ui->theme->searchLabels->sales  = '购买最多';
+$lang->ui->theme->searchLabels->latest = '最新';
+$lang->ui->theme->searchLabels->hot    = '最热';
+$lang->ui->theme->searchLabels->rand   = '推荐';
+$lang->ui->theme->searchLabels->free   = '免费';
+
 $lang->ui->groups = new stdclass();
 $lang->ui->groups->basic  = '基本样式';
 $lang->ui->groups->navbar = '导航条';
