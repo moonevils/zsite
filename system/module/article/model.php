@@ -436,7 +436,7 @@ class articleModel extends model
         $blog->type       = 'blog';
         $blog->categories = $this->post->categories;
         $blog->copyURL    = $articleID; 
-        $blog->author     = $this->app->user->realname;
+        $blog->author     = $this->app->user->account;
         $blog->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
         $blog->editedDate = $blog->addedDate;
         $blog->views      = 0;
