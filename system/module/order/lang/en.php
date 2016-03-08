@@ -23,8 +23,11 @@ $lang->order->receiver       = 'Receiver';
 $lang->order->noRecord       = 'No record';
 $lang->order->status         = 'Status';
 $lang->order->note           = 'Message to seller';
+$lang->order->basic          = 'Basic Info';
+$lang->order->info           = 'Detailed Info';
 
 $lang->order->admin          = 'Admin Orders';
+$lang->order->view           = 'Order Info';
 $lang->order->setting        = 'Settings';
 $lang->order->browse         = 'My Orders';
 $lang->order->bought         = 'Browse bought producs';
