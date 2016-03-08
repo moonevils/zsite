@@ -1363,7 +1363,6 @@ class packageModel extends model
     {
         $apiURL = $this->apiRoot . "apiGetThemes-$type-$param-$recTotal-$recPerPage-$pageID.json";
         $data   = $this->fetchAPI($apiURL);
-
         if(isset($data->themes))
         {
             foreach($data->themes as $package)
