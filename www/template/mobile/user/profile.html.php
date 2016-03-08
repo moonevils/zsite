@@ -11,6 +11,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
+<?php js::import($this->config->webRoot . 'js/fingerprint/fingerprint.js');?>
 <?php include TPL_ROOT . 'user/side.html.php';?>
 <table class="table table-layout">
   <tbody>
