@@ -95,6 +95,11 @@ js::execute($product->js);
                   $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->brand . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>";
               }
+              if(!$product->brand and $product->model)
+              {
+                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->model . "</span>";
+                  $attributeHtml .= "<span class='meta-value'>" . $product->model . "</span></li>";
+              }
               if($product->color)
               {
                 $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->color . "</span>";
@@ -164,13 +169,13 @@ js::execute($product->js);
         <?php $this->loadModel('file')->printFiles($product->files);?>
       </div>
     </div>
+    <div class='row blocks' data-region='product_view-bottom'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
     <?php if(commonModel::isAvailable('message')):?>
     <div id='comments'>
       <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=product&objectID={$product->id}");?></div>
       <?php echo html::a('', '', "name='comment'");?>
     </div>
     <?php endif;?>
-    <div class='row blocks' data-region='product_view-bottom'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
     <side class='page-side blocks' data-region='product_view-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>

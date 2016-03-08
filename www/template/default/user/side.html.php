@@ -8,7 +8,9 @@ ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
 <div class='col-md-2'>
   <ul class='nav nav-primary nav-stacked user-control-nav'>
     <?php foreach($this->config->user->navGroups as $group => $items):?>
+    <?php if(isset($lang->user->navGroups->$group)):?>
     <li class='nav-heading'> <?php echo $lang->user->navGroups->$group;?></li>
+    <?php endif;?>
     <?php $navs = explode(',', $items);?>
     <?php foreach($navs as $nav)
     {
