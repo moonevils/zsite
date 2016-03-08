@@ -762,3 +762,6 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu .theme.current .theme-card > .icon:before {position: absolute; right: -15px; top: -15px}
 #menu .theme:hover .theme-card {border-color: #145ccd; -moz-box-shadow:0px 0px 6px #145ccd; -webkit-box-shadow:0px 0px 6px #145ccd; box-shadow:0px 0px 6px #145ccd;}
 #menu .theme.current .theme-card {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
+
+.panel-heading > a { display: inline-block; margin: -3px 3px; line-height: 26px;padding: 0 3px}
+.panel-heading > a.active { font-weight: bold;}

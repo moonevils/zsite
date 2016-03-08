@@ -41,8 +41,10 @@ $lang->ui->themeStore      = '主题市场';
 $lang->ui->help            = "帮助";
 $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->setCode         = "代码";
+$lang->ui->installedThemes = "已安装主题";
 $lang->ui->enableTheme     = "使用此主题";
 $lang->ui->industry        = "行业";
+$lang->ui->offcial         = "官方";
 
 $lang->ui->noLogo                 = "未上传Logo";
 $lang->ui->noFavicon              = "未上传小图标";
@@ -121,6 +123,7 @@ $lang->ui->blocks2Create = "新创建区块";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置为默认';
+$lang->ui->theme->online                               = '在线主题';
 $lang->ui->theme->default                              = '默认';
 $lang->ui->theme->resetTip                             = '参数已重置，保存后生效';
 $lang->ui->theme->sizeTip                              = '默认单位为像素，如1px';
@@ -131,19 +134,24 @@ $lang->ui->theme->extraStyle                           = 'CSS';
 $lang->ui->theme->extraScript                          = 'Javascript';
 $lang->ui->theme->customStyleTip                       = '样式表支持Less语法。';
 $lang->ui->theme->customScriptTip                      = '已包含 jQuery 1.9.0。';
+$lang->ui->theme->noThemeInstalled                     = '没有安装主题';
+
 $lang->ui->theme->borderStyleList['none']              = '无边框';
 $lang->ui->theme->borderStyleList['solid']             = '实线';
 $lang->ui->theme->borderStyleList['dashed']            = '虚线';
 $lang->ui->theme->borderStyleList['dotted']            = '点线';
 $lang->ui->theme->borderStyleList['double']            = '双线条';
+
 $lang->ui->theme->imageRepeatList['repeat']            = '默认';
 $lang->ui->theme->imageRepeatList['repeat']            = '重复';
 $lang->ui->theme->imageRepeatList['repeat-x']          = 'X轴重复';
 $lang->ui->theme->imageRepeatList['repeat-y']          = 'Y轴重复';
 $lang->ui->theme->imageRepeatList['no-repeat']         = '不重复';
+
 $lang->ui->theme->fontWeightList['inherit']            = '默认';
 $lang->ui->theme->fontWeightList['normal']             = '正常';
 $lang->ui->theme->fontWeightList['bold']               = '加粗';
+
 $lang->ui->theme->fontList['inherit']                  = '默认';
 $lang->ui->theme->fontList['SimSun']                   = '宋体';
 $lang->ui->theme->fontList['FangSong']                 = '仿宋';
@@ -155,6 +163,7 @@ $lang->ui->theme->fontList['Console']                  = 'Console';
 $lang->ui->theme->fontList['Tahoma']                   = 'Tahoma';
 $lang->ui->theme->fontList['Verdana']                  = 'Verdana';
 $lang->ui->theme->fontList['ZenIcon']                  = '图标字体 ZenIcon';
+
 $lang->ui->theme->fontSizeList['inherit']              = '默认';
 $lang->ui->theme->fontSizeList['12px']                 = '12px';
 $lang->ui->theme->fontSizeList['13px']                 = '13px';

@@ -503,7 +503,21 @@ class ui extends control
      */
     public function themeStore($type = 'byindustry', $param = 'all', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
+        $this->loadModel('package');
         $pager = null;
+    
+        $installedThemes = $this->ui->getInstalledThemes();
+        
+        $codes = array();
+        if($type == 'installed')
+        {
+            foreach($installedThemes as $template => $themes)
+            {
+                $codes = $codes + array_keys($themes);
+            }
+
+            $param = join(',', $codes);
+        }
 
         /* Get results from the api. */
         $results = $this->loadModel('package')->getThemesByApi($type, $param, $recTotal, $recPerPage, $pageID);
@@ -521,7 +535,6 @@ class ui extends control
         $this->view->position[]   = $this->lang->package->obtain;
 
         $this->view->industryTree = str_replace('/index.php', $this->server->script_name, $this->package->getIndustriesByAPI());
-        $this->view->installeds   = $this->package->getLocalPackages('installed');
         $this->view->pager        = $pager;
         $this->view->tab          = 'obtain';
         $this->view->type         = $type;
