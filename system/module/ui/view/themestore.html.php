@@ -19,7 +19,12 @@
     ?>
   </div>
   <div id='mainArea'>
-    <div id='industryBox'> <?php if($type != 'installed') echo $industryTree;?></div>
+    <div id='industryBox'>
+      <?php if($type != 'installed') echo $industryTree;?>
+      <?php foreach($lang->ui->theme->searchLabels as $code => $label):?>
+      <?php echo html::a(inlink('themestore', "type={$code}"), $label);?>
+      <?php endforeach;?>
+    </div>
     <?php if($themes):?>
     <div id='storeThemes' class='cards cards-borderless themes row' data-param='<?php echo $param ?>'>
       <?php foreach($themes as $theme):?>
@@ -162,12 +167,7 @@
   </div>
   <?php endif; ?>
   <?php elseif($type != 'installed'):?>
-  <div class='alert alert-default'>
-    <i class='icon icon-remove-sign'></i>
-    <div class='content'>
-      <h4><?php echo $lang->package->errorOccurs;?></h4>
-      <div><?php echo $lang->package->errorGetPackages;?></div>
-    </div>
+  <div class='panel-body'>
   </div>
   <?php elseif($type == 'installed'):?>
   <div class='panel-body'>
