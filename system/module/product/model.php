@@ -365,7 +365,7 @@ class productModel extends model
      */
     public function saveAttributes($productID)
     {
-        $lables = fixer::input('post')->get('label');
+        $labels = fixer::input('post')->get('label');
         $values =  fixer::input('post')->get('value');
 
         $data = new stdclass();
@@ -374,13 +374,15 @@ class productModel extends model
         $this->dao->delete()->from(TABLE_PRODUCT_CUSTOM)->where('product')->eq($productID)->exec();
 
         $attributes = '';
-        foreach($lables as $key => $label)
+        $order = 0;
+        foreach($labels as $key => $label)
         {
             $data->label = $label;
-            $data->order = $key;
+            $data->order = $order;
             $data->value = isset($values[$key]) ? $values[$key] : '';
             $attributes .= $label . $this->lang->colon . $data->value; 
             $this->dao->replace(TABLE_PRODUCT_CUSTOM)->data($data)->exec();
+            $order ++;
         }
         if(dao::isError()) return false;
         return $attributes;
