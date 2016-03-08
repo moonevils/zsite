@@ -163,9 +163,8 @@ $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->book     = 'Book|book|admin|';
 $lang->menu->page     = 'Page|article|admin|type=page';
 
-$lang->menu->product      = 'Product|product|admin|';
 $lang->menu->order        = 'Order|order|admin|';
-$lang->menu->express      = 'Express|tree|browse|type=express';
+$lang->menu->product      = 'Product|product|admin|';
 $lang->menu->orderSetting = 'Setting|product|setting|';
 
 $lang->menu->user         = 'User|user|admin|';
@@ -205,6 +204,7 @@ $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
 $lang->menuGroups->score   = 'site';
+$lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -222,6 +222,11 @@ $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => 'List|article|admin|type=page', 'alias' => 'create, edit');
 
 $lang->express = new stdclass();
+
+$lang->orderSetting = new stdclass();
+$lang->orderSetting->menu = new stdclass();
+$lang->orderSetting->menu->orderSetting = 'Setting|product|setting|';
+$lang->orderSetting->menu->express      = 'Express|tree|browse|type=express';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -242,12 +247,8 @@ $lang->theme->menu->source  = 'Source|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
-$lang->user->menu = new stdclass();
-$lang->user->menu->all    = 'All Users|user|admin|';
-$lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
-$lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
-$lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
 
+/* Menu of message module. */
 $lang->message = new stdclass();
 
 /* Menu of forum module. */
@@ -271,6 +272,7 @@ $lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'de
 $lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search   = 'Full text search|search|buildindex|';
 $lang->site->menu->score    = 'Score Rule|score|setcounts|';
+$lang->site->menu->api      = 'API Integration|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();

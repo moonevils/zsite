@@ -248,6 +248,7 @@ $lang->theme->menu->source  = '素材|file|browsesource|';
 /* Menu of user module. */
 $lang->user = new stdclass();
 
+/* Menu of message module. */
 $lang->message = new stdclass();
 
 /* Menu of forum module. */
