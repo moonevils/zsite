@@ -200,3 +200,10 @@ $lang->site->yangcong = new stdclass();
 $lang->site->yangcong->appID = 'APP ID';
 $lang->site->yangcong->key   = 'APP KEY';
 $lang->site->yangcong->auth  = 'Auth ID';
+
+$lang->site->api = new stdclass();
+$lang->site->api->common = 'API';
+$lang->site->api->key    = 'KEy';
+$lang->site->api->ip     = 'IP List';
+$lang->site->api->allip  = 'All IP';
+$lang->site->api->ipTip  = 'Allow the caller to use these IP, use "," to divide different IP, support IP segment, such as 192.168.1.*';

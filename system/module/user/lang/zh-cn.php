@@ -218,7 +218,7 @@ $lang->user->control->lblPassword = "留空，则保持不变。";
 
 $lang->user->control->menus[10] = '<i class="icon-user"></i> 个人信息 <i class="icon-chevron-right"></i>|user|profile';
 if(RUN_MODE != 'install' and commonModel::isAvailable('message')) $lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
-if(RUN_MODE != 'install' and commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope-alt"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|contribution'; 
+if(RUN_MODE != 'install' and commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|contribution'; 
 if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 {
     $lang->user->control->menus[30] = '<i class="icon-sun"></i> 积分详情 <i class="icon-chevron-right"></i>|user|score';
