@@ -39,6 +39,7 @@ $sysURL             = $common->getSysURL();
 
   js::exportConfigVars();
   js::set('lang', $lang->js);
+  js::set('theme', array('template' => $templateName, 'theme' => $themeName, 'device' => $this->device));
   if($config->debug)
   {
       js::import($templateCommonRoot . 'js/mzui.all.min.js');
@@ -56,12 +57,12 @@ $sysURL             = $common->getSysURL();
   $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . '_' . $templateName . DS . $themeName . '.css';
   if($config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s_%s.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}' data-device='{$this->device}'");
+      css::import(sprintf($webRoot . 'data/css/%s/%s_%s.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'");
   }
   else
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $templateName . '_' . $themeName . '.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s_%s.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}' data-device='{$this->device}'");
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s_%s.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'");
 
   }
 

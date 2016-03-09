@@ -657,6 +657,9 @@
             if(isBlocks) setTimeout(function()
             {
                 var $area = $$(selector);
+                $area.find('img.lazy').each(function() {
+                    $$.lazyload(this);
+                });
                 tidyBlocks($area);
                 $$('.tooltip').remove();
             }, 100);
@@ -755,7 +758,7 @@
         // load visual edit style
         if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
-        themesConfig = $$('#themeStyle').data();
+        themesConfig = $$.iframe.v.theme;
         $('body').addClass('ve-device-' + window.v.device);
         if(themesConfig.device != window.v.device) reloadPage();
 
@@ -923,6 +926,7 @@
             if(iframe.jQuery)
             {
                 window.$$ = iframe.jQuery;
+                $$.iframe = iframe;
                 initVisualPage();
             }
             else
@@ -931,6 +935,14 @@
                 {
                     window.$$ = iframe.jQuery.noConflict();
                     loadJs('zui', window.v.zuiJsUrl, iframeDocument, initVisualPage);
+                    $$.iframe = iframe;
+                    if(iframe.Zepto && iframe.Zepto.fn.lazyload)
+                    {
+                        $$.lazyload = function(img)
+                        {
+                            iframe.Zepto(img).lazyload();
+                        };
+                    }
                 });
             }
         }
@@ -993,7 +1005,7 @@
         return false;
     });
 
-    $.updateTheme = function()
+    $.updateTheme = function(theme)
     {
         $.ajax(
         {
@@ -1005,7 +1017,7 @@
                 var $page = $(response);
                 var $style = $page.filter('link#themeStyle');
                 window.$page = $page;
-                themesConfig = $style.data();
+                themesConfig.theme = theme;
                 $$('#themeStyle').attr(
                 {
                     href: $style.attr('href'),
