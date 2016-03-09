@@ -132,8 +132,8 @@ class scoreModel extends model
             $data = new stdclass();
             $data->score = $after;
             $data->rank  = $rank;
-            if($type == 'in')     $data->rank = $rank + $count;
-            if($type == 'punish') $data->rank = $rank - $count;
+            if($type == 'in') $data->rank = $rank + $count;
+            if($type == 'punish' or $type == 'out') $data->rank = $rank - $count;
             $this->dao->setAutoLang(false)->update(TABLE_USER)->data($data)->where('account')->eq($account)->exec();
 
             return !dao::isError();
