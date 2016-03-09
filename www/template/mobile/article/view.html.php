@@ -14,7 +14,6 @@
 include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/files.html.php';
 js::set('path', $article->path);
-js::set('articleID', $article->id);
 js::set('categoryID', $category->id);
 js::set('categoryPath', explode(',', trim($category->path, ',')));
 css::internal($article->css);
@@ -81,9 +80,14 @@ js::execute($article->js);
 </div>
 
 <?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
+<div id='commentBox'></div>
 <?php endif;?>
 
 <div class='block-region region-article-view-bottom blocks' data-region='article_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'bottom');?></div>
-
+<script>
+$(function()
+{
+    $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=article&objectID=$article->id", 'mhtml');?>');
+});
+</script>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

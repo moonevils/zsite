@@ -98,4 +98,6 @@ $(document).ready(function()
             $('#navbar a').css('font-weight', 'normal');
         }
     };
+
+    $('#commentBox').load( createLink('message', 'comment', 'objectType=' + v.objectType + '&objectID=' + v.objectID) );
 });
