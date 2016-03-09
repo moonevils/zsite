@@ -45,7 +45,7 @@ class message extends control
     {
         $recPerPage = !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage;
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0 , $recPerPage, $pageID);
+        $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
         $this->view->objectType  = $objectType;
         $this->view->objectID    = $objectID;
