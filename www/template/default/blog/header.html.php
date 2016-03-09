@@ -14,7 +14,7 @@
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 $webRoot        = $config->webRoot;
 $jsRoot         = $webRoot . "js/";
-$themeRoot      = $webRoot . "template/default/theme/";
+$themeRoot      = $webRoot . "theme/default/";
 $sysURL         = $common->getSysURL();
 $thisModuleName = $this->app->getModuleName();
 $thisMethodName = $this->app->getMethodName();

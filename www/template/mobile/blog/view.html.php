@@ -77,9 +77,15 @@ include TPL_ROOT . 'common/files.html.php';
 </div>
 
 <?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
+<div id='commentBox'></div>
 <?php endif;?>
 
 <div class='block-region region-bottom blocks' data-region='blog_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'bottom');?></div>
+<script>
+$(function()
+{
+    $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=article&objectID=$article->id", 'mhtml');?>');
+});
+</script>
 
 <?php include TPL_ROOT . 'blog/footer.html.php';?>

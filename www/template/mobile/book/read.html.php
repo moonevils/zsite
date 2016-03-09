@@ -14,7 +14,6 @@
 include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/files.html.php';
 ?>
-<?php js::set('articleID', $article->id)?>
 <div class='block-region region-top blocks' data-region='book_read-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'top');?></div>
 <div class='appheader'>
   <div class='heading'>
@@ -71,7 +70,13 @@ include TPL_ROOT . 'common/files.html.php';
 </div>
 
 <?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
+<div id='commentBox'></div>
 <?php endif;?>
 <div class='block-region region-bottom blocks' data-region='book_read-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'bottom');?></div>
+<script>
+$(function()
+{
+    $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=book&objectID=$article->id", 'mhtml');?>');
+});
+</script>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

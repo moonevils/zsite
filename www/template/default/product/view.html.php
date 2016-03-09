@@ -16,7 +16,9 @@ include TPL_ROOT . 'common/treeview.html.php';
 
 /* set categoryPath for topNav highlight. */
 js::set('path',  $product->path);
+js::set('objectType', 'product');
 js::set('productID', $product->id);
+js::set('objectID', $product->id);
 js::set('categoryID', $category->id);
 js::set('categoryPath', explode(',', trim($category->path, ',')));
 js::set('addToCartSuccess', $lang->product->addToCartSuccess);
@@ -172,7 +174,7 @@ js::execute($product->js);
     <div class='row blocks' data-region='product_view-bottom'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
     <?php if(commonModel::isAvailable('message')):?>
     <div id='comments'>
-      <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=product&objectID={$product->id}");?></div>
+      <div id='commentBox'></div>
       <?php echo html::a('', '', "name='comment'");?>
     </div>
     <?php endif;?>
