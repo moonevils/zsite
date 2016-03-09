@@ -17,7 +17,7 @@
       <h5 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->user->editProfile;?></h5>
     </div>
     <div class='modal-body'>
-      <form id='editProfileForm' method='post' action="<?php echo inlink('edit');?>">
+      <form id='editProfileForm' method='post' action="<?php echo inlink('edit');?>" data-checkfingerprint='1'>
         <div class='form-group'>
           <label for='realname' class='control-label'><?php echo $lang->user->realname;?></label>
           <?php if($user->admin == 'super'):?>
@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block') . html::hidden('token', $token);;?>
+          <?php echo html::submitButton('', 'btn primary block') . html::hidden('token', $token);?>
         </div>
       </form>
     </div>
@@ -121,6 +121,7 @@
 $(function()
 {
     var $editProfileForm = $('#editProfileForm');
+    appendFingerprint($editProfileForm);
     $editProfileForm.ajaxform({onSuccess: function(response)
     {
         if(response.result == 'success')
