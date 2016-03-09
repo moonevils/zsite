@@ -17,6 +17,7 @@ $lang->upgrade->success = '升级成功';
 $lang->upgrade->tohome  = '返回首页';
 
 $lang->upgrade->backup        = '备份数据';
+$lang->upgrade->prepair       = '准备升级';
 $lang->upgrade->selectVersion = '确认升级之前的版本';
 $lang->upgrade->confirm       = '确认要执行的SQL语句';
 $lang->upgrade->execute       = '确认执行';
@@ -33,6 +34,10 @@ EOT;
 $lang->upgrade->createSlidePath = <<<EOT
 <div class='alert'> 请创建幻灯片目录：<b>%s</b> 并开启该目录写权限后继续。 </div>
 EOT;
+$lang->upgrade->chmodThemePath = <<<EOT
+<div class='alert'> 请开启<b>%s</b> 目录写权限后继续。 </div>
+EOT;
+
 
 $lang->upgrade->versionNote = "务必选择正确的版本，否则会造成数据丢失。";
 
@@ -73,3 +78,4 @@ $lang->upgrade->fromVersions['4_5_2']    = '4.5.2';
 $lang->upgrade->fromVersions['4_6']      = '4.6';
 $lang->upgrade->fromVersions['5_0']      = '5.0';
 $lang->upgrade->fromVersions['5_0_1']    = '5.0.1';
+$lang->upgrade->fromVersions['5_1']      = '5.1';

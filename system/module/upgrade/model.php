@@ -137,6 +137,9 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
                 $this->fixLayoutPlans();
                 $this->moveCodes();
+            case '5_1';
+                $this->execSQL($this->getUpgradeFile('5.1'));
+                $this->moveThemes();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -192,6 +195,7 @@ class upgradeModel extends model
             case '4_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.6'));
             case '5_0';
             case '5_0_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.0.1'));
+            case '5_1';
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1850,6 +1854,32 @@ class upgradeModel extends model
                        $this->dao->insert(TABLE_CONFIG)->data($data)->exec();
                     }
                 }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Move old themes to theme path.
+     * 
+     * @access public
+     * @return void
+     */
+    public function moveThemes()
+    {
+        $zfile        = $this->app->loadClass('zfile');
+        $templateRoot = $this->app->getWwwroot() . 'template' . DS;
+        $themeRoot    = $this->app->getWwwroot() . 'theme' . DS;
+        $templates    = glob($templateRoot . '*');
+        foreach($templates as $template)
+        {
+            if(!is_dir($template . DS . 'theme')) continue;
+            $folders = glob($template . DS . 'theme' . DS . '*');
+            if(empty($folders)) continue;
+            foreach($folders as $folder)
+            {
+                if(!is_dir($folder) or is_dir($themeRoot . basename($template) . DS . basename($folder))) continue;
+                $zfile->copyDir($folder, $themeRoot . basename($template) . DS . basename($folder));
             }
         }
         return true;
