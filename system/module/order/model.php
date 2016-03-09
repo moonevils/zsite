@@ -176,7 +176,7 @@ class orderModel extends model
     public function createPayLink($order, $type = '')
     {
         if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $type);
-        return false;
+        return helper::createLink('order', 'check', "orderID=$order->id");
     }
 
     /**
