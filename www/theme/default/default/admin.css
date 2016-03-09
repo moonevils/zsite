@@ -765,3 +765,9 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 
 .panel-heading > a { display: inline-block; margin: -3px 3px; line-height: 26px;padding: 0 3px}
 .panel-heading > a.active { font-weight: bold;}
+
+.panel-heading.with-nav-tabs {padding: 4px 5px 0 5px}
+.panel-heading > .nav-tabs {margin-bottom: -1px}
+.panel-heading > .nav-tabs > li > a {padding: 5px 10px 8px}
+.panel-heading > .nav-tabs > li > a.active, .panel-heading > .nav-tabs > li > a.focus {outline: none;}
+.panel-heading > .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
