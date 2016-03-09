@@ -15,7 +15,8 @@ include TPL_ROOT . 'blog/header.html.php';
 $path = !empty($category->pathNames) ? array_keys($category->pathNames) : array();
 js::set('path', $path);
 js::set('categoryID', $category->id);
-js::set('articleID', $article->id);
+js::set('objectType', 'article');
+js::set('objectID', $article->id);
 if(isset($article->css)) css::internal($article->css);
 if(isset($article->js))  js::execute($article->js);
 include TPL_ROOT . 'common/treeview.html.php';
@@ -81,7 +82,7 @@ $common->printPositionBar($category, $article, '', $root);
       </footer>
     </div>
     <?php if(commonModel::isAvailable('message')):?>
-    <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
+    <div id='commentBox'></div>
     <?php endif;?>
     <div class='row blocks' data-region='blog_view-bottom'><?php $this->block->printRegion($layouts, 'blog_view', 'bottom', true);?></div>
   </div>

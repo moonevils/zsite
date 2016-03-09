@@ -1,5 +1,6 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php js::set('articleID', $article->id)?>
+<?php js::set('objectType', 'book');?>
+<?php js::set('objectID', $article->id);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
 <div class='article' id='book' data-id='<?php echo $article->id?>'>
@@ -42,7 +43,7 @@
   </footer>
 </div>
 <?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?></div>
+<div id='commentBox'></div>
 <?php endif;?>
 <div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
