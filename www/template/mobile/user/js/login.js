@@ -1,5 +1,6 @@
 $(function()
 {
+    appendFingerprint($('#loginForm'));
     $('#loginForm').ajaxform(
     {
         onSubmit: function(data)
