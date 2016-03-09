@@ -26,7 +26,7 @@ body {background-color: #f1f1f1}
   <div class='alert alert-login'>
     <h2 class='bg-gray-pale'><?php echo $this->config->site->name;?></h2>
     <div class='table-row'>
-      <div class='img text-center table-cell'><?php echo html::image($this->config->webRoot . 'template/default/theme/default/images/main/logo.login.admin.png'); ?></div>
+      <div class='img text-center table-cell'><?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.png'); ?></div>
       <div class='content table-cell'>
         <form method='post' id='loginForm' role='form' data-checkfingerprint='1'>
           <div class='form-group hide form-message alert text-danger bg-danger-pale'>
