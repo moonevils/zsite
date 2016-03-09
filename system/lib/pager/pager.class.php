@@ -256,7 +256,6 @@ class pager
         unset($query['t']);
 
         $this->params = array_merge($this->params, $query);
-
     }
 
     /**
@@ -551,12 +550,14 @@ EOT;
         {
             $link  = strip_tags(urldecode($_SERVER['REQUEST_URI']));
 
-            if($this->params['pageID'] == 1) return html::a(preg_replace('/\/p\d+\./', '.', $link), $title);
+            if($this->params['pageID'] == 1) return html::a(preg_replace('/\/p\d+\.html/', '.html', $link), $title);
 
-            if(preg_match('/\/p\d+/', $link)) return html::a(preg_replace('/\/p\d+\./', '/p' . $this->params['pageID'] . '.', $link), $title);
+            if(preg_match('/\/p\d+/', $link)) return html::a(preg_replace('/\/p\d+\.html/', '/p' . $this->params['pageID'] . '.html', $link), $title);
 
             if($config->requestType == 'PATH_INFO2') $link = str_replace('index.php/', 'index_php/', $link);
-            $link = str_replace('.', "/p{$this->params['pageID']}.", $link);
+
+            $link = str_replace('.html', "/p{$this->params['pageID']}.html", $link);
+
             if($config->requestType == 'PATH_INFO2') $link =  str_replace('index_php/', 'index.php/', $link);
             return html::a($link, $title);
         }
