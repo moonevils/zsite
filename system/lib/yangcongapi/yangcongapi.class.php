@@ -32,10 +32,27 @@ class yangcongapi
 
     public function get($url)
     {
-        $response = file_get_contents($url);
-        $response = json_decode($response);
-        $this->log(var_export($response, true));
-        return $response;
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($curl);
+        
+        if(!$result)
+        {
+            $this->log('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
+            curl_close($ch);
+            return false;
+        }
+        else
+        {
+            $response = json_decode($result);
+            $this->log(var_export($response, true));
+            curl_close($ch);
+            return $response;
+        }
     }
     
     public  function log($response)
