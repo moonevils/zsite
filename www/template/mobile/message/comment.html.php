@@ -119,6 +119,13 @@ $(function()
 
     var $commentForm = $('#commentForm'),
         $commentBox = $('#commentBox');
+
+    $commentBox.find('.pager').on('click', 'a', function()
+    {
+        $commentBox.load($(this).attr('href'));
+        return false;
+    });
+
     $commentForm.ajaxform({onSuccess: function(response)
     {
         if(response.result == 'success')
@@ -132,11 +139,5 @@ $(function()
             $commentForm.find('.captcha-box').html(response.captcha).removeClass('hide');
         }
     }});
-
-    $commentBox.find('.pager').on('click', 'a', function()
-    {
-        $commentBox.load($(this).attr('href'));
-        return false;
-    });
 });
 </script>

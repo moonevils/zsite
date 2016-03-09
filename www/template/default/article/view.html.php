@@ -4,7 +4,8 @@ include TPL_ROOT . 'common/treeview.html.php';
 
 /* set categoryPath for topNav highlight. */
 js::set('path', $article->path);
-js::set('articleID', $article->id);
+js::set('objectType', 'article');
+js::set('objectID', $article->id);
 js::set('categoryID', $category->id);
 js::set('categoryPath', explode(',', trim($category->path, ',')));
 if(isset($article->css)) css::internal($article->css);
@@ -80,7 +81,7 @@ if(isset($article->js)) js::execute($article->js);
     </div>
     <div class='row blocks' data-region='article_view-bottom'><?php $this->block->printRegion($layouts, 'article_view', 'bottom', true);?></div>
     <?php if(commonModel::isAvailable('message')):?>
-    <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
+    <div id='commentBox'></div>
     <?php endif;?>
   </div>
   <div class='col-md-3 col-side'><side class='page-side blocks' data-region='article_view-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></side></div>
