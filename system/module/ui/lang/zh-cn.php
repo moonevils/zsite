@@ -46,14 +46,15 @@ $lang->ui->enableTheme     = "使用此主题";
 $lang->ui->industry        = "行业";
 $lang->ui->offcial         = "官方";
 
-$lang->ui->noLogo                 = "未上传Logo";
-$lang->ui->noFavicon              = "未上传小图标";
+$lang->ui->uploadLogo             = "上传Logo";
+$lang->ui->uploadFavicon          = "上传小图标";
 $lang->ui->noStyleTag             = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->noJsTag                = "请填写全局JS代码，不需要&lt;script&gt;&lt;/script&gt;标签";
 $lang->ui->setLogoFailed          = "设置Logo失败";
 $lang->ui->noSelectedFile         = "获取上传图片失败，可能是图片大小超出上传限制";
 $lang->ui->notAlloweFileType      = "请选择正确的%s文件";
 $lang->ui->suitableLogoSize       = '最佳高度范围：%s，最佳宽度范围：%s';
+$lang->ui->faviconHelp            = "请上传.ico图标文件。<a href='%s' target='_blank'>帮助</a>";
 $lang->ui->exportedSuccess        = '导出成功';
 $lang->ui->deleteThemeSuccess     = '删除主题成功';
 $lang->ui->deleteThemeFail        = '删除主题失败';
