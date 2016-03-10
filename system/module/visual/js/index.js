@@ -12,9 +12,11 @@
     var isInPreview = false;
     var lang = $.extend(window.v.visualLang, window.v.lang, {blocks: window.v.visualBlocks});
     var visualPageUrl = visualPage.src;
+    if(DEBUG) console.log('visualPageUrl =', visualPageUrl);
     var visuals = window.v.visuals;
     var visualsLang = window.v.visualsLang;
     var themesConfig;
+    var clientLang = $.zui.clientLang().replace('zh-', '');
     var DEFAULT_ACTIONS_CONFIG =
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
@@ -98,7 +100,7 @@
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
-        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
+        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, 'l=' + clientLang + '&' + (action.params || setting.params || '').format(options));
     };
 
     var openModal = function(url, options)
@@ -917,7 +919,7 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
-                var url = createLink('visual', 'index', 'referer=' + Base64.encode(visualPageUrl));
+                var url = createLink('visual', 'index', 'l=' + clientLang + '&' + 'referer=' + Base64.encode(visualPageUrl));
                 window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
@@ -1014,6 +1016,7 @@
             beforeSend: resetAjaxSetup,
             success: function(response)
             {
+                console.log(theme);
                 var $page = $(response);
                 var $style = $page.filter('link#themeStyle');
                 window.$page = $page;
