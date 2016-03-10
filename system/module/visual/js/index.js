@@ -12,9 +12,11 @@
     var isInPreview = false;
     var lang = $.extend(window.v.visualLang, window.v.lang, {blocks: window.v.visualBlocks});
     var visualPageUrl = visualPage.src;
+    if(DEBUG) console.log('visualPageUrl =', visualPageUrl);
     var visuals = window.v.visuals;
     var visualsLang = window.v.visualsLang;
     var themesConfig;
+    var clientLang = $.zui.clientLang().replace('zh-', '');
     var DEFAULT_ACTIONS_CONFIG =
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
@@ -98,7 +100,7 @@
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
-        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
+        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, 'l=' + clientLang + '&' + (action.params || setting.params || '').format(options));
     };
 
     var openModal = function(url, options)
@@ -657,6 +659,9 @@
             if(isBlocks) setTimeout(function()
             {
                 var $area = $$(selector);
+                $area.find('img.lazy').each(function() {
+                    $$.lazyload(this);
+                });
                 tidyBlocks($area);
                 $$('.tooltip').remove();
             }, 100);
@@ -755,7 +760,7 @@
         // load visual edit style
         if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
-        themesConfig = $$('#themeStyle').data();
+        themesConfig = $$.iframe.v.theme;
         $('body').addClass('ve-device-' + window.v.device);
         if(themesConfig.device != window.v.device) reloadPage();
 
@@ -914,7 +919,7 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
-                var url = createLink('visual', 'index', 'referer=' + Base64.encode(visualPageUrl));
+                var url = createLink('visual', 'index', 'l=' + clientLang + '&' + 'referer=' + Base64.encode(visualPageUrl));
                 window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
@@ -923,6 +928,7 @@
             if(iframe.jQuery)
             {
                 window.$$ = iframe.jQuery;
+                $$.iframe = iframe;
                 initVisualPage();
             }
             else
@@ -931,6 +937,14 @@
                 {
                     window.$$ = iframe.jQuery.noConflict();
                     loadJs('zui', window.v.zuiJsUrl, iframeDocument, initVisualPage);
+                    $$.iframe = iframe;
+                    if(iframe.Zepto && iframe.Zepto.fn.lazyload)
+                    {
+                        $$.lazyload = function(img)
+                        {
+                            iframe.Zepto(img).lazyload();
+                        };
+                    }
                 });
             }
         }
@@ -993,7 +1007,7 @@
         return false;
     });
 
-    $.updateTheme = function()
+    $.updateTheme = function(theme)
     {
         $.ajax(
         {
@@ -1002,10 +1016,11 @@
             beforeSend: resetAjaxSetup,
             success: function(response)
             {
+                console.log(theme);
                 var $page = $(response);
                 var $style = $page.filter('link#themeStyle');
                 window.$page = $page;
-                themesConfig = $style.data();
+                themesConfig.theme = theme;
                 $$('#themeStyle').attr(
                 {
                     href: $style.attr('href'),

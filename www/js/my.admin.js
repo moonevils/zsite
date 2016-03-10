@@ -114,7 +114,7 @@ $(function()
                 if($this.hasClass('menu-theme')) $this.addClass('current');
                 messager.success(response.message);
 
-                if($.updateTheme) $.updateTheme();
+                if($.updateTheme) $.updateTheme($this.data('theme'));
                 else setTimeout(function(){window.location.reload();}, 1000);
             }
             else
