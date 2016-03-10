@@ -42,7 +42,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <div class='tab-content table-cell col-xs-12'>
         <?php endif; ?>
           <div class='tab-pane theme-control-tab-pane' id='contentTab'>
-            <table align='center' class='table table-form'>
+            <table align='center' class='table table-form mg-0'>
               <tr>
                 <th class='w-100px'><?php echo $lang->block->type;?></th>
                 <td><?php echo $this->block->createTypeSelector($template, $type, $block->id);?></td>
@@ -87,7 +87,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <table class='table table-form mg-0'>
               <?php if(isset($config->block->defaultIcons[$type])):?>
               <tr>
-                <th class='w-80px'><?php echo $lang->block->icon;?></th>
+                <th class='w-100px'><?php echo $lang->block->icon;?></th>
                 <td>
                   <div class='colorplate'>
                     <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->iconColor) ? $block->content->custom->$theme->iconColor : ''?>">
@@ -105,7 +105,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
               </tr>
               <?php endif;?>
               <tr>
-                <th class='w-80px'><?php echo $lang->block->border;?></th>
+                <th class='w-100px'><?php echo $lang->block->border;?></th>
                 <td>
                   <div class='colorplate'>
                     <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->borderColor) ? $block->content->custom->$theme->borderColor : ''?>">
@@ -247,7 +247,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <div class='form-footer'>
         <?php echo html::submitButton() . html::hidden('blockID', $block->id);?>
         <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
-        <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default btn-cancel'");?>
+        <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default btn-cancel hidden-ve'");?>
       </div>
     </div>
   </div>

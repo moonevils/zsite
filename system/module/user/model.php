@@ -920,6 +920,11 @@ class userModel extends model
                 ->check('email', 'unique')
                 ->check('email', 'email')
                 ->exec();
+
+            if(commonModel::isAvailable('score') and !dao::isError())
+            {
+                $this->loadModel('score')->earn('register', '', '', 'REGISTER', $user->account);
+            }
         }
 
         if(dao::isError()) return false;
