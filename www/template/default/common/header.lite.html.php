@@ -8,6 +8,7 @@ $thisModuleName = $this->app->getModuleName();
 $thisMethodName = $this->app->getMethodName();
 $template       = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
 $theme          = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
+$cdnRoot        = ($this->config->cdn->open == 'open') ? $this->config->cdn->host . $this->config->version : '';
 ?>
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>' class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
@@ -53,8 +54,6 @@ $theme          = $this->config->template->{$this->device}->theme ? $this->confi
   }
   else
   {
-      $cdnRoot = ($this->config->cdn->open == 'open') ? $this->config->cdn->host . $this->config->version : '';
-
       if($cdnRoot)
       {
           css::import($cdnRoot . '/template/default/theme/default/all.css', '', $cdn = true);
@@ -93,7 +92,18 @@ $theme          = $this->config->template->{$this->device}->theme ? $this->confi
   }
   else
   {
-      js::import($jsRoot . 'all.ie8.js');
+      if($cdnRoot)
+      {
+          echo '<link href="' . $cdnRoot . 'js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />'; 
+          echo '<link href="/js/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />';
+          js::import($jsRoot . 'html5shiv/min.js');
+          js::import($jsRoot . 'respond/min.js');
+          js::import($jsRoot . 'respond/cross-domain/respond.proxy.js');
+      }
+      else
+      {
+          js::import($jsRoot . 'all.ie8.js');
+      }
   }
   ?>
   <![endif]-->
