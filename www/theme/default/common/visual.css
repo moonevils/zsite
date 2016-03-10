@@ -85,6 +85,7 @@
 .ve-block-actions {position: relative; clear: both; margin-bottom: 14px;}
 .ve-block-actions.ve-actions-bar > .nav > li {display: table-cell; padding: 0 5px;}
 .ve-block-actions > .breadcrumb {pointer-events:none; position: absolute; top: 0; left: 6px; background-color: #F1A325; color: #fff; padding: 2px 5px; transition: top .2s, left .2s; border-radius: 0 0 4px 0}
+.ve-block-actions > .breadcrumb:after {display: none!important}
 .blocks.row .ve-block-actions.ve-actions-bar {margin: 0 2px 14px;}
 .blocks.sortable-sorting .ve-block-actions {display: none}
 
