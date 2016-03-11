@@ -32,7 +32,11 @@ js::execute($product->js);
 <?php $common->printPositionBar($category, $product);?>
 <div class='row blocks' data-region='product_view-topBanner'><?php $this->block->printRegion($layouts, 'product_view', 'topBanner', true);?></div>
 <div class='row'>
+  <?php if(isset($layouts['product_view']['side'])):?>
   <div class='col-md-9 col-main'>
+  <?php else:?>
+  <div class='col-md-12'>
+  <?php endif;?>
     <div class='row blocks' data-region='product_view-top'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
     <div class='panel panel-body panel-product' id='product' data-id='<?php echo $product->id;?>'>
       <div class='row'>
@@ -179,9 +183,11 @@ js::execute($product->js);
     </div>
     <?php endif;?>
   </div>
+  <?php if(isset($layouts['product_view']['side'])):?>
   <div class='col-md-3 col-side'>
     <side class='page-side blocks' data-region='product_view-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
+  <?php endif;?>
 </div>
 <div class='row blocks' data-region='product_view-bottomBanner'><?php $this->block->printRegion($layouts, 'product_view', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
