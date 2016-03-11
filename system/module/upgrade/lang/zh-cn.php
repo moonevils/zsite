@@ -37,7 +37,7 @@ EOT;
 
 $lang->upgrade->chmodThemePath = <<<EOT
 <div class='alert'> 请开启<b>%s</b> 目录写权限后继续。 </div>
-OT;
+EOT;
 
 $lang->upgrade->versionNote = "务必选择正确的版本，否则会造成数据丢失。";
 
