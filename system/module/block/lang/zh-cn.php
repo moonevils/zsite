@@ -59,6 +59,7 @@ $lang->block->renameLayout    = '方案重命名';
 $lang->block->planName        = '方案名称';
 $lang->block->saveLayoutAs    = '复制布局：%s';
 $lang->block->defaultPlan     = '默认方案';
+$lang->block->navType         = '导航类型';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局";
@@ -119,3 +120,10 @@ $lang->block->category->fromCurrentList[0] = '否';
 
 $lang->block->category->showCategoryList['abbr'] = '简称';
 $lang->block->category->showCategoryList['name'] = '全称';
+
+$lang->block->navTypeList = new stdclass();
+$lang->block->navTypeList->desktop_top   = '桌面';
+$lang->block->navTypeList->desktop_blog  = '博客';
+$lang->block->navTypeList->mobile_top    = '移动版顶部';
+$lang->block->navTypeList->mobile_bottom = '移动版底部';
+$lang->block->navTypeList->mobile_blog   = '移动版博客';
