@@ -106,6 +106,7 @@ class slideModel extends model
         $data = fixer::input('post')
             ->stripTags('summary', $this->config->allowedTags->front)
             ->setIf(!empty($image), 'image', $image)
+            ->setDefault('target', 0)
             ->remove('files')
             ->get();
 
