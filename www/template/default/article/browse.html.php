@@ -10,7 +10,11 @@ include TPL_ROOT . 'common/treeview.html.php';
 <?php echo $common->printPositionBar($category);?>
 <div class='row blocks' data-region='article_browse-topBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
 <div class='row'>
-  <div class='col-md-9 col-main'>
+  <?php if(isset($layouts['article_browse']['side'])):?>
+  <div class="col-md-9 col-main">
+  <?php else:?>
+  <div class="col-md-12">
+  <?php endif;?>
     <div class='list list-condensed'>
     <div class='row blocks' data-region='article_browse-top'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
       <header><h2><?php echo $category->name;?></h2></header>
@@ -47,7 +51,9 @@ include TPL_ROOT . 'common/treeview.html.php';
     </div>
     <div class='row blocks' data-region='article_browse-bottom'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
   </div>
+  <?php if(isset($layouts['article_browse']['side'])):?>
   <div class='col-md-3 col-side'><side class='page-side blocks' data-region='article_browse-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
+  <?php endif;?>
 </div>
 <div class='row blocks' data-region='article_browse-bottomBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>
