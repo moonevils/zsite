@@ -84,7 +84,7 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getList($categories, $orderBy, $pager = null) 
+    public function getList($categories, $orderBy, $pager = null, $image = false) 
     {   
         $searchWord = $this->get->searchWord;
         $categoryID = $this->get->categoryID;
@@ -100,10 +100,22 @@ class productModel extends model
             $productsIdList = array_keys($productList);
         }
 
+        $imageProductIDs = array();
+        if($image)
+        {
+            $imageProducts = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
+                ->where('objectType')->eq('product')
+                ->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
+                ->orderBy('objectID desc') 
+                ->fetchAll('objectID');
+            $imageProductIDs = array_keys($imageProducts);
+        }
+
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)
             ->where('1 = 1')
             ->beginIF(!empty($categories))->andWhere('id')->in($productsIdList)->fi()
             ->beginIF(RUN_MODE == 'front')->andWhere('status')->eq('normal')->fi()
+            ->beginIF($image)->andWhere('id')->in($imageProductIDs)->fi()
 
             ->beginIF($searchWord)
             ->andWhere('name', true)->like("%{$searchWord}%")
@@ -189,7 +201,7 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getLatest($categories, $count)
+    public function getLatest($categories, $count, $image)
     {
         $family = array();
         $this->loadModel('tree');
@@ -199,7 +211,7 @@ class productModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($family, '`order` desc', $pager);
+        return $this->getList($family, '`order` desc', $pager, $image);
     }
 
     /**
