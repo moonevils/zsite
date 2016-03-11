@@ -13,7 +13,7 @@ $config->block->categoryList = new stdclass();
 $config->block->categoryList->custom  = ',html,htmlcode,phpcode,';
 $config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,';
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
-$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,nav,logo,slogan,userMenu,';
+$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,nav,logo,slogan,userMenu,searchbar,';
 
 $config->block->defaultIcons = array();
 $config->block->defaultIcons['about']         = 'icon-group';

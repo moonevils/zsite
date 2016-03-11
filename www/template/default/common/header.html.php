@@ -19,7 +19,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 <div class='page-container'>
-  <div class='blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top', true);?></div>
+  <div class='blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
   <div class='page-wrapper'>
     <div class='page-content'>
       <div class='blocks' data-region='all-banner'><?php $this->block->printRegion($layouts, 'all', 'banner');?></div>
