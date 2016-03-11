@@ -19,6 +19,13 @@ foreach($config->menus as $group => $modules)
     }
 }
 
+$config->multiEntrances = array();
+$config->multiEntrances[] = 'order_admin';
+$config->multiEntrances[] = 'message_admin';
+$config->multiEntrances[] = 'forum_admin';
+$config->multiEntrances[] = 'reply_admin';
+$config->multiEntrances[] = 'article_admin';
+
 $config->menuDependence = new stdclass();
 $config->menuDependence->contribution = 'contribution';
 $config->menuDependence->page         = 'page';
