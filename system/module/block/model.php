@@ -262,7 +262,7 @@ class blockModel extends model
     public function createTypeMenu($template, $type = '', $blockID = 0, $method = '', $class = '')
     {
         if(empty($method)) $method = $this->app->getMethodName();
-        $select = "<ul class='dropdown-menu $class' role='menu'><li><dl>";
+        $select = "<ul class='dropdown-menu $class block-types-menu' role='menu'><li><dl>";
         foreach($this->config->block->categoryList as $category => $groups)
         {
             $select .= "<dt>{$this->lang->block->categoryList[$category]}</dt>";

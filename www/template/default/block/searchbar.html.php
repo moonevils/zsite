@@ -1,5 +1,5 @@
 <?php if(commonModel::isAvailable('search')): ?>
-  <div id='searchbar' data-ve='search'>
+  <div data-ve='block' data-id='<?php echo $block->id; ?>' class='searchbar'>
     <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
       <div class='input-group'>
         <?php $keywords = ($this->app->getModuleName() == 'search') ? $this->session->serachIngWord : '';?>
