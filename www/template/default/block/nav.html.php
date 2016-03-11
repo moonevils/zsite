@@ -1,5 +1,5 @@
 <?php $params = json_decode($block->content);?>
-<?php $topNavs = $this->loadModel('nav')->getNavs(isset($params->navType) ? $params->navType : null);?>
+<?php $topNavs = $this->loadModel('nav')->getNavs(isset($params->navType) ? $params->navType : 'desktop_top');?>
 <nav id='navbar' class='navbar' data-type='desktop_top' data-ve='block' data-id='<?php echo $block->id; ?>'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
