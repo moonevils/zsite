@@ -101,6 +101,7 @@ class productModel extends model
         }
 
         $imageProductIDs = array();
+        $this->loadModel('file');
         if($image)
         {
             $imageProducts = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
@@ -157,7 +158,7 @@ class productModel extends model
             }
         }
         /* Get images for these products. */
-        $images = $this->loadModel('file')->getByObject('product', array_keys($products), $isImage = true);
+        $images = $this->file->getByObject('product', array_keys($products), $isImage = true);
 
         /* Assign images to it's product. */
         foreach($products as $product)
