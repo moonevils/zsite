@@ -128,8 +128,8 @@ body.ve-preview-in .ve-cover, body.ve-preview-hover .ve-cover, body.ve-preview-i
 body.ve-preview-in .block.ve, body.ve-preview-hover .block.ve {min-height: none; margin-bottom: auto;}
 body.ve-preview-in .blocks.row > .col.col-row > .row.ve, body.ve-preview-hover .blocks.row > .col.col-row > .row.ve {margin: 0 -7px; padding: 0;}
 
-#navbarCollapse .ve-heading {right: auto; left: 0; border-radius: 0 0 2px 0}
-#siteSlogan > .ve {display: block}
-#siteName > h2 .ve-heading, #siteSlogan > .ve .ve-heading {top: 20px;}
-#siteLogo > a .ve-heading {top: auto; bottom: 0}
-#siteLogo[data-ve='block'], nav[data-ve='block'], #siteSlogan[data-ve='block'] {display: block; width: 100%}
+#navbarCollapse .ve-heading, .ve-mode .site-slogan > .ve .ve-heading {right: auto; left: 0; border-radius: 0 0 2px 0}
+.site-logo > .ve {display: block}
+.site-name > h2 .ve-heading, .site-logo > .ve .ve-heading {left: 0; bottom: 0; top: auto; right: auto}
+.site-logo > a .ve-heading {top: auto; bottom: 0}
+.site-logo[data-ve='block'], nav[data-ve='block'], .site-logo[data-ve='block'] {display: block; width: 100%}
