@@ -41,17 +41,20 @@ $lang->ui->themeStore      = 'Theme store';
 $lang->ui->help            = "Help";
 $lang->ui->deleteLogo      = "Delete Logo";
 $lang->ui->setCode         = "Code";
+$lang->ui->installedThemes = "Installed Themes";
 $lang->ui->enableTheme     = "Use this theme";
 $lang->ui->industry        = "Industry";
+$lang->ui->offcial         = "Offcial";
 
-$lang->ui->noLogo                 = "Logo not uploaded";
-$lang->ui->noFavicon              = "Favicon not uploaded";
+$lang->ui->uploadLogo             = "Upload Logo";
+$lang->ui->uploadFavicon          = "Upload Favicon";
 $lang->ui->noStyleTag             = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->noJsTag                = "Please write base JS file code, No &lt;script&gt;&lt;/script&gt; tag.";
 $lang->ui->setLogoFailed          = "Set logo failed.";
 $lang->ui->noSelectedFile         = "No file selected.";
 $lang->ui->notAlloweFileType      = "Please select %s files.";
 $lang->ui->suitableLogoSize       = 'Suitable height: %s, width: %s';
+$lang->ui->faviconHelp            = "Please upload favicon with .ico extension. <a href='%s' target='_blank'>Help</a>";
 $lang->ui->exportedSuccess        = 'Export Successfully';
 $lang->ui->deleteThemeSuccess     = 'Delete theme successfully';
 $lang->ui->deleteThemeFail        = 'Delete theme failed';
@@ -121,6 +124,7 @@ $lang->ui->blocks2Create = "blocks to created";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = 'Reset';
+$lang->ui->theme->online                               = 'Store';
 $lang->ui->theme->default                              = 'Default';
 $lang->ui->theme->resetTip                             = 'Setting changed, take effect after saved.';
 $lang->ui->theme->sizeTip                              = 'The default unit is pixels, such as 1px';
@@ -131,19 +135,23 @@ $lang->ui->theme->extraStyle                           = 'CSS';
 $lang->ui->theme->extraScript                          = 'Javascript';
 $lang->ui->theme->customStyleTip                       = 'Extra style support LESS.';
 $lang->ui->theme->customScriptTip                      = 'Include jQuery 1.9.0.';
+
 $lang->ui->theme->borderStyleList['none']              = 'No Border';
 $lang->ui->theme->borderStyleList['solid']             = 'Solid';
 $lang->ui->theme->borderStyleList['dashed']            = 'Dashed';
 $lang->ui->theme->borderStyleList['dotted']            = 'Dotted';
 $lang->ui->theme->borderStyleList['double']            = 'Double';
+
 $lang->ui->theme->imageRepeatList['repeat']            = 'Default';
 $lang->ui->theme->imageRepeatList['repeat']            = 'Repeat';
 $lang->ui->theme->imageRepeatList['repeat-x']          = 'Repeat-X';
 $lang->ui->theme->imageRepeatList['repeat-y']          = 'Repeat-Y';
 $lang->ui->theme->imageRepeatList['no-repeat']         = 'No Repeat';
+
 $lang->ui->theme->fontWeightList['inherit']            = 'Default';
 $lang->ui->theme->fontWeightList['normal']             = 'Normal';
 $lang->ui->theme->fontWeightList['bold']               = 'Bold';
+
 $lang->ui->theme->fontList['inherit']                  = 'Default';
 $lang->ui->theme->fontList['SimSun']                   = 'SimSun';
 $lang->ui->theme->fontList['FangSong']                 = 'FangSong';
@@ -155,6 +163,7 @@ $lang->ui->theme->fontList['Console']                  = 'Console';
 $lang->ui->theme->fontList['Tahoma']                   = 'Tahoma';
 $lang->ui->theme->fontList['Verdana']                  = 'Verdana';
 $lang->ui->theme->fontList['ZenIcon']                  = '图标字体 ZenIcon';
+
 $lang->ui->theme->fontSizeList['inherit']              = 'Default';
 $lang->ui->theme->fontSizeList['12px']                 = '12px';
 $lang->ui->theme->fontSizeList['13px']                 = '13px';
@@ -164,16 +173,27 @@ $lang->ui->theme->fontSizeList['16px']                 = '16px';
 $lang->ui->theme->fontSizeList['18px']                 = '18px';
 $lang->ui->theme->fontSizeList['20px']                 = '20px';
 $lang->ui->theme->fontSizeList['24px']                 = '24px';
+
 $lang->ui->theme->navbarLayoutList['false']            = 'Normal';
 $lang->ui->theme->navbarLayoutList['true']             = 'Adaptive Width';
+
 $lang->ui->theme->sidebarPullLeftList['false']         = 'Right';
 $lang->ui->theme->sidebarPullLeftList['true']          = 'Left';
+
 $lang->ui->theme->sidebarWidthList["16.666666666667%"] = "1/6";
 $lang->ui->theme->sidebarWidthList["25%"]              = "1/4";
 $lang->ui->theme->sidebarWidthList["33.333333333333%"] = "1/3";
 $lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
+
 $lang->ui->theme->underlineList['none']                = 'None';
 $lang->ui->theme->underlineList['underline']           = 'Underline';
+
+$lang->ui->theme->searchLabels = new stdclass();
+$lang->ui->theme->searchLabels->sales  = 'Most Saled';
+$lang->ui->theme->searchLabels->latest = 'Latest';
+$lang->ui->theme->searchLabels->hot    = 'Hot';
+$lang->ui->theme->searchLabels->rand   = 'Recommend';
+$lang->ui->theme->searchLabels->free   = 'Free';
 
 $lang->ui->groups = new stdclass();
 $lang->ui->groups->basic  = 'Basic Style';
