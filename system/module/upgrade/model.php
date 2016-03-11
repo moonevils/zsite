@@ -138,8 +138,8 @@ class upgradeModel extends model
                 $this->fixLayoutPlans();
                 $this->moveCodes();
             case '5_1';
-                $this->execSQL($this->getUpgradeFile('5.1'));
                 $this->moveThemes();
+                $this->setNavBlock();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1820,7 +1820,7 @@ class upgradeModel extends model
      * Move codes from custom to css and js.
      * 
      * @access public
-     * @return void
+     * @return bool
      */
     public function moveCodes()
     {
@@ -1880,6 +1880,50 @@ class upgradeModel extends model
             {
                 if(!is_dir($folder) or is_dir($themeRoot . basename($template) . DS . basename($folder))) continue;
                 $zfile->copyDir($folder, $themeRoot . basename($template) . DS . basename($folder));
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Add nav block to top region.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setNavBlock()
+    {
+        $nav = new stdclass();
+        $nav->template = 'default';
+        $nav->type     = 'nav';
+        $nav->content  = json_encode(array('navType' => 'desktop_top'));
+        
+        foreach($this->config->langs as $lang => $name)
+        {
+            $nav->lang  = $lang;
+            $nav->title = zget($this->config->upgrade->navBlockNames, $lang);
+            $this->dao->insert(TABLE_BLOCK)->data($nav)->exec();
+            $blockID = $this->dao->lastInsertId();
+
+            $block = new stdclass();
+            $block->id         = $blockID;
+            $block->grid       = "";
+            $block->titleless  = "";
+            $block->borderless = "";
+
+            $layout = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)
+                ->where('template')->eq('default')
+                ->andWhere('page')->eq('all')
+                ->andWhere('region')->eq('top')
+                ->andWhere('lang')->eq($lang)
+                ->fetch();
+
+            if(!empty($layout))
+            {
+                $blocks = json_decode($layout->blocks);
+                $blocks[] = $block;
+                $layout->blocks = json_encode($blocks);
+                $this->dao->setAutoLang(false)->replace(TABLE_LAYOUT)->data($layout)->exec();
             }
         }
         return true;
