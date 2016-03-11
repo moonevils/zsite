@@ -17,6 +17,7 @@ $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Go to index';
 
 $lang->upgrade->backup        = 'Backup';
+$lang->upgrade->prepair       = 'Prepair works';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
 $lang->upgrade->execute       = 'Execute';
@@ -32,6 +33,10 @@ EOT;
 
 $lang->upgrade->createSlidePath = <<<EOT
 <div class='alert alert-danger'>Slide path %s must be writeable. Please create the path and make sure it can be writeable.</div>
+EOT;
+
+$lang->upgrade->chmodThemePath = <<<EOT
+<div class='alert'> Path <b>%s</b> must be writeable before upgrade. </div>
 EOT;
 
 $lang->upgrade->versionNote = "Please choose the version to upgrade.";
