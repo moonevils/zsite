@@ -120,3 +120,9 @@ $lang->block->category->fromCurrentList[0] = 'No';
 $lang->block->category->showCategoryList['abbr'] = 'Abbr';
 $lang->block->category->showCategoryList['name'] = 'Name';
 
+$lang->block->navTypeList = new stdclass();
+$lang->block->navTypeList->desktop_top   = 'Desktop';
+$lang->block->navTypeList->desktop_blog  = 'Blog';
+$lang->block->navTypeList->mobile_top    = 'Top of Mobile';
+$lang->block->navTypeList->mobile_bottom = 'Button of Mobile';
+$lang->block->navTypeList->mobile_blog   = 'Blog of Mobile';

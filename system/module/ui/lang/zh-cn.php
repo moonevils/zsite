@@ -135,7 +135,6 @@ $lang->ui->theme->extraStyle                           = 'CSS';
 $lang->ui->theme->extraScript                          = 'Javascript';
 $lang->ui->theme->customStyleTip                       = '样式表支持Less语法。';
 $lang->ui->theme->customScriptTip                      = '已包含 jQuery 1.9.0。';
-$lang->ui->theme->noThemeInstalled                     = '没有安装主题';
 
 $lang->ui->theme->borderStyleList['none']              = '无边框';
 $lang->ui->theme->borderStyleList['solid']             = '实线';
@@ -174,14 +173,18 @@ $lang->ui->theme->fontSizeList['16px']                 = '16px';
 $lang->ui->theme->fontSizeList['18px']                 = '18px';
 $lang->ui->theme->fontSizeList['20px']                 = '20px';
 $lang->ui->theme->fontSizeList['24px']                 = '24px';
+
 $lang->ui->theme->navbarLayoutList['false']            = '普通';
 $lang->ui->theme->navbarLayoutList['true']             = '自适应宽度';
+
 $lang->ui->theme->sidebarPullLeftList['false']         = '靠右';
 $lang->ui->theme->sidebarPullLeftList['true']          = '靠左';
+
 $lang->ui->theme->sidebarWidthList["16.666666666667%"] = "1/6";
 $lang->ui->theme->sidebarWidthList["25%"]              = "1/4";
 $lang->ui->theme->sidebarWidthList["33.333333333333%"] = "1/3";
 $lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
+
 $lang->ui->theme->underlineList['none']                = '无';
 $lang->ui->theme->underlineList['underline']           = '带下划线';
 
