@@ -15,7 +15,8 @@ $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
 if(empty($content->category)) $content->category = 0;
-$products = $this->loadModel('product')->$method($content->category, $content->limit);
+$image = isset($content->image) ? true : false;
+$products = $this->loadModel('product')->$method($content->category, $content->limit, $image);
 ?>
 <div id="block<?php echo $block->id;?>" class="panel-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
