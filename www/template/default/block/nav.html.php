@@ -1,6 +1,6 @@
 <?php $params = json_decode($block->content);?>
-<?php $topNavs = $this->loadModel('nav')->getNavs($params->navType);?>
-<nav id='navbar' class='navbar' data-type='desktop_top'>
+<?php $topNavs = $this->loadModel('nav')->getNavs(isset($params->navType) ? $params->navType : null);?>
+<nav id='navbar' class='navbar' data-type='desktop_top' data-ve='block' data-id='<?php echo $block->id; ?>'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
       <span class='icon-bar'></span>
@@ -9,7 +9,7 @@
     </button>
     <a class='navbar-brand' href='<?php echo helper::createLink('index');?>'><i class='icon-home'></i></a>
   </div>
-  <div class='collapse navbar-collapse' id='navbarCollapse'>
+  <div class='collapse navbar-collapse' id='navbarCollapse' data-ve='navbar'>
     <ul class='nav navbar-nav'>
       <?php foreach($topNavs as $nav1):?>
         <?php if(empty($nav1->children)):?>

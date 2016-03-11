@@ -367,6 +367,7 @@
         }
 
         $veMain.data('ve', name).data('veInit', true);
+
         var setting = visuals[name];
 
         if($.isPlainObject(setting))
@@ -531,7 +532,7 @@
             var $blocksHolder = $$(this);
             var withGrid = $blocksHolder.hasClass('row');
 
-            $blocksHolder.find('.block, .panel-block, .col-row > .row').each(function()
+            $blocksHolder.find('.block, .panel-block, .col-row > .row, [data-ve="block"]').each(function()
             {
                 var $ve = $$(this);
                 if($ve.data('veInit')) return;
@@ -749,6 +750,7 @@
     {
         $.each(visuals, function(name, setting)
         {
+            if(name === 'block') return;
             $$('[data-ve="' + name + '"], #' + name).each(initVisualArea);
         });
 
@@ -1016,7 +1018,6 @@
             beforeSend: resetAjaxSetup,
             success: function(response)
             {
-                console.log(theme);
                 var $page = $(response);
                 var $style = $page.filter('link#themeStyle');
                 window.$page = $page;
