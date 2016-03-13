@@ -20,17 +20,6 @@ class user extends control
     private $referer;
 
     /**
-     * The construct function fix sina and qq menu.
-     * 
-     * @access public
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Register a user. 
      * 
      * @access public
