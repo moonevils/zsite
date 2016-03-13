@@ -82,7 +82,7 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
   {
       if($this->config->cdn->open == 'open') 
       {
-          js::import($this->config->cdn->host . $this->config->version . '/js/all.js');
+          js::import($this->config->cdn->host . $this->config->version . '/js/all.js', $version = false);
       } 
       else
       {

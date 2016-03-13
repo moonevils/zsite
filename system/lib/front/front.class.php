@@ -466,11 +466,11 @@ class js
      * @access public
      * @return string
      */
-    public static function import($url, $cdn = false)
+    public static function import($url, $version = true)
     {
         global $config;
 
-        if(!$cdn)
+        if($version)
         {
             $pathInfo = parse_url($url);
             $mark  = !empty($pathInfo['query']) ? '&' : '?';
@@ -798,11 +798,11 @@ class css
      * @access public
      * @return vod
      */
-    public static function import($url, $attrib = '', $cdn = false)
+    public static function import($url, $attrib = '', $version = true)
     {
         global $config;
         if(!empty($attrib)) $attrib = ' ' . $attrib;
-        if(!$cdn) $url = "$url?v={$config->version}";
+        if(!$version) $url = "$url?v={$config->version}";
         echo "<link rel='stylesheet' href='$url' type='text/css' media='screen'{$attrib}/>\n";
     }
 
