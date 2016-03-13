@@ -5,7 +5,7 @@
     <?php include TPL_ROOT . 'user/side.html.php';?>
     <div class='col-md-10'>
       <div class='panel'>
-        <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->user->editEmail;?></strong></div>
+        <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->user->setEmail;?></strong></div>
         <div class='panel-body'>
           <form method='post' id='ajaxForm' class='form form-horizontal' data-checkfingerprint='1'>
             <div class='form-group'>
