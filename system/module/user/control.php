@@ -398,13 +398,13 @@ class user extends control
     }
 
     /**
-     * Edit email. 
+     * Set email. 
      * 
      * @param  string $account 
      * @access public
      * @return void
      */
-    public function editEmail()
+    public function setEmail()
     {
         $account = $this->app->user->account;
         $user    = $this->user->getByAccount($account);
@@ -423,11 +423,11 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->title      = $this->lang->user->editEmail;
+        $this->view->title      = $this->lang->user->setEmail;
         $this->view->token      = $this->user->getToken();
         $this->view->user       = $user;
-        $this->view->mobileURL  = helper::createLink('user', 'editEmail', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'editEmail', '', '', 'html');
+        $this->view->mobileURL  = helper::createLink('user', 'setEmail', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'setEmail', '', '', 'html');
         $this->display();
     }
 
