@@ -181,7 +181,7 @@ $lang->menu->stat  = 'Stat|stat|traffic|';
 $lang->menu->tag   = 'Keywords|tag|admin|';
 $lang->menu->links = 'Links|links|admin|';
 
-$lang->menu->ui       = 'Ui|ui|settemplate|';
+$lang->menu->ui       = 'UI|ui|settemplate|';
 $lang->menu->logo     = 'Logo|ui|setlogo|';
 $lang->menu->nav      = 'Nav|nav|admin|';
 $lang->menu->block    = 'Block|block|admin|';
