@@ -117,30 +117,32 @@ $config->thanksList['Spyc 0.5']            = 'http://code.google.com/p/spyc/';
 
 /* Module dependence setting. */
 $config->dependence = new stdclass();
-$config->dependence->article[] = 'article';
-$config->dependence->blog[]    = 'blog';
-$config->dependence->page[]    = 'page';
-$config->dependence->product[] = 'product';
-$config->dependence->book[]    = 'book';
-$config->dependence->user[]    = 'user';
-$config->dependence->forum[]   = 'forum';
-$config->dependence->forum[]   = 'user';
-$config->dependence->reply[]   = 'forum';
-$config->dependence->reply[]   = 'user';
-$config->dependence->message[] = 'message';
-$config->dependence->message[] = 'user';
-$config->dependence->shop[]    = 'shop';
-$config->dependence->shop[]    = 'user';
-$config->dependence->cart[]    = 'shop';
-$config->dependence->address[] = 'shop';
-$config->dependence->order[]   = 'user';
-$config->dependence->search[]  = 'search';
-$config->dependence->score[]   = 'score';
-$config->dependence->score[]   = 'user';
-$config->dependence->stat[]    = 'stat';
-$config->dependence->log[]     = 'stat';
-$config->dependence->contribution[] = 'contribution';
-$config->dependence->contribution[] = 'user';
+$config->dependence->article[]      = 'article';
+$config->dependence->blog[]         = 'blog';
+$config->dependence->page[]         = 'page';
+$config->dependence->product[]      = 'product';
+$config->dependence->book[]         = 'book';
+$config->dependence->user[]         = 'user';
+$config->dependence->forum[]        = 'forum';
+$config->dependence->forum[]        = 'user';
+$config->dependence->reply[]        = 'forum';
+$config->dependence->reply[]        = 'user';
+$config->dependence->message[]      = 'message';
+$config->dependence->message[]      = 'user';
+$config->dependence->shop[]         = 'shop';
+$config->dependence->shop[]         = 'user';
+$config->dependence->cart[]         = 'shop';
+$config->dependence->address[]      = 'shop';
+$config->dependence->express[]      = 'shop';
+$config->dependence->order[]        = 'user';
+$config->dependence->search[]       = 'search';
+$config->dependence->score[]        = 'score';
+$config->dependence->score[]        = 'user';
+$config->dependence->stat[]         = 'stat';
+$config->dependence->log[]          = 'stat';
+$config->dependence->submittion[]   = 'submittion';
+$config->dependence->submittion[]   = 'user';
+$config->dependence->orderSetting[] = 'product';
 
 /* Database settings. */
 $config->db = new stdclass();          
@@ -149,10 +151,6 @@ $config->db->driver     = 'mysql';             // The driver of pdo, only mysql 
 $config->db->encoding   = 'UTF8';              // The encoding of the database.
 $config->db->strictMode = false;               // Turn off the strict mode.
 $config->db->prefix     = 'eps_';              // The prefix of the table name.
-
-
-$config->article = new stdclass();          
-$config->article->contribution = 'close';
 
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot      = dirname(__FILE__) . DS;

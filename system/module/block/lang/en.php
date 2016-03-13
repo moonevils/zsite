@@ -59,6 +59,7 @@ $lang->block->renameLayout    = 'Rename Plan';
 $lang->block->planName        = 'Plan name';
 $lang->block->saveLayoutAs    = 'Copy plan from %s';
 $lang->block->defaultPlan     = 'Default plan';
+$lang->block->navType         = 'Navigation';
 
 $lang->block->admin        = "Block management";
 $lang->block->pages        = "Layout";

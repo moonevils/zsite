@@ -48,21 +48,21 @@ $lang->article->selectCategories = '選擇類目';
 $lang->article->selectBoard      = '選擇版塊';
 $lang->article->confirmReject    = '確認駁回這篇投稿？';
 
-$lang->contribution= new stdclass();
-$lang->contribution->common  = '投稿';
-$lang->contribution->check   = '審核';
-$lang->contribution->list    = '投稿列表';
-$lang->contribution->publish = '發佈';
-$lang->contribution->reject  = '駁回';
+$lang->submittion= new stdclass();
+$lang->submittion->common  = '投稿';
+$lang->submittion->check   = '審核';
+$lang->submittion->list    = '投稿列表';
+$lang->submittion->publish = '發佈';
+$lang->submittion->reject  = '駁回';
 
-$lang->contribution->status[0] = '';
-$lang->contribution->status[1] = '<span class="label label-xsm label-primary">' . '待審核' .'</span>';
-$lang->contribution->status[2] = '<span class="label label-xsm label-success">' . '通過' . '</span>';
-$lang->contribution->status[3] = '駁回';
+$lang->submittion->status[0] = '';
+$lang->submittion->status[1] = '<span class="label label-xsm label-primary">' . '待審核' .'</span>';
+$lang->submittion->status[2] = '<span class="label label-xsm label-success">' . '通過' . '</span>';
+$lang->submittion->status[3] = '駁回';
 
-$lang->contribution->typeList = array();
-$lang->contribution->typeList['article'] = '文章';
-$lang->contribution->typeList['blog']    = '博客';
+$lang->submittion->typeList = array();
+$lang->submittion->typeList['article'] = '文章';
+$lang->submittion->typeList['blog']    = '博客';
 
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '維護文章';
@@ -73,12 +73,12 @@ $lang->article->edit          = '編輯文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '圖片';
 
-$lang->article->contribution    = '投稿';
+$lang->article->submittion    = '投稿';
 $lang->article->submissionTime  = '投遞時間';
 
-$lang->article->contributionOptions = new stdclass;
-$lang->article->contributionOptions->open  = '開啟';
-$lang->article->contributionOptions->close = '關閉';
+$lang->article->submittionOptions = new stdclass;
+$lang->article->submittionOptions->open  = '開啟';
+$lang->article->submittionOptions->close = '關閉';
 
 $lang->blog->common = '博客';
 $lang->blog->admin  = '維護博客';

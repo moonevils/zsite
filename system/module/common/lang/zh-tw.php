@@ -175,7 +175,7 @@ $lang->menu->reply        = '回覆|message|admin|type=reply';
 $lang->menu->forum        = '論壇|forum|admin|';
 $lang->menu->thread       = '主題|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
-$lang->menu->contribution = '投稿|article|admin|type=contribution&tab=user';
+$lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = '統計|stat|traffic|';

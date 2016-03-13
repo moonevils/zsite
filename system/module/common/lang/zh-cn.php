@@ -174,7 +174,7 @@ $lang->menu->reply        = '回复|message|admin|type=reply';
 $lang->menu->forum        = '论坛|forum|admin|';
 $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
-$lang->menu->contribution = '投稿|article|admin|type=contribution&tab=user';
+$lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = '统计|stat|traffic|';
@@ -272,7 +272,7 @@ $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias
 $lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
 $lang->site->menu->score    = '积分规则|score|setcounts|';
-$lang->site->menu->api      = '集成|site|setapi|';
+//$lang->site->menu->api      = '集成|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();

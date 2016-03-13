@@ -107,10 +107,10 @@
             <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle);?></td>
           </tr>
           <?php endif;?>
-          <?php if(commonModel::isAvailable('contribution') and $contributions != '0'):?>
-          <?php $contributionTitle = sprintf($lang->admin->contribution, $contributions);?>
+          <?php if(commonModel::isAvailable('submittion') and $submittionCount != '0'):?>
+          <?php $submittionTitle = sprintf($lang->admin->submittion, $submittionCount);?>
           <tr>
-            <td><?php commonModel::printLink('article', 'admin','type=contribution&tab=feedback', $contributionTitle);?></td>
+            <td><?php commonModel::printLink('article', 'admin','type=submittion&tab=feedback', $submittionTitle);?></td>
           </tr>
           <?php endif;?>
           <?php if(!empty($todayReportTitle)):?>

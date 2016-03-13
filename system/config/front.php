@@ -95,10 +95,10 @@ $config->rights->guest['yangcong']['getresult'] = 'getresult';
 
 $config->rights->guest['ui']['getencrypt'] = 'getencrypt';
 /* For logged member. */
-$config->rights->member['article']['contribution'] = 'contribution';
-$config->rights->member['article']['post']         = 'post';
-$config->rights->member['article']['modify']       = 'modify';
-$config->rights->member['article']['delete']       = 'delete';
+$config->rights->member['article']['submittion'] = 'submittion';
+$config->rights->member['article']['post']       = 'post';
+$config->rights->member['article']['modify']     = 'modify';
+$config->rights->member['article']['delete']     = 'delete';
 
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';

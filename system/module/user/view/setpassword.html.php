@@ -1,7 +1,7 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <?php if($pass):?>
-<form method='post' action='<?php echo inlink('changepassword');?>' id='passwordForm' class='form' data-checkfingerprint='1'>
+<form method='post' action='<?php echo inlink('setpassword');?>' id='passwordForm' class='form' data-checkfingerprint='1'>
   <table class='table table-form borderless'>
     <tr>
       <th class="w-100px"><?php echo $lang->user->account;?></th>
@@ -24,7 +24,7 @@
 </form>
 <?php else:?>
 <?php
-$url = helper::safe64Encode($this->createLink('user', 'changepassword'));
+$url = helper::safe64Encode($this->createLink('user', 'setpassword'));
 include '../../guarder/view/validate.html.php';
 ?>
 <?php endif;?>

@@ -113,7 +113,7 @@ class fileModel extends model
         $template = $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
 
-        $this->scanSources($template, $theme);
+        $this->syncSources($template, $theme);
 
         $files = $this->dao->setAutoLang(false)->select('*')
             ->from(TABLE_FILE)
@@ -138,14 +138,14 @@ class fileModel extends model
     }
 
     /**
-     * Scan sources and save to file table.
+     * Sync sources and save to file table.
      * 
      * @param  string    $template 
      * @param  string    $theme 
      * @access public
      * @return void
      */
-    public function scanSources($template, $theme)
+    public function syncSources($template, $theme)
     {
         $fileList = glob($this->app->getDataRoot() . "source/$template/$theme/*");
         $newFiles = array();

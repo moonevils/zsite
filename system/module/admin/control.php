@@ -33,7 +33,7 @@ class admin extends control
             $messages->reply   = $this->loadModel('message')->getMessages('reply');
         }
         if(commonModel::isAvailable('order')) $this->view->orders = $this->loadModel('order')->getOrders();
-        if(commonModel::isAvailable('contribution')) $this->view->contributions = $this->loadModel('article')->getContributions();
+        if(commonModel::isAvailable('submittion')) $this->view->submittionCount = $this->loadModel('article')->getSubmittionCount();
         $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->todayReport       = $this->loadModel('stat')->getTodayReport();
         $this->view->yestodayReport    = $this->loadModel('stat')->getYestodayReport();
