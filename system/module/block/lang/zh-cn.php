@@ -59,6 +59,7 @@ $lang->block->renameLayout    = '方案重命名';
 $lang->block->planName        = '方案名称';
 $lang->block->saveLayoutAs    = '复制布局：%s';
 $lang->block->defaultPlan     = '默认方案';
+$lang->block->navType         = '导航类型';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局";
