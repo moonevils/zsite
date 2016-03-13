@@ -24,7 +24,7 @@
             <dt><?php echo $lang->user->email;?></dt>
             <dd>
               <?php echo $user->email;?>&nbsp;&nbsp;
-              <?php echo html::a(inlink('editemail'), "<i class='icon-edit'></i>");?>
+              <?php echo html::a(inlink('setemail'), "<i class='icon-edit'></i>");?>
             </dd>
             <dt><?php echo $lang->user->company;?></dt>
             <dd><?php echo $user->company;?></dd>

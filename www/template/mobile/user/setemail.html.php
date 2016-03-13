@@ -14,10 +14,10 @@
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->user->editEmail;?></h5>
+      <h5 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->user->setEmail;?></h5>
     </div>
     <div class='modal-body'>
-      <form id='editMailForm' method='post' action="<?php echo inlink('editemail');?>">
+      <form id='editMailForm' method='post' action="<?php echo inlink('setemail');?>">
         <div class='form-group'>
           <label for='oldPwd' class='control-label'><?php echo $lang->user->password;?></label>
           <?php echo html::password('oldPwd', '', "class='form-control' placeholder='{$lang->user->placeholder->password}'");?>
