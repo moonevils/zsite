@@ -49,6 +49,7 @@ $lang->user->list            = '会员列表';
 $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";
+$lang->user->operate         = '操作';
 $lang->user->changePassword  = "更改密码";
 $lang->user->changeEmail     = "邮箱设置";
 $lang->user->recoverPassword = "忘记密码";
@@ -134,7 +135,6 @@ $lang->user->forbidDate['3']    = '三天';
 $lang->user->forbidDate['7']    = '一周';
 $lang->user->forbidDate['30']   = '一个月';
 $lang->user->forbidDate['3000'] = '永久';
-$lang->user->operate            = '操作';
 
 $lang->user->adminList['super']  = '超级管理员';
 $lang->user->adminList['common'] = '管理员';
@@ -216,6 +216,8 @@ $lang->user->control->common      = '用户中心';
 $lang->user->control->welcome     = '欢迎您，<strong>%s</strong>';
 $lang->user->control->lblPassword = "留空，则保持不变。";
 
+$lang->user->navGroups = new stdclass();
+$lang->user->navGroups->user    = '个人信息';
 $lang->user->control->menus[10] = '<i class="icon-user"></i> 个人信息 <i class="icon-chevron-right"></i>|user|profile';
 if(RUN_MODE != 'install')
 {
@@ -237,11 +239,10 @@ if(RUN_MODE != 'install')
     if(commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> 我的订单 <i class="icon-chevron-right"></i>|order|browse';
     if(commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
 }
-if(RUN_MODE == 'admin')
-{
-    if(RUN_MODE == 'admin' and commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order   = '订单信息';
-    if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = '主题消息';
-}
+
+if(commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order = '订单信息';
+if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = '主题消息';
+
 $lang->user->log = new stdclass();
 $lang->user->log->common = '日志';
 $lang->user->log->list   = '登录日志';
@@ -264,7 +265,3 @@ $lang->user->forceYangcong        = '已开启强制洋葱登录，普通登录�
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';
 $lang->user->placeholder->verifyCode = '请输入验证邮件里面收到的验证码';
-
-$lang->user->navGroups = new stdclass();
-$lang->user->navGroups->user    = '个人信息';
-

@@ -991,8 +991,7 @@ function checkAdminEntry()
         if(strpos($file, '.php') !== false and !in_array($file, $defaultFiles))
         {
             $contents = file_get_contents($path . '/' . $file);
-            $webRoot  = getWebRoot();
-            if(strpos($contents, "'RUN_MODE', 'admin'") && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header("location: $webRoot"));
+            if(strpos($contents, "'RUN_MODE', 'admin'") && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header("location: " . getWebRoot()));
         }
     }
 }
