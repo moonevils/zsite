@@ -625,7 +625,7 @@ class user extends control
      * @access public
      * @return void
      */
-    public function changePassword()
+    public function setPassword()
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
