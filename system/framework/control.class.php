@@ -768,6 +768,8 @@ class control
                 }
             }
 
+            header("Content-type: text/html; charset=utf-8");
+            header("Content-type: application/json");
             echo json_encode($data);
         }
         die(helper::removeUTF8Bom(ob_get_clean()));

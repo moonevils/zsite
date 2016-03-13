@@ -151,7 +151,7 @@ $lang->groups->content  = array('title' => 'Content', 'link' => 'article|admin|t
 $lang->groups->shop     = array('title' => 'Shop', 'link' => 'order|admin|',                  'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => 'Member', 'link' => 'user|admin|',                 'icon' => 'group');
 $lang->groups->promote  = array('title' => 'Promote', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
-$lang->groups->design   = array('title' => 'Designer', 'link' => 'ui|settemplate|',           'icon' => 'dashboard');
+$lang->groups->design   = array('title' => 'Designer', 'link' => 'ui|settemplate|',           'icon' => 'paint-brush');
 $lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',               'icon' => 'cloud');
 $lang->groups->setting  = array('title' => 'Setting', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
@@ -329,13 +329,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = 'Traffic Info|stat|traffic|';
+$lang->stat->menu->traffic  = 'Basic|stat|traffic|';
 $lang->stat->menu->from     = 'Source|stat|from|';
 $lang->stat->menu->domains  = array('link' => 'Domain|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
-$lang->stat->menu->search   = 'Search Engine|stat|search|';
+$lang->stat->menu->search   = 'Engine|stat|search|';
 $lang->stat->menu->keywords = 'Keywords|stat|keywords|';
 $lang->stat->menu->client   = 'Client|stat|client|type=browser';
-$lang->stat->menu->page     = 'Click ranking|stat|page|';
+$lang->stat->menu->page     = 'Top|stat|page|';
 $lang->stat->menu->setStat  = 'Setting|stat|setting|';
 
 /* Error info. */

@@ -218,30 +218,31 @@ $lang->user->control->lblPassword = "留空，则保持不变。";
 
 $lang->user->navGroups = new stdclass();
 $lang->user->navGroups->user    = '个人信息';
-$lang->user->control->menus[10] = '<i class="icon-user"></i> 个人信息 <i class="icon-chevron-right"></i>|user|profile';
+
+$lang->user->control->menus['profile'] = '<i class="icon-user"></i> 个人信息 <i class="icon-chevron-right"></i>|user|profile';
 if(RUN_MODE != 'install')
 {
-    if(commonModel::isAvailable('message')) $lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
-    if(commonModel::isAvailable('submittion')) $lang->user->control->menus[21] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submittion'; 
+    if(commonModel::isAvailable('message')) $lang->user->control->menus['message'] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
+    if(commonModel::isAvailable('submittion')) $lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submittion'; 
 
     if(commonModel::isAvailable('score'))
     {
-        $lang->user->control->menus[30] = '<i class="icon-sun"></i> 积分详情 <i class="icon-chevron-right"></i>|user|score';
-        if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> 积分充值 <i class="icon-chevron-right"></i>|score|buyscore';
+        $lang->user->control->menus['score'] = '<i class="icon-sun"></i> 积分详情 <i class="icon-chevron-right"></i>|user|score';
+        if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus['recharge'] = '<i class="icon-bolt"></i> 积分充值 <i class="icon-chevron-right"></i>|score|buyscore';
     }
 
     if(commonModel::isAvailable('forum'))
     {
-        $lang->user->control->menus[50] = '<i class="icon-comment"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
-        $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+        $lang->user->control->menus['thread'] = '<i class="icon-comment"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
+        $lang->user->control->menus['reply'] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
     }
 
-    if(commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> 我的订单 <i class="icon-chevron-right"></i>|order|browse';
-    if(commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
-}
+    if(commonModel::isAvailable('order')) $lang->user->control->menus['order'] = '<i class="icon-shopping-cart"></i> 我的订单 <i class="icon-chevron-right"></i>|order|browse';
+    if(commonModel::isAvailable('shop')) $lang->user->control->menus['address'] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
 
-if(commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order = '订单信息';
-if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = '主题消息';
+    if(commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order = '订单信息';
+    if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = '主题消息';
+}
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = '日志';
