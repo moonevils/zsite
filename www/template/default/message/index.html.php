@@ -22,26 +22,18 @@
     <?php $class = 'success';?>
     <?php foreach($messages as $number => $message):?>
     <?php $class = $class == 'success' ? '' : 'success';?>
-    <div class='comment w-p100' id="comment<?php echo $message->id?>">
-      <div class='<?php echo $class;?> comment-id'><?php echo $message->id?></div>
-      <table class='table table-borderless w-p100'>
-        <tr>
-        <th class='th-from'>
-          <?php echo $message->from;?><br>
-          <span class='time'> <?php echo formatTime($message->date, 'Y/m/d');?> </span>
-        </th>
-        <td class='td-content'>
-          <div class='content-detail'><?php echo nl2br($message->content);?></div>
-        </td>
-        <td class='td-action'> <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?> </td>
-        </tr>
-        <?php $this->message->getFrontReplies($message);?>
-      </table>
+    <div class='w-p100 panel comment-item' id="comment<?php echo $message->id?>">
+      <div class='panel-heading content-heading'>
+        <i class='icon icon-user'> <?php echo $message->from;?></i>
+        <i class='text-muted'> <?php echo $message->date;?></i>
+        <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply text-info'> </i>", "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?>
+      </div>
+      <div class='panel-body'><?php echo nl2br($message->content);?></div>
+      <?php $this->message->getFrontReplies($message);?>
     </div>
     <?php endforeach; ?>
     <?php endif;?>
     <div class='text-right'><div class='pager clearfix'><?php $pager->show('right', 'short');?></div></div>
-
     <div class='panel panel-form'>
       <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
       <div class='panel-body'>
