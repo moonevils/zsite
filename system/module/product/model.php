@@ -86,37 +86,31 @@ class productModel extends model
      */
     public function getList($categories, $orderBy, $pager = null, $image = false) 
     {   
+        $this->loadModel('file');
         $searchWord = $this->get->searchWord;
         $categoryID = $this->get->categoryID;
 
         /* Get products(use groupBy to distinct products).  */
-        $productsIdList = array();
-        if(!empty($categories))
-        {
-            $productList = $this->dao->select('id')->from(TABLE_RELATION)
-                ->where('type')->eq('product')
-                ->andWhere('category')->in($categories)
-                ->fetchAll('id');
-            $productsIdList = array_keys($productList);
-        }
+        $productIDList = $this->dao->select('id')->from(TABLE_RELATION)
+            ->where('type')->eq('product')
+            ->andWhere('category')->in($categories)
+            ->fetchPairs();
 
-        $imageProductIDs = array();
-        $this->loadModel('file');
         if($image)
         {
-            $imageProducts = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
+            $objectIDList = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
                 ->where('objectType')->eq('product')
                 ->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
                 ->orderBy('objectID desc') 
-                ->fetchAll('objectID');
-            $imageProductIDs = array_keys($imageProducts);
+                ->fetchPairs();
+
+            $productIDList = array_merge($productIDList, $objectIDList);
         }
 
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)
             ->where('1 = 1')
-            ->beginIF(!empty($categories))->andWhere('id')->in($productsIdList)->fi()
+            ->beginIF(!empty($categories) or $image)->andWhere('id')->in($productIDList)->fi()
             ->beginIF(RUN_MODE == 'front')->andWhere('status')->eq('normal')->fi()
-            ->beginIF($image)->andWhere('id')->in($imageProductIDs)->fi()
 
             ->beginIF($searchWord)
             ->andWhere('name', true)->like("%{$searchWord}%")
@@ -143,33 +137,23 @@ class productModel extends model
             ->andWhere('t1.id')->in(array_keys($products))
             ->fetchGroup('product', 'id');
 
-        /* Assign categories to it's product. */
-        foreach($products as $product)
-        {
-            $product->categories = !empty($categories[$product->id]) ? $categories[$product->id] : array();
-            $product->category = current($product->categories);
-        }
-
-        foreach($products as $product)
-        {
-            foreach($product->categories as $category)
-            {
-                if($category->unsaleable and !$product->unsaleable) $product->unsaleable = 1;
-            }
-        }
         /* Get images for these products. */
         $images = $this->file->getByObject('product', array_keys($products), $isImage = true);
 
-        /* Assign images to it's product. */
         foreach($products as $product)
         {
+            /* Assign categories to it's product. */
+            $product->categories = !empty($categories[$product->id]) ? $categories[$product->id] : array();
+            $product->category   = current($product->categories);
+            foreach($product->categories as $category)  $product->unsaleable = ($category->unsaleable and !$product->unsaleable);
+
+            /* Assign images to it's product. */
             if(empty($images[$product->id])) continue;
             $product->image = new stdclass();
             if(isset($images[$product->id]))  $product->image->list = $images[$product->id];
             if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
             $product->desc = empty($product->desc) ? helper::substr(strip_tags($product->content), 250) : $product->desc;
         }
-
 
         return $products;
     }
