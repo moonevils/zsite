@@ -217,32 +217,32 @@ $lang->user->control->welcome     = 'Welcome, <strong>%s</strong>';
 $lang->user->control->lblPassword = "Keep empty, will not change it.";
 
 $lang->user->navGroups = new stdclass();
-$lang->user->navGroups->user = 'User profile';
+$lang->user->navGroups->user    = 'User profile';
 
-$lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
+$lang->user->control->menus['profile'] = '<i class="icon-large icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
 if(RUN_MODE != 'install')
 {
-    if(commonModel::isAvailable('message')) $lang->user->control->menus[20] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
-    if(commonModel::isAvailable('submittion')) $lang->user->control->menus[21] = '<i class="icon-envelope"></i> My Submittion <i class="icon-chevron-right"></i>|article|submittion'; 
+    if(commonModel::isAvailable('message')) $lang->user->control->menus['message'] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
+    if(commonModel::isAvailable('submittion')) $lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> My Submittion <i class="icon-chevron-right"></i>|article|submittion'; 
 
     if(commonModel::isAvailable('score'))
     {
-        $lang->user->control->menus[30] = '<i class="icon-sun"></i> Score <i class="icon-chevron-right"></i>|user|score';
-        if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> Recharge Score <i class="icon-chevron-right"></i>|score|buyscore';
+        $lang->user->control->menus['score'] = '<i class="icon-sun"></i> Score <i class="icon-chevron-right"></i>|user|score';
+        if(strpos($this->config->shop->payment, 'recharge') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> Recharge Score <i class="icon-chevron-right"></i>|score|buyscore';
     }
 
     if(commonModel::isAvailable('forum'))
     {
-        $lang->user->control->menus[50] = '<i class="icon-comment"></i> My Theme <i class="icon-chevron-right"></i>|user|thread';
-        $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
+        $lang->user->control->menus['thread'] = '<i class="icon-comment"></i> My Theme <i class="icon-chevron-right"></i>|user|thread';
+        $lang->user->control->menus['reply'] = '<i class="icon-mail-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
     }
 
-    if(commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
-    if(commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
-}
+    if(commonModel::isAvailable('order')) $lang->user->control->menus['order'] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
+    if(commonModel::isAvailable('shop')) $lang->user->control->menus['address'] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 
-if(commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order   = 'Order Info';
-if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = 'My messages';
+    if(commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order = 'Order Info';
+    if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = 'My messages';
+}
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = 'Log';
