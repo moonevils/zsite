@@ -390,7 +390,7 @@ class commonModel extends model
             if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
-            if(!commonModel::isAvailable('contribution') && $vars == 'type=contribution') continue;
+            if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
 
             if(commonModel::hasPriv($module, $method))
             {

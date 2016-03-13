@@ -723,15 +723,15 @@ class userModel extends model
         $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER)->where('id')->in($this->post->orders)->exec();
         $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER_PRODUCT)->where('orderID')->in($this->post->orders)->exec();
 
-        /* Delete contributions of user. */
+        /* Delete submittion of user. */
         $this->dao->setAutoLang(false)->delete()->from(TABLE_RELATION)
-            ->where('id')->in($this->post->contributions)
+            ->where('id')->in($this->post->submittions)
             ->andWhere('type')->in('article, blog')
             ->exec();
-        $this->dao->setAutoLang(false)->delete()->from(TABLE_ARTICLE)->where('id')->in($this->post->contributions)->exec();
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_ARTICLE)->where('id')->in($this->post->submittions)->exec();
         $this->dao->setAutolang(false)->delete()->from(TABLE_SEARCH_INDEX)
             ->where('objectType')->in('article, blog')
-            ->andWhere('objectID')->in($this->post->contributions)
+            ->andWhere('objectID')->in($this->post->submittions)
             ->exec();
 
         /* Delete addresses of user. */
@@ -1276,13 +1276,13 @@ class userModel extends model
     public function getUserHistory($account)
     {
         $user = new stdclass;
-        $user->threads       = $this->getThreads($account);
-        $user->replies       = $this->getReplies($account);
-        $user->comments      = $this->getMessages($account, 'comment');
-        $user->messages      = $this->getMessages($account, 'message');
-        $user->orders        = $this->getOrders($account);
-        $user->addresses     = $this->getAddresses($account);
-        $user->contributions = $this->getContributions($account);
+        $user->threads     = $this->getThreads($account);
+        $user->replies     = $this->getReplies($account);
+        $user->comments    = $this->getMessages($account, 'comment');
+        $user->messages    = $this->getMessages($account, 'message');
+        $user->orders      = $this->getOrders($account);
+        $user->addresses   = $this->getAddresses($account);
+        $user->submittions = $this->getSubmittions($account);
 
         return $user;
     }
@@ -1300,7 +1300,7 @@ class userModel extends model
             ->where('author')->in($users)
             ->groupBy('author')
             ->fetchPairs('author');
-        $contributions = $this->dao->setAutoLang(false)->select('addedBy,count(*) as count')->from(TABLE_ARTICLE)
+        $submittions = $this->dao->setAutoLang(false)->select('addedBy,count(*) as count')->from(TABLE_ARTICLE)
             ->where('addedBy')->in($users)
             ->groupBy('addedBy')
             ->fetchPairs('addedBy');
@@ -1340,15 +1340,15 @@ class userModel extends model
         foreach($users as $user)
         {
            $history[$user] = new stdClass();
-           $history[$user]->thread       = isset($threads[$user]) ? $threads[$user] : 0;
-           $history[$user]->reply        = isset($replies[$user]) ? $replies[$user] : 0;
-           $history[$user]->contribution = isset($contributions[$user]) ? $contributions[$user] : 0;
-           $history[$user]->comment      = isset($fromComments[$user]) ? $fromComments[$user] : 0;
-           $history[$user]->comment     += isset($toComments[$user]) ? $toComments[$user] : 0;
-           $history[$user]->message      = isset($fromMessages[$user]) ? $fromMessages[$user] : 0;
-           $history[$user]->message     += isset($toMessages[$user]) ? $toMessages[$user] : 0;
-           $history[$user]->order        = isset($orders[$user]) ? $orders[$user] : 0;
-           $history[$user]->address      = isset($addresses[$user]) ? $addresses[$user] : 0;
+           $history[$user]->thread     = isset($threads[$user]) ? $threads[$user] : 0;
+           $history[$user]->reply      = isset($replies[$user]) ? $replies[$user] : 0;
+           $history[$user]->submittion = isset($submittions[$user]) ? $submittions[$user] : 0;
+           $history[$user]->comment    = isset($fromComments[$user]) ? $fromComments[$user] : 0;
+           $history[$user]->comment   += isset($toComments[$user]) ? $toComments[$user] : 0;
+           $history[$user]->message    = isset($fromMessages[$user]) ? $fromMessages[$user] : 0;
+           $history[$user]->message   += isset($toMessages[$user]) ? $toMessages[$user] : 0;
+           $history[$user]->order      = isset($orders[$user]) ? $orders[$user] : 0;
+           $history[$user]->address    = isset($addresses[$user]) ? $addresses[$user] : 0;
         }
         return $history;
     }
@@ -1448,20 +1448,20 @@ class userModel extends model
     }
 
     /**
-     * Get contributions by user account. 
+     * Get submittions by user account. 
      * 
      * @param  string $account 
      * @access public
      * @return array 
      */
-    public function getContributions($account)
+    public function getSubmittions($account)
     {
-        $contributions = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_ARTICLE)
+        $submittions = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_ARTICLE)
             ->where('addedBy')->eq($account)
             ->fetchAll();
         
         if(dao::isError()) return dao::getError();
-        return $contributions;
+        return $submittions;
     }
 
     /**
