@@ -38,7 +38,7 @@ $lang->score->dayRank   = '日排行榜';
 
 $lang->score->methods['register'] = '注册';
 $lang->score->methods['login']    = '登录';
-$lang->score->methods['maxLogin'] = '每日登录获得积分上限';
+$lang->score->methods['maxLogin'] = '每日登录积分上限';
 $lang->score->methods['download'] = '下载';
 
 $lang->score->methods['thread']      = '发贴';
@@ -50,7 +50,7 @@ $lang->score->methods['delReply']    = '删回复';
 $lang->score->methods['award']       = '奖励积分';
 $lang->score->methods['punish']      = '扣除积分';
 
-$lang->score->methods['approveContribution'] = '投稿成功';
+$lang->score->methods['approveSubmittion'] = '投稿成功';
 
 $lang->score->methods['buyscore']  = '购买积分';
 $lang->score->methods['statement'] = '积分结算';

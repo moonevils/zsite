@@ -55,11 +55,11 @@
         <?php endforeach;?>
       </div>
       <?php endif;?>
-      <?php if(!empty($userHistory->contributions)):?>
-      <div class="panel-heading"><?php echo $lang->user->contributionHistory;?></div>
+      <?php if(!empty($userHistory->submittions)):?>
+      <div class="panel-heading"><?php echo $lang->user->submittionHistory;?></div>
       <div class="panel-body">
-        <?php foreach($userHistory->contributions as $contribution):?>
-        <?php echo html::checkbox('contributions', array($contribution->id => html::a($this->loadModel('article')->createPreviewLink($contribution->id), $contribution->title, "target='_blank'")), $contribution->id);?>
+        <?php foreach($userHistory->submittions as $submittion):?>
+        <?php echo html::checkbox('submittions', array($submittion->id => html::a($this->loadModel('article')->createPreviewLink($submittion->id), $submittion->title, "target='_blank'")), $submittion->id);?>
         <?php endforeach;?>
       </div>
     <?php endif;?>
