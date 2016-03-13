@@ -38,6 +38,12 @@
           <th><?php echo $lang->score->methods['reply'] . $lang->score->methods['award'];?></th> 
           <td><?php echo html::input('reply', $this->config->score->counts->reply, "class='form-control'");?></td><td></td>
         </tr>
+        <?php if(commonModel::isAvailable('submittion')):?>
+        <tr>
+          <th><?php echo $lang->score->methods['approveSubmittion'] . $lang->score->methods['award'];?></th> 
+          <td><?php echo html::input('approveSubmittion', $this->config->score->counts->approveSubmittion, "class='form-control'");?></td><td></td>
+        </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->score->methods['delThread'] .$lang->score->methods['punish'];?></th> 
           <td><?php echo html::input('delThread', $this->config->score->counts->delThread, "class='form-control'");?></td><td></td>
@@ -46,12 +52,6 @@
           <th><?php echo $lang->score->methods['delReply'] . $lang->score->methods['punish'];?></th> 
           <td><?php echo html::input('delReply', $this->config->score->counts->delReply, "class='form-control'");?></td><td></td>
         </tr>
-        <?php if($this->config->article->contribution == 'open'):?>
-        <tr>
-          <th><?php echo $lang->score->methods['approveContribution'] . $lang->score->methods['award'];?></th> 
-          <td><?php echo html::input('approveContribution', $this->config->score->counts->approveContribution, "class='form-control'");?></td><td></td>
-        </tr>
-        <?php endif;?>
         <tr>
           <th><?php echo $lang->score->methods['buyscore'];?></th> 
           <td>

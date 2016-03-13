@@ -381,6 +381,12 @@ class site extends control
         }
     }
 
+    /**
+     * Set api config.
+     * 
+     * @access public
+     * @return void
+     */
     public function setApi()
     {   
         if($_POST)

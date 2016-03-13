@@ -84,22 +84,22 @@ $lang->user->deleteHistory   = 'Delete user and history data';
 $lang->user->question        = 'Security question';
 $lang->user->answer          = 'Answer';
 
-$lang->user->type         = 'Account Type';
-$lang->user->profile      = 'Profile';
-$lang->user->editProfile  = 'Edit profile';
-$lang->user->thread       = 'My threads';
-$lang->user->messages     = 'My Messages';
-$lang->user->reply        = 'My replies';
-$lang->user->contribution = 'My Contribution';
+$lang->user->type        = 'Account Type';
+$lang->user->profile     = 'Profile';
+$lang->user->editProfile = 'Edit profile';
+$lang->user->thread      = 'My threads';
+$lang->user->messages    = 'My Messages';
+$lang->user->reply       = 'My replies';
+$lang->user->submittion  = 'My Submittion';
 
-$lang->user->userHistory         = "User History Data";
-$lang->user->threadHistory       = "Post";
-$lang->user->replyHistory        = "Reply";
-$lang->user->commentHistory      = "Comment";
-$lang->user->messageHistory      = "Message";
-$lang->user->orderHistory        = "Order";
-$lang->user->addressHistory      = "Address";
-$lang->user->contributionHistory = "Contribution";
+$lang->user->userHistory       = "User History Data";
+$lang->user->threadHistory     = "Post";
+$lang->user->replyHistory      = "Reply";
+$lang->user->commentHistory    = "Comment";
+$lang->user->messageHistory    = "Message";
+$lang->user->orderHistory      = "Order";
+$lang->user->addressHistory    = "Address";
+$lang->user->submittionHistory = "Submittion";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "My message <span class='label label-badge text-latin'>%s</span>";
@@ -220,7 +220,7 @@ $lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> Profile 
 if(RUN_MODE != 'install')
 {
     if(commonModel::isAvailable('message')) $lang->user->control->menus[20] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
-    if(commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope"></i> My Contribution <i class="icon-chevron-right"></i>|article|contribution'; 
+    if(commonModel::isAvailable('submittion')) $lang->user->control->menus[21] = '<i class="icon-envelope"></i> My Submittion <i class="icon-chevron-right"></i>|article|submittion'; 
 
     if(commonModel::isAvailable('score'))
     {

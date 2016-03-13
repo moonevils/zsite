@@ -174,7 +174,7 @@ $lang->menu->reply        = 'Message Reply|message|admin|type=reply';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Thread Reply|reply|admin|';
-$lang->menu->contribution = 'Contribution|article|admin|type=contribution&tab=user';
+$lang->menu->submittion   = 'Submittion|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = 'Stat|stat|traffic|';

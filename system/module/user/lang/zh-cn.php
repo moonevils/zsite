@@ -85,22 +85,22 @@ $lang->user->deleteHistory   = '删除用户及历史数据';
 $lang->user->question        = '密保问题';
 $lang->user->answer          = '答案';
 
-$lang->user->type         = '账户类型';
-$lang->user->profile      = '个人信息';
-$lang->user->editProfile  = '编辑信息';
-$lang->user->thread       = '我的主题';
-$lang->user->messages     = '我的消息';
-$lang->user->reply        = '我的回贴';
-$lang->user->contribution = '我的投稿';
+$lang->user->type        = '账户类型';
+$lang->user->profile     = '个人信息';
+$lang->user->editProfile = '编辑信息';
+$lang->user->thread      = '我的主题';
+$lang->user->messages    = '我的消息';
+$lang->user->reply       = '我的回贴';
+$lang->user->submittion  = '我的投稿';
 
-$lang->user->userHistory         = "用户历史数据";
-$lang->user->threadHistory       = "发帖";
-$lang->user->replyHistory        = "回帖";
-$lang->user->commentHistory      = "评论";
-$lang->user->messageHistory      = "留言";
-$lang->user->orderHistory        = "订单";
-$lang->user->addressHistory      = "地址";
-$lang->user->contributionHistory = "投稿";
+$lang->user->userHistory       = "用户历史数据";
+$lang->user->threadHistory     = "发帖";
+$lang->user->replyHistory      = "回帖";
+$lang->user->commentHistory    = "评论";
+$lang->user->messageHistory    = "留言";
+$lang->user->orderHistory      = "订单";
+$lang->user->addressHistory    = "地址";
+$lang->user->submittionHistory = "投稿";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
@@ -222,7 +222,7 @@ $lang->user->control->menus[10] = '<i class="icon-user"></i> 个人信息 <i cla
 if(RUN_MODE != 'install')
 {
     if(commonModel::isAvailable('message')) $lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
-    if(commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|contribution'; 
+    if(commonModel::isAvailable('submittion')) $lang->user->control->menus[21] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submittion'; 
 
     if(commonModel::isAvailable('score'))
     {
