@@ -38,7 +38,7 @@
       <th><?php echo $lang->user->email;?></th>
       <td>
         <?php if(!empty($user->email)) echo $user->email . '&nbsp;&nbsp;&nbsp;';?>
-        <?php echo html::a(inlink('editemail'), "<i class='icon-pencil'></i> " . $lang->user->editEmail, "class='text-primary' data-toggle='modal'");?>
+        <?php echo html::a(inlink('setemail'), "<i class='icon-pencil'></i> " . $lang->user->setEmail, "class='text-primary' data-toggle='modal'");?>
       </td>
     </tr>
     <tr>
