@@ -9,35 +9,27 @@ if(isset($pageCSS)) css::internal($pageCSS);
 <div class='panel mgb-0'>
   <div class='panel-heading'>
     <div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
-    <strong><i class='icon-comments'></i> <?php echo $lang->message->list;?></strong>
+    <strong><?php echo $lang->message->list;?></strong>
+  </div>
+  <div class='comment-container'>
+    <?php $i = 0;?>
+    <?php foreach($comments as $number => $comment):?>
+    <div class='w-p100 panel comment-item' id="comment<?php echo $comment->id?>">
+      <div class='panel-heading content-heading'>
+        <i class='icon icon-user'> <?php echo $comment->from;?></i>
+        <i class='text-muted'> <?php echo $comment->date;?></i>
+        <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), "<i class='icon icon-reply text-info'> </i>", "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?>
+      </div>
+      <div class='panel-body'><?php echo nl2br($comment->content);?></div>
+      <?php $this->message->getFrontReplies($comment);?>
+    </div>
+    <?php endforeach;?>
+    <div class='text-right'>
+      <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
+    </div>
+    <?php endif;?>
   </div>
 </div>
-<?php $i = 0;?>
-<?php foreach($comments as $number => $comment):?>
-<?php $class = $i%2 ? '' : 'success';?>
-<div class='comment w-p100 <?php if($i == 0) echo 'first'?>' id="comment<?php echo $comment->id?>">
-  <div class='<?php echo $class;?> comment-id'><?php echo $comment->id?></div>
-  <table class='table table-borderless w-p100'>
-    <tr>
-    <th class='th-from'>
-      <?php echo $comment->from?><br>
-      <span class='time'><?php echo formatTime($comment->date, 'Y/m/d');?> </span>
-    </th>
-    <td class='td-content'>
-      <div class='content-detail'><?php echo nl2br($comment->content);?></div>
-    </td>
-    <td class='td-action'> <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?> </td>
-    </tr>
-    <?php $this->message->getFrontReplies($comment);?>
-  </table>
-</div>
-<?php $i ++;?>
-<?php endforeach;?>
-<div class='text-right'>
-  <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
-</div>
-<?php endif;?>
-
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
   <div class='panel-body'>
