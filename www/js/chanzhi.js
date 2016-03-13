@@ -587,7 +587,6 @@ function setRequiredFields()
 function selectLang(lang)
 {
     $.cookie(config.runMode + 'Lang', lang, {expires:config.cookieLife, path:config.webRoot});
-    $.get(createLink('user', 'authorize'));
     location.href = removeAnchor(location.href);
 }
 

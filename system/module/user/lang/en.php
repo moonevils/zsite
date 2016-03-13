@@ -216,6 +216,9 @@ $lang->user->control->common      = 'User dashboard';
 $lang->user->control->welcome     = 'Welcome, <strong>%s</strong>';
 $lang->user->control->lblPassword = "Keep empty, will not change it.";
 
+$lang->user->navGroups = new stdclass();
+$lang->user->navGroups->user = 'User profile';
+
 $lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
 if(RUN_MODE != 'install')
 {
@@ -238,11 +241,9 @@ if(RUN_MODE != 'install')
     if(commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 }
 
-if(RUN_MODE == 'admin')
-{
-    if(commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order   = 'Order Info';
-    if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = 'My messages';
-}
+if(commonModel::isAvailable('shop') or commonModel::isAvailable('score')) $lang->user->navGroups->order   = 'Order Info';
+if(commonModel::isAvailable('forum')) $lang->user->navGroups->message = 'My messages';
+
 $lang->user->log = new stdclass();
 $lang->user->log->common = 'Log';
 $lang->user->log->list   = 'Admin user login log';
@@ -265,7 +266,3 @@ $lang->user->forceYangcong        = 'Yangcong has been open, please confirm your
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your website login password';
 $lang->user->placeholder->verifyCode = 'Please enter the code you received.';
-
-$lang->user->navGroups = new stdclass();
-$lang->user->navGroups->user    = 'User profile';
-
