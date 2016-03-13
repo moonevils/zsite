@@ -471,8 +471,8 @@ class commonModel extends model
         $string .= '<ul class="dropdown-menu">';
         $string .= '<li class="heading"><i class="icon icon-user icon-large"></i><strong> ' . $app->user->realname . '</strong></li>';
         $string .= '<li class="divider"></li>';
-        $string .= '<li>' . html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
-        $string .= '<li>' . html::a(helper::createLink('user', 'editEmail'), $lang->editEmail, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'setPassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'setEmail'), $lang->editEmail, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'securityQuestion'), $lang->securityQuestion, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'") . '</li>';
