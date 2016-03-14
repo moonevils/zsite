@@ -416,19 +416,22 @@ class orderModel extends model
     {
         if(RUN_MODE == 'admin' and $order->status == 'normal')
         {
-            echo html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view, "data-toggle='modal'");
+            if($btnLink) echo "<div class='btn-group'>";
+            $class = $btnLink ? 'btn' : '';
+            echo html::a(inlink('view', "orderID=$order->id", "class='$class'"), $this->lang->order->view, "data-toggle='modal' class='$class'");
 
             /* Send link. */
             $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
-            echo $disabled ? html::a('#', $this->lang->order->delivery, $disabled) : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal'");
+            echo $disabled ? html::a('#', $this->lang->order->delivery, $disabled . "class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal' class='$class'");
 
             /* Pay link. */
             $disabled = ($order->payment == 'COD' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->return, $disabled) : html::a(helper::createLink('order', 'pay', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal'");
+            echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(helper::createLink('order', 'pay', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'");
 
             /* Finish link. */
             $disabled = ($order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->finish, $disabled) : html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher'");
+            echo $disabled ? html::a('#', $this->lang->order->finish, $disabled . "class='$class'") : html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher $class'");
+            if($btnLink) echo "</div>";
         }
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
