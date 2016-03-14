@@ -13,10 +13,14 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <?php
-    echo html::a(inlink('themestore', "type=installed"), $lang->package->installed, $type == 'installed' ? "class='active'" : '');
-    echo html::a(inlink('themestore'), $lang->ui->theme->online, $type != 'installed' ? "class='active'" : '');
-    ?>
+    <ul id='typeNav' class='nav nav-tabs'>
+      <li data-type='internal' <?php echo $type == 'installed' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('themestore', "type=installed"), $lang->package->installed);?>
+      </li>
+      <li data-type='internal' <?php echo $type != 'installed' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('themestore'), $lang->ui->theme->online);?>
+      </li>
+    </ul> 
   </div>
   <div id='mainArea'>
     <?php if($type != 'installed'):?>
