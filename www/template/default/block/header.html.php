@@ -10,45 +10,15 @@
  * @link        http://www.chanzhi.org
 */
 ?>
+<?php $setting = json_decode($block->content);?>
 <?php $isSearchAvaliable = commonModel::isAvailable('search'); ?>
-<header id='header' class='clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>' data-ve='block' data-id='<?php echo $block->id;?>'>
-  <div id='headNav'>
-    <div class='wrapper'>
-      <nav>
-        <?php echo commonModel::printTopBar();?>
-        <?php commonModel::printLanguageBar();?>
-      </nav>
-    </div>
-  </div>
-  <div id='headTitle'>
-    <div class="wrapper">
-      <?php $device = helper::getDevice();?>
-      <?php $template    = $this->config->template->{$device}->name;?>
-      <?php $theme       = $this->config->template->{$device}->theme;?>
-      <?php $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();?>
-      <?php $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);?>
-      <?php if($logo):?>
-      <div id='siteLogo' data-ve='logo'>
-        <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
-      </div>
-      <?php else: ?>
-      <div id='siteName' data-ve='logo'><h2><?php echo html::a($this->config->webRoot, $this->config->site->name);?></h2></div>
-      <?php endif;?>
-      <div id='siteSlogan' data-ve='slogan'><span><?php echo $this->config->site->slogan;?></span></div>
-    </div>
-  </div>
-  <?php if($isSearchAvaliable):?>
-  <div id='searchbar' data-ve='search'>
-    <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
-      <div class='input-group'>
-        <?php $keywords = ($this->app->getModuleName() == 'search') ? $this->session->serachIngWord : '';?>
-        <?php echo html::input('words', $keywords, "class='form-control' placeholder=''");?>
-        <?php if($this->config->requestType == 'GET') echo html::hidden($this->config->moduleVar, 'search') . html::hidden($this->config->methodVar, 'index');?>
-        <div class='input-group-btn'>
-          <button class='btn btn-default' type='submit'><i class='icon icon-search'></i></button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <?php endif;?>
-</header>
+<?php $device      = helper::getDevice();?>
+<?php $template    = $this->config->template->{$device}->name;?>
+<?php $theme       = $this->config->template->{$device}->theme;?>
+<?php $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();?>
+<?php $logo        = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);?>
+<?php if($setting->nav == 'row' and $setting->slogan == 'besideLogo' and $setting->searchbar == 'besideSlogan'):?>
+<?php include "header.default.html.php";?>
+<?php else:?>
+<?php include "header.layout.html.php";?>
+<?php endif;?>
