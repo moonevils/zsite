@@ -13,7 +13,7 @@
 <header id='header' class='clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>' data-ve='block' data-id='<?php echo $block->id;?>'>
   <div class='row'>
     <?php if($setting->slogan == 'topLeft'):?>
-    <div class='pull-left'><span><?php echo $this->config->site->slogan;?></span></div>
+    <div id="siteSlogan" class='pull-left'><span><?php echo $this->config->site->slogan;?></span></div>
     <?php endif;?>
     <nav class='pull-right'>
       <?php echo commonModel::printTopBar();?>
