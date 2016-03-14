@@ -838,7 +838,8 @@ function fixFooterOfWideTheme()
     }
 }
 
-var Detector = function()
+/* http://www.lalit.org/lab/javascript-css-font-detect/ */
+var fontDetector = function()
 {
     var baseFonts = ['monospace', 'sans-serif', 'serif'];
     var testString = "mmmmmmmmmmlli";

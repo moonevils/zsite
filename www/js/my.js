@@ -92,7 +92,7 @@ $(document).ready(function()
 
     window.onload = function()
     {
-        var detective = new Detector();
+        var detective = new fontDetector();
         if(!detective.detect('Helvetica Neue') && !detective.detect('Helvetica') && detective.detect('Microsoft Yahei'))
         {
             $('#navbar a').css('font-weight', 'normal');
