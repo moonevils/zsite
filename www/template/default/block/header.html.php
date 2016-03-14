@@ -10,15 +10,25 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $setting = json_decode($block->content);?>
-<?php $isSearchAvaliable = commonModel::isAvailable('search'); ?>
-<?php $device      = helper::getDevice();?>
-<?php $template    = $this->config->template->{$device}->name;?>
-<?php $theme       = $this->config->template->{$device}->theme;?>
-<?php $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();?>
-<?php $logo        = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);?>
-<?php if($setting->nav == 'row' and $setting->slogan == 'besideLogo' and $setting->searchbar == 'besideSlogan'):?>
-<?php include "header.default.html.php";?>
-<?php else:?>
-<?php include "header.layout.html.php";?>
-<?php endif;?>
+<?php
+$isSearchAvaliable = commonModel::isAvailable('search'); 
+$setting           = json_decode($block->content);
+$device            = helper::getDevice();
+$template          = $this->config->template->{$device}->name;
+$theme             = $this->config->template->{$device}->theme;
+$logoSetting       = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
+$logo              = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
+
+/* Set default header layout setting. */
+$setting->nav       = zget($setting, 'nav',       'row');
+$setting->slogan    = zget($setting, 'slogan',    'besideLogo');
+$setting->searchbar = zget($setting, 'searchbar', 'besideSlogan');
+
+if($setting->nav == 'row' and $setting->slogan == 'besideLogo' and $setting->searchbar == 'besideSlogan')
+{
+    include "header.default.html.php";
+}
+else
+{
+    include "header.layout.html.php";
+}
