@@ -71,12 +71,12 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? $this->config->cdn->hos
   $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . $this->config->template->{$this->device}->name . '_' . $this->config->template->{$this->device}->theme . '.css';
   if($config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s_%s.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'");
+      css::import(sprintf($webRoot . 'data/css/%s/%s_%s.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'", false);
   }
   else
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->{$this->device}->name . '_' . $this->config->template->{$this->device}->theme . '.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s_%s.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'");
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s_%s.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'", false);
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);
