@@ -94,5 +94,9 @@
         <td><?php echo $order->paiedDate;?></td>
       </tr> 
       <?php endif;?>
+      <tr class='text-center'>
+        <td colspan='2'><?php echo $this->order->printActions($order, $btnLink = true);?></td>
+      </tr> 
+
     </table>
 <?php include '../../common/view/footer.modal.html.php';?>
