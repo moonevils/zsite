@@ -54,7 +54,7 @@ class thread extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->$captchaInput === false and $needCaptcha)
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Thread()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Thread())));
             }
 
             $result = $this->thread->post($boardID);
@@ -106,7 +106,7 @@ class thread extends control
             if($this->loadModel('guarder')->isEvil($this->post->content))
             {
                 $captchaInput = $this->session->captchaInput;
-                if(!$captchaInput or $this->post->$captchaInput === false) $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->guarder->create4Thread()));
+                if(!$captchaInput or $this->post->$captchaInput === false) $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->guarder->create4Thread())));
             }
 
             $return = $this->thread->update($threadID);
@@ -137,6 +137,7 @@ class thread extends control
      */
     public function view($threadID, $pageID = 1)
     {
+        $this->loadModel('guarder');
         $thread = $this->thread->getByID($threadID);
         if(!$thread or $thread->hidden) die(js::locate('back'));
 
