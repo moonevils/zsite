@@ -1,5 +1,3 @@
-.panel-heading > a { display: inline-block; margin: -3px 3px; line-height: 26px;padding: 0 3px}
-.panel-heading > a.active {font-weight: bold;}
 dl.alert{margin-top: 10px;}
 dl.alert dl.alert{margin-bottom: 0;}
 .reply-alert {max-height: 100px; overflow-y: scroll;}

@@ -32,6 +32,7 @@ class yangcongapi
 
     public function get($url)
     {
+        if(!function_exists('curl_init')) die('I can\'t get yangcong qrcode without curl extension.');
         $curl = curl_init();
 
         curl_setopt($curl, CURLOPT_URL, $url);
