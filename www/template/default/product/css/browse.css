@@ -16,5 +16,5 @@
 .price{font-size: 20px;}
 .card-heading a{color: #333;}
 
-
+.btn-group .btn {min-width: 30px; text-shadow: none; padding: 3px; border-color: transparent; border-radius: 2px!important; background: none;}
 .table-list td{vertical-align:middle;}
