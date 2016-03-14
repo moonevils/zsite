@@ -53,7 +53,7 @@
               <span class='pull-right'><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
             </div>
             <div class='theme-desc'>
-              <?php echo html::a($theme->viewLink, $theme->name);?>
+              <?php echo html::a($theme->viewLink, $theme->name, "target='_blank'");?>
               <div class="dropdown dropup pull-right">
                 <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='icon icon-cog'></span></button>
                 <ul class="dropdown-menu pull-right">
