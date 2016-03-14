@@ -14,10 +14,14 @@
 <?php js::set('type', $type);?>
 <div class="panel">
   <div class="panel-heading">
-    <?php
-    echo html::a(inlink('admin', "type={$type}&status=0"), $lang->message->statusList[0], $status == 0 ? "class='active'" : '');
-    echo html::a(inlink('admin', "type={$type}&status=1"), $lang->message->statusList[1], $status == 1 ? "class='active'" : '');
-    ?>
+    <ul id='typeNav' class='nav nav-tabs'>
+      <li data-type='internal' <?php echo $status == 0 ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "type={$type}&status=0"), $lang->message->statusList[0]);?>
+      </li>
+      <li data-type='internal' <?php echo $status == 1 ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "type={$type}&status=1"), $lang->message->statusList[1]);?>
+      </li>
+    </ul> 
   </div>
   <?php foreach($messages as $messageID => $message):?>
   <div class='message w-p100'>

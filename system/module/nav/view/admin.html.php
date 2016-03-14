@@ -15,13 +15,25 @@
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
 <div class='panel'>
   <div class='panel-heading'>
-    <?php if($this->config->site->type != 'blog'):?>
-    <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop, $type == 'desktop_top' ? "class='active'" : '');?>
-    <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $type == 'mobile_top' ? "class='active'" : '');?>
-    <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom, $type == 'mobile_bottom' ? "class='active'" : '');?>
-    <?php endif;?>
-    <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_blog"), $lang->nav->desktop_blog, $type == 'desktop_blog' ? "class='active'" : '');?>
-    <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog, $type == 'mobile_blog' ? "class='active'" : '');?>
+    <ul id='typeNav' class='nav nav-tabs'>
+      <?php if($this->config->site->type != 'blog'):?>
+      <li data-type='internal' <?php echo $type == 'desktop_top' ? "class='active'" : '';?>>
+        <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop);?>
+      </li>
+      <li data-type='internal' <?php echo $type == 'mobile_top' ? "class='active'" : '';?>>
+        <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top);?>
+      </li>
+      <li data-type='internal' <?php echo $type == 'mobile_bottom' ? "class='active'" : '';?>>
+        <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom);?>
+      </li>
+      <?php endif;?>
+      <li data-type='internal' <?php echo $type == 'desktop_blog' ? "class='active'" : '';?>>
+        <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_blog"), $lang->nav->desktop_blog);?>
+      </li>
+      <li data-type='internal' <?php echo $type == 'mobile_blog' ? "class='active'" : '';?>>
+        <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog);?>
+      </li>
+    </ul> 
   </div>
   <div class='panel-body'>
     <form class='form-inline ve-form' id='navForm' method='post'>

@@ -16,13 +16,27 @@ js::set('provider', $this->get->provider);
 js::set('admin', $this->get->admin);
 ?>
 <div class="panel">
-  <div class="panel-heading">
-    <?php
-    echo html::a(inlink('admin'), $lang->user->all, !$this->get->provider ? "class='active'" : '');
-    if(!empty($this->config->oauth->sina))    echo html::a(inlink('admin', "provider=sina", $this->get->provider == 'sina' ? "class='active'" : ''), $lang->user->oauth->typeList['sina']);
-    if(!empty($this->config->oauth->qq))      echo html::a(inlink('admin', "provider=qq"), $lang->user->oauth->typeList['qq'], $this->get->provider == 'qq' ? "class='active'" : '');
-    if($this->loadModel('wechat')->getList()) echo html::a(inlink('admin', "provider=wechat"), $lang->user->oauth->typeList['wechat'], $this->get->provider == 'wechat' ? "class='active'" : '');
-    ?>
+  <div class="panel-heading clearfix">
+    <ul id='typeNav' class='nav nav-tabs pull-left'>
+      <li data-type='internal' <?php echo !$this->get->provider ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin'), $lang->user->all);?>
+      </li>
+      <?php if(!empty($this->config->oauth->sina)):?>
+      <li data-type='internal' <?php echo$this->get->provider == 'sina' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "provider=sina"), $lang->user->oauth->typeList['sina']);?>
+      </li>
+      <?php endif;?>
+      <?php if(!empty($this->config->oauth->qq)):?>
+      <li data-type='internal' <?php echo$this->get->provider == 'qq' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "provider=qq"), $lang->user->oauth->typeList['qq']);?>
+      </li>
+      <?php endif;?>
+      <?php if($this->loadModel('wechat')->getList()):?>
+      <li data-type='internal' <?php echo$this->get->provider == 'wechat' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "provider=wechat"), $lang->user->oauth->typeList['wechat']);?>
+      </li>
+      <?php endif;?>
+    </ul> 
     <div class="panel-actions">
       <form method='get' class='form-inline form-search'>
         <?php echo html::hidden('m','user') . html::hidden('f','admin');?>
