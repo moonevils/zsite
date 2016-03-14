@@ -10,15 +10,15 @@
         <strong><i class="icon-shopping-cart"> </i><?php echo $lang->order->admin;?></strong>
         </div>
         <table class='table table-hover table-striped tablesorter'>
-          <tdead>
+          <thead>
             <tr class='text-center'>
               <td class='w-60px'><?php echo $lang->order->id;?></td>
-              <td class='w-300px text-left'><?php echo $lang->order->productInfo;?></td>
+              <td class='w-260px text-left'><?php echo $lang->order->productInfo;?></td>
               <td class='w-80px text-right'><?php echo $lang->order->amount;?></td>
               <td class='w-220px'><?php echo $lang->order->life;?></td>
-              <td class='w-70px'><?php echo $lang->product->status;?></td>
+              <td class='w-60px'><?php echo $lang->product->status;?></td>
               <td><?php echo $lang->order->note;?></td>
-              <td class='w-80px'><?php echo $lang->actions;?></td>
+              <td class='w-200px'><?php echo $lang->actions;?></td>
             </tr>
           </thead>
           <tbody>
@@ -29,16 +29,14 @@
                 <?php if($order->type == 'score'):?>
                 <?php echo $lang->order->score;?>
                 <?php else:?>
-                <dl>
                   <?php foreach($order->products as $product):?>
-                  <dd class='text-left'>
+                  <div class='text-left'>
                     <span><?php echo html::a(helper::createLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName);?></span>
                     <span>
                     <?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon. $product->count; ?>
                     </span>
-                  </dd>
+                  </div>
                   <?php endforeach;?>
-                </dl>
                 <?php endif;?>
               </td>
               <td class='text-right text-middle'><?php echo $order->amount;?></td>
@@ -52,7 +50,7 @@
               <td class='text-center text-middle'>
                 <?php echo $this->order->processStatus($order);?>
               </td>
-              <td><?php echo $order->note;?></td>
+              <td class='text-left'><?php echo $order->note;?></td>
               <td class='text-center text-middle'><?php $this->order->printActions($order);?></td>
             </tr>
             <?php endforeach;?>

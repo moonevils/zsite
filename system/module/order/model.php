@@ -416,17 +416,19 @@ class orderModel extends model
     {
         if(RUN_MODE == 'admin' and $order->status == 'normal')
         {
-            echo html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view);
+            echo html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view, "data-toggle='modal'");
 
             /* Send link. */
-            if($order->payment == 'COD' and $order->deliveryStatus == 'not_send') echo html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal'");
-            if($order->payment != 'COD' and $order->payStatus == 'paid' and $order->deliveryStatus == 'not_send') echo html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal'");
+            $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
+            echo $disabled ? html::a('#', $this->lang->order->delivery, $disabled) : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal'");
 
             /* Pay link. */
-            if($order->payment == 'COD' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed') echo html::a(helper::createLink('order', 'pay', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal'");
+            $disabled = ($order->payment == 'COD' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed') ? '' : "disabled='disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->return, $disabled) : html::a(helper::createLink('order', 'pay', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal'");
 
             /* Finish link. */
-            if($order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') echo html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher'");
+            $disabled = ($order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->finish, $disabled) : html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher'");
         }
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
@@ -434,30 +436,38 @@ class orderModel extends model
             if($btnLink)
             {
                 /* Pay link. */
-                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
+                $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->pay, "class='btn' $disabled") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
 
                 /* Track link. */
-                if($order->deliveryStatus != 'not_send') echo html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='btn btn-link'");
+                $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->track, "class='btn' $disabled") : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='btn btn-link'");
 
                 /* Confirm link. */
-                if($order->deliveryStatus == 'send') echo html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery btn primary'");
+                $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->confirmReceived, "class='btn' $disabled") : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery btn primary'");
 
                 /* Cancel link. */
-                if($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') echo html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink btn btn-link'");
+                $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->cancel, "class='btn' $disabled") : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink btn btn-link'");
             }
             else
             {
                 /* Pay link. */
-                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
+                $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->pay, $disabled) : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
 
                 /* Track link. */
-                if($order->deliveryStatus != 'not_send') echo html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal'") . '<br>';
+                $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->track, $disabled) : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal'");
 
                 /* Confirm link. */
-                if($order->deliveryStatus == 'send') echo html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
+                $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->confirmReceived, $disabled) : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
 
                 /* Cancel link. */
-                if($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') echo html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink'");
+                $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->cancel, $disabled) : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink'");
             }
         }
    }

@@ -27,7 +27,7 @@ $lang->order->basic          = '基本信息';
 $lang->order->info           = '订单信息';
 
 $lang->order->admin          = '订单管理';
-$lang->order->view           = '订单详情';
+$lang->order->view           = '详情';
 $lang->order->setting        = '系统设置';
 $lang->order->browse         = '我的订单';
 $lang->order->bought         = '查看已买到的商品';
