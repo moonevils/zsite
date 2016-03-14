@@ -10,7 +10,7 @@ $(document).ready(function()
         {
             if(data.reason == 'needChecking')
             {
-                $('#captchaBox').html(data.captcha).show();
+                $('#captchaBox').html(Base64.decode(data.captcha)).show();
             }
         }
     }); 
