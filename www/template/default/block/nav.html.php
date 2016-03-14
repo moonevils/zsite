@@ -1,5 +1,4 @@
-<?php $params = json_decode($block->content);?>
-<?php $topNavs = $this->loadModel('nav')->getNavs(isset($params->navType) ? $params->navType : 'desktop_top');?>
+<?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
 <nav id='navbar' class='navbar' data-type='desktop_top' data-ve='block' data-id='<?php echo $block->id; ?>'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
@@ -36,6 +35,8 @@
           </li>
         <?php endif;?>
       <?php endforeach;?><!-- end nav1 -->
+      <li><?php if($setting->searchbar == 'insideNav') include "searchbar.html.php";?></li>
     </ul>
   </div>
 </nav>
+
