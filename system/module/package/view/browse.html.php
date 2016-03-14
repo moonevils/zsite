@@ -12,12 +12,18 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'>
-    <?php
-    echo html::a(inlink('browse', "status=installed"),   $lang->package->installed,   $status == 'installed' ? "class='active'" : '');
-    echo html::a(inlink('browse', "status=deactivated"), $lang->package->deactivated, $status == 'deactivated' ? "class='active'" : '');
-    echo html::a(inlink('browse', "status=available"), $lang->package->available,   $status == 'available' ? "class='active'" : '');
-    ?>
+  <div class='panel-heading clearfix'>
+    <ul id='typeNav' class='nav nav-tabs pull-left'>
+      <li data-type='internal' <?php echo $status == 'installed' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('browse', "status=installed"), $lang->package->installed);?>
+      </li>
+      <li data-type='internal' <?php echo $status == 'deactivated' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('browse', "status=deactivated"), $lang->package->deactivated);?>
+      </li>
+      <li data-type='internal' <?php echo $status == 'available' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('browse', "status=available"), $lang->package->available);?>
+      </li>
+    </ul> 
     <div class='panel-actions'>
       <?php commonModel::printLink('package', 'upload', '', $lang->package->upload, "class='btn btn-primary' data-toggle='modal'");?>
       <?php commonModel::printLink('package', 'obtain', '', $lang->package->obtain, "class='btn btn-primary'");?>

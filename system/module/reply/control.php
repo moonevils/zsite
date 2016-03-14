@@ -32,7 +32,7 @@ class reply extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->$captchaInput === false and $needCaptcha)
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Reply()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Reply())));
             }
 
             $result = $this->reply->post($threadID);
@@ -87,7 +87,7 @@ class reply extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->$captchaInput === false and $this->loadModel('guarder')->isEvil($_POST['content']))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->guarder->create4Thread()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->guarder->create4Thread())));
             }
 
             $return = $this->reply->update($replyID);

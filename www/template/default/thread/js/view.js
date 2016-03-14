@@ -4,19 +4,13 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            if(response.locate) 
-            {
-                return setTimeout(function()
-                {
-                    location.href = response.locate;
-                }, 1200);
-            }
+            setTimeout(function(){ location.href = response.locate;}, 1200);
         }
         else
         {
             if(response.reason == 'needChecking')
             {
-                $('#captchaBox').html(response.captcha).show();
+                $('#captchaBox').html(Base64.decode(response.captcha)).show();
             }
         }
     });

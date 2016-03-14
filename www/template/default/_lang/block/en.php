@@ -182,3 +182,17 @@ $lang->block->default->regions->page_view['top']          = 'Top';
 $lang->block->default->regions->page_view['bottom']       = 'Bottom';
 $lang->block->default->regions->page_view['side']         = 'Side';
 $lang->block->default->regions->page_view['bottomBanner'] = 'BottomBanner';
+
+$lang->block->headerLayout = new stdclass();
+$lang->block->headerLayout->nav = array();
+$lang->block->headerLayout->nav['besideLogo'] = 'Right of logo';
+$lang->block->headerLayout->nav['row']        = 'A whole row';
+
+$lang->block->headerLayout->slogan = array();
+$lang->block->headerLayout->slogan['besideLogo'] = 'Right of Logo';
+$lang->block->headerLayout->slogan['topLeft']    = 'Top left';
+
+$lang->block->headerLayout->searchbar = array();
+$lang->block->headerLayout->searchbar['besideSlogan'] = 'Right of slogan';
+$lang->block->headerLayout->searchbar['topRight']     = 'Top right';
+$lang->block->headerLayout->searchbar['insideNav']    = 'Right of navigation';
