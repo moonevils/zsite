@@ -239,11 +239,11 @@ $lang->ui = new stdclass();
 /* Menu of theme. */
 $lang->theme = new stdclass();
 $lang->theme->menu = new stdclass();
-$lang->theme->menu->theme   = '主题|ui|settemplate|';
-$lang->theme->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 'setregion');
-$lang->theme->menu->custom  = '外观|ui|customtheme|';
-$lang->theme->menu->code    = '代码|ui|setcode|';
-$lang->theme->menu->source  = '素材|file|browsesource|';
+$lang->theme->menu->theme   = '主题管理|ui|settemplate|';
+$lang->theme->menu->layout  = array('link' => '布局管理|block|pages|', 'alias' => 'setregion');
+$lang->theme->menu->custom  = '外观管理|ui|customtheme|';
+$lang->theme->menu->code    = '代码管理|ui|setcode|';
+$lang->theme->menu->source  = '素材管理|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();

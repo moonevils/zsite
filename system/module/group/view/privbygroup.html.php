@@ -23,7 +23,7 @@
       </ul>
     </div>
     <?php foreach($lang->moduelGroups as $group => $modules):?>
-    <div <?php echo "id='group$group'"?>>
+    <div class='panel' <?php echo "id='group$group'"?>>
       <div class='group-heading'>
         <strong><?php if(isset($lang->groups->{$group})) echo $lang->groups->{$group}['title'];?></strong>
       </div>

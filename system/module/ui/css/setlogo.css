@@ -4,6 +4,5 @@
 .row-logo .card a, .row-logo .card .icon-spin{line-height:80px;}
 .row-logo img.logo{height:80px;}
 .row-logo img.favicon{max-height:64px;}
-.row-logo .actions{position:absolute; left:46%;bottom:-5px;display:none;}
+.row-logo .actions{position:absolute; right:20px;top:10px;}
 .row-logo .text-important{margin:0 auto;}
-.row-logo .card:hover .actions{display:block;}
