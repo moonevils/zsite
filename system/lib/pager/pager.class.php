@@ -549,14 +549,15 @@ EOT;
         if(helper::inSeoMode() && method_exists('uri', 'create' . $this->moduleName . $this->methodName)) 
         {
             $link = strip_tags(urldecode($_SERVER['REQUEST_URI']));
+            $viewType = substr($link, strrpos($link, '.') + 1);
 
-            if($this->params['pageID'] == 1) return html::a(preg_replace('/\/p\d+\.html/', '.html', $link), $title);
+            if($this->params['pageID'] == 1) return html::a(preg_replace('/\/p\d+\.' . $viewType . '/', '.' . $viewType, $link), $title);
 
-            if(preg_match('/\/p\d+/', $link)) return html::a(preg_replace('/\/p\d+\.html/', '/p' . $this->params['pageID'] . '.html', $link), $title);
+            if(preg_match('/\/p\d+/', $link)) return html::a(preg_replace('/\/p\d+\.' . $viewType . '/', '/p' . $this->params['pageID'] . '.' . $viewType, $link), $title);
 
             if($config->requestType == 'PATH_INFO2') $link = str_replace('index.php/', 'index_php/', $link);
 
-            $link = str_replace('.html', "/p{$this->params['pageID']}.html", $link);
+            $link = str_replace('.' . $viewType, "/p{$this->params['pageID']}.{$viewType}", $link);
 
             if($config->requestType == 'PATH_INFO2') $link =  str_replace('index_php/', 'index.php/', $link);
             return html::a($link, $title);
