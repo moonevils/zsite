@@ -137,7 +137,7 @@ class message extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->{$captchaInput} === false and $needCaptcha)
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Comment()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Comment())));
             }
 
             $result = $this->message->post($type);
@@ -168,7 +168,7 @@ class message extends control
                 $captchaInput = $this->session->captchaInput;
                 if($this->post->$captchaInput === false and $needCaptcha)
                 {
-                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4MessageReply()));
+                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4MessageReply())));
                 }
             }
 
