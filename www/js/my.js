@@ -7,7 +7,7 @@ $(document).ready(function()
             $li       = $a.parents('li'),
             url       = document.location.href;
         var hrefIndex = url.indexOf(href);
-        if(href !== '/' && hrefIndex > -1 && !$li.hasClass('active') && url.substring(hrefIndex) == href)
+        if(href !== '/' && hrefIndex > -1 && !$li.hasClass('active') && url.substring(hrefIndex) == href && !$('ul.navbar-nav li.active').length)
         {
             $li.addClass('active');
         }
