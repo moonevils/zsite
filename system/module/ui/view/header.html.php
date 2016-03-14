@@ -18,3 +18,4 @@
     </ul>
   </div>
 </nav>
+<style> #menu > .nav > li{padding:4px;} </style>
