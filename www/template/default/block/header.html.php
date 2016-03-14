@@ -12,7 +12,7 @@
 ?>
 <?php
 $isSearchAvaliable = commonModel::isAvailable('search'); 
-$setting           = json_decode($block->content);
+$setting           = !empty($block->content) ? json_decode($block->content) : new stdclass();
 $device            = helper::getDevice();
 $template          = $this->config->template->{$device}->name;
 $theme             = $this->config->template->{$device}->theme;
