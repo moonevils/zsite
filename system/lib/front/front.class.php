@@ -802,7 +802,7 @@ class css
     {
         global $config;
         if(!empty($attrib)) $attrib = ' ' . $attrib;
-        if(!$version) $url = "$url?v={$config->version}";
+        if($version) $url = "$url?v={$config->version}";
         echo "<link rel='stylesheet' href='$url' type='text/css' media='screen'{$attrib}/>\n";
     }
 
