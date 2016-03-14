@@ -32,7 +32,7 @@ class reply extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->$captchaInput === false and $needCaptcha)
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->createCaptcha()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Reply())));
             }
 
             $result = $this->reply->post($threadID);
