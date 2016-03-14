@@ -14,11 +14,17 @@
 <?php js::set('finishWarning', $lang->order->finishWarning);?>
 <div class='panel'>
   <div class='panel-heading'>
-    <?php
-    echo html::a(inlink('admin', "mode=status&status=normal"), $lang->order->statusList['normal'], $param == 'normal' ? "class='active'" : '');
-    echo html::a(inlink('admin', "mode=status&status=finished"), $lang->order->statusList['finished'], $param == 'finished' ? "class='active'" : '');
-    echo html::a(inlink('admin', "mode=status&status=canceled"), $lang->order->statusList['canceled'], $param == 'canceled' ? "class='active'" : '');
-    ?>
+    <ul id='typeNav' class='nav nav-tabs'>
+      <li data-type='internal' <?php echo $param == 'normal' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "mode=status&status=normal"), $lang->order->statusList['normal']);?>
+      </li>
+      <li data-type='internal' <?php echo $param == 'finished' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "mode=status&status=finished"), $lang->order->statusList['finished']);?>
+      </li>
+      <li data-type='internal' <?php echo $param == 'canceled' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "mode=status&status=canceled"), $lang->order->statusList['canceled']);?>
+      </li>
+    </ul> 
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
