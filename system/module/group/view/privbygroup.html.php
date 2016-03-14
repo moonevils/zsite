@@ -14,7 +14,7 @@
   <div class='panel main-panel'>
     <div class='panel-heading with-nav-tabs'> 
       <ul class='nav nav-tabs'>
-        <li class='active' data-group='all'><?php echo html::a('javascript:;', '所有权限');?></li>
+        <li class='active' data-group='all'><?php echo html::a('javascript:;', $lang->group->allGroups);?></li>
         <?php foreach($lang->moduelGroups as $group => $modules):?>
         <?php if($group != 'admin'):?>
         <li data-group='<?php echo $group;?>'><?php echo html::a('javascript:;', $lang->groups->{$group}['title']);?></li>
@@ -25,14 +25,18 @@
     <?php foreach($lang->moduelGroups as $group => $modules):?>
     <div class='panel' <?php echo "id='group$group'"?>>
       <div class='group-heading'>
-        <strong><?php if(isset($lang->groups->{$group})) echo $lang->groups->{$group}['title'];?></strong>
       </div>
-      <table class='table table-hover table-striped table-bordered table-form'> 
+      <table class='table table-bordered table-form'> 
+        <?php $heading = false;?>
         <?php foreach($modules as $module):?>
         <?php $this->app->loadLang($module);?>
         <?php $moduleActions = zget($lang->resource, $module);?>
         <tr>
-          <th class='text-right w-150px'>
+          <?php if(!$heading) :?>
+          <th class='w-90px' style='text-align:center;' rowspan="<?php echo count($modules);?>"> <?php if(isset($lang->groups->{$group})) echo $lang->groups->{$group}['title'];?></th>
+          <?php $heading = true;?>
+          <?php endif;?>
+          <th class='text-right w-120px'>
             <?php echo $this->lang->{$module}->common;?>
             <input type="checkbox" class='checkModule' />
           </th>
