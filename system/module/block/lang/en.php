@@ -59,7 +59,12 @@ $lang->block->renameLayout    = 'Rename Plan';
 $lang->block->planName        = 'Plan name';
 $lang->block->saveLayoutAs    = 'Copy plan from %s';
 $lang->block->defaultPlan     = 'Default plan';
-$lang->block->navType         = 'Navigation';
+
+$lang->block->layout            = 'Layout';
+$lang->block->logoPosition      = 'Logo';
+$lang->block->navPosition       = 'navigation';
+$lang->block->searchbarPosition = 'searchbae';
+$lang->block->sloganPosition    = 'slogan';
 
 $lang->block->admin        = "Block management";
 $lang->block->pages        = "Layout";
