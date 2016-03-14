@@ -34,7 +34,6 @@ side {display: block}
 /* Button */
 .btn-link {background-color: transparent;}
 
-.btn-group .btn {min-width: 30px; text-shadow: none; padding: 3px; border-color: transparent; border-radius: 2px!important; background: none;}
 .btn-group .btn > .icon {position: relative; top: 1px;}
 .btn-group .btn.active {color: #3280FC;}
 
