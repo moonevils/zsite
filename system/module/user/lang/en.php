@@ -241,7 +241,7 @@ $lang->user->log->browser     = 'Browser';
 $lang->user->log->ip          = 'IP';
 $lang->user->log->location    = 'Location';
 $lang->user->log->date        = 'Date';
-$lang->user->log->desc        = 'description';
+$lang->user->log->desc        = 'Result';
 
 $lang->user->ipDenied             = 'This IP not allowed login, please do these steps.';
 $lang->user->locationDenied       = 'This location not allowed login, please do these steps.';
