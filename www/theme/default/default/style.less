@@ -96,7 +96,6 @@
         font-size: @headFontSize;
         background-color: @headBackColor;
         color: @headColor;
-        .line-gradient(@headBackColor);
     }
 
     .panel-heading > h4 {margin: 0; line-height: 20px}
@@ -135,7 +134,6 @@
             font-size: @headFontSize;
             background-color: @headBackColor;
             color: @headColor;
-            .line-gradient(@headBackColor);
         }
 
         > li > a
@@ -395,10 +393,6 @@ a:active, a:focus
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         background-color: #f7f7f7;
     }
-    .navbar-header
-    {
-        .line-gradient-with-image(@navbar-backcolor, @navbar-background-image);
-    }
 }
 @media (max-width: 500px)
 {
@@ -412,18 +406,12 @@ a:active, a:focus
         padding: 9px 20px;
     }
 
-    .navbar,
-    .navbar-nav > li > a
-    {
-        .line-gradient-with-image(@navbar-backcolor, @navbar-background-image);
-    }
-
     .navbar-nav > li > a:hover,
     .navbar-nav > li > a:focus,
     .navbar-brand:hover,
     .navbar-brand:focus
     {
-        .line-gradient(@navbar-menu-backcolor-hover);
+        background-color: @navbar-menu-backcolor-hover;
     }
 
     .navbar-nav > li.active > a,
@@ -431,7 +419,7 @@ a:active, a:focus
     .navbar-nav > li.active > a:focus,
     .navbar-nav > li.active > a:visited
     {
-        .line-gradient(@navbar-menu-backcolor-active);
+        background-color: @navbar-menu-backcolor-active;
     }
 }
 
