@@ -24,7 +24,7 @@ if($slides):
     <?php foreach($slides as $slide):?>
     <?php
       $url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";
-      $target = " data-target='" . (isset($slide->target) ? $slide->target : '') . "'";
+      $target = " data-target='" . ($slide->target ? $slide->target : '') . "'";
       if($height == 0 and $slide->height) $height = $slide->height;
       $itemClass = 0 === $index++ ? 'item active' : 'item';
     ?>

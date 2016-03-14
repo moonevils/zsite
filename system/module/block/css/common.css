@@ -48,3 +48,5 @@
 .block-types-menu > li dl dd > a:hover {background:#F3F3F3; color: #333}
 .block-types-menu > li dl dd.active > a:hover,
 .block-types-menu > li dl dd.active > a {color:#145CCD;}
+
+.layout-group{width:60%}
