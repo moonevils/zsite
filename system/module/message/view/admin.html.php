@@ -23,33 +23,35 @@
       </li>
     </ul> 
   </div>
-  <?php foreach($messages as $messageID => $message):?>
-  <div class='message w-p100'>
-    <div class='message-id'><?php echo $messageID;?></div>
-    <?php
-    if($type != 'message')
-    {
-        include 'admin.common.html.php';
-    }
-    else
-    {
-        include 'admin.message.html.php';
-    }
-    ?>
-    <div class='message-action'>
+  <div class='panel-body'>
+    <?php foreach($messages as $messageID => $message):?>
+    <div class='message w-p100'>
+      <div class='message-id'><?php echo $messageID;?></div>
       <?php
-      commonModel::printLink('message', 'reply', "messageID=$message->id", $lang->message->reply, "data-toggle='modal'");
-      commonModel::printLink('guarder', 'addToBlacklist', "type=message&id={$message->id}", $lang->addToBlacklist, "data-toggle='modal'");
-      echo '<br />';
-      if($status == 0) commonModel::printLink('message', 'pass', "messageID=$message->id&type=single", $lang->message->pass, "class='pass'");
-      if($status == 0) commonModel::printLink('message', 'pass', "messageID=$message->id&type=pre", $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
-      echo '<br />';
-      commonModel::printLink('message', 'delete', "messageID=$message->id&type=single&status=$status", $lang->message->delete, "class='deleter'");
-      if($status == 0) commonModel::printLink('message', 'delete', "messageID=$message->id&type=pre&status=$status", $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
+      if($type != 'message')
+      {
+          include 'admin.common.html.php';
+      }
+      else
+      {
+          include 'admin.message.html.php';
+      }
       ?>
+      <div class='message-action'>
+        <?php
+        commonModel::printLink('message', 'reply', "messageID=$message->id", $lang->message->reply, "data-toggle='modal'");
+        commonModel::printLink('guarder', 'addToBlacklist', "type=message&id={$message->id}", $lang->addToBlacklist, "data-toggle='modal'");
+        echo '<br />';
+        if($status == 0) commonModel::printLink('message', 'pass', "messageID=$message->id&type=single", $lang->message->pass, "class='pass'");
+        if($status == 0) commonModel::printLink('message', 'pass', "messageID=$message->id&type=pre", $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
+        echo '<br />';
+        commonModel::printLink('message', 'delete', "messageID=$message->id&type=single&status=$status", $lang->message->delete, "class='deleter'");
+        if($status == 0) commonModel::printLink('message', 'delete', "messageID=$message->id&type=pre&status=$status", $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
+        ?>
+      </div>
     </div>
+    <?php endforeach;?>
+    <?php $pager->show();?>
   </div>
-  <?php endforeach;?>
-  <?php $pager->show();?>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
