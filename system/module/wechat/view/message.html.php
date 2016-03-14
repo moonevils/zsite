@@ -14,14 +14,14 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class="panel-heading">
-    <?php
-    foreach($lang->wechat->message->tabList as $tab)
-    {
-        list($query, $text) = explode('|', $tab);
-        $active = strpos($this->server->query_string, $query) == false ? '' : "class='active'";
-        echo  html::a(inlink('message', $query), $text, $active);
-    }
-    ?>
+    <ul id='typeNav' class='nav nav-tabs'>
+      <?php foreach($lang->wechat->message->tabList as $tab):?>
+      <?php list($query, $text) = explode('|', $tab);?>
+      <li data-type='internal' <?php echo strpos($this->server->query_string, $query) !== false ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('message', $query), $text);?>
+      </li>
+      <?php endforeach;?>
+    </ul> 
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
