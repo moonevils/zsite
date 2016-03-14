@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<header id='header' class='clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>' data-ve='block' data-id='<?php echo $block->id;?>'>
+<header id='header' class='compatible clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>' data-ve='block' data-id='<?php echo $block->id;?>'>
   <div id='headNav'>
     <div class='wrapper'>
       <nav>

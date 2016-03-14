@@ -479,7 +479,7 @@ body.body-modal {padding: 20px;}
 .article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial;}
 
 /* Search bar */
-#searchbar {position: absolute; right: 0; top: 45%; max-width: 200px;}
+#searchbar {max-width: 200px;}
 #searchbar .input-group {position: relative;}
 #searchbar .form-control {border-radius: 16px; padding-right: 30px;}
 #searchbar .btn {position: absolute; right: 0; top: 1px; z-index: 10; border: none; box-shadow: none; background: none; color: #808080}

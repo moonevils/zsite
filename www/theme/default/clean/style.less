@@ -206,7 +206,7 @@ a
 .page-container:before,.page-container:after {content: " "; display: table;}
 .page-container:after {clear: both;}
 @media (min-width: 768px) {.page-container {max-width: 750px;}}
-@media (min-width: 992px) {.page-container {max-width: 970px;}}
+@media (min-width: 992px) {.page-container {max-width: 970px; padding-top: 10px;}}
 @media (min-width: 1200px) {.page-container {max-width: 1170px;}}
 @media (max-width: 767px) {.page-container {padding: 0 10px;}}
 
@@ -220,16 +220,26 @@ body > .page-container
 }
 
 /* Header */
-#headNav {top: 25px;}
-#headNav nav > span, #headNav nav > a {margin-right: 10px}
+#header.compatible
+{
+    #headNav {top: 25px;}
+    #headNav nav > span, #headNav nav > a {margin-right: 10px}
+    #headNav.with-searchbar {top: 10px;}
+    #headNav.with-searchbar #searchbar .form-control {height: 30px;}
+    #headNav.with-searchbar #searchbar .btn {padding: 4px; top: 1px; right: 2px;}
+}
 
 /* Search bar */
-#searchbar {top: auto; bottom: -43px; z-index: 1010; max-width: 160px;}
-#searchbar .form-control {border-radius: 0; border: none; border-bottom: 2px solid transparent; box-shadow: none; padding-left: 8px; background: none; padding-top: 11px; padding-bottom: 9px; height: 43px; color: #808080}
+#searchbar .form-control {border-radius: 0; border: none; border-bottom: 2px solid #ddd; box-shadow: none; padding-left: 8px; background: none; padding-top: 11px; padding-bottom: 9px; height: 43px; color: #808080}
 #searchbar .form-control:hover, #searchbar .form-control:focus {border-bottom-color: @color-primary; }
 #searchbar .form-control:hover {background-color: @color-pale; color: #333}
 #searchbar .btn {padding: 8px; top: 5px; right: 4px;}
 #searchbar .btn:hover, #searchbar .btn:focus {color: @color-primary}
+#navbar li.nav-item-searchbar #searchbar > form {margin: 0!important}
+#header.compatible
+{
+    #searchbar {position: absolute; right: 0; top: auto; bottom: -43px; z-index: 1010; max-width: 160px;}
+}
 
 /* Navbar */
 .navbar
@@ -273,10 +283,16 @@ body > .page-container
     z-index: 10;
 }
 
+#navbar .nav > li.nav-item-searchbar {float: right}
+#navbar .nav > li.nav-item-searchbar #searchbar {padding: 0;}
+#navbar .nav > li.nav-item-searchbar #searchbar .form-control {margin-bottom: -2px; height: 42px;}
+#navbar .navbar-collapse {padding-right: 0;}
+
 @media (max-width: 767px)
 {
     body > .page-container {margin-top: 0;}
     #header {margin-left: -10px; margin-right: -10px;}
+    #headTitle {padding: 0 10px!important;}
     #searchbar {bottom: auto; top: 3px;}
     #searchbar .form-control {padding-top: 2px; padding-bottom: 2px; border: none; background-color: #fafafa; height: 24px;}
     #searchbar .btn {top: 0; padding: 3px;}

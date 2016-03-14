@@ -24,11 +24,4 @@ $setting->nav       = zget($setting, 'nav',       'row');
 $setting->slogan    = zget($setting, 'slogan',    'besideLogo');
 $setting->searchbar = zget($setting, 'searchbar', 'besideSlogan');
 
-if($setting->nav == 'row' and $setting->slogan == 'besideLogo' and $setting->searchbar == 'besideSlogan')
-{
-    include "header.default.html.php";
-}
-else
-{
-    include "header.layout.html.php";
-}
+include "header.layout.html.php";
