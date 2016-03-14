@@ -19,12 +19,14 @@
     ?>
   </div>
   <div id='mainArea'>
+    <?php if($type != 'installed'):?>
     <div id='industryBox'>
       <?php if($type != 'installed') echo $industryTree;?>
       <?php foreach($lang->ui->theme->searchLabels as $code => $label):?>
       <?php echo html::a(inlink('themestore', "type={$code}"), $label);?>
       <?php endforeach;?>
     </div>
+    <?php endif;?>
     <?php if($themes):?>
     <div id='storeThemes' class='cards cards-borderless themes row' data-param='<?php echo $param ?>'>
       <?php foreach($themes as $theme):?>
