@@ -1486,4 +1486,30 @@ class userModel extends model
         return !dao::isError();
     }
     
+    /**
+     * Fix menus for profile.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixMenus()
+    {
+        if(!commonModel::isAvailable('shop') and !commonModel::isAvailable('score')) unset($this->lang->user->navGroups->order);
+        if(!commonModel::isAvailable('forum')) unset($this->lang->user->navGroups->message);
+
+        if(!commonModel::isAvailable('message')) unset($this->lang->user->control->menus['message']);
+        if(!commonModel::isAvailable('submittion')) unset($this->lang->user->control->menus['submittion']);
+
+        if(!commonModel::isAvailable('score')) unset($this->lang->user->control->menus['score']);
+        if(!commonModel::isAvailable('score') or strpos($this->config->shop->payment, 'alipay') !== false) unset($this->lang->user->control->menus['recharge']);
+
+        if(!commonModel::isAvailable('forum'))
+        {
+            unset($this->lang->user->control->menus['thread']);
+            unset($this->lang->user->control->menus['reply']);
+        }
+
+        if(!commonModel::isAvailable('order')) unset($this->lang->user->control->menus['order']);
+        if(!commonModel::isAvailable('shop')) unset($this->lang->user->control->menus['address']);
+    }
 }

@@ -4,6 +4,7 @@ ul.user-control-nav > li.nav-icon > a{border-top:none; border-bottom:dashed 1px 
 ul.user-control-nav > li.nav-icon.active > a{border-bottom:none}
 ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
 </style>
+<?php $this->loadModel('user')->fixMenus();?>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <div class='col-md-2'>
   <ul class='nav nav-primary nav-stacked user-control-nav'>
