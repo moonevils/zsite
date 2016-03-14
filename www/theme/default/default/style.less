@@ -165,11 +165,11 @@
         .navbar-nav > li:first-child > a {border-radius: @radius 0 0 @radius}
 
         #navbar .navbar-collapse {padding: 0;}
-        #navbar .navbar-nav > li {float: none; display: table-cell; width: 1%}
-        #navbar .navbar-nav > li > a {text-align: center; white-space:nowrap; box-shadow: inset 1px 0 0 lighten(@backcolor, 10%), inset -1px 0 0 darken(@backcolor, 10%);}
+        #navbar .navbar-nav > li {float: none; display: table-cell; width: 1%; vertical-align: top}
+        #navbar .navbar-nav > li > a {text-align: center; white-space:nowrap;}
 
-        #navbar .navbar-nav > li:first-child > a {border-radius: @radius 0 0 @radius; box-shadow: inset -1px 0 0 darken(@backcolor, 10%);}
-        #navbar .navbar-nav > li:last-child > a {border-radius: 0 @radius @radius 0; box-shadow: inset 1px 0 0 lighten(@backcolor, 10%);}
+        #navbar .navbar-nav > li:first-child > a {border-radius: @radius 0 0 @radius;}
+        #navbar .navbar-nav > li:last-child > a {border-radius: 0 @radius @radius 0;}
     }
 }
 .navbarLayout(@layout; @radius) when (@layout = false)
@@ -375,6 +375,13 @@ a:active, a:focus
     background-color: @navbar-menu-backcolor-active;
 }
 
+@media (max-width: 991px)
+{
+    #navbar .navbar-nav > li.nav-item-searchbar,
+    #headTitle > .row > #siteLogo + #siteSlogan,
+    #headTitle > .row > #siteName + #siteSlogan {display: none}
+}
+
 @media (max-width: 767px)
 {
     #headNav {margin: 0 -10px;}
@@ -393,17 +400,21 @@ a:active, a:focus
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         background-color: #f7f7f7;
     }
+
+    #headNav > .row > nav {width: 100%}
+    #headNav > .row > nav > #searchbar {position: absolute; left: 0; top: 2px}
 }
 @media (max-width: 500px)
 {
     .navbar-nav > li {width: 50%;}
+    #headNav > .row > nav > #searchbar {display: none}
 }
 
 @media (min-width: 992px)
 {
     .navbar-nav > li > a
     {
-        padding: 9px 20px;
+        padding: 9px 10px;
     }
 
     .navbar-nav > li > a:hover,
