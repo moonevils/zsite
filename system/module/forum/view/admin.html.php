@@ -43,7 +43,7 @@
       <tr class='text-center'>
         <td><?php echo $thread->id;?></td>
         <td class='title text-left'>
-          <?php echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank'"); ?>
+          <?php echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank' title='{$thread->title}'"); ?>
         </td>
         <td><?php echo $thread->authorRealname;?></td>
         <td><?php echo substr($thread->addedDate, 5, -3);?></td>
