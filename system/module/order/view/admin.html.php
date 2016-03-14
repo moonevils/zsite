@@ -30,7 +30,7 @@
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th><?php echo $lang->order->note;?></th>
-        <th class='w-100px'><?php echo $lang->actions;?></th>
+        <th class='w-140px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -44,7 +44,7 @@
           <?php else:?>
             <?php foreach($order->products as $product):?>
             <div class='text-left'>
-              <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
+              <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "class='product' target='_blank'");?></span>
               <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
             </div>
             <?php endforeach;?>
@@ -52,7 +52,7 @@
         </td>
         <td><?php echo $order->amount;?></td>
         <td><?php echo $this->order->processStatus($order);?></td>
-        <td><?php echo $order->note;?></td>
+        <td class='text-left'><?php echo $order->note;?></td>
         <td class='text-left'><?php $this->order->printActions($order);?></td>
       </tr>
       <?php endforeach;?>

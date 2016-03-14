@@ -13,7 +13,7 @@ if(count($langs) > 1):
 <ul class='dropdown-menu'>
   <?php
   unset($langs[$clientLang]);
-  foreach($langs as $langKey => $currentLang) echo "<li><a rel='nofollow' href='javascript:selectLang(\"$langKey\")'>$currentLang</a></li>";
+  foreach($langs as $langKey => $currentLang) echo "<li>" . html::a($this->createLink('admin', 'switchLang', "lang=$langKey"), $currentLang) . "</li>";
   ?>
 </ul>
 <?php endif;?>

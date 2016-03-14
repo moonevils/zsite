@@ -44,8 +44,8 @@ $themeRoot = $webRoot . "theme/default/";
       $themeRoot = $webRoot . "template/default/theme/";
       if($this->config->cdn->open == 'open')
       {
-          css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css', '', $cdn = true);
-          js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $cdn = true);
+          css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css', '', $version = false);
+          js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $version = false);
       }
       else
       {
