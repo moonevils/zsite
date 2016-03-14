@@ -241,7 +241,7 @@ $lang->user->log->browser     = '浏览器';
 $lang->user->log->ip          = 'IP';
 $lang->user->log->location    = '登录地址';
 $lang->user->log->date        = '登录时间';
-$lang->user->log->desc        = '描述';
+$lang->user->log->desc        = '结果';
 
 $lang->user->ipDenied             = '登录IP受限，请按提示操作。';
 $lang->user->locationDenied       = '登录地区受限，请按提示操作。';
