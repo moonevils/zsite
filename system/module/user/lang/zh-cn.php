@@ -198,12 +198,12 @@ $lang->user->oauth->typeList['qq']     = 'QQ会员';
 $lang->user->oauth->typeList['wechat'] = '微信会员';
 
 $lang->user->oauth->lblWelcome       = '开放登录，快捷方便';
-$lang->user->oauth->lblProfile       = "设置用户名，完成注册";
-$lang->user->oauth->lblBind          = "或绑定已有帐号";
+$lang->user->oauth->lblProfile       = "注册新用户";
+$lang->user->oauth->lblBind          = "绑定已有用户";
 $lang->user->oauth->lblUnbind        = "解除绑定";
 $lang->user->oauth->lblUnbindSuccess = "解除绑定成功！";
 $lang->user->oauth->lblUnbindFailed  = "解除绑定失败！";
-$lang->user->oauth->lblBindFailed    = "绑定账户失败！";
+$lang->user->oauth->lblBindFailed    = "绑定用户失败！";
 $lang->user->oauth->ignore           = "忽略";
 
 $lang->user->statusList = new stdclass();
