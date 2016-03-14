@@ -61,10 +61,10 @@ $lang->block->saveLayoutAs    = '复制布局：%s';
 $lang->block->defaultPlan     = '默认方案';
 
 $lang->block->layout            = '布局';
-$lang->block->logoPosition      = 'Logo 位置';
-$lang->block->navPosition       = '导航 位置';
-$lang->block->searchbarPosition = '搜索框 位置';
-$lang->block->sloganPosition    = '站点口号位置';
+$lang->block->logoPosition      = 'Logo';
+$lang->block->navPosition       = '导航';
+$lang->block->searchbarPosition = '搜索框';
+$lang->block->sloganPosition    = '站点口号';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局";

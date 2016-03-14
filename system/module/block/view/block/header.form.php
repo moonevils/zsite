@@ -11,16 +11,17 @@
 */
 ?>
 <tr>
-  <th><?php echo $lang->block->navPosition;?></th>
-  <td><?php echo html::select('params[nav]', $lang->block->headerLayout->nav, zget($block->content, 'nav', 'besideLogo'), "class='form-control'");?></td>
-</tr>
-<tr>
-  <th><?php echo $lang->block->sloganPosition;?></th>
-  <td><?php echo html::select('params[slogan]', $lang->block->headerLayout->slogan, zget($block->content, 'slogan', 'row'), "class='form-control'");?></td>
-</tr>
-<tr>
-  <th><?php echo $lang->block->searchbarPosition;?></th>
-  <td><?php echo html::select('params[searchbar]', $lang->block->headerLayout->searchbar, zget($block->content, 'searchbar', 'besideSlogan'), "class='form-control'");?></td>
+  <th><?php echo $lang->block->layout;?></th>
+  <td>
+    <div class='input-group layout-group'>
+      <span class='input-group-addon'><?php echo $lang->block->navPosition;?></span>
+      <?php echo html::select('params[nav]', $lang->block->headerLayout->nav, zget($block->content, 'nav', 'besideLogo'), "class='form-control'");?>
+      <span class='input-group-addon'><?php echo $lang->block->sloganPosition;?></span>
+      <?php echo html::select('params[slogan]', $lang->block->headerLayout->slogan, zget($block->content, 'slogan', 'row'), "class='form-control'");?>
+      <span class='input-group-addon'><?php echo $lang->block->searchbarPosition;?></span>
+      <?php echo html::select('params[searchbar]', $lang->block->headerLayout->searchbar, zget($block->content, 'searchbar', 'besideSlogan'), "class='form-control'");?>
+    </div>
+  </td>
 </tr>
 <script>
 $().ready(function()
