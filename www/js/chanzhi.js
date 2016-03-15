@@ -20,7 +20,6 @@ $.extend(
         
         appendFingerprint(formID);
         form = $(formID);
-        if(form && $.zui.browser && $.zui.browser.ie <= 8) form.attr('enctype ', null);
 
         var options =
         {
