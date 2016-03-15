@@ -49,7 +49,7 @@ $(function()
         }
         if(response.reason == 'needChecking')
         {
-            $threadTransferForm.find('.captcha-box').html(response.captcha).removeClass('hide');
+            $threadTransferForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
     }});
 });

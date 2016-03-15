@@ -56,7 +56,7 @@ $(function()
         }
         if(response.reason == 'needChecking')
         {
-            $editThreadForm.find('.captcha-box').html(response.captcha).removeClass('hide');
+            $editThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
     }});
 });

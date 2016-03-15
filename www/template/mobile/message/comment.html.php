@@ -136,7 +136,7 @@ $(function()
         }
         if(response.reason == 'needChecking')
         {
-            $commentForm.find('.captcha-box').html(response.captcha).removeClass('hide');
+            $commentForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
     }});
 });
