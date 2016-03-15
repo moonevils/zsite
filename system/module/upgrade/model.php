@@ -140,7 +140,7 @@ class upgradeModel extends model
             case '5_1';
                 $this->execSQL($this->getUpgradeFile('5.1'));
                 $this->moveThemes();
-                $this->awardOauthUser();
+                $this->awardRegister();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1887,12 +1887,12 @@ class upgradeModel extends model
     }
     
     /**
-     * Award oauthUser register when upgrade from 5.1.
+     * Award register when upgrade from 5.1.
      * 
      * @access public
      * @return void
      */
-    public function awardOauthUser()
+    public function awardRegister()
     {
         $this->app->loadConfig('score');
 
