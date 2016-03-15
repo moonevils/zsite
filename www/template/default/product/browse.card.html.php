@@ -14,23 +14,25 @@
       }
       ?>
       <div class='card-heading'>
-        <?php
-        $currencySymbol = $this->config->product->currencySymbol;
-        if(!$product->unsaleable)
-        {
-            if($product->promotion != 0)
-            {
-                echo "<strong class='text-danger price'>" . $currencySymbol . $product->promotion . '</strong>';
-            }
-            else
-            {
-                if($product->price != 0)
-                {
-                    echo "<strong class='text-danger price'>" . $currencySymbol . $product->price . '</strong>';
-                }
-            }
-        }
-        ?>
+        <div class='price'>
+          <?php
+          $currencySymbol = $this->config->product->currencySymbol;
+          if(!$product->unsaleable)
+          {
+              if($product->promotion != 0)
+              {
+                  echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
+              }
+              else
+              {
+                  if($product->price != 0)
+                  {
+                      echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
+                  }
+              }
+          }
+          ?>
+        </div>
         <div class='text-nowrap text-ellipsis'>
           <span class='pull-left'><?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $product->name);?></span>
           <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>

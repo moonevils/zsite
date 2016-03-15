@@ -19,4 +19,13 @@ $(function()
     var type = $.cookie('productViewType');
     if(typeof(type) == 'undefined' || type == '') type = 'card';
     $('#modeControl').find('[data-mode=' + type +']').click();
+
+    $('.price').each(function()
+    {
+         if($(this).find('strong').length > 0)
+         {
+             $('.price').css('height', '30px');
+             return false;
+         }
+    });
 })
