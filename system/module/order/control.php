@@ -168,7 +168,7 @@ class order extends control
         if($_POST)
         {
             $payment = $this->post->payment;
-            $result = $this->order->setPayment($orderID, $payment);
+            $result  = $this->order->setPayment($orderID, $payment);
             if(!$result) exit;
 
             if($payment == 'COD')
@@ -200,8 +200,7 @@ class order extends control
         {
             if($order->payment == 'alipaySecured') $this->order->postDeliveryToAlipay($order);
             $result = $this->order->delivery($orderID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
-            $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            $this->send($result);
         }
 
         $this->view->order       = $order;
