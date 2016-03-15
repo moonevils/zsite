@@ -10,6 +10,8 @@
  * @link        http://www.chanzhi.org
 */
 ?>
+<?php if(!isset($block)) $block = new stdclass();?>
+<?php if(!isset($block->content)) $block->content = new stdclass();?>
 <tr>
   <th><?php echo $lang->block->layout;?></th>
   <td>
