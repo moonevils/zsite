@@ -153,7 +153,6 @@
             <?php
             $key = 0;
             foreach($product->attributes as $attribute):
-            if(!$attribute->label and !$attribute->value) continue;
             ?>
             <div class='row form-group'>
               <div class="col-xs-3"> <?php echo html::input("label[{$key}]", $attribute->label, "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>

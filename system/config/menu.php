@@ -30,8 +30,7 @@ $config->menuDependence = new stdclass();
 $config->menuDependence->submittion   = 'submittion';
 $config->menuDependence->page         = 'page';
 $config->menuDependence->blog         = 'blog';
-$config->menuDependence->express      = 'shop';
-$config->menuDependence->orderSetting = 'user';
+$config->menuDependence->orderSetting = 'product';
 
 $config->menuExtra = new stdclass();
 $config->menuExtra->visual = "target='_blank'";
