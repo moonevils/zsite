@@ -22,24 +22,14 @@
       <th><?php echo $lang->user->realname;?></th>
       <td>
         <?php echo $user->realname;?>
-        <?php if(isset($user->provider) and isset($user->openID)):?>
-        <?php if(strpos($user->account, "{$user->provider}_") === false):?>
+        <?php if(isset($user->provider) and isset($user->openID) and strpos($user->account, "{$user->provider}_") === false):?>
         <span class='bg-info-pale text-info'><?php echo $lang->user->oauth->typeList[$user->provider];?></span>
-        <?php echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='text-primary ajaxaction jsoner'");?>
-        <?php else:?>
-        <br>
-        <?php echo html::a(inlink('oauthRegister'), "<i class='icon-link'></i> " . $lang->user->oauth->lblProfile, "class='text-primary'");?>&nbsp;&nbsp;
-        <?php echo html::a(inlink('oauthBind'), "<i class='icon-link'></i> " . $lang->user->oauth->lblBind, "class='text-primary'");?>
-        <?php endif;?>
         <?php endif;?>
       </td>
     </tr>
     <tr>
       <th><?php echo $lang->user->email;?></th>
-      <td>
-        <?php if(!empty($user->email)) echo $user->email . '&nbsp;&nbsp;&nbsp;';?>
-        <?php echo html::a(inlink('setemail'), "<i class='icon-pencil'></i> " . $lang->user->setEmail, "class='text-primary' data-toggle='modal'");?>
-      </td>
+      <td><?php if(!empty($user->email)) echo $user->email;?></td>
     </tr>
     <tr>
       <th><?php echo $lang->user->company;?></th>
@@ -72,6 +62,16 @@
     <tr>
       <td colspan='2'>
         <?php echo html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn block primary' data-toggle='modal'");?>
+        <?php echo html::a(inlink('setemail'), "<i class='icon-pencil'></i> " . $lang->user->setEmail, "class='btn block primary' data-toggle='modal'");?>
+        <?php if(isset($user->provider) and isset($user->openID)):?>
+        <?php if(strpos($user->account, "{$user->provider}_") === false):?>
+        <?php echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'");?>
+        <?php else:?>
+        <br>
+        <?php echo html::a(inlink('oauthRegister'), "<i class='icon-link'></i> " . $lang->user->oauth->lblProfile, "class='btn block primary'");?>
+        <?php echo html::a(inlink('oauthBind'), "<i class='icon-link'></i> " . $lang->user->oauth->lblBind, "class='btn block primary'");?>
+        <?php endif;?>
+        <?php endif;?>
       </td>
     </tr>
   </tbody>
