@@ -1,6 +1,6 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
-<form method='post' action='<?php echo inlink('securityquestion');?>' id='questionForm' class='form' data-checkfingerprint='1'>
+<form method='post' action='<?php echo inlink('setsecurity');?>' id='questionForm' class='form' data-checkfingerprint='1'>
   <table class='table table-form borderless'>
     <tr>
       <th class='w-100px'><?php echo $lang->user->password;?></th>
