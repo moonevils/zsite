@@ -48,7 +48,7 @@ $(function()
         }
         if(response.reason == 'needChecking')
         {
-            $eidtReplyForm.find('.captcha-box').html(response.captcha).removeClass('hide');
+            $eidtReplyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
     }});
 });

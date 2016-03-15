@@ -90,7 +90,7 @@ $(function()
         $replyForm.find('#content').val('');
         if(response.reason == 'needChecking')
         {
-            $replyForm.find('.captcha-box').html(response.captcha).removeClass('hide');
+            $replyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
     }});
 });

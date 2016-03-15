@@ -75,7 +75,7 @@ $(function()
         }
         if(response.reason == 'needChecking')
         {
-            $postThreadForm.find('.captcha-box').html(response.captcha).removeClass('hide');
+            $postThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
     }});
 });
