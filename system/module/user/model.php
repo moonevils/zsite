@@ -1471,7 +1471,7 @@ class userModel extends model
      * @access public
      * @return bool
      */
-    public function setQuestion($account)
+    public function setSecurity($account)
     {
         $this->checkOldPassword();
         $data = fixer::input('post')->get();
@@ -1479,7 +1479,7 @@ class userModel extends model
         $data->security = json_encode(array('question' => $data->question, 'answer' => md5(trim($data->answer))));
         $this->dao->setAutoLang(false)->update(TABLE_USER)
             ->data($data, $skip = 'question, answer, fingerprint, oldPwd')
-            ->batchCheck($this->config->user->require->securityQuestion, 'notempty')
+            ->batchCheck($this->config->user->require->setSecurity, 'notempty')
             ->where('account')->eq($account)
             ->exec();
 
