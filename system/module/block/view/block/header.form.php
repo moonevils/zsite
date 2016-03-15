@@ -21,7 +21,7 @@
       <span class='input-group-addon'><?php echo $lang->block->searchbarPosition;?></span>
       <?php echo html::select('params[searchbar]', $lang->block->headerLayout->searchbar, zget($block->content, 'searchbar', 'besideSlogan'), "class='form-control'");?>
     </div>
-    <div class='checkbox'><label><input style='margin-top: 3px' type='checkbox' id='compatible'  name='params[compatible]' value='1'<?php if(zget($block->content, 'compatible', false)) echo " checked='checked'" ?>> <?php echo $lang->block->headerLayout->compatibleEnable ?></label></div>
+    <div class='checkbox'><label><input style='margin-top: 3px' type='checkbox' id='compatible'  name='params[compatible]' value='1'<?php if(zget($block->content, 'compatible', 0)) echo " checked='checked'" ?>> <?php echo $lang->block->headerLayout->compatibleEnable ?></label></div>
   </td>
 </tr>
 <script>
