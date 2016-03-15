@@ -36,11 +36,6 @@ $lang->block->default->typeList['about']     = 'About';
 $lang->block->default->typeList['links']     = 'Links';
 $lang->block->default->typeList['slide']     = 'Slide';
 $lang->block->default->typeList['header']    = 'Header';
-$lang->block->default->typeList['nav']       = 'Nav';
-$lang->block->default->typeList['searchbar'] = 'Search bar';
-$lang->block->default->typeList['logo']      = 'Logo';
-$lang->block->default->typeList['slogan']    = 'Slogan';
-$lang->block->default->typeList['userMenu']  = 'User menu';
 
 $lang->block->default->typeGroups = array();
 $lang->block->default->typeGroups['html']     = 'input';
@@ -69,11 +64,6 @@ $lang->block->default->typeGroups['about']     = 'system';
 $lang->block->default->typeGroups['links']     = 'system';
 $lang->block->default->typeGroups['slide']     = 'system';
 $lang->block->default->typeGroups['header']    = 'system';
-$lang->block->default->typeGroups['nav']       = 'system';
-$lang->block->default->typeGroups['logo']      = 'system';
-$lang->block->default->typeGroups['slogan']    = 'system';
-$lang->block->default->typeGroups['userMenu']  = 'system';
-$lang->block->default->typeGroups['searchbar'] = 'system';
 
 $lang->block->default->pages['all']            = 'All';
 $lang->block->default->pages['index_index']    = 'Home';
@@ -184,7 +174,8 @@ $lang->block->default->regions->page_view['side']         = 'Side';
 $lang->block->default->regions->page_view['bottomBanner'] = 'BottomBanner';
 
 $lang->block->headerLayout = new stdclass();
-$lang->block->headerLayout->compatibleEnable  = 'Enable compatible mode';
+$lang->block->headerLayout->compatibleEnable  = 'Compatible old header';
+
 $lang->block->headerLayout->nav = array();
 $lang->block->headerLayout->nav['besideLogo'] = 'Right of logo';
 $lang->block->headerLayout->nav['row']        = 'A whole row';
