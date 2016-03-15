@@ -53,7 +53,7 @@ js::set('admin', $this->get->admin);
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>
-    <table class='table table-hover table-striped table-bordered table-condensed' id='userList'>
+    <table class='table table-hover table-striped able-condensed' id='userList'>
       <thead>
         <tr class='text-center'>
           <th class='w-60px'><?php echo $lang->user->id;?></th>
