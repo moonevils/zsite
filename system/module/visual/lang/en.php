@@ -57,7 +57,7 @@ $lang->visual->setting = new stdclass();
 $lang->visual->setting->logo                               = array('name' => "Logo/Sitename");
 $lang->visual->setting->slogan                             = array('name' => "Slogan");
 $lang->visual->setting->powerby                            = array('name' => "Chanzhi mark", 'actions' => array());
-$lang->visual->setting->powerby['actions']['edit']         = array('title' => 'Remove chanzhi mark', 'text' => 'Remove chanzhi mark');
+$lang->visual->setting->powerby['actions']['edit']         = array('title' => 'Remove chanzhi mark', 'text' => 'Remove chanzhi mark', 'alert' => $lang->visual->editPowerBy);
 $lang->visual->setting->company                            = array('name' => "Company profile", 'actions' => array());
 $lang->visual->setting->company['actions']['edit']         = array('text' => 'Eidt company profile');
 $lang->visual->setting->companyName                        = array('name' => "Company name");
