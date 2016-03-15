@@ -41,10 +41,10 @@ $themeRoot = $webRoot . "theme/default/";
   else
   {
       $jsRoot    = $webRoot . "js/";
-      $themeRoot = $webRoot . "template/default/theme/";
+      $themeRoot = $webRoot . "theme/default/";
       if($this->config->cdn->open == 'open')
       {
-          css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css', '', $version = false);
+          css::import($this->config->cdn->host . $this->config->version . '/theme/default/default/all.admin.css', '', $version = false);
           js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $version = false);
       }
       else
