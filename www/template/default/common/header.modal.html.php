@@ -2,7 +2,7 @@
 <?php
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
+$themeRoot = $webRoot . "theme/default/";
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
 <div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 600 : $modalWidth;?>px;">
