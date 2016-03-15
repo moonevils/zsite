@@ -35,7 +35,7 @@
           </li>
         <?php endif;?>
       <?php endforeach;?><!-- end nav1 -->
-      <?php if($setting->searchbar == 'insideNav'):?>
+      <?php if(!$setting->compatible && $setting->searchbar == 'insideNav'):?>
       <li class='nav-item-searchbar'><?php include "searchbar.html.php";?></li>
       <?php endif; ?>
     </ul>

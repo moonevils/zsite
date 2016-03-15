@@ -184,6 +184,7 @@ $lang->block->default->regions->page_view['side']         = '侧边';
 $lang->block->default->regions->page_view['bottomBanner'] = '底部通栏';
 
 $lang->block->headerLayout = new stdclass();
+$lang->block->headerLayout->compatibleEnable = '启用兼容模式';
 $lang->block->headerLayout->nav = array();
 $lang->block->headerLayout->nav['besideLogo'] = 'logo右侧';
 $lang->block->headerLayout->nav['row']        = '独占一行';

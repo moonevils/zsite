@@ -290,10 +290,11 @@ body > .page-container
 
 @media (max-width: 767px)
 {
+    .navbar-nav {margin: 5px 0;}
     body > .page-container {margin-top: 0;}
     #header {margin-left: -10px; margin-right: -10px;}
     #headTitle {padding: 0 10px!important;}
-    #searchbar {bottom: auto; top: 3px;}
+    #header.compatible #searchbar {bottom: auto; top: 3px; left: 10px}
     #searchbar .form-control {padding-top: 2px; padding-bottom: 2px; border: none; background-color: #fafafa; height: 24px;}
     #searchbar .btn {top: 0; padding: 3px;}
     #searchbar .form-control:hover {background-color: #fff}
@@ -344,6 +345,7 @@ body > .page-container
 .m-blog #pager {margin-bottom: 10px;}
 @media (max-width: 767px)
 {
+    .m-blog #searchbar {left: 12px}
     #blogNav {margin-left: 0; margin-right: 0;}
     #blogNav .navbar-nav > li > a {border-radius: 0}
 }
