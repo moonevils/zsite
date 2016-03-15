@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class="icon-cog"></i> <?php echo $lang->score->setCounts;?></strong>
   </div>
-  <form method='post' action='<?php echo $this->createLink('score', 'setCounts');?>' id='setCountsForm' class='form'>
+  <form method='post' action='<?php echo $this->createLink('score', 'setCounts');?>' id='ajaxForm' class='form'>
     <table class='table table-form borderless'>
       <tbody class='scoreCounts'>
         <tr>

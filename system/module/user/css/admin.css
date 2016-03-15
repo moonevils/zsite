@@ -1,3 +1,4 @@
 #userList th, #userList td{overflow: hidden; white-space: nowrap;}
+#userList td.operate, #userList tr:last-child td{overflow: visible; white-space: normal;}
 .panel-heading{padding-bottom: 5px;}
 #typeNav {border-bottom: none;}
