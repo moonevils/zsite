@@ -73,6 +73,7 @@ include TPL_ROOT . 'common/files.html.php';
 <div id='commentBox'></div>
 <?php endif;?>
 <div class='block-region region-bottom blocks' data-region='book_read-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'bottom');?></div>
+<?php js::import($templateCommonRoot . 'js/mzui.form.min.js'); ?>
 <script>
 $(function()
 {
