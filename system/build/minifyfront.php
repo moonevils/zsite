@@ -51,7 +51,7 @@ if($result) echo "create all.ie9.js success\n";
 $themeRoot  = $baseDir . '/www/theme/default/';
 
 /* Common css files. */
-$cssCode  = str_replace('../fonts', '../../../../zui/fonts', file_get_contents($baseDir . '/www/zui/css/min.css'));
+$cssCode  = str_replace('../fonts', '../../../zui/fonts', file_get_contents($baseDir . '/www/zui/css/min.css'));
 $cssCode .= file_get_contents($jsRoot . 'jquery/treeview/min.css');
 
 /* Combine them. */
