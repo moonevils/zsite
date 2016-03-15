@@ -172,3 +172,19 @@ $lang->block->default->regions->page_view['top']          = '上部';
 $lang->block->default->regions->page_view['bottom']       = '底部';
 $lang->block->default->regions->page_view['side']         = '側邊';
 $lang->block->default->regions->page_view['bottomBanner'] = '底部通欄';
+
+$lang->block->headerLayout = new stdclass();
+$lang->block->headerLayout->compatibleEnable = '兼容老版本头部';
+
+$lang->block->headerLayout->nav = array();
+$lang->block->headerLayout->nav['besideLogo'] = 'Logo右侧';
+$lang->block->headerLayout->nav['row']        = '独占一行';
+
+$lang->block->headerLayout->slogan = array();
+$lang->block->headerLayout->slogan['besideLogo'] = 'Logo 右侧';
+$lang->block->headerLayout->slogan['topLeft']    = '左上角';
+
+$lang->block->headerLayout->searchbar = array();
+$lang->block->headerLayout->searchbar['besideSlogan'] = '站点口号右侧';
+$lang->block->headerLayout->searchbar['topRight']     = '右上角';
+$lang->block->headerLayout->searchbar['insideNav']    = '导航右侧';

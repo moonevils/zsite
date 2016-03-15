@@ -15,7 +15,6 @@ include TPL_ROOT . 'common/header.html.php';
 $path = isset($category->pathNames) ? array_keys($category->pathNames) : array(0);
 js::set('path', $path);
 js::set('categoryID', $category->id);
-
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
