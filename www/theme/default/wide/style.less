@@ -284,7 +284,8 @@ a.tag-link {color: inherit;}
 /* --- HEADER --- */
 #header.compatible
 {
-    #header {margin: 0 -15px; padding: 15px; min-height: 80px; vertical-align: middle; position: relative;}
+    margin: 0 -15px; padding: 15px; min-height: 80px; vertical-align: middle; position: relative;
+
     #headTitle {display: table; min-height: 55px; margin-top: 0;}
     #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: middle;}
     #siteName {padding: 0;}
@@ -365,7 +366,7 @@ a.tag-link {color: inherit;}
   #footer {text-align: left; padding-right: 100px;}
   #header {padding-top: 30px; min-height: inherit; padding-top: 0;}
   #headNav {position: static; font-size: 12px; line-height: 30px; background-color: #e5e5e5; margin-right: -10px; margin-left: -10px; text-align: right; padding: 0 10px;}
-  #headTitle {position: absolute; z-index: 10010; bottom: -49px; left: 25px; min-height: inherit; height: 45px;}
+  #header.compatible #headTitle {position: absolute; z-index: 10010; bottom: -49px; left: 0; min-height: inherit; height: 45px;}
   .navbar-brand {display: none}
   .navbar-header {min-height: 50px}
   .navbar-toggle {margin-top: 8px}
@@ -489,7 +490,7 @@ body {background: #232323;}
 #siteSlogan {color: #808080}
 #header.compatible
 {
-    #header {min-height: 112px;}
+    min-height: 112px;
     #headNav {width: 100%; position: absolute; top: 0; right: 0; text-align: right;}
     #headTitle {position: absolute; display: block; min-height: 70px; top : 42px; width: 100%;}
     #siteSlogan {position: absolute; top: -32px; padding-left: 0; font-size: 14px; font-weight: normal; color: #808080}
@@ -506,10 +507,7 @@ body {background: #232323;}
 #headNav nav > a:hover, #headNav nav > span:hover {background: #f1f1f1; text-decoration: none;}
 
 /* Navbar */
-#header.compatible
-{
-    #navbar .collapse {position: absolute; right: 0; top: -70px;}
-}
+#header.compatible + #navbar .collapse {position: absolute; right: 0; top: -70px;}
 #navbar {position: relative; background: none; border: none; min-height: 0; background: #fff}
 #navbar .nav > li {display: block; float: left; width: auto;}
 @media (min-width: 768px){#navbar .nav > li {display: block;float: left;width: auto;}@-moz-document url-prefix(){#navbar .nav > li{position: inherit;}}}
@@ -669,7 +667,8 @@ body.m-message-reply{background:#fff;}
 @media (min-width: 1200px) {#blogNav {max-width: 1170px;}}
 
 /* style of blogNav */
-.m-blog #headTitle {margin-top: 40px;}
+.m-blog #headTitle {margin-top: 40px; display: block}
+.m-blog #headTitle > .wrapper {display: block}
 #blogNav {position: relative; background: none; border: none; min-height: 0; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0}
 #blogNav .wrapper {position: absolute; right: 0; top: -72px;}
 #blogNav .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 26px 10px; margin-left: 10px;}
@@ -867,7 +866,7 @@ a.card:hover, .card:hover a {color: @color-primary}
 #navbar .dropdown-menu > li > a:focus,
 #navbar .dropdown-menu > li > a:hover {color: #ffffff; background: lighten(@color-primary, 8%);}
 #navbar .nav > li.active > a,
-#navbar .nav > li.active > a:hover {color: @color-primary; color: @color-primary;}
+#navbar .nav > li.active > a:hover {color: @color-primary; background-color: transparent; font-weight: bold}
 
 /* for ie8 start */
 @media (min-width: 768px)
@@ -881,7 +880,7 @@ a.card:hover, .card:hover a {color: @color-primary}
         #navbar .nav > li > a:hover,
         #navbar .nav > li > a:focus,
         #navbar .nav > li.active > a,
-        #navbar .nav > li.active > a:hover {color: @color-primary; color: @color-primary;}
+        #navbar .nav > li.active > a:hover {color: @color-primary; background-color: transparent;}
     }
 }
 /* for ie8 end */
@@ -961,10 +960,12 @@ body
       #searchbar .form-control {padding: 5px 10px; height: 30px}
       #searchbar .btn {padding: 5px 10px; height: 30px}
       #header.with-searchbar #headNav.hide {height: 40px; line-height: 40px;}
+      #siteSlogan {display: none!important}
     }
     @media (max-width: 600px) {#searchbar {max-width: 100px}}
 }
+@media (max-width: 767px) {#header.compatible.with-searchbar #headNav.hide {height: 40px; line-height: 40px;}}
+#header.compatible.with-searchbar #headNav nav {float: right; margin-right: 200px;} 
 
-
-.m-blog #searchbar {top: 5px;}
-@media (max-width: 767px) {.m-blog #searchbar{top : 0}}
+.m-blog #searchbar {display: none}
+@media (max-width: 767px) {.m-blog #headNav, .m-blog #searchbar{display: none}}

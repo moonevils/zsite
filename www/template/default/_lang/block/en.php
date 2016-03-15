@@ -184,6 +184,7 @@ $lang->block->default->regions->page_view['side']         = 'Side';
 $lang->block->default->regions->page_view['bottomBanner'] = 'BottomBanner';
 
 $lang->block->headerLayout = new stdclass();
+$lang->block->headerLayout->compatibleEnable  = 'Enable compatible mode';
 $lang->block->headerLayout->nav = array();
 $lang->block->headerLayout->nav['besideLogo'] = 'Right of logo';
 $lang->block->headerLayout->nav['row']        = 'A whole row';
