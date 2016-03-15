@@ -60,7 +60,7 @@ class guarderModel extends model
       <tr class='text-middle'>
         <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
         {$equal}
-        <input type='text' name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <input type='text' name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/></td>
       </tr>
   </table>
 </div>
@@ -89,7 +89,7 @@ EOT;
     <td class='w-80px text-center'><label for='captcha'>{$this->lang->guarder->captcha}</label></td>
     <td class='text-lg'>{$leftTag}{$guarder}{$rightTag}
     {$equal} 
-      <input type='text'  name="{$input}" id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
+      <input type='text'  name="{$input}" id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/>
     </td>
   </tr>
 </table>
@@ -119,7 +119,7 @@ EOT;
       <tr class='text-middle'>
         <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
         {$equal}
-        <input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/></td>
       </tr>
   </table>
 </div>
@@ -149,7 +149,7 @@ EOT;
     <tr class='text-middle'>
       <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
       {$equal}
-      <input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+      <input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/></td>
     </tr>
   </table>
 </td>
