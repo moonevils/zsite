@@ -1896,7 +1896,10 @@ class upgradeModel extends model
     {
         $this->app->loadConfig('score');
 
-        $users = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)->fetchAll();
+        $users = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
+            ->where('score')->gt(0)
+            ->orWhere('rank')->gt(0)
+            ->fetchAll();
 
         foreach($users as $user)
         {
