@@ -480,18 +480,19 @@ body.body-modal {padding: 20px;}
 
 /* Search bar */
 #searchbar {max-width: 200px;}
+.m-blog #searchbar, #header.compatible #searchbar {position: absolute; right: 0; top: 45%;}
 #searchbar .input-group {position: relative;}
 #searchbar .form-control {border-radius: 16px; padding-right: 30px;}
 #searchbar .btn {position: absolute; right: 0; top: 1px; z-index: 10; border: none; box-shadow: none; background: none; color: #808080}
 #searchbar .btn:hover {color: #347aeb}
 @media (max-width: 767px) {
-  #searchbar {right: auto; left: 10px; top: 2px; max-width: 150px}
+  #header.compatible #searchbar {right: auto; left: 0; top: 2px; max-width: 150px}
   #searchbar .form-control, #searchbar .btn {padding: 3px 8px; height: 26px}
   #searchbar .btn {padding: 3px; right: 5px; top: 1px;}
   #headNav.hide {display: block; height: 30px}
   #headNav.hide + #searchbar {max-width: 400px; left: auto; right: 0; padding: 0 10px;}
 }
-@media (max-width: 480px) {#searchbar {max-width: 90px}}
+@media (max-width: 480px) {#searchbar {display: none}}
 
 /* === Blog === */
 #articles .card-heading a {font-weight: bold;}
@@ -507,7 +508,7 @@ body.body-modal {padding: 20px;}
 
 /* Search bar */
 .m-blog #searchbar {top: 30%;}
-@media (max-width: 767px) {.m-blog #searchbar {top: 2%; left: 10px; right: auto;}}
+@media (max-width: 767px) {.m-blog #searchbar {top: 2%; left: 0; right: auto;}}
 
 /* Pager. */
 .pager {margin: 10px 0;line-height: 20px; color: #999}

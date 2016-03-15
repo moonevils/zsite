@@ -295,12 +295,12 @@ a.tag-link {color: inherit;}
 #headTitle.with-navbar {display: block}
 
 /* Search bar */
-#searchbar {right: 15px; padding: 2px;}
+#header.compatible #searchbar {right: 15px; padding: 2px;}
 #searchbar .form-control {border-radius: 2px}
 #headNav > .row > nav > #searchbar {margin-left: 20px; top: 13px;}
 @media (max-width: 767px)
 {
-  #searchbar {left: 16px;}
+  #header.compatible #searchbar {left: 16px; top: 0;}
 }
 #navbar li.nav-item-searchbar #searchbar > form {margin: 0!important;}
 
@@ -569,6 +569,9 @@ body.m-message-reply{background:#f5f0cc;}
 .m-blog h3{font-size: 16px;}
 .m-blog h4{font-size: 14px; font-weight:600;}
 .m-blog h5{font-size: 14px;}
+
+/* blog header */
+.m-blog #header {padding: 0}
 
 /* style of blogNav */
 #blogNav{background: #7A94B2; }
