@@ -7,7 +7,7 @@ $config->visual->setting->slogan                    = array('actions' => array()
 $config->visual->setting->slogan['actions']['edit'] = array('width' => 700, 'module' => 'visual', 'method' => 'editslogan');
 
 $config->visual->setting->powerby                    = array('actions' => array());
-$config->visual->setting->powerby['actions']['edit'] = array('width' => 600, 'icon' => 'info-sign', 'module' => 'visual', 'method' => 'editpowerby');
+$config->visual->setting->powerby['actions']['edit'] = array('width' => 600, 'icon' => 'info-sign', 'type' => 'alert');
 
 $config->visual->setting->company                    = array('actions' => array());
 $config->visual->setting->company['actions']['edit'] = array('method' => 'setbasic', 'params' => 'display=content', 'width' => 900);

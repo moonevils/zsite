@@ -57,7 +57,7 @@ $lang->visual->setting = new stdclass();
 $lang->visual->setting->logo                               = array('name' => "Logo/名称");
 $lang->visual->setting->slogan                             = array('name' => "口号");
 $lang->visual->setting->powerby                            = array('name' => "蝉知标识", 'actions' => array());
-$lang->visual->setting->powerby['actions']['edit']         = array('title' => '移除蝉知标识', 'text' => '移除蝉知标识');
+$lang->visual->setting->powerby['actions']['edit']         = array('title' => '移除蝉知标识', 'text' => '移除蝉知标识', 'alert' => $lang->visual->editPowerBy);
 $lang->visual->setting->company                            = array('name' => "公司介绍", 'actions' => array());
 $lang->visual->setting->company['actions']['edit']         = array('text' => '编辑公司介绍');
 $lang->visual->setting->companyName                        = array('name' => "公司名称");

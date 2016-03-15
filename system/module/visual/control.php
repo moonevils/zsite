@@ -62,17 +62,6 @@ class visual extends control
     }
 
     /**
-     * Eidt powerby
-     *
-     * @access public
-     * @return void
-     */
-    public function editpowerby()
-    {
-        $this->display();
-    }
-
-    /**
      * Fix a block in a region.
      *
      * @access public
