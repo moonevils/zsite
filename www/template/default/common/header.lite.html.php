@@ -57,7 +57,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? $this->config->cdn->hos
   {
       if($cdnRoot)
       {
-          css::import($cdnRoot . '/template/default/theme/default/all.css', '', $version = false);
+          css::import($cdnRoot . '/theme/default/default/all.css', '', $version = false);
           js::import($cdnRoot  . '/js/all.js', $version = false);
       }
       else
