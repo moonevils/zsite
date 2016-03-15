@@ -140,6 +140,7 @@ class upgradeModel extends model
             case '5_1';
                 $this->execSQL($this->getUpgradeFile('5.1'));
                 $this->moveThemes();
+                $this->awardRegister();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1883,5 +1884,46 @@ class upgradeModel extends model
             }
         }
         return true;
+    }
+    
+    /**
+     * Award register when upgrade from 5.1.
+     * 
+     * @access public
+     * @return void
+     */
+    public function awardRegister()
+    {
+        $this->app->loadConfig('score');
+
+        $users = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)->fetchAll();
+
+        foreach($users as $user)
+        {
+            $register = $this->dao->select('*')->from(TABLE_SCORE)->where('account')->eq($user->account)->andWhere('method')->eq('register')->fetch();
+
+            if(!$register)
+            {
+                $data = new stdclass();
+                $data->score = $user->score + $this->config->score->counts->register; 
+                $data->rank  = $user->score == $user->rank ? $data->score : $user->rank;
+
+                $score = new stdclass();
+                $score->account = $user->account;
+                $score->method  = 'register';
+                $score->type    = 'in';
+                $score->count   = $this->config->score->counts->register;
+                $score->before  = $user->score;
+                $score->after   = $data->score;
+                $score->actor   = $user->account;
+                $score->note    = 'REGISTER';
+                $score->time    = $user->join;
+
+                $this->dao->update(TABLE_USER)->data($data)->where('account')->eq($user->account)->exec();
+                $this->dao->insert(TABLE_SCORE)->data($score)->exec();
+            }
+        }
+
+        return !dao::isError();
     }
 }

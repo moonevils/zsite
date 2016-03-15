@@ -324,7 +324,9 @@ class orderModel extends model
 
         foreach($goodsList as $goods)
         {
-            $this->dao->update(TABLE_PRODUCT)->set("amount=amount - {$goods->count}")->where('id')->eq($goods->productID)->exec();
+            $product = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($goods->productID)->fetch();
+            $stock = $product->amount - $goods->count;
+            $this->dao->update(TABLE_PRODUCT)->set("amount")->eq($stock)->where('id')->eq($goods->productID)->exec();
         }
 
         return !dao::isError();
@@ -423,10 +425,6 @@ class orderModel extends model
             /* Send link. */
             $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
             echo $disabled ? html::a('#', $this->lang->order->delivery, $disabled . "class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal' class='$class'");
-
-            /* Pay link. */
-            $disabled = ($order->payment == 'COD' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(helper::createLink('order', 'pay', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'");
 
             /* Finish link. */
             $disabled = ($order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
@@ -536,13 +534,27 @@ class orderModel extends model
             ->add('deliveriedBy', $this->app->user->account)
             ->add('deliveryStatus', 'send')
             ->get();
+
         $this->dao->update(TABLE_ORDER)->data($delivery)->where('id')->eq($orderID)->exec();
 
-        if(dao::isError()) return false;
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
-        if($order->payment == 'COD' and isset($this->config->product->stock)) return $this->fixStocks($orderID);
+        if(isset($this->config->product->stock) and $this->config->product->stock)
+        {
+            $goodsList = $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)->where('orderID')->eq($orderID)->fetchAll();
+            foreach($goodsList as $goods)
+            {
+                $product = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($goods->productID)->fetch();
+                if($product->amount < $goods->count)
+                {
+                    return array('result' => 'fail', 'message' => strip_tags(sprintf($this->lang->order->lowStocks, $goods->productName)));
+                }
+            }
+        }
 
-        return true;
+        if($order->payment == 'COD' and isset($this->config->product->stock) and $this->config->product->stock) $this->fixStocks($orderID);
+
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin'));
     }
 
     /**
