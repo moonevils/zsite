@@ -20,7 +20,7 @@ $logoSetting       = isset($this->config->site->logo) ? json_decode($this->confi
 $logo              = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
 
 /* Set default header layout setting. */
-$setting->compatible = zget($setting, 'compatible', false);
+$setting->compatible = zget($setting, 'compatible', 0);
 $setting->nav        = zget($setting, 'nav',       'row');
 $setting->slogan     = zget($setting, 'slogan',    'besideLogo');
 $setting->searchbar  = zget($setting, 'searchbar', 'besideSlogan');

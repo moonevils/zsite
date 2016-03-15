@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<header id='header' data-ve='block' data-id='<?php echo $block->id;?>'>
+<header id='header' data-ve='block' data-id='<?php echo $block->id;?>' class='<?php if($setting->nav == 'row') echo 'without-navbar'; ?>'>
   <div id='headNav' class='<?php if($setting->slogan == 'topLeft') echo 'with-slogan' ?><?php if($setting->searchbar == 'topRight') echo ' with-searchbar' ?>'>
     <div class='row'>
       <?php if($setting->slogan == 'topLeft'):?>

@@ -667,7 +667,7 @@
         });
     };
 
-    var openCommonActionModal = function(ve, actionName)
+    var handleCommonAction = function(ve, actionName)
     {
         actionName = actionName || 'edit';
         var $ve = null;
@@ -685,6 +685,13 @@
         var setting = visuals[name];
         var options = getVisualOptions($ve || name);
         var action = setting.actions[actionName];
+
+        if(action.type === 'alert')
+        {
+            bootbox.alert(action.alert);
+            return;
+        }
+
         var url = createActionLink(setting, action, options);
         openModal(url,
         {
@@ -796,7 +803,7 @@
             }
             else if(actionName !== 'move')
             {
-                openCommonActionModal($ve || name, actionName);
+                handleCommonAction($ve || name, actionName);
             }
             e.stopPropagation();
             return false;
