@@ -118,7 +118,7 @@ function appendFingerprint(form)
 {
     if(form.data('checkfingerprint'))
     {
-        fingerprint = getFingerprint();
+        var fingerprint = getFingerprint();
         if(form.find('#fingerprint').size() == 0)
         {
             form.append("<input type='hidden' id='fingerprint'  name='fingerprint' value='" + fingerprint + "'>");
@@ -134,7 +134,7 @@ function getFingerprint()
 {
     if(typeof(Fingerprint) == 'function') return new Fingerprint().get();
 
-    fingerprint = '';
+    var fingerprint = '';
     $.each(navigator, function(key, value)
     {
         if(typeof(value) == 'string') fingerprint += value.length;
