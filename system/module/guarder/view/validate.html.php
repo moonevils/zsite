@@ -43,14 +43,14 @@ $(document).ready(function()
           <?php
           $types   = array();
           $options = explode(',', $this->config->site->importantValidate);
-          if(in_array('securityQuestion', $options)) $types['securityQuestion'] = $lang->site->validateTypes->securityQuestion;
+          if(in_array('setSecurity', $options)) $types['setSecurity'] = $lang->site->validateTypes->setSecurity;
           if(in_array('okFile', $options)) $types['okFile'] = $lang->site->validateTypes->okFile;
           if(in_array('email', $options)) $types['email'] = $lang->site->validateTypes->email;
           ?>
           <?php echo html::radio('type[]', $types, isset($types[$this->cookie->validate]) ? $this->cookie->validate : key($types));?>
         </td>
       </tr>
-      <?php if(in_array('securityQuestion', $options)):?>
+      <?php if(in_array('setSecurity', $options)):?>
       <tr class='option-question'>
         <th></th>
         <?php if(!empty($question)):?>
@@ -175,13 +175,13 @@ $(document).ready(function()
               $.cookie('validate', 'okFile');
           }
 
-          if($('[name*=type][value=securityQuestion]').prop('checked'))
+          if($('[name*=type][value=setSecurity]').prop('checked'))
           {
               $('.option-question').show();
               $('.option-okfile').hide();
               $('.option-email').hide();
               $('.submit-button').show();
-              $.cookie('validate', 'securityQuestion');
+              $.cookie('validate', 'setSecurity');
           }
 
           if($('[name*=type][value=email]').prop('checked'))
