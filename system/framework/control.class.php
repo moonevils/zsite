@@ -847,6 +847,7 @@ class control
         if(!empty($styles[1])) $pageCSS = join('', $styles[1]);
         if(!empty($pageCSS))
         {
+            $this->output = str_replace("</style>\n", '</style>', $this->output);
             $this->output = preg_replace('/<style>([\s\S]*?)<\/style>/', '', $this->output);
             if(strpos($this->output, '</head>') != false) $this->output = str_replace('</head>', "<style>{$pageCSS}</style></head>", $this->output);
             if(strpos($this->output, '</head>') == false) $this->output = "<style>{$pageCSS}</style>" . $this->output;
@@ -868,9 +869,10 @@ class control
         unset($scripts[1][1]);
         unset($scripts[1][0]);
         
-        if(!empty($scripts[1])) $pageJS = join('', $scripts[1]);
+        if(!empty($scripts[1])) $pageJS = join(';', $scripts[1]);
         if(!empty($pageJS))
         {
+            $this->output = str_replace("</script>\n", '</script>', $this->output);
             $this->output = preg_replace('/<script>([\s\S]*?)<\/script>/', '', $this->output);
             if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "<script>{$pageJS}</script></body>", $this->output);
             if(strpos($this->output, '</body>') == false) $this->output .= "<script>$pageJS</script>";
