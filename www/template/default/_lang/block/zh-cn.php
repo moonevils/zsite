@@ -36,11 +36,6 @@ $lang->block->default->typeList['about']           = '公司简介';
 $lang->block->default->typeList['links']           = '友情链接';
 $lang->block->default->typeList['slide']           = '幻灯片';
 $lang->block->default->typeList['header']          = '网站头部';
-$lang->block->default->typeList['nav']             = '网站导航';
-$lang->block->default->typeList['searchbar']       = '搜索框';
-$lang->block->default->typeList['logo']            = '网站Logo';
-$lang->block->default->typeList['slogan']          = '站点口号';
-$lang->block->default->typeList['userMenu']        = '用户菜单';
 
 $lang->block->default->typeGroups = array();
 $lang->block->default->typeGroups['html']     = 'input';
@@ -69,11 +64,6 @@ $lang->block->default->typeGroups['about']     = 'system';
 $lang->block->default->typeGroups['links']     = 'system';
 $lang->block->default->typeGroups['slide']     = 'system';
 $lang->block->default->typeGroups['header']    = 'system';
-$lang->block->default->typeGroups['nav']       = 'system';
-$lang->block->default->typeGroups['logo']      = 'system';
-$lang->block->default->typeGroups['slogan']    = 'system';
-$lang->block->default->typeGroups['userMenu']  = 'system';
-$lang->block->default->typeGroups['searchbar'] = 'system';
 
 $lang->block->default->pages['all']            = '全部页面';
 $lang->block->default->pages['index_index']    = '首页';
@@ -184,7 +174,8 @@ $lang->block->default->regions->page_view['side']         = '侧边';
 $lang->block->default->regions->page_view['bottomBanner'] = '底部通栏';
 
 $lang->block->headerLayout = new stdclass();
-$lang->block->headerLayout->compatibleEnable = '启用兼容模式';
+$lang->block->headerLayout->compatibleEnable = '兼容老版本头部';
+
 $lang->block->headerLayout->nav = array();
 $lang->block->headerLayout->nav['besideLogo'] = 'logo右侧';
 $lang->block->headerLayout->nav['row']        = '独占一行';
