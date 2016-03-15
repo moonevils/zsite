@@ -1122,15 +1122,15 @@ class user extends control
      * @access public
      * @return void
      */
-    public function securityQuestion()
+    public function setSecurity()
     {
         if($_POST)
         {
-            $result = $this->user->setQuestion($this->app->user->account); 
+            $result = $this->user->setSecurity($this->app->user->account); 
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->title = $this->lang->securityQuestion;
+        $this->view->title = $this->lang->setSecurity;
         $this->display();
     }
 }
