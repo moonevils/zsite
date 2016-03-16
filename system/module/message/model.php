@@ -119,7 +119,7 @@ class messageModel extends model
                     echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), "<i class='icon icon-reply'> </i>", " data-toggle='modal' data-type='iframe' class='text-info pull-right' id='reply{$reply->id}'");
                     echo '</div>';
                     echo "<div class='panel-body'>";
-                    echo nl2br($message->content);
+                    echo nl2br($reply->content);
                     echo '</div>';
                     $this->getFrontReplies($reply);
                 }
