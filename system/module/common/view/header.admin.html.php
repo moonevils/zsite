@@ -15,9 +15,9 @@
       if(!$print) continue;
 
       list($module, $method, $params) = explode('|', $groupSetting['link']);
-      $class =  $menuGroup == $this->session->currentGroup ? 'active' : '';
-      $url   = helper::createLink($module, $method, $params);
-      echo "<li class='{$class}' data-id='{$menuGroup}'><a data-toggle='tooltip' href='{$url}' title='{$groupSetting['title']}'><i class='icon icon-{$groupSetting['icon']}'></i></a></li>";
+      $groupClass = $menuGroup == $this->session->currentGroup ? 'active' : '';
+      $groupUrl = helper::createLink($module, $method, $params);
+      echo "<li class='{$groupClass}' data-id='{$menuGroup}'><a data-toggle='tooltip' href='{$groupUrl}' title='{$groupSetting['title']}'><i class='icon icon-{$groupSetting['icon']}'></i></a></li>";
   }
   ?>
   </ul>
