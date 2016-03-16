@@ -905,7 +905,7 @@ class uiModel extends model
         if(isset($this->config->ui->themes[$template][$theme]))
         {
             $configCode = "<?php\n";
-            $configCode .= '$this->config->ui->themes["' . $template . '"]["' . $code . '"] = ';
+            $configCode .= '$config->ui->themes["' . $template . '"]["' . $code . '"] = ';
             $configCode .= "\n";
             $configCode .= var_export($this->config->ui->themes[$template][$theme], true);
             $configCode .= ";";

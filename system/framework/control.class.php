@@ -602,9 +602,16 @@ class control
             {
                 $jsFun  = "get{$theme}JS";
                 $cssFun = "get{$theme}CSS";
-
                 if(function_exists($jsFun))  $importedJS = $jsFun();
                 if(function_exists($cssFun)) $importedCSS = $cssFun();
+
+                $jsFun  = "get_THEME_CODEFIX_CSS";
+                $cssFun = "get_THEME_CODEFIX_JS";
+                if(function_exists($jsFun))  $importedJS = $jsFun();
+                if(function_exists($cssFun)) $importedCSS = $cssFun();
+                if(!empty($importedJS)) $importedJS = $this->processImportedCodes($template, $theme, $importedJS);
+                if(!empty($importedCSS)) $importedCSS = $this->processImportedCodes($template, $theme, $importedCSS);
+                
             }
 
             $js .= zget($importedJS, "{$template}_{$theme}_all", '');
@@ -826,8 +833,8 @@ class control
      */
     public function loadThemeHooks()
     {
-        $theme    = $this->config->template->{$this->device}->theme;
-        $hookPath = dirname(TPL_ROOT) . DS . 'theme' . DS . $theme . DS;
+        $theme     = $this->config->template->{$this->device}->theme;
+        $hookPath  = $this->app->getWwwRoot() . 'theme/' . $this->config->template->{$this->device}->name. DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
 
         foreach($hookFiles as $file) include $file;
@@ -880,5 +887,33 @@ class control
         $pos = strpos($this->output, '<script src=');
         $this->output = substr_replace($this->output, '<script>' . $configCode . '</script>', $pos) . substr($this->output, $pos);
         return true;
+    }
+
+    /**
+     * Process imported codes encrypted.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  array     $codes 
+     * @access public
+     * @return void
+     */
+    public function processImportedCodes($template, $theme, $codes)
+    {
+        $sources[] = "{$template}_default_";
+        $sources[] = "{$template}_clean_";
+        $sources[] = "{$template}_wide_";
+        $sources[] = "{$template}_tartan_";
+        $sources[] = "{$template}_colorful_";
+        $sources[] = "{$template}_blank_";
+
+        foreach($sources as $source) $replace[] = "{$template}_{$theme}_";
+
+        foreach($codes as $page => $code)
+        {
+            $page = str_replace($sources, $replace, $page);
+            $codes->$page = $code;
+        }
+        return  $codes;
     }
 }
