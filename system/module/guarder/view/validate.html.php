@@ -33,7 +33,7 @@ $(document).ready(function()
         </div>
         <div class="modal-body">
   <?php endif;?>
-  <form class='form-inline' id='validateForm' action="<?php echo $this->createLink('guarder', 'validate', "url=$url&target=$target&account=$account&method=$method");?>" method='post' style='min-height:165px'>
+  <form class='form-inline' id='validateForm' action="<?php echo $this->createLink('guarder', 'validate', "url={$url}&target={$target}&account={$account}&method={$method}");?>" method='post' style='min-height:165px'>
     <?php $refUrl  = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
     <?php $fileBtn = html::a($refUrl, $lang->guarder->created, "class='btn btn-sm btn-primary okFile'")?>
     <table class='table table-form'>
