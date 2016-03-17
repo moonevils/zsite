@@ -106,6 +106,37 @@ class uiModel extends model
     }
 
     /**
+     * Load theme info from yaml.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function loadThemeInfo($template, $theme)
+    {
+        $this->app->loadClass('Spyc', true);
+        $themePath = $this->app->getWwwRoot() . 'theme/' . $template . "/$theme/";
+        $yamls = glob($themePath . "*.yaml");
+
+        if(empty($yamls)) return false;
+        return Spyc::YAMLLoadString(file_get_contents($yamls[0]));
+    }
+
+    /**
+     * check a theme is imported.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return bool
+     */
+    public function isImported($template, $theme)
+    {
+        return !in_array("$template}_{$theme}", $this->config->ui->systemThemes);
+    }
+
+    /**
      * Set UI option with file.
      *
      * @param  int    $type
@@ -132,7 +163,7 @@ class uiModel extends model
             foreach($oldFiles as $file) $fileModel->delete($file->id);
             if(dao::isError()) return array('result' => false, 'message' => dao::getError());
         }
-        
+
         /* Upload new logo. */
         $uploadResult = $fileModel->saveUpload('', '', '', $htmlTagName);
         if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
@@ -381,7 +412,7 @@ class uiModel extends model
         $this->printTextbox($id, $value, $this->lang->ui->$label, '', $params['default'], '', '', $this->lang->ui->theme->sizeTip);
     }
 
-     /**
+    /**
      * Print image control
      * @param  string  $id
      * @param  string  $label
@@ -829,7 +860,7 @@ class uiModel extends model
         /* Dump whole css and js data. */
         $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or (section in('css','js') and `key` like '{$template}_{$theme}%') )";
         $zdb->dump($dbFile, $tables, $fields, 'data', $condations, true);
-       
+
         $this->fixSqlFile($template, $theme, $encryptFile);
         $this->fixSqlFile($template, $theme, $dbFile);
         return true;
@@ -864,7 +895,7 @@ class uiModel extends model
         $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-cn' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
         $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-tw' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
         $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'en' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
- 
+
         return file_put_contents($file, $sqls);
     }
 
@@ -1014,7 +1045,7 @@ class uiModel extends model
         $zfile->copyDir($this->directories->exportDocPath,    $this->directories->encryptDocPath);
         $zfile->copyDir($this->directories->exportLessPath,   $this->directories->encryptLessPath);
         $zfile->copyDir($this->directories->exportConfigPath, $this->directories->encryptConfigPath);
-        
+
         return true;
     }
 
@@ -1037,7 +1068,7 @@ header('Content-type: $contentType');\n
 echo $content;\n
 exit;
 EOT;
-       return file_put_contents($target, $phpCodes);
+        return file_put_contents($target, $phpCodes);
     }
 
     /**
@@ -1057,7 +1088,7 @@ EOT;
         $params = var_export($params, true);
         $params = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $params);
         $params = str_replace("{$template}_{$theme}_", "{$template}__THEME_CODEFIX__", $params);
-       
+
         foreach($this->config->css as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
         foreach($this->config->js  as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
 
@@ -1073,24 +1104,24 @@ if(!function_exists('get_THEME_CODEFIX_CSS'))
         \$css = unserialize($cssCode);
         return \$css;
     }
-}
-if(!function_exists('get_THEME_CODEFIX_JS'))
-{
-    function get_THEME_CODEFIX_JS()
-    {
-        \$js = unserialize($jsCodes);
-        return \$js;
     }
-}
-if(!function_exists('get_THEME_CODEFIX_params'))
-{
-    function get_THEME_CODEFIX_params()
+    if(!function_exists('get_THEME_CODEFIX_JS'))
     {
-        return $params;
+        function get_THEME_CODEFIX_JS()
+        {
+            \$js = unserialize($jsCodes);
+            return \$js;
     }
-}
-";
-        return file_put_contents($hookFile, $code);
+    }
+    if(!function_exists('get_THEME_CODEFIX_params'))
+    {
+        function get_THEME_CODEFIX_params()
+        {
+            return $params;
+    }
+    }
+    ";
+    return file_put_contents($hookFile, $code);
     }
 
     /**
@@ -1157,7 +1188,7 @@ if(!function_exists('get_THEME_CODEFIX_params'))
         if(is_dir($sourcePath) and !$zfile->removeDir($sourcePath)) $faildPaths[] = $sourcePath;
         return empty($faildPaths) ? true : $faildPaths;
     }
-    
+
     /**
      * Clear tmp data imported.
      * 
