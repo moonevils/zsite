@@ -229,7 +229,7 @@ class logModel extends model
         $ipAndUv->ip = 0;
         $ipAndUv->uv = 0;
 
-        $allowedTypes = array('basic', 'search', 'keywords', 'os', 'url', 'domain', 'browser', 'from');
+        $allowedTypes = array('basic', 'search', 'keywords', 'os', 'url', 'domain', 'browser', 'from', 'device');
         if(!in_array($type, $allowedTypes)) return $ipAndUv;
 
         if($timeType == 'year') return $ipAndUv;
@@ -244,6 +244,14 @@ class logModel extends model
 
             ->beginIF($type == 'basic' and $item == 'mobile')
             ->andWhere('mobile')->eq(1)
+            ->fi()
+
+            ->beginIF($type == 'device' and $item == 'mobile')
+            ->andWhere('mobile')->eq(1)
+            ->fi()
+
+           ->beginIF($type == 'device' and $item != 'mobile')
+            ->andWhere('mobile')->eq(0)
             ->fi()
 
             ->beginIF($type == 'search')
