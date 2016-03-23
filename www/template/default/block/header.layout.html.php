@@ -88,6 +88,7 @@
   #headTitle > .row > #siteTitle {display: block; position: absolute; z-index: 10015; left: 8px;}
   #headTitle > .row > #navbarWrapper {display: block; padding: 0}
   #headTitle > .row > #navbarWrapper > #navbar {margin-bottom: 14px; width: 100%}
-  #headTitle #siteLogo img {margin-top: 2px;}*/
+  #headTitle #siteLogo img {margin-top: 2px;}
+}
 <?php endif;?>
 </style>
