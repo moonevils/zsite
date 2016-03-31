@@ -837,7 +837,7 @@ class control
         $hookPath  = $this->app->getWwwRoot() . 'theme/' . $this->config->template->{$this->device}->name. DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
 
-        foreach($hookFiles as $file) include $file;
+        if(!empty($hookFiles)) foreach($hookFiles as $file) include $file;
         return $hookFiles;
     }
 
