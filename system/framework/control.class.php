@@ -611,7 +611,6 @@ class control
                 if(function_exists($cssFun)) $importedCSS = $cssFun();
                 if(!empty($importedJS)) $importedJS = $this->processImportedCodes($template, $theme, $importedJS);
                 if(!empty($importedCSS)) $importedCSS = $this->processImportedCodes($template, $theme, $importedCSS);
-                
             }
 
             $js .= zget($importedJS, "{$template}_{$theme}_all", '');
