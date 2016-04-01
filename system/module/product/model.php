@@ -91,25 +91,24 @@ class productModel extends model
         $categoryID = $this->get->categoryID;
 
         /* Get products(use groupBy to distinct products).  */
-        $productIDList = $this->dao->select('id')->from(TABLE_RELATION)
+        $productIdList = $this->dao->select('id')->from(TABLE_RELATION)
             ->where('type')->eq('product')
             ->andWhere('category')->in($categories)
             ->fetchPairs();
 
         if($image)
         {
-            $objectIDList = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
+            $productIdList = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
                 ->where('objectType')->eq('product')
                 ->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
+                ->beginIF(!empty($productIdList))->andWhere('objectID')->in($productIdList)
                 ->orderBy('objectID desc') 
                 ->fetchPairs();
-
-            $productIDList = array_merge($productIDList, $objectIDList);
         }
 
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)
             ->where('1 = 1')
-            ->beginIF(!empty($categories) or $image)->andWhere('id')->in($productIDList)->fi()
+            ->beginIF(!empty($categories) or $image)->andWhere('id')->in($productIdList)->fi()
             ->beginIF(RUN_MODE == 'front')->andWhere('status')->eq('normal')->fi()
 
             ->beginIF($searchWord)

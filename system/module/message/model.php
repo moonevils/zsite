@@ -186,7 +186,15 @@ class messageModel extends model
     {
         $message = $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch();
         if(strpos('message,reply,comment', $message->objectType) === false or $message->objectID == 0) return false;
-        return $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($message->objectID)->fetch();
+
+        $original = $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($message->objectID)->fetch();
+        if($original->objectType == 'article') $original->objectTitle = $this->dao->select('title')->from(TABLE_ARTICLE)->where('id')->eq($original->objectID)->fetch('title');
+        if($original->objectType == 'product') $original->objectTitle = $this->dao->select('name')->from(TABLE_PRODUCT)->where('id')->eq($original->objectID)->fetch('name');
+        if($original->objectType == 'book')    $original->objectTitle = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($original->objectID)->fetch('title');
+        if($original->objectType == 'message' or $original->objectType == 'comment') $original->objectTitle = $original->from;
+
+        $original->objectViewURL = $original->type == 'message' ? $this->getObjectLink($original) : '';
+        return $original;
     }
 
     /**
