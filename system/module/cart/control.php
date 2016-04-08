@@ -16,6 +16,7 @@ class cart extends control
         parent::__construct();
         if($this->app->user->account != 'guest') $this->cart->mergeToDb();
     }
+
     /**
      * Add a product to cart.
      * 
@@ -68,8 +69,7 @@ class cart extends control
     {
         $count = 0;
 
-        $goodsInCookie = $this->cart->getListByCookie();
-
+        $goodsInCookie = (array) $this->cart->getListByCookie();
         if($this->app->user->account != 'guest')
         {
             $count = $this->dao->select('count(*) as count')->from(TABLE_CART)
