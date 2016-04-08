@@ -150,7 +150,6 @@ class order extends control
         $this->view->desktopURL  = helper::createLink('order', 'track', "orderID=$orderID", '', 'html');
 
         $this->display();
-    
     }
 
     /**
