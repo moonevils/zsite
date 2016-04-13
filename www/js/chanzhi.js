@@ -673,7 +673,7 @@ function setGo2Top()
                 if(recPerRow && winWidth > 767)
                 {
                     width = 1 / recPerRow * 100;
-                    cards.attr('style', "width:" + width + '%');
+                    cards.attr('style', "width:" + width + '%' + (recPerRow > 1 ? ';float:left' : ''));
                 }
 
                 if(grid >= 9) cards.attr('class', 'col-md-4 col-sm-6');
