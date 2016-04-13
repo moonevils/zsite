@@ -109,12 +109,12 @@ class cartModel extends model
         $newCart = array();
         foreach($cart as $product)
         {
-            $pro = new stdclass();
-            $pro->account = 'guest';
-            $pro->product = $product->product;
-            $pro->count   = $product->count;
-            $pro->lang    = 'zh-cn';
-            $newCart[$product->product] = $pro;
+            $goods = new stdclass();
+            $goods->account = 'guest';
+            $goods->product = $product->product;
+            $goods->count   = $product->count;
+            $goods->lang    = 'zh-cn';
+            $newCart[$product->product] = $goods;
         }
         return $newCart;
     }

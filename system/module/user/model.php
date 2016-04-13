@@ -1512,4 +1512,19 @@ class userModel extends model
         if(!commonModel::isAvailable('order')) unset($this->lang->user->control->menus['order']);
         if(!commonModel::isAvailable('shop')) unset($this->lang->user->control->menus['address']);
     }
+
+    /**
+     * Get openID of a user.
+     * 
+     * @param  string    $account 
+     * @param  string    $provider 
+     * @access public
+     * @return string
+     */
+    public function getOpenID($account, $provider)
+    {
+        return $this->dao->select('openID')->from(TABLE_OAUTH)->where('account')->eq($account)
+            ->andWhere('provider')->eq($provider)
+            ->fetch('openID');
+    }
 }
