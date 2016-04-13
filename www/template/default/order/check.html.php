@@ -35,7 +35,7 @@
               <div class='text-count'><?php echo $product->count;?></div>
             </td>
             <td class='w-100px text-middle text-danger'> 
-              <div class='text-price'><?php echo $currencySymbol . $product->price;?></div>
+              <div class='text-price'><?php echo $currencySymbol . number_format($product->price * $product->count, 2);?></div>
             </td>
           </tr>
           <?php endforeach;?>
