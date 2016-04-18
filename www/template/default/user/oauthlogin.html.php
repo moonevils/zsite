@@ -1,6 +1,6 @@
 <?php 
 foreach($lang->user->oauth->providers as $providerCode => $providerName) $providerConfig[$providerCode] = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
-if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->clientID) or !empty($this->config->site->yangcong)):
+if(!empty($providerConfig[$providerCode]->clientID) or !empty($this->config->site->yangcong)):
 ?>
   <div class='col-md-6'>
     <div class='panel panel-pure'>
