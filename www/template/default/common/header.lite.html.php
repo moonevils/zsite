@@ -95,7 +95,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? $this->config->cdn->hos
   {
       if($cdnRoot)
       {
-          echo '<link href="' . $cdnRoot . 'js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />'; 
+          echo '<link href="' . $cdnRoot . '/js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />'; 
           echo '<link href="/js/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />';
           js::import($jsRoot . 'html5shiv/min.js');
           js::import($jsRoot . 'respond/min.js');
