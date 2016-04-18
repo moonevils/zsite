@@ -27,7 +27,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <ul class='nav nav-tabs'>
         <li class='nav-heading'><i class='icon icon-pencil'></i> <?php echo $lang->block->edit ?> [<?php echo $block->title; ?>]</li>
         <li><a href='#contentTab' data-toggle='tab'><?php echo $lang->block->content;?></a></li>
-        <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
+        <?php if(strpos(',htmlcode, phpcode, header', $type) == false or $type == 'html'):?>
         <li><a href='#customTab' data-toggle='tab'><?php echo $lang->block->style;?></a></li>
         <?php endif;?>
         <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
@@ -82,7 +82,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <?php endif;?>
             </table>
           </div>
-          <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
+          <?php if(strpos(',htmlcode, phpcode, header', $type) == false or $type == 'html'):?>
           <div class='tab-pane theme-control-tab-pane' id='customTab'>
             <table class='table table-form mg-0'>
               <?php if(isset($config->block->defaultIcons[$type])):?>
@@ -104,6 +104,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
                 <td></td>
               </tr>
               <?php endif;?>
+              <?php if($type != 'slide'):?>
               <tr>
                 <th class='w-100px'><?php echo $lang->block->border;?></th>
                 <td>
@@ -214,8 +215,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
                 </td>
               </tr>
               <?php endif;?>
+              <?php endif;?>
               <tr>
-                <th><?php echo $lang->block->class;?></th>
+                <th class='w-80px'><?php echo $lang->block->class;?></th>
                 <td><?php echo html::input('params[class]', isset($block->content->class) ? $block->content->class : '', "class='form-control' placeholder='{$lang->block->placeholder->class}'");?></td>
               </tr>
             </table>
