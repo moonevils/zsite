@@ -49,9 +49,14 @@ $lang->widget->default['3']['title'] = '评论留言';
 $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
-$lang->widget->default['3']['title'] = '蝉知动态';
-$lang->widget->default['3']['type']  = 'chanzhiDynamic';
-$lang->widget->default['3']['grid']  = 4;
+$lang->widget->default['4']['title'] = '快捷入口';
+$lang->widget->default['4']['type']  = 'commonMenu';
+$lang->widget->default['4']['grid']  = 4;
+
+
+$lang->widget->default['5']['title'] = '蝉知动态';
+$lang->widget->default['5']['type']  = 'chanzhiDynamic';
+$lang->widget->default['5']['grid']  = 4;
 
 $lang->widget->moreLinkList = new stdclass();
 $lang->widget->moreLinkList->latestOrder    = 'order|admin|';
@@ -66,3 +71,4 @@ $lang->widget->typeList->latestThread   = '最新帖子';
 $lang->widget->typeList->message        = '评论留言';
 $lang->widget->typeList->chanzhiDynamic = '蝉知动态';
 $lang->widget->typeList->html           = '自定义';
+$lang->widget->typeList->commonMenu     = '快捷入口';
