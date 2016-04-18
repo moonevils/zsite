@@ -4,9 +4,9 @@
 @media(min-width:1200px){#shortcutBox{margin-top: 30px;}}
 @media(min-width:1400px){#shortcutBox{margin-top: 60px;}}
 body {background: #fafafa;}
+#shortcutBox{max-width:94%}
 
 .page-content {margin-top: -19px; border-top: 1px solid #3280fc;}
-
 .dashboard {position: relative;}
 .dashboard .panel-actions {margin-top: 0; margin-right: 0;}
 .dashboard .panel-heading {line-height: 17px; height: 30px; position: relative;}
@@ -23,6 +23,9 @@ body {background: #fafafa;}
 .dashboard .panel-dragging-shadow {position: absolute;}
 .dashboard-empty-message {text-align: center; margin-top: 100px;}
 .dashboard-empty-message > h5 {margin-bottom: 20px;}
+.dashboard .panel .panel-body{padding:5px;}
+
+.dashboard .panel .panel-body .table tr td{overflow:hidden;}
 
 .dashboard-actions {margin-bottom: 20px;}
 
