@@ -53,7 +53,6 @@ $lang->widget->default['4']['title'] = '快捷入口';
 $lang->widget->default['4']['type']  = 'commonMenu';
 $lang->widget->default['4']['grid']  = 4;
 
-
 $lang->widget->default['5']['title'] = '蝉知动态';
 $lang->widget->default['5']['type']  = 'chanzhiDynamic';
 $lang->widget->default['5']['grid']  = 4;
