@@ -49,9 +49,10 @@ $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
 $lang->widget->moreLinkList = new stdclass();
-$lang->widget->moreLinkList->latestOrder  = 'order|admin|';
-$lang->widget->moreLinkList->latestThread = 'forum|amdin|';
-$lang->widget->moreLinkList->message      = 'message|admin|type=message';
+$lang->widget->moreLinkList->latestOrder    = 'order|admin|';
+$lang->widget->moreLinkList->latestThread   = 'forum|amdin|';
+$lang->widget->moreLinkList->message        = 'message|admin|type=message';
+$lang->widget->moreLinkList->chanzhiDynamic = 'http://www.chanzhi.org/dynamic.html';
 
 $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = '最新订单';
