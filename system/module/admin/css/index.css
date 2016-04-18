@@ -12,6 +12,7 @@ body {background: #fafafa;}
 .dashboard .panel-heading {line-height: 17px; height: 30px; position: relative;}
 .dashboard .panel-actions {position: absolute; top: 0; right: 0; height: 30px;}
 .dashboard .panel-action {display: block; float: left; height: 30px; width: 26px; text-align: center; line-height: 30px;}
+.dashboard .panel-action.btn-more{color:#252525; font-weight:bold;}
 .dashboard .panel-action:hover, .dashboard .panel-actions > .dropdown > a:hover {color: #333; background-color: #ddd; background-color: rgba(0,0,0,0.1)}
 .dashboard .panel-title {font-size: 13px; color: #333}
 .dashboard a.panel-title > .icon-double-angle-right {position: relative; opacity: 0; transition: opacity .2s, left .2s; left: -5px}
@@ -25,6 +26,7 @@ body {background: #fafafa;}
 
 .dashboard-actions {margin-bottom: 20px;}
 
+.dashboard-control{position: absolute; right: -50px; top: 30%;}
 .table-header-fixed {position: absolute; left: 0; top: 0; right: 0;}
 
 /* panel style */
