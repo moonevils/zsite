@@ -44,6 +44,9 @@
     <a href='javascript:;' class='refresh-all-panel'><i class='icon-repeat'></i></a>
     <a data-toggle='modal' href='<?php echo $this->createLink("widget", "create"); ?>' title='<?php echo $lang->widget->create; ?>'><i class='icon-plus'></i></a>
   </div>
+  <div id='dashboardWrapper'>
+    <div class='panels-container dashboard' id='dashboard' data-confirm-remove-block='<?php  echo $lang->widget->confirmRemoveWidget;?>'>
+
   <div class='row summary'>
     <?php
     $index = 0;
@@ -79,6 +82,8 @@
       </div>
     </div>
     <?php endforeach;?>
+  </div>
+  </div>
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
