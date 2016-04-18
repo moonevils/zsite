@@ -42,7 +42,7 @@
   <?php endif;?>
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
-      <div class='dashboard-control' style='position: absolute; right: -46px; top: 30%;'>
+      <div class='dashboard-control'>
         <div class='pull-right'>
           <a class='btn' data-toggle='modal' href='<?php echo $this->createLink("widget", "create"); ?>'><i  data-toggle='tooltip' class='icon-plus' title='<?php echo $lang->widget->create; ?>'></i></a>
         </div>

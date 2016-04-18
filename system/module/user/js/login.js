@@ -44,6 +44,7 @@ $('#submit').click(function()
 
 function showFormError(text)
 {
+    if(text == '') return true;
     var error = $('#formError').text(text);
     var parent = error.closest('.form-group');
     if(parent.length) parent.show();
