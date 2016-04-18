@@ -1,7 +1,8 @@
 $(document).ready(function()
 {
     $('[name=payment]').eq(0).prop('checked', true);
-    $('#submit').click(function(){
+    $('#submit').click(function()
+    {
         var payment = $('input:radio[name=payment]:checked').val();
         if(payment == 'COD')
         {
