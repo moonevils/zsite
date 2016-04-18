@@ -91,9 +91,6 @@ class threadModel extends model
             ->beginIf($this->config->forum->postReview == 'open')
             ->andWhere('status')->eq('wait')
             ->fi()
-            ->beginIf($this->config->forum->postReview != 'open')
-            ->andWhere('repies')->eq(0)
-            ->fi()
             ->orderBy('id desc')
             ->limit($limit)
             ->fetchAll('id');
