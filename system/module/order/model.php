@@ -48,10 +48,11 @@ class orderModel extends model
         }
 
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
-            ->beginIf($mode == 'account')->where('account')->eq($value)->fi()
-            ->beginIf($mode == 'status')->where('status')->eq($value)->fi()
-            ->beginIf($mode == 'payStatus')->where('payStatus')->eq($value)->fi()
-            ->beginIf($mode == 'deliveryStatus')->where('deliveryStatus')->eq($value)->fi()
+            ->where(1)
+            ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
+            ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
+            ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
+            ->beginIf($mode == 'deliveryStatus')->andWhere('deliveryStatus')->eq($value)->fi()
             ->beginIf(!commonModel::isAvailable('score'))->andWhere('type')->ne('score')->fi()
             ->beginIf(!commonModel::isAvailable('shop'))->andWhere('type')->ne('shop')->fi()
             ->orderBy($orderBy)
