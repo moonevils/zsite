@@ -21,7 +21,7 @@ js::set('lang', $lang->js);
 ?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
-  <div class='col-md-4'>
+  <div class='col-md-3'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong></div>
       <div class='panel-body'>
@@ -35,7 +35,7 @@ js::set('lang', $lang->js);
       </div>
     </div>
   </div>
-  <div class='col-md-8' id='categoryBox'></div>
+  <div class='col-md-9' id='categoryBox'></div>
 </div>
 <?php else:?>
 <div id='categoryBox'></div>
