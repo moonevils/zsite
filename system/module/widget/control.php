@@ -53,9 +53,10 @@ class widget extends control
         $hiddenWidgets = $this->widget->getHiddenWidgets();
 
         if($type) $widget->type = $type;
-        $this->view->widget = $widget;
-        $this->view->title  = $this->lang->widget->editWidget;
-        $this->view->type   = $widget->type;
+        $this->view->widget     = $widget;
+        $this->view->title      = $this->lang->widget->editWidget;
+        $this->view->type       = $widget->type;
+        $this->view->modalWidth = 700;
         $this->display();
     }
 
@@ -70,15 +71,6 @@ class widget extends control
     {
         $widget = $this->widget->getByID($widget);
         if(empty($widget)) return false;
-
-        if($widget->type == 'html')
-        {
-            die( "<div class='article-content'>" . htmlspecialchars_decode($widget->params->html) .'</div>');
-        }
-        elseif($widget->type == 'rss')
-        {
-            die($this->widget->getRss($widget));
-        }
 
         $this->app->loadClass('pager', true);
         $this->view->widget = $widget;       
@@ -144,9 +136,9 @@ class widget extends control
      */
     public function delete($id)
     {
-        $this->dao->delete()->from(TABLE_BLOCK)->where('`id`')->eq($index)->andWhere('account')->eq($this->app->user->account)->exec();
+        $this->dao->delete()->from(TABLE_WIDGET)->where('`id`')->eq($id)->andWhere('account')->eq($this->app->user->account)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'locate' => helper::createLink('admin')));
     }
 
     /**
@@ -160,7 +152,7 @@ class widget extends control
      */
     public function hide($id)
     {
-        $this->dao->update(TABLE_BLOCK)->set('hidden')->eq(1)->where('`order`')->eq($index)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
+        $this->dao->update(TABLE_WIDGET)->set('hidden')->eq(1)->where('`order`')->eq($id)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }

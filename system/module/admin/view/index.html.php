@@ -72,7 +72,7 @@
                   <a href='javascript:;' data-toggle='dropdown' class='panel-action'><i class='icon icon-ellipsis-v'></i></a>
                   <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="<?php echo $this->createLink("widget", "edit", "index=$widget->id"); ?>" data-toggle='modal' class='edit-widget' data-title='<?php echo $widget->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit;?></a></li>
-                    <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
+                    <li><a href="<?php echo helper::createLink('widget', 'delete', "id={$widget->id}")?>" class="remove-panel deleter"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
                     <?php if($widget->type == 'html'):?>
                       <li><a href="javascript:hiddenBlock(<?php echo $widget->id;?>)" class="hidden-panel"><i class='icon-eye-close'></i> <?php echo $lang->widget->hidden; ?></a></li>
                     <?php endif;?>
