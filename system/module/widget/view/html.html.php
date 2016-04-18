@@ -1,1 +1,1 @@
-<?php echo zget($widget->params, 'content', ''); ?>
+<?php echo htmlspecialchars_decode(zget($widget->params, 'content', '')); ?>
