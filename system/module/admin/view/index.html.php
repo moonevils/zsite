@@ -56,7 +56,11 @@
         <?php foreach($widgets as $key => $widget):?>
         <?php
         $index = $key;
-        list($moreModule, $moreMethod, $moreParams) = explode('|', $widget->moreLink);
+        if(strpos($widget->moreLink, '|') !== false)
+        {
+            list($moreModule, $moreMethod, $moreParams) = explode('|', $widget->moreLink);
+            $widget->moreLink = helper::createLink($moreModule, $moreMethod, $moreParams);
+        }
         ?>
         <div class='col-xs-<?php echo $widget->grid;?> pull-left'>
           <div class='panel panel-widget <?php if(isset($widget->params->color)) echo 'panel-' . $widget->params->color;?>' id='widget<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $widget->title?>' data-url='<?php echo $this->createLink('widget', 'printWidget', 'widget=' . $widget->id) ?>'>
@@ -76,7 +80,7 @@
                 </div>
               </div>
               <?php if(!empty($widget->moreLink)):?>
-              <?php echo html::a(helper::createLink($moreModule, $moreMethod, $moreParams), $widget->title . " <i class='icon-double-angle-right'></i>", "class='panel-title drag-disabled' title='$lang->more' data-toggle='tooltip' data-placement='right'"); ?>
+              <?php echo html::a($widget->moreLink, $widget->title . " <i class='icon-double-angle-right'></i>", "class='panel-title drag-disabled' title='$lang->more' data-toggle='tooltip' data-placement='right'"); ?>
               <?php else: ?>
               <span class='panel-title'><?php echo $widget->title;?></span>
               <?php endif; ?>
