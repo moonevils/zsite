@@ -20,7 +20,7 @@ $globalButtons = $group->desc ? json_decode($group->desc, true) : array();
 if($slides):
 ?>
 <div class='block <?php echo $blockClass;?>' id='block<?php echo $block->id?>'>
-  <?php if($block->content->slideDisplay == 'tile'):?>
+  <?php if($block->content->style == 'tile'):?>
   <div id="<?php echo $slideId;?>" class='tile slide' data-id='<?php echo $groupID?>'>
   <?php else:?>
   <div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='<?php echo $groupID?>'>
@@ -37,7 +37,7 @@ if($slides):
       <?php else: ?>
       <div class='item<?php if($index === 0) echo ' active';?>'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
       <?php endif ?>
-        <div class="<?php echo $block->content->slideDisplay . '-caption';?>">
+        <div class="<?php echo $block->content->style . '-caption';?>">
           <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
           <div><?php echo $slide->summary;?></div>
           <?php
@@ -67,7 +67,7 @@ if($slides):
       </div>
       <?php $index++; ?>
       <?php endforeach;?>
-    <?php if($block->content->slideDisplay == 'carousel'):?>
+    <?php if($block->content->style == 'carousel'):?>
     </div>
     <?php if(count($slides) > 1):?>
     <a class='left carousel-control' href='#<?php echo $slideId;?>' data-slide='prev'> <i class='icon icon-chevron-left'></i> </a>
