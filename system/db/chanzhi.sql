@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   `type` char(20) NOT NULL,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `account` char(30) DEFAULT NULL,
+  `account` char(30) NOT NULL,
   `from` char(30) NOT NULL,
   `to` char(30) NOT NULL,
   `phone` char(30) NOT NULL,
