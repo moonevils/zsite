@@ -126,6 +126,10 @@ $lang->block->category->fromCurrentList[0] = '否';
 $lang->block->category->showCategoryList['abbr'] = '简称';
 $lang->block->category->showCategoryList['name'] = '全称';
 
+$lang->block->slideDisplay = '展示形式';
+$lang->block->slideDisplayList['carousel'] = '轮播';
+$lang->block->slideDisplayList['tile']     = '平铺';
+
 $lang->block->navTypeList = new stdclass();
 $lang->block->navTypeList->desktop_top   = '桌面';
 $lang->block->navTypeList->desktop_blog  = '博客';
