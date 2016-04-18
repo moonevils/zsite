@@ -17,7 +17,7 @@ $slides  = $this->loadModel('slide')->getList($groupID);
 $slideId = 'slide' . $block->id . '-' . $groupID;
 if($slides):
 ?>
-<div class='block' id='block<?php echo $block->id?>'>
+<div class='block <?php echo $blockClass;?>' id='block<?php echo $block->id?>'>
 <div id='<?php echo $slideId;?>' class='carousel slide' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='<?php echo $groupID?>'>
   <div class='carousel-inner'>
     <?php $height = 0; $index = 0;?>
