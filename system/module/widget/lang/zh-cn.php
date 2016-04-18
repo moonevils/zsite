@@ -49,9 +49,13 @@ $lang->widget->default['3']['title'] = '评论留言';
 $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
+$lang->widget->default['3']['title'] = '蝉知动态';
+$lang->widget->default['3']['type']  = 'chanzhiDynamic';
+$lang->widget->default['3']['grid']  = 4;
+
 $lang->widget->moreLinkList = new stdclass();
 $lang->widget->moreLinkList->latestOrder    = 'order|admin|';
-$lang->widget->moreLinkList->latestThread   = 'forum|amdin|';
+$lang->widget->moreLinkList->latestThread   = 'forum|admin|';
 $lang->widget->moreLinkList->message        = 'message|admin|type=message';
 $lang->widget->moreLinkList->chanzhiDynamic = 'http://www.chanzhi.org/dynamic.html';
 $lang->widget->moreLinkList->html           = '';
