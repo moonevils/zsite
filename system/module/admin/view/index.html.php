@@ -74,7 +74,7 @@
                     <li><a href="<?php echo $this->createLink("widget", "edit", "index=$widget->id"); ?>" data-toggle='modal' class='edit-widget' data-title='<?php echo $widget->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit;?></a></li>
                     <li><a href="javascript:;" class="remove-panel"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
                     <?php if($widget->type == 'html'):?>
-                      <li><a href="javascript:hiddenBlock(<?php echo $index;?>)" class="hidden-panel"><i class='icon-eye-close'></i> <?php echo $lang->index->hidden; ?></a></li>
+                      <li><a href="javascript:hiddenBlock(<?php echo $widget->id;?>)" class="hidden-panel"><i class='icon-eye-close'></i> <?php echo $lang->widget->hidden; ?></a></li>
                     <?php endif;?>
                   </ul>
                 </div>

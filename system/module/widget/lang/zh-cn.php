@@ -18,10 +18,11 @@ $lang->widget->color  = '颜色';
 $lang->widget->status = '状态';
 
 $lang->widget->create    = '创建区块';
+$lang->widget->hidden    = '隐藏';
 $lang->widget->lblWidget = '区块';
 $lang->widget->lblRss    = 'RSS地址';
 $lang->widget->lblNum    = '条数';
-$lang->widget->lblHtml   = 'HTML内容';
+$lang->widget->content   = '内容';
 
 $lang->widget->params = new stdclass();
 $lang->widget->params->name  = '参数名称';
@@ -53,6 +54,7 @@ $lang->widget->moreLinkList->latestOrder    = 'order|admin|';
 $lang->widget->moreLinkList->latestThread   = 'forum|amdin|';
 $lang->widget->moreLinkList->message        = 'message|admin|type=message';
 $lang->widget->moreLinkList->chanzhiDynamic = 'http://www.chanzhi.org/dynamic.html';
+$lang->widget->moreLinkList->html           = '';
 
 $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = '最新订单';

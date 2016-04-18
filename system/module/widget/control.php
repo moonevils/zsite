@@ -29,6 +29,7 @@ class widget extends control
 
         $this->view->title = $this->lang->widget->create;
         $this->view->type  = $type;
+        $this->view->modalWidth  = '700';
         $this->display();
     }
 
