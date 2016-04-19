@@ -62,3 +62,6 @@ $lang->slide->defaultGroup = '默认分组';
 /* Targets setting. */
 $lang->slide->target = new stdclass();
 $lang->slide->target->_blank = '新开窗口';
+
+$lang->slide->globalButton = array();
+$lang->slide->globalButton[1] = '全局按钮';
