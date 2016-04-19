@@ -207,6 +207,16 @@ table.captcha td label {padding: 0;}
 .carousel-caption .lead {margin-top: 10px;}
 .carousel-caption .btn {margin-top: 10px; min-width: 120px;}
 
+.tile {margin-bottom: 10px; overflow: hidden;}
+.tile .item {background-color: transparent; position: relative; margin-bottom: 10px;}
+.tile .item[data-url] {cursor: pointer;}
+.tile > .item, .tile > .item > a {text-align: center;}
+.tile > .item > img, .tile > .item > a > img {min-width: 100%; height: auto; max-height: 600px; max-width: 100%;}
+.tile-caption {max-width: 550px; padding: 20px 0 30px; color: #fff; position: absolute; top: 10%; left: 12%; bottom: 20px; text-align: left; text-shadow: 0 1px 1px rgba(0, 0, 0, .4);}
+.tile-caption ul {margin: 0; padding: 10px 0 10px 20px; line-height: 1.5em;}
+.tile-caption h2, .tile-caption .lead {margin-top: 10px;}
+.tile-caption .btn {margin-top: 10px; min-width: 120px;}
+
 /* Panel actions */
 .panel-actions {margin-top: -6px;margin-right: -12px; float: right;}
 

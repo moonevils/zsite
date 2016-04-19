@@ -209,6 +209,12 @@ foreach (explode('|', $lang->colorPlates) as $value)
             </tr>
             <?php endif;?>
             <?php endif;?>
+            <?php if($type == 'slide'):?>
+            <tr>
+              <th class='w-80px'><?php echo $lang->block->slideDisplay;?></th>
+              <td class='w-p40'><?php echo html::select('params[slideDisplay]', $lang->block->slideDisplayList, '', "class='form-control'")?></td><td></td>
+            </tr>
+            <?php endif;?>
             <tr>
               <th class='w-80px'><?php echo $lang->block->class;?></th>
               <td><?php echo html::input('params[class]', '', "class='form-control' placeholder='{$lang->block->placeholder->class}'");?></td>
