@@ -63,7 +63,7 @@ class slideModel extends model
             ->add('group', $groupID)
             ->add('image', $image)
             ->add('createdDate', helper::now())
-            ->remove('files')
+            ->remove('files, globalButton')
             ->get();
 
         $maxOrder = $this->dao->select('max(`order`) as maxOrder')->from(TABLE_SLIDE)->fetch('maxOrder');
@@ -81,12 +81,17 @@ class slideModel extends model
             ->checkIF($this->post->backgroundType == 'color', 'height', 'ge', 100)
             ->exec();
 
+        $slideID = $this->dao->lastInsertId();
         if($image and empty($_POST['image'])) 
         {
-            $slideID = $this->dao->lastInsertId();
             $pathname = str_replace('/data/', '', $image);
             $this->dao->update(TABLE_FILE)->set('objectID')->eq($slideID)->where('pathname')->eq($pathname)->exec();
         }
+
+        $group = $this->loadModel('tree')->getByID($groupID);
+        $globalButton = json_decode($group->desc, true);
+        $globalButton[$slideID] = $this->post->globalButton;
+        $this->dao->update(TABLE_CATEGORY)->set('desc')->eq(helper::jsonEncode($globalButton))->where('id')->eq($groupID)->exec();
 
         return !dao::isError();
     }
@@ -107,7 +112,7 @@ class slideModel extends model
             ->stripTags('summary', $this->config->allowedTags->front)
             ->setIf(!empty($image), 'image', $image)
             ->setDefault('target', 0)
-            ->remove('files')
+            ->remove('files,globalButton')
             ->get();
 
         $data->label        = helper::jsonEncode(array_values($data->label));
@@ -127,6 +132,11 @@ class slideModel extends model
             $pathname = str_replace('/data/', '', $image);
             $this->dao->update(TABLE_FILE)->set('objectID')->eq($id)->where('pathname')->eq($pathname)->exec();
         }
+
+        $group = $this->loadModel('tree')->getByID($slide->group);
+        $globalButton = json_decode($group->desc, true);
+        $globalButton[$id] = $this->post->globalButton;
+        $this->dao->update(TABLE_CATEGORY)->set('desc')->eq(helper::jsonEncode($globalButton))->where('id')->eq($slide->group)->exec();
 
         return !dao::isError();
     }

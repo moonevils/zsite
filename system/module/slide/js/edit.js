@@ -21,6 +21,7 @@ $(document).ready(function()
     });
 
     $('.button-target').change();
+    $('.global-button').change();
 
     $('#imageShow').hide();
     $('#uploadFile').hide();
