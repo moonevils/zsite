@@ -32,8 +32,6 @@ class admin extends control
             $widget->params = json_decode($widget->params);
             if(empty($widget->params)) $widget->params = new stdclass();
 
-            if(strpos('dynamic, allEntries, html, rss', $widget->type) !== false) continue;
-
             $widget->moreLink = zget($this->lang->widget->moreLinkList, $widget->type, '');
         }
 

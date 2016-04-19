@@ -83,6 +83,7 @@ $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
 $lang->more           = 'More';
+$lang->refresh        = 'Refresh';
 $lang->actions        = 'Actions';
 $lang->feature        = 'Feature';
 $lang->year           = 'Year';

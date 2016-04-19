@@ -29,6 +29,7 @@ class widget extends control
 
         $this->view->title = $this->lang->widget->create;
         $this->view->type  = $type;
+        $this->view->modalWidth  = '700';
         $this->display();
     }
 
@@ -52,9 +53,10 @@ class widget extends control
         $hiddenWidgets = $this->widget->getHiddenWidgets();
 
         if($type) $widget->type = $type;
-        $this->view->widget = $widget;
-        $this->view->title  = $this->lang->widget->editWidget;
-        $this->view->type   = $widget->type;
+        $this->view->widget     = $widget;
+        $this->view->title      = $this->lang->widget->editWidget;
+        $this->view->type       = $widget->type;
+        $this->view->modalWidth = 700;
         $this->display();
     }
 
@@ -70,45 +72,57 @@ class widget extends control
         $widget = $this->widget->getByID($widget);
         if(empty($widget)) return false;
 
-        if($widget->type == 'html')
-        {
-            die( "<div class='article-content'>" . htmlspecialchars_decode($widget->params->html) .'</div>');
-        }
-        elseif($widget->type == 'rss')
-        {
-            die($this->widget->getRss($widget));
-        }
-
         $this->app->loadClass('pager', true);
         $this->view->widget = $widget;       
         $this->display();
     }
 
     /**
-     * Sort widget.
+     * Sort block.
      * 
      * @param  string    $oldOrder 
      * @param  string    $newOrder 
-     * @param  string    $app 
+     * @param  string    $module 
      * @access public
      * @return void
      */
-    public function sort($oldOrder, $newOrder, $app = 'sys')
+    public function sort($orders, $app = 'sys')
     {
-        $oldOrder  = explode(',', $oldOrder);
-        $newOrder  = explode(',', $newOrder);
-        $orderList = $this->widget->getWidgetList($app);
-
-        foreach($oldOrder as $key => $oldIndex)
+        $orders    = explode(',', $orders);
+        $blockList = $this->widget->getWidgetList($app);
+        
+        foreach ($orders as $order => $blockID)
         {
-            if(!isset($orderList[$oldIndex])) continue;
-            $order = $orderList[$oldIndex];
-            $order->order = $newOrder[$key];
-            $this->dao->replace(TABLE_BLOCK)->data($order)->exec();
+            $block = $blockList[$blockID];
+            if(!isset($block)) continue;
+            $block->order = $order;
+            $this->dao->replace(TABLE_WIDGET)->data($block)->exec();
         }
 
         if(dao::isError()) $this->send(array('result' => 'fail'));
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Resize block
+     * @param  integer $id
+     * @access public
+     * @return void
+     */
+    public function resize($id, $grid = 4)
+    {
+        $block = $this->widget->getByID($id);
+        if($block)
+        {
+            $block->grid = $grid;
+            $this->dao->replace(TABLE_WIDGET)->data($block)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail'));
+            $this->send(array('result' => 'success'));
+        }
+        else
+        {
+            $this->send(array('result' => 'fail'));
+        }
     }
 
     /**
@@ -122,9 +136,9 @@ class widget extends control
      */
     public function delete($id)
     {
-        $this->dao->delete()->from(TABLE_BLOCK)->where('`id`')->eq($index)->andWhere('account')->eq($this->app->user->account)->exec();
+        $this->dao->delete()->from(TABLE_WIDGET)->where('`id`')->eq($id)->andWhere('account')->eq($this->app->user->account)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'locate' => helper::createLink('admin')));
     }
 
     /**
@@ -138,7 +152,7 @@ class widget extends control
      */
     public function hide($id)
     {
-        $this->dao->update(TABLE_BLOCK)->set('hidden')->eq(1)->where('`order`')->eq($index)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
+        $this->dao->update(TABLE_WIDGET)->set('hidden')->eq(1)->where('`order`')->eq($id)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }
