@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <th class='w-100px'><?php echo $lang->widget->title?></th>
-    <td><?php echo html::input('title', $widget ? $widget->title : zget($lang->widget->typeList, $type, ''), "class='form-control'")?></td>
+    <td><?php echo html::input('title', zget($lang->widget->typeList, $type, ''), "class='form-control'")?></td>
   </tr>
   <tr>
     <th><?php echo $lang->widget->style;?></th>
@@ -39,13 +39,12 @@
       <div class='w-240px'>
         <div class='input-group'>
           <span class='input-group-addon'><?php echo $lang->widget->grid;?></span>
-          <?php echo html::select('grid', $config->widget->gridOptions, $widget ? $widget->grid : 4, "class='form-control'")?>
+          <?php echo html::select('grid', $config->widget->gridOptions, 4, "class='form-control'")?>
           <div class='input-group-btn widget'>
-            <?php $btn = isset($widget->params->color) ? 'btn-' . $widget->params->color : 'btn-default'?>
-            <button type='button' class="btn <?php echo $btn;?> dropdown-toggle" data-toggle='dropdown'>
+            <button type='button' class="btn btn-default dropdown-toggle" data-toggle='dropdown'>
               <?php echo $lang->widget->color;?> <span class='caret'></span>
             </button>
-            <?php echo html::hidden('params[color]', isset($widget->params->color) ? $widget->params->color : 'default');?>
+            <?php echo html::hidden('params[color]', 'default');?>
             <div class='dropdown-menu buttons'>
               <li><button type='button' data-id='default' class='btn btn-widget btn-default'>&nbsp;</li>
               <li><button type='button' data-id='primary' class='btn btn-widget btn-primary'>&nbsp;</li>
@@ -64,11 +63,9 @@
     <th></th>
     <td>
       <?php echo html::submitButton();?>
-      <?php echo html::hidden('order', $index);?>
       <?php echo html::hidden('type', $type);?>
     </td>
   </tr>
 </table>
 </form>
-<?php js::set('index', $index)?>
 <?php include '../../common/view/footer.modal.html.php';?>
