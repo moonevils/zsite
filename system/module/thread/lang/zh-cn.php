@@ -37,6 +37,7 @@ $lang->thread->show           = '显示';
 $lang->thread->transfer       = '转移';
 $lang->thread->switchStatus   = '隐藏/显示';
 $lang->thread->deleteFile     = '删除附件';
+$lang->thread->unreplied      = "<span class='text-important'>未回复</span>";
 
 $lang->thread->sticks[0] = '不置顶';
 $lang->thread->sticks[1] = '版块置顶';

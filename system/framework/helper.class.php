@@ -496,7 +496,6 @@ class helper
     public static function getSiteCode($domain)
     {
         global $config;
-
         if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':')); // Remove port from domain.
         $domain = strtolower($domain);
 

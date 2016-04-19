@@ -51,9 +51,9 @@ $(function()
         else
         {
             $('[name*=searchbar]').find('[value=besideSlogan]').prop('disabled', true).hide();
-            $('[name*=searchbar]').val('topRight');
         }
     });
+
     $('[name*=nav]').change();
 
     $('#compatible').change(function()
