@@ -1,4 +1,15 @@
 ALTER TABLE `eps_message` CHANGE account account char(30) NOT NULL;
+ALTER TABLE `eps_address`    ADD index `lang` (`lang`);
+ALTER TABLE `eps_cart`       ADD index `lang` (`lang`);
+ALTER TABLE `eps_order`      ADD index `lang` (`lang`);
+ALTER TABLE `eps_oauth`      ADD index `lang` (`lang`);
+ALTER TABLE `eps_usergroup`  ADD index `lang` (`lang`);
+ALTER TABLE `eps_group`      ADD index `lang` (`lang`);
+ALTER TABLE `eps_relation`   ADD index `lang` (`lang`);
+ALTER TABLE `eps_statregion` ADD index `lang` (`lang`);
+ALTER TABLE `eps_score`      ADD index `lang` (`lang`);
+ALTER TABLE `eps_log`        ADD index `lang` (`lang`);
+ALTER TABLE `eps_blacklist`  ADD index `lang` (`lang`);
 ALTER TABLE `eps_layout` ADD object char(30) NOT NULL AFTER `region`;
 ALTER TABLE `eps_order` CHANGE express express char(30) NOT NULL AFTER waybill;
 -- DROP TABLE IF EXISTS `eps_widget`;
