@@ -22,8 +22,14 @@ class articleModel extends model
     public function getByID($articleID, $replaceTag = true)
     {   
         /* Get article self. */
-        $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
-        if(!$article) $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
+        if(!is_numeric($articleID))
+        {
+            $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
+        }
+        else
+        {
+            $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
+        }
 
         if(!$article) return false;
         
@@ -35,7 +41,7 @@ class articleModel extends model
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t1.type')->eq($article->type)
-            ->andWhere('t1.id')->eq($articleID)
+            ->andWhere('t1.id')->eq($article->id)
             ->fetchAll('id');
 
         /* Get article path to highlight main nav. */
@@ -59,8 +65,8 @@ class articleModel extends model
     public function getPageByID($pageID)
     {
         /* Get article self. */
-        $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($pageID)->andWhere('type')->eq('page')->fetch();
-        if(!$page) $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->fetch();
+        if(!is_nemeric($pageID)) $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($pageID)->andWhere('type')->eq('page')->fetch();
+        if(is_nemeric($pageID))  $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->fetch();
 
         if(!$page) return false;
         
@@ -80,10 +86,11 @@ class articleModel extends model
      * @param  array   $categories 
      * @param  string  $orderBy 
      * @param  object  $pager 
+     * @param  int     $limit 
      * @access public
      * @return array
      */
-    public function getList($type, $categories, $orderBy, $pager = null)
+    public function getList($type, $categories, $orderBy, $pager = null, $limit = 0)
     {
         $searchWord = $this->get->searchWord;
         $categoryID = $this->get->categoryID;
@@ -102,6 +109,7 @@ class articleModel extends model
                 ->orWhere('content')->like("%{$searchWord}%")->andWhere('type')->eq($type)
                 ->fi()
                 ->orderBy($orderBy)
+                ->beginIf($limit)->limit($limit)->fi()
                 ->page($pager)
                 ->fetchAll('id');
         }
@@ -113,6 +121,7 @@ class articleModel extends model
                 ->andWhere('addedBy')->eq($this->app->user->account)
                 ->fi()
                 ->orderBy($orderBy)
+                ->beginIf($limit)->limit($limit)->fi()
                 ->page($pager)
                 ->fetchAll('id');
         }
@@ -127,8 +136,8 @@ class articleModel extends model
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
                 ->where('type')->eq($type)
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-                ->andWhere('addedDate')->le(helper::now())
                 ->andWhere('status')->eq('normal')
+                ->andWhere('addedDate')->le(helper::now())
                 ->fi()
                 ->beginIf(!empty($categories))->andWhere('id')->in(array_keys($articleIdList))->fi()
 
@@ -142,6 +151,7 @@ class articleModel extends model
 
                 ->orderBy($orderBy)
                 ->page($pager)
+                ->beginIf($limit)->limit($limit)->fi()
                 ->fetchAll('id');
         }
         if(!$articles) return array();
@@ -152,43 +162,17 @@ class articleModel extends model
     /**
      * Get page pairs.
      * 
-     * @param string $pager 
      * @access public
      * @return array
      */
-    public function getPagePairs($pager = null)
+    public function getPagePairs()
     {
         return $this->dao->select('id, title')->from(TABLE_ARTICLE)
             ->where('type')->eq('page')
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('status')->eq('normal')
             ->orderBy('id_desc')
-            ->page($pager, false)
             ->fetchPairs();
-    }
-
-    /**
-     * Get article pairs.
-     * 
-     * @param string $modules 
-     * @param string $orderBy 
-     * @param string $pager 
-     * @access public
-     * @return array
-     */
-    public function getPairs($categories, $orderBy, $pager = null)
-    {
-        return $this->dao->select('t1.id, t1.title, t1.alias')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-            ->where('1=1')
-            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-            ->andWhere('t1.addedDate')->le(helper::now())
-            ->andWhere('t1.status')->eq('normal')
-            ->fi()
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-            ->orderBy($orderBy)
-            ->page($pager, false)
-            ->fetchAll('id');
     }
 
     /**
@@ -208,9 +192,7 @@ class articleModel extends model
         if(!is_array($categories)) $categories = explode(',', $categories);
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
-        $this->app->loadClass('pager', true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($type, $family, 'sticky_desc, views_desc', $pager);
+        return $this->getList($type, $family, 'sticky_desc, views_desc', null, $count);
     }
 
     /**
@@ -231,8 +213,7 @@ class articleModel extends model
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
         $this->app->loadClass('pager', true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($type, $family, 'sticky_desc, addedDate_desc', $pager);
+        return $this->getList($type, $family, 'sticky_desc, addedDate_desc', null, $count);
     }
 
     /**
@@ -246,8 +227,7 @@ class articleModel extends model
     public function getPageList($count)
     {
         $this->app->loadClass('pager', true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList('page', '', '`order` desc', $pager);
+        return $this->getList('page', '', '`order` desc', null, $count);
     }
 
     /**
@@ -286,24 +266,71 @@ class articleModel extends model
      */
     public function processArticleList($articles, $type)
     {
-        $categories = $this->dao->select('t2.id, t2.name, t2.abbr, t2.alias, t1.id AS article')
+        $articleIdList = array_keys($articles);
+        $categories    = $this->dao->select('t2.id, t2.name, t2.abbr, t2.alias, t1.id AS article')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq($type)
-            ->andWhere('t1.id')->in(array_keys($articles))
+            ->andWhere('t1.id')->in($articleIdList)
             ->fetchGroup('article', 'id');
 
-        /* Assign categories to it's article. */
+        /* Get images for these articles. */
+        $images = $this->loadModel('file')->getByObject($type, $articleIdList, $isImage = true);
+
+         /* Assign summary, category to it's article. */
         foreach($articles as $article)
         {
+            $article->summary    = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
             $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
             $article->category   = current($article->categories);
         }
 
-        /* Get images for these articles. */
-        $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
+        return $articles;
+    }
 
-        /* Assign images to it's article. */
+    /**
+     * Compute comments of an article list.
+     * 
+     * @param  array    $articles 
+     * @param  string   $type
+     * @access public
+     * @return array
+     */
+    public function computeComments($articles, $type = 'article')
+    {
+        if(empty($articles)) return $articles;
+        if(!commonModel::isAvailable('message')) return $articles;
+        $articleIdList = array_keys($articles);
+
+        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
+            ->where('type')->eq('comment')
+            ->andWhere('objectType')->eq($type)
+            ->andWhere('objectID')->in($articleIdList)
+            ->andWhere('status')->eq(1)
+            ->groupBy('objectID')
+            ->fetchPairs('objectID', 'count');
+
+        foreach($articles as $article)
+        {
+            $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
+        }
+
+        return $articles;
+    }
+
+    /**
+     * Process images of article list.
+     * 
+     * @param  array    $articles 
+     * @access public
+     * @return void
+     */
+    public function processImages($articles, $type)
+    {
+        if(empty($articles)) return $articles;
+        $articleIdList = array_keys($articles);
+        $images = $this->loadModel('file')->getByObject($type, $articleIdList, $isImage = true);
+
         foreach($articles as $article)
         {
             if(empty($images[$article->id])) continue;
@@ -313,25 +340,11 @@ class articleModel extends model
             $article->image->primary = $article->image->list[0];
         }
 
-        /* Assign summary to it's article. */
-        foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
-
-        /* Assign comments to it's article. */
-        $articleIdList = array_keys($articles);
-        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
-            ->where('type')->eq('comment')
-            ->andWhere('objectType')->eq('article')
-            ->andWhere('objectID')->in($articleIdList)
-            ->andWhere('status')->eq(1)
-            ->groupBy('objectID')
-            ->fetchPairs('objectID', 'count');
-        foreach($articles as $article) $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
- 
         return $articles;
     }
 
     /**
-     * Get the prev and next ariticle.
+     * Get the prev and next article.
      * 
      * @param  int    $current  the current article id.
      * @param  int    $category the category id.
