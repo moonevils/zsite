@@ -85,30 +85,51 @@ class widget extends control
     }
 
     /**
-     * Sort widget.
+     * Sort block.
      * 
      * @param  string    $oldOrder 
      * @param  string    $newOrder 
-     * @param  string    $app 
+     * @param  string    $module 
      * @access public
      * @return void
      */
-    public function sort($oldOrder, $newOrder, $app = 'sys')
+    public function sort($orders, $app = 'sys')
     {
-        $oldOrder  = explode(',', $oldOrder);
-        $newOrder  = explode(',', $newOrder);
-        $orderList = $this->widget->getWidgetList($app);
-
-        foreach($oldOrder as $key => $oldIndex)
+        $orders    = explode(',', $orders);
+        $blockList = $this->widget->getWidgetList($app);
+        
+        foreach ($orders as $order => $blockID)
         {
-            if(!isset($orderList[$oldIndex])) continue;
-            $order = $orderList[$oldIndex];
-            $order->order = $newOrder[$key];
-            $this->dao->replace(TABLE_BLOCK)->data($order)->exec();
+            $block = $blockList[$blockID];
+            if(!isset($block)) continue;
+            $block->order = $order;
+            $this->dao->replace(TABLE_WIDGET)->data($block)->exec();
         }
 
         if(dao::isError()) $this->send(array('result' => 'fail'));
         $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Resize block
+     * @param  integer $id
+     * @access public
+     * @return void
+     */
+    public function resize($id, $grid = 4)
+    {
+        $block = $this->widget->getByID($id);
+        if($block)
+        {
+            $block->grid = $grid;
+            $this->dao->replace(TABLE_WIDGET)->data($block)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail'));
+            $this->send(array('result' => 'success'));
+        }
+        else
+        {
+            $this->send(array('result' => 'fail'));
+        }
     }
 
     /**
