@@ -92,6 +92,7 @@ class slide extends control
     public function edit($id)
     {
         $slide = $this->slide->getByID($id);
+        $group = $this->loadModel('tree')->getByID($slide->group);
 
         if($_POST)
         {
@@ -100,9 +101,10 @@ class slide extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->title = $this->lang->slide->edit;
-        $this->view->id    = $id;
-        $this->view->slide = $slide;
+        $this->view->title        = $this->lang->slide->edit;
+        $this->view->id           = $id;
+        $this->view->slide        = $slide;
+        $this->view->globalButton = $group->desc ? json_decode($group->desc, true) : array();
         $this->display();
     }
 
