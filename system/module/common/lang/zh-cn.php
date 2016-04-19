@@ -83,6 +83,7 @@ $lang->send           = '发送';
 $lang->preview        = '预览';
 $lang->goback         = '返回';
 $lang->more           = '更多';
+$lang->refresh        = '刷新';
 $lang->actions        = '操作';
 $lang->feature        = '未来';
 $lang->year           = '年';
