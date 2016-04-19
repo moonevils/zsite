@@ -49,7 +49,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
             <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($stick->addedDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($stick->addedDate));?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $stick->author);?>'><i class="icon-user"></i> <?php echo $stick->author;?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $stick->views);?>'><i class="icon-eye-open"></i> <?php echo $stick->views;?></span>
-            <?php if($stick->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $stick->comments);?>'><i class="icon-comments-alt"></i> <?php echo $stick->comments;?></span></a><?php endif;?>
+            <?php if(commonModel::isAvailable('message') and $stick->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $stick->comments);?>'><i class="icon-comments-alt"></i> <?php echo $stick->comments;?></span></a><?php endif;?>
           </div>
         </div>
       <?php unset($articles[$stick->id]);?>
@@ -74,7 +74,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
             <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class="icon-user"></i> <?php echo $article->author;?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $article->views);?>'><i class="icon-eye-open"></i> <?php echo $article->views;?></span>
-            <?php if($article->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $article->comments);?>'><i class="icon-comments-alt"></i> <?php echo $article->comments;?></span></a><?php endif;?>
+            <?php if(commonModel::isAvailable('message') and $article->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $article->comments);?>'><i class="icon-comments-alt"></i> <?php echo $article->comments;?></span></a><?php endif;?>
           </div>
         </div>
       <?php endforeach;?>
