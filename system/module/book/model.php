@@ -27,6 +27,7 @@ class bookModel extends model
             $this->lang->book->menu->$bookID = $book->title . '|book|admin|book=' . $bookID;
         }
 
+        $this->lang->book->menu->setting    = $this->lang->book->setting . '|book|setting|'; 
         $this->lang->book->menu->createBook = $this->lang->book->createBook . '|book|create|'; 
         $this->lang->menuGroups->tree = 'book';
     }
@@ -90,6 +91,17 @@ class bookModel extends model
     public function getBookList()
     {
         return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->fetchAll('id');
+    }
+
+    /**
+     * Get book pairs.
+     *
+     * @access public
+     * @return array
+     */
+    public function getBookPairs()
+    {
+        return $this->dao->select('id, title')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->fetchPairs();
     }
 
     /**
