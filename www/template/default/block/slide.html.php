@@ -15,6 +15,8 @@ $block->content = json_decode($block->content);
 $groupID = !empty($block->content->group) ? $block->content->group : '';
 $slides  = $this->loadModel('slide')->getList($groupID);
 $slideId = 'slide' . $block->id . '-' . $groupID;
+$group   = $this->loadModel('tree')->getByID($groupID);
+$globalButtons = json_decode($group->desc, true);
 if($slides):
 ?>
 <div class='block <?php echo $blockClass;?>' id='block<?php echo $block->id?>'>
@@ -38,7 +40,21 @@ if($slides):
         <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
         <div><?php echo $slide->summary;?></div>
         <?php
+        foreach($globalButtons as $id => $globalButton)
+        {
+            foreach($globalButton as $key => $global)
+            {
+                if(!$global) continue;
+                if(trim($slides[$id]->label[$key]) != '')
+                {
+                    if($slides[$id]->buttonUrl[$key])  echo html::a($slides[$id]->buttonUrl[$key], $slides[$id]->label[$key], "class='btn btn-lg btn-{$slides[$id]->buttonClass[$key]}' target='{$slides[$id]->buttonTarget[$key]}'");
+                    if(!$slides[$id]->buttonUrl[$key]) echo html::commonButton($slides[$id]->label[$key], "btn btn-lg btn-{$slides[$id]->buttonClass[$key]}");
+                }
+            }
+        }
+
         foreach($slide->label as $key => $label):
+        if($globalButtons[$slide->id][$key]) continue;
         if(trim($label) != '')
         {
             if($slide->buttonUrl[$key])  echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}' target='{$slide->buttonTarget[$key]}'");
