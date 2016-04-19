@@ -213,6 +213,7 @@ define('TABLE_STATREGION',     $config->db->prefix . 'statregion');
 define('TABLE_SCORE',          $config->db->prefix . 'score');
 define('TABLE_BLACKLIST',      $config->db->prefix . 'blacklist');
 define('TABLE_OPERATIONLOG',   $config->db->prefix . 'operationlog');
+define('TABLE_WIDGET',         $config->db->prefix . 'widget');
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');

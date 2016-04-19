@@ -19,28 +19,27 @@ class admin extends control
      */
     public function index()
     {
-        $this->app->loadConfig('product');
-        $messages = new stdclass();
-        if(commonModel::isAvailable('forum'))
+        $widgets = $this->loadModel('widget')->getWidgetList();
+
+        /* Init widget when vist index first. */
+        if(empty($widgets) and empty($this->config->widgetInited))
         {
-            $this->view->threads     = $this->loadModel('thread')->getThreads();
-            $this->view->threadReply = $this->loadModel('reply')->getReplies();
+            if($this->widget->initWidget()) die(js::reload());
         }
-        if(commonModel::isAvailable('message'))
+
+        foreach($widgets as $key => $widget)
         {
-            $messages->comment = $this->loadModel('message')->getMessages('comment');
-            $messages->message = $this->loadModel('message')->getMessages('message');
-            $messages->reply   = $this->loadModel('message')->getMessages('reply');
+            $widget->params = json_decode($widget->params);
+            if(empty($widget->params)) $widget->params = new stdclass();
+
+            if(strpos('dynamic, allEntries, html, rss', $widget->type) !== false) continue;
+
+            $widget->moreLink = zget($this->lang->widget->moreLinkList, $widget->type, '');
         }
-        if(commonModel::isAvailable('order')) $this->view->orders = $this->loadModel('order')->getOrders();
-        if(commonModel::isAvailable('submittion')) $this->view->submittionCount = $this->loadModel('article')->getSubmittionCount();
-        $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
-        $this->view->todayReport       = $this->loadModel('stat')->getTodayReport();
-        $this->view->yestodayReport    = $this->loadModel('stat')->getYestodayReport();
-        $this->view->ignoreUpgrade     = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
-        $this->view->checkLocation     = $this->loadModel('user')->checkAllowedLocation();
-        $this->view->currencySymbol    = $this->config->product->currencySymbol;
-        $this->view->messages          = $messages;
+
+        $this->view->ignoreUpgrade = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
+        $this->view->checkLocation = $this->loadModel('user')->checkAllowedLocation();
+        $this->view->widgets        = $widgets;
         $this->display();
     }
 

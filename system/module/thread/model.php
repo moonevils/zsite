@@ -72,7 +72,30 @@ class threadModel extends model
             ->fetchAll('id');
 
         if(!$threads) return array();
+        $this->setRealNames($threads);
 
+        return $this->process($threads);
+    }
+
+    /**
+     * Get thread fist for widget 
+     * 
+     * @param  int    $limit 
+     * @access public
+     * @return void
+     */
+    public function getListForWidget($limit)
+    {
+         $threads = $this->dao->select('*')->from(TABLE_THREAD)
+            ->where(1)
+            ->beginIf($this->config->forum->postReview == 'open')
+            ->andWhere('status')->eq('wait')
+            ->fi()
+            ->orderBy('id desc')
+            ->limit($limit)
+            ->fetchAll('id');
+
+        if(!$threads) return array();
         $this->setRealNames($threads);
 
         return $this->process($threads);
@@ -658,26 +681,5 @@ EOT;
         }
 
         return $board;
-    }
-
-    /**
-     * Get lastest threads.
-     * 
-     * @access public
-     * @return array 
-     */
-    public function getThreads()
-    {
-        $this->app->loadConfig('forum');
-        $threads = $this->dao->select('*')->from(TABLE_THREAD)
-            ->where('addedDate')->like(date("Y-m-d") . '%')
-            ->beginIf($this->config->forum->postReview == 'open')
-            ->andWhere('status')->eq('wait')
-            ->fi()
-            ->orderBy('`addedDate` desc')
-            ->limit(5)
-            ->fetchAll('id');
-
-        return $threads;
     }
 }
