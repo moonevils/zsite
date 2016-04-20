@@ -126,9 +126,9 @@ $lang->block->category->fromCurrentList[0] = '否';
 $lang->block->category->showCategoryList['abbr'] = '简称';
 $lang->block->category->showCategoryList['name'] = '全称';
 
-$lang->block->slideDisplay = '展示形式';
-$lang->block->slideDisplayList['carousel'] = '轮播';
-$lang->block->slideDisplayList['tile']     = '平铺';
+$lang->block->slideStyle = '展示形式';
+$lang->block->slideStyleList['carousel'] = '横向轮播';
+$lang->block->slideStyleList['tile']     = '竖向展开';
 
 $lang->block->navTypeList = new stdclass();
 $lang->block->navTypeList->desktop_top   = '桌面';
