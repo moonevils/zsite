@@ -1,6 +1,7 @@
 /* books */
 .books {position: relative;}
 .books dl { margin:0 0 0 25px; line-height: 20px; }
+.books > dl {margin-left: 0;}
 .books .article { padding: 0; border: none; box-shadow: none; margin: 0}
 .book,.chapter,.books .article { line-height: 30px; padding: 3px 0; transition: all 0.3s; border-radius: 4px}
 .book:before { content: '\e62a'; font-family: ZenIcon; display: inline-block; margin-right: 10px; font-weight: normal; font-size: 14px; width: 30px; height: 30px; color: #999; text-align: center; border: 1px solid #e1e1e1; border-radius: 15px; }
@@ -26,3 +27,4 @@
 dl.drop-area {background-color: #f1f1f1}
 .show-empty-catalog .catalog-empty {display: block;}
 .books > .catalog > .actions > .sort-handle {display: none}
+.book-menu{margin: 0;}

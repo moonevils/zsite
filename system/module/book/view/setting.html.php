@@ -22,7 +22,7 @@
       </tr>
       <tr>
         <th><?php echo $lang->book->chapterList;?></th>
-        <td><?php echo html::select('chapter', $lang->book->chapterTypeList, isset($this->config->book->chapterType) ? $this->config->book->chapterType : '', "class='form-control'");?></td>
+        <td><?php echo html::select('chapter', $lang->book->chapterTypeList, isset($this->config->book->chapter) ? $this->config->book->chapter : '', "class='form-control'");?></td>
         <td></td>
       </tr>
       <tr>
