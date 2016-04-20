@@ -212,7 +212,8 @@ CREATE TABLE IF NOT EXISTS `eps_group` (
   `role` char(30) NOT NULL default '',
   `desc` char(255) NOT NULL default '',
   `lang` char(30) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_grouppriv`;
@@ -269,7 +270,8 @@ CREATE TABLE IF NOT EXISTS `eps_oauth` (
   `provider` varchar(30) NOT NULL,
   `openID` varchar(60) NOT NULL,
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `account` (`account`,`provider`,`openID`)
+  UNIQUE KEY `account` (`account`,`provider`,`openID`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_product`;
@@ -315,7 +317,8 @@ CREATE TABLE IF NOT EXISTS `eps_relation` (
   `id` mediumint(9) NOT NULL,
   `category` smallint(5) NOT NULL,
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `relation` (`type`,`id`,`category`)
+  UNIQUE KEY `relation` (`type`,`id`,`category`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_reply`;
@@ -449,7 +452,8 @@ CREATE TABLE IF NOT EXISTS `eps_statregion`(
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `region` (`country`, `province`, `city`),
-  KEY `time` (`timeType`, `timeValue`)
+  KEY `time` (`timeType`, `timeValue`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_tag`;
@@ -547,7 +551,8 @@ CREATE TABLE IF NOT EXISTS `eps_usergroup` (
   `account` char(30) NOT NULL default '',
   `group` mediumint(8) unsigned NOT NULL default '0',
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `account` (`account`,`group`)
+  UNIQUE KEY `account` (`account`,`group`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_log`;
@@ -562,7 +567,8 @@ CREATE TABLE IF NOT EXISTS `eps_log` (
   `ext` text NOT NULL,
   `type` varchar(30) NOT NULL DEFAULT 'adminlogin',
   `lang` char(30) NOT NULL DEFAULT 'all',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_public`;
@@ -635,6 +641,7 @@ CREATE TABLE IF NOT EXISTS `eps_score` (
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
   KEY `method` (`method`),
+  KEY `lang` (`lang`),
   KEY `objectType` (`objectType`),
   KEY `objectID` (`objectID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
@@ -694,7 +701,8 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   KEY `account` (`account`),
   KEY `status` (`status`),
   KEY `createdDate` (`createdDate`),
-  KEY `deliveriedDate` (`deliveriedDate`)
+  KEY `deliveriedDate` (`deliveriedDate`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_order_product`;
@@ -708,7 +716,8 @@ CREATE TABLE IF NOT EXISTS `eps_order_product` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `orderID` (`orderID`),
-  KEY `productID` (`productID`)
+  KEY `productID` (`productID`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_cart`;
@@ -719,7 +728,8 @@ CREATE TABLE IF NOT EXISTS `eps_cart` (
   `count` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `account` (`account`)
+  KEY `account` (`account`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_address`;
@@ -732,7 +742,8 @@ CREATE TABLE IF NOT EXISTS `eps_address` (
   `zipcode` char(6) NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `account` (`account`)
+  KEY `account` (`account`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_blacklist`;
@@ -744,7 +755,8 @@ CREATE TABLE IF NOT EXISTS  `eps_blacklist` (
   `times` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   UNIQUE KEY `identity` (`type`, `identity`, `lang`),
-  KEY `expiredDate` (`expiredDate`)
+  KEY `expiredDate` (`expiredDate`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_operationlog`;
