@@ -41,9 +41,14 @@ class bookModel extends model
      */
     public function getBookByID($id)
     {
-        $book = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($id)->andWhere('type')->eq('book')->fetch();
-        if(!$book) $book = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($id)->fetch();
-        return $book;
+        if(is_numeric($id))
+        {
+            return $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($id)->andWhere('type')->eq('book')->fetch();
+        }
+        else
+        {
+            return $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($id)->fetch();
+        }
     }
 
     /**
