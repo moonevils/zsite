@@ -218,8 +218,8 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <?php endif;?>
               <?php if($type == 'slide'):?>
               <tr>
-                <th class='w-80px'><?php echo $lang->block->slideDisplay;?></th>
-                <td class='w-p40'><?php echo html::select('params[slideDisplay]', $lang->block->slideDisplayList, isset($block->content->slideDisplay) ? $block->content->slideDisplay : '', "class='form-control'")?></td><td></td>
+                <th class='w-80px'><?php echo $lang->block->slideStyle;?></th>
+                <td class='w-p40'><?php echo html::select('params[style]', $lang->block->slideStyleList, isset($block->content->style) ? $block->content->style : '', "class='form-control'")?></td><td></td>
               </tr>
               <?php endif;?>
               <tr>
