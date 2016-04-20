@@ -3,6 +3,32 @@
 <?php js::set('objectID', $article->id);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
+<?php if($this->config->book->chapter == 'left'):?>
+<div class='row'>
+  <div class='col-md-3'>
+    <div class='panel'>
+      <?php if(!empty($book) && $book->title): ?>
+      <div class='panel-heading'>
+        <strong class='title'><?php echo $book->title;?></strong>
+        <div class='panel-actions book-menu'>
+          <div class='dropdown'>
+            <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><span class='caret'></span></a>
+            <ul role='menu' class='dropdown-menu pull-right'>
+              <?php foreach($books as $bookMenu):?>
+              <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias"), $bookMenu->title);?></li>
+              <?php endforeach;?>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <?php endif; ?>
+      <div class='panel-body'>
+        <div class='books'><?php if(!empty($allCatalog)) echo $allCatalog;?></div>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-9'>
+<?php endif;?>
 <div class='article' id='book' data-id='<?php echo $article->id?>'>
   <header>
     <h2><?php echo $article->title;?></h2>
@@ -44,6 +70,10 @@
 </div>
 <?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'></div>
+<?php endif;?>
+<?php if($this->config->book->chapter == 'left'):?>
+  </div>
+</div>
 <?php endif;?>
 <div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
