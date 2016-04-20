@@ -24,8 +24,24 @@ class book extends control
      */
     public function index()
     {
-        $book = $this->book->getFirstBook();
-        $this->locate(inlink('browse', "nodeID=$book->id", "book=$book->alias"));
+        if(isset($this->config->book->index) and $this->config->book->index == 'list')
+        {
+            $this->view->title = $this->lang->book->list;
+            $this->view->books = $this->book->getBookList();
+            $this->display();
+        }
+        else
+        {
+            if(isset($this->config->book->index) and $this->config->book->index != 'list')
+            {
+                $book = $this->book->getBookByID($this->config->book->index);
+            }
+            else
+            {
+                $book = $this->book->getFirstBook();
+            }
+            $this->locate(inlink('browse', "nodeID=$book->id", "book=$book->alias"));
+        }
     }
 
     /**
@@ -100,9 +116,9 @@ class book extends control
     {
         $this->book->setMenu();
         
-        if($nodeID)  ($node = $this->book->getNodeByID($nodeID))   && $book   = $node->book;
-        if(!$nodeID or !$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
-        if(!$node)  $this->locate(inlink('create'));
+        if($nodeID) ($node = $this->book->getNodeByID($nodeID)) && $book = $node->book;
+        if(!$nodeID or !$node) ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
+        if(!$node) $this->locate(inlink('create'));
         $this->view->title   = $this->lang->book->common;
         $this->view->book    = $book;
         $this->view->node    = $node;
@@ -255,6 +271,32 @@ class book extends control
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
 
+        $this->display();
+    }
+
+    /**
+     * Setting.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting()
+    {
+        if($_POST)
+        {
+            $data = new stdclass();
+            $data->index      = $this->post->index;
+            $data->chapter    = $this->post->chapter;
+            $data->fullScreen = $this->post->fullScreen;
+            $this->loadModel('setting')->setItems('system.book', $data);
+
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->book->setMenu();
+        $this->view->title = $this->lang->book->setting; 
+        $this->view->books = array('list' => $this->lang->book->list) + $this->book->getBookPairs();
         $this->display();
     }
 }    
