@@ -56,7 +56,18 @@ class book extends control
         $node = $this->book->getNodeByID($nodeID);
         if($node)
         {
-            $book    = $this->book->getBookByNode($node);
+            $book = $this->book->getBookByNode($node);
+            if($this->config->book->chapter == 'left')
+            {
+                $articles = $this->book->getArticleIDs($book->id);
+                if($articles)
+                {
+                    $articleID = substr($articles, 0, 1);
+                    $article   = $this->book->getNodeByID($firstArticle);
+                    $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias"));
+                }
+                $this->view->hasArticles = false;
+            }
             $serials = $this->book->computeSN($book->id);
 
             $this->view->title      = $book->title;
@@ -66,6 +77,7 @@ class book extends control
             $this->view->serials    = $serials;
             $this->view->books      = $this->book->getBookList();
             $this->view->catalog    = $this->book->getFrontCatalog($node->id, $serials);
+            $this->view->allCatalog = $this->book->getFrontCatalog($book->id, $serials);
             $this->view->mobileURL  = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'mhtml');
             $this->view->desktopURL = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'html');
         }
@@ -87,6 +99,7 @@ class book extends control
         $parent  = $article->origins[$article->parent];
         $book    = $article->book;
         $content = $this->book->addMenu($article->content);
+        $serials = $this->book->computeSN($book->id);
 
         $this->view->title    = $article->title . ' - ' . $book->title;;
         $this->view->keywords = $article->keywords;
@@ -96,9 +109,11 @@ class book extends control
 
         $this->view->parent      = $parent;
         $this->view->book        = $book;
+        $this->view->allCatalog  = $this->book->getFrontCatalog($book->id, $serials);
         $this->view->prevAndNext = $this->book->getPrevAndNext($article);
         $this->view->mobileURL   = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'html');
+        $this->view->books       = $this->book->getBookList();
 
         $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 

@@ -166,8 +166,15 @@ class bookModel extends model
                 $serial = $node->type != 'book' ? $serials[$node->id] : '';
                 if($node->type == 'chapter')
                 {
-                    $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias");
-                    $catalog .= "<dd class='catalogue chapter'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
+                    if($this->config->book->chapter == 'left')
+                    {
+                        $catalog .= "<dd class='catalogue chapter'><strong><span class='order'>$serial</span>&nbsp;" . $node->title . '</strong></dd>';
+                    }
+                    else
+                    {
+                        $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias");
+                        $catalog .= "<dd class='catalogue chapter'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
+                    }
                 }
                 elseif($node->type == 'article')
                 {
