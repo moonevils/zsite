@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-    <div class='panel-heading'>
+  <div class='panel-heading'>
     <strong><i class='icon-book'></i> <?php echo $lang->book->searchResults;?></strong>
     <div class='panel-actions'>
       <form method='get' class='form-inline form-search'>
@@ -31,7 +31,7 @@
       <?php commonModel::printLink('book', 'create', '', '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-primary'");?>
     </div>
   </div>
- <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
         <th class='w-60px'><?php echo $lang->book->id;?></th>
@@ -66,4 +66,3 @@
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
-
