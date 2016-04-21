@@ -121,6 +121,19 @@ class commonModel extends model
             $inList = $this->loadModel('guarder')->inList();
             if($inList) die('Request Forbidden');
         }
+
+        if(RUN_MODE == 'admin' and !empty($this->config->group->unUpdatedAccounts) and strpos($this->config->group->unUpdatedAccounts, $this->app->user->account) !== false)
+        {
+            $user = $this->app->user;
+            $user->rights = $this->loadModel('user')->authorize($user);
+            $this->session->set('user', $user);
+            $this->app->user = $this->session->user;
+
+            $unUpdatedAccounts = str_replace($this->app->user->account, '', $this->config->group->unUpdatedAccounts);
+            if(str_replace(',', '', $unUpdatedAccounts) == '') $unUpdatedAccounts = '';
+            $this->loadModel('setting')->setItem("system.group.unUpdatedAccounts", $unUpdatedAccounts);
+        }
+
         $module = $this->app->getModuleName();
         $method = $this->app->getMethodName();
 
@@ -244,6 +257,14 @@ class commonModel extends model
     public function deny($module, $method)
     {
         if(helper::isAjaxRequest()) exit;
+
+        /* Get authorize again. */
+        $user = $this->app->user;
+        $user->rights = $this->loadModel('user')->authorize($user->account);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+        if(commonModel::hasPriv($module, $method)) return true;
+
         $vars = "module=$module&method=$method";
         if(isset($_SERVER['HTTP_REFERER']))
         {
@@ -1053,7 +1074,7 @@ class commonModel extends model
                 if(empty($category->alias)) continue;
                 $categories['blog'][$category->alias] = $category;
                 $category->module = 'blog';
-                $this->config->seo->alias->blog[$category->id] = $category->alias;
+                $this->config->seo->alias->blog[$category->alias] = $category;
             }
         }
 
@@ -1064,7 +1085,7 @@ class commonModel extends model
                 if(empty($category->alias)) continue;
                 $categories['forum'][$category->alias] = $category;
                 $category->module = 'forum';
-                $this->config->seo->alias->forum[$category->id] = $category->alias;
+                $this->config->seo->alias->forum[$category->alias] = $category;
             }
         }
     

@@ -11,6 +11,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
+<?php js::set('fullScreen', $this->config->book->fullScreen);?>
 <?php $bookModel = $this->loadModel('book'); ?>
 <div class='block-region region-top blocks' data-region='book_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
 <hr class='space'>
