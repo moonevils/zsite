@@ -21,3 +21,18 @@ $config->widget->gridOptions[8]  = '2/3';
 $config->widget->gridOptions[3]  = '1/4';
 $config->widget->gridOptions[9]  = '3/4';
 $config->widget->gridOptions[12] = '100%';
+
+$config->widget->dependence = new stdclass();
+$config->widget->dependence->latestOrder    = 'shop';
+$config->widget->dependence->latestThread   = 'forum';
+$config->widget->dependence->message        = 'message';
+$config->widget->dependence->submittion     = 'submittion';
+
+$config->widget->moreLinkList = new stdclass();
+$config->widget->moreLinkList->latestOrder    = 'order|admin|';
+$config->widget->moreLinkList->latestThread   = 'forum|admin|';
+$config->widget->moreLinkList->message        = 'message|admin|type=message';
+$config->widget->moreLinkList->chanzhiDynamic = 'http://www.chanzhi.org/dynamic.html';
+$config->widget->moreLinkList->html           = '';
+$config->widget->moreLinkList->submittion     = 'article|admin|type=submittion&tab=user';
+

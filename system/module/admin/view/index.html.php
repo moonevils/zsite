@@ -54,6 +54,12 @@
         ?>
         <?php foreach($widgets as $key => $widget):?>
         <?php
+        if(isset($this->config->widget->dependence->{$widget->type}))
+        {
+            $dependence =  $this->config->widget->dependence->{$widget->type};
+            if(!commonModel::isAvailable($dependence)) continue;
+        }
+
         $index = $key;
         if(strpos($widget->moreLink, '|') !== false)
         {
@@ -63,7 +69,6 @@
         ?>
         <div class='col-xs-<?php echo $widget->grid;?> pull-left'>
           <div class='panel panel-widget <?php if(isset($widget->params->color)) echo 'panel-' . $widget->params->color;?>' id='widget<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $widget->title?>' data-url='<?php echo $this->createLink('widget', 'printWidget', 'widget=' . $widget->id) ?>'>
-
             <div class='panel-heading'>
               <span class='panel-title'><?php echo $widget->title;?></span>
               <div class='panel-actions'>

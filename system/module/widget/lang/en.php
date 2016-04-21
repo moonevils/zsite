@@ -145,38 +145,3 @@ $lang->widget->default['sys']['7'] = $lang->widget->default['team']['1'];
 $lang->widget->default['sys']['7']['source'] = 'team';
 $lang->widget->default['sys']['8'] = $lang->widget->default['team']['2'];
 $lang->widget->default['sys']['8']['source'] = 'team';
-
-$lang->widget->moreLinkList = new stdclass();
-$lang->widget->moreLinkList->order['assinedTo'] = 'Assigned To Me|sys|my|order|type=assinedTo';
-$lang->widget->moreLinkList->order['createdBy'] = 'Created By Me|sys|my|order|type=createdBy';
-$lang->widget->moreLinkList->order['signedBy']  = 'Signed By Me|sys|my|order|type=signedBy';
-
-$lang->widget->moreLinkList->contract['returnedBy']     = 'Returned By Me|sys|my|contract|type=returnedBy';
-$lang->widget->moreLinkList->contract['deliveredBy']    = 'Delivered By Me|sys|my|contract|type=deliveredBy';
-$lang->widget->moreLinkList->contract['normalstatus']   = 'Unfinished|sys|my|contract|type=unfinished';
-$lang->widget->moreLinkList->contract['closedstatus']   = 'Finished|sys|my|contract|type=finished';
-$lang->widget->moreLinkList->contract['canceledstatus'] = 'Canceled|sys|my|contract|type=canceled';
-
-$lang->widget->moreLinkList->customer['today']    = 'Today|crm|customer|browse|type=today';
-$lang->widget->moreLinkList->customer['thisweek'] = 'This Week|crm|customer|browse|type=thisweek';
-
-$lang->widget->moreLinkList->trade     = 'Trade|cash|trade|browse|';
-$lang->widget->moreLinkList->depositor = 'Depositor|cash|depositor|index|';
-$lang->widget->moreLinkList->provider  = 'Provider|cash|provider|browse|';
-
-$lang->widget->moreLinkList->announce = 'Announce|oa|announce|browse|';
-$lang->widget->moreLinkList->attend   = 'Attend|oa|todo|calendar|';
-
-$lang->widget->moreLinkList->task['assignedTo'] = 'Assigned To Me|sys|my|task|type=assignedTo';
-$lang->widget->moreLinkList->task['createdBy']  = 'Created By Me|sys|my|task|type=createdBy';
-$lang->widget->moreLinkList->task['finishedBy'] = 'Finished By Me|sys|my|task|type=finishedBy';
-$lang->widget->moreLinkList->task['closedBy']   = 'Closed By Me|sys|my|task|type=closedBy';
-$lang->widget->moreLinkList->task['canceledBy'] = 'Canceled By Me|sys|my|task|type=canceledBy';
-
-$lang->widget->moreLinkList->project['doing']    = 'Doing|oa|project|index|status=doing';
-$lang->widget->moreLinkList->project['finished'] = 'Finished|oa|project|index|status=finished';
-$lang->widget->moreLinkList->project['suspend']  = 'Suspend|oa|project|index|status=suspend';
-
-$lang->widget->moreLinkList->blog = 'Latest Blog|team|blog|index|';
-$lang->widget->moreLinkList->thread['new']   = 'Latest Thread|team|forum|index|';
-$lang->widget->moreLinkList->thread['stick'] = 'Stick Thread|team|forum|index|';

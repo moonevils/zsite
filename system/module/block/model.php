@@ -33,13 +33,12 @@ class blockModel extends model
      * Get block list of one site.
      *
      * @param  string    $template
-     * @param  object    $pager
      * @access public
      * @return array
      */
-    public function getList($template, $pager = null)
+    public function getList($template)
     {
-        return $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->fetchAll('id');
     }
 
     /**
@@ -52,11 +51,12 @@ class blockModel extends model
      */
     public function getPageBlocks($module, $method)
     {
-        $device = helper::getDevice();
+        $device   = helper::getDevice();
         $template =  $this->config->template->{$device}->name;
-        $theme = $this->config->template->{$device}->theme;
-        $plan  = zget($this->config->layout, "{$template}_{$theme}");
-        $pages = "all,{$module}_{$method}";
+        $theme    = $this->config->template->{$device}->theme;
+        $plan     = zget($this->config->layout, "{$template}_{$theme}");
+        $pages    = "all,{$module}_{$method}";
+
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
