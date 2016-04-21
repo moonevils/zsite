@@ -37,7 +37,7 @@ class articleModel extends model
         if($replaceTag) $article->content = $this->loadModel('tag')->addLink($article->content);
 
         /* Get it's categories. */
-        $article->categories = $this->dao->select('t2.*')
+        $article->categories = $this->dao->select('t2.name,t2.id,t2.alias,t2.path')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t1.type')->eq($article->type)
@@ -127,11 +127,15 @@ class articleModel extends model
         }
         else
         {
-            /*Get articles containing the search word (use groupBy to distinct articles).  */
-            $articleIdList = $this->dao->select('id')->from(TABLE_RELATION)
-                ->where('type')->eq($type)
-                ->andWhere('category')->in($categories)
-                ->fetchAll('id');
+            $articleIdList = array();
+            if(!empty($categories))
+            {
+                /*Get articles containing the search word (use groupBy to distinct articles).  */
+                $articleIdList = $this->dao->select('id')->from(TABLE_RELATION)
+                    ->where('type')->eq($type)
+                    ->andWhere('category')->in($categories)
+                    ->fetchAll('id');
+            }
 
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
                 ->where('type')->eq($type)
@@ -302,7 +306,7 @@ class articleModel extends model
         if(!commonModel::isAvailable('message')) return $articles;
         $articleIdList = array_keys($articles);
 
-        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
+        $comments = $this->dao->select("objectID, count(id) as count")->from(TABLE_MESSAGE)
             ->where('type')->eq('comment')
             ->andWhere('objectType')->eq($type)
             ->andWhere('objectID')->in($articleIdList)
