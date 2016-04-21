@@ -66,7 +66,6 @@ class book extends control
                     $article   = $this->book->getNodeByID($firstArticle);
                     $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias"));
                 }
-                $this->view->hasArticles = false;
             }
             $serials = $this->book->computeSN($book->id);
 
