@@ -353,6 +353,18 @@ class site extends control
     {
         if(!empty($_POST))
         {
+            if($this->post->site)
+            {
+                foreach($this->config->cdn->fileList as $file)
+                {
+                    $ch = curl_init(rtrim($this->post->site, '/') . $file);
+                    curl_setopt($ch, CURLOPT_NOBODY, true);
+                    curl_exec($ch);
+                    $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    curl_close($ch);
+                    if($retcode != 200) $this->send(array('result' => 'fail', 'message' => $this->lang->site->cdnSiteTip));
+                }
+            }
             $setting = fixer::input('post')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.cdn', $setting);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
