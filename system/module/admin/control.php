@@ -19,8 +19,6 @@ class admin extends control
      */
     public function index()
     {
-        $this->loadModel('ui')->initExportPath('default', 'default', 'demo');
-        $this->ui->createHookFile('default', 'default', 'demo');exit;
         $widgets = $this->loadModel('widget')->getWidgetList();
 
         /* Init widget when vist index first. */
