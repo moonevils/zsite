@@ -48,7 +48,7 @@
             $imageHtml .= "<div class='file-source'><input id='fullURL{$file->id}' type='text' value='{$file->fullURL}'/><button class='copyBtn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></div>";
             $imageHtml .= "<span class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
+            $imageHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
             $imageHtml .= '</span>';
             $imageHtml .= '</li>';
         }
@@ -60,7 +60,7 @@
             $fileHtml .= "<div class='file-source'><input type='text' value='" . $file->fullURL . "'/></div>";
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $fileHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
+            $fileHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
             $fileHtml .= '</span>';
             $fileHtml .= '</li>';
         }
@@ -107,7 +107,7 @@
           <td><?php echo $file->addedDate;?></td>
           <td class='text-center'>
             <?php
-            commonModel::printLink('file', 'sourceedit',   "id=$file->id", $lang->edit, "data-toggle='modal'");
+            commonModel::printLink('file', 'editsource',   "id=$file->id", $lang->edit, "data-toggle='modal'");
             commonModel::printLink('file', 'sourcedelete', "id=$file->id", $lang->delete, "class='deleter'");
             ?>
           </td>
