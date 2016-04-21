@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `type` (`type`),
   KEY `lang` (`lang`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
@@ -202,7 +203,8 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
-  KEY `object` (`objectType`,`objectID`)
+  KEY `object` (`objectType`,`objectID`),
+  KEY `extension` (`extension`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_group`;
@@ -1066,7 +1068,7 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (1, 'file', 'delete', 'zh-cn'),
 (1, 'file', 'sourceBrowse', 'zh-cn'),
 (1, 'file', 'sourceDelete', 'zh-cn'),
-(1, 'file', 'sourceEdit', 'zh-cn'),
+(1, 'file', 'editSource', 'zh-cn'),
 (1, 'file', 'selectImage', 'zh-cn'),
 (1, 'file', 'browseSource', 'zh-cn'),
 (1, 'search', 'buildIndex', 'zh-cn'),
@@ -1097,7 +1099,7 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (2, 'file', 'browse', 'zh-cn'),
 (2, 'file', 'sourceBrowse', 'zh-cn'),
 (2, 'file', 'sourceDelete', 'zh-cn'),
-(2, 'file', 'sourceEdit', 'zh-cn'),
+(2, 'file', 'editSource', 'zh-cn'),
 (2, 'file', 'selectImage', 'zh-cn'),
 (2, 'file', 'browseSource', 'zh-cn'),
 (2, 'ui', 'setTemplate', 'zh-cn'),

@@ -266,7 +266,7 @@ class fileModel extends model
             else
             {
                 if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
-            }          
+            }
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
@@ -634,7 +634,7 @@ class fileModel extends model
      * @access public
      * @return array
      */
-    public function sourceEdit($file, $fileName)
+    public function editSource($file, $fileName)
     {
         $files = $this->getUpload('upFile', $file->objectType);
         $uploadPath = $this->app->getDataRoot();

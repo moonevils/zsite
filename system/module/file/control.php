@@ -163,7 +163,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function sourceEdit($fileID)
+    public function editSource($fileID)
     {
         $this->file->setSavePath('source');
         $file = $this->file->getById($fileID);
@@ -183,7 +183,7 @@ class file extends control
                 if(!empty($sameUpFile) or !empty($sameFilename))$this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
             }
 
-            $result = $this->file->sourceEdit($file, $filename);
+            $result = $this->file->editSource($file, $filename);
             if($result) $this->send(array('result' => 'success','message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'browseSource')));
             $this->send(array('result' => 'fail', 'message' => dao::getError() ));
         }
