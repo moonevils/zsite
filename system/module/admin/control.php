@@ -32,7 +32,7 @@ class admin extends control
             $widget->params = json_decode($widget->params);
             if(empty($widget->params)) $widget->params = new stdclass();
 
-            $widget->moreLink = zget($this->lang->widget->moreLinkList, $widget->type, '');
+            $widget->moreLink = zget($this->config->widget->moreLinkList, $widget->type, '');
         }
 
         $this->view->ignoreUpgrade = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
