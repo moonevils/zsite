@@ -777,12 +777,12 @@ class articleModel extends model
      * @access public
      * @return array
      */
-    public function getSubmittionCount()
+    public function getSubmittions($limit)
     {
-        return $this->dao->select('count(*) as count')->from(TABLE_ARTICLE)
+        return $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('type')->eq('submittion')
             ->andWhere('submittion')->ne(3)
             ->andWhere('editedDate')->like(date("Y-m-d") . '%')
-            ->fetch('count');
+            ->fetchAll('id');
     }
 }

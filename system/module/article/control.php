@@ -236,8 +236,8 @@ class article extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submittion&tab=feedback")));
         }
 
-        $this->lang->article->menu       = $this->lang->feedback->menu;
-        $this->lang->menuGroups->article = 'feedback';
+        unset($this->lang->article->menu);
+        $this->lang->menuGroups->article = 'user';
         
         $this->view->title             = $this->lang->submittion->check;
         $this->view->article           = $this->article->getByID($id);
