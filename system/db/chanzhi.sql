@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `type` (`type`),
   KEY `lang` (`lang`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
