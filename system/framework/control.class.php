@@ -611,8 +611,8 @@ class control
 
                 $jsFun  = "getJS";
                 $cssFun = "getCSS";
-                if(function_exists($jsFun))  $importedJS = $jsFun();
-                if(function_exists($cssFun)) $importedCSS = $cssFun();
+                if(function_exists($jsFun))  $importedJS = $jsFun('demo');
+                if(function_exists($cssFun)) $importedCSS = $cssFun('demo');
             }
 
             $js .= zget($importedJS, 'all', '');
