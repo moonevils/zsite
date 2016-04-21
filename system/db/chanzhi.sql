@@ -203,7 +203,8 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
-  KEY `object` (`objectType`,`objectID`)
+  KEY `object` (`objectType`,`objectID`),
+  KEY `extension` (`extension`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_group`;
