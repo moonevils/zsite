@@ -41,12 +41,30 @@ $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><t
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
 
+$config->product = new stdclass();
+
 $config->site = new stdclass();
 $config->site->resetPassword     = 'open'; 
 $config->site->importantValidate = 'okFile,email';
 $config->site->modules           = 'article,product';
 $config->site->type              = 'portal';
 $config->site->filterFunction    = 'close';
+$config->site->keywords          = '';
+$config->site->indexKeywords     = '';
+$config->site->slogan            = '';
+$config->site->copyright         = '';
+$config->site->icpSN             = '';
+$config->site->meta              = '';
+$config->site->desc              = '';
+$config->site->theme             = 'default';
+$config->site->lang              = 'zh-cn';
+$config->site->menu              = json_encode(array());
+
+$config->company          = new stdclass();
+$config->company->name    = '';
+$config->company->desc    = '';
+$config->company->content = '';
+$config->company->contact = json_encode(array());
 
 $config->template = new stdclass();
 $config->template->desktop = new stdclass();

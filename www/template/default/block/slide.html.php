@@ -12,18 +12,18 @@
 ?>
 <?php
 $block->content = json_decode($block->content);
-$groupID = !empty($block->content->group) ? $block->content->group : '';
-$slides  = $this->loadModel('slide')->getList($groupID);
-$slideId = 'slide' . $block->id . '-' . $groupID;
-$group   = $this->loadModel('tree')->getByID($groupID);
-$globalButtons = $group->desc ? json_decode($group->desc, true) : array();
+$groupID        = !empty($block->content->group) ? $block->content->group : '';
+$slides         = $this->loadModel('slide')->getList($groupID);
+$slideID        = 'slide' . $block->id . '-' . $groupID;
+$group          = $this->loadModel('tree')->getByID($groupID);
+$globalButtons  = zget($group, 'desc', '') ? json_decode($group->desc, true) : array();
 if($slides):
 ?>
 <div class='block <?php echo $blockClass;?>' id='block<?php echo $block->id?>'>
   <?php if($block->content->style == 'tile'):?>
-  <div id="<?php echo $slideId;?>" class='tile slide' data-id='<?php echo $groupID?>'>
+  <div id="<?php echo $slideID;?>" class='tile slide' data-id='<?php echo $groupID?>'>
   <?php else:?>
-  <div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='<?php echo $groupID?>'>
+  <div id='<?php echo $slideID;?>' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='<?php echo $groupID?>'>
     <div class='carousel-inner'>
   <?php endif;?>
       <?php $height = 0; $index = 0?>
@@ -34,12 +34,12 @@ if($slides):
         if($height == 0 and $slide->height) $height = $slide->height;
         $itemClass = 0 === $index++ ? 'item active' : 'item';
       ?>
-      <?php if ($slide->backgroundType == 'image'): ?>
+      <?php if($slide->backgroundType == 'image'): ?>
       <div data-id='<?php echo $slide->id?>' class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?>>
       <?php print(html::image($slide->image));?>
-      <?php else: ?>
+      <?php else:?>
       <div data-id='<?php echo $slide->id?>' class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
-      <?php endif ?>
+      <?php endif;?>
         <div class="<?php echo $block->content->style . '-caption';?>">
           <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
           <div><?php echo $slide->summary;?></div>
@@ -72,8 +72,8 @@ if($slides):
     <?php if($block->content->style == 'carousel'):?>
     </div>
     <?php if(count($slides) > 1):?>
-    <a class='left carousel-control' href='#<?php echo $slideId;?>' data-slide='prev'><i class='icon icon-chevron-left'></i></a>
-    <a class='right carousel-control' href='#<?php echo $slideId;?>' data-slide='next'><i class='icon icon-chevron-right'></i></a>
+    <a class='left carousel-control' href='#<?php echo $slideID;?>' data-slide='prev'><i class='icon icon-chevron-left'></i></a>
+    <a class='right carousel-control' href='#<?php echo $slideID;?>' data-slide='next'><i class='icon icon-chevron-right'></i></a>
     <?php endif;?>
     <?php endif;?>
   </div>
