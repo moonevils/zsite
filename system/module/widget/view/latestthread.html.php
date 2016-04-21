@@ -1,7 +1,7 @@
 <?php
 $this->loadModel('thread');
 $limit  = zget($widget->params, 'limit', 10);
-$threads = $this->thread->getListForWidget($limit)
+$threads = $this->thread->getListForWidget($limit);
 ?>
 <table class='table table-data table-hover table-fixed'>
   <?php foreach($threads as $thread):?>
