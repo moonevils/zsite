@@ -350,7 +350,6 @@ class commonModel extends model
         global $config, $app, $lang;
 
         self::fixGroups();
-
         $currentModule = zget($lang->menuGroups, $currentModule);
 
         $group = 'home';
@@ -380,7 +379,6 @@ class commonModel extends model
             }
             if(!isset($lang->menu->{$menu})) continue;
             $moduleMenu = $lang->menu->{$menu};
-
             $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
