@@ -44,8 +44,16 @@ $themeRoot = $webRoot . "theme/default/";
       $themeRoot = $webRoot . "theme/default/";
       if($this->config->cdn->open == 'open')
       {
-          css::import($this->config->cdn->host . $this->config->version . '/theme/default/default/all.admin.css', '', $version = false);
-          js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $version = false);
+          if(!empty($this->config->cdn->site))
+          {
+              css::import(rtrim($this->config->cdn->site, '/') . '/theme/default/default/all.admin.css');
+              js::import(rtrim($this->config->cdn->site, '/')  . '/js/all.admin.js');
+          }
+          else
+          {
+              css::import($this->config->cdn->host . $this->config->version . '/theme/default/default/all.admin.css', '', $version = false);
+              js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $version = false);
+          }
       }
       else
       {

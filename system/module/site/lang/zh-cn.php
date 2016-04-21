@@ -58,8 +58,6 @@ $lang->site->mobileTemplate   = '移动模板';
 $lang->site->score            = '积分';
 $lang->site->setCounts        = '积分规则';
 $lang->site->front            = '网站浏览';
-$lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
-$lang->site->cdnTip           = 'cdn资源仅在非debug模式下启用，包含：字体、css和js，不包含附件。';
 $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
@@ -180,12 +178,15 @@ $lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。
 $lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
 $lang->site->saveDaysTip      = '访问日志保存天数必须为为 >0 的数字。';
 $lang->site->yangcongTip      = '开启强制洋葱登录后，您可以通过设置密保问题开启密保登录作为备用。';
+$lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
+$lang->site->cdnTip           = 'cdn资源仅在非debug模式下启用，包含：字体、css和js，不包含附件，路径跟蝉知保持一致。';
+$lang->site->cdnSiteTip       = '资源存放路径错误';
+$lang->site->defaultTip       = '站点维护中……';
+$lang->site->icpTip           = '';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
 $lang->site->reloadForRobots   = '刷新页面';
-$lang->site->defaultTip        = '站点维护中……';
-$lang->site->icpTip            = '';
 
 $lang->site->customizableList = new stdclass();
 $lang->site->customizableList->article = '文章列表数量';

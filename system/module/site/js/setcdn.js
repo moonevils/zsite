@@ -1,0 +1,14 @@
+$(document).ready(function()
+{
+    $('input[name=open]').click(function()
+    {
+        if($('#open2').prop('checked'))
+        {
+            $('.cdn-host').hide();
+        }
+        else
+        {
+            $('.cdn-host').show();
+        }
+    });
+})
