@@ -3,7 +3,7 @@
 <?php js::set('objectID', $article->id);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
-<?php if($this->config->book->chapter == 'left'):?>
+<?php if(isset($this->config->book->chapter) and $this->config->book->chapter == 'left'):?>
 <div class='row'>
   <div class='col-md-3'>
     <div class='panel'>
@@ -12,7 +12,7 @@
         <strong class='title'><?php echo $book->title;?></strong>
         <div class='panel-actions book-menu'>
           <div class='dropdown'>
-            <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><span class='caret'></span></a>
+            <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><i class='icon-list'></i></a>
             <ul role='menu' class='dropdown-menu pull-right'>
               <?php foreach($books as $bookMenu):?>
               <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias"), $bookMenu->title);?></li>
@@ -59,7 +59,9 @@
       <?php else: ?>
       <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
       <?php endif; ?>
+      <?php if($this->config->book->chapter == 'home'):?>
       <li><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
+      <?php endif; ?>
       <?php if($next):?>
       <li class='next'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}"), $next->title . " <i class='icon-arrow-right'></i>"); ?></li>
       <?php else:?>
