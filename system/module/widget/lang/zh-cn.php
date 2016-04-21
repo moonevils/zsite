@@ -68,6 +68,7 @@ $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = '最新订单';
 $lang->widget->typeList->latestThread   = '最新帖子';
 $lang->widget->typeList->message        = '评论留言';
+$lang->widget->typeList->submition      = '投稿列表';
 $lang->widget->typeList->chanzhiDynamic = '蝉知动态';
 $lang->widget->typeList->html           = '自定义';
 $lang->widget->typeList->commonMenu     = '快捷入口';

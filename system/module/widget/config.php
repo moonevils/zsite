@@ -21,3 +21,9 @@ $config->widget->gridOptions[8]  = '2/3';
 $config->widget->gridOptions[3]  = '1/4';
 $config->widget->gridOptions[9]  = '3/4';
 $config->widget->gridOptions[12] = '100%';
+
+$config->widget->dependence = new stdclass();
+$config->widget->dependence->latestOrder    = 'shop';
+$config->widget->dependence->latestThread   = 'forum';
+$config->widget->dependence->message        = 'message';
+$config->widget->dependence->submition      = 'submition';
