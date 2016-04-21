@@ -1,12 +1,13 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('objectType', 'book');?>
 <?php js::set('objectID', $article->id);?>
+<?php js::set('fullScreen', $this->config->book->fullScreen);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
 <?php if(isset($this->config->book->chapter) and $this->config->book->chapter == 'left'):?>
 <div class='row'>
   <div class='col-md-3'>
-    <div class='panel'>
+    <div class='panel book-catalog'>
       <?php if(!empty($book) && $book->title): ?>
       <div class='panel-heading'>
         <strong class='title'><?php echo $book->title;?></strong>
@@ -29,7 +30,7 @@
   </div>
   <div class='col-md-9'>
 <?php endif;?>
-<div class='article' id='book' data-id='<?php echo $article->id?>'>
+<div class='article book-content' id='book' data-id='<?php echo $article->id?>'>
   <header>
     <h2><?php echo $article->title;?></h2>
     <dl class='dl-inline'>
@@ -57,10 +58,10 @@
       <?php if($prev): ?>
       <li class='previous'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}"), "<i class='icon-arrow-left'></i> " . $prev->title); ?></li>
       <?php else: ?>
-      <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
+      <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
       <?php endif; ?>
       <?php if($this->config->book->chapter == 'home'):?>
-      <li><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
+      <li class='back'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
       <?php endif; ?>
       <?php if($next):?>
       <li class='next'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}"), $next->title . " <i class='icon-arrow-right'></i>"); ?></li>
@@ -70,12 +71,12 @@
     </ul>
   </footer>
 </div>
-<?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'></div>
-<?php endif;?>
 <?php if($this->config->book->chapter == 'left'):?>
   </div>
 </div>
+<?php endif;?>
+<?php if(commonModel::isAvailable('message')):?>
+<div id='commentBox'></div>
 <?php endif;?>
 <div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>

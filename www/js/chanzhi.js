@@ -635,6 +635,7 @@ function setGo2Top()
     }).resize(function ()
     {
         var parent = $('#go2top').closest('.page-container').find('.page-content');
+        if(!parent.length) return;
         $('#go2top').css('left', parent.offset().left + parent.width() + 30);
         if(parent.width() == $(window).width()) $('#go2top').css('left', parent.width() - 90);
     }).scroll().resize();
