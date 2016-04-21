@@ -1,4 +1,5 @@
 ALTER TABLE `eps_message` CHANGE account account char(30) NOT NULL;
+ALTER TABLE `eps_book`       ADD index `type` (`type`);
 ALTER TABLE `eps_address`    ADD index `lang` (`lang`);
 ALTER TABLE `eps_cart`       ADD index `lang` (`lang`);
 ALTER TABLE `eps_order`      ADD index `lang` (`lang`);
