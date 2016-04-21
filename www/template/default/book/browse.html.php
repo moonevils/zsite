@@ -10,7 +10,7 @@
         <strong class='title'><?php echo $book->title;?></strong>
         <div class='panel-actions book-menu'>
           <div class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle' href='javascript:;'><span class='caret'></span></a>
+            <a data-toggle='dropdown' class='dropdown-toggle' href='javascript:;'><i class='icon-list'></i></a>
             <ul role='menu' class='dropdown-menu pull-right'>
               <?php foreach($books as $bookMenu):?>
               <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias"), $bookMenu->title);?></li>
@@ -37,7 +37,7 @@
         <strong class='title'><?php echo $book->title;?></strong>
         <div class='panel-actions book-menu'>
           <div class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle' href='javascript:;'><span class='caret'></span></a>
+            <a data-toggle='dropdown' class='dropdown-toggle' href='javascript:;'><i class='icon-list'></i></a>
             <ul role='menu' class='dropdown-menu pull-right'>
               <?php foreach($books as $bookMenu):?>
               <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias"), $bookMenu->title);?></li>
