@@ -62,8 +62,9 @@ class book extends control
                 $articles = $this->book->getArticleIDs($book->id);
                 if($articles)
                 {
-                    $articleID = substr($articles, 0, 1);
-                    $article   = $this->book->getNodeByID($firstArticle);
+                    $articles  = explode(',', $articles);
+                    $articleID = current($articles);
+                    $article   = $this->book->getNodeByID($articleID);
                     $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias"));
                 }
             }
