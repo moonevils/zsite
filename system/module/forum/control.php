@@ -84,12 +84,12 @@ class forum extends control
         $boards  = $this->loadModel('tree')->getFamily($boardID, 'forum');
         $threads = $boards ? $this->thread->getList($boards, $orderBy, $pager) : array();
 
-        $this->view->boardID  = $boardID;
-        $this->view->orderBy  = $orderBy;
-        $this->view->board    = $this->tree->getByID($boardID, 'forum');
-        $this->view->title    = $this->lang->thread->common;
-        $this->view->threads  = $threads;
-        $this->view->pager    = $pager;
+        $this->view->boardID = $boardID;
+        $this->view->orderBy = $orderBy;
+        $this->view->board   = $this->tree->getByID($boardID, 'forum');
+        $this->view->title   = $this->lang->thread->common;
+        $this->view->threads = $threads;
+        $this->view->pager   = $pager;
 
         $this->display();
     }
