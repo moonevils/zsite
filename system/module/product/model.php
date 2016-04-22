@@ -136,9 +136,6 @@ class productModel extends model
             ->andWhere('t1.id')->in(array_keys($products))
             ->fetchGroup('product', 'id');
 
-        /* Get images for these products. */
-        $images = $this->file->getByObject('product', array_keys($products), $isImage = true);
-
         foreach($products as $product)
         {
             /* Assign categories to it's product. */
@@ -146,12 +143,18 @@ class productModel extends model
             $product->category   = current($product->categories);
             foreach($product->categories as $category)  $product->unsaleable = ($category->unsaleable and !$product->unsaleable);
 
-            /* Assign images to it's product. */
-            if(empty($images[$product->id])) continue;
-            $product->image = new stdclass();
-            if(isset($images[$product->id]))  $product->image->list = $images[$product->id];
-            if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
             $product->desc = empty($product->desc) ? helper::substr(strip_tags($product->content), 250) : $product->desc;
+
+            if($image)
+            {
+                /* Get images for these products. */
+                if($image) $images = $this->file->getByObject('product', array_keys($products), $isImage = true);
+
+                if(empty($images[$product->id])) continue;
+                $product->image = new stdclass();
+                if(isset($images[$product->id]))  $product->image->list = $images[$product->id];
+                if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
+            }
         }
 
         return $products;
@@ -362,7 +365,7 @@ class productModel extends model
     public function saveAttributes($productID)
     {
         $labels = fixer::input('post')->get('label');
-        $values =  fixer::input('post')->get('value');
+        $values = fixer::input('post')->get('value');
 
         $data = new stdclass();
         $data->product = $productID;
