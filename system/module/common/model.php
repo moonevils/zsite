@@ -1074,7 +1074,7 @@ class commonModel extends model
                 if(empty($category->alias)) continue;
                 $categories['blog'][$category->alias] = $category;
                 $category->module = 'blog';
-                $this->config->seo->alias->blog[$category->id] = $category->alias;
+                $this->config->seo->alias->blog[$category->alias] = $category;
             }
         }
 
@@ -1085,7 +1085,7 @@ class commonModel extends model
                 if(empty($category->alias)) continue;
                 $categories['forum'][$category->alias] = $category;
                 $category->module = 'forum';
-                $this->config->seo->alias->forum[$category->id] = $category->alias;
+                $this->config->seo->alias->forum[$category->alias] = $category;
             }
         }
     
