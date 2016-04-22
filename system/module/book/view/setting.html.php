@@ -17,17 +17,17 @@
     <table class='table table-form'>
       <tr>
         <th class='w-80px'><?php echo $lang->book->index;?></th>
-        <td class='w-p40'><?php echo html::select('index', $books, isset($this->config->book->index) ? $this->config->book->index : '', "class='form-control'");?></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->book->chapterList;?></th>
-        <td><?php echo html::select('chapter', $lang->book->chapterTypeList, isset($this->config->book->chapter) ? $this->config->book->chapter : '', "class='form-control'");?></td>
+        <td class='w-p40'><?php echo html::select('index', $books, isset($this->config->book->index) ? $this->config->book->index : $firstBook, "class='form-control'");?></td>
         <td></td>
       </tr>
       <tr>
         <th><?php echo $lang->book->fullScreen;?></th>
         <td><?php echo html::radio('fullScreen', $lang->book->fullScreenList, isset($this->config->book->fullScreen) ? $this->config->book->fullScreen : 0, "class='checkbox'");?></td>
+        <td></td>
+      </tr>
+      <tr class='chapter <?php echo !empty($this->config->book->fullScreen) ? 'hide' : '';?>'>
+        <th><?php echo $lang->book->chapterList;?></th>
+        <td><?php echo html::select('chapter', $lang->book->chapterTypeList, isset($this->config->book->chapter) ? $this->config->book->chapter : '', "class='form-control'");?></td>
         <td></td>
       </tr>
       <tr>
