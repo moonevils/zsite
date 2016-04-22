@@ -4,8 +4,6 @@ $(document).ready(function()
 
     if(v.fullScreen)
     {
-        $('.full-screen').remove();
-
         $('html, body').css('height', '100%');
         var string = "<div class='fullScreen-book'>";
         if($('.book-catalog').length || $('#bookCatalog').length)
@@ -28,7 +26,6 @@ $(document).ready(function()
 
         $('body').html(string);
 
-        $('.previous, .next').css('top', $('body').height() / 2);
         if(!$('.fullScreen-catalog').length)
         {
           $('.fullScreen-content').css('left', 0);
