@@ -40,7 +40,7 @@ class book extends control
             {
                 $book = $this->book->getFirstBook();
             }
-            $this->locate(inlink('browse', "nodeID=$book->id", "book=$book->alias"));
+            $this->locate(inlink('browse', "nodeID=$book->id", "book=$book->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''));
         }
     }
 
@@ -57,7 +57,7 @@ class book extends control
         if($node)
         {
             $book = $this->book->getBookByNode($node);
-            if($this->config->book->chapter == 'left')
+            if($this->config->book->chapter == 'left' and $this->device == 'desktop')
             {
                 $articles = $this->book->getArticleIDs($book->id);
                 if($articles)
@@ -65,7 +65,7 @@ class book extends control
                     $articles  = explode(',', $articles);
                     $articleID = current($articles);
                     $article   = $this->book->getNodeByID($articleID);
-                    $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias"));
+                    $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''));
                 }
             }
             $serials = $this->book->computeSN($book->id);
