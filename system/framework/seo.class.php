@@ -121,8 +121,9 @@ class seo
             $items[1] = $items[2];
         }
 
-        if($module == 'forum' && isset($pageAlias[$items[1]]))
+        if($module == 'forum' && isset($forumAlias[$items[1]]))
         {
+            $params['category'] = $items[1];
             $method = $methodAlias[$module]['browse'];
             return seo::convertURI($module, $method, $params, $pageID);
         }
