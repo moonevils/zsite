@@ -1,10 +1,10 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('objectType', 'book');?>
 <?php js::set('objectID', $article->id);?>
-<?php js::set('fullScreen', !empty($this->config->book->fullScreen) ? 1 : 0);?>
+<?php js::set('fullScreen', (!empty($this->config->book->fullScreen) or $this->get->fullScreen) ? 1 : 0);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
-<?php if(isset($this->config->book->chapter) and $this->config->book->chapter == 'left'):?>
+<?php if((isset($this->config->book->chapter) and $this->config->book->chapter == 'left') or $this->get->fullScreen):?>
 <div class='row'>
   <div class='col-md-3'>
     <div class='panel book-catalog'>
@@ -16,7 +16,7 @@
             <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><i class='icon-list'></i></a>
             <ul role='menu' class='dropdown-menu pull-right'>
               <?php foreach($books as $bookMenu):?>
-              <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias"), $bookMenu->title);?></li>
+              <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
               <?php endforeach;?>
             </ul>
           </div>
@@ -56,22 +56,22 @@
     <?php extract($prevAndNext);?>
     <ul class='pager pager-justify'>
       <?php if($prev): ?>
-      <li class='previous'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}"), "<i class='icon-arrow-left'></i> " . $prev->title); ?></li>
+      <li class='previous'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title); ?></li>
       <?php else: ?>
       <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
       <?php endif; ?>
-      <?php if($this->config->book->chapter == 'home'):?>
-      <li class='back'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
+      <?php if($this->config->book->chapter == 'home' or !$this->get->fullScreen):?>
+      <li class='back'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
       <?php endif; ?>
       <?php if($next):?>
-      <li class='next'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}"), $next->title . " <i class='icon-arrow-right'></i>"); ?></li>
+      <li class='next'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $next->title . " <i class='icon-arrow-right'></i>"); ?></li>
       <?php else:?>
       <li class='next disabled'><a href='###'> <?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a></li>
       <?php endif; ?>
     </ul>
   </footer>
 </div>
-<?php if($this->config->book->chapter == 'left'):?>
+<?php if($this->config->book->chapter == 'left' or $this->get->fullScreen):?>
   </div>
 </div>
 <?php endif;?>

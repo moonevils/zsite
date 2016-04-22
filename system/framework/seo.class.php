@@ -154,6 +154,12 @@ class seo
                 $method = $methodAlias[$module]['view'];
                 return seo::convertURI($module, $method, $params, $pageID);
             }
+            else
+            {
+                $params['id'] = $items[1];
+                $method = $methodAlias[$module]['browse'];
+                return seo::convertURI($module, $method, $params, $pageID);
+            }
         }
         else
         {

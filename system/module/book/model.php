@@ -177,13 +177,13 @@ class bookModel extends model
                     }
                     else
                     {
-                        $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias");
+                        $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
                         $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
                     }
                 }
                 elseif($node->type == 'article')
                 {
-                    $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias");
+                    $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
                     $catalog .= "<dd class='catalogue article text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
                 }
                 if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog'])) $catalog .= $nodeList[$node->id]['catalog'];
