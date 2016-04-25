@@ -159,6 +159,7 @@ class userModel extends model
     {
         $users = $this->dao->setAutolang(false)->select('account, email, realnames, realname')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();     
+
         foreach($users as $account => $user)
         {
             if(!$account) continue;

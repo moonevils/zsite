@@ -45,7 +45,7 @@ class tree extends control
         }
 
         $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
-        $userFunc = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
+        $userFunc  = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, $userFunc);
 
         $this->view->title        = $this->lang->category->common;
@@ -126,12 +126,12 @@ class tree extends control
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
             
-        $this->view->isWechatMenu  = $isWechatMenu;
-        $this->view->title         = $this->lang->tree->manage;
-        $this->view->type          = $type;
-        $this->view->children      = $this->tree->getChildren($category, $type);
-        $this->view->origins       = $this->tree->getOrigin($category);
-        $this->view->parent        = $category;
+        $this->view->isWechatMenu = $isWechatMenu;
+        $this->view->title        = $this->lang->tree->manage;
+        $this->view->type         = $type;
+        $this->view->children     = $this->tree->getChildren($category, $type);
+        $this->view->origins      = $this->tree->getOrigin($category);
+        $this->view->parent       = $category;
 
         $this->display();
     }
