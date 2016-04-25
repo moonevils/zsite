@@ -595,33 +595,35 @@ class control
             $theme       = $this->config->template->{$this->device}->theme;
             $customParam = $this->loadModel('ui')->getCustomParams($template, $theme);
             $themeHooks  = $this->loadThemeHooks();
+
             $importedCSS = array();
             $importedJS  = array();
 
             if(!empty($themeHooks))
             {
-                $jsFun  = "get{$theme}JS";
-                $cssFun = "get{$theme}CSS";
+                $jsFun  = "get{$theme}CSS";
+                $cssFun = "get{$theme}JS";
                 if(function_exists($jsFun))  $importedJS = $jsFun();
                 if(function_exists($cssFun)) $importedCSS = $cssFun();
 
-                $jsFun  = "get_THEME_CODEFIX_CSS";
-                $cssFun = "get_THEME_CODEFIX_JS";
-                if(function_exists($jsFun))  $importedJS = $jsFun();
-                if(function_exists($cssFun)) $importedCSS = $cssFun();
-                if(!empty($importedJS)) $importedJS = $this->processImportedCodes($template, $theme, $importedJS);
+                if(!empty($importedJS))  $importedJS  = $this->processImportedCodes($template, $theme, $importedJS);
                 if(!empty($importedCSS)) $importedCSS = $this->processImportedCodes($template, $theme, $importedCSS);
+
+                $jsFun  = "getJS";
+                $cssFun = "getCSS";
+                if(function_exists($jsFun))  $importedJS = $jsFun('demo');
+                if(function_exists($cssFun)) $importedCSS = $cssFun('demo');
             }
 
-            $js .= zget($importedJS, "{$template}_{$theme}_all", '');
+            $js .= zget($importedJS, 'all', '');
             $js .= zget($this->config->js, "{$template}_{$theme}_all", '');
-            $js .= zget($importedJS, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
+            $js .= zget($importedJS, "{$moduleName}_{$methodName}", '');
             $js .= zget($this->config->js,"{$template}_{$theme}_{$moduleName}_{$methodName}", '');
 
-            $allPageCSS  = zget($importedCSS, "{$template}_{$theme}_all", '');
+            $allPageCSS  = zget($importedCSS, 'all', '');
             $allPageCSS .= zget($this->config->css, "{$template}_{$theme}_all", '');
 
-            $currentPageCSS  = zget($importedCSS, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
+            $currentPageCSS  = zget($importedCSS, "{$moduleName}_{$methodName}", '');
             $currentPageCSS .= zget($this->config->css, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
             $css .= $this->ui->compileCSS($customParam, $allPageCSS . $currentPageCSS);
         }
@@ -836,7 +838,11 @@ class control
         $hookPath  = $this->app->getWwwRoot() . 'theme/' . $this->config->template->{$this->device}->name. DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
 
-        if(!empty($hookFiles)) foreach($hookFiles as $file) include $file;
+        if(empty($hookFiles)) return array();
+        foreach($hookFiles as $file)
+        {
+            include $file;
+        }
         return $hookFiles;
     }
 
@@ -906,13 +912,13 @@ class control
         $sources[] = "{$template}_colorful_";
         $sources[] = "{$template}_blank_";
 
-        foreach($sources as $source) $replace[] = "{$template}_{$theme}_";
+        foreach($sources as $source) $replace[] = '';
 
         foreach($codes as $page => $code)
         {
             $page = str_replace($sources, $replace, $page);
             $codes->$page = $code;
         }
-        return  $codes;
+        return $codes;
     }
 }
