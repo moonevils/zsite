@@ -1084,44 +1084,53 @@ EOT;
     {
         $hookFile = $this->directories->encryptLessPath . helper::createRandomStr(6, $skip = '0-9A-Z') . ".php";
 
-        $params = $this->getCustomParams($template, $theme);
-        $params = var_export($params, true);
-        $params = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $params);
-        $params = str_replace("{$template}_{$theme}_", "{$template}__THEME_CODEFIX__", $params);
+        $css = new stdclass();
+        foreach($this->config->css as $item => $value)
+        {
+            if(strpos($item, "{$template}_{$theme}_") === false) continue;
+            $item = str_replace("{$template}_{$theme}_", '', $item);
+            $css->{$item} = $value;
+        }
 
-        foreach($this->config->css as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
-        foreach($this->config->js  as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
+        $js = new stdclass();
+        foreach($this->config->js  as $item => $value)
+        {
+            if(strpos($item, "{$template}_{$theme}_") === false) continue;
+            $item  = str_replace("{$template}_{$theme}_", '', $item);
+            $js->{$item} = $value;
+        }
 
-        $cssCodes = serialize($this->config->css);
-        $jsCodes  = serialize($this->config->js);
+        $cssCodes = serialize($css);
+        $jsCodes  = serialize($js);
         $cssCode  = var_export($cssCodes, true);
         $jsCodes  = var_export($jsCodes, true);
-        $code = "<?php
-if(!function_exists('get_THEME_CODEFIX_CSS'))
+        $codes = "<?php
+if(!function_exists('getCSS'))
 {
-    function get_THEME_CODEFIX_CSS()
+    function getCSS(\$code)
     {
         \$css = unserialize($cssCode);
+        foreach(\$css as \$page => \$value)
+        {
+            \$css->\$page = str_replace('{$template}/{$theme}/', '{$template}/' . \$code . '/', \$value);
+        }
         return \$css;
     }
-    }
-    if(!function_exists('get_THEME_CODEFIX_JS'))
+}
+if(!function_exists('getJS'))
+{
+    function getJS(\$code)
     {
-        function get_THEME_CODEFIX_JS()
+        \$js = unserialize($jsCodes);
+        foreach(\$js as \$page => \$value)
         {
-            \$js = unserialize($jsCodes);
-            return \$js;
+            \$js->\$page = str_replace('{$template}/{$theme}/', '{$template}/' . \$code . '/', \$value);
+        }
+        return \$js;
     }
-    }
-    if(!function_exists('get_THEME_CODEFIX_params'))
-    {
-        function get_THEME_CODEFIX_params()
-        {
-            return $params;
-    }
-    }
-    ";
-    return file_put_contents($hookFile, $code);
+}
+";
+        return file_put_contents($hookFile, $codes);
     }
 
     /**

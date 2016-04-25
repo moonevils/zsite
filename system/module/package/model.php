@@ -1050,17 +1050,6 @@ class packageModel extends model
         $content = str_replace('THEME_CODEFIX', $newCode, $content);
         file_put_contents($dbFile, $content);
 
-        $hookFiles = glob("./theme/{$package}/www/theme/{$themeInfo->template}/{$code}/*.php");
-        if(!$renameCode and !empty($hookFiles))
-        {
-            foreach($hookFiles as $hookFile)
-            {
-                $hookCode = file_get_contents($hookFile);
-                $hookCode = str_replace('_THEME_CODEFIX_', $code, $hookCode);
-                file_put_contents($hookFile, $hookCode);
-            }
-        }
-
         if($renameCode)
         {
             /* Write new newCode to yaml file. */
@@ -1073,14 +1062,6 @@ class packageModel extends model
             $configCode = file_get_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php");
             $configCode = str_replace('$this->config->ui->themes["' . $code . '"] = ', '$this->config->ui->themes["' . $newCode . '"] = ', $configCode);
             file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
-
-            /* Change code in hook file. */
-            if(file_exists($hookFile))
-            {
-                $hookCode = file_get_contents($hookFile);
-                $hookCode = str_replace('_THEME_CODEFIX_', $newCode, $hookCode);
-                file_put_contents("./theme/{$package}/system/module/ui/ext/model/{$themeInfo->template}.{$newCode}.theme.php", $hookCode);
-            }
 
             /* Rename files named by old newCode. */
             $files2Move = array();
