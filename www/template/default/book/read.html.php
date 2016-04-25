@@ -4,7 +4,7 @@
 <?php js::set('fullScreen', (!empty($this->config->book->fullScreen) or $this->get->fullScreen) ? 1 : 0);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
-<?php if(isset($this->config->book->chapter) and $this->config->book->chapter == 'left'):?>
+<?php if((isset($this->config->book->chapter) and $this->config->book->chapter == 'left') or $this->get->fullScreen):?>
 <div class='row'>
   <div class='col-md-3'>
     <div class='panel book-catalog'>
@@ -60,7 +60,7 @@
       <?php else: ?>
       <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
       <?php endif; ?>
-      <?php if($this->config->book->chapter == 'home'):?>
+      <?php if($this->config->book->chapter == 'home' or !$this->get->fullScreen):?>
       <li class='back'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
       <?php endif; ?>
       <?php if($next):?>
@@ -71,7 +71,7 @@
     </ul>
   </footer>
 </div>
-<?php if($this->config->book->chapter == 'left'):?>
+<?php if($this->config->book->chapter == 'left' or $this->get->fullScreen):?>
   </div>
 </div>
 <?php endif;?>
