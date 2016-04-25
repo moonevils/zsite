@@ -27,8 +27,8 @@ class bookModel extends model
             $this->lang->book->menu->$bookID = $book->title . '|book|admin|book=' . $bookID;
         }
 
-        $this->lang->book->menu->setting    = $this->lang->book->setting . '|book|setting|'; 
         $this->lang->book->menu->createBook = $this->lang->book->createBook . '|book|create|'; 
+        $this->lang->book->menu->setting    = $this->lang->book->setting . '|book|setting|'; 
         $this->lang->menuGroups->tree = 'book';
     }
 
