@@ -1,6 +1,6 @@
 <?php include TPL_ROOT . 'common/header.html.php'; ?>
 <?php if(isset($node)) $common->printPositionBar($node->origins);?>
-<?php js::set('fullScreen', !empty($this->config->book->fullScreen) ? 1 : 0);?>
+<?php js::set('fullScreen', (!empty($this->config->book->fullScreen) or $this->get->fullScreen) ? 1 : 0);?>
 <div class='row blocks' data-region='book_browse-topBanner'><?php $this->block->printRegion($layouts, 'book_browse', 'topBanner', true);?></div>
 <div class='panel' id='bookCatalog' data-id='<?php echo $node->id?>'>
   <?php if(!empty($book) && $book->title): ?>
@@ -11,7 +11,7 @@
         <a data-toggle='dropdown' class='dropdown-toggle' href='javascript:;'><i class='icon-list'></i></a>
         <ul role='menu' class='dropdown-menu pull-right'>
           <?php foreach($books as $bookMenu):?>
-          <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias"), $bookMenu->title);?></li>
+          <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
           <?php endforeach;?>
         </ul>
       </div>
