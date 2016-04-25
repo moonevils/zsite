@@ -8,7 +8,7 @@ $thisModuleName = $this->app->getModuleName();
 $thisMethodName = $this->app->getMethodName();
 $template       = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
 $theme          = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
-$cdnRoot        = ($this->config->cdn->open == 'open') ? $this->config->cdn->host . $this->config->version : '';
+$cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->cdn->site) ? rtrim($this->config->cdn->site, '/') : $this->config->cdn->host . $this->config->version) : '';
 ?>
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>' class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
