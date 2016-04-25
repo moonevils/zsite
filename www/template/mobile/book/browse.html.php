@@ -11,7 +11,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php js::set('fullScreen', $this->config->book->fullScreen);?>
+<?php js::set('fullScreen', (!empty($this->config->book->fullScreen) or $this->get->fullScreen) ? 1 : 0);?>
 <?php $bookModel = $this->loadModel('book'); ?>
 <div class='block-region region-top blocks' data-region='book_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
 <hr class='space'>
@@ -23,7 +23,7 @@
       <ul class='dropdown-menu responsive'>
         <li class='dropdown-header'><?php echo $lang->book->list;?></li>
         <?php foreach($books as $menu): ?>
-        <li<?php echo $menu->title == $book->title ? " class='active'" : ''; ?>><?php echo html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias"), '<i class="icon-book"></i> &nbsp;' . $menu->title);?></li>
+        <li<?php echo $menu->title == $book->title ? " class='active'" : ''; ?>><?php echo html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), '<i class="icon-book"></i> &nbsp;' . $menu->title);?></li>
         <?php endforeach; ?>
       </ul>
       <?php endif; ?>
@@ -38,8 +38,8 @@
         {
           if($nodeChild->type != 'book') $serial = $serials[$nodeChild->id];
 
-          if($nodeChild->type == 'chapter') $link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias");
-          if($nodeChild->type == 'article') $link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias");
+          if($nodeChild->type == 'chapter') $link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+          if($nodeChild->type == 'article') $link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
           $class =  $originTree->current->id === $nodeChild->id ? " class='active'" : '';
           echo "<li{$class}>" . html::a($link, ($nodeChild->type == 'chapter' ? "<i class='icon icon-list-ul'></i>" : "<i class='icon icon-file-text-o'></i>") . " {$serial} &nbsp;{$nodeChild->title}") . '</li>';
         }
@@ -56,8 +56,8 @@
       {
           if($nodeChild->type != 'book') $serial = $serials[$nodeChild->id];
 
-          if($nodeChild->type == 'chapter') $link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias");
-          if($nodeChild->type == 'article') $link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias");
+          if($nodeChild->type == 'chapter') $link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+          if($nodeChild->type == 'article') $link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
           echo html::a($link, ($nodeChild->type == 'chapter' ? "<i class='icon icon-list-ul'></i>" : "<i class='icon icon-file-text-o'></i>") . " {$serial} &nbsp;{$nodeChild->title} <i class='pull-right icon-chevron-right'></i>", "class='list-group-item" . ($nodeChild->type == 'chapter' ? ' strong' : '') . "'");
       }
       ?>

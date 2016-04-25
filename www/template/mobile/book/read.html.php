@@ -13,7 +13,7 @@
 <?php
 include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/files.html.php';
-js::set('fullScreen', $this->config->book->fullScreen);
+js::set('fullScreen', (!empty($this->config->book->fullScreen) or $this->get->fullScreen) ? 1 : 0);
 ?>
 <div class='block-region region-top blocks' data-region='book_read-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'top');?></div>
 <div class='book'>
@@ -58,16 +58,16 @@ js::set('fullScreen', $this->config->book->fullScreen);
       <?php extract($prevAndNext);?>
   
         <?php if($prev): ?>
-        <?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}"), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'"); ?>
+        <?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'"); ?>
         <?php else: ?>
         <a href='###' class='btn block text-left default disabled'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a>
         <?php endif; ?>
         <?php if($next):?>
-        <?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}"), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'"); ?>
+        <?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'"); ?>
         <?php else:?>
         <a href='###' class='btn block text-left default disabled'><?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a>
         <?php endif; ?>
-        <?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'");?>
+        <?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'");?>
     </div>
   </div>
 
