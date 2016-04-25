@@ -301,8 +301,8 @@ class book extends control
         {
             $data = new stdclass();
             $data->index      = $this->post->index;
-            $data->chapter    = $this->post->chapter;
             $data->fullScreen = $this->post->fullScreen;
+            $data->chapter    = $this->post->fullScreen ? 'left' : $this->post->chapter;
             $this->loadModel('setting')->setItems('system.book', $data);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -310,8 +310,11 @@ class book extends control
         }
 
         $this->book->setMenu();
-        $this->view->title = $this->lang->book->setting; 
-        $this->view->books = array('list' => $this->lang->book->list) + $this->book->getBookPairs();
+        $books = $this->book->getBookPairs();
+
+        $this->view->title     = $this->lang->book->setting; 
+        $this->view->books     = array('list' => $this->lang->book->list) + $books;
+        $this->view->firstBook = key($books);
         $this->display();
     }
 }    

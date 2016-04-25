@@ -1,6 +1,6 @@
 <?php include TPL_ROOT . 'common/header.html.php'; ?>
 <?php if(isset($node)) $common->printPositionBar($node->origins);?>
-<?php js::set('fullScreen', $this->config->book->fullScreen);?>
+<?php js::set('fullScreen', !empty($this->config->book->fullScreen) ? 1 : 0);?>
 <div class='row blocks' data-region='book_browse-topBanner'><?php $this->block->printRegion($layouts, 'book_browse', 'topBanner', true);?></div>
 <div class='panel' id='bookCatalog' data-id='<?php echo $node->id?>'>
   <?php if(!empty($book) && $book->title): ?>

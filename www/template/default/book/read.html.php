@@ -1,7 +1,7 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('objectType', 'book');?>
 <?php js::set('objectID', $article->id);?>
-<?php js::set('fullScreen', $this->config->book->fullScreen);?>
+<?php js::set('fullScreen', !empty($this->config->book->fullScreen) ? 1 : 0);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
 <?php if(isset($this->config->book->chapter) and $this->config->book->chapter == 'left'):?>
