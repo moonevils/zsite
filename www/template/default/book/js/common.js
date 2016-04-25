@@ -8,7 +8,7 @@ $(document).ready(function()
         var string = "<div class='fullScreen-book'>";
         if($('.book-catalog').length || $('#bookCatalog').length)
         {
-            string += "<div class='fullScreen-catalog'>";
+            string += "<div class='fullScreen-catalog panel'>";
             if($('.book-catalog').length) string += $('.book-catalog').html();
             if($('#bookCatalog').length)  string += $('#bookCatalog').html();
             string += "</div>";
@@ -16,7 +16,7 @@ $(document).ready(function()
 
         if($('.book-content').length)
         {
-            string += "<div class='fullScreen-content'>";
+            string += "<div class='fullScreen-content panel'>";
             string += "<div class='fullScreen-inner'>";
             string += $('.book-content').html();
             string += "</div></div>";
