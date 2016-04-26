@@ -25,6 +25,7 @@ $(document).ready(function()
         string += "</div>";
 
         $('body').html(string);
+        $('.home').show();
         $('#commentBox').load( createLink('message', 'comment', 'objectType=' + v.objectType + '&objectID=' + v.objectID) );
 
         if(!$('.fullScreen-catalog').length)

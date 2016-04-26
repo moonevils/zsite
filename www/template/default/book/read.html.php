@@ -9,18 +9,16 @@
   <div class='col-md-3'>
     <div class='panel book-catalog'>
       <?php if(!empty($book) && $book->title): ?>
-      <div class='panel-heading'>
-        <strong class='title'><?php echo $book->title;?></strong>
-        <div class='panel-actions book-menu'>
-          <div class='dropdown'>
-            <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><i class='icon-list'></i></a>
-            <ul role='menu' class='dropdown-menu pull-right'>
-              <?php foreach($books as $bookMenu):?>
-              <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
-              <?php endforeach;?>
-            </ul>
-          </div>
+      <div class='panel-heading clearfix'>
+        <div class='dropdown pull-left'>
+          <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <span class='caret'></span></a>
+          <ul role='menu' class='dropdown-menu'>
+            <?php foreach($books as $bookMenu):?>
+            <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
+            <?php endforeach;?>
+          </ul>
         </div>
+        <div class='pull-right home hide'><a href='/' title='<?php echo $lang->book->goHome;?>'><i class='icon-home'></i></a></div>
       </div>
       <?php endif; ?>
       <div class='panel-body'>
