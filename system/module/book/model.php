@@ -241,20 +241,20 @@ class bookModel extends model
      * @access public
      * @return string
      */
-    public function getArticleIDs($nodeID)
+    public function getArticleIdList($nodeID, $families, $allNodes)
     {
-        $node = $this->getNodeByID($nodeID);
+        $node = zget($allNodes, $nodeID, '');
         if(!$node) return '';
 
         if($node->type == 'article') return $node->id;
 
         $ids      = '';
-        $children = $this->getChildren($nodeID);
+        $children = zget($families, $node->id);
         if(!$children) return '';
 
         foreach($children as $child)
         {
-            $result = $this->getArticleIDs($child->id);
+            $result = $this->getArticleIdList($child->id, $families, $allNodes);
             if(strlen($result) == 0) continue;
             $ids .= $result . ',';
         }
@@ -356,7 +356,9 @@ class bookModel extends model
      */
     public function getPrevAndNext($current)
     {
-        $idList = explode(',', $this->getArticleIDs($current->book->id));
+        $families = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->fetchGroup('parent', 'id');
+        $allNodes = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->fetchAll('id');
+        $idList = explode(',', $this->getArticleIdList($current->book->id, $families, $allNodes));
         $idListFlip = array_flip($idList);
 
         $currentOrder = isset($idListFlip[$current->id]) ? $idListFlip[$current->id] : -1;
@@ -467,7 +469,7 @@ class bookModel extends model
         $startPath = '';
         if($startParent > 0)
         {
-            $startParent = $this->getNodeById($startParent);
+            $startParent = $this->getNodeByID($startParent);
             if($startParent) $startPath = $startParent->path . '%';
         }
 
