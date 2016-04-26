@@ -61,6 +61,26 @@ class site extends control
     }
 
     /**
+     * Set domain.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDomain()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
+        }
+
+        $this->view->title = $this->lang->site->setDomain;
+        $this->display();
+    }
+
+    /**
      * set sensitive.
      *
      * @access public

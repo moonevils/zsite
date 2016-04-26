@@ -265,6 +265,7 @@ $lang->forum->menu->setting = '论坛设置|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
+$lang->site->menu->domain   = '域名设置|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN设置|site|setcdn|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
