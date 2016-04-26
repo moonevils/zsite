@@ -27,7 +27,7 @@ $lang->site->desc            = '站点描述';
 $lang->site->icpSN           = '备案编号';
 $lang->site->icpLink         = '备案链接';
 $lang->site->policeSN        = '公安部备案编号';
-$lang->site->policeLink      = '链接';
+$lang->site->policeLink      = '备案链接';
 $lang->site->slogan          = '站点口号';
 $lang->site->mission         = '站点使命';
 $lang->site->copyright       = '创建年份';
@@ -42,6 +42,10 @@ $lang->site->cdn             = 'CDN地址';
 $lang->site->sensitive       = '敏感词';
 $lang->site->scheme          = '默认访问协议';
 $lang->site->saveDays        = '日志保存天数';
+$lang->site->openCache       = '开启缓存';
+$lang->site->cachePage       = '缓存整页';
+$lang->site->cacheExpired    = '更新时间';
+$lang->site->hour            = '小时';
 
 $lang->site->importantOption  = '重要操作';
 $lang->site->resetPassword    = '前台找回密码';
@@ -63,6 +67,7 @@ $lang->site->front            = '网站浏览';
 $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
+$lang->site->setCache      = '缓存设置';
 $lang->site->setCDN        = "CDN设置";
 $lang->site->setDomain     = "域名设置";
 $lang->site->setLang       = "语言设置";
@@ -151,6 +156,12 @@ $lang->site->scoreList['close'] = '禁用';
 
 $lang->site->cdnList['open']  = '启用';
 $lang->site->cdnList['close'] = '关闭';
+
+$lang->site->cacheTypes['close'] = '关闭';
+$lang->site->cacheTypes['file']  = '启用';
+
+$lang->site->cachePageOptions['close'] = '关闭';
+$lang->site->cachePageOptions['open']  = '开启';
 
 $lang->site->filterFunctionList['open']  = '启用';
 $lang->site->filterFunctionList['close'] = '关闭';
