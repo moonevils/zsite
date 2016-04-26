@@ -551,8 +551,8 @@ class blockModel extends model
 
         foreach($blocks as $block) 
         {
-            $key = "block/{$block->id}";
-            if($withGrid and $block->grid) $key = "block/{$block->id}_{$block->grid}";
+            $key = "block/{$block->type}_{$block->id}";
+            if($withGrid and $block->grid) $key = "block/{$block->type}_{$block->id}_{$block->grid}";
 
             $cache = $this->app->cache->get($key);
 

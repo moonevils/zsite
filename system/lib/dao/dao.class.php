@@ -122,7 +122,6 @@ class dao
      */
     public $autoLang;
 
-
     /**
      * The queries executed. Every query will be saved in this array.
      * 
@@ -130,6 +129,15 @@ class dao
      * @access public
      */
     static public $querys = array();
+
+    /**
+     * The tables changed.
+     * 
+     * @var array
+     * @access public
+     */
+    static public $changedTables = array();
+
 
     /**
      * The errors.
@@ -650,6 +658,7 @@ class dao
         if(!empty(dao::$errors)) return new PDOStatement();   // If any error, return an empty statement object to make sure the remain method to execute.
 
         $sql = $this->processSQL();
+        self::$changedTables[] = $this->table;
         try
         {
             $this->reset();
