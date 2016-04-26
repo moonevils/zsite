@@ -44,7 +44,7 @@ class fileCache extends cache
      */
     public function set($key, $value)
     {
-        $cacheFile = $this->config->savePath . $key . '.' .  zget($this->config, 'cacheExtension', 'php');
+        $cacheFile = $this->config->savePath . strtolower($key) . '.' .  zget($this->config, 'cacheExtension', 'php');
         if(!is_dir(dirname($cacheFile))) mkdir(dirname($cacheFile), 0777, true);
         file_put_contents($cacheFile, $value);
     }
@@ -73,6 +73,7 @@ class fileCache extends cache
      */
     public function clear($key)
     {
-
+        $cacheFiles = glob($this->config->savePath . strtolower($key));
+        foreach($cacheFiles as $file) unlink($file);
     }
 }

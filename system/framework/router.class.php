@@ -315,7 +315,7 @@ class router
         $this->loadClass('filter', $static = true);
         $this->loadClass('dao',    $static = true);
 
-        if(RUN_MODE == 'front' and $this->config->cache->type != 'close') $this->loadCacheClass();
+        if($this->config->cache->type != 'close') $this->loadCacheClass();
 
         if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 1;
     }
@@ -1691,6 +1691,9 @@ class router
      */
     public function shutdown()
     {
+        /* If cache on, clear caches. */
+        if($this->config->cache->type != 'close') $this->clearCache();
+        
         /* If debug on, save sql lines. */
         if(!empty($this->config->debug)) $this->saveSQL();
 
@@ -1698,6 +1701,45 @@ class router
         if(!function_exists('error_get_last')) return;
         $error = error_get_last();
         if($error) $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
+    }
+    
+    /**
+     * Clear caches.
+     * 
+     * @access public
+     * @return void
+     */
+    public function clearCache()
+    {
+        if(empty(dao::$changedTables)) return true;
+        foreach(dao::$changedTables as $table)
+        {
+            $items = zget($this->config->cache->relation, $table);
+            $blocks[] = zget($items, 'blocks');
+            $pages[]  = zget($items, 'pages');
+        }
+
+        $blocks = join(',', $blocks);
+        $pages  = join(',', $pages);
+        
+        $blocks = array_unique(explode(',', $blocks));
+        $pages  = array_unique(explode(',', $pages));
+
+        foreach($blocks as $block) 
+        {
+            if(empty($block)) continue;
+            $this->cache->clear("block/{$block}*");
+        }
+
+        if($this->config->cache->cachePage != 'close')
+        {
+            foreach($pages as $page) 
+            {
+                if(empty($page)) continue;
+                $this->cache->clear("page/{$page}*");
+            }
+        }
+        return true;
     }
 
     /**
