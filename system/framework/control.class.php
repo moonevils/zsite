@@ -727,14 +727,6 @@ class control
             $this->mergeJS();
         }
 
-        //if(isset($this->config->site->cdn))
-        //{
-        //    $cdn = rtrim($this->config->site->cdn, '/');
-        //    $this->output = str_replace('src="/data/upload', 'src="' . $cdn . '/data/upload', $this->output);
-        //    $this->output = str_replace("src='/data/upload", "src='" . $cdn . "/data/upload", $this->output);
-        //    $this->output = str_replace("url(/data/upload", "url(" . $cdn . "/data/upload", $this->output);
-        //}
-        
         echo $this->output;
     }
 

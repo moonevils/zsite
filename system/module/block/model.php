@@ -548,9 +548,27 @@ class blockModel extends model
     {
         if(!isset($blocks[$method][$region])) return '';
         $blocks = $blocks[$method][$region];
-        $html   = '';
-        foreach($blocks as $block) $html .= $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
-        echo $html;
+
+        foreach($blocks as $block) 
+        {
+            $key = "block/{$block->id}";
+            if($withGrid and $block->grid) $key = "block/{$block->id}_{$block->grid}";
+
+            $cache = $this->app->cache->get($key);
+
+            if($cache)
+            {
+                echo $cache;
+            }
+            else
+            {
+                ob_start();
+                $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
+                $content = ob_get_flush();
+
+                $this->app->cache->set($key, $content);
+            }
+        }
     }
 
     /**

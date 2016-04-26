@@ -315,7 +315,23 @@ class router
         $this->loadClass('filter', $static = true);
         $this->loadClass('dao',    $static = true);
 
+        if(RUN_MODE == 'front' and $this->config->cacher) $this->loadCacheClass();
+
         if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 1;
+    }
+
+    /**
+     * Load cache class.
+     * 
+     * @access public
+     * @return void
+     */
+    public function loadCacheClass()
+    {
+        $this->loadClass('cache', $static = true);
+        $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache';
+        if($this->config->multi) $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache' . DS . $this->config->site->code;
+        $this->cache = cache::factory($this->config->cacher, zget($this->config->cache, $this->config->cacher));
     }
 
     /**
