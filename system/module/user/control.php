@@ -1133,4 +1133,11 @@ class user extends control
         $this->view->title = $this->lang->setSecurity;
         $this->display();
     }
+
+    public function printTopbar()
+    {
+        commonModel::printTopBar();
+        commonModel::printLanguageBar();
+        die();
+    }
 }

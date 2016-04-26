@@ -551,22 +551,29 @@ class blockModel extends model
 
         foreach($blocks as $block) 
         {
-            $key = "block/{$block->type}_{$block->id}";
-            if($withGrid and $block->grid) $key = "block/{$block->type}_{$block->id}_{$block->grid}";
-
-            $cache = $this->app->cache->get($key);
-
-            if($cache)
+            if($this->config->cache->type != 'close')
             {
-                echo $cache;
+                $key = "block/{$block->type}_{$block->id}";
+                if($withGrid and $block->grid) $key = "block/{$block->type}_{$block->id}_{$block->grid}";
+
+                $cache = $this->app->cache->get($key);
+
+                if($cache)
+                {
+                    echo $cache;
+                }
+                else
+                {
+                    ob_start();
+                    $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
+                    $content = ob_get_flush();
+
+                    $this->app->cache->set($key, $content);
+                }
             }
             else
             {
-                ob_start();
                 $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
-                $content = ob_get_flush();
-
-                $this->app->cache->set($key, $content);
             }
         }
     }
