@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php js::set('closeScoreTip', $lang->site->closeScoreTip);?>
+<?php js::set('requestTypeTip', $lang->site->requestTypeTip);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setBasic;?></strong></div>
   <div class='panel-body'>
@@ -49,6 +50,10 @@
         <tr>
           <th><?php echo $lang->site->mobileTemplate;?></th> 
           <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close', "class='checkbox'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->site->requestType;?></th> 
+          <td><?php echo html::select('requestType', $lang->site->requestTypeList, isset($this->config->site->requestType) ? $this->config->site->requestType : $this->config->frontRequestType, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->name;?></th> 
