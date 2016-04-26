@@ -68,6 +68,7 @@ js::set('fullScreen', (!empty($this->config->book->fullScreen) or $this->get->fu
         <a href='###' class='btn block text-left default disabled'><?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a>
         <?php endif; ?>
         <?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'");?>
+        <a href='/' class='btn block text-left default home'><i class='icon-home'></i> <?php echo $lang->book->goHome; ?></a>
     </div>
   </div>
 
