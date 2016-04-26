@@ -112,11 +112,24 @@
             </div>
           </td>
         </tr>
+        <tr class='policeSN'>
+          <th><?php echo $lang->site->policeSN;?></th> 
+          <td colspan='2'>
+            <div class='row'>
+              <?php $placeholder = ($this->app->getClientLang() == 'en') ? "placeholder='{$lang->site->policeTip}'" : '';?>
+              <div class='col-sm-4'><?php echo html::input('policeSN', isset($this->config->site->policeSN) ? $this->config->site->policeSN : '', "class='form-control col-xs-2' $placeholder");?></div>
+              <div class='col-sm-8'>
+                <div class='input-group'>
+                  <span class="input-group-addon"><?php echo $lang->site->policeLink;?></span>
+                  <?php echo html::input('policeLink', isset($this->config->site->policeLink) ? $this->config->site->policeLink : 'http://www.miitbeian.gov.cn', "class='form-control'")?>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
         <tr>
           <th></th>
-          <td colspan='2'>
-            <?php echo html::submitButton();?>
-          </td>
+          <td colspan='2'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>
