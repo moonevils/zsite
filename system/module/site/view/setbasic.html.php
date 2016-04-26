@@ -97,7 +97,6 @@
             </div>
           </td>
         </tr>
-<<<<<<< HEAD
         <tr class='policeSN'>
           <th><?php echo $lang->site->policeSN;?></th> 
           <td colspan='2'>
@@ -112,12 +111,6 @@
               </div>
             </div>
           </td>
-=======
-        <tr>
-          <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></td>
->>>>>>> 3c6d4702d3fb033fb3b3459aca665c06b03b11de
-        </tr>
         <tr>
           <th></th>
           <td colspan='2'><?php echo html::submitButton();?></td>
