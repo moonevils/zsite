@@ -5,33 +5,11 @@ $(document).ready(function()
     if(v.fullScreen)
     {
         $('html, body').css('height', '100%');
-        var string = "<div class='fullScreen-book'>";
-        if($('.book-catalog').length || $('#bookCatalog').length)
-        {
-            string += "<div class='fullScreen-catalog panel'>";
-            if($('.book-catalog').length) string += $('.book-catalog').html();
-            if($('#bookCatalog').length)  string += $('#bookCatalog').html();
-            string += "</div>";
-        }
+        $('#article' + v.objectID).css('font-weight', 'bold');
 
-        if($('.book-content').length)
-        {
-            string += "<div class='fullScreen-content panel'>";
-            string += "<div class='fullScreen-inner'>";
-            string += $('.book-content').html();
-            string += "</div></div>";
-        }
+        curPos = sessionStorage.getItem('curPos');
+        if(curPos) $('.fullScreen-catalog').animate({scrollTop: curPos}, 0);
 
-        string += "</div>";
-
-        $('body').html(string);
-        $('.home').show();
-        $('#commentBox').load( createLink('message', 'comment', 'objectType=' + v.objectType + '&objectID=' + v.objectID) );
-
-        if(!$('.fullScreen-catalog').length)
-        {
-          $('.fullScreen-content').css('left', 0);
-          $('.previous').css('left', '5px');
-        }
+        $('.article').click(function(){sessionStorage.setItem('curPos', $('.fullScreen-catalog').scrollTop());});
     }
 });
