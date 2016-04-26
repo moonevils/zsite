@@ -47,5 +47,28 @@ $(document).ready(function()
         })
     });
 
+    $('#requestType').change(function()
+    {
+        if($(this).find('option:selected').val() == 'PATH_INFO')
+        {
+            $.ajax(
+            {
+                type: 'get',
+                url: 'pathinfo.php',
+                dataType: 'json',
+                success: function(data){return false;},  
+                error: function(data)
+                {
+                    if(data.status != '200') 
+                    {
+                        $('option[value=PATH_INFO2]').prop('selected', true);
+                        bootbox.alert(v.requestTypeTip);
+                    }
+                }
+            });
+        }
+    })
+
     $('input[type=checkbox][id*=lang]').change();
+    $('#requestType').change();
 })

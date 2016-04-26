@@ -101,9 +101,8 @@ $(document).ready(function()
       $('#mailSender').click(function()
       {
           $('#mailSender').popover({trigger:'manual', content: v.emailSending, placement:'right'}).popover('show');
-          $('#mailSender').next('.popover').addClass('popover-success').css('width', '320px');
-          function distroy(){$('#mailSender').popover('destroy')}
-          setTimeout(distroy, 2000);
+          $('#mailSender').next('.popover').addClass('popover-success');
+          setTimeout(function(){$('#mailSender').popover('destroy');}, 2000);
   
           var url = $(this).attr('href');
 
@@ -115,8 +114,7 @@ $(document).ready(function()
                    $('#mailSender').attr('disabled', 'disabled');
                    $('#mailSender').popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
                    $('#mailSender').next('.popover').addClass('popover-success');
-                   function distroy(){$('#mailSender').popover('destroy')}
-                   setTimeout(distroy,2000);
+                   setTimeout(function(){$('#mailSender').popover('destroy');}, 2000);
               }
               else
               {

@@ -12,6 +12,7 @@
 $lang->site->common        = "站点";
 
 $lang->site->type            = '站点类型';
+$lang->site->requestType     = '访问类型';
 $lang->site->status          = '站点状态';
 $lang->site->pauseTip        = '暂停提示';
 $lang->site->name            = '网站名称';
@@ -46,6 +47,7 @@ $lang->site->openCache       = '开启缓存';
 $lang->site->cachePage       = '缓存整页';
 $lang->site->cacheExpired    = '更新时间';
 $lang->site->hour            = '小时';
+$lang->site->homeMenus       = '首页菜单';
 
 $lang->site->importantOption  = '重要操作';
 $lang->site->resetPassword    = '前台找回密码';
@@ -86,10 +88,16 @@ $lang->site->setRecPerPage = "列表数量设置";
 $lang->site->useLocation   = "使用当前登录地址: <span>%s</span>";
 $lang->site->changeSetting = "更改设置";
 $lang->site->setStat       = "流量统计设置";
+$lang->site->setHomeMenu   = "首页菜单";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
 $lang->site->typeList->blog   = '个人博客';
+
+$lang->site->requestTypeList = array();
+$lang->site->requestTypeList['GET']        = 'GET';
+$lang->site->requestTypeList['PATH_INFO']  = 'PATH_INFO';
+$lang->site->requestTypeList['PATH_INFO2'] = 'PATH_INFO2';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
@@ -197,6 +205,7 @@ $lang->site->cdnTip           = 'cdn资源仅在非debug模式下启用，包含
 $lang->site->cdnSiteTip       = '资源存放路径错误';
 $lang->site->defaultTip       = '站点维护中……';
 $lang->site->icpTip           = '';
+$lang->site->requestTypeTip   = '系统不支持PATH_INFO方式';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
@@ -222,3 +231,24 @@ $lang->site->api->key    = '密钥';
 $lang->site->api->ip     = 'IP列表';
 $lang->site->api->allip  = '无限制';
 $lang->site->api->ipTip  = '允许调用者使用这些IP访问，多个IP使用,隔开。支持IP段，如192.168.1.*';
+
+$lang->site->menus = array();
+$lang->site->menus['order']      = '订单';
+$lang->site->menus['message']    = '留言';
+$lang->site->menus['comment']    = '评论';
+$lang->site->menus['reply']      = '回复';
+$lang->site->menus['thread']     = '主题';
+$lang->site->menus['forumreply'] = '回帖';
+$lang->site->menus['article']    = '文章';
+$lang->site->menus['page']       = '单页';
+$lang->site->menus['blog']       = '博客';
+$lang->site->menus['book']       = '手册';
+$lang->site->menus['submittion'] = '投稿';
+$lang->site->menus['product']    = '产品';
+$lang->site->menus['user']       = '会员';
+$lang->site->menus['wechat']     = '微信';
+$lang->site->menus['stat']       = '统计';
+$lang->site->menus['tag']        = '关键词';
+$lang->site->menus['links']      = '友情链接';
+$lang->site->menus['site']       = '站点';
+$lang->site->menus['security']   = '安全';
