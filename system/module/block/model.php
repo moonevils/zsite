@@ -546,7 +546,6 @@ class blockModel extends model
      */
     public function printRegion($blocks, $method = '', $region = '', $withGrid = false, $containerHeader = '', $containerFooter = '')
     {
-        $this->loadModel('cache');
         if(!isset($blocks[$method][$region])) return '';
         $blocks = $blocks[$method][$region];
 
@@ -555,7 +554,7 @@ class blockModel extends model
             $key = "block/{$block->id}";
             if($withGrid and $block->grid) $key = "block/{$block->id}_{$block->grid}";
 
-            $cache = $this->cache->get($key);
+            $cache = $this->app->cache->get($key);
 
             if($cache)
             {
@@ -567,7 +566,7 @@ class blockModel extends model
                 $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
                 $content = ob_get_flush();
 
-                $this->cache->set($key, $content);
+                $this->app->cache->set($key, $content);
             }
         }
     }
