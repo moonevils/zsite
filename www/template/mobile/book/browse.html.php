@@ -61,6 +61,7 @@
           echo html::a($link, ($nodeChild->type == 'chapter' ? "<i class='icon icon-list-ul'></i>" : "<i class='icon icon-file-text-o'></i>") . " {$serial} &nbsp;{$nodeChild->title} <i class='pull-right icon-chevron-right'></i>", "class='list-group-item" . ($nodeChild->type == 'chapter' ? ' strong' : '') . "'");
       }
       ?>
+      <a href='/' class='btn block text-left default home'><i class='icon-home'></i> <?php echo $lang->book->goHome;?></a>
     </div>
   </div>
 </div>
