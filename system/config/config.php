@@ -233,6 +233,9 @@ define('TABLE_BLACKLIST',      $config->db->prefix . 'blacklist');
 define('TABLE_OPERATIONLOG',   $config->db->prefix . 'operationlog');
 define('TABLE_WIDGET',         $config->db->prefix . 'widget');
 
+/* Include cache config file. */
+include $configRoot . 'cache.php';
+
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');
 if($extConfigFiles) foreach($extConfigFiles as $extConfigFile) include $extConfigFile;
