@@ -33,3 +33,11 @@ else
 {
     include "header.layout.html.php";
 }
+?>
+
+<script>
+$(document).ready(function()
+{
+    $('#headNav .wrapper nav').load(createLink('user', 'printtopbar'));
+});
+</script>

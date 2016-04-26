@@ -2,7 +2,8 @@
 $config->cachePages = '';
 
 $config->cache = new stdclass();
-$config->cache->expired = 86400;
+$config->cache->expired   = 86400;
+$config->cache->cachePage = 'open';
 
 $config->cache->type = 'file';
 $config->cache->cachedPages = 'index.index,article.browse,product.browse,book.browse,book.index,';
@@ -11,6 +12,13 @@ $config->cache->file = new stdclass();
 $config->cache->file->expired = $config->cache->expired;
 
 $config->cache->relation = array();
+
+$config->cache->relation[TABLE_BLOCK]['blocks'] = '/';
+$config->cache->relation[TABLE_BLOCK]['pages']  = '/';
+
+$config->cache->relation[TABLE_LAYOUT]['blocks'] = '/';
+$config->cache->relation[TABLE_LAYOUT]['pages']  = '/';
+
 $config->cache->relation[TABLE_CONFIG]['blocks'] = '/';
 $config->cache->relation[TABLE_CONFIG]['pages']  = '/';
 
