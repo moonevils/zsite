@@ -5,16 +5,13 @@
 <div class='panel' id='bookCatalog' data-id='<?php echo $node->id?>'>
   <?php if(!empty($book) && $book->title): ?>
   <div class='panel-heading clearfix'>
-    <strong class='title'><?php echo $book->title;?></strong>
-    <div class='panel-actions book-menu'>
-      <div class='dropdown'>
-        <a data-toggle='dropdown' class='dropdown-toggle' href='javascript:;'><i class='icon-list'></i></a>
-        <ul role='menu' class='dropdown-menu pull-right'>
-          <?php foreach($books as $bookMenu):?>
-          <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
-          <?php endforeach;?>
-        </ul>
-      </div>
+    <div class='dropdown'>
+      <a data-toggle='dropdown' class='dropdown-toggle' href='javascript:;'><strong><?php echo $book->title;?></strong> <span class='caret'></span></a>
+      <ul role='menu' class='dropdown-menu'>
+        <?php foreach($books as $bookMenu):?>
+        <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
+        <?php endforeach;?>
+      </ul>
     </div>
   </div>
   <?php endif;?>

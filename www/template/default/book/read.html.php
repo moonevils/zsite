@@ -9,18 +9,16 @@
   <div class='col-md-3'>
     <div class='panel book-catalog'>
       <?php if(!empty($book) && $book->title): ?>
-      <div class='panel-heading'>
-        <strong class='title'><?php echo $book->title;?></strong>
-        <div class='panel-actions book-menu'>
-          <div class='dropdown'>
-            <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><i class='icon-list'></i></a>
-            <ul role='menu' class='dropdown-menu pull-right'>
-              <?php foreach($books as $bookMenu):?>
-              <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
-              <?php endforeach;?>
-            </ul>
-          </div>
+      <div class='panel-heading clearfix'>
+        <div class='dropdown pull-left'>
+          <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <span class='caret'></span></a>
+          <ul role='menu' class='dropdown-menu'>
+            <?php foreach($books as $bookMenu):?>
+            <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
+            <?php endforeach;?>
+          </ul>
         </div>
+        <div class='pull-right home hide'><a href='/' title='<?php echo $lang->book->goHome;?>'><i class='icon-home'></i></a></div>
       </div>
       <?php endif; ?>
       <div class='panel-body'>
@@ -70,14 +68,14 @@
       <?php endif; ?>
     </ul>
   </footer>
+  <?php if(commonModel::isAvailable('message')):?>
+  <div id='commentBox'></div>
+  <?php endif;?>
 </div>
+<div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
+<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php if($this->config->book->chapter == 'left' or $this->get->fullScreen):?>
   </div>
 </div>
 <?php endif;?>
-<?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'></div>
-<?php endif;?>
-<div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

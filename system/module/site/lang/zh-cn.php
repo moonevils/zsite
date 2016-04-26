@@ -64,6 +64,7 @@ $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setCDN        = "CDN设置";
+$lang->site->setDomain     = "域名设置";
 $lang->site->setLang       = "语言设置";
 $lang->site->setFilter     = "过滤设置";
 $lang->site->ipFilter      = "ip过滤";
@@ -171,9 +172,9 @@ $lang->site->moduleAvailable['submittion'] = '投稿';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签。';
 $lang->site->fileAllowedRole  = '多个后缀名之间请用 "," 隔开';
-$lang->site->domainTip        = '设置主域名可使所有网站访问跳转到该域名，设置前请确保主域名解析正确。该值为空时不进行跳转。';
-$lang->site->allowedDomainTip = '多个域名使用 , 隔开，如www.chanzhi.org,www.chanzhi.com。该值为空时允许所有域名访问。';
-$lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.194.132.0/28。允许所有IP访问请留空。';
+$lang->site->domainTip        = '所有网站访问跳转到该域名，请确保主域名解析正确，该值为空时不进行跳转。';
+$lang->site->allowedDomainTip = "只允许填写的域名访问网站，多个域名用 , 隔开，该值为空时允许所有域名访问。";
+$lang->site->allowedIPTip     = '多个IP用 , 隔开，如202.194.133.1,202.194.132.0/28。允许所有IP访问请留空。';
 $lang->site->wrongAllowedIP   = 'IP 格式错误';
 $lang->site->changeLocation   = '您当前的登录地区与允许登录地区不一致。';
 $lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。';
