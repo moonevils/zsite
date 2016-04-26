@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+    $('.home').hide();
+
     if(v.fullScreen)
     {
         $('body').css('margin', '0');
@@ -15,5 +17,6 @@ $(document).ready(function()
         }
         string += "</div>";
         $('body').html(string);
+        $('.home').show();
     }
 });
