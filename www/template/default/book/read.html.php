@@ -70,14 +70,14 @@
       <?php endif; ?>
     </ul>
   </footer>
+  <?php if(commonModel::isAvailable('message')):?>
+  <div id='commentBox'></div>
+  <?php endif;?>
 </div>
+<div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
+<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php if($this->config->book->chapter == 'left' or $this->get->fullScreen):?>
   </div>
 </div>
 <?php endif;?>
-<?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'></div>
-<?php endif;?>
-<div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

@@ -30,7 +30,7 @@ dl.drop-area {background-color: #f1f1f1}
 .book-menu{margin: 0;}
 
 .fullScreen-book{display: block; width: 100%; height: 100%; position: relative;}
-.fullScreen-book .panel{border: none; box-shadow: none;}
+.fullScreen-book > .panel{border: none; box-shadow: none;}
 .fullScreen-book .fullScreen-catalog{position: absolute; top: 0; left: 0; z-index: 1; width: 300px; overflow-y:auto; height: 100%; border-right: 1px solid #ddd;}
 .fullScreen-book .fullScreen-content{position: absolute; top: 0; left: 320px; height: 100%; overflow-y: auto; right: 0;}
 .fullScreen-book .fullScreen-inner{max-width: 850px; margin: 0 auto;}
