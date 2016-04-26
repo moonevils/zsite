@@ -147,7 +147,7 @@ class mail extends control
                 $error = str_replace('\n', "<br />", join('', $this->mail->getError()));
                 $this->send(array('result' => 'fail', 'data' => $error));
             }
-            $this->send(array('result' => 'success', 'message' => $this->lang->mail->successSended));
+            $this->send(array('result' => 'success', 'message' => sprintf($this->lang->mail->successSended, $this->post->to)));
         }
 
         $this->view->title      = $this->lang->mail->common . $this->lang->colon . $this->lang->mail->test;
@@ -196,7 +196,7 @@ class mail extends control
         if(!$this->mail->isError())
         {
             $this->session->set('lastSendTo' . $account, time());
-            $this->send(array('result' => 'success', 'message' => sprintf($this->lang->mail->sendSuccess, $email)));
+            $this->send(array('result' => 'success', 'message' => sprintf($this->lang->mail->successSended, $email)));
         }
 
         $error = str_replace('\n', "<br />", join('', $this->mail->getError()));

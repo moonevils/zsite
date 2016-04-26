@@ -268,6 +268,7 @@ $lang->site->menu->basic    = '站点设置|site|setbasic|';
 $lang->site->menu->domain   = '域名设置|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN设置|site|setcdn|';
 $lang->site->menu->cache    = '缓存设置|site|setcache|';
+$lang->site->menu->home     = '首页菜单|site|sethomemenu|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
