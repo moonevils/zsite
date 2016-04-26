@@ -63,4 +63,16 @@ class fileCache extends cache
         if($this->expired and  (time() - filemtime($cacheFile) > $this->expired)) return false;
         return file_get_contents($cacheFile);
     }
+    
+    /**
+     * Clear cache by key.
+     * 
+     * @param  string    $key 
+     * @access public
+     * @return bool
+     */
+    public function clear($key)
+    {
+
+    }
 }

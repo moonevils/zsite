@@ -1,9 +1,8 @@
 <?php
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 /**
- * cache class.
+ * Cache class.
  * 
- * @copyright Copyright 2009-2010 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
+ * @copyright Copyright 2009-2016 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
  * @author    Xiying Guan <guanxiying@xirangit.com>
  * @package   
  * @license   ZPL
@@ -25,7 +24,7 @@ class cache
     /**
      * expired time.
      */ 
-    public $expired = 0;
+    public $expired = 86400;
 
     /**
      * Factory function.
@@ -99,6 +98,28 @@ class cache
      * @return void
      */
     public function get($key)
+    {
+    }
+
+    /**
+     * Get cached keys.
+     * 
+     * @param string $patten 
+     * @access public
+     * @return array
+     */
+    public function getKeys($patten)
+    {
+    }
+
+    /**
+     * clear items by key.
+     * 
+     * @param  string    $key 
+     * @access public
+     * @return void
+     */
+    public function clear($key)
     {
     }
 }
