@@ -19,8 +19,11 @@ class error extends control
      */
     public function index()
     {
-        @header("http/1.1 404 not found");
-        @header("status: 404 not found");
+        if(!helper::isAjaxRequest())
+        {
+            @header("http/1.1 404 not found");
+            @header("status: 404 not found");
+        }
 
         /* Record post number. */
         $this->loadModel('guarder')->logOperation('ip', 'error404');

@@ -12,6 +12,7 @@
 $lang->site->common        = "站点";
 
 $lang->site->type            = '站点类型';
+$lang->site->requestType     = '访问类型';
 $lang->site->status          = '站点状态';
 $lang->site->pauseTip        = '暂停提示';
 $lang->site->name            = '网站名称';
@@ -83,6 +84,11 @@ $lang->site->setStat       = "流量统计设置";
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
 $lang->site->typeList->blog   = '个人博客';
+
+$lang->site->requestTypeList = array();
+$lang->site->requestTypeList['GET']        = 'GET';
+$lang->site->requestTypeList['PATH_INFO']  = 'PATH_INFO';
+$lang->site->requestTypeList['PATH_INFO2'] = 'PATH_INFO2';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
@@ -184,6 +190,7 @@ $lang->site->cdnTip           = 'cdn资源仅在非debug模式下启用，包含
 $lang->site->cdnSiteTip       = '资源存放路径错误';
 $lang->site->defaultTip       = '站点维护中……';
 $lang->site->icpTip           = '';
+$lang->site->requestTypeTip   = '系统不支持PATH_INFO方式';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
