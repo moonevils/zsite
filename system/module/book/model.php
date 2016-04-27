@@ -171,7 +171,7 @@ class bookModel extends model
                 $serial = $node->type != 'book' ? $serials[$node->id] : '';
                 if($node->type == 'chapter')
                 {
-                    if($this->config->book->chapter == 'left')
+                    if($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen)
                     {
                         $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span>&nbsp;" . $node->title . '</strong></dd>';
                     }
@@ -184,7 +184,7 @@ class bookModel extends model
                 elseif($node->type == 'article')
                 {
                     $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
-                    $catalog .= "<dd class='catalogue article text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
+                    $catalog .= "<dd id='article{$node->id}' class='catalogue article text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
                 }
                 if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog'])) $catalog .= $nodeList[$node->id]['catalog'];
             }

@@ -57,7 +57,7 @@ class book extends control
         if($node)
         {
             $book = $this->book->getBookByNode($node);
-            if($this->config->book->chapter == 'left' and $this->device == 'desktop')
+            if(($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen) and $this->device == 'desktop') 
             {
                 $articles = $this->book->getArticleIDs($book->id);
                 if($articles)
