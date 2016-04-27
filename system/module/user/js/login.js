@@ -1,3 +1,11 @@
+$(document).ready(function()
+{
+    $("#langs li > a").click(function() 
+    {
+        selectLang($(this).data('value'));
+    });
+})
+
 /* Keep session random valid. */
 needPing = true;
 $('#submit').click(function()
