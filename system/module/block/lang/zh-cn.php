@@ -25,6 +25,7 @@ $lang->block->regionList      = '区域列表';
 $lang->block->select          = '请选择区块';
 $lang->block->categories      = '分类';
 $lang->block->showImage       = '图文';
+$lang->block->maxWidth        = '最大宽度';
 $lang->block->showCategory    = '显示类目';
 $lang->block->showBoard       = '显示版块';
 $lang->block->showTime        = '显示时间';
@@ -112,6 +113,13 @@ $lang->block->categoryList['custom']  = '自定义';
 $lang->block->categoryList['article'] = '文章';
 $lang->block->categoryList['product'] = '产品';
 $lang->block->categoryList['system']  = '系统';
+
+$lang->block->imageSizeList['large']  = '大图';
+$lang->block->imageSizeList['middle'] = '中图';
+$lang->block->imageSizeList['small']  = '小图';
+
+$lang->block->imagePositionList['left']  = '居左';
+$lang->block->imagePositionList['right'] = '居右';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
