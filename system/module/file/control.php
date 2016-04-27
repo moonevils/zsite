@@ -555,4 +555,45 @@ class file extends control
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
+
+    /**
+     * Rebuild thumb images.
+     * 
+     * @param  int    $imageDirKey 
+     * @param  int    $lastImage 
+     * @access public
+     * @return void
+     */
+    public function rebuildThumbs($imageDirKey = 0, $lastImage = 0)
+    {
+        static $imageDirs = array();
+        if(empty($imageDirs)) $imageDirs = glob($this->app->getDataRoot() . "upload/*");
+        $imageDir = $imageDirs[$imageDirKey];
+
+        $images = glob($imageDir . '/f_*');
+        $imageCount = count($images);
+        $limit = $imageCount - $lastImage >= 10 ? 10 : $imageCount - $lastImage; 
+        $rawImages = array_slice($images, $lastImage, $limit);
+        foreach($rawImages as $image)
+        {
+            $extension = $this->file->getExtension($image);
+            if(in_array(strtolower($extension), $this->config->file->imageExtensions, true) === false) continue;
+            $this->file->compressImage($image);
+        }
+
+        if($lastImage + $limit == $imageCount)
+        { 
+            if($imageDirKey == count($imageDirs) - 1) $this->send(array('result' => 'finished', 'message' => $this->lang->createSuccess));
+            if($imageDirKey < count($imageDirs) - 1)
+            {
+                $imageDirKey = $imageDirKey + 1;
+                $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildThumbs', "imageDirKey=$imageDirKey&lastImage=0")));
+            }
+        }
+        else
+        {
+            $lastImage = $lastImage + $limit;
+            $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildthumbs', "imageDirKey=$imageDirKey&lastImage=$lastImage")));
+        }
+    }
 }
