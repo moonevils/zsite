@@ -132,6 +132,7 @@ class model
      
         $this->loadDAO();
         $this->setSuperVars();
+        $this->setReferer();
     }
 
     /**
@@ -167,6 +168,25 @@ class model
         $this->cookie  = $this->app->cookie;
         $this->session = $this->app->session;
         $this->global  = $this->app->global;
+    }
+
+    /**
+     * Set referer.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setReferer()
+    {
+        if($this->session->http_referer) return true;
+
+        if(!empty($this->server->http_referer))
+        {
+            $refererInfo = parse_url($this->server->http_referer);
+            if($this->server->http_host == $refererInfo['host']) $referer = '';
+            $this->session->set('http_referer', $referer);
+        }
+        return true;
     }
 
     /**
