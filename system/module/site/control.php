@@ -434,4 +434,23 @@ class site extends control
         $this->view->title = $this->lang->site->api->common;
         $this->display();
     }   
+
+    /**
+     * Set home menu.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setHomeMenu()
+    {
+        if($_POST)
+        {
+            $this->loadModel('setting')->setItem('system.common.menus.home', 'admin,' . implode(',', $this->post->homeMenus));
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+        }
+
+        $this->view->title = $this->lang->site->setHomeMenu;
+        $this->display();
+    }
 }

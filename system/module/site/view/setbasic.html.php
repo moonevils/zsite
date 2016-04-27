@@ -116,6 +116,7 @@
               </div>
             </div>
           </td>
+        </tr>
         <tr>
           <th></th>
           <td colspan='2'><?php echo html::submitButton();?></td>
