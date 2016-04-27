@@ -39,10 +39,11 @@
       <div class='panel-body'>
         <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
           <?php
-          $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
-          $phone = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
-          $qq    = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
-          $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
+          $from   = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
+          $phone  = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
+          $mobile = $this->session->user->account == 'guest' ? '' : $this->session->user->mobile;
+          $qq     = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
+          $email  = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
           ?>
           <div class='form-group'>
             <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
@@ -56,6 +57,12 @@
               <?php echo html::input('phone', $phone, "class='form-control'"); ?>
             </div>
             <div class='col-sm-6'><div class='help-block'><small class='text-important'><?php echo $lang->message->contactHidden;?></small></div></div>
+          </div>
+          <div class='form-group'>
+            <label for='mobile' class='col-sm-1 control-label'><?php echo $lang->message->mobile; ?></label>
+            <div class='col-sm-5'>
+              <?php echo html::input('mobile', $mobile, "class='form-control'"); ?>
+            </div>
           </div>
           <div class='form-group'>
             <label for='qq' class='col-sm-1 control-label'><?php echo $lang->message->qq;?></label>

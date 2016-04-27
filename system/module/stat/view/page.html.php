@@ -13,35 +13,30 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
-  <div class="panel-heading pd-l0">
-    <div class='panel-actions pull-left'>
-      <ul class='nav nav-tabs'>
-        <li <?php echo $mode == 'all' ? "class='active'" : '' ?>><?php echo html::a(inlink('page', "mode=all"), $lang->stat->all);?></li>
-        <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
-        <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('page', "mode=$code"), $modeName);?></li>
-        <?php endforeach;?>
-        <li>
-          <form method='get'>
-            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report');?>
-            <?php echo html::hidden('mode', 'fixed');?>
-            <table class='table table-borderless'>
-              <tr>
-                <td style='padding:4px'>
-                  <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
-                  <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
-                  <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
-                </td>
-              </tr>
-            </table>
-          </form>
-        </li>
-       </ul>
-    </div>
-    <strong>&nbsp;</strong>
+  <div class='panel-heading'>
+    <ul class='nav nav-tabs' id='typeNav'>
+      <li <?php echo $mode == 'all' ? "class='active'" : '' ?>><?php echo html::a(inlink('page', "mode=all"), $lang->stat->all);?></li>
+      <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
+      <?php $class = $mode == $code ? "class='active'" : '';?>
+      <li <?php echo $class?>><?php echo html::a(inlink('page', "mode=$code"), $modeName);?></li>
+      <?php endforeach;?>
+      <li>
+        <form method='get'>
+          <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report');?>
+          <?php echo html::hidden('mode', 'fixed');?>
+          <table class='table table-borderless'>
+            <tr>
+              <td style='padding:4px'>
+                <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
+                <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
+                <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </li>
+    </ul>
   </div>
-</div>
-<div class='panel'>
   <table class='table table-hover table-bordered table-striped tablesorter'>
     <thead>
       <tr class='text-center'>

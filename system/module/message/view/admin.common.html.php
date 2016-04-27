@@ -31,9 +31,10 @@ EOT;
       <?php echo "<span class='gray'>$original->date</span>";?>
       <?php if(!empty($original->link))  echo html::a($original->link, $original->link, "target='_blank'");?>
       <br/>
-      <?php if(!empty($original->phone)) echo "<i class='icon-phone text-info icon'></i> {$original->phone} &nbsp; ";?>
-      <?php if(!empty($original->email)) echo "<i class='icon-envelope text-warning icon'></i> {$original->email} &nbsp; ";?>
-      <?php if(!empty($original->qq))    echo "<strong class='text-danger'>QQ</strong> {$original->qq} &nbsp; ";?>
+      <?php if(!empty($original->phone))  echo "<i class='icon-phone text-info icon'></i> {$original->phone} &nbsp; ";?>
+      <?php if(!empty($original->mobile)) echo "<i class='icon-mobile text-info icon'></i> {$original->mobile} &nbsp; ";?>
+      <?php if(!empty($original->email))  echo "<i class='icon-envelope text-warning icon'></i> {$original->email} &nbsp; ";?>
+      <?php if(!empty($original->qq))     echo "<strong class='text-danger'>QQ</strong> {$original->qq} &nbsp; ";?>
     </td>
     <?php endif;?>
   </tr>
@@ -73,9 +74,10 @@ EOT;
       <?php echo "<span class='gray'>$message->date</span>";?>
       <?php if(!empty($message->link))  echo html::a($message->link, $message->link, "target='_blank'");?>
       <br/>
-      <?php if(!empty($message->phone)) echo "<i class='icon-phone text-info icon'></i> {$message->phone} &nbsp; ";?>
-      <?php if(!empty($message->email)) echo "<i class='icon-envelope text-warning icon'></i> {$message->email} &nbsp; ";?>
-      <?php if(!empty($message->qq))    echo "<strong class='text-danger'>QQ</strong> {$message->qq} &nbsp; ";?>
+      <?php if(!empty($message->phone))  echo "<i class='icon-phone text-info icon'></i> {$message->phone} &nbsp; ";?>
+      <?php if(!empty($message->mobile)) echo "<i class='icon-mobile text-info icon'></i> {$message->mobile} &nbsp; ";?>
+      <?php if(!empty($message->email))  echo "<i class='icon-envelope text-warning icon'></i> {$message->email} &nbsp; ";?>
+      <?php if(!empty($message->qq))     echo "<strong class='text-danger'>QQ</strong> {$message->qq} &nbsp; ";?>
     </td>
     <?php endif;?>
   </tr>
