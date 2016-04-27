@@ -5,9 +5,10 @@
       <?php echo "<span class='gray'>$message->date</span>";?>
       <?php if(!empty($message->link))  echo html::a($message->link, $message->link, "target='_blank'");?>
       <br/>
-      <?php if(!empty($message->phone)) echo "<i class='icon-phone text-info icon'></i> {$message->phone} &nbsp; ";?>
-      <?php if(!empty($message->email)) echo "<i class='icon-envelope text-warning icon'></i> {$message->email} &nbsp; ";?>
-      <?php if(!empty($message->qq))    echo "<strong class='text-danger'>QQ</strong> {$message->qq} &nbsp; ";?>
+      <?php if(!empty($message->phone))  echo "<i class='icon-phone text-info icon'></i> {$message->phone} &nbsp; ";?>
+      <?php if(!empty($message->mobile)) echo "<i class='icon-mobile text-info icon'></i> {$message->mobile} &nbsp; ";?>
+      <?php if(!empty($message->email))  echo "<i class='icon-envelope text-warning icon'></i> {$message->email} &nbsp; ";?>
+      <?php if(!empty($message->qq))     echo "<strong class='text-danger'>QQ</strong> {$message->qq} &nbsp; ";?>
     </td>
   </tr>
   <tr class='original'>
@@ -36,9 +37,10 @@ EOT;
       <?php echo "<span class='gray'>$reply->date</span>";?>
       <?php if(!empty($reply->link))  echo html::a($reply->link, $reply->link, "target='_blank'");?>
       <br/>
-      <?php if(!empty($reply->phone)) echo "<i class='icon-phone text-info icon'></i> {$reply->phone} &nbsp; ";?>
-      <?php if(!empty($reply->email)) echo "<i class='icon-envelope text-warning icon'></i> {$reply->email} &nbsp; ";?>
-      <?php if(!empty($reply->qq))    echo "<strong class='text-danger'>QQ</strong> {$reply->qq} &nbsp; ";?>
+      <?php if(!empty($reply->phone))  echo "<i class='icon-phone text-info icon'></i> {$reply->phone} &nbsp; ";?>
+      <?php if(!empty($reply->mobile)) echo "<i class='icon-mobile text-info icon'></i> {$reply->mobile} &nbsp; ";?>
+      <?php if(!empty($reply->email))  echo "<i class='icon-envelope text-warning icon'></i> {$reply->email} &nbsp; ";?>
+      <?php if(!empty($reply->qq))     echo "<strong class='text-danger'>QQ</strong> {$reply->qq} &nbsp; ";?>
     </td>
     <?php endif;?>
   </tr>
