@@ -727,6 +727,15 @@ class control
             $this->mergeJS();
         }
 
+        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'on')
+        {
+            if($this->app->user->account == 'guest' and strpos($this->config->cachePages, "$moduleName.$methodName") !== false)
+            {
+                $key = 'page' . DS . md5($this->app->getURI());
+                $this->app->cache->set($key, $this->output);
+            }
+        }
+
         echo $this->output;
     }
 
@@ -734,7 +743,7 @@ class control
      * Send data directly, for ajax requests.
      * 
      * @param  misc    $data 
-     * @param  string $type 
+     * @param  string  $type 
      * @access public
      * @return void
      */

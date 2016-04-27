@@ -315,7 +315,7 @@ class router
         $this->loadClass('filter', $static = true);
         $this->loadClass('dao',    $static = true);
 
-        if(RUN_MODE == 'front' and $this->config->cacher) $this->loadCacheClass();
+        if(RUN_MODE == 'front' and $this->config->cache->type != 'close') $this->loadCacheClass();
 
         if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 1;
     }
@@ -331,7 +331,7 @@ class router
         $this->loadClass('cache', $static = true);
         $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache';
         if($this->config->multi) $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache' . DS . $this->config->site->code;
-        $this->cache = cache::factory($this->config->cacher, zget($this->config->cache, $this->config->cacher));
+        $this->cache = cache::factory($this->config->cache->type, zget($this->config->cache, $this->config->cache->type));
     }
 
     /**
@@ -1297,6 +1297,17 @@ class router
         else
         {
             $this->setParamsByGET($defaultParams);
+        }
+
+        /* Call the method. */
+        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'on')
+        {
+            if($this->user->account == 'guest' and strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
+            {
+                $key   = 'page' . DS . md5($this->URI);
+                $cache = $this->cache->get($key);
+                if($cache) die($cache);
+            }
         }
 
         /* Call the method. */
