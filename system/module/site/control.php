@@ -436,11 +436,38 @@ class site extends control
     }   
 
     /**
-     * Set home menu.
+     * Set cache function.
      * 
      * @access public
      * @return void
      */
+    public function setCache()
+    {
+        if(!empty($_POST))
+        {
+            $post    = fixer::input('post')->get();
+
+            $setting = new stdclass();
+            $setting->type      = $post->status;
+            $setting->cachePage = $post->cachePage;
+            $setting->expired   = $post->cacheExpired * 3600;
+
+            $result = $this->loadModel('setting')->setItems('system.common.cache', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setcache')));
+        }
+
+        $this->view->title = $this->lang->site->setCache;
+        $this->display();
+    }
+
+    /**
+     * Set cache function.
+     * 
+     * @access public
+     * @return void
+     */
+
     public function setHomeMenu()
     {
         if($_POST)

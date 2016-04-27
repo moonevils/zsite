@@ -209,6 +209,7 @@ $lang->resource->site->setOauth     = 'setOauth';
 $lang->resource->site->setsecurity  = 'setsecurity';
 $lang->resource->site->setsensitive = 'setsensitive';
 $lang->resource->site->setstat      = 'setStat';
+$lang->resource->site->setCache     = 'setCache';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();

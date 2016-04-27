@@ -54,12 +54,22 @@ class book extends control
     public function browse($nodeID)
     {
         $node = $this->book->getNodeByID($nodeID);
+
         if($node)
         {
+            $nodeID = $node->id;
             $book = $this->book->getBookByNode($node);
             if(($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen) and $this->device == 'desktop') 
             {
-                $articles = $this->book->getArticleIDs($book->id);
+                $families = $this->dao->select('*')->from(TABLE_BOOK)
+                    ->where('path')->like(",{$nodeID},%")
+                    ->fetchGroup('parent', 'id');
+
+                $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
+                    ->where('path')->like("%,{$nodeID},%")
+                    ->fetchAll('id');
+                $articles = $this->book->getArticleIdList($nodeID, $families, $allNodes);
+
                 if($articles)
                 {
                     $articles  = explode(',', $articles);
@@ -68,6 +78,7 @@ class book extends control
                     $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''));
                 }
             }
+
             $serials = $this->book->computeSN($book->id);
 
             $this->view->title      = $book->title;
