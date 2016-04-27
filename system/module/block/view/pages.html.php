@@ -37,26 +37,72 @@
       <?php echo html::a(inlink('clonelayout', "plan={$plan}"), $lang->block->cloneLayout, "class='btn btn-sm btn-primary' data-toggle='modal'");?>
     </div>
   </div>
-  <table class='table table-bordered table-hover table-striped'>
-    <tr>
-      <th class='w-200px'><?php echo $lang->block->page;?></th>
-      <th class='text-center'><?php echo $lang->block->regionList;?></th>
-    </tr>
-    <?php foreach($this->lang->block->$template->pages as $page => $name):?>
+  <div class='panel-body'>
+    <div>
+    <?php foreach($this->lang->block->{$template}->pages as $page => $name):?>
     <?php if(empty($lang->block->$template->regions->$page)) continue;?>
-    <tr>
-      <td><?php echo $name;?></td>
-      <td>
-      <?php
-      $regions = $lang->block->$template->regions->$page;
-      foreach($regions as $region => $regionName)
-      {
-          commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn btn-xs' data-toggle='modal'");
-      }
-      ?>
-      </td>
-    </tr>
+    <div style='margin:6px; width:160px;float:left;'>
+      <?php echo html::a('javascript:;', $name, "class='btn-page' data-page='{$page}'  data-toggle='modal' data-target='#region{$page}'");?>
+      <div class="modal fade" id="<?php echo 'region' .  $page;?>" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title"><?php echo $name;?></h4>
+            </div>
+            <div class="modal-body">
+            <table class='table table-borderless w-p100 table-regions'>
+            <?php
+            $regions = $lang->block->$template->regions->$page;
+            if(isset($regions['side']))
+            {
+                $rows = count($regions) - 1;
+
+                $i = 1;
+                foreach($regions as $region => $regionName)
+                {
+                    if($region != 'side')
+                    {
+                        echo '<tr>';
+                        if($custom['sidebar-pull-left'] != 'false' and $i == 1)
+                        {
+                            echo "<td rowspan='$rows' class='text-middle'>";
+                            commonModel::printLink('block', 'setregion', "page={$page}&region=side", $regions['side'], "class='btn-region btn-side' data-toggle='modal'");
+                            echo '</td>';
+                        }
+                        echo "<td class='w-p80'>";
+                        commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn-region' data-toggle='modal'");
+                        echo '</td>';
+                        if($custom['sidebar-pull-left'] == 'false' and $i == 1)
+                        {
+                            echo "<td rowspan='$rows' class='text-middle'>";
+                            commonModel::printLink('block', 'setregion', "page={$page}&region=side", $regions['side'], "class='btn-region btn-side' data-toggle='modal'");
+                            echo '</td>';
+                        }
+                        echo '</tr>';
+                    }
+                    $i ++;
+                }
+            }
+            else
+            {
+                foreach($regions as $region => $regionName)
+                {
+                    echo '<tr><td>';
+                    commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn-region' data-toggle='modal'");
+                    echo '</td>';
+                    echo '</tr>';
+                }
+            }
+            ?>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <?php endforeach;?>
-  </table>
+    </div>
+  </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

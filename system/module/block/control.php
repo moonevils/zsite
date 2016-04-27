@@ -50,6 +50,8 @@ class block extends control
         $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
         $this->view->uiHeader = true;
+        $custom   = json_decode($this->config->template->custom, true);
+        $this->view->custom   = $custom[$template][$theme];
         $this->display();       
     }
 

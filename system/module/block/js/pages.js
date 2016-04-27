@@ -70,6 +70,10 @@ $(document).ready(function()
         if(hasNext) $(this).parents('tr').next().after($(this).parents('tr')); 
     });
 
+    $('.btn-region').click(function()
+    {
+        $(this).parents('.modal-content').find('.close').click();
+    });
 })
 
 function computeParent()
