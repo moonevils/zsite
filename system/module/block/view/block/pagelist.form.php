@@ -16,7 +16,19 @@
 </tr>
 <tr>
   <th><?php echo $lang->block->showImage;?></th>
-  <td><input type='checkbox' name='params[image]' <?php if(isset($block->content->image) && $block->content->image) echo 'checked';?> value='1' /></td>
+  <td>
+    <div class='input-group'>
+      <span class='input-group-addon'>
+        <input type='checkbox' name='params[image]' <?php if(isset($block->content->image) && $block->content->image) echo 'checked';?> value='1' />
+      </span>
+      <?php echo html::select('params[imagePosition]', $lang->block->imagePositionList, isset($block->content->imagePosition) ? $block->content->imagePosition : '', "class='form-control'");?>
+      <span class='input-group-addon fix-border fix-padding'></span>
+      <?php echo html::select('params[imageSize]', $lang->block->imageSizeList, isset($block->content->imageSize) ? $block->content->imageSize : '', "class='form-control'");?>
+      <span class='input-group-addon fix-border'><?php echo $lang->block->maxWidth;?></span>
+      <?php echo html::input('params[imageWidth]', isset($block->content->imageWidth) ? $block->content->imageWidth : '60', "class='form-control'");?>
+      <span class='input-group-addon'>px</span>
+    </div>
+  </td>
 </tr>
 <tr>
   <th><?php echo $lang->block->showTime;?></th>
