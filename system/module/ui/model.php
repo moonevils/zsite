@@ -124,6 +124,35 @@ class uiModel extends model
     }
 
     /**
+     * Get custom css file.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return string
+     */
+    public function getCustomCssFile($template, $theme)
+    {
+        $lang = $this->app->getClientLang();
+        if($this->config->multi)  return $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . "{$template}_{$theme}_{$lang}.css";
+        if(!$this->config->multi) return $this->app->getDataRoot() . 'css' . DS . "{$template}_{$theme}_{$lang}.css";
+    }
+
+    /**
+     * Get theme css url.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function getThemeCssUrl($template, $theme)
+    {
+        $lang = $this->app->getClientLang();
+        if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $config->site->code . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+        if(!$this->config->multi) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+    }
+    /**
      * check a theme is imported.
      * 
      * @param  string    $template 
@@ -238,7 +267,7 @@ class uiModel extends model
     public function createCustomerCss($template, $theme, $params = null)
     {
         $lessc   = $this->app->loadClass('lessc');
-        $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+        $cssFile = $this->getCustomCssFile($template, $theme);
 
         if(!empty($params)) $params = (array) $params;
         if(empty($params))  $params = $this->getCustomParams($template, $theme);
@@ -947,8 +976,7 @@ class uiModel extends model
 
         /* Copy customed css file. */
         $customCssFile = $this->directories->exportCssPath . "{$template}_{$code}.css";
-        $originCssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-        copy($originCssFile, $customCssFile);
+        copy($this->getCustomCssFile($template, $theme), $customCssFile);
 
         /* Copy less file. */
         $lessFile = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS . 'style.less';

@@ -54,17 +54,8 @@ $sysURL             = $common->getSysURL();
   }
 
   /* Import customed css file if it exists. */
-  $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . '_' . $templateName . DS . $themeName . '.css';
-  if($config->multi && file_exists($siteCustomCssFile))
-  {
-      css::import(sprintf($webRoot . 'data/css/%s/%s_%s.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'");
-  }
-  else
-  {
-      $customCssFile = $this->app->getDataRoot() . 'css' . DS . $templateName . '_' . $themeName . '.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s_%s.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle'");
-
-  }
+  $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->device}->name, $config->template->{$this->device}->theme);
+  if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme));
 
   if(isset($pageCSS)) css::internal($pageCSS);
 
