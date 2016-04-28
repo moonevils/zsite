@@ -70,7 +70,7 @@ class logModel extends model
      */
     public function saveReferer()
     {
-        if(!$this->get->referer)
+        if(!$this->session->http_referer)
         {
             if($this->session->referer)
             {
@@ -80,7 +80,8 @@ class logModel extends model
             return null;
         }
 
-        $url = helper::safe64decode($this->get->referer);
+        $url = $this->session->http_referer;
+
         $refererInDB = $this->dao->select("*")->from(TABLE_STATREFERER)->where('url')->eq($url)->fetch();
 
         if(!empty($refererInDB))
