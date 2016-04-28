@@ -14,6 +14,7 @@
 /* Decode the content and get pages. */
 $content = json_decode($block->content);
 $pages   = $this->loadModel('article')->getPageList($content->limit);
+if(isset($content->image)) $pages = $this->article->processImages($pages, 'page');
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
@@ -23,6 +24,8 @@ $pages   = $this->loadModel('article')->getPageList($content->limit);
     <?php endif;?>
   </div>
   <?php if(isset($content->image)):?>
+  <?php $pull     = $content->imagePosition == 'right' ? 'pull-right' : 'pull-left';?>
+  <?php $imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';?>
   <div class='panel-body'>
     <div class='items'>
     <?php
@@ -34,12 +37,12 @@ $pages   = $this->loadModel('article')->getPageList($content->limit);
       <div class='item-content'>
         
         <div class='text small text-muted'>
-          <div class='media pull-left'>
+          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px';?>">
           <?php 
           if(!empty($page->image))
           {
               $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-              echo html::a($url, html::image($page->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+              echo html::a($url, html::image($page->image->primary->{$imageURL}, "title='{$title}' class='thumbnail'" ));
           }
           ?>
           </div>
