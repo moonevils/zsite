@@ -249,6 +249,7 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   `from` char(30) NOT NULL,
   `to` char(30) NOT NULL,
   `phone` char(30) NOT NULL,
+  `mobile` char(11) NOT NULL,
   `email` varchar(90) NOT NULL,
   `qq` char(30) NOT NULL,
   `date` datetime NOT NULL,
