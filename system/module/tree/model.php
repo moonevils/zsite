@@ -374,7 +374,6 @@ class treeModel extends model
 
         $gradeLimit = zget($config->tree->gradeLimits, $category->type, 999); 
         if($category->grade < $gradeLimit) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
-        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
         if(strpos('article,blog,product', $category->type) !== false)
         {
             $device = helper::getDevice();
@@ -390,6 +389,7 @@ class treeModel extends model
             $linkHtml .= "</dl>";
             $linkHtml .= "</span>";
         }
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
     }

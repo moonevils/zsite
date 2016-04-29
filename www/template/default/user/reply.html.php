@@ -4,7 +4,7 @@
     <?php include TPL_ROOT . 'user/side.html.php';?>
     <div class='col-md-10'>
       <div class='panel'>
-        <div class='panel-heading'><strong><i class='icon-mail-reply'></i> <?php echo $lang->user->reply;?></strong></div>
+        <div class='panel-heading'><strong><i class='icon-reply'></i> <?php echo $lang->user->reply;?></strong></div>
         <table class='table table-hover'>
           <thead>
             <tr class='text-center'>

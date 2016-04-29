@@ -89,6 +89,15 @@
           commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1", $lang->article->images, "data-toggle='modal'");
           commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
           ?>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->article->layout;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
+              <?php $page = $type . '_view';?>
+              <?php foreach($lang->block->$template->regions->$page as $region => $regionName):?>
+              <li><?php commonModel::printLink('block', 'setregion', "page=$page&region=$region&object=$article->id", $regionName, "data-toggle='modal'");?></li>
+              <?php endforeach;?>
+            </ul>
+          </span>
           <?php if($type != 'page'):?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='###'><?php echo $lang->article->stick; ?><span class='caret'></span></a>
@@ -110,7 +119,7 @@
               ?>
             </ul>
           </span>
-      <?php endif;?>
+          <?php endif;?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
             <ul class='dropdown-menu pull-right'>    
@@ -121,15 +130,6 @@
               <li><?php commonmodel::printlink('article', 'forward2blog', "articleid=$article->id", $lang->article->forward2Blog, "data-toggle='modal'");?></li>
               <li><?php commonmodel::printlink('article', 'forward2forum', "articleid=$article->id", $lang->article->forward2Forum, "data-toggle='modal'");?></li>
               <?php endif;?>
-            </ul>
-          </span>
-          <span class='dropdown'>
-            <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->article->layout;?><span class='caret'></span></a>
-            <ul class='dropdown-menu pull-right'>    
-              <?php $page = $type . '_view';?>
-              <?php foreach($lang->block->$template->regions->$page as $region => $regionName):?>
-              <li><?php commonModel::printLink('block', 'setregion', "page=$page&region=$region&object=$article->id", $regionName, "data-toggle='modal'");?></li>
-              <?php endforeach;?>
             </ul>
           </span>
         </td>
