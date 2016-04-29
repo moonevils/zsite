@@ -29,21 +29,6 @@ $(document).ready(function()
         computeParent();
     });
 
-    /* Set border and title show. */
-    $(document).on('change', 'input[type=checkbox]', function()
-    { 
-        $('input[type=checkbox]').next('input[type=hidden]').val('0');
-        $('input:checked').next('input[type=hidden]').val('1');
-    });
-    
-    $('input[type=checkbox]').change();
-
-    /* Fix edit link. */
-    $(document).on('change', 'select', function()
-    {
-        $(this).parents('td').next().find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).val()));
-    });
-
     /* Delete options. */
     $(document).on('click', '.delete', function()
     {
@@ -56,6 +41,8 @@ $(document).ready(function()
             $(this).parent().parent('.block-item').remove();
         }
     });
+<<<<<<< HEAD
+=======
 
    /* Sort up. */
     $(document).on('click', '.icon-arrow-up', function()
@@ -74,6 +61,7 @@ $(document).ready(function()
     {
         $(this).parents('.modal-content').find('.close').click();
     });
+>>>>>>> 1a7931faa0de9de7161fc118c3ce95d11d03b4a6
 })
 
 function computeParent()

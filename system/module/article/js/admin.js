@@ -1,7 +1,5 @@
-$(function()
+$(document).ready(function()
 {
-    $.setAjaxJSONER('.changeStatus');
-
     $(document).on('click', 'a.plus', function()
     {
         v.key ++;

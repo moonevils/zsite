@@ -13,6 +13,7 @@ ALTER TABLE `eps_score`      ADD index `lang` (`lang`);
 ALTER TABLE `eps_log`        ADD index `lang` (`lang`);
 ALTER TABLE `eps_blacklist`  ADD index `lang` (`lang`);
 ALTER TABLE `eps_layout` ADD object char(30) NOT NULL AFTER `region`;
+ALTER TABLE `eps_layout` ADD UNIQUE `layout` (`template`, `plan`, `page`, `region`, `object`, `lang`),DROP INDEX `layout`;
 ALTER TABLE `eps_order` CHANGE express express char(30) NOT NULL AFTER waybill;
 ALTER TABLE `eps_message` ADD `mobile` char(11) NOT NULL AFTER `phone`;
 -- DROP TABLE IF EXISTS `eps_widget`;
