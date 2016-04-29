@@ -49,7 +49,7 @@ class article extends control
         $articles   = $this->article->processImages($articles, 'article');
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'article');
 
-        $articles   = $sticks + $articles;
+        $articles = $sticks + $articles;
 
         if($category)
         {
@@ -72,6 +72,7 @@ class article extends control
         $this->view->contact    = $this->loadModel('company')->getContact();
         $this->view->mobileURL  = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'mhtml');
         $this->view->desktopURL = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'html');
+        $this->view->layouts    = $this->loadModel('block')->getPageBlocks('article', 'browse', $category->id);
 
         $this->display();
     }
@@ -122,11 +123,14 @@ class article extends control
             $this->view->treeManageLink =  html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
 
+        $this->loadModel('block');
+
         $this->view->type       = $type;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
+        $this->view->template   = $this->config->template->{$this->device}->name;
 
         $this->display();
     }   
@@ -347,6 +351,7 @@ class article extends control
         $this->view->contact     = $this->loadModel('company')->getContact();
         $this->view->mobileURL   = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'mhtml');
         $this->view->desktopURL  = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'html');
+        $this->view->layouts     = $this->loadModel('block')->getPageBlocks('article', 'view', $article->id);
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 

@@ -233,10 +233,11 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
   `plan` char(30) NOT NULL DEFAULT 'default',
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
+  `object` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
   `import` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `layout` (`template`,`plan`,`page`,`region`,`lang`)
+  UNIQUE KEY `layout` (`template`,`plan`,`page`,`region`,`object`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_message`;

@@ -41,6 +41,7 @@ $lang->article->isLink     = '跳转';
 $lang->article->link       = '链接';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
+$lang->article->layout     = '布局';
 
 $lang->article->forward2Blog     = '转至博客';
 $lang->article->forward2Forum    = '转至论坛';
