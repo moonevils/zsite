@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<header id='header' data-ve='block' data-id='<?php echo $block->id;?>' class='<?php if($setting->nav == 'row') echo 'without-navbar'; ?>'>
+<header data-searchbar='<?php echo $setting->searchbar ?>' id='header' data-ve='block' data-id='<?php echo $block->id;?>' class='<?php if($setting->nav == 'row') echo 'without-navbar'; ?>'>
   <div id='headNav' class='<?php if($setting->slogan == 'topLeft') echo 'with-slogan' ?><?php if($setting->searchbar == 'topRight') echo ' with-searchbar' ?>'>
     <div class='row'>
       <?php if($setting->slogan == 'topLeft'):?>
@@ -70,6 +70,10 @@
 #searchbar {padding-left: 10px; width: 260px;}
 #searchbar > form {max-width: 100%; float: none; margin: 4px 0}
 @media (max-width: 767px){#headNav > .row > #searchbar {display: none}}
+<?php endif;?>
+<?php if($setting->searchbar == 'insideNav'):?>
+#searchbar {min-width: 80px}
+#searchbar .form-control {border-radius: 4px}
 <?php endif;?>
 
 <?php if($setting->slogan == 'topLeft'):?>
