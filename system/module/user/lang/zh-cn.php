@@ -228,7 +228,7 @@ $lang->user->control->menus['recharge']   = '<i class="icon-bolt"></i> 积分充
 $lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> 我的订单 <i class="icon-chevron-right"></i>|order|browse';
 $lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
 $lang->user->control->menus['thread']     = '<i class="icon-comment"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
-$lang->user->control->menus['reply']      = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->control->menus['reply']      = '<i class="icon-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 $lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submittion'; 
 
 $lang->user->log = new stdclass();
