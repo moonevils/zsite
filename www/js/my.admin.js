@@ -112,14 +112,14 @@ $(function()
             {
                 $themePicker.find('.menu-theme.current').removeClass('current');
                 if($this.hasClass('menu-theme')) $this.addClass('current');
-                messager.success(response.message);
+                $.zui.messager.success(response.message);
 
                 if($.updateTheme) $.updateTheme($this.data('theme'));
                 else setTimeout(function(){window.location.reload();}, 1000);
             }
             else
             {
-                messager.danger(response.message);
+                $.zui.messager.danger(response.message);
             }
         });
         return false;
@@ -150,7 +150,7 @@ $(function()
         {
             if(response.result == 'success')
             {
-                messager.success(response.message);
+                $.zui.messager.success(response.message);
                 location.reload();
             }
             return false;
