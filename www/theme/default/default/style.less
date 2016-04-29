@@ -166,7 +166,8 @@
 
         #navbar .navbar-collapse {padding: 0;}
         #navbar .navbar-nav > li {float: none; display: table-cell; width: 1%; vertical-align: top}
-        #navbar .navbar-nav > li > a {text-align: center; white-space:nowrap;}
+        #navbar .navbar-nav > li > a {text-align: center; white-space:nowrap;  border-right: @navbar-border-style @navbar-border-color @navbar-border-width;}
+        #navbar .navbar-nav > li:last-child > a {border-right: none}
 
         #navbar .navbar-nav > li:first-child > a {border-radius: @radius 0 0 @radius;}
         #navbar .navbar-nav > li:last-child > a {border-radius: 0 @radius @radius 0;}
