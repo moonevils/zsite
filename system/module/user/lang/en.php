@@ -228,7 +228,7 @@ $lang->user->control->menus['recharge']   = '<i class="icon-bolt"></i> Recharge 
 $lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
 $lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 $lang->user->control->menus['thread']     = '<i class="icon-comment"></i> My Theme <i class="icon-chevron-right"></i>|user|thread';
-$lang->user->control->menus['reply']      = '<i class="icon-mail-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->control->menus['reply']      = '<i class="icon-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
 $lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> My Submittion <i class="icon-chevron-right"></i>|article|submittion'; 
 
 $lang->user->log = new stdclass();
