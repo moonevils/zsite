@@ -50,6 +50,7 @@ class blog extends control
             $this->view->keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
             $this->view->desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
+            $this->view->layouts    = $this->loadModel('block')->getPageBlocks('blog', 'index', $category->id);
         }
 
         $this->display();
@@ -91,6 +92,7 @@ class blog extends control
         $this->view->contact     = $this->loadModel('company')->getContact();
         $this->view->mobileURL   = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'html');
+        $this->view->layouts     = $this->loadModel('block')->getPageBlocks('blog', 'view', $article->id);
 
         if($article->source == 'article')
         {

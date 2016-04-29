@@ -123,7 +123,7 @@ class block extends control
      * @access public
      * @return void
      */
-    public function setRegion($page, $region)
+    public function setRegion($page, $region, $object = '')
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
@@ -131,19 +131,20 @@ class block extends control
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $result = $this->block->setRegion($page, $region, $template, $theme);
+            $result = $this->block->setRegion($page, $region, $object, $template, $theme);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('pages')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => $this->server->http_referer));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $blocks = $this->block->getRegionBlocks($page, $region, $template, $theme);
+        $blocks = $this->block->getRegionBlocks($page, $region, $object, $template, $theme);
         if(empty($blocks)) $blocks = array(new stdclass());
 
         $this->view->title        = "<i class='icon-cog'></i> " . $this->lang->block->setPage . ' - '. $this->lang->block->{$template}->pages[$page] . ' - ' . $this->lang->block->$template->regions->{$page}[$region];
         $this->view->modalWidth   = 900;
         $this->view->page         = $page;
         $this->view->region       = $region;
+        $this->view->object       = $object;
         $this->view->blocks       = $blocks;
         $this->view->blockOptions = $this->block->getPairs($template);
         $this->view->template     = $template; 

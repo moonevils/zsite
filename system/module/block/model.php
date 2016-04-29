@@ -49,19 +49,39 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getPageBlocks($module, $method)
+    public function getPageBlocks($module, $method, $object = '')
     {
         $device   = helper::getDevice();
         $template =  $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
-        $plan     = zget($this->config->layout, "{$template}_{$theme}");
+        $plan     = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
         $pages    = "all,{$module}_{$method}";
+
+        $layoutsInCurrent = array();
+        if($object)
+        {
+            $layoutsInCurrent = $this->dao->select('*')->from(TABLE_LAYOUT)
+                ->where('page')->eq("{$module}_{$method}")
+                ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
+                ->andWhere('plan')->in($plan)
+                ->andWhere('object')->eq($object)
+                ->fetchAll('region');
+        }
 
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-            ->andWhere('plan')->eq($plan)
+            ->andWhere('plan')->in($plan)
+            ->andWhere('object')->eq('')
             ->fetchGroup('page', 'region');
+
+        if(!empty($layoutsInCurrent))
+        {
+            foreach($layoutsInCurrent as $region => $layouts)
+            {
+                $rawLayouts["{$module}_{$method}"][$region] = $layouts;
+            }
+        }
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
 
@@ -156,10 +176,13 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getRegionBlocks($page, $region, $template, $theme)
+    public function getRegionBlocks($page, $region, $object, $template, $theme)
     {
-        $plan = zget($this->config->layout, "{$template}_{$theme}");
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($plan)->fetch('blocks');
+        $plan = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
+
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq($object)->andWhere('template')->eq($template)->andWhere('plan')->in($plan)->fetch('blocks');
+        if($object and empty($regionBlocks)) $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq('')->andWhere('template')->eq($template)->andWhere('plan')->in($plan)->fetch('blocks');
+
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -482,17 +505,25 @@ class blockModel extends model
      * @access public
      * @return bool
      */
-    public function setRegion($page, $region, $template, $theme)
+    public function setRegion($page, $region, $object = '', $template, $theme)
     {
         $layout = new stdclass();
         $layout->page     = $page;
         $layout->region   = $region;
         $layout->template = $template;
-        $layout->plan     = zget($this->config->layout, $template . '_' . $theme);
+        $layout->object   = $object;
+        $layout->plan     = $object ? 'all' : zget($this->config->layout, $template . '_' . $theme);
 
         if(!$this->post->blocks)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($layout->plan)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)
+                ->where('page')->eq($page)
+                ->andWhere('region')->eq($region)
+                ->andWhere('object')->eq($object)
+                ->andWhere('template')->eq($template)
+                ->andWhere('plan')->eq($layout->plan)
+                ->exec();
+
             if(!dao::isError()) return true;
         }
 

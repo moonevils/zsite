@@ -375,6 +375,21 @@ class treeModel extends model
         $gradeLimit = zget($config->tree->gradeLimits, $category->type, 999); 
         if($category->grade < $gradeLimit) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
+        if(strpos('article,blog,product', $category->type) !== false)
+        {
+            $device = helper::getDevice();
+            $template = $config->template->{$device}->name;
+            $page = $category->type == 'blog' ? $category->type . '_index' : $category->type . '_browse';
+
+            $linkHtml .= "<span class='dropdown'>";
+            $linkHtml .= "<a data-toggle='dropdown' href='javascript:;'>" . $lang->tree->layout . " <span class='caret'></span></a>";
+            $linkHtml .= "<dl class='dropdown-menu pull-right'>";
+            foreach($lang->block->$template->regions->$page as $region => $regionName):
+            $linkHtml .= "<dd>" . html::a(helper::createLink('block', 'setregion', "page=$page&region=$region&object=$category->id"), $regionName, "data-toggle='modal'") . "</dd>";
+            endforeach;
+            $linkHtml .= "</dl>";
+            $linkHtml .= "</span>";
+        }
 
         return $linkHtml;
     }
