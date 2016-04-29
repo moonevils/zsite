@@ -123,6 +123,15 @@
               <?php endif;?>
             </ul>
           </span>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->article->layout;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
+              <?php $page = $type . '_view';?>
+              <?php foreach($lang->block->$template->regions->$page as $region => $regionName):?>
+              <li><?php commonModel::printLink('block', 'setregion', "page=$page&region=$region&object=$article->id", $regionName, "data-toggle='modal'");?></li>
+              <?php endforeach;?>
+            </ul>
+          </span>
         </td>
       </tr>
       <?php endif;?>

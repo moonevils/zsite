@@ -82,6 +82,7 @@ class product extends control
         $this->view->contact    = $this->loadModel('company')->getContact();
         $this->view->mobileURL  = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'html');
+        $this->view->layouts    = $this->loadModel('block')->getPageBlocks('product', 'browse', $category->id);
 
         $this->display();
     }
@@ -109,11 +110,14 @@ class product extends control
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $this->product->getList($families, $orderBy, $pager);
 
-        $this->view->title          = $this->lang->product->common;
-        $this->view->products       = $products;
-        $this->view->pager          = $pager;
-        $this->view->categoryID     = $categoryID;
-        $this->view->orderBy        = $orderBy;
+        $this->loadModel('block');
+
+        $this->view->title      = $this->lang->product->common;
+        $this->view->products   = $products;
+        $this->view->pager      = $pager;
+        $this->view->categoryID = $categoryID;
+        $this->view->orderBy    = $orderBy;
+        $this->view->template   = $this->config->template->{$this->device}->name;
         $this->display();
     }   
 
@@ -254,6 +258,7 @@ class product extends control
         $this->view->stockOpened = isset($this->config->product->stock) && $this->config->product->stock == 1;
         $this->view->mobileURL   = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'html');
+        $this->view->layouts     = $this->loadModel('block')->getPageBlocks('product', 'view', $product->id);
 
         $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec();
 

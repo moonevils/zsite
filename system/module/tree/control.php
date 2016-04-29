@@ -44,6 +44,7 @@ class tree extends control
             }
         }
 
+        $this->loadModel('block');
         $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
         $userFunc  = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, $userFunc);

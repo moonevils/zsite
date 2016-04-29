@@ -75,6 +75,15 @@
               <li><?php commonModel::printLink('product', 'setjs',  "productID=$product->id", $lang->product->js, "data-toggle='modal'");?></li>
             </ul>
           </span>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->product->layout;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
+              <?php $page = 'product_view';?>
+              <?php foreach($lang->block->$template->regions->$page as $region => $regionName):?>
+              <li><?php commonModel::printLink('block', 'setregion', "page=$page&region=$region&object=$product->id", $regionName, "data-toggle='modal'");?></li>
+              <?php endforeach;?>
+            </ul>
+          </span>
         </td>
       </tr> <?php endforeach;?>
     </tbody>
