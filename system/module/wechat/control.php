@@ -76,7 +76,7 @@ class wechat extends control
 
         if($_POST) $this->send($this->wechat->reply($this->api, $message));
 
-        $this->view->title      = "<i class='icon-mail-reply'></i> " . $lang->wechat->message->reply;
+        $this->view->title      = "<i class='icon-reply'></i> " . $lang->wechat->message->reply;
         $this->view->modalWidth = 700;
         $this->view->public     = $this->wechat->getByID($message->public);
         $this->view->records    = $this->wechat->getRecords($message);

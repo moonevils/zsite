@@ -180,7 +180,7 @@ class message extends control
 
         $message = $this->message->getByID($messageID);
 
-        $this->view->title      = "<i class='icon-mail-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
+        $this->view->title      = "<i class='icon-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
         $this->view->modalWidth = 600;
         $this->view->message    = $message;
         $this->display();
