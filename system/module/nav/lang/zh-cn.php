@@ -38,11 +38,12 @@ $lang->nav->system->blog    = '博客';
 $lang->nav->system->book    = '手册';
 $lang->nav->system->message = '留言';
 
-$lang->nav->desktop       = '桌面';
-$lang->nav->desktop_blog  = '博客';
-$lang->nav->mobile_top    = '移动版顶部';
-$lang->nav->mobile_bottom = '移动版底部';
-$lang->nav->mobile_blog   = '移动版博客';
+$lang->nav->desktop_top    = '桌面版顶部';
+$lang->nav->desktop_bottom = '桌面版底部';
+$lang->nav->desktop_blog   = '博客';
+$lang->nav->mobile_top     = '移动版顶部';
+$lang->nav->mobile_bottom  = '移动版底部';
+$lang->nav->mobile_blog    = '移动版博客';
 
 /* Targets setting. */
 $lang->nav->targetList = array();
