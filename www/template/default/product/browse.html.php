@@ -35,8 +35,8 @@ include TPL_ROOT . 'common/treeview.html.php';
           <?php endforeach;?>
         </div>
       </header>
-      <?php include 'browse.card.html.php';?>
-      <?php include 'browse.list.html.php';?>
+      <?php include TPL_ROOT . 'product' . DS . 'browse.card.html.php';?>
+      <?php include TPL_ROOT . 'product' . DS . 'browse.list.html.php';?>
       <footer class='clearfix'>
         <?php $pager->show('right', 'short');?>
       </footer>

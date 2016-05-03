@@ -20,7 +20,7 @@
         <?php echo commonModel::printTopBar();?>
         <?php commonModel::printLanguageBar();?>
       </nav>
-      <?php if($setting->searchbar == 'topRight') include 'searchbar.html.php';?>
+      <?php if($setting->searchbar == 'topRight') include  TPL_ROOT . 'block' . DS . 'searchbar.html.php';?>
     </div>
   </div>
   <div id='headTitle' class='<?php if($setting->nav == 'besideLogo') echo 'with-navbar' ?><?php if($setting->slogan == 'besideLogo') echo ' with-slogan' ?>'>
@@ -36,13 +36,13 @@
         <?php endif;?>
       </div>
       <?php if($setting->nav == 'besideLogo'):?>
-      <div id='navbarWrapper'><?php include 'nav.html.php' ?></div>
+      <div id='navbarWrapper'><?php include  TPL_ROOT . 'block' . DS . 'nav.html.php' ?></div>
       <?php endif; ?>
-      <?php if($setting->searchbar == 'besideSlogan') include 'searchbar.html.php';?>
+      <?php if($setting->searchbar == 'besideSlogan') include TPL_ROOT . 'block' . DS . 'searchbar.html.php';?>
     </div>
   </div>
 </header>
-<?php if($setting->nav == 'row') include 'nav.html.php';?>
+<?php if($setting->nav == 'row') include TPL_ROOT . 'block' . DS . 'nav.html.php';?>
 <style>
 #header {padding: 0; margin-bottom: 14px;}
 #headNav {min-height: 30px; line-height: 30px; padding: 0; margin-bottom: 8px;}
