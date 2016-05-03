@@ -13,7 +13,7 @@ $config->block->categoryList = new stdclass();
 $config->block->categoryList->custom  = ',html,htmlcode,phpcode,';
 $config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,';
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
-$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,';
+$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,bottomNav,';
 
 $config->block->defaultIcons = array();
 $config->block->defaultIcons['about']         = 'icon-group';
@@ -36,6 +36,8 @@ $config->block->defaultIcons['pageList'] = 'icon-list-ul';
 $config->block->defaultIcons['articleTree']   = 'icon-folder-close';
 $config->block->defaultIcons['productTree']   = 'icon-folder-close';
 $config->block->defaultIcons['blogTree']      = 'icon-folder-close';
+
+$config->block->defaultIcons['bottomNav'] = '';
 
 $config->block->defaultMoreUrl['html']          = '';
 $config->block->defaultMoreUrl['latestArticle'] = '';
