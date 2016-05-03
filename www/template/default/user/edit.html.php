@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class="page-user-control">
   <div class="row">
@@ -106,4 +106,4 @@
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

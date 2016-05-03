@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
 <div class='row blocks' data-grid='4' data-region='forum_index-top'><?php $this->block->printRegion($layouts, 'forum_index', 'top', true);?></div>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div id='boards'>
@@ -45,4 +45,4 @@
 <?php endforeach;?>
 </div>
 <div class='blocks' data-region='forum_index-bottom'><?php $this->block->printRegion($layouts, 'forum_index', 'bottom');?></div>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>

@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::set('currencySymbol', $currencySymbol);?>
 <?php js::set('checkStock', isset($this->config->product->stock) ? $this->config->product->stock : false);?>
 <?php if(!empty($products)):?>
@@ -122,4 +122,4 @@
   </div>
 </div>
 <?php endif;?>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

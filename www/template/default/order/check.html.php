@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::set('goToPay', $lang->order->goToPay);?>
 <?php js::set('paid', $lang->order->paid);?>
 <div class='panel'>
@@ -58,4 +58,4 @@
     <input class='submitBtn' type='submit' value="<?php echo $lang->confirm;?>" />
   </form>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

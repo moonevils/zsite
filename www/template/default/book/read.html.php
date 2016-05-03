@@ -1,5 +1,5 @@
 <?php if(!empty($this->config->book->fullScreen) or $this->get->fullScreen):?>
-<?php include TPL_ROOT . 'common/header.lite.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite'); ?>
 <?php js::set('objectType', 'book');?>
 <?php js::set('objectID', $article->id);?>
 <?php js::set('fullScreen', 1);?>
@@ -78,7 +78,7 @@
 </body>
 </html>
 <?php else:?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::set('objectType', 'book');?>
 <?php js::set('objectID', $article->id);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
@@ -157,5 +157,5 @@
 </div>
 <?php endif;?>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>
 <?php endif;?>

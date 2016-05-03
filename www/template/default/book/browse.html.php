@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
 <?php if(isset($node)) $common->printPositionBar($node->origins);?>
 <?php js::set('fullScreen', (!empty($this->config->book->fullScreen) or $this->get->fullScreen) ? 1 : 0);?>
 <div class='row blocks' data-region='book_browse-topBanner'><?php $this->block->printRegion($layouts, 'book_browse', 'topBanner', true);?></div>
@@ -20,4 +20,4 @@
   </div>
 </div>
 <div class='row blocks' data-region='book_browse-bottomBanner'><?php $this->block->printRegion($layouts, 'book_browse', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
