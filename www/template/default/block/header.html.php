@@ -27,11 +27,11 @@ $setting->searchbar  = zget($setting, 'searchbar', 'besideSlogan');
 
 if($setting->compatible)
 {
-    include "header.default.html.php";
+    include TPL_ROOT . 'block' . DS . "header.default.html.php";
 }
 else
 {
-    include "header.layout.html.php";
+    include TPL_ROOT . 'block' . DS . "header.layout.html.php";
 }
 ?>
 
