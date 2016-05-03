@@ -57,7 +57,7 @@
               </div>
               <?php endif;?>
               <span class="input-group-addon w-70px">
-                <label class='checkbox'>
+                <label class='checkbox-inline'>
                 <?php $checked = $article->link ? 'checked' : '';?>
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->article->isLink}</span>" ?>
                 </label>

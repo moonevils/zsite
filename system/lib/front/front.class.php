@@ -216,7 +216,7 @@ class html
         foreach($options as $key => $value)
         {
             $key     = str_replace('item', '', $key);
-            $string .= "<label class='checkbox'><input type='checkbox' id='{$name}{$i}'  name='{$name}[]' value='$key' ";
+            $string .= "<label class='checkbox-inline'><input type='checkbox' id='{$name}{$i}'  name='{$name}[]' value='$key' ";
             $string .= strpos($checked, ",$key,") !== false ? " checked ='checked'" : "";
             $string .= $attrib;
             $string .= " /> $value</label>\n";

@@ -7,7 +7,7 @@
 #blockList .block-item.dragging {opacity: 0.35; background-color: #FFF4E5;}
 #blockList .block-item.drag-shadow {border: 1px solid #ddd; box-shadow:0 1px 8px rgba(0,0,0,.15); background-color: #fff; z-index: 9999}
 .children{margin-left: 20px; clear: both;}
-.block-item label{margin-right: 10px; font-weight: 400;}
+.block-item label{margin-right: 10px; font-weight: 400; margin-top: 2px}
 .block-item label input[type='checkbox']{margin: 8px 3px 0 0;}
 #blockList div.block-item {border: 1px solid #ccc; margin: 10px 5px; background-color: #f1f1f1; padding: 0; border-radius: 3px}
 .block-item .sort-handle {cursor: move; line-height: 32px}
