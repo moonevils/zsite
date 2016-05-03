@@ -4,11 +4,11 @@ $(document).ready(function()
     {
        if(data.result == 'success')
        {
-            messager.success(data.message);
+            $.zui.messager.success(data.message);
        }
        else
        {
-            messager.danger(data.message);
+            $.zui.messager.danger(data.message);
        }
     });
 

@@ -16,7 +16,7 @@
             <div class='input-group'>
               <?php echo html::input('ip', isset($this->config->site->api->ip) ? $this->config->site->api->ip: '', "class='form-control' placeholder='{$lang->site->api->ipTip}'");?>
               <div class='input-group-addon'>
-                <label class='checkbox'><input type='checkbox' id='allip' name='allip' value='1'> <?php echo $lang->site->api->allip;?></label>
+                <label class='checkbox-inline'><input type='checkbox' id='allip' name='allip' value='1'> <?php echo $lang->site->api->allip;?></label>
               </div>
             </div>
           </td>
