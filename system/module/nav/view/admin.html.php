@@ -18,7 +18,10 @@
     <ul id='typeNav' class='nav nav-tabs'>
       <?php if($this->config->site->type != 'blog'):?>
       <li data-type='internal' <?php echo $type == 'desktop_top' ? "class='active'" : '';?>>
-        <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop);?>
+        <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop_top);?>
+      </li>
+      <li data-type='internal' <?php echo $type == 'desktop_bottom' ? "class='active'" : '';?>>
+        <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_bottom"), $lang->nav->desktop_bottom);?>
       </li>
       <li data-type='internal' <?php echo $type == 'mobile_top' ? "class='active'" : '';?>>
         <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top);?>

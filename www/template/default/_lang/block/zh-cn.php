@@ -36,6 +36,7 @@ $lang->block->default->typeList['about']           = '公司简介';
 $lang->block->default->typeList['links']           = '友情链接';
 $lang->block->default->typeList['slide']           = '幻灯片';
 $lang->block->default->typeList['header']          = '网站头部';
+$lang->block->default->typeList['bottomNav']       = '底部导航';
 
 $lang->block->default->typeGroups = array();
 $lang->block->default->typeGroups['html']     = 'input';
@@ -64,6 +65,7 @@ $lang->block->default->typeGroups['about']     = 'system';
 $lang->block->default->typeGroups['links']     = 'system';
 $lang->block->default->typeGroups['slide']     = 'system';
 $lang->block->default->typeGroups['header']    = 'system';
+$lang->block->default->typeGroups['bottomNav'] = 'system';
 
 $lang->block->default->pages['all']            = '全部页面';
 $lang->block->default->pages['index_index']    = '首页';
