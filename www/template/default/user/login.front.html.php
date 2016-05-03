@@ -1,5 +1,5 @@
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 js::import($jsRoot . 'md5.js');
 js::import($jsRoot . 'fingerprint/fingerprint.js');
 js::set('random', $this->session->random);
@@ -24,4 +24,4 @@ js::set('random', $this->session->random);
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

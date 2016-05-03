@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php $common->printPositionBar();?>
 <div class='article'>
   <section class='article-content'>
@@ -21,5 +21,5 @@
     </ul>
   </section>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
 

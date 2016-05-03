@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <style>
 #panel-404 {padding: 40px 80px 60px;}
 #panel-404 h1 {margin-bottom: 40px;}
@@ -32,4 +32,4 @@
   </form>
 </div>
 <?php $this->fetch('sitemap', 'index', 'onlyBody=yes')?>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

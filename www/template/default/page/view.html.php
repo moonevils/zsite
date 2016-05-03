@@ -1,5 +1,5 @@
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/treeview.html.php';
 js::set('pageID', $page->id);
 css::internal($page->css);
@@ -38,4 +38,4 @@ js::execute($page->js);
 </div>
 <div class='row blocks' data-region='page_view-bottomBanner'><?php $this->block->printRegion($layouts, 'page_view', 'bottomBanner', true);?></div>
 <?php if(strpos($page->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php';?>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>

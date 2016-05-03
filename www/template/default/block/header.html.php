@@ -24,14 +24,13 @@ $setting->compatible = zget($setting, 'compatible', 0);
 $setting->nav        = zget($setting, 'nav',       'row');
 $setting->slogan     = zget($setting, 'slogan',    'besideLogo');
 $setting->searchbar  = zget($setting, 'searchbar', 'besideSlogan');
-
 if($setting->compatible)
 {
-    include TPL_ROOT . 'block' . DS . "header.default.html.php";
+    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default');
 }
 else
 {
-    include TPL_ROOT . 'block' . DS . "header.layout.html.php";
+    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout');
 }
 ?>
 

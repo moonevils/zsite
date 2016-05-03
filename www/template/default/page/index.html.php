@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php $common->printPositionBar();?>
 <div class='row blocks' data-region='page_index-top'><?php $this->block->printRegion($layouts, 'page_index', 'top', true);?></div>
 <div class='row'>
@@ -35,4 +35,4 @@
   <div class='col-md-3'><side class='page-side blocks blocks' data-region='page_index-side'><?php $this->block->printRegion($layouts, 'page_index', 'side');?></side></div>
 </div>
 <div class='row blocks' data-region='page_index-bottom'><?php $this->block->printRegion($layouts, 'page_index', 'bottom', true);?></div>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>

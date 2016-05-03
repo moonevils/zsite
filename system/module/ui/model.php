@@ -1238,4 +1238,26 @@ if(!function_exists('getJS'))
         foreach($tables as $table) $this->dao->setAutoLang(false)->delete()->from($table)->where('lang')->eq('lang')->exec();
         return !dao::isError();
     }
+
+    public function getExtFile($template, $module, $file)
+    {
+        return $this->app->getTmpRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
+    }
+
+    public function getEffectViewFile($template, $module, $file)
+    {
+        $extFile = $this->getExtFile($template, $module, $file);
+        return file_exists($extFile) ? $extFile : $this->app->getWwwroot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
+    }
+
+    public function writeViewFile($template, $module, $file)
+    {
+        $file = $this->getExtFile($template, $module, $file);       
+        $filePath = dirname($file);
+        if(!is_dir($filePath)) mkdir($filePath, 0777, true);
+        $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$', 'include', 'require', 'assert');
+        $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $', 'i n c l u d e', 'r e q u i r e', 'a s s e r t');
+        $content     = str_replace($gibbedEvils, $evils, $this->post->content);
+        return file_put_contents($file, $content);
+    }
 }

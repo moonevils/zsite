@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include TPL_ROOT . 'common/header.lite.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
 <div class='container' id='payResult'>
   <div class='modal-dialog w-450px'>
   <div class='modal-body'><div class='alert alert-success text-center'><h4><i class="text-success icon-ok-sign"></i> <?php echo $lang->order->paidSuccess;?></h4></div></div>

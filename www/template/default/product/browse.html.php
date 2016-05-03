@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 $path = isset($category->pathNames) ? array_keys($category->pathNames) : array(0);
 js::set('path', $path);
 js::set('categoryID', $category->id);
@@ -35,8 +35,8 @@ include TPL_ROOT . 'common/treeview.html.php';
           <?php endforeach;?>
         </div>
       </header>
-      <?php include TPL_ROOT . 'product' . DS . 'browse.card.html.php';?>
-      <?php include TPL_ROOT . 'product' . DS . 'browse.list.html.php';?>
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'product', 'browse.card');?>
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'product', 'browse.list');?>
       <footer class='clearfix'>
         <?php $pager->show('right', 'short');?>
       </footer>
@@ -50,4 +50,4 @@ include TPL_ROOT . 'common/treeview.html.php';
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='product_browse-bottomBanner'><?php $this->block->printRegion($layouts, 'product_browse', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

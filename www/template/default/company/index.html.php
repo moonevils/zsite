@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div class='row blocks' data-region='company_index-topBanner'><?php $this->block->printRegion($layouts, 'company_index', 'topBanner', true);?></div>
 <div class="row">
@@ -23,4 +23,4 @@
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='company_index-bottomBanner'><?php $this->block->printRegion($layouts, 'company_index', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>
