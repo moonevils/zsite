@@ -3,7 +3,7 @@ $config->ui->systemThemes = array('default.default', 'default.tartan', 'default.
 
 $config->ui->themeSnapRoot = 'http://www.chanzhi.org/data/upload/';
 
-$config->ui->groups = array('basic', 'navbar', 'block', 'button', 'footer');
+$config->ui->groups = array('basic', 'navbar', 'block', 'button', 'header', 'footer');
 $config->ui->require = new stdclass();
 $config->ui->require->exportTheme = "name,code,author,email";
 
@@ -127,6 +127,20 @@ $config->ui->selectorOptions['footer']['border']['color']  = array('type' => 'co
 $config->ui->selectorOptions['footer']['background'] = array();
 $config->ui->selectorOptions['footer']['background']['backcolor'] = array('type' => 'color', 'default' => '#f7f7f7', 'name' => 'footer-backcolor');
 
+$config->ui->selectorOptions['header']['background'] = array();
+$config->ui->selectorOptions['header']['background']['backcolor']    = array('type' => 'color', 'default' => '#FFF', 'name' => 'header-backcolor');
+$config->ui->selectorOptions['header']['background']['toppadding'] = array('type' => 'size', 'default' => '0', 'name' => 'header-top-padding');
+$config->ui->selectorOptions['header']['background']['rightpadding'] = array('type' => 'size', 'default' => '0', 'name' => 'header-right-padding');
+$config->ui->selectorOptions['header']['background']['bottompadding'] = array('type' => 'size', 'default' => '0', 'name' => 'header-bottom-padding');
+$config->ui->selectorOptions['header']['background']['leftpadding']  = array('type' => 'size', 'default' => '0', 'name' => 'header-left-padding');
+
+$config->ui->selectorOptions['header']['border']['color'] = array('type' => 'color', 'default' => '#ddd', 'name' => 'header-border-color');
+$config->ui->selectorOptions['header']['border']['radius'] = array('type' => 'size', 'default' => '0', 'name' => 'header-border-radius');
+
+$config->ui->selectorOptions['header']['text']['fontSize']   = array('type' => 'fontSize', 'default' => '16px', 'name' => 'header-text-font-size');
+$config->ui->selectorOptions['header']['text']['color']       = array('type' => 'color', 'default' => '#333', 'name' => 'header-text-color');
+$config->ui->selectorOptions['header']['text']['linkColor']   = array('type' => 'color', 'default' => '#0D3D88', 'name' => 'header-text-link-color');
+
 /* Default theme setting */
 $config->ui->themes['default']['default'] = $config->ui->selectorOptions;
 unset($config->ui->themes['default']['default']['basic']['border']);
@@ -184,6 +198,8 @@ $config->ui->themes['default']['tartan']['basic']['aLink']['color']['default'] =
 $config->ui->themes['default']['tartan']['basic']['aHover']['color']['default'] = '#35636E';
 $config->ui->themes['default']['tartan']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['default']['tartan']['footer']['background']['backcolor']['default'] = '#F5F0CC';
+$config->ui->themes['default']['tartan']['header']['text']['color']['default'] = '#777777';
+$config->ui->themes['default']['tartan']['header']['text']['linkColor']['default'] = '#254952';
 
 /* Clean theme setting */
 $config->ui->themes['default']['clean'] = $config->ui->selectorOptions;
@@ -197,6 +213,7 @@ unset($config->ui->themes['default']['clean']['navbar']);
 unset($config->ui->themes['default']['clean']['button']);
 unset($config->ui->themes['default']['clean']['block']);
 unset($config->ui->themes['default']['clean']['footer']);
+unset($config->ui->themes['default']['clean']['header']);
 $config->ui->themes['default']['clean']['basic']['colorset']['primary']['default'] = '#254952';
 $config->ui->themes['default']['clean']['basic']['pageBackground']['backgroundImage']['default'] = 'inherit';
 
@@ -229,7 +246,15 @@ unset($config->ui->themes['default']['wide']['navbar']);
 unset($config->ui->themes['default']['wide']['button']);
 unset($config->ui->themes['default']['wide']['block']);
 unset($config->ui->themes['default']['wide']['footer']);
+unset($config->ui->themes['default']['wide']['header']['background']['toppadding']);
+unset($config->ui->themes['default']['wide']['header']['background']['rightpadding']);
+unset($config->ui->themes['default']['wide']['header']['background']['bottompadding']);
+unset($config->ui->themes['default']['wide']['header']['background']['leftpadding']);
+unset($config->ui->themes['default']['wide']['header']['border']['radius']);
 $config->ui->themes['default']['wide']['basic']['colorset']['primary']['default'] = '#E91B23';
+$config->ui->themes['default']['wide']['header']['border']['color']['default'] = '#e5e5e5';
+$config->ui->themes['default']['wide']['header']['text']['color']['default'] = '#808080';
+$config->ui->themes['default']['wide']['header']['text']['linkColor']['default'] = '#666666';
 
 /* Colorful theme setting */
 $config->ui->themes['default']['colorful'] = $config->ui->selectorOptions;

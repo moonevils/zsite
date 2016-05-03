@@ -203,6 +203,7 @@ $lang->ui->groups->basic  = '基本样式';
 $lang->ui->groups->navbar = '导航条';
 $lang->ui->groups->block  = '区块';
 $lang->ui->groups->button = '按钮';
+$lang->ui->groups->header = '页眉';
 $lang->ui->groups->footer = '页脚';
 
 $lang->ui->color          = '颜色';
@@ -260,6 +261,10 @@ $lang->ui->danger          = '危险';
 $lang->ui->warning         = '警告';
 $lang->ui->success         = '积极';
 $lang->ui->removeDirFaild  = "<h4>以下目录删除失败</h4><pre>%s</pre> <div class='text-important'>请手动删除，或者设置这些文件的可写权限后继续。</div>";
+$lang->ui->leftpadding     = '左边距';
+$lang->ui->rightpadding    = '右边距';
+$lang->ui->toppadding      = '上边距';
+$lang->ui->bottompadding   = '下边距';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
