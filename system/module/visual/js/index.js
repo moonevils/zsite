@@ -113,7 +113,7 @@
             icon               : 'pencil',
             title              : '',
             mergeOptions       : true,
-            hidden             : function()
+            hidden             : function(e)
             {
                 if(options.dismiss === 'update')
                 {
@@ -293,7 +293,7 @@
                     loaded: function(e)
                     {
                         var modal$ = e.jQuery;
-                        modal$.setAjaxForm('.ve-form', function(response)
+                        if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                         {
                             $.closeModal();
                             if($.updateVisualArea) $.updateVisualArea($carousel, response);
@@ -508,7 +508,7 @@
                 loaded: function(e)
                 {
                     var modal$ = e.jQuery;
-                    modal$.setAjaxForm('.ve-form', function(response)
+                    if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                     {
                         addBlock(page, region, response.blockID, parent);
                     });
@@ -701,7 +701,7 @@
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
-                modal$.setAjaxForm('.ve-form', function(response)
+                if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                 {
                     $.closeModal();
                     updateVisualArea($ve, response);
@@ -935,7 +935,8 @@
             {
                 window.$$ = iframe.jQuery;
                 $$.iframe = iframe;
-                initVisualPage();
+                if(!$$.fn.sortable) loadJs('zuiAdmin', window.v.zuiAdminJsUrl, iframeDocument, initVisualPage);
+                else initVisualPage();
             }
             else
             {
@@ -943,6 +944,7 @@
                 {
                     window.$$ = iframe.jQuery.noConflict();
                     loadJs('zui', window.v.zuiJsUrl, iframeDocument, initVisualPage);
+                    loadJs('zuiAdmin', window.v.zuiAdminJsUrl, iframeDocument, initVisualPage);
                     $$.iframe = iframe;
                     if(iframe.Zepto && iframe.Zepto.fn.lazyload)
                     {
@@ -1001,7 +1003,7 @@
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
-                modal$.setAjaxForm('.ve-form', function(response)
+                if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                 {
                     $.closeModal();
                     var $style = $$('#themeStyle');
