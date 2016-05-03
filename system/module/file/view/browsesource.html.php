@@ -121,6 +121,6 @@
 <script type="text/javascript">
 var copyBtns = $('.copyBtn');
 var clip = new ZeroClipboard(copyBtns);
-clip.on('aftercopy', function(){window.messager.success(v.copySuccess); });
+clip.on('aftercopy', function(){$.zui.messager.success(v.copySuccess); });
 </script>
 <?php include '../../common/view/footer.admin.html.php';?>

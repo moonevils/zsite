@@ -36,7 +36,7 @@ $(document).ready(function()
         {
             if(response.result == 'success')
             {
-                messager.success(response.message);
+                $.zui.messager.success(response.message);
 
                 var $themes = $this.closest('.themes');
                 $themes.attr('data-theme', $this.data('theme'))
