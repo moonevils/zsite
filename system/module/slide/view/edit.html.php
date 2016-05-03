@@ -50,7 +50,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <div class='input-group mainLink'>
               <?php echo html::input('mainLink', $slide->mainLink, "class='form-control'");?>
               <div class='input-group-addon'>
-                <label class='checkbox'>
+                <label class='checkbox-inline'>
                   <?php $checked = (isset($slide->target) and $slide->target) ? 'checked' : '';?>
                   <?php echo "<input type='checkbox' name='target' id='target' value='1' $checked /><span>{$lang->slide->newWindow}</span>" ?>
                 </label>

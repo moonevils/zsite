@@ -7,3 +7,6 @@
 body.body-modal-ve {padding: 20px;}
 dl dd a{display: block; padding: 5px 10px;}
 dl dd a:hover{background: #f5f5f5;}
+
+.form-horizontal .input-group-addon .checkbox-inline {padding-top: 0}
+.input-group-addon.fix-border-left {border-left: none}

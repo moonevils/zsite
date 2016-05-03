@@ -29,7 +29,7 @@
       <?php endif;?>
       <?php if(version_compare($this->loadModel('setting')->getVersion(), 2.3) < 0):?>
       <div class='text-left'>
-        <label class='checkbox'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
+        <label class='checkbox-inline'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
       </div>
       <?php endif;?>
     </div>
