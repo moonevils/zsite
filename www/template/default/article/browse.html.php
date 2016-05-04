@@ -4,12 +4,10 @@ include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header')
 $path = array_keys($category->pathNames);
 js::set('path', $path);
 js::set('categoryID', $category->id);
-
-include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
 <div class='row blocks' data-region='article_browse-topBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
-<div class='row'>
+<div class='row row-main'>
   <?php if(isset($layouts['article_browse']['side'])):?>
   <div class="col-md-9 col-main">
   <?php else:?>
