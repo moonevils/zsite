@@ -626,7 +626,7 @@ class ui extends control
             if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'warning' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
             $result = $this->ui->writeViewFile($template, $this->post->module, $this->post->file);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('editTemplate', "moduel=$module&file=$file")));
-            $this->send(array('result' => 'success', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
         $this->view->title         = $this->lang->ui->editTemplate;
