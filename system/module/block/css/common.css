@@ -50,3 +50,10 @@
 .block-types-menu > li dl dd.active > a {color:#145CCD;}
 
 .layout-group{width:60%}
+
+ul.navList{padding-left: 0;} 
+.navList li {list-style: none; padding: 8px 0;}
+
+.navList .form-control {width: auto; min-width: 100px; max-width: 100px; }
+.navList .sort-handle {cursor: move;}
+i{cursor: pointer;}
