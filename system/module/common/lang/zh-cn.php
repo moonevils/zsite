@@ -78,7 +78,6 @@ $lang->close          = '关闭';
 $lang->save           = '保存';
 $lang->confirm        = '确认';
 $lang->addToBlacklist = '加黑';
-$lang->edit           = '编辑';
 $lang->send           = '发送';
 $lang->preview        = '预览';
 $lang->goback         = '返回';
