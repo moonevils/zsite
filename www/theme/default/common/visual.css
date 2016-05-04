@@ -133,3 +133,8 @@ body.ve-preview-in .blocks.row > .col.col-row > .row.ve, body.ve-preview-hover .
 .site-name > h2 .ve-heading, .site-logo > .ve .ve-heading {left: 0; bottom: 0; top: auto; right: auto}
 .site-logo > a .ve-heading {top: auto; bottom: 0}
 .site-logo[data-ve='block'], nav[data-ve='block'], .site-logo[data-ve='block'] {display: block; width: 100%}
+
+.ve-mode #columns, .ve-mode .row-columns {padding-top: 30px; margin-bottom: 14px;}
+.ve-mode #columns > .ve-cover, .ve-mode .row-columns > .ve-cover {background-color: transparent; border: none}
+.ve-mode #columns:hover > .ve-cover, .ve-mode .row-columns:hover > .ve-cover {animation: none; border: none!important;}
+.ve-mode #columns > .ve-cover > .ve-heading, .ve-mode .row-columns > .ve-cover > .ve-heading {opacity: 1; visibility: visible; background: #03B8CF; right: 8px}

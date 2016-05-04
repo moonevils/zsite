@@ -7,7 +7,7 @@ js::set('categoryID', $category->id);
 ?>
 <?php echo $common->printPositionBar($category);?>
 <div class='row blocks' data-region='article_browse-topBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
-<div class='row row-main'>
+<div class='row' id='columns' data-page='article_browse'>
   <?php if(isset($layouts['article_browse']['side'])):?>
   <div class="col-md-9 col-main">
   <?php else:?>

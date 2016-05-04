@@ -132,3 +132,21 @@ $lang->block->navTypeList->desktop_blog  = 'Blog';
 $lang->block->navTypeList->mobile_top    = 'Top of Mobile';
 $lang->block->navTypeList->mobile_bottom = 'Button of Mobile';
 $lang->block->navTypeList->mobile_blog   = 'Blog of Mobile';
+
+
+$lang->block->sideGrid  = 'Side column grid';
+$lang->block->sideFloat = 'Side column position';
+
+$lang->block->sideFloatOptions          = array();
+$lang->block->sideFloatOptions['left']  = 'Left';
+$lang->block->sideFloatOptions['right'] = 'Right';
+
+$lang->block->sideGridOptions     = array();
+$lang->block->sideGridOptions[6]  = '1/2';
+$lang->block->sideGridOptions[4]  = '1/3';
+$lang->block->sideGridOptions[8]  = '2/3';
+$lang->block->sideGridOptions[3]  = '1/4';
+$lang->block->sideGridOptions[9]  = '3/4';
+$lang->block->sideGridOptions[2]  = '1/6';
+$lang->block->sideGridOptions[10] = '5/6';
+$lang->block->sideGridOptions[0]  = 'Don\'t display';

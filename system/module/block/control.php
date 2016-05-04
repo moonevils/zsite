@@ -276,4 +276,29 @@ class block extends control
         $this->view->plan  = $plan;
         $this->display(); 
     }
+
+    /**
+     * Set page columns
+     * 
+     * @param string $page    like 'article_browse'
+     * @access public
+     * @return void
+     */
+    public function setColumns($page)
+    {
+        if($_POST)
+        {
+            $sideGrid  = $_POST['sideGrid'];  // 0,1,2,...12, define 0 to hide side column
+            $sideFloat = $_POST['sideFloat']; // 'left' or 'right';
+            // save to user config
+        }
+
+        // query sideGrid and sideFloat config from database
+        $sideGrid  = 4;
+        $sideFloat = 'right';
+
+        $this->view->sideGrid   = $sideGrid;
+        $this->view->sideFloat  = $sideFloat;
+        $this->display();
+    }
 }
