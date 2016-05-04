@@ -31,14 +31,15 @@ $config = $app->config;
 if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig());
 if(!isset($config->installed) or !$config->installed) die(header('location: install.php'));
 
+$common = $app->loadCommon();
+
 /* Change the request settings. */
-$config->frontRequestType = $config->requestType;
+$config->frontRequestType = $common->loadModel('setting')->getRequestType();
 $config->requestType = 'GET';
 $config->default->module = 'admin'; 
 $config->default->method = 'index';
 
 /* Run it. */
-$common = $app->loadCommon();
 $app->parseRequest();
 $common->checkPriv();
 $app->loadModule();
