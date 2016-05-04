@@ -21,7 +21,7 @@
 <form method='post' id='editForm'>
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
-      <strong><?php echo zget($lang->ui->folderList, $currentModule) . ' / ' . $files->{$currentModule}[$currentFile];?></strong>
+      <strong id='fileName'> </strong> <span class='text-info'><?php echo $file . ".html.php";?></span>
     </div>
     <div class='tab-content'>
       <div class='tab-pane theme-control-tab-pane active' id='cssTab'>
