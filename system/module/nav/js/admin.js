@@ -126,7 +126,6 @@ $(document).ready(function()
     $.setAjaxForm('#navForm');
 
     if(v.type == 'mobile_bottom') $('.plus2, .plus3').hide();
-    if(v.type == 'desktop_bottom') $('.plus3').hide();
 });
 
 /**
