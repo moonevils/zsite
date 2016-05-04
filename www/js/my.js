@@ -100,4 +100,11 @@ $(document).ready(function()
     };
 
     $('#commentBox').load( createLink('message', 'comment', 'objectType=' + v.objectType + '&objectID=' + v.objectID) );
+
+    // init tree
+    $('.tree').each(function()
+    {
+        var $e = $(this).addClass('tree-lines');
+        $e.tree({initialState: 'preserve', name: config.currentModule + '-' + config.currentMethod + '-' + $e.data('type')});
+    });
 });

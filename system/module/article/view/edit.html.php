@@ -131,5 +131,4 @@
   </div>
 </div>
 
-<?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>

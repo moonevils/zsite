@@ -46,12 +46,10 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
       js::import($jsRoot . 'jquery/min.js');
       js::import($jsRoot . 'zui/min.js');
       js::import($jsRoot . 'chanzhi.js');
-      js::import($jsRoot . 'jquery/treeview/min.js');
       js::import($jsRoot . 'my.js');
 
       css::import($webRoot . 'zui/css/min.css');
       css::import($themeRoot . 'common/style.css');
-      css::import($jsRoot    . 'jquery/treeview/min.css');
   }
   else
   {
