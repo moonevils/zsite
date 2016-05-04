@@ -65,6 +65,8 @@ $lang->submittion->typeList = array();
 $lang->submittion->typeList['article'] = '文章';
 $lang->submittion->typeList['blog']    = '博客';
 
+$lang->article->showOnlyBody = '只显示页面内容';
+
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '维护文章';
 $lang->article->create        = '发布文章';

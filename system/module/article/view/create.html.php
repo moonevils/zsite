@@ -124,6 +124,12 @@
           <th><?php echo $lang->article->status;?></th>
           <td><?php echo html::radio('status', $lang->article->statusList, 'normal');?></td>
         </tr>
+        <?php if($type == 'page'):?>
+        <tr>
+          <th><?php echo $lang->article->layout;?></th>
+          <td><input type='checkbox' name='onlyBody' id='onlyBody' value='1'/> <span><?php echo $lang->article->showOnlyBody;?></span></td>
+        </tr>
+        <?php endif;?>
         </tbody>
         <tr>
           <td></td>
