@@ -286,7 +286,7 @@ class treeModel extends model
             }
             $treeMenu[$category->parent] .= "</li>\n"; 
         }
-        $lastMenu = "<ul class='tree'>" . @array_pop($treeMenu) . "</ul>\n";
+        $lastMenu = "<ul class='tree' data-type='$type'>" . @array_pop($treeMenu) . "</ul>\n";
         return $lastMenu; 
     }
 

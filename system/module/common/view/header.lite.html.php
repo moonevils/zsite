@@ -31,13 +31,11 @@ $themeRoot = $webRoot . "theme/default/";
       js::import($jsRoot . 'zui/min.js');
       js::import($jsRoot . 'zui/admin.min.js');
       js::import($jsRoot . 'chanzhi.js');
-      js::import($jsRoot . 'jquery/treeview/min.js');
       js::import($jsRoot . 'my.js');
       js::import($jsRoot . 'my.admin.js');
 
       css::import($webRoot . 'zui/css/min.css');
       css::import($webRoot . 'zui/css/admin.min.css');
-      css::import($jsRoot    . 'jquery/treeview/min.css');
       css::import($themeRoot . 'default/admin.css');
   }
   else

@@ -40,5 +40,4 @@ js::set('lang', $lang->js);
 <?php else:?>
 <div id='categoryBox'></div>
 <?php endif;?>
-<?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>
