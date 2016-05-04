@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.lite.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
 <?php 
 $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
 $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 

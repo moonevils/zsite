@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/treeview.html.php';
 
 /* set categoryPath for topNav highlight. */
@@ -191,4 +191,4 @@ js::execute($product->js);
 </div>
 <div class='row blocks' data-region='product_view-bottomBanner'><?php $this->block->printRegion($layouts, 'product_view', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>

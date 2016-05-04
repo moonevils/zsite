@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
 <?php include TPL_ROOT . 'common/treeview.html.php'; ?>
 <div class='row blocks' data-grid='4' data-region='forum_board-top'><?php $this->block->printRegion($layouts, 'forum_board', 'top', true);?></div>
 <?php $common->printPositionBar($board);?>
@@ -74,4 +74,4 @@
   </table>
 </div>
 <div class='blocks' data-region='forum_board-bottom'><?php $this->block->printRegion($layouts, 'forum_board', 'bottom');?></div>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>

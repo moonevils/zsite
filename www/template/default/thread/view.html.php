@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/kindeditor.html.php';
 
 echo "<div class='row blocks' data-grid='4' data-region='thread_view-top'>";
@@ -18,12 +18,12 @@ echo "</div>";
 
 $common->printPositionBar($board, $thread);
 
-if($pager->pageID == 1) include TPL_ROOT . 'thread/thread.html.php';
-include TPL_ROOT . 'thread/reply.html.php';
+if($pager->pageID == 1) include $this->loadModel('ui')->getEffectViewFile('default', 'thread', 'thread');
+include $this->loadModel('ui')->getEffectViewFile('default', 'thread', 'reply');
 
 echo "<div class='blocks' data-region='thread_view-bottom'>";
 $this->block->printRegion($layouts, 'thread_view', 'bottom');
 echo "</div>";
 
 include TPL_ROOT . 'common/jplayer.html.php';
-include TPL_ROOT . 'common/footer.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');

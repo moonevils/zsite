@@ -189,6 +189,7 @@ $lang->menu->block    = '区块|block|admin|';
 $lang->menu->slide    = '幻灯片|slide|admin|';
 $lang->menu->others   = "设置|ui|others|";
 $lang->menu->visual   = "可视化|visual|index|";
+$lang->menu->edit     = "编辑模板|ui|edittemplate|";
 
 $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';

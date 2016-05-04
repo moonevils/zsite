@@ -1,5 +1,5 @@
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 
 $path = array_keys($category->pathNames);
 js::set('path', $path);
@@ -56,4 +56,4 @@ include TPL_ROOT . 'common/treeview.html.php';
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='article_browse-bottomBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

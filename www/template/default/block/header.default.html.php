@@ -31,6 +31,6 @@
       <div id='siteSlogan' data-ve='slogan'><span><?php echo $this->config->site->slogan;?></span></div>
     </div>
   </div>
-  <?php include TPL_ROOT . 'block' . DS . 'searchbar.html.php';?>
+  <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
 </header>
-<?php include TPL_ROOT . 'block' . DS . 'nav.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>

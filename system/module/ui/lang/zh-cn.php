@@ -41,10 +41,12 @@ $lang->ui->themeStore      = '主题市场';
 $lang->ui->help            = "帮助";
 $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->setCode         = "代码";
+$lang->ui->editTemplate    = "编辑模板";
 $lang->ui->installedThemes = "已安装主题";
 $lang->ui->enableTheme     = "使用此主题";
 $lang->ui->industry        = "行业";
 $lang->ui->offcial         = "官方";
+$lang->ui->reset           = "重置为默认";
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
@@ -273,3 +275,110 @@ $lang->ui->themeColors[] = 'FF63E8';
 $lang->ui->themeColors[] = '964B00';
 $lang->ui->themeColors[] = '7F7F7F';
 $lang->ui->themeColors[] = '000000';
+
+$lang->ui->folderList = new stdclass();
+$lang->ui->folderList->common  = '全局文件';
+$lang->ui->folderList->index   = '首页';
+$lang->ui->folderList->block   = '区块';
+$lang->ui->folderList->article = '文章';
+$lang->ui->folderList->product = '产品';
+$lang->ui->folderList->search  = '搜索';
+$lang->ui->folderList->order   = '订单';
+$lang->ui->folderList->user    = '会员';
+$lang->ui->folderList->message = '评论留言';
+$lang->ui->folderList->forum   = '论坛';
+
+$lang->ui->files = new stdclass();
+$lang->ui->files->default = new stdclass();
+$lang->ui->files->mobile  = new stdclass();
+
+$lang->ui->files->default->common = array();
+$lang->ui->files->default->common['header.lite']  = 'header';
+$lang->ui->files->default->common['header']       = '头部';
+$lang->ui->files->default->common['qrcode']       = '二维码';
+$lang->ui->files->default->common['footer']       = '页脚';
+$lang->ui->files->default->common['header.modal'] = '弹窗页头';
+$lang->ui->files->default->common['footer.modal'] = '弹窗底部';
+
+$lang->ui->files->default->index = array();
+$lang->ui->files->default->index['index'] = '首页';
+
+$lang->ui->files->default->block = array();
+
+$lang->ui->files->default->block['about']           = '公司简介';
+$lang->ui->files->default->block['articletree']     = '文章类目';
+$lang->ui->files->default->block['blogtree']        = '博客类目';
+$lang->ui->files->default->block['contact']         = '联系我们';
+$lang->ui->files->default->block['featuredproduct'] = '推荐产品';
+$lang->ui->files->default->block['followus']        = '关注我们';
+$lang->ui->files->default->block['header']          = '头部';
+$lang->ui->files->default->block['header.default']  = '兼容模式头部';
+$lang->ui->files->default->block['header.layout']   = '自定义头部';
+$lang->ui->files->default->block['hotarticle']      = '热门文章';
+$lang->ui->files->default->block['hotproduct']      = '热门产品';
+$lang->ui->files->default->block['htmlcode']        = 'html源码';
+$lang->ui->files->default->block['html']            = '自定义';
+$lang->ui->files->default->block['latestarticle']   = '最新文章';
+$lang->ui->files->default->block['latestblog']      = '最新博客';
+$lang->ui->files->default->block['latestproduct']   = '最新产品';
+$lang->ui->files->default->block['latestthread']    = '最新帖子';
+$lang->ui->files->default->block['links']           = '友情链接';
+$lang->ui->files->default->block['logo']            = 'logo区域';
+$lang->ui->files->default->block['nav']             = '导航条';
+$lang->ui->files->default->block['pagelist']        = '单页列表';
+$lang->ui->files->default->block['phpcode']         = 'php源码';
+$lang->ui->files->default->block['producttree']     = '产品列表';
+$lang->ui->files->default->block['searchbar']       = '搜索条';
+$lang->ui->files->default->block['slide']           = '幻灯片';
+$lang->ui->files->default->block['slogan']          = '站点口号';
+$lang->ui->files->default->block['usermenu']        = '登录信息';
+
+$lang->ui->files->default->article = array();
+$lang->ui->files->default->article['browse'] = '文章列表';
+$lang->ui->files->default->article['view']   = '文章详情';
+
+$lang->ui->files->default->article['blog/header'] = '博客头部';
+$lang->ui->files->default->article['blog/index']  = '博客列表';
+$lang->ui->files->default->article['blog/view']   = '博客详情';
+$lang->ui->files->default->article['blog/footer'] = '博客底部';
+
+$lang->ui->files->default->article['page/view'] = '单页';
+
+$lang->ui->files->default->product = array();
+$lang->ui->files->default->product['browse']      = '产品列表';
+$lang->ui->files->default->product['browse.card'] = '列表视图';
+$lang->ui->files->default->product['browse.list'] = '卡片视图';
+$lang->ui->files->default->product['view']        = '产品详情';
+
+$lang->ui->files->default->forum = array();
+$lang->ui->files->default->forum['index'] = '论坛首页';
+$lang->ui->files->default->forum['board'] = '板块页面';
+
+$lang->ui->files->default->forum['thread/view']   = '查看帖子';
+$lang->ui->files->default->forum['thread/thread'] = '主题展示';
+$lang->ui->files->default->forum['thread/reply']  = '回复展示';
+$lang->ui->files->default->forum['thread/post']   = '发布主题';
+$lang->ui->files->default->forum['reply/reply']   = '回复表单';
+
+$lang->ui->files->default->user['control']     = '会员中心';
+$lang->ui->files->default->user['side']        = '菜单区域';
+$lang->ui->files->default->user['deny']        = '权限不足';
+$lang->ui->files->default->user['edit']        = '账户编辑';
+$lang->ui->files->default->user['login.front'] = '登录';
+$lang->ui->files->default->user['message']     = '我的消息';
+$lang->ui->files->default->user['profile']     = '个人资料';
+$lang->ui->files->default->user['register']    = '注册界面';
+$lang->ui->files->default->user['score']       = '积分详情';
+$lang->ui->files->default->user['thread']      = '我的主题';
+
+
+$lang->ui->files->default->order['browse']        = '我的订单';
+$lang->ui->files->default->order['check']         = '结算页面';
+$lang->ui->files->default->order['confirm']       = '订单确认';
+$lang->ui->files->default->order['processorder']  = '支付结果';
+$lang->ui->files->default->order['track']         = '物流跟踪';
+
+/*
+
+ *
+ */

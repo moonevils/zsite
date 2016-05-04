@@ -20,7 +20,7 @@
         <?php echo commonModel::printTopBar();?>
         <?php commonModel::printLanguageBar();?>
       </nav>
-      <?php if($setting->searchbar == 'topRight') include  TPL_ROOT . 'block' . DS . 'searchbar.html.php';?>
+      <?php if($setting->searchbar == 'topRight') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
     </div>
   </div>
   <div id='headTitle' class='<?php if($setting->nav == 'besideLogo') echo 'with-navbar' ?><?php if($setting->slogan == 'besideLogo') echo ' with-slogan' ?>'>
@@ -36,13 +36,13 @@
         <?php endif;?>
       </div>
       <?php if($setting->nav == 'besideLogo'):?>
-      <div id='navbarWrapper'><?php include  TPL_ROOT . 'block' . DS . 'nav.html.php' ?></div>
+      <div id='navbarWrapper'><?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav'); ?></div>
       <?php endif; ?>
-      <?php if($setting->searchbar == 'besideSlogan') include TPL_ROOT . 'block' . DS . 'searchbar.html.php';?>
+      <?php if($setting->searchbar == 'besideSlogan') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
     </div>
   </div>
 </header>
-<?php if($setting->nav == 'row') include TPL_ROOT . 'block' . DS . 'nav.html.php';?>
+<?php if($setting->nav == 'row') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
 <style>
 #header {padding: 0; margin-bottom: 14px;}
 #headNav {min-height: 30px; line-height: 30px; padding: 0; margin-bottom: 8px;}
