@@ -1,5 +1,4 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
-<?php include TPL_ROOT . 'common/treeview.html.php'; ?>
 <div class='row blocks' data-grid='4' data-region='forum_board-top'><?php $this->block->printRegion($layouts, 'forum_board', 'top', true);?></div>
 <?php $common->printPositionBar($board);?>
 <div class='panel'>

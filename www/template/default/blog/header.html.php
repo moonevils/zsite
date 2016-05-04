@@ -53,7 +53,6 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
 
   css::import($webRoot . 'zui/css/min.css');
   css::import($themeRoot . 'common/style.css');
-  css::import($jsRoot    . 'jquery/treeview/min.css');
 
   /* Import customed css file if it exists. */
   $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->device}->name, $config->template->{$this->device}->theme);
@@ -66,7 +65,6 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
       js::import($jsRoot . 'jquery/min.js');
       js::import($jsRoot . 'zui/min.js');
       js::import($jsRoot . 'chanzhi.js');
-      js::import($jsRoot . 'jquery/treeview/min.js');
       js::import($jsRoot . 'my.js');
   }
   else

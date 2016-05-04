@@ -2,7 +2,6 @@
 <<<<<<< HEAD
 if($page->onlyBody):
 include TPL_ROOT . 'common/header.lite.html.php';
-include TPL_ROOT . 'common/treeview.html.php';
 js::set('pageID', $page->id);
 css::internal($page->css);
 js::execute($page->js);
@@ -12,7 +11,6 @@ include TPL_ROOT . 'common/header.html.php';
 =======
 include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 >>>>>>> 3fa331863d8a96e1983aa6b9632fd5e0c105da72
-include TPL_ROOT . 'common/treeview.html.php';
 js::set('pageID', $page->id);
 css::internal($page->css);
 js::execute($page->js);
