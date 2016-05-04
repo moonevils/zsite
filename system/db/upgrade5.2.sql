@@ -16,6 +16,7 @@ ALTER TABLE `eps_layout` ADD object char(30) NOT NULL AFTER `region`;
 ALTER TABLE `eps_layout` ADD UNIQUE `layout` (`template`, `plan`, `page`, `region`, `object`, `lang`),DROP INDEX `layout`;
 ALTER TABLE `eps_order` CHANGE express express char(30) NOT NULL AFTER waybill;
 ALTER TABLE `eps_message` ADD `mobile` char(11) NOT NULL AFTER `phone`;
+ALTER TABLE `eps_article` ADD `onlyBody` enum('0', '1') NOT NULL DEFAULT '0' AFTER `js`;
 -- DROP TABLE IF EXISTS `eps_widget`;
 CREATE TABLE `eps_widget` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
