@@ -19,6 +19,9 @@ $config->cache->relation[TABLE_BLOCK]['pages']  = '/';
 $config->cache->relation[TABLE_LAYOUT]['blocks'] = '/';
 $config->cache->relation[TABLE_LAYOUT]['pages']  = '/';
 
+$config->cache->relation[TABLE_SLIDE]['blocks'] = 'slide';
+$config->cache->relation[TABLE_SLIDE]['pages']  = '/';
+
 $config->cache->relation[TABLE_CONFIG]['blocks'] = '/';
 $config->cache->relation[TABLE_CONFIG]['pages']  = '/';
 
@@ -40,5 +43,3 @@ $config->cache->relation[TABLE_THREAD]['blocks'] = 'latestproduct,hotproduct,';
 
 $config->cache->relation[TABLE_RELATION]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist,';
 $config->cache->relation[TABLE_RELATION]['pages']  = '/';
-
-
