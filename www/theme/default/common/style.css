@@ -106,16 +106,11 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .table-data th {font-weight: bold; white-space:nowrap; text-align: right; font-size: 12px}
 
 /* Tree */
-.tree {padding: 0; margin: 0;}
-.tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}
-.tree > li {margin-right: 20px; font-weight: 400; padding-bottom: 8px;}
-.tree > li > ul li {padding: 3px 15px; margin: 0;}
-.tree li:before {display: inline-block; margin-right: 6px; content: '\e6ec'; font-family: ZenIcon; color: #ddd;}
-.tree > li ul {border-left: 1px dashed #ccc; margin-left: 7px; font-weight: normal;}
-.tree > li ul > li:before {content: '\e6e8';}
-.tree > li ul > li:hover:before {content: '\e6ec';}
-.tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 12px; height: 20px; border-top: 1px dashed #ccc;}
-.tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
+.tree li.open > .list-toggle:before {content: '\e712'}
+.tree li>.list-toggle:before {content: '\e710'}
+.tree li:before {top: 6px; left: 4px; width: 12px; height: 12px; border-radius: 6px; background-color: #fff; z-index: 2; border: 2px solid #ddd;}
+.tree > li:before {background-color: #ddd}
+.panel .tree {margin-bottom: 0}
 
 /* Page */
 .page {padding: 8px 0; color: #bbb; text-align: right;}
