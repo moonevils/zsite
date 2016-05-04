@@ -1,5 +1,5 @@
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/treeview.html.php';
 
 /* set categoryPath for topNav highlight. */
@@ -94,4 +94,4 @@ if(isset($article->js)) js::execute($article->js);
 </div>
 <div class='row blocks' data-region='article_view-bottomBanner'><?php $this->block->printRegion($layouts, 'article_view', 'bottomBanner', true);?></div>
 <?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php'; ?>
-<?php include TPL_ROOT . 'common/footer.html.php'; ?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>

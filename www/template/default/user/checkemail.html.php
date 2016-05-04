@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <div class='panel panel-body'>
   <div class='panel panel-pure' id='checkEmail'>
     <div class='panel-heading'><strong><?php echo $lang->user->checkEmail;?></strong></div>
@@ -23,4 +23,4 @@
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

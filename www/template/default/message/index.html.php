@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::set('showDetail', $this->lang->message->showDetail);?>
 <?php js::set('hideDetail', $this->lang->message->hideDetail);?>
 <?php $common->printPositionBar();?>
@@ -120,4 +120,4 @@
   </div>
 </div>
 <div class='row blocks' data-region='message_index-bottomBanner'><?php $this->block->printRegion($layouts, 'message_index', 'bottomBanner', true);?></div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

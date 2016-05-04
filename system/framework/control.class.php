@@ -344,6 +344,13 @@ class control
         $siteExtViewFile   = $viewExtPath['site'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
         $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
         $viewFile = file_exists($siteExtViewFile) ? $siteExtViewFile : $viewFile;
+
+        if(RUN_MODE == 'front')
+        {
+            $customedFile = str_replace($this->app->getWwwRoot(), $this->app->getTmpRoot(), $mainViewFile);
+            if(file_exists($customedFile)) $viewFile = $customedFile;
+        }
+
         if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
 
         /* Extension hook file. */

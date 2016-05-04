@@ -1,5 +1,5 @@
 <?php 
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar('search', null, $words);?>
@@ -39,4 +39,4 @@ include TPL_ROOT . 'common/treeview.html.php';
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

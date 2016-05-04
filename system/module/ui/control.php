@@ -607,4 +607,33 @@ class ui extends control
         $this->view->pageList = $this->lang->block->$template->pages;
         $this->display();
     }
+
+    /**
+     * Edit template files.
+     * 
+     * @param  string $module 
+     * @param  string $file 
+     * @access public
+     * @return void
+     */
+    public function editTemplate($module = 'common', $file = 'header')
+    {
+        $template = $this->config->template->{$this->device}->name;
+        if($_POST)
+        {
+            $result = $this->ui->writeViewFile($template, $this->post->module, $this->post->file);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('editTemplate', "moduel=$module&file=$file")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title         = $this->lang->ui->editTemplate;
+        $this->view->currentModule = $module;
+        $this->view->currentFile   = $file;
+        $this->view->uiHeader      = false;
+        $this->view->files         = $this->lang->ui->files->$template;
+        $this->view->content       = file_get_contents($this->ui->getEffectViewFile($template, $module, $file));
+        $this->view->rawContent    = file_get_contents($this->app->getWwwRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php');
+
+        $this->display();
+    }
 }

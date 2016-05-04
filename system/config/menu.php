@@ -5,7 +5,7 @@ $config->menus->content = 'article,page,blog,book,submittion';
 $config->menus->shop    = 'order,product,orderSetting';
 $config->menus->user    = 'user,message,comment,reply,forum,wechat,submittion';
 $config->menus->promote = 'stat,tag,links,setstat';
-$config->menus->design  = 'ui,logo,slide,nav,block,visual,others';
+$config->menus->design  = 'ui,logo,slide,nav,block,visual,others,edit';
 $config->menus->setting = 'site,security';
 $config->menus->open    = 'package,themestore';
 

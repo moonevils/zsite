@@ -17,7 +17,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <div class="modal-body">
 <?php else:?>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php include TPL_ROOT . 'common/header.lite.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
 <div class='page-container'>
   <div class='blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
   <div class='page-wrapper'>
