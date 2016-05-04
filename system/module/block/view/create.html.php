@@ -251,4 +251,19 @@ foreach (explode('|', $lang->colorPlates) as $value)
   </div>
 </div>
 </form>
+<?php /* hidden navSource start .*/ ?>
+<div id='grade1NavSource' class='hide'>
+  <li class='liGrade1'>
+    <?php echo $this->loadModel('nav')->createEntry(1, null, 'desktop_bottom');?>
+    <ul class='ulGrade2'></ul>
+  </li>
+</div>
+<div id='grade2NavSource' class='hide'>
+  <ul class='ulGrade2'>
+    <li class='liGrade2'>
+      <?php echo $this->loadModel('nav')->createEntry(2, null, 'desktop_bottom');?>
+    </li>
+  </ul>
+</div>
+<?php /* hidden navSource end.*/ ?>
 <?php include '../../common/view/footer.admin.html.php';?>
