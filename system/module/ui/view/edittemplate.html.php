@@ -10,7 +10,7 @@
         <?php foreach($fileList as $file => $name):?>
           <?php if(strpos($file, '/') !== false) list($folder, $file) = explode('/', $file);?>
           <?php $class = ($folder == $currentModule and $file == $currentFile) ? "class='active btn-file'" : "class='btn-file'";?>
-          <?php echo html::a(inlink('edittemplate', "module={$folder}&file={$file}"), $name, "title='{$file}.html.php' $class" );?>
+          <?php echo html::a(inlink('edittemplate', "module={$folder}&file={$file}"), $name, "title='/{$folder}/{$file}.html.php' $class" );?>
         <?php endforeach;?>
         </div>
       <?php endforeach;?>
@@ -18,7 +18,7 @@
   </div>
 </div>
 <div class='col-xs-10'>
-<form method='post' id='ajaxForm'>
+<form method='post' id='editForm'>
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
       <strong><?php echo zget($lang->ui->folderList, $currentModule) . ' / ' . $files->{$currentModule}[$currentFile];?></strong>
