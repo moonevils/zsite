@@ -22,4 +22,8 @@ $(document).ready(function()
        $('#content').val($('#rawContent').val());
        $('#editForm').submit();
     });
+
+    btn = $('.btn-file.active');
+    file = btn.parents('.panel').find('strong').html() + ' / ' + btn.html();
+    $('#fileName').prepend(file);
 });
