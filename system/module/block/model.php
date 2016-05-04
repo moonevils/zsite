@@ -426,9 +426,26 @@ class blockModel extends model
             if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
         }
         if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
+
+        if($this->post->nav)
+        {
+            $navs = $this->post->nav;
+
+            foreach($navs as $key => $nav) $navs[$key] = $this->loadModel('nav')->organizeNav($nav);
+
+            if(isset($navs[2])) $navs[2] = $this->nav->group($navs[2]);
+
+            foreach($navs[1] as &$nav)
+            {
+                $nav['children'] = isset($navs[2][$nav['key']]) ?  $navs[2][$nav['key']] : array();
+            }
+
+            $block->params['nav'] = $navs[1];
+        }
+
         $block->content = helper::jsonEncode($block->params);
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js,nav')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
@@ -469,9 +486,28 @@ class blockModel extends model
         }
 
         if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
+        if($this->post->nav)
+        {
+            $navs = $this->post->nav;
+
+            foreach($navs as $key => $nav)
+            {
+                $navs[$key] = $this->loadModel('nav')->organizeNav($nav);
+            }
+
+            if(isset($navs[2])) $navs[2] = $this->nav->group($navs[2]);
+
+            foreach($navs[1] as &$nav)
+            {
+                $nav['children'] = isset($navs[2][$nav['key']]) ?  $navs[2][$nav['key']] : array();
+            }
+
+            $data->params['nav'] = $navs[1];
+        }
+
         $data->content = helper::jsonEncode($data->params);
 
-        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js')
+        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js,nav')
             ->batchCheck($this->config->block->require->edit, 'notempty')
             ->autoCheck()
             ->where('id')->eq($this->post->blockID)
