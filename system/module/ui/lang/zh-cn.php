@@ -304,7 +304,6 @@ $lang->ui->files->default->index = array();
 $lang->ui->files->default->index['index'] = '首页';
 
 $lang->ui->files->default->block = array();
-
 $lang->ui->files->default->block['about']           = '公司简介';
 $lang->ui->files->default->block['articletree']     = '文章类目';
 $lang->ui->files->default->block['blogtree']        = '博客类目';
@@ -371,14 +370,13 @@ $lang->ui->files->default->user['register']    = '注册界面';
 $lang->ui->files->default->user['score']       = '积分详情';
 $lang->ui->files->default->user['thread']      = '我的主题';
 
-
 $lang->ui->files->default->order['browse']        = '我的订单';
 $lang->ui->files->default->order['check']         = '结算页面';
 $lang->ui->files->default->order['confirm']       = '订单确认';
 $lang->ui->files->default->order['processorder']  = '支付结果';
 $lang->ui->files->default->order['track']         = '物流跟踪';
 
-/*
+$lang->ui->files->default->message['index']       = '留言页面';
+$lang->ui->files->default->message['comment']     = '评论列表';
 
- *
- */
+$lang->ui->files->default->search['index']        = '搜索结果';
