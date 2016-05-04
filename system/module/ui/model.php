@@ -1239,11 +1239,29 @@ if(!function_exists('getJS'))
         return !dao::isError();
     }
 
+    /**
+     * Get ext file of a view file.
+     * 
+     * @param  int    $template 
+     * @param  int    $module 
+     * @param  int    $file 
+     * @access public
+     * @return void
+     */
     public function getExtFile($template, $module, $file)
     {
         return $this->app->getTmpRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
     }
 
+    /**
+     * Get effect view file 
+     * 
+     * @param  string    $template 
+     * @param  string    $module 
+     * @param  string    $file 
+     * @access public
+     * @return string
+     */
     public function getEffectViewFile($template, $module, $file)
     {
         $extFile = $this->getExtFile($template, $module, $file);

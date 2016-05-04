@@ -629,6 +629,8 @@ class ui extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->lang->menuGroups->ui = 'edit';
+
         $this->view->title         = $this->lang->ui->editTemplate;
         $this->view->currentModule = $module;
         $this->view->currentFile   = $file;
@@ -639,5 +641,4 @@ class ui extends control
 
         $this->display();
     }
-
 }
