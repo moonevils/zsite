@@ -1250,6 +1250,15 @@ if(!function_exists('getJS'))
         return file_exists($extFile) ? $extFile : $this->app->getWwwroot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
     }
 
+    /**
+     * Write view file.
+     * 
+     * @param  string    $template 
+     * @param  string    $module 
+     * @param  string    $file 
+     * @access public
+     * @return bool
+     */
     public function writeViewFile($template, $module, $file)
     {
         $file = $this->getExtFile($template, $module, $file);       
@@ -1258,6 +1267,8 @@ if(!function_exists('getJS'))
         $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$', 'include', 'require', 'assert');
         $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $', 'i n c l u d e', 'r e q u i r e', 'a s s e r t');
         $content     = str_replace($gibbedEvils, $evils, $this->post->content);
-        return file_put_contents($file, $content);
+        $result = file_put_contents($file, $content);
+        if($result === false) return false;
+        return true;
     }
 }

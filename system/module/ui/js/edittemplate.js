@@ -6,6 +6,13 @@ $(document).ready(function()
         {
             bootbox.alert(response.warning);
         }
+        if(response.result == 'success')
+        {
+            setTimeout(function()
+            {
+                location.href = response.locate;  
+            }, 2000);
+        }
     });
 
     $.setAjaxLoader('.okFile', '#ajaxModal');
@@ -13,5 +20,6 @@ $(document).ready(function()
     $('#resetBtn').click(function()
     {
        $('#content').val($('#rawContent').val());
+       $('#editForm').submit();
     });
 });
