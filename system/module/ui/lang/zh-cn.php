@@ -372,13 +372,13 @@ $lang->ui->files->default->user['score']       = '积分详情';
 $lang->ui->files->default->user['thread']      = '我的主题';
 
 
-$lang->ui->files->default['browse']        = '我的订单';
-$lang->ui->files->default['check']         = '';
+$lang->ui->files->default->order['browse']        = '我的订单';
+$lang->ui->files->default->order['check']         = '结算页面';
+$lang->ui->files->default->order['confirm']       = '订单确认';
+$lang->ui->files->default->order['processorder']  = '支付结果';
+$lang->ui->files->default->order['track']         = '物流跟踪';
 
 /*
-$lang->ui->files->default['confirm']
-$lang->ui->files->default['processorder']
-$lang->ui->files->default['track']
 
  *
  */
