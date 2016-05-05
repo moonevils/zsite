@@ -144,3 +144,21 @@ $lang->block->navTypeList->desktop_blog  = '博客';
 $lang->block->navTypeList->mobile_top    = '移动版顶部';
 $lang->block->navTypeList->mobile_bottom = '移动版底部';
 $lang->block->navTypeList->mobile_blog   = '移动版博客';
+
+$lang->block->sideGrid  = '侧边栏宽度';
+$lang->block->sideFloat = '侧边栏位置';
+
+$lang->block->sideFloatOptions          = array();
+$lang->block->sideFloatOptions['left']  = '左侧';
+$lang->block->sideFloatOptions['right'] = '右侧';
+
+$lang->block->sideGridOptions     = array();
+$lang->block->sideGridOptions[6]  = '1/2';
+$lang->block->sideGridOptions[4]  = '1/3';
+$lang->block->sideGridOptions[8]  = '2/3';
+$lang->block->sideGridOptions[3]  = '1/4';
+$lang->block->sideGridOptions[9]  = '3/4';
+$lang->block->sideGridOptions[2]  = '1/6';
+$lang->block->sideGridOptions[10] = '5/6';
+$lang->block->sideGridOptions[12] = '100%';
+$lang->block->sideGridOptions[0]  = '不显示侧边栏';

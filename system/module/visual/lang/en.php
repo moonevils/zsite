@@ -78,6 +78,8 @@ $lang->visual->setting->block['actions']['delete']         = array('confirm' => 
 $lang->visual->setting->block['actions']['layout']         = array('text' => 'Change layout', 'success' => 'Layout changes saved.');
 $lang->visual->setting->block['actions']['add']            = array('title' => 'Add block {title}');
 $lang->visual->setting->block['actions']['create']         = array('title' => 'Create and add block');
+$lang->visual->setting->columns                            = array('name' => "Page columns", 'actions' => array());
+$lang->visual->setting->columns['actions']['edit']         = array('title' => "Custom columns", 'text' => "Custom columns");
 $lang->visual->setting->article                            = array('name' => 'Article');
 $lang->visual->setting->articles                           = array('name' => 'Article list', 'actions' => array());
 $lang->visual->setting->articles['actions']['add']         = array('text' => 'Publish article');

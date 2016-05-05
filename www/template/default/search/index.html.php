@@ -1,6 +1,5 @@
 <?php 
 include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
-include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar('search', null, $words);?>
 <div class='row'>
