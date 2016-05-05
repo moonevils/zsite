@@ -84,10 +84,14 @@ $(function()
     var $replyForm = $('#replyForm');
     $replyForm.ajaxform({onResultSuccess: function(response)
     {
-        response.locate = false;
-        $('#replyDialog').modal('hide');
-        $.refreshRepliesList();
-        $replyForm.find('#content').val('');
+        $('#replyDialog').modal('hide')
+        if($.isFunction($.refreshRepliesList))
+        {
+            response.locate = false;
+            setTimeout($.refreshRepliesList, 200);
+        }
+    }, onSuccess: function(response)
+    {
         if(response.reason == 'needChecking')
         {
             $replyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');

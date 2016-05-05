@@ -67,12 +67,14 @@
 $(function()
 {
     var $postThreadForm = $('#postThreadForm');
-    $postThreadForm.ajaxform({onSuccess: function(response)
+    $postThreadForm.ajaxform({onResultSuccess: function(response)
     {
         if(response.result == 'success')
         {
             $.closeModal();
         }
+    }, onSuccess: function(response)
+    {
         if(response.reason == 'needChecking')
         {
             $postThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
