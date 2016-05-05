@@ -79,7 +79,7 @@ $lang->visual->setting->block['actions']['layout']         = array('text' => '�
 $lang->visual->setting->block['actions']['add']            = array('title' => '添加内容到 【{title}】');
 $lang->visual->setting->block['actions']['create']         = array('title' => '创建并添加区块');
 $lang->visual->setting->columns                            = array('name' => "分栏设置", 'actions' => array());
-$lang->visual->setting->columns['actions']['edit']         = array('title' => "定制侧边栏", 'text' => "定制侧边栏");
+$lang->visual->setting->columns['actions']['edit']         = array('title' => "侧边栏设置", 'text' => "侧边栏设置");
 $lang->visual->setting->article                            = array('name' => '文章');
 $lang->visual->setting->articles                           = array('name' => '文章列表', 'actions' => array());
 $lang->visual->setting->articles['actions']['add']         = array('text' => '发布新文章');
