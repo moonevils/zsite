@@ -398,7 +398,7 @@ class articleModel extends model
             ->add('addedBy', $this->app->user->account)
             ->setIF(!$this->post->isLink, 'link', '')
             ->setIF(RUN_MODE == 'front', 'submittion', 1)
-            ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', '')
+            ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', 0)
             ->stripTags('content,link', $this->config->allowedTags->admin)
             ->get();
 
@@ -545,7 +545,7 @@ class articleModel extends model
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->setIF(!$this->post->isLink, 'link', '')
-            ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', '')
+            ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', 0)
             ->get();
 
         $article->keywords = seo::unify($article->keywords, ',');
