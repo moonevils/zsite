@@ -943,8 +943,10 @@
                 loadJs('jQuery', window.v.jQueryUrl, iframeDocument, function()
                 {
                     window.$$ = iframe.jQuery.noConflict();
-                    loadJs('zui', window.v.zuiJsUrl, iframeDocument, initVisualPage);
-                    loadJs('zuiAdmin', window.v.zuiAdminJsUrl, iframeDocument, initVisualPage);
+                    loadJs('zui', window.v.zuiJsUrl, iframeDocument, function()
+                    {
+                        loadJs('zuiAdmin', window.v.zuiAdminJsUrl, iframeDocument, initVisualPage);
+                    });
                     $$.iframe = iframe;
                     if(iframe.Zepto && iframe.Zepto.fn.lazyload)
                     {
