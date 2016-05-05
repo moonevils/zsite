@@ -1,4 +1,4 @@
-<?php
+<?php 
 <<<<<<< HEAD
 if($page->onlyBody):
 include TPL_ROOT . 'common/header.lite.html.php';
