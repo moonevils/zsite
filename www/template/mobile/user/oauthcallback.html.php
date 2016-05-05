@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <div class='panel-section'>
   <div class='panel-heading bg-gray-pale'>
     <strong><?php echo $lang->user->oauth->lblProfile;?></strong>
@@ -56,4 +56,4 @@
     </form>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

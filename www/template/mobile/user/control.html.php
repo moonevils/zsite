@@ -10,13 +10,13 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 
 <hr class='space'>
 <div class='panel panel-body panel-section'>
   <div class='alert bg-primary-pale'><?php printf($lang->user->control->welcome, $this->app->user->realname);?></div>
 </div>
 
-<?php include TPL_ROOT . 'user/side.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
 
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

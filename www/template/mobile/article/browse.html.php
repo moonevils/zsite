@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <?php
 $path = array_keys($category->pathNames);
 js::set('path', $path);
@@ -62,4 +62,4 @@ js::set('categoryID', $category->id);
 
 <div class='block-region blocks region-bottom' data-region='article_browse-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'bottom');?></div>
 
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

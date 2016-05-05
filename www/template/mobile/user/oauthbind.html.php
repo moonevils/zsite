@@ -1,5 +1,5 @@
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 ?>
 <div class='panel-section'>
   <div class='panel-heading'>

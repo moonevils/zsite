@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 include TPL_ROOT . 'common/files.html.php';
 ?>
 <div class='block-region region-top blocks' data-region='thread_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'thread_view', 'top');?></div>
@@ -22,4 +22,4 @@ include TPL_ROOT . 'thread/reply.html.php';
 ?>
 <div class='block-region region-bottom blocks' data-region='thread_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'thread_view', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

@@ -1,5 +1,5 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
-<?php include TPL_ROOT . 'user/side.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
 <div class='panel-section'>
   <div class='panel-heading'>
     <button type='button' class='btn primary block' data-toggle='modal' data-remote="<?php echo inlink('post');?>"><i class='icon-plus'></i> <?php echo $lang->article->post;?></button>
@@ -36,4 +36,4 @@
   </div>
   <div class='panel-footer'><?php $pager->show('justify');?></div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
