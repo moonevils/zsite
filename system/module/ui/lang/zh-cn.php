@@ -183,11 +183,11 @@ $lang->ui->theme->navbarLayoutList['true']             = '自适应宽度';
 $lang->ui->theme->sideFloatList['left']  = '靠左';
 $lang->ui->theme->sideFloatList['right'] = '靠右';
 
-$lang->ui->theme->sideGridList["0"]                = "不显示";
-$lang->ui->theme->sideGridList["16.666666666667%"] = "1/6";
-$lang->ui->theme->sideGridList["25%"]              = "1/4";
-$lang->ui->theme->sideGridList["33.333333333333%"] = "1/3";
-$lang->ui->theme->sideGridList["50%"]              = "1/2";
+$lang->ui->theme->sideGridList['hidden'] = "不显示";
+$lang->ui->theme->sideGridList[2]        = "1/6";
+$lang->ui->theme->sideGridList[3]        = "1/4";
+$lang->ui->theme->sideGridList[4]        = "1/3";
+$lang->ui->theme->sideGridList[6]        = "1/2";
 
 $lang->ui->theme->underlineList['none']                = '无';
 $lang->ui->theme->underlineList['underline']           = '带下划线';

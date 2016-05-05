@@ -18,9 +18,9 @@ js::set('categoryID', $category->id);
 ?>
 <?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
 <div class='row blocks' data-region='product_browse-topBanner'><?php $this->block->printRegion($layouts, 'product_browse', 'topBanner', true);?></div>
-<div class='row'>
-  <?php if(isset($layouts['product_browse']['side'])):?>
-  <div class='col-md-9 col-main'>
+<div class='row' id='columns' data-page='product_browse'>
+  <?php if(isset($layouts['product_browse']['side']) and !empty($sideGrid) && $sideGrid !== 'hidden'):?>
+  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
   <?php else:?>
   <div class='col-md-12'>
   <?php endif;?>
@@ -42,8 +42,8 @@ js::set('categoryID', $category->id);
     </div>
     <div class='row blocks' data-region='product_browse-bottom'><?php $this->block->printRegion($layouts, 'product_browse', 'bottom', true);?></div>
   </div>
-  <?php if(isset($layouts['product_browse']['side'])):?>
-  <div class='col-md-3 col-side'>
+  <?php if(isset($layouts['product_browse']['side']) and !(empty($sideGrid) || $sideGrid === 'hidden')):?>
+  <div class='col-md-<?php echo $sideGrid ?> col-side'>
     <side class='page-side blocks' data-region='product_browse-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
   </div>
   <?php endif;?>

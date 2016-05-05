@@ -758,14 +758,6 @@ body {
 
 .footerLayout(@footer-border-style, @footer-backcolor);
 
-/* Column style */
-@media (min-width: 992px)
-{
-    .columnLayout(@sidebar-pull-left);
-    .col-main {width: 100% - @sidebar-width;}
-    .col-side {width: @sidebar-width}
-}
-
 /* Search bar */
 #searchbar {right: 15px;}
 @media (max-width: 767px) {.m-blog #searchbar {right: 15px;}}
