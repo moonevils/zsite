@@ -20,8 +20,8 @@
       <li <?php echo $class?>><?php echo html::a(inlink('domainlist', "mode=$code"), $modeName);?></li>
       <?php endforeach;?>
       <li>
-        <form method='get' action="<?php echo inlink('domainreport')?>">
-          <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domain') . html::hidden('mode', 'fixed');?>
+        <form method='get' action="<?php echo inlink('domainlist')?>">
+          <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domainlist') . html::hidden('mode', 'fixed');?>
           <table class='table table-borderless'>
             <tr>
               <td style='padding:4px'>
