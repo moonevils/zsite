@@ -129,7 +129,7 @@ ol {padding-left: 20px;}
 .panel > .table > thead > tr > th,.panel > form > .table > thead > tr > th {background-color: transparent;}
 .panel.panel-pure {box-shadow: none; border: 0; border-radius: 0;}
 .panel.panel-pure .panel-heading {background: transparent;}
-.panel-actions{float: right;margin-top: -6px; margin-right: -12px;}
+.panel-actions {float: right;margin-top: -6px; margin-right: -12px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 .panel-actions .form-search{width: 300px; float: left;}
