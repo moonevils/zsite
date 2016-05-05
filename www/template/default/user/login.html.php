@@ -7,10 +7,10 @@ if(RUN_MODE == 'front')
     }
     else
     {
-        include  TPL_ROOT . 'user/login.front.html.php';
+        include  $this->loadModel('ui')->getEffectViewFile('default', 'user', 'login.front');
     }
 }
 else
 {
-    include TPL_ROOT . 'user/login.admin.html.php';
+    include  $this->loadModel('ui')->getEffectViewFile('default', 'user', 'login.front');
 }
