@@ -680,9 +680,9 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .icon-rotate-90:before {display: inline-block; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);}
 
 /* menu */
-#menu {margin: -20px -10px 20px; border-bottom: 1px solid #ddd; height: 41px;}
+#menu {margin: -20px -10px 20px; border-bottom: 1px solid #ddd; height: 40px;}
 #menu .nav {float: left;}
-#menu .nav > li {float: left; position: relative; padding: 5px 0;}
+#menu .nav > li {float: left; position: relative; padding: 5px 3px;}
 
 #menu .nav > li > a {padding: 5px;}
 #menu .nav > li > a > .icon, #menu .dropdown-menu > li > a > .icon  {display: inline-block; width: 20px; text-align: center;}
