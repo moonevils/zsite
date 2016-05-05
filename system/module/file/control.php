@@ -203,8 +203,9 @@ class file extends control
      */
     public function upload($objectType, $objectID)
     {
+
         $this->file->setSavePath($objectType);
-        if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
+        if(!$this->file->checkSavePath()) die(json_encode(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable)));
 
         if($objectType == 'source' and !$this->post->continue)
         {
@@ -213,13 +214,14 @@ class file extends control
                 $extension    = $this->file->getExtension($name);
                 $filename     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
                 $sameFilename = $this->file->checkSameFile($filename);
-                if(!empty($sameFilename)) $this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+                if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'error' => $this->lang->file->sameName)));
             }
         }
 
         $files = $this->file->getUpload('files', $objectType);
         if($files) $this->file->saveUpload($objectType, $objectID);
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+
+        die(json_encode(array('result' => 'success', 'message' => $this->lang->saveSuccess)));
     }
 
     /**
