@@ -14,11 +14,11 @@ js::execute($page->js);
 ?>
 <?php $common->printPositionBar($page);?>
 <div class='row blocks' data-region='page_view-topBanner'><?php $this->block->printRegion($layouts, 'page_view', 'topBanner', true);?></div>
-<div class='row'>
-  <?php if(!empty($layouts['page_view'])):?>
-  <div class='col-md-9 col-main'>
+<div class='row' id='columns' data-page='page_view'>
+  <?php if(isset($layouts['page_view']['side']) and !empty($sideGrid) && $sideGrid !== 'hidden'):?>
+  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
   <?php else:?>
-  <div class='col-md-12'>
+  <div class="col-md-12">
   <?php endif;?>
     <div class='row blocks' data-region='page_view-top'><?php $this->block->printRegion($layouts, 'page_view', 'top', true);?></div>
     <div class='article' id='page<?php echo $page->id;?>' data-ve='page'>
@@ -39,8 +39,8 @@ js::execute($page->js);
     </div>
     <div class='row blocks' data-region='page_view-bottom'><?php $this->block->printRegion($layouts, 'page_view', 'bottom', true);?></div>
   </div>
-  <?php if(!empty($layouts['page_view'])):?>
-  <div class='col-md-3 col-side'><side class='page-side blocks blocks' data-region='page_view-side'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></side></div>
+  <?php if(isset($layouts['page_view']['side']) and !(empty($sideGrid) || $sideGrid === 'hidden')):?>
+  <div class='col-md-<?php echo $sideGrid ?> col-side'><side class='page-side blocks blocks' data-region='page_view-side'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></side></div>
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='page_view-bottomBanner'><?php $this->block->printRegion($layouts, 'page_view', 'bottomBanner', true);?></div>

@@ -129,7 +129,7 @@ ol {padding-left: 20px;}
 .panel > .table > thead > tr > th,.panel > form > .table > thead > tr > th {background-color: transparent;}
 .panel.panel-pure {box-shadow: none; border: 0; border-radius: 0;}
 .panel.panel-pure .panel-heading {background: transparent;}
-.panel-actions{float: right;margin-top: -6px; margin-right: -12px;}
+.panel-actions {float: right;margin-top: -6px; margin-right: -12px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 .panel-actions .form-search{width: 300px; float: left;}
@@ -680,9 +680,9 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .icon-rotate-90:before {display: inline-block; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);}
 
 /* menu */
-#menu {margin: -20px -10px 20px; border-bottom: 1px solid #ddd; height: 41px;}
+#menu {margin: -20px -10px 20px; border-bottom: 1px solid #ddd; height: 40px;}
 #menu .nav {float: left;}
-#menu .nav > li {float: left; position: relative; padding: 5px 0;}
+#menu .nav > li {float: left; position: relative; padding: 5px 3px;}
 
 #menu .nav > li > a {padding: 5px;}
 #menu .nav > li > a > .icon, #menu .dropdown-menu > li > a > .icon  {display: inline-block; width: 20px; text-align: center;}
