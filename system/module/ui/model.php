@@ -254,6 +254,24 @@ class uiModel extends model
         }
         return $params;
     }
+    
+    /**
+     * Get theme coinfig by key.
+     * 
+     * @param  string    $key 
+     * @param  string $default 
+     * @param  string $template 
+     * @param  string $theme 
+     * @access public
+     * @return string
+     */
+    public function getThemeSetting($key, $default = '', $template = '', $theme = '')
+    {
+        if(empty($theme))    $theme    = $this->config->template->{$this->device}->theme;
+        if(empty($template)) $template = $this->config->template->{$this->device}->name;
+        $config = $this->getCustomParams($template, $theme);
+        return zget($config, $key, $default);
+    }
 
     /**
      * Create customer css.
@@ -580,7 +598,7 @@ class uiModel extends model
      */
     public function printSidebarLayoutControl($id, $label, $params, $value = '')
     {
-        $this->printSelectList($this->lang->ui->theme->sidebarPullLeftList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+        $this->printSelectList($this->lang->ui->theme->sideFloatList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
     /**
@@ -593,7 +611,7 @@ class uiModel extends model
      */
     public function printSidebarWidthControl($id, $label, $params, $value = '')
     {
-        $this->printSelectList($this->lang->ui->theme->sidebarWidthList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+        $this->printSelectList($this->lang->ui->theme->sideGridList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
     /**

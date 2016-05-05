@@ -286,19 +286,24 @@ class block extends control
      */
     public function setColumns($page)
     {
+        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->device}->name;
+        $params = $this->loadModel('ui')->getCustomParams($template, $theme);
+
         if($_POST)
         {
-            $sideGrid  = $_POST['sideGrid'];  // 0,1,2,...12, define 0 to hide side column
-            $sideFloat = $_POST['sideFloat']; // 'left' or 'right';
-            // save to user config
+            $params['sideGrid']  = $this->post->sideGrid;
+            $params['sideFloat'] = $this->post->sideFloat;
+            $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
+            $setting[$template][$theme] = $params;
+
+            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
+            $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        // query sideGrid and sideFloat config from database
-        $sideGrid  = 4;
-        $sideFloat = 'right';
-
-        $this->view->sideGrid   = $sideGrid;
-        $this->view->sideFloat  = $sideFloat;
+        $this->view->sideGrid   = $this->ui->getThemeSetting('sideGrid');
+        $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat');
         $this->display();
     }
 }

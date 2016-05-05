@@ -180,13 +180,14 @@ $lang->ui->theme->fontSizeList['24px']                 = '24px';
 $lang->ui->theme->navbarLayoutList['false']            = '普通';
 $lang->ui->theme->navbarLayoutList['true']             = '自适应宽度';
 
-$lang->ui->theme->sidebarPullLeftList['false']         = '靠右';
-$lang->ui->theme->sidebarPullLeftList['true']          = '靠左';
+$lang->ui->theme->sideFloatList['left']  = '靠左';
+$lang->ui->theme->sideFloatList['right'] = '靠右';
 
-$lang->ui->theme->sidebarWidthList["16.666666666667%"] = "1/6";
-$lang->ui->theme->sidebarWidthList["25%"]              = "1/4";
-$lang->ui->theme->sidebarWidthList["33.333333333333%"] = "1/3";
-$lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
+$lang->ui->theme->sideGridList["0"]                = "不显示";
+$lang->ui->theme->sideGridList["16.666666666667%"] = "1/6";
+$lang->ui->theme->sideGridList["25%"]              = "1/4";
+$lang->ui->theme->sideGridList["33.333333333333%"] = "1/3";
+$lang->ui->theme->sideGridList["50%"]              = "1/2";
 
 $lang->ui->theme->underlineList['none']                = '无';
 $lang->ui->theme->underlineList['underline']           = '带下划线';
@@ -234,8 +235,8 @@ $lang->ui->background    = '背景';
 $lang->ui->button        = '按钮';
 $lang->ui->text          = '文字';
 $lang->ui->column        = '分栏';
-$lang->ui->sidebarLayout = '侧边栏布局';
-$lang->ui->sidebarWidth  = '侧边栏宽度';
+$lang->ui->sideFloat     = '侧边栏布局';
+$lang->ui->sideGrid      = '侧边栏宽度';
 
 $lang->ui->primaryColor    = '基色';
 $lang->ui->backcolor       = '背景色';

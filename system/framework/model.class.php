@@ -107,6 +107,14 @@ class model
     public $global;
 
     /**
+     * The device of visiting client.
+     * 
+     * @var string   
+     * @access public
+     */
+    public $device;
+
+    /**
      * The construct function.
      *
      * 1. global the global vars, refer them by the class member such as $this->app.
@@ -123,6 +131,7 @@ class model
         $this->lang   = $lang;
         $this->dbh    = $dbh;
 
+        $this->setCurrentDevice();
         $moduleName = $this->getModuleName();
         if($moduleName != 'common')
         {
@@ -169,6 +178,19 @@ class model
         $this->session = $this->app->session;
         $this->global  = $this->app->global;
     }
+
+    /**
+     * Set current device of visit website.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCurrentDevice()
+    {
+        $this->app->setCurrentDevice();
+        $this->device = $this->app->device;
+    }
+
 
     /**
      * Set referer.
