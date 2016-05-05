@@ -9,9 +9,10 @@ form .article-files {margin-bottom: 10px;}
 .color.active > .icon-ok, .color.error > .icon-question, .color.active .input-group-btn > .dropdown-toggle > .icon-ok, .color.error .input-group-btn > .dropdown-toggle > .icon-question {display: inline;}
 .color.active.error .icon-ok {display: none}
 .color .input-group-addon {min-width: 40px; text-align: center; border-left: none; border-radius: 0;}
-.input-group-btn > .dropdown-toggle{border-right: none; border-radius: 0;}
+
+.input-group-btn > .dropdown-toggle {border-right: none; border-radius: 0;}
+.input-group-addon .checkbox-inline {padding-top: 0;}
 
 .dropdown-menu.colors {padding: 5px; width: 205px}
-
 .dropdown-menu.buttons {padding: 5px; padding-bottom: 0;}
 .dropdown-menu.buttons > li {margin-bottom: 5px;}
