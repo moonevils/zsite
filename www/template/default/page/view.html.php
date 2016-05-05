@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-<?php
-=======
 <?php 
-<<<<<<< HEAD
->>>>>>> adadc42d3b925442be9be327701faa98a41eb10e
 if($page->onlyBody):
 include TPL_ROOT . 'common/header.lite.html.php';
 js::set('pageID', $page->id);
