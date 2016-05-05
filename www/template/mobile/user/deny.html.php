@@ -10,9 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php
-include TPL_ROOT . 'common/header.lite.html.php';
-?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
 <style>
 .alert > .icon, .alert > .icon + .content {padding: 10px 15px;}
 .alert > .icon {display: block; text-align: center; font-size: 48px; float: none; line-height: 1; padding-bottom: 0; opacity: .7}

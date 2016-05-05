@@ -11,7 +11,7 @@
  */
 ?>
 <?php if(!empty($this->config->book->fullScreen) or $this->get->fullScreen):?>
-<?php include TPL_ROOT . 'common/header.lite.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
 <?php js::set('fullScreen', 1);?>
 <?php $bookModel = $this->loadModel('book'); ?>
 <div class='fullScreen-book'>

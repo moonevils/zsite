@@ -122,7 +122,6 @@ class stat extends control
         $this->display();
     }
 
-
     /**
      * From statistics report page.
      * 
