@@ -11,7 +11,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <div class='cards borderless with-icon' id='companyContact'>
   <?php if(!empty($contact->contacts)): ?>
   <div class='card'>

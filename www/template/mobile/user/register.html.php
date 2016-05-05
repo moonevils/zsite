@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 ?>
 <hr class='space'>
 <div class='panel-section'>
@@ -58,4 +58,4 @@ include TPL_ROOT . 'common/header.html.php';
   </div>
 </div>
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 include TPL_ROOT . 'common/files.html.php';
 
 /* set categoryPath for topNav highlight. */
@@ -195,4 +195,4 @@ $(function()
 });
 </script>
 
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

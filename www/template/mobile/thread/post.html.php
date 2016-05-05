@@ -20,7 +20,7 @@
     </div>
     <div class='modal-body'>
 <?php else: ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <hr class='space'>
 <div class='panel-section'>
   <div class='panel-heading'>

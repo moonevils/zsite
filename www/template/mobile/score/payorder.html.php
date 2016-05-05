@@ -1,6 +1,6 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <div class='row'>
-  <?php include TPL_ROOT . 'user/side.html.php';?>
+  <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
   <div class='col-md-10'>
     <div class='panel panel-section'>
       <div class='panel-body'>
@@ -35,4 +35,4 @@
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
