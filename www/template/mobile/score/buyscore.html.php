@@ -21,6 +21,7 @@
     <div class='modal-body'>
 <?php else: ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include TPL_ROOT . 'user/side.html.php';?>
 <div class='panel panel-section'>
   <div class='panel-heading'><strong><?php echo $lang->user->buyScore?></strong></div>
   <div class='panel-body'>
