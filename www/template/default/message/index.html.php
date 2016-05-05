@@ -15,8 +15,12 @@
 <?php js::set('hideDetail', $this->lang->message->hideDetail);?>
 <?php $common->printPositionBar();?>
 <div class='row blocks' data-region='message_index-topBanner'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
-<div class='row'>
-  <div class='col-md-9 col-main'>
+<div class='row' id='columns' data-page='message_index'>
+  <?php if(isset($layouts['message_index']['side']) and !empty($sideGrid) && $sideGrid !== 'hidden'):?>
+  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
+  <?php else:?>
+  <div class="col-md-12">
+  <?php endif;?>
     <div class='row blocks' data-region='message_index-top'><?php $this->block->printRegion($layouts, 'message_index', 'top', true);?></div>
     <?php if(!empty($messages)):?>
     <?php $class = 'success';?>
@@ -112,12 +116,14 @@
     </div>
     <div class='row blocks' data-region='message_index-bottom'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
   </div>
-  <div class='col-md-3 col-side'>
+  <?php if(isset($layouts['message_index']['side']) and !(empty($sideGrid) || $sideGrid === 'hidden')):?>
+  <div class='col-md-<?php echo $sideGrid ?> col-side'>
     <div class='nav'>
     <a href='#commentForm' class='btn btn-primary btn-lg w-p100'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
     </div>
     <side class='blocks' data-region='message_index-side'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></side>
   </div>
+  <?php endif;?>
 </div>
 <div class='row blocks' data-region='message_index-bottomBanner'><?php $this->block->printRegion($layouts, 'message_index', 'bottomBanner', true);?></div>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

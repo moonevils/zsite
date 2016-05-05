@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-  <form id='ajaxForm' method='post'>
+  <form class='ve-form' id='ajaxForm' method='post'>
     <table class='table table-form w-p90'>
       <tbody>
         <tr>

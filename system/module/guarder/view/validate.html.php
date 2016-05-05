@@ -44,8 +44,8 @@ $(document).ready(function()
           $types   = array();
           $options = explode(',', $this->config->site->importantValidate);
           if(in_array('setSecurity', $options)) $types['setSecurity'] = $lang->site->validateTypes->setSecurity;
-          if(in_array('okFile', $options)) $types['okFile'] = $lang->site->validateTypes->okFile;
-          if(in_array('email', $options)) $types['email'] = $lang->site->validateTypes->email;
+          if(in_array('okFile', $options))      $types['okFile']      = $lang->site->validateTypes->okFile;
+          if(in_array('email', $options))       $types['email']       = $lang->site->validateTypes->email;
           ?>
           <?php echo html::radio('type[]', $types, isset($types[$this->cookie->validate]) ? $this->cookie->validate : key($types));?>
         </td>
