@@ -974,12 +974,12 @@ class router
             $value = @getenv('PATH_INFO');
             if(empty($value)) $value = @getenv('ORIG_PATH_INFO');
             if(empty($value)) $value = @getenv('REQUEST_URI');
-            if(strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
         }
 
+        if($this->config->requestType != 'GET' and strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
         if(strpos($value, '?') === false) return trim($value, '/');
         $value = parse_url($value);
-        return trim($value['path'], '/');
+        return trim(zget($value, 'path', ''), '/');
     }
 
     /**
