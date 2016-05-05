@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <div class='block-region region-top blocks' data-region='page_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'top');?></div>
 <div class='panel panel-section'>
   <div class='panel-heading'>
@@ -48,4 +48,4 @@
 
 <div class='block-region region-bottom blocks' data-region='page_index-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'bottom');?></div>
 
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

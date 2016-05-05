@@ -11,7 +11,7 @@
  */
 ?>
 <?php 
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 // TODO: check follow methods: showDetail and hideDetail
 ?>
 <div class='block-region region-top blocks' data-region='message_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'message_index', 'top');?></div>
@@ -146,4 +146,4 @@ $(function()
     }});
 });
 </script>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

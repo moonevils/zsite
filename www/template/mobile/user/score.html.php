@@ -1,6 +1,6 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <div class='row'>
-  <?php include TPL_ROOT . 'user/side.html.php';?>
+  <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
   <div class='col-md-10'>
     <div class='panel-section'>
       <div class='panel-heading'><?php echo html::a($this->createLink('score', 'buyScore'), $lang->user->buyScore, "class='btn primary block' data-toggle='modal'")?></div>
@@ -41,4 +41,4 @@
   </div>
 </div>
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

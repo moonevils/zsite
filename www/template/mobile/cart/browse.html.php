@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <?php js::set('currencySymbol', $currencySymbol);?>
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
@@ -160,4 +160,4 @@ $(function()
 });
 </script>
 <?php include TPL_ROOT . 'common/form.html.php';?>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

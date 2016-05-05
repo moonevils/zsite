@@ -93,7 +93,7 @@
 
 <?php else:?>
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 include TPL_ROOT . 'common/files.html.php';
 js::set('fullScreen', 0);
 ?>
@@ -165,5 +165,5 @@ js::set('fullScreen', 0);
   });
   </script>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
 <?php endif;?>
