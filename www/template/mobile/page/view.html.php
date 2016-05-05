@@ -11,7 +11,7 @@
  */
 ?>
 <?php 
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 include TPL_ROOT . 'common/files.html.php';
 js::set('pageID', $page->id);
 css::internal($page->css);
@@ -47,4 +47,4 @@ js::execute($page->js);
 </div>
 </div>
 <div class='block-region region-bottom blocks' data-region='page_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'page_view', 'bottom');?></div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

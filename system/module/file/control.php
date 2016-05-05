@@ -566,14 +566,14 @@ class file extends control
      */
     public function rebuildThumbs($imageDirKey = 0, $lastImage = 0)
     {
-        static $imageDirs = array();
-        if(empty($imageDirs)) $imageDirs = glob($this->app->getDataRoot() . "upload/*");
-        $imageDir = $imageDirs[$imageDirKey];
+        $imageDirs = glob($this->app->getDataRoot() . "upload/*");
+        $imageDir  = $imageDirs[$imageDirKey];
 
-        $images = glob($imageDir . '/f_*');
+        $images     = glob($imageDir . '/f_*');
         $imageCount = count($images);
-        $limit = $imageCount - $lastImage >= 10 ? 10 : $imageCount - $lastImage; 
-        $rawImages = array_slice($images, $lastImage, $limit);
+        $limit      = $imageCount - $lastImage >= 10 ? 10 : $imageCount - $lastImage; 
+        $rawImages  = array_slice($images, $lastImage, $limit);
+
         foreach($rawImages as $image)
         {
             $extension = $this->file->getExtension($image);

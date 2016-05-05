@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 include TPL_ROOT . 'common/files.html.php';
 js::set('path', $article->path);
 js::set('categoryID', $category->id);
@@ -91,4 +91,4 @@ $(function()
     $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=article&objectID=$article->id", 'mhtml');?>');
 });
 </script>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
