@@ -19,7 +19,7 @@ $thisMethodName     = $this->app->getMethodName();
     <div class='modal-body'>
 <?php else:?>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php include TPL_ROOT . 'common/header.lite.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
 
 <div class='block-region region-all-top blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
 

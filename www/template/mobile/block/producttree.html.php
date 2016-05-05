@@ -1,1 +1,1 @@
-<?php include TPL_ROOT . 'block/articletree.html.php'?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'block', 'articletree');?>
