@@ -872,14 +872,6 @@ a:active, a:focus
     color: lighten(@link-hover-color, 10%);
 }
 
-/* Column style */
-@media (min-width: 992px)
-{
-    .columnLayout(@sidebar-pull-left);
-    .col-main {width: 100% - @sidebar-width;}
-    .col-side {width: @sidebar-width}
-}
-
 /* Header */
 #siteName, #siteSlogan {color: contrast(darken(@background-color, 10%), @fore-color, @back-color)}
 

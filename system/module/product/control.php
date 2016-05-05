@@ -83,6 +83,8 @@ class product extends control
         $this->view->mobileURL  = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'html');
         $this->view->layouts    = $this->loadModel('block')->getPageBlocks('product', 'browse', $category->id);
+        $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->display();
     }
@@ -259,6 +261,8 @@ class product extends control
         $this->view->mobileURL   = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'html');
         $this->view->layouts     = $this->loadModel('block')->getPageBlocks('product', 'view', $product->id);
+        $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec();
 

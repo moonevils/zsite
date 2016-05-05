@@ -26,6 +26,8 @@ class company extends control
         $this->view->publicList = $this->loadModel('wechat')->getList();
         $this->view->mobileURL  = helper::createLink('company', 'index', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('company', 'index', '', '', 'html');
+        $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->display();
     }
