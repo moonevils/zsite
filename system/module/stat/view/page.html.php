@@ -22,8 +22,7 @@
       <?php endforeach;?>
       <li>
         <form method='get'>
-          <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report');?>
-          <?php echo html::hidden('mode', 'fixed');?>
+          <?php echo html::hidden('m', 'stat') . html::hidden('f', 'page') . html::hidden('mode', 'fixed');?>
           <table class='table table-borderless'>
             <tr>
               <td style='padding:4px'>
