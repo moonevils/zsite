@@ -11,7 +11,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <div class='block-region region-top no-padding blocks' data-region='company_index-top'><?php $this->block->printRegion($layouts, 'company_index', 'top');?></div>
 <div class='article-content' id='company'>
   <?php echo $company->content;?>

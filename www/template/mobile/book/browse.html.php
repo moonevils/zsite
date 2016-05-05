@@ -75,7 +75,7 @@
 </body>
 </html>
 <?php else:?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <?php js::set('fullScreen', 0);?>
 <?php $bookModel = $this->loadModel('book'); ?>
 <div class='block-region region-top blocks' data-region='book_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
@@ -130,5 +130,5 @@
   </div>
 </div>
 <div class='block-region region-bottom blocks' data-region='book_browse-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'bottom');?></div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
 <?php endif;?>

@@ -10,8 +10,8 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
-<?php include TPL_ROOT . 'user/side.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
 <div class='panel-section'>
   <div class='panel-heading'>
     <div class='title strong'><i class='icon icon-comments-alt'></i> <?php echo $lang->user->messages?> <span>(<?php echo count($messages)?>)</span> </div>
@@ -77,4 +77,4 @@ $(function()
     });
 });
 </script>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

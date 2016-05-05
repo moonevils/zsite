@@ -1,5 +1,5 @@
 <?php 
-include TPL_ROOT . 'common/header.html.php';
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 ?>
 <div class='panel panel-section'>
   <div class='panel-heading'>
@@ -39,4 +39,4 @@ include TPL_ROOT . 'common/header.html.php';
 <script>
 $(function(){$('#searchToggle').dropdown('toggle');});
 </script>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
