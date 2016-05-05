@@ -817,14 +817,6 @@ a:active, a:focus
        @block-border-style, @block-border-color, @block-border-width, @block-border-radius,
        @block-heading-color, @block-heading-font-size, @block-heading-font-weight, @block-heading-backcolor);
 
-/* Column style */
-@media (min-width: 992px)
-{
-    .columnLayout(@sidebar-pull-left);
-    .col-main {width: 100% - @sidebar-width;}
-    .col-side {width: @sidebar-width}
-}
-
 /* Form */
 @input-border-style: @button-border-style;
 @input-border-color: #ccc;

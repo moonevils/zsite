@@ -73,6 +73,8 @@ class article extends control
         $this->view->mobileURL  = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'mhtml');
         $this->view->desktopURL = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'html');
         $this->view->layouts    = $this->loadModel('block')->getPageBlocks('article', 'browse', $category->id);
+        $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->display();
     }
@@ -352,6 +354,8 @@ class article extends control
         $this->view->mobileURL   = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'mhtml');
         $this->view->desktopURL  = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'html');
         $this->view->layouts     = $this->loadModel('block')->getPageBlocks('article', 'view', $article->id);
+        $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 
