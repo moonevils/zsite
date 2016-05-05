@@ -19,7 +19,6 @@ js::set('objectType', 'article');
 js::set('objectID', $article->id);
 if(isset($article->css)) css::internal($article->css);
 if(isset($article->js))  js::execute($article->js);
-include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';

@@ -12,7 +12,6 @@
 ?>
 <?php
 include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
-include TPL_ROOT . 'common/treeview.html.php';
 
 /* set categoryPath for topNav highlight. */
 js::set('path',  $product->path);
