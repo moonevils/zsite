@@ -39,8 +39,8 @@ $(document).ready(function()
 
     $('.image-view').click(function()
     {
-        $('.image-view').addClass('selected');
-        $('.list-view').removeClass('selected');
+        $('.image-view').addClass('active');
+        $('.list-view').removeClass('active');
         $('#imageView').show();
         $('#listView').hide();
         $.cookie('sourceViewType', 'image', {path: "/"});
@@ -48,8 +48,8 @@ $(document).ready(function()
 
     $('.list-view').click(function()
     {
-        $('.list-view').addClass('selected');
-        $('.image-view').removeClass('selected');
+        $('.list-view').addClass('active');
+        $('.image-view').removeClass('active');
         $('#listView').show();
         $('#imageView').hide();
         $.cookie('sourceViewType', 'list', {path: "/"});
