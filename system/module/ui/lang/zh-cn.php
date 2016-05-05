@@ -180,13 +180,14 @@ $lang->ui->theme->fontSizeList['24px']                 = '24px';
 $lang->ui->theme->navbarLayoutList['false']            = '普通';
 $lang->ui->theme->navbarLayoutList['true']             = '自适应宽度';
 
-$lang->ui->theme->sidebarPullLeftList['false']         = '靠右';
-$lang->ui->theme->sidebarPullLeftList['true']          = '靠左';
+$lang->ui->theme->sideFloatList['left']  = '靠左';
+$lang->ui->theme->sideFloatList['right'] = '靠右';
 
-$lang->ui->theme->sidebarWidthList["16.666666666667%"] = "1/6";
-$lang->ui->theme->sidebarWidthList["25%"]              = "1/4";
-$lang->ui->theme->sidebarWidthList["33.333333333333%"] = "1/3";
-$lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
+$lang->ui->theme->sideGridList["0"]                = "不显示";
+$lang->ui->theme->sideGridList["16.666666666667%"] = "1/6";
+$lang->ui->theme->sideGridList["25%"]              = "1/4";
+$lang->ui->theme->sideGridList["33.333333333333%"] = "1/3";
+$lang->ui->theme->sideGridList["50%"]              = "1/2";
 
 $lang->ui->theme->underlineList['none']                = '无';
 $lang->ui->theme->underlineList['underline']           = '带下划线';
@@ -234,8 +235,8 @@ $lang->ui->background    = '背景';
 $lang->ui->button        = '按钮';
 $lang->ui->text          = '文字';
 $lang->ui->column        = '分栏';
-$lang->ui->sidebarLayout = '侧边栏布局';
-$lang->ui->sidebarWidth  = '侧边栏宽度';
+$lang->ui->sideFloat     = '侧边栏布局';
+$lang->ui->sideGrid      = '侧边栏宽度';
 
 $lang->ui->primaryColor    = '基色';
 $lang->ui->backcolor       = '背景色';
@@ -290,7 +291,6 @@ $lang->ui->folderList->forum   = '论坛';
 
 $lang->ui->files = new stdclass();
 $lang->ui->files->default = new stdclass();
-$lang->ui->files->mobile  = new stdclass();
 
 $lang->ui->files->default->common = array();
 $lang->ui->files->default->common['header.lite']  = 'header';
@@ -380,3 +380,19 @@ $lang->ui->files->default->message['index']       = '留言页面';
 $lang->ui->files->default->message['comment']     = '评论列表';
 
 $lang->ui->files->default->search['index']        = '搜索结果';
+
+$lang->ui->files->mobile = $lang->ui->files->default;
+
+unset($this->lang->ui->files->mobile->common['qrcode']);
+unset($this->lang->ui->files->mobile->common['header.modal']);
+unset($this->lang->ui->files->mobile->common['footer.modal']);
+unset($this->lang->ui->files->mobile->block['header']);
+unset($this->lang->ui->files->mobile->block['header.default']);
+unset($this->lang->ui->files->mobile->block['logo']);
+unset($this->lang->ui->files->mobile->block['nav']);
+unset($this->lang->ui->files->mobile->block['searchbar']);
+unset($this->lang->ui->files->mobile->block['slogan']);
+unset($this->lang->ui->files->mobile->block['usermenu']);
+unset($this->lang->ui->files->mobile->product['browse.card']);
+unset($this->lang->ui->files->mobile->product['browse.list']);
+unset($this->lang->ui->files->mobile->forum['reply/reply']);

@@ -17,13 +17,13 @@
         <tr>
           <th class='w-120px'><?php echo $lang->block->sideGrid ?></th>
           <td>
-            <?php echo html::select('sideGrid', $lang->block->sideGridOptions, $sideGrid, "class='form-control'");?>
+            <?php echo html::select('sideGrid', $lang->ui->theme->sideGridList, $sideGrid, "class='form-control'");?>
           </td>
         </tr>
         <tr>
           <th><?php echo $lang->block->sideFloat ?></th>
           <td>
-            <?php echo html::select('sideFloat', $lang->block->sideFloatOptions, $sideFloat, "class='form-control'");?>
+            <?php echo html::select('sideFloat', $lang->ui->theme->sideFloatList, $sideFloat, "class='form-control'");?>
           </td>
         </tr>
         <tr>
