@@ -10,4 +10,4 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php include TPL_ROOT . 'block/latestproduct.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'block', 'latestproduct');?>
