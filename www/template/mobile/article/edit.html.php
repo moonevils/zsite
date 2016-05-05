@@ -1,9 +1,9 @@
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <?php js::set('type', $type);?>
 
 <div class='page-user-control'>
   <div class='row'>
-    <?php include TPL_ROOT . 'user/side.html.php';?>
+    <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
     <div class='col-md-10'>
       <div class='panel'>
         <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $type == 'blog' ? $lang->blog->edit : $lang->article->edit;?></strong></div>
@@ -72,4 +72,4 @@
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

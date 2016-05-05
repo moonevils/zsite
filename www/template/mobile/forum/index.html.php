@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
 <div class='block-region region-top blocks' data-region='forum_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_index', 'top');?></div>
 <div id='boards'>
 <?php foreach($boards as $parentBoard):?>
@@ -65,4 +65,4 @@
 <?php endforeach;?>
 </div>
 <div class='block-region region-bottom blocks' data-region='forum_index-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'forum_index', 'bottom');?></div>
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
