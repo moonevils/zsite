@@ -198,9 +198,9 @@ class guarder extends control
      */
     public function validate($url = '', $target = 'modal', $account = '', $type = '')
     {
-        if($url == '')     $url     = helper::safe64Encode('close');
-        if($account == '') $account = $this->app->user->account;
-        if($type != '' and $type != 'okFile' and $type != 'email' and $type != 'setSecurity') $type = '';
+        if(!$url)     $url     = helper::safe64Encode('close');
+        if(!$account) $account = $this->app->user->account;
+        if($type and strpos('okFile,email,setSecurity', $type) === false)) $type = '';
         $question = $this->guarder->getSecurityQuestion($account);;
 
         if($_POST)

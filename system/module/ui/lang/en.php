@@ -180,10 +180,11 @@ $lang->ui->theme->navbarLayoutList['true']             = 'Adaptive Width';
 $lang->ui->theme->sidebarPullLeftList['false']         = 'Right';
 $lang->ui->theme->sidebarPullLeftList['true']          = 'Left';
 
-$lang->ui->theme->sidebarWidthList["16.666666666667%"] = "1/6";
-$lang->ui->theme->sidebarWidthList["25%"]              = "1/4";
-$lang->ui->theme->sidebarWidthList["33.333333333333%"] = "1/3";
-$lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
+$lang->ui->theme->sideGridList['hidden'] = "hidden";
+$lang->ui->theme->sideGridList[2]        = "1/6";
+$lang->ui->theme->sideGridList[3]        = "1/4";
+$lang->ui->theme->sideGridList[4]        = "1/3";
+$lang->ui->theme->sideGridList[6]        = "1/2";
 
 $lang->ui->theme->underlineList['none']                = 'None';
 $lang->ui->theme->underlineList['underline']           = 'Underline';

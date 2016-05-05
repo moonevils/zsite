@@ -1,9 +1,9 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div class='row blocks' data-region='company_index-topBanner'><?php $this->block->printRegion($layouts, 'company_index', 'topBanner', true);?></div>
-<div class="row">
-  <?php if(isset($layouts['company_index']['side'])):?>
-  <div class="col-md-9 col-main">
+<div class='row' id='columns' data-page='company_index'>
+  <?php if(isset($layouts['company_index']['side']) and !empty($sideGrid) && $sideGrid !== 'hidden'):?>
+  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
   <?php else:?>
   <div class="col-md-12">
   <?php endif;?>
@@ -18,8 +18,8 @@
     </div>
     <div class='row blocks' data-region='company_index-bottom'><?php $this->block->printRegion($layouts, 'company_index', 'bottom', true);?></div>
   </div>
-  <?php if(isset($layouts['company_index'])):?>
-  <div class='col-md-3 col-side'><side class='page-side blocks' data-region='company_index-side'><?php $this->block->printRegion($layouts, 'company_index', 'side');?></side></div>
+  <?php if(isset($layouts['company_index']['side']) and !(empty($sideGrid) || $sideGrid === 'hidden')):?>
+  <div class='col-md-<?php echo $sideGrid ?> col-side'><side class='page-side blocks' data-region='company_index-side'><?php $this->block->printRegion($layouts, 'company_index', 'side');?></side></div>
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='company_index-bottomBanner'><?php $this->block->printRegion($layouts, 'company_index', 'bottomBanner', true);?></div>

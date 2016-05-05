@@ -54,6 +54,8 @@ $(function()
         {
             $.closeModal();
         }
+    }, onSuccess: function(response)
+    {
         if(response.reason == 'needChecking')
         {
             $editThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');

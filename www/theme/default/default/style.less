@@ -183,12 +183,6 @@
     }
 }
 
-.columnLayout(@inverse) when (@inverse)
-{
-    .col-main {float: right;}
-    .col-side {float: left;}
-}
-
 .footerLayout(@borderStyle; @backColor) when not(@borderStyle = none), not(@backColor = transparent)
 {
     #footer {padding: 20px 15px;}
@@ -526,14 +520,6 @@ a:active, a:focus
 .panel(@block-body-backcolor, @block-body-color, @block-body-link-color,
        @block-border-style, @block-border-color, @block-border-width, @block-border-radius,
        @block-heading-color, @block-heading-font-size, @block-heading-font-weight, @block-heading-backcolor);
-
-/* Column style */
-@media (min-width: 992px)
-{
-    .columnLayout(@sidebar-pull-left);
-    .col-main {width: 100% - @sidebar-width;}
-    .col-side {width: @sidebar-width}
-}
 
 /* Form */
 @input-border-style: @button-border-style;
