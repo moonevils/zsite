@@ -16,14 +16,8 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
-        <tr>
-          <th class='w-100px'><?php echo $lang->site->homeMenus;?></th>
-          <td><?php echo html::checkbox('homeMenus', $lang->site->menus, $this->config->menus->home);?></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td><?php echo html::submitButton();?></td>
-        </tr>
+        <tr><td><?php echo html::checkbox('homeMenus', $lang->site->menus, $this->config->menus->home);?></td></tr>
+        <tr><td><?php echo html::submitButton();?></td></tr>
       </table>
     </form>
   </div>
