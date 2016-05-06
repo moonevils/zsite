@@ -171,7 +171,21 @@ $(function()
     $('#submit').click(function()
     {
         return submitForm();
-    })
+    });
+
+    $('[name="params\\[image\\]"]').change(function()
+    {
+        if($(this).prop('checked'))
+        {
+            $('tr.image').show();
+        }
+        else
+        {
+            $('tr.image').hide();
+        }
+    });
+
+    $('[name="params\\[image\\]"]').change();
 });
 
 /**
