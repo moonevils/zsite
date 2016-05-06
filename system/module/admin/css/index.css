@@ -24,8 +24,10 @@ body {background: #fafafa;}
 .dashboard-empty-message {text-align: center; margin-top: 100px;}
 .dashboard-empty-message > h5 {margin-bottom: 20px;}
 .dashboard .panel .panel-body{padding:5px;}
-
 .dashboard .panel .panel-body .table tr td{overflow:hidden;}
+.dashboard .resize-handle {display: none}
+.dashboard .row > div:hover .resize-handle {display: block}
+.ie-8 .dashboard .resize-handle > .icon {left: -4px}
 
 .dashboard-actions {margin-bottom: 20px;}
 

@@ -7,26 +7,26 @@ $(document).ready(function()
             if(response.error && response.error.length)
             {
                 bootbox.dialog(
-                {  
-                    message: response.error,  
+                {
+                    message: response.error,
                     buttons:
-                    {  
+                    {
                         back:
                         {  
                             label:     v.lang.back,
-                            className: 'btn-primary',  
-                            callback:  function(){location.reload();}  
+                            className: 'btn-primary',
+                            callback:  function(){location.reload();}
                         },
-                        continue:
+                        'continue':
                         {  
-                            label:     v.lang.continue,  
-                            className: 'btn-primary',  
+                            label:     v.lang['continue'],
+                            className: 'btn-primary',
                             callback:  function()
-                                       {
-                                           $('#fileForm #submit').append("<input value='1' name='continue' class='hide'>");
-                                           $('#fileForm #submit').click();
-                                       }  
-                        }  
+                            {
+                                $('#fileForm #submit').append("<input value='1' name='continue' class='hide'>");
+                                $('#fileForm #submit').click();
+                            }
+                        }
                     }  
                 });
             }
