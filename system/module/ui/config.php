@@ -129,10 +129,12 @@ $config->ui->selectorOptions['footer']['background']['backcolor'] = array('type'
 
 $config->ui->selectorOptions['header']['background'] = array();
 $config->ui->selectorOptions['header']['background']['backcolor']    = array('type' => 'color', 'default' => '#FFF', 'name' => 'header-backcolor');
-$config->ui->selectorOptions['header']['background']['toppadding'] = array('type' => 'size', 'default' => '0', 'name' => 'header-top-padding');
-$config->ui->selectorOptions['header']['background']['rightpadding'] = array('type' => 'size', 'default' => '0', 'name' => 'header-right-padding');
-$config->ui->selectorOptions['header']['background']['bottompadding'] = array('type' => 'size', 'default' => '0', 'name' => 'header-bottom-padding');
-$config->ui->selectorOptions['header']['background']['leftpadding']  = array('type' => 'size', 'default' => '0', 'name' => 'header-left-padding');
+
+$config->ui->selectorOptions['header']['padding'] = array();
+$config->ui->selectorOptions['header']['padding']['top']    = array('type' => 'size', 'default' => '0', 'name' => 'header-top-padding');
+$config->ui->selectorOptions['header']['padding']['bottom'] = array('type' => 'size', 'default' => '0', 'name' => 'header-bottom-padding');
+$config->ui->selectorOptions['header']['padding']['left']   = array('type' => 'size', 'default' => '0', 'name' => 'header-left-padding');
+$config->ui->selectorOptions['header']['padding']['right']  = array('type' => 'size', 'default' => '0', 'name' => 'header-right-padding');
 
 $config->ui->selectorOptions['header']['border']['color'] = array('type' => 'color', 'default' => '#ddd', 'name' => 'header-border-color');
 $config->ui->selectorOptions['header']['border']['radius'] = array('type' => 'size', 'default' => '0', 'name' => 'header-border-radius');
@@ -246,10 +248,10 @@ unset($config->ui->themes['default']['wide']['navbar']);
 unset($config->ui->themes['default']['wide']['button']);
 unset($config->ui->themes['default']['wide']['block']);
 unset($config->ui->themes['default']['wide']['footer']);
-unset($config->ui->themes['default']['wide']['header']['background']['toppadding']);
-unset($config->ui->themes['default']['wide']['header']['background']['rightpadding']);
-unset($config->ui->themes['default']['wide']['header']['background']['bottompadding']);
-unset($config->ui->themes['default']['wide']['header']['background']['leftpadding']);
+unset($config->ui->themes['default']['wide']['header']['padding']['top']);
+unset($config->ui->themes['default']['wide']['header']['padding']['bottom']);
+unset($config->ui->themes['default']['wide']['header']['padding']['left']);
+unset($config->ui->themes['default']['wide']['header']['padding']['right']);
 unset($config->ui->themes['default']['wide']['header']['border']['radius']);
 $config->ui->themes['default']['wide']['basic']['colorset']['primary']['default'] = '#E91B23';
 $config->ui->themes['default']['wide']['header']['border']['color']['default'] = '#e5e5e5';
