@@ -13,7 +13,7 @@ if(isset($article->js)) js::execute($article->js);
 <?php $common->printPositionBar($category, $article);?>
 <div class='row blocks' data-region='article_view-topBanner'><?php $this->block->printRegion($layouts, 'article_view', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='article_view'>
-  <?php if(isset($layouts['article_view']['side']) and !empty($sideGrid) && $sideGrid !== 'hidden'):?>
+  <?php if(isset($layouts['article_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
   <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
   <?php else:?>
   <div class='col-md-12'>
@@ -87,7 +87,7 @@ if(isset($article->js)) js::execute($article->js);
     <div id='commentBox'></div>
     <?php endif;?>
   </div>
-  <?php if(isset($layouts['article_view']['side']) and !(empty($sideGrid) || $sideGrid === 'hidden')):?>
+  <?php if(isset($layouts['article_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
   <div class='col-md-<?php echo $sideGrid ?> col-side'><side class='page-side blocks' data-region='article_view-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></side></div>
   <?php endif;?>
 </div>
