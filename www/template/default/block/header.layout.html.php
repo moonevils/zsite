@@ -16,10 +16,7 @@
       <?php if($setting->slogan == 'topLeft'):?>
       <div id='siteSlogan' class='nobr'><span><?php echo $this->config->site->slogan;?></span></div>
       <?php endif;?>
-      <nav id='siteNav'>
-        <?php echo commonModel::printTopBar();?>
-        <?php commonModel::printLanguageBar();?>
-      </nav>
+      <nav id='siteNav'> </nav> 
       <?php if($setting->searchbar == 'topRight') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
     </div>
   </div>
@@ -96,3 +93,9 @@
 }
 <?php endif;?>
 </style>
+<script>
+$(document).ready(function()
+{
+    $('#headNav #siteNav').load(createLink('user', 'printtopbar'));
+});
+</script>
