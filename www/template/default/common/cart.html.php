@@ -1,12 +1,7 @@
 <script>
     function loadCartInfo(twinkle)
     {
-        <?php if($this->app->user->account != 'guest'):?>
-        if($('#cartBox').length == 0) $('.login-msg').append("<span class='text-center text-middle' id='cartBox'></span>");
-        <?php else:?>
-        if($('#cartBox').length == 0) $('div nav').prepend("<span class='text-center text-middle' id='cartBox'></span>");
-        <?php endif;?>
-        $('#cartBox').load(createLink('cart', 'printTopBar'),
+        $('#cartBox').load(createLink('user', 'printTopBar'),
             function()
             {
                 if(twinkle) 
