@@ -704,7 +704,7 @@ class blockModel extends model
                 /* No ext file, use the block/block/. */
                 if(!file_exists($blockFile))
                 {
-                    $blockFile = $tplPath . strtolower($block->type) . '.html.php';
+                    $blockFile = $this->loadModel('ui')->getEffectViewFile($template, 'block', strtolower($block->type));
                     if(!file_exists($blockFile))
                     {
                         if($withGrid) echo '</div>';
