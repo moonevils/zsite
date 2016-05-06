@@ -177,10 +177,10 @@ $lang->ui->theme->fontSizeList['24px']                 = '24px';
 $lang->ui->theme->navbarLayoutList['false']            = 'Normal';
 $lang->ui->theme->navbarLayoutList['true']             = 'Adaptive Width';
 
-$lang->ui->theme->sidebarPullLeftList['false']         = 'Right';
-$lang->ui->theme->sidebarPullLeftList['true']          = 'Left';
+$lang->ui->theme->sideFloatList['left']   = 'Left';
+$lang->ui->theme->sideFloatList['right']  = 'Right';
+$lang->ui->theme->sideFloatList['hidden'] = "Hidden";
 
-$lang->ui->theme->sideGridList['hidden'] = "hidden";
 $lang->ui->theme->sideGridList[2]        = "1/6";
 $lang->ui->theme->sideGridList[3]        = "1/4";
 $lang->ui->theme->sideGridList[4]        = "1/3";

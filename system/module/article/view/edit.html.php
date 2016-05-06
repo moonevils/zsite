@@ -117,9 +117,9 @@
       </tr>
       <?php if($type == 'page'):?>
       <tr>
-        <th><?php echo $lang->article->layout;?></th>
+        <th></th>
         <?php $checked = $article->onlyBody ? 'checked' : '';?>
-        <td><input type='checkbox' name='onlyBody' id='onlyBody' value='1' <?php echo $checked;?>/> <span><?php echo $lang->article->showOnlyBody;?></span></td>
+        <td><input type='checkbox' name='onlyBody' id='onlyBody' value='1' <?php echo $checked;?>/> <span><?php echo $lang->article->onlyBody;?></span></td>
       </tr>
       <?php endif;?>
       </tbody>

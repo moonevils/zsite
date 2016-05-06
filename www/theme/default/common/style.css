@@ -281,6 +281,16 @@ table.captcha td label {padding: 0;}
 .wechat-block .qrcode img {width: 160px; border: 1px solid #ddd;}
 .wechat-block .name {font-size: 12px; margin-bottom: 6px; font-weight: bold;}
 
+/* bottom nav block */
+.nav-bottom.nav-justified {width: auto;}
+.nav-bottom > li {padding: 10px}
+.nav-bottom > li > a {text-align: left; font-weight: 500; font-size: 14px; background-color: #f5f5f5; background-color: rgba(0,0,0,.05); padding: 5px 10px; margin-bottom: 5px; border-left: 0 solid #ddd}
+.nav-bottom > li > ul {padding-left: 10px;}
+.nav-bottom > li > ul > li > a {padding: 3px 10px; border-left: 0 solid transparent}
+.nav-bottom li > a:before {content: ' '; display: none; width: 10px; height: 10px; background-color: #ddd; margin-right: 6px; border-radius: 2px}
+.nav-bottom li > a:hover:before {background-color: #ccc}
+.nav-bottom > li > ul > li > a:before {border: 2px solid #ddd; background-color: #fff}
+
 /* product cards */
 .card > .media-wrapper > img {max-height: 100%}
 

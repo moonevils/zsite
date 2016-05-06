@@ -81,7 +81,7 @@
 <?php if($setting->nav == 'besideLogo'):?>
 #headTitle > .row > #navbarWrapper {display: table-cell; vertical-align: middle; padding-left: 8px;}
 #headTitle > .row > #navbarWrapper > #navbar {margin:0}
-#siteLogo img {min-width: 150px;}
+#siteTitle, #siteLogo img {min-width: 150px;}
 @media (max-width: 767px)
 {
   #headTitle {padding: 0;}
