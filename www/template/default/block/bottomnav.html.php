@@ -18,15 +18,14 @@ $navs = $block->content->nav;
     <strong><?php echo $icon . $block->title;?></strong>
   </div>
   <div class='panel-body'>
-    <ul style='display: table; width: 100%;'>
-      <?php $width = 100 / count($navs) . '%';?>
+    <ul class='nav nav-bottom nav-justified'>
       <?php foreach($navs as $nav):?>
-      <li style='display:table-cell;  width: <?php echo $width;?>'>
-        <h5><?php echo html::a($this->nav->getUrl($nav), $nav->title, $nav->target ? "target='{$nav->target}'" : '');?></h5>
+      <li>
+        <?php echo html::a($this->nav->getUrl($nav), $nav->title, $nav->target ? "target='{$nav->target}'" : '');?>
         <?php if(!empty($nav->children)):?>
-        <ul>
+        <ul class='nav nav-stacked'>
           <?php foreach($nav->children as $child):?>
-          <li style='list-style-type:none'><?php echo html::a($this->nav->getUrl($child), $child->title, $child->target ? "target='{$child->target}'" : '');?></li>
+          <li><?php echo html::a($this->nav->getUrl($child), $child->title, $child->target ? "target='{$child->target}'" : '');?></li>
           <?php endforeach;?>
         </ul>
         <?php endif;?>
