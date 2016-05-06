@@ -262,10 +262,11 @@ $lang->ui->danger          = '危险';
 $lang->ui->warning         = '警告';
 $lang->ui->success         = '积极';
 $lang->ui->removeDirFaild  = "<h4>以下目录删除失败</h4><pre>%s</pre> <div class='text-important'>请手动删除，或者设置这些文件的可写权限后继续。</div>";
-$lang->ui->leftpadding     = '左边距';
-$lang->ui->rightpadding    = '右边距';
-$lang->ui->toppadding      = '上边距';
-$lang->ui->bottompadding   = '下边距';
+$lang->ui->padding         = '边距';
+$lang->ui->left            = '左边距';
+$lang->ui->right           = '右边距';
+$lang->ui->top             = '上边距';
+$lang->ui->bottom          = '下边距';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
