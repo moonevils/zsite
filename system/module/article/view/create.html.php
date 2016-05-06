@@ -126,8 +126,8 @@
         </tr>
         <?php if($type == 'page'):?>
         <tr>
-          <th><?php echo $lang->article->layout;?></th>
-          <td><input type='checkbox' name='onlyBody' id='onlyBody' value='1'/> <span><?php echo $lang->article->showOnlyBody;?></span></td>
+          <th></th>
+          <td><input type='checkbox' name='onlyBody' id='onlyBody' value='1'/> <span><?php echo $lang->article->onlyBody;?></span></td>
         </tr>
         <?php endif;?>
         </tbody>
