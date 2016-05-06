@@ -180,10 +180,10 @@ $lang->ui->theme->fontSizeList['24px']                 = '24px';
 $lang->ui->theme->navbarLayoutList['false']            = '普通';
 $lang->ui->theme->navbarLayoutList['true']             = '自适应宽度';
 
-$lang->ui->theme->sideFloatList['left']  = '靠左';
-$lang->ui->theme->sideFloatList['right'] = '靠右';
+$lang->ui->theme->sideFloatList['right']  = '靠右';
+$lang->ui->theme->sideFloatList['left']   = '靠左';
+$lang->ui->theme->sideFloatList['hidden'] = '不显示';
 
-$lang->ui->theme->sideGridList['hidden'] = "不显示";
 $lang->ui->theme->sideGridList[2]        = "1/6";
 $lang->ui->theme->sideGridList[3]        = "1/4";
 $lang->ui->theme->sideGridList[4]        = "1/3";
