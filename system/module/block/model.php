@@ -550,7 +550,7 @@ class blockModel extends model
         $layout->object   = $object;
         $layout->plan     = $object ? 'all' : zget($this->config->layout, $template . '_' . $theme);
 
-        if(!$this->post->blocks)
+        if(!$this->post->blocks and !$object)
         {
             $this->dao->delete()->from(TABLE_LAYOUT)
                 ->where('page')->eq($page)
