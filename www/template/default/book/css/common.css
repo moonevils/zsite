@@ -1,6 +1,6 @@
 /* books */
 .books {position: relative;}
-.books dl { margin:0 0 0 25px; line-height: 20px; }
+.books dl{margin: 0 0 0 10px; line-height: 20px;}
 .books > dl {margin-left: 0;}
 .books .article { padding: 0; border: none; box-shadow: none; margin: 0}
 .book,.chapter,.books .article { line-height: 30px; padding: 3px 0; transition: all 0.3s; border-radius: 4px}
@@ -35,6 +35,3 @@ dl.drop-area {background-color: #f1f1f1}
 .fullScreen-book .fullScreen-inner{max-width: 850px; margin: 0 auto;}
 .fullScreen-book .fullScreen-content footer ul{background: #fafafa; display: block; position: fixed; bottom: 0; right: 20px; left: 320px; margin: 0; z-index: 1000;}
 .fullScreen-book .home{margin: 0;}
-
-.fullScreen-book .books dl{margin: 0 0 0 10px;}
-.fullScreen-book .books > dl > dl{margin-left: 0;}
