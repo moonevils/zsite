@@ -13,10 +13,7 @@
 <header id='header' class='compatible clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>' data-ve='block' data-id='<?php echo $block->id;?>'>
   <div id='headNav'>
     <div class='wrapper'>
-      <nav>
-        <?php echo commonModel::printTopBar();?>
-        <?php commonModel::printLanguageBar();?>
-      </nav>
+      <nav> </nav>
     </div>
   </div>
   <div id='headTitle'>
@@ -34,3 +31,9 @@
   <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
 </header>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
+<script>
+$(document).ready(function()
+{
+    $('#headNav .wrapper nav').load(createLink('user', 'printtopbar'));
+});
+</script>
