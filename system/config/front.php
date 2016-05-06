@@ -78,7 +78,6 @@ $config->rights->guest['search']['index'] = 'index';
 $config->rights->guest['cart']['add']           = 'add';
 $config->rights->guest['cart']['delete']        = 'delete';
 $config->rights->guest['cart']['browse']        = 'browse';
-$config->rights->guest['cart']['printtopbar']   = 'printtopbar';
 $config->rights->guest['cart']['count']         = 'count';
 $config->rights->guest['order']['confirm']      = 'confirm';
 $config->rights->guest['order']['check']        = 'check';
