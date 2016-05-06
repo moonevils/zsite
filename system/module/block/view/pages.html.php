@@ -64,7 +64,7 @@
                     if($region != 'side')
                     {
                         echo '<tr>';
-                        if($custom['sidebar-pull-left'] != 'false' and $i == 1)
+                        if($custom['sideFloat'] == 'left' and $i == 1)
                         {
                             echo "<td rowspan='$rows' class='text-middle'>";
                             commonModel::printLink('block', 'setregion', "page={$page}&region=side", $regions['side'], "class='btn-region btn-side' data-toggle='modal'");
@@ -73,7 +73,7 @@
                         echo "<td class='w-p80'>";
                         commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn-region' data-toggle='modal'");
                         echo '</td>';
-                        if($custom['sidebar-pull-left'] == 'false' and $i == 1)
+                        if($custom['sideFloat'] == 'right' and $i == 1)
                         {
                             echo "<td rowspan='$rows' class='text-middle'>";
                             commonModel::printLink('block', 'setregion', "page={$page}&region=side", $regions['side'], "class='btn-region btn-side' data-toggle='modal'");

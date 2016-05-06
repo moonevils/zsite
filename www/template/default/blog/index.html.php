@@ -22,7 +22,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
 <div class='row blocks' data-region='blog_index-topBanner'><?php $this->block->printRegion($layouts, 'blog_index', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='blog_index'>
-  <?php if(isset($layouts['blog_index']['side']) and !empty($sideGrid) && $sideGrid !== 'hidden'):?>
+  <?php if(isset($layouts['blog_index']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
   <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
   <?php else:?>
   <div class="col-md-12">
@@ -85,7 +85,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
     </div>
     <div class='row blocks' data-region='blog_index-bottom'><?php $this->block->printRegion($layouts, 'blog_index', 'bottom', true);?></div>
   </div>
-  <?php if(isset($layouts['blog_index']['side']) and !(empty($sideGrid) || $sideGrid === 'hidden')):?>
+  <?php if(isset($layouts['blog_index']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
   <div class='col-md-<?php echo $sideGrid ?> col-side'>
     <side class='page-side'>
       <div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div>
