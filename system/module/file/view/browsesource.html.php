@@ -50,7 +50,7 @@
             $imageHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $imageHtml .= "<div class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $imageHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-pencil'></i>", "data-toggle='modal'");
+            $imageHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-pencil'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
             $imageHtml .= '</div>';
             $imageHtml .= '</li>';
         }
@@ -59,10 +59,10 @@
             $file->title = $file->title . ".$file->extension";
             $fileHtml .= "<li class='file file-{$file->extension}'>";
             $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
-            $fileHtml .= "<div class='file-source'><input type='text' value='" . $file->fullURL . "'/></div>";
+            $fileHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $fileHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
+            $fileHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
             $fileHtml .= '</span>';
             $fileHtml .= '</li>';
         }
