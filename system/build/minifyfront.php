@@ -54,7 +54,12 @@ if($result) echo "create all.js success.\n";
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type js $allJSFile -o $allJSFile`;
 
 $adminAllJSFile  = $jsRoot . 'all.admin.js';
-foreach($adminFiles as $file) $jsCode .= "\n". file_get_contents($jsFiles[$file]);
+$jsCode = '';
+foreach($adminFiles as $file)
+{
+    if($jsCode != '') $jsCode .= "\n";
+    $jsCode .= file_get_contents($jsFiles[$file]);
+}
 $result = file_put_contents($adminAllJSFile, $jsCode);
 if($result) echo "create all.admin.js success\n";
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type js $adminAllJSFile -o $adminAllJSFile`;
