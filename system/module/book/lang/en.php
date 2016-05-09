@@ -10,6 +10,8 @@ $lang->book->create     = 'Create';
 $lang->book->catalog    = 'Catalog';
 $lang->book->edit       = 'Edit';
 $lang->book->sort       = 'Sort';
+$lang->book->setting    = 'Setting';
+$lang->book->index      = 'Home';
 
 $lang->book->searchResults      = 'Search results';
 $lang->book->inputArticleTitle  = 'Please enter the article title';
@@ -32,10 +34,17 @@ $lang->book->files       = 'Files';
 $lang->book->images      = 'Images';
 $lang->book->chapterList = 'Chapters';
 $lang->book->articleList = 'Articles';
+$lang->book->fullScreen  = 'Full Screen';
 
 $lang->book->typeList['book']    = 'Book';
 $lang->book->typeList['chapter'] = 'Chapter';
 $lang->book->typeList['article'] = 'Article';
+
+$lang->book->chapterTypeList['home'] = 'Only home page.';
+$lang->book->chapterTypeList['left'] = 'All pages.';
+
+$lang->book->fullScreenList['1'] = 'Yes';
+$lang->book->fullScreenList['0'] = 'No';
 
 $lang->book->lblAddedDate = 'Add Date: <strong>%s</strong> ';
 $lang->book->lblAuthor    = 'Author: <strong>%s</strong> ';
@@ -45,6 +54,7 @@ $lang->book->lblEditor    = 'Edited by %s at %s ';
 $lang->book->none     = 'None';
 $lang->book->chapter  = 'List';
 $lang->book->back2Top = 'Top';
+$lang->book->goHome   = 'Go Home';
 
 $lang->book->aliasRepeat   = 'Alias:<strong> %s </strong> can not be repeated' ;
 $lang->book->confirmDelete = "<span class='text-danger'> Are you sure to delete this book and all its chapters and articles?</span>";

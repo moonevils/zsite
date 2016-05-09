@@ -62,3 +62,6 @@ $lang->slide->defaultGroup = 'Default Group';
 /* Targets setting. */
 $lang->slide->target = new stdclass();
 $lang->slide->target->_blank = 'New Window';
+
+$lang->slide->globalButton = array();
+$lang->slide->globalButton[1] = 'Global';

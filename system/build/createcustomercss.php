@@ -26,8 +26,12 @@ foreach($config->ui->themes['default'] as $theme => $defaults)
     unset($params['navbar-background-image-position']);
 
     $lessc->setVariables($params);
-    $cssFile      = $wwwRoot . 'data/css/default_' . $theme . '.css';
+    $zhcnFile     = $wwwRoot . 'data/css/default_' . $theme . '_zh-cn.css';
+    $zhtwFile     = $wwwRoot . 'data/css/default_' . $theme . '_zh-tw.css';
+    $enFile       = $wwwRoot . 'data/css/default_' . $theme . '_en.css';
     $lessTemplate = $wwwRoot . 'theme/default/' . $theme . '/style.less';
-    $lessc->compileFile($lessTemplate, $cssFile);
+    $lessc->compileFile($lessTemplate, $zhcnFile);
+    $lessc->compileFile($lessTemplate, $zhtwFile);
+    $lessc->compileFile($lessTemplate, $enFile);
     print_r($cssFile . " Createed \n");
 }
