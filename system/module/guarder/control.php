@@ -200,7 +200,7 @@ class guarder extends control
     {
         if(!$url)     $url     = helper::safe64Encode('close');
         if(!$account) $account = $this->app->user->account;
-        if($type and strpos('okFile,email,setSecurity', $type) === false)) $type = '';
+        if($type and strpos('okFile,email,setSecurity', $type) === false) $type = '';
         $question = $this->guarder->getSecurityQuestion($account);;
 
         if($_POST)
