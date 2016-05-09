@@ -44,7 +44,7 @@ jQuery.fn.codeeditor = function(options)
             $this.val(editor.getValue());
         });
 
-        $this.data('editor', editor);
+        $this.data('editor', editor).data('editorId', id);
         $wrapper.on('click', '.btn-fullscreen', function(){
             $wrapper.toggleClass('fullscreen');
             $wrapper.closest('.modal-dialog').toggleClass('editor-fullscreen');

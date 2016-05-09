@@ -68,12 +68,14 @@
         }
         ?>
         <div class='col-xs-<?php echo $widget->grid;?> pull-left'>
-          <div class='panel panel-widget <?php if(isset($widget->params->color)) echo 'panel-' . $widget->params->color;?>' id='widget<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $widget->title?>' data-url='<?php echo $this->createLink('widget', 'printWidget', 'widget=' . $widget->id) ?>'>
+          <?php $url = $widget->type != 'chanzhiDynamic' ? helper::createLink('widget', 'printWidget', 'widget=' . $widget->id) : '' ?>
+          <div class='panel panel-widget <?php if(isset($widget->params->color)) echo 'panel-' . $widget->params->color;?>' id='widget<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $widget->title?>' data-url='<?php echo $url ?>'>
             <div class='panel-heading'>
               <span class='panel-title'><?php echo $widget->title;?></span>
               <div class='panel-actions'>
               <?php if(!empty($widget->moreLink)):?>
-              <?php echo html::a($widget->moreLink, $lang->more, "class='panel-action btn-more'");?>
+              <?php $target = $widget->type == 'chanzhiDynamic' ? "target='_blank'" : '';?>
+              <?php echo html::a($widget->moreLink, $lang->more, "class='panel-action btn-more' $target");?>
               <?php endif; ?>
                 <div class='dropdown'>
                   <a href='javascript:;' data-toggle='dropdown' class='panel-action'><i class='icon icon-ellipsis-v'></i></a>
@@ -84,9 +86,11 @@
                 </div>
               </div>
             </div>
-            <div class='panel-body no-padding'>
-              <?php echo $this->fetch('widget', 'printWidget', 'widget=' . $widget->id);?>
-            </div>
+            <?php if($widget->type != 'chanzhiDynamic'):?>
+            <div class='panel-body no-padding' data-url="<?php echo helper::createLink('widget', 'printWidget', 'widget=' . $widget->id);?>"> </div>
+            <?php else:?>
+            <script src='http://api.chanzhi.org/goto.php?item=dynamics' type='text/javascript'></script>
+            <?php endif;?>
           </div>
         </div>
         <?php endforeach;?>

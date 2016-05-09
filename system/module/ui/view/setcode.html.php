@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="panel-footer">
-      <?php echo html::submitButton();?>
+      <?php echo html::submitButton();?> &nbsp; 
       <span id='cssTab' class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip; ?></span>
       <span id='jsTab'  class='text-info text-tip'><?php echo $lang->ui->theme->customScriptTip; ?></span>
     </div>
