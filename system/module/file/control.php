@@ -566,15 +566,25 @@ class file extends control
      * @access public
      * @return void
      */
-    public function rebuildThumbs($imageDirKey = 0, $lastImage = 0)
+    public function rebuildThumbs($imageDirKey = 0, $lastImage = 0, $completed = 0, $total = 0)
     {
         $imageDirs = glob($this->app->getDataRoot() . "upload/*");
-        $imageDir  = $imageDirs[$imageDirKey];
+        if($total == 0)
+        {
+            foreach($imageDirs as $dir)
+            {
+                $images = glob($dir . '/f_*');
+                $total  += count($images);
+            }
+        }
+        $rate = round($completed / $total * 100) . $this->lang->percent;
 
+        $imageDir   = $imageDirs[$imageDirKey];
         $images     = glob($imageDir . '/f_*');
         $imageCount = count($images);
         $limit      = $imageCount - $lastImage >= 10 ? 10 : $imageCount - $lastImage; 
         $rawImages  = array_slice($images, $lastImage, $limit);
+        $completed += $limit;
 
         foreach($rawImages as $image)
         {
@@ -589,13 +599,13 @@ class file extends control
             if($imageDirKey < count($imageDirs) - 1)
             {
                 $imageDirKey = $imageDirKey + 1;
-                $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildThumbs', "imageDirKey=$imageDirKey&lastImage=0")));
+                $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildThumbs', "imageDirKey=$imageDirKey&lastImage=0&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildThumbs, $rate)));
             }
         }
         else
         {
             $lastImage = $lastImage + $limit;
-            $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildthumbs', "imageDirKey=$imageDirKey&lastImage=$lastImage")));
+            $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildthumbs', "imageDirKey=$imageDirKey&lastImage=$lastImage&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildThumbs, $rate)));
         }
     }
 }
