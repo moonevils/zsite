@@ -14,6 +14,11 @@ $(document).ready(function()
         $('#upgradeNotice').remove();
     }
 
+    $('.panel-widget').each(function()
+    {
+        container = $(this).find('.panel-body');   
+        if(container.data('utl') != '') container.load(container.data('url')); 
+    })
 });
 
 /**
