@@ -140,15 +140,14 @@ class book extends control
      */
     public function admin($nodeID = '')
     {
-        $this->book->setMenu();
-        
         if($nodeID) ($node = $this->book->getNodeByID($nodeID)) && $book = $node->book;
         if(!$nodeID or !$node) ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
         if(!$node) $this->locate(inlink('create'));
-        $this->view->title   = $this->lang->book->common;
-        $this->view->book    = $book;
-        $this->view->node    = $node;
-        $this->view->catalog = $this->book->getAdminCatalog($nodeID, $this->book->computeSN($book->id));
+        $this->view->title    = $this->lang->book->common;
+        $this->view->bookList = $this->book->getBookList();
+        $this->view->book     = $book;
+        $this->view->node     = $node;
+        $this->view->catalog  = $this->book->getAdminCatalog($nodeID, $this->book->computeSN($book->id));
         
         $this->display();
     }
@@ -161,16 +160,15 @@ class book extends control
      */
     public function create()
     {
-        $this->book->setMenu();
-
         if($_POST)
         {
             $bookID = $this->book->createBook();
             if($bookID)  $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
             if(!$bookID) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->title = $this->lang->book->createBook;
 
+        $this->view->title    = $this->lang->book->createBook;
+        $this->view->bookList = $this->book->getBookList();
         $this->display(); 
     }
 
@@ -199,12 +197,12 @@ class book extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->book->setMenu();
         unset($this->lang->book->typeList['book']);
 
         $this->view->title    = $this->lang->book->catalog;
         $this->view->node     = $this->book->getNodeByID($node);
         $this->view->children = $this->book->getChildren($node);
+        $this->view->bookList = $this->book->getBookList();
 
         $this->display(); 
     }
@@ -218,7 +216,6 @@ class book extends control
      */
     public function edit($nodeID)
     {
-        $this->book->setMenu();
         $node = $this->book->getNodeByID($nodeID, false);
         $book = $node->book;
 
@@ -237,7 +234,7 @@ class book extends control
         $this->view->title      = $this->lang->edit . $this->lang->book->typeList[$node->type];
         $this->view->node       = $node;
         $this->view->optionMenu = $optionMenu;
-
+        $this->view->bookList   = $this->book->getBookList();
         $this->display();
     }
 
@@ -274,8 +271,6 @@ class book extends control
      */
     public function search($recTotal = 0, $recPerPage = 10, $pageID = 1, $searchWord = '')
     {
-        $this->book->setMenu();
-        
         $this->app->loadClass('pager');
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -296,6 +291,7 @@ class book extends control
         $this->view->title    = $this->lang->book->searchResults;
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
+        $this->view->bookList = $this->book->getBookList();
 
         $this->display();
     }
@@ -320,12 +316,12 @@ class book extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        $this->book->setMenu();
         $books = $this->book->getBookPairs();
 
         $this->view->title     = $this->lang->book->setting; 
         $this->view->books     = array('list' => $this->lang->book->list) + $books;
         $this->view->firstBook = key($books);
+        $this->view->bookList  = $this->book->getBookList();
         $this->display();
     }
 }    
