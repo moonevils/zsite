@@ -22,8 +22,12 @@ $lang->backup->success->backup  = 'Success backup!';
 $lang->backup->success->restore = 'Success restore!';
 
 $lang->backup->error = new stdclass();
-$lang->backup->error->noWritable  = "Cannot backup! <code>%s</code> do not write! Please check the directory permissions.";
-$lang->backup->error->noDelete    = "The file %s cannot delete, modify permissions or deleted manually.";
-$lang->backup->error->restoreSQL  = "The database restore failed. Error: %s";
-$lang->backup->error->restoreFile = "Attachments failed to restore. Error: %s";
-$lang->backup->error->backupFile  = "Attachments failed to backup. Error: %s";
+$lang->backup->error->noWritable     = "Cannot backup! <code>%s</code> do not write! Please check the directory permissions.";
+$lang->backup->error->noDelete       = "The file %s cannot delete, modify permissions or deleted manually.";
+$lang->backup->error->restoreSQL     = "The database restore failed. Error: %s";
+$lang->backup->error->restoreFile    = "Attachments failed to restore. Error: %s";
+$lang->backup->error->backupFile     = "Attachments failed to backup. Error: %s";
+$lang->backup->error->backupTemplate = "Templates failed to backup. Error: %s";
+
+$lang->js->backuping = 'Backuping ...';
+$lang->js->restoring = 'Restoring ...';

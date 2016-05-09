@@ -68,3 +68,4 @@ $lang->file->sameName         = "Have a same name file";
 $lang->file->nameEmpty        = "File name con'n empty";
 $lang->file->copySuccess      = "Copied to Clipboard";
 $lang->file->evilChar         = "Please remove evil char";
+$lang->file->rebuildThumbs    = "%s finished.";

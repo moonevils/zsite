@@ -41,6 +41,7 @@ $lang->article->isLink     = 'Locate';
 $lang->article->link       = 'Link';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
+$lang->article->layout     = 'Layout';
 
 $lang->article->forward2Blog     = 'Forward to blog';
 $lang->article->forward2Forum    = 'Forward to forum';
@@ -63,6 +64,8 @@ $lang->submittion->status[3] = 'Reject';
 $lang->submittion->typeList = array();
 $lang->submittion->typeList['article'] = 'Article';
 $lang->submittion->typeList['blog']    = 'Blog';
+
+$lang->article->onlyBody = 'With out header and footer, high-ustomizable.';
 
 $lang->article->list       = 'List';
 $lang->article->admin      = 'Admin';
