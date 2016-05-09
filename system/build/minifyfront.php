@@ -27,6 +27,7 @@ if($result) echo "create all.js success.\n";
 
 $adminAllJSFile  = $jsRoot . 'all.admin.js';
 $jsCode .= "\n". file_get_contents($jsRoot . 'my.admin.js'); 
+$jsCode .= "\n". file_get_contents($jsRoot . 'zui/admin.min.js'); 
 $result = file_put_contents($adminAllJSFile, $jsCode);
 if($result) echo "create all.admin.js success\n";
 
