@@ -636,6 +636,7 @@ class ui extends control
         $this->view->currentFile   = $file;
         $this->view->uiHeader      = false;
         $this->view->files         = $this->lang->ui->files->$template;
+        $this->view->realFile      = $this->ui->getExtFile($template, $module, $file);
         $this->view->content       = file_get_contents($this->ui->getEffectViewFile($template, $module, $file));
         $this->view->rawContent    = file_get_contents($this->app->getWwwRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php');
 
