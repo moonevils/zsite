@@ -14,6 +14,7 @@ $lang->colon      = ' : ';
 $lang->prev       = '‹';
 $lang->next       = '›';
 $lang->equal      = '=';
+$lang->percent    = '%';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
@@ -67,6 +68,7 @@ $lang->categoryMenu     = 'Categories';
 $lang->wechatTip        = 'Wechat';
 $lang->qrcodeTip        = 'Mobile';
 $lang->language         = 'Language';
+$lang->custom           = 'custom';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
@@ -78,7 +80,6 @@ $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
 $lang->addToBlacklist = 'Add To Blacklist';
-$lang->edit           = 'Edit';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
@@ -189,6 +190,7 @@ $lang->menu->block    = 'Block|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
 $lang->menu->others   = "Setting|ui|others|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i> Visual design|visual|index|";
+$lang->menu->edit     = "Edit template|ui|edittemplate|";
 
 $lang->menu->site     = 'site|site|setbasic|';
 $lang->menu->security = 'Security|site|setsecurity|';
@@ -265,7 +267,10 @@ $lang->forum->menu->setting = 'Forum Settings|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = 'Basic|site|setbasic|';
+$lang->site->menu->domain   = 'Domain Setting|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN Setting|site|setcdn|';
+$lang->site->menu->cache    = 'Cache Setting|site|setcache|';
+$lang->site->menu->home     = 'Home Menu|site|sethomemenu|';
 $lang->site->menu->company  = 'Company|company|setbasic|';
 $lang->site->menu->contact  = 'Contact|company|setcontact|';
 $lang->site->menu->oauth    = 'OAuth|site|setoauth|';
@@ -273,7 +278,8 @@ $lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'de
 $lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search   = 'Full text search|search|buildindex|';
 $lang->site->menu->score    = 'Score Rule|score|setcounts|';
-$lang->site->menu->api      = 'API Integration|site|setapi|';
+$lang->site->menu->backup   = 'backup & restore|backup|index|';
+//$lang->site->menu->api      = 'API Integration|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();

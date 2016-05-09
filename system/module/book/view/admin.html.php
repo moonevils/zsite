@@ -16,26 +16,29 @@ $path = explode(',', $node->path);
 js::set('path', $path);
 js::set('confirmDelete', $lang->book->confirmDelete);
 ?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class='icon-book'></i> <?php echo $book->title;?></strong>
-    <div class='panel-actions'>
-      <form method='get' class='form-inline form-search ve-form'>
-        <?php echo html::hidden('m', 'book');?>
-        <?php echo html::hidden('f', 'search');?>
-        <?php echo html::hidden('recTotal', isset($this->get->recTotal) ? $this->get->recTotal : 0);?>
-        <?php echo html::hidden('recPerPage', isset($this->get->recPerPage) ? $this->get->recPerPage : 20);?>
-        <?php echo html::hidden('pageID', isset($this->get->pageID) ? $this->get->pageID :  1);?>
-        <div class='input-group'>
-          <?php echo html::input('searchWord', $this->get->searchWord, "class='form-control search-query' placeholder='{$lang->book->inputArticleTitle}'");?>
-          <span class='input-group-btn'>
-            <?php echo html::submitButton($lang->search->common, 'btn btn-primary');?>
-          </span>
-        </div>
-      </form>
-      <?php commonModel::printLink('book', 'create', '', '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-primary'");?>
+<?php include './side.html.php';?>
+<div class='col-md-10'>
+  <div class='panel'>
+    <div class='panel-heading'>
+      <strong><i class='icon-book'></i> <?php echo $book->title;?></strong>
+      <div class='panel-actions'>
+        <form method='get' class='form-inline form-search ve-form'>
+          <?php echo html::hidden('m', 'book');?>
+          <?php echo html::hidden('f', 'search');?>
+          <?php echo html::hidden('recTotal', isset($this->get->recTotal) ? $this->get->recTotal : 0);?>
+          <?php echo html::hidden('recPerPage', isset($this->get->recPerPage) ? $this->get->recPerPage : 20);?>
+          <?php echo html::hidden('pageID', isset($this->get->pageID) ? $this->get->pageID :  1);?>
+          <div class='input-group'>
+            <?php echo html::input('searchWord', $this->get->searchWord, "class='form-control search-query' placeholder='{$lang->book->inputArticleTitle}'");?>
+            <span class='input-group-btn'>
+              <?php echo html::submitButton($lang->search->common, 'btn btn-primary');?>
+            </span>
+          </div>
+        </form>
+        <?php commonModel::printLink('book', 'create', '', '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-primary'");?>
+      </div>
     </div>
+    <div class='panel-body'><div class='books'><?php echo $catalog;?></div></div>
   </div>
-  <div class='panel-body'><div class='books'><?php echo $catalog;?></div></div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

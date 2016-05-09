@@ -37,6 +37,7 @@ $lang->thread->show         = 'Show';
 $lang->thread->transfer     = 'Transfer';
 $lang->thread->switchStatus = 'Hide/Show';
 $lang->thread->deleteFile   = 'Delete file';
+$lang->thread->unreplied    = "<span class='text-important'>Unreplyed</span>";
 
 $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';

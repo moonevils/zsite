@@ -12,27 +12,6 @@
 class bookModel extends model
 {
     /**
-     * Set the menu for admin.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setMenu()
-    {
-        $this->lang->book->menu = new stdclass();
-
-        $books = $this->getBookList();
-        foreach($books as $bookID => $book)
-        {
-            $this->lang->book->menu->$bookID = $book->title . '|book|admin|book=' . $bookID;
-        }
-
-        $this->lang->book->menu->createBook = $this->lang->book->createBook . '|book|create|'; 
-        $this->lang->book->menu->setting    = $this->lang->book->setting . '|book|setting|'; 
-        $this->lang->menuGroups->tree = 'book';
-    }
-
-    /**
      * Get a book by id or alias.
      *
      * @param  string|int $id   the id can be the number id or the alias.
@@ -249,7 +228,7 @@ class bookModel extends model
         if($node->type == 'article') return $node->id;
 
         $ids      = '';
-        $children = zget($families, $node->id);
+        $children = zget($families, $node->id, '');
         if(!$children) return '';
 
         foreach($children as $child)

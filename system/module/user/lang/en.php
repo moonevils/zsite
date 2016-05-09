@@ -49,6 +49,7 @@ $lang->user->list            = 'User list';
 $lang->user->view            = "User info";
 $lang->user->create          = "Add a user";
 $lang->user->edit            = "Edit user";
+$lang->user->operate         = 'Operate';
 $lang->user->changePassword  = "Change password";
 $lang->user->changeEmail     = "Email setting";
 $lang->user->recoverPassword = "recover password";
@@ -134,7 +135,6 @@ $lang->user->forbidDate['3']     = '3d';
 $lang->user->forbidDate['7']     = '7d';
 $lang->user->forbidDate['30']    = '30d';
 $lang->user->forbidDate['3000']  = 'Forever';
-$lang->user->operate             = 'Operate';
 
 $lang->user->adminList['super']  = 'Super administrator';
 $lang->user->adminList['common'] = 'Administrator';
