@@ -2,10 +2,15 @@
 <?php include '../../common/view/codeeditor.html.php';?>
 <div class='col-xs-2'>
   <div class="hiddden-xs hidden-sm" style='height:600px;'>
-    <div class='panel'>
+    <div class='panel folder-menu'>
       <?php foreach($lang->ui->folderList as $folder => $name):?>
-        <div class='panel-heading'> <strong><i class='icon icon-folder-close'> </i><?php echo $name;?></strong> </div>
-        <div class='panel-body'>
+        <div class='panel-heading'>
+          <strong><?php echo $name;?></strong>
+          <div class='panel-actions'> 
+            <i class='icon icon-chevron-down'> </i> 
+          </div>
+        </div>
+        <div class='panel-body panel-folder'>
         <?php $fileList = zget($files, $folder);?>
         <?php foreach($fileList as $file => $name):?>
           <?php if(strpos($file, '/') !== false) list($folder, $file) = explode('/', $file);?>
@@ -21,7 +26,7 @@
 <form method='post' id='editForm'>
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
-      <strong id='fileName'> </strong> <span class='text-info'><?php echo $currentFile . ".html.php";?></span>
+      <strong id='fileName'> </strong><span class='text-important'><?php echo $realFile;?></span>
     </div>
     <div class='tab-content'>
       <div class='tab-pane theme-control-tab-pane active' id='cssTab'>
