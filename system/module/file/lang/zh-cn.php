@@ -68,3 +68,4 @@ $lang->file->sameName         = "已存在同名文件，如果继续将覆盖�
 $lang->file->nameEmpty        = "文件名不能为空";
 $lang->file->copySuccess      = "已复制到剪贴板";
 $lang->file->evilChar         = "包含非法字符";
+$lang->file->rebuildThumbs    = "已完成 %s";

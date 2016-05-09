@@ -14,6 +14,7 @@ $lang->colon      = '：';
 $lang->prev       = '‹';
 $lang->next       = '›';
 $lang->equal      = '=';
+$lang->percent    = '%';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';

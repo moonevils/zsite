@@ -11,14 +11,14 @@ $(document).ready(function()
             {   
                  $('#execButton').attr('href', createLink('file', 'rebuildthumbs'));
                  $('#execButton').text(v.rebuildThumbs);
+                 $('#execButton').next('.total').text(response.message);
                  $('#execButton').removeClass('disabled');
-                 $('#execButton').popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
-                 $('#execButton').next('.popover').addClass('popover-success');
-                 setTimeout(function(){$('#execButton').popover('destroy');}, 2000);
+                 setTimeout(function(){$('#execButton').next('.total').hide();}, 2000);
                  return false;
              }   
              else
              {   
+                 $('#execButton').next('.total').text(response.completed).show();
                  $('#execButton').attr('href', response.next);
                  return $('#execButton').click();
              }   
