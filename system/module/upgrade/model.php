@@ -133,14 +133,17 @@ class upgradeModel extends model
             case '4_6':
                 $this->execSQL($this->getUpgradeFile('4.6'));
             case '5_0';
-            case '5_0_1';
+            case '5_0_1':
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
                 $this->fixLayoutPlans();
                 $this->moveCodes();
-            case '5_1';
+            case '5_1':
                 $this->execSQL($this->getUpgradeFile('5.1'));
                 $this->moveThemes();
                 $this->awardRegister();
+            case '5_2':
+                $this->execSQL($this->getUpgradeFile('5.2'));
+
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -197,6 +200,7 @@ class upgradeModel extends model
             case '5_0';
             case '5_0_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.0.1'));
             case '5_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.1'));
+            case '5_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.2'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }

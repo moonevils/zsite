@@ -2,6 +2,7 @@ $(function()
 {
     $('#backupBtn').click(function()
     {
+        $(this).text(v.lang.backuping).prop('disabled', true);
         url = $(this).attr('href');
         $.getJSON(url, function(response)
         {
@@ -15,15 +16,19 @@ $(function()
 
     $('.restore').click(function()
     {
-        url = $(this).attr('href') + '&confirm=yes';
+        btn     = $(this);
+        url     = btn.attr('href') + '&confirm=yes';
+        rawText = btn.text();
         bootbox.confirm(v.restore, function(result)
         {
             if(result)
             {
+                btn.text(v.lang.restoring);
                 $.getJSON(url, function(response)
                 {
                     if(response.result == 'success') ($.zui.messager || $.zui.messager).success(response.message);
                     if(response.result == 'fail')    ($.zui.messager || $.zui.messager).warning(response.message);
+                    btn.text(rawText)
                 });
             }
         });

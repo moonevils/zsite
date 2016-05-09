@@ -50,6 +50,31 @@ class backupModel extends model
     }
 
     /**
+     * Backup template.
+     * 
+     * @param  string    $backupFile 
+     * @access public
+     * @return object
+     */
+    public function backTemplate($backupFile)
+    {
+        $return = new stdclass();
+        $return->result = true;
+        $return->error  = '';
+
+        $this->app->loadClass('pclzip', true);
+        $zip = new pclzip($backupFile);
+        $zip->create($this->app->getTmpRoot() . 'template/', PCLZIP_OPT_REMOVE_PATH, $this->app->getTmpRoot() . 'template/');
+        if($zip->errorCode() != 0)
+        {
+            $return->result = false;
+            $return->error  = $zip->errorInfo();
+        }
+
+        return $return;
+    }
+
+    /**
      * Restore SQL 
      * 
      * @param  string    $backupFile 
@@ -78,6 +103,29 @@ class backupModel extends model
         $this->app->loadClass('pclzip', true);
         $zip = new pclzip($backupFile);
         if($zip->extract(PCLZIP_OPT_PATH, $this->app->getWwwRoot() . 'data/') == 0)
+        {
+            $return->result = false;
+            $return->error  = $zip->errorInfo();
+        }
+
+        return $return;
+    }
+
+    /**
+     * Restore File 
+     * 
+     * @param  string    $backupFile 
+     * @access public
+     * @return object
+     */
+    public function restoreTemplate($backupFile)
+    {
+        $return = new stdclass();
+        $return->result = true;
+        $return->error  = '';
+        $this->app->loadClass('pclzip', true);
+        $zip = new pclzip($backupFile);
+        if($zip->extract(PCLZIP_OPT_PATH, $this->app->getTmpRoot() . 'template/') == 0)
         {
             $return->result = false;
             $return->error  = $zip->errorInfo();
