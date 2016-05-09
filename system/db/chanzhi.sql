@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `link` varchar(255) NOT NULL,
   `css` text NOT NULL,
   `js` text NOT NULL,
+  `onlyBody` enum('0', '1') NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
@@ -693,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `deliveriedDate` datetime NOT NULL,
   `deliveriedBy` char(30) NOT NULL,
   `deliveryStatus` enum('not_send', 'send', 'confirmed') NOT NULL DEFAULT 'not_send',
-  `express` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `express` char(30) unsigned NOT NULL DEFAULT '0',
   `waybill` char(30) NOT NULL,
   `confirmedDate` datetime NOT NULL,
   `finishedDate` datetime NOT NULL,
@@ -776,6 +777,22 @@ CREATE TABLE IF NOT EXISTS  `eps_operationlog` (
   KEY operation (`type`, `identity`, `operation`, `createdTime`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_widget`;
+CREATE TABLE `eps_widget` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `account` char(30) NOT NULL,
+  `type`    char(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `params` text NOT NULL,
+  `order` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `grid` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
+  UNIQUE KEY `accountAppOrder` (`account`, `order`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
