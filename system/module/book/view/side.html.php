@@ -20,7 +20,7 @@
           <?php endforeach;?>
         </ul>
         <div class='text-right'>
-          <?php commonModel::printLink('book', 'create', '', $lang->book->createBook);?>
+          <?php commonModel::printLink('book', 'create', '', $lang->book->create);?>
           <?php commonModel::printLink('book', 'setting', '', $lang->book->setting);?>
         </div>
       </div>
