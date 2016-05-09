@@ -22,6 +22,7 @@
     <?php endif; ?>
     <div class='panel-body'>
       <div class='books'><?php if(!empty($allCatalog)) echo $allCatalog;?></div>
+      <div class='powerby'><?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?></div>
     </div>
   </div>
   <div class='fullScreen-content panel'>

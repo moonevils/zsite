@@ -35,3 +35,7 @@ dl.drop-area {background-color: #f1f1f1}
 .fullScreen-book .fullScreen-inner{max-width: 960px; margin: 0 auto;}
 .fullScreen-book .fullScreen-content footer ul{background: #fafafa; display: block; position: fixed; bottom: 0; right: 20px; left: 320px; margin: 0; z-index: 1000;}
 .fullScreen-book .home{margin: 0;}
+.fullScreen-book .powerby{position: fixed; background: #fafafa; bottom: 0; height: 30px; line-height: 30px; left: 0; width: 282px; overflow: hidden;}
+.fullScreen-book .powerby .icon-chanzhi{left: 0; position: absolute; top: 8px;}
+.fullScreen-book .powerby a {display: block; margin: 0; padding-left: 36px; color: #777; position: relative;}
+.fullScreen-book .powerby a > .name{display: block; overflow: hidden; position: absolute; width: 0;}

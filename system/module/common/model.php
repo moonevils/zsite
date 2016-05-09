@@ -417,6 +417,7 @@ class commonModel extends model
                 $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
             }
         }
+        if($group == 'home') $string .= "<li>" . html::a(helper::createLink('site', 'sethomemenu'), "<i class='icon icon-plus'> </i>" . $lang->custom) . "</li>";
         
         $string .= "</ul>\n";
         return $string;

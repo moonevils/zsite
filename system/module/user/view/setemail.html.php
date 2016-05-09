@@ -18,6 +18,11 @@
       <th><?php echo $lang->user->captcha;?></th>
       <td><?php echo html::input('captcha', '', "class='form-control' placeholder='{$lang->user->placeholder->verifyCode}'");?></td>
       <td><?php echo html::a($this->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-sm btn-primary'");?></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td id='responser' class='alert alert-success'></td>
+    </tr>
     <tr>
       <th></th><td colspan='2'><?php echo html::submitButton() . html::hidden('token', $token);?></td>
     </tr>
