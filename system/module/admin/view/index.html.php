@@ -68,7 +68,8 @@
         }
         ?>
         <div class='col-xs-<?php echo $widget->grid;?> pull-left'>
-          <div class='panel panel-widget <?php if(isset($widget->params->color)) echo 'panel-' . $widget->params->color;?>' id='widget<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $widget->title?>' data-url='<?php echo $this->createLink('widget', 'printWidget', 'widget=' . $widget->id) ?>'>
+          <?php $url = $widget->type != 'chanzhiDynamic' ? helper::createLink('widget', 'printWidget', 'widget=' . $widget->id) : '' ?>
+          <div class='panel panel-widget <?php if(isset($widget->params->color)) echo 'panel-' . $widget->params->color;?>' id='widget<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $widget->title?>' data-url='<?php echo $url ?>'>
             <div class='panel-heading'>
               <span class='panel-title'><?php echo $widget->title;?></span>
               <div class='panel-actions'>
@@ -79,15 +80,17 @@
                 <div class='dropdown'>
                   <a href='javascript:;' data-toggle='dropdown' class='panel-action'><i class='icon icon-ellipsis-v'></i></a>
                   <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="javascript:;" class="refresh-panel"><i class="icon-repeat"></i> 刷新</a></li>
                     <li><a href="<?php echo $this->createLink("widget", "edit", "index=$widget->id"); ?>" data-toggle='modal' class='edit-widget' data-title='<?php echo $widget->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit;?></a></li>
                     <li><a href="<?php echo helper::createLink('widget', 'delete', "id={$widget->id}")?>" class="deleter"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
                   </ul>
                 </div>
               </div>
             </div>
-            <?php $url = $widget->type != 'chanzhiDynamic' ? helper::createLink('widget', 'printWidget', 'widget=' . $widget->id) : 'http://api.chanzhi.org/goto.php?item=dynamics' ?>
-            <div class='panel-body no-padding' data-url="<?php echo $url ;?>"> </div>
+            <?php if($widget->type != 'chanzhiDynamic'):?>
+            <div class='panel-body no-padding' data-url="<?php echo helper::createLink('widget', 'printWidget', 'widget=' . $widget->id);?>"> </div>
+            <?php else:?>
+            <script src='http://api.chanzhi.org/goto.php?item=dynamics' type='text/javascript'></script>
+            <?php endif;?>
           </div>
         </div>
         <?php endforeach;?>
