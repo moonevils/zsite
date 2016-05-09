@@ -27,7 +27,7 @@ $lang->backup->error->noDelete       = "文件 %s 无法删除，修改权限或
 $lang->backup->error->restoreSQL     = "数据库还原失败，错误：%s";
 $lang->backup->error->restoreFile    = "附件还原失败，错误：%s";
 $lang->backup->error->backupFile     = "附件备份失败，错误：%s";
-$lang->backup->error->backupTemplate = "附件模板失败，错误：%s";
+$lang->backup->error->backupTemplate = "模板备份失败，错误：%s";
 
 $lang->js->backuping = '备份中...';
 $lang->js->restoring = '还原中...';

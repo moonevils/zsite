@@ -41,10 +41,12 @@ $lang->ui->themeStore      = 'Theme store';
 $lang->ui->help            = "Help";
 $lang->ui->deleteLogo      = "Delete Logo";
 $lang->ui->setCode         = "Code";
+$lang->ui->editTemplate    = "Edit Template";
 $lang->ui->installedThemes = "Installed Themes";
 $lang->ui->enableTheme     = "Use this theme";
 $lang->ui->industry        = "Industry";
 $lang->ui->offcial         = "Offcial";
+$lang->ui->reset           = "Reset";
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";
@@ -62,6 +64,7 @@ $lang->ui->fileRequired           = 'Please select file';
 $lang->ui->importThemeSuccess     = 'Import theme successfully';
 $lang->ui->packagePathUnwriteable = 'Package directory is not writable.';
 $lang->ui->selectSourceImage      = 'Select image from source';
+$lang->ui->rebuildThumbs          = 'Rebuild thumbs';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i>Desktop";
@@ -177,8 +180,8 @@ $lang->ui->theme->fontSizeList['24px']                 = '24px';
 $lang->ui->theme->navbarLayoutList['false']            = 'Normal';
 $lang->ui->theme->navbarLayoutList['true']             = 'Adaptive Width';
 
-$lang->ui->theme->sideFloatList['left']   = 'Left';
 $lang->ui->theme->sideFloatList['right']  = 'Right';
+$lang->ui->theme->sideFloatList['left']   = 'Left';
 $lang->ui->theme->sideFloatList['hidden'] = "Hidden";
 
 $lang->ui->theme->sideGridList[2]        = "1/6";
@@ -201,6 +204,7 @@ $lang->ui->groups->basic  = 'Basic Style';
 $lang->ui->groups->navbar = 'Navbar';
 $lang->ui->groups->block  = 'Block';
 $lang->ui->groups->button = 'Button';
+$lang->ui->groups->header = 'Topbar';
 $lang->ui->groups->footer = 'Footer';
 
 $lang->ui->color          = 'Color';
@@ -231,8 +235,8 @@ $lang->ui->background    = 'Background';
 $lang->ui->button        = 'Button';
 $lang->ui->text          = 'Text';
 $lang->ui->column        = 'Column';
-$lang->ui->sidebarLayout = 'Sidebar Layout';
-$lang->ui->sidebarWidth  = 'Sidebar Width';
+$lang->ui->sideFloat     = 'Sidebar Layout';
+$lang->ui->sideGrid      = 'Sidebar Width';
 
 $lang->ui->primaryColor    = 'Color';
 $lang->ui->backcolor       = 'Background';
@@ -258,6 +262,11 @@ $lang->ui->danger          = 'Danger';
 $lang->ui->warning         = 'Warning';
 $lang->ui->success         = 'Success';
 $lang->ui->removeDirFaild  = "<h4>Delete the following directories failed</h4><pre>%s</pre> <div class='text-important'>Please manually delete, or set up these files writable. </div>";
+$lang->ui->padding         = 'Padding';
+$lang->ui->left            = 'Left';
+$lang->ui->right           = 'Right';
+$lang->ui->top             = 'Top';
+$lang->ui->bottom          = 'Bottom';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
@@ -268,3 +277,123 @@ $lang->ui->themeColors[] = 'FF63E8';
 $lang->ui->themeColors[] = '964B00';
 $lang->ui->themeColors[] = '7F7F7F';
 $lang->ui->themeColors[] = '000000';
+
+$lang->ui->folderList = new stdclass();
+$lang->ui->folderList->common  = 'Global files';
+$lang->ui->folderList->index   = 'Home page';
+$lang->ui->folderList->block   = 'Block';
+$lang->ui->folderList->article = 'Article';
+$lang->ui->folderList->product = 'Product';
+$lang->ui->folderList->search  = 'Serach';
+$lang->ui->folderList->order   = 'Order';
+$lang->ui->folderList->user    = 'User';
+$lang->ui->folderList->message = 'Message';
+$lang->ui->folderList->forum   = 'Forum';
+
+$lang->ui->files = new stdclass();
+$lang->ui->files->default = new stdclass();
+
+$lang->ui->files->default->common = array();
+$lang->ui->files->default->common['header.lite']  = 'header & meta';
+$lang->ui->files->default->common['header']       = 'body header';
+$lang->ui->files->default->common['qrcode']       = 'qrcode';
+$lang->ui->files->default->common['footer']       = 'footer';
+$lang->ui->files->default->common['header.modal'] = 'dialog header';
+$lang->ui->files->default->common['footer.modal'] = 'dialog footer';
+
+$lang->ui->files->default->index = array();
+$lang->ui->files->default->index['index'] = 'Home page';
+
+$lang->ui->files->default->block = array();
+$lang->ui->files->default->block['about']           = 'Company Info';
+$lang->ui->files->default->block['articletree']     = 'Article Tree';
+$lang->ui->files->default->block['blogtree']        = 'Blog Tree';
+$lang->ui->files->default->block['contact']         = 'Contact';
+$lang->ui->files->default->block['featuredproduct'] = 'Featured Product';
+$lang->ui->files->default->block['followus']        = 'Fllow Us';
+$lang->ui->files->default->block['header']          = 'Header';
+$lang->ui->files->default->block['header.default']  = 'Header for default';
+$lang->ui->files->default->block['header.layout']   = 'Header Customed';
+$lang->ui->files->default->block['hotarticle']      = 'Hot Articles';
+$lang->ui->files->default->block['hotproduct']      = 'Hot Product';
+$lang->ui->files->default->block['htmlcode']        = 'Html code';
+$lang->ui->files->default->block['html']            = 'Custom';
+$lang->ui->files->default->block['latestarticle']   = 'Latest Article';
+$lang->ui->files->default->block['latestblog']      = 'Latest Blog';
+$lang->ui->files->default->block['latestproduct']   = 'Latest Product';
+$lang->ui->files->default->block['latestthread']    = 'Latest Thread';
+$lang->ui->files->default->block['links']           = 'Links';
+$lang->ui->files->default->block['logo']            = 'logo';
+$lang->ui->files->default->block['nav']             = 'Nav';
+$lang->ui->files->default->block['pagelist']        = 'Page List';
+$lang->ui->files->default->block['phpcode']         = 'PHP Code';
+$lang->ui->files->default->block['producttree']     = 'Product Tree';
+$lang->ui->files->default->block['searchbar']       = 'Search Bar';
+$lang->ui->files->default->block['slide']           = 'Slide';
+$lang->ui->files->default->block['slogan']          = 'Slogan';
+$lang->ui->files->default->block['usermenu']        = 'User Menu';
+
+$lang->ui->files->default->article = array();
+$lang->ui->files->default->article['browse'] = 'Article List';
+$lang->ui->files->default->article['view']   = 'Article Detail';
+
+$lang->ui->files->default->article['blog/header'] = 'Blog Header';
+$lang->ui->files->default->article['blog/index']  = 'Blog List';
+$lang->ui->files->default->article['blog/view']   = 'Blog Detail';
+$lang->ui->files->default->article['blog/footer'] = 'Blog Footer';
+
+$lang->ui->files->default->article['page/view'] = 'Page Detail';
+
+$lang->ui->files->default->product = array();
+$lang->ui->files->default->product['browse']      = 'Product List';
+$lang->ui->files->default->product['browse.card'] = 'Card Mode';
+$lang->ui->files->default->product['browse.list'] = 'List Mode';
+$lang->ui->files->default->product['view']        = 'Detail';
+
+$lang->ui->files->default->forum = array();
+$lang->ui->files->default->forum['index'] = 'Home Page';
+$lang->ui->files->default->forum['board'] = 'Board Page';
+
+$lang->ui->files->default->forum['thread/view']   = 'View thread';
+$lang->ui->files->default->forum['thread/thread'] = 'Thread Area';
+$lang->ui->files->default->forum['thread/reply']  = 'Reply Area';
+$lang->ui->files->default->forum['thread/post']   = 'Post Form';
+$lang->ui->files->default->forum['reply/reply']   = 'Reply Form';
+
+$lang->ui->files->default->user['control']     = 'Control';
+$lang->ui->files->default->user['side']        = 'Side Menu';
+$lang->ui->files->default->user['deny']        = 'Deny Page';
+$lang->ui->files->default->user['edit']        = 'Profile Form';
+$lang->ui->files->default->user['login.front'] = 'Login Page';
+$lang->ui->files->default->user['message']     = 'Message';
+$lang->ui->files->default->user['profile']     = 'Profile Page';
+$lang->ui->files->default->user['register']    = 'Register Page';
+$lang->ui->files->default->user['score']       = 'Score';
+$lang->ui->files->default->user['thread']      = 'My Thread';
+
+$lang->ui->files->default->order['browse']        = 'My Orders';
+$lang->ui->files->default->order['check']         = 'Pay page';
+$lang->ui->files->default->order['confirm']       = 'Confirm';
+$lang->ui->files->default->order['processorder']  = 'Pay Result';
+$lang->ui->files->default->order['track']         = 'Track';
+
+$lang->ui->files->default->message['index']       = 'Message Home';
+$lang->ui->files->default->message['comment']     = 'Comment List';
+
+$lang->ui->files->default->search['index']        = 'Search Page';
+
+$lang->ui->files->mobile = $lang->ui->files->default;
+
+unset($this->lang->ui->files->mobile->common['qrcode']);
+unset($this->lang->ui->files->mobile->common['header.modal']);
+unset($this->lang->ui->files->mobile->common['footer.modal']);
+unset($this->lang->ui->files->mobile->block['header']);
+unset($this->lang->ui->files->mobile->block['header.default']);
+unset($this->lang->ui->files->mobile->block['logo']);
+unset($this->lang->ui->files->mobile->block['nav']);
+unset($this->lang->ui->files->mobile->block['searchbar']);
+unset($this->lang->ui->files->mobile->block['slogan']);
+unset($this->lang->ui->files->mobile->block['usermenu']);
+unset($this->lang->ui->files->mobile->product['browse.card']);
+unset($this->lang->ui->files->mobile->product['browse.list']);
+unset($this->lang->ui->files->mobile->forum['reply/reply']);

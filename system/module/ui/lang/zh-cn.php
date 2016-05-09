@@ -327,7 +327,7 @@ $lang->ui->files->default->block['logo']            = 'logo区域';
 $lang->ui->files->default->block['nav']             = '导航条';
 $lang->ui->files->default->block['pagelist']        = '单页列表';
 $lang->ui->files->default->block['phpcode']         = 'php源码';
-$lang->ui->files->default->block['producttree']     = '产品列表';
+$lang->ui->files->default->block['producttree']     = '产品类目';
 $lang->ui->files->default->block['searchbar']       = '搜索条';
 $lang->ui->files->default->block['slide']           = '幻灯片';
 $lang->ui->files->default->block['slogan']          = '站点口号';
@@ -346,8 +346,8 @@ $lang->ui->files->default->article['page/view'] = '单页';
 
 $lang->ui->files->default->product = array();
 $lang->ui->files->default->product['browse']      = '产品列表';
-$lang->ui->files->default->product['browse.card'] = '列表视图';
-$lang->ui->files->default->product['browse.list'] = '卡片视图';
+$lang->ui->files->default->product['browse.card'] = '卡片视图';
+$lang->ui->files->default->product['browse.list'] = '列表视图';
 $lang->ui->files->default->product['view']        = '产品详情';
 
 $lang->ui->files->default->forum = array();
