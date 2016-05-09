@@ -78,6 +78,10 @@ $(document).ready(function()
         <td><?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->guarder->captcha}");?></td>
         <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->guarder->getEmailCode, "id='mailSender' class='btn btn-success'");?></td>
       </tr>
+      <tr>
+        <th></th>
+        <td id='mailResult' class='alert alert-success'></td>
+      </tr>
       <?php else:?>
       <tr class='option-email'>
         <th></th>
@@ -105,22 +109,24 @@ $(document).ready(function()
           setTimeout(function(){$('#mailSender').popover('destroy');}, 2000);
   
           var url = $(this).attr('href');
+          text = $(this).text();
+          $(this).text('sending...');
 
           $.getJSON(url, function(response)
           {
-              $('#mailSender').popover('destroy');
               if(response.result == 'success')
               {
-                   $('#mailSender').attr('disabled', 'disabled');
-                   $('#mailSender').popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
-                   $('#mailSender').next('.popover').addClass('popover-success');
-                   setTimeout(function(){$('#mailSender').popover('destroy');}, 2000);
+                 $('#mailResult').html(response.message);
+                 $('#mailSender').hide();
               }
               else
               {
                   bootbox.alert(response.message);
+                  $('#mailSender').text(text).prop('disabled', false);
               }
-          })
+              $('#mailSender').attr('disabled', 'disabled');
+              return false;
+          });
           return false;
       })
 
