@@ -28,6 +28,7 @@ foreach($jsFiles as $file)
 
 $frontFiles = array();
 $frontFiles[] = 'jquery';
+$frontFiles[] = 'jqueryform';
 $frontFiles[] = 'zui';
 $frontFiles[] = 'chanzhi';
 $frontFiles[] = 'my';
