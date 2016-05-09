@@ -694,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `deliveriedDate` datetime NOT NULL,
   `deliveriedBy` char(30) NOT NULL,
   `deliveryStatus` enum('not_send', 'send', 'confirmed') NOT NULL DEFAULT 'not_send',
-  `express` char(30) unsigned NOT NULL DEFAULT '0',
+  `express` char(30) NOT NULL,
   `waybill` char(30) NOT NULL,
   `confirmedDate` datetime NOT NULL,
   `finishedDate` datetime NOT NULL,
