@@ -228,7 +228,7 @@ class bookModel extends model
         if($node->type == 'article') return $node->id;
 
         $ids      = '';
-        $children = zget($families, $node->id);
+        $children = zget($families, $node->id, '');
         if(!$children) return '';
 
         foreach($children as $child)
