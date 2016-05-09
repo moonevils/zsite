@@ -11,35 +11,9 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version);?>
+<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version, false);?>
 <div class='container' id='shortcutBox'>
 
-  <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
-  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
-    <div class="alert alert-danger">
-      <button type="submit" class="close">&times;</button>
-      <strong><?php echo $lang->admin->adminEntry;?></strong>
-    </div>
-  </form>
-  <?php endif;?>
-
-  <?php if(!$ignoreUpgrade):?>
-  <div class='alert alert-success' id='upgradeNotice'>
-    <div>
-      <?php echo $lang->newVersion;?>
-      <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
-    </div>
-  </div>
-  <?php endif;?>
-
-  <?php if(!$checkLocation):?>
-  <div class='alert alert-success'>
-    <div>
-      <?php echo $lang->site->changeLocation;?>
-      <?php echo html::a($this->createLink('site', 'setsecurity'), $lang->site->changeSetting, "class='red'");?>
-    </div>
-  </div>
-  <?php endif;?>
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
       <div class='dashboard-control'>
@@ -98,4 +72,32 @@
     </div>
   </div>
 </div>
+  <div id='noticeBox'>
+  <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
+  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
+    <div class="alert alert-danger alert with-icon alert-dismissable">
+      <button type="submit" class="close">&times;</button>
+      <strong><?php echo $lang->admin->adminEntry;?></strong>
+    </div>
+  </form>
+  <?php endif;?>
+  <?php if(!$ignoreUpgrade):?>
+  <div class='alert alert-success' id='upgradeNotice'>
+    <div>
+      <?php echo $lang->newVersion;?>
+      <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
+    </div>
+  </div>
+  <?php endif;?>
+
+  <?php if(!$checkLocation):?>
+  <div class='alert alert-success'>
+    <div>
+      <?php echo $lang->site->changeLocation;?>
+      <?php echo html::a($this->createLink('site', 'setsecurity'), $lang->site->changeSetting, "class='red'");?>
+    </div>
+  </div>
+  <?php endif;?>
+  </div>
+
 <?php include '../../common/view/footer.admin.html.php';?>
