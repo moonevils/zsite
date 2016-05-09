@@ -17,6 +17,7 @@ $slides         = $this->loadModel('slide')->getList($groupID);
 $slideID        = 'slide' . $block->id . '-' . $groupID;
 $group          = $this->loadModel('tree')->getByID($groupID);
 $globalButtons  = zget($group, 'desc', '') ? json_decode($group->desc, true) : array();
+$block->content->style = !empty($block->content->style) ? $block->content->style : 'carousel';
 if($slides):
 ?>
 <div class='block <?php echo $blockClass;?>' id='block<?php echo $block->id?>'>
