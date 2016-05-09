@@ -14,6 +14,7 @@ $lang->colon      = '：';
 $lang->prev       = '‹';
 $lang->next       = '›';
 $lang->equal      = '=';
+$lang->percent    = '%';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
@@ -67,6 +68,7 @@ $lang->categoryMenu     = '分类导航';
 $lang->wechatTip        = '微信订阅';
 $lang->qrcodeTip        = '移动访问';
 $lang->language         = '语言';
+$lang->custom           = '自定义';
 
 /* Global action items. */
 $lang->reset          = '重置';

@@ -57,6 +57,12 @@ class backup extends control
                         $backupFile->files[$this->backupPath . $backupFile->name . '.file.zip.php'] = abs(filesize($this->backupPath . $backupFile->name . '.file.zip.php'));
                     }
 
+                    if(file_exists($this->backupPath . $backupFile->name . '.template.zip.php'))
+                    {
+                        $backupFile->files[$this->backupPath . $backupFile->name . '.template.zip.php'] = abs(filesize($this->backupPath . $backupFile->name . '.template.zip.php'));
+                    }
+
+
                     $backups[$backupFile->name] = $backupFile;
                 }
             }
@@ -87,6 +93,9 @@ class backup extends control
         {
             $result = $this->backup->backFile($this->backupPath . $fileName . '.file.zip.php');
             if(!$result->result) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupFile, $result->error)));
+            $result = $this->backup->backTemplate($this->backupPath . $fileName . '.template.zip.php');
+            if(!$result->result) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupTemplate, $result->error)));
+
             $this->backup->addFileHeader($this->backupPath . $fileName . '.file.zip.php');
         }
 
@@ -138,6 +147,19 @@ class backup extends control
                 $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->restoreFile, $result->error)));
             }
         }
+
+        /* Restore templates. */
+        if(file_exists($this->backupPath . $fileName . '.template.zip.php'))
+        {
+            $this->backup->removeFileHeader($this->backupPath . $fileName . '.template.zip.php');
+            $result = $this->backup->restoreTemplate($this->backupPath . $fileName . '.template.zip.php');
+            $this->backup->addFileHeader($this->backupPath . $fileName . '.template.zip.php');
+            if(!$result->result)
+            {
+                $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->restoreTemplate, $result->error)));
+            }
+        }
+
         $this->send(array('result' => 'success', 'message' => $this->lang->backup->success->restore));
     }
 
