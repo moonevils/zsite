@@ -34,6 +34,7 @@ $frontFiles[] = 'my';
 
 $adminFiles = array();
 $adminFiles[] = 'jquery';
+$adminFiles[] = 'jqueryform';
 $adminFiles[] = 'zui';
 $adminFiles[] = 'zui.admin';
 $adminFiles[] = 'chanzhi';
