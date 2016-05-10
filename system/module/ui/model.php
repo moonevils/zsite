@@ -278,6 +278,7 @@ class uiModel extends model
                 $sideFloat = zget($config, 'sidebar-pull-left', $default);
                 if(!in_array($sideFloat, array('left', 'right', 'hidden'))) return 'right';
             }
+            return $sideFloat;
         }
         return zget($config, $key, $default);
     }
