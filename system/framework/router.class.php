@@ -1300,9 +1300,9 @@ class router
         }
 
         /* Call the method. */
-        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'on')
+        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
         {
-            if($this->user->account == 'guest' and strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
+            if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
                 $key   = 'page' . DS . md5($this->URI);
                 $cache = $this->cache->get($key);

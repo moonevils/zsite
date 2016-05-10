@@ -622,6 +622,11 @@ class blockModel extends model
             {
                 $key = "block/{$block->type}_{$block->id}";
                 if($withGrid and $block->grid) $key = "block/{$block->type}_{$block->id}_{$block->grid}";
+                if(strpos($key, 'Tree') !== false)
+                {
+                    if($this->session->articleCategory) $key .= "_{$this->session->articleCategory}";
+                    if($this->session->productCategory) $key .= "_{$this->session->productCategory}";
+                }
 
                 $cache = $this->app->cache->get($key);
 
