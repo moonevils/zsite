@@ -142,6 +142,7 @@ class upgradeModel extends model
                 $this->moveThemes();
                 $this->awardRegister();
             case '5_2':
+                $this->fixSideFloat();
                 $this->execSQL($this->getUpgradeFile('5.2'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
@@ -1932,5 +1933,30 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Fix side float function.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function fixSideFloat()
+    {
+        $customParams = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('custom')->fetchAll('id');
+        foreach($customParams as $setting)
+        {
+            $config = json_decode($setting->value, true);
+            foreach($config['default'] as $theme => $params)
+            {
+                $params['sideFloat'] = $params['sidebar-pull-left'] == 'false' ? 'right' : 'left';
+                $params['sideGrid']  = (int) (100 / (str_replace('%', '', $params['sidebar-width'])));
+
+                $config['default'][$theme] = $params;
+            }
+            $setting->value = json_encode($config);
+            $this->dao->replace(TABLE_CONFIG)->data($setting)->exec();
+        }
+        return true;
     }
 }
