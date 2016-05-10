@@ -25,6 +25,7 @@ $lang->block->regionList      = '區域列表';
 $lang->block->select          = '請選擇區塊';
 $lang->block->categories      = '分類';
 $lang->block->showImage       = '圖文';
+$lang->block->maxWidth        = '最大寬度';
 $lang->block->showCategory    = '顯示類目';
 $lang->block->showBoard       = '顯示版塊';
 $lang->block->showTime        = '顯示時間';
@@ -59,6 +60,13 @@ $lang->block->renameLayout    = '方案重命名';
 $lang->block->planName        = '方案名稱';
 $lang->block->saveLayoutAs    = '複製佈局：%s';
 $lang->block->defaultPlan     = '預設方案';
+$lang->block->image           = '圖片';
+
+$lang->block->layout            = '佈局';
+$lang->block->logoPosition      = 'Logo';
+$lang->block->navPosition       = '導航';
+$lang->block->searchbarPosition = '搜索框';
+$lang->block->sloganPosition    = '站點口號';
 
 $lang->block->admin        = "區塊管理";
 $lang->block->pages        = "佈局";
@@ -107,6 +115,13 @@ $lang->block->categoryList['article'] = '文章';
 $lang->block->categoryList['product'] = '產品';
 $lang->block->categoryList['system']  = '系統';
 
+$lang->block->imageSizeList['large']  = '大圖';
+$lang->block->imageSizeList['middle'] = '中圖';
+$lang->block->imageSizeList['small']  = '小圖';
+
+$lang->block->imagePositionList['left']  = '居左';
+$lang->block->imagePositionList['right'] = '居右';
+
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '顯示子分類';
 $lang->block->category->fromCurrent  = '當前類目開始';
@@ -119,3 +134,17 @@ $lang->block->category->fromCurrentList[0] = '否';
 
 $lang->block->category->showCategoryList['abbr'] = '簡稱';
 $lang->block->category->showCategoryList['name'] = '全稱';
+
+$lang->block->slideStyle = '展示形式';
+$lang->block->slideStyleList['carousel'] = '橫向輪播';
+$lang->block->slideStyleList['tile']     = '豎向展開';
+
+$lang->block->navTypeList = new stdclass();
+$lang->block->navTypeList->desktop_top   = '桌面';
+$lang->block->navTypeList->desktop_blog  = '博客';
+$lang->block->navTypeList->mobile_top    = '移動版頂部';
+$lang->block->navTypeList->mobile_bottom = '移動版底部';
+$lang->block->navTypeList->mobile_blog   = '移動版博客';
+
+$lang->block->sideGrid  = '側邊欄寬度';
+$lang->block->sideFloat = '側邊欄位置';

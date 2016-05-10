@@ -65,6 +65,7 @@ $lang->product->comments     = '評論';
 $lang->product->detail       = '查看詳情';
 $lang->product->setting      = '設置';
 $lang->product->soldout      = '已售罄';
+$lang->product->layout       = '佈局';
 
 $lang->product->congratulations  = "恭喜";
 $lang->product->addToCartSuccess = "成功加入購物車。";

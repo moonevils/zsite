@@ -17,6 +17,7 @@ $lang->tree->browse      = "類目維護";
 $lang->tree->manage      = "維護類目";
 $lang->tree->fix         = "修復數據";
 $lang->tree->children    = "子類目";
+$lang->tree->layout      = '佈局';
 
 $lang->tree->common           = '類目';
 $lang->tree->noCategories     = '您還沒有添加類目，請添加類目。';
