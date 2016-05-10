@@ -38,7 +38,7 @@ $lang->score->dayRank   = '日排行榜';
 
 $lang->score->methods['register'] = '註冊';
 $lang->score->methods['login']    = '登錄';
-$lang->score->methods['maxLogin'] = '每日登錄獲得積分上限';
+$lang->score->methods['maxLogin'] = '每日登錄積分上限';
 $lang->score->methods['download'] = '下載';
 
 $lang->score->methods['thread']      = '發貼';
@@ -50,7 +50,7 @@ $lang->score->methods['delReply']    = '刪回覆';
 $lang->score->methods['award']       = '獎勵積分';
 $lang->score->methods['punish']      = '扣除積分';
 
-$lang->score->methods['approveContribution'] = '投稿成功';
+$lang->score->methods['approveSubmittion'] = '投稿成功';
 
 $lang->score->methods['buyscore']  = '購買積分';
 $lang->score->methods['statement'] = '積分結算';

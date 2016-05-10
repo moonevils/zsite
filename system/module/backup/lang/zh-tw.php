@@ -22,8 +22,12 @@ $lang->backup->success->backup  = '備份成功！';
 $lang->backup->success->restore = '還原成功！';
 
 $lang->backup->error = new stdclass();
-$lang->backup->error->noWritable  = "<code>%s</code> 不可寫！請檢查該目錄權限，否則無法備份。";
-$lang->backup->error->noDelete    = "檔案 %s 無法刪除，修改權限或手工刪除。";
-$lang->backup->error->restoreSQL  = "資料庫還原失敗，錯誤：%s";
-$lang->backup->error->restoreFile = "附件還原失敗，錯誤：%s";
-$lang->backup->error->backupFile  = "附件備份失敗，錯誤：%s";
+$lang->backup->error->noWritable     = "<code>%s</code> 不可寫！請檢查該目錄權限，否則無法備份。";
+$lang->backup->error->noDelete       = "檔案 %s 無法刪除，修改權限或手工刪除。";
+$lang->backup->error->restoreSQL     = "資料庫還原失敗，錯誤：%s";
+$lang->backup->error->restoreFile    = "附件還原失敗，錯誤：%s";
+$lang->backup->error->backupFile     = "附件備份失敗，錯誤：%s";
+$lang->backup->error->backupTemplate = "模板備份失敗，錯誤：%s";
+
+$lang->js->backuping = '備份中...';
+$lang->js->restoring = '還原中...';
