@@ -738,7 +738,7 @@ class control
         {
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
-                $key = 'page' . DS . md5($this->app->getURI());
+                $key = 'page' . DS . $this->device . DS . md5($this->app->getURI());
                 $this->app->cache->set($key, $this->output);
             }
         }
