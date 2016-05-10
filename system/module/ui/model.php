@@ -270,6 +270,15 @@ class uiModel extends model
         if(empty($theme))    $theme    = $this->config->template->{$this->device}->theme;
         if(empty($template)) $template = $this->config->template->{$this->device}->name;
         $config = $this->getCustomParams($template, $theme);
+        if($key == 'sideFloat')
+        {
+            $sideFloat = zget($config, $key, $default);
+            if(!in_array($sideFloat, array('left', 'right', 'hidden')))
+            {
+                $sideFloat = zget($config, 'sidebar-pull-left', $default);
+                if(!in_array($sideFloat, array('left', 'right', 'hidden'))) return 'right';
+            }
+        }
         return zget($config, $key, $default);
     }
 
