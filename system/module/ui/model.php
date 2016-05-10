@@ -307,7 +307,7 @@ class uiModel extends model
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
         $lessTemplateDir = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS;
 
-        foreach($this->config->ui->themes[$template][$theme] as $section => $selector)
+        foreach(zget($this->config->ui->themes[$template], $theme, array()) as $section => $selector)
         {
             foreach($selector as $attr => $settings)
             {
