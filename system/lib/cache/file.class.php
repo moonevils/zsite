@@ -25,13 +25,14 @@ class fileCache extends cache
         if(!isset($this->config->savePath))
         {
             global $app, $config;
-            $this->config->savePath = $config->multi ? $app->getTmpRoot() . 'cache' . DS . $config->site->code : $app->getTmpRoot() . 'cache' . DS . $this->app->getClientlang();
+            $this->config->savePath = $config->multi ? $app->getTmpRoot() . 'cache' . DS . $config->site->code : $app->getTmpRoot() . 'cache';
         }
 
         if(zget($this->config, 'savePath', '') == '') die('The cache save path must defined in $config');
         if(!is_dir($this->config->savePath)) mkdir($this->config->savePath, 0777, true);
         if(!is_writeable(zget($this->config, 'savePath', ''))) die('The cache save path ' . $this->config->savePath . ' is not writeable.');
         $this->config->savePath = rtrim($this->config->savePath, DS) . DS;
+        $this->config->savePath .= $_COOKIE['lang'] . DS;
     }
     
     /**
