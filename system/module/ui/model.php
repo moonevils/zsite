@@ -134,7 +134,7 @@ class uiModel extends model
     public function getCustomCssFile($template, $theme)
     {
         $lang = $this->app->getClientLang();
-        if($this->config->multi)  return $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . "{$template}_{$theme}_{$lang}.css";
+        if($this->config->multi)  return $this->app->getDataRoot() . 'css' . DS . $this->config->site->code . DS . "{$template}_{$theme}_{$lang}.css";
         if(!$this->config->multi) return $this->app->getDataRoot() . 'css' . DS . "{$template}_{$theme}_{$lang}.css";
     }
 
@@ -149,7 +149,7 @@ class uiModel extends model
     public function getThemeCssUrl($template, $theme)
     {
         $lang = $this->app->getClientLang();
-        if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $config->site->code . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+        if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $this->config->site->code . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
         if(!$this->config->multi) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
     }
     /**
