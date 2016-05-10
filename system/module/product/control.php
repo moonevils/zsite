@@ -54,7 +54,7 @@ class product extends control
         $pager = new pager(0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), '`order` desc', $pager);
+        $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), '`order` desc', $pager, true);
 
         if(!$category and $categoryID != 0) die($this->fetch('error', 'index'));
 
