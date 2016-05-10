@@ -44,10 +44,12 @@ $lang->user->captcha   = '驗證碼';
 $lang->user->alert     = '您的帳號已被禁用';
 $lang->user->privilege = '權限';
 
+$lang->user->all             = '全部會員';
 $lang->user->list            = '會員列表';
 $lang->user->view            = "用戶詳情";
 $lang->user->create          = "添加用戶";
 $lang->user->edit            = "編輯用戶";
+$lang->user->operate         = '操作';
 $lang->user->changePassword  = "更改密碼";
 $lang->user->changeEmail     = "郵箱設置";
 $lang->user->recoverPassword = "忘記密碼";
@@ -68,7 +70,7 @@ $lang->user->pullWechatFans  = '更新微信會員數據';
 $lang->user->adminlog        = '登錄日誌';
 $lang->user->checkEmail      = '綁定郵箱';
 $lang->user->getEmailCode    = '獲取郵箱驗證碼';
-$lang->user->setEmail        = '修改郵箱';
+$lang->user->setEmail        = '郵箱設置';
 $lang->user->newEmail        = '新郵箱';
 $lang->user->rank            = '等級積分';
 $lang->user->score           = '積分詳情';
@@ -83,22 +85,22 @@ $lang->user->deleteHistory   = '刪除用戶及歷史數據';
 $lang->user->question        = '密保問題';
 $lang->user->answer          = '答案';
 
-$lang->user->type         = '賬戶類型';
-$lang->user->profile      = '個人信息';
-$lang->user->editProfile  = '編輯信息';
-$lang->user->thread       = '我的主題';
-$lang->user->messages     = '我的消息';
-$lang->user->reply        = '我的回貼';
-$lang->user->contribution = '我的投稿';
+$lang->user->type        = '賬戶類型';
+$lang->user->profile     = '個人信息';
+$lang->user->editProfile = '編輯信息';
+$lang->user->thread      = '我的主題';
+$lang->user->messages    = '我的消息';
+$lang->user->reply       = '我的回貼';
+$lang->user->submittion  = '我的投稿';
 
-$lang->user->userHistory         = "用戶歷史數據";
-$lang->user->threadHistory       = "發帖";
-$lang->user->replyHistory        = "回帖";
-$lang->user->commentHistory      = "評論";
-$lang->user->messageHistory      = "留言";
-$lang->user->orderHistory        = "訂單";
-$lang->user->addressHistory      = "地址";
-$lang->user->contributionHistory = "投稿";
+$lang->user->userHistory       = "用戶歷史數據";
+$lang->user->threadHistory     = "發帖";
+$lang->user->replyHistory      = "回帖";
+$lang->user->commentHistory    = "評論";
+$lang->user->messageHistory    = "留言";
+$lang->user->orderHistory      = "訂單";
+$lang->user->addressHistory    = "地址";
+$lang->user->submittionHistory = "投稿";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
@@ -133,7 +135,6 @@ $lang->user->forbidDate['3']    = '三天';
 $lang->user->forbidDate['7']    = '一周';
 $lang->user->forbidDate['30']   = '一個月';
 $lang->user->forbidDate['3000'] = '永久';
-$lang->user->operate            = '操作';
 
 $lang->user->adminList['super']  = '超級管理員';
 $lang->user->adminList['common'] = '管理員';
@@ -197,12 +198,12 @@ $lang->user->oauth->typeList['qq']     = 'QQ會員';
 $lang->user->oauth->typeList['wechat'] = '微信會員';
 
 $lang->user->oauth->lblWelcome       = '開放登錄，快捷方便';
-$lang->user->oauth->lblProfile       = "設置用戶名，完成註冊";
-$lang->user->oauth->lblBind          = "或綁定已有帳號";
+$lang->user->oauth->lblProfile       = "註冊新用戶";
+$lang->user->oauth->lblBind          = "綁定已有用戶";
 $lang->user->oauth->lblUnbind        = "解除綁定";
 $lang->user->oauth->lblUnbindSuccess = "解除綁定成功！";
 $lang->user->oauth->lblUnbindFailed  = "解除綁定失敗！";
-$lang->user->oauth->lblBindFailed    = "綁定賬戶失敗！";
+$lang->user->oauth->lblBindFailed    = "綁定用戶失敗！";
 $lang->user->oauth->ignore           = "忽略";
 
 $lang->user->statusList = new stdclass();
@@ -215,19 +216,20 @@ $lang->user->control->common      = '用戶中心';
 $lang->user->control->welcome     = '歡迎您，<strong>%s</strong>';
 $lang->user->control->lblPassword = "留空，則保持不變。";
 
-$lang->user->control->menus[10] = '<i class="icon-user"></i> 個人信息 <i class="icon-chevron-right"></i>|user|profile';
-$lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
-if(RUN_MODE != 'install' and commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope-alt"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|contribution'; 
-if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
-{
-    $lang->user->control->menus[30] = '<i class="icon-sun"></i> 積分詳情 <i class="icon-chevron-right"></i>|user|score';
-    if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> 積分充值 <i class="icon-chevron-right"></i>|score|buyscore';
-}
-$lang->user->control->menus[50] = '<i class="icon-comment"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
-$lang->user->control->menus[60] = '<i class="icon-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->navGroups = new stdclass();
+$lang->user->navGroups->user    = '個人信息';
+$lang->user->navGroups->order   = '訂單信息';
+$lang->user->navGroups->message = '主題消息';
 
-if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> 我的訂單 <i class="icon-chevron-right"></i>|order|browse';
-if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
+$lang->user->control->menus['profile']    = '<i class="icon-user"></i> 個人信息 <i class="icon-chevron-right"></i>|user|profile';
+$lang->user->control->menus['message']    = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
+$lang->user->control->menus['score']      = '<i class="icon-sun"></i> 積分詳情 <i class="icon-chevron-right"></i>|user|score';
+$lang->user->control->menus['recharge']   = '<i class="icon-bolt"></i> 積分充值 <i class="icon-chevron-right"></i>|score|buyscore';
+$lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> 我的訂單 <i class="icon-chevron-right"></i>|order|browse';
+$lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
+$lang->user->control->menus['thread']     = '<i class="icon-comment"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
+$lang->user->control->menus['reply']      = '<i class="icon-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submittion'; 
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = '日誌';
@@ -239,7 +241,7 @@ $lang->user->log->browser     = '瀏覽器';
 $lang->user->log->ip          = 'IP';
 $lang->user->log->location    = '登錄地址';
 $lang->user->log->date        = '登錄時間';
-$lang->user->log->desc        = '描述';
+$lang->user->log->desc        = '結果';
 
 $lang->user->ipDenied             = '登錄IP受限，請按提示操作。';
 $lang->user->locationDenied       = '登錄地區受限，請按提示操作。';
@@ -251,8 +253,3 @@ $lang->user->forceYangcong        = '已開啟強制洋蔥登錄，普通登錄�
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';
 $lang->user->placeholder->verifyCode = '請輸入驗證郵件裡面收到的驗證碼';
-
-$lang->user->navGroups = new stdclass();
-$lang->user->navGroups->user    = '個人信息';
-$lang->user->navGroups->order   = '訂單信息';
-$lang->user->navGroups->message = '主題消息';

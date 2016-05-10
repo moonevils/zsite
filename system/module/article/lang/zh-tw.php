@@ -41,6 +41,7 @@ $lang->article->isLink     = '跳轉';
 $lang->article->link       = '連結';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
+$lang->article->layout     = '佈局';
 
 $lang->article->forward2Blog     = '轉至博客';
 $lang->article->forward2Forum    = '轉至論壇';
@@ -63,6 +64,8 @@ $lang->submittion->status[3] = '駁回';
 $lang->submittion->typeList = array();
 $lang->submittion->typeList['article'] = '文章';
 $lang->submittion->typeList['blog']    = '博客';
+
+$lang->article->onlyBody = '不顯示頭部、側邊和底部(可定製性更強)';
 
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '維護文章';

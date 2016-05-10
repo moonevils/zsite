@@ -26,6 +26,7 @@ $lang->package->erase         = '清除';
 $lang->package->upgrade       = '升級';
 $lang->package->agreeLicense  = '我同意該授權';
 $lang->package->settemplate   = '設置模板';
+$lang->package->buy           = '購買';
 
 $lang->package->structure   = '目錄結構';
 $lang->package->installed   = '已安裝';
@@ -118,5 +119,4 @@ $lang->package->errorIncompatible            = '該插件與您的蟬知版本�
 $lang->package->errorUninstallDepends        = '插件“%s”依賴該插件，不能卸載';
 
 /* Add theme items.*/
-$lang->theme = new stdclass();
 $lang->theme->common = '主題市場';
