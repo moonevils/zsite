@@ -536,11 +536,6 @@ body.body-modal {padding: 20px;}
 #_pageID, #goto {display: none}
 .pager > .pager {margin: 0;}
 
-/* Icon rotate */
-.icon-rotate-270:before {display: inline-block; -webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);}
-.icon-rotate-180:before {display: inline-block; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);}
-.icon-rotate-90:before {display: inline-block; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);}
-
 /* Ajusted grid system */
 #navbar {margin-bottom: 14px;}
 .row {margin-left: -7px; margin-right: -7px;}
