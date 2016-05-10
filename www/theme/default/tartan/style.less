@@ -42,18 +42,6 @@
 .page {padding: 8px 0; color: #bbb; text-align: right;}
 .page > a {display: inline-block; margin-left: 3px;}
 
-/* tree */
-.tree {padding: 0; margin: 0;}
-.tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}
-.tree > li {margin-right: 20px; font-weight: 400; padding-bottom: 8px;}
-.tree > li > ul li {padding: 3px 15px 0; margin: 0;}
-.tree li:before {display: inline-block; margin-right: 6px; content: '\e6ec'; font-family: ZenIcon; color: #ddd;}
-.tree > li ul {border-left: 1px dashed #ccc; margin-left: 7px; font-weight: normal;}
-.tree > li ul > li:before {content: '\e6e8';}
-.tree > li ul > li:hover:before {content: '\e6ec';}
-.tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 12px; height: 20px; border-top: 1px dashed #ccc;}
-.tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
-
 /* carousel */
 .carousel {border-radius: 4px;overflow: hidden;margin-bottom: 20px;}
 .carousel .item {background-color: transparent;}
@@ -483,8 +471,6 @@ a:hover,a:active{color: #35636e;}
 .panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #7A94B2;color: #fff;border: none;-moz-border-radius:2px 2px 0 0; -webkit-border-radius:2px 2px 0 0; border-radius:2px 2px 0 0; margin: 0 -1px;}
 .panel > .panel-heading .text-muted{color: #ccc}
 .panel.panel-pure .panel-heading{background-color: transparent; color: #666;border-bottom: 1px solid #7A94B2}
-.panel .treeview .hitarea{background-color: #f5f0cc!important}
-.panel .tree > li > ul li:last-child:after{border-left-color: #f5f0cc!important}
 .panel-heading > .pull-right > a{color: #f1f1f1}
 .panel-block .panel-body > .ul-list > li > .pull-right {background: #F5F0CC}
 
@@ -560,10 +546,9 @@ textarea{height: auto;}
 .items-hover .item:hover{background-color: #faf6d8}
 
 /* tree */
-.tree li:before {color: #E8D0A9;}
 .sitemap-tree > h4 {background-color: #E8D0A9!important}
-.treeview .hitarea:before {color: #C4B274!important}
-.treeview li:hover .hitarea:before {color: #6E2E16!important}
+.tree li > .list-toggle:active, .tree li > .list-toggle:hover {color: #6F6658;}
+.tree li:before {background-color: #F5F0CC}
 
 /* ul-list */
 .ul-list > li:before {color: #E8D0A9}
