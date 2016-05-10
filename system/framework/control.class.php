@@ -608,8 +608,8 @@ class control
 
             if(!empty($themeHooks))
             {
-                $jsFun  = "get{$theme}CSS";
-                $cssFun = "get{$theme}JS";
+                $jsFun  = "get{$theme}JS";
+                $cssFun = "get{$theme}CSS";
                 if(function_exists($jsFun))  $importedJS = $jsFun();
                 if(function_exists($cssFun)) $importedCSS = $cssFun();
 
