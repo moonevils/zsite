@@ -60,10 +60,6 @@ $(document).ready(function()
         else $('#navbar .dropdown').css('position', 'relative');
     }
 
-    /* Remove empty headNav */
-    var headNav = $('#headNav');
-    if(!headNav.find('nav a').length) headNav.addClass('hide');
-
     /* set right docker */
     var $dockerBtn = $('#rightDockerBtn');
     $dockerBtn.popover({container: 'body', html:true, trigger:'manual', tipId: 'dockerPopover'}).click(function(e)
