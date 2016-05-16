@@ -206,10 +206,11 @@ class productModel extends model
      *
      * @param array      $categories
      * @param int        $count
+     * @param bool       $image
      * @access public
      * @return array
      */
-    public function getHot($categories, $count)
+    public function getHot($categories, $count, $image = false)
     {
         $family = array();
         $this->loadModel('tree');
@@ -219,7 +220,7 @@ class productModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($family, 'views_desc', $pager);
+        return $this->getList($family, 'views_desc', $pager, $image);
     }
 
     /**
