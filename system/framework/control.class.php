@@ -843,14 +843,11 @@ class control
     public function loadThemeHooks()
     {
         $theme     = $this->config->template->{$this->device}->theme;
-        $hookPath  = $this->app->getWwwRoot() . 'theme/' . $this->config->template->{$this->device}->name. DS . $theme . DS;
+        $hookPath  = $this->app->getWwwRoot() . 'theme' . DS . $this->config->template->{$this->device}->name. DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
 
         if(empty($hookFiles)) return array();
-        foreach($hookFiles as $file)
-        {
-            include $file;
-        }
+        foreach($hookFiles as $file) include $file;
         return $hookFiles;
     }
 
