@@ -562,6 +562,7 @@ class wechatModel extends model
         $pager = new pager($recTotal = 0, $recPerPage = $content->limit, 1);
 
         $articles = $this->loadModel('article')->getList('article', $content->category, $orderByList[$content->block], $pager);
+        $articles = $this->article->processImages($articles, 'article');
 
         $response = new stdclass();
         $response->msgType = 'news';
