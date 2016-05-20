@@ -260,7 +260,7 @@ class commonModel extends model
 
         /* Get authorize again. */
         $user = $this->app->user;
-        $user->rights = $this->loadModel('user')->authorize($user->account);
+        $user->rights = $this->loadModel('user')->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
         if(commonModel::hasPriv($module, $method)) return true;
