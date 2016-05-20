@@ -31,7 +31,7 @@ js::execute($product->js);
 <?php $common->printPositionBar($category, $product);?>
 <div class='row blocks' data-region='product_view-topBanner'><?php $this->block->printRegion($layouts, 'product_view', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='product_view'>
-  <?php if(isset($layouts['product_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
+  <?php if(!empty($layouts['product_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
   <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
   <?php else:?>
   <div class='col-md-12'>
@@ -182,7 +182,7 @@ js::execute($product->js);
     </div>
     <?php endif;?>
   </div>
-  <?php if(isset($layouts['product_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
+  <?php if(!empty($layouts['product_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
   <div class='col-md-<?php echo $sideGrid ?> col-side'>
     <side class='page-side blocks' data-region='product_view-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
