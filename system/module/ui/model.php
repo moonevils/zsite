@@ -152,6 +152,7 @@ class uiModel extends model
         if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $this->config->site->code . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
         if(!$this->config->multi) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
     }
+
     /**
      * check a theme is imported.
      * 
