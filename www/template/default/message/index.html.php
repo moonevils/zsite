@@ -16,7 +16,7 @@
 <?php $common->printPositionBar();?>
 <div class='row blocks' data-region='message_index-topBanner'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='message_index'>
-  <?php if(isset($layouts['message_index']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
+  <?php if(!empty($layouts['message_index']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
   <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
   <?php else:?>
   <div class="col-md-12">
@@ -116,7 +116,7 @@
     </div>
     <div class='row blocks' data-region='message_index-bottom'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
   </div>
-  <?php if(isset($layouts['message_index']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
+  <?php if(!empty($layouts['message_index']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
   <div class='col-md-<?php echo $sideGrid ?> col-side'>
     <div class='nav'>
     <a href='#commentForm' class='btn btn-primary btn-lg w-p100'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
