@@ -29,7 +29,7 @@ $lang->file->source        = 'Source';
 $lang->file->sourceList    = 'Source list';
 $lang->file->uploadSource  = 'Upload source';
 $lang->file->sourceURI     = 'URL';
-$lang->file->sourceDelete  = 'Delete source';
+$lang->file->deleteSource  = 'Delete source';
 $lang->file->editSource    = 'Edit source';
 $lang->file->selectImage   = 'Select source';
 
