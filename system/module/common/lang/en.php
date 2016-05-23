@@ -40,6 +40,7 @@ $lang->agreement      = "I Agree to the <a href='http://zpl.pub/page/zplv12.html
 $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>ChanzhiEPS %s</a></span>";
 $lang->newVersion     = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
+$lang->execInfo       = "<div id='execInfoBar' class='text-right'>SQL query : <b>%s</b> times, memory useage : <b>%s</b> bites, PHP executed time : <b>%s</b> seconds。 <button type='button' class='close text-danger' data-dismiss='alert' aria-hidden='true'>×</button> </div>";
 
 /* Global lang items. */
 $lang->home             = 'Home';
