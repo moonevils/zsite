@@ -1696,7 +1696,8 @@ class router
         if($this->config->cache->type != 'close') $this->clearCache();
         
         /* If debug on, save sql lines. */
-        if(!empty($this->config->debug)) $this->saveSQL();
+        if($this->config->debug) $this->saveSQL();
+        if(RUN_MODE == 'front' and $this->config->debug and !helper::isAjaxRequest()) $this->getExecInfo();
 
         /* If any error occers, save it. */
         if(!function_exists('error_get_last')) return;
@@ -1737,7 +1738,8 @@ class router
             foreach($pages as $page) 
             {
                 if(empty($page)) continue;
-                $this->cache->clear("page/{$page}*");
+                $key = 'page' . DS . $this->device . $page . '*';
+                $this->cache->clear($key);
             }
         }
         return true;
@@ -1765,6 +1767,24 @@ class router
 
         /* Trigger it. */
         trigger_error($log, $exit ? E_USER_ERROR : E_USER_WARNING);
+    }
+
+    /**
+     * Get exec infomation.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getExecInfo()
+    {
+        list($second, $millisecond) = explode(' ', STARTED_TIME);
+        $started = (float) $second + (float) $millisecond;
+        list($second, $millisecond) = explode(' ', microtime());
+        $ended = (float) $second + (float) $millisecond;
+
+        $execTime = round($ended - $started, 2);
+        $memoryUsage = memory_get_peak_usage();
+        printf($this->lang->execInfo, count(dao::$querys), $memoryUsage, $execTime);
     }
 
     /**
