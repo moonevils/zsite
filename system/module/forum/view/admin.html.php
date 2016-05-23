@@ -60,7 +60,7 @@
         <td><?php if($thread->status != 'wait')echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->displayList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->displayList['normal'] . '</span>';?></td>
         <td>
           <?php
-          if($this->config->forum->postReview == 'open' and $thread->status == 'wait')
+          if($this->config->forum->postReview == 'open' and ($thread->status == 'wait' or $thread->status == ''))
           {
               commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'");
           }
