@@ -14,7 +14,7 @@
 /* Decode the content and get pages. */
 $content = json_decode($block->content);
 $pages   = $this->loadModel('article')->getPageList($content->limit);
-if(isset($content->image)) $pages = $this->article->processImages($pages, 'page');
+if(isset($content->image)) $pages = $this->loadModel('file')->processImages($pages, 'page');
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
