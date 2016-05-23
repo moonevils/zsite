@@ -140,7 +140,7 @@ KindEditor.lang({
 	'image.rightAlign' : '向右對齊',
 	'image.imgTitle' : '影像說明',
 	'image.upload' : '瀏覽...',
-	'image.viewServer' : '瀏覽...',
+	'image.viewServer' : '圖片空間',
 	'multiimage.uploadDesc' : 'Allows users to upload <%=uploadLimit%> images, single image size not exceeding <%=sizeLimit%>',
 	'multiimage.startUpload' : 'Start upload',
 	'multiimage.clearAll' : 'Clear all',
