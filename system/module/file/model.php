@@ -99,6 +99,31 @@ class fileModel extends model
     }
 
     /**
+     * Process images of object list.
+     * 
+     * @param  array     $objects 
+     * @access public
+     * @return array
+     */
+    public function processImages($objects, $type)
+    {
+        if(empty($objects)) return $objects;
+        $idList = array_keys($objects);
+        $images = $this->loadModel('file')->getByObject($type, $idList, $isImage = true);
+
+        foreach($objects as $object)
+        {
+            if(empty($images[$object->id])) continue;
+
+            $object->image = new stdclass();
+            $object->image->list    = $images[$object->id];
+            $object->image->primary = $object->image->list[0];
+        }
+
+        return $objects;
+    }
+
+    /**
      * Get source list. 
      * 
      * @param  string $type 
