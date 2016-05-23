@@ -53,7 +53,10 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->requestType;?></th> 
-          <td><?php echo html::select('requestType', $lang->site->requestTypeList, isset($this->config->site->requestType) ? $this->config->site->requestType : $this->config->frontRequestType, "class='form-control'");?></td><td></td>
+          <td>
+            <?php echo html::select('requestType', $lang->site->requestTypeList, isset($this->config->site->requestType) ? $this->config->site->requestType : $this->config->frontRequestType, "class='form-control'");?>
+          </td>
+          <td><span id='requestTypeTip' class='hide text-important'><?php echo $lang->site->requestTypeTip?></span></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->name;?></th> 

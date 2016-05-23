@@ -205,7 +205,7 @@ $lang->site->cdnTip           = 'CDN source take place when debug is closed, Con
 $lang->site->cdnSiteTip       = 'Correct url shoule be %s';
 $lang->site->defaultTip       = 'Under maintenance.';
 $lang->site->icpTip           = 'For Mainland China site only';
-$lang->site->requestTypeTip   = 'Your server host is not compatible this request type.';
+$lang->site->requestTypeTip   = 'We detected that your can use PATH_INFO to provide better url.';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
