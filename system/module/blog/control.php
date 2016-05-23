@@ -30,7 +30,7 @@ class blog extends control
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'blog') : '';
         $articles   = $this->loadModel('article')->getList('blog', $families, 'addedDate_desc', $pager);
-        $articles   = $this->article->processImages($articles, 'blog');
+        $articles   = $this->loadModel('file')->processImages($articles, 'blog');
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'blog');
 
         $this->view->title      = $this->lang->blog->common;
