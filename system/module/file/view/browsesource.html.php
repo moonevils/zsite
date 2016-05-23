@@ -49,7 +49,7 @@
             $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
             $imageHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $imageHtml .= "<div class='file-actions'>";
-            $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
+            $imageHtml .= html::a(helper::createLink('file', 'deletesource', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $imageHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-pencil'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
             $imageHtml .= '</div>';
             $imageHtml .= '</li>';
@@ -61,7 +61,7 @@
             $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
             $fileHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $fileHtml .= "<span class='file-actions'>";
-            $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
+            $fileHtml .= html::a(helper::createLink('file', 'deletesource', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $fileHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
             $fileHtml .= '</span>';
             $fileHtml .= '</li>';
@@ -110,7 +110,7 @@
           <td class='text-center'>
             <?php
             commonModel::printLink('file', 'editsource',   "id=$file->id", $lang->edit, "data-toggle='modal'");
-            commonModel::printLink('file', 'sourcedelete', "id=$file->id", $lang->delete, "class='deleter'");
+            commonModel::printLink('file', 'deletesource', "id=$file->id", $lang->delete, "class='deleter'");
             ?>
           </td>
         </tr>

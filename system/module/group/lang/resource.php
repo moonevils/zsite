@@ -253,7 +253,7 @@ $lang->resource->ui->deleteLogo    = 'deleteLogo';
 $lang->resource->ui->others        = 'others';
 $lang->resource->ui->setcode       = 'setCode';
 $lang->resource->ui->browseSource  = array('module' => 'file', 'method' => 'sourceList');
-$lang->resource->ui->sourceDelete  = array('module' => 'file', 'method' => 'sourceDelete');
+$lang->resource->ui->deleteSource  = array('module' => 'file', 'method' => 'deleteSource');
 $lang->resource->ui->editSource    = array('module' => 'file', 'method' => 'editSource');
 $lang->resource->ui->selectImage   = array('module' => 'file', 'method' => 'selectImage');
 
