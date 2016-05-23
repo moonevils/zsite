@@ -1783,8 +1783,9 @@ class router
         $ended = (float) $second + (float) $millisecond;
 
         $execTime = round($ended - $started, 2);
-        $memoryUsage = memory_get_peak_usage();
-        printf($this->lang->execInfo, count(dao::$querys), $memoryUsage, $execTime);
+        $memoryUsage = memory_get_peak_usage(true);
+        $memoryUsage = number_format(round($memoryUsage / 1024 / 1024, 2), 2);
+        printf($this->lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
     }
 
     /**
