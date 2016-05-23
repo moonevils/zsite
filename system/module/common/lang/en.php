@@ -14,6 +14,7 @@ $lang->colon      = ' : ';
 $lang->prev       = '‹';
 $lang->next       = '›';
 $lang->equal      = '=';
+$lang->percent    = '%';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
@@ -59,14 +60,15 @@ $lang->login            = 'Login';
 $lang->account          = 'Account';
 $lang->password         = 'Password';
 $lang->changePassword   = 'Change password';
-$lang->editEmail        = "Email setting";
-$lang->securityQuestion = 'Security question';
+$lang->setEmail         = "Email setting";
+$lang->setSecurity      = 'Set security question';
 $lang->forgotPassword   = 'Forgot password?';
 $lang->currentPos       = 'Positon';
 $lang->categoryMenu     = 'Categories';
 $lang->wechatTip        = 'Wechat';
 $lang->qrcodeTip        = 'Mobile';
 $lang->language         = 'Language';
+$lang->custom           = 'custom';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
@@ -78,11 +80,11 @@ $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
 $lang->addToBlacklist = 'Add To Blacklist';
-$lang->edit           = 'Edit';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
 $lang->more           = 'More';
+$lang->refresh        = 'Refresh';
 $lang->actions        = 'Actions';
 $lang->feature        = 'Feature';
 $lang->year           = 'Year';
@@ -151,7 +153,7 @@ $lang->groups->content  = array('title' => 'Content', 'link' => 'article|admin|t
 $lang->groups->shop     = array('title' => 'Shop', 'link' => 'order|admin|',                  'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => 'Member', 'link' => 'user|admin|',                 'icon' => 'group');
 $lang->groups->promote  = array('title' => 'Promote', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
-$lang->groups->design   = array('title' => 'Designer', 'link' => 'ui|settemplate|',           'icon' => 'dashboard');
+$lang->groups->design   = array('title' => 'Designer', 'link' => 'ui|settemplate|',           'icon' => 'paint-brush');
 $lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',               'icon' => 'cloud');
 $lang->groups->setting  = array('title' => 'Setting', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
@@ -163,37 +165,37 @@ $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->book     = 'Book|book|admin|';
 $lang->menu->page     = 'Page|article|admin|type=page';
 
-$lang->menu->product      = 'Product|product|admin|';
 $lang->menu->order        = 'Order|order|admin|';
-$lang->menu->express      = 'Express|tree|browse|type=express';
+$lang->menu->product      = 'Product|product|admin|';
 $lang->menu->orderSetting = 'Setting|product|setting|';
 
-$lang->menu->user         = 'USer|user|admin|';
+$lang->menu->user         = 'User|user|admin|';
 $lang->menu->message      = 'Message|message|admin|type=message';
 $lang->menu->comment      = 'Comment|message|admin|type=comment';
 $lang->menu->reply        = 'Message Reply|message|admin|type=reply';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Thread Reply|reply|admin|';
-$lang->menu->contribution = 'Contribution|article|admin|type=contribution&tab=user';
+$lang->menu->submittion   = 'Submittion|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = 'Stat|stat|traffic|';
-$lang->menu->tag   = 'Tags|tag|admin|';
+$lang->menu->tag   = 'Keywords|tag|admin|';
 $lang->menu->links = 'Links|links|admin|';
 
-$lang->menu->ui       = 'Ui|ui|settemplate|';
+$lang->menu->ui       = 'UI|ui|settemplate|';
 $lang->menu->logo     = 'Logo|ui|setlogo|';
 $lang->menu->nav      = 'Nav|nav|admin|';
 $lang->menu->block    = 'Block|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
-$lang->menu->others   = "Seeing|ui|others|";
+$lang->menu->others   = "Setting|ui|others|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i> Visual design|visual|index|";
+$lang->menu->edit     = "Edit template|ui|edittemplate|";
 
 $lang->menu->site     = 'site|site|setbasic|';
 $lang->menu->security = 'Security|site|setsecurity|';
 
-$lang->menu->package    = 'Extension|package|browse|';
+$lang->menu->package    = 'Package|package|browse|';
 $lang->menu->themestore = 'Theme stroe|ui|themestore|';
 
 /* Menu groups setting. */
@@ -205,6 +207,7 @@ $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
 $lang->menuGroups->score   = 'site';
+$lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -223,6 +226,11 @@ $lang->page->menu->browse = array('link' => 'List|article|admin|type=page', 'ali
 
 $lang->express = new stdclass();
 
+$lang->orderSetting = new stdclass();
+$lang->orderSetting->menu = new stdclass();
+$lang->orderSetting->menu->orderSetting = 'Setting|product|setting|';
+$lang->orderSetting->menu->express      = 'Express|tree|browse|type=express';
+
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -234,28 +242,24 @@ $lang->ui = new stdclass();
 /* Menu of theme. */
 $lang->theme = new stdclass();
 $lang->theme->menu = new stdclass();
-$lang->theme->menu->theme   = 'Themes|ui|settemplate|';
+$lang->theme->menu->theme   = 'Theme|ui|settemplate|';
 $lang->theme->menu->layout  = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 $lang->theme->menu->custom  = 'Appearance|ui|customtheme|';
-$lang->theme->menu->code    = 'Codes|ui|setcode|';
-$lang->theme->menu->source  = 'Sources|file|browsesource|';
+$lang->theme->menu->code    = 'Code|ui|setcode|';
+$lang->theme->menu->source  = 'Source|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
-$lang->user->menu = new stdclass();
-$lang->user->menu->all    = 'All Users|user|admin|';
-$lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
-$lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
-$lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
 
+/* Menu of message module. */
 $lang->message = new stdclass();
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
-$lang->forum->menu->browse  = 'Threads|forum|admin|';
-$lang->forum->menu->reply   = 'Replies|reply|admin|';
-$lang->forum->menu->tree    = 'Boards|tree|browse|type=forum';
+$lang->forum->menu->browse  = 'Thread|forum|admin|';
+$lang->forum->menu->reply   = 'Reply|reply|admin|';
+$lang->forum->menu->tree    = 'Board|tree|browse|type=forum';
 $lang->forum->menu->update  = 'Update|forum|update|';
 $lang->forum->menu->setting = 'Forum Settings|forum|setting|';
 
@@ -263,7 +267,10 @@ $lang->forum->menu->setting = 'Forum Settings|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = 'Basic|site|setbasic|';
+$lang->site->menu->domain   = 'Domain Setting|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN Setting|site|setcdn|';
+$lang->site->menu->cache    = 'Cache Setting|site|setcache|';
+$lang->site->menu->home     = 'Home Menu|site|sethomemenu|';
 $lang->site->menu->company  = 'Company|company|setbasic|';
 $lang->site->menu->contact  = 'Contact|company|setcontact|';
 $lang->site->menu->oauth    = 'OAuth|site|setoauth|';
@@ -271,6 +278,8 @@ $lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'de
 $lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search   = 'Full text search|search|buildindex|';
 $lang->site->menu->score    = 'Score Rule|score|setcounts|';
+$lang->site->menu->backup   = 'backup & restore|backup|index|';
+//$lang->site->menu->api      = 'API Integration|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -288,6 +297,9 @@ $lang->security->menu->log       = 'Login log|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
+
+/* Menu of score module. */
+$lang->score->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -324,13 +336,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = 'Summary|stat|traffic|';
-$lang->stat->menu->from     = 'Source Stats|stat|from|';
-$lang->stat->menu->search   = 'Search Engine Stats|stat|search|';
-$lang->stat->menu->keywords = 'Keyswords Stats|stat|keywords|';
-$lang->stat->menu->domains  = 'Antecedents Domains|stat|domainlist|';
-$lang->stat->menu->client   = 'Client Stats|stat|client|type=browser';
-$lang->stat->menu->page     = 'Page Views Ranking|stat|page|';
+$lang->stat->menu->traffic  = 'Basic|stat|traffic|';
+$lang->stat->menu->from     = 'Source|stat|from|';
+$lang->stat->menu->domains  = array('link' => 'Domain|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
+$lang->stat->menu->search   = 'Engine|stat|search|';
+$lang->stat->menu->keywords = 'Keywords|stat|keywords|';
+$lang->stat->menu->client   = 'Client|stat|client|type=browser';
+$lang->stat->menu->page     = 'Top|stat|page|';
 $lang->stat->menu->setStat  = 'Setting|stat|setting|';
 
 /* Error info. */

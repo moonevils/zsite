@@ -1,6 +1,3 @@
-// https://github.com/dankogai/js-base64
-(function(global){"use strict";var _Base64=global.Base64;var version="2.1.9";var buffer;if(typeof module!=="undefined"&&module.exports){try{buffer=require("buffer").Buffer}catch(err){}}var b64chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";var b64tab=function(bin){var t={};for(var i=0,l=bin.length;i<l;i++)t[bin.charAt(i)]=i;return t}(b64chars);var fromCharCode=String.fromCharCode;var cb_utob=function(c){if(c.length<2){var cc=c.charCodeAt(0);return cc<128?c:cc<2048?fromCharCode(192|cc>>>6)+fromCharCode(128|cc&63):fromCharCode(224|cc>>>12&15)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}else{var cc=65536+(c.charCodeAt(0)-55296)*1024+(c.charCodeAt(1)-56320);return fromCharCode(240|cc>>>18&7)+fromCharCode(128|cc>>>12&63)+fromCharCode(128|cc>>>6&63)+fromCharCode(128|cc&63)}};var re_utob=/[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g;var utob=function(u){return u.replace(re_utob,cb_utob)};var cb_encode=function(ccc){var padlen=[0,2,1][ccc.length%3],ord=ccc.charCodeAt(0)<<16|(ccc.length>1?ccc.charCodeAt(1):0)<<8|(ccc.length>2?ccc.charCodeAt(2):0),chars=[b64chars.charAt(ord>>>18),b64chars.charAt(ord>>>12&63),padlen>=2?"=":b64chars.charAt(ord>>>6&63),padlen>=1?"=":b64chars.charAt(ord&63)];return chars.join("")};var btoa=global.btoa?function(b){return global.btoa(b)}:function(b){return b.replace(/[\s\S]{1,3}/g,cb_encode)};var _encode=buffer?function(u){return(u.constructor===buffer.constructor?u:new buffer(u)).toString("base64")}:function(u){return btoa(utob(u))};var encode=function(u,urisafe){return!urisafe?_encode(String(u)):_encode(String(u)).replace(/[+\/]/g,function(m0){return m0=="+"?"-":"_"}).replace(/=/g,"")};var encodeURI=function(u){return encode(u,true)};var re_btou=new RegExp(["[À-ß][-¿]","[à-ï][-¿]{2}","[ð-÷][-¿]{3}"].join("|"),"g");var cb_btou=function(cccc){switch(cccc.length){case 4:var cp=(7&cccc.charCodeAt(0))<<18|(63&cccc.charCodeAt(1))<<12|(63&cccc.charCodeAt(2))<<6|63&cccc.charCodeAt(3),offset=cp-65536;return fromCharCode((offset>>>10)+55296)+fromCharCode((offset&1023)+56320);case 3:return fromCharCode((15&cccc.charCodeAt(0))<<12|(63&cccc.charCodeAt(1))<<6|63&cccc.charCodeAt(2));default:return fromCharCode((31&cccc.charCodeAt(0))<<6|63&cccc.charCodeAt(1))}};var btou=function(b){return b.replace(re_btou,cb_btou)};var cb_decode=function(cccc){var len=cccc.length,padlen=len%4,n=(len>0?b64tab[cccc.charAt(0)]<<18:0)|(len>1?b64tab[cccc.charAt(1)]<<12:0)|(len>2?b64tab[cccc.charAt(2)]<<6:0)|(len>3?b64tab[cccc.charAt(3)]:0),chars=[fromCharCode(n>>>16),fromCharCode(n>>>8&255),fromCharCode(n&255)];chars.length-=[0,0,2,1][padlen];return chars.join("")};var atob=global.atob?function(a){return global.atob(a)}:function(a){return a.replace(/[\s\S]{1,4}/g,cb_decode)};var _decode=buffer?function(a){return(a.constructor===buffer.constructor?a:new buffer(a,"base64")).toString()}:function(a){return btou(atob(a))};var decode=function(a){return _decode(String(a).replace(/[-_]/g,function(m0){return m0=="-"?"+":"/"}).replace(/[^A-Za-z0-9\+\/]/g,""))};var noConflict=function(){var Base64=global.Base64;global.Base64=_Base64;return Base64};global.Base64={VERSION:version,atob:atob,btoa:btoa,fromBase64:decode,toBase64:encode,utob:utob,encode:encode,encodeURI:encodeURI,btou:btou,decode:decode,noConflict:noConflict};if(typeof Object.defineProperty==="function"){var noEnum=function(v){return{value:v,enumerable:false,writable:true,configurable:true}};global.Base64.extendString=function(){Object.defineProperty(String.prototype,"fromBase64",noEnum(function(){return decode(this)}));Object.defineProperty(String.prototype,"toBase64",noEnum(function(urisafe){return encode(this,urisafe)}));Object.defineProperty(String.prototype,"toBase64URI",noEnum(function(){return encode(this,true)}))}}if(global["Meteor"]){Base64=global.Base64}})(this);
-
 (function(window, $)
 {
     'use strict';
@@ -12,9 +9,11 @@
     var isInPreview = false;
     var lang = $.extend(window.v.visualLang, window.v.lang, {blocks: window.v.visualBlocks});
     var visualPageUrl = visualPage.src;
+    if(DEBUG) console.log('visualPageUrl =', visualPageUrl);
     var visuals = window.v.visuals;
     var visualsLang = window.v.visualsLang;
     var themesConfig;
+    var clientLang = $.zui.clientLang().replace('zh-', '');
     var DEFAULT_ACTIONS_CONFIG =
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
@@ -98,7 +97,7 @@
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
-        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
+        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, 'l=' + clientLang + '&' + (action.params || setting.params || '').format(options));
     };
 
     var openModal = function(url, options)
@@ -114,7 +113,7 @@
             icon               : 'pencil',
             title              : '',
             mergeOptions       : true,
-            hidden             : function()
+            hidden             : function(e)
             {
                 if(options.dismiss === 'update')
                 {
@@ -294,7 +293,7 @@
                     loaded: function(e)
                     {
                         var modal$ = e.jQuery;
-                        modal$.setAjaxForm('.ve-form', function(response)
+                        if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                         {
                             $.closeModal();
                             if($.updateVisualArea) $.updateVisualArea($carousel, response);
@@ -365,6 +364,7 @@
         }
 
         $veMain.data('ve', name).data('veInit', true);
+
         var setting = visuals[name];
 
         if($.isPlainObject(setting))
@@ -508,7 +508,7 @@
                 loaded: function(e)
                 {
                     var modal$ = e.jQuery;
-                    modal$.setAjaxForm('.ve-form', function(response)
+                    if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                     {
                         addBlock(page, region, response.blockID, parent);
                     });
@@ -529,7 +529,7 @@
             var $blocksHolder = $$(this);
             var withGrid = $blocksHolder.hasClass('row');
 
-            $blocksHolder.find('.block, .panel-block, .col-row > .row').each(function()
+            $blocksHolder.find('.block, .panel-block, .col-row > .row, [data-ve="block"]').each(function()
             {
                 var $ve = $$(this);
                 if($ve.data('veInit')) return;
@@ -657,6 +657,9 @@
             if(isBlocks) setTimeout(function()
             {
                 var $area = $$(selector);
+                $area.find('img.lazy').each(function() {
+                    $$.lazyload(this);
+                });
                 tidyBlocks($area);
                 $$('.tooltip').remove();
             }, 100);
@@ -664,7 +667,7 @@
         });
     };
 
-    var openCommonActionModal = function(ve, actionName)
+    var handleCommonAction = function(ve, actionName)
     {
         actionName = actionName || 'edit';
         var $ve = null;
@@ -682,6 +685,13 @@
         var setting = visuals[name];
         var options = getVisualOptions($ve || name);
         var action = setting.actions[actionName];
+
+        if(action.type === 'alert')
+        {
+            bootbox.alert(action.alert);
+            return;
+        }
+
         var url = createActionLink(setting, action, options);
         openModal(url,
         {
@@ -691,7 +701,7 @@
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
-                modal$.setAjaxForm('.ve-form', function(response)
+                if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                 {
                     $.closeModal();
                     updateVisualArea($ve, response);
@@ -744,6 +754,7 @@
     {
         $.each(visuals, function(name, setting)
         {
+            if(name === 'block') return;
             $$('[data-ve="' + name + '"], #' + name).each(initVisualArea);
         });
 
@@ -755,7 +766,7 @@
         // load visual edit style
         if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
-        themesConfig = $$('#themeStyle').data();
+        themesConfig = $$.iframe.v.theme;
         $('body').addClass('ve-device-' + window.v.device);
         if(themesConfig.device != window.v.device) reloadPage();
 
@@ -792,7 +803,7 @@
             }
             else if(actionName !== 'move')
             {
-                openCommonActionModal($ve || name, actionName);
+                handleCommonAction($ve || name, actionName);
             }
             e.stopPropagation();
             return false;
@@ -914,7 +925,7 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
-                var url = createLink('visual', 'index', 'referer=' + Base64.encode(visualPageUrl));
+                var url = createLink('visual', 'index', 'l=' + clientLang + '&' + 'referer=' + Base64.encode(visualPageUrl));
                 window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
@@ -923,14 +934,27 @@
             if(iframe.jQuery)
             {
                 window.$$ = iframe.jQuery;
-                initVisualPage();
+                $$.iframe = iframe;
+                if(!$$.fn.sortable) loadJs('zuiAdmin', window.v.zuiAdminJsUrl, iframeDocument, initVisualPage);
+                else initVisualPage();
             }
             else
             {
                 loadJs('jQuery', window.v.jQueryUrl, iframeDocument, function()
                 {
                     window.$$ = iframe.jQuery.noConflict();
-                    loadJs('zui', window.v.zuiJsUrl, iframeDocument, initVisualPage);
+                    loadJs('zui', window.v.zuiJsUrl, iframeDocument, function()
+                    {
+                        loadJs('zuiAdmin', window.v.zuiAdminJsUrl, iframeDocument, initVisualPage);
+                    });
+                    $$.iframe = iframe;
+                    if(iframe.Zepto && iframe.Zepto.fn.lazyload)
+                    {
+                        $$.lazyload = function(img)
+                        {
+                            iframe.Zepto(img).lazyload();
+                        };
+                    }
                 });
             }
         }
@@ -981,7 +1005,7 @@
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
-                modal$.setAjaxForm('.ve-form', function(response)
+                if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
                 {
                     $.closeModal();
                     var $style = $$('#themeStyle');
@@ -993,7 +1017,7 @@
         return false;
     });
 
-    $.updateTheme = function()
+    $.updateTheme = function(theme)
     {
         $.ajax(
         {
@@ -1005,7 +1029,7 @@
                 var $page = $(response);
                 var $style = $page.filter('link#themeStyle');
                 window.$page = $page;
-                themesConfig = $style.data();
+                themesConfig.theme = theme;
                 $$('#themeStyle').attr(
                 {
                     href: $style.attr('href'),

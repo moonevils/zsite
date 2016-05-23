@@ -9,7 +9,7 @@
  * @version     $Id: zh-tw.php 4719 2013-05-03 02:20:28Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhico.com
  */
-$lang->group->common             = '權限分組';
+$lang->group->common             = '分組權限';
 $lang->group->allGroups          = '所有權限';
 $lang->group->browse             = '瀏覽分組';
 $lang->group->create             = '新增分組';

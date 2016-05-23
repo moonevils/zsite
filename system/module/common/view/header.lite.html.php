@@ -2,7 +2,7 @@
 <?php
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
+$themeRoot = $webRoot . "theme/default/";
 ?>
 <!DOCTYPE html>
 <html lang='<?php echo $app->getClientLang();?>'>
@@ -29,23 +29,31 @@ $themeRoot = $webRoot . "template/default/theme/";
   {
       js::import($jsRoot . 'jquery/min.js');
       js::import($jsRoot . 'zui/min.js');
+      js::import($jsRoot . 'zui/admin.min.js');
       js::import($jsRoot . 'chanzhi.js');
-      js::import($jsRoot . 'jquery/treeview/min.js');
       js::import($jsRoot . 'my.js');
       js::import($jsRoot . 'my.admin.js');
 
       css::import($webRoot . 'zui/css/min.css');
-      css::import($jsRoot    . 'jquery/treeview/min.css');
+      css::import($webRoot . 'zui/css/admin.min.css');
       css::import($themeRoot . 'default/admin.css');
   }
   else
   {
       $jsRoot    = $webRoot . "js/";
-      $themeRoot = $webRoot . "template/default/theme/";
+      $themeRoot = $webRoot . "theme/default/";
       if($this->config->cdn->open == 'open')
       {
-          css::import($this->config->cdn->host . $this->config->version . '/template/default/theme/default/all.admin.css');
-          js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js');
+          if(!empty($this->config->cdn->site))
+          {
+              css::import(rtrim($this->config->cdn->site, '/') . '/theme/default/default/all.admin.css');
+              js::import(rtrim($this->config->cdn->site, '/')  . '/js/all.admin.js');
+          }
+          else
+          {
+              css::import($this->config->cdn->host . $this->config->version . '/theme/default/default/all.admin.css', '', $version = false);
+              js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $version = false);
+          }
       }
       else
       {

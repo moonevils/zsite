@@ -1,3 +1,11 @@
+$(document).ready(function()
+{
+    $("#langs li > a").click(function() 
+    {
+        selectLang($(this).data('value'));
+    });
+})
+
 /* Keep session random valid. */
 needPing = true;
 $('#submit').click(function()
@@ -44,6 +52,7 @@ $('#submit').click(function()
 
 function showFormError(text)
 {
+    if(text == '') return true;
     var error = $('#formError').text(text);
     var parent = error.closest('.form-group');
     if(parent.length) parent.show();

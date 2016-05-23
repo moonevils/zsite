@@ -16,13 +16,14 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `editedDate` datetime NOT NULL,
   `status` varchar(20) NOT NULL DEFAULT 'normal',
   `type` varchar(30) NOT NULL,
-  `contribution` int(1) NOT NULL DEFAULT '0',
+  `submittion` enum('0', '1', '2', '3') NOT NULL DEFAULT '0',
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,
   `link` varchar(255) NOT NULL,
   `css` text NOT NULL,
   `js` text NOT NULL,
+  `onlyBody` enum('0', '1') NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
@@ -88,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `type` (`type`),
   KEY `lang` (`lang`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
@@ -202,7 +204,8 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
-  KEY `object` (`objectType`,`objectID`)
+  KEY `object` (`objectType`,`objectID`),
+  KEY `extension` (`extension`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_group`;
@@ -212,7 +215,8 @@ CREATE TABLE IF NOT EXISTS `eps_group` (
   `role` char(30) NOT NULL default '',
   `desc` char(255) NOT NULL default '',
   `lang` char(30) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_grouppriv`;
@@ -230,10 +234,11 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
   `plan` char(30) NOT NULL DEFAULT 'default',
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
+  `object` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
   `import` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `layout` (`template`,`plan`,`page`,`region`,`lang`)
+  UNIQUE KEY `layout` (`template`,`plan`,`page`,`region`,`object`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_message`;
@@ -242,10 +247,11 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   `type` char(20) NOT NULL,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `account` char(30) DEFAULT NULL,
+  `account` char(30) NOT NULL,
   `from` char(30) NOT NULL,
   `to` char(30) NOT NULL,
   `phone` char(30) NOT NULL,
+  `mobile` char(11) NOT NULL,
   `email` varchar(90) NOT NULL,
   `qq` char(30) NOT NULL,
   `date` datetime NOT NULL,
@@ -269,7 +275,8 @@ CREATE TABLE IF NOT EXISTS `eps_oauth` (
   `provider` varchar(30) NOT NULL,
   `openID` varchar(60) NOT NULL,
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `account` (`account`,`provider`,`openID`)
+  UNIQUE KEY `account` (`account`,`provider`,`openID`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_product`;
@@ -315,7 +322,8 @@ CREATE TABLE IF NOT EXISTS `eps_relation` (
   `id` mediumint(9) NOT NULL,
   `category` smallint(5) NOT NULL,
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `relation` (`type`,`id`,`category`)
+  UNIQUE KEY `relation` (`type`,`id`,`category`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_reply`;
@@ -449,7 +457,8 @@ CREATE TABLE IF NOT EXISTS `eps_statregion`(
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `region` (`country`, `province`, `city`),
-  KEY `time` (`timeType`, `timeValue`)
+  KEY `time` (`timeType`, `timeValue`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_tag`;
@@ -547,7 +556,8 @@ CREATE TABLE IF NOT EXISTS `eps_usergroup` (
   `account` char(30) NOT NULL default '',
   `group` mediumint(8) unsigned NOT NULL default '0',
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `account` (`account`,`group`)
+  UNIQUE KEY `account` (`account`,`group`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_log`;
@@ -562,7 +572,8 @@ CREATE TABLE IF NOT EXISTS `eps_log` (
   `ext` text NOT NULL,
   `type` varchar(30) NOT NULL DEFAULT 'adminlogin',
   `lang` char(30) NOT NULL DEFAULT 'all',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_public`;
@@ -635,6 +646,7 @@ CREATE TABLE IF NOT EXISTS `eps_score` (
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
   KEY `method` (`method`),
+  KEY `lang` (`lang`),
   KEY `objectType` (`objectType`),
   KEY `objectID` (`objectID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
@@ -682,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `deliveriedDate` datetime NOT NULL,
   `deliveriedBy` char(30) NOT NULL,
   `deliveryStatus` enum('not_send', 'send', 'confirmed') NOT NULL DEFAULT 'not_send',
-  `express` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `express` char(30) NOT NULL,
   `waybill` char(30) NOT NULL,
   `confirmedDate` datetime NOT NULL,
   `finishedDate` datetime NOT NULL,
@@ -694,7 +706,8 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   KEY `account` (`account`),
   KEY `status` (`status`),
   KEY `createdDate` (`createdDate`),
-  KEY `deliveriedDate` (`deliveriedDate`)
+  KEY `deliveriedDate` (`deliveriedDate`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_order_product`;
@@ -708,7 +721,8 @@ CREATE TABLE IF NOT EXISTS `eps_order_product` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `orderID` (`orderID`),
-  KEY `productID` (`productID`)
+  KEY `productID` (`productID`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_cart`;
@@ -719,7 +733,8 @@ CREATE TABLE IF NOT EXISTS `eps_cart` (
   `count` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `account` (`account`)
+  KEY `account` (`account`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_address`;
@@ -732,7 +747,8 @@ CREATE TABLE IF NOT EXISTS `eps_address` (
   `zipcode` char(6) NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `account` (`account`)
+  KEY `account` (`account`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_blacklist`;
@@ -744,7 +760,8 @@ CREATE TABLE IF NOT EXISTS  `eps_blacklist` (
   `times` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   UNIQUE KEY `identity` (`type`, `identity`, `lang`),
-  KEY `expiredDate` (`expiredDate`)
+  KEY `expiredDate` (`expiredDate`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_operationlog`;
@@ -760,6 +777,22 @@ CREATE TABLE IF NOT EXISTS  `eps_operationlog` (
   KEY operation (`type`, `identity`, `operation`, `createdTime`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_widget`;
+CREATE TABLE `eps_widget` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `account` char(30) NOT NULL,
+  `type`    char(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `params` text NOT NULL,
+  `order` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `grid` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
+  UNIQUE KEY `accountAppOrder` (`account`, `order`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
@@ -847,6 +880,7 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (31, 'about', '公司简介', '', 'mobile','zh-cn'),
 (32, 'links', '友情链接', '', 'mobile','zh-cn'),
 (33, 'followUs', '关注我们', '', 'mobile','zh-cn');
+
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (101, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default','en'),
 (102, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'default','en'),
@@ -862,6 +896,7 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (112, 'links', 'Link', '', 'default','en'),
 (113, 'header', 'Header', '', 'default','en'),
 (114, 'followUs', 'Follow Us', '', 'default','en');
+
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (121, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'mobile','en'),
 (122, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'mobile','en'),
@@ -876,6 +911,7 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (131, 'about', 'About Us', '', 'mobile','en'),
 (132, 'links', 'Link', '', 'mobile','en'),
 (133, 'followUs', 'Follow Us', '', 'mobile','en');
+
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (201, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
 (202, 'hotArticle', '熱門文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
@@ -891,6 +927,7 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (212, 'links', '友情鏈接', '', 'default','zh-tw'),
 (213, 'header', '網站頭部', '', 'default','zh-tw'),
 (214, 'followUs', '關注我們', '', 'default','zh-tw');
+
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (221, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'mobile','zh-tw'),
 (222, 'hotArticle', '熱門文章', '{"category":"0","limit":"7"}', 'mobile','zh-tw'),
@@ -1050,7 +1087,7 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (1, 'file', 'delete', 'zh-cn'),
 (1, 'file', 'sourceBrowse', 'zh-cn'),
 (1, 'file', 'sourceDelete', 'zh-cn'),
-(1, 'file', 'sourceEdit', 'zh-cn'),
+(1, 'file', 'editSource', 'zh-cn'),
 (1, 'file', 'selectImage', 'zh-cn'),
 (1, 'file', 'browseSource', 'zh-cn'),
 (1, 'search', 'buildIndex', 'zh-cn'),
@@ -1081,7 +1118,7 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (2, 'file', 'browse', 'zh-cn'),
 (2, 'file', 'sourceBrowse', 'zh-cn'),
 (2, 'file', 'sourceDelete', 'zh-cn'),
-(2, 'file', 'sourceEdit', 'zh-cn'),
+(2, 'file', 'editSource', 'zh-cn'),
 (2, 'file', 'selectImage', 'zh-cn'),
 (2, 'file', 'browseSource', 'zh-cn'),
 (2, 'ui', 'setTemplate', 'zh-cn'),

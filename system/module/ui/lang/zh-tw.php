@@ -22,7 +22,6 @@ $lang->ui->manageTheme     = '主題管理';
 $lang->ui->installTemplate = '導入模板';
 $lang->ui->exportTheme     = '導出主題';
 $lang->ui->setTheme        = '主題設置';
-$lang->ui->customTheme     = '自定義主題';
 $lang->ui->setFavicon      = "Favicon設置";
 $lang->ui->deleteFavicon   = "不顯示Favicon";
 $lang->ui->deleteLogo      = "刪除Logo";
@@ -41,18 +40,23 @@ $lang->ui->useOldBlock     = '使用已有區塊';
 $lang->ui->themeStore      = '主題市場';
 $lang->ui->help            = "幫助";
 $lang->ui->deleteLogo      = "刪除Logo";
-$lang->ui->setCode         = "代碼設置";
+$lang->ui->setCode         = "代碼";
+$lang->ui->editTemplate    = "編輯模板";
+$lang->ui->installedThemes = "已安裝主題";
 $lang->ui->enableTheme     = "使用此主題";
 $lang->ui->industry        = "行業";
+$lang->ui->offcial         = "官方";
+$lang->ui->reset           = "重置為預設";
 
-$lang->ui->noLogo                 = "未上傳Logo";
-$lang->ui->noFavicon              = "未上傳小表徵圖";
+$lang->ui->uploadLogo             = "上傳Logo";
+$lang->ui->uploadFavicon          = "上傳小表徵圖";
 $lang->ui->noStyleTag             = "請填寫全局CSS樣式代碼，不需要&lt;style&gt;&lt;/style&gt;標籤";
 $lang->ui->noJsTag                = "請填寫全局JS代碼，不需要&lt;script&gt;&lt;/script&gt;標籤";
 $lang->ui->setLogoFailed          = "設置Logo失敗";
 $lang->ui->noSelectedFile         = "獲取上傳圖片失敗，可能是圖片大小超出上傳限制";
 $lang->ui->notAlloweFileType      = "請選擇正確的%s檔案";
 $lang->ui->suitableLogoSize       = '最佳高度範圍：%s，最佳寬度範圍：%s';
+$lang->ui->faviconHelp            = "請上傳.ico表徵圖檔案。<a href='%s' target='_blank'>幫助</a>";
 $lang->ui->exportedSuccess        = '導出成功';
 $lang->ui->deleteThemeSuccess     = '刪除主題成功';
 $lang->ui->deleteThemeFail        = '刪除主題失敗';
@@ -60,6 +64,7 @@ $lang->ui->fileRequired           = '請選擇一個檔案';
 $lang->ui->importThemeSuccess     = '導入主題成功';
 $lang->ui->packagePathUnwriteable = '上傳目錄：%s 不可寫';
 $lang->ui->selectSourceImage      = '從素材庫選擇';
+$lang->ui->rebuildThumbs          = '重新生成縮略圖';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
@@ -111,7 +116,7 @@ $lang->ui->template->qq              = 'QQ';
 $lang->ui->template->email           = 'Email';
 $lang->ui->template->site            = 'site';
 
-$lang->ui->customtheme = '自定義主題';
+$lang->ui->appearance  = '外觀';
 $lang->ui->custom      = '自定義';
 $lang->ui->themeSaved  = '主題配置已保存';
 $lang->ui->unWritable  = "不能生成樣式檔案，請檢查 %s目錄的權限";
@@ -122,6 +127,7 @@ $lang->ui->blocks2Create = "新創建區塊";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置為預設';
+$lang->ui->theme->online                               = '在綫主題';
 $lang->ui->theme->default                              = '預設';
 $lang->ui->theme->resetTip                             = '參數已重置，保存後生效';
 $lang->ui->theme->sizeTip                              = '預設單位為像素，如1px';
@@ -132,19 +138,23 @@ $lang->ui->theme->extraStyle                           = 'CSS';
 $lang->ui->theme->extraScript                          = 'Javascript';
 $lang->ui->theme->customStyleTip                       = '樣式表支持Less語法。';
 $lang->ui->theme->customScriptTip                      = '已包含 jQuery 1.9.0。';
+
 $lang->ui->theme->borderStyleList['none']              = '無邊框';
 $lang->ui->theme->borderStyleList['solid']             = '實線';
 $lang->ui->theme->borderStyleList['dashed']            = '虛線';
 $lang->ui->theme->borderStyleList['dotted']            = '點線';
 $lang->ui->theme->borderStyleList['double']            = '雙線條';
+
 $lang->ui->theme->imageRepeatList['repeat']            = '預設';
 $lang->ui->theme->imageRepeatList['repeat']            = '重複';
 $lang->ui->theme->imageRepeatList['repeat-x']          = 'X軸重複';
 $lang->ui->theme->imageRepeatList['repeat-y']          = 'Y軸重複';
 $lang->ui->theme->imageRepeatList['no-repeat']         = '不重複';
+
 $lang->ui->theme->fontWeightList['inherit']            = '預設';
 $lang->ui->theme->fontWeightList['normal']             = '正常';
 $lang->ui->theme->fontWeightList['bold']               = '加粗';
+
 $lang->ui->theme->fontList['inherit']                  = '預設';
 $lang->ui->theme->fontList['SimSun']                   = '宋體';
 $lang->ui->theme->fontList['FangSong']                 = '仿宋';
@@ -156,6 +166,7 @@ $lang->ui->theme->fontList['Console']                  = 'Console';
 $lang->ui->theme->fontList['Tahoma']                   = 'Tahoma';
 $lang->ui->theme->fontList['Verdana']                  = 'Verdana';
 $lang->ui->theme->fontList['ZenIcon']                  = '表徵圖字型 ZenIcon';
+
 $lang->ui->theme->fontSizeList['inherit']              = '預設';
 $lang->ui->theme->fontSizeList['12px']                 = '12px';
 $lang->ui->theme->fontSizeList['13px']                 = '13px';
@@ -165,22 +176,35 @@ $lang->ui->theme->fontSizeList['16px']                 = '16px';
 $lang->ui->theme->fontSizeList['18px']                 = '18px';
 $lang->ui->theme->fontSizeList['20px']                 = '20px';
 $lang->ui->theme->fontSizeList['24px']                 = '24px';
+
 $lang->ui->theme->navbarLayoutList['false']            = '普通';
 $lang->ui->theme->navbarLayoutList['true']             = '自適應寬度';
-$lang->ui->theme->sidebarPullLeftList['false']         = '靠右';
-$lang->ui->theme->sidebarPullLeftList['true']          = '靠左';
-$lang->ui->theme->sidebarWidthList["16.666666666667%"] = "1/6";
-$lang->ui->theme->sidebarWidthList["25%"]              = "1/4";
-$lang->ui->theme->sidebarWidthList["33.333333333333%"] = "1/3";
-$lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
+
+$lang->ui->theme->sideFloatList['right']  = '靠右';
+$lang->ui->theme->sideFloatList['left']   = '靠左';
+$lang->ui->theme->sideFloatList['hidden'] = '不顯示';
+
+$lang->ui->theme->sideGridList[2]        = "1/6";
+$lang->ui->theme->sideGridList[3]        = "1/4";
+$lang->ui->theme->sideGridList[4]        = "1/3";
+$lang->ui->theme->sideGridList[6]        = "1/2";
+
 $lang->ui->theme->underlineList['none']                = '無';
 $lang->ui->theme->underlineList['underline']           = '帶下劃線';
+
+$lang->ui->theme->searchLabels = new stdclass();
+$lang->ui->theme->searchLabels->sales  = '購買最多';
+$lang->ui->theme->searchLabels->latest = '最新';
+$lang->ui->theme->searchLabels->hot    = '最熱';
+$lang->ui->theme->searchLabels->rand   = '推薦';
+$lang->ui->theme->searchLabels->free   = '免費';
 
 $lang->ui->groups = new stdclass();
 $lang->ui->groups->basic  = '基本樣式';
 $lang->ui->groups->navbar = '導航條';
 $lang->ui->groups->block  = '區塊';
 $lang->ui->groups->button = '按鈕';
+$lang->ui->groups->header = '頁眉';
 $lang->ui->groups->footer = '頁腳';
 
 $lang->ui->color          = '顏色';
@@ -211,8 +235,8 @@ $lang->ui->background    = '背景';
 $lang->ui->button        = '按鈕';
 $lang->ui->text          = '文字';
 $lang->ui->column        = '分欄';
-$lang->ui->sidebarLayout = '側邊欄佈局';
-$lang->ui->sidebarWidth  = '側邊欄寬度';
+$lang->ui->sideFloat     = '側邊欄佈局';
+$lang->ui->sideGrid      = '側邊欄寬度';
 
 $lang->ui->primaryColor    = '基色';
 $lang->ui->backcolor       = '背景色';
@@ -238,6 +262,11 @@ $lang->ui->danger          = '危險';
 $lang->ui->warning         = '警告';
 $lang->ui->success         = '積極';
 $lang->ui->removeDirFaild  = "<h4>以下目錄刪除失敗</h4><pre>%s</pre> <div class='text-important'>請手動刪除，或者設置這些檔案的可寫權限後繼續。</div>";
+$lang->ui->padding         = '邊距';
+$lang->ui->left            = '左邊距';
+$lang->ui->right           = '右邊距';
+$lang->ui->top             = '上邊距';
+$lang->ui->bottom          = '下邊距';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
@@ -248,3 +277,123 @@ $lang->ui->themeColors[] = 'FF63E8';
 $lang->ui->themeColors[] = '964B00';
 $lang->ui->themeColors[] = '7F7F7F';
 $lang->ui->themeColors[] = '000000';
+
+$lang->ui->folderList = new stdclass();
+$lang->ui->folderList->common  = '全局檔案';
+$lang->ui->folderList->index   = '首頁';
+$lang->ui->folderList->block   = '區塊';
+$lang->ui->folderList->article = '文章';
+$lang->ui->folderList->product = '產品';
+$lang->ui->folderList->search  = '搜索';
+$lang->ui->folderList->order   = '訂單';
+$lang->ui->folderList->user    = '會員';
+$lang->ui->folderList->message = '評論留言';
+$lang->ui->folderList->forum   = '論壇';
+
+$lang->ui->files = new stdclass();
+$lang->ui->files->default = new stdclass();
+
+$lang->ui->files->default->common = array();
+$lang->ui->files->default->common['header.lite']  = 'header';
+$lang->ui->files->default->common['header']       = '頭部';
+$lang->ui->files->default->common['qrcode']       = '二維碼';
+$lang->ui->files->default->common['footer']       = '頁腳';
+$lang->ui->files->default->common['header.modal'] = '彈窗頁頭';
+$lang->ui->files->default->common['footer.modal'] = '彈窗底部';
+
+$lang->ui->files->default->index = array();
+$lang->ui->files->default->index['index'] = '首頁';
+
+$lang->ui->files->default->block = array();
+$lang->ui->files->default->block['about']           = '公司簡介';
+$lang->ui->files->default->block['articletree']     = '文章類目';
+$lang->ui->files->default->block['blogtree']        = '博客類目';
+$lang->ui->files->default->block['contact']         = '聯繫我們';
+$lang->ui->files->default->block['featuredproduct'] = '推薦產品';
+$lang->ui->files->default->block['followus']        = '關注我們';
+$lang->ui->files->default->block['header']          = '頭部';
+$lang->ui->files->default->block['header.default']  = '兼容模式頭部';
+$lang->ui->files->default->block['header.layout']   = '自定義頭部';
+$lang->ui->files->default->block['hotarticle']      = '熱門文章';
+$lang->ui->files->default->block['hotproduct']      = '熱門產品';
+$lang->ui->files->default->block['htmlcode']        = 'html源碼';
+$lang->ui->files->default->block['html']            = '自定義';
+$lang->ui->files->default->block['latestarticle']   = '最新文章';
+$lang->ui->files->default->block['latestblog']      = '最新博客';
+$lang->ui->files->default->block['latestproduct']   = '最新產品';
+$lang->ui->files->default->block['latestthread']    = '最新帖子';
+$lang->ui->files->default->block['links']           = '友情連結';
+$lang->ui->files->default->block['logo']            = 'logo區域';
+$lang->ui->files->default->block['nav']             = '導航條';
+$lang->ui->files->default->block['pagelist']        = '單頁列表';
+$lang->ui->files->default->block['phpcode']         = 'php源碼';
+$lang->ui->files->default->block['producttree']     = '產品類目';
+$lang->ui->files->default->block['searchbar']       = '搜索條';
+$lang->ui->files->default->block['slide']           = '幻燈片';
+$lang->ui->files->default->block['slogan']          = '站點口號';
+$lang->ui->files->default->block['usermenu']        = '登錄信息';
+
+$lang->ui->files->default->article = array();
+$lang->ui->files->default->article['browse'] = '文章列表';
+$lang->ui->files->default->article['view']   = '文章詳情';
+
+$lang->ui->files->default->article['blog/header'] = '博客頭部';
+$lang->ui->files->default->article['blog/index']  = '博客列表';
+$lang->ui->files->default->article['blog/view']   = '博客詳情';
+$lang->ui->files->default->article['blog/footer'] = '博客底部';
+
+$lang->ui->files->default->article['page/view'] = '單頁';
+
+$lang->ui->files->default->product = array();
+$lang->ui->files->default->product['browse']      = '產品列表';
+$lang->ui->files->default->product['browse.card'] = '卡片視圖';
+$lang->ui->files->default->product['browse.list'] = '列表視圖';
+$lang->ui->files->default->product['view']        = '產品詳情';
+
+$lang->ui->files->default->forum = array();
+$lang->ui->files->default->forum['index'] = '論壇首頁';
+$lang->ui->files->default->forum['board'] = '板塊頁面';
+
+$lang->ui->files->default->forum['thread/view']   = '查看帖子';
+$lang->ui->files->default->forum['thread/thread'] = '主題展示';
+$lang->ui->files->default->forum['thread/reply']  = '回覆展示';
+$lang->ui->files->default->forum['thread/post']   = '發佈主題';
+$lang->ui->files->default->forum['reply/reply']   = '回覆表單';
+
+$lang->ui->files->default->user['control']     = '會員中心';
+$lang->ui->files->default->user['side']        = '菜單區域';
+$lang->ui->files->default->user['deny']        = '權限不足';
+$lang->ui->files->default->user['edit']        = '賬戶編輯';
+$lang->ui->files->default->user['login.front'] = '登錄';
+$lang->ui->files->default->user['message']     = '我的消息';
+$lang->ui->files->default->user['profile']     = '個人資料';
+$lang->ui->files->default->user['register']    = '註冊界面';
+$lang->ui->files->default->user['score']       = '積分詳情';
+$lang->ui->files->default->user['thread']      = '我的主題';
+
+$lang->ui->files->default->order['browse']        = '我的訂單';
+$lang->ui->files->default->order['check']         = '結算頁面';
+$lang->ui->files->default->order['confirm']       = '訂單確認';
+$lang->ui->files->default->order['processorder']  = '支付結果';
+$lang->ui->files->default->order['track']         = '物流跟蹤';
+
+$lang->ui->files->default->message['index']       = '留言頁面';
+$lang->ui->files->default->message['comment']     = '評論列表';
+
+$lang->ui->files->default->search['index']        = '搜索結果';
+
+$lang->ui->files->mobile = $lang->ui->files->default;
+
+unset($this->lang->ui->files->mobile->common['qrcode']);
+unset($this->lang->ui->files->mobile->common['header.modal']);
+unset($this->lang->ui->files->mobile->common['footer.modal']);
+unset($this->lang->ui->files->mobile->block['header']);
+unset($this->lang->ui->files->mobile->block['header.default']);
+unset($this->lang->ui->files->mobile->block['logo']);
+unset($this->lang->ui->files->mobile->block['nav']);
+unset($this->lang->ui->files->mobile->block['searchbar']);
+unset($this->lang->ui->files->mobile->block['slogan']);
+unset($this->lang->ui->files->mobile->block['usermenu']);
+unset($this->lang->ui->files->mobile->product['browse.card']);
+unset($this->lang->ui->files->mobile->product['browse.list']);
+unset($this->lang->ui->files->mobile->forum['reply/reply']);

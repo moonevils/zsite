@@ -1,13 +1,7 @@
-#mainPanel .panel-heading {padding: 4px 5px 0 5px}
-#mainPanel .nav-tabs {margin-bottom: -1px}
-#mainPanel .nav-tabs > li > a {padding: 5px 10px 8px}
-#mainPanel .nav-tabs > li > a.active, #mainPanel .nav-tabs > li > a.focus {outline: none;}
-#mainPanel .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
-
 #internalSection {padding: 0;}
 
-.themes .col-theme {float: left;}
-.themes .theme {width: 200px; float: left; cursor: pointer; margin-right: 10px; margin-bottom: 10px; margin-left: 5px; border: 1px solid #ccc; border-radius: 2px; min-width: 200px; position: relative; opacity: 0.9; overflow: hidden;}
+.themes .col-theme {float: left; width:20%}
+.themes .theme {width: 90%; float: left; cursor: pointer; margin:0 auto 20px; border: 1px solid #ccc; border-radius: 2px; min-width: 200px; position: relative; opacity: 0.9; overflow: hidden;}
 .themes .theme-name {padding: 5px 30px 4px; background-color: #f1f1f1;}
 .themes .theme > .actions {position: absolute; bottom: 2px; right: 2px}
 .themes .theme > .actions > a:hover {background-color: #ddd}
@@ -21,13 +15,6 @@
 .themes .theme.current > .icon:before {position: absolute; right: -15px; top: -15px}
 .themes .theme:hover {border-color: #145ccd; -moz-box-shadow:0px 0px 6px #145ccd; -webkit-box-shadow:0px 0px 6px #145ccd; box-shadow:0px 0px 6px #145ccd;}
 .themes .theme.current {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
-
-#industryBox {padding: 5px 10px!important; background-color: transparent; margin: -15px -15px 15px}
-#industryBox > .tree > li {display: inline-block; padding-bottom: 0; margin-right: 10px;}
-#industryBox > .tree > li:before {display: none}
-#industryBox > .tree > li > a {display: inline-block; background-color: transparent; border-radius: 11px; padding: 1px 10px; border: 1px solid transparent}
-#industryBox > .tree > li > a:hover {border-color: #ddd;}
-#industryBox > .tree > li.active > a {border-color: #3280FC; color: #3280fc}
 
 #mainArea {position: relative; border: none; box-shadow: none; margin-bottom: 0;}
 #mainArea .cards {padding-top: 0;}

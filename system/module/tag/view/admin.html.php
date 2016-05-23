@@ -11,11 +11,9 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php js::set('score', commonModel::isAvailable('score'));?>
-<?php js::set('setCounts', $lang->site->setCounts);?>
 <div class='panel'>
   <div class="panel-heading">
-    <strong><i class='icon-tags'></i> <?php echo $lang->tag->admin;?></strong>
+    <strong><i class='icon-tags'></i> <?php echo $lang->tag->common;?></strong>
     <div class="panel-actions">
       <form method='post' class='form-inline form-search'>
         <div class="input-group">

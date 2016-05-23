@@ -17,7 +17,7 @@ $lang->company->content = "More";
 $lang->company->contact = "Contact";
 $lang->company->qrcode  = "Subscribe";
 
-$lang->company->setBasic   = "Basic";
+$lang->company->setBasic   = "Company";
 $lang->company->setContact = "Contact";
 
 $lang->company->error = new stdclass(); 

@@ -17,6 +17,7 @@ $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Go to index';
 
 $lang->upgrade->backup        = 'Backup';
+$lang->upgrade->prepair       = 'Prepair works';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
 $lang->upgrade->execute       = 'Execute';
@@ -32,6 +33,10 @@ EOT;
 
 $lang->upgrade->createSlidePath = <<<EOT
 <div class='alert alert-danger'>Slide path %s must be writeable. Please create the path and make sure it can be writeable.</div>
+EOT;
+
+$lang->upgrade->chmodThemePath = <<<EOT
+<div class='alert'> Path <b>%s</b> must be writeable before upgrade. </div>
 EOT;
 
 $lang->upgrade->versionNote = "Please choose the version to upgrade.";
@@ -67,9 +72,11 @@ $lang->upgrade->fromVersions['4_2_1']    = '4.2.1';
 $lang->upgrade->fromVersions['4_3_beta'] = '4.3.beta';
 $lang->upgrade->fromVersions['4_4']      = '4.4';
 $lang->upgrade->fromVersions['4_4_1']    = '4.4.1';
-$lang->upgrade->fromVersions['4_5']      = '4.5'
-$lang->upgrade->fromVersions['4_5_1']    = '4.5.1'
-$lang->upgrade->fromVersions['4_5_2']    = '4.5.2'
+$lang->upgrade->fromVersions['4_5']      = '4.5';
+$lang->upgrade->fromVersions['4_5_1']    = '4.5.1';
+$lang->upgrade->fromVersions['4_5_2']    = '4.5.2';
 $lang->upgrade->fromVersions['4_6']      = '4.6';
 $lang->upgrade->fromVersions['5_0']      = '5.0';
 $lang->upgrade->fromVersions['5_0_1']    = '5.0.1';
+$lang->upgrade->fromVersions['5_1']      = '5.1';
+$lang->upgrade->fromVersions['5_2']      = '5.2';

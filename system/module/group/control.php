@@ -36,7 +36,7 @@ class group extends control
         $groupUsers = array();
         foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);
 
-        $this->view->title      = $this->lang->group->browse;
+        $this->view->title      = $this->lang->group->common;
         $this->view->groups     = $groups;
         $this->view->groupUsers = $groupUsers;
 
@@ -127,7 +127,11 @@ class group extends control
         {
             if($type == 'byGroup')  $result = $this->group->updatePrivByGroup($groupID);
             if($type == 'byModule') $result = $this->group->updatePrivByModule();
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->group->successSaved, 'locate'=>inlink('browse')));
+            if($result)
+            {
+                if($type == 'byGroup') $this->group->updateAccounts($groupID);
+                $this->send(array('result' => 'success', 'message' => $this->lang->group->successSaved, 'locate'=>inlink('browse')));
+            }
             $this->send(array('result' => 'fail', 'message' => $this->lang->group->errorNotSaved));
         }
 
@@ -177,6 +181,7 @@ class group extends control
         {
             $this->group->updateUser($groupID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->group->updateAccounts($groupID);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
         }
         $group      = $this->group->getById($groupID);
@@ -207,6 +212,7 @@ class group extends control
      */
     public function delete($groupID)
     {
+        $this->group->updateAccounts($groupID);
         $this->group->delete($groupID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));

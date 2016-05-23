@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#sourceEditForm', function(response)
+    $.setAjaxForm('#editSourceForm', function(response)
     {
         if(response.result == 'fail')
         {
@@ -23,8 +23,8 @@ $(document).ready(function()
                             className: 'btn-primary',  
                             callback:  function()
                                        {
-                                           $('#sourceEditForm #submit').append("<input value='1' name='continue' class='hide'>");
-                                           $('#sourceEditForm #submit').click();
+                                           $('#editSourceForm #submit').append("<input value='1' name='continue' class='hide'>");
+                                           $('#editSourceForm #submit').click();
                                        }  
                         }  
                     }  

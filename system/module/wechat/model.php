@@ -504,6 +504,7 @@ class wechatModel extends model
         $response->msgType = 'news';
 
         $isFirst = true;
+        $viewType = isset($this->config->site->mobileTemplate) && $this->config->site->mobileTemplate == 'open' ? 'mhtml' : '';
         foreach($content->category as $categoryID)
         {
             if(empty($categories[$categoryID])) continue;
@@ -511,7 +512,7 @@ class wechatModel extends model
 
             $article = new stdclass();
             $article->title       = $category->name;
-            $article->url         = getHostURL() . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}");
+            $article->url         = getHostURL() . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}", $viewType);
             $article->description =  $category->desc;
 
             if($isFirst) $article->picUrl = getWebRoot(true) . "theme/default/images/main/wechat{$type}.png";
@@ -561,16 +562,18 @@ class wechatModel extends model
         $pager = new pager($recTotal = 0, $recPerPage = $content->limit, 1);
 
         $articles = $this->loadModel('article')->getList('article', $content->category, $orderByList[$content->block], $pager);
+        $articles = $this->article->processImages($articles, 'article');
 
         $response = new stdclass();
         $response->msgType = 'news';
 
         $isFirst = true;
+        $viewType = isset($this->config->site->mobileTemplate) && $this->config->site->mobileTemplate == 'open' ? 'mhtml' : '';
         foreach($articles as $article)
         {
             $item = new stdclass();
             $item->title       = $article->title;
-            $item->url         = getHostURL() . $this->article->createPreviewLink($article->id);
+            $item->url         = getHostURL() . $this->article->createPreviewLink($article->id, $viewType);
             $item->description = $article->summary;
             if(!empty($article->image))
             {
@@ -626,6 +629,7 @@ class wechatModel extends model
         $response = new stdclass();
         $response->msgType = 'news';
 
+        $viewType = isset($this->config->site->mobileTemplate) && $this->config->site->mobileTemplate == 'open' ? 'mhtml' : '';
         foreach($products as $product)
         {
             $categories    = $product->categories;
@@ -633,7 +637,7 @@ class wechatModel extends model
 
             $article = new stdclass();
             $article->title       = $product->name;
-            $article->url         = getHostURL() . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias");
+            $article->url         = getHostURL() . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias", $viewType);
             $article->description = isset($product->summary) ? $product->summary : '';
             if(!empty($product->image)) $article->picUrl = rtrim(getWebRoot(true), '/') . $product->image->primary->smallURL;
             $response->articles[] = $article;
@@ -885,9 +889,10 @@ class wechatModel extends model
     public function getModuleList()
     {
         $hostURL = getHostURL();
+        $viewType = isset($this->config->site->mobileTemplate) && $this->config->site->mobileTemplate == 'open' ? 'mhtml' : '';
         foreach($this->lang->wechat->response->moduleList as $module => $title)
         {
-            if($module != 'manual') $moduleList[$hostURL . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
+            if($module != 'manual') $moduleList[$hostURL . commonModel::createFrontLink($module, 'index', '', '', $viewType)] = $title;
             if($module == 'manual') $moduleList[$module] = $title;
         }
         return $moduleList;

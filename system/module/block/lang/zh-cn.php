@@ -25,6 +25,7 @@ $lang->block->regionList      = '区域列表';
 $lang->block->select          = '请选择区块';
 $lang->block->categories      = '分类';
 $lang->block->showImage       = '图文';
+$lang->block->maxWidth        = '最大宽度';
 $lang->block->showCategory    = '显示类目';
 $lang->block->showBoard       = '显示版块';
 $lang->block->showTime        = '显示时间';
@@ -59,9 +60,16 @@ $lang->block->renameLayout    = '方案重命名';
 $lang->block->planName        = '方案名称';
 $lang->block->saveLayoutAs    = '复制布局：%s';
 $lang->block->defaultPlan     = '默认方案';
+$lang->block->image           = '图片';
+
+$lang->block->layout            = '布局';
+$lang->block->logoPosition      = 'Logo';
+$lang->block->navPosition       = '导航';
+$lang->block->searchbarPosition = '搜索框';
+$lang->block->sloganPosition    = '站点口号';
 
 $lang->block->admin        = "区块管理";
-$lang->block->pages        = "布局设置";
+$lang->block->pages        = "布局";
 $lang->block->add          = "添加";
 $lang->block->addChild     = "子区块";
 $lang->block->template     = "模板";
@@ -107,6 +115,13 @@ $lang->block->categoryList['article'] = '文章';
 $lang->block->categoryList['product'] = '产品';
 $lang->block->categoryList['system']  = '系统';
 
+$lang->block->imageSizeList['large']  = '大图';
+$lang->block->imageSizeList['middle'] = '中图';
+$lang->block->imageSizeList['small']  = '小图';
+
+$lang->block->imagePositionList['left']  = '居左';
+$lang->block->imagePositionList['right'] = '居右';
+
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
 $lang->block->category->fromCurrent  = '当前类目开始';
@@ -119,3 +134,17 @@ $lang->block->category->fromCurrentList[0] = '否';
 
 $lang->block->category->showCategoryList['abbr'] = '简称';
 $lang->block->category->showCategoryList['name'] = '全称';
+
+$lang->block->slideStyle = '展示形式';
+$lang->block->slideStyleList['carousel'] = '横向轮播';
+$lang->block->slideStyleList['tile']     = '竖向展开';
+
+$lang->block->navTypeList = new stdclass();
+$lang->block->navTypeList->desktop_top   = '桌面';
+$lang->block->navTypeList->desktop_blog  = '博客';
+$lang->block->navTypeList->mobile_top    = '移动版顶部';
+$lang->block->navTypeList->mobile_bottom = '移动版底部';
+$lang->block->navTypeList->mobile_blog   = '移动版博客';
+
+$lang->block->sideGrid  = '侧边栏宽度';
+$lang->block->sideFloat = '侧边栏位置';

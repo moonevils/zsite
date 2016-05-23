@@ -9,10 +9,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->article->setting     = 'Setting';
 $lang->article->common      = 'Article';
+$lang->article->setting     = 'Setting';
 $lang->article->createDraft = 'Create draft';
-$lang->article->post        = 'Post Contribution';
+$lang->article->post        = 'Post Submittion';
 $lang->article->check       = 'Review post';
 $lang->article->reject      = 'Reject post';
 
@@ -41,6 +41,7 @@ $lang->article->isLink     = 'Locate';
 $lang->article->link       = 'Link';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
+$lang->article->layout     = 'Layout';
 
 $lang->article->forward2Blog     = 'Forward to blog';
 $lang->article->forward2Forum    = 'Forward to forum';
@@ -48,20 +49,23 @@ $lang->article->selectCategories = 'Select categories';
 $lang->article->selectBoard      = 'Select board';
 $lang->article->confirmReject    = 'Are you sure to reject this post ?';
 
-$lang->contribution= new stdclass();
-$lang->contribution->check   = 'Check';
-$lang->contribution->list    = 'Contribution List';
-$lang->contribution->publish = 'Publish';
-$lang->contribution->reject  = 'Reject';
+$lang->submittion= new stdclass();
+$lang->submittion->common  = 'Submittion';
+$lang->submittion->check   = 'Check';
+$lang->submittion->list    = 'Submittion List';
+$lang->submittion->publish = 'Publish';
+$lang->submittion->reject  = 'Reject';
 
-$lang->contribution->status[0] = '';
-$lang->contribution->status[1] = '<span class="label label-xsm label-primary">' . 'Moderated' .'</span>';
-$lang->contribution->status[2] = '<span class="label label-xsm label-success">' . 'Approbed' . '</span>';
-$lang->contribution->status[3] = 'Reject';
+$lang->submittion->status[0] = '';
+$lang->submittion->status[1] = '<span class="label label-xsm label-primary">' . 'Moderated' .'</span>';
+$lang->submittion->status[2] = '<span class="label label-xsm label-success">' . 'Approbed' . '</span>';
+$lang->submittion->status[3] = 'Reject';
 
-$lang->contribution->typeList = array();
-$lang->contribution->typeList['article'] = 'Article';
-$lang->contribution->typeList['blog']    = 'Blog';
+$lang->submittion->typeList = array();
+$lang->submittion->typeList['article'] = 'Article';
+$lang->submittion->typeList['blog']    = 'Blog';
+
+$lang->article->onlyBody = 'With out header and footer, high-ustomizable.';
 
 $lang->article->list       = 'List';
 $lang->article->admin      = 'Admin';
@@ -72,18 +76,20 @@ $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
 $lang->article->images     = 'Images';
 
-$lang->article->contribution    = 'Contribution';
+$lang->article->submittion    = 'Submittion';
 $lang->article->submissionTime  = 'Submission Time';
 
-$lang->article->contributionOptions = new stdclass;
-$lang->article->contributionOptions->open  = 'Open';
-$lang->article->contributionOptions->close = 'Close';
+$lang->article->submittionOptions = new stdclass;
+$lang->article->submittionOptions->open  = 'Open';
+$lang->article->submittionOptions->close = 'Close';
 
+$lang->blog->common = 'Blog';
 $lang->blog->admin  = 'Admin';
 $lang->blog->list   = 'List';
 $lang->blog->create = 'Create';
 $lang->blog->edit   = 'Edit';
 
+$lang->page->common = 'Page';
 $lang->page->admin  = 'Admin';
 $lang->page->list   = 'List';
 $lang->page->create = 'Create';
@@ -125,7 +131,7 @@ $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = 'Support delay publishing of article';
 $lang->article->placeholder->link      = 'Input link, it can be outer chain.';
 
-$lang->article->approveMessage = 'Your contribution <strong>《%s》</strong> has been approved，award <strong>+%s</strong> scores.';
-$lang->article->rejectMessage  = 'Your contribution <strong>《%s》</strong> has not been approved, you can edit it, then submit it for review again.';
+$lang->article->approveMessage = 'Your submittion <strong>《%s》</strong> has been approved，award <strong>+%s</strong> scores.';
+$lang->article->rejectMessage  = 'Your submittion <strong>《%s》</strong> has not been approved, you can edit it, then submit it for review again.';
 
 $lang->article->forwardFrom = 'Fowarding from';

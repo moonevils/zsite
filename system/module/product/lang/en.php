@@ -65,6 +65,7 @@ $lang->product->comments     = 'Comments';
 $lang->product->detail       = 'Detail';
 $lang->product->setting      = 'Setting';
 $lang->product->soldout      = 'Sold out';
+$lang->product->layout       = 'Layout';
 
 $lang->product->congratulations  = "Congratulations";
 $lang->product->addToCartSuccess = "Added to Cart.";

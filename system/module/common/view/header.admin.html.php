@@ -3,10 +3,23 @@
 <?php include 'header.lite.html.php';?>
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
-  <?php foreach ($lang->groups as $menuGroup => $groupSetting):?>
-  <?php list($module, $method, $params) = explode('|', $groupSetting['link'])?>
-  <li <?php if($menuGroup == $this->session->currentGroup) echo "class='active'";?> data-id='<?php echo $menuGroup ?>'><a data-toggle='tooltip' href='<?php echo helper::createLink($module, $method, $params);?>' title='<?php echo $groupSetting['title'] ?>'><i class='icon icon-<?php echo $groupSetting['icon'] ?>'></i></a></li>
-  <?php endforeach;?>
+  <?php
+  foreach ($lang->groups as $menuGroup => $groupSetting)
+  {
+      $print = false;
+      $groupMenus = explode(',', $this->config->menus->$menuGroup);
+      foreach($groupMenus as $groupMenu)
+      {
+          if(commonModel::isAvailable($groupMenu)) $print = true;
+      }
+      if(!$print) continue;
+
+      list($module, $method, $params) = explode('|', $groupSetting['link']);
+      $groupClass = $menuGroup == $this->session->currentGroup ? 'active' : '';
+      $groupUrl = helper::createLink($module, $method, $params);
+      echo "<li class='{$groupClass}' data-id='{$menuGroup}'><a data-toggle='tooltip' href='{$groupUrl}' title='{$groupSetting['title']}'><i class='icon icon-{$groupSetting['icon']}'></i></a></li>";
+  }
+  ?>
   </ul>
   <?php echo commonModel::createManagerMenu('nav nav-stacked fixed-bottom');?>
 </nav>
@@ -52,6 +65,9 @@
   </div>
 </nav>
 <div class="clearfix row-main">
+  <?php if($this->session->currentGroup == 'home' and strpos('forum,reply', $this->moduleName) !== false and $this->methodName == 'admin'):?>
+  <div class='col-md-12'>
+  <?php else:?>
   <?php $moduleName = $this->moduleName; ?>
   <?php $menuGroup  = zget($lang->menuGroups, $moduleName);?>
   <?php if(!isset($uiHeader) or !$uiHeader): ?>
@@ -91,4 +107,5 @@
     </div>
     <div class='col-md-10'>
     <?php endif;?>
+  <?php endif;?>
   <?php endif;?>

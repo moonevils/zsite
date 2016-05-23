@@ -12,6 +12,7 @@
 $lang->site->common        = "站点";
 
 $lang->site->type            = '站点类型';
+$lang->site->requestType     = '访问类型';
 $lang->site->status          = '站点状态';
 $lang->site->pauseTip        = '暂停提示';
 $lang->site->name            = '网站名称';
@@ -26,6 +27,8 @@ $lang->site->meta            = 'Meta 标签';
 $lang->site->desc            = '站点描述';
 $lang->site->icpSN           = '备案编号';
 $lang->site->icpLink         = '备案链接';
+$lang->site->policeSN        = '公安部备案编号';
+$lang->site->policeLink      = '备案链接';
 $lang->site->slogan          = '站点口号';
 $lang->site->mission         = '站点使命';
 $lang->site->copyright       = '创建年份';
@@ -40,6 +43,11 @@ $lang->site->cdn             = 'CDN地址';
 $lang->site->sensitive       = '敏感词';
 $lang->site->scheme          = '默认访问协议';
 $lang->site->saveDays        = '日志保存天数';
+$lang->site->openCache       = '开启缓存';
+$lang->site->cachePage       = '缓存整页';
+$lang->site->cacheExpired    = '更新时间';
+$lang->site->hour            = '小时';
+$lang->site->homeMenus       = '首页菜单';
 
 $lang->site->importantOption  = '重要操作';
 $lang->site->resetPassword    = '前台找回密码';
@@ -58,20 +66,20 @@ $lang->site->mobileTemplate   = '移动模板';
 $lang->site->score            = '积分';
 $lang->site->setCounts        = '积分规则';
 $lang->site->front            = '网站浏览';
-$lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
-$lang->site->cdnTip           = 'cdn资源仅在非debug模式下启用，包含：字体、css和js，不包含附件。';
 $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
+$lang->site->setCache      = '缓存设置';
 $lang->site->setCDN        = "CDN设置";
+$lang->site->setDomain     = "域名设置";
 $lang->site->setLang       = "语言设置";
 $lang->site->setFilter     = "过滤设置";
 $lang->site->ipFilter      = "ip过滤";
 $lang->site->accountFilter = "账号过滤";
 $lang->site->setSecurity   = "安全设置";
-$lang->site->setUpload     = "文件上传设置";
+$lang->site->setUpload     = "附件上传";
 $lang->site->setRobots     = "Robots 设置";
-$lang->site->setOauth      = "开放登录设置";
+$lang->site->setOauth      = "开放登录";
 $lang->site->setSinaOauth  = "新浪微博接入";
 $lang->site->setYangcong   = "洋葱登录设置";
 $lang->site->setQQOauth    = "QQ接入";
@@ -80,10 +88,16 @@ $lang->site->setRecPerPage = "列表数量设置";
 $lang->site->useLocation   = "使用当前登录地址: <span>%s</span>";
 $lang->site->changeSetting = "更改设置";
 $lang->site->setStat       = "流量统计设置";
+$lang->site->setHomeMenu   = "首页菜单";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
 $lang->site->typeList->blog   = '个人博客';
+
+$lang->site->requestTypeList = array();
+$lang->site->requestTypeList['GET']        = 'GET';
+$lang->site->requestTypeList['PATH_INFO']  = 'PATH_INFO';
+$lang->site->requestTypeList['PATH_INFO2'] = 'PATH_INFO2';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
@@ -130,9 +144,9 @@ $lang->site->captchaList['auto']  = '有敏感内容时自动启用验证码';
 $lang->site->captchaList['close'] = '不用验证码';
 
 $lang->site->validateTypes = new stdclass();
-$lang->site->validateTypes->okFile           = '文件验证';
-$lang->site->validateTypes->email            = '邮件验证码验证';
-$lang->site->validateTypes->securityQuestion = '密保问题验证';
+$lang->site->validateTypes->okFile      = '文件验证';
+$lang->site->validateTypes->email       = '邮件验证码验证';
+$lang->site->validateTypes->setSecurity = '密保问题验证';
 
 $lang->site->schemeList = array();
 $lang->site->schemeList['http']  = 'http';
@@ -151,41 +165,51 @@ $lang->site->scoreList['close'] = '禁用';
 $lang->site->cdnList['open']  = '启用';
 $lang->site->cdnList['close'] = '关闭';
 
+$lang->site->cacheTypes['close'] = '关闭';
+$lang->site->cacheTypes['file']  = '启用';
+
+$lang->site->cachePageOptions['close'] = '关闭';
+$lang->site->cachePageOptions['open']  = '开启';
+
 $lang->site->filterFunctionList['open']  = '启用';
 $lang->site->filterFunctionList['close'] = '关闭';
 
 $lang->site->moduleAvailable = array();
-$lang->site->moduleAvailable['user']         = '会员';
-$lang->site->moduleAvailable['article']      = '文章';
-$lang->site->moduleAvailable['blog']         = '博客';
-$lang->site->moduleAvailable['product']      = '产品';
-$lang->site->moduleAvailable['book']         = '手册';
-$lang->site->moduleAvailable['page']         = '单页';
-$lang->site->moduleAvailable['forum']        = '论坛';
-$lang->site->moduleAvailable['message']      = '评论留言';
-$lang->site->moduleAvailable['search']       = '搜索';
-$lang->site->moduleAvailable['shop']         = '商城';
-$lang->site->moduleAvailable['score']        = '积分';
-$lang->site->moduleAvailable['stat']         = '统计';
-$lang->site->moduleAvailable['contribution'] = '投稿';
+$lang->site->moduleAvailable['user']       = '会员';
+$lang->site->moduleAvailable['article']    = '文章';
+$lang->site->moduleAvailable['blog']       = '博客';
+$lang->site->moduleAvailable['product']    = '产品';
+$lang->site->moduleAvailable['book']       = '手册';
+$lang->site->moduleAvailable['page']       = '单页';
+$lang->site->moduleAvailable['forum']      = '论坛';
+$lang->site->moduleAvailable['message']    = '评论留言';
+$lang->site->moduleAvailable['search']     = '搜索';
+$lang->site->moduleAvailable['shop']       = '商城';
+$lang->site->moduleAvailable['score']      = '积分';
+$lang->site->moduleAvailable['stat']       = '统计';
+$lang->site->moduleAvailable['submittion'] = '投稿';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签。';
 $lang->site->fileAllowedRole  = '多个后缀名之间请用 "," 隔开';
-$lang->site->domainTip        = '设置主域名可使所有网站访问跳转到该域名，设置前请确保主域名解析正确。该值为空时不进行跳转。';
-$lang->site->allowedDomainTip = '多个域名使用 , 隔开，如www.chanzhi.org,www.chanzhi.com。该值为空时允许所有域名访问。';
-$lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.194.132.0/28。允许所有IP访问请留空。';
+$lang->site->domainTip        = '所有网站访问跳转到该域名，请确保主域名解析正确，该值为空时不进行跳转。';
+$lang->site->allowedDomainTip = "只允许填写的域名访问网站，多个域名用 , 隔开，该值为空时允许所有域名访问。";
+$lang->site->allowedIPTip     = '多个IP用 , 隔开，如202.194.133.1,202.194.132.0/28。允许所有IP访问请留空。';
 $lang->site->wrongAllowedIP   = 'IP 格式错误';
 $lang->site->changeLocation   = '您当前的登录地区与允许登录地区不一致。';
 $lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。';
 $lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
 $lang->site->saveDaysTip      = '访问日志保存天数必须为为 >0 的数字。';
 $lang->site->yangcongTip      = '开启强制洋葱登录后，您可以通过设置密保问题开启密保登录作为备用。';
+$lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
+$lang->site->cdnTip           = 'cdn资源仅在非debug模式下启用，包含：字体、css和js，不包含附件，路径跟蝉知保持一致。';
+$lang->site->cdnSiteTip       = '正确路径为 %s';
+$lang->site->defaultTip       = '站点维护中……';
+$lang->site->icpTip           = '';
+$lang->site->requestTypeTip   = '系统不支持PATH_INFO方式';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
 $lang->site->reloadForRobots   = '刷新页面';
-$lang->site->defaultTip        = '站点维护中……';
-$lang->site->icpTip            = '';
 
 $lang->site->customizableList = new stdclass();
 $lang->site->customizableList->article = '文章列表数量';
@@ -200,3 +224,31 @@ $lang->site->yangcong = new stdclass();
 $lang->site->yangcong->appID = 'APP ID';
 $lang->site->yangcong->key   = 'APP KEY';
 $lang->site->yangcong->auth  = 'Auth ID';
+
+$lang->site->api = new stdclass();
+$lang->site->api->common = '集成';
+$lang->site->api->key    = '密钥';
+$lang->site->api->ip     = 'IP列表';
+$lang->site->api->allip  = '无限制';
+$lang->site->api->ipTip  = '允许调用者使用这些IP访问，多个IP使用,隔开。支持IP段，如192.168.1.*';
+
+$lang->site->menus = array();
+$lang->site->menus['order']      = '订单';
+$lang->site->menus['message']    = '留言';
+$lang->site->menus['comment']    = '评论';
+$lang->site->menus['reply']      = '回复';
+$lang->site->menus['thread']     = '主题';
+$lang->site->menus['forumreply'] = '回帖';
+$lang->site->menus['article']    = '文章';
+$lang->site->menus['page']       = '单页';
+$lang->site->menus['blog']       = '博客';
+$lang->site->menus['book']       = '手册';
+$lang->site->menus['submittion'] = '投稿';
+$lang->site->menus['product']    = '产品';
+$lang->site->menus['user']       = '会员';
+$lang->site->menus['wechat']     = '微信';
+$lang->site->menus['stat']       = '统计';
+$lang->site->menus['tag']        = '关键词';
+$lang->site->menus['links']      = '友情链接';
+$lang->site->menus['site']       = '站点';
+$lang->site->menus['security']   = '安全';

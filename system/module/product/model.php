@@ -84,25 +84,31 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getList($categories, $orderBy, $pager = null) 
+    public function getList($categories, $orderBy, $pager = null, $image = false) 
     {   
+        $this->loadModel('file');
         $searchWord = $this->get->searchWord;
         $categoryID = $this->get->categoryID;
 
         /* Get products(use groupBy to distinct products).  */
-        $productsIdList = array();
-        if(!empty($categories))
+        $productIdList = $this->dao->select('id')->from(TABLE_RELATION)
+            ->where('type')->eq('product')
+            ->andWhere('category')->in($categories)
+            ->fetchPairs();
+
+        if($image)
         {
-            $productList = $this->dao->select('id')->from(TABLE_RELATION)
-                ->where('type')->eq('product')
-                ->andWhere('category')->in($categories)
-                ->fetchAll('id');
-            $productsIdList = array_keys($productList);
+            $productIdList = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
+                ->where('objectType')->eq('product')
+                ->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
+                ->beginIF(!empty($productIdList))->andWhere('objectID')->in($productIdList)
+                ->orderBy('objectID desc') 
+                ->fetchPairs();
         }
 
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)
             ->where('1 = 1')
-            ->beginIF(!empty($categories))->andWhere('id')->in($productsIdList)->fi()
+            ->beginIF(!empty($categories) or $image)->andWhere('id')->in($productIdList)->fi()
             ->beginIF(RUN_MODE == 'front')->andWhere('status')->eq('normal')->fi()
 
             ->beginIF($searchWord)
@@ -130,33 +136,26 @@ class productModel extends model
             ->andWhere('t1.id')->in(array_keys($products))
             ->fetchGroup('product', 'id');
 
-        /* Assign categories to it's product. */
         foreach($products as $product)
         {
+            /* Assign categories to it's product. */
             $product->categories = !empty($categories[$product->id]) ? $categories[$product->id] : array();
-            $product->category = current($product->categories);
-        }
+            $product->category   = current($product->categories);
+            foreach($product->categories as $category)  $product->unsaleable = ($category->unsaleable and !$product->unsaleable);
 
-        foreach($products as $product)
-        {
-            foreach($product->categories as $category)
+            $product->desc = empty($product->desc) ? helper::substr(strip_tags($product->content), 250) : $product->desc;
+
+            if($image)
             {
-                if($category->unsaleable and !$product->unsaleable) $product->unsaleable = 1;
+                /* Get images for these products. */
+                if($image) $images = $this->file->getByObject('product', array_keys($products), $isImage = true);
+
+                if(empty($images[$product->id])) continue;
+                $product->image = new stdclass();
+                if(isset($images[$product->id]))  $product->image->list = $images[$product->id];
+                if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
             }
         }
-        /* Get images for these products. */
-        $images = $this->loadModel('file')->getByObject('product', array_keys($products), $isImage = true);
-
-        /* Assign images to it's product. */
-        foreach($products as $product)
-        {
-            if(empty($images[$product->id])) continue;
-            $product->image = new stdclass();
-            if(isset($images[$product->id]))  $product->image->list = $images[$product->id];
-            if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
-            $product->desc = empty($product->desc) ? helper::substr(strip_tags($product->content), 250) : $product->desc;
-        }
-
 
         return $products;
     }
@@ -189,7 +188,7 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getLatest($categories, $count)
+    public function getLatest($categories, $count, $image)
     {
         $family = array();
         $this->loadModel('tree');
@@ -199,7 +198,7 @@ class productModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($family, '`order` desc', $pager);
+        return $this->getList($family, '`order` desc', $pager, $image);
     }
 
     /**
@@ -207,10 +206,11 @@ class productModel extends model
      *
      * @param array      $categories
      * @param int        $count
+     * @param bool       $image
      * @access public
      * @return array
      */
-    public function getHot($categories, $count)
+    public function getHot($categories, $count, $image = false)
     {
         $family = array();
         $this->loadModel('tree');
@@ -220,7 +220,7 @@ class productModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($family, 'views_desc', $pager);
+        return $this->getList($family, 'views_desc', $pager, $image);
     }
 
     /**
@@ -365,8 +365,8 @@ class productModel extends model
      */
     public function saveAttributes($productID)
     {
-        $lables = fixer::input('post')->get('label');
-        $values =  fixer::input('post')->get('value');
+        $labels = fixer::input('post')->get('label');
+        $values = fixer::input('post')->get('value');
 
         $data = new stdclass();
         $data->product = $productID;
@@ -374,13 +374,15 @@ class productModel extends model
         $this->dao->delete()->from(TABLE_PRODUCT_CUSTOM)->where('product')->eq($productID)->exec();
 
         $attributes = '';
-        foreach($lables as $key => $label)
+        $order = 0;
+        foreach($labels as $key => $label)
         {
             $data->label = $label;
-            $data->order = $key;
+            $data->order = $order;
             $data->value = isset($values[$key]) ? $values[$key] : '';
             $attributes .= $label . $this->lang->colon . $data->value; 
             $this->dao->replace(TABLE_PRODUCT_CUSTOM)->data($data)->exec();
+            $order ++;
         }
         if(dao::isError()) return false;
         return $attributes;

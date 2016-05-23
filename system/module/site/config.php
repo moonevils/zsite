@@ -9,13 +9,13 @@ $config->site->editor->setbasic = array('id' => 'pauseTip', 'tools' => 'simple')
 
 if(!isset($config->site->mobileTemplate)) $config->site->mobileTemplate = 'close';
 
-global $app;
-$config->site->ui = new stdclass();
-if($config->multi)  $config->site->ui->customCssFile = $app->getDataRoot() . 'css/' . $config->site->code . '/%s/%s/style.css';
-if(!$config->multi) $config->site->ui->customCssFile = $app->getDataRoot() . 'css/%s/%s/style.css';
-
 $config->themeSetting = new stdclass();
 $config->themeSetting->primaryColor = '#D1270A' ;
 $config->themeSetting->backColor    = '#FFFFFF';
 $config->themeSetting->borderRadius = '4px';
 $config->themeSetting->fontSize     = '14px';
+
+$config->cdn->fileList[] = '/theme/default/default/all.admin.css';
+$config->cdn->fileList[] = '/js/all.admin.js';
+$config->cdn->fileList[] = '/theme/default/default/all.css';
+$config->cdn->fileList[] = '/js/all.js';

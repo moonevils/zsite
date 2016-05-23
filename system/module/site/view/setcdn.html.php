@@ -17,9 +17,16 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='w-130px'><?php echo $lang->site->useCDN;?></th>
+          <th class='w-100px'><?php echo $lang->site->useCDN;?></th>
+          <td><?php echo html::radio('open', $lang->site->cdnList, $this->config->cdn->open, "class='checkbox'");?></td>
+        </tr>
+        <tr class="cdn-host <?php echo $this->config->cdn->open == 'open' ? '' : 'hide';?>">
+          <th><?php echo $lang->site->cdn;?></th>
+          <td><?php echo html::input('site', isset($this->config->cdn->site) ? $this->config->cdn->site : '', "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th></th>
           <td>
-            <?php echo html::radio('open', $lang->site->cdnList, $this->config->cdn->open, "class='checkbox'");?> &nbsp;
             <?php echo html::submitButton();?>
             <span class='text-important'><?php echo $lang->site->cdnTip?></span>
           </td>

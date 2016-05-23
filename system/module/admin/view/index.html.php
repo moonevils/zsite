@@ -11,18 +11,76 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version);?>
+<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version, false);?>
 <div class='container' id='shortcutBox'>
 
+  <div id='dashboardWrapper'>
+    <div class='panels-container dashboard' id='dashboard'>
+      <div class='dashboard-control'>
+        <div class='pull-right'>
+          <a class='btn' data-toggle='modal' href='<?php echo $this->createLink("widget", "create"); ?>'><i  data-toggle='tooltip' class='icon-plus' title='<?php echo $lang->widget->create; ?>'></i></a>
+        </div>
+      </div>
+      <div class='row summary'>
+        <?php
+        $index = 0;
+        reset($widgets);
+        ?>
+        <?php foreach($widgets as $key => $widget):?>
+        <?php
+        if(isset($this->config->widget->dependence->{$widget->type}))
+        {
+            $dependence =  $this->config->widget->dependence->{$widget->type};
+            if(!commonModel::isAvailable($dependence)) continue;
+        }
+
+        $index = $key;
+        if(strpos($widget->moreLink, '|') !== false)
+        {
+            list($moreModule, $moreMethod, $moreParams) = explode('|', $widget->moreLink);
+            $widget->moreLink = helper::createLink($moreModule, $moreMethod, $moreParams);
+        }
+        ?>
+        <div class='col-xs-<?php echo $widget->grid;?> pull-left'>
+          <?php $url = $widget->type != 'chanzhiDynamic' ? helper::createLink('widget', 'printWidget', 'widget=' . $widget->id) : '' ?>
+          <div class='panel panel-widget <?php if(isset($widget->params->color)) echo 'panel-' . $widget->params->color;?>' id='widget<?php echo $index?>' data-id='<?php echo $index?>' data-name='<?php echo $widget->title?>' data-url='<?php echo $url ?>'>
+            <div class='panel-heading'>
+              <span class='panel-title'><?php echo $widget->title;?></span>
+              <div class='panel-actions'>
+              <?php if(!empty($widget->moreLink)):?>
+              <?php $target = $widget->type == 'chanzhiDynamic' ? "target='_blank'" : '';?>
+              <?php echo html::a($widget->moreLink, $lang->more, "class='panel-action btn-more' $target");?>
+              <?php endif; ?>
+                <div class='dropdown'>
+                  <a href='javascript:;' data-toggle='dropdown' class='panel-action'><i class='icon icon-ellipsis-v'></i></a>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="<?php echo $this->createLink("widget", "edit", "index=$widget->id"); ?>" data-toggle='modal' class='edit-widget' data-title='<?php echo $widget->title; ?>' data-icon='icon-pencil'><i class="icon-pencil"></i> <?php echo $lang->edit;?></a></li>
+                    <li><a href="<?php echo helper::createLink('widget', 'delete', "id={$widget->id}")?>" class="deleter"><i class="icon-remove"></i> <?php echo $lang->delete; ?></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <?php if($widget->type != 'chanzhiDynamic'):?>
+            <div class='panel-body no-padding' data-url="<?php echo helper::createLink('widget', 'printWidget', 'widget=' . $widget->id);?>"> </div>
+            <?php else:?>
+            <script src='http://api.chanzhi.org/goto.php?item=dynamics' type='text/javascript'></script>
+            <?php endif;?>
+          </div>
+        </div>
+        <?php endforeach;?>
+      </div>
+    </div>
+  </div>
+</div>
+  <div id='noticeBox'>
   <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
   <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger alert with-icon alert-dismissable">
       <button type="submit" class="close">&times;</button>
       <strong><?php echo $lang->admin->adminEntry;?></strong>
     </div>
   </form>
   <?php endif;?>
-
   <?php if(!$ignoreUpgrade):?>
   <div class='alert alert-success' id='upgradeNotice'>
     <div>
@@ -40,111 +98,6 @@
     </div>
   </div>
   <?php endif;?>
-
-  <div class='row summary'>
-    <?php if(commonModel::isAvailable('order')):?>
-    <div class='col-xs-6'>
-      <div class='panel'>
-        <div class='panel-heading'><strong><?php echo $lang->admin->order;?></strong></div>
-        <div class='panel-body'>
-          <table class='table table-hover table-condensed table-borderless'>
-          <?php foreach($orders as $order):?> 
-          <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
-            <tr>
-              <td><?php commonModel::printLink('order', 'admin','', $orderTitle);?></td>
-              <td><?php echo substr($order->createdDate, -8);?></td>
-            </tr>
-          <?php endforeach;?>
-          <?php if(count($orders) == 5):?>
-            <tr>
-              <td></td><td align='right'><?php commonModel::printLink('order', 'admin', '', $lang->more . '...');?></td>
-            </tr>
-          <?php endif;?>
-          </table>
-        </div>
-      </div>
-    </div>
-    <?php endif;?>
-    <?php if(commonModel::isAvailable('forum')):?>
-    <div class='col-xs-6'>
-      <div class='panel'>
-        <div class='panel-heading'><strong><?php echo $lang->admin->thread;?></strong></div>
-        <div class='panel-body'>
-          <table class='table table-hover table-condensed table-borderless'>
-          <?php foreach($threads as $thread):?> 
-          <?php $threadTitle = $thread->author . '&nbsp&nbsp' . helper::substr($thread->title, 25);?>
-            <tr>
-              <td><?php echo html::a(commonmodel::createFrontLink('thread', 'view', "threadid=$thread->id"), $threadTitle);?></td>
-              <td><?php echo substr($thread->addedDate, -8);?></td>
-            </tr>
-          <?php endforeach;?>
-          <?php if(count($threads) == 5):?>
-            <tr>
-              <td></td><td align='right'><?php commonModel::printLink('forum', 'admin', "tab=feedback", $lang->more . '...');?></td>
-            </tr>
-          <?php endif;?>
-          </table>
-        </div>
-      </div>
-    </div>
-    <?php endif;?>
-    <div class='col-xs-6'>
-      <div class='panel'>
-        <div class='panel-heading'><strong><?php echo $lang->admin->feedback;?></strong></div>
-        <div class='panel-body'>
-          <table class='table table-hover table-condensed table-borderless'>
-          <?php foreach($messages as $type => $message):?> 
-          <?php if($message != '0'):?>
-          <?php $messageTitle = sprintf($lang->admin->$type, $message);?>
-          <tr>
-            <td><?php commonModel::printLink('message', 'admin', "type={$type}", $messageTitle);?></td>
-          </tr>
-          <?php endif;?>
-          <?php endforeach;?>
-          <?php if(!empty($threadReply) and $threadReply != '0'):?>
-          <tr>
-            <?php $threadReplyTitle = sprintf($lang->admin->threadReply, $threadReply);?>
-            <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle);?></td>
-          </tr>
-          <?php endif;?>
-          <?php if(commonModel::isAvailable('contribution') and $contributions != '0'):?>
-          <?php $contributionTitle = sprintf($lang->admin->contribution, $contributions);?>
-          <tr>
-            <td><?php commonModel::printLink('article', 'admin','type=contribution&tab=feedback', $contributionTitle);?></td>
-          </tr>
-          <?php endif;?>
-          <?php if(!empty($todayReportTitle)):?>
-          <tr>
-            <?php $todayReportTitle = sprintf($lang->admin->todayReport, $todayReport->pv, $todayReport->uv, $todayReport->ip);?>
-            <td><?php commonModel::printLink('stat', 'traffic', "mode=today", $todayReportTitle);?></td>
-          </tr>
-          <?php endif;?>
-          <?php if(!empty($yestodayReportTitle)):?>
-          <tr>
-            <?php $yestodayReportTitle = sprintf($lang->admin->yestodayReport, $yestodayReport->pv, $yestodayReport->uv, $yestodayReport->ip);?>
-            <td><?php commonModel::printLink('stat', 'traffic', "mode=yestoday", $yestodayReportTitle);?></td>
-          </tr>
-          <?php endif;?>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class='col-xs-6'>
-      <div class='row panel'>
-        <div class='panel-heading'><strong><?php echo $lang->admin->shortcuts->common;?></strong></div>
-        <div class='panel-body shortcutGroup'>
-          <?php 
-            if(!empty($articleCategories)) echo html::a($this->createLink('article', 'create'), $lang->admin->shortcuts->article, "class='btn btn-default'");
-            else echo html::a($this->createLink('tree', 'browse',"type=article"), $lang->admin->shortcuts->articleCategories, "class='btn btn-default'")
-          ?>
-          <?php echo html::a($this->createLink('product', 'create'), $lang->admin->shortcuts->product, "class='btn btn-default'");?>
-          <?php echo html::a($this->createLink('message', 'admin'), $lang->admin->shortcuts->feedback, "class='btn btn-default'");?>  
-          <?php echo html::a($this->createLink('site', 'setBasic'), $lang->admin->shortcuts->site, "class='btn btn-default'");?>
-          <?php echo html::a($this->createLink('company', 'setBasic'), $lang->admin->shortcuts->company, "class='btn btn-default'");?>
-          <?php echo html::a($this->createLink('company', 'setcontact'), $lang->admin->shortcuts->contact, "class='btn btn-default'")?>  
-        </div>
-      </div>
-    </div>
   </div>
-</div>
+
 <?php include '../../common/view/footer.admin.html.php';?>

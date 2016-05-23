@@ -7,7 +7,7 @@ $config->visual->setting->slogan                    = array('actions' => array()
 $config->visual->setting->slogan['actions']['edit'] = array('width' => 700, 'module' => 'visual', 'method' => 'editslogan');
 
 $config->visual->setting->powerby                    = array('actions' => array());
-$config->visual->setting->powerby['actions']['edit'] = array('width' => 600, 'icon' => 'info-sign', 'module' => 'visual', 'method' => 'editpowerby');
+$config->visual->setting->powerby['actions']['edit'] = array('width' => 600, 'icon' => 'info-sign', 'type' => 'alert');
 
 $config->visual->setting->company                    = array('actions' => array());
 $config->visual->setting->company['actions']['edit'] = array('method' => 'setbasic', 'params' => 'display=content', 'width' => 900);
@@ -41,9 +41,12 @@ $config->visual->setting->block                       = array('module' => 'visua
 $config->visual->setting->block['actions']['edit']    = array('module' => 'block', 'width' => 1200, 'params' => 'blockID={id}');
 $config->visual->setting->block['actions']['delete']  = array('method' => 'removeBlock', 'params' => 'blockID={id}&page={page}&region={region}'); 
 $config->visual->setting->block['actions']['move']    = array('method' => 'sortblocks','params' => 'page={page}&region={region}&pagent={parent}');
-$config->visual->setting->block['actions']['layout']  = array('method' => 'fixblock', 'width' => 600, 'icon' => 'columns', 'params' => 'page={page}&region={region}&blockID={id}');
+$config->visual->setting->block['actions']['layout']  = array('method' => 'fixblock', 'width' => 600, 'icon' => 'list-alt', 'params' => 'page={page}&region={region}&blockID={id}');
 $config->visual->setting->block['actions']['add']     = array('method' => 'appendBlock', 'params' => 'page={page}&region={region}&parent={parent}&allowregionblock={allowregionblock}', 'hidden' => true, 'width' => '80%', 'title' => '添加区块 {title}');
 $config->visual->setting->block['actions']['create']  = array('method' => 'create', 'params' => 'type=html', 'module' => 'block', 'width' => 1000, 'hidden' => true);
+
+$config->visual->setting->columns                     = array('module' => 'visual', 'actions' => array());
+$config->visual->setting->columns['actions']['edit']  = array('module' => 'block', 'method' => 'setColumns', 'width' => 600, 'params' => 'page={page}', 'icon' => 'columns');
 
 $config->visual->setting->article                      = array('actions' => array());
 $config->visual->setting->article['actions']['delete'] = array('params' => 'articleID={id}');

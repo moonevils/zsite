@@ -17,6 +17,7 @@ $lang->tree->browse      = "類目維護";
 $lang->tree->manage      = "維護類目";
 $lang->tree->fix         = "修復數據";
 $lang->tree->children    = "子類目";
+$lang->tree->layout      = '佈局';
 
 $lang->tree->common           = '類目';
 $lang->tree->noCategories     = '您還沒有添加類目，請添加類目。';
@@ -71,7 +72,8 @@ $lang->board->placeholder->setChildren = '論壇功能需要設置二級版塊�
 
 /* Lang items for express. */
 $lang->express = $lang->tree;
-$lang->express->name = '快遞名稱';
+$lang->express->common = '快遞';
+$lang->express->name   = '快遞名稱';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();

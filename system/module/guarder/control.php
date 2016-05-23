@@ -198,9 +198,9 @@ class guarder extends control
      */
     public function validate($url = '', $target = 'modal', $account = '', $type = '')
     {
-        if($url == '')     $url     = helper::safe64Encode('close');
-        if($account == '') $account = $this->app->user->account;
-        if($type != '' and $type != 'okFile' and $type != 'email' and $type != 'securityQuestion') $type = '';
+        if(!$url)     $url     = helper::safe64Encode('close');
+        if(!$account) $account = $this->app->user->account;
+        if($type and strpos('okFile,email,setSecurity', $type) === false) $type = '';
         $question = $this->guarder->getSecurityQuestion($account);;
 
         if($_POST)
@@ -212,7 +212,7 @@ class guarder extends control
                 $this->session->set('verifyCode', '');
                 $this->session->set('verify', 'pass');
             }
-            elseif($validateType == 'securityQuestion')
+            elseif($validateType == 'setSecurity')
             {
                 if(!($this->post->answer) or md5(trim($this->post->answer)) != $question->answer) $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->questionFail));
                 $this->session->set('verify', 'pass');

@@ -22,8 +22,14 @@ class articleModel extends model
     public function getByID($articleID, $replaceTag = true)
     {   
         /* Get article self. */
-        $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
-        if(!$article) $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
+        if(!is_numeric($articleID))
+        {
+            $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
+        }
+        else
+        {
+            $article = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
+        }
 
         if(!$article) return false;
         
@@ -31,11 +37,11 @@ class articleModel extends model
         if($replaceTag) $article->content = $this->loadModel('tag')->addLink($article->content);
 
         /* Get it's categories. */
-        $article->categories = $this->dao->select('t2.*')
+        $article->categories = $this->dao->select('t2.name,t2.id,t2.alias,t2.path')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t1.type')->eq($article->type)
-            ->andWhere('t1.id')->eq($articleID)
+            ->andWhere('t1.id')->eq($article->id)
             ->fetchAll('id');
 
         /* Get article path to highlight main nav. */
@@ -59,8 +65,8 @@ class articleModel extends model
     public function getPageByID($pageID)
     {
         /* Get article self. */
-        $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($pageID)->andWhere('type')->eq('page')->fetch();
-        if(!$page) $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->fetch();
+        if(!is_numeric($pageID)) $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($pageID)->andWhere('type')->eq('page')->fetch();
+        if(is_numeric($pageID))  $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->fetch();
 
         if(!$page) return false;
         
@@ -80,10 +86,11 @@ class articleModel extends model
      * @param  array   $categories 
      * @param  string  $orderBy 
      * @param  object  $pager 
+     * @param  int     $limit 
      * @access public
      * @return array
      */
-    public function getList($type, $categories, $orderBy, $pager = null)
+    public function getList($type, $categories, $orderBy, $pager = null, $limit = 0)
     {
         $searchWord = $this->get->searchWord;
         $categoryID = $this->get->categoryID;
@@ -102,33 +109,39 @@ class articleModel extends model
                 ->orWhere('content')->like("%{$searchWord}%")->andWhere('type')->eq($type)
                 ->fi()
                 ->orderBy($orderBy)
+                ->beginIf($limit)->limit($limit)->fi()
                 ->page($pager)
                 ->fetchAll('id');
         }
-        elseif($type == 'contribution')
+        elseif($type == 'submittion')
         {
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
-                ->where('contribution')->ne(0)
+                ->where('submittion')->ne(0)
                 ->beginIf(RUN_MODE == 'front')
                 ->andWhere('addedBy')->eq($this->app->user->account)
                 ->fi()
                 ->orderBy($orderBy)
+                ->beginIf($limit)->limit($limit)->fi()
                 ->page($pager)
                 ->fetchAll('id');
         }
         else
         {
-            /*Get articles containing the search word (use groupBy to distinct articles).  */
-            $articleIdList = $this->dao->select('id')->from(TABLE_RELATION)
-                ->where('type')->eq($type)
-                ->andWhere('category')->in($categories)
-                ->fetchAll('id');
+            $articleIdList = array();
+            if(!empty($categories))
+            {
+                /*Get articles containing the search word (use groupBy to distinct articles).  */
+                $articleIdList = $this->dao->select('id')->from(TABLE_RELATION)
+                    ->where('type')->eq($type)
+                    ->andWhere('category')->in($categories)
+                    ->fetchAll('id');
+            }
 
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
                 ->where('type')->eq($type)
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-                ->andWhere('addedDate')->le(helper::now())
                 ->andWhere('status')->eq('normal')
+                ->andWhere('addedDate')->le(helper::now())
                 ->fi()
                 ->beginIf(!empty($categories))->andWhere('id')->in(array_keys($articleIdList))->fi()
 
@@ -142,6 +155,7 @@ class articleModel extends model
 
                 ->orderBy($orderBy)
                 ->page($pager)
+                ->beginIf($limit)->limit($limit)->fi()
                 ->fetchAll('id');
         }
         if(!$articles) return array();
@@ -152,43 +166,17 @@ class articleModel extends model
     /**
      * Get page pairs.
      * 
-     * @param string $pager 
      * @access public
      * @return array
      */
-    public function getPagePairs($pager = null)
+    public function getPagePairs()
     {
         return $this->dao->select('id, title')->from(TABLE_ARTICLE)
             ->where('type')->eq('page')
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('status')->eq('normal')
             ->orderBy('id_desc')
-            ->page($pager, false)
             ->fetchPairs();
-    }
-
-    /**
-     * Get article pairs.
-     * 
-     * @param string $modules 
-     * @param string $orderBy 
-     * @param string $pager 
-     * @access public
-     * @return array
-     */
-    public function getPairs($categories, $orderBy, $pager = null)
-    {
-        return $this->dao->select('t1.id, t1.title, t1.alias')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-            ->where('1=1')
-            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-            ->andWhere('t1.addedDate')->le(helper::now())
-            ->andWhere('t1.status')->eq('normal')
-            ->fi()
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-            ->orderBy($orderBy)
-            ->page($pager, false)
-            ->fetchAll('id');
     }
 
     /**
@@ -208,9 +196,7 @@ class articleModel extends model
         if(!is_array($categories)) $categories = explode(',', $categories);
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
-        $this->app->loadClass('pager', true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($type, $family, 'sticky_desc, views_desc', $pager);
+        return $this->getList($type, $family, 'sticky_desc, views_desc', null, $count);
     }
 
     /**
@@ -231,8 +217,7 @@ class articleModel extends model
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
         $this->app->loadClass('pager', true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($type, $family, 'sticky_desc, addedDate_desc', $pager);
+        return $this->getList($type, $family, 'sticky_desc, addedDate_desc', null, $count);
     }
 
     /**
@@ -246,8 +231,7 @@ class articleModel extends model
     public function getPageList($count)
     {
         $this->app->loadClass('pager', true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList('page', '', '`order` desc', $pager);
+        return $this->getList('page', '', '`order` desc', null, $count);
     }
 
     /**
@@ -286,24 +270,71 @@ class articleModel extends model
      */
     public function processArticleList($articles, $type)
     {
-        $categories = $this->dao->select('t2.id, t2.name, t2.abbr, t2.alias, t1.id AS article')
+        $articleIdList = array_keys($articles);
+        $categories    = $this->dao->select('t2.id, t2.name, t2.abbr, t2.alias, t1.id AS article')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq($type)
-            ->andWhere('t1.id')->in(array_keys($articles))
+            ->andWhere('t1.id')->in($articleIdList)
             ->fetchGroup('article', 'id');
 
-        /* Assign categories to it's article. */
+        /* Get images for these articles. */
+        $images = $this->loadModel('file')->getByObject($type, $articleIdList, $isImage = true);
+
+         /* Assign summary, category to it's article. */
         foreach($articles as $article)
         {
+            $article->summary    = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
             $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
             $article->category   = current($article->categories);
         }
 
-        /* Get images for these articles. */
-        $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
+        return $articles;
+    }
 
-        /* Assign images to it's article. */
+    /**
+     * Compute comments of an article list.
+     * 
+     * @param  array    $articles 
+     * @param  string   $type
+     * @access public
+     * @return array
+     */
+    public function computeComments($articles, $type = 'article')
+    {
+        if(empty($articles)) return $articles;
+        if(!commonModel::isAvailable('message')) return $articles;
+        $articleIdList = array_keys($articles);
+
+        $comments = $this->dao->select("objectID, count(id) as count")->from(TABLE_MESSAGE)
+            ->where('type')->eq('comment')
+            ->andWhere('objectType')->eq($type)
+            ->andWhere('objectID')->in($articleIdList)
+            ->andWhere('status')->eq(1)
+            ->groupBy('objectID')
+            ->fetchPairs('objectID', 'count');
+
+        foreach($articles as $article)
+        {
+            $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
+        }
+
+        return $articles;
+    }
+
+    /**
+     * Process images of article list.
+     * 
+     * @param  array    $articles 
+     * @access public
+     * @return void
+     */
+    public function processImages($articles, $type)
+    {
+        if(empty($articles)) return $articles;
+        $articleIdList = array_keys($articles);
+        $images = $this->loadModel('file')->getByObject($type, $articleIdList, $isImage = true);
+
         foreach($articles as $article)
         {
             if(empty($images[$article->id])) continue;
@@ -313,25 +344,11 @@ class articleModel extends model
             $article->image->primary = $article->image->list[0];
         }
 
-        /* Assign summary to it's article. */
-        foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
-
-        /* Assign comments to it's article. */
-        $articleIdList = array_keys($articles);
-        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
-            ->where('type')->eq('comment')
-            ->andWhere('objectType')->eq('article')
-            ->andWhere('objectID')->in($articleIdList)
-            ->andWhere('status')->eq(1)
-            ->groupBy('objectID')
-            ->fetchPairs('objectID', 'count');
-        foreach($articles as $article) $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
- 
         return $articles;
     }
 
     /**
-     * Get the prev and next ariticle.
+     * Get the prev and next article.
      * 
      * @param  int    $current  the current article id.
      * @param  int    $category the category id.
@@ -380,7 +397,8 @@ class articleModel extends model
             ->add('type', $type)
             ->add('addedBy', $this->app->user->account)
             ->setIF(!$this->post->isLink, 'link', '')
-            ->setIF(RUN_MODE == 'front', 'contribution', 1)
+            ->setIF(RUN_MODE == 'front', 'submittion', 1)
+            ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', 0)
             ->stripTags('content,link', $this->config->allowedTags->admin)
             ->get();
 
@@ -391,8 +409,8 @@ class articleModel extends model
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type != 'page' and $type != 'contribution' and !$this->post->isLink, $this->config->article->require->create, 'notempty')
-            ->batchCheckIF($type == 'contribution', $this->config->article->require->post, 'notempty')
+            ->batchCheckIF($type != 'page' and $type != 'submittion' and !$this->post->isLink, $this->config->article->require->create, 'notempty')
+            ->batchCheckIF($type == 'submittion', $this->config->article->require->post, 'notempty')
             ->batchCheckIF($type == 'page' and !$this->post->isLink, $this->config->article->require->page, 'notempty')
             ->batchCheckIF($type != 'page' and $this->post->isLink, $this->config->article->require->link, 'notempty')
             ->batchCheckIF($type == 'page' and $this->post->isLink, $this->config->article->require->pageLink, 'notempty')
@@ -406,9 +424,9 @@ class articleModel extends model
 
         /* Save article keywords. */
         $this->loadModel('tag')->save($article->keywords);
-        if($type != 'page' and $type != 'contribution') $this->processCategories($articleID, $type, $this->post->categories);
+        if($type != 'page' and $type != 'submittion') $this->processCategories($articleID, $type, $this->post->categories);
 
-        if($article->contribution == 0)
+        if($article->submittion == 0)
         {
             $article = $this->getByID($articleID);
             $this->loadModel('search')->save($type, $article);
@@ -436,7 +454,7 @@ class articleModel extends model
         $blog->type       = 'blog';
         $blog->categories = $this->post->categories;
         $blog->copyURL    = $articleID; 
-        $blog->author     = $this->app->user->realname;
+        $blog->author     = $this->app->user->account;
         $blog->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
         $blog->editedDate = $blog->addedDate;
         $blog->views      = 0;
@@ -527,6 +545,7 @@ class articleModel extends model
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->setIF(!$this->post->isLink, 'link', '')
+            ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', 0)
             ->get();
 
         $article->keywords = seo::unify($article->keywords, ',');
@@ -536,8 +555,8 @@ class articleModel extends model
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type == 'contribution', $this->config->article->require->post, 'notempty')
-            ->batchCheckIF($type != 'page' and $type != 'contribution' and !$this->post->isLink, $this->config->article->require->edit, 'notempty')
+            ->batchCheckIF($type == 'submittion', $this->config->article->require->post, 'notempty')
+            ->batchCheckIF($type != 'page' and $type != 'submittion' and !$this->post->isLink, $this->config->article->require->edit, 'notempty')
             ->batchCheckIF($type == 'page' and !$this->post->isLink, $this->config->article->require->page, 'notempty')
             ->batchCheckIF($type != 'page' and $this->post->isLink, $this->config->article->require->link, 'notempty')
             ->batchCheckIF($type == 'page' and $this->post->isLink, $this->config->article->require->pageLink, 'notempty')
@@ -551,13 +570,13 @@ class articleModel extends model
         if(dao::isError()) return false;
 
         $this->loadModel('tag')->save($article->keywords);
-        if($type != 'page' and $type != 'contribution') $this->processCategories($articleID, $type, $this->post->categories);
+        if($type != 'page' and $type != 'submittion') $this->processCategories($articleID, $type, $this->post->categories);
 
         if(dao::isError()) return false;
 
         $article = $this->getByID($articleID);
         if(empty($article)) return false;
-        if($type = 'contribution') return true;
+        if($type = 'submittion') return true;
         return $this->loadModel('search')->save($type, $article);
     }
         
@@ -573,8 +592,8 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if(!$article) return false;
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) die();
-        /* If this article is a contribution and has been adopt, front cannot delete it.*/
-        if(RUN_MODE == 'front' and $article->contribution == 2) die();
+        /* If this article is a submittion and has been adopt, front cannot delete it.*/
+        if(RUN_MODE == 'front' and $article->submittion == 2) die();
 
         $this->dao->delete()->from(TABLE_RELATION)->where('id')->eq($articleID)->andWhere('type')->eq($article->type)->exec();
         $this->dao->delete()->from(TABLE_ARTICLE)->where('id')->eq($articleID)->exec();
@@ -621,7 +640,7 @@ class articleModel extends model
      * @access public
      * @return string
      */
-    public function createPreviewLink($articleID)
+    public function createPreviewLink($articleID, $viewType = '')
     {
         $article = $this->getByID($articleID);
         if(empty($article)) return null;
@@ -638,7 +657,7 @@ class articleModel extends model
             $alias = "name=$article->alias";
         }
 
-        $link = commonModel::createFrontLink($module, 'view', $param, $alias);
+        $link = commonModel::createFrontLink($module, 'view', $param, $alias, $viewType);
         if($article->link) $link = $article->link;
 
         return $link;
@@ -713,13 +732,13 @@ class articleModel extends model
     public function saveSetting()
     {
         $setting = new stdclass();
-        $setting->contribution = $this->post->contribution; 
+        $setting->submittion = $this->post->submittion; 
         $this->loadModel('setting')->setItems('system.common.article', $setting);
         return !dao::isError();
     }
 
     /**
-     * Approve an contribution. 
+     * Approve an submittion. 
      * 
      * @param  int    $articleID 
      * @access public
@@ -728,12 +747,12 @@ class articleModel extends model
     public function approve($articleID, $type, $categories)
     {
         $this->processCategories($articleID, $type, $categories);
-        $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('contribution')->eq(2)->where('id')->eq($articleID)->exec();
+        $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submittion')->eq(2)->where('id')->eq($articleID)->exec();
         $article = $this->getByID($articleID);
-        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveContribution', 'article', $articleID, '', $article->addedBy);
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmittion', 'article', $articleID, '', $article->addedBy);
         
         $this->loadModel('search')->save($article->type, $article);
-        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveContribution));
+        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmittion));
 
         return !dao::isError();
     }
@@ -747,7 +766,7 @@ class articleModel extends model
      */
     public function reject($articleID)
     {
-        $this->dao->update(TABLE_ARTICLE)->set('contribution')->eq(3)->where('id')->eq($articleID)->exec();
+        $this->dao->update(TABLE_ARTICLE)->set('submittion')->eq(3)->where('id')->eq($articleID)->exec();
         $article = $this->getByID($articleID);
         $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->rejectMessage, $article->title));
 
@@ -755,19 +774,17 @@ class articleModel extends model
     }
 
     /**
-     * Get new contributions.
+     * Get new submittion list.
      * 
      * @access public
      * @return array
      */
-    public function getContributions()
+    public function getSubmittions($limit)
     {
-        $contributions = $this->dao->select('count(*) as count')->from(TABLE_ARTICLE)
-            ->where('type')->eq('contribution')
-            ->andWhere('contribution')->ne(3)
+        return $this->dao->select('*')->from(TABLE_ARTICLE)
+            ->where('type')->eq('submittion')
+            ->andWhere('submittion')->ne(3)
             ->andWhere('editedDate')->like(date("Y-m-d") . '%')
-            ->fetch();
-
-        return $contributions->count;
+            ->fetchAll('id');
     }
 }

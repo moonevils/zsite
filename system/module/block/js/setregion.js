@@ -19,6 +19,7 @@ $(document).ready(function()
     computeParent();
     initSortable();
 
+    /* Set border and title show. */
     $('input[type=checkbox]').change(function()
     {
         if($(this).prop('checked')) $(this).next('input[type=hidden]').val(1);
@@ -26,6 +27,12 @@ $(document).ready(function()
     });
 
     $('input[type=checkbox]').change();
+
+    /* Fix edit link. */
+    $(document).on('change', 'select', function()
+    {
+        $(this).parents('td').next().find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).val()));
+    });
 
     $('#blockList').on('click', '.plus, .plus-child, .btn-add-child', function()
     {

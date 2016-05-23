@@ -34,15 +34,12 @@ class ui extends control
             $setting['parser']      = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
             $setting['customTheme'] =  $custom ? $theme : '';
 
-            $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-            if(!file_exists($cssFile)) $this->ui->createCustomerCss($template, $theme);
-
             $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title           = $this->lang->ui->setTemplate;
+        $this->view->title           = $this->lang->ui->template->theme;
         $this->view->template        = current($templates);
         $this->view->installedThemes = $this->ui->getInstalledThemes();
         $this->view->currentTheme    = $this->config->template->{$this->device}->theme;
@@ -66,7 +63,7 @@ class ui extends control
         $templates = $this->ui->getTemplates();
         if(!isset($templates[$template]['themes'][$theme])) die();
 
-        $cssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+        $cssFile  = $this->ui->getCustomCssFile($template, $theme);
         $savePath = dirname($cssFile);
         if(!file_exists($savePath)) mkdir($savePath, 0777, true);
 
@@ -90,7 +87,7 @@ class ui extends control
 
         $this->view->setting = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
 
-        $this->view->title      = $this->lang->ui->customtheme;
+        $this->view->title      = $this->lang->ui->appearance;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
         $this->view->uiHeader   = true;
@@ -212,6 +209,7 @@ class ui extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->lang->menuGroups->ui = 'others';
         $this->view->title = $this->lang->ui->others;
         $this->display();
     }
@@ -502,7 +500,21 @@ class ui extends control
      */
     public function themeStore($type = 'byindustry', $param = 'all', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
+        $this->loadModel('package');
         $pager = null;
+    
+        $installedThemes = $this->ui->getInstalledThemes();
+        
+        $codes = array();
+        if($type == 'installed')
+        {
+            foreach($installedThemes as $template => $themes)
+            {
+                $codes = $codes + array_keys($themes);
+            }
+
+            $param = join(',', $codes);
+        }
 
         /* Get results from the api. */
         $results = $this->loadModel('package')->getThemesByApi($type, $param, $recTotal, $recPerPage, $pageID);
@@ -512,12 +524,14 @@ class ui extends control
             $pager  = new pager($results->dbPager->recTotal, $results->dbPager->recPerPage, $results->dbPager->pageID);
         }
 
+        if($this->session->currentGroup != 'design') $this->lang->menuGroups->ui = 'themestore';
+        if($this->session->currentGroup == 'design') $this->view->uiHeader = true;
+
         $this->view->themes       = zget($results, 'themes');
         $this->view->title        = $this->lang->ui->themeStore;
         $this->view->position[]   = $this->lang->package->obtain;
 
         $this->view->industryTree = str_replace('/index.php', $this->server->script_name, $this->package->getIndustriesByAPI());
-        $this->view->installeds   = $this->package->getLocalPackages('installed');
         $this->view->pager        = $pager;
         $this->view->tab          = 'obtain';
         $this->view->type         = $type;
@@ -591,6 +605,41 @@ class ui extends control
         $this->view->theme    = $theme;
         $this->view->uiHeader = true;
         $this->view->pageList = $this->lang->block->$template->pages;
+        $this->display();
+    }
+
+    /**
+     * Edit template files.
+     * 
+     * @param  string $module 
+     * @param  string $file 
+     * @access public
+     * @return void
+     */
+    public function editTemplate($module = 'common', $file = 'header')
+    {
+        $template = $this->config->template->{$this->device}->name;
+        if($_POST)
+        {
+            $canManage = array('result' => 'success');
+            if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'warning' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
+            $result = $this->ui->writeViewFile($template, $this->post->module, $this->post->file);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('editTemplate', "moduel=$module&file=$file")));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->lang->menuGroups->ui = 'edit';
+
+        $this->view->title         = $this->lang->ui->editTemplate;
+        $this->view->currentModule = $module;
+        $this->view->currentFile   = $file;
+        $this->view->uiHeader      = false;
+        $this->view->files         = $this->lang->ui->files->$template;
+        $this->view->realFile      = $this->ui->getExtFile($template, $module, $file);
+        $this->view->content       = file_get_contents($this->ui->getEffectViewFile($template, $module, $file));
+        $this->view->rawContent    = file_get_contents($this->app->getWwwRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php');
+
         $this->display();
     }
 }

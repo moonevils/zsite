@@ -50,7 +50,7 @@ class file extends control
      */
     public function ajaxUpload($uid)
     {
-        if(RUN_MODE == 'front' and !commonModel::isAvailable('forum') and !commonModel::isAvailable('contribution')) exit;
+        if(RUN_MODE == 'front' and !commonModel::isAvailable('forum') and !commonModel::isAvailable('submittion')) exit;
         if(!$this->loadModel('file')->canUpload())  $this->send(array('error' => 1, 'message' => $this->lang->file->uploadForbidden));
         $file = $this->file->getUpload('imgFile');
         $file = $file[0];
@@ -163,7 +163,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function sourceEdit($fileID)
+    public function editSource($fileID)
     {
         $this->file->setSavePath('source');
         $file = $this->file->getById($fileID);
@@ -183,7 +183,7 @@ class file extends control
                 if(!empty($sameUpFile) or !empty($sameFilename))$this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
             }
 
-            $result = $this->file->sourceEdit($file, $filename);
+            $result = $this->file->editSource($file, $filename);
             if($result) $this->send(array('result' => 'success','message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'browseSource')));
             $this->send(array('result' => 'fail', 'message' => dao::getError() ));
         }
@@ -203,8 +203,9 @@ class file extends control
      */
     public function upload($objectType, $objectID)
     {
+
         $this->file->setSavePath($objectType);
-        if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
+        if(!$this->file->checkSavePath()) die(json_encode(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable)));
 
         if($objectType == 'source' and !$this->post->continue)
         {
@@ -213,13 +214,14 @@ class file extends control
                 $extension    = $this->file->getExtension($name);
                 $filename     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
                 $sameFilename = $this->file->checkSameFile($filename);
-                if(!empty($sameFilename)) $this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+                if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'error' => $this->lang->file->sameName)));
             }
         }
 
         $files = $this->file->getUpload('files', $objectType);
         if($files) $this->file->saveUpload($objectType, $objectID);
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+
+        die(json_encode(array('result' => 'success', 'message' => $this->lang->saveSuccess)));
     }
 
     /**
@@ -554,5 +556,56 @@ class file extends control
             if($score) $this->dao->update(TABLE_FILE)->set('score')->eq($score)->set('public')->eq(0)->where('id')->eq($fileID)->exec();
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
+
+    /**
+     * Rebuild thumb images.
+     * 
+     * @param  int    $imageDirKey 
+     * @param  int    $lastImage 
+     * @access public
+     * @return void
+     */
+    public function rebuildThumbs($imageDirKey = 0, $lastImage = 0, $completed = 0, $total = 0)
+    {
+        $imageDirs = glob($this->app->getDataRoot() . "upload/*");
+        if($total == 0)
+        {
+            foreach($imageDirs as $dir)
+            {
+                $images = glob($dir . '/f_*');
+                $total  += count($images);
+            }
+        }
+        $rate = round($completed / $total * 100) . $this->lang->percent;
+
+        $imageDir   = $imageDirs[$imageDirKey];
+        $images     = glob($imageDir . '/f_*');
+        $imageCount = count($images);
+        $limit      = $imageCount - $lastImage >= 10 ? 10 : $imageCount - $lastImage; 
+        $rawImages  = array_slice($images, $lastImage, $limit);
+        $completed += $limit;
+
+        foreach($rawImages as $image)
+        {
+            $extension = $this->file->getExtension($image);
+            if(in_array(strtolower($extension), $this->config->file->imageExtensions, true) === false) continue;
+            $this->file->compressImage($image);
+        }
+
+        if($lastImage + $limit == $imageCount)
+        { 
+            if($imageDirKey == count($imageDirs) - 1) $this->send(array('result' => 'finished', 'message' => $this->lang->createSuccess));
+            if($imageDirKey < count($imageDirs) - 1)
+            {
+                $imageDirKey = $imageDirKey + 1;
+                $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildThumbs', "imageDirKey=$imageDirKey&lastImage=0&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildThumbs, $rate)));
+            }
+        }
+        else
+        {
+            $lastImage = $lastImage + $limit;
+            $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildthumbs', "imageDirKey=$imageDirKey&lastImage=$lastImage&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildThumbs, $rate)));
+        }
     }
 }

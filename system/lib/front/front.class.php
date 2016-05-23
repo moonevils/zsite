@@ -216,7 +216,7 @@ class html
         foreach($options as $key => $value)
         {
             $key     = str_replace('item', '', $key);
-            $string .= "<label class='checkbox'><input type='checkbox' id='{$name}{$i}'  name='{$name}[]' value='$key' ";
+            $string .= "<label class='checkbox-inline'><input type='checkbox' id='{$name}{$i}'  name='{$name}[]' value='$key' ";
             $string .= strpos($checked, ",$key,") !== false ? " checked ='checked'" : "";
             $string .= $attrib;
             $string .= " /> $value</label>\n";
@@ -466,14 +466,18 @@ class js
      * @access public
      * @return string
      */
-    public static function import($url)
+    public static function import($url, $version = true)
     {
         global $config;
 
-        $pathInfo = parse_url($url);
-        $mark  = !empty($pathInfo['query']) ? '&' : '?';
+        if($version)
+        {
+            $pathInfo = parse_url($url);
+            $mark  = !empty($pathInfo['query']) ? '&' : '?';
+            $url = "$url{$mark}v={$config->version}";
+        }
 
-        echo "<script src='$url{$mark}v={$config->version}' type='text/javascript'></script>\n";
+        echo "<script src='$url' type='text/javascript'></script>\n";
     }
 
     /**
@@ -794,11 +798,12 @@ class css
      * @access public
      * @return vod
      */
-    public static function import($url, $attrib = '')
+    public static function import($url, $attrib = '', $version = true)
     {
         global $config;
         if(!empty($attrib)) $attrib = ' ' . $attrib;
-        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='screen'{$attrib}/>\n";
+        if($version) $url = "$url?v={$config->version}";
+        echo "<link rel='stylesheet' href='$url' type='text/css' media='screen'{$attrib}/>\n";
     }
 
     /**

@@ -36,7 +36,7 @@
                   <span class="input-group-addon"><?php echo $lang->product->order;?></span>
                   <?php echo html::input('order', $order, "class='form-control'");?>
                   <span class="input-group-addon">
-                    <label class='checkbox'>
+                    <label class='checkbox-inline'>
                       <?php $checked = (isset($currentCategory->unsaleable) and $currentCategory->unsaleable) ? 'checked' : '';?>
                       <input type='checkbox' name='unsaleable' id='unsaleable' value='1' <?php echo $checked;?> />
                       <span><?php echo $lang->product->unsaleable;?></span>

@@ -9,12 +9,24 @@ js::set('random', $this->session->random);
   <div id='adminLogin'>
     <div id='siteName'>
       <?php echo $this->config->site->name;?>
+      <div class='pull-right'>
+        <div class='dropdown' id='langs'>
+          <button class='btn' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class='caret'></span></button>
+          <ul class='dropdown-menu'>
+            <?php foreach($config->langs as $key => $value):?>
+            <li class="<?php echo $key == $this->app->getClientLang() ? 'active' : ''; ?>">
+              <a href='###' data-value="<?php echo $key;?>"><?php echo $value;?></a>
+            </li>
+            <?php endforeach;?>
+          </ul>
+        </div>
+      </div>
     </div>
     <form method='post' id='ajaxForm' data-checkfingerprint='1'>
       <div id='formError' class='alert alert-danger hiding'></div>
       <div class='row'>
         <div class='col-xs-4 text-center'>
-        <?php echo html::image($this->config->webRoot . 'template/default/theme/default/images/main/logo.login.admin.png'); ?>
+        <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.png'); ?>
         </div>
         <div class='col-xs-8'>
           <table class="table table-form">

@@ -21,7 +21,7 @@ class cartModel extends model
      */
     public function add($productID, $count)
     {
-        $hasProduct = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->andWhere('product')->eq($productID)->fetch('count');
+        $hasProduct = $this->dao->select('count(id) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->andWhere('product')->eq($productID)->fetch('count');
 
         if(!$hasProduct)
         {
@@ -109,12 +109,12 @@ class cartModel extends model
         $newCart = array();
         foreach($cart as $product)
         {
-            $pro = new stdclass();
-            $pro->account = 'guest';
-            $pro->product = $product->product;
-            $pro->count   = $product->count;
-            $pro->lang    = 'zh-cn';
-            $newCart[$product->product] = $pro;
+            $goods = new stdclass();
+            $goods->account = 'guest';
+            $goods->product = $product->product;
+            $goods->count   = $product->count;
+            $goods->lang    = 'zh-cn';
+            $newCart[$product->product] = $goods;
         }
         return $newCart;
     }
@@ -177,5 +177,29 @@ class cartModel extends model
             unset($goodsList[$id]);
         }
         setcookie('cart', json_encode($goodsList), time() + 60 * 60 * 24);
+    }
+
+    /**
+     * Get count number of goods in cart.
+     * 
+     * @access public
+     * @return int
+     */
+    public function getCount()
+    {
+        $count = 0;
+
+        $goodsInCookie = (array) $this->getListByCookie();
+        if($this->app->user->account != 'guest')
+        {
+            $count = $this->dao->select('count(*) as count')->from(TABLE_CART)
+                ->where('account')->eq($this->app->user->account)
+                ->beginIf(!empty($goodsInCookie))->andWhere('product')->notin(array_keys($goodsInCookie))->fi()
+                ->fetch('count');
+        }
+
+        $count += count($goodsInCookie);
+        if($this->app->user->account != 'guest' or $count != 0) return html::a(helper::createLink('cart', 'browse'), sprintf($this->lang->cart->topbarInfo, $count));
+        return null;
     }
 }

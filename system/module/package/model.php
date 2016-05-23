@@ -1050,17 +1050,6 @@ class packageModel extends model
         $content = str_replace('THEME_CODEFIX', $newCode, $content);
         file_put_contents($dbFile, $content);
 
-        $hookFiles = glob("./theme/{$package}/www/template/{$themeInfo->template}/theme/{$code}/*.php");
-        if(!$renameCode and !empty($hookFiles))
-        {
-            foreach($hookFiles as $hookFile)
-            {
-                $hookCode = file_get_contents($hookFile);
-                $hookCode = str_replace('_THEME_CODEFIX_', $code, $hookCode);
-                file_put_contents($hookFile, $hookCode);
-            }
-        }
-
         if($renameCode)
         {
             /* Write new newCode to yaml file. */
@@ -1074,20 +1063,12 @@ class packageModel extends model
             $configCode = str_replace('$this->config->ui->themes["' . $code . '"] = ', '$this->config->ui->themes["' . $newCode . '"] = ', $configCode);
             file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
 
-            /* Change code in hook file. */
-            if(file_exists($hookFile))
-            {
-                $hookCode = file_get_contents($hookFile);
-                $hookCode = str_replace('_THEME_CODEFIX_', $newCode, $hookCode);
-                file_put_contents("./theme/{$package}/system/module/ui/ext/model/{$themeInfo->template}.{$newCode}.theme.php", $hookCode);
-            }
-
             /* Rename files named by old newCode. */
             $files2Move = array();
-            $files2Move["./theme/{$package}/www/data/css/{$themeInfo->template}/{$code}"]       = "./theme/{$package}/www/data/css/{$themeInfo->template}/{$newCode}";
-            $files2Move["./theme/{$package}/www/data/source/{$themeInfo->template}/{$code}"]    = "./theme/{$package}/www/data/source/{$themeInfo->template}/{$newCode}";
-            $files2Move["./theme/{$package}/system/module/ui/ext/config/{$code}.php"]           = "./theme/{$package}/system/module/ui/ext/config/{$newCode}.php";
-            $files2Move["./theme/{$package}/www/template/{$themeInfo->template}/theme/{$code}"] = "./theme/{$package}/www/template/{$themeInfo->template}/theme/{$newCode}";
+            $files2Move["./theme/{$package}/www/data/css/{$themeInfo->template}_{$code}.css"] = "./theme/{$package}/www/data/css/{$themeInfo->template}_{$newCode}.css";
+            $files2Move["./theme/{$package}/www/data/source/{$themeInfo->template}/{$code}"]  = "./theme/{$package}/www/data/source/{$themeInfo->template}/{$newCode}";
+            $files2Move["./theme/{$package}/system/module/ui/ext/config/{$code}.php"]         = "./theme/{$package}/system/module/ui/ext/config/{$newCode}.php";
+            $files2Move["./theme/{$package}/www/theme/{$themeInfo->template}/{$code}"]        = "./theme/{$package}/www/theme/{$themeInfo->template}/{$newCode}";
             foreach($files2Move as $oldFile => $newFile)
             {
                 if(is_dir($oldFile))
@@ -1363,7 +1344,6 @@ class packageModel extends model
     {
         $apiURL = $this->apiRoot . "apiGetThemes-$type-$param-$recTotal-$recPerPage-$pageID.json";
         $data   = $this->fetchAPI($apiURL);
-
         if(isset($data->themes))
         {
             foreach($data->themes as $package)

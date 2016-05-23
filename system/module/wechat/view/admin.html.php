@@ -11,8 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php js::set('setCounts', $lang->site->setCounts);?>
-<?php js::set('score', commonModel::isAvailable('score'));?>
 <?php if(!checkCurlSSL()):?>
   <div class='alert alert-danger'>
     <?php echo $lang->wechat->curlSSLRequired;?>
@@ -21,10 +19,7 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->list;?></strong>
-    <div class='panel-actions'>
-      <?php commonModel::printLink('wechat', 'create', '', '<i class="icon-plus"></i>', "class='btn btn-primary', title='{$lang->wechat->create}'");?>
-      <?php commonModel::printLink('user', 'admin', "provider=wechat", '<i class="icon-user"></i> ', "class='btn btn-primary' title='{$lang->wechat->users}'");?>
-    </div>
+    <div class='panel-actions'><?php commonModel::printLink('wechat', 'create', '', '<i class="icon-plus"></i>' . $lang->wechat->create, "class='btn btn-primary'");?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>

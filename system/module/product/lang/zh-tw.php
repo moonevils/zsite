@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->product->common = '產品維護';
+$lang->product->common = '產品';
 $lang->product->home   = '產品中心';
 
 $lang->product->id         = '編號';
@@ -63,8 +63,9 @@ $lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入�
 $lang->product->count        = '數量';
 $lang->product->comments     = '評論';
 $lang->product->detail       = '查看詳情';
-$lang->product->setting      = '系統設置';
+$lang->product->setting      = '設置';
 $lang->product->soldout      = '已售罄';
+$lang->product->layout       = '佈局';
 
 $lang->product->congratulations  = "恭喜";
 $lang->product->addToCartSuccess = "成功加入購物車。";

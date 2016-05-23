@@ -33,24 +33,24 @@ $(document).ready(function()
         </div>
         <div class="modal-body">
   <?php endif;?>
-  <form class='form-inline' id='validateForm' action="<?php echo $this->createLink('guarder', 'validate', "url=$url&target=$target&account=$account&method=$method");?>" method='post' style='min-height:165px'>
+  <form class='form-inline' id='validateForm' action="<?php echo $this->createLink('guarder', 'validate', "url={$url}&target={$target}&account={$account}&method={$method}");?>" method='post' style='min-height:165px'>
     <?php $refUrl  = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
     <?php $fileBtn = html::a($refUrl, $lang->guarder->created, "class='btn btn-sm btn-primary okFile'")?>
     <table class='table table-form'>
       <tr>
-        <th class='w-100px'><?php echo $lang->guarder->options;?></th>
+        <th class='w-80px'><?php echo $lang->guarder->options;?></th>
         <td colspan='3'>
           <?php
           $types   = array();
           $options = explode(',', $this->config->site->importantValidate);
-          if(in_array('securityQuestion', $options)) $types['securityQuestion'] = $lang->site->validateTypes->securityQuestion;
-          if(in_array('okFile', $options)) $types['okFile'] = $lang->site->validateTypes->okFile;
-          if(in_array('email', $options)) $types['email'] = $lang->site->validateTypes->email;
+          if(in_array('setSecurity', $options)) $types['setSecurity'] = $lang->site->validateTypes->setSecurity;
+          if(in_array('okFile', $options))      $types['okFile']      = $lang->site->validateTypes->okFile;
+          if(in_array('email', $options))       $types['email']       = $lang->site->validateTypes->email;
           ?>
           <?php echo html::radio('type[]', $types, isset($types[$this->cookie->validate]) ? $this->cookie->validate : key($types));?>
         </td>
       </tr>
-      <?php if(in_array('securityQuestion', $options)):?>
+      <?php if(in_array('setSecurity', $options)):?>
       <tr class='option-question'>
         <th></th>
         <?php if(!empty($question)):?>
@@ -78,6 +78,10 @@ $(document).ready(function()
         <td><?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->guarder->captcha}");?></td>
         <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->guarder->getEmailCode, "id='mailSender' class='btn btn-success'");?></td>
       </tr>
+      <tr>
+        <th></th>
+        <td id='mailResult' class='alert alert-success'></td>
+      </tr>
       <?php else:?>
       <tr class='option-email'>
         <th></th>
@@ -101,28 +105,28 @@ $(document).ready(function()
       $('#mailSender').click(function()
       {
           $('#mailSender').popover({trigger:'manual', content: v.emailSending, placement:'right'}).popover('show');
-          $('#mailSender').next('.popover').addClass('popover-success').css('width', '320px');
-          function distroy(){$('#mailSender').popover('destroy')}
-          setTimeout(distroy, 2000);
+          $('#mailSender').next('.popover').addClass('popover-success');
+          setTimeout(function(){$('#mailSender').popover('destroy');}, 2000);
   
           var url = $(this).attr('href');
+          text = $(this).text();
+          $(this).text('sending...');
 
           $.getJSON(url, function(response)
           {
-              $('#mailSender').popover('destroy');
               if(response.result == 'success')
               {
-                   $('#mailSender').attr('disabled', 'disabled');
-                   $('#mailSender').popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
-                   $('#mailSender').next('.popover').addClass('popover-success');
-                   function distroy(){$('#mailSender').popover('destroy')}
-                   setTimeout(distroy,2000);
+                 $('#mailResult').html(response.message);
+                 $('#mailSender').hide();
               }
               else
               {
                   bootbox.alert(response.message);
+                  $('#mailSender').text(text).prop('disabled', false);
               }
-          })
+              $('#mailSender').attr('disabled', 'disabled');
+              return false;
+          });
           return false;
       })
 
@@ -175,13 +179,13 @@ $(document).ready(function()
               $.cookie('validate', 'okFile');
           }
 
-          if($('[name*=type][value=securityQuestion]').prop('checked'))
+          if($('[name*=type][value=setSecurity]').prop('checked'))
           {
               $('.option-question').show();
               $('.option-okfile').hide();
               $('.option-email').hide();
               $('.submit-button').show();
-              $.cookie('validate', 'securityQuestion');
+              $.cookie('validate', 'setSecurity');
           }
 
           if($('[name*=type][value=email]').prop('checked'))

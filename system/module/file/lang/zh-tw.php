@@ -30,7 +30,7 @@ $lang->file->sourceList    = '素材列表';
 $lang->file->uploadSource  = '上傳素材';
 $lang->file->sourceURI     = '地址';
 $lang->file->sourceDelete  = '刪除素材';
-$lang->file->sourceEdit    = '編輯素材';
+$lang->file->editSource    = '編輯素材';
 $lang->file->selectImage   = '選擇素材';
 
 $lang->file->id        = '編號';
@@ -68,3 +68,4 @@ $lang->file->sameName         = "已存在同名檔案，如果繼續將覆蓋�
 $lang->file->nameEmpty        = "檔案名不能為空";
 $lang->file->copySuccess      = "已複製到剪貼板";
 $lang->file->evilChar         = "包含非法字元";
+$lang->file->rebuildThumbs    = "已完成 %s";

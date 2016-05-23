@@ -12,6 +12,7 @@
 $lang->site->common        = "Site";
 
 $lang->site->type            = 'Type';
+$lang->site->requestType     = 'Request Type';
 $lang->site->status          = 'Status';
 $lang->site->pauseTip        = 'Tip for pause site';
 $lang->site->name            = 'Name';
@@ -26,6 +27,8 @@ $lang->site->meta            = 'Meta';
 $lang->site->desc            = 'Description';
 $lang->site->icpSN           = 'ICP';
 $lang->site->icpLink         = 'ICP Link';
+$lang->site->policeSN        = 'Public security records';
+$lang->site->policeLink      = 'Link';
 $lang->site->slogan          = 'Slogan';
 $lang->site->mission         = 'Mission';
 $lang->site->copyright       = 'Copyright';
@@ -40,6 +43,11 @@ $lang->site->cdn             = 'CND Site';
 $lang->site->sensitive       = 'Sensitive Words';
 $lang->site->scheme          = 'Default scheme';
 $lang->site->saveDays        = 'Save days';
+$lang->site->openCache       = 'Open cache';
+$lang->site->cachePage       = 'Whole Page Cache';
+$lang->site->cacheExpired    = 'Expired Time';
+$lang->site->hour            = 'hour';
+$lang->site->homeMenus       = 'menu of home';
 
 $lang->site->importantOption  = 'Important option';
 $lang->site->resetPassword    = 'Member Reset Password';
@@ -58,12 +66,12 @@ $lang->site->mobileTemplate   = 'Mobile Template';
 $lang->site->score            = 'Score';
 $lang->site->setCounts        = 'Set score rule';
 $lang->site->front            = 'Visit website';
-$lang->site->closeScoreTip    = 'After disabling the integral function, CV will not be cummulative and remain unchanged.';
-$lang->site->cdnTip           = 'CDN source take place when debug is closed, Contains css, js, font files. not include uploaded files.';
 $lang->site->useCDN           = 'Enable CDN';
 
 $lang->site->setBasic      = "Baisc";
+$lang->site->setCache      = 'Cache Setting';
 $lang->site->setCDN        = "CDN Setting";
+$lang->site->setDomain     = "Domain Setting";
 $lang->site->setLang       = "Languages";
 $lang->site->setFilter     = "Filter Settings";
 $lang->site->ipFilter      = "ip Filter";
@@ -80,10 +88,16 @@ $lang->site->setRecPerPage = "Record per page";
 $lang->site->useLocation   = "Use current Location: <span>%s</span>";
 $lang->site->changeSetting = "Change settings";
 $lang->site->setStat       = "Stats Settings";
+$lang->site->setHomeMenu   = "menus of home";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Portal';
 $lang->site->typeList->blog   = 'Blog';
+
+$lang->site->requestTypeList = array();
+$lang->site->requestTypeList['GET']        = 'GET';
+$lang->site->requestTypeList['PATH_INFO']  = 'PATH_INFO';
+$lang->site->requestTypeList['PATH_INFO2'] = 'PATH_INFO2';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
@@ -130,9 +144,9 @@ $lang->site->captchaList['auto']  = 'Automatic';
 $lang->site->captchaList['close'] = 'Close';
 
 $lang->site->validateTypes = new stdclass();
-$lang->site->validateTypes->okFile           = 'File';
-$lang->site->validateTypes->email            = 'Email';
-$lang->site->validateTypes->securityQuestion = 'Question';
+$lang->site->validateTypes->okFile      = 'File';
+$lang->site->validateTypes->email       = 'Email';
+$lang->site->validateTypes->setSecurity = 'Security Question';
 
 $lang->site->schemeList = array();
 $lang->site->schemeList['http']  = 'http';
@@ -151,23 +165,29 @@ $lang->site->scoreList['close'] = 'Close';
 $lang->site->cdnList['open']  = 'open';
 $lang->site->cdnList['close'] = 'close';
 
+$lang->site->cacheTypes['close'] = 'close';
+$lang->site->cacheTypes['file']  = 'open';
+
+$lang->site->cachePageOptions['close'] = 'close';
+$lang->site->cachePageOptions['open']  = 'open';
+
 $lang->site->filterFunctionList['open']  = 'open';
 $lang->site->filterFunctionList['close'] = 'close';
 
 $lang->site->moduleAvailable = array();
-$lang->site->moduleAvailable['user']         = 'Member';
-$lang->site->moduleAvailable['article']      = 'Article';
-$lang->site->moduleAvailable['blog']         = 'Blog';
-$lang->site->moduleAvailable['product']      = 'Product';
-$lang->site->moduleAvailable['book']         = 'Book';
-$lang->site->moduleAvailable['page']         = 'Page';
-$lang->site->moduleAvailable['forum']        = 'Forum';
-$lang->site->moduleAvailable['message']      = 'Message';
-$lang->site->moduleAvailable['search']       = 'Search';
-$lang->site->moduleAvailable['shop']         = 'Shop';
-$lang->site->moduleAvailable['score']        = 'Score';
-$lang->site->moduleAvailable['stat']         = 'Statistics';
-$lang->site->moduleAvailable['contribution'] = 'Contribution';
+$lang->site->moduleAvailable['user']       = 'Member';
+$lang->site->moduleAvailable['article']    = 'Article';
+$lang->site->moduleAvailable['blog']       = 'Blog';
+$lang->site->moduleAvailable['product']    = 'Product';
+$lang->site->moduleAvailable['book']       = 'Book';
+$lang->site->moduleAvailable['page']       = 'Page';
+$lang->site->moduleAvailable['forum']      = 'Forum';
+$lang->site->moduleAvailable['message']    = 'Message';
+$lang->site->moduleAvailable['search']     = 'Search';
+$lang->site->moduleAvailable['shop']       = 'Shop';
+$lang->site->moduleAvailable['score']      = 'Score';
+$lang->site->moduleAvailable['stat']       = 'Statistics';
+$lang->site->moduleAvailable['submittion'] = 'Submittion';
 
 $lang->site->metaHolder       = 'Tags, like <meta>, <script>, <style>, <link>, is accepted.';
 $lang->site->fileAllowedRole  = 'Use "," to divide different extension name.';
@@ -180,12 +200,16 @@ $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
 $lang->site->schemeTip        = 'Redirect all request to this scheme.';
 $lang->site->saveDaysTip      = "The access logs' save day must be a positive number.";
 $lang->site->yangcongTip      = 'After opening force yangcong login, you can open security question login as a backup through setting security question.';
+$lang->site->closeScoreTip    = 'After disabling the integral function, CV will not be cummulative and remain unchanged.';
+$lang->site->cdnTip           = 'CDN source take place when debug is closed, Contains css, js, font files. not include uploaded files.';
+$lang->site->cdnSiteTip       = 'Correct url shoule be %s';
+$lang->site->defaultTip       = 'Under maintenance.';
+$lang->site->icpTip           = 'For Mainland China site only';
+$lang->site->requestTypeTip   = 'Your server host is not compatible this request type.';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
 $lang->site->reloadForRobots   = 'Reload this ppage';
-$lang->site->defaultTip        = 'Under maintenance.';
-$lang->site->icpTip            = 'For Mainland China site only';
 
 $lang->site->customizableList = new stdclass();
 $lang->site->customizableList->article = 'Article List Number';
@@ -200,3 +224,31 @@ $lang->site->yangcong = new stdclass();
 $lang->site->yangcong->appID = 'APP ID';
 $lang->site->yangcong->key   = 'APP KEY';
 $lang->site->yangcong->auth  = 'Auth ID';
+
+$lang->site->api = new stdclass();
+$lang->site->api->common = 'API';
+$lang->site->api->key    = 'KEy';
+$lang->site->api->ip     = 'IP List';
+$lang->site->api->allip  = 'All IP';
+$lang->site->api->ipTip  = 'Allow the caller to use these IP, use "," to divide different IP, support IP segment, such as 192.168.1.*';
+
+$lang->site->menus = array();
+$lang->site->menus['order']      = 'Order';
+$lang->site->menus['message']    = 'Message';
+$lang->site->menus['comment']    = 'Comment';
+$lang->site->menus['reply']      = 'Reply';
+$lang->site->menus['thread']     = 'Thread';
+$lang->site->menus['forumreply'] = 'Reply of forum';
+$lang->site->menus['article']    = 'Article';
+$lang->site->menus['page']       = 'Page';
+$lang->site->menus['blog']       = 'Blog';
+$lang->site->menus['book']       = 'Book';
+$lang->site->menus['submittion'] = 'Submittion';
+$lang->site->menus['product']    = 'Product';
+$lang->site->menus['user']       = 'User';
+$lang->site->menus['wechat']     = 'Wechat';
+$lang->site->menus['stat']       = 'Statistics';
+$lang->site->menus['tag']        = 'Tag';
+$lang->site->menus['links']      = 'Links';
+$lang->site->menus['site']       = 'Site';
+$lang->site->menus['security']   = 'Security';

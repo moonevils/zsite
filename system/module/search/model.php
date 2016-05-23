@@ -44,12 +44,26 @@ class searchModel extends model
             ->page($pager)
             ->fetchAll('id');
 
+        $this->loadModel('file');
+        $images = $this->dao->setAutoLang(false)->select('*')->from(TABLE_FILE)
+            ->where('extension')->in($this->config->file->imageExtensions)
+            ->andWhere('objectType')->in('article,product')
+            ->orderBy('`primary`, editor_desc') 
+            ->fetchGroup('objectID');
+
+        foreach($images as $objectImages) $this->file->batchProcessFile($objectImages);
+
         foreach($results as $record)
         {
             $record->title   = str_replace('</span> ', '</span>', $this->decode($this->markKeywords($record->title, $words)));
             $record->title   = str_replace('_', '', $this->decode($this->markKeywords($record->title, $words)));
             $record->summary = $this->getSummary($record->content, $words);
             $record->summary = str_replace('_', '', $record->summary);
+
+            if(empty($images[$record->objectID])) continue;
+            $record->image = new stdclass();
+            if(isset($images[$record->objectID]))  $record->image->list = $images[$record->objectID];
+            if(!empty($record->image->list)) $record->image->primary = $record->image->list[0];
         }
 
         return $this->processLinks($results);

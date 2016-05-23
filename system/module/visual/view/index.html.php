@@ -9,6 +9,7 @@ js::set('visualsLang', $lang->visual->setting);
 js::set('visualLang', $lang->visual->js);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
 js::set('zuiJsUrl', $jsRoot . 'zui/min.js');
+js::set('zuiAdminJsUrl', $jsRoot . 'zui/admin.min.js');
 js::set('jQueryUrl', $jsRoot . 'jquery/min.js');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
@@ -80,7 +81,7 @@ js::set('device', $this->device);
                     $selectThemeUrl = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theTheme}");
                     $themeClass = $isCurrent && $currentTheme == $theTheme ? 'current' : '';
                     $themesList .= "<div class='theme menu-theme {$themeClass}' data-url='{$selectThemeUrl}' data-theme='{$theTheme}'><div class='theme-card'><i class='icon-ok icon'></i>";
-                    $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$theTheme}/preview.png", "alt={$theTheme}") . '</div>';
+                    $themesList .= "<div class='theme-img'>" . html::image($themeRoot . $theTheme . '/preview.png', "alt={$theTheme}") . '</div>';
                     $themesList .= "<div class='theme-name'>{$name}</div>";
                     $themesList .= '</div></div>';
                 }

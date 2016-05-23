@@ -27,7 +27,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <ul class='nav nav-tabs'>
         <li class='nav-heading'><i class='icon icon-pencil'></i> <?php echo $lang->block->edit ?> [<?php echo $block->title; ?>]</li>
         <li><a href='#contentTab' data-toggle='tab'><?php echo $lang->block->content;?></a></li>
-        <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
+        <?php if(strpos(',htmlcode, phpcode, header', $type) == false or $type == 'html'):?>
         <li><a href='#customTab' data-toggle='tab'><?php echo $lang->block->style;?></a></li>
         <?php endif;?>
         <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
@@ -42,7 +42,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <div class='tab-content table-cell col-xs-12'>
         <?php endif; ?>
           <div class='tab-pane theme-control-tab-pane' id='contentTab'>
-            <table align='center' class='table table-form'>
+            <table align='center' class='table table-form mg-0'>
               <tr>
                 <th class='w-100px'><?php echo $lang->block->type;?></th>
                 <td><?php echo $this->block->createTypeSelector($template, $type, $block->id);?></td>
@@ -82,12 +82,12 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <?php endif;?>
             </table>
           </div>
-          <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
+          <?php if(strpos(',htmlcode, phpcode, header', $type) == false or $type == 'html'):?>
           <div class='tab-pane theme-control-tab-pane' id='customTab'>
             <table class='table table-form mg-0'>
               <?php if(isset($config->block->defaultIcons[$type])):?>
               <tr>
-                <th class='w-80px'><?php echo $lang->block->icon;?></th>
+                <th class='w-100px'><?php echo $lang->block->icon;?></th>
                 <td>
                   <div class='colorplate'>
                     <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->iconColor) ? $block->content->custom->$theme->iconColor : ''?>">
@@ -104,8 +104,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
                 <td></td>
               </tr>
               <?php endif;?>
+              <?php if($type != 'slide'):?>
               <tr>
-                <th class='w-80px'><?php echo $lang->block->border;?></th>
+                <th class='w-100px'><?php echo $lang->block->border;?></th>
                 <td>
                   <div class='colorplate'>
                     <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->borderColor) ? $block->content->custom->$theme->borderColor : ''?>">
@@ -214,8 +215,15 @@ foreach (explode('|', $lang->colorPlates) as $value)
                 </td>
               </tr>
               <?php endif;?>
+              <?php endif;?>
+              <?php if($type == 'slide'):?>
               <tr>
-                <th><?php echo $lang->block->class;?></th>
+                <th class='w-80px'><?php echo $lang->block->slideStyle;?></th>
+                <td class='w-p40'><?php echo html::select('params[style]', $lang->block->slideStyleList, isset($block->content->style) ? $block->content->style : '', "class='form-control'")?></td><td></td>
+              </tr>
+              <?php endif;?>
+              <tr>
+                <th class='w-80px'><?php echo $lang->block->class;?></th>
                 <td><?php echo html::input('params[class]', isset($block->content->class) ? $block->content->class : '', "class='form-control' placeholder='{$lang->block->placeholder->class}'");?></td>
               </tr>
             </table>
@@ -247,9 +255,24 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <div class='form-footer'>
         <?php echo html::submitButton() . html::hidden('blockID', $block->id);?>
         <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
-        <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default btn-cancel'");?>
+        <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default btn-cancel hidden-ve'");?>
       </div>
     </div>
   </div>
 </form>
+<?php /* hidden navSource start .*/ ?>
+<div id='grade1NavSource' class='hide'>
+  <li class='liGrade1'>
+    <?php echo $this->loadModel('nav')->createEntry(1, null, 'desktop_bottom');?>
+    <ul class='ulGrade2'></ul>
+  </li>
+</div>
+<div id='grade2NavSource' class='hide'>
+  <ul class='ulGrade2'>
+    <li class='liGrade2'>
+      <?php echo $this->loadModel('nav')->createEntry(2, null, 'desktop_bottom');?>
+    </li>
+  </ul>
+</div>
+<?php /* hidden navSource end.*/ ?>
 <?php include '../../common/view/footer.admin.html.php';?>

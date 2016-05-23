@@ -7,26 +7,26 @@ $(document).ready(function()
             if(response.error && response.error.length)
             {
                 bootbox.dialog(
-                {  
-                    message: response.error,  
+                {
+                    message: response.error,
                     buttons:
-                    {  
+                    {
                         back:
                         {  
                             label:     v.lang.back,
-                            className: 'btn-primary',  
-                            callback:  function(){location.reload();}  
+                            className: 'btn-primary',
+                            callback:  function(){location.reload();}
                         },
-                        continue:
+                        'continue':
                         {  
-                            label:     v.lang.continue,  
-                            className: 'btn-primary',  
+                            label:     v.lang['continue'],
+                            className: 'btn-primary',
                             callback:  function()
-                                       {
-                                           $('#fileForm #submit').append("<input value='1' name='continue' class='hide'>");
-                                           $('#fileForm #submit').click();
-                                       }  
-                        }  
+                            {
+                                $('#fileForm #submit').append("<input value='1' name='continue' class='hide'>");
+                                $('#fileForm #submit').click();
+                            }
+                        }
                     }  
                 });
             }
@@ -39,8 +39,8 @@ $(document).ready(function()
 
     $('.image-view').click(function()
     {
-        $('.image-view').addClass('selected');
-        $('.list-view').removeClass('selected');
+        $('.image-view').addClass('active');
+        $('.list-view').removeClass('active');
         $('#imageView').show();
         $('#listView').hide();
         $.cookie('sourceViewType', 'image', {path: "/"});
@@ -48,8 +48,8 @@ $(document).ready(function()
 
     $('.list-view').click(function()
     {
-        $('.list-view').addClass('selected');
-        $('.image-view').removeClass('selected');
+        $('.list-view').addClass('active');
+        $('.image-view').removeClass('active');
         $('#listView').show();
         $('#imageView').hide();
         $.cookie('sourceViewType', 'list', {path: "/"});

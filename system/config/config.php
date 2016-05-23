@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '5.1';           // The version number, don't change.
+$config->version     = '5.3';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -41,12 +41,30 @@ $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><t
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
 
+$config->product = new stdclass();
+
 $config->site = new stdclass();
 $config->site->resetPassword     = 'open'; 
 $config->site->importantValidate = 'okFile,email';
 $config->site->modules           = 'article,product';
 $config->site->type              = 'portal';
 $config->site->filterFunction    = 'close';
+$config->site->keywords          = '';
+$config->site->indexKeywords     = '';
+$config->site->slogan            = '';
+$config->site->copyright         = '';
+$config->site->icpSN             = '';
+$config->site->meta              = '';
+$config->site->desc              = '';
+$config->site->theme             = 'default';
+$config->site->lang              = 'zh-cn';
+$config->site->menu              = json_encode(array());
+
+$config->company          = new stdclass();
+$config->company->name    = '';
+$config->company->desc    = '';
+$config->company->content = '';
+$config->company->contact = json_encode(array());
 
 $config->template = new stdclass();
 $config->template->desktop = new stdclass();
@@ -108,7 +126,7 @@ $config->thanksList['IPIP.NET']            = 'http://www.ipip.net/';
 $config->thanksList['Lessphp v0.4.0']      = 'http://leafo.net/lessphp/';
 $config->thanksList['MobileDetect 2.8.15'] = 'http://mobiledetect.net/';
 $config->thanksList['PhpConcept 2.8.2']    = 'http://www.phpconcept.net/';
-$config->thanksList['PHPMailer 5.1']       = 'http://phpmailer.sourceforge.net/';
+$config->thanksList['PHPMailer 5.1']       = 'http://phpmailer.worxware.com/';
 $config->thanksList['PhpThumb 3.0']        = 'http://phpthumb.sourceforge.net/';
 $config->thanksList['HTML Purifier 4.6.0'] = 'http://htmlpurifier.org/';
 $config->thanksList['PHP QRCode 1.1.4']    = 'http://phpqrcode.sourceforge.net/';
@@ -117,28 +135,32 @@ $config->thanksList['Spyc 0.5']            = 'http://code.google.com/p/spyc/';
 
 /* Module dependence setting. */
 $config->dependence = new stdclass();
-$config->dependence->article[] = 'article';
-$config->dependence->blog[]    = 'blog';
-$config->dependence->page[]    = 'page';
-$config->dependence->product[] = 'product';
-$config->dependence->book[]    = 'book';
-$config->dependence->user[]    = 'user';
-$config->dependence->forum[]   = 'forum';
-$config->dependence->forum[]   = 'user';
-$config->dependence->reply[]   = 'forum';
-$config->dependence->reply[]   = 'user';
-$config->dependence->message[] = 'message';
-$config->dependence->shop[]    = 'shop';
-$config->dependence->shop[]    = 'user';
-$config->dependence->cart[]    = 'shop';
-$config->dependence->address[] = 'shop';
-$config->dependence->order[]   = 'user';
-$config->dependence->search[]  = 'search';
-$config->dependence->score[]   = 'score';
-$config->dependence->score[]   = 'user';
-$config->dependence->stat[]    = 'stat';
-$config->dependence->log[]     = 'stat';
-$config->dependence->contribution[] = 'contribution';
+$config->dependence->article[]      = 'article';
+$config->dependence->blog[]         = 'blog';
+$config->dependence->page[]         = 'page';
+$config->dependence->product[]      = 'product';
+$config->dependence->book[]         = 'book';
+$config->dependence->user[]         = 'user';
+$config->dependence->forum[]        = 'forum';
+$config->dependence->forum[]        = 'user';
+$config->dependence->reply[]        = 'forum';
+$config->dependence->reply[]        = 'user';
+$config->dependence->message[]      = 'message';
+$config->dependence->message[]      = 'user';
+$config->dependence->shop[]         = 'shop';
+$config->dependence->shop[]         = 'user';
+$config->dependence->cart[]         = 'shop';
+$config->dependence->address[]      = 'shop';
+$config->dependence->express[]      = 'shop';
+$config->dependence->order[]        = 'user';
+$config->dependence->search[]       = 'search';
+$config->dependence->score[]        = 'score';
+$config->dependence->score[]        = 'user';
+$config->dependence->stat[]         = 'stat';
+$config->dependence->log[]          = 'stat';
+$config->dependence->submittion[]   = 'submittion';
+$config->dependence->submittion[]   = 'user';
+$config->dependence->orderSetting[] = 'product';
 
 /* Database settings. */
 $config->db = new stdclass();          
@@ -147,10 +169,6 @@ $config->db->driver     = 'mysql';             // The driver of pdo, only mysql 
 $config->db->encoding   = 'UTF8';              // The encoding of the database.
 $config->db->strictMode = false;               // Turn off the strict mode.
 $config->db->prefix     = 'eps_';              // The prefix of the table name.
-
-
-$config->article = new stdclass();          
-$config->article->contribution = 'close';
 
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot      = dirname(__FILE__) . DS;
@@ -213,6 +231,10 @@ define('TABLE_STATREGION',     $config->db->prefix . 'statregion');
 define('TABLE_SCORE',          $config->db->prefix . 'score');
 define('TABLE_BLACKLIST',      $config->db->prefix . 'blacklist');
 define('TABLE_OPERATIONLOG',   $config->db->prefix . 'operationlog');
+define('TABLE_WIDGET',         $config->db->prefix . 'widget');
+
+/* Include cache config file. */
+include $configRoot . 'cache.php';
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');

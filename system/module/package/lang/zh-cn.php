@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->package->common        = '插件管理';
+$lang->package->common        = '插件';
 $lang->package->browse        = '浏览插件';
 $lang->package->install       = '安装';
 $lang->package->installAuto   = '自动安装';
@@ -26,6 +26,7 @@ $lang->package->erase         = '清除';
 $lang->package->upgrade       = '升级';
 $lang->package->agreeLicense  = '我同意该授权';
 $lang->package->settemplate   = '设置模板';
+$lang->package->buy           = '购买';
 
 $lang->package->structure   = '目录结构';
 $lang->package->installed   = '已安装';
@@ -118,5 +119,4 @@ $lang->package->errorIncompatible            = '该插件与您的蝉知版本�
 $lang->package->errorUninstallDepends        = '插件“%s”依赖该插件，不能卸载';
 
 /* Add theme items.*/
-$lang->theme = new stdclass();
 $lang->theme->common = '主题市场';

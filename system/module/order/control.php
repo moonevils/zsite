@@ -61,6 +61,29 @@ class order extends control
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('check', "orderID=$orderID")));
     }
 
+    /**
+     * View an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function view($orderID)
+    {
+        $this->view->title    = $this->lang->order->view;
+        $this->view->order    = $this->order->getByID($orderID);
+        $this->view->products = $this->order->getOrderProducts($orderID);
+        $this->view->users    = $this->loadModel('user')->getPairs();
+        $this->display();
+    }
+
+    /**
+     * Check order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
     public function check($orderID)
     {
         $order = $this->order->getByID($orderID);
@@ -85,7 +108,7 @@ class order extends control
      * @access public
      * @return void
      */
-    public function admin($mode = 'status', $value = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
+    public function admin($mode = 'status', $param = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
     {
         if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
@@ -93,15 +116,15 @@ class order extends control
         $this->app->loadConfig('product');
 
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        $this->view->orders  = $this->order->getList($mode, $value, $orderBy, $pager);
-        $this->view->pager   = $pager;
-        $this->view->orderBy = $orderBy;
-        $this->view->mode    = $mode;
-        $this->view->value   = $value;
 
-        $this->view->title          = $this->lang->order->admin;
+        $this->view->title          = $this->lang->order->common;
+        $this->view->orders         = $this->order->getList($mode, $param, $orderBy, $pager);
+        $this->view->pager          = $pager;
+        $this->view->orderBy        = $orderBy;
+        $this->view->mode           = $mode;
+        $this->view->param          = $param;
+        $this->view->users          = $this->loadModel('user')->getPairs();
         $this->view->currencySymbol = $this->config->product->currencySymbol;
-        
         $this->display();
     }
 
@@ -127,7 +150,6 @@ class order extends control
         $this->view->desktopURL  = helper::createLink('order', 'track', "orderID=$orderID", '', 'html');
 
         $this->display();
-    
     }
 
     /**
@@ -145,7 +167,7 @@ class order extends control
         if($_POST)
         {
             $payment = $this->post->payment;
-            $result = $this->order->setPayment($orderID, $payment);
+            $result  = $this->order->setPayment($orderID, $payment);
             if(!$result) exit;
 
             if($payment == 'COD')
@@ -177,8 +199,7 @@ class order extends control
         {
             if($order->payment == 'alipaySecured') $this->order->postDeliveryToAlipay($order);
             $result = $this->order->delivery($orderID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
-            $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            $this->send($result);
         }
 
         $this->view->order       = $order;

@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of book module of chanzhiEPS.
@@ -24,8 +25,24 @@ class book extends control
      */
     public function index()
     {
-        $book = $this->book->getFirstBook();
-        $this->locate(inlink('browse', "nodeID=$book->id", "book=$book->alias"));
+        if(isset($this->config->book->index) and $this->config->book->index == 'list')
+        {
+            $this->view->title = $this->lang->book->list;
+            $this->view->books = $this->book->getBookList();
+            $this->display();
+        }
+        else
+        {
+            if(isset($this->config->book->index) and $this->config->book->index != 'list')
+            {
+                $book = $this->book->getBookByID($this->config->book->index);
+            }
+            else
+            {
+                $book = $this->book->getFirstBook();
+            }
+            $this->locate(inlink('browse', "nodeID=$book->id", "book=$book->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''));
+        }
     }
 
     /**
@@ -38,9 +55,32 @@ class book extends control
     public function browse($nodeID)
     {
         $node = $this->book->getNodeByID($nodeID);
+
         if($node)
         {
-            $book    = $this->book->getBookByNode($node);
+            $nodeID = $node->id;
+            $book = $this->book->getBookByNode($node);
+            if(($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen) and $this->device == 'desktop') 
+            {
+                $families = $this->dao->select('id,parent,type,`order`')->from(TABLE_BOOK)
+                    ->where('path')->like(",{$nodeID},%")
+                    ->orderBy('`order`')
+                    ->fetchGroup('parent', 'id');
+
+                $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
+                    ->where('path')->like("%,{$nodeID},%")
+                    ->fetchAll('id');
+                $articles = $this->book->getArticleIdList($nodeID, $families, $allNodes);
+
+                if($articles)
+                {
+                    $articles  = explode(',', $articles);
+                    $articleID = current($articles);
+                    $article   = $this->book->getNodeByID($articleID);
+                    $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''));
+                }
+            }
+
             $serials = $this->book->computeSN($book->id);
 
             $this->view->title      = $book->title;
@@ -50,6 +90,7 @@ class book extends control
             $this->view->serials    = $serials;
             $this->view->books      = $this->book->getBookList();
             $this->view->catalog    = $this->book->getFrontCatalog($node->id, $serials);
+            $this->view->allCatalog = $this->book->getFrontCatalog($book->id, $serials);
             $this->view->mobileURL  = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'mhtml');
             $this->view->desktopURL = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'html');
         }
@@ -67,10 +108,10 @@ class book extends control
     { 
         $article = $this->book->getNodeByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
-
         $parent  = $article->origins[$article->parent];
         $book    = $article->book;
         $content = $this->book->addMenu($article->content);
+        $serials = $this->book->computeSN($book->id);
 
         $this->view->title    = $article->title . ' - ' . $book->title;;
         $this->view->keywords = $article->keywords;
@@ -80,9 +121,11 @@ class book extends control
 
         $this->view->parent      = $parent;
         $this->view->book        = $book;
+        $this->view->allCatalog  = $this->book->getFrontCatalog($book->id, $serials);
         $this->view->prevAndNext = $this->book->getPrevAndNext($article);
         $this->view->mobileURL   = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'html');
+        $this->view->books       = $this->book->getBookList();
 
         $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 
@@ -98,15 +141,14 @@ class book extends control
      */
     public function admin($nodeID = '')
     {
-        $this->book->setMenu();
-        
-        if($nodeID)  ($node = $this->book->getNodeByID($nodeID))   && $book   = $node->book;
-        if(!$nodeID or !$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
-        if(!$node)  $this->locate(inlink('create'));
-        $this->view->title   = $this->lang->book->common;
-        $this->view->book    = $book;
-        $this->view->node    = $node;
-        $this->view->catalog = $this->book->getAdminCatalog($nodeID, $this->book->computeSN($book->id));
+        if($nodeID) ($node = $this->book->getNodeByID($nodeID)) && $book = $node->book;
+        if(!$nodeID or !$node) ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
+        if(!$node) $this->locate(inlink('create'));
+        $this->view->title    = $this->lang->book->common;
+        $this->view->bookList = $this->book->getBookList();
+        $this->view->book     = $book;
+        $this->view->node     = $node;
+        $this->view->catalog  = $this->book->getAdminCatalog($nodeID, $this->book->computeSN($book->id));
         
         $this->display();
     }
@@ -119,16 +161,15 @@ class book extends control
      */
     public function create()
     {
-        $this->book->setMenu();
-
         if($_POST)
         {
             $bookID = $this->book->createBook();
             if($bookID)  $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
             if(!$bookID) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->title = $this->lang->book->createBook;
 
+        $this->view->title    = $this->lang->book->createBook;
+        $this->view->bookList = $this->book->getBookList();
         $this->display(); 
     }
 
@@ -157,12 +198,12 @@ class book extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->book->setMenu();
         unset($this->lang->book->typeList['book']);
 
         $this->view->title    = $this->lang->book->catalog;
         $this->view->node     = $this->book->getNodeByID($node);
         $this->view->children = $this->book->getChildren($node);
+        $this->view->bookList = $this->book->getBookList();
 
         $this->display(); 
     }
@@ -176,7 +217,6 @@ class book extends control
      */
     public function edit($nodeID)
     {
-        $this->book->setMenu();
         $node = $this->book->getNodeByID($nodeID, false);
         $book = $node->book;
 
@@ -195,7 +235,7 @@ class book extends control
         $this->view->title      = $this->lang->edit . $this->lang->book->typeList[$node->type];
         $this->view->node       = $node;
         $this->view->optionMenu = $optionMenu;
-
+        $this->view->bookList   = $this->book->getBookList();
         $this->display();
     }
 
@@ -232,8 +272,6 @@ class book extends control
      */
     public function search($recTotal = 0, $recPerPage = 10, $pageID = 1, $searchWord = '')
     {
-        $this->book->setMenu();
-        
         $this->app->loadClass('pager');
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -254,7 +292,37 @@ class book extends control
         $this->view->title    = $this->lang->book->searchResults;
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
+        $this->view->bookList = $this->book->getBookList();
 
+        $this->display();
+    }
+
+    /**
+     * Setting.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting()
+    {
+        if($_POST)
+        {
+            $data = new stdclass();
+            $data->index      = $this->post->index;
+            $data->fullScreen = $this->post->fullScreen;
+            $data->chapter    = $this->post->fullScreen ? 'left' : $this->post->chapter;
+            $this->loadModel('setting')->setItems('system.book', $data);
+
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $books = $this->book->getBookPairs();
+
+        $this->view->title     = $this->lang->book->setting; 
+        $this->view->books     = array('list' => $this->lang->book->list) + $books;
+        $this->view->firstBook = key($books);
+        $this->view->bookList  = $this->book->getBookList();
         $this->display();
     }
 }    

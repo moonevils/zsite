@@ -11,7 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/treeview.html.php';?>
 <?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -67,6 +66,15 @@
           commonModel::printLink('product', 'changeStatus', "productID=$product->id&status=$changeStatus", $lang->product->statusList[$changeStatus], "class='changeStatus'");
           echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias"), $lang->preview, "target='_blank'");
           ?>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->product->layout;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
+              <?php $page = 'product_view';?>
+              <?php foreach($lang->block->$template->regions->$page as $region => $regionName):?>
+              <li><?php commonModel::printLink('block', 'setregion', "page=$page&region=$region&object=$product->id", $regionName, "data-toggle='modal'");?></li>
+              <?php endforeach;?>
+            </ul>
+          </span>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
             <ul class='dropdown-menu pull-right'>    

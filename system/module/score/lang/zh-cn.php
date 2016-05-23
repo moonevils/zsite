@@ -27,7 +27,7 @@ $lang->score->product = '产品';
 $lang->score->confirm = '确认订单';
 $lang->score->details = '积分详情';
 
-$lang->score->setCounts = '设置积分规则';
+$lang->score->setCounts = '积分规则';
 
 $lang->score->totalRank = '总排行榜';
 $lang->score->rank      = '排名';
@@ -38,7 +38,7 @@ $lang->score->dayRank   = '日排行榜';
 
 $lang->score->methods['register'] = '注册';
 $lang->score->methods['login']    = '登录';
-$lang->score->methods['maxLogin'] = '每日登录获得积分上限';
+$lang->score->methods['maxLogin'] = '每日登录积分上限';
 $lang->score->methods['download'] = '下载';
 
 $lang->score->methods['thread']      = '发贴';
@@ -50,7 +50,7 @@ $lang->score->methods['delReply']    = '删回复';
 $lang->score->methods['award']       = '奖励积分';
 $lang->score->methods['punish']      = '扣除积分';
 
-$lang->score->methods['approveContribution'] = '投稿成功';
+$lang->score->methods['approveSubmittion'] = '投稿成功';
 
 $lang->score->methods['buyscore']  = '购买积分';
 $lang->score->methods['statement'] = '积分结算';
@@ -64,8 +64,8 @@ $lang->score->types['out']   = '减少';
 $lang->score->getByThread = '论坛发表主题赚积分'; 
 $lang->score->getByReply  = '论坛发表回帖赚积分'; 
 
-$lang->score->lblTotal   = "共有消耗积分：%s, 等级积分：%s ";
-$lang->score->lblNoScore = "抱歉，您的积分不够";
+$lang->score->lblTotal         = "共有消耗积分：%s, 等级积分：%s ";
+$lang->score->lblNoScore       = "抱歉，您的积分不够";
 $lang->score->lblNoScoreReason = "抱歉，您的积分不够 %s 需要 <strong class='red'>%s</strong> 分，您现在有 <strong class='red'>%s</strong> 分";
 $lang->score->lblDetail        = "详情可参考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
 
