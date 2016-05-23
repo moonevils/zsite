@@ -83,7 +83,7 @@ $lang->block->default->pages['blog_view']      = '博客详情页面';
 $lang->block->default->pages['forum_index']    = '论坛首页';
 $lang->block->default->pages['forum_board']    = '帖子列表页面';
 $lang->block->default->pages['thread_view']    = '帖子查看页面';
-$lang->block->default->pages['search_list']    = '搜索结果页';
+$lang->block->default->pages['search_index']   = '搜索结果页';
 
 $lang->block->default->pages['book_index']     = '手册中心';
 $lang->block->default->pages['book_browse']    = '手册首页';
