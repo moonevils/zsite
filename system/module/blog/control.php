@@ -30,6 +30,8 @@ class blog extends control
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'blog') : '';
         $articles   = $this->loadModel('article')->getList('blog', $families, 'addedDate_desc', $pager);
+        $articles   = $this->article->processImages($articles, 'blog');
+        if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'blog');
 
         $this->view->title      = $this->lang->blog->common;
         $this->view->categoryID = $categoryID;
@@ -48,7 +50,11 @@ class blog extends control
             $this->view->keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
             $this->view->desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
+            $this->view->layouts    = $this->loadModel('block')->getPageBlocks('blog', 'index', $category->id);
         }
+
+        $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->display();
     }
@@ -89,6 +95,9 @@ class blog extends control
         $this->view->contact     = $this->loadModel('company')->getContact();
         $this->view->mobileURL   = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'html');
+        $this->view->layouts     = $this->loadModel('block')->getPageBlocks('blog', 'view', $article->id);
+        $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
         if($article->source == 'article')
         {

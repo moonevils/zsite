@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php js::set('closeScoreTip', $lang->site->closeScoreTip);?>
+<?php js::set('requestTypeTip', $lang->site->requestTypeTip);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setBasic;?></strong></div>
   <div class='panel-body'>
@@ -51,23 +52,12 @@
           <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->requestType;?></th> 
+          <td><?php echo html::select('requestType', $lang->site->requestTypeList, isset($this->config->site->requestType) ? $this->config->site->requestType : $this->config->frontRequestType, "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->name;?></th> 
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->domain;?></th> 
-          <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td>
-          <td><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-custom='{$lang->site->domainTip}' data-toggle='modal' data-icon='question-sign' data-title='{$lang->site->domain}'")?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->allowedDomain;?></th> 
-          <td><?php echo html::input('allowedDomain',  isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '', "class='form-control'");?></td>
-          <td><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-custom='{$lang->site->allowedDomainTip}' data-toggle='modal' data-icon='question-sign' data-title='{$lang->site->allowedDomain}'")?></td>
-        </tr>
-        <tr title="<?php echo $lang->site->schemeTip;?>">
-          <th><?php echo $lang->site->scheme;?></th> 
-          <td><?php echo html::radio('scheme', $lang->site->schemeList, isset($this->config->site->scheme) ? $this->config->site->scheme : 'http', "class='checkbox'");?></td>
-          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->copyright;?></th> 
@@ -112,11 +102,24 @@
             </div>
           </td>
         </tr>
+        <tr class='policeSN'>
+          <th><?php echo $lang->site->policeSN;?></th> 
+          <td colspan='2'>
+            <div class='row'>
+              <?php $placeholder = ($this->app->getClientLang() == 'en') ? "placeholder='{$lang->site->policeTip}'" : '';?>
+              <div class='col-sm-4'><?php echo html::input('policeSN', isset($this->config->site->policeSN) ? $this->config->site->policeSN : '', "class='form-control col-xs-2' $placeholder");?></div>
+              <div class='col-sm-8'>
+                <div class='input-group'>
+                  <span class="input-group-addon"><?php echo $lang->site->policeLink;?></span>
+                  <?php echo html::input('policeLink', isset($this->config->site->policeLink) ? $this->config->site->policeLink : 'http://www.miitbeian.gov.cn', "class='form-control'")?>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
         <tr>
           <th></th>
-          <td colspan='2'>
-            <?php echo html::submitButton();?>
-          </td>
+          <td colspan='2'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>

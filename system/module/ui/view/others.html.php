@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('rebuildThumbs', $lang->ui->rebuildThumbs);?>
+<?php js::set('thumbs', $this->config->file->thumbs);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-cogs'> </i><?php echo $lang->ui->others;?></strong>
@@ -82,7 +84,14 @@
             <?php endforeach;?>
           </td>
         </tr>
-        <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
+        <tr>
+          <th></th>
+          <td colspan='2'>
+            <?php echo html::submitButton();?>
+            <?php echo html::a(helper::createLink('file', 'rebuildthumbs'), $lang->ui->rebuildThumbs, "class='btn btn-primary' id='execButton'");?>
+            <span class='alert alert-success total hide'></span>
+          </td>
+        </tr>
       </table>
     </form>
   </div>

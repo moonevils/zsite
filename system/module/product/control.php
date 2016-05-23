@@ -54,7 +54,7 @@ class product extends control
         $pager = new pager(0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), '`order` desc', $pager);
+        $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), '`order` desc', $pager, true);
 
         if(!$category and $categoryID != 0) die($this->fetch('error', 'index'));
 
@@ -82,6 +82,9 @@ class product extends control
         $this->view->contact    = $this->loadModel('company')->getContact();
         $this->view->mobileURL  = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'html');
+        $this->view->layouts    = $this->loadModel('block')->getPageBlocks('product', 'browse', $category->id);
+        $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->display();
     }
@@ -109,11 +112,14 @@ class product extends control
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $this->product->getList($families, $orderBy, $pager);
 
-        $this->view->title          = $this->lang->product->admin;
-        $this->view->products       = $products;
-        $this->view->pager          = $pager;
-        $this->view->categoryID     = $categoryID;
-        $this->view->orderBy        = $orderBy;
+        $this->loadModel('block');
+
+        $this->view->title      = $this->lang->product->common;
+        $this->view->products   = $products;
+        $this->view->pager      = $pager;
+        $this->view->categoryID = $categoryID;
+        $this->view->orderBy    = $orderBy;
+        $this->view->template   = $this->config->template->{$this->device}->name;
         $this->display();
     }   
 
@@ -254,6 +260,9 @@ class product extends control
         $this->view->stockOpened = isset($this->config->product->stock) && $this->config->product->stock == 1;
         $this->view->mobileURL   = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'html');
+        $this->view->layouts     = $this->loadModel('block')->getPageBlocks('product', 'view', $product->id);
+        $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec();
 
@@ -336,6 +345,7 @@ class product extends control
     public function setting()
     {
         unset($this->lang->product->menu);
+        $this->lang->product->menu = $this->lang->orderSetting->menu;
         $this->lang->menuGroups->product = 'orderSetting';
         if(commonModel::isAvailable('shop')) $this->app->loadLang('order');
         if($_POST)

@@ -315,7 +315,23 @@ class router
         $this->loadClass('filter', $static = true);
         $this->loadClass('dao',    $static = true);
 
+        if($this->config->cache->type != 'close') $this->loadCacheClass();
+
         if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 1;
+    }
+
+    /**
+     * Load cache class.
+     * 
+     * @access public
+     * @return void
+     */
+    public function loadCacheClass()
+    {
+        $this->loadClass('cache', $static = true);
+        $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache';
+        if($this->config->multi) $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache' . DS . $this->config->site->code;
+        $this->cache = cache::factory($this->config->cache->type, zget($this->config->cache, $this->config->cache->type));
     }
 
     /**
@@ -958,12 +974,12 @@ class router
             $value = @getenv('PATH_INFO');
             if(empty($value)) $value = @getenv('ORIG_PATH_INFO');
             if(empty($value)) $value = @getenv('REQUEST_URI');
-            if(strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
         }
 
+        if($this->config->requestType != 'GET' and strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
         if(strpos($value, '?') === false) return trim($value, '/');
         $value = parse_url($value);
-        return trim($value['path'], '/');
+        return trim(zget($value, 'path', ''), '/');
     }
 
     /**
@@ -1284,6 +1300,17 @@ class router
         }
 
         /* Call the method. */
+        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
+        {
+            if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
+            {
+                $key = 'page' . DS . $this->device . DS . md5($this->URI);
+                $cache = $this->cache->get($key);
+                if($cache) die($cache);
+            }
+        }
+
+        /* Call the method. */
         call_user_func_array(array(&$module, $methodName), $this->params);
         return $module;
     }
@@ -1346,6 +1373,7 @@ class router
         //}
 
         $passedParams = array_values($passedParams);
+        unset($passedParams['HTTP_X_REQUESTED_WITH']);
 
         $i = 0;
         foreach($defaultParams as $key => $defaultValue)
@@ -1571,7 +1599,7 @@ class router
         if(is_object($app))
         {
             $device = helper::getDevice();
-            $langPath = $this->getTplRoot() . $this->config->template->{$device}->name . DS . 'lang' . DS . $moduleName . DS; 
+            $langPath = $this->getTplRoot() . $this->config->template->{$device}->name . DS . '_lang' . DS . $moduleName . DS; 
             $templateLangFile = $langPath . $this->clientLang . '.php';
 
             if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;
@@ -1664,6 +1692,9 @@ class router
      */
     public function shutdown()
     {
+        /* If cache on, clear caches. */
+        if($this->config->cache->type != 'close') $this->clearCache();
+        
         /* If debug on, save sql lines. */
         if(!empty($this->config->debug)) $this->saveSQL();
 
@@ -1671,6 +1702,45 @@ class router
         if(!function_exists('error_get_last')) return;
         $error = error_get_last();
         if($error) $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
+    }
+    
+    /**
+     * Clear caches.
+     * 
+     * @access public
+     * @return void
+     */
+    public function clearCache()
+    {
+        if(empty(dao::$changedTables)) return true;
+        foreach(dao::$changedTables as $table)
+        {
+            $items = zget($this->config->cache->relation, $table);
+            $blocks[] = zget($items, 'blocks');
+            $pages[]  = zget($items, 'pages');
+        }
+
+        $blocks = join(',', $blocks);
+        $pages  = join(',', $pages);
+        
+        $blocks = array_unique(explode(',', $blocks));
+        $pages  = array_unique(explode(',', $pages));
+
+        foreach($blocks as $block) 
+        {
+            if(empty($block)) continue;
+            $this->cache->clear("block/{$block}*");
+        }
+
+        if($this->config->cache->cachePage != 'close')
+        {
+            foreach($pages as $page) 
+            {
+                if(empty($page)) continue;
+                $this->cache->clear("page/{$page}*");
+            }
+        }
+        return true;
     }
 
     /**
@@ -1941,6 +2011,7 @@ class super
         }
         elseif($this->scope == 'server')
         {
+            if($key == 'ajax') return isset($_SERVER['HTTP_X_REQUESTED_WITH']) ? true : false;
             if(isset($_SERVER[$key])) return $_SERVER[$key];
             $key = strtoupper($key);
             if(isset($_SERVER[$key])) return $_SERVER[$key];

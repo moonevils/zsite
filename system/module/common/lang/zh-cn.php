@@ -14,6 +14,7 @@ $lang->colon      = '：';
 $lang->prev       = '‹';
 $lang->next       = '›';
 $lang->equal      = '=';
+$lang->percent    = '%';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
@@ -59,14 +60,15 @@ $lang->login            = '登录';
 $lang->account          = '帐号';
 $lang->password         = '密码';
 $lang->changePassword   = '修改密码';
-$lang->editEmail        = "邮箱设置";
-$lang->securityQuestion = '密保问题';
+$lang->setEmail         = "邮箱设置";
+$lang->setSecurity      = '密保问题';
 $lang->forgotPassword   = '忘记密码?';
 $lang->currentPos       = '当前位置';
 $lang->categoryMenu     = '分类导航';
 $lang->wechatTip        = '微信订阅';
 $lang->qrcodeTip        = '移动访问';
 $lang->language         = '语言';
+$lang->custom           = '自定义';
 
 /* Global action items. */
 $lang->reset          = '重置';
@@ -78,11 +80,11 @@ $lang->close          = '关闭';
 $lang->save           = '保存';
 $lang->confirm        = '确认';
 $lang->addToBlacklist = '加黑';
-$lang->edit           = '编辑';
 $lang->send           = '发送';
 $lang->preview        = '预览';
 $lang->goback         = '返回';
 $lang->more           = '更多';
+$lang->refresh        = '刷新';
 $lang->actions        = '操作';
 $lang->feature        = '未来';
 $lang->year           = '年';
@@ -163,9 +165,8 @@ $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->book     = '手册|book|admin|';
 $lang->menu->page     = '单页|article|admin|type=page';
 
-$lang->menu->product      = '产品|product|admin|';
 $lang->menu->order        = '订单|order|admin|';
-$lang->menu->express      = '快递|tree|browse|type=express';
+$lang->menu->product      = '产品|product|admin|';
 $lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
@@ -175,7 +176,7 @@ $lang->menu->reply        = '回复|message|admin|type=reply';
 $lang->menu->forum        = '论坛|forum|admin|';
 $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
-$lang->menu->contribution = '投稿|article|admin|type=contribution&tab=user';
+$lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = '统计|stat|traffic|';
@@ -189,12 +190,13 @@ $lang->menu->block    = '区块|block|admin|';
 $lang->menu->slide    = '幻灯片|slide|admin|';
 $lang->menu->others   = "设置|ui|others|";
 $lang->menu->visual   = "可视化|visual|index|";
+$lang->menu->edit     = "编辑模板|ui|edittemplate|";
 
 $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
 
-$lang->menu->package    = '扩展|package|browse|';
-$lang->menu->themestore = '主题市场|ui|themestore|';
+$lang->menu->package    = '插件|package|browse|';
+$lang->menu->themestore = '主题|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
@@ -205,6 +207,7 @@ $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
 $lang->menuGroups->score   = 'site';
+$lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -223,6 +226,11 @@ $lang->page->menu->browse = array('link' => '单页列表|article|admin|type=pag
 
 $lang->express = new stdclass();
 
+$lang->orderSetting = new stdclass();
+$lang->orderSetting->menu = new stdclass();
+$lang->orderSetting->menu->orderSetting = '设置|product|setting|';
+$lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
+
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -234,20 +242,16 @@ $lang->ui = new stdclass();
 /* Menu of theme. */
 $lang->theme = new stdclass();
 $lang->theme->menu = new stdclass();
-$lang->theme->menu->theme   = '主题|ui|settemplate|';
-$lang->theme->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 'setregion');
-$lang->theme->menu->custom  = '外观|ui|customtheme|';
-$lang->theme->menu->code    = '代码|ui|setcode|';
-$lang->theme->menu->source  = '素材|file|browsesource|';
+$lang->theme->menu->theme   = '主题管理|ui|settemplate|';
+$lang->theme->menu->layout  = array('link' => '布局管理|block|pages|', 'alias' => 'setregion');
+$lang->theme->menu->custom  = '外观管理|ui|customtheme|';
+$lang->theme->menu->code    = '代码管理|ui|setcode|';
+$lang->theme->menu->source  = '素材管理|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
-$lang->user->menu = new stdclass();
-$lang->user->menu->all    = '全部会员|user|admin|';
-$lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
-$lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
-$lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 
+/* Menu of message module. */
 $lang->message = new stdclass();
 
 /* Menu of forum module. */
@@ -263,14 +267,19 @@ $lang->forum->menu->setting = '论坛设置|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
+$lang->site->menu->domain   = '域名设置|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN设置|site|setcdn|';
+$lang->site->menu->cache    = '缓存设置|site|setcache|';
+$lang->site->menu->home     = '首页菜单|site|sethomemenu|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
 $lang->site->menu->score    = '积分规则|score|setcounts|';
+$lang->site->menu->backup   = '备份还原|backup|index|';
+//$lang->site->menu->api      = '集成|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -288,6 +297,9 @@ $lang->security->menu->log       = '登录日志|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
+
+/* Menu of score module. */
+$lang->score->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -324,13 +336,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = '概况|stat|traffic|';
-$lang->stat->menu->from     = '来源统计|stat|from|';
-$lang->stat->menu->search   = '搜索引擎统计|stat|search|';
-$lang->stat->menu->keywords = '关键词统计|stat|keywords|';
+$lang->stat->menu->traffic  = '流量概况|stat|traffic|';
+$lang->stat->menu->from     = '来源分类|stat|from|';
 $lang->stat->menu->domains  = array('link' => '来路域名|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
-$lang->stat->menu->client   = '终端统计|stat|client|type=browser';
-$lang->stat->menu->page     = '页面访问量排名|stat|page|';
+$lang->stat->menu->search   = '搜索引擎|stat|search|';
+$lang->stat->menu->keywords = '关键词|stat|keywords|';
+$lang->stat->menu->client   = '用户终端|stat|client|type=browser';
+$lang->stat->menu->page     = '点击排行|stat|page|';
 $lang->stat->menu->setStat  = '设置|stat|setting|';
 
 /* The error messages. */

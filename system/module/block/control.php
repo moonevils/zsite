@@ -42,12 +42,16 @@ class block extends control
         $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
-        $this->view->title    = $this->lang->block->browseRegion;
+        $this->lang->menuGroups->block = 'ui';
+        $this->lang->block->menu = $this->lang->theme->menu;
+
+        $this->view->title    = $this->lang->block->pages;
         $this->view->plans    = $this->block->getPlans($template);
         $this->view->plan     = zget($this->config->layout, $template . '_' . $theme);
         $this->view->template = $template;
         $this->view->uiHeader = true;
-        $this->lang->block->menu = $this->lang->theme->menu;
+        $custom   = json_decode($this->config->template->custom, true);
+        $this->view->custom   = $custom[$template][$theme];
         $this->display();       
     }
 
@@ -73,6 +77,7 @@ class block extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title    = $this->lang->block->create;
         $this->view->type     = $type;
         $this->view->template = $template;
         $this->view->theme    = $theme;
@@ -104,6 +109,7 @@ class block extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $this->view->title    = $this->lang->block->edit;
         $this->view->template = $template;
         $this->view->theme    = $theme;
         $this->view->block    = $this->block->getByID($blockID);
@@ -119,7 +125,7 @@ class block extends control
      * @access public
      * @return void
      */
-    public function setRegion($page, $region)
+    public function setRegion($page, $region, $object = '')
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
@@ -127,19 +133,20 @@ class block extends control
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $result = $this->block->setRegion($page, $region, $template, $theme);
+            $result = $this->block->setRegion($page, $region, $object, $template, $theme);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('pages')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => $this->server->http_referer));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $blocks = $this->block->getRegionBlocks($page, $region, $template, $theme);
+        $blocks = $this->block->getRegionBlocks($page, $region, $object, $template, $theme);
         if(empty($blocks)) $blocks = array(new stdclass());
 
         $this->view->title        = "<i class='icon-cog'></i> " . $this->lang->block->setPage . ' - '. $this->lang->block->{$template}->pages[$page] . ' - ' . $this->lang->block->$template->regions->{$page}[$region];
         $this->view->modalWidth   = 900;
         $this->view->page         = $page;
         $this->view->region       = $region;
+        $this->view->object       = $object;
         $this->view->blocks       = $blocks;
         $this->view->blockOptions = $this->block->getPairs($template);
         $this->view->template     = $template; 
@@ -268,5 +275,35 @@ class block extends control
         $this->view->title = $this->lang->block->renameLayout . $this->lang->colon . $plan->name;
         $this->view->plan  = $plan;
         $this->display(); 
+    }
+
+    /**
+     * Set page columns
+     * 
+     * @param string $page    like 'article_browse'
+     * @access public
+     * @return void
+     */
+    public function setColumns($page)
+    {
+        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->device}->name;
+        $params = $this->loadModel('ui')->getCustomParams($template, $theme);
+
+        if($_POST)
+        {
+            $params['sideGrid']  = $this->post->sideGrid;
+            $params['sideFloat'] = $this->post->sideFloat;
+            $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
+            $setting[$template][$theme] = $params;
+
+            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
+            $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->sideGrid   = $this->ui->getThemeSetting('sideGrid');
+        $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat');
+        $this->display();
     }
 }

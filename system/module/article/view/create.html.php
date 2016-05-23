@@ -13,7 +13,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php js::set('type', $type);?>
-<?php js::set('contribution', $this->config->article->contribution);?>
 <?php js::set('categoryID', $currentCategory);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
@@ -68,7 +67,7 @@
               </div>
               <?php endif;?>
               <span class="input-group-addon w-70px">
-                <label class='checkbox'>
+                <label class='checkbox-inline'>
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' /><span>{$lang->article->isLink}</span>" ?>
                 </label>
               </span>
@@ -125,6 +124,12 @@
           <th><?php echo $lang->article->status;?></th>
           <td><?php echo html::radio('status', $lang->article->statusList, 'normal');?></td>
         </tr>
+        <?php if($type == 'page'):?>
+        <tr>
+          <th></th>
+          <td><input type='checkbox' name='onlyBody' id='onlyBody' value='1'/> <span><?php echo $lang->article->onlyBody;?></span></td>
+        </tr>
+        <?php endif;?>
         </tbody>
         <tr>
           <td></td>

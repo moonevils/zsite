@@ -10,6 +10,8 @@ $lang->book->create     = '添加';
 $lang->book->catalog    = '章節';
 $lang->book->edit       = '編輯';
 $lang->book->sort       = '排序';
+$lang->book->setting    = '設置';
+$lang->book->index      = '首頁';
 
 $lang->book->searchResults     = '搜索結果';
 $lang->book->inputArticleTitle = '請輸入文章標題';
@@ -30,12 +32,19 @@ $lang->book->order       = '排序';
 $lang->book->views       = '閲讀';
 $lang->book->files       = '附件';
 $lang->book->images      = '圖片';
-$lang->book->chapterList = '目錄管理';
-$lang->book->articleList = '文章管理';
+$lang->book->chapterList = '目錄';
+$lang->book->articleList = '文章';
+$lang->book->fullScreen  = '全屏顯示';
 
 $lang->book->typeList['book']    = '手冊';
 $lang->book->typeList['chapter'] = '章節';
 $lang->book->typeList['article'] = '文章';
+
+$lang->book->chapterTypeList['home'] = '只在首頁顯示';
+$lang->book->chapterTypeList['left'] = '一直顯示在左側';
+
+$lang->book->fullScreenList['1'] = '是';
+$lang->book->fullScreenList['0'] = '否';
 
 $lang->book->lblAddedDate = '添加時間：<strong>%s</strong> ';
 $lang->book->lblAuthor    = '作者：<strong>%s</strong> ';
@@ -45,6 +54,7 @@ $lang->book->lblEditor    = '最後編輯：%s 于 %s ';
 $lang->book->none     = '沒有了';
 $lang->book->chapter  = '返回目錄';
 $lang->book->back2Top = '返回頂部';
+$lang->book->goHome   = '返迴首頁';
 
 $lang->book->aliasRepeat   = '別名:<strong> %s </strong>不能重複添加。';
 $lang->book->confirmDelete = "<span class='text-danger'>此操作將刪除該手冊所有章節和文章，確認刪除?</span>";

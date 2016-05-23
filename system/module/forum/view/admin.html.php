@@ -24,8 +24,8 @@
       <tr class='text-center'>
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='text-center w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
-        <th class='w-max-200px'><?php echo $lang->thread->title;?></th>
-        <th class='w-80px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
+        <th><?php echo $lang->thread->title;?></th>
+        <th><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
         <th class='w-110px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
         <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
@@ -34,7 +34,7 @@
         <th class='w-80px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
         <?php endif;?>
         <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->display);?></th>
-        <th><?php echo $lang->actions;?></th>
+        <th class='w-180px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <?php endif;?>
@@ -43,7 +43,7 @@
       <tr class='text-center'>
         <td><?php echo $thread->id;?></td>
         <td class='title text-left'>
-          <?php echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank'"); ?>
+          <?php echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank' title='{$thread->title}'"); ?>
         </td>
         <td><?php echo $thread->authorRealname;?></td>
         <td><?php echo substr($thread->addedDate, 5, -3);?></td>

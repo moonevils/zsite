@@ -115,13 +115,12 @@ class stat extends control
         $timeType = $begin == $end ? 'hour' : 'day';
         $this->view->lineCharts = $this->stat->getTypeLine($type, $timeType, $labels);
         
-        $this->view->title = $this->lang->stat->from;
+        $this->view->title = $this->lang->stat->search;
         $this->view->mode  = $mode; 
         $this->view->type  = $type;
         
         $this->display();
     }
-
 
     /**
      * From statistics report page.
@@ -209,7 +208,7 @@ class stat extends control
 
         $this->view->searchEngines = $this->config->stat->searchEngines;
         $this->view->keywordList   = $keywordList;
-        $this->view->title         = $this->lang->stat->keywords;
+        $this->view->title         = $this->lang->stat->keyword;
         $this->view->mode          = $mode;
         $this->view->begin         = $begin;
         $this->view->end           = $end;
@@ -273,6 +272,7 @@ class stat extends control
         if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
         if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
 
+        $this->view->title   = $this->lang->stat->domain;
         $this->view->labels  = $labels;
         $this->view->mode    = $mode;
         $this->view->domains = $this->stat->getDomainList($begin, $end, $orderBy, $pager);
@@ -371,11 +371,11 @@ class stat extends control
             ->limit(100)
             ->fetchAll();
 
-        $this->view->title   = $this->lang->stat->page->common;
-        $this->view->mode    = $mode;
-        $this->view->pages   = $pages;
-        $this->view->begin   = $begin;
-        $this->view->end     = $end;
+        $this->view->title = $this->lang->stat->click;
+        $this->view->mode  = $mode;
+        $this->view->pages = $pages;
+        $this->view->begin = $begin;
+        $this->view->end   = $end;
         $this->display();
     }
 

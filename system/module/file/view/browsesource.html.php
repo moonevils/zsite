@@ -29,9 +29,11 @@
   <div class='panel-heading'>
     <?php echo $lang->file->sourceList?>
     <span class='panel-actions'>
-      <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view selected'")?>
-      <?php echo html::a('javascript:void(0)', "<i class='icon icon-list'></i>", "class='list-view'")?>
-      <?php echo html::commonButton($lang->file->uploadSource, 'btn btn-sm btn-primary', "data-toggle='modal' data-target='#uploadModal'")?>
+      <div class="btn-group">
+        <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view active btn'")?>
+        <?php echo html::a('javascript:void(0)', "<i class='icon icon-list'></i>", "class='list-view btn'")?>
+      </div>
+      <?php echo html::commonButton($lang->file->uploadSource, 'btn btn-primary', "data-toggle='modal' data-target='#uploadModal'")?>
     </span>
   </div>
   <div id='imageView' class='panel-body'>
@@ -45,11 +47,11 @@
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
             $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
-            $imageHtml .= "<div class='file-source'><input id='fullURL{$file->id}' type='text' value='{$file->fullURL}'/><button class='copyBtn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></div>";
-            $imageHtml .= "<span class='file-actions'>";
+            $imageHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
+            $imageHtml .= "<div class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
-            $imageHtml .= '</span>';
+            $imageHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-pencil'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
+            $imageHtml .= '</div>';
             $imageHtml .= '</li>';
         }
         else
@@ -57,10 +59,10 @@
             $file->title = $file->title . ".$file->extension";
             $fileHtml .= "<li class='file file-{$file->extension}'>";
             $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
-            $fileHtml .= "<div class='file-source'><input type='text' value='" . $file->fullURL . "'/></div>";
+            $fileHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $fileHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
+            $fileHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
             $fileHtml .= '</span>';
             $fileHtml .= '</li>';
         }
@@ -107,7 +109,7 @@
           <td><?php echo $file->addedDate;?></td>
           <td class='text-center'>
             <?php
-            commonModel::printLink('file', 'sourceedit',   "id=$file->id", $lang->edit, "data-toggle='modal'");
+            commonModel::printLink('file', 'editsource',   "id=$file->id", $lang->edit, "data-toggle='modal'");
             commonModel::printLink('file', 'sourcedelete', "id=$file->id", $lang->delete, "class='deleter'");
             ?>
           </td>
@@ -121,6 +123,6 @@
 <script type="text/javascript">
 var copyBtns = $('.copyBtn');
 var clip = new ZeroClipboard(copyBtns);
-clip.on('aftercopy', function(){window.messager.success(v.copySuccess); });
+clip.on('aftercopy', function(){$.zui.messager.success(v.copySuccess); });
 </script>
 <?php include '../../common/view/footer.admin.html.php';?>

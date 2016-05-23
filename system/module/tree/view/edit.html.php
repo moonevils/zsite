@@ -33,8 +33,8 @@ $themeRoot = $webRoot . "theme/";
           <div class="input-group">
             <?php echo html::input('name', $category->name, "class='form-control'");?>
             <?php if($category->type != 'forum' or $category->parent != 0):?>
-            <span class="input-group-addon w-70px">
-              <label class='checkbox'>
+            <span class="input-group-addon fix-border-left w-70px">
+              <label class='checkbox-inline'>
                 <?php $checked = $category->link ? 'checked' : '';?>
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked} /><span>{$lang->category->isLink}</span>" ?>
               </label>
@@ -42,7 +42,7 @@ $themeRoot = $webRoot . "theme/";
             <?php endif;?>
             <?php if($category->type == 'product'):?>
             <span class="input-group-addon">
-              <label class='checkbox'>
+              <label class='checkbox-inline'>
                 <?php $checked = $category->unsaleable ? 'checked' : '';?>
                 <input type='checkbox' name='unsaleable' id='unsaleable' value='1' <?php echo $checked;?> />
                 <span><?php echo $lang->category->unsaleable;?></span>

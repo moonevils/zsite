@@ -23,8 +23,11 @@ $lang->order->receiver       = '收貨人';
 $lang->order->noRecord       = '無';
 $lang->order->status         = '狀態';
 $lang->order->note           = '買家留言';
+$lang->order->basic          = '基本信息';
+$lang->order->info           = '訂單信息';
 
 $lang->order->admin          = '訂單管理';
+$lang->order->view           = '詳情';
 $lang->order->setting        = '系統設置';
 $lang->order->browse         = '我的訂單';
 $lang->order->bought         = '查看已買到的商品';

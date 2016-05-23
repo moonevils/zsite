@@ -450,6 +450,8 @@ class statModel extends model
     {
         $todayReport = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('timeType')->eq('day')
+            ->andWhere('type')->eq('basic') 
+            ->andWhere('item')->eq('total')
             ->andWhere('timeValue')->eq(date('Ymd'))
             ->fetch(); 
 
@@ -466,6 +468,8 @@ class statModel extends model
     {
         $yestodayReport = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('timeType')->eq('day')
+            ->andWhere('type')->eq('basic') 
+            ->andWhere('item')->eq('total')
             ->andWhere('timeValue')->eq(date('Ymd', strtotime("-1 day")))
             ->fetch();
 

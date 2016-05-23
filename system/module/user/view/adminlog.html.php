@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class="panel">
-  <div class="panel-heading"><strong><i class="icon-group"></i><?php echo $lang->user->log->list;?></strong></div>
+  <div class="panel-heading"><strong><i class="icon-group"></i> <?php echo $lang->user->log->list;?></strong></div>
   <table class='table table-hover table-striped table-bordered'>
     <thead>
       <tr class='text-center'>
@@ -29,7 +29,7 @@
     <?php foreach($logs as $log):?>
     <tr class='text-center'>
       <td><?php echo $log->id;?></td>
-      <td><?php commonModel::printLink('user', 'adminlog', "account=$log->account", $log->account);?></td>
+      <td><?php commonModel::printLink('user', 'adminlog', "account=$log->account", $users[$log->account]);?></td>
       <td><?php echo $log->desc;?></td>
       <td><?php echo $log->browser;?></td>
       <td><?php commonModel::printLink('user', 'adminlog', "ip=$log->ip", $log->ip);?></td>

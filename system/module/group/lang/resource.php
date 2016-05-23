@@ -209,6 +209,7 @@ $lang->resource->site->setOauth     = 'setOauth';
 $lang->resource->site->setsecurity  = 'setsecurity';
 $lang->resource->site->setsensitive = 'setsensitive';
 $lang->resource->site->setstat      = 'setStat';
+$lang->resource->site->setCache     = 'setCache';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();
@@ -245,7 +246,7 @@ $lang->resource->tree->redirect = 'redirect';
 /* Ui module. */
 $lang->resource->ui = new stdclass();
 $lang->resource->ui->setTemplate   = 'setTemplate';
-$lang->resource->ui->customTheme   = 'customTheme';
+$lang->resource->ui->customTheme   = 'custom';
 $lang->resource->ui->setLogo       = 'setLogo';
 $lang->resource->ui->deleteFavicon = 'deleteFavicon';
 $lang->resource->ui->deleteLogo    = 'deleteLogo';
@@ -253,7 +254,7 @@ $lang->resource->ui->others        = 'others';
 $lang->resource->ui->setcode       = 'setCode';
 $lang->resource->ui->browseSource  = array('module' => 'file', 'method' => 'sourceList');
 $lang->resource->ui->sourceDelete  = array('module' => 'file', 'method' => 'sourceDelete');
-$lang->resource->ui->sourceEdit    = array('module' => 'file', 'method' => 'sourceEdit');
+$lang->resource->ui->editSource    = array('module' => 'file', 'method' => 'editSource');
 $lang->resource->ui->selectImage   = array('module' => 'file', 'method' => 'selectImage');
 
 /* User module. */

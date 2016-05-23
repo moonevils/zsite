@@ -33,13 +33,12 @@ class blockModel extends model
      * Get block list of one site.
      *
      * @param  string    $template
-     * @param  object    $pager
      * @access public
      * @return array
      */
-    public function getList($template, $pager = null)
+    public function getList($template)
     {
-        return $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->page($pager)->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->fetchAll('id');
     }
 
     /**
@@ -50,18 +49,39 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getPageBlocks($module, $method)
+    public function getPageBlocks($module, $method, $object = '')
     {
-        $device = helper::getDevice();
+        $device   = helper::getDevice();
         $template =  $this->config->template->{$device}->name;
-        $theme = $this->config->template->{$device}->theme;
-        $plan  = zget($this->config->layout, "{$template}_{$theme}");
-        $pages = "all,{$module}_{$method}";
+        $theme    = $this->config->template->{$device}->theme;
+        $plan     = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
+        $pages    = "all,{$module}_{$method}";
+
+        $layoutsInCurrent = array();
+        if($object)
+        {
+            $layoutsInCurrent = $this->dao->select('*')->from(TABLE_LAYOUT)
+                ->where('page')->eq("{$module}_{$method}")
+                ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
+                ->andWhere('plan')->in($plan)
+                ->andWhere('object')->eq($object)
+                ->fetchAll('region');
+        }
+
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-            ->andWhere('plan')->eq($plan)
+            ->andWhere('plan')->in($plan)
+            ->andWhere('object')->eq('')
             ->fetchGroup('page', 'region');
+
+        if(!empty($layoutsInCurrent))
+        {
+            foreach($layoutsInCurrent as $region => $layouts)
+            {
+                $rawLayouts["{$module}_{$method}"][$region] = $layouts;
+            }
+        }
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
 
@@ -156,10 +176,13 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getRegionBlocks($page, $region, $template, $theme)
+    public function getRegionBlocks($page, $region, $object, $template, $theme)
     {
-        $plan = zget($this->config->layout, "{$template}_{$theme}");
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($plan)->fetch('blocks');
+        $plan = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
+
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq($object)->andWhere('template')->eq($template)->andWhere('plan')->in($plan)->fetch('blocks');
+        if($object and empty($regionBlocks)) $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq('')->andWhere('template')->eq($template)->andWhere('plan')->in($plan)->fetch('blocks');
+
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -262,7 +285,7 @@ class blockModel extends model
     public function createTypeMenu($template, $type = '', $blockID = 0, $method = '', $class = '')
     {
         if(empty($method)) $method = $this->app->getMethodName();
-        $select = "<ul class='dropdown-menu $class' role='menu'><li><dl>";
+        $select = "<ul class='dropdown-menu $class block-types-menu' role='menu'><li><dl>";
         foreach($this->config->block->categoryList as $category => $groups)
         {
             $select .= "<dt>{$this->lang->block->categoryList[$category]}</dt>";
@@ -403,9 +426,26 @@ class blockModel extends model
             if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
         }
         if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
+
+        if($this->post->nav)
+        {
+            $navs = $this->post->nav;
+
+            foreach($navs as $key => $nav) $navs[$key] = $this->loadModel('nav')->organizeNav($nav);
+
+            if(isset($navs[2])) $navs[2] = $this->nav->group($navs[2]);
+
+            foreach($navs[1] as &$nav)
+            {
+                $nav['children'] = isset($navs[2][$nav['key']]) ?  $navs[2][$nav['key']] : array();
+            }
+
+            $block->params['nav'] = $navs[1];
+        }
+
         $block->content = helper::jsonEncode($block->params);
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js,nav')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
@@ -446,9 +486,28 @@ class blockModel extends model
         }
 
         if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
+        if($this->post->nav)
+        {
+            $navs = $this->post->nav;
+
+            foreach($navs as $key => $nav)
+            {
+                $navs[$key] = $this->loadModel('nav')->organizeNav($nav);
+            }
+
+            if(isset($navs[2])) $navs[2] = $this->nav->group($navs[2]);
+
+            foreach($navs[1] as &$nav)
+            {
+                $nav['children'] = isset($navs[2][$nav['key']]) ?  $navs[2][$nav['key']] : array();
+            }
+
+            $data->params['nav'] = $navs[1];
+        }
+
         $data->content = helper::jsonEncode($data->params);
 
-        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js')
+        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js,nav')
             ->batchCheck($this->config->block->require->edit, 'notempty')
             ->autoCheck()
             ->where('id')->eq($this->post->blockID)
@@ -482,17 +541,25 @@ class blockModel extends model
      * @access public
      * @return bool
      */
-    public function setRegion($page, $region, $template, $theme)
+    public function setRegion($page, $region, $object = '', $template, $theme)
     {
         $layout = new stdclass();
         $layout->page     = $page;
         $layout->region   = $region;
         $layout->template = $template;
-        $layout->plan     = zget($this->config->layout, $template . '_' . $theme);
+        $layout->object   = $object;
+        $layout->plan     = $object ? 'all' : zget($this->config->layout, $template . '_' . $theme);
 
-        if(!$this->post->blocks)
+        if(!$this->post->blocks and !$object)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($layout->plan)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)
+                ->where('page')->eq($page)
+                ->andWhere('region')->eq($region)
+                ->andWhere('object')->eq($object)
+                ->andWhere('template')->eq($template)
+                ->andWhere('plan')->eq($layout->plan)
+                ->exec();
+
             if(!dao::isError()) return true;
         }
 
@@ -548,9 +615,39 @@ class blockModel extends model
     {
         if(!isset($blocks[$method][$region])) return '';
         $blocks = $blocks[$method][$region];
-        $html   = '';
-        foreach($blocks as $block) $html .= $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
-        echo $html;
+
+        foreach($blocks as $block) 
+        {
+            if($this->config->cache->type != 'close')
+            {
+                $key = "block/{$block->type}_{$block->id}";
+                if($withGrid and $block->grid) $key = "block/{$block->type}_{$block->id}_{$block->grid}";
+                if(strpos($key, 'Tree') !== false)
+                {
+                    if($this->session->articleCategory) $key .= "_{$this->session->articleCategory}";
+                    if($this->session->productCategory) $key .= "_{$this->session->productCategory}";
+                }
+
+                $cache = $this->app->cache->get($key);
+
+                if($cache)
+                {
+                    echo $cache;
+                }
+                else
+                {
+                    ob_start();
+                    $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
+                    $content = ob_get_flush();
+
+                    $this->app->cache->set($key, $content);
+                }
+            }
+            else
+            {
+                $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
+            }
+        }
     }
 
     /**
@@ -597,22 +694,22 @@ class blockModel extends model
             $device   = helper::getDevice();
             $template = $this->config->template->{$device}->name;
             $theme    = $this->config->template->{$device}->theme;
-            $tplPath  = $this->app->getTplRoot() . $template . DS . 'view' . DS . 'block' . DS;
+            $tplPath  = $this->app->getTplRoot() . $template . DS . 'block' . DS;
 
-            /* First try block/ext/sitecode/view/block/ */
+            /* First try block/ext/sitecode/block/ */
             $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
             $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
-            /* Then try block/ext/view/block/ */
+            /* Then try block/ext//block/ */
             if(!file_exists($blockFile))
             {
                 $extBlockRoot = $tplPath . 'ext' . DS;
                 $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
-                /* No ext file, use the block/view/block/. */
+                /* No ext file, use the block/block/. */
                 if(!file_exists($blockFile))
                 {
-                    $blockFile = $tplPath . strtolower($block->type) . '.html.php';
+                    $blockFile = $this->loadModel('ui')->getEffectViewFile($template, 'block', strtolower($block->type));
                     if(!file_exists($blockFile))
                     {
                         if($withGrid) echo '</div>';
@@ -660,7 +757,7 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
                 if(!empty($content->custom->$theme->css))
                 {
-                    $customStyle = str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                    $customStyle = str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->css));
                     $lessc = $this->app->loadClass('lessc');
                     $lessc->setFormatter("compressed");
                     $customStyle = $lessc->compile($customStyle);
@@ -668,7 +765,7 @@ class blockModel extends model
                 }
             }
             $style .= '</style>';
-            $script = !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->js) . "</script>" : '';
+            $script = !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->js)) . "</script>" : '';
 
             echo $containerHeader;
             if(file_exists($blockFile)) include $blockFile;

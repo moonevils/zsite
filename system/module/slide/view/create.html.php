@@ -49,7 +49,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <div class='input-group mainLink'>
               <?php echo html::input('mainLink', '', "class='form-control'");?>
               <div class='input-group-addon'>
-                <label class='checkbox'>
+                <label class='checkbox-inline'>
                   <?php echo "<input type='checkbox' name='target' id='target' value='1'/><span>{$lang->slide->newWindow}</span>" ?>
                 </label>
               </div>
@@ -125,6 +125,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <div class='input-group-addon'>
                 <?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[0]', '');?>
               </div>
+              <div class='input-group-addon'>
+                <?php echo html::checkbox('globalButton', $lang->slide->globalButton, '', "class='global-button'") . html::hidden('globalButton[0]', '');?>
+              </div>
             </div>
           </td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
@@ -169,6 +172,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php echo html::input('buttonUrl[key]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?>
             <div class='input-group-addon'>
               <?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[key]', '');?>
+            </div>
+            <div class='input-group-addon'>
+              <?php echo html::checkbox('globalButton', $lang->slide->globalButton, '', "class='global-button'") . html::hidden('globalButton[key]', '');?>
             </div>
           </div>
         </td>

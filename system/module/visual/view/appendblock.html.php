@@ -50,7 +50,7 @@ $(function()
         $('.nav-tabs > li[data-key="' + key + '"]').addClass('active');
     };
 
-    $(document).on('click', '.btn-add-block:not(.disabled)', function()
+    $(document).on('click', '.btn-add-block:not(.disabled, #addRegionBlock)', function()
     {
         window.parent.$.addBlock('<?php echo $page?>', '<?php echo $region?>', $(this).data('id'), '<?php echo $parent?>');
     }).on('click', '.nav-tabs > li > a', function()

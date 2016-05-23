@@ -44,10 +44,12 @@ $lang->user->captcha   = 'Captcha';
 $lang->user->alert     = 'Your account has been forbidden';
 $lang->user->privilege = 'Privilege';
 
+$lang->user->all             = 'All users';
 $lang->user->list            = 'User list';
 $lang->user->view            = "User info";
 $lang->user->create          = "Add a user";
 $lang->user->edit            = "Edit user";
+$lang->user->operate         = 'Operate';
 $lang->user->changePassword  = "Change password";
 $lang->user->changeEmail     = "Email setting";
 $lang->user->recoverPassword = "recover password";
@@ -68,7 +70,7 @@ $lang->user->pullWechatFans  = 'Pull wechat uses';
 $lang->user->adminlog        = 'Admin login';
 $lang->user->checkEmail      = 'Check Email';
 $lang->user->getEmailCode    = 'Get email code';
-$lang->user->editEmail       = 'Edit Email';
+$lang->user->setEmail        = 'Set Email';
 $lang->user->newEmail        = 'New Email';
 $lang->user->rank            = 'Level Scores';
 $lang->user->score           = 'Integral Details';
@@ -83,22 +85,22 @@ $lang->user->deleteHistory   = 'Delete user and history data';
 $lang->user->question        = 'Security question';
 $lang->user->answer          = 'Answer';
 
-$lang->user->type         = 'Account Type';
-$lang->user->profile      = 'Profile';
-$lang->user->editProfile  = 'Edit profile';
-$lang->user->thread       = 'My threads';
-$lang->user->messages     = 'My Messages';
-$lang->user->reply        = 'My replies';
-$lang->user->contribution = 'My Contribution';
+$lang->user->type        = 'Account Type';
+$lang->user->profile     = 'Profile';
+$lang->user->editProfile = 'Edit profile';
+$lang->user->thread      = 'My threads';
+$lang->user->messages    = 'My Messages';
+$lang->user->reply       = 'My replies';
+$lang->user->submittion  = 'My Submittion';
 
-$lang->user->userHistory         = "User History Data";
-$lang->user->threadHistory       = "Post";
-$lang->user->replyHistory        = "Reply";
-$lang->user->commentHistory      = "Comment";
-$lang->user->messageHistory      = "Message";
-$lang->user->orderHistory        = "Order";
-$lang->user->addressHistory      = "Address";
-$lang->user->contributionHistory = "Contribution";
+$lang->user->userHistory       = "User History Data";
+$lang->user->threadHistory     = "Post";
+$lang->user->replyHistory      = "Reply";
+$lang->user->commentHistory    = "Comment";
+$lang->user->messageHistory    = "Message";
+$lang->user->orderHistory      = "Order";
+$lang->user->addressHistory    = "Address";
+$lang->user->submittionHistory = "Submittion";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "My message <span class='label label-badge text-latin'>%s</span>";
@@ -132,7 +134,7 @@ $lang->user->forbidDate['2']     = '2d';
 $lang->user->forbidDate['3']     = '3d';
 $lang->user->forbidDate['7']     = '7d';
 $lang->user->forbidDate['30']    = '30d';
-$lang->user->operate             = 'Operate';
+$lang->user->forbidDate['3000']  = 'Forever';
 
 $lang->user->adminList['super']  = 'Super administrator';
 $lang->user->adminList['common'] = 'Administrator';
@@ -163,8 +165,9 @@ $lang->user->login->welcome = 'Welcome';
 $lang->user->login->why     = 'Login, and use more feature.';
 
 $lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->success    = "Password change link has been sent to your mailbox";
-$lang->user->resetPassword->failed     = "Please input your correct mail";
+$lang->user->resetPassword->common  = "Reset Password";
+$lang->user->resetPassword->success = "Password change link has been sent to your mailbox";
+$lang->user->resetPassword->failed  = "Please input your correct mail";
 
 $lang->user->resetMail = new stdclass();
 $lang->user->resetMail->subject  = 'Modify password';
@@ -213,19 +216,20 @@ $lang->user->control->common      = 'User dashboard';
 $lang->user->control->welcome     = 'Welcome, <strong>%s</strong>';
 $lang->user->control->lblPassword = "Keep empty, will not change it.";
 
-$lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
-$lang->user->control->menus[20] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
-if(RUN_MODE != 'install' and commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope-alt"></i> My Contribution <i class="icon-chevron-right"></i>|article|contribution'; 
-if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
-{
-    $lang->user->control->menus[30] = '<i class="icon-sun"></i> Score <i class="icon-chevron-right"></i>|user|score';
-    if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> Recharge Score <i class="icon-chevron-right"></i>|score|buyscore';
-}
-$lang->user->control->menus[50] = '<i class="icon-comment"></i> My Theme <i class="icon-chevron-right"></i>|user|thread';
-$lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->navGroups = new stdclass();
+$lang->user->navGroups->user    = 'User profile';
+$lang->user->navGroups->order   = 'Order Info';
+$lang->user->navGroups->message = 'My messages';
 
-if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
-if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
+$lang->user->control->menus['profile']    = '<i class="icon-large icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
+$lang->user->control->menus['message']    = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
+$lang->user->control->menus['score']      = '<i class="icon-sun"></i> Score <i class="icon-chevron-right"></i>|user|score';
+$lang->user->control->menus['recharge']   = '<i class="icon-bolt"></i> Recharge Score <i class="icon-chevron-right"></i>|score|buyscore';
+$lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
+$lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
+$lang->user->control->menus['thread']     = '<i class="icon-comment"></i> My Theme <i class="icon-chevron-right"></i>|user|thread';
+$lang->user->control->menus['reply']      = '<i class="icon-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> My Submittion <i class="icon-chevron-right"></i>|article|submittion'; 
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = 'Log';
@@ -237,7 +241,7 @@ $lang->user->log->browser     = 'Browser';
 $lang->user->log->ip          = 'IP';
 $lang->user->log->location    = 'Location';
 $lang->user->log->date        = 'Date';
-$lang->user->log->desc        = 'description';
+$lang->user->log->desc        = 'Result';
 
 $lang->user->ipDenied             = 'This IP not allowed login, please do these steps.';
 $lang->user->locationDenied       = 'This location not allowed login, please do these steps.';
@@ -249,8 +253,3 @@ $lang->user->forceYangcong        = 'Yangcong has been open, please confirm your
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your website login password';
 $lang->user->placeholder->verifyCode = 'Please enter the code you received.';
-
-$lang->user->navGroups = new stdclass();
-$lang->user->navGroups->user    = 'User profile';
-$lang->user->navGroups->order   = 'Order Info';
-$lang->user->navGroups->message = 'My messages';

@@ -14,9 +14,14 @@
 <?php if($type == 'ip') unset($lang->guarder->punishOptions[0]);?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-globe'></i> <?php echo $lang->site->setFilter;?></strong>
-    <?php echo html::a(inlink('setfilter', "type=ip"), $lang->site->ipFilter, $class = $type == 'ip' ? "class='active'" : '');?>
-    <?php echo html::a(inlink('setfilter', "type=account"), $lang->site->accountFilter, $class = $type == 'account' ? "class='active'" : '');?>
+    <ul id='typeNav' class='nav nav-tabs'>
+      <li data-type='internal' <?php echo $type == 'ip' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('setfilter', "type=ip"), $lang->site->ipFilter);?>
+      </li>
+      <li data-type='internal' <?php echo$type == 'account' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('setfilter', "type=account"), $lang->site->accountFilter);?>
+      </li>
+    </ul> 
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>

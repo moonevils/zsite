@@ -12,26 +12,6 @@
 class bookModel extends model
 {
     /**
-     * Set the menu for admin.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setMenu()
-    {
-        $this->lang->book->menu = new stdclass();
-
-        $books = $this->getBookList();
-        foreach($books as $bookID => $book)
-        {
-            $this->lang->book->menu->$bookID = $book->title . '|book|admin|book=' . $bookID;
-        }
-
-        $this->lang->book->menu->createBook = $this->lang->book->createBook . '|book|create|'; 
-        $this->lang->menuGroups->tree = 'book';
-    }
-
-    /**
      * Get a book by id or alias.
      *
      * @param  string|int $id   the id can be the number id or the alias.
@@ -40,9 +20,14 @@ class bookModel extends model
      */
     public function getBookByID($id)
     {
-        $book = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($id)->andWhere('type')->eq('book')->fetch();
-        if(!$book) $book = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($id)->fetch();
-        return $book;
+        if(!is_numeric($id))
+        {
+            return $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($id)->andWhere('type')->eq('book')->fetch();
+        }
+        else
+        {
+            return $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($id)->fetch();
+        }
     }
 
     /**
@@ -90,6 +75,17 @@ class bookModel extends model
     public function getBookList()
     {
         return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->fetchAll('id');
+    }
+
+    /**
+     * Get book pairs.
+     *
+     * @access public
+     * @return array
+     */
+    public function getBookPairs()
+    {
+        return $this->dao->select('id, title')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->fetchPairs();
     }
 
     /**
@@ -154,13 +150,20 @@ class bookModel extends model
                 $serial = $node->type != 'book' ? $serials[$node->id] : '';
                 if($node->type == 'chapter')
                 {
-                    $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias");
-                    $catalog .= "<dd class='catalogue chapter'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
+                    if($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen)
+                    {
+                        $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span>&nbsp;" . $node->title . '</strong></dd>';
+                    }
+                    else
+                    {
+                        $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+                        $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
+                    }
                 }
                 elseif($node->type == 'article')
                 {
-                    $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias");
-                    $catalog .= "<dd class='catalogue article'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
+                    $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+                    $catalog .= "<dd id='article{$node->id}' class='catalogue article text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
                 }
                 if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog'])) $catalog .= $nodeList[$node->id]['catalog'];
             }
@@ -217,20 +220,20 @@ class bookModel extends model
      * @access public
      * @return string
      */
-    public function getArticleIDs($nodeID)
+    public function getArticleIdList($nodeID, $families, $allNodes)
     {
-        $node = $this->getNodeByID($nodeID);
+        $node = zget($allNodes, $nodeID, '');
         if(!$node) return '';
 
         if($node->type == 'article') return $node->id;
 
         $ids      = '';
-        $children = $this->getChildren($nodeID);
+        $children = zget($families, $node->id, '');
         if(!$children) return '';
 
         foreach($children as $child)
         {
-            $result = $this->getArticleIDs($child->id);
+            $result = $this->getArticleIdList($child->id, $families, $allNodes);
             if(strlen($result) == 0) continue;
             $ids .= $result . ',';
         }
@@ -332,7 +335,9 @@ class bookModel extends model
      */
     public function getPrevAndNext($current)
     {
-        $idList = explode(',', $this->getArticleIDs($current->book->id));
+        $families = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->fetchGroup('parent', 'id');
+        $allNodes = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->fetchAll('id');
+        $idList = explode(',', $this->getArticleIdList($current->book->id, $families, $allNodes));
         $idListFlip = array_flip($idList);
 
         $currentOrder = isset($idListFlip[$current->id]) ? $idListFlip[$current->id] : -1;
@@ -443,7 +448,7 @@ class bookModel extends model
         $startPath = '';
         if($startParent > 0)
         {
-            $startParent = $this->getNodeById($startParent);
+            $startParent = $this->getNodeByID($startParent);
             if($startParent) $startPath = $startParent->path . '%';
         }
 

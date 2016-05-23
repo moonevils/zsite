@@ -1,6 +1,5 @@
 $(function()
 {
-    tempColor = new Color();
     $('.color').each(function()
     {
         var $this = $(this);
@@ -26,7 +25,7 @@ $(function()
 
         $this.closest('.colorplate').find('.color.active').removeClass('active');
 
-        if(tempColor.isColor(val))
+        if(Color.isColor(val))
         {
             var ic = (new Color(val)).contrast().hexStr();
             $this.attr('placeholder', val).closest('.color').removeClass('error').find('.input-group-btn .dropdown-toggle').css({'background': val, 'color': ic}).find('.caret').css('border-top-color', ic);;
@@ -65,8 +64,14 @@ $(function()
 
     $(document).on('change', '.button-target', function()
     { 
-        $('.button-target').parent().next('input[type=hidden]').val('');
-        $('input:checked').parent().next('input[type=hidden]').val('_blank');
+        $(this).parent().next('input[type=hidden]').val('');
+        $(this).parent().find('input:checked').parent().next('input[type=hidden]').val('_blank');
+    });
+
+    $(document).on('change', '.global-button', function()
+    { 
+        $(this).parent().next('input[type=hidden]').val('');
+        $(this).parent().find('input:checked').parent().next('input[type=hidden]').val('1');
     });
 
     $('#height').parents('tr').find('.required-wrapper').eq(0).remove();

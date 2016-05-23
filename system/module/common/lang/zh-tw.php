@@ -14,6 +14,7 @@ $lang->colon      = '：';
 $lang->prev       = '‹';
 $lang->next       = '›';
 $lang->equal      = '=';
+$lang->percent    = '%';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
@@ -59,14 +60,15 @@ $lang->login            = '登錄';
 $lang->account          = '帳號';
 $lang->password         = '密碼';
 $lang->changePassword   = '修改密碼';
-$lang->editEmail        = "郵箱設置";
-$lang->securityQuestion = '密保問題';
+$lang->setEmail         = "郵箱設置";
+$lang->setSecurity      = '密保問題';
 $lang->forgotPassword   = '忘記密碼?';
 $lang->currentPos       = '當前位置';
 $lang->categoryMenu     = '分類導航';
 $lang->wechatTip        = '微信訂閲';
 $lang->qrcodeTip        = '移動訪問';
 $lang->language         = '語言';
+$lang->custom           = '自定義';
 
 /* Global action items. */
 $lang->reset          = '重置';
@@ -78,11 +80,11 @@ $lang->close          = '關閉';
 $lang->save           = '保存';
 $lang->confirm        = '確認';
 $lang->addToBlacklist = '加黑';
-$lang->edit           = '編輯';
 $lang->send           = '發送';
 $lang->preview        = '預覽';
 $lang->goback         = '返回';
 $lang->more           = '更多';
+$lang->refresh        = '刷新';
 $lang->actions        = '操作';
 $lang->feature        = '未來';
 $lang->year           = '年';
@@ -163,9 +165,8 @@ $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->book     = '手冊|book|admin|';
 $lang->menu->page     = '單頁|article|admin|type=page';
 
-$lang->menu->product      = '產品|product|admin|';
 $lang->menu->order        = '訂單|order|admin|';
-$lang->menu->express      = '快遞|tree|browse|type=express';
+$lang->menu->product      = '產品|product|admin|';
 $lang->menu->orderSetting = '設置|product|setting|';
 
 $lang->menu->user         = '會員|user|admin|';
@@ -175,7 +176,7 @@ $lang->menu->reply        = '回覆|message|admin|type=reply';
 $lang->menu->forum        = '論壇|forum|admin|';
 $lang->menu->thread       = '主題|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
-$lang->menu->contribution = '投稿|article|admin|type=contribution&tab=user';
+$lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat  = '統計|stat|traffic|';
@@ -187,13 +188,15 @@ $lang->menu->logo     = '標誌|ui|setlogo|';
 $lang->menu->nav      = '導航|nav|admin|';
 $lang->menu->block    = '區塊|block|admin|';
 $lang->menu->slide    = '幻燈片|slide|admin|';
-$lang->menu->visual   = "<i class='icon icon-magic'></i> 可視化編輯|visual|index|";
+$lang->menu->others   = "設置|ui|others|";
+$lang->menu->visual   = "可視化|visual|index|";
+$lang->menu->edit     = "編輯模板|ui|edittemplate|";
 
 $lang->menu->site     = '站點|site|setbasic|';
 $lang->menu->security = '安全|site|setsecurity|';
 
-$lang->menu->package    = '擴展|package|browse|';
-$lang->menu->themestore = '主題市場|ui|themestore|';
+$lang->menu->package    = '插件|package|browse|';
+$lang->menu->themestore = '主題|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
@@ -204,6 +207,7 @@ $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'site';
 $lang->menuGroups->score   = 'site';
+$lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -222,6 +226,11 @@ $lang->page->menu->browse = array('link' => '單頁列表|article|admin|type=pag
 
 $lang->express = new stdclass();
 
+$lang->orderSetting = new stdclass();
+$lang->orderSetting->menu = new stdclass();
+$lang->orderSetting->menu->orderSetting = '設置|product|setting|';
+$lang->orderSetting->menu->express      = '快遞|tree|browse|type=express';
+
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -233,20 +242,16 @@ $lang->ui = new stdclass();
 /* Menu of theme. */
 $lang->theme = new stdclass();
 $lang->theme->menu = new stdclass();
-$lang->theme->menu->theme   = '主題|ui|settemplate|';
-$lang->theme->menu->layout  = array('link' => '佈局|block|pages|', 'alias' => 'setregion');
-$lang->theme->menu->custom  = '外觀|ui|customtheme|';
-$lang->theme->menu->code    = '代碼|ui|setcode|';
-$lang->theme->menu->source  = '素材|file|browsesource|';
+$lang->theme->menu->theme   = '主題管理|ui|settemplate|';
+$lang->theme->menu->layout  = array('link' => '佈局管理|block|pages|', 'alias' => 'setregion');
+$lang->theme->menu->custom  = '外觀管理|ui|customtheme|';
+$lang->theme->menu->code    = '代碼管理|ui|setcode|';
+$lang->theme->menu->source  = '素材管理|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
-$lang->user->menu = new stdclass();
-$lang->user->menu->all    = '全部會員|user|admin|';
-$lang->user->menu->sina   = '微博會員|user|admin|provider=sina';
-$lang->user->menu->wechat = '微信會員|user|admin|provider=wechat';
-$lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
 
+/* Menu of message module. */
 $lang->message = new stdclass();
 
 /* Menu of forum module. */
@@ -262,14 +267,19 @@ $lang->forum->menu->setting = '論壇設置|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站點設置|site|setbasic|';
+$lang->site->menu->domain   = '域名設置|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN設置|site|setcdn|';
+$lang->site->menu->cache    = '緩存設置|site|setcache|';
+$lang->site->menu->home     = '首頁菜單|site|sethomemenu|';
 $lang->site->menu->company  = '公司信息|company|setbasic|';
 $lang->site->menu->contact  = '聯繫方式|company|setcontact|';
 $lang->site->menu->oauth    = '開放登錄|site|setoauth|';
 $lang->site->menu->mail     = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search   = '全文檢索|search|buildindex|';
 $lang->site->menu->score    = '積分規則|score|setcounts|';
+$lang->site->menu->backup   = '備份還原|backup|index|';
+//$lang->site->menu->api      = '整合|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -287,6 +297,9 @@ $lang->security->menu->log       = '登錄日誌|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
+
+/* Menu of score module. */
+$lang->score->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -323,13 +336,13 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = '概況|stat|traffic|';
-$lang->stat->menu->from     = '來源統計|stat|from|';
-$lang->stat->menu->search   = '搜索引擎統計|stat|search|';
-$lang->stat->menu->keywords = '關鍵詞統計|stat|keywords|';
+$lang->stat->menu->traffic  = '流量概況|stat|traffic|';
+$lang->stat->menu->from     = '來源分類|stat|from|';
 $lang->stat->menu->domains  = array('link' => '來路域名|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
-$lang->stat->menu->client   = '終端統計|stat|client|type=browser';
-$lang->stat->menu->page     = '頁面訪問量排名|stat|page|';
+$lang->stat->menu->search   = '搜索引擎|stat|search|';
+$lang->stat->menu->keywords = '關鍵詞|stat|keywords|';
+$lang->stat->menu->client   = '用戶終端|stat|client|type=browser';
+$lang->stat->menu->page     = '點擊排行|stat|page|';
 $lang->stat->menu->setStat  = '設置|stat|setting|';
 
 /* The error messages. */

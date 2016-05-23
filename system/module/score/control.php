@@ -164,7 +164,7 @@ class score extends control
             $result = $this->loadModel('setting')->setItems('system.score.buyScore', $buyScore);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('site', 'setBasic')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
         $this->view->title = $this->lang->score->setCounts;

@@ -2,9 +2,9 @@
 $config->user->resetExpired = 3*86400;
 
 $config->user->require = new stdclass();
-$config->user->require->register         = 'account,realname,email,password1';
-$config->user->require->edit             = 'realname';
-$config->user->require->securityQuestion = 'question, answer, security';
+$config->user->require->register    = 'account,realname,email,password1';
+$config->user->require->edit        = 'realname';
+$config->user->require->setSecurity = 'question, answer, security';
 
 $config->user->default = new stdclass();
 $config->user->default->module = RUN_MODE == 'front' ? 'user'    : 'admin';
@@ -23,6 +23,6 @@ $config->user->level[6] = 50000;
 $config->user->level[7] = 200000;
 
 $config->user->navGroups = new stdclass();
-$config->user->navGroups->user    = '10,20,30,40';
-$config->user->navGroups->order   = '25,26';
-$config->user->navGroups->message = '50,60,21';
+$config->user->navGroups->user    = 'profile,message,score,recharge';
+$config->user->navGroups->order   = 'order,address';
+$config->user->navGroups->message = 'thread,reply,submittion';

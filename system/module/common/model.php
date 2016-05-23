@@ -121,6 +121,19 @@ class commonModel extends model
             $inList = $this->loadModel('guarder')->inList();
             if($inList) die('Request Forbidden');
         }
+
+        if(RUN_MODE == 'admin' and !empty($this->config->group->unUpdatedAccounts) and strpos($this->config->group->unUpdatedAccounts, $this->app->user->account) !== false)
+        {
+            $user = $this->app->user;
+            $user->rights = $this->loadModel('user')->authorize($user);
+            $this->session->set('user', $user);
+            $this->app->user = $this->session->user;
+
+            $unUpdatedAccounts = str_replace($this->app->user->account, '', $this->config->group->unUpdatedAccounts);
+            if(str_replace(',', '', $unUpdatedAccounts) == '') $unUpdatedAccounts = '';
+            $this->loadModel('setting')->setItem("system.group.unUpdatedAccounts", $unUpdatedAccounts);
+        }
+
         $module = $this->app->getModuleName();
         $method = $this->app->getMethodName();
 
@@ -244,6 +257,14 @@ class commonModel extends model
     public function deny($module, $method)
     {
         if(helper::isAjaxRequest()) exit;
+
+        /* Get authorize again. */
+        $user = $this->app->user;
+        $user->rights = $this->loadModel('user')->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+        if(commonModel::hasPriv($module, $method)) return true;
+
         $vars = "module=$module&method=$method";
         if(isset($_SERVER['HTTP_REFERER']))
         {
@@ -322,6 +343,22 @@ class commonModel extends model
     }
 
     /**
+     * Check API.
+     * 
+     * @access public
+     * @return void
+     */
+    public function checkAPI()
+    {
+        $key = '';
+        if($this->post->key) $key = $this->post->key;
+        if($this->get->key) $key = $this->get->key;
+
+        if(!empty($this->config->site->api->key) or $this->config->site->api->key != $key) die('KEY ERROR!');
+        if(!empty($this->config->site->api->ip) && strpos($this->config->site->api->ip, $this->server->remote_addr) === false) die('IP DENIED');
+    }
+
+    /**
      * Create the main menu.
      *
      * @param  string $currentModule
@@ -334,12 +371,12 @@ class commonModel extends model
         global $config, $app, $lang;
 
         self::fixGroups();
-
         $currentModule = zget($lang->menuGroups, $currentModule);
 
         $group = 'home';
         /* Set current module. */
         $currentGroup = $app->cookie->currentGroup;
+        if(!in_array($app->getModuleName() . '_' . $app->getMethodName(), $config->multiEntrances)) $currentGroup = false;
         if($currentGroup and isset($config->menus->{$currentGroup})) 
         {
             $group = $currentGroup;
@@ -363,7 +400,6 @@ class commonModel extends model
             }
             if(!isset($lang->menu->{$menu})) continue;
             $moduleMenu = $lang->menu->{$menu};
-
             $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
@@ -373,7 +409,7 @@ class commonModel extends model
             if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
-            if(!commonModel::isAvailable('contribution') && $vars == 'type=contribution') continue;
+            if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
 
             if(commonModel::hasPriv($module, $method))
             {
@@ -381,6 +417,7 @@ class commonModel extends model
                 $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
             }
         }
+        if($group == 'home') $string .= "<li>" . html::a(helper::createLink('site', 'sethomemenu'), "<i class='icon icon-plus'> </i>" . $lang->custom) . "</li>";
         
         $string .= "</ul>\n";
         return $string;
@@ -409,7 +446,7 @@ class commonModel extends model
         /* Cycling to print every menus of current module. */
         foreach($moduleMenus as $methodName => $methodMenu)
         {
-            $extra = zget($config->moduleMenu, "{$currentModule}_{$methodName}");
+            $extra = zget($config->moduleMenu, "{$currentModule}_{$methodName}", '');
             if(is_array($methodMenu))
             {
                 $methodAlias = $methodMenu['alias'];
@@ -454,9 +491,9 @@ class commonModel extends model
         $string .= '<ul class="dropdown-menu">';
         $string .= '<li class="heading"><i class="icon icon-user icon-large"></i><strong> ' . $app->user->realname . '</strong></li>';
         $string .= '<li class="divider"></li>';
-        $string .= '<li>' . html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
-        $string .= '<li>' . html::a(helper::createLink('user', 'editEmail'), $lang->editEmail, "data-toggle='modal'") . '</li>';
-        $string .= '<li>' . html::a(helper::createLink('user', 'securityQuestion'), $lang->securityQuestion, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'setPassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'setEmail'), $lang->setEmail, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'setSecurity'), $lang->setSecurity, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user','logout'), $lang->logout) . '</li>';
@@ -487,7 +524,6 @@ class commonModel extends model
             }
             else
             {
-                printf('<span class="login-msg"></span>');
                 echo html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
                 echo "<span id='msgBox' class='hiding'></span>";
                 $referer = helper::safe64encode(trim($_SERVER['REQUEST_URI'], '/'));
@@ -935,15 +971,15 @@ class commonModel extends model
      * @param string|array $alias
      * return string
      */
-    public static function createFrontLink($module, $method, $vars = '', $alias = '')
+    public static function createFrontLink($module, $method, $vars = '', $alias = '', $viewType = '')
     {
-        if(RUN_MODE == 'front') return helper::createLink($module, $method, $vars, $alias);
+        if(RUN_MODE == 'front') return helper::createLink($module, $method, $vars, $alias, $viewType);
 
         global $config;
 
         $requestType = $config->requestType;
         $config->requestType = $config->frontRequestType;
-        $link = helper::createLink($module, $method, $vars, $alias, '',  $front = true);
+        $link = helper::createLink($module, $method, $vars, $alias, $viewType);
         $link = str_replace($_SERVER['SCRIPT_NAME'], $config->webRoot . 'index.php', $link);
         $config->requestType = $requestType;
 
@@ -1038,7 +1074,7 @@ class commonModel extends model
                 if(empty($category->alias)) continue;
                 $categories['blog'][$category->alias] = $category;
                 $category->module = 'blog';
-                $this->config->seo->alias->blog[$category->id] = $category->alias;
+                $this->config->seo->alias->blog[$category->alias] = $category;
             }
         }
 
@@ -1049,7 +1085,7 @@ class commonModel extends model
                 if(empty($category->alias)) continue;
                 $categories['forum'][$category->alias] = $category;
                 $category->module = 'forum';
-                $this->config->seo->alias->forum[$category->id] = $category->alias;
+                $this->config->seo->alias->forum[$category->alias] = $category;
             }
         }
     
@@ -1070,12 +1106,12 @@ class commonModel extends model
         $modules = $config->site->modules;
         if(strpos($modules, 'article') === false)
         {
-            if(strpos($modules, 'page') !== false) $lang->groups->content['link'] = 'article|admin|type=page';
             if(strpos($modules, 'book') !== false) $lang->groups->content['link'] = 'book|admin|';
             if(strpos($modules, 'blog') !== false) $lang->groups->content['link'] = 'article|admin|type=blog';
+            if(strpos($modules, 'page') !== false) $lang->groups->content['link'] = 'article|admin|type=page';
         }
 
-        if(strpos($modules, 'shop') === false and strpos($modules, 'score') === false)
+        if((strpos($modules, 'shop') === false and strpos($modules, 'score') === false) or strpos($modules, 'user') === false)
         {
             if(strpos($modules, 'product') !== false) $lang->groups->shop['link'] = 'product|admin|';
         }

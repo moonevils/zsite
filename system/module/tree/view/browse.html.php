@@ -18,15 +18,10 @@ js::set('root', $root);
 js::set('type', $type);
 js::set('isWechatMenu', $isWechatMenu);
 js::set('lang', $lang->js);
-if(strpos($type, 'wechat') !== false)
-{
-    js::set('score', commonModel::isAvailable('score'));
-    js::set('setCounts', $lang->site->setCounts);
-}
 ?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
-  <div class='col-md-4'>
+  <div class='col-md-3'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong></div>
       <div class='panel-body'>
@@ -40,10 +35,9 @@ if(strpos($type, 'wechat') !== false)
       </div>
     </div>
   </div>
-  <div class='col-md-8' id='categoryBox'></div>
+  <div class='col-md-9' id='categoryBox'></div>
 </div>
 <?php else:?>
 <div id='categoryBox'></div>
 <?php endif;?>
-<?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>

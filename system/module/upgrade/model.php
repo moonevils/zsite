@@ -133,10 +133,18 @@ class upgradeModel extends model
             case '4_6':
                 $this->execSQL($this->getUpgradeFile('4.6'));
             case '5_0';
-            case '5_0_1';
+            case '5_0_1':
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
                 $this->fixLayoutPlans();
                 $this->moveCodes();
+            case '5_1':
+                $this->execSQL($this->getUpgradeFile('5.1'));
+                $this->moveThemes();
+                $this->awardRegister();
+            case '5_2':
+                $this->fixSideFloat();
+                $this->execSQL($this->getUpgradeFile('5.2'));
+
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -192,6 +200,8 @@ class upgradeModel extends model
             case '4_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.6'));
             case '5_0';
             case '5_0_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.0.1'));
+            case '5_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.1'));
+            case '5_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.2'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1816,7 +1826,7 @@ class upgradeModel extends model
      * Move codes from custom to css and js.
      * 
      * @access public
-     * @return void
+     * @return bool
      */
     public function moveCodes()
     {
@@ -1851,6 +1861,101 @@ class upgradeModel extends model
                     }
                 }
             }
+        }
+        return true;
+    }
+
+    /**
+     * Move old themes to theme path.
+     * 
+     * @access public
+     * @return void
+     */
+    public function moveThemes()
+    {
+        $zfile        = $this->app->loadClass('zfile');
+        $templateRoot = $this->app->getWwwroot() . 'template' . DS;
+        $themeRoot    = $this->app->getWwwroot() . 'theme' . DS;
+        $templates    = glob($templateRoot . '*');
+        foreach($templates as $template)
+        {
+            if(!is_dir($template . DS . 'theme')) continue;
+            $folders = glob($template . DS . 'theme' . DS . '*');
+            if(empty($folders)) continue;
+            foreach($folders as $folder)
+            {
+                if(!is_dir($folder) or is_dir($themeRoot . basename($template) . DS . basename($folder))) continue;
+                $zfile->copyDir($folder, $themeRoot . basename($template) . DS . basename($folder));
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Award register when upgrade from 5.1.
+     * 
+     * @access public
+     * @return void
+     */
+    public function awardRegister()
+    {
+        $this->app->loadConfig('score');
+
+        $users = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
+            ->where('score')->gt(0)
+            ->orWhere('rank')->gt(0)
+            ->fetchAll();
+
+        foreach($users as $user)
+        {
+            $register = $this->dao->select('*')->from(TABLE_SCORE)->where('account')->eq($user->account)->andWhere('method')->eq('register')->fetch();
+
+            if(!$register)
+            {
+                $data = new stdclass();
+                $data->score = $user->score + $this->config->score->counts->register; 
+                $data->rank  = $user->score == $user->rank ? $data->score : $user->rank;
+
+                $score = new stdclass();
+                $score->account = $user->account;
+                $score->method  = 'register';
+                $score->type    = 'in';
+                $score->count   = $this->config->score->counts->register;
+                $score->before  = $user->score;
+                $score->after   = $data->score;
+                $score->actor   = $user->account;
+                $score->note    = 'REGISTER';
+                $score->time    = $user->join;
+
+                $this->dao->update(TABLE_USER)->data($data)->where('account')->eq($user->account)->exec();
+                $this->dao->insert(TABLE_SCORE)->data($score)->exec();
+            }
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Fix side float function.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function fixSideFloat()
+    {
+        $customParams = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('custom')->fetchAll('id');
+        foreach($customParams as $setting)
+        {
+            $config = json_decode($setting->value, true);
+            foreach($config['default'] as $theme => $params)
+            {
+                $params['sideFloat'] = $params['sidebar-pull-left'] == 'false' ? 'right' : 'left';
+                $params['sideGrid']  = (int) (100 / (str_replace('%', '', $params['sidebar-width'])));
+
+                $config['default'][$theme] = $params;
+            }
+            $setting->value = json_encode($config);
+            $this->dao->replace(TABLE_CONFIG)->data($setting)->exec();
         }
         return true;
     }

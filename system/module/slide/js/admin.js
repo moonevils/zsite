@@ -16,12 +16,12 @@ $(document).ready(function()
             hideEditForm();
             if(response.message)
             {
-                (window.messager || $.zui.messager).success(response.message);
+                ($.zui.messager || $.zui.messager).success(response.message);
             }
         }
         else
         {
-            (window.messager || $.zui.messager).warning(response.message);
+            ($.zui.messager || $.zui.messager).warning(response.message);
         }
     });
 

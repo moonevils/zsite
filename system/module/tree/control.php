@@ -31,7 +31,7 @@ class tree extends control
             $this->lang->tree             = $this->lang->wechatMenu;
             $this->lang->category         = $this->lang->wechatMenu;
             $this->lang->tree->menu       = $this->lang->wechat->menu;
-            $this->lang->menuGroups->tree = 'wechat';
+            $this->lang->menuGroups->tree = 'site';
         }
         else
         {
@@ -39,13 +39,14 @@ class tree extends control
             $this->tree->fixMenu($type);
             if($type == 'express')
             {
-                $this->lang->category->common = $this->lang->express->name;
+                $this->lang->category->common = $this->lang->express->common;
                 $this->lang->category->name   = $this->lang->express->name;
             }
         }
 
+        $this->loadModel('block');
         $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
-        $userFunc = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
+        $userFunc  = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, $userFunc);
 
         $this->view->title        = $this->lang->category->common;
@@ -126,12 +127,12 @@ class tree extends control
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
             
-        $this->view->isWechatMenu  = $isWechatMenu;
-        $this->view->title         = $this->lang->tree->manage;
-        $this->view->type          = $type;
-        $this->view->children      = $this->tree->getChildren($category, $type);
-        $this->view->origins       = $this->tree->getOrigin($category);
-        $this->view->parent        = $category;
+        $this->view->isWechatMenu = $isWechatMenu;
+        $this->view->title        = $this->lang->tree->manage;
+        $this->view->type         = $type;
+        $this->view->children     = $this->tree->getChildren($category, $type);
+        $this->view->origins      = $this->tree->getOrigin($category);
+        $this->view->parent       = $category;
 
         $this->display();
     }

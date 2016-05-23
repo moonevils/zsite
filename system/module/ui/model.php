@@ -30,7 +30,7 @@ class uiModel extends model
             if(!is_dir($folder)) continue;
 
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
-            $docFile      = $folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml';
+            $docFile      = $folder . DS . '_doc' . DS . $this->app->getClientLang() . '.yaml';
             if(!is_file($docFile)) continue;
 
             $config = Spyc::YAMLLoadString(file_get_contents($docFile));
@@ -98,11 +98,72 @@ class uiModel extends model
         foreach($folders as $folder)
         {
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
-            $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
+            $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . '_doc' . DS . $this->app->getClientLang() . '.yaml'));
             $templates[$templateName] = $config['name'];
         }
 
         return $templates;
+    }
+
+    /**
+     * Load theme info from yaml.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function loadThemeInfo($template, $theme)
+    {
+        $this->app->loadClass('Spyc', true);
+        $themePath = $this->app->getWwwRoot() . 'theme/' . $template . "/$theme/";
+        $yamls = glob($themePath . "*.yaml");
+
+        if(empty($yamls)) return false;
+        return Spyc::YAMLLoadString(file_get_contents($yamls[0]));
+    }
+
+    /**
+     * Get custom css file.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return string
+     */
+    public function getCustomCssFile($template, $theme)
+    {
+        $lang = $this->app->getClientLang();
+        if($this->config->multi)  return $this->app->getDataRoot() . 'css' . DS . $this->config->site->code . DS . "{$template}_{$theme}_{$lang}.css";
+        if(!$this->config->multi) return $this->app->getDataRoot() . 'css' . DS . "{$template}_{$theme}_{$lang}.css";
+    }
+
+    /**
+     * Get theme css url.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function getThemeCssUrl($template, $theme)
+    {
+        $lang = $this->app->getClientLang();
+        if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $this->config->site->code . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+        if(!$this->config->multi) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+    }
+
+    /**
+     * check a theme is imported.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return bool
+     */
+    public function isImported($template, $theme)
+    {
+        return !in_array("$template}_{$theme}", $this->config->ui->systemThemes);
     }
 
     /**
@@ -132,7 +193,7 @@ class uiModel extends model
             foreach($oldFiles as $file) $fileModel->delete($file->id);
             if(dao::isError()) return array('result' => false, 'message' => dao::getError());
         }
-        
+
         /* Upload new logo. */
         $uploadResult = $fileModel->saveUpload('', '', '', $htmlTagName);
         if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
@@ -194,6 +255,35 @@ class uiModel extends model
         }
         return $params;
     }
+    
+    /**
+     * Get theme coinfig by key.
+     * 
+     * @param  string    $key 
+     * @param  string $default 
+     * @param  string $template 
+     * @param  string $theme 
+     * @access public
+     * @return string
+     */
+    public function getThemeSetting($key, $default = '', $template = '', $theme = '')
+    {
+        if(empty($theme))    $theme    = $this->config->template->{$this->device}->theme;
+        if(empty($template)) $template = $this->config->template->{$this->device}->name;
+        $config = $this->getCustomParams($template, $theme);
+        if($key == 'sideFloat')
+        {
+            $sideFloat = zget($config, $key, $default);
+            if(!in_array($sideFloat, array('left', 'right', 'hidden')))
+            {
+                if(isset($config['sidebar-pull-left']) and isset($config['sidebar-width'])) $this->loadModel('upgrade')->fixSideFloat();
+                $sideFloat = zget($config, 'sidebar-pull-left', $default);
+                if(!in_array($sideFloat, array('left', 'right', 'hidden'))) return 'right';
+            }
+            return $sideFloat;
+        }
+        return zget($config, $key, $default);
+    }
 
     /**
      * Create customer css.
@@ -207,7 +297,7 @@ class uiModel extends model
     public function createCustomerCss($template, $theme, $params = null)
     {
         $lessc   = $this->app->loadClass('lessc');
-        $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+        $cssFile = $this->getCustomCssFile($template, $theme);
 
         if(!empty($params)) $params = (array) $params;
         if(empty($params))  $params = $this->getCustomParams($template, $theme);
@@ -216,9 +306,9 @@ class uiModel extends model
 
         $savePath = dirname($cssFile);
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
-        $lessTemplateDir = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS;
+        $lessTemplateDir = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS;
 
-        foreach($this->config->ui->themes[$template][$theme] as $section => $selector)
+        foreach(zget($this->config->ui->themes[$template], $theme, array()) as $section => $selector)
         {
             foreach($selector as $attr => $settings)
             {
@@ -381,7 +471,7 @@ class uiModel extends model
         $this->printTextbox($id, $value, $this->lang->ui->$label, '', $params['default'], '', '', $this->lang->ui->theme->sizeTip);
     }
 
-     /**
+    /**
      * Print image control
      * @param  string  $id
      * @param  string  $label
@@ -520,7 +610,7 @@ class uiModel extends model
      */
     public function printSidebarLayoutControl($id, $label, $params, $value = '')
     {
-        $this->printSelectList($this->lang->ui->theme->sidebarPullLeftList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+        $this->printSelectList($this->lang->ui->theme->sideFloatList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
     /**
@@ -533,7 +623,7 @@ class uiModel extends model
      */
     public function printSidebarWidthControl($id, $label, $params, $value = '')
     {
-        $this->printSelectList($this->lang->ui->theme->sidebarWidthList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+        $this->printSelectList($this->lang->ui->theme->sideGridList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
     /**
@@ -723,8 +813,8 @@ class uiModel extends model
         $this->directories->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->exportDocPath    = $this->directories->exportPath . 'doc' . DS;
         $this->directories->exportDbPath     = $this->directories->exportPath . 'db' . DS;
-        $this->directories->exportCssPath    = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
-        $this->directories->exportLessPath   = $this->directories->exportPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
+        $this->directories->exportCssPath    = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'css' . DS;
+        $this->directories->exportLessPath   = $this->directories->exportPath . 'www' . DS . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->exportSourcePath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->exportSlidePath  = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->directories->exportConfigPath = $this->directories->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
@@ -732,8 +822,8 @@ class uiModel extends model
         $this->directories->encryptPath       = $this->directories->exportPath . 'encrypt' . DS;
         $this->directories->encryptDocPath    = $this->directories->encryptPath . 'doc' . DS;
         $this->directories->encryptDbPath     = $this->directories->encryptPath . 'db'  . DS;
-        $this->directories->encryptCssPath    = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
-        $this->directories->encryptLessPath   = $this->directories->encryptPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
+        $this->directories->encryptCssPath    = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'css' . DS;
+        $this->directories->encryptLessPath   = $this->directories->encryptPath . 'www' . DS . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->encryptSourcePath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->encryptSlidePath  = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->directories->encryptConfigPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
@@ -829,7 +919,7 @@ class uiModel extends model
         /* Dump whole css and js data. */
         $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or (section in('css','js') and `key` like '{$template}_{$theme}%') )";
         $zdb->dump($dbFile, $tables, $fields, 'data', $condations, true);
-       
+
         $this->fixSqlFile($template, $theme, $encryptFile);
         $this->fixSqlFile($template, $theme, $dbFile);
         return true;
@@ -864,7 +954,7 @@ class uiModel extends model
         $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-cn' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
         $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-tw' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
         $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'en' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
- 
+
         return file_put_contents($file, $sqls);
     }
 
@@ -905,7 +995,7 @@ class uiModel extends model
         if(isset($this->config->ui->themes[$template][$theme]))
         {
             $configCode = "<?php\n";
-            $configCode .= '$this->config->ui->themes["' . $template . '"]["' . $code . '"] = ';
+            $configCode .= '$config->ui->themes["' . $template . '"]["' . $code . '"] = ';
             $configCode .= "\n";
             $configCode .= var_export($this->config->ui->themes[$template][$theme], true);
             $configCode .= ";";
@@ -915,12 +1005,11 @@ class uiModel extends model
         $zfile = $this->app->loadClass('zfile');
 
         /* Copy customed css file. */
-        $customCssFile = $this->directories->exportCssPath . 'style.css';
-        $originCssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-        copy($originCssFile, $this->directories->exportCssPath . 'style.css');
+        $customCssFile = $this->directories->exportCssPath . "{$template}_{$code}.css";
+        copy($this->getCustomCssFile($template, $theme), $customCssFile);
 
         /* Copy less file. */
-        $lessFile = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
+        $lessFile = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS . 'style.less';
         if(file_exists($lessFile)) copy($lessFile, $this->directories->exportLessPath . 'style.less');
 
         /* Copy source files. */
@@ -946,7 +1035,7 @@ class uiModel extends model
         }
         else
         {
-            $previewImage = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'preview.png';
+            $previewImage = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS . 'preview.png';
             copy($previewImage, $this->directories->exportLessPath . 'preview.png');
         }
 
@@ -1014,7 +1103,7 @@ class uiModel extends model
         $zfile->copyDir($this->directories->exportDocPath,    $this->directories->encryptDocPath);
         $zfile->copyDir($this->directories->exportLessPath,   $this->directories->encryptLessPath);
         $zfile->copyDir($this->directories->exportConfigPath, $this->directories->encryptConfigPath);
-        
+
         return true;
     }
 
@@ -1037,7 +1126,7 @@ header('Content-type: $contentType');\n
 echo $content;\n
 exit;
 EOT;
-       return file_put_contents($target, $phpCodes);
+        return file_put_contents($target, $phpCodes);
     }
 
     /**
@@ -1053,43 +1142,53 @@ EOT;
     {
         $hookFile = $this->directories->encryptLessPath . helper::createRandomStr(6, $skip = '0-9A-Z') . ".php";
 
-        $params = $this->getCustomParams($template, $theme);
-        $params = var_export($params, true);
-        $params = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $params);
-       
-        foreach($this->config->css as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
-        foreach($this->config->js  as $item => $value) $value = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $value);
+        $css = new stdclass();
+        foreach($this->config->css as $item => $value)
+        {
+            if(strpos($item, "{$template}_{$theme}_") === false) continue;
+            $item = str_replace("{$template}_{$theme}_", '', $item);
+            $css->{$item} = $value;
+        }
 
-        $cssCodes = serialize($this->config->css);
-        $jsCodes  = serialize($this->config->js);
+        $js = new stdclass();
+        foreach($this->config->js  as $item => $value)
+        {
+            if(strpos($item, "{$template}_{$theme}_") === false) continue;
+            $item  = str_replace("{$template}_{$theme}_", '', $item);
+            $js->{$item} = $value;
+        }
+
+        $cssCodes = serialize($css);
+        $jsCodes  = serialize($js);
         $cssCode  = var_export($cssCodes, true);
         $jsCodes  = var_export($jsCodes, true);
-        $code = "<?php
-if(!function_exists('get_THEME_CODEFIX_CSS'))
+        $codes = "<?php
+if(!function_exists('getCSS'))
 {
-    function get_THEME_CODEFIX_CSS()
+    function getCSS(\$code)
     {
         \$css = unserialize($cssCode);
+        foreach(\$css as \$page => \$value)
+        {
+            \$css->\$page = str_replace('{$template}/{$theme}/', '{$template}/' . \$code . '/', \$value);
+        }
         return \$css;
     }
 }
-if(!function_exists('get_THEME_CODEFIX_JS'))
+if(!function_exists('getJS'))
 {
-    function get_THEME_CODEFIX_JS()
+    function getJS(\$code)
     {
         \$js = unserialize($jsCodes);
+        foreach(\$js as \$page => \$value)
+        {
+            \$js->\$page = str_replace('{$template}/{$theme}/', '{$template}/' . \$code . '/', \$value);
+        }
         return \$js;
     }
 }
-if(!function_exists('get_THEME_CODEFIX_params'))
-{
-    function get_THEME_CODEFIX_params()
-    {
-        return $params;
-    }
-}
 ";
-        return file_put_contents($hookFile, $code);
+        return file_put_contents($hookFile, $codes);
     }
 
     /**
@@ -1156,7 +1255,7 @@ if(!function_exists('get_THEME_CODEFIX_params'))
         if(is_dir($sourcePath) and !$zfile->removeDir($sourcePath)) $faildPaths[] = $sourcePath;
         return empty($faildPaths) ? true : $faildPaths;
     }
-    
+
     /**
      * Clear tmp data imported.
      * 
@@ -1168,5 +1267,56 @@ if(!function_exists('get_THEME_CODEFIX_params'))
         $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE, TABLE_CONFIG);
         foreach($tables as $table) $this->dao->setAutoLang(false)->delete()->from($table)->where('lang')->eq('lang')->exec();
         return !dao::isError();
+    }
+
+    /**
+     * Get ext file of a view file.
+     * 
+     * @param  int    $template 
+     * @param  int    $module 
+     * @param  int    $file 
+     * @access public
+     * @return void
+     */
+    public function getExtFile($template, $module, $file)
+    {
+        return $this->app->getTmpRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
+    }
+
+    /**
+     * Get effect view file 
+     * 
+     * @param  string    $template 
+     * @param  string    $module 
+     * @param  string    $file 
+     * @access public
+     * @return string
+     */
+    public function getEffectViewFile($template, $module, $file)
+    {
+        $extFile = $this->getExtFile($template, $module, $file);
+        return file_exists($extFile) ? $extFile : $this->app->getWwwroot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
+    }
+
+    /**
+     * Write view file.
+     * 
+     * @param  string    $template 
+     * @param  string    $module 
+     * @param  string    $file 
+     * @access public
+     * @return bool
+     */
+    public function writeViewFile($template, $module, $file)
+    {
+        $file = $this->getExtFile($template, $module, $file);       
+        $filePath = dirname($file);
+        if(!is_dir($filePath)) mkdir($filePath, 0777, true);
+        $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$', 'include', 'require', 'assert');
+        $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $', 'i n c l u d e', 'r e q u i r e', 'a s s e r t');
+        $content     = str_replace($gibbedEvils, $evils, $this->post->content);
+        $result = file_put_contents($file, $content);
+        if($result === false) return false;
+        return true;
     }
 }

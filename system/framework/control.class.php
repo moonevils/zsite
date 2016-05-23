@@ -226,7 +226,7 @@ class control
      */
     public function setTplRoot()
     {
-        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->{$this->device}->name . DS . 'view' . DS);
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->{$this->device}->name . DS);
     }
 
     /**
@@ -344,6 +344,13 @@ class control
         $siteExtViewFile   = $viewExtPath['site'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
         $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
         $viewFile = file_exists($siteExtViewFile) ? $siteExtViewFile : $viewFile;
+
+        if(RUN_MODE == 'front')
+        {
+            $customedFile = str_replace($this->app->getWwwRoot(), $this->app->getTmpRoot(), $mainViewFile);
+            if(file_exists($customedFile)) $viewFile = $customedFile;
+        }
+
         if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
 
         /* Extension hook file. */
@@ -399,7 +406,6 @@ class control
         $methodName = strtolower(trim($methodName));
 
         $modulePath = $this->app->getModulePath($moduleName);
-
         $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
 
         $css = '';
@@ -596,6 +602,7 @@ class control
             $theme       = $this->config->template->{$this->device}->theme;
             $customParam = $this->loadModel('ui')->getCustomParams($template, $theme);
             $themeHooks  = $this->loadThemeHooks();
+
             $importedCSS = array();
             $importedJS  = array();
 
@@ -603,20 +610,27 @@ class control
             {
                 $jsFun  = "get{$theme}JS";
                 $cssFun = "get{$theme}CSS";
-
                 if(function_exists($jsFun))  $importedJS = $jsFun();
                 if(function_exists($cssFun)) $importedCSS = $cssFun();
+
+                if(!empty($importedJS))  $importedJS  = $this->processImportedCodes($template, $theme, $importedJS);
+                if(!empty($importedCSS)) $importedCSS = $this->processImportedCodes($template, $theme, $importedCSS);
+
+                $jsFun  = "getJS";
+                $cssFun = "getCSS";
+                if(function_exists($jsFun))  $importedJS = $jsFun('demo');
+                if(function_exists($cssFun)) $importedCSS = $cssFun('demo');
             }
 
-            $js .= zget($importedJS, "{$template}_{$theme}_all", '');
+            $js .= zget($importedJS, 'all', '');
             $js .= zget($this->config->js, "{$template}_{$theme}_all", '');
-            $js .= zget($importedJS, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
+            $js .= zget($importedJS, "{$moduleName}_{$methodName}", '');
             $js .= zget($this->config->js,"{$template}_{$theme}_{$moduleName}_{$methodName}", '');
 
-            $allPageCSS  = zget($importedCSS, "{$template}_{$theme}_all", '');
+            $allPageCSS  = zget($importedCSS, 'all', '');
             $allPageCSS .= zget($this->config->css, "{$template}_{$theme}_all", '');
 
-            $currentPageCSS  = zget($importedCSS, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
+            $currentPageCSS  = zget($importedCSS, "{$moduleName}_{$methodName}", '');
             $currentPageCSS .= zget($this->config->css, "{$template}_{$theme}_{$moduleName}_{$methodName}", '');
             $css .= $this->ui->compileCSS($customParam, $allPageCSS . $currentPageCSS);
         }
@@ -720,14 +734,15 @@ class control
             $this->mergeJS();
         }
 
-        //if(isset($this->config->site->cdn))
-        //{
-        //    $cdn = rtrim($this->config->site->cdn, '/');
-        //    $this->output = str_replace('src="/data/upload', 'src="' . $cdn . '/data/upload', $this->output);
-        //    $this->output = str_replace("src='/data/upload", "src='" . $cdn . "/data/upload", $this->output);
-        //    $this->output = str_replace("url(/data/upload", "url(" . $cdn . "/data/upload", $this->output);
-        //}
-        
+        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
+        {
+            if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
+            {
+                $key = 'page' . DS . $this->device . DS . md5($this->app->getURI());
+                $this->app->cache->set($key, $this->output);
+            }
+        }
+
         echo $this->output;
     }
 
@@ -735,7 +750,7 @@ class control
      * Send data directly, for ajax requests.
      * 
      * @param  misc    $data 
-     * @param  string $type 
+     * @param  string  $type 
      * @access public
      * @return void
      */
@@ -769,6 +784,8 @@ class control
                 }
             }
 
+            header("Content-type: text/html; charset=utf-8");
+            header("Content-type: application/json");
             echo json_encode($data);
         }
         die(helper::removeUTF8Bom(ob_get_clean()));
@@ -825,10 +842,11 @@ class control
      */
     public function loadThemeHooks()
     {
-        $theme    = $this->config->template->{$this->device}->theme;
-        $hookPath = dirname(TPL_ROOT) . DS . 'theme' . DS . $theme . DS;
+        $theme     = $this->config->template->{$this->device}->theme;
+        $hookPath  = $this->app->getWwwRoot() . 'theme' . DS . $this->config->template->{$this->device}->name. DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
 
+        if(empty($hookFiles)) return array();
         foreach($hookFiles as $file) include $file;
         return $hookFiles;
     }
@@ -846,6 +864,7 @@ class control
         if(!empty($styles[1])) $pageCSS = join('', $styles[1]);
         if(!empty($pageCSS))
         {
+            $this->output = str_replace("</style>\n", '</style>', $this->output);
             $this->output = preg_replace('/<style>([\s\S]*?)<\/style>/', '', $this->output);
             if(strpos($this->output, '</head>') != false) $this->output = str_replace('</head>', "<style>{$pageCSS}</style></head>", $this->output);
             if(strpos($this->output, '</head>') == false) $this->output = "<style>{$pageCSS}</style>" . $this->output;
@@ -867,9 +886,10 @@ class control
         unset($scripts[1][1]);
         unset($scripts[1][0]);
         
-        if(!empty($scripts[1])) $pageJS = join('', $scripts[1]);
+        if(!empty($scripts[1])) $pageJS = join(';', $scripts[1]);
         if(!empty($pageJS))
         {
+            $this->output = str_replace("</script>\n", '</script>', $this->output);
             $this->output = preg_replace('/<script>([\s\S]*?)<\/script>/', '', $this->output);
             if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "<script>{$pageJS}</script></body>", $this->output);
             if(strpos($this->output, '</body>') == false) $this->output .= "<script>$pageJS</script>";
@@ -877,5 +897,33 @@ class control
         $pos = strpos($this->output, '<script src=');
         $this->output = substr_replace($this->output, '<script>' . $configCode . '</script>', $pos) . substr($this->output, $pos);
         return true;
+    }
+
+    /**
+     * Process imported codes encrypted.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  array     $codes 
+     * @access public
+     * @return void
+     */
+    public function processImportedCodes($template, $theme, $codes)
+    {
+        $sources[] = "{$template}_default_";
+        $sources[] = "{$template}_clean_";
+        $sources[] = "{$template}_wide_";
+        $sources[] = "{$template}_tartan_";
+        $sources[] = "{$template}_colorful_";
+        $sources[] = "{$template}_blank_";
+
+        foreach($sources as $source) $replace[] = '';
+
+        foreach($codes as $page => $code)
+        {
+            $page = str_replace($sources, $replace, $page);
+            $codes->$page = $code;
+        }
+        return $codes;
     }
 }

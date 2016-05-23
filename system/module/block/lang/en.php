@@ -25,6 +25,7 @@ $lang->block->regionList      = 'Regions List';
 $lang->block->select          = 'Please select a block';
 $lang->block->categories      = 'Categories';
 $lang->block->showImage       = 'Show image';
+$lang->block->maxWidth        = 'Max Width';
 $lang->block->showCategory    = 'Show Category';
 $lang->block->showBoard       = 'Show Board';
 $lang->block->showTime        = 'Show time';
@@ -59,9 +60,16 @@ $lang->block->renameLayout    = 'Rename Plan';
 $lang->block->planName        = 'Plan name';
 $lang->block->saveLayoutAs    = 'Copy plan from %s';
 $lang->block->defaultPlan     = 'Default plan';
+$lang->block->image           = 'Image';
+
+$lang->block->layout            = 'Layout';
+$lang->block->logoPosition      = 'Logo';
+$lang->block->navPosition       = 'navigation';
+$lang->block->searchbarPosition = 'searchbae';
+$lang->block->sloganPosition    = 'slogan';
 
 $lang->block->admin        = "Block management";
-$lang->block->pages        = "Layout settings";
+$lang->block->pages        = "Layout";
 $lang->block->add          = "Add";
 $lang->block->addChild     = "Add Child";
 $lang->block->template     = "Template";
@@ -107,6 +115,13 @@ $lang->block->categoryList['article'] = 'Article';
 $lang->block->categoryList['product'] = 'Product';
 $lang->block->categoryList['system']  = 'System';
 
+$lang->block->imageSizeList['large']  = 'large size';
+$lang->block->imageSizeList['middle'] = 'middle size';
+$lang->block->imageSizeList['small']  = 'small size';
+
+$lang->block->imagePositionList['left']  = 'Float left';
+$lang->block->imagePositionList['right'] = 'Float right';
+
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = 'Show Children';
 $lang->block->category->fromCurrent  = 'From Current';
@@ -120,3 +135,30 @@ $lang->block->category->fromCurrentList[0] = 'No';
 $lang->block->category->showCategoryList['abbr'] = 'Abbr';
 $lang->block->category->showCategoryList['name'] = 'Name';
 
+$lang->block->slideStyle = 'Slide style';
+$lang->block->slideStyleList['carousel'] = 'Common carousel';
+$lang->block->slideStyleList['tile']     = 'Verticaly';
+
+$lang->block->navTypeList = new stdclass();
+$lang->block->navTypeList->desktop_top   = 'Desktop';
+$lang->block->navTypeList->desktop_blog  = 'Blog';
+$lang->block->navTypeList->mobile_top    = 'Top of Mobile';
+$lang->block->navTypeList->mobile_bottom = 'Button of Mobile';
+$lang->block->navTypeList->mobile_blog   = 'Blog of Mobile';
+
+$lang->block->sideGrid  = 'Side column grid';
+$lang->block->sideFloat = 'Side column position';
+
+$lang->block->sideFloatOptions          = array();
+$lang->block->sideFloatOptions['left']  = 'Left';
+$lang->block->sideFloatOptions['right'] = 'Right';
+
+$lang->block->sideGridOptions     = array();
+$lang->block->sideGridOptions[6]  = '1/2';
+$lang->block->sideGridOptions[4]  = '1/3';
+$lang->block->sideGridOptions[8]  = '2/3';
+$lang->block->sideGridOptions[3]  = '1/4';
+$lang->block->sideGridOptions[9]  = '3/4';
+$lang->block->sideGridOptions[2]  = '1/6';
+$lang->block->sideGridOptions[10] = '5/6';
+$lang->block->sideGridOptions[0]  = 'Don\'t display';

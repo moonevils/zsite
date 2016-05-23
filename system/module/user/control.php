@@ -20,20 +20,6 @@ class user extends control
     private $referer;
 
     /**
-     * The construct function fix sina and qq menu.
-     * 
-     * @access public
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        if(empty($this->config->oauth->sina)) unset($this->lang->user->menu->sina);
-        if(empty($this->config->oauth->qq))   unset($this->lang->user->menu->qq);
-        if(!($this->loadModel('wechat')->getList())) unset($this->lang->user->menu->wechat);
-    }
-
-    /**
      * Register a user. 
      * 
      * @access public
@@ -397,6 +383,7 @@ class user extends control
         $this->view->token = $this->user->getToken();
         if(RUN_MODE == 'admin') 
         { 
+            $this->loadModel('mail');
             $user->groups = array_keys($this->loadModel('group')->getByAccount($user->account));
             $this->view->groups   = $this->loadModel('group')->getPairs();
             $this->view->siteLang = explode(',', $this->config->site->lang);
@@ -411,13 +398,13 @@ class user extends control
     }
 
     /**
-     * Edit email. 
+     * Set email. 
      * 
      * @param  string $account 
      * @access public
      * @return void
      */
-    public function editEmail()
+    public function setEmail()
     {
         $account = $this->app->user->account;
         $user    = $this->user->getByAccount($account);
@@ -436,11 +423,11 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->title      = $this->lang->user->editEmail;
+        $this->view->title      = $this->lang->user->setEmail;
         $this->view->token      = $this->user->getToken();
         $this->view->user       = $user;
-        $this->view->mobileURL  = helper::createLink('user', 'editEmail', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'editEmail', '', '', 'html');
+        $this->view->mobileURL  = helper::createLink('user', 'setEmail', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'setEmail', '', '', 'html');
         $this->display();
     }
 
@@ -553,7 +540,7 @@ class user extends control
         
         $this->view->users = $users;
         $this->view->pager = $pager;
-        $this->view->title = $this->lang->user->list;
+        $this->view->title = $this->lang->user->common;
         $this->display();
     }
 
@@ -638,7 +625,7 @@ class user extends control
      * @access public
      * @return void
      */
-    public function changePassword()
+    public function setPassword()
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
@@ -824,8 +811,8 @@ class user extends control
         $this->view->referer    = $referer;
         $this->view->mobileURL  = helper::createLink('user', 'oauthCallback', "provider=$provider", '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'oauthCallback', "provider=$provider", '', 'html');
-        if($provider == 'qq')   $this->view->realname = !empty($openUser->nickname) ? htmlspecialchars($openUser->nickname) : '';
         if($provider == 'sina') $this->view->realname = !empty($openUser->name) ? htmlspecialchars($openUser->name) : '';
+        $this->view->realname = !empty($openUser->nickname) ? htmlspecialchars($openUser->nickname) : '';
         die($this->display());
     }
 
@@ -984,6 +971,7 @@ class user extends control
         
         $this->view->logs  = $logs;
         $this->view->pager = $pager;
+        $this->view->users = $this->user->getPairs();
         $this->view->title = $this->lang->user->log->list;
         $this->display();
     }
@@ -1134,15 +1122,30 @@ class user extends control
      * @access public
      * @return void
      */
-    public function securityQuestion()
+    public function setSecurity()
     {
         if($_POST)
         {
-            $result = $this->user->setQuestion($this->app->user->account); 
+            $result = $this->user->setSecurity($this->app->user->account); 
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->title = $this->lang->securityQuestion;
+        $this->view->title = $this->lang->setSecurity;
         $this->display();
+    }
+
+    /**
+     * Print topbar.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printTopbar()
+    {
+        $cartInfo = $this->loadModel('cart')->getCount();
+        if($cartInfo) echo "<span class='text-center text-middle' id='cartBox'>{$cartInfo}</span>";
+        commonModel::printTopBar();
+        commonModel::printLanguageBar();
+        die();
     }
 }

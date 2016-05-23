@@ -286,7 +286,7 @@ class treeModel extends model
             }
             $treeMenu[$category->parent] .= "</li>\n"; 
         }
-        $lastMenu = "<ul class='tree'>" . @array_pop($treeMenu) . "</ul>\n";
+        $lastMenu = "<ul class='tree' data-type='$type'>" . @array_pop($treeMenu) . "</ul>\n";
         return $lastMenu; 
     }
 
@@ -374,6 +374,21 @@ class treeModel extends model
 
         $gradeLimit = zget($config->tree->gradeLimits, $category->type, 999); 
         if($category->grade < $gradeLimit) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
+        if(strpos('article,blog,product', $category->type) !== false)
+        {
+            $device = helper::getDevice();
+            $template = $config->template->{$device}->name;
+            $page = $category->type == 'blog' ? $category->type . '_index' : $category->type . '_browse';
+
+            $linkHtml .= "<span class='dropdown'>";
+            $linkHtml .= "<a data-toggle='dropdown' href='javascript:;'>" . $lang->tree->layout . " <span class='caret'></span></a>";
+            $linkHtml .= "<dl class='dropdown-menu pull-right'>";
+            foreach($lang->block->$template->regions->$page as $region => $regionName):
+            $linkHtml .= "<dd>" . html::a(helper::createLink('block', 'setregion', "page=$page&region=$region&object=$category->id"), $regionName, "data-toggle='modal'") . "</dd>";
+            endforeach;
+            $linkHtml .= "</dl>";
+            $linkHtml .= "</span>";
+        }
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
@@ -392,7 +407,7 @@ class treeModel extends model
 
         $public = str_replace('wechat_', '', $category->type);
 
-        $linkHtml  = $category->name;
+        $linkHtml = $category->name;
         if($category->parent == 0)     $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->wechatMenu->children, "class='ajax'");
         if(empty($category->children)) $linkHtml .= ' ' . html::a(helper::createLink('wechat', 'setResponse', "public={$public}&group=menu&key=m_{$category->id}"), $lang->tree->setResponse, "class='ajax'");
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
@@ -733,9 +748,7 @@ class treeModel extends model
     public function fixMenu($type = 'article')
     {
         $menuGroup = zget($this->config->tree->menuGroups, $type);
-
         unset($this->lang->tree->menu);
-        If(isset($this->lang->{$menuGroup}->menu)) $this->lang->tree->menu = $this->lang->{$menuGroup}->menu;
         $this->lang->menuGroups->tree = $menuGroup;
     }
 }

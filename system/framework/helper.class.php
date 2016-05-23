@@ -496,7 +496,6 @@ class helper
     public static function getSiteCode($domain)
     {
         global $config;
-
         if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':')); // Remove port from domain.
         $domain = strtolower($domain);
 
@@ -553,7 +552,9 @@ class helper
      */
     public static function isAjaxRequest()
     {
-        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+        $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+        if(!$isAjax) $isAjax = (isset($_GET['HTTP_X_REQUESTED_WITH']) && $_GET['HTTP_X_REQUESTED_WITH'] == 'true');
+        return $isAjax;
     }
 
     /**
@@ -712,6 +713,12 @@ class helper
         else if(!empty($_SERVER["REMOTE_ADDR"]))
         {
             $ip = $_SERVER["REMOTE_ADDR"];
+        }
+
+        if(strpos($ip, ',') !== false)
+        {
+            $ipList = explode(',', $ip);
+            $ip = $ipList[0];
         }
 
         return $ip;
@@ -985,8 +992,7 @@ function checkAdminEntry()
         if(strpos($file, '.php') !== false and !in_array($file, $defaultFiles))
         {
             $contents = file_get_contents($path . '/' . $file);
-            $webRoot  = getWebRoot();
-            if(strpos($contents, "'RUN_MODE', 'admin'") && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header("location: $webRoot"));
+            if(strpos($contents, "'RUN_MODE', 'admin'") && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header("location: " . getWebRoot()));
         }
     }
 }

@@ -15,7 +15,6 @@ $(document).ready(function()
 
     $('[data-toggle="tooltip"]').tooltip({container: '#ajaxModal'});
 
-    tempColor = new Color();
     $('.color').each(function()
     {
         var $this = $(this);
@@ -47,7 +46,7 @@ $(document).ready(function()
 
         $this.closest('.colorplate').find('.color.active').removeClass('active');
 
-        if(tempColor.isColor(val))
+        if(Color.isColor(val))
         {
             var ic = (new Color(val)).contrast().toCssStr();
             $this.attr('placeholder', val).closest('.color').removeClass('error').find('.input-group-btn .dropdown-toggle').css({'background': val, 'color': ic}).find('.caret').css('border-top-color', ic);;

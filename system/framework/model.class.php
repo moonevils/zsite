@@ -107,6 +107,14 @@ class model
     public $global;
 
     /**
+     * The device of visiting client.
+     * 
+     * @var string   
+     * @access public
+     */
+    public $device;
+
+    /**
      * The construct function.
      *
      * 1. global the global vars, refer them by the class member such as $this->app.
@@ -123,6 +131,7 @@ class model
         $this->lang   = $lang;
         $this->dbh    = $dbh;
 
+        $this->setCurrentDevice();
         $moduleName = $this->getModuleName();
         if($moduleName != 'common')
         {
@@ -132,6 +141,7 @@ class model
      
         $this->loadDAO();
         $this->setSuperVars();
+        $this->setReferer();
     }
 
     /**
@@ -167,6 +177,39 @@ class model
         $this->cookie  = $this->app->cookie;
         $this->session = $this->app->session;
         $this->global  = $this->app->global;
+    }
+
+    /**
+     * Set current device of visit website.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCurrentDevice()
+    {
+        $this->app->setCurrentDevice();
+        $this->device = $this->app->device;
+    }
+
+
+    /**
+     * Set referer.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setReferer()
+    {
+        if($this->session->http_referer) return true;
+
+        if(!empty($_SERVER['HTTP_REFERER']))
+        {
+            $refererInfo = parse_url($_SERVER['HTTP_REFERER']);
+            $referer     = $_SERVER['HTTP_REFERER'];
+            if($this->server->http_host == $refererInfo['host']) $referer = '';
+            $this->session->set('http_referer', $_SERVER['HTTP_REFERER']);
+        }
+        return true;
     }
 
     /**

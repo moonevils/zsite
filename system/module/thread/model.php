@@ -24,16 +24,15 @@ class threadModel extends model
         $thread = $this->dao->findById($threadID)->from(TABLE_THREAD)->fetch();
         if(!$thread) return false;
 
-        $speaker   = array();
-        $speaker[] = $thread->editor;
-        $speaker   = $this->loadModel('user')->getRealNamePairs($speaker);
-        $thread->editorRealname = !empty($thread->editor) ? $speaker[$thread->editor] : '';
+        /* Get realname of thread editor. */
+        $speaker = !empty($thread->editor) ? $this->loadModel('user')->getRealNamePairs(array($thread->editor)) : array();
+        $thread->editorRealname = zget($speaker, $thread->editor, '');
 
         $thread->files = $this->loadModel('file')->getByObject('thread', $thread->id);
 
         if(commonModel::isAvailable('score'))
         {
-            if(!isset($thread->scoreSum))$thread->scoreSum = 0;
+            if(!isset($thread->scoreSum)) $thread->scoreSum = 0;
             $scores = $this->loadModel('score')->getByObject('thread', $threadID, 'valuethread');
             foreach($scores as $score) $thread->scoreSum += $score->count;
         }
@@ -52,16 +51,11 @@ class threadModel extends model
      */
     public function getList($board, $orderBy, $pager = null) 
     {
-        if($board and !is_array($board))
-        {
-            $board = $this->loadModel('tree')->getByID($board, 'forum');
-            $board = $board->id;
-        }
         $searchWord = $this->get->searchWord;
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where(1)
             ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->andWhere('addedDate')->le(helper::now())->fi()
-            ->beginIf($board)->andWhere('board')->in($board)->fi()
+            ->beginIf($board)->andWhere('board')->in((array) $board)->fi()
             ->beginIf($searchWord)
             ->andWhere('title', true)->like("%{$searchWord}%")
             ->orWhere('content')->like("%{$searchWord}%")
@@ -72,7 +66,30 @@ class threadModel extends model
             ->fetchAll('id');
 
         if(!$threads) return array();
+        $this->setRealNames($threads);
 
+        return $this->process($threads);
+    }
+
+    /**
+     * Get thread fist for widget 
+     * 
+     * @param  int    $limit 
+     * @access public
+     * @return void
+     */
+    public function getListForWidget($limit)
+    {
+         $threads = $this->dao->select('*')->from(TABLE_THREAD)
+            ->where(1)
+            ->beginIf($this->config->forum->postReview == 'open')
+            ->andWhere('status')->eq('wait')
+            ->fi()
+            ->orderBy('id desc')
+            ->limit($limit)
+            ->fetchAll('id');
+
+        if(!$threads) return array();
         $this->setRealNames($threads);
 
         return $this->process($threads);
@@ -658,26 +675,5 @@ EOT;
         }
 
         return $board;
-    }
-
-    /**
-     * Get lastest threads.
-     * 
-     * @access public
-     * @return array 
-     */
-    public function getThreads()
-    {
-        $this->app->loadConfig('forum');
-        $threads = $this->dao->select('*')->from(TABLE_THREAD)
-            ->where('addedDate')->like(date("Y-m-d") . '%')
-            ->beginIf($this->config->forum->postReview == 'open')
-            ->andWhere('status')->eq('wait')
-            ->fi()
-            ->orderBy('`addedDate` desc')
-            ->limit(5)
-            ->fetchAll('id');
-
-        return $threads;
     }
 }

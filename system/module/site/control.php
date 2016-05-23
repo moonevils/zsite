@@ -56,7 +56,27 @@ class site extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
 
-        $this->view->title = $this->lang->site->setBasic;
+        $this->view->title = $this->lang->site->common;
+        $this->display();
+    }
+
+    /**
+     * Set domain.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDomain()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
+        }
+
+        $this->view->title = $this->lang->site->setDomain;
         $this->display();
     }
 
@@ -353,6 +373,18 @@ class site extends control
     {
         if(!empty($_POST))
         {
+            if($this->post->site and $this->post->site != 'http://cdn.chanzhi.org/5.2/')
+            {
+                foreach($this->config->cdn->fileList as $file)
+                {
+                    $ch = curl_init(rtrim($this->post->site, '/') . $file);
+                    curl_setopt($ch, CURLOPT_NOBODY, true);
+                    curl_exec($ch);
+                    $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    curl_close($ch);
+                    if($retcode != 200) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->site->cdnSiteTip, rtrim($this->post->site, '/') . $file)));
+                }
+            }
             $setting = fixer::input('post')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.cdn', $setting);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
@@ -379,5 +411,73 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
+    }
+
+    /**
+     * Set api config.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setApi()
+    {   
+        if($_POST)
+        {   
+            $setting = array();
+            $setting['key'] = $this->post->key;
+            $setting['ip']  = $this->post->allip ? '' : $this->post->ip;
+
+            $this->loadModel('setting')->setItems('system.site.api', $setting, $lang = 'all');
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+        }   
+
+        $this->view->title = $this->lang->site->api->common;
+        $this->display();
+    }   
+
+    /**
+     * Set cache function.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCache()
+    {
+        if(!empty($_POST))
+        {
+            $post    = fixer::input('post')->get();
+
+            $setting = new stdclass();
+            $setting->type      = $post->status;
+            $setting->cachePage = $post->cachePage;
+            $setting->expired   = $post->cacheExpired * 3600;
+
+            $result = $this->loadModel('setting')->setItems('system.common.cache', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setcache')));
+        }
+
+        $this->view->title = $this->lang->site->setCache;
+        $this->display();
+    }
+
+    /**
+     * Set cache function.
+     * 
+     * @access public
+     * @return void
+     */
+
+    public function setHomeMenu()
+    {
+        if($_POST)
+        {
+            $this->loadModel('setting')->setItem('system.common.menus.home', 'admin,' . implode(',', $this->post->homeMenus));
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+        }
+
+        $this->view->title = $this->lang->site->setHomeMenu;
+        $this->display();
     }
 }

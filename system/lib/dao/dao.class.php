@@ -122,7 +122,6 @@ class dao
      */
     public $autoLang;
 
-
     /**
      * The queries executed. Every query will be saved in this array.
      * 
@@ -130,6 +129,15 @@ class dao
      * @access public
      */
     static public $querys = array();
+
+    /**
+     * The tables changed.
+     * 
+     * @var array
+     * @access public
+     */
+    static public $changedTables = array();
+
 
     /**
      * The errors.
@@ -572,7 +580,12 @@ class dao
 
             if($this->slaveDBH and $method == 'select')
             {
-                if(isset(dao::$cache[$key])) return dao::$cache[$key];
+                if(isset(dao::$cache[$key])) 
+                {
+                    /* Unset this query. */
+                    array_pop(dao::$querys);
+                    return dao::$cache[$key];
+                }
                 $result = $this->slaveDBH->query($sql);
                 dao::$cache[$key] = $result;
                 return $result;
@@ -612,7 +625,6 @@ class dao
         {
             /* Get the SELECT, FROM position, thus get the fields, replace it by count(*). */
             $sql       = $this->processSQL();
-            $sql       = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS ', $sql);
 
             /* Remove the part after order and limit. */
             $subLength = strlen($sql);
@@ -626,17 +638,14 @@ class dao
             /* Get the records count. */
             try
             {
-                $row = $this->dbh->query($sql)->fetch(PDO::FETCH_OBJ);
+                $rows = $this->dbh->query($sql)->rowCount();
             }
             catch (PDOException $e) 
             {
                 $this->app->triggerError($e->getMessage() . "<p>The sql is: $sql</p>", __FILE__, __LINE__, $exit = true);
             }
 
-            $sql  = 'SELECT FOUND_ROWS() as recTotal;';
-            $row = $this->dbh->query($sql)->fetch();
- 
-            $pager->setRecTotal($row->recTotal);
+            $pager->setRecTotal($rows);
             $pager->setPageTotal();
         }
         $this->sqlobj->limit($pager->limit());
@@ -654,6 +663,7 @@ class dao
         if(!empty(dao::$errors)) return new PDOStatement();   // If any error, return an empty statement object to make sure the remain method to execute.
 
         $sql = $this->processSQL();
+        self::$changedTables[] = $this->table;
         try
         {
             $this->reset();

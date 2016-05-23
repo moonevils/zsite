@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->article->common      = '文章';
 $lang->article->setting     = '文章设置';
-$lang->article->common      = '文章维护';
 $lang->article->createDraft = '保存草稿';
 $lang->article->post        = '创建投稿';
 $lang->article->check       = '审核投稿';
@@ -41,6 +41,7 @@ $lang->article->isLink     = '跳转';
 $lang->article->link       = '链接';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
+$lang->article->layout     = '布局';
 
 $lang->article->forward2Blog     = '转至博客';
 $lang->article->forward2Forum    = '转至论坛';
@@ -48,20 +49,23 @@ $lang->article->selectCategories = '选择类目';
 $lang->article->selectBoard      = '选择版块';
 $lang->article->confirmReject    = '确认驳回这篇投稿？';
 
-$lang->contribution= new stdclass();
-$lang->contribution->check   = '审核';
-$lang->contribution->list    = '投稿列表';
-$lang->contribution->publish = '发布';
-$lang->contribution->reject  = '驳回';
+$lang->submittion= new stdclass();
+$lang->submittion->common  = '投稿';
+$lang->submittion->check   = '审核';
+$lang->submittion->list    = '投稿列表';
+$lang->submittion->publish = '发布';
+$lang->submittion->reject  = '驳回';
 
-$lang->contribution->status[0] = '';
-$lang->contribution->status[1] = '<span class="label label-xsm label-primary">' . '待审核' .'</span>';
-$lang->contribution->status[2] = '<span class="label label-xsm label-success">' . '通过' . '</span>';
-$lang->contribution->status[3] = '驳回';
+$lang->submittion->status[0] = '';
+$lang->submittion->status[1] = '<span class="label label-xsm label-primary">' . '待审核' .'</span>';
+$lang->submittion->status[2] = '<span class="label label-xsm label-success">' . '通过' . '</span>';
+$lang->submittion->status[3] = '驳回';
 
-$lang->contribution->typeList = array();
-$lang->contribution->typeList['article'] = '文章';
-$lang->contribution->typeList['blog']    = '博客';
+$lang->submittion->typeList = array();
+$lang->submittion->typeList['article'] = '文章';
+$lang->submittion->typeList['blog']    = '博客';
+
+$lang->article->onlyBody = '不显示头部、侧边和底部(可定制性更强)';
 
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '维护文章';
@@ -72,18 +76,20 @@ $lang->article->edit          = '编辑文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '图片';
 
-$lang->article->contribution    = '投稿';
+$lang->article->submittion    = '投稿';
 $lang->article->submissionTime  = '投递时间';
 
-$lang->article->contributionOptions = new stdclass;
-$lang->article->contributionOptions->open  = '开启';
-$lang->article->contributionOptions->close = '关闭';
+$lang->article->submittionOptions = new stdclass;
+$lang->article->submittionOptions->open  = '开启';
+$lang->article->submittionOptions->close = '关闭';
 
+$lang->blog->common = '博客';
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';
 $lang->blog->create = '发布博客';
 $lang->blog->edit   = '编辑博客';
 
+$lang->page->common = '单页';
 $lang->page->admin  = '维护单页';
 $lang->page->list   = '单页列表';
 $lang->page->create = '添加单页';

@@ -43,7 +43,7 @@ class search extends control
         $this->loadModel('guarder')->logOperation('account', 'search');
 
         $this->view->consumed   = time() - $begin;
-        $this->view->title      = $this->lang->search->index; 
+        $this->view->title      = $words;
         $this->view->pager      = $pager;
         $this->view->words      = $words;
         $this->view->mobileURL  = helper::createLink('search', 'index', "words=$words&pageID=$pageID", '', 'mhtml');

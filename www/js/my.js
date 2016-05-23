@@ -7,11 +7,20 @@ $(document).ready(function()
             $li       = $a.parents('li'),
             url       = document.location.href;
         var hrefIndex = url.indexOf(href);
-        if(href !== '/' && hrefIndex > -1 && !$li.hasClass('active') && url.substring(hrefIndex) == href)
+        if(href !== '/' && hrefIndex > -1 && !$li.hasClass('active') && url.substring(hrefIndex) == href && !$('ul.navbar-nav li.active').length)
         {
             $li.addClass('active');
         }
     });
+
+    $('#navbar .dropdown-submenu, #blogNav .dropdown-submenu').mouseover(function()
+    {
+        var $menu = $('#navbar ul.navbar-nav > li.dropdown'); 
+        if($menu.offset().left + $menu.find('.dropdown-menu').width() + $menu.find('.dropdown-submenu').find('.dropdown-menu').width() > $(window).width()) 
+        {
+            $(this).addClass('pull-left');
+        }
+    })
 
     setRequiredFields();
 
@@ -51,10 +60,6 @@ $(document).ready(function()
         else $('#navbar .dropdown').css('position', 'relative');
     }
 
-    /* Remove empty headNav */
-    var headNav = $('#headNav');
-    if(!headNav.find('nav a').length) headNav.addClass('hide');
-
     /* set right docker */
     var $dockerBtn = $('#rightDockerBtn');
     $dockerBtn.popover({container: 'body', html:true, trigger:'manual', tipId: 'dockerPopover'}).click(function(e)
@@ -80,4 +85,22 @@ $(document).ready(function()
     $('.file-md5 a').popover();
 
     fixFooterOfWideTheme(); // Fit footer style of the 'wide' theme
+
+    window.onload = function()
+    {
+        var detective = new fontDetector();
+        if(!detective.detect('Helvetica Neue') && !detective.detect('Helvetica') && detective.detect('Microsoft Yahei'))
+        {
+            $('#navbar a').css('font-weight', 'normal');
+        }
+    };
+
+    $('#commentBox').load( createLink('message', 'comment', 'objectType=' + v.objectType + '&objectID=' + v.objectID) );
+
+    // init tree
+    $('.tree').each(function()
+    {
+        var $e = $(this).addClass('tree-lines');
+        $e.tree({initialState: 'preserve', name: config.currentModule + '-' + config.currentMethod + '-' + $e.data('type')});
+    });
 });

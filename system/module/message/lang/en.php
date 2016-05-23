@@ -9,12 +9,13 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->message->common            = 'Comments';
+$lang->message->common            = 'Message';
 $lang->message->id                = 'ID';
 $lang->message->type              = 'Type';
 $lang->message->from              = 'Name';
 $lang->message->content           = 'Content';
 $lang->message->phone             = 'Phone';
+$lang->message->mobile            = 'mobile';
 $lang->message->qq                = 'QQ';
 $lang->message->email             = 'Email';
 $lang->message->date              = 'Date';
@@ -61,6 +62,7 @@ $lang->comment->type         = 'Type';
 $lang->comment->from         = 'Name';
 $lang->comment->content      = 'Content';
 $lang->comment->phone        = 'Phone';
+$lang->comment->mobile       = 'Mobile';
 $lang->comment->qq           = 'QQ';
 $lang->comment->email        = 'Email';
 $lang->comment->captcha      = 'Captcha';

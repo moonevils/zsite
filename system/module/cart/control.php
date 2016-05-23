@@ -16,6 +16,7 @@ class cart extends control
         parent::__construct();
         if($this->app->user->account != 'guest') $this->cart->mergeToDb();
     }
+
     /**
      * Add a product to cart.
      * 
@@ -56,30 +57,6 @@ class cart extends control
         $this->view->mobileURL  = helper::createLink('cart', 'browse', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('cart', 'browse', '', '', 'html');
         $this->display();
-    }
-
-    /**
-     * Print cart msg in topbar.
-     * 
-     * @access public
-     * @return void
-     */
-    public function printtopbar()
-    {
-        $count = 0;
-
-        $goodsInCookie = $this->cart->getListByCookie();
-
-        if($this->app->user->account != 'guest')
-        {
-            $count = $this->dao->select('count(*) as count')->from(TABLE_CART)
-                ->where('account')->eq($this->app->user->account)
-                ->beginIf(!empty($goodsInCookie))->andWhere('product')->notin(array_keys($goodsInCookie))->fi()
-                ->fetch('count');
-        }
-        $count = $count + count($goodsInCookie);
-
-        if($this->app->user->account != 'guest' or $count != 0) echo html::a($this->createLink('cart', 'browse'), sprintf($this->lang->cart->topbarInfo, $count));
     }
 
     /**

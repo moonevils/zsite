@@ -21,8 +21,8 @@ class sitemap extends control
     public function index($onlyBody = 'no')
     {
        if($this->app->getviewType() == 'mhtml') die($this->sitemapHTML($onlyBody));
-       if($this->app->getviewType() == 'html') die($this->sitemapHTML($onlyBody));
-       if($this->app->getviewType() == 'xml')  die($this->sitemapXML());
+       if($this->app->getviewType() == 'html')  die($this->sitemapHTML($onlyBody));
+       if($this->app->getviewType() == 'xml')   die($this->sitemapXML());
     }
 
     /**
@@ -38,7 +38,7 @@ class sitemap extends control
 
         $this->view->articleTree = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
         $this->view->productTree = $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
-        $this->view->blogTree    = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
+        $this->view->blogTree    = $this->tree->getTreeMenu('blog',    0, array('treeModel', 'createBlogBrowseLink'));
         $this->view->boards      = $this->loadModel('forum')->getBoards();
         $this->view->books       = $this->dao->select('id, title, alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchAll();
         $this->view->pages       = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
@@ -73,8 +73,8 @@ class sitemap extends control
         $articles = $this->article->getList('article', $this->tree->getFamily(0, 'article'), 'id_desc');
         $pages    = $this->dao->select('id, title, alias, editedDate')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
         $blogs    = $this->article->getList('blog', $this->tree->getFamily(0, 'blog'), 'id_desc');
-        $products = $this->product->getList($this->tree->getFamily(0), 'id_desc');
-        $board    = $this->tree->getFamily(0);
+        $products = $this->product->getList($this->tree->getFamily(0, 'product'), 'id_desc');
+        $board    = $this->tree->getFamily(0, 'forum');
         $threads  = $this->dao->select('id, editedDate')->from(TABLE_THREAD)->beginIf($board)->where('board')->in($board)->orderBy('id desc')->fetchPairs();
 
         $this->view->systemURL = commonModel::getSysURL();

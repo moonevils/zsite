@@ -57,6 +57,7 @@ $config->rights->guest['user']['oauthbind']     = 'oauthbind';
 $config->rights->guest['user']['oauthunbind']   = 'oauthunbind';
 $config->rights->guest['user']['ignorebind']    = 'ignorebind';
 $config->rights->guest['user']['message']       = 'message';
+$config->rights->guest['user']['printtopbar']   = 'printtopbar';
 
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';
@@ -77,7 +78,6 @@ $config->rights->guest['search']['index'] = 'index';
 $config->rights->guest['cart']['add']           = 'add';
 $config->rights->guest['cart']['delete']        = 'delete';
 $config->rights->guest['cart']['browse']        = 'browse';
-$config->rights->guest['cart']['printtopbar']   = 'printtopbar';
 $config->rights->guest['cart']['count']         = 'count';
 $config->rights->guest['order']['confirm']      = 'confirm';
 $config->rights->guest['order']['check']        = 'check';
@@ -95,10 +95,10 @@ $config->rights->guest['yangcong']['getresult'] = 'getresult';
 
 $config->rights->guest['ui']['getencrypt'] = 'getencrypt';
 /* For logged member. */
-$config->rights->member['article']['contribution'] = 'contribution';
-$config->rights->member['article']['post']         = 'post';
-$config->rights->member['article']['modify']       = 'modify';
-$config->rights->member['article']['delete']       = 'delete';
+$config->rights->member['article']['submittion'] = 'submittion';
+$config->rights->member['article']['post']       = 'post';
+$config->rights->member['article']['modify']     = 'modify';
+$config->rights->member['article']['delete']     = 'delete';
 
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';
@@ -124,7 +124,7 @@ $config->rights->member['user']['thread']     = 'thread';
 $config->rights->member['user']['reply']      = 'reply';
 $config->rights->member['user']['message']    = 'message';
 $config->rights->member['user']['checkemail'] = 'checkemail';
-$config->rights->member['user']['editemail']  = 'editemail';
+$config->rights->member['user']['setemail']   = 'setemail';
 $config->rights->member['user']['score']      = 'score';
 
 $config->rights->member['file']['ajaxupload'] = 'ajaxupload';

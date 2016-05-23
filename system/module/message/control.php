@@ -30,6 +30,9 @@ class message extends control
         $this->view->startNumber = ($pageID - 1) * 10;
         $this->view->mobileURL   = helper::createLink('message', 'index', "pageID=$pageID", '', 'mhtml');
         $this->view->desktopURL  = helper::createLink('message', 'index', "pageID=$pageID", '', 'html');
+        $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
+        $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
+
         $this->display();
     }
 
@@ -45,7 +48,7 @@ class message extends control
     {
         $recPerPage = !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage;
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0 , $recPerPage, $pageID);
+        $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
         $this->view->objectType  = $objectType;
         $this->view->objectID    = $objectID;
@@ -109,7 +112,7 @@ class message extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title    = $this->lang->message->common;
+        $this->view->title    = $type == 'reply' ? $this->lang->message->reply : $this->lang->$type->common;
         $this->view->messages = $this->message->getList($type, $status, $pager);
         $this->view->pager    = $pager;
         $this->view->type     = $type;
@@ -137,7 +140,7 @@ class message extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->{$captchaInput} === false and $needCaptcha)
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Comment()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Comment())));
             }
 
             $result = $this->message->post($type);
@@ -168,7 +171,7 @@ class message extends control
                 $captchaInput = $this->session->captchaInput;
                 if($this->post->$captchaInput === false and $needCaptcha)
                 {
-                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4MessageReply()));
+                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4MessageReply())));
                 }
             }
 
@@ -180,7 +183,7 @@ class message extends control
 
         $message = $this->message->getByID($messageID);
 
-        $this->view->title      = "<i class='icon-mail-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
+        $this->view->title      = "<i class='icon-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
         $this->view->modalWidth = 600;
         $this->view->message    = $message;
         $this->display();

@@ -121,8 +121,9 @@ class seo
             $items[1] = $items[2];
         }
 
-        if($module == 'forum' && isset($pageAlias[$items[1]]))
+        if($module == 'forum' && isset($forumAlias[$items[1]]))
         {
+            $params['category'] = $items[1];
             $method = $methodAlias[$module]['browse'];
             return seo::convertURI($module, $method, $params, $pageID);
         }
@@ -151,6 +152,12 @@ class seo
             {
                 $params['id'] = $id;
                 $method = $methodAlias[$module]['view'];
+                return seo::convertURI($module, $method, $params, $pageID);
+            }
+            else
+            {
+                $params['id'] = $items[1];
+                $method = $methodAlias[$module]['browse'];
                 return seo::convertURI($module, $method, $params, $pageID);
             }
         }
@@ -193,6 +200,7 @@ class seo
      */
     public static function unify($string, $to = ',')
     {
+        $string = str_replace(' ', '', $string);
         $labels = array('_', '、', '-', '\n', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
         $string = str_replace($labels, $to, $string);
         return preg_replace("/[{$to}]+/", $to, trim($string, $to));

@@ -13,7 +13,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php js::set('type',$type);?>
-<?php js::set('contribution', $this->config->article->contribution);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <div class='panel'>
@@ -58,7 +57,7 @@
               </div>
               <?php endif;?>
               <span class="input-group-addon w-70px">
-                <label class='checkbox'>
+                <label class='checkbox-inline'>
                 <?php $checked = $article->link ? 'checked' : '';?>
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->article->isLink}</span>" ?>
                 </label>
@@ -116,6 +115,13 @@
         <th><?php echo $lang->article->status;?></th>
         <td><?php echo html::radio('status', $lang->article->statusList, $article->status);?></td>
       </tr>
+      <?php if($type == 'page'):?>
+      <tr>
+        <th></th>
+        <?php $checked = $article->onlyBody ? 'checked' : '';?>
+        <td><input type='checkbox' name='onlyBody' id='onlyBody' value='1' <?php echo $checked;?>/> <span><?php echo $lang->article->onlyBody;?></span></td>
+      </tr>
+      <?php endif;?>
       </tbody>
       <tr>
         <th></th><td colspan='2'><?php echo html::submitButton();?></td>
@@ -125,5 +131,4 @@
   </div>
 </div>
 
-<?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>
