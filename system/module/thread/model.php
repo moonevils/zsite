@@ -55,6 +55,7 @@ class threadModel extends model
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where(1)
             ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->andWhere('addedDate')->le(helper::now())->fi()
+            ->beginIf(RUN_MODE == 'front' and $this->config->forum->postReview == 'open')->andWhere('status')->eq('approved')->fi()
             ->beginIf($board)->andWhere('board')->in((array) $board)->fi()
             ->beginIf($searchWord)
             ->andWhere('title', true)->like("%{$searchWord}%")
