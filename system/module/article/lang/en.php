@@ -76,8 +76,9 @@ $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
 $lang->article->images     = 'Images';
 
-$lang->article->submittion    = 'Submittion';
-$lang->article->submissionTime  = 'Submission Time';
+$lang->article->submittion     = 'Submittion';
+$lang->article->submissionTime = 'Submission Time';
+$lang->article->noSubmittion   = 'Welcome you post your articles to earn scores.';
 
 $lang->article->submittionOptions = new stdclass;
 $lang->article->submittionOptions->open  = 'Open';

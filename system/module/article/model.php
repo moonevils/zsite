@@ -365,6 +365,7 @@ class articleModel extends model
     public function create($type)
     {
         $now = helper::now();
+
         $article = fixer::input('post')
             ->join('categories', ',')
             ->setDefault('addedDate', $now)
@@ -377,10 +378,17 @@ class articleModel extends model
             ->stripTags('content,link', $this->config->allowedTags->admin)
             ->get();
 
+        if($type == 'submittion')
+        {
+            $article->author = $this->app->user->account;
+            if(!empty($this->app->user->nickname)) $article->author = $this->app->user->nickname;
+            if(!empty($this->app->user->realname)) $article->author = $this->app->user->realname;
+        }
+
         $article->keywords = seo::unify($article->keywords, ',');
         if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-');
         $article->content = $this->rtrimContent($article->content);
-
+    
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
