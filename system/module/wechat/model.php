@@ -562,7 +562,7 @@ class wechatModel extends model
         $pager = new pager($recTotal = 0, $recPerPage = $content->limit, 1);
 
         $articles = $this->loadModel('article')->getList('article', $content->category, $orderByList[$content->block], $pager);
-        $articles = $this->article->processImages($articles, 'article');
+        $articles = $this->loadModel('file')->processImages($articles, 'article');
 
         $response = new stdclass();
         $response->msgType = 'news';
@@ -625,6 +625,7 @@ class wechatModel extends model
         $pager = new pager($recTotal = 0, $recPerPage = $content->limit, 1);
 
         $products = $this->loadModel('product')->getList($content->category, $orderByList[$content->block], $pager);
+        $products = $this->loadModel('file')->processImages($products, product');
 
         $response = new stdclass();
         $response->msgType = 'news';
