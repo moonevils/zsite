@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of book module of chanzhiEPS.
@@ -61,8 +62,9 @@ class book extends control
             $book = $this->book->getBookByNode($node);
             if(($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen) and $this->device == 'desktop') 
             {
-                $families = $this->dao->select('*')->from(TABLE_BOOK)
+                $families = $this->dao->select('id,parent,type,`order`')->from(TABLE_BOOK)
                     ->where('path')->like(",{$nodeID},%")
+                    ->orderBy('`order`')
                     ->fetchGroup('parent', 'id');
 
                 $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
@@ -106,7 +108,6 @@ class book extends control
     { 
         $article = $this->book->getNodeByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
-
         $parent  = $article->origins[$article->parent];
         $book    = $article->book;
         $content = $this->book->addMenu($article->content);

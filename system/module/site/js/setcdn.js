@@ -1,14 +1,27 @@
 $(document).ready(function()
 {
-    $('input[name=open]').click(function()
+    $('input[name=open]').change(function()
     {
-        if($('#open2').prop('checked'))
+        $('.cdn-host').toggle($('#open1').prop('checked'));
+    });
+    $('input[name=open]').change();
+    $.setAjaxForm('#cdnForm', function(response)
+    {
+        if(response.result != 'success')
         {
-            $('.cdn-host').hide();
-        }
-        else
-        {
-            $('.cdn-host').show();
+            if(response.message.length)
+            {
+                $.each(response.message, function(key, file)
+                {
+                    $('#messageBox').append(file + '<br>').parent().show();
+                })
+            }
         }
     });
+    $('#cdnForm input').change(function(){ $('#messageBox').html('').parent().hide();});
+    $('.cdnreseter').click(function()
+    {
+        $('#messageBox').html('').parent().hide();
+        $('#site').val($('#site').data('default'));
+    })
 })

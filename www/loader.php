@@ -10,6 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 
+/* Record time started */
+define('STARTED_TIME', microtime());
+
 /* Set systemRoot */
 //$systemRoot = '';                                                                 // User can define the systemRoot manually.
 if(!isset($systemRoot))  $systemRoot = dirname(__FILE__) . '/system/';              // Not set, use  www/system as default.
