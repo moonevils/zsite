@@ -205,7 +205,7 @@ $lang->site->cdnFileLost      = '以下资源无法访问：';
 $lang->site->useDefaultCdn    = '使用默认地址';
 $lang->site->defaultTip       = '站点维护中……';
 $lang->site->icpTip           = '';
-$lang->site->requestTypeTip   = '系统不支持PATH_INFO方式';
+$lang->site->requestTypeTip   = '经检测，您可使用PATH_INFO模式，SEO效果更佳。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
