@@ -101,7 +101,7 @@ class productModel extends model
             $productIdList = $this->dao->setAutoLang(false)->select('`objectID`')->from(TABLE_FILE)
                 ->where('objectType')->eq('product')
                 ->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
-                ->beginIF(!empty($productIdList))->andWhere('objectID')->in($productIdList)
+                ->andWhere('objectID')->in($productIdList)
                 ->orderBy('objectID desc') 
                 ->fetchPairs();
         }
