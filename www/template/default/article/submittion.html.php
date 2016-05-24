@@ -7,6 +7,7 @@
         <div class='panel-heading'><strong><i class='icon-envelope-alt'></i> <?php echo $lang->user->submittion;?></strong>
           <div class='panel-actions'><?php commonModel::printLink('article', 'post', '', '<i class="icon-plus"></i> ' . $lang->article->post, 'class="btn btn-primary"');?></div>
         </div>
+        <?php if(!empty($articles)):?>
         <table class='table table-hover table-striped tablesorter'>
           <thead>
             <tr>
@@ -46,6 +47,12 @@
           </tbody>
           <tfoot><tr><td colspan='6'><?php $pager->show();?></td></tr></tfoot>
         </table>
+        <?php else:?>
+        <div class='panel-body'>
+          <?php echo $lang->article->noSubmittion;?>
+          <?php echo html::a(inlink('post'), "<i class='icon icon-plus'> </i>{$lang->article->post}", "class='btn btn-success'");?>
+        </div>
+        <?php endif;?>
       </div>
     </div>
   </div>

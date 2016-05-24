@@ -982,6 +982,7 @@ class commonModel extends model
         $link = helper::createLink($module, $method, $vars, $alias, $viewType);
         $link = str_replace($_SERVER['SCRIPT_NAME'], $config->webRoot . 'index.php', $link);
         $config->requestType = $requestType;
+        if($config->frontRequestType == 'GET') $link .= "&l=" . $config->langCode;
 
         return $link;
     }

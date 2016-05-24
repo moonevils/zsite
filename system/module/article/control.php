@@ -106,7 +106,7 @@ class article extends control
         }
         else
         {
-            $this->lang->article->menu = $this->lang->$type->menu;
+            $this->lang->article->menu = isset($this->lang->$type->menu) ? $this->lang->$type->menu : null;
             $this->lang->menuGroups->article = $type;
             $this->view->title = $this->lang->$type->common;
         }
