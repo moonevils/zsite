@@ -79,7 +79,7 @@ $lang->block->mobile->pages['blog_view']      = '博客详情页面';
 $lang->block->mobile->pages['forum_index']    = '论坛首页';
 $lang->block->mobile->pages['forum_board']    = '帖子列表页面';
 $lang->block->mobile->pages['thread_view']    = '帖子查看页面';
-$lang->block->mobile->pages['search_list']    = '搜索结果页';
+$lang->block->mobile->pages['search_index']   = '搜索结果页';
 
 $lang->block->mobile->pages['book_index']     = '手册中心';
 $lang->block->mobile->pages['book_browse']    = '手册首页';

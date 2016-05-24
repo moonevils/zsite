@@ -83,7 +83,7 @@ $lang->block->default->pages['blog_view']      = 'View blog page';
 $lang->block->default->pages['forum_index']    = 'Forum home';
 $lang->block->default->pages['forum_board']    = 'Forum board';
 $lang->block->default->pages['thread_view']    = 'View thread';
-$lang->block->default->pages['search_list']    = 'Search';
+$lang->block->default->pages['search_index']   = 'Search';
 
 $lang->block->default->pages['book_index']     = 'Book';
 $lang->block->default->pages['book_browse']    = 'Book catalogue';

@@ -79,7 +79,7 @@ $lang->block->mobile->pages['blog_view']      = 'View blog page';
 $lang->block->mobile->pages['forum_index']    = 'Forum home';
 $lang->block->mobile->pages['forum_board']    = 'Forum board';
 $lang->block->mobile->pages['thread_view']    = 'View thread';
-$lang->block->mobile->pages['search_list']    = 'Search';
+$lang->block->mobile->pages['search_index']   = 'Search';
 
 $lang->block->mobile->pages['book_index']     = 'Book';
 $lang->block->mobile->pages['book_browse']    = 'Book catalogue';
