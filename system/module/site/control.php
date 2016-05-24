@@ -373,7 +373,7 @@ class site extends control
     {
         if(!empty($_POST))
         {
-            if($this->post->site and $this->post->site != 'http://cdn.chanzhi.org/5.2/')
+            if($this->post->site and $this->post->site != 'http://cdn.chanzhi.org/' . $this->config->version . '/')
             {
                 foreach($this->config->cdn->fileList as $file)
                 {
@@ -382,8 +382,12 @@ class site extends control
                     curl_exec($ch);
                     $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                     curl_close($ch);
-                    if($retcode != 200) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->site->cdnSiteTip, rtrim($this->post->site, '/') . $file)));
+                    if($retcode != 200) 
+                    {
+                        $lostFiles[] = $this->post->site . $file;
+                    }
                 }
+                if(!empty($lostFiles)) $this->send(array('result' => 'fail', 'message' => $lostFiles));
             }
             $setting = fixer::input('post')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.cdn', $setting);

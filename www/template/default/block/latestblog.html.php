@@ -18,7 +18,7 @@ $themeRoot = $this->config->webRoot . 'theme/';
 $content  = json_decode($block->content);
 $method   = 'get' . ucfirst(str_replace('blog', '', strtolower($block->type)));
 $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit, 'blog');
-if(isset($content->image)) $articles = $this->article->processImages($articles, 'blog');
+if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'blog');
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>

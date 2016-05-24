@@ -46,7 +46,7 @@ class article extends control
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
         $sticks     = $this->article->getSticks($families, 'article');
         $articles   = $this->article->getList('article', $families, 'addedDate_desc', $pager);
-        $articles   = $this->article->processImages($articles, 'article');
+        $articles   = $this->loadModel('file')->processImages($articles, 'article');
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'article');
 
         $articles = $sticks + $articles;

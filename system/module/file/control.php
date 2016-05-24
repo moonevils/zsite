@@ -382,7 +382,7 @@ class file extends control
      * @param  int  $fileID
      * @return void
      */
-    public function sourceDelete($fileID)
+    public function deleteSource($fileID)
     {
         $this->file->setSavePath('source');
         $file = $this->file->getByID($fileID);

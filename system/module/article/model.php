@@ -323,31 +323,6 @@ class articleModel extends model
     }
 
     /**
-     * Process images of article list.
-     * 
-     * @param  array    $articles 
-     * @access public
-     * @return void
-     */
-    public function processImages($articles, $type)
-    {
-        if(empty($articles)) return $articles;
-        $articleIdList = array_keys($articles);
-        $images = $this->loadModel('file')->getByObject($type, $articleIdList, $isImage = true);
-
-        foreach($articles as $article)
-        {
-            if(empty($images[$article->id])) continue;
-
-            $article->image = new stdclass();
-            $article->image->list    = $images[$article->id];
-            $article->image->primary = $article->image->list[0];
-        }
-
-        return $articles;
-    }
-
-    /**
      * Get the prev and next article.
      * 
      * @param  int    $current  the current article id.
