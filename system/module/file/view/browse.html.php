@@ -37,8 +37,16 @@
       <td>
       <?php
       echo html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'");
-      echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'");
-      if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'");
+      echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'");      
+      if($file->primary != 1)
+      {
+           if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'");
+      }
+      elseif($file->primary == 1)
+      {
+           if($file->isImage) echo html::a('javascript:;', $lang->file->setPrimary, "disabled");
+      }
+
       ?>
       </td>
     </tr>
