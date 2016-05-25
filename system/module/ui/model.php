@@ -309,6 +309,7 @@ class uiModel extends model
 
         $savePath = dirname($cssFile);
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
+        if(!file_exists($savePath . DS . 'index.html')) file_put_contents($savePath . DS . 'index.html', '');
         $lessTemplateDir = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS;
 
         foreach(zget($this->config->ui->themes[$template], $theme, array()) as $section => $selector)
