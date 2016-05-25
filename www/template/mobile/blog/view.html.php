@@ -12,6 +12,7 @@
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'blog', 'header');?>
 <?php include TPL_ROOT . 'common/files.html.php'; ?>
+<?php js::set('pageLayout', $this->block->getLayoutScope('blog_view', $article->id));?>
 
 <div class='block-region region-top blocks' data-region='blog_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'top');?></div>
 

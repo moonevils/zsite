@@ -788,6 +788,7 @@ class uiModel extends model
     {
         $themeInfo  = fixer::input('post')
             ->add('type', 'theme')
+            ->add('fromVersion', $this->config->version)
             ->add('templateCompatible', $this->post->template)
             ->get();
 

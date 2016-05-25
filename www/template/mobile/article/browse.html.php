@@ -15,6 +15,7 @@
 $path = array_keys($category->pathNames);
 js::set('path', $path);
 js::set('categoryID', $category->id);
+js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->id));
 ?>
 <div class='block-region blocks region-top' data-region='article_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'top');?></div>
 <div class='panel panel-section'>
