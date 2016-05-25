@@ -16,6 +16,7 @@
       <ul class='nav nav-tabs'>
         <li class='active' data-group='all'><?php echo html::a('javascript:;', $lang->group->allGroups);?></li>
         <?php foreach($lang->moduelGroups as $group => $modules):?>
+        <?php if(!isset($lang->groups->{$group})) continue;?>
         <?php if($group != 'admin'):?>
         <li data-group='<?php echo $group;?>'><?php echo html::a('javascript:;', $lang->groups->{$group}['title']);?></li>
         <?php endif;?>

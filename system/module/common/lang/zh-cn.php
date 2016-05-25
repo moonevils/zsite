@@ -180,9 +180,9 @@ $lang->menu->forumreply   = '回帖|reply|admin|';
 $lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 
-$lang->menu->stat  = '统计|stat|traffic|';
-$lang->menu->tag   = '关键词|tag|admin|';
-$lang->menu->links = '友情链接|links|admin|';
+$lang->menu->stat    = '统计|stat|traffic|';
+$lang->menu->tag     = '关键词|tag|admin|';
+$lang->menu->links   = '友情链接|links|admin|';
 
 $lang->menu->ui       = '界面|ui|settemplate|';
 $lang->menu->logo     = '标志|ui|setlogo|';
