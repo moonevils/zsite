@@ -11,6 +11,7 @@
  */
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
+<?php js::set('pageLayout', $this->block->getLayoutScope('product_browse', $category->id));?>
 <div class='block-region region-top blocks' data-region='product_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'top');?></div>
 <div class='panel-section'>
   <div class='panel-heading page-header'>

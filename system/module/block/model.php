@@ -859,7 +859,7 @@ class blockModel extends model
 
         $plan           = zget($this->config->layout, $template . '_' . $theme);
         $layout->plan   = $object ? 'all' : $plan;
-        $layout->object = $object ? '0' : $object;
+        $layout->object = $object ? $object : '';
 
         $layout->blocks = helper::jsonEncode($newBlocks);
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
@@ -931,7 +931,7 @@ class blockModel extends model
 
         $plan           = zget($this->config->layout, $template . '_' . $theme);
         $layout->plan   = $object ? 'all' : $plan;
-        $layout->object = $object ? '0' : $object;
+        $layout->object = $object ? $object : '';
 
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         if(!dao::isError()) return array('result' => 'success');
@@ -1023,7 +1023,7 @@ class blockModel extends model
 
         $plan           = zget($this->config->layout, $template . '_' . $theme);
         $layout->plan   = $object ? 'all' : $plan;
-        $layout->object = $object ? '0' : $object;
+        $layout->object = $object ? $object : '';
 
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
 

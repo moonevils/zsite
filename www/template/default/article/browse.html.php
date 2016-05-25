@@ -1,9 +1,9 @@
 <?php
 include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
-
 $path = array_keys($category->pathNames);
 js::set('path', $path);
 js::set('categoryID', $category->id);
+js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->id));
 ?>
 <?php echo $common->printPositionBar($category);?>
 <div class='row blocks' data-region='article_browse-topBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
