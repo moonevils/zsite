@@ -526,7 +526,7 @@ class commonModel extends model
             {
                 echo html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
                 echo "<span id='msgBox' class='hiding'></span>";
-                $referer = helper::safe64encode(trim($_SERVER['REQUEST_URI'], '/'));
+                $referer = helper::safe64encode(trim($_SERVER['HTTP_REFERER'], '/'));
                 $visualEditLink = $config->webRoot . getAdminEntry() . "?m=visual&f=index&referer={$referer}" ;
                 if($app->session->user->admin != 'no') echo html::a($visualEditLink, $app->lang->editMode, "class='text-important' id='visualEditBtn'");
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
