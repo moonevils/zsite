@@ -1,3 +1,7 @@
+body.body-modal {min-height: 514px}
+body.body-modal .table-form {margin-bottom: 0}
+body.body-modal .ke-edit, body.body-modal .ke-edit > iframe {min-height: 366px}
+
 .display-name .panel-heading, .display-desc .panel-heading, .display-content .panel-heading,
 .display-name tr > th, .display-desc tr > th, .display-content tr > th,
 .display-name [data-row], .display-desc [data-row], .display-content [data-row]
