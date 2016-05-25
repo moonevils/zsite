@@ -796,11 +796,24 @@ class blockModel extends model
      * @param  string   $theme 
      * @param  string   $page 
      * @param  string   $region 
+     * @param  int      $object 
      * @access public
      * @return object
      */
-    public function getLayout($template, $theme, $page, $region)
+    public function getLayout($template, $theme, $page, $region, $object = 0)
     {
+        if($object)
+        {
+            $layout = $this->dao->select('*')->from(TABLE_LAYOUT)
+                ->where('template')->eq($template)
+                ->andWhere('plan')->eq('all')
+                ->andWhere('page')->eq($page)
+                ->andWhere('object')->eq($object)
+                ->andWhere('region')->eq($region)
+                ->fetch();
+            if(!empty($layout)) return $layout;
+        }
+
         $plan = zget($this->config->layout, $template . '_' . $theme);
         return $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('template')->eq($template)
@@ -818,12 +831,13 @@ class blockModel extends model
      * @param  string    $page 
      * @param  string    $region 
      * @param  int       $blockID 
+     * @param  int       $object 
      * @access public
      * @return void
      */
-    public function removeBlock($template, $theme, $page, $region, $blockID)
+    public function removeBlock($template, $theme, $page, $region, $object, $blockID)
     {
-        $layout = $this->getLayout($template, $theme, $page, $region);
+        $layout = $this->getLayout($template, $theme, $page, $region, $object);
 
         if(empty($layout)) return array('result' => 'fail', 'message' => $this->lang->fail);
         $blocks = json_decode($layout->blocks);
@@ -843,6 +857,10 @@ class blockModel extends model
             if($block->id != $blockID) $newBlocks[] = $block;
         }
 
+        $plan           = zget($this->config->layout, $template . '_' . $theme);
+        $layout->plan   = $object ? 'all' : $plan;
+        $layout->object = $object ? '0' : $object;
+
         $layout->blocks = helper::jsonEncode($newBlocks);
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
 
@@ -858,14 +876,15 @@ class blockModel extends model
      * @param  string    $page 
      * @param  string    $region 
      * @param  string    $parent 
-     * @param  int    $block 
+     * @param  int       $block 
+     * @param  int       $object 
      * @access public
-     * @return void
+     * @return array     result for send
      */
-    public function appendBlock($template, $theme, $page, $region, $parent, $block)
+    public function appendBlock($template, $theme, $page, $region, $object, $parent, $block)
     {
         if(!$this->checkRegion($template, $theme, $page, $region)) return array('result' => 'fail', 'message' => 'region not exisits.');
-        $layout  = $this->getLayout($template, $theme, $page, $region);
+        $layout  = $this->getLayout($template, $theme, $page, $region, $object);
         if(empty($layout))
         {
             $layout = new stdclass();
@@ -909,6 +928,11 @@ class blockModel extends model
         }
 
         $layout->blocks = helper::jsonEncode($blocks);
+
+        $plan           = zget($this->config->layout, $template . '_' . $theme);
+        $layout->plan   = $object ? 'all' : $plan;
+        $layout->object = $object ? '0' : $object;
+
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         if(!dao::isError()) return array('result' => 'success');
         return array('result' => 'fail', 'message' => dao::getError());
@@ -964,10 +988,9 @@ class blockModel extends model
      * @access public
      * @return bool
      */
-    public function sortBlocks($template, $theme, $page, $region, $parent = 0, $orders = '')
+    public function sortBlocks($template, $theme, $page, $region, $object = 0, $parent = 0, $orders = '')
     {
-        $plan = zget($this->config->layout, $template . '_' . $theme);
-        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('plan')->eq($plan)->fetch();
+        $layout  = $this->getLayout($template, $theme, $page, $region, $object);
         $blocks = json_decode($layout->blocks);
         $orders = explode(',', $orders);
         if($parent)
@@ -997,6 +1020,11 @@ class blockModel extends model
         }
 
         $layout->blocks = helper::jsonEncode($blocks);
+
+        $plan           = zget($this->config->layout, $template . '_' . $theme);
+        $layout->plan   = $object ? 'all' : $plan;
+        $layout->object = $object ? '0' : $object;
+
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
 
         return !dao::isError();
@@ -1120,5 +1148,25 @@ class blockModel extends model
             ->exec();
 
         return !dao::isError();
+    }
+
+    /**
+     * Get layout setting's scope.
+     * 
+     * @param  string   $page 
+     * @param  int      $object 
+     * @access public
+     * @return void
+     */
+    public function getLayoutScope($page, $object)
+    {
+        $template = $this->loadModel('common')->getCurrentTemplate();
+        $layout   = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)
+            ->where('template')->eq($template)
+            ->andWhere('plan')->eq('all')
+            ->andWhere('page')->eq($page)
+            ->andWhere('object')->eq($object)
+            ->fetch('count');
+        return $layout ? 'object' : 'global';
     }
 }

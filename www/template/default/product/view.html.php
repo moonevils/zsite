@@ -27,6 +27,7 @@ js::set('stockOpened', $stockOpened);
 js::set('stock', $product->amount);
 css::internal($product->css);
 js::execute($product->js);
+js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id));
 ?>
 <?php $common->printPositionBar($category, $product);?>
 <div class='row blocks' data-region='product_view-topBanner'><?php $this->block->printRegion($layouts, 'product_view', 'topBanner', true);?></div>
