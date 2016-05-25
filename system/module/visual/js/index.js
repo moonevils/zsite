@@ -172,7 +172,7 @@
 
     });
     $.visuals = visuals;
-    if(DEBUG) console.log(visuals);
+    if(DEBUG) console.log(visuals, lang);
 
     var initCarouselArea = function($carousel, setting)
     {
@@ -761,6 +761,33 @@
         initBlocks();
     };
 
+    var initLayoutSelector = function()
+    {
+        var pageLayout = $$.iframe.v.pageLayout;
+        var $selector = $('#pageLayoutSelector').toggle(!!pageLayout);
+        if(pageLayout)
+        {
+            var currentLayoutType = pageLayout === 'global' ? 'global' : 'page';
+            $selector.find('.page-name').text($$.iframe.v.pageTitle);
+            var $selectItem = $selector.find('.dropdown-menu > li').removeClass('active').filter('li[data-type="' + currentLayoutType + '"]').addClass('active');
+            $selector.find('.layout-type-name').text($selectItem.find('strong').text());
+            $selector.data('current', currentLayoutType);
+        }
+        if(!$selector.data('bindEvent'))
+        {
+            $selector.on('click', '.dropdown-menu > li > a', function()
+            {
+                var $li = $(this).closest('li');
+                if($li.data('type') !== $selector.data('current'))
+                {
+                    // TODO: Set current page layout type
+                    reloadPage();
+                }
+            });
+            $selector.data('bindEvent', true);
+        }
+    };
+
     var initVisualPage = function()
     {
         // load visual edit style
@@ -769,6 +796,14 @@
         themesConfig = $$.iframe.v.theme;
         $('body').addClass('ve-device-' + window.v.device);
         if(themesConfig.device != window.v.device) reloadPage();
+
+        if(!$$.iframe.v.pageName)
+        {
+            $$.iframe.v.pageName = $$.iframe.config.currentModule + '_' + $$.iframe.config.currentMethod;
+        }
+        $$.iframe.v.pageTitle = lang.blocks.pages[$$.iframe.v.pageName];
+
+        initLayoutSelector();
 
         // init visual edit area
         initVisualAreas();

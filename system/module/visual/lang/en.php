@@ -29,6 +29,10 @@ $lang->visual->searchBlock     = 'Search blocks';
 $lang->visual->allBlock        = 'All';
 $lang->visual->openInNewWindow = 'Open current page in new window(or tab)';
 $lang->visual->editPowerBy     = "<p>You can use changer cms freely under the <a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>license of change system</a>. Keeping the logo and link of changecms is very important for us.  If you want to remove the logo please <a href='http://www.chanzhi.org/license-search.html' target='_blank'> buy the business license</a> </p>";
+$lang->visual->pageLayout      = 'Page layout';
+$lang->visual->pageLayoutInfo  = 'Blocks layout for current <span class="page-name"></span>';
+$lang->visual->globalLayout    = 'Global layout';
+$lang->visual->globalLayoutInfo= 'Blocks layout for all <span class="page-name"></span>';
 
 $lang->visual->js = new stdclass();
 $lang->visual->js->saved              = $lang->saveSuccess;

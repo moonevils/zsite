@@ -5,6 +5,18 @@
 
 #visualPageWrapper {display: block; position: fixed; top: 40px; left: 0; right: 0; bottom: 0;}
 
+#pageLayoutSelector {display: none}
+#pageLayoutSelector > a {color: #fff; padding: 5px 8px!important; margin: 5px; background-color: #F1A325}
+#pageLayoutSelector > a:hover, #pageLayoutSelector > a:active, #pageLayoutSelector > a:focus {color: #fff!important; background-color: #e29923!important}
+#pageLayoutSelector .dropdown-menu > li > a {padding: 8px 60px 8px 15px; position: relative;}
+#pageLayoutSelector .dropdown-menu > li > a:hover,
+#pageLayoutSelector .dropdown-menu > li > a:hover > small {color: #fff}
+#pageLayoutSelector .dropdown-menu > li > a > .icon {position: absolute; right: 10px; top: 19px; display: none; color: #47A447}
+#pageLayoutSelector .dropdown-menu > li > a > small {display: block; margin-top: 2px;}
+#pageLayoutSelector .dropdown-menu > li.active > a {color: #47A447; background-color: #DDF4DF}
+#pageLayoutSelector .dropdown-menu > li.active > a > .icon {display: block}
+#pageLayoutSelector .dropdown-menu > li.active > a > small {color: grey}
+
 .nav-main {margin-left: -10px}
 
 #menu {margin: 0 auto; border-bottom: none; height: auto;}
