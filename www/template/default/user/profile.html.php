@@ -33,18 +33,16 @@
             <dd><?php echo $user->gtalk;?></dd>
             <dt></dt>
             <dd>
-              <div class='btn-group'>
-                <?php echo html::a(inlink('edit'), $lang->user->editProfile, "class='btn'");?>
-                <?php echo html::a(inlink('setemail'), $lang->user->setEmail, "class='btn'");?>
-                <?php if(isset($user->provider) and isset($user->openID)):?>
-                <?php if(strpos($user->account, "{$user->provider}_") === false):?>
-                <?php echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), $lang->user->oauth->lblUnbind, "class='btn unbind'");?>
-                <?php else:?>
-                <?php echo html::a(inlink('oauthRegister'), $lang->user->oauth->lblProfile, "class='btn'");?>
-                <?php echo html::a(inlink('oauthBind'), $lang->user->oauth->lblBind, "class='btn'");?>
-                <?php endif;?>
-                <?php endif;?>
-              </div>
+              <?php echo html::a(inlink('edit'), $lang->user->editProfile, "class='btn'");?>
+              <?php echo html::a(inlink('setemail'), $lang->user->setEmail, "class='btn'");?>
+              <?php if(isset($user->provider) and isset($user->openID)):?>
+              <?php if(strpos($user->account, "{$user->provider}_") === false):?>
+              <?php echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), $lang->user->oauth->lblUnbind, "class='btn unbind'");?>
+              <?php else:?>
+              <?php echo html::a(inlink('oauthRegister'), $lang->user->oauth->lblProfile, "class='btn'");?>
+              <?php echo html::a(inlink('oauthBind'), $lang->user->oauth->lblBind, "class='btn'");?>
+              <?php endif;?>
+              <?php endif;?>
             </dd>
           </dl>
         </div>
