@@ -67,11 +67,11 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function fixBlock($page, $region, $blockID)
+    public function fixBlock($page, $region, $object = '', $blockID)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
-        $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region);
+        $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region, $object);
 
         $blocks   = json_decode($layout->blocks);
         foreach($blocks as $block)
@@ -101,12 +101,12 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function removeBlock($blockID, $page, $region)
+    public function removeBlock($blockID, $page, $region, $object = '')
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $blockID);
+        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $object, $blockID);
         $this->send($result);
     }
 
@@ -116,7 +116,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock($page, $region, $parent = 0, $allowregionblock = false)
+    public function appendBlock($page, $region, $object = '', $parent = 0, $allowregionblock = false)
     {
         $blockModel = $this->loadModel('block');
         
@@ -126,7 +126,7 @@ class visual extends control
         if($_POST)
         {
             $block  = $this->post->block;
-            $result = $blockModel->appendBlock($template, $theme, $page, $region, $parent, $block);
+            $result = $blockModel->appendBlock($template, $theme, $page, $region, $object, $parent, $block);
             $this->send($result);
         }
 
@@ -152,14 +152,14 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function sortBlocks($page, $region, $parent = 0)
+    public function sortBlocks($page, $region, $object = '', $parent = 0)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
         if($_POST)
         {
-            $return = $this->loadModel('block')->sortBlocks($template, $theme, $page, $region, $parent, $this->post->orders);
+            $return = $this->loadModel('block')->sortBlocks($template, $theme, $page, $region, $object, $parent, $this->post->orders);
             if($return) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }

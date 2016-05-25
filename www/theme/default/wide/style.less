@@ -567,9 +567,10 @@ body {background: #232323;}
     #navbar .dropdown-submenu:hover > a:after,
     #navbar .dropdown-submenu:focus > a:after {border-left-color: #fff}
     #navbar .nav > li > a:hover > .caret,
-    #navbar .nav > li > a:focus > .caret,
+    #navbar .nav > li > a:focus > .caret {border-top-color: #fff; border-bottom-color: #fff}
     #navbar .nav > li.active > a > .caret,
-    #navbar .nav > li.active > a:hover > .caret {border-top-color: #fff; border-bottom-color: #fff}
+    #navbar .nav > li.active > a:hover > .caret {border-top-color: #666; border-bottom-color: #666}
+    #navbar .nav > li.open > a {color: #333}
 
     #header.without-navbar {padding-bottom: 71px;}
     #header.without-navbar + #navbar {margin-top: -71px;}
@@ -850,6 +851,8 @@ a.btn-primary:visited, a.btn-danger:visited, a.btn-info:visited, a.warning-info:
 
 a.list-group-item:hover, a.list-group-item:focus {background-color: @color-primary-dark; color: @text-color-inverse}
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {background-color: @color-primary;}
+
+.nav .caret {border-top-color: #666; border-bottom-color: #666;}
 
 .nav-secondary > li > a:hover,
 .nav-primary > li > a:hover {background-color: lighten(@color-primary, 5%); border-color: #ddd; color: @text-color-inverse;}
