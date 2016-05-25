@@ -143,6 +143,11 @@
         }
         var parentOptions = ($ve && name === 'block') ? $ve.closest('.blocks[data-region]').data() : {};
         var options = $.extend(parentOptions, visuals[name], $ve ? $ve.data() : {});
+
+        if($$.pageLayoutObject)
+        {
+            options['object'] = $$.pageLayoutObject;
+        }
         return options;
     };
 
@@ -172,7 +177,7 @@
 
     });
     $.visuals = visuals;
-    if(DEBUG) console.log(visuals);
+    if(DEBUG) console.log(visuals, lang);
 
     var initCarouselArea = function($carousel, setting)
     {
@@ -460,6 +465,7 @@
         var action = setting.actions.move;
         var options = $.extend(
         {
+            "object": $$.pageLayoutObject,
             orders: orders,
             parent: subRegion ? $holder.data('id') : ''
         }, setting, $holder.closest('.blocks').data(), $holder.data());
@@ -761,6 +767,35 @@
         initBlocks();
     };
 
+    var initLayoutSelector = function()
+    {
+        var pageLayout = $$.iframe.v.pageLayout;
+        var $selector = $('#pageLayoutSelector').toggle(!!pageLayout);
+        $$.pageLayoutObject = '';
+        if(pageLayout)
+        {
+            var currentLayoutType = pageLayout === 'global' ? 'global' : 'page';
+            $selector.find('.page-name').text($$.iframe.v.pageTitle);
+            var $selectItem = $selector.find('.dropdown-menu > li').removeClass('active').filter('li[data-type="' + currentLayoutType + '"]').addClass('active');
+            $selector.find('.layout-type-name').text($selectItem.find('strong').text());
+            $selector.data('current', currentLayoutType);
+            if(currentLayoutType !== 'global') $$.pageLayoutObject = $$.iframe.v.objectID;
+        }
+        if(!$selector.data('bindEvent'))
+        {
+            $selector.on('click', '.dropdown-menu > li > a', function()
+            {
+                var $li = $(this).closest('li');
+                if($li.data('type') !== $selector.data('current'))
+                {
+                    // TODO: Set current page layout type
+                    reloadPage();
+                }
+            });
+            $selector.data('bindEvent', true);
+        }
+    };
+
     var initVisualPage = function()
     {
         // load visual edit style
@@ -769,6 +804,14 @@
         themesConfig = $$.iframe.v.theme;
         $('body').addClass('ve-device-' + window.v.device);
         if(themesConfig.device != window.v.device) reloadPage();
+
+        if(!$$.iframe.v.pageName)
+        {
+            $$.iframe.v.pageName = $$.iframe.config.currentModule + '_' + $$.iframe.config.currentMethod;
+        }
+        $$.iframe.v.pageTitle = lang.blocks.pages[$$.iframe.v.pageName];
+
+        initLayoutSelector();
 
         // init visual edit area
         initVisualAreas();
