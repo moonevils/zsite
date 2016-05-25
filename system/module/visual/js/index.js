@@ -143,6 +143,11 @@
         }
         var parentOptions = ($ve && name === 'block') ? $ve.closest('.blocks[data-region]').data() : {};
         var options = $.extend(parentOptions, visuals[name], $ve ? $ve.data() : {});
+
+        if($$.pageLayoutObject)
+        {
+            options['object'] = $$.pageLayoutObject;
+        }
         return options;
     };
 
@@ -460,6 +465,7 @@
         var action = setting.actions.move;
         var options = $.extend(
         {
+            "object": $$.pageLayoutObject,
             orders: orders,
             parent: subRegion ? $holder.data('id') : ''
         }, setting, $holder.closest('.blocks').data(), $holder.data());
@@ -765,6 +771,7 @@
     {
         var pageLayout = $$.iframe.v.pageLayout;
         var $selector = $('#pageLayoutSelector').toggle(!!pageLayout);
+        $$.pageLayoutObject = '';
         if(pageLayout)
         {
             var currentLayoutType = pageLayout === 'global' ? 'global' : 'page';
@@ -772,6 +779,7 @@
             var $selectItem = $selector.find('.dropdown-menu > li').removeClass('active').filter('li[data-type="' + currentLayoutType + '"]').addClass('active');
             $selector.find('.layout-type-name').text($selectItem.find('strong').text());
             $selector.data('current', currentLayoutType);
+            if(currentLayoutType !== 'global') $$.pageLayoutObject = $$.iframe.v.objectID;
         }
         if(!$selector.data('bindEvent'))
         {
