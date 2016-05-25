@@ -8,12 +8,7 @@
   {
       $print = false;
       $groupMenus = explode(',', $this->config->menus->$menuGroup);
-      foreach($groupMenus as $groupMenu)
-      {
-          if(commonModel::isAvailable($groupMenu)) $print = true;
-      }
-      if(!$print) continue;
-
+      
       list($module, $method, $params) = explode('|', $groupSetting['link']);
       $groupClass = $menuGroup == $this->session->currentGroup ? 'active' : '';
       $groupUrl = helper::createLink($module, $method, $params);

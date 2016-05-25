@@ -1098,6 +1098,25 @@ class commonModel extends model
     public static function fixGroups()
     {
         global $app, $config, $lang;
+
+        foreach($lang->groups as $menuGroup => $groupSetting)
+        {
+            $groupMenus = explode(',', $config->menus->$menuGroup);
+      
+            $showGroup = false;
+            foreach($groupMenus as $groupMenu)
+            {
+                list($title, $module, $method, $params) = explode('|', $lang->menu->$groupMenu);
+                if(commonModel::isAvailable($groupMenu) and commonModel::hasPriv($module, $method))
+                {
+                    $showGroup = true;
+                    $lang->groups->{$menuGroup}['link'] = substr($lang->menu->$groupMenu, strpos($lang->menu->$groupMenu, '|') + 1);
+                    continue;
+                }
+            }
+            if(!$showGroup) unset($lang->groups->$menuGroup);
+        }
+
         $modules = $config->site->modules;
         if(strpos($modules, 'article') === false)
         {
@@ -1112,7 +1131,6 @@ class commonModel extends model
         }
   
         if(strpos($modules, 'stat') === false) $lang->groups->promote['link'] = 'tag|admin|';
-              
         return true;
     }
 }
