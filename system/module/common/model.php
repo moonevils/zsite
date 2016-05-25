@@ -1135,4 +1135,26 @@ class commonModel extends model
         if(strpos($modules, 'stat') === false) $lang->groups->promote['link'] = 'tag|admin|';
         return true;
     }
+
+    /**
+     * Get current template.
+     * 
+     * @access public
+     * @return string
+     */
+    public function getCurrentTemplate()
+    {
+        return $this->config->template->{$this->device}->name;
+    }
+
+    /**
+     * Get current theme 
+     * 
+     * @access public
+     * @return string
+     */
+    public function getCurrentTheme()
+    {
+        return $this->config->template->{$this->device}->theme;
+    }
 }
