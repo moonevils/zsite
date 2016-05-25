@@ -67,11 +67,11 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function fixBlock($page, $region, $blockID)
+    public function fixBlock($page, $region, $object = '', $blockID)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
-        $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region);
+        $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region, $object);
 
         $blocks   = json_decode($layout->blocks);
         foreach($blocks as $block)
@@ -101,7 +101,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function removeBlock($blockID, $page, $region)
+    public function removeBlock($blockID, $page, $region, $object = '')
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
@@ -116,7 +116,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock($page, $region, $parent = 0, $allowregionblock = false)
+    public function appendBlock($page, $region, $object = '', $parent = 0, $allowregionblock = false)
     {
         $blockModel = $this->loadModel('block');
         
@@ -152,7 +152,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function sortBlocks($page, $region, $parent = 0)
+    public function sortBlocks($page, $region, $object = '', $parent = 0)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
