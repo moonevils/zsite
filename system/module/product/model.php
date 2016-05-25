@@ -93,7 +93,7 @@ class productModel extends model
         /* Get products(use groupBy to distinct products).  */
         $productIdList = $this->dao->select('id')->from(TABLE_RELATION)
             ->where('type')->eq('product')
-            ->andWhere('category')->in($categories)
+            ->beginIF(!empty($categories))->andWhere('category')->in($categories)->fi()
             ->fetchPairs();
 
         if($image)
