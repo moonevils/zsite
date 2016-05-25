@@ -271,16 +271,19 @@ class uiModel extends model
         if(empty($theme))    $theme    = $this->config->template->{$this->device}->theme;
         if(empty($template)) $template = $this->config->template->{$this->device}->name;
         $config = $this->getCustomParams($template, $theme);
+
+        if($key == 'sideGrid')
+        {
+            $value = zget($config, $key, $default);
+            if(!in_array($value, array('2', '3', '4', '6'))) return 3;
+            return $value;
+        }
+
         if($key == 'sideFloat')
         {
-            $sideFloat = zget($config, $key, $default);
-            if(!in_array($sideFloat, array('left', 'right', 'hidden')))
-            {
-                if(isset($config['sidebar-pull-left']) and isset($config['sidebar-width'])) $this->loadModel('upgrade')->fixSideFloat();
-                $sideFloat = zget($config, 'sidebar-pull-left', $default);
-                if(!in_array($sideFloat, array('left', 'right', 'hidden'))) return 'right';
-            }
-            return $sideFloat;
+            $value = zget($config, $key, $default);
+            if(!in_array($value, array('left', 'right', 'hidden'))) return 'right';
+            return $value;
         }
         return zget($config, $key, $default);
     }
