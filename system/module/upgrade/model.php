@@ -142,9 +142,9 @@ class upgradeModel extends model
                 $this->moveThemes();
                 $this->awardRegister();
             case '5_2':
-                $this->fixSideFloat();
                 $this->execSQL($this->getUpgradeFile('5.2'));
-
+            case '5_3':
+                $this->fixSideFloat();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -182,26 +182,27 @@ class upgradeModel extends model
             case '2_5_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.beta'));
             case '2_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.2'));
             case '2_5_3'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.3'));
-            case '3_0';
-            case '3_0_1';
-            case '3_1';
-            case '3_2';
+            case '3_0'      ;
+            case '3_0_1'    ;
+            case '3_1'      ;
+            case '3_2'      ;
             case '3_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('3.3'));
-            case '4_0';
+            case '4_0'      ;
             case '4_1_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.1.beta'));
-            case '4_2';
+            case '4_2'      ;
             case '4_2_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
             case '4_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.3.beta'));
             case '4_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4'));
             case '4_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4.1'));
-            case '4_5';
+            case '4_5'      ;     
             case '4_5_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.1'));
             case '4_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.2'));
             case '4_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.6'));
-            case '5_0';
+            case '5_0'      ;
             case '5_0_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.0.1'));
             case '5_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.1'));
             case '5_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.2'));
+            case '5_3'      ;
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1949,9 +1950,11 @@ class upgradeModel extends model
             $config = json_decode($setting->value, true);
             foreach($config['default'] as $theme => $params)
             {
-                $params['sideFloat'] = $params['sidebar-pull-left'] == 'false' ? 'right' : 'left';
-                $params['sideGrid']  = (int) (100 / (str_replace('%', '', $params['sidebar-width'])));
-
+                if(!isset($params['sideFloat'])) $params['sideFloat'] = $params['sidebar-pull-left'] == 'false' ? 'right' : 'left';
+                if(!isset($params['sideGrid']))  $params['sideGrid']  = (int) (100 / (str_replace('%', '', $params['sidebar-width'])));
+                
+                if(!in_array($params['sideGrid'], array('2', '3', '4', '6'))) $params['sideGrid'] = 3;
+                if(!in_array($params['sideFloat'], array('left', 'right', 'hidden'))) $params['sideFloat'] = 'right';
                 $config['default'][$theme] = $params;
             }
             $setting->value = json_encode($config);
