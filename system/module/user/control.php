@@ -1133,19 +1133,4 @@ class user extends control
         $this->view->title = $this->lang->setSecurity;
         $this->display();
     }
-
-    /**
-     * Print topbar.
-     * 
-     * @access public
-     * @return void
-     */
-    public function printTopbar()
-    {
-        $cartInfo = $this->loadModel('cart')->getCount();
-        if($cartInfo) echo "<span class='text-center text-middle' id='cartBox'>{$cartInfo}</span>";
-        commonModel::printTopBar();
-        commonModel::printLanguageBar();
-        die();
-    }
 }
