@@ -789,7 +789,7 @@ class router
             else
             {
                 $flipedLangs = array_flip($this->config->langsShortcuts);
-                if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
+                if($this->config->requestType == 'GET' and !empty($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
                 if($this->config->requestType != 'GET')
                 {
                     $pathInfo = $this->getPathInfo();
