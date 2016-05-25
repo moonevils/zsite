@@ -112,6 +112,17 @@ js::set('device', $this->device);
       <li><?php commonModel::printLink('ui', 'customtheme', '', '<i class="icon-cog"></i>', "id='customThemeBtn' data-toggle='tooltip' data-placement='bottom' title='{$lang->visual->customTheme}'") ?></li>
       <li class="divider angle"></li>
       <li><a href='###' id='visualPageName' target='_blank' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->visual->openInNewWindow?>'><span class='page-name'><i class='icon icon-spinner icon-spin'></i></span></a></li>
+      <li id='pageLayoutSelector'>
+        <a href='###' data-toggle='dropdown'><i class='icon icon-columns'></i> <span class='layout-type-name'><?php echo $lang->visual->globalLayout; ?></span> <span class='icon icon-caret-down'></span></a>
+        <ul class='dropdown-menu'>
+          <li class='active' data-type='global'>
+            <a href='###'><i class='icon icon-check'></i><strong><?php echo $lang->visual->globalLayout ?></strong><small class='text-muted'><?php echo $lang->visual->globalLayoutInfo ?></small></a>
+          </li>
+          <li data-type='page'>
+            <a href='###'><i class='icon icon-check'></i><strong><?php echo $lang->visual->pageLayout ?></strong><small class='text-muted'><?php echo $lang->visual->pageLayoutInfo ?></small></a>
+          </li>
+        </ul>
+      </li>
     </ul>
     <ul class="nav navbar-nav pull-right">
       <li><a href='###' id='visualReloadBtn'><i class='icon-repeat'> </i><?php echo $lang->visual->reload?></a></li>
