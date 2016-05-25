@@ -96,6 +96,6 @@
 <script>
 $(document).ready(function()
 {
-    $('#headNav #siteNav').load(createLink('user', 'printtopbar'));
+    $('#headNav #siteNav').load(createLink('misc', 'printtopbar'));
 });
 </script>

@@ -57,7 +57,6 @@ $config->rights->guest['user']['oauthbind']     = 'oauthbind';
 $config->rights->guest['user']['oauthunbind']   = 'oauthunbind';
 $config->rights->guest['user']['ignorebind']    = 'ignorebind';
 $config->rights->guest['user']['message']       = 'message';
-$config->rights->guest['user']['printtopbar']   = 'printtopbar';
 
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';
@@ -72,6 +71,7 @@ $config->rights->guest['page']['view']  = 'view';
 
 $config->rights->guest['misc']['qrcode']         = 'qrcode';
 $config->rights->guest['misc']['ajaxgetfiniger'] = 'ajaxgetfiniger';
+$config->rights->guest['misc']['printtopbar']    = 'printtopbar';
 
 $config->rights->guest['search']['index'] = 'index';
 

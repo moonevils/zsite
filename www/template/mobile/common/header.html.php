@@ -69,12 +69,7 @@ $thisMethodName     = $this->app->getMethodName();
     <?php if($isUserAvailable || $isMultiLangAvailable):?>
     <div class='dropdown'>
       <button type='button' class='btn' data-toggle='dropdown'><i class='icon-bars circle'></i></button>
-      <ul class='dropdown-menu dropdown-menu-right'>
-        <?php
-        if($isUserAvailable) echo commonModel::printTopBar(true);
-        if($isUserAvailable && $isMultiLangAvailable) echo "<li class='divider'></li>";
-        if($isMultiLangAvailable) echo commonModel::printLanguageBar(true);
-        ?>
+      <ul class='dropdown-menu dropdown-menu-right' id='topbarBox'>
       </ul>
     </div>
     <?php endif; ?>
@@ -131,3 +126,9 @@ $thisMethodName     = $this->app->getMethodName();
   <?php $this->block->printRegion($layouts, 'all', 'banner');?>
 </div>
 <?php endif;?>
+<script>
+$(document).ready(function()
+{
+    $('#topbarBox').load("<?php echo helper::createLink('misc', 'printtopbar')?>");
+});
+</script>

@@ -41,8 +41,9 @@
       <table class='table table-list'>
         <thead>
           <tr class='text-center'>
-            <td colspan='2' class='text-left'><strong><?php echo $lang->order->productInfo;?></strong></td>
-            <td class='text-left'><?php echo $lang->order->price;?></td>
+            <td class='text-left'><strong><?php echo $lang->order->productInfo;?></strong></td>
+            <td class='hidden-xs'></td>
+            <td class='text-left hidden-xs'><?php echo $lang->order->price;?></td>
             <td><?php echo $lang->order->count;?></td>
             <td><?php echo $lang->order->amount;?></td>
             <td><?php echo $lang->actions;?></td>
@@ -59,11 +60,12 @@
                 echo html::a($productLink, html::image($product->image->primary->smallURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
             }
             ?>
+            <h6 class='visible-xs'><?php echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");?></h6>
           </td>
-          <td class='text-left text-middle'>
+          <td class='text-left text-middle hidden-xs'>
             <?php echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");?>
           </td>
-          <td class='w-100px text-middle'> 
+          <td class='w-100px text-middle hidden-xs'> 
             <?php if($product->promotion != 0):?>
             <?php $price = $product->promotion;?>
             <div class='text-muted'><del><?php echo $currencySymbol . $product->price;?></del></div>

@@ -34,6 +34,6 @@
 <script>
 $(document).ready(function()
 {
-    $('#headNav .wrapper nav').load(createLink('user', 'printtopbar'));
+    $('#headNav .wrapper nav').load(createLink('misc', 'printtopbar'));
 });
 </script>

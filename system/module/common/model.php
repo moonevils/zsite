@@ -509,14 +509,14 @@ class commonModel extends model
      * @access public
      * @return void
      */
-    public static function printTopBar($asListItem = false)
+    public static function printTopBar()
     {
         if(!commonModel::isAvailable('user')) return '';
 
         global $app, $config;
         if($app->session->user->account != 'guest')
         {
-            if($asListItem)
+            if($app->device == 'mobile')
             {
                 echo "<li class='menu-user-center text-center'>" . html::a(helper::createLink('user', 'control'), "<div class='user-avatar'><i class='icon icon-user avatar icon-s2 bg-primary circle'></i><strong class='user-name'>{$app->session->user->realname}</strong></div>") . '</li>';
                 echo "<li>" . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
@@ -534,7 +534,7 @@ class commonModel extends model
         }
         else
         {
-            if($asListItem)
+            if($app->device == 'mobile')
             {
                 echo '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
                 echo '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
@@ -551,17 +551,17 @@ class commonModel extends model
      * Print language bar.
      *
      * @static
-     * @param  boolean $asListItem
      * @access public
      * @return string
      */
-    public static function printLanguageBar($asListItem = false)
+    public static function printLanguageBar()
     {
         global $config, $app;
         $langs = explode(',', $config->site->lang);
         if(count($langs) == 1) return false;
-        if($asListItem)
+        if($app->device == 'mobile')
         {
+            if(commonModel::isAvailable('user')) echo "<li class='divider'></li>";
             $clientLang = $app->getClientLang();
             echo "<li class='dropdown-header'>{$app->lang->language}</li>";
             foreach($langs as $lang)
@@ -855,11 +855,13 @@ class commonModel extends model
     public function printBlog($module, $article)
     {
         if(empty($module->pathNames)) return '';
+        $categories = array();
+        foreach($this->config->seo->alias->blog as $alias => $category) $categories[$category->id] = $alias;
 
         $divider = $this->lang->divider;
         foreach($module->pathNames as $moduleID => $moduleName)
         {
-            $categoryAlias = isset($this->config->seo->alias->blog[$moduleID]) ? $this->config->seo->alias->blog[$moduleID] : '';
+            $categoryAlias = zget($categories, $moduleID, '');
             echo '<li>' . html::a(inlink('index', "moduleID=$moduleID", "category=" . $categoryAlias), $moduleName) . '</li>';
         }
         if($article) echo '<li>' . $article->title . '</li>';
@@ -901,10 +903,13 @@ class commonModel extends model
         echo '<li>' . html::a(helper::createLink('forum', 'index'), $this->lang->forumHome) . '</li>';
         if(!$board) return false;
 
+        $categories = array();
+        foreach($this->config->seo->alias->forum as $alias => $category) $categories[$category->id] = $alias;
+
         unset($board->pathNames[key($board->pathNames)]);
         foreach($board->pathNames as $boardID => $boardName)
         {
-            $categoryAlias = isset($this->config->seo->alias->forum[$boardID]) ? $this->config->seo->alias->forum[$boardID] : '';
+            $categoryAlias = zget($categories, $boardID, '');
             echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}", "category=" . $categoryAlias), $boardName) . '</li>';
         }
     }
@@ -1030,7 +1035,7 @@ class commonModel extends model
     public function loadAlias()
     {
         if(version_compare($this->loadModel('setting')->getVersion(), 1.4) <= 0) return true;
-        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,product,blog,forum,page')->fetchGroup('type', 'id');
+        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,product,blog,forum')->fetchGroup('type', 'id');
         $this->config->categories = $categories;
         $this->config->seo->alias->category = array();
         $this->config->seo->alias->blog     = array();
@@ -1057,18 +1062,7 @@ class commonModel extends model
             }
         }
 
-        if(!empty($categories['page'] ))
-        {
-            foreach($categories['page'] as $category) 
-            {
-                if(empty($category->alias)) continue;
-                $categories['page'][$category->alias] = $category;
-                $category->module = 'page';
-                $this->config->seo->alias->page[$category->alias] = $category;
-            }
-        }
-
-        if(!empty($categories['blog'] ))
+        if(!empty($categories['blog']))
         {
             foreach($categories['blog'] as $category) 
             {
