@@ -509,14 +509,14 @@ class commonModel extends model
      * @access public
      * @return void
      */
-    public static function printTopBar($asListItem = false)
+    public static function printTopBar()
     {
         if(!commonModel::isAvailable('user')) return '';
 
         global $app, $config;
         if($app->session->user->account != 'guest')
         {
-            if($asListItem)
+            if($app->device == 'mobile')
             {
                 echo "<li class='menu-user-center text-center'>" . html::a(helper::createLink('user', 'control'), "<div class='user-avatar'><i class='icon icon-user avatar icon-s2 bg-primary circle'></i><strong class='user-name'>{$app->session->user->realname}</strong></div>") . '</li>';
                 echo "<li>" . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
@@ -534,7 +534,7 @@ class commonModel extends model
         }
         else
         {
-            if($asListItem)
+            if($app->device == 'mobile')
             {
                 echo '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
                 echo '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
@@ -551,17 +551,17 @@ class commonModel extends model
      * Print language bar.
      *
      * @static
-     * @param  boolean $asListItem
      * @access public
      * @return string
      */
-    public static function printLanguageBar($asListItem = false)
+    public static function printLanguageBar()
     {
         global $config, $app;
         $langs = explode(',', $config->site->lang);
         if(count($langs) == 1) return false;
-        if($asListItem)
+        if($app->device == 'mobile')
         {
+            if(commonModel::isAvailable('user')) echo "<li class='divider'></li>";
             $clientLang = $app->getClientLang();
             echo "<li class='dropdown-header'>{$app->lang->language}</li>";
             foreach($langs as $lang)
