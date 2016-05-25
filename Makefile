@@ -17,9 +17,7 @@ zip:
 	cp -frv system chanzhieps/
 	rm -fr chanzhieps/system/config/my.php
 	cp -frv www chanzhieps && rm -fr chanzhieps/www/data/* && mkdir -p chanzhieps/www/data/upload/
-	mkdir -p chanzhieps/www/data/css/default/default
-	mkdir -p chanzhieps/www/data/css/default/tartan
-	mkdir -p chanzhieps/www/data/css/default/wide
+	mkdir -p chanzhieps/www/data/css/
 	mkdir -p chanzhieps/www/data/slides
 	mkdir -p chanzhieps/www/data/source
 	touch chanzhieps/www/robots.txt && rm chanzhieps/www/robots.txt && touch chanzhieps/www/robots.txt  && chmod 777 chanzhieps/www/robots.txt
