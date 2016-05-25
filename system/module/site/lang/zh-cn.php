@@ -204,7 +204,7 @@ $lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会�
 $lang->site->cdnFileLost      = '以下资源无法访问：';
 $lang->site->useDefaultCdn    = '使用默认地址';
 $lang->site->defaultTip       = '站点维护中……';
-$lang->site->icpTip           = '';
+$lang->site->icpTip           = '仅支持中国大陆网站';
 $lang->site->requestTypeTip   = '经检测，您可使用PATH_INFO模式，SEO效果更佳。';
 
 $lang->site->robots            = 'Robots';
