@@ -15,7 +15,7 @@ else
 }
 
 $config->file->imageExtensions  = array('jpeg', 'jpg', 'gif', 'png');
-$config->file->videoExtensions  = array('flv', 'webmv', 'wav', 'rtmp', 'ogg', 'mp3', 'mp4', 'm4v');
+$config->file->videoExtensions  = array('flv', 'webmv', 'wav', 'rtmp', 'ogg', 'mp3', 'mp4', 'm4v', 'swf');
 
 $config->file->mediaTypes = new stdclass();
 $config->file->mediaTypes->flv  = 'flv';
