@@ -301,7 +301,7 @@ class commonModel extends model
         if($module == 'wechat' and $method == 'response') return true;
         if($module == 'yangcong') return true;
         if(RUN_MODE == 'admin' and $this->app->user->admin != 'no' and isset($this->config->rights->admin[$module][$method])) return true;
-        if($module == 'widget' and $method == 'printwidget' and RUN_MODE == 'admin') return true;
+        if($module == 'widget' and RUN_MODE == 'admin') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
