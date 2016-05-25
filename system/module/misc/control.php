@@ -52,4 +52,22 @@ class misc extends control
         $this->view->modalWidth = 700;
         $this->display();
     }
+
+    /**
+     * Print topbar.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printTopbar()
+    {
+        if($this->device == 'desktop')
+        {
+            $cartInfo = $this->loadModel('cart')->getCount();
+            if($cartInfo) echo "<span class='text-center text-middle' id='cartBox'>{$cartInfo}</span>";
+        }
+        commonModel::printTopBar();
+        commonModel::printLanguageBar();
+        die();
+    }
 }
