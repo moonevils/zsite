@@ -301,6 +301,7 @@ class commonModel extends model
         if($module == 'wechat' and $method == 'response') return true;
         if($module == 'yangcong') return true;
         if(RUN_MODE == 'admin' and $this->app->user->admin != 'no' and isset($this->config->rights->admin[$module][$method])) return true;
+        if($module == 'widget' and $method == 'printwidget' and RUN_MODE == 'admin') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
@@ -1106,17 +1107,18 @@ class commonModel extends model
             $showGroup = false;
             foreach($groupMenus as $groupMenu)
             {
+                if($showGroup) continue;
                 list($title, $module, $method, $params) = explode('|', $lang->menu->$groupMenu);
                 if(commonModel::isAvailable($groupMenu) and commonModel::hasPriv($module, $method))
                 {
                     $showGroup = true;
                     $lang->groups->{$menuGroup}['link'] = substr($lang->menu->$groupMenu, strpos($lang->menu->$groupMenu, '|') + 1);
-                    continue;
                 }
+                continue;
             }
             if(!$showGroup) unset($lang->groups->$menuGroup);
         }
-
+        
         $modules = $config->site->modules;
         if(strpos($modules, 'article') === false)
         {
