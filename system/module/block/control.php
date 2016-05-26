@@ -284,7 +284,7 @@ class block extends control
      * @access public
      * @return void
      */
-    public function setColumns($page)
+    public function setColumns($page, $object = '')
     {
         $theme    = $this->config->template->{$this->device}->theme;
         $template = $this->config->template->{$this->device}->name;

@@ -484,7 +484,7 @@
         var name = 'block';
         var setting = visuals[name];
         var action = setting.actions.add;
-        var options = {'object': $$.pageLayoutObject, page: page, region: region, block: blockID, parent: parent || ''};
+        var options = {allowregionblock: '', 'object': $$.pageLayoutObject, page: page, region: region, block: blockID, parent: parent || ''};
 
         postActionData(name, action, options, function(result)
         {
