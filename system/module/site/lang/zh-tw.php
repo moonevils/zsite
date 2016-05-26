@@ -201,11 +201,11 @@ $lang->site->schemeTip        = '所有訪問會跳轉至預設訪問協議。';
 $lang->site->saveDaysTip      = '訪問日誌保存天數必須為為 >0 的數字。';
 $lang->site->yangcongTip      = '開啟強制洋蔥登錄後，您可以通過設置密保問題開啟密保登錄作為備用。';
 $lang->site->closeScoreTip    = '禁用積分功能後不再記錄積分，會員保持原有積分不變。';
-$lang->site->cdnTip           = 'cdn資源僅在非debug模式下啟用，包含：字型、css和js，不包含附件，路徑跟蟬知保持一致。';
-$lang->site->cdnSiteTip       = '正確路徑為 %s';
+$lang->site->cdnFileLost      = '以下資源無法訪問：';
+$lang->site->useDefaultCdn    = '使用預設地址';
 $lang->site->defaultTip       = '站點維護中……';
-$lang->site->icpTip           = '';
-$lang->site->requestTypeTip   = '系統不支持PATH_INFO方式';
+$lang->site->icpTip           = '僅支持中國大陸網站';
+$lang->site->requestTypeTip   = '經檢測，您可使用PATH_INFO模式，SEO效果更佳。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots檔案%s 不可寫，請修改權限後設置。';

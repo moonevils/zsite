@@ -12,7 +12,7 @@
 $lang->article->common      = '文章';
 $lang->article->setting     = '文章設置';
 $lang->article->createDraft = '保存草稿';
-$lang->article->post        = '創建投稿';
+$lang->article->post        = '我要投稿';
 $lang->article->check       = '審核投稿';
 $lang->article->reject      = '駁回投稿';
 
@@ -76,8 +76,9 @@ $lang->article->edit          = '編輯文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '圖片';
 
-$lang->article->submittion    = '投稿';
-$lang->article->submissionTime  = '投遞時間';
+$lang->article->submittion     = '投稿';
+$lang->article->submissionTime = '投遞時間';
+$lang->article->noSubmittion   = '您還沒有投稿記錄，歡迎您提交投稿賺取積分，分享宣傳。';
 
 $lang->article->submittionOptions = new stdclass;
 $lang->article->submittionOptions->open  = '開啟';

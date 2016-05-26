@@ -40,6 +40,7 @@ $lang->agreement      = "已閲讀並同意<a href='http://zpl.pub/page/zplv12.h
 $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>蟬知企業門戶系統 %s</a> 強力驅動！</span>";
 $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
+$lang->execInfo       = "<div id='execInfoBar' class='text-right'>SQL查詢：<b>%s</b> 次，內存占用：<b>%s</b>， PHP 執行時間：<b>%s</b> 秒。 <button type='button' class='close text-danger' data-dismiss='alert' aria-hidden='true'>×</button> </div>";
 
 /* Global lang items. */
 $lang->home             = '首頁';
@@ -179,9 +180,9 @@ $lang->menu->forumreply   = '回帖|reply|admin|';
 $lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 
-$lang->menu->stat  = '統計|stat|traffic|';
-$lang->menu->tag   = '關鍵詞|tag|admin|';
-$lang->menu->links = '友情連結|links|admin|';
+$lang->menu->stat    = '統計|stat|traffic|';
+$lang->menu->tag     = '關鍵詞|tag|admin|';
+$lang->menu->links   = '友情連結|links|admin|';
 
 $lang->menu->ui       = '界面|ui|settemplate|';
 $lang->menu->logo     = '標誌|ui|setlogo|';
