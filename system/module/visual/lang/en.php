@@ -54,6 +54,7 @@ $lang->visual->js->alreadyLastSlide   = 'Already last';
 $lang->visual->js->alreadyFirstSlide  = 'Already first';
 $lang->visual->js->slideOrder         = 'Current play order';
 $lang->visual->js->gridWidth          = 'Grid value';
+$lang->visual->js->pageLayoutPrefix   = 'Only current ';
 $lang->visual->js->actions            = array('edit' => 'Edit', 'delete' => 'Delete', 'move' => 'Move', 'add' => 'Add');
 
 /* Language for config */
