@@ -484,7 +484,7 @@
         var name = 'block';
         var setting = visuals[name];
         var action = setting.actions.add;
-        var options = {page: page, region: region, block: blockID, parent: parent || ''};
+        var options = {'object': $$.pageLayoutObject, page: page, region: region, block: blockID, parent: parent || ''};
 
         postActionData(name, action, options, function(result)
         {
@@ -770,9 +770,9 @@
     var initLayoutSelector = function()
     {
         var pageLayout = $$.iframe.v.pageLayout;
-        var $selector = $('#pageLayoutSelector').toggle(!!pageLayout);
+        var $selector = $('#pageLayoutSelector').toggle(!!(pageLayout && pageLayout !== 'global'));
         $$.pageLayoutObject = '';
-        if(pageLayout)
+        if(pageLayout && pageLayout !== 'global')
         {
             var currentLayoutType = pageLayout === 'global' ? 'global' : 'page';
             $selector.find('.page-name').text($$.iframe.v.pageTitle);

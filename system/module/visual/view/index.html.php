@@ -113,9 +113,9 @@ js::set('device', $this->device);
       <li class="divider angle"></li>
       <li><a href='###' id='visualPageName' target='_blank' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->visual->openInNewWindow?>'><span class='page-name'><i class='icon icon-spinner icon-spin'></i></span></a></li>
       <li id='pageLayoutSelector'>
-        <a href='###' data-toggle='dropdown'><i class='icon icon-columns'></i> <span class='layout-type-name'><?php echo $lang->visual->globalLayout; ?></span> <span class='icon icon-caret-down'></span></a>
+        <a href='###' data-toggle='dropdown'><span class='layout-type-name'><?php echo $lang->visual->globalLayout; ?></span> <span class='icon icon-info-sign'></span></a>
         <ul class='dropdown-menu'>
-          <li class='active' data-type='global'>
+          <li class='active hidden' data-type='global'>
             <a href='###'><i class='icon icon-check'></i><strong><?php echo $lang->visual->globalLayout ?></strong><small class='text-muted'><?php echo $lang->visual->globalLayoutInfo ?></small></a>
           </li>
           <li data-type='page'>

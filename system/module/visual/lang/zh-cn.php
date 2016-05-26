@@ -29,8 +29,8 @@ $lang->visual->searchBlock     = '搜索区块';
 $lang->visual->allBlock        = '全部';
 $lang->visual->openInNewWindow = '在新窗口中打开当前编辑页面';
 $lang->visual->editPowerBy     = "<p>您可以在遵守我们<a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>授权协议</a>的前提下免费使用蝉知系统，保留蝉知标志是对宣传蝉知系统非常重要。如果您想去除蝉知的标志，请<a href='http://www.chanzhi.org/license-search.html' target='_blank'>购买蝉知商业授权</a>。</p>";
-$lang->visual->pageLayout      = '页面布局';
-$lang->visual->pageLayoutInfo  = '区块布局适合当前<span class="page-name"></span>';
+$lang->visual->pageLayout      = '页面布局已启用';
+$lang->visual->pageLayoutInfo  = '区块布局仅适合当前<span class="page-name"></span>，不会影响全局设置';
 $lang->visual->globalLayout    = '全局布局';
 $lang->visual->globalLayoutInfo= '区块布局适合所有<span class="page-name"></span>';
 
