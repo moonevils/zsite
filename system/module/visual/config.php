@@ -46,7 +46,7 @@ $config->visual->setting->block['actions']['add']     = array('method' => 'appen
 $config->visual->setting->block['actions']['create']  = array('method' => 'create', 'params' => 'type=html', 'module' => 'block', 'width' => 1000, 'hidden' => true);
 
 $config->visual->setting->columns                     = array('module' => 'visual', 'actions' => array());
-$config->visual->setting->columns['actions']['edit']  = array('module' => 'block', 'method' => 'setColumns', 'width' => 600, 'params' => 'page={page}', 'icon' => 'columns');
+$config->visual->setting->columns['actions']['edit']  = array('module' => 'block', 'method' => 'setColumns', 'width' => 600, 'params' => 'page={page}&object={object}', 'icon' => 'columns');
 
 $config->visual->setting->article                      = array('actions' => array());
 $config->visual->setting->article['actions']['delete'] = array('params' => 'articleID={id}');
