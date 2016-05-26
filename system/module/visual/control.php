@@ -67,7 +67,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function fixBlock($page, $region, $object = '', $blockID)
+    public function fixBlock($page, $region, $blockID, $object = '')
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
@@ -106,7 +106,7 @@ class visual extends control
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $object, $blockID);
+        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $blockID, $object);
         $this->send($result);
     }
 
@@ -116,17 +116,17 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock($page, $region, $object = '', $parent = 0, $allowregionblock = false)
+    public function appendBlock($page, $region, $parent = 0, $allowregionblock = false, $object = '')
     {
         $blockModel = $this->loadModel('block');
-        
+
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
         if($_POST)
         {
             $block  = $this->post->block;
-            $result = $blockModel->appendBlock($template, $theme, $page, $region, $object, $parent, $block);
+            $result = $blockModel->appendBlock($template, $theme, $page, $region, $parent, $block, $object);
             $this->send($result);
         }
 
@@ -152,14 +152,14 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function sortBlocks($page, $region, $object = '', $parent = 0)
+    public function sortBlocks($page, $region, $parent = 0, $object = '')
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
         if($_POST)
         {
-            $return = $this->loadModel('block')->sortBlocks($template, $theme, $page, $region, $object, $parent, $this->post->orders);
+            $return = $this->loadModel('block')->sortBlocks($template, $theme, $page, $region, $parent, $this->post->orders, $object);
             if($return) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
