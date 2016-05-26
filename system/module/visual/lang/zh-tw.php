@@ -29,6 +29,10 @@ $lang->visual->searchBlock     = '搜索區塊';
 $lang->visual->allBlock        = '全部';
 $lang->visual->openInNewWindow = '在新窗口中打開當前編輯頁面';
 $lang->visual->editPowerBy     = "<p>您可以在遵守我們<a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>授權協議</a>的前提下免費使用蟬知系統，保留蟬知標誌是對宣傳蟬知系統非常重要。如果您想去除蟬知的標誌，請<a href='http://www.chanzhi.org/license-search.html' target='_blank'>購買蟬知商業授權</a>。</p>";
+$lang->visual->pageLayout      = '頁面佈局已啟用';
+$lang->visual->pageLayoutInfo  = '區塊佈局僅適合當前<span class="page-name"></span>，不會影響全局設置';
+$lang->visual->globalLayout    = '全局佈局';
+$lang->visual->globalLayoutInfo= '區塊佈局適合所有<span class="page-name"></span>';
 
 $lang->visual->js = new stdclass();
 $lang->visual->js->saved             = $lang->saveSuccess;
