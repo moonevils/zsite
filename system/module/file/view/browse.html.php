@@ -52,7 +52,6 @@
     </tr>
     <?php endforeach;?>
   </tbody>
-
 </table>
 <form id="fileForm" method='post' enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=$objectType&objectID=$objectID");?>'>
   <table class='table table-form'>
