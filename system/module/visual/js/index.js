@@ -627,7 +627,8 @@
             });
 
             var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addcontent" data-allowregionblock="' + (withGrid ? 1 : 0) + '"><i class="icon icon-plus"></i> ' + lang.addContent + '</button></li>';
-            actionsBar += '</ul><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
+            var pageLayout = $$.iframe.v.pageLayout;
+            actionsBar += '</ul><ul class="breadcrumb"><li>' + (($$.iframe.v.pageName === page && pageLayout && pageLayout !== 'global') ? lang.pageLayoutPrefix : '') + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
 
             $blocksHolder.append(actionsBar);
         });
