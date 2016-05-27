@@ -611,7 +611,7 @@ class user extends control
     {
         if(!empty($referer))
         {
-            $this->referer = helper::safe64Decode($referer);
+            $this->referer = htmlspecialchars((helper::safe64Decode($referer)));
         }
         else
         {
