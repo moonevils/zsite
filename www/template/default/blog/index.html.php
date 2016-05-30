@@ -15,7 +15,7 @@ include TPL_ROOT . 'blog/header.html.php';
 if(isset($category)) $path = array_keys($category->pathNames);
 if(!empty($path))         js::set('path',  $path);
 if(!empty($category->id)) js::set('categoryID', $category->id);
-if(!empty($category->id)) js::set('pageLayout', $this->block->getLayoutScope('blog_index', $category->id));?>
+if(!empty($category->id)) js::set('pageLayout', $this->block->getLayoutScope('blog_index', $category->id));
 ?>
 <?php
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
