@@ -889,7 +889,7 @@ class router
     {
         if(isGetUrl())
         {
-            if($this->config->requestType == 'PATH_INFO2') define('FIX_PATH_INFO2', true);
+            if($this->config->requestType != 'GET') define('REAL_REQUEST_TYPE', $this->config->requestType);
             $this->config->requestType = 'GET';
         }
 
@@ -913,6 +913,7 @@ class router
         {
             $this->triggerError("The request type {$this->config->requestType} not supported", __FILE__, __LINE__, $exit = true);
         }
+        if(defined('REAL_REQUEST_TYPE') and strpos('PATH_INFO2', REAL_REQUEST_TYPE) !== false) $this->config->requestType = REAL_REQUEST_TYPE;
     }
 
     /**
