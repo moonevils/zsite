@@ -947,7 +947,6 @@ function getWebRoot($full = false)
         $http = (isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://';
         return $http . $_SERVER['HTTP_HOST'] . substr($path, 0, (strrpos($path, '/') + 1));
     }
-
     return substr($path, 0, (strrpos($path, '/') + 1));
 }
 
@@ -961,6 +960,8 @@ function getWebRoot($full = false)
 function getHomeRoot($langCode = '')
 {
     global $config;
+    $requestType = $config->requestType;
+    $config->requestType = zget($config, 'frontRequestType', '');
 
     $langCode = $langCode == '' ? $config->langCode : $langCode;
     $defaultLang = isset($config->site->defaultLang) ?  $config->site->defaultLang : $config->default->lang;
@@ -971,6 +972,8 @@ function getHomeRoot($langCode = '')
     if($langCode and $config->requestType == 'PATH_INFO2') $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
     if($langCode and $config->requestType == 'GET') $homeRoot = $config->webRoot . 'index.php?l=' . "$langCode";
     if($config->requestType != 'GET') $homeRoot = rtrim($homeRoot, '/') . '/';
+    $config->requestType = $requestType;
+
     return $homeRoot;
 }
 
