@@ -41,7 +41,7 @@ $config->visual->setting->block                       = array('module' => 'visua
 $config->visual->setting->block['actions']['edit']    = array('module' => 'block', 'width' => 1200, 'params' => 'blockID={id}');
 $config->visual->setting->block['actions']['delete']  = array('method' => 'removeBlock', 'params' => 'blockID={id}&page={page}&region={region}&object={object}'); 
 $config->visual->setting->block['actions']['move']    = array('method' => 'sortblocks','params' => 'page={page}&region={region}&pagent={parent}&object={object}');
-$config->visual->setting->block['actions']['layout']  = array('method' => 'fixblock', 'width' => 600, 'icon' => 'list-alt', 'params' => 'page={page}&region={region}&object={object}&blockID={id}');
+$config->visual->setting->block['actions']['layout']  = array('method' => 'fixblock', 'width' => 600, 'icon' => 'list-alt', 'params' => 'page={page}&region={region}&blockID={id}&object={object}');
 $config->visual->setting->block['actions']['add']     = array('method' => 'appendBlock', 'params' => 'page={page}&region={region}&parent={parent}&allowregionblock={allowregionblock}&object={object}', 'hidden' => true, 'width' => '80%', 'title' => '添加区块 {title}');
 $config->visual->setting->block['actions']['create']  = array('method' => 'create', 'params' => 'type=html', 'module' => 'block', 'width' => 1000, 'hidden' => true);
 
