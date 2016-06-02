@@ -959,9 +959,10 @@ function getWebRoot($full = false)
  */
 function getHomeRoot($langCode = '')
 {
-    global $config;
+    global $config, $app;
+    if(RUN_MODE == 'front' and is_object($app)) $app->setRequestTypeFRomDB();
     $requestType = $config->requestType;
-    $config->requestType = zget($config, 'frontRequestType', '');
+    if(RUN_MODE == 'admin') $config->requestType = zget($config, 'frontRequestType', $config->requestType);
 
     $langCode = $langCode == '' ? $config->langCode : $langCode;
     $defaultLang = isset($config->site->defaultLang) ?  $config->site->defaultLang : $config->default->lang;
