@@ -54,7 +54,7 @@
     <?php endif;?>
     <?php echo $mainMenu;?>
     <ul class='nav navbar-nav navbar-right'>
-      <li><?php echo html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'");?></li>
+      <li><?php echo html::a(getHomeRoot($this->app->getClientLang()), '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'");?></li>
       <li class='dropdown'><?php include 'selectlang.html.php';?></li>
     </ul>
   </div>
