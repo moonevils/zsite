@@ -144,10 +144,7 @@
         var parentOptions = ($ve && name === 'block') ? $ve.closest('.blocks[data-region]').data() : {};
         var options = $.extend(parentOptions, visuals[name], $ve ? $ve.data() : {});
 
-        if($$.pageLayoutObject)
-        {
-            options['object'] = $$.pageLayoutObject;
-        }
+        options['object'] = $$.pageLayoutObject || '';
         return options;
     };
 
