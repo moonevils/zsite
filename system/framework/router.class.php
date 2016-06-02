@@ -782,6 +782,7 @@ class router
         }
         elseif(RUN_MODE == 'front')
         {
+            $this->setRequestTypeFromDB();
             if(strpos($this->server->http_referer, 'm=visual') !== false and !empty($_COOKIE['adminLang'])) 
             {
                 $this->clientLang = $_COOKIE['adminLang'];
@@ -820,6 +821,18 @@ class router
         setcookie('lang', $this->clientLang, $this->config->cookieLife, $this->config->cookiePath);
 
         if(in_array($this->clientLang, $enabledLangs)) return $this->clientLang;
+    }
+    
+    /**
+     * Set requestType from DB.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setRequestTypeFromDB()
+    {
+        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'requestType'")->fetch();
+        $this->config->requestType = $result->value;
     }
 
     /**
