@@ -405,7 +405,7 @@ class site extends control
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
-
+            foreach($setting as $key => $value) $value = trim($value);
             $result  = $this->loadModel('setting')->setItem('system.common.site.yangcong', helper::jsonEncode($setting), "all");
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
