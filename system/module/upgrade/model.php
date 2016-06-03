@@ -145,6 +145,8 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('5.2'));
             case '5_3':
                 $this->fixSideFloat();
+            case '5_3_1':
+                $this->execSQL($this->getUpgradeFile('5.3.1'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -203,6 +205,7 @@ class upgradeModel extends model
             case '5_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.1'));
             case '5_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.2'));
             case '5_3'      ;
+            case '5_3_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
