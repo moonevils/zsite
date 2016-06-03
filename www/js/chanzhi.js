@@ -531,7 +531,7 @@ function createLink(moduleName, methodName, vars, viewType)
         if(config.requestType == 'PATH_INFO')
         {
             link = config.webRoot + moduleName + config.requestFix + methodName;
-            if(config.langCode != '') link = '/' + config.langCode + link;
+            if(config.langCode != '') link = config.webRoot + config.langCode + '/' + moduleName + config.requestFix + methodName;
         }
 
         if(config.requestType == 'PATH_INFO2')
