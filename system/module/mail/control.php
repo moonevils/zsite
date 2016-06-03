@@ -35,15 +35,14 @@ class mail extends control
         {
             $error = '';
             if($this->post->fromAddress == false) $error = sprintf($this->lang->error->notempty, $this->lang->mail->fromAddress);
-            if(!validater::checkEmail($this->post->fromAddress)) $error .= '\n' . sprintf($this->lang->error->email, $this->lang->mail->fromAddress);
+            if(!validater::checkEmail($this->post->fromAddress)) $error .= sprintf($this->lang->error->email, $this->lang->mail->fromAddress);
 
-            if($error) die(js::alert($error));
+            if($error) $this->send(array('result' => 'fail', 'message' => strip_tags($error)));
 
             $mailConfig = $this->mail->autoDetect($this->post->fromAddress);
             $mailConfig->fromAddress = $this->post->fromAddress;
             $this->session->set('mailConfig',  $mailConfig);
-
-            die(js::locate(inlink('edit'), 'parent'));
+            $this->send(array('result' => 'success', 'locate' => inlink('edit')));
         }
 
         $this->view->title      = $this->lang->mail->common . $this->lang->minus . $this->lang->mail->detect;

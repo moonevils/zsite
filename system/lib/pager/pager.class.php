@@ -548,7 +548,9 @@ EOT;
         global $config; 
         if(helper::inSeoMode() && method_exists('uri', 'create' . $this->moduleName . $this->methodName)) 
         {
-            $link = strip_tags(urldecode($_SERVER['REQUEST_URI']));
+            $link     = strip_tags(urldecode($_SERVER['REQUEST_URI']));
+            $link     = str_replace('"', '', $link);
+            $link     = str_replace('\'', '', $link);
             $viewType = substr($link, strrpos($link, '.') + 1);
 
             if($this->params['pageID'] == 1) return html::a(preg_replace('/\/p\d+\.' . $viewType . '/', '.' . $viewType, $link), $title);
