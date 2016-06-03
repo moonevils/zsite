@@ -29,30 +29,25 @@ class site extends control
                 ->remove('allowedFiles')
                 ->setDefault('modules', '')
                 ->stripTags('pauseTip', $allowedTags)
-                ->remove('uid,lang,cn2tw,defaultLang')
+                ->remove('uid,lang,cn2tw,defaultLang,requestType')
                 ->get();
 
             if($setting->modules == 'initial') unset($setting->modules);
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            /* Set global settings. */
+            $globalSetting = new stdclass();
+            $globalSetting->lang        = join(',', $this->post->lang);
+            $globalSetting->cn2tw       = join('', $this->post->cn2tw);
+            $globalSetting->defaultLang = $this->post->defaultLang;
+            $globalSetting->requestType = $this->post->requestType;
+            $result = $this->loadModel('setting')->setItems('system.common.site', $globalSetting, 'all');
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            /* Switch to desktop device if mobile template closed. */
             if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');
-
-            if($this->post->lang)
-            {
-                $setting = fixer::input('post')
-                    ->setDefault('cn2tw', 0)
-                    ->join('lang', ',')
-                    ->join('cn2tw', '')
-                    ->get('lang,cn2tw,defaultLang');
-
-                if(empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-                if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-
-                $result = $this->loadModel('setting')->setItems('system.common.site', $setting, $lang = 'all');
-                $this->dao->delete()->from(TABLE_CONFIG)->where("`key`")->eq('defaultLang')->andWhere('lang')->ne('all')->exec();
-                if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-            }
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
 
