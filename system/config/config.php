@@ -146,7 +146,6 @@ $config->dependence->forum[]        = 'user';
 $config->dependence->reply[]        = 'forum';
 $config->dependence->reply[]        = 'user';
 $config->dependence->message[]      = 'message';
-$config->dependence->message[]      = 'user';
 $config->dependence->shop[]         = 'shop';
 $config->dependence->shop[]         = 'user';
 $config->dependence->cart[]         = 'shop';
