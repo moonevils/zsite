@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php if(helper::isAjaxRequest()):?>
 <?php
 $webRoot            = $config->webRoot;
@@ -80,7 +81,9 @@ $thisMethodName     = $this->app->getMethodName();
   <div class='mainnav'>
     <ul class='nav'>
     <?php $subnavs = '';?>
+    <?php $navID   = 0;?>
     <?php foreach($topNavs as $nav1):?>
+    <?php $navID++;?>
       <li class='<?php echo $nav1->class?>'>
       <?php
       if(empty($nav1->children))
@@ -89,8 +92,8 @@ $thisMethodName     = $this->app->getMethodName();
       }
       else
       {
-          echo html::a("#sub-{$nav1->class}", $nav1->title . " <i class='icon-caret-down'></i>", ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
-          $subnavs .= "<ul class='nav' id='sub-{$nav1->class}'>\n";
+          echo html::a("#sub-{$navID}", $nav1->title . " <i class='icon-caret-down'></i>", ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
+          $subnavs .= "<ul class='nav' id='sub-{$navID}'>\n";
           foreach($nav1->children as $nav2)
           {
               $subnavs .= "<li class='{$nav2->class}'>";

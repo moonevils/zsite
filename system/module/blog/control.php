@@ -33,10 +33,12 @@ class blog extends control
         $articles   = $this->loadModel('file')->processImages($articles, 'blog');
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'blog');
 
+        $sticks = $this->article->getSticks($families, 'blog');
+        $sticks = $this->file->processImages($sticks, 'blog');
         $this->view->title      = $this->lang->blog->common;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
-        $this->view->sticks     = $this->article->getSticks($families, 'blog');
+        $this->view->sticks     = $sticks;
         $this->view->pager      = $pager;
         $this->view->mobileURL  = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'mhtml');
         $this->view->desktopURL = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'html');
