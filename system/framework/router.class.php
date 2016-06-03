@@ -900,7 +900,7 @@ class router
      */
     public function parseRequest()
     {
-        if(isGetUrl())
+        if(isGetUrl() and RUN_MODE == 'front')
         {
             if($this->config->requestType != 'GET') define('REAL_REQUEST_TYPE', $this->config->requestType);
             $this->config->requestType = 'GET';

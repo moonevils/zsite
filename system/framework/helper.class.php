@@ -65,12 +65,6 @@ class helper
     static public function createLink($moduleName, $methodName = 'index', $vars = '', $alias = array(), $viewType = '')
     {
         global $app, $config;
-        $requestType = $config->requestType;
-        if(defined('FIX_PATH_INFO2') and FIX_PATH_INFO2) 
-        {
-            $config->requestType = 'PATH_INFO2';
-        }
-
         $clientLang = $app->getClientLang();
         $lang       = $config->langCode;
 
@@ -92,7 +86,6 @@ class helper
             if($lang and $link) $link = $config->webRoot .  $lang . '/' . substr($link, strlen($config->webRoot));
 
             if($config->requestType == 'PATH_INFO2') $config->webRoot = getWebRoot();
-            $config->requestType = $requestType;
             if($link) return $link;
         }
         
@@ -137,7 +130,6 @@ class helper
             foreach($vars as $key => $value) $link .= "&$key=$value";
             if($lang and RUN_MODE != 'admin') $link .= "&l=$lang";
         }
-        $config->requestType = $requestType;
         return $link;
     }
 
@@ -960,21 +952,25 @@ function getWebRoot($full = false)
 function getHomeRoot($langCode = '')
 {
     global $config, $app;
-    if(RUN_MODE == 'front' and is_object($app)) $app->setRequestTypeFRomDB();
     $requestType = $config->requestType;
+    if(RUN_MODE == 'front' and is_object($app)) $app->setRequestTypeFRomDB();
     if(RUN_MODE == 'admin') $config->requestType = zget($config, 'frontRequestType', $config->requestType);
 
     $langCode = $langCode == '' ? $config->langCode : $langCode;
     $defaultLang = isset($config->site->defaultLang) ?  $config->site->defaultLang : $config->default->lang;
-    if($langCode == $config->langsShortcuts[$defaultLang]) return $config->webRoot;
+    if($langCode == $config->langsShortcuts[$defaultLang])
+    {
+        $config->requestType = $requestType;
+        return $config->webRoot;
+    }
     $homeRoot = $config->webRoot;
 
     if($langCode and $config->requestType == 'PATH_INFO') $homeRoot = $config->webRoot . $langCode; 
     if($langCode and $config->requestType == 'PATH_INFO2') $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
     if($langCode and $config->requestType == 'GET') $homeRoot = $config->webRoot . 'index.php?l=' . "$langCode";
     if($config->requestType != 'GET') $homeRoot = rtrim($homeRoot, '/') . '/';
-    $config->requestType = $requestType;
 
+    $config->requestType = $requestType;
     return $homeRoot;
 }
 
