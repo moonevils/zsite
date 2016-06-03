@@ -304,7 +304,7 @@ class messageModel extends model
             ->setIF($type == 'message', 'to', 'admin')
             ->setIF($account != 'guest', 'account', $account)
             ->setIF($admin == 'super', 'status', '1')
-            ->add('ip', $this->server->REMOTE_ADDR)
+            ->add('ip', helper::getRemoteIP())
             ->get();
 
         if(strlen($message->content) > 29)
