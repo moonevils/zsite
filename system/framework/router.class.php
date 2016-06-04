@@ -1711,7 +1711,7 @@ class router
         
         /* If debug on, save sql lines. */
         if($this->config->debug) $this->saveSQL();
-        if(RUN_MODE == 'front' and $this->config->debug and !helper::isAjaxRequest()) $this->getExecInfo();
+        if(RUN_MODE == 'front' and $this->config->site->execInfo == 'show' and !helper::isAjaxRequest()) $this->getExecInfo();
 
         /* If any error occers, save it. */
         if(!function_exists('error_get_last')) return;
@@ -1799,7 +1799,28 @@ class router
         $execTime = round($ended - $started, 2);
         $memoryUsage = memory_get_peak_usage(true);
         $memoryUsage = number_format(round($memoryUsage / 1024 / 1024, 2), 2);
-        printf($this->lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
+        echo "<span style='cursor:pointer;' id='execIcon'><i class='icon icon-dashboard'> </i></span>";
+        if($this->device == 'desktop')
+        {
+            printf($this->lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
+            echo '<script>';
+            echo " $().ready(function() { $('#execIcon').tooltip({title:$('#execInfoBar').html(), html:true, placement:'right'}); $('#powerby').after($('#execIcon')) }); ";
+            echo '</script>';
+        }
+
+        if($this->device == 'mobile')
+        {
+            echo '<script>';
+            echo "$().ready(function() { ";
+            echo "$('#powerby').parent().find('.copyright').append($('#execIcon')).append($('#execInfoBar'));";
+            echo "$('#execIcon').click(function(){ $('#execInfoBar').toggle();});";
+            echo "}); ";
+            echo '</script>';
+            $this->lang->execInfo = str_replace('<br>', '', $this->lang->execInfo);
+            printf($this->lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
+        }
+
+        echo "</body></html>";
     }
 
     /**
