@@ -26,6 +26,8 @@
       <div id='powerby'>
         <?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?>
       </div>
+      <?php if($this->config->site->execInfo == 'show'):?>
+      <?php endif;?>
     </div>
   </footer>
 <?php
@@ -54,5 +56,4 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 <?php if(commonModel::isAvailable('score') and (!isset($this->config->site->resetMaxLoginDate) or $this->config->site->resetMaxLoginDate < date('Y-m-d'))):?>
 <script>$.get(createLink('score', 'resetMaxLogin'));</script>
 <?php endif;?>
-</body>
-</html>
+<?php if($this->config->site->execInfo != 'show') echo " </body> </html>";?>

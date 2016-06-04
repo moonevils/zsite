@@ -38,5 +38,4 @@ if(isset($pageJS)) js::execute($pageJS);
 ?>
 <div class='hide'><?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 <?php include TPL_ROOT . 'common/log.html.php';?>
-</body>
-</html>
+<?php if($this->config->site->execInfo != 'show') echo " </body> </html>";?>
