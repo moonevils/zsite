@@ -543,6 +543,3 @@ body.body-modal {padding: 20px;}
 .row > .col > .panel, .row > .col .carousel, .row > [class*='col-'] > .panel, .row > [class*='col-'] .carousel, .page-content > .panel, #boards > .panel, .page-side > .panel, .row > [class*='col-'] > .nav, .row > [class*='col-'] > .list-group, .m-blog .card, .row > .col > .list-group {margin-bottom: 14px;}
 
 .blocks .searchbar, .blocks .usermenu, .blocks .site-logo, .blocks .site-name, .blocks .site-slogan  {margin-bottom: 20px}
-
-#execInfoBar{position:fixed; bottom:0px; width:100%;padding:8px; border-radius:0; background:#f1f1f1;}
-#execInfoBar button.close{font-size:18px; opacity: 0.4;  margin-top:2px;}
