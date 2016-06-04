@@ -28,6 +28,7 @@ $lang->ui->deleteLogo      = "Delete logo";
 $lang->ui->others          = "Set others";
 $lang->ui->productView     = "Product view";
 $lang->ui->QRCode          = "QR Code";
+$lang->ui->execInfo        = "Execution information";
 $lang->ui->templateName    = "Template Name";
 $lang->ui->currentTheme    = 'Used template&theme';
 $lang->ui->internalTheme   = 'Internal Theme';
@@ -75,6 +76,9 @@ $lang->ui->productViewList[0] = 'Hide';
 
 $lang->ui->QRCodeList[1] = 'Show'; 
 $lang->ui->QRCodeList[0] = 'Hide'; 
+
+$lang->ui->execInfoOptions['show'] = 'Show'; 
+$lang->ui->execInfoOptions['hide'] = 'Hide';
 
 $lang->ui->logoList['current'] = 'Current theme';
 $lang->ui->logoList['all']     = 'All theme';

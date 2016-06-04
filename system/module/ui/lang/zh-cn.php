@@ -28,6 +28,7 @@ $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->others          = "其他设置";
 $lang->ui->productView     = "产品点击量";
 $lang->ui->QRCode          = "移动二维码";
+$lang->ui->execInfo        = "运行信息";
 $lang->ui->templateName    = "模板";
 $lang->ui->currentTheme    = '当前主题';
 $lang->ui->internalTheme   = '内置主题';
@@ -75,6 +76,9 @@ $lang->ui->productViewList[0] = '不显示';
 
 $lang->ui->QRCodeList[1] = '显示'; 
 $lang->ui->QRCodeList[0] = '不显示'; 
+
+$lang->ui->execInfoOptions['show'] = '显示'; 
+$lang->ui->execInfoOptions['hide'] = '不显示';
 
 $lang->ui->logoList['current'] = '当前主题';
 $lang->ui->logoList['all']     = '所有主题';
