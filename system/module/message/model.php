@@ -277,10 +277,7 @@ class messageModel extends model
             if($message->objectType == 'comment') $message->objectTitle = isset($commentTitles[$message->objectID]) ? $commentTitles[$message->objectID] : '';
         }
 
-        foreach($messages as $message)
-        {
-            if($message->type != 'message') $message->objectViewURL = $this->getObjectLink($message);
-        }
+        foreach($messages as $message) $message->objectViewURL = $this->getObjectLink($message);
 
         return $messages;
     }
@@ -502,6 +499,7 @@ class messageModel extends model
     public function getObjectLink($message)
     {
         if(empty($message)) return '';
+        if($message->type == 'message') return commonModel::createFrontLink('message', 'index');
         $link = '';
         if($message->objectType == 'article')
         {
@@ -610,10 +608,8 @@ class messageModel extends model
             if($message->objectType == 'comment') $message->objectTitle = isset($commentTitles[$message->objectID]) ? $commentTitles[$message->objectID] : '';
         }
 
-        foreach($messages as $message)
-        {
-            if($message->type != 'message') $message->objectViewURL = $this->getObjectLink($message);
-        }
+        foreach($messages as $message) $message->objectViewURL = $this->getObjectLink($message);
+
         return $messages;
     }
 }
