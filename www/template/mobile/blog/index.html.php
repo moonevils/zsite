@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'blog', 'header');?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'header');?>
 <?php if(!empty($category->id)) js::set('pageLayout', $this->block->getLayoutScope('blog_index', $category->id));?>
 <div class='block-region region-top blocks' data-region='blog_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_index', 'top');?></div>
 <hr class='space'>
@@ -82,4 +82,4 @@
 </div>
 
 <div class='block-region region-bottom blocks' data-region='blog_index-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'blog_index', 'bottom');?></div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'blog', 'footer');?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'footer');?>

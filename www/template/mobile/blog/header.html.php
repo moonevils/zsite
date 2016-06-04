@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
 <div class='block-region region-all-top blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
