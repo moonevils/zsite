@@ -641,7 +641,7 @@ class articleModel extends model
         }
 
         $link = commonModel::createFrontLink($module, 'view', $param, $alias, $viewType);
-        if($article->link) $link = $article->link;
+        if(!empty($article->link)) $link = $article->link;
 
         return $link;
     }
