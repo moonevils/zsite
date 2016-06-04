@@ -144,5 +144,3 @@ function getFingerprint()
     })
     return fingerprint;
 }
-
-
