@@ -55,8 +55,8 @@ class productModel extends model
 
         $product->image = new stdclass();
         $product->image->list    = $product->images;
-        $product->image->primary = !empty($product->image->list) ? $product->image->list[0] : '';
-         
+        $product->image->primary = !empty($product->image->list) ? $product->image->list[0] : ''; 
+
         return $product;
     }   
 
