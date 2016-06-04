@@ -63,7 +63,4 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
   if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
 ?>
-<?php if($this->config->site->execInfo != 'show'):?>
-</body>
-</html>
-<?php endif;?>
+<?php if($this->config->site->execInfo != 'show') echo "</body> </html>";?>
