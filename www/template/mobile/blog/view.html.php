@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'blog', 'header');?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'header');?>
 <?php include TPL_ROOT . 'common/files.html.php'; ?>
 <?php js::set('pageLayout', $this->block->getLayoutScope('blog_view', $article->id));?>
 
@@ -88,4 +88,4 @@ $(function()
 });
 </script>
 
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'blog', 'footer');?>
+<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'footer');?>
