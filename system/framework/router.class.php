@@ -831,8 +831,11 @@ class router
      */
     public function setRequestTypeFromDB()
     {
-        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'requestType'")->fetch();
-        $this->config->requestType = $result->value;
+        if($this->config->installed)
+        {
+            $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'requestType'")->fetch();
+            if(!empty($result)) $this->config->requestType = $result->value;
+        }
     }
 
     /**
