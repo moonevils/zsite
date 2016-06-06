@@ -620,8 +620,9 @@ class blockModel extends model
         {
             if($this->config->cache->type != 'close')
             {
-                $key = "block/{$block->type}_{$block->id}";
-                if($withGrid and $block->grid) $key = "block/{$block->type}_{$block->id}_{$block->grid}";
+                $type = zget($block, 'type', '');
+                $key  = "block/{$type}_{$block->id}";
+                if($withGrid and $block->grid) $key = "block/{$type}_{$block->id}_{$block->grid}";
                 if(strpos($key, 'Tree') !== false)
                 {
                     if($this->session->articleCategory) $key .= "_{$this->session->articleCategory}";
