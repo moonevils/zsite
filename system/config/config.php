@@ -59,6 +59,7 @@ $config->site->desc              = '';
 $config->site->theme             = 'default';
 $config->site->lang              = 'zh-cn';
 $config->site->menu              = json_encode(array());
+$config->site->execInfo    = 'show';
 
 $config->company          = new stdclass();
 $config->company->name    = '';
