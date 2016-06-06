@@ -37,7 +37,7 @@
         <?php $vars = "categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->product->id);?></th>
         <th><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->product->name);?></th>
-        <th class='w-p10'><?php $lang->product->category;?></th>
+        <th class='w-p10'><?php echo $lang->product->category;?></th>
         <th class='w-p10'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->product->amount);?></th>
         <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
