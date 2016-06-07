@@ -39,10 +39,15 @@ class site extends control
 
             /* Set global settings. */
             $globalSetting = new stdclass();
-            $globalSetting->lang        = join(',', $this->post->lang);
-            $globalSetting->cn2tw       = join('', $this->post->cn2tw);
-            $globalSetting->defaultLang = $this->post->defaultLang;
-            $globalSetting->requestType = $this->post->requestType;
+            if($this->post->lang)
+            {
+                $globalSetting->lang        = join(',', $this->post->lang);
+                $globalSetting->cn2tw       = join('', $this->post->cn2tw);
+                $globalSetting->defaultLang = $this->post->defaultLang;
+            }
+
+            if($this->post->requestType) $globalSetting->requestType = $this->post->requestType;
+
             $result = $this->loadModel('setting')->setItems('system.common.site', $globalSetting, 'all');
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
