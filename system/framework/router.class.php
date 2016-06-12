@@ -1714,8 +1714,11 @@ class router
         
         /* If debug on, save sql lines. */
         if($this->config->debug) $this->saveSQL();
-        if(RUN_MODE == 'front' and $this->config->site->execInfo == 'show' and !helper::isAjaxRequest()) $this->getExecInfo();
-
+        if(RUN_MODE == 'front' and $this->config->site->execInfo == 'show' and !helper::isAjaxRequest()) 
+        {
+            if($this->viewType == 'html' or $this->viewType == 'mhtml')  
+                $this->getExecInfo();
+        }
         /* If any error occers, save it. */
         if(!function_exists('error_get_last')) return;
         $error = error_get_last();
