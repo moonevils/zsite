@@ -995,6 +995,7 @@ class router
 
         if($this->config->requestType != 'GET' and strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
         if(strpos($value, '?') === false) return trim($value, '/');
+        if(substr($value, 0, 2) == '//') $value = substr($value, 1);
         $value = parse_url($value);
         return trim(zget($value, 'path', ''), '/');
     }
