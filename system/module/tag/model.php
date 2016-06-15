@@ -48,7 +48,6 @@ class tagModel extends model
         /* Replace mark with tags and links. */
         foreach($tags as $id => $tag)
         {
-            $content = str_replace("{tag{$id}}", $tag->tag, $content);
             $content = str_replace("{link{$id}}", html::a($tag->link, $tag->tag, "class='tag-link'"), $content);
         }
         return $content;
@@ -65,25 +64,60 @@ class tagModel extends model
     public function markTag($content, $tag)
     {
         if(strpos($content, $tag->link) !== false) return $content;
+        $pos = $this->findKeyword($content, $tag->tag);
+        if($pos)
+            return substr_replace($content, "{link$tag->id}", $pos, strlen($tag->tag));
+        else
+            return $content; 
+    }
 
-        $pos = strpos($content, $tag->tag);
-        if($pos === false) return $content;
-
-        $preContent  = substr($content, 0, $pos);
-        $startNeddle = '<a'; 
-        $endNeddle   = '</a>'; 
-
-        /* If tag is not in html::a tag mark it with link{tagID}. */
-        if(strpos($preContent, $startNeddle) == false) return substr_replace($content, "{link$tag->id}", $pos, strlen($tag->tag));
-
-        /* If tag is in html::a tag mark it with tag{tagID}. */
-        if((strpos($preContent, $endNeddle) == false ) or (strpos($preContent, $endNeddle) < strpos($preContent, $startNeddle)) ) 
+    /**
+     * Check the string is between html tag
+     *
+     * @param string $content
+     * @param int    $pos
+     * @access public
+     * @return boolean
+     */
+    public function checkInTag($content, $pos)
+    {
+        $inTag = 0;
+        $pos = $pos - 1;
+        while($pos >= 0)
         {
-            $content = substr_replace($content, "{tag$tag->id}", $pos, strlen($tag->tag));
-            return $this->markTag($content, $tag);
+            if($content{$pos} == '>')
+            {
+                $inTag = 1;
+                break;
+            }
+            if($content{$pos} == '<')
+            {
+                $intag = 0;
+                break;
+            }
+            $pos -= 1;
         }
+        return $inTag;
+    }
 
-        return substr_replace($content, "{link$tag->id}", $pos, strlen($tag->tag));
+    /**
+     * Find the position of the keyword in the content
+     * @param string  $content
+     * @param string  $keyword
+     * @access public
+     * @return int|boolean
+     */
+    public function findKeyword($content, $keyword)
+    {
+        $pos = strpos($content, $keyword);
+        while($pos !== false)
+        {
+            if($this->checkInTag($content, $pos))
+                break;
+            $pos = $pos + strlen($keyword);
+            $pos = strpos($content, $keyword, $pos);
+        }
+        return $pos; 
     }
 
     /**
