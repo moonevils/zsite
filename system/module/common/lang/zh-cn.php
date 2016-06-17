@@ -406,8 +406,8 @@ define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
 
 /* Keywords for chanzhi. */
-$lang->k  = '蝉知建站系统，PHP开源免费的企业门户系统; ';
-$lang->k .= '蝉知企业门户，开源免费的企业建站CMS系统; ';
-$lang->k .= '蝉知CMS系统，更好用的企业建站系统; ';
-$lang->k .= '蝉知商城系统，企业营销网站的首选; ';
-$lang->k .= '蝉知企业建站系统，PHP开源免费的CMS系统;';
+$lang->k  = '开源 cms — 首选蝉知建站系统;';
+$lang->k .= '蝉知建站系统，开源免费的CMS系统;';
+$lang->k .= 'cms系统，首选蝉知cms;';
+$lang->k .= '企业建站，就用蝉知cms;';
+$lang->k .= '蝉知企业建站系统，开源免费的php CMS系统';
