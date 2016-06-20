@@ -1717,8 +1717,7 @@ class router
         if($this->config->debug) $this->saveSQL();
         if(RUN_MODE == 'front' and $this->config->site->execInfo == 'show' and !helper::isAjaxRequest()) 
         {
-            if($this->viewType == 'html' or $this->viewType == 'mhtml')  
-                $this->getExecInfo();
+            if($this->viewType == 'html' or $this->viewType == 'mhtml')  $this->getExecInfo();
         }
         /* If any error occers, save it. */
         if(!function_exists('error_get_last')) return;
@@ -1806,6 +1805,7 @@ class router
         $execTime = round($ended - $started, 2);
         $memoryUsage = memory_get_peak_usage(true);
         $memoryUsage = number_format(round($memoryUsage / 1024 / 1024, 2), 2);
+
         echo "<span style='cursor:pointer;' id='execIcon'><i class='icon icon-dashboard'> </i></span>";
         if($this->device == 'desktop')
         {
