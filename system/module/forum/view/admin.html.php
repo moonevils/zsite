@@ -25,13 +25,13 @@
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
         <th><?php echo $lang->thread->title;?></th>
-        <th class='w-70px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
         <th class='w-110px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
         <th class='w-70px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
         <th class='w-150px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
         <?php if($this->config->forum->postReview == 'open'):?>
-        <th class='w-80px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
+        <th class='w-70px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
         <?php endif;?>
         <th class='w-70px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->display);?></th>
         <th class='w-210px'><?php echo $lang->actions;?></th>
