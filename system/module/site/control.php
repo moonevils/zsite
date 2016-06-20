@@ -32,6 +32,7 @@ class site extends control
                 ->remove('uid,lang,cn2tw,defaultLang,requestType')
                 ->get();
 
+            if(strpos($setting->modules, 'shop') !== false  && strpos($setting->modules, 'user') === false) $setting->modules = 'user,' . $setting->modules;
             if($setting->modules == 'initial') unset($setting->modules);
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
