@@ -1,6 +1,6 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include_once '../../common/view/header.modal.html.php';?>
-<?php js::set('emailSending', sprintf($lang->mail->sending, $user->email));?>
+<?php js::set('emailSending', sprintf($lang->mail->sending, $this->app->user->email));?>
 <?php if(isset($pass) and $pass):?>
 <script>
 $(document).ready(function()
