@@ -335,7 +335,7 @@ class bookModel extends model
      */
     public function getPrevAndNext($current)
     {
-        $families = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->fetchGroup('parent', 'id');
+        $families = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->orderBy('`order`')->fetchGroup('parent', 'id');
         $allNodes = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->fetchAll('id');
         $idList = explode(',', $this->getArticleIdList($current->book->id, $families, $allNodes));
         $idListFlip = array_flip($idList);
