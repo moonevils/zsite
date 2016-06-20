@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+    $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
+
     $('#upgradeNotice').hide();
     if($('#upgradeNotice').size())
     {

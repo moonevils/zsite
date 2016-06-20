@@ -8,11 +8,6 @@ $(function()
         group = $(this).parent('li').data('id');
         $.cookie('currentGroup', group, {expires:config.cookieLife, path:config.webRoot});
     })
-
-    $('#positionRoot').click(function()
-    {
-        $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
-    })
 });
 
 /**
