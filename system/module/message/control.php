@@ -183,7 +183,27 @@ class message extends control
 
         $message = $this->message->getByID($messageID);
 
-        $this->view->title      = "<i class='icon-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
+        $title = "<i class='icon-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
+        if($message->type != 'message')
+        {
+            $message->objectTitle   = $this->message->getObjectTitle($message);
+            $message->objectViewURL = $message->type == 'message' ? $this->message->getObjectLink($message) : '';
+
+            if(!empty($message->objectTitle))
+            {
+                $objectViewLink = html::a($message->objectViewURL, $message->objectTitle, "target='_blank'");
+            }
+            else
+            {
+                $objectViewLink = "<span class='alert-error'>{$this->lang->comment->deletedObject}</span>";
+            }
+
+            $commentTo = $message->type == 'reply' ? $this->lang->message->reply : $this->lang->comment->commentTo;
+
+            $title .= "&nbsp; <i class='icon-envelope green icon'></i>" . $message->email . "&nbsp;<span class='gray'>" . $message->date . "</span> &nbsp;" . $commentTo . $objectViewLink;
+        }
+
+        $this->view->title      = $title; 
         $this->view->modalWidth = 600;
         $this->view->message    = $message;
         $this->display();
