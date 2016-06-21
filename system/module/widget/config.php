@@ -35,4 +35,4 @@ $config->widget->moreLinkList->message        = 'message|admin|type=message';
 $config->widget->moreLinkList->chanzhiDynamic = 'http://www.chanzhi.org/dynamic.html';
 $config->widget->moreLinkList->html           = '';
 $config->widget->moreLinkList->submittion     = 'article|admin|type=submittion&tab=user';
-
+$config->widget->moreLinkList->wechatMessage  = 'wechat|message|mode=replied&replied=0';
