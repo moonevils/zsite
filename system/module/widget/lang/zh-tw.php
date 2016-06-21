@@ -49,22 +49,27 @@ $lang->widget->default['3']['title'] = '評論留言';
 $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
-$lang->widget->default['4']['title'] = '最新投稿';
-$lang->widget->default['4']['type']  = 'submittion';
+$lang->widget->default['4']['title'] = '微信留言';
+$lang->widget->default['4']['type']  = 'wechatMessage';
 $lang->widget->default['4']['grid']  = 4;
 
-$lang->widget->default['5']['title'] = '快捷入口';
-$lang->widget->default['5']['type']  = 'commonMenu';
+$lang->widget->default['5']['title'] = '最新投稿';
+$lang->widget->default['5']['type']  = 'submittion';
 $lang->widget->default['5']['grid']  = 4;
 
-$lang->widget->default['6']['title'] = '蟬知動態';
-$lang->widget->default['6']['type']  = 'chanzhiDynamic';
+$lang->widget->default['6']['title'] = '快捷入口';
+$lang->widget->default['6']['type']  = 'commonMenu';
 $lang->widget->default['6']['grid']  = 4;
+
+$lang->widget->default['7']['title'] = '蟬知動態';
+$lang->widget->default['7']['type']  = 'chanzhiDynamic';
+$lang->widget->default['7']['grid']  = 4;
 
 $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = '最新訂單';
 $lang->widget->typeList->latestThread   = '最新帖子';
 $lang->widget->typeList->message        = '評論留言';
+$lang->widget->typeList->wechatMessage  = '微信留言';
 $lang->widget->typeList->submittion     = '最新投稿';
 $lang->widget->typeList->chanzhiDynamic = '蟬知動態';
 $lang->widget->typeList->html           = '自定義';

@@ -25,14 +25,14 @@ include 'loader.php';
 $app = router::createApp('chanzhi', $systemRoot);
 $config = $app->config;
 
+/* Connect to db, load module. */
+$common = $app->loadCommon();
+$config->requestType = $common->loadModel('setting')->getRequestType();
+$common->checkDomain();
+
 /* Check the reqeust is getconfig or not. Check installed or not. */
 if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig());
 if(!isset($config->installed) or !$config->installed) die(header('location: install.php'));
-
-/* Connect to db, load module. */
-$common = $app->loadCommon();
-$common->checkDomain();
-$config->requestType = $common->loadModel('setting')->getRequestType();
 
 /* Check site status. */
 if($app->config->site->status == 'pause')

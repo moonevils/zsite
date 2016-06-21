@@ -128,7 +128,8 @@ $config->ui->selectorOptions['footer']['background'] = array();
 $config->ui->selectorOptions['footer']['background']['backcolor'] = array('type' => 'color', 'default' => '#f7f7f7', 'name' => 'footer-backcolor');
 
 $config->ui->selectorOptions['header']['background'] = array();
-$config->ui->selectorOptions['header']['background']['backcolor']    = array('type' => 'color', 'default' => '#FFF', 'name' => 'header-backcolor');
+$config->ui->selectorOptions['header']['background']['backcolor'] = array('type' => 'color', 'default' => '#FFF', 'name' => 'header-backcolor');
+$config->ui->selectorOptions['header']['background']['height']    = array('type' => 'size', 'default' => '30px', 'name' => 'header-height');
 
 $config->ui->selectorOptions['header']['padding'] = array();
 $config->ui->selectorOptions['header']['padding']['top']    = array('type' => 'size', 'default' => '0', 'name' => 'header-top-padding');

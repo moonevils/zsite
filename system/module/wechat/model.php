@@ -898,4 +898,36 @@ class wechatModel extends model
         }
         return $moduleList;
     }
+
+    /**
+     * Get message list for widget
+     *
+     * @param  int     $limit
+     * @access public
+     * @return object
+     */
+    public function getListForWidget($limit)
+    {
+        $messages = $this->dao->select("*")->from(TABLE_WX_MESSAGE)
+            ->where('type')->ne('reply')
+            ->andWhere('replied')->eq(0)
+            ->orderBy('time_desc')
+            ->limit($limit)
+            ->fetchAll('id');
+        $users = $this->loadModel("user")->getList();
+        $wechatUsers = array();
+        foreach($users as $user)
+        {
+            if(!$user->openID) continue;
+            $wechatUsers[$user->openID] = $user->realname;
+        }
+        foreach($messages as $message)
+        {
+            $content = json_decode($message->content);
+            if(is_object($content)) $message->content = $content;
+            if(isset($wechatUsers[$message->from])) $message->fromUserName = $wechatUsers[$message->from];
+        }
+        return $messages;
+    }
+
 }
