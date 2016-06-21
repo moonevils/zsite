@@ -72,12 +72,9 @@ $lang->widget->default['7']['grid']  = 4;
 $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = '最新订单';
 $lang->widget->typeList->latestThread   = '最新帖子';
-<<<<<<< HEAD
+
 $lang->widget->typeList->message        = '反馈';
-=======
-$lang->widget->typeList->message        = '评论留言';
 $lang->widget->typeList->wechatMessage  = '微信留言';
->>>>>>> 5cbe2927b44ce3cc8f542c536f2dc255b77816b5
 $lang->widget->typeList->submittion     = '最新投稿';
 $lang->widget->typeList->chanzhiDynamic = '蝉知动态';
 $lang->widget->typeList->html           = '自定义';
