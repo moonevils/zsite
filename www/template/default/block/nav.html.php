@@ -1,5 +1,5 @@
 <?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
-<nav id='navbar' class='navbar' data-ve='block' data-id='<?php echo $block->id; ?>'>
+<nav id='navbar' class='navbar'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
       <span class='icon-bar'></span>

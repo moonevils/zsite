@@ -24,6 +24,10 @@ $setting->compatible = zget($setting, 'compatible', 0);
 $setting->nav        = zget($setting, 'nav',       'row');
 $setting->slogan     = zget($setting, 'slogan',    'besideLogo');
 $setting->searchbar  = zget($setting, 'searchbar', 'besideSlogan');
+?>
+
+<div data-ve='block' data-id="<?php echo $block->id;?>">
+<?php
 if($setting->compatible)
 {
     include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default');
@@ -33,5 +37,4 @@ else
     include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout');
 }
 ?>
-
-
+</div>
