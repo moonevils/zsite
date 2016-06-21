@@ -16,7 +16,11 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
-        <tr><td><?php echo html::checkbox('homeMenus', $lang->site->menus, $this->config->menus->home);?></td></tr>
+        <tr><td>
+        <?php
+        if($this->dao->select("id")->from("TABLE_WX_MESSAGE")->fetch()) $this->config->menus->home += ",wechat";
+        echo html::checkbox('homeMenus', $lang->site->menus, $this->config->menus->home);
+        ?></td></tr>
         <tr><td><?php echo html::submitButton();?></td></tr>
       </table>
     </form>

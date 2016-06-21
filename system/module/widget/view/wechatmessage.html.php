@@ -8,7 +8,7 @@ $messages = $this->wechat->getListForWidget($limit);
   <tr>
     <td>
     <?php
-    $href = helper::createLink("wechat", "message", "mode='replied'&replied=0");  
+    $href = helper::createLink("wechat", "reply", "message={$message->id}");  
     echo $message->fromUserName . $lang->colon . html::a($href, $message->content, "data-toggle='modal'");
     ?>
     </td>
