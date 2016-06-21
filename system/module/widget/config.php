@@ -31,7 +31,7 @@ $config->widget->dependence->submittion     = 'submittion';
 $config->widget->moreLinkList = new stdclass();
 $config->widget->moreLinkList->latestOrder    = 'order|admin|';
 $config->widget->moreLinkList->latestThread   = 'forum|admin|';
-$config->widget->moreLinkList->message        = 'message|admin|type=message';
+$config->widget->moreLinkList->message        = '';
 $config->widget->moreLinkList->chanzhiDynamic = 'http://www.chanzhi.org/dynamic.html';
 $config->widget->moreLinkList->html           = '';
 $config->widget->moreLinkList->submittion     = 'article|admin|type=submittion&tab=user';

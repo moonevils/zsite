@@ -19,7 +19,7 @@ $(document).ready(function()
     $('.panel-widget').each(function()
     {
         container = $(this).find('.panel-body');   
-        if(container.data('utl') != '') container.load(container.data('url')); 
+        if(container.data('url') != '') container.load(container.data('url')); 
     })
 });
 

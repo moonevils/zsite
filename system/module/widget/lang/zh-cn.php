@@ -17,6 +17,10 @@ $lang->widget->grid   = '宽度';
 $lang->widget->color  = '颜色';
 $lang->widget->status = '状态';
 
+$lang->widget->message = '留言';
+$lang->widget->comment = '评论';
+$lang->widget->reply   = '回复';
+
 $lang->widget->create    = '创建区块';
 $lang->widget->hidden    = '隐藏';
 $lang->widget->lblWidget = '区块';
@@ -45,7 +49,7 @@ $lang->widget->default['2']['title'] = '最新主题';
 $lang->widget->default['2']['type']  = 'latestThread';
 $lang->widget->default['2']['grid']  = 4;
 
-$lang->widget->default['3']['title'] = '评论留言';
+$lang->widget->default['3']['title'] = '反馈';
 $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
@@ -68,7 +72,8 @@ $lang->widget->default['7']['grid']  = 4;
 $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = '最新订单';
 $lang->widget->typeList->latestThread   = '最新帖子';
-$lang->widget->typeList->message        = '评论留言';
+
+$lang->widget->typeList->message        = '反馈';
 $lang->widget->typeList->wechatMessage  = '微信留言';
 $lang->widget->typeList->submittion     = '最新投稿';
 $lang->widget->typeList->chanzhiDynamic = '蝉知动态';
