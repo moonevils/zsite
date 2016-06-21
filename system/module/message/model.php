@@ -580,7 +580,7 @@ class messageModel extends model
      * @access public
      * @return void
      */
-    public function getListForWidget()
+    public function getListForWidget($limit)
     {
         $admins = $this->dao->select('account')->from(TABLE_USER)->where('admin')->ne('no')->fetchAll('account');
         $messages = $this->dao->select('*')
@@ -588,6 +588,7 @@ class messageModel extends model
             ->where('status')->eq(0)
             ->andWhere('type')->in('comment,message')
             ->andWhere('account')->notIn(array_keys($admins))
+            ->limit($limit)
             ->fetchAll();
 
         /* Get object titles and id. */

@@ -380,7 +380,7 @@ class commonModel extends model
         /* Set current module. */
         $currentGroup = $app->cookie->currentGroup;
         if(!in_array($app->getModuleName() . '_' . $app->getMethodName(), $config->multiEntrances)) $currentGroup = false;
-        if($currentGroup and isset($config->menus->{$currentGroup})) 
+        if($currentGroup and isset($config->menus->{$currentGroup}) and strpos($config->menus->$currentGroup, $currentModule) !== false) 
         {
             $group = $currentGroup;
         }
