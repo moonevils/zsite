@@ -241,6 +241,7 @@ $lang->ui->text          = '文字';
 $lang->ui->column        = '分栏';
 $lang->ui->sideFloat     = '侧边栏布局';
 $lang->ui->sideGrid      = '侧边栏宽度';
+$lang->ui->height        = '高度';
 
 $lang->ui->primaryColor    = '基色';
 $lang->ui->backcolor       = '背景色';
