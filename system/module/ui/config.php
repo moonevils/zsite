@@ -140,9 +140,10 @@ $config->ui->selectorOptions['header']['padding']['right']  = array('type' => 's
 $config->ui->selectorOptions['header']['border']['color'] = array('type' => 'color', 'default' => '#ddd', 'name' => 'header-border-color');
 $config->ui->selectorOptions['header']['border']['radius'] = array('type' => 'size', 'default' => '0', 'name' => 'header-border-radius');
 
-$config->ui->selectorOptions['header']['text']['fontSize']   = array('type' => 'fontSize', 'default' => '16px', 'name' => 'header-text-font-size');
-$config->ui->selectorOptions['header']['text']['color']       = array('type' => 'color', 'default' => '#333', 'name' => 'header-text-color');
-$config->ui->selectorOptions['header']['text']['linkColor']   = array('type' => 'color', 'default' => '#0D3D88', 'name' => 'header-text-link-color');
+$config->ui->selectorOptions['header']['text']['fontSize']     = array('type' => 'fontSize', 'default' => '16px', 'name' => 'header-text-font-size');
+$config->ui->selectorOptions['header']['text']['color']        = array('type' => 'color', 'default' => '#333', 'name' => 'header-text-color');
+$config->ui->selectorOptions['header']['text']['linkColor']    = array('type' => 'color', 'default' => '#0D3D88', 'name' => 'header-text-link-color');
+$config->ui->selectorOptions['header']['text']['linkFontSize'] = array('type' => 'fontSize', 'default' => '16px', 'name' => 'header-text-link-font-size');
 
 /* Default theme setting */
 $config->ui->themes['default']['default'] = $config->ui->selectorOptions;
@@ -255,6 +256,8 @@ $config->ui->themes['default']['wide']['basic']['colorset']['primary']['default'
 $config->ui->themes['default']['wide']['header']['border']['color']['default'] = '#e5e5e5';
 $config->ui->themes['default']['wide']['header']['text']['color']['default'] = '#808080';
 $config->ui->themes['default']['wide']['header']['text']['linkColor']['default'] = '#666666';
+$config->ui->themes['default']['wide']['header']['background']['height']['default'] = '42px';
+
 
 /* Colorful theme setting */
 $config->ui->themes['default']['colorful'] = $config->ui->selectorOptions;
