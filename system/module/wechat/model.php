@@ -909,7 +909,7 @@ class wechatModel extends model
     public function getListForWidget($limit)
     {
         $messages = $this->dao->select("*")->from(TABLE_WX_MESSAGE)
-            ->where('type')->ne('reply')
+            ->where('type')->eq('text')
             ->andWhere('replied')->eq(0)
             ->orderBy('time_desc')
             ->limit($limit)
