@@ -38,7 +38,7 @@
         <?php endif;?>
         <?php $i++; ?>
       <?php endforeach;?><!-- end nav1 -->
-      <?php if(!$setting->compatible && $setting->searchbar == 'insideNav'):?>
+      <?php if(!$setting->compatible && ($setting->bottom == 'navAndsearch' or $setting->middle->right == 'search')):?>
       <li class='nav-item-searchbar'><?php include TPL_ROOT . 'block' . DS . "searchbar.html.php";?></li>
       <?php endif; ?>
     </ul>
