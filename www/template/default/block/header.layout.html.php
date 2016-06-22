@@ -10,17 +10,30 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<header data-searchbar='<?php echo $setting->searchbar ?>' id='header' class='<?php if($setting->nav == 'row') echo 'without-navbar'; ?>'>
-  <div id='headNav' class='<?php if($setting->slogan == 'topLeft') echo 'with-slogan' ?><?php if($setting->searchbar == 'topRight') echo ' with-searchbar' ?>'>
+<header data-searchbar='<?php echo $setting->searchbar ?>' id='header' class='<?php if($setting->bottom) echo 'without-navbar'; ?>'>
+  <?php if($setting->top->left or $setting->top->right):?>
+  <div id='headNav' class='<?php if($setting->top->left == 'slogan') echo 'with-slogan' ?><?php if($setting->top->right and strpos('searchAndLogin,search,loginAndSearch', $setting->top->right) !== false) echo ' with-searchbar' ?>'>
     <div class='row'>
-      <?php if($setting->slogan == 'topLeft'):?>
+      <?php if($setting->top->left == 'slogan'):?>
       <div id='siteSlogan' class='nobr'><span><?php echo $this->config->site->slogan;?></span></div>
+      <?php elseif($setting->custom->topLeft):?>
+      <div id='siteSlogan' class='nobr'><span><?php echo htmlspecialchars_decode($setting->custom->topLeft);?></span></div>
       <?php endif;?>
+      <?php if($setting->top->right == 'loginAndSearch'):?>
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
       <nav id='siteNav'> </nav> 
-      <?php if($setting->searchbar == 'topRight') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
+      <?php elseif($setting->top->right == 'searchAndLogin'):?>
+      <nav id='siteNav'></nav> 
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
+      <?php elseif($setting->top->right == 'login'):?>
+      <nav id='siteNav'> </nav> 
+      <?php elseif($setting->top->right == 'search'):?>
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
+      <?php endif;?>
     </div>
   </div>
-  <div id='headTitle' class='<?php if($setting->nav == 'besideLogo') echo 'with-navbar' ?><?php if($setting->slogan == 'besideLogo') echo ' with-slogan' ?>'>
+  <?php endif;?>
+  <div id='headTitle' class='<?php if($setting->middle->center == 'nav') echo 'with-navbar' ?><?php if($setting->middle->center == 'slogan') echo ' with-slogan' ?>'>
     <div class='row'>
       <div id='siteTitle'>
         <?php if($logo):?>
@@ -28,18 +41,19 @@
         <?php else: ?>
         <div id='siteName' data-ve='logo'><h2><?php echo html::a(helper::createLink('index'), $this->config->site->name);?></h2></div>
         <?php endif;?>
-        <?php if($setting->slogan == 'besideLogo'):?>
+        <?php if($setting->middle->center == 'slogan'):?>
         <div id='siteSlogan' data-ve='slogan'><span><?php echo $this->config->site->slogan;?></span></div>
         <?php endif;?>
       </div>
-      <?php if($setting->nav == 'besideLogo'):?>
+      <?php if($setting->middle->center == 'nav'):?>
       <div id='navbarWrapper'><?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav'); ?></div>
       <?php endif; ?>
-      <?php if($setting->searchbar == 'besideSlogan') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
+      <?php if($setting->middle->right == 'search' and $setting->middle->center != 'nav') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
     </div>
   </div>
 </header>
-<?php if($setting->nav == 'row') include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
+
+<?php if(strpos(strtolower($setting->bottom), 'nav') !== false) include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
 <style>
 #header {padding: 0; margin-bottom: 14px;}
 #headNav {min-height: 30px; line-height: 30px; padding: 0; margin-bottom: 8px;}
@@ -53,7 +67,7 @@
 #headTitle > .row > #searchbar {display: table-cell; vertical-align: middle;}
 
 #headTitle {padding: 0;}
-#siteNav {text-align: right;}
+#siteNav {text-align: right; float: right; display: inline-block !important;}
 @media (max-width: 767px){#siteNav {padding-left: 8px; padding-right: 8px;}}
 
 #searchbar {max-width: initial;}
@@ -63,22 +77,22 @@
 #navbar .navbar-nav {margin: 0;}
 #navbar li.nav-item-searchbar {float: right;}
 #navbar li.nav-item-searchbar #searchbar > form {margin: 4px;}
-<?php if($setting->searchbar == 'topRight'):?>
-#searchbar {padding-left: 10px; width: 260px;}
+<?php if(strpos('search,searchAndLogin,loginAndSearch', $setting->top->right) !== false):?>
+#searchbar {padding-left: 10px; width: 260px; float: right;}
 #searchbar > form {max-width: 100%; float: none; margin: 4px 0}
 @media (max-width: 767px){#headNav > .row > #searchbar {display: none}}
 <?php endif;?>
-<?php if($setting->searchbar == 'insideNav'):?>
+<?php if($setting->bottom == 'navAndSearch' or ($setting->middle->center == 'nav' and $setting->middle->right == 'search')):?>
 #searchbar {min-width: 80px}
 #searchbar .form-control {border-radius: 4px}
 <?php endif;?>
 
-<?php if($setting->slogan == 'topLeft'):?>
+<?php if($setting->top->left == 'slogan' or $setting->custom->topLeft):?>
 #headNav #siteSlogan {padding: 0; font-size: 16px; line-height: 30px; text-align: left;}
 @media (max-width: 767px){#headNav #siteSlogan {padding-left: 8px; padding-right: 8px;}}
 <?php endif;?>
 
-<?php if($setting->nav == 'besideLogo'):?>
+<?php if($setting->middle->center == 'nav'):?>
 #headTitle > .row > #navbarWrapper {display: table-cell; vertical-align: middle; padding-left: 8px;}
 #headTitle > .row > #navbarWrapper > #navbar {margin:0}
 #siteTitle, #siteLogo img {min-width: 150px;}
