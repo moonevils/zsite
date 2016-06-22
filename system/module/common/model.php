@@ -296,7 +296,6 @@ class commonModel extends model
         $module = strtolower($module);
         $method = strtolower($method);
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey|yangconglogin|oauthbind|', $method)) return true;
-        if($module == 'cart' and $method == 'printtopbar') return true;
         if($module == 'mail' and $method == 'sendmailcode') return true;
         if($module == 'guarder' and $method == 'validate') return true;
         if($module == 'misc' and $method == 'ajaxgetfingerprint') return true;
