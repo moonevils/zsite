@@ -9,7 +9,11 @@ $threads = $this->thread->getListForWidget($limit);
     <td>
       <?php echo html::a(commonModel::createFrontLink('thread', 'view', "id={$thread->id}"), $thread->title, "target='_blank'");?>
     </td>
-    <td class='w-40px'><?php echo $thread->author;?></td>
+    <td class='w-40px'>
+    <?php 
+    $realName = $this->loadModel("user")->getPairs();
+    echo $realName[$thread->author];
+    ?></td>
     <?php if($this->config->forum->postReview == 'open'):?>
     <td class='w-50px'><?php echo zget($lang->thread->statusList, $thread->status);?></td>
     <?php else:?>
