@@ -744,6 +744,8 @@ class control
             }
         }
 
+        /* Hide execinfo if output has no powerby btn. */
+        if(strpos($this->output, '<html') === false or strpos($this->output, 'powerby') === false) $this->config->execInfo = 'hide';
         echo $this->output;
     }
 
@@ -757,6 +759,7 @@ class control
      */
     public function send($data, $type = 'json')
     {
+        $this->config->execInfo = 'hide';
         $data = (array) $data;
         if($type == 'json')
         {
