@@ -260,6 +260,7 @@ $lang->ui->borderWidth     = '边框宽度';
 $lang->ui->width           = '宽度';
 $lang->ui->radius          = '圆角';
 $lang->ui->linkColor       = '链接颜色';
+$lang->ui->linkFontSize    = '链接字号';
 $lang->ui->default         = '普通';
 $lang->ui->primary         = '主要';
 $lang->ui->info            = '信息';
