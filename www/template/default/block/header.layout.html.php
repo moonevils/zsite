@@ -16,8 +16,8 @@
     <div class='row'>
       <?php if($setting->top->left == 'slogan'):?>
       <div id='siteSlogan' class='nobr'><span><?php echo $this->config->site->slogan;?></span></div>
-      <?php elseif($setting->custom->topLeft):?>
-      <div id='siteSlogan' class='nobr'><span><?php echo htmlspecialchars_decode($setting->custom->topLeft);?></span></div>
+      <?php elseif($setting->topLeftContent):?>
+      <div id='siteSlogan' class='nobr'><span><?php echo htmlspecialchars_decode($setting->topLeftContent);?></span></div>
       <?php endif;?>
       <?php if($setting->top->right == 'loginAndSearch'):?>
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
@@ -100,7 +100,7 @@
 #searchbar {min-width: 80px}
 <?php endif;?>
 
-<?php if($setting->top->left == 'slogan' or $setting->custom->topLeft):?>
+<?php if($setting->top->left == 'slogan' or $setting->topLeftContent):?>
 #headNav #siteSlogan {padding: 0; font-size: 16px; line-height: 30px; text-align: left;}
 @media (max-width: 767px){#headNav #siteSlogan {padding-left: 8px; padding-right: 8px;}}
 <?php endif;?>
