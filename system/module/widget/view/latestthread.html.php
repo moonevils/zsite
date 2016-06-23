@@ -9,16 +9,16 @@ $threads = $this->thread->getListForWidget($limit);
     <td>
       <?php echo html::a(commonModel::createFrontLink('thread', 'view', "id={$thread->id}"), $thread->title, "target='_blank'");?>
     </td>
-    <td class='w-55px'>
-      <?php 
-        $realName = $this->loadModel("user")->getPairs();
-        echo $realName[$thread->author];
-      ?>
-    </td>
+    <?php 
+      $realName = $this->loadModel("user")->getPairs();
+      echo "<td class='w-55px' title='{$realName[$thread->author]}'>";
+      echo $realName[$thread->author];
+      echo "</td>";
+    ?>
     <?php if($this->config->forum->postReview == 'open'):?>
-    <td class='w-50px'><?php echo zget($lang->thread->statusList, $thread->status);?></td>
+    <td class='w-50px text-center'><?php echo zget($lang->thread->statusList, $thread->status);?></td>
     <?php else:?>
-    <td class='w-50px'><?php echo $thread->replies == 0 ? $lang->thread->unreplied : '';?></td>
+    <td class='w-50px text-center'><?php echo $thread->replies == 0 ? $lang->thread->unreplied : '';?></td>
     <?php endif;?>
     <td class='w-80px'><?php echo formatTime($thread->addedDate, 'm-d H:i');?></td>
   </tr>
