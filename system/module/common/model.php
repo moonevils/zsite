@@ -142,8 +142,7 @@ class commonModel extends model
         /* If no $app->user yet, go to the login pae. */
         if(RUN_MODE == 'admin' and $this->app->user->account == 'guest')
         {
-            $referer = helper::safe64Encode($this->app->getURI(true));
-            die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+            die(js::locate(helper::createLink('user', 'login')));
         }
 
         /* if remote ip not equal loginIP, go to login page. */
@@ -152,8 +151,7 @@ class commonModel extends model
             if(zget($this->config->site, 'checkSessionIP', '0') and (helper::getRemoteIP() != $this->app->user->loginIP))
             {
                 session_destroy();
-                $referer = helper::safe64Encode($this->app->getURI(true));
-                die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+                die(js::locate(helper::createLink('user', 'login')));
             }
         }
 
