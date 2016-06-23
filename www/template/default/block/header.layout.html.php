@@ -71,20 +71,25 @@
 @media (max-width: 767px){#siteNav {padding-left: 8px; padding-right: 8px;}}
 
 #searchbar {max-width: initial;}
-#searchbar > form {max-width: 260px; float: right;}
+#searchbar > form {max-width: 200px; float: right;}
 #navbar .navbar-nav {width: 100%}
 #navbarCollapse {padding: 0;}
 #navbar .navbar-nav {margin: 0;}
 #navbar li.nav-item-searchbar {float: right;}
 #navbar li.nav-item-searchbar #searchbar > form {margin: 4px;}
 <?php if(strpos('search,searchAndLogin,loginAndSearch', $setting->top->right) !== false):?>
-#searchbar {padding-left: 10px; width: 260px; float: right;}
-#searchbar > form {max-width: 100%; float: none; margin: 4px 0}
+<?php if($setting->top->right == 'loginAndSearch'):?>
+#searchbar {padding-left: 10px;}
+<?php endif;?>
+<?php if($setting->top->right == 'searchAndLogin'):?>
+#searchbar {padding-right: 10px;}
+<?php endif;?>
+#searchbar {float: right;}
+#searchbar > form {float: none; margin: 4px 0}
 @media (max-width: 767px){#headNav > .row > #searchbar {display: none}}
 <?php endif;?>
 <?php if($setting->bottom == 'navAndSearch' or ($setting->middle->center == 'nav' and $setting->middle->right == 'search')):?>
 #searchbar {min-width: 80px}
-#searchbar .form-control {border-radius: 4px}
 <?php endif;?>
 
 <?php if($setting->top->left == 'slogan' or $setting->custom->topLeft):?>
