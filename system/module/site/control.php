@@ -467,7 +467,7 @@ class site extends control
     }
 
     /**
-     * Set cache function.
+     * Set home menu.
      * 
      * @access public
      * @return void
