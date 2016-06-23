@@ -1,7 +1,7 @@
 <script>
     function loadCartInfo(twinkle)
     {
-        $('#cartBox').load(createLink('user', 'printTopBar'),
+        $('#siteNav').load(createLink('misc', 'printTopBar'),
             function()
             {
                 if(twinkle) 
