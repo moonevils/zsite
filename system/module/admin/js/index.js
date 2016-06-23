@@ -15,12 +15,6 @@ $(document).ready(function()
         }
         $('#upgradeNotice').remove();
     }
-
-    $('.panel-widget').each(function()
-    {
-        container = $(this).find('.panel-body');   
-        if(container.data('url') != '') container.load(container.data('url')); 
-    })
 });
 
 /**
