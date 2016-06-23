@@ -925,7 +925,7 @@ class wechatModel extends model
 
         foreach($messages as $message)
         {
-            $message->content = is_object(json_decode($message->content)) ? json_decode($message->content : $message->content;
+            $message->content = is_object(json_decode($message->content)) ? json_decode($message->content) : $message->content;
             if(isset($wechatUsers[$message->from])) $message->fromUserName = $wechatUsers[$message->from];
         }
 
