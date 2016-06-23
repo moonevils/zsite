@@ -46,10 +46,7 @@ class tagModel extends model
         foreach($tags as $tag) $content = $this->markTag($content, $tag);
 
         /* Replace mark with tags and links. */
-        foreach($tags as $id => $tag)
-        {
-            $content = str_replace("{link{$id}}", html::a($tag->link, $tag->tag, "class='tag-link'"), $content);
-        }
+        foreach($tags as $id => $tag) $content = str_replace("{link{$id}}", html::a($tag->link, $tag->tag, "class='tag-link'"), $content);
         return $content;
     }
 
@@ -65,10 +62,7 @@ class tagModel extends model
     {
         if(strpos($content, $tag->link) !== false) return $content;
         $pos = $this->findKeyword($content, $tag->tag);
-        if($pos)
-            return substr_replace($content, "{link$tag->id}", $pos, strlen($tag->tag));
-        else
-            return $content; 
+        return $pos ? substr_replace($content, "{link{$tag->id}}", $pos, strlen($tag->tag)) : $content; 
     }
 
     /**
@@ -79,7 +73,7 @@ class tagModel extends model
      * @access public
      * @return boolean
      */
-    public function checkInTag($content, $pos)
+    public function checkInHtmlTag($content, $pos)
     {
         $inTag = 0;
         $pos = $pos - 1;
@@ -112,8 +106,7 @@ class tagModel extends model
         $pos = strpos($content, $keyword);
         while($pos !== false)
         {
-            if($this->checkInTag($content, $pos))
-                break;
+            if($this->checkInHtmlTag($content, $pos)) break;
             $pos = $pos + strlen($keyword);
             $pos = strpos($content, $keyword, $pos);
         }
@@ -129,7 +122,7 @@ class tagModel extends model
      */
     public function save($tags)
     {
-        $tags =  array_unique(explode(',', $tags));
+        $tags = array_unique(explode(',', $tags));
 
         foreach($tags as $tag)
         {
