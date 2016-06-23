@@ -586,7 +586,7 @@ class messageModel extends model
         $messages = $this->dao->select('*')
             ->from(TABLE_MESSAGE)
             ->where('status')->eq(0)
-            ->andWhere('type')->in('comment,message')
+            ->andWhere('type')->in('comment,message,reply')
             ->andWhere('account')->notIn(array_keys($admins))
             ->limit($limit)
             ->fetchAll();
