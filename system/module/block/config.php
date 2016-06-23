@@ -4,7 +4,7 @@ $config->block->allowedTags = $config->allowedTags->admin . '<script><style><obj
 $config->block->editor = new stdclass();
 $config->block->editor->create    = array('id' => 'content', 'tools' => 'full');
 $config->block->editor->edit      = array('id' => 'content', 'tools' => 'full');
-$config->block->editor->blockform = array('id' => "params\[custom\]\[topLeft\]", 'tools' => 'full');
+$config->block->editor->blockform = array('id' => "params\[custom\]\[topLeft\]", 'tools' => 'simple');
 
 $config->block->require = new stdclass();
 $config->block->require->create = 'title, template';
