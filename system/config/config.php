@@ -38,8 +38,9 @@ $config->allowedTags = new stdclass();
 $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr><pre><embed>';           // For front mode.
 $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><table><td><th><tr><tbody><iframe><style><header><nav><meta>'; // For admin users.
 
-/* The method that should not output the exec infomation*/
-$config->ignoreExecInfoPages = array("wechat"=>array("response"));
+/* The methods should not display the exec infomation*/
+$config->ignoreExecInfoPages = array();
+$config->ignoreExecInfoPages[] = 'wechat.response';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
