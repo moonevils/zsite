@@ -7,4 +7,5 @@ $lang->cart->pickProducts   = "去挑選商品";
 $lang->cart->goAccount      = "去結算";
 $lang->cart->goHome         = "返迴首頁";
 
-$lang->cart->topbarInfo     = "<i class='icon icon-shopping-cart text-danger'></i> 購物車<font class='text-danger'>%s</font>";
+$lang->cart->topbarInfo          = "<i class='icon icon-shopping-cart text-danger'></i> 購物車<font class='text-danger'>%s</font>";
+$lang->cart->topbarInfoEmpty     = "<i class='icon icon-shopping-cart text-danger'></i> 購物車";
