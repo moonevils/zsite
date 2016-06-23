@@ -7,4 +7,4 @@ $lang->cart->pickProducts   = "去挑选商品";
 $lang->cart->goAccount      = "去结算";
 $lang->cart->goHome         = "返回首页";
 
-$lang->cart->topbarInfo          = "<i class='icon icon-shopping-cart text-danger'></i> 购物车<font class='text-danger'>%s</font>";
+$lang->cart->topbarInfo     = "<i class='icon icon-shopping-cart text-danger'></i> 购物车 <span class='label label-badge'>%s</span>";
