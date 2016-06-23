@@ -1718,10 +1718,7 @@ class router
         {
             if($this->viewType == 'html' or $this->viewType == 'mhtml')  
             {
-                $checkModule = $this->moduleName;
-                $checkMethod = $this->methodName;
-                $checkArray = $this->config->ignoreExecInfoPages;
-                if(!(key_exists($checkModule, $checkArray) && in_array($checkMethod, $checkArray[$checkModule]))) $this->getExecInfo();
+                if(!in_array($this->moduleName . '.' . $this->methodName, $this->config->ignoreExecInfoPages)) $this->getExecInfo();
             }
         }
         /* If any error occers, save it. */
