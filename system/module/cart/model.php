@@ -199,7 +199,8 @@ class cartModel extends model
         }
 
         $count += count($goodsInCookie);
-        if($this->app->user->account != 'guest' or $count != 0) return html::a(helper::createLink('cart', 'browse'), sprintf($this->lang->cart->topbarInfo, $count));
+        if($this->app->user->account != 'guest' and $count != 0) return html::a(helper::createLink('cart', 'browse'), sprintf($this->lang->cart->topbarInfo, $count));
+        if($this->app->user->account != 'guest' and $count == 0) return html::a(helper::createLink('cart', 'browse'), $this->lang->cart->topbarInfoEmpty);
         return null;
     }
 }
