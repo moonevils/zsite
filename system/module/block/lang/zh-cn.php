@@ -69,7 +69,8 @@ $lang->block->searchbarPosition = '搜索框';
 $lang->block->sloganPosition    = '站点口号';
 
 $lang->block->header = new stdclass();
-$lang->block->header->top    = new stdclass();
+
+$lang->block->header->top = new stdclass();
 $lang->block->header->top->common = '页眉';
 $lang->block->header->top->left   = '左栏';
 $lang->block->header->top->center = '中间';
@@ -88,9 +89,9 @@ $lang->block->header->top->leftList[''] = '';
 $lang->block->header->top->leftList['slogan']   = '站点口号';
 $lang->block->header->top->leftList['custom']   = '自定义';
 
-$lang->block->header->top->rightList['']        = '';
-$lang->block->header->top->rightList['login']   = '登录注册语言';
-$lang->block->header->top->rightList['search']  = '搜索框';
+$lang->block->header->top->rightList['']               = '';
+$lang->block->header->top->rightList['login']          = '登录注册 + 语言切换';
+$lang->block->header->top->rightList['search']         = '搜索框';
 $lang->block->header->top->rightList['loginAndSearch'] = '登录注册语言 + 搜索框';
 $lang->block->header->top->rightList['searchAndLogin'] = '搜索框 + 登录注册语言';
 
@@ -104,8 +105,8 @@ $lang->block->header->middle->centerList['nav']    = '导航';
 $lang->block->header->middle->rightList['']       = '';
 $lang->block->header->middle->rightList['search'] = '搜索框';
 
-$lang->block->header->bottomList['']    = '';
-$lang->block->header->bottomList['nav'] = '导航';
+$lang->block->header->bottomList['']             = '';
+$lang->block->header->bottomList['nav']          = '导航';
 $lang->block->header->bottomList['navAndSearch'] = '导航 + 搜索框';
 
 $lang->block->admin        = "区块管理";
