@@ -7,5 +7,4 @@ $lang->cart->pickProducts   = "Go to pick goods.";
 $lang->cart->goAccount      = "Go Account";
 $lang->cart->goHome         = "Back to home page.";
 
-$lang->cart->topbarInfo          = "<i class='icon icon-shopping-cart text-danger'></i> Cart <font class='text-danger'>%s</font>";
-$lang->cart->topbarInfoEmpty     = "<i class='icon icon-shopping-cart text-danger'></i> Cart";
+$lang->cart->topbarInfo     = "<i class='icon icon-shopping-cart text-danger'></i> Cart <span class='label label-badge'>%s</span>";
