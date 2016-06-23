@@ -12,7 +12,7 @@
 ?>
 <header data-searchbar='<?php echo $setting->searchbar ?>' id='header' class='<?php if($setting->bottom) echo 'without-navbar'; ?>'>
   <?php if($setting->top->left or $setting->top->right):?>
-  <div id='headNav' class='<?php if($setting->top->left == 'slogan') echo 'with-slogan' ?><?php if($setting->top->right and strpos('searchAndLogin,search,loginAndSearch', $setting->top->right) !== false) echo ' with-searchbar' ?>'>
+  <div id='headNav' class='<?php if($setting->top->left == 'slogan') echo 'with-slogan' ?><?php if($setting->top->right and strpos(',searchAndLogin,search,loginAndSearch,', ',' . $setting->top->right . ',') !== false) echo ' with-searchbar' ?>'>
     <div class='row'>
       <?php if($setting->top->left == 'slogan'):?>
       <div id='siteSlogan' class='nobr'><span><?php echo $this->config->site->slogan;?></span></div>
@@ -77,17 +77,25 @@
 #navbar .navbar-nav {margin: 0;}
 #navbar li.nav-item-searchbar {float: right;}
 #navbar li.nav-item-searchbar #searchbar > form {margin: 4px;}
-<?php if(strpos('search,searchAndLogin,loginAndSearch', $setting->top->right) !== false):?>
+
 <?php if($setting->top->right == 'loginAndSearch'):?>
-#searchbar {padding-left: 10px;}
+#searchbar{padding-left: 10px;}
 <?php endif;?>
+
 <?php if($setting->top->right == 'searchAndLogin'):?>
-#searchbar {padding-right: 10px;}
+#searchbar{padding-right: 10px;}
+<?php endif;?>
+
+<?php if(strpos(',search,searchAndLogin,loginAndSearch,', ',' . $setting->top->right . ',') !== false):?>
+<?php if($this->config->template->desktop->theme != 'wide'):?>
+#searchbar .form-control{height: 25px; line-height: 25px;}
+#searchbar .btn{line-height: 10px;}
 <?php endif;?>
 #searchbar {float: right;}
 #searchbar > form {float: none; margin: 4px 0}
 @media (max-width: 767px){#headNav > .row > #searchbar {display: none}}
 <?php endif;?>
+
 <?php if($setting->bottom == 'navAndSearch' or ($setting->middle->center == 'nav' and $setting->middle->right == 'search')):?>
 #searchbar {min-width: 80px}
 <?php endif;?>
