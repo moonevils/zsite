@@ -21,12 +21,12 @@
       <?php endif;?>
       <?php if($setting->top->right == 'loginAndSearch'):?>
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
-      <nav id='siteNav'> </nav> 
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');?>
       <?php elseif($setting->top->right == 'searchAndLogin'):?>
-      <nav id='siteNav'></nav> 
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');?>
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
       <?php elseif($setting->top->right == 'login'):?>
-      <nav id='siteNav'> </nav> 
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');?>
       <?php elseif($setting->top->right == 'search'):?>
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
       <?php endif;?>
@@ -107,9 +107,3 @@
 }
 <?php endif;?>
 </style>
-<script>
-$(document).ready(function()
-{
-    $('#headNav #siteNav').load(createLink('misc', 'printtopbar'));
-});
-</script>
