@@ -904,7 +904,7 @@ class wechatModel extends model
      *
      * @param  int     $limit
      * @access public
-     * @return object
+     * @return array
      */
     public function getListForWidget($limit)
     {
@@ -914,20 +914,21 @@ class wechatModel extends model
             ->orderBy('time_desc')
             ->limit($limit)
             ->fetchAll('id');
-        $users = $this->loadModel("user")->getList();
+
         $wechatUsers = array();
+        $users       = $this->loadModel("user")->getList();
+
         foreach($users as $user)
         {
-            if(!$user->openID) continue;
-            $wechatUsers[$user->openID] = $user->realname;
+            if($user->openID) $wechatUsers[$user->openID] = $user->realname;
         }
+
         foreach($messages as $message)
         {
-            $content = json_decode($message->content);
-            if(is_object($content)) $message->content = $content;
+            $message->content = is_object(json_decode($message->content)) ? json_decode($message->content : $message->content;
             if(isset($wechatUsers[$message->from])) $message->fromUserName = $wechatUsers[$message->from];
         }
+
         return $messages;
     }
-
 }
