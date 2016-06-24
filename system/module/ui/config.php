@@ -143,7 +143,7 @@ $config->ui->selectorOptions['header']['border']['radius'] = array('type' => 'si
 $config->ui->selectorOptions['header']['text']['fontSize']     = array('type' => 'fontSize', 'default' => '16px', 'name' => 'header-text-font-size');
 $config->ui->selectorOptions['header']['text']['color']        = array('type' => 'color', 'default' => '#333', 'name' => 'header-text-color');
 $config->ui->selectorOptions['header']['text']['linkColor']    = array('type' => 'color', 'default' => '#0D3D88', 'name' => 'header-text-link-color');
-$config->ui->selectorOptions['header']['text']['linkFontSize'] = array('type' => 'fontSize', 'default' => '16px', 'name' => 'header-text-link-font-size');
+$config->ui->selectorOptions['header']['text']['linkFontSize'] = array('type' => 'fontSize', 'default' => '13px', 'name' => 'header-text-link-font-size');
 
 /* Default theme setting */
 $config->ui->themes['default']['default'] = $config->ui->selectorOptions;
