@@ -200,7 +200,7 @@ class message extends control
 
             $commentTo = $message->type == 'reply' ? $this->lang->message->reply : $this->lang->comment->commentTo;
 
-            $title .= "&nbsp; <i class='icon-envelope green icon'></i>" . $message->email . "&nbsp;<span class='gray'>" . $message->date . "</span> &nbsp;" . $commentTo . $objectViewLink;
+            $title .= "&nbsp; <i class='icon-envelope green icon'></i>" . $message->email . "&nbsp;<span class='gray'>" . $message->date . "</span> &nbsp;" . $commentTo . "&nbsp" .  $objectViewLink;
         }
 
         $this->view->title      = $title; 
