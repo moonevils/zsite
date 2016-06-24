@@ -206,7 +206,7 @@ class messageModel extends model
         if($message->objectType == 'article') $objectTitle = $this->dao->select('title')->from(TABLE_ARTICLE)->where('id')->eq($message->objectID)->fetch('title');
         if($message->objectType == 'product') $objectTitle = $this->dao->select('name')->from(TABLE_PRODUCT)->where('id')->eq($message->objectID)->fetch('name');
         if($message->objectType == 'book')    $objectTitle = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($message->objectID)->fetch('title');
-        if($message->objectType == 'message' or $message->objectType == 'comment') $objectTitle = $message->from;
+        if($message->objectType == 'message' or $message->objectType == 'comment') $objectTitle = $this->getByID($message->objectID)->from;
         return $objectTitle;
     }
 
@@ -588,6 +588,7 @@ class messageModel extends model
             ->where('status')->eq(0)
             ->andWhere('type')->in('comment,message,reply')
             ->andWhere('account')->notIn(array_keys($admins))
+            ->orderBy('date_desc')
             ->limit($limit)
             ->fetchAll();
 
