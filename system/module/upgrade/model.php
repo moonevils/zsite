@@ -147,6 +147,8 @@ class upgradeModel extends model
                 $this->fixSideFloat();
             case '5_3_1':
                 $this->execSQL($this->getUpgradeFile('5.3.1'));
+            case '5_3_2':
+                $this->fixHeaderBlock();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1964,5 +1966,48 @@ class upgradeModel extends model
             $this->dao->replace(TABLE_CONFIG)->data($setting)->exec();
         }
         return true;
+    }
+
+    /**
+     * Fix header blocks.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function fixHeaderBlock() 
+    {
+        $blocks = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->where('type')->eq('header')->fetchAll();
+        foreach($blocks as $block)
+        {    
+            $data = array();
+            $data['top'] = array();
+            $data['middle'] = array();
+
+            $data['top']['left']      = '';
+            $data['top']['right']     = 'login';
+            $data['middle']['left']   = 'logo';
+            $data['middle']['center'] = '';
+            $data['middle']['right']  = '';
+            $data['bottom']           = '';
+
+            $block->content = json_decode($block->content);
+
+
+            if($block->content->nav == 'besideLogo')         $data['middle']['center'] = 'nav';
+            if($block->content->nav == 'row')                $data['bottom'] = 'nav';
+            if($block->content->slogan == 'besideLogo')      $data['middle']['center'] = 'slogan';
+            if($block->content->slogan == 'topLeft')         $data['top']['left']  = 'slogan';
+            if($block->content->searchbar == 'besideSlogan') $data['middle']['right']  = 'search';
+            if($block->content->searchbar == 'topRight')     $data['top']['right'] = 'loginAndSearch'; 
+            if($block->content->searchbar == 'insideNav')
+            {
+                if($block->content->nav == 'besideLogo') $data['middle']['right'] = 'search';
+                if($block->content->nav == 'row')        $data['bottom']          = 'navAndSearch';
+            }
+
+
+            $this->dao->update(TABLE_BLOCK)->set('content')->eq(helper::jsonEncode($data))->where('id')->eq($block->id)->exec();
+        }
+        return !dao::isError();
     }
 }
