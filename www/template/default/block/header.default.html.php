@@ -13,7 +13,7 @@
 <header id='header' class='compatible clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>'>
   <div id='headNav'>
     <div class='wrapper'>
-      <?php elseif($setting->top->right == 'search'):?>
+      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');?>
     </div>
   </div>
   <div id='headTitle'>
