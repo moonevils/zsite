@@ -1980,7 +1980,7 @@ class upgradeModel extends model
         foreach($blocks as $block)
         {    
             $data = array();
-            $data['top'] = array();
+            $data['top']    = array();
             $data['middle'] = array();
 
             $data['top']['left']      = '';
@@ -1989,22 +1989,21 @@ class upgradeModel extends model
             $data['middle']['center'] = '';
             $data['middle']['right']  = '';
             $data['bottom']           = '';
+            $data['topLeftContent']   = '';
 
             $block->content = json_decode($block->content);
 
-
-            if($block->content->nav == 'besideLogo')         $data['middle']['center'] = 'nav';
-            if($block->content->nav == 'row')                $data['bottom'] = 'nav';
-            if($block->content->slogan == 'besideLogo')      $data['middle']['center'] = 'slogan';
-            if($block->content->slogan == 'topLeft')         $data['top']['left']  = 'slogan';
-            if($block->content->searchbar == 'besideSlogan') $data['middle']['right']  = 'search';
-            if($block->content->searchbar == 'topRight')     $data['top']['right'] = 'loginAndSearch'; 
-            if($block->content->searchbar == 'insideNav')
+            if(zget($block->content, 'nav' == 'besideLogo')         $data['middle']['center'] = 'nav';
+            if(zget($block->content, 'nav' == 'row')                $data['bottom']           = 'nav';
+            if(zget($block->content, 'slogan' == 'besideLogo')      $data['middle']['center'] = 'slogan';
+            if(zget($block->content, 'slogan' == 'topLeft')         $data['top']['left']      = 'slogan';
+            if(zget($block->content, 'searchbar' == 'besideSlogan') $data['middle']['right']  = 'search';
+            if(zget($block->content, 'searchbar' == 'topRight')     $data['top']['right']     = 'loginAndSearch'; 
+            if(zget($block->content, 'searchbar' == 'insideNav')
             {
                 if($block->content->nav == 'besideLogo') $data['middle']['right'] = 'search';
                 if($block->content->nav == 'row')        $data['bottom']          = 'navAndSearch';
             }
-
 
             $this->dao->update(TABLE_BLOCK)->set('content')->eq(helper::jsonEncode($data))->where('id')->eq($block->id)->exec();
         }
