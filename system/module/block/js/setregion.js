@@ -29,9 +29,14 @@ $(document).ready(function()
     $('input[type=checkbox]').change();
 
     /* Fix edit link. */
-    $(document).on('change', 'select', function()
+    $(document).on('change', 'select.block', function()
     {
-        $(this).parents('td').next().find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).val()));
+        $(this).parents('.block-item').find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).find('option:selected').val()));
+    });
+
+    $.setAjaxLoader('.loadInModal', '#ajaxModal', function()
+    {
+        $('#ajaxModal').find('.modal-dialog').css('width', '1100');
     });
 
     $('#blockList').on('click', '.plus, .plus-child, .btn-add-child', function()
