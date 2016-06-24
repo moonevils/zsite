@@ -68,6 +68,47 @@ $lang->block->navPosition       = '導航';
 $lang->block->searchbarPosition = '搜索框';
 $lang->block->sloganPosition    = '站點口號';
 
+$lang->block->header = new stdclass();
+
+$lang->block->header->top = new stdclass();
+$lang->block->header->top->common = '頁眉';
+$lang->block->header->top->left   = '左欄';
+$lang->block->header->top->center = '中間';
+$lang->block->header->top->right  = '右欄';
+
+$lang->block->header->middle = new stdclass();
+$lang->block->header->middle->common = '中間';
+$lang->block->header->middle->left   = '左欄';
+$lang->block->header->middle->center = '中間';
+$lang->block->header->middle->right  = '右欄';
+
+$lang->block->header->bottom = new stdclass();
+$lang->block->header->bottom->common = '下欄';
+
+$lang->block->header->top->leftOptions['']         = '不顯示';
+$lang->block->header->top->leftOptions['slogan']   = '站點口號';
+$lang->block->header->top->leftOptions['custom']   = '自定義';
+
+$lang->block->header->top->rightOptions['']               = '不顯示';
+$lang->block->header->top->rightOptions['login']          = '登錄註冊 + 語言切換';
+$lang->block->header->top->rightOptions['search']         = '搜索框';
+$lang->block->header->top->rightOptions['loginAndSearch'] = '登錄註冊語言 + 搜索框';
+$lang->block->header->top->rightOptions['searchAndLogin'] = '搜索框 + 登錄註冊語言';
+
+$lang->block->header->middle->leftOptions['']     = '不顯示';
+$lang->block->header->middle->leftOptions['logo'] = 'Logo';
+
+$lang->block->header->middle->centerOptions['']       = '不顯示';
+$lang->block->header->middle->centerOptions['slogan'] = '站點口號';
+$lang->block->header->middle->centerOptions['nav']    = '導航';
+
+$lang->block->header->middle->rightOptions['']       = '不顯示';
+$lang->block->header->middle->rightOptions['search'] = '搜索框';
+
+$lang->block->header->bottomOptions['']             = '不顯示';
+$lang->block->header->bottomOptions['nav']          = '導航';
+$lang->block->header->bottomOptions['navAndSearch'] = '導航 + 搜索框';
+
 $lang->block->admin        = "區塊管理";
 $lang->block->pages        = "佈局";
 $lang->block->add          = "添加";
