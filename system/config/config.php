@@ -41,6 +41,7 @@ $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><t
 /* The methods should not display the exec infomation*/
 $config->ignoreExecInfoPages = array();
 $config->ignoreExecInfoPages[] = 'wechat.response';
+$config->ignoreExecInfoPages[] = 'message.reply';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
