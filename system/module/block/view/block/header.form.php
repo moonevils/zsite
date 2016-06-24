@@ -53,6 +53,12 @@
   <td><?php echo html::select('params[bottom]', $lang->block->header->bottomOptions, isset($block->content->bottom) ? $block->content->bottom : 'nav', "class='form-control'");?></td>
   <td></td>
 </tr>
+<tr>
+  <th></th>
+  <td colspan='2'>
+    <div class='checkbox'><label><input style='margin-top: 3px' type='checkbox' id='compatible'  name='params[compatible]' value='1'<?php if(zget($block->content, 'compatible', 0)) echo " checked='checked'" ?>> <?php echo $lang->block->headerLayout->compatibleEnable ?></label></div>
+  </td>
+</tr>
 <script>
 $(function()
 {
