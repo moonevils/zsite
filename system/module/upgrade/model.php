@@ -1992,7 +1992,7 @@ class upgradeModel extends model
             $data['topLeftContent']   = '';
 
             $block->content = json_decode($block->content);
-            $data['compitable'] = zget($block->content, 'compatible', 0);
+            $data['compatible'] = zget($block->content, 'compatible', 0);
 
             if(zget($block->content, 'nav') == 'besideLogo')         $data['middle']['center'] = 'nav';
             if(zget($block->content, 'nav') == 'row')                $data['bottom']           = 'nav';
