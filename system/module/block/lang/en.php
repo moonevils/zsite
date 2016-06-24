@@ -68,6 +68,47 @@ $lang->block->navPosition       = 'navigation';
 $lang->block->searchbarPosition = 'searchbae';
 $lang->block->sloganPosition    = 'slogan';
 
+$lang->block->header = new stdclass();
+
+$lang->block->header->top = new stdclass();
+$lang->block->header->top->common = 'Top of page';
+$lang->block->header->top->left   = 'Left section';
+$lang->block->header->top->center = 'Middle section';
+$lang->block->header->top->right  = 'Right section';
+
+$lang->block->header->middle = new stdclass();
+$lang->block->header->middle->common = 'Middle section';
+$lang->block->header->middle->left   = 'Left section';
+$lang->block->header->middle->center = 'Middle section';
+$lang->block->header->middle->right  = 'Right section';
+
+$lang->block->header->bottom = new stdclass();
+$lang->block->header->bottom->common = 'Down section';
+
+$lang->block->header->top->leftOptions['']         = 'No Dispaly';
+$lang->block->header->top->leftOptions['slogan']   = 'Slogon';
+$lang->block->header->top->leftOptions['custom']   = 'User-defined';
+
+$lang->block->header->top->rightOptions['']               = 'No Display';
+$lang->block->header->top->rightOptions['login']          = ' + Switch Language';
+$lang->block->header->top->rightOptions['search']         = 'Search Bar';
+$lang->block->header->top->rightOptions['loginAndSearch'] = 'LoginLogout + Language + Search Bar';
+$lang->block->header->top->rightOptions['searchAndLogin'] = 'Search Bar + LoginLogout + Language';
+
+$lang->block->header->middle->leftOptions['']     = 'No Display';
+$lang->block->header->middle->leftOptions['logo'] = 'Logo';
+
+$lang->block->header->middle->centerOptions['']       = 'No Display';
+$lang->block->header->middle->centerOptions['slogan'] = 'Slogan';
+$lang->block->header->middle->centerOptions['nav']    = 'Navigator';
+
+$lang->block->header->middle->rightOptions['']       = 'No Display';
+$lang->block->header->middle->rightOptions['search'] = 'Search Bar';
+
+$lang->block->header->bottomOptions['']             = 'No Display';
+$lang->block->header->bottomOptions['nav']          = 'Navigator';
+$lang->block->header->bottomOptions['navAndSearch'] = 'Navigator + Search Bar';
+
 $lang->block->admin        = "Block management";
 $lang->block->pages        = "Layout";
 $lang->block->add          = "Add";

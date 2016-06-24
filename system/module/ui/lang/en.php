@@ -241,6 +241,7 @@ $lang->ui->text          = 'Text';
 $lang->ui->column        = 'Column';
 $lang->ui->sideFloat     = 'Sidebar Layout';
 $lang->ui->sideGrid      = 'Sidebar Width';
+$lang->ui->height        = 'Height';
 
 $lang->ui->primaryColor    = 'Color';
 $lang->ui->backcolor       = 'Background';
@@ -259,6 +260,7 @@ $lang->ui->borderWidth     = 'Border Width';
 $lang->ui->width           = 'width';
 $lang->ui->radius          = 'Radius';
 $lang->ui->linkColor       = 'Link Color';
+$lang->ui->linkFontSize    = 'Link Font Size';
 $lang->ui->default         = 'Default';
 $lang->ui->primary         = 'Primary';
 $lang->ui->info            = 'Info';
