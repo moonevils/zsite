@@ -241,6 +241,7 @@ $lang->ui->text          = '文字';
 $lang->ui->column        = '分欄';
 $lang->ui->sideFloat     = '側邊欄佈局';
 $lang->ui->sideGrid      = '側邊欄寬度';
+$lang->ui->height        = '高度';
 
 $lang->ui->primaryColor    = '基色';
 $lang->ui->backcolor       = '背景色';
@@ -259,6 +260,7 @@ $lang->ui->borderWidth     = '邊框寬度';
 $lang->ui->width           = '寬度';
 $lang->ui->radius          = '圓角';
 $lang->ui->linkColor       = '連結顏色';
+$lang->ui->linkFontSize    = '連結字型大小';
 $lang->ui->default         = '普通';
 $lang->ui->primary         = '主要';
 $lang->ui->info            = '信息';
