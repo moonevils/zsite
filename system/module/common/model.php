@@ -390,7 +390,7 @@ class commonModel extends model
 
         $menus  = explode(',', $config->menus->{$group});
         $string = "<ul class='nav navbar-nav'>\n";
-
+        
         foreach($menus as $menu)
         {
             $extra = zget($config->menuExtra, $menu, '');
@@ -410,7 +410,7 @@ class commonModel extends model
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
             if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
-            if(!commonModel::isAvailable('wechat') && $vars == 'mode=replied&replied=0') continue; 
+            
             if(commonModel::hasPriv($module, $method))
             {
                 $link  = helper::createLink($module, $method, $vars);
