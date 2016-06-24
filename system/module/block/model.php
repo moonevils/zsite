@@ -414,7 +414,7 @@ class blockModel extends model
     public function create($template, $theme)
     {
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
-        if($block->params['top']['left'] != 'custom') $block->params['custom']['topLeft'] = '';
+        if($block->params['top']['left'] != 'custom') $block->params['topLeftContent'] = '';
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc());
@@ -466,7 +466,7 @@ class blockModel extends model
         $block = $this->getByID($this->post->blockID);
 
         $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
-        if($data->params['top']['left'] != 'custom') $data->params['custom']['topLeft'] = '';
+        if($data->params['top']['left'] != 'custom') $data->params['topLeftContent'] = '';
         if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc());

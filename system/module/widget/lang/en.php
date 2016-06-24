@@ -49,21 +49,17 @@ $lang->widget->default['3']['title'] = 'Latest Message';
 $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
-$lang->widget->default['4']['title'] = 'Wechat Message';
-$lang->widget->default['4']['type']  = 'wechatMessage';
+$lang->widget->default['4']['title'] = 'Latest Submittion';
+$lang->widget->default['4']['type']  = 'submittion';
 $lang->widget->default['4']['grid']  = 4;
 
-$lang->widget->default['5']['title'] = 'Latest Submittion';
-$lang->widget->default['5']['type']  = 'submittion';
+$lang->widget->default['5']['title'] = 'Common menu';
+$lang->widget->default['5']['type']  = 'commonMenu';
 $lang->widget->default['5']['grid']  = 4;
 
-$lang->widget->default['6']['title'] = 'Common menu';
-$lang->widget->default['6']['type']  = 'commonMenu';
+$lang->widget->default['6']['title'] = 'Chanzhi Dynamic';
+$lang->widget->default['6']['type']  = 'chanzhiDynamic';
 $lang->widget->default['6']['grid']  = 4;
-
-$lang->widget->default['7']['title'] = 'Chanzhi Dynamic';
-$lang->widget->default['7']['type']  = 'chanzhiDynamic';
-$lang->widget->default['7']['grid']  = 4;
 
 $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = 'Latest Order';
