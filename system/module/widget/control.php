@@ -140,20 +140,4 @@ class widget extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'locate' => helper::createLink('admin')));
     }
-
-    /**
-     * Hide a widget.
-     * 
-     * @param  int    $index 
-     * @param  string $sys 
-     * @param  string $type 
-     * @access public
-     * @return void
-     */
-    public function hide($id)
-    {
-        $this->dao->update(TABLE_WIDGET)->set('hidden')->eq(1)->where('`order`')->eq($id)->andWhere('account')->eq($this->app->user->account)->andWhere('app')->eq($app)->exec();
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
-    }
 }
