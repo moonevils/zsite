@@ -20,7 +20,7 @@ $(document).ready(function()
     initSortable();
 
     /* Set border and title show. */
-    $('input[type=checkbox]').change(function()
+    $(document).on('change', 'input[type=checkbox]', function()
     {
         if($(this).prop('checked')) $(this).next('input[type=hidden]').val(1);
         if(!$(this).prop('checked')) $(this).next('input[type=hidden]').val(0);
