@@ -1992,14 +1992,15 @@ class upgradeModel extends model
             $data['topLeftContent']   = '';
 
             $block->content = json_decode($block->content);
+            $data['compitable'] = zget($block->content, 'compatible', 0);
 
-            if(zget($block->content, 'nav' == 'besideLogo')         $data['middle']['center'] = 'nav';
-            if(zget($block->content, 'nav' == 'row')                $data['bottom']           = 'nav';
-            if(zget($block->content, 'slogan' == 'besideLogo')      $data['middle']['center'] = 'slogan';
-            if(zget($block->content, 'slogan' == 'topLeft')         $data['top']['left']      = 'slogan';
-            if(zget($block->content, 'searchbar' == 'besideSlogan') $data['middle']['right']  = 'search';
-            if(zget($block->content, 'searchbar' == 'topRight')     $data['top']['right']     = 'loginAndSearch'; 
-            if(zget($block->content, 'searchbar' == 'insideNav')
+            if(zget($block->content, 'nav') == 'besideLogo')         $data['middle']['center'] = 'nav';
+            if(zget($block->content, 'nav') == 'row')                $data['bottom']           = 'nav';
+            if(zget($block->content, 'slogan') == 'besideLogo')      $data['middle']['center'] = 'slogan';
+            if(zget($block->content, 'slogan') == 'topLeft')         $data['top']['left']      = 'slogan';
+            if(zget($block->content, 'searchbar') == 'besideSlogan') $data['middle']['right']  = 'search';
+            if(zget($block->content, 'searchbar') == 'topRight')     $data['top']['right']     = 'loginAndSearch'; 
+            if(zget($block->content, 'searchbar') == 'insideNav')
             {
                 if($block->content->nav == 'besideLogo') $data['middle']['right'] = 'search';
                 if($block->content->nav == 'row')        $data['bottom']          = 'navAndSearch';
