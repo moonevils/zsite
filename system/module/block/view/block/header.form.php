@@ -19,18 +19,18 @@
   <td class='w-p45'>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->left;?></span>
-      <?php echo html::select('params[top][left]', $lang->block->header->top->leftList, isset($block->content->top->left) ? $block->content->top->left : '', "class='form-control'");?>
+      <?php echo html::select('params[top][left]', $lang->block->header->top->leftOptions, isset($block->content->top->left) ? $block->content->top->left : '', "class='form-control'");?>
     </div>
   </td>
 </tr>
 <tr class='topLeft hide'>
-  <td><?php echo html::textarea("params[custom][topLeft]", isset($block->content->custom->topLeft) ? $block->content->custom->topLeft : '', "class='form-control'");?></td>
+  <td><?php echo html::textarea("params[topLeftContent]", isset($block->content->topLeftContent) ? $block->content->topLeftContent : '', "class='form-control'");?></td>
 </tr>
 <tr>
   <td>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->right;?></span>
-      <?php echo html::select('params[top][right]', $lang->block->header->top->rightList, isset($block->content->top->right) ? $block->content->top->right : '', "class='form-control'");?>
+      <?php echo html::select('params[top][right]', $lang->block->header->top->rightOptions, isset($block->content->top->right) ? $block->content->top->right : '', "class='form-control'");?>
     </div>
   </td>
   <td></td>
@@ -40,17 +40,17 @@
   <td colsapn='2'>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->left;?></span>
-      <?php echo html::select('params[middle][left]', $lang->block->header->middle->leftList, isset($block->content->middle->left) ? $block->content->middle->left : 'logo', "class='form-control'");?>
+      <?php echo html::select('params[middle][left]', $lang->block->header->middle->leftOptions, isset($block->content->middle->left) ? $block->content->middle->left : 'logo', "class='form-control'");?>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->center;?></span>
-      <?php echo html::select('params[middle][center]', $lang->block->header->middle->centerList, isset($block->content->middle->center) ? $block->content->middle->center : 'logo', "class='form-control'");?>
+      <?php echo html::select('params[middle][center]', $lang->block->header->middle->centerOptions, isset($block->content->middle->center) ? $block->content->middle->center : 'logo', "class='form-control'");?>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->right;?></span>
-      <?php echo html::select('params[middle][right]', $lang->block->header->middle->rightList, isset($block->content->middle->right) ? $block->content->middle->right : 'logo', "class='form-control'");?>
+      <?php echo html::select('params[middle][right]', $lang->block->header->middle->rightOptions, isset($block->content->middle->right) ? $block->content->middle->right : 'logo', "class='form-control'");?>
     </div>
   </td>
 </tr>
 <tr>
   <th><?php echo $lang->block->header->bottom->common;?></th>
-  <td><?php echo html::select('params[bottom]', $lang->block->header->bottomList, isset($block->content->bottom) ? $block->content->bottom : 'nav', "class='form-control'");?></td>
+  <td><?php echo html::select('params[bottom]', $lang->block->header->bottomOptions, isset($block->content->bottom) ? $block->content->bottom : 'nav', "class='form-control'");?></td>
   <td></td>
 </tr>
 <script>

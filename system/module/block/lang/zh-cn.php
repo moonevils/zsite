@@ -85,29 +85,29 @@ $lang->block->header->middle->right  = '右栏';
 $lang->block->header->bottom = new stdclass();
 $lang->block->header->bottom->common = '下栏';
 
-$lang->block->header->top->leftList[''] = '';
-$lang->block->header->top->leftList['slogan']   = '站点口号';
-$lang->block->header->top->leftList['custom']   = '自定义';
+$lang->block->header->top->leftOptions['']         = '不显示';
+$lang->block->header->top->leftOptions['slogan']   = '站点口号';
+$lang->block->header->top->leftOptions['custom']   = '自定义';
 
-$lang->block->header->top->rightList['']               = '';
-$lang->block->header->top->rightList['login']          = '登录注册 + 语言切换';
-$lang->block->header->top->rightList['search']         = '搜索框';
-$lang->block->header->top->rightList['loginAndSearch'] = '登录注册语言 + 搜索框';
-$lang->block->header->top->rightList['searchAndLogin'] = '搜索框 + 登录注册语言';
+$lang->block->header->top->rightOptions['']               = '不显示';
+$lang->block->header->top->rightOptions['login']          = '登录注册 + 语言切换';
+$lang->block->header->top->rightOptions['search']         = '搜索框';
+$lang->block->header->top->rightOptions['loginAndSearch'] = '登录注册语言 + 搜索框';
+$lang->block->header->top->rightOptions['searchAndLogin'] = '搜索框 + 登录注册语言';
 
-$lang->block->header->middle->leftList['']     = '';
-$lang->block->header->middle->leftList['logo'] = 'Logo';
+$lang->block->header->middle->leftOptions['']     = '不显示';
+$lang->block->header->middle->leftOptions['logo'] = 'Logo';
 
-$lang->block->header->middle->centerList['']       = '';
-$lang->block->header->middle->centerList['slogan'] = '站点口号';
-$lang->block->header->middle->centerList['nav']    = '导航';
+$lang->block->header->middle->centerOptions['']       = '不显示';
+$lang->block->header->middle->centerOptions['slogan'] = '站点口号';
+$lang->block->header->middle->centerOptions['nav']    = '导航';
 
-$lang->block->header->middle->rightList['']       = '';
-$lang->block->header->middle->rightList['search'] = '搜索框';
+$lang->block->header->middle->rightOptions['']       = '不显示';
+$lang->block->header->middle->rightOptions['search'] = '搜索框';
 
-$lang->block->header->bottomList['']             = '';
-$lang->block->header->bottomList['nav']          = '导航';
-$lang->block->header->bottomList['navAndSearch'] = '导航 + 搜索框';
+$lang->block->header->bottomOptions['']             = '不显示';
+$lang->block->header->bottomOptions['nav']          = '导航';
+$lang->block->header->bottomOptions['navAndSearch'] = '导航 + 搜索框';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局";
