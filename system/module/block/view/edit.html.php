@@ -10,7 +10,11 @@
  * @link        http://www.chanzhi.org
  */
 ?>
+<?php if(helper::isAjaxRequest()):?>
+<?php include '../../common/view/header.modal.html.php';?>
+<?php else:?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php endif;?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php include '../../common/view/codeeditor.html.php';?>
 <?php
@@ -21,7 +25,11 @@ foreach (explode('|', $lang->colorPlates) as $value)
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
 ?>
+<?php if(helper::isAjaxRequest()):?>
+<form method='post' id='blockForm' class='blockForm ve-form' action="<?php echo inlink('edit', "blockID=$block->id")?>">
+<?php else:?>
 <form method='post' id='editForm' class='blockForm ve-form'>
+<?php endif;?>
   <div class='panel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>
@@ -254,8 +262,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
       </div>
       <div class='form-footer'>
         <?php echo html::submitButton() . html::hidden('blockID', $block->id);?>
-        <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
+        <?php if(helper::isAjaxRequest()):?>
+        <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "class='hidden captchaModal loadInModal'")?>
+        <?php echo html::commonButton($this->lang->goback, 'btn btn-default reloadModal');?>
+        <?php else:?>
+        <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?>
         <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default btn-cancel hidden-ve'");?>
+        <?php endif;?>
       </div>
     </div>
   </div>
@@ -275,4 +288,8 @@ foreach (explode('|', $lang->colorPlates) as $value)
   </ul>
 </div>
 <?php /* hidden navSource end.*/ ?>
+<?php if(helper::isAjaxRequest()):?>
+<?php include '../../common/view/footer.modal.html.php';?>
+<?php else:?>
 <?php include '../../common/view/footer.admin.html.php';?>
+<?php endif;?>

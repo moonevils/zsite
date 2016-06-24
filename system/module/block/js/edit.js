@@ -1,5 +1,18 @@
 $(document).ready(function()
 {
+    /* Set ajaxform for create and edit. */
+    $.setAjaxForm('#blockForm', function(data)
+    {   
+        if(data.result == 'success')
+        {
+            $.reloadAjaxModal(1500);
+        }
+        else if(data.result == 'fail' && data.reason == 'captcha')
+        {
+            $('.captchaModal').click();
+        }   
+    });
+
     $('#type').change(function()
     {
         location.href = createLink('block', 'edit', 'id=' + v.id + '&type=' + $(this).val() );
@@ -11,6 +24,8 @@ $(document).ready(function()
             $('.captchaModal').click();
         }   
     }); 
+
+    $('.reloadModal').click(function(){$.reloadAjaxModal()});
 
     $('[name*=group]').change(function()
     {

@@ -54,7 +54,7 @@ $.extend(
                 {
                     if(response.message && response.message.length) showPopover();
 
-                    if($.isFunction(callback)) return callback(response);
+                    if($.isFunction(callback)) return setTimeout(function(){callback(response)}, 600);
 
                     if($('#responser').length && response.message && response.message.length)
                     {
@@ -218,10 +218,12 @@ $.extend(
             if(!url) url = $(this).data('rel');
             if(!url) return false;
 
+            width = target.find('.modal-dialog').width();
             target.attr('rel', url);
 
             target.load(url, function()
             {
+                target.find('.modal-dialog').css('width', width);
                 if(target.hasClass('modal'))
                 {
                     $.ajustModalPosition('fit', target);

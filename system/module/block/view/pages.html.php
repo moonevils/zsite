@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong class='pull-left'> <?php printf($lang->block->currentLayout, $plans[$plan]);?> </strong> &nbsp;
+    <strong class='pull-left text-danger'> <?php printf($lang->block->currentLayout, $plans[$plan]);?> </strong> &nbsp;
     <ul class='pull-left'>
       <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -37,72 +37,25 @@
       <?php echo html::a(inlink('clonelayout', "plan={$plan}"), $lang->block->cloneLayout, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
-  <div class='panel-body'>
-    <div>
-    <?php foreach($this->lang->block->{$template}->pages as $page => $name):?>
-    <?php if(empty($lang->block->$template->regions->$page)) continue;?>
-    <div style='margin:6px; width:160px;float:left;'>
-      <?php echo html::a('javascript:;', $name, "class='btn-page' data-page='{$page}'  data-toggle='modal' data-target='#region{$page}'");?>
-      <div class="modal fade" id="<?php echo 'region' .  $page;?>" >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title"><?php echo $name;?></h4>
-            </div>
-            <div class="modal-body">
-            <table class='table table-borderless w-p100 table-regions'>
-            <?php
-            $regions = $lang->block->$template->regions->$page;
-            if(isset($regions['side']))
-            {
-                $rows = count($regions) - 1;
-
-                $i = 1;
-                foreach($regions as $region => $regionName)
-                {
-                    if($region != 'side')
-                    {
-                        echo '<tr>';
-                        if($custom['sideFloat'] == 'left' and $i == 1)
-                        {
-                            echo "<td rowspan='$rows' class='text-middle'>";
-                            commonModel::printLink('block', 'setregion', "page={$page}&region=side", $regions['side'], "class='btn-region btn-side' data-toggle='modal'");
-                            echo '</td>';
-                        }
-                        echo "<td class='w-p80'>";
-                        commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn-region' data-toggle='modal'");
-                        echo '</td>';
-                        if($custom['sideFloat'] == 'right' and $i == 1)
-                        {
-                            echo "<td rowspan='$rows' class='text-middle'>";
-                            commonModel::printLink('block', 'setregion', "page={$page}&region=side", $regions['side'], "class='btn-region btn-side' data-toggle='modal'");
-                            echo '</td>';
-                        }
-                        echo '</tr>';
-                    }
-                    $i ++;
-                }
-            }
-            else
-            {
-                foreach($regions as $region => $regionName)
-                {
-                    echo '<tr><td>';
-                    commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn-region' data-toggle='modal'");
-                    echo '</td>';
-                    echo '</tr>';
-                }
-            }
-            ?>
-            </table>
-            </div>
+  <table class='table' style='margin-top:10px;'>
+    <tr>
+      <?php $i = 0;?>
+      <?php foreach($config->block->pageGroupList as $group => $pageList):?>
+      <td class='w-p25'>
+        <?php foreach($pageList as $page):?>
+        <div class='panel page-panel'>
+          <div class='label label-badge'><?php echo ++$i;?></div>
+          <div class='text-center text-important page-name'><?php echo $this->lang->block->{$template}->pages[$page];?></div>
+          <div class='panel-body text-center'>
+            <?php foreach($lang->block->{$template}->regions->{$page} as $region => $regionName):?>
+            <?php commonModel::printLink('block', 'setregion', "page={$page}&region=$region", $regionName, "class='btn-region' data-toggle='modal'");?>
+            <?php endforeach;?>
           </div>
         </div>
-      </div>
-    </div>
-    <?php endforeach;?>
-    </div>
-  </div>
+        <?php endforeach;?>
+      </td>
+      <?php endforeach;?>
+    </tr>
+  </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

@@ -16,6 +16,12 @@ $config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,la
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
 $config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,bottomNav,';
 
+$config->block->pageGroupList = new stdclass();
+$config->block->pageGroupList->system   = array('all', 'index_index', 'company_index', 'page_view');
+$config->block->pageGroupList->content  = array('article_browse', 'article_view', 'blog_index', 'blog_view');
+$config->block->pageGroupList->product  = array('product_browse', 'product_view', 'book_browse', 'book_read');
+$config->block->pageGroupList->feedback = array('forum_index', 'forum_board', 'thread_view', 'message_index');
+
 $config->block->defaultIcons = array();
 $config->block->defaultIcons['about']         = 'icon-group';
 $config->block->defaultIcons['html']          = '';
