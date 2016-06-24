@@ -241,7 +241,7 @@ $lang->ui->text          = 'Text';
 $lang->ui->column        = 'Column';
 $lang->ui->sideFloat     = 'Sidebar Layout';
 $lang->ui->sideGrid      = 'Sidebar Width';
-$lang->ui->height        = 'height';
+$lang->ui->height        = 'Height';
 
 $lang->ui->primaryColor    = 'Color';
 $lang->ui->backcolor       = 'Background';
