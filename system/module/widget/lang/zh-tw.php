@@ -17,6 +17,10 @@ $lang->widget->grid   = '寬度';
 $lang->widget->color  = '顏色';
 $lang->widget->status = '狀態';
 
+$lang->widget->message = '留言';
+$lang->widget->comment = '評論';
+$lang->widget->reply   = '回覆';
+
 $lang->widget->create    = '創建區塊';
 $lang->widget->hidden    = '隱藏';
 $lang->widget->lblWidget = '區塊';
@@ -41,11 +45,11 @@ $lang->widget->default['1']['title'] = '最新訂單';
 $lang->widget->default['1']['type']  = 'latestOrder';
 $lang->widget->default['1']['grid']  = 4;
 
-$lang->widget->default['2']['title'] = '最新貼子';
+$lang->widget->default['2']['title'] = '最新帖子';
 $lang->widget->default['2']['type']  = 'latestThread';
 $lang->widget->default['2']['grid']  = 4;
 
-$lang->widget->default['3']['title'] = '評論留言';
+$lang->widget->default['3']['title'] = '反饋';
 $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
@@ -64,7 +68,7 @@ $lang->widget->default['6']['grid']  = 4;
 $lang->widget->typeList = new stdclass();
 $lang->widget->typeList->latestOrder    = '最新訂單';
 $lang->widget->typeList->latestThread   = '最新帖子';
-$lang->widget->typeList->message        = '評論留言';
+$lang->widget->typeList->message        = '反饋';
 $lang->widget->typeList->wechatMessage  = '微信留言';
 $lang->widget->typeList->submittion     = '最新投稿';
 $lang->widget->typeList->chanzhiDynamic = '蟬知動態';

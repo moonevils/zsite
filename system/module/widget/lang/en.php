@@ -17,6 +17,10 @@ $lang->widget->grid   = 'Width';
 $lang->widget->color  = 'Color';
 $lang->widget->status = 'Status';
 
+$lang->widget->message = "message"
+$lang->widget->comment = "comment"
+$lang->widget->reply   = "reply"
+
 $lang->widget->create    = 'Create Block';
 $lang->widget->hidden    = 'Hide';
 $lang->widget->lblWidget = 'block';
