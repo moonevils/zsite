@@ -1,6 +1,6 @@
 <?php
 $config->menus = new stdclass();
-$config->menus->home    = 'admin,order,message,comment,reply,thread,forumreply';
+$config->menus->home    = 'admin,order,message,comment,reply,thread,forumreply,wechat';
 $config->menus->content = 'article,page,blog,book,submittion';
 $config->menus->shop    = 'order,product,orderSetting';
 $config->menus->user    = 'user,message,comment,reply,forum,wechat,submittion';
