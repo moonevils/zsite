@@ -156,6 +156,11 @@ $lang->block->categoryList['article'] = '文章';
 $lang->block->categoryList['product'] = '產品';
 $lang->block->categoryList['system']  = '系統';
 
+$lang->block->pageGroupList['system']   = '系統';
+$lang->block->pageGroupList['content']  = '內容';
+$lang->block->pageGroupList['product']  = '產品';
+$lang->block->pageGroupList['feedback'] = '反饋';
+
 $lang->block->imageSizeList['large']  = '大圖';
 $lang->block->imageSizeList['middle'] = '中圖';
 $lang->block->imageSizeList['small']  = '小圖';

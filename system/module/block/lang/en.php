@@ -156,6 +156,11 @@ $lang->block->categoryList['article'] = 'Article';
 $lang->block->categoryList['product'] = 'Product';
 $lang->block->categoryList['system']  = 'System';
 
+$lang->block->pageGroupList['system']   = 'System';
+$lang->block->pageGroupList['content']  = 'Content';
+$lang->block->pageGroupList['product']  = 'Product';
+$lang->block->pageGroupList['feedback'] = 'Feedback';
+
 $lang->block->imageSizeList['large']  = 'large size';
 $lang->block->imageSizeList['middle'] = 'middle size';
 $lang->block->imageSizeList['small']  = 'small size';
