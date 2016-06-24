@@ -30,7 +30,7 @@
   <td>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->right;?></span>
-      <?php echo html::select('params[top][right]', $lang->block->header->top->rightOptions, isset($block->content->top->right) ? $block->content->top->right : '', "class='form-control'");?>
+      <?php echo html::select('params[top][right]', $lang->block->header->top->rightOptions, isset($block->content->top->right) ? $block->content->top->right : 'login', "class='form-control'");?>
     </div>
   </td>
   <td></td>
@@ -42,9 +42,9 @@
       <span class='input-group-addon'><?php echo $lang->block->header->middle->left;?></span>
       <?php echo html::select('params[middle][left]', $lang->block->header->middle->leftOptions, isset($block->content->middle->left) ? $block->content->middle->left : 'logo', "class='form-control'");?>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->center;?></span>
-      <?php echo html::select('params[middle][center]', $lang->block->header->middle->centerOptions, isset($block->content->middle->center) ? $block->content->middle->center : 'logo', "class='form-control'");?>
+      <?php echo html::select('params[middle][center]', $lang->block->header->middle->centerOptions, isset($block->content->middle->center) ? $block->content->middle->center : 'slogan', "class='form-control'");?>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->right;?></span>
-      <?php echo html::select('params[middle][right]', $lang->block->header->middle->rightOptions, isset($block->content->middle->right) ? $block->content->middle->right : 'logo', "class='form-control'");?>
+      <?php echo html::select('params[middle][right]', $lang->block->header->middle->rightOptions, isset($block->content->middle->right) ? $block->content->middle->right : 'search', "class='form-control'");?>
     </div>
   </td>
 </tr>
