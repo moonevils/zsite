@@ -14,7 +14,7 @@
 
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
-<tr>
+<tr class='top'>
   <th rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
     <div class='input-group'>
@@ -23,10 +23,10 @@
     </div>
   </td>
 </tr>
-<tr class='topLeft hide'>
+<tr class='top topLeft hide'>
   <td><?php echo html::textarea("params[topLeftContent]", isset($block->content->topLeftContent) ? $block->content->topLeftContent : '', "class='form-control'");?></td>
 </tr>
-<tr>
+<tr class='top'>
   <td>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->right;?></span>
@@ -35,7 +35,7 @@
   </td>
   <td></td>
 </tr>
-<tr>
+<tr class='middle'>
   <th><?php echo $lang->block->header->middle->common;?></th>
   <td colsapn='2'>
     <div class='input-group'>
@@ -48,7 +48,7 @@
     </div>
   </td>
 </tr>
-<tr>
+<tr class='bottom'>
   <th><?php echo $lang->block->header->bottom->common;?></th>
   <td><?php echo html::select('params[bottom]', $lang->block->header->bottomOptions, isset($block->content->bottom) ? $block->content->bottom : 'nav', "class='form-control'");?></td>
   <td></td>
@@ -62,6 +62,12 @@
 <script>
 $(function()
 {
+    $('#compatible').change(function()
+    {
+        $('tr.top, tr.middle, tr.bottom').toggle(!$(this).is(':checked'));
+        $("[name*=params][name*=top][name*=left]").change();
+    }).change();
+
     $("[name*=params][name*=top][name*=left]").change(function()
     {
         if($(this).val() == 'custom')
