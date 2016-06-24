@@ -390,7 +390,7 @@ class commonModel extends model
 
         $menus  = explode(',', $config->menus->{$group});
         $string = "<ul class='nav navbar-nav'>\n";
-        
+
         foreach($menus as $menu)
         {
             $extra = zget($config->menuExtra, $menu, '');
@@ -410,7 +410,8 @@ class commonModel extends model
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
             if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
-            
+            $hasPublic = $app->loadClass('dao')->select('count(*) as count')->from(TABLE_WX_PUBLIC)->fetch('count');
+            if($menu == 'wechat' and !$hasPublic) continue;
             if(commonModel::hasPriv($module, $method))
             {
                 $link  = helper::createLink($module, $method, $vars);
