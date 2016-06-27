@@ -15,7 +15,7 @@ if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::
 $webRoot        = $config->webRoot;
 $jsRoot         = $webRoot . "js/";
 $themeRoot      = $webRoot . "theme/default/";
-$sysURL         = $common->getSysURL();
+$sysURL         = rtrim($common->getSysURL(), '/') . '/';
 $thisModuleName = $this->app->getModuleName();
 $thisMethodName = $this->app->getMethodName();
 $template       = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
@@ -35,10 +35,10 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-Control" content="no-transform" />
   <?php if(isset($mobileURL)):?>
-  <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . ltrim($mobileURL, '/');?>">
   <?php endif;?>
   <?php if(isset($sourceURL)):?>
-  <link rel="canonical" href="<?php echo $sysURL . $sourceURL;?>" >
+  <link rel="canonical" href="<?php echo $sysURL . ltrim($sourceURL, '/');?>" >
   <?php endif;?>
   <?php
   if(!isset($title))    $title    = '';
