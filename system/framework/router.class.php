@@ -1322,7 +1322,7 @@ class router
         {
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
-                $key = 'page' . DS . $this->device . DS . md5($this->URI);
+                $key = 'page' . DS . $this->device . DS . md5($_SERVER['REQUEST_URI']);
                 $cache = $this->cache->get($key);
                 if($cache) die($cache);
             }
