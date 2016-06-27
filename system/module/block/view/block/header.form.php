@@ -14,7 +14,7 @@
 
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
-<tr>
+<tr class='top'>
   <th rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
     <div class='input-group'>
@@ -23,39 +23,51 @@
     </div>
   </td>
 </tr>
-<tr class='topLeft hide'>
+<tr class='top topLeft hide'>
   <td><?php echo html::textarea("params[topLeftContent]", isset($block->content->topLeftContent) ? $block->content->topLeftContent : '', "class='form-control'");?></td>
 </tr>
-<tr>
+<tr class='top'>
   <td>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->right;?></span>
-      <?php echo html::select('params[top][right]', $lang->block->header->top->rightOptions, isset($block->content->top->right) ? $block->content->top->right : '', "class='form-control'");?>
+      <?php echo html::select('params[top][right]', $lang->block->header->top->rightOptions, isset($block->content->top->right) ? $block->content->top->right : 'login', "class='form-control'");?>
     </div>
   </td>
   <td></td>
 </tr>
-<tr>
+<tr class='middle'>
   <th><?php echo $lang->block->header->middle->common;?></th>
   <td colsapn='2'>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->left;?></span>
       <?php echo html::select('params[middle][left]', $lang->block->header->middle->leftOptions, isset($block->content->middle->left) ? $block->content->middle->left : 'logo', "class='form-control'");?>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->center;?></span>
-      <?php echo html::select('params[middle][center]', $lang->block->header->middle->centerOptions, isset($block->content->middle->center) ? $block->content->middle->center : 'logo', "class='form-control'");?>
+      <?php echo html::select('params[middle][center]', $lang->block->header->middle->centerOptions, isset($block->content->middle->center) ? $block->content->middle->center : 'slogan', "class='form-control'");?>
       <span class='input-group-addon'><?php echo $lang->block->header->middle->right;?></span>
-      <?php echo html::select('params[middle][right]', $lang->block->header->middle->rightOptions, isset($block->content->middle->right) ? $block->content->middle->right : 'logo', "class='form-control'");?>
+      <?php echo html::select('params[middle][right]', $lang->block->header->middle->rightOptions, isset($block->content->middle->right) ? $block->content->middle->right : 'search', "class='form-control'");?>
     </div>
   </td>
 </tr>
-<tr>
+<tr class='bottom'>
   <th><?php echo $lang->block->header->bottom->common;?></th>
   <td><?php echo html::select('params[bottom]', $lang->block->header->bottomOptions, isset($block->content->bottom) ? $block->content->bottom : 'nav', "class='form-control'");?></td>
   <td></td>
 </tr>
+<tr>
+  <th></th>
+  <td colspan='2'>
+    <div class='checkbox'><label><input style='margin-top: 3px' type='checkbox' id='compatible'  name='params[compatible]' value='1'<?php if(zget($block->content, 'compatible', 0)) echo " checked='checked'" ?>> <?php echo $lang->block->headerLayout->compatibleEnable ?></label></div>
+  </td>
+</tr>
 <script>
 $(function()
 {
+    $('#compatible').change(function()
+    {
+        $('tr.top, tr.middle, tr.bottom').toggle(!$(this).is(':checked'));
+        $("[name*=params][name*=top][name*=left]").change();
+    }).change();
+
     $("[name*=params][name*=top][name*=left]").change(function()
     {
         if($(this).val() == 'custom')
