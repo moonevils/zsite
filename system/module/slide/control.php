@@ -19,7 +19,7 @@ class slide extends control
      */
     public function admin()
     {
-        $groups = $this->slide->getCatagory();
+        $groups = $this->slide->getCategory();
         foreach ($groups as $group)
         {
             $group->slides = $this->slide->getList($group->id);
