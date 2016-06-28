@@ -911,7 +911,7 @@ class wechatModel extends model
         $messages = $this->dao->select('*')->from(TABLE_WX_MESSAGE)
             ->where('type')->eq('text')
             ->andWhere('replied')->eq(0)
-            ->orderBy('time_desc')
+            ->orderBy('id_desc')
             ->limit($limit)
             ->fetchAll('id');
 
