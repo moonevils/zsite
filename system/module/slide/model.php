@@ -259,12 +259,12 @@ class slideModel extends model
     }
 
      /**
-      * Get slide catagory.
+      * Get slide category.
       *
       * @access public 
       * @return string
       */
-     public function getCatagory()
+     public function getCategory()
      {   
           return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('slide')->orderBy('id')->fetchall();
      }
