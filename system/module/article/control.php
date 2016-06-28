@@ -51,7 +51,6 @@ class article extends control
         $articles   = $this->loadModel('file')->processImages($articles, 'article');
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'article');
 
-
         if($category)
         {
             $title    = $category->name;
