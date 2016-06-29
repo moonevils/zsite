@@ -24,17 +24,16 @@ foreach($messages as $message)
   </tr>
   <?php endforeach;?>
 </table>
+<?php if($messageCount) echo html::a(helper::createLink('message', 'admin', "type=message"), $lang->widget->message . "[$messageCount]", "class='panel-action btn-count'");?>
+<?php if($commentCount) echo html::a(helper::createLink('message', 'admin', "type=comment"), $lang->widget->comment . "[$commentCount]", "class='panel-action btn-count'");?>
+<?php if($replyCount)   echo html::a(helper::createLink('message', 'admin', "type=reply"), $lang->widget->reply . "[$replyCount]",       "class='panel-action btn-count'");?>
 <script>
 $(document).ready(function()
 {
     var panel = $('#widget' + <?php echo $widget->order;?>);
     if(panel.find('.panel-actions > .panel-action').length == 0)
     {
-        var count = '';
-        count += "<a class='panel-action' href='/admin.php?m=message&f=admin&type=message'><?php echo $lang->widget->message . '[' . $messageCount . ']';?></a>";
-        count += "<a class='panel-action' href='/admin.php?m=message&f=admin&type=comment'><?php echo $lang->widget->comment . '[' . $commentCount . ']';?></a>";
-        count += "<a class='panel-action' href='/admin.php?m=message&f=admin&type=reply'><?php echo $lang->widget->reply . '[' . $replyCount . ']';?></a>";
-        panel.find('.panel-actions').prepend(count);
+       $('.btn-count').prependTo(panel.find('.panel-actions')).show();
     }
 })
 </script>
