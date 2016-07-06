@@ -18,7 +18,7 @@ include TPL_ROOT . 'common/files.html.php';
 <hr class='space'>
 <?php
 if($pager->pageID == 1) include $this->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'thread');
-include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'reply');
+include $this->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'reply');
 ?>
 <div class='block-region region-bottom blocks' data-region='thread_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'thread_view', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
