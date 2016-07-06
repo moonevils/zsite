@@ -66,34 +66,10 @@ class messageModel extends model
             ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('public')->eq(1)->fi()
             ->andWhere('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
-            ->andWhere("(id in ({$userMessages}) or (status = '1'))")
+            ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere("(id in ({$userMessages}) or (status = '1'))")->fi()
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll();
-    }
-
-    /**
-     * Get all replies of a message for admin.
-     *
-     * @param  object  $message
-     * @access public
-     * @return array
-     */
-    public function getAdminReplies($message)
-    {
-        $replies = $this->getReplies($message);
-
-        if(!empty($replies))
-        {
-            echo "<dl class='alert alert-info'>";
-            foreach($replies as $reply)
-            {
-                printf($this->lang->message->replyItem, $reply->from, $reply->date, $reply->content);
-                commonModel::printLink('message', 'delete', "messageID=$reply->id&type=single&status=$reply->status", $this->lang->delete, "class='deleter'");
-                $this->getAdminReplies($reply);
-            }
-            echo "</dl>";
-        }
     }
 
     /**
@@ -116,7 +92,7 @@ class messageModel extends model
                     echo "<div class='panel-heading reply-heading'>";
                     echo "<i class='icon icon-user'> {$reply->from}</i> ";
                     echo "<i class='text-muted'>" . $reply->date . "</i>";
-                    echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), "<i class='icon icon-reply'> </i>", " data-toggle='modal' data-type='iframe' class='text-info pull-right' id='reply{$reply->id}'");
+                    echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), "<i class='icon icon-reply'> </i>", " data-toggle='modal' data-type='iframe' class='text-info pull-right' id='reply{$reply->id}' data-icon='reply' data-title='{$this->lang->message->reply}'");
                     echo '</div>';
                     echo "<div class='panel-body'>";
                     echo nl2br($reply->content);
