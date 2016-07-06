@@ -323,7 +323,6 @@ class messageModel extends model
             if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
         }
 
-
         if($this->loadModel('guarder')->matchList($message))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
 
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
