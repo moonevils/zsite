@@ -12,7 +12,7 @@
       list($module, $method, $params) = explode('|', $groupSetting['link']);
       $groupClass = $menuGroup == $this->session->currentGroup ? 'active' : '';
       $groupUrl = helper::createLink($module, $method, $params);
-      echo "<li class='{$groupClass}' data-id='{$menuGroup}'><a data-toggle='tooltip' href='{$groupUrl}' title='{$groupSetting['title']}'><i class='icon icon-{$groupSetting['icon']}'></i></a></li>";
+      echo "<li class='{$groupClass}' data-id='{$menuGroup}'><a data-toggle='tooltip' href='{$groupUrl}' title='{$groupSetting['title']}'>{$groupSetting['title']}</a></li>";
   }
   ?>
   </ul>
