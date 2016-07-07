@@ -78,7 +78,7 @@ $(document).ready(function()
         <td><?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->guarder->captcha}");?></td>
         <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->guarder->getEmailCode, "id='mailSender' class='btn btn-success'");?></td>
       </tr>
-      <tr>
+      <tr id='mailResultParent'>
         <th></th>
         <td id='mailResult' class='alert alert-success'></td>
       </tr>
@@ -102,6 +102,7 @@ $(document).ready(function()
   <script>
   $(document).ready(function()
   {
+      $('#mailResultParent').hide();     
       $('#mailSender').click(function()
       {
           $('#mailSender').popover({trigger:'manual', content: v.emailSending, placement:'right'}).popover('show');
@@ -116,6 +117,7 @@ $(document).ready(function()
           {
               if(response.result == 'success')
               {
+                 $('#mailResultParent').show();
                  $('#mailResult').html(response.message);
                  $('#mailSender').hide();
               }
