@@ -609,6 +609,11 @@ class user extends control
      */
     private function setReferer($referer = '')
     {
+        if(RUN_MODE == 'admin') 
+        {
+            $referer = '';
+            return;
+        }
         if(!empty($referer))
         {
             $this->referer = htmlspecialchars((helper::safe64Decode($referer)));
