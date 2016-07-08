@@ -5,7 +5,7 @@
     <div class='panel folder-menu'>
       <?php foreach($lang->ui->folderList as $folder => $name):?>
         <div class='panel-heading'>
-          <strong><?php echo $name;?></strong>
+          <span><?php echo $name;?></span>
           <div class='panel-actions'> 
             <i class='icon icon-chevron-down'> </i> 
           </div>
