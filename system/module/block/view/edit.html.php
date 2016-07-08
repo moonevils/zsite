@@ -33,7 +33,6 @@ foreach (explode('|', $lang->colorPlates) as $value)
   <div class='panel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>
-        <li class='nav-heading'><i class='icon icon-pencil'></i> <?php echo $lang->block->edit ?> [<?php echo $block->title; ?>]</li>
         <li><a href='#contentTab' data-toggle='tab'><?php echo $lang->block->content;?></a></li>
         <?php if(strpos(',htmlcode, phpcode, header', $type) == false or $type == 'html'):?>
         <li><a href='#customTab' data-toggle='tab'><?php echo $lang->block->style;?></a></li>
