@@ -13,7 +13,10 @@ if(!empty($providerConfig[$providerCode]->clientID) or !empty($this->config->sit
             if(empty($providerConfig->clientID)) continue;
             $params = "provider=$providerCode&fingerprint=fingerprintval";
             if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
-            echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon'></i> " . $providerName, "class='btn btn-default btn-oauth btn-lg btn-block btn-{$providerCode}'");
+            if($providerCode == 'qq')
+                echo html::a(inlink('oauthLogin', $params), "<img src='../../../theme/default/default/images/main/qqlogin.png'>", "class='btn btn-default btn-oauth btn-lg btn-block login-qq'");
+            else
+                echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon'></i> " . $providerName, "class='btn btn-default btn-oauth btn-lg btn-block btn-{$providerCode}'");
         }
         ?>
         <?php if(!empty($this->config->site->yangcong)) echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<i class='icon icon-yangcong icon-lg'></i>{$lang->user->yangcongLogin}", "class='btn btn-lg btn-block btn-default btn-yangcong btn-oauth' data-toggle='modal'");?>
