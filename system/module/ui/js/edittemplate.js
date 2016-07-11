@@ -30,10 +30,14 @@ $(document).ready(function()
     $('.panel-folder').each(function()
     {
         $(this).toggle($(this).find('a.active').size() > 0);
+        if($(this).find('a.active').size() > 0)
+          $(this).css("display", "block");
     });
+
     $('.folder-menu').find('.panel-heading').click(function()
     {
-        $(this).next().toggle();
+        $('div[style="display: block;"]').hide(); 
+        $(this).next().show();
     });
 
     var extraHeight = $('#mainNavbar').outerHeight() + $('#menu').outerHeight() + $('#mainPanel > .panel-heading').outerHeight() + $('#mainPanel > .panel-footer').outerHeight() + 80;;
