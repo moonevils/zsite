@@ -39,7 +39,7 @@
         <?php echo html::a('javascript:;', $lang->ui->deviceList->desktop);?>
         <?php else:?>
         <a href='javascript:;' data-toggle='dropdown'>
-          <?php echo $lang->ui->deviceList->{$currentDevice};?> <i class='icon-caret-down'></i>
+          <?php echo "<strong>" . $lang->ui->deviceList->{$currentDevice} . "</strong>";?> <i class='icon-caret-down'></i>
         </a>
         <ul class='dropdown-menu'>
           <?php foreach($lang->ui->deviceList as $device => $name):?>
