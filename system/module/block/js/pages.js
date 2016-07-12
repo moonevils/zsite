@@ -44,7 +44,7 @@ $(document).ready(function()
 
     $(document).on('click', '.loadInModal.edit', function()
     {
-        $('#ajaxModal').load($(this).attr('href'));
+        $('#ajaxModal').load($(this).attr('href'), function(){ $.ajustModalPosition('fit', '#ajaxModal');});
         return false;
     });
 });
