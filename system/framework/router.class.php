@@ -1318,13 +1318,17 @@ class router
         }
 
         /* Call the method. */
-        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
+        if(RUN_MODE == 'front' and $this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
         {
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
                 $key = 'page' . DS . $this->device . DS . md5($_SERVER['REQUEST_URI']);
                 $cache = $this->cache->get($key);
-                if($cache) die($cache);
+                if($cache)
+                {
+                    if($this->config->site->execInfo == 'show') $cache = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $cache);
+                    die($cache);
+                }
             }
         }
 
@@ -1714,13 +1718,7 @@ class router
         if($this->config->cache->type != 'close') $this->clearCache();
         /* If debug on, save sql lines. */
         if($this->config->debug) $this->saveSQL();
-        if(RUN_MODE == 'front' and $this->config->site->execInfo == 'show' and !helper::isAjaxRequest()) 
-        {
-            if($this->viewType == 'html' or $this->viewType == 'mhtml')  
-            {
-                if(!in_array($this->moduleName . '.' . $this->methodName, $this->config->ignoreExecInfoPages)) $this->getExecInfo();
-            }
-        }
+
         /* If any error occers, save it. */
         if(!function_exists('error_get_last')) return;
         $error = error_get_last();
@@ -1789,47 +1787,6 @@ class router
 
         /* Trigger it. */
         trigger_error($log, $exit ? E_USER_ERROR : E_USER_WARNING);
-    }
-
-    /**
-     * Get exec infomation.
-     * 
-     * @access public
-     * @return void
-     */
-    public function getExecInfo()
-    {
-        list($second, $millisecond) = explode(' ', STARTED_TIME);
-        $started = (float) $second + (float) $millisecond;
-        list($second, $millisecond) = explode(' ', microtime());
-        $ended = (float) $second + (float) $millisecond;
-
-        $execTime = round($ended - $started, 2);
-        $memoryUsage = memory_get_peak_usage(true);
-        $memoryUsage = number_format(round($memoryUsage / 1024 / 1024, 2), 2);
-
-        echo "<span style='cursor:pointer;' id='execIcon'><i class='icon icon-dashboard'> </i></span>";
-        if($this->device == 'desktop')
-        {
-            printf($this->lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
-            echo '<script>';
-            echo " $().ready(function() { $('#execIcon').tooltip({title:$('#execInfoBar').html(), html:true, placement:'right'}); $('#powerby').after($('#execIcon')) }); ";
-            echo '</script>';
-        }
-
-        if($this->device == 'mobile')
-        {
-            echo '<script>';
-            echo "$().ready(function() { ";
-            echo "$('#powerby').parent().find('.copyright').append($('#execIcon')).append($('#execInfoBar'));";
-            echo "$('#execIcon').click(function(){ $('#execInfoBar').toggle();});";
-            echo "}); ";
-            echo '</script>';
-            $this->lang->execInfo = str_replace('<br>', '', $this->lang->execInfo);
-            printf($this->lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
-        }
-
-        echo "</body></html>";
     }
 
     /**
