@@ -55,4 +55,5 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 <?php if(commonModel::isAvailable('score') and (!isset($this->config->site->resetMaxLoginDate) or $this->config->site->resetMaxLoginDate < date('Y-m-d'))):?>
 <script>$.get(createLink('score', 'resetMaxLogin'));</script>
 <?php endif;?>
-<?php if($this->config->site->execInfo != 'show') echo " </body> </html>";?>
+</body>
+</html>

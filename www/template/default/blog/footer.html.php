@@ -27,6 +27,7 @@
       <div id='powerby'>
         <?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> " . $config->version); ?>
       </div>
+      <?php if($this->config->site->execInfo == 'show') echo $this->config->execPlaceholder; ?>
     </div>
   </footer>
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='<?php echo $lang->back2Top; ?>'></a>
@@ -38,4 +39,5 @@ if(isset($pageJS)) js::execute($pageJS);
 ?>
 <div class='hide'><?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 <?php include TPL_ROOT . 'common/log.html.php';?>
-<?php if($this->config->site->execInfo != 'show') echo " </body> </html>";?>
+</body>
+</html>
