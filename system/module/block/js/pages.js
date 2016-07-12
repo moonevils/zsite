@@ -41,7 +41,13 @@ $(document).ready(function()
             $(this).parent().parent('.block-item').remove();
         }
     });
-})
+
+    $(document).on('click', '.loadInModal.edit', function()
+    {
+        $('#ajaxModal').load($(this).attr('href'));
+        return false;
+    });
+});
 
 function computeParent()
 {
