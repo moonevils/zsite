@@ -745,7 +745,7 @@ class control
         }
 
         /* Hide execinfo if output has no powerby btn. */
-        if(strpos($this->output, '<html') === false or strpos($this->output, 'powerby') === false) $this->config->execInfo = 'hide';
+        if($this->config->site->execInfo == 'show') $this->output = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $this->output);
         echo $this->output;
     }
 
