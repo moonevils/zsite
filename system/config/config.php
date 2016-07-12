@@ -33,6 +33,8 @@ $config->viewVar     = 't';               // RequestType=GET: the name of the vi
 $config->langVar     = 'l';               // RequestType=GET: the name of the view var.
 $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
+$config->execPlaceholder = 'EXEC_PLACEHOLDER';
+
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
 $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr><pre><embed>';           // For front mode.
