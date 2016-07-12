@@ -34,11 +34,6 @@ $(document).ready(function()
         $(this).parents('.block-item').find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).find('option:selected').val()));
     });
 
-    $.setAjaxLoader('.loadInModal', '#ajaxModal', function()
-    {
-        $('#ajaxModal').find('.modal-dialog').css('width', '1100');
-    });
-
     $('#blockList').on('click', '.plus, .plus-child, .btn-add-child', function()
     {
         setTimeout(hideEmptyChildren, 100);

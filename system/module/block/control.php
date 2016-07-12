@@ -110,11 +110,12 @@ class block extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->title    = $this->lang->block->edit;
-        $this->view->template = $template;
-        $this->view->theme    = $theme;
-        $this->view->block    = $this->block->getByID($blockID);
-        $this->view->type     = $this->get->type ? $this->get->type : $this->view->block->type;
+        $this->view->title      = $this->lang->block->edit;
+        $this->view->template   = $template;
+        $this->view->theme      = $theme;
+        $this->view->modalWidth = 1100;
+        $this->view->block      = $this->block->getByID($blockID);
+        $this->view->type       = $this->get->type ? $this->get->type : $this->view->block->type;
         $this->display();
     }
 
@@ -144,7 +145,7 @@ class block extends control
         if(empty($blocks)) $blocks = array(new stdclass());
 
         $this->view->title        = "<i class='icon-cog'></i> " . $this->lang->block->setPage . ' - '. $this->lang->block->{$template}->pages[$page] . ' - ' . $this->lang->block->$template->regions->{$page}[$region];
-        $this->view->modalWidth   = 900;
+        $this->view->modalWidth   = 1100;
         $this->view->page         = $page;
         $this->view->region       = $region;
         $this->view->object       = $object;
