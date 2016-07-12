@@ -79,6 +79,7 @@ $config->multiEntrances[] = 'group_browse';
 $config->multiEntrances[] = 'group_managepriv'; 
 $config->multiEntrances[] = 'group_managemember'; 
 $config->multiEntrances[] = 'user_adminlog'; 
+$config->multiEntrances[] = 'article_submittion'; 
 
 $config->menuDependence = new stdclass();
 $config->menuDependence->submittion   = 'submittion';
