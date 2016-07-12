@@ -44,14 +44,14 @@ class yangcongapi
         if(!$result)
         {
             $this->log('Error: "' . curl_error($curl) . '" - Code: ' . curl_errno($curl));
-            curl_close($ch);
+            curl_close($curl);
             return false;
         }
         else
         {
             $response = json_decode($result);
             $this->log(var_export($response, true));
-            curl_close($ch);
+            curl_close($curl);
             return $response;
         }
     }
