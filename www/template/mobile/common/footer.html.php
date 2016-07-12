@@ -6,7 +6,8 @@
       $contact   = json_decode($config->company->contact);
       $company   = (empty($contact->site) or $contact->site == $this->server->http_host) ? $config->company->name : html::a('http://' . $contact->site, $config->company->name, "target='_blank'");
       echo "&copy; $company";
-      ?>
+      if($this->config->site->execInfo == 'show') echo $this->config->execPlaceholder;
+    ?>
   </div>
   <div class='icpinfo hide'>
     <?php if(!empty($config->site->icpLink) and !empty($config->site->icpSN)) echo html::a(strpos($config->site->icpLink, 'http://') !== false ? $config->site->icpLink : 'http://' . $config->site->icpLink, $config->site->icpSN, "target='_blank'");?>
@@ -61,6 +62,7 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 <?php
 // execute script of theme
 $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
-  if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
+if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
 ?>
-<?php if($this->config->site->execInfo != 'show') echo "</body> </html>";?>
+</body>
+</html>
