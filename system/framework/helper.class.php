@@ -825,6 +825,47 @@ class helper
         }
         return 'desktop';
     }
+
+    /**
+     * Get exec infomation.
+     * 
+     * @access public
+     * @return string
+     */
+    public static function getExecInfo()
+    {
+        global $lang;
+        $device = helper::getDevice();
+        list($second, $millisecond) = explode(' ', STARTED_TIME);
+        $started = (float) $second + (float) $millisecond;
+        list($second, $millisecond) = explode(' ', microtime());
+        $ended = (float) $second + (float) $millisecond;
+
+        $execTime = round($ended - $started, 2);
+        $memoryUsage = memory_get_peak_usage(true);
+        $memoryUsage = number_format(round($memoryUsage / 1024 / 1024, 2), 2);
+
+        $html = "<span style='cursor:pointer;' id='execIcon'><i class='icon icon-dashboard'> </i></span>";
+        if($device == 'desktop')
+        {
+            $html .= sprintf($lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
+            $html .= '<script>';
+            $html .= "$().ready(function() { $('#execIcon').tooltip({title:$('#execInfoBar').html(), html:true, placement:'right'}); }); ";
+            $html .= '</script>';
+        }
+
+        if($device == 'mobile')
+        {
+            $html .= '<script>';
+            $html .= "$().ready(function() { ";
+            $html .= "$('#execIcon').click(function(){ $('#execInfoBar').toggle();});";
+            $html .= "}); ";
+            $html .= '</script>';
+            $lang->execInfo = str_replace('<br>', '', $lang->execInfo);
+            $html .= sprintf($lang->execInfo, count(dao::$querys), $memoryUsage . 'MB', $execTime);
+        }
+        return $html;
+    }
 }
 
 /**
