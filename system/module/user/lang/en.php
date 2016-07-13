@@ -150,6 +150,7 @@ $lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
 $lang->user->register->common     = 'Register';
+$lang->user->register->instant    = 'Register';
 $lang->user->register->welcome    = 'Welcome to join the membership.';
 $lang->user->register->why        = 'After register, you can enjoy more features and services.';
 $lang->user->register->lblUserInfo= 'User info';
@@ -198,6 +199,7 @@ $lang->user->oauth->typeList['qq']     = 'QQ membership';
 $lang->user->oauth->typeList['wechat'] = 'Wechat membership';
 
 $lang->user->oauth->lblWelcome       = 'OAuth login';
+$lang->user->oauth->lblOtherLogin    = 'Other options : ';
 $lang->user->oauth->lblProfile       = "<h3>Register a new account</h3>";
 $lang->user->oauth->lblBind          = "<h3>Or bind an registered account</h3>";
 $lang->user->oauth->lblUnbind        = "Unbind";
