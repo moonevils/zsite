@@ -2,9 +2,9 @@
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class='panel panel-body' id='reg'>
   <div class='row'>
-    <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
-      <div class='panel panel-pure'>
-        <div class='panel-heading'><strong><?php echo $lang->user->register->welcome;?></strong></h4></div>
+      <div id='login-region'>
+      <div class='panel panel-pure' id='panel-pure'>
+        <div class='panel-heading'><span id="heading-title"><?php echo $lang->user->register->welcome;?></span></div>
         <div class='panel-body'>
           <form method='post' id='ajaxForm' class='form-horizontal' role='form' data-checkfingerprint='1'>
             <div class='form-group'>
@@ -40,9 +40,11 @@
               <div class='col-sm-9'><?php echo html::submitButton($lang->register,'btn btn-primary btn-block') . html::hidden('referer', $referer);?></div>
             </div>
           </form>
+          <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
         </div>
       </div>    
     </div>
+    <div>
   </div>
 </div>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
