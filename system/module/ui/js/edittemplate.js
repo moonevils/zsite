@@ -31,7 +31,9 @@ $(document).ready(function()
     {
         $(this).toggle($(this).find('a.active').size() > 0);
         if($(this).find('a.active').size() > 0)
+        {
           $(this).css("display", "block");
+        }
     });
 
     $('.folder-menu').find('.panel-heading').click(function()
