@@ -150,6 +150,7 @@ $lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
 $lang->user->register->common      = '注册';
+$lang->user->register->instant     = '立即注册';
 $lang->user->register->welcome     = '欢迎注册成为会员';
 $lang->user->register->why         = '欢迎注册成为我们的会员，您可以享受更多的服务。';
 $lang->user->register->lblUserInfo = '用户信息';
@@ -198,6 +199,7 @@ $lang->user->oauth->typeList['qq']     = 'QQ会员';
 $lang->user->oauth->typeList['wechat'] = '微信会员';
 
 $lang->user->oauth->lblWelcome       = '开放登录，快捷方便';
+$lang->user->oauth->lblOtherLogin    = '其他方式 : ';
 $lang->user->oauth->lblProfile       = "注册新用户";
 $lang->user->oauth->lblBind          = "绑定已有用户";
 $lang->user->oauth->lblUnbind        = "解除绑定";
