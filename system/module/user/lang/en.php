@@ -149,13 +149,15 @@ $lang->user->genderList->f = 'Female';
 $lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
-$lang->user->register->common     = 'Register';
-$lang->user->register->instant    = 'Register';
-$lang->user->register->welcome    = 'Welcome to join the membership.';
-$lang->user->register->why        = 'After register, you can enjoy more features and services.';
-$lang->user->register->lblUserInfo= 'User info';
-$lang->user->register->lblAccount = 'The account must be a series of letters and/or numbers';
-$lang->user->register->lblPassword= 'Please set you password, at lest six letters or numbers.';
+$lang->user->register->common      = 'Register';
+$lang->user->register->instant     = 'Register';
+$lang->user->register->welcome     = 'Welcome to join the membership.';
+$lang->user->register->why         = 'After register, you can enjoy more features and services.';
+$lang->user->register->lblUserInfo = 'User info';
+$lang->user->register->lblAccount  = 'The account must be a series of letters and/or numbers';
+$lang->user->register->lblPassword = 'Please set you password, at lest six letters or numbers.';
+$lang->user->register->login       = 'Please Login';
+$lang->user->register->loginHint   = 'If you have account: ';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = 'Numbers and letters, at least six';

@@ -156,6 +156,8 @@ $lang->user->register->why         = '欢迎注册成为我们的会员，您可
 $lang->user->register->lblUserInfo = '用户信息';
 $lang->user->register->lblAccount  = '必须是三位以上的英文字母或数字';
 $lang->user->register->lblPassword = '数字和字母组成，六位以上';
+$lang->user->register->login       = '请登录';
+$lang->user->register->loginHint   = '已有账号: ';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和数字组合，最少六位';
