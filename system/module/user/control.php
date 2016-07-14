@@ -605,15 +605,12 @@ class user extends control
      * 
      * @param  string $referer 
      * @access private
-     * @return void
+     * @return bool
      */
     private function setReferer($referer = '')
     {
-        if(RUN_MODE == 'admin') 
-        {
-            $referer = '';
-            return;
-        }
+        if(RUN_MODE == 'admin') return true;
+
         if(!empty($referer))
         {
             $this->referer = htmlspecialchars((helper::safe64Decode($referer)));
@@ -622,6 +619,7 @@ class user extends control
         {
             $this->referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
         }
+        return true;
     }
 
     /**
