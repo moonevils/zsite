@@ -329,7 +329,7 @@ class commonModel extends model
         $redirectURI = $currentURI;
         if(strpos($redirectURI, $scheme . '://') !== 0) $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
         if(!empty($mainDomain) and $httpHost != $mainDomain) $redirectURI = str_replace($httpHost, $mainDomain, $redirectURI);
-        if($redirectURI != $currentURI) header301($redirectURI);
+        if($redirectURI != $currentURI) helper::header301($redirectURI);
 
         /* Check domain is allowed. */
         $allowedDomains = isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '';
