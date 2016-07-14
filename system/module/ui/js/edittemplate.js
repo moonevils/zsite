@@ -19,8 +19,8 @@ $(document).ready(function()
 
     $('#resetBtn').click(function()
     {
-       $('#content').val($('#rawContent').val());
-       $('#editForm').submit();
+        $('#content').val($('#rawContent').val());
+        $('#editForm').submit();
     });
 
     btn = $('.btn-file.active');
@@ -32,13 +32,13 @@ $(document).ready(function()
         $(this).toggle($(this).find('a.active').size() > 0);
         if($(this).find('a.active').size() > 0)
         {
-          $(this).css("display", "block");
+            $(this).css("display", "block");
         }
     });
 
     $('.folder-menu').find('.panel-heading').click(function()
     {
-        $('div[style="display: block;"]').hide(); 
+        $('.folder-menu .panel-folder').hide(); 
         $(this).next().show();
     });
 
