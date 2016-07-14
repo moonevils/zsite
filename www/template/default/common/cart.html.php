@@ -1,32 +1,33 @@
 <script>
-    function loadCartInfo(twinkle)
-    {
-        $('#siteNav').load(createLink('misc', 'printTopBar'),
-            function()
+function loadCartInfo(twinkle)
+{
+    $('#siteNav').load(createLink('misc', 'printTopBar'),
+        function()
+        {
+            if(twinkle) 
             {
-                if(twinkle) 
-                {
-                    bootbox.dialog(
+                bootbox.dialog(
+                {  
+                    message: v.addToCartSuccess,  
+                    buttons:
                     {  
-                        message: v.addToCartSuccess,  
-                        buttons:
+                        back:
                         {  
-                            back:
-                            {  
-                                label:     v.lang.continueShopping,
-                                className: 'btn-primary',  
-                                callback:  function(){location.reload();}  
-                            },
-                            cart:
-                            {  
-                                label:     v.gotoCart,  
-                                className: 'btn-primary',  
-                                callback:  function(){location.href = createLink('cart', 'browse');}  
-                            }  
+                            label:     v.lang.continueShopping,
+                            className: 'btn-primary',  
+                            callback:  function(){location.reload();}  
+                        },
+                        cart:
+                        {  
+                            label:     v.gotoCart,  
+                            className: 'btn-primary',  
+                            callback:  function(){location.href = createLink('cart', 'browse');}  
                         }  
-                    });
-                }
+                    }  
+                });
             }
-        );
-    }
+        }
+    );
+}
+$(document).ready(function() { loadCartInfo(false); })
 </script>
