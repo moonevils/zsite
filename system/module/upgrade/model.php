@@ -29,7 +29,7 @@ class upgradeModel extends model
      * @access public
      * @return void
      */
-    public ounction execute($fromVersion)
+    public function execute($fromVersion)
     {
         switch($fromVersion)
         {
