@@ -151,13 +151,13 @@ $lang->user->genderList->u = '';
 $lang->user->register  = new stdclass();
 $lang->user->register->common      = 'Register';
 $lang->user->register->instant     = 'Register';
-$lang->user->register->welcome     = 'Welcome to join the membership.';
+$lang->user->register->welcome     = 'Welcome to sign in.';
 $lang->user->register->why         = 'After register, you can enjoy more features and services.';
 $lang->user->register->lblUserInfo = 'User info';
 $lang->user->register->lblAccount  = 'The account must be a series of letters and/or numbers';
 $lang->user->register->lblPassword = 'Please set you password, at lest six letters or numbers.';
-$lang->user->register->login       = 'Please Login';
-$lang->user->register->loginTip    = 'If you have account: ';
+$lang->user->register->login       = 'Sign in';
+$lang->user->register->loginTip    = '';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = 'Numbers and letters, at least six';
@@ -201,7 +201,7 @@ $lang->user->oauth->typeList['qq']     = 'QQ membership';
 $lang->user->oauth->typeList['wechat'] = 'Wechat membership';
 
 $lang->user->oauth->lblWelcome       = 'OAuth login';
-$lang->user->oauth->lblOtherLogin    = 'Other options : ';
+$lang->user->oauth->lblOtherLogin    = 'Sign in with';
 $lang->user->oauth->lblProfile       = "<h3>Register a new account</h3>";
 $lang->user->oauth->lblBind          = "<h3>Or bind an registered account</h3>";
 $lang->user->oauth->lblUnbind        = "Unbind";
