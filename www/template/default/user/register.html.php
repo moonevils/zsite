@@ -8,7 +8,7 @@
           <span id="heading-title"><?php echo $lang->user->register->welcome;?></span>
           <span id="heading-login" class='pull-right'>
             <?php 
-            echo "<span id='heading-loginTip'>" . $lang->user->register->loginTip . "<span>";
+            echo "<span id='heading-loginTip'>" . $lang->user->register->loginTip . " <span>";
             echo html::a(inlink('login'), $lang->user->register->login);
             ?>
           </span>
