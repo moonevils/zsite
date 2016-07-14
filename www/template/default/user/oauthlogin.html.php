@@ -16,11 +16,11 @@ if(!empty($providerConfig['qq']->clientID) or !empty($providerConfig['sina']->cl
         $params = "provider=$providerCode&fingerprint=fingerprintval";
         if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
 
-        echo html::a(inlink('oauthLogin', $params), html::image("/theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"));  
+        echo html::a(inlink('oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"));  
     }
     if(zget($yangcongConfig, 'appID', 0)) 
     {
-        echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<img class='login-image' src='../../../theme/default/default/images/main/yangconglogin.png'>", "data-toggle='modal'");
+        echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)),  html::image(getWebRoot() . "theme/default/default/images/main/yangconglogin.png"), "data-toggle='modal'");
     }
     ?>
   </span>
