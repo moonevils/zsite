@@ -2,9 +2,17 @@
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class='panel panel-body' id='reg'>
   <div class='row'>
-      <div id='login-region'>
+    <div id='login-region'>
       <div class='panel panel-pure' id='panel-pure'>
-        <div class='panel-heading'><span id="heading-title"><?php echo $lang->user->register->welcome;?></span></div>
+        <div class='panel-heading'>
+          <span id="heading-title"><?php echo $lang->user->register->welcome;?></span>
+          <span id="heading-login">
+            <?php 
+                echo "<span id='heading-loginHint'>" . $lang->user->register->loginHint . "<span>";
+                echo html::a(inlink('login'), $lang->user->register->login);
+            ?>
+          </span>
+        </div>
         <form method='post' id='ajaxForm' class='form-horizontal' role='form' data-checkfingerprint='1'>
           <div class='panel-body'>
             <div class='form-group'>
@@ -42,11 +50,11 @@
             <div class='form-group'>
               <div class="col-sm-3"></div>
               <div class='col-sm-9'><?php include TPL_ROOT . 'user/oauthlogin.html.php';?></div>
-          </div>
+            </div>
+          <div>
         </form>
       </div>    
     </div>
-    <div>
-  </div>
-</div>
+  <div>
+<div>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
