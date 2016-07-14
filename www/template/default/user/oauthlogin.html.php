@@ -6,23 +6,24 @@ foreach($lang->user->oauth->providers as $providerCode => $providerName)
 }
 if(!empty($providerConfig['qq']->clientID) or !empty($providerConfig['sina']->clientID) or !empty($yangcongConfig->appID)):
 ?>
-<span class='login-images'>
-<?php
-echo "<span class='login-heading'>" . $lang->user->oauth->lblOtherLogin . "</span>";
-foreach($lang->user->oauth->providers as $providerCode => $providerName) 
-{
-    $providerConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
-    if(empty($providerConfig->clientID)) continue;
-    $params = "provider=$providerCode&fingerprint=fingerprintval";
-    if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
-    echo html::a(inlink('oauthLogin', $params), "<img class='login-image " . $providerCode . "' src='../../../theme/default/default/images/main/" . $providerCode . "login.png'>");  
-}
-if(zget($yangcongConfig, 'appID', 0)) 
-{
-    echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<img class='login-image' src='../../../theme/default/default/images/main/yangconglogin.png'>", "data-toggle='modal'");
-}
-?>
-</span>
+  <span class='span-oauth'>
+    <span class='login-heading'><?php echo  $lang->user->oauth->lblOtherLogin;?></span>
+    <?php
+    foreach($lang->user->oauth->providers as $providerCode => $providerName) 
+    {
+        $providerConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
+        if(empty($providerConfig->clientID)) continue;
+        $params = "provider=$providerCode&fingerprint=fingerprintval";
+        if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
+
+        echo html::a(inlink('oauthLogin', $params), html::image("/theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"));  
+    }
+    if(zget($yangcongConfig, 'appID', 0)) 
+    {
+        echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<img class='login-image' src='../../../theme/default/default/images/main/yangconglogin.png'>", "data-toggle='modal'");
+    }
+    ?>
+  </span>
 <?php endif;?>
 <script>
 $().ready(function()
@@ -34,3 +35,11 @@ $().ready(function()
     })
 });
 </script>
+<style>
+.span-oauth {margin: 0; line-height:30px;}
+.span-oauth a{margin: 0 3px; }
+.span-oauth a > img{height: 24px; width:24px;}
+.span-oauth a > img.qq{height: 18px; width:18px;}
+
+
+</style>
