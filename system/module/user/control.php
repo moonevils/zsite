@@ -95,6 +95,7 @@ class user extends control
      */
     public function login($referer = '')
     {
+        dao::$changedTables[] = TABLE_CONFIG;
         $this->setReferer($referer);
 
         /* Load mail config for reset password. */
@@ -201,6 +202,7 @@ class user extends control
      */
     public function logout($referer = 0)
     {
+        dao::$changedTables[] = TABLE_CONFIG;
         session_destroy();
         $vars = !empty($referer) ? "referer=$referer" : '';
         $this->locate($this->createLink('user', 'login', $vars));
