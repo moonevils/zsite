@@ -6,10 +6,10 @@
       <div class='panel panel-pure' id='panel-pure'>
         <div class='panel-heading'>
           <span id="heading-title"><?php echo $lang->user->register->welcome;?></span>
-          <span id="heading-login">
+          <span id="heading-login" class='pull-right'>
             <?php 
-                echo "<span id='heading-loginTip'>" . $lang->user->register->loginTip . "<span>";
-                echo html::a(inlink('login'), $lang->user->register->login);
+            echo "<span id='heading-loginTip'>" . $lang->user->register->loginTip . "<span>";
+            echo html::a(inlink('login'), $lang->user->register->login);
             ?>
           </span>
         </div>
@@ -51,10 +51,10 @@
               <div class="col-sm-3"></div>
               <div class='col-sm-9'><?php include TPL_ROOT . 'user/oauthlogin.html.php';?></div>
             </div>
-          <div>
+          </div>
         </form>
       </div>    
     </div>
-  <div>
-<div>
+  </div>
+</div>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

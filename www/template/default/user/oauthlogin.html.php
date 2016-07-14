@@ -40,6 +40,4 @@ $().ready(function()
 .span-oauth a{margin: 0 3px; }
 .span-oauth a > img{height: 24px; width:24px;}
 .span-oauth a > img.qq{height: 18px; width:18px;}
-
-
 </style>
