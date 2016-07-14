@@ -157,7 +157,7 @@ $lang->user->register->lblUserInfo = 'User info';
 $lang->user->register->lblAccount  = 'The account must be a series of letters and/or numbers';
 $lang->user->register->lblPassword = 'Please set you password, at lest six letters or numbers.';
 $lang->user->register->login       = 'Please Login';
-$lang->user->register->loginHint   = 'If you have account: ';
+$lang->user->register->loginTip    = 'If you have account: ';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = 'Numbers and letters, at least six';
