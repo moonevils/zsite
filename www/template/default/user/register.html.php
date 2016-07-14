@@ -5,8 +5,8 @@
       <div id='login-region'>
       <div class='panel panel-pure' id='panel-pure'>
         <div class='panel-heading'><span id="heading-title"><?php echo $lang->user->register->welcome;?></span></div>
-        <div class='panel-body'>
-          <form method='post' id='ajaxForm' class='form-horizontal' role='form' data-checkfingerprint='1'>
+        <form method='post' id='ajaxForm' class='form-horizontal' role='form' data-checkfingerprint='1'>
+          <div class='panel-body'>
             <div class='form-group'>
               <label class='col-sm-3 control-label'><?php echo $lang->user->account;?></label>
               <div class='col-sm-9'><?php echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?></div>
@@ -39,9 +39,11 @@
               <div class="col-sm-3"></div>
               <div class='col-sm-9'><?php echo html::submitButton($lang->register,'btn btn-primary btn-block') . html::hidden('referer', $referer);?></div>
             </div>
-          </form>
-          <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
-        </div>
+            <div class='form-group'>
+              <div class="col-sm-3"></div>
+              <div class='col-sm-9'><?php include TPL_ROOT . 'user/oauthlogin.html.php';?></div>
+          </div>
+        </form>
       </div>    
     </div>
     <div>
