@@ -29,7 +29,7 @@ class upgradeModel extends model
      * @access public
      * @return void
      */
-    public function execute($fromVersion)
+    public ounction execute($fromVersion)
     {
         switch($fromVersion)
         {
@@ -149,6 +149,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('5.3.1'));
             case '5_3_2':
                 $this->fixHeaderBlock();
+            case '5_3_3';
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -208,6 +209,8 @@ class upgradeModel extends model
             case '5_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.2'));
             case '5_3'      ;
             case '5_3_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.1'));
+            case '5_3_2'    ; 
+            case '5_3_3'    ; 
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
