@@ -481,6 +481,11 @@ class site extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
         }
+        if($this->cookie->currentGroup == 'home') 
+        {
+            unset($this->lang->site->menu);
+            $this->config->menuGroups->site = 'home';
+        }
 
         $this->view->title = $this->lang->site->setHomeMenu;
         $this->display();
