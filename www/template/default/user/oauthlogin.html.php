@@ -1,5 +1,5 @@
 <?php
-$yangcongConfig = json_decode(zget($this->config->site, 'yangcong', array()));
+$yangcongConfig = json_decode(zget($this->config->site, 'yangcong', ""));
 foreach($lang->user->oauth->providers as $providerCode => $providerName)
 {
     if(isset($config->oauth->$providerCode)) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
