@@ -744,6 +744,10 @@ class control
             }
         }
 
+        $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
+
+        $this->output = str_replace($this->config->siteNavHolder, $siteNav, $this->output);
+
         /* Hide execinfo if output has no powerby btn. */
         if($this->config->site->execInfo == 'show') $this->output = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $this->output);
         echo $this->output;
@@ -759,7 +763,6 @@ class control
      */
     public function send($data, $type = 'json')
     {
-        $this->config->execInfo = 'hide';
         $data = (array) $data;
         if($type == 'json')
         {
