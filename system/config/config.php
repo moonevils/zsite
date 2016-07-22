@@ -34,6 +34,7 @@ $config->langVar     = 'l';               // RequestType=GET: the name of the vi
 $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
 $config->execPlaceholder = 'EXEC_PLACEHOLDER';
+$config->siteNavHolder   = 'SITENAV_PLACEHOLDER';
 
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
