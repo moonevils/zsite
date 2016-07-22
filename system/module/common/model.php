@@ -512,37 +512,83 @@ class commonModel extends model
      */
     public static function printTopBar()
     {
+        $topBar = '';
         if(!commonModel::isAvailable('user')) return '';
 
-        global $app, $config;
-        if($app->session->user->account != 'guest')
+        global $app, $config, $lang;
+
+        /* Compute cart info. */
+        if($app->device == 'desktop' and commonModel::isAvailable('shop'))
         {
+            $cart          = ($app->cookie->cart === false or $app->cookie->cart == '') ? array() : json_decode($app->cookie->cart);
+            $goodsInCookie = array();
+            foreach($cart as $product)
+            {
+                $goods = new stdclass();
+                $goods->account = 'guest';
+                $goods->product = $product->product;
+                $goods->count   = $product->count;
+                $goods->lang    = 'zh-cn';
+                $goodsInCookie[$product->product] = $goods;
+            }
+
+            $goodsInCookie = (array) $goodsInCookie;
+            $cartCount = 0;
+            if($app->user->account != 'guest')
+            {
+                $cartCount = $app->loadClass('dao')->select('count(*) as count')->from(TABLE_CART)
+                    ->where('account')->eq($app->user->account)
+                    ->beginIf(!empty($goodsInCookie))->andWhere('product')->notin(array_keys($goodsInCookie))->fi()
+                    ->fetch('count');
+            }
+
+            $cartCount += count($goodsInCookie);
+
+            if($cartCount)
+            {
+                $app->loadLang('cart');
+                $cartInfo = html::a(helper::createLink('cart', 'browse'), sprintf($lang->cart->topbarInfo, $cartCount));
+                $topBar .= "<span class='text-center text-middle' id='cartBox'>{$cartInfo}</span>";
+            }
+        }
+
+        if($app->user->account != 'guest')
+        {
+            $messages = '';
+            if(commonModel::isAvailable('message'))
+            {
+                $messages = $app->loadClass('dao')->select('COUNT(*) as count')->from(TABLE_MESSAGE)->where('`to`')->eq($app->user->account)->andWhere('readed')->eq(0)->fetch('count');
+                if($messages) $messages = html::a(helper::createLink('user', 'message'), sprintf($lang->user->message->mine, $messages));
+            }
+
             if($app->device == 'mobile')
             {
-                echo "<li class='menu-user-center text-center'>" . html::a(helper::createLink('user', 'control'), "<div class='user-avatar'><i class='icon icon-user avatar icon-s2 bg-primary circle'></i><strong class='user-name'>{$app->session->user->realname}</strong></div>") . '</li>';
-                echo "<li>" . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
-                echo '<li>' . html::a(helper::createLink('user', 'logout'),  $app->lang->logout) . '</li>';
+                $topBar .= "<li class='menu-user-center text-center'>" . html::a(helper::createLink('user', 'control'), "<div class='user-avatar'><i class='icon icon-user avatar icon-s2 bg-primary circle'></i><strong class='user-name'>{$app->session->user->realname}</strong></div>") . '</li>';
+                $topBar .= "<li>" . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
+                $topBar .= '<li>' . html::a(helper::createLink('user', 'logout'),  $app->lang->logout) . '</li>';
             }
             else
             {
-                echo html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
-                echo "<span id='msgBox' class='hiding'></span>";
-                echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
+                $topBar .= html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
+                $topBar .= "<span id='msgBox'>{$messages}</span>";
+                $topBar .= html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
         }
         else
         {
             if($app->device == 'mobile')
             {
-                echo '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
-                echo '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
+                $topBar .= '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
+                $topBar .= '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
             }
             else
             {
-                echo html::a(helper::createLink('user', 'login'), $app->lang->login);
-                echo html::a(helper::createLink('user', 'register'), $app->lang->register);
+                $topBar .= html::a(helper::createLink('user', 'login'), $app->lang->login);
+                $topBar .= html::a(helper::createLink('user', 'register'), $app->lang->register);
             }
         }
+
+        return $topBar;
     }
 
     /**
@@ -554,26 +600,29 @@ class commonModel extends model
      */
     public static function printLanguageBar()
     {
+        $languagebar = '';
         global $config, $app;
         $langs = explode(',', $config->site->lang);
         if(count($langs) == 1) return false;
         if($app->device == 'mobile')
         {
-            if(commonModel::isAvailable('user')) echo "<li class='divider'></li>";
+            if(commonModel::isAvailable('user')) $languagebar .= "<li class='divider'></li>";
             $clientLang = $app->getClientLang();
-            echo "<li class='dropdown-header'>{$app->lang->language}</li>";
+            $languagebar .= "<li class='dropdown-header'>{$app->lang->language}</li>";
             foreach($langs as $lang)
             {
                 $a = html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
                 $liClass = $clientLang === $lang ? " class='active'" : '';
                 $a = "<li{$liClass}>{$a}</li>";
-                echo $a;
+                $languagebar .= $a;
             }
         }
         else
         {
-            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langAbbrLabels[$lang]);
+            foreach($langs as $lang) $languagebar .= html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langAbbrLabels[$lang]);
         }
+
+        return $languagebar;
     }
 
     /**
