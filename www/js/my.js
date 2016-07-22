@@ -34,12 +34,6 @@ $(document).ready(function()
     /* Ping for keep login every six minute. */
     if(needPing) setInterval('ping()', 1000 * 360);
 
-    /* Load message notify. */
-    $('#headNav #msgBox').load(createLink('message', 'notify'), function()
-    {
-        if($('#headNav #msgBox').find('.label').length > 0) $('#msgBox').removeClass('hiding');
-    });
-
     /* Set 'go to top' button. */
     setGo2Top();
 

@@ -70,8 +70,7 @@ $thisMethodName     = $this->app->getMethodName();
     <?php if($isUserAvailable || $isMultiLangAvailable):?>
     <div class='dropdown'>
       <button type='button' class='btn' data-toggle='dropdown'><i class='icon-bars circle'></i></button>
-      <ul class='dropdown-menu dropdown-menu-right' id='topbarBox'>
-      </ul>
+      <ul class='dropdown-menu dropdown-menu-right' id='topbarBox'><?php echo $this->config->siteNavHolder;?></ul>
     </div>
     <?php endif; ?>
   </div>
@@ -129,9 +128,3 @@ $thisMethodName     = $this->app->getMethodName();
   <?php $this->block->printRegion($layouts, 'all', 'banner');?>
 </div>
 <?php endif;?>
-<script>
-$(document).ready(function()
-{
-    $('#topbarBox').load("<?php echo helper::createLink('misc', 'printtopbar')?>");
-});
-</script>
