@@ -1322,10 +1322,12 @@ class router
         {
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
-                $key = 'page' . DS . $this->device . DS . md5($_SERVER['REQUEST_URI']);
+                $key   = 'page' . DS . $this->device . DS . md5($_SERVER['REQUEST_URI']);
                 $cache = $this->cache->get($key);
                 if($cache)
                 {
+                    $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
+                    $cache = str_replace($this->config->siteNavHolder, $siteNav, $cache);
                     if($this->config->site->execInfo == 'show') $cache = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $cache);
                     die($cache);
                 }
