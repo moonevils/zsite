@@ -29,5 +29,4 @@ function loadCartInfo(twinkle)
         }
     );
 }
-$(document).ready(function() { loadCartInfo(false); })
 </script>
