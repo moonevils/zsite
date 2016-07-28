@@ -23,7 +23,7 @@ $config->cookieLife  = time() + 2592000;  // The lifetime of cookies.
 $config->timezone    = 'Asia/Shanghai';   // Time zone setting, more plese visit http://www.php.net/manual/en/timezones.php
 $config->multi       = false;             // The config of multi site.
 
-/* The request settins. */
+/* The request settings. */
 $config->requestType = 'PATH_INFO';       // PATH_INFO or GET.
 $config->seoMode     = true;              // Whether turn on seo mode or not.
 $config->requestFix  = '-';               // RequestType=PATH_INFO: the divider of the params, can be - _ or /
