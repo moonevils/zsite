@@ -86,7 +86,7 @@
     <div class='col-md-10'>
     <?php endif;?>
   <?php else:?>
-    <?php if(isset($uiHeader) and $uiHeader) include '../../ui/view/header.html.php';?>
+    <?php if(isset($uiHeader) and $uiHeader) include $this->app->getAppRoot() . 'module/ui/view/header.html.php';?>
     <?php if(!empty($treeModuleMenu)):?>
     <div class='col-md-2'>
       <div class="leftmenu affix hiddden-xs hidden-sm">
