@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.get("pathinfo.php", function(result)
+    $.get("/pathinfo.html", function(result)
     {
         $('#requestType').val('PATH_INFO');
     });
