@@ -148,10 +148,8 @@
       <?php endif; ?>
     </ul>
   </footer>
-  <?php if(commonModel::isAvailable('message')):?>
-  <div id='commentBox'></div>
-  <?php endif;?>
 </div>
+<?php if(commonModel::isAvailable('message')) echo "<div id='commentBox'></div>";?>
 <div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php if($this->config->book->chapter == 'left'):?>
   </div>
