@@ -1154,6 +1154,7 @@ class commonModel extends model
             foreach($groupMenus as $groupMenu)
             {
                 if($showGroup) continue;
+                if(!isset($lang->menu->$groupMenu)) continue;
                 list($title, $module, $method, $params) = explode('|', $lang->menu->$groupMenu);
                 if(commonModel::isAvailable($groupMenu) and commonModel::hasPriv($module, $method))
                 {
