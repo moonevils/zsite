@@ -331,7 +331,11 @@ class router
         $this->loadClass('cache', $static = true);
         $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache';
         if($this->config->multi) $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache' . DS . $this->config->site->code;
-        $this->cache = cache::factory($this->config->cache->type, zget($this->config->cache, $this->config->cache->type));
+
+        $cacheConfig = zget($this->config->cache, $this->config->cache->type);
+        if(is_object($cacheConfig)) $cacheConfig->lang = $this->getClientLang();
+
+        $this->cache = cache::factory($this->config->cache->type, $cacheConfig);
     }
 
     /**
