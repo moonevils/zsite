@@ -32,7 +32,7 @@ class fileCache extends cache
         if(!is_dir($this->config->savePath)) mkdir($this->config->savePath, 0777, true);
         if(!is_writeable(zget($this->config, 'savePath', ''))) die('The cache save path ' . $this->config->savePath . ' is not writeable.');
         $this->config->savePath = rtrim($this->config->savePath, DS) . DS;
-        $this->config->savePath .= $_COOKIE['lang'] . DS;
+        $this->config->savePath .= $config->lang . DS;
     }
     
     /**
