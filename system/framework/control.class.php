@@ -735,21 +735,25 @@ class control
             $this->mergeJS();
         }
 
-        if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
+        if(RUN_MODE == 'front')
         {
-            if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
+            if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
             {
-                $key = 'page' . DS . $this->device . DS . md5($_SERVER['REQUEST_URI']);
-                $this->app->cache->set($key, $this->output);
+                if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
+                {
+                    $key = 'page' . DS . $this->device . DS . md5($_SERVER['REQUEST_URI']);
+                    $this->app->cache->set($key, $this->output);
+                }
             }
+
+            $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
+
+            $this->output = str_replace($this->config->siteNavHolder, $siteNav, $this->output);
+
+            /* Hide execinfo if output has no powerby btn. */
+            if($this->config->site->execInfo == 'show') $this->output = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $this->output);
         }
 
-        $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
-
-        $this->output = str_replace($this->config->siteNavHolder, $siteNav, $this->output);
-
-        /* Hide execinfo if output has no powerby btn. */
-        if($this->config->site->execInfo == 'show') $this->output = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $this->output);
         echo $this->output;
     }
 
