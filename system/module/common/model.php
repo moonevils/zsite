@@ -570,7 +570,7 @@ class commonModel extends model
             else
             {
                 $topBar .= html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
-                $topBar .= "<span id='msgBox'>{$messages}</span>";
+                if($messages) $topBar .= "<span id='msgBox'>{$messages}</span>";
                 $topBar .= html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
         }
