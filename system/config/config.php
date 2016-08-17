@@ -13,8 +13,23 @@
 if(!class_exists('config')){class config{}}
 if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
+/* Use these params to enable or disable some features of framework. */
+$config->framework = new stdclass();
+$config->framework->autoConnectDB = true;  // 是否自动连接数据库。              Whether auto connect database or not.
+$config->framework->autoLang      = true;  // 是否自动连接数据库。              Whether auto connect database or not.
+$config->framework->multiLanguage = true; // 是否启用多语言功能。              Whether enable multi lanuage or not.
+$config->framework->multiTheme    = true; // 是否启用多风格功能。              Whether enable multi theme or not.
+$config->framework->detectDevice  = true; // 是否启用设备检测功能。            Whether enable device detect or not.
+$config->framework->multiSite     = false; // 是否启用多站点模式。              Whether enable multi site mode or not.
+$config->framework->extensionLevel= 0;     // 0=>无扩展,1=>公共扩展,2=>站点扩展 0=>no extension, 1=> common extension, 2=> every site has it's extension.
+$config->framework->jsWithPrefix  = true;  // js::set()输出的时候是否增加前缀。 When us js::set(), add prefix or not.
+$config->framework->filterBadKeys = true;  // 是否过滤不合要求的键值。          Whether filter bad keys or not.
+$config->framework->filterTrojan  = true;  // 是否过滤木马攻击代码。            Whether strip trojan code or not.
+$config->framework->filterXSS     = true;  // 是否过滤XSS攻击代码。             Whether strip xss code or not.
+$config->framework->purifier      = true;  // 是否对数据做purifier处理。        Whether purifier data or not.
+$config->framework->logDays       = 14;    // 日志文件保存的天数。              The days to save log files.
+
 /* The basic settings. */
-$config = new config();
 $config->version     = '5.3.4';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
@@ -32,6 +47,8 @@ $config->methodVar   = 'f';               // RequestType=GET: the name of the me
 $config->viewVar     = 't';               // RequestType=GET: the name of the view var.
 $config->langVar     = 'l';               // RequestType=GET: the name of the view var.
 $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
+
+$config->devicePrefix['mhtml'] = 'm.';
 
 $config->execPlaceholder = 'EXEC_PLACEHOLDER';
 $config->siteNavHolder   = 'SITENAV_PLACEHOLDER';
