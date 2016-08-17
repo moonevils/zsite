@@ -192,8 +192,8 @@
 
 .btn(@color;)
 {
-    @textColor: contrast(darken(@color, 10%), @fore-color, @back-color);
-    @border: darken(@color, 12%);
+    @textColor: contrast(@color, @fore-color, @back-color, 67%);
+    @border: darken(@color, 10%);
 
     color: @textColor;
     border-color: @border;
@@ -203,6 +203,7 @@
     {
         background-color: darken(@color, 6%);
         border-color: darken(@border, 6% + 4%);
+        color: @textColor;
     }
     &:focus,
     &:active,
