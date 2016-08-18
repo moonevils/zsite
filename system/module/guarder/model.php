@@ -198,7 +198,7 @@ EOT;
     public function inList()
     {
         if($this->config->site->filterFunction != 'open') return false;
-        $ip      = $this->server->remote_addr;
+        $ip      = helper::getRemoteIP();
         $account = $this->app->user->account;
 
         $blackList = $this->dao->select('*')->from(TABLE_BLACKLIST)
@@ -250,7 +250,7 @@ EOT;
         if($this->config->site->filterFunction != 'open') return true;
         if($identity == '')
         {
-            if($type == 'ip')      $identity = $this->server->remote_addr;
+            if($type == 'ip')      $identity = helper::getRemoteIP();
             if($type == 'account') $identity = $this->app->user->account;
         }
         if($identity == 'guest') return true;
