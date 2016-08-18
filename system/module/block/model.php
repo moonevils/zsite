@@ -51,8 +51,8 @@ class blockModel extends model
      */
     public function getPageBlocks($module, $method, $object = '')
     {
-        $device   = helper::getDevice();
-        $template =  $this->config->template->{$device}->name;
+        $device   = $this->app->clientDevice;
+        $template = $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
         $plan     = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
         $pages    = "all,{$module}_{$method}";
@@ -631,19 +631,22 @@ class blockModel extends model
                     if($this->session->productCategory) $key .= "_{$this->session->productCategory}";
                 }
 
-                $cache = $this->app->cache->get($key);
-
-                if($cache)
+                if(isset($this->app->cache) and is_object($this->app->cache))
                 {
-                    echo $cache;
-                }
-                else
-                {
-                    ob_start();
-                    $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
-                    $content = ob_get_flush();
+                    $cache = $this->app->cache->get($key);
 
-                    $this->app->cache->set($key, $content);
+                    if($cache)
+                    {
+                        echo $cache;
+                    }
+                    else
+                    {
+                        ob_start();
+                        $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
+                        $content = ob_get_flush();
+
+                        $this->app->cache->set($key, $content);
+                    }
                 }
             }
             else
@@ -694,13 +697,13 @@ class blockModel extends model
                 }
             }
 
-            $device   = helper::getDevice();
+            $device   = $this->app->clientDevice;
             $template = $this->config->template->{$device}->name;
             $theme    = $this->config->template->{$device}->theme;
             $tplPath  = $this->app->getTplRoot() . $template . DS . 'block' . DS;
 
             /* First try block/ext/sitecode/block/ */
-            $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
+            $extBlockRoot = $tplPath . "/ext/_{$this->app->siteCode}/";
             $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
             /* Then try block/ext//block/ */
