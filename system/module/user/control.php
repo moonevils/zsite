@@ -33,7 +33,7 @@ class user extends control
         }
         if(!empty($_POST))
         {
-            $this->loadModel('guarder')->logOperation('ip', 'register', $this->server->remote_addr);
+            $this->loadModel('guarder')->logOperation('ip', 'register', helper::getRemoteIP());
             $this->user->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 

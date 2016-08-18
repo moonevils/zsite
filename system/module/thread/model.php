@@ -206,7 +206,7 @@ class threadModel extends model
             ->setIF(!$this->post->isLink, 'link', '')
             ->setForce('board', $boardID)
             ->setForce('author', $this->app->user->account)
-            ->setForce('ip', $this->server->remote_addr)
+            ->setForce('ip', helper::getRemoteIP())
             ->setForce('addedDate', $now) 
             ->setForce('editedDate', $now) 
             ->setForce('repliedDate', $now)
