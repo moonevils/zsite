@@ -35,19 +35,29 @@ class control extends baseControl
 
         $this->setClientDevice();
         $this->setTplRoot();
+        $this->setReferer();
 
         if(RUN_MODE == 'front') $this->view->layouts = $this->loadModel('block')->getPageBlocks($this->moduleName, $this->methodName);
     }
 
     /**
-     * Set current device of visit website.
+     * Set referer.
      * 
      * @access public
      * @return void
      */
-    public function setClientDevice()
+    public function setReferer()
     {
-        $this->device = $this->app->getClientDevice();
+        if($this->session->http_referer) return true;
+
+        if(!empty($_SERVER['HTTP_REFERER']))
+        {
+            $refererInfo = parse_url($_SERVER['HTTP_REFERER']);
+            $referer     = $_SERVER['HTTP_REFERER'];
+            if($this->server->http_host == $refererInfo['host']) $referer = '';
+            $this->session->set('http_referer', $_SERVER['HTTP_REFERER']);
+        }
+        return true;
     }
 
     /**
