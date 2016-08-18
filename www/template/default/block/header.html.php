@@ -13,7 +13,7 @@
 <?php
 $isSearchAvaliable = commonModel::isAvailable('search'); 
 $setting           = !empty($block->content) ? json_decode($block->content) : new stdclass();
-$device            = helper::getDevice();
+$device            = $this->app->clientDevice;
 $template          = $this->config->template->{$device}->name;
 $theme             = $this->config->template->{$device}->theme;
 $logoSetting       = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();

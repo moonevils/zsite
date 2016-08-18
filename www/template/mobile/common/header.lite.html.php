@@ -2,8 +2,8 @@
 <?php
 $webRoot            = $config->webRoot;
 $jsRoot             = $webRoot . "js/";
-$templateName       = $this->config->template->{$this->device}->name;
-$themeName          = $this->config->template->{$this->device}->theme;
+$templateName       = $this->config->template->{$this->app->clientDevice}->name;
+$themeName          = $this->config->template->{$this->app->clientDevice}->theme;
 $templateRoot       = $webRoot . "template/{$templateName}/";
 $templateThemeRoot  = $webRoot . "theme/{$templateName}/";
 $templateCommonRoot = "{$templateThemeRoot}common/";
@@ -39,7 +39,7 @@ $sysURL             = $common->getSysURL();
 
   js::exportConfigVars();
   js::set('lang', $lang->js);
-  js::set('theme', array('template' => $templateName, 'theme' => $themeName, 'device' => $this->device));
+  js::set('theme', array('template' => $templateName, 'theme' => $themeName, 'device' => $this->app->clientDevice));
   if($config->debug)
   {
       js::import($templateCommonRoot . 'js/mzui.all.min.js');
@@ -54,7 +54,7 @@ $sysURL             = $common->getSysURL();
   }
 
   /* Import customed css file if it exists. */
-  $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->device}->name, $config->template->{$this->device}->theme);
+  $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->app->clientDevice}->name, $config->template->{$this->app->clientDevice}->theme);
   if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme));
 
   if(isset($pageCSS)) css::internal($pageCSS);
