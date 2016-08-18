@@ -199,8 +199,8 @@ class control extends baseControl
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
         
-        $modulePath = $this->app->getModulePath($moduleName);
-        $jsExtPath  = $this->app->getModuleExtPath($moduleName, $methodName, 'js');
+        $modulePath = $this->app->getModulePath('', $moduleName);
+        $jsExtPath  = $this->app->getModuleExtPath('', $moduleName, $methodName, 'js');
 
         $js = '';
         if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
