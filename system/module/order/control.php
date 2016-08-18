@@ -87,7 +87,7 @@ class order extends control
     public function check($orderID)
     {
         $order = $this->order->getByID($orderID);
-        $this->app->loadConfig('product');
+        $this->app->loadModuleConfig('product');
 
         $paymentList = explode(',', $this->config->shop->payment);
         foreach($paymentList as $payment)
@@ -113,7 +113,7 @@ class order extends control
         if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
         $this->app->loadLang('product');
-        $this->app->loadConfig('product');
+        $this->app->loadModuleConfig('product');
 
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -261,7 +261,7 @@ class order extends control
         $this->view->pager  = $pager;
 
         $this->app->loadLang('product');
-        $this->app->loadConfig('product');
+        $this->app->loadModuleConfig('product');
         $this->view->currencySymbol = $this->config->product->currencySymbol;
 
         $this->view->title      = $this->lang->order->browse;

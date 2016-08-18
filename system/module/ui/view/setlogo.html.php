@@ -28,8 +28,8 @@
         <?php if(isset($logo->webPath)) commonModel::printLink('ui', 'deleteLogo', '', "<i class='icon icon-lg icon-remove-sign'> </i>", "class='text-danger btn-deleter'");?>
         </span>
         <div class='text-important'>
-          <?php if($this->device == 'desktop') printf($lang->ui->suitableLogoSize, '50px-80px', '80px-240px');?>
-          <?php if($this->device == 'mobile') printf($lang->ui->suitableLogoSize, '<50px', '50px-200px');?>
+          <?php if($this->app->clientDevice == 'desktop') printf($lang->ui->suitableLogoSize, '50px-80px', '80px-240px');?>
+          <?php if($this->app->clientDevice == 'mobile') printf($lang->ui->suitableLogoSize, '<50px', '50px-200px');?>
           <div class='hide'><?php echo html::file('logo', "class='form-control'");?></div>
         </div>
         </div>
