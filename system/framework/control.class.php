@@ -35,7 +35,7 @@ class control extends baseControl
 
         $this->setClientDevice();
         $this->setTplRoot();
-        $this->setReferer();
+        $this->setHttpReferer();
 
         if(RUN_MODE == 'front') $this->view->layouts = $this->loadModel('block')->getPageBlocks($this->moduleName, $this->methodName);
     }
@@ -46,7 +46,7 @@ class control extends baseControl
      * @access public
      * @return void
      */
-    public function setReferer()
+    public function setHttpReferer()
     {
         if($this->session->http_referer) return true;
 
@@ -68,7 +68,7 @@ class control extends baseControl
      */
     public function setTplRoot()
     {
-        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->device}->name . DS);
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS);
     }
 
     /**
@@ -84,7 +84,7 @@ class control extends baseControl
         $viewFile = parent::setViewFile($moduleName, $methodName);
         if(RUN_MODE != 'front') return $viewFile;
 
-        $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->device}->name . DS . $moduleName;
+        $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $moduleName;
 
         /* If there is no hook files. */
         if(is_string($viewFile))
@@ -298,8 +298,8 @@ class control extends baseControl
 
         if(RUN_MODE == 'front')
         {
-            $template    = $this->config->template->{$this->device}->name;
-            $theme       = $this->config->template->{$this->device}->theme;
+            $template    = $this->config->template->{$this->app->clientDevice}->name;
+            $theme       = $this->config->template->{$this->app->clientDevice}->theme;
             $customParam = $this->loadModel('ui')->getCustomParams($template, $theme);
             $themeHooks  = $this->loadThemeHooks();
 
@@ -384,7 +384,7 @@ class control extends baseControl
             {
                 if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
                 {
-                    $key = 'page' . DS . $this->device . DS . md5($_SERVER['REQUEST_URI']);
+                    $key = 'page' . DS . $this->app->clientDevice . DS . md5($_SERVER['REQUEST_URI']);
                     $this->app->cache->set($key, $this->output);
                 }
             }
@@ -483,8 +483,8 @@ class control extends baseControl
      */
     public function loadThemeHooks()
     {
-        $theme     = $this->config->template->{$this->device}->theme;
-        $hookPath  = $this->app->getWwwRoot() . 'theme' . DS . $this->config->template->{$this->device}->name. DS . $theme . DS;
+        $theme     = $this->config->template->{$this->app->clientDevice}->theme;
+        $hookPath  = $this->app->getWwwRoot() . 'theme' . DS . $this->config->template->{$this->app->clientDevice}->name. DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
 
         if(empty($hookFiles)) return array();
