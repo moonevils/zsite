@@ -29,8 +29,8 @@
   <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
     <?php if($this->session->currentGroup == 'design'):?>
     <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
-    <?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
-    <?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
+    <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
+    <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
     <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
     <ul class='nav navbar-nav'>
       <li class='device-nav'>
