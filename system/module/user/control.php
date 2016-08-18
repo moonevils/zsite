@@ -99,7 +99,7 @@ class user extends control
         $this->setReferer($referer);
 
         /* Load mail config for reset password. */
-        $this->app->loadConfig('mail');
+        $this->app->loadModuleConfig('mail');
 
         $loginLink = $this->createLink('user', 'login');
         $denyLink  = $this->createLink('user', 'deny');

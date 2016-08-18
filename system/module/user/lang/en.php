@@ -38,7 +38,6 @@ $lang->user->join      = 'Join Date';
 $lang->user->visits    = 'Visits';
 $lang->user->ip        = 'Last ip address';
 $lang->user->last      = 'Last login time';
-$lang->user->allowTime = 'Allow time';
 $lang->user->status    = 'Status';
 $lang->user->captcha   = 'Captcha';
 $lang->user->alert     = 'Your account has been forbidden';

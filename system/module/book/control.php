@@ -60,7 +60,7 @@ class book extends control
         {
             $nodeID = $node->id;
             $book = $this->book->getBookByNode($node);
-            if(($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen) and $this->device == 'desktop') 
+            if(($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen) and $this->app->clientDevice == 'desktop') 
             {
                 $families = $this->dao->select('id,parent,type,`order`')->from(TABLE_BOOK)
                     ->where('path')->like(",{$nodeID},%")

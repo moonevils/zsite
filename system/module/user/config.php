@@ -1,4 +1,5 @@
 <?php
+$config->user = new stdclass();
 $config->user->resetExpired = 3*86400;
 
 $config->user->require = new stdclass();

@@ -573,7 +573,7 @@ class userModel extends model
                 $this->app->user->account = $account;
                 if($user->maxLogin > 0)
                 {
-                    $this->app->loadConfig('score');
+                    $this->app->loadModuleConfig('score');
                     $login = $this->config->score->counts->login;
                     $this->dao->update(TABLE_USER)->set('maxLogin = maxLogin - '. $login)->where('account')->eq($account)->exec();
                     $this->loadModel('score')->earn('login', '', '', 'LOGIN');

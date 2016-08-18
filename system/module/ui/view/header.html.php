@@ -1,6 +1,6 @@
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
-<?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
-<?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
+<?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
+<?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
 <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
 <nav id='menu' style='padding-left:15px;'>
   <?php 

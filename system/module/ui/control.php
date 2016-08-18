@@ -27,10 +27,10 @@ class ui extends control
         if($template and isset($templates[$template]))
         {
             $setting = array();
-            $setting[$this->device]['name']  = $template;
-            $setting[$this->device]['theme'] = $theme;
+            $setting[$this->app->clientDevice]['name']  = $template;
+            $setting[$this->app->clientDevice]['theme'] = $theme;
 
-            $setting[$this->device] = helper::jsonEncode($setting[$this->device]);
+            $setting[$this->app->clientDevice] = helper::jsonEncode($setting[$this->app->clientDevice]);
             $setting['parser']      = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
             $setting['customTheme'] =  $custom ? $theme : '';
 
@@ -42,7 +42,7 @@ class ui extends control
         $this->view->title           = $this->lang->ui->template->theme;
         $this->view->template        = current($templates);
         $this->view->installedThemes = $this->ui->getInstalledThemes();
-        $this->view->currentTheme    = $this->config->template->{$this->device}->theme;
+        $this->view->currentTheme    = $this->config->template->{$this->app->clientDevice}->theme;
         $this->view->uiHeader        = true;
         $this->display();
     }
@@ -57,8 +57,8 @@ class ui extends control
      */
     public function customTheme($theme = '', $template = '')
     {
-        if(empty($theme))    $theme    = $this->config->template->{$this->device}->theme;
-        if(empty($template)) $template = $this->config->template->{$this->device}->name;
+        if(empty($theme))    $theme    = $this->config->template->{$this->app->clientDevice}->theme;
+        if(empty($template)) $template = $this->config->template->{$this->app->clientDevice}->name;
 
         $templates = $this->ui->getTemplates();
         if(!isset($templates[$template]['themes'][$theme])) die();
@@ -123,8 +123,8 @@ class ui extends control
         }
 
         $this->lang->menuGroups->ui = 'logo';
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
 
         $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
@@ -163,7 +163,7 @@ class ui extends control
      */
     public function deleteLogo()
     {
-        $theme = $this->config->template->{$this->device}->theme;
+        $theme = $this->config->template->{$this->app->clientDevice}->theme;
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=logo&key=$theme");
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=logo");
 
@@ -182,15 +182,15 @@ class ui extends control
     public function others()
     {
         /* Get configs of list number. */
-        $this->app->loadConfig('file');
-        if(strpos($this->config->site->modules, 'article') !== false) $this->app->loadConfig('article');
-        if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadConfig('product');
-        if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadConfig('blog');
-        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
+        $this->app->loadModuleConfig('file');
+        if(strpos($this->config->site->modules, 'article') !== false) $this->app->loadModuleConfig('article');
+        if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadModuleConfig('product');
+        if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
+        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadModuleConfig('message');
         if(strpos($this->config->site->modules, 'forum') !== false)
         {
-            $this->app->loadConfig('forum');
-            $this->app->loadConfig('reply');
+            $this->app->loadModuleConfig('forum');
+            $this->app->loadModuleConfig('reply');
         }
 
         if(!empty($_POST))
@@ -425,9 +425,9 @@ class ui extends control
         $this->package->fixLang();
 
         $setting = array();
-        $setting[$this->device]['name']  = $packageInfo->template;
-        $setting[$this->device]['theme'] = $packageInfo->code;
-        $setting[$this->device]  = helper::jsonEncode($setting[$this->device]);
+        $setting[$this->app->clientDevice]['name']  = $packageInfo->template;
+        $setting[$this->app->clientDevice]['theme'] = $packageInfo->code;
+        $setting[$this->app->clientDevice]  = helper::jsonEncode($setting[$this->app->clientDevice]);
         $setting['parser'] = isset($packageInfo->parser) ? $packageInfo->parser : 'default';
 
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
@@ -586,8 +586,8 @@ class ui extends control
      */
     public function setCode($page = 'all')
     {
-        $theme    = $this->config->template->{$this->device}->theme;
-        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
         if($_POST)
         {
             $post = fixer::input('post')->stripTags('css,js', $this->config->allowedTags->admin)->get();
@@ -618,7 +618,7 @@ class ui extends control
      */
     public function editTemplate($module = 'common', $file = 'header')
     {
-        $template = $this->config->template->{$this->device}->name;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
         if($_POST)
         {
             $canManage = array('result' => 'success');
