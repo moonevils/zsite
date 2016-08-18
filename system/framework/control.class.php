@@ -10,149 +10,15 @@
  *  May you share freely, never taking more than you give.
  */
 
+include FRAME_ROOT . '/base/control.class.php';
+
 /**
  * The base class of control.
  *
  * @package framework
  */
-class control
+class control extends baseControl
 {
-    /**
-     * The global $app object.
-     * 
-     * @var object
-     * @access protected
-     */
-    protected $app;
-
-    /**
-     * The global $config object.
-     * 
-     * @var object
-     * @access protected
-     */
-    protected $config;
-
-    /**
-     * The global $lang object.
-     * 
-     * @var object
-     * @access protected
-     */
-    protected $lang;
-
-    /**
-     * The global $dbh object, the database connection handler.
-     * 
-     * @var object
-     * @access protected
-     */
-    protected $dbh;
-
-    /**
-     * The $dao object, used to access or update database.
-     * 
-     * @var object
-     * @access protected
-     */
-    public $dao;
-
-    /**
-     * The $post object, used to access the $_POST var.
-     * 
-     * @var ojbect
-     * @access public
-     */
-    public $post;
-
-    /**
-     * The $get object, used to access the $_GET var.
-     * 
-     * @var ojbect
-     * @access public
-     */
-    public $get;
-
-    /**
-     * The $session object, used to access the $_SESSION var.
-     * 
-     * @var ojbect
-     * @access public
-     */
-    public $session;
-
-    /**
-     * The $server object, used to access the $_SERVER var.
-     * 
-     * @var ojbect
-     * @access public
-     */
-    public $server;
-
-    /**
-     * The $cookie object, used to access the $_COOKIE var.
-     * 
-     * @var ojbect
-     * @access public
-     */
-    public $cookie;
-
-    /**
-     * The $global object, used to access the $_GLOBAL var.
-     * 
-     * @var ojbect
-     * @access public
-     */
-    public $global;
-
-    /**
-     * The name of current module.
-     * 
-     * @var string
-     * @access protected
-     */
-    protected $moduleName;
-
-    /**
-     * The vars assigned to the view page.
-     * 
-     * @var object
-     * @access public
-     */
-    public $view; 
-
-    /**
-     * The type of the view, such html, json.
-     * 
-     * @var string
-     * @access private
-     */
-    private $viewType;
-
-    /**
-     * The content to display.
-     * 
-     * @var string
-     * @access private
-     */
-    private $output;
-
-    /**
-     * The prefix of view file for mobile or PC. 
-     * 
-     * @var string   
-     * @access public
-     */
-    public $viewPrefix;
-
-    /**
-     * The device of visiting client.
-     * 
-     * @var string   
-     * @access public
-     */
-    public $device;
-
     /**
      * The construct function.
      *
@@ -165,57 +31,23 @@ class control
      */
     public function __construct($moduleName = '', $methodName = '')
     {
-        /* Global the globals, and refer them to the class member. */
-        global $app, $config, $lang, $dbh, $common;
-        $this->app      = $app;
-        $this->config   = $config;
-        $this->lang     = $lang;
-        $this->dbh      = $dbh;
-        $this->viewType = $this->app->getViewType();
+        parent::__construct();
 
-        $this->setCurrentDevice();
-        $this->setModuleName($moduleName);
-        $this->setMethodName($methodName);
+        $this->setClientDevice();
         $this->setTplRoot();
 
-        /* Load the model file auto. */
-        $this->loadModel();
-        $this->setViewPrefix();
-
-        /* Assign them to the view. */
-        $this->view          = new stdclass();
-        $this->view->app     = $app;
-        $this->view->lang    = $lang;
-        $this->view->config  = $config;
-        $this->view->common  = $common;
-        $this->view->session = $app->session;
         if(RUN_MODE == 'front') $this->view->layouts = $this->loadModel('block')->getPageBlocks($this->moduleName, $this->methodName);
-
-        $this->setSuperVars();
     }
 
-    //-------------------- Model related methods --------------------//
-
-    /* Set the module name. 
+    /**
+     * Set current device of visit website.
      * 
-     * @param   string  $moduleName     The module name, if empty, get it from $app.
-     * @access  private
-     * @return  void
+     * @access public
+     * @return void
      */
-    private function setModuleName($moduleName = '')
+    public function setClientDevice()
     {
-        $this->moduleName = $moduleName ? strtolower($moduleName) : $this->app->getModuleName();
-    }
-
-    /* Set the method name. 
-     * 
-     * @param   string  $methodName    The method name, if empty, get it from $app.
-     * @access  private
-     * @return  void
-     */
-    private function setMethodName($methodName = '')
-    {
-        $this->methodName = $methodName ? strtolower($methodName) : $this->app->getMethodName();
+        $this->device = $this->app->getClientDevice();
     }
 
     /**
@@ -226,86 +58,9 @@ class control
      */
     public function setTplRoot()
     {
-        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->{$this->device}->name . DS);
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->device}->name . DS);
     }
 
-    /**
-     * Load the model file of one module.
-     * 
-     * @param   string      $methodName    The method name, if empty, use current module's name.
-     * @access  public
-     * @return  object|bool If no model file, return false. Else return the model object.
-     */
-    public function loadModel($moduleName = '')
-    {
-        if(empty($moduleName)) $moduleName = $this->moduleName;
-        $modelFile = helper::setModelFile($moduleName);
-
-        /* If no model file, try load config. */
-        if(!is_file($modelFile)  or !helper::import($modelFile)) 
-        {
-            $this->app->loadConfig($moduleName, false);
-            $this->app->loadLang($moduleName);
-            $this->dao = new dao();
-            return false;
-        }
-
-        $modelClass = class_exists('ext' . $moduleName. 'model') ? 'ext' . $moduleName . 'model' : $moduleName . 'model';
-        if(!class_exists($modelClass)) $this->app->triggerError(" The model $modelClass not found", __FILE__, __LINE__, $exit = true);
-
-        $this->$moduleName = new $modelClass();
-        $this->dao = $this->$moduleName->dao;
-        return $this->$moduleName;
-    }
-
-    /**
-     * Set the super vars.
-     * 
-     * @access protected
-     * @return void
-     */
-    protected function setSuperVars()
-    {
-        $this->post    = $this->app->post;
-        $this->get     = $this->app->get;
-        $this->server  = $this->app->server;
-        $this->session = $this->app->session;
-        $this->cookie  = $this->app->cookie;
-        $this->global  = $this->app->global;
-    }
-
-    /**
-     * Set the prefix of view file for mobile or PC.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setViewPrefix()
-    {
-        global $app, $config;
-        $this->viewPrefix = '';
-        if(RUN_MODE == 'front')
-        {
-            /* Detect mobile. */
-            $mobile = $app->loadClass('mobile');
-            if($mobile->isMobile() and !isset($config->template->mobile)) $this->viewPrefix = 'm.';
-        }
-    }
-
-    /**
-     * Set current device of visit website.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setCurrentDevice()
-    {
-        $this->app->setCurrentDevice();
-        $this->device = $this->app->device;
-    }
-
-    //-------------------- View related methods --------------------//
-   
     /**
      * Set the view file, thus can use fetch other module's page.
      * 
@@ -316,50 +71,30 @@ class control
      */
     public function setViewFile($moduleName, $methodName)
     {
-        $moduleName = strtolower(trim($moduleName));
-        $methodName = strtolower(trim($methodName));
+        $viewFile = parent::setViewFile($moduleName, $methodName);
+        if(RUN_MODE != 'front') return $viewFile;
 
-        $modulePath  = $this->app->getModulePath($moduleName);
-        $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
+        $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->device}->name . DS . $moduleName;
 
-        $viewType = $this->viewType == 'mhtml' ? 'html' : $this->viewType;
-        if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext' . DS) !== false))
+        /* If there is no hook files. */
+        if(is_string($viewFile))
         {
-            /* If not in front mode or is ext module, view file is in modeule path. */
-            $mainViewFile = $modulePath . 'view' . DS . $this->viewPrefix . $methodName . '.' . $viewType . '.php';
-        }
-        else
-        {
-            /* If in front mode, view file is in www/template path. */
-            $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
-            if($this->viewPrefix == 'm.' and !is_file($mainViewFile))
+            if(strpos($viewFile, DS . 'ext' . DS) === false)
             {
-                $this->viewPrefix = '';
-                $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
+                $viewFile = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
+                if(file_exists($viewFile)) return $viewFile;
             }
         }
-
-        /* Extension view file. */
-        $commonExtViewFile = $viewExtPath['common'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
-        $siteExtViewFile   = $viewExtPath['site'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
-        $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
-        $viewFile = file_exists($siteExtViewFile) ? $siteExtViewFile : $viewFile;
-
-        if(RUN_MODE == 'front')
+        if(is_array($viewFile))
         {
-            $customedFile = str_replace($this->app->getWwwRoot(), $this->app->getTmpRoot(), $mainViewFile);
-            if(file_exists($customedFile)) $viewFile = $customedFile;
+            if(strpos($viewFile['viewFile'], DS . 'ext' . DS) === false)
+            {
+                $frontFile = str_replace($this->app->getAppRoot(), $templatePath, $viewFile);
+                if(file_exists($frontFile)) $viewFile['viewFile'] = $frontFile;
+            }
         }
-
-        if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
-
-        /* Extension hook file. */
-        $commonExtHookFiles = glob($viewExtPath['common'] . $this->viewPrefix . $methodName . ".*.{$viewType}.hook.php");
-        $siteExtHookFiles   = glob($viewExtPath['site'] . $this->viewPrefix . $methodName . ".*.{$viewType}.hook.php");
-        $extHookFiles       = array_merge((array) $commonExtHookFiles, (array) $siteExtHookFiles);
-        if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
-
         return $viewFile;
+
     }
 
     /**
@@ -371,7 +106,7 @@ class control
      */
     public function getExtViewFile($viewFile)
     {
-        $extPath     = dirname(realpath($viewFile)) . "/ext/_{$this->config->site->code}/";
+        $extPath     = dirname(realpath($viewFile)) . "/ext/_{$this->app->siteCode}/";
         $extViewFile = $extPath . basename($viewFile);
 
         if(file_exists($extViewFile))
@@ -400,29 +135,29 @@ class control
      * @access private
      * @return string
      */
-    private function getCSS($moduleName, $methodName)
+    public function getCSS($moduleName, $methodName)
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $modulePath = $this->app->getModulePath($moduleName);
-        $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
+        $modulePath = $this->app->getModulePath('', $moduleName);
+        $cssExtPath = $this->app->getModuleExtPath('', $moduleName, $methodName, 'css') ;
 
         $css = '';
         if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
-            $mainCssFile   = $modulePath . 'css' . DS . $this->viewPrefix . 'common.css';
-            $methodCssFile = $modulePath . 'css' . DS . $this->viewPrefix . $methodName . '.css';
+            $mainCssFile   = $modulePath . 'css' . DS . $this->devicePrefix . 'common.css';
+            $methodCssFile = $modulePath . 'css' . DS . $this->devicePrefix . $methodName . '.css';
 
             if(file_exists($mainCssFile))   $css .= file_get_contents($mainCssFile);
             if(file_exists($methodCssFile)) $css .= file_get_contents($methodCssFile);
         }
         else
         {
-            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "common.css";
-            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "{$methodName}.css";
-            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "common.{$this->config->site->theme}.css";
-            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "{$methodName}.{$this->config->site->theme}.css";
+            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "common.css";
+            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "{$methodName}.css";
+            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "common.{$this->config->site->theme}.css";
+            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "{$methodName}.{$this->config->site->theme}.css";
 
             if(file_exists($defaultMainCssFile))   $css .= file_get_contents($defaultMainCssFile);
             if(file_exists($defaultMethodCssFile)) $css .= file_get_contents($defaultMethodCssFile);
@@ -430,12 +165,14 @@ class control
             if(file_exists($themeMethodCssFile))   $css .= file_get_contents($themeMethodCssFile);
         }
 
-        $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . $this->viewPrefix . '*.css');
-        if(!empty($commonExtCssFiles)) foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
+        if(!empty($cssExtPath))
+        {
+            $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . $this->devicePrefix . '*.css');
+            if(!empty($commonExtCssFiles)) foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
-        $methodExtCssFiles = glob($cssExtPath['site'] . $methodName . DS . $this->viewPrefix . '*.css');
-        if(!empty($methodExtCssFiles)) foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
-
+            $methodExtCssFiles = glob($cssExtPath['site'] . $methodName . DS . $this->devicePrefix . '*.css');
+            if(!empty($methodExtCssFiles)) foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
+        }
         return $css;
     }
 
@@ -447,29 +184,29 @@ class control
      * @access private
      * @return string
      */
-    private function getJS($moduleName, $methodName)
+    public function getJS($moduleName, $methodName)
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
         
         $modulePath = $this->app->getModulePath($moduleName);
-        $jsExtPath  = $this->app->getModuleExtPath($moduleName, 'js');
+        $jsExtPath  = $this->app->getModuleExtPath($moduleName, $methodName, 'js');
 
         $js = '';
         if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
-            $mainJsFile   = $modulePath . 'js' . DS . $this->viewPrefix . 'common.js';
-            $methodJsFile = $modulePath . 'js' . DS . $this->viewPrefix . $methodName . '.js';
+            $mainJsFile   = $modulePath . 'js' . DS . $this->devicePrefix . 'common.js';
+            $methodJsFile = $modulePath . 'js' . DS . $this->devicePrefix . $methodName . '.js';
 
             if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
             if(file_exists($methodJsFile)) $js .= file_get_contents($methodJsFile);
         }
         else
         {
-            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "common.js";
-            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "{$methodName}.js";
-            $themeMainJsFile     = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "common.{$this->config->site->theme}.js";
-            $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "{$methodName}.{$this->config->site->theme}.js";
+            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "common.js";
+            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "{$methodName}.js";
+            $themeMainJsFile     = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "common.{$this->config->site->theme}.js";
+            $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "{$methodName}.{$this->config->site->theme}.js";
 
             if(file_exists($defaultMainJsFile))   $js .= file_get_contents($defaultMainJsFile);
             if(file_exists($defaultMethodJsFile)) $js .= file_get_contents($defaultMethodJsFile);
@@ -477,43 +214,22 @@ class control
             if(file_exists($themeMethodJsFile))   $js .= file_get_contents($themeMethodJsFile);
         }
 
-        $commonExtJsFiles = glob($jsExtPath['common'] . $methodName . DS . $this->viewPrefix . '*.js');
-        if(!empty($commonExtJsFiles))
+        if(!empty($jsExtPath))
         {
-            foreach($commonExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
-        }
+            $commonExtJsFiles = glob($jsExtPath['common'] . $methodName . DS . $this->devicePrefix . '*.js');
+            if(!empty($commonExtJsFiles))
+            {
+                foreach($commonExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
+            }
 
-        $methodExtJsFiles = glob($jsExtPath['site'] . $methodName . DS  . $this->viewPrefix . '*.js');
-        if(!empty($methodExtJsFiles))
-        {
-            foreach($methodExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
+            $methodExtJsFiles = glob($jsExtPath['site'] . $methodName . DS  . $this->devicePrefix . '*.js');
+            if(!empty($methodExtJsFiles))
+            {
+                foreach($methodExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
+            }
         }
 
         return $js;
-    }
-
-    /**
-     * Assign one var to the view vars.
-     * 
-     * @param   string  $name       the name.
-     * @param   mixed   $value      the value.
-     * @access  public
-     * @return  void
-     */
-    public function assign($name, $value)
-    {
-        $this->view->$name = $value;
-    }
-
-    /**
-     * Clear the output.
-     * 
-     * @access public
-     * @return void
-     */
-    public function clear()
-    {
-        $this->output = '';
     }
 
     /**
@@ -552,32 +268,6 @@ class control
     }
 
     /**
-     * Parse json format.
-     *
-     * @param string $moduleName    module name
-     * @param string $methodName    method name
-     * @access private
-     * @return void
-     */
-    private function parseJSON($moduleName, $methodName)
-    {
-        die('View type error.');
-        unset($this->view->app);
-        unset($this->view->config);
-        unset($this->view->lang);
-        unset($this->view->pager);
-        unset($this->view->header);
-        unset($this->view->position);
-        unset($this->view->moduleTree);
-        unset($this->view->common);
-
-        $output['status'] = is_object($this->view) ? 'success' : 'fail';
-        $output['data']   = json_encode($this->view);
-        $output['md5']    = md5(json_encode($this->view));
-        $this->output     = json_encode($output);
-    }
-
-    /**
      * Parse default html format.
      *
      * @param string $moduleName    module name
@@ -585,7 +275,7 @@ class control
      * @access private
      * @return void
      */
-    private function parseDefault($moduleName, $methodName)
+    public function parseDefault($moduleName, $methodName)
     {
         /* Set the view file. */
         $results  = $this->setViewFile($moduleName, $methodName);
@@ -653,63 +343,6 @@ class control
 
         /* At the end, chang the dir to the previous. */
         chdir($currentPWD);
-    }
-
-    /**
-     * Get the output of one module's one method as a string, thus in one module's method, can fetch other module's content.
-     * 
-     * If the module name is empty, then use the current module and method. If set, use the user defined module and method.
-     *
-     * @param   string  $moduleName    module name.
-     * @param   string  $methodName    method name.
-     * @param   array   $params        params.
-     * @access  public
-     * @return  string  the parsed html.
-     */
-    public function fetch($moduleName = '', $methodName = '', $params = array())
-    {
-        if($moduleName == '') $moduleName = $this->moduleName;
-        if($methodName == '') $methodName = $this->methodName;
-        if($moduleName == $this->moduleName and $methodName == $this->methodName) 
-        {
-            $this->parse($moduleName, $methodName);
-            return $this->output;
-        }
-
-        /* Set the pathes and files to included. */
-        $modulePath        = $this->app->getModulePath($moduleName);
-        $moduleControlFile = $modulePath . 'control.php';
-        $actionExtPath     = $this->app->getModuleExtPath($moduleName, 'control');
-
-        $commonActionExtFile = $actionExtPath['common'] . strtolower($methodName) . '.php';
-        $siteActionExtFile   = $actionExtPath['site'] . strtolower($methodName) . '.php';
-        $file2Included = file_exists($commonActionExtFile) ? $commonActionExtFile : $moduleControlFile;
-        $file2Included = file_exists($siteActionExtFile) ? $siteActionExtFile : $file2Included;
-
-        /* Load the control file. */
-        if(!is_file($file2Included)) $this->app->triggerError("The control file $file2Included not found", __FILE__, __LINE__, $exit = true);
-        $currentPWD = getcwd();
-        chdir(dirname($file2Included));
-        if($moduleName != $this->moduleName) helper::import($file2Included);
-        
-        /* Set the name of the class to be called. */
-        $className = class_exists("my$moduleName") ? "my$moduleName" : $moduleName;
-        if(!class_exists($className)) $this->app->triggerError(" The class $className not found", __FILE__, __LINE__, $exit = true);
-
-        /* Parse the params, create the $module control object. */
-        if(!is_array($params)) parse_str($params, $params);
-        $module = new $className($moduleName, $methodName);
-
-        /* Call the method and use ob function to get the output. */
-        ob_start();
-        call_user_func_array(array($module, $methodName), $params);
-        $output = ob_get_contents();
-        ob_end_clean();
-
-        /* Return the content. */
-        unset($module);
-        chdir($currentPWD);
-        return $output;
     }
 
     /**
@@ -830,19 +463,6 @@ class control
     public function inlink($methodName = 'index', $vars = array(), $alias = array(), $viewType = '')
     {
         return helper::createLink($this->moduleName, $methodName, $vars, $alias, $viewType);
-    }
-
-    /**
-     * Location to another page.
-     * 
-     * @param   string   $url   the target url.
-     * @access  public
-     * @return  void
-     */
-    public function locate($url)
-    {
-        header("location: $url");
-        exit;
     }
 
     /**
