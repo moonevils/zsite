@@ -18,8 +18,8 @@ $themeRoot      = $webRoot . "theme/default/";
 $sysURL         = rtrim($common->getSysURL(), '/') . '/';
 $thisModuleName = $this->app->getModuleName();
 $thisMethodName = $this->app->getMethodName();
-$template       = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
-$theme          = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
+$template       = $this->config->template->{$this->app->clientDevice}->name ? $this->config->template->{$this->app->clientDevice}->name : 'default';
+$theme          = $this->config->template->{$this->app->clientDevice}->theme ? $this->config->template->{$this->app->clientDevice}->theme : 'default';
 $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
 ?>
 <!DOCTYPE html>
@@ -55,11 +55,11 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
   css::import($themeRoot . 'common/style.css');
 
   /* Import customed css file if it exists. */
-  $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->device}->name, $config->template->{$this->device}->theme);
+  $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->app->clientDevice}->name, $config->template->{$this->app->clientDevice}->theme);
   if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme));
 
   js::exportConfigVars();
-  js::set('theme', array('template' => $config->template->{$this->device}->name, 'theme' => $config->template->{$this->device}->theme, 'device' => $this->device));
+  js::set('theme', array('template' => $config->template->{$this->app->clientDevice}->name, 'theme' => $config->template->{$this->app->clientDevice}->theme, 'device' => $this->app->clientDevice));
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');

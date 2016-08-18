@@ -13,7 +13,7 @@ if(!isset($templateCommonRoot))
 {
     $thisModuleName     = $this->app->getModuleName();
     $thisMethodName     = $this->app->getMethodName();
-    $templateCommonRoot = $config->webRoot . "theme/" . $this->config->template->{$this->device}->name . "/common/";
+    $templateCommonRoot = $config->webRoot . "theme/" . $this->config->template->{$this->app->clientDevice}->name . "/common/";
 }
 if($thisModuleName === 'user' and $thisMethodName === 'login')
 {

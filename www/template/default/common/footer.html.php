@@ -40,7 +40,7 @@ $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 
 /* Load hook file for site.*/
-$siteExtPath  = dirname(__FILE__) . DS . "ext/_{$config->site->code}/";
+$siteExtPath  = dirname(__FILE__) . DS . "ext/_{$this->app->siteCode}/";
 $extHookRule  = $siteExtPath . 'footer.front.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;

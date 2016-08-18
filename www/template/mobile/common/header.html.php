@@ -3,8 +3,8 @@
 <?php
 $webRoot            = $config->webRoot;
 $jsRoot             = $webRoot . "js/";
-$templateName       = $this->config->template->{$this->device}->name;
-$themeName          = $this->config->template->{$this->device}->theme;
+$templateName       = $this->config->template->{$this->app->clientDevice}->name;
+$themeName          = $this->config->template->{$this->app->clientDevice}->theme;
 $templateRoot       = $webRoot . "template/{$templateName}/";
 $templateThemeRoot  = "{$templateRoot}theme/";
 $templateCommonRoot = "{$templateThemeRoot}common/";
