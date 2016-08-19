@@ -7,4 +7,6 @@
 #addressBox dl dt span a{font-weight:normal;}
 
 #payResult{margin:60px auto;}
+#payResult .alert{margin-bottom:0; padding:30px;}
+#payResult .alert .content{font-weight:bold; font-size:14px}
 .pager{margin:0;}
