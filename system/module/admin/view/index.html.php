@@ -47,10 +47,10 @@
             <div class='panel-heading'>
               <span class='panel-title'><?php echo $widget->title;?></span>
               <div class='panel-actions'>
-              <?php if(!empty($widget->moreLink)):?>
-              <?php $target = $widget->type == 'chanzhiDynamic' ? "target='_blank'" : '';?>
-              <?php echo html::a($widget->moreLink, $lang->more, "class='panel-action btn-more' $target");?>
-              <?php endif; ?>
+                <?php if(!empty($widget->moreLink)):?>
+                <?php $target = $widget->type == 'chanzhiDynamic' ? "target='_blank'" : '';?>
+                <?php echo html::a($widget->moreLink, $lang->more, "class='panel-action btn-more' $target");?>
+                <?php endif; ?>
                 <div class='dropdown'>
                   <a href='javascript:;' data-toggle='dropdown' class='panel-action'><i class='icon icon-ellipsis-v'></i></a>
                   <ul class="dropdown-menu pull-right" role="menu">
@@ -72,32 +72,32 @@
     </div>
   </div>
 </div>
-  <div id='noticeBox'>
-  <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
-  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
-    <div class="alert alert-danger alert with-icon alert-dismissable">
-      <button type="submit" class="close">&times;</button>
-      <strong><?php echo $lang->admin->adminEntry;?></strong>
-    </div>
-  </form>
-  <?php endif;?>
-  <?php if(!$ignoreUpgrade):?>
-  <div class='alert alert-success' id='upgradeNotice'>
-    <div>
-      <?php echo $lang->newVersion;?>
-      <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
-    </div>
+<div id='noticeBox'>
+<?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
+  <div class="alert alert-danger alert with-icon alert-dismissable">
+    <button type="submit" class="close">&times;</button>
+    <strong><?php echo $lang->admin->adminEntry;?></strong>
   </div>
-  <?php endif;?>
+</form>
+<?php endif;?>
+<?php if(!$ignoreUpgrade):?>
+<div class='alert alert-success' id='upgradeNotice'>
+  <div>
+    <?php echo $lang->newVersion;?>
+    <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
+  </div>
+</div>
+<?php endif;?>
 
-  <?php if(!$checkLocation):?>
-  <div class='alert alert-success'>
-    <div>
-      <?php echo $lang->site->changeLocation;?>
-      <?php echo html::a($this->createLink('site', 'setsecurity'), $lang->site->changeSetting, "class='red'");?>
-    </div>
+<?php if(!$checkLocation):?>
+<div class='alert alert-success'>
+  <div>
+    <?php echo $lang->site->changeLocation;?>
+    <?php echo html::a($this->createLink('site', 'setsecurity'), $lang->site->changeSetting, "class='red'");?>
   </div>
-  <?php endif;?>
-  </div>
+</div>
+<?php endif;?>
+</div>
 
 <?php include '../../common/view/footer.admin.html.php';?>
