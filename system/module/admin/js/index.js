@@ -151,5 +151,3 @@ $(function()
         checkRefreshProgress($dashboard, function() {$icon.removeClass('icon-spin');});
     });
 });
-
-

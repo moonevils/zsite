@@ -132,7 +132,7 @@ class article extends control
         $this->view->articles   = $articles;
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
-        $this->view->template   = $this->config->template->{$this->device}->name;
+        $this->view->template   = $this->config->template->{$this->app->clientDevice}->name;
 
         $this->display();
     }   

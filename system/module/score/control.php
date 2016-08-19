@@ -52,7 +52,8 @@ class score extends control
 
             $orderID = $this->score->saveOrder();
             if(!$orderID) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('payOrder', "orderID=$orderID")));
+            $payLink = helper::createlink('order', 'check', "orderID=$orderID");
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $payLink));
         }
         $this->view->title = $this->lang->user->buyScore;
         $this->display();
@@ -74,35 +75,6 @@ class score extends control
         $this->view->title   = $this->lang->score->confirm;
         $this->view->payLink = $this->loadModel('order')->createPayLink($order);
         $this->view->order   = $order;
-        $this->display();
-    }
-
-    /**
-     * Process order.
-     * 
-     * @param  string $type
-     * @param  string $mode return|notify
-     * @access public
-     * @return object
-     */
-    public function processOrder($type = 'alipay', $mode = 'return')
-    {
-        /* Get the orderID from the order. */
-        $order = $this->loadModel('order')->getOrderFromAlipay($mode);
-        if(!$order) die('STOP!');
-
-        /* Process the order. */
-        $result = $this->score->processOrder($order);
-
-        /* Notify mode. */
-        if($mode == 'notify')
-        {
-            $this->order->saveAlipayLog();
-            if($result) die('success');
-            die('fail');
-        }
-        $this->view->result  = $result;
-        $this->view->orderID = $order->id;
         $this->display();
     }
 

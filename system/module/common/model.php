@@ -20,11 +20,19 @@ class commonModel extends model
     public function __construct()
     {
         parent::__construct();
-        $this->startSession();
-        $this->setUser();
-        $this->loadConfigFromDB();
-        $this->loadAlias();
-        $this->loadModel('site')->setSite();
+        if(!defined('FIRST_RUN'))
+        {
+            $this->startSession();
+            $this->setUser();
+            $this->loadConfigFromDB();
+
+            if($this->config->cache->type != 'close') $this->app->loadCacheClass();
+            if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 1;
+
+            $this->loadAlias();
+            $this->loadModel('site')->setSite();
+            define('FIRST_RUN', true);
+        }
     }
 
     /**
@@ -84,7 +92,7 @@ class commonModel extends model
             }
         }
 
-        $device = helper::getDevice();
+        $device = $this->app->clientDevice;
         if(isset($this->config->template->desktop) and !is_object($this->config->template->desktop)) $this->config->template->desktop = json_decode($this->config->template->desktop);
         if(isset($this->config->template->mobile) and !is_object($this->config->template->mobile)) $this->config->template->mobile = json_decode($this->config->template->mobile);
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
@@ -355,7 +363,7 @@ class commonModel extends model
         if($this->get->key) $key = $this->get->key;
 
         if(!empty($this->config->site->api->key) or $this->config->site->api->key != $key) die('KEY ERROR!');
-        if(!empty($this->config->site->api->ip) && strpos($this->config->site->api->ip, $this->server->remote_addr) === false) die('IP DENIED');
+        if(!empty($this->config->site->api->ip) && strpos($this->config->site->api->ip, helper::getRemoteIP()) === false) die('IP DENIED');
     }
 
     /**
@@ -518,7 +526,7 @@ class commonModel extends model
         global $app, $config, $lang;
 
         /* Compute cart info. */
-        if($app->device == 'desktop' and commonModel::isAvailable('shop'))
+        if($app->clientDevice == 'desktop' and commonModel::isAvailable('shop'))
         {
             $cart          = ($app->cookie->cart === false or $app->cookie->cart == '') ? array() : json_decode($app->cookie->cart);
             $goodsInCookie = array();
@@ -561,7 +569,7 @@ class commonModel extends model
                 if($messages) $messages = html::a(helper::createLink('user', 'message'), sprintf($lang->user->message->mine, $messages));
             }
 
-            if($app->device == 'mobile')
+            if($app->clientDevice == 'mobile')
             {
                 $topBar .= "<li class='menu-user-center text-center'>" . html::a(helper::createLink('user', 'control'), "<div class='user-avatar'><i class='icon icon-user avatar icon-s2 bg-primary circle'></i><strong class='user-name'>{$app->session->user->realname}</strong></div>") . '</li>';
                 $topBar .= "<li>" . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
@@ -576,7 +584,7 @@ class commonModel extends model
         }
         else
         {
-            if($app->device == 'mobile')
+            if($app->clientDevice == 'mobile')
             {
                 $topBar .= '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
                 $topBar .= '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
@@ -604,7 +612,7 @@ class commonModel extends model
         global $config, $app;
         $langs = explode(',', $config->site->lang);
         if(count($langs) == 1) return false;
-        if($app->device == 'mobile')
+        if($app->clientDevice == 'mobile')
         {
             if(commonModel::isAvailable('user')) $languagebar .= "<li class='divider'></li>";
             $clientLang = $app->getClientLang();
@@ -636,7 +644,7 @@ class commonModel extends model
     {
         global $app;
         echo "<ul class='nav'>";
-        echo '<li>' . html::a($app->config->homeRoot, $app->lang->homePage) . '</li>';
+        echo '<li>' . html::a(getHomeRoot(), $app->lang->homePage) . '</li>';
         foreach($app->site->menuLinks as $menu) echo "<li>$menu</li>";
         echo '</ul>';
     }
@@ -655,7 +663,7 @@ class commonModel extends model
         echo '<ul class="breadcrumb">';
         if($root == '')
         {
-            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a($this->config->homeRoot, $this->lang->home) . '</li>';
+            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a(getHomeRoot(), $this->lang->home) . '</li>';
         }
         else
         {
@@ -1191,7 +1199,7 @@ class commonModel extends model
      */
     public function getCurrentTemplate()
     {
-        return $this->config->template->{$this->device}->name;
+        return $this->config->template->{$this->app->clientDevice}->name;
     }
 
     /**
@@ -1202,6 +1210,6 @@ class commonModel extends model
      */
     public function getCurrentTheme()
     {
-        return $this->config->template->{$this->device}->theme;
+        return $this->config->template->{$this->app->clientDevice}->theme;
     }
 }

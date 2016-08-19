@@ -21,8 +21,6 @@ class uiModel extends model
      */
     public function getTemplates()
     {
-        $device = helper::getDevice();
-
         $this->app->loadClass('Spyc', true);
         $folders = glob($this->app->getTplRoot() . '*');
         foreach($folders as $folder)
@@ -36,7 +34,7 @@ class uiModel extends model
             $config = Spyc::YAMLLoadString(file_get_contents($docFile));
             if(empty($config)) continue;
 
-            if(isset($config['device']) and strpos($config['device'], ",{$device},") === false) continue;;
+            if(isset($config['device']) and strpos($config['device'], ",{$this->app->clientDevice},") === false) continue;;
             $templates[$templateName] = $config;
 
             if(!isset($templates[$templateName]['themes']))
@@ -134,7 +132,7 @@ class uiModel extends model
     public function getCustomCssFile($template, $theme)
     {
         $lang = $this->app->getClientLang();
-        if($this->config->multi)  return $this->app->getDataRoot() . 'css' . DS . $this->config->site->code . DS . "{$template}_{$theme}_{$lang}.css";
+        if($this->config->multi)  return $this->app->getDataRoot() . 'css' . DS . $this->app->siteCode . DS . "{$template}_{$theme}_{$lang}.css";
         if(!$this->config->multi) return $this->app->getDataRoot() . 'css' . DS . "{$template}_{$theme}_{$lang}.css";
     }
 
@@ -149,7 +147,7 @@ class uiModel extends model
     public function getThemeCssUrl($template, $theme)
     {
         $lang = $this->app->getClientLang();
-        if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $this->config->site->code . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+        if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $this->app->siteCode . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
         if(!$this->config->multi) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
     }
 
@@ -211,9 +209,8 @@ class uiModel extends model
 
         if($section == 'logo')
         {
-            $device = helper::getDevice();
-            $template = $this->config->template->{$device}->name;
-            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$device}->theme;
+            $template = $this->config->template->{$this->app->clientDevice}->name;
+            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$this->app->clientDevice}->theme;
             $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo, true) : array();
             if(!isset($logo[$template])) $logo[$template] = array();
             $logo[$template]['themes'][$theme] = $setting;
@@ -268,8 +265,8 @@ class uiModel extends model
      */
     public function getThemeSetting($key, $default = '', $template = '', $theme = '')
     {
-        if(empty($theme))    $theme    = $this->config->template->{$this->device}->theme;
-        if(empty($template)) $template = $this->config->template->{$this->device}->name;
+        if(empty($theme))    $theme    = $this->config->template->{$this->app->clientDevice}->theme;
+        if(empty($template)) $template = $this->config->template->{$this->app->clientDevice}->name;
         $config = $this->getCustomParams($template, $theme);
 
         if($key == 'sideGrid')

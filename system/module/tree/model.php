@@ -376,9 +376,9 @@ class treeModel extends model
         if($category->grade < $gradeLimit) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
         if(strpos('article,blog,product', $category->type) !== false)
         {
-            $device = helper::getDevice();
+            $device   = $this->app->clientDevice;
             $template = $config->template->{$device}->name;
-            $page = $category->type == 'blog' ? $category->type . '_index' : $category->type . '_browse';
+            $page     = $category->type == 'blog' ? $category->type . '_index' : $category->type . '_browse';
 
             $linkHtml .= "<span class='dropdown'>";
             $linkHtml .= "<a data-toggle='dropdown' href='javascript:;'>" . $lang->tree->layout . " <span class='caret'></span></a>";

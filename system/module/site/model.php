@@ -21,6 +21,6 @@ class siteModel extends model
      */
     public function setSite()
     {
-        if(!isset($this->config->site->name))          $this->config->site->name          = $this->lang->chanzhiEPS;
+        if(!isset($this->config->site->name))  $this->config->site->name = $this->lang->chanzhiEPS;
     }
 }

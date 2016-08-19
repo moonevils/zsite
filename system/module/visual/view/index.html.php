@@ -1,6 +1,6 @@
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
-<?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
-<?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
+<?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
+<?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
 <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
 <?php include "header.html.php"; ?>
 <?php
@@ -13,7 +13,7 @@ js::set('zuiAdminJsUrl', $jsRoot . 'zui/admin.min.js');
 js::set('jQueryUrl', $jsRoot . 'jquery/min.js');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
-js::set('device', $this->device);
+js::set('device', $this->app->clientDevice);
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
   <div class='container' id='menu'>

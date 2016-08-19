@@ -19,7 +19,7 @@ class block extends control
      */
     public function admin()
     {
-        $template = $this->config->template->{$this->device}->name;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
         $this->block->loadTemplateLang($template);
 
         $this->session->set('blockList', $this->app->getURI());
@@ -38,8 +38,8 @@ class block extends control
      */
     public function pages()
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $this->block->loadTemplateLang($template);
 
         $this->lang->menuGroups->block = 'ui';
@@ -62,8 +62,8 @@ class block extends control
      */
     public function create($type = 'html')
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $this->block->loadTemplateLang($template);
 
         if($_POST)
@@ -92,8 +92,8 @@ class block extends control
      */
     public function edit($blockID, $type = '')
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $this->block->loadTemplateLang($template);
 
         if(!$blockID) $this->locate($this->inlink('admin'));
@@ -126,8 +126,8 @@ class block extends control
      */
     public function setRegion($page, $region, $object = '')
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $this->block->loadTemplateLang($template);
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -193,8 +193,8 @@ class block extends control
      */
     public function switchLayout($plan)
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         $result = $this->block->setPlan($plan, $template, $theme);
         if($result) $this->locate($this->server->http_referer);
@@ -209,8 +209,8 @@ class block extends control
      */
     public function cloneLayout($plan)
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         if($plan)
         {
@@ -285,8 +285,8 @@ class block extends control
      */
     public function setColumns($page, $object = '')
     {
-        $theme    = $this->config->template->{$this->device}->theme;
-        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
         $params = $this->loadModel('ui')->getCustomParams($template, $theme);
 
         if($_POST)
