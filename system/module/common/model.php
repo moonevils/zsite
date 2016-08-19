@@ -644,7 +644,7 @@ class commonModel extends model
     {
         global $app;
         echo "<ul class='nav'>";
-        echo '<li>' . html::a($app->config->homeRoot, $app->lang->homePage) . '</li>';
+        echo '<li>' . html::a(getHomeRoot(), $app->lang->homePage) . '</li>';
         foreach($app->site->menuLinks as $menu) echo "<li>$menu</li>";
         echo '</ul>';
     }
@@ -663,7 +663,7 @@ class commonModel extends model
         echo '<ul class="breadcrumb">';
         if($root == '')
         {
-            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a($this->config->homeRoot, $this->lang->home) . '</li>';
+            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a(getHomeRoot(), $this->lang->home) . '</li>';
         }
         else
         {
