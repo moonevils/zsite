@@ -134,9 +134,8 @@ class fileModel extends model
      */
     public function getSourceList($type = '', $orderBy = 'id_desc', $pager = null)
     {
-        $device   = helper::getDevice();
-        $template = $this->config->template->{$device}->name;
-        $theme    = $this->config->template->{$device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         $this->syncSources($template, $theme);
 
@@ -476,9 +475,8 @@ class fileModel extends model
         elseif($objectType == 'source') 
         {
             /* Process file path if objectType is source. */
-            $device   = helper::getDevice();
-            $template = $this->config->template->{$device}->name;
-            $theme    = $this->config->template->{$device}->theme;
+            $template = $this->config->template->{$this->app->clientDevice}->name;
+            $theme    = $this->config->template->{$this->app->clientDevice}->theme;
             return "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
         }
         
@@ -502,9 +500,8 @@ class fileModel extends model
 
         if($objectType == 'source')
         {
-            $device   = helper::getDevice();
-            $template = $this->config->template->{$device}->name;
-            $theme    = $this->config->template->{$device}->theme;
+            $template = $this->config->template->{$this->app->clientDevice}->name;
+            $theme    = $this->config->template->{$this->app->clientDevice}->theme;
             $savePath = $this->app->getDataRoot() . "source/{$template}/{$theme}/";
             $this->savePath = $this->app->getDataRoot();
         }
@@ -639,9 +636,8 @@ class fileModel extends model
      */
     public function checkSameFile($filename, $fileID = 0)
     {
-        $device   = helper::getDevice();
-        $template = $this->config->template->{$device}->name;
-        $theme    = $this->config->template->{$device}->theme;
+        $template = $this->config->template->{$app->clientDevice}->name;
+        $theme    = $this->config->template->{$app->clientDevice}->theme;
 
         return $this->dao->select('*')->from(TABLE_FILE)
             ->where('title')->eq($filename)
@@ -700,7 +696,7 @@ class fileModel extends model
         $log = new stdClass();
         $log->file    = $file;
         $log->account = $this->app->user->account;
-        $log->ip      = $this->server->remote_addr;
+        $log->ip      = helper::getRemoteIP();
         $log->referer = $this->server->http_referer;
         $log->time    = helper::now();
 

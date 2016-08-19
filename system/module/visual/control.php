@@ -19,7 +19,7 @@ class visual extends control
      */
     public function index($referer = '')
     {
-        $template = $this->config->template->{$this->device}->name;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
         $this->loadModel('block')->loadTemplateLang($template);;
 
         $this->view->referer = helper::safe64decode($referer);
@@ -39,8 +39,8 @@ class visual extends control
     public function editlogo()
     {
         $this->app->loadLang('ui');
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
 
         $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
@@ -69,8 +69,8 @@ class visual extends control
      */
     public function fixBlock($page, $region, $blockID, $object = '')
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region, $object);
 
         $blocks   = json_decode($layout->blocks);
@@ -103,8 +103,8 @@ class visual extends control
      */
     public function removeBlock($blockID, $page, $region, $object = '')
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $object, $blockID);
         $this->send($result);
@@ -120,8 +120,8 @@ class visual extends control
     {
         $blockModel = $this->loadModel('block');
 
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         if($_POST)
         {
@@ -154,8 +154,8 @@ class visual extends control
      */
     public function sortBlocks($page, $region, $parent = 0, $object = '')
     {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         if($_POST)
         {

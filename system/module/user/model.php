@@ -550,7 +550,7 @@ class userModel extends model
         }
 
         /* Update user data. */
-        $user->ip     = $this->server->remote_addr;
+        $user->ip     = helper::getRemoteIP();
         $user->last   = helper::now();
         $user->fails  = 0;
         $user->visits ++;
@@ -560,7 +560,7 @@ class userModel extends model
 
         $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
-        $user->realname = $this->computeRealname($user);
+        $user->realname  = $this->computeRealname($user);
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
@@ -573,7 +573,7 @@ class userModel extends model
                 $this->app->user->account = $account;
                 if($user->maxLogin > 0)
                 {
-                    $this->app->loadConfig('score');
+                    $this->app->loadModuleConfig('score');
                     $login = $this->config->score->counts->login;
                     $this->dao->update(TABLE_USER)->set('maxLogin = maxLogin - '. $login)->where('account')->eq($account)->exec();
                     $this->loadModel('score')->earn('login', '', '', 'LOGIN');

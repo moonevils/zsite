@@ -311,7 +311,21 @@ class orderModel extends model
             ->where('id')->eq($order->id)->exec();
 
         if(dao::isError()) return false;
+
+        if(is_callable(array($this, "process{$order->type}Order"))) call_user_func(array($this, "process{$order->type}Order"), $order);
         return true;
+    }
+
+    /**
+     * Process ccore order.
+     * 
+     * @param  int    $order 
+     * @access public
+     * @return void
+     */
+    public function processScoreOrder($order)
+    {
+        $result = $this->loadModel('score')->processOrder($order);
     }
 
     /**

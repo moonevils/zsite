@@ -68,6 +68,7 @@ $lang->score->lblTotal         = "共有消耗积分：%s, 等级积分：%s ";
 $lang->score->lblNoScore       = "抱歉，您的积分不够";
 $lang->score->lblNoScoreReason = "抱歉，您的积分不够 %s 需要 <strong class='red'>%s</strong> 分，您现在有 <strong class='red'>%s</strong> 分";
 $lang->score->lblDetail        = "详情可参考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
+$lang->score->lblBuySocre      = "购买积分 %s";
 
 $lang->score->setAmount   = '充值金额';
 $lang->score->getScore    = '获取积分';

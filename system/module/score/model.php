@@ -271,7 +271,7 @@ class scoreModel extends model
         $data->account    = strip_tags($account);
         $data->objectType = $objectType;
         $data->objectID   = (int)$objectID;
-        $data->ip         = $this->server->remote_addr;
+        $data->ip         = helper::getRemoteIP();
         $data->date       = date('Y-m-d');
 
         $this->dao->insert(TABLE_IP)->data($data)->exec(); 
@@ -285,7 +285,7 @@ class scoreModel extends model
      */
     public function saveOrder()
     {
-        $data = fixer::input('post')
+        $order = fixer::input('post')
             ->add('account', $this->app->user->account)
             ->add('createdDate', helper::now())
             ->add('payment', 'alipay')
@@ -293,9 +293,22 @@ class scoreModel extends model
             ->add('payStatus', 'not_paid')
             ->add('type', 'score')
             ->get();
-        $this->dao->insert(TABLE_ORDER)->data($data)->check('amount', 'notempty')->exec();
-        if(!dao::isError()) return $this->dao->lastInsertID();
-        return false;
+
+        $this->dao->insert(TABLE_ORDER)->data($order)->check('amount', 'notempty')->exec();
+
+        if(dao::isError()) return false;
+        $orderID = $this->dao->lastInsertID();
+
+        $goods = new stdclass();
+        $goods->orderID     = $orderID;
+        $goods->productID   = 0;
+        $goods->productName = sprintf($this->lang->score->lblBuySocre, $order->amount * $this->config->score->buyScore->perYuan);
+        $goods->price       = $order->amount;
+        $goods->count       = 1;
+        $this->dao->insert(TABLE_ORDER_PRODUCT)->data($goods)->exec();
+        
+        if(dao::isError()) return false;
+        return $orderID;
     }
 
     /**
@@ -323,20 +336,11 @@ class scoreModel extends model
      */
     public function processOrder($order)
     {
-        if($order->payStatus == 'paid') return true;
-        $result = $this->loadModel('order')->processOrder($order);
-        if($result)
-        {
-            $account = $order->account;
-            $count   = round($order->amount * $this->config->score->buyScore->perYuan);
-            $type    = 'in';
-            $note = strtoupper('buyScore') . ":" . $order->id;
-            return $this->log($account, 'buyScore', $type, $count, $note, 'buyScore', $order->id);
-        }
-        else
-        {
-            return $result;
-        }
+        $account = $order->account;
+        $count   = round($order->amount * $this->config->score->buyScore->perYuan);
+        $type    = 'in';
+        $note    = strtoupper('buyScore') . ":" . $order->id;
+        return $this->log($account, 'buyScore', $type, $count, $note, 'buyScore', $order->id);
     }
 
     /**

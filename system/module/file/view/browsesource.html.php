@@ -5,8 +5,8 @@
   <div class='modal-dialog'>
     <div class='modal-content'>
       <div class='modal-header'><?php echo $lang->file->uploadSource?></div>
-      <?php $template = $this->config->template->{$this->device}->name;?>
-      <?php $theme    = $this->config->template->{$this->device}->theme;?>
+      <?php $template = $this->config->template->{$this->app->clientDevice}->name;?>
+      <?php $theme    = $this->config->template->{$this->app->clientDevice}->theme;?>
       <form id="fileForm" method='post' enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=source&objectID={$template}_{$theme}");?>'>
         <table class='table table-form'>
           <?php if($writeable):?>
@@ -14,7 +14,7 @@
             <td class='w-10px'></td>
             <td class='text-middle w-100px'><?php echo $lang->file->source . sprintf($lang->file->limit, $this->config->file->maxSize / 1024 /1024);?></td>
             <td><?php echo $this->fetch('file', 'buildForm');?></td>
-            <te class='w-40px'></td>
+            <td class='w-40px'></td>
           </tr>
           <tr><td colspan='4' class='text-center'><?php echo html::submitButton();?></td></tr>
           <?php else:?>
