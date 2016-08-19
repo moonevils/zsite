@@ -271,7 +271,7 @@ class scoreModel extends model
         $data->account    = strip_tags($account);
         $data->objectType = $objectType;
         $data->objectID   = (int)$objectID;
-        $data->ip         = $this->server->remote_addr;
+        $data->ip         = helper::getRemoteIP();
         $data->date       = date('Y-m-d');
 
         $this->dao->insert(TABLE_IP)->data($data)->exec(); 

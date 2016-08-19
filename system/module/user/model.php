@@ -550,7 +550,7 @@ class userModel extends model
         }
 
         /* Update user data. */
-        $user->ip     = $this->server->remote_addr;
+        $user->ip     = helper::getRemoteIP();
         $user->last   = helper::now();
         $user->fails  = 0;
         $user->visits ++;
