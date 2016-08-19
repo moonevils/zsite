@@ -283,7 +283,7 @@ class order extends control
      */
     public function processOrder($type = 'alipay', $mode = 'return')
     {
-        if($type == 'alipay') $order = $this->processAlipayOrder($mode);
+        if($type == 'alipay') $this->processAlipayOrder($mode)
         $this->display('order', zget($this->config->order->processViews, $this->view->order->type, 'processorder')); 
     }
 
