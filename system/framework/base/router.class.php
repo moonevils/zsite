@@ -370,6 +370,23 @@ class baseRouter
         if($this->config->framework->multiSite)     $this->setSiteCode() && $this->loadExtraConfig();
     }
 
+    /**
+     * 创建一个应用。
+     * Create an application.
+     * 
+     * @param string $appName   应用名称。  The name of the app.
+     * @param string $appRoot   应用根路径。The root path of the app.
+     * @param string $className 应用类名，如果对router类做了扩展，需要指定类名。When extends router class, you should pass in the child router class name.
+     * @static
+     * @access public
+     * @return object   the app object
+     */
+    public static function createApp($appName = 'demo', $appRoot = '', $className = '')
+    {
+        if(empty($className)) $className = __CLASS__;
+        return new $className($appName, $appRoot);
+    }
+
     //-------------------- 路径相关方法(Path related methods)--------------------//
 
     /**
