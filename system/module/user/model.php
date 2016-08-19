@@ -560,7 +560,7 @@ class userModel extends model
 
         $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
-        $user->realname = $this->computeRealname($user);
+        $user->realname  = $this->computeRealname($user);
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
