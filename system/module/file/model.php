@@ -696,7 +696,7 @@ class fileModel extends model
         $log = new stdClass();
         $log->file    = $file;
         $log->account = $this->app->user->account;
-        $log->ip      = $this->server->remote_addr;
+        $log->ip      = helper::getRemoteIP();
         $log->referer = $this->server->http_referer;
         $log->time    = helper::now();
 
