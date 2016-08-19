@@ -263,6 +263,11 @@ class router extends baseRouter
             }
         }
 
+        if(empty($lang) and isset($_COOKIE[$langCookieVar])) 
+        {
+            $lang = $_COOKIE[$langCookieVar];
+        }
+
         if(empty($lang) and RUN_MODE == 'admin' and isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
         {
             $lang = strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ',') === false ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ','));
