@@ -104,7 +104,6 @@ class control extends baseControl
             }
         }
         return $viewFile;
-
     }
 
     /**
