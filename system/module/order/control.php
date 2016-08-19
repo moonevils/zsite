@@ -95,6 +95,9 @@ class order extends control
             $paymentOptions[$payment] = $this->lang->order->paymentList[$payment];
         }
 
+        if($order->type != 'shop') unset($paymentOptions['COD']);
+
+        $this->view->title          = $this->lang->order->check;
         $this->view->order          = $order;
         $this->view->products       = $this->order->getOrderProducts($orderID);
         $this->view->paymentList    = $paymentOptions;
@@ -280,7 +283,8 @@ class order extends control
      */
     public function processOrder($type = 'alipay', $mode = 'return')
     {
-        if($type == 'alipay') $this->processAlipayOrder($mode);
+        if($type == 'alipay') $order = $this->processAlipayOrder($mode);
+        $this->display('order', zget($this->config->order->processViews, $this->view->order->type, 'processorder')); 
     }
 
     /**
@@ -316,7 +320,7 @@ class order extends control
         $this->view->order  = $order;
         $this->view->result = $result;
 
-        $this->display('order', 'processorder'); 
+        return $order;
     }
      
     /**
