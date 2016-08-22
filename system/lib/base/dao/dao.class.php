@@ -773,22 +773,12 @@ class baseDAO
      */
     public function fetch($field = '')
     {
-        $sql = $this->processSQL($saveQuery = false);
-        $key = md5($sql);
-        if(isset(dao::$cache['fetch'][$key][$field])) return dao::$cache['fetch'][$key][$field];
-
-        if(empty($field))
-        {
-            $result = $this->query()->fetch();
-            dao::$cache['fetch'][$key][$field] = $result;
-            return $result;
-        }
+        if(empty($field)) return $this->query()->fetch();
 
         $this->setFields($field);
         $result = $this->query()->fetch(PDO::FETCH_OBJ);
         if($result)
         {
-            dao::$cache['fetch'][$key][$field] = $result->$field;
             return $result->$field;
         }
     }
