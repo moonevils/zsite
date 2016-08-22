@@ -687,6 +687,7 @@ class baseControl
         $modulePath        = $this->app->getModulePath($appName, $moduleName);
         $moduleControlFile = $modulePath . 'control.php';
         $actionExtPath     = $this->app->getModuleExtPath($appName, $moduleName, 'control');
+        $file2Included     = $moduleControlFile;
 
         if(!empty($actionExtPath))
         {
@@ -698,15 +699,15 @@ class baseControl
                 $siteActionExtFile = $actionExtPath['site'] . strtolower($methodName) . '.php';
                 $file2Included     = file_exists($siteActionExtFile) ? $siteActionExtFile : $file2Included;
             }
-
-            /**
-             * 加载控制器文件。
-             * Load the control file. 
-             */
-            if(!is_file($file2Included)) $this->app->triggerError("The control file $file2Included not found", __FILE__, __LINE__, $exit = true);
-            chdir(dirname($file2Included));
-            if($moduleName != $this->moduleName) helper::import($file2Included);
         }
+
+        /**
+         * 加载控制器文件。
+         * Load the control file. 
+         */
+        if(!is_file($file2Included)) $this->app->triggerError("The control file $file2Included not found", __FILE__, __LINE__, $exit = true);
+        chdir(dirname($file2Included));
+        if($moduleName != $this->moduleName) helper::import($file2Included);
 
         /**
          * 设置调用的类名。
