@@ -58,7 +58,7 @@
             ?>
             </ul>
           </span>
-          <?php if(commonModel::isAvailable('score')):?>
+          <?php if(commonModel::isAvailable('score') and $this->thread->canManage($board->id)):?>
           <?php $account = helper::safe64Encode($thread->author);?>
           <?php echo html::a(inlink('addScore', "account={$account}&objectType=thread&objectID={$thread->id}"), $lang->thread->score, "data-toggle=modal");?>
           <?php endif;?>
