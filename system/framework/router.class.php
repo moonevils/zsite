@@ -77,7 +77,7 @@ class router extends baseRouter
     {
         $this->loadClass('cache', $static = true);
         $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache';
-        if($this->config->multi) $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache' . DS . $this->app->siteCode;
+        if($this->config->multi) $this->config->cache->file->savePath = $this->getTmpRoot() . 'cache' . DS . $this->siteCode;
 
         $cacheConfig = zget($this->config->cache, $this->config->cache->type);
         if(is_object($cacheConfig)) $cacheConfig->lang = $this->getClientLang();
