@@ -235,39 +235,48 @@ class messageModel extends model
             ->page($pager)
             ->fetchAll('id');
 
-        /* Get object titles and id. */
-        $articles   = array();
-        $products   = array();
-        $books      = array();
-        $messageIDs = array();
-        $comments   = array();
-
-        foreach($messages as $message)
-        {
-            if('article' == $message->objectType) $articles[]   = $message->objectID;
-            if('product' == $message->objectType) $products[]   = $message->objectID;
-            if('book'    == $message->objectType) $books[]      = $message->objectID;
-            if('message' == $message->objectType) $messageIDs[] = $message->objectID;
-            if('comment' == $message->objectType) $comments[]   = $message->objectID;
-        }
-
-        $articleTitles = $this->dao->select('id, title')->from(TABLE_ARTICLE)->where('id')->in($articles)->fetchPairs('id', 'title');
-        $productTitles = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($products)->fetchPairs('id', 'name');
-        $bookTitles    = $this->dao->select('id, title')->from(TABLE_BOOK)->where('id')->in($books)->fetchPairs('id', 'title');
-        $messageTitles = $this->dao->select('id, `from`')->from(TABLE_MESSAGE)->where('id')->in($messageIDs)->fetchPairs('id', 'from');
-        $commentTitles = $this->dao->select('id, `from`')->from(TABLE_MESSAGE)->where('id')->in($comments)->fetchPairs('id', 'from');
-
-        foreach($messages as $message)
-        {
-            if($message->objectType == 'article') $message->objectTitle = isset($articleTitles[$message->objectID]) ? $articleTitles[$message->objectID] : '';
-            if($message->objectType == 'product') $message->objectTitle = isset($productTitles[$message->objectID]) ? $productTitles[$message->objectID] : '';
-            if($message->objectType == 'book')    $message->objectTitle = isset($bookTitles[$message->objectID]) ? $bookTitles[$message->objectID] : '';
-            if($message->objectType == 'message') $message->objectTitle = isset($messageTitles[$message->objectID]) ? $messageTitles[$message->objectID] : '';
-            if($message->objectType == 'comment') $message->objectTitle = isset($commentTitles[$message->objectID]) ? $commentTitles[$message->objectID] : '';
-        }
+        $messages = $this->processObjectTitle($messages);
 
         foreach($messages as $message) $message->objectViewURL = $this->getObjectLink($message);
 
+        return $messages;
+    }
+
+    /**
+     * Process object title of messages.
+     * 
+     * @param  array    $messages 
+     * @access public
+     * @return array
+     */
+    public function processObjectTitle($messages)
+    {
+        $objects = array();
+        $titles  = array();
+
+        foreach($messages as $message)
+        {
+            $objects[$message->objectType][] = $message->objectID;
+        }
+
+        foreach($objects as $type => $objectList)
+        {
+            if($type == 'article') $titles[$type] = $this->dao->select('id, title')->from(TABLE_ARTICLE)->where('id')->in($objectList)->fetchPairs('id', 'title');
+            elseif($type == 'product') $titles[$type] = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($objectList)->fetchPairs('id', 'name');
+            elseif($type == 'book')    $titles[$type] = $this->dao->select('id, title')->from(TABLE_BOOK)->where('id')->in($objectList)->fetchPairs('id', 'title');
+            elseif($type == 'comment') $titles[$type] = $this->dao->select('id, `from`')->from(TABLE_MESSAGE)->where('id')->in($objectList)->fetchPairs('id', 'from');
+            elseif($type == 'message') $titles[$type] = $this->dao->select('id, `from`')->from(TABLE_MESSAGE)->where('id')->in($objectList)->fetchPairs('id', 'from');
+
+            /* If ext function for get title callable call them, */
+            elseif(is_callable(array($this, "get{$type}Title")))  $titles[$type] =  call_user_func(array($this, "get{$message->objectType}Title"), $objectList);
+
+        }
+
+        foreach($messages as $message)
+        {
+            $message->objectTitle = isset($titles[$message->objectType][$message->objectID]) ? $titles[$message->objectType][$message->objectID] : '';
+        }
+        
         return $messages;
     }
 
@@ -510,6 +519,10 @@ class messageModel extends model
         {
             $object = $this->getByID($message->objectID);
             $link   = $this->getObjectLink($object);
+        }
+        elseif(is_callable(array($this, "get{$message->objectType}Link")))
+        {
+            $link = call_user_func(array($this, "get{$message->objectType}Link"), $message);
         }
 
         return $link;
