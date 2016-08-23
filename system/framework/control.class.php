@@ -99,7 +99,7 @@ class control extends baseControl
         {
             if(strpos($viewFile['viewFile'], DS . 'ext' . DS) === false)
             {
-                $frontFile = str_replace($this->app->getAppRoot(), $templatePath, $viewFile);
+                $frontFile = str_replace($this->app->getAppRoot(), $templatePath, $viewFile['viewFile']);
                 if(file_exists($frontFile)) $viewFile['viewFile'] = $frontFile;
             }
         }
