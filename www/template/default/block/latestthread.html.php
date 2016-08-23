@@ -13,7 +13,7 @@
 <?php 
 /* Set $themRoot. */
 $themeRoot = $this->config->webRoot . 'theme/';
-$this->app->loadConfig('forum');
+$this->app->loadModuleConfig('forum');
 
 /* Decode the content and get articles. */
 $content = json_decode($block->content);
