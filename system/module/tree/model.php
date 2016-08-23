@@ -364,7 +364,7 @@ class treeModel extends model
      */
     public static function createManageLink($category)
     {
-        global $lang, $config;
+        global $app, $lang, $config;
 
         /* Set the class of children link. */
         $childrenLinkClass = '';
@@ -376,7 +376,7 @@ class treeModel extends model
         if($category->grade < $gradeLimit) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
         if(strpos('article,blog,product', $category->type) !== false)
         {
-            $device   = $this->app->clientDevice;
+            $device   = $app->clientDevice;
             $template = $config->template->{$device}->name;
             $page     = $category->type == 'blog' ? $category->type . '_index' : $category->type . '_browse';
 
