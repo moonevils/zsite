@@ -235,7 +235,7 @@ class messageModel extends model
             ->page($pager)
             ->fetchAll('id');
 
-        $messages = $this->processObjectTitle($messages);
+        $messages = $this->getTitlesByList($messages);
 
         foreach($messages as $message) $message->objectViewURL = $this->getObjectLink($message);
 
@@ -243,13 +243,13 @@ class messageModel extends model
     }
 
     /**
-     * Process object title of messages.
+     * Get object title of messages.
      * 
      * @param  array    $messages 
      * @access public
      * @return array
      */
-    public function processObjectTitle($messages)
+    public function getTitlesByList($messages)
     {
         $objects = array();
         $titles  = array();
@@ -269,7 +269,6 @@ class messageModel extends model
 
             /* If ext function for get title callable call them, */
             elseif(is_callable(array($this, "get{$type}Title")))  $titles[$type] =  call_user_func(array($this, "get{$message->objectType}Title"), $objectList);
-
         }
 
         foreach($messages as $message)
@@ -279,6 +278,49 @@ class messageModel extends model
         
         return $messages;
     }
+
+    /**
+     * Get the link of the object of one message.
+     *
+     * @param string $message
+     * @access public
+     * @return sting
+     */
+    public function getObjectLink($message)
+    {
+        if(empty($message)) return '';
+        if($message->type == 'message') return commonModel::createFrontLink('message', 'index');
+        $link = '';
+        if($message->objectType == 'article')
+        {
+            $link = $this->loadModel('article')->createPreviewLink($message->objectID);
+        }
+        elseif($message->objectType == 'product')
+        {
+            $link = commonModel::createFrontLink('product', 'view', "prodcutID=$message->objectID");
+        }
+        elseif($message->objectType == 'book')
+        {
+            $node = $this->loadModel('book')->getNodeByID($message->objectID);
+            $link = commonModel::createFrontLink('book', 'read', "articleID=$message->objectID", "book={$node->book->alias}&node={$node->alias}");
+        }
+        elseif($message->objectType == 'message')
+        {
+            $link = commonModel::createFrontLink('message', 'index') . "#comment{$message->objectID}";
+        }
+        elseif($message->objectType == 'comment')
+        {
+            $object = $this->getByID($message->objectID);
+            $link   = $this->getObjectLink($object);
+        }
+        elseif(is_callable(array($this, "get{$message->objectType}Link")))
+        {
+            $link = call_user_func(array($this, "get{$message->objectType}Link"), $message);
+        }
+
+        return $link;
+    }
+
 
     /**
      * Post a message.
@@ -484,48 +526,6 @@ class messageModel extends model
             }
         }
         setcookie('cmts', $messages);
-    }
-
-    /**
-     * Get the link of the object of one message.
-     *
-     * @param string $message
-     * @access public
-     * @return sting
-     */
-    public function getObjectLink($message)
-    {
-        if(empty($message)) return '';
-        if($message->type == 'message') return commonModel::createFrontLink('message', 'index');
-        $link = '';
-        if($message->objectType == 'article')
-        {
-            $link = $this->loadModel('article')->createPreviewLink($message->objectID);
-        }
-        elseif($message->objectType == 'product')
-        {
-            $link = commonModel::createFrontLink('product', 'view', "prodcutID=$message->objectID");
-        }
-        elseif($message->objectType == 'book')
-        {
-            $node = $this->loadModel('book')->getNodeByID($message->objectID);
-            $link = commonModel::createFrontLink('book', 'read', "articleID=$message->objectID", "book={$node->book->alias}&node={$node->alias}");
-        }
-        elseif($message->objectType == 'message')
-        {
-            $link = commonModel::createFrontLink('message', 'index') . "#comment{$message->objectID}";
-        }
-        elseif($message->objectType == 'comment')
-        {
-            $object = $this->getByID($message->objectID);
-            $link   = $this->getObjectLink($object);
-        }
-        elseif(is_callable(array($this, "get{$message->objectType}Link")))
-        {
-            $link = call_user_func(array($this, "get{$message->objectType}Link"), $message);
-        }
-
-        return $link;
     }
 
     /**
