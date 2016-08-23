@@ -81,28 +81,38 @@ class control extends baseControl
      */
     public function setViewFile($moduleName, $methodName)
     {
-        $viewFile = parent::setViewFile($moduleName, $methodName);
-        if(RUN_MODE != 'front') return $viewFile;
+        $moduleName = strtolower(trim($moduleName));
+        $methodName = strtolower(trim($methodName));
 
-        $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $moduleName;
+        $modulePath  = $this->app->getModulePath($this->appName, $moduleName);
+        $viewExtPath = $this->app->getModuleExtPath($this->appName, $moduleName, 'view');
 
-        /* If there is no hook files. */
-        if(is_string($viewFile))
+        $viewType     = $this->viewType == 'mhtml' ? 'html' : $this->viewType;
+        $mainViewFile = $modulePath . 'view' . DS . $this->devicePrefix . $methodName . '.' . $viewType . '.php';
+        $viewFile     = $mainViewFile;
+
+        if(RUN_MODE == 'front')
         {
-            if(strpos($viewFile, DS . 'ext' . DS) === false)
-            {
-                $viewFile = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
-                if(file_exists($viewFile)) return $viewFile;
-            }
+            $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $moduleName;
+            $viewFile = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
+            $mainViewFile = $viewFile;
         }
-        if(is_array($viewFile))
+
+        if(!empty($viewExtPath))
         {
-            if(strpos($viewFile['viewFile'], DS . 'ext' . DS) === false)
-            {
-                $frontFile = str_replace($this->app->getAppRoot(), $templatePath, $viewFile['viewFile']);
-                if(file_exists($frontFile)) $viewFile['viewFile'] = $frontFile;
-            }
+            $commonExtViewFile = $viewExtPath['common'] . $this->devicePrefix . $methodName . ".{$viewType}.php";
+            $siteExtViewFile   = empty($viewExtPath['site']) ? '' : $viewExtPath['site'] . $this->devicePrefix . $methodName . ".{$viewType}.php";
+
+            $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
+            $viewFile = (!empty($siteExtViewFile) and file_exists($siteExtViewFile)) ? $siteExtViewFile : $viewFile;
+            if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
+
+            $commonExtHookFiles = glob($viewExtPath['common'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
+            $siteExtHookFiles   = empty($viewExtPath['site']) ? '' : glob($viewExtPath['site'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
+            $extHookFiles       = array_merge((array) $commonExtHookFiles, (array) $siteExtHookFiles);
         }
+
+        if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
         return $viewFile;
     }
 
