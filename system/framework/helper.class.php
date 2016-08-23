@@ -235,6 +235,33 @@ class helper extends baseHelper
 
         return 'unknown';
     }
+
+    /**
+     * Create random string. 
+     * 
+     * @param  int    $length 
+     * @param  string $skip A-Z|a-z|0-9
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function createRandomStr($length, $skip = '')
+    {
+        $str  = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $skip = str_replace('A-Z', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', $skip);
+        $skip = str_replace('a-z', 'abcdefghijklmnopqrstuvwxyz', $skip);
+        $skip = str_replace('0-9', '0123456789', $skip);
+        for($i = 0; $i < strlen($skip); $i++)
+        {
+            $str = str_replace($skip[$i], '', $str);
+        }
+
+        $strlen = strlen($str);
+        while($length > strlen($str)) $str .= $str;
+
+        $str = str_shuffle($str); 
+        return substr($str,0,$length); 
+    }
 }
 
 /**
@@ -322,7 +349,7 @@ function k()
     $count    = count($keywords);
 
     $sum = 0;
-    for($i = 0; $i < $codeLen; $i++) $sum += ord($siteCode{$i});
+    for($i = 0; $i < $codeLen; $i++) $sum += ord($app->siteCode{$i});
 
     $key = $sum % $count;
     return $keywords[$key];
