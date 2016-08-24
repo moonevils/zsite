@@ -1852,7 +1852,7 @@ class baseRouter
         $mainConfigFile = $this->getModulePath($appName, $moduleName) . 'config.php';
 
         /* 查找扩展配置文件。Get extension config files. */
-        if($config->framework->extensionLevel > 0)  $extConfigPath        = $this->getModuleExtPath($appName, $moduleName, 'config');
+        if($config->framework->extensionLevel > 0) $extConfigPath = $this->getModuleExtPath($appName, $moduleName, 'config');
         if($config->framework->extensionLevel >= 1 and !empty($extConfigPath['common'])) $commonExtConfigFiles = helper::ls($extConfigPath['common'], '.php');
         if($config->framework->extensionLevel == 2 and !empty($extConfigPath['site']))   $siteExtConfigFiles   = helper::ls($extConfigPath['site'], '.php');
         $extConfigFiles = array_merge($commonExtConfigFiles, $siteExtConfigFiles);
@@ -1928,7 +1928,7 @@ class baseRouter
             $siteExtLangFiles   = array();
 
             $extLangPath = $this->getModuleExtPath($appName, $moduleName, 'lang');
-            if($this->config->framework->extensionLevel == 1 and !empty($extLangPath['common'])) $commonExtLangFiles = helper::ls($extLangPath['common'] . $this->clientLang, '.php');
+            if($this->config->framework->extensionLevel >= 1 and !empty($extLangPath['common'])) $commonExtLangFiles = helper::ls($extLangPath['common'] . $this->clientLang, '.php');
             if($this->config->framework->extensionLevel == 2 and !empty($extLangPath['site']))   $siteExtLangFiles   = helper::ls($extLangPath['site'] . $this->clientLang, '.php');
             $extLangFiles  = array_merge($commonExtLangFiles, $siteExtLangFiles);
         }
