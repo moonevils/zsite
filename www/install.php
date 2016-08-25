@@ -34,9 +34,6 @@ $config->set('debug', true);
 $config->set('default.module', 'install');
 $app->setDebug();
 
-/* If setted db parms, connect it. */
-if(!empty($config->installed)) $dbh = $app->connectDB();
-
 /* Run the app. */
 $app->parseRequest();
 $app->loadModule();
