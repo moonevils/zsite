@@ -169,6 +169,71 @@ class router extends baseRouter
     }
 
     /**
+     * Override set control file logic, use modulePath instead of moduleRoot and moduleName.
+     * 
+     * @access  public
+     * @return  bool
+     */
+    public function setControlFile()
+    {
+        $modulePath = $this->getModulePath();
+        $this->controlFile = $modulePath . DS . 'control.php';
+
+        if(is_file($this->controlFile)) return true;
+
+        if($this->getModuleName() != 'error') 
+        {
+            if($this->server->request_uri == '/favicon.ico') die();
+            $this->setModuleName('error');
+            $this->setMethodName('index');
+            return $this->setControlFile();
+        }
+    }
+
+    /**
+     * Extends get module path logic. 
+     * If the module path doesn't exist and extensionLevel == 2, return the ext directory of site below module root.
+     * 
+     * @param  string $appName    the app name
+     * @param  string $moduleName    the module name
+     * @access public
+     * @return string the module path
+     */
+    public function getModulePath($appName = '', $moduleName = '')
+    {
+        if($moduleName == '') $moduleName = $this->moduleName;
+        $modulePath = parent::getModulePath($appName, $moduleName);
+        if(!file_exists($modulePath) && $this->config->framework->extensionLevel == 2) 
+        {
+            $modulePath = $this->getModuleRoot() . 'ext' . DS . '_' . $this->siteCode . DS . $moduleName . DS;
+        }
+        return $modulePath;
+    }
+
+    /**
+     * Extends get module ext path logic. 
+     * If the extensionLevel == 2, use the ext directory of site below module root as site extension directory.
+     *
+     * @param   string $appName        the app name
+     * @param   string $moduleName     the module name
+     * @param   string $ext            the extension type, can be control|model|view|lang|config
+     * @access  public
+     * @return  string the extension path.
+     */
+    public function getModuleExtPath($appName, $moduleName, $ext)
+    {
+        $paths = parent::getModuleExtPath($appName, $moduleName, $ext);
+
+        $modulePath = parent::getModulePath($appName, $moduleName);
+        if(!file_exists($modulePath) && $this->config->framework->extensionLevel == 2)
+        {
+            $modulePath = $this->getModuleRoot() . 'ext' . DS . '_' . $this->siteCode . DS . $moduleName . DS;
+            $paths['site'] = $modulePath . $ext . DS;
+        }
+        return $paths;
+    }
+
+    /**
      * Extend page cache logics.
      * 
      * @access public
