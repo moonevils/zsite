@@ -27,3 +27,15 @@ $config->user->navGroups = new stdclass();
 $config->user->navGroups->user    = 'profile,message,score,recharge';
 $config->user->navGroups->order   = 'order,address';
 $config->user->navGroups->message = 'thread,reply,submittion';
+
+$config->user->relatedTables = array();
+$config->user->relatedTables[TABLE_MESSAGE][]  = 'account';
+$config->user->relatedTables[TABLE_MESSAGE][]  = '`to`';
+$config->user->relatedTables[TABLE_THREAD][]   = 'author';
+$config->user->relatedTables[TABLE_THREAD][]   = 'repliedBy';
+$config->user->relatedTables[TABLE_REPLY][]    = 'author';
+$config->user->relatedTables[TABLE_CATEGORY][] = 'postedBy';
+$config->user->relatedTables[TABLE_ADDRESS][]  = 'account';
+$config->user->relatedTables[TABLE_CART][]     = 'account';
+$config->user->relatedTables[TABLE_ORDER][]    = 'account';
+$config->user->relatedTables[TABLE_ARTICLE][]  = 'addedBy';
