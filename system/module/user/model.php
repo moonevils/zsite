@@ -864,6 +864,29 @@ class userModel extends model
     }
 
     /**
+     * Update related data. 
+     * 
+     * @param  string    $oldAccount 
+     * @param  string    $account 
+     * @access public
+     * @return void
+     */
+    public function updateRelated($oldAccount, $account)
+    {
+        foreach($this->config->relatedTables as $table => $field)
+        {
+            $this->dao->update($table)
+                ->set($field)->eq($account)
+                ->where($field)->eq($oldAccount)
+                ->exec();
+
+            if(dao::isError()) return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Register an account when using OAuth.
      * 
      * @param  string    $provider 
@@ -901,15 +924,7 @@ class userModel extends model
                 ->where('id')->eq($oldUser->id)
                 ->exec();
 
-           $this->dao->update(TABLE_MESSAGE)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_MESSAGE)->set('to')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_THREAD)->set('author')->eq($user->account)->where('author')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_THREAD)->set('repliedBy')->eq($user->account)->where('repliedBy')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_REPLY)->set('author')->eq($user->account)->where('author')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_CATEGORY)->set('postedBy')->eq($user->account)->where('postedBy')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_ADDRESS)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_CART)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
-           $this->dao->update(TABLE_ORDER)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
+            $this->updateRelated($oldUser->account, $user->account);
         }
         else
         { 
@@ -961,16 +976,8 @@ class userModel extends model
             $user = $this->getByOpenID($openID, $provider);
             if($user)
             { 
-                $this->dao->update(TABLE_MESSAGE)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
-                $this->dao->update(TABLE_MESSAGE)->set('to')->eq($account)->where('account')->eq($user->account)->exec();
-                $this->dao->update(TABLE_THREAD)->set('author')->eq($account)->where('author')->eq($user->account)->exec();
-                $this->dao->update(TABLE_THREAD)->set('repliedBy')->eq($account)->where('repliedBy')->eq($user->account)->exec();
-                $this->dao->update(TABLE_REPLY)->set('author')->eq($account)->where('author')->eq($user->account)->exec();
-                $this->dao->update(TABLE_CATEGORY)->set('postedBy')->eq($account)->where('postedBy')->eq($user->account)->exec();
-                $this->dao->update(TABLE_ADDRESS)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
-                $this->dao->update(TABLE_CART)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
-                $this->dao->update(TABLE_ORDER)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
-
+                $result = $this->updateRelated($user->account, $account);
+                if(!$result) return false;
                 $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('id')->eq($user->id)->exec();
                 if(dao::isError()) return false;
             }
