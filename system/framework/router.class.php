@@ -181,13 +181,15 @@ class router extends baseRouter
 
         if(is_file($this->controlFile)) return true;
 
-        if($this->getModuleName() != 'error') 
+        if(RUN_MODE == 'front' && $this->getModuleName() != 'error') 
         {
             if($this->server->request_uri == '/favicon.ico') die();
             $this->setModuleName('error');
             $this->setMethodName('index');
             return $this->setControlFile();
         }
+        
+        $this->triggerError("the control file $this->controlFile not found.", __FILE__, __LINE__, $exitIfNone);
     }
 
     /**
