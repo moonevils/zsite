@@ -516,6 +516,8 @@ class baseValidater
                 }
             }
         }
+
+        return $_FILES;
     }
 
     /**
