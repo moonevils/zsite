@@ -351,6 +351,7 @@ class baseRouter
         $this->setWwwRoot();
         $this->setThemeRoot();
         $this->setDataRoot();
+        $this->loadMainConfig();
 
         $this->loadClass('front',  $static = true);
         $this->loadClass('filter', $static = true);
@@ -358,7 +359,6 @@ class baseRouter
         $this->loadClass('mobile', $static = true);
 
         $this->setSuperVars();
-        $this->loadMainConfig();
         $this->setDebug();
         $this->setErrorHandler();
         $this->setTimezone();
