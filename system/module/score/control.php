@@ -128,12 +128,18 @@ class score extends control
     {
         if($_POST)
         {
-            $setting = fixer::input('post')->remove('perYuan, minAmount')->get();
-            $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
+            $setting = fixer::input('post')->get();
+            
+            $buyScore            = new stdclass();
+            $buyScore->perYuan   = $setting->perYuan;
+            $buyScore->minAmount = $setting->minAmount;
+
+            $result = $this->loadModel('setting')->setItems('system.score.buyScore', $buyScore);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            $buyScore = fixer::input('post')->get('perYuan, minAmount');
-            $result = $this->loadModel('setting')->setItems('system.score.buyScore', $buyScore);
+            unset($setting->perYuan);
+            unset($setting->minAmount);
+            $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
