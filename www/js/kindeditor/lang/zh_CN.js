@@ -116,6 +116,7 @@ KindEditor.lang({
 	'link.linkType' : '打开类型',
 	'link.newWindow' : '新窗口',
 	'link.selfWindow' : '当前窗口',
+	'link.download' : '下载',
 	'flash.url' : 'URL',
 	'flash.width' : '宽度',
 	'flash.height' : '高度',
