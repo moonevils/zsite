@@ -1871,8 +1871,9 @@ class baseRouter
         
         /* 加载数据库中与本模块相关的配置项。Merge from the db configs. */
         if($moduleName != 'common' and isset($config->system->$moduleName))
-        {    
-            if(!isset($config->$moduleName)) $config->$moduleName = new stdclass();    // Init the $config->$moduleName if not set.
+        {   
+            /* 如果没有设置本模块配置，则首先进行初始化。Init the $config->$moduleName if not set.*/
+            if(!isset($config->$moduleName)) $config->$moduleName = new stdclass();
 
             foreach($config->system->$moduleName as $item)
             {
