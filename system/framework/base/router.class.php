@@ -1868,6 +1868,28 @@ class baseRouter
             if(file_exists($configFile)) include $configFile;
             $loadedConfigs[] = $configFile;
         }
+        
+        /* 加载数据库中与本模块相关的配置项。Merge from the db configs. */
+        if($moduleName != 'common' and isset($config->system->$moduleName))
+        {    
+            if(!isset($config->$moduleName)) $config->$moduleName = new stdclass();    // Init the $config->$moduleName if not set.
+
+            foreach($config->system->$moduleName as $item)
+            {
+                if($item->section)
+                {
+                    if(!isset($config->{$moduleName}->{$item->section})) $config->{$moduleName}->{$item->section} = new stdclass();
+                    if(is_object($config->{$moduleName}->{$item->section}))
+                    {
+                        $config->{$moduleName}->{$item->section}->{$item->key} = $item->value;
+                    }
+                }
+                else
+                {
+                    $config->{$moduleName}->{$item->key} = $item->value;
+                }
+            }
+        }
     }
 
     /**
