@@ -47,7 +47,6 @@ KindEditor.plugin('link', function(K) {
 			urlBox.val('http://');
 			typeBox[0].options[0] = new Option(lang.newWindow, '_blank');
 			typeBox[0].options[1] = new Option(lang.selfWindow, '');
-			typeBox[0].options[2] = new Option(lang.download, 'download');
 			self.cmd.selection();
 			var a = self.plugin.getSelectedLink();
 			if (a) {
