@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->block->default = new stdclass();
+if(!isset($lang->block->default)) $lang->block->default = new stdclass();
 $lang->block->default->typeList['html']     = 'Html block';
 $lang->block->default->typeList['htmlcode'] = 'Html codes';
 $lang->block->default->typeList['phpcode']  = 'php codes';
@@ -94,7 +94,7 @@ $lang->block->default->pages['message_index']  = 'Inquire';
 $lang->block->default->pages['page_view']      = 'Page';
 
 /* page layou>default-> list. */
-$lang->block->default->regions = new stdclass();
+if(!isset($lang->block->default->regions)) $lang->block->default->regions = new stdclass();
 $lang->block->default->regions->all['header'] = 'Header(invisible)';
 $lang->block->default->regions->all['top']    = 'Top';
 $lang->block->default->regions->all['banner'] = 'Banner';
@@ -175,7 +175,7 @@ $lang->block->default->regions->page_view['bottom']       = 'Bottom';
 $lang->block->default->regions->page_view['side']         = 'Side';
 $lang->block->default->regions->page_view['bottomBanner'] = 'BottomBanner';
 
-$lang->block->headerLayout = new stdclass();
+if(!isset($lang->block->headerLayout)) $lang->block->headerLayout = new stdclass();
 $lang->block->headerLayout->compatibleEnable  = 'Compatible old header';
 
 $lang->block->headerLayout->nav = array();
