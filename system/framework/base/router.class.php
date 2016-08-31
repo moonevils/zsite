@@ -1403,7 +1403,8 @@ class baseRouter
         $modelClass    = $moduleName . 'Model';
         $extModelClass = 'ext' . $modelClass;
         $tmpModelClass = 'tmpExt' . $modelClass;
-        $tmpModelFile = $mergedModelDir . "tmp$moduleName.php";
+        $tmpModelFile  = $mergedModelDir . "tmp$moduleName.php";
+        $replaceMark   = '//**//';
 
         /* 读取hook文件。Get hook codes need to merge. */
         $hookCodes = array();
