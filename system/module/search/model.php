@@ -250,6 +250,11 @@ class searchModel extends model
         $limit = 100;
         $categories = $this->dao->select('id,alias')->from(TABLE_CATEGORY)->fetchPairs();
 
+        if(is_callable(array($this, "build{$type}Index")))
+        {
+            return call_user_func(array($this, "build{$type}Index"), $lastID);
+        }
+
         if($type == 'article')
         {
             $articles = $this->dao->select('t1.*, t2.category as category')
@@ -392,11 +397,6 @@ class searchModel extends model
 
                 return array('finished' => true);
             }
-        }
-
-        if(is_callable(array($this, "build{$type}Index")))
-        {
-            return call_user_func(array($this, "build{$type}Index"), $lastID);
         }
     }
 
