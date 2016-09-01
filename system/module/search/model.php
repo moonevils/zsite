@@ -250,6 +250,11 @@ class searchModel extends model
         $limit = 100;
         $categories = $this->dao->select('id,alias')->from(TABLE_CATEGORY)->fetchPairs();
 
+        if(is_callable(array($this, "build{$type}Index")))
+        {
+            return call_user_func(array($this, "build{$type}Index"), $lastID);
+        }
+
         if($type == 'article')
         {
             $articles = $this->dao->select('t1.*, t2.category as category')
@@ -263,7 +268,7 @@ class searchModel extends model
 
             if(empty($articles))
             {
-                $type   = 'product';
+                $type   = $this->config->search->buildOrder['article'];
                 $lastID = 0;
             }
             else
@@ -290,7 +295,7 @@ class searchModel extends model
 
             if(empty($products))
             {
-                $type   = 'page';
+                $type   = $this->config->search->buildOrder['product'];
                 $lastID = 0;
             }
             else
@@ -315,7 +320,7 @@ class searchModel extends model
 
             if(empty($pages))
             {
-                $type   = 'thread';
+                $type   = $this->config->search->buildOrder['page'];
                 $lastID = 0;
             }
             else
@@ -335,7 +340,7 @@ class searchModel extends model
 
             if(empty($threads))
             {
-                $type   = 'book';
+                $type   = $this->config->search->buildOrder['thread'];
                 $lastID = 0;
             }
             else
@@ -348,17 +353,50 @@ class searchModel extends model
         if($type == 'book')
         {
             $books    = $this->dao->select('id,alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchPairs();
-            $articles = $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('article')->fetchAll();
+            $articles = $this->dao->select('*')->from(TABLE_BOOK)
+                ->where('type')->eq('article')
+                ->beginIF($lastID)->andWhere('id')->gt($lastID)
+                ->limit($limit)
+                ->fetchAll('id');
 
-            foreach($articles as $article)
+            if(isset($this->config->search->buildOrder['book']) and is_callable(array($this, "build{$this->config->search->buildOrder['book']}Index")))
             {
-                $pathes = explode(',', trim($article->path, ','));
-                $bookID = $pathes[0];
+                if(empty($articles))
+                {
+                    $type   = $this->config->search->buildOrder['book'];
+                    $lastID = 0;
+                }
+                else
+                {
+                    foreach($articles as $article)
+                    {
+                        $pathes = explode(',', trim($article->path, ','));
+                        $bookID = $pathes[0];
 
-                $article->book = $books[$bookID];
-                $this->save('book', $article);
+                        $article->book = $books[$bookID];
+                        $this->save('book', $article);
+                    }
+                    return array('type' => $type, 'count' => count($articles), 'lastID' => max(array_keys($articles)));
+                }
+
+                if($type == $this->config->search->buildOrder['book'])
+                {
+                    return call_user_func(array($this, "build{$this->config->search->buildOrder['book']}Index"), $lastID);
+                }
             }
-            return array('finished' => true);
+            else
+            {
+                foreach($articles as $article)
+                {
+                    $pathes = explode(',', trim($article->path, ','));
+                    $bookID = $pathes[0];
+
+                    $article->book = $books[$bookID];
+                    $this->save('book', $article);
+                }
+
+                return array('finished' => true);
+            }
         }
     }
 
