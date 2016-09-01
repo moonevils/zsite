@@ -38,7 +38,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
     <div class='table-row'>
       <div class='tab-content table-cell col-xs-6'>
         <div class='tab-pane theme-control-tab-pane' id='contentTab'>
-          <table align='center' class='table table-form'>
+          <table align='center' class='table table-form mg-0'>
             <tr>
               <th class='w-100px'><?php echo $lang->block->type;?></th>
               <td><?php echo $this->block->createTypeSelector($template, $type);?></td>

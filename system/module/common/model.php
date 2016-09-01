@@ -415,6 +415,7 @@ class commonModel extends model
 
             /* Just whether article/blog/page menu should shown. */
             if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;
+            if(!commonModel::isAvailable('video') && $vars == 'type=video') continue;
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
             if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
@@ -1090,7 +1091,7 @@ class commonModel extends model
     public function loadAlias()
     {
         if(version_compare($this->loadModel('setting')->getVersion(), 1.4) <= 0) return true;
-        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,product,blog,forum')->fetchGroup('type', 'id');
+        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,video,product,blog,forum')->fetchGroup('type', 'id');
         $this->config->categories = $categories;
         $this->config->seo->alias->category = array();
         $this->config->seo->alias->blog     = array();
@@ -1102,6 +1103,17 @@ class commonModel extends model
                 if(empty($category->alias)) continue;
                 $categories['article'][$category->alias] = $category;
                 $category->module = 'article';
+                $this->config->seo->alias->category[$category->alias] = $category;
+            }
+        }
+        
+        if(!empty($categories['video'] ))
+        {
+            foreach($categories['video'] as $category) 
+            {
+                if(empty($category->alias)) continue;
+                $categories['video'][$category->alias] = $category;
+                $category->module = 'video';
                 $this->config->seo->alias->category[$category->alias] = $category;
             }
         }
@@ -1177,9 +1189,10 @@ class commonModel extends model
         $modules = $config->site->modules;
         if(strpos($modules, 'article') === false)
         {
-            if(strpos($modules, 'book') !== false) $lang->groups->content['link'] = 'book|admin|';
-            if(strpos($modules, 'blog') !== false) $lang->groups->content['link'] = 'article|admin|type=blog';
-            if(strpos($modules, 'page') !== false) $lang->groups->content['link'] = 'article|admin|type=page';
+            if(strpos($modules, 'book') !== false)  $lang->groups->content['link'] = 'book|admin|';
+            if(strpos($modules, 'video') !== false) $lang->groups->content['link'] = 'article|admin|type=video';
+            if(strpos($modules, 'blog') !== false)  $lang->groups->content['link'] = 'article|admin|type=blog';
+            if(strpos($modules, 'page') !== false)  $lang->groups->content['link'] = 'article|admin|type=page';
         }
 
         if((strpos($modules, 'shop') === false and strpos($modules, 'score') === false) or strpos($modules, 'user') === false)
