@@ -1,6 +1,12 @@
 <?php
 $config->search = new stdclass();
 
+$config->search->buildOrder = array();
+$config->search->buildOrder['article'] = 'product';
+$config->search->buildOrder['product'] = 'page';
+$config->search->buildOrder['page']    = 'thread';
+$config->search->buildOrder['thread']  = 'book';
+
 $config->search->fields = new stdclass();
 $config->search->fields->article = new stdclass();
 $config->search->fields->article->id         = 'id';
