@@ -247,6 +247,12 @@ class searchModel extends model
      */
     public function buildAllIndex($type, $lastID)
     {
+        if(!commonModel::isAvailable($type))
+        {
+            if(isset($this->config->search->buildOrder[$type])) $type = $this->config->search->buildOrder[$type];
+            if(!isset($this->config->search->buildOrder[$type])) return array('finished' => true);
+        }
+
         $limit = 100;
         $categories = $this->dao->select('id,alias')->from(TABLE_CATEGORY)->fetchPairs();
 
@@ -257,114 +263,177 @@ class searchModel extends model
 
         if($type == 'article')
         {
-            $articles = $this->dao->select('t1.*, t2.category as category')
-                ->from(TABLE_ARTICLE)->alias('t1')
-                ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
-                ->where('t2.type')->in('article,blog')
-                ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)
-                ->orderBy('t1.id')
-                ->limit($limit)
-                ->fetchAll('id');
-
-            if(empty($articles))
+            if(!commonModel::isAvailable($type))
             {
-                $type   = $this->config->search->buildOrder['article'];
-                $lastID = 0;
+                if(isset($this->config->search->buildOrder[$type])) $type = $this->config->search->buildOrder[$type];
+                if(!isset($this->config->search->buildOrder[$type])) return array('finished' => true);
             }
             else
             {
-                foreach($articles as $article) 
-                {
-                    $article->category = $categories[$article->category];
-                    $this->save($article->type, $article);
-                }
+                $articles = $this->dao->select('t1.*, t2.category as category')
+                    ->from(TABLE_ARTICLE)->alias('t1')
+                    ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
+                    ->where('t2.type')->in('article,blog,video')
+                    ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)
+                    ->orderBy('t1.id')
+                    ->limit($limit)
+                    ->fetchAll('id');
 
-                return array('type' => $type, 'count' => count($articles), 'lastID' => max(array_keys($articles)));
+                if(empty($articles))
+                {
+                    $type   = $this->config->search->buildOrder['article'];
+                    $lastID = 0;
+                }
+                else
+                {
+                    foreach($articles as $article) 
+                    {
+                        $article->category = $categories[$article->category];
+                        $this->save($article->type, $article);
+                    }
+
+                    return array('type' => $type, 'count' => count($articles), 'lastID' => max(array_keys($articles)));
+                }
             }
         }
 
         if($type == 'product')
         {
-            $products = $this->dao->select('t1.*, t2.category as category')
-                ->from(TABLE_PRODUCT)->alias('t1')
-                ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
-                ->where('t2.type')->eq('product')
-                ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)
-                ->limit($limit)
-                ->fetchAll('id');
-
-            if(empty($products))
+            if(!commonModel::isAvailable($type))
             {
-                $type   = $this->config->search->buildOrder['product'];
-                $lastID = 0;
+                if(isset($this->config->search->buildOrder[$type])) $type = $this->config->search->buildOrder[$type];
+                if(!isset($this->config->search->buildOrder[$type])) return array('finished' => true);
             }
             else
             {
-                foreach($products as $product)
+                $products = $this->dao->select('t1.*, t2.category as category')
+                    ->from(TABLE_PRODUCT)->alias('t1')
+                    ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
+                    ->where('t2.type')->eq('product')
+                    ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)
+                    ->limit($limit)
+                    ->fetchAll('id');
+
+                if(empty($products))
                 {
-                    $product->category = $categories[$product->category];
-                    $this->save('product', $product);
+                    $type   = $this->config->search->buildOrder['product'];
+                    $lastID = 0;
                 }
-                return array('type' => $type, 'count' => count($products), 'lastID' => max(array_keys($products)));
+                else
+                {
+                    foreach($products as $product)
+                    {
+                        $product->category = $categories[$product->category];
+                        $this->save('product', $product);
+                    }
+                    return array('type' => $type, 'count' => count($products), 'lastID' => max(array_keys($products)));
+                }
             }
         }
         
         if($type == 'page')
         {
-            $pages = $this->dao->select("*")
-                ->from(TABLE_ARTICLE)
-                ->where('type')->eq('page')
-                ->beginIF($lastID)->andWhere('id')->gt($lastID)
-                ->limit($limit)
-                ->fetchAll('id');
-
-            if(empty($pages))
+            if(!commonModel::isAvailable($type))
             {
-                $type   = $this->config->search->buildOrder['page'];
-                $lastID = 0;
+                if(isset($this->config->search->buildOrder[$type])) $type = $this->config->search->buildOrder[$type];
+                if(!isset($this->config->search->buildOrder[$type])) return array('finished' => true);
             }
             else
             {
-                foreach($pages as $page) $this->save('page', $page);
-                return array('type' => $type, 'count' => count($pages), 'lastID' => max(array_keys($pages)));
+                $pages = $this->dao->select("*")
+                    ->from(TABLE_ARTICLE)
+                    ->where('type')->eq('page')
+                    ->beginIF($lastID)->andWhere('id')->gt($lastID)
+                    ->limit($limit)
+                    ->fetchAll('id');
+
+                if(empty($pages))
+                {
+                    $type   = $this->config->search->buildOrder['page'];
+                    $lastID = 0;
+                }
+                else
+                {
+                    foreach($pages as $page) $this->save('page', $page);
+                    return array('type' => $type, 'count' => count($pages), 'lastID' => max(array_keys($pages)));
+                }
             }
         }
 
         if($type == 'thread')
         {
-            $threads = $this->dao->select("*, 'normal' as status")
-                ->from(TABLE_THREAD)
-                ->beginIF($lastID)->where('id')->gt($lastID)
-                ->limit($limit)
-                ->fetchAll('id');
-
-            if(empty($threads))
+            if(!commonModel::isAvailable($type))
             {
-                $type   = $this->config->search->buildOrder['thread'];
-                $lastID = 0;
+                if(isset($this->config->search->buildOrder[$type])) $type = $this->config->search->buildOrder[$type];
+                if(!isset($this->config->search->buildOrder[$type])) return array('finished' => true);
             }
             else
             {
-                foreach($threads as $thread) $this->save('thread', $thread);
-                return array('type' => $type, 'count' => count($threads), 'lastID' => max(array_keys($threads)));
+                $threads = $this->dao->select("*, 'normal' as status")
+                    ->from(TABLE_THREAD)
+                    ->beginIF($lastID)->where('id')->gt($lastID)
+                    ->limit($limit)
+                    ->fetchAll('id');
+
+                if(empty($threads))
+                {
+                    $type   = $this->config->search->buildOrder['thread'];
+                    $lastID = 0;
+                }
+                else
+                {
+                    foreach($threads as $thread) $this->save('thread', $thread);
+                    return array('type' => $type, 'count' => count($threads), 'lastID' => max(array_keys($threads)));
+                }
             }
         }
 
         if($type == 'book')
         {
-            $books    = $this->dao->select('id,alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchPairs();
-            $articles = $this->dao->select('*')->from(TABLE_BOOK)
-                ->where('type')->eq('article')
-                ->beginIF($lastID)->andWhere('id')->gt($lastID)
-                ->limit($limit)
-                ->fetchAll('id');
-
-            if(isset($this->config->search->buildOrder['book']) and is_callable(array($this, "build{$this->config->search->buildOrder['book']}Index")))
+            if(!commonModel::isAvailable($type))
             {
-                if(empty($articles))
+                if(isset($this->config->search->buildOrder['book']) and is_callable(array($this, "build{$this->config->search->buildOrder['book']}Index")))
                 {
-                    $type   = $this->config->search->buildOrder['book'];
-                    $lastID = 0;
+                    return call_user_func(array($this, "build{$this->config->search->buildOrder['book']}Index"), $lastID);
+                }
+                else
+                {
+                    return array('finished' => true);
+                }
+            }
+            else
+            {
+                $books    = $this->dao->select('id,alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchPairs();
+                $articles = $this->dao->select('*')->from(TABLE_BOOK)
+                    ->where('type')->eq('article')
+                    ->beginIF($lastID)->andWhere('id')->gt($lastID)
+                    ->limit($limit)
+                    ->fetchAll('id');
+
+                if(isset($this->config->search->buildOrder['book']) and is_callable(array($this, "build{$this->config->search->buildOrder['book']}Index")))
+                {
+                    if(empty($articles))
+                    {
+                        $type   = $this->config->search->buildOrder['book'];
+                        $lastID = 0;
+                    }
+                    else
+                    {
+                        foreach($articles as $article)
+                        {
+                            $pathes = explode(',', trim($article->path, ','));
+                            $bookID = $pathes[0];
+
+                            $article->book = $books[$bookID];
+                            $this->save('book', $article);
+                        }
+                        return array('type' => $type, 'count' => count($articles), 'lastID' => max(array_keys($articles)));
+                    }
+
+                    if($type == $this->config->search->buildOrder['book'])
+                    {
+                        return call_user_func(array($this, "build{$this->config->search->buildOrder['book']}Index"), $lastID);
+                    }
                 }
                 else
                 {
@@ -376,26 +445,9 @@ class searchModel extends model
                         $article->book = $books[$bookID];
                         $this->save('book', $article);
                     }
-                    return array('type' => $type, 'count' => count($articles), 'lastID' => max(array_keys($articles)));
-                }
 
-                if($type == $this->config->search->buildOrder['book'])
-                {
-                    return call_user_func(array($this, "build{$this->config->search->buildOrder['book']}Index"), $lastID);
+                    return array('finished' => true);
                 }
-            }
-            else
-            {
-                foreach($articles as $article)
-                {
-                    $pathes = explode(',', trim($article->path, ','));
-                    $bookID = $pathes[0];
-
-                    $article->book = $books[$bookID];
-                    $this->save('book', $article);
-                }
-
-                return array('finished' => true);
             }
         }
     }
