@@ -439,6 +439,10 @@ class orderModel extends model
             $class = $btnLink ? 'btn' : '';
             if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id", "class='$class'"), $this->lang->order->view, "data-toggle='modal' class='$class'");
 
+            /*Savepay Link*/
+            $disabled = $order->payStatus !== 'paid' ? '' : "disabled = 'disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(inlink('savepay', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
+            
             /* Send link. */
             $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
             echo $disabled ? html::a('#', $this->lang->order->delivery, $disabled . "class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal' class='$class'");
@@ -765,5 +769,26 @@ class orderModel extends model
 
         return sprintf($this->lang->order->payInfo, $this->config->site->name, date('Y-m-d'));
     }
+    
+    /** 
+     * Save the save pay data
+     *
+     * @access public
+     * @param  int
+     * @return array
+     */
+    public function savePay($orderID)
+    {   
+        $data      = fixer::input('post')->remove('savepay')->get();
+        $order     = $this->getByID($orderID);
+        $order->sn = $data->sn;
+        $this->processOrder($order);
 
+        $this->dao->update(TABLE_ORDER)
+            ->data($data)
+            ->batchCheck($this->config->order->require->savepay, 'notempty')
+            ->where('id')->eq($orderID)
+            ->exec();
+        return !dao::isError();
+    }
 }
