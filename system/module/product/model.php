@@ -274,7 +274,6 @@ class productModel extends model
             ->add('addedDate', $now)
             ->add('editedDate', $now)
             ->get();
-
         $product->alias    = seo::unify($product->alias, '-');
         $product->keywords = seo::unify($product->keywords, ',');
 
@@ -367,7 +366,7 @@ class productModel extends model
     {
         $labels = fixer::input('post')->get('label');
         $values = fixer::input('post')->get('value');
-
+        
         $data = new stdclass();
         $data->product = $productID;
 

@@ -351,4 +351,24 @@ class order extends control
     {
         die(js::locate($this->post->payLink));
     }
+    
+    /** 
+     * Edit the return of order
+     * 
+     * @access public
+     * @param  int
+     * @return array
+     */
+    public function savePay($orderID)
+    {   
+        if($_POST)
+        {   
+            $result = $this->order->savePay($orderID);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }   
+        $this->view->order    = $this->order->getByID($orderID);
+        $this->view->title    = $this->lang->order->savePay;
+        $this->display();
+    }   
 }
