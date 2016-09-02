@@ -25,6 +25,7 @@ $lang->order->status         = '状态';
 $lang->order->note           = '买家留言';
 $lang->order->basic          = '基本信息';
 $lang->order->info           = '订单信息';
+$lang->order->savePay        = '回款';
 
 $lang->order->admin          = '订单管理';
 $lang->order->view           = '详情';
@@ -82,6 +83,7 @@ $lang->order->paymentList = array();
 $lang->order->paymentList['alipay']        = '支付宝即时到帐';
 $lang->order->paymentList['alipaySecured'] = '支付宝担保交易';
 $lang->order->paymentList['COD']           = '货到付款';
+$lang->order->paymentList['offlinepay']    = '线下支付';
 
 $lang->order->statusList = array();
 $lang->order->statusList['not_paid']  = '待付款';
