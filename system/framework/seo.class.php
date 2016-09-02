@@ -256,6 +256,48 @@ class uri
     }
 
     /**
+     * Create video browse
+     *
+     * @params array    $params
+     * @params array    $alias  
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createVideoBrowse($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $link = 'video/c' . array_shift($params);
+        if(!empty($alias['category'])) $link = $alias['category'];
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create video view
+     *
+     * @params array    $params
+     * @params array    $alias  
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createVideoView($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $link = 'video/';
+        if(!empty($alias['category'])) $link = $alias['category'] . '/';
+        if(!empty($alias['name'])) $link .= $alias['name'] . '-';
+        $link .= array_shift($params);
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
      * Create article view
      *
      * @params array    $params
