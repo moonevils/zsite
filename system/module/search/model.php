@@ -207,6 +207,11 @@ class searchModel extends model
             if($record->objectType == 'blog')    $record->url = helper::createLink('blog', 'view',  "id={$record->objectID}", "category={$record->params->category}&name={$record->params->alias}");
             if($record->objectType == 'page')    $record->url = helper::createLink('page', 'view',  "id={$record->objectID}", "name={$record->params->alias}");
             if($record->objectType == 'book')    $record->url = helper::createLink('book', 'read', "id={$record->objectID}", "book={$record->params->book}&node={$record->params->alias}");
+
+            if(is_callable(array($this, "process{$record->objectType}Link"))
+            {
+                return call_user_func(array($this, "process{$record->objectType}Link"), $record);
+            }
         }
 
         return $results;
