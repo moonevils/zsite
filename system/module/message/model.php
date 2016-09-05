@@ -369,7 +369,8 @@ class messageModel extends model
             ->batchCheck($this->config->message->require->post, 'notempty')
             ->exec();
 
-        $this->setCookie($this->dao->lastInsertId());
+        $messageID = $this->dao->lastInsertId();
+        $this->setCookie($messageID);
 
         /* Record post number. */
         $guarder = $this->loadModel('guarder');
@@ -385,7 +386,7 @@ class messageModel extends model
             }
             return array('result' => 'fail', 'message' => $errors);
         }
-        return array('result' => 'success', 'message' => $this->lang->message->needCheck);
+        return array('result' => 'success', 'message' => $this->lang->message->needCheck, 'messageID' => $messageID);
     }
 
     /**
