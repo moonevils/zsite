@@ -64,7 +64,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
           <strong class='text-important'>
             <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?>
           </strong> 
-          &nbsp;<?php echo $article->summary;?>
+          <?php echo $article->summary;?>
         </div>
       </div>
     </div>
