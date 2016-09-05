@@ -1535,4 +1535,19 @@ class userModel extends model
             ->andWhere('provider')->eq($provider)
             ->fetch('openID');
     }
+
+    /**
+     * Get score of a user.
+     * 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function getScore($account = '')
+    {
+       if(empty($account)) $account = $this->app->user->account;
+       $user = $this->getByAccount($account);
+       if(empty($user)) return 0;
+       return $user->score;
+    }
 }
