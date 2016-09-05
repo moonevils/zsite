@@ -14,7 +14,7 @@
     <h4><?php printf($lang->score->lblNoScoreReason, $lang->score->methods[$method], $score, $app->user->score);?></h4>
     <?php
     echo html::a($this->createLink('score', 'buyScore'), $lang->user->buyScore, "target='_blank' class='btn' ");
-    echo html::a($this->createLink('score', 'rule'), $lang->score->scoreGuider, "target='_blank' class='btn'");
+    echo html::a($this->createLink('score', 'rule'), $lang->score->getScore, "target='_blank' class='btn'");
     echo html::a("javascript:history.go(-1)", $lang->goback, "class='btn'");
     ?>
   </div>
