@@ -216,10 +216,10 @@ class userModel extends model
             ->setIF($this->cookie->referer == '', 'referer', '')
             ->remove('ip, fingerprint')
             ->get();
-
+        
         if(RUN_MODE != 'admin') $user->admin = 'no';
         $user->password = $this->createPassword($this->post->password1, $user->account); 
-
+        
         $this->dao->insert(TABLE_USER)
             ->data($user, $skip = 'password1,password2,groups')
             ->autoCheck()
