@@ -55,7 +55,11 @@ class nav extends control
 
             $settings =  array($type => helper::jsonEncode($navs[1]));
             $result   = $this->loadModel('setting')->setItems('system.common.nav', $settings);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            if($result)
+            {
+                dao::$changedTables[] = TABLE_CONFIG;
+                $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            }
             $this->send(array('result' => 'fail', 'message' => $this->lang->failed));
         }
 
