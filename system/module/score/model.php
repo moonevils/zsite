@@ -340,7 +340,7 @@ class scoreModel extends model
         $count   = round($order->amount * $this->config->score->buyScore->perYuan);
         $type    = 'in';
         $note    = strtoupper('buyScore') . ":" . $order->id;
-        $result $this->log($account, 'buyScore', $type, $count, $note, 'buyScore', $order->id);
+        $result  = $this->log($account, 'buyScore', $type, $count, $note, 'buyScore', $order->id);
         if($result)
         {
             $now = date('Y-m-d H:i:s');
