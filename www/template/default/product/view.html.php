@@ -79,31 +79,31 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
                   {
                       if($product->price != 0)
                       {
-                          $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
+                          $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
                           $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
                       }
-                      $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
+                      $attributeHtml .= "<li id='promotionItem'><span class='meta-name'>" . $lang->product->promotion . "</span>";
                       $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
                   }
                   else if($product->price != 0)
                   {
-                      $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
+                      $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
                       $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $this->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
                   }
               }
               if($product->amount)
               {
-                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->stock . "</span>";
+                  $attributeHtml .= "<li id='amountItem'><span class='meta-name'>" . $lang->product->stock . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>";
               }
               if($product->brand)
               {
-                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->brand . "</span>";
+                  $attributeHtml .= "<li id='brandItem'><span class='meta-name'>" . $lang->product->brand . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>";
               }
               if(!$product->brand and $product->model)
               {
-                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->model . "</span>";
+                  $attributeHtml .= "<li id='modelItem'><span class='meta-name'>" . $lang->product->model . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $product->model . "</span></li>";
               }
               if($product->color)
