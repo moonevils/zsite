@@ -24,6 +24,7 @@ $lang->order->noRecord       = '无';
 $lang->order->status         = '状态';
 $lang->order->note           = '买家留言';
 $lang->order->basic          = '基本信息';
+$lang->order->type           = '订单类型';
 $lang->order->info           = '订单信息';
 $lang->order->savePay        = '回款';
 
@@ -94,3 +95,7 @@ $lang->order->statusList['confirmed'] = '已收货';
 $lang->order->statusList['normal']    = '进行中';
 $lang->order->statusList['finished']  = '已完成';
 $lang->order->statusList['canceled']  = '已取消';
+
+$lang->order->types = array();
+$lang->order->types['shop']  = '购买商品';
+$lang->order->types['score'] = '购买积分';
