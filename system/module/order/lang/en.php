@@ -25,6 +25,7 @@ $lang->order->status         = 'Status';
 $lang->order->note           = 'Message to seller';
 $lang->order->basic          = 'Basic Info';
 $lang->order->info           = 'Detailed Info';
+$lang->order->type           = 'Order type';
 
 $lang->order->admin          = 'Admin Orders';
 $lang->order->view           = 'Order Info';
@@ -91,3 +92,7 @@ $lang->order->statusList['confirmed'] = 'Received';
 $lang->order->statusList['normal']    = 'Going';
 $lang->order->statusList['finished']  = 'Finished';
 $lang->order->statusList['canceled']  = 'Canceled';
+
+$lang->order->types = array();
+$lang->order->types['shop']  = 'Goods order';
+$lang->order->types['score'] = 'Score order';

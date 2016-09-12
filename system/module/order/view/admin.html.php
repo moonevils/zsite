@@ -32,6 +32,7 @@
         <?php $vars = "mode=$mode&param={$param}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->order->type);?></th>
         <th><?php echo $lang->order->productInfo;?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
@@ -45,16 +46,15 @@
         <td><?php echo $order->id;?></td>
         <td><?php echo zget($users, $order->account);?></td>
         <td>
-          <?php if($order->type == 'score'):?>
-          <?php echo $lang->order->score;?>
-          <?php else:?>
-            <?php foreach($order->products as $product):?>
-            <div class='text-left'>
-              <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "class='product' target='_blank'");?></span>
-              <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
-            </div>
-            <?php endforeach;?>
-          <?php endif;?>
+          <?php echo zget($lang->order->types, $order->type);?>
+        </td>
+        <td>
+          <?php foreach($order->products as $product):?>
+          <div class='text-left'>
+            <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "class='product' target='_blank'");?></span>
+            <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
+          </div>
+          <?php endforeach;?>
         </td>
         <td><?php echo $order->amount;?></td>
         <td><?php echo $this->order->processStatus($order);?></td>
