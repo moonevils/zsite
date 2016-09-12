@@ -6,6 +6,7 @@ $lang->order->productInfo    = '商品信息';
 $lang->order->account        = '账号';
 $lang->order->address        = '收货地址';
 $lang->order->price          = '价格';
+$lang->order->score          = '积分';
 $lang->order->count          = '数量';
 $lang->order->amount         = '金额';
 $lang->order->sn             = '交易号';
@@ -73,7 +74,6 @@ $lang->order->lowStocks            = "<strong>%s</strong> 库存不足";
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';
 $lang->order->alipayEmail = '支付宝邮箱';
-$lang->order->score       = '充值';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid   = '合作身份者id，以2088开头的16位纯数字';

@@ -6,6 +6,7 @@ $lang->order->productInfo    = 'Products';
 $lang->order->account        = 'Account';
 $lang->order->address        = 'Address';
 $lang->order->price          = 'Price';
+$lang->order->score          = 'Score';
 $lang->order->count          = 'count';
 $lang->order->amount         = 'Amount';
 $lang->order->sn             = 'Payment Number';
@@ -71,7 +72,6 @@ $lang->order->lowStocks            = "<strong>%s</strong>Inventory shortage ";
 $lang->order->alipayPid   = 'Partner ID';
 $lang->order->alipayKey   = 'Partner KEY';
 $lang->order->alipayEmail = 'Alipay Email';
-$lang->order->score       = 'Score';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid = 'Corporate identity to ID, 16 pure number begin with 2088.';
