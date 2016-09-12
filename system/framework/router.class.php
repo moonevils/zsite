@@ -259,19 +259,61 @@ class router extends baseRouter
     }
 
     /**
-     * loadLang 
+     * 加载语言文件，返回全局$lang对象。
+     * Load lang and return it as the global lang object.
      * 
-     * @param  int    $moduleName 
-     * @param  string $appName 
-     * @access public
-     * @return void
+     * @param   string $moduleName     the module name
+     * @param   string $appName     the app name
+     * @access  public
+     * @return  bool|ojbect the lang object or false.
      */
     public function loadLang($moduleName, $appName = '')
     {
-        $lang = parent::loadLang($moduleName, $appName);
-        $langPath = $this->getTplRoot() . $this->config->template->{$this->clientDevice}->name . DS . '_lang' . DS . $moduleName . DS; 
-        $templateLangFile = $langPath . $this->clientLang . '.php';
-        if(file_exists($templateLangFile)) include $templateLangFile;
+        /* 初始化变量。Init vars. */
+        $modulePath      = $this->getModulePath($appName, $moduleName);
+        $extLangFiles    = array();
+        $langFilesToLoad = array();
+
+        /* 判断主语言文件是否存在。Whether the main lang file exists or not. */
+        $mainLangFile = $modulePath . 'lang' . DS . $this->clientLang . '.php';
+        if(file_exists($mainLangFile)) $langFilesToLoad[] = $mainLangFile;
+
+        /* 获取前台语言文件。Get template lang files. */
+        $templateLangPath = $this->getTplRoot() . $this->config->template->{$this->clientDevice}->name . DS . '_lang' . DS . $moduleName . DS; 
+        $templateLangFile = $templateLangPath . $this->clientLang . '.php';
+        if(file_exists($templateLangFile)) $langFilesToLoad[] = $templateLangFile;
+
+        /* 获取扩展语言文件。If extensionLevel > 0, get extension lang files. */
+        if($this->config->framework->extensionLevel > 0)
+        {
+            $commonExtLangFiles = array();
+            $siteExtLangFiles   = array();
+
+            $extLangPath = $this->getModuleExtPath($appName, $moduleName, 'lang');
+            if($this->config->framework->extensionLevel >= 1 and !empty($extLangPath['common'])) $commonExtLangFiles = helper::ls($extLangPath['common'] . $this->clientLang, '.php');
+            if($this->config->framework->extensionLevel == 2 and !empty($extLangPath['site']))   $siteExtLangFiles   = helper::ls($extLangPath['site'] . $this->clientLang, '.php');
+            $extLangFiles  = array_merge($commonExtLangFiles, $siteExtLangFiles);
+        }
+
+        /* 计算最终要加载的语言文件。 Get the lang files to be loaded. */
+        $langFilesToLoad = array_merge($langFilesToLoad, $extLangFiles);
+        if(empty($langFilesToLoad)) return false;
+
+
+        /* 加载语言文件。Load lang files. */
+        global $lang;
+        if(!is_object($lang)) $lang = new language();
+        if(!isset($lang->$moduleName)) $lang->$moduleName = new stdclass();
+
+        static $loadedLangs = array();
+        foreach($langFilesToLoad as $langFile)
+        {
+            if(in_array($langFile, $loadedLangs)) continue;
+            include $langFile;
+            $loadedLangs[] = $langFile;
+        }
+
+        $this->lang = $lang;
         return $lang;
     }
 
