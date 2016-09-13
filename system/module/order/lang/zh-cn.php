@@ -97,8 +97,8 @@ $lang->order->statusList['finished']  = '已完成';
 $lang->order->statusList['canceled']  = '已取消';
 
 $lang->order->types = array();
-$lang->order->types['shop']  = '购买商品';
-$lang->order->types['score'] = '购买积分';
+$lang->order->types['shop']  = '商品';
+$lang->order->types['score'] = '积分';
 
 $lang->order->abbr = new stdclass();
 $lang->order->abbr->paidDate       = '付款';
