@@ -1907,9 +1907,10 @@ class baseSQL
 
         /* Add "`" in order string. */
         /* When order has limit string. */
-        $pos    = stripos($order, 'limit');
-        $orders = $pos ? substr($order, 0, $pos) : $order;
-        $limit  = $pos ? substr($order, $pos) : '';
+        $pos      = stripos($order, 'limit');
+        $instrpos = stripos($order, 'instr');
+        $orders   = $pos ? substr($order, 0, $pos) : $order;
+        $limit    = $pos ? substr($order, $pos) : '';
 
         $orders = explode(',', $orders);
         foreach($orders as $i => $order)
@@ -1924,7 +1925,7 @@ class baseSQL
                 /* such as t1.id field. */
                 if(strpos($value, '.') !== false) list($table, $field) = explode('.', $field);
                 /* Ignore order with function e.g. order by length(tag) asc. */
-                if(strpos($field, '(') === false) $field = "`$field`";
+                if($instrpos === false && strpos($field, '(') === false) $field = "`$field`";
 
                 $orderParse[$key] = isset($table) ? $table . '.' . $field :  $field;
                 unset($table);
