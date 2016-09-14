@@ -375,7 +375,8 @@ class articleModel extends model
             ->setIF(!$this->post->isLink, 'link', '')
             ->setIF(RUN_MODE == 'front', 'submittion', 1)
             ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', 0)
-            ->stripTags('content,link', $this->config->allowedTags->admin)
+            ->stripTags('content,link,videoLink', $this->config->allowedTags->admin)
+            ->removeIF($type == 'video', 'videoLink, width, height, autoplay')
             ->get();
 
         if($type == 'submittion')
@@ -383,6 +384,23 @@ class articleModel extends model
             $article->author = $this->app->user->account;
             if(!empty($this->app->user->nickname)) $article->author = $this->app->user->nickname;
             if(!empty($this->app->user->realname)) $article->author = $this->app->user->realname;
+        }
+
+        /* Set video */
+        if($type == 'video')
+        {
+            if(!$this->post->videoLink)
+            {
+                dao::$errors['videoLink'] = sprintf($this->lang->error->notempty, $this->lang->video->link);
+                return false;
+            }
+    
+            $video = new stdclass();
+            $video->link     = $this->post->videoLink;
+            $video->width    = $this->post->width;
+            $video->height   = $this->post->height;
+            $video->autoplay = $this->post->autoplay ? true : false;
+            $article->video = helper::jsonEncode($video);
         }
 
         $article->keywords = seo::unify($article->keywords, ',');
@@ -397,6 +415,7 @@ class articleModel extends model
             ->batchCheckIF($type == 'page' and !$this->post->isLink, $this->config->article->require->page, 'notempty')
             ->batchCheckIF($type != 'page' and $this->post->isLink, $this->config->article->require->link, 'notempty')
             ->batchCheckIF($type == 'page' and $this->post->isLink, $this->config->article->require->pageLink, 'notempty')
+            ->batchCheckIF($type == 'video', $this->config->article->require->video, 'notempty')
             ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page'")
             ->exec();
         $articleID = $this->dao->lastInsertID();
