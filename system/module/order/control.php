@@ -359,11 +359,11 @@ class order extends control
      * @param  int
      * @return array
      */
-    public function savePay($orderID)
+    public function savePayment($orderID)
     {   
         if($_POST)
         {   
-            $result = $this->order->savePay($orderID);
+            $result = $this->order->savePayment($orderID);
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }   
