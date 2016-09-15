@@ -441,7 +441,7 @@ class orderModel extends model
 
             /*Savepay Link*/
             $disabled = $order->payStatus !== 'paid' ? '' : "disabled = 'disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(inlink('savepay', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
+            echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
             
             /* Send link. */
             $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
@@ -777,7 +777,7 @@ class orderModel extends model
      * @param  int
      * @return array
      */
-    public function savePay($orderID)
+    public function savePayment($orderID)
     {   
         $data      = fixer::input('post')->remove('savepay')->get();
         $order     = $this->getByID($orderID);
