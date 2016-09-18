@@ -567,7 +567,7 @@ class baseValidater
     {
         global $config;
         if(empty($config->framework->filterBadKeys)) return $var;
-        foreach($var as $key => $value) if(preg_match('/[^a-zA-Z0-9_\.]/', $key)) unset($var[$key]);
+        foreach($var as $key => $value) if(preg_match('/[^a-zA-Z0-9_\.\-]/', $key)) unset($var[$key]);
         return $var;
     }
 

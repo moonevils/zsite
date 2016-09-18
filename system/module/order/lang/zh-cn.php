@@ -24,10 +24,20 @@ $lang->order->receiver       = '收货人';
 $lang->order->noRecord       = '无';
 $lang->order->status         = '状态';
 $lang->order->note           = '买家留言';
+$lang->order->frontNote      = '留言';
 $lang->order->basic          = '基本信息';
 $lang->order->type           = '类型';
 $lang->order->info           = '订单信息';
 $lang->order->savePay        = '回款';
+$lang->order->edit           = '编辑';
+$lang->order->contact        = '收货姓名';
+$lang->order->phone          = '手机号';
+$lang->order->zipcode        = '邮编';
+$lang->order->deliveryStatus = '发货状态';
+
+$lang->order->deliverList['not_send']  = '待发货';
+$lang->order->deliverList['send']      = '已发货';
+$lang->order->deliverList['confirmed'] = '已收货';
 
 $lang->order->admin          = '订单管理';
 $lang->order->view           = '详情';

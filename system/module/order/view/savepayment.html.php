@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<form method='post' action='<?php echo inlink('savepay', "orderID={$order->id}");?>' id='editForm'>
+<form method='post' action='<?php echo inlink('savepayment', "orderID={$order->id}");?>' id='editForm'>
   <table class='table table-form'>
     <tr>
       <th class='w-80px'><?php echo $lang->order->payment;?></th>
