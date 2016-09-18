@@ -95,6 +95,11 @@ class control extends baseControl
         {
             $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $moduleName;
             $viewFile = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
+            if($this->devicePrefix == 'm.' and !is_file($viewFile))
+            {
+                $this->devicePrefix = '';
+                $viewFile = $templatePath . DS . $this->devicePrefix . "{$methodName}.{$viewType}.php";
+            }
             $mainViewFile = $viewFile;
         }
 
