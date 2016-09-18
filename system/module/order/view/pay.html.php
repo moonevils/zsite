@@ -35,4 +35,3 @@
   </table>
 </form>
 <?php include '../../common/view/footer.modal.html.php';?>
-

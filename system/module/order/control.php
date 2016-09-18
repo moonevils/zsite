@@ -371,4 +371,25 @@ class order extends control
         $this->view->title    = $this->lang->order->savePay;
         $this->display();
     }   
+
+    /**
+     * Edit the order
+     *
+     * @access public
+     * @param  string
+     * @return void
+     */
+    public function edit($orderID)
+    {
+        if($_POST)
+        {
+            $result = $this->order->edit($orderID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+        $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
+        $this->view->order       = $this->order->getByID($orderID);
+        $this->view->title       = $this->lang->order->edit;
+        $this->display();
+    }
 }
