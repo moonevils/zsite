@@ -268,7 +268,7 @@ class messageModel extends model
             elseif($type == 'message') $titles[$type] = $this->dao->select('id, `from`')->from(TABLE_MESSAGE)->where('id')->in($objectList)->fetchPairs('id', 'from');
 
             /* If ext function for get title callable call them, */
-            elseif(is_callable(array($this, "get{$type}Title")))  $titles[$type] =  call_user_func(array($this, "get{$message->objectType}Title"), $objectList);
+            elseif(is_callable(array($this, "get{$type}Title")))  $titles[$type] =  call_user_func(array($this, "get{$type}Title"), $objectList);
         }
 
         foreach($messages as $message)
