@@ -138,6 +138,7 @@ $config->rights->member['order']['track']           = 'track';
 $config->rights->member['order']['cancel']          = 'cancel';
 $config->rights->member['order']['confirmdelivery'] = 'confirmdelivery';
 $config->rights->member['order']['redirect']        = 'redirect';
+$config->rights->member['order']['edit']            = 'edit';
 
 $config->rights->member['address']['create'] = 'create';
 $config->rights->member['address']['edit']   = 'edit';

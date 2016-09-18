@@ -279,7 +279,7 @@ class searchModel extends model
                     ->from(TABLE_ARTICLE)->alias('t1')
                     ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
                     ->where('t2.type')->in('article,blog,video')
-                    ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)
+                    ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)->fi()
                     ->orderBy('t1.id')
                     ->limit($limit)
                     ->fetchAll('id');
@@ -315,7 +315,7 @@ class searchModel extends model
                     ->from(TABLE_PRODUCT)->alias('t1')
                     ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
                     ->where('t2.type')->eq('product')
-                    ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)
+                    ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)->fi()
                     ->limit($limit)
                     ->fetchAll('id');
 
@@ -348,7 +348,7 @@ class searchModel extends model
                 $pages = $this->dao->select("*")
                     ->from(TABLE_ARTICLE)
                     ->where('type')->eq('page')
-                    ->beginIF($lastID)->andWhere('id')->gt($lastID)
+                    ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
                     ->limit($limit)
                     ->fetchAll('id');
 
@@ -376,7 +376,7 @@ class searchModel extends model
             {
                 $threads = $this->dao->select("*, 'normal' as status")
                     ->from(TABLE_THREAD)
-                    ->beginIF($lastID)->where('id')->gt($lastID)
+                    ->beginIF($lastID)->where('id')->gt($lastID)->fi()
                     ->limit($limit)
                     ->fetchAll('id');
 
@@ -411,7 +411,7 @@ class searchModel extends model
                 $books    = $this->dao->select('id,alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchPairs();
                 $articles = $this->dao->select('*')->from(TABLE_BOOK)
                     ->where('type')->eq('article')
-                    ->beginIF($lastID)->andWhere('id')->gt($lastID)
+                    ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
                     ->limit($limit)
                     ->fetchAll('id');
 
