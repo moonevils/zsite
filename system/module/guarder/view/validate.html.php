@@ -1,5 +1,9 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+<?php if(strpos(getcwd(), '/ext/') !== false):?>
+<?php include_once '../../../common/view/header.modal.html.php';?>
+<?php else:?>
 <?php include_once '../../common/view/header.modal.html.php';?>
+<?php endif;?>
 <?php js::set('emailSending', sprintf($lang->mail->sending, $this->app->user->email));?>
 <?php if(isset($pass) and $pass):?>
 <script>
@@ -38,7 +42,7 @@ $(document).ready(function()
     <?php $fileBtn = html::a($refUrl, $lang->guarder->created, "class='btn btn-sm btn-primary okFile'")?>
     <table class='table table-form'>
       <tr>
-        <th class='w-80px'><?php echo $lang->guarder->options;?></th>
+        <th class='w-70px'><?php echo $lang->guarder->options;?></th>
         <td colspan='3'>
           <?php
           $types   = array();
