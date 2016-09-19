@@ -1,6 +1,6 @@
 $(function()
 {
-    fixCategoryNav();
+    fixLeftMenu();
     fixPositionbar();
     initPrimaryNavbar();
     $('#primaryNavbar a').click(function()
@@ -52,27 +52,29 @@ function fixPositionbar()
  * @access public
  * @return void
  */
-function fixCategoryNav()
+function fixLeftMenu()
 {
-    var $categoryNav = $('.category-nav');
-    if($categoryNav.length)
-    {
-        var $panelBody = $categoryNav.find('.panel-body');
-        var ajustHeight = function()
-        {
+    var $leftmenu = $('.leftmenu');
+    if(!$leftmenu.length) return;
 
-            if($('html').hasClass('screen-phone'))
-            {
-                $panelBody.css('max-height', 'auto');
-            }
-            else
-            {
-                $panelBody.css('max-height', $(window).height() - 170 - $('.leftmenu > .nav-stacked').height());
-            }
-        };
-        ajustHeight();
-        $(window).resize(ajustHeight);
-    }
+    var $categoryNav = $leftmenu.children('.category-nav');
+    var $panelBody = $categoryNav.find('.panel-body');
+    var $stackedNav = $leftmenu.children('.nav-stacked');
+    var ajustHeight = function()
+    {
+        if($('html').hasClass('screen-phone')) return;
+        var winHeight = $(window).height();
+        var maxHeight = winHeight - 120;
+        var isStatic = $stackedNav.length && $stackedNav.height() > maxHeight;
+        $leftmenu.toggleClass('leftmenu-static', isStatic);
+        if($panelBody.length)
+        {
+            $panelBody.css('max-height', isStatic ? (winHeight/2) : (maxHeight - ($stackedNav.height() || 0)));
+        }
+    };
+
+    ajustHeight();
+    $(window).resize(ajustHeight);
 }
 
 /**

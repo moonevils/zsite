@@ -592,10 +592,12 @@ body {padding-top:60px; padding-bottom:60px;background: #fff;}
 
 /* left menu. */
 .leftmenu {width: 15%;}
-.leftmenu.affix {top:60px;}
-.leftmenu.affix-bottom {position:absolute; top:auto; bottom:270px;}
+.leftmenu.affix {top: 60px;}
+.leftmenu.affix-bottom {position: absolute; top: auto; bottom: 270px;}
+.leftmenu.leftmenu-static {position: static; width: 100%;}
 .leftmenu > .category-nav, .leftmenu > .nav {width: 100%; margin-bottom: 20px;}
 .leftmenu > .category-nav > .panel-body {overflow-y: auto;}
+
 /* panel */
 .panel {box-shadow: none}
 .panel .table-bordered {border:none; margin-bottom: 0;}
