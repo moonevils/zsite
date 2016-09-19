@@ -41,6 +41,21 @@ class control extends baseControl
     }
 
     /**
+     * Set the prefix of view file for mobile or PC.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDevicePrefix()
+    {
+        $this->devicePrefix = '';
+        if(RUN_MODE == 'front')
+        {
+            if($this->app->clientDevice == 'mobile') $this->devicePrefix = 'm.';
+        }
+    }
+
+    /**
      * Set referer.
      * 
      * @access public
@@ -97,8 +112,7 @@ class control extends baseControl
             $viewFile = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
             if($this->devicePrefix == 'm.' and !is_file($viewFile))
             {
-                $this->devicePrefix = '';
-                $viewFile = $templatePath . DS . $this->devicePrefix . "{$methodName}.{$viewType}.php";
+                $viewFile = $templatePath . DS . "{$methodName}.{$viewType}.php";
             }
             $mainViewFile = $viewFile;
         }
@@ -106,11 +120,15 @@ class control extends baseControl
         if(!empty($viewExtPath))
         {
             $commonExtViewFile = $viewExtPath['common'] . $this->devicePrefix . $methodName . ".{$viewType}.php";
+            if(!file_exists($commonExtViewFile)) $commonExtViewFile = $viewExtPath['common'] . $methodName . ".{$viewType}.php";
             $siteExtViewFile   = empty($viewExtPath['site']) ? '' : $viewExtPath['site'] . $this->devicePrefix . $methodName . ".{$viewType}.php";
+            if(!file_exists($siteExtViewFile)) $siteExtViewFile   = empty($viewExtPath['site']) ? '' : $viewExtPath['site'] . $methodName . ".{$viewType}.php";
 
             $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
+
             $viewFile = (!empty($siteExtViewFile) and file_exists($siteExtViewFile)) ? $siteExtViewFile : $viewFile;
             if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
+            
 
             $commonExtHookFiles = glob($viewExtPath['common'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
             $siteExtHookFiles   = empty($viewExtPath['site']) ? '' : glob($viewExtPath['site'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
