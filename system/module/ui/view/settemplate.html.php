@@ -11,8 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php $currentTheme    = $this->config->template->{$this->device}->theme; ?>
-<?php $currentTemplate = $this->config->template->{$this->device}->name; ?>
+<?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
+<?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
 <div class='panel' id='mainPanel'>
   <div class='panel-heading'>
     <ul class='nav nav-tabs' id='typeNav'>

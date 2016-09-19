@@ -38,7 +38,6 @@ $lang->user->join      = '注册日期';
 $lang->user->visits    = '访问次数';
 $lang->user->ip        = '最后IP';
 $lang->user->last      = '最后登录';
-$lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->captcha   = '验证码';
 $lang->user->alert     = '您的帐号已被禁用';

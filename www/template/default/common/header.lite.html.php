@@ -6,8 +6,8 @@ $themeRoot      = $webRoot . "theme/default/";
 $sysURL         = $common->getSysURL();
 $thisModuleName = $this->app->getModuleName();
 $thisMethodName = $this->app->getMethodName();
-$template       = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
-$theme          = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
+$template       = $this->config->template->{$this->app->clientDevice}->name ? $this->config->template->{$this->app->clientDevice}->name : 'default';
+$theme          = $this->config->template->{$this->app->clientDevice}->theme ? $this->config->template->{$this->app->clientDevice}->theme : 'default';
 $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->cdn->site) ? rtrim($this->config->cdn->site, '/') : $this->config->cdn->host . $this->config->version) : '';
 ?>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
   if(isset($this->config->site->meta)) echo $this->config->site->meta;
 
   js::exportConfigVars();
-  js::set('theme', array('template' => $template, 'theme' => $theme, 'device' => $this->device));
+  js::set('theme', array('template' => $template, 'theme' => $theme, 'device' => $this->app->clientDevice));
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
@@ -66,7 +66,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
   }
 
   /* Import customed css file if it exists. */
-  $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->device}->name, $config->template->{$this->device}->theme);
+  $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->app->clientDevice}->name, $config->template->{$this->app->clientDevice}->theme);
   if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme));
 
   if(isset($pageCSS)) css::internal($pageCSS);

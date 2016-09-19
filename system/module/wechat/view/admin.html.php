@@ -11,7 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php if(!checkCurlSSL()):?>
+<?php $version = curl_version();?>
+<?php if(!($version['features'] & CURL_VERSION_SSL)):?>
   <div class='alert alert-danger'>
     <?php echo $lang->wechat->curlSSLRequired;?>
   </div>

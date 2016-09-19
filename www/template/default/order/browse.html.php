@@ -12,32 +12,28 @@
         <table class='table table-hover table-striped tablesorter'>
           <thead>
             <tr class='text-center'>
-              <td class='w-60px'><?php echo $lang->order->id;?></td>
+              <td class='w-70px'><?php echo $lang->order->type;?></td>
               <td class='w-260px text-left'><?php echo $lang->order->productInfo;?></td>
               <td class='w-80px text-right'><?php echo $lang->order->amount;?></td>
               <td class='w-220px'><?php echo $lang->order->life;?></td>
               <td class='w-60px'><?php echo $lang->product->status;?></td>
               <td><?php echo $lang->order->note;?></td>
-              <td class='w-200px'><?php echo $lang->actions;?></td>
+              <td class='w-220px'><?php echo $lang->actions;?></td>
             </tr>
           </thead>
           <tbody>
             <?php foreach($orders as $order):?>
             <tr>
-              <td class='text-center text-middle'><?php echo $order->id;?></td>
+              <td class='text-center'><?php echo zget($lang->order->types, $order->type);?></td>
               <td class='text-middle'>
-                <?php if($order->type == 'score'):?>
-                <?php echo $lang->order->score;?>
-                <?php else:?>
-                  <?php foreach($order->products as $product):?>
-                  <div class='text-left'>
-                    <span><?php echo html::a(helper::createLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName);?></span>
-                    <span>
-                    <?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon. $product->count; ?>
-                    </span>
-                  </div>
-                  <?php endforeach;?>
-                <?php endif;?>
+                <?php foreach($order->products as $product):?>
+                <div class='text-left'>
+                  <span><?php echo html::a(helper::createLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName);?></span>
+                  <span>
+                  <?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon. $product->count; ?>
+                  </span>
+                </div>
+                <?php endforeach;?>
               </td>
               <td class='text-right text-middle'><?php echo $order->amount;?></td>
               <td class='text-center text-middle'>

@@ -17,7 +17,7 @@
       printf($lang->score->lblNoScoreReason, $lang->score->methods[$method], $score, $app->user->score);
       echo '<ol>';
       echo '<li>' . html::a($this->createLink('forum', 'index'), $lang->score->getByThread, "target='_blank'") . '</li>';
-      echo '<li>' . html::a($this->createLink('forum', 'index'), $lang->score->getByReply, "target='_blank'") . '</li>';
+      echo '<li>' . html::a($this->createLink('score', 'rule'), $lang->score->getScore, "target='_blank' class='btn'") . '</li>';
       echo '<li>' . html::a($this->createLink('score', 'buyScore'), $lang->user->buyScore, "target='_blank'") . '</li>';
       echo '</ol>';
       echo $lang->score->lblDetail;

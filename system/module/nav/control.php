@@ -20,8 +20,8 @@ class nav extends control
      */
     public function admin($type = '')
     {   
-        if($type == '' and $this->config->site->type == 'portal') $type = $this->device . '_top';
-        if($type == '' and $this->config->site->type == 'blog')   $type = $this->device . '_blog';
+        if($type == '' and $this->config->site->type == 'portal') $type = $this->app->clientDevice . '_top';
+        if($type == '' and $this->config->site->type == 'blog')   $type = $this->app->clientDevice . '_blog';
 
         foreach($this->lang->nav->system as $module => $name)
         {
@@ -55,7 +55,11 @@ class nav extends control
 
             $settings =  array($type => helper::jsonEncode($navs[1]));
             $result   = $this->loadModel('setting')->setItems('system.common.nav', $settings);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            if($result)
+            {
+                dao::$changedTables[] = TABLE_CONFIG;
+                $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            }
             $this->send(array('result' => 'fail', 'message' => $this->lang->failed));
         }
 

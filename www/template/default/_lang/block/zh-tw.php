@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->block->default = new stdclass();
+if(!isset($lang->block->default)) $lang->block->default = new stdclass();
 $lang->block->default->typeList['html']     = '自定義區塊';
 $lang->block->default->typeList['htmlcode'] = 'html原始碼';
 $lang->block->default->typeList['phpcode']  = 'php原始碼';
@@ -92,7 +92,7 @@ $lang->block->default->pages['message_index']  = '留言';
 $lang->block->default->pages['page_view']      = '單頁';
 
 /* page layout list. */
-$lang->block->default->regions = new stdclass();
+if(!isset($lang->block->default->regions)) $lang->block->default->regions = new stdclass();
 $lang->block->default->regions->all['header'] = 'Header(不可見)';
 $lang->block->default->regions->all['top']    = '頁頭';
 $lang->block->default->regions->all['banner'] = 'Banner';
@@ -173,7 +173,7 @@ $lang->block->default->regions->page_view['bottom']       = '底部';
 $lang->block->default->regions->page_view['side']         = '側邊';
 $lang->block->default->regions->page_view['bottomBanner'] = '底部通欄';
 
-$lang->block->headerLayout = new stdclass();
+if(!isset($lang->block->headerLayout)) $lang->block->headerLayout = new stdclass();
 $lang->block->headerLayout->compatibleEnable = '兼容老版本头部';
 
 $lang->block->headerLayout->nav = array();

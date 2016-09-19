@@ -25,12 +25,12 @@ class seo
     public static function parseURI($uri)
     {
         global $config;
-        if(!helper::inSeoMode()) return $uri;
 
         $categoryAlias = $config->seo->alias->category;
         $pageAlias     = $config->seo->alias->page;
         $forumAlias    = isset($config->seo->alias->forum) ? $config->seo->alias->forum : array();
         $methodAlias   = $config->seo->alias->method;
+        $usercaseAlias = zget($config->seo->alias, 'usercase');
 
         $params = array();
 
@@ -127,6 +127,24 @@ class seo
             $method = $methodAlias[$module]['browse'];
             return seo::convertURI($module, $method, $params, $pageID);
         }
+
+        if($module == 'usercase' and isset( $items[2]) and isset($usercaseAlias[$items[2]]))
+        {
+            $params['type']     = $items[1];
+            $industry = $usercaseAlias[$items[2]];
+            $params['category'] = $industry->id;
+            $method = $methodAlias[$module]['browse'];
+            return seo::convertURI($module, $method, $params, $pageID);
+        }
+
+        if($module == 'usercase' and isset( $items[2]) and  preg_match('/^c\d+$/', $items[2]))
+        {
+            $params['type'] = $items[1];
+            $params['category'] = str_replace('c', '', $items[2]);
+            $method = $methodAlias[$module]['browse'];
+            return seo::convertURI($module, $method, $params, $pageID);
+        }
+
 
         /*  If the first param is a category id, like news/c123.html. */
         if(preg_match('/^c\d+$/', $items[1]))
@@ -247,6 +265,48 @@ class uri
         global $config;
 
         $link = 'article/';
+        if(!empty($alias['category'])) $link = $alias['category'] . '/';
+        if(!empty($alias['name'])) $link .= $alias['name'] . '-';
+        $link .= array_shift($params);
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create video browse
+     *
+     * @params array    $params
+     * @params array    $alias  
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createVideoBrowse($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $link = 'video/c' . array_shift($params);
+        if(!empty($alias['category'])) $link = $alias['category'];
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create video view
+     *
+     * @params array    $params
+     * @params array    $alias  
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createVideoView($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $link = 'video/';
         if(!empty($alias['category'])) $link = $alias['category'] . '/';
         if(!empty($alias['name'])) $link .= $alias['name'] . '-';
         $link .= array_shift($params);
@@ -432,6 +492,77 @@ class uri
         $link = 'page/' . array_shift($params);
         if($alias['name']) $link = 'page/' . $alias['name'];
 
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create ask browse
+     *
+     * @params array    $params
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createAskBrowse($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $link = 'ask/c' . array_shift($params);
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create ask view
+     *
+     * @params array    $params
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createAskView($params, $viewType = '')
+    {
+        global $config;
+
+        $link = 'ask/' . array_shift($params);
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create ask browse
+     *
+     * @params array    $params
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createUsercaseBrowse($params, $viewType = '')
+    {
+        global $config;
+        $type = array_shift($params);
+        $id   = array_shift($params);
+        $link = 'usercase/' . $type;
+        if(is_numeric($id)) $id = 'c' . $id;
+        $link .= '/' . $id;
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create ask view
+     *
+     * @params array    $params
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createUsercaseView($params, $viewType = '')
+    {
+        global $config;
+
+        $link = 'usercase/' . array_shift($params);
+
+        $viewType = $viewType ? $viewType : $config->default->view;
         return $config->webRoot . $link . '.' . $viewType;
     }
 }

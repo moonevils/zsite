@@ -1908,7 +1908,7 @@ class upgradeModel extends model
      */
     public function awardRegister()
     {
-        $this->app->loadConfig('score');
+        $this->app->loadModuleConfig('score');
 
         $users = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
             ->where('score')->gt(0)

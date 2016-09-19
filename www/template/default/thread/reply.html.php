@@ -45,7 +45,7 @@
     <div class="pull-right reply-actions thread-actions">
     <?php if($this->app->user->account != 'guest'):?>
     <span class="thread-more-actions">
-      <?php if(commonModel::isAvailable('score')):?>
+      <?php if(commonModel::isAvailable('score') and $this->thread->canManage($board->id)):?>
       <?php $account = helper::safe64Encode($reply->author);?>
       <?php echo html::a(inlink('addScore', "account={$account}&objectType=reply&objectID={$reply->id}"), $lang->thread->score, "data-toggle=modal");?>
       <?php endif;?>

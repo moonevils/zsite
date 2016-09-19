@@ -95,7 +95,7 @@ $(document).ready(function()
 
     // Expand all nodes when user visit at first time of this day.
     var tree = $('.tree').data('zui.tree');
-    if(!tree.store.time || tree.store.time < (new Date().getTime() - 24*40*60*1000))
+    if(tree && (!tree.store.time || tree.store.time < (new Date().getTime() - 24*40*60*1000)))
     {
         tree.show($('.item-type-tasks, .item-type-task').parent().parent());
     }

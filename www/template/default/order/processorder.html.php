@@ -12,9 +12,15 @@
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
 <div class='container' id='payResult'>
-  <div class='modal-dialog w-450px'>
-  <div class='modal-body'><div class='alert alert-success text-center'><h4><i class="text-success icon-ok-sign"></i> <?php echo $lang->order->paidSuccess;?></h4></div></div>
-  <div class='modal-footer'><?php echo html::a(inlink('browse'), $lang->order->bought, "class='btn btn-success'");?></div>
+  <div class='modal-dialog w-450px'> 
+    <div class='alert alert-success'>
+      <div class='content'>
+        <i class='icon icon-ok'> </i>
+        <?php echo $lang->order->paidSuccess;?>
+        <span style='padding-left:10px;'><?php echo html::a(inlink('browse'), "<i class='icon icon-shopping-cart'> </i>" . $lang->order->bought, "class='btn btn-primary btn-xs'");?></span>
+      </div>
+    </div>
+  </div>
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
 <?php include TPL_ROOT . 'common/log.html.php';?>
