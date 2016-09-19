@@ -362,6 +362,7 @@ class baseRouter
         $this->setDebug();
         $this->setErrorHandler();
         $this->setTimezone();
+        $this->startSession();
 
         if($this->config->framework->multiSite)     $this->setSiteCode() && $this->loadExtraConfig();
         if($this->config->framework->autoConnectDB) $this->connectDB();
@@ -513,6 +514,24 @@ class baseRouter
     {
         $this->configRoot = $this->basePath . 'config' . DS;
     }
+
+    /**
+     * Start the session.
+     *
+     * @access public
+     * @return void
+     */
+    public function startSession()
+    {
+        if(!defined('SESSION_STARTED'))
+        {
+            $sessionName = $this->config->sessionVar;
+            session_name($sessionName);
+            session_start();
+            define('SESSION_STARTED', true);
+        }
+    }
+
 
     /**
      * 设置模块的根目录。
@@ -897,7 +916,7 @@ class baseRouter
         if($this->cookie->device == 'mobile')  $this->clientDevice = 'mobile';
         if($this->cookie->device == 'desktop') $this->clientDevice = 'desktop';
 
-        if(!isset($this->cookie->device)) 
+        if(strpos('mobile,desktop', $this->cookie->device) === false) 
         {
             $mobile = new mobile();
             $this->clientDevice = ($mobile->isMobile() and !$mobile->isTablet()) ? 'mobile' : 'desktop';
