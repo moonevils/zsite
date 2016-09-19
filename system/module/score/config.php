@@ -28,3 +28,5 @@ $config->score->methodOptions['approveSubmittion'] = 'award';
 $config->score->methodOptions['delThread']         = 'punish';
 $config->score->methodOptions['delReply']          = 'punish';
 $config->score->methodOptions['maxLogin']          = '';
+
+$config->score->setCountsNav[] = 'setCounts';
