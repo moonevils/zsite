@@ -1091,7 +1091,7 @@ class commonModel extends model
     public function loadAlias()
     {
         if(version_compare($this->loadModel('setting')->getVersion(), 1.4) <= 0) return true;
-        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,video,product,blog,forum')->fetchGroup('type', 'id');
+        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,video,product,blog,forum,usercase')->fetchGroup('type', 'id');
         $this->config->categories = $categories;
         $this->config->seo->alias->category = array();
         $this->config->seo->alias->blog     = array();
@@ -1115,6 +1115,17 @@ class commonModel extends model
                 $categories['video'][$category->alias] = $category;
                 $category->module = 'video';
                 $this->config->seo->alias->category[$category->alias] = $category;
+            }
+        }
+
+        if(!empty($categories['usercase'] ))
+        {
+            foreach($categories['usercase'] as $category) 
+            {
+                if(empty($category->alias)) continue;
+                $categories['usercase'][$category->alias] = $category;
+                $category->module = 'usercase';
+                $this->config->seo->alias->usercase[$category->alias] = $category;
             }
         }
 

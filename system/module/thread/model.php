@@ -253,7 +253,7 @@ class threadModel extends model
         $this->loadModel('guarder')->logOperation('ip', 'postThread');
         $this->loadModel('guarder')->logOperation('account', 'postThread');
 
-        if($this->config->forum->postReview == 'open') return array('result' => 'success', 'message' => $this->lang->thread->thanks, 'locate' => helper::createLink('forum', 'board', "boardID=$boardID"));
+        if($this->config->forum->postReview == 'open') return array('result' => 'success', 'threadID' => $threadID, 'message' => $this->lang->thread->thanks, 'locate' => helper::createLink('forum', 'board', "boardID=$boardID"));
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
 
         /* Update board stats. */
@@ -262,7 +262,7 @@ class threadModel extends model
         $thread = $this->getByID($threadID);
         $this->loadModel('search')->save('thread', $thread);
 
-        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'threadID' => $threadID, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
     }
 
     /**

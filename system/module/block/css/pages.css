@@ -16,6 +16,10 @@
 .page-panel .label{background: #6999E0; color: #FFF; font-weight: bold;}
 .page-panel .page-name{font-size: 15px; height: 30px; line-height: 30px;}
 .page-panel a.btn-region{border: solid 1px #ddd; padding: 3px;}
+.page-panel .label-system{background: #6999E0}
+.page-panel .label-content{background: #4caf50}
+.page-panel .label-product{background: #f57c00}
+.page-panel .label-feedback{background: #ef5350}
 
 .mgb-0 {margin-bottom: 0;}
 #blockList {padding: 5px 0;}
