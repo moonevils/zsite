@@ -146,6 +146,7 @@ class score extends control
         }
 
         $this->view->title = $this->lang->score->setCounts;
+        $this->view->type  = 'setCounts';
         $this->display();
     }
 
