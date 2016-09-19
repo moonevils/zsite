@@ -6,6 +6,7 @@ $lang->order->productInfo    = 'Products';
 $lang->order->account        = 'Account';
 $lang->order->address        = 'Address';
 $lang->order->price          = 'Price';
+$lang->order->score          = 'Score';
 $lang->order->count          = 'count';
 $lang->order->amount         = 'Amount';
 $lang->order->sn             = 'Payment Number';
@@ -25,6 +26,7 @@ $lang->order->status         = 'Status';
 $lang->order->note           = 'Message to seller';
 $lang->order->basic          = 'Basic Info';
 $lang->order->info           = 'Detailed Info';
+$lang->order->type           = 'Order type';
 
 $lang->order->admin          = 'Admin Orders';
 $lang->order->view           = 'Order Info';
@@ -70,7 +72,6 @@ $lang->order->lowStocks            = "<strong>%s</strong>Inventory shortage ";
 $lang->order->alipayPid   = 'Partner ID';
 $lang->order->alipayKey   = 'Partner KEY';
 $lang->order->alipayEmail = 'Alipay Email';
-$lang->order->score       = 'Score Recharge';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid = 'Corporate identity to ID, 16 pure number begin with 2088.';
@@ -91,3 +92,7 @@ $lang->order->statusList['confirmed'] = 'Received';
 $lang->order->statusList['normal']    = 'Going';
 $lang->order->statusList['finished']  = 'Finished';
 $lang->order->statusList['canceled']  = 'Canceled';
+
+$lang->order->types = array();
+$lang->order->types['shop']  = 'Goods order';
+$lang->order->types['score'] = 'Score order';

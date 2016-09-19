@@ -311,7 +311,21 @@ class orderModel extends model
             ->where('id')->eq($order->id)->exec();
 
         if(dao::isError()) return false;
+
+        if(is_callable(array($this, "process{$order->type}Order"))) call_user_func(array($this, "process{$order->type}Order"), $order);
         return true;
+    }
+
+    /**
+     * Process ccore order.
+     * 
+     * @param  int    $order 
+     * @access public
+     * @return void
+     */
+    public function processScoreOrder($order)
+    {
+        $result = $this->loadModel('score')->processOrder($order);
     }
 
     /**
@@ -423,8 +437,18 @@ class orderModel extends model
         {
             if($btnLink) echo "<div class='btn-group'>";
             $class = $btnLink ? 'btn' : '';
+            
+            /* View link */
             if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id", "class='$class'"), $this->lang->order->view, "data-toggle='modal' class='$class'");
 
+            /* Edit link */
+            $disabled = $order->status !== 'finished' ? '' : "disabled = 'disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->edit, $disabled . "class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
+            
+            /*Savepay Link*/
+            $disabled = $order->payStatus !== 'paid' ? '' : "disabled = 'disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
+            
             /* Send link. */
             $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
             echo $disabled ? html::a('#', $this->lang->order->delivery, $disabled . "class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal' class='$class'");
@@ -439,6 +463,10 @@ class orderModel extends model
         {
             if($btnLink)
             {
+                /* Edit link. */
+                $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->edit, "class='btn' $disabled") : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal' class='btn btn-link'");
+                
                 /* Pay link. */
                 $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
                 echo $disabled ? html::a('#', $this->lang->order->pay, "class='btn' $disabled") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
@@ -457,6 +485,10 @@ class orderModel extends model
             }
             else
             {
+                /* Edit link. */
+                $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
+                echo $disabled ? html::a('#', $this->lang->order->edit, $disabled) : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal'");
+                
                 /* Pay link. */
                 $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
                 echo $disabled ? html::a('#', $this->lang->order->pay, $disabled) : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
@@ -751,5 +783,65 @@ class orderModel extends model
 
         return sprintf($this->lang->order->payInfo, $this->config->site->name, date('Y-m-d'));
     }
+    
+    /** 
+     * Save the save pay data
+     *
+     * @access public
+     * @param  int
+     * @return array
+     */
+    public function savePayment($orderID)
+    {   
+        $data      = fixer::input('post')->remove('savepay')->get();
+        $order     = $this->getByID($orderID);
+        $order->sn = $data->sn;
+        $this->processOrder($order);
 
+        $this->dao->update(TABLE_ORDER)
+            ->data($data)
+            ->batchCheck($this->config->order->require->savepay, 'notempty')
+            ->where('id')->eq($orderID)
+            ->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Edit the order
+     * 
+     * @access public
+     * @param  string
+     * @return array
+     */
+    public function edit($orderID)
+    {   
+        $data = fixer::input('post')->get();
+        $content = new stdclass();
+        
+        $order = $this->getByID($orderID);
+
+        $address['account'] = $this->app->user->account;
+        $address['address'] = $data->address;
+        $address['contact'] = $data->contact;
+        $address['phone']   = $data->phone;
+        $address['zipcode'] = $data->zipcode;
+        $address['lang']    = $this->config->site->lang;
+        $address = json_encode($address);
+
+        $content->address = $address; 
+
+        if($order->deliveryStatus === 'send')
+        {   
+            $content->express        = $data->express;
+            $content->waybill        = $data->waybill;
+            $content->deliveriedDate = $data->deliveriedDate;
+            $content->deliveriedBy   = $this->app->user->account;
+        }
+        
+        $content->note    = $data->note;
+        
+        $this->dao->update(TABLE_ORDER)->data($content)->where('id')->eq($orderID)->exec();
+        
+        return !dao::isError();
+    }
 }

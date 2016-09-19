@@ -39,6 +39,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->order->payment;?></th> 
+          <?php unset($lang->order->paymentList['offlinepay']);?>
           <td colspan='2'><?php echo html::checkbox('payment', $lang->order->paymentList, isset($this->config->shop->payment) ? $this->config->shop->payment : 'COD,alipay', "class='checkbox'");?></td>
         </tr>
         <tr class='alipay-item'>

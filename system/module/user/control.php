@@ -33,7 +33,7 @@ class user extends control
         }
         if(!empty($_POST))
         {
-            $this->loadModel('guarder')->logOperation('ip', 'register', $this->server->remote_addr);
+            $this->loadModel('guarder')->logOperation('ip', 'register', helper::getRemoteIP());
             $this->user->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
@@ -99,7 +99,7 @@ class user extends control
         $this->setReferer($referer);
 
         /* Load mail config for reset password. */
-        $this->app->loadConfig('mail');
+        $this->app->loadModuleConfig('mail');
 
         $loginLink = $this->createLink('user', 'login');
         $denyLink  = $this->createLink('user', 'deny');

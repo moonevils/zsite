@@ -14,3 +14,9 @@ $config->order->statusFields->confirmed = 'deliveryStatus';
 $config->order->statusFields->normal    = 'status';
 $config->order->statusFields->finished  = 'status';
 $config->order->statusFields->canceled  = 'status';
+
+$config->order->processViews = new stdclass();
+$config->order->processViews->shop  = 'processorder';
+$config->order->processViews->score = 'processscore';
+
+$config->order->require->savepay = 'sn,payment,payStatus';

@@ -87,7 +87,7 @@ class order extends control
     public function check($orderID)
     {
         $order = $this->order->getByID($orderID);
-        $this->app->loadConfig('product');
+        $this->app->loadModuleConfig('product');
 
         $paymentList = explode(',', $this->config->shop->payment);
         foreach($paymentList as $payment)
@@ -95,6 +95,9 @@ class order extends control
             $paymentOptions[$payment] = $this->lang->order->paymentList[$payment];
         }
 
+        if($order->type != 'shop') unset($paymentOptions['COD']);
+
+        $this->view->title          = $this->lang->order->check;
         $this->view->order          = $order;
         $this->view->products       = $this->order->getOrderProducts($orderID);
         $this->view->paymentList    = $paymentOptions;
@@ -113,7 +116,7 @@ class order extends control
         if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
         $this->app->loadLang('product');
-        $this->app->loadConfig('product');
+        $this->app->loadModuleConfig('product');
 
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -261,7 +264,7 @@ class order extends control
         $this->view->pager  = $pager;
 
         $this->app->loadLang('product');
-        $this->app->loadConfig('product');
+        $this->app->loadModuleConfig('product');
         $this->view->currencySymbol = $this->config->product->currencySymbol;
 
         $this->view->title      = $this->lang->order->browse;
@@ -281,6 +284,7 @@ class order extends control
     public function processOrder($type = 'alipay', $mode = 'return')
     {
         if($type == 'alipay') $this->processAlipayOrder($mode);
+        $this->display('order', zget($this->config->order->processViews, $this->view->order->type, 'processorder')); 
     }
 
     /**
@@ -316,7 +320,7 @@ class order extends control
         $this->view->order  = $order;
         $this->view->result = $result;
 
-        $this->display('order', 'processorder'); 
+        return $order;
     }
      
     /**
@@ -346,5 +350,46 @@ class order extends control
     public function redirect()
     {
         die(js::locate($this->post->payLink));
+    }
+    
+    /** 
+     * Edit the return of order
+     * 
+     * @access public
+     * @param  int
+     * @return array
+     */
+    public function savePayment($orderID)
+    {   
+        if($_POST)
+        {   
+            $result = $this->order->savePayment($orderID);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }   
+        $this->view->order    = $this->order->getByID($orderID);
+        $this->view->title    = $this->lang->order->savePay;
+        $this->display();
+    }   
+
+    /**
+     * Edit the order
+     *
+     * @access public
+     * @param  string
+     * @return void
+     */
+    public function edit($orderID)
+    {
+        if($_POST)
+        {
+            $result = $this->order->edit($orderID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+        $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
+        $this->view->order       = $this->order->getByID($orderID);
+        $this->view->title       = $this->lang->order->edit;
+        $this->display();
     }
 }

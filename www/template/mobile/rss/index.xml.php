@@ -1,6 +1,6 @@
 <?php
 $webRoot            = $config->webRoot;
-$templateName       = $this->config->template->{$this->device}->name;
+$templateName       = $this->config->template->{$this->app->clientDevice}->name;
 $templateRoot       = $webRoot . "template/{$templateName}/";
 $templateThemeRoot  = "{$templateRoot}theme/";
 $templateCommonRoot = "{$templateThemeRoot}common/";

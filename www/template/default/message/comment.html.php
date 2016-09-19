@@ -27,9 +27,9 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <div class='text-right'>
       <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
     </div>
-    <?php endif;?>
   </div>
 </div>
+<?php endif;?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
   <div class='panel-body'>

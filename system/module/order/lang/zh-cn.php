@@ -6,6 +6,7 @@ $lang->order->productInfo    = '商品信息';
 $lang->order->account        = '账号';
 $lang->order->address        = '收货地址';
 $lang->order->price          = '价格';
+$lang->order->score          = '积分';
 $lang->order->count          = '数量';
 $lang->order->amount         = '金额';
 $lang->order->sn             = '交易号';
@@ -23,16 +24,28 @@ $lang->order->receiver       = '收货人';
 $lang->order->noRecord       = '无';
 $lang->order->status         = '状态';
 $lang->order->note           = '买家留言';
+$lang->order->frontNote      = '留言';
 $lang->order->basic          = '基本信息';
+$lang->order->type           = '类型';
 $lang->order->info           = '订单信息';
+$lang->order->savePay        = '回款';
+$lang->order->edit           = '编辑';
+$lang->order->contact        = '收货姓名';
+$lang->order->phone          = '手机号';
+$lang->order->zipcode        = '邮编';
+$lang->order->deliveryStatus = '发货状态';
+
+$lang->order->deliverList['not_send']  = '待发货';
+$lang->order->deliverList['send']      = '已发货';
+$lang->order->deliverList['confirmed'] = '已收货';
 
 $lang->order->admin          = '订单管理';
 $lang->order->view           = '详情';
 $lang->order->setting        = '系统设置';
 $lang->order->browse         = '我的订单';
-$lang->order->bought         = '查看已买到的商品';
+$lang->order->bought         = '查看已买商品';
 $lang->order->createdSuccess = '订单创建成功！';
-$lang->order->paidSuccess    = '订单支付成功！';
+$lang->order->paidSuccess    = '恭喜，订单支付成功！';
 $lang->order->submit         = '提交订单';
 $lang->order->cancel         = '取消';
 $lang->order->pay            = '支付';
@@ -54,6 +67,7 @@ $lang->order->paid           = '我已付款';
 $lang->order->products       = '订单产品';
 $lang->order->selectPayment  = '选择支付方式';
 $lang->order->settlement     = '去结算';
+$lang->order->check          = '订单结算';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->confirmReceived      = '确认收货';
@@ -70,7 +84,6 @@ $lang->order->lowStocks            = "<strong>%s</strong> 库存不足";
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';
 $lang->order->alipayEmail = '支付宝邮箱';
-$lang->order->score       = '积分充值';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid   = '合作身份者id，以2088开头的16位纯数字';
@@ -81,6 +94,7 @@ $lang->order->paymentList = array();
 $lang->order->paymentList['alipay']        = '支付宝即时到帐';
 $lang->order->paymentList['alipaySecured'] = '支付宝担保交易';
 $lang->order->paymentList['COD']           = '货到付款';
+$lang->order->paymentList['offlinepay']    = '线下支付';
 
 $lang->order->statusList = array();
 $lang->order->statusList['not_paid']  = '待付款';
@@ -91,3 +105,13 @@ $lang->order->statusList['confirmed'] = '已收货';
 $lang->order->statusList['normal']    = '进行中';
 $lang->order->statusList['finished']  = '已完成';
 $lang->order->statusList['canceled']  = '已取消';
+
+$lang->order->types = array();
+$lang->order->types['shop']  = '商品';
+$lang->order->types['score'] = '积分';
+
+$lang->order->abbr = new stdclass();
+$lang->order->abbr->paidDate       = '付款';
+$lang->order->abbr->deliveriedDate = '发货';
+$lang->order->abbr->confirmedDate  = '收货';
+$lang->order->abbr->createdDate    = '下单';
