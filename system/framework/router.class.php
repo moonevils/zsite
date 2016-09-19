@@ -68,6 +68,36 @@ class router extends baseRouter
     }
 
     /**
+     * Set client device.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setClientDevice()
+    {
+        if(strpos('mobile,desktop', $this->cookie->device) !== false) $device = $this->cookie->device;
+
+        if(RUN_MODE == 'admin')
+        {
+            $device = $this->session->device ? $this->session->device : 'desktop';
+        }
+        elseif(RUN_MODE == 'front')
+        {
+            if(isset($_COOKIE['visualDevice'])) $device = $_COOKIE['visualDevice'];
+        }
+        
+        $pathInfo = $this->getPathInfo();
+        $dotPos   = strrpos($pathInfo, '.');
+        $viewType = substr($pathInfo, $dotPos + 1);
+        if($viewType == 'mhtml') $device = 'mobile';
+
+        $this->clientDevice = $device;
+        $this->cookie->set('device', $this->clientDevice);
+        $this->cookie->set('device', $this->clientDevice);
+        parent::setClientDevice();
+    }
+
+    /**
      * Load cache class.
      * 
      * @access public

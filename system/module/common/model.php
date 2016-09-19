@@ -22,7 +22,6 @@ class commonModel extends model
         parent::__construct();
         if(!defined('FIRST_RUN'))
         {
-            $this->startSession();
             $this->setUser();
             $this->loadConfigFromDB();
 
@@ -96,23 +95,6 @@ class commonModel extends model
         if(isset($this->config->template->desktop) and !is_object($this->config->template->desktop)) $this->config->template->desktop = json_decode($this->config->template->desktop);
         if(isset($this->config->template->mobile) and !is_object($this->config->template->mobile)) $this->config->template->mobile = json_decode($this->config->template->mobile);
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
-    }
-
-    /**
-     * Start the session.
-     *
-     * @access public
-     * @return void
-     */
-    public function startSession()
-    {
-        if(!defined('SESSION_STARTED'))
-        {
-            $sessionName = $this->config->sessionVar;
-            session_name($sessionName);
-            session_start();
-            define('SESSION_STARTED', true);
-        }
     }
 
     /**
