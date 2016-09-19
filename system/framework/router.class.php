@@ -376,7 +376,7 @@ class router extends baseRouter
                 }
             }
             
-            if(isset($this->config->langs[$defaultLang])) $this->config->default->lang = $defaultLang;
+            if(isset($defaultLang) && isset($this->config->langs[$defaultLang])) $this->config->default->lang = $defaultLang;
         }
 
         if(!isset($this->config->langs[$this->config->default->lang])) $this->config->default->lang = current(array_keys($this->config->langs));
