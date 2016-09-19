@@ -13,7 +13,6 @@ $(document).ready(function()
         }   
         if(response.result == 'success' && response.locate != '')
         {
-            $('.captchaModal').click();
             location.href = response.locate;
         }   
     }); 
