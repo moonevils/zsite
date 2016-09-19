@@ -13,7 +13,13 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-cog"></i> <?php echo $lang->score->setCounts;?></strong>
+    <ul id='typeNav' class='nav nav-tabs'>
+    <?php foreach($this->config->score->setCountsNav as $nav):?>
+      <li data-type='internal' <?php echo $type == $nav ? "class='active'" : '';?>>
+        <?php echo html::a(inlink($nav), $lang->score->$nav);?>
+      </li>
+    <?php endforeach;?>
+    </ul>
   </div>
   <form method='post' action='<?php echo $this->createLink('score', 'setCounts');?>' id='ajaxForm' class='form'>
     <table class='table table-form borderless'>
