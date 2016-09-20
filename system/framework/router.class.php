@@ -273,16 +273,22 @@ class router extends baseRouter
      */
     public function loadModule()
     {
+        $moduleName = $this->moduleName;
+        $methodName = $this->methodName;
+
         if(RUN_MODE == 'front' and $this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
         {
-            $key   = 'page' . DS . $this->clientDevice . DS . md5($_SERVER['REQUEST_URI']);
-            $cache = $this->cache->get($key);
-            if($cache)
+            if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
-                $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
-                $cache = str_replace($this->config->siteNavHolder, $siteNav, $cache);
-                if($this->config->site->execInfo == 'show') $cache = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $cache);
-                die($cache);
+                $key   = 'page' . DS . $this->clientDevice . DS . md5($_SERVER['REQUEST_URI']);
+                $cache = $this->cache->get($key);
+                if($cache)
+                {
+                    $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
+                    $cache = str_replace($this->config->siteNavHolder, $siteNav, $cache);
+                    if($this->config->site->execInfo == 'show') $cache = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $cache);
+                    die($cache);
+                }
             }
         }
         parent::loadModule();
