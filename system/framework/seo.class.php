@@ -535,7 +535,11 @@ class uri
     {
         global $config;
 
-        $link = 'ask/' . array_shift($params);
+        $questionID = array_shift($params);
+        $answerID   = array_shift($params);
+
+        $link = 'ask/' . $questionID;
+        if(is_numeric($answerID)) $link .= '/' . $answerID;
 
         $viewType = $viewType ? $viewType : $config->default->view;
         return $config->webRoot . $link . '.' . $viewType;
