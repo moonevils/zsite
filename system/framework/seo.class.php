@@ -145,6 +145,13 @@ class seo
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
+        if($module == 'ask' and isset($items[2]) and preg_match('/^c\d+$/', $items[1]))
+        {
+            $params['categoryID'] = str_replace('c', '', $items[1]);
+            $params['type']       = $items[2];
+            $method = $methodAlias[$module]['browse'];
+            return seo::convertURI($module, $method, $params, $pageID);
+        }
 
         /*  If the first param is a category id, like news/c123.html. */
         if(preg_match('/^c\d+$/', $items[1]))
@@ -496,7 +503,7 @@ class uri
     }
 
     /**
-     * Create ask browse
+     * Create ask browse.
      *
      * @params array    $params
      * @params string   $viewType  
@@ -506,14 +513,19 @@ class uri
     {
         global $config;
 
-        $link = 'ask/c' . array_shift($params);
+        $categoryID = array_shift($params);
+        $type       = array_shift($params);
+
+        $link = 'ask/c';
+        $link .= is_numeric($categoryID) ? $categoryID : 0;
+        if($type) $link .= '/' . $type;
 
         $viewType = $viewType ? $viewType : $config->default->view;
         return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
-     * Create ask view
+     * Create ask view.
      *
      * @params array    $params
      * @params string   $viewType  
@@ -530,7 +542,7 @@ class uri
     }
 
     /**
-     * Create ask browse
+     * Create usercase browse.
      *
      * @params array    $params
      * @params string   $viewType  
@@ -550,7 +562,7 @@ class uri
     }
 
     /**
-     * Create ask view
+     * Create usercase view.
      *
      * @params array    $params
      * @params string   $viewType  
