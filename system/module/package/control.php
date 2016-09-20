@@ -107,7 +107,7 @@ class package extends control
      * @access public
      * @return void
      */
-    public function install($package, $downLink = '', $md5 = '', $type = '', $overridePackage = 'no', $ignoreCompatible = 'no', $overrideFile = 'no', $agreeLicense = 'no', $upgrade = 'no')
+    public function install($package, $downLink = '', $md5 = '', $type = 'extension', $overridePackage = 'no', $ignoreCompatible = 'no', $overrideFile = 'no', $agreeLicense = 'no', $upgrade = 'no')
     {
         $this->loadModel('guarder');
         $this->view->canManage = array('result' => 'success');

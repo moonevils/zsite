@@ -32,6 +32,7 @@
     <?php echo html::a($agreeLink, $lang->package->agreeLicense, "class='btn btn-primary loadInModal'");?>
   </div>
 </div>
+<?php js::set('step', 'license');?>
 <?php else:?>
 <div class='alert'>
   <h2 class='text-center text-success'><?php echo sprintf($lang->package->installFinished, $installType);?></h2>
