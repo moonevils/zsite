@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.setAjaxLoader('.loadInModal', '#ajaxModal');
+    if(v.step == 'license') $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
     $(document).on('click', '.btn-reload', function()
     {
