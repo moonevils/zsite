@@ -39,12 +39,14 @@
   </div>
   <table class='table' style='margin-top:10px;'>
     <tr>
-      <?php foreach($config->block->pageGroupList as $group => $pageList):?>
       <?php $i = 0;?>
+      <?php foreach($config->block->pageGroupList as $group => $pageList):?>
+      <?php ++$i;?>
+      <?php $j = 0;?>
       <td class='w-p25'>
         <?php foreach($pageList as $page):?>
         <div class='panel page-panel'>
-          <div class='label label-badge label-<?php echo $group;?>'><?php echo ++$i;?></div>
+          <div class='label label-badge label-<?php echo $group;?>'><?php echo $i . '.' . ++$j;?></div>
           <div class='text-center text-important page-name'><?php echo $this->lang->block->{$template}->pages[$page];?></div>
           <div class='panel-body text-center'>
             <?php foreach($lang->block->{$template}->regions->{$page} as $region => $regionName):?>

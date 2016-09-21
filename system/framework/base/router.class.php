@@ -1839,8 +1839,8 @@ class baseRouter
     {
         global $config;
         $multiConfigFile = $this->configRoot . 'multi.php';
-        $siteConfigFile  = $this->configRoot . "sites/{$this->siteCode}.php";
         if(file_exists($multiConfigFile)) include $multiConfigFile;
+        $siteConfigFile  = $this->configRoot . "sites/{$this->siteCode}.php";
         if(file_exists($siteConfigFile))  include $siteConfigFile;
     }
 
