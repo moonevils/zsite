@@ -434,9 +434,10 @@ class orderModel extends model
     public function printGoods($order)
     {
         if(is_callable(array($this, "print{$order->type}Goods"))) return call_user_func(array($this, "print{$order->type}Goods"), $order);
+        $goodsInfo = '';
         foreach($order->products as $product)
         {
-            $goodsInfo  = "<div class='text-left'>";
+            $goodsInfo .= "<div class='text-left'>";
             $goodsInfo .= '<span>' . $product->productName . '</span>';
             $goodsInfo .= "</div>";
         }
