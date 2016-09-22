@@ -12,14 +12,58 @@
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php $common->printPositionBar();?>
-<div class='article'>
-  <section class='article-content'>
-    <ul class='nav'>
-      <?php foreach($config->score->methodOptions as $item => $type):?>
-      <li><?php echo $lang->score->methods[$item] . zget($lang->score->methods, $type, '') . ' <strong>' . zget($this->config->score->counts, $item, '0') . '</strong>';?></li>
-      <?php endforeach;?>
+<div class='panel'>
+  <div class='panel-heading'>
+    <?php if(count($this->config->score->ruleNav) > 1):?>
+    <ul id='typeNav' class='nav nav-tabs'>
+    <?php foreach($this->config->score->ruleNav as $nav):?>
+      <li data-type='internal' <?php echo $type == $nav ? "class='active'" : '';?>>
+        <?php echo html::a(inlink($nav), $lang->score->$nav);?>
+      </li>
+    <?php endforeach;?>
     </ul>
-  </section>
+    <?php else:?>
+    <strong><?php echo $lang->score->rule;?></strong>
+    <?php endif;?>
+  </div>
+  <div class='panel-body'>
+    <div class='row'>
+      <div class='col-md-4 col-md-offset-2'>
+        <table class='table table-bordered'>
+          <tbody>
+            <tr><th colspan='2'><?php echo $lang->score->methods['award']?></th></tr>
+            <?php foreach($config->score->methodOptions as $item => $type):?>
+              <?php if($type != 'award') continue;?>
+              <?php $count = zget($this->config->score->counts, $item, '0');?>
+              <?php if($count == '0') continue;?>
+              <?php if($item == 'expend') $item = 'expendproduct';?>
+              <?php if($item == 'recharge') $item = 'rechargebalance';?>
+              <tr>
+                <td><?php echo $lang->score->methods[$item];?></td>
+                <td><?php echo  '+' . $count;?></td>
+              </tr>
+            <?php endforeach;?>
+          </tbody>
+        </table>
+      </div>
+      <div class='col-md-4'>
+        <table class='table table-bordered'>
+          <tbody>
+            <tr><th colspan='2'><?php echo $lang->score->methods['punish']?></th></tr>
+            <?php foreach($config->score->methodOptions as $item => $type):?>
+              <?php if($type != 'punish') continue;?>
+              <?php $count = zget($this->config->score->counts, $item, '0');?>
+              <?php if($count == '0') continue;?>
+              <tr>
+                <td><?php echo $lang->score->methods[$item];?></td>
+                <td><?php echo '-' . $count;?></td>
+              </tr>
+            <?php endforeach;?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
-
