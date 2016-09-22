@@ -1,1 +1,4 @@
-tbody th {text-align:center;}
+ol{margin-left:20px;}
+li{line-height:26px;}
+.method {display:inline-block; width: 90px;}
+#typeNav{margin: -4px -8px -8px; border-bottom:none;}
