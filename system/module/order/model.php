@@ -425,6 +425,57 @@ class orderModel extends model
 
 
     /**
+     * Print goods of an order.
+     * 
+     * @param  string    $order 
+     * @access public
+     * @return string
+     */
+    public function printGoods($order)
+    {
+        if(is_callable(array($this, "print{$order->type}Goods"))) return call_user_func(array($this, "print{$order->type}Goods"), $order);
+        foreach($order->products as $product)
+        {
+            $goodsInfo  = "<div class='text-left'>";
+            $goodsInfo .= '<span>' . $product->productName . '</span>';
+            $goodsInfo .= "</div>";
+        }
+        return $goodsInfo;
+    }
+
+    /**
+     * Print goods info of shop order.
+     * 
+     * @param  int    $order 
+     * @access public
+     * @return string
+     */
+    public function printShopGoods($order)
+    {
+        foreach($order->products as $product)
+        {
+            $goodsInfo  = "<div class='text-left'>";
+            $goodsInfo .= '<span>' . html::a(helper::createLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName) . '</span>';
+            $goodsInfo .= $this->config->product->currencySymbol . $product->price . ' &times; ' . $product->count . '</div>';
+        }
+        return $goodsInfo;
+    }
+
+    /**
+     * Print goods info of score order.
+     * 
+     * @param  int    $order 
+     * @access public
+     * @return void
+     */
+    public function printScoreGoods($order)
+    {
+        if(empty($oder->products)) return '';
+        $goods = current($order->products);
+        return $goods->productName;
+    }
+
+    /**
      * Print actions of an order.
      * 
      * @param  string    $order 
@@ -433,21 +484,48 @@ class orderModel extends model
      */
     public function printActions($order, $btnLink = false)
     {
-        if(RUN_MODE == 'admin' and $order->status == 'normal')
-        {
-            if($btnLink) echo "<div class='btn-group'>";
-            $class = $btnLink ? 'btn' : '';
-            
-            /* View link */
-            if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id", "class='$class'"), $this->lang->order->view, "data-toggle='modal' class='$class'");
+        $this->commonLink = array();
+        $this->commonLink['savePayment'] = true;
+        $this->commonLink['cancelLink']  = true;
+        if(is_callable(array($this, "print{$order->type}Actions"))) call_user_func(array($this, "print{$order->type}Actions"), $order, $btnLink);
 
-            /* Edit link */
-            $disabled = $order->status !== 'finished' ? '' : "disabled = 'disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->edit, $disabled . "class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
-            
-            /*Savepay Link*/
+        if(RUN_MODE == 'admin' and $this->commonLink['savePayment'])
+        {
+            $class = $btnLink ? 'btn' : '';
+            /* Save payment link. */
             $disabled = $order->payStatus !== 'paid' ? '' : "disabled = 'disabled'";
             echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
+        }
+
+        if(RUN_MODE == 'front' and $this->commonLink['cancelLink'])
+        {
+            /* Cancel link. */
+            $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
+            $class = $btnLink ? "  btn btn-link " : "";
+            echo $disabled ? '' : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink {$class}'");
+        }
+    }
+
+    /**
+     * Print actions buttons of shop order.
+     * 
+     * @param  object    $order 
+     * @param  bool      $btnLink 
+     * @access public
+     * @return string
+     */
+    public function printShopActions($order, $btnLink = false)
+    {
+        if(RUN_MODE == 'admin' and $order->status == 'normal')
+        {
+            $class = $btnLink ? 'btn' : '';
+            
+            /* View link. */
+            if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id", "class='$class'"), $this->lang->order->view, "data-toggle='modal' class='$class'");
+
+            /* Edit link. */
+            $disabled = $order->status !== 'finished' ? '' : "disabled = 'disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->edit, $disabled . "class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
             
             /* Send link. */
             $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
@@ -456,7 +534,6 @@ class orderModel extends model
             /* Finish link. */
             $disabled = ($order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
             echo $disabled ? html::a('#', $this->lang->order->finish, $disabled . "class='$class'") : html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher $class'");
-            if($btnLink) echo "</div>";
         }
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
@@ -477,11 +554,7 @@ class orderModel extends model
 
                 /* Confirm link. */
                 $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->confirmReceived, "class='btn' $disabled") : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery btn primary'");
-
-                /* Cancel link. */
-                $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->cancel, "class='btn' $disabled") : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink btn btn-link'");
+                echo $disabled ? html::a('#', $this->lang->order->confirmReceived, "class='btn' $disabled") : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
             }
             else
             {
@@ -500,13 +573,31 @@ class orderModel extends model
                 /* Confirm link. */
                 $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
                 echo $disabled ? html::a('#', $this->lang->order->confirmReceived, $disabled) : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
-
-                /* Cancel link. */
-                $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->cancel, $disabled) : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink'");
             }
         }
-   }
+    }
+
+    /**
+     * Print action buttons of score order.
+     * 
+     * @param  object    $order 
+     * @param  bool      $btnLink 
+     * @access public
+     * @return string
+     */
+    public function printScoreActions($order, $btnLink)
+    {
+        if(RUN_MODE == 'front') 
+        {
+            /* Pay link. */
+            $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->pay, $disabled) : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
+
+            /* Cancel link. */
+            $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
+            echo $disabled ? html::a('#', $this->lang->order->cancel, $disabled) : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink'");
+        }
+    }
 
     /**
      * Confirm delivery.
