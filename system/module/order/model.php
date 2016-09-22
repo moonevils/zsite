@@ -594,10 +594,6 @@ class orderModel extends model
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
             echo $disabled ? html::a('#', $this->lang->order->pay, $disabled) : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
-
-            /* Cancel link. */
-            $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->cancel, $disabled) : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink'");
         }
     }
 

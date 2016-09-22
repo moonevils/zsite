@@ -138,9 +138,9 @@
     </tbody>
     <tfoot>
       <tr>
-        <?php $col = commonModel::isAvailable('submission') ? 7 : 6;?>
+        <?php $col = commonModel::isAvailable('submittion') ? 7 : 6;?>
         <?php if($type == 'page') $col = 5;?>
-        <?php if($type == 'submission') $col = 6;?>
+        <?php if($type == 'submittion') $col = 6;?>
         <td colspan="<?php echo $col;?>"><?php $pager->show();?></td>
       </tr>
     </tfoot>
