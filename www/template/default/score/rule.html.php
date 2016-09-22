@@ -27,43 +27,20 @@
     <?php endif;?>
   </div>
   <div class='panel-body'>
-    <div class='row'>
-      <div class='col-md-4 col-md-offset-2'>
-        <table class='table table-bordered'>
-          <tbody>
-            <tr><th colspan='2'><?php echo $lang->score->methods['award']?></th></tr>
-            <?php foreach($config->score->methodOptions as $item => $type):?>
-              <?php if($type != 'award') continue;?>
-              <?php $count = zget($this->config->score->counts, $item, '0');?>
-              <?php if($count == '0') continue;?>
-              <?php if($item == 'expend') $item = 'expendproduct';?>
-              <?php if($item == 'recharge') $item = 'rechargebalance';?>
-              <tr>
-                <td><?php echo $lang->score->methods[$item];?></td>
-                <td><?php echo  '+' . $count;?></td>
-              </tr>
-            <?php endforeach;?>
-          </tbody>
-        </table>
-      </div>
-      <div class='col-md-4'>
-        <table class='table table-bordered'>
-          <tbody>
-            <tr><th colspan='2'><?php echo $lang->score->methods['punish']?></th></tr>
-            <?php foreach($config->score->methodOptions as $item => $type):?>
-              <?php if($type != 'punish') continue;?>
-              <?php $count = zget($this->config->score->counts, $item, '0');?>
-              <?php if($count == '0') continue;?>
-              <tr>
-                <td><?php echo $lang->score->methods[$item];?></td>
-                <td><?php echo '-' . $count;?></td>
-              </tr>
-            <?php endforeach;?>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <ol>
+      <?php foreach($config->score->methodOptions as $item => $type):?>
+        <?php if($type != 'award' and $type != 'punish') continue;?>
+        <?php $count = zget($this->config->score->counts, $item, '0');?>
+        <?php if($count == '0') continue;?>
+        <?php if($item == 'expend') $item = 'expendproduct';?>
+        <?php if($item == 'recharge') $item = 'rechargebalance';?>
+        <?php $count = ($type == 'award' ? '+' : '-') . $count;?>
+        <li class='w-120px'>
+          <span class='method'><?php echo $lang->score->methods[$item];?></span>
+          <span class='pull-right'><?php echo $count;?></span>
+        </li>
+      <?php endforeach;?>
+    </ol>
   </div>
-
 </div>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
