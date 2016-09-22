@@ -79,3 +79,6 @@ $lang->score->alipay      = "立即使用支付宝支付";
 $lang->score->paySuccess  = '恭喜你，支付成功';
 $lang->score->payFail     = '对不起，支付没成功，如果有问题，请联系我们。';
 $lang->score->viewHistory = '查看支付历史';
+
+$lang->score->awardRule  = '奖励积分规则';
+$lang->score->punishRule = '惩罚积分规则';
