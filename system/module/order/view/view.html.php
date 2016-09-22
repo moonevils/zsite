@@ -95,7 +95,7 @@
       </tr> 
       <?php endif;?>
       <tr class='text-center'>
-        <td colspan='2'><?php echo $this->order->printActions($order, $btnLink = true);?></td>
+        <td colspan='2'> <div class='btn-group'><?php echo $this->order->printActions($order, true);?></div> </td>
       </tr> 
 
     </table>
