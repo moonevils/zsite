@@ -36,7 +36,7 @@
         <th><?php echo $lang->order->productInfo;?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
-        <th title='<?php echo $order->note?>'><?php echo $lang->order->note;?></th>
+        <th><?php echo $lang->order->note;?></th>
         <th class='w-180px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -50,7 +50,7 @@
         <td class='text-left' <?php echo strip_tags($goodsInfo);?>><?php echo $goodsInfo;?> </td>
         <td><?php echo $order->amount;?></td>
         <td><?php echo $this->order->processStatus($order);?></td>
-        <td class='text-left'><?php echo $order->note;?></td>
+        <td title='<?php echo $order->note;?>' class='text-left'><?php echo $order->note;?></td>
         <td class='text-left'><?php $this->order->printActions($order);?></td>
       </tr>
       <?php endforeach;?>
