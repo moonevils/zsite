@@ -452,6 +452,7 @@ class orderModel extends model
      */
     public function printShopGoods($order)
     {
+        if(empty($order->products)) return '';
         foreach($order->products as $product)
         {
             $goodsInfo  = "<div class='text-left'>";
