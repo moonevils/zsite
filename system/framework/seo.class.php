@@ -549,7 +549,7 @@ class uri
         $answerID   = array_shift($params);
 
         $link = 'ask/' . $questionID;
-        if(is_numeric($answerID)) $link .= '/' . $answerID;
+        if($answerID and is_numeric($answerID)) $link .= '/' . $answerID;
 
         $viewType = $viewType ? $viewType : $config->default->view;
         return $config->webRoot . $link . '.' . $viewType;
