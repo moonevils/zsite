@@ -153,6 +153,15 @@ class seo
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
+        if($module == 'faq' and isset($items[1]))
+        {
+            $params['mode'] = $items[1];
+            if(isset($items[2]) and preg_match('/^c\d+$/', $items[2])) $params['objectID'] = str_replace('c', '', $items[2]);
+            if(isset($items[3])) $params['orderBy'] = $items['3'];
+            $method = $methodAlias[$module]['browse'];
+            return seo::convertURI($module, $method, $params, $pageID);
+        }
+
         /*  If the first param is a category id, like news/c123.html. */
         if(preg_match('/^c\d+$/', $items[1]))
         {
@@ -509,9 +518,12 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createAskBrowse($params, $alias, $viewType = '')
+    public static function createAskIndex($params, $alias, $viewType = '')
     {
         global $config;
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+        if(empty($params)) return $config->webRoot . 'ask.' . $viewType;
 
         $categoryID = array_shift($params);
         $type       = array_shift($params);
@@ -519,8 +531,6 @@ class uri
         $link = 'ask/c';
         $link .= is_numeric($categoryID) ? $categoryID : 0;
         if($type) $link .= '/' . $type;
-
-        $viewType = $viewType ? $viewType : $config->default->view;
         return $config->webRoot . $link . '.' . $viewType;
     }
 
@@ -542,6 +552,34 @@ class uri
         if(is_numeric($answerID)) $link .= '/' . $answerID;
 
         $viewType = $viewType ? $viewType : $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create faq index.
+     * 
+     * @param  array   $params 
+     * @param  array   $alias 
+     * @param  string  $viewType 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function createFaqIndex($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+        if(empty($params)) return $config->webRoot . 'faq.' . $viewType;
+
+        $mode     = array_shift($params);
+        $objectID = array_shift($params);
+        $orderBy  = array_shift($params);
+
+        $link = 'faq/';
+        if($mode) $link .= $mode;
+        $link .= '/c' . (is_numeric($objectID) ? $objectID : 0);
+        if($orderBy) $link .= '/' . $orderBy;
         return $config->webRoot . $link . '.' . $viewType;
     }
 
