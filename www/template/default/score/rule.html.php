@@ -37,7 +37,7 @@
         <?php $count = ($type == 'award' ? '+' : '-') . $count;?>
         <li class='w-120px'>
           <span class='method'><?php echo $lang->score->methods[$item];?></span>
-          <span class='pull-right'><?php echo $count;?></span>
+          <span class='pull-right <?php echo $type == 'award' ? 'green' : 'red';?>'><?php echo $count;?></span>
         </li>
       <?php endforeach;?>
     </ol>
