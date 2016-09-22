@@ -31,7 +31,7 @@
     </form>
     <?php commonModel::printLink('product', 'create', "category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-primary"');?></div>
   </div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-striped tablesorter table-fixed'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
@@ -49,7 +49,7 @@
       <?php foreach($products as $product):?>
       <tr class='text-center'>
         <td><?php echo $product->id;?></td>
-        <td class='text-left'><?php echo $product->name;?></td>
+        <td class='text-left' title="<?php echo $product->name;?>"><?php echo $product->name;?></td>
         <td class='text-left'><?php foreach($product->categories as $category) echo $category->name . ' ';?></td>
         <td><?php echo $product->amount;?></td>
         <td><?php echo $product->addedDate;?></td>

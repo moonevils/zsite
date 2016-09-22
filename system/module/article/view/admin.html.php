@@ -36,7 +36,7 @@
    </div>
   <?php endif;?>
   </div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-striped tablesorter table-fixed'>
     <thead>
       <tr>
         <?php $vars = "type=$type&categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
@@ -58,7 +58,7 @@
       <?php $maxOrder = 0; foreach($articles as $article):?>
       <tr>
         <td class='text-center'><?php echo $article->id;?></td>
-        <td>
+        <td title="<?php echo $article->title;?>">
           <?php echo $article->title;?>
           <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
@@ -136,7 +136,14 @@
       <?php endif;?>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='7'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot>
+      <tr>
+        <?php $col = commonModel::isAvailable('submission') ? 7 : 6;?>
+        <?php if($type == 'page') $col = 5;?>
+        <?php if($type == 'submission') $col = 6;?>
+        <td colspan="<?php echo $col;?>"><?php $pager->show();?></td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
