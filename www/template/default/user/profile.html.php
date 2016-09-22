@@ -4,35 +4,52 @@
   <div class='row'>
     <?php include TPL_ROOT . 'user/side.html.php';?>
     <div class='col-md-10'>
-      <div class='panel'>
-        <div class='panel-heading'><strong><i class='icon-user'></i> <?php echo $lang->user->profile;?></strong></div>
-        <div class='panel-body'>
-          <dl class='dl-horizontal'>
-            <dt><?php echo $lang->user->realname;?></dt>
-            <dd>
+      <div class='panel borderless'>
+        <div class='panel-heading borderless'><strong><i class='icon-user'></i> <?php echo $lang->user->profile;?></strong></div>
+          <table class='table table-bordered' id="profileTable">
+          <tr>
+            <th class='w-100px text-right'><?php echo $lang->user->realname;?></th>
+            <td>
               <?php echo $user->realname;?>
               <?php if(isset($user->provider) and isset($user->openID) and strpos($user->account, "{$user->provider}_") === false):?>
               <span class='label label-info'><?php echo $lang->user->oauth->typeList[$user->provider];?></span>
               <?php endif;?>
-            </dd>
-            <dt><?php echo $lang->user->email;?></dt>
-            <dd><?php echo $user->email;?></dd>
-            <dt><?php echo $lang->user->company;?></dt>
-            <dd><?php echo $user->company;?></dd>
-            <dt><?php echo $lang->user->address;?></dt>
-            <dd><?php echo $user->address;?></dd>
-            <dt><?php echo $lang->user->zipcode;?></dt>
-            <dd><?php echo $user->zipcode;?></dd>
-            <dt><?php echo $lang->user->mobile;?></dt>
-            <dd><?php echo $user->mobile;?></dd>
-            <dt><?php echo $lang->user->phone;?></dt>
-            <dd><?php echo $user->phone;?></dd>
-            <dt><?php echo $lang->user->qq;?></dt>
-            <dd><?php echo $user->qq;?></dd>
-            <dt><?php echo $lang->user->gtalk;?></dt>
-            <dd><?php echo $user->gtalk;?></dd>
-            <dt></dt>
-            <dd>
+            </td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->email;?></th>
+            <td><?php echo $user->email;?></td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->company;?></th>
+            <td><?php echo $user->company;?></td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->address;?></th>
+            <td><?php echo $user->address;?></td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->zipcode;?></th>
+            <td><?php echo $user->zipcode;?></td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->mobile;?></th>
+            <td><?php echo $user->mobile;?></td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->phone;?></th>
+            <td><?php echo $user->phone;?></td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->qq;?></th>
+            <td><?php echo $user->qq;?></td>
+          </tr>
+          <tr>
+            <th class='text-right'><?php echo $lang->user->gtalk;?></th>
+            <td><?php echo $user->gtalk;?></td>
+          </tr>
+          <tr>
+            <td class='borderless text-center' id='btnBox' colspan='2'>
               <?php echo html::a(inlink('edit'), $lang->user->editProfile, "class='btn'");?>
               <?php echo html::a(inlink('setemail'), $lang->user->setEmail, "class='btn'");?>
               <?php if(isset($user->provider) and isset($user->openID)):?>
@@ -43,9 +60,9 @@
               <?php echo html::a(inlink('oauthBind'), $lang->user->oauth->lblBind, "class='btn'");?>
               <?php endif;?>
               <?php endif;?>
-            </dd>
-          </dl>
-        </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

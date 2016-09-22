@@ -1,1 +1,4 @@
-dd,dt { padding: 5px 0; }
+.panel.borderless, .panel .panel-heading.borderless{border:none}
+#profileTable th.borderless, #profileTable td.borderless{border:none;}
+#profileTable th, #profileTable td{padding: 10px 8px;}
+
