@@ -22,7 +22,7 @@
     </ul>
   </div>
   <form method='post' action='<?php echo $this->createLink('score', 'setCounts');?>' id='ajaxForm' class='form'>
-    <table class='table table-form borderless'>
+    <table class='table table-form borderless table-fixed'>
       <tbody class='scoreCounts'>
         <tr>
           <th class='w-120px'><?php echo $lang->score->methods['register'] . $lang->score->methods['award'];?></th> 
