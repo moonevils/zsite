@@ -224,8 +224,8 @@ class orderModel extends model
         $notifyURL = empty($type) ? inlink('processorder', "type=alipay&mode=notify") : helper::createLink($type, 'processorder', "type=alipay&mode=notify");
         $returnURL = empty($type) ? inlink('processorder', "type=alipay&mode=return") : helper::createLink($type, 'processorder', "type=alipay&mode=return");
 
-        $alipayConfig->notifyURL = getWebRoot(true) . ltrim($notifyURL, '/');
-        $alipayConfig->returnURL = getWebRoot(true) . ltrim($returnURL, '/');
+        $alipayConfig->notifyURL = commonModel::getSysURL() . ltrim($notifyURL, '/');
+        $alipayConfig->returnURL = commonModel::getSysURL() . ltrim($returnURL, '/');
         $alipayConfig->pid   = $this->config->alipay->pid;
         $alipayConfig->key   = $this->config->alipay->key;
         $alipayConfig->email = $this->config->alipay->email;
