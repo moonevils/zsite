@@ -115,6 +115,7 @@ class score extends control
     public function rule()
     {
         $this->view->title = $this->lang->score->rule;
+        $this->view->type  = 'rule';
         $this->display();
     }
 
