@@ -26,36 +26,28 @@
       </li>
     </ul> 
   </div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-striped tablesorter table-fixed'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "mode=$mode&param={$param}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
-        <th class='w-90px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->order->type);?></th>
+        <th class='w-90px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th><?php echo $lang->order->productInfo;?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
-        <th><?php echo $lang->order->note;?></th>
+        <th title='<?php echo $order->note?>'><?php echo $lang->order->note;?></th>
         <th class='w-180px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($orders as $order):?>
+      <?php $goodsInfo = $this->order->printGoods($order);?>
       <tr class='text-center text-top'>
         <td><?php echo $order->id;?></td>
+        <td> <?php echo zget($lang->order->types, $order->type);?> </td>
         <td><?php echo zget($users, $order->account);?></td>
-        <td>
-          <?php echo zget($lang->order->types, $order->type);?>
-        </td>
-        <td>
-          <?php foreach($order->products as $product):?>
-          <div class='text-left'>
-            <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "class='product' target='_blank'");?></span>
-            <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
-          </div>
-          <?php endforeach;?>
-        </td>
+        <td class='text-left' <?php echo strip_tags($goodsInfo);?>><?php echo $goodsInfo;?> </td>
         <td><?php echo $order->amount;?></td>
         <td><?php echo $this->order->processStatus($order);?></td>
         <td class='text-left'><?php echo $order->note;?></td>
@@ -63,7 +55,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='9'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
