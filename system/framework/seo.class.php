@@ -128,7 +128,15 @@ class seo
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
-        if($module == 'usercase' and isset( $items[2]) and isset($usercaseAlias[$items[2]]))
+        if($module == 'usercase' and $items[1] == 'area' and isset($items[2]))
+        {
+            $params['type'] = $items[1];
+            $params['area'] = $items[2];
+            $method = $methodAlias[$module]['browse'];
+            return seo::convertURI($module, $method, $params, $pageID);
+        }
+
+        if($module == 'usercase' and $items[1] == 'industry' and isset($items[2]) and isset($usercaseAlias[$items[2]]))
         {
             $params['type']     = $items[1];
             $industry = $usercaseAlias[$items[2]];
