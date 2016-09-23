@@ -30,12 +30,13 @@ class dao extends baseDAO
 
     /* Execute the sql. It's different with query(), which return the stmt object. But this not.
      *
+     * @param  string $sql
      * @access public
      * @return int the modified or deleted records.
      */
-    public function exec()
+    public function exec($sql = '')
     {
-        parent::exec();
+        parent::exec($sql);
         self::$changedTables[] = $this->table;
     }
 }
