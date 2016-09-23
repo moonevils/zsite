@@ -204,7 +204,7 @@ class router extends baseRouter
      * @access  public
      * @return  bool
      */
-    public function setControlFile()
+    public function setControlFile($exitIfNone = true)
     {
         $modulePath = $this->getModulePath();
         $this->controlFile = $modulePath . DS . 'control.php';
