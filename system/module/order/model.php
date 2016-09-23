@@ -547,7 +547,7 @@ class orderModel extends model
                 echo $disabled ? html::a('#', $this->lang->order->edit, "class='btn' $disabled") : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal' class='btn btn-link'");
                 
                 /* Pay link. */
-                $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
+                $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
                 echo $disabled ? html::a('#', $this->lang->order->pay, "class='btn' $disabled") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
 
                 /* Track link. */
