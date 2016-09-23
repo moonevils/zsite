@@ -3,6 +3,12 @@
   <?php include TPL_ROOT . 'user/side.html.php';?>
   <div class='col-md-10'>
     <div class='panel'>
+      <div class='panel-heading'>
+        <strong class='red'><?php printf($lang->score->lblTotal, $user->score, $user->rank);?></strong>
+        <div class='panel-actions'>
+          <?php if(strpos($this->config->shop->payment, 'alipay') !== false) echo html::a($this->createLink('score', 'buyScore'), $this->lang->user->buyScore, "class='btn btn-primary'");?>
+        </div>
+      </div>
       <table class='table table-hover table-striped'>
         <thead>
           <tr>
@@ -31,11 +37,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan='4'>
-              <strong class='red'><?php printf($lang->score->lblTotal, $user->score, $user->rank);?></strong>
-              <?php if(strpos($this->config->shop->payment, 'alipay') !== false) echo html::a($this->createLink('score', 'buyScore'), $this->lang->user->buyScore, "class='btn btn-primary btn-xs'");?>
-            </td>
-            <td colspan='4' class='a-right'><?php $pager->show();?></td>
+            <td colspan='7' class='a-right'><?php $pager->show();?></td>
           </tr>
         </tfoot>
       </table>
