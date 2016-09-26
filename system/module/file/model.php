@@ -636,8 +636,8 @@ class fileModel extends model
      */
     public function checkSameFile($filename, $fileID = 0)
     {
-        $template = $this->config->template->{$app->clientDevice}->name;
-        $theme    = $this->config->template->{$app->clientDevice}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         return $this->dao->select('*')->from(TABLE_FILE)
             ->where('title')->eq($filename)
