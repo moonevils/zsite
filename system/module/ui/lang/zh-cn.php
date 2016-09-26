@@ -133,6 +133,7 @@ $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置为默认';
 $lang->ui->theme->online                               = '在线主题';
 $lang->ui->theme->default                              = '默认';
+$lang->ui->theme->all                                  = '全部';
 $lang->ui->theme->resetTip                             = '参数已重置，保存后生效';
 $lang->ui->theme->sizeTip                              = '默认单位为像素，如1px';
 $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
