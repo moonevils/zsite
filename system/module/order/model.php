@@ -504,7 +504,7 @@ class orderModel extends model
             /* Cancel link. */
             $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
             $class = $btnLink ? "  btn btn-link " : "";
-            echo $disabled ? '' : html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink {$class}'");
+            echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}' data-toggle='modal'" );
         }
     }
 
@@ -547,7 +547,7 @@ class orderModel extends model
                 echo $disabled ? html::a('#', $this->lang->order->edit, "class='btn' $disabled") : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal' class='btn btn-link'");
                 
                 /* Pay link. */
-                $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
+                $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
                 echo $disabled ? html::a('#', $this->lang->order->pay, "class='btn' $disabled") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
 
                 /* Track link. */
