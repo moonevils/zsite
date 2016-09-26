@@ -1308,8 +1308,8 @@ class baseRouter
         {
             if(empty($modelExtPath)) continue;
 
-            $tmpHookFiles =  helper::ls($modelExtPath . 'hook/', '.php');
-            $tmpExtFiles  =  helper::ls($modelExtPath, '.php');
+            $tmpHookFiles = helper::ls($modelExtPath . 'hook/', '.php');
+            $tmpExtFiles  = helper::ls($modelExtPath, '.php');
             $hookFiles    = array_merge($hookFiles, $tmpHookFiles);
             $extFiles     = array_merge($extFiles,  $tmpExtFiles);
 

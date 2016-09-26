@@ -414,7 +414,7 @@ class baseControl
             }
         }
 
-        $extPath = dirname(dirname(realpath($viewFile))) . '/ext/view/';
+        $extPath     = dirname(dirname(realpath($viewFile))) . '/ext/view/';
         $extViewFile = $extPath . basename($viewFile);
         if(file_exists($extViewFile))
         {

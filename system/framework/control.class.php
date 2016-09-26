@@ -70,7 +70,7 @@ class control extends baseControl
             $refererInfo = parse_url($_SERVER['HTTP_REFERER']);
             $referer     = $_SERVER['HTTP_REFERER'];
             if($this->server->http_host == $refererInfo['host']) $referer = '';
-            $this->session->set('http_referer', $_SERVER['HTTP_REFERER']);
+            $this->session->set('http_referer', $referer);
         }
         return true;
     }
