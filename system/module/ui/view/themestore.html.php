@@ -175,6 +175,7 @@
   <?php endif; ?>
   <?php elseif($type != 'installed'):?>
   <div class='panel-body'>
+    <?php echo $lang->ui->theme->noTheme;?>
   </div>
   <?php elseif($type == 'installed'):?>
   <div class='panel-body'>
