@@ -26,6 +26,7 @@
     <?php if($type != 'installed'):?>
     <div id='industryBox'>
       <?php if($type != 'installed') echo $industryTree;?>
+      <?php echo html::a(inlink('themestore'), $lang->ui->theme->all, "id='theme-all'");?>
       <?php foreach($lang->ui->theme->searchLabels as $code => $label):?>
       <?php echo html::a(inlink('themestore', "type={$code}"), $label);?>
       <?php endforeach;?>
