@@ -83,34 +83,7 @@ class backup extends control
      */
     public function backup()
     {
-        set_time_limit(7200);
-        $fileName = date('YmdHis') . mt_rand(0, 9);
-        $result = $this->backup->backSQL($this->backupPath . $fileName . '.sql.php');
-        if(!$result->result) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->noWritable, $this->backupPath)));
-        $this->backup->addFileHeader($this->backupPath . $fileName . '.sql.php');
-
-        if(extension_loaded('zlib'))
-        {
-            $result = $this->backup->backFile($this->backupPath . $fileName . '.file.zip.php');
-            if(!$result->result) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupFile, $result->error)));
-            $result = $this->backup->backTemplate($this->backupPath . $fileName . '.template.zip.php');
-            if(!$result->result) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupTemplate, $result->error)));
-
-            $this->backup->addFileHeader($this->backupPath . $fileName . '.file.zip.php');
-        }
-
-        /* Delete expired backup. */
-        $backupFiles = glob("{$this->backupPath}*.php");
-        if(!empty($backupFiles))
-        {
-            $time = time();
-            foreach($backupFiles as $file)
-            {
-                if($time - filemtime($file) > $this->config->backup->holdDays * 24 * 3600) unlink($file);
-            }
-        }
-
-        $this->send(array('result' => 'success', 'message' => $this->lang->backup->success->backup));
+        $this->send($this->backup->backupAll());
     }
 
     /**
