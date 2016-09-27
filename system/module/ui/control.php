@@ -229,7 +229,7 @@ class ui extends control
 
             if(!$this->ui->checkExportParams()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $exportedFile = $this->ui->exportTheme($this->post->template, $this->post->theme, $this->post->code);
-            $exportedFile = urlencode($exportedFile);
+            $exportedFile = helper::safe64Encode($exportedFile);
             $this->send(array('result' => 'success', 'message' => $this->lang->ui->exportedSuccess, 'locate' => inlink('downloadtheme', "theme={$exportedFile}")));
         }
 
@@ -256,6 +256,7 @@ class ui extends control
      */
     public function downloadtheme($exportedFile)
     {
+        $exportedFile = helper::safe64Decode($exportedFile);
         $fileData = file_get_contents($exportedFile);
         $pathInfo = pathinfo($exportedFile);
         $this->loadModel('file')->sendDownHeader($pathInfo['basename'], 'zip', $fileData, filesize($exportedFile));
