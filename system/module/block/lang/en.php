@@ -85,7 +85,7 @@ $lang->block->header->middle->right  = 'Right section';
 $lang->block->header->bottom = new stdclass();
 $lang->block->header->bottom->common = 'Down section';
 
-$lang->block->header->top->leftOptions['']         = 'No Dispaly';
+$lang->block->header->top->leftOptions['']         = 'No Display';
 $lang->block->header->top->leftOptions['slogan']   = 'Slogon';
 $lang->block->header->top->leftOptions['custom']   = 'User-defined';
 
