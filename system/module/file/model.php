@@ -636,8 +636,8 @@ class fileModel extends model
      */
     public function checkSameFile($filename, $fileID = 0)
     {
-        $template = $this->config->template->{$app->clientDevice}->name;
-        $theme    = $this->config->template->{$app->clientDevice}->theme;
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
         return $this->dao->select('*')->from(TABLE_FILE)
             ->where('title')->eq($filename)
@@ -725,7 +725,10 @@ class fileModel extends model
                 if(file_exists($thumbPath)) unlink($thumbPath);
             }
         }
-        $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($file->id)->exec();
+        $this->dao->delete()->from(TABLE_FILE)
+            ->where('id')->eq($file->id)
+            ->beginIf(RUN_MODE == 'front')->andWhere($file->addedBy)->eq($this->app->user->account)->fi()
+            ->exec();
         return !dao::isError();
     }
 

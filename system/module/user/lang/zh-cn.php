@@ -139,8 +139,8 @@ $lang->user->adminList['super']  = '超级管理员';
 $lang->user->adminList['common'] = '管理员';
 $lang->user->adminList['no']     = '普通会员';
 
-$lang->user->accountTypeList['no']      = '前台账号';
-$lang->user->accountTypeList['common']  = '后台账号';
+$lang->user->accountTypeList['no']      = '前台帐号';
+$lang->user->accountTypeList['common']  = '后台帐号';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
@@ -156,7 +156,7 @@ $lang->user->register->lblUserInfo = '用户信息';
 $lang->user->register->lblAccount  = '必须是三位以上的英文字母或数字';
 $lang->user->register->lblPassword = '数字和字母组成，六位以上';
 $lang->user->register->login       = '请登录';
-$lang->user->register->loginTip    = '已有账号';
+$lang->user->register->loginTip    = '已有帐号';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和数字组合，最少六位';
