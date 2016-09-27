@@ -74,7 +74,7 @@
             echo "<td class='text-center'>" . $lang->submittion->status[$article->submittion] . '</td>';
         }
         ?>
-        <td class='text-center'>
+        <td class='text-center articleAdmin-overflowVisible'>
           <?php if($type == 'submittion'):?>
           <?php
           if($article->submittion != 2) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->submittion->check); 
