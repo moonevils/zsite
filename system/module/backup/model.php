@@ -12,6 +12,45 @@
 class backupModel extends model
 {
     /**
+     * Backup 
+     * 
+     * @access public
+     * @return void
+     */
+    public function backupAll()
+    {
+        $this->backupPath = $this->app->getTmpRoot() . 'backup/';
+        set_time_limit(7200);
+        $fileName = date('YmdHis') . mt_rand(0, 9);
+        $result = $this->backSQL($this->backupPath . $fileName . '.sql.php');
+        if(!$result->result) return array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->noWritable, $this->backupPath));
+        $this->addFileHeader($this->backupPath . $fileName . '.sql.php');
+
+        if(extension_loaded('zlib'))
+        {
+            $result = $this->backFile($this->backupPath . $fileName . '.file.zip.php');
+            if(!$result->result) return array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupFile, $result->error));
+            $result = $this->backTemplate($this->backupPath . $fileName . '.template.zip.php');
+            if(!$result->result) return array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->backupTemplate, $result->error));
+
+            $this->addFileHeader($this->backupPath . $fileName . '.file.zip.php');
+        }
+
+        /* Delete expired backup. */
+        $backupFiles = glob("{$this->backupPath}*.php");
+        if(!empty($backupFiles))
+        {
+            $time = time();
+            foreach($backupFiles as $file)
+            {
+                if($time - filemtime($file) > $this->config->backup->holdDays * 24 * 3600) unlink($file);
+            }
+        }
+
+        return array('result' => 'success', 'message' => $this->lang->backup->success->backup);
+    }
+
+    /**
      * Backup SQL 
      * 
      * @param  string    $backupFile 
