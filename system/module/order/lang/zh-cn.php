@@ -3,7 +3,7 @@ $lang->order->common  = '订单';
 
 $lang->order->id             = 'ID';
 $lang->order->productInfo    = '商品信息';
-$lang->order->account        = '账号';
+$lang->order->account        = '帐号';
 $lang->order->address        = '收货地址';
 $lang->order->price          = '价格';
 $lang->order->score          = '积分';
