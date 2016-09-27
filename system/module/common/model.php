@@ -220,9 +220,8 @@ class commonModel extends model
     public static function isAvailable($module)
     {
         global $app, $config;
-
         $enabledModules = zget($config->site, 'modules', '');
-        if($module == 'order' and (strpos($enabledModules, 'score') !== false and strpos($enabledModules, 'shop') !== false)) return true;
+        if($module == 'order' and strpos($enabledModules, 'score') === false and strpos($enabledModules, 'shop') === false) return false;
 
         /* Check whether dependence modules is available. */
         if(!empty($config->dependence->$module))
@@ -232,7 +231,7 @@ class commonModel extends model
                 if(!isset($config->site->modules) or strpos($config->site->modules, $dependModule) === false) return false;
             }
         }
-
+        
         return true;
     }
 
