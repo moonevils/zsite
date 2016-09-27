@@ -81,7 +81,7 @@ class navModel extends model
 
         global $config;
         $defaultNavs = new stdclass();
-        $defaultNavs->home    = $config->homeRoot;
+        $defaultNavs->home    = getHomeRoot();
         $defaultNavs->company = commonModel::createFrontLink('company', 'index');
 
         if($type == 'mobile_bottom')

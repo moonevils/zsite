@@ -132,8 +132,8 @@ class uiModel extends model
     public function getCustomCssFile($template, $theme)
     {
         $lang = $this->app->getClientLang();
-        if($this->config->multi)  return $this->app->getDataRoot() . 'css' . DS . $this->app->siteCode . DS . "{$template}_{$theme}_{$lang}.css";
-        if(!$this->config->multi) return $this->app->getDataRoot() . 'css' . DS . "{$template}_{$theme}_{$lang}.css";
+        if($this->config->framework->multiSite)  return $this->app->getDataRoot() . 'css' . DS . $this->app->siteCode . DS . "{$template}_{$theme}_{$lang}.css";
+        if(!$this->config->framework->multiSite) return $this->app->getDataRoot() . 'css' . DS . "{$template}_{$theme}_{$lang}.css";
     }
 
     /**
@@ -147,8 +147,8 @@ class uiModel extends model
     public function getThemeCssUrl($template, $theme)
     {
         $lang = $this->app->getClientLang();
-        if($this->config->multi)  return $this->config->webRoot . 'data/css/' . $this->app->siteCode . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
-        if(!$this->config->multi) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+        if($this->config->framework->multiSite)  return $this->config->webRoot . 'data/css/' . $this->app->siteCode . "/{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
+        if(!$this->config->framework->multiSite) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
     }
 
     /**
