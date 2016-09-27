@@ -725,7 +725,10 @@ class fileModel extends model
                 if(file_exists($thumbPath)) unlink($thumbPath);
             }
         }
-        $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($file->id)->exec();
+        $this->dao->delete()->from(TABLE_FILE)
+            ->where('id')->eq($file->id)
+            ->beginIf(RUN_MODE == 'front')->andWhere($file->addedBy)->eq($this->app->user->account)->fi()
+            ->exec();
         return !dao::isError();
     }
 
