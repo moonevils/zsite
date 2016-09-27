@@ -23,3 +23,5 @@
 #mainArea .themes .theme:hover .theme-img > .theme-info {opacity: 1}
 #mainArea .themes .theme-name .dropdown {position: absolute; right: 5px; bottom: 5px;}
 #mainArea .pager {margin: 0 5px 0 0}
+
+#industryBox #theme-all{padding-left:22px;}
