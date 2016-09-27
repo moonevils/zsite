@@ -242,7 +242,7 @@ class seo
      */
     public static function unify($string, $to = ',')
     {
-        $string = str_replace(' ', '', $string);
+        if($to != ' ') $string = str_replace(' ', '', $string);
         $labels = array('_', '、', '-', '\n', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
         $string = str_replace($labels, $to, $string);
         return preg_replace("/[{$to}]+/", $to, trim($string, $to));

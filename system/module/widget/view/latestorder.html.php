@@ -12,7 +12,7 @@ $orders = $this->order->getList($mode, $status, 'id desc', $pager);
     <td>
     <?php $goods = current($order->products);?>
       <a href="<?php echo helper::createLink('order', 'view', "id={$order->id}");?>" data-toggle='modal'>
-      <?php echo $goods->productName . ' X ' . $goods->count;?>
+      <?php echo $goods->productName . ' &times ' . $goods->count;?>
       <?php if(count($order->products) > 1) echo ' ...';?>
       </a>
     </td>
