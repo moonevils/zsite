@@ -34,8 +34,8 @@ class logModel extends model
         $visitor = fixer::input('get')
             ->add('device', $this->app->device)
             ->add('osName', helper::getOS())
-            ->add('browserName', helper::getBrowser())
-            ->add('browserVersion', helper::getBrowserVersion())
+            ->add('browserName', $browserName)
+            ->add('browserVersion', $browserVersion)
             ->add('createdTime', helper::now())
             ->get();
 
