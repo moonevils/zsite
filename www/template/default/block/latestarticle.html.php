@@ -115,3 +115,8 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
   </div>
   <?php endif;?>
 </div>
+<style>
+    .ul-list li{padding-right:40px !important;}
+    .ul-list li span{position:absolute !important;right:10px;top:4px !important;}
+</style>
+
