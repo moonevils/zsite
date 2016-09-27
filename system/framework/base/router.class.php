@@ -1707,7 +1707,6 @@ class baseRouter
         foreach($passedParams as $param => $value)
         {
             if(preg_match('/[^a-zA-Z0-9_\.]/', $param)) die('Bad Request!');
-            if(preg_match('/[^a-zA-Z0-9=_\-]/', trim($value))) die('Bad Request!');
         }
 
         $passedParams = array_values($passedParams);
