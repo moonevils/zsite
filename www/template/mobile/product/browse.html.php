@@ -60,8 +60,9 @@
                     echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
                     if($product->price != 0)
                     {
-                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small></div>';
+                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
                     }
+                    echo "</div>";
                 }
                 else if($product->price != 0)
                 {
