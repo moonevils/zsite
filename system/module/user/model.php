@@ -138,7 +138,7 @@ class userModel extends model
         }
         else
         {
-            $clientLang = isset($this->config->site->defaultLang) ? $this->config->site->defaultLang : $this->config->site->lang;
+            $clientLang = $this->app->clientLang;
             $clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang;
 
             $user->realnames = new stdclass();
