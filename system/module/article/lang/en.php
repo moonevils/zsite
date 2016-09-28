@@ -101,7 +101,7 @@ $lang->article->sourceList['copied']        = 'Copied';
 $lang->article->sourceList['translational'] = 'Translated';
 $lang->article->sourceList['article']       = 'Repost';
 
-$lang->article->statusList['Open'] = 'Normal';
+$lang->article->statusList['normal'] = 'Normal';
 $lang->article->statusList['draft']  = 'Draft';
 
 $lang->article->sticks[0] = 'No Stickup';

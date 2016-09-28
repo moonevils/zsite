@@ -67,6 +67,7 @@ $lang->order->paid           = 'Paid Order';
 $lang->order->products       = 'Ordered Product';
 $lang->order->selectPayment  = 'Choose payment';
 $lang->order->settlement     = 'Check Out';
+$lang->order->check          = 'Settle Order';
 
 $lang->order->confirmLimit         = 'Receiving Cyle';
 $lang->order->confirmReceived      = 'Receive Order';
@@ -83,7 +84,6 @@ $lang->order->lowStocks            = "<strong>%s</strong> is out of stock!";
 $lang->order->alipayPid   = 'Partner ID';
 $lang->order->alipayKey   = 'Partner KEY';
 $lang->order->alipayEmail = 'Alipay Email';
-$lang->order->score       = 'Refill Points';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid   = 'Corporate identity to ID, 16 pure number begin with 2088.';

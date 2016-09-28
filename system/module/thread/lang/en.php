@@ -44,7 +44,7 @@ $lang->thread->sticks[1] = 'Stick to he Top of the Board';
 $lang->thread->sticks[2] = 'Stick to the Top Globally';
 
 $lang->thread->displayList['hidden'] = 'Hidden';
-$lang->thread->displayList['Open'] = 'Normal';
+$lang->thread->displayList['normal'] = 'Normal';
 
 $lang->thread->statusList['wait']     = 'Not Reviewed';
 $lang->thread->statusList['approved'] = 'Approved';

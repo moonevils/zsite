@@ -158,7 +158,7 @@ $lang->ui->theme->imageRepeatList['repeat-y']          = 'Y axis repeated';
 $lang->ui->theme->imageRepeatList['no-repeat']         = 'No Repeat';
 
 $lang->ui->theme->fontWeightList['inherit']            = 'Default';
-$lang->ui->theme->fontWeightList['Open']               = 'Normal';
+$lang->ui->theme->fontWeightList['normal']               = 'Normal';
 $lang->ui->theme->fontWeightList['bold']               = 'Bold';
 
 $lang->ui->theme->fontList['inherit']                  = 'Default';
