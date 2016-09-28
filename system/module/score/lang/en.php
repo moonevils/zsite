@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The action module English file of ZenTaoCMS.
@@ -9,9 +8,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.net
  */
-$lang->score->back        = 'Back';
-$lang->score->rankingList = 'Score Ranking';
-$lang->score->rule        = 'Score Rule';
+$lang->score->back        = 'Return';
+$lang->score->rankingList = 'Point Ranking';
+$lang->score->rule        = 'Point Rules';
 
 $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
@@ -20,62 +19,63 @@ $lang->score->type    = 'Type';
 $lang->score->count   = 'Count';
 $lang->score->before  = 'Before';
 $lang->score->after   = 'After';
-$lang->score->amount  = 'Amount';
+$lang->score->amount  = 'Price';
 $lang->score->note    = 'Note';
-$lang->score->time    = 'Time';
+$lang->score->time    = 'Date';
 $lang->score->product = 'Product';
-$lang->score->confirm = 'Confirm order';
-$lang->score->details = 'Score details';
+$lang->score->confirm = 'Confirm Order';
+$lang->score->details = 'Point Details';
 
-$lang->score->setCounts = 'Set score rule';
+$lang->score->setCounts = 'Point Rules';
 
-$lang->score->totalRank = 'Total rank';
-$lang->score->rank      = 'Rank';
-$lang->score->username  = 'Username';
-$lang->score->monthRank = 'Month rank';
-$lang->score->weekRank  = 'Weekly rank';
-$lang->score->dayRank   = 'Daily rank';
+$lang->score->totalRank = 'Universal Ranking';
+$lang->score->rank      = 'Ranking';
+$lang->score->username  = 'User Name';
+$lang->score->monthRank = 'Monthly Ranking';
+$lang->score->weekRank  = 'Weekly Ranking';
+$lang->score->dayRank   = 'Daily Ranking';
 
-$lang->score->methods['register']     = 'Register';
-$lang->score->methods['login']        = 'Login';
-$lang->score->methods['maxLogin']     = 'Max Scores of Daily Loging';
-$lang->score->methods['download']     = 'Download';
+$lang->score->methods['register'] = 'Register';
+$lang->score->methods['login']    = 'Login';
+$lang->score->methods['maxLogin'] = 'Max Login Point';
+$lang->score->methods['download'] = 'Download';
 
-$lang->score->methods['thread']      = 'Thread';
+$lang->score->methods['thread']      = 'Post';
 $lang->score->methods['reply']       = 'Reply';
-$lang->score->methods['valuethread'] = 'Valueable thread';
-$lang->score->methods['valuereply']  = 'Valueable reply';
-$lang->score->methods['delThread']   = 'Delete thread';
-$lang->score->methods['delReply']    = 'Delete reply';
-$lang->score->methods['award']       = 'Reward Scores';
-$lang->score->methods['punish']      = 'Deduct Scores';
+$lang->score->methods['valuethread'] = 'Reward Thread';
+$lang->score->methods['valuereply']  = 'Reward Reply';
+$lang->score->methods['delThread']   = 'Delte Thread';
+$lang->score->methods['delReply']    = 'Delete Reply';
+$lang->score->methods['award']       = 'Reward Points';
+$lang->score->methods['punish']      = 'Deduct Point';
 
-$lang->score->methods['approveSubmittion'] = 'Submittion Successfully';
+$lang->score->methods['approveSubmittion'] = 'Contributed';
 
-$lang->score->methods['buyscore']  = 'Buy score';
-$lang->score->methods['statement'] = 'Integral Settlement';
+$lang->score->methods['buyscore']  = 'Purchase Points';
+$lang->score->methods['statement'] = 'Point Checkout';
 
 $lang->score->methods['vip'] = 'VIP';
 $lang->score->methods['co']  = 'Partner';
 
-$lang->score->types['in']  = 'Increase';
-$lang->score->types['out'] = 'Decreate';
+$lang->score->types['in']    = 'increase';
+$lang->score->types['out']   = 'decrease';
 
-$lang->score->getByThread = 'Published Thread'; 
-$lang->score->getByReply  = 'Replied Thread'; 
+$lang->score->getByThread = 'Post threads to get points.'; 
+$lang->score->getByReply  = 'Reply to get points.'; 
 
-$lang->score->lblTotal         = "Consume score：%s, Rank score: %s ";
-$lang->score->lblNoScore       = "Sorry, your score isn't enouth.";
-$lang->score->lblNoScoreReason = "<p>Sorry, your scores is not enough.<strong>%s</strong> need <strong class='red'>%s</strong>scores，now you have <strong class='red'>%s</strong> scores.</p>";
-$lang->score->lblDetail        = "You can refer to <a href='http://www.chanzhi.net/thread-view-79915.html' target='_blank'>\"how to get scores\"</a><br /><br />";
+$lang->score->lblTotal         = "You have used %s points. The ranking points is %s ";
+$lang->score->lblNoScore       = "Sorry, your points is insufficient.";
+$lang->score->lblNoScoreReason = "Sorry, your points is less than %s. You heed <strong class='red'>%s</strong> Points. You have <strong class='red'>%s</strong> Poins.";
+$lang->score->lblDetail        = "Please refer to<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
+$lang->score->lblBuySocre      = "Purchase Points %s";
 
-$lang->score->setAmount   = 'Amount';
-$lang->score->getScore    = 'Get scores';
-$lang->score->amountUnit  = 'yuan';
-$lang->score->minAmount   = 'Minimum Amount';
-$lang->score->buyWaring   = "at least %s yuan,1 yuan = %s scores";
-$lang->score->errorAmount = "At least %s yuan";
-$lang->score->alipay      = "Immediately use Alipay";
-$lang->score->paySuccess  = 'Congratulations, paid successfully!';
-$lang->score->payFail     = 'Sorry, paid failed. If you have problems, please contact us.';
-$lang->score->viewHistory = 'View payment history';
+$lang->score->setAmount   = 'Refill Amount';
+$lang->score->getScore    = 'Get Points';
+$lang->score->amountUnit  = 'Yuan';
+$lang->score->minAmount   = 'Min ';
+$lang->score->buyWaring   = "Min refill is %s Yuan，1 Yuan=%s Points";
+$lang->score->errorAmount = "Refill amount should be more than %s Yuan.";
+$lang->score->alipay      = "Use AliPay right now!";
+$lang->score->paySuccess  = 'Thank you for your payment!';
+$lang->score->payFail     = 'Sorry, there is problem with your payment. Contact us if any questions.';
+$lang->score->viewHistory = 'Payment History';

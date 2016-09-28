@@ -1,30 +1,30 @@
 <?php 
-$lang->admin->common        = 'Admin';
-$lang->admin->index         = 'Index';
-$lang->admin->ignore        = 'Ignore safety warning';
+$lang->admin->common        = 'Backend';
+$lang->admin->index         = 'Home';
+$lang->admin->ignore        = 'Ignore security warning';
 $lang->admin->ignoreupgrade = 'Ignore upgrade prompt';
 
 $lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->common             = 'Quick Entry';
-$lang->admin->shortcuts->articleCategories  = 'Article Categories';
-$lang->admin->shortcuts->article            = 'Article';
-$lang->admin->shortcuts->product            = 'Product';
-$lang->admin->shortcuts->feedback           = 'Feedback';
-$lang->admin->shortcuts->site               = 'Site';
-$lang->admin->shortcuts->logo               = 'Logo';
-$lang->admin->shortcuts->company            = 'Company';
-$lang->admin->shortcuts->contact            = 'Contact';
+$lang->admin->shortcuts->articleCategories  = 'Article Category';
+$lang->admin->shortcuts->article            = 'Publish an article';
+$lang->admin->shortcuts->product            = 'Add a product';
+$lang->admin->shortcuts->feedback           = 'Feedback Mgmt';
+$lang->admin->shortcuts->site               = 'Site Settings';
+$lang->admin->shortcuts->logo               = 'LOGO Setting';
+$lang->admin->shortcuts->company            = 'Compsny Info';
+$lang->admin->shortcuts->contact            = 'Contact US';
 
-$lang->admin->thread       = 'New Threads';
-$lang->admin->order        = 'New orders';
+$lang->admin->thread       = 'New Thread';
+$lang->admin->order        = 'New Order';
 $lang->admin->feedback     = 'New Feedback';
 
-$lang->admin->adminEntry     = "Warning: Your management portal is still admin.php, please rename it to enhance system security.";
-$lang->admin->orderTitle     = 'User %s created a %s order';
-$lang->admin->message        = 'There are %s messages awaiting moderation';
-$lang->admin->reply          = 'There are %s replies awaiting moderation';
-$lang->admin->comment        = 'There are %s comments awaiting moderation';
-$lang->admin->threadReply    = 'There are %s replies to your thread today';
-$lang->admin->submittion     = 'There are %s submittion awaiting moderation today';
-$lang->admin->todayReport    = 'Today this site has %s PV,  %s UV , %s IP';
-$lang->admin->yestodayReport = 'Yestoday this site has %s PV,  %s UV , %s IP';
+$lang->admin->adminEntry     = 'Warning! Your management entry is admin.php as default. Please change its name for security!';
+$lang->admin->orderTitle     = '%s has created an Order %s ';
+$lang->admin->message        = 'Today you have %s messages to review.';
+$lang->admin->reply          = 'Today you have %s replies to review.';
+$lang->admin->comment        = 'Today you have %s comments to review.';
+$lang->admin->threadReply    = 'Today you have %s replies.';
+$lang->admin->submittion     = 'Today you have %s contributions to review.';
+$lang->admin->todayReport    = 'Today your website has %s PVs, %s UVs, and %s IP addresses.';
+$lang->admin->yestodayReport = 'Yesterday your website has %s PVs, %s UVs, and %s IP addresses.';
