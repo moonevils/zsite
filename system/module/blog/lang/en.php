@@ -10,6 +10,6 @@
  * @link        http://www.chanzhi.org
  */
 $lang->blog->common    = 'Blog';
-$lang->blog->home      = 'Home';
-$lang->blog->siteHome  = 'Site';
-$lang->blog->subscribe = 'Subscribe Blog';
+$lang->blog->home      = 'Blog Home';
+$lang->blog->siteHome  = 'Website Home';
+$lang->blog->subscribe = 'Subscribe';

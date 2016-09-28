@@ -9,44 +9,44 @@
  * @version     $Id: en.php 4719 2013-05-03 02:20:28Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhico.com
  */
-$lang->group->common             = 'Group';
-$lang->group->allGroups          = 'All Groups';
-$lang->group->browse             = 'Browse';
-$lang->group->create             = 'Create';
+$lang->group->common             = 'Group Privilege';
+$lang->group->allGroups          = 'All Privilege';
+$lang->group->browse             = 'Browse Group';
+$lang->group->create             = 'Add';
 $lang->group->edit               = 'Edit';
 $lang->group->copy               = 'Copy';
 $lang->group->delete             = 'Delete';
 $lang->group->managePriv         = 'Privilege';
-$lang->group->managePrivByGroup  = 'Privilege';
-$lang->group->managePrivByModule = 'Manage privilege by module';
-$lang->group->byModuleTips       = '<span class="tips"> (Press shift or control to multiple select)</span>';
-$lang->group->manageMember       = 'Members';
-$lang->group->linkMember         = 'Add members';
-$lang->group->unlinkMember       = 'Remove member';
-$lang->group->confirmDelete      = 'Are you sure to delete this group?';
-$lang->group->successSaved       = 'Success saved.';
-$lang->group->errorNotSaved      = 'Not saved, please make sure you have selected some actions and groups.';
+$lang->group->managePrivByGroup  = 'Group Privilege';
+$lang->group->managePrivByModule = 'Module Privilege';
+$lang->group->byModuleTips       = '<span class="tips">(Press shift/control to multiselect.)</span>';
+$lang->group->manageMember       = 'Member Mgmt';
+$lang->group->linkMember         = 'Associate Member';
+$lang->group->unlinkMember       = 'Unassociate Member';
+$lang->group->confirmDelete      = 'Do you want to delete this member?';
+$lang->group->successSaved       = 'Saved';
+$lang->group->errorNotSaved      = 'Not saved. Please choose privilege.';
 
-$lang->group->id       = 'Id';
-$lang->group->name     = 'Name';
-$lang->group->desc     = 'Desc';
-$lang->group->users    = 'Users';
+$lang->group->id       = 'ID';
+$lang->group->name     = 'Group Name';
+$lang->group->desc     = 'Group Description';
+$lang->group->users    = 'User List';
 $lang->group->module   = 'Module';
 $lang->group->method   = 'Function';
-$lang->group->priv     = 'Priviledge';
+$lang->group->priv     = 'Privilege';
 $lang->group->option   = 'Option';
-$lang->group->inside   = 'Group users';
-$lang->group->outside  = 'Other users';
-$lang->group->other    = 'Others';
-$lang->group->all      = 'All';
-$lang->group->extent   = 'extent';
-$lang->group->havePriv = 'Have Privilege';
-$lang->group->noPriv   = 'No Privilege';
+$lang->group->inside   = 'Users within group';
+$lang->group->outside  = 'Users from outside';
+$lang->group->other    = 'Other Modules';
+$lang->group->all      = 'All Privilege';
+$lang->group->extent   = 'Privilege Scope';
+$lang->group->havePriv = 'Authorized';
+$lang->group->noPriv   = 'Unauthorized';
 
 $lang->group->selectAll = 'Select All';
-$lang->group->manageAll = 'View all customers and orders';
+$lang->group->manageAll = 'View All';
 
-$lang->group->copyOptions['copyPriv'] = 'Copy priviledge';
-$lang->group->copyOptions['copyUser'] = 'Copy user';
+$lang->group->copyOptions['copyPriv'] = 'Copy Privilege';
+$lang->group->copyOptions['copyUser'] = 'Copy User';
 
 include (dirname(__FILE__) . '/resource.php');

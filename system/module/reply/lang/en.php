@@ -11,15 +11,15 @@
  */
 $lang->reply = new stdclass();
 $lang->reply->common    = 'Reply';
-$lang->reply->id        = 'Id';
-$lang->reply->list      = 'Replies';
+$lang->reply->id        = 'ID';
+$lang->reply->list      = 'List';
 $lang->reply->content   = 'Content';
 $lang->reply->author    = 'Author';
-$lang->reply->files     = 'Files:';
-$lang->reply->addedDate = 'Date';
-$lang->reply->admin     = 'Admin';
-$lang->reply->sofa      = 'Sofa';
-$lang->reply->stool     = 'Stool';
+$lang->reply->files     = 'File：';
+$lang->reply->addedDate = 'Replied On';
+$lang->reply->admin     = 'Reply Admin';
+$lang->reply->sofa      = '沙发';
+$lang->reply->stool     = '板凳';
 
 $lang->reply->edit       = 'Edit';
-$lang->reply->deleteFile = 'Delete file';
+$lang->reply->deleteFile = 'Delete File';
