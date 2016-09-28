@@ -17,6 +17,28 @@ $(document).ready(function()
     }
 });
 
+
+/**
+ * index new order module,finisher button
+ * click event
+ */
+ $(document).ready(function()
+{
+    $(document).on( 'click', '.finisher', function()
+    {
+        confirmLink = $(this).data('rel');
+        $.getJSON(confirmLink, function (response)
+        {
+            if(response.result == 'success')
+            {
+                bootbox.alert(response.message, function(){ location.reload(); });
+            }
+        });
+        return true;
+    });
+});
+
+
 /**
  * Delete widget.
  * 
