@@ -9,9 +9,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->index->common  = 'Home';
+$lang->index->common  = 'Homepage';
 $lang->index->index   = 'Home';
-$lang->index->aboutus = 'About';
-$lang->index->news    = 'News';
-$lang->index->blog    = 'Blogs';
-$lang->index->contact = 'Contact';
+$lang->index->aboutus = 'About Us';
+$lang->index->news    = 'Latest Feed';
+$lang->index->blog    = 'Latest Blog';
+$lang->index->contact = 'Contact Us';

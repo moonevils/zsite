@@ -1,7 +1,7 @@
 <?php
 $lang->error = new stdclass();
-$lang->error->pageNotFound    = 'Page not found';
-$lang->error->articleCategory = 'Browse articles';
-$lang->error->productCategory = 'Browse products';
-$lang->error->blogCategory    = 'Browse blog';
-$lang->error->searchTip       = 'Welcome to continue browsing other content:';
+$lang->error->pageNotFound    = "Page not found.";
+$lang->error->articleCategory = 'Article Category';
+$lang->error->productCategory = 'Product Category';
+$lang->error->blogCategory    = 'Blog Category';
+$lang->error->searchTip       = 'Please continue browsing our website. You can use Search to loof for';

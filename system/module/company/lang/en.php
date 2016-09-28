@@ -11,14 +11,14 @@
  */
 $lang->company->common  = "Company";
 
-$lang->company->name    = "Name";
-$lang->company->desc    = "Intro";
-$lang->company->content = "More";
-$lang->company->contact = "Contact";
-$lang->company->qrcode  = "Subscribe";
+$lang->company->name    = "Company Name";
+$lang->company->desc    = "Company Description";
+$lang->company->content = "Conpamy Intro";
+$lang->company->contact = "Contact Us";
+$lang->company->qrcode  = "QR Code";
 
-$lang->company->setBasic   = "Company";
-$lang->company->setContact = "Contact";
+$lang->company->setBasic   = "Company Info";
+$lang->company->setContact = "Company Contact";
 
 $lang->company->error = new stdclass(); 
-$lang->company->error->email = "email was wrong.";
+$lang->company->error->email = "Pleae use valid Email.";
