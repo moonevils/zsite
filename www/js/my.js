@@ -41,7 +41,7 @@ $(document).ready(function()
     $(document).on('click', '.carousel .item[data-url]', function()
     {
         var url    = $(this).data('url');
-        var target = $(this).data('target');
+        var target = $(this).data('target') || '_self';
         if(url && url.length) window.open(url, target);
     });
 
