@@ -966,7 +966,7 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
-                var url = createLink('visual', 'index', 'l=' + clientLang + '&' + 'referer=' + Base64.encode(visualPageUrl));
+                var url = createLink('visual', 'index', 'referer=' + Base64.encode(visualPageUrl) + '&l=' + clientLang);
                 window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);

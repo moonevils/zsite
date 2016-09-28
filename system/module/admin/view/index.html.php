@@ -11,9 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version, false);?>
+<?php $ignoreUpgrade = false; ?>
 <div class='container' id='shortcutBox'>
-
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
       <div class='dashboard-control'>
@@ -61,9 +60,10 @@
               </div>
             </div>
             <?php if($widget->type != 'chanzhiDynamic'):?>
-            <div class='panel-body no-padding' data-url="<?php echo helper::createLink('widget', 'printWidget', 'widget=' . $widget->id);?>"> </div>
+            <div class='panel-body no-padding' data-url="<?php echo helper::createLink('widget', 'printWidget', 'widget=' . $widget->id);?>"></div>
             <?php else:?>
-            <script src='http://api.chanzhi.org/goto.php?item=dynamics' type='text/javascript'></script>
+            <div id='chanzhiDynamic'></div>
+            <script async src='http://api.chanzhi.org/goto.php?item=dynamics_jsonp&extra=afterDynmaicsLoad'></script>
             <?php endif;?>
           </div>
         </div>
@@ -100,4 +100,7 @@
 <?php endif;?>
 </div>
 
+<?php if(!$ignoreUpgrade): ?>
+<script async src='<?php echo 'http://api.chanzhi.org/latest.php?version=' . $this->config->version ?>'></script>
+<?php endif; ?>
 <?php include '../../common/view/footer.admin.html.php';?>

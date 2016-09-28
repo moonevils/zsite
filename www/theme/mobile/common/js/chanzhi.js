@@ -72,6 +72,15 @@ $(function()
         $.ajaxaction(options, $this);
     });
 
+    /* Make slide item clickable   */
+    $(document).on('click', '.carousel .item[data-url]', function()
+    {
+        var $item  = $(this),
+            url    = $item.data('url'),
+            target = $item.data('target') || '_self';
+        if(url && url.length) window.open(url, target);
+    });
+
     function tidyCardsRow($row)
     {
         var $cards = $row.children('.col');
