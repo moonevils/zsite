@@ -1,33 +1,33 @@
 <?php
 $lang->backup->common   = 'Backup';
-$lang->backup->index    = 'Index';
-$lang->backup->history  = 'History';
-$lang->backup->delete   = 'Delete';
+$lang->backup->index    = 'Home';
+$lang->backup->history  = 'Bachup History';
+$lang->backup->delete   = 'Delete Backup';
 $lang->backup->backup   = 'Backup';
-$lang->backup->restore  = 'Restore';
-$lang->backup->change   = 'Change hold days';
-$lang->backup->changeAB = 'change';
+$lang->backup->restore  = 'Restore Backup';
+$lang->backup->change   = 'Retention Time';
+$lang->backup->changeAB = 'Modify';
 
-$lang->backup->time  = 'Time';
+$lang->backup->time  = 'Backup Time';
 $lang->backup->files = 'Files';
 $lang->backup->size  = 'Size';
 
-$lang->backup->waitting       = '<span id="backupType"></span> is in progress, please wait...';
-$lang->backup->confirmDelete  = 'Are you sure delete this backup?';
-$lang->backup->confirmRestore = 'Are you sure restore this backup?';
-$lang->backup->holdDays       = 'Keep backup copy of the recent %s days';
+$lang->backup->waitting       = '<span id="backupType"></span>Processing. Please wait...';
+$lang->backup->confirmDelete  = 'Do you want to delete the backup?';
+$lang->backup->confirmRestore = 'Do you want to restore the backup?';
+$lang->backup->holdDays       = 'Keep the latest %s days backup.';
 
 $lang->backup->success = new stdclass();
-$lang->backup->success->backup  = 'Success backup!';
-$lang->backup->success->restore = 'Success restore!';
+$lang->backup->success->backup  = 'Backed up!';
+$lang->backup->success->restore = 'Restored!';
 
 $lang->backup->error = new stdclass();
-$lang->backup->error->noWritable     = "Cannot backup! <code>%s</code> do not write! Please check the directory permissions.";
-$lang->backup->error->noDelete       = "The file %s cannot delete, modify permissions or deleted manually.";
-$lang->backup->error->restoreSQL     = "The database restore failed. Error: %s";
-$lang->backup->error->restoreFile    = "Attachments failed to restore. Error: %s";
-$lang->backup->error->backupFile     = "Attachments failed to backup. Error: %s";
-$lang->backup->error->backupTemplate = "Templates failed to backup. Error: %s";
+$lang->backup->error->noWritable     = "<code>%s</code> is not writable! Please check the permission, or it cannot be backed up!";
+$lang->backup->error->noDelete       = "%s cannot be deleted. Please update the permission or manually delete it.";
+$lang->backup->error->restoreSQL     = "Database restoration failed. Error %s";
+$lang->backup->error->restoreFile    = "File restoration failed. Error %s";
+$lang->backup->error->backupFile     = "File backup failed. Error %s";
+$lang->backup->error->backupTemplate = "Template backup failed. Error %s";
 
-$lang->js->backuping = 'Backuping ...';
-$lang->js->restoring = 'Restoring ...';
+$lang->js->backuping = 'Backing up...';
+$lang->js->restoring = 'Restoring...';

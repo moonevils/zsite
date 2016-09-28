@@ -28,6 +28,7 @@ $lang->site->desc            = '站点描述';
 $lang->site->icpSN           = '备案编号';
 $lang->site->icpLink         = '备案链接';
 $lang->site->policeSN        = '公安部备案编号';
+$lang->site->policeTip       = '公安部备案编号';
 $lang->site->policeLink      = '备案链接';
 $lang->site->slogan          = '站点口号';
 $lang->site->mission         = '站点使命';

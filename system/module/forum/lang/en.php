@@ -12,28 +12,28 @@
 $lang->forum->common      = 'Forum';
 $lang->forum->board       = 'Board';
 $lang->forum->owners      = 'Moderator';
-$lang->forum->threadList  = 'Threads';
-$lang->forum->threadCount = 'Threads';
-$lang->forum->postCount   = 'Posts';
-$lang->forum->lastPost    = 'Last post';
-$lang->forum->readonly    = 'Readonly';
-$lang->forum->notExist    = 'The board does not exist.';
-$lang->forum->lblOwner    = " [ Moderator: %s ]";
+$lang->forum->threadList  = 'Thread List';
+$lang->forum->threadCount = 'Thread Count';
+$lang->forum->postCount   = 'Post Count';
+$lang->forum->lastPost    = 'Lst Post';
+$lang->forum->readonly    = 'Read Only';
+$lang->forum->notExist    = 'Board does not exist.'; 
+$lang->forum->lblOwner    = " [ BM %s ]";
 
-$lang->forum->post       = 'Post';
-$lang->forum->admin      = 'Admin';
-$lang->forum->update     = 'Update';
-$lang->forum->setting    = 'Setting';
+$lang->forum->post    = 'Post';
+$lang->forum->admin   = 'Board Admin';
+$lang->forum->update  = 'Data Update';
+$lang->forum->setting = 'Forum Settings';
 $lang->forum->postReview = 'Post Review';
 
-$lang->forum->updateDesc    = 'This action will re-compute the stats(threads, replies) of every board again.';
-$lang->forum->successUpdate = 'Update sucessfully';
+$lang->forum->updateDesc    = 'Data update will update post counts of each boards.';
+$lang->forum->successUpdate = 'Data updated!';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';
-$lang->pager->digest        = str_replace('records', 'threads', $lang->pager->digest);
+$lang->pager->digest        = str_replace('Record', 'Theme', $lang->pager->digest);
 $lang->pager->settedInForum = true;    // Set this switch thus in thread module can avoid overiding them.
 
 $lang->forum->postReviewOptions        = new stdclass(); 
-$lang->forum->postReviewOptions->open  = 'Open';
-$lang->forum->postReviewOptions->close = 'Close';
+$lang->forum->postReviewOptions->open  = 'On';
+$lang->forum->postReviewOptions->close = 'Off';

@@ -75,6 +75,7 @@ class router extends baseRouter
      */
     public function setClientDevice()
     {
+        $device = 'desktop';
         if(strpos('mobile,desktop', $this->cookie->device) !== false) $device = $this->cookie->device;
 
         if(RUN_MODE == 'admin')
