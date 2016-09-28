@@ -79,3 +79,6 @@ $lang->score->alipay      = "Use AliPay right now!";
 $lang->score->paySuccess  = 'Thank you for your payment!';
 $lang->score->payFail     = 'Sorry, there is problem with your payment. Contact us if any questions.';
 $lang->score->viewHistory = 'Payment History';
+
+$lang->score->awardRule  = 'Award Point Rule';
+$lang->score->punishRule = 'Punish Point Rule';

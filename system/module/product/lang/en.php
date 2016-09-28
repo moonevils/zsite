@@ -81,7 +81,7 @@ $lang->product->directory = 'Back to Directory';
 $lang->product->noCssTag  = 'No &lt;style&gt;&lt;/style&gt; Tag';
 $lang->product->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; Tag';
 
-$lang->product->statusList['Open']  = 'On the Shelf';
+$lang->product->statusList['normal']  = 'On the Shelf';
 $lang->product->statusList['offline'] = 'Off the Shelf';
 
 $lang->product->placeholder = new stdclass();
