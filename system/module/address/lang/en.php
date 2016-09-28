@@ -1,10 +1,10 @@
 <?php
 $lang->address->common  = 'Address';
-$lang->address->address = 'addree';
+$lang->address->address = 'Detailed Address';
 $lang->address->phone   = 'Phone';
-$lang->address->zipcode = 'zipcode';
-$lang->address->contact = 'contact';
+$lang->address->zipcode = 'zip code';
+$lang->address->contact = 'Contact';
 
 $lang->address->browse = 'Address List';
-$lang->address->create = 'Add new Address';
-$lang->address->edit   = 'Edit address';
+$lang->address->create = 'Add';
+$lang->address->edit   = 'Edit';

@@ -377,10 +377,6 @@ class router extends baseRouter
             if(!empty($enabledLangs))
             {
                 $enabledLangs = explode(',', $enabledLangs);
-                foreach($this->config->langs as $code => $title)
-                {
-                   if(!in_array($code, $enabledLangs)) unset($this->config->langs[$code]);
-                }
             }
             
             if(isset($defaultLang) && isset($this->config->langs[$defaultLang])) $this->config->default->lang = $defaultLang;
