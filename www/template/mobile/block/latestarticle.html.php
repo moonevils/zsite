@@ -20,6 +20,10 @@ $method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type))
 $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
 if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article'); 
 ?>
+<style>
+#block<?php echo $block->id;?> .card .thumbnail-cell {padding-left: 8px; padding-right: 0}
+#block<?php echo $block->id;?> .card .table-cell + .thumbnail-cell {padding-right: 8px; padding-left: 0}
+</style>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
@@ -28,6 +32,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
     <?php endif;?>
   </div>
   <?php if(isset($content->image)):?>
+  <?php $imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';?>
   <div class='panel-body no-padding'>
     <div class='cards condensed cards-list'>
     <?php
@@ -48,19 +53,22 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <strong><?php echo html::a($url, $article->title);?></strong>
       </div>
       <div class='table-layout'>
+        <?php
+        if(!empty($article->image))
+        {
+            $thumbnailTitle = $article->image->primary->title ? $article->image->primary->title : $article->title;
+            $thumbnailLink = html::a($url, html::image($article->image->primary->{$imageURL}, "title='{$thumbnailTitle}' class='thumbnail'" ));
+            $thumbnailMaxWidth = !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px';
+            $thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: {$thumbnailMaxWidth};'>{$thumbnailLink}</div>";
+            if($content->imagePosition == 'left') echo $thumbnail;
+        }
+        ?>
         <div class='table-cell'>
           <div class='card-content text-muted small'>
-            <strong class='text-important'><?php if(isset($content->time)) echo "<i class='icon-time'></i> &nbsp;" . formatTime($article->addedDate, DT_DATE4);?></strong> <?php echo $article->summary;?>
+            <strong class='text-important'><?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?></strong> &nbsp;<?php echo $article->summary;?>
           </div>
         </div>
-        <?php if(!empty($article->image)): ?>
-        <div class='table-cell thumbnail-cell'>
-        <?php
-          $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-          echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
-        ?>
-        </div>
-        <?php endif; ?>
+        <?php if(isset($thumbnail) && $content->imagePosition == 'right') echo $thumbnail; ?>
       </div>
     </div>
     <?php endforeach;?>
