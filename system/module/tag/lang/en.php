@@ -1,19 +1,19 @@
 <?php
-$lang->tag->common = 'keywords';
-$lang->tag->rank   = 'Rank';
-$lang->tag->link   = 'link';
+$lang->tag->common = 'Keyword';
+$lang->tag->rank   = 'Ranking';
+$lang->tag->link   = 'Links';
 
-$lang->tag->admin     = 'Manage keywords';
-$lang->tag->editLink  = 'Edit Link';
+$lang->tag->admin     = 'Keyword Admin';
+$lang->tag->editLink  = 'Edit a Link';
 $lang->tag->source    = 'Source';
-$lang->tag->inputLink = 'Please input link';
-$lang->tag->inputTag  = 'Please input tag';
+$lang->tag->inputLink = 'Enter a Link';
+$lang->tag->inputTag  = 'Enter a Keyword';
 $lang->tag->search    = 'Search';
 
 $lang->tag->sourceList['article']  = 'Article';
 $lang->tag->sourceList['blog']     = 'Blog';
 $lang->tag->sourceList['page']     = 'Page';
 $lang->tag->sourceList['product']  = 'Product';
-$lang->tag->sourceList['book']     = 'Book';
+$lang->tag->sourceList['book']     = 'Manual';
 $lang->tag->sourceList['category'] = 'Category';
 $lang->tag->sourceList['board']    = 'Board';
