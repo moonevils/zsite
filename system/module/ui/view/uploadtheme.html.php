@@ -14,10 +14,17 @@
 <?php if($canManage['result'] == 'success'):?>
 <form method='post' enctype='multipart/form-data' id='uploadForm' action='<?php echo inlink('uploadtheme')?>'>
   <div id='responser'></div>
-  <div class='input-group'>
-    <input type='file' name='file' class='form-control' />
-    <div class='input-group-btn'><?php echo html::submitButton($lang->ui->uploadTheme);?></div>
-  </div>
+  <table class='table table-form'>
+    <tr>
+      <th class='w-80px'><?php echo $lang->ui->importType;?></th>
+      <td><?php echo html::radio('type', $lang->ui->importTypes, 'theme', "class='checkbox'")?></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->ui->themePackage;?></th>
+      <td> <input type='file' name='file' class='form-control' /> </td>
+    </tr>
+    <tr><th></th><td><?php echo html::submitButton($lang->ui->uploadTheme);?></td></tr>
+  <table>
 </form>
 <?php else:?>
 <div>

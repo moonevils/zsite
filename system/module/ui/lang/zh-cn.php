@@ -48,6 +48,7 @@ $lang->ui->enableTheme     = "使用此主题";
 $lang->ui->industry        = "行业";
 $lang->ui->offcial         = "官方";
 $lang->ui->reset           = "重置为默认";
+$lang->ui->themePackage    = "主题包";
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
@@ -275,6 +276,13 @@ $lang->ui->left            = '左边距';
 $lang->ui->right           = '右边距';
 $lang->ui->top             = '上边距';
 $lang->ui->bottom          = '下边距';
+
+$lang->ui->importType    = '导入方式';
+$lang->js->fullImportTip = "完整导入将会替换站点的文章、产品等数据";
+
+$lang->ui->importTypes = new stdclass();
+$lang->ui->importTypes->theme = '只导入主题';
+$lang->ui->importTypes->full  = '完整导入';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
