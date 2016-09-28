@@ -335,6 +335,24 @@ function formatTime($time, $format = '')
 }
 
 /**
+ * Get file mime type.
+ * 
+ * @param  int    $file 
+ * @access public
+ * @return void
+ */
+function getFileMimeType($file)
+{
+    if(function_exists('mime_content_type')) return mime_content_type($file);
+    if(function_exists('finfo_open'))
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        return finfo_file($finfo, $file); 
+    }
+    return false;
+}
+
+/**
  * Key for chanzhi.
  * 
  * @access public
