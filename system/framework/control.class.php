@@ -196,10 +196,10 @@ class control extends baseControl
         }
         else
         {
-            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "common.css";
-            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "{$methodName}.css";
-            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "common.{$this->config->site->theme}.css";
-            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->devicePrefix . "{$methodName}.{$this->config->site->theme}.css";
+            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . "common.css";
+            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . 'css' . DS . "{$methodName}.css";
+            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . 'css' . DS . "common.{$this->config->site->theme}.css";
+            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . "{$methodName}.{$this->config->site->theme}.css";
 
             if(file_exists($defaultMainCssFile))   $css .= file_get_contents($defaultMainCssFile);
             if(file_exists($defaultMethodCssFile)) $css .= file_get_contents($defaultMethodCssFile);
