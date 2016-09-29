@@ -97,7 +97,7 @@
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
-        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, 'l=' + clientLang + '&' + (action.params || setting.params || '').format(options));
+        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options) + '&l=' + clientLang);
     };
 
     var openModal = function(url, options)
