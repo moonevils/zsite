@@ -24,6 +24,9 @@
       <li data-type='internal' <?php echo $param == 'canceled' ? "class='active'" : '';?>>
         <?php echo html::a(inlink('admin', "mode=status&status=canceled"), $lang->order->statusList['canceled']);?>
       </li>
+      <li data-type='internal' <?php echo $param == 'expired' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "mode=status&status=expired"), $lang->order->statusList['expired']);?>
+      </li>
     </ul> 
   </div>
   <table class='table table-hover table-striped tablesorter table-fixed'>

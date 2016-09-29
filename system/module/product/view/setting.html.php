@@ -38,6 +38,15 @@
           </td>
         </tr>
         <tr>
+          <th><?php echo $lang->order->expireLimit;?></th> 
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('expireLimit', isset($this->config->shop->expireLimit) ? $this->config->shop->expireLimit: 30, "class='form-control'");?>
+              <span class='input-group-addon'><?php echo $lang->order->days;?></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
           <th><?php echo $lang->order->payment;?></th> 
           <?php unset($lang->order->paymentList['offlinepay']);?>
           <td colspan='2'><?php echo html::checkbox('payment', $lang->order->paymentList, isset($this->config->shop->payment) ? $this->config->shop->payment : 'COD,alipay', "class='checkbox'");?></td>
