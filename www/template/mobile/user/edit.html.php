@@ -121,7 +121,6 @@
 $(function()
 {
     var $editProfileForm = $('#editProfileForm');
-    appendFingerprint($editProfileForm);
     $editProfileForm.ajaxform({onSuccess: function(response)
     {
         if(response.result == 'success')

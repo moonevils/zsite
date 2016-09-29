@@ -252,31 +252,3 @@ $(function()
         if($row.parent().hasClass('cards-products')) tidyCardsRow($row);
     })
 });
-
-function appendFingerprint(form)
-{
-    if(form.data('checkfingerprint'))
-    {
-        var fingerprint = getFingerprint();
-        if(form.find('#fingerprint').size() == 0)
-        {
-            form.append("<input type='hidden' id='fingerprint'  name='fingerprint' value='" + fingerprint + "'>");
-        }
-        else
-        {
-            $('#fingerprint').val(fingerprint);
-        }
-    }
-}
-
-function getFingerprint()
-{
-    if(typeof(Fingerprint) == 'function') return new Fingerprint().get();
-
-    var fingerprint = '';
-    $.each(navigator, function(key, value)
-    {
-        if(typeof(value) == 'string') fingerprint += value.length;
-    })
-    return fingerprint;
-}
