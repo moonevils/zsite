@@ -237,8 +237,8 @@ class control extends baseControl
         $js = '';
         if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
-            $mainJsFile   = $modulePath . 'js' . DS . $this->devicePrefix . 'common.js';
-            $methodJsFile = $modulePath . 'js' . DS . $this->devicePrefix . $methodName . '.js';
+            $mainJsFile   = $modulePath . 'js' . DS . 'common.js';
+            $methodJsFile = $modulePath . 'js' . DS . $methodName . '.js';
 
             if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
             if(file_exists($methodJsFile)) $js .= file_get_contents($methodJsFile);
