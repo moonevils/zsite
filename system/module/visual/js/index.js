@@ -1050,9 +1050,9 @@
                 {
                     $.closeModal();
                     var $style = $$('#themeStyle');
-                    $style.attr('href', $style.href());
+                    if($style.length) $style.attr('href', $style.href());
+                    else reloadPage();
                 });
-                if(DEBUG) console.log('Modal loaded:', url);
             }
         });
         return false;

@@ -594,7 +594,7 @@ class commonModel extends model
     {
         $languagebar = '';
         global $config, $app;
-        $langs = explode(',', $config->site->lang);
+        $langs = explode(',', $config->enabledLangs);
         if(count($langs) == 1) return false;
         if($app->clientDevice == 'mobile')
         {

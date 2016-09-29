@@ -366,14 +366,9 @@ class router extends baseRouter
         $langCookieVar = RUN_MODE . 'Lang';
         if((RUN_MODE == 'front' or RUN_MODE == 'admin') and $this->config->installed)
         {
-            $records = $this->dbh->query("select `key`,value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` in ('defaultLang', 'lang', 'cn2tw')")->fetchAll();
-            foreach($records as $record)
-            {
-                if($record->key == 'lang')        $enabledLangs  = $record->value;
-                if($record->key == 'defaultLang') $defaultLang   = $record->value;
-                if($record->key == 'cn2tw') $this->config->cn2tw = $record->value;
-            }
-
+            $enabledLangs  = $this->config->enabledLangs;
+            $defaultLang   = $this->config->defaultLang;
+                
             if(!empty($enabledLangs))
             {
                 $enabledLangs = explode(',', $enabledLangs);

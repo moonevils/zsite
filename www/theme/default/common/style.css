@@ -12,8 +12,13 @@ LTD www.xirangit.com)
 /* === Basic style === */
 /* Zui reset */
 .col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: left; width: 100%}
-@media (max-width: 991px) {.col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: none;}}
-@media (min-width: 992px) {
+@media (max-width: 991px)
+{
+  .col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: none;}
+  .col-main.pull-right, [class*=' col-md-'].pull-right, [class^='col-md-'].pull-right {float: none!important}
+}
+@media (min-width: 992px)
+{
   .col {float: left; width: 100%}
   .col[data-grid='1'], .col-1 {width: 8.33333333%}
   .col[data-grid='2'], .col-2 {width: 16.66666667%}
@@ -27,6 +32,11 @@ LTD www.xirangit.com)
   .col[data-grid='10'], .col-10 {width: 83.33333333%}
   .col[data-grid='11'], .col-11 {width: 91.66666667%}
   .col[data-grid='12'], .col-12 {width: 100%}
+}
+
+@media (min-width: 992px)
+{
+  .col-md-10 {width: 83.33333333%;}
 }
 
 side {display: block}

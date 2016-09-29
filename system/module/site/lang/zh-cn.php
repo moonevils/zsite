@@ -70,6 +70,7 @@ $lang->site->front            = '网站浏览';
 $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
+$lang->site->setSystem     = "系统设置";
 $lang->site->setCache      = '缓存设置';
 $lang->site->setCDN        = "CDN设置";
 $lang->site->setDomain     = "域名设置";
@@ -253,3 +254,5 @@ $lang->site->menus['tag']        = '关键词';
 $lang->site->menus['links']      = '友情链接';
 $lang->site->menus['site']       = '站点';
 $lang->site->menus['security']   = '安全';
+
+$lang->site->fileAuthority = '需要修改写入文件的权限，Linux下的运行命令为<code>%s</code>';
