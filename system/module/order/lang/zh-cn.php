@@ -52,6 +52,7 @@ $lang->order->pay            = '支付';
 $lang->order->goToPay        = '订单创建成功，请到支付页面完成付款。';
 $lang->order->return         = '收款';
 $lang->order->delivery       = '发货';
+$lang->order->delete         = '删除';
 $lang->order->finish         = '完成';
 $lang->order->confirm        = '确认订单信息';
 $lang->order->selectProducts = "选择了 <strong class='text-danger'>%s</strong> 件商品，";
