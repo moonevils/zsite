@@ -245,8 +245,8 @@ class control extends baseControl
         }
         else
         {
-            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "common.js";
-            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "{$methodName}.js";
+            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . "common.js";
+            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . "{$methodName}.js";
             $themeMainJsFile     = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "common.{$this->config->site->theme}.js";
             $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "{$methodName}.{$this->config->site->theme}.js";
 
