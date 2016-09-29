@@ -89,6 +89,7 @@ class siteModel extends model
                 }
             }
             file_put_contents($systemConfig, $content, FILE_APPEND);
+            dao::$changedTables[] = TABLE_CONFIG;
             return array('result' => 'success', 'message' => $this->lang->saveSuccess); 
         }
     }
