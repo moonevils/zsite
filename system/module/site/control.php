@@ -395,7 +395,6 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
-
         $this->view->title = $this->lang->site->setCDN;
         $this->display();
     }

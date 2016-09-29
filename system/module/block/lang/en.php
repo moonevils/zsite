@@ -169,14 +169,18 @@ $lang->block->imagePositionList['left']  = 'Left';
 $lang->block->imagePositionList['right'] = 'Right';
 
 $lang->block->category = new stdclass();
-$lang->block->category->showChildren = 'Display Subcategory';
-$lang->block->category->fromCurrent  = 'Start from current category';
+$lang->block->category->showChildren  = 'Display Subcategory';
+$lang->block->category->fromCurrent   = 'Start from current category';
+$lang->block->category->initialExpand = 'Display Subcategory Expand';
 
 $lang->block->category->showChildrenList[1] = 'Yes';
 $lang->block->category->showChildrenList[0] = 'No';
 
 $lang->block->category->fromCurrentList[1] = 'Yes';
 $lang->block->category->fromCurrentList[0] = 'No';
+
+$lang->block->category->initialExpandList[1] = 'Yes';
+$lang->block->category->initialExpandList[0] = 'No';
 
 $lang->block->category->showCategoryList['abbr'] = 'Abbreviation';
 $lang->block->category->showCategoryList['name'] = 'Full Name';
