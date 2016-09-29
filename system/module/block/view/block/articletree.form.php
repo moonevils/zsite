@@ -15,6 +15,10 @@
   <td><?php echo html::radio('params[showChildren]', $lang->block->category->showChildrenList, isset($block->content->showChildren) ? $block->content->showChildren : 'no');?></td>
 </tr>
 <tr>
+  <th><?php echo $lang->block->category->initialExpand;?></th>
+  <td><?php echo html::radio('params[initialExpand]', $lang->block->category->initialExpandList, isset($block->content->initialExpand) ? $block->content->initialExpand : 'no');?></td>
+</tr>
+<tr>
   <th><?php echo $lang->block->category->fromCurrent;?></th>
   <td><?php echo html::radio('params[fromCurrent]', $lang->block->category->fromCurrentList, isset($block->content->fromCurrent) ? $block->content->fromCurrent : 'no');?></td>
 </tr>

@@ -205,6 +205,7 @@ $domainConfig    = $configRoot . 'domain.php';
 $modeConfig      = $configRoot . RUN_MODE . '.php';
 $shopConfig      = $configRoot . 'shop.php';
 $sensitiveConfig = $configRoot . 'sensitive.php';
+$customConfig    = $configRoot . 'custom.php';
 
 if(file_exists($guarderConfig))   include $guarderConfig;
 if(file_exists($myConfig))        include $myConfig;
@@ -214,6 +215,7 @@ if(file_exists($modeConfig))      include $modeConfig;
 if(file_exists($shopConfig))      include $shopConfig;
 if(file_exists($sensitiveConfig)) include $sensitiveConfig;
 if(RUN_MODE == 'admin')           include $configRoot . 'menu.php';
+if(file_exists($customConfig))    include $customConfig;
 
 /* The tables. */
 define('TABLE_CONFIG',         $config->db->prefix . 'config');

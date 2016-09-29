@@ -64,7 +64,7 @@ $thisMethodName     = $this->app->getMethodName();
     <a class='btn with-badge' href='<?php echo $this->createLink('cart', 'browse');?>'><i class='icon icon-shopping-cart'></i><strong class='cart-count badge small text-danger circle hide'>12</strong></a>
     <?php endif; ?>
     <?php
-    $isMultiLangAvailable = count(explode(',', $config->site->lang)) > 1;
+    $isMultiLangAvailable = count(explode(',', $config->enabledLangs)) > 1;
     $isUserAvailable = commonModel::isAvailable('user');
     ?>
     <?php if($isUserAvailable || $isMultiLangAvailable):?>

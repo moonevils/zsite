@@ -40,7 +40,7 @@
         </div>
         <div class='card-footer'>
           <?php echo html::a(helper::createLink('address', 'edit', "id={$address->id}"), $lang->edit, "class='editor text-primary' data-toggle='modal'");?>&nbsp;&nbsp;
-          <?php echo html::a(helper::createLink('address', 'delete', "id={$address->id}"), $lang->delete, "class='deleter text-primary'");?>
+          <?php echo html::a(helper::createLink('address', 'delete', "id={$address->id}"), $lang->delete, "class='deleter text-danger'");?>
         </div>
       </div>
       <?php endforeach;?>
