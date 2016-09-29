@@ -404,6 +404,6 @@ class order extends control
     {
         $result = $this->order->deleteOrder($orderID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess));
     }
 }
