@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The action module zh-tw file of ZenTaoCMS.
@@ -68,6 +67,7 @@ $lang->score->lblTotal         = "共有消耗積分：%s, 等級積分：%s ";
 $lang->score->lblNoScore       = "抱歉，您的積分不夠";
 $lang->score->lblNoScoreReason = "抱歉，您的積分不夠 %s 需要 <strong class='red'>%s</strong> 分，您現在有 <strong class='red'>%s</strong> 分";
 $lang->score->lblDetail        = "詳情可參考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何獲得積分》</a><br /><br />";
+$lang->score->lblBuySocre      = "購買積分 %s";
 
 $lang->score->setAmount   = '充值金額';
 $lang->score->getScore    = '獲取積分';
@@ -79,3 +79,6 @@ $lang->score->alipay      = "立即使用支付寶支付";
 $lang->score->paySuccess  = '恭喜你，支付成功';
 $lang->score->payFail     = '對不起，支付沒成功，如果有問題，請聯繫我們。';
 $lang->score->viewHistory = '查看支付歷史';
+
+$lang->score->awardRule  = '獎勵積分規則';
+$lang->score->punishRule = '懲罰積分規則';
