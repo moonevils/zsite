@@ -51,6 +51,7 @@ class orderModel extends model
             ->where(1)
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
             ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
+            ->andWhere('status')->ne('deleted')
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
             ->beginIf($mode == 'deliveryStatus')->andWhere('deliveryStatus')->eq($value)->fi()
             ->beginIf(!commonModel::isAvailable('score'))->andWhere('type')->ne('score')->fi()
@@ -62,7 +63,7 @@ class orderModel extends model
         $products = $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
 
         foreach($orders as $order) $order->products = isset($products[$order->id]) ? $products[$order->id] : array();
-
+        
         return $orders;
     }
 
@@ -497,6 +498,9 @@ class orderModel extends model
             /* Save payment link. */
             $disabled = $order->payStatus !== 'paid' ? '' : "disabled = 'disabled'";
             echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
+            
+            /* Delete order link. */
+            echo html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "data-toggle='modal' class='$class deleter'"); 
         }
 
         if(RUN_MODE == 'front' and $this->commonLink['cancelLink'])
@@ -932,5 +936,18 @@ class orderModel extends model
         $this->dao->update(TABLE_ORDER)->data($content)->where('id')->eq($orderID)->exec();
         
         return !dao::isError();
+    }
+
+    /**
+     * Delete the order
+     * 
+     * @access public
+     * @param  string
+     * @return bool
+     */
+    public function deleteOrder($orderID)
+    {
+        $this->dao->update(TABLE_ORDER)->set('status')->eq('deleted')->where('id')->eq($orderID)->exec();
+        return !dao::isError(); 
     }
 }

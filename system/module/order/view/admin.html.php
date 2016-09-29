@@ -37,7 +37,7 @@
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th><?php echo $lang->order->note;?></th>
-        <th class='w-180px'><?php echo $lang->actions;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

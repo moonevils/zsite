@@ -531,7 +531,7 @@ body.body-modal {padding: 20px;}
 }
 
 /* Search bar */
-.m-blog #searchbar {top: 30%;}
+.m-blog #searchbar {top: 50%;}
 @media (max-width: 767px) {.m-blog #searchbar {top: 2%; left: 0; right: auto;}}
 
 /* Pager. */
