@@ -61,17 +61,19 @@
     </tr>
     <tr>
       <td colspan='2'>
-        <?php echo html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn block primary' data-toggle='modal'");?>
-        <?php echo html::a(inlink('setemail'), "<i class='icon-pencil'></i> " . $lang->user->setEmail, "class='btn block primary' data-toggle='modal'");?>
-        <?php if(isset($user->provider) and isset($user->openID)):?>
-        <?php if(strpos($user->account, "{$user->provider}_") === false):?>
-        <?php echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'");?>
-        <?php else:?>
-        <br>
-        <?php echo html::a(inlink('oauthRegister'), "<i class='icon-link'></i> " . $lang->user->oauth->lblProfile, "class='btn block primary'");?>
-        <?php echo html::a(inlink('oauthBind'), "<i class='icon-link'></i> " . $lang->user->oauth->lblBind, "class='btn block primary'");?>
-        <?php endif;?>
-        <?php endif;?>
+        <div class='row'>
+          <div class='col-6'><?php echo html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn block primary' data-toggle='modal'");?></div>
+          <div class='col-6'><?php echo html::a(inlink('setemail'), "<i class='icon-envelope'></i> " . $lang->user->setEmail, "class='btn block primary' data-toggle='modal'");?></div>
+          <?php if(isset($user->provider) and isset($user->openID)):?>
+          <?php if(strpos($user->account, "{$user->provider}_") === false):?>
+          <div class='col-6'><?php echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'");?></div>
+          <?php else:?>
+          <br>
+          <div class='col-6'><?php echo html::a(inlink('oauthRegister'), "<i class='icon-link'></i> " . $lang->user->oauth->lblProfile, "class='btn block primary'");?></div>
+          <div class='col-6'><?php echo html::a(inlink('oauthBind'), "<i class='icon-link'></i> " . $lang->user->oauth->lblBind, "class='btn block primary'");?></div>
+          <?php endif;?>
+          <?php endif;?>
+        </div>
       </td>
     </tr>
   </tbody>
