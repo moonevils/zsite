@@ -38,7 +38,6 @@ $lang->user->join      = '註冊日期';
 $lang->user->visits    = '訪問次數';
 $lang->user->ip        = '最後IP';
 $lang->user->last      = '最後登錄';
-$lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->captcha   = '驗證碼';
 $lang->user->alert     = '您的帳號已被禁用';
@@ -140,8 +139,8 @@ $lang->user->adminList['super']  = '超級管理員';
 $lang->user->adminList['common'] = '管理員';
 $lang->user->adminList['no']     = '普通會員';
 
-$lang->user->accountTypeList['no']      = '前台賬號';
-$lang->user->accountTypeList['common']  = '後台賬號';
+$lang->user->accountTypeList['no']      = '前台帳號';
+$lang->user->accountTypeList['common']  = '後台帳號';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
@@ -156,8 +155,8 @@ $lang->user->register->why         = '歡迎註冊成為我們的會員，您可
 $lang->user->register->lblUserInfo = '用戶信息';
 $lang->user->register->lblAccount  = '必須是三位以上的英文字母或數字';
 $lang->user->register->lblPassword = '數字和字母組成，六位以上';
-$lang->user->register->login       = '请登录';
-$lang->user->register->loginTip    = '已有帐号 ';
+$lang->user->register->login       = '請登錄';
+$lang->user->register->loginTip    = '已有帳號';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和數字組合，最少六位';
