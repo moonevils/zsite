@@ -9,3 +9,4 @@ CREATE TABLE `eps_farm` (
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+ALTER TABLE `eps_order` change status status enum('normal','canceled','finished','deleted') NOT NULL DEFAULT 'normal';
