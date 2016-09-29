@@ -44,6 +44,13 @@ if(isset($block->content->fromCurrent) and $block->content->fromCurrent)
     <strong><?php echo $icon . $block->title;?></strong>
   </div>
   <div class='panel-body'><?php echo $treeMenu;?></div>
+  <?php 
+    if(isset($block->content->initialExpand) and $block->content->initialExpand)
+    {
+        $code = "$(document).ready(function(){\$('.has-list').addClass('open in')});";
+        js::execute($code);
+    }
+  ?>
 </div>
 <?php else:?>
 <?php $topCategories = $this->tree->getChildren($startCategory, $type);?>
