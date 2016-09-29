@@ -67,8 +67,8 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
 
   /* Import customed css file if it exists. */
   $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->app->clientDevice}->name, $config->template->{$this->app->clientDevice}->theme);
-  if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme));
-
+  if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme), "id='themeStyle'");
+ 
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : (file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '');
