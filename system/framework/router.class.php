@@ -389,13 +389,17 @@ class router extends baseRouter
             {
                 $flipedLangs = array_flip($this->config->langsShortcuts);
                 if($this->config->requestType == 'GET' and !empty($_GET[$this->config->langVar])) $lang = $flipedLangs[$_GET[$this->config->langVar]];
+                if($this->config->requestType == 'GET' and empty($_GET[$this->config->langVar])) $lang = $this->config->default->lang;
                 if($this->config->requestType != 'GET')
                 {
                     $pathInfo = $this->getPathInfo();
+                    $langFromPathInfo = '';
                     foreach($this->config->langsShortcuts as $language => $code)
                     {
-                        if(strpos(trim($pathInfo, '/'), $code) === 0) $lang = $language;
+                        if(strpos(trim($pathInfo, '/'), $code) === 0) $langFromPathInfo = $language;
                     }
+                    if(empty($langFromPathInfo)) $langFromPathInfo = $this->config->default->lang;
+                    $lang = $langFromPathInfo;
                 }
             }
         }
