@@ -45,10 +45,7 @@
         <div class="card theme">
           <div class='media-wrapper theme-img'>
             <?php if(!empty($theme->images)):?>
-            <?php echo html::a('javascript:;', html::image($theme->images[0]), "data-image='{$theme->images[0]}' title='{$theme->name}' data-group='{$theme->code}' data-toggle='lightbox' class='preview-theme'");?>
-            <?php foreach($theme->images as $key => $image):?>
-            <?php if($key > 0) echo html::a('javascript:;', html::image($image), "data-image='{$image}' title='{$theme->name}' data-group='{$theme->code}' data-toggle='lightbox' class='preview-theme hide'");?>
-            <?php endforeach;?>
+            <?php echo html::a('http://www.chanzhi.org/theme-viewsnap-0-' . $theme->code . '.html', html::image($theme->images[0]), "title='{$theme->name}' data-size='fullscreen' data-toggle='modal' data-type='ajax' data-show-header='false'");?>
             <?php endif;?>
           </div>
           <div class='theme-info'>
@@ -60,7 +57,7 @@
             <div class='theme-desc'>
               <?php echo html::a($theme->viewLink, $theme->name, "target='_blank'");?>
               <div class="dropdown dropup pull-right">
-                <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='icon icon-cog'></span></button>
+                <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='icon icon-theme-store icon-cog'></span></button>
                 <ul class="dropdown-menu pull-right">
                   <li><?php echo html::a($theme->viewLink, $lang->package->view, 'target="_blank"');?></li>
                   <?php
