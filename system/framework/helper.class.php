@@ -278,7 +278,7 @@ function getHomeRoot($langCode = '')
     if(RUN_MODE == 'admin') $config->requestType = zget($config, 'frontRequestType', $config->requestType);
 
     $langCode = $langCode == '' ? $config->langCode : $langCode;
-    $defaultLang = isset($config->site->defaultLang) ?  $config->site->defaultLang : $config->default->lang;
+    $defaultLang = isset($config->defaultLang) ?  $config->defaultLang : $config->default->lang;
     if($langCode == $config->langsShortcuts[$defaultLang])
     {
         $config->requestType = $requestType;

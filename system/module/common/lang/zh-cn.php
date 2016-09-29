@@ -268,6 +268,7 @@ $lang->forum->menu->setting = '论坛设置|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
+$lang->site->menu->system   = '系统设置|site|setsystem|';
 $lang->site->menu->domain   = '域名设置|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN设置|site|setcdn|';
 $lang->site->menu->cache    = '缓存设置|site|setcache|';
