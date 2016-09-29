@@ -54,10 +54,10 @@
               <th><?php echo $lang->user->oauth->callbackURL;?></th>
               <td>
                 <?php $callbackURL = commonModel::createFrontLink('user', 'oauthCallback', "provider=qq");?>
-                <?php if($callbackURL == '/user-oauthCallback-qq.html'):?>
-                <?php echo rtrim(commonModel::getSysURL(), '/') . $callbackURL;?>
+                <?php if($callbackURL == $this->config->webRoot . 'user-oauthCallback-qq.html'):?>
+                <?php echo commonModel::getSysURL() . $callbackURL;?>
                 <?php else:?>
-                <?php echo rtrim(commonModel::getSysURL(), '/') . '/index.php/user-oauthCallback-qq.html';?>
+                <?php echo commonModel::getSysURL() . $this->config->webRoot. 'index.php/user-oauthCallback-qq.html';?>
                 <?php endif;?>
               </td>
             </tr>

@@ -25,7 +25,7 @@ class fileCache extends cache
         if(!isset($this->config->savePath))
         {
             global $app, $config;
-            $this->config->savePath = $config->multi ? $app->getTmpRoot() . 'cache' . DS . $app->siteCode : $app->getTmpRoot() . 'cache';
+            $this->config->savePath = $config->framework->multiSite ? $app->getTmpRoot() . 'cache' . DS . $app->siteCode : $app->getTmpRoot() . 'cache';
         }
 
         if(zget($this->config, 'savePath', '') == '') die('The cache save path must defined in $config');
