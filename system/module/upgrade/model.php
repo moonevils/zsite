@@ -547,7 +547,7 @@ class upgradeModel extends model
         $blocks['en']    = array('type' => 'blogTree', 'title' => 'Blog Category', 'content' => '{"showChildren":"1"}');
         $blocks['zh-cn'] = array('type' => 'blogTree', 'title' => '博客分类',      'content' => '{"showChildren":"1"}');
         $blocks['zh-tw'] = array('type' => 'blogTree', 'title' => '博客分類',      'content' => '{"showChildren":"1"}');
-        $block = $blocks[$this->config->site->lang];
+        $block = $blocks[$this->app->clientLang];
         $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
         $blockID = $this->dao->lastInsertID();
 
@@ -1015,8 +1015,8 @@ class upgradeModel extends model
      */
     public function setDefaultCurrency()
     {
-        if($this->config->site->lang != 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '￥'));
-        if($this->config->site->lang == 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '$'));
+        if($this->app->clientLang != 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '￥'));
+        if($this->app->clientLang == 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '$'));
     }
 
     /**

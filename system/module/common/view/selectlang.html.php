@@ -1,6 +1,6 @@
 <?php
 $clientLang  = $this->app->getClientLang();
-$enableLangs = explode(',', $config->site->lang);
+$enableLangs = explode(',', $config->enabledLangs);
 $enableLangs = array_flip($enableLangs);
 $langs       = $config->langs;
 foreach($langs as $key => $value)

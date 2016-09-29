@@ -819,6 +819,7 @@ class uiModel extends model
         $this->directories->exportLessPath   = $this->directories->exportPath . 'www' . DS . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->exportSourcePath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->exportSlidePath  = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
+        $this->directories->exportUploadPath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'upload' . DS;
         $this->directories->exportConfigPath = $this->directories->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
         $this->directories->encryptPath       = $this->directories->exportPath . 'encrypt' . DS;
@@ -828,6 +829,7 @@ class uiModel extends model
         $this->directories->encryptLessPath   = $this->directories->encryptPath . 'www' . DS . 'theme' . DS . $template . DS . $code . DS;
         $this->directories->encryptSourcePath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->encryptSlidePath  = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
+        $this->directories->encryptUploadPath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'upload' . DS;
         $this->directories->encryptConfigPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
         if(is_dir($this->directories->exportPath)) $this->app->loadClass('zfile')->removeDir($this->directories->exportPath);
@@ -867,6 +869,21 @@ class uiModel extends model
     }
 
     /**
+     * Export data in database. 
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function exportDB($template, $theme)
+    {
+        $this->zdb = $this->app->loadClass('zdb');
+        $this->exportThemeDB($template, $theme);
+        $this->exportFullDB($template, $theme);
+    }
+
+    /**
      * Export theme sqls.
      *
      * @param  string    $template
@@ -874,10 +891,9 @@ class uiModel extends model
      * @access public
      * @return bool
      */
-    public function exportDB($template, $theme)
+    public function exportThemeDB($template, $theme)
     {
         $lang        = $this->app->getClientLang();
-        $zdb         = $this->app->loadClass('zdb');
         $dbFile      = $this->directories->exportDbPath  . 'install.sql';
         $encryptFile = $this->directories->encryptDbPath . 'install.sql';
         $plan        = zget($this->config->layout, "{$template}_{$theme}");
@@ -916,11 +932,64 @@ class uiModel extends model
         $replaces[TABLE_CATEGORY] = false;
         $replaces[TABLE_FILE]     = false;
 
-        $zdb->dump($encryptFile, $tables, $fields, 'data', $condations, true);
+        $this->zdb->dump($encryptFile, $tables, $fields, 'data', $condations, $replaces);
 
         /* Dump whole css and js data. */
         $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or (section in('css','js') and `key` like '{$template}_{$theme}%') )";
-        $zdb->dump($dbFile, $tables, $fields, 'data', $condations, true);
+        $this->zdb->dump($dbFile, $tables, $fields, 'data', $condations, $replaces);
+
+        $this->fixSqlFile($template, $theme, $encryptFile);
+        $this->fixSqlFile($template, $theme, $dbFile);
+        return true;
+    }
+
+    /**
+     * Export full db. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function exportFullDB($template, $theme)
+    {
+        $lang        = $this->app->getClientLang();
+        $dbFile      = $this->directories->exportDbPath  . 'full.sql';
+        $encryptFile = $this->directories->encryptDbPath . 'full.sql';
+        $plan        = zget($this->config->layout, "{$template}_{$theme}");
+
+        $tables = array(TABLE_CATEGORY, TABLE_PRODUCT, TABLE_FILE, TABLE_ARTICLE, TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_RELATION, TABLE_SLIDE);
+
+        $condations = array();
+        $condations[TABLE_BLOCK]    = "where template='{$template}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_LAYOUT]   = "where template='{$template}' and plan = '{$plan}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and section='template' and `key` = 'custom'";
+        $condations[TABLE_CATEGORY] = '';
+        $condations[TABLE_SLIDE]    = "where lang in('all', '{$lang}')";
+        $condations[TABLE_FILE]     = '';
+        $condations[TABLE_RELATION] = '';
+
+        $fields = array();
+        $fields[TABLE_BLOCK]    = "*";
+        $fields[TABLE_LAYOUT]   = "*";
+        $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, lang";
+        $fields[TABLE_SLIDE]    = "*";
+        $fields[TABLE_CATEGORY] = "*";
+        $fields[TABLE_FILE]     = "*";
+        $fields[TABLE_RELATION] = "*";
+
+        $replaces = array();
+        $replaces[TABLE_BLOCK]    = true;
+        $replaces[TABLE_LAYOUT]   = true;
+        $replaces[TABLE_CONFIG]   = true;
+        $replaces[TABLE_SLIDE]    = false;
+        $replaces[TABLE_CATEGORY] = false;
+        $replaces[TABLE_FILE]     = false;
+        $replaces[TABLE_RELATION] = false;
+
+        $this->zdb->dump($encryptFile, $tables, $fields, 'data', $condations, $replaces);
+
+        /* Dump layout plan, css and js config. */
+        $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or (section in('css', 'js', 'layout') and `key` like '{$template}_{$theme}%') )";
+        $this->zdb->dump($dbFile, $tables, $fields, 'data', $condations, $replaces);
 
         $this->fixSqlFile($template, $theme, $encryptFile);
         $this->fixSqlFile($template, $theme, $dbFile);
@@ -952,10 +1021,15 @@ class uiModel extends model
         $sqls = str_replace("data\/source\/{$template}\/{$theme}\/", "data\/source\/{$template}\/THEME_CODEFIX\/", $sqls);
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
         $sqls = str_replace("{$template}_{$theme}_", "{$template}_THEME_CODEFIX_", $sqls);
+        $sqls = str_replace("'{$template}_{$theme}'", "'{$template}_THEME_CODEFIX'", $sqls);
+        $sqls = str_replace('\"' . $theme . '\":{\"background', '\"THEME_CODEFIX\":{\"background', $sqls);
 
-        $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-cn' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
-        $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-tw' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
-        $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'en' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
+        if(basename($file) != 'full.sql')
+        {
+            $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-cn' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
+            $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'zh-tw' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
+            $sqls .= "INSERT INTO `eps_config` (owner,module,section,`key`,value,lang) select owner,module,section,`key`,value, 'en' as lang from `eps_config` where section in ('css', 'js') and lang = 'lang';\n";
+        }
 
         return file_put_contents($file, $sqls);
     }
@@ -1013,6 +1087,10 @@ class uiModel extends model
         /* Copy less file. */
         $lessFile = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS . 'style.less';
         if(file_exists($lessFile)) copy($lessFile, $this->directories->exportLessPath . 'style.less');
+
+        /* Copy upload files. */
+        $uploadPath = $this->app->getDataRoot() . 'upload';
+        if(is_dir($uploadPath)) $zfile->copyDir($uploadPath, $this->directories->exportUploadPath);
 
         /* Copy source files. */
         $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $template . DS . $theme;
@@ -1103,6 +1181,7 @@ class uiModel extends model
         /* Copy doc, config, less files. */
         $zfile = $this->app->loadClass('zfile');
         $zfile->copyDir($this->directories->exportDocPath,    $this->directories->encryptDocPath);
+        $zfile->copyDir($this->directories->exportUploadPath,   $this->directories->encryptUploadPath);
         $zfile->copyDir($this->directories->exportLessPath,   $this->directories->encryptLessPath);
         $zfile->copyDir($this->directories->exportConfigPath, $this->directories->encryptConfigPath);
 
@@ -1320,5 +1399,17 @@ if(!function_exists('getJS'))
         $result = file_put_contents($file, $content);
         if($result === false) return false;
         return true;
+    }
+
+    /**
+     * Clear tables need to import.
+     * 
+     * @access public
+     * @return void
+     */
+    public function clearDB()
+    {
+        $tables = array(TABLE_CATEGORY, TABLE_PRODUCT, TABLE_FILE, TABLE_ARTICLE, TABLE_BLOCK, TABLE_LAYOUT, TABLE_RELATION, TABLE_SLIDE);
+        foreach($tables as $tableName) $this->dao->exec("truncate table `{$tableName}`");
     }
 }

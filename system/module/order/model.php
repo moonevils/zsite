@@ -914,7 +914,7 @@ class orderModel extends model
         $address['contact'] = $data->contact;
         $address['phone']   = $data->phone;
         $address['zipcode'] = $data->zipcode;
-        $address['lang']    = $this->config->site->lang;
+        $address['lang']    = $this->config->defaultLang;
         $address = json_encode($address);
 
         $content->address = $address; 

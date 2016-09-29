@@ -6,7 +6,7 @@ $(document).ready(function()
         {
             setTimeout(function()
             {
-                $('#ajaxModal').attr('rel', response.locate).load(response.locate, function()
+                $('#ajaxModal').attr('ref', response.locate).load(response.locate, function()
                 {
                     $.ajustModalPosition();
                 });
@@ -15,4 +15,9 @@ $(document).ready(function()
     });
 
     $.setAjaxLoader('.okFile', '#ajaxModal');
+
+    $('[name=type]').change(function()
+    {
+        if($(this).val() == 'full')  $(this).parent().append(" <span class='text-danger'>" + v.lang.fullImportTip + '</span>');
+    })
 });
