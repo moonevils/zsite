@@ -706,8 +706,15 @@ body.m-message-reply{background:#fff;}
 @media (min-width: 1200px) {#blogNav {max-width: 1170px;}}
 
 /* style of blogNav */
-.m-blog #headTitle {margin-top: 40px; display: block}
+.m-blog #headTitle {margin-top: 60px; display: block}
 .m-blog #headTitle > .wrapper {display: block}
+.m-blog #headNav {left: 0; top: 0}
+.m-blog #headNav > .wrapper {text-align: right}
+.m-blog #headNav > .wrapper > a,
+.m-blog #headNav > .wrapper > span {display: inline-block; margin-left: 5px; padding: 0 5px;}
+.m-blog #headNav > .wrapper > span:hover,
+.m-blog #headNav > .wrapper > span > a:hover,
+.m-blog #headNav > .wrapper > a:hover {text-decoration: none; background-color: #f1f1f1}
 #blogNav {position: relative; background: none; border: none; min-height: 0; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0}
 #blogNav .wrapper {position: absolute; right: 0; top: -72px;}
 #blogNav .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 26px 10px; margin-left: 10px;}
@@ -733,6 +740,7 @@ body.m-message-reply{background:#fff;}
 /* responsive for mobile devices */
 @media (max-width: 767px)
 {
+    .m-blog #headTitle {margin-top: 25px}
     #blogNav {border-bottom: 1px solid #e5e5e5;}
     #blogNav .wrapper {position: relative; top: 0; left: 0}
     #blogNav .navbar-nav {margin: 0}

@@ -772,7 +772,7 @@ class commonModel extends model
     {
         global $config;
         $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';
-        $httpHost = rtrim($_SERVER['HTTP_HOST'], '/') . $config->webRoot;
+        $httpHost = rtrim($_SERVER['HTTP_HOST'], '/');
         return "$httpType://$httpHost";
     }
 
