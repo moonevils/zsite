@@ -472,7 +472,6 @@ class site extends control
      * @access public
      * @return void
      */
-
     public function setHomeMenu()
     {
         if($_POST)
@@ -488,6 +487,23 @@ class site extends control
         }
 
         $this->view->title = $this->lang->site->setHomeMenu;
+        $this->display();
+    }
+
+    /**
+     * Set system options.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSystem()
+    {
+        if($_POST)
+        {
+            $result = $this->site->setSystem();
+            $this->send($result);
+        }
+        $this->view->title = $this->lang->site->setSystem;
         $this->display();
     }
 }

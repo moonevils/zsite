@@ -19,7 +19,7 @@
       <table class='table table-form'>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->lang;?></th>
-          <td class='col-xs-6'><?php echo html::checkbox('lang', $config->langs, isset($this->config->lang) ? $this->config->lang : 'zh-cn');?></td><td></td>
+          <td class='col-xs-6'><?php echo html::checkbox('lang', $config->langs, isset($this->config->enabledLangs) ? $this->config->enabledLangs : 'zh-cn');?></td><td></td>
         </tr>
         <tr id='twTR'>
           <th><?php echo $lang->site->twContent;?></th>
@@ -35,7 +35,7 @@
         <tr>
           <th><?php echo $lang->site->requestType;?></th> 
           <td>
-            <?php echo html::select('requestType', $lang->site->requestTypeList, isset($this->config->requestType) ? $this->config->requestType : $this->config->frontRequestType, "class='form-control'");?>
+            <?php echo html::select('requestType', $lang->site->requestTypeList, $this->config->frontRequestType, "class='form-control'");?>
           </td>
           <td><span id='requestTypeTip' class='hide text-important'><?php echo $lang->site->requestTypeTip?></span></td>
         </tr>

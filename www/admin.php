@@ -34,7 +34,7 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 $common = $app->loadCommon();
 
 /* Change the request settings. */
-$config->frontRequestType = $common->loadModel('setting')->getRequestType();
+$config->frontRequestType = $config->requestType;
 $config->requestType = 'GET';
 $config->default->module = 'admin'; 
 $config->default->method = 'index';

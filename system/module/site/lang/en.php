@@ -70,6 +70,7 @@ $lang->site->front            = 'View Website';
 $lang->site->useCDN           = 'Activate CDN';
 
 $lang->site->setBasic      = "Basic Settings";
+$lang->site->setSystem     = "System Settings";
 $lang->site->setCache      = 'Cache Settings';
 $lang->site->setCDN        = "CDN Settings";
 $lang->site->setDomain     = "Domain Settings";
@@ -253,3 +254,5 @@ $lang->site->menus['tag']        = 'Keyword';
 $lang->site->menus['links']      = 'Links';
 $lang->site->menus['site']       = 'Site';
 $lang->site->menus['security']   = 'Security';
+
+$lang->site->fileAuthority = 'Need to change the write authority of file，on linux, you should run the command<code>%s</code>';
