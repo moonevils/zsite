@@ -169,14 +169,18 @@ $lang->block->imagePositionList['left']  = '居左';
 $lang->block->imagePositionList['right'] = '居右';
 
 $lang->block->category = new stdclass();
-$lang->block->category->showChildren = '顯示子分類';
-$lang->block->category->fromCurrent  = '當前類目開始';
+$lang->block->category->showChildren  = '顯示子分類';
+$lang->block->category->fromCurrent   = '當前類目開始';
+$lang->block->category->initialExpand = '子分類展開';
 
 $lang->block->category->showChildrenList[1] = '是';
 $lang->block->category->showChildrenList[0] = '否';
 
 $lang->block->category->fromCurrentList[1] = '是';
 $lang->block->category->fromCurrentList[0] = '否';
+
+$lang->block->category->initialExpandList[1] = '是';
+$lang->block->category->initialExpandList[0] = '否';
 
 $lang->block->category->showCategoryList['abbr'] = '簡稱';
 $lang->block->category->showCategoryList['name'] = '全稱';

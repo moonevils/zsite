@@ -268,6 +268,7 @@ $lang->forum->menu->setting = '論壇設置|forum|setting|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站點設置|site|setbasic|';
+$lang->site->menu->system   = '系統設置|site|setsystem|';
 $lang->site->menu->domain   = '域名設置|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN設置|site|setcdn|';
 $lang->site->menu->cache    = '緩存設置|site|setcache|';
@@ -280,7 +281,7 @@ $lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'ali
 $lang->site->menu->search   = '全文檢索|search|buildindex|';
 $lang->site->menu->score    = '積分規則|score|setcounts|';
 $lang->site->menu->backup   = '備份還原|backup|index|';
-//$lang->site->menu->api      = '整合|site|setapi|';
+$lang->site->menu->farm     = '推廣站點|farm|admin|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
