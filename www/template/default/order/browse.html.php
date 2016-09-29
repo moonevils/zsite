@@ -17,7 +17,7 @@
               <td class='w-220px'><?php echo $lang->order->life;?></td>
               <td class='w-60px'><?php echo $lang->product->status;?></td>
               <td><?php echo $lang->order->note;?></td>
-              <td class='w-200px'><?php echo $lang->actions;?></td>
+              <td class='w-220px'><?php echo $lang->actions;?></td>
             </tr>
           </thead>
           <tbody>

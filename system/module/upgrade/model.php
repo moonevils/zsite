@@ -2013,4 +2013,20 @@ class upgradeModel extends model
         }
         return !dao::isError();
     }
+
+    /**
+     * Fix cdn setting.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function processCDN()
+    {
+        $cdnSite = $this->dao->select('*')->from(TABLE_CONFIG)->where('section')->eq('cdn')->andWhere('`key`')->eq('site')->fetchAll();
+        if(!empty($cdnSite) and !empty($cdnSite[0]->value) and strpos($cdnSite[0]->value, 'http://cdn.chanzhi.org') !== false)
+        {
+            $this->dao->delete()->from(TABLE_CONFIG)->where('section')->eq('cdn')->andWhere('`key`')->eq('site')->exec();
+        }
+        return true;
+    }
 }
