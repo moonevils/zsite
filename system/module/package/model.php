@@ -668,9 +668,7 @@ class packageModel extends model
     public function copyPackageFiles($package, $type = 'ext')
     {
         $appRoot    = $this->app->getAppRoot();
-        if($type != 'theme') $type = 'ext';
         $packageDir = $type . DS . $package . DS;
-        if($type == 'template') $packageDir = 'ext' . DS . $package . DS;
 
         $systemPathes   = array();
         $wwwPathes      = array();
@@ -678,7 +676,6 @@ class packageModel extends model
 
         if(is_dir($packageDir . 'system' . DS)) $systemPathes   = scandir($packageDir . 'system' . DS);
         if(is_dir($packageDir . 'www' . DS))    $wwwPathes      = scandir($packageDir . 'www' . DS);
-        if($type == 'template')                 $templatePathes = scandir($packageDir);
 
         $copiedFiles         = array();
         $copiedSystemFiles   = array();
@@ -712,6 +709,20 @@ class packageModel extends model
         }
 
         return $copiedFiles;
+    }
+
+    /**
+     * Copy  slides after import a full package.
+     * 
+     * @access public
+     * @return void
+     */
+    public function copySlides()
+    {
+        $tmpPath = $this->app->getDataRoot() . 'slidestmp';
+        $slidePath = $this->app->getDataRoot() . 'slides';
+        if(is_dir($tmpPath)) $slides = $this->classFile->copyDir($tmpPath, $slidePath);
+        return $slides;
     }
 
     /**
@@ -1046,6 +1057,11 @@ class packageModel extends model
 
         /* Replace codofix in db file with new newCode. */
         $dbFile  = $this->getDBFile($package, 'install', 'theme');
+        $content = file_get_contents($dbFile); 
+        $content = str_replace('THEME_CODEFIX', $newCode, $content);
+        file_put_contents($dbFile, $content);
+
+        $dbFile  = $this->getDBFile($package, 'full', 'theme');
         $content = file_get_contents($dbFile); 
         $content = str_replace('THEME_CODEFIX', $newCode, $content);
         file_put_contents($dbFile, $content);

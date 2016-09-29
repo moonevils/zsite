@@ -388,7 +388,7 @@ class user extends control
             $this->loadModel('mail');
             $user->groups = array_keys($this->loadModel('group')->getByAccount($user->account));
             $this->view->groups   = $this->loadModel('group')->getPairs();
-            $this->view->siteLang = explode(',', $this->config->site->lang);
+            $this->view->siteLang = explode(',', $this->config->enabledLangs);
             $this->display('user', 'edit.admin');
         }
         else

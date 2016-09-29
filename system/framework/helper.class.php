@@ -278,7 +278,7 @@ function getHomeRoot($langCode = '')
     if(RUN_MODE == 'admin') $config->requestType = zget($config, 'frontRequestType', $config->requestType);
 
     $langCode = $langCode == '' ? $config->langCode : $langCode;
-    $defaultLang = isset($config->site->defaultLang) ?  $config->site->defaultLang : $config->default->lang;
+    $defaultLang = isset($config->defaultLang) ?  $config->defaultLang : $config->default->lang;
     if($langCode == $config->langsShortcuts[$defaultLang])
     {
         $config->requestType = $requestType;
@@ -332,6 +332,24 @@ function formatTime($time, $format = '')
     $time = str_replace('00:00:00', '', $time);
     if($format) return date($format, strtotime($time));
     return trim($time);
+}
+
+/**
+ * Get file mime type.
+ * 
+ * @param  int    $file 
+ * @access public
+ * @return void
+ */
+function getFileMimeType($file)
+{
+    if(function_exists('mime_content_type')) return mime_content_type($file);
+    if(function_exists('finfo_open'))
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        return finfo_file($finfo, $file); 
+    }
+    return false;
 }
 
 /**
