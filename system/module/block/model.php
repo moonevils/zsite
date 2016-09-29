@@ -362,7 +362,10 @@ class blockModel extends model
             $entry .= html::hidden('isRegion', 0);
         }
 
-        $entry   .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
+        if($template != 'mobile')
+        {
+            $entry   .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
+        }
 
         $titlelessChecked  = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';

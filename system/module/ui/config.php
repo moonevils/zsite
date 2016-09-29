@@ -283,6 +283,7 @@ unset($config->ui->themes['mobile']['default']['basic']['pageText']);
 unset($config->ui->themes['mobile']['default']['navbar']);
 unset($config->ui->themes['mobile']['default']['button']);
 unset($config->ui->themes['mobile']['default']['block']);
+unset($config->ui->themes['mobile']['default']['header']);
 unset($config->ui->themes['mobile']['default']['footer']);
 $config->ui->themes['mobile']['default']['basic']['colorset']['primary']['default'] = '#3280FC';
 
