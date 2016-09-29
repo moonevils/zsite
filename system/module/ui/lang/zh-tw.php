@@ -48,6 +48,7 @@ $lang->ui->enableTheme     = "使用此主題";
 $lang->ui->industry        = "行業";
 $lang->ui->offcial         = "官方";
 $lang->ui->reset           = "重置為預設";
+$lang->ui->themePackage    = "主題包";
 
 $lang->ui->uploadLogo             = "上傳Logo";
 $lang->ui->uploadFavicon          = "上傳小表徵圖";
@@ -133,6 +134,8 @@ $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置為預設';
 $lang->ui->theme->online                               = '在綫主題';
 $lang->ui->theme->default                              = '預設';
+$lang->ui->theme->all                                  = '全部';
+$lang->ui->theme->noTheme                              = '此分類下沒有主題';
 $lang->ui->theme->resetTip                             = '參數已重置，保存後生效';
 $lang->ui->theme->sizeTip                              = '預設單位為像素，如1px';
 $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
@@ -273,6 +276,13 @@ $lang->ui->left            = '左邊距';
 $lang->ui->right           = '右邊距';
 $lang->ui->top             = '上邊距';
 $lang->ui->bottom          = '下邊距';
+
+$lang->ui->importType    = '導入方式';
+$lang->js->fullImportTip = "完整導入將會替換站點的文章、產品等數據";
+
+$lang->ui->importTypes = new stdclass();
+$lang->ui->importTypes->theme = '只導入主題';
+$lang->ui->importTypes->full  = '完整導入';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
