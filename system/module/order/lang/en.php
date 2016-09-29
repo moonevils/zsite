@@ -52,6 +52,7 @@ $lang->order->pay            = 'Check Out';
 $lang->order->goToPay        = 'Order has been made. Please continue your payment.';
 $lang->order->return         = 'Collect';
 $lang->order->delivery       = 'Ship';
+$lang->order->delete         = 'Delete';
 $lang->order->finish         = 'Submit';
 $lang->order->confirm        = 'Confirm';
 $lang->order->selectProducts = "You have <strong class='text-danger'>%s</strong> in your cart";
