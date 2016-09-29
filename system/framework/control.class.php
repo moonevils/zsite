@@ -237,16 +237,16 @@ class control extends baseControl
         $js = '';
         if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
-            $mainJsFile   = $modulePath . 'js' . DS . 'common.js';
-            $methodJsFile = $modulePath . 'js' . DS . $methodName . '.js';
+            $mainJsFile   = $modulePath . 'js' . DS . $this->devicePrefix . 'common.js';
+            $methodJsFile = $modulePath . 'js' . DS . $this->devicePrefix . $methodName . '.js';
 
             if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
             if(file_exists($methodJsFile)) $js .= file_get_contents($methodJsFile);
         }
         else
         {
-            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "common.js";
-            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "{$methodName}.js";
+            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . "common.js";
+            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . "{$methodName}.js";
             $themeMainJsFile     = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "common.{$this->config->site->theme}.js";
             $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->devicePrefix . "{$methodName}.{$this->config->site->theme}.js";
 
