@@ -35,15 +35,29 @@ class orderModel extends model
      */
     public function getList($mode, $value, $orderBy = 'id_desc', $pager = null)
     {
-        $days = $this->config->shop->confirmLimit;
+        $confirmLimitDays = $this->config->shop->confirmLimit;
+        $expireLimitDays  = isset($this->config->shop->expireLimit) ? $this->config->shop->expireLimit : 30;
 
-        if($days)
+        if($confirmLimitDays)
         {
-            $deliveryDate = date('Y-m-d H:i:s', time() - 24 * 60 * 60 * $days);
+            $deliveryDate = date('Y-m-d H:i:s', time() - 24 * 60 * 60 * $confirmLimitDays);
+
             $this->dao->update(TABLE_ORDER)
                 ->set('deliveryStatus')->eq('confirmed')
                 ->where('deliveryStatus')->eq('send')
                 ->andWhere('deliveriedDate')->le($deliveryDate)
+                ->exec();
+        }
+
+        if($expireLimitDays)
+        {
+            $createdDate  = date('Y-m-d H:i:s', time() - 24 * 60 * 60 * $expireLimitDays);
+         
+            $this->dao->update(TABLE_ORDER)
+                ->set('status')->eq('expired')
+                ->where('payStatus')->eq('not_paid')
+                ->andWhere('status')->ne('deleted')
+                ->andWhere('createdDate')->le($createdDate)
                 ->exec();
         }
 
@@ -361,6 +375,7 @@ class orderModel extends model
     {
         if($order->status == 'finished') return $this->lang->order->statusList['finished'];
         if($order->status == 'canceled') return $this->lang->order->statusList['canceled'];
+        if($order->status == 'expired')  return $this->lang->order->statusList['expired'];
     
         if($order->payment == 'COD') return $this->lang->order->statusList[$order->deliveryStatus];
 
@@ -496,8 +511,8 @@ class orderModel extends model
         {
             $class = $btnLink ? 'btn' : '';
             /* Save payment link. */
-            $disabled = $order->payStatus !== 'paid' ? '' : "disabled = 'disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->return, $disabled . "class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
+            $disabled = ($order->status == 'normal' and $order->payStatus != 'paid') ? true : false;
+            echo $disabled ? html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'") : ''; 
             
             /* Delete order link. */
             echo html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "data-toggle='modal' class='$class deleter'"); 
@@ -509,6 +524,10 @@ class orderModel extends model
             $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
             $class = $btnLink ? "  btn btn-link " : "";
             echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}' data-toggle='modal'" );
+            
+            /* Delete order link. */
+            $disabled = $order->status == 'expired' ? false : true;
+            echo $disabled ? '' : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "class='deleter'"); 
         }
     }
 
@@ -531,15 +550,15 @@ class orderModel extends model
 
             /* Edit link. */
             $disabled = $order->status !== 'finished' ? '' : "disabled = 'disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->edit, $disabled . "class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
+            echo $disabled ? '' : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
             
             /* Send link. */
             $disabled = ($order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
-            echo $disabled ? html::a('#', $this->lang->order->delivery, $disabled . "class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal' class='$class'");
+            echo $disabled ? '' : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal' class='$class'");
 
             /* Finish link. */
             $disabled = ($order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->finish, $disabled . "class='$class'") : html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher $class'");
+            echo $disabled ? '' : html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher $class'");
         }
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
@@ -548,37 +567,37 @@ class orderModel extends model
             {
                 /* Edit link. */
                 $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->edit, "class='btn' $disabled") : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal' class='btn btn-link'");
+                echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal' class='btn btn-link'");
                 
                 /* Pay link. */
                 $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->pay, "class='btn' $disabled") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
+                echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
 
                 /* Track link. */
                 $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->track, "class='btn' $disabled") : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='btn btn-link'");
+                echo $disabled ? '' : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='btn btn-link'");
 
                 /* Confirm link. */
                 $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->confirmReceived, "class='btn' $disabled") : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
+                echo $disabled ? '' : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
             }
             else
             {
                 /* Edit link. */
                 $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->edit, $disabled) : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal'");
+                echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal'");
                 
                 /* Pay link. */
                 $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->pay, $disabled) : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
+                echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
 
                 /* Track link. */
                 $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->track, $disabled) : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal'");
+                echo $disabled ? '' : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal'");
 
                 /* Confirm link. */
                 $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('#', $this->lang->order->confirmReceived, $disabled) : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
+                echo $disabled ? '' : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
             }
         }
     }
@@ -776,6 +795,7 @@ class orderModel extends model
         $shopSetting = array();
         $shopSetting['payment']      = join(',', $this->post->payment);
         $shopSetting['confirmLimit'] = $this->post->confirmLimit;
+        $shopSetting['expireLimit']  = $this->post->expireLimit;
         $this->loadModel('setting')->setItems('system.common.shop', $shopSetting);
 
         $alipaySetting = array();
