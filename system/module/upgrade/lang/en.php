@@ -39,6 +39,10 @@ $lang->upgrade->chmodThemePath = <<<EOT
 <div class='alert'> Please turn on the wirte permission of <b>%s</b> and continuee. </div>
 EOT;
 
+$lang->upgrade->chmodCustomConfig = <<<EOT
+<div class='alert'> Please turn on the wirte permission of <b>%s</b> and continuee. </div>
+EOT;
+
 $lang->upgrade->versionNote = " Please choose the right version, or it might cause data loss.";
 
 $lang->upgrade->fromVersions['1_1']      = '1.1.stable';
