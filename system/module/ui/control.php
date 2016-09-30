@@ -551,7 +551,6 @@ class ui extends control
         $result = $this->ui->removeTemplateData($template);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $result = $this->ui->removeTemplateFiles($template);
-        if($result !== true) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->removeDirFaild, join('<br/>', $result))) );
         $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
     }
 
