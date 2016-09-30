@@ -251,10 +251,10 @@ class treeModel extends model
      * @access public
      * @return string   the html code of the tree menu.
      */
-    public function getTreeMenu($type = 'article', $startCategoryID = 0, $userFunc, $siteID = 0)
+    public function getTreeMenu($type = 'article', $startCategoryID = 0, $userFunc, $expand = 1)
     {
         $treeMenu = array();
-        $stmt = $this->dbh->query($this->buildQuery($type, $startCategoryID, $siteID));
+        $stmt = $this->dbh->query($this->buildQuery($type, $startCategoryID));
 
         $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
         if(isset($userFunc[0])) $userFunc[0] = $modelName;
@@ -286,7 +286,8 @@ class treeModel extends model
             }
             $treeMenu[$category->parent] .= "</li>\n"; 
         }
-        $lastMenu = "<ul class='tree' data-type='$type'>" . @array_pop($treeMenu) . "</ul>\n";
+        $expand = $expand ? "data-initial-state='expand'" : '';
+        $lastMenu = "<ul class='tree' data-type='$type' $expand>" . @array_pop($treeMenu) . "</ul>\n";
         return $lastMenu; 
     }
 
