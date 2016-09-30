@@ -30,31 +30,29 @@ class siteModel extends model
      * @access public
      * @return void
      */
-    public function setSystem()
+    public function setSystem($data = null)
     {
         $errors ='';
-        $data   = fixer::input('post')->get();
-
-        $configRoot   = $this->app->getConfigRoot();
-        $systemConfig = $configRoot . 'custom.php';
+        If(empty($data)) $data = fixer::input('post')->get();
+        $customFile = $this->app->getConfigRoot() . 'custom.php';
         
-        if(!file_exists($systemConfig))
+        if(!file_exists($customFile))
         {
-            $command = "touch $configRoot";
+            $command = "touch $customFile";
             $error   = sprintf($this->lang->site->fileRequired, $command);
             $errors['submit'] = $error;
             return array('result' => 'fail', 'message' => $errors);
         }
         
-        if(file_exists($systemConfig) and is_writable($systemConfig) !== true)
+        if(file_exists($customFile) and is_writable($customFile) !== true)
         {
-            $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $systemConfig);
+            $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $customFile);
             $errors['submit'] = $error;
             return array('result' => 'fail', 'message' => $errors);
         }        
-        if(file_exists($systemConfig) and is_writable($systemConfig))
+        else
         {
-            file_put_contents($systemConfig, "<?php\n");
+            file_put_contents($customFile, "<?php\n");
             
             $content = '';
             foreach($data as $type => $option)
@@ -82,7 +80,7 @@ class siteModel extends model
                     $content .= '$config->requestType = \'' . $option. "';\n";
                 }
             }
-            file_put_contents($systemConfig, $content, FILE_APPEND);
+            file_put_contents($customFile, $content, FILE_APPEND);
             dao::$changedTables[] = TABLE_CONFIG;
             return array('result' => 'success', 'message' => $this->lang->saveSuccess); 
         }
