@@ -169,9 +169,9 @@ $lang->block->imagePositionList['left']  = 'Left';
 $lang->block->imagePositionList['right'] = 'Right';
 
 $lang->block->category = new stdclass();
-$lang->block->category->showChildren  = 'Display Subcategory';
+$lang->block->category->showChildren  = 'Display subcategory';
 $lang->block->category->fromCurrent   = 'Start from current category';
-$lang->block->category->initialExpand = 'Display Subcategory Expand';
+$lang->block->category->initialExpand = 'Expand subcategory by default';
 
 $lang->block->category->showChildrenList[1] = 'Yes';
 $lang->block->category->showChildrenList[0] = 'No';
