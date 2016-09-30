@@ -34,26 +34,24 @@ class siteModel extends model
     {
         $errors ='';
         If(empty($data)) $data = fixer::input('post')->get();
-        $customFile = $this->app->getConfigRoot() . 'custom.php';
+        $myFile = $this->app->getConfigRoot() . 'my.php';
         
-        if(!file_exists($customFile))
+        if(!file_exists($myFile))
         {
-            $command = "touch $customFile";
+            $command = "touch $myFile";
             $error   = sprintf($this->lang->site->fileRequired, $command);
             $errors['submit'] = $error;
             return array('result' => 'fail', 'message' => $errors);
         }
         
-        if(file_exists($customFile) and is_writable($customFile) !== true)
+        if(file_exists($myFile) and is_writable($myFile) !== true)
         {
-            $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $customFile);
+            $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $myFile);
             $errors['submit'] = $error;
             return array('result' => 'fail', 'message' => $errors);
         }        
         else
         {
-            file_put_contents($customFile, "<?php\n");
-            
             $content = '';
             foreach($data as $type => $option)
             {
@@ -80,7 +78,7 @@ class siteModel extends model
                     $content .= '$config->requestType = \'' . $option. "';\n";
                 }
             }
-            file_put_contents($customFile, $content, FILE_APPEND);
+            file_put_contents($myFile, $content, FILE_APPEND);
             dao::$changedTables[] = TABLE_CONFIG;
             return array('result' => 'success', 'message' => $this->lang->saveSuccess); 
         }
