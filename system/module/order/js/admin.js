@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $('.finisher').click(function()
+    $( document ).on( 'click', '.finisher', function()
     {
         confirmLink = $(this).data('rel');
         bootbox.confirm(v.finishWarning, function(result)

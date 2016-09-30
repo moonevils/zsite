@@ -105,7 +105,25 @@ class blog extends control
         {
             $copyArticle = $this->article->getByID($article->copyURL);
             $copyArticleCategory = current(array_slice($copyArticle->categories, 0, 1));
-            $this->view->sourceURL = helper::createLink('article', 'view', "articleID=$copyArticle->id&categoryID=$copyArticleCategory->id", "category=$copyArticleCategory->alias&name=$copyArticle->alias", 'html');
+            if($this->app->clientDevice == 'desktop') 
+            {    
+                $this->view->sourceURL = helper::createLink('article', 'view', "articleID=$copyArticle->id&categoryID=$copyArticleCategory->id", "category=$copyArticleCategory->alias&name=$copyArticle->alias", 'html');
+            }
+            else
+            {
+                $this->view->sourceURL = helper::createLink('article', 'view', "articleID=$copyArticle->id&categoryID=$copyArticleCategory->id", "category=$copyArticleCategory->alias&name=$copyArticle->alias", 'mhtml');
+            } 
+        }
+        else
+        {
+            if($this->app->clientDevice == 'desktop') 
+            {
+                $this->view->canonicalURL = helper::createLink('article', 'view', "articleID=$$articleID->id&categoryID=$currentCategory", "category=$category->alias&name=$article->alias", 'html');
+            }
+            else
+            {
+                $this->view->canonicalURL = helper::createLink('article', 'view', "articleID=$$articleID->id&categoryID=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
+            }
         }
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();

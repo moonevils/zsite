@@ -68,6 +68,9 @@ $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
 
 $config->product = new stdclass();
 
+$config->enabledLangs = 'zh-cn';
+$config->defaultLang  = 'zh-cn';
+
 $config->site = new stdclass();
 $config->site->resetPassword     = 'open'; 
 $config->site->importantValidate = 'okFile,email';
