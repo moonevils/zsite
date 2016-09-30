@@ -71,6 +71,7 @@ $lang->order->settlement     = 'Check Out';
 $lang->order->check          = 'Settle Order';
 
 $lang->order->confirmLimit         = 'Receiving Cyle';
+$lang->order->expireLimit          = 'Expire days';
 $lang->order->confirmReceived      = 'Receive Order';
 $lang->order->deliveryConfirmed    = 'Your order has been received！';
 $lang->order->confirmWarning       = "Please confirm after your order has been received!";
@@ -106,6 +107,7 @@ $lang->order->statusList['confirmed'] = 'Confirmed';
 $lang->order->statusList['normal']    = 'In Process';
 $lang->order->statusList['finished']  = 'Finished';
 $lang->order->statusList['canceled']  = 'Cancelled';
+$lang->order->statusList['expired']   = 'Expired';
 
 $lang->order->types = array();
 $lang->order->types['shop']  = 'Goods order';

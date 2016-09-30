@@ -48,6 +48,7 @@ $lang->ui->enableTheme     = "Apply this theme";
 $lang->ui->industry        = "Industry";
 $lang->ui->offcial         = "Official";
 $lang->ui->reset           = "Reset";
+$lang->ui->themePackage    = "Theme package";
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";
@@ -275,6 +276,13 @@ $lang->ui->left            = 'Left';
 $lang->ui->right           = 'Right';
 $lang->ui->top             = 'Top';
 $lang->ui->bottom          = 'Bottom';
+
+$lang->ui->importType    = 'Import type';
+$lang->js->fullImportTip = "Old article, product, layout data will be replaced";
+
+$lang->ui->importTypes = new stdclass();
+$lang->ui->importTypes->theme = 'Theme data';
+$lang->ui->importTypes->full  = 'Full data';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
