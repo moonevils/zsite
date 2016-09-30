@@ -12,8 +12,8 @@ $lang->admin->shortcuts->product            = 'Add a product';
 $lang->admin->shortcuts->feedback           = 'Feedback Mgmt';
 $lang->admin->shortcuts->site               = 'Site Settings';
 $lang->admin->shortcuts->logo               = 'LOGO Setting';
-$lang->admin->shortcuts->company            = 'Compsny Info';
-$lang->admin->shortcuts->contact            = 'Contact US';
+$lang->admin->shortcuts->company            = 'Company Info';
+$lang->admin->shortcuts->contact            = 'Contact';
 
 $lang->admin->thread       = 'New Thread';
 $lang->admin->order        = 'New Order';

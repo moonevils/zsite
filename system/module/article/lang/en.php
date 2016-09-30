@@ -23,8 +23,8 @@ $lang->article->title      = 'Title';
 $lang->article->alias      = 'Alias';
 $lang->article->content    = 'Content';
 $lang->article->source     = 'Source';
-$lang->article->copySite   = 'Cope Site';
-$lang->article->copyURL    = 'Copy URL';
+$lang->article->copySite   = 'Site';
+$lang->article->copyURL    = 'URL';
 $lang->article->keywords   = 'Keyword';
 $lang->article->summary    = 'Summary';
 $lang->article->author     = 'Author';
@@ -37,14 +37,14 @@ $lang->article->views      = 'View';
 $lang->article->comments   = 'Comment';
 $lang->article->stick      = 'Stick Up';
 $lang->article->order      = 'Sort';
-$lang->article->isLink     = 'Skip';
+$lang->article->isLink     = 'Redirect';
 $lang->article->link       = 'Link';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 $lang->article->layout     = 'Layout';
 
-$lang->article->forward2Blog     = 'Go to Blog';
-$lang->article->forward2Forum    = 'Go to Forum';
+$lang->article->forward2Blog     = 'Copy to Blog';
+$lang->article->forward2Forum    = 'Copy to Forum';
 $lang->article->selectCategories = 'Select a Category';
 $lang->article->selectBoard      = 'Select a Board';
 $lang->article->confirmReject    = 'Do you want to reject it?';
@@ -65,7 +65,7 @@ $lang->submittion->typeList = array();
 $lang->submittion->typeList['article'] = 'Article';
 $lang->submittion->typeList['blog']    = 'Blog';
 
-$lang->article->onlyBody = 'Dispaly body only(for custom).';
+$lang->article->onlyBody = 'Display body only(for custom).';
 
 $lang->article->list          = 'List';
 $lang->article->admin         = 'Maintain';
