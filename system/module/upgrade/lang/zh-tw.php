@@ -39,6 +39,10 @@ $lang->upgrade->chmodThemePath = <<<EOT
 <div class='alert'> 請開啟<b>%s</b> 目錄寫權限後繼續。 </div>
 EOT;
 
+$lang->upgrade->chmodCustomConfig = <<<EOT
+<div class='alert'> 請開啟<b>%s</b> 檔案寫權限後繼續 。 </div>
+EOT;
+
 $lang->upgrade->versionNote = "務必選擇正確的版本，否則會造成數據丟失。";
 
 $lang->upgrade->fromVersions['1_1']      = '1.1.stable';
