@@ -499,6 +499,15 @@ class site extends control
     {
         if($_POST)
         {
+            $okFile = $this->loadModel('common')->verifyAdmin();
+            $pass   = $this->loadModel('guarder')->verify('okFile');
+            $this->view->pass   = $pass;
+            $this->view->okFile = $okFile;
+            if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+        }
+
+        if($_POST)
+        {
             $result = $this->site->setSystem();
             $this->send($result);
         }
