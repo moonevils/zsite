@@ -24,11 +24,10 @@
       <?php printf($lang->upgrade->createSlidePath, $slidePath);?>
       <?php elseif($chmodThemePath):?>
       <?php printf($lang->upgrade->chmodThemePath, $themePath);?>
+      <?php elseif($chmodCustomConfig):?>
+      <?php printf($lang->upgrade->chmodCustomConfig, $customFile);?>
       <?php else:?>
       <?php printf($lang->upgrade->backupData, $db->user, $db->password, $db->name, inlink('selectVersion'));?>
-      <?php endif;?>
-      <?php if($chmodCustomConfig):?>
-      <?php printf($lang->upgrade->chmodCustomConfig, $customFile);?>
       <?php endif;?>
       <?php if(version_compare($this->loadModel('setting')->getVersion(), 2.3) < 0):?>
       <div class='text-left'>
