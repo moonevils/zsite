@@ -63,6 +63,14 @@ class page extends control
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec();
 
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = helper::createLink('page', 'view', "pageID=$pageID", "name={$page->alias}", 'html'); 
+        }
+        else
+        {
+            $this->view->canonicalURL = helper::createLink('page', 'view', "pageID=$pageID", "name=$page->alias", 'mhtml'); 
+        }
         $this->display();
     }
 }

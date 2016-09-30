@@ -24,6 +24,8 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
   <?php endif;?>
   <?php if(isset($sourceURL)):?>
   <link rel="canonical" href="<?php echo rtrim($sysURL, '/') . '/' . ltrim($sourceURL, '/');?>" >
+  <?php elseif(isset($canonicalURL)):?>
+  <link rel="canonical" href="<?php echo $sysURL . $canonicalURL;?>" >
   <?php endif;?>
   <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">

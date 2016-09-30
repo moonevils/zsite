@@ -87,6 +87,14 @@ class product extends control
         $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
 
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category={$category->alias}", 'html'); 
+        }
+        else
+        {
+            $this->view->canonicalURL = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category={$category->alias}", 'mhtml'); 
+        }
         $this->display();
     }
 
@@ -266,6 +274,15 @@ class product extends control
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec();
+        
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = helper::createLink('product', 'view', "productID=$productID", "category={$category->alias}&name={$product->alias}", 'html'); 
+        }
+        else
+        {
+            $this->view->canonicalURL = helper::createLink('product', 'view', "productID=$productID", "category={$category->alias}&name={$product->alias}", 'mhtml'); 
+        }
 
         $this->display();
     }
