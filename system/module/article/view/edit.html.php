@@ -46,12 +46,12 @@
         <tr>
           <th class='w-100px'><?php echo $lang->article->title;?></th>
           <td colspan='2'>
-            <div class='order input-group'>
+            <div class='order  input-group'>
               <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?>"><?php echo html::input('title', $article->title, "class='form-control'");?></div>
               <?php if($type == 'page'):?>
               <div class='col-sm-3 order'>
                 <div class='input-group'>
-                  <span class="input-group-addon"><?php echo $lang->article->order;?></span>
+                  <span class="fix-border input-group-addon"><?php echo $lang->article->order;?></span>
                   <?php echo html::input('order', $article->order == '0' ? $article->id : $article->order, "class='form-control'");?>
                 </div>
               </div>
