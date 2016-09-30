@@ -64,8 +64,14 @@ class baseHelper
     {
         /* 设置$appName和$moduleName。Set appName and moduleName. */
         global $app, $config;
-        if(strpos($moduleName, '.') !== false) list($appName, $moduleName) = explode('.', $moduleName);
-        if(strpos($moduleName, '.') === false) $appName = $app->getAppName();
+        if(strpos($moduleName, '.') !== false) 
+        {
+            list($appName, $moduleName) = explode('.', $moduleName);
+        }
+        else
+        {
+            $appName = $app->getAppName();
+        }
         if(!empty($appName)) $appName .= '/';
 
         /* 处理$viewType和$vars。Set $viewType and $vars. */
