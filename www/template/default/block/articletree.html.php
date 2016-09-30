@@ -38,19 +38,12 @@ if(isset($block->content->fromCurrent) and $block->content->fromCurrent)
 }
 ?>
 <?php if($block->content->showChildren):?>
-<?php $treeMenu = $this->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink));?>
+<?php $treeMenu = $this->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink), $block->content->initialExpand);?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
   </div>
   <div class='panel-body'><?php echo $treeMenu;?></div>
-  <?php 
-    if(isset($block->content->initialExpand) and $block->content->initialExpand)
-    {
-        $code = "$(document).ready(function(){\$('.has-list').addClass('open in')});";
-        js::execute($code);
-    }
-  ?>
 </div>
 <?php else:?>
 <?php $topCategories = $this->tree->getChildren($startCategory, $type);?>
