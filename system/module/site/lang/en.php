@@ -256,3 +256,4 @@ $lang->site->menus['site']       = 'Site';
 $lang->site->menus['security']   = 'Security';
 
 $lang->site->fileAuthority = 'Need to change the write authority of file，on linux, you should run the command<code>%s</code>';
+$lang->site->fileRequired  = 'Need to create file, on Linux, you should run the command<code>%s</code>';
