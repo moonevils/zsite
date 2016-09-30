@@ -286,7 +286,7 @@ class treeModel extends model
             }
             $treeMenu[$category->parent] .= "</li>\n"; 
         }
-        $expand = $expand ? "data-initial-state='expand'" : '';
+        $expand = $expand ? "data-ride='tree' data-initial-state='expand'" : '';
         $lastMenu = "<ul class='tree' data-type='$type' $expand>" . @array_pop($treeMenu) . "</ul>\n";
         return $lastMenu; 
     }
