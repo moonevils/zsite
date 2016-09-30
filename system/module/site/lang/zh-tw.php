@@ -256,3 +256,4 @@ $lang->site->menus['site']       = '站點';
 $lang->site->menus['security']   = '安全';
 
 $lang->site->fileAuthority = '需要修改寫入檔案的權限，Linux下的運行命令為<code>%s</code>';
+$lang->site->fileRequired  = '需要創建檔案，Linux下的運行命令為<code>%s</code>';

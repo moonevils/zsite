@@ -281,7 +281,7 @@ $lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'ali
 $lang->site->menu->search   = '全文檢索|search|buildindex|';
 $lang->site->menu->score    = '積分規則|score|setcounts|';
 $lang->site->menu->backup   = '備份還原|backup|index|';
-$lang->site->menu->farm     = '推廣站點|farm|admin|';
+//$lang->site->menu->api    = 'API|site|setapi|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
