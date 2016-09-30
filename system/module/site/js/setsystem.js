@@ -2,6 +2,10 @@ $(document).ready(function()
 {
     $.setAjaxForm('#setSystemForm', function(response)
     {
+        if(response.reason == 'captcha')
+        {
+            $('.captchaModal').click();
+        }
         if('success' == response.result) 
         {
           $.get(location.href, function(){window.location.reload();});
