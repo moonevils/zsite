@@ -15,7 +15,7 @@
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setSystem;?></strong></div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-inline'>
+    <form method='post' id='setSystemForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->lang;?></th>
