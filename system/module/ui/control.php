@@ -472,7 +472,7 @@ class ui extends control
 
         $setting[$this->app->clientDevice] = helper::jsonEncode($setting[$this->app->clientDevice]);
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
-
+        $this->ui->createCustomerCss($packageInfo->template, $packageInfo->code);
         $this->view->title = $this->lang->ui->importThemeSuccess;
         $this->display('ui', 'importsuccess');
     }
