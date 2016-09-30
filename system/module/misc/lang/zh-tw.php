@@ -9,4 +9,3 @@ $lang->misc->forum       = '論壇交流';
 $lang->misc->thanksTitle      = '蟬知構建於眾多優秀的開源項目之上';
 $lang->misc->thanksFooter     = '感謝%s提供安全審計';
 $lang->misc->thanksObjectName = '站長安全網';
-
