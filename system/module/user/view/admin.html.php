@@ -57,7 +57,7 @@ js::set('admin', $this->get->admin);
       <thead>
         <tr class='text-center'>
           <th class='w-60px'><?php echo $lang->user->id;?></th>
-          <th class='w-100px'><?php echo $lang->user->realname;?></th>
+          <th class='w-120px'><?php echo $lang->user->realname;?></th>
           <th class='w-100px'><?php echo $lang->user->account;?></th>
           <?php if(commonModel::isAvailable('score')):?>
           <th class='w-70px'><?php echo $lang->user->score;?></th>
