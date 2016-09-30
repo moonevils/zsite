@@ -230,6 +230,17 @@ class userModel extends model
             ->check('email', 'unique')
             ->exec();
 
+        if(RUN_MODE == 'admin')
+        {
+            foreach($this->post->groups as $group)
+            {
+                $data = new stdclass();
+                $data->account = $user->account;
+                $data->group   = $group;
+                $this->dao->insert(TABLE_USERGROUP)->data($data)->exec();
+            }
+        }
+
         if(commonModel::isAvailable('score'))
         {
             $viewType = $this->app->getViewType();
