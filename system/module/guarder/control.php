@@ -123,7 +123,7 @@ class guarder extends control
             }
             
             $result = $this->guarder->punish($type, $item, $this->post->reason, $this->post->expired);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('blacklist', "mode=$type")));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setblacklist', "mode=$type")));
             $this->send(array('result' => 'fail', 'message' => dao::geterror()));
         }
 
@@ -179,7 +179,7 @@ class guarder extends control
     public function delete($type, $identity)
     {
         $result = $this->dao->delete()->from(TABLE_BLACKLIST)->where('identity')->eq($identity)->andWhere('type')->eq($type)->exec();
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist', "mode=$type")));
+        if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setblacklist', "mode=$type")));
         $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
         $this->view->title = $this->lang->site->setBlacklist;

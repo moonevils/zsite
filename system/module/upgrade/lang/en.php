@@ -11,35 +11,35 @@
  */
 $lang->upgrade->common  = 'Upgrade';
 
-$lang->upgrade->result  = 'Result';
-$lang->upgrade->fail    = 'Failed';
-$lang->upgrade->success = 'Success';
-$lang->upgrade->tohome  = 'Go to index';
+$lang->upgrade->result  = 'Backup Result';
+$lang->upgrade->fail    = 'Backup failed!';
+$lang->upgrade->success = 'Backed up!';
+$lang->upgrade->tohome  = 'Back to Home';
 
-$lang->upgrade->backup        = 'Backup';
-$lang->upgrade->prepair       = 'Prepair works';
-$lang->upgrade->selectVersion = 'Select version to upgrade from';
-$lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
-$lang->upgrade->execute       = 'Execute';
+$lang->upgrade->backup        = 'Data Backup';
+$lang->upgrade->prepair       = 'Prepare to upgrade';
+$lang->upgrade->selectVersion = 'Confirm current version';
+$lang->upgrade->confirm       = 'Confirm SQL statement';
+$lang->upgrade->execute       = 'Confirm';
 $lang->upgrade->next          = 'Next';
-$lang->upgrade->updateLicense = 'The license of ChanZhi 4.0 has changed to Z PUBLIC LICENSE(ZPL) 1.2.';
+$lang->upgrade->updateLicense = 'Changer 4.0 has swtiched to use Z PUBLIC LICENSE(ZPL) 1.2.';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
-<strong>Using phpMyAdmin or mysqldump to backup database.</strong>
+<strong>Use phpMyAdminor mysqldump to backup database.</strong>
 <textarea class='autoSelect w-500px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
 </pre>
 EOT;
 
 $lang->upgrade->createSlidePath = <<<EOT
-<div class='alert alert-danger'>Slide path %s must be writeable. Please create the path and make sure it can be writeable.</div>
+<div class='alert'> Please create a silde directory <b>%s</b> and turn on the permission to write in this directory. </div>
 EOT;
 
 $lang->upgrade->chmodThemePath = <<<EOT
-<div class='alert'> Path <b>%s</b> must be writeable before upgrade. </div>
+<div class='alert'> Please turn on the wirte permission of <b>%s</b> and continuee. </div>
 EOT;
 
-$lang->upgrade->versionNote = "Please choose the version to upgrade.";
+$lang->upgrade->versionNote = " Please choose the right version, or it might cause data loss.";
 
 $lang->upgrade->fromVersions['1_1']      = '1.1.stable';
 $lang->upgrade->fromVersions['1_2']      = '1.2.stable';

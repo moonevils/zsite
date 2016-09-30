@@ -180,6 +180,15 @@ class thread extends control
         $this->view->mobileURL  = helper::createLink('thread', 'view', "threadID=$threadID&pageID=$pageID", '', 'mhtml');
         $this->view->desktopURL = helper::createLink('thread', 'view', "threadID=$threadID&pageID=$pageID", '', 'html');
 
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = $this->view->desktopURL; 
+        }
+        else
+        {
+            $this->view->canonicalURL = $this->view->mobileURL; 
+        }
+        
         $this->display();
     }
 

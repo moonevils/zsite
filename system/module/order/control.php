@@ -392,4 +392,18 @@ class order extends control
         $this->view->title       = $this->lang->order->edit;
         $this->display();
     }
+    
+    /**
+     * Edit the order
+     *
+     * @access public
+     * @param  string
+     * @return void
+     */
+    public function delete($orderID)
+    {
+        $result = $this->order->deleteOrder($orderID);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess));
+    }
 }

@@ -28,7 +28,15 @@ class company extends control
         $this->view->desktopURL = helper::createLink('company', 'index', '', '', 'html');
         $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
-
+        
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = helper::createLink('company', 'index', '', '', 'html'); 
+        }
+        else
+        {
+            $this->view->canonicalURL = helper::createLink('company', 'index', '', '', 'mhtml'); 
+        }
         $this->display();
     }
 

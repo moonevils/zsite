@@ -23,8 +23,17 @@
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'>
-            <div>
+          <div class='card-content'>
+            <div class='pull-right'>
+              <?php if($article->submittion != 2): ?>
+              <?php echo html::a(helper::createLink('article', 'modify', "articleID={$article->id}"), $lang->edit, "class='editor text-primary' data-toggle='modal'");?>&nbsp;&nbsp;
+              <?php echo html::a(helper::createLink('article', 'delete', "articleID={$article->id}"), $lang->delete, "class='deleter text-danger' data-locate='self'");?>
+              <?php else: ?>
+              <a class='disabled'><?php echo $lang->edit ?></a>
+              <a class='disabled'><?php echo $lang->delete ?></a>
+              <?php endif; ?>
+            </div>
+            <div class='text-muted small'>
               <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span>
               &nbsp;&nbsp; <span title="<?php echo $lang->article->submissionTime;?>"><i class='icon-time'></i> <?php echo $article->editedDate;?></span>
             </div>
@@ -36,4 +45,5 @@
   </div>
   <div class='panel-footer'><?php $pager->show('justify');?></div>
 </div>
+<?php include TPL_ROOT . 'common/form.html.php';?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

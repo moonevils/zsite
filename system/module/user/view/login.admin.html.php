@@ -8,7 +8,9 @@ js::set('random', $this->session->random);
 <div class='container'>
   <div id='adminLogin'>
     <div id='siteName'>
-      <?php echo $this->config->site->name;?>
+      <h4 class='text-ellipsis text-rightPadding'>
+        <?php echo $this->config->site->name;?>
+      </h4>
       <div class='pull-right'>
         <div class='dropdown' id='langs'>
           <button class='btn' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class='caret'></span></button>
@@ -56,5 +58,10 @@ js::set('random', $this->session->random);
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
 ?>
+<style>
+  #siteName{position:relative;}
+  .text-rightPadding{padding-right:80px;}
+  .pull-right{position:absolute;top:16px;right:20px;}
+</style>
 </body>
 </html>

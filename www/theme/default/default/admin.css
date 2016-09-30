@@ -363,6 +363,7 @@ body {padding-left: 50px;}
 #mainNavbar .nav > li.divider.angle:after {z-index: 2; left: -1px; border-color: transparent transparent transparent #fff;}
 #mainNavbar .nav > li + li.divider.angle:after { border-left-color: #E2E9F1;}
 
+#mainNavbar .navbar-nav > li.device-nav > a {padding-bottom: 9px}
 #mainNavbar .device-nav .dropdown-menu  {width: 187px; padding: 8px 4px; background-color: #fafafa}
 #mainNavbar .device-nav .dropdown-menu > li {float: left; margin: 0 4px;}
 #mainNavbar .device-nav .dropdown-menu > li > a {width: 80px; text-align: center; border-radius: 0; border: 1px solid #e5e5e5; padding: 0; background-color: #fff; color: #666; position: relative;}

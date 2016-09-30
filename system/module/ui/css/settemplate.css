@@ -23,3 +23,24 @@
 #mainArea .themes .theme:hover .theme-img > .theme-info {opacity: 1}
 #mainArea .themes .theme-name .dropdown {position: absolute; right: 5px; bottom: 5px;}
 #mainArea .pager {margin: 0 5px 0 0}
+
+#industryBox #theme-all{padding-left:22px;}
+
+.modal-theme-preview {position: fixed!important; top: 0!important; right: 0!important; bottom: 0!important; left: 0!important; margin: 0!important; }
+.modal-theme-preview .panel {border: none; border-radius: 0; margin: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 0;}
+.modal-theme-preview .image-box {position: absolute; top: 41px; left: 0; right: 0; bottom: 0; overflow-y: auto;}
+.modal-theme-preview .modal-body {position: static}
+.modal-theme-preview .image-box .next,
+.modal-theme-preview .image-box .prev {position: fixed; left: 0; top: 50%; margin-top: -25px; width: 50px; height: 50px; line-height: 62px; text-align: center; z-index: 1200;  background-color: rgba(0,0,0,.05)}
+.modal-theme-preview .image-box .next {left: auto; right: 0;}
+.modal-theme-preview .image-box .next:hover,
+.modal-theme-preview .image-box .prev:hover,
+.modal-theme-preview .image-box .next:active,
+.modal-theme-preview .image-box .prev:active {background-color: #eee; background-color: rgba(0,0,0,.2); text-decoration: none;}
+#return {position: absolute; top: 4px; right: 10px;}
+#theme-heading > strong {font-weight: bold; font-size: 16px; margin-right: 10px; display: inline-block;}
+#theme-heading > span {display: inline-block;}
+#theme-heading > span > a {display: block; padding: 0 2px; color: #666;}
+#theme-heading > span.active > a,
+#theme-heading > span > a:hover {color: #347aeb; text-decoration: none}
+#theme-heading > span.active > a {color: #333; font-weight: bold;}

@@ -21,27 +21,27 @@
         <div class='form-group'>
           <label for='realname' class='control-label'><?php echo $lang->user->realname;?></label>
           <?php if($user->admin == 'super'):?>
-            <?php if(count(explode(',', $this->config->site->lang)) > 1):?>
-            <?php if(strpos($this->config->site->lang, 'zh-cn') !== false):?>
+            <?php if(count(explode(',', $this->config->enabledLangs)) > 1):?>
+            <?php if(strpos($this->config->enabledLangs, 'zh-cn') !== false):?>
             <div class='input-group'>
               <label class='input-group-addon'><?php echo $config->langs['zh-cn']?></label>
               <?php echo html::input("realnames[cn]", isset($user->realnames->cn) ? $user->realnames->cn : '', "class='form-control'");?>
             </div>
             <?php endif;?>
-            <?php if(strpos($this->config->site->lang, 'zh-tw') !== false):?>
+            <?php if(strpos($this->config->enabledLangs, 'zh-tw') !== false):?>
             <div class='input-group'>
               <label class='input-group-addon'><?php echo $config->langs['zh-tw'];?></label>
               <?php echo html::input("realnames[tw]", isset($user->realnames->tw) ? $user->realnames->tw : '', "class='form-control'");?>
             </div>
             <?php endif;?>
-            <?php if(strpos($this->config->site->lang, 'en') !== false):?>
+            <?php if(strpos($this->config->enabledLangs, 'en') !== false):?>
             <div class='input-group'>
               <label class='input-group-addon'><?php echo $config->langs['en']?></label>
               <?php echo html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'");?>
             </div>
             <?php endif;?>
             <?php else:?>
-            <?php $clientLang = $this->config->site->defaultLang;?>
+            <?php $clientLang = $this->config->defaultLang;?>
             <?php $clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang;?>
             <?php echo html::input("realnames[{$clientLang}]", $user->realname, "class='form-control'")?>
             <?php endif;?>
@@ -121,7 +121,6 @@
 $(function()
 {
     var $editProfileForm = $('#editProfileForm');
-    appendFingerprint($editProfileForm);
     $editProfileForm.ajaxform({onSuccess: function(response)
     {
         if(response.result == 'success')

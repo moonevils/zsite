@@ -11,7 +11,6 @@
  */
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header'); ?>
-<?php js::import($this->config->webRoot . 'js/fingerprint/fingerprint.js');?>
 <hr class='space'>
 <div class='panel-section'>
   <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>

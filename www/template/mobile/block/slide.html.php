@@ -30,7 +30,7 @@ if($slides):
       <?php $height = 0; $index = 0;?>
       <?php foreach($slides as $slide):?>
       <?php $url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
-      <?php $target = " data-target='" . (isset($slide->target) ? $slide->target : '') . "'";?>
+      <?php $target = " data-target='" . (isset($slide->target) && $slide->target ? '_blank' : '_self') . "'";?>
       <?php if($height == 0 and $slide->height) $height = $slide->height;?>
       <?php if ($slide->backgroundType == 'image'): ?>
       <div class='item<?php if($index === 0) echo ' active';?>'<?php echo $url . ' ' . $target;?>>

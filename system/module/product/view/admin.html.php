@@ -55,7 +55,7 @@
         <td><?php echo $product->addedDate;?></td>
         <td><?php echo isset($lang->product->statusList[$product->status]) ? $lang->product->statusList[$product->status] : '';?></td>
         <td><?php echo $product->views;?></td>
-        <td>
+        <td class='nofixed'>
           <?php
           $categories    = $product->categories;
           $categoryAlias = !empty($categories) ? current($categories)->alias : '';
