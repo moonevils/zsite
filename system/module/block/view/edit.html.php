@@ -51,7 +51,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <div class='tab-pane theme-control-tab-pane' id='contentTab'>
             <table align='center' class='table table-form mg-0'>
               <tr>
-                <th class='w-100px'><?php echo $lang->block->type;?></th>
+                <th class='w-120px'><?php echo $lang->block->type;?></th>
                 <td><?php echo $this->block->createTypeSelector($template, $type, $block->id);?></td>
               </tr>
               <tr>
