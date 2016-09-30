@@ -19,7 +19,7 @@
       <table class='table table-form'>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->lang;?></th>
-          <td class='col-xs-6'><?php echo html::checkbox('enabledLangs', $config->langs, isset($this->config->enabledLangs) ? $this->config->enabledLangs : 'zh-cn');?></td><td></td>
+          <td class='col-xs-6'><?php echo html::checkbox('enabledLangs', $config->langs, isset($config->enabledLangs) ? $config->enabledLangs : 'zh-cn');?></td><td></td>
         </tr>
         <tr id='twTR'>
           <th><?php echo $lang->site->twContent;?></th>

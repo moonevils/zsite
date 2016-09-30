@@ -26,6 +26,14 @@ class forum extends control
         $this->view->mobileURL  = helper::createLink('forum', 'index', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('forum', 'index', '', '', 'html');
 
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = helper::createLink('forum', 'index', "", "", 'html'); 
+        }
+        else
+        {
+            $this->view->canonicalURL = helper::createLink('forum', 'index', "", "", 'mhtml'); 
+        }
         $this->display();
     }
 
@@ -60,6 +68,15 @@ class forum extends control
         $this->view->mobileURL  = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'html');
 
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = $this->view->desktopURL; 
+        }
+        else
+        {
+            $this->view->canonicalURL = $this->view->mobileURL; 
+        }
+        
         $this->display();
     }
 
