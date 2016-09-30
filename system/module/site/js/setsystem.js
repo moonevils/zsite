@@ -1,5 +1,12 @@
 $(document).ready(function()
 {
+    $.setAjaxForm('#setSystemForm', function(response)
+    {
+        if('success' == response.result) 
+        {
+          $.get(location.href, function(){window.location.reload();});
+        }
+    });
     /* Change set lang imput. */
     $('input[type=checkbox]').change(function()
     {
