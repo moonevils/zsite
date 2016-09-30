@@ -24,6 +24,9 @@
       <li data-type='internal' <?php echo $param == 'canceled' ? "class='active'" : '';?>>
         <?php echo html::a(inlink('admin', "mode=status&status=canceled"), $lang->order->statusList['canceled']);?>
       </li>
+      <li data-type='internal' <?php echo $param == 'expired' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('admin', "mode=status&status=expired"), $lang->order->statusList['expired']);?>
+      </li>
     </ul> 
   </div>
   <table class='table table-hover table-striped tablesorter table-fixed'>
@@ -37,7 +40,7 @@
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th><?php echo $lang->order->note;?></th>
-        <th class='w-180px'><?php echo $lang->actions;?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

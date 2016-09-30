@@ -289,6 +289,8 @@ class commonModel extends model
         if($module == 'wechat' and $method == 'response') return true;
         if($module == 'yangcong') return true;
         if(RUN_MODE == 'admin' and $this->app->user->admin != 'no' and isset($this->config->rights->admin[$module][$method])) return true;
+        if(RUN_MODE == 'admin' and $module == 'farm' and $method == 'register') return true;
+        if(RUN_MODE == 'admin' and $module == 'farm' and (strpos($method, 'api') !== false)) return true;
         if($module == 'widget' and RUN_MODE == 'admin') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
@@ -306,7 +308,7 @@ class commonModel extends model
     {
         if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
 
-        $http       = (isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://';
+        $http       = (!empty($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://';
         $httpHost   = $this->server->http_host;
         if(strpos($this->server->http_host, ':') !== false) $httpHost = substr($httpHost, 0, strpos($httpHost, ':'));
         $currentURI = $http . $httpHost . $this->server->request_uri;
@@ -592,7 +594,7 @@ class commonModel extends model
     {
         $languagebar = '';
         global $config, $app;
-        $langs = explode(',', $config->site->lang);
+        $langs = explode(',', $config->enabledLangs);
         if(count($langs) == 1) return false;
         if($app->clientDevice == 'mobile')
         {
@@ -772,7 +774,7 @@ class commonModel extends model
     {
         global $config;
         $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';
-        $httpHost = rtrim($_SERVER['HTTP_HOST'], '/') . $config->webRoot;
+        $httpHost = rtrim($_SERVER['HTTP_HOST'], '/');
         return "$httpType://$httpHost";
     }
 

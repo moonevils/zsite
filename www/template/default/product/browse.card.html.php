@@ -34,9 +34,9 @@
           ?>
         </div>
         <div class='text-nowrap text-ellipsis'>
-          <span class='pull-left'><?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $product->name);?></span>
+          <span><?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $product->name);?></span>
           <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
-          <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count pull-right' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span><?php endif;?>
+          <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span><?php endif;?>
         </div>
       </div>
     </div>

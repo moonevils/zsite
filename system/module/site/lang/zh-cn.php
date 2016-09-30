@@ -28,6 +28,7 @@ $lang->site->desc            = '站点描述';
 $lang->site->icpSN           = '备案编号';
 $lang->site->icpLink         = '备案链接';
 $lang->site->policeSN        = '公安部备案编号';
+$lang->site->policeTip       = '公安部备案编号';
 $lang->site->policeLink      = '备案链接';
 $lang->site->slogan          = '站点口号';
 $lang->site->mission         = '站点使命';
@@ -69,6 +70,7 @@ $lang->site->front            = '网站浏览';
 $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
+$lang->site->setSystem     = "系统设置";
 $lang->site->setCache      = '缓存设置';
 $lang->site->setCDN        = "CDN设置";
 $lang->site->setDomain     = "域名设置";
@@ -252,3 +254,6 @@ $lang->site->menus['tag']        = '关键词';
 $lang->site->menus['links']      = '友情链接';
 $lang->site->menus['site']       = '站点';
 $lang->site->menus['security']   = '安全';
+
+$lang->site->fileAuthority = '需要修改写入文件的权限，Linux下的运行命令为<code>%s</code>';
+$lang->site->fileRequired  = '需要创建文件，Linux下的运行命令为<code>%s</code>';

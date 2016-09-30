@@ -699,7 +699,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `confirmedDate` datetime NOT NULL,
   `finishedDate` datetime NOT NULL,
   `finishedBy` char(30) NOT NULL,
-  `status` enum('normal', 'canceled', 'finished') NOT NULL DEFAULT 'normal',
+  `status` enum('normal', 'canceled', 'finished','deleted','expired') NOT NULL DEFAULT 'normal',
   `type` varchar(30) NOT NULL default 'shop',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),

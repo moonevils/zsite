@@ -9,10 +9,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->sitemap->productCategory = 'Product category';
-$lang->sitemap->articleCategory = 'Article category';
-$lang->sitemap->blogCategory    = 'Blog category';
-$lang->sitemap->boards          = 'Boards';
+$lang->sitemap->productCategory = 'Product Category';
+$lang->sitemap->articleCategory = 'Article Category';
+$lang->sitemap->blogCategory    = 'Blog Category';
+$lang->sitemap->boards          = 'Board';
 $lang->sitemap->books           = 'Manual';
-$lang->sitemap->pages           = 'Pages';
-$lang->sitemap->xmlVersion      = 'XML';
+$lang->sitemap->pages           = 'Page';
+$lang->sitemap->xmlVersion      = 'Visit XML';

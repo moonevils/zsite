@@ -18,10 +18,13 @@ $sysURL             = $common->getSysURL();
   <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="Generator" content="<?php echo 'chanzhi' . $this->config->version . ' www.chanzhi.org'; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php if(isset($desktopURL)):?>
+  <link rel="alternate" href="<?php echo $sysURL . $desktopURL;?>" >
+  <?php endif;?>
   <?php if(isset($sourceURL)):?>
   <link rel="canonical" href="<?php echo $sysURL . $sourceURL;?>" >
-  <?php elseif(isset($desktopURL)):?>
-  <link rel="canonical" href="<?php echo $sysURL . $desktopURL;?>" >
+  <?php elseif(isset($canonicalURL)):?>
+  <link rel="canonical" href="<?php echo $sysURL . $canonicalURL;?>" >
   <?php endif;?>
   <?php if($thisModuleName == 'user' and $thisMethodName == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
@@ -55,11 +58,11 @@ $sysURL             = $common->getSysURL();
 
   /* Import customed css file if it exists. */
   $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->app->clientDevice}->name, $config->template->{$this->app->clientDevice}->theme);
-  if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme));
+  if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme), "id='themeStyle'");
 
   if(isset($pageCSS)) css::internal($pageCSS);
 
-  echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '';
+  echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : (file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '');
   echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
 ?>
 <?php

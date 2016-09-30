@@ -60,7 +60,7 @@ $lang->guarder->blacklistModes['email']    = '邮箱地址';
 
 $lang->guarder->whitelist = new stdclass();
 $lang->guarder->whitelist->ip            = 'IP白名单';
-$lang->guarder->whitelist->account       = '账号白名单';
+$lang->guarder->whitelist->account       = '帐号白名单';
 $lang->guarder->whitelist->accountHolder = '多个账户使用 , 隔开如zhangsan,lisi';
 $lang->guarder->whitelist->ipHolder      = '多个IP使用 , 隔开如202.194.133.1,202.194.132.0/28';
 $lang->guarder->whitelist->wrongIP       = 'IP 格式错误';

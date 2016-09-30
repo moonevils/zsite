@@ -99,6 +99,8 @@ class upgrade extends control
     {
         $this->upgrade->execute($this->post->fromVersion);
 
+        $this->upgrade->processCDN();
+
         $this->view->title = $this->lang->upgrade->result;
 
         if(!$this->upgrade->isError())

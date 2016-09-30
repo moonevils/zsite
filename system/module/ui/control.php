@@ -229,7 +229,7 @@ class ui extends control
 
             if(!$this->ui->checkExportParams()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $exportedFile = $this->ui->exportTheme($this->post->template, $this->post->theme, $this->post->code);
-            $exportedFile = urlencode($exportedFile);
+            $exportedFile = helper::safe64Encode($exportedFile);
             $this->send(array('result' => 'success', 'message' => $this->lang->ui->exportedSuccess, 'locate' => inlink('downloadtheme', "theme={$exportedFile}")));
         }
 
@@ -256,6 +256,7 @@ class ui extends control
      */
     public function downloadtheme($exportedFile)
     {
+        $exportedFile = helper::safe64Decode($exportedFile);
         $fileData = file_get_contents($exportedFile);
         $pathInfo = pathinfo($exportedFile);
         $this->loadModel('file')->sendDownHeader($pathInfo['basename'], 'zip', $fileData, filesize($exportedFile));
@@ -269,6 +270,7 @@ class ui extends control
      */
     public function uploadTheme()
     {
+        set_time_limit(0);
         $canManage = array('result' => 'success');
         if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
 
@@ -285,9 +287,11 @@ class ui extends control
             $packagePath = $this->app->getTmpRoot() . "package";
             if(!is_dir($packagePath)) mkdir($packagePath, 0777, true);
             if(!is_writeable($packagePath)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->packagePathUnwriteable, $packagePath)));
-            $result = move_uploaded_file($tmpName, $this->app->getTmpRoot() . "package/$fileName");
+            $packageFile = $this->app->getTmpRoot() . "package/$fileName"; 
+            if(file_exists($packageFile)) @unlink($packageFile);
+            $result = move_uploaded_file($tmpName, $packageFile);
 
-            $link = inlink('installtheme', "package=$package&downLink=&md5=");
+            $link = inlink('installtheme', "package=$package&downLink=&md5=&type={$this->post->type}");
             $this->app->loadLang('package');
             $this->send(array('result' => 'success', 'message' => $this->lang->package->successUploadedPackage, 'locate' => $link));
         }
@@ -303,15 +307,26 @@ class ui extends control
      * @param  string   $package
      * @param  string   $downLink
      * @param  string   $md5
+     * @param  string   $type
      * @access public
      * @return void
      */
-    public function installTheme($package, $downLink = '', $md5 = '')
+    public function installTheme($package, $downLink = '', $md5 = '', $type)
     {
         set_time_limit(0);
 
         $this->view->error = '';
         $this->view->title = $this->lang->ui->installTheme;
+
+        if($type == 'full')
+        {
+            $backup = $this->loadModel('backup')->backupAll();
+            if($backup['result'] != 'success')
+            {
+                $this->view->error = 'backupFail';       
+                die($this->display());
+            }
+        }
 
         /* Ignore merge blocks before blocks imported. */
         $this->view->blocksMerged = true;
@@ -327,10 +342,9 @@ class ui extends control
         }
 
         $packageInfo = $this->loadModel('package')->parsePackageCFG($package, 'theme');
-        $type = 'theme';
 
         /* Checking the package pathes. */
-        $return = $this->package->checkPackagePathes($package, $type);
+        $return = $this->package->checkPackagePathes($package, 'theme');
         if($this->session->dirs2Created == false) $this->session->set('dirs2Created', $return->dirs2Created);    // Save the dirs to be created.
         if($return->result != 'ok')
         {
@@ -346,6 +360,7 @@ class ui extends control
             die($this->display());
         }
 
+        if($type == 'full') return $this->importFullSite($package, $downLink, $md5);
         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
 
         /* Process theme code. */
@@ -355,10 +370,10 @@ class ui extends control
         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
 
         /* Save to database. */
-        if(!$_POST) $this->package->savePackage($package, $type);
+        if(!$_POST) $this->package->savePackage($package, 'theme');
 
         /* Copy files to target directory. */
-        $this->view->files = $this->package->copyPackageFiles($package, $type);
+        $this->view->files = $this->package->copyPackageFiles($package, 'theme');
 
         /* Execute the install.sql. */
         $this->ui->clearTmpData();
@@ -407,6 +422,59 @@ class ui extends control
         $this->view->blocksMerged    = true;
         $this->view->package         = $package;
         $this->display();
+    }
+
+    /**
+     * Import full site.
+     * 
+     * @param  string    $package 
+     * @param  string    $downLink 
+     * @param  string    $md5 
+     * @access public
+     * @return void
+     */
+    public function importFullSite($package, $downLink, $md5)
+    {
+         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
+
+        /* Process theme code. */
+        $installedThemes = $this->ui->getThemesByTemplate($packageInfo->template);
+        $package = $this->package->fixThemeCode($package, $installedThemes);
+
+        $packageInfo = $this->package->parsePackageCFG($package, 'theme');
+        /* Save to database. */
+        if(!$_POST) $this->package->savePackage($package, 'theme');
+
+        /* Clear tables to import. */
+        $this->ui->clearDB();
+
+        /* Copy files to target directory. */
+        $this->view->files = $this->package->copyPackageFiles($package, 'theme');
+        $this->package->copySlides();
+
+        /* Execute the install.sql. */
+        $this->ui->clearTmpData();
+        $return = $this->package->executeDB($package, 'full', 'theme');
+        if($return->result != 'ok')
+        {
+            $this->view->error = sprintf($this->lang->package->errorInstallDB, $return->error);
+            die($this->display());
+        }
+
+        $this->package->fixLang();
+        $themeCode = $packageInfo->template . '_' . $packageInfo->code;
+        if(!isset($this->config->layout->{$themeCode}))  $this->loadModel('block')->setPlan(0, $packageInfo->template, $packageInfo->code);
+
+        $setting = array();
+        $device = $packageInfo->template == 'default' ? 'desktop' : 'mobile';
+        $setting[$device]['name']  = $packageInfo->template;
+        $setting[$device]['theme'] = $packageInfo->code;
+
+        $setting[$this->app->clientDevice] = helper::jsonEncode($setting[$this->app->clientDevice]);
+        $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
+
+        $this->view->title = $this->lang->ui->importThemeSuccess;
+        $this->display('ui', 'importsuccess');
     }
 
     /**

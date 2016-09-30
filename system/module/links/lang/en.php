@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->links->common  = 'Links';
-$lang->links->index   = 'Home links';
-$lang->links->admin   = 'Link manage';
-$lang->links->all     = 'All links';
+$lang->links->common  = 'Blogroll';
+$lang->links->index   = 'Index Link';
+$lang->links->admin   = 'Link Admin';
+$lang->links->all     = 'All Links';

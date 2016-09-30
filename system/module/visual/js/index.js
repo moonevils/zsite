@@ -97,7 +97,7 @@
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
-        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, 'l=' + clientLang + '&' + (action.params || setting.params || '').format(options));
+        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options) + '&l=' + clientLang);
     };
 
     var openModal = function(url, options)
@@ -966,7 +966,7 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
-                var url = createLink('visual', 'index', 'l=' + clientLang + '&' + 'referer=' + Base64.encode(visualPageUrl));
+                var url = createLink('visual', 'index', 'referer=' + Base64.encode(visualPageUrl) + '&l=' + clientLang);
                 window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
@@ -1050,9 +1050,9 @@
                 {
                     $.closeModal();
                     var $style = $$('#themeStyle');
-                    $style.attr('href', $style.href());
+                    if($style.length) $style.attr('href', $style.href());
+                    else reloadPage();
                 });
-                if(DEBUG) console.log('Modal loaded:', url);
             }
         });
         return false;

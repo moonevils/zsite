@@ -75,6 +75,7 @@ class router extends baseRouter
      */
     public function setClientDevice()
     {
+        $device = 'desktop';
         if(strpos('mobile,desktop', $this->cookie->device) !== false) $device = $this->cookie->device;
 
         if(RUN_MODE == 'admin')
@@ -365,21 +366,12 @@ class router extends baseRouter
         $langCookieVar = RUN_MODE . 'Lang';
         if((RUN_MODE == 'front' or RUN_MODE == 'admin') and $this->config->installed)
         {
-            $records = $this->dbh->query("select `key`,value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` in ('defaultLang', 'lang', 'cn2tw')")->fetchAll();
-            foreach($records as $record)
-            {
-                if($record->key == 'lang')        $enabledLangs  = $record->value;
-                if($record->key == 'defaultLang') $defaultLang   = $record->value;
-                if($record->key == 'cn2tw') $this->config->cn2tw = $record->value;
-            }
-
+            $enabledLangs  = $this->config->enabledLangs;
+            $defaultLang   = $this->config->defaultLang;
+                
             if(!empty($enabledLangs))
             {
                 $enabledLangs = explode(',', $enabledLangs);
-                foreach($this->config->langs as $code => $title)
-                {
-                   if(!in_array($code, $enabledLangs)) unset($this->config->langs[$code]);
-                }
             }
             
             if(isset($defaultLang) && isset($this->config->langs[$defaultLang])) $this->config->default->lang = $defaultLang;
@@ -397,13 +389,17 @@ class router extends baseRouter
             {
                 $flipedLangs = array_flip($this->config->langsShortcuts);
                 if($this->config->requestType == 'GET' and !empty($_GET[$this->config->langVar])) $lang = $flipedLangs[$_GET[$this->config->langVar]];
+                if($this->config->requestType == 'GET' and empty($_GET[$this->config->langVar])) $lang = $this->config->default->lang;
                 if($this->config->requestType != 'GET')
                 {
                     $pathInfo = $this->getPathInfo();
+                    $langFromPathInfo = '';
                     foreach($this->config->langsShortcuts as $language => $code)
                     {
-                        if(strpos(trim($pathInfo, '/'), $code) === 0) $lang = $language;
+                        if(strpos(trim($pathInfo, '/'), $code) === 0) $langFromPathInfo = $language;
                     }
+                    if(empty($langFromPathInfo)) $langFromPathInfo = $this->config->default->lang;
+                    $lang = $langFromPathInfo;
                 }
             }
         }

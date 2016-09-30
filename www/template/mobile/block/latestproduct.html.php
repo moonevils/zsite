@@ -15,17 +15,17 @@ $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
 if(empty($content->category)) $content->category = 0;
-$image = isset($content->image) ? true : false;
-$products = $this->loadModel('product')->$method($content->category, $content->limit, $image);
+$showImage = isset($content->image) ? true : false;
+$products = $this->loadModel('product')->$method($content->category, $content->limit, $showImage);
 ?>
-<div id="block<?php echo $block->id;?>" class="panel-cards with-cards panel panel-block <?php echo $blockClass;?>">
+<div id="block<?php echo $block->id;?>" class="<?php echo $showImage ? 'panel-cards with-cards ' : '' ?>panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
     <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
     <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>
-  <?php if(isset($content->image)):?>
+  <?php if($showImage):?>
   <div class='panel-body no-padding'>
     <?php
     $count = count($products);
@@ -43,7 +43,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       <div class='row'>
       <?php endif; ?>
 
-      <div class='col col-custom-<?php echo $recPerRow?>'>
+      <div class='col col-custom-<?php echo $recPerRow?>' data-rowIndex='<?php echo $rowIndex ?>' data-index='<?php echo $index ?>'>
       <?php $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"); ?>
         <div class='card'>
           <a class='card-img' href='<?php echo $url?>'>
@@ -93,8 +93,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
           </div>
         </div>
       </div>
-
-      <?php if($recPerRow === 1 || $rowIndex === ($recPerRow - 1)): ?>
+      <?php if($recPerRow === 1 || $rowIndex === ($recPerRow - 1) || $count === ($index + 1)): ?>
       </div>
       <?php endif; ?>
       <?php $index++; ?>

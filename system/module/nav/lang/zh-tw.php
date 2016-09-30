@@ -9,7 +9,6 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-
 $lang->nav->common   = '導航設置';
 $lang->nav->setNav   = '導航設置';
 $lang->nav->add      = '添加';

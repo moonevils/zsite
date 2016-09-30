@@ -360,6 +360,15 @@ class article extends control
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $this->view->canonicalURL = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'html'); 
+        }
+        else
+        {
+            $this->view->canonicalURL = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'mhtml'); 
+        }
+            
         $this->display();
     }
 

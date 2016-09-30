@@ -18,3 +18,5 @@
 
 .btn-group .btn {min-width: 30px; text-shadow: none; padding: 3px; border-color: transparent; border-radius: 2px!important; background: none;}
 .table-list td{vertical-align:middle;}
+#cardMode .text-ellipsis{padding-right:44px;position:relative;}
+#cardMode .text-ellipsis .views-count{position:absolute;top:0;right:0;}
