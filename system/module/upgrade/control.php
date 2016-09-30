@@ -48,9 +48,11 @@ class upgrade extends control
         $this->view->title = $this->lang->upgrade->backup;
         $this->view->db    = $this->config->db;
         $this->view->slidePath = $this->app->getDataRoot() . 'slides';
+        $this->view->customFile =  $this->app->getConfigRoot() . 'custom.php';
         if(!is_dir($this->view->slidePath)) mkdir($this->view->slidePath, 0777, true);
 
-        $this->view->createSlidePath = !is_writeable($this->view->slidePath);
+        $this->view->createSlidePath   = !is_writeable($this->view->slidePath);
+        $this->view->chmodCustomConfig = !is_writeable($this->view->customFile);
 
         $this->view->themePath      = $this->app->getWwwRoot() . 'theme';
         $this->view->chmodThemePath = !is_writeable($this->view->themePath);
