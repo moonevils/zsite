@@ -48,7 +48,6 @@ zip:
 	chmod 777 -R chanzhieps/system/tmp/
 	chmod 777 -R chanzhieps/www/data
 	chmod 777 -R chanzhieps/www/template
-	touch chanzhieps/system/config/custom.php
 	chmod 777 -R chanzhieps/system/config
 	chmod 777 chanzhieps/system/module
 	chmod 777 chanzhieps/system/module/package/ext

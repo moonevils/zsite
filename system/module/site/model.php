@@ -35,7 +35,14 @@ class siteModel extends model
         $errors ='';
         If(empty($data)) $data = fixer::input('post')->get();
         $myFile = $this->app->getConfigRoot() . 'my.php';
-        
+
+        $rawContent = file_get_contents($myFile);
+        $rawContent = preg_replace('/.*config\->requestType.*\n/', '', $rawContent);
+        $rawContent = preg_replace('/.*config\->cn2tw.*\n/', '', $rawContent);
+        $rawContent = preg_replace('/.*config\->enabledLangs.*\n/', '', $rawContent);
+        $rawContent = preg_replace('/.*config\->defaultLang.*\n/', '', $rawContent);
+        $rawContent = str_replace('?>', '', $rawContent);
+
         if(!file_exists($myFile))
         {
             $command = "touch $myFile";
@@ -78,7 +85,7 @@ class siteModel extends model
                     $content .= '$config->requestType = \'' . $option. "';\n";
                 }
             }
-            file_put_contents($myFile, $content, FILE_APPEND);
+            file_put_contents($myFile, $rawContent . $content);
             dao::$changedTables[] = TABLE_CONFIG;
             return array('result' => 'success', 'message' => $this->lang->saveSuccess); 
         }
