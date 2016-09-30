@@ -1154,7 +1154,7 @@ class packageModel extends model
             $old = zget($oldBlocks, $blockID, '');
             
             $blockRelations[$originID] = $blockID;
-            $blocks2Delete[] = $imported->id;
+            if(!in_array($originID, $blocks2Create)) $blocks2Delete[] = $imported->id;
 
             if(!is_object($old->content)) $old->content = json_decode($old->content); 
             if(!is_object($imported->content)) $imported->content = json_decode($imported->content); 
@@ -1196,6 +1196,7 @@ class packageModel extends model
             $layout->blocks = json_encode($blocks);
             $this->dao->setAutoLang(false)->replace(TABLE_LAYOUT)->data($layout)->exec();
         }
+
         if(!empty($blocks2Delete)) $this->dao->setAutoLang(false)->delete()->from(TABLE_BLOCK)->where('id')->in($blocks2Delete)->exec();
 
         /* Fix blockID selector in css and js. */
@@ -1323,7 +1324,7 @@ class packageModel extends model
             ->fetch('value');
 
         $params = json_decode($params, true);
-        if(!empty($params[$template][$theme]))
+        if(!empty($params[$template][$code]))
         {
             $userCustom =  $this->dao->setAutoLang(false)->select('*')
                 ->from(TABLE_CONFIG)
@@ -1336,7 +1337,7 @@ class packageModel extends model
             {
                 $setting = json_decode($custom->value, true);
                 if(!isset($setting[$template])) $setting[$template] = array();
-                $setting[$template][$code] = zget($params[$template], $theme, array());
+                $setting[$template][$code] = zget($params[$template], $code, array());
                 $custom->value = helper::jsonEncode($setting);
                 $this->dao->replace(TABLE_CONFIG)->data($custom)->exec();
             }

@@ -36,7 +36,7 @@
               <?php endforeach;?>
             </select>
             <span class='input-group-addon'>
-            <?php echo html::checkbox('blocks2Create', array($newBlock->id => $lang->ui->createBlock));?>
+            <?php echo html::checkbox('blocks2Create', array($newBlock->originID => $lang->ui->createBlock));?>
             </span>
           </div>
         </td>
