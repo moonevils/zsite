@@ -667,6 +667,7 @@ class packageModel extends model
      */
     public function copyPackageFiles($package, $type = 'ext')
     {
+        if($type == 'extension') $type = 'ext';
         $appRoot    = $this->app->getAppRoot();
         $packageDir = $type . DS . $package . DS;
 
