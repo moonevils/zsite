@@ -22,6 +22,7 @@ class commonModel extends model
         parent::__construct();
         if(!defined('FIRST_RUN'))
         {
+            $this->sendHeader();
             $this->setUser();
             $this->loadConfigFromDB();
 
@@ -32,6 +33,21 @@ class commonModel extends model
             $this->loadModel('site')->setSite();
             define('FIRST_RUN', true);
         }
+    }
+
+    /**
+     * Set the header info.
+     * 
+     * @access public
+     * @return void
+     */
+    public function sendHeader()
+    {
+        $type = 'html';
+        if((strpos($_SERVER['REQUEST_URI'], '.xml') !== false) or (isset($_GET['t']) and $_GET['t'] == 'xml')) $type = 'xml'; 
+
+        header("Content-Type: text/{$type}; charset={$this->config->encoding}");
+        header("Cache-control: private");
     }
 
     /**
