@@ -522,6 +522,7 @@ $.extend(
 function createLink(moduleName, methodName, vars, viewType)
 {
     if(!viewType) viewType = config.defaultView;
+
     if(vars)
     {
         vars = vars.split('&');
@@ -558,8 +559,8 @@ function createLink(moduleName, methodName, vars, viewType)
     else
     {
         link = config.router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName + '&' + config.viewVar + '=' + viewType;
-        if(config.langCode != '') link = link + '&l=' + config.langCode;
         if(vars) for(i = 0; i < vars.length; i ++) link += '&' + vars[i][0] + '=' + vars[i][1];
+        if(config.langCode != '') link = link + '&l=' + config.langCode;
     }
     return link;
 }
