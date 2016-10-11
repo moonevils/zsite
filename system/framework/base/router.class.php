@@ -1060,7 +1060,8 @@ class baseRouter
             $value = @getenv('PATH_INFO');
             if(empty($value)) $value = @getenv('ORIG_PATH_INFO');
         }
-        if(RUN_MODE == 'PATH_INFO2' and strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
+
+        if(RUN_MODE == 'front' and strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
 
         if(strpos($value, '?') === false) return trim($value, '/');
 
