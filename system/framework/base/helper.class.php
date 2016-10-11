@@ -474,6 +474,10 @@ class baseHelper
         $postfix = str_replace($items[0] . '.' . $items[1] . '.', '', $domain);
         if(isset($config->domainPostfix) and strpos($config->domainPostfix, "|$postfix|") !== false) return $items[1];
 
+        /* 类似xxx.sub.a.com的形式。 Domain like xxx.sub.a.com. */
+        $postfix = str_replace($items[0] . '.' . $items[1] . '.' . $items[2] . '.', '', $domain);
+        if(isset($config->domainPostfix) and strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
+
         return '';
     }
 
