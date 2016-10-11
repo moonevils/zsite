@@ -488,7 +488,7 @@ class orderModel extends model
      */
     public function printScoreGoods($order)
     {
-        if(empty($oder->products)) return '';
+        if(empty($order->products)) return '';
         $goods = current($order->products);
         return $goods->productName;
     }
