@@ -24,6 +24,8 @@
       <?php printf($lang->upgrade->createSlidePath, $slidePath);?>
       <?php elseif($chmodThemePath):?>
       <?php printf($lang->upgrade->chmodThemePath, $themePath);?>
+      <?php elseif($chmodCustomConfig):?>
+      <?php printf($lang->upgrade->chmodCustomConfig, $customFile);?>
       <?php else:?>
       <?php printf($lang->upgrade->backupData, $db->user, $db->password, $db->name, inlink('selectVersion'));?>
       <?php endif;?>
@@ -34,7 +36,7 @@
       <?php endif;?>
     </div>
     <div class='modal-footer'>
-      <?php if($createSlidePath or $chmodThemePath):?>
+      <?php if($createSlidePath or $chmodThemePath or $chmodCustomConfig):?>
       <?php echo html::a('', $lang->upgrade->next, "class='btn btn-primary'");?>
       <?php else:?>
       <?php echo html::a(inlink('selectVersion'), $lang->upgrade->next, "class='btn btn-primary'");?>

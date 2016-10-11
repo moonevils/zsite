@@ -1050,7 +1050,7 @@ class blockModel extends model
      */
     public function createRegion($template = '', $page, $region)
     {
-        if($template == '') $template = $this->config->template->{$this->app->device}->name;
+        if($template == '') $template = $this->config->template->{$this->app->clientDevice}->name;
 
         $block = new stdclass();
 

@@ -171,7 +171,7 @@ $lang->block->imagePositionList['right'] = '居右';
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren  = '顯示子分類';
 $lang->block->category->fromCurrent   = '當前類目開始';
-$lang->block->category->initialExpand = '子分類展開';
+$lang->block->category->initialExpand = '子分類預設展開';
 
 $lang->block->category->showChildrenList[1] = '是';
 $lang->block->category->showChildrenList[0] = '否';
