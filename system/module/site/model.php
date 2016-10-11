@@ -30,10 +30,10 @@ class siteModel extends model
      * @access public
      * @return void
      */
-    public function setSystem($data = null)
+    public function setSystem($config = null)
     {
         $errors ='';
-        If(empty($data)) $data = fixer::input('post')->get();
+        if(empty($config)) $config = fixer::input('post')->get();
         $myFile = $this->app->getConfigRoot() . 'my.php';
 
         $rawContent = file_get_contents($myFile);
@@ -43,15 +43,9 @@ class siteModel extends model
         $rawContent = preg_replace('/.*config\->defaultLang.*\n/', '', $rawContent);
         $rawContent = str_replace('?>', '', $rawContent);
 
-        if(!file_exists($myFile))
-        {
-            $command = "touch $myFile";
-            $error   = sprintf($this->lang->site->fileRequired, $command);
-            $errors['submit'] = $error;
-            return array('result' => 'fail', 'message' => $errors);
-        }
-        
-        if(file_exists($myFile) and is_writable($myFile) !== true)
+        if(strpos($rawContent, "config->db->name") === false) return array('result' => 'fail');
+
+        if(is_writable($myFile) !== true)
         {
             $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $myFile);
             $errors['submit'] = $error;
@@ -60,31 +54,34 @@ class siteModel extends model
         else
         {
             $content = '';
-            foreach($data as $type => $option)
+
+            if(isset($config->enabledLangs))
             {
-                if($type == 'enabledLangs')
+                $enabledLangs = array();
+                foreach($config->enabledLangs as $lang)
                 {
-                    $content .= '$config->enabledLangs = \'';
-                    foreach($option as $item)
-                    {
-                        $content .= "$item,";
-                    }
-                    $content  = rtrim($content, ',');
-                    $content .= "';\n";
+                    if(isset($this->config->langs[$lang])) $enabledLangs[] = $lang;
                 }
-                if((in_array('zh-tw', $data->enabledLangs) == true) and $type == 'cn2tw')
-                {
-                    $content .= '$config->cn2tw = ' . $option[0] . ";\n";
-                }
-                if($type == 'defaultLang')
-                {
-                    $content .= '$config->defaultLang = \'' . $option . "';\n";
-                }
-                if($type == 'requestType')
-                {
-                    $content .= '$config->requestType = \'' . $option. "';\n";
-                }
+                $content .= '$config->enabledLangs = \'' . join(',', $enabledLangs) . "';\n";
             }
+
+            if(isset($config->cn2tw) and in_array('zh-tw', $enabledLangs))
+            {
+                if(is_array($config->cn2tw)) $config->cn2tw = $config->cn2tw[0];
+                $config->cn2tw = (int) $config->cn2tw;
+                $content .= '$config->cn2tw = ' . $config->cn2tw . ";\n";
+            }
+
+            if(isset($config->defaultLang) and in_array($config->defaultLang, $enabledLangs))
+            {
+                $content .= '$config->defaultLang = \'' . $config->defaultLang . "';\n";
+            }
+
+            if(isset($config->requestType) and strpos('GET,PATH_INFO,PATH_INFO2', $config->requestType) !== false)
+            {
+                $content .= '$config->requestType = \'' . $config->requestType. "';\n";
+            }
+
             file_put_contents($myFile, $rawContent . $content);
             dao::$changedTables[] = TABLE_CONFIG;
             return array('result' => 'success', 'message' => $this->lang->saveSuccess); 
