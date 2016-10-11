@@ -504,13 +504,11 @@ class site extends control
             $this->view->pass   = $pass;
             $this->view->okFile = $okFile;
             if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
-        }
 
-        if($_POST)
-        {
             $result = $this->site->setSystem();
             $this->send($result);
         }
+
         $this->view->title = $this->lang->site->setSystem;
         $this->display();
     }
