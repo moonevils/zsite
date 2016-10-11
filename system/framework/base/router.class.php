@@ -1568,6 +1568,7 @@ class baseRouter
      */
     public function loadModule()
     {
+        $appName    = $this->appName;
         $moduleName = $this->moduleName;
         $methodName = $this->methodName;
 
@@ -1610,7 +1611,11 @@ class baseRouter
             $name = $param->getName();
 
             $default = '_NOT_SET';
-            if(isset($paramDefaultValue[$className][$methodName][$name]))
+            if(isset($paramDefaultValue[$appName][$className][$methodName][$name]))
+            {
+                $default = $paramDefaultValue[$appName][$className][$methodName][$name];
+            }
+            elseif(isset($paramDefaultValue[$className][$methodName][$name]))
             {
                 $default = $paramDefaultValue[$className][$methodName][$name];
             }
@@ -1979,7 +1984,6 @@ class baseRouter
         /* 计算最终要加载的语言文件。 Get the lang files to be loaded. */
         $langFilesToLoad = array_merge($langFilesToLoad, $extLangFiles);
         if(empty($langFilesToLoad)) return false;
-
 
         /* 加载语言文件。Load lang files. */
         global $lang;
