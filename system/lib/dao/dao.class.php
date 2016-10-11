@@ -36,8 +36,8 @@ class dao extends baseDAO
      */
     public function exec($sql = '')
     {
-        parent::exec($sql);
         self::$changedTables[] = $this->table;
+        parent::exec($sql);
     }
 }
 
