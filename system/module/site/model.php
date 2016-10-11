@@ -30,32 +30,35 @@ class siteModel extends model
      * @access public
      * @return void
      */
-    public function setSystem()
+    public function setSystem($data = null)
     {
         $errors ='';
-        $data   = fixer::input('post')->get();
+        If(empty($data)) $data = fixer::input('post')->get();
+        $myFile = $this->app->getConfigRoot() . 'my.php';
 
-        $configRoot   = $this->app->getConfigRoot();
-        $systemConfig = $configRoot . 'custom.php';
-        
-        if(!file_exists($systemConfig))
+        $rawContent = file_get_contents($myFile);
+        $rawContent = preg_replace('/.*config\->requestType.*\n/', '', $rawContent);
+        $rawContent = preg_replace('/.*config\->cn2tw.*\n/', '', $rawContent);
+        $rawContent = preg_replace('/.*config\->enabledLangs.*\n/', '', $rawContent);
+        $rawContent = preg_replace('/.*config\->defaultLang.*\n/', '', $rawContent);
+        $rawContent = str_replace('?>', '', $rawContent);
+
+        if(!file_exists($myFile))
         {
-            $command = "touch $configRoot";
+            $command = "touch $myFile";
             $error   = sprintf($this->lang->site->fileRequired, $command);
             $errors['submit'] = $error;
             return array('result' => 'fail', 'message' => $errors);
         }
         
-        if(file_exists($systemConfig) and is_writable($systemConfig) !== true)
+        if(file_exists($myFile) and is_writable($myFile) !== true)
         {
-            $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $systemConfig);
+            $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $myFile);
             $errors['submit'] = $error;
             return array('result' => 'fail', 'message' => $errors);
         }        
-        if(file_exists($systemConfig) and is_writable($systemConfig))
+        else
         {
-            file_put_contents($systemConfig, "<?php\n");
-            
             $content = '';
             foreach($data as $type => $option)
             {
@@ -82,7 +85,7 @@ class siteModel extends model
                     $content .= '$config->requestType = \'' . $option. "';\n";
                 }
             }
-            file_put_contents($systemConfig, $content, FILE_APPEND);
+            file_put_contents($myFile, $rawContent . $content);
             dao::$changedTables[] = TABLE_CONFIG;
             return array('result' => 'success', 'message' => $this->lang->saveSuccess); 
         }

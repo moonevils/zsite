@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of upgrade module of chanzhiEPS.
@@ -150,6 +151,9 @@ class upgradeModel extends model
             case '5_3_2':
                 $this->fixHeaderBlock();
             case '5_3_3';
+            case '5_3_4':
+                $this->fixCustomConfig();
+                $this->execSQL($this->getUpgradeFile('5.3.4'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -211,6 +215,7 @@ class upgradeModel extends model
             case '5_3_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.1'));
             case '5_3_2'    ; 
             case '5_3_3'    ; 
+            case '5_3_4'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.4'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -2022,11 +2027,35 @@ class upgradeModel extends model
      */
     public function processCDN()
     {
-        $cdnSite = $this->dao->select('*')->from(TABLE_CONFIG)->where('section')->eq('cdn')->andWhere('`key`')->eq('site')->fetchAll();
-        if(!empty($cdnSite) and !empty($cdnSite[0]->value) and strpos($cdnSite[0]->value, 'http://cdn.chanzhi.org') !== false)
-        {
-            $this->dao->delete()->from(TABLE_CONFIG)->where('section')->eq('cdn')->andWhere('`key`')->eq('site')->exec();
-        }
-        return true;
+        $this->dao->delete()->from(TABLE_CONFIG)
+            ->where('section')->eq('cdn')
+            ->andWhere('`key`')->eq('site')
+            ->andWhere('value')->like('http://cdn.chanzhi.org/%')
+            ->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Fix custom config.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixCustomConfig()
+    {
+        $setting = $this->dao->setAutolang(false)->select('`key`, value')->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('site')
+            ->andWhere('`key`')->in('lang,requestType,defaultLang,cn2tw')
+            ->fetchPairs();
+
+        $this->loadModel('site')->setSystem($setting);
+        $this->dao->setAutolang(false)->delete()->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('site')
+            ->andWhere('`key`')->in('lang,requestType,defaultLang,cn2tw')
+            ->exec();
     }
 }

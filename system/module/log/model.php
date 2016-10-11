@@ -32,7 +32,7 @@ class logModel extends model
         }
 
         $visitor = fixer::input('get')
-            ->add('device', $this->app->device)
+            ->add('device', $this->app->clientDevice)
             ->add('osName', helper::getOS())
             ->add('browserName', $browserName)
             ->add('browserVersion', $browserVersion)
@@ -182,7 +182,7 @@ class logModel extends model
         $log->day      = $day;
         $log->hour     = $hour;
         $log->new      = $visitor->new ? 1 : 0;
-        $log->mobile   = $this->app->device == 'mobile' ? 1 : 0;
+        $log->mobile   = $this->app->clientDevice == 'mobile' ? 1 : 0;
         $this->dao->insert(TABLE_STATLOG)->data($log)->exec();
 
         /* Save basic report data. */
