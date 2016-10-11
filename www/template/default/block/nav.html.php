@@ -1,5 +1,5 @@
 <?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
-<nav id='navbar' class='navbar'>
+<nav id='navbar' class='navbar' data-type='desktop_top'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
       <span class='icon-bar'></span>
@@ -8,7 +8,7 @@
     </button>
     <a class='navbar-brand' href='<?php echo helper::createLink('index');?>'><i class='icon-home'></i></a>
   </div>
-  <div class='collapse navbar-collapse' id='navbarCollapse' data-ve='navbar' data-type='desktop_top'>
+  <div class='collapse navbar-collapse' id='navbarCollapse'>
     <ul class='nav navbar-nav'>
       <?php $navCount = count($topNavs);?>
       <?php $i =0;?>
