@@ -2049,7 +2049,7 @@ class upgradeModel extends model
             ->andWhere('section')->eq('site')
             ->andWhere('`key`')->in('lang,requestType,defaultLang,cn2tw')
             ->fetchPairs();
-
+        if(isset($setting->lang)) $setting->enabledLangs = explode(',', $setting->lang);
         $this->loadModel('site')->setSystem($setting);
         $this->dao->setAutolang(false)->delete()->from(TABLE_CONFIG)
             ->where('owner')->eq('system')
