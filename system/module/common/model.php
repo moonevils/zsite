@@ -344,7 +344,7 @@ class commonModel extends model
         if(!empty($allowedDomains))
         {
             if(strpos($allowedDomains, $httpHost) !== false) return true;
-            if(!empty($mainDomain) and helper::getSiteCode($httpHost) == helper::getSiteCode($mainDomain)) return true;
+            if(!empty($mainDomain) and helper::parseSiteCode($httpHost) == helper::parseSiteCode($mainDomain)) return true;
             die('domain denied.');
         }
     }
