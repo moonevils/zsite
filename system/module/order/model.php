@@ -267,6 +267,8 @@ class orderModel extends model
         $orderID = 0;
         if($mode == 'return')
         {
+            unset($_GET['type']);
+            unset($_GET['mode']);
             if($alipay->checkNotify($_GET) and ($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS' or $this->get->trade_status == 'WAIT_SELLER_SEND_GOODS'))
             {
                 $orderID = $this->get->out_trade_no;
