@@ -9,22 +9,22 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->file->common        = 'Attachment';
-$lang->file->upload        = 'Upload';
+$lang->file->common        = 'File';
+$lang->file->upload        = 'Upload ';
 $lang->file->browse        = 'File List';
 $lang->file->imageList     = 'Image List';
 $lang->file->download      = 'Download';
 $lang->file->edit          = 'Edit';
 $lang->file->primary       = 'Cover';
 $lang->file->name          = 'Title';
-$lang->file->setPrimary    = 'Set as Cover.';
+$lang->file->setPrimary    = 'Set as Cover';
 $lang->file->cancelPrimary = 'Remove Cover';
 $lang->file->deny          = 'Disable';
 $lang->file->allow         = 'Enable';
 $lang->file->toggle        = 'Switch';
 $lang->file->label         = 'Title';
 $lang->file->lblInfo       = '<i>(Type %s, Size %s, Added on %s，Download %s times)</i>';
-$lang->file->limit         = "(<span class='text-danger'> no more than %sM</span>)";
+$lang->file->limit         = "(<span class='text-danger'>less than %sM</span>)";
 $lang->file->source        = 'Source';
 $lang->file->sourceList    = 'Source List';
 $lang->file->uploadSource  = 'Upload';
@@ -39,7 +39,7 @@ $lang->file->pathname  = 'Path Name';
 $lang->file->extension = 'Type';
 $lang->file->size      = 'Size';
 $lang->file->addedBy   = 'Uploaded By';
-$lang->file->addedDate = 'Uploaded on';
+$lang->file->addedDate = 'Uploaded On';
 $lang->file->public    = 'Anonymous Download';
 $lang->file->downloads = 'Downloads';
 $lang->file->score     = 'Points Required';

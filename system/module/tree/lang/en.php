@@ -11,24 +11,24 @@
  */
 $lang->tree->add         = "Add";
 $lang->tree->edit        = "Edit";
-$lang->tree->addChild    = "Add a Sub";
+$lang->tree->addChild    = "Add a Child";
 $lang->tree->delete      = "Delete";
 $lang->tree->browse      = "View Category";
-$lang->tree->manage      = "Category Admin";
+$lang->tree->manage      = "Manage Category";
 $lang->tree->fix         = "Fix Data";
 $lang->tree->children    = "Subcategory";
 $lang->tree->layout      = 'Layout';
 
 $lang->tree->common           = 'Category';
-$lang->tree->noCategories     = 'Please create a category.';
+$lang->tree->noCategories     = 'Please create a category first.';
 $lang->tree->timeCountDown    = "<strong id='countDown'>3</strong> seconds later, it will be redirected to Category page.";
-$lang->tree->redirect         = 'Redirect Now';
+$lang->tree->redirect         = 'Redirecting...';
 $lang->tree->aliasRepeat      = 'Alias %s is existed. Do not add it again.';
 $lang->tree->aliasConflict    = 'Alias %s is conflicted with system module. Do not add it.';
-$lang->tree->aliasNumber      = 'Alias cannot be numbers.';
-$lang->tree->hasChildren      = 'This board belongs to a sub board. Do not delete it.';
+$lang->tree->aliasNumber      = 'Alias should not be numbers.';
+$lang->tree->hasChildren      = 'This board belongs to a SubBoard. Do not delete it.';
 $lang->tree->confirmDelete    = "Do you want to delete this category?";
-$lang->tree->successFixed     = "Fixed!";
+$lang->tree->successFixed     = "Done!";
 $lang->tree->browseByCategory = 'View by Category';
 
 $lang->tree->placeholder = new stdclass();
@@ -43,7 +43,7 @@ $lang->category->alias      = 'Alias';
 $lang->category->parent     = 'Parent Category';
 $lang->category->desc       = 'Description';
 $lang->category->keywords   = 'Keyword';
-$lang->category->children   = "Child Category";
+$lang->category->children   = "Child";
 $lang->category->unsaleable = 'Not for Sale';
 $lang->category->isLink     = 'Jump';
 $lang->category->link       = 'Link';
@@ -51,7 +51,7 @@ $lang->category->link       = 'Link';
 /* Lang items for forum. */
 $lang->board = new stdclass();
 $lang->board->common     = 'Board';
-$lang->board->name       = 'Board Name';
+$lang->board->name       = 'Name';
 $lang->board->abbr       = 'Abbreviation';
 $lang->board->alias      = 'Alias';
 $lang->board->parent     = 'Parent Board';
@@ -68,12 +68,12 @@ $lang->board->readonlyList[1] = 'Read Only';
 
 $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = 'Use comma to separate user names';
-$lang->board->placeholder->setChildren = 'Set secondary board to display forum.';
+$lang->board->placeholder->setChildren = 'You have to set a child board to display forum.';
 
 /* Lang items for express. */
 $lang->express = new stdclass();
-$lang->express->common = 'Express';
-$lang->express->name   = 'Express Name';
+$lang->express->common = 'Shipping Carrier';
+$lang->express->name   = 'Carrier Name';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();

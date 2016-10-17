@@ -28,7 +28,7 @@ $lang->cn = '简';
 $lang->tw = '繁';
 $lang->en = 'EN';
 
-$lang->toBeAdded = 'To be added';
+$lang->toBeAdded = 'Add';
 
 $lang->about  = 'About';
 $lang->thanks = 'Acknowledgement';
@@ -49,9 +49,9 @@ $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>"
 $lang->todayIs          = 'Today is %s，';
 $lang->aboutUs          = 'About Us';
 $lang->link             = 'Links';
-$lang->frontHome        = 'Frontend';
+$lang->frontHome        = 'Front End';
 $lang->forumHome        = 'Forum';
-$lang->bookHome         = 'Manual';
+$lang->bookHome         = 'Book';
 $lang->dashboard        = 'Dashboard';
 $lang->visualEdit       = 'Visual Editor';
 $lang->editMode         = 'Edit Mode';
@@ -68,7 +68,7 @@ $lang->currentPos       = 'Current Page';
 $lang->categoryMenu     = 'Menu';
 $lang->wechatTip        = 'Wechat Subscribe';
 $lang->qrcodeTip        = 'QR Code';
-$lang->language         = 'Lang';
+$lang->language         = 'Language';
 $lang->custom           = 'Custom';
 
 /* Global action items. */
@@ -83,7 +83,7 @@ $lang->confirm        = 'Confirm';
 $lang->addToBlacklist = 'Block';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
-$lang->goback         = 'Return';
+$lang->goback         = 'Back';
 $lang->more           = 'More';
 $lang->refresh        = 'Refresh';
 $lang->actions        = 'Action';
@@ -92,15 +92,15 @@ $lang->year           = 'Year';
 $lang->selectAll      = 'Select All';
 $lang->selectReverse  = 'Select Reverse';
 $lang->loading        = 'Loading...';
-$lang->saveSuccess    = 'Saved';
-$lang->setSuccess     = 'Set';
-$lang->createSuccess  = 'Created';
-$lang->sendSuccess    = 'Sent';
+$lang->saveSuccess    = 'Done';
+$lang->setSuccess     = 'Done';
+$lang->createSuccess  = 'Done';
+$lang->sendSuccess    = 'Done';
 $lang->deleteSuccess  = 'Deleted';
 $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No match found!';
-$lang->alias          = 'For SEO. Use letters and numbers.';
-$lang->keywordsHolder = 'Use commas to delimit keywords.';
+$lang->alias          = 'For SEO, use letters and numbers.';
+$lang->keywordsHolder = 'Use commas to separate keywords.';
 
 $lang->setOkFile = <<<EOT
 <h5>Please confirm your admin account by following steps below.</h5>
@@ -125,13 +125,13 @@ $lang->js->timeout          = 'Timeout. Please try it again.';
 $lang->js->errorThrown      = '<h4> Error </h4>';
 $lang->js->continueShopping = 'Continue shopping';
 $lang->js->required         = 'Required';
-$lang->js->back             = 'Return';
+$lang->js->back             = 'Back';
 $lang->js->continue         = 'Continue';
 
 /* Contact fields*/
 $lang->company = new stdclass();
 $lang->company->contactUs = 'Contact Us';
-$lang->company->contacts  = 'Contact';
+$lang->company->contacts  = 'Contacts';
 $lang->company->address   = 'Address';
 $lang->company->phone     = 'Phone';
 $lang->company->email     = 'Email';
@@ -155,8 +155,8 @@ $lang->groups->shop     = array('title' => 'Mall', 'link' => 'order|admin|',    
 $lang->groups->user     = array('title' => 'User', 'link' => 'user|admin|',                'icon' => 'group');
 $lang->groups->promote  = array('title' => 'SEO', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
 $lang->groups->design   = array('title' => 'UI', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
-$lang->groups->open     = array('title' => 'EXT', 'link' => 'package|browse|',            'icon' => 'cloud');
-$lang->groups->setting  = array('title' => 'SET', 'link' => 'site|setbasic|',             'icon' => 'cog');
+$lang->groups->open     = array('title' => 'Ext', 'link' => 'package|browse|',            'icon' => 'cloud');
+$lang->groups->setting  = array('title' => 'Set', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
 /* The main menus. */
 $lang->menu = new stdclass();
@@ -191,13 +191,13 @@ $lang->menu->block    = 'Block|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
 $lang->menu->others   = "Settings|ui|others|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i>Visualize|visual|index|";
-$lang->menu->edit     = "Edit templates|ui|edittemplate|";
+$lang->menu->edit     = "Templates|ui|edittemplate|";
 
 $lang->menu->site     = 'Site|site|setbasic|';
 $lang->menu->security = 'Security|site|setsecurity|';
 
-$lang->menu->package    = 'Plug-ins|package|browse|';
-$lang->menu->themestore = 'Themes|ui|themestore|';
+$lang->menu->package    = 'Extensions|package|browse|';
+$lang->menu->themestore = 'Theme|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
@@ -230,7 +230,7 @@ $lang->express = new stdclass();
 $lang->orderSetting = new stdclass();
 $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = 'Settings|product|setting|';
-$lang->orderSetting->menu->express      = 'Express|tree|browse|type=express';
+$lang->orderSetting->menu->express      = 'Shipping Carrier|tree|browse|type=express';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -245,9 +245,9 @@ $lang->theme = new stdclass();
 $lang->theme->menu = new stdclass();
 $lang->theme->menu->theme   = 'Theme|ui|settemplate|';
 $lang->theme->menu->layout  = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
-$lang->theme->menu->custom  = 'UI|ui|customtheme|';
+$lang->theme->menu->custom  = 'Appearance|ui|customtheme|';
 $lang->theme->menu->code    = 'Code|ui|setcode|';
-$lang->theme->menu->source  = 'Source|file|browsesource|';
+$lang->theme->menu->source  = 'Source Library|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -272,15 +272,15 @@ $lang->site->menu->system   = 'System|site|setsystem|';
 $lang->site->menu->domain   = 'Domain Settings|site|setdomain|';
 $lang->site->menu->cdn      = 'CDN Settings|site|setcdn|';
 $lang->site->menu->cache    = 'Cache Settings|site|setcache|';
-$lang->site->menu->home     = 'Home Menu|site|sethomemenu|';
+$lang->site->menu->home     = 'Homepage Menu|site|sethomemenu|';
 $lang->site->menu->company  = 'Company Info|company|setbasic|';
-$lang->site->menu->contact  = 'Contact Us|company|setcontact|';
+$lang->site->menu->contact  = 'Company Contact|company|setcontact|';
 $lang->site->menu->oauth    = 'Set Oauth|site|setoauth|';
 $lang->site->menu->mail     = array('link' => 'Email Settings|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => 'Wechat Settings|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search   = 'Full Text Retrieval|search|buildindex|';
 $lang->site->menu->score    = 'Points|score|setcounts|';
-$lang->site->menu->backup   = 'Backup Restore|backup|index|';
+$lang->site->menu->backup   = 'Backup/Restore|backup|index|';
 //$lang->site->menu->api      = 'API|site|setapi|';
 
 /* Menu of security module. */
@@ -291,11 +291,11 @@ $lang->security->menu->filter    = 'Filter|site|setfilter|';
 $lang->security->menu->blacklist = 'Blacklist|guarder|setblacklist|';
 $lang->security->menu->whitelist = 'Whitelist|guarder|setwhitelist|';
 $lang->security->menu->sensitive = 'Sensitive Words|site|setsensitive|';
-$lang->security->menu->captcha   = 'Verification Code|guarder|setcaptcha|';
-$lang->security->menu->upload    = 'Upload|site|setupload|';
-$lang->security->menu->admin     = 'Admin|user|admin|admin=1';
+$lang->security->menu->captcha   = 'Security Questions|guarder|setcaptcha|';
+$lang->security->menu->upload    = 'Attachment Upload|site|setupload|';
+$lang->security->menu->admin     = 'Administrators|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => 'Group Privilege|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log       = 'Log|user|adminlog|';
+$lang->security->menu->log       = 'Login Log|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
@@ -342,7 +342,7 @@ $lang->stat->menu->traffic  = 'Traffic|stat|traffic|';
 $lang->stat->menu->from     = 'Source|stat|from|';
 $lang->stat->menu->domains  = array('link' => 'Domain|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
 $lang->stat->menu->search   = 'Search Engine|stat|search|';
-$lang->stat->menu->keywords = 'Keyword|stat|keywords|';
+$lang->stat->menu->keywords = 'Keywords|stat|keywords|';
 $lang->stat->menu->client   = 'Client|stat|client|type=browser';
 $lang->stat->menu->page     = 'Page Click|stat|page|';
 $lang->stat->menu->setStat  = 'Settings|stat|setting|';
@@ -368,13 +368,13 @@ $lang->error->URL          = '<strong>%s</strong> should be valid URL.';
 $lang->error->date         = '<strong>%s</strong> should be valid date.';
 $lang->error->account      = '<strong>%s</strong> should be any combination of letters and numbers and must be a minimum of 3 characters.';
 $lang->error->passwordsame = 'Passwords should match.';
-$lang->error->passwordrule = 'Password should be minimum of 6 characters and meet its setting requirement.';
-$lang->error->captcha      = 'Please enter verification code correctly.';
-$lang->error->noWritable   = '%s is not writable. Please update your permission!';
+$lang->error->passwordrule = 'Password should be a minimum of 6 characters and meet its setting requirement.';
+$lang->error->captcha      = 'Please enter correct verification code.';
+$lang->error->noWritable   = '%s is not writable. Please update your privilege!';
 $lang->error->fingerprint  = 'Authentication expired. Please try again!';
 $lang->error->token        = 'Must be letters/numbers and the characters between 3-32.';
 $lang->error->sensitive    = 'No sensitive words allowed!';
-$lang->error->noRepeat     = 'No duplicated content, please!';
+$lang->error->noRepeat     = 'No duplicated content!';
 
 /* The pager items. */
 $lang->pager = new stdclass();

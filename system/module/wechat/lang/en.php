@@ -37,7 +37,7 @@ $lang->wechat->deleteResponse = 'Remove Response';
 $lang->wechat->reply          = 'Reply';
 $lang->wechat->commitMenu     = 'Menu';
 $lang->wechat->deleteMenu     = 'Delete Menu';
-$lang->wechat->messageList    = 'Message';
+$lang->wechat->messageList    = 'Messages';
 
 $lang->wechat->typeList['subscribe'] = 'Subscribe';
 $lang->wechat->typeList['service']   = 'Service';

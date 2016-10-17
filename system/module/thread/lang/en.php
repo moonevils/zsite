@@ -15,38 +15,38 @@ $lang->thread->id          = 'ID';
 $lang->thread->title       = 'Title';
 $lang->thread->board       = 'Board';
 $lang->thread->author      = 'Author';
-$lang->thread->content     = 'Content';
+$lang->thread->content     = 'Text';
 $lang->thread->file        = 'File: ';
-$lang->thread->postedDate  = 'Posted on';
+$lang->thread->postedDate  = 'Created On';
 $lang->thread->replies     = 'Reply';
 $lang->thread->views       = 'View';
 $lang->thread->lastReply   = 'Last Reply';
-$lang->thread->isLink      = 'Jump';
+$lang->thread->isLink      = 'Link';
 $lang->thread->link        = 'Link';
 
 $lang->thread->post           = 'Post';
 $lang->thread->postTo         = 'Post to';
 $lang->thread->browse         = 'Thread List';
-$lang->thread->stick          = 'Stick to Top';
-$lang->thread->edit           = 'Edit s Thread';
+$lang->thread->stick          = 'Sticky';
+$lang->thread->edit           = 'Edit';
 $lang->thread->status         = 'Status';
-$lang->thread->approve        = 'Pass';
+$lang->thread->approve        = 'Approve';
 $lang->thread->display        = 'Dispaly';
 $lang->thread->hide           = 'Hide';
 $lang->thread->show           = 'Show';
-$lang->thread->transfer       = 'Transfer';
+$lang->thread->transfer       = 'Repost';
 $lang->thread->switchStatus   = 'Hide/Display';
 $lang->thread->deleteFile     = 'Delete File';
 $lang->thread->unreplied      = "<span class='text-important'> Not Replied</span>";
 
-$lang->thread->sticks[0] = 'Do not stick';
-$lang->thread->sticks[1] = 'Stick to he Top of the Board';
-$lang->thread->sticks[2] = 'Stick to the Top Globally';
+$lang->thread->sticks[0] = 'No Sticky';
+$lang->thread->sticks[1] = 'Sticky';
+$lang->thread->sticks[2] = 'Global Sticky ';
 
 $lang->thread->displayList['hidden'] = 'Hidden';
 $lang->thread->displayList['normal'] = 'Normal';
 
-$lang->thread->statusList['wait']     = 'Not Reviewed';
+$lang->thread->statusList['wait']     = 'Pending';
 $lang->thread->statusList['approved'] = 'Approved';
 
 $lang->thread->confirmDeleteThread = "Do you want to delete it?";
@@ -58,15 +58,15 @@ $lang->thread->confirmDeleteFile   = "Do you want to delete it?";
 $lang->thread->lblEdited       = 'Last edited by %s on %s';
 $lang->thread->message         = '%s replied in #%s the thread %s, which is %s';
 $lang->thread->readonly        = 'Read Only';
-$lang->thread->successStick    = 'Sticked!';
-$lang->thread->successUnstick  = 'Cancelled the sticked!';
-$lang->thread->successHide     = 'Hidden!';
-$lang->thread->successShow     = 'Displayed!';
-$lang->thread->readonlyMessage = 'This has been set as <strong>Read Only</strong>. You can not post any replied now.';
-$lang->thread->successTransfer = 'Transferred!';
-$lang->thread->thanks          = 'It will be posted to the board once approved.';
+$lang->thread->successStick    = 'Done!';
+$lang->thread->successUnstick  = 'Cancelled!';
+$lang->thread->successHide     = 'Done!';
+$lang->thread->successShow     = 'Done!';
+$lang->thread->readonlyMessage = 'This post is <strong>Read Only</strong>. You cannot reply to it.';
+$lang->thread->successTransfer = 'Done!';
+$lang->thread->thanks          = 'It will be posted once approved.';
 
-$lang->thread->score    = 'Reward Points';
+$lang->thread->score    = 'Points';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";
 $lang->thread->scores[5]  = '+ 5';
 $lang->thread->scores[10] = '+ 10';
@@ -74,7 +74,7 @@ $lang->thread->scores[50] = '+ 50';
 $lang->thread->scores[100]= '+ 100';
 
 $lang->thread->placeholder = new stdclass();
-$lang->thread->placeholder->link = 'Enter a link. External one is OK.';
+$lang->thread->placeholder->link = 'Enter a link. External links are OK.';
 
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))

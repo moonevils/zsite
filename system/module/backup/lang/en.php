@@ -2,23 +2,23 @@
 $lang->backup->common   = 'Backup';
 $lang->backup->index    = 'Home';
 $lang->backup->history  = 'Bachup History';
-$lang->backup->delete   = 'Delete Backup';
-$lang->backup->backup   = 'Backup';
-$lang->backup->restore  = 'Restore Backup';
-$lang->backup->change   = 'Retention Time';
-$lang->backup->changeAB = 'Modify';
+$lang->backup->delete   = 'Delete';
+$lang->backup->backup   = 'Back Up';
+$lang->backup->restore  = 'Restore';
+$lang->backup->change   = 'Hold Time';
+$lang->backup->changeAB = 'Change';
 
-$lang->backup->time  = 'Backup Time';
+$lang->backup->time  = 'Hold Time';
 $lang->backup->files = 'Files';
 $lang->backup->size  = 'Size';
 
 $lang->backup->waitting       = '<span id="backupType"></span>Processing. Please wait...';
 $lang->backup->confirmDelete  = 'Do you want to delete the backup?';
 $lang->backup->confirmRestore = 'Do you want to restore the backup?';
-$lang->backup->holdDays       = 'Keep the latest %s days backup.';
+$lang->backup->holdDays       = 'last %s days backup';
 
 $lang->backup->success = new stdclass();
-$lang->backup->success->backup  = 'Backed up!';
+$lang->backup->success->backup  = 'Done!';
 $lang->backup->success->restore = 'Restored!';
 
 $lang->backup->error = new stdclass();

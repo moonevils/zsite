@@ -9,19 +9,19 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->package->common        = 'Plug-ins';
-$lang->package->browse        = 'View Plug-ins';
+$lang->package->common        = 'Extension';
+$lang->package->browse        = 'View Extensions';
 $lang->package->install       = 'Install';
 $lang->package->installAuto   = 'Auto Install';
 $lang->package->installForce  = 'Mandatory Install';
 $lang->package->uninstall     = 'Uninstal';
 $lang->package->activate      = 'Activate';
 $lang->package->deactivate    = 'Disable';
-$lang->package->obtain        = 'Get Plug-ins';
+$lang->package->obtain        = 'Get Extensions';
 $lang->package->view          = 'Details';
 $lang->package->download      = 'Download';
 $lang->package->downloadAB    = 'Download';
-$lang->package->upload        = 'Local Install';
+$lang->package->upload        = 'Local Installed';
 $lang->package->erase         = 'Clear';
 $lang->package->upgrade       = 'Upgrade';
 $lang->package->agreeLicense  = 'I have read and acknowledged the License';
@@ -82,9 +82,9 @@ $lang->package->successDownloadedPackage = 'Plug-in is downloaded.';
 $lang->package->successUploadedPackage   = 'Plug-in is uploaded.';
 $lang->package->successCopiedFiles       = 'Files is copied.';
 $lang->package->successInstallDB         = 'Databse is installed.';
-$lang->package->viewInstalled            = 'View installed plug-ins.';
-$lang->package->viewAvailable            = 'View available plug-ins';
-$lang->package->viewDeactivated          = 'View deactivated plug-ins.';
+$lang->package->viewInstalled            = 'View installed Extensions.';
+$lang->package->viewAvailable            = 'View available Extensions';
+$lang->package->viewDeactivated          = 'View deactivated Extensions.';
 $lang->package->backDBFile               = 'Relavant plug-in data has been backed up to %s ！';
 
 $lang->package->upgradeExt     = 'Upgrade';
@@ -93,14 +93,14 @@ $lang->package->upgradeVersion = '(%s has been upgraded to %s)';
 
 $lang->package->types = new stdclass();
 $lang->package->types->theme     = 'Theme';
-$lang->package->types->extension = 'Plug-ins';
-$lang->package->types->ext       = 'Plug-ins';
+$lang->package->types->extension = 'Extensions';
+$lang->package->types->ext       = 'Extensions';
 
 $lang->package->waring = 'Warning';
 
 $lang->package->errorOccurs                  = 'Error ';
-$lang->package->errorGetModules              = 'Get plug-ins from www.chanzhi.org failed. Please check your network and refresh.';
-$lang->package->errorGetPackages             = 'Get plug-ins from www.chanzhi.org failed. Please check your network, and go to <a href="http://www.chanzhi.org/extemsion" target="_blank" class="alert-link">www.chanzhi.org</a> to manually download plug-ins to install.';
+$lang->package->errorGetModules              = 'Get Extensions from www.chanzhi.org failed. Please check your network and refresh.';
+$lang->package->errorGetPackages             = 'Get Extensions from www.chanzhi.org failed. Please check your network, and go to <a href="http://www.chanzhi.org/extemsion" target="_blank" class="alert-link">www.chanzhi.org</a> to manually download Extensions to install.';
 $lang->package->errorDownloadPathNotFound    = 'Download path <strong>%s</strong> does not exist. <br />Excute <strong>mkdir -p %s</strong> in Linux to correct it.';
 $lang->package->errorDownloadPathNotWritable = 'Download path <strong>%s</strong>is not writable. <br />Excute <strong>sudo chmod 777 %s</strong>in Linux to correct it.';
 $lang->package->errorPackageFileExists       = 'A file named <strong>%s</strong> exists in this download path. <a href="%s" class="btn btn-primary loadInModal">Redo %s</a>';

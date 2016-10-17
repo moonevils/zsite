@@ -1,7 +1,7 @@
 <?php
-$lang->mail->common = 'Email Config';
+$lang->mail->common = 'Email Settings';
 $lang->mail->index  = 'Home';
-$lang->mail->detect = 'Detect';
+$lang->mail->detect = 'Testing';
 $lang->mail->edit   = 'Configure';
 $lang->mail->save   = 'Save';
 $lang->mail->test   = 'Test';
@@ -16,8 +16,8 @@ $lang->mail->port         = 'SMTP Port';
 $lang->mail->auth         = 'Verification';
 $lang->mail->username     = 'SMTP Account';
 $lang->mail->password     = 'SMTP Password';
-$lang->mail->secure       = 'Encrypt';
-$lang->mail->debug        = 'Debug';
+$lang->mail->secure       = 'Encryption';
+$lang->mail->debug        = 'Debugging';
 $lang->mail->getEmailCode = 'Email Verification Code';
 
 $lang->mail->turnonList[1] = 'On';
@@ -30,7 +30,7 @@ $lang->mail->debugList[2] = 'High';
 $lang->mail->authList[1] = 'Required';
 $lang->mail->authList[0] = 'Not Required';
 
-$lang->mail->secureList['']    = 'Not Encrypted';
+$lang->mail->secureList['']    = 'No';
 $lang->mail->secureList['ssl'] = 'ssl';
 $lang->mail->secureList['tls'] = 'tls';
 

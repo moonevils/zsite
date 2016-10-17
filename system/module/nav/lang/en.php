@@ -34,17 +34,17 @@ $lang->nav->system->company = 'About Us';
 $lang->nav->system->contact = 'Contact Us';
 $lang->nav->system->forum   = 'Forum';
 $lang->nav->system->blog    = 'Blog';
-$lang->nav->system->book    = 'Manual';
+$lang->nav->system->book    = 'Book';
 $lang->nav->system->message = 'Message';
 
-$lang->nav->desktop        = 'Top';
+$lang->nav->desktop        = 'Desktop Top';
 $lang->nav->desktop_blog   = 'Blog';
-$lang->nav->mobile_top     = 'Top';
-$lang->nav->mobile_bottom  = 'Bottom';
-$lang->nav->mobile_blog    = 'Blog';
+$lang->nav->mobile_top     = 'Mobile Top';
+$lang->nav->mobile_bottom  = 'Mobile Bottom';
+$lang->nav->mobile_blog    = 'Mobile Blog';
 
 /* Targets setting. */
 $lang->nav->targetList = array();
-$lang->nav->targetList['_self']  = 'Active window';
-$lang->nav->targetList['_blank'] = 'New window';
-$lang->nav->targetList['modal']  = 'Popout window';
+$lang->nav->targetList['_self']  = 'Active Window';
+$lang->nav->targetList['_blank'] = 'New Window';
+$lang->nav->targetList['modal']  = 'Popout Window';
