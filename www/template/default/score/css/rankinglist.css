@@ -1,3 +1,4 @@
+#nav-heading {border-bottom-width: 0px;}
 .row .panel-heading {font-weight:bold;}
 .row .panel-body dl{margin:0px}
 .row .panel-body dt{ width:75%; float:left; clear:left; line-height:1.5; font-weight:normal;}

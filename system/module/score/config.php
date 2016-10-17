@@ -32,3 +32,4 @@ $config->score->methodOptions['maxLogin']          = '';
 $config->score->setCountsNav[] = 'setCounts';
 
 $config->score->ruleNav[] = 'rule';
+$config->score->ruleNav[] = 'rankingList';
