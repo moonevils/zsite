@@ -1023,6 +1023,7 @@ class uiModel extends model
         $sqls = str_replace("{$template}_{$theme}_", "{$template}_THEME_CODEFIX_", $sqls);
         $sqls = str_replace("'{$template}_{$theme}'", "'{$template}_THEME_CODEFIX'", $sqls);
         $sqls = str_replace('\"' . $theme . '\":{\"background', '\"THEME_CODEFIX\":{\"background', $sqls);
+        $sqls = str_replace('\"' . $theme . '\":{\"color-primary', '\"THEME_CODEFIX\":{\"color-primary', $sqls);
 
         if(basename($file) != 'full.sql')
         {
