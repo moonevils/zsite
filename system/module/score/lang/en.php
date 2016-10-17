@@ -16,7 +16,7 @@ $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
 $lang->score->method  = 'Method';
 $lang->score->type    = 'Type';
-$lang->score->count   = 'Count';
+$lang->score->count   = 'Points';
 $lang->score->before  = 'Before';
 $lang->score->after   = 'After';
 $lang->score->amount  = 'Price';
@@ -70,14 +70,14 @@ $lang->score->lblDetail        = "Please refer to<a href='http://www.zentao.net/
 $lang->score->lblBuySocre      = "Purchase Points %s";
 
 $lang->score->setAmount   = 'Refill Amount';
-$lang->score->getScore    = 'Get Points';
-$lang->score->amountUnit  = 'Yuan';
-$lang->score->minAmount   = 'Min ';
-$lang->score->buyWaring   = "Min refill is %s Yuan，1 Yuan=%s Points";
-$lang->score->errorAmount = "Refill amount should be more than %s Yuan.";
+$lang->score->getScore    = 'Refill Points';
+$lang->score->amountUnit  = 'Dollar';
+$lang->score->minAmount   = 'Cent';
+$lang->score->buyWaring   = "cent refill is %s dollar，1 dollar=%s Points";
+$lang->score->errorAmount = "Refill amount should be more than %s Dollar.";
 $lang->score->alipay      = "Use AliPay right now!";
 $lang->score->paySuccess  = 'Thank you for your payment!';
-$lang->score->payFail     = 'Sorry, there is problem with your payment. Contact us if any questions.';
+$lang->score->payFail     = 'Sorry, there is a problem with your payment. Contact us if any questions.';
 $lang->score->viewHistory = 'Payment History';
 
 $lang->score->awardRule  = 'Award Point Rule';

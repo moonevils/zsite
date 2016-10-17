@@ -16,7 +16,7 @@ $lang->guarder->action       = 'Action';
 $lang->guarder->then         = 'Then';
 $lang->guarder->setBlacklist = 'Blacklist';
 $lang->guarder->setWhitelist = 'Whitelist';
-$lang->guarder->setCaptcha   = 'Verification Code';
+$lang->guarder->setCaptcha   = 'Security Questions';
 $lang->guarder->addBlacklist = 'Add to Blacklist';
 $lang->guarder->addCaptcha   = 'Add verification code';
 $lang->guarder->getEmailCode = 'Get verification code';
@@ -31,13 +31,13 @@ $lang->guarder->placeholder    = 'numbers/letters';
 $lang->guarder->password       = 'Admin Password';
 $lang->guarder->passwordHolder = 'Enter current account password';
 $lang->guarder->identityTip    = 'Enter IP, Email, account, or sensitive words.';
-$lang->guarder->captchaTip     = 'Once custom verification code set, frontend will automatically call those codes.';
+$lang->guarder->captchaTip     = 'Once security qyestions are set, the frontend will only call those questions at random.';
 
 $lang->guarder->verify        = 'Current action requires admin privilege verification for security reasons.';
 $lang->guarder->okFile        = 'File Mode';
-$lang->guarder->created       = 'Created';
+$lang->guarder->created       = 'Created and Continue';
 $lang->guarder->email         = 'Email verification';
-$lang->guarder->setSecurity   = 'Security Question';
+$lang->guarder->setSecurity   = 'Security Questions';
 $lang->guarder->captcha       = 'Verification Code';
 $lang->guarder->needVerify    = 'Admin verification is required.';
 $lang->guarder->emailFail     = 'Please enter correct verification code.';
@@ -47,30 +47,30 @@ $lang->guarder->noConfigure   = "Email settings cannot be found.";
 $lang->guarder->noEmail       = "No Email address entered";
 $lang->guarder->noQuestion    = "No security questions set up.";
 $lang->guarder->noCaptcha     = "Email verification is disabled.";
-$lang->guarder->okFileVerify  = "Please create <span class='red'>%s</span> on your web server and enter <span class='red'>%s</span>.";
+$lang->guarder->okFileVerify  = "Please create <span class='red'>%s</span> on your server and enter <span class='red'>%s</span>.";
 $lang->guarder->sendSuccess   = 'Verification code has been sent to %s';
 $lang->guarder->options       = 'Verification options';
 
 $lang->guarder->blacklistModes['all']      = 'All';
-$lang->guarder->blacklistModes['ip']       = 'IP Address';
+$lang->guarder->blacklistModes['ip']       = 'IP';
 $lang->guarder->blacklistModes['account']  = 'Account';
 $lang->guarder->blacklistModes['keywords'] = 'Keyword';
 $lang->guarder->blacklistModes['guard']    = 'Website';
 $lang->guarder->blacklistModes['email']    = 'Email';
 
 $lang->guarder->whitelist = new stdclass();
-$lang->guarder->whitelist->ip            = 'IP whitelist';
+$lang->guarder->whitelist->ip            = 'IP Whitelist';
 $lang->guarder->whitelist->account       = 'Account whitelist';
-$lang->guarder->whitelist->accountHolder = 'Multiple accounts, please use comma to separate them, such as zhangsan, lisi';
-$lang->guarder->whitelist->ipHolder      = 'Multiple IP, please use comma to separate them, such as 202.194.133.1,202.194.132.0/28';
+$lang->guarder->whitelist->accountHolder = 'use comma to separate multiple accounts, such as John, Jeff.';
+$lang->guarder->whitelist->ipHolder      = 'use comma to separate multiple IP, such as 202.194.133.1, 202.194.132.0/28';
 $lang->guarder->whitelist->wrongIP       = 'IP Error';
 
 $lang->guarder->permanent = 'Permanent';
-$lang->guarder->interval  = 'within mins';
+$lang->guarder->interval  = 'mins';
 $lang->guarder->perDay    = 'exceed per day';
-$lang->guarder->exceed    = 'exceed';
-$lang->guarder->times     = 'times';
-$lang->guarder->disable   = 'Disable';
+$lang->guarder->exceed    = ' more';
+$lang->guarder->times     = 'times ';
+$lang->guarder->disable   = ' disable it for';
 
 $lang->guarder->operationList = new stdclass();
 

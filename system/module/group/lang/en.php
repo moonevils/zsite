@@ -9,10 +9,10 @@
  * @version     $Id: en.php 4719 2013-05-03 02:20:28Z chencongzhi520@gmail.com $
  * @link        http://www.ranzhico.com
  */
-$lang->group->common             = 'Group Privilege';
+$lang->group->common             = 'Privilege';
 $lang->group->allGroups          = 'All Privilege';
-$lang->group->browse             = 'Browse Group';
-$lang->group->create             = 'Add';
+$lang->group->browse             = 'Group List';
+$lang->group->create             = 'Create a Group';
 $lang->group->edit               = 'Edit';
 $lang->group->copy               = 'Copy';
 $lang->group->delete             = 'Delete';
@@ -20,7 +20,7 @@ $lang->group->managePriv         = 'Privilege';
 $lang->group->managePrivByGroup  = 'Group Privilege';
 $lang->group->managePrivByModule = 'Module Privilege';
 $lang->group->byModuleTips       = '<span class="tips">(Press shift/control to multiselect.)</span>';
-$lang->group->manageMember       = 'Member Mgmt';
+$lang->group->manageMember       = 'Member';
 $lang->group->linkMember         = 'Associate Member';
 $lang->group->unlinkMember       = 'Unassociate Member';
 $lang->group->confirmDelete      = 'Do you want to delete this member?';
@@ -28,15 +28,15 @@ $lang->group->successSaved       = 'Saved';
 $lang->group->errorNotSaved      = 'Not saved. Please choose privilege.';
 
 $lang->group->id       = 'ID';
-$lang->group->name     = 'Group Name';
-$lang->group->desc     = 'Group Description';
+$lang->group->name     = 'Name';
+$lang->group->desc     = 'Description';
 $lang->group->users    = 'User List';
 $lang->group->module   = 'Module';
 $lang->group->method   = 'Function';
 $lang->group->priv     = 'Privilege';
 $lang->group->option   = 'Option';
-$lang->group->inside   = 'Users within group';
-$lang->group->outside  = 'Users from outside';
+$lang->group->inside   = 'Group Member';
+$lang->group->outside  = 'Non Group Member';
 $lang->group->other    = 'Other Modules';
 $lang->group->all      = 'All Privilege';
 $lang->group->extent   = 'Privilege Scope';

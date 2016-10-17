@@ -11,10 +11,10 @@
  */
 $lang->company->common  = "Company";
 
-$lang->company->name    = "Company Name";
-$lang->company->desc    = "Company Description";
-$lang->company->content = "Conpamy Intro";
-$lang->company->contact = "Contact Us";
+$lang->company->name    = "Name";
+$lang->company->desc    = "Brief Introduction";
+$lang->company->content = "Description";
+$lang->company->contact = "Contact";
 $lang->company->qrcode  = "QR Code";
 
 $lang->company->setBasic   = "Company Info";

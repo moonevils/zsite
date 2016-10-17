@@ -1,6 +1,6 @@
 <?php
 $lang->address->common  = 'Address';
-$lang->address->address = 'Detailed Address';
+$lang->address->address = 'Address';
 $lang->address->phone   = 'Phone';
 $lang->address->zipcode = 'zip code';
 $lang->address->contact = 'Contact';

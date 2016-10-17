@@ -11,5 +11,5 @@
  */
 $lang->blog->common    = 'Blog';
 $lang->blog->home      = 'Blog Home';
-$lang->blog->siteHome  = 'Website Home';
+$lang->blog->siteHome  = 'Homepage';
 $lang->blog->subscribe = 'Subscribe';

@@ -1,12 +1,12 @@
 <?php
-$lang->book->common       = 'Manual';
+$lang->book->common       = 'Book';
 $lang->book->list         = 'List';
 $lang->book->articles     = 'Articles';
 $lang->book->backtolist   = 'Back to List';
 
-$lang->book->admin      = 'Manual List';
-$lang->book->createBook = 'Add a Manual';
-$lang->book->create     = 'Add';
+$lang->book->admin      = 'Book List';
+$lang->book->createBook = 'Add a Book';
+$lang->book->create     = 'Add a Book';
 $lang->book->catalog    = 'Chapter';
 $lang->book->edit       = 'Edit';
 $lang->book->sort       = 'Sort';
@@ -36,7 +36,7 @@ $lang->book->chapterList = 'Contents';
 $lang->book->articleList = 'Article';
 $lang->book->fullScreen  = 'Full Screen';
 
-$lang->book->typeList['book']    = 'Manual';
+$lang->book->typeList['book']    = 'Book';
 $lang->book->typeList['chapter'] = 'Chapter';
 $lang->book->typeList['article'] = 'Article';
 

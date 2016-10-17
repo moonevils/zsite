@@ -13,7 +13,7 @@ $lang->slide->common     = 'Slide';
 $lang->slide->group      = 'Category';
 $lang->slide->title      = 'Title';
 $lang->slide->groupName  = 'Group Name';
-$lang->slide->titleColor = 'Title Name';
+$lang->slide->titleColor = 'Name';
 $lang->slide->image      = 'Image';
 $lang->slide->mainLink   = 'Link';
 $lang->slide->summary    = 'Summary';
@@ -37,13 +37,13 @@ $lang->slide->height      = 'Height';
 $lang->slide->url         = 'URL';
 $lang->slide->buttonUrl   = 'Button URL';
 $lang->slide->buttonColor = 'Color';
-$lang->slide->sourceImage = 'Source Image';
+$lang->slide->sourceImage = 'Image Library';
 
 $lang->slide->sort        = 'Sort';
 $lang->slide->admin       = 'Slide Settings';
 $lang->slide->browse      = 'View Slides';
 $lang->slide->create      = 'Add a Slide';
-$lang->slide->edit        = 'Edit a Slide';
+$lang->slide->edit        = 'Edit';
 $lang->slide->createGroup = 'Add a Group';
 $lang->slide->editGroup   = 'Edit a Group';
 $lang->slide->removeGroup = 'Delete a Group';
@@ -51,11 +51,11 @@ $lang->slide->return      = 'Return to List';
 $lang->slide->rename      = 'Rename';
 $lang->slide->removeGroup = 'Delete a Group';
 
-$lang->slide->successSort     = 'Sorting Saved!';
-$lang->slide->noImageSelected = 'Choose an Image';
-$lang->slide->suitableSize    = 'Image size should be the same.';
-$lang->slide->noChange        = 'No Change.';
-$lang->slide->groupNotEmpty   = 'Group name should not be blank.';
+$lang->slide->successSort     = 'Done!';
+$lang->slide->noImageSelected = 'Select an Image';
+$lang->slide->suitableSize    = 'Sizes of images hould be the same.';
+$lang->slide->noChange        = 'Nothing changed.';
+$lang->slide->groupNotEmpty   = 'Group name should not be empty.';
 
 $lang->slide->defaultGroup = 'Default Group';
 
