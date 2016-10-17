@@ -82,7 +82,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
       $url   = helper::createLink('article', 'view', "id={$article->id}", $alias);
       ?>
       <?php if(isset($content->time)):?>
-      <li>
+      <li class='addDataList'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -92,11 +92,13 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
-        <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
-        <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
+        <span class='pull-right'>
+            <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+            <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
+        </span>      
       </li>
       <?php else:?>
-      <li>
+      <li class='notDataList'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -106,7 +108,9 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
-        <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+        <span class='pull-right'>
+            <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+        </span>
       </li>
       <?php endif;?>
       
@@ -116,7 +120,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
   <?php endif;?>
 </div>
 <style>
-    .ul-list li{padding-right:40px !important;}
-    .ul-list li span{position:absolute !important;right:10px;top:4px !important;}
+    .ul-list .addDataList{padding-right:126px !important;}
+    .ul-list .notDataList{padding-right:60px !important;}
 </style>
 

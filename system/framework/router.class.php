@@ -146,7 +146,7 @@ class router extends baseRouter
         foreach($blocks as $block) 
         {
             if(empty($block)) continue;
-            $this->cache->clear("block/{$block}*");
+            if(isset($this->cache)) $this->cache->clear("block/{$block}*");
         }
 
         if($this->config->cache->cachePage != 'close')

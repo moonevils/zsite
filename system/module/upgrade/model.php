@@ -1,4 +1,5 @@
 <?php if(!defined("RUN_MODE")) die();?>
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of upgrade module of chanzhiEPS.
@@ -154,6 +155,7 @@ class upgradeModel extends model
             case '5_3_4':
                 $this->fixCustomConfig();
                 $this->execSQL($this->getUpgradeFile('5.3.4'));
+            case '5_4';
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2049,7 +2051,8 @@ class upgradeModel extends model
             ->andWhere('section')->eq('site')
             ->andWhere('`key`')->in('lang,requestType,defaultLang,cn2tw')
             ->fetchPairs();
-
+        if(isset($setting['lang'])) $setting['enabledLangs'] = explode(',', $setting['lang']);
+        $setting = (object) $setting;
         $this->loadModel('site')->setSystem($setting);
         $this->dao->setAutolang(false)->delete()->from(TABLE_CONFIG)
             ->where('owner')->eq('system')
