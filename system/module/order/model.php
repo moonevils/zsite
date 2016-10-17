@@ -492,6 +492,7 @@ class orderModel extends model
     {
         if(empty($order->products)) return '';
         $goods = current($order->products);
+        $goods->productName = '￥' . $order->amount . ' ' . $goods->productName;
         return $goods->productName;
     }
 
