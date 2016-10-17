@@ -102,6 +102,7 @@ class score extends control
         $this->view->monthScore = $monthScore; 
         $this->view->weekScore  = $weekScore;
         $this->view->dayScore   = $dayScore;
+        $this->view->type       = 'rankingList';
         $this->view->users      = $this->loadModel('user')->getBasicInfo($users);
         $this->display();
     }
