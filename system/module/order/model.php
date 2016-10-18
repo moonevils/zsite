@@ -526,7 +526,8 @@ class orderModel extends model
             }
 
             /* Delete order link. */
-            echo html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "data-toggle='modal' class='$class deleter'"); 
+            $disabled = ($order->status == 'expired' or $order->status == 'canceled' or $order->status == 'finished') ? false : true;
+            echo $disabled ? '' : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "data-toggle='modal' class='$class deleter'"); 
         }
 
         if(RUN_MODE == 'front')
