@@ -140,6 +140,7 @@ $config->rights->member['order']['confirmdelivery'] = 'confirmdelivery';
 $config->rights->member['order']['redirect']        = 'redirect';
 $config->rights->member['order']['edit']            = 'edit';
 $config->rights->member['order']['delete']          = 'delete';
+$config->rights->member['order']['view']            = 'view';
 
 $config->rights->member['address']['create'] = 'create';
 $config->rights->member['address']['edit']   = 'edit';

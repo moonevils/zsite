@@ -40,6 +40,7 @@
         <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th><?php echo $lang->order->note;?></th>
+        <th class='w-100px'><?php echo $lang->order->lastProcessedDate;?></th>
         <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -54,6 +55,7 @@
         <td><?php echo $order->amount;?></td>
         <td><?php echo $this->order->processStatus($order);?></td>
         <td title='<?php echo $order->note;?>' class='text-left'><?php echo $order->note;?></td>
+        <td><?php echo formatTime($order->lastProcessedDate, 'm-d H:i');?></td>
         <td class='text-left'><?php $this->order->printActions($order);?></td>
       </tr>
       <?php endforeach;?>

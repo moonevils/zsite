@@ -70,8 +70,10 @@ class order extends control
      */
     public function view($orderID)
     {
+        $order                = $this->order->getByID($orderID);
         $this->view->title    = $this->lang->order->view;
-        $this->view->order    = $this->order->getByID($orderID);
+        $this->view->order    = $order;
+        $this->view->type     = $order->type;
         $this->view->products = $this->order->getOrderProducts($orderID);
         $this->view->users    = $this->loadModel('user')->getPairs();
         $this->display();
