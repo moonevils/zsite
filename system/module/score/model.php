@@ -288,6 +288,7 @@ class scoreModel extends model
         $order = fixer::input('post')
             ->add('account', $this->app->user->account)
             ->add('createdDate', helper::now())
+            ->add('lastProcessedDate', helper::now())
             ->add('payment', 'alipay')
             ->add('status', 'normal')
             ->add('payStatus', 'not_paid')
@@ -348,6 +349,7 @@ class scoreModel extends model
                 ->set('deliveryStatus')->eq('send')->set('deliveriedDate')->eq($now)->set('deliveriedBy')->eq('system')
                 ->set('status')->eq('finished')->set('finishedDate')->eq($now)->set('finishedBy')->eq('system')
                 ->set('confirmedDate')->eq($now)
+                ->set('lastProcessedDate')->eq($now)
                 ->where('id')->eq($order->id)
                 ->exec();
         }

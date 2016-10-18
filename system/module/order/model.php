@@ -92,6 +92,7 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('account', $this->app->user->account)
             ->add('createdDate', helper::now())
+            ->add('lastProcessedDate', helper::now())
             ->add('payStatus', 'not_paid')
             ->add('status', 'normal')
             ->add('deliveryStatus', 'not_send')
@@ -325,6 +326,7 @@ class orderModel extends model
             ->set('sn')->eq($order->sn)
             ->set('payStatus')->eq('paid')
             ->set('paidDate')->eq(helper::now())
+            ->set('lastProcessedDate')->eq(helper::now())
             ->where('id')->eq($order->id)->exec();
 
         if(dao::isError()) return false;
@@ -401,6 +403,7 @@ class orderModel extends model
             ->set('status')->eq('finished')
             ->set('finishedDate')->eq(helper::now())
             ->set('finishedBy')->eq($this->app->user->account)
+            ->set('lastProcessedDate')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
         return !dao::isError();
@@ -417,6 +420,7 @@ class orderModel extends model
     {
         $this->dao->update(TABLE_ORDER)
             ->set('status')->eq('canceled')
+            ->set('lastProcessedDate')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->andWhere('account')->eq($this->app->user->account)
             ->exec();
@@ -436,6 +440,7 @@ class orderModel extends model
             ->set('payStatus')->eq('paid')
             ->set('sn')->eq($this->post->sn)
             ->set('paidDate')->eq($this->post->paidDate)
+            ->set('lastProcessedDate')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
         return !dao::isError();
@@ -510,23 +515,33 @@ class orderModel extends model
         $this->commonLink['cancelLink']  = true;
         if(is_callable(array($this, "print{$order->type}Actions"))) call_user_func(array($this, "print{$order->type}Actions"), $order, $btnLink);
 
-        if(RUN_MODE == 'admin' and $this->commonLink['savePayment'])
+        if(RUN_MODE == 'admin')
         {
             $class = $btnLink ? 'btn' : '';
-            /* Save payment link. */
-            $disabled = ($order->status == 'normal' and $order->payStatus != 'paid') ? true : false;
-            echo $disabled ? html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'") : ''; 
-            
+            if($this->commonLink['savePayment'])
+            {
+                /* Save payment link. */
+                $disabled = ($order->status == 'normal' and $order->payStatus != 'paid') ? true : false;
+                echo $disabled ? html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'") : ''; 
+            }
+
             /* Delete order link. */
             echo html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "data-toggle='modal' class='$class deleter'"); 
         }
 
-        if(RUN_MODE == 'front' and $this->commonLink['cancelLink'])
+        if(RUN_MODE == 'front')
         {
-            /* Cancel link. */
-            $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
-            $class = $btnLink ? "  btn btn-link " : "";
-            echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}' data-toggle='modal'" );
+            if($this->commonLink['cancelLink'])
+            {
+                /* Cancel link. */
+                $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
+                $class = $btnLink ? "  btn btn-link " : "";
+                echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}' data-toggle='modal'" );
+            }
+
+            /* View order link. */
+            $disabled = ($order->status == 'normal' or $order->status == 'finished') ? false : true;
+            echo $disabled ? '' : html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view, "data-toggle='modal'"); 
             
             /* Delete order link. */
             $disabled = $order->status == 'expired' ? false : true;
@@ -619,7 +634,7 @@ class orderModel extends model
         {
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('#', $this->lang->order->pay, $disabled) : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
+            echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
         }
     }
 
@@ -635,6 +650,7 @@ class orderModel extends model
         $this->dao->update(TABLE_ORDER)
             ->set('deliveryStatus')->eq('confirmed')
             ->set('confirmedDate')->eq(helper::now())
+            ->set('lastProcessedDate')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->andWhere('account')->eq($this->app->user->account)
             ->exec();
@@ -683,6 +699,7 @@ class orderModel extends model
         $delivery = fixer::input('post')
             ->add('deliveriedBy', $this->app->user->account)
             ->add('deliveryStatus', 'send')
+            ->add('lastProcessedDate', helper::now())
             ->get();
 
         $this->dao->update(TABLE_ORDER)->data($delivery)->where('id')->eq($orderID)->exec();
@@ -880,7 +897,11 @@ class orderModel extends model
      */
     public function setPayment($orderID, $payment)
     {
-        $this->dao->update(TABLE_ORDER)->set('payment')->eq($payment)->where('id')->eq($orderID)->exec();
+        $this->dao->update(TABLE_ORDER)
+            ->set('payment')->eq($payment)
+            ->set('lastProcessedDate')->eq(helper::now())
+            ->where('id')->eq($orderID)
+            ->exec();
         if(dao::isError()) return false;
         return true;
     }
@@ -909,7 +930,11 @@ class orderModel extends model
      */
     public function savePayment($orderID)
     {   
-        $data      = fixer::input('post')->remove('savepay')->get();
+        $data = fixer::input('post')
+            ->add('lastProcessedDate', helper::now())
+            ->remove('savepay')
+            ->get();
+
         $order     = $this->getByID($orderID);
         $order->sn = $data->sn;
         $this->processOrder($order);
@@ -954,7 +979,8 @@ class orderModel extends model
             $content->deliveriedBy   = $this->app->user->account;
         }
         
-        $content->note    = $data->note;
+        $content->note              = $data->note;
+        $content->lastProcessedDate = helper::now();
         
         $this->dao->update(TABLE_ORDER)->data($content)->where('id')->eq($orderID)->exec();
         
@@ -970,7 +996,11 @@ class orderModel extends model
      */
     public function deleteOrder($orderID)
     {
-        $this->dao->update(TABLE_ORDER)->set('status')->eq('deleted')->where('id')->eq($orderID)->exec();
+        $this->dao->update(TABLE_ORDER)
+            ->set('status')->eq('deleted')
+            ->set('lastProcessedDate')->eq(helper::now())
+            ->where('id')->eq($orderID)
+            ->exec();
         return !dao::isError(); 
     }
 }
