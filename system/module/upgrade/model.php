@@ -649,7 +649,7 @@ class upgradeModel extends model
      */
     public function processSiteDesc()
     {
-        $value = strip_tags(htmlspecialchars_decode($this->config->site->desc));
+        $value = strip_tags(htmlspecialchars_decode($this->config->site->desc, ENT_QUOTES));
         $this->dao->update(TABLE_CONFIG)->set('value')->eq($value)->where('`key`')->eq('desc')->andWhere('section')->eq('site')->exec();
         return !dao::isError();
     }   
