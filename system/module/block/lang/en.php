@@ -152,7 +152,7 @@ $lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
 
 $lang->block->categoryList['custom']  = 'Custom Block';
-$lang->block->categoryList['article'] = 'Article';
+$lang->block->categoryList['article'] = 'Content';
 $lang->block->categoryList['product'] = 'Product';
 $lang->block->categoryList['system']  = "System";
 
