@@ -1022,8 +1022,14 @@ class uiModel extends model
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
         $sqls = str_replace("{$template}_{$theme}_", "{$template}_THEME_CODEFIX_", $sqls);
         $sqls = str_replace("'{$template}_{$theme}'", "'{$template}_THEME_CODEFIX'", $sqls);
+
+        /* Replace theme code in custom params of themes. */
         $sqls = str_replace('\"' . $theme . '\":{\"background', '\"THEME_CODEFIX\":{\"background', $sqls);
+
+        /* Replace theme code in custom params of clrean and wide theme. */
         $sqls = str_replace('\"' . $theme . '\":{\"color-primary', '\"THEME_CODEFIX\":{\"color-primary', $sqls);
+        /* Replace theme code in block custom. */
+        $sqls = str_replace('\"' . $theme . '\":{\"iconColor\":', '\"THEME_CODEFIX\":{\"iconColor\":', $sqls);
 
         if(basename($file) != 'full.sql')
         {
