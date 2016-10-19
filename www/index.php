@@ -37,7 +37,7 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 /* Check site status. */
 if($app->config->site->status == 'pause')
 {
-    die("<div style='text-align:center'>" . htmlspecialchars_decode($app->config->site->pauseTip) . '</div>');
+    die("<div style='text-align:center'>" . htmlspecialchars_decode($app->config->site->pauseTip, ENT_QUOTES) . '</div>');
 }
 
 $app->parseRequest();
