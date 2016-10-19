@@ -84,7 +84,7 @@ class widgetModel extends model
         if(empty($widget)) return false;
         $http = $this->app->loadClass('http');
 
-        $xml = $http->get(htmlspecialchars_decode($widget->params->link));
+        $xml = $http->get(htmlspecialchars_decode($widget->params->link, ENT_QUOTES));
 
         $xpc = xml_parser_create();
         xml_parse_into_struct($xpc, $xml, $values);

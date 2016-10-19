@@ -351,7 +351,7 @@ class product extends control
     public function redirect($productID)
     {
         $product = $this->product->getByID($productID);
-        helper::header301(htmlspecialchars_decode($product->mall));
+        helper::header301(htmlspecialchars_decode($product->mall, ENT_QUOTES));
     }
 
     /**
