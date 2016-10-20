@@ -1028,8 +1028,10 @@ class uiModel extends model
 
         /* Replace theme code in custom params of clrean and wide theme. */
         $sqls = str_replace('\"' . $theme . '\":{\"color-primary', '\"THEME_CODEFIX\":{\"color-primary', $sqls);
+
         /* Replace theme code in block custom. */
         $sqls = str_replace('\"' . $theme . '\":{\"iconColor\":', '\"THEME_CODEFIX\":{\"iconColor\":', $sqls);
+        $sqls = str_replace('\"' . $theme . '\":{\"css\":', '\"THEME_CODEFIX\":{\"css\":', $sqls);
 
         if(basename($file) != 'full.sql')
         {
