@@ -153,9 +153,10 @@ class seo
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
-        if($module == 'ask' and isset($items[2]) and preg_match('/^c\d+$/', $items[1]))
+        if($module == 'ask' and isset($items[2]))
         {
-            $params['categoryID'] = str_replace('c', '', $items[1]);
+            if(preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = str_replace('c', '', $items[1]);
+            if(!preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = $items[1];
             $params['type']       = $items[2];
             $method = $methodAlias[$module]['browse'];
             return seo::convertURI($module, $method, $params, $pageID);
@@ -242,7 +243,7 @@ class seo
      */
     public static function unify($string, $to = ',')
     {
-        if($to != ' ') $string = str_replace(' ', '', $string);
+        $string = str_replace(' ', '', $string);
         $labels = array('_', '、', '-', '\n', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
         $string = str_replace($labels, $to, $string);
         return preg_replace("/[{$to}]+/", $to, trim($string, $to));
@@ -535,7 +536,13 @@ class uri
 
         $categoryID = array_shift($params);
         $type       = array_shift($params);
-
+        if(!empty($alias['name']))
+        {
+            $link = $config->webRoot . 'ask' . '/' . $alias['name'];
+            if($type) $link .= '/' . $type;
+            return $link . '.' . $viewType;
+        }
+ 
         $link = 'ask/c';
         $link .= is_numeric($categoryID) ? $categoryID : 0;
         if($type) $link .= '/' . $type;
