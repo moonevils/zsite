@@ -1938,9 +1938,11 @@ class baseRouter
         $view->sessionVar  = $this->config->sessionVar;
 
         $this->session->set('rand', mt_rand(0, 10000));
+        $this->session->set('random', $this->session->rand);
         $view->sessionName = session_name();
         $view->sessionID   = session_id();
         $view->rand        = $this->session->rand;
+        $view->random      = $this->session->random;
         $view->expiredTime = ini_get('session.gc_maxlifetime');
         $view->serverTime  = time();
 
