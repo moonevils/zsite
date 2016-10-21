@@ -207,7 +207,11 @@ class orderModel extends model
      */
     public function getHumanOrder($rawOrderID)
     {
-        return  date('ym') . str_pad($rawOrderID, 7, '0', STR_PAD_LEFT) . mt_rand(10, 99);
+        $order = $this->getByID($rawOrderID);
+        if(!empty($order->humanID)) return $order->humanID;
+        $humanID = date('ym') . str_pad($rawOrderID, 7, '0', STR_PAD_LEFT) . mt_rand(10, 99);
+        $this->dao->update(TABLE_ORDER)->set('humanID')->eq($humanID)->where('id')->eq($rawOrderID)->exec();
+        return $humanID;
     }
 
     /**

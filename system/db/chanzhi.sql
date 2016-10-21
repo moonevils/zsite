@@ -682,6 +682,7 @@ CREATE TABLE IF NOT EXISTS `eps_search_dict` (
 -- DROP TABLE IF EXISTS `eps_order`;
 CREATE TABLE IF NOT EXISTS `eps_order` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `humanID` char(13) NOT NULL,
   `account` char(30) NOT NULL,
   `amount` decimal(10,2) NOT NULL DEFAULT '0.00',
   `payment` char(30) NOT NULL,
