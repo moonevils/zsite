@@ -527,6 +527,7 @@ class baseRouter
         {
             $sessionName = $this->config->sessionVar;
             session_name($sessionName);
+            if(isset($_GET[$this->config->sessionVar])) session_id($_GET[$this->config->sessionVar]);
             session_start();
             define('SESSION_STARTED', true);
         }
