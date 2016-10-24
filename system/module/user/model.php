@@ -884,16 +884,18 @@ class userModel extends model
      */
     public function updateRelated($oldAccount, $account)
     {
-        foreach($this->config->relatedTables as $table => $field)
+        foreach($this->config->user->relatedTables as $table => $fields)
         {
-            $this->dao->update($table)
-                ->set($field)->eq($account)
-                ->where($field)->eq($oldAccount)
-                ->exec();
+            foreach($fields as $field)
+            {
+                $this->dao->update($table)
+                    ->set($field)->eq($account)
+                    ->where($field)->eq($oldAccount)
+                    ->exec();
 
-            if(dao::isError()) return false;
+                if(dao::isError()) return false;
+            }
         }
-
         return true;
     }
 
