@@ -186,7 +186,7 @@ class control extends baseControl
         $cssExtPath = $this->app->getModuleExtPath('', $moduleName, 'css') ;
 
         $css = '';
-        if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
+        if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext' . DS) !== false))
         {
             $mainCssFile   = $modulePath . 'css' . DS . $this->devicePrefix . 'common.css';
             $methodCssFile = $modulePath . 'css' . DS . $this->devicePrefix . $methodName . '.css';
@@ -235,7 +235,7 @@ class control extends baseControl
         $jsExtPath  = $this->app->getModuleExtPath('', $moduleName, 'js');
 
         $js = '';
-        if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
+        if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext' . DS) !== false))
         {
             $mainJsFile   = $modulePath . 'js' . DS . $this->devicePrefix . 'common.js';
             $methodJsFile = $modulePath . 'js' . DS . $this->devicePrefix . $methodName . '.js';
