@@ -178,11 +178,11 @@ class score extends control
         $scores = $this->dao->select('*')->from(TABLE_SCORE)
             ->where('1=1')
             ->beginIF($date)->andWhere('`time`')->le($date)->fi()
-            ->orderBy('date_asc,id_asc')
+            ->orderBy('time_asc,id_asc')
             ->fetchAll('account');
         $outs = $this->dao->select('*')->from(TABLE_SCORE)->where('type')->ne('in')
             ->beginIF($date)->andWhere('`time`')->le($date)->fi()
-            ->orderBy('date_asc,id_asc')
+            ->orderBy('time_asc,id_asc')
             ->fetchAll('account');
 
         $now        = $date ? $date : helper::now();
