@@ -574,7 +574,7 @@ class userModel extends model
         $user->realname  = $this->computeRealname($user);
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
-        unset($_SESSION['random']);
+        if($this->app->getViewType() != 'json') unset($_SESSION['random']);
 
         if(commonModel::isAvailable('score'))
         {
@@ -637,6 +637,20 @@ class userModel extends model
     public function isLogon()
     {
         return (isset($_SESSION['user']) and !empty($_SESSION['user']) and $_SESSION['user']->account != 'guest');
+    }
+
+    /**
+     * Juage a user is logon or not from api.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function isApiLogon()
+    {
+        $checkAccount  = $this->post->account == $this->session->user->account;
+        $checkPassword = $this->compareHashPassword($this->post->password, $this->session->user);
+
+        return ($checkAccount and $checkPassword);
     }
 
     /**
@@ -1562,5 +1576,25 @@ class userModel extends model
        $user = $this->getByAccount($account);
        if(empty($user)) return 0;
        return $user->score;
+    }
+
+    /**
+     * Get data in JSON.
+     * 
+     * @param  object $user 
+     * @access public
+     * @return array
+     */
+    public function getDataInJSON($user)
+    {
+        $data                   = array();
+        $data['data']           = new stdclass();
+        $data['data']->id       = $user->id;
+        $data['data']->account  = $user->account;
+        $data['data']->email    = $user->email;
+        $data['data']->realname = $user->realname;
+        $data['data']->gender   = $user->gender;
+    
+        return $data;
     }
 }
