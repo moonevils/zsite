@@ -34,7 +34,7 @@ $lang->order->contact           = '收货姓名';
 $lang->order->phone             = '手机号';
 $lang->order->zipcode           = '邮编';
 $lang->order->deliveryStatus    = '发货状态';
-$lang->order->lastProcessedDate = '最后处理时间';
+$lang->order->last              = '最后处理时间';
 
 $lang->order->deliverList['not_send']  = '待发货';
 $lang->order->deliverList['send']      = '已发货';

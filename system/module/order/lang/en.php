@@ -34,7 +34,7 @@ $lang->order->contact           = 'Contact';
 $lang->order->phone             = 'Phone';
 $lang->order->zipcode           = 'Zipcode';
 $lang->order->deliveryStatus    = 'Delivery Status';
-$lang->order->lastProcessedDate = 'Last Process Date';
+$lang->order->last              = 'Last Process Date';
 
 $lang->order->deliverList['not_send']  = 'Pending';
 $lang->order->deliverList['send']      = 'Delivered';

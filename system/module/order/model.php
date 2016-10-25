@@ -92,7 +92,7 @@ class orderModel extends model
         $order = fixer::input('post')
             ->add('account', $this->app->user->account)
             ->add('createdDate', helper::now())
-            ->add('lastProcessedDate', helper::now())
+            ->add('last', helper::now())
             ->add('payStatus', 'not_paid')
             ->add('status', 'normal')
             ->add('deliveryStatus', 'not_send')
@@ -330,7 +330,7 @@ class orderModel extends model
             ->set('sn')->eq($order->sn)
             ->set('payStatus')->eq('paid')
             ->set('paidDate')->eq(helper::now())
-            ->set('lastProcessedDate')->eq(helper::now())
+            ->set('last')->eq(helper::now())
             ->where('id')->eq($order->id)->exec();
 
         if(dao::isError()) return false;
@@ -407,7 +407,7 @@ class orderModel extends model
             ->set('status')->eq('finished')
             ->set('finishedDate')->eq(helper::now())
             ->set('finishedBy')->eq($this->app->user->account)
-            ->set('lastProcessedDate')->eq(helper::now())
+            ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
         return !dao::isError();
@@ -424,7 +424,7 @@ class orderModel extends model
     {
         $this->dao->update(TABLE_ORDER)
             ->set('status')->eq('canceled')
-            ->set('lastProcessedDate')->eq(helper::now())
+            ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->andWhere('account')->eq($this->app->user->account)
             ->exec();
@@ -444,7 +444,7 @@ class orderModel extends model
             ->set('payStatus')->eq('paid')
             ->set('sn')->eq($this->post->sn)
             ->set('paidDate')->eq($this->post->paidDate)
-            ->set('lastProcessedDate')->eq(helper::now())
+            ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
         return !dao::isError();
@@ -655,7 +655,7 @@ class orderModel extends model
         $this->dao->update(TABLE_ORDER)
             ->set('deliveryStatus')->eq('confirmed')
             ->set('confirmedDate')->eq(helper::now())
-            ->set('lastProcessedDate')->eq(helper::now())
+            ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->andWhere('account')->eq($this->app->user->account)
             ->exec();
@@ -704,7 +704,7 @@ class orderModel extends model
         $delivery = fixer::input('post')
             ->add('deliveriedBy', $this->app->user->account)
             ->add('deliveryStatus', 'send')
-            ->add('lastProcessedDate', helper::now())
+            ->add('last', helper::now())
             ->get();
 
         $this->dao->update(TABLE_ORDER)->data($delivery)->where('id')->eq($orderID)->exec();
@@ -904,7 +904,7 @@ class orderModel extends model
     {
         $this->dao->update(TABLE_ORDER)
             ->set('payment')->eq($payment)
-            ->set('lastProcessedDate')->eq(helper::now())
+            ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
         if(dao::isError()) return false;
@@ -936,7 +936,7 @@ class orderModel extends model
     public function savePayment($orderID)
     {   
         $data = fixer::input('post')
-            ->add('lastProcessedDate', helper::now())
+            ->add('last', helper::now())
             ->remove('savepay')
             ->get();
 
@@ -984,8 +984,8 @@ class orderModel extends model
             $content->deliveriedBy   = $this->app->user->account;
         }
         
-        $content->note              = $data->note;
-        $content->lastProcessedDate = helper::now();
+        $content->note = $data->note;
+        $content->last = helper::now();
         
         $this->dao->update(TABLE_ORDER)->data($content)->where('id')->eq($orderID)->exec();
         
@@ -1003,7 +1003,7 @@ class orderModel extends model
     {
         $this->dao->update(TABLE_ORDER)
             ->set('status')->eq('deleted')
-            ->set('lastProcessedDate')->eq(helper::now())
+            ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
         return !dao::isError(); 
