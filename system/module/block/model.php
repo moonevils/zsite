@@ -417,6 +417,9 @@ class blockModel extends model
     public function create($template, $theme)
     {
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
+        $block->content = helper::decodeXSS($block->content);
+        $block->css     = helper::decodeXSS($block->css);
+        $block->js      = helper::decodeXSS($block->js);
         if($block->params['top']['left'] != 'custom') $block->params['topLeftContent'] = '';
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
@@ -469,6 +472,10 @@ class blockModel extends model
         $block = $this->getByID($this->post->blockID);
 
         $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
+        $data->content = helper::decodeXSS($data->content);
+        $data->css     = helper::decodeXSS($data->css);
+        $data->js      = helper::decodeXSS($data->js);
+
         if($data->params['top']['left'] != 'custom') $data->params['topLeftContent'] = '';
         if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
