@@ -106,17 +106,28 @@ class user extends control
         $regLink   = $this->createLink('user', 'register');
 
         /* If the user logon already, goto the pre page. */
-        if($this->user->isLogon())
+        if($this->app->getViewType() == 'json')
         {
-            if(helper::isAjaxRequest())
+            if($this->user->isApiLogon())
             {
-                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->send(array('result' => 'success', 'locate' => $this->referer));
-                $this->send(array('result' => 'success', 'locate' => $this->createLink($this->config->default->module)));
+                $data = $this->user->getDataInJSON($this->app->user);
+                die(helper::removeUTF8Bom(json_encode(array('result' => 'success') + $data)));
             }
+        }
+        else
+        {
+            if($this->user->isLogon())
+            {
+                if(helper::isAjaxRequest())
+                {
+                    if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->send(array('result' => 'success', 'locate' => $this->referer));
+                    $this->send(array('result' => 'success', 'locate' => $this->createLink($this->config->default->module)));
+                }
 
-            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate($this->referer);
-            $this->locate($this->createLink($this->config->default->module));
-            exit;
+                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate($this->referer);
+                $this->locate($this->createLink($this->config->default->module));
+                exit;
+            }
         }
 
         /* If the user sumbit post, check the user and then authorize him. */
@@ -132,7 +143,11 @@ class user extends control
                     $error = $this->lang->user->forceYangcong;
                     $pass  = $this->loadModel('guarder')->verify();
                     $captchaUrl = $this->createLink('guarder', 'validate', "url=&target=modal&account={$this->post->account}&type=");
-                    if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
+                    if(!$pass)
+                    {
+                        if($this->app->getViewType() == 'json') die(helper::removeUTF8Bom(json_encode(array('result' => 'fail', 'message' => $error))));
+                        $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
+                    }
                 }
 
                 $checkIP              = $this->user->checkIP();
@@ -145,12 +160,17 @@ class user extends control
                     $error .= $checkLoginLocation ? '' : $this->lang->user->loginLocationChanged;
                     $pass   = $this->loadModel('guarder')->verify();
                     $captchaUrl = $this->createLink('guarder', 'validate', "url=&target=modal&account={$this->post->account}");
-                    if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
+                    if(!$pass)
+                    {
+                        if($this->app->getViewType() == 'json') die(helper::removeUTF8Bom(json_encode(array('result' => 'fail', 'message' => $error))));
+                        $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
+                    }
                 }
             }
 
             if(!$this->user->login($this->post->account, $this->post->password))
             {
+                if($this->app->getViewType() == 'json') die(helper::removeUTF8Bom(json_encode(array('result' => 'fail', 'message' => $this->lang->user->loginFailed))));
                 $this->loadModel('guarder')->logOperation('ip', 'logonFailure');
                 $this->loadModel('guarder')->logOperation('account', 'logonFailure', $this->post->account);
                 $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
@@ -164,6 +184,12 @@ class user extends control
                     if(!helper::isAjaxRequest()) helper::header301("http://". $_SERVER['HTTP_HOST'] . inlink('checkEmail', "referer={$referer}"));
                     $this->send(array('result'=>'success', 'locate'=> inlink('checkEmail', "referer={$referer}")));
                 }
+            }
+
+            if($this->app->getViewType() == 'json')
+            {
+                $data = $this->user->getDataInJSON($user);
+                die(helper::removeUTF8Bom(json_encode(array('result' => 'success') + $data)));
             }
 
             /* Goto the referer or to the default module */
