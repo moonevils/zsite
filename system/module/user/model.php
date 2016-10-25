@@ -977,12 +977,13 @@ class userModel extends model
           
         if(empty($openUser))
         {
-            return $this->dao->replace(TABLE_OAUTH)
+            $this->dao->replace(TABLE_OAUTH)
                 ->set('account')->eq($account)
                 ->set('provider')->eq($provider)
                 ->set('openID')->eq($openID)
                 ->set('lang')->eq('all')
                 ->exec();
+            return !dao::isError();
         }
         else
         {
