@@ -529,6 +529,9 @@ class orderModel extends model
                 echo $disabled ? html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'") : ''; 
             }
 
+            /* View order link */ 
+            if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id&btnLink=false"), $this->lang->order->view, "data-toggle='modal'");
+            
             /* Delete order link. */
             $disabled = ($order->status == 'expired' or $order->status == 'canceled' or $order->status == 'finished') ? false : true;
             echo $disabled ? '' : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "data-toggle='modal' class='$class deleter'"); 
