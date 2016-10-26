@@ -512,8 +512,8 @@ class wechatModel extends model
 
             $article = new stdclass();
             $article->title       = $category->name;
-            $article->url         = getHostURL() . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}", $viewType);
-            $article->description =  $category->desc;
+            $article->url         = commonModel::getSysURL() . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}", $viewType);
+            $article->description = $category->desc;
 
             if($isFirst) $article->picUrl = getWebRoot(true) . "theme/default/default/images/main/wechat{$type}.png";
 
@@ -573,7 +573,7 @@ class wechatModel extends model
         {
             $item = new stdclass();
             $item->title       = $article->title;
-            $item->url         = getHostURL() . $this->article->createPreviewLink($article->id, $viewType);
+            $item->url         = commonModel::getSysURL() . $this->article->createPreviewLink($article->id, $viewType);
             $item->description = $article->summary;
             if(!empty($article->image))
             {
@@ -638,7 +638,7 @@ class wechatModel extends model
 
             $article = new stdclass();
             $article->title       = $product->name;
-            $article->url         = getHostURL() . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias", $viewType);
+            $article->url         = commonModel::getSysURL() . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias", $viewType);
             $article->description = isset($product->summary) ? $product->summary : '';
             if(!empty($product->image)) $article->picUrl = rtrim(getWebRoot(true), '/') . $product->image->primary->smallURL;
             $response->articles[] = $article;
@@ -889,7 +889,7 @@ class wechatModel extends model
      */
     public function getModuleList()
     {
-        $hostURL = getHostURL();
+        $hostURL  = commonModel::getSysURL();
         $viewType = isset($this->config->site->mobileTemplate) && $this->config->site->mobileTemplate == 'open' ? 'mhtml' : '';
         foreach($this->lang->wechat->response->moduleList as $module => $title)
         {
