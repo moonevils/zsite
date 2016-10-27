@@ -196,7 +196,7 @@ class score extends control
 
             $count  = $score->after;
             $before = 0;
-            if($outs[$account])
+            if(isset($outs[$account]))
             {
                 $out    = $outs[$account];
                 $count  = $score->after - $out->after;
