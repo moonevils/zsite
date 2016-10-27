@@ -658,8 +658,10 @@ class ui extends control
         if($_POST)
         {
             $post = fixer::input('post')->stripTags('css,js', $this->config->allowedTags->admin)->get();
-            $cssSetting["{$template}_{$theme}_{$page}"] = $post->css;
-            $jsSetting["{$template}_{$theme}_{$page}"]  = $post->js;
+
+            $cssSetting["{$template}_{$theme}_{$page}"] = helper::decodeXSS($post->css);
+            $jsSetting["{$template}_{$theme}_{$page}"]  = helper::decodeXSS($post->js);
+
             $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
             $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));

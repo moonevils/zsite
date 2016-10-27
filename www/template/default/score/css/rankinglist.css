@@ -4,4 +4,4 @@
 .row .panel-body dt{ width:75%; float:left; clear:left; line-height:1.5; font-weight:normal;}
 .row .panel-body dt span{margin-right:20px}
 .row .panel-body dd{ float:right; clear:right; line-height:1.5}
-.strong{font-weight:bold;}
+.strong{font-weight:bold;display:inline-block; width: 30px; }
