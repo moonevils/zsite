@@ -17,7 +17,7 @@ class user extends control
      * @var string
      * @access private
      */
-    private $referer;
+    public $referer;
 
     /**
      * Register a user. 
