@@ -16,6 +16,7 @@
               <td class='w-120px text-right'><?php echo $lang->order->amount;?></td>
               <td class='w-120px'><?php echo $lang->product->status;?></td>
               <td><?php echo $lang->order->note;?></td>
+              <td><?php echo $lang->order->last;?></td>
               <td class='w-220px'><?php echo $lang->actions;?></td>
             </tr>
           </thead>
@@ -25,11 +26,12 @@
             <tr>
               <td class='text-center text-middle'><?php echo zget($lang->order->types, $order->type);?></td>
               <td class='text-middle' title='<?php echo strip_tags($goodsInfo);?>'><?php echo $goodsInfo;?></td>
-              <td class='text-right text-middle'><?php echo $order->amount;?></td>
+              <td class='text-right text-middle'><?php echo $order->amount + $order->balance;?></td>
               <td class='text-center text-middle'>
                 <?php echo $this->order->processStatus($order);?>
               </td>
               <td class='text-left' title='<?php echo $order->note?>'><?php echo $order->note;?></td>
+              <td class='text-center'><?php echo formatTime($order->last, 'm-d H:i');?></td>
               <td class='text-left text-middle'><?php $this->order->printActions($order);?></td>
             </tr>
             <?php endforeach;?>

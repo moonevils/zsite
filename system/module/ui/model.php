@@ -1175,22 +1175,25 @@ class uiModel extends model
             $fileInfo = pathinfo($file);
             if($fileInfo['extension'] == 'php') continue;
             $encryptFiles[$fileInfo['basename']] = $fileInfo['filename'] . '.php';
-            $target   = $this->directories->encryptSlidePath . $fileInfo['filename'] . '.php'; 
+            $target = $this->directories->encryptSlidePath . $fileInfo['filename'] . '.php'; 
             $this->save2php($file, $target);
         }
 
         /* Create encrypt sql file. */
-        $sql = file_get_contents($this->directories->encryptDbPath . 'install.sql');
+        $sql     = file_get_contents($this->directories->encryptDbPath . 'install.sql');
+        $fullSql = file_get_contents($this->directories->encryptDbPath . 'full.sql');
         foreach($encryptFiles as $file => $encrypt)
         {
-            $sql = str_replace('/' . $file, '/' . $encrypt, $sql);
+            $sql     = str_replace('/' . $file, '/' . $encrypt, $sql);
+            $fullSql = str_replace('/' . $file, '/' . $encrypt, $fullSql);
         }
         file_put_contents($this->directories->encryptDbPath . 'install.sql', $sql);
+        file_put_contents($this->directories->encryptDbPath . 'full.sql', $fullSql);
 
         /* Copy doc, config, less files. */
         $zfile = $this->app->loadClass('zfile');
         $zfile->copyDir($this->directories->exportDocPath,    $this->directories->encryptDocPath);
-        $zfile->copyDir($this->directories->exportUploadPath,   $this->directories->encryptUploadPath);
+        $zfile->copyDir($this->directories->exportUploadPath, $this->directories->encryptUploadPath);
         $zfile->copyDir($this->directories->exportLessPath,   $this->directories->encryptLessPath);
         $zfile->copyDir($this->directories->exportConfigPath, $this->directories->encryptConfigPath);
 
