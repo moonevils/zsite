@@ -635,7 +635,7 @@ class user extends control
      * @access private
      * @return bool
      */
-    private function setReferer($referer = '')
+    public function setReferer($referer = '')
     {
         if(RUN_MODE == 'admin') return true;
 
