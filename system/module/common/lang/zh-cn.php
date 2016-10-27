@@ -267,20 +267,21 @@ $lang->forum->menu->setting = '论坛设置|forum|setting|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic    = '站点设置|site|setbasic|';
-$lang->site->menu->system   = '系统设置|site|setsystem|';
-$lang->site->menu->domain   = '域名设置|site|setdomain|';
-$lang->site->menu->cdn      = 'CDN设置|site|setcdn|';
-$lang->site->menu->cache    = '缓存设置|site|setcache|';
-$lang->site->menu->home     = '首页菜单|site|sethomemenu|';
-$lang->site->menu->company  = '公司信息|company|setbasic|';
-$lang->site->menu->contact  = '联系方式|company|setcontact|';
-$lang->site->menu->oauth    = '开放登录|site|setoauth|';
-$lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
-$lang->site->menu->search   = '全文检索|search|buildindex|';
-$lang->site->menu->score    = '积分规则|score|setcounts|';
-$lang->site->menu->backup   = '备份还原|backup|index|';
+$lang->site->menu->basic     = '站点设置|site|setbasic|';
+$lang->site->menu->system    = '系统设置|site|setsystem|';
+$lang->site->menu->domain    = '域名设置|site|setdomain|';
+$lang->site->menu->cdn       = 'CDN设置|site|setcdn|';
+$lang->site->menu->cache     = '缓存设置|site|setcache|';
+$lang->site->menu->home      = '首页菜单|site|sethomemenu|';
+$lang->site->menu->company   = '公司信息|company|setbasic|';
+$lang->site->menu->contact   = '联系方式|company|setcontact|';
+$lang->site->menu->oauth     = '开放登录|site|setoauth|';
+$lang->site->menu->mail      = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat    = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
+$lang->site->menu->search    = '全文检索|search|buildindex|';
+$lang->site->menu->score     = '积分规则|score|setcounts|';
+$lang->site->menu->backup    = '备份还原|backup|index|';
+$lang->site->menu->stateInfo = '积分结算|score|showstateinfo|';
 //$lang->site->menu->api    = 'API|site|setapi|';
 
 /* Menu of security module. */
