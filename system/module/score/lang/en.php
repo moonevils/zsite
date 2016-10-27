@@ -11,6 +11,8 @@
 $lang->score->back        = 'Return';
 $lang->score->rankingList = 'Point Ranking';
 $lang->score->rule        = 'Point Rules';
+$lang->score->statement   = 'State Score';
+$lang->score->stateDesc   = 'Settlement will be a month before all income points in accordance with the total score of each user. In order to reduce the number of records.';
 
 $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
@@ -68,6 +70,7 @@ $lang->score->lblNoScore       = "Sorry, your points is insufficient.";
 $lang->score->lblNoScoreReason = "Sorry, your points is less than %s. You heed <strong class='red'>%s</strong> Points. You have <strong class='red'>%s</strong> Poins.";
 $lang->score->lblDetail        = "Please refer to<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
 $lang->score->lblBuySocre      = "Purchase Points %s";
+$lang->score->lblStateSuccess  = 'State score success';
 
 $lang->score->setAmount   = 'Refill Amount';
 $lang->score->getScore    = 'Refill Points';
