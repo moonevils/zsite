@@ -13,7 +13,7 @@
             <tr class='text-center'>
               <td class='w-120px'><?php echo $lang->order->type;?></td>
               <td class='w-280px text-left'><?php echo $lang->order->productInfo;?></td>
-              <td class='w-120px text-right'><?php echo $lang->order->amount;?></td>
+              <td class='w-80px text-right'><?php echo $lang->order->amount;?></td>
               <td class='w-120px'><?php echo $lang->product->status;?></td>
               <td><?php echo $lang->order->note;?></td>
               <td><?php echo $lang->order->last;?></td>
