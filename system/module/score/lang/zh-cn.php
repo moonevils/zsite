@@ -11,6 +11,8 @@
 $lang->score->back        = '返回';
 $lang->score->rankingList = '积分排行榜';
 $lang->score->rule        = '积分规则';
+$lang->score->statement   = '积分结算';
+$lang->score->stateDesc   = '积分结算会将一个月之前的所有收入积分按照每个用户结算为总积分。以减少记录数。';
 
 $lang->score->id      = '编号';
 $lang->score->account = '用户';
@@ -68,6 +70,7 @@ $lang->score->lblNoScore       = "抱歉，您的积分不够";
 $lang->score->lblNoScoreReason = "抱歉，您的积分不够 %s 需要 <strong class='red'>%s</strong> 分，您现在有 <strong class='red'>%s</strong> 分";
 $lang->score->lblDetail        = "详情可参考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
 $lang->score->lblBuySocre      = "购买积分 %s";
+$lang->score->lblStateSuccess  = '积分结算成功！';
 
 $lang->score->setAmount   = '充值金额';
 $lang->score->getScore    = '获取积分';

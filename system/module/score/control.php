@@ -196,7 +196,7 @@ class score extends control
 
             $count  = $score->after;
             $before = 0;
-            if($outs[$account])
+            if(isset($outs[$account]))
             {
                 $out    = $outs[$account];
                 $count  = $score->after - $out->after;
@@ -224,5 +224,24 @@ class score extends control
             }
             echo "Statement {$account} finish\n";
         }
+    }
+
+    /**
+     * Show state info.
+     * 
+     * @access public
+     * @return void
+     */
+    public function showStateInfo()
+    {
+        if($_POST)
+        {
+            ob_start();
+            $this->statement();
+            ob_end_clean();
+            $this->send(array('result' => 'success', 'message' => $this->lang->score->lblStateSuccess));
+        }
+        $this->view->title = $this->lang->score->statement;
+        $this->display();
     }
 }
