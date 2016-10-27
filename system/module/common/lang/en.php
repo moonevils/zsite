@@ -267,20 +267,21 @@ $lang->forum->menu->setting = 'Settings|forum|setting|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic    = 'Basic Settings|site|setbasic|';
-$lang->site->menu->system   = 'System|site|setsystem|';
-$lang->site->menu->domain   = 'Domain Settings|site|setdomain|';
-$lang->site->menu->cdn      = 'CDN Settings|site|setcdn|';
-$lang->site->menu->cache    = 'Cache Settings|site|setcache|';
-$lang->site->menu->home     = 'Homepage Menu|site|sethomemenu|';
-$lang->site->menu->company  = 'Company Info|company|setbasic|';
-$lang->site->menu->contact  = 'Company Contact|company|setcontact|';
-$lang->site->menu->oauth    = 'Set Oauth|site|setoauth|';
-$lang->site->menu->mail     = array('link' => 'Email Settings|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => 'Wechat Settings|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
-$lang->site->menu->search   = 'Full Text Retrieval|search|buildindex|';
-$lang->site->menu->score    = 'Points|score|setcounts|';
-$lang->site->menu->backup   = 'Backup/Restore|backup|index|';
+$lang->site->menu->basic     = 'Basic Settings|site|setbasic|';
+$lang->site->menu->system    = 'System|site|setsystem|';
+$lang->site->menu->domain    = 'Domain Settings|site|setdomain|';
+$lang->site->menu->cdn       = 'CDN Settings|site|setcdn|';
+$lang->site->menu->cache     = 'Cache Settings|site|setcache|';
+$lang->site->menu->home      = 'Homepage Menu|site|sethomemenu|';
+$lang->site->menu->company   = 'Company Info|company|setbasic|';
+$lang->site->menu->contact   = 'Company Contact|company|setcontact|';
+$lang->site->menu->oauth     = 'Set Oauth|site|setoauth|';
+$lang->site->menu->mail      = array('link' => 'Email Settings|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat    = array('link' => 'Wechat Settings|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
+$lang->site->menu->search    = 'Full Text Retrieval|search|buildindex|';
+$lang->site->menu->score     = 'Points|score|setcounts|';
+$lang->site->menu->backup    = 'Backup/Restore|backup|index|';
+$lang->site->menu->stateInfo = 'State Score|score|showstateinfo|';
 //$lang->site->menu->api      = 'API|site|setapi|';
 
 /* Menu of security module. */
