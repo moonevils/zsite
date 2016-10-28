@@ -426,8 +426,8 @@ class blockModel extends model
         $gpcOn = (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc());
 
         if(!isset($block->params)) $block->params = array();
-        $block->params['custom'][$theme]['css'] = $block->css;
-        $block->params['custom'][$theme]['js']  = $block->js;
+        $block->params['custom'][$theme]['css'] = $gpcOn ? stripslashes($block->css) : $block->css;
+        $block->params['custom'][$theme]['js']  = $gpcOn ? stripslashes($block->js) : $block->js;
         foreach($block->params as $field => $value)
         {
             if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
@@ -482,8 +482,8 @@ class blockModel extends model
         $gpcOn = (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc());
 
         if(!isset($data->params)) $data->params = array();
-        $data->params['custom'][$theme]['css'] = $data->css;
-        $data->params['custom'][$theme]['js']  = $data->js;
+        $data->params['custom'][$theme]['css'] = $gpcOn ? stripslashes($data->css) : $data->css;
+        $data->params['custom'][$theme]['js']  = $gpcOn ? stripslashes($data->js) : $data->js;
         foreach($data->params as $field => $value)
         {
             if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
