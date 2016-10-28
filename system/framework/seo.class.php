@@ -155,10 +155,19 @@ class seo
 
         if($module == 'ask' and isset($items[2]))
         {
-            if(preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = str_replace('c', '', $items[1]);
-            if(!preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = $items[1];
-            $params['type']       = $items[2];
-            $method = $methodAlias[$module]['browse'];
+            if(is_numeric($items[1]) and is_numeric($items[2]))
+            {
+                $method = $methodAlias[$module]['view'];
+                $params['questionID'] = $items[1];
+                $params['answerID']   = $items[2];
+            }
+            else
+            {
+                if(preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = str_replace('c', '', $items[1]);
+                if(!preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = $items[1];
+                $params['type']       = $items[2];
+                $method = $methodAlias[$module]['browse'];
+            }
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
