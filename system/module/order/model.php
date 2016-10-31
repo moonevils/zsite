@@ -570,9 +570,6 @@ class orderModel extends model
         if(RUN_MODE == 'admin' and $order->status == 'normal')
         {
             $class = $btnLink ? 'btn' : '';
-            
-            /* View link. */
-            if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id", "class='$class'"), $this->lang->order->view, "data-toggle='modal' class='$class'");
 
             /* Edit link. */
             $disabled = $order->status !== 'finished' ? '' : "disabled = 'disabled'";
