@@ -1164,4 +1164,20 @@ class user extends control
         $this->view->title = $this->lang->setSecurity;
         $this->display();
     }
+
+    /**
+     * Get the contact of user
+     *
+     * @access public
+     * @param  string
+     * @return array
+     */
+    public function checkContact($account)
+    {
+        $user = $this->user->getByAccount($account);
+
+        $this->view->title = $this->lang->user->checkContact;
+        $this->view->user  = $user;
+        $this->display();
+    }
 }

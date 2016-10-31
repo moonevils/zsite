@@ -83,8 +83,8 @@ js::set('admin', $this->get->admin);
           <input type='checkbox' name='account[]'  value='<?php echo $user->account;?>'/> 
           <?php echo $user->id;?>
         </td>
-        <td><?php echo $user->realname;?></td>
-        <td><?php echo $user->account;?></td>
+        <td><?php echo html::a(helper::createLink('user', 'checkContact', "user=$user->account"), $user->realname, "data-toggle='modal'");?></td>
+        <td><?php echo html::a(helper::createLink('user', 'checkContact', "user=$user->account"), $user->account, "data-toggle='modal'");?></td>
         <?php if(commonModel::isAvailable('score')):?>
         <td><?php echo $user->score;?></td>
         <td><?php echo $user->rank;?></td>
