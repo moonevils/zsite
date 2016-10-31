@@ -83,6 +83,7 @@ $lang->user->batchDelete     = 'Batch Delete';
 $lang->user->deleteHistory   = 'Delete account and history';
 $lang->user->question        = 'Security Questions';
 $lang->user->answer          = 'Answer';
+$lang->user->checkContact    = 'Check Contact';
 
 $lang->user->type        = 'Account Type';
 $lang->user->profile     = 'Profile';
