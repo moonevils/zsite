@@ -193,21 +193,24 @@ $lang->menu->others   = "设置|ui|others|";
 $lang->menu->visual   = "可视化|visual|index|";
 $lang->menu->edit     = "编辑模板|ui|edittemplate|";
 
-$lang->menu->site     = '站点|site|setbasic|';
-$lang->menu->security = '安全|site|setsecurity|';
+$lang->menu->site      = '站点|site|setbasic|';
+$lang->menu->security  = '安全|site|setsecurity|';
+$lang->menu->company   = '公司|company|setbasic|';
+$lang->menu->score     = '积分|score|setcounts|';
+$lang->menu->interface = '接口|site|setoauth|';
 
 $lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主题|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-$lang->menuGroups->mail    = 'site';
-$lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->mail    = 'interface';
+$lang->menuGroups->wechat  = 'interface';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
-$lang->menuGroups->company = 'site';
-$lang->menuGroups->score   = 'site';
+$lang->menuGroups->company = 'company';
+$lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
@@ -273,8 +276,6 @@ $lang->site->menu->domain    = '域名设置|site|setdomain|';
 $lang->site->menu->cdn       = 'CDN设置|site|setcdn|';
 $lang->site->menu->cache     = '缓存设置|site|setcache|';
 $lang->site->menu->home      = '首页菜单|site|sethomemenu|';
-$lang->site->menu->company   = '公司信息|company|setbasic|';
-$lang->site->menu->contact   = '联系方式|company|setcontact|';
 $lang->site->menu->oauth     = '开放登录|site|setoauth|';
 $lang->site->menu->mail      = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat    = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
@@ -283,6 +284,12 @@ $lang->site->menu->score     = '积分规则|score|setcounts|';
 $lang->site->menu->backup    = '备份还原|backup|index|';
 $lang->site->menu->stateInfo = '积分结算|score|showstateinfo|';
 //$lang->site->menu->api    = 'API|site|setapi|';
+
+/* Menu of company module. */
+$lang->company = new stdclass();
+$lang->company->menu = new stdclass();
+$lang->company->menu->company   = '公司信息|company|setbasic|';
+$lang->company->menu->contact   = '联系方式|company|setcontact|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
