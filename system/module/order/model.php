@@ -62,7 +62,8 @@ class orderModel extends model
         }
         
         $normalStatus = array('not_paid', 'not_send', 'send');
-         
+        $isTypeMode   = in_array($mode, $this->config->order->orderTypes);
+
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where(1)
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
@@ -70,10 +71,10 @@ class orderModel extends model
             ->andWhere('status')->ne('deleted')
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
             ->beginIf($mode == 'deliveryStatus')->andWhere('deliveryStatus')->eq($value)->fi()
-            ->beginIf(in_array($mode, $this->config->order->orderTypes))->andWhere('type')->eq($mode)
-                ->beginIf($value != 'all')->andWhere($this->config->order->statusTypes[$value])->eq($value)->fi()
-                ->beginIf(in_array($value, $normalStatus))->andWhere('status')->eq('normal')->fi()
-            ->fi()
+            ->beginIf($isTypeMode)->andWhere('type')->eq($mode)->fi()
+            ->beginIf($isTypeMode and $value != 'all' and $value != 'send')->andWhere(zget($this->config->order->statusTypes, $value, ''))->eq($value)->fi()
+            ->beginIf($isTypeMode and $value == 'send')->andWhere('deliveryStatus')->ne('not_send')->fi()
+            ->beginIf($isTypeMode and in_array($value, $normalStatus))->andWhere('status')->eq('normal')->fi()
             ->beginIf(!commonModel::isAvailable('score'))->andWhere('type')->ne('score')->fi()
             ->beginIf(!commonModel::isAvailable('shop'))->andWhere('type')->ne('shop')->fi()
             ->orderBy($orderBy)

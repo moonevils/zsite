@@ -113,7 +113,7 @@ class order extends control
      * @access public
      * @return void
      */
-    public function admin($mode = 'status', $param = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
+    public function admin($mode = 'shop', $param = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
     {
         if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
