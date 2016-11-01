@@ -286,7 +286,7 @@ $lang->site->menu->stateInfo = '积分结算|score|showstateinfo|';
 //$lang->site->menu->api    = 'API|site|setapi|';
 
 /* Menu of company module. */
-$lang->company = new stdclass();
+if(!isset($lang->company)) $lang->company = new stdclass();
 $lang->company->menu = new stdclass();
 $lang->company->menu->company   = '公司信息|company|setbasic|';
 $lang->company->menu->contact   = '联系方式|company|setcontact|';
