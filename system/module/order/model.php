@@ -60,7 +60,9 @@ class orderModel extends model
                 ->andWhere('createdDate')->le($createdDate)
                 ->exec();
         }
-
+        
+        $normalStatus = array('not_paid', 'not_send', 'send');
+         
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where(1)
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
@@ -68,6 +70,10 @@ class orderModel extends model
             ->andWhere('status')->ne('deleted')
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
             ->beginIf($mode == 'deliveryStatus')->andWhere('deliveryStatus')->eq($value)->fi()
+            ->beginIf(in_array($mode, $this->config->order->orderTypes))->andWhere('type')->eq($mode)
+                ->beginIf($value != 'all')->andWhere($this->config->order->statusTypes[$value])->eq($value)->fi()
+                ->beginIf(in_array($value, $normalStatus))->andWhere('status')->eq('normal')->fi()
+            ->fi()
             ->beginIf(!commonModel::isAvailable('score'))->andWhere('type')->ne('score')->fi()
             ->beginIf(!commonModel::isAvailable('shop'))->andWhere('type')->ne('shop')->fi()
             ->orderBy($orderBy)

@@ -20,3 +20,19 @@ $config->order->processViews->shop  = 'processorder';
 $config->order->processViews->score = 'processscore';
 
 $config->order->require->savepay = 'sn,payment,payStatus';
+
+$config->order->orderTypes = array();
+$config->order->orderTypes[] = 'shop';
+$config->order->orderTypes[] = 'score';
+
+$config->order->statusTypes = array();
+$config->order->statusTypes['not_paid']  = 'payStatus';
+$config->order->statusTypes['paid']      = 'payStatus';
+$config->order->statusTypes['not_send']  = 'deliveryStatus';
+$config->order->statusTypes['send']      = 'deliveryStatus';
+$config->order->statusTypes['confirmed'] = 'deliveryStatus';
+$config->order->statusTypes['normal']    = 'status';
+$config->order->statusTypes['finished']  = 'status';
+$config->order->statusTypes['canceled']  = 'status';
+$config->order->statusTypes['expired']   = 'status';
+$config->order->statusTypes['all']       = 'status';

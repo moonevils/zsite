@@ -70,6 +70,7 @@ $lang->order->products       = 'Ordered Product';
 $lang->order->selectPayment  = 'Choose payment';
 $lang->order->settlement     = 'Checkout';
 $lang->order->check          = 'Settle Order';
+$lang->order->all            = 'All';
 
 $lang->order->confirmLimit         = 'Receiving Cyle';
 $lang->order->expireLimit          = 'Order Expiration';

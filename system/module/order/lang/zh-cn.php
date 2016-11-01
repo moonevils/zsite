@@ -70,6 +70,7 @@ $lang->order->products       = '订单产品';
 $lang->order->selectPayment  = '选择支付方式';
 $lang->order->settlement     = '去结算';
 $lang->order->check          = '订单结算';
+$lang->order->all            = '所有';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->expireLimit          = '订单过期时间';
