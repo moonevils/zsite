@@ -276,11 +276,7 @@ $lang->site->menu->domain    = '域名设置|site|setdomain|';
 $lang->site->menu->cdn       = 'CDN设置|site|setcdn|';
 $lang->site->menu->cache     = '缓存设置|site|setcache|';
 $lang->site->menu->home      = '首页菜单|site|sethomemenu|';
-$lang->site->menu->oauth     = '开放登录|site|setoauth|';
-$lang->site->menu->mail      = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat    = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search    = '全文检索|search|buildindex|';
-$lang->site->menu->score     = '积分规则|score|setcounts|';
 $lang->site->menu->backup    = '备份还原|backup|index|';
 $lang->site->menu->stateInfo = '积分结算|score|showstateinfo|';
 //$lang->site->menu->api    = 'API|site|setapi|';
@@ -305,11 +301,16 @@ $lang->security->menu->admin     = '管理员|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log       = '登录日志|user|adminlog|';
 
-/* Menu of company module. */
-$lang->company->menu = $lang->site->menu;
+$lang->interface = new stdclass();
+$lang->interface->menu = new stdclass();
+$lang->interface->menu->oauth  = '开放登录|site|setoauth|';
+$lang->interface->menu->mail   = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->wechat = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
-$lang->score->menu = $lang->site->menu;
+$lang->score->menu = new stdclass();
+$lang->score->menu->score     = '积分规则|score|setcounts|';
+$lang->score->menu->stateInfo = '积分结算|score|showstateinfo|';
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -318,10 +319,6 @@ $lang->address = new stdclass();
 /* Menu of tree module. */
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
-
-/* Menu of mail module. */
-$lang->mail = new stdclass();
-$lang->mail->menu = $lang->site->menu;
 
 /* Menu of reply module. */
 $lang->reply = new stdclass();

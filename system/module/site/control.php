@@ -279,6 +279,8 @@ class site extends control
      */
     public function setOauth()
     {
+        $this->lang->menuGroups->site = 'interface';
+        $this->lang->site->menu       = $this->lang->interface->menu;
         if(!empty($_POST))
         {
             $provider = $this->post->provider;

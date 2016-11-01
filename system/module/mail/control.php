@@ -19,6 +19,9 @@ class mail extends control
      */
     public function admin()
     {
+        $this->lang->menuGroups->mail = 'interface';
+        $this->lang->mail->menu       = $this->lang->interface->menu;
+        
         if($this->config->mail->turnon) $this->locate(inlink('edit'));
         $this->locate(inlink('detect'));
     }
@@ -31,6 +34,9 @@ class mail extends control
      */
     public function detect()
     {
+        $this->lang->menuGroups->mail = 'interface';
+        $this->lang->mail->menu       = $this->lang->interface->menu;
+        
         if($_POST)
         {
             $error = '';

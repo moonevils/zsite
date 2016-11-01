@@ -92,6 +92,9 @@ class wechat extends control
      */
     public function admin()
     {
+        $this->lang->menuGroups->wechat = 'interface';
+        $this->lang->wechat->menu       = $this->lang->interface->menu;
+        
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 
