@@ -47,7 +47,7 @@
         </li>
       </ul> 
     </div>
-    <table class='table table-hover table-striped tablesorter table-fixed'>
+    <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
       <thead>
         <tr class='text-center'>
           <?php $vars = "mode=$mode&param={$param}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
