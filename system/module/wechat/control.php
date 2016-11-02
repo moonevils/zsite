@@ -112,6 +112,9 @@ class wechat extends control
      */
     public function create()
     {
+        $this->lang->menuGroups->wechat = 'interface';
+        $this->lang->wechat->menu       = $this->lang->interface->menu;
+        
         if($_POST) 
         {
             $publicID = $this->wechat->create();
