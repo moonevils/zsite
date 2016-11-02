@@ -40,6 +40,9 @@ class backup extends control
      */
     public function index()
     {
+        $this->lang->menuGroups->backup = 'site';
+        $this->lang->backup->menu       = $this->lang->site->menu;
+        
         $backups = array();
         if(empty($this->view->error))
         {
