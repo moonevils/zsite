@@ -1373,7 +1373,8 @@ if(!function_exists('getJS'))
      */
     public function getExtFile($template, $module, $file)
     {
-        return $this->app->getTmpRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
+        if($this->config->framework->multiSite) return $this->app->getTmpRoot() . 'template' . DS . $this->app->siteCode . DS . $template  . DS . $module . DS . $file . '.html.php';
+        if(!$this->config->framework->multiSite) return $this->app->getTmpRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
     }
 
     /**
