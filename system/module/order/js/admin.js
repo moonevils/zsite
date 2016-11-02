@@ -16,5 +16,4 @@ $(document).ready(function()
         });
         return true;
     });
-    fixedTheadOfList('#orderList');
 })
