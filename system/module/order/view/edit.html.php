@@ -27,8 +27,11 @@
           <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
           <span>
             <?php 
-            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input('product[]', $product->count, "class='form-control w-30px product-input'");
+            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input("product[$product->id]", $product->count, "class='form-control w-40px product-input'");
             ?>
+          </span>
+          <span>
+            <?php echo html::a('javascript:;', $lang->delete, "class='delete-product'");?>
           </span>
         </div>
       </td>
@@ -42,8 +45,11 @@
           <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
           <span>
             <?php 
-            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input('product[]', $product->count, "class='form-control w-30px product-input'");
+            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input("product[$product->id]", $product->count, "class='form-control w-40px product-input'");
             ?>
+          </span>
+          <span>
+            <?php echo html::a('javascript:;', $lang->delete, "class='delete-product'");?>
           </span>
         </div>
       </td>

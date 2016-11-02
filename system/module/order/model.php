@@ -973,6 +973,15 @@ class orderModel extends model
         
         $order = $this->getByID($orderID);
 
+        if(isset($data->product))
+        {
+            foreach($data->product as $orderProductID =>$count)
+            {
+                if(preg_match("/^[1-9][0-9]*$/",$count)) $this->dao->update(TABLE_ORDER_PRODUCT)->set('count')->eq($count)->where('id')->eq($orderProductID)->exec();
+                if($count == '0') $this->dao->delete()->from(TABLE_ORDER_PRODUCT)->where('id')->eq($orderProductID)->exec();
+            }
+        }
+        
         $address['account'] = $this->app->user->account;
         $address['address'] = $data->address;
         $address['contact'] = $data->contact;
