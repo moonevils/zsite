@@ -22,8 +22,8 @@
     </tr>
     <tr>
       <th rowspan='<?php echo $productCount;?>'><?php echo $lang->order->productInfo;?></th>
-      <td>
-        <?php $product = $products[0];?>
+      <?php $product = $products[0];?>
+      <td class='product<?php echo $product->id;?>'>
         <div>
           <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
           <span>
@@ -32,7 +32,7 @@
             ?>
           </span>
           <span>
-            <?php echo html::a('javascript:;', $lang->delete, "class='delete-product'");?>
+            <?php echo html::a('javascript:;', $lang->delete, "class='delete-product' data-id='product$product->id'");?>
           </span>
         </div>
       </td>
@@ -40,8 +40,8 @@
     <?php if($productCount > 1):?>
     <?php while($item < $productCount):?>
     <tr>
-      <td>
-        <?php $product = $products[$item]; $item += 1;?>
+      <?php $product = $products[$item]; $item += 1;?>
+      <td class='product<?php echo $product->id;?>'>
         <div>
           <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
           <span>
@@ -50,7 +50,7 @@
             ?>
           </span>
           <span>
-            <?php echo html::a('javascript:;', $lang->delete, "class='delete-product'");?>
+            <?php echo html::a('javascript:;', $lang->delete, "class='delete-product' data-id='product$product->id'");?>
           </span>
         </div>
       </td>

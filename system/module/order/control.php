@@ -385,6 +385,7 @@ class order extends control
     {
         if($_POST)
         {
+            a($_POST);die();
             $result = $this->order->edit($orderID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
