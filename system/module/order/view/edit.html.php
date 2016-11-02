@@ -18,6 +18,38 @@
       <th class='w-80px'><?php echo $lang->order->deliveryStatus;?></th>
       <td><?php echo $lang->order->deliverList[$order->deliveryStatus];?></td>
     </tr>
+    <?php $productCount = count($products); $item = 1;?>
+    <tr>
+      <th rowspan='<?php echo $productCount;?>'><?php echo $lang->order->productInfo;?></th>
+      <td>
+        <?php $product = $products[0];?>
+        <div>
+          <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
+          <span>
+            <?php 
+            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input('product[]', $product->count, "class='form-control w-30px product-input'");
+            ?>
+          </span>
+        </div>
+      </td>
+    </tr>
+    <?php if($productCount > 1):?>
+    <?php while($item < $productCount):?>
+    <tr>
+      <td>
+        <?php $product = $products[$item]; $item += 1;?>
+        <div>
+          <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
+          <span>
+            <?php 
+            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input('product[]', $product->count, "class='form-control w-30px product-input'");
+            ?>
+          </span>
+        </div>
+      </td>
+    </tr>
+    <?php endwhile;?>
+    <?php endif;?>
     <?php if($order->deliveryStatus === 'send'):?>
     <tr>
       <th class='w-80px'><?php echo $lang->order->express;?></th>
