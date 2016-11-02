@@ -977,8 +977,19 @@ class orderModel extends model
         {
             foreach($data->product as $orderProductID =>$count)
             {
-                if(preg_match("/^[1-9][0-9]*$/",$count)) $this->dao->update(TABLE_ORDER_PRODUCT)->set('count')->eq($count)->where('id')->eq($orderProductID)->exec();
-                if($count == '0') $this->dao->delete()->from(TABLE_ORDER_PRODUCT)->where('id')->eq($orderProductID)->exec();
+                if(preg_match("/^[1-9][0-9]*$/",$count))
+                {
+                    $this->dao->update(TABLE_ORDER_PRODUCT)->set('count')->eq($count)->where('id')->eq($orderProductID)->exec();
+                }
+                if($count == '0')
+                {
+                    $this->dao->delete()->from(TABLE_ORDER_PRODUCT)->where('id')->eq($orderProductID)->exec();
+                }
+            }
+            $totalAmount = $this->computeOrderAmount($orderID);
+            if($totalAmount != $order->amount)
+            {
+                $this->dao->update(TABLE_ORDER)->set('amount')->eq($totalAmount)->where('id')->eq($orderID)->exec();
             }
         }
         
@@ -1023,5 +1034,23 @@ class orderModel extends model
             ->where('id')->eq($orderID)
             ->exec();
         return !dao::isError(); 
+    }
+
+    /**
+     * Compute the total amount of order 
+     *
+     * @access public
+     * @param  string
+     * @return int
+     */
+    public function computeOrderAmount($orderID)
+    {
+        $products = $this->getOrderProducts($orderID);
+        $amount   = 0;
+        foreach($products as $product)
+        {
+            $amount += $product->count * $product->price;
+        }
+        return $amount;
     }
 }
