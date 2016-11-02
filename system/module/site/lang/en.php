@@ -176,28 +176,43 @@ $lang->site->cachePageOptions['open']  = 'On';
 $lang->site->filterFunctionList['open']  = 'On';
 $lang->site->filterFunctionList['close'] = 'Off';
 
-$lang->site->moduleAvailable = new stdclass();
+$lang->site->moduleAvailableGroups = new stdclass();
 
-$lang->site->moduleAvailable->user    = array();
-$lang->site->moduleAvailable->user['user']          = 'User';
-$lang->site->moduleAvailable->user['forum']         = 'Forum';
-$lang->site->moduleAvailable->user['message']       = 'Message';
-$lang->site->moduleAvailable->user['search']        = 'Search';
+$lang->site->moduleAvailableGroups->user = array();
+$lang->site->moduleAvailableGroups->user['user']    = 'User';
+$lang->site->moduleAvailableGroups->user['forum']   = 'Forum';
+$lang->site->moduleAvailableGroups->user['message'] = 'Message';
+$lang->site->moduleAvailableGroups->user['search']  = 'Search';
 
-$lang->site->moduleAvailable->content = array();
-$lang->site->moduleAvailable->content['book']       = 'Book';
-$lang->site->moduleAvailable->content['page']       = 'Page';
-$lang->site->moduleAvailable->content['article']    = 'Article';
-$lang->site->moduleAvailable->content['blog']       = 'Blog';
-$lang->site->moduleAvailable->content['submittion'] = 'Contribution';
+$lang->site->moduleAvailableGroups->content = array();
+$lang->site->moduleAvailableGroups->content['book']       = 'Book';
+$lang->site->moduleAvailableGroups->content['page']       = 'Page';
+$lang->site->moduleAvailableGroups->content['article']    = 'Article';
+$lang->site->moduleAvailableGroups->content['blog']       = 'Blog';
+$lang->site->moduleAvailableGroups->content['submittion'] = 'Contribution';
 
-$lang->site->moduleAvailable->mall    = array();
-$lang->site->moduleAvailable->mall['shop']          = 'Mall';
-$lang->site->moduleAvailable->mall['product']       = 'Product';
+$lang->site->moduleAvailableGroups->mall = array();
+$lang->site->moduleAvailableGroups->mall['shop']    = 'Mall';
+$lang->site->moduleAvailableGroups->mall['product'] = 'Product';
 
-$lang->site->moduleAvailable->score   = array();
-$lang->site->moduleAvailable->score['score']        = 'Points';
-$lang->site->moduleAvailable->score['stat']         = 'Report';
+$lang->site->moduleAvailableGroups->score = array();
+$lang->site->moduleAvailableGroups->score['score'] = 'Points';
+$lang->site->moduleAvailableGroups->score['stat']  = 'Report';
+
+$lang->site->moduleAvailable = array();
+$lang->site->moduleAvailable['user']       = 'Member';
+$lang->site->moduleAvailable['article']    = 'Article';
+$lang->site->moduleAvailable['blog']       = 'Blog';
+$lang->site->moduleAvailable['product']    = 'Product';
+$lang->site->moduleAvailable['book']       = 'Book';
+$lang->site->moduleAvailable['page']       = 'Page';
+$lang->site->moduleAvailable['forum']      = 'Forum';
+$lang->site->moduleAvailable['message']    = 'Message';
+$lang->site->moduleAvailable['search']     = 'Search';
+$lang->site->moduleAvailable['shop']       = 'Shop';
+$lang->site->moduleAvailable['score']      = 'Score';
+$lang->site->moduleAvailable['stat']       = 'Statistics';
+$lang->site->moduleAvailable['submittion'] = 'Submittion';
 
 $lang->site->metaHolder       = 'Tag <meta><script><style> and <link> applicable';
 $lang->site->fileAllowedRole  = 'Use "," to separate file types.';
