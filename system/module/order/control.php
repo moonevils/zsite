@@ -391,6 +391,7 @@ class order extends control
         }
         $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
         $this->view->order       = $this->order->getByID($orderID);
+        $this->view->products    = $this->order->getOrderProducts($orderID);
         $this->view->title       = $this->lang->order->edit;
         $this->display();
     }
