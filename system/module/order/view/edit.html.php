@@ -12,13 +12,14 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php include '../../../common/view/datepicker.html.php';?>
+<?php $productCount = count($products); $item = 1;?>
+<?php js::set('productCount', $productCount);?>
 <form method='post' id='editForm' class='form-inline' action="<?php echo inlink('edit', "orderID={$order->id}");?>">
   <table class='table table-form'>
     <tr>
       <th class='w-80px'><?php echo $lang->order->deliveryStatus;?></th>
       <td><?php echo $lang->order->deliverList[$order->deliveryStatus];?></td>
     </tr>
-    <?php $productCount = count($products); $item = 1;?>
     <tr>
       <th rowspan='<?php echo $productCount;?>'><?php echo $lang->order->productInfo;?></th>
       <td>
