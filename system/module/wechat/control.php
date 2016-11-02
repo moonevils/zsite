@@ -132,6 +132,9 @@ class wechat extends control
      */
     public function integrate($publicID)
     {
+        $this->lang->menuGroups->wechat = 'interface';
+        $this->lang->wechat->menu       = $this->lang->interface->menu;
+        
         $this->view->title  = $this->lang->wechat->integrate;
         $this->view->public = $this->wechat->getByID($publicID);
         $this->display();
@@ -146,6 +149,9 @@ class wechat extends control
      */
     public function edit($publicID)
     {
+        $this->lang->menuGroups->wechat = 'interface';
+        $this->lang->wechat->menu       = $this->lang->interface->menu;
+        
         if($_POST) 
         {
             $this->wechat->update($publicID);       
@@ -180,6 +186,9 @@ class wechat extends control
      */
     public function adminResponse($publicID)
     {
+        $this->lang->menuGroups->wechat = 'interface';
+        $this->lang->wechat->menu       = $this->lang->interface->menu;
+
         $this->view->title           = $this->lang->wechat->response->keywords;
         $this->view->publicID        = $publicID;
         $this->view->responseList    = $this->wechat->getResponseList($publicID);
