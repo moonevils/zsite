@@ -488,8 +488,10 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
-        $browser = helper::getBrowser() . ' ' . helper::getBrowserVersion();
-        $os      = helper::getOS();
+        $browserInfo = helper::getBrowser();
+        $browser     = $browserInfo['name'] . ' ' . $browserInfo['version'];
+        $os          = helper::getOS();
+
         $this->dao->update(TABLE_USER)->set('browser')->eq($browser)->set('os')->eq($os)->where('id')->eq($user->id)->exec();
         if(dao::isError()) return false;
 
@@ -1074,13 +1076,14 @@ class userModel extends model
 
         $extData = new stdclass();
         $extData->userAgent = $this->server->http_user_agent;
+        $browserInfo = helper::getBrowser();
 
         $data = new stdclass();
         $data->account     = $account;
         $data->date        = helper::now();
         $data->ip          = $ip;
         $data->location    = is_array($location) ? join(' ', $location) : $location;
-        $data->browser     = helper::getBrowser() . ' ' . helper::getBrowserVersion();
+        $data->browser     = $browserInfo['name'] . ' ' . $browserInfo['version'];
         $data->type        = 'adminlogin';
         $data->desc        = $result;
         $data->lang        = 'all';

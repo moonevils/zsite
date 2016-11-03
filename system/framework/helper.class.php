@@ -148,48 +148,38 @@ class helper extends baseHelper
     }
 
     /**
-     * Get browser.
+     * Get browser name and version.
      * 
      * @access public
-     * @return string
+     * @return array
      */
     public static function getBrowser()
     {
-        if(empty($_SERVER['HTTP_USER_AGENT'])) return 'unknow';
+        $browser = array('name'=>'unknown', 'version'=>'unknown');
+
+        if(empty($_SERVER['HTTP_USER_AGENT'])) return $browser;
 
         $agent = $_SERVER["HTTP_USER_AGENT"];
 
-        if(strpos($agent, 'MSIE') !== false || strpos($agent, 'rv:11.0')) return "ie";
+        // Check the name of browser
+        if(strpos($agent, 'MSIE') !== false || strpos($agent, 'rv:11.0')) $browser['name'] = 'ie';
 
         /* Chrome should checked before safari.*/
-        if(strpos($agent, 'Chrome') !== false)  return "chrome";
-        if(strpos($agent, 'Safari') !== false)  return 'safari';
-        if(strpos($agent, 'Firefox') !== false) return "firefox";
-        if(strpos($agent, 'Opera') !== false)   return 'opera';
+        if(strpos($agent, 'Chrome') !== false)  $browser['name'] = "chrome";
+        if(strpos($agent, 'Safari') !== false)  $browser['name'] = 'safari';
+        if(strpos($agent, 'Firefox') !== false) $browser['name'] = "firefox";
+        if(strpos($agent, 'Opera') !== false)   $browser['name'] = 'opera';
 
-        return 'unknown';
-    }
+        // Check the version of browser
+        if(preg_match('/MSIE\s(\d+)\..*/i', $agent, $regs))       $browser['version'] = $regs[1];
+        if(preg_match('/FireFox\/(\d+)\..*/i', $agent, $regs))    $browser['version'] = $regs[1];
+        if(preg_match('/Opera[\s|\/](\d+)\..*/i', $agent, $regs)) $browser['version'] = $regs[1];
+        if(preg_match('/Chrome\/(\d+)\..*/i', $agent, $regs))     $browser['version'] = $regs[1];
 
-    /**
-     * Get browser version. 
-     * 
-     * @access public
-     * @return string
-     */
-    public static function getBrowserVersion()
-    {
-        if(empty($_SERVER['HTTP_USER_AGENT'])) return 'unknow';
-
-        $agent = $_SERVER['HTTP_USER_AGENT'];   
-        if(preg_match('/MSIE\s(\d+)\..*/i', $agent, $regs))       return $regs[1];
-        if(preg_match('/FireFox\/(\d+)\..*/i', $agent, $regs))    return $regs[1];
-        if(preg_match('/Opera[\s|\/](\d+)\..*/i', $agent, $regs)) return $regs[1];
-        if(preg_match('/Chrome\/(\d+)\..*/i', $agent, $regs))     return $regs[1];
-
-        if((strpos($agent,'Chrome') == false) && preg_match('/Safari\/(\d+)\..*$/i', $agent, $regs)) return $regs[1];
-        if(preg_match('/rv:(\d+)\..*/i', $agent, $regs)) return $regs[1];
-
-        return 'unknow';
+        if((strpos($agent,'Chrome') == false) && preg_match('/Safari\/(\d+)\..*$/i', $agent, $regs)) $browser['version'] = $regs[1];
+        if(preg_match('/rv:(\d+)\..*/i', $agent, $regs)) $browser['version'] = $regs[1];
+        
+        return $browser;
     }
 
     /**
