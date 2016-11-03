@@ -33,7 +33,7 @@
         <?php commonModel::printLink('book', 'create', '', '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-primary'");?>
       </div>
     </div>
-    <table class='table table-hover table-striped tablesorter'>
+    <table class='table table-hover table-striped table-fixed tablesorter'>
       <thead>
         <tr class='text-center'>
           <th class='w-60px'><?php echo $lang->book->id;?></th>

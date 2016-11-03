@@ -18,7 +18,7 @@
       </form>
     </div>
   </div>
-  <table class='table table-hover table-striped tablesorter' id='threadList'>
+  <table class='table table-hover table-striped tablesorter table-fixed' id='threadList'>
     <?php if($threads):?>
     <thead>
       <tr class='text-center'>
@@ -86,7 +86,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='9'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php'; ?>

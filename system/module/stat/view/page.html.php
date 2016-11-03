@@ -36,7 +36,7 @@
       </li>
     </ul>
   </div>
-  <table class='table table-hover table-bordered table-striped tablesorter'>
+  <table class='table table-hover table-bordered table-striped tablesorter table-fixed'>
     <thead>
       <tr class='text-center'>
         <th class='text-left'><?php echo $lang->stat->page->url;?></th>
