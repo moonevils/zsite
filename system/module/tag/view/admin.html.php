@@ -25,7 +25,7 @@
       </form>
     </div>
   </div>
-  <table class='table table-hover table-bordered table-striped tablesorter'>
+  <table class='table table-hover table-bordered table-striped tablesorter table-fixed'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>

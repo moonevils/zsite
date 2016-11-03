@@ -22,7 +22,7 @@
     </ul> 
     <span class='panel-actions'><?php commonModel::printLink('guarder', 'addblacklist', '', '<i class="icon-plus"></i> ' . $lang->guarder->addBlacklist, 'class="btn btn-primary" data-toggle="modal"');?></span>
   </div>
-  <table class='table table-bordered'>
+  <table class='table table-bordered table-fixed'>
     <thead>
       <tr>
         <th><?php echo $lang->blacklist->identity;?></th>
@@ -49,7 +49,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='7' class='text-right'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='4' class='text-right'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

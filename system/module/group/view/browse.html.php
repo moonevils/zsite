@@ -16,7 +16,7 @@
     <strong><i class='icon-group'></i> <?php echo $lang->group->browse;?></strong>
     <span class='panel-actions pull-right'><?php commonModel::printLink('group', 'create', '', $lang->group->create, "class='btn btn-primary' data-toggle='modal'");?></span>
   </div>
-  <table class='table table-hover table-striped'>
+  <table class='table table-hover table-striped table-fixed'>
     <thead>
       <tr>
        <th class='w-50px'><?php echo $lang->group->id;?></th>

@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class='clo-md-6'>
-      <table class='table table-bordered table-report w-500px' id='reportData'>
+      <table class='table table-bordered table-fixed table-report w-500px' id='reportData'>
         <thead>
           <tr class='text-center'>
             <td><?php echo $lang->stat->searchEngine?></td>
