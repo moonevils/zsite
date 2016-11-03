@@ -19,8 +19,9 @@ class logModel extends model
      */
     public function saveVisitor()
     {
-        $browserName    = helper::getBrowser();
-        $browserVersion = helper::getBrowserVersion();
+        $browser        = helper::getBrowser();
+        $browserName    = $browser['name'];
+        $browserVersion = $browser['version'];
         if(!empty($_COOKIE['vid']))
         {           
             $visitor = $this->getVisitorByID($this->cookie->vid); 
