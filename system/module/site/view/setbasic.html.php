@@ -46,16 +46,16 @@
         </tr>
         <tr>
           <th rowspan='4'><?php echo $lang->site->module;?></th>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailableGroups->user, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
+          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->user, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
         </tr>
         <tr>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailableGroups->content, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
+          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->content, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
         </tr>
         <tr>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailableGroups->mall, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
+          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->mall, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
         </tr>
         <tr>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailableGroups->score, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
+          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->score, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->keywords;?></th> 
