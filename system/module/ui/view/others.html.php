@@ -19,7 +19,7 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
-      <table class='table table-form w-p60'>
+      <table class='table table-form w-p60 table-fixed'>
         <?php if(strpos($this->config->site->modules, 'product') !== false):?>
         <tr>
           <th class='w-200px'><?php echo $lang->ui->productView;?></th>
