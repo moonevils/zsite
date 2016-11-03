@@ -16,7 +16,7 @@
       </form>
     </div>
   <strong><i class='icon-comments'></i> <?php echo $lang->reply->list;?></strong></div>
-  <table class='table table-hover table-bordered table-striped' id='replyList'>
+  <table class='table table-hover table-bordered table-fixed table-striped' id='replyList'>
     <thead>
       <tr class='text-center'>
         <th class='w-80px'><?php echo $lang->reply->id;?></th>
@@ -44,7 +44,7 @@
       </tr>  
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php'; ?>
