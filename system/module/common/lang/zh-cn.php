@@ -70,6 +70,7 @@ $lang->wechatTip        = '微信订阅';
 $lang->qrcodeTip        = '移动访问';
 $lang->language         = '语言';
 $lang->custom           = '自定义';
+$lang->productMenu      = '产品';
 
 /* Global action items. */
 $lang->reset          = '重置';
