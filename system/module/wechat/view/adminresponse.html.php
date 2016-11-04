@@ -18,7 +18,7 @@
       <?php commonModel::printLink('wechat', 'setResponse', "publicID=$publicID", $lang->wechat->response->create, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-fixed table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
         <th class='w-180px'><?php echo $lang->wechat->response->keywords;?></th>

@@ -22,7 +22,7 @@
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->list;?></strong>
     <div class='panel-actions'><?php commonModel::printLink('wechat', 'create', '', '<i class="icon-plus"></i>' . $lang->wechat->create, "class='btn btn-primary'");?></div>
   </div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-fixed table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
         <th class='w-200px'><?php echo $lang->wechat->name;?></th>

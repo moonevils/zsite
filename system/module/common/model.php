@@ -433,7 +433,7 @@ class commonModel extends model
         $string .= "</ul>\n";
         return $string;
     }
-    
+     
     /**
      * Create the module menu.
      *

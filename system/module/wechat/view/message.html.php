@@ -23,7 +23,7 @@
       <?php endforeach;?>
     </ul> 
   </div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-fixed table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
         <th colspan='2'><?php echo $lang->wechat->message->content;?></th>
@@ -46,7 +46,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='6'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='4'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

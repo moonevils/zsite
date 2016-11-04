@@ -60,7 +60,7 @@ class guarder extends control
             $ips = explode(',', $setting->ip);
             foreach($ips as $ip)
             {
-                if(!empty($ip) and !helper::checkIP($ip))
+                if(!empty($ip) and !validater::checkIP($ip))
                 {
                     $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->whitelist->wrongIP));
                 }
