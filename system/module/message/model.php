@@ -576,7 +576,7 @@ class messageModel extends model
             ->from(TABLE_MESSAGE)
             ->where('status')->eq(0)
             ->andWhere('type')->in('comment,message,reply')
-            ->andWhere('account')->notIn(array_keys($admins))
+            ->andWhere('account')->notin(array_keys($admins))
             ->orderBy('date_desc')
             ->limit($limit)
             ->fetchAll();
