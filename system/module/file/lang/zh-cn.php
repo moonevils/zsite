@@ -69,3 +69,4 @@ $lang->file->nameEmpty        = "文件名不能为空";
 $lang->file->copySuccess      = "已复制到剪贴板";
 $lang->file->evilChar         = "包含非法字符";
 $lang->file->rebuildThumbs    = "已完成 %s";
+$lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";

@@ -60,4 +60,17 @@ $(document).ready(function()
     $('.' + type + '-view').click();
     
     $('.file-source input').mouseover(function(){$(this).select()});
+
+    var hasFlash = false;
+    try {
+          hasFlash = Boolean(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'));
+    } catch(exception) {
+          hasFlash = ('undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']);
+    }
+    if(!hasFlash){ $('.file-url').attr("disabled",false);}
+    if(!hasFlash){ $('.copyBtn').click(function(){
+      new $.zui.Messager(v.noFlashTip, {
+            type: 'warning'
+      }).show();
+    })}
 });

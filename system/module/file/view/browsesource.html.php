@@ -1,6 +1,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::import($jsRoot . 'zeroclipboard/zeroclipboard.min.js');?>
 <?php js::set('copySuccess', $lang->file->copySuccess);?>
+<?php js::set('noFlashTip', $lang->file->noFlashTip);?>
 <div class='modal fade' id='uploadModal'>
   <div class='modal-dialog'>
     <div class='modal-content'>
@@ -47,7 +48,7 @@
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
             $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
-            $imageHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
+            $imageHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control file-url'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $imageHtml .= "<div class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'deletesource', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $imageHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-pencil'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
@@ -59,7 +60,7 @@
             $file->title = $file->title . ".$file->extension";
             $fileHtml .= "<li class='file file-{$file->extension}'>";
             $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
-            $fileHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
+            $fileHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control file-url'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'deletesource', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $fileHtml .= html::a(helper::createLink('file', 'editsource', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal' data-title='{$lang->file->editSource}'");
