@@ -143,7 +143,7 @@ class baseValidater
      */
     public static function checkTel($var)
     {
-        return preg_match("/^([0-9]{3,4}-)?[0-9]{7,8}$/", $var);
+        return preg_match("/^([0-9]{3,4}-?)?[0-9]{7,8}$/", $var);
     }
 
     /**

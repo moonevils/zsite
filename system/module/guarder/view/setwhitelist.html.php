@@ -15,7 +15,7 @@
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->guarder->setWhitelist;?></strong></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
-      <table class='table table-form'>
+      <table class='table table-form table-fixed'>
         <tr>
           <th class='w-100px'><?php echo $lang->guarder->whitelist->ip;?></th>
           <td colspan='2'>

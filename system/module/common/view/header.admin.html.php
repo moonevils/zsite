@@ -4,8 +4,15 @@
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
   <?php
+  if(!commonModel::isAvailable('shop')) unset($lang->groups->shop);
+  if(!commonModel::isAvailable('user'))
+  {
+    unset($lang->groups->shop);
+    unset($lang->groups->user);
+  }
   foreach ($lang->groups as $menuGroup => $groupSetting)
   {
+      
       $print = false;
       $groupMenus = explode(',', $this->config->menus->$menuGroup);
       
