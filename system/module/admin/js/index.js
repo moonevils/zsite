@@ -1,32 +1,3 @@
-/**
- * Callback for http://api.chanzhi.org/goto.php?item=dynamics_jsonp&extra=afterDynmaicsLoad
- * 
- * @param  string html
- * @return void
- */
-function afterDynmaicsLoad(html)
-{
-    $('#chanzhiDynamic').html(html);
-}
-
-function afterCheckVersion(latest)
-{
-  if(typeof latest != 'undefined')
-  {
-      if(latest.isNew)
-      {
-          $('#version').html(latest.version);
-          $('#releaseDate').html(latest.releaseDate);
-          $('#upgradeLink').attr('href', latest.url);
-          $('#upgradeNotice').show();
-      }
-      else 
-      {
-        $('#upgradeNotice').remove();
-      }
-  }
-}
-
 $(document).ready(function()
 {
     $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});

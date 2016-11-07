@@ -63,6 +63,7 @@
             <div class='panel-body no-padding' data-url="<?php echo helper::createLink('widget', 'printWidget', 'widget=' . $widget->id);?>"></div>
             <?php else:?>
             <div id='chanzhiDynamic'></div>
+            <script>function afterDynmaicsLoad(html){$('#chanzhiDynamic').html(html);}</script>
             <script async src='http://api.chanzhi.org/goto.php?item=dynamics_jsonp&extra=afterDynmaicsLoad'></script>
             <?php endif;?>
           </div>
@@ -88,6 +89,25 @@
     <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
   </div>
 </div>
+<script>
+function afterCheckVersion(latest)
+{
+  if(typeof latest != 'undefined')
+  {
+      if(latest.isNew)
+      {
+          $('#version').html(latest.version);
+          $('#releaseDate').html(latest.releaseDate);
+          $('#upgradeLink').attr('href', latest.url);
+          $('#upgradeNotice').show();
+      }
+      else 
+      {
+        $('#upgradeNotice').remove();
+      }
+  }
+}
+</script>
 <script async src='<?php echo 'http://api.chanzhi.org/latest.php?version=' . $this->config->version . '&type=afterCheckVersion';?>'></script>
 <?php endif;?>
 
