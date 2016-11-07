@@ -747,8 +747,9 @@ class bookModel extends model
         foreach($families as $node)
         {
             $this->dao->delete()->from(TABLE_BOOK)->where('id')->eq($node->id)->exec();
+            $this->loadModel('search')->deleteIndex('book', $node->id);
         }
-        return $this->loadModel('search')->deleteIndex('book', $bookID);
+        return !dao::isError(); 
     }
 
     /**
