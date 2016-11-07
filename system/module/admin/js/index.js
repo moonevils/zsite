@@ -9,6 +9,24 @@ function afterDynmaicsLoad(html)
     $('#chanzhiDynamic').html(html);
 }
 
+function afterCheckVersion(latest)
+{
+  if(typeof latest != 'undefined')
+  {
+      if(latest.isNew)
+      {
+          $('#version').html(latest.version);
+          $('#releaseDate').html(latest.releaseDate);
+          $('#upgradeLink').attr('href', latest.url);
+          $('#upgradeNotice').show();
+      }
+      else 
+      {
+        $('#upgradeNotice').remove();
+      }
+  }
+}
+
 $(document).ready(function()
 {
     $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
@@ -17,24 +35,6 @@ $(document).ready(function()
     if($notice.length)
     {
         $notice.hide();
-        var checkVersionTask = null;
-        var checkVersion = function()
-        {
-            if(typeof latest != 'undefined')
-            {
-                clearInterval(checkVersionTask);
-                if(latest.isNew)
-                {
-                    $('#version').html(latest.version);
-                    $('#releaseDate').html(latest.releaseDate);
-                    $('#upgradeLink').attr('href', latest.url);
-                    $notice.show();
-                }
-                else $notice.remove();
-            }
-            
-        };
-        checkVersionTask = setInterval(checkVersion, 500);
     }
 });
 

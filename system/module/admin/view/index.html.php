@@ -88,6 +88,7 @@
     <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
   </div>
 </div>
+<script async src='<?php echo 'http://api.chanzhi.org/latest.php?version=' . $this->config->version . '&type=afterCheckVersion';?>'></script>
 <?php endif;?>
 
 <?php if(!$checkLocation):?>
@@ -99,8 +100,4 @@
 </div>
 <?php endif;?>
 </div>
-
-<?php if(!$ignoreUpgrade): ?>
-<script async src='<?php echo 'http://api.chanzhi.org/latest.php?version=' . $this->config->version ?>'></script>
-<?php endif; ?>
 <?php include '../../common/view/footer.admin.html.php';?>
