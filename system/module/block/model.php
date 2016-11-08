@@ -773,10 +773,12 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
                 if(!empty($content->custom->$theme->css))
                 {
-                    $customStyle = str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->css, ENT_QUOTES));
-                    $lessc = $this->app->loadClass('lessc');
+                    $customStyle     = str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->css, ENT_QUOTES));
+                    $customStyleBack = $customStyle;
+                    $lessc           = $this->app->loadClass('lessc');
                     $lessc->setFormatter("compressed");
                     $customStyle = $lessc->compile($customStyle);
+                    if(is_array($customStyle) and !empty($customStyle)) $customStyle = $customStyleBack;
                     $style .= $customStyle;
                 }
             }
