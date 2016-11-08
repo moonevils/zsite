@@ -448,8 +448,8 @@ class site extends control
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setcache')));
         }
-
-        $this->view->title = $this->lang->site->setCache;
+        $this->view->cacheRoot = $this->app->getTmpRoot() . 'cache/'; 
+        $this->view->title     = $this->lang->site->setCache;
         $this->display();
     }
 
@@ -499,5 +499,21 @@ class site extends control
 
         $this->view->title = $this->lang->site->setSystem;
         $this->display();
+    }
+    /**
+     * Clear cache
+     *
+     * @access public
+     * @param  void
+     * @return void
+     */
+    public function clearCache()
+    {
+        if(helper::isAjaxRequest())
+        {
+             $clearResult = $this->site->clearCache();
+             $clearResult = json_encode($clearResult);
+             echo $clearResult;
+        }
     }
 }

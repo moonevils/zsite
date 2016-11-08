@@ -23,7 +23,57 @@ class siteModel extends model
     {
         if(!isset($this->config->site->name))  $this->config->site->name = $this->lang->chanzhiEPS;
     }
-    
+
+    /**
+     * Clear cache
+     *
+     * @access public
+     * @param  void
+     * @return array
+     */
+    public function clearCache()
+    {
+        $clearResult = array('result' => 'success', 'message' => '');
+        $tmpRoot = $this->app->getTmpRoot();
+        $cacheRoot = $tmpRoot . 'cache/'; 
+        if(!$this->deleteDir($cacheRoot)) $clearResult = array('result' => 'fail', 'message' => $this->lang->site->failClear);
+        return $clearResult;
+    }
+
+    /**
+     * Delete dir
+     * 
+     * @access public
+     * @param  string
+     * @return bool
+     */
+    function deleteDir($dir) 
+    {
+        $dh = opendir($dir);
+        while($file = readdir($dh)) 
+        {
+            if($file != "." && $file != "..") 
+            {
+                $fullpath = $dir . "/" . $file;
+                if(!is_dir($fullpath)) 
+                {
+                    unlink($fullpath);
+                } 
+                else 
+                {
+                    $this->deleteDir($fullpath);
+                }
+            }
+        }
+
+        closedir($dh);
+        if(rmdir($dir)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Set the site syetem options.
      *
