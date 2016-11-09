@@ -70,9 +70,8 @@ class ui extends control
         if($_POST)
         {
             $params = $_POST;
-
             $lessResult = $this->ui->createCustomerCss($template, $theme, $params);
-            if($lessResult['result'] != 'success') $this->send(array('result' => 'fail', 'message' => $errors));
+            if($lessResult['result'] != 'success') $this->send(array('result' => 'fail', 'message' => $lessResult['message']));
             $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
             $postedSetting = fixer::input('post')->remove('template,theme')->get();
 
