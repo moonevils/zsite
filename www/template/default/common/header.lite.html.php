@@ -69,6 +69,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
 
   /* Import customed css file if it exists. */
   $customCssFile = $this->loadModel('ui')->getCustomCssFile($config->template->{$this->app->clientDevice}->name, $config->template->{$this->app->clientDevice}->theme);
+  if(!file_exists($customCssFile)) $this->loadModel('ui')->createCustomerCss($config->template->{$this->app->clientDevice}->name, $config->template->{$this->app->clientDevice}->theme);
   if(file_exists($customCssFile)) css::import($this->ui->getThemeCssUrl($template, $theme), "id='themeStyle'");
  
   if(isset($pageCSS)) css::internal($pageCSS);
