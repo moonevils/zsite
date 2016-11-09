@@ -28,7 +28,7 @@ class logModel extends model
             if(!empty($visitor))
             {
                 $visitor->new = false;
-                if($visitor->browserName == $browserName and $visitor->browserVersion = $browserVersion and $visitor->osName == helper::getOS()) return $visitor;
+                if($visitor->browserName == $browserName and $visitor->browserVersion == $browserVersion and $visitor->osName == helper::getOS()) return $visitor;
             }
         }
 
