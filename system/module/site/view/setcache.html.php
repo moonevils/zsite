@@ -12,6 +12,9 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('closeScoreTip', $lang->site->closeScoreTip);?>
+<?php js::set('clearing', $lang->site->clearingCache);?>
+<?php js::set('cleared', $lang->site->clearedCache);?>
+<?php js::set('clearCacheTip', sprintf($lang->site->clearCacheTip, $cacheRoot));?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setCache;?></strong></div>
   <div class='panel-body'>
@@ -35,8 +38,11 @@
           </td>
         </tr>
         <tr>
-          <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></td>
+          <td></td>
+          <td id='saveCacheSetting'>
+            <?php echo html::submitButton();?>
+            <?php echo html::a(inlink('clearCache'), $lang->site->clearCache, "class='btn btn-primary' id='clearButton'");?>
+          </td>
         </tr>
       </table>
     </form>

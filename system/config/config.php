@@ -190,6 +190,9 @@ $config->dependence->submittion[]   = 'submittion';
 $config->dependence->submittion[]   = 'user';
 $config->dependence->orderSetting[] = 'product';
 $config->dependence->comment[]      = 'message';
+$config->dependence->wechat[]       = 'user';
+$config->dependence->tag[]          = 'article';
+$config->dependence->order[]        = 'shop';
 
 /* Database settings. */
 $config->db = new stdclass();          

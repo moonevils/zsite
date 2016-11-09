@@ -4,7 +4,17 @@
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
   <?php
-  if(!commonModel::isAvailable('shop')) unset($lang->groups->shop);
+  if(!commonModel::isAvailable('shop')) 
+  {
+    if(!commonModel::isAvailable('product'))  
+    {
+      unset($lang->groups->shop);
+    }
+    else
+    {
+      $lang->groups->shop = array('title' => "$lang->productMenu", 'link' => 'product|admin|', 'icon' => 'shopping-cart');
+    }
+  }
   if(!commonModel::isAvailable('user'))
   {
     unset($lang->groups->shop);

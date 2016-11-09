@@ -1193,6 +1193,7 @@ class commonModel extends model
                     $showGroup = true;
                     $lang->groups->{$menuGroup}['link'] = substr($lang->menu->$groupMenu, strpos($lang->menu->$groupMenu, '|') + 1);
                 }
+                if(!commonModel::isAvailable($groupMenu)) unset($lang->menu->$groupMenu);
                 continue;
             }
             if(!$showGroup) unset($lang->groups->$menuGroup);

@@ -155,7 +155,7 @@ class router extends baseRouter
             {
                 if(empty($page)) continue;
                 $key = 'page' . DS . $this->clientDevice . $page . '*';
-                $this->cache->clear($key);
+                if(isset($this->cache)) $this->cache->clear($key);
             }
         }
         return true;
