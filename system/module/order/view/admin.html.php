@@ -73,7 +73,7 @@
           <td><?php echo $order->amount;?></td>
           <td><?php echo $this->order->processStatus($order);?></td>
           <td title='<?php echo $order->note;?>' class='text-left'><?php echo $order->note;?></td>
-          <td><?php echo formatTime($order->last, 'm-d H:i');?></td>
+          <td><?php echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i');?></td>
           <td class='text-left'><?php $this->order->printActions($order);?></td>
         </tr>
         <?php endforeach;?>

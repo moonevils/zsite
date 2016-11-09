@@ -13,7 +13,7 @@
 <div class='container'>
   <div class='modal-dialog'>
     <div class='modal-header'>
-      <?php if($createSlidePath or $chmodThemePath):?>
+      <?php if($createSlidePath or (isset($chmodThemePath) and $chmodThemePath)):?>
       <h3><?php echo $lang->upgrade->prepair;?></h3>
       <?php else:?>
       <h3><?php echo $lang->upgrade->backup;?></h3>
@@ -22,9 +22,9 @@
     <div class='modal-body'>
       <?php if($createSlidePath):?>
       <?php printf($lang->upgrade->createSlidePath, $slidePath);?>
-      <?php elseif($chmodThemePath):?>
+      <?php elseif(isset($chmodThemePath) and $chmodThemePath):?>
       <?php printf($lang->upgrade->chmodThemePath, $themePath);?>
-      <?php elseif($chmodCustomConfig):?>
+      <?php elseif(isset($chmodCustomConfig) and $chmodCustomConfig):?>
       <?php printf($lang->upgrade->chmodCustomConfig, $customFile);?>
       <?php else:?>
       <?php printf($lang->upgrade->backupData, $db->user, $db->password, $db->name, inlink('selectVersion'));?>
@@ -36,7 +36,7 @@
       <?php endif;?>
     </div>
     <div class='modal-footer'>
-      <?php if($createSlidePath or $chmodThemePath or $chmodCustomConfig):?>
+      <?php if($createSlidePath or (isset($chmodThemePath) and $chmodThemePath) or (isset($chmodCustomConfig) and $chmodCustomConfig)):?>
       <?php echo html::a('', $lang->upgrade->next, "class='btn btn-primary'");?>
       <?php else:?>
       <?php echo html::a(inlink('selectVersion'), $lang->upgrade->next, "class='btn btn-primary'");?>
