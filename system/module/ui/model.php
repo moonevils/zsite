@@ -363,7 +363,16 @@ class uiModel extends model
             $css .= $compiledCss;
         }
 
-        if(!empty($lessc->errors)) return array('result' => 'fail', 'message' => $lessc->errors);
+        if(!empty($lessc->errors)) 
+        {
+            $errorLessc = '';
+            foreach($lessc->errors as $errorLesscValue)
+            {
+                $errorLessc .= $errorLesscValue . '; ';
+            }
+            return array('result' => 'fail', 'message' => $errorLessc);
+        }
+
         file_put_contents($cssFile, $css);
 
         return array('result' => 'success', 'css' => $css);

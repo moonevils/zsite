@@ -187,8 +187,7 @@ class message extends control
         if($message->type != 'message')
         {
             $message->objectTitle   = $this->message->getObjectTitle($message);
-            $message->objectViewURL = $message->type == 'message' ? $this->message->getObjectLink($message) : '';
-
+            $message->objectViewURL = $this->message->getObjectLink($message);
             if(!empty($message->objectTitle))
             {
                 $objectViewLink = html::a($message->objectViewURL, $message->objectTitle, "target='_blank'");
@@ -199,7 +198,7 @@ class message extends control
             }
 
             $commentTo = $message->type == 'reply' ? $this->lang->message->reply : $this->lang->comment->commentTo;
-
+            
             $title .= "&nbsp; <i class='icon-envelope green icon'></i>" . $message->email . "&nbsp;<span class='gray'>" . $message->date . "</span> &nbsp;" . $commentTo . "&nbsp" .  $objectViewLink;
         }
 
