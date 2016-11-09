@@ -1877,8 +1877,8 @@ class lessc {
 		if ($outFname !== null) {
 			return file_put_contents($outFname, $out);
 		}
-
-		return $out;
+        
+        return $out;
 	}
 
 	// compile only if changed input has changed or output doesn't exist
