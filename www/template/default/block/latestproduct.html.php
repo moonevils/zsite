@@ -37,7 +37,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
-          <div class='card-heading'>
+          <div class='card-heading' style='min-height:20px;'>
             <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
             <?php if($content->categoryName == 'abbr'):?>
             <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
@@ -69,6 +69,14 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             </span>
           </div>
         </a>
+         <?php if(isset($content->showInfo) and isset($content->infoAmount)):?>
+         <?php 
+           $productInfo = empty($product->desc) ? $product->content : $product->desc; 
+           $productInfo = strip_tags($productInfo);
+           $productInfo = (mb_strlen($productInfo) > $content->infoAmount) ? mb_substr($productInfo, 0 , $content->infoAmount, 'utf8') : $productInfo;
+         ?>
+         <div style='padding-left:10px;'><?php echo $productInfo;?></div>
+         <?php endif;?>
       </div>
       <?php endif;?>
       <?php endforeach;?>
@@ -114,6 +122,14 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         <?php endif;?>
         <?php echo html::a($url, $product->name);?>
       </li>
+      <?php if(isset($content->showInfo) and isset($content->infoAmount)):?>
+      <?php 
+        $productInfo = empty($product->desc) ? $product->content : $product->desc; 
+        $productInfo = strip_tags($productInfo);
+        $productInfo = (mb_strlen($productInfo) > $content->infoAmount) ? mb_substr($productInfo, 0 , $content->infoAmount, 'utf8') : $productInfo;
+      ?>
+      <div style='padding-left:30px;'><?php echo $productInfo;?></div>
+      <?php endif;?>
       <?php endforeach;?>
     </ul>
   </div>

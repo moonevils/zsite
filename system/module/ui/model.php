@@ -358,7 +358,9 @@ class uiModel extends model
         {
             $css .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
             $extraCss = str_replace(array('&gt;', '&quot;'), array('>', '"'), $extraCss);
-            $css .= $lessc->compile($extraCss);
+            $comiledCss = $lessc->compile($extraCss);
+            if(is_array($comiledCss) and !empty($comiledCss)) $comiledCss = $extraCss;
+            $css .= $compiledCss;
         }
 
         if(!empty($lessc->errors)) return array('result' => 'fail', 'message' => $lessc->errors);
@@ -382,14 +384,8 @@ class uiModel extends model
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
 
-        try
-        {
-            $compiledCSS = $lessc->compile($css);
-        }
-        catch(Exception $error) 
-        {
-            return $css;
-        }
+        $compiledCSS = $lessc->compile($css);
+        if(is_array($compiledCSS) and !empty($compiledCSS)) return $css;
 
         return $compiledCSS;
     }

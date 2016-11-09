@@ -39,6 +39,19 @@
   </td>
 </tr>
 <tr>
+  <th><?php echo $lang->block->showInfo;?></th>
+  <td>
+    <div class='input-group' style='width:300px'>
+      <span class='input-group-addon'>
+        <input type='checkbox' name='params[showInfo]' <?php if(isset($block->content->showInfo) && $block->content->showInfo) echo 'checked';?> value='1' />
+      </span>
+      <span class='input-group-addon fix-border'><?php echo $lang->block->infoAmount;?></span>
+      <?php echo html::input('params[infoAmount]', isset($block->content->infoAmount) ? $block->content->infoAmount : '', "class='form-control'");?>
+      <span class='input-group-addon fix-border'><?php echo $lang->block->character;?></span>
+    </div>
+  </td>
+</tr>
+<tr>
   <th><?php echo $lang->block->showImage;?></th>
   <td><input type='checkbox' name='params[image]' <?php if(isset($block->content->image) && $block->content->image) echo 'checked';?> value='1' /></td>
 </tr>
