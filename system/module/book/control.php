@@ -55,7 +55,7 @@ class book extends control
     public function browse($nodeID)
     {
         $node = $this->book->getNodeByID($nodeID);
-        if($node->type == 'book') $this->locate(inlink('read', "articleID={$node->id}")); 
+        if($node->type == 'book' and !empty($node->content)) $this->locate(inlink('read', "articleID={$node->id}")); 
         if($node)
         {
             $nodeID = $node->id;
@@ -110,22 +110,22 @@ class book extends control
         if(!$article) die($this->fetch('error', 'index'));
         $book    = $article->book;
         $serials = $this->book->computeSN($book->id);
+        $content = $this->book->addMenu($article->content);
         
         if($article->type != 'book')
         {        
             $parent  = $article->origins[$article->parent];
-            $content = $this->book->addMenu($article->content);
             $this->view->parent      = $parent;
-            $this->view->content     = $content;
             $this->view->prevAndNext = $this->book->getPrevAndNext($article);
         }
-        $activeLink = $article->type == 'book' ? 'activeSummary' : '';
-        $this->view->bookSummaryLink = html::a(inLink('read', "articleID=$book->id", "book=$book->alias&node=$article->alias"), $book->title . $this->lang->book->summary, "class = $activeLink");
+        $activeInfoLink = $article->type == 'book' ? 'activeBookInfo' : '';
+        $this->view->bookInfoLink = html::a(inLink('read', "articleID=$book->id", "book=$book->alias&node=$article->alias"), $book->title . $this->lang->book->info, "class = $activeInfoLink");
         
         $this->view->title       = $article->title . ' - ' . $book->title;;
         $this->view->keywords    = $article->keywords;
         $this->view->desc        = $article->summary;
         $this->view->article     = $article;
+        $this->view->content     = $content;
 
         $this->view->book            = $book;
         $this->view->allCatalog      = $this->book->getFrontCatalog($book->id, $serials);
