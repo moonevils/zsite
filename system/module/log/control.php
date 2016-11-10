@@ -11,7 +11,7 @@
  */
 class log extends control
 {
-    public function record()
+    public function record($hash = '')
     {
         $this->log->clearLog();
         $visitor = $this->log->saveVisitor();
