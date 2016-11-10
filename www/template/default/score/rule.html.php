@@ -31,7 +31,7 @@
       <?php foreach($config->score->methodOptions as $item => $type):?>
         <?php if($type != 'award' and $type != 'punish') continue;?>
         <?php $count = zget($this->config->score->counts, $item, '0');?>
-        <?php if($count == '0') continue;?>
+        <?php if($count == '0' or $count == '') continue;?>
         <?php if($item == 'expend') $item = 'expendproduct';?>
         <?php if($item == 'recharge') $item = 'rechargebalance';?>
         <?php $count = ($type == 'award' ? '+' : '-') . $count;?>
