@@ -332,7 +332,6 @@ class articleModel extends model
      */
     public function getPrevAndNext($current, $category)
     {
-        $current = $this->getByID($current);
         $prev = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
