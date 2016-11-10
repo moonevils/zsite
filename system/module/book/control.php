@@ -55,7 +55,7 @@ class book extends control
     public function browse($nodeID)
     {
         $node = $this->book->getNodeByID($nodeID);
-
+        
         if($node)
         {
             $nodeID = $node->id;
@@ -66,17 +66,17 @@ class book extends control
                     ->where('path')->like(",{$nodeID},%")
                     ->orderBy('`order`')
                     ->fetchGroup('parent', 'id');
-
+                
                 $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
                     ->where('path')->like("%,{$nodeID},%")
                     ->fetchAll('id');
                 $articles = $this->book->getArticleIdList($nodeID, $families, $allNodes);
-
+                
                 if($articles)
                 {
                     $articles  = explode(',', $articles);
                     $articleID = current($articles);
-                    $article   = $this->book->getNodeByID($articleID);
+                    $article   = zget($allNodes, $articleID);
                     $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''));
                 }
             }
