@@ -38,7 +38,7 @@ if(isset($block->content->fromCurrent) and $block->content->fromCurrent)
 }
 ?>
 <?php if($block->content->showChildren):?>
-<?php $treeMenu = $this->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink), $block->content->initialExpand);?>
+<?php $treeMenu = $this->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink), zget($block->content, 'initialExpand', 1));?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
