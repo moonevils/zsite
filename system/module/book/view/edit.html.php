@@ -74,7 +74,7 @@ js::set('path', $path);
             <th><?php echo $lang->book->summary;?></th>
             <td colspan='2'><?php echo html::textarea('summary', $node->summary, "class='form-control' rows='2'");?></td>
           </tr>
-          <?php if($node->type == 'article'):?>
+          <?php if($node->type == 'article' or $node->type == 'book'):?>
           <tr>
             <th><?php echo $lang->book->content;?></th>
             <td colspan='2' valign='middle'><?php echo html::textarea('content', htmlspecialchars($node->content), "rows='15' class='form-control'");?></td>
