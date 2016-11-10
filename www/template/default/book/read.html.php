@@ -21,7 +21,12 @@
     </div>
     <?php endif; ?>
     <div class='panel-body'>
-      <div class='books'><?php if(!empty($allCatalog)) echo $allCatalog;?></div>
+      <div class='books'>
+        <?php 
+          if(!empty($bookInfoLink) and !empty($book->summary)) echo "<span id='bookInfoLink'>" . $bookInfoLink . "</span>";   
+          if(!empty($allCatalog)) echo $allCatalog;
+        ?>
+      </div>
       <div class='powerby'><?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?></div>
     </div>
   </div>
@@ -106,7 +111,7 @@
       <div class='panel-body'>
         <div class='books'>
         <?php
-          if(!empty($bookSummaryLink) and !empty($book->summary)) echo "<span id='bookSummaryLink'>" . $bookSummaryLink . "</span>";   
+          if(!empty($bookInfoLink) and !empty($book->content)) echo "<span id='bookInfoLink'>" . $bookInfoLink . "</span>";   
           if(!empty($allCatalog)) echo $allCatalog;
         ?>
         </div>
@@ -132,7 +137,7 @@
   </header>
   <section class='article-content'>
     <?php if(isset($content)) echo $content;?>
-    <?php if($article->type == 'book') echo $article->summary;?>
+    <?php if($article->type == 'book') echo $article->content;?>
   </section>
   <section><?php $this->loadModel('file')->printFiles($article->files);?></section>
   <footer>
@@ -159,7 +164,7 @@
     <?php endif;?>
   </footer>
 </div>
-<?php if(commonModel::isAvailable('message')) echo "<div id='commentBox'></div>";?>
+<?php if(commonModel::isAvailable('message') and $article->type != 'book') echo "<div id='commentBox'></div>";?>
 <div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php if($this->config->book->chapter == 'left'):?>
   </div>
