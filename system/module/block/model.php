@@ -83,7 +83,17 @@ class blockModel extends model
             }
         }
 
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
+        $blockIdList = array();
+        foreach($rawLayouts as $page => $pageBlocks)
+        {
+            foreach($pageBlocks as $region => $regionBlock)
+            {
+                $regionBlocks = json_decode($regionBlock->blocks);
+                foreach((array)$regionBlocks as $block) $blockIdList[] = $block->id;
+            }
+        }
+
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
 
         $layouts = array();
         foreach($rawLayouts as $page => $pageBlocks)

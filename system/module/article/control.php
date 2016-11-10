@@ -349,11 +349,11 @@ class article extends control
         $this->view->keywords    = $keywords;
         $this->view->desc        = $desc;
         $this->view->article     = $article;
-        $this->view->prevAndNext = $this->article->getPrevAndNext($article->id, $category->id);
+        $this->view->prevAndNext = $this->article->getPrevAndNext($article, $category->id);
         $this->view->category    = $category;
-        $this->view->contact     = $this->loadModel('company')->getContact();
         $this->view->mobileURL   = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'mhtml');
         $this->view->desktopURL  = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'html');
+
         $this->view->layouts     = $this->loadModel('block')->getPageBlocks('article', 'view', $article->id);
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
