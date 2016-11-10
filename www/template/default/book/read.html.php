@@ -8,7 +8,7 @@
     <?php if(!empty($book) && $book->title): ?>
     <div class='panel-heading clearfix'>
       <div class='dropdown pull-left'>
-        <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <span class='caret'></span></a>
+        <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <i class='caret-down'></i></a>
         <ul role='menu' class='dropdown-menu'>
           <?php foreach($books as $bookMenu):?>
           <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
@@ -23,7 +23,7 @@
     <div class='panel-body'>
       <div class='books'>
         <?php 
-          if(!empty($bookInfoLink) and !empty($book->summary)) echo "<span id='bookInfoLink'>" . $bookInfoLink . "</span>";   
+          if(!empty($bookInfoLink) and !empty($book->content)) echo "<span id='bookInfoLink'>" . $bookInfoLink . "</span>";   
           if(!empty($allCatalog)) echo $allCatalog;
         ?>
       </div>
@@ -98,7 +98,7 @@
       <?php if(!empty($book) && $book->title): ?>
       <div class='panel-heading clearfix'>
         <div class='dropdown pull-left'>
-          <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <span class='caret'></span></a>
+          <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <i class='icon icon-caret-down'></i></a>
           <ul role='menu' class='dropdown-menu'>
             <?php foreach($books as $bookMenu):?>
             <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
@@ -164,7 +164,7 @@
     <?php endif;?>
   </footer>
 </div>
-<?php if(commonModel::isAvailable('message') and $article->type != 'book') echo "<div id='commentBox'></div>";?>
+<?php if(commonModel::isAvailable('message')) echo "<div id='commentBox'></div>";?>
 <div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php if($this->config->book->chapter == 'left'):?>
   </div>
