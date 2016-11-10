@@ -49,13 +49,18 @@ class upgrade extends control
         $this->view->db    = $this->config->db;
         $this->view->slidePath = $this->app->getDataRoot() . 'slides';
         $this->view->customFile =  $this->app->getConfigRoot() . 'my.php';
+        $this->view->themePath      = $this->app->getWwwRoot() . 'theme';
         if(!is_dir($this->view->slidePath)) mkdir($this->view->slidePath, 0777, true);
 
         $this->view->createSlidePath   = !is_writeable($this->view->slidePath);
-        $this->view->chmodCustomConfig = !is_writeable($this->view->customFile);
-
-        $this->view->themePath      = $this->app->getWwwRoot() . 'theme';
-        $this->view->chmodThemePath = !is_writeable($this->view->themePath);
+        if(version_compare($this->config->installedVersion, '5.4', '<'))
+        {
+            $this->view->chmodCustomConfig = !is_writeable($this->view->customFile);
+        }
+        if(version_compare($this->config->installedVersion, '5.1', '<'))
+        {
+            $this->view->chmodThemePath = !is_writeable($this->view->themePath);
+        }
 
         $this->display();
     }

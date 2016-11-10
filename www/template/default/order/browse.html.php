@@ -31,7 +31,7 @@
                 <?php echo $this->order->processStatus($order);?>
               </td>
               <td class='text-left' title='<?php echo $order->note?>'><?php echo $order->note;?></td>
-              <td class='text-center'><?php echo formatTime($order->last, 'm-d H:i');?></td>
+              <td class='text-center'><?php echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i');?></td>
               <td class='text-left text-middle'><?php $this->order->printActions($order);?></td>
             </tr>
             <?php endforeach;?>

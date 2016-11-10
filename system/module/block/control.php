@@ -228,7 +228,7 @@ class block extends control
             if($newPlan) 
             {
                 $result   = $this->block->setPlan($newPlan, $template, $theme);
-                $this->send(array('result' => 'success', 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
             }
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
