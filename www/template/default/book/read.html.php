@@ -8,7 +8,7 @@
     <?php if(!empty($book) && $book->title): ?>
     <div class='panel-heading clearfix'>
       <div class='dropdown pull-left'>
-        <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <span class='caret'></span></a>
+        <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <i class='caret-down'></i></a>
         <ul role='menu' class='dropdown-menu'>
           <?php foreach($books as $bookMenu):?>
           <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
@@ -21,7 +21,12 @@
     </div>
     <?php endif; ?>
     <div class='panel-body'>
-      <div class='books'><?php if(!empty($allCatalog)) echo $allCatalog;?></div>
+      <div class='books'>
+        <?php 
+          if(!empty($bookInfoLink) and !empty($book->content)) echo "<span id='bookInfoLink'>" . $bookInfoLink . "</span>";   
+          if(!empty($allCatalog)) echo $allCatalog;
+        ?>
+      </div>
       <div class='powerby'><?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?></div>
     </div>
   </div>
@@ -37,18 +42,19 @@
           <dd data-toggle='tooltip' data-placement='top' ><i class='icon-edit icon-large'></i><?php printf($lang->book->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></dd>
           <?php endif;?>
         </dl>
-        <?php if($article->summary):?>
+        <?php if($article->summary and $article->type != 'book'):?>
         <section class='abstract'><strong><?php echo $lang->book->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
         <?php endif; ?>
       </header>
       <section class='article-content'>
-        <?php echo $content;;?>
+        <?php if(isset($content)) echo $content;;?>
       </section>
       <section><?php $this->loadModel('file')->printFiles($article->files);?></section>
       <footer>
         <?php if($article->keywords):?>
         <p class='small'><strong class='text-muted'><?php echo $lang->book->keywords;?></strong><span class='article-keywords'><?php echo $lang->colon . $article->keywords;?></span></p>
         <?php endif; ?>
+        <?php if(isset($prevAndNext)):?>
         <?php extract($prevAndNext);?>
         <ul class='pager pager-justify'>
           <?php if($prev): ?>
@@ -65,6 +71,7 @@
           <li class='next disabled'><a href='###'> <?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a></li>
           <?php endif; ?>
         </ul>
+        <?php endif;?>
       </footer>
       <?php if(commonModel::isAvailable('message')):?>
       <div id='commentBox'></div>
@@ -91,7 +98,7 @@
       <?php if(!empty($book) && $book->title): ?>
       <div class='panel-heading clearfix'>
         <div class='dropdown pull-left'>
-          <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <span class='caret'></span></a>
+          <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <i class='icon icon-caret-down'></i></a>
           <ul role='menu' class='dropdown-menu'>
             <?php foreach($books as $bookMenu):?>
             <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>
@@ -102,7 +109,12 @@
       </div>
       <?php endif; ?>
       <div class='panel-body'>
-        <div class='books'><?php if(!empty($allCatalog)) echo $allCatalog;?></div>
+        <div class='books'>
+        <?php
+          if(!empty($bookInfoLink) and !empty($book->content)) echo "<span id='bookInfoLink'>" . $bookInfoLink . "</span>";   
+          if(!empty($allCatalog)) echo $allCatalog;
+        ?>
+        </div>
       </div>
     </div>
   </div>
@@ -119,18 +131,20 @@
       <dd data-toggle='tooltip' data-placement='top' ><i class='icon-edit icon-large'></i><?php printf($lang->book->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></dd>
       <?php endif;?>
     </dl>
-    <?php if($article->summary):?>
+    <?php if($article->summary and $article->type != 'book'):?>
     <section class='abstract'><strong><?php echo $lang->book->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
     <?php endif; ?>
   </header>
   <section class='article-content'>
-    <?php echo $content;;?>
+    <?php if(isset($content)) echo $content;?>
+    <?php if($article->type == 'book') echo $article->content;?>
   </section>
   <section><?php $this->loadModel('file')->printFiles($article->files);?></section>
   <footer>
     <?php if($article->keywords):?>
     <p class='small'><strong class='text-muted'><?php echo $lang->book->keywords;?></strong><span class='article-keywords'><?php echo $lang->colon . $article->keywords;?></span></p>
     <?php endif; ?>
+    <?php if(isset($prevAndNext)):?>
     <?php extract($prevAndNext);?>
     <ul class='pager pager-justify'>
       <?php if($prev): ?>
@@ -147,6 +161,7 @@
       <li class='next disabled'><a href='###'> <?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a></li>
       <?php endif; ?>
     </ul>
+    <?php endif;?>
   </footer>
 </div>
 <?php if(commonModel::isAvailable('message')) echo "<div id='commentBox'></div>";?>

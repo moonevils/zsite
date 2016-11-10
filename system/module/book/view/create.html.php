@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php'; ?>
+<?php include '../../common/view/kindeditor.html.php';?>
 <?php include './side.html.php';?>
 <div class='col-md-10'>
   <div class='panel'>
@@ -47,6 +48,10 @@
           <tr>
             <th><?php echo $lang->book->summary;?></th>
             <td><?php echo html::textarea('summary', '', "class='form-control' rows='3'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->book->content;?></th>
+            <td colspan='2'><?php echo html::textarea('content', '', "rows='15' class='form-control'");?></td>
           </tr>
           <tr>
             <th></th><td><?php echo html::submitButton();?></td>

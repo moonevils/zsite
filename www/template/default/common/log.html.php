@@ -1,7 +1,8 @@
 <?php if(commonModel::isAvailable('stat')):?>
 <script>
+var hash = window.location.hash.substring(1);
 var browserLanguage = navigator.language || navigator.userLanguage; 
 var resolution      = screen.availWidth + ' X ' + screen.availHeight;
-$.get(createLink('log', 'record'), {browserLanguage:browserLanguage, resolution:resolution});
+$.get(createLink('log', 'record', "hash=" + hash), {browserLanguage:browserLanguage, resolution:resolution});
 </script>
 <?php endif;?>

@@ -55,7 +55,7 @@ class book extends control
     public function browse($nodeID)
     {
         $node = $this->book->getNodeByID($nodeID);
-
+        if($node->type == 'book' and !empty($node->content)) $this->locate(inlink('read', "articleID={$node->id}")); 
         if($node)
         {
             $nodeID = $node->id;
@@ -66,17 +66,17 @@ class book extends control
                     ->where('path')->like(",{$nodeID},%")
                     ->orderBy('`order`')
                     ->fetchGroup('parent', 'id');
-
+                
                 $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
                     ->where('path')->like("%,{$nodeID},%")
                     ->fetchAll('id');
                 $articles = $this->book->getArticleIdList($nodeID, $families, $allNodes);
-
+                
                 if($articles)
                 {
                     $articles  = explode(',', $articles);
                     $articleID = current($articles);
-                    $article   = $this->book->getNodeByID($articleID);
+                    $article   = zget($allNodes, $articleID);
                     $this->locate(inlink('read', "articleID=$articleID", "book=$book->alias&node=$article->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''));
                 }
             }
@@ -108,24 +108,30 @@ class book extends control
     { 
         $article = $this->book->getNodeByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
-        $parent  = $article->origins[$article->parent];
         $book    = $article->book;
-        $content = $this->book->addMenu($article->content);
         $serials = $this->book->computeSN($book->id);
+        $content = $this->book->addMenu($article->content);
+        
+        if($article->type != 'book')
+        {        
+            $parent  = $article->origins[$article->parent];
+            $this->view->parent      = $parent;
+            $this->view->prevAndNext = $this->book->getPrevAndNext($article);
+        }
+        $activeInfoLink = $article->type == 'book' ? 'activeBookInfo' : '';
+        $this->view->bookInfoLink = html::a(inLink('read', "articleID=$book->id", "book=$book->alias&node=$article->alias"), $book->title . $this->lang->book->info, "class = $activeInfoLink");
+        
+        $this->view->title       = $article->title . ' - ' . $book->title;;
+        $this->view->keywords    = $article->keywords;
+        $this->view->desc        = $article->summary;
+        $this->view->article     = $article;
+        $this->view->content     = $content;
 
-        $this->view->title    = $article->title . ' - ' . $book->title;;
-        $this->view->keywords = $article->keywords;
-        $this->view->desc     = $article->summary;
-        $this->view->article  = $article;
-        $this->view->content  = $content;
-
-        $this->view->parent      = $parent;
-        $this->view->book        = $book;
-        $this->view->allCatalog  = $this->book->getFrontCatalog($book->id, $serials);
-        $this->view->prevAndNext = $this->book->getPrevAndNext($article);
-        $this->view->mobileURL   = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'mhtml');
-        $this->view->desktopURL  = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'html');
-        $this->view->books       = $this->book->getBookList();
+        $this->view->book            = $book;
+        $this->view->allCatalog      = $this->book->getFrontCatalog($book->id, $serials);
+        $this->view->mobileURL       = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'mhtml');
+        $this->view->desktopURL      = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'html');
+        $this->view->books           = $this->book->getBookList();
 
         $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 
