@@ -150,9 +150,10 @@ class wechatModel extends model
             ->batchCheck($this->config->wechat->require->create, 'notempty')
             ->exec();
         
+        $publicID = $this->dao->lastInsertID();
+        
         $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
 
-        $publicID = $this->dao->lastInsertID();
         return $publicID;
     }
 
