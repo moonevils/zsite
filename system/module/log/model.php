@@ -38,6 +38,7 @@ class logModel extends model
             ->add('browserName', $browserName)
             ->add('browserVersion', $browserVersion)
             ->add('createdTime', helper::now())
+            ->remove('hash')
             ->get();
 
         if($visitor->browserName == 'ie') $visitor->browserName .= $visitor->browserVersion;
