@@ -8,7 +8,9 @@ $(document).ready(function()
     });  
     //scroll
     function yrScroll(){
-        var headerHeight = $("#book").offset().top;
+        if( $("#book").offset() ){
+            var headerHeight = $("#book").offset().top;
+        }
         var listTitleHeight = $(".book-catalog .panel-heading").height();
         //init
         $(".book-catalog").css({
@@ -16,13 +18,11 @@ $(document).ready(function()
             "overflow":"auto"
         });
         var listScrollTop =  $(".books .active").position().top;
-        var listMoveSize = listScrollTop > ( $(".book-catalog").height() - listTitleHeight ) / 2 ? listScrollTop : 0;
+        var listMoveSize = listScrollTop > ( $(".bookScrollListsBox").height() - listTitleHeight ) / 2 ? listScrollTop : 0;
         var scrollMoveSize = listMoveSize / $(".books").height(); 
-        $(".book-catalog").scrollTop(
-            $(".book-catalog .books").height() * scrollMoveSize - ( $(".book-catalog").height() / 2 - listTitleHeight )
+        $(".bookScrollListsBox").scrollTop(
+            $(".bookScrollListsBox .books").height() * scrollMoveSize -($(".bookScrollListsBox").height() / 2 - $(".bookScrollListsBox .panel-heading").height() - 47)
         );
-        console.log(listMoveSize)
-        console.log($(".book-catalog .book").height() * scrollMoveSize)
         //scroll event
         $(document).on("scroll", function (){
              //minHeight
