@@ -8,6 +8,7 @@
     <div class='popover-content docker-right'>
       <table class='table table-borderless'>
         <tr>
+          <?php if(isset($publicList)):?>
           <?php foreach($publicList as $public):?>
           <?php if(!$public->qrcode) continue;?>
           <td>
@@ -15,6 +16,7 @@
             <?php echo html::image('javascript:;', "data-src='{$public->qrcode}' width='200' height='200'");?>
           </td>
           <?php endforeach;?>
+          <?php endif;?>
           <?php if(extension_loaded('gd')):?>
           <td>
             <div class='heading'><i class='icon-mobile-phone'></i> <?php echo $lang->qrcodeTip;?></div>
