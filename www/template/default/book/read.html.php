@@ -4,7 +4,7 @@
 <?php js::set('objectID', $article->id);?>
 <?php js::set('fullScreen', 1);?>
 <div class='fullScreen-book'>
-  <div class='fullScreen-catalog panel'>
+  <div class='fullScreen-catalog pANeli bookScrollListsBox'>
     <?php if(!empty($book) && $book->title): ?>
     <div class='panel-heading clearfix'>
       <div class='dropdown pull-left'>
@@ -94,7 +94,7 @@
 <?php if($this->config->book->chapter == 'left'):?>
 <div class='row'>
   <div class='col-md-3'>
-    <div class='panel book-catalog'>
+    <div class='panel book-catalog bookScrollListsBox'>
       <?php if(!empty($book) && $book->title): ?>
       <div class='panel-heading clearfix'>
         <div class='dropdown pull-left'>
