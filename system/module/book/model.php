@@ -152,12 +152,12 @@ class bookModel extends model
                 {
                     if($this->config->book->chapter == 'left' or $this->config->book->fullScreen or $this->get->fullScreen)
                     {
-                        $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span>&nbsp;" . $node->title . '</strong></dd>';
+                        $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><span><span class='order'>$serial</span>&nbsp;" . $node->title . '</span></dd>';
                     }
                     else
                     {
                         $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
-                        $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</strong></dd>';
+                        $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><span><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</span></dd>';
                     }
                 }
                 elseif($node->type == 'article')
