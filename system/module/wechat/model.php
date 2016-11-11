@@ -149,6 +149,8 @@ class wechatModel extends model
             ->autoCheck()
             ->batchCheck($this->config->wechat->require->create, 'notempty')
             ->exec();
+        
+        $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
 
         $publicID = $this->dao->lastInsertID();
         return $publicID;
@@ -185,6 +187,8 @@ class wechatModel extends model
     public function delete($publicID, $null = null)
     {
         $this->dao->delete()->from(TABLE_WX_PUBLIC)->where('id')->eq($publicID)->exec();
+        $publics = $this->getList();
+        if(empty($publics)) $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '0');
         return !dao::isError();
     }
 
