@@ -8,6 +8,14 @@ $(document).ready(function()
         $('.nav-product-' + v.categoryID).addClass('active');
     }
 
+    if(v.categoryID > 0 && $('.nav-product-' + '0').length >= 1)
+    {
+      if(!hasActive)
+      {
+        hasActive = true;
+        $('.nav-product-' + '0').addClass('active');
+      }
+    }
     if(v.categoryPath && v.categoryPath.length)
     {
         $.each(v.categoryPath, function(index, category)
