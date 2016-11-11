@@ -1,4 +1,4 @@
-<?php $publicList = $this->loadModel('wechat')->getList();?>
+<?php if(isset($this->config->wechatPublic->hasPublic) and $this->config->wechatPublic->hasPublic) $publicList = $this->loadModel('wechat')->getList();?>
 <div id='rightDocker' class='hidden-xs'>
   <?php if(!empty($publicList) or extension_loaded('gd')):?>
   <button id='rightDockerBtn' class='btn' data-toggle="popover" data-placement="left" data-target='$next'><i class='icon-qrcode'></i></button>
