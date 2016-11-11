@@ -98,7 +98,7 @@
       <?php if(!empty($book) && $book->title): ?>
       <div class='panel-heading clearfix'>
         <div class='dropdown pull-left'>
-          <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong><?php echo $book->title;?></strong> <i class='icon icon-caret-down'></i></a>
+        <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><i class="icon icon-book"></i><strong><?php echo $book->title;?></strong> <span><?php echo $lang->book->more;?><i class='icon icon-caret-down'></i></span></a>
           <ul role='menu' class='dropdown-menu'>
             <?php foreach($books as $bookMenu):?>
             <li><?php echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $bookMenu->title);?></li>

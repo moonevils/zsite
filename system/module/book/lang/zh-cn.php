@@ -13,6 +13,7 @@ $lang->book->edit       = '编辑';
 $lang->book->sort       = '排序';
 $lang->book->setting    = '设置';
 $lang->book->index      = '首页';
+$lang->book->more       = '更多';
 
 $lang->book->searchResults     = '搜索结果';
 $lang->book->inputArticleTitle = '请输入文章标题';
