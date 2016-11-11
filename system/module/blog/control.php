@@ -92,7 +92,7 @@ class blog extends control
         $this->view->keywords    = $keywords;
         $this->view->desc        = $desc;
         $this->view->article     = $article;
-        $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($article->id, $category->id);
+        $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($article, $category->id);
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
         $this->view->mobileURL   = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
