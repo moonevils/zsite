@@ -14,6 +14,7 @@
 <?php js::set('closeScoreTip', $lang->site->closeScoreTip);?>
 <?php js::set('clearing', $lang->site->clearingCache);?>
 <?php js::set('cleared', $lang->site->clearedCache);?>
+<?php js::set('clear', $lang->site->clearCache);?>
 <?php js::set('clearCacheTip', sprintf($lang->site->clearCacheTip, $cacheRoot));?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setCache;?></strong></div>
