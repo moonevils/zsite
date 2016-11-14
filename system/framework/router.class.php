@@ -409,7 +409,7 @@ class router extends baseRouter
                     $langFromPathInfo = '';
                     foreach($this->config->langsShortcuts as $language => $code)
                     {
-                        if(strpos(trim($pathInfo, '/'), $code) === 0) $langFromPathInfo = $language;
+                        if(strpos(trim($pathInfo, '/'), $code . '/') === 0) $langFromPathInfo = $language;
                     }
                     if(empty($langFromPathInfo)) $langFromPathInfo = $this->config->default->lang;
                     $lang = $langFromPathInfo;
