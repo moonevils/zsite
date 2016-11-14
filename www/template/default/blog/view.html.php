@@ -20,6 +20,7 @@ js::set('objectID', $article->id);
 if(isset($article->css)) css::internal($article->css);
 if(isset($article->js))  js::execute($article->js);
 js::set('pageLayout', $this->block->getLayoutScope('blog_view', $article->id));
+js::set('updateViewsLink', $updateViewsLink);
 ?>
 <?php
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';

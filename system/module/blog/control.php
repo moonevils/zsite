@@ -126,7 +126,23 @@ class blog extends control
             }
         }
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
+        $this->view->updateViewsLink = helper::createLink('blog', 'updateBlogViews', "articleID=$articleID");
         $this->display();
+    }
+    
+    /**
+     * Update the views number of blog 
+     *
+     * @access public
+     * @param  string
+     * @return void
+     */
+    public function updateBlogViews($articleID)
+    {
+        if(is_numeric($articleID))
+        {
+            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
+            dao::$changedTables = array();
+        }
     }
 }
