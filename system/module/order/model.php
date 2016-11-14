@@ -546,21 +546,24 @@ class orderModel extends model
 
         if(RUN_MODE == 'front')
         {
+            $isMobile = ($this->app->clientDevice == 'mobile');
             if($this->commonLink['cancelLink'])
             {
                 /* Cancel link. */
                 $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
-                $class = $btnLink ? "  btn btn-link " : "";
+                $class    = $isMobile ? "  btn btn-link " : "";
                 echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}' data-toggle='modal'" );
             }
 
             /* View order link. */
             $disabled = ($order->status == 'normal' or $order->status == 'finished') ? false : true;
-            echo $disabled ? '' : html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view, "data-toggle='modal'"); 
+            $class    = $isMobile ? "  btn btn-link " : "";
+            echo $disabled ? '' : html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view, "data-toggle='modal' class='$class'"); 
             
             /* Delete order link. */
             $disabled = $order->status == 'expired' ? false : true;
-            echo $disabled ? '' : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "class='deleter'"); 
+            $class = $isMobile ? "  btn btn-link " : "";
+            echo $disabled ? '' : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "class='deleter $class'"); 
         }
     }
 
@@ -593,7 +596,8 @@ class orderModel extends model
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
         {
-            if($btnLink)
+            $isMobile = ($this->app->clientDevice == 'mobile');
+            if($isMobile)
             {
                 /* Edit link. */
                 $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
@@ -601,7 +605,7 @@ class orderModel extends model
                 
                 /* Pay link. */
                 $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
-                echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
+                echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn btn-link'");
 
                 /* Track link. */
                 $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
@@ -609,7 +613,7 @@ class orderModel extends model
 
                 /* Confirm link. */
                 $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
-                echo $disabled ? '' : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
+                echo $disabled ? '' : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery btn-btn-link'");
             }
             else
             {
@@ -644,9 +648,11 @@ class orderModel extends model
     {
         if(RUN_MODE == 'front') 
         {
+            $isMobile = ($this->app->clientDevice == 'mobile');
+            $class    = $isMobile ? "  btn btn-link " : "";
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
-            echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
+            echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay $class'");
         }
     }
 
