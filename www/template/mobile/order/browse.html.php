@@ -111,4 +111,5 @@ $(function()
     });
 });
 </script>
+<?php include TPL_ROOT . 'common/form.html.php';?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
