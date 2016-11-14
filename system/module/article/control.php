@@ -314,7 +314,7 @@ class article extends control
 
         if($article->link)
         {
-            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
+            $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID=$articleID");
             helper::header301($article->link);
         }
 
