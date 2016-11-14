@@ -92,7 +92,7 @@ js::set('updateViewsLink', $updateViewsLink);
                       $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $this->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
                   }
               }
-              if($product->amount)
+              if($product->amount and $this->config->product->stock)
               {
                   $attributeHtml .= "<li id='amountItem'><span class='meta-name'>" . $lang->product->stock . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>";
