@@ -24,8 +24,8 @@ class stat extends control
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
-        $this->view->todayReport    = $this->stat->getTodayReport(); 
-        $this->view->yestodayReport = $this->stat->getYestodayReport(); 
+        $this->view->todayReport     = $this->stat->getTodayReport(); 
+        $this->view->yesterdayReport = $this->stat->getYesterdayReport(); 
 
         if($begin == $end)
         {

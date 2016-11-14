@@ -459,12 +459,12 @@ class statModel extends model
     }
 
     /**
-     * Get yestoday report 
+     * Get yesterday report 
      * 
      * @access public
      * @return array 
      */
-    public function getYestodayReport()
+    public function getYesterdayReport()
     {
         $yestodayReport = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('timeType')->eq('day')
