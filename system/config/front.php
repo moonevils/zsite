@@ -47,9 +47,10 @@ $config->rights->guest['message']['notify']  = 'notify';
 $config->rights->guest['message']['post']    = 'post';
 $config->rights->guest['message']['reply']   = 'reply';
 
-$config->rights->guest['book']['index']  = 'index';
-$config->rights->guest['book']['browse'] = 'browse';
-$config->rights->guest['book']['read']   = 'read';
+$config->rights->guest['book']['index']           = 'index';
+$config->rights->guest['book']['browse']          = 'browse';
+$config->rights->guest['book']['read']            = 'read';
+$config->rights->guest['book']['updatebookviews'] = 'updatebookviews';
 
 $config->rights->guest['user']['login']         = 'login';
 $config->rights->guest['user']['register']      = 'register';

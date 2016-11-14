@@ -3,6 +3,7 @@
 <?php js::set('objectType', 'book');?>
 <?php js::set('objectID', $article->id);?>
 <?php js::set('fullScreen', 1);?>
+<?php js::set('updateViewsLink', $updateViewsLink);?>
 <div class='fullScreen-book'>
   <div class='fullScreen-catalog pANeli bookScrollListsBox'>
     <?php if(!empty($book) && $book->title): ?>
@@ -89,6 +90,7 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::set('objectType', 'book');?>
 <?php js::set('objectID', $article->id);?>
+<?php js::set('updateViewsLink', $updateViewsLink);?>
 <div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
 <?php if($this->config->book->chapter == 'left'):?>
