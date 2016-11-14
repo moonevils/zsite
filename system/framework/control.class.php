@@ -416,7 +416,7 @@ class control extends baseControl
             {
                 if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
                 {
-                    $key = 'page' . DS . $this->app->clientDevice . DS . md5($_SERVER['REQUEST_URI']);
+                    $key = 'page' . DS . $this->app->clientDevice . DS . $moduleName . '_' . $methodName . DS . md5($_SERVER['REQUEST_URI']);
                     $this->app->cache->set($key, $this->output);
                 }
             }
