@@ -74,7 +74,15 @@ class fileCache extends cache
      */
     public function clear($key)
     {
-        $cacheFiles = glob($this->config->savePath . strtolower($key));
-        foreach($cacheFiles as $file) unlink($file);
+        $cacheItems = glob($this->config->savePath . strtolower($key));
+        foreach($cacheItems as $cacheItem) 
+        {
+            if(is_file($cacheItem)) unlink($cacheItem);
+            if(is_dir($cacheItem))
+            {
+                $cacheItemFiles = glob($cacheItem . DS . '*');
+                foreach($cacheItemFiles as $cacheItemFile) unlink($cacheItemFile);
+            }
+        }
     }
 }

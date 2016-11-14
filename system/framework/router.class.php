@@ -160,7 +160,7 @@ class router extends baseRouter
                 }
                 else
                 {
-                    $page = str_replace($page, '.', '_');
+                    $page = str_replace('.', '_', $page);
                     $key  = 'page' . DS . $this->clientDevice . DS . $page . DS . '*';
                 }
                 if(isset($this->cache)) $this->cache->clear($key);
