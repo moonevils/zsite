@@ -27,4 +27,3 @@ $lang->admin->comment        = '您今天有 %s 條評論待審核';
 $lang->admin->threadReply    = '您今天有 %s 篇回帖';
 $lang->admin->submittion     = '您今天有 %s 篇投稿待審核';
 $lang->admin->todayReport    = '網站今日瀏覽量 %s , 訪客數 %s , IP數 %s';
-$lang->admin->yestodayReport = '網站昨日瀏覽量 %s , 訪客數 %s , IP數 %s';
