@@ -409,7 +409,9 @@ class control extends baseControl
             $this->mergeCSS();
             $this->mergeJS();
         }
-
+        
+        $moduleName = $this->moduleName;
+        $methodName = $this->methodName;
         if(RUN_MODE == 'front')
         {
             if($this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
