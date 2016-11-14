@@ -74,8 +74,11 @@ class blog extends control
         $article = $this->loadModel('article')->getByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
 
-        if($article->link) helper::header301($article->link);
-
+        if($article->link) 
+        {
+            $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID=$articleID");
+            helper::header301($article->link);
+        }
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
         $category = $category[0]->id;
@@ -126,23 +129,7 @@ class blog extends control
             }
         }
 
-        $this->view->updateViewsLink = helper::createLink('blog', 'updateBlogViews', "articleID=$articleID");
+        $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID=$articleID");
         $this->display();
-    }
-    
-    /**
-     * Update the views number of blog 
-     *
-     * @access public
-     * @param  string
-     * @return void
-     */
-    public function updateBlogViews($articleID)
-    {
-        if(is_numeric($articleID))
-        {
-            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
-            dao::$changedTables = array();
-        }
     }
 }
