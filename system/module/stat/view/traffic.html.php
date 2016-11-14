@@ -51,15 +51,15 @@
     <tbody>
       <tr class='text-center'>
         <td class='text-center'><?php echo $lang->stat->today;?></td>
-        <td><?php echo $todayReport ? zget($todayReport->pv, 0) : 0;?></td>
-        <td><?php echo $todayReport ? zget($todayReport->uv, 0) : 0;?></td>
-        <td><?php echo $todayReport ? zget($todayReport->ip, 0) : 0;?></td>
+        <td><?php echo zget($todayReport, 'pv', 0);?></td>
+        <td><?php echo zget($todayReport, 'uv', 0);?></td>
+        <td><?php echo zget($todayReport, 'ip', 0);?></td>
       </tr>
       <tr class='text-center'>
-        <td class='text-center'><?php echo $lang->stat->yestoday;?></td>
-        <td><?php echo $yestodayReport ? zget($yestodayReport->pv, 0) : 0;?></td>
-        <td><?php echo $yestodayReport ? zget($yestodayReport->uv, 0) : 0;?></td>
-        <td><?php echo $yestodayReport ? zget($yestodayReport->ip, 0) : 0;?></td>
+        <td class='text-center'><?php echo $lang->stat->yesterday;?></td>
+        <td><?php echo zget($yesterdayReport, 'pv', 0);?></td>
+        <td><?php echo zget($yesterdayReport, 'uv', 0);?></td>
+        <td><?php echo zget($yesterdayReport, 'ip', 0);?></td>
       </tr>
     </tbody>
   </table> 

@@ -26,5 +26,3 @@ $lang->admin->reply          = 'Today you have %s replies to review.';
 $lang->admin->comment        = 'Today you have %s comments to review.';
 $lang->admin->threadReply    = 'Today you have %s replies.';
 $lang->admin->submittion     = 'Today you have %s contributions to review.';
-$lang->admin->todayReport    = 'Today your website has %s PVs, %s UVs, and %s IP.';
-$lang->admin->yestodayReport = 'Yesterday your website has %s PVs, %s UVs, and %s IP.';
