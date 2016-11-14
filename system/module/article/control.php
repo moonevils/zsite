@@ -358,7 +358,7 @@ class article extends control
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
+        $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID=$articleID");
 
         if($this->app->clientDevice == 'desktop') 
         {
@@ -372,6 +372,22 @@ class article extends control
         $this->display();
     }
 
+    /**
+     * Update the views number of artcile 
+     *
+     * @access public
+     * @param  string
+     * @return void
+     */
+    public function updateArticleViews($articleID)
+    {
+        if(is_numeric($articleID))
+        {
+            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
+            dao::$changedTables = array();
+        }
+    }
+    
     /**
      * Delete an article.
      * 

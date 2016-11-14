@@ -272,9 +272,9 @@ class product extends control
         $this->view->layouts     = $this->loadModel('block')->getPageBlocks('product', 'view', $product->id);
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
-
-        $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec();
         
+        $this->view->updateViewsLink = helper::createLink('product', 'updateProductViews', "productID=$productID");
+
         if($this->app->clientDevice == 'desktop') 
         {
             $this->view->canonicalURL = helper::createLink('product', 'view', "productID=$productID", "category={$category->alias}&name={$product->alias}", 'html'); 
@@ -285,6 +285,22 @@ class product extends control
         }
 
         $this->display();
+    }
+    
+    /**
+     * Update the views number of product 
+     *
+     * @access public
+     * @param  string
+     * @return void
+     */
+    public function updateProductViews($productID)
+    {
+        if(is_numeric($productID))
+        {
+            $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec();
+            dao::$changedTables = array();
+        }
     }
 
     /**

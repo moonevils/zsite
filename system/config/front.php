@@ -14,17 +14,19 @@ $config->rights = new stdclass();
 
 /* For guest users. */
 $config->rights->guest['index']['index'] = 'index';
-$config->rights->guest['article']['index']  = 'index';
-$config->rights->guest['article']['browse'] = 'browse';
-$config->rights->guest['article']['view']   = 'view';
+$config->rights->guest['article']['index']              = 'index';
+$config->rights->guest['article']['browse']             = 'browse';
+$config->rights->guest['article']['view']               = 'view';
+$config->rights->guest['article']['updatearticleviews'] = 'updatearticleviews';
 
 $config->rights->guest['blog']['index']  = 'index';
 $config->rights->guest['blog']['view']   = 'view';
 
-$config->rights->guest['product']['index']    = 'index';
-$config->rights->guest['product']['browse']   = 'browse';
-$config->rights->guest['product']['view']     = 'view';
-$config->rights->guest['product']['redirect'] = 'redirect';
+$config->rights->guest['product']['index']              = 'index';
+$config->rights->guest['product']['browse']             = 'browse';
+$config->rights->guest['product']['view']               = 'view';
+$config->rights->guest['product']['redirect']           = 'redirect';
+$config->rights->guest['product']['updateproductviews'] = 'updateproductviews';
 
 $config->rights->guest['company']['index']   = 'index';
 $config->rights->guest['company']['contact'] = 'contact';
