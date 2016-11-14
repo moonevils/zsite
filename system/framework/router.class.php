@@ -142,7 +142,7 @@ class router extends baseRouter
         
         $blocks = array_unique(explode(',', $blocks));
         $pages  = array_unique(explode(',', $pages));
-
+        
         foreach($blocks as $block) 
         {
             if(empty($block)) continue;
@@ -154,7 +154,15 @@ class router extends baseRouter
             foreach($pages as $page) 
             {
                 if(empty($page)) continue;
-                $key = 'page' . DS . $this->clientDevice . $page . '*';
+                if($page == '/')
+                {
+                    $key = 'page' . DS . $this->clientDevice . DS . '*';
+                }
+                else
+                {
+                    $page = str_replace('.', '_', $page);
+                    $key  = 'page' . DS . $this->clientDevice . DS . $page . DS . '*';
+                }
                 if(isset($this->cache)) $this->cache->clear($key);
             }
         }
@@ -286,7 +294,7 @@ class router extends baseRouter
         {
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
-                $key   = 'page' . DS . $this->clientDevice . DS . md5($_SERVER['REQUEST_URI']);
+                $key   = 'page' . DS . $this->clientDevice . DS . $moduleName . '_' . $methodName . DS . md5($_SERVER['REQUEST_URI']);
                 $cache = $this->cache->get($key);
                 if($cache)
                 {
