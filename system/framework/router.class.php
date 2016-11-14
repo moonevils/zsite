@@ -153,9 +153,16 @@ class router extends baseRouter
         {
             foreach($pages as $page) 
             {
-
                 if(empty($page)) continue;
-                $key = 'page' . DS . $this->clientDevice . $page . '*';
+                if($page == '/')
+                {
+                    $key = 'page' . DS . $this->clientDevice . DS . '*';
+                }
+                else
+                {
+                    $page = str_replace($page, '.', '_');
+                    $key  = 'page' . DS . $this->clientDevice . DS . $page . DS . '*';
+                }
                 if(isset($this->cache)) $this->cache->clear($key);
             }
         }
