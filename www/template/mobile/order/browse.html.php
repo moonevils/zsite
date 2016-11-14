@@ -78,7 +78,7 @@
           ?>
         </div>
         <div class='card-footer order-actions text-right'>
-          <?php $this->order->printActions($order, true);?>
+          <?php $this->order->printActions($order);?>
         </div>
       </div>
       <?php endforeach;?>
