@@ -121,11 +121,11 @@ class blog extends control
         {
             if($this->app->clientDevice == 'desktop') 
             {
-                $this->view->canonicalURL = helper::createLink('article', 'view', "articleID=$$articleID->id&categoryID=$currentCategory", "category=$category->alias&name=$article->alias", 'html');
+                $this->view->canonicalURL = helper::createLink('article', 'view', "articleID=$$article->id&categoryID=$currentCategory", "category=$category->alias&name=$article->alias", 'html');
             }
             else
             {
-                $this->view->canonicalURL = helper::createLink('article', 'view', "articleID=$$articleID->id&categoryID=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
+                $this->view->canonicalURL = helper::createLink('article', 'view', "articleID=$$article->id&categoryID=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
             }
         }
 
