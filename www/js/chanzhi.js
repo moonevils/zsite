@@ -558,9 +558,10 @@ function createLink(moduleName, methodName, vars, viewType)
     }
     else
     {
-        link = config.router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName + '&' + config.viewVar + '=' + viewType;
+        link = config.router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName;
         if(vars) for(i = 0; i < vars.length; i ++) link += '&' + vars[i][0] + '=' + vars[i][1];
         if(config.langCode != '') link = link + '&l=' + config.langCode;
+        link = link + '&' + config.viewVar + '=' + viewType;
     }
     return link;
 }

@@ -10,6 +10,7 @@ js::set('categoryPath', explode(',', trim($category->path, ',')));
 if(isset($article->css)) css::internal($article->css);
 if(isset($article->js)) js::execute($article->js);
 js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id));
+js::set('updateViewsLink', $updateViewsLink);
 ?>
 <?php $common->printPositionBar($category, $article);?>
 <div class='row blocks' data-region='article_view-topBanner'><?php $this->block->printRegion($layouts, 'article_view', 'topBanner', true);?></div>
