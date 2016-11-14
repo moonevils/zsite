@@ -11,6 +11,7 @@ js::set('pageID', $page->id);
 css::internal($page->css);
 js::execute($page->js);
 js::set('pageLayout', $this->block->getLayoutScope('page_view', $page->id));
+js::set('updateViewsLink', $updateViewsLink);
 ?>
 <?php $common->printPositionBar($page);?>
 <div class='row blocks' data-region='page_view-topBanner'><?php $this->block->printRegion($layouts, 'page_view', 'topBanner', true);?></div>

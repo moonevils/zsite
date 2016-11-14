@@ -16,6 +16,7 @@ include TPL_ROOT . 'common/files.html.php';
 js::set('pageID', $page->id);
 css::internal($page->css);
 js::execute($page->js);
+js::set('updateViewsLink', $updateViewsLink);
 ?>
 <div class='block-region region-top blocks' data-region='page_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_view', 'top');?></div>
 <div id='page' data-id='<?php echo $page->id ?>'>

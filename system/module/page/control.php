@@ -43,7 +43,7 @@ class page extends control
 
         if($page->link)
         {
-            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($pageID)->exec();
+            $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID={$page->id}");
             helper::header301($page->link);
         }
 
@@ -61,7 +61,7 @@ class page extends control
         $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec();
+        $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID={$page->id}");
 
         if($this->app->clientDevice == 'desktop') 
         {
