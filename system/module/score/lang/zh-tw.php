@@ -11,6 +11,8 @@
 $lang->score->back        = '返回';
 $lang->score->rankingList = '積分排行榜';
 $lang->score->rule        = '積分規則';
+$lang->score->statement   = '積分結算';
+$lang->score->stateDesc   = '積分結算會將一個月之前的所有收入積分按照每個用戶結算為總積分。以減少記錄數。';
 
 $lang->score->id      = '編號';
 $lang->score->account = '用戶';
@@ -68,6 +70,7 @@ $lang->score->lblNoScore       = "抱歉，您的積分不夠";
 $lang->score->lblNoScoreReason = "抱歉，您的積分不夠 %s 需要 <strong class='red'>%s</strong> 分，您現在有 <strong class='red'>%s</strong> 分";
 $lang->score->lblDetail        = "詳情可參考<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何獲得積分》</a><br /><br />";
 $lang->score->lblBuySocre      = "購買積分 %s";
+$lang->score->lblStateSuccess  = '積分結算成功！';
 
 $lang->score->setAmount   = '充值金額';
 $lang->score->getScore    = '獲取積分';

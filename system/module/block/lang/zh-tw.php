@@ -25,6 +25,9 @@ $lang->block->regionList      = '區域列表';
 $lang->block->select          = '請選擇區塊';
 $lang->block->categories      = '分類';
 $lang->block->showImage       = '圖文';
+$lang->block->showInfo        = '顯示描述';
+$lang->block->infoAmount      = '最多顯示';
+$lang->block->character       = '字';
 $lang->block->maxWidth        = '最大寬度';
 $lang->block->showCategory    = '顯示類目';
 $lang->block->showBoard       = '顯示版塊';
@@ -152,7 +155,7 @@ $lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
 
 $lang->block->categoryList['custom']  = '自定義';
-$lang->block->categoryList['article'] = '文章';
+$lang->block->categoryList['article'] = '內容';
 $lang->block->categoryList['product'] = '產品';
 $lang->block->categoryList['system']  = '系統';
 
