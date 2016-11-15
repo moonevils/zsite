@@ -47,6 +47,11 @@ $lang->site->saveDays        = 'Hold Time';
 $lang->site->openCache       = 'Cache';
 $lang->site->cachePage       = 'Cache Page';
 $lang->site->cacheExpired    = 'Expiration';
+$lang->site->clearCache      = 'Clear cache';
+$lang->site->clearingCache   = 'Clearing';
+$lang->site->clearedCache    = 'Clear finished';
+$lang->site->failClear       = 'Clear failed';
+$lang->site->clearCacheTip   = '<td>Short of autority, pleae run the command <br/><code>sudo chown www-data:www-data %s</code><td>';
 $lang->site->hour            = 'Hour';
 $lang->site->homeMenus       = 'Homepage Menu';
 

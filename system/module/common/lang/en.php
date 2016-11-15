@@ -70,6 +70,7 @@ $lang->wechatTip        = 'Wechat Subscribe';
 $lang->qrcodeTip        = 'QR Code';
 $lang->language         = 'Language';
 $lang->custom           = 'Custom';
+$lang->productMenu      = 'Product';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
@@ -193,8 +194,11 @@ $lang->menu->others   = "Settings|ui|others|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i>Visualize|visual|index|";
 $lang->menu->edit     = "Templates|ui|edittemplate|";
 
-$lang->menu->site     = 'Site|site|setbasic|';
-$lang->menu->security = 'Security|site|setsecurity|';
+$lang->menu->site      = 'Site|site|setbasic|';
+$lang->menu->security  = 'Security|site|setsecurity|';
+$lang->menu->company   = 'Company|company|setbasic|';
+$lang->menu->score     = 'Score|score|setcounts|';
+$lang->menu->interface = 'Interface|site|setoauth|';
 
 $lang->menu->package    = 'Extensions|package|browse|';
 $lang->menu->themestore = 'Theme|ui|themestore|';
@@ -273,16 +277,15 @@ $lang->site->menu->domain    = 'Domain Settings|site|setdomain|';
 $lang->site->menu->cdn       = 'CDN Settings|site|setcdn|';
 $lang->site->menu->cache     = 'Cache Settings|site|setcache|';
 $lang->site->menu->home      = 'Homepage Menu|site|sethomemenu|';
-$lang->site->menu->company   = 'Company Info|company|setbasic|';
-$lang->site->menu->contact   = 'Company Contact|company|setcontact|';
-$lang->site->menu->oauth     = 'Set Oauth|site|setoauth|';
-$lang->site->menu->mail      = array('link' => 'Email Settings|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat    = array('link' => 'Wechat Settings|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 $lang->site->menu->search    = 'Full Text Retrieval|search|buildindex|';
-$lang->site->menu->score     = 'Points|score|setcounts|';
 $lang->site->menu->backup    = 'Backup/Restore|backup|index|';
-$lang->site->menu->stateInfo = 'State Score|score|showstateinfo|';
 //$lang->site->menu->api      = 'API|site|setapi|';
+
+/* Menu of company module. */
+if(!isset($lang->company)) $lang->company = new stdclass();
+$lang->company->menu = new stdclass();
+$lang->company->menu->company   = 'Company|company|setbasic|';
+$lang->company->menu->contact   = 'Contact|company|setcontact|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -298,11 +301,16 @@ $lang->security->menu->admin     = 'Administrators|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => 'Group Privilege|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log       = 'Login Log|user|adminlog|';
 
-/* Menu of company module. */
-$lang->company->menu = $lang->site->menu;
+$lang->interface = new stdclass();
+$lang->interface->menu = new stdclass();
+$lang->interface->menu->oauth  = 'Oauth|site|setoauth|';
+$lang->interface->menu->mail   = array('link' => 'Mail Setting|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->wechat = array('link' => 'Wechat setting|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
 $lang->score->menu = $lang->site->menu;
+$lang->score->menu->score     = 'Score Rule|score|setcounts|';
+$lang->score->menu->stateInfo = 'Score Info|score|showstateinfo|';
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -311,10 +319,6 @@ $lang->address = new stdclass();
 /* Menu of tree module. */
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
-
-/* Menu of mail module. */
-$lang->mail = new stdclass();
-$lang->mail->menu = $lang->site->menu;
 
 /* Menu of reply module. */
 $lang->reply = new stdclass();

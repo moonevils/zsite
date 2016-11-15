@@ -69,3 +69,4 @@ $lang->file->nameEmpty        = "File name should not be blank.";
 $lang->file->copySuccess      = "Copy to clipboard";
 $lang->file->evilChar         = "Invalid Character";
 $lang->file->rebuildThumbs    = "%s has been finished.";
+$lang->file->noFlashTip       = "Flash extension is forbidden，please do the paste manually";
