@@ -418,6 +418,7 @@ class control extends baseControl
             {
                 if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
                 {
+                    if(!isset($this->app->clientDevice) or empty($this->app->clientDevice)) $this->app->clientDevice = 'desktop';
                     $key = 'page' . DS . $this->app->clientDevice . DS . $moduleName . '_' . $methodName . DS . md5($_SERVER['REQUEST_URI']);
                     $this->app->cache->set($key, $this->output);
                 }
