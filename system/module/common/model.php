@@ -420,8 +420,27 @@ class commonModel extends model
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
             if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
-            $hasPublic = $app->loadClass('dao')->select('count(*) as count')->from(TABLE_WX_PUBLIC)->fetch('count');
+
+            $hasPublic= false;
+            if(isset($this->config->wechatPublic->hasPublic) )
+            {
+                if($this->config->wechatPublic->hasPublic) $hasPublic = true;
+            }
+            else
+            {
+                $isHasPublic = $app->loadClass('dao')->select('count(*) as count')->from(TABLE_WX_PUBLIC)->fetch('count');
+                if(!empty($isHasPublic))
+                {
+                    $hasPublic = true;
+                    $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
+                }
+                else
+                {
+                    $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '0');
+                }
+            }
             if($menu == 'wechat' and !$hasPublic) continue;
+            
             if(commonModel::hasPriv($module, $method))
             {
                 $link  = helper::createLink($module, $method, $vars);
