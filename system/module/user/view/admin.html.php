@@ -53,7 +53,7 @@ js::set('admin', $this->get->admin);
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>
-    <table class='table table-hover table-striped able-condensed' id='userList'>
+    <table class='table table-fixed table-hover table-striped able-condensed' id='userList'>
       <thead>
         <tr class='text-center'>
           <th class='w-60px'><?php echo $lang->user->id;?></th>
@@ -72,7 +72,7 @@ js::set('admin', $this->get->admin);
           <th class='w-140px'><?php echo $lang->user->last;?></th>
           <th class='w-100px'><?php echo $lang->user->ip;?></th>
           <th class='w-60px'><?php echo $lang->user->status;?></th>
-          <th class='w-160px'><?php echo $lang->actions;?></th>
+          <th class='w-200px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -83,8 +83,8 @@ js::set('admin', $this->get->admin);
           <input type='checkbox' name='account[]'  value='<?php echo $user->account;?>'/> 
           <?php echo $user->id;?>
         </td>
-        <td><?php echo html::a(helper::createLink('user', 'checkContact', "user=$user->account"), $user->realname, "data-toggle='modal'");?></td>
-        <td><?php echo html::a(helper::createLink('user', 'checkContact', "user=$user->account"), $user->account, "data-toggle='modal'");?></td>
+        <td><?php echo $user->realname;?></td>
+        <td><?php echo $user->account;?></td>
         <?php if(commonModel::isAvailable('score')):?>
         <td><?php echo $user->score;?></td>
         <td><?php echo $user->rank;?></td>
@@ -102,8 +102,9 @@ js::set('admin', $this->get->admin);
         <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
         <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
         </td>
-        <td class='operate text-left'>
+        <td class='operate text-left nofixed'>
           <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
+          <?php echo html::a(helper::createLink('user', 'checkContact', "user=$user->account"), $lang->user->contactInfo, "data-toggle='modal'");?>
           <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
           <?php if(commonModel::isAvailable('score')):?>
           <span class="dropdown">
@@ -133,9 +134,9 @@ js::set('admin', $this->get->admin);
       <tfoot>
         <tr>
           <?php if(commonModel::isAvailable('score')):?>
-          <td colspan='14'>
+          <td colspan='13'>
           <?php else:?>
-          <td colspan='12'>
+          <td colspan='11'>
           <?php endif;?>
           <div class='btn-group'>
             <?php echo html::selectButton();?>
