@@ -30,7 +30,7 @@ $config->framework->purifier       = true;  // 是否对数据做purifier处理�
 $config->framework->logDays        = 14;    // 日志文件保存的天数。              The days to save log files.
 
 /* The basic settings. */
-$config->version     = '5.4.1';           // The version number, don't change.
+$config->version     = '5.5';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.

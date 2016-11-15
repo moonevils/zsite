@@ -156,6 +156,8 @@ class upgradeModel extends model
                 $this->fixCustomConfig();
                 $this->execSQL($this->getUpgradeFile('5.3.4'));
             case '5_4';
+            case '5_4_1':
+                $this->fixWechatConfig();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2060,5 +2062,24 @@ class upgradeModel extends model
             ->andWhere('section')->eq('site')
             ->andWhere('`key`')->in('lang,requestType,defaultLang,cn2tw')
             ->exec();
+    }
+
+    /**
+     * Fix wechar config
+     *
+     * @access public
+     * @param  void
+     */
+    public function fixWechatPublicConfig()
+    {
+        $wechatPublic = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll();
+        if(!empty($wechatPublic))
+        {
+            $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
+        }
+        else
+        {
+            $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '0');
+        }
     }
 }
