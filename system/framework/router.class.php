@@ -294,6 +294,7 @@ class router extends baseRouter
         {
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
+                if(!isset($this->clientDevice) or empty($this->clientDevice)) $this->clientDevice = 'desktop';
                 $key   = 'page' . DS . $this->clientDevice . DS . $moduleName . '_' . $methodName . DS . md5($_SERVER['REQUEST_URI']);
                 $cache = $this->cache->get($key);
                 if($cache)

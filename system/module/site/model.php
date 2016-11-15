@@ -103,7 +103,7 @@ class siteModel extends model
         }        
         else
         {
-            $content = '';
+            $content = '\n';
 
             if(isset($config->enabledLangs))
             {
