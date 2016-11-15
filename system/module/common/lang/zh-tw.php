@@ -70,6 +70,7 @@ $lang->wechatTip        = '微信訂閲';
 $lang->qrcodeTip        = '移動訪問';
 $lang->language         = '語言';
 $lang->custom           = '自定義';
+$lang->productMenu      = '產品';
 
 /* Global action items. */
 $lang->reset          = '重置';
@@ -193,21 +194,24 @@ $lang->menu->others   = "設置|ui|others|";
 $lang->menu->visual   = "可視化|visual|index|";
 $lang->menu->edit     = "編輯模板|ui|edittemplate|";
 
-$lang->menu->site     = '站點|site|setbasic|';
-$lang->menu->security = '安全|site|setsecurity|';
+$lang->menu->site      = '站點|site|setbasic|';
+$lang->menu->security  = '安全|site|setsecurity|';
+$lang->menu->company   = '公司|company|setbasic|';
+$lang->menu->score     = '積分|score|setcounts|';
+$lang->menu->interface = '介面|site|setoauth|';
 
 $lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主題|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-$lang->menuGroups->mail    = 'site';
-$lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->mail    = 'interface';
+$lang->menuGroups->wechat  = 'interface';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
-$lang->menuGroups->company = 'site';
-$lang->menuGroups->score   = 'site';
+$lang->menuGroups->company = 'company';
+$lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
@@ -267,21 +271,21 @@ $lang->forum->menu->setting = '論壇設置|forum|setting|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic    = '站點設置|site|setbasic|';
-$lang->site->menu->system   = '系統設置|site|setsystem|';
-$lang->site->menu->domain   = '域名設置|site|setdomain|';
-$lang->site->menu->cdn      = 'CDN設置|site|setcdn|';
-$lang->site->menu->cache    = '緩存設置|site|setcache|';
-$lang->site->menu->home     = '首頁菜單|site|sethomemenu|';
-$lang->site->menu->company  = '公司信息|company|setbasic|';
-$lang->site->menu->contact  = '聯繫方式|company|setcontact|';
-$lang->site->menu->oauth    = '開放登錄|site|setoauth|';
-$lang->site->menu->mail     = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
-$lang->site->menu->search   = '全文檢索|search|buildindex|';
-$lang->site->menu->score    = '積分規則|score|setcounts|';
-$lang->site->menu->backup   = '備份還原|backup|index|';
+$lang->site->menu->basic     = '站點設置|site|setbasic|';
+$lang->site->menu->system    = '系統設置|site|setsystem|';
+$lang->site->menu->domain    = '域名設置|site|setdomain|';
+$lang->site->menu->cdn       = 'CDN設置|site|setcdn|';
+$lang->site->menu->cache     = '緩存設置|site|setcache|';
+$lang->site->menu->home      = '首頁菜單|site|sethomemenu|';
+$lang->site->menu->search    = '全文檢索|search|buildindex|';
+$lang->site->menu->backup    = '備份還原|backup|index|';
 //$lang->site->menu->api    = 'API|site|setapi|';
+
+/* Menu of company module. */
+if(!isset($lang->company)) $lang->company = new stdclass();
+$lang->company->menu = new stdclass();
+$lang->company->menu->company   = '公司信息|company|setbasic|';
+$lang->company->menu->contact   = '聯繫方式|company|setcontact|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -297,11 +301,16 @@ $lang->security->menu->admin     = '管理員|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log       = '登錄日誌|user|adminlog|';
 
-/* Menu of company module. */
-$lang->company->menu = $lang->site->menu;
+$lang->interface = new stdclass();
+$lang->interface->menu = new stdclass();
+$lang->interface->menu->oauth  = '開放登錄|site|setoauth|';
+$lang->interface->menu->mail   = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->wechat = array('link' => '微信設置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
-$lang->score->menu = $lang->site->menu;
+$lang->score->menu = new stdclass();
+$lang->score->menu->score     = '積分規則|score|setcounts|';
+$lang->score->menu->stateInfo = '積分結算|score|showstateinfo|';
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -310,10 +319,6 @@ $lang->address = new stdclass();
 /* Menu of tree module. */
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
-
-/* Menu of mail module. */
-$lang->mail = new stdclass();
-$lang->mail->menu = $lang->site->menu;
 
 /* Menu of reply module. */
 $lang->reply = new stdclass();

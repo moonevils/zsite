@@ -72,7 +72,7 @@ $lang->user->getEmailCode    = '獲取郵箱驗證碼';
 $lang->user->setEmail        = '郵箱設置';
 $lang->user->newEmail        = '新郵箱';
 $lang->user->rank            = '等級積分';
-$lang->user->score           = '積分詳情';
+$lang->user->score           = '消耗積分';
 $lang->user->myScore         = '當前積分';
 $lang->user->buyScore        = '積分充值';
 $lang->user->addScore        = '獎勵積分';
@@ -83,6 +83,7 @@ $lang->user->batchDelete     = '批量刪除用戶';
 $lang->user->deleteHistory   = '刪除用戶及歷史數據';
 $lang->user->question        = '密保問題';
 $lang->user->answer          = '答案';
+$lang->user->checkContact    = '聯繫方式';
 
 $lang->user->type        = '賬戶類型';
 $lang->user->profile     = '個人信息';

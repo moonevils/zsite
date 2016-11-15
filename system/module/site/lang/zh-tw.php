@@ -47,6 +47,11 @@ $lang->site->saveDays        = '日誌保存天數';
 $lang->site->openCache       = '開啟緩存';
 $lang->site->cachePage       = '緩存整頁';
 $lang->site->cacheExpired    = '更新時間';
+$lang->site->clearCache      = '清除緩存';
+$lang->site->clearingCache   = '清除中';
+$lang->site->clearedCache    = '清除完畢';
+$lang->site->failClear       = '清除失敗';
+$lang->site->clearCacheTip   = '<td>刪除權限不足，在linux上運行命令<br/><code>sudo chown www-data:www-data %s</code><td>';
 $lang->site->hour            = '小時';
 $lang->site->homeMenus       = '首頁菜單';
 
@@ -176,20 +181,28 @@ $lang->site->cachePageOptions['open']  = '開啟';
 $lang->site->filterFunctionList['open']  = '啟用';
 $lang->site->filterFunctionList['close'] = '關閉';
 
-$lang->site->moduleAvailable = array();
-$lang->site->moduleAvailable['user']       = '會員';
-$lang->site->moduleAvailable['article']    = '文章';
-$lang->site->moduleAvailable['blog']       = '博客';
-$lang->site->moduleAvailable['product']    = '產品';
-$lang->site->moduleAvailable['book']       = '手冊';
-$lang->site->moduleAvailable['page']       = '單頁';
-$lang->site->moduleAvailable['forum']      = '論壇';
-$lang->site->moduleAvailable['message']    = '評論留言';
-$lang->site->moduleAvailable['search']     = '搜索';
-$lang->site->moduleAvailable['shop']       = '商城';
-$lang->site->moduleAvailable['score']      = '積分';
-$lang->site->moduleAvailable['stat']       = '統計';
-$lang->site->moduleAvailable['submittion'] = '投稿';
+$lang->site->moduleAvailable = new stdclass();
+                            
+$lang->site->moduleAvailable->user = array();
+$lang->site->moduleAvailable->user['user']    = '會員';
+$lang->site->moduleAvailable->user['forum']   = '論壇';
+$lang->site->moduleAvailable->user['message'] = '評論留言';
+$lang->site->moduleAvailable->user['search']  = '搜索';
+                            
+$lang->site->moduleAvailable->content = array();
+$lang->site->moduleAvailable->content['book']       = '手冊';
+$lang->site->moduleAvailable->content['page']       = '單頁';
+$lang->site->moduleAvailable->content['article']    = '文章';
+$lang->site->moduleAvailable->content['blog']       = '博客';
+$lang->site->moduleAvailable->content['submittion'] = '投稿';
+                            
+$lang->site->moduleAvailable->mall = array();
+$lang->site->moduleAvailable->mall['shop']    = '商城';
+$lang->site->moduleAvailable->mall['product'] = '產品';
+                            
+$lang->site->moduleAvailable->score = array();
+$lang->site->moduleAvailable->score['score'] = '積分';
+$lang->site->moduleAvailable->score['stat']  = '統計';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>標籤。';
 $lang->site->fileAllowedRole  = '多個尾碼名之間請用 "," 隔開';
