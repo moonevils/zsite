@@ -305,6 +305,7 @@ class uiModel extends model
         if(isset($params['css'])) unset($params['css']);
 
         $savePath = dirname($cssFile);
+        if(is_dir($savePath) and !is_writable($savePath)) return array('result' => 'fail', 'message' => sprintf($this->lang->ui->unWritable, $savePath));
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
         if(!file_exists($savePath . DS . 'index.html')) file_put_contents($savePath . DS . 'index.html', '');
         $lessTemplateDir = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme . DS;
@@ -372,9 +373,9 @@ class uiModel extends model
             }
             return array('result' => 'fail', 'message' => $errorLessc);
         }
-
+        if(file_exists($cssFile) and !is_writable($cssFile)) return array('result' => 'fail', 'message' => sprintf($this->lang->ui->unWritableFile, $cssFile));
         file_put_contents($cssFile, $css);
-
+        if(!file_exists($cssFile)) return array('result' => 'fail', 'message' => sprintf($this->lang->ui->unWritableFile, $cssFile));
         return array('result' => 'success', 'css' => $css);
     }
 
