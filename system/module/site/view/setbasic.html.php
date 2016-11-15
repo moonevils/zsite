@@ -44,19 +44,20 @@
           <th><?php echo $lang->site->copyright;?></th> 
           <td><?php echo html::input('copyright', $this->config->site->copyright, "class='form-control'");?></td><td></td>
         </tr>
+        <?php $firstType = true;?>
+        <?php $numberOfModuleType = count((array)$lang->site->moduleAvailable);?>
+        <?php foreach($lang->site->moduleAvailable as $moduleType => $moduleList):?>
         <tr>
-          <th rowspan='4'><?php echo $lang->site->module;?></th>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->user, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
+          <?php 
+            if($firstType)
+            { 
+              echo "<th rowspan='" . $numberOfModuleType . "'>" . $lang->site->module . "</th>"; 
+              $firstType = false;
+            }
+          ?>
+          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->{$moduleType}, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
         </tr>
-        <tr>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->content, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
-        </tr>
-        <tr>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->mall, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
-        </tr>
-        <tr>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->score, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
-        </tr>
+        <?php endforeach;?>
         <tr>
           <th><?php echo $lang->site->keywords;?></th> 
           <td colspan='2'><?php echo html::input('keywords', $this->config->site->keywords, "class='form-control'");?></td>
