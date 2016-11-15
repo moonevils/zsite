@@ -5,6 +5,7 @@ $lang->book->articles     = 'Articles';
 $lang->book->backtolist   = 'Back to List';
 
 $lang->book->admin      = 'Book List';
+$lang->book->info       = 'Book Info';
 $lang->book->createBook = 'Add a Book';
 $lang->book->create     = 'Add a Book';
 $lang->book->catalog    = 'Chapter';
@@ -12,6 +13,7 @@ $lang->book->edit       = 'Edit';
 $lang->book->sort       = 'Sort';
 $lang->book->setting    = 'Settings';
 $lang->book->index      = 'Home';
+$lang->book->more       = 'More';
 
 $lang->book->searchResults     = 'Search Results';
 $lang->book->inputArticleTitle = 'Pleae enter the title of an article';
