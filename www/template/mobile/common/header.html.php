@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php if(helper::isAjaxRequest()):?>
 <?php
 $webRoot            = $config->webRoot;
