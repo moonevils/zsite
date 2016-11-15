@@ -196,8 +196,6 @@ class user extends control
             if($this->post->referer != false and strpos($loginLink . $denyLink . $regLink, $this->post->referer) === false)
             {
                 if(!helper::isAjaxRequest()) helper::header301(urldecode($this->post->referer));
-                $frontLogonUrl = $this->createLink('user', 'control');
-                if(RUN_MODE == 'front' and strpos($this->post->referer, 'order') === false) $this->send(array('result'=>'success', 'locate'=>"$frontLogonUrl"));
                 $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
             }
             else
@@ -641,14 +639,10 @@ class user extends control
     {
         if(RUN_MODE == 'admin') return true;
 
-        if(!empty($referer))
-        {
-            $this->referer = htmlspecialchars((helper::safe64Decode($referer)));
-        }
-        else
-        {
-            $this->referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-        }
+        $this->referer = '';
+
+        if(!empty($referer)) $this->referer = htmlspecialchars((helper::safe64Decode($referer)));
+
         return true;
     }
 
