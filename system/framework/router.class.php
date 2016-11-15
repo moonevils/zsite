@@ -299,7 +299,7 @@ class router extends baseRouter
                 if($cache)
                 {
                     $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
-                    $cache = str_replace($this->config->siteNavHolder, $siteNav, $cache);
+                    $cache   = str_replace($this->config->siteNavHolder, $siteNav, $cache);
                     if($this->config->site->execInfo == 'show') $cache = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $cache);
                     die($cache);
                 }
