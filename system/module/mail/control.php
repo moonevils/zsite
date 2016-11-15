@@ -68,7 +68,6 @@ class mail extends control
      */
     public function edit()
     {
-        $this->lang->menuGroups->mail = 'interface';
         $this->lang->mail->menu       = $this->lang->interface->menu;
         
         if($this->config->mail->turnon)
@@ -104,7 +103,6 @@ class mail extends control
      */
     public function save()
     {
-        $this->lang->menuGroups->mail = 'interface';
         $this->lang->mail->menu       = $this->lang->interface->menu;
         
         if(!empty($_POST))
@@ -145,7 +143,6 @@ class mail extends control
      */
     public function test()
     {
-        $this->lang->menuGroups->mail = 'interface';
         $this->lang->mail->menu       = $this->lang->interface->menu;
         
         if(!$this->config->mail->turnon)
