@@ -422,9 +422,9 @@ class commonModel extends model
             if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
 
             $hasPublic= false;
-            if(isset($this->config->wechatPublic->hasPublic) )
+            if(isset($config->wechatPublic->hasPublic))
             {
-                if($this->config->wechatPublic->hasPublic) $hasPublic = true;
+                if($config->wechatPublic->hasPublic) $hasPublic = true;
             }
             else
             {
