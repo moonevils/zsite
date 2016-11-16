@@ -1,6 +1,6 @@
 <?php
 $config->book->require = new stdclass();
-$config->book->require->book = 'title, alias';
+$config->book->require->book = 'title, alias, content';
 $config->book->require->node = 'title';
 
 $config->book->editor = new stdclass();
