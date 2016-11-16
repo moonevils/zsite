@@ -14,7 +14,8 @@
               <td class='w-120px'><?php echo $lang->order->type;?></td>
               <td class='w-280px text-left'><?php echo $lang->order->productInfo;?></td>
               <td class='w-80px text-right'><?php echo $lang->order->amount;?></td>
-              <td class='w-120px'><?php echo $lang->product->status;?></td>
+              <td class='w-80px'><?php echo $lang->product->status;?></td>
+              <td class='w-80px'><?php echo $lang->order->payStatus;?></td>
               <td><?php echo $lang->order->note;?></td>
               <td><?php echo $lang->order->last;?></td>
               <td class='w-220px'><?php echo $lang->actions;?></td>
@@ -30,13 +31,16 @@
               <td class='text-center text-middle'>
                 <?php echo $this->order->processStatus($order);?>
               </td>
+              <td class='text-center text-middle'>
+                <?php echo zget($lang->order->payStatusList, $order->payStatus, '');?>
+              </td>
               <td class='text-left' title='<?php echo $order->note?>'><?php echo $order->note;?></td>
               <td class='text-center'><?php echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i');?></td>
               <td class='text-left text-middle'><?php $this->order->printActions($order);?></td>
             </tr>
             <?php endforeach;?>
           </tbody>
-          <tfoot><tr><td colspan='7'><?php $pager->show();?></td></tr></tfoot>
+          <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
         </table>
       </div>
     </div>
