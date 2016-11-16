@@ -111,6 +111,10 @@ $lang->order->statusList['finished']  = 'Finished';
 $lang->order->statusList['canceled']  = 'Cancelled';
 $lang->order->statusList['expired']   = 'Expired';
 
+$lang->order->payStatusList = array();
+$lang->order->payStatusList['not_paid'] = 'Not Paid';
+$lang->order->payStatusList['paid']     = 'Paid';
+
 $lang->order->types = array();
 $lang->order->types['shop']  = 'Product';
 $lang->order->types['score'] = 'Points';

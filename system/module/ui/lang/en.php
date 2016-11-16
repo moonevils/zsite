@@ -121,11 +121,12 @@ $lang->ui->template->qq              = 'QQ';
 $lang->ui->template->email           = 'Email';
 $lang->ui->template->site            = 'Site';
 
-$lang->ui->appearance  = 'Appearance';
-$lang->ui->custom      = 'Customize';
-$lang->ui->themeSaved  = 'Theme saved!';
-$lang->ui->unWritable  = "File cannot be created. Please check %s permission.";
-$lang->ui->codeHolder  = "Theme ID, a combination of numbers and letter.";
+$lang->ui->appearance      = 'Appearance';
+$lang->ui->custom          = 'Customize';
+$lang->ui->themeSaved      = 'Theme saved!';
+$lang->ui->unWritable      = "File cannot be created. Please check %s permission.";
+$lang->ui->codeHolder      = "Theme ID, a combination of numbers and letter.";
+$lang->ui->unWritableFile  = "Fail to generate the css file, please check the authority of %s";
 
 $lang->ui->blocks2Merge  = "Blocks can be merged";
 $lang->ui->blocks2Create = "New Block";

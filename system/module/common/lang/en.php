@@ -41,6 +41,7 @@ $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' 
 $lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>Changer CMS %s</a></span>";
 $lang->newVersion     = "Note: Changer CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
+$lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
 
 /* Global lang items. */
 $lang->home             = 'Home';
