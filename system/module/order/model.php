@@ -605,15 +605,15 @@ class orderModel extends model
             
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('javascript', $this->lang->order->pay, "class='$class' $disabled") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-goToPay $class'");
+            echo $disabled ? html::a('javascript:;', $this->lang->order->pay, "class='$class' $disabled") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-goToPay $class'");
 
             /* Track link. */
             $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
-            echo $disabled ? '' : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='$class'");
+            echo $disabled ? html::a('javascript:;', $this->lang->order->track, "class='$class' $disabled") : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='$class'");
 
             /* Confirm link. */
             $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
-            echo $disabled ? '' : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery $class'");
+            echo $disabled ? html::a('javascript:;', $this->lang->order->confirmReceived, "$disabled class='$class'") : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery $class'");
         }
     }
 
