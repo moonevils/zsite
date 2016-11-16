@@ -627,13 +627,14 @@ class orderModel extends model
      */
     public function printScoreActions($order, $btnLink)
     {
-        if(RUN_MODE == 'front') 
+        if(RUN_MODE == 'front' and $order->status == 'normal') 
         {
             $isMobile = ($this->app->clientDevice == 'mobile');
             $class    = $isMobile ? "  btn btn-link " : "";
+            
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
-            echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay $class'");
+            echo $disabled ? html::a('javascript:;', $this->lang->order->pay, "$disabled class='$class'") : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay $class'");
         }
     }
 
