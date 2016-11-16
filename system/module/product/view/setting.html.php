@@ -16,7 +16,7 @@
   <div class='panel-heading'><strong><i class='icon icon-cog'> </i><?php echo $lang->product->setting;?></strong></div>
   <div class='panel-body'>
     <form id='ajaxForm' action="<?php echo inlink('setting');?>" method='post' class='form-inline'>
-      <table class="table table-form table-fixed">
+      <table class="table table-form">
         <tr>
           <th class='w-120px'><?php echo $lang->product->currency;?></th>
           <td class='w-200px'><?php echo html::select('currency', $lang->product->currencyList, isset($config->product->currency) ? $config->product->currency : '', "class='chosen'");?></td>
