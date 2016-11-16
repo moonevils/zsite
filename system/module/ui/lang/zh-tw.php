@@ -121,11 +121,12 @@ $lang->ui->template->qq              = 'QQ';
 $lang->ui->template->email           = 'Email';
 $lang->ui->template->site            = 'site';
 
-$lang->ui->appearance  = '外觀';
-$lang->ui->custom      = '自定義';
-$lang->ui->themeSaved  = '主題配置已保存';
-$lang->ui->unWritable  = "不能生成樣式檔案，請檢查 %s目錄的權限";
-$lang->ui->codeHolder  = "字母加數字組合成的主題代號";
+$lang->ui->appearance      = '外觀';
+$lang->ui->custom          = '自定義';
+$lang->ui->themeSaved      = '主題配置已保存';
+$lang->ui->unWritable      = "不能生成樣式檔案，請檢查 %s目錄的權限";
+$lang->ui->codeHolder      = "字母加數字組合成的主題代號";
+$lang->ui->unWritableFile  = "不能生成樣式檔案，請檢查 %s檔案的權限";
 
 $lang->ui->blocks2Merge  = "可合併區塊";
 $lang->ui->blocks2Create = "新創建區塊";
