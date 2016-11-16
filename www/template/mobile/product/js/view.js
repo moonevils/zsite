@@ -20,10 +20,6 @@
 
 $(function()
 {
-  $.get(v.updateViewsLink);
-});
-$(function()
-{
     $(document).on('click', '.btn-buy', function()
     {
         window.location.href = $(this).data('url').replace('count', $('#count').val());

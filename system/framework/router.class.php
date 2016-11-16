@@ -289,6 +289,7 @@ class router extends baseRouter
     {
         $moduleName = $this->moduleName;
         $methodName = $this->methodName;
+        commonModel::processPre($moduleName, $methodName);
 
         if(RUN_MODE == 'front' and $this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
         {

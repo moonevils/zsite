@@ -19,7 +19,6 @@ js::set('categoryPath', explode(',', trim($category->path, ',')));
 css::internal($article->css);
 js::execute($article->js);
 js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id));
-js::set('updateViewsLink', $updateViewsLink);
 ?>
 <div class='block-region region-article-view-top blocks' data-region='article_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'top');?></div>
 <div class='appheader'>
@@ -90,7 +89,6 @@ js::set('updateViewsLink', $updateViewsLink);
 <script>
 $(function()
 {
-    $.get(v.updateViewsLink);  
     $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=article&objectID=$article->id", 'mhtml');?>');
 });
 </script>

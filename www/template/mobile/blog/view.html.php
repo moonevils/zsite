@@ -14,7 +14,6 @@
 <?php include TPL_ROOT . 'common/files.html.php'; ?>
 <?php 
 js::set('pageLayout', $this->block->getLayoutScope('blog_view', $article->id));
-js::set('updateViewsLink', $updateViewsLink);
 ?>
 
 <div class='block-region region-top blocks' data-region='blog_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'top');?></div>
@@ -87,7 +86,6 @@ js::set('updateViewsLink', $updateViewsLink);
 <script>
 $(function()
 {
-    $.get(v.updateViewsLink);  
     $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=article&objectID=$article->id", 'mhtml');?>');
 });
 </script>

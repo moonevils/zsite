@@ -132,27 +132,9 @@ class book extends control
         $this->view->desktopURL      = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'html');
         $this->view->books           = $this->book->getBookList();
 
-        $this->view->updateViewsLink = helper::createLink('book', 'updateBookViews', "articleID=$articleID");
-
         $this->display();
     }
 
-    /**
-     * Update the views number of artcile 
-     *
-     * @access public
-     * @param  string
-     * @return void
-     */
-    public function updateBookViews($articleID)
-    {
-        if(is_numeric($articleID))
-        {
-            $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec();
-            dao::$changedTables = array();
-        }
-    }
-    
     /**
      * Admin a book or a chapter.
      * 

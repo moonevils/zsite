@@ -312,11 +312,7 @@ class article extends control
         $article  = $this->article->getByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
 
-        if($article->link)
-        {
-            $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID=$articleID");
-            helper::header301($article->link);
-        }
+        if($article->link) helper::header301($article->link);
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
@@ -358,8 +354,6 @@ class article extends control
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
-        $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID=$articleID");
-
         if($this->app->clientDevice == 'desktop') 
         {
             $this->view->canonicalURL = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'html'); 
@@ -372,22 +366,6 @@ class article extends control
         $this->display();
     }
 
-    /**
-     * Update the views number of artcile 
-     *
-     * @access public
-     * @param  string
-     * @return void
-     */
-    public function updateArticleViews($articleID)
-    {
-        if(is_numeric($articleID))
-        {
-            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
-            dao::$changedTables = array();
-        }
-    }
-    
     /**
      * Delete an article.
      * 
