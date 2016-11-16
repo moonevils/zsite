@@ -1280,4 +1280,52 @@ class commonModel extends model
     {
         return $this->config->template->{$this->app->clientDevice}->theme;
     }
+
+    /**
+     * Process before load cache.
+     * 
+     * @param  string    $moduleName 
+     * @param  string    $methodName 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function processPre($moduleName, $methodName)
+    {
+        global $app;
+
+        $uri = $app->URI;
+        if($moduleName == 'article' and $methodName == 'view')
+        {
+            $articleID = str_replace('article-view-', '', $uri); 
+            $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($articleID)->exec();
+        }
+
+        if($moduleName == 'product' and $methodName == 'view')
+        {
+            $id = str_replace('product-view-', '', $uri); 
+            $app->loadClass('dao')->update(TABLE_PRODUCT)->set("views = views + 1")->where('id')->eq($id)->exec();
+        }
+
+        if($moduleName == 'blog' and $methodName == 'view')
+        {
+            $id = str_replace('blog-view-', '', $uri); 
+            $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
+        }
+
+        if($moduleName == 'book' and $methodName == 'read')
+        {
+            $id = str_replace('book-read-', '', $uri); 
+            $app->loadClass('dao')->update(TABLE_BOOK)->set("views = views + 1")->where('id')->eq($id)->exec();
+        }
+
+        if($moduleName == 'page' and $methodName == 'view')
+        {
+            $id = str_replace('page-view-', '', $uri); 
+            if(is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
+            if(!is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('alias')->eq($id)->exec();
+        }
+        
+        dao::$changedTables = array();
+    }
 }
