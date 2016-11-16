@@ -13,7 +13,6 @@
 <?php if(!empty($this->config->book->fullScreen) or $this->get->fullScreen):?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
 <?php js::set('fullScreen', 1);?>
-<?php js::set('updateViewsLink', $updateViewsLink);?>
 <div class='fullScreen-book'>
   <div class='fullScreen-content'>
     <div class='fullScreen-inner'>
@@ -82,7 +81,6 @@
       <script>
       $(function()
       {
-          $.get(v.updateViewsLink);  
           $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=book&objectID=$article->id", 'mhtml');?>');
       });
       </script>
@@ -98,7 +96,6 @@
 include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 include TPL_ROOT . 'common/files.html.php';
 js::set('fullScreen', 0);
-js::set('updateViewsLink', $updateViewsLink);
 ?>
 <div class='block-region region-top blocks' data-region='book_read-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'top');?></div>
 <div class='book'>
@@ -164,7 +161,6 @@ js::set('updateViewsLink', $updateViewsLink);
   <script>
   $(function()
   {
-      $.get(v.updateViewsLink);  
       $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=book&objectID=$article->id", 'mhtml');?>');
   });
   </script>
