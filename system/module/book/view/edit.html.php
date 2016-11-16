@@ -77,7 +77,7 @@ js::set('path', $path);
           <?php if($node->type == 'article' or $node->type == 'book'):?>
           <tr>
             <th><?php echo $lang->book->content;?></th>
-            <td colspan='2' valign='middle'><?php echo html::textarea('content', htmlspecialchars($node->content), "rows='15' class='form-control'");?></td>
+            <td colspan='2' valign='middle' <?php if($node->type == 'book') echo "class='required required-wrapper'";?>><?php echo html::textarea('content', htmlspecialchars($node->content), "rows='15' class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->book->addedDate;?></th>
