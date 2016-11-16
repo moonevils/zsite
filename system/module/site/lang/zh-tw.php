@@ -182,27 +182,27 @@ $lang->site->filterFunctionList['open']  = '啟用';
 $lang->site->filterFunctionList['close'] = '關閉';
 
 $lang->site->moduleAvailable = new stdclass();
-                            
-$lang->site->moduleAvailable->user = array();
-$lang->site->moduleAvailable->user['user']    = '會員';
-$lang->site->moduleAvailable->user['forum']   = '論壇';
-$lang->site->moduleAvailable->user['message'] = '評論留言';
-$lang->site->moduleAvailable->user['search']  = '搜索';
-                            
+                           
 $lang->site->moduleAvailable->content = array();
-$lang->site->moduleAvailable->content['book']       = '手冊';
-$lang->site->moduleAvailable->content['page']       = '單頁';
 $lang->site->moduleAvailable->content['article']    = '文章';
 $lang->site->moduleAvailable->content['blog']       = '博客';
-$lang->site->moduleAvailable->content['submittion'] = '投稿';
-                            
+$lang->site->moduleAvailable->content['page']       = '單頁';
+$lang->site->moduleAvailable->content['book']       = '手冊';
+                           
+$lang->site->moduleAvailable->user = array();
+$lang->site->moduleAvailable->user['user']       = '會員';
+$lang->site->moduleAvailable->user['forum']      = '論壇';
+$lang->site->moduleAvailable->user['message']    = '評論留言';
+$lang->site->moduleAvailable->user['submittion'] = '投稿';
+$lang->site->moduleAvailable->user['score']      = '積分';
+
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = '商城';
 $lang->site->moduleAvailable->mall['product'] = '產品';
-                            
+                           
 $lang->site->moduleAvailable->score = array();
-$lang->site->moduleAvailable->score['score'] = '積分';
-$lang->site->moduleAvailable->score['stat']  = '統計';
+$lang->site->moduleAvailable->score['search'] = '搜索';
+$lang->site->moduleAvailable->score['stat']   = '統計';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>標籤。';
 $lang->site->fileAllowedRole  = '多個尾碼名之間請用 "," 隔開';

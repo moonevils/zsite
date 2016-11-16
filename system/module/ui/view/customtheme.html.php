@@ -26,7 +26,7 @@
         <?php if(isset($this->config->ui->themes[$template][$theme])):?>
         <?php foreach($lang->ui->groups as $group => $name):?>
         <div class='tab-pane theme-control-tab-pane' id='<?php echo $group?>Tab'>
-          <table class='table table-form borderless table-fixed'>
+          <table class='table table-form borderless'>
             <?php
             $options = isset($config->ui->themes[$template][$theme][$group]) ? $config->ui->themes[$template][$theme][$group] : '';
             if($options) foreach($options as $selector => $attributes):

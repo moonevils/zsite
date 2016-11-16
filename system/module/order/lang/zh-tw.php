@@ -60,7 +60,7 @@ $lang->order->selectProducts = "選擇了 <strong class='text-danger'>%s</strong
 $lang->order->totalToPay     = "共計：<strong id='amount' class='text-lg text-danger'>%s</strong>";
 $lang->order->payInfo        = "%s %s 商品訂單";
 $lang->order->goToBank       = "請在綫支付您的訂單。";
-$lang->order->track          = '查看物流';
+$lang->order->track          = '物流';
 $lang->order->life           = '訂單跟蹤';
 $lang->order->days           = '天';
 $lang->order->deliveryInfo   = '查看詳情';
@@ -110,6 +110,10 @@ $lang->order->statusList['normal']    = '進行中';
 $lang->order->statusList['finished']  = '已完成';
 $lang->order->statusList['canceled']  = '已取消';
 $lang->order->statusList['expired']   = '已過期';
+
+$lang->order->payStatusList = array();
+$lang->order->payStatusList['not_paid'] = '未付款';
+$lang->order->payStatusList['paid']     = '已付款';
 
 $lang->order->types = array();
 $lang->order->types['shop']  = '商品';

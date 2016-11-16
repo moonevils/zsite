@@ -189,10 +189,6 @@ $lang->site->moduleAvailable->content['article']    = '文章';
 $lang->site->moduleAvailable->content['blog']       = '博客';
 $lang->site->moduleAvailable->content['page']       = '单页';
 $lang->site->moduleAvailable->content['book']       = '手册';
-
-$lang->site->moduleAvailable->mall = array();
-$lang->site->moduleAvailable->mall['shop']    = '商城';
-$lang->site->moduleAvailable->mall['product'] = '产品';
                            
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = '会员';
@@ -200,7 +196,11 @@ $lang->site->moduleAvailable->user['forum']      = '论坛';
 $lang->site->moduleAvailable->user['message']    = '评论留言';
 $lang->site->moduleAvailable->user['submittion'] = '投稿';
 $lang->site->moduleAvailable->user['score']      = '积分';
-                            
+
+$lang->site->moduleAvailable->mall = array();
+$lang->site->moduleAvailable->mall['shop']    = '商城';
+$lang->site->moduleAvailable->mall['product'] = '产品';
+                           
 $lang->site->moduleAvailable->score = array();
 $lang->site->moduleAvailable->score['search'] = '搜索';
 $lang->site->moduleAvailable->score['stat']   = '统计';
