@@ -68,7 +68,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
             <strong class='text-important'><?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?></strong> &nbsp;<?php echo $article->summary;?>
           </div>
         </div>
-        <?php if(isset($thumbnail) && $content->imagePosition == 'right') echo $thumbnail; ?>
+        <?php if(!empty($article->image) && isset($thumbnail) && $content->imagePosition == 'right') echo $thumbnail; ?>
       </div>
     </div>
     <?php endforeach;?>
