@@ -386,7 +386,7 @@ class baseDAO
             $this->sqlError($e);
         }
 
-        return $row->recTotal;
+        return is_object($row) ? $row->recTotal : 0;
     }
 
     /**
