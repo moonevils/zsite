@@ -135,19 +135,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
 <?php if(isset($resultCustomCss) and $resultCustomCss['result'] != 'success'):?>
 <?php if(!empty($resultCustomCss['message'])):?>
 <div class='alert alert-danger'>
-  <?php 
-    if(is_array($resultCustomCss['message']))
-    {
-        foreach($resultCustomCss['message'] as $errorCustomCss)
-        {
-            echo $errorCustomCss . "<br/>";
-        }
-    }
-    else
-    {
-        echo $resultCustomCss['message'];
-    }
-  ?>
+  <?php echo $lang->customCssError;?>
 </div>
 <?php endif;?>
 <?php endif;?>
