@@ -432,7 +432,7 @@ class commonModel extends model
                 if(!empty($isHasPublic))
                 {
                     $hasPublic = true;
-                    //$this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
+                    $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
                 }
                 else
                 {
