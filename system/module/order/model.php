@@ -57,6 +57,7 @@ class orderModel extends model
                 ->set('status')->eq('expired')
                 ->where('payStatus')->eq('not_paid')
                 ->andWhere('status')->ne('deleted')
+                ->andWhere('status')->ne('expired')
                 ->andWhere('createdDate')->le($createdDate)
                 ->exec();
         }
