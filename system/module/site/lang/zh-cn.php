@@ -75,7 +75,8 @@ $lang->site->front            = '网站浏览';
 $lang->site->useCDN           = '启用CDN';
 
 $lang->site->setBasic      = "基本信息设置";
-$lang->site->setSystem     = "系统设置";
+$lang->site->setLanguage   = "语言设置";
+$lang->site->setUrlType    = "地址类型";
 $lang->site->setCache      = '缓存设置';
 $lang->site->setCDN        = "CDN设置";
 $lang->site->setDomain     = "域名设置";
@@ -102,9 +103,9 @@ $lang->site->typeList->portal = '企业门户';
 $lang->site->typeList->blog   = '个人博客';
 
 $lang->site->requestTypeList = array();
-$lang->site->requestTypeList['GET']        = 'GET';
 $lang->site->requestTypeList['PATH_INFO']  = 'PATH_INFO';
 $lang->site->requestTypeList['PATH_INFO2'] = 'PATH_INFO2';
+$lang->site->requestTypeList['GET']        = 'GET';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';

@@ -478,12 +478,12 @@ class site extends control
     }
 
     /**
-     * Set system options.
+     * Set RequestType.
      * 
      * @access public
      * @return void
      */
-    public function setSystem()
+    public function setUrlType()
     {
         if($_POST)
         {
@@ -497,9 +497,34 @@ class site extends control
             $this->send($result);
         }
 
-        $this->view->title = $this->lang->site->setSystem;
+        $this->view->title = $this->lang->site->setUrlType;
         $this->display();
     }
+
+    /**
+     * Set languages.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setLanguage()
+    {
+        if($_POST)
+        {
+            $okFile = $this->loadModel('common')->verifyAdmin();
+            $pass   = $this->loadModel('guarder')->verify('okFile');
+            $this->view->pass   = $pass;
+            $this->view->okFile = $okFile;
+            if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+
+            $result = $this->site->setSystem();
+            $this->send($result);
+        }
+
+        $this->view->title = $this->lang->site->setLanguage;
+        $this->display();
+    }
+
     /**
      * Clear cache
      *

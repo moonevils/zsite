@@ -203,6 +203,8 @@ $lang->resource->reply->deleteFile = 'deleteFile';
 /* Site module. */
 $lang->resource->site = new stdclass();
 $lang->resource->site->setBasic     = 'setBasic';
+$lang->resource->site->setLanguage  = 'setLanguage';
+$lang->resource->site->setUrlType   = 'setUrlType';
 $lang->resource->site->setRobots    = 'setRobots';
 $lang->resource->site->setUpload    = 'setUpload';
 $lang->resource->site->setOauth     = 'setOauth';
