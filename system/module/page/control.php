@@ -41,11 +41,7 @@ class page extends control
     {
         $page = $this->loadModel('article')->getPageByID($pageID);
 
-        if($page->link)
-        {
-            $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID={$page->id}");
-            helper::header301($page->link);
-        }
+        if($page->link) helper::header301($page->link);
 
         $title    = $page->title;
         $keywords = $page->keywords . ' ' . $this->config->site->keywords;
@@ -60,8 +56,6 @@ class page extends control
         $this->view->layouts    = $this->loadModel('block')->getPageBlocks('page', 'view', $page->id);
         $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
-
-        $this->view->updateViewsLink = helper::createLink('article', 'updateArticleViews', "articleID={$page->id}");
 
         if($this->app->clientDevice == 'desktop') 
         {
