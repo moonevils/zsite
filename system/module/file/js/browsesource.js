@@ -69,8 +69,7 @@ $(document).ready(function()
     }
     if(!hasFlash){ $('.file-url').attr("disabled",false);}
     if(!hasFlash){ $('.copyBtn').click(function(){
-      new $.zui.Messager(v.noFlashTip, {
-            type: 'warning'
-      }).show();
+      $(this).popover({trigger:'manual', content:v.noFlashTip, placement:'bottom', tipClass:'noflashTip'}).popover('toggle');
+      $(this).parent().prev().focus();
     })}
 });
