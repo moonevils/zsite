@@ -75,7 +75,7 @@ class siteModel extends model
     }
 
     /**
-     * Set the site syetem options.
+     * Set the site language and request type options.
      *
      * @access public
      * @return void
@@ -87,10 +87,16 @@ class siteModel extends model
         $myFile = $this->app->getConfigRoot() . 'my.php';
 
         $rawContent = file_get_contents($myFile);
-        $rawContent = preg_replace('/.*config\->requestType.*\n/', '', $rawContent);
-        $rawContent = preg_replace('/.*config\->cn2tw.*\n/', '', $rawContent);
-        $rawContent = preg_replace('/.*config\->enabledLangs.*\n/', '', $rawContent);
-        $rawContent = preg_replace('/.*config\->defaultLang.*\n/', '', $rawContent);
+
+        if(isset($config->requestType)) $rawContent = preg_replace('/.*config\->requestType.*\n/', '', $rawContent);
+        if(isset($config->enabledLangs))
+        {
+            $rawContent = preg_replace('/.*config\->cn2tw.*\n/', '', $rawContent);
+            $rawContent = preg_replace('/.*config\->enabledLangs.*\n/', '', $rawContent);
+            $rawContent = preg_replace('/.*config\->defaultLang.*\n/', '', $rawContent);
+        }
+
+        $rawContent = str_replace("\n\n", "\n", $rawContent);
         $rawContent = str_replace('?>', '', $rawContent);
 
         if(strpos($rawContent, "config->db->name") === false) return array('result' => 'fail');
@@ -132,7 +138,7 @@ class siteModel extends model
                 $content .= '$config->requestType = \'' . $config->requestType. "';\n";
             }
 
-            file_put_contents($myFile, $rawContent . $content);
+            file_put_contents($myFile, $rawContent . "\n" . $content);
             dao::$changedTables[] = TABLE_CONFIG;
             return array('result' => 'success', 'message' => $this->lang->saveSuccess); 
         }

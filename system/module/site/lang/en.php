@@ -75,7 +75,8 @@ $lang->site->front            = 'Website Access';
 $lang->site->useCDN           = 'Activate CDN';
 
 $lang->site->setBasic      = "Basic Settings";
-$lang->site->setSystem     = "System Settings";
+$lang->site->setLanguage   = "Language";
+$lang->site->setUrlType    = "Url Type";
 $lang->site->setCache      = 'Cache Settings';
 $lang->site->setCDN        = "CDN Settings";
 $lang->site->setDomain     = "Domain Settings";
@@ -102,9 +103,9 @@ $lang->site->typeList->portal = 'Enterprise Portal';
 $lang->site->typeList->blog   = 'Individual Blog';
 
 $lang->site->requestTypeList = array();
-$lang->site->requestTypeList['GET']        = 'GET';
 $lang->site->requestTypeList['PATH_INFO']  = 'PATH_INFO';
 $lang->site->requestTypeList['PATH_INFO2'] = 'PATH_INFO2';
+$lang->site->requestTypeList['GET']        = 'GET';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
