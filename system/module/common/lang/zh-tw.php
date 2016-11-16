@@ -41,6 +41,7 @@ $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' 
 $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>蟬知企業門戶系統 %s</a> 強力驅動！</span>";
 $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查詢：<b>%s</b> 次<br>內存占用：<b>%s</b><br> PHP 執行時間：<b>%s</b> 秒</span></span>";
+$lang->customCssError = "不能生成樣式檔案，如果您是網站管理員，請到網站後台外觀管理重新設置樣式檔案";
 
 /* Global lang items. */
 $lang->home             = '首頁';
