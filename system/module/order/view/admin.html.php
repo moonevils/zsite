@@ -80,7 +80,7 @@
         </tr>
         <?php endforeach;?>
       </tbody>
-      <tfoot><tr><td colspan='9'><?php $pager->show();?></td></tr></tfoot>
+      <tfoot><tr><td colspan='10'><?php $pager->show();?></td></tr></tfoot>
     </table>
   </div>
 </div>
