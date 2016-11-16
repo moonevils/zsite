@@ -429,14 +429,37 @@ class commonModel extends model
             else
             {
                 $isHasPublic = $app->loadClass('dao')->select('count(*) as count')->from(TABLE_WX_PUBLIC)->fetch('count');
+                
+                $data = new stdclass();
+                $data->owner   = 'system';
+                $data->module  = 'common';
+                $data->section = 'wechatPublic';
+                $data->key     = 'hasPublic';
+                
                 if(!empty($isHasPublic))
                 {
                     $hasPublic = true;
-                    $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
+                    $data->value = '1';
+                    if(empty($app->loadClass('dao')->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('hasPublic')->fetchAll()))
+                    {
+                        $app->loadClass('dao')->insert(TABLE_CONFIG)->data($data)->exec();
+                    }
+                    else
+                    {
+                        $app->loadClass('dao')->update(TABLE_CONFIG)->set('value')->eq('1')->where('`key`')->eq('hasPublic')->exec();
+                    }
                 }
                 else
                 {
-                    $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '0');
+                    $data->value = '0';
+                    if(empty($app->loadClass('dao')->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('hasPublic')->fetchAll()))
+                    {
+                        $app->loadClass('dao')->insert(TABLE_CONFIG)->data($data)->exec();
+                    }
+                    else
+                    {
+                        $app->loadClass('dao')->update(TABLE_CONFIG)->set('value')->eq('0')->where('`key`')->eq('hasPublic')->exec();
+                    }
                 }
             }
             if($menu == 'wechat' and !$hasPublic) continue;

@@ -21,7 +21,7 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
-      <table class='table table-form table-fixed'>
+      <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->product->category;?></th>
           <td class='w-p40'><?php echo html::select("categories[]", $categories, $categoryID, "multiple='multiple' class='form-control chosen'");?></td><td></td>

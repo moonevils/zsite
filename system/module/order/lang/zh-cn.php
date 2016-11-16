@@ -111,6 +111,10 @@ $lang->order->statusList['finished']  = '已完成';
 $lang->order->statusList['canceled']  = '已取消';
 $lang->order->statusList['expired']   = '已过期';
 
+$lang->order->payStatusList = array();
+$lang->order->payStatusList['not_paid'] = '未付款';
+$lang->order->payStatusList['paid']     = '已付款';
+
 $lang->order->types = array();
 $lang->order->types['shop']  = '商品';
 $lang->order->types['score'] = '积分';

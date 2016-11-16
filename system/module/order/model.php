@@ -44,6 +44,7 @@ class orderModel extends model
 
             $this->dao->update(TABLE_ORDER)
                 ->set('deliveryStatus')->eq('confirmed')
+                ->set('last')->eq(helper::now())
                 ->where('deliveryStatus')->eq('send')
                 ->andWhere('deliveriedDate')->le($deliveryDate)
                 ->exec();
@@ -55,8 +56,10 @@ class orderModel extends model
          
             $this->dao->update(TABLE_ORDER)
                 ->set('status')->eq('expired')
+                ->set('last')->eq(helper::now())
                 ->where('payStatus')->eq('not_paid')
                 ->andWhere('status')->ne('deleted')
+                ->andWhere('status')->ne('expired')
                 ->andWhere('createdDate')->le($createdDate)
                 ->exec();
         }
@@ -392,13 +395,7 @@ class orderModel extends model
         if($order->status == 'canceled') return $this->lang->order->statusList['canceled'];
         if($order->status == 'expired')  return $this->lang->order->statusList['expired'];
     
-        if($order->payment == 'COD') return $this->lang->order->statusList[$order->deliveryStatus];
-
-        if($order->payment != 'COD')
-        {
-            if($order->payStatus == 'paid') return $this->lang->order->statusList[$order->deliveryStatus];
-            return $this->lang->order->statusList[$order->payStatus];
-        }
+        return $this->lang->order->statusList[$order->deliveryStatus];
     }
 
     /**

@@ -51,7 +51,10 @@
           </tr>
           <tr>
             <th><?php echo $lang->book->content;?></th>
-            <td colspan='2'><?php echo html::textarea('content', '', "rows='15' class='form-control'");?></td>
+            <td colspan='2'>
+               <div class='required required-wrapper'></div>
+               <?php echo html::textarea('content', '', "rows='15' class='form-control'");?>
+            </td>
           </tr>
           <tr>
             <th></th><td><?php echo html::submitButton();?></td>
