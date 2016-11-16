@@ -183,26 +183,26 @@ $lang->site->filterFunctionList['close'] = 'Off';
 
 $lang->site->moduleAvailable = new stdclass();
 
-$lang->site->moduleAvailable->user = array();
-$lang->site->moduleAvailable->user['user']    = 'User';
-$lang->site->moduleAvailable->user['forum']   = 'Forum';
-$lang->site->moduleAvailable->user['message'] = 'Message';
-$lang->site->moduleAvailable->user['search']  = 'Search';
-
 $lang->site->moduleAvailable->content = array();
-$lang->site->moduleAvailable->content['book']       = 'Book';
-$lang->site->moduleAvailable->content['page']       = 'Page';
 $lang->site->moduleAvailable->content['article']    = 'Article';
 $lang->site->moduleAvailable->content['blog']       = 'Blog';
-$lang->site->moduleAvailable->content['submittion'] = 'Contribution';
+$lang->site->moduleAvailable->content['page']       = 'Page';
+$lang->site->moduleAvailable->content['book']       = 'Book';
+
+$lang->site->moduleAvailable->user = array();
+$lang->site->moduleAvailable->user['user']       = 'User';
+$lang->site->moduleAvailable->user['forum']      = 'Forum';
+$lang->site->moduleAvailable->user['message']    = 'Message';
+$lang->site->moduleAvailable->user['submittion'] = 'Contribution';
+$lang->site->moduleAvailable->user['score']      = 'Points';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = 'Mall';
 $lang->site->moduleAvailable->mall['product'] = 'Product';
 
 $lang->site->moduleAvailable->score = array();
-$lang->site->moduleAvailable->score['score'] = 'Points';
-$lang->site->moduleAvailable->score['stat']  = 'Report';
+$lang->site->moduleAvailable->score['search'] = 'Search';
+$lang->site->moduleAvailable->score['stat']   = 'Report';
 
 $lang->site->metaHolder       = 'Tag <meta><script><style> and <link> applicable';
 $lang->site->fileAllowedRole  = 'Use "," to separate file types.';
