@@ -32,7 +32,7 @@
             ?>
           </span>
           <span>
-            <?php echo html::a('javascript:;', $lang->delete, "class='product-deleter'");?>
+            <?php echo $productCount == 1 ? '' : html::a('javascript:;', $lang->delete, "class='product-deleter'");?>
           </span>
         </div>
       </td>
