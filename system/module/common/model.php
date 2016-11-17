@@ -421,48 +421,7 @@ class commonModel extends model
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
             if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
 
-            $hasPublic= false;
-            if(isset($config->wechatPublic->hasPublic))
-            {
-                if($config->wechatPublic->hasPublic) $hasPublic = true;
-            }
-            else
-            {
-                $isHasPublic = $app->loadClass('dao')->select('count(*) as count')->from(TABLE_WX_PUBLIC)->fetch('count');
-                
-                $data = new stdclass();
-                $data->owner   = 'system';
-                $data->module  = 'common';
-                $data->section = 'wechatPublic';
-                $data->key     = 'hasPublic';
-                
-                if(!empty($isHasPublic))
-                {
-                    $hasPublic = true;
-                    $data->value = '1';
-                    if(empty($app->loadClass('dao')->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('hasPublic')->fetchAll()))
-                    {
-                        $app->loadClass('dao')->insert(TABLE_CONFIG)->data($data)->exec();
-                    }
-                    else
-                    {
-                        $app->loadClass('dao')->update(TABLE_CONFIG)->set('value')->eq('1')->where('`key`')->eq('hasPublic')->exec();
-                    }
-                }
-                else
-                {
-                    $data->value = '0';
-                    if(empty($app->loadClass('dao')->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('hasPublic')->fetchAll()))
-                    {
-                        $app->loadClass('dao')->insert(TABLE_CONFIG)->data($data)->exec();
-                    }
-                    else
-                    {
-                        $app->loadClass('dao')->update(TABLE_CONFIG)->set('value')->eq('0')->where('`key`')->eq('hasPublic')->exec();
-                    }
-                }
-            }
-            if($menu == 'wechat' and !$hasPublic) continue;
+            if($menu == 'wechat' and !commonModel::hasPublic()) continue;
             
             if(commonModel::hasPriv($module, $method))
             {
@@ -476,6 +435,32 @@ class commonModel extends model
         return $string;
     }
      
+    /**
+     * Check  has wechat public.
+     * 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function hasPublic()
+    {
+        global $config, $app;
+        if(isset($config->wechatPublic->hasPublic)) return $config->wechatPublic->hasPublic;
+
+        $publicCount = $app->loadClass('dao')->select('count(*) as count')->from(TABLE_WX_PUBLIC)->fetch('count');
+        
+        $data = new stdclass();
+        $data->owner   = 'system';
+        $data->module  = 'common';
+        $data->section = 'wechatPublic';
+        $data->key     = 'hasPublic';
+
+        $data->value = $publicCount ? '1' : '0';
+        $app->loadClass('dao')->replace(TABLE_CONFIG)->data($data)->exec();
+
+        return $publicCount;
+    }
+
     /**
      * Create the module menu.
      *
