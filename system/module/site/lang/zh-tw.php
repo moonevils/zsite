@@ -51,7 +51,7 @@ $lang->site->clearCache      = '清除緩存';
 $lang->site->clearingCache   = '清除中';
 $lang->site->clearedCache    = '清除完畢';
 $lang->site->failClear       = '清除失敗';
-$lang->site->clearCacheTip   = '<td>刪除權限不足，<br/>請修改<code>%s</code>權限<td>';
+$lang->site->clearCacheTip   = '<td>刪除權限不足，請修改<code>%s</code>權限<td>';
 $lang->site->hour            = '小時';
 $lang->site->homeMenus       = '首頁菜單';
 
