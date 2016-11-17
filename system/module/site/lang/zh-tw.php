@@ -51,7 +51,7 @@ $lang->site->clearCache      = '清除緩存';
 $lang->site->clearingCache   = '清除中';
 $lang->site->clearedCache    = '清除完畢';
 $lang->site->failClear       = '清除失敗';
-$lang->site->clearCacheTip   = '<td>刪除權限不足，在linux上運行命令<br/><code>sudo chown www-data:www-data %s</code><td>';
+$lang->site->clearCacheTip   = '<td>刪除權限不足，<br/>請修改<code>%s</code>權限<td>';
 $lang->site->hour            = '小時';
 $lang->site->homeMenus       = '首頁菜單';
 
@@ -75,7 +75,8 @@ $lang->site->front            = '網站瀏覽';
 $lang->site->useCDN           = '啟用CDN';
 
 $lang->site->setBasic      = "基本信息設置";
-$lang->site->setSystem     = "系統設置";
+$lang->site->setLanguage   = "語言設置";
+$lang->site->setUrlType    = "地址類型";
 $lang->site->setCache      = '緩存設置';
 $lang->site->setCDN        = "CDN設置";
 $lang->site->setDomain     = "域名設置";
@@ -102,9 +103,9 @@ $lang->site->typeList->portal = '企業門戶';
 $lang->site->typeList->blog   = '個人博客';
 
 $lang->site->requestTypeList = array();
-$lang->site->requestTypeList['GET']        = 'GET';
 $lang->site->requestTypeList['PATH_INFO']  = 'PATH_INFO';
 $lang->site->requestTypeList['PATH_INFO2'] = 'PATH_INFO2';
+$lang->site->requestTypeList['GET']        = 'GET';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
