@@ -38,6 +38,6 @@ $(document).ready(function()
           amount += parseInt($(this).val()) * parseFloat($(this).data('price')).toFixed(2);
       });
 
-      $('#amount').val(amount);
+      $('#amount').val(amount.toFixed(2));
   })
 });
