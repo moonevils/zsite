@@ -488,7 +488,7 @@ class orderModel extends model
         foreach($order->products as $product)
         {
             $goodsInfo  = "<div class='text-left'>";
-            $goodsInfo .= '<span>' . html::a(helper::createLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName) . '</span>';
+            $goodsInfo .= '<span>' . html::a(commonModel::createFrontLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName) . '</span>';
             $goodsInfo .= $this->config->product->currencySymbol . $product->price . ' &times; ' . $product->count . '</div>';
         }
         return $goodsInfo;
