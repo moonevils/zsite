@@ -90,3 +90,4 @@ $lang->upgrade->fromVersions['5_3_2']    = '5.3.2';
 $lang->upgrade->fromVersions['5_3_3']    = '5.3.3';
 $lang->upgrade->fromVersions['5_3_4']    = '5.3.4';
 $lang->upgrade->fromVersions['5_4']      = '5.4';
+$lang->upgrade->fromVersions['5_4_1']    = '5.4.1';
