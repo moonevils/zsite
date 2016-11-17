@@ -28,12 +28,10 @@ class tree extends control
         $isWechatMenu = treeModel::isWechatMenu($type);
         if($isWechatMenu)
         {
-            $this->lang->menuGroups->wechat = 'interface';
-            $this->lang->wechat->menu       = $this->lang->interface->menu;
             $this->lang->tree             = $this->lang->wechatMenu;
             $this->lang->category         = $this->lang->wechatMenu;
-            $this->lang->tree->menu       = $this->lang->wechat->menu;
-            $this->lang->menuGroups->tree = 'site';
+            $this->lang->tree->menu       = $this->lang->interface->menu;
+            $this->lang->menuGroups->tree = 'interface';
         }
         else
         {
