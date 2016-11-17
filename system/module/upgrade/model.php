@@ -154,7 +154,8 @@ class upgradeModel extends model
                 $this->fixCustomConfig();
                 $this->execSQL($this->getUpgradeFile('5.3.4'));
             case '5_4';
-            case '5_4_1';
+            case '5_4_1':
+                $this->execSQL($this->getUpgradeFile('5.4.1'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
