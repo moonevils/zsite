@@ -187,7 +187,6 @@ foreach($product->attributes as $attribute)
 <?php endif;?>
 
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_view', 'bottom');?></div>
-<?php js::import($templateCommonRoot . 'js/mzui.form.min.js'); ?>
 <style>
   #productSlide{height:320px;text-align:center;}
   #productSlide .carousel-inner{width:320px;height:320px;display:inline-block;}

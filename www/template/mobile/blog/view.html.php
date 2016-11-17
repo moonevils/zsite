@@ -82,7 +82,6 @@ js::set('pageLayout', $this->block->getLayoutScope('blog_view', $article->id));
 <?php endif;?>
 
 <div class='block-region region-bottom blocks' data-region='blog_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'bottom');?></div>
-<?php js::import($templateCommonRoot . 'js/mzui.form.min.js'); ?>
 <script>
 $(function()
 {
