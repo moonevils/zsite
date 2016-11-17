@@ -47,7 +47,7 @@
         <?php endif; ?>
       </header>
       <section class='article-content'>
-        <?php if(isset($content)) echo $content;;?>
+        <?php if(isset($content)) echo $content;?>
       </section>
       <section><?php $this->loadModel('file')->printFiles($article->files);?></section>
       <footer>
@@ -136,7 +136,7 @@
     <?php endif; ?>
   </header>
   <section class='article-content'>
-    <?php if(isset($content)) echo $content;?>
+    <?php if(isset($content) and $article->type != 'book') echo $content;?>
     <?php if($article->type == 'book') echo $article->content;?>
   </section>
   <section><?php $this->loadModel('file')->printFiles($article->files);?></section>
