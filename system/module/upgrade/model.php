@@ -217,6 +217,7 @@ class upgradeModel extends model
             case '5_3_2'    ; 
             case '5_3_3'    ; 
             case '5_3_4'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.4'));
+            case '5_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.4.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
