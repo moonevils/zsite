@@ -51,7 +51,7 @@ $lang->site->clearCache      = 'Clear cache';
 $lang->site->clearingCache   = 'Clearing';
 $lang->site->clearedCache    = 'Clear finished';
 $lang->site->failClear       = 'Clear failed';
-$lang->site->clearCacheTip   = '<td>Short of autority, <br/>Please edit the authority of <code>%s</code><td>';
+$lang->site->clearCacheTip   = '<td>Short of autority, Please edit the authority of <code>%s</code><td>';
 $lang->site->hour            = 'Hour';
 $lang->site->homeMenus       = 'Homepage Menu';
 
