@@ -20,43 +20,35 @@
       <th class='w-80px'><?php echo $lang->order->deliveryStatus;?></th>
       <td><?php echo $lang->order->deliverList[$order->deliveryStatus];?></td>
     </tr>
+    <?php foreach($products as $goods):?>
     <tr>
+      <?php if(!isset($goodsStarted)):?>
       <th rowspan='<?php echo $productCount;?>'><?php echo $lang->order->productInfo;?></th>
-      <?php $product = $products[0];?>
+      <?php endif;?>
       <td>
-        <div>
-          <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
-          <span>
-            <?php 
-            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input("product[$product->id]", $product->count, "class='form-control w-40px product-input'");
-            ?>
-          </span>
-          <span>
-            <?php echo $productCount == 1 ? '' : html::a('javascript:;', $lang->delete, "class='product-deleter'");?>
-          </span>
+        <div class='pull-left' style='padding:8px; padding-left:0;'>
+          <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$goods->productID"), $goods->productName, "target='_blank'");?></span>
+          <span><?php echo $lang->order->price . $lang->colon . $goods->price ;?></span>
+        </div>
+        <div class='w-180px pull-left'>
+          <div class='input-group'>
+            <span class="input-group-addon"><i class='icon icon-minus'> </i></span>
+            <?php echo html::input("count[$goods->id]", $goods->count, "class='form-control' data-price='{$goods->price}'"); ?>
+            <span class="input-group-addon fix-border"><i class='icon icon-plus'> </i></span>
+            <span class="input-group-addon">
+              <?php $disabled = $productCount >  1 ? '' : 'disabled'?>
+              <?php echo html::a('javascript:;', $lang->delete, "class='{$disabled} product-deleter'");?>
+            </span>
+          </div>
         </div>
       </td>
-    </tr>
-    <?php if($productCount > 1):?>
-    <?php while($item < $productCount):?>
+      <?php $goodsStarted = true;?>
+      </tr>
+    <?php endforeach;?>
     <tr>
-      <?php $product = $products[$item]; $item += 1;?>
-      <td>
-        <div>
-          <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
-          <span>
-            <?php 
-            echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . html::input("product[$product->id]", $product->count, "class='form-control w-40px product-input'");
-            ?>
-          </span>
-          <span>
-            <?php echo html::a('javascript:;', $lang->delete, "class='product-deleter'");?>
-          </span>
-        </div>
-      </td>
+      <th class='w-80px'><?php echo $lang->order->amount;?></th>
+      <td><?php echo html::input('amount', $order->amount, "readonly class='form-control'");?></td>
     </tr>
-    <?php endwhile;?>
-    <?php endif;?>
     <?php if($order->deliveryStatus === 'send'):?>
     <tr>
       <th class='w-80px'><?php echo $lang->order->express;?></th>
