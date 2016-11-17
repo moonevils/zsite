@@ -653,6 +653,35 @@ function setGo2Top()
  */
 +(function($)
 {
+    $.fn.tidyCards = function()
+    {
+        var winWidth = $(window).width();
+        $(this).each(function()
+        {
+            var $this = $(this);
+            var parentGrid = $this.closest('[class*="col-"]').parent().closest('[class*="col-"]').data('grid') || 12;
+            var grid = parentGrid * $this.closest('[class*="col-"]').data('grid') / 12,
+                $cards = $this.find('[class*="col-"]'),
+                layout = $this.data('layout');
+                recPerRow = $cards.data('recperrow');
+
+            if(layout == 'horizontal') $cards.attr('class', 'col-md-3 col-sm-4 col-xs-6');
+            else if(layout == 'vertical') $cards.attr('class', 'col-lg-12');
+            else
+            {
+                if(recPerRow && winWidth > 767)
+                {
+                    width = 1 / recPerRow * 100;
+                    $cards.attr('style', "width:" + width + '%' + (recPerRow > 1 ? ';float:left' : ''));
+                }
+
+                if(grid >= 9) $cards.attr('class', 'col-md-4 col-sm-6');
+                else if(grid >= 5) $cards.attr('class', 'col-md-6');
+                else $cards.attr('class', 'col-md-12');
+            }
+        });
+    };
+
     function tidy($blocks, options)
     {
         $blocks = $blocks || $(this);
@@ -661,31 +690,6 @@ function setGo2Top()
         var winWidth = $(window).width();
         if(!options.force && winWidth == $blocks.data('tidyWinWidth')) return;
         else $blocks.data('tidyWinWidth', winWidth);
-        
-        $blocks.find('.panel-block .cards').each(function()
-        {
-            var $this = $(this);
-            var parentGrid = $this.closest('[class*="col-"]').parent().closest('[class*="col-"]').data('grid') || 12;
-            var grid = parentGrid * $this.closest('[class*="col-"]').data('grid') / 12,
-                cards = $this.find('[class*="col-"]'),
-                layout = $this.data('layout');
-                recPerRow = cards.data('recperrow');
-
-            if(layout == 'horizontal') cards.attr('class', 'col-md-3 col-sm-4 col-xs-6');
-            else if(layout == 'vertical') cards.attr('class', 'col-lg-12');
-            else
-            {
-                if(recPerRow && winWidth > 767)
-                {
-                    width = 1 / recPerRow * 100;
-                    cards.attr('style', "width:" + width + '%' + (recPerRow > 1 ? ';float:left' : ''));
-                }
-
-                if(grid >= 9) cards.attr('class', 'col-md-4 col-sm-6');
-                else if(grid >= 5) cards.attr('class', 'col-md-6');
-                else cards.attr('class', 'col-md-12');
-            }
-        });
 
         var rows = {};
         var rowIndex = 0;
@@ -767,10 +771,14 @@ function setGo2Top()
     var tidyBlocks = function()
     {
         clearTimeout(lastTidyTask);
-        lastTidyTask = setTimeout(function(){$('.row.blocks').tidy();}, 300)
+        lastTidyTask = setTimeout(function()
+        {
+            $('.row.blocks').tidy();
+            $('.cards-custom').tidyCards();
+        }, 300);
     };
 
-    $.extend({tidyBlocks: tidyBlocks})
+    $.extend({tidyBlocks: tidyBlocks});
     $(function()
     {
         tidyBlocks();
