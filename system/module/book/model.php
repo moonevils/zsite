@@ -479,7 +479,7 @@ class bookModel extends model
             ->get();
 
         $this->dao->insert(TABLE_BOOK)
-            ->data($book)
+            ->data($book, $skip = 'uid')
             ->autoCheck()
             ->batchCheck($this->config->book->require->book, 'notempty')
             ->check('alias', 'unique', "`type`='book' AND `lang`='{$this->app->getClientLang()}'")
