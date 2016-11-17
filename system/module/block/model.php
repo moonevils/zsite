@@ -89,7 +89,11 @@ class blockModel extends model
             foreach($pageBlocks as $region => $regionBlock)
             {
                 $regionBlocks = json_decode($regionBlock->blocks);
-                foreach((array)$regionBlocks as $block) $blockIdList[] = $block->id;
+                foreach((array)$regionBlocks as $block)
+                {
+                    $blockIdList[] = $block->id;
+                    if(isset($block->children)) foreach($block->children as $child) $blockIdList[] = $child->id;
+                }
             }
         }
 
