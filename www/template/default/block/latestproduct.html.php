@@ -27,7 +27,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
   </div>
   <?php if(isset($content->image)):?>
   <div class='panel-body'>
-    <div class='cards cards-borderless'>
+    <div class='cards cards-borderless cards-custom'>
       <?php foreach($products as $product):?>
       <?php 
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
