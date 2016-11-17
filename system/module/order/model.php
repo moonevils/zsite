@@ -961,17 +961,17 @@ class orderModel extends model
         
         $order = $this->getByID($orderID);
 
-        if(isset($data->product))
+        if(RUN_MODE == 'admin' and isset($data->count))
         {
-            foreach($data->product as $orderProductID =>$count)
+            foreach($data->count as $goodsID => $count)
             {
-                if(preg_match("/^[1-9][0-9]*$/",$count))
+                if($count > 0)
                 {
-                    $this->dao->update(TABLE_ORDER_PRODUCT)->set('count')->eq($count)->where('id')->eq($orderProductID)->exec();
+                    $this->dao->update(TABLE_ORDER_PRODUCT)->set('count')->eq($count)->where('id')->eq($goodsID)->exec();
                 }
                 if($count == '0')
                 {
-                    $this->dao->delete()->from(TABLE_ORDER_PRODUCT)->where('id')->eq($orderProductID)->exec();
+                    $this->dao->delete()->from(TABLE_ORDER_PRODUCT)->where('id')->eq($goodsID)->exec();
                 }
             }
             $totalAmount = $this->computeOrderAmount($orderID);
