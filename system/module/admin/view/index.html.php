@@ -11,7 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php $ignoreUpgrade = false; ?>
 <div class='container' id='shortcutBox'>
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
