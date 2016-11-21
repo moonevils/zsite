@@ -374,7 +374,7 @@ body {padding-left: 50px;}
 #mainNavbar .device-nav .dropdown-menu > li > a > .icon {font-size: 42px; display: block; height: 56px; width: 80px; line-height: 56px;}
 
 #positionBar {margin-bottom: 0; line-height: 40px; padding-left: 15px;}
-#positionBar > li + li:before {content: '\e6e1'; font-family: ZenIcon; font-size: 14px; display: inline-block; margin-right: -2px;}
+#positionBar > li + li:before {content: '\e6e1'; font-family: ZenIcon; font-size: 14px; display: inline-block; margin-right: -2px; color:black;}
 #positionBar:after {display: none}
 
 #navbar {border-color: #ddd; border-radius: 0; border-bottom-color: #ccc; min-height: 38px}
