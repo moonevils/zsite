@@ -109,13 +109,26 @@ class control extends baseControl
         if(RUN_MODE == 'front')
         {
             $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $moduleName;
-            $viewFile = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
+            $viewFile     = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
+            
             if($this->devicePrefix == 'm.' and !is_file($viewFile))
             {
                 $viewFile = $templatePath . DS . "{$methodName}.{$viewType}.php";
             }
             $mainViewFile = $viewFile;
         }
+
+        if(RUN_MODE == 'front')
+        {
+            $tmpViewFolder = $this->config->framework->multiSite ? $this->app->getTmpRoot() . 'template' . DS . $this->app->siteCode : $this->app->getTmpRoot() . 'template';
+            $customedFile  = str_replace($this->app->getWwwRoot() . 'template', $tmpViewFolder, $mainViewFile);
+            if(file_exists($customedFile))
+            {
+                $viewFile     = $customedFile;  
+                $mainViewFile = $viewFile;
+            }
+        }
+
 
         if(!empty($viewExtPath))
         {
@@ -128,7 +141,6 @@ class control extends baseControl
 
             $viewFile = (!empty($siteExtViewFile) and file_exists($siteExtViewFile)) ? $siteExtViewFile : $viewFile;
             if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
-            
 
             $commonExtHookFiles = glob($viewExtPath['common'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
             $siteExtHookFiles   = empty($viewExtPath['site']) ? '' : glob($viewExtPath['site'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
