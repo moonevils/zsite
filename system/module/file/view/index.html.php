@@ -1,25 +1,54 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'>
-    <?php echo $lang->file->sourceList?>
+  <div class='panel-heading clearfix'>
+    <ul id='typeNav' class='nav nav-tabs pull-left'>
+      <li data-type='internal' <?php echo $type == 'valid' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('index', "type=valid"), $lang->file->fileList);?>
+      </li>
+      <li data-type='internal' <?php echo $type == 'invalid' ? "class='active'" : '';?>>
+        <?php echo html::a(inlink('index', "type=invalid"), $lang->file->invalidFile);?>
+      </li>
+    </ul> 
+    <div class='panel-actions'>
+      <?php if($type == 'valid') commonModel::printLink('package', 'upload', '', $lang->file->upload, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php if($type == 'invalid') commonModel::printLink('package', 'upload', '', $lang->file->updateInvalidFiles, "class='btn btn-primary' data-toggle='modal'");?>
+    </div>
   </div>
-  <div id='listView' class='panel-body'>
-    <table class='table table-bordered'>
-      <thead>
-        <tr class='text-center'>
-          <th class=' w-60px'><?php echo $lang->file->id;?></th>
-          <th><?php echo $lang->file->source;?></th>
-          <th><?php echo $lang->file->sourceURI;?></th>
-          <th class='w-60px'><?php echo $lang->file->extension;?></th>
-          <th class='w-80px'><?php echo $lang->file->size;?></th>
-          <th class='w-100px'><?php echo $lang->file->addedBy;?></th>
-          <th class='w-160px'><?php echo $lang->file->addedDate;?></th>
-          <th class='w-80px'><?php echo $lang->actions;?></th>
+  <div class='panel-body'>
+  <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
+    <thead>
+      <tr class='text-center'>
+        <th class=' w-60px'><?php echo $lang->file->id;?></th>
+        <th><?php echo $lang->file->source;?></th>
+        <th><?php echo $lang->file->sourceURI;?></th>
+        <th class='w-60px'><?php echo $lang->file->extension;?></th>
+        <th class='w-80px'><?php echo $lang->file->size;?></th>
+        <th class='w-100px'><?php echo $lang->file->addedBy;?></th>
+        <th class='w-160px'><?php echo $lang->file->addedDate;?></th>
+        <th class='w-80px'><?php echo $lang->actions;?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($files as $file):?>
+        <tr class='text-center text-middle'>
+          <td><?php echo $file->id;?></td>
+          <td><?php echo html::a(inlink('download', "id=$file->id"), $file->title, "target='_blank'");?></td>
+          <td class='text-left'><?php echo $file->pathname;?></td>
+          <td><?php echo $file->extension;?></td>
+          <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
+          <td><?php echo isset($file->addedBy) ? $file->addedBy : '';?></td>
+          <td><?php echo $file->addedDate;?></td>
+          <td class='text-center'>
+            <?php
+            commonModel::printLink('file', 'editsource',   "id=$file->id", $lang->edit, "data-toggle='modal'");
+            commonModel::printLink('file', 'deletesource', "id=$file->id", $lang->delete, "class='deleter'");
+            ?>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+      <?php endforeach;?>
+    </tbody>
+    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+  </table>
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

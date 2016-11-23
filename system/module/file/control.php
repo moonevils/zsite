@@ -18,10 +18,19 @@ class file extends control
      * @access public
      * @return void
      */
-    public function index()
+    public function index($type = 'valid', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10,  $pageID = 1)
     {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+        
+        $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList($orderBy, $pager);
+
         $this->lang->menuGroups->file = 'attachment'; 
+       
         $this->view->title = $this->lang->file->fileManager;
+        $this->view->type  = $type;
+        $this->view->files = $files;
+        $this->view->pager = $pager;
         $this->display();
     }
     

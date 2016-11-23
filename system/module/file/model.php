@@ -30,7 +30,36 @@ class fileModel extends model
         $this->setSavePath();
         $this->setWebPath();
     }
+    
+    /**
+     * Get the list of file from database file
+     * 
+     * @param  void
+     * @access public
+     * @return array
+     */
+    public function getList($orderBy, $pager)
+    {
+        $files = $this->dao->select('*')->from(TABLE_FILE)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
+        return $files;
+    }
 
+    /**
+     * Get the list of invalid files
+     * 
+     * @param  void
+     * @access public
+     * @return array
+     */
+    public function getInvalidList($orderBy, $pager)
+    {
+        $files = $this->dao->select('*')->from(TABLE_FILE)->fetchAll('id');
+        return $files;
+    }
+    
     /**
      * Print files.
      * 
