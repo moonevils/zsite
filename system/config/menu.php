@@ -1,7 +1,7 @@
 <?php
 $config->menus = new stdclass();
 $config->menus->home    = 'admin,order,message,comment,reply,thread,forumreply,wechat';
-$config->menus->content = 'article,page,blog,book,submittion';
+$config->menus->content = 'article,page,blog,book,submittion,attachment';
 $config->menus->shop    = 'order,product,orderSetting';
 $config->menus->user    = 'user,message,comment,reply,forum,wechat,submittion';
 $config->menus->promote = 'stat,tag,links';
@@ -80,6 +80,7 @@ $config->multiEntrances[] = 'group_managepriv';
 $config->multiEntrances[] = 'group_managemember'; 
 $config->multiEntrances[] = 'user_adminlog'; 
 $config->multiEntrances[] = 'article_submittion'; 
+$config->multiEntrances[] = 'file_index'; 
 
 $config->menuDependence = new stdclass();
 $config->menuDependence->submittion   = 'submittion';

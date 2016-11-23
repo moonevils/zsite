@@ -12,6 +12,20 @@
 class file extends control
 {
     /**
+     * The management of files.
+     * 
+     * @param  void
+     * @access public
+     * @return void
+     */
+    public function index()
+    {
+        $this->lang->menuGroups->file = 'attachment'; 
+        $this->view->title = $this->lang->file->fileManager;
+        $this->display();
+    }
+    
+    /**
      * Build the upload form.
      * 
      * @param int $fileCount 
