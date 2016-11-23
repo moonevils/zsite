@@ -11,7 +11,7 @@
     </ul> 
     <div class='panel-actions'>
       <?php if($type == 'valid') commonModel::printLink('file', 'upload', '', $lang->file->upload, "class='btn btn-primary' data-toggle='modal'");?>
-      <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
     </div>
   </div>
   <div class='panel-body'>
@@ -68,7 +68,8 @@
           <td><?php echo $file->addedDate;?></td>
           <td class='text-center'>
             <?php 
-              commonModel::printLink('file', 'deleteInvalidFile', "pathname=" . urlencode($file->pathname), $lang->delete, "class='deleter'");
+              $pathname = urlencode($file->pathname);
+              commonModel::printLink('file', 'deleteInvalidFile', "pathname=" . $pathname, $lang->delete, "class='deleter'");
             ?>
           </td>
         </tr>
