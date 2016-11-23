@@ -32,6 +32,8 @@ $lang->file->sourceURI     = '地址';
 $lang->file->deleteSource  = '删除素材';
 $lang->file->editSource    = '编辑素材';
 $lang->file->selectImage   = '选择素材';
+$lang->file->fileList      = '文件列表';
+$lang->file->invalidFile   = '无效文件';
 
 $lang->file->id        = '编号';
 $lang->file->title     = '名称';
@@ -70,3 +72,5 @@ $lang->file->copySuccess      = "已复制到剪贴板";
 $lang->file->evilChar         = "包含非法字符";
 $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";
+
+$lang->file->updateInvalidFiles = '更新列表';
