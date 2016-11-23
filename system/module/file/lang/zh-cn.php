@@ -74,3 +74,4 @@ $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";
 
 $lang->file->updateInvalidFiles = '更新列表';
+$lang->file->clearAllInvalid    = '清空全部';
