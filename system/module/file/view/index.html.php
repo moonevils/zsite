@@ -10,7 +10,6 @@
       </li>
     </ul> 
     <div class='panel-actions'>
-      <?php if($type == 'valid') commonModel::printLink('file', 'upload', '', $lang->file->upload, "class='btn btn-primary' data-toggle='modal'");?>
       <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
     </div>
   </div>
