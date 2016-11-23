@@ -23,7 +23,7 @@ class file extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
         
-        $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList($orderBy, $pager);
+        $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList();
 
         $this->lang->menuGroups->file = 'attachment'; 
        
@@ -32,6 +32,42 @@ class file extends control
         $this->view->files = $files;
         $this->view->pager = $pager;
         $this->display();
+    }
+    
+    /**
+     * Delete the invalid file
+     *
+     * @access public
+     * @param  string
+     * @return array
+     */ 
+    public function deleteInvalidFile($pathname)
+    {
+        $result = $this->file->deleteInvalidFile(urldecode($pathname));
+        if($result) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Delete all the invalid file
+     *
+     * @access public
+     * @param  string
+     * @return array
+     */ 
+    public function deleteAllInvalid()
+    {
+        $files  = $this->file->getInvalidList();
+        foreach($files as $file)
+        {
+            $result = $this->file->deleteInvalidFile($file->pathname);
+            if(!$result)
+            {
+                $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                break;
+            }
+        }
+        if($result) $this->send(array('result' => 'success'));
     }
     
     /**

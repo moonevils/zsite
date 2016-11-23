@@ -10,12 +10,13 @@
       </li>
     </ul> 
     <div class='panel-actions'>
-      <?php if($type == 'valid') commonModel::printLink('package', 'upload', '', $lang->file->upload, "class='btn btn-primary' data-toggle='modal'");?>
-      <?php if($type == 'invalid') commonModel::printLink('package', 'upload', '', $lang->file->updateInvalidFiles, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php if($type == 'valid') commonModel::printLink('file', 'upload', '', $lang->file->upload, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
   <div class='panel-body'>
   <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
+    <?php if($type == 'valid'):?>
     <thead>
       <tr class='text-center'>
         <th class=' w-60px'><?php echo $lang->file->id;?></th>
@@ -40,14 +41,40 @@
           <td><?php echo $file->addedDate;?></td>
           <td class='text-center'>
             <?php
-            commonModel::printLink('file', 'editsource',   "id=$file->id", $lang->edit, "data-toggle='modal'");
-            commonModel::printLink('file', 'deletesource', "id=$file->id", $lang->delete, "class='deleter'");
+            commonModel::printLink('file', 'edit',   "fileID=$file->id", $lang->edit, "data-toggle='modal'");
+            commonModel::printLink('file', 'delete', "fileID=$file->id", $lang->delete, "class='deleter'");
             ?>
           </td>
         </tr>
       <?php endforeach;?>
     </tbody>
     <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+    <?php else:?>
+    <thead>
+      <tr class='text-center'>
+        <th><?php echo $lang->file->common;?></th>
+        <th class='w-60px'><?php echo $lang->file->extension;?></th>
+        <th class='w-80px'><?php echo $lang->file->size;?></th>
+        <th class='w-160px'><?php echo $lang->file->addedDate;?></th>
+        <th class='w-80px'><?php echo $lang->actions;?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach($files as $file):?>
+        <tr class='text-center text-middle'>
+          <td class='text-left'><?php echo $file->pathname;?></td>
+          <td><?php echo $file->extension;?></td>
+          <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
+          <td><?php echo $file->addedDate;?></td>
+          <td class='text-center'>
+            <?php 
+              commonModel::printLink('file', 'deleteInvalidFile', "pathname=" . urlencode($file->pathname), $lang->delete, "class='deleter'");
+            ?>
+          </td>
+        </tr>
+      <?php endforeach;?>
+    </tbody>
+    <?php endif;?>
   </table>
   </div>
 </div>
