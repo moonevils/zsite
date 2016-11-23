@@ -74,6 +74,8 @@ class fileModel extends model
           if(strlen($tag) < 10) continue;
           if(strpos($sqlContent, $tag) === false) $invalidFiles[] = $uploadFile;
         }
+        
+        $unusedFiles = array();
         foreach($invalidFiles as $invalidFile) 
         { 
             $unusedFile           = new stdclass();
