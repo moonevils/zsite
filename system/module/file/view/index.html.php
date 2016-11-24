@@ -11,6 +11,7 @@
     </ul> 
     <div class='panel-actions'>
       <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
+      <?php if($type == 'valid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
     </div>
   </div>
   <div class='panel-body'>
