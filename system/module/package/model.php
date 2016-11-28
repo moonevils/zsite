@@ -855,11 +855,11 @@ class packageModel extends model
         if(!file_exists($dbFile)) return $return;
 
         $sqls = file_get_contents($this->getDBFile($package, $method, $type));
-        $sqls = explode(';\n', $sqls);
+        $sqls = explode("');\n", $sqls);
 
         foreach($sqls as $sql)
         {
-            $sql = trim($sql);
+            $sql = trim($sql) . "');";
 
             if(empty($sql)) continue;
             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
