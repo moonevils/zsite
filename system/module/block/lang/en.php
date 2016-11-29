@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->block->common          = 'Block/Layout';
+$lang->block->common          = 'Widget';
 $lang->block->id              = 'ID';
 $lang->block->title           = 'Title';
 $lang->block->amount          = 'Count';
@@ -22,11 +22,11 @@ $lang->block->content         = 'Content';
 $lang->block->moreLink        = 'Links';
 $lang->block->page            = 'Page';
 $lang->block->regionList      = 'Region List';
-$lang->block->select          = 'Select Block';
+$lang->block->select          = 'Select';
 $lang->block->categories      = 'Category';
 $lang->block->showImage       = 'Display Image';
 $lang->block->showInfo        = 'Display Presentaion';
-$lang->block->infoAmount      = 'Max Display';
+$lang->block->infoAmount      = 'Maximum';
 $lang->block->character       = 'Character';
 $lang->block->maxWidth        = 'Max Width ';
 $lang->block->showCategory    = 'Display Category';
@@ -112,13 +112,13 @@ $lang->block->header->bottomOptions['']             = 'Hide';
 $lang->block->header->bottomOptions['nav']          = 'Navigation';
 $lang->block->header->bottomOptions['navAndSearch'] = 'Naviagtion + Search Box';
 
-$lang->block->admin        = "Block";
+$lang->block->admin        = "Widget";
 $lang->block->pages        = "Layout";
 $lang->block->add          = "Add";
-$lang->block->addChild     = "SubBlock";
+$lang->block->addChild     = "Child";
 $lang->block->template     = "Template";
 $lang->block->create       = 'Add';
-$lang->block->browseBlocks = 'Block List';
+$lang->block->browseBlocks = 'Widgets';
 $lang->block->browseRegion = 'Layout Settings';
 $lang->block->edit         = 'Edit';
 $lang->block->view         = 'View';
@@ -136,8 +136,8 @@ $lang->block->paddingLeft   = 'Left';
 $lang->block->paddingRight  = 'Right';
 
 $lang->block->placeholder = new stdclass();
-$lang->block->placeholder->moreText               = 'Text shown at the upper right of the block';
-$lang->block->placeholder->moreUrl                = 'Link shown at the upper right of the block';
+$lang->block->placeholder->moreText               = 'Text shown at the upper right of the widget.';
+$lang->block->placeholder->moreUrl                = 'Link shown at the upper right of the widget.';
 $lang->block->placeholder->padding                = '0';
 $lang->block->placeholder->customStyleTip         = 'Less is supported in style chart. You can use #blockID as ID selector.';
 $lang->block->placeholder->desktopCustomScriptTip = 'jQuery 1.9.0 is included. You can use #blockID as ID selector.';
@@ -154,7 +154,7 @@ $lang->block->gridOptions[2]  = '1/6';
 $lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
 
-$lang->block->categoryList['custom']  = 'Custom Block';
+$lang->block->categoryList['custom']  = 'Custom Widget';
 $lang->block->categoryList['article'] = 'Content';
 $lang->block->categoryList['product'] = 'Product';
 $lang->block->categoryList['system']  = "System";

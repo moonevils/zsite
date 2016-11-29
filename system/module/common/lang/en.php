@@ -93,7 +93,7 @@ $lang->feature        = 'Feature';
 $lang->year           = 'Year';
 $lang->selectAll      = 'Select All';
 $lang->selectReverse  = 'Select Reverse';
-$lang->loading        = 'Loading...';
+$lang->loading        = 'In progress...';
 $lang->saveSuccess    = 'Done';
 $lang->setSuccess     = 'Done';
 $lang->createSuccess  = 'Done';
@@ -165,7 +165,7 @@ $lang->menu = new stdclass();
 $lang->menu->admin    = 'Home|admin|index|';
 $lang->menu->article  = 'Article|article|admin|type=article';
 $lang->menu->blog     = 'Blog|article|admin|type=blog';
-$lang->menu->book     = 'Manual|book|admin|';
+$lang->menu->book     = 'Book|book|admin|';
 $lang->menu->page     = 'Page|article|admin|type=page';
 
 $lang->menu->order        = 'Order|order|admin|';
@@ -178,31 +178,31 @@ $lang->menu->comment      = 'Comment|message|admin|type=comment';
 $lang->menu->reply        = 'Reply|message|admin|type=reply';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
-$lang->menu->forumreply   = 'Replies|reply|admin|';
-$lang->menu->submittion   = 'Commit|article|admin|type=submittion&tab=user';
+$lang->menu->forumreply   = 'Post|reply|admin|';
+$lang->menu->submittion   = 'Contribute|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
-$lang->menu->tag     = 'Tag|tag|admin|';
+$lang->menu->tag     = 'Tags|tag|admin|';
 $lang->menu->links   = 'Links|links|admin|';
 
 $lang->menu->ui       = 'UI|ui|settemplate|';
 $lang->menu->logo     = 'Logo|ui|setlogo|';
 $lang->menu->nav      = 'Navigation|nav|admin|';
-$lang->menu->block    = 'Block|block|admin|';
+$lang->menu->block    = 'Widget|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
 $lang->menu->others   = "Settings|ui|others|";
-$lang->menu->visual   = "<i class='icon icon-magic'></i>Visualize|visual|index|";
-$lang->menu->edit     = "Templates|ui|edittemplate|";
+$lang->menu->visual   = "<i class='icon icon-magic'></i>Visual Editor|visual|index|";
+$lang->menu->edit     = "Custom|ui|edittemplate|";
 
 $lang->menu->site      = 'Site|site|setbasic|';
 $lang->menu->security  = 'Security|site|setsecurity|';
 $lang->menu->company   = 'Company|company|setbasic|';
-$lang->menu->score     = 'Score|score|setcounts|';
-$lang->menu->interface = 'Interface|site|setoauth|';
+$lang->menu->score     = 'Points|score|setcounts|';
+$lang->menu->interface = 'API|site|setoauth|';
 
 $lang->menu->package    = 'Extensions|package|browse|';
-$lang->menu->themestore = 'Theme|ui|themestore|';
+$lang->menu->themestore = 'Themes|ui|themestore|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
@@ -218,17 +218,17 @@ $lang->menuGroups->guarder = 'security';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse       = 'Article List|article|admin|';
+$lang->article->menu->browse       = 'Articles|article|admin|';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse       = 'Blog List|article|admin|type=blog';
+$lang->blog->menu->browse       = 'Blogs|article|admin|type=blog';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => 'Page List|article|admin|type=page', 'alias' => 'create, edit');
+$lang->page->menu->browse = array('link' => 'Pages|article|admin|type=page', 'alias' => 'create, edit');
 
 $lang->express = new stdclass();
 
@@ -252,7 +252,7 @@ $lang->theme->menu->theme   = 'Theme|ui|settemplate|';
 $lang->theme->menu->layout  = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 $lang->theme->menu->custom  = 'Appearance|ui|customtheme|';
 $lang->theme->menu->code    = 'Code|ui|setcode|';
-$lang->theme->menu->source  = 'Source Library|file|browsesource|';
+$lang->theme->menu->source  = 'Source|file|browsesource|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -263,10 +263,10 @@ $lang->message = new stdclass();
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
-$lang->forum->menu->browse  = 'Thread List|forum|admin|';
-$lang->forum->menu->reply   = 'Reply List|reply|admin|';
-$lang->forum->menu->tree    = 'Board|tree|browse|type=forum';
-$lang->forum->menu->update  = 'Update|forum|update|';
+$lang->forum->menu->browse  = 'Threads|forum|admin|';
+$lang->forum->menu->reply   = 'Replies|reply|admin|';
+$lang->forum->menu->tree    = 'Boards|tree|browse|type=forum';
+$lang->forum->menu->update  = 'Updates|forum|update|';
 $lang->forum->menu->setting = 'Settings|forum|setting|';
 
 /* Menu of site module. */
@@ -311,8 +311,8 @@ $lang->interface->menu->wechat = array('link' => 'Wechat setting|wechat|admin|',
 
 /* Menu of score module. */
 $lang->score->menu = $lang->site->menu;
-$lang->score->menu->score     = 'Score Rule|score|setcounts|';
-$lang->score->menu->stateInfo = 'Score Info|score|showstateinfo|';
+$lang->score->menu->score     = 'Point Rules|score|setcounts|';
+$lang->score->menu->stateInfo = 'Point Info|score|showstateinfo|';
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -350,8 +350,8 @@ $lang->stat->menu->from     = 'Source|stat|from|';
 $lang->stat->menu->domains  = array('link' => 'Domain|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
 $lang->stat->menu->search   = 'Search Engine|stat|search|';
 $lang->stat->menu->keywords = 'Keywords|stat|keywords|';
-$lang->stat->menu->client   = 'Client|stat|client|type=browser';
-$lang->stat->menu->page     = 'Page Click|stat|page|';
+$lang->stat->menu->client   = 'Clients|stat|client|type=browser';
+$lang->stat->menu->page     = 'Page Clicks|stat|page|';
 $lang->stat->menu->setStat  = 'Settings|stat|setting|';
 
 /* Error info. */
@@ -414,8 +414,8 @@ define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
 
 /* Keywords for chanzhi. */
-$lang->k  = 'Open Source CMS - Changer CMS;';
-$lang->k .= 'Changer CMS, free and open source CMS;';
-$lang->k .= 'Changer CMS, your #1 Choice;';
-$lang->k .= 'Website building, choose Changer CMS;';
-$lang->k .= 'Changer CMS, free and open source php CMS.';
+$lang->k  = 'Open Source CMS - Changer;';
+$lang->k .= 'Changer, free and open source CMS;';
+$lang->k .= 'Changer, your #1 Choice;';
+$lang->k .= 'Website building, choose Changer;';
+$lang->k .= 'Changer, free and open source php CMS.';

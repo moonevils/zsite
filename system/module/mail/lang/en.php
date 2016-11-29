@@ -51,6 +51,6 @@ Hello, %s
 <br />Your <strong>%s</strong>(%s)verification code is %s
 <br />Please ignore if you did not request it.
 <br />
-<br /><strong>%s</strong> is powered by <a href='http://www.chanzhi.org' target='_blank'>Changer CMS</a>.
+<br /><strong>%s</strong> is powered by <a href='http://www.chanzhi.org' target='_blank'>Changer</a>.
 <br /><a href='http://www.cnezsoft.com' target='_blank'>Nature Easy Soft</a> provide professional management software for you!
 EOT;

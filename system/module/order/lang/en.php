@@ -10,7 +10,7 @@ $lang->order->score             = 'Score';
 $lang->order->count             = 'Count';
 $lang->order->amount            = 'Amount';
 $lang->order->sn                = 'TSN';
-$lang->order->payStatus         = 'Payment Status';
+$lang->order->payStatus         = 'Payment';
 $lang->order->paidDate          = 'Paid Date';
 $lang->order->deliveryStatus    = 'Shipment Status';
 $lang->order->deliveriedDate    = 'Shipped Date';
@@ -34,7 +34,7 @@ $lang->order->contact           = 'Contact';
 $lang->order->phone             = 'Phone';
 $lang->order->zipcode           = 'Zipcode';
 $lang->order->deliveryStatus    = 'Delivery Status';
-$lang->order->last              = 'Last Process Date';
+$lang->order->last              = 'Last Processed';
 
 $lang->order->deliverList['not_send']  = 'Pending';
 $lang->order->deliverList['send']      = 'Delivered';
@@ -66,7 +66,7 @@ $lang->order->days           = 'Day';
 $lang->order->deliveryInfo   = 'Details';
 $lang->order->backToCart     = 'Back to Cart';
 $lang->order->paid           = 'Paid';
-$lang->order->products       = 'Ordered Product';
+$lang->order->products       = 'Ordered Products';
 $lang->order->selectPayment  = 'Choose payment';
 $lang->order->settlement     = 'Checkout';
 $lang->order->check          = 'Settle Order';
@@ -116,7 +116,7 @@ $lang->order->payStatusList['not_paid'] = 'Not Paid';
 $lang->order->payStatusList['paid']     = 'Paid';
 
 $lang->order->types = array();
-$lang->order->types['shop']  = 'Product';
+$lang->order->types['shop']  = 'Products';
 $lang->order->types['score'] = 'Points';
 
 $lang->order->abbr = new stdclass();

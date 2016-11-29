@@ -68,7 +68,7 @@ $lang->board->readonlyList[1] = 'Read Only';
 
 $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = 'Use comma to separate user names';
-$lang->board->placeholder->setChildren = 'You have to set a child board to display forum.';
+$lang->board->placeholder->setChildren = 'You have to set child boards to display a forum.';
 
 /* Lang items for express. */
 $lang->express = new stdclass();
