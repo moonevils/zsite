@@ -76,7 +76,7 @@ class tree extends control
         if(!empty($_POST))
         {
             $result = $this->tree->update($categoryID);
-            if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
 
