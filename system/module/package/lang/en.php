@@ -107,7 +107,7 @@ $lang->package->errorPackageFileExists       = 'A file named <strong>%s</strong>
 $lang->package->errorDownloadFailed          = 'Download failed. Please try it again. If failed again, please download it manually, and upload it to install.';
 $lang->package->errorMd5Checking             = 'Download file is incomplete. Please try it again. If failed again, please download it manually, and upload it to install.';
 $lang->package->errorExtracted               = 'Unzip <strong> %s </strong> failed. It could be an invalid zip file. Error info <br />%s';
-$lang->package->errorCheckIncompatible       = 'It is not compatible with Changer CMS. After %sed, it might be inapplicable. <h3>You can <a href="%s" class="loadInModal">force %s</a> or <a href="#" onclick=parent.location.href="%s"> cancel it.</a></h3>';
+$lang->package->errorCheckIncompatible       = 'It is not compatible with Changer. After %sed, it might be inapplicable. <h3>You can <a href="%s" class="loadInModal">force %s</a> or <a href="#" onclick=parent.location.href="%s"> cancel it.</a></h3>';
 $lang->package->errorFileConflicted          = 'It is conflicted with <br />%s. <h3>You can <a href="%s">override</a> or <a href="#" onclick=parent.location.href="%s">cancel it.</a></h3>';
 $lang->package->errorPackageNotFound         = ' <strong>%s </strong> is not found. It could be auto downloading failure. Please try it again.';
 $lang->package->errorTargetPathNotWritable   = 'Path <strong>%s </strong>is not writable.';

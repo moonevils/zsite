@@ -17,7 +17,7 @@ $lang->install->error   = 'Error';
 
 $lang->install->start            = 'Install';
 $lang->install->keepInstalling   = 'Continue installation';
-$lang->install->welcome          = 'Thank you for choosing Changer CMS!';
+$lang->install->welcome          = 'Thank you for choosing Changer!';
 $lang->install->license          = 'License';
 $lang->install->desc             = <<<EOT
 <p>With Changer, you can </p>

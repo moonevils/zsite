@@ -28,7 +28,7 @@ $lang->visual->manageBlock     = 'Block Admin';
 $lang->visual->searchBlock     = 'Search a Block';
 $lang->visual->allBlock        = 'All Blocks';
 $lang->visual->openInNewWindow = 'Open in a new window';
-$lang->visual->editPowerBy     = "<p>You can use Changer for free, if you have read and acknowledged <a href='http://changercms.com/book/changermanual/changerlicense-5.html' target='_blank'> Z PUBLIC LICENSE 1.2 </a>, and you have to keep Changer logos which is of great importance to Changer CMS. If you would like to remove Changer logos, please purchase <a href='http://www.chanzhi.org/license-search.html' target='_blank'> Changer business license</a>.</p>";
+$lang->visual->editPowerBy     = "<p>You can use Changer for free, if you have read and acknowledged <a href='http://changercms.com/book/changermanual/changerlicense-5.html' target='_blank'> Z PUBLIC LICENSE 1.2 </a>, and you have to keep Changer logos which is of great importance to Changer. If you would like to remove Changer logos, please purchase <a href='http://www.chanzhi.org/license-search.html' target='_blank'> Changer business license</a>.</p>";
 $lang->visual->pageLayout      = 'Page layout is applied.';
 $lang->visual->pageLayoutInfo  = 'Only applies to current layout.<span class="page-name"></span> will not affect global layout.';
 $lang->visual->globalLayout    = 'Gloabl Layout';
