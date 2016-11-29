@@ -12,6 +12,65 @@
 class file extends control
 {
     /**
+     * The management of files.
+     * 
+     * @param  void
+     * @access public
+     * @return void
+     */
+    public function index($type = 'valid', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10,  $pageID = 1)
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+        
+        $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList();
+
+        $this->lang->menuGroups->file = 'attachment'; 
+       
+        $this->view->title = $this->lang->file->fileManager;
+        $this->view->type  = $type;
+        $this->view->files = $files;
+        $this->view->pager = $pager;
+        $this->display();
+    }
+    
+    /**
+     * Delete the invalid file
+     *
+     * @access public
+     * @param  string
+     * @return array
+     */ 
+    public function deleteInvalidFile($pathname)
+    {
+        $result = $this->file->deleteInvalidFile(urldecode($pathname));
+        if($result) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Delete all the invalid file
+     *
+     * @access public
+     * @param  string
+     * @return array
+     */ 
+    public function deleteAllInvalid()
+    {
+        $files  = $this->file->getInvalidList();
+        foreach($files as $file)
+        {
+            $result = $this->file->deleteInvalidFile($file->pathname);
+            if(!$result)
+            {
+                $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                break;
+            }
+        }
+        if($result) $this->send(array('result' => 'success'));
+    }
+    
+    /**
      * Build the upload form.
      * 
      * @param int $fileCount 

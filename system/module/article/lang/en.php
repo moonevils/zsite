@@ -25,7 +25,7 @@ $lang->article->content    = 'Text';
 $lang->article->source     = 'Source';
 $lang->article->copySite   = 'Site';
 $lang->article->copyURL    = 'URL';
-$lang->article->keywords   = 'Keyword';
+$lang->article->keywords   = 'Keywords';
 $lang->article->summary    = 'Summary';
 $lang->article->author     = 'Author';
 $lang->article->editor     = 'Edit';
@@ -36,7 +36,7 @@ $lang->article->type       = 'Type';
 $lang->article->views      = 'Views';
 $lang->article->comments   = 'Comment';
 $lang->article->stick      = 'Sticky';
-$lang->article->order      = 'Sort';
+$lang->article->order      = 'Ranking';
 $lang->article->isLink     = 'Link';
 $lang->article->link       = 'Link';
 $lang->article->css        = 'CSS';
@@ -65,7 +65,7 @@ $lang->submittion->typeList = array();
 $lang->submittion->typeList['article'] = 'Article';
 $lang->submittion->typeList['blog']    = 'Blog';
 
-$lang->article->onlyBody = 'Display body only(for custom).';
+$lang->article->onlyBody = 'Display body only (for custom).';
 
 $lang->article->list          = 'List';
 $lang->article->admin         = 'Maintain';

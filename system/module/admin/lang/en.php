@@ -15,11 +15,11 @@ $lang->admin->shortcuts->logo               = 'Logo Settings';
 $lang->admin->shortcuts->company            = 'Company Info';
 $lang->admin->shortcuts->contact            = 'Manage Contact';
 
-$lang->admin->thread       = 'New Thread';
-$lang->admin->order        = 'New Order';
+$lang->admin->thread       = 'New Threads';
+$lang->admin->order        = 'New Orders';
 $lang->admin->feedback     = 'New Feedback';
 
-$lang->admin->adminEntry     = 'Warning! Your entry is admin.php as default. Please change it for security reasons.';
+$lang->admin->adminEntry     = 'Warning! Your default entry is admin.php. Please change it for security.';
 $lang->admin->orderTitle     = '%s has created an Order %s ';
 $lang->admin->message        = 'Today you have %s messages to review.';
 $lang->admin->reply          = 'Today you have %s replies to review.';
