@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.ranzhico.com
  */
-$lang->widget->common = 'Block';
+$lang->widget->common = 'Widget';
 $lang->widget->title  = 'Name';
 $lang->widget->style  = 'Style';
 $lang->widget->type   = 'Type';
@@ -21,11 +21,11 @@ $lang->widget->message = 'Message';
 $lang->widget->comment = 'Comment';
 $lang->widget->reply   = 'Reply';
 
-$lang->widget->create    = 'Add a widget';
+$lang->widget->create    = 'Add a Widget';
 $lang->widget->hidden    = 'Hide';
-$lang->widget->lblWidget = 'Block';
+$lang->widget->lblWidget = 'Widgets';
 $lang->widget->lblRss    = 'RSS';
-$lang->widget->lblNum    = 'Number';
+$lang->widget->lblNum    = 'No. od Entries';
 $lang->widget->content   = 'Content';
 
 $lang->widget->params = new stdclass();
@@ -33,11 +33,11 @@ $lang->widget->params->name  = 'Parameter';
 $lang->widget->params->value = 'Value';
 
 $lang->widget->createWidget        = 'Add a Widget';
-$lang->widget->editWidget          = 'Edit a Widget';
-$lang->widget->ordersSaved         = 'Sorting Saved!';
+$lang->widget->editWidget          = 'Edit';
+$lang->widget->ordersSaved         = 'Ranking saved!';
 $lang->widget->confirmRemoveWidget = 'Do you want to remove【{0}】?';
 
-$lang->widget->dynamic     = 'Latest News';
+$lang->widget->dynamic     = 'Dynamic';
 $lang->widget->dynamicInfo = "%s, %s <em>%s</em> %s <a href='%s'>%s</a>。";
 
 $lang->widget->default = array();
@@ -61,7 +61,7 @@ $lang->widget->default['5']['title'] = 'Quick Entry';
 $lang->widget->default['5']['type']  = 'commonMenu';
 $lang->widget->default['5']['grid']  = 4;
 
-$lang->widget->default['6']['title'] = 'Changer Feed';
+$lang->widget->default['6']['title'] = 'Changer Dynamic';
 $lang->widget->default['6']['type']  = 'chanzhiDynamic';
 $lang->widget->default['6']['grid']  = 4;
 
@@ -71,6 +71,6 @@ $lang->widget->typeList->latestThread   = 'Latest Thread';
 $lang->widget->typeList->message        = 'Feedback';
 $lang->widget->typeList->wechatMessage  = 'Wechat Message';
 $lang->widget->typeList->submittion     = 'Latest Contribution';
-$lang->widget->typeList->chanzhiDynamic = 'Changer Feed';
+$lang->widget->typeList->chanzhiDynamic = 'Changer Dynamic';
 $lang->widget->typeList->html           = 'Custom';
 $lang->widget->typeList->commonMenu     = 'Quick Entry';

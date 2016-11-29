@@ -6,6 +6,6 @@ $lang->misc->support     = 'Technical Support';
 $lang->misc->userbook    = 'User Manual';
 $lang->misc->forum       = 'Forum';
 
-$lang->misc->thanksTitle      = 'Changer CMS is built on top of outstanding open source projects.';
+$lang->misc->thanksTitle      = 'Changer is built on top of outstanding open source projects.';
 $lang->misc->thanksFooter     = 'Thank %s for security audit.';
 $lang->misc->thanksObjectName = 'http://www.zzsec.com/';

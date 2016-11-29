@@ -20,7 +20,7 @@ $config->framework->autoLang       = true;  // 是否自动连接数据库。   
 $config->framework->multiLanguage  = true; // 是否启用多语言功能。              Whether enable multi lanuage or not.
 $config->framework->multiTheme     = true; // 是否启用多风格功能。              Whether enable multi theme or not.
 $config->framework->detectDevice   = true; // 是否启用设备检测功能。            Whether enable device detect or not.
-$config->framework->multiSite      = false; // 是否启用多站点模式。              Whether enable multi site mode or not.
+$config->framework->multiSite      = true; // 是否启用多站点模式。              Whether enable multi site mode or not.
 $config->framework->extensionLevel = 2;     // 0=>无扩展,1=>公共扩展,2=>站点扩展 0=>no extension, 1=> common extension, 2=> every site has it's extension.
 $config->framework->jsWithPrefix   = true;  // js::set()输出的时候是否增加前缀。 When us js::set(), add prefix or not.
 $config->framework->filterBadKeys  = true;  // 是否过滤不合要求的键值。          Whether filter bad keys or not.

@@ -10,9 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 if(!isset($lang->block->default)) $lang->block->default = new stdclass();
-$lang->block->default->typeList['html']     = 'Html block';
-$lang->block->default->typeList['htmlcode'] = 'Html codes';
-$lang->block->default->typeList['phpcode']  = 'php codes';
+$lang->block->default->typeList['html']     = 'Html widget';
+$lang->block->default->typeList['htmlcode'] = 'Html code';
+$lang->block->default->typeList['phpcode']  = 'php code';
 
 $lang->block->default->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->default->typeList['hotArticle']    = 'Hot Articles';
@@ -24,7 +24,7 @@ $lang->block->default->typeList['latestProduct']   = 'Latest Products';
 $lang->block->default->typeList['featuredProduct'] = 'Featured Products';
 $lang->block->default->typeList['hotProduct']      = 'Hot Products';
 
-$lang->block->default->typeList['pageList']        = 'Page List';
+$lang->block->default->typeList['pageList']        = 'Pages';
 
 $lang->block->default->typeList['articleTree'] = 'Article Categories';
 $lang->block->default->typeList['productTree'] = 'Product Categories';
@@ -67,39 +67,39 @@ $lang->block->default->typeGroups['slide']     = 'system';
 $lang->block->default->typeGroups['header']    = 'system';
 $lang->block->default->typeGroups['bottomNav'] = 'system';
 
-$lang->block->default->pages['all']            = 'All';
-$lang->block->default->pages['index_index']    = 'Home';
+$lang->block->default->pages['all']            = 'All Pages';
+$lang->block->default->pages['index_index']    = 'Homepage';
 $lang->block->default->pages['company_index']  = 'About Us';
 
-$lang->block->default->pages['article_browse'] = 'Browse article page';
-$lang->block->default->pages['article_view']   = 'View article page';
+$lang->block->default->pages['article_browse'] = 'Article List Pages';
+$lang->block->default->pages['article_view']   = 'Article Detail Pages';
 
-$lang->block->default->pages['product_browse'] = 'Browse product page';
-$lang->block->default->pages['product_view']   = 'View product page';
+$lang->block->default->pages['product_browse'] = 'Product List Pages';
+$lang->block->default->pages['product_view']   = 'Product Detail Pages';
 
-$lang->block->default->pages['blog_index']     = 'Browse blog page';
-$lang->block->default->pages['blog_view']      = 'View blog page';
+$lang->block->default->pages['blog_index']     = 'Blog List Pages';
+$lang->block->default->pages['blog_view']      = 'Blog Detail Pages';
 
-$lang->block->default->pages['forum_index']    = 'Forum home';
-$lang->block->default->pages['forum_board']    = 'Forum board';
-$lang->block->default->pages['thread_view']    = 'View thread';
+$lang->block->default->pages['forum_index']    = 'Forum Home';
+$lang->block->default->pages['forum_board']    = 'Thread List Pages';
+$lang->block->default->pages['thread_view']    = 'Thread Detail Pages';
 $lang->block->default->pages['search_index']   = 'Search';
 
 $lang->block->default->pages['book_index']     = 'Book';
-$lang->block->default->pages['book_browse']    = 'Book catalogue';
-$lang->block->default->pages['book_read']      = 'Book content';
+$lang->block->default->pages['book_browse']    = 'Book Home';
+$lang->block->default->pages['book_read']      = 'Book Contents';
 
-$lang->block->default->pages['message_index']  = 'Inquire';
+$lang->block->default->pages['message_index']  = 'Messages';
 
-$lang->block->default->pages['page_view']      = 'Page';
+$lang->block->default->pages['page_view']      = 'Pages';
 
 /* page layou>default-> list. */
 if(!isset($lang->block->default->regions)) $lang->block->default->regions = new stdclass();
-$lang->block->default->regions->all['header'] = 'Header(invisible)';
+$lang->block->default->regions->all['header'] = 'Header';
 $lang->block->default->regions->all['top']    = 'Top';
 $lang->block->default->regions->all['banner'] = 'Banner';
 $lang->block->default->regions->all['bottom'] = 'Bottom';
-$lang->block->default->regions->all['footer'] = 'Footer(invisible)';
+$lang->block->default->regions->all['footer'] = 'Footer';
 
 $lang->block->default->regions->index_index['top']     = 'Top';
 $lang->block->default->regions->index_index['middle']  = 'Middle';

@@ -10,13 +10,13 @@
  * @link        http://www.chanzhi.org
  */
 $lang->slide->common     = 'Slide';
-$lang->slide->group      = 'Category';
+$lang->slide->group      = 'Slide Groups';
 $lang->slide->title      = 'Title';
 $lang->slide->groupName  = 'Group Name';
-$lang->slide->titleColor = 'Name';
+$lang->slide->titleColor = 'Color';
 $lang->slide->image      = 'Image';
 $lang->slide->mainLink   = 'Link';
-$lang->slide->summary    = 'Summary';
+$lang->slide->summary    = 'Description';
 $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
 $lang->slide->newWindow  = 'New Window';
@@ -37,23 +37,23 @@ $lang->slide->height      = 'Height';
 $lang->slide->url         = 'URL';
 $lang->slide->buttonUrl   = 'Button URL';
 $lang->slide->buttonColor = 'Color';
-$lang->slide->sourceImage = 'Image Library';
+$lang->slide->sourceImage = 'Source Library';
 
-$lang->slide->sort        = 'Sort';
+$lang->slide->sort        = 'Ranking';
 $lang->slide->admin       = 'Slide Settings';
 $lang->slide->browse      = 'View Slides';
-$lang->slide->create      = 'Add a Slide';
+$lang->slide->create      = 'Create a Slide';
 $lang->slide->edit        = 'Edit';
-$lang->slide->createGroup = 'Add a Group';
-$lang->slide->editGroup   = 'Edit a Group';
+$lang->slide->createGroup = 'Create a Group';
+$lang->slide->editGroup   = 'Edit';
 $lang->slide->removeGroup = 'Delete a Group';
-$lang->slide->return      = 'Return to List';
+$lang->slide->return      = 'Back';
 $lang->slide->rename      = 'Rename';
 $lang->slide->removeGroup = 'Delete a Group';
 
 $lang->slide->successSort     = 'Done!';
 $lang->slide->noImageSelected = 'Select an Image';
-$lang->slide->suitableSize    = 'Sizes of images hould be the same.';
+$lang->slide->suitableSize    = 'Sizes of images should be the same.';
 $lang->slide->noChange        = 'Nothing changed.';
 $lang->slide->groupNotEmpty   = 'Group name should not be empty.';
 
