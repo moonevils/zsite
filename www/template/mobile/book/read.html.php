@@ -54,8 +54,8 @@
             <p class='small'><strong class="text-muted"><?php echo $lang->book->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
             <?php endif; ?>
           </div>
+          <?php if(isset($prevAndNext)):?>
           <?php extract($prevAndNext);?>
-      
             <?php if($prev): ?>
             <?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'"); ?>
             <?php else: ?>
@@ -70,6 +70,7 @@
             <?php if(!$this->get->fullScreen):?>
             <a href='/' class='btn block text-left default home'><i class='icon-home'></i> <?php echo $lang->book->goHome;?></a>
             <?php endif;?>
+          <?php endif;?>
         </div>
       </div>
 
@@ -136,8 +137,8 @@ js::set('fullScreen', 0);
         <p class='small'><strong class="text-muted"><?php echo $lang->book->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
         <?php endif; ?>
       </div>
+      <?php if(isset($prevAndNext)):?>
       <?php extract($prevAndNext);?>
-  
         <?php if($prev): ?>
         <?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'"); ?>
         <?php else: ?>
@@ -149,6 +150,7 @@ js::set('fullScreen', 0);
         <a href='###' class='btn block text-left default disabled'><?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a>
         <?php endif; ?>
         <?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'");?>
+        <?php endif; ?>
     </div>
   </div>
 

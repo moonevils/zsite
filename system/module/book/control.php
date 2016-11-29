@@ -54,7 +54,6 @@ class book extends control
     public function browse($nodeID)
     {
         $node = $this->book->getNodeByID($nodeID);
-        if($node->type == 'book') $this->locate(inlink('read', "articleID={$node->id}", "book=$node->alias")); 
         if($node)
         {
             $nodeID = $node->id;
