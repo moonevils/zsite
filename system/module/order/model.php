@@ -171,6 +171,7 @@ class orderModel extends model
 
         $this->dao->update(TABLE_ORDER)->set('amount')->eq($amount)->where('id')->eq($orderID)->exec();
         $this->dao->delete()->from(TABLE_CART)->where('account')->eq($this->app->user->account)->andWhere('product')->in($this->post->product)->exec();
+      
         if(!dao::isError()) return $orderID;
     }
 

@@ -19,7 +19,7 @@ $lang->stat->link          = 'Links';
 $lang->stat->today         = 'Today';
 $lang->stat->yesterday     = 'Yesterday';
 $lang->stat->pv            = 'Page Visit';
-$lang->stat->uv            = 'User Visit';
+$lang->stat->uv            = 'Unique Visit';
 $lang->stat->ipCount       = 'IP Count';
 $lang->stat->totalPV       = 'Total PVs';
 $lang->stat->searchEngine  = 'Sear Engine';
@@ -28,12 +28,12 @@ $lang->stat->domainList    = 'Domian List';
 $lang->stat->domainTrend   = 'Trend';
 $lang->stat->domainPage    = 'Page';
 $lang->stat->percentage    = 'Percentage';
-$lang->stat->ignoreKeyword = 'Ignore Keyword';
+$lang->stat->ignoreKeyword = 'Ignore Keywords';
 $lang->stat->keywordNotice = 'Google and Baidu have deactivated their service to trace source links of keywords, so the relavant statistics is not available.';
 
 $lang->stat->all   = 'All';
-$lang->stat->begin = 'Start Date';
-$lang->stat->end   = 'End Data';
+$lang->stat->begin = 'Begin';
+$lang->stat->end   = 'End';
 $lang->stat->date  = 'Date';
 
 $lang->stat->noData    = 'No data';
@@ -59,7 +59,7 @@ $lang->stat->fromList->search = 'Search';
 
 $lang->stat->dataTypes = new stdclass();
 $lang->stat->dataTypes->pv = 'Page Visit';
-$lang->stat->dataTypes->uv = 'User Visit';
+$lang->stat->dataTypes->uv = 'Unique Visit';
 $lang->stat->dataTypes->ip = 'IP Count';
 
 $lang->stat->page = new stdclass();
