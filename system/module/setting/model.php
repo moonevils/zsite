@@ -183,17 +183,6 @@ class settingModel extends model
         return $config;
     }
 
-    /**
-     * Get request type.
-     * 
-     * @access public
-     * @return string
-     */
-    public function getRequestType()
-    {
-        return isset($this->config->site->requestType) ? $this->config->site->requestType : $this->config->requestType;
-    }
-
     //-------------------------------- methods for version and sn. ----------------------------//
    
     /**
