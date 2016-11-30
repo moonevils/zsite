@@ -64,7 +64,7 @@ $config->rights->guest['sitemap']['index']   = 'index';
 $config->rights->guest['file']['download']    = 'download';
 $config->rights->guest['file']['printfiles']  = 'printfiles';
 
-$config->rights->guest['error']['index'] = 'index';
+$config->rights->guest['errorpage']['index'] = 'index';
 
 $config->rights->guest['page']['index'] = 'index';
 $config->rights->guest['page']['view']  = 'view';
