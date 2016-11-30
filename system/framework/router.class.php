@@ -228,7 +228,7 @@ class router extends baseRouter
         if(RUN_MODE == 'front' && $this->getModuleName() != 'error') 
         {
             if($this->server->request_uri == '/favicon.ico') die();
-            $this->setModuleName('error');
+            $this->setModuleName('errorpage');
             $this->setMethodName('index');
             return $this->setControlFile();
         }
