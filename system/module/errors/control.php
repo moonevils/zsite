@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-class errorpage extends control
+class errors extends control
 {
     /**
      * Show 404 error page.
