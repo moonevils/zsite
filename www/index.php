@@ -27,7 +27,6 @@ $config = $app->config;
 
 /* Connect to db, load module. */
 $common = $app->loadCommon();
-$config->requestType = $common->loadModel('setting')->getRequestType();
 $common->checkDomain();
 
 /* Check the reqeust is getconfig or not. Check installed or not. */
