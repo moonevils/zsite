@@ -1303,7 +1303,6 @@ if(!function_exists('getJS'))
         $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('templateCompatible')->eq($template)->andWhere('code')->eq($theme)->exec();
         if(dao::isError()) return false;
 
-        $this->dao->setAutoLang(false)->delete()->from(TABLE_LAYOUT)->where('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
         if(dao::isError()) return false;
 
         $themeDirs = array();

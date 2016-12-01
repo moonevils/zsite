@@ -116,10 +116,7 @@ class control extends baseControl
                 $viewFile = $templatePath . DS . "{$methodName}.{$viewType}.php";
             }
             $mainViewFile = $viewFile;
-        }
 
-        if(RUN_MODE == 'front')
-        {
             $tmpViewFolder = $this->config->framework->multiSite ? $this->app->getTmpRoot() . 'template' . DS . $this->app->siteCode : $this->app->getTmpRoot() . 'template';
             $customedFile  = str_replace($this->app->getWwwRoot() . 'template', $tmpViewFolder, $mainViewFile);
             if(file_exists($customedFile))

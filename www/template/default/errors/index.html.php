@@ -31,5 +31,5 @@
     </div>
   </form>
 </div>
-<?php $this->fetch('sitemap', 'index', 'onlyBody=yes')?>
+<?php echo $this->fetch('sitemap', 'index', 'onlyBody=yes')?>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
