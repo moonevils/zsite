@@ -1130,6 +1130,7 @@ class commonModel extends model
             {
                 if(empty($category->alias)) continue;
                 $categories['article'][$category->alias] = $category;
+                $category->alias  = urlencode($category->alias);
                 $category->module = 'article';
                 $this->config->seo->alias->category[$category->alias] = $category;
             }
@@ -1140,8 +1141,9 @@ class commonModel extends model
             foreach($categories['video'] as $category) 
             {
                 if(empty($category->alias)) continue;
-                $categories['video'][$category->alias] = $category;
+                $category->alias  = urlencode($category->alias);
                 $category->module = 'video';
+                $categories['video'][$category->alias] = $category;
                 $this->config->seo->alias->category[$category->alias] = $category;
             }
         }
@@ -1151,8 +1153,9 @@ class commonModel extends model
             foreach($categories['usercase'] as $category) 
             {
                 if(empty($category->alias)) continue;
-                $categories['usercase'][$category->alias] = $category;
+                $category->alias  = urlencode($category->alias);
                 $category->module = 'usercase';
+                $categories['usercase'][$category->alias] = $category;
                 $this->config->seo->alias->usercase[$category->alias] = $category;
             }
         }
@@ -1162,8 +1165,9 @@ class commonModel extends model
             foreach($categories['product'] as $category) 
             {
                 if(empty($category->alias)) continue;
-                $categories['product'][$category->alias] = $category;
+                $category->alias  = urlencode($category->alias);
                 $category->module = 'product';
+                $categories['product'][$category->alias] = $category;
                 $this->config->seo->alias->category[$category->alias] = $category;
             }
         }
@@ -1173,8 +1177,9 @@ class commonModel extends model
             foreach($categories['blog'] as $category) 
             {
                 if(empty($category->alias)) continue;
-                $categories['blog'][$category->alias] = $category;
+                $category->alias  = urlencode($category->alias);
                 $category->module = 'blog';
+                $categories['blog'][$category->alias] = $category;
                 $this->config->seo->alias->blog[$category->alias] = $category;
             }
         }
@@ -1184,8 +1189,9 @@ class commonModel extends model
             foreach($categories['forum'] as $category) 
             {
                 if(empty($category->alias)) continue;
-                $categories['forum'][$category->alias] = $category;
+                $category->alias  = urlencode($category->alias);
                 $category->module = 'forum';
+                $categories['forum'][$category->alias] = $category;
                 $this->config->seo->alias->forum[$category->alias] = $category;
             }
         }
