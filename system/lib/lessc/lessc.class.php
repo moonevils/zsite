@@ -60,8 +60,6 @@ class lessc {
 	public $importDisabled = false;
 	public $importDir = '';
 
-    public $errors = array();
-
 	protected $numberPrecision = null;
 
 	protected $allParsedFiles = array();
@@ -1799,11 +1797,7 @@ class lessc {
 			$parser->count = 0;
 			$parser->buffer = (string)$strValue;
 			if (!$parser->propertyValue($value)) {
-                try{
-                    throw new Exception("failed to parse passed in variable $name: $strValue");
-                } catch(Exception $e){
-                    $this->errors[] = $e->getMessage();
-                }
+                throw new Exception("failed to parse passed in variable $name: $strValue");
 			}
 
 			$this->set($name, $value);
@@ -1844,21 +1838,12 @@ class lessc {
 		$this->formatter->block($this->scope);
 		$out = ob_get_clean();
 		setlocale(LC_NUMERIC, $locale);
-        if(!empty($this->errors)) 
-        {
-            $compileError = array('result' => 'fail', 'error' => $this->errors);
-            return $compileError;
-        }
 		return $out;
 	}
 
 	public function compileFile($fname, $outFname = null) {
 		if (!is_readable($fname)) {
-            try{
-                throw new Exception('load error: failed to find ' . $fname);
-            } catch(Exception $e){
-                $this->errors[] = $e->getMessage();
-            }
+            throw new Exception('load error: failed to find ' . $fname);
 		}
 
 		$pi = pathinfo($fname);
