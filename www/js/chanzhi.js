@@ -773,7 +773,7 @@ function setGo2Top()
         clearTimeout(lastTidyTask);
         lastTidyTask = setTimeout(function()
         {
-            $('.row.blocks').tidy();
+            $('.row.blocks').tidy({force: true});
             $('.cards-custom').tidyCards();
         }, 300);
     };
