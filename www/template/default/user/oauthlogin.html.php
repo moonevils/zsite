@@ -4,7 +4,7 @@ foreach($lang->user->oauth->providers as $providerCode => $providerName)
 {
     if(isset($config->oauth->$providerCode)) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
 }
-if(!empty($providerConfig['qq']->clientID) or !empty($providerConfig['sina']->clientID) or !empty($yangcongConfig->appID)):
+if(!empty($providerConfig)):
 ?>
   <span class='span-oauth'>
     <span class='login-heading'><?php echo  $lang->user->oauth->lblOtherLogin;?></span>
