@@ -159,6 +159,7 @@ class file extends control
         $this->view->objectID   = $objectID;
         $this->view->files      = $this->file->getByObject($objectType, $objectID, $isImage);
         $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->isImage    = $isImage;
         $this->display();
     }
   
