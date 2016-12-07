@@ -167,7 +167,7 @@ $lang->menu->article    = '文章|article|admin|type=article';
 $lang->menu->blog       = '博客|article|admin|type=blog';
 $lang->menu->book       = '手册|book|admin|';
 $lang->menu->page       = '单页|article|admin|type=page';
-$lang->menu->attachment = '附件|file|index|';
+$lang->menu->attachment = '附件|file|admin|';
 
 $lang->menu->order        = '订单|order|admin|';
 $lang->menu->product      = '产品|product|admin|';
