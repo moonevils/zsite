@@ -1,19 +1,18 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel-heading clearfix'>
+  <div class='panel-heading' style='height:39px;'>
     <ul id='typeNav' class='nav nav-tabs pull-left'>
       <li data-type='internal' <?php echo $type == 'valid' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('index', "type=valid"), $lang->file->fileList);?>
+        <?php echo html::a(inlink('admin', "type=valid"), $lang->file->fileList);?>
       </li>
       <li data-type='internal' <?php echo $type == 'invalid' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('index', "type=invalid"), $lang->file->invalidFile);?>
+        <?php echo html::a(inlink('admin', "type=invalid"), $lang->file->invalidFile);?>
       </li>
     </ul> 
     <div class='panel-actions' style='height:32px;'>
       <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
     </div>
   </div>
-  <div class='panel-body'>
   <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
     <?php if($type == 'valid'):?>
     <thead>
@@ -76,6 +75,5 @@
     </tbody>
     <?php endif;?>
   </table>
-  </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
