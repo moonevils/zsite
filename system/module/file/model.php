@@ -44,6 +44,18 @@ class fileModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+        foreach($files as $file)
+        {
+            if($file->objectType == 'source' or $file->objectType == 'slide')
+            {
+                $file->existStatus = file_exists($this->app->getDataRoot() . $file->pathname) ? 'yes' : 'no';
+            }
+            else
+            {
+                $file->existStatus = file_exists($this->app->getDataRoot() . 'upload/' . $file->pathname) ? 'yes' : 'no';
+            }
+        }
+
         return $files;
     }
 
@@ -78,11 +90,12 @@ class fileModel extends model
         $unusedFiles = array();
         foreach($invalidFiles as $invalidFile) 
         { 
-            $unusedFile           = new stdclass();
-            $unusedFile->pathname  = $invalidFile;
-            $unusedFile->extension = filetype($invalidFile);
-            $unusedFile->size      = filesize($invalidFile);
-            $unusedFile->addedDate = date("Y-m-d H:i:s", filemtime($invalidFile));
+            $unusedFile               = new stdclass();
+            $unusedFile->realPathname = $invalidFile; 
+            $unusedFile->pathname     = substr($invalidFile, strlen($this->app->getDataRoot() . 'upload/'));
+            $unusedFile->extension    = $this->getExtension($invalidFile);
+            $unusedFile->size         = filesize($invalidFile);
+            $unusedFile->addedDate    = date("Y-m-d H:i:s", filemtime($invalidFile));
                   
             $unusedFiles[] = $unusedFile;
         }   

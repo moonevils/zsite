@@ -26,7 +26,7 @@ class file extends control
         $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList();
 
         $this->lang->menuGroups->file = 'attachment'; 
-       
+        
         $this->view->title = $this->lang->file->fileManager;
         $this->view->type  = $type;
         $this->view->files = $files;
@@ -43,7 +43,15 @@ class file extends control
      */ 
     public function deleteInvalidFile($pathname)
     {
-        $result = $this->file->deleteInvalidFile(urldecode($pathname));
+        $pathname = urldecode($pathname);
+        $pathname = realpath($this->app->getDataRoot() . 'upload/' . $pathname); 
+        if($pathname === false) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if(strpos($pathname, $this->app->getDataRoot() . 'upload') === false)
+        {
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        
+        $result = $this->file->deleteInvalidFile($pathname);
         if($result) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
@@ -60,7 +68,7 @@ class file extends control
         $files  = $this->file->getInvalidList();
         foreach($files as $file)
         {
-            $result = $this->file->deleteInvalidFile($file->pathname);
+            $result = $this->file->deleteInvalidFile($file->realPathname);
             if(!$result)
             {
                 $this->send(array('result' => 'fail', 'message' => dao::getError()));
