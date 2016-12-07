@@ -9,9 +9,8 @@
         <?php echo html::a(inlink('index', "type=invalid"), $lang->file->invalidFile);?>
       </li>
     </ul> 
-    <div class='panel-actions'>
+    <div class='panel-actions' style='height:32px;'>
       <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
-      <?php if($type == 'valid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
     </div>
   </div>
   <div class='panel-body'>
