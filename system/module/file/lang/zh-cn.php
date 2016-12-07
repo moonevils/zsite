@@ -75,3 +75,4 @@ $lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";
 
 $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '删除全部';
+$lang->file->fileTip            = '提示：红色代表数据库中有文件记录，但是文件实际已经被删除';

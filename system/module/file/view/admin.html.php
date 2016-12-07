@@ -31,8 +31,16 @@
       <?php foreach($files as $file):?>
         <tr class='text-center text-middle'>
           <td><?php echo $file->id;?></td>
-          <td><?php echo html::a(inlink('download', "id=$file->id"), $file->title, "target='_blank'");?></td>
-          <td class='text-left'><?php echo $file->pathname;?></td>
+          <td class='text-left'><?php echo html::a(inlink('download', "id=$file->id"), $file->title, "target='_blank'");?></td>
+          <td class='text-left 
+            <?php 
+              if(isset($file->existStatus)) 
+              {
+                echo $file->existStatus == 'no' ? 'red' : ''; 
+              }
+            ?>'>
+            <?php echo $file->pathname;?>
+          </td>
           <td><?php echo $file->extension;?></td>
           <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
           <td><?php echo isset($file->addedBy) ? $file->addedBy : '';?></td>
@@ -46,15 +54,15 @@
         </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='3' class='text-right'><?php echo $lang->file->fileTip;?></td><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
     <?php else:?>
     <thead>
       <tr class='text-center'>
         <th><?php echo $lang->file->common;?></th>
-        <th class='w-60px'><?php echo $lang->file->extension;?></th>
-        <th class='w-80px'><?php echo $lang->file->size;?></th>
+        <th class='w-100px'><?php echo $lang->file->extension;?></th>
+        <th class='w-100px'><?php echo $lang->file->size;?></th>
         <th class='w-160px'><?php echo $lang->file->addedDate;?></th>
-        <th class='w-80px'><?php echo $lang->actions;?></th>
+        <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
