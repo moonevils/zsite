@@ -18,7 +18,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function index($type = 'valid', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10,  $pageID = 1)
+    public function admin($type = 'valid', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10,  $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -26,7 +26,7 @@ class file extends control
         $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList();
 
         $this->lang->menuGroups->file = 'attachment'; 
-       
+        
         $this->view->title = $this->lang->file->fileManager;
         $this->view->type  = $type;
         $this->view->files = $files;
@@ -43,7 +43,15 @@ class file extends control
      */ 
     public function deleteInvalidFile($pathname)
     {
-        $result = $this->file->deleteInvalidFile(urldecode($pathname));
+        $pathname = urldecode($pathname);
+        $pathname = realpath($this->app->getDataRoot() . 'upload/' . $pathname); 
+        if($pathname === false) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if(strpos($pathname, $this->app->getDataRoot() . 'upload') === false)
+        {
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        
+        $result = $this->file->deleteInvalidFile($pathname);
         if($result) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
@@ -60,7 +68,7 @@ class file extends control
         $files  = $this->file->getInvalidList();
         foreach($files as $file)
         {
-            $result = $this->file->deleteInvalidFile($file->pathname);
+            $result = $this->file->deleteInvalidFile($file->realPathname);
             if(!$result)
             {
                 $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -159,6 +167,7 @@ class file extends control
         $this->view->objectID   = $objectID;
         $this->view->files      = $this->file->getByObject($objectType, $objectID, $isImage);
         $this->view->users      = $this->loadModel('user')->getPairs();
+        $this->view->isImage    = $isImage;
         $this->display();
     }
   

@@ -162,11 +162,12 @@ $lang->groups->setting  = array('title' => 'Set', 'link' => 'site|setbasic|',   
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin    = 'Home|admin|index|';
-$lang->menu->article  = 'Article|article|admin|type=article';
-$lang->menu->blog     = 'Blog|article|admin|type=blog';
-$lang->menu->book     = 'Book|book|admin|';
-$lang->menu->page     = 'Page|article|admin|type=page';
+$lang->menu->admin      = 'Home|admin|index|';
+$lang->menu->article    = 'Article|article|admin|type=article';
+$lang->menu->blog       = 'Blog|article|admin|type=blog';
+$lang->menu->book       = 'Book|book|admin|';
+$lang->menu->page       = 'Page|article|admin|type=page';
+$lang->menu->attachment = 'File|file|admin|';
 
 $lang->menu->order        = 'Order|order|admin|';
 $lang->menu->product      = 'Product|product|admin|';

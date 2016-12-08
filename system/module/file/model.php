@@ -44,6 +44,18 @@ class fileModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+        foreach($files as $file)
+        {
+            if($file->objectType == 'source' or $file->objectType == 'slide')
+            {
+                $file->existStatus = file_exists($this->app->getDataRoot() . $file->pathname) ? 'yes' : 'no';
+            }
+            else
+            {
+                $file->existStatus = file_exists($this->app->getDataRoot() . 'upload/' . $file->pathname) ? 'yes' : 'no';
+            }
+        }
+
         return $files;
     }
 
@@ -60,7 +72,7 @@ class fileModel extends model
 
         $zdb      = $this->app->loadClass('zdb');
         $fileName = $this->app->getTmpRoot() . 'checkInvalidFile' . '.sql';
-        $tables   = array('eps_file', 'eps_article' ,'eps_blacklist' ,'eps_block' ,'eps_book' ,'eps_cart' ,'eps_category' ,'eps_config' ,'eps_down' ,'eps_group' ,'eps_grouppriv' ,'eps_layout' ,'eps_log' ,'eps_message' ,'eps_oauth' ,'eps_operationlog' ,'eps_order' ,'eps_order_product' ,'eps_package' ,'eps_product' ,'eps_product_custom' ,'eps_relation' ,'eps_reply' ,'eps_score' ,'eps_search_dict' ,'eps_search_index' ,'eps_slide' ,'eps_statlog' ,'eps_statreferer' ,'eps_statregion' ,'eps_statreport' ,'eps_statvisitor' ,'eps_tag' ,'eps_thread' ,'eps_user' ,'eps_usergroup' ,'eps_widget' ,'eps_wx_message' ,'eps_wx_public' ,'eps_wx_response');
+        $tables   = array(TABLE_FILE, TABLE_ARTICLE, TABLE_BLOCK, TABLE_BOOK, TABLE_CONFIG, TABLE_ORDER, TABLE_PACKAGE, TABLE_PRODUCT, TABLE_PRODUCT_CUSTOM, TABLE_REPLY, TABLE_SLIDE, TABLE_THREAD, TABLE_USER, TABLE_WIDGET, TABLE_WX_PUBLIC, TABLE_WX_MESSAGE);
         $zdb->dump($fileName, $tables);
         
         $sqlContent  = file_get_contents($fileName);
@@ -78,11 +90,12 @@ class fileModel extends model
         $unusedFiles = array();
         foreach($invalidFiles as $invalidFile) 
         { 
-            $unusedFile           = new stdclass();
-            $unusedFile->pathname  = $invalidFile;
-            $unusedFile->extension = filetype($invalidFile);
-            $unusedFile->size      = filesize($invalidFile);
-            $unusedFile->addedDate = date("Y-m-d H:i:s", filemtime($invalidFile));
+            $unusedFile               = new stdclass();
+            $unusedFile->realPathname = $invalidFile; 
+            $unusedFile->pathname     = substr($invalidFile, strlen($this->app->getDataRoot() . 'upload/'));
+            $unusedFile->extension    = $this->getExtension($invalidFile);
+            $unusedFile->size         = filesize($invalidFile);
+            $unusedFile->addedDate    = date("Y-m-d H:i:s", filemtime($invalidFile));
                   
             $unusedFiles[] = $unusedFile;
         }   
