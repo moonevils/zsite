@@ -413,7 +413,8 @@ class uiModel extends model
     public function compileCSS($params, $css)
     {
         $lessc = $this->app->loadClass('lessc');
-
+        $css   = htmlspecialchars_decode($css, ENT_QUOTES);
+        
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
 
