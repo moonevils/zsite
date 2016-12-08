@@ -6,20 +6,20 @@ $lang->admin->ignoreupgrade = 'Ignore upgrade prompt.';
 
 $lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->common             = 'Quick Entry';
-$lang->admin->shortcuts->articleCategories  = 'Article Category';
+$lang->admin->shortcuts->articleCategories  = 'Article Categories';
 $lang->admin->shortcuts->article            = 'Publish Article';
-$lang->admin->shortcuts->product            = 'Add a Product';
+$lang->admin->shortcuts->product            = 'Add Products';
 $lang->admin->shortcuts->feedback           = 'Manage Feedback';
 $lang->admin->shortcuts->site               = 'Site Settings';
 $lang->admin->shortcuts->logo               = 'Logo Settings';
-$lang->admin->shortcuts->company            = 'Company Info';
-$lang->admin->shortcuts->contact            = 'Manage Contact';
+$lang->admin->shortcuts->company            = 'Company Information';
+$lang->admin->shortcuts->contact            = 'Manage Contacts';
 
 $lang->admin->thread       = 'New Threads';
 $lang->admin->order        = 'New Orders';
 $lang->admin->feedback     = 'New Feedback';
 
-$lang->admin->adminEntry     = 'Warning! Your default entry is admin.php. Please change it for security.';
+$lang->admin->adminEntry     = 'Warning! Your default entry is admin.php. Please change it for security reasons.';
 $lang->admin->orderTitle     = '%s has created an Order %s ';
 $lang->admin->message        = 'Today you have %s messages to review.';
 $lang->admin->reply          = 'Today you have %s replies to review.';
