@@ -33,8 +33,8 @@ $lang->order->edit              = 'Edit';
 $lang->order->contact           = 'Contact';
 $lang->order->phone             = 'Phone';
 $lang->order->zipcode           = 'Zipcode';
-$lang->order->deliveryStatus    = 'Delivery Status';
-$lang->order->last              = 'Last Processed';
+$lang->order->deliveryStatus    = 'Status';
+$lang->order->last              = 'Last Action';
 
 $lang->order->deliverList['not_send']  = 'Pending';
 $lang->order->deliverList['send']      = 'Delivered';
