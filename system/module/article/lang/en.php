@@ -29,8 +29,8 @@ $lang->article->keywords   = 'Keywords';
 $lang->article->summary    = 'Summary';
 $lang->article->author     = 'Author';
 $lang->article->editor     = 'Edit';
-$lang->article->addedDate  = 'Publish Time';
-$lang->article->editedDate = 'Edit Time';
+$lang->article->addedDate  = 'Publish On';
+$lang->article->editedDate = 'Edit On';
 $lang->article->status     = 'Status';
 $lang->article->type       = 'Type';
 $lang->article->views      = 'Views';
@@ -45,14 +45,14 @@ $lang->article->layout     = 'Layout';
 
 $lang->article->forward2Blog     = 'To Blog';
 $lang->article->forward2Forum    = 'To Forum';
-$lang->article->selectCategories = 'Select a Category';
-$lang->article->selectBoard      = 'Select a Board';
+$lang->article->selectCategories = 'Select Category';
+$lang->article->selectBoard      = 'Select Board';
 $lang->article->confirmReject    = 'Do you want to reject it?';
 
 $lang->submittion= new stdclass();
 $lang->submittion->common  = 'Contribute';
 $lang->submittion->check   = 'Review';
-$lang->submittion->list    = 'Contribution List';
+$lang->submittion->list    = 'Contributions';
 $lang->submittion->publish = 'Pass';
 $lang->submittion->reject  = 'Reject';
 
@@ -69,7 +69,7 @@ $lang->article->onlyBody = 'Display body only (for custom).';
 
 $lang->article->list          = 'List';
 $lang->article->admin         = 'Maintain';
-$lang->article->create        = 'Add an Article';
+$lang->article->create        = 'Add Article';
 $lang->article->setcss        = 'CSS Settings';
 $lang->article->setjs         = 'JS Settings';
 $lang->article->edit          = 'Edit';
@@ -77,7 +77,7 @@ $lang->article->files         = 'File';
 $lang->article->images        = 'Image';
 
 $lang->article->submittion     = 'Contribute';
-$lang->article->submissionTime = 'Contribute Time';
+$lang->article->submissionTime = 'Contribute On';
 $lang->article->noSubmittion   = 'You have no contributions yet. Contribute and earn points NOW!';
 
 $lang->article->submittionOptions = new stdclass;
@@ -112,7 +112,7 @@ $lang->article->successStick   = 'Sticky!';
 $lang->article->successUnstick = 'Sticky cancelled!';
 
 $lang->article->confirmDelete = 'Do you want to delete this article?';
-$lang->article->categoryEmpty = 'Choose a category';
+$lang->article->categoryEmpty = 'Choose Category';
 
 $lang->article->lblAddedDate = '<strong>Added on </strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>Author </strong> %s &nbsp;&nbsp;";
@@ -124,7 +124,7 @@ $lang->article->lblComments  = '<strong>Commented by </strong> %s';
 $lang->article->none      = 'The End';
 $lang->article->previous  = 'Previous';
 $lang->article->next      = 'Next';
-$lang->article->directory = 'Back to directory';
+$lang->article->directory = 'Back';
 $lang->article->noCssTag  = 'No &lt;style&gt;&lt;/style&gt; tag';
 $lang->article->noJsTag   = 'No &lt;script&gt;&lt;/script&gt;tag';
 
