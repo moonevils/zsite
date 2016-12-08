@@ -792,7 +792,7 @@ class blockModel extends model
                     $lessc           = $this->app->loadClass('lessc');
                     $lessc->setFormatter("compressed");
                     
-                    $customStyle = '';
+                    $customStyle = htmlspecialchars_decode($customStyle, ENT_QUOTES);
                     try
                     {
                         $customStyle = $lessc->compile($customStyle);
