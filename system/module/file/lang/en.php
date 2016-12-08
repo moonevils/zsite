@@ -32,6 +32,8 @@ $lang->file->sourceURI     = 'URL';
 $lang->file->deleteSource  = 'Delete';
 $lang->file->editSource    = 'Edit';
 $lang->file->selectImage   = 'Select';
+$lang->file->fileList      = 'List';
+$lang->file->invalidFile   = 'Invalid File';
 
 $lang->file->id        = 'ID';
 $lang->file->title     = 'Title';
@@ -70,3 +72,7 @@ $lang->file->copySuccess      = "Copy to clipboard";
 $lang->file->evilChar         = "Invalid Character";
 $lang->file->rebuildThumbs    = "%s has been finished.";
 $lang->file->noFlashTip       = "Flash extension is forbidden，please do the paste manually";
+
+$lang->file->updateInvalidFiles = 'Update Invalid List';
+$lang->file->clearAllInvalid    = 'Delete All Invalid Files';
+$lang->file->fileTip            = 'Tip : Red represent the file has been deleted while there is data in database';
