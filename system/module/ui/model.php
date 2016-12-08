@@ -371,18 +371,19 @@ class uiModel extends model
 
         if(!empty($extraCss))
         {
-            $css        .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
-            $extraCss   = str_replace(array('&gt;', '&quot;'), array('>', '"'), $extraCss);
-            $comiledCss = '';
+            $css         .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
+            $extraCss    = str_replace(array('&gt;', '&quot;'), array('>', '"'), $extraCss);
+            $extraCss    = htmlspecialchars_decode($extraCss, ENT_QUOTES);
+            $compiledCss = '';
             try
             {
-                $comiledCss = $lessc->compile($extraCss);
+                $compiledCss = $lessc->compile($extraCss);
             }
             catch(Exception $e)
             {
                 $lessc->errors[] = $e->getMessage();
             }
-            if(isset($lessc->errors) and !empty($lessc->errors)) $comiledCss = $extraCss;
+            if(isset($lessc->errors) and !empty($lessc->errors)) $compiledCss = $extraCss;
             $css .= $compiledCss;
         }
 
