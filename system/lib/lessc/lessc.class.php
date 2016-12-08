@@ -59,7 +59,8 @@ class lessc {
 
 	public $importDisabled = false;
 	public $importDir = '';
-
+    
+    public $errors = array();
 	protected $numberPrecision = null;
 
 	protected $allParsedFiles = array();

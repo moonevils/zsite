@@ -791,8 +791,18 @@ class blockModel extends model
                     $customStyleBack = $customStyle;
                     $lessc           = $this->app->loadClass('lessc');
                     $lessc->setFormatter("compressed");
-                    $customStyle = $lessc->compile($customStyle);
-                    if(is_array($customStyle) and !empty($customStyle)) $customStyle = $customStyleBack;
+                    
+                    $customStyle = htmlspecialchars_decode($customStyle, ENT_QUOTES);
+                    try
+                    {
+                        $customStyle = $lessc->compile($customStyle);
+                    }
+                    catch(Exception $e)
+                    {
+                        $lessc->errors[] = $e->getMessage();
+                    }
+                    if(isset($lessc->errors) and !empty($lessc->errors)) $customStyle = $customStyleBack;
+
                     $style .= $customStyle;
                 }
             }

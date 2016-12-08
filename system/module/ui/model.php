@@ -339,7 +339,14 @@ class uiModel extends model
         $lessTemplate = $lessTemplateDir . 'style.less';
         if(file_exists($lessTemplate))
         {
-            $css .= $lessc->compileFile($lessTemplate);
+            try
+            {
+                $css .= $lessc->compileFile($lessTemplate);
+            }
+            catch(Exception $e)
+            {
+                $lessc->errors[] = $e->getMessage();
+            }
         }
         else if(file_exists($lessTemplateDir . 'style.css'))
         {
@@ -348,7 +355,14 @@ class uiModel extends model
         $customLessFile = $lessTemplateDir . 'custom.less';
         if(file_exists($customLessFile))
         {
-            $css .= $lessc->compileFile($customLessFile);
+            try
+            {
+                $css .= $lessc->compileFile($customLessFile);
+            }
+            catch(Exception $e)
+            {
+                $lessc->errors[] = $e->getMessage();
+            }
         }
         else if(file_exists($lessTemplateDir . 'custom.css'))
         {
@@ -357,10 +371,19 @@ class uiModel extends model
 
         if(!empty($extraCss))
         {
-            $css .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
-            $extraCss = str_replace(array('&gt;', '&quot;'), array('>', '"'), $extraCss);
-            $comiledCss = $lessc->compile($extraCss);
-            if(is_array($comiledCss) and !empty($comiledCss)) $comiledCss = $extraCss;
+            $css         .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
+            $extraCss    = str_replace(array('&gt;', '&quot;'), array('>', '"'), $extraCss);
+            $extraCss    = htmlspecialchars_decode($extraCss, ENT_QUOTES);
+            $compiledCss = '';
+            try
+            {
+                $compiledCss = $lessc->compile($extraCss);
+            }
+            catch(Exception $e)
+            {
+                $lessc->errors[] = $e->getMessage();
+            }
+            if(isset($lessc->errors) and !empty($lessc->errors)) $compiledCss = $extraCss;
             $css .= $compiledCss;
         }
 
@@ -390,12 +413,20 @@ class uiModel extends model
     public function compileCSS($params, $css)
     {
         $lessc = $this->app->loadClass('lessc');
-
+        $css   = htmlspecialchars_decode($css, ENT_QUOTES);
+        
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
 
-        $compiledCSS = $lessc->compile($css);
-        if(is_array($compiledCSS) and !empty($compiledCSS)) return $css;
+        try
+        {
+            $compiledCSS = $lessc->compile($css);
+        }
+        catch(Exception $e)
+        {
+            $lessc->errors[] = $e->getMessage();
+            $compiledCSS     = $css;
+        }
 
         return $compiledCSS;
     }
