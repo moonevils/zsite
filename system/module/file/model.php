@@ -54,6 +54,7 @@ class fileModel extends model
             {
                 $file->existStatus = file_exists($this->app->getDataRoot() . 'upload/' . $file->pathname) ? 'yes' : 'no';
             }
+            $this->processFile($file);
         }
 
         return $files;

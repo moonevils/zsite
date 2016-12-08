@@ -31,7 +31,18 @@
       <?php foreach($files as $file):?>
         <tr class='text-center text-middle'>
           <td><?php echo $file->id;?></td>
-          <td class='text-left'><?php echo html::a(inlink('download', "id=$file->id"), $file->title, "target='_blank'");?></td>
+          <td class='text-left'>
+            <?php 
+              if($file->isImage and $file->existStatus == 'yes')
+              {
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id"), html::image($file->fullURL, "class='image-small'"), "target='_blank' data-toggle='lightbox'");
+              }
+              else
+              {
+                echo html::a(inlink('download', "id=$file->id"), $file->title, "target='_blank'");
+              }
+            ?>
+          </td>
           <td class='text-left 
             <?php 
               if(isset($file->existStatus)) 
