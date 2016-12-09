@@ -320,21 +320,22 @@ class file extends control
         /* If the mode is open, locate directly. */
         if($mode == 'open')
         {
-            if(file_exists($file->realPath))$this->locate($file->webPath);
+            if(file_exists($file->realPath) or (isset($file->syncStatus) and $file->syncStatus == 'synced')) $this->locate($file->webPath);
             $this->app->triggerError("The file you visit $fileID not found.", __FILE__, __LINE__, true);
         }
         else
         {
             /* Down the file. */
-            if(file_exists($file->realPath))
+            if(file_exists($file->realPath) or (isset($file->syncStatus) and $file->syncStatus == 'synced'))
             {
                 $fileName = $file->title . '.' . $file->extension;
                 $fileData = file_get_contents($file->realPath);
+                $fileSize = file_exists($file->realPath) ? filesize($file->realPath) : $file->size;
 
                 /* Recording download times, downloads of this file plus one. */
                 $this->file->log($fileID);
 
-                $this->file->sendDownHeader($fileName, $file->extension, $fileData, filesize($file->realPath));
+                $this->file->sendDownHeader($fileName, $file->extension, $fileData, $fileSize);
 
             }
             else
