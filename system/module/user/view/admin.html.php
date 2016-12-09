@@ -69,7 +69,7 @@ js::set('admin', $this->get->admin);
           <th class='w-80px'><?php echo $lang->user->join;?></th>
           <?php endif;?>
           <th class='w-70px'><?php echo $lang->user->visits;?></th>
-          <th class='w-140px'><?php echo $lang->user->last;?></th>
+          <th class='w-110px'><?php echo $lang->user->last;?></th>
           <th class='w-100px'><?php echo $lang->user->ip;?></th>
           <th class='w-60px'><?php echo $lang->user->status;?></th>
           <th class='w-180px'><?php echo $lang->actions;?></th>
@@ -95,7 +95,7 @@ js::set('admin', $this->get->admin);
         <td><?php echo substr($user->join, 0, 10);?></td>
         <?php endif;?>
         <td><?php echo $user->visits;?></td>
-        <td><?php echo $user->last;?></td>
+        <td><?php echo date('y-m-d H:i', strtotime($user->last));?></td>
         <td><?php echo $user->ip;?></td>
         <td>
         <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
