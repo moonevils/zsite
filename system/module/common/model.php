@@ -988,6 +988,7 @@ class commonModel extends model
         if(!$board) return false;
 
         $categories = array();
+        if(empty($this->config->seo->alias->forum)) $this->config->seo->alias->forum = array();
         foreach($this->config->seo->alias->forum as $alias => $category) $categories[$category->id] = $alias;
 
         unset($board->pathNames[key($board->pathNames)]);

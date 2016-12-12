@@ -333,11 +333,12 @@ EOT;
     public function punish($type, $identity, $reason, $expired, $times = 1)
     {
        $blacklist = new stdclass(); 
-       $blacklist->type     = $type;
-       $blacklist->identity = $identity;
-       $blacklist->reason   = $reason;
-       $blacklist->times    = $times;
-       $blacklist->lang     = 'all';
+       $blacklist->type      = $type;
+       $blacklist->identity  = $identity;
+       $blacklist->reason    = $reason;
+       $blacklist->times     = $times;
+       $blacklist->lang      = 'all';
+       $blacklist->addedDate = helper::now();
        if(!empty($expired)) $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 60 * $times + time());
 
        $this->dao->replace(TABLE_BLACKLIST)->data($blacklist)
