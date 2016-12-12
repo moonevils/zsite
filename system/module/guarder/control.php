@@ -28,13 +28,14 @@ class guarder extends control
 
         $blacklist = $this->dao->select('*')->from(TABLE_BLACKLIST)
             ->beginIf($mode != 'all')->where('type')->eq($mode)->fi()
+            ->orderBy('addedDate_desc')
             ->page($pager)
             ->fetchAll();
         
-        $this->view->title = $this->lang->site->setBlacklist;
+        $this->view->title     = $this->lang->site->setBlacklist;
         $this->view->blacklist = $blacklist;
-        $this->view->pager = $pager;
-        $this->view->mode  = $mode;
+        $this->view->pager     = $pager;
+        $this->view->mode      = $mode;
         $this->display();
     }
 
