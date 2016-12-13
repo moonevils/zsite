@@ -924,6 +924,24 @@ class fileModel extends model
     }
 
     /**
+     * Update objectype of file
+     *
+     * @param  string $objectID
+     * @param  string $oldobjectType
+     * @param  string $newObjectType
+     * @access public
+     * @return bool
+     */
+    public function updateObjectType($objectID, $oldObjectType, $newObjectType)
+    {
+        $this->dao->update(TABLE_FILE)->set('objectType')->eq($newObjectType)
+            ->where('objectID')->eq($objectID)
+            ->andWhere('objectType')->eq($oldObjectType)
+            ->exec();
+        return !dao::isError();
+    }
+    
+    /**
      * Copy file in content from file space.
      * 
      * @param  string $content 
