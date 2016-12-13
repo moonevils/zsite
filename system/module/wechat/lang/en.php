@@ -20,7 +20,7 @@ $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
 $lang->wechat->url       = 'URL';
 $lang->wechat->certified = 'Certified';
-$lang->wechat->users     = '微信会员';
+$lang->wechat->users     = 'WeChat User';
 $lang->wechat->content   = 'Content';
 $lang->wechat->qrcode    = 'QR Code';
 
@@ -74,7 +74,7 @@ $lang->wechat->response->moduleList['index']   = 'Home';
 $lang->wechat->response->moduleList['company'] = 'About Us';
 $lang->wechat->response->moduleList['blog']    = 'Blog';
 $lang->wechat->response->moduleList['forum']   = 'Forum';
-$lang->wechat->response->moduleList['book']    = 'Manual';
+$lang->wechat->response->moduleList['book']    = 'Book';
 $lang->wechat->response->moduleList['manual']  = 'Custom';
 
 $lang->wechat->response->textBlockList['company'] = 'Company Intro';
