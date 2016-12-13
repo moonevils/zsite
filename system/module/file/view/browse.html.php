@@ -25,12 +25,12 @@ css::import($jsRoot . 'uploader/min.css');
 .file-info-addedBy {min-width: 80px;}
 .file-info-addedDate {min-width: 130px;}
 .file-info-downloads {min-width: 50px;}
+.btn-set-primary {display: none; margin-left: 10px; padding-left: 5px; padding-right: 5px; margin-left: 0}
 .file-list .file.can-set-primary .actions>.btn-set-primary,
 .file-list .file[data-status=done] .actions>.btn-edit-file {display: inline-block;}
 .file-list .file-wrapper > .actions {width: 210px;}
 #uploader {margin-bottom: 0}
 .file-label-id {display: inline-block; padding: 0 2px; border: 1px solid #ccc; line-height: 14px; font-size: 12px; color: #999; margin-right: 5px;}
-.btn-set-primary {display: inline-block; margin-left: 10px; padding-left: 5px; padding-right: 5px; margin-left: 0}
 </style>
 <script>
 if(!$.zui.strCode)
