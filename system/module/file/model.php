@@ -1016,4 +1016,119 @@ class fileModel extends model
         header("Expires: 0");
         die($content);
     }
+
+    /**
+     * get uploaded file from zui.uploader.
+     * 
+     * @param string $htmlTagName 
+     * @param string $objectType 
+     * @access public
+     * @return void
+     */
+    public function getUploadFile($htmlTagName = 'file', $objectType = 'upload')
+    {
+        if(!isset($_FILES[$htmlTagName]) || empty($_FILES[$htmlTagName]['name'])) return;
+        if(!$this->canUpload()) return;
+        
+        $this->app->loadClass('filter', true);
+        $this->app->loadClass('purifier', true);
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+
+        extract($_FILES[$htmlTagName]);
+        if(!validater::checkFileName($name)) return;
+
+        $file = array();
+        $file['id'] = 0;
+        $file['extension'] = $this->getExtension($name);
+        $file['title']     = !empty($_POST['label']) ? htmlspecialchars($_POST['label']) : substr($name, 0, strpos($name, $file['extension']) - 1);
+        $file['title']     = $purifier->purify($file['title']);
+        $file['size']      = $_POST['size'];
+        $file['tmpname']   = $tmp_name;
+        $file['uuid']      = $_POST['uuid'];
+        $file['pathname']  = $this->setPathName($file, $objectType);
+        $file['chunkpath'] = $path . 'chunks' . DS .'f_' . $file['uuid'] . '.' . $file['extension'] . '.part';
+        $file['chunks']    = isset($_POST['chunks']) ? intval($_POST['chunks']) : 0;
+        $file['chunk']     = isset($_POST['chunk']) ? intval($_POST['chunk']) : 0;
+
+        return $file;
+    }
+
+    /**
+     * Save uploaded file from zui.uploader.
+     * 
+     * @param object $file 
+     * @param string $objectType 
+     * @param string $objectID
+     * @param string $extra
+     * @access public
+     * @return void
+     */
+    public function saveUploadFile($file, $objectType = 'upload', $objectID = '', $extra = '')
+    {
+        if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
+        if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
+        {
+            $file['pathname'] .= '.txt';
+        }
+        if($file['chunks'] > 1)
+        {
+            $fileSavePath = $this->savePath . $file['chunkpath'];
+            if (!file_exists($fileSavePath)) {
+                mkdir(dirname($fileSavePath));
+            }
+            if($file['chunk'] > 0)
+            {
+                $uploadedFile = fopen($fileSavePath, 'a+b');
+                $tmpChunkFile = fopen($file['tmpname'], 'rb');
+                while ($buff = fread($tmpChunkFile, 4096))
+                {
+                    fwrite($uploadedFile, $buff);
+                }
+                fclose($uploadedFile);
+                fclose($tmpChunkFile);
+            }
+            else
+            {
+                if(!move_uploaded_file($file['tmpname'], $fileSavePath)) return 'error1';
+            }
+            if($file['chunk'] == ($file['chunks'] - 1))
+            {
+                rename($fileSavePath, $this->savePath . $file['pathname']);
+            }
+        }
+        else
+        {
+            if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return 'error3';
+        }
+
+        if(!$file['chunks'] || $file['chunk'] == ($file['chunks'] - 1))
+        {
+            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
+            {
+                if($objectType != 'source' and $objectType != 'slide') $this->compressImage($this->savePath . $file['pathname']);
+                $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
+            }
+
+            $file['objectType'] = $objectType;
+            $file['objectID']   = $objectID;
+            $file['addedBy']    = $this->app->user->account;
+            $file['addedDate']  = $now;
+            $file['extra']      = $extra;
+            $file['width']      = $imageSize['width'];
+            $file['height']     = $imageSize['height'];
+            $file['lang']       = 'all';
+            if($objectType == 'logo') $file['lang'] = $this->app->getClientLang();
+            unset($file['tmpname']);
+            unset($file['id']);
+            unset($file['uuid']);
+            unset($file['chunks']);
+            unset($file['chunk']);
+            unset($file['chunkpath']);
+            $this->dao->insert(TABLE_FILE)->data($file)->exec();
+            $file['id'] = $this->dao->lastInsertId();
+        }
+
+        return $file;
+    }
 }

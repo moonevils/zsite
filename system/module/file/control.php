@@ -293,6 +293,25 @@ class file extends control
     }
 
     /**
+     * Upload file with zui.uploader for an object.
+     * 
+     * @param  string $objectType 
+     * @param  string $objectID 
+     * @access public
+     * @return void
+     */
+    public function uploadFile($objectType, $objectID)
+    {
+        $this->file->setSavePath($objectType);
+        if(!$this->file->checkSavePath()) die(json_encode(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable)));
+
+        $file = $this->file->getUploadFile('file', $objectType);
+        if($file) $file = $this->file->saveUploadFile($file, $objectType, $objectID);
+
+        die(json_encode(array('result' => 'success', 'file' => $file, 'message' => $this->lang->saveSuccess)));
+    }
+
+    /**
      * Down a file.
      * 
      * @param  int    $fileID 
