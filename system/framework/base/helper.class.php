@@ -356,14 +356,15 @@ class baseHelper
 
         $agent = $_SERVER["HTTP_USER_AGENT"];
 
-        // Check the name of browser
-        if(strpos($agent, 'MSIE') !== false || strpos($agent, 'rv:11.0')) $browser['name'] = 'ie';
-
         /* Chrome should checked before safari.*/
-        if(strpos($agent, 'Chrome') !== false)  $browser['name'] = "chrome";
-        if(strpos($agent, 'Safari') !== false)  $browser['name'] = 'safari';
         if(strpos($agent, 'Firefox') !== false) $browser['name'] = "firefox";
         if(strpos($agent, 'Opera') !== false)   $browser['name'] = 'opera';
+        if(strpos($agent, 'Safari') !== false)  $browser['name'] = 'safari';
+        if(strpos($agent, 'Chrome') !== false)  $browser['name'] = "chrome";
+
+        // Check the name of browser
+        if(strpos($agent, 'MSIE') !== false || strpos($agent, 'rv:11.0')) $browser['name'] = 'ie';
+        if(strpos($agent, 'Edge') !== false) $browser['name'] = 'edge';
 
         // Check the version of browser
         if(preg_match('/MSIE\s(\d+)\..*/i', $agent, $regs))       $browser['version'] = $regs[1];
@@ -371,9 +372,10 @@ class baseHelper
         if(preg_match('/Opera[\s|\/](\d+)\..*/i', $agent, $regs)) $browser['version'] = $regs[1];
         if(preg_match('/Chrome\/(\d+)\..*/i', $agent, $regs))     $browser['version'] = $regs[1];
 
-        if((strpos($agent,'Chrome') == false) && preg_match('/Safari\/(\d+)\..*$/i', $agent, $regs)) $browser['version'] = $regs[1];
+        if((strpos($agent, 'Chrome') == false) && preg_match('/Safari\/(\d+)\..*$/i', $agent, $regs)) $browser['version'] = $regs[1];
         if(preg_match('/rv:(\d+)\..*/i', $agent, $regs)) $browser['version'] = $regs[1];
-        
+        if(preg_match('/Edge\/(\d+)\..*/i', $agent, $regs)) $browser['version'] = $regs[1];
+
         return $browser;
     }
 
