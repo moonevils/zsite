@@ -1285,37 +1285,46 @@ class commonModel extends model
     public static function processPre($moduleName, $methodName)
     {
         global $app;
-
+        $isGetRequest = $app->config->requestType == 'GET' ? true : false;
+        
         $uri = $app->URI;
         if($moduleName == 'article' and $methodName == 'view')
         {
-            $articleID = str_replace('article-view-', '', $uri); 
+            $articleID = $isGetRequest ? $_GET['id'] : str_replace('article-view-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($articleID)->exec();
         }
 
         if($moduleName == 'product' and $methodName == 'view')
         {
-            $id = str_replace('product-view-', '', $uri); 
+            $id = $isGetRequest ? $_GET['productID'] : str_replace('product-view-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_PRODUCT)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
         if($moduleName == 'blog' and $methodName == 'view')
         {
-            $id = str_replace('blog-view-', '', $uri); 
+            $id = $isGetRequest ? $_GET['id'] : str_replace('blog-view-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
         if($moduleName == 'book' and $methodName == 'read')
         {
-            $id = str_replace('book-read-', '', $uri); 
+            $id = $isGetRequest ? $_GET['articleID'] : str_replace('book-read-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_BOOK)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
         if($moduleName == 'page' and $methodName == 'view')
         {
-            $id = str_replace('page-view-', '', $uri); 
-            if(is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
-            if(!is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('alias')->eq($id)->exec();
+            if($isGetRequest)
+            {
+                $id = $_GET['pageID']; 
+                $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
+            }
+            else
+            {
+                $id = str_replace('page-view-', '', $uri); 
+                if(is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
+                if(!is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('alias')->eq($id)->exec();
+            }
         }
         
         dao::$changedTables = array();
