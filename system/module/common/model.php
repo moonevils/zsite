@@ -1302,7 +1302,7 @@ class commonModel extends model
 
         if($moduleName == 'blog' and $methodName == 'view')
         {
-            $id = $isGetRequest ? $_GET['id'] : str_replace('blog-view-', '', $uri); 
+            $id = $isGetRequest ? $_GET['articleID'] : str_replace('blog-view-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
@@ -1328,5 +1328,37 @@ class commonModel extends model
         }
         
         dao::$changedTables = array();
+    }
+
+    /*
+     * replace the views placeholder with the views from databaes;
+     *
+     * @access public
+     * @param  string $moduleName
+     * @param  string $methodName
+     * @static
+     * @return string
+     */
+    public static function getViewsInfo($moduleName, $methodName)
+    {
+        global $app;
+        $isGetRequest = $app->config->requestType == 'GET' ? true : false;
+        
+        $uri = $app->URI;
+
+        if($moduleName == 'article' and $methodName == 'view')
+        {
+            $articleID = $isGetRequest ? $_GET['id'] : str_replace('article-view-', '', $uri); 
+            $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch()->views;
+        }
+        
+        if($moduleName == 'blog' and $methodName == 'view')
+        {
+            $id = $isGetRequest ? $_GET['articleID'] : str_replace('blog-view-', '', $uri); 
+            $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($id)->fetch()->views;
+        }
+
+        $views = is_numeric($views) ? $views : '0';
+        return $views;
     }
 }

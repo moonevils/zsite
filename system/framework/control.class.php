@@ -433,6 +433,12 @@ class control extends baseControl
                 }
             }
 
+            if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsPages))
+            {
+                $views        = commonModel::getViewsInfo($moduleName, $methodName);
+                $this->output = str_replace($this->config->viewsPlaceholder, $views, $this->output);
+            }
+            
             $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
 
             $this->output = str_replace($this->config->siteNavHolder, $siteNav, $this->output);
