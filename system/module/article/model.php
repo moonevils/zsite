@@ -377,6 +377,7 @@ class articleModel extends model
             ->stripTags('content,link,videoLink', $this->config->allowedTags->admin)
             ->removeIF($type == 'video', 'videoLink, width, height, autoplay')
             ->get();
+        if(!isset($article->categories)) $article->categories = '';
 
         if($type == 'submittion')
         {
@@ -552,6 +553,7 @@ class articleModel extends model
         $article->keywords = seo::unify($article->keywords, ',');
         if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-');
         $article->content  = $this->rtrimContent($article->content);
+        if(!isset($article->categories)) $article->categories = '';
 
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
