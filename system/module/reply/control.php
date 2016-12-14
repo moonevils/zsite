@@ -24,6 +24,8 @@ class reply extends control
 
         if($_POST)
         {
+            if(!$this->loadModel('thread')->canReply($threadID)) $this->send(array('result' => 'fail', 'message' => $this->lang->reply->noReply['readonly'])); 
+
             $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
             $needCaptcha   = false;
             if($captchaConfig == 'open' or ($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content))) $needCaptcha = true;
@@ -83,6 +85,8 @@ class reply extends control
         
         if($_POST)
         {
+            if(!$this->reply->canEdit($reply)) $this->send(array('result' => 'fail', 'message' => $this->lang->reply->noEdit['readonly']));
+
             /* If no captcha but is garbage, return the error info. */
             $captchaInput = $this->session->captchaInput;
             if($this->post->$captchaInput === false and $this->loadModel('guarder')->isEvil($_POST['content']))
