@@ -329,6 +329,7 @@ class productModel extends model
 
         $product->alias    = seo::unify($product->alias, '-');
         $product->keywords = seo::unify($product->keywords, ',');
+        if(!isset($product->categories)) $product->categories = '';
 
         $this->dao->update(TABLE_PRODUCT)
             ->data($product, $skip = 'categories,uid,label,value')
