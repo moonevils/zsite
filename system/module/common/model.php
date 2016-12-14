@@ -1274,6 +1274,79 @@ class commonModel extends model
     }
 
     /**
+     * Parse the item id
+     *
+     * @param  string    $moduleName 
+     * @param  string    $methodName 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function parseItemID($moduleName, $methodName)
+    {
+        global $app;
+        $isGetRequest = $app->config->requestType == 'GET' ? true : false;
+        
+        $uri = $app->URI;
+        $id  = '0'; 
+
+        if($moduleName == 'article' and $methodName == 'view')
+        {
+            if($isGetRequest)
+            {
+                $id = isset($_GET['articleID']) ? $_GET['articleID'] : $_GET['id'];
+            }
+            else
+            {
+                $id = str_replace('article-view-', '', $uri); 
+            }
+        }
+        
+        if($moduleName == 'product' and $methodName == 'view')
+        {
+            if($isGetRequest)
+            {
+                $id = isset($_GET['productID']) ? $_GET['productID'] : $_GET['id'];
+            }
+            else
+            {
+                $id = str_replace('product-view-', '', $uri); 
+            }
+        }
+        
+        if($moduleName == 'blog' and $methodName == 'view')
+        {
+            if($isGetRequest)
+            {
+                $id = isset($_GET['articleID']) ? $_GET['articleID'] : $_GET['id'];
+            }
+            else
+            {
+                $id = str_replace('blog-view-', '', $uri); 
+            }
+        }
+        
+        if($moduleName == 'book' and $methodName == 'read')
+        {
+            $id = $isGetRequest ? $_GET['articleID'] : str_replace('book-read-', '', $uri); 
+        }
+        
+        if($moduleName == 'page' and $methodName == 'view')
+        {
+            if($isGetRequest)
+            {
+                $id = isset($_GET['pageID']) ? $_GET['pageID'] : $_GET['id']; 
+            }
+            else
+            {
+                $id = str_replace('page-view-', '', $uri); 
+            }
+        }
+        
+        return $id;
+    }
+
+    /**
      * Process before load cache.
      * 
      * @param  string    $moduleName 
@@ -1285,46 +1358,32 @@ class commonModel extends model
     public static function processPre($moduleName, $methodName)
     {
         global $app;
-        $isGetRequest = $app->config->requestType == 'GET' ? true : false;
-        
-        $uri = $app->URI;
+        $id = self::parseItemID($moduleName, $methodName);
+
         if($moduleName == 'article' and $methodName == 'view')
         {
-            $articleID = $isGetRequest ? $_GET['id'] : str_replace('article-view-', '', $uri); 
-            $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($articleID)->exec();
+            $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
         if($moduleName == 'product' and $methodName == 'view')
         {
-            $id = $isGetRequest ? $_GET['productID'] : str_replace('product-view-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_PRODUCT)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
         if($moduleName == 'blog' and $methodName == 'view')
         {
-            $id = $isGetRequest ? $_GET['articleID'] : str_replace('blog-view-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
         if($moduleName == 'book' and $methodName == 'read')
         {
-            $id = $isGetRequest ? $_GET['articleID'] : str_replace('book-read-', '', $uri); 
             $app->loadClass('dao')->update(TABLE_BOOK)->set("views = views + 1")->where('id')->eq($id)->exec();
         }
 
         if($moduleName == 'page' and $methodName == 'view')
         {
-            if($isGetRequest)
-            {
-                $id = $_GET['pageID']; 
-                $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
-            }
-            else
-            {
-                $id = str_replace('page-view-', '', $uri); 
-                if(is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
-                if(!is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('alias')->eq($id)->exec();
-            }
+            if(is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('id')->eq($id)->exec();
+            if(!is_numeric($id)) $app->loadClass('dao')->update(TABLE_ARTICLE)->set("views = views + 1")->where('alias')->eq($id)->exec();
         }
         
         dao::$changedTables = array();
@@ -1342,20 +1401,21 @@ class commonModel extends model
     public static function getViewsInfo($moduleName, $methodName)
     {
         global $app;
-        $isGetRequest = $app->config->requestType == 'GET' ? true : false;
-        
-        $uri = $app->URI;
+        $id = self::parseItemID($moduleName, $methodName);
 
         if($moduleName == 'article' and $methodName == 'view')
         {
-            $articleID = $isGetRequest ? $_GET['id'] : str_replace('article-view-', '', $uri); 
-            $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch()->views;
+            $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($id)->fetch()->views;
         }
         
         if($moduleName == 'blog' and $methodName == 'view')
         {
-            $id = $isGetRequest ? $_GET['articleID'] : str_replace('blog-view-', '', $uri); 
             $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($id)->fetch()->views;
+        }
+        
+        if($moduleName == 'book' and $methodName == 'read')
+        {
+            $views = $app->loadClass('dao')->select('views')->from(TABLE_BOOK)->where('id')->eq($id)->fetch()->views;
         }
 
         $views = is_numeric($views) ? $views : '0';

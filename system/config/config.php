@@ -68,6 +68,7 @@ $config->ignoreExecInfoPages[] = 'message.reply';
 $config->replaceViewsPages = array();
 $config->replaceViewsPages[] = 'article_view';
 $config->replaceViewsPages[] = 'blog_view';
+$config->replaceViewsPages[] = 'book_read';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
