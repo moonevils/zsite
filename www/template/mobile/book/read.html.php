@@ -22,7 +22,7 @@
           <div class='caption text-muted'>
             <small><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></small> &nbsp;&nbsp;
             <small><i class='icon-user icon-large'></i> <?php echo $article->author; ?></small> &nbsp;&nbsp;
-            <small><i class='icon-eye-open'></i> <?php echo $article->views; ?></small>
+            <small><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder; ?></small>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ js::set('fullScreen', 0);
       <div class='caption text-muted'>
         <small><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></small> &nbsp;&nbsp;
         <small><i class='icon-user icon-large'></i> <?php echo $article->author; ?></small> &nbsp;&nbsp;
-        <small><i class='icon-eye-open'></i> <?php echo $article->views; ?></small>
+        <small><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder; ?></small>
       </div>
     </div>
   </div>
