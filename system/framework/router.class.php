@@ -302,7 +302,15 @@ class router extends baseRouter
                 {
                     $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
                     $cache   = str_replace($this->config->siteNavHolder, $siteNav, $cache);
+
                     if($this->config->site->execInfo == 'show') $cache = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $cache);
+                    
+                    if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsPages))
+                    {
+                        $views = commonModel::getViewsInfo($moduleName, $methodName);
+                        $cache = str_replace($this->config->viewsPlaceholder, $views, $cache);
+                    }
+                    
                     die($cache);
                 }
             }
@@ -437,6 +445,8 @@ class router extends baseRouter
         {
             $this->clientLang = $this->config->default->lang;
         }
+        
+        if(strpos($this->config->enabledLangs, $this->clientLang) === false) $this->clientLang = $this->config->defaultLang; 
 
         setcookie($langCookieVar, $this->clientLang, $this->config->cookieLife, $this->config->cookiePath);
         if(!isset($_COOKIE[$langCookieVar])) $_COOKIE[$langCookieVar] = $this->clientLang;

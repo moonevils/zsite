@@ -41,7 +41,7 @@ js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id)
                 if(isset($sina->widget)) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
             }
             ?>
-            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
+            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder);?>'><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder; ?></span>
           </dd>
         </dl>
         <?php if($article->summary):?>

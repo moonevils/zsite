@@ -50,8 +50,9 @@ $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
 $config->devicePrefix['mhtml'] = 'm.';
 
-$config->execPlaceholder = 'EXEC_PLACEHOLDER';
-$config->siteNavHolder   = 'SITENAV_PLACEHOLDER';
+$config->execPlaceholder  = 'EXEC_PLACEHOLDER';
+$config->siteNavHolder    = 'SITENAV_PLACEHOLDER';
+$config->viewsPlaceholder = 'VIEWS_PLACEHOLDER';
 
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
@@ -62,6 +63,11 @@ $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><t
 $config->ignoreExecInfoPages = array();
 $config->ignoreExecInfoPages[] = 'wechat.response';
 $config->ignoreExecInfoPages[] = 'message.reply';
+
+/* The methods should replace the views information*/
+$config->replaceViewsPages = array();
+$config->replaceViewsPages[] = 'article_view';
+$config->replaceViewsPages[] = 'blog_view';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
