@@ -582,10 +582,12 @@ EOT;
         if($this->app->user->admin == 'super') return true; 
 
         /* Then check the user is a moderator or not. */
-        $user = ",{$this->app->user->account},";
-        $board = $this->loadModel('tree')->getByID($boardID);
+        $user       = ",{$this->app->user->account},";
+        $board      = $this->loadModel('tree')->getByID($boardID);
         $moderators = ',' . str_replace(' ', '', $board->moderators) . ',';
-        $users = $moderators . str_replace(' ', '', $users) . ',';
+
+        $users = ($board->readonly) ? $moderators : $moderators . str_replace(' ', '', $users) . ',';
+        
         if(strpos($users, $user) !== false) return true;
 
         return false;
@@ -676,5 +678,20 @@ EOT;
         }
 
         return $board;
+    }
+    
+    /**
+     * Judge a user can post a reply to a thread or not 
+     *
+     * @param  string $threadID
+     * @access public
+     * @return bool
+     */
+    public function canReply($threadID)
+    {
+        $thread = $this->getByID($threadID);
+        $board  = $this->loadModel('tree')->getById($thread->board);
+
+        return $this->loadModel('forum')->canPost($board);
     }
 }
