@@ -206,6 +206,7 @@ class userModel extends model
     public function create()
     {
         $this->checkPassword();
+        $viewType = $this->app->getViewType();
 
         $user = fixer::input('post')
             ->setForce('join', date('Y-m-d H:i:s'))
@@ -230,6 +231,16 @@ class userModel extends model
             ->check('email', 'unique')
             ->exec();
 
+        if(dao::isError())
+        {
+            if($viewType == 'json') die(dao::getError());
+            return false;
+        }
+
+        if($viewType == 'json') die('success');
+
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('register', '', '', 'REGISTER', $user->account);
+
         if(RUN_MODE == 'admin')
         {
             foreach($this->post->groups as $group)
@@ -241,20 +252,7 @@ class userModel extends model
             }
         }
 
-        if(commonModel::isAvailable('score'))
-        {
-            $viewType = $this->app->getViewType();
-            if(!dao::isError())
-            {
-                $this->loadModel('score')->earn('register', '', '', 'REGISTER', $user->account);
-
-                if($viewType == 'json') die('success');
-            }
-            else
-            {
-                if($viewType == 'json' and dao::isError()) die(js::error(dao::getError()));
-            }
-        }
+        return true;
     }
 
     /**
@@ -651,7 +649,6 @@ class userModel extends model
     {
         $checkAccount  = $this->post->account == $this->session->user->account;
         $checkPassword = $this->compareHashPassword($this->post->password, $this->session->user);
-
         return ($checkAccount and $checkPassword);
     }
 
