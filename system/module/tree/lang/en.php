@@ -85,3 +85,5 @@ $lang->wechatMenu->delete     = "Detele";
 $lang->wechatMenu->commit     = "Sync";
 
 $lang->wechatMenu->setResponse = 'Response Settings';
+
+$lang->wechatMenu->responseTip = 'Tip:Every menu should set the response';
