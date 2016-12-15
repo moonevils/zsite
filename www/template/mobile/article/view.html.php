@@ -27,7 +27,7 @@ js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id)
     <div class='caption text-muted'>
       <small><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></small> &nbsp;&nbsp;
       <small><i class='icon-user icon-large'></i> <?php echo $article->author; ?></small> &nbsp;&nbsp;
-      <small><i class='icon-eye-open'></i> <?php echo $article->views; ?></small> &nbsp;&nbsp;
+      <small><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder; ?></small> &nbsp;&nbsp;
       <?php if($article->source != 'original' and $article->copyURL != ''):?>
       <small><?php echo $lang->article->sourceList[$article->source] . $lang->colon;?><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></small>
       <?php else: ?>

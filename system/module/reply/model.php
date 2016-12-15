@@ -376,4 +376,16 @@ class replyModel extends model
 
         return $replies->count;
     }
+
+    /**
+     * Judge the use can edit the reply or not
+     *
+     * @param  object $reply
+     * @access public
+     * @return bool
+     */
+    public function canEdit($reply)
+    {
+        return $this->loadModel('thread')->canReply($reply->thread); 
+    }
 }
