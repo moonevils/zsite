@@ -97,22 +97,17 @@ class admin extends control
 		if($_POST)
 		{
 			$response = $this->admin->registerByAPI();
+
 			if($response == 'success') 
 			{
                 $bindResult = $this->admin->bindByAPI();
                 if($bindResult->result == 'success')
                 {
-                    $this->loadModel('setting')->setItem('system.common.community.account', $bindResult->account);
-                    $this->loadModel('setting')->setItem('system.common.community.private', $bindResult->private);
-                }
-                else
-                {
-                    
+                    $this->admin->setCommunity($bindResult->data->account, $bindResult->data->private);
                 }
                 $this->send(array('result' => 'success', 'message' => $this->lang->admin->register->success, 'locate' => inlink('register')));
 			}
-
-            $this->send(array('result' => 'fail', 'message' => $response->message));
+            $this->send(array('result' => 'fail', 'message' => json_decode($response)));
 		}
 
         $this->view->title    = $this->lang->admin->register->caption;
