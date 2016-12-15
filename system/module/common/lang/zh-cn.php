@@ -45,6 +45,7 @@ $lang->customCssError = "不能生成样式文件，如果您是网站管理员�
 
 /* Global lang items. */
 $lang->home             = '首页';
+$lang->siteHome         = '网站首页';
 $lang->welcome          = '欢迎您，<strong>%s</strong>！';
 $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs          = '今天是%s，';

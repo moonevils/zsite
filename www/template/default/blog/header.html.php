@@ -185,7 +185,7 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
       </ul>
       <?php if(!isset($this->config->site->type) or $this->config->site->type != 'blog'):?>
       <ul class="nav navbar-nav navbar-right">
-        <li><?php echo html::a(helper::createLink('index'), '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
+        <li><?php echo html::a(helper::createLink('index'), '<i class="icon-home icon-large"></i> ' . $lang->siteHome);?></li>
       </ul>
       <?php endif;?>
     </div>
