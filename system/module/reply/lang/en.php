@@ -23,3 +23,9 @@ $lang->reply->stool     = '板凳';
 
 $lang->reply->edit       = 'Edit';
 $lang->reply->deleteFile = 'Delete File';
+
+$lang->reply->noReply = array();
+$lang->reply->noReply['readonly'] = 'Can not reply in readonly board';
+
+$lang->reply->noEdit = array();
+$lang->reply->noEdit['readonly']  = 'Can not edit in readonly board';
