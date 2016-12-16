@@ -98,8 +98,8 @@ class router extends baseRouter
         $dotPos   = strrpos($pathInfo, '.');
         $viewType = substr($pathInfo, $dotPos + 1);
         if($viewType == 'mhtml') $device = 'mobile';
+        
         $this->clientDevice = $device;
-        $this->cookie->set('device', $this->clientDevice);
         $this->cookie->set('device', $this->clientDevice);
     }
 
