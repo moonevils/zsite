@@ -315,3 +315,14 @@ function saveInfoToFile($file, $info)
     file_put_contents($file, $time . "\n");
     file_put_contents($file, $info . "\n", FILE_APPEND);
 }
+
+function http_build_url($data)
+{
+    $url  = isset( $data['scheme'])  ? "{$data['scheme']}://" : '';
+    $url .= !empty($data['host'])    ? $data['host'] : '';
+    $url .= !empty($data['port'])    ? ":{$data['port']}" : '';
+    $url .= $data['path'];
+    $url .= empty($data['query'])    ? '' : "?{$data['query']}";
+    $url .= empty($data['fragment']) ? '' : "#{$data['fragment']}";
+    return $url;
+}
