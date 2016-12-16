@@ -109,7 +109,7 @@ class product extends control
      * @access public
      * @return void
      */
-    public function admin($categoryID = 0, $orderBy = '`order` desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($categoryID = 0, $orderBy = 'order_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         /* Set the session. */
         $this->session->set('productList', $this->app->getURI(true));
