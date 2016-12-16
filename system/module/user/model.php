@@ -233,7 +233,7 @@ class userModel extends model
 
         if(dao::isError())
         {
-            if($viewType == 'json') die(dao::getError());
+            if($viewType == 'json') die(json_encode(dao::getError()));
             return false;
         }
 
