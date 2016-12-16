@@ -106,4 +106,37 @@ class adminModel extends model
         if($this->config->community->account and $this->config->community->private) return $this->config->community;
         return false;
 	}
+
+    public function getByApi($api)
+    {
+        $api = $this->processApi($api);
+        return file_get_contents($this->config->admin->apiRoot . $api);
+    }
+
+    public function processApi($api)
+    {
+        $config = $this->getRegisterInfo();
+        if(empty($config)) return false;
+        $pathInfo = parse_url($api);
+
+        if(!isset($pathInfo['query']))
+        {
+           $params = array();
+        }
+        else
+        {
+            parse_str($pathInfo['query'], $params);
+        }
+        
+        if(!isset($params['site'])) $params['site'] = $this->server->http_host;
+        if(!isset($params['time'])) $params['time'] = time();
+
+        if(isset($params['u'])) unset($params['u']);
+        $key = md5(http_build_query($params) . md5($config->private));
+        $params['u'] = $config->account;
+        $params['k'] = $key;
+        $pathInfo['query'] = http_build_query($params);
+        $api = http_build_url($pathInfo);
+        return $api;
+    }
 }
