@@ -28,8 +28,10 @@ js::set('lang', $lang->js);
         <div id='treeMenuBox'><?php echo $treeMenu;?></div>
         <?php if($isWechatMenu):?>
         <div class='panel-body'>
-          <?php commonModel::printLink('wechat', 'commitMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->commit, "class='btn btn-primary jsoner'");?>
-          <?php commonModel::printLink('wechat', 'deleteMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->delete, "class='btn btn-danger jsoner'");?>
+          <?php commonModel::printLink('wechat', 'commitMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->commit, "class='btn btn-primary jsoner w-100px'");?>
+          <?php commonModel::printLink('wechat', 'deleteMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->delete, "class='btn btn-danger jsoner w-100px'");?>
+          <p></p>
+          <p><?php echo $lang->wechatMenu->responseTip;?></p>
         </div>
         <?php endif;?>
       </div>
