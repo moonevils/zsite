@@ -95,7 +95,7 @@ class stat extends control
     public function search($mode = '', $begin = '', $end = '')
     {
         if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
-        $type = 'search';
+        $type  = 'search';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;

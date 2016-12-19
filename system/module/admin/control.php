@@ -84,4 +84,68 @@ class admin extends control
         $this->app->user = $this->session->user;
         die(js::locate('back'));
     }
+
+    /**
+     * Register chanzhi.
+     * 
+	 * @access public
+	 * @return void
+	 */
+	public function register()
+	{
+		$registerInfo = $this->admin->getRegisterInfo();
+		if($_POST)
+		{
+			$response = $this->admin->registerByAPI();
+
+			if($response == 'success') 
+			{
+                $bindResult = $this->admin->bindByAPI();
+                if($bindResult->result == 'success')
+                {
+                    $this->admin->setCommunity($bindResult->data->account, $bindResult->data->private);
+                }
+                $this->send(array('result' => 'success', 'message' => $this->lang->admin->register->success, 'locate' => inlink('register')));
+			}
+            $this->send(array('result' => 'fail', 'message' => json_decode($response)));
+		}
+
+        $this->view->title    = $this->lang->admin->register->caption;
+		$this->view->register = $registerInfo;
+		$this->display();
+	}
+
+	/**
+	 * Bind zentao.
+	 * 
+	 * @access public
+	 * @return void
+	 */
+	public function bind()
+	{
+        if($_POST)
+        {
+            $response = $this->admin->bindByAPI();
+            if($response->result == 'success')
+            {
+                $this->admin->setCommunity($response->data->account, $response->data->private);
+                $this->send(array('result' => 'success', 'message' => $this->lang->admin->register->success, 'locate' => inlink('register')));
+            }
+
+            $this->send(array('result' => 'fail', 'message' => $response->message));
+        }
+        exit;
+    }
+    
+    /**
+     * Unbind chanzhi account.
+     * 
+     * @access public
+     * @return void
+     */
+    public function unbind()
+    {
+        $this->admin->setCommunity('', '');
+        $this->locate(inlink('register'));
+    }
 }

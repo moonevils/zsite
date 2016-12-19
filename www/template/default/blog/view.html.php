@@ -53,7 +53,7 @@ $common->printPositionBar($category, $article, '', $root);
             }
             ?>
             <?php if($article->source):?><span class='label label-success'><?php echo $lang->article->sourceList[$article->source]; ?></span><?php endif;?>
-            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
+            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder);?>'><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder; ?></span>
           </dd>
         </dl>
         <?php if($article->summary):?>

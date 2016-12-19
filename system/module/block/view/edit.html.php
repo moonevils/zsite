@@ -44,7 +44,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
     <div class='panel-body'>
       <div class='table-row'>
         <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
-        <div class='tab-content table-cell col-xs-6'>
+        <div class='tab-content table-cell col-xs-7'>
         <?php else: ?>
         <div class='tab-content table-cell col-xs-12'>
         <?php endif; ?>
