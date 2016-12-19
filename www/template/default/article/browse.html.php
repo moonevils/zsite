@@ -6,6 +6,7 @@ js::set('categoryID', $category->id);
 js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->id));
 ?>
 <?php echo $common->printPositionBar($category);?>
+<div class='hidden'><?php echo isset($articleList) ? $articleList : '';?></div>
 <div class='row blocks' data-region='article_browse-topBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='article_browse'>
   <?php if(!empty($layouts['article_browse']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>

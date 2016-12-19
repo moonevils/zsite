@@ -38,8 +38,16 @@ class site extends control
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            /* Switch to desktop device if mobile template closed. */
-            if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');
+            /* Edit config->framework->detectDevice if mobile template closed. */
+            if(isset($setting->mobileTemplate))
+            {
+                $configDetectDevice               = new stdclass;
+                $configDetectDevice->detectDevice = $setting->mobileTemplate == 'open' ? true : false;
+
+                $result = $this->site->setSystem($configDetectDevice);
+                if(isset($result['result']) and $result['result'] == 'fail') $this->send($result);
+                $this->session->set('device', 'desktop');
+            }
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
 

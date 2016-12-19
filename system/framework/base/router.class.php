@@ -366,7 +366,7 @@ class baseRouter
 
         if($this->config->framework->multiSite)     $this->setSiteCode() && $this->loadExtraConfig();
         if($this->config->framework->autoConnectDB) $this->connectDB();
-        if($this->config->framework->detectDevice)  $this->setClientDevice();
+        $this->clientDevice = $this->config->framework->detectDevice ? $this->setClientDevice() : 'desktop';
         if($this->config->framework->multiLanguage) $this->setClientLang() && $this->loadLang('common');
         if($this->config->framework->multiTheme)    $this->setClientTheme();
     }
