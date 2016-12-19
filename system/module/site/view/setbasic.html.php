@@ -34,7 +34,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->mobileTemplate;?></th> 
-          <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close', "class='checkbox'");?></td><td></td>
+          <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, $this->config->framework->detectDevice ? 'open' : 'close', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->name;?></th> 

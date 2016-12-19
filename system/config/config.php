@@ -50,9 +50,10 @@ $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
 $config->devicePrefix['mhtml'] = 'm.';
 
-$config->execPlaceholder  = 'EXEC_PLACEHOLDER';
-$config->siteNavHolder    = 'SITENAV_PLACEHOLDER';
-$config->viewsPlaceholder = 'VIEWS_PLACEHOLDER';
+$config->execPlaceholder      = 'EXEC_PLACEHOLDER';
+$config->siteNavHolder        = 'SITENAV_PLACEHOLDER';
+$config->viewsPlaceholder     = 'VIEWS_PLACEHOLDER';
+$config->viewsListPlaceHolder = 'VIEWSLIST_PLACEHOLDER';
 
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
@@ -69,6 +70,12 @@ $config->replaceViewsPages = array();
 $config->replaceViewsPages[] = 'article_view';
 $config->replaceViewsPages[] = 'blog_view';
 $config->replaceViewsPages[] = 'book_read';
+
+/* The methods should replcae the list of views number */
+$config->replaceViewsListPages = array();
+$config->replaceViewsListPages[] = 'article_browse';
+$config->replaceViewsListPages[] = 'blog_index';
+$config->replaceViewsListPages[] = 'product_browse';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.

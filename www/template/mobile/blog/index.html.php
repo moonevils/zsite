@@ -12,6 +12,11 @@
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'header');?>
 <?php if(!empty($category->id)) js::set('pageLayout', $this->block->getLayoutScope('blog_index', $category->id));?>
+<?php if(isset($articleList)):?>
+<script><?php echo "place" . md5(time()). "='" . $config->viewsListPlaceHolder . $articleList . $config->viewsListPlaceHolder . "';";?></script>
+<?php else:?>
+<script><?php echo "place" . md5(time()) . "='" . $config->viewsListPlaceHolder . '' . $config->viewsListPlaceHolder . "';";?></script>
+<?php endif;?>
 <div class='block-region region-top blocks' data-region='blog_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_index', 'top');?></div>
 <hr class='space'>
 <div class='panel panel-section'>
@@ -30,7 +35,7 @@
         <div class='table-cell'>
           <div class='card-content text-muted small'>
             <?php echo $stick->summary;?>
-            <div><span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $stick->views;?></span>
+            <div><span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $stick->id;?></span>
                 <?php if(commonModel::isAvailable('message') and $stick->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $stick->comments;?></span> &nbsp;<?php endif;?>
                 &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($stick->addedDate, 0, 10);?></span></div>
           </div>
@@ -59,7 +64,7 @@
         <div class='table-cell'>
           <div class='card-content text-muted small'>
             <?php echo $article->summary;?>
-            <div><span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span>
+            <div><span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $article->id;?></span>
               <?php if(commonModel::isAvailable('message') and $article->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
               &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span></div>
           </div>

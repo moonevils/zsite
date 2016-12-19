@@ -75,7 +75,7 @@ class siteModel extends model
     }
 
     /**
-     * Set the site language and request type options.
+     * Set the site language, request type and detectDevice options.
      *
      * @access public
      * @return void
@@ -89,6 +89,7 @@ class siteModel extends model
         $rawContent = file_get_contents($myFile);
 
         if(isset($config->requestType)) $rawContent = preg_replace('/.*config\->requestType.*\n/', '', $rawContent);
+        if(isset($config->detectDevice)) $rawContent = preg_replace('/.*config\->framework\->detectDevice.*\n/', '', $rawContent);
         if(isset($config->enabledLangs))
         {
             $rawContent = preg_replace('/.*config\->cn2tw.*\n/', '', $rawContent);
@@ -136,6 +137,11 @@ class siteModel extends model
             if(isset($config->requestType) and strpos('GET,PATH_INFO,PATH_INFO2', $config->requestType) !== false)
             {
                 $content .= '$config->requestType = \'' . $config->requestType. "';\n";
+            }
+            if(isset($config->detectDevice) and is_bool($config->detectDevice))
+            {
+                $config->detectDevice = $config->detectDevice ? 'true' : 'false';
+                $content .= '$config->framework->detectDevice = ' . $config->detectDevice . ";\n";
             }
 
             file_put_contents($myFile, $rawContent . "\n" . $content);
