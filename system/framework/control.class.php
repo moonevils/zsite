@@ -126,7 +126,6 @@ class control extends baseControl
             }
         }
 
-
         if(!empty($viewExtPath))
         {
             $commonExtViewFile = $viewExtPath['common'] . $this->devicePrefix . $methodName . ".{$viewType}.php";
