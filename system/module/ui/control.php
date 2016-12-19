@@ -710,4 +710,71 @@ class ui extends control
 
         $this->display();
     }
+
+    /**
+     * Admin effect page.
+     * 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function effect($pageID = 1)
+    {
+        $community = $this->loadModel('admin')->getRegisterInfo();
+        if(!$community)
+        {
+            $this->view->reason = $this->lang->effect->bindCommunity;
+            $this->view->locate = helper::createLink('admin', 'register');
+            $this->view->target = $this->lang->admin->register->common;
+            $this->display('admin', 'redirect');
+            die();
+        }
+
+        $this->lang->menuGroups->ui = 'effect';
+        $this->view->title = $this->lang->effect->admin;
+        $result = $this->ui->getEffectListByApi($pageID);
+        if($result->result == 'success')
+        {
+            $this->app->loadClass('pager', $static = true);
+            $pager  = new pager($result->pager->recTotal, $result->pager->recPerPage, $result->pager->pageID);
+            $this->view->pager = $pager;
+            $this->view->categories = $result->categories;
+            $this->view->effects = $result->effects;
+        }
+        else
+        {
+            $this->view->effects = null;
+        }
+
+        $this->view->blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('effectID')->ne('0')->fetchAll('effectID');
+
+        $this->display();
+    }
+
+    /**
+     * Import one effect.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function importEffect($id)
+    {
+        if($_POST)
+        {
+            $result = $this->ui->importEffect($id);
+            $this->send($result);
+        }
+
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $blockList = $this->loadModel('block')->getList($template);
+        $blocks = array('0' => '');
+        foreach($blockList as $block) $blocks[$block->id] = $block->title;
+
+        $this->view->id     = $id;
+        $this->view->effect = $this->ui->getEffectByApi($id);
+        $this->view->title  = $this->lang->effect->import;
+        $this->view->blocks = $blocks;
+        $this->display();
+    }
 }
