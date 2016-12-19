@@ -45,6 +45,7 @@ $lang->customCssError = "Fail to load the self-defined css file, if you are the 
 
 /* Global lang items. */
 $lang->home             = 'Home';
+$lang->siteHome         = 'Homepage';
 $lang->welcome          = 'Welcome to Changer, <strong>%s</strong>!';
 $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs          = 'Today is %s，';

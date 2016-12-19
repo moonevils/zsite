@@ -30,7 +30,7 @@ $config->framework->purifier       = true;  // 是否对数据做purifier处理�
 $config->framework->logDays        = 14;    // 日志文件保存的天数。              The days to save log files.
 
 /* The basic settings. */
-$config->version     = '5.5';           // The version number, don't change.
+$config->version     = '5.6';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -50,8 +50,9 @@ $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
 $config->devicePrefix['mhtml'] = 'm.';
 
-$config->execPlaceholder = 'EXEC_PLACEHOLDER';
-$config->siteNavHolder   = 'SITENAV_PLACEHOLDER';
+$config->execPlaceholder  = 'EXEC_PLACEHOLDER';
+$config->siteNavHolder    = 'SITENAV_PLACEHOLDER';
+$config->viewsPlaceholder = 'VIEWS_PLACEHOLDER';
 
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
@@ -62,6 +63,12 @@ $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><t
 $config->ignoreExecInfoPages = array();
 $config->ignoreExecInfoPages[] = 'wechat.response';
 $config->ignoreExecInfoPages[] = 'message.reply';
+
+/* The methods should replace the views information*/
+$config->replaceViewsPages = array();
+$config->replaceViewsPages[] = 'article_view';
+$config->replaceViewsPages[] = 'blog_view';
+$config->replaceViewsPages[] = 'book_read';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.

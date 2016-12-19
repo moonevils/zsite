@@ -496,7 +496,7 @@ class orderModel extends model
         {
             $goodsInfo  = "<div class='text-left'>";
             $goodsInfo .= '<span>' . html::a(commonModel::createFrontLink('product', 'view', "id={$product->productID}"), $product->productName, "target='_blank'") . '</span>';
-            $goodsInfo .= $this->config->product->currencySymbol . $product->price . ' &times; ' . $product->count . '</div>';
+            $goodsInfo .= ' &times; ' . $product->count . '</div>';
         }
         return $goodsInfo;
     }
@@ -512,7 +512,7 @@ class orderModel extends model
     {
         if(empty($order->products)) return '';
         $goods = current($order->products);
-        $goods->productName = '￥' . $order->amount . ' ' . $goods->productName;
+        $goods->productName = $goods->productName;
         return $goods->productName;
     }
 

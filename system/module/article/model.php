@@ -377,6 +377,7 @@ class articleModel extends model
             ->stripTags('content,link,videoLink', $this->config->allowedTags->admin)
             ->removeIF($type == 'video', 'videoLink, width, height, autoplay')
             ->get();
+        if(!isset($article->categories)) $article->categories = '';
 
         if($type == 'submittion')
         {
@@ -552,6 +553,7 @@ class articleModel extends model
         $article->keywords = seo::unify($article->keywords, ',');
         if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-');
         $article->content  = $this->rtrimContent($article->content);
+        if(!isset($article->categories)) $article->categories = '';
 
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
@@ -752,6 +754,7 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmittion', 'article', $articleID, '', $article->addedBy);
         
+        $this->loadModel('file')->updateObjectType($articleID, 'submittion', $type);
         $this->loadModel('search')->save($article->type, $article);
         $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmittion));
 

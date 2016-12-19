@@ -1,5 +1,12 @@
 <?php 
-include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
+if(isset($isFromBlog) and $isFromBlog)
+{
+    include TPL_ROOT . 'blog/header.html.php';
+}
+else
+{
+    include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
+}
 ?>
 <?php echo $common->printPositionBar('search', null, $words);?>
 <div class='row'>

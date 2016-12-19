@@ -98,8 +98,8 @@ class router extends baseRouter
         $dotPos   = strrpos($pathInfo, '.');
         $viewType = substr($pathInfo, $dotPos + 1);
         if($viewType == 'mhtml') $device = 'mobile';
+        
         $this->clientDevice = $device;
-        $this->cookie->set('device', $this->clientDevice);
         $this->cookie->set('device', $this->clientDevice);
     }
 
@@ -302,7 +302,15 @@ class router extends baseRouter
                 {
                     $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
                     $cache   = str_replace($this->config->siteNavHolder, $siteNav, $cache);
+
                     if($this->config->site->execInfo == 'show') $cache = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $cache);
+                    
+                    if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsPages))
+                    {
+                        $views = commonModel::getViewsInfo($moduleName, $methodName);
+                        $cache = str_replace($this->config->viewsPlaceholder, $views, $cache);
+                    }
+                    
                     die($cache);
                 }
             }
@@ -437,6 +445,9 @@ class router extends baseRouter
         {
             $this->clientLang = $this->config->default->lang;
         }
+        
+        if(strpos($this->config->enabledLangs, $this->clientLang) === false) $this->clientLang = $this->config->defaultLang; 
+        if(RUN_MODE == 'admin' and isset($this->config->cn2tw) and $this->config->cn2tw and $this->clientLang == 'zh-tw') $this->clientLang = 'zh-cn';
 
         setcookie($langCookieVar, $this->clientLang, $this->config->cookieLife, $this->config->cookiePath);
         if(!isset($_COOKIE[$langCookieVar])) $_COOKIE[$langCookieVar] = $this->clientLang;

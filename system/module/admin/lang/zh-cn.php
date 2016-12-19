@@ -26,3 +26,20 @@ $lang->admin->reply          = '您今天有 %s 条回复待审核';
 $lang->admin->comment        = '您今天有 %s 条评论待审核';
 $lang->admin->threadReply    = '您今天有 %s 篇回帖';
 $lang->admin->submittion     = '您今天有 %s 篇投稿待审核';
+
+$lang->admin->registerInfo = "站点已经绑定到蝉知账号%s，%s";
+$lang->admin->rebind       = "重新绑定";
+
+$lang->js->confirmRebind = "确认要重新绑定蝉知账号？";
+
+$lang->admin->register = new stdclass();
+$lang->admin->register->caption    = '蝉知社区登记';
+$lang->admin->register->lblAccount = '请设置您的用户名，英文字母和数字的组合，三位以上。';
+$lang->admin->register->lblPasswd  = '请设置您的密码。数字和字母的组合，六位以上。';
+$lang->admin->register->submit     = '登记';
+$lang->admin->register->success    = "登记账户成功";
+
+$lang->admin->bind = new stdclass();
+$lang->admin->bind->caption = '已有蝉知官网账号';
+$lang->admin->bind->submit  = '绑定账号';
+$lang->admin->bind->success = "关联账户成功";
