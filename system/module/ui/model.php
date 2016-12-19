@@ -151,6 +151,18 @@ class uiModel extends model
         if(!$this->config->framework->multiSite) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
     }
 
+    public function getEffectListByApi($pageID)
+    {
+        $result = $this->loadModel('admin')->getByApi("effect-apigetList-{$pageID}.json");
+        return json_decode($result);
+    }
+
+    public function getEffectByApi($id)
+    {
+        $result = $this->loadModel('admin')->getByApi("effect-apigetbyid-{$id}.json");
+        return json_decode($result);
+    }
+
     /**
      * check a theme is imported.
      * 
@@ -1461,4 +1473,68 @@ if(!function_exists('getJS'))
         $tables = array(TABLE_CATEGORY, TABLE_PRODUCT, TABLE_FILE, TABLE_ARTICLE, TABLE_BLOCK, TABLE_LAYOUT, TABLE_RELATION, TABLE_SLIDE);
         foreach($tables as $tableName) $this->dao->exec("truncate table `{$tableName}`");
     }
+
+    /**
+     * Import effect.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return array
+     */
+    public function importEffect($id)
+    {
+        $content = $this->loadModel('admin')->getByApi("effect-apigetpackage-{$id}.json");
+        $package = $this->app->getTmpRoot() . 'effect' . DS . 'effect_' . $id . '.zip';
+        file_put_contents($package, $content);
+        $result = $this->extractEffect($package, $id);
+        if($result['result'] != 'success') return $result;
+        $block = new stdclass();
+        $block->title    = $this->post->block;
+        $block->type     = 'htmlcode';
+        $block->template = $this->config->template->{$this->app->clientDevice}->name;
+        $block->effectID = $id;
+        $block->content  = file_get_contents($this->app->getWwwRoot() . 'data' . DS . 'effect' . DS . $id . DS . 'data.html'); 
+        $block->content  = helper::decodeXSS($block->content);
+        $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        return array('result' => 'success', 'message' => $this->lang->effect->importSuccess, 'locate' => $this->server->http_referer);
+    }
+
+    /**
+     * Extract effect package.
+     * 
+     * @param  string    $package 
+     * @param  int       $effectID 
+     * @access public
+     * @return array
+     */
+    public function extractEffect($package, $effectID)
+    {   
+        $this->app->loadClass('pclzip', true);
+        $zfile = $this->app->loadClass('zfile');
+
+        $zip        = new pclzip($package);
+        $files      = $zip->listContent();
+        $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'effect' . DS . $effectID;
+        $removePath = $files[0]['filename'];
+        $soureList = glob($sourcePath . '*');
+        if(!empty($soureList))
+        {   
+            foreach($soureList as $source)
+            {   
+                if(is_dir($source)) $zfile->removeDir($source);
+                if(is_file($source)) $zfile->removeFile($source);
+            }   
+        }   
+
+        $return = array();
+        $return['result'] = 'success';
+        if($zip->extract(PCLZIP_OPT_PATH, $sourcePath, PCLZIP_OPT_REMOVE_PATH, $removePath) == 0)
+        {   
+            $return['result']  = 'fail';
+            $return['message'] = $zip->errorInfo(true);
+        }   
+
+        return $return;
+    }   
 }
