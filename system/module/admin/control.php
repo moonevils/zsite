@@ -110,6 +110,7 @@ class admin extends control
             $this->send(array('result' => 'fail', 'message' => json_decode($response)));
 		}
 
+        $this->lang->menuGroups->admin = 'community';
         $this->view->title    = $this->lang->admin->register->caption;
 		$this->view->register = $registerInfo;
 		$this->display();
