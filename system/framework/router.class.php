@@ -312,6 +312,17 @@ class router extends baseRouter
                         $cache = str_replace($this->config->viewsPlaceholder, $views, $cache);
                     }
                     
+                    if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsListPages))
+                    {
+                        $beginPos    = strpos($cache, $this->config->viewsListPlaceHolder) + strlen($this->config->viewsListPlaceHolder);
+                        $length      = strrpos($cache, $this->config->viewsListPlaceHolder) - $beginPos; 
+                        $viewsIDList = explode(',', trim(substr($cache, $beginPos, $length), ',')); 
+                        $viewsList   = commonModel::getViewsList($moduleName, $methodName, $viewsIDList);
+                        foreach($viewsList as $viewID => $views)
+                        {
+                            $cache = str_replace($this->config->viewsPlaceholder . $viewID, $views, $cache);
+                        }
+                    }
                     die($cache);
                 }
             }

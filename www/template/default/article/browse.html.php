@@ -6,7 +6,11 @@ js::set('categoryID', $category->id);
 js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->id));
 ?>
 <?php echo $common->printPositionBar($category);?>
-<div class='hidden'><?php echo isset($articleList) ? $articleList : '';?></div>
+<?php if(isset($articleList)):?>
+<script><?php echo "place" . md5(time()). "='" . $config->viewsListPlaceHolder . $articleList . $config->viewsListPlaceHolder . "';";?></script>
+<?php else:?>
+<script><?php echo "place" . md5(time()) . "='" . $config->viewsListPlaceHolder . '' . $config->viewsListPlaceHolder . "';";?></script>
+<?php endif;?>
 <div class='row blocks' data-region='article_browse-topBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='article_browse'>
   <?php if(!empty($layouts['article_browse']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
@@ -23,7 +27,7 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
         <div class='item' id="article<?php echo $article->id?>" data-ve='article'>
           <div class='item-heading'>
             <div class="text-muted pull-right">
-              <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp;
+              <span title="<?php echo $config->viewsPlaceholder . $article->id;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $article->id;?></span> &nbsp;
               <?php if(commonModel::isAvailable('message') and $article->comments):?><span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
               <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>
             </div>
