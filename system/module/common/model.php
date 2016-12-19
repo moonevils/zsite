@@ -1435,7 +1435,13 @@ class commonModel extends model
     {
         global $app;
         if(empty($viewsIDList)) return array();
+
+        $viewsList = array();
         if($moduleName == 'article' and $methodName == 'browse')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+        }
+        if($moduleName == 'blog' and $methodName == 'index')
         {
             $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
         }

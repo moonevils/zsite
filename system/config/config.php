@@ -74,6 +74,7 @@ $config->replaceViewsPages[] = 'book_read';
 /* The methods should replcae the list of views number */
 $config->replaceViewsListPages = array();
 $config->replaceViewsListPages[] = 'article_browse';
+$config->replaceViewsListPages[] = 'blog_index';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
