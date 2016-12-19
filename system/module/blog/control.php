@@ -35,6 +35,11 @@ class blog extends control
 
         $sticks = $this->article->getSticks($families, 'blog');
         $sticks = $this->file->processImages($sticks, 'blog');
+        $articleList = '';
+        foreach($articles as $article) $articleList .= $article->id . ',';
+        foreach($sticks as $stick) $articleList .= $stick->id . ',';
+        $this->view->articleList = $articleList;
+        
         $this->view->title      = $this->lang->blog->common;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
