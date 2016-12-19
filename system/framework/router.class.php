@@ -101,6 +101,7 @@ class router extends baseRouter
         
         $this->clientDevice = $device;
         $this->cookie->set('device', $this->clientDevice);
+        return $this->clientDevice;
     }
 
     /**
