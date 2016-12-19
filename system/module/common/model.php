@@ -1445,6 +1445,10 @@ class commonModel extends model
         {
             $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
         }
+        if($moduleName == 'product' and $methodName == 'browse')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_PRODUCT)->where('id')->in($viewsIDList)->fetchPairs();
+        }
         return $viewsList;
     }
 }

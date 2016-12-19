@@ -18,6 +18,11 @@ js::set('categoryID', $category->id);
 js::set('pageLayout', $this->block->getLayoutScope('product_browse', $category->id));
 ?>
 <?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
+<?php if(isset($productList)):?>
+<script><?php echo "place" . md5(time()). "='" . $config->viewsListPlaceHolder . $productList. $config->viewsListPlaceHolder . "';";?></script>
+<?php else:?>
+<script><?php echo "place" . md5(time()) . "='" . $config->viewsListPlaceHolder . '' . $config->viewsListPlaceHolder . "';";?></script>
+<?php endif;?>
 <div class='row blocks' data-region='product_browse-topBanner'><?php $this->block->printRegion($layouts, 'product_browse', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='product_browse'>
   <?php if(!empty($layouts['product_browse']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>

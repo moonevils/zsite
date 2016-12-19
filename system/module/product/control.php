@@ -74,6 +74,10 @@ class product extends control
         $desc     = strip_tags($category->desc) . ' ';
         $this->session->set('productCategory', $category->id);
 
+        $productList = '';
+        foreach($products as $product) $productList .= $product->id . ',';
+        $this->view->productList = $productList;
+
         $this->view->title      = $title;
         $this->view->keywords   = $keywords;
         $this->view->desc       = $desc;
