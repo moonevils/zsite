@@ -3,6 +3,8 @@ $clientLang  = $this->app->getClientLang();
 $enableLangs = explode(',', $config->enabledLangs);
 $enableLangs = array_flip($enableLangs);
 $langs       = $config->langs;
+
+if(isset($config->cn2tw) and $config->cn2tw) unset($langs['zh-tw']);
 foreach($langs as $key => $value)
 {
     if(!isset($enableLangs[$key])) unset($langs[$key]);

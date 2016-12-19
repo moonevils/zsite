@@ -1421,4 +1421,34 @@ class commonModel extends model
         $views = is_numeric($views) ? $views : '0';
         return $views;
     }
+    /*
+     * Get the views list according to the id list from databaes;
+     *
+     * @access public
+     * @param  string $moduleName
+     * @param  string $methodName
+     * @param  array  $viewsIDList
+     * @static
+     * @return array 
+     */
+    public static function getViewsList($moduleName, $methodName, $viewsIDList)
+    {
+        global $app;
+        if(empty($viewsIDList)) return array();
+
+        $viewsList = array();
+        if($moduleName == 'article' and $methodName == 'browse')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+        }
+        if($moduleName == 'blog' and $methodName == 'index')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+        }
+        if($moduleName == 'product' and $methodName == 'browse')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_PRODUCT)->where('id')->in($viewsIDList)->fetchPairs();
+        }
+        return $viewsList;
+    }
 }
