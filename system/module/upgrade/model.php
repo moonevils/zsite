@@ -157,6 +157,7 @@ class upgradeModel extends model
             case '5_4_1':
                 $this->execSQL($this->getUpgradeFile('5.4.1'));
             case '5_5':
+                $this->fixDetectDeviceConfig();
                 $this->execSQL($this->getUpgradeFile('5.5'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -221,6 +222,7 @@ class upgradeModel extends model
             case '5_3_3'    ; 
             case '5_3_4'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.4'));
             case '5_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.4.1'));
+            case '5_5'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.5'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -2063,5 +2065,17 @@ class upgradeModel extends model
             ->andWhere('section')->eq('site')
             ->andWhere('`key`')->in('lang,requestType,defaultLang,cn2tw')
             ->exec();
+    }
+
+    /*
+     * Fix detect device config
+     *
+     * @param  void
+     * @access public
+     * @return void
+     */
+    public function fixDetectDeviceConfig()
+    {
+
     }
 }

@@ -75,6 +75,7 @@ $config->replaceViewsPages[] = 'book_read';
 $config->replaceViewsListPages = array();
 $config->replaceViewsListPages[] = 'article_browse';
 $config->replaceViewsListPages[] = 'blog_index';
+$config->replaceViewsListPages[] = 'product_browse';
 
 /* Views and themes. */
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
