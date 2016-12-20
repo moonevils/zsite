@@ -67,6 +67,7 @@ $lang->ui->importThemeSuccess     = '导入主题成功';
 $lang->ui->packagePathUnwriteable = '上传目录：%s 不可写';
 $lang->ui->selectSourceImage      = '从素材库选择';
 $lang->ui->rebuildThumbs          = '重新生成缩略图';
+$lang->ui->packagePathTip         = '请将主题包的zip文件上传至 %s 目录，进行安装。';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
