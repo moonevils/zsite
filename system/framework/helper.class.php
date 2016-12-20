@@ -187,6 +187,18 @@ class helper extends baseHelper
         $replaces = array('a p p e n d c h i l d (', 'c r e a t e E l e  m e n t (', 'x s s . r e', 'o n f o c u s', 'o n c l i c k', 'i n n e r H T M L', 'r e p l a c e C h i l d (', 'h t m l (', 'a p p e n d (', 'a p p e n d T o (', 'p r e p e n d (', 'p r e p e n d T o (', 'a f t e r (', 'b e f o r e (', 'r e p l a c e W i t h (');
         return str_ireplace($replaces, $evils, $content);
     }
+
+    /**
+     * Process traffic.
+     * 
+     * @param  float    $traffic 
+     * @access public
+     * @return float
+     */
+    public static function formatKB($traffic)
+    {
+        return round($traffic / (1024 * 1024), 2) > 1 ? round($traffic / (1024 * 1024), 2) . 'G' : (round($traffic / 1024, 2) > 1 ? round($traffic / 1024, 2) . 'M' : round($traffic, 2) . 'KB');
+    }
 }
 
 /**
