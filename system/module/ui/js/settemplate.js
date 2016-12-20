@@ -8,7 +8,14 @@ $(document).ready(function()
         });
     }
 
-    var storeContentLoaded = false;
+    var loadPackageContent = function(url)
+    {
+        $('#packageSection').load(url);
+    }
+
+
+    var storeContentLoaded   = false;
+    var packageContentLoaded = false;
     var $loader = $('#storeSection > .load-icon').clone();
     $('#typeNav > li > a[href="#storeSection"]').on('shown.zui.tab', function(e)
     {
@@ -18,6 +25,16 @@ $(document).ready(function()
             storeContentLoaded = true;
         }
     });
+
+    $('#typeNav > li > a[href="#packageSection"]').on('shown.zui.tab', function(e)
+    {
+        if(!packageContentLoaded)
+        {
+            loadPackageContent(createLink('ui', 'browsetheme'));
+            packageContentLoaded = true;
+        }
+    });
+
 
     $('#storeSection').on('click', '#industryBox a', function(e)
     {
