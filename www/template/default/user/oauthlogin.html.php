@@ -16,7 +16,7 @@ if(!empty($providerConfig)):
         $params = "provider=$providerCode&fingerprint=fingerprintval";
         if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
 
-        echo html::a(inlink('oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"));  
+        echo html::a(inlink('oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"), "class='btn-oauth'");  
     }
     if(zget($yangcongConfig, 'appID', 0)) 
     {
