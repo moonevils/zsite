@@ -606,6 +606,19 @@ class ui extends control
     }
 
     /**
+     * Browse theme page.
+     * 
+     * @access public
+     * @return void
+     */
+    public function browseTheme()
+    {
+        $this->view->themes = $this->ui->getThemesAvailable();
+        $this->view->packagePath = $this->app->getTmpRoot() . 'package';
+        $this->display();
+    }
+
+    /**
      * Get encrypt css and js.
      * 
      * @param  int    $type 
