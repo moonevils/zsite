@@ -11,7 +11,6 @@
  */
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-
 <hr class='space'>
 <div class='panel panel-body panel-section'>
   <div class='alert bg-primary-pale'><?php printf($lang->user->control->welcome, $this->app->user->realname);?></div>
