@@ -7,22 +7,27 @@
 .user-control-nav > li > a > [class*='icon-'] {color: #666;}
 .user-control-nav > li.active > a > [class*='icon-'] {color: #3280fc;}
 </style>
+<?php $this->loadModel('user')->fixMenus();?>
 <ul class='nav user-control-nav clearfix'>
 <?php if($thisMethodName !== 'control'): ?>
   <li><?php echo html::a($this->createLink('user', 'control'), "<i class='icon-th-large'></i> " . $lang->user->control->common, "class='btn default'"); ?></li>
 <?php endif; ?>
-<?php
-ksort($lang->user->control->menus);
-foreach($lang->user->control->menus as $menu)
-{
-    $class = '';
-    list($label, $module, $method) = explode('|', $menu);
-
-    if(in_array($method, array('thread', 'reply')) && !commonModel::isAvailable('forum')) continue;
-
-    if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= 'active';
-
-    echo '<li class="' . $class . '">' . html::a($this->createLink($module, $method), $label, "class='btn default'") . '</li>';
-}
-?>
+<?php foreach($this->config->user->navGroups as $group => $items):?>
+    <?php $navs = explode(',', $items);?>
+    <?php foreach($navs as $nav)
+    {
+        $class = '';
+        $menu = zget($lang->user->control->menus, $nav, '');
+        if(empty($menu)) continue;
+        list($label, $module, $method) = explode('|', $menu);
+        $module = strtolower($module);
+        $method = strtolower($method);
+        $menuInfo = explode('|', $menu);
+        $params   = zget($menuInfo, 3 ,''); 
+        if(!commonModel::isAvailable($module)) continue;
+        if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= 'active';
+        echo '<li class="' . $class . '">' . html::a($this->createLink($module, $method, $params), $label, "class='btn default'") . '</li>';
+    }
+    ?>
+<?php endforeach;?>
 </ul>

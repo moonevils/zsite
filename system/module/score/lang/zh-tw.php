@@ -52,6 +52,7 @@ $lang->score->methods['award']       = '獎勵積分';
 $lang->score->methods['punish']      = '扣除積分';
 
 $lang->score->methods['approveSubmittion'] = '投稿成功';
+$lang->score->methods['approvesubmittion'] = '投稿成功';
 
 $lang->score->methods['buyscore']  = '購買積分';
 $lang->score->methods['statement'] = '積分結算';
