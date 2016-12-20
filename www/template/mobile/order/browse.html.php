@@ -23,7 +23,11 @@
       <div class='card'>
         <div class='card-heading bg-gray-pale'>
           #<?php echo $order->id;?> &nbsp; &nbsp;
-          <span><?php echo $lang->order->amount;?>: <strong class='text-danger'><?php echo $order->amount;?></strong></span> 
+          <span><?php echo $lang->order->amount;?>: <strong class='text-danger'>
+            <?php 
+              echo isset($order->balance) ? $order->amount + $order->balance : $order->amount;
+              echo isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '';
+            ?></strong></span> 
           <div class='pull-right'>
             <?php
             switch ($order->status)
