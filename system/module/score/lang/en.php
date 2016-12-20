@@ -52,6 +52,7 @@ $lang->score->methods['award']       = 'Reward';
 $lang->score->methods['punish']      = 'Deduct';
 
 $lang->score->methods['approveSubmittion'] = 'Contributed';
+$lang->score->methods['approvesubmittion'] = 'Contributed';
 
 $lang->score->methods['buyscore']  = 'Purchase';
 $lang->score->methods['statement'] = 'Point Statement';
