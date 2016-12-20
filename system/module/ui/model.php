@@ -1441,6 +1441,28 @@ if(!function_exists('getJS'))
     }
 
     /**
+     * Get themes available.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getThemesAvailable()
+    {
+        $packages = glob($this->app->getTmpRoot() . 'package' . DS . '*.zip');
+        $themes   = array();
+
+        foreach($packages as $package)
+        {
+            $theme = new stdclass();
+            $theme->name = basename($package, '.zip');
+            $theme->size = filesize($package);
+            $theme->time = date('Y-m-d', fileatime($package));
+            $themes[] = $theme;
+        }
+        return $themes;
+    }
+
+    /**
      * Write view file.
      * 
      * @param  string    $template 
