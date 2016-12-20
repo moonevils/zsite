@@ -151,6 +151,13 @@ class uiModel extends model
         if(!$this->config->framework->multiSite) return $this->config->webRoot . 'data/css/' . "{$template}_{$theme}_{$lang}.css?v={$this->config->template->customVersion}";
     }
 
+    /**
+     * Get effect list by api.
+     * 
+     * @param  int    $pageID 
+     * @access public
+     * @return object
+     */
     public function getEffectListByApi($pageID)
     {
         $result = $this->loadModel('admin')->getByApi("effect-apigetList-{$pageID}.json");
