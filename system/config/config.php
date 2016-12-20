@@ -19,7 +19,6 @@ $config->framework->autoConnectDB  = true;  // 是否自动连接数据库。   
 $config->framework->autoLang       = true;  // 是否自动连接数据库。              Whether auto connect database or not.
 $config->framework->multiLanguage  = true; // 是否启用多语言功能。              Whether enable multi lanuage or not.
 $config->framework->multiTheme     = true; // 是否启用多风格功能。              Whether enable multi theme or not.
-$config->framework->detectDevice   = true; // 是否启用设备检测功能。            Whether enable device detect or not.
 $config->framework->multiSite      = true; // 是否启用多站点模式。              Whether enable multi site mode or not.
 $config->framework->extensionLevel = 2;     // 0=>无扩展,1=>公共扩展,2=>站点扩展 0=>no extension, 1=> common extension, 2=> every site has it's extension.
 $config->framework->jsWithPrefix   = true;  // js::set()输出的时候是否增加前缀。 When us js::set(), add prefix or not.
@@ -28,6 +27,10 @@ $config->framework->filterTrojan   = true;  // 是否过滤木马攻击代码。
 $config->framework->filterXSS      = true;  // 是否过滤XSS攻击代码。             Whether strip xss code or not.
 $config->framework->purifier       = true;  // 是否对数据做purifier处理。        Whether purifier data or not.
 $config->framework->logDays        = 14;    // 日志文件保存的天数。              The days to save log files.
+
+$config->framework->detectDevice['zh-cn'] = true; // 在zh-cn语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
+$config->framework->detectDevice['zh-tw'] = true; // 在zh-tw语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
+$config->framework->detectDevice['en']    = true; // 在en语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
 
 /* The basic settings. */
 $config->version     = '5.6';           // The version number, don't change.

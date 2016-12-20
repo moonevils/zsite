@@ -2076,6 +2076,20 @@ class upgradeModel extends model
      */
     public function fixDetectDeviceConfig()
     {
-
+        $mobileTemplateConfigList = $this->dao->setAutoLang(false)->select('value, lang')->from(TABLE_CONFIG)
+            ->where('`key`')->eq('mobileTemplate')
+            ->fetchAll();
+        if(!empty($mobileTemplateConfigList))
+        {
+            $myFile = $this->app->getConfigRoot() . 'my.php';
+            file_put_contents($myFile, "\n", FILE_APPEND);
+            foreach($mobileTemplateConfigList as $mobileTemplateConfig)
+            {
+                $fixedConfig = '$config->framework->detectDevice[' . "'{$mobileTemplateConfig->lang}'] = ";
+                $fixedConfig .= $mobileTemplateConfig->value == 'open' ? 'true' : 'false';
+                $fixedConfig .= ";\n";
+                file_put_contents($myFile, $fixedConfig, FILE_APPEND);
+            }
+        }
     }
 }
