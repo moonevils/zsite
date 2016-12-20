@@ -89,7 +89,7 @@ class siteModel extends model
         $rawContent = file_get_contents($myFile);
 
         if(isset($config->requestType)) $rawContent = preg_replace('/.*config\->requestType.*\n/', '', $rawContent);
-        if(isset($config->detectDevice)) $rawContent = preg_replace('/.*config\->framework\->detectDevice.*\n/', '', $rawContent);
+        if(isset($config->detectDevice)) $rawContent = preg_replace("/.*config\->framework\->detectDevice\['" . $this->app->clientLang . "'\].*\n/", '', $rawContent);
         if(isset($config->enabledLangs))
         {
             $rawContent = preg_replace('/.*config\->cn2tw.*\n/', '', $rawContent);
@@ -141,7 +141,7 @@ class siteModel extends model
             if(isset($config->detectDevice) and is_bool($config->detectDevice))
             {
                 $config->detectDevice = $config->detectDevice ? 'true' : 'false';
-                $content .= '$config->framework->detectDevice = ' . $config->detectDevice . ";\n";
+                $content .= '$config->framework->detectDevice[' . "'{$this->app->clientLang}'" .  '] = ' . $config->detectDevice . ";\n";
             }
 
             file_put_contents($myFile, $rawContent . "\n" . $content);
