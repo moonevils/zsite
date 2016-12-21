@@ -82,7 +82,7 @@ class admin extends control
         $user->rights = $this->loadModel('user')->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
-        die(js::locate('back'));
+        $this->locate($this->server->http_referer);
     }
 
     /**
