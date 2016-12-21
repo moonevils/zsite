@@ -60,7 +60,7 @@
           <th class='w-80px'><?php commonModel::printOrderLink('payStatus', $orderBy, $vars, $lang->order->payStatus);?></th>
           <th><?php echo $lang->order->note;?></th>
           <th class='w-100px'><?php echo $lang->order->last;?></th>
-          <th class='w-200px'><?php echo $lang->actions;?></th>
+          <th class='w-240px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -76,7 +76,7 @@
           <td><?php echo zget($lang->order->payStatusList, $order->payStatus, '');?></td>
           <td title='<?php echo $order->note;?>' class='text-left'><?php echo $order->note;?></td>
           <td><?php echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i');?></td>
-          <td class='text-left'><?php $this->order->printActions($order);?></td>
+          <td class='text-center'><?php $this->order->printActions($order);?></td>
         </tr>
         <?php endforeach;?>
       </tbody>
