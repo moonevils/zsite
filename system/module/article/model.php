@@ -579,7 +579,7 @@ class articleModel extends model
 
         $article = $this->getByID($articleID);
         if(empty($article)) return false;
-        if($type = 'submittion') return true;
+        if($type == 'submittion') return true;
         return $this->loadModel('search')->save($type, $article);
     }
         
