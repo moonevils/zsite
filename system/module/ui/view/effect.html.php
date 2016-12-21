@@ -30,7 +30,8 @@
       <?php foreach($effects as $record):?>
       <?php $effect = $record->effect;?>
       <?php if(!is_object($effect)) continue;?>
-      <?php $viewLink = $this->config->admin->apiRoot . "effect-preview-{$effect->id}-{$record->id}";?> 
+      <?php $viewLink        = $this->config->admin->apiRoot . "effect-view-{$effect->id}-{$record->id}";?> 
+      <?php $previewLink = $this->config->admin->apiRoot . 'user-login-'. helper::safe64Encode("/effect-preview-{$effect->id}-{$record->id}");?> 
       <tr class='text-center'>
         <td class='text-left'>
           <?php echo html::a($viewLink, $effect->name);?>
@@ -40,7 +41,7 @@
         <td><?php echo $effect->createdTime;?></td>
         <td>
           <?php 
-          echo html::a($viewLink, $lang->preview, "target='_blank'");
+          echo html::a($previewLink, $lang->preview, "target='_blank'");
           echo html::a(inlink('importEffect', "id={$record->id}"), $lang->effect->import, "data-toggle='modal'");
           ?>
         </td> 
