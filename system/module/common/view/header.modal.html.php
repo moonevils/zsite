@@ -5,6 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
+<?php js::set('lang', $lang->js);?>
 <div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 600 : $modalWidth;?>px;">
   <div class="modal-content">
     <div class="modal-header">
