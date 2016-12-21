@@ -1,17 +1,9 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading' style='height:39px;'>
-    <ul id='typeNav' class='nav nav-tabs pull-left'>
-      <li data-type='internal' <?php echo $type == 'valid' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('admin', "type=valid"), $lang->file->fileList);?>
-      </li>
-      <li data-type='internal' <?php echo $type == 'invalid' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('admin', "type=invalid"), $lang->file->invalidFile);?>
-      </li>
-    </ul> 
-    <div class='panel-actions' style='height:32px;'>
-      <?php if($type == 'invalid') commonModel::printLink('file', 'deleteAllInvalid', '', $lang->file->clearAllInvalid, "class='btn btn-primary deleter'");?>
-    </div>
+    <strong>
+      <?php echo '<i class="icon icon-list-alt"></i> ' . $lang->file->fileList;?>
+    </strong>
   </div>
   <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
     <?php if($type == 'valid'):?>
@@ -31,7 +23,7 @@
       <?php foreach($files as $file):?>
         <tr class='text-center text-middle'>
           <td><?php echo $file->id;?></td>
-          <td class='text-left'>
+          <td class='text-center'>
             <?php 
               if($file->isImage and $file->existStatus == 'yes')
               {

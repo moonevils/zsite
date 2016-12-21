@@ -67,6 +67,7 @@ $lang->ui->importThemeSuccess     = 'Imported!';
 $lang->ui->packagePathUnwriteable = 'Upload directory %s is not writable.';
 $lang->ui->selectSourceImage      = 'from Library';
 $lang->ui->rebuildThumbs          = 'Rebuild Thumbnail';
+$lang->ui->packagePathTip         = 'Please upload the zip file to %s, then install';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> Desktop";
@@ -414,3 +415,28 @@ unset($this->lang->ui->files->mobile->block['usermenu']);
 unset($this->lang->ui->files->mobile->product['browse.card']);
 unset($this->lang->ui->files->mobile->product['browse.list']);
 unset($this->lang->ui->files->mobile->forum['reply/reply']);
+
+$lang->effect = new stdclass();
+
+$lang->effect->category    = 'category';
+$lang->effect->name        = 'name';
+$lang->effect->account     = 'designer';
+$lang->effect->desc        = 'description';
+$lang->effect->score       = 'score';
+$lang->effect->content     = 'code';
+$lang->effect->image       = 'effect image';
+$lang->effect->package     = 'effect package';
+$lang->effect->status      = 'status';
+$lang->effect->views       = 'views';
+$lang->effect->downloads   = 'download';
+$lang->effect->createdTime = 'created time';
+
+$lang->effect->admin         = 'manage effect';
+$lang->effect->import        = 'import';
+$lang->effect->blockName     = 'block name';
+$lang->effect->newBlock      = 'import new block';
+$lang->effect->obtan         = 'get effect';
+$lang->effect->imported      = 'Import finished';
+$lang->effect->importSuccess = 'Import successfully';
+$lang->effect->bindCommunity = 'Please bind the account of chanzhi before get effect';
+$lang->effect->noRsults      = "You have no effect, please login the platform of chanzhi <a href='http://www.chanzhi.org/effect.html' target='_blank'>get effect</a>。";
