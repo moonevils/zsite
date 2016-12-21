@@ -678,6 +678,8 @@ function a($var)
  */
 function isLocalIP()
 {
+    global $config;
+    if(isset($config->islocalIP)) return $config->isLocalIP;
     $serverIP = $_SERVER['SERVER_ADDR'];
     if($serverIP == '127.0.0.1') return true;
     if(strpos($serverIP, '10.70') !== false) return false;
