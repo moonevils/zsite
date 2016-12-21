@@ -1,5 +1,12 @@
 <?php 
-include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
+if(isset($config->site->type) and $config->site->type == 'blog')
+{
+    include TPL_ROOT . 'blog/header.html.php';
+}
+else
+{
+    include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
+}
 ?>
 <div class='panel panel-section'>
   <div class='panel-heading'>
@@ -39,4 +46,13 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 <script>
 $(function(){$('#searchToggle').dropdown('toggle');});
 </script>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+<?php 
+if(isset($config->site->type) and $config->site->type == 'blog')
+{
+    include TPL_ROOT . 'blog/footer.html.php';
+}
+else
+{
+    include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');
+}
+?>
