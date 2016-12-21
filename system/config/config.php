@@ -85,7 +85,7 @@ $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
 
 $config->product = new stdclass();
 
-$config->enabledLangs = 'zh-cn';
+$config->enabledLangs = 'zh-cn,zh-tw,en';
 $config->defaultLang  = 'zh-cn';
 
 $config->site = new stdclass();

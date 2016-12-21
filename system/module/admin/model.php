@@ -113,6 +113,13 @@ class adminModel extends model
         return file_get_contents($this->config->admin->apiRoot . $api);
     }
 
+    /**
+     * Process api url. 
+     * 
+     * @param  string    $api 
+     * @access public
+     * @return void
+     */
     public function processApi($api)
     {
         $config = $this->getRegisterInfo();
@@ -138,5 +145,24 @@ class adminModel extends model
         $pathInfo['query'] = http_build_query($params);
         $api = http_build_url($pathInfo);
         return $api;
+    }
+
+    /**
+     * Switch lang of admin.
+     * 
+     * @param  int    $lang 
+     * @access public
+     * @return void
+     */
+    public function switchLang($lang)
+    {
+        $langCookieVar = RUN_MODE . 'Lang';
+        setcookie($langCookieVar, $lang, $this->config->cookieLife, $this->config->cookiePath);
+
+        $user = $this->app->user;
+        $user->rights = $this->loadModel('user')->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+        return true;
     }
 }
