@@ -562,7 +562,7 @@ class orderModel extends model
                 /* Cancel link. */
                 $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
                 $class    = $isMobile ? "  btn btn-link " : "";
-                echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}' data-toggle='modal'" );
+                echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}'" );
             }
 
             /* Delete order link. */
