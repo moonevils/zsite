@@ -613,8 +613,9 @@ class ui extends control
      */
     public function browseTheme()
     {
-        $this->view->themes = $this->ui->getThemesAvailable();
-        $this->view->packagePath = $this->app->getTmpRoot() . 'package';
+        $this->view->themes          = $this->ui->getThemesAvailable();
+        $this->view->installedThemes = $this->ui->getInstalledThemes();
+        $this->view->packagePath     = $this->app->getTmpRoot() . 'package';
         $this->display();
     }
 

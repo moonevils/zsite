@@ -49,6 +49,7 @@ $lang->ui->industry        = "行业";
 $lang->ui->offcial         = "官方";
 $lang->ui->reset           = "重置为默认";
 $lang->ui->themePackage    = "主题包";
+$lang->ui->installed       = "已安装";
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
