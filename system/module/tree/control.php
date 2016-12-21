@@ -44,6 +44,12 @@ class tree extends control
             }
         }
 
+        if(isset($this->lang->tree->adminLinks->$type))
+        {
+            list($title, $module, $method, $vars) = explode('|', $this->lang->tree->adminLinks->$type);
+            $this->view->fromAdminPage = html::a(helper::createLink($module, $method, $vars), "<i class='icon icon-reply'> </i>'" . $title);
+        }
+
         $this->loadModel('block');
         $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
         $userFunc  = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
