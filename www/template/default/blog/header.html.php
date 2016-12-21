@@ -123,7 +123,7 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
 ?>
 </head>
 <body>
-<div class='page-container page-blog'>
+<div class='m-blog page-container page-blog'>
   <header id='header' class='clearfix'>
     <div id='headNav'><div class='wrapper'><?php echo commonModel::printTopBar();?></div></div>
     <div id='headTitle'>
