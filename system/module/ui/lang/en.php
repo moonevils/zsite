@@ -431,11 +431,11 @@ $lang->effect->views       = 'views';
 $lang->effect->downloads   = 'download';
 $lang->effect->createdTime = 'created time';
 
-$lang->effect->admin         = 'manage effect';
-$lang->effect->import        = 'import';
+$lang->effect->admin         = 'Manage effect';
+$lang->effect->import        = 'Import';
 $lang->effect->blockName     = 'block name';
 $lang->effect->newBlock      = 'import new block';
-$lang->effect->obtan         = 'get effect';
+$lang->effect->obtan         = 'Get effect';
 $lang->effect->imported      = 'Import finished';
 $lang->effect->importSuccess = 'Import successfully';
 $lang->effect->bindCommunity = 'Please bind the account of chanzhi before get effect';
