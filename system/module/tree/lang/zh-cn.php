@@ -77,13 +77,17 @@ $lang->express->name   = '快递名称';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
-$lang->wechatMenu->common     = '公众号菜单';
-$lang->wechatMenu->name       = '标题';
-$lang->wechatMenu->parent     = '上级菜单';
-$lang->wechatMenu->children   = "子菜单";
-$lang->wechatMenu->delete     = "清空微信菜单";
-$lang->wechatMenu->commit     = "同步到微信";
-
+$lang->wechatMenu->common      = '公众号菜单';
+$lang->wechatMenu->name        = '标题';
+$lang->wechatMenu->parent      = '上级菜单';
+$lang->wechatMenu->children    = "子菜单";
+$lang->wechatMenu->delete      = "清空微信菜单";
+$lang->wechatMenu->commit      = "同步到微信";
 $lang->wechatMenu->setResponse = '响应设置';
-
 $lang->wechatMenu->responseTip = '提示：每个菜单都要设置响应。';
+
+$lang->tree->adminLinks = new stdclass();
+$lang->tree->adminLinks->article = '返回文章列表|article|admin|type=article';
+$lang->tree->adminLinks->blog    = '返回博客列表|article|admin|type=blog';
+$lang->tree->adminLinks->forum   = '返回主题列表|forum|admin|';
+$lang->tree->adminLinks->product = '返回产品列表|product|admin|';
