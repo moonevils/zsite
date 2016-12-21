@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of user module of chanzhiEPS.
@@ -1157,7 +1158,7 @@ class user extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->title = $this->lang->setSecurity;
+        $this->view->title = $this->lang->user->question;
         $this->display();
     }
 
