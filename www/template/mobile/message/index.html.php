@@ -44,6 +44,7 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
     </div>
     <?php else: ?>
     <div class='panel-body'>
+      <hr class='space'>
       <div class='alert text-center bg-primary-pale text-info'>
         <p><i class='icon-comments-alt icon-s3'></i></p><strong>0 <?php echo $lang->message->common?></strong>
       </div>
