@@ -1,5 +1,12 @@
 <?php 
-include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
+if(isset($config->site->type) and $config->site->type == 'blog')
+{
+    include TPL_ROOT . 'blog/header.html.php';
+}
+else
+{
+    include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
+}
 ?>
 <div class='panel panel-section'>
   <div class='panel-heading'>
@@ -22,7 +29,7 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $object->image->primary->title ? $object->image->primary->title : $object->title;
-          echo html::a($url, html::image($object->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+          echo html::image($object->image->primary->smallURL, "title='{$title}' class='thumbnail'" );
         ?>
         </div>
         <?php endif;?>
@@ -39,4 +46,13 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 <script>
 $(function(){$('#searchToggle').dropdown('toggle');});
 </script>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+<?php 
+if(isset($config->site->type) and $config->site->type == 'blog')
+{
+    include TPL_ROOT . 'blog/footer.html.php';
+}
+else
+{
+    include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');
+}
+?>

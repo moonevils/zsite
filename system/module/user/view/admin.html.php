@@ -72,7 +72,7 @@ js::set('admin', $this->get->admin);
           <th class='w-110px'><?php echo $lang->user->last;?></th>
           <th class='w-100px'><?php echo $lang->user->ip;?></th>
           <th class='w-60px'><?php echo $lang->user->status;?></th>
-          <th class='w-180px'><?php echo $lang->actions;?></th>
+          <th class='w-190px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -102,7 +102,7 @@ js::set('admin', $this->get->admin);
         <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
         <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
         </td>
-        <td class='operate text-left nofixed'>
+        <td class='operate text-center nofixed'>
           <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
           <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
           <?php if(commonModel::isAvailable('score')):?>

@@ -36,7 +36,7 @@
           <div class='card-content text-muted small'>
             <?php echo $stick->summary;?>
             <div><span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $stick->id;?></span>
-                <?php if(commonModel::isAvailable('message') and $stick->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $stick->comments;?></span> &nbsp;<?php endif;?>
+                <?php if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $stick->comments;?></span> &nbsp;<?php endif;?>
                 &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($stick->addedDate, 0, 10);?></span></div>
           </div>
         </div>

@@ -42,7 +42,7 @@
         <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
-        <th style='width: 270px'><?php echo $lang->actions;?></th>
+        <th style='width: <?php echo ($this->app->clientLang == 'en') ? '320px' : '260px';?>'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -55,7 +55,7 @@
         <td><?php echo $product->addedDate;?></td>
         <td><?php echo isset($lang->product->statusList[$product->status]) ? $lang->product->statusList[$product->status] : '';?></td>
         <td><?php echo $product->views;?></td>
-        <td class='nofixed'>
+        <td class='nofixed text-center'>
           <?php
           $categories    = $product->categories;
           $categoryAlias = !empty($categories) ? current($categories)->alias : '';

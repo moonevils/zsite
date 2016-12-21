@@ -81,8 +81,8 @@ $lang->wechatMenu->common      = '公众号菜单';
 $lang->wechatMenu->name        = '标题';
 $lang->wechatMenu->parent      = '上级菜单';
 $lang->wechatMenu->children    = "子菜单";
-$lang->wechatMenu->delete      = "清空微信菜单";
-$lang->wechatMenu->commit      = "同步到微信";
+$lang->wechatMenu->delete      = "清空菜单";
+$lang->wechatMenu->commit      = "同步菜单";
 $lang->wechatMenu->setResponse = '响应设置';
 $lang->wechatMenu->responseTip = '提示：每个菜单都要设置响应。';
 
