@@ -525,7 +525,14 @@ class site extends control
             $this->view->okFile = $okFile;
             if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
 
+            if(!in_array($this->post->defaultLang, $this->post->enabledLangs)) $this->send(array('result' => 'fail', 'message' => sprintf(strip_tags($this->lang->error->in), $this->lang->site->defaultLang, join(',' , $this->post->enabledLangs))));
+
             $result = $this->site->setSystem();
+            if($result['result'] == 'success')
+            {
+                if(!in_array($this->app->clientLang, $this->post->enabledLangs)) $this->loadModel('admin')->switchLang($this->post->defaultLang);
+            }
+
             $this->send($result);
         }
 
