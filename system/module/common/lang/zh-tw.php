@@ -42,9 +42,11 @@ $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.or
 $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查詢：<b>%s</b> 次<br>內存占用：<b>%s</b><br> PHP 執行時間：<b>%s</b> 秒</span></span>";
 $lang->customCssError = "不能生成樣式檔案，如果您是網站管理員，請到網站後台外觀管理重新設置樣式檔案";
+$lang->redirecting    = "正在跳轉到%s，<a href='%s'>立即跳轉</a>";
 
 /* Global lang items. */
 $lang->home             = '首頁';
+$lang->siteHome         = '網站首頁';
 $lang->welcome          = '歡迎您，<strong>%s</strong>！';
 $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs          = '今天是%s，';
@@ -162,11 +164,12 @@ $lang->groups->setting  = array('title' => '設置', 'link' => 'site|setbasic|',
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin    = '首頁|admin|index|';
-$lang->menu->article  = '文章|article|admin|type=article';
-$lang->menu->blog     = '博客|article|admin|type=blog';
-$lang->menu->book     = '手冊|book|admin|';
-$lang->menu->page     = '單頁|article|admin|type=page';
+$lang->menu->admin      = '首頁|admin|index|';
+$lang->menu->article    = '文章|article|admin|type=article';
+$lang->menu->blog       = '博客|article|admin|type=blog';
+$lang->menu->book       = '手冊|book|admin|';
+$lang->menu->page       = '單頁|article|admin|type=page';
+$lang->menu->attachment = '附件|file|admin|';
 
 $lang->menu->order        = '訂單|order|admin|';
 $lang->menu->product      = '產品|product|admin|';
@@ -192,6 +195,7 @@ $lang->menu->nav      = '導航|nav|admin|';
 $lang->menu->block    = '區塊|block|admin|';
 $lang->menu->slide    = '幻燈片|slide|admin|';
 $lang->menu->others   = "設置|ui|others|";
+$lang->menu->effect   = "特效|ui|effect|";
 $lang->menu->visual   = "可視化|visual|index|";
 $lang->menu->edit     = "編輯模板|ui|edittemplate|";
 
@@ -203,6 +207,7 @@ $lang->menu->interface = '介面|site|setoauth|';
 
 $lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主題|ui|themestore|';
+$lang->menu->community  = '社區|admin|register|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();

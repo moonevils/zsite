@@ -85,3 +85,5 @@ $lang->wechatMenu->delete     = "清空微信菜單";
 $lang->wechatMenu->commit     = "同步到微信";
 
 $lang->wechatMenu->setResponse = '響應設置';
+
+$lang->wechatMenu->responseTip = '提示：每個菜單都要設置響應。';
