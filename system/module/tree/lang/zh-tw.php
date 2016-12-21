@@ -81,8 +81,8 @@ $lang->wechatMenu->common     = '公眾號菜單';
 $lang->wechatMenu->name       = '標題';
 $lang->wechatMenu->parent     = '上級菜單';
 $lang->wechatMenu->children   = "子菜單";
-$lang->wechatMenu->delete     = "清空微信菜單";
-$lang->wechatMenu->commit     = "同步到微信";
+$lang->wechatMenu->delete     = "清空菜單";
+$lang->wechatMenu->commit     = "同步菜單";
 
 $lang->wechatMenu->setResponse = '響應設置';
 
