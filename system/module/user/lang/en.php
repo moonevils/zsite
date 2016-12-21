@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The user module english file of chanzhiEPS.
@@ -81,7 +82,7 @@ $lang->user->yangcongLogin   = 'Yangcong Login';
 $lang->user->bindAccount     = 'Account Binding';
 $lang->user->batchDelete     = 'Batch Delete';
 $lang->user->deleteHistory   = 'Delete account and history';
-$lang->user->question        = 'Security Questions';
+$lang->user->question        = 'Security Question';
 $lang->user->answer          = 'Answer';
 $lang->user->checkContact    = 'Check Contact';
 
