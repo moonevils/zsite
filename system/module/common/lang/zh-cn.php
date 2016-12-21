@@ -209,7 +209,6 @@ $lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主题|ui|themestore|';
 $lang->menu->community  = '社区|admin|register|';
 
-
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
 $lang->menuGroups->mail    = 'interface';

@@ -32,6 +32,8 @@ $lang->file->sourceURI     = '地址';
 $lang->file->deleteSource  = '刪除素材';
 $lang->file->editSource    = '編輯素材';
 $lang->file->selectImage   = '選擇素材';
+$lang->file->fileList      = '檔案列表';
+$lang->file->invalidFile   = '無效檔案';
 
 $lang->file->id        = '編號';
 $lang->file->title     = '名稱';
@@ -70,3 +72,7 @@ $lang->file->copySuccess      = "已複製到剪貼板";
 $lang->file->evilChar         = "包含非法字元";
 $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，請手動複製";
+
+$lang->file->updateInvalidFiles = '更新列表';
+$lang->file->clearAllInvalid    = '刪除全部';
+$lang->file->fileTip            = '提示：紅色代表資料庫中有檔案記錄，但是檔案實際已經被刪除';

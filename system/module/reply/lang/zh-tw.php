@@ -23,3 +23,10 @@ $lang->reply->stool     = '板凳';
 
 $lang->reply->edit       = '編輯回帖';
 $lang->reply->deleteFile = '刪除附件';
+
+$lang->reply->noReply = array();
+$lang->reply->noReply['readonly'] = '板塊狀態為只讀，禁止回帖';
+
+$lang->reply->noEdit = array();
+$lang->reply->noEdit['readonly']  = '板塊狀態為只讀，禁止編輯';
+
