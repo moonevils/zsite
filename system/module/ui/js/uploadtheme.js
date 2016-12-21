@@ -18,6 +18,9 @@ $(document).ready(function()
 
     $('[name=type]').change(function()
     {
-        if($(this).val() == 'full')  $(this).parent().append(" <span class='text-danger'>" + v.lang.fullImportTip + '</span>');
+        if($(this).val() == 'full') 
+        {
+            if($(this).parents('td').find('.text-danger').size() == 0) $(this).parent().append(" <span class='text-danger'>" + v.lang.fullImportTip + '</span>');
+        }
     })
 });
