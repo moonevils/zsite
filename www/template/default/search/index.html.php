@@ -1,5 +1,5 @@
 <?php 
-if(isset($isFromBlog) and $isFromBlog)
+if(isset($config->site->type) and $config->site->type == 'blog')
 {
     include TPL_ROOT . 'blog/header.html.php';
 }
@@ -45,4 +45,13 @@ else
     </div>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+<?php 
+if(isset($config->site->type) and $config->site->type == 'blog')
+{
+    include TPL_ROOT . 'blog/footer.html.php';
+}
+else
+{
+    include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');
+}
+?>
