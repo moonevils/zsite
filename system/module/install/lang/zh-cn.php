@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The zh-cn language file of install module of chanzhiEPS.
@@ -58,8 +59,8 @@ $lang->install->pdoMySQL     = 'PDO_MySQL扩展';
 $lang->install->pdoMySQLFail = '修改PHP配置文件，加载pdo_mysql扩展。';
 $lang->install->tmpRoot      = '临时文件目录';
 $lang->install->dataRoot     = '上传文件目录';
-$lang->install->mkdir        = '<p>需要创建目录%s。linux下面命令为：<br /> <code>mkdir -p %s</code></p>';
-$lang->install->chmod        = '需要修改目录 "%s" 的权限。linux下面命令为：<br /><code>chmod o=rwx -R %s</code>';
+$lang->install->mkdir        = '<p>需要创建目录%s。Linux下面命令为：<br /> <code>mkdir -p %s</code></p>';
+$lang->install->chmod        = '需要修改目录 "%s" 的权限。Linux下面命令为：<br /><code>chmod o=rwx -R %s</code>';
 
 $lang->install->settingDB      = '设置数据库';
 $lang->install->dbHost         = '数据库服务器';
