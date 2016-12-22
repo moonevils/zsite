@@ -116,6 +116,7 @@ $lang->resource->file->edit         = 'edit';
 $lang->resource->file->sort         = 'sort';
 $lang->resource->file->fileManager  = 'fileManager';
 $lang->resource->file->delete       = 'delete';
+$lang->resource->file->admin        = 'admin';
 
 /* Forum module. */
 $lang->resource->forum = new stdclass();
