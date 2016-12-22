@@ -24,9 +24,7 @@
       </ul>
     </div>
     <?php foreach($lang->moduelGroups as $group => $modules):?>
-    <div class='panel panel-group' <?php echo "id='group$group'"?>>
-      <div class='group-heading'>
-      </div>
+    <div class='panel-group' <?php echo "id='group$group'"?>>
       <table class='table table-bordered table-form'> 
         <?php $heading = false;?>
         <?php foreach($modules as $module):?>
@@ -38,8 +36,10 @@
           <?php $heading = true;?>
           <?php endif;?>
           <th class='text-right w-120px'>
-            <?php echo $this->lang->{$module}->common;?>
-            <input type="checkbox" class='checkModule' />
+            <label class='checkbox-inline pad-right'>
+              <?php echo $this->lang->{$module}->common;?>
+              <input type="checkbox" class='checkModule' />
+            </label>
           </th>
           <td id='<?php echo $module;?>' class='pv-10px'>
             <?php $i = 1;?>
@@ -53,10 +53,12 @@
             }
             ?>
             <div class='group-item'>
-              <input type='checkbox' name='actions[<?php echo $module;?>][]' value='<?php echo $action;?>' <?php if(isset($groupPrivs[$module][$action])) echo "checked";?> />
-              <span class='priv' id="<?php echo $module . '-' . $actionLabel;?>">
-              <?php echo isset($lang->$module->$actionLabel) ? $lang->$module->$actionLabel : $lang->$actionLabel;?>
-              </span>
+              <label class='checkbox-inline'>
+                <input type='checkbox' name='actions[<?php echo $module;?>][]' value='<?php echo $action;?>' <?php if(isset($groupPrivs[$module][$action])) echo "checked";?> />
+                <span class='priv' id="<?php echo $module . '-' . $actionLabel;?>">
+                <?php echo isset($lang->$module->$actionLabel) ? $lang->$module->$actionLabel : $lang->$actionLabel;?>
+                </span>
+              </label>
             </div>
             <?php $currentModule = $module;?>
             <?php endforeach;?>
