@@ -49,7 +49,6 @@ $lang->ui->industry        = "行业";
 $lang->ui->offcial         = "官方";
 $lang->ui->reset           = "重置为默认";
 $lang->ui->themePackage    = "主题包";
-$lang->ui->installed       = "已安装";
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
@@ -417,7 +416,7 @@ unset($this->lang->ui->files->mobile->product['browse.card']);
 unset($this->lang->ui->files->mobile->product['browse.list']);
 unset($this->lang->ui->files->mobile->forum['reply/reply']);
 
-$lang->effect = new stdclass();
+if(!isset($lang->effect)) $lang->effect = new stdclass();
 
 $lang->effect->category    = '分类';
 $lang->effect->name        = '名称';
