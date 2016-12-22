@@ -183,12 +183,26 @@ class seo
             {
                 if(preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = str_replace('c', '', $items[1]);
                 if(!preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = $items[1];
-                $params['type']       = $items[2];
-                $method = $methodAlias[$module]['browse'];
+                $params['type'] = $items[2];
+                $method         = $methodAlias[$module]['browse'];
             }
             return seo::convertURI($module, $method, $params, $pageID);
         }
+        else
+        {
+            if(preg_match('/^\w+-\d+$/', $items[1])) 
+            {
+               list($category, $params['effectID']) = explode('-', $items[1]);
+               return seo::convertURI($module, 'view', $params, $pageID);
+            }
 
+            if(preg_match('/^\w+$/', $items[1])) 
+            {
+               $params['categoryID'] = $items[1];
+               $params['mode'] = 'all';
+               return seo::convertURI($module, 'index', $params, $pageID);
+            }
+        }
 
         if($module == 'faq' and isset($items[1]))
         {
@@ -655,6 +669,27 @@ class uri
         $link = 'effect/c';
         $link .= is_numeric($categoryID) ? $categoryID : 0;
         if($mode) $link .= '/' . $mode;
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create effect view
+     *
+     * @params array    $params
+     * @params array    $alias  
+     * @params string   $viewType  
+     * return string
+     */
+    public static function createEffectView($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $link = 'effect/';
+        if(!empty($alias['category'])) $link .= $alias['category'] . '-';
+        $link .= array_shift($params);
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+
         return $config->webRoot . $link . '.' . $viewType;
     }
 
