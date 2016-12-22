@@ -24,9 +24,7 @@
       </ul>
     </div>
     <?php foreach($lang->moduelGroups as $group => $modules):?>
-    <div class='panel panel-group' <?php echo "id='group$group'"?>>
-      <div class='group-heading'>
-      </div>
+    <div class='panel-group' <?php echo "id='group$group'"?>>
       <table class='table table-bordered table-form'> 
         <?php $heading = false;?>
         <?php foreach($modules as $module):?>
