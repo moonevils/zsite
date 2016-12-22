@@ -7,6 +7,6 @@ form .nav > li {float:left}
 
 .main-panel .group-heading {background-color: #fff; padding: 8px 15px;}
 .main-panel .table-bordered {border-top: 1px solid #ddd; border-bottom: 1px solid #ddd}
-.main-panel .panel-footer {border-top: none}
+.main-panel .panel-footer {border-top: none;margin-top:-20px; padding-left:10px}
 .main-panel .panel-heading {border-bottom: none}
 .panel-group {border-left: 0px; border-right: 0px;}
