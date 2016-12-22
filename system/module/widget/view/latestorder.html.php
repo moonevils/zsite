@@ -4,7 +4,7 @@ $limit  = zget($widget->params, 'limit', '10');
 $this->loadModel('order');
 $mode = zget($this->config->order->statusFields, $status);
 $pager = new pager(0, $limit, 1);
-$orders = $this->order->getList($mode, $status, 'id desc', $pager);
+$orders = $this->order->getList($type = 'all', $mode, $status, 'id desc', $pager);
 ?>
 <table class='table table-data table-hover table-fixed'>
   <?php foreach($orders as $order):?>
