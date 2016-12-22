@@ -133,9 +133,9 @@ js::set('admin', $this->get->admin);
       <tfoot>
         <tr>
           <?php if(commonModel::isAvailable('score')):?>
-          <td colspan='13'>
+            <td colspan='<?php echo $this->get->admin ? '10' : '13';?>'>
           <?php else:?>
-          <td colspan='11'>
+            <td colspan='<?php echo $this->get->admin ? '8' : '11'?>'>
           <?php endif;?>
           <div class='btn-group'>
             <?php echo html::selectButton();?>
