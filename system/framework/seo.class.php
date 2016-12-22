@@ -171,6 +171,25 @@ class seo
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
+        if($module == 'effect' and isset($items[2]))
+        {
+            if(is_numeric($items[1]) and is_numeric($items[2]))
+            {
+                $method = $methodAlias[$module]['view'];
+                $params['categoryID'] = $items[1];
+                $params['type']       = $items[2];
+            }
+            else
+            {
+                if(preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = str_replace('c', '', $items[1]);
+                if(!preg_match('/^c\d+$/', $items[1])) $params['categoryID'] = $items[1];
+                $params['type']       = $items[2];
+                $method = $methodAlias[$module]['browse'];
+            }
+            return seo::convertURI($module, $method, $params, $pageID);
+        }
+
+
         if($module == 'faq' and isset($items[1]))
         {
             $params['mode'] = $items[1];
@@ -604,6 +623,38 @@ class uri
         if($mode) $link .= $mode;
         $link .= '/c' . (is_numeric($objectID) ? $objectID : 0);
         if($orderBy) $link .= '/' . $orderBy;
+        return $config->webRoot . $link . '.' . $viewType;
+    }
+
+    /**
+     * Create effect index.
+     * 
+     * @param  array   $params 
+     * @param  array   $alias 
+     * @param  string  $viewType 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function createEffectIndex($params, $alias, $viewType = '')
+    {
+        global $config;
+
+        $viewType = $viewType ? $viewType : $config->default->view;
+        if(empty($params)) return $config->webRoot . 'effect.' . $viewType;
+
+        $categoryID = array_shift($params);
+        $mode       = array_shift($params);
+        if(!empty($alias['name']))
+        {
+            $link = $config->webRoot . 'effect' . '/' . $alias['name'];
+            if($mode) $link .= '/' . $mode;
+            return $link . '.' . $viewType;
+        }
+ 
+        $link = 'effect/c';
+        $link .= is_numeric($categoryID) ? $categoryID : 0;
+        if($mode) $link .= '/' . $mode;
         return $config->webRoot . $link . '.' . $viewType;
     }
 
