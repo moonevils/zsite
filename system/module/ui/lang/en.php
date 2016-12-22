@@ -417,7 +417,7 @@ unset($this->lang->ui->files->mobile->product['browse.card']);
 unset($this->lang->ui->files->mobile->product['browse.list']);
 unset($this->lang->ui->files->mobile->forum['reply/reply']);
 
-$lang->effect = new stdclass();
+if(!isset($lang->effect)) $lang->effect = new stdclass();
 
 $lang->effect->category    = 'category';
 $lang->effect->name        = 'name';
