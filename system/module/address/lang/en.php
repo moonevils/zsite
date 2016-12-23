@@ -5,6 +5,6 @@ $lang->address->phone   = 'Phone';
 $lang->address->zipcode = 'zip code';
 $lang->address->contact = 'Contact';
 
-$lang->address->browse = 'Address List';
+$lang->address->browse = 'Address';
 $lang->address->create = 'Add';
 $lang->address->edit   = 'Edit';
