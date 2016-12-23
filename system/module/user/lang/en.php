@@ -91,7 +91,7 @@ $lang->user->editProfile = 'Edit';
 $lang->user->thread      = 'My Thread';
 $lang->user->messages    = 'My Message';
 $lang->user->reply       = 'My Reply';
-$lang->user->submittion  = 'My Contribution';
+$lang->user->submittion  = 'My Submission';
 
 $lang->user->userHistory       = "User History";
 $lang->user->threadHistory     = "Post";
@@ -100,7 +100,7 @@ $lang->user->commentHistory    = "Comment";
 $lang->user->messageHistory    = "Message";
 $lang->user->orderHistory      = "Order";
 $lang->user->addressHistory    = "Address";
-$lang->user->submittionHistory = "Contribution";
+$lang->user->submittionHistory = "Submission";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "Message <span class='label label-badge text-latin'>%s</span>";
@@ -233,7 +233,7 @@ $lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> 
 $lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> My Address <i class="icon-chevron-right"></i>|address|browse';
 $lang->user->control->menus['thread']     = '<i class="icon-comment"></i> My Thread <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus['reply']      = '<i class="icon-reply"></i> My Reply <i class="icon-chevron-right"></i>|user|reply';
-$lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> My Contribution <i class="icon-chevron-right"></i>|article|submittion'; 
+$lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> My Submission <i class="icon-chevron-right"></i>|article|submittion'; 
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = 'Log';
