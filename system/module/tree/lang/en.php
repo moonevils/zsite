@@ -87,7 +87,7 @@ $lang->wechatMenu->setResponse = 'Response Settings';
 $lang->wechatMenu->responseTip = 'Tip:Every menu should set the response';
 
 $lang->tree->adminLinks = new stdclass();
-$lang->tree->adminLinks->article = 'Admin articles|article|admin|type=article';
-$lang->tree->adminLinks->blog    = 'Admin blogs|article|admin|type=blog';
-$lang->tree->adminLinks->forum   = 'Admin threads|forum|admin|';
-$lang->tree->adminLinks->product = 'Admin products|product|admin|';
+$lang->tree->adminLinks->article = 'Manage articles|article|admin|type=article';
+$lang->tree->adminLinks->blog    = 'Manage blogs|article|admin|type=blog';
+$lang->tree->adminLinks->forum   = 'Manage threads|forum|admin|';
+$lang->tree->adminLinks->product = 'Manage products|product|admin|';
