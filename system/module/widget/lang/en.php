@@ -72,5 +72,5 @@ $lang->widget->typeList->message        = 'Feedback';
 $lang->widget->typeList->wechatMessage  = 'Wechat Message';
 $lang->widget->typeList->submittion     = 'Latest Contribution';
 $lang->widget->typeList->chanzhiDynamic = 'Changer Dynamic';
+$lang->widget->typeList->commonMenu     = 'Shortcuts';
 $lang->widget->typeList->html           = 'Custom';
-$lang->widget->typeList->commonMenu     = 'Quick Entry';
