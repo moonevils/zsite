@@ -6,8 +6,8 @@ $lang->book->backtolist   = 'Back';
 
 $lang->book->admin      = 'Books';
 $lang->book->info       = 'Book Info';
-$lang->book->createBook = 'Create a Book';
-$lang->book->create     = 'Create';
+$lang->book->createBook = 'Add Book';
+$lang->book->create     = 'Add Book';
 $lang->book->catalog    = 'Chapter';
 $lang->book->edit       = 'Edit';
 $lang->book->sort       = 'Ranking';

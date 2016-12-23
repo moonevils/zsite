@@ -87,7 +87,7 @@ $lang->article->submittionOptions->close = 'Off';
 $lang->blog->common = 'Blog';
 $lang->blog->admin  = 'Maintain';
 $lang->blog->list   = 'List';
-$lang->blog->create = 'Add a Blog';
+$lang->blog->create = 'Add Blog';
 $lang->blog->edit   = 'Edit';
 
 $lang->page->common = 'Page';
