@@ -11,8 +11,8 @@
  */
 $lang->file->common        = 'File';
 $lang->file->upload        = 'Upload ';
-$lang->file->browse        = 'File List';
-$lang->file->imageList     = 'Image List';
+$lang->file->browse        = 'File';
+$lang->file->imageList     = 'Image';
 $lang->file->download      = 'Download';
 $lang->file->edit          = 'Edit';
 $lang->file->primary       = 'Cover';
