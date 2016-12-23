@@ -25,7 +25,7 @@ $lang->admin->message        = 'Today you have %s messages to review.';
 $lang->admin->reply          = 'Today you have %s replies to review.';
 $lang->admin->comment        = 'Today you have %s comments to review.';
 $lang->admin->threadReply    = 'Today you have %s replies.';
-$lang->admin->submittion     = 'Today you have %s contributions to review.';
+$lang->admin->submittion     = 'Today you have %s submissions to review.';
 
 $lang->admin->registerInfo = "The site has binded the account with chanzhi%s, %s";
 $lang->admin->registerPage = 'Register Page';
