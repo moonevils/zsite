@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The zh-tw language file of install module of chanzhiEPS.
@@ -58,8 +59,8 @@ $lang->install->pdoMySQL     = 'PDO_MySQL擴展';
 $lang->install->pdoMySQLFail = '修改PHP配置檔案，加載pdo_mysql擴展。';
 $lang->install->tmpRoot      = '臨時檔案目錄';
 $lang->install->dataRoot     = '上傳檔案目錄';
-$lang->install->mkdir        = '<p>需要創建目錄%s。linux下面命令為：<br /> <code>mkdir -p %s</code></p>';
-$lang->install->chmod        = '需要修改目錄 "%s" 的權限。linux下面命令為：<br /><code>chmod o=rwx -R %s</code>';
+$lang->install->mkdir        = '<p>需要創建目錄%s。Linux下面命令為：<br /> <code>mkdir -p %s</code></p>';
+$lang->install->chmod        = '需要修改目錄 "%s" 的權限。Linux下面命令為：<br /><code>chmod o=rwx -R %s</code>';
 
 $lang->install->settingDB      = '設置資料庫';
 $lang->install->dbHost         = '資料庫伺服器';
