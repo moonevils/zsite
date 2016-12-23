@@ -11,8 +11,8 @@
  */
 $lang->file->common        = 'File';
 $lang->file->upload        = 'Upload ';
-$lang->file->browse        = 'File List';
-$lang->file->imageList     = 'Image List';
+$lang->file->browse        = 'File';
+$lang->file->imageList     = 'Image';
 $lang->file->download      = 'Download';
 $lang->file->edit          = 'Edit';
 $lang->file->primary       = 'Cover';
@@ -56,7 +56,7 @@ $lang->file->publics[1] = 'Enable';
 $lang->file->sort        = 'Sort';
 $lang->file->edit        = 'Edit';
 $lang->file->editFile    = 'Edit File';
-$lang->file->fileManager = 'File Mgmt';
+$lang->file->fileManager = 'Manage File';
 
 $lang->file->viewType[0] = 'Image';
 $lang->file->viewType[1] = 'List';
@@ -76,8 +76,8 @@ $lang->file->noFlashTip       = "Flash extension is forbidden，please do the pa
 
 $lang->file->updateInvalidFiles = 'Update Invalid List';
 $lang->file->clearAllInvalid    = 'Delete All Invalid Files';
-$lang->file->fileTip            = 'Tip : Red represent the file has been deleted while there is data in database';
+$lang->file->fileTip            = 'Tips: Red represent the file has been deleted while there is data in database';
 
-$lang->file->dragFile    = 'Please drag the file to here';
-$lang->file->addFile     = 'Add File';
-$lang->file->beginUpload = 'Begin Upload';
+$lang->file->dragFile    = 'Please drag files here';
+$lang->file->addFile     = 'Add';
+$lang->file->beginUpload = 'Upload';
