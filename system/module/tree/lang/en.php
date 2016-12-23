@@ -77,13 +77,17 @@ $lang->express->name   = 'Carrier Name';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
-$lang->wechatMenu->common     = 'Menu for public account';
-$lang->wechatMenu->name       = 'Title';
-$lang->wechatMenu->parent     = 'Parent Menu';
-$lang->wechatMenu->children   = "Child Menu";
-$lang->wechatMenu->delete     = "Detele";
-$lang->wechatMenu->commit     = "Sync";
-
+$lang->wechatMenu->common      = 'Menu for public account';
+$lang->wechatMenu->name        = 'Title';
+$lang->wechatMenu->parent      = 'Parent Menu';
+$lang->wechatMenu->children    = "Child Menu";
+$lang->wechatMenu->delete      = "Detele";
+$lang->wechatMenu->commit      = "Sync";
 $lang->wechatMenu->setResponse = 'Response Settings';
-
 $lang->wechatMenu->responseTip = 'Tip:Every menu should set the response';
+
+$lang->tree->adminLinks = new stdclass();
+$lang->tree->adminLinks->article = 'Manage articles|article|admin|type=article';
+$lang->tree->adminLinks->blog    = 'Manage blogs|article|admin|type=blog';
+$lang->tree->adminLinks->forum   = 'Manage threads|forum|admin|';
+$lang->tree->adminLinks->product = 'Manage products|product|admin|';

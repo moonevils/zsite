@@ -76,13 +76,8 @@ class admin extends control
      */
     public function switchLang($lang)
     {
-        setcookie('adminLang', $lang, $this->config->cookieLife, $this->config->cookiePath);
-
-        $user = $this->app->user;
-        $user->rights = $this->loadModel('user')->authorize($user);
-        $this->session->set('user', $user);
-        $this->app->user = $this->session->user;
-        die(js::locate('back'));
+        $this->admin->switchLang($lang);
+        $this->locate($this->server->http_referer);
     }
 
     /**
@@ -110,6 +105,7 @@ class admin extends control
             $this->send(array('result' => 'fail', 'message' => json_decode($response)));
 		}
 
+        $this->lang->menuGroups->admin = 'community';
         $this->view->title    = $this->lang->admin->register->caption;
 		$this->view->register = $registerInfo;
 		$this->display();

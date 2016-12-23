@@ -6,7 +6,7 @@ $config->cache->expired   = 86400;
 $config->cache->cachePage = 'open';
 
 $config->cache->type = 'file';
-$config->cache->cachedPages = 'index.index,article.browse,article.view,product.browse,product.view,page.view,blog.view,book.browse,book.index,book.read,';
+$config->cache->cachedPages = 'index.index,article.browse,article.view,product.browse,product.view,page.view,blog.index,blog.view,book.browse,book.index,book.read,';
 
 $config->cache->file = new stdclass();
 $config->cache->file->expired = $config->cache->expired;
@@ -35,7 +35,7 @@ $config->cache->relation[TABLE_PRODUCT]['blocks'] = 'latestproduct,hotproduct,fe
 $config->cache->relation[TABLE_PRODUCT]['pages']  = 'product.browse,product.view';
 
 $config->cache->relation[TABLE_FILE]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist,articletree,producttree,blogtree,slide,featuredproduct';
-$config->cache->relation[TABLE_FILE]['pages']  = 'article.browse,article.view,page.view,blog.index,blog.view,product.browse,product.view,index.index,blog.index,';
+$config->cache->relation[TABLE_FILE]['pages']  = 'article.browse,article.view,page.view,blog.index,blog.view,product.browse,product.view,index.index';
 
 $config->cache->relation[TABLE_BOOK]['pages']  = 'book.browse,book.index,book.read';
 

@@ -33,7 +33,7 @@ class orderModel extends model
      * @access public
      * @return array
      */
-    public function getList($mode, $value, $orderBy = 'id_desc', $pager = null)
+    public function getList($type = 'all', $mode, $value, $orderBy = 'id_desc', $pager = null)
     {
         $confirmLimitDays = $this->config->shop->confirmLimit;
         $expireLimitDays  = isset($this->config->shop->expireLimit) ? $this->config->shop->expireLimit : 30;
@@ -64,22 +64,17 @@ class orderModel extends model
                 ->exec();
         }
         
-        $normalStatus = array('not_paid', 'not_send', 'send');
-        $isTypeMode   = in_array($mode, $this->config->order->orderTypes);
-
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where(1)
+            ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
             ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
             ->andWhere('status')->ne('deleted')
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
-            ->beginIf($mode == 'deliveryStatus')->andWhere('deliveryStatus')->eq($value)->fi()
-            ->beginIf($isTypeMode)->andWhere('type')->eq($mode)->fi()
-            ->beginIf($isTypeMode and $value != 'all' and $value != 'send')->andWhere(zget($this->config->order->statusTypes, $value, ''))->eq($value)->fi()
-            ->beginIf($isTypeMode and $value == 'send')->andWhere('deliveryStatus')->ne('not_send')->fi()
-            ->beginIf($isTypeMode and in_array($value, $normalStatus))->andWhere('status')->eq('normal')->fi()
-            ->beginIf(!commonModel::isAvailable('score'))->andWhere('type')->ne('score')->fi()
-            ->beginIf(!commonModel::isAvailable('shop'))->andWhere('type')->ne('shop')->fi()
+            ->beginIf($mode == 'deliveryStatus' and $value !='not_send' )->andWhere('deliveryStatus')->eq($value)->fi()
+            ->beginIf($mode == 'deliveryStatus' and $value =='not_send')
+            ->andWhere("deliveryStatus = 'not_send' and (payStatus='paid' or payment='COD')")
+            ->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
@@ -562,7 +557,7 @@ class orderModel extends model
                 /* Cancel link. */
                 $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
                 $class    = $isMobile ? "  btn btn-link " : "";
-                echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}' data-toggle='modal'" );
+                echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}'" );
             }
 
             /* Delete order link. */

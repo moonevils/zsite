@@ -17,6 +17,7 @@ $lang->file->download      = '下载附件';
 $lang->file->edit          = '编辑';
 $lang->file->primary       = '封面';
 $lang->file->name          = '名称';
+$lang->file->admin         = '附件管理';
 $lang->file->setPrimary    = '设为封面';
 $lang->file->cancelPrimary = '取消封面';
 $lang->file->deny          = '禁止';
@@ -76,3 +77,7 @@ $lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";
 $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '删除全部';
 $lang->file->fileTip            = '提示：红色代表数据库中有文件记录，但是文件实际已经被删除';
+
+$lang->file->dragFile    = '请拖拽文件到此处';
+$lang->file->addFile     = '添加文件';
+$lang->file->beginUpload = '开始上传';

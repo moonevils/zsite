@@ -12,39 +12,25 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('finishWarning', $lang->order->finishWarning);?>
+<?php if(count($lang->order->types) > 1):?>
 <div class='col-md-1'>
   <ul class='nav nav-primary nav-stacked user-control-nav'>
-    <?php foreach($lang->order->types as $type => $name):?>
-    <?php $class = $mode == $type ? 'active' : '';?>
-    <?php echo '<li class="' . $class . '">' . html::a(helper::createLink('order', 'admin', "mode=$type&status=all"), $name) . '</li>';?> 
+    <?php foreach($lang->order->types as $typeCode => $name):?>
+    <?php $class = $type == $typeCode ? 'active' : '';?>
+    <?php echo '<li class="' . $class . '">' . html::a(helper::createLink('order', 'admin', "type=$typeCode&mode=all"), $name) . '</li>';?> 
     <?php endforeach;?>
   </ul>
 </div>
-<div class='col-md-11'>
+<?php endif;?>
+<div class='<?php echo count($lang->order->types) > 1 ? 'col-md-11' : 'col-md-12'?>'>
   <div class='panel'>
     <div class='panel-heading'>
       <ul id='typeNav' class='nav nav-tabs'>
-        <li data-type='internal' <?php echo $param == 'all' ? "class='active'" : '';?>>
-          <?php echo html::a(inlink('admin', "mode=$mode&status=all"), $lang->order->all);?>
-        </li>
-        <li data-type='internal' <?php echo $param == 'not_paid' ? "class='active'" : '';?>>
-          <?php echo html::a(inlink('admin', "mode=$mode&status=not_paid"), $lang->order->statusList['not_paid']);?>
-        </li>
-        <li data-type='internal' <?php echo $param == 'not_send' ? "class='active'" : '';?>>
-          <?php echo html::a(inlink('admin', "mode=$mode&status=not_send"), $lang->order->statusList['not_send']);?>
-        </li>
-        <li data-type='internal' <?php echo $param == 'send' ? "class='active'" : '';?>>
-          <?php echo html::a(inlink('admin', "mode=$mode&status=send"), $lang->order->statusList['send']);?>
-        </li>
-        <li data-type='internal' <?php echo $param == 'finished' ? "class='active'" : '';?>>
-          <?php echo html::a(inlink('admin', "mode=$mode&status=finished"), $lang->order->statusList['finished']);?>
-        </li>
-        <li data-type='internal' <?php echo $param == 'canceled' ? "class='active'" : '';?>>
-          <?php echo html::a(inlink('admin', "mode=$mode&status=canceled"), $lang->order->statusList['canceled']);?>
-        </li>
-        <li data-type='internal' <?php echo $param == 'expired' ? "class='active'" : '';?>>
-          <?php echo html::a(inlink('admin', "mode=$mode&status=expired"), $lang->order->statusList['expired']);?>
-        </li>
+        <?php foreach($lang->order->searchLabels as $label):?>
+        <?php list($title, $params) = explode('|', $label);?>
+        <?php $class = strpos(strtolower($this->server->query_string), strtolower($params)) == false ? '' : "class='active'";?>
+        <li <?php echo $class;?> data-type='internal' ><?php echo html::a(inlink('admin', "type={$type}&" . $params), $title);?></li>
+        <?php endforeach;?>
       </ul> 
     </div>
     <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
@@ -60,7 +46,7 @@
           <th class='w-80px'><?php commonModel::printOrderLink('payStatus', $orderBy, $vars, $lang->order->payStatus);?></th>
           <th><?php echo $lang->order->note;?></th>
           <th class='w-100px'><?php echo $lang->order->last;?></th>
-          <th class='w-200px'><?php echo $lang->actions;?></th>
+          <th class='w-240px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -76,7 +62,7 @@
           <td><?php echo zget($lang->order->payStatusList, $order->payStatus, '');?></td>
           <td title='<?php echo $order->note;?>' class='text-left'><?php echo $order->note;?></td>
           <td><?php echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i');?></td>
-          <td class='text-left'><?php $this->order->printActions($order);?></td>
+          <td class='text-center'><?php $this->order->printActions($order);?></td>
         </tr>
         <?php endforeach;?>
       </tbody>

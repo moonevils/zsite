@@ -26,7 +26,7 @@ js::set('pageLayout', $this->block->getLayoutScope('blog_view', $article->id));
       <small><i class='icon-user icon-large'></i> <?php echo $article->author; ?></small> &nbsp;&nbsp;
       <small><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder; ?></small> &nbsp;&nbsp;
       <?php if($article->source != 'original' and $article->copyURL != ''):?>
-      <small><?php echo $article->source ? $lang->article->fromArticle : $lang->article->sourceList[$article->source] . $lang->colon;?><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></small>
+      <small><?php echo $article->source ? $lang->article->lblSource : $lang->article->sourceList[$article->source] . $lang->colon;?><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></small>
       <?php else: ?>
       <small class='text-success bg-success-pale'><?php echo $lang->article->sourceList[$article->source]; ?></small>
       <?php endif;?>

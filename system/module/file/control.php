@@ -27,7 +27,7 @@ class file extends control
 
         $this->lang->menuGroups->file = 'attachment'; 
         
-        $this->view->title = $this->lang->file->fileManager;
+        $this->view->title = $this->lang->file->admin;
         $this->view->type  = $type;
         $this->view->files = $files;
         $this->view->pager = $pager;

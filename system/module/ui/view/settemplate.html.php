@@ -18,6 +18,7 @@
     <ul class='nav nav-tabs' id='typeNav'>
       <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->internalTheme, "data-toggle='tab'");?></li>
       <li data-type='store'><?php echo html::a('#storeSection', $lang->ui->themeStore, "data-toggle='tab'");?></li>
+      <li data-type='store'><?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?></li>
     </ul>
   </div>
   <div class='panel-body tab-content'>
@@ -41,6 +42,9 @@
       <?php endforeach;?>
     </section>
     <section class='tab-pane' id='storeSection'>
+      <div class='text-center text-muted load-icon' style='padding: 50px'><i class='icon icon-2x icon-spinner icon-spin'></i></div>
+    </section>
+    <section class='tab-pane' id='packageSection'>
       <div class='text-center text-muted load-icon' style='padding: 50px'><i class='icon icon-2x icon-spinner icon-spin'></i></div>
     </section>
   </div>

@@ -63,6 +63,10 @@ class article extends control
             die($this->fetch('error', 'index'));
         }
 
+        $articleList = '';
+        foreach($articles as $article) $articleList .= $article->id . ',';
+        $this->view->articleList = $articleList;
+        
         $this->view->title      = $title;
         $this->view->keywords   = $keywords;
         $this->view->desc       = $desc;

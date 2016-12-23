@@ -35,6 +35,7 @@
     </div>
     <div class='panel-footer'>
       <?php echo html::submitButton($lang->order->settlement, 'btn-order-submit btn danger block'); ?>
+      <?php echo html::a(helper::createLink('order', 'browse'), $lang->order->admin, "class='btn default block'");?>
     </div>
   </form>
 </div>

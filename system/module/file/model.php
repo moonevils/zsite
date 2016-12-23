@@ -82,10 +82,10 @@ class fileModel extends model
         
         foreach($uploadFiles as $uploadFile)
         {
-          $name = basename($uploadFile);
-          $tag  = substr(substr($name, strpos($name, '_') + 1), 0, strpos($name, '.') - 2);
-          if(strlen($tag) < 10) continue;
-          if(strpos($sqlContent, $tag) === false) $invalidFiles[] = $uploadFile;
+            $name = basename($uploadFile);
+            $tag  = substr(substr($name, strpos($name, '_') + 1), 0, strpos($name, '.') - 2);
+            if(strlen($tag) < 10) continue;
+            if(strpos($sqlContent, $tag) === false) $invalidFiles[] = $uploadFile;
         }
         
         $unusedFiles = array();
