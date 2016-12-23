@@ -21,7 +21,7 @@ $lang->tree->layout      = 'Layout';
 
 $lang->tree->common           = 'Category';
 $lang->tree->noCategories     = 'Please create a category first.';
-$lang->tree->timeCountDown    = "<strong id='countDown'>3</strong> seconds later, it will be redirected to Category page.";
+$lang->tree->timeCountDown    = "<strong id='countDown'>3</strong> seconds later, it will be redirected to category management page.";
 $lang->tree->redirect         = 'Redirecting...';
 $lang->tree->aliasRepeat      = 'Alias %s is existed. Do not add it again.';
 $lang->tree->aliasConflict    = 'Alias %s is conflicted with system module. Do not add it.';
