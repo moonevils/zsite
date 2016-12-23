@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The user module english file of chanzhiEPS.
