@@ -226,6 +226,28 @@ class commonModel extends model
     }
 
     /**
+     * Set the user info.
+     *
+     * @access public
+     * @return void
+     */
+    public function setUser()
+    {
+        if($this->session->user) return $this->app->user = $this->session->user;
+
+        /* Create a guest account. */
+        $user           = new stdclass();
+        $user->id       = 0;
+        $user->account  = 'guest';
+        $user->realname = 'guest';
+        $user->admin    = RUN_MODE == 'cli' ? 'super' : 'no';
+        if(RUN_MODE == 'front') $user->rights = $this->config->rights->guest;
+
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+    }
+
+    /**
      * Check whether module is available.
      *
      * @param  string $module
@@ -772,86 +794,6 @@ class commonModel extends model
     }
 
     /**
-     * Set the user info.
-     *
-     * @access public
-     * @return void
-     */
-    public function setUser()
-    {
-        if($this->session->user) return $this->app->user = $this->session->user;
-
-        /* Create a guest account. */
-        $user           = new stdclass();
-        $user->id       = 0;
-        $user->account  = 'guest';
-        $user->realname = 'guest';
-        $user->admin    = RUN_MODE == 'cli' ? 'super' : 'no';
-        if(RUN_MODE == 'front') $user->rights = $this->config->rights->guest;
-
-        $this->session->set('user', $user);
-        $this->app->user = $this->session->user;
-    }
-
-    /**
-     * Get the run info.
-     *
-     * @param mixed $startTime  the start time of this execution
-     * @access public
-     * @return array    the run info array.
-     */
-    public function getRunInfo($startTime)
-    {
-        $info['timeUsed'] = round(getTime() - $startTime, 4) * 1000;
-        $info['memory']   = round(memory_get_peak_usage() / 1024, 1);
-        $info['querys']   = count(dao::$querys);
-        return $info;
-    }
-
-    /**
-     * Get the full url of the system.
-     *
-     * @static
-     * @access public
-     * @return string
-     */
-    public static function getSysURL()
-    {
-        global $config;
-        $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';
-        $httpHost = rtrim($_SERVER['HTTP_HOST'], '/');
-        return "$httpType://$httpHost";
-    }
-
-    /**
-     * Get client IP.
-     *
-     * @access public
-     * @return void
-     */
-    public function getIP()
-    {
-        if(getenv("HTTP_CLIENT_IP"))
-        {
-            $ip = getenv("HTTP_CLIENT_IP");
-        }
-        elseif(getenv("HTTP_X_FORWARDED_FOR"))
-        {
-            $ip = getenv("HTTP_X_FORWARDED_FOR");
-        }
-        elseif(getenv("REMOTE_ADDR"))
-        {
-            $ip = getenv("REMOTE_ADDR");
-        }
-        else
-        {
-            $ip = "Unknow";
-        }
-
-        return $ip;
-    }
-
-    /**
      * Print the positon bar of product module.
      *
      * @param  object $module
@@ -1109,6 +1051,64 @@ class commonModel extends model
         $this->session->set('okFileName', '');
 
         return array('result' => 'success');
+    }
+
+    /**
+     * Get the run info.
+     *
+     * @param mixed $startTime  the start time of this execution
+     * @access public
+     * @return array    the run info array.
+     */
+    public function getRunInfo($startTime)
+    {
+        $info['timeUsed'] = round(getTime() - $startTime, 4) * 1000;
+        $info['memory']   = round(memory_get_peak_usage() / 1024, 1);
+        $info['querys']   = count(dao::$querys);
+        return $info;
+    }
+
+    /**
+     * Get the full url of the system.
+     *
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function getSysURL()
+    {
+        global $config;
+        $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';
+        $httpHost = rtrim($_SERVER['HTTP_HOST'], '/');
+        return "$httpType://$httpHost";
+    }
+
+    /**
+     * Get client IP.
+     *
+     * @access public
+     * @return void
+     */
+    public function getIP()
+    {
+        if(getenv("HTTP_CLIENT_IP"))
+        {
+            $ip = getenv("HTTP_CLIENT_IP");
+        }
+        elseif(getenv("HTTP_X_FORWARDED_FOR"))
+        {
+            $ip = getenv("HTTP_X_FORWARDED_FOR");
+        }
+        elseif(getenv("REMOTE_ADDR"))
+        {
+            $ip = getenv("REMOTE_ADDR");
+        }
+        else
+        {
+            $ip = "Unknow";
+        }
+
+        return $ip;
     }
 
     /**
@@ -1420,5 +1420,35 @@ class commonModel extends model
 
         $views = is_numeric($views) ? $views : '0';
         return $views;
+    }
+    /*
+     * Get the views list according to the id list from databaes;
+     *
+     * @access public
+     * @param  string $moduleName
+     * @param  string $methodName
+     * @param  array  $viewsIDList
+     * @static
+     * @return array 
+     */
+    public static function getViewsList($moduleName, $methodName, $viewsIDList)
+    {
+        global $app;
+        if(empty($viewsIDList)) return array();
+
+        $viewsList = array();
+        if($moduleName == 'article' and $methodName == 'browse')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+        }
+        if($moduleName == 'blog' and $methodName == 'index')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+        }
+        if($moduleName == 'product' and $methodName == 'browse')
+        {
+            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_PRODUCT)->where('id')->in($viewsIDList)->fetchPairs();
+        }
+        return $viewsList;
     }
 }

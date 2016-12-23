@@ -126,7 +126,6 @@ class control extends baseControl
             }
         }
 
-
         if(!empty($viewExtPath))
         {
             $commonExtViewFile = $viewExtPath['common'] . $this->devicePrefix . $methodName . ".{$viewType}.php";
@@ -439,6 +438,18 @@ class control extends baseControl
                 $this->output = str_replace($this->config->viewsPlaceholder, $views, $this->output);
             }
             
+            if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsListPages))
+            {
+                $beginPos    = strpos($this->output, $this->config->viewsListPlaceHolder) + strlen($this->config->viewsListPlaceHolder);
+                $length      = strrpos($this->output, $this->config->viewsListPlaceHolder) - $beginPos; 
+                $viewsIDList = explode(',', trim(substr($this->output, $beginPos, $length), ',')); 
+                $viewsList   = commonModel::getViewsList($moduleName, $methodName, $viewsIDList);
+                foreach($viewsList as $viewID => $views)
+                {
+                    $this->output = str_replace($this->config->viewsPlaceholder . $viewID, $views, $this->output);
+                }
+            }
+
             $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
 
             $this->output = str_replace($this->config->siteNavHolder, $siteNav, $this->output);

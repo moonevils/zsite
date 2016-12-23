@@ -18,26 +18,26 @@
     </div>
     <div class='modal-body'>
       <form id='editProfileForm' method='post' action="<?php echo inlink('edit');?>" data-checkfingerprint='1'>
-        <div class='form-group'>
-          <label for='realname' class='control-label'><?php echo $lang->user->realname;?></label>
+        <div class='form-group form-pad-list'>
+          <label for='realname' class='text-muted small'><?php echo $lang->user->realname;?></label>
           <?php if($user->admin == 'super'):?>
             <?php if(count(explode(',', $this->config->enabledLangs)) > 1):?>
             <?php if(strpos($this->config->enabledLangs, 'zh-cn') !== false):?>
-            <div class='input-group'>
-              <label class='input-group-addon'><?php echo $config->langs['zh-cn']?></label>
+            <div class='form-group pad-lable-left'>
               <?php echo html::input("realnames[cn]", isset($user->realnames->cn) ? $user->realnames->cn : '', "class='form-control'");?>
+              <label><?php echo $config->langs['zh-cn']?></label>
             </div>
             <?php endif;?>
             <?php if(strpos($this->config->enabledLangs, 'zh-tw') !== false):?>
-            <div class='input-group'>
-              <label class='input-group-addon'><?php echo $config->langs['zh-tw'];?></label>
+            <div class='form-group pad-lable-left'>
               <?php echo html::input("realnames[tw]", isset($user->realnames->tw) ? $user->realnames->tw : '', "class='form-control'");?>
+              <label><?php echo $config->langs['zh-tw'];?></label>
             </div>
             <?php endif;?>
             <?php if(strpos($this->config->enabledLangs, 'en') !== false):?>
-            <div class='input-group'>
-              <label class='input-group-addon'><?php echo $config->langs['en']?></label>
+            <div class='form-group pad-lable-left'>
               <?php echo html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'");?>
+              <label><?php echo $config->langs['en']?></label>
             </div>
             <?php endif;?>
             <?php else:?>
@@ -49,65 +49,49 @@
           <?php echo html::input('realname', $user->realname, "class='form-control'")?>
           <?php endif;?>
         </div>
-        <hr>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='oldPwd' class='input-group-addon'><?php echo $lang->user->oldPwd;?></label>
+        <div class='form-group form-pad-list'>
+          <label class='text-muted small'><?php echo $lang->user->password;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::password('oldPwd', '', "class='form-control'");?>
+            <label for='oldPwd'><?php echo $lang->user->oldPwd;?></label>
           </div>
-        </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='password' class='input-group-addon'><?php echo $lang->user->password;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::password('password1', '', "class='form-control'");?>
+            <label for='password'><?php echo $lang->user->password;?></label>
           </div>
-        </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='password2' class='input-group-addon'><?php echo $lang->user->password2;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::password('password2', '', "class='form-control'");?>
+            <label for='password2'><?php echo $lang->user->password2;?></label>
           </div>
         </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='company' class='input-group-addon'><?php echo $lang->user->company;?></label>
-            <?php echo html::input('company', $user->company, "class='form-control'");?>
-          </div>
+        <div class='form-group pad-lable-left'>
+          <?php echo html::input('company', $user->company, "class='form-control'");?>
+          <label for='company'><?php echo $lang->user->company;?></label>
         </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='address' class='input-group-addon'><?php echo $lang->user->address;?></label>
+        <div class='form-group form-pad-list'>
+          <div class='form-group pad-lable-left'>
             <?php echo html::input('address', $user->address, "class='form-control'");?>
+            <label for='address'><?php echo $lang->user->address;?></label>
           </div>
-        </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='zipcode' class='input-group-addon'><?php echo $lang->user->zipcode;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::input('zipcode', $user->zipcode, "class='form-control'");?>
+            <label for='zipcode'><?php echo $lang->user->zipcode;?></label>
           </div>
-        </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='mobile' class='input-group-addon'><?php echo $lang->user->mobile;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::input('mobile', $user->mobile, "class='form-control'");?>
+            <label for='mobile'><?php echo $lang->user->mobile;?></label>
           </div>
-        </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='phone' class='input-group-addon'><?php echo $lang->user->phone;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::input('phone', $user->phone, "class='form-control'");?>
+            <label for='phone'><?php echo $lang->user->phone;?></label>
           </div>
-        </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='qq' class='input-group-addon'><?php echo $lang->user->qq;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::input('qq', $user->qq, "class='form-control'");?>
+            <label for='qq'><?php echo $lang->user->qq;?></label>
           </div>
-        </div>
-        <div class='form-group'>
-          <div class='input-group'>
-            <label for='gtalk' class='input-group-addon'><?php echo $lang->user->gtalk;?></label>
+          <div class='form-group pad-lable-left'>
             <?php echo html::input('gtalk', $user->gtalk, "class='form-control'");?>
+            <label for='gtalk'><?php echo $lang->user->gtalk;?></label>
           </div>
         </div>
         <div class='form-group'>

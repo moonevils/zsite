@@ -81,12 +81,31 @@ class adminModel extends model
 	public function bindByAPI()
 	{
 		$api = 'user-bindchanzhi.json';
+
         $user = array();
         $user['account']  = $this->post->account;
         $user['password'] = $this->post->password ? $this->post->password : $this->post->password1;
-		return json_decode($this->postAPI($api, $user));
+        $user['site']     = $this->server->http_host;
+	
+		$response = $this->postAPI($api, $user);
+        $result   = json_decode($response);
+        if(empty($result))
+        {
+            $result = new stdclass();
+            $result->result  = 'fail';
+            $result->message = $response;
+        }
+        return $result;
 	}
 
+    /**
+     * Set community info.
+     * 
+     * @param  string    $account 
+     * @param  string    $private 
+     * @access public
+     * @return bool
+     */
     public function setCommunity($account, $private)
     {
         $this->loadModel('setting')->setItem('system.common.community.account', $account);
@@ -107,12 +126,26 @@ class adminModel extends model
         return false;
 	}
 
+    /**
+     * Get by api.
+     * 
+     * @param  int    $api 
+     * @access public
+     * @return void
+     */
     public function getByApi($api)
     {
         $api = $this->processApi($api);
         return file_get_contents($this->config->admin->apiRoot . $api);
     }
 
+    /**
+     * Process api url. 
+     * 
+     * @param  string    $api 
+     * @access public
+     * @return void
+     */
     public function processApi($api)
     {
         $config = $this->getRegisterInfo();
@@ -138,5 +171,24 @@ class adminModel extends model
         $pathInfo['query'] = http_build_query($params);
         $api = http_build_url($pathInfo);
         return $api;
+    }
+
+    /**
+     * Switch lang of admin.
+     * 
+     * @param  int    $lang 
+     * @access public
+     * @return void
+     */
+    public function switchLang($lang)
+    {
+        $langCookieVar = RUN_MODE . 'Lang';
+        setcookie($langCookieVar, $lang, $this->config->cookieLife, $this->config->cookiePath);
+
+        $user = $this->app->user;
+        $user->rights = $this->loadModel('user')->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+        return true;
     }
 }

@@ -124,3 +124,13 @@ $lang->order->abbr->paidDate       = 'Paid';
 $lang->order->abbr->deliveriedDate = 'Delivered';
 $lang->order->abbr->confirmedDate  = 'Received';
 $lang->order->abbr->createdDate    = 'Created';
+
+$lang->order->searchLabels = new stdclass();
+$lang->order->searchLabels->all         = 'All|mode=all';
+$lang->order->searchLabels->waitPay     = 'Not_paid|mode=payStatus&param=not_paid';
+$lang->order->searchLabels->waitSend    = 'Not_send|mode=deliveryStatus&param=not_send';
+$lang->order->searchLabels->waitConfirm = 'Send|mode=deliveryStatus&param=send';
+$lang->order->searchLabels->confirmed   = 'Confirmed|mode=deliveryStatus&param=confirmed';
+$lang->order->searchLabels->finished    = 'Finished|mode=status&param=finished';
+$lang->order->searchLabels->canceled    = 'Canceled|mode=status&param=canceled';
+$lang->order->searchLabels->expired     = 'Expired|mode=status&param=expired';

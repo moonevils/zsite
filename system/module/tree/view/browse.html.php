@@ -23,13 +23,16 @@ js::set('lang', $lang->js);
 <div class='row'>
   <div class='col-md-3'>
     <div class='panel'>
-      <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong></div>
+      <div class='panel-heading'>
+        <strong><i class="icon-sitemap"></i> <?php echo $lang->category->common;?></strong>
+        <?php if(isset($fromAdminPage)):?> <div class='pull-right'><?php echo $fromAdminPage;?></div><?php endif;?>
+      </div>
       <div class='panel-body'>
         <div id='treeMenuBox'><?php echo $treeMenu;?></div>
         <?php if($isWechatMenu):?>
         <div class='panel-body'>
-          <?php commonModel::printLink('wechat', 'commitMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->commit, "class='btn btn-primary jsoner w-100px'");?>
-          <?php commonModel::printLink('wechat', 'deleteMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->delete, "class='btn btn-danger jsoner w-100px'");?>
+          <?php commonModel::printLink('wechat', 'commitMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->commit, "class='btn btn-primary jsoner w-80px'");?>
+          <?php commonModel::printLink('wechat', 'deleteMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->delete, "class='btn btn-danger jsoner w-80px'");?>
           <p></p>
           <p><?php echo $lang->wechatMenu->responseTip;?></p>
         </div>

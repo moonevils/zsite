@@ -67,6 +67,7 @@ $lang->ui->importThemeSuccess     = '导入主题成功';
 $lang->ui->packagePathUnwriteable = '上传目录：%s 不可写';
 $lang->ui->selectSourceImage      = '从素材库选择';
 $lang->ui->rebuildThumbs          = '重新生成缩略图';
+$lang->ui->packagePathTip         = '请将主题包的zip文件上传至 %s 目录，进行安装。';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
@@ -414,3 +415,28 @@ unset($this->lang->ui->files->mobile->block['usermenu']);
 unset($this->lang->ui->files->mobile->product['browse.card']);
 unset($this->lang->ui->files->mobile->product['browse.list']);
 unset($this->lang->ui->files->mobile->forum['reply/reply']);
+
+if(!isset($lang->effect)) $lang->effect = new stdclass();
+
+$lang->effect->category    = '分类';
+$lang->effect->name        = '名称';
+$lang->effect->account     = '设计师';
+$lang->effect->desc        = '描述';
+$lang->effect->score       = '积分';
+$lang->effect->content     = '代码';
+$lang->effect->image       = '效果图';
+$lang->effect->package     = '特效包';
+$lang->effect->status      = '状态';
+$lang->effect->views       = '浏览';
+$lang->effect->downloads   = '下载次数';
+$lang->effect->createdTime = '创建时间';
+
+$lang->effect->admin         = '特效管理';
+$lang->effect->import        = '导入';
+$lang->effect->blockName     = '区块名';
+$lang->effect->newBlock      = '导入新区块';
+$lang->effect->obtan         = '获取特效';
+$lang->effect->imported      = '已导入';
+$lang->effect->importSuccess = '导入成功';
+$lang->effect->bindCommunity = '请先登记蝉知社区获取特效。';
+$lang->effect->noRsults      = "你还没有任何特效，请登录蝉知特效平台，<a href='http://www.chanzhi.org/effect.html' target='_blank'>获取特效</a>。";

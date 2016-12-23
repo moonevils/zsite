@@ -81,7 +81,7 @@ $lang->user->yangcongLogin   = 'Yangcong Login';
 $lang->user->bindAccount     = 'Account Binding';
 $lang->user->batchDelete     = 'Batch Delete';
 $lang->user->deleteHistory   = 'Delete account and history';
-$lang->user->question        = 'Security Questions';
+$lang->user->question        = 'Security Question';
 $lang->user->answer          = 'Answer';
 $lang->user->checkContact    = 'Check Contact';
 
@@ -255,5 +255,5 @@ $lang->user->confirmUnbind        = 'Do you want to remove binding?';
 $lang->user->forceYangcong        = 'Yangcong has been open, please confirm your identity.';
 
 $lang->user->placeholder = new stdclass();
-$lang->user->placeholder->password   = 'Enter your login password';
+$lang->user->placeholder->password   = 'Please enter your password.';
 $lang->user->placeholder->verifyCode = 'Please enter verification code received by Email.';

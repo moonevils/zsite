@@ -35,7 +35,7 @@ class spliter
             $ord    = ord($letter);
 
             /* The first letter is ascii, try to get a word. */
-            if($ord >= 0 && $ord <= 191)
+            if(($ord >= 0 && $ord <= 191) or is_numeric($letter))
             {
                 $i ++;
 

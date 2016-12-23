@@ -11,17 +11,20 @@ $().ready(function()
     });
     $('.nav-tabs li').click(function()
     {
-        $(this).parent().find('.active').removeClass('active');
-        $(this).addClass('active');
-        group = $(this).data('group');
-        $(this).parents('.panel').find('.panel').hide();
-        if(group == 'all') $(this).parents('.panel').find('.panel').show();
-        $('#group' + group).show();
-
+        var $li = $(this);
+        $li.parent().find('.active').removeClass('active');
+        $li.addClass('active');
+        group = $li.data('group');
+        if(group == 'all') $li.parents('.panel').find('.panel-group').show();
+        else
+        {
+            $li.parents('.panel').find('.panel-group').hide();
+            $('#group' + group).show();
+        }
     })
 });
 
 function showPriv(value)
 {
-  location.href = createLink('group', 'managePriv', "type=byGroup&param="+ groupID + "&menu=&version=" + value);
+    location.href = createLink('group', 'managePriv', "type=byGroup&param="+ groupID + "&menu=&version=" + value);
 }

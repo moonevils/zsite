@@ -178,7 +178,8 @@ table.captcha td label {padding: 0;}
 
 .article > .article-content {padding: 20px;}
 .article > .article-content img {border: 1px solid #E5E5E5; padding: 3px;}
-.article > .article-content img[src*='kindeditor/plugins/emoticons'] {border: none; padding: 0; margin-right: 0;}
+.article > .article-content > img {display: block; margin-left: auto; margin-right: auto;}
+.article > .article-content img[src*='kindeditor/plugins/emoticons'] {border: none; padding: 0; margin-right: 0; display: inline-block;}
 
 .article-files {padding: 10px 20px; border-top: 1px dotted #ddd; background: #f5f5f5}
 .article-files > .files-list {margin: -5px}

@@ -15,7 +15,7 @@
   <footer id='footer'>
     <div class='wrapper'>
       <div id='footNav'>
-        <?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', '<i class="icon icon-rss-sign icon-large"></i>', "target='_blank'"); ?>
+        <?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), '<i class="icon icon-rss-sign icon-large"></i>', "target='_blank'"); ?>
       </div>
       <span id='copyright'>
         <?php

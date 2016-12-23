@@ -20,7 +20,7 @@ $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
 $lang->dollarSign = '$';
 $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
-$lang->back2Top   = 'Return<br/>to<br/>the<br/>Top';
+$lang->back2Top   = 'Top';
 $lang->cancel     = 'Cancel';
 
 /*Language shorthand*/
@@ -31,17 +31,18 @@ $lang->en = 'EN';
 $lang->toBeAdded = 'Add';
 
 $lang->about  = 'About';
-$lang->thanks = 'Acknowledgement';
+$lang->thanks = 'Thanks';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS     = 'Changer CMS';
-$lang->chanzhiEPSx    = 'Changer';
-$lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, I should not remove, hide, or cover any signs/links of Changer CMS.</span>";
+$lang->chanzhiEPS     = 'CHANGER';
+$lang->chanzhiEPSx    = 'CHANGER';
+$lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, any signs/links of Changer shouldn't be removed, hidden or covered.</span>";
 $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>Changer CMS %s</a></span>";
 $lang->newVersion     = "Note: Changer CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
+$lang->redirecting    = "Redirecting to %s，<a href='%s'>Redirect immediately</a>";
 
 /* Global lang items. */
 $lang->home             = 'Home';
@@ -62,9 +63,9 @@ $lang->logout           = 'Logout';
 $lang->login            = 'Login';
 $lang->account          = 'Account';
 $lang->password         = 'Password';
-$lang->changePassword   = 'Change Password';
-$lang->setEmail         = "Email Settings";
-$lang->setSecurity      = 'Security Questions';
+$lang->changePassword   = 'Password';
+$lang->setEmail         = "Email";
+$lang->setSecurity      = 'Security';
 $lang->forgotPassword   = 'Forgot password?';
 $lang->currentPos       = 'Current Page';
 $lang->categoryMenu     = 'Menu';
@@ -194,6 +195,7 @@ $lang->menu->nav      = 'Navigation|nav|admin|';
 $lang->menu->block    = 'Widget|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
 $lang->menu->others   = "Settings|ui|others|";
+$lang->menu->effect   = "Eeffect|ui|effect|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i>Visual Editor|visual|index|";
 $lang->menu->edit     = "Custom|ui|edittemplate|";
 
@@ -205,6 +207,7 @@ $lang->menu->interface = 'API|site|setoauth|';
 
 $lang->menu->package    = 'Extensions|package|browse|';
 $lang->menu->themestore = 'Themes|ui|themestore|';
+$lang->menu->community  = 'Community|admin|register|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();

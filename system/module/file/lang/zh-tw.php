@@ -17,6 +17,7 @@ $lang->file->download      = '下載附件';
 $lang->file->edit          = '編輯';
 $lang->file->primary       = '封面';
 $lang->file->name          = '名稱';
+$lang->file->admin         = '附件管理';
 $lang->file->setPrimary    = '設為封面';
 $lang->file->cancelPrimary = '取消封面';
 $lang->file->deny          = '禁止';
@@ -32,6 +33,8 @@ $lang->file->sourceURI     = '地址';
 $lang->file->deleteSource  = '刪除素材';
 $lang->file->editSource    = '編輯素材';
 $lang->file->selectImage   = '選擇素材';
+$lang->file->fileList      = '檔案列表';
+$lang->file->invalidFile   = '無效檔案';
 
 $lang->file->id        = '編號';
 $lang->file->title     = '名稱';
@@ -70,3 +73,11 @@ $lang->file->copySuccess      = "已複製到剪貼板";
 $lang->file->evilChar         = "包含非法字元";
 $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，請手動複製";
+
+$lang->file->updateInvalidFiles = '更新列表';
+$lang->file->clearAllInvalid    = '刪除全部';
+$lang->file->fileTip            = '提示：紅色代表資料庫中有檔案記錄，但是檔案實際已經被刪除';
+
+$lang->file->dragFile    = '請拖拽檔案到此處';
+$lang->file->addFile     = '添加檔案';
+$lang->file->beginUpload = '開始上傳';
