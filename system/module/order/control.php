@@ -113,7 +113,7 @@ class order extends control
      * @access public
      * @return void
      */
-    public function admin($mode = 'shop', $param = 'all', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
+    public function admin($type = 'shop', $mode = 'all', $param = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
     {
         if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
@@ -122,9 +122,11 @@ class order extends control
 
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        if(!commonModel::isAvailable('score')) unset($this->lang->order->types['score']);
         $this->view->title          = $this->lang->order->common;
-        $this->view->orders         = $this->order->getList($mode, $param, $orderBy, $pager);
+        $this->view->orders         = $this->order->getList($type, $mode, $param, $orderBy, $pager);
         $this->view->pager          = $pager;
+        $this->view->type           = $type;
         $this->view->orderBy        = $orderBy;
         $this->view->mode           = $mode;
         $this->view->param          = $param;
@@ -262,7 +264,7 @@ class order extends control
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        $this->view->orders = $this->order->getList('account', $this->app->user->account, 'id_desc', $pager);
+        $this->view->orders = $this->order->getList('all', 'account', $this->app->user->account, 'id_desc', $pager);
         $this->view->pager  = $pager;
 
         $this->app->loadLang('product');

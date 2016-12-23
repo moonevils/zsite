@@ -3,7 +3,7 @@
 <form method='post' action='<?php echo inlink('setsecurity');?>' id='questionForm' class='form' data-checkfingerprint='1'>
   <table class='table table-form borderless'>
     <tr>
-      <th class='w-100px'><?php echo $lang->user->password;?></th>
+      <th class='w-130px'><?php echo $lang->user->password;?></th>
       <td>
         <?php echo html::password('oldPwd', '', "class='form-control' placeholder='{$lang->user->placeholder->password}'");?>
       </td>

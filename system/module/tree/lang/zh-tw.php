@@ -77,13 +77,17 @@ $lang->express->name   = '快遞名稱';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
-$lang->wechatMenu->common     = '公眾號菜單';
-$lang->wechatMenu->name       = '標題';
-$lang->wechatMenu->parent     = '上級菜單';
-$lang->wechatMenu->children   = "子菜單";
-$lang->wechatMenu->delete     = "清空菜單";
-$lang->wechatMenu->commit     = "同步菜單";
-
+$lang->wechatMenu->common      = '公眾號菜單';
+$lang->wechatMenu->name        = '標題';
+$lang->wechatMenu->parent      = '上級菜單';
+$lang->wechatMenu->children    = "子菜單";
+$lang->wechatMenu->delete      = "清空菜單";
+$lang->wechatMenu->commit      = "同步菜單";
 $lang->wechatMenu->setResponse = '響應設置';
-
 $lang->wechatMenu->responseTip = '提示：每個菜單都要設置響應。';
+
+$lang->tree->adminLinks = new stdclass();
+$lang->tree->adminLinks->article = '返回文章列表|article|admin|type=article';
+$lang->tree->adminLinks->blog    = '返回博客列表|article|admin|type=blog';
+$lang->tree->adminLinks->forum   = '返回主題列表|forum|admin|';
+$lang->tree->adminLinks->product = '返回產品列表|product|admin|';
