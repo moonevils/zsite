@@ -54,11 +54,11 @@ if(!$.zui.strCode)
     <div class='content'></div>
     <button type='button' class='close'>×</button>
   </div>
-  <div class='file-list file-list-lg' data-drag-placeholder="请拖拽文件到此处"></div>
+  <div class='file-list file-list-lg' data-drag-placeholder="<?php echo $lang->file->dragFile;?>"></div>
   <div>
     <div class='uploader-status pull-right text-muted'></div>
-    <button type='button' class='btn btn-primary uploader-btn-browse'><i class='icon icon-plus'></i> 添加文件</button>
-    <button type='button' class='btn btn-success uploader-btn-start'><i class='icon icon-cloud-upload'></i> 开始上传</button>
+    <button type='button' class='btn btn-primary uploader-btn-browse'><i class='icon icon-plus'></i><?php echo $lang->file->addFile;?></button>
+    <button type='button' class='btn btn-success uploader-btn-start'><i class='icon icon-cloud-upload'></i><?php echo $lang->file->beginUpload;?></button>
   </div>
 </div>
 <script>
