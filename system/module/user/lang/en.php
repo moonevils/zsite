@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The user module english file of chanzhiEPS.
@@ -256,5 +255,5 @@ $lang->user->confirmUnbind        = 'Do you want to remove binding?';
 $lang->user->forceYangcong        = 'Yangcong has been open, please confirm your identity.';
 
 $lang->user->placeholder = new stdclass();
-$lang->user->placeholder->password   = 'Enter your login password';
+$lang->user->placeholder->password   = 'Please enter your password.';
 $lang->user->placeholder->verifyCode = 'Please enter verification code received by Email.';

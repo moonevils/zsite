@@ -14,6 +14,7 @@ $config->order->statusFields->confirmed = 'deliveryStatus';
 $config->order->statusFields->normal    = 'status';
 $config->order->statusFields->finished  = 'status';
 $config->order->statusFields->canceled  = 'status';
+$config->order->statusFields->expired   = 'status';
 
 $config->order->processViews = new stdclass();
 $config->order->processViews->shop  = 'processorder';

@@ -5,15 +5,15 @@ $lang->admin->ignore        = 'Ignore security warning.';
 $lang->admin->ignoreupgrade = 'Ignore upgrade prompt.';
 
 $lang->admin->shortcuts = new stdclass();
-$lang->admin->shortcuts->common             = 'Quick Entry';
-$lang->admin->shortcuts->articleCategories  = 'Article Categories';
-$lang->admin->shortcuts->article            = 'Publish Article';
-$lang->admin->shortcuts->product            = 'Add Products';
-$lang->admin->shortcuts->feedback           = 'Manage Feedback';
-$lang->admin->shortcuts->site               = 'Site Settings';
-$lang->admin->shortcuts->logo               = 'Logo Settings';
-$lang->admin->shortcuts->company            = 'Company Information';
-$lang->admin->shortcuts->contact            = 'Manage Contacts';
+$lang->admin->shortcuts->common             = 'Shortcuts';
+$lang->admin->shortcuts->articleCategories  = 'Categories';
+$lang->admin->shortcuts->article            = 'Article';
+$lang->admin->shortcuts->product            = 'Products';
+$lang->admin->shortcuts->feedback           = 'Feedback';
+$lang->admin->shortcuts->site               = 'Settings';
+$lang->admin->shortcuts->logo               = 'Logo';
+$lang->admin->shortcuts->company            = 'Company';
+$lang->admin->shortcuts->contact            = 'Contacts';
 
 $lang->admin->thread       = 'New Threads';
 $lang->admin->order        = 'New Orders';

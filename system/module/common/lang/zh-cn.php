@@ -30,7 +30,7 @@ $lang->en = 'EN';
 
 $lang->toBeAdded = '待添加';
 
-$lang->about  = '关于';
+$lang->about  = '关于蝉知';
 $lang->thanks = '致谢';
 
 /* Lang items for xirang. */

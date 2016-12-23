@@ -124,3 +124,13 @@ $lang->order->abbr->paidDate       = '付款';
 $lang->order->abbr->deliveriedDate = '發貨';
 $lang->order->abbr->confirmedDate  = '收貨';
 $lang->order->abbr->createdDate    = '下單';
+
+$lang->order->searchLabels = new stdclass();
+$lang->order->searchLabels->all         = '所有|mode=all';
+$lang->order->searchLabels->waitPay     = '待付款|mode=payStatus&param=not_paid';
+$lang->order->searchLabels->waitSend    = '待發貨|mode=deliveryStatus&param=not_send';
+$lang->order->searchLabels->waitConfirm = '待收貨|mode=deliveryStatus&param=send';
+$lang->order->searchLabels->confirmed   = '已收貨|mode=deliveryStatus&param=confirmed';
+$lang->order->searchLabels->finished    = '已完成|mode=status&param=finished';
+$lang->order->searchLabels->canceled    = '已取消|mode=status&param=canceled';
+$lang->order->searchLabels->expired     = '已過期|mode=status&param=expired';
