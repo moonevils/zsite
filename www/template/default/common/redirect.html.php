@@ -8,9 +8,9 @@
  * @package     chanzhiEPS
  * @version     $Id: deny.html.php 824 2010-05-02 15:32:06Z wwccss $
  */
-include '../../common/view/header.lite.html.php';
+include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');
 ?>
-<?php if(0 and isset($locate)):?>
+<?php if(isset($locate)):?>
 <meta http-equiv='refresh' content="5;url='<?php echo $locate;?>'">
 <?php endif;?>
 <script>
@@ -27,16 +27,18 @@ $(function()
 });
 </script>
 <style>
+body{margin-top:40px;}
 .alert.with-icon > .icon, .alert.with-icon > .icon + .content {padding: 10px 20px 20px;}
 .alert.with-icon > .icon {padding-left: 35px;}
 .alert-deny {max-width: 500px; margin: 8% auto; padding: 0; background-color: #FFF; border: 1px solid #DDD; box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2); border-radius: 6px;}
 .btn-link {border-color: none!important}
+#errorInfo{font-weight:normal; font-size:14px;}
 </style>
 <div class='container w-600px'>
   <div class='alert with-icon alert-deny'>
-    <i class='icon-frown icon'></i>
+    <i class='icon-info icon'></i>
     <div class='content'>
-      <h4> <?php echo $reason;?></h4>
+      <h4 id='errorInfo' class='text-info'><?php echo $reason;?></h4>
       <div class='actions'><?php printf($lang->redirecting, $target, $locate);?></div>
     </div>
   </div>
