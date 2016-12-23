@@ -12,7 +12,7 @@
 $lang->article->common      = 'Article';
 $lang->article->setting     = 'Basic Settings';
 $lang->article->createDraft = 'Save the draft';
-$lang->article->post        = 'Contribute';
+$lang->article->post        = 'Submit';
 $lang->article->check       = 'Review';
 $lang->article->reject      = 'Reject';
 
@@ -50,9 +50,9 @@ $lang->article->selectBoard      = 'Select Board';
 $lang->article->confirmReject    = 'Do you want to reject it?';
 
 $lang->submittion= new stdclass();
-$lang->submittion->common  = 'Contribute';
+$lang->submittion->common  = 'Submit';
 $lang->submittion->check   = 'Review';
-$lang->submittion->list    = 'Contributions';
+$lang->submittion->list    = 'Submissions';
 $lang->submittion->publish = 'Pass';
 $lang->submittion->reject  = 'Reject';
 
@@ -76,24 +76,24 @@ $lang->article->edit          = 'Edit';
 $lang->article->files         = 'File';
 $lang->article->images        = 'Image';
 
-$lang->article->submittion     = 'Contribute';
-$lang->article->submissionTime = 'Contribute On';
-$lang->article->noSubmittion   = 'You have no contributions yet. Contribute and earn points NOW!';
+$lang->article->submittion     = 'Submit';
+$lang->article->submissionTime = 'Submit On';
+$lang->article->noSubmittion   = 'You have no submissions yet. Submit and earn points NOW!';
 
 $lang->article->submittionOptions = new stdclass;
 $lang->article->submittionOptions->open  = 'On';
 $lang->article->submittionOptions->close = 'Off';
 
 $lang->blog->common = 'Blog';
-$lang->blog->admin  = 'Maintain';
+$lang->blog->admin  = 'Manage';
 $lang->blog->list   = 'List';
 $lang->blog->create = 'Add Blog';
 $lang->blog->edit   = 'Edit';
 
 $lang->page->common = 'Page';
-$lang->page->admin  = 'Maintain`';
+$lang->page->admin  = 'Manage`';
 $lang->page->list   = 'List';
-$lang->page->create = 'Add a Page';
+$lang->page->create = 'Add Page';
 $lang->page->edit   = 'Edit';
 
 $lang->article->sourceList['original']      = 'Original';
@@ -132,7 +132,7 @@ $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = 'Select a date to publish.';
 $lang->article->placeholder->link      = 'Enter the link here. External link is OK.';
 
-$lang->article->approveMessage = 'Your contribution <strong>%s</strong> has passed the review. You have earned <strong>+%s</strong> points. Thank you!';
-$lang->article->rejectMessage  = 'Your contribution <strong>%s</strong> did not pass the review. You can edit it and submit for review again. Thank you!';
+$lang->article->approveMessage = 'Your submission <strong>%s</strong> has passed the review. You have earned <strong>+%s</strong> points. Thank you!';
+$lang->article->rejectMessage  = 'Your submission <strong>%s</strong> did not pass the review. You can edit it and submit for review again. Thank you!';
 
 $lang->article->forwardFrom = 'Repost from';
