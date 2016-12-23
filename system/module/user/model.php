@@ -215,7 +215,7 @@ class userModel extends model
             ->setIF($this->post->password1 == false, 'password', '')
             ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
             ->setIF($this->cookie->referer == '', 'referer', '')
-            ->remove('ip, fingerprint')
+            ->remove('ip,fingerprint,private,emailCertified,emailCode,mobileCertified,mobileCode')
             ->get();
         
         if(RUN_MODE != 'admin') $user->admin = 'no';
@@ -231,14 +231,7 @@ class userModel extends model
             ->check('email', 'unique')
             ->exec();
 
-        if(dao::isError())
-        {
-            if($viewType == 'json') die(json_encode(dao::getError()));
-            return false;
-        }
-
-        if($viewType == 'json') die('success');
-
+        if(dao::isError()) return false;
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('register', '', '', 'REGISTER', $user->account);
 
         if(RUN_MODE == 'admin')
@@ -335,7 +328,7 @@ class userModel extends model
             ->cleanInt('imobile, qq, zipcode')
             ->setDefault('admin', 'no')
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
-            ->remove('ip, account, join, visits, fingerprint, token')
+            ->remove('ip,account,join,visits,fingerprint,locked,token,private,emailCertified,mobileCertified,mobileCode,emailCode,bindSite')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->removeIF(RUN_MODE == 'admin', 'groups')
             ->removeIF(RUN_MODE == 'front', 'email')
