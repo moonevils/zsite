@@ -190,10 +190,23 @@ class seo
         }
         else
         {
+            if(preg_match('/^\d+$/', $items[1])) 
+            {
+               $params['effectID'] = $items[1];
+               return seo::convertURI($module, 'view', $params, $pageID);
+            }
+
             if(preg_match('/^\w+-\d+$/', $items[1])) 
             {
                list($category, $params['effectID']) = explode('-', $items[1]);
                return seo::convertURI($module, 'view', $params, $pageID);
+            }
+
+            if(preg_match('/^c\d+$/', $items[1])) 
+            {
+                $params['categoryID'] = str_replace('c', '', $items[1]);
+                $params['type'] = 'all';
+                return seo::convertURI($module, 'index', $params, $pageID);
             }
 
             if(preg_match('/^\w+$/', $items[1])) 
@@ -202,6 +215,8 @@ class seo
                $params['mode'] = 'all';
                return seo::convertURI($module, 'index', $params, $pageID);
             }
+
+
         }
 
         if($module == 'faq' and isset($items[1]))
