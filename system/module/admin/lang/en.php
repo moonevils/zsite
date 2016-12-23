@@ -19,7 +19,7 @@ $lang->admin->thread       = 'New Threads';
 $lang->admin->order        = 'New Orders';
 $lang->admin->feedback     = 'New Feedback';
 
-$lang->admin->adminEntry     = 'Warning! Your default entry is admin.php. Please change it for security reasons.';
+$lang->admin->adminEntry     = 'Warning! The admin entry is still admin.php now. Please rename it for security reasons.';
 $lang->admin->orderTitle     = '%s has created an Order %s ';
 $lang->admin->message        = 'Today you have %s messages to review.';
 $lang->admin->reply          = 'Today you have %s replies to review.';

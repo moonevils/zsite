@@ -35,13 +35,13 @@ $lang->js->confirmRebind = "确认要重新绑定蝉知账号？";
 
 $lang->admin->register = new stdclass();
 $lang->admin->register->common     = '蝉知社区绑定页面';
-$lang->admin->register->caption    = '蝉知社区登记';
+$lang->admin->register->caption    = '还有没有蝉知社区帐号？马上注册一个!';
 $lang->admin->register->lblAccount = '请设置您的用户名，英文字母和数字的组合，三位以上。';
 $lang->admin->register->lblPasswd  = '请设置您的密码。数字和字母的组合，六位以上。';
-$lang->admin->register->submit     = '登记';
-$lang->admin->register->success    = "登记账户成功";
+$lang->admin->register->submit     = '注册';
+$lang->admin->register->success    = "注册账户成功";
 
 $lang->admin->bind = new stdclass();
-$lang->admin->bind->caption = '已有蝉知官网账号';
+$lang->admin->bind->caption = '已有蝉知社区账号，输入用户名密码进行绑定！';
 $lang->admin->bind->submit  = '绑定账号';
 $lang->admin->bind->success = "关联账户成功";
