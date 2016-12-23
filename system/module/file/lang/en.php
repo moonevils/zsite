@@ -76,3 +76,7 @@ $lang->file->noFlashTip       = "Flash extension is forbidden，please do the pa
 $lang->file->updateInvalidFiles = 'Update Invalid List';
 $lang->file->clearAllInvalid    = 'Delete All Invalid Files';
 $lang->file->fileTip            = 'Tip : Red represent the file has been deleted while there is data in database';
+
+$lang->file->dragFile    = 'Please drag the file to here';
+$lang->file->addFile     = 'Add File';
+$lang->file->beginUpload = 'Begin Upload';
