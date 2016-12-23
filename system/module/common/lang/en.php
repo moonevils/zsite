@@ -182,7 +182,7 @@ $lang->menu->reply        = 'Reply|message|admin|type=reply';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Post|reply|admin|';
-$lang->menu->submittion   = 'Contribute|article|admin|type=submittion&tab=user';
+$lang->menu->submittion   = 'Submission|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
