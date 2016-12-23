@@ -438,5 +438,5 @@ $lang->effect->newBlock      = '导入新区块';
 $lang->effect->obtan         = '获取特效';
 $lang->effect->imported      = '已导入';
 $lang->effect->importSuccess = '导入成功';
-$lang->effect->bindCommunity = '请先登记蝉知社区获取特效。';
+$lang->effect->bindCommunity = '蝉知特效只对蝉知社区认证用户开放，请先注册并绑定蝉知社区账号后，获取蝉知特效。';
 $lang->effect->noRsults      = "你还没有任何特效，请登录蝉知特效平台，<a href='http://www.chanzhi.org/effect.html' target='_blank'>获取特效</a>。";
