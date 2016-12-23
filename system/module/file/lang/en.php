@@ -17,6 +17,7 @@ $lang->file->download      = 'Download';
 $lang->file->edit          = 'Edit';
 $lang->file->primary       = 'Cover';
 $lang->file->name          = 'Title';
+$lang->file->admin         = 'Attachment Manage';
 $lang->file->setPrimary    = 'Set as Cover';
 $lang->file->cancelPrimary = 'Remove Cover';
 $lang->file->deny          = 'Disable';

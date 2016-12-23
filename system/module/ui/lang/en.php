@@ -49,7 +49,6 @@ $lang->ui->industry        = "Industry";
 $lang->ui->offcial         = "Official";
 $lang->ui->reset           = "Reset";
 $lang->ui->themePackage    = "Theme Package";
-$lang->ui->installed       = "Installed";
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";
