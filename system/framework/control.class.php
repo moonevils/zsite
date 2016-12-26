@@ -474,7 +474,7 @@ class control extends baseControl
         $data = (array) $data;
         if($type == 'json')
         {
-            if(!helper::isAjaxRequest())
+            if(!helper::isAjaxRequest() and $this->viewType != 'json')
             {
                 if(isset($data['result']) and $data['result'] == 'success')
                 {
