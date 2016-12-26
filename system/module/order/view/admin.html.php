@@ -29,6 +29,8 @@
         <?php foreach($lang->order->searchLabels as $label):?>
         <?php list($title, $params) = explode('|', $label);?>
         <?php $class = strpos(strtolower($this->server->query_string), strtolower($params)) == false ? '' : "class='active'";?>
+        <?php parse_str($this->server->query_string, $queryPart);?>
+        <?php if(count($queryPart) == 2 and $params == 'mode=all') $class = "class='active'";?>
         <li <?php echo $class;?> data-type='internal' ><?php echo html::a(inlink('admin', "type={$type}&" . $params), $title);?></li>
         <?php endforeach;?>
       </ul> 
@@ -36,7 +38,7 @@
     <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
       <thead>
         <tr class='text-center'>
-          <?php $vars = "mode=$mode&param={$param}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+          <?php $vars = "type=$type&mode=$mode&param={$param}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
           <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
           <th class='w-80px'><?php commonModel::printOrderLink('type', $orderBy, $vars, $lang->order->type);?></th>
           <th class='w-90px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
