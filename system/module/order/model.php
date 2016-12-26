@@ -119,6 +119,7 @@ class orderModel extends model
             ->autocheck()
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();
+			
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $orderID = $this->dao->lastInsertID();
