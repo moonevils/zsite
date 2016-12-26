@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->product->common = 'Product';
-$lang->product->home   = 'Product Center';
+$lang->product->common = 'Products';
+$lang->product->home   = 'Products';
 
 $lang->product->id         = 'ID';
 $lang->product->category   = 'Category';
