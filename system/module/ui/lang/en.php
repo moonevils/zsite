@@ -383,11 +383,11 @@ $lang->ui->files->default->user['side']        = 'Menu';
 $lang->ui->files->default->user['deny']        = 'Access denied';
 $lang->ui->files->default->user['edit']        = 'Edit';
 $lang->ui->files->default->user['login.front'] = 'Login';
-$lang->ui->files->default->user['message']     = 'My Messages';
-$lang->ui->files->default->user['profile']     = 'My Profile';
+$lang->ui->files->default->user['message']     = 'Messages';
+$lang->ui->files->default->user['profile']     = 'Profile';
 $lang->ui->files->default->user['register']    = 'Register';
-$lang->ui->files->default->user['score']       = 'My Points';
-$lang->ui->files->default->user['thread']      = 'My Threads';
+$lang->ui->files->default->user['score']       = 'Points';
+$lang->ui->files->default->user['thread']      = 'Threads';
 
 $lang->ui->files->default->order['browse']        = 'My Orders';
 $lang->ui->files->default->order['check']         = 'Chechout';
