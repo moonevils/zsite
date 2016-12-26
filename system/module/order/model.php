@@ -47,6 +47,7 @@ class orderModel extends model
                 ->set('last')->eq(helper::now())
                 ->where('deliveryStatus')->eq('send')
                 ->andWhere('deliveriedDate')->le($deliveryDate)
+                ->andWhere('status')->ne('finished')
                 ->exec();
         }
 
@@ -66,10 +67,11 @@ class orderModel extends model
         
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where(1)
-            ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
+            ->andWhere('status')->ne('deleted')
+            ->beginIf(!empty($type) and $type != 'all')->andWhere('type')->eq($type)->fi()
+            ->beginIf($mode != 'all' and $mode != 'status')->andWhere('status')->eq('normal')->fi()
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
             ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
-            ->andWhere('status')->ne('deleted')
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
             ->beginIf($mode == 'deliveryStatus' and $value !='not_send' )->andWhere('deliveryStatus')->eq($value)->fi()
             ->beginIf($mode == 'deliveryStatus' and $value =='not_send')
@@ -78,7 +80,7 @@ class orderModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
-
+        
         $products = $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
 
         foreach($orders as $order) $order->products = isset($products[$order->id]) ? $products[$order->id] : array();
@@ -119,6 +121,7 @@ class orderModel extends model
             ->autocheck()
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();
+			
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $orderID = $this->dao->lastInsertID();
