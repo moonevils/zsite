@@ -491,7 +491,7 @@ class control extends baseControl
                         $message = json_decode(json_encode((array)$data['message']));
                         foreach((array)$message as $item => $errors)
                         {
-                            $message->$item = implode(',', $errors);
+                            $message[$item] = implode(',', (array)$errors);
                         }
                         echo js::alert(strip_tags(implode(" ", (array) $message)));
                         die(js::locate('back'));
