@@ -89,25 +89,25 @@ class admin extends control
 	public function register()
 	{
 		$registerInfo = $this->admin->getRegisterInfo();
+        $apiConfig    = $this->admin->getApiConfig();
 		if($_POST)
 		{
-			$response = $this->admin->registerByAPI();
-
-			if($response == 'success') 
-			{
-                $bindResult = $this->admin->bindByAPI();
-                if($bindResult->result == 'success')
-                {
-                    $this->admin->setCommunity($bindResult->data->account, $bindResult->data->private);
-                }
-                $this->send(array('result' => 'success', 'message' => $this->lang->admin->register->success, 'locate' => inlink('register')));
-			}
-            $this->send(array('result' => 'fail', 'message' => json_decode($response)));
+			$response = $this->admin->registerByAPI($apiConfig);
+            if(isset($response->certifiedEmail)) $this->session->set('certifiedEmail', $response->certifiedEmail);
+            if(isset($response->certifiedMobile)) $this->session->set('certifiedMobile', $response->certifiedMobile);
+            if($response->result == 'success') 
+            {
+                $this->admin->setCommunity($response->data->account, $response->data->private);
+                $response->message = $this->lang->admin->register->success;
+                $response->locate  = inlink('register');
+            }
+            $this->send($response);
 		}
 
         $this->lang->menuGroups->admin = 'community';
-        $this->view->title    = $this->lang->admin->register->caption;
-		$this->view->register = $registerInfo;
+        $this->view->title             = $this->lang->admin->register->caption;
+	    $this->view->apiConnected      = !empty($apiConfig);
+        $this->view->register          = $registerInfo;
 		$this->display();
 	}
 
@@ -131,6 +131,32 @@ class admin extends control
             $this->send(array('result' => 'fail', 'message' => $response->message));
         }
         exit;
+    }
+
+    /**
+     * Api get mobileCode 
+     * 
+     * @param  int    $mobile 
+     * @access public
+     * @return void
+     */
+    public function getMobileCodeByApi($mobile)
+    {
+        $result = $this->admin->getMobileCodeByApi($mobile);
+        $this->send($result);
+    }
+
+    /**
+     * Aet email code by api.
+     * 
+     * @param  string    $email 
+     * @access public
+     * @return void
+     */
+    public function getEmailCodeByApi($email)
+    {
+        $result = $this->admin->getEmailCodeByApi($email);
+        $this->send($result);
     }
     
     /**

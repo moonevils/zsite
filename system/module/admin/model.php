@@ -45,6 +45,24 @@ class adminModel extends model
     }
 
     /**
+     * Get api config.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getApiConfig()
+    {
+        if(!$this->session->apiConfig)
+        {
+            $config = file_get_contents($this->config->admin->apiRoot . "?mode=getconfig");    
+            $config = json_decode($config);
+            if(empty($config) or empty($config->sessionID)) return null;
+            $this->session->set('apiConfig', $config);
+        }
+        return $this->session->apiConfig;
+    }
+
+    /**
      * Post data form  API 
      * 
      * @param  string $url 
@@ -60,16 +78,55 @@ class adminModel extends model
 		return $this->agent->results;
     }
 
+    /**
+     * Get mobile code by api.
+     * 
+     * @param  int    $mobile 
+     * @access public
+     * @return void
+     */
+    public function getMobileCodeByApi($mobile)
+    {
+        if(empty($mobile) or !$this->session->apiConfig) return array('result' => 'fail', 'message' => 'fail');
+		$api = "sms-apiSendCode.json?{$this->session->apiConfig->sessionVar}={$this->session->apiConfig->sessionID}&t=json";
+        $response = $this->postApi($api, array('mobile' => $mobile));
+        $result   = json_decode($response);
+        if(!empty($result)) return $result;
+        return array('result' => 'fail', 'message' => $response);
+    }
+
+    /**
+     * Get email code by api.
+     * 
+     * @param  string    $email 
+     * @access public
+     * @return void
+     */
+    public function getEmailCodeByApi($email)
+    {
+        if(empty($email) or !$this->session->apiConfig) return array('result' => 'fail', 'message' => 'fail');
+		$api = "mail-apiSendCode.json?{$this->session->apiConfig->sessionVar}={$this->session->apiConfig->sessionID}&t=json";
+        $response = $this->postApi($api, array('email' => $email));
+        $result   = json_decode($response);
+        if(!empty($result)) return $result;
+        return array('result' => 'fail', 'message' => $response);
+    }
+
+
 	/**
 	 * Register zentao by API. 
 	 * 
 	 * @access public
 	 * @return void
 	 */
-	public function registerByAPI()
+	public function registerByAPI($apiConfig)
 	{
-		$api = 'user-register.json';
-		return $this->postAPI($api, $_POST);
+        $_POST['bindSite'] = $this->server->http_host;
+		$api = "user-apiregister.json?{$apiConfig->sessionVar}={$apiConfig->sessionID}";
+        $response = $this->postApi($api, $_POST);
+        $result   = json_decode($response);
+        if(!empty($result)) return $result;
+        return array('result' => 'fail', 'message' => $response);
 	}
 
 	/**

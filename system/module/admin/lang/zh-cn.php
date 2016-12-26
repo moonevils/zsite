@@ -3,6 +3,7 @@ $lang->admin->common        = '后台管理';
 $lang->admin->index         = '首页';
 $lang->admin->ignore        = '忽略安全警告';
 $lang->admin->ignoreupgrade = '忽略升级提示';
+$lang->admin->checked       = '已认证';
 
 $lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->common             = '快捷入口';
@@ -27,9 +28,10 @@ $lang->admin->comment        = '您今天有 %s 条评论待审核';
 $lang->admin->threadReply    = '您今天有 %s 篇回帖';
 $lang->admin->submittion     = '您今天有 %s 篇投稿待审核';
 
-$lang->admin->registerInfo = "站点已经绑定到蝉知账号%s，%s";
-$lang->admin->registerPage = '登记页面';
-$lang->admin->rebind       = "重新绑定";
+$lang->admin->connectApiFail = "不能连接到蝉知社区，请检查您的网络设置后 <a href='javascritp:loaction.reload()'>重试</a>。";
+$lang->admin->registerInfo   = "站点已经绑定到蝉知账号%s，%s";
+$lang->admin->registerPage   = '登记页面';
+$lang->admin->rebind         = "重新绑定";
 
 $lang->js->confirmRebind = "确认要重新绑定蝉知账号？";
 
