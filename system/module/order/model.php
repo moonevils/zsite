@@ -67,10 +67,10 @@ class orderModel extends model
         
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where(1)
+            ->andWhere('status')->ne('deleted')
             ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
             ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
-            ->andWhere('status')->ne('deleted')
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
             ->beginIf($mode == 'deliveryStatus' and $value !='not_send' )->andWhere('deliveryStatus')->eq($value)->fi()
             ->beginIf($mode == 'deliveryStatus' and $value =='not_send')
