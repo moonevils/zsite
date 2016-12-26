@@ -47,6 +47,7 @@ class orderModel extends model
                 ->set('last')->eq(helper::now())
                 ->where('deliveryStatus')->eq('send')
                 ->andWhere('deliveriedDate')->le($deliveryDate)
+                ->andWhere('status')->ne('finished')
                 ->exec();
         }
 
