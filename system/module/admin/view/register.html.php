@@ -11,9 +11,15 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('certifiedMobile', $this->session->certifiedMobile);?>
+<?php js::set('certifiedEmail', $this->session->certifiedEmail);?>
 <?php if($register):?>
 <div class='alert alert-success'>
 <?php printf($lang->admin->registerInfo, $register->account, html::a(inlink('unbind'), $lang->admin->rebind, "id='rebindBtn'"));?>
+</div>
+<?php elseif(!$apiConnected):?>
+<div class='alert alert-warning'>
+<?php printf($lang->admin->connectApiFail);?>
 </div>
 <?php else:?>
 <div class='col-md-6'>
@@ -26,29 +32,53 @@
         <table class='table table-form'>
           <tr>
             <th class='w-100px'><?php echo $lang->user->account;?></th>
-            <td>
+            <td colspan='2'>
               <div class="required required-wrapper"></div>
               <?php echo html::input('account', '', "class='form-control' placeholder='{$lang->admin->register->lblAccount}'");?>
             </td>
           </tr>
           <tr>
             <th><?php echo $lang->user->realname;?></th>
-            <td>
+            <td colspan='2'>
               <div class="required required-wrapper"></div>
               <?php echo html::input('realname', '', "class='form-control'");?>
             </td>
           </tr>
           <tr>
             <th><?php echo $lang->user->company;?></th>
-            <td><?php echo html::input('company', '', "class='form-control'");?></td>
+            <td colspan='2'><?php echo html::input('company', '', "class='form-control'");?></td>
           </tr>
           <tr>
-            <th><?php echo $lang->user->phone;?></th>
-            <td><?php echo html::input('phone', '', "class='form-control'");?></td>
+            <th><?php echo $lang->user->mobile;?></th>
+            <td style='padding-right:0;'>
+              <?php echo html::input('mobile', $this->session->certifiedMobile, "class='form-control'");?>
+            </td>
+            <td >
+              <?php if($this->session->certifiedMobile) echo "<span class='certified label label-success'><i class='icon icon-check'> </i>{$lang->admin->checked}</span>";?>
+              <?php echo html::a($this->createLink('sms', 'sendcertifycode'), $lang->user->getCertifyCode, "id='smsSender' class='btn uncertified'");?> 
+            </td>
+            <td class='w-180px td-captcha'>
+              <div class="required required-wrapper"></div>
+              <div class='input-group'>
+                <span class='input-group-addon borderless'><?php echo $lang->user->captcha;?></span>
+                <?php echo html::input('mobileCode', '', "class='form-control'");?>
+              </div>
+            </td>
           </tr>  
           <tr>
             <th><?php echo $lang->user->email;?></th>
-            <td><div class="required required-wrapper"></div><?php echo html::input('email', '', "class='form-control'");?></td>
+            <td style='padding-right:0;'><?php echo html::input('email', $this->session->certifiedEmail, "class='form-control'");?></td>
+            <td>
+              <?php if($this->session->certifiedEmail) echo "<span class='certified label label-success'><i class='icon icon-check'> </i>{$lang->admin->checked}</span>";?>
+              <?php echo html::a($this->createLink('sms', 'sendcertifycode'), $lang->user->getCertifyCode, "id='mailSender' class='uncertified btn'");?>
+            </td>
+            <td class='td-captcha'>
+              <div class="required required-wrapper"></div>
+              <div class='input-group'>
+                <span class='input-group-addon borderless'><?php echo $lang->user->captcha;?></span>
+                <?php echo html::input('emailCode', '', "class='form-control'");?>
+              </div>
+            </td>
           </tr>  
           <tr>
             <th><?php echo $lang->user->password;?></th>
@@ -63,7 +93,7 @@
           </tr> 
           <tr>
             <th></th>
-            <td colspan="2">
+            <td colspan="4">
               <?php echo html::submitButton($lang->admin->register->submit);?>
             </td>
           </tr>
@@ -95,7 +125,6 @@
           <tr>
             <th></th><td><?php echo html::submitButton($lang->admin->bind->submit);?></td>
           </tr>
-
         </table>
       </form>
     </div>
