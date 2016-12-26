@@ -1,6 +1,6 @@
 <?php
 $lang->book->common       = 'Book';
-$lang->book->list         = 'List';
+$lang->book->list         = 'Book List';
 $lang->book->articles     = 'Articles';
 $lang->book->backtolist   = 'Back';
 
@@ -42,8 +42,8 @@ $lang->book->typeList['book']    = 'Book';
 $lang->book->typeList['chapter'] = 'Chapter';
 $lang->book->typeList['article'] = 'Article';
 
-$lang->book->chapterTypeList['home'] = 'Display on homepage only';
-$lang->book->chapterTypeList['left'] = 'Always dispaly on the left';
+$lang->book->chapterTypeList['home'] = 'On homepage only';
+$lang->book->chapterTypeList['left'] = 'Always on the left';
 
 $lang->book->fullScreenList['1'] = 'Yes';
 $lang->book->fullScreenList['0'] = 'No';
