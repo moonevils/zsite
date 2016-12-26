@@ -68,7 +68,7 @@ class orderModel extends model
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where(1)
             ->andWhere('status')->ne('deleted')
-            ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
+            ->beginIf(!empty($type) and $type != 'all')->andWhere('type')->eq($type)->fi()
             ->beginIf($mode != 'all' and $mode != 'status')->andWhere('status')->eq('normal')->fi()
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
             ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
