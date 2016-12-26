@@ -29,6 +29,8 @@
         <?php foreach($lang->order->searchLabels as $label):?>
         <?php list($title, $params) = explode('|', $label);?>
         <?php $class = strpos(strtolower($this->server->query_string), strtolower($params)) == false ? '' : "class='active'";?>
+        <?php parse_str($this->server->query_string, $queryPart);?>
+        <?php if(count($queryPart) == 2 and $params == 'mode=all') $class = "class='active'";?>
         <li <?php echo $class;?> data-type='internal' ><?php echo html::a(inlink('admin', "type={$type}&" . $params), $title);?></li>
         <?php endforeach;?>
       </ul> 
