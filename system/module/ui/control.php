@@ -739,7 +739,6 @@ class ui extends control
         {
             $this->view->reason = $this->lang->effect->bindCommunity;
             $this->view->locate = helper::createLink('admin', 'register');
-            $this->view->target = $this->lang->admin->register->common;
             $this->display('common', 'redirect');
             die();
         }

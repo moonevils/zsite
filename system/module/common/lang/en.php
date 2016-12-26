@@ -37,9 +37,15 @@ $lang->thanks = 'Thanks';
 $lang->chanzhiEPS     = 'CHANGER';
 $lang->chanzhiEPSx    = 'CHANGER';
 $lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, any signs/links of Changer shouldn't be removed, hidden or covered.</span>";
+<<<<<<< HEAD
 $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>Changer %s</a></span>";
 $lang->newVersion     = "Note: Changer has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
+=======
+$lang->poweredBy      = "<a href='http://www.changerpress.com/?v=%s' target='_blank' title='%s'>%s</a>";
+$lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.changerpress.com/?v=%s' target='_blank' title='%s'>Changer CMS %s</a></span>";
+$lang->newVersion     = "Note: Changer CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
+>>>>>>> 9d4a361f9c1bfa7c9083472fef2e5472d9eef6c2
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
 $lang->redirecting    = "Redirecting to %s，<a href='%s'>Redirect immediately</a>";
@@ -182,7 +188,7 @@ $lang->menu->reply        = 'Reply|message|admin|type=reply';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Post|reply|admin|';
-$lang->menu->submittion   = 'Contribute|article|admin|type=submittion&tab=user';
+$lang->menu->submittion   = 'Submission|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
