@@ -69,6 +69,7 @@ class orderModel extends model
             ->where(1)
             ->andWhere('status')->ne('deleted')
             ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
+            ->beginIf($mode != 'all' and $mode != 'status')->andWhere('status')->eq('normal')->fi()
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
             ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
@@ -79,7 +80,7 @@ class orderModel extends model
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
-
+        
         $products = $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
 
         foreach($orders as $order) $order->products = isset($products[$order->id]) ? $products[$order->id] : array();
