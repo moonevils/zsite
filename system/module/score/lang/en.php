@@ -51,8 +51,8 @@ $lang->score->methods['delReply']    = 'Delete Reply';
 $lang->score->methods['award']       = 'Reward';
 $lang->score->methods['punish']      = 'Deduct';
 
-$lang->score->methods['approveSubmittion'] = 'Contributed';
-$lang->score->methods['approvesubmittion'] = 'Contributed';
+$lang->score->methods['approveSubmittion'] = 'Submitted';
+$lang->score->methods['approvesubmittion'] = 'Submitted';
 
 $lang->score->methods['buyscore']  = 'Purchase';
 $lang->score->methods['statement'] = 'Point Statement';
