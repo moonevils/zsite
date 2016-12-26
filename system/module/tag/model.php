@@ -62,7 +62,7 @@ class tagModel extends model
     {
         if(strpos($content, $tag->link) !== false) return $content;
         $pos = $this->findKeyword($content, $tag->tag);
-        return $pos ? substr_replace($content, "{link{$tag->id}}", $pos, strlen($tag->tag)) : $content; 
+        return $pos !== false ? substr_replace($content, "{link{$tag->id}}", $pos, strlen($tag->tag)) : $content; 
     }
 
     /**
@@ -76,7 +76,8 @@ class tagModel extends model
     public function checkInHtmlTag($content, $pos)
     {
         $inTag = 0;
-        $pos = $pos - 1;
+        $pos   = $pos - 1;
+        if($pos < 0) $inTag = 1;
         while($pos >= 0)
         {
             if($content{$pos} == '>')
