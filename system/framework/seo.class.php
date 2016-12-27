@@ -129,7 +129,6 @@ class seo
                 return seo::convertURI('book', 'browse', $params);
             }
         }
-        a($uri);
 
         if($module == 'forum' && isset($forumAlias[$items[1]]))
         {
