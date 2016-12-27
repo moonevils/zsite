@@ -203,7 +203,7 @@ $lang->site->moduleAvailable->mall['product'] = 'Product';
 
 $lang->site->moduleAvailable->score = array();
 $lang->site->moduleAvailable->score['search'] = 'Search';
-$lang->site->moduleAvailable->score['stat']   = 'Report';
+$lang->site->moduleAvailable->score['stat']   = 'Statistics';
 
 $lang->site->metaHolder       = 'Tag <meta><script><style> and <link> applicable';
 $lang->site->fileAllowedRole  = 'Use "," to separate file types.';
@@ -263,7 +263,7 @@ $lang->site->menus['submittion'] = 'Submission';
 $lang->site->menus['product']    = 'Product';
 $lang->site->menus['user']       = 'User';
 $lang->site->menus['wechat']     = 'Wechat';
-$lang->site->menus['stat']       = 'Report';
+$lang->site->menus['stat']       = 'Stats';
 $lang->site->menus['tag']        = 'Keywords';
 $lang->site->menus['links']      = 'Links';
 $lang->site->menus['site']       = 'Site';
