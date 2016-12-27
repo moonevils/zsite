@@ -64,4 +64,4 @@ $lang->slide->target = new stdclass();
 $lang->slide->target->_blank = 'New Window';
 
 $lang->slide->globalButton = array();
-$lang->slide->globalButton[1] = 'Global Button';
+$lang->slide->globalButton[1] = 'Global';
