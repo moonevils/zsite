@@ -119,9 +119,17 @@ class seo
         {
             if(count($items) > 2)
             {
-                $params = explode('-', $items[2]);
-                $params = array('articleID' => end($params));
-                return seo::convertURI('book', 'read', $params);
+                if(preg_match('/\w+-\d+$/', $items[2])) 
+                {
+                    $params = explode('-', $items[2]);
+                    $params = array('articleID' => end($params));
+                    return seo::convertURI('book', 'read', $params);
+                }
+                else
+                {
+                    $params = array('articleID' => $items[2]);
+                    return seo::convertURI('book', 'browse', $params);
+                }
             }
             if(count($items) == 2 )
             {

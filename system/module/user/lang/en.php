@@ -85,7 +85,7 @@ $lang->user->question        = 'Security Question';
 $lang->user->answer          = 'Answer';
 $lang->user->checkContact    = 'Check Contact';
 
-$lang->user->type        = 'Account Type';
+$lang->user->type        = 'Type';
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit';
 $lang->user->thread      = 'Thread';
