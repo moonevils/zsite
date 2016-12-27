@@ -84,7 +84,7 @@ $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
-$lang->addToBlacklist = 'Block';
+$lang->addToBlacklist = 'Widget';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
@@ -186,7 +186,7 @@ $lang->menu->submittion   = 'Submission|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
-$lang->menu->tag     = 'Tags|tag|admin|';
+$lang->menu->tag     = 'Keywords|tag|admin|';
 $lang->menu->links   = 'Links|links|admin|';
 
 $lang->menu->ui       = 'UI|ui|settemplate|';
