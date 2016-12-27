@@ -26,7 +26,7 @@ $lang->forum->update  = 'Data Update';
 $lang->forum->setting = 'Forum Settings';
 $lang->forum->postReview = 'Post Review';
 
-$lang->forum->updateDesc    = 'Number of posts on each board will be updated.';
+$lang->forum->updateDesc    = 'Number of threads on each board will be updated.';
 $lang->forum->successUpdate = 'Done!';
 
 /* Adjust the pager. */
