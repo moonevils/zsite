@@ -115,11 +115,21 @@ class seo
             return seo::convertURI($module, 'view', $params, $pageID);
         }
 
-        if($module == 'book' && count($items) > 2)
+        if($module == 'book')
         {
-            $uri      = str_replace('/' . $items[1], '', $uri );
-            $items[1] = $items[2];
+            if(count($items) > 2)
+            {
+                $params = explode('-', $items[2]);
+                $params = array('articleID' => end($params));
+                return seo::convertURI('book', 'read', $params);
+            }
+            if(count($items) == 2 )
+            {
+                $params = array('nodeID' => $items[1]);
+                return seo::convertURI('book', 'browse', $params);
+            }
         }
+        a($uri);
 
         if($module == 'forum' && isset($forumAlias[$items[1]]))
         {
@@ -215,8 +225,6 @@ class seo
                $params['mode'] = 'all';
                return seo::convertURI($module, 'index', $params, $pageID);
             }
-
-
         }
 
         if($module == 'faq' and isset($items[1]))
