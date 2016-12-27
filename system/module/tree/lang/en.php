@@ -11,12 +11,12 @@
  */
 $lang->tree->add         = "Add";
 $lang->tree->edit        = "Edit";
-$lang->tree->addChild    = "Add a Child";
+$lang->tree->addChild    = "Add Child";
 $lang->tree->delete      = "Delete";
-$lang->tree->browse      = "View Category";
+$lang->tree->browse      = "Categories";
 $lang->tree->manage      = "Manage Category";
 $lang->tree->fix         = "Fix Data";
-$lang->tree->children    = "Subcategory";
+$lang->tree->children    = "Child";
 $lang->tree->layout      = 'Layout';
 
 $lang->tree->common           = 'Category';
@@ -40,9 +40,9 @@ $lang->category->common     = 'Category';
 $lang->category->name       = 'Name';
 $lang->category->abbr       = 'Abbreviation';
 $lang->category->alias      = 'Alias';
-$lang->category->parent     = 'Parent Category';
+$lang->category->parent     = 'Parent';
 $lang->category->desc       = 'Description';
-$lang->category->keywords   = 'Keyword';
+$lang->category->keywords   = 'Keywords';
 $lang->category->children   = "Child";
 $lang->category->unsaleable = 'Not for Sale';
 $lang->category->isLink     = 'Jump';
@@ -54,12 +54,12 @@ $lang->board->common     = 'Board';
 $lang->board->name       = 'Name';
 $lang->board->abbr       = 'Abbreviation';
 $lang->board->alias      = 'Alias';
-$lang->board->parent     = 'Parent Board';
+$lang->board->parent     = 'Parent';
 $lang->board->desc       = 'Description';
-$lang->board->keywords   = 'Keyword';
-$lang->board->children   = "Child Board";
-$lang->board->readonly   = 'Access Permission';
-$lang->board->moderators = 'Moderator';
+$lang->board->keywords   = 'Keywords';
+$lang->board->children   = "Child";
+$lang->board->readonly   = 'Access Control';
+$lang->board->moderators = 'Board Moderator';
 $lang->board->isLink     = 'Jump';
 $lang->board->link       = 'Link';
 
