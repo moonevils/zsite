@@ -308,19 +308,20 @@ class router extends baseRouter
                     
                     if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsPages))
                     {
-                        $views = commonModel::getViewsInfo($moduleName, $methodName);
-                        $cache = str_replace($this->config->viewsPlaceholder, $views, $cache);
+                        $viewsID = commonModel::parseItemID($moduleName, $methodName);
+                        $views   = commonModel::getViews($moduleName, $methodName, $viewsID);
+                        $cache   = str_replace($this->config->viewsPlaceholder, $views, $cache);
                     }
                     
                     if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsListPages))
                     {
-                        $beginPos    = strpos($cache, $this->config->viewsListPlaceHolder) + strlen($this->config->viewsListPlaceHolder);
-                        $length      = strrpos($cache, $this->config->viewsListPlaceHolder) - $beginPos; 
+                        $beginPos    = strpos($cache, $this->config->idListPlaceHolder) + strlen($this->config->idListPlaceHolder);
+                        $length      = strrpos($cache, $this->config->idListPlaceHolder) - $beginPos; 
                         $viewsIDList = explode(',', trim(substr($cache, $beginPos, $length), ',')); 
-                        $viewsList   = commonModel::getViewsList($moduleName, $methodName, $viewsIDList);
+                        $viewsList   = commonModel::getViews($moduleName, $methodName, $viewsIDList);
                         foreach($viewsList as $viewID => $views)
                         {
-                            $cache = str_replace($this->config->viewsPlaceholder . $viewID, $views, $cache);
+                            $cache = str_replace($this->config->viewsPlaceholder . $viewID . $this->config->viewsPlaceholder, $views, $cache);
                         }
                     }
                     die($cache);

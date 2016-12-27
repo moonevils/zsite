@@ -53,10 +53,10 @@ $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
 $config->devicePrefix['mhtml'] = 'm.';
 
-$config->execPlaceholder      = 'EXEC_PLACEHOLDER';
-$config->siteNavHolder        = 'SITENAV_PLACEHOLDER';
-$config->viewsPlaceholder     = 'VIEWS_PLACEHOLDER';
-$config->viewsListPlaceHolder = 'VIEWSLIST_PLACEHOLDER';
+$config->execPlaceholder   = 'EXEC_PLACEHOLDER';
+$config->siteNavHolder     = 'SITENAV_PLACEHOLDER';
+$config->viewsPlaceholder  = 'VIEWS_PLACEHOLDER';
+$config->idListPlaceHolder = 'IDLIST_PLACEHOLDER';
 
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();

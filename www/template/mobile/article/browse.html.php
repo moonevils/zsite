@@ -18,9 +18,9 @@ js::set('categoryID', $category->id);
 js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->id));
 ?>
 <?php if(isset($articleList)):?>
-<script><?php echo "place" . md5(time()). "='" . $config->viewsListPlaceHolder . $articleList . $config->viewsListPlaceHolder . "';";?></script>
+<script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';";?></script>
 <?php else:?>
-<script><?php echo "place" . md5(time()) . "='" . $config->viewsListPlaceHolder . '' . $config->viewsListPlaceHolder . "';";?></script>
+<script><?php echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';";?></script>
 <?php endif;?>
 <div class='block-region blocks region-top' data-region='article_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'top');?></div>
 <div class='panel panel-section'>
@@ -43,7 +43,7 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
         <div class='table-cell'>
           <div class='card-content text-muted small'>
               <?php echo helper::substr($article->summary, 40, '...');?>
-              <div><span title="<?php echo $config->viewsPlaceholder . $article->id;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $article->id;?></span>
+              <div><span title="<?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?></span>
                 <?php if($article->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
                 &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span></div>
           </div>

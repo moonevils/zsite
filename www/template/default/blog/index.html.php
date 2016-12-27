@@ -22,9 +22,9 @@ $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
 <?php if(isset($articleList)):?>
-<script><?php echo "place" . md5(time()). "='" . $config->viewsListPlaceHolder . $articleList . $config->viewsListPlaceHolder . "';";?></script>
+<script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';";?></script>
 <?php else:?>
-<script><?php echo "place" . md5(time()) . "='" . $config->viewsListPlaceHolder . '' . $config->viewsListPlaceHolder . "';";?></script>
+<script><?php echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';";?></script>
 <?php endif;?>
 <div class='row blocks' data-region='blog_index-topBanner'><?php $this->block->printRegion($layouts, 'blog_index', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='blog_index'>
@@ -57,7 +57,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <div class="card-actions text-muted">
             <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($stick->addedDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($stick->addedDate));?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $stick->author);?>'><i class="icon-user"></i> <?php echo $stick->author;?></span>
-            &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder . $stick->id);?>'><i class="icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $stick->id;?></span>
+            &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder);?>'><i class="icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder;?></span>
             <?php if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $stick->comments);?>'><i class="icon-comments-alt"></i> <?php echo $stick->comments;?></span></a><?php endif;?>
           </div>
         </div>
@@ -82,7 +82,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <div class="card-actions text-muted">
             <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class="icon-user"></i> <?php echo $article->author;?></span>
-            &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder . $article->id);?>'><i class="icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $article->id;?></span>
+            &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder);?>'><i class="icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?></span>
             <?php if(commonModel::isAvailable('message') and $article->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $article->comments);?>'><i class="icon-comments-alt"></i> <?php echo $article->comments;?></span></a><?php endif;?>
           </div>
         </div>

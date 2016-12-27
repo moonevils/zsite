@@ -35,13 +35,6 @@ class search extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $this->config->search->recPerPage, $pageID);
 
-        if(isset($_SERVER['HTTP_REFERER']))
-        {
-            $refererArray = parse_url($_SERVER['HTTP_REFERER']);
-            $requestUrl   = $refererArray['path'] . '/' . zget($refererArray, 'query', '');
-            if((strpos($requestUrl, 'blog') !== false) and (strpos($requestUrl, 'words') === false)) $this->view->isFromBlog = true; 
-        }
-        
         $this->session->set('serachIngWord', $words);
 
         $begin = time();
