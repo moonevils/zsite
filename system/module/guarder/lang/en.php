@@ -49,7 +49,7 @@ $lang->guarder->noQuestion    = "No security questions set up.";
 $lang->guarder->noCaptcha     = "Email verification is disabled.";
 $lang->guarder->okFileVerify  = "Please create <span class='red'>%s</span> on your server and enter <span class='red'>%s</span>.";
 $lang->guarder->sendSuccess   = 'Verification code has been sent to %s';
-$lang->guarder->options       = 'Verification options';
+$lang->guarder->options       = 'Verification';
 
 $lang->guarder->blacklistModes['all']      = 'All';
 $lang->guarder->blacklistModes['ip']       = 'IP';
