@@ -765,6 +765,7 @@ CREATE TABLE IF NOT EXISTS  `eps_blacklist` (
   `lang` char(30) NOT NULL,
   UNIQUE KEY `identity` (`type`, `identity`, `lang`),
   KEY `expiredDate` (`expiredDate`),
+  KEY `addedDate` (`addedDate`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
