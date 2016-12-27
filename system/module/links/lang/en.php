@@ -10,6 +10,6 @@
  * @link        http://www.chanzhi.org
  */
 $lang->links->common  = 'Link';
-$lang->links->index   = 'Homepage Link';
+$lang->links->index   = 'Homepage Links';
 $lang->links->admin   = 'Manage Link';
 $lang->links->all     = 'All Links';

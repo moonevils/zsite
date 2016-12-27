@@ -4,7 +4,7 @@ $lang->tag->rank   = 'Weight';
 $lang->tag->link   = 'Links';
 
 $lang->tag->admin     = 'Manage Keywords';
-$lang->tag->editLink  = 'Edit Link';
+$lang->tag->editLink  = 'Link';
 $lang->tag->source    = 'Source';
 $lang->tag->inputLink = 'Enter a Link';
 $lang->tag->inputTag  = 'Enter a Keyword';
