@@ -1152,8 +1152,9 @@ class baseRouter
         helper::import($commonModelFile);
 
         if($this->config->framework->extensionLevel > 0  and class_exists('extCommonModel')) return new extCommonModel();
+	
         if(class_exists('commonModel')) return new commonModel();
-
+	
         return false;
     }
 
