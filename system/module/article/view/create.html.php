@@ -57,11 +57,11 @@
           <th class='w-100px'><?php echo $lang->article->title;?></th>
           <td colspan='2'>
             <div class='order input-group'>
-              <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?> input-group"><?php echo html::input('title', '', "class='form-control'");?></div>
+              <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?>"><?php echo html::input('title', '', "class='form-control'");?></div>
               <?php if($type == 'page'):?>
               <div class='col-sm-3 order'>
                 <div class='input-group'>
-                  <span class="input-group-addon"><?php echo $lang->article->order;?></span>
+                  <span class="input-group-addon fix-border"><?php echo $lang->article->order;?></span>
                   <?php echo html::input('order', $order, "class='form-control'");?>
                 </div>
               </div>
