@@ -314,13 +314,13 @@ class router extends baseRouter
                     
                     if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsListPages))
                     {
-                        $beginPos    = strpos($cache, $this->config->viewsListPlaceHolder) + strlen($this->config->viewsListPlaceHolder);
-                        $length      = strrpos($cache, $this->config->viewsListPlaceHolder) - $beginPos; 
+                        $beginPos    = strpos($cache, $this->config->idListPlaceHolder) + strlen($this->config->idListPlaceHolder);
+                        $length      = strrpos($cache, $this->config->idListPlaceHolder) - $beginPos; 
                         $viewsIDList = explode(',', trim(substr($cache, $beginPos, $length), ',')); 
                         $viewsList   = commonModel::getViewsList($moduleName, $methodName, $viewsIDList);
                         foreach($viewsList as $viewID => $views)
                         {
-                            $cache = str_replace($this->config->viewsPlaceholder . $viewID, $views, $cache);
+                            $cache = str_replace($this->config->viewsPlaceholder . $viewID . $this->config->viewsPlaceholder, $views, $cache);
                         }
                     }
                     die($cache);
