@@ -19,9 +19,9 @@ js::set('pageLayout', $this->block->getLayoutScope('product_browse', $category->
 ?>
 <?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
 <?php if(isset($productList)):?>
-<script><?php echo "place" . md5(time()). "='" . $config->viewsListPlaceHolder . $productList. $config->viewsListPlaceHolder . "';";?></script>
+<script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $productList. $config->idListPlaceHolder . "';";?></script>
 <?php else:?>
-<script><?php echo "place" . md5(time()) . "='" . $config->viewsListPlaceHolder . '' . $config->viewsListPlaceHolder . "';";?></script>
+<script><?php echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';";?></script>
 <?php endif;?>
 <div class='row blocks' data-region='product_browse-topBanner'><?php $this->block->printRegion($layouts, 'product_browse', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='product_browse'>
