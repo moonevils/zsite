@@ -434,7 +434,8 @@ class control extends baseControl
 
             if(in_array($moduleName . '_' . $methodName, $this->config->replaceViewsPages))
             {
-                $views        = commonModel::getViewsInfo($moduleName, $methodName);
+                $viewsID      = commonModel::parseItemID($moduleName, $methodName);
+                $views        = commonModel::getViews($moduleName, $methodName, $viewsID);
                 $this->output = str_replace($this->config->viewsPlaceholder, $views, $this->output);
             }
             
@@ -443,7 +444,7 @@ class control extends baseControl
                 $beginPos    = strpos($this->output, $this->config->idListPlaceHolder) + strlen($this->config->idListPlaceHolder);
                 $length      = strrpos($this->output, $this->config->idListPlaceHolder) - $beginPos; 
                 $viewsIDList = explode(',', trim(substr($this->output, $beginPos, $length), ',')); 
-                $viewsList   = commonModel::getViewsList($moduleName, $methodName, $viewsIDList);
+                $viewsList   = commonModel::getViews($moduleName, $methodName, $viewsIDList);
                 foreach($viewsList as $viewID => $views)
                 {
                     $this->output = str_replace($this->config->viewsPlaceholder . $viewID . $this->config->viewsPlaceholder, $views, $this->output);
