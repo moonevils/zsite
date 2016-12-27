@@ -205,7 +205,7 @@ class seo
             }
             return seo::convertURI($module, $method, $params, $pageID);
         }
-        else
+        elseif($module == 'effect')
         {
             if(preg_match('/^\d+$/', $items[1])) 
             {
