@@ -1390,65 +1390,59 @@ class commonModel extends model
     }
 
     /*
-     * replace the views placeholder with the views from databaes;
+     * Get the views data according to param from databaes;
      *
      * @access public
      * @param  string $moduleName
      * @param  string $methodName
+     * @param  array|string $viewsIDList
      * @static
      * @return string
      */
-    public static function getViewsInfo($moduleName, $methodName)
+    public static function getViews($moduleName, $methodName, $viewsIDList)
     {
         global $app;
-        $id = self::parseItemID($moduleName, $methodName);
-
-        if($moduleName == 'article' and $methodName == 'view')
-        {
-            $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($id)->fetch()->views;
-        }
         
-        if($moduleName == 'blog' and $methodName == 'view')
+        if(is_array($viewsIDList))
         {
-            $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($id)->fetch()->views;
-        }
-        
-        if($moduleName == 'book' and $methodName == 'read')
-        {
-            $views = $app->loadClass('dao')->select('views')->from(TABLE_BOOK)->where('id')->eq($id)->fetch()->views;
-        }
+            if(empty($viewsIDList)) return array();
 
-        $views = is_numeric($views) ? $views : '0';
-        return $views;
-    }
-    /*
-     * Get the views list according to the id list from databaes;
-     *
-     * @access public
-     * @param  string $moduleName
-     * @param  string $methodName
-     * @param  array  $viewsIDList
-     * @static
-     * @return array 
-     */
-    public static function getViewsList($moduleName, $methodName, $viewsIDList)
-    {
-        global $app;
-        if(empty($viewsIDList)) return array();
+            $viewsList = array();
+            if($moduleName == 'article' and $methodName == 'browse')
+            {
+                $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+            }
+            if($moduleName == 'blog' and $methodName == 'index')
+            {
+                $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+            }
+            if($moduleName == 'product' and $methodName == 'browse')
+            {
+                $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_PRODUCT)->where('id')->in($viewsIDList)->fetchPairs();
+            }
+            return $viewsList;
+        }
+        else
+        {
+            $id = $viewsIDList;
 
-        $viewsList = array();
-        if($moduleName == 'article' and $methodName == 'browse')
-        {
-            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
+            if($moduleName == 'article' and $methodName == 'view')
+            {
+                $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($id)->fetch()->views;
+            }
+            
+            if($moduleName == 'blog' and $methodName == 'view')
+            {
+                $views = $app->loadClass('dao')->select('views')->from(TABLE_ARTICLE)->where('id')->eq($id)->fetch()->views;
+            }
+            
+            if($moduleName == 'book' and $methodName == 'read')
+            {
+                $views = $app->loadClass('dao')->select('views')->from(TABLE_BOOK)->where('id')->eq($id)->fetch()->views;
+            }
+
+            $views = is_numeric($views) ? $views : '0';
+            return $views;
         }
-        if($moduleName == 'blog' and $methodName == 'index')
-        {
-            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_ARTICLE)->where('id')->in($viewsIDList)->fetchPairs();
-        }
-        if($moduleName == 'product' and $methodName == 'browse')
-        {
-            $viewsList = $app->loadClass('dao')->select('id, views')->from(TABLE_PRODUCT)->where('id')->in($viewsIDList)->fetchPairs();
-        }
-        return $viewsList;
     }
 }
