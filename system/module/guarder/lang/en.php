@@ -33,7 +33,7 @@ $lang->guarder->passwordHolder = 'Enter current account password';
 $lang->guarder->identityTip    = 'Enter IP, Email, account, or sensitive words.';
 $lang->guarder->captchaTip     = 'Once security qyestions are set, the frontend will only call those questions at random.';
 
-$lang->guarder->verify        = 'Current action requires admin privilege verification for security reasons.';
+$lang->guarder->verify        = 'Current action requires admin verification for securities.';
 $lang->guarder->okFile        = 'File Mode';
 $lang->guarder->created       = 'Created and Continue';
 $lang->guarder->email         = 'Email verification';
