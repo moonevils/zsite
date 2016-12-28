@@ -43,8 +43,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
     </div>
     <div class='panel-body'>
       <div class='table-row'>
-        <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
+        <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false):?>
         <div class='tab-content table-cell col-xs-7'>
+        <?php elseif($type == 'html'):?>
+        <div class='tab-content table-cell col-xs-9'>
         <?php else: ?>
         <div class='tab-content table-cell col-xs-12'>
         <?php endif; ?>

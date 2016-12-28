@@ -25,7 +25,7 @@ $lang->file->allow         = 'Enable';
 $lang->file->toggle        = 'Switch';
 $lang->file->label         = 'Title';
 $lang->file->lblInfo       = '<i>(Type %s, Size %s, Added on %s，Download %s times)</i>';
-$lang->file->limit         = "(<span class='text-danger'>less than %sM</span>)";
+$lang->file->limit         = "(<span class='text-danger'> <= %sM</span>)";
 $lang->file->source        = 'Source';
 $lang->file->sourceList    = 'Source List';
 $lang->file->uploadSource  = 'Upload';
