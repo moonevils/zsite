@@ -42,6 +42,7 @@ $lang->user->status    = 'Status';
 $lang->user->captcha   = 'Verification Code';
 $lang->user->alert     = 'Your account has been disabled.';
 $lang->user->privilege = 'Privilege';
+$lang->user->certified = 'Certified';
 
 $lang->user->all             = 'All Users';
 $lang->user->list            = 'User List';
@@ -65,11 +66,13 @@ $lang->user->allUsers        = 'All Users';
 $lang->user->submit          = "Submit";
 $lang->user->forbid          = 'Disable';
 $lang->user->activate        = 'Activate';
-$lang->user->pullWechatFans  = '更新微信会员数据';
+$lang->user->pullWechatFans  = 'Update wechat fans data';
 $lang->user->adminlog        = 'Admin Log';
 $lang->user->checkEmail      = 'Email Binding';
 $lang->user->getEmailCode    = 'Get verification code';
+$lang->user->getCertifyCode  = 'Get certification code';
 $lang->user->setEmail        = 'Configure Email';
+$lang->user->setMobile       = 'Configure Mobile';
 $lang->user->newEmail        = 'Email';
 $lang->user->rank            = 'Ranking';
 $lang->user->score           = 'Points';
@@ -84,6 +87,10 @@ $lang->user->deleteHistory   = 'Delete account and history';
 $lang->user->question        = 'Security Question';
 $lang->user->answer          = 'Answer';
 $lang->user->checkContact    = 'Check Contact';
+$lang->user->certifyNow      = 'Go certify';
+
+$lang->user->checkMobile        = 'Check mobile';
+$lang->user->checkMobileSuccess = 'Check mobile successfully';
 
 $lang->user->type        = 'Type';
 $lang->user->profile     = 'Profile';

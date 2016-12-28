@@ -42,6 +42,7 @@ $lang->user->status     = '狀態';
 $lang->user->captcha    = '驗證碼';
 $lang->user->alert      = '您的帳號已被禁用';
 $lang->user->privilege  = '權限';
+$lang->user->certified  = '已認證';
 
 $lang->user->all             = '全部會員';
 $lang->user->list            = '會員列表';
@@ -69,7 +70,9 @@ $lang->user->pullWechatFans  = '更新微信會員數據';
 $lang->user->adminlog        = '登錄日誌';
 $lang->user->checkEmail      = '綁定郵箱';
 $lang->user->getEmailCode    = '獲取郵箱驗證碼';
+$lang->user->getCertifyCode  = '獲取驗證碼';
 $lang->user->setEmail        = '郵箱設置';
+$lang->user->setMobile       = '手機設置';
 $lang->user->newEmail        = '新郵箱';
 $lang->user->rank            = '等級積分';
 $lang->user->score           = '消耗積分';
@@ -84,6 +87,10 @@ $lang->user->deleteHistory   = '刪除用戶及歷史數據';
 $lang->user->question        = '密保問題';
 $lang->user->answer          = '答案';
 $lang->user->checkContact    = '聯繫方式';
+$lang->user->certifyNow      = '立即認證';
+
+$lang->user->checkMobile        = '手機認證';
+$lang->user->checkMobileSuccess = '手機認證成功';
 
 $lang->user->type        = '賬戶類型';
 $lang->user->profile     = '個人信息';

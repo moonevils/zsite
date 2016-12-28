@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->email;?></th>
-            <td><?php echo $user->email;?></td>
+            <td id='emailTD'><?php echo $user->email;?></td>
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->company;?></th>
@@ -34,7 +34,7 @@
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->mobile;?></th>
-            <td><?php echo $user->mobile;?></td>
+            <td id='mobileTD'><?php echo $user->mobile;?></td>
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->phone;?></th>

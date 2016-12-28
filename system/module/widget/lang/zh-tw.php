@@ -72,5 +72,5 @@ $lang->widget->typeList->message        = '反饋';
 $lang->widget->typeList->wechatMessage  = '微信留言';
 $lang->widget->typeList->submittion     = '最新投稿';
 $lang->widget->typeList->chanzhiDynamic = '蟬知動態';
-$lang->widget->typeList->html           = '自定義';
 $lang->widget->typeList->commonMenu     = '快捷入口';
+$lang->widget->typeList->html           = '自定義';
