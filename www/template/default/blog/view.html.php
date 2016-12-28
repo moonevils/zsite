@@ -93,7 +93,7 @@ $common->printPositionBar($category, $article, '', $root);
   <?php if(!empty($layouts['blog_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
   <div class='col-md-<?php echo $sideGrid ?> col-side'>
     <side class='page-side'>
-      <div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div>
+      <div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div>
       <div class='blocks' data-region='blog_view-side'><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></div>
     </side>
   </div>

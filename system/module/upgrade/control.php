@@ -47,13 +47,13 @@ class upgrade extends control
     {
         $this->view->title = $this->lang->upgrade->backup;
         $this->view->db    = $this->config->db;
-        $this->view->slidePath = $this->app->getDataRoot() . 'slides';
-        $this->view->customFile =  $this->app->getConfigRoot() . 'my.php';
+        $this->view->slidePath      = $this->app->getDataRoot() . 'slides';
+        $this->view->customFile     =  $this->app->getConfigRoot() . 'my.php';
         $this->view->themePath      = $this->app->getWwwRoot() . 'theme';
         if(!is_dir($this->view->slidePath)) mkdir($this->view->slidePath, 0777, true);
 
         $this->view->createSlidePath   = !is_writeable($this->view->slidePath);
-        if(version_compare($this->config->installedVersion, '5.4', '<'))
+        if(version_compare($this->config->installedVersion, '5.5', '<='))
         {
             $this->view->chmodCustomConfig = !is_writeable($this->view->customFile);
         }
