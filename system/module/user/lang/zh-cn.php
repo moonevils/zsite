@@ -42,6 +42,7 @@ $lang->user->status     = '状态';
 $lang->user->captcha    = '验证码';
 $lang->user->alert      = '您的帐号已被禁用';
 $lang->user->privilege  = '权限';
+$lang->user->certified  = '已认证';
 
 $lang->user->all             = '全部会员';
 $lang->user->list            = '会员列表';
@@ -85,6 +86,11 @@ $lang->user->deleteHistory   = '删除用户及历史数据';
 $lang->user->question        = '密保问题';
 $lang->user->answer          = '答案';
 $lang->user->checkContact    = '联系方式';
+$lang->user->certifyNow      = '立即认证';
+
+$lang->user->checkMobile        = '手机认证';
+$lang->user->checkMobileSuccess = '手机认证成功';
+
 
 $lang->user->type        = '账户类型';
 $lang->user->profile     = '个人信息';
