@@ -69,7 +69,7 @@ class orderModel extends model
             ->where(1)
             ->andWhere('status')->ne('deleted')
             ->beginIf(!empty($type) and $type != 'all')->andWhere('type')->eq($type)->fi()
-            ->beginIf($mode != 'all' and $mode != 'status')->andWhere('status')->eq('normal')->fi()
+            ->beginIf($mode != 'all' and $mode != 'status' and $mode != 'account')->andWhere('status')->eq('normal')->fi()
             ->beginIf($mode == 'account')->andWhere('account')->eq($value)->fi()
             ->beginIf($mode == 'status')->andWhere('status')->eq($value)->fi()
             ->beginIf($mode == 'payStatus')->andWhere('payStatus')->eq($value)->fi()
