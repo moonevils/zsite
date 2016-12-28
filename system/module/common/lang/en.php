@@ -84,7 +84,7 @@ $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
-$lang->addToBlacklist = 'Block';
+$lang->addToBlacklist = 'Widget';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
@@ -186,7 +186,7 @@ $lang->menu->submittion   = 'Submission|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
-$lang->menu->tag     = 'Tags|tag|admin|';
+$lang->menu->tag     = 'Keywords|tag|admin|';
 $lang->menu->links   = 'Links|links|admin|';
 
 $lang->menu->ui       = 'UI|ui|settemplate|';
@@ -387,6 +387,7 @@ $lang->error->fingerprint  = 'Authentication expired. Please try again!';
 $lang->error->token        = 'Must be letters/numbers and the characters between 3-32.';
 $lang->error->sensitive    = 'No sensitive words allowed!';
 $lang->error->noRepeat     = 'No duplicated content!';
+$lang->error->between      = '<strong>%s</strong>should in between<strong>%s</strong>.';
 
 /* The pager items. */
 $lang->pager = new stdclass();

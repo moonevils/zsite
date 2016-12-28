@@ -3,12 +3,13 @@ $lang->tag->common = 'Keywords';
 $lang->tag->rank   = 'Weight';
 $lang->tag->link   = 'Links';
 
-$lang->tag->admin     = 'Manage Keywords';
-$lang->tag->editLink  = 'Edit Link';
-$lang->tag->source    = 'Source';
-$lang->tag->inputLink = 'Enter a Link';
-$lang->tag->inputTag  = 'Enter a Keyword';
-$lang->tag->search    = 'Search';
+$lang->tag->admin         = 'Manage Keywords';
+$lang->tag->editLink      = 'Link';
+$lang->tag->source        = 'Source';
+$lang->tag->inputLink     = 'Enter a Link';
+$lang->tag->inputTag      = 'Enter a Keyword';
+$lang->tag->linkFormatTip = 'When the link inputed is external, the link should start with http or https';
+$lang->tag->search        = 'Search';
 
 $lang->tag->sourceList['article']  = 'Article';
 $lang->tag->sourceList['blog']     = 'Blog';
