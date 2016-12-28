@@ -387,6 +387,7 @@ $lang->error->fingerprint  = 'Authentication expired. Please try again!';
 $lang->error->token        = 'Must be letters/numbers and the characters between 3-32.';
 $lang->error->sensitive    = 'No sensitive words allowed!';
 $lang->error->noRepeat     = 'No duplicated content!';
+$lang->error->between      = '<strong>%s</strong>should in between<strong>%s</strong>.';
 
 /* The pager items. */
 $lang->pager = new stdclass();

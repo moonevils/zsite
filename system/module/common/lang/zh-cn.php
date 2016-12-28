@@ -387,6 +387,7 @@ $lang->error->fingerprint  = '身份认证过期，请重试！';
 $lang->error->token        = '必须为英文或数字，长度为3-32字符！';
 $lang->error->sensitive    = '内容中不能存在敏感词!';
 $lang->error->noRepeat     = '主题或内容已存在，禁止重复';
+$lang->error->between      = '<strong>%s</strong>必须在<strong>%s</strong>之中。';
 
 /* The pager items. */
 $lang->pager = new stdclass();
