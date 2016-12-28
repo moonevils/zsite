@@ -39,13 +39,13 @@ $lang->score->dayRank   = 'Daily Ranking';
 
 $lang->score->methods['register'] = 'Register';
 $lang->score->methods['login']    = 'Login';
-$lang->score->methods['maxLogin'] = 'Maximum Login Points';
+$lang->score->methods['maxLogin'] = 'Max Login Points';
 $lang->score->methods['download'] = 'Download';
 
 $lang->score->methods['thread']      = 'Post';
 $lang->score->methods['reply']       = 'Reply';
-$lang->score->methods['valuethread'] = 'Post Threads';
-$lang->score->methods['valuereply']  = 'Post Replies';
+$lang->score->methods['valuethread'] = 'Post Thread';
+$lang->score->methods['valuereply']  = 'Post Reply';
 $lang->score->methods['delThread']   = 'Delete Thread';
 $lang->score->methods['delReply']    = 'Delete Reply';
 $lang->score->methods['award']       = 'Reward';
@@ -65,7 +65,7 @@ $lang->score->types['out']   = 'decrease';
 $lang->score->getByThread = 'Post threads to get reward points.'; 
 $lang->score->getByReply  = 'Reply to get reward points.'; 
 
-$lang->score->lblTotal         = "You have used %s points. The ranking is %s ";
+$lang->score->lblTotal         = "You have %s points for consumption. The points for ranking is %s. ";
 $lang->score->lblNoScore       = "Sorry, your points is insufficient.";
 $lang->score->lblNoScoreReason = "Sorry, your points is less than %s. You need <strong class='red'>%s</strong> Points. You have <strong class='red'>%s</strong> Points.";
 $lang->score->lblDetail        = "Please refer to<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
