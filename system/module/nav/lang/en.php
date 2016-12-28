@@ -11,8 +11,8 @@
  */
 $lang->nav->common   = 'Naviagtion';
 $lang->nav->setNav   = 'Settings';
-$lang->nav->add      = 'Add a Navigation';
-$lang->nav->addChild = 'Add a SubNav';
+$lang->nav->add      = 'Add Navigation';
+$lang->nav->addChild = 'Add Child';
 $lang->nav->delete   = 'Delete';
 
 $lang->nav->inputUrl        = 'Enter a Link';
