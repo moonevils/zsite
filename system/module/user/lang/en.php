@@ -72,6 +72,7 @@ $lang->user->checkEmail      = 'Email Binding';
 $lang->user->getEmailCode    = 'Get verification code';
 $lang->user->getCertifyCode  = 'Get certification code';
 $lang->user->setEmail        = 'Configure Email';
+$lang->user->setMobile       = 'Configure Mobile';
 $lang->user->newEmail        = 'Email';
 $lang->user->rank            = 'Ranking';
 $lang->user->score           = 'Points';
