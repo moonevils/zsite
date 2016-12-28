@@ -215,7 +215,7 @@ class userModel extends model
             ->setIF($this->post->password1 == false, 'password', '')
             ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
             ->setIF($this->cookie->referer == '', 'referer', '')
-            ->remove('ip,fingerprint,private,emailCertified,emailCode,mobileCertified,mobileCode')
+            ->remove($this->config->user->skipedFields->create)
             ->get();
         
         if(RUN_MODE != 'admin') $user->admin = 'no';
@@ -328,10 +328,7 @@ class userModel extends model
             ->cleanInt('imobile, qq, zipcode')
             ->setDefault('admin', 'no')
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
-            ->remove('ip,account,join,visits,fingerprint,locked,token,private,emailCertified,mobileCertified,mobileCode,emailCode,bindSite')
-            ->removeIF(RUN_MODE != 'admin', 'admin')
-            ->removeIF(RUN_MODE == 'admin', 'groups')
-            ->removeIF(RUN_MODE == 'front', 'email')
+            ->removeif(RUN_MODE != 'admin', $this->config->user->skipedFields->update)
             ->get();
 
         if(RUN_MODE == 'admin')
