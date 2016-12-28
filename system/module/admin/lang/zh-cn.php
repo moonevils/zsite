@@ -32,16 +32,18 @@ $lang->admin->connectApiFail = "不能连接到蝉知社区，请检查您的网
 $lang->admin->registerInfo   = "站点已经绑定到蝉知账号%s，%s";
 $lang->admin->registerPage   = '登记页面';
 $lang->admin->rebind         = "重新绑定";
+$lang->admin->bindedInfo     = '蝉知社区账号信息';
 
 $lang->js->confirmRebind = "确认要重新绑定蝉知账号？";
 
 $lang->admin->register = new stdclass();
-$lang->admin->register->common     = '蝉知社区绑定页面';
+$lang->admin->register->common     = '蝉知社区';
 $lang->admin->register->caption    = '还有没有蝉知社区帐号？马上注册一个!';
 $lang->admin->register->lblAccount = '请设置您的用户名，英文字母和数字的组合，三位以上。';
 $lang->admin->register->lblPasswd  = '请设置您的密码。数字和字母的组合，六位以上。';
 $lang->admin->register->submit     = '注册';
 $lang->admin->register->success    = "注册账户成功";
+$lang->admin->register->update     = "更新资料";
 
 $lang->admin->bind = new stdclass();
 $lang->admin->bind->caption = '已有蝉知社区账号，输入用户名密码进行绑定！';

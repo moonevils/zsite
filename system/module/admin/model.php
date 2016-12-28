@@ -88,8 +88,9 @@ class adminModel extends model
     public function getMobileCodeByApi($mobile)
     {
         if(empty($mobile) or !$this->session->apiConfig) return array('result' => 'fail', 'message' => 'fail');
+        $community = $this->getRegisterInfo();
 		$api = "sms-apiSendCode.json?{$this->session->apiConfig->sessionVar}={$this->session->apiConfig->sessionID}&t=json";
-        $response = $this->postApi($api, array('mobile' => $mobile));
+        $response = $this->postApi($api, array('mobile' => $mobile, 'account' => zget($community, 'account')));
         $result   = json_decode($response);
         if(!empty($result)) return $result;
         return array('result' => 'fail', 'message' => $response);
@@ -106,12 +107,12 @@ class adminModel extends model
     {
         if(empty($email) or !$this->session->apiConfig) return array('result' => 'fail', 'message' => 'fail');
 		$api = "mail-apiSendCode.json?{$this->session->apiConfig->sessionVar}={$this->session->apiConfig->sessionID}&t=json";
-        $response = $this->postApi($api, array('email' => $email));
+        $community = $this->getRegisterInfo();
+        $response = $this->postApi($api, array('email' => $email, 'account' => $community->account));
         $result   = json_decode($response);
         if(!empty($result)) return $result;
         return array('result' => 'fail', 'message' => $response);
     }
-
 
 	/**
 	 * Register zentao by API. 
@@ -163,11 +164,44 @@ class adminModel extends model
      * @access public
      * @return bool
      */
-    public function setCommunity($account, $private)
+    public function setCommunity($account, $private, $email = '', $mobile = '')
     {
         $this->loadModel('setting')->setItem('system.common.community.account', $account);
         $this->loadModel('setting')->setItem('system.common.community.private', $private);
+        $this->loadModel('setting')->setItem('system.common.community.email',   $email);
+        $this->loadModel('setting')->setItem('system.common.community.mobile',  $mobile);
         return true;
+    }
+
+    /**
+     * Get user by api.
+     * 
+     * @access public
+     * @return object
+     */
+    public function getUserByApi($sync = false)
+    {
+        if(!$this->getRegisterInfo()) return null;
+        if(!$sync and isset($this->config->community->user)) 
+        {
+            $user = json_decode($this->config->community->user);
+            if(!empty($user)) return $user;
+        }
+
+        $apiConfig = $this->getApiConfig();
+        $api = 'user-apigetuser.json';
+        $response = $this->getByApi($api);
+        $result   = json_decode($response);
+        if(empty($result)) return null;
+
+        if($result->result == 'success')
+        {
+            $user = $result->user;
+            $this->loadModel('setting')->setItem('system.common.community.user', helper::jsonEncode($user));
+            return $user;
+        }
+
+        return null;
     }
 
 	/**
@@ -228,6 +262,58 @@ class adminModel extends model
         $pathInfo['query'] = http_build_query($params);
         $api = http_build_url($pathInfo);
         return $api;
+    }
+
+    /**
+     * Check mobile by api.
+     * 
+     * @access public
+     * @return array
+     */
+    public function checkMobileByApi()
+    {
+        $registerInfo = $this->getRegisterInfo();
+        $apiConfig    = $this->getApiConfig();
+        if(!$registerInfo or empty($apiConfig)) return array('result' => 'fail');
+
+		$api      = "sms-apiCertify.json?{$this->session->apiConfig->sessionVar}={$this->session->apiConfig->sessionID}&t=json";
+        $api      = $this->processApi($api);
+		$response = $this->postAPI($api, array('mobile' => $this->post->mobile, 'account' => $registerInfo->account, 'captcha' => $this->post->captcha));
+        $result   = json_decode($response);
+
+        if(empty($result))
+        {
+            $result = new stdclass();
+            $result->result  = 'fail';
+            $result->message = $response;
+        }
+        return $result;
+    }
+
+    /**
+     * Check mobile by api.
+     * 
+     * @access public
+     * @return array
+     */
+    public function checkEmailByApi()
+    {
+        $registerInfo = $this->getRegisterInfo();
+        $apiConfig    = $this->getApiConfig();
+        if(!$registerInfo or empty($apiConfig)) return array('result' => 'fail');
+
+		$api      = "mail-apiCertify.json?{$this->session->apiConfig->sessionVar}={$this->session->apiConfig->sessionID}&t=json";
+        $api      = $this->processApi($api);
+		$response = $this->postAPI($api, array('email' => $this->post->email, 'account' => $registerInfo->account, 'captcha' => $this->post->captcha));
+        $result   = json_decode($response);
+
+        if(empty($result))
+        {
+            $result = new stdclass();
+            $result->result  = 'fail';
+            $result->message = $response;
+        }
+        return $result;
     }
 
     /**
