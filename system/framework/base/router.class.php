@@ -1071,7 +1071,7 @@ class baseRouter
         if(strpos($value, '?') === false) return trim($value, '/');
 
         $value = parse_url($value);
-        return trim($value['path'], '/');
+        return trim(zget($value, 'path', ''), '/');
     }
 
     /**
