@@ -91,7 +91,6 @@ $lang->user->certifyNow      = '立即认证';
 $lang->user->checkMobile        = '手机认证';
 $lang->user->checkMobileSuccess = '手机认证成功';
 
-
 $lang->user->type        = '账户类型';
 $lang->user->profile     = '个人信息';
 $lang->user->editProfile = '编辑信息';
