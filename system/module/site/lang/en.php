@@ -46,7 +46,7 @@ $lang->site->scheme          = 'Default Protocol';
 $lang->site->saveDays        = 'Hold Time';
 $lang->site->openCache       = 'Cache';
 $lang->site->cachePage       = 'Cache Page';
-$lang->site->cacheExpired    = 'Expiration Date';
+$lang->site->cacheExpired    = 'Cache Expiration';
 $lang->site->clearCache      = 'Clear Cache';
 $lang->site->clearingCache   = 'Clearing';
 $lang->site->clearedCache    = 'Finished';
@@ -72,7 +72,7 @@ $lang->site->mobileTemplate   = 'Mobile Site';
 $lang->site->score            = 'Points';
 $lang->site->setCounts        = 'Point Rules';
 $lang->site->front            = 'Website Access';
-$lang->site->useCDN           = 'Activate CDN';
+$lang->site->useCDN           = 'CDN';
 
 $lang->site->setBasic      = "Basic Settings";
 $lang->site->setLanguage   = "Language";
