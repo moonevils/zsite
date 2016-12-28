@@ -14,8 +14,49 @@
 <?php js::set('certifiedMobile', $this->session->certifiedMobile);?>
 <?php js::set('certifiedEmail', $this->session->certifiedEmail);?>
 <?php if($register):?>
-<div class='alert alert-success'>
-<?php printf($lang->admin->registerInfo, $register->account, html::a(inlink('unbind'), $lang->admin->rebind, "id='rebindBtn'"));?>
+<?php js::set('certifiedMobile', $bindedUser->mobileCertified ? $bindedUser->mobile : '');?>
+<?php if($bindedUser->emailCertified) js::set('certifiedEmail', $bindedUser->email);?>
+<div class='panel'>
+  <div class='panel-heading borderless'><strong><i class='icon-user'></i> <?php echo $lang->admin->bindedInfo;?></strong></div>
+  <div class='panel-body'>
+    <table class='table table-form' id="certifyTable">
+      <tr>
+        <th class='w-100px text-right'><?php echo $lang->user->account;?></th>
+        <td class='text-middle'> <?php echo $bindedUser->account;?> </td>
+      </tr>
+      <tr>
+        <th class='text-right'><?php echo $lang->user->realname;?></th>
+        <td class='text-middle'> <?php echo $bindedUser->realname;?> </td>
+      </tr>
+      <tr>
+        <th class='text-right'><?php echo $lang->user->company;?></th>
+        <td class='text-middle'> <?php echo $bindedUser->company;?> </td>
+      </tr>
+      <tr>
+        <th class='text-right'><?php echo $lang->user->email;?></th>
+        <td>
+          <?php echo $bindedUser->email;?>
+          <?php if($bindedUser->emailCertified)  echo "<i class='label label-success icon icon-check'>{$lang->user->certified}</i>"; ?>
+          <?php if(!$bindedUser->emailCertified) echo html::a(inlink('checkemail'), $lang->user->certifyNow, "class='btn btn-xs btn-primary' data-toggle='modal'"); ?>
+        </td>
+      </tr>
+      <tr>
+        <th class='text-right'><?php echo $lang->user->mobile;?></th>
+        <td>
+          <?php echo $bindedUser->mobile;?>
+          <?php if($bindedUser->mobileCertified) echo "<i class='label label-success icon icon-check'>{$lang->user->certified}</span>"?>
+          <?php if(!$bindedUser->mobileCertified) echo html::a(inlink('checkMobile'), $lang->user->certifyNow, "data-toggle='modal' class='btn btn-xs btn-primary'");?>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <?php echo html::a(inlink('unbind'), $lang->admin->rebind, "id='rebindBtn' class='btn'");?>
+          <?php echo html::a(inlink('getUserByApi'), $lang->admin->register->update, "id='rebindBtn' class='btn'");?>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
 <?php elseif(!$apiConnected):?>
 <div class='alert alert-warning'>

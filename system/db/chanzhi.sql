@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
 -- DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `originID` smallint(5) unsigned NOT NULL,
+  `originID` smallint(5) unsigned NOT NULL default 0,
+  `effectID` mediumint(8) unsigned NOT NULL default 0,
   `template` varchar(30) NOT NULL DEFAULT 'default',
   `type` varchar(20) NOT NULL,
   `title` varchar(60) NOT NULL,
@@ -188,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `pathname` char(200) NOT NULL,
   `title` char(90) NOT NULL,
   `extension` char(30) NOT NULL,
-  `size` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `size` int(10) unsigned NOT NULL DEFAULT '0',
   `width` smallint(5) unsigned NOT NULL DEFAULT '0',
   `height` smallint(5) unsigned NOT NULL DEFAULT '0',
   `objectType` char(20) NOT NULL,

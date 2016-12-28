@@ -34,7 +34,7 @@ js::set('lang', $lang->js);
           <?php commonModel::printLink('wechat', 'commitMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->commit, "class='btn btn-primary jsoner w-80px'");?>
           <?php commonModel::printLink('wechat', 'deleteMenu', "public=" . str_replace('wechat_', '', $type), $lang->wechatMenu->delete, "class='btn btn-danger jsoner w-80px'");?>
           <p></p>
-          <p><?php echo $lang->wechatMenu->responseTip;?></p>
+          <p class="text-danger"><?php echo $lang->wechatMenu->responseTip;?></p>
         </div>
         <?php endif;?>
       </div>
