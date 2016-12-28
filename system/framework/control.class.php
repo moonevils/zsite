@@ -451,6 +451,10 @@ class control extends baseControl
                 }
             }
 
+            $keywords     = ($this->app->getModuleName() == 'search') ? $this->session->serachIngWord : '';
+            $searchHtml   = html::input('words', $keywords, "class='form-control' placeholder=''");
+            $this->output = str_replace($this->config->searchWordPlaceHolder, $searchHtml, $this->output);
+
             $siteNav = commonModel::printTopBar() . commonModel::printLanguageBar();
 
             $this->output = str_replace($this->config->siteNavHolder, $siteNav, $this->output);
