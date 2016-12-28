@@ -30,7 +30,7 @@ $lang->en = 'EN';
 
 $lang->toBeAdded = '待添加';
 
-$lang->about  = '關於';
+$lang->about  = '關於蟬知';
 $lang->thanks = '致謝';
 
 /* Lang items for xirang. */
@@ -42,7 +42,7 @@ $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.or
 $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查詢：<b>%s</b> 次<br>內存占用：<b>%s</b><br> PHP 執行時間：<b>%s</b> 秒</span></span>";
 $lang->customCssError = "不能生成樣式檔案，如果您是網站管理員，請到網站後台外觀管理重新設置樣式檔案";
-$lang->redirecting    = "正在跳轉到%s，<a href='%s'>立即跳轉</a>";
+$lang->redirecting    = "<span class='text-muted'>正在跳轉請稍後......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳轉</a>";
 
 /* Global lang items. */
 $lang->home             = '首頁';
@@ -387,6 +387,7 @@ $lang->error->fingerprint  = '身份認證過期，請重試！';
 $lang->error->token        = '必須為英文或數字，長度為3-32字元！';
 $lang->error->sensitive    = '內容中不能存在敏感詞!';
 $lang->error->noRepeat     = '主題或內容已存在，禁止重複';
+$lang->error->between      = '<strong>%s</strong>必須在<strong>%s</strong>之中。';
 
 /* The pager items. */
 $lang->pager = new stdclass();
