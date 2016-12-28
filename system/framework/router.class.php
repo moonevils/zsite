@@ -324,6 +324,11 @@ class router extends baseRouter
                             $cache = str_replace($this->config->viewsPlaceholder . $viewID . $this->config->viewsPlaceholder, $views, $cache);
                         }
                     }
+                    
+                    $keywords   = ($this->getModuleName() == 'search') ? $this->session->serachIngWord : '';
+                    $searchHtml = html::input('words', $keywords, "class='form-control' placeholder=''");
+                    $cache      = str_replace($this->config->searchWordPlaceHolder, $searchHtml, $cache);
+
                     die($cache);
                 }
             }

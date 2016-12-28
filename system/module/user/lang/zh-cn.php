@@ -42,6 +42,7 @@ $lang->user->status     = '状态';
 $lang->user->captcha    = '验证码';
 $lang->user->alert      = '您的帐号已被禁用';
 $lang->user->privilege  = '权限';
+$lang->user->certified  = '已认证';
 
 $lang->user->all             = '全部会员';
 $lang->user->list            = '会员列表';
@@ -71,6 +72,7 @@ $lang->user->checkEmail      = '绑定邮箱';
 $lang->user->getEmailCode    = '获取邮箱验证码';
 $lang->user->getCertifyCode  = '获取验证码';
 $lang->user->setEmail        = '邮箱设置';
+$lang->user->setMobile       = '手机设置';
 $lang->user->newEmail        = '新邮箱';
 $lang->user->rank            = '等级积分';
 $lang->user->score           = '消耗积分';
@@ -85,6 +87,11 @@ $lang->user->deleteHistory   = '删除用户及历史数据';
 $lang->user->question        = '密保问题';
 $lang->user->answer          = '答案';
 $lang->user->checkContact    = '联系方式';
+$lang->user->certifyNow      = '立即认证';
+
+$lang->user->checkMobile        = '手机认证';
+$lang->user->checkMobileSuccess = '手机认证成功';
+
 
 $lang->user->type        = '账户类型';
 $lang->user->profile     = '个人信息';

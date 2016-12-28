@@ -81,8 +81,11 @@ class tag extends control
     {
         if($_POST)
         {
-            $link = fixer::input('post')->stripTags('link', $this->config->allowedTags->admin)->get();
-            if(strpos($link->link, 'http://') === false and strpos($link->link, 'https://') === false) $link->link = "http://" . $link->link;
+            $link       = fixer::input('post')->stripTags('link', $this->config->allowedTags->admin)->get();
+            if(isset($link->link{0}) and $link->link{0} !== '/')
+            {
+                if(strpos($link->link, 'http') === false and strpos($link->link, 'https') === false) $this->send(array('result' => 'fail', 'message' => $this->lang->tag->linkFormatTip));
+            }
             $this->dao->update(TABLE_TAG)->data($link)->autoCheck()->where('id')->eq($tagID)->exec();
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
