@@ -12,12 +12,12 @@
 $lang->company->common  = "Company";
 
 $lang->company->name    = "Name";
-$lang->company->desc    = "Brief Introduction";
+$lang->company->desc    = "Introduction";
 $lang->company->content = "Description";
 $lang->company->contact = "Contact";
 $lang->company->qrcode  = "QR Code";
 
-$lang->company->setBasic   = "Company Info";
+$lang->company->setBasic   = "Company Information";
 $lang->company->setContact = "Company Contact";
 
 $lang->company->error = new stdclass(); 
