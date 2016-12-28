@@ -12,7 +12,7 @@ $(document).ready(function()
         return false;
     });
 
-    $('#smsSender').click(function()
+    $(document).on('click', '#smsSender', function()
     {
         if(!$('#mobile').val()) return false;
         url = createLink('admin', 'getMobileCodeByApi', "mobile=" + $('#mobile').val());
@@ -33,7 +33,7 @@ $(document).ready(function()
         return false;
     });
 
-    $('#mailSender').click(function()
+    $(document).on('click', '#mailSender', function()
     {
         if(!$('#email').val()) return false;
         url = createLink('admin', 'getEmailCodeByApi', "email=" + $('#email').val());

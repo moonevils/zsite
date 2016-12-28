@@ -1,6 +1,7 @@
 /system/config/my.php
 /system/config/multi.php
 /system/config/sites/*
+/system/tmp/*
 /system/tmp/log/*
 /system/tmp/model/*
 /system/tmp/cache/*

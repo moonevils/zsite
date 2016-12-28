@@ -97,7 +97,7 @@ class admin extends control
             if(isset($response->certifiedMobile)) $this->session->set('certifiedMobile', $response->certifiedMobile);
             if($response->result == 'success') 
             {
-                $this->admin->setCommunity($response->data->account, $response->data->private);
+                $this->admin->setCommunity($response->data->account, $response->data->private, $response->certifiedEmail, $response->certifiedMobile);
                 $response->message = $this->lang->admin->register->success;
                 $response->locate  = inlink('register');
             }
@@ -105,14 +105,17 @@ class admin extends control
 		}
 
         $this->lang->menuGroups->admin = 'community';
-        $this->view->title             = $this->lang->admin->register->caption;
+        $this->view->title             = $this->lang->admin->register->common;
 	    $this->view->apiConnected      = !empty($apiConfig);
         $this->view->register          = $registerInfo;
+
+        if(!empty($registerInfo)) $this->view->bindedUser = $this->admin->getUserByApi();
+
 		$this->display();
 	}
 
 	/**
-	 * Bind zentao.
+	 * Bind chanzhi.
 	 * 
 	 * @access public
 	 * @return void
@@ -125,7 +128,7 @@ class admin extends control
             if($response->result == 'success')
             {
                 $this->admin->setCommunity($response->data->account, $response->data->private);
-                $this->send(array('result' => 'success', 'message' => $this->lang->admin->register->success, 'locate' => inlink('register')));
+                $this->send(array('result' => 'success', 'message' => $this->lang->admin->bind->success, 'locate' => inlink('register')));
             }
 
             $this->send(array('result' => 'fail', 'message' => $response->message));
@@ -169,5 +172,76 @@ class admin extends control
     {
         $this->admin->setCommunity('', '');
         $this->locate(inlink('register'));
+    }
+
+    /**
+     * Get user by api.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getUserByApi()
+    {
+        $result = $this->admin->getUserByApi(true);
+        $this->locate(inlink('register'));
+    }
+
+    /**
+     * check mobile 
+     * 
+     * @param  string $referer 
+     * @access public
+     * @return void
+     */
+    public function checkMobile()
+    {
+        if($_POST)
+        {
+            $result  =$this->admin->checkMobileByApi();
+
+            if($result->result == 'success')
+            {
+                $result->message = $lang->user->checkMobileSuccess;
+                $result->locate  = inlink('register');
+                $this->admin->getUserByApi(true);
+            }
+
+            $this->send($result);
+        }
+
+        $this->view->title      = $this->lang->user->checkMobile;
+        $this->view->user       = $this->admin->getUserByApi();
+        $this->view->referer    = $this->referer;
+        $this->view->mobileURL  = helper::createLink('user', 'checkEmail', "referer=$referer", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'checkEmail', "referer=$referer", '', 'html');
+        $this->display();
+    }
+
+    /**
+     * check mobile 
+     * 
+     * @param  string $referer 
+     * @access public
+     * @return void
+     */
+    public function checkEmail()
+    {
+        if($_POST)
+        {
+            $result = $this->admin->checkEmailByApi();
+
+            if($result->result == 'success')
+            {
+                $result->message = $lang->user->checkEmailSuccess;
+                $result->locate  = inlink('register');
+                $this->admin->getUserByApi(true);
+            }
+
+            $this->send($result);
+        }
+
+        $this->view->title = $this->lang->user->checkEmail;
+        $this->view->user  = $this->admin->getUserByApi();
+        $this->display();
     }
 }
