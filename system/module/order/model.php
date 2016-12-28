@@ -529,21 +529,22 @@ class orderModel extends model
 
         if(RUN_MODE == 'admin')
         {
-            $class = $btnLink ? 'btn' : '';
+            $class  = $btnLink ? 'btn' : '';
+            $toggle = $btnLink ? '' : "data-toggle='modal'";
             
             /* View order link */ 
-            if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id&btnLink=false"), $this->lang->order->view, "data-toggle='modal'");
+            if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id&btnLink=false"), $this->lang->order->view, $toggle);
             
             if($this->commonLink['savePayment'])
             {
                 /* Save payment link. */
                 $disabled = ($order->status == 'normal' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
-                echo $disabled ? html::a('javascript:;', $this->lang->order->return, "$disabled  class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "data-toggle='modal' class='$class'"); 
+                echo $disabled ? html::a('javascript:;', $this->lang->order->return, "$disabled  class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "{$toggle} class='$class'"); 
             }
             
             /* Delete order link. */
             $disabled = ($order->status == 'expired' or $order->status == 'canceled' or $order->status == 'finished') ? '' : "disabled='disabled'";
-            echo $disabled ? html::a('javascript:;', $this->lang->order->delete, "$disabled class='$class'") : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "data-toggle='modal' class='$class deleter'"); 
+            echo $disabled ? html::a('javascript:;', $this->lang->order->delete, "$disabled class='$class'") : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, " class='$class deleter'"); 
         }
 
         if(RUN_MODE == 'front')
@@ -553,7 +554,7 @@ class orderModel extends model
             /* View order link. */
             $disabled = ($order->status == 'normal' or $order->status == 'finished') ? '' : "disabled='disabled'";
             $class    = $isMobile ? "  btn btn-link " : "";
-            echo $disabled ? '' : html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view, "data-toggle='modal' class='$class'"); 
+            echo $disabled ? '' : html::a(inlink('view', "orderID=$order->id"), $this->lang->order->view, "{$toggle} class='$class'"); 
             
             if($this->commonLink['cancelLink'])
             {
@@ -584,15 +585,16 @@ class orderModel extends model
     {
         if(RUN_MODE == 'admin' )
         {
-            $class = $btnLink ? 'btn' : '';
+            $class  = $btnLink ? 'btn' : '';
+            $toggle = $btnLink ? '' : "data-toggle='modal'";
 
             /* Edit link. */
             $disabled = $order->status == 'normal' ? '' : "disabled = 'disabled'";
-            echo $disabled ? html::a('javascript:;', $this->lang->order->edit, "$disabled  class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
+            echo $disabled ? html::a('javascript:;', $this->lang->order->edit, "$disabled  class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "{$toggle} class='$class'");
             
             /* Send link. */
             $disabled = ($order->status == 'normal' and $order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
-            echo $disabled ?  html::a('javascript:;', $this->lang->order->delivery, "$disabled class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "data-toggle='modal' class='$class'");
+            echo $disabled ?  html::a('javascript:;', $this->lang->order->delivery, "$disabled class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "{$toggle} class='$class'");
 
             /* Finish link. */
             $disabled = ($order->status == 'normal' and $order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
