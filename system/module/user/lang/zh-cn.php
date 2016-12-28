@@ -72,6 +72,7 @@ $lang->user->checkEmail      = '绑定邮箱';
 $lang->user->getEmailCode    = '获取邮箱验证码';
 $lang->user->getCertifyCode  = '获取验证码';
 $lang->user->setEmail        = '邮箱设置';
+$lang->user->setMobile       = '手机设置';
 $lang->user->newEmail        = '新邮箱';
 $lang->user->rank            = '等级积分';
 $lang->user->score           = '消耗积分';
