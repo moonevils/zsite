@@ -59,6 +59,8 @@ $lang->dashboard        = 'Dashboard';
 $lang->visualEdit       = 'Visual Editor';
 $lang->editMode         = 'Edit Mode';
 $lang->register         = 'Register';
+$lang->unbind           = 'Unbind account';
+$lang->bind             = 'Bind account';
 $lang->logout           = 'Logout';
 $lang->login            = 'Login';
 $lang->account          = 'Account';
@@ -117,6 +119,14 @@ $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A6
 
 $lang->score = new stdclass();
 $lang->score->common = 'Points';
+
+$lang->community = new stdclass();
+$lang->community->common  = 'Community';
+$lang->getMobileCodeByApi = 'Get mobile code by api';
+$lang->getEmailCodeByApi  = 'Get email code by api';
+$lang->checkEmail         = 'Check email';
+$lang->checkMobile        = 'Check mobile';
+$lang->getUserByApi       = 'Get user info by api';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

@@ -62,6 +62,14 @@ class seo
                 return seo::convertURI($module, 'index', $params, $pageID);
             }
 
+            if($pageID and $module == 'effect' and count($items) == 1) 
+            {
+                $params['category'] = 0;
+                $params['mode'] = 0;
+                return seo::convertURI($module, 'index', $params, $pageID);
+            }
+
+
             /* Not an alias, return directly. */
             if(empty($categoryAlias[$uri])) return $uri;
 
@@ -119,16 +127,24 @@ class seo
         {
             if(count($items) > 2)
             {
+                if(preg_match('/^c\d+$/', $items[2])) 
+                {
+                    $params = array('articleID' => str_replace('c', '', $items[2]));
+                    
+                    return seo::convertURI('book', 'browse', $params);
+                }
+
                 if(preg_match('/\w+-\d+$/', $items[2])) 
                 {
                     $params = explode('-', $items[2]);
                     $params = array('articleID' => end($params));
+                    
                     return seo::convertURI('book', 'read', $params);
                 }
                 else
                 {
                     $params = array('articleID' => $items[2]);
-                    return seo::convertURI('book', 'browse', $params);
+                    return seo::convertURI('book', 'read', $params);
                 }
             }
             if(count($items) == 2 )
