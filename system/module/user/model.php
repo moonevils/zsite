@@ -1588,4 +1588,32 @@ class userModel extends model
     
         return $data;
     }
+    
+    /**
+     * Check if the user has certificated the require option
+     *
+     * @access public
+     * @param  string $account
+     * @param  array  $options
+     * @return bool
+     */
+    public function checkCertification($account, $options = '')
+    {
+        if($account == 'guest') return false;
+    
+        $options = explode(',', $options);
+        if(empty($options)) return true;
+    
+        $user = $this->getByAccount($account);
+        if(!$user) return false;
+        
+        foreach($options as $option)
+        {
+            $option = trim($option);
+            if($option == 'email')  if(!$user->emailCertified) return false;
+            if($option == 'mobile') if(!$user->mobileCertified) return false;
+        }
+    
+        return true;
+    }
 }
