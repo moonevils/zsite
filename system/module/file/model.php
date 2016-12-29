@@ -1008,6 +1008,7 @@ class fileModel extends model
         /* Judge the content type. */
         $mimes = $this->config->file->mimes;
         $contentType = isset($mimes[$fileType]) ? $mimes[$fileType] : $mimes['default'];
+        if(empty($fileSize) and $content) $fileSize = strlen($content);
 
         header("Content-type: $contentType");
         header("Content-Disposition: attachment; filename=\"$fileName\"");
