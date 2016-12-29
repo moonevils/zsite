@@ -274,7 +274,7 @@ class productModel extends model
             ->add('addedDate', $now)
             ->add('editedDate', $now)
             ->get();
-        $product->alias    = seo::unify($product->alias, '-');
+        $product->alias    = seo::unify($product->alias, '-', true);
         $product->keywords = seo::unify($product->keywords, ',');
         if(!isset($product->categories)) $product->categories = '';
 
@@ -327,7 +327,7 @@ class productModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $product->alias    = seo::unify($product->alias, '-');
+        $product->alias    = seo::unify($product->alias, '-', true);
         $product->keywords = seo::unify($product->keywords, ',');
         if(!isset($product->categories)) $product->categories = '';
 

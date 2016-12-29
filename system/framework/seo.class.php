@@ -329,9 +329,9 @@ class seo
      * @access public
      * @return string
      */
-    public static function unify($string, $to = ',')
+    public static function unify($string, $to = ',', $trim = false)
     {
-        $string = str_replace(' ', '', $string);
+        if($trim) $string = str_replace(' ', '', $string);
         $labels = array('_', '、', '-', '\n', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
         $string = str_replace($labels, $to, $string);
         return preg_replace("/[{$to}]+/", $to, trim($string, $to));

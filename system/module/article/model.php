@@ -404,7 +404,7 @@ class articleModel extends model
         }
 
         $article->keywords = seo::unify($article->keywords, ',');
-        if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-');
+        if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-', true);
         $article->content = $this->rtrimContent($article->content);
     
         $this->dao->insert(TABLE_ARTICLE)
@@ -551,7 +551,7 @@ class articleModel extends model
             ->get();
 
         $article->keywords = seo::unify($article->keywords, ',');
-        if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-');
+        if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-', true);
         $article->content  = $this->rtrimContent($article->content);
         if(!isset($article->categories)) $article->categories = '';
 
