@@ -329,6 +329,7 @@ class userModel extends model
             ->setDefault('admin', 'no')
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
             ->removeif(RUN_MODE != 'admin', $this->config->user->skipedFields->update)
+            ->removeif(RUN_MODE == 'admin', $this->config->user->skipedFields->adminUpdate)
             ->get();
 
         if(RUN_MODE == 'admin')
@@ -1587,5 +1588,33 @@ class userModel extends model
         $data['data']->gender   = $user->gender;
     
         return $data;
+    }
+    
+    /**
+     * Check if the user has certificated the require option
+     *
+     * @access public
+     * @param  string $account
+     * @param  array  $options
+     * @return bool
+     */
+    public function checkCertification($account, $options = '')
+    {
+        if($account == 'guest') return false;
+    
+        $options = explode(',', $options);
+        if(empty($options)) return true;
+    
+        $user = $this->getByAccount($account);
+        if(!$user) return false;
+        
+        foreach($options as $option)
+        {
+            $option = trim($option);
+            if($option == 'email')  if(!$user->emailCertified) return false;
+            if($option == 'mobile') if(!$user->mobileCertified) return false;
+        }
+    
+        return true;
     }
 }
