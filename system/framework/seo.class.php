@@ -119,16 +119,24 @@ class seo
         {
             if(count($items) > 2)
             {
+                if(preg_match('/^c\d+$/', $items[2])) 
+                {
+                    $params = array('articleID' => str_replace('c', '', $items[2]));
+                    
+                    return seo::convertURI('book', 'browse', $params);
+                }
+
                 if(preg_match('/\w+-\d+$/', $items[2])) 
                 {
                     $params = explode('-', $items[2]);
                     $params = array('articleID' => end($params));
+                    
                     return seo::convertURI('book', 'read', $params);
                 }
                 else
                 {
                     $params = array('articleID' => $items[2]);
-                    return seo::convertURI('book', 'browse', $params);
+                    return seo::convertURI('book', 'read', $params);
                 }
             }
             if(count($items) == 2 )
