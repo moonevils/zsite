@@ -303,16 +303,16 @@ $lang->security->menu->blacklist = 'Blacklist|guarder|setblacklist|';
 $lang->security->menu->whitelist = 'Whitelist|guarder|setwhitelist|';
 $lang->security->menu->sensitive = 'Sensitive Words|site|setsensitive|';
 $lang->security->menu->captcha   = 'Security Questions|guarder|setcaptcha|';
-$lang->security->menu->upload    = 'Attachment Upload|site|setupload|';
+$lang->security->menu->upload    = 'File Upload|site|setupload|';
 $lang->security->menu->admin     = 'Administrators|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => 'Group Privilege|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log       = 'Login Log|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
-$lang->interface->menu->oauth  = 'Oauth|site|setoauth|';
-$lang->interface->menu->mail   = array('link' => 'Mail Setting|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->interface->menu->wechat = array('link' => 'Wechat setting|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
+$lang->interface->menu->oauth  = 'Social Login|site|setoauth|';
+$lang->interface->menu->mail   = array('link' => 'Email|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
 $lang->score->menu = $lang->site->menu;
