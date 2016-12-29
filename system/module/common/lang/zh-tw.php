@@ -59,6 +59,8 @@ $lang->dashboard        = '用戶中心';
 $lang->visualEdit       = '可視化編輯';
 $lang->editMode         = '編輯模式';
 $lang->register         = '註冊';
+$lang->unbind           = '解除綁定';
+$lang->bind             = '綁定賬號';
 $lang->logout           = '退出';
 $lang->login            = '登錄';
 $lang->account          = '帳號';
@@ -117,6 +119,14 @@ $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A6
 
 $lang->score = new stdclass();
 $lang->score->common = '積分';
+
+$lang->community = new stdclass();
+$lang->community->common  = '社區';
+$lang->getMobileCodeByApi = '獲取手機驗證碼';
+$lang->getEmailCodeByApi  = '獲取郵箱驗證碼';
+$lang->checkEmail         = '驗證郵箱';
+$lang->checkMobile        = '驗證手機';
+$lang->getUserByApi       = '獲取綁定信息';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

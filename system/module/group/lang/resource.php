@@ -45,6 +45,7 @@ $lang->moduelGroups->design[] = 'visual';
 $lang->moduelGroups->open = array();
 $lang->moduelGroups->open[] = 'package';
 $lang->moduelGroups->open[] = 'theme';
+$lang->moduelGroups->community[] = 'community';
 
 $lang->moduelGroups->setting = array();
 $lang->moduelGroups->setting[] = 'site';
@@ -181,7 +182,7 @@ $lang->resource->package->structure  = 'structure';
 
 /* Theme module. */
 $lang->resource->theme = new stdclass();
-$lang->resource->theme->setFilter    = array('module' => 'ui', 'method' => 'themeStore');
+$lang->resource->theme->themeStore    = array('module' => 'ui', 'method' => 'themeStore');
 
 /* Product module. */
 $lang->resource->product = new stdclass();
@@ -311,3 +312,13 @@ $lang->resource->score->setCounts = 'setCounts';
 /* Search module. */
 if(!isset($lang->resource->search))$lang->resource->search = new stdclass();
 $lang->resource->search->buildIndex   = 'buildIndex';
+
+$lang->resource->community = new stdclass();
+$lang->resource->community->register   = array('module' => 'admin', 'method' => 'register');
+$lang->resource->community->bind = array('module' => 'admin', 'method' => 'bind');
+$lang->resource->community->unbind = array('module' => 'admin', 'method' => 'unbind');
+$lang->resource->community->getMobileCodeByApi = array('module' => 'admin', 'method' => 'getMobileCodeByApi');
+$lang->resource->community->getEmailCodeByApi  = array('module' => 'admin', 'method' => 'getEmailCodeByApi');
+$lang->resource->community->getUserByApi  = array('module' => 'admin', 'method' => 'getUserByApi');
+$lang->resource->community->checkMobile  = array('module' => 'admin', 'method' => 'checkMobile');
+$lang->resource->community->checkEmail  = array('module' => 'admin', 'method' => 'checkEmail');
