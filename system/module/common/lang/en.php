@@ -59,6 +59,8 @@ $lang->dashboard        = 'Dashboard';
 $lang->visualEdit       = 'Visual Editor';
 $lang->editMode         = 'Edit Mode';
 $lang->register         = 'Register';
+$lang->unbind           = 'Unbind account';
+$lang->bind             = 'Bind account';
 $lang->logout           = 'Logout';
 $lang->login            = 'Login';
 $lang->account          = 'Account';
@@ -117,6 +119,14 @@ $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A6
 
 $lang->score = new stdclass();
 $lang->score->common = 'Points';
+
+$lang->community = new stdclass();
+$lang->community->common  = 'Community';
+$lang->getMobileCodeByApi = 'Get mobile code by api';
+$lang->getEmailCodeByApi  = 'Get email code by api';
+$lang->checkEmail         = 'Check email';
+$lang->checkMobile        = 'Check mobile';
+$lang->getUserByApi       = 'Get user info by api';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -195,7 +205,7 @@ $lang->menu->nav      = 'Navigation|nav|admin|';
 $lang->menu->block    = 'Widget|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
 $lang->menu->others   = "Settings|ui|others|";
-$lang->menu->effect   = "Eeffect|ui|effect|";
+$lang->menu->effect   = "Effect|ui|effect|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i>Visual Editor|visual|index|";
 $lang->menu->edit     = "Custom|ui|edittemplate|";
 
@@ -303,16 +313,16 @@ $lang->security->menu->blacklist = 'Blacklist|guarder|setblacklist|';
 $lang->security->menu->whitelist = 'Whitelist|guarder|setwhitelist|';
 $lang->security->menu->sensitive = 'Sensitive Words|site|setsensitive|';
 $lang->security->menu->captcha   = 'Security Questions|guarder|setcaptcha|';
-$lang->security->menu->upload    = 'Attachment Upload|site|setupload|';
+$lang->security->menu->upload    = 'File Upload|site|setupload|';
 $lang->security->menu->admin     = 'Administrators|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => 'Group Privilege|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log       = 'Login Log|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
-$lang->interface->menu->oauth  = 'Oauth|site|setoauth|';
-$lang->interface->menu->mail   = array('link' => 'Mail Setting|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->interface->menu->wechat = array('link' => 'Wechat setting|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
+$lang->interface->menu->oauth  = 'Social Login|site|setoauth|';
+$lang->interface->menu->mail   = array('link' => 'Email|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
 $lang->score->menu = $lang->site->menu;
