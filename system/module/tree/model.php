@@ -446,7 +446,7 @@ class treeModel extends model
             ->setIF(!$this->post->isLink, 'link', '')
             ->get();
 
-        $category->alias    = seo::unify($category->alias, '-');
+        $category->alias    = seo::unify($category->alias, '-', true);
         $category->keywords = seo::unify($category->keywords, ',');
 
         /* Set moderators. */
@@ -527,7 +527,7 @@ class treeModel extends model
         foreach($children as $key => $categoryName)
         {
             $alias = $this->post->alias[$key];
-            $alias = seo::unify($alias, '-');
+            $alias = seo::unify($alias, '-', true);
             $order = $i * 10;
             if(empty($categoryName)) continue;
 
