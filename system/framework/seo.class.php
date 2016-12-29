@@ -62,6 +62,14 @@ class seo
                 return seo::convertURI($module, 'index', $params, $pageID);
             }
 
+            if($pageID and $module == 'effect' and count($items) == 1) 
+            {
+                $params['category'] = 0;
+                $params['mode'] = 0;
+                return seo::convertURI($module, 'index', $params, $pageID);
+            }
+
+
             /* Not an alias, return directly. */
             if(empty($categoryAlias[$uri])) return $uri;
 
