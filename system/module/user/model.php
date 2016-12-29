@@ -329,6 +329,7 @@ class userModel extends model
             ->setDefault('admin', 'no')
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
             ->removeif(RUN_MODE != 'admin', $this->config->user->skipedFields->update)
+            ->removeif(RUN_MODE == 'admin', $this->config->user->skipedFields->adminUpdate)
             ->get();
 
         if(RUN_MODE == 'admin')

@@ -6,6 +6,8 @@ $config->user->skipedFields = new stdclass();
 $config->user->skipedFields->create = 'ip,fingerprint,private,emailCertified,mobileCertified';
 $config->user->skipedFields->update = 'ip,admin,email,groups,account,join,visits,fingerprint,locked,token,private,emailCertified,mobileCertified,bindSite';
 
+$config->user->skipedFields->adminUpdate = 'fingerprint';
+
 $config->user->require = new stdclass();
 $config->user->require->register    = 'account,realname,email,password1';
 $config->user->require->edit        = 'realname';
