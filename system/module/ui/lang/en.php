@@ -438,5 +438,5 @@ $lang->effect->newBlock      = 'Import Widget';
 $lang->effect->obtan         = 'Get effect';
 $lang->effect->imported      = 'Imported';
 $lang->effect->importSuccess = 'Imported';
-$lang->effect->bindCommunity = 'Please bind the account of chanzhi before get effect';
+$lang->effect->bindCommunity = 'Please bind the account of Changer before get effect';
 $lang->effect->noRsults      = "You have no effect, please login the platform of Changer <a href='http://www.chanzhi.org/effect.html' target='_blank'>get effect</a>。";

@@ -59,6 +59,8 @@ $lang->dashboard        = '用户中心';
 $lang->visualEdit       = '可视化编辑';
 $lang->editMode         = '编辑模式';
 $lang->register         = '注册';
+$lang->unbind           = '解除绑定';
+$lang->bind             = '绑定账号';
 $lang->logout           = '退出';
 $lang->login            = '登录';
 $lang->account          = '帐号';
@@ -117,6 +119,14 @@ $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A6
 
 $lang->score = new stdclass();
 $lang->score->common = '积分';
+
+$lang->community = new stdclass();
+$lang->community->common  = '社区';
+$lang->getMobileCodeByApi = '获取手机验证码';
+$lang->getEmailCodeByApi  = '获取邮箱验证码';
+$lang->checkEmail         = '验证邮箱';
+$lang->checkMobile        = '验证手机';
+$lang->getUserByApi       = '获取绑定信息';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

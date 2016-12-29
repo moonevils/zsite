@@ -1,8 +1,8 @@
 <?php
-$lang->mail->common = 'Email Settings';
+$lang->mail->common = 'Set Email';
 $lang->mail->index  = 'Home';
 $lang->mail->detect = 'Testing';
-$lang->mail->edit   = 'Configure';
+$lang->mail->edit   = 'Reset';
 $lang->mail->save   = 'Save';
 $lang->mail->test   = 'Test';
 $lang->mail->reset  = 'Reset';
@@ -34,9 +34,9 @@ $lang->mail->secureList['']    = 'No';
 $lang->mail->secureList['ssl'] = 'ssl';
 $lang->mail->secureList['tls'] = 'tls';
 
-$lang->mail->inputFromEmail = 'Enter Sender Email';
+$lang->mail->inputFromEmail = 'Enter Email Address';
 $lang->mail->nextStep       = 'Next';
-$lang->mail->successSaved   = 'Configuration saved.';
+$lang->mail->successSaved   = 'Configuration is saved.';
 $lang->mail->subject        = 'Testing Email';
 $lang->mail->content        = 'Email configured';
 $lang->mail->sending        = "Sending an Email to %s. Please wait...";
