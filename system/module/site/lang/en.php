@@ -271,3 +271,5 @@ $lang->site->menus['security']   = 'Security';
 
 $lang->site->fileAuthority = 'You have to edit the privilege to write the file. In Linux, run the command <code>%s</code>.';
 $lang->site->fileRequired  = 'You have to to create the file. In Linux, run the command<code>%s</code>.';
+
+$lang->site->wechatLoginTip = 'It requires the extension openssl of php to use wechat login';
