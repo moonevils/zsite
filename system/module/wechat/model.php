@@ -327,6 +327,7 @@ class wechatModel extends model
             {
                $response->content = $response->source;
             }
+            $response->content = htmlspecialchars_decode($response->content);
         }
 
         return $response;
