@@ -693,7 +693,7 @@ function isLocalIP()
  * @access public
  * @return string 
  */
-function getWebRoot()
+function getWebRoot($full = false)
 {
     $path = $_SERVER['SCRIPT_NAME'];
 
@@ -702,6 +702,12 @@ function getWebRoot()
         $url  = parse_url($_SERVER['argv'][1]);
         $path = empty($url['path']) ? '/' : rtrim($url['path'], '/');
         $path = empty($path) ? '/' : preg_replace('/\/www$/', '/www/', $path);
+    }
+    
+    if($full)
+    {
+        $http = (isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://';
+        return $http . $_SERVER['HTTP_HOST'] . substr($path, 0, (strrpos($path, '/') + 1));
     }
 
     return substr($path, 0, (strrpos($path, '/') + 1));
