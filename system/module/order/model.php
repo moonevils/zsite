@@ -526,11 +526,11 @@ class orderModel extends model
         $this->commonLink = array();
         $this->commonLink['savePayment'] = true;
         $this->commonLink['cancelLink']  = true;
+        $toggle = $btnLink ? '' : "data-toggle='modal'";
 
         if(RUN_MODE == 'admin')
         {
             $class  = $btnLink ? 'btn' : '';
-            $toggle = $btnLink ? '' : "data-toggle='modal'";
             
             /* View order link */ 
             if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id&btnLink=false"), $this->lang->order->view, $toggle);
@@ -583,10 +583,10 @@ class orderModel extends model
      */
     public function printShopActions($order, $btnLink = false)
     {
+        $toggle = $btnLink ? '' : "data-toggle='modal'";
         if(RUN_MODE == 'admin' )
         {
             $class  = $btnLink ? 'btn' : '';
-            $toggle = $btnLink ? '' : "data-toggle='modal'";
 
             /* Edit link. */
             $disabled = $order->status == 'normal' ? '' : "disabled = 'disabled'";
