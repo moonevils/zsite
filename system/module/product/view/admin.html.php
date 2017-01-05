@@ -42,7 +42,7 @@
         <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
-        <th style='width: <?php echo ($this->app->clientLang == 'en') ? '320px' : '260px';?>'><?php echo $lang->actions;?></th>
+        <th style='width: <?php echo ($this->app->clientLang == 'en') ? '320px' : '280px';?>'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
