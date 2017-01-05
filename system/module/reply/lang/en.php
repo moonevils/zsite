@@ -16,10 +16,10 @@ $lang->reply->list      = 'List';
 $lang->reply->content   = 'Text';
 $lang->reply->author    = 'Author';
 $lang->reply->files     = 'File：';
-$lang->reply->addedDate = 'Replied On';
-$lang->reply->admin     = 'Reply Admin';
-$lang->reply->sofa      = '沙发';
-$lang->reply->stool     = '板凳';
+$lang->reply->addedDate = 'Replied on';
+$lang->reply->admin     = 'Manage Reply';
+$lang->reply->sofa      = ' ';
+$lang->reply->stool     = ' ';
 
 $lang->reply->edit       = 'Edit';
 $lang->reply->deleteFile = 'Delete File';
