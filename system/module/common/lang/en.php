@@ -169,7 +169,7 @@ $lang->groups->shop     = array('title' => 'Mall', 'link' => 'order|admin|',    
 $lang->groups->user     = array('title' => 'User', 'link' => 'user|admin|',                'icon' => 'group');
 $lang->groups->promote  = array('title' => 'SEO', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
 $lang->groups->design   = array('title' => 'UI', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
-$lang->groups->open     = array('title' => 'Ext', 'link' => 'package|browse|',            'icon' => 'cloud');
+$lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',            'icon' => 'cloud');
 $lang->groups->setting  = array('title' => 'Set', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
 /* The main menus. */
