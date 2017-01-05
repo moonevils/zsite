@@ -7,5 +7,5 @@ $lang->misc->userbook    = 'User Manual';
 $lang->misc->forum       = 'Forum';
 
 $lang->misc->thanksTitle      = 'Changer is built on top of outstanding open source projects.';
-$lang->misc->thanksFooter     = 'Thank %s for security audit.';
+$lang->misc->thanksFooter     = 'Thank %s for security check.';
 $lang->misc->thanksObjectName = 'http://www.zzsec.com/';

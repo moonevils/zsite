@@ -71,7 +71,7 @@ $lang->user->adminlog        = 'Admin Log';
 $lang->user->checkEmail      = 'Email Binding';
 $lang->user->getEmailCode    = 'Get verification code';
 $lang->user->getCertifyCode  = 'Get certification code';
-$lang->user->setEmail        = 'Configure Email';
+$lang->user->setEmail        = 'Change Email';
 $lang->user->setMobile       = 'Configure Mobile';
 $lang->user->newEmail        = 'Email';
 $lang->user->rank            = 'Ranking';
@@ -147,7 +147,7 @@ $lang->user->adminList['super']  = 'Super Admin';
 $lang->user->adminList['common'] = 'Admin';
 $lang->user->adminList['no']     = 'User';
 
-$lang->user->accountTypeList['no']      = 'Frontend Account';
+$lang->user->accountTypeList['no']      = 'Front Account';
 $lang->user->accountTypeList['common']  = 'Backend Account';
 
 $lang->user->genderList = new stdclass();
@@ -230,7 +230,7 @@ $lang->user->control->lblPassword = "Leave it blank, if you don't want to change
 $lang->user->navGroups = new stdclass();
 $lang->user->navGroups->user    = 'My Profile';
 $lang->user->navGroups->order   = 'My Order';
-$lang->user->navGroups->message = 'My Message';
+$lang->user->navGroups->message = 'My Post';
 
 $lang->user->control->menus['profile']    = '<i class="icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus['message']    = '<i class="icon-comments-alt"></i> Message <i class="icon-chevron-right"></i>|user|message';
