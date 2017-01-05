@@ -52,7 +52,7 @@ $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>"
 $lang->todayIs          = 'Today is %s，';
 $lang->aboutUs          = 'About Us';
 $lang->link             = 'Links';
-$lang->frontHome        = 'FrontEnd';
+$lang->frontHome        = 'Front';
 $lang->forumHome        = 'Forum';
 $lang->bookHome         = 'Book';
 $lang->dashboard        = 'Dashboard';
