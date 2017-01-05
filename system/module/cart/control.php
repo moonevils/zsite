@@ -69,7 +69,7 @@ class cart extends control
     {
         /* Get info from cookie. */
         $cart  = $this->cart->getListByCookie();
-        $count = count($cart);
+        $count = count((array) $cart);
 
         /* Save cookie's cart info. */
         if($this->app->user->account != 'guest')
