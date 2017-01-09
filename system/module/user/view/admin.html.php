@@ -53,23 +53,24 @@ js::set('admin', $this->get->admin);
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>
-    <table class='table table-fixed table-hover table-striped able-condensed' id='userList'>
+    <table class='table table-fixed table-hover tablesorter table-striped able-condensed' id='userList'>
       <thead>
         <tr class='text-center'>
-          <th class='w-60px'><?php echo $lang->user->id;?></th>
+          <?php $vars = 'orderBy=%s';?>
+          <th class='w-60px'><?php echo commonModel::printOrderLink('id', $orderBy, $vars, $lang->user->id);?></th>
           <th class='w-120px'><?php echo $lang->user->realname;?></th>
-          <th class='w-100px'><?php echo $lang->user->account;?></th>
+          <th class='w-100px'><?php echo commonModel::printOrderLink('account', $orderBy, $vars, $lang->user->account);?></th>
           <?php if(commonModel::isAvailable('score')):?>
-          <th class='w-70px'><?php echo $lang->user->score;?></th>
-          <th class='w-70px'><?php echo $lang->user->rank;?></th>
+          <th class='w-80px'><?php echo commonModel::printOrderLink('score', $orderBy, $vars, $lang->user->score);?></th>
+          <th class='w-80px'><?php echo commonModel::printOrderLink('rank', $orderBy, $vars, $lang->user->rank);?></th>
           <?php endif;?>
           <?php if(!$this->get->admin):?>
           <th class='w-60px'><?php echo $lang->user->gender;?></th>
           <th class='text-left visible-lg'><?php echo $lang->user->company;?></th>
-          <th class='w-80px'><?php echo $lang->user->join;?></th>
+          <th class='w-80px'><?php echo commonModel::printOrderLink('join', $orderBy, $vars, $lang->user->join);?></th>
           <?php endif;?>
-          <th class='w-70px'><?php echo $lang->user->visits;?></th>
-          <th class='w-110px'><?php echo $lang->user->last;?></th>
+          <th class='w-80px'><?php echo commonModel::printOrderLink('visits', $orderBy, $vars, $lang->user->visits);?></th>
+          <th class='w-110px'><?php echo commonModel::printOrderLink('last', $orderBy, $vars, $lang->user->last);?></th>
           <th class='w-100px'><?php echo $lang->user->ip;?></th>
           <th class='w-60px'><?php echo $lang->user->status;?></th>
           <th class='w-190px'><?php echo $lang->actions;?></th>
