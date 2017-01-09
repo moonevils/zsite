@@ -32,7 +32,7 @@ class userModel extends model
             ->fi()
             ->beginIF($provider)->andWhere('o.provider')->like("%{$provider}%")->fi()
             ->beginIF($admin)->andWhere('u.admin')->ne('no')->fi()
-            ->orderBy('id_asc')
+            ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');
 
