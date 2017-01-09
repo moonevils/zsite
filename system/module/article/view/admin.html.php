@@ -51,6 +51,20 @@
         <th class='text-center w-70px'> <?php commonModel::printOrderLink('submittion', $orderBy, $vars, $lang->article->status);?></th>
         <?php endif;?>
         <?php $actionClass = $type == 'page' ? 'w-250px' : 'w-300px';?>
+        <?php 
+          if($type == 'page')
+          {
+            $actionClass = 'w-250px';
+          }
+          else if($type == 'submittion')
+          {
+            $actionClass = 'w-150px';
+          }
+          else
+          {
+            $actionClass = 'w-300px';
+          }
+        ?>
         <th class="text-center <?php echo $actionClass;?>"><?php echo $lang->actions;?></th>
       </tr>
     </thead>
