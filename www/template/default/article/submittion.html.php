@@ -13,7 +13,7 @@
             <tr>
               <th class='text-center w-50px'><?php echo $lang->article->id;?></th>
               <th class='text-center'><?php echo $lang->article->title;?></th>
-              <th class='text-center w-160px'><?php echo $lang->article->submissionTime;?></th>
+              <th class='text-center w-160px'><?php echo $lang->article->submittionTime;?></th>
               <th class='text-center w-60px'><?php echo $lang->article->status;?></th>
               <th class='text-center w-60px'><?php echo $lang->article->views;?></th>
               <th class="text-center w-120px"><?php echo $lang->actions;?></th>

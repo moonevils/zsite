@@ -77,7 +77,7 @@ $lang->article->files         = 'File';
 $lang->article->images        = 'Image';
 
 $lang->article->submittion     = 'Submit';
-$lang->article->submissionTime = 'Submit On';
+$lang->article->submittionTime = 'Submit On';
 $lang->article->noSubmittion   = 'You have no submissions yet. Submit and earn points NOW!';
 
 $lang->article->submittionOptions = new stdclass;
