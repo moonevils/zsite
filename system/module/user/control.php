@@ -551,7 +551,7 @@ class user extends control
             $this->lang->user->menu = $this->lang->security->menu;
             $this->lang->menuGroups->user = 'security';
         }
-
+        
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
             ->setDefault('recPerPage', 10)
@@ -559,16 +559,18 @@ class user extends control
             ->setDefault('user', '')
             ->setDefault('provider', '')
             ->setDefault('admin', '')
+            ->setDefault('orderBy', 'id_desc')
             ->get();
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
 
-        $users = $this->user->getList($pager, $get->user, $get->provider, $get->admin);
+        $users = $this->user->getList($pager, $get->user, $get->provider, $get->admin, $get->orderBy);
         
-        $this->view->users = $users;
-        $this->view->pager = $pager;
-        $this->view->title = $this->lang->user->common;
+        $this->view->orderBy  = $get->orderBy;
+        $this->view->users    = $users;
+        $this->view->pager    = $pager;
+        $this->view->title    = $this->lang->user->common;
         $this->display();
     }
 

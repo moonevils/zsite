@@ -281,11 +281,6 @@ class site extends control
             $provider = $this->post->provider;
             $oauth    = array($provider => helper::jsonEncode($_POST));
 
-            if($provider == 'wechat')
-            {
-                if(!extension_loaded('openssl')) $this->send(array('result' => 'fail', 'message' => $this->lang->site->wechatLoginTip));
-            }
-
             $result   = $this->loadModel('setting')->setItems('system.common.oauth', $oauth);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));

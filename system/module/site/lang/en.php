@@ -173,11 +173,11 @@ $lang->site->scoreList['close'] = 'Off';
 $lang->site->cdnList['open']  = 'On';
 $lang->site->cdnList['close'] = 'Off';
 
-$lang->site->cacheTypes['close'] = 'Off';
 $lang->site->cacheTypes['file']  = 'On';
+$lang->site->cacheTypes['close'] = 'Off';
 
-$lang->site->cachePageOptions['close'] = 'Off';
 $lang->site->cachePageOptions['open']  = 'On';
+$lang->site->cachePageOptions['close'] = 'Off';
 
 $lang->site->filterFunctionList['open']  = 'On';
 $lang->site->filterFunctionList['close'] = 'Off';
@@ -193,9 +193,9 @@ $lang->site->moduleAvailable->content['book']       = 'Book';
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = 'User';
 $lang->site->moduleAvailable->user['forum']      = 'Forum';
+$lang->site->moduleAvailable->user['score']      = 'Points';
 $lang->site->moduleAvailable->user['message']    = 'Message';
 $lang->site->moduleAvailable->user['submittion'] = 'Submission';
-$lang->site->moduleAvailable->user['score']      = 'Points';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = 'Mall';

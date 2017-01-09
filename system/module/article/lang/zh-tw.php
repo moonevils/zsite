@@ -77,7 +77,7 @@ $lang->article->files         = '附件';
 $lang->article->images        = '圖片';
 
 $lang->article->submittion     = '投稿';
-$lang->article->submissionTime = '投遞時間';
+$lang->article->submittionTime = '投遞時間';
 $lang->article->noSubmittion   = '您還沒有投稿記錄，歡迎您提交投稿賺取積分，分享宣傳。';
 
 $lang->article->submittionOptions = new stdclass;
