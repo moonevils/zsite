@@ -567,10 +567,10 @@ class user extends control
 
         $users = $this->user->getList($pager, $get->user, $get->provider, $get->admin, $get->orderBy);
         
-        $this->view->orderBy = $get->orderBy;
-        $this->view->users   = $users;
-        $this->view->pager   = $pager;
-        $this->view->title   = $this->lang->user->common;
+        $this->view->orderBy  = $get->orderBy;
+        $this->view->users    = $users;
+        $this->view->pager    = $pager;
+        $this->view->title    = $this->lang->user->common;
         $this->display();
     }
 

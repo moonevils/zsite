@@ -19,21 +19,21 @@ js::set('admin', $this->get->admin);
   <div class="panel-heading clearfix">
     <ul id='typeNav' class='nav nav-tabs pull-left'>
       <li data-type='internal' <?php echo !$this->get->provider ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('admin'), $lang->user->all);?>
+        <?php echo html::a(inlink('admin', "admin={$this->get->admin}"), $lang->user->all);?>
       </li>
       <?php if(!empty($this->config->oauth->sina)):?>
       <li data-type='internal' <?php echo$this->get->provider == 'sina' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('admin', "provider=sina"), $lang->user->oauth->typeList['sina']);?>
+        <?php echo html::a(inlink('admin', "provider=sina&admin={$this->get->admin}"), $lang->user->oauth->typeList['sina']);?>
       </li>
       <?php endif;?>
       <?php if(!empty($this->config->oauth->qq)):?>
       <li data-type='internal' <?php echo$this->get->provider == 'qq' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('admin', "provider=qq"), $lang->user->oauth->typeList['qq']);?>
+        <?php echo html::a(inlink('admin', "provider=qq&admin={$this->get->admin}"), $lang->user->oauth->typeList['qq']);?>
       </li>
       <?php endif;?>
       <?php if($this->loadModel('wechat')->getList()):?>
       <li data-type='internal' <?php echo$this->get->provider == 'wechat' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('admin', "provider=wechat"), $lang->user->oauth->typeList['wechat']);?>
+        <?php echo html::a(inlink('admin', "provider=wechat&admin={$this->get->admin}"), $lang->user->oauth->typeList['wechat']);?>
       </li>
       <?php endif;?>
     </ul> 
@@ -56,7 +56,7 @@ js::set('admin', $this->get->admin);
     <table class='table table-fixed table-hover tablesorter table-striped able-condensed' id='userList'>
       <thead>
         <tr class='text-center'>
-          <?php $vars = 'orderBy=%s';?>
+          <?php $vars = "orderBy=%s&admin={$this->get->admin}&provider={$this->get->provider}";?>
           <th class='w-60px'><?php echo commonModel::printOrderLink('id', $orderBy, $vars, $lang->user->id);?></th>
           <th class='w-120px'><?php echo $lang->user->realname;?></th>
           <th class='w-100px'><?php echo commonModel::printOrderLink('account', $orderBy, $vars, $lang->user->account);?></th>
