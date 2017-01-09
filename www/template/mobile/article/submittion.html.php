@@ -35,7 +35,7 @@
             </div>
             <div class='text-muted small'>
               <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span>
-              &nbsp;&nbsp; <span title="<?php echo $lang->article->submissionTime;?>"><i class='icon-time'></i> <?php echo $article->editedDate;?></span>
+              &nbsp;&nbsp; <span title="<?php echo $lang->article->submittionTime;?>"><i class='icon-time'></i> <?php echo $article->editedDate;?></span>
             </div>
           </div>
         </div>
