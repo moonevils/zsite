@@ -20,7 +20,7 @@ class userModel extends model
      * @access public
      * @return object 
      */
-    public function getList($pager = null, $user = '', $provider = '', $admin = '')
+    public function getList($pager = null, $user = '', $provider = '', $admin = '', $orderBy = 'id_desc')
     {
         $users = $this->dao->setAutolang(false)
             ->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
@@ -32,7 +32,7 @@ class userModel extends model
             ->fi()
             ->beginIF($provider)->andWhere('o.provider')->like("%{$provider}%")->fi()
             ->beginIF($admin)->andWhere('u.admin')->ne('no')->fi()
-            ->orderBy('id_asc')
+            ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
 

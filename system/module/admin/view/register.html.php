@@ -72,7 +72,7 @@
       <form method="post" id='registerForm'>
         <table class='table table-form'>
           <tr>
-            <th class='w-100px'><?php echo $lang->user->account;?></th>
+            <th class='w-120px'><?php echo $lang->user->account;?></th>
             <td colspan='2'>
               <div class="required required-wrapper"></div>
               <?php echo html::input('account', '', "class='form-control' placeholder='{$lang->admin->register->lblAccount}'");?>
@@ -123,14 +123,14 @@
           </tr>  
           <tr>
             <th><?php echo $lang->user->password;?></th>
-            <td>
+            <td colspan='2'>
               <div class="required required-wrapper"></div>
               <?php echo html::password('password1', '', "class='form-control' placeholder='{$lang->admin->register->lblPasswd}'");?>
             </td>
           </tr>  
           <tr>
             <th><?php echo $lang->user->password2;?></th>
-            <td><?php echo html::password('password2', '', "class='form-control'") . '<span class="star">*</span>';?></td>
+            <td colspan='2'><?php echo html::password('password2', '', "class='form-control'") . '<span class="star">*</span>';?></td>
           </tr> 
           <tr>
             <th></th>
