@@ -193,9 +193,9 @@ $lang->site->moduleAvailable->content['book']       = '手册';
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = '会员';
 $lang->site->moduleAvailable->user['forum']      = '论坛';
+$lang->site->moduleAvailable->user['score']      = '积分';
 $lang->site->moduleAvailable->user['message']    = '评论留言';
 $lang->site->moduleAvailable->user['submittion'] = '投稿';
-$lang->site->moduleAvailable->user['score']      = '积分';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = '商城';
