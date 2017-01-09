@@ -21,12 +21,6 @@ $lang->admin->order        = '最新订单';
 $lang->admin->feedback     = '最新反馈';
 
 $lang->admin->adminEntry     = '警告：您现在的管理入口还是默认的admin.php，建议将admin.php改名以增强系统安全!';
-$lang->admin->orderTitle     = '用户 %s 创建了一笔 %s 的订单';
-$lang->admin->message        = '您今天有 %s 条留言待审核';
-$lang->admin->reply          = '您今天有 %s 条回复待审核';
-$lang->admin->comment        = '您今天有 %s 条评论待审核';
-$lang->admin->threadReply    = '您今天有 %s 篇回帖';
-$lang->admin->submittion     = '您今天有 %s 篇投稿待审核';
 
 $lang->admin->connectApiFail = "不能连接到蝉知社区，请检查您的网络设置后 <a href='javascritp:loaction.reload()'>重试</a>。";
 $lang->admin->registerInfo   = "站点已经绑定到蝉知账号%s，%s";
