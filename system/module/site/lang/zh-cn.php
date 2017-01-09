@@ -173,11 +173,11 @@ $lang->site->scoreList['close'] = '禁用';
 $lang->site->cdnList['open']  = '启用';
 $lang->site->cdnList['close'] = '关闭';
 
-$lang->site->cacheTypes['close'] = '关闭';
 $lang->site->cacheTypes['file']  = '启用';
+$lang->site->cacheTypes['close'] = '关闭';
 
-$lang->site->cachePageOptions['close'] = '关闭';
 $lang->site->cachePageOptions['open']  = '开启';
+$lang->site->cachePageOptions['close'] = '关闭';
 
 $lang->site->filterFunctionList['open']  = '启用';
 $lang->site->filterFunctionList['close'] = '关闭';
