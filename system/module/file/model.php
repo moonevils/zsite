@@ -1038,6 +1038,7 @@ class fileModel extends model
 
         extract($_FILES[$htmlTagName]);
         if(!validater::checkFileName($name)) return;
+        if($this->post->name) $name = $this->post->name;
 
         $file = array();
         $file['id'] = 0;
