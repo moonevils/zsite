@@ -414,7 +414,7 @@ body {padding-left: 50px;}
 #powerby a {margin: 0; display: block; padding-left: 36px;}
 #powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: #1152b7; text-decoration: none}
 #powerby a > .name {display: block; width: 0; overflow: hidden; position: absolute;}
-#powerby .icon-chanzhi {top: 3px; position: absolute; left: 0}
+#powerby .icon-chanzhi {top: 4px; position: absolute; left: 0}
 
 /* responsive for mobile devices */
 @media (min-width: 992px) {.carousel-caption{left: 12%\0!important}}
