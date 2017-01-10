@@ -475,7 +475,7 @@ class site extends control
         {
             $this->loadModel('setting')->setItem('system.common.menus.home', 'admin,' . implode(',', $this->post->homeMenus));
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('sethomemenu')));
         }
         if($this->cookie->currentGroup == 'home') 
         {
