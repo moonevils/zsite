@@ -1,8 +1,6 @@
 <?php 
 $lang->admin->common        = 'Admin';
 $lang->admin->index         = 'Home';
-$lang->admin->ignore        = 'Ignore security warning.';
-$lang->admin->ignoreupgrade = 'Ignore upgrade prompt.';
 $lang->admin->checked       = 'Checked';
 
 $lang->admin->shortcuts = new stdclass();
