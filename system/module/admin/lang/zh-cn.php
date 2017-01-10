@@ -1,8 +1,6 @@
 <?php 
 $lang->admin->common        = '后台管理';
 $lang->admin->index         = '首页';
-$lang->admin->ignore        = '忽略安全警告';
-$lang->admin->ignoreupgrade = '忽略升级提示';
 $lang->admin->checked       = '已认证';
 
 $lang->admin->shortcuts = new stdclass();

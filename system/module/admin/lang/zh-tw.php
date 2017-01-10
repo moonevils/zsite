@@ -1,8 +1,6 @@
 <?php 
 $lang->admin->common        = '後台管理';
 $lang->admin->index         = '首頁';
-$lang->admin->ignore        = '忽略安全警告';
-$lang->admin->ignoreupgrade = '忽略升級提示';
 $lang->admin->checked       = '已認證';
 
 $lang->admin->shortcuts = new stdclass();
