@@ -73,7 +73,7 @@ js::set('admin', $this->get->admin);
           <th class='w-110px'><?php echo commonModel::printOrderLink('last', $orderBy, $vars, $lang->user->last);?></th>
           <th class='w-100px'><?php echo $lang->user->ip;?></th>
           <th class='w-60px'><?php echo $lang->user->status;?></th>
-          <th class='w-190px'><?php echo $lang->actions;?></th>
+          <th class='w-200px text-center'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>

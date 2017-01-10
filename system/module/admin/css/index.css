@@ -98,3 +98,5 @@ body {background: #fafafa;}
 .block.input-group-btn .btn-primary .caret, .block.input-group-btn .btn-success .caret, .block.input-group-btn .btn-warning .caret, .block.input-group-btn .btn-danger .caret, .block.input-group-btn .btn-info .caret {border-top-color: #333}
 
 #noticeBox{ width:380px; position:fixed; bottom:25px; right:15px; z-index: 9999; }
+
+.shortcutGroup .btn-default{width : 75px; padding-left:10px;}

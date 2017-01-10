@@ -17,7 +17,7 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr><td><?php echo html::checkbox('homeMenus', $lang->site->menus, $this->config->menus->home);?></td></tr>
-        <tr><td><?php echo html::submitButton();?></td></tr>
+        <tr><td><?php echo html::submitButton() . html::hidden('placeholder', 'placeholder');?></td></tr>
       </table>
     </form>
   </div>

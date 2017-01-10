@@ -1,14 +1,12 @@
 <?php 
 $lang->admin->common        = 'Admin';
 $lang->admin->index         = 'Home';
-$lang->admin->ignore        = 'Ignore security warning.';
-$lang->admin->ignoreupgrade = 'Ignore upgrade prompt.';
 $lang->admin->checked       = 'Checked';
 
 $lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->common             = 'Shortcuts';
 $lang->admin->shortcuts->articleCategories  = 'Categories';
-$lang->admin->shortcuts->article            = 'Article';
+$lang->admin->shortcuts->article            = 'Articles';
 $lang->admin->shortcuts->product            = 'Products';
 $lang->admin->shortcuts->feedback           = 'Feedback';
 $lang->admin->shortcuts->site               = 'Settings';
@@ -21,12 +19,6 @@ $lang->admin->order        = 'New Orders';
 $lang->admin->feedback     = 'New Feedback';
 
 $lang->admin->adminEntry     = 'Warning! The admin entry is admin.php. Please rename it for security reasons.';
-$lang->admin->orderTitle     = '%s has created an Order %s ';
-$lang->admin->message        = 'Today you have %s messages to review.';
-$lang->admin->reply          = 'Today you have %s replies to review.';
-$lang->admin->comment        = 'Today you have %s comments to review.';
-$lang->admin->threadReply    = 'Today you have %s replies.';
-$lang->admin->submittion     = 'Today you have %s submissions to review.';
 
 $lang->admin->connectApiFail = "Can't connect to the chanzhi community, please <a href='javascritp:loaction.reload()'>retry</a> after check the internet connection.";
 $lang->admin->registerInfo   = "The site has binded the account with Changer %s, %s";

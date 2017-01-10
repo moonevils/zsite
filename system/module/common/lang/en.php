@@ -42,7 +42,7 @@ $lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www
 $lang->newVersion     = "Note: Changer CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
-$lang->redirecting    = "Redirecting to %s，<a href='%s'>Redirect immediately</a>";
+$lang->redirecting    = "<span class='text-muted'>Redirecting......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Redirect</a>";
 
 /* Global lang items. */
 $lang->home             = 'Home';
@@ -86,7 +86,7 @@ $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
-$lang->addToBlacklist = 'Widget';
+$lang->addToBlacklist = 'Block';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
@@ -221,13 +221,13 @@ $lang->menu->community  = 'Community|admin|register|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-$lang->menuGroups->mail    = 'site';
-$lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->mail    = 'interface';
+$lang->menuGroups->wechat  = 'interface';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
-$lang->menuGroups->company = 'site';
-$lang->menuGroups->score   = 'site';
+$lang->menuGroups->company = 'company';
+$lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
@@ -325,7 +325,7 @@ $lang->interface->menu->mail   = array('link' => 'Email|mail|admin|', 'alias' =>
 $lang->interface->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
-$lang->score->menu = $lang->site->menu;
+$lang->score->menu = new stdclass();
 $lang->score->menu->score     = 'Point Rules|score|setcounts|';
 $lang->score->menu->stateInfo = 'Point Info|score|showstateinfo|';
 
