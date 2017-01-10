@@ -34,7 +34,7 @@
         <th class='w-70px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
         <?php endif;?>
         <th class='w-70px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->display);?></th>
-        <th class='w-210px'><?php echo $lang->actions;?></th>
+        <th class='<?php echo $this->app->clientLang == 'en' ? 'w-220px' : 'w-210px';?>'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <?php endif;?>
