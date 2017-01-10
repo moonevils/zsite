@@ -221,13 +221,13 @@ $lang->menu->community  = 'Community|admin|register|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
-$lang->menuGroups->mail    = 'site';
-$lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->mail    = 'interface';
+$lang->menuGroups->wechat  = 'interface';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
-$lang->menuGroups->company = 'site';
-$lang->menuGroups->score   = 'site';
+$lang->menuGroups->company = 'company';
+$lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 /* Menu of article module. */
@@ -325,7 +325,7 @@ $lang->interface->menu->mail   = array('link' => 'Email|mail|admin|', 'alias' =>
 $lang->interface->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
-$lang->score->menu = $lang->site->menu;
+$lang->score->menu = new stdclass();
 $lang->score->menu->score     = 'Point Rules|score|setcounts|';
 $lang->score->menu->stateInfo = 'Point Info|score|showstateinfo|';
 
