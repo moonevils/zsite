@@ -5,6 +5,7 @@
     <div class='panel-actions'>
       <?php $i++;?>
       <strong><?php if($i > 3) echo '#' . $i;?></strong>
+      <?php echo html::a('', '', "name=$i");?>
       <?php if($i == 2):?>
       <strong class='text-danger'><?php echo $lang->reply->sofa;?></strong>
       <?php elseif($i == 3):?>
