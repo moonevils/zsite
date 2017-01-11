@@ -256,6 +256,8 @@ $lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
 $lang->userSetting = new stdclass();
 $lang->userSetting->menu = new stdclass();
 $lang->userSetting->menu->userSetting   = '会员设置|user|setting|';
+$lang->userSetting->menu->score         = '积分规则|score|setcounts|';
+$lang->userSetting->menu->stateinfo     = '积分结算|score|showstateinfo|';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -333,7 +335,7 @@ $lang->interface->menu->wechat = array('link' => '微信设置|wechat|admin|', '
 /* Menu of score module. */
 $lang->score->menu = new stdclass();
 $lang->score->menu->score     = '积分规则|score|setcounts|';
-$lang->score->menu->stateInfo = '积分结算|score|showstateinfo|';
+$lang->score->menu->stateinfo = '积分结算|score|showstateinfo|';
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
