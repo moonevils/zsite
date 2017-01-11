@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = '会员';
+$lang->user->setting   = '会员设置';
 
 $lang->user->id         = '编号';
 $lang->user->account    = '用户名';
@@ -264,3 +265,11 @@ $lang->user->forceYangcong        = '已开启强制洋葱登录，普通登录�
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';
 $lang->user->placeholder->verifyCode = '请输入验证邮件里面收到的验证码';
+
+$lang->user->filterUsernameSensitive = '用户名过滤';
+
+$lang->user->filterUsernameSensitiveList = array(); 
+$lang->user->filterUsernameSensitiveList['open']  = '开启';
+$lang->user->filterUsernameSensitiveList['close'] = '关闭';
+
+$lang->user->usernameSensitive = '用户名敏感词';
