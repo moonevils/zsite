@@ -612,7 +612,7 @@ class orderModel extends model
            
             /* Edit link. */
             $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
-            echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
+            echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "{$toggle} class='$class'");
 
             /* Track link. */
             $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
