@@ -18,11 +18,11 @@
       <table class='table table-form'>
         <tr>
           <th class='w-150px'><?php echo $lang->user->filterUsernameSensitive;?></th>
-          <td><?php echo html::radio('filterUsernameSensitive', $lang->user->filterUsernameSensitiveList, isset($this->config->user->filterUsernameSensitive) ? $this->config->user->filterUsernameSensitive : 'close');?></td>
+          <td><?php echo html::radio('filterUsernameSensitive', $lang->user->filterUsernameSensitiveList, isset($this->config->site->filterUsernameSensitive) ? $this->config->site->filterUsernameSensitive : 'close');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->user->usernameSensitive;?></th>
-          <td><?php echo html::textarea('usernameSensitive', !empty($this->config->user->usernameSensitive) ? $this->config->user->usernameSensitive : '', "class='form-control' rows=4");?></td>
+          <td><?php echo html::textarea('usernameSensitive', !empty($this->config->site->usernameSensitive) ? $this->config->site->usernameSensitive : '', "class='form-control' rows=4");?></td>
         </tr>
         <tr>
           <th></th>

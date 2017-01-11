@@ -255,7 +255,7 @@ $lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
 
 $lang->userSetting = new stdclass();
 $lang->userSetting->menu = new stdclass();
-$lang->userSetting->menu->userSetting   = '注册设置|user|setting|';
+$lang->userSetting->menu->userSetting   = '会员设置|user|setting|';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
