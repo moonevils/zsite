@@ -1,10 +1,10 @@
 .panel-body.shortcutGroup{padding-top: 35px;}
 .shortcutGroup > a{margin: 10px 20px; font-size: 13px;}
-@media(min-width:768px){#shortcutBox{margin-top: 20px;}}
-@media(min-width:1200px){#shortcutBox{margin-top: 30px;}}
-@media(min-width:1400px){#shortcutBox{margin-top: 20px;}}
+@media(min-width:768px){#shortcutBox{margin-top: 15px;}}
+@media(min-width:1200px){#shortcutBox{margin-top: 15px;}}
+@media(min-width:1400px){#shortcutBox{margin-top: 15px;}}
 body {background: #fafafa;}
-#shortcutBox{max-width:94%}
+#shortcutBox{max-width:95%;}
 
 .page-content {margin-top: -19px; border-top: 1px solid #3280fc;}
 .dashboard {position: relative;}
