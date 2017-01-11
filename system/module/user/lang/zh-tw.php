@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = '會員';
+$lang->user->setting   = '會員設置';
 
 $lang->user->id         = '編號';
 $lang->user->account    = '用戶名';
@@ -264,3 +265,13 @@ $lang->user->forceYangcong        = '已開啟強制洋蔥登錄，普通登錄�
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';
 $lang->user->placeholder->verifyCode = '請輸入驗證郵件裡面收到的驗證碼';
+
+$lang->user->filterUsernameSensitive = '用戶名過濾';
+
+$lang->user->filterUsernameSensitiveList = array(); 
+$lang->user->filterUsernameSensitiveList['open']  = '開啟';
+$lang->user->filterUsernameSensitiveList['close'] = '關閉';
+
+$lang->user->usernameSensitive    = '用戶名敏感詞';
+$lang->user->usernameIsSensitive  = '用戶名或者真實姓名不能含有敏感詞，請修改後再提交';
+$lang->user->usernameSensitiveTip = '多個敏感詞之間請用英文逗號分隔';
