@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->user->usernameSensitive;?></th>
-          <td><?php echo html::textarea('usernameSensitive', !empty($this->config->site->usernameSensitive) ? $this->config->site->usernameSensitive : '', "class='form-control' rows=4");?></td>
+          <td><?php echo html::textarea('usernameSensitive', !empty($this->config->site->usernameSensitive) ? $this->config->site->usernameSensitive : '', "class='form-control' rows=4 placeholder='{$lang->user->usernameSensitiveTip}'");?></td>
         </tr>
         <tr>
           <th></th>
