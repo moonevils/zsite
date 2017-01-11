@@ -194,6 +194,7 @@ $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
 $lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
+$lang->menu->userSetting  = '设置|user|setting|';
 
 $lang->menu->stat    = '统计|stat|traffic|';
 $lang->menu->tag     = '关键词|tag|admin|';
@@ -252,6 +253,10 @@ $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = '设置|product|setting|';
 $lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
 
+$lang->userSetting = new stdclass();
+$lang->userSetting->menu = new stdclass();
+$lang->userSetting->menu->userSetting   = '会员设置|user|setting|';
+
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -307,16 +312,17 @@ $lang->company->menu->contact   = '联系方式|company|setcontact|';
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
-$lang->security->menu->basic     = '基本设置|site|setsecurity|';
-$lang->security->menu->filter    = '过滤设置|site|setfilter|';
-$lang->security->menu->blacklist = '黑名单管理|guarder|setblacklist|';
-$lang->security->menu->whitelist = '白名单管理|guarder|setwhitelist|';
-$lang->security->menu->sensitive = '敏感词设置|site|setsensitive|';
-$lang->security->menu->captcha   = '验证码设置|guarder|setcaptcha|';
-$lang->security->menu->upload    = '附件上传|site|setupload|';
-$lang->security->menu->admin     = '管理员|user|admin|admin=1';
-$lang->security->menu->group     = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log       = '登录日志|user|adminlog|';
+$lang->security->menu->basic       = '基本设置|site|setsecurity|';
+$lang->security->menu->filter      = '过滤设置|site|setfilter|';
+$lang->security->menu->blacklist   = '黑名单管理|guarder|setblacklist|';
+$lang->security->menu->whitelist   = '白名单管理|guarder|setwhitelist|';
+$lang->security->menu->sensitive   = '敏感词设置|site|setsensitive|';
+$lang->security->menu->userSetting = '会员设置|user|setting|';
+$lang->security->menu->captcha     = '验证码设置|guarder|setcaptcha|';
+$lang->security->menu->upload      = '附件上传|site|setupload|';
+$lang->security->menu->admin       = '管理员|user|admin|admin=1';
+$lang->security->menu->group       = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log         = '登录日志|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();

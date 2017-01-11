@@ -76,7 +76,7 @@
       <div class='panel-heading'>
         <strong><?php echo $lang->site->setYangcong?></strong>
         <div class='panel-actions'>
-          <?php //echo html::a('http://api.chanzhi.org/goto.php?item=help_' . $providerCode . 'oauth', '<i class="icon-question-sign"></i> ' . $lang->site->oauthHelp, "target='_blank' class='btn btn-link'");?>
+          <?php echo html::a('http://api.chanzhi.org/goto.php?item=help_yangcongoauth', '<i class="icon-question-sign"></i> ' . $lang->site->oauthHelp, "target='_blank' class='btn btn-link'");?>
         </div>
       </div>
       <div class='panel-body'>

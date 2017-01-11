@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = 'User';
+$lang->user->setting   = 'User Setting';
 
 $lang->user->id        = 'ID';
 $lang->user->account   = 'Account';

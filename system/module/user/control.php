@@ -1178,4 +1178,41 @@ class user extends control
         $this->view->user  = $user;
         $this->display();
     }
+
+    /**
+     * Set the setting of user
+     *
+     * @access public
+     * @param  void
+     * @return string
+     */
+    public function setting()
+    {
+        if($this->session->currentGroup == 'user')
+        {
+            unset($this->lang->user->menu);
+            $this->lang->user->menu       = $this->lang->userSetting->menu;
+            $this->lang->menuGroups->user = 'userSetting';     
+        }
+
+        if($this->session->currentGroup == 'setting')
+        {
+            unset($this->lang->user->menu);
+            $this->lang->user->menu       = $this->lang->security->menu;
+            $this->lang->menuGroups->user = 'security';     
+        }
+        
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setting')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->user->setting;
+        $this->display();
+    }
 }
