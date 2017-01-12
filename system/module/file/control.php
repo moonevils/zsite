@@ -160,14 +160,21 @@ class file extends control
      */
     public function browse($objectType, $objectID, $isImage = null)
     {
-        $this->view->title      = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
-        if($objectType == 'source') $this->view->title = "<i class='icon-paper-clip'></i> " . $this->lang->file->sourceList;
+        $this->view->title          = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
+        $this->view->files          = $this->file->getByObject($objectType, $objectID, $isImage);
+        $this->view->showSetPrimary = true;
+        
+        if($objectType == 'source')
+        {
+            $this->view->title          = "<i class='icon-paper-clip'></i> " . $this->lang->file->sourceList;
+            $this->view->files          = array();
+            $this->view->showSetPrimary = false;
+        }
 
         $this->view->modalWidth = 800;
         $this->view->writeable  = $this->file->checkSavePath();
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
-        $this->view->files      = $objectType != 'source' ? $this->file->getByObject($objectType, $objectID, $isImage) : array();
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->isImage    = $isImage;
         $this->display();
