@@ -546,7 +546,7 @@ class fileModel extends model
      */
     public function setPathName($file, $objectType = 'upload')
     {
-        if(strpos('slide,source', $objectType) === false)
+        if(strpos('slide,source,themePackage', $objectType) === false)
         {
             $sessionID  = session_id();
             $randString = substr($sessionID, mt_rand(0, strlen($sessionID) - 5), 3);
@@ -558,6 +558,10 @@ class fileModel extends model
             $template = $this->config->template->{$this->app->clientDevice}->name;
             $theme    = $this->config->template->{$this->app->clientDevice}->theme;
             return "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
+        }
+        elseif($objectType == 'themePackage')
+        {
+            return "{$file['title']}.{$file['extension']}"; 
         }
         
         /* rand file name more */
@@ -584,6 +588,12 @@ class fileModel extends model
             $theme    = $this->config->template->{$this->app->clientDevice}->theme;
             $savePath = $this->app->getDataRoot() . "source/{$template}/{$theme}/";
             $this->savePath = $this->app->getDataRoot();
+        }
+
+        if($objectType == 'themePackage')
+        {
+            $savePath       = $this->app->getTmpRoot() . "package/";
+            $this->savePath = $savePath;
         }
 
         if(!file_exists($savePath)) 
@@ -1049,7 +1059,7 @@ class fileModel extends model
         $file['tmpname']   = $tmp_name;
         $file['uuid']      = $_POST['uuid'];
         $file['pathname']  = $this->setPathName($file, $objectType);
-        $file['chunkpath'] = $path . 'chunks' . DS .'f_' . $file['uuid'] . '.' . $file['extension'] . '.part';
+        $file['chunkpath'] = 'chunks' . DS .'f_' . $file['uuid'] . '.' . $file['extension'] . '.part';
         $file['chunks']    = isset($_POST['chunks']) ? intval($_POST['chunks']) : 0;
         $file['chunk']     = isset($_POST['chunk']) ? intval($_POST['chunk']) : 0;
 
@@ -1070,6 +1080,7 @@ class fileModel extends model
     {
         $now = helper::now();
         if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
+        if($objectType == 'themePackage')  $this->config->file->allowed  = ',zip,';
         if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
         {
             $file['pathname'] .= '.txt';
@@ -1118,8 +1129,8 @@ class fileModel extends model
             $file['addedBy']    = $this->app->user->account;
             $file['addedDate']  = $now;
             $file['extra']      = $extra;
-            $file['width']      = $imageSize['width'];
-            $file['height']     = $imageSize['height'];
+            $file['width']      = isset($imageSize['width']) ? $imageSize['width'] : 0;
+            $file['height']     = isset($imageSize['height']) ? $imageSize['height'] : 0;
             $file['lang']       = 'all';
             if($objectType == 'logo') $file['lang'] = $this->app->getClientLang();
             unset($file['tmpname']);
@@ -1128,8 +1139,12 @@ class fileModel extends model
             unset($file['chunks']);
             unset($file['chunk']);
             unset($file['chunkpath']);
-            $this->dao->insert(TABLE_FILE)->data($file)->exec();
-            $file['id'] = $this->dao->lastInsertId();
+            
+            if($objectType != 'themePackage')
+            {
+                $this->dao->insert(TABLE_FILE)->data($file)->exec();
+                $file['id'] = $this->dao->lastInsertId();
+            }
         }
 
         return $file;
