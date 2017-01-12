@@ -1068,6 +1068,7 @@ class fileModel extends model
      */
     public function saveUploadFile($file, $objectType = 'upload', $objectID = '', $extra = '')
     {
+        $now = helper::now();
         if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
         if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
         {
