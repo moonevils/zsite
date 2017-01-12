@@ -307,6 +307,17 @@ class file extends control
         $this->file->setSavePath($objectType);
         if(!$this->file->checkSavePath()) die(json_encode(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable)));
 
+        if($objectType == 'source' and !$this->post->continue)
+        {
+            foreach($_FILES['files']['name'] as $id => $name)
+            {
+                $extension    = $this->file->getExtension($name);
+                $filename     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
+                $sameFilename = $this->file->checkSameFile($filename);
+                if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'error' => $this->lang->file->sameName)));
+            }
+        }
+
         $file = $this->file->getUploadFile('file', $objectType);
         if($file) $file = $this->file->saveUploadFile($file, $objectType, $objectID);
 
