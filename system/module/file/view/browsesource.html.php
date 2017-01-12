@@ -2,30 +2,6 @@
 <?php js::import($jsRoot . 'zeroclipboard/zeroclipboard.min.js');?>
 <?php js::set('copySuccess', $lang->file->copySuccess);?>
 <?php js::set('noFlashTip', $lang->file->noFlashTip);?>
-<div class='modal fade' id='uploadModal'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header'><?php echo $lang->file->uploadSource?></div>
-      <?php $template = $this->config->template->{$this->app->clientDevice}->name;?>
-      <?php $theme    = $this->config->template->{$this->app->clientDevice}->theme;?>
-      <form id="fileForm" method='post' enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=source&objectID={$template}_{$theme}");?>'>
-        <table class='table table-form'>
-          <?php if($writeable):?>
-          <tr>
-            <td class='w-10px'></td>
-            <td class='text-middle w-100px'><?php echo $lang->file->source . sprintf($lang->file->limit, $this->config->file->maxSize / 1024 /1024);?></td>
-            <td><?php echo $this->fetch('file', 'buildForm');?></td>
-            <td class='w-40px'></td>
-          </tr>
-          <tr><td colspan='4' class='text-center'><?php echo html::submitButton();?></td></tr>
-          <?php else:?>
-          <tr><td colspan='4'><h5 class='text-danger'><?php echo $lang->file->errorUnwritable;?></h5></td></tr>
-          <?php endif;?>
-        </table>
-      </form>
-    </div>
-  </div>
-</div>
 <div class='panel'>
   <div class='panel-heading'>
     <?php echo $lang->file->sourceList?>
@@ -34,7 +10,9 @@
         <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view active btn'")?>
         <?php echo html::a('javascript:void(0)', "<i class='icon icon-list'></i>", "class='list-view btn'")?>
       </div>
-      <?php echo html::commonButton($lang->file->uploadSource, 'btn btn-primary', "data-toggle='modal' data-target='#uploadModal'")?>
+      <?php $template = $this->config->template->{$this->app->clientDevice}->name;?>
+      <?php $theme    = $this->config->template->{$this->app->clientDevice}->theme;?>
+      <?php commonModel::printLink('file', 'browse', "objectType=source&objectID={$template}_{$theme}", $lang->file->uploadSource, "data-toggle='modal' class='btn btn-primary'");?>
     </span>
   </div>
   <div id='imageView' class='panel-body'>

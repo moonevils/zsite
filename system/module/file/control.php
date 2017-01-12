@@ -160,12 +160,21 @@ class file extends control
      */
     public function browse($objectType, $objectID, $isImage = null)
     {
-        $this->view->title      = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
+        $this->view->title          = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
+        $this->view->files          = $this->file->getByObject($objectType, $objectID, $isImage);
+        $this->view->showSetPrimary = true;
+        
+        if($objectType == 'source')
+        {
+            $this->view->title          = "<i class='icon-paper-clip'></i> " . $this->lang->file->sourceList;
+            $this->view->files          = array();
+            $this->view->showSetPrimary = false;
+        }
+
         $this->view->modalWidth = 800;
         $this->view->writeable  = $this->file->checkSavePath();
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
-        $this->view->files      = $this->file->getByObject($objectType, $objectID, $isImage);
         $this->view->users      = $this->loadModel('user')->getPairs();
         $this->view->isImage    = $isImage;
         $this->display();
@@ -304,6 +313,15 @@ class file extends control
     {
         $this->file->setSavePath($objectType);
         if(!$this->file->checkSavePath()) die(json_encode(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable)));
+        
+        if($objectType == 'source')
+        {
+            $name         = $_FILES['file']['name'];
+            $extension    = $this->file->getExtension($name);
+            $filename     = !empty($_POST['label']) ? htmlspecialchars($_POST['label']) : str_replace('.' . $extension, '', $name);
+            $sameFilename = $this->file->checkSameFile($filename);
+            if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'file' => $name, 'message' => $this->lang->file->sameName)));
+        }
 
         $file = $this->file->getUploadFile('file', $objectType);
         if($file) $file = $this->file->saveUploadFile($file, $objectType, $objectID);
