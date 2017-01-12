@@ -64,14 +64,17 @@ if(!$.zui.strCode)
 <script>
 <?php
 $filesArray = array();
-foreach($files as $file)
+if(!empty($files))
 {
-    $file->url      = inlink('download', "id=$file->id");
-    $file->name     = $file->title . '.' . $file->extension;
-    $file->ext      = $file->extension;
-    $file->remoteId = $file->id;
-    if($file->isImage) $file->previewImage = $file->smallURL;
-    $filesArray[] = $file;
+    foreach($files as $file)
+    {
+        $file->url      = inlink('download', "id=$file->id");
+        $file->name     = $file->title . '.' . $file->extension;
+        $file->ext      = $file->extension;
+        $file->remoteId = $file->id;
+        if($file->isImage) $file->previewImage = $file->smallURL;
+        $filesArray[] = $file;
+    }
 }
 ?>
 $('#uploader').uploader(
