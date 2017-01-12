@@ -859,9 +859,9 @@ class packageModel extends model
 
         foreach($sqls as $sql)
         {
+            if(empty($sql)) continue;
             $sql = trim($sql) . "');";
 
-            if(empty($sql)) continue;
             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
             try
             {
