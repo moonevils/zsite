@@ -115,10 +115,12 @@ $('#uploader').uploader(
 
             $file.find('.btn-delete-file').before('<button type="button" data-tip-class="tooltip-in-modal" data-toggle="tooltip" class="btn btn-link btn-edit-file" title="<?php echo $lang->edit ?>"><i class="icon icon-pencil"></i></button>');
         }
+        <?php if($showSetPrimary):?>
         if(file.isImage && !$file.find('.btn-set-primary').length)
         {
-            $file.find('.file-status').after(' <a href="javascript:;"  class="btn-set-primary btn btn-link"><?php echo $lang->file->setPrimary ?></a>');
+            $file.find('.file-status').after(' <a href="javascript:;"  class="btn-set-primary btn btn-link"><?php echo $lang->file->setPrimary;?></a>');
         }
+        <?php endif;?>
         $file.toggleClass('can-set-primary', status === 'done' && file.isImage && !(file.primary && file.primary !== '0'));
         $file.find('.file-icon').html(this.createFileIcon(file)).css('color', 'hsl(' + $.zui.strCode(file.type || file.ext) + ', 70%, 40%)');
         if(file.percent !== undefined) $file.find('.file-progress-bar').css('width', file.percent + '%');
