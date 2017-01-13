@@ -28,7 +28,11 @@ js::set('random', $this->session->random);
       <div id='formError' class='alert alert-danger hiding'></div>
       <div class='row'>
         <div class='col-xs-4 text-center'>
+        <?php if($this->app->clientLang == 'en'):?>
+        <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.en.png'); ?>
+        <?php else:?>
         <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.png'); ?>
+        <?php endif;?>
         </div>
         <div class='col-xs-8'>
           <table class="table table-form">

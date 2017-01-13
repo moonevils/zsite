@@ -6,7 +6,11 @@
 </style>
 <div class='row'>
   <div class='col-xs-6 text-center'>
+    <?php if($this->app->clientLang == 'en'):?>
+    <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.en.png'); ?>
+    <?php else:?>
     <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.png'); ?>
+    <?php endif;?>
     <h4><?php printf($lang->misc->version, $config->version);?></h4>
   </div>
   <div class='col-xs-6' style='border-left: 1px solid #ddd'>
