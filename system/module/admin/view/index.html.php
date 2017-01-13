@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php $urlScheme = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';?>
 <div class='container' id='shortcutBox'>
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
@@ -63,7 +64,7 @@
             <?php else:?>
             <div id='chanzhiDynamic'></div>
             <script>function afterDynmaicsLoad(html){$('#chanzhiDynamic').html(html);}</script>
-            <script async src='http://api.chanzhi.org/goto.php?item=dynamics_jsonp&extra=afterDynmaicsLoad'></script>
+            <script async src='<?php echo $urlScheme;?>://api.chanzhi.org/goto.php?item=dynamics_jsonp&extra=afterDynmaicsLoad'></script>
             <?php endif;?>
           </div>
         </div>
@@ -107,7 +108,7 @@ function afterCheckVersion(latest)
   }
 }
 </script>
-<script async src='<?php echo 'http://api.chanzhi.org/latest.php?version=' . $this->config->version . '&type=afterCheckVersion';?>'></script>
+<script async src='<?php echo $urlScheme . '://api.chanzhi.org/latest.php?version=' . $this->config->version . '&type=afterCheckVersion';?>'></script>
 <?php endif;?>
 
 <?php if(!$checkLocation):?>
