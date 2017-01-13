@@ -237,11 +237,15 @@ class statModel extends model
      */
     public function getDomainList($begin, $end, $orderBy, $pager)
     {
+        $localDomain = $_SERVER['HTTP_HOST']; 
         return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
             ->where('type')->eq('domain')
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
             ->andWhere('timeValue')->le($end)
+            ->andWhere('item')->ne('127.0.0.1')
+            ->andWhere('item')->ne('localhost')
+            ->andWhere('item')->ne($localDomain)
             ->groupBy('item')
             ->orderBy($orderBy)
             ->page($pager)
