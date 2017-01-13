@@ -372,6 +372,9 @@ body {padding-left: 50px;}
 #mainNavbar .device-nav .dropdown-menu > li > a > .icon-ok {display: none}
 #mainNavbar .device-nav .dropdown-menu > li.active > a > .icon-ok {display: block; position: absolute; left: 33px; top: 16px; color: green;}
 #mainNavbar .device-nav .dropdown-menu > li > a > .icon {font-size: 42px; display: block; height: 56px; width: 80px; line-height: 56px;}
+#mainNavbar .navbar-nav > li.device-nav > a {position:relative; float:left; display:inline-block;}
+#mainNavbar .navbar-nav > li.device-nav > a.active:after {background-color: #145ccd; content: ' '; position: absolute; bottom: -1px; left: 1px; right: 1px; height: 1px; display: block;}
+#mainNavbar .navbar-nav > li.device-nav > a.active {background-color: #EFF7FF;}
 
 #positionBar {margin-bottom: 0; line-height: 40px; padding-left: 15px;}
 #positionBar > li + li:before {content: '\e6e1'; font-family: ZenIcon; font-size: 14px; display: inline-block; margin-right: -2px; color:black;}
