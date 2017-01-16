@@ -122,7 +122,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
 </div>
 <style>
     .ul-list .addDataList.withStick{padding-right:126px !important;}
-    .ul-list .addDataList.withoutStick{padding-right:85px !important;}
+    .ul-list .addDataList.withoutStick{padding-right:80px !important;}
     .ul-list .notDataList.withStick{padding-right:60px !important;}
     .ul-list .notDataList.withoutStick{padding-right:5px !important;}
 </style>
