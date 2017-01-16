@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->thread->common    = '主题';
+$lang->thread->common    = '帖子';
 
 $lang->thread->id          = '编号';
 $lang->thread->title       = '标题';
