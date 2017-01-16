@@ -128,6 +128,13 @@ $lang->checkEmail         = '驗證郵箱';
 $lang->checkMobile        = '驗證手機';
 $lang->getUserByApi       = '獲取綁定信息';
 
+/* Select lang tip */
+$lang->selectLangTip = array();
+$lang->selectLangTip['zh-tw'] = array();
+$lang->selectLangTip['zh-tw']['zh-cn'] = '切換到簡體中文站點';
+$lang->selectLangTip['zh-tw']['zh-tw'] = '切換到繁體中文站點';
+$lang->selectLangTip['zh-tw']['en']    = '切換到英文站點';
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete    = '您確定要執行刪除操作嗎？';
