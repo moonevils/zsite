@@ -128,6 +128,13 @@ $lang->checkEmail         = 'Check email';
 $lang->checkMobile        = 'Check mobile';
 $lang->getUserByApi       = 'Get user info by api';
 
+/* Select lang tip */
+$lang->selectLangTip = array();
+$lang->selectLangTip['en'] = array();
+$lang->selectLangTip['en']['zh-cn'] = 'Switch to simplified Chinese site';
+$lang->selectLangTip['en']['zh-tw'] = 'Switch to traditional Chinese site';
+$lang->selectLangTip['en']['en']    = 'Switch to English site';
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete    = 'Do you want to delete it?';
