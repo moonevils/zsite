@@ -78,11 +78,12 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
       <?php 
       $article->category->alias = isset($article->category->alias) ? $article->category->alias : '';
       $article->alias = isset($article->alias) ? $article->alias : '';
-      $alias = "category={$article->category->alias}&name={$article->alias}";
-      $url   = helper::createLink('article', 'view', "id={$article->id}", $alias);
+      $alias       = "category={$article->category->alias}&name={$article->alias}";
+      $url         = helper::createLink('article', 'view', "id={$article->id}", $alias);
+      $stickLabel  = $article->sticky ? 'withStick' : 'withoutStick';
       ?>
       <?php if(isset($content->time)):?>
-      <li class='addDataList'>
+      <li class='addDataList <?php echo $stickLabel;?>'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -98,7 +99,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         </span>      
       </li>
       <?php else:?>
-      <li class='notDataList'>
+      <li class='notDataList <?php echo $stickLabel;?>'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -120,7 +121,9 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
   <?php endif;?>
 </div>
 <style>
-    .ul-list .addDataList{padding-right:126px !important;}
-    .ul-list .notDataList{padding-right:60px !important;}
+    .ul-list .addDataList.withStick{padding-right:126px !important;}
+    .ul-list .addDataList.withoutStick{padding-right:85px !important;}
+    .ul-list .notDataList.withStick{padding-right:60px !important;}
+    .ul-list .notDataList.withoutStick{padding-right:5px !important;}
 </style>
 
