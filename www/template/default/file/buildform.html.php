@@ -15,7 +15,9 @@
   </table>
 EOT;
   for($i = 1; $i <= $fileCount; $i ++) echo str_replace('$i', $i, $fileRow);
-  printf($lang->file->sizeLimit, $this->config->file->maxSize / 1024 / 1024);
+  $fileLimit = trim(ini_get('upload_max_filesize'), 'M') > trim(ini_get('post_max_size'), 'M') ? trim(ini_get('post_max_size'), 'M') : trim(ini_get('upload_max_filesize'), 'M');
+  if(!is_numeric($fileLimit)) $fileLimit = $this->config->file->maxSize / 1024 / 1024;  
+  printf($lang->file->sizeLimit, $fileLimit);
   ?>
 </div>
 <?php endif;?>
