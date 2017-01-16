@@ -17,7 +17,7 @@
     <th class='w-130px'><?php echo $lang->widget->type; ?></th>
     <td>
       <div class="dropdown">
-        <button data-toggle="dropdown" type="button" class="btn dropdown-toggle">
+      <button data-toggle="dropdown" type="button" class="btn dropdown-toggle" style="width:<?php echo $this->app->clientLang == 'en' ? '148px' : '92px';?>">
           <?php echo zget($lang->widget->typeList, $type, $lang->widget->type);?>
           <span class="caret"></span>
         </button>
