@@ -100,6 +100,14 @@ if(!empty($files))
 ?>
 $('#uploader').uploader(
 {
+    limitFilesCount : true,
+    onUploadComplete: function(files){
+        $(".uploader-btn-browse").addClass('hidden');
+        packageName = files[0].name.slice(0, -4);
+        installType = $("input[name='type']:checked").val();
+        installLink = createLink('ui', 'installtheme', 'package=' + packageName + '&downLink=&md5=&type=' + installType);
+        $('.modal').load(installLink);
+    },
     staticFiles: <?php echo json_encode($filesArray) ?>,
     fileFormater: function($file, file, status)
     {
