@@ -24,7 +24,7 @@ $lang->stat->ipCount       = 'IP Count';
 $lang->stat->totalPV       = 'Total PVs';
 $lang->stat->searchEngine  = 'Sear Engine';
 $lang->stat->keywordReport = 'Keyword Stats';
-$lang->stat->domainList    = 'Domian List';
+$lang->stat->domainList    = 'Domain List';
 $lang->stat->domainTrend   = 'Trend';
 $lang->stat->domainPage    = 'Page';
 $lang->stat->percentage    = 'Percentage';
@@ -36,7 +36,7 @@ $lang->stat->begin = 'Begin';
 $lang->stat->end   = 'End';
 $lang->stat->date  = 'Date';
 
-$lang->stat->noData    = 'No data';
+$lang->stat->noData    = 'No data.';
 $lang->stat->dateError = 'Date Error';
 
 $lang->stat->itemList = new stdclass();
