@@ -22,3 +22,4 @@ a .icon-sina{background-position: 0 -48px;}
 
 #siteName{font-size:14px; color:#444; font-weight:600; display:block;}
 hr{margin-top:8px;}
+#adminLogin .dropdown-menu {min-width:80px;width:80px;}

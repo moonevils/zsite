@@ -13,7 +13,7 @@ js::set('random', $this->session->random);
       </h4>
       <div class='pull-right'>
         <div class='dropdown' id='langs'>
-          <button class='btn' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class='caret'></span></button>
+          <button class='btn' style='width:81px' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class='caret'></span></button>
           <ul class='dropdown-menu'>
             <?php foreach($config->langs as $key => $value):?>
             <li class="<?php echo $key == $this->app->getClientLang() ? 'active' : ''; ?>">
