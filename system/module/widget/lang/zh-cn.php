@@ -54,7 +54,7 @@ $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
 $lang->widget->default['4']['title'] = '最新投稿';
-$lang->widget->default['4']['type']  = 'submittion';
+$lang->widget->default['4']['type']  = 'submission';
 $lang->widget->default['4']['grid']  = 4;
 
 $lang->widget->default['5']['title'] = '快捷入口';
@@ -70,7 +70,7 @@ $lang->widget->typeList->latestOrder    = '最新订单';
 $lang->widget->typeList->latestThread   = '最新帖子';
 $lang->widget->typeList->message        = '反馈';
 $lang->widget->typeList->wechatMessage  = '微信留言';
-$lang->widget->typeList->submittion     = '最新投稿';
+$lang->widget->typeList->submission     = '最新投稿';
 $lang->widget->typeList->chanzhiDynamic = '蝉知动态';
 $lang->widget->typeList->commonMenu     = '快捷入口';
 $lang->widget->typeList->html           = '自定义';

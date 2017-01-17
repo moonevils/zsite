@@ -15,7 +15,7 @@
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-th-large"></i> <?php echo $lang->$type->list;?></strong>
-  <?php if($type != 'submittion'):?>
+  <?php if($type != 'submission'):?>
   <div class='panel-actions'>
     <form method='get' class='form-inline form-search'>
       <?php echo html::hidden('m', 'article');?>
@@ -42,13 +42,13 @@
         <?php $vars = "type=$type&categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='text-center w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
         <th class='text-center'><?php commonModel::printOrderLink('title', $orderBy, $vars, $lang->article->title);?></th>
-        <?php if($type != 'page' and $type != 'submittion'):?>
+        <?php if($type != 'page' and $type != 'submission'):?>
         <th class='text-center w-200px'><?php echo $lang->article->category;?></th>
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php if($type != 'page' and commonModel::isAvailable('submittion')):?>
-        <th class='text-center w-70px'> <?php commonModel::printOrderLink('submittion', $orderBy, $vars, $lang->article->status);?></th>
+        <?php if($type != 'page' and commonModel::isAvailable('submission')):?>
+        <th class='text-center w-70px'> <?php commonModel::printOrderLink('submission', $orderBy, $vars, $lang->article->status);?></th>
         <?php endif;?>
         <?php $actionClass = $type == 'page' ? 'w-250px' : 'w-300px';?>
         <?php 
@@ -56,7 +56,7 @@
           {
             $actionClass = 'w-250px';
           }
-          else if($type == 'submittion')
+          else if($type == 'submission')
           {
             $actionClass = 'w-150px';
           }
@@ -77,21 +77,21 @@
           <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
         </td>
-        <?php if($type != 'page' and $type != 'submittion'):?>
+        <?php if($type != 'page' and $type != 'submission'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
         <?php endif;?>
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
         <?php
-        if($type != 'page' and commonModel::isAvailable('submittion'))
+        if($type != 'page' and commonModel::isAvailable('submission'))
         {
-            echo "<td class='text-center'>" . $lang->submittion->status[$article->submittion] . '</td>';
+            echo "<td class='text-center'>" . $lang->submission->status[$article->submission] . '</td>';
         }
         ?>
         <td class='text-center nofixed'>
-          <?php if($type == 'submittion'):?>
+          <?php if($type == 'submission'):?>
           <?php
-          if($article->submittion != 2) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->submittion->check); 
+          if($article->submission != 2) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->submission->check); 
           else commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
           commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');
           ?>
@@ -152,9 +152,9 @@
     </tbody>
     <tfoot>
       <tr>
-        <?php $col = commonModel::isAvailable('submittion') ? 7 : 6;?>
+        <?php $col = commonModel::isAvailable('submission') ? 7 : 6;?>
         <?php if($type == 'page') $col = 5;?>
-        <?php if($type == 'submittion') $col = 6;?>
+        <?php if($type == 'submission') $col = 6;?>
         <td colspan="<?php echo $col;?>"><?php $pager->show();?></td>
       </tr>
     </tfoot>

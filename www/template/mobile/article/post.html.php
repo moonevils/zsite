@@ -14,7 +14,7 @@
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->submittion->common;?></h5>
+      <h5 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->submission->common;?></h5>
     </div>
     <div class='modal-body'>
       <form id='postArticleForm' method='post' action="<?php echo inlink('post');?>">

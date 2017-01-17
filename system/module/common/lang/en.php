@@ -128,6 +128,13 @@ $lang->checkEmail         = 'Check email';
 $lang->checkMobile        = 'Check mobile';
 $lang->getUserByApi       = 'Get user info by api';
 
+/* Select lang tip */
+$lang->selectLangTip = array();
+$lang->selectLangTip['en'] = array();
+$lang->selectLangTip['en']['zh-cn'] = 'Switch to simplified Chinese site';
+$lang->selectLangTip['en']['zh-tw'] = 'Switch to traditional Chinese site';
+$lang->selectLangTip['en']['en']    = 'Switch to English site';
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete    = 'Do you want to delete it?';
@@ -192,7 +199,7 @@ $lang->menu->reply        = 'Reply|message|admin|type=reply';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Post|reply|admin|';
-$lang->menu->submittion   = 'Submission|article|admin|type=submittion&tab=user';
+$lang->menu->submission   = 'Submission|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 $lang->menu->userSetting  = 'Setting|user|setting|';
 

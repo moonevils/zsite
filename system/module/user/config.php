@@ -32,7 +32,7 @@ $config->user->level[7] = 200000;
 $config->user->navGroups = new stdclass();
 $config->user->navGroups->user    = 'profile,message,score,recharge';
 $config->user->navGroups->order   = 'order,address';
-$config->user->navGroups->message = 'thread,reply,submittion';
+$config->user->navGroups->message = 'thread,reply,submission';
 
 $config->user->relatedTables = array();
 $config->user->relatedTables[TABLE_MESSAGE][]  = 'account';

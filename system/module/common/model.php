@@ -145,10 +145,11 @@ class commonModel extends model
 
         if($this->isOpenMethod($module, $method)) return true;
 
-        /* If no $app->user yet, go to the login pae. */
+        /* If no $app->user yet, go to the login page. */
         if(RUN_MODE == 'admin' and $this->app->user->account == 'guest')
         {
-            die(js::locate(helper::createLink('user', 'login')));
+            $referer = helper::safe64Encode($this->app->getURI(true));
+            die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
         }
 
         /* if remote ip not equal loginIP, go to login page. */
@@ -157,7 +158,8 @@ class commonModel extends model
             if(zget($this->config->site, 'checkSessionIP', '0') and (helper::getRemoteIP() != $this->app->user->loginIP))
             {
                 session_destroy();
-                die(js::locate(helper::createLink('user', 'login')));
+                $referer = helper::safe64Encode($this->app->getURI(true));
+                die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
             }
         }
 
@@ -441,7 +443,7 @@ class commonModel extends model
             if(!commonModel::isAvailable('video') && $vars == 'type=video') continue;
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
-            if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
+            if(!commonModel::isAvailable('submission') && $vars == 'type=submission') continue;
 
             if($menu == 'wechat' and !commonModel::hasPublic()) continue;
             
