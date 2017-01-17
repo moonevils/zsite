@@ -145,7 +145,7 @@ class commonModel extends model
 
         if($this->isOpenMethod($module, $method)) return true;
 
-        /* If no $app->user yet, go to the login pae. */
+        /* If no $app->user yet, go to the login page. */
         if(RUN_MODE == 'admin' and $this->app->user->account == 'guest')
         {
             die(js::locate(helper::createLink('user', 'login')));
