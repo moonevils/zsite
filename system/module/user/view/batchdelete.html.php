@@ -9,7 +9,7 @@
           <th><?php echo $lang->user->account;?></th>
           <th><?php echo $lang->user->threadHistory;?></th>
           <th><?php echo $lang->user->replyHistory;?></th>
-          <th><?php echo $lang->user->submittionHistory;?></th>
+          <th><?php echo $lang->user->submissionHistory;?></th>
           <th><?php echo $lang->user->commentHistory;?></th>
           <th><?php echo $lang->user->messageHistory;?></th>
           <th><?php echo $lang->user->orderHistory;?></th>
@@ -23,7 +23,7 @@
         <td><?php echo $account;?></td>
         <td><span class='<?php echo $history->thread ? 'warning' : '';?>'><?php echo $history->thread;?></span></td>
         <td><span class='<?php echo $history->reply ? 'warning' : '';?>'><?php echo $history->reply;?></span></td>
-        <td><span class='<?php echo $history->submittion ? 'warning' : '';?>'><?php echo $history->submittion;?></span></td>
+        <td><span class='<?php echo $history->submission ? 'warning' : '';?>'><?php echo $history->submission;?></span></td>
         <td><span class='<?php echo $history->comment ? 'warning' : '';?>'><?php echo $history->comment;?></span></td>
         <td><span class='<?php echo $history->message ? 'warning' : '';?>'><?php echo $history->message;?></span></td>
         <td><span class='<?php echo $history->order ? 'warning' : '';?>'><?php echo $history->order;?></span></td>

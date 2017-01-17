@@ -49,21 +49,21 @@ $lang->article->selectCategories = 'Select Category';
 $lang->article->selectBoard      = 'Select Board';
 $lang->article->confirmReject    = 'Do you want to reject it?';
 
-$lang->submittion= new stdclass();
-$lang->submittion->common  = 'Submit';
-$lang->submittion->check   = 'Review';
-$lang->submittion->list    = 'Submissions';
-$lang->submittion->publish = 'Pass';
-$lang->submittion->reject  = 'Reject';
+$lang->submission= new stdclass();
+$lang->submission->common  = 'Submit';
+$lang->submission->check   = 'Review';
+$lang->submission->list    = 'Submissions';
+$lang->submission->publish = 'Pass';
+$lang->submission->reject  = 'Reject';
 
-$lang->submittion->status[0] = '';
-$lang->submittion->status[1] = '<span class="label label-xsm label-primary">' . 'Pending' .'</span>';
-$lang->submittion->status[2] = '<span class="label label-xsm label-success">' . 'Pass' . '</span>';
-$lang->submittion->status[3] = 'Reject';
+$lang->submission->status[0] = '';
+$lang->submission->status[1] = '<span class="label label-xsm label-primary">' . 'Pending' .'</span>';
+$lang->submission->status[2] = '<span class="label label-xsm label-success">' . 'Pass' . '</span>';
+$lang->submission->status[3] = 'Reject';
 
-$lang->submittion->typeList = array();
-$lang->submittion->typeList['article'] = 'Article';
-$lang->submittion->typeList['blog']    = 'Blog';
+$lang->submission->typeList = array();
+$lang->submission->typeList['article'] = 'Article';
+$lang->submission->typeList['blog']    = 'Blog';
 
 $lang->article->onlyBody = 'Display body only (for custom).';
 
@@ -76,13 +76,13 @@ $lang->article->edit          = 'Edit';
 $lang->article->files         = 'File';
 $lang->article->images        = 'Image';
 
-$lang->article->submittion     = 'Submit';
-$lang->article->submittionTime = 'Submit On';
+$lang->article->submission     = 'Submit';
+$lang->article->submissionTime = 'Submit On';
 $lang->article->noSubmittion   = 'You have no submissions yet. Submit and earn points NOW!';
 
-$lang->article->submittionOptions = new stdclass;
-$lang->article->submittionOptions->open  = 'On';
-$lang->article->submittionOptions->close = 'Off';
+$lang->article->submissionOptions = new stdclass;
+$lang->article->submissionOptions->open  = 'On';
+$lang->article->submissionOptions->close = 'Off';
 
 $lang->blog->common = 'Blog';
 $lang->blog->admin  = 'Manage';

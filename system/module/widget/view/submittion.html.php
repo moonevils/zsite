@@ -12,7 +12,7 @@ $articles = $this->article->getSubmittions($limit);
     <td><?php echo $article->author;?></td>
     <td><?php echo formatTime($article->addedDate, 'm-d H:i');?></td>
     <td class='w-40px'>
-      <?php if($article->submittion != 2) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->submittion->check); ?>
+      <?php if($article->submission != 2) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->submission->check); ?>
     </td>
   </tr>
   <?php endforeach;?>

@@ -117,7 +117,7 @@ class file extends control
      */
     public function ajaxUpload($uid)
     {
-        if(RUN_MODE == 'front' and !commonModel::isAvailable('forum') and !commonModel::isAvailable('submittion')) exit;
+        if(RUN_MODE == 'front' and !commonModel::isAvailable('forum') and !commonModel::isAvailable('submission')) exit;
         if(!$this->loadModel('file')->canUpload())  $this->send(array('error' => 1, 'message' => $this->lang->file->uploadForbidden));
         $file = $this->file->getUpload('imgFile');
         $file = $file[0];
