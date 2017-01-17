@@ -57,7 +57,7 @@
         </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='3' class='text-right'><?php echo $lang->file->fileTip;?></td><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='3' class='text-left'><?php echo $lang->file->fileTip;?></td><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
     <?php else:?>
     <thead>
       <tr class='text-center'>
