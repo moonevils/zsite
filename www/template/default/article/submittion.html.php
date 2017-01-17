@@ -49,7 +49,7 @@
         </table>
         <?php else:?>
         <div class='panel-body'>
-          <?php echo $lang->article->noSubmittion;?>
+          <?php echo $lang->article->noSubmission;?>
           <?php echo html::a(inlink('post'), "<i class='icon icon-plus'> </i>{$lang->article->post}", "class='btn btn-success'");?>
         </div>
         <?php endif;?>

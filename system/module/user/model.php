@@ -1309,7 +1309,7 @@ class userModel extends model
         $user->messages    = $this->getMessages($account, 'message');
         $user->orders      = $this->getOrders($account);
         $user->addresses   = $this->getAddresses($account);
-        $user->submissions = $this->getSubmittions($account);
+        $user->submissions = $this->getSubmissions($account);
 
         return $user;
     }
@@ -1481,7 +1481,7 @@ class userModel extends model
      * @access public
      * @return array 
      */
-    public function getSubmittions($account)
+    public function getSubmissions($account)
     {
         $submissions = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_ARTICLE)
             ->where('addedBy')->eq($account)

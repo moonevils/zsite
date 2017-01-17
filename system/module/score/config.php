@@ -10,7 +10,7 @@ $config->score->counts->reply        = 3;
 $config->score->counts->delThread    = 15;
 $config->score->counts->delReply     = 9;
 
-$config->score->counts->approveSubmittion = 10;
+$config->score->counts->approveSubmission = 10;
 
 $config->score->buyScore = new stdclass(); 
 $config->score->buyScore->perYuan   = 1 / 0.1; 

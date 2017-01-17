@@ -78,7 +78,7 @@ $lang->article->images        = 'Image';
 
 $lang->article->submission     = 'Submit';
 $lang->article->submissionTime = 'Submit On';
-$lang->article->noSubmittion   = 'You have no submissions yet. Submit and earn points NOW!';
+$lang->article->noSubmission   = 'You have no submissions yet. Submit and earn points NOW!';
 
 $lang->article->submissionOptions = new stdclass;
 $lang->article->submissionOptions->open  = 'On';
