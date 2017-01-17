@@ -47,7 +47,7 @@
         <?php if(commonModel::isAvailable('submission')):?>
         <tr>
           <th><?php echo $lang->score->methods['approvesubmission'] . $lang->score->methods['award'];?></th> 
-          <td><?php echo html::input('approveSubmittion', $this->config->score->counts->approveSubmittion, "class='form-control'");?></td><td></td>
+          <td><?php echo html::input('approveSubmission', $this->config->score->counts->approveSubmission, "class='form-control'");?></td><td></td>
         </tr>
         <?php endif;?>
         <tr>

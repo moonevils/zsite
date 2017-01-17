@@ -752,11 +752,11 @@ class articleModel extends model
         $this->processCategories($articleID, $type, $categories);
         $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submission')->eq(2)->where('id')->eq($articleID)->exec();
         $article = $this->getByID($articleID);
-        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmittion', 'article', $articleID, '', $article->addedBy);
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmission', 'article', $articleID, '', $article->addedBy);
         
         $this->loadModel('file')->updateObjectType($articleID, 'submission', $type);
         $this->loadModel('search')->save($article->type, $article);
-        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmittion));
+        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmission));
 
         return !dao::isError();
     }
@@ -783,7 +783,7 @@ class articleModel extends model
      * @access public
      * @return array
      */
-    public function getSubmittions($limit)
+    public function getSubmissions($limit)
     {
         return $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('type')->eq('submission')

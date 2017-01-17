@@ -1,7 +1,7 @@
 <?php
 $this->loadModel('article');
 $limit  = zget($widget->params, 'limit', 10);
-$articles = $this->article->getSubmittions($limit);
+$articles = $this->article->getSubmissions($limit);
 ?>
 <table class='table table-data table-hover table-fixed'>
   <?php foreach($articles as $article):?>

@@ -78,7 +78,7 @@ $lang->article->images        = '圖片';
 
 $lang->article->submission     = '投稿';
 $lang->article->submissionTime = '投遞時間';
-$lang->article->noSubmittion   = '您還沒有投稿記錄，歡迎您提交投稿賺取積分，分享宣傳。';
+$lang->article->noSubmission   = '您還沒有投稿記錄，歡迎您提交投稿賺取積分，分享宣傳。';
 
 $lang->article->submissionOptions = new stdclass;
 $lang->article->submissionOptions->open  = '開啟';
