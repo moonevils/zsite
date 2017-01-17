@@ -34,7 +34,7 @@ class replyModel extends model
      * @access public
      * @return string
      */
-    public function getPosition($replyID)
+    public function getPosition($replyID, $mode = 'url')
     {
         $reply = $this->getByID($replyID);
         if(!$reply) return '';
@@ -45,8 +45,15 @@ class replyModel extends model
             ->andWhere('hidden')->eq('0')
             ->fetch('id');
 
-        $pageID   = (int)($replies / 10);
-        $position = $pageID ? "pageID=" . ($pageID + 1) . "&replyID=$replyID": "replyID=$replyID";
+        $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
+        $pageID     = (int)($replies / $recPerPage);
+        
+        if($mode == 'anchor')
+        {
+            return array('pageID' => $pageID + 1, 'anchorID' => $replies + 2);
+        }
+
+        $position   = $pageID ? "pageID=" . ($pageID + 1) . "&replyID=$replyID": "replyID=$replyID";
 
         return $position;
     }
@@ -197,7 +204,9 @@ class replyModel extends model
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($thread->board);
 
-            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
+            $urlInfo = $this->getPosition($replyID, 'anchor');
+            
+            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID&pageID=" . $urlInfo['pageID'], "pageID=" . $urlInfo['pageID']) . "?rand=" . rand(1, 100) . "#" . $urlInfo['anchorID']);
         }
         return array('result' => 'fail', 'message' => dao::getError());
     }
