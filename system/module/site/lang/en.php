@@ -195,7 +195,7 @@ $lang->site->moduleAvailable->user['user']       = 'User';
 $lang->site->moduleAvailable->user['forum']      = 'Forum';
 $lang->site->moduleAvailable->user['score']      = 'Points';
 $lang->site->moduleAvailable->user['message']    = 'Message';
-$lang->site->moduleAvailable->user['submittion'] = 'Submission';
+$lang->site->moduleAvailable->user['submission'] = 'Submission';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = 'Mall';
@@ -259,7 +259,7 @@ $lang->site->menus['article']    = 'Article';
 $lang->site->menus['page']       = 'Page';
 $lang->site->menus['blog']       = 'Blog';
 $lang->site->menus['book']       = 'Book';
-$lang->site->menus['submittion'] = 'Submission';
+$lang->site->menus['submission'] = 'Submission';
 $lang->site->menus['product']    = 'Product';
 $lang->site->menus['user']       = 'User';
 $lang->site->menus['wechat']     = 'Wechat';

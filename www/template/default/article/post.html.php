@@ -7,7 +7,7 @@
     <?php include TPL_ROOT . 'user/side.html.php';?>
     <div class='col-md-10'>
       <div class='panel'>
-      <div class='panel-heading'><strong><i class='icon-plus'></i>&nbsp;<?php echo $lang->article->submittion;?></strong></div>
+      <div class='panel-heading'><strong><i class='icon-plus'></i>&nbsp;<?php echo $lang->article->submission;?></strong></div>
       <div class='panel-body'>
         <form method='post' role='form' id='ajaxForm'>
           <table class='table table-form'>

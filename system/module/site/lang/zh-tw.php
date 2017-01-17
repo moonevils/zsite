@@ -195,7 +195,7 @@ $lang->site->moduleAvailable->user['user']       = '會員';
 $lang->site->moduleAvailable->user['forum']      = '論壇';
 $lang->site->moduleAvailable->user['score']      = '積分';
 $lang->site->moduleAvailable->user['message']    = '評論留言';
-$lang->site->moduleAvailable->user['submittion'] = '投稿';
+$lang->site->moduleAvailable->user['submission'] = '投稿';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = '商城';
@@ -259,7 +259,7 @@ $lang->site->menus['article']    = '文章';
 $lang->site->menus['page']       = '單頁';
 $lang->site->menus['blog']       = '博客';
 $lang->site->menus['book']       = '手冊';
-$lang->site->menus['submittion'] = '投稿';
+$lang->site->menus['submission'] = '投稿';
 $lang->site->menus['product']    = '產品';
 $lang->site->menus['user']       = '會員';
 $lang->site->menus['wechat']     = '微信';

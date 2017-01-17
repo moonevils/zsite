@@ -10,7 +10,7 @@ $config->score->counts->reply        = 3;
 $config->score->counts->delThread    = 15;
 $config->score->counts->delReply     = 9;
 
-$config->score->counts->approveSubmittion = 10;
+$config->score->counts->approveSubmission = 10;
 
 $config->score->buyScore = new stdclass(); 
 $config->score->buyScore->perYuan   = 1 / 0.1; 
@@ -24,7 +24,7 @@ $config->score->methodOptions['register']          = 'award';
 $config->score->methodOptions['login']             = 'award';
 $config->score->methodOptions['thread']            = 'award';
 $config->score->methodOptions['reply']             = 'award';
-$config->score->methodOptions['approvesubmittion'] = 'award';
+$config->score->methodOptions['approvesubmission'] = 'award';
 $config->score->methodOptions['delthread']         = 'punish';
 $config->score->methodOptions['delreply']          = 'punish';
 $config->score->methodOptions['maxlogin']          = '';

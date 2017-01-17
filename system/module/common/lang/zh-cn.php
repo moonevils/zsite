@@ -128,6 +128,13 @@ $lang->checkEmail         = '验证邮箱';
 $lang->checkMobile        = '验证手机';
 $lang->getUserByApi       = '获取绑定信息';
 
+/* Select lang tip */
+$lang->selectLangTip = array();
+$lang->selectLangTip['zh-cn'] = array();
+$lang->selectLangTip['zh-cn']['zh-cn'] = '切换到简体中文站点';
+$lang->selectLangTip['zh-cn']['zh-tw'] = '切换到繁体中文站点';
+$lang->selectLangTip['zh-cn']['en']    = '切换到英文站点';
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete    = '您确定要执行删除操作吗？';
@@ -192,7 +199,7 @@ $lang->menu->reply        = '回复|message|admin|type=reply';
 $lang->menu->forum        = '论坛|forum|admin|';
 $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
-$lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
+$lang->menu->submission   = '投稿|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 $lang->menu->userSetting  = '设置|user|setting|';
 

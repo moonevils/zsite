@@ -54,7 +54,7 @@ $lang->widget->default['3']['type']  = 'message';
 $lang->widget->default['3']['grid']  = 4;
 
 $lang->widget->default['4']['title'] = 'Latest Submission';
-$lang->widget->default['4']['type']  = 'submittion';
+$lang->widget->default['4']['type']  = 'submission';
 $lang->widget->default['4']['grid']  = 4;
 
 $lang->widget->default['5']['title'] = 'Quick Entry';
@@ -70,7 +70,7 @@ $lang->widget->typeList->latestOrder    = 'Latest Order';
 $lang->widget->typeList->latestThread   = 'Latest Thread';
 $lang->widget->typeList->message        = 'Feedback';
 $lang->widget->typeList->wechatMessage  = 'Wechat Message';
-$lang->widget->typeList->submittion     = 'Latest Submission';
+$lang->widget->typeList->submission     = 'Latest Submission';
 $lang->widget->typeList->chanzhiDynamic = 'Changer Dynamic';
 $lang->widget->typeList->commonMenu     = 'Quick Entry';
 $lang->widget->typeList->html           = 'Custom';
