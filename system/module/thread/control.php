@@ -137,6 +137,7 @@ class thread extends control
      */
     public function view($threadID, $pageID = 1)
     {
+        if(strpos($pageID, '?') !== false) $pageID = explode('?', $pageID)[0];
         $this->loadModel('guarder');
         $thread = $this->thread->getByID($threadID);
         if(!$thread or $thread->hidden) die(js::locate('back'));
