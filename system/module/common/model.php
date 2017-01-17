@@ -443,7 +443,7 @@ class commonModel extends model
             if(!commonModel::isAvailable('video') && $vars == 'type=video') continue;
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
-            if(!commonModel::isAvailable('submittion') && $vars == 'type=submittion') continue;
+            if(!commonModel::isAvailable('submission') && $vars == 'type=submission') continue;
 
             if($menu == 'wechat' and !commonModel::hasPublic()) continue;
             

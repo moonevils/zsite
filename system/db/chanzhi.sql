@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `editedDate` datetime NOT NULL,
   `status` varchar(20) NOT NULL DEFAULT 'normal',
   `type` varchar(30) NOT NULL,
-  `submittion` enum('0', '1', '2', '3') NOT NULL DEFAULT '0',
+  `submission` enum('0', '1', '2', '3') NOT NULL DEFAULT '0',
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,

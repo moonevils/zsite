@@ -199,7 +199,7 @@ $lang->menu->reply        = '回复|message|admin|type=reply';
 $lang->menu->forum        = '论坛|forum|admin|';
 $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
-$lang->menu->submittion   = '投稿|article|admin|type=submittion&tab=user';
+$lang->menu->submission   = '投稿|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 $lang->menu->userSetting  = '设置|user|setting|';
 

@@ -14,7 +14,7 @@
 <?php include '../../common/view/chosen.html.php';?>
 <?php js::set('confirmReject', $lang->article->confirmReject);?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->submittion->check;?></strong></div>
+  <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->submission->check;?></strong></div>
   <div class='panel-body'>
   <form method='post' id='ajaxForm' class='ve-form'>
     <table class='table table-form'>
@@ -53,7 +53,7 @@
       </tbody>
       <tr>
         <th class='w-100px'><?php echo $lang->article->type;?></th>
-        <td><?php echo html::radio("type", $lang->submittion->typeList, 'article');?></td><td></td>
+        <td><?php echo html::radio("type", $lang->submission->typeList, 'article');?></td><td></td>
       </tr>
       <tr>
         <th class='w-100px'><?php echo $lang->article->category;?></th>
@@ -61,7 +61,7 @@
         <td class='blogTD'><?php echo html::select("blogCategories[]", $blogCategories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td>
       </tr>
       <tr>
-        <th></th><td colspan='2'><?php echo html::submitButton($lang->submittion->publish) . html::a(inlink('reject', "id={$article->id}"), $lang->submittion->reject, "class='btn btn-warning rejecter'");?></td>
+        <th></th><td colspan='2'><?php echo html::submitButton($lang->submission->publish) . html::a(inlink('reject', "id={$article->id}"), $lang->submission->reject, "class='btn btn-warning rejecter'");?></td>
       </tr>
     </table>
   </form>
