@@ -55,13 +55,15 @@
         <?php if($mobileTemplate == 'close'):?>
         <?php echo html::a('javascript:;', $lang->ui->deviceList->desktop);?>
         <?php else:?>
-        <a href='<?php echo helper::createLink('ui', 'setdevice', "device={$currentDevice}");?>' class='active'>
-          <?php echo "<strong>" . $lang->ui->deviceList->{$currentDevice} . "</strong>";?>
+        <a href='javascript:;' data-toggle='dropdown'>
+          <?php echo "<strong>" . strip_tags($lang->ui->deviceList->{$currentDevice}) . "</strong>";?> <i class='icon-caret-down'></i>
         </a>
-        <?php $nextDevice = $currentDevice == 'mobile' ? 'desktop' : 'mobile';?>
-        <a href='<?php echo helper::createLink('ui', 'setdevice', "device={$nextDevice}");?>'>
-          <?php echo "<strong>" . $lang->ui->deviceList->{$nextDevice} . "</strong>";?>
-        </a>
+        <ul class='dropdown-menu'>
+          <?php foreach($lang->ui->deviceList as $device => $name):?>
+          <?php $class = $device == $currentDevice ? "class='active'" : '';?>
+          <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
+          <?php endforeach;?>
+        </ul>
         <?php endif;?>
       </li>
       <li class='divider'></li>
