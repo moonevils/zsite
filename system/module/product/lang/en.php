@@ -133,3 +133,5 @@ $lang->product->currencySymbols['sgd']  = 'S$';
 $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = 'Off';
 $lang->product->stockOptions[1] = 'On';
+
+$lang->product->noCategoriesTip = 'You have not added the categories, please add the categories at first.';

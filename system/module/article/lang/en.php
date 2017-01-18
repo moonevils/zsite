@@ -136,3 +136,10 @@ $lang->article->approveMessage = 'Your submission <strong>%s</strong> has passed
 $lang->article->rejectMessage  = 'Your submission <strong>%s</strong> did not pass the review. You can edit it and submit for review again. Thank you!';
 
 $lang->article->forwardFrom = 'Repost from';
+
+$lang->article->noCategoriesTip = 'You have not added the categories, please add the categories at first';
+
+$lang->article->noCategories = array();
+$lang->article->noCategories['article'] = 'You have not added the categories for article, please add the categories at first.';
+$lang->article->noCategories['blog']    = 'You have not added the categories for blog, please add the categories at first.';
+$lang->article->noCategories['video']   = 'You have not added the categories for video, please add the categories at first.';

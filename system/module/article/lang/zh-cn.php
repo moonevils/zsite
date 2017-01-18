@@ -136,3 +136,10 @@ $lang->article->approveMessage = '您投递的文章 <strong>《%s》</strong> �
 $lang->article->rejectMessage  = '您投递的文章 <strong>《%s》</strong> 未通过审核，您可以编辑后再次提交审核，感谢您的支持。';
 
 $lang->article->forwardFrom = '转发自';
+
+$lang->article->noCategoriesTip = '您还没有添加类目，请添加类目。';
+
+$lang->article->noCategories = array();
+$lang->article->noCategories['article'] = '您还没有为文章添加类目，请添加类目。';
+$lang->article->noCategories['blog']    = '您还没有为博客添加类目，请添加类目。';
+$lang->article->noCategories['video']   = '您还没有为视频添加类目，请添加类目。';
