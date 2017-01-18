@@ -30,3 +30,7 @@ $config->file->mediaTypes->wav  = 'wav';
 $config->file->editorExtensions = array_merge($config->file->imageExtensions, $config->file->videoExtensions);
 
 $config->file->mimes['default'] = 'application/octet-stream';
+
+$config->file->tables   = array();
+$config->file->tables[] = array('table' => TABLE_FILE, 'field' => array('pathname'));
+$config->file->tables[] = array('table' => TABLE_ARTICLE, 'field' => array('content'));
