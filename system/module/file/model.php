@@ -69,23 +69,15 @@ class fileModel extends model
      */
     public function getInvalidList()
     {
+        $dataRoot     = $this->app->getDataRoot();
+        $uploadFiles  = glob($dataRoot . "/upload/*/*"); 
         $invalidFiles = array();
-
-        $zdb      = $this->app->loadClass('zdb');
-        $fileName = $this->app->getTmpRoot() . 'checkInvalidFile' . '.sql';
-        $tables   = array(TABLE_FILE, TABLE_ARTICLE, TABLE_BLOCK, TABLE_BOOK, TABLE_CONFIG, TABLE_ORDER, TABLE_PACKAGE, TABLE_PRODUCT, TABLE_PRODUCT_CUSTOM, TABLE_REPLY, TABLE_SLIDE, TABLE_THREAD, TABLE_USER, TABLE_WIDGET, TABLE_WX_PUBLIC, TABLE_WX_MESSAGE);
-        $zdb->dump($fileName, $tables);
-        
-        $sqlContent  = file_get_contents($fileName);
-        $dataRoot    = $this->app->getDataRoot();
-        $uploadFiles = glob($dataRoot . "/upload/*/*"); 
-        
         foreach($uploadFiles as $uploadFile)
         {
             $name = basename($uploadFile);
             $tag  = substr(substr($name, strpos($name, '_') + 1), 0, strpos($name, '.') - 2);
             if(strlen($tag) < 10) continue;
-            if(strpos($sqlContent, $tag) === false) $invalidFiles[] = $uploadFile;
+            if(!$this->checkExistence($tag)) $invalidFiles[] = $uploadFile; 
         }
         
         $unusedFiles = array();
@@ -103,8 +95,29 @@ class fileModel extends model
         return $unusedFiles;
     }
 
+    /*
+     * Check existence of filename in the database
+     *
+     * @param  string $fileTag
+     * @access public 
+     * @return bool
+     */
+    public function checkExistence($fileTag)
+    {
+        foreach($this->config->file->tables as $table)
+        {
+            foreach($table['field'] as $field)
+            {
+                $searchResult = $this->dao->select("count('*') as count")->from($table['table'])->where($field)->like("%$fileTag%")->fetch('count'); 
+                if($searchResult) return true;
+            }
+        }
+
+        return false;
+    }
+
     /* 
-     * Delete the 
+     * Delete the unused file 
      */
     public function deleteInvalidFile($pathname) 
     {
