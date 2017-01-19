@@ -38,7 +38,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading' style='min-height:20px;'>
-            <span style='width:70%;float:left; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>
+            <span style='width:60%;float:left; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>
             <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
             <?php if($content->categoryName == 'abbr'):?>
             <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
