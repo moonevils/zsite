@@ -23,7 +23,7 @@ class file extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
         
-        $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList();
+        $files = $type == 'valid' ? $this->file->getList($orderBy, $pager) : $this->file->getInvalidList($pager);
 
         $this->lang->menuGroups->file = 'attachment'; 
         
