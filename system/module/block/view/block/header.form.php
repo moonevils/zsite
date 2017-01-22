@@ -15,7 +15,7 @@
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
 <tr class='top'>
-  <th id='th-top' rowspan='2'><?php echo $lang->block->header->top->common;?></th>
+  <th id='tableHeadingtop' rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->left;?></span>
@@ -76,10 +76,26 @@ $(function()
         if($(this).val() == 'custom')
         {
             $('tr.topLeft').show();
+            if($("[name*=params][name*=top][name*=right]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '4');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
         }
         else
         {
             $('tr.topLeft').hide();
+            if($("[name*=params][name*=top][name*=right]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '2');
+            }
         }
     })
 
@@ -88,10 +104,26 @@ $(function()
         if($(this).val() == 'custom')
         {
             $('tr.topRight').show();
+            if($("[name*=params][name*=top][name*=left]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '4');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
         }
         else
         {
             $('tr.topRight').hide();
+            if($("[name*=params][name*=top][name*=left]").val() == 'custom')
+            {
+                $("#tableHeadingtop").attr('rowspan', '3');
+            }
+            else
+            {
+                $("#tableHeadingtop").attr('rowspan', '2');
+            }
         }
     })
     
