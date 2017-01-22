@@ -20,7 +20,7 @@ $(document).ready(function()
     {
         if($(this).val() == 'full') 
         {
-            if($(this).parents('td').find('.text-danger').size() == 0) $(this).parent().append(" <span class='text-danger'>" + v.lang.fullImportTip + '</span>');
+            if($(this).parents('#typeCheckBox').find('#typeTip').size() == 0) $(this).parent().after(" <span id='typeTip' class='text-danger'>" + v.lang.fullImportTip + '</span>');
         }
     })
 });

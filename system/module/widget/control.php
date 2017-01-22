@@ -72,6 +72,7 @@ class widget extends control
         $widget = $this->widget->getByID($widget);
         if(empty($widget)) return false;
 
+        if($widget->type == 'commonMenu') $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true); 
         $this->app->loadClass('pager', true);
         $this->view->widget = $widget;       
         $this->display();

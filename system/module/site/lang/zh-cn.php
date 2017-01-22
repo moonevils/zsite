@@ -173,11 +173,11 @@ $lang->site->scoreList['close'] = '禁用';
 $lang->site->cdnList['open']  = '启用';
 $lang->site->cdnList['close'] = '关闭';
 
-$lang->site->cacheTypes['close'] = '关闭';
 $lang->site->cacheTypes['file']  = '启用';
+$lang->site->cacheTypes['close'] = '关闭';
 
-$lang->site->cachePageOptions['close'] = '关闭';
 $lang->site->cachePageOptions['open']  = '开启';
+$lang->site->cachePageOptions['close'] = '关闭';
 
 $lang->site->filterFunctionList['open']  = '启用';
 $lang->site->filterFunctionList['close'] = '关闭';
@@ -193,9 +193,9 @@ $lang->site->moduleAvailable->content['book']       = '手册';
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = '会员';
 $lang->site->moduleAvailable->user['forum']      = '论坛';
-$lang->site->moduleAvailable->user['message']    = '评论留言';
-$lang->site->moduleAvailable->user['submittion'] = '投稿';
 $lang->site->moduleAvailable->user['score']      = '积分';
+$lang->site->moduleAvailable->user['message']    = '评论留言';
+$lang->site->moduleAvailable->user['submission'] = '投稿';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = '商城';
@@ -259,7 +259,7 @@ $lang->site->menus['article']    = '文章';
 $lang->site->menus['page']       = '单页';
 $lang->site->menus['blog']       = '博客';
 $lang->site->menus['book']       = '手册';
-$lang->site->menus['submittion'] = '投稿';
+$lang->site->menus['submission'] = '投稿';
 $lang->site->menus['product']    = '产品';
 $lang->site->menus['user']       = '会员';
 $lang->site->menus['wechat']     = '微信';

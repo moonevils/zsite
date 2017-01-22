@@ -4,7 +4,7 @@
     <?php include TPL_ROOT . 'user/side.html.php';?>
     <div class='col-md-10'>
       <div class='panel'>
-        <div class='panel-heading'><strong><i class='icon-envelope-alt'></i> <?php echo $lang->user->submittion;?></strong>
+        <div class='panel-heading'><strong><i class='icon-envelope-alt'></i> <?php echo $lang->user->submission;?></strong>
           <div class='panel-actions'><?php commonModel::printLink('article', 'post', '', '<i class="icon-plus"></i> ' . $lang->article->post, 'class="btn btn-primary"');?></div>
         </div>
         <?php if(!empty($articles)):?>
@@ -25,16 +25,16 @@
               <td class='text-center'><?php echo $article->id;?></td>
               <td>
                 <?php 
-                    if($article->submittion == 2) echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
+                    if($article->submission == 2) echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
                     else echo $article->title;
                 ?>
               </td>
               <td class='text-center'><?php echo $article->editedDate;?></td>
-              <td class='text-center'><?php echo $lang->submittion->status[$article->submittion];?></td>
+              <td class='text-center'><?php echo $lang->submission->status[$article->submission];?></td>
               <td class='text-center'><?php echo $article->views;?></td>
               <td class='text-center'>
                 <?php
-                    if($article->submittion != 2)
+                    if($article->submission != 2)
                     {
                         commonModel::printLink('article', 'modify', "articleID=$article->id", $lang->edit);
                         commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');
@@ -49,7 +49,7 @@
         </table>
         <?php else:?>
         <div class='panel-body'>
-          <?php echo $lang->article->noSubmittion;?>
+          <?php echo $lang->article->noSubmission;?>
           <?php echo html::a(inlink('post'), "<i class='icon icon-plus'> </i>{$lang->article->post}", "class='btn btn-success'");?>
         </div>
         <?php endif;?>

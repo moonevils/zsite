@@ -278,7 +278,7 @@ class searchModel extends model
                 $articles = $this->dao->select('t1.*, t2.category as category')
                     ->from(TABLE_ARTICLE)->alias('t1')
                     ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
-                    ->where('t2.type')->in('article,blog,video')
+                    ->where('t2.type')->in('article,video')
                     ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)->fi()
                     ->orderBy('t1.id')
                     ->limit($limit)
@@ -287,6 +287,42 @@ class searchModel extends model
                 if(empty($articles))
                 {
                     $type   = $this->config->search->buildOrder['article'];
+                    $lastID = 0;
+                }
+                else
+                {
+                    foreach($articles as $article) 
+                    {
+                        $article->category = $categories[$article->category];
+                        $this->save($article->type, $article);
+                    }
+
+                    return array('type' => $type, 'count' => count($articles), 'lastID' => max(array_keys($articles)));
+                }
+            }
+        }
+
+        if($type == 'blog')
+        {
+            if(!commonModel::isAvailable($type))
+            {
+                if(isset($this->config->search->buildOrder[$type])) $type = $this->config->search->buildOrder[$type];
+                if(!isset($this->config->search->buildOrder[$type])) return array('finished' => true);
+            }
+            else
+            {
+                $articles = $this->dao->select('t1.*, t2.category as category')
+                    ->from(TABLE_ARTICLE)->alias('t1')
+                    ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
+                    ->where('t2.type')->eq('blog')
+                    ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)->fi()
+                    ->orderBy('t1.id')
+                    ->limit($limit)
+                    ->fetchAll('id');
+
+                if(empty($articles))
+                {
+                    $type   = $this->config->search->buildOrder['blog'];
                     $lastID = 0;
                 }
                 else

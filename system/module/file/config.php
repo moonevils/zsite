@@ -30,3 +30,14 @@ $config->file->mediaTypes->wav  = 'wav';
 $config->file->editorExtensions = array_merge($config->file->imageExtensions, $config->file->videoExtensions);
 
 $config->file->mimes['default'] = 'application/octet-stream';
+
+$config->file->tables   = array();
+$config->file->tables[] = 'file.pathname';
+$config->file->tables[] = 'article.content';
+$config->file->tables[] = 'block.content';
+$config->file->tables[] = 'book.content';
+$config->file->tables[] = 'product.content';
+$config->file->tables[] = 'reply.content';
+$config->file->tables[] = 'thread.content';
+$config->file->tables[] = 'wx_message.content';
+$config->file->tables[] = 'slide.image';

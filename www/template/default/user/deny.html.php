@@ -42,6 +42,7 @@ $(function()
         <?php
         if($refererBeforeDeny) echo html::a(helper::safe64Decode($refererBeforeDeny), $lang->user->goback, "class='btn btn-primary'");
          echo html::a($this->createLink($config->default->module), $lang->index->common, "class='btn'");
+         if($this->app->user->account == 'guest') echo html::a($this->createLink('user', 'register'), $lang->user->register->common, "class='btn btn-link'");
          echo html::a($this->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin, "class='btn btn-link'");
         ?>
       </div>

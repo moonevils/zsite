@@ -20,7 +20,7 @@ class userModel extends model
      * @access public
      * @return object 
      */
-    public function getList($pager = null, $user = '', $provider = '', $admin = '')
+    public function getList($pager = null, $user = '', $provider = '', $admin = '', $orderBy = 'id_desc')
     {
         $users = $this->dao->setAutolang(false)
             ->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
@@ -32,7 +32,7 @@ class userModel extends model
             ->fi()
             ->beginIF($provider)->andWhere('o.provider')->like("%{$provider}%")->fi()
             ->beginIF($admin)->andWhere('u.admin')->ne('no')->fi()
-            ->orderBy('id_asc')
+            ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
 
@@ -739,15 +739,15 @@ class userModel extends model
         $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER)->where('id')->in($this->post->orders)->exec();
         $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER_PRODUCT)->where('orderID')->in($this->post->orders)->exec();
 
-        /* Delete submittion of user. */
+        /* Delete submission of user. */
         $this->dao->setAutoLang(false)->delete()->from(TABLE_RELATION)
-            ->where('id')->in($this->post->submittions)
+            ->where('id')->in($this->post->submissions)
             ->andWhere('type')->in('article, blog')
             ->exec();
-        $this->dao->setAutoLang(false)->delete()->from(TABLE_ARTICLE)->where('id')->in($this->post->submittions)->exec();
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_ARTICLE)->where('id')->in($this->post->submissions)->exec();
         $this->dao->setAutolang(false)->delete()->from(TABLE_SEARCH_INDEX)
             ->where('objectType')->in('article, blog')
-            ->andWhere('objectID')->in($this->post->submittions)
+            ->andWhere('objectID')->in($this->post->submissions)
             ->exec();
 
         /* Delete addresses of user. */
@@ -1309,7 +1309,7 @@ class userModel extends model
         $user->messages    = $this->getMessages($account, 'message');
         $user->orders      = $this->getOrders($account);
         $user->addresses   = $this->getAddresses($account);
-        $user->submittions = $this->getSubmittions($account);
+        $user->submissions = $this->getSubmissions($account);
 
         return $user;
     }
@@ -1327,7 +1327,7 @@ class userModel extends model
             ->where('author')->in($users)
             ->groupBy('author')
             ->fetchPairs('author');
-        $submittions = $this->dao->setAutoLang(false)->select('addedBy,count(*) as count')->from(TABLE_ARTICLE)
+        $submissions = $this->dao->setAutoLang(false)->select('addedBy,count(*) as count')->from(TABLE_ARTICLE)
             ->where('addedBy')->in($users)
             ->groupBy('addedBy')
             ->fetchPairs('addedBy');
@@ -1369,7 +1369,7 @@ class userModel extends model
            $history[$user] = new stdClass();
            $history[$user]->thread     = isset($threads[$user]) ? $threads[$user] : 0;
            $history[$user]->reply      = isset($replies[$user]) ? $replies[$user] : 0;
-           $history[$user]->submittion = isset($submittions[$user]) ? $submittions[$user] : 0;
+           $history[$user]->submission = isset($submissions[$user]) ? $submissions[$user] : 0;
            $history[$user]->comment    = isset($fromComments[$user]) ? $fromComments[$user] : 0;
            $history[$user]->comment   += isset($toComments[$user]) ? $toComments[$user] : 0;
            $history[$user]->message    = isset($fromMessages[$user]) ? $fromMessages[$user] : 0;
@@ -1475,20 +1475,20 @@ class userModel extends model
     }
 
     /**
-     * Get submittions by user account. 
+     * Get submissions by user account. 
      * 
      * @param  string $account 
      * @access public
      * @return array 
      */
-    public function getSubmittions($account)
+    public function getSubmissions($account)
     {
-        $submittions = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_ARTICLE)
+        $submissions = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_ARTICLE)
             ->where('addedBy')->eq($account)
             ->fetchAll();
         
         if(dao::isError()) return dao::getError();
-        return $submittions;
+        return $submissions;
     }
 
     /**
@@ -1525,7 +1525,7 @@ class userModel extends model
         if(!commonModel::isAvailable('forum')) unset($this->lang->user->navGroups->message);
 
         if(!commonModel::isAvailable('message')) unset($this->lang->user->control->menus['message']);
-        if(!commonModel::isAvailable('submittion')) unset($this->lang->user->control->menus['submittion']);
+        if(!commonModel::isAvailable('submission')) unset($this->lang->user->control->menus['submission']);
 
         if(!commonModel::isAvailable('score')) unset($this->lang->user->control->menus['score']);
         if(!commonModel::isAvailable('score') or strpos($this->config->shop->payment, 'alipay') !== false) unset($this->lang->user->control->menus['recharge']);

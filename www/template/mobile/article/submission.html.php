@@ -5,19 +5,19 @@
     <button type='button' class='btn primary block' data-toggle='modal' data-remote="<?php echo inlink('post');?>"><i class='icon-plus'></i> <?php echo $lang->article->post;?></button>
   </div>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-envolope-alt'></i> <?php echo $lang->user->submittion;?></div>
+    <div class='title strong'><i class='icon icon-envolope-alt'></i> <?php echo $lang->user->submission;?></div>
   </div>
   <div class='cards condensed cards-list'>
     <?php foreach($articles as $article):?>
     <div class='card' id="article<?php echo $article->id?>" data-ve='article'>
       <div class='card-heading'>
         <div class='pull-right'>
-          <small class='bg-danger-pale text-danger'><?php echo $lang->submittion->status[$article->submittion];?></small>
+          <small class='bg-danger-pale text-danger'><?php echo $lang->submission->status[$article->submission];?></small>
         </div>
         <h5>
           <?php 
-          if($article->submittion == 2) echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
-          if($article->submittion != 2) echo $article->title;
+          if($article->submission == 2) echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
+          if($article->submission != 2) echo $article->title;
           ?>
         </h5>
       </div>
@@ -25,7 +25,7 @@
         <div class='table-cell'>
           <div class='card-content'>
             <div class='pull-right'>
-              <?php if($article->submittion != 2): ?>
+              <?php if($article->submission != 2): ?>
               <?php echo html::a(helper::createLink('article', 'modify', "articleID={$article->id}"), $lang->edit, "class='editor text-primary' data-toggle='modal'");?>&nbsp;&nbsp;
               <?php echo html::a(helper::createLink('article', 'delete', "articleID={$article->id}"), $lang->delete, "class='deleter text-danger' data-locate='self'");?>
               <?php else: ?>

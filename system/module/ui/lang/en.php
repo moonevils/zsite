@@ -47,6 +47,7 @@ $lang->ui->installedThemes = "Installed Themes";
 $lang->ui->enableTheme     = "Apply this theme";
 $lang->ui->industry        = "Industry";
 $lang->ui->offcial         = "Official";
+$lang->ui->score           = "score";
 $lang->ui->reset           = "Reset";
 $lang->ui->themePackage    = "Theme Package";
 

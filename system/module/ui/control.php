@@ -269,6 +269,8 @@ class ui extends control
      */
     public function uploadTheme()
     {
+        $this->app->loadLang('file');
+        
         set_time_limit(0);
         $canManage = array('result' => 'success');
         if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
@@ -294,9 +296,13 @@ class ui extends control
             $this->app->loadLang('package');
             $this->send(array('result' => 'success', 'message' => $this->lang->package->successUploadedPackage, 'locate' => $link));
         }
-
-        $this->view->canManage = $canManage;
-        $this->view->title     = $this->lang->ui->uploadTheme;
+        
+        $this->view->files          = array();
+        $this->view->showSetPrimary = false;
+        $this->view->objectType     = 'themePackage'; 
+        $this->view->objectID       = 'theme'; 
+        $this->view->canManage      = $canManage;
+        $this->view->title          = $this->lang->ui->uploadTheme;
         $this->display();
     }
 

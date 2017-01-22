@@ -97,6 +97,7 @@ $lang->block->header->top->rightOptions['login']          = '登录注册 + 语�
 $lang->block->header->top->rightOptions['search']         = '搜索框';
 $lang->block->header->top->rightOptions['loginAndSearch'] = '登录注册语言 + 搜索框';
 $lang->block->header->top->rightOptions['searchAndLogin'] = '搜索框 + 登录注册语言';
+$lang->block->header->top->rightOptions['custom']         = '自定义';
 
 $lang->block->header->middle->leftOptions['']     = '不显示';
 $lang->block->header->middle->leftOptions['logo'] = 'Logo';

@@ -148,7 +148,10 @@ class product extends control
         $categories = $this->loadModel('tree')->getOptionMenu('product', 0, $removeRoot = true);
         if(empty($categories))
         {
-            die(js::locate($this->createLink('tree', 'redirect', 'type=product')));
+            $this->view->reason = $this->lang->product->noCategoriesTip;
+            $this->view->locate = helper::createLink('tree', 'browse', "type=product");
+            $this->display('common', 'redirect');
+            die();
         }
 
         if($_POST)

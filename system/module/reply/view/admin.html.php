@@ -23,7 +23,7 @@
         <th><?php echo $lang->reply->content;?></th>
         <th class='w-120px'><?php echo $lang->reply->author;?></th>
         <th class='w-100px'><?php echo $lang->reply->addedDate;?></th>
-        <th class='w-80px'><?php echo $lang->actions;?></th>
+        <th class='<?php echo $this->app->clientLang == 'en' ? 'w-100px' : 'w-80px';?>'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

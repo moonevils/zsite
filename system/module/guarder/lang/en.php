@@ -31,7 +31,7 @@ $lang->guarder->placeholder    = 'numbers/letters';
 $lang->guarder->password       = 'Password';
 $lang->guarder->passwordHolder = 'Enter current account password';
 $lang->guarder->identityTip    = 'Enter IP, Email, account, or sensitive words.';
-$lang->guarder->captchaTip     = 'Once security qyestions are set, the frontend will only call those questions at random.';
+$lang->guarder->captchaTip     = 'Once security qyestions are set, the front will only call those questions at random.';
 
 $lang->guarder->verify        = 'Current action requires admin verification for securities.';
 $lang->guarder->okFile        = 'File Mode';
