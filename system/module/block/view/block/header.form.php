@@ -15,7 +15,7 @@
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
 <tr class='top'>
-  <th rowspan='2'><?php echo $lang->block->header->top->common;?></th>
+  <th id='th-top' rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
     <div class='input-group'>
       <span class='input-group-addon'><?php echo $lang->block->header->top->left;?></span>
@@ -34,6 +34,9 @@
     </div>
   </td>
   <td></td>
+</tr>
+<tr class='top topRight hide'>
+  <td><?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control'");?></td>
 </tr>
 <tr class='middle'>
   <th><?php echo $lang->block->header->middle->common;?></th>
@@ -73,15 +76,26 @@ $(function()
         if($(this).val() == 'custom')
         {
             $('tr.topLeft').show();
-            $(this).parents('tr').find('th').attr('rowspan', '3');
         }
         else
         {
             $('tr.topLeft').hide();
-            $(this).parents('tr').find('th').attr('rowspan', '2');
         }
     })
 
+    $("[name*=params][name*=top][name*=right]").change(function()
+    {
+        if($(this).val() == 'custom')
+        {
+            $('tr.topRight').show();
+        }
+        else
+        {
+            $('tr.topRight').hide();
+        }
+    })
+    
     $("[name*=params][name*=top][name*=left]").change();
+    $("[name*=params][name*=top][name*=right]").change();
 })
 </script>
