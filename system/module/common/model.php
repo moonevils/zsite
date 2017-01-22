@@ -199,7 +199,7 @@ class commonModel extends model
         $module = strtolower($module);
         $method = strtolower($method);
         global $app, $config;
-
+        
         $rights  = $app->user->rights;
         if(RUN_MODE == 'admin')
         {
