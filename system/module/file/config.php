@@ -32,5 +32,5 @@ $config->file->editorExtensions = array_merge($config->file->imageExtensions, $c
 $config->file->mimes['default'] = 'application/octet-stream';
 
 $config->file->tables   = array();
-$config->file->tables[] = array('table' => TABLE_FILE, 'field' => array('pathname'));
-$config->file->tables[] = array('table' => TABLE_ARTICLE, 'field' => array('content'));
+$config->file->tables[] = 'file.pathname';
+$config->file->tables[] = 'article.content';

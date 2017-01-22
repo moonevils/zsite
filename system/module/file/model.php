@@ -104,13 +104,12 @@ class fileModel extends model
      */
     public function checkExistence($fileTag)
     {
-        foreach($this->config->file->tables as $table)
+        foreach($this->config->file->tables as $tableInfo)
         {
-            foreach($table['field'] as $field)
-            {
-                $searchResult = $this->dao->select("count('*') as count")->from($table['table'])->where($field)->like("%$fileTag%")->fetch('count'); 
-                if($searchResult) return true;
-            }
+            list($table, $field) = explode('.', $tableInfo);
+            $table = $this->config->db->prefix . $table;
+            $searchResult = $this->dao->select("count('*') as count")->from($table)->where($field)->like("%$fileTag%")->fetch('count'); 
+            if($searchResult) return true;
         }
         
         return false;
