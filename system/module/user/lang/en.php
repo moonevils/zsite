@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = 'User';
+$lang->user->setting   = 'User Setting';
 
 $lang->user->id        = 'ID';
 $lang->user->account   = 'Account';
@@ -71,7 +72,7 @@ $lang->user->adminlog        = 'Admin Log';
 $lang->user->checkEmail      = 'Email Binding';
 $lang->user->getEmailCode    = 'Get verification code';
 $lang->user->getCertifyCode  = 'Get certification code';
-$lang->user->setEmail        = 'Configure Email';
+$lang->user->setEmail        = 'Change Email';
 $lang->user->setMobile       = 'Configure Mobile';
 $lang->user->newEmail        = 'Email';
 $lang->user->rank            = 'Ranking';
@@ -98,7 +99,7 @@ $lang->user->editProfile = 'Edit';
 $lang->user->thread      = 'Thread';
 $lang->user->messages    = 'Message';
 $lang->user->reply       = 'Reply';
-$lang->user->submittion  = 'Submission';
+$lang->user->submission  = 'Submission';
 
 $lang->user->userHistory       = "User History";
 $lang->user->threadHistory     = "Post";
@@ -107,7 +108,7 @@ $lang->user->commentHistory    = "Comment";
 $lang->user->messageHistory    = "Message";
 $lang->user->orderHistory      = "Order";
 $lang->user->addressHistory    = "Address";
-$lang->user->submittionHistory = "Submission";
+$lang->user->submissionHistory = "Submission";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "Message <span class='label label-badge text-latin'>%s</span>";
@@ -147,7 +148,7 @@ $lang->user->adminList['super']  = 'Super Admin';
 $lang->user->adminList['common'] = 'Admin';
 $lang->user->adminList['no']     = 'User';
 
-$lang->user->accountTypeList['no']      = 'Frontend Account';
+$lang->user->accountTypeList['no']      = 'Front Account';
 $lang->user->accountTypeList['common']  = 'Backend Account';
 
 $lang->user->genderList = new stdclass();
@@ -230,7 +231,7 @@ $lang->user->control->lblPassword = "Leave it blank, if you don't want to change
 $lang->user->navGroups = new stdclass();
 $lang->user->navGroups->user    = 'My Profile';
 $lang->user->navGroups->order   = 'My Order';
-$lang->user->navGroups->message = 'My Message';
+$lang->user->navGroups->message = 'My Post';
 
 $lang->user->control->menus['profile']    = '<i class="icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus['message']    = '<i class="icon-comments-alt"></i> Message <i class="icon-chevron-right"></i>|user|message';
@@ -240,7 +241,7 @@ $lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> 
 $lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> Address <i class="icon-chevron-right"></i>|address|browse';
 $lang->user->control->menus['thread']     = '<i class="icon-comment"></i> Thread <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus['reply']      = '<i class="icon-reply"></i> Reply <i class="icon-chevron-right"></i>|user|reply';
-$lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> Submission <i class="icon-chevron-right"></i>|article|submittion'; 
+$lang->user->control->menus['submission'] = '<i class="icon-envelope"></i> Submission <i class="icon-chevron-right"></i>|article|submission'; 
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = 'Log';
@@ -264,3 +265,13 @@ $lang->user->forceYangcong        = 'Yangcong has been open, please confirm your
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your password.';
 $lang->user->placeholder->verifyCode = 'Please enter verification code received by Email.';
+
+$lang->user->filterUsernameSensitive = 'Username Filter';
+
+$lang->user->filterUsernameSensitiveList = array(); 
+$lang->user->filterUsernameSensitiveList['open']  = 'open';
+$lang->user->filterUsernameSensitiveList['close'] = 'close';
+
+$lang->user->usernameSensitive    = 'Sensitive Username';
+$lang->user->usernameIsSensitive  = 'Username can not be sensitive, please change it';
+$lang->user->usernameSensitiveTip = 'Mutiple sensitive usernames should be devided by quote';

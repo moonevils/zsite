@@ -27,6 +27,18 @@
         <?php endforeach;?>
       </ul>
     </div>
+    
+    <?php if(commonModel::isAvailable('article')):?>
+    <div class='clearfix sitemap-tree'> 
+      <h4><?php echo $lang->sitemap->articleList;?></h4>
+      <ul class='tree'>
+        <?php foreach($articles as $article):?>
+        <li class='articleItem'><?php echo html::a(helper::createLink('article', 'view', "id=$article->id", "category={$article->category->alias}&name=$article->alias"), $article->title);?></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <?php endif;?>
+    
     <?php if(strpos($productTree, '<li>') !== false):?>
     <div class='clearfix sitemap-tree'> 
       <h4><?php echo $lang->sitemap->productCategory?></h4>

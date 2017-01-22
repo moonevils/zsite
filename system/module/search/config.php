@@ -2,7 +2,8 @@
 $config->search = new stdclass();
 
 $config->search->buildOrder = array();
-$config->search->buildOrder['article'] = 'product';
+$config->search->buildOrder['article'] = 'blog';
+$config->search->buildOrder['blog']    = 'product';
 $config->search->buildOrder['product'] = 'page';
 $config->search->buildOrder['page']    = 'thread';
 $config->search->buildOrder['thread']  = 'book';

@@ -173,11 +173,11 @@ $lang->site->scoreList['close'] = '禁用';
 $lang->site->cdnList['open']  = '啟用';
 $lang->site->cdnList['close'] = '關閉';
 
-$lang->site->cacheTypes['close'] = '關閉';
 $lang->site->cacheTypes['file']  = '啟用';
+$lang->site->cacheTypes['close'] = '關閉';
 
-$lang->site->cachePageOptions['close'] = '關閉';
 $lang->site->cachePageOptions['open']  = '開啟';
+$lang->site->cachePageOptions['close'] = '關閉';
 
 $lang->site->filterFunctionList['open']  = '啟用';
 $lang->site->filterFunctionList['close'] = '關閉';
@@ -193,9 +193,9 @@ $lang->site->moduleAvailable->content['book']       = '手冊';
 $lang->site->moduleAvailable->user = array();
 $lang->site->moduleAvailable->user['user']       = '會員';
 $lang->site->moduleAvailable->user['forum']      = '論壇';
-$lang->site->moduleAvailable->user['message']    = '評論留言';
-$lang->site->moduleAvailable->user['submittion'] = '投稿';
 $lang->site->moduleAvailable->user['score']      = '積分';
+$lang->site->moduleAvailable->user['message']    = '評論留言';
+$lang->site->moduleAvailable->user['submission'] = '投稿';
 
 $lang->site->moduleAvailable->mall = array();
 $lang->site->moduleAvailable->mall['shop']    = '商城';
@@ -259,7 +259,7 @@ $lang->site->menus['article']    = '文章';
 $lang->site->menus['page']       = '單頁';
 $lang->site->menus['blog']       = '博客';
 $lang->site->menus['book']       = '手冊';
-$lang->site->menus['submittion'] = '投稿';
+$lang->site->menus['submission'] = '投稿';
 $lang->site->menus['product']    = '產品';
 $lang->site->menus['user']       = '會員';
 $lang->site->menus['wechat']     = '微信';
@@ -271,3 +271,5 @@ $lang->site->menus['security']   = '安全';
 
 $lang->site->fileAuthority = '需要修改寫入檔案的權限，Linux下的運行命令為<code>%s</code>';
 $lang->site->fileRequired  = '需要創建檔案，Linux下的運行命令為<code>%s</code>';
+
+$lang->site->wechatLoginTip = '使用微信登錄需要開啟PHP的openssl擴展';

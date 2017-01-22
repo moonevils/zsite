@@ -67,25 +67,17 @@ class fileModel extends model
      * @access public
      * @return array
      */
-    public function getInvalidList()
+    public function getInvalidList($pager)
     {
+        $dataRoot     = $this->app->getDataRoot();
+        $uploadFiles  = glob($dataRoot . "/upload/*/*"); 
         $invalidFiles = array();
-
-        $zdb      = $this->app->loadClass('zdb');
-        $fileName = $this->app->getTmpRoot() . 'checkInvalidFile' . '.sql';
-        $tables   = array(TABLE_FILE, TABLE_ARTICLE, TABLE_BLOCK, TABLE_BOOK, TABLE_CONFIG, TABLE_ORDER, TABLE_PACKAGE, TABLE_PRODUCT, TABLE_PRODUCT_CUSTOM, TABLE_REPLY, TABLE_SLIDE, TABLE_THREAD, TABLE_USER, TABLE_WIDGET, TABLE_WX_PUBLIC, TABLE_WX_MESSAGE);
-        $zdb->dump($fileName, $tables);
-        
-        $sqlContent  = file_get_contents($fileName);
-        $dataRoot    = $this->app->getDataRoot();
-        $uploadFiles = glob($dataRoot . "/upload/*/*"); 
-        
         foreach($uploadFiles as $uploadFile)
         {
             $name = basename($uploadFile);
             $tag  = substr(substr($name, strpos($name, '_') + 1), 0, strpos($name, '.') - 2);
             if(strlen($tag) < 10) continue;
-            if(strpos($sqlContent, $tag) === false) $invalidFiles[] = $uploadFile;
+            if(!$this->checkExistence($tag)) $invalidFiles[] = $uploadFile; 
         }
         
         $unusedFiles = array();
@@ -100,11 +92,36 @@ class fileModel extends model
                   
             $unusedFiles[] = $unusedFile;
         }   
+
+        $pager->recTotal  = count($unusedFiles);
+        $pager->pageTotal = ceil($pager->recTotal / $pager->recPerPage);
+        $unusedFiles      = array_slice($unusedFiles, ($pager->pageID - 1) * $pager->recPerPage, $pager->recPerPage);
+        
         return $unusedFiles;
     }
 
+    /*
+     * Check existence of filename in the database
+     *
+     * @param  string $fileTag
+     * @access public 
+     * @return bool
+     */
+    public function checkExistence($fileTag)
+    {
+        foreach($this->config->file->tables as $tableInfo)
+        {
+            list($table, $field) = explode('.', $tableInfo);
+            $table = $this->config->db->prefix . $table;
+            $searchResult = $this->dao->select("count('*') as count")->from($table)->where($field)->like("%$fileTag%")->fetch('count'); 
+            if($searchResult) return true;
+        }
+        
+        return false;
+    }
+
     /* 
-     * Delete the 
+     * Delete the unused file 
      */
     public function deleteInvalidFile($pathname) 
     {
@@ -546,7 +563,7 @@ class fileModel extends model
      */
     public function setPathName($file, $objectType = 'upload')
     {
-        if(strpos('slide,source', $objectType) === false)
+        if(strpos('slide,source,themePackage', $objectType) === false)
         {
             $sessionID  = session_id();
             $randString = substr($sessionID, mt_rand(0, strlen($sessionID) - 5), 3);
@@ -558,6 +575,10 @@ class fileModel extends model
             $template = $this->config->template->{$this->app->clientDevice}->name;
             $theme    = $this->config->template->{$this->app->clientDevice}->theme;
             return "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
+        }
+        elseif($objectType == 'themePackage')
+        {
+            return "{$file['title']}.{$file['extension']}"; 
         }
         
         /* rand file name more */
@@ -584,6 +605,12 @@ class fileModel extends model
             $theme    = $this->config->template->{$this->app->clientDevice}->theme;
             $savePath = $this->app->getDataRoot() . "source/{$template}/{$theme}/";
             $this->savePath = $this->app->getDataRoot();
+        }
+
+        if($objectType == 'themePackage')
+        {
+            $savePath       = $this->app->getTmpRoot() . "package/";
+            $this->savePath = $savePath;
         }
 
         if(!file_exists($savePath)) 
@@ -1038,6 +1065,7 @@ class fileModel extends model
 
         extract($_FILES[$htmlTagName]);
         if(!validater::checkFileName($name)) return;
+        if($this->post->name) $name = $this->post->name;
 
         $file = array();
         $file['id'] = 0;
@@ -1048,7 +1076,7 @@ class fileModel extends model
         $file['tmpname']   = $tmp_name;
         $file['uuid']      = $_POST['uuid'];
         $file['pathname']  = $this->setPathName($file, $objectType);
-        $file['chunkpath'] = $path . 'chunks' . DS .'f_' . $file['uuid'] . '.' . $file['extension'] . '.part';
+        $file['chunkpath'] = 'chunks' . DS .'f_' . $file['uuid'] . '.' . $file['extension'] . '.part';
         $file['chunks']    = isset($_POST['chunks']) ? intval($_POST['chunks']) : 0;
         $file['chunk']     = isset($_POST['chunk']) ? intval($_POST['chunk']) : 0;
 
@@ -1067,7 +1095,9 @@ class fileModel extends model
      */
     public function saveUploadFile($file, $objectType = 'upload', $objectID = '', $extra = '')
     {
+        $now = helper::now();
         if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
+        if($objectType == 'themePackage')  $this->config->file->allowed  = ',zip,';
         if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
         {
             $file['pathname'] .= '.txt';
@@ -1116,8 +1146,8 @@ class fileModel extends model
             $file['addedBy']    = $this->app->user->account;
             $file['addedDate']  = $now;
             $file['extra']      = $extra;
-            $file['width']      = $imageSize['width'];
-            $file['height']     = $imageSize['height'];
+            $file['width']      = isset($imageSize['width']) ? $imageSize['width'] : 0;
+            $file['height']     = isset($imageSize['height']) ? $imageSize['height'] : 0;
             $file['lang']       = 'all';
             if($objectType == 'logo') $file['lang'] = $this->app->getClientLang();
             unset($file['tmpname']);
@@ -1126,8 +1156,12 @@ class fileModel extends model
             unset($file['chunks']);
             unset($file['chunk']);
             unset($file['chunkpath']);
-            $this->dao->insert(TABLE_FILE)->data($file)->exec();
-            $file['id'] = $this->dao->lastInsertId();
+            
+            if($objectType != 'themePackage')
+            {
+                $this->dao->insert(TABLE_FILE)->data($file)->exec();
+                $file['id'] = $this->dao->lastInsertId();
+            }
         }
 
         return $file;

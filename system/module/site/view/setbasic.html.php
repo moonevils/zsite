@@ -55,7 +55,7 @@
               $firstType = false;
             }
           ?>
-          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->{$moduleType}, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
+          <td colspan='2' class='setModules'><?php echo html::checkbox('modules', $lang->site->moduleAvailable->{$moduleType}, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
         </tr>
         <?php endforeach;?>
         <tr>

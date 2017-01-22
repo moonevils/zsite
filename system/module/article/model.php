@@ -113,10 +113,10 @@ class articleModel extends model
                 ->page($pager)
                 ->fetchAll('id');
         }
-        elseif($type == 'submittion')
+        elseif($type == 'submission')
         {
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
-                ->where('submittion')->ne(0)
+                ->where('submission')->ne(0)
                 ->beginIf(RUN_MODE == 'front')
                 ->andWhere('addedBy')->eq($this->app->user->account)
                 ->fi()
@@ -372,14 +372,14 @@ class articleModel extends model
             ->add('type', $type)
             ->add('addedBy', $this->app->user->account)
             ->setIF(!$this->post->isLink, 'link', '')
-            ->setIF(RUN_MODE == 'front', 'submittion', 1)
+            ->setIF(RUN_MODE == 'front', 'submission', 1)
             ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', 0)
             ->stripTags('content,link,videoLink', $this->config->allowedTags->admin)
             ->removeIF($type == 'video', 'videoLink, width, height, autoplay')
             ->get();
         if(!isset($article->categories)) $article->categories = '';
 
-        if($type == 'submittion')
+        if($type == 'submission')
         {
             $article->author = $this->app->user->account;
             if(!empty($this->app->user->nickname)) $article->author = $this->app->user->nickname;
@@ -410,8 +410,8 @@ class articleModel extends model
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type != 'page' and $type != 'submittion' and !$this->post->isLink, $this->config->article->require->create, 'notempty')
-            ->batchCheckIF($type == 'submittion', $this->config->article->require->post, 'notempty')
+            ->batchCheckIF($type != 'page' and $type != 'submission' and !$this->post->isLink, $this->config->article->require->create, 'notempty')
+            ->batchCheckIF($type == 'submission', $this->config->article->require->post, 'notempty')
             ->batchCheckIF($type == 'page' and !$this->post->isLink, $this->config->article->require->page, 'notempty')
             ->batchCheckIF($type != 'page' and $this->post->isLink, $this->config->article->require->link, 'notempty')
             ->batchCheckIF($type == 'page' and $this->post->isLink, $this->config->article->require->pageLink, 'notempty')
@@ -426,9 +426,9 @@ class articleModel extends model
 
         /* Save article keywords. */
         $this->loadModel('tag')->save($article->keywords);
-        if($type != 'page' and $type != 'submittion') $this->processCategories($articleID, $type, $this->post->categories);
+        if($type != 'page' and $type != 'submission') $this->processCategories($articleID, $type, $this->post->categories);
 
-        if($article->submittion == 0)
+        if($article->submission == 0)
         {
             $article = $this->getByID($articleID);
             $this->loadModel('search')->save($type, $article);
@@ -558,8 +558,8 @@ class articleModel extends model
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type == 'submittion', $this->config->article->require->post, 'notempty')
-            ->batchCheckIF($type != 'page' and $type != 'submittion' and !$this->post->isLink, $this->config->article->require->edit, 'notempty')
+            ->batchCheckIF($type == 'submission', $this->config->article->require->post, 'notempty')
+            ->batchCheckIF($type != 'page' and $type != 'submission' and !$this->post->isLink, $this->config->article->require->edit, 'notempty')
             ->batchCheckIF($type == 'page' and !$this->post->isLink, $this->config->article->require->page, 'notempty')
             ->batchCheckIF($type != 'page' and $this->post->isLink, $this->config->article->require->link, 'notempty')
             ->batchCheckIF($type == 'page' and $this->post->isLink, $this->config->article->require->pageLink, 'notempty')
@@ -573,13 +573,13 @@ class articleModel extends model
         if(dao::isError()) return false;
 
         $this->loadModel('tag')->save($article->keywords);
-        if($type != 'page' and $type != 'submittion') $this->processCategories($articleID, $type, $this->post->categories);
+        if($type != 'page' and $type != 'submission') $this->processCategories($articleID, $type, $this->post->categories);
 
         if(dao::isError()) return false;
 
         $article = $this->getByID($articleID);
         if(empty($article)) return false;
-        if($type == 'submittion') return true;
+        if($type == 'submission') return true;
         return $this->loadModel('search')->save($type, $article);
     }
         
@@ -595,8 +595,8 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if(!$article) return false;
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) die();
-        /* If this article is a submittion and has been adopt, front cannot delete it.*/
-        if(RUN_MODE == 'front' and $article->submittion == 2) die();
+        /* If this article is a submission and has been adopt, front cannot delete it.*/
+        if(RUN_MODE == 'front' and $article->submission == 2) die();
 
         $this->dao->delete()->from(TABLE_RELATION)->where('id')->eq($articleID)->andWhere('type')->eq($article->type)->exec();
         $this->dao->delete()->from(TABLE_ARTICLE)->where('id')->eq($articleID)->exec();
@@ -735,13 +735,13 @@ class articleModel extends model
     public function saveSetting()
     {
         $setting = new stdclass();
-        $setting->submittion = $this->post->submittion; 
+        $setting->submission = $this->post->submission; 
         $this->loadModel('setting')->setItems('system.common.article', $setting);
         return !dao::isError();
     }
 
     /**
-     * Approve an submittion. 
+     * Approve an submission. 
      * 
      * @param  int    $articleID 
      * @access public
@@ -750,13 +750,13 @@ class articleModel extends model
     public function approve($articleID, $type, $categories)
     {
         $this->processCategories($articleID, $type, $categories);
-        $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submittion')->eq(2)->where('id')->eq($articleID)->exec();
+        $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submission')->eq(2)->where('id')->eq($articleID)->exec();
         $article = $this->getByID($articleID);
-        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmittion', 'article', $articleID, '', $article->addedBy);
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmission', 'article', $articleID, '', $article->addedBy);
         
-        $this->loadModel('file')->updateObjectType($articleID, 'submittion', $type);
+        $this->loadModel('file')->updateObjectType($articleID, 'submission', $type);
         $this->loadModel('search')->save($article->type, $article);
-        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmittion));
+        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmission));
 
         return !dao::isError();
     }
@@ -770,7 +770,7 @@ class articleModel extends model
      */
     public function reject($articleID)
     {
-        $this->dao->update(TABLE_ARTICLE)->set('submittion')->eq(3)->where('id')->eq($articleID)->exec();
+        $this->dao->update(TABLE_ARTICLE)->set('submission')->eq(3)->where('id')->eq($articleID)->exec();
         $article = $this->getByID($articleID);
         $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->rejectMessage, $article->title));
 
@@ -778,16 +778,16 @@ class articleModel extends model
     }
 
     /**
-     * Get new submittion list.
+     * Get new submission list.
      * 
      * @access public
      * @return array
      */
-    public function getSubmittions($limit)
+    public function getSubmissions($limit)
     {
         return $this->dao->select('*')->from(TABLE_ARTICLE)
-            ->where('type')->eq('submittion')
-            ->andWhere('submittion')->ne(3)
+            ->where('type')->eq('submission')
+            ->andWhere('submission')->ne(3)
             ->andWhere('editedDate')->like(date("Y-m-d") . '%')
             ->fetchAll('id');
     }

@@ -13,7 +13,7 @@ js::set('random', $this->session->random);
       </h4>
       <div class='pull-right'>
         <div class='dropdown' id='langs'>
-          <button class='btn' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class='caret'></span></button>
+          <button class='btn' style='width:81px' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class='caret'></span></button>
           <ul class='dropdown-menu'>
             <?php foreach($config->langs as $key => $value):?>
             <li class="<?php echo $key == $this->app->getClientLang() ? 'active' : ''; ?>">
@@ -28,7 +28,11 @@ js::set('random', $this->session->random);
       <div id='formError' class='alert alert-danger hiding'></div>
       <div class='row'>
         <div class='col-xs-4 text-center'>
+        <?php if($this->app->clientLang == 'en'):?>
+        <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.en.png'); ?>
+        <?php else:?>
         <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.png'); ?>
+        <?php endif;?>
         </div>
         <div class='col-xs-8'>
           <table class="table table-form">
@@ -44,7 +48,13 @@ js::set('random', $this->session->random);
               <th><?php echo html::a('', $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
               <td>
                 <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn');?>
-                <?php if(!empty($this->config->site->yangcong)) echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<i class='icon icon-qrcode icon-lg'> {$lang->user->yangcongLogin}</i>", "class='btn btn-success pull-right' data-toggle='modal'");?>
+                <?php 
+                  if(!empty($this->config->site->yangcong)) 
+                  {        
+                    $yangcongConfig = json_decode($this->config->site->yangcong);
+                    if(zget($yangcongConfig, 'appID', '')) echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<i class='icon icon-qrcode icon-lg'> {$lang->user->yangcongLogin}</i>", "class='btn btn-success' data-toggle='modal'");
+                  }
+                ?>
               </td>
             </tr>
           </table>

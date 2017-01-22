@@ -1,8 +1,6 @@
 <?php 
 $lang->admin->common        = '後台管理';
 $lang->admin->index         = '首頁';
-$lang->admin->ignore        = '忽略安全警告';
-$lang->admin->ignoreupgrade = '忽略升級提示';
 $lang->admin->checked       = '已認證';
 
 $lang->admin->shortcuts = new stdclass();
@@ -21,12 +19,6 @@ $lang->admin->order        = '最新訂單';
 $lang->admin->feedback     = '最新反饋';
 
 $lang->admin->adminEntry     = '警告：您現在的管理入口還是預設的admin.php，建議將admin.php改名以增強系統安全!';
-$lang->admin->orderTitle     = '用戶 %s 創建了一筆 %s 的訂單';
-$lang->admin->message        = '您今天有 %s 條留言待審核';
-$lang->admin->reply          = '您今天有 %s 條回覆待審核';
-$lang->admin->comment        = '您今天有 %s 條評論待審核';
-$lang->admin->threadReply    = '您今天有 %s 篇回帖';
-$lang->admin->submittion     = '您今天有 %s 篇投稿待審核';
 
 $lang->admin->connectApiFail = "不能連接到蟬知社區，請檢查您的網絡設置後 <a href='javascritp:loaction.reload()'>重試</a>。";
 $lang->admin->registerInfo   = "站點已經綁定到蟬知賬號%s，%s";

@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = '會員';
+$lang->user->setting   = '會員設置';
 
 $lang->user->id         = '編號';
 $lang->user->account    = '用戶名';
@@ -98,7 +99,7 @@ $lang->user->editProfile = '編輯信息';
 $lang->user->thread      = '我的主題';
 $lang->user->messages    = '我的消息';
 $lang->user->reply       = '我的回貼';
-$lang->user->submittion  = '我的投稿';
+$lang->user->submission  = '我的投稿';
 
 $lang->user->userHistory       = "用戶歷史數據";
 $lang->user->threadHistory     = "發帖";
@@ -107,7 +108,7 @@ $lang->user->commentHistory    = "評論";
 $lang->user->messageHistory    = "留言";
 $lang->user->orderHistory      = "訂單";
 $lang->user->addressHistory    = "地址";
-$lang->user->submittionHistory = "投稿";
+$lang->user->submissionHistory = "投稿";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
@@ -240,7 +241,7 @@ $lang->user->control->menus['order']      = '<i class="icon-shopping-cart"></i> 
 $lang->user->control->menus['address']    = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
 $lang->user->control->menus['thread']     = '<i class="icon-comment"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus['reply']      = '<i class="icon-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
-$lang->user->control->menus['submittion'] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submittion'; 
+$lang->user->control->menus['submission'] = '<i class="icon-envelope"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|submission'; 
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = '日誌';
@@ -264,3 +265,13 @@ $lang->user->forceYangcong        = '已開啟強制洋蔥登錄，普通登錄�
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';
 $lang->user->placeholder->verifyCode = '請輸入驗證郵件裡面收到的驗證碼';
+
+$lang->user->filterUsernameSensitive = '用戶名過濾';
+
+$lang->user->filterUsernameSensitiveList = array(); 
+$lang->user->filterUsernameSensitiveList['open']  = '開啟';
+$lang->user->filterUsernameSensitiveList['close'] = '關閉';
+
+$lang->user->usernameSensitive    = '用戶名敏感詞';
+$lang->user->usernameIsSensitive  = '用戶名或者真實姓名不能含有敏感詞，請修改後再提交';
+$lang->user->usernameSensitiveTip = '多個敏感詞之間請用英文逗號分隔';

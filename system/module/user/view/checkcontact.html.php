@@ -10,8 +10,20 @@
   </tr> 
   <tr>
     <th class='w-80px'><?php echo $lang->user->email;?></th>
-    <td><?php echo $user->email;?></td>
+    <td>
+      <?php echo $user->email;?>
+      <?php if(zget($user, 'emailCertified', 0) == 1) echo "<i class='icon icon-envelope'> </i>";?>
+    </td>
   </tr> 
+  <?php if(!empty($user->mobile)):?>
+  <tr>
+    <th class='w-80px'><?php echo $lang->user->mobile;?></th>
+    <td>
+      <?php echo $user->mobile;?>
+      <?php if(zget($user, 'mobileCertified', 0) == 1) echo "<i class='icon icon-mobile' title='{$lang->user->certified}'> </i>";?>
+    </td>
+  </tr> 
+  <?php endif;?>
   <?php if(!empty($user->phone)):?>
   <tr>
     <th class='w-80px'><?php echo $lang->user->phone;?></th>

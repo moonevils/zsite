@@ -51,7 +51,7 @@ $lang->score->methods['delReply']    = 'Delete Reply';
 $lang->score->methods['award']       = 'Reward';
 $lang->score->methods['punish']      = 'Deduct';
 
-$lang->score->methods['approvesubmittion'] = 'Submitted';
+$lang->score->methods['approvesubmission'] = 'Submitted';
 
 $lang->score->methods['buyscore']  = 'Purchase';
 $lang->score->methods['statement'] = 'Point Statement';
@@ -75,8 +75,8 @@ $lang->score->lblStateSuccess  = 'Point statement is generated.';
 $lang->score->setAmount   = 'Refill Amount';
 $lang->score->getScore    = 'Refill Points';
 $lang->score->amountUnit  = 'Dollar';
-$lang->score->minAmount   = 'Cent';
-$lang->score->buyWaring   = "cent refill is %s dollar，1 dollar=%s Points";
+$lang->score->minAmount   = 'Minimum refill';
+$lang->score->buyWaring   = " Minimum refill is %s dollar，1 dollar=%s Points";
 $lang->score->errorAmount = "Refill amount should be more than %s Dollars.";
 $lang->score->alipay      = "Use AliPay right now!";
 $lang->score->paySuccess  = 'Thank you for your payment!';

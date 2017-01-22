@@ -246,22 +246,29 @@ class orderModel extends model
     {
         if($type == 'shop') $type = 'order';
 
+        $clientDevice = isset($this->app->clientDevice) ? $this->app->clientDevice : 'desktop';
+
         $this->app->loadClass('alipay', true);
         $alipayConfig = $order->payment == 'alipay' ? $this->config->alipay->direct : $this->config->alipay->secured;
+
+        if($clientDevice == 'mobile') $alipayConfig->service = 'alipay.wap.create.direct.pay.by.user';
 
         /* Create right link that module is not order in order-browse page, such as score. */
         $notifyURL = empty($type) ? inlink('processorder', "type=alipay&mode=notify") : helper::createLink($type, 'processorder', "type=alipay&mode=notify");
         $returnURL = empty($type) ? inlink('processorder', "type=alipay&mode=return") : helper::createLink($type, 'processorder', "type=alipay&mode=return");
+        $showURL   = helper::createLink('order', 'check', "orderID={$order->id}");
 
         $alipayConfig->notifyURL = commonModel::getSysURL() . $notifyURL;
         $alipayConfig->returnURL = commonModel::getSysURL() . $returnURL;
-        $alipayConfig->pid   = $this->config->alipay->pid;
-        $alipayConfig->key   = $this->config->alipay->key;
-        $alipayConfig->email = $this->config->alipay->email;
+        $alipayConfig->showURL   = $clientDevice == 'mobile' ? commonModel::getSysURL() . $showURL : ''; 
+        $alipayConfig->pid    = $this->config->alipay->pid;
+        $alipayConfig->key    = $this->config->alipay->key;
+        $alipayConfig->email  = $this->config->alipay->email;
+        $alipayConfig->device = $clientDevice; 
         
-        $alipay = new alipay($alipayConfig);
+        $alipay   = new alipay($alipayConfig);
 
-        $subject = $this->getSubject($order->id);
+        $subject  = $this->getSubject($order->id);
 
         return $alipay->createPayLink($this->getHumanOrder($order->id),  $subject, $order->amount);
     }
@@ -526,11 +533,11 @@ class orderModel extends model
         $this->commonLink = array();
         $this->commonLink['savePayment'] = true;
         $this->commonLink['cancelLink']  = true;
+        $toggle = $btnLink ? '' : "data-toggle='modal'";
 
         if(RUN_MODE == 'admin')
         {
             $class  = $btnLink ? 'btn' : '';
-            $toggle = $btnLink ? '' : "data-toggle='modal'";
             
             /* View order link */ 
             if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id&btnLink=false"), $this->lang->order->view, $toggle);
@@ -583,10 +590,10 @@ class orderModel extends model
      */
     public function printShopActions($order, $btnLink = false)
     {
+        $toggle = $btnLink ? '' : "data-toggle='modal'";
         if(RUN_MODE == 'admin' )
         {
             $class  = $btnLink ? 'btn' : '';
-            $toggle = $btnLink ? '' : "data-toggle='modal'";
 
             /* Edit link. */
             $disabled = $order->status == 'normal' ? '' : "disabled = 'disabled'";
@@ -612,7 +619,7 @@ class orderModel extends model
            
             /* Edit link. */
             $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
-            echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "data-toggle='modal' class='$class'");
+            echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "{$toggle} class='$class'");
 
             /* Track link. */
             $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
@@ -927,7 +934,18 @@ class orderModel extends model
 
         return sprintf($this->lang->order->payInfo, $this->config->site->name, date('Y-m-d'));
     }
-    
+
+    /**
+     * Get the show url of order
+     *
+     * @param  int $orderID
+     * @access public 
+     * @return string
+     */ 
+    public function getShowUrl($orderID)
+    {
+        return commonModel::getSysURL() . helper::createLink('order', 'check', "orderID=$orderID");
+    }
     /** 
      * Save the save pay data
      *

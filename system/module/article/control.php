@@ -98,15 +98,15 @@ class article extends control
     {   
         if($this->get->tab == 'user') 
         {
-            $type = 'submittion';
-            $this->lang->menuGroups->article = 'submittion';
+            $type = 'submission';
+            $this->lang->menuGroups->article = 'submission';
             if($this->app->cookie->currentGroup == 'home')
             {
                 $this->session->currentGroup = 'user';
                 $this->app->cookie->currentGroup = 'user';
             }
             unset($this->lang->article->menu);
-            $this->view->title = $this->lang->submittion->common;
+            $this->view->title = $this->lang->submission->common;
         }
         else
         {
@@ -123,7 +123,7 @@ class article extends control
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
         $articles = $sticks + $articles;
 
-        if($type != 'page' and $type != 'submittion') 
+        if($type != 'page' and $type != 'submission') 
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
             $this->view->treeManageLink =  html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
@@ -158,14 +158,17 @@ class article extends control
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         if(empty($categories) && $type != 'page')
         {
-            die(js::locate($this->createLink('tree', 'redirect', "type=$type")));
+            $this->view->reason = isset($this->lang->article->noCategories[$type]) ? $this->lang->article->noCategories[$type] : $this->lang->article->noCategoriesTip;
+            $this->view->locate = helper::createLink('tree', 'browse', "type=$type");
+            $this->display('common', 'redirect');
+            die();
         }
 
         if($_POST)
         {
             $this->article->create($type);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('submittion')));
+            if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('submission')));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
         }
 
@@ -186,7 +189,7 @@ class article extends control
     }
 
     /**
-     * Create an submittion.
+     * Create an submission.
      * 
      * @param  string $type 
      * @param  int    $categoryID
@@ -195,12 +198,12 @@ class article extends control
      */
     public function post()
     {
-        if(!commonModel::isAvailable('submittion')) die();
+        if(!commonModel::isAvailable('submission')) die();
         if($_POST)
         {
-            $this->article->create('submittion');
+            $this->article->create('submission');
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('submittion')));
+            if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('submission')));
         }
 
         $this->view->title = $this->lang->article->create;
@@ -208,7 +211,7 @@ class article extends control
     }
 
     /**
-     * edit an submittion.
+     * edit an submission.
      * 
      * @param  string $type 
      * @param  int    $categoryID
@@ -217,15 +220,15 @@ class article extends control
      */
     public function modify($articleID)
     {
-        if(!commonModel::isAvailable('submittion')) die();
+        if(!commonModel::isAvailable('submission')) die();
         $article = $this->article->getByID($articleID);
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) return false;
 
         if($_POST)
         {
-            $this->article->update($articleID, 'submittion');
+            $this->article->update($articleID, 'submission');
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('submittion')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('submission')));
         }
 
         $this->view->title      = $this->lang->article->edit;
@@ -234,7 +237,7 @@ class article extends control
     }
 
     /**
-     * check submittion.
+     * check submission.
      * 
      * @param  int    $id 
      * @access public
@@ -249,13 +252,13 @@ class article extends control
             if(empty($categories))$this->send(array('result' => 'fail', 'message' => $this->lang->article->categoryEmpty));
             $result = $this->article->approve($id, $type, $categories);
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submittion&tab=feedback")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submission&tab=feedback")));
         }
 
         unset($this->lang->article->menu);
         $this->lang->menuGroups->article = 'user';
         
-        $this->view->title             = $this->lang->submittion->check;
+        $this->view->title             = $this->lang->submission->check;
         $this->view->article           = $this->article->getByID($id);
         $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->blogCategories    = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
@@ -496,34 +499,34 @@ class article extends control
     }
 
     /**
-     * Manage article submittion.
+     * Manage article submission.
      * 
      * @access public
      * @return void
      */
-    public function submittion($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function submission($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        if(!commonModel::isAvailable('submittion')) die();
+        if(!commonModel::isAvailable('submission')) die();
         $this->app->loadLang('user');
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
-            ->where('submittion')->ne(0)
+            ->where('submission')->ne(0)
             ->andWhere('addedBy')->eq($this->app->user->account)
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchall('id'); 
         
-        $this->view->title    = $this->lang->user->submittion;
+        $this->view->title    = $this->lang->user->submission;
         $this->view->articles = $articles;
 
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
 
-        $this->view->mobileURL  = helper::createLink('article', 'submittion', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('article', 'submittion', '', '', 'html');
+        $this->view->mobileURL  = helper::createLink('article', 'submission', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('article', 'submission', '', '', 'html');
         $this->display();
     }
 
@@ -538,6 +541,6 @@ class article extends control
     {
         $result = $this->article->reject($articleID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submittion&tab=feedback")));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submission&tab=feedback")));
     }
 }

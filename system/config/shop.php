@@ -24,6 +24,7 @@ $config->alipay->direct->map['payType']   = 'payment_type';
 $config->alipay->direct->map['charset']   = '_input_charset';
 $config->alipay->direct->map['notifyURL'] = 'notify_url';
 $config->alipay->direct->map['returnURL'] = 'return_url';
+$config->alipay->direct->map['showURL']   = 'show_url';
 
 $config->alipay->direct->map['pid']       = 'partner';
 $config->alipay->direct->map['key']       = 'security_code';

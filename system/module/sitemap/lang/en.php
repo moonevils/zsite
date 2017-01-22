@@ -10,7 +10,8 @@
  * @link        http://www.chanzhi.org
  */
 $lang->sitemap->productCategory = 'Products';
-$lang->sitemap->articleCategory = 'Articles';
+$lang->sitemap->articleCategory = 'Article Category';
+$lang->sitemap->articleList     = 'Article List';
 $lang->sitemap->blogCategory    = 'Blogs';
 $lang->sitemap->boards          = 'Boards';
 $lang->sitemap->books           = 'Books';

@@ -45,6 +45,14 @@ class alipay
         {
             if(isset($this->config->$ourKey) and $this->config->$ourKey and $ourKey != 'key') $params[$aliKey] = $this->config->$ourKey;
         }
+        
+        if($this->config->device == 'mobile') 
+        {
+            $params['seller_id'] = $this->config->pid;
+            $params['app_pay']   = 'Y';
+            unset($params['seller_email']);
+        }
+
         $params['sign'] = $this->createSign($params);
         return $params;
     }

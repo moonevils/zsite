@@ -1,10 +1,10 @@
 .panel-body.shortcutGroup{padding-top: 35px;}
 .shortcutGroup > a{margin: 10px 20px; font-size: 13px;}
-@media(min-width:768px){#shortcutBox{margin-top: 20px;}}
-@media(min-width:1200px){#shortcutBox{margin-top: 30px;}}
-@media(min-width:1400px){#shortcutBox{margin-top: 20px;}}
+@media(min-width:768px){#shortcutBox{margin-top: 15px;}}
+@media(min-width:1200px){#shortcutBox{margin-top: 15px;}}
+@media(min-width:1400px){#shortcutBox{margin-top: 15px;}}
 body {background: #fafafa;}
-#shortcutBox{max-width:94%}
+#shortcutBox{max-width:95%;margin-left:17px;}
 
 .page-content {margin-top: -19px; border-top: 1px solid #3280fc;}
 .dashboard {position: relative;}
@@ -98,3 +98,5 @@ body {background: #fafafa;}
 .block.input-group-btn .btn-primary .caret, .block.input-group-btn .btn-success .caret, .block.input-group-btn .btn-warning .caret, .block.input-group-btn .btn-danger .caret, .block.input-group-btn .btn-info .caret {border-top-color: #333}
 
 #noticeBox{ width:380px; position:fixed; bottom:25px; right:15px; z-index: 9999; }
+
+.shortcutGroup .btn-default{width : 75px; padding-left:10px;}

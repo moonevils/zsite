@@ -24,15 +24,14 @@
     </div>
   </div>
   <?php endforeach;?>
-  <div class='div-tip text-danger'><?php printf($lang->ui->packagePathTip, $packagePath);?></div>
 </div>
+<div class='div-tip text-danger'><?php printf($lang->ui->packagePathTip, $packagePath);?></div>
 <style>
 .theme-panel > .panel-body{padding-top:4px !important; cursor:pointer;}
 .theme-panel > .panel-body > .theme-title{font-size:16px; padding: 10px 0; color:#555; font-weight:bold;}
 .theme-panel .span-size{margin-left:20px;}
 .p-actions{margin-right:10px; padding-left:12px;}
 .p-actions > i {font-size:13px; padding:4px; font-weight:bold;}
-.div-tip{padding-left:10px}
 </style>
 <script>
 $().ready(function()

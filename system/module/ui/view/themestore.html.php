@@ -50,7 +50,11 @@
           </div>
           <div class='theme-info'>
             <div class='theme-price'>
+              <?php if($theme->latestRelease->lifePrice):?>
               <?php echo "<strong class='text-danger price'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
+              <?php elseif($theme->latestRelease->score):?>
+                  <?php echo "<strong class='text-danger price'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
+              <?php endif;?>
               <span class='pull-right'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
               <span class='pull-right'><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
             </div>
@@ -59,7 +63,7 @@
               <div class="dropdown dropup pull-right">
                 <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='icon icon-theme-store icon-cog'></span></button>
                 <ul class="dropdown-menu pull-right">
-                  <li><?php echo html::a($theme->viewLink, $lang->package->view, 'target="_blank"');?></li>
+                  <li><?php echo html::a($theme->viewLink, $lang->package->buy, 'target="_blank"');?></li>
                   <?php
                   if($theme->type != 'computer' and $theme->type != 'mobile')
                   {
@@ -77,15 +81,6 @@
                           }
                       }
                   }
-
-                  if(!$currentRelease->charge)
-                  {
-                      $label = $currentRelease->compatible ? $lang->package->installAuto : $lang->package->installForce;
-                      echo '<li>';
-                      commonModel::printLink('package', 'install',  "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$theme->type&overridePackage=no&ignoreCompitable=yes", $label, "data-toggle='modal'");
-                      echo '</li>';
-                  }
-                  echo '<li>' . html::a($currentRelease->downLink, $currentRelease->charge ? $lang->package->buy : $lang->package->downloadAB, 'class="manual" target="_blank"') . '</li>';
                   echo '<li>' . html::a($theme->site, $lang->package->site, "target='_blank'") . '</li>';
                   ?>
                 </ul>

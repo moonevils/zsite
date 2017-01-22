@@ -159,6 +159,9 @@ class upgradeModel extends model
             case '5_5':
                 $this->fixDetectDeviceConfig();
                 $this->execSQL($this->getUpgradeFile('5.5'));
+            case '5_6':
+                $this->execSQL($this->getUpgradeFile('5.6'));
+                $this->fixWrongWordSubmittion();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -223,6 +226,7 @@ class upgradeModel extends model
             case '5_3_4'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.4'));
             case '5_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.4.1'));
             case '5_5'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.5'));
+            case '5_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.6'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -2091,5 +2095,16 @@ class upgradeModel extends model
                 file_put_contents($myFile, $fixedConfig, FILE_APPEND);
             }
         }
+    }
+
+    /**
+     * Fix the wrong word submittion to submission in database
+     *
+     * @param  void
+     * @access public
+     * @reurn  void
+     */
+    public function fixWrongWordSubmittion()
+    {
     }
 }
