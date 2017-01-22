@@ -1,10 +1,15 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading' style='height:39px;'>
-    <ul id='typeNav' class='nav nav-tabs'>
+    <ul id='typeNav' class='nav nav-tabs pull-left'>
       <li class='<?php echo $type == 'valid' ? 'active' : '';?>' data-type='internal' ><?php echo html::a(inlink('admin', "type=valid"), $lang->file->fileList);?></li>
       <li class='<?php echo $type == 'invalid' ? 'active' : '';?>' data-type='internal' ><?php echo html::a(inlink('admin', "type=invalid"), $lang->file->invalidFile);?></li>
     </ul>
+    <?php if($type == 'invalid'):?>
+      <div class='panel-actions'>
+        <?php echo html::a(inlink('deleteAllInvalid'), $lang->file->clearAllInvalid, 'class="btn btn-primary pull-right"');?>
+      </div>
+    <?php endif;?>
   </div>
   <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
     <?php if($type == 'valid'):?>
