@@ -26,7 +26,7 @@
     <?php $class = 'success';?>
     <?php foreach($messages as $number => $message):?>
     <?php $class = $class == 'success' ? '' : 'success';?>
-    <div class='w-p100 panel comment-item' id="comment<?php echo $message->id?>">
+    <div class='w-p100 panel comment-item commment-panel' id="comment<?php echo $message->id?>">
       <div class='panel-heading content-heading'>
         <i class='icon icon-user'> <?php echo $message->from;?></i>
         <i class='text-muted'> <?php echo $message->date;?></i>
