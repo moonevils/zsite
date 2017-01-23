@@ -78,7 +78,7 @@ var insertable = true;
 var addChoice = function(choiceItem)
 {
     topRightContent = $("[name*=params][name*=topRightContent]").val();
-    topRightContent += '__' + choiceItem.toUpperCase() + ' ';
+    topRightContent += '__' + choiceItem.toUpperCase() + '__ ';
     if(checkChoiceInserted($("[name*=params][name*=topRightContent]").val()))
     {
         insertable = false;
@@ -97,7 +97,7 @@ var addChoice = function(choiceItem)
     }
 };
 var checkChoiceInserted = function(searchedStr){
-    var choices = ['__LOGIN', '__SEARCH', '__LOGINANDSEARCH', 'SEARCHANDLOGIN'];
+    var choices = ['__LOGIN__', '__SEARCH__', '__LOGINANDSEARCH__', '__SEARCHANDLOGIN__'];
     for(var i = 0, l = choices.length; i < l; i++)
     {
        if(searchedStr.indexOf(choices[i]) >= 0) return true;
