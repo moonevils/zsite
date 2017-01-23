@@ -491,6 +491,8 @@ class blockModel extends model
         $data->js      = helper::decodeXSS($data->js);
 
         if($data->params['top']['left'] != 'custom') $data->params['topLeftContent'] = '';
+        if($data->params['top']['right'] != 'custom') $data->params['topRightContent'] = '';
+        
         if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc());

@@ -36,7 +36,18 @@
   <td></td>
 </tr>
 <tr class='top topRight hide'>
-  <td><?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control'");?></td>
+  <td>
+    <?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control'");?>
+    <strong><?php echo $lang->block->insertLink . ':';?></strong>
+    <div class='chosen-container chosen-container-multi'>
+      <ul class='chosen-choices'>
+        <?php foreach($lang->block->header->top->rightOptions as $rightOption => $rightOptionName):?>
+          <?php if($rightOption == '' or $rightOption == 'custom') continue;?>
+          <li class='search-choice' onclick="addChoice('<?php echo $rightOption?>')"><a><?php echo $rightOptionName;?></a></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+  </td>
 </tr>
 <tr class='middle'>
   <th><?php echo $lang->block->header->middle->common;?></th>
@@ -63,8 +74,43 @@
   </td>
 </tr>
 <script>
+var insertable = true;
+var addChoice = function(choiceItem)
+{
+    topRightContent = $("[name*=params][name*=topRightContent]").val();
+    topRightContent += '__' + choiceItem.toUpperCase() + ' ';
+    if(checkChoiceInserted($("[name*=params][name*=topRightContent]").val()))
+    {
+        insertable = false;
+    }
+    else
+    {
+        insertable = true;
+    }
+    if(insertable) 
+    {
+        $("[name*=params][name*=topRightContent]").val(topRightContent); 
+    }
+    else
+    {
+        alert('Please delete the existed one');
+    }
+};
+var checkChoiceInserted = function(searchedStr){
+    var choices = ['__LOGIN', '__SEARCH', '__LOGINANDSEARCH', 'SEARCHANDLOGIN'];
+    for(var i = 0, l = choices.length; i < l; i++)
+    {
+       if(searchedStr.indexOf(choices[i]) >= 0) return true;
+    }
+    return false;
+};
 $(function()
 {
+    if(checkChoiceInserted($("[name*=params][name*=topRightContent]").val()))
+    {
+       insertable = false; 
+    } 
+    
     $('#compatible').change(function()
     {
         $('tr.top, tr.middle, tr.bottom').toggle(!$(this).is(':checked'));
@@ -126,7 +172,8 @@ $(function()
             }
         }
     })
-    
+    $("[name*=params][name*=topRightContent]").bind('input propertychange', function() {
+    });
     $("[name*=params][name*=top][name*=left]").change();
     $("[name*=params][name*=top][name*=right]").change();
 })

@@ -116,6 +116,7 @@ $lang->block->header->bottomOptions['navAndSearch'] = '导航 + 搜索框';
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局";
 $lang->block->add          = "添加";
+$lang->block->insertLink   = '插入';
 $lang->block->addChild     = "子区块";
 $lang->block->template     = "模板";
 $lang->block->create       = '添加区块';
