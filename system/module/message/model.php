@@ -87,8 +87,10 @@ class messageModel extends model
         {
             if($type !== 'simple')
             {
+                echo "<div class='replies'>";
                 foreach($replies as $reply)
                 {
+                    echo "<div class='reply-panel'>";
                     echo "<div class='panel-heading reply-heading'>";
                     echo "<i class='icon icon-user'> {$reply->from}</i> ";
                     echo "<i class='text-muted'>" . $reply->date . "</i>";
@@ -98,7 +100,9 @@ class messageModel extends model
                     echo nl2br($reply->content);
                     echo '</div>';
                     $this->getFrontReplies($reply);
+                    echo "</div>";
                 }
+                echo "</div>";
             }
             else
             {
