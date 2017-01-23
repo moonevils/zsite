@@ -112,9 +112,20 @@
   </div>
 </header>
 
+<?php if($setting->top->right == 'custom'):?>
 <style>
+#searchbar{padding-left: 10px;}
 .custom-top-right {display:inline-block; width:auto; float:right; position:relative;margin-right: 5px;margin-left: 5px;}
+<?php if($this->config->template->desktop->theme != 'wide'):?>
+#searchbar .form-control{height: 25px; line-height: 25px;}
+#searchbar .btn{line-height: 10px;}
+<?php endif;?>
+#searchbar {float: right;}
+#searchbar > form {float: none; margin: 4px 0}
+@media (max-width: 767px){#headNav > .row > #searchbar {display: none}}
 </style>
+<?php endif;?>
+
 <?php if(strpos(strtolower($setting->bottom), 'nav') !== false) include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
 <style>
 #header {padding: 0; margin-bottom: 14px;}
