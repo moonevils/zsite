@@ -10,9 +10,27 @@
  * @link        http://www.chanzhi.org
 */
 ?>
+<?php 
+  $isWidthSearchBar = false;
+  if($setting->top->right and strpos(',searchAndLogin,search,loginAndSearch,', ',' . $setting->top->right . ',') !== false)
+  {
+      $isWidthSearchBar = true;
+  }
+  if($setting->top->right == 'custom')
+  {
+    foreach(array('searchAndLogin', 'search', 'loginAndSearch') as $searchItem)
+    {
+        if(strpos($setting->topRightContent, strtoupper($searchItem)) !== false) 
+        {
+            $isWidthSearchBar = true;
+            break;
+        }
+    }
+  }
+?>
 <header id='header' class='<?php if($setting->bottom) echo 'without-navbar'; ?>'>
   <?php if($setting->top->left or $setting->top->right):?>
-  <div id='headNav' class='<?php if($setting->top->left == 'slogan') echo 'with-slogan' ?><?php if($setting->top->right and strpos(',searchAndLogin,search,loginAndSearch,', ',' . $setting->top->right . ',') !== false) echo ' with-searchbar' ?>'>
+  <div id='headNav' class='<?php if($setting->top->left == 'slogan') echo 'with-slogan' ?><?php if($isWidthSearchBar) echo ' with-searchbar' ?>'>
     <div class='row'>
       <?php if($setting->top->left == 'slogan'):?>
       <div id='siteSlogan' class='nobr'><span><?php echo $this->config->site->slogan;?></span></div>
@@ -30,6 +48,47 @@
       <?php elseif($setting->top->right == 'search'):?>
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
       <?php endif;?>
+      <?php if($setting->top->right == 'custom'):?>
+      <?php
+        $firstPos = strpos($setting->topRightContent, '__') + 2;
+        if($firstPos > 2)
+        {
+            echo " <div class='custom-top-right'>" . htmlspecialchars_decode(substr($setting->topRightContent, 0, $firstPos - 2), ENT_QUOTES) .  "</div> ";
+        }
+        if($firstPos !== false)
+        {
+            $lastPos    = strrpos($setting->topRightContent, '__');
+            $slicedItem = strtolower(substr($setting->topRightContent, $firstPos, $lastPos - $firstPos));
+            if(in_array($slicedItem, array('login', 'search', 'loginandsearch', 'searchandlogin')))
+            {
+                if($slicedItem == 'loginandsearch')
+                {
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');
+                }
+                elseif($slicedItem == 'searchandlogin')
+                {
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');
+                }
+                elseif($slicedItem == 'login')
+                {
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');
+                }
+                elseif($slicedItem == 'search')
+                {
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');
+                }
+
+            }
+            if($lastPos != $firstPos)
+            {
+                echo " <div class='custom-top-right'>" . htmlspecialchars_decode(substr($setting->topRightContent, $lastPos + 2), ENT_QUOTES)   . "</div> ";
+            }
+        }
+      ?>
+      <?php endif;?>
+      <?php ?>
     </div>
   </div>
   <?php endif;?>
@@ -53,6 +112,9 @@
   </div>
 </header>
 
+<style>
+.custom-top-right {display:inline-block; width:auto; float:right; position:relative;margin-right: 5px;margin-left: 5px;}
+</style>
 <?php if(strpos(strtolower($setting->bottom), 'nav') !== false) include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
 <style>
 #header {padding: 0; margin-bottom: 14px;}
