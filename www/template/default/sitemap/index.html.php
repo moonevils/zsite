@@ -19,18 +19,15 @@
     </div>
   </div>
   <div class='panel-body'>
-    <div class='clearfix sitemap-tree'>
-      <ul class='tree'>
-        <li><?php echo html::a(helper::createLink('company', 'index'), $lang->aboutUs);?></li>
-        <?php if(!empty($pages)) foreach($pages as $page):?>
-        <li><?php echo html::a(helper::createLink('page', 'view', "pageID={$page->id}", "name={$page->alias}"), $page->title);?></li>
-        <?php endforeach;?>
-      </ul>
-    </div>
-    
     <?php if(commonModel::isAvailable('article')):?>
     <div class='clearfix sitemap-tree'> 
       <h4><?php echo $lang->sitemap->articleList;?></h4>
+      <ul class='tree'>
+        <li class='articleItem'><?php echo html::a(helper::createLink('company', 'index'), $lang->aboutUs);?></li>
+        <?php if(!empty($pages)) foreach($pages as $page):?>
+        <li class='articleItem'><?php echo html::a(helper::createLink('page', 'view', "pageID={$page->id}", "name={$page->alias}"), $page->title);?></li>
+        <?php endforeach;?>
+      </ul>
       <ul class='tree'>
         <?php foreach($articles as $article):?>
         <li class='articleItem'><?php echo html::a(helper::createLink('article', 'view', "id=$article->id", "category={$article->category->alias}&name=$article->alias"), $article->title);?></li>
