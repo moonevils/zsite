@@ -209,7 +209,6 @@ class commonModel extends model
             if(isset($rights[$module][$method])) return true;
             return false;
         }
-
         if(!commonModel::isAvailable($module)) return false;
 
         if(isset($rights[$module][$method])) return true;
