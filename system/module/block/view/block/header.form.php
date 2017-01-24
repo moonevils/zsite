@@ -37,16 +37,14 @@
 </tr>
 <tr class='top topRight hide'>
   <td>
-    <?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control'");?>
-    <strong><?php echo $lang->block->insertLink . ':';?></strong>
-    <div class='chosen-container chosen-container-multi'>
-      <ul class='chosen-choices'>
-        <?php foreach($lang->block->header->top->rightOptions as $rightOption => $rightOptionName):?>
+    <?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control textarea-withchosen' rows='5'");?>
+    <div class='textarea-chosen'>
+        <?php foreach($lang->block->header->top->rightOptions as $rightOption => $optionName):?>
           <?php if($rightOption == '' or $rightOption == 'custom') continue;?>
-          <li class='search-choice' onclick="addChoice('<?php echo $rightOption?>')"><a><?php echo $rightOptionName;?></a></li>
+          <?php echo html::a('javascript:;', $optionName, "class='btn btn-xs btn-default btn-select'");?>
         <?php endforeach;?>
-      </ul>
     </div>
+    <p></p>
   </td>
 </tr>
 <tr class='middle'>
