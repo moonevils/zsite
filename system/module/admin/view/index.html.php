@@ -15,9 +15,9 @@
 <div class='container' id='shortcutBox'>
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
-      <div class='dashboard-control'>
+      <div class='dashboard-control' data-toggle='tooltip' title data-placement="top" data-original-title='<?php echo $lang->widget->create; ?>'>
         <div class='pull-right'>
-          <a class='btn' data-toggle='modal' href='<?php echo $this->createLink("widget", "create"); ?>'><i  data-toggle='tooltip' class='icon-plus' title data-placement="left" data-original-title='<?php echo $lang->widget->create; ?>'></i></a>
+          <a class='btn' data-toggle='modal' href='<?php echo $this->createLink("widget", "create"); ?>'><i  class='icon-plus'></i></a>
         </div>
       </div>
       <div class='row summary'>
