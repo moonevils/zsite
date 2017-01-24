@@ -41,6 +41,12 @@ class user extends control
                 $dicts = explode(',', $dicts);
                 if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->usernameIsSensitive));
             }
+            if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open' and isset($_POST['account']) and isset($_POST['realname']))
+            {
+                $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
+                $dicts = explode(',', $dicts);
+                if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->usernameIsSensitive));
+            }
             
             $this->user->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
