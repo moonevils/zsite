@@ -471,7 +471,7 @@ class site extends control
      */
     public function setHomeMenu()
     {
-        if($_POST)
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $this->loadModel('setting')->setItem('system.common.menus.home', 'admin,' . implode(',', $this->post->homeMenus));
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
