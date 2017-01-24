@@ -99,7 +99,7 @@
                 </div>
               </div>
               <div class='modal-body'>
-                <p class=''><?php echo $theme->abstract;?></p>
+                <p class=''><?php echo strip_tags($theme->abstract);?></p>
                 <p>
                 <?php
                 echo "{$lang->package->author}:     {$theme->author} ";
