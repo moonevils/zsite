@@ -1,4 +1,4 @@
 $().ready(function()
 {
-    $.setAjaxLoader('#ajaxModal .btn', '#ajaxModal');
+    $.setAjaxLoader('#ajaxModal .btn-ajax-loader', '#ajaxModal');
 });
