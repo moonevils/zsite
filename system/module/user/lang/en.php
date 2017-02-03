@@ -201,8 +201,8 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
-$lang->user->oauth->providers['qq']   = 'QQ';
 $lang->user->oauth->providers['sina'] = 'Weibo';
+$lang->user->oauth->providers['qq']   = 'QQ';
 
 $lang->user->oauth->typeList['sina']   = 'Weibo User';
 $lang->user->oauth->typeList['qq']     = 'QQ User';
