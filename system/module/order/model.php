@@ -593,7 +593,7 @@ class orderModel extends model
         $toggle = $btnLink ? '' : "data-toggle='modal'";
         if(RUN_MODE == 'admin' )
         {
-            $class  = $btnLink ? 'btn' : '';
+            $class  = $btnLink ? 'btn btn-ajax-loader' : '';
 
             /* Edit link. */
             $disabled = $order->status == 'normal' ? '' : "disabled = 'disabled'";
