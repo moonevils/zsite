@@ -237,15 +237,16 @@ class statModel extends model
      */
     public function getDomainList($begin, $end, $orderBy, $pager)
     {
-        $localDomain = $_SERVER['HTTP_HOST']; 
+        $noAllowedDomainList = array('127.0.0.1', 'localhost', $_SERVER['HTTP_HOST']);
+        if(isset($this->config->site->domain)) $noAllowedDomainList[] = $this->config->site->domain;
+        if(isset($this->config->site->allowedDomain)) $noAllowedDomainList[] = $this->config->site->allowedDomain;
+
         return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
             ->where('type')->eq('domain')
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
             ->andWhere('timeValue')->le($end)
-            ->andWhere('item')->ne('127.0.0.1')
-            ->andWhere('item')->ne('localhost')
-            ->andWhere('item')->ne($localDomain)
+            ->andWhere('item')->notin($noAllowedDomainList)
             ->groupBy('item')
             ->orderBy($orderBy)
             ->page($pager)

@@ -250,7 +250,7 @@ $lang->ui->sideGrid      = 'Grid';
 $lang->ui->height        = 'Height';
 
 $lang->ui->primaryColor    = 'Primary Color';
-$lang->ui->backcolor       = 'Color';
+$lang->ui->backcolor       = 'Background Color';
 $lang->ui->forecolor       = 'Foreground Color';
 $lang->ui->backgroundImage = 'Image';
 $lang->ui->repeat          = 'Repeat Mode';
