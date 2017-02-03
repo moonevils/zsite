@@ -773,22 +773,19 @@ function setGo2Top()
         clearTimeout(lastTidyTask);
         lastTidyTask = setTimeout(function()
         {
-            $('.cards-custom').tidyCards();
             $('.row.blocks').tidy({force: true});
+            $('.cards-custom').tidyCards();
         }, 300);
     };
 
     $.extend({tidyBlocks: tidyBlocks});
-    $(function()
+    tidyBlocks();
+    $(window).resize(tidyBlocks);
+    setTimeout(tidyBlocks, 500);
+    $('.row.blocks img').load(tidyBlocks).each(function()
     {
-        tidyBlocks();
-        $(window).resize(tidyBlocks);
-        setTimeout(tidyBlocks, 500);
-        $('.row.blocks img').load(tidyBlocks).each(function()
-        {
-            if(this.complete) $(this).load();
-        });
-    })
+        if(this.complete) $(this).load();
+    });
 }(jQuery));
 
 function appendFingerprint(form)
