@@ -8,6 +8,7 @@ $(document).ready(function()
             if(response.result == 'success')
             {
                 $("#deleteAllButton").text(v.deletedTip);
+                location.href=response.locate;
             }
             else
             {
