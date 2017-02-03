@@ -36,14 +36,17 @@ $(function()
   <div class='alert with-icon alert-deny'>
     <i class='icon-frown icon'></i>
     <div class='content'>
-      <h2><?php echo $app->user->account, ' ', $lang->user->deny;?></h2>
+      <?php if(commonModel::isAvailable($module)):?>
       <p><?php printf($lang->user->errorDeny, $moduleName, $methodName);?></p>
+      <?php else:?>
+      <p><?php printf($lang->user->noModuleDeny, $moduleName);?></p>
+      <?php endif;?>
       <div class='actions'>
         <?php
         if($refererBeforeDeny) echo html::a(helper::safe64Decode($refererBeforeDeny), $lang->user->goback, "class='btn btn-primary'");
-         echo html::a($this->createLink($config->default->module), $lang->index->common, "class='btn'");
-         if($this->app->user->account == 'guest') echo html::a($this->createLink('user', 'register'), $lang->user->register->common, "class='btn btn-link'");
-         echo html::a($this->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin, "class='btn btn-link'");
+        echo html::a($this->createLink($config->default->module), $lang->index->common, "class='btn'");
+        if(commonModel::isAvailable($module) and $this->app->user->account == 'guest') echo html::a($this->createLink('user', 'register'), $lang->user->register->common, "class='btn btn-link'");
+        if(commonModel::isAvailable($module)) echo html::a($this->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin, "class='btn btn-link'");
         ?>
       </div>
     </div>

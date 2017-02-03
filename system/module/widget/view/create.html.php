@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <th class='w-130px'><?php echo $lang->widget->title?></th>
-    <td><?php echo html::input('title', zget($lang->widget->typeList, $type, ''), "class='form-control w-400px'")?></td>
+    <td><?php echo html::input('title', zget($lang->widget->typeList, $type, ''), "class='form-control w-300px'")?></td>
   </tr>
   <tr>
     <th><?php echo $lang->widget->style;?></th>
