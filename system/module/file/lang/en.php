@@ -81,3 +81,4 @@ $lang->file->fileTip            = 'Tips: Red represent the file has been deleted
 $lang->file->dragFile    = 'Please drag files here';
 $lang->file->addFile     = 'Add';
 $lang->file->beginUpload = 'Upload';
+$lang->file->deletingTip = 'Deleting';
