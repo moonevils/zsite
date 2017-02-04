@@ -90,9 +90,6 @@ $config->rights->guest['score']['rule']         = 'rule';
 $config->rights->guest['score']['noscore']      = 'noscore';
 $config->rights->guest['score']['processorder'] = 'processorder';
 
-$config->rights->guest['yangcong']['qrcode']    = 'qrcode';
-$config->rights->guest['yangcong']['getresult'] = 'getresult';
-
 $config->rights->guest['ui']['getencrypt'] = 'getencrypt';
 /* For logged member. */
 $config->rights->member['article']['submission'] = 'submission';

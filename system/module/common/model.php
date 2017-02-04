@@ -321,13 +321,12 @@ class commonModel extends model
     {
         $module = strtolower($module);
         $method = strtolower($method);
-        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey|yangconglogin|oauthbind|', $method)) return true;
+        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey|oauthbind|', $method)) return true;
         if($module == 'mail' and $method == 'sendmailcode') return true;
         if($module == 'guarder' and $method == 'validate') return true;
         if($module == 'misc' and $method == 'ajaxgetfingerprint') return true;
         if($module == 'wechat' and $method == 'response') return true;
         if($module == 'sitemap' and $method == 'index') return true;
-        if($module == 'yangcong') return true;
         if(RUN_MODE == 'admin' and $this->app->user->admin != 'no' and isset($this->config->rights->admin[$module][$method])) return true;
         if(RUN_MODE == 'admin' and $module == 'farm' and $method == 'register') return true;
         if(RUN_MODE == 'admin' and $module == 'farm' and (strpos($method, 'api') !== false)) return true;

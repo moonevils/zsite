@@ -63,7 +63,6 @@ $lang->site->checkEmail       = '會員郵箱綁定';
 $lang->site->filterFunction   = '過濾功能';
 $lang->site->allowedLocation  = '允許登錄地區';
 $lang->site->checkSessionIP   = '後台檢查IP';
-$lang->site->forceYangcong    = '後台強制洋蔥登錄';
 $lang->site->setsecurity      = '安全設置';
 $lang->site->setsensitive     = '敏感詞設置';
 $lang->site->filterSensitive  = '敏感詞過濾';
@@ -89,7 +88,6 @@ $lang->site->setUpload     = "附件上傳";
 $lang->site->setRobots     = "Robots 設置";
 $lang->site->setOauth      = "開放登錄";
 $lang->site->setSinaOauth  = "新浪微博接入";
-$lang->site->setYangcong   = "洋蔥登錄設置";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用幫助";
 $lang->site->setRecPerPage = "列表數量設置";
@@ -114,10 +112,6 @@ $lang->site->statusList->pause  = '暫停';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = '開啟';
 $lang->site->resetPasswordList['close'] = '關閉';
-
-$lang->site->forceYangcongList = array();
-$lang->site->forceYangcongList['open']  = '開啟';
-$lang->site->forceYangcongList['close'] = '關閉';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '開啟';
@@ -215,7 +209,6 @@ $lang->site->changeLocation   = '您當前的登錄地區與允許登錄地區�
 $lang->site->sessionIpTip     = '開啟後，如IP變化將自動退出登錄。';
 $lang->site->schemeTip        = '所有訪問會跳轉至預設訪問協議。';
 $lang->site->saveDaysTip      = '訪問日誌保存天數必須為為 >0 的數字。';
-$lang->site->yangcongTip      = '開啟強制洋蔥登錄後，您可以通過設置密保問題開啟密保登錄作為備用。';
 $lang->site->closeScoreTip    = '禁用積分功能後不再記錄積分，會員保持原有積分不變。';
 $lang->site->cdnFileLost      = '以下資源無法訪問：';
 $lang->site->useDefaultCdn    = '使用預設地址';
@@ -235,11 +228,6 @@ $lang->site->customizableList->forum   = '論壇列表數量';
 $lang->site->customizableList->reply   = '回帖列表數量';
 $lang->site->customizableList->message = '留言列表數量';
 $lang->site->customizableList->comment = '評論列表數量';
-
-$lang->site->yangcong = new stdclass();
-$lang->site->yangcong->appID = 'APP ID';
-$lang->site->yangcong->key   = 'APP KEY';
-$lang->site->yangcong->auth  = 'Auth ID';
 
 $lang->site->api = new stdclass();
 $lang->site->api->common = '整合';

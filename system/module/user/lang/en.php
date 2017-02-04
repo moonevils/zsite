@@ -81,7 +81,6 @@ $lang->user->myScore         = 'Points';
 $lang->user->buyScore        = 'Refill Points';
 $lang->user->addScore        = 'Reward';
 $lang->user->reduceScore     = 'Deduct';
-$lang->user->yangcongLogin   = 'Yangcong Login';
 $lang->user->bindAccount     = 'Account Binding';
 $lang->user->batchDelete     = 'Batch Delete';
 $lang->user->deleteHistory   = 'Delete account and history';
@@ -260,7 +259,6 @@ $lang->user->locationDenied       = 'Login location is restricted. Please follow
 $lang->user->loginLocationChanged = 'Login address is changed. Please follow instructions.';
 $lang->user->verifyFail           = 'Please enter the correct verification code.';
 $lang->user->confirmUnbind        = 'Do you want to remove binding?';
-$lang->user->forceYangcong        = 'Yangcong has been open, please confirm your identity.';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your password.';

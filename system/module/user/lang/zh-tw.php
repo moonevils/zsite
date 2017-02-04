@@ -81,7 +81,6 @@ $lang->user->myScore         = '當前積分';
 $lang->user->buyScore        = '積分充值';
 $lang->user->addScore        = '獎勵積分';
 $lang->user->reduceScore     = '扣除積分';
-$lang->user->yangcongLogin   = '洋蔥登錄';
 $lang->user->bindAccount     = '綁定帳號';
 $lang->user->batchDelete     = '批量刪除用戶';
 $lang->user->deleteHistory   = '刪除用戶及歷史數據';
@@ -260,7 +259,6 @@ $lang->user->locationDenied       = '登錄地區受限，請按提示操作。'
 $lang->user->loginLocationChanged = '登錄地址發生變化，請按提示操作。';
 $lang->user->verifyFail           = '請填寫正確的驗證碼';
 $lang->user->confirmUnbind        = '您確定要解除綁定嗎？';
-$lang->user->forceYangcong        = '已開啟強制洋蔥登錄，普通登錄需要進行驗證。';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';
