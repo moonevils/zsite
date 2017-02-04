@@ -232,7 +232,9 @@ class messageModel extends model
     public function getList($type, $status, $pager = null)
     {
         $messages = $this->dao->select('*')->from(TABLE_MESSAGE)
-            ->where('type')->eq($type)
+            ->where(1)
+            ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
+            ->beginIf($type == 'all')->andWhere('type')->in('message,comment,reply')->fi()
             ->andWhere('status')->eq($status)
             ->beginIf(RUN_MODE == 'front')->andWhere('public')->eq(1)->fi()
             ->orderBy('id_desc')

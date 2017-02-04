@@ -193,9 +193,7 @@ $lang->menu->product      = 'Product|product|admin|';
 $lang->menu->orderSetting = 'Settings|product|setting|';
 
 $lang->menu->user         = 'User|user|admin|';
-$lang->menu->message      = 'Message|message|admin|type=message';
-$lang->menu->comment      = 'Comment|message|admin|type=comment';
-$lang->menu->reply        = 'Reply|message|admin|type=reply';
+$lang->menu->message      = 'Message|message|admin|';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Post|reply|admin|';

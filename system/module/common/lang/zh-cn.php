@@ -193,9 +193,7 @@ $lang->menu->product      = '产品|product|admin|';
 $lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
-$lang->menu->message      = '留言|message|admin|type=message';
-$lang->menu->comment      = '评论|message|admin|type=comment';
-$lang->menu->reply        = '回复|message|admin|type=reply';
+$lang->menu->message      = '留言|message|admin|';
 $lang->menu->forum        = '论坛|forum|admin|';
 $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
