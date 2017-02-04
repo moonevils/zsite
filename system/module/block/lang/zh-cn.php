@@ -131,6 +131,7 @@ $lang->block->cloneLayout  = '布局另存为';
 $lang->block->switchLayout = '切换布局';
 $lang->block->removeLayout = '删除布局方案';
 $lang->block->planIsUseing = '此方案正在使用，不能删除';
+$lang->block->noInsertTip  = '插入新选项需要删除原有的选项';
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';
