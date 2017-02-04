@@ -116,6 +116,7 @@ $lang->block->header->bottomOptions['navAndSearch'] = 'Naviagtion + Search Box';
 $lang->block->admin        = "Widget";
 $lang->block->pages        = "Layout";
 $lang->block->add          = "Add";
+$lang->block->insertLink   = 'Insert';
 $lang->block->addChild     = "Child";
 $lang->block->template     = "Template";
 $lang->block->create       = 'Add';

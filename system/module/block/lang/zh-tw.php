@@ -97,6 +97,7 @@ $lang->block->header->top->rightOptions['login']          = '登錄註冊 + 語�
 $lang->block->header->top->rightOptions['search']         = '搜索框';
 $lang->block->header->top->rightOptions['loginAndSearch'] = '登錄註冊語言 + 搜索框';
 $lang->block->header->top->rightOptions['searchAndLogin'] = '搜索框 + 登錄註冊語言';
+$lang->block->header->top->rightOptions['custom']         = '自定義';
 
 $lang->block->header->middle->leftOptions['']     = '不顯示';
 $lang->block->header->middle->leftOptions['logo'] = 'Logo';
@@ -115,6 +116,7 @@ $lang->block->header->bottomOptions['navAndSearch'] = '導航 + 搜索框';
 $lang->block->admin        = "區塊管理";
 $lang->block->pages        = "佈局";
 $lang->block->add          = "添加";
+$lang->block->insertLink   = '插入';
 $lang->block->addChild     = "子區塊";
 $lang->block->template     = "模板";
 $lang->block->create       = '添加區塊';
@@ -129,6 +131,7 @@ $lang->block->cloneLayout  = '佈局另存為';
 $lang->block->switchLayout = '切換佈局';
 $lang->block->removeLayout = '刪除佈局方案';
 $lang->block->planIsUseing = '此方案正在使用，不能刪除';
+$lang->block->noInsertTip  = '插入新選項需要刪除原有的選項';
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';

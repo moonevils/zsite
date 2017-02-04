@@ -119,6 +119,7 @@ $lang->user->inputPassword       = 'Enter Password';
 $lang->user->searchUser          = 'Search';
 
 $lang->user->errorDeny         = "Sorry, you have no access to『<b>%s</b>』->『<b>%s</b>』. Please contact your Admin. <br/> You will be directed to Homepage in 5 sec...";
+$lang->user->noModuleDeny      = "Sorry, the site which you are visiting has not enabled 『<b>%s</b>』module, Please contact your Admin. <br/> You will be directed to Homepage in 5 sec...";
 $lang->user->loginFailed       = "Login failed. Please check your user name and password.";
 $lang->user->identifyFailed    = "Verification failed. Please check your password.";
 $lang->user->locked            = "Account has been locked. Please try to login in %s.";

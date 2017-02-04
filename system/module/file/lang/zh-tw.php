@@ -78,6 +78,9 @@ $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '刪除全部';
 $lang->file->fileTip            = '提示：紅色代表資料庫中有檔案記錄，但是檔案實際已經被刪除';
 
-$lang->file->dragFile    = '請拖拽檔案到此處';
-$lang->file->addFile     = '添加檔案';
-$lang->file->beginUpload = '開始上傳';
+$lang->file->dragFile      = '請拖拽檔案到此處';
+$lang->file->addFile       = '添加檔案';
+$lang->file->beginUpload   = '開始上傳';
+$lang->file->deletingTip   = '刪除中';
+$lang->file->deletedTip    = '已刪除';
+$lang->file->failDeleteTip = '刪除失敗';

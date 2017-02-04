@@ -47,6 +47,7 @@ $lang->ui->installedThemes = "已安裝主題";
 $lang->ui->enableTheme     = "使用此主題";
 $lang->ui->industry        = "行業";
 $lang->ui->offcial         = "官方";
+$lang->ui->score           = "積分";
 $lang->ui->reset           = "重置為預設";
 $lang->ui->themePackage    = "主題包";
 
