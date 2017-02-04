@@ -41,7 +41,7 @@
     <div class='textarea-chosen'>
         <?php foreach($lang->block->header->top->rightOptions as $rightOption => $optionName):?>
           <?php if($rightOption == '' or $rightOption == 'custom') continue;?>
-          <?php echo html::a('javascript:;', $optionName, "class='btn btn-xs btn-default btn-select'");?>
+          <?php echo html::a('javascript:;', $optionName, "id='$rightOption' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
         <?php endforeach;?>
     </div>
     <p></p>
@@ -72,20 +72,12 @@
   </td>
 </tr>
 <script>
-var insertable = true;
-var addChoice = function(choiceItem)
-{
+$(".btn-addChoice").click(function(){
+    choiceItem      = this.id;
     topRightContent = $("[name*=params][name*=topRightContent]").val();
     topRightContent += '__' + choiceItem.toUpperCase() + '__ ';
-    if(checkChoiceInserted($("[name*=params][name*=topRightContent]").val()))
-    {
-        insertable = false;
-    }
-    else
-    {
-        insertable = true;
-    }
-    if(insertable) 
+
+    if(!checkChoiceInserted($("[name*=params][name*=topRightContent]").val())) 
     {
         $("[name*=params][name*=topRightContent]").val(topRightContent); 
     }
@@ -93,7 +85,8 @@ var addChoice = function(choiceItem)
     {
         alert('Please delete the existed one');
     }
-};
+});
+
 var checkChoiceInserted = function(searchedStr){
     var choices = ['__LOGIN__', '__SEARCH__', '__LOGINANDSEARCH__', '__SEARCHANDLOGIN__'];
     for(var i = 0, l = choices.length; i < l; i++)
@@ -102,13 +95,9 @@ var checkChoiceInserted = function(searchedStr){
     }
     return false;
 };
+
 $(function()
 {
-    if(checkChoiceInserted($("[name*=params][name*=topRightContent]").val()))
-    {
-       insertable = false; 
-    } 
-    
     $('#compatible').change(function()
     {
         $('tr.top, tr.middle, tr.bottom').toggle(!$(this).is(':checked'));
@@ -170,8 +159,6 @@ $(function()
             }
         }
     })
-    $("[name*=params][name*=topRightContent]").bind('input propertychange', function() {
-    });
     $("[name*=params][name*=top][name*=left]").change();
     $("[name*=params][name*=top][name*=right]").change();
 })
