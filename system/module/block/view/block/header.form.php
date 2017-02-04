@@ -14,6 +14,7 @@
 
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
+<?php js::set('noInsertTip', $lang->block->noInsertTip);?>
 <tr class='top'>
   <th id='tableHeadingtop' rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
@@ -83,7 +84,7 @@ $(".btn-addChoice").click(function(){
     }
     else
     {
-        alert('Please delete the existed one');
+        $(this).popover({trigger:'manual', content:v.noInsertTip, placement:'bottom'}).popover('toggle');
     }
 });
 
