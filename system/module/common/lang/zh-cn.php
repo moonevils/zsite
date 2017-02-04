@@ -130,10 +130,9 @@ $lang->getUserByApi       = '获取绑定信息';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['zh-cn'] = array();
-$lang->selectLangTip['zh-cn']['zh-cn'] = '切换到简体中文站点';
-$lang->selectLangTip['zh-cn']['zh-tw'] = '切换到繁体中文站点';
-$lang->selectLangTip['zh-cn']['en']    = '切换到英文站点';
+$lang->selectLangTip['zh-cn'] = '切换到简体中文站点';
+$lang->selectLangTip['zh-tw'] = '切换到繁体中文站点';
+$lang->selectLangTip['en']    = '切换到英文站点';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

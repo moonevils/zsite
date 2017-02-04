@@ -118,7 +118,8 @@ $lang->user->inputAccountOrEmail = '請輸入用戶名或Email';
 $lang->user->inputPassword       = '請輸入密碼';
 $lang->user->searchUser          = '搜索';
 
-$lang->user->errorDeny         = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。<br/> 5秒鐘後將自動返迴首頁...";
+$lang->user->errorDeny         = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。<br/>點擊後退返回上頁。5秒鐘後將自動返迴首頁...";
+$lang->user->noModuleDeny      = "抱歉，您所訪問的網站沒有開啟『<b>%s</b>』模組，如有疑問，請聯繫網站管理員。<br/>點擊後退返回上頁。5秒鐘後將自動返迴首頁...";
 $lang->user->loginFailed       = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
 $lang->user->identifyFailed    = "驗證失敗，請檢查您的密碼是否正確。";
 $lang->user->locked            = "用戶已經被鎖定，請%s後再重新嘗試登錄";
@@ -200,8 +201,8 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
-$lang->user->oauth->providers['qq']   = 'QQ';
 $lang->user->oauth->providers['sina'] = '新浪微博';
+$lang->user->oauth->providers['qq']   = 'QQ';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博會員';
 $lang->user->oauth->typeList['qq']     = 'QQ會員';
