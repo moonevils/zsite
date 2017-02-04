@@ -63,7 +63,6 @@ $lang->site->checkEmail       = '会员邮箱绑定';
 $lang->site->filterFunction   = '过滤功能';
 $lang->site->allowedLocation  = '允许登录地区';
 $lang->site->checkSessionIP   = '后台检查IP';
-$lang->site->forceYangcong    = '后台强制洋葱登录';
 $lang->site->setsecurity      = '安全设置';
 $lang->site->setsensitive     = '敏感词设置';
 $lang->site->filterSensitive  = '敏感词过滤';
@@ -89,7 +88,6 @@ $lang->site->setUpload     = "附件上传";
 $lang->site->setRobots     = "Robots 设置";
 $lang->site->setOauth      = "开放登录";
 $lang->site->setSinaOauth  = "新浪微博接入";
-$lang->site->setYangcong   = "洋葱登录设置";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
 $lang->site->setRecPerPage = "列表数量设置";
@@ -114,10 +112,6 @@ $lang->site->statusList->pause  = '暂停';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = '开启';
 $lang->site->resetPasswordList['close'] = '关闭';
-
-$lang->site->forceYangcongList = array();
-$lang->site->forceYangcongList['open']  = '开启';
-$lang->site->forceYangcongList['close'] = '关闭';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '开启';
@@ -215,7 +209,6 @@ $lang->site->changeLocation   = '您当前的登录地区与允许登录地区�
 $lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。';
 $lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
 $lang->site->saveDaysTip      = '访问日志保存天数必须为为 >0 的数字。';
-$lang->site->yangcongTip      = '开启强制洋葱登录后，您可以通过设置密保问题开启密保登录作为备用。';
 $lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
 $lang->site->cdnFileLost      = '以下资源无法访问：';
 $lang->site->useDefaultCdn    = '使用默认地址';
@@ -235,11 +228,6 @@ $lang->site->customizableList->forum   = '论坛列表数量';
 $lang->site->customizableList->reply   = '回帖列表数量';
 $lang->site->customizableList->message = '留言列表数量';
 $lang->site->customizableList->comment = '评论列表数量';
-
-$lang->site->yangcong = new stdclass();
-$lang->site->yangcong->appID = 'APP ID';
-$lang->site->yangcong->key   = 'APP KEY';
-$lang->site->yangcong->auth  = 'Auth ID';
 
 $lang->site->api = new stdclass();
 $lang->site->api->common = '集成';

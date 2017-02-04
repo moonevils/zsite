@@ -81,7 +81,6 @@ $lang->user->myScore         = '当前积分';
 $lang->user->buyScore        = '积分充值';
 $lang->user->addScore        = '奖励积分';
 $lang->user->reduceScore     = '扣除积分';
-$lang->user->yangcongLogin   = '洋葱登录';
 $lang->user->bindAccount     = '绑定帐号';
 $lang->user->batchDelete     = '批量删除用户';
 $lang->user->deleteHistory   = '删除用户及历史数据';
@@ -261,7 +260,6 @@ $lang->user->locationDenied       = '登录地区受限，请按提示操作。'
 $lang->user->loginLocationChanged = '登录地址发生变化，请按提示操作。';
 $lang->user->verifyFail           = '请填写正确的验证码';
 $lang->user->confirmUnbind        = '您确定要解除绑定吗？';
-$lang->user->forceYangcong        = '已开启强制洋葱登录，普通登录需要进行验证。';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';
