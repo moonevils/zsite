@@ -34,7 +34,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       ?>
       <?php if(!empty($product->image)): ?>
       <?php $recPerRow = (isset($content->recPerRow) and !empty($content->recPerRow)) ? $content->recPerRow : '3';?>
-      <div class='col-md-12' data-recperrow="<?php echo $recPerRow;?>">
+      <div class='col-md-12' style="width:<?php echo 100 / $recPerRow;?>%" data-recperrow="<?php echo $recPerRow;?>">
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
