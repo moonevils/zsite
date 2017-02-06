@@ -50,6 +50,7 @@ $lang->ui->offcial         = "Official";
 $lang->ui->score           = "score";
 $lang->ui->reset           = "Reset";
 $lang->ui->themePackage    = "Theme Package";
+$lang->ui->refreshPage     = "Refresh";
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";
