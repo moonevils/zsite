@@ -27,6 +27,7 @@ zip:
 	mkdir -p chanzhieps/system/tmp/cache/
 	mkdir -p chanzhieps/system/tmp/log/
 	mkdir -p chanzhieps/system/tmp/model/
+	mkdir -p chanzhieps/system/tmp/backup/
 	mkdir -p chanzhieps/system/tmp/package/
 	mkdir -p chanzhieps/system/tmp/theme/
 	mkdir -p chanzhieps/system/tmp/template/
