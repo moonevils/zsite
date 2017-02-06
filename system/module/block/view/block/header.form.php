@@ -80,10 +80,6 @@ $(".btn-addChoice").click(function(){
     {
         $("[name*=params][name*=topRightContent]").val(topRightContent); 
     }
-    else
-    {
-        $(this).popover({trigger:'manual', content:v.noInsertTip, placement:'bottom'}).popover('toggle');
-    }
 });
 
 var checkChoiceInserted = function(searchedStr, searchItem){
