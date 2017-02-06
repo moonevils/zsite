@@ -40,10 +40,8 @@
   <td>
     <?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control textarea-withchosen' rows='5'");?>
     <div class='textarea-chosen'>
-        <?php foreach($lang->block->header->top->rightOptions as $rightOption => $optionName):?>
-          <?php if($rightOption == '' or $rightOption == 'custom') continue;?>
-          <?php echo html::a('javascript:;', $optionName, "id='$rightOption' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
-        <?php endforeach;?>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['login'], "id='login' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['search'], "id='search' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
     </div>
     <p></p>
   </td>
@@ -76,9 +74,9 @@
 $(".btn-addChoice").click(function(){
     choiceItem      = this.id;
     topRightContent = $("[name*=params][name*=topRightContent]").val();
-    topRightContent += '__' + choiceItem.toUpperCase() + '__ ';
+    topRightContent += '$' + choiceItem.toUpperCase() + '$ ';
 
-    if(!checkChoiceInserted($("[name*=params][name*=topRightContent]").val())) 
+    if(!checkChoiceInserted($("[name*=params][name*=topRightContent]").val(), choiceItem)) 
     {
         $("[name*=params][name*=topRightContent]").val(topRightContent); 
     }
@@ -88,12 +86,16 @@ $(".btn-addChoice").click(function(){
     }
 });
 
-var checkChoiceInserted = function(searchedStr){
-    var choices = ['__LOGIN__', '__SEARCH__', '__LOGINANDSEARCH__', '__SEARCHANDLOGIN__'];
-    for(var i = 0, l = choices.length; i < l; i++)
+var checkChoiceInserted = function(searchedStr, searchItem){
+    if(searchItem == 'login')
     {
-       if(searchedStr.indexOf(choices[i]) >= 0) return true;
+        if(searchedStr.indexOf('$LOGIN$') >= 0) return true;
     }
+    if(searchItem == 'search')
+    {
+        if(searchedStr.indexOf('$SEARCH$') >= 0) return true;
+    }
+    
     return false;
 };
 
