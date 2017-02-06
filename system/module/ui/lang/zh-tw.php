@@ -50,7 +50,7 @@ $lang->ui->offcial         = "官方";
 $lang->ui->score           = "積分";
 $lang->ui->reset           = "重置為預設";
 $lang->ui->themePackage    = "主題包";
-$lang->ui->refreshPage     = "刷新页面";
+$lang->ui->refreshPage     = "刷新頁面";
 
 $lang->ui->uploadLogo             = "上傳Logo";
 $lang->ui->uploadFavicon          = "上傳小表徵圖";
@@ -124,12 +124,13 @@ $lang->ui->template->qq              = 'QQ';
 $lang->ui->template->email           = 'Email';
 $lang->ui->template->site            = 'site';
 
-$lang->ui->appearance      = '外觀';
-$lang->ui->custom          = '自定義';
-$lang->ui->themeSaved      = '主題配置已保存';
-$lang->ui->unWritable      = "不能生成樣式檔案，請檢查 %s目錄的權限";
-$lang->ui->codeHolder      = "字母加數字組合成的主題代號";
-$lang->ui->unWritableFile  = "不能生成樣式檔案，請檢查 %s檔案的權限";
+$lang->ui->appearance         = '外觀';
+$lang->ui->custom             = '自定義';
+$lang->ui->themeSaved         = '主題配置已保存';
+$lang->ui->unWritable         = "不能生成樣式檔案，請檢查 %s目錄的權限";
+$lang->ui->codeHolder         = "字母加數字組合成的主題代號";
+$lang->ui->unWritableFile     = "不能生成樣式檔案，請檢查 %s檔案的權限";
+$lang->ui->openMobileTemplate = "確認開啟移動模板？";
 
 $lang->ui->blocks2Merge  = "可合併區塊";
 $lang->ui->blocks2Create = "新創建區塊";
