@@ -161,7 +161,6 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('5.5'));
             case '5_6':
                 $this->execSQL($this->getUpgradeFile('5.6'));
-                $this->fixWrongWordSubmittion();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2095,16 +2094,5 @@ class upgradeModel extends model
                 file_put_contents($myFile, $fixedConfig, FILE_APPEND);
             }
         }
-    }
-
-    /**
-     * Fix the wrong word submittion to submission in database
-     *
-     * @param  void
-     * @access public
-     * @reurn  void
-     */
-    public function fixWrongWordSubmittion()
-    {
     }
 }
