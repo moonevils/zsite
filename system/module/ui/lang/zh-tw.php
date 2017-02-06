@@ -50,6 +50,7 @@ $lang->ui->offcial         = "官方";
 $lang->ui->score           = "積分";
 $lang->ui->reset           = "重置為預設";
 $lang->ui->themePackage    = "主題包";
+$lang->ui->refreshPage     = "刷新页面";
 
 $lang->ui->uploadLogo             = "上傳Logo";
 $lang->ui->uploadFavicon          = "上傳小表徵圖";

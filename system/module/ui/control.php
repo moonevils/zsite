@@ -322,7 +322,7 @@ class ui extends control
 
         $this->view->error = '';
         $this->view->title = $this->lang->ui->installTheme;
-
+        
         if($type == 'full')
         {
             $backup = $this->loadModel('backup')->backupAll();
@@ -332,7 +332,7 @@ class ui extends control
                 die($this->display());
             }
         }
-
+        
         /* Ignore merge blocks before blocks imported. */
         $this->view->blocksMerged = true;
 
