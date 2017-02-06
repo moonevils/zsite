@@ -20,6 +20,8 @@ class backupModel extends model
     public function backupAll()
     {
         $this->backupPath = $this->app->getTmpRoot() . 'backup/';
+        if(!is_dir($this->backupPath)) mkdir($this->backupPath, 0777, true);
+
         set_time_limit(7200);
         $fileName = date('YmdHis') . mt_rand(0, 9);
         $result = $this->backSQL($this->backupPath . $fileName . '.sql.php');
