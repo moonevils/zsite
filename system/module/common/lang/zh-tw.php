@@ -192,7 +192,7 @@ $lang->menu->product      = '產品|product|admin|';
 $lang->menu->orderSetting = '設置|product|setting|';
 
 $lang->menu->user         = '會員|user|admin|';
-$lang->menu->message      = '留言|message|admin|';
+$lang->menu->message      = '反饋|message|admin|';
 $lang->menu->forum        = '論壇|forum|admin|';
 $lang->menu->thread       = '主題|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
