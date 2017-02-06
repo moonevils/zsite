@@ -74,7 +74,7 @@
 $(".btn-addChoice").click(function(){
     choiceItem      = this.id;
     topRightContent = $("[name*=params][name*=topRightContent]").val();
-    topRightContent += '$' + choiceItem.toUpperCase() + '$ ';
+    topRightContent += '$' + choiceItem.toUpperCase() + ' ';
 
     if(!checkChoiceInserted($("[name*=params][name*=topRightContent]").val(), choiceItem)) 
     {
@@ -85,11 +85,11 @@ $(".btn-addChoice").click(function(){
 var checkChoiceInserted = function(searchedStr, searchItem){
     if(searchItem == 'login')
     {
-        if(searchedStr.indexOf('$LOGIN$') >= 0) return true;
+        if(searchedStr.indexOf('$LOGIN') >= 0) return true;
     }
     if(searchItem == 'search')
     {
-        if(searchedStr.indexOf('$SEARCH$') >= 0) return true;
+        if(searchedStr.indexOf('$SEARCH') >= 0) return true;
     }
     
     return false;
