@@ -533,6 +533,20 @@ class ui extends control
      */
     public function setDevice($device)
     {
+        if($device == 'mobile')
+        {
+            $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';
+            if($mobileTemplate == 'close')
+            {
+                $deviceConfig = new stdclass;
+                $deviceConfig->detectDevice = true;
+
+                $result = $this->loadModel('site')->setSystem($deviceConfig);
+                if(isset($result['result']) and $result['result'] == 'fail') $this->send($result);
+                if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');
+            }
+        }
+
         $this->session->set('device', $device);
 
         $template = $this->config->template->{$device};
