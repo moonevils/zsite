@@ -41,11 +41,11 @@
         <td <?php if($rowspan > 1) echo "rowspan='$rowspan'"?>>
           <?php echo date(DT_DATETIME1, $backupFile->time);?>
           <?php
-             if(isset($config->backup->note->{$backupFile->name})) 
-             {
-                echo "<br/>" . $lang->backup->note . " : ";
-                echo $config->backup->note->{$backupFile->name};
-             }
+            if(isset($config->backup->note->{$backupFile->name})) 
+            {
+              echo "<br/>" . $lang->backup->note . " : ";
+              echo $config->backup->note->{$backupFile->name};
+            }
           ?>
         </td>
         <?php endif;?>
@@ -58,7 +58,14 @@
           commonModel::printLink('backup', 'delete', "file=$backupFile->name",  $lang->backup->delete, "class='deleter'");
           echo "<br/>";
           commonModel::printLink('backup', 'note', "file=$backupFile->name",  $lang->backup->note, "data-toggle='modal' class='noter'");
-          commonModel::printLink('backup', 'reserve', "file=$backupFile->name",  $lang->backup->reserve, "class='reserver'");
+          if(isset($this->config->backup->reservedFiles) and strpos($this->config->backup->reservedFiles, $backupFile->name) !== false)
+          {
+            commonModel::printLink('backup', 'reserve', "file=$backupFile->name",  $lang->backup->reserved, "class='reserver' disabled='disabled'");
+          }
+          else
+          {
+            commonModel::printLink('backup', 'reserve', "file=$backupFile->name",  $lang->backup->reserve, "class='reserver'");
+          }
           ?>
         </td>
         <?php endif;?>
