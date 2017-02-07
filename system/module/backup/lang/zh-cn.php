@@ -7,6 +7,8 @@ $lang->backup->backup   = '备份';
 $lang->backup->restore  = '还原';
 $lang->backup->change   = '修改保留时间';
 $lang->backup->changeAB = '修改';
+$lang->backup->note     = '备注';
+$lang->backup->reserve  = '保留备份';
 
 $lang->backup->time  = '备份时间';
 $lang->backup->files = '备份文件';

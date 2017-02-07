@@ -182,4 +182,23 @@ class backup extends control
         $this->view->title = $this->lang->backup->change;
         $this->display();
     }
+    
+    /**
+     * Add the backup a note. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function note($fileName)
+    {
+        if($_POST)
+        {
+            $data = fixer::input('post')->get();
+            $this->loadModel('setting')->setItem('system.backup.note.' . $fileName, $data->note);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('index')));
+        }
+        $this->view->title    = $this->lang->backup->note;
+        $this->view->fileName = $fileName;
+        $this->display();
+    }
 }
