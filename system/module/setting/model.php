@@ -66,7 +66,7 @@ class settingModel extends model
         $defaultLang   = !empty($clientLang) ? $clientLang : 'zh-cn';
         $item->lang    = $lang ? $lang : $defaultLang;
 
-        $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
+        $this->dao->replace(TABLE_CONFIG)->data($item)->printSQL();die();
         return !dao::isError();
     }
 

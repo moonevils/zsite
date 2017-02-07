@@ -38,7 +38,16 @@
       <?php foreach($backupFile->files as $file => $size):?>
       <tr>
         <?php if($i == 0):?>
-        <td <?php if($rowspan > 1) echo "rowspan='$rowspan'"?>><?php echo date(DT_DATETIME1, $backupFile->time);?></td>
+        <td <?php if($rowspan > 1) echo "rowspan='$rowspan'"?>>
+          <?php echo date(DT_DATETIME1, $backupFile->time);?>
+          <?php
+             if(isset($config->backup->note->{$backupFile->name})) 
+             {
+                echo "<br/>" . $lang->backup->note . " : ";
+                echo $config->backup->note->{$backupFile->name};
+             }
+          ?>
+        </td>
         <?php endif;?>
         <td class='text-left' style='padding-left:5px;'><?php echo $file;?></td>
         <td class='text-right'><?php echo $size / 1024 >= 1024 ? round($size / 1024 / 1024, 2) . 'MB' : round($size / 1024, 2) . 'KB';?></td>
@@ -47,6 +56,9 @@
           <?php
           commonModel::printLink('backup', 'restore', "file=$backupFile->name",  $lang->backup->restore, "class='restore'");
           commonModel::printLink('backup', 'delete', "file=$backupFile->name",  $lang->backup->delete, "class='deleter'");
+          echo "<br/>";
+          commonModel::printLink('backup', 'note', "file=$backupFile->name",  $lang->backup->note, "data-toggle='modal' class='noter'");
+          commonModel::printLink('backup', 'reserve', "file=$backupFile->name",  $lang->backup->reserve, "class='reserver'");
           ?>
         </td>
         <?php endif;?>
