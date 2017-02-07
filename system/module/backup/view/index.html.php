@@ -54,7 +54,7 @@
         <?php if($i == 0):?>
         <td <?php if($rowspan > 1) echo "rowspan='$rowspan'"?> class='text-middle'>
           <?php
-          commonModel::printLink('backup', 'restore', "file=$backupFile->name",  $lang->backup->restore, "class='restore'");
+          commonModel::printLink('backup', 'restore', "file=$backupFile->name",  $lang->backup->restore, "class='restore' style='padding-left: 4px;'");
           commonModel::printLink('backup', 'delete', "file=$backupFile->name",  $lang->backup->delete, "class='deleter'");
           echo "<br/>";
           commonModel::printLink('backup', 'note', "file=$backupFile->name",  $lang->backup->note, "data-toggle='modal' class='noter'");
