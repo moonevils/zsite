@@ -45,7 +45,16 @@ class backupModel extends model
             $time = time();
             foreach($backupFiles as $file)
             {
-                if($time - filemtime($file) > $this->config->backup->holdDays * 24 * 3600) unlink($file);
+                if($time - filemtime($file) > $this->config->backup->holdDays * 24 * 3600)
+                {
+                    if(isset($this->config->backup->reservedFiles))
+                    {
+                        $baseInfo = explode('.', basename($file));
+                        $basename = zget($baseInfo, 0);
+                        if(strpos($this->config->backup->reservedFiles, $basename) !== false) continue;
+                    }
+                    unlink($file);
+                }
             }
         }
 
