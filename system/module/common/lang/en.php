@@ -107,6 +107,7 @@ $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No match found!';
 $lang->alias          = 'For SEO, use letters and numbers.';
 $lang->keywordsHolder = 'Use commas to separate keywords.';
+$lang->autoUpgrade    = 'Auto upgrade';
 
 $lang->setOkFile = <<<EOT
 <h5>Please confirm your admin account by following steps below.</h5>

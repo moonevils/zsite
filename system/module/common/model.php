@@ -555,6 +555,7 @@ class commonModel extends model
         $string .= '<li>' . html::a(helper::createLink('user', 'setEmail'), $lang->setEmail, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'setSecurity'), $lang->setSecurity, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('misc','autoupgrade'), $lang->autoUpgrade, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user','logout'), $lang->logout) . '</li>';
         $string .= '</ul></li></ul>';
