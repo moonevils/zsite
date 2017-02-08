@@ -16,13 +16,13 @@ $lang->upgrade->fail    = '升级失败';
 $lang->upgrade->success = '升级成功';
 $lang->upgrade->tohome  = '返回首页';
 
-$lang->upgrade->backup        = '备份数据';
-$lang->upgrade->prepair       = '准备升级';
-$lang->upgrade->selectVersion = '确认升级之前的版本';
-$lang->upgrade->confirm       = '确认要执行的SQL语句';
-$lang->upgrade->execute       = '确认执行';
-$lang->upgrade->next          = '下一步';
-$lang->upgrade->updateLicense = '蝉知 4.0 已更换授权协议至 Z PUBLIC LICENSE(ZPL) 1.2。';
+$lang->upgrade->backup           = '备份数据';
+$lang->upgrade->prepair          = '准备升级';
+$lang->upgrade->selectVersion    = '确认升级之前的版本';
+$lang->upgrade->confirm          = '确认要执行的SQL语句';
+$lang->upgrade->execute          = '确认执行';
+$lang->upgrade->next             = '下一步';
+$lang->upgrade->updateLicense    = '蝉知 4.0 已更换授权协议至 Z PUBLIC LICENSE(ZPL) 1.2。';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
