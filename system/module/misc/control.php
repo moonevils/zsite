@@ -120,6 +120,7 @@ class misc extends control
         $tmpPath = $this->app->getTmpRoot() . 'upgrade/chanzhieps.zip';
         set_time_limit(0);
         //touch($tmpPath);
+        //chmod($tmpPath, 0777);
         
         if ($fp = fopen($url, "rb")) 
         {
@@ -176,6 +177,48 @@ class misc extends control
         else
         {
             $this->send(array('fullsize' => 0));
+        }
+    }
+
+    /**
+     * Check the package of download
+     *
+     * @access public
+     * @param  void
+     * @return void
+     */
+    public function checkDownloadedPackage()
+    {
+        $this->send(array('result' => 'success'));
+    }
+
+    /**
+     * Extract downloaded package
+     *
+     * @access public
+     * @param  void
+     * @return void
+     */
+    public function extractDownloadedPackage()
+    {
+        $extarctPath   = $this->app->getTmpRoot() . 'upgrade/';
+        $extarctedPath = $extarctPath . 'chanzhieps/';
+        if(file_exists($extarctedPath))
+        {
+            $this->send(array('result' => 'success'));
+        }
+        else
+        {
+            $return = new stdclass();
+            $return->result = true;
+            $return->error  = '';
+            $this->app->loadClass('pclzip', true);
+            $zip = new pclzip($extarctPath . 'chanzhieps.zip');
+            if($zip->extract(PCLZIP_OPT_PATH, $extarctPath) == 0)
+            {
+                $return->result = false;
+                $return->error  = $zip->errorInfo();
+            }
         }
     }
 }

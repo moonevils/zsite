@@ -19,7 +19,10 @@ $lang->misc->checkUpgradeInfo = '查看升级内容';
 
 $lang->misc->downloadingPackage = '正在下载更新包';
 $lang->misc->downloadedPackage  = '更新包下载完成';
+$lang->misc->checkingPackage    = '正在验证更新包';
+$lang->misc->checkedPackage     = '更新包验证完成';
 $lang->misc->extractingPackage  = '解压缩更新包';
+$lang->misc->downloadingpackage = '准备升级中';
 
 $lang->misc->invalidUpgradePath['no_dir']       = '请创建/tmp/upgradepath';
 $lang->misc->invalidUpgradePath['not_writable'] = '请修改权限/tmp/upgradepath';

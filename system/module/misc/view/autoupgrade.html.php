@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php if(!$isLatestVersion) js::set('url', $latestVersion['releasePackage']);?>
+<?php if(!$isLatestVersion) js::set('downloadingpackage', $lang->misc->downloadingpackage);?>
 <div>
   <?php if($isLatestVersion):?>
   <div class='versionBox'>
@@ -33,6 +34,8 @@
       <li id='hasError' class='hidden'><span id='error'>ssssssssssss</span></li>
       <li id='downloading' class='hidden'><?php echo $lang->misc->downloadingPackage;?> <span id='progress'>0</span>%</li>
       <li id='downloaded' class='hidden'><?php echo $lang->misc->downloadedPackage;?></li>
+      <li id='checking' class='hidden'><?php echo $lang->misc->checkingPackage;?></li>
+      <li id='checked' class='hidden'><?php echo $lang->misc->checkedPackage;?></li>
       <li id='extracting' class='hidden'><?php echo $lang->misc->extractingPackage;?></li>
     </ul>
   </div>
