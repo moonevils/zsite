@@ -52,6 +52,25 @@
   </td>
 </tr>
 <tr>
+  <th><?php echo $lang->block->showTitle;?></th>
+  <td>
+    <div class='input-group'>
+      <span class='input-group-addon'>
+        <input type='checkbox' name='params[showTitle]' <?php if(!isset($block->content->showTitle) or (isset($block->content->showTitle) && $block->content->showTitle)) echo 'checked';?> value='1' />
+      </span>
+      <?php echo html::select('params[alignTitle]', $lang->block->alignList, isset($block->content->alignTitle) ? $block->content->alignTitle : 'left', "class='form-control'");?>
+    </div>
+  </td>
+</tr>
+<tr>
+  <th><?php echo $lang->block->showPrice;?></th>
+  <td><input type='checkbox' name='params[showPrice]' <?php if(!isset($block->content->showPrice) or (isset($block->content->showPrice) && $block->content->showPrice)) echo 'checked';?> value='1' /></td>
+</tr>
+<tr>
+  <th><?php echo $lang->block->showViews;?></th>
+  <td><input type='checkbox' name='params[showViews]' <?php if(isset($block->content->showViews) && $block->content->showViews) echo 'checked';?> value='1' /></td>
+</tr>
+<tr>
   <th><?php echo $lang->block->showImage;?></th>
   <td><input type='checkbox' name='params[image]' <?php if(isset($block->content->image) && $block->content->image) echo 'checked';?> value='1' /></td>
 </tr>
