@@ -50,6 +50,12 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             <?php endif;?>
             <?php echo $product->name;?>
             </span>
+            <?php if(isset($content->showViews) and $content->showViews):?>
+            <span style='float:right;margin-left:5px;'>
+               <i class="icon icon-eye-open"></i> <?php echo $product->views;?>
+            </span>
+            <?php endif;?>
+            <?php if(isset($content->showPrice) and $content->showPrice):?>
             <span class='text-latin' style='float:right'>
             <?php
             $currencySymbol = $this->config->product->currencySymbol;
@@ -70,6 +76,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
             ?>
             </span>
+            <?php endif;?>
           </div>
         </a>
          <?php if(isset($content->showInfo) and isset($content->infoAmount)):?>
@@ -94,6 +101,8 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       ?>
       <li>
         <span class='text-latin pull-right'>
+        <?php if(isset($content->showPrice) and $content->showPrice):?>
+        <span>
         <?php
         if(!$product->unsaleable)
         {
@@ -114,6 +123,13 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
         }
         ?>
+        <?php endif;?>
+        </span>
+        <?php if(isset($content->showViews) and $content->showViews):?>
+        <span>
+          <i class="icon icon-eye-open"></i> <?php echo $product->views;?>
+        </span>
+        <?php endif;?>
         </span>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
           <?php if($content->categoryName == 'abbr'):?>
