@@ -1026,7 +1026,7 @@ class user extends control
             $this->user->checkEmail($this->post->email);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->app->user->emailCertified = 1;
-            $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
+            $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => inlink('control')));
         }
 
         $this->view->title      = $this->lang->user->checkEmail;
