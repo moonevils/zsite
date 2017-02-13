@@ -38,7 +38,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
     ?>
     <div class='item'>
       <div class='item-heading'>
-        <?php if($article->sticky):?><span class='text-danger'><i class="icon icon-flag"></i></span><?php endif;?>
+        <?php if($article->sticky):?><span class='<?php if($article->sticky == '2') echo 'red';?>'><i class="icon icon-flag"></i></span><?php endif;?>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -94,7 +94,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <span class='pull-right'>
-            <?php if($article->sticky):?><span class='text-danger'><i class="icon icon-flag"></i></span><?php endif;?>
+            <?php if($article->sticky):?><span class='<?php if($article->sticky == '2') echo 'red';?>'><i class="icon icon-flag"></i></span><?php endif;?>
             <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
         </span>      
       </li>
@@ -110,7 +110,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <span class='pull-right'>
-            <?php if($article->sticky):?><span class='text-danger'><i class="icon icon-flag"></i></span><?php endif;?>
+            <?php if($article->sticky):?><span class='<?php if($article->sticky == '2') echo 'red';?>'><i class="icon icon-flag"></i></span><?php endif;?>
         </span>
       </li>
       <?php endif;?>
