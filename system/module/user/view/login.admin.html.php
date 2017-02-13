@@ -48,13 +48,6 @@ js::set('random', $this->session->random);
               <th><?php echo html::a('', $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
               <td>
                 <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn');?>
-                <?php 
-                  if(!empty($this->config->site->yangcong)) 
-                  {        
-                    $yangcongConfig = json_decode($this->config->site->yangcong);
-                    if(zget($yangcongConfig, 'appID', '')) echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<i class='icon icon-qrcode icon-lg'> {$lang->user->yangcongLogin}</i>", "class='btn btn-success' data-toggle='modal'");
-                  }
-                ?>
               </td>
             </tr>
           </table>

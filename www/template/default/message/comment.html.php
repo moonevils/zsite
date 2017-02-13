@@ -7,20 +7,21 @@ if(isset($pageCSS)) css::internal($pageCSS);
 ?>
 <?php if(isset($comments) and $comments):?>
 <div class='panel mgb-0'>
-  <div class='panel-heading'>
+  <div class='panel-heading' style="border-bottom-width: 0px;">
     <div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
     <strong><?php echo $lang->message->list;?></strong>
   </div>
   <div class='comment-container'>
     <?php $i = 0;?>
     <?php foreach($comments as $number => $comment):?>
-    <div class='w-p100 panel comment-item' id="comment<?php echo $comment->id?>">
+    <div class='w-p100 panel comment-item comment-panel' id="comment<?php echo $comment->id?>">
       <div class='panel-heading content-heading'>
         <i class='icon icon-user'> <?php echo $comment->from;?></i>
         <i class='text-muted'> <?php echo $comment->date;?></i>
         <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), "<i class='icon icon-reply text-info'> </i>", "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?>
       </div>
       <div class='panel-body'><?php echo nl2br($comment->content);?></div>
+      <div>
       <?php $this->message->getFrontReplies($comment);?>
     </div>
     <?php endforeach;?>

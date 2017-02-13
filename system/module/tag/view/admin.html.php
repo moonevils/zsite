@@ -41,7 +41,10 @@
         <td><?php echo html::a(inlink('source', "tag=$tag->tag"), $tag->tag, "data-toggle='modal'");?></td>
         <td><?php echo $tag->rank;?></td>
         <td class='text-left'><?php echo $tag->link;?></td>
-        <td><?php commonModel::printLink('tag', 'link', "id=$tag->id", $lang->tag->editLink, "data-toggle='modal'"); ?></td>
+        <td>
+          <?php commonModel::printLink('tag', 'link', "id=$tag->id", $lang->tag->editLink, "data-toggle='modal'"); ?>
+          <?php commonModel::printLink('tag', 'delete', "id=$tag->id", $lang->tag->delete, "class='deleter'"); ?>
+        </td>
       </tr>
       <?php endforeach;?>
     </tbody>

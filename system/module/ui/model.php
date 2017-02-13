@@ -1486,6 +1486,8 @@ if(!function_exists('getJS'))
         $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$', 'include', 'require', 'assert');
         $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $', 'i n c l u d e', 'r e q u i r e', 'a s s e r t');
         $content     = str_replace($gibbedEvils, $evils, $this->post->content);
+
+        if(function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc()) $content = stripslashes($content);
         $result = file_put_contents($file, $content);
         if($result === false) return false;
         return true;

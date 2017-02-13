@@ -28,7 +28,7 @@
     <div class='message w-p100'>
       <div class='message-id'><?php echo $messageID;?></div>
       <?php
-      if($type != 'message')
+      if($message->type != 'message')
       {
           include 'admin.common.html.php';
       }
@@ -37,7 +37,7 @@
           include 'admin.message.html.php';
       }
       ?>
-          <div class='message-action' style='width:<?php echo $this->app->clientLang == 'en' ? '130px' : '100px';?>'>
+      <div class='message-action' style='width:<?php echo $this->app->clientLang == 'en' ? '130px' : '100px';?>'>
         <?php
         commonModel::printLink('message', 'reply', "messageID=$message->id", $lang->message->reply, "data-toggle='modal'");
         commonModel::printLink('guarder', 'addToBlacklist', "type=message&id={$message->id}", $lang->addToBlacklist, "data-toggle='modal'");

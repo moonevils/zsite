@@ -81,7 +81,6 @@ $lang->user->myScore         = '当前积分';
 $lang->user->buyScore        = '积分充值';
 $lang->user->addScore        = '奖励积分';
 $lang->user->reduceScore     = '扣除积分';
-$lang->user->yangcongLogin   = '洋葱登录';
 $lang->user->bindAccount     = '绑定帐号';
 $lang->user->batchDelete     = '批量删除用户';
 $lang->user->deleteHistory   = '删除用户及历史数据';
@@ -119,7 +118,8 @@ $lang->user->inputAccountOrEmail = '请输入用户名或Email';
 $lang->user->inputPassword       = '请输入密码';
 $lang->user->searchUser          = '搜索';
 
-$lang->user->errorDeny         = "抱歉，您无权访问『<b>%s</b>』模块的『<b>%s</b>』功能。请联系管理员获取权限。点击后退返回上页。<br/> 5秒钟后将自动返回首页...";
+$lang->user->errorDeny         = "抱歉，您无权访问『<b>%s</b>』模块的『<b>%s</b>』功能。请联系管理员获取权限。<br/>点击后退返回上页。5秒钟后将自动返回首页...";
+$lang->user->noModuleDeny      = "抱歉，您所访问的网站没有开启『<b>%s</b>』模块，如有疑问，请联系网站管理员。<br/>点击后退返回上页。5秒钟后将自动返回首页...";
 $lang->user->loginFailed       = "登录失败，请检查您的用户名或密码是否填写正确。";
 $lang->user->identifyFailed    = "验证失败，请检查您的密码是否正确。";
 $lang->user->locked            = "用户已经被锁定，请%s后再重新尝试登录";
@@ -201,8 +201,8 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
-$lang->user->oauth->providers['qq']   = 'QQ';
 $lang->user->oauth->providers['sina'] = '新浪微博';
+$lang->user->oauth->providers['qq']   = 'QQ';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博会员';
 $lang->user->oauth->typeList['qq']     = 'QQ会员';
@@ -260,7 +260,6 @@ $lang->user->locationDenied       = '登录地区受限，请按提示操作。'
 $lang->user->loginLocationChanged = '登录地址发生变化，请按提示操作。';
 $lang->user->verifyFail           = '请填写正确的验证码';
 $lang->user->confirmUnbind        = '您确定要解除绑定吗？';
-$lang->user->forceYangcong        = '已开启强制洋葱登录，普通登录需要进行验证。';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';

@@ -107,6 +107,7 @@ $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No match found!';
 $lang->alias          = 'For SEO, use letters and numbers.';
 $lang->keywordsHolder = 'Use commas to separate keywords.';
+$lang->autoUpgrade    = 'Auto upgrade';
 
 $lang->setOkFile = <<<EOT
 <h5>Please confirm your admin account by following steps below.</h5>
@@ -130,10 +131,9 @@ $lang->getUserByApi       = 'Get user info by api';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['en'] = array();
-$lang->selectLangTip['en']['zh-cn'] = 'Switch to simplified Chinese site';
-$lang->selectLangTip['en']['zh-tw'] = 'Switch to traditional Chinese site';
-$lang->selectLangTip['en']['en']    = 'Switch to English site';
+$lang->selectLangTip['zh-cn'] = 'Switch to simplified Chinese site';
+$lang->selectLangTip['zh-tw'] = 'Switch to traditional Chinese site';
+$lang->selectLangTip['en']    = 'Switch to English site';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -193,9 +193,7 @@ $lang->menu->product      = 'Product|product|admin|';
 $lang->menu->orderSetting = 'Settings|product|setting|';
 
 $lang->menu->user         = 'User|user|admin|';
-$lang->menu->message      = 'Message|message|admin|type=message';
-$lang->menu->comment      = 'Comment|message|admin|type=comment';
-$lang->menu->reply        = 'Reply|message|admin|type=reply';
+$lang->menu->message      = 'Message|message|admin|';
 $lang->menu->forum        = 'Forum|forum|admin|';
 $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Post|reply|admin|';

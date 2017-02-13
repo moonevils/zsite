@@ -52,16 +52,6 @@
           <td colspan='2'><?php echo html::radio('checkLocation', $lang->site->checkLocationList, isset($this->config->site->checkLocation) ? $this->config->site->checkLocation : 'close');?></td>
           <td></td>
         </tr>
-        <?php if(isset($this->config->site->yangcong)):?>
-        <tr>
-          <th class='w-200px'><?php echo $lang->site->forceYangcong;?></th>
-          <td colspan='2'>
-            <?php echo html::radio('forceYangcong', $lang->site->forceYangcongList, isset($this->config->site->forceYangcong) ? $this->config->site->forceYangcong : 'close');?>
-            <br/><span class='text-important'><?php echo $lang->site->yangcongTip;?></span>
-          </td>
-          <td></td>
-        </tr>
-        <?php endif;?>
         <tr>
           <?php $allowedLocation = isset($this->config->site->allowedLocation) ? $this->config->site->allowedLocation : '';?>
           <th class='w-200px'><?php echo $lang->site->allowedLocation;?></th>

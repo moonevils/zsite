@@ -1,4 +1,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('deletingTip', $lang->file->deletingTip);?>
+<?php js::set('deletedTip', $lang->file->deletedTip);?>
+<?php js::set('failDeleteTip', $lang->file->failDeleteTip);?>
 <div class='panel'>
   <div class='panel-heading' style='height:39px;'>
     <ul id='typeNav' class='nav nav-tabs pull-left'>
@@ -7,7 +10,7 @@
     </ul>
     <?php if($type == 'invalid'):?>
       <div class='panel-actions'>
-        <?php echo html::a(inlink('deleteAllInvalid'), $lang->file->clearAllInvalid, 'class="btn btn-primary pull-right"');?>
+        <?php echo html::a(inlink('deleteAllInvalid'), $lang->file->clearAllInvalid, 'class="btn btn-primary pull-right" id="deleteAllButton"');?>
       </div>
     <?php endif;?>
   </div>

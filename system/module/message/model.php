@@ -87,8 +87,10 @@ class messageModel extends model
         {
             if($type !== 'simple')
             {
+                echo "<div class='replies'>";
                 foreach($replies as $reply)
                 {
+                    echo "<div class='reply-panel'>";
                     echo "<div class='panel-heading reply-heading'>";
                     echo "<i class='icon icon-user'> {$reply->from}</i> ";
                     echo "<i class='text-muted'>" . $reply->date . "</i>";
@@ -98,7 +100,9 @@ class messageModel extends model
                     echo nl2br($reply->content);
                     echo '</div>';
                     $this->getFrontReplies($reply);
+                    echo "</div>";
                 }
+                echo "</div>";
             }
             else
             {
@@ -182,7 +186,7 @@ class messageModel extends model
         if($message->objectType == 'article') $objectTitle = $this->dao->select('title')->from(TABLE_ARTICLE)->where('id')->eq($message->objectID)->fetch('title');
         if($message->objectType == 'product') $objectTitle = $this->dao->select('name')->from(TABLE_PRODUCT)->where('id')->eq($message->objectID)->fetch('name');
         if($message->objectType == 'book')    $objectTitle = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($message->objectID)->fetch('title');
-        if($message->objectType == 'message' or $message->objectType == 'comment') $objectTitle = $this->getByID($message->id)->from;
+        if($message->objectType == 'message' or $message->objectType == 'comment') $objectTitle = $this->getByID($message->objectID)->from;
         return $objectTitle;
     }
 
@@ -228,7 +232,9 @@ class messageModel extends model
     public function getList($type, $status, $pager = null)
     {
         $messages = $this->dao->select('*')->from(TABLE_MESSAGE)
-            ->where('type')->eq($type)
+            ->where(1)
+            ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
+            ->beginIf($type == 'all')->andWhere('type')->in('message,comment,reply')->fi()
             ->andWhere('status')->eq($status)
             ->beginIf(RUN_MODE == 'front')->andWhere('public')->eq(1)->fi()
             ->orderBy('id_desc')

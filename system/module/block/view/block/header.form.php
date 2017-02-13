@@ -14,6 +14,7 @@
 
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
+<?php js::set('noInsertTip', $lang->block->noInsertTip);?>
 <tr class='top'>
   <th id='tableHeadingtop' rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
@@ -36,7 +37,14 @@
   <td></td>
 </tr>
 <tr class='top topRight hide'>
-  <td><?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control'");?></td>
+  <td>
+    <?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control textarea-withchosen' rows='5'");?>
+    <div class='textarea-chosen'>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['login'], "id='login' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['search'], "id='search' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
+    </div>
+    <p></p>
+  </td>
 </tr>
 <tr class='middle'>
   <th><?php echo $lang->block->header->middle->common;?></th>
@@ -63,6 +71,30 @@
   </td>
 </tr>
 <script>
+$(".btn-addChoice").click(function(){
+    choiceItem      = this.id;
+    topRightContent = $("[name*=params][name*=topRightContent]").val();
+    topRightContent += '$' + choiceItem.toUpperCase() + ' ';
+
+    if(!checkChoiceInserted($("[name*=params][name*=topRightContent]").val(), choiceItem)) 
+    {
+        $("[name*=params][name*=topRightContent]").val(topRightContent); 
+    }
+});
+
+var checkChoiceInserted = function(searchedStr, searchItem){
+    if(searchItem == 'login')
+    {
+        if(searchedStr.indexOf('$LOGIN') >= 0) return true;
+    }
+    if(searchItem == 'search')
+    {
+        if(searchedStr.indexOf('$SEARCH') >= 0) return true;
+    }
+    
+    return false;
+};
+
 $(function()
 {
     $('#compatible').change(function()
@@ -126,7 +158,6 @@ $(function()
             }
         }
     })
-    
     $("[name*=params][name*=top][name*=left]").change();
     $("[name*=params][name*=top][name*=right]").change();
 })

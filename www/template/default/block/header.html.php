@@ -20,16 +20,17 @@ $logoSetting       = isset($this->config->site->logo) ? json_decode($this->confi
 $logo              = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
 
 /* Set default header layout setting. */
-$setting->top            = isset($setting->top) ? $setting->top : new stdclass();
-$setting->middle         = isset($setting->middle) ? $setting->middle : new stdclass();
-$setting->bottom         = zget($setting, 'bottom', 'nav');
-$setting->top->left      = zget($setting->top, 'left', '');
-$setting->top->right     = zget($setting->top, 'right', 'login');
-$setting->middle->left   = zget($setting->middle, 'left', 'nav');
-$setting->middle->center = zget($setting->middle, 'center', 'slogan');
-$setting->middle->right  = zget($setting->middle, 'right', 'search');
-$setting->compatible     = zget($setting, 'compatible', '0');
-$setting->topLeftContent = zget($setting, 'topLeftContent', '');
+$setting->top             = isset($setting->top) ? $setting->top : new stdclass();
+$setting->middle          = isset($setting->middle) ? $setting->middle : new stdclass();
+$setting->bottom          = zget($setting, 'bottom', 'nav');
+$setting->top->left       = zget($setting->top, 'left', '');
+$setting->top->right      = zget($setting->top, 'right', 'login');
+$setting->middle->left    = zget($setting->middle, 'left', 'nav');
+$setting->middle->center  = zget($setting->middle, 'center', 'slogan');
+$setting->middle->right   = zget($setting->middle, 'right', 'search');
+$setting->compatible      = zget($setting, 'compatible', '0');
+$setting->topLeftContent  = zget($setting, 'topLeftContent', '');
+$setting->topRightContent = zget($setting, 'topRightContent', '');
 ?>
 
 <div data-ve='block' data-id="<?php echo $block->id;?>">

@@ -133,3 +133,5 @@ $lang->product->currencySymbols['sgd']  = 'S$';
 $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = '關閉';
 $lang->product->stockOptions[1] = '開啟';
+
+$lang->product->noCategoriesTip = '您還沒有為產品添加類目，請添加類目';

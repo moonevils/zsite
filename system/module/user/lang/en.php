@@ -81,7 +81,6 @@ $lang->user->myScore         = 'Points';
 $lang->user->buyScore        = 'Refill Points';
 $lang->user->addScore        = 'Reward';
 $lang->user->reduceScore     = 'Deduct';
-$lang->user->yangcongLogin   = 'Yangcong Login';
 $lang->user->bindAccount     = 'Account Binding';
 $lang->user->batchDelete     = 'Batch Delete';
 $lang->user->deleteHistory   = 'Delete account and history';
@@ -120,6 +119,7 @@ $lang->user->inputPassword       = 'Enter Password';
 $lang->user->searchUser          = 'Search';
 
 $lang->user->errorDeny         = "Sorry, you have no access to『<b>%s</b>』->『<b>%s</b>』. Please contact your Admin. <br/> You will be directed to Homepage in 5 sec...";
+$lang->user->noModuleDeny      = "Sorry, the site which you are visiting has not enabled 『<b>%s</b>』module, Please contact your Admin. <br/> You will be directed to Homepage in 5 sec...";
 $lang->user->loginFailed       = "Login failed. Please check your user name and password.";
 $lang->user->identifyFailed    = "Verification failed. Please check your password.";
 $lang->user->locked            = "Account has been locked. Please try to login in %s.";
@@ -201,8 +201,8 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
-$lang->user->oauth->providers['qq']   = 'QQ';
 $lang->user->oauth->providers['sina'] = 'Weibo';
+$lang->user->oauth->providers['qq']   = 'QQ';
 
 $lang->user->oauth->typeList['sina']   = 'Weibo User';
 $lang->user->oauth->typeList['qq']     = 'QQ User';
@@ -260,7 +260,6 @@ $lang->user->locationDenied       = 'Login location is restricted. Please follow
 $lang->user->loginLocationChanged = 'Login address is changed. Please follow instructions.';
 $lang->user->verifyFail           = 'Please enter the correct verification code.';
 $lang->user->confirmUnbind        = 'Do you want to remove binding?';
-$lang->user->forceYangcong        = 'Yangcong has been open, please confirm your identity.';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your password.';
