@@ -33,7 +33,8 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
       ?>
       <?php if(!empty($product->image)): ?>
-      <div class='col-md-12' data-recperrow="<?php echo (isset($content->recPerRow) and !empty($content->recPerRow)) ? $content->recPerRow : '3';?>">
+      <?php $recPerRow = (isset($content->recPerRow) and !empty($content->recPerRow)) ? $content->recPerRow : '3';?>
+      <div class='col-md-12' style="width:<?php echo 100 / $recPerRow;?>%" data-recperrow="<?php echo $recPerRow;?>">
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
@@ -49,6 +50,12 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             <?php endif;?>
             <?php echo $product->name;?>
             </span>
+            <?php if(isset($content->showViews) and $content->showViews):?>
+            <span style='float:right;margin-left:5px;'>
+               <i class="icon icon-eye-open"></i> <?php echo $product->views;?>
+            </span>
+            <?php endif;?>
+            <?php if(isset($content->showPrice) and $content->showPrice):?>
             <span class='text-latin' style='float:right'>
             <?php
             $currencySymbol = $this->config->product->currencySymbol;
@@ -69,6 +76,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
             ?>
             </span>
+            <?php endif;?>
           </div>
         </a>
          <?php if(isset($content->showInfo) and isset($content->infoAmount)):?>
@@ -93,6 +101,8 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       ?>
       <li>
         <span class='text-latin pull-right'>
+        <?php if(isset($content->showPrice) and $content->showPrice):?>
+        <span>
         <?php
         if(!$product->unsaleable)
         {
@@ -113,6 +123,13 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
         }
         ?>
+        <?php endif;?>
+        </span>
+        <?php if(isset($content->showViews) and $content->showViews):?>
+        <span>
+          <i class="icon icon-eye-open"></i> <?php echo $product->views;?>
+        </span>
+        <?php endif;?>
         </span>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
           <?php if($content->categoryName == 'abbr'):?>

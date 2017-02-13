@@ -537,7 +537,7 @@ class orderModel extends model
 
         if(RUN_MODE == 'admin')
         {
-            $class  = $btnLink ? 'btn' : '';
+            $class  = $btnLink ? 'btn btn-ajax-loader' : '';
             
             /* View order link */ 
             if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id&btnLink=false"), $this->lang->order->view, $toggle);
@@ -593,7 +593,7 @@ class orderModel extends model
         $toggle = $btnLink ? '' : "data-toggle='modal'";
         if(RUN_MODE == 'admin' )
         {
-            $class  = $btnLink ? 'btn' : '';
+            $class  = $btnLink ? 'btn btn-ajax-loader' : '';
 
             /* Edit link. */
             $disabled = $order->status == 'normal' ? '' : "disabled = 'disabled'";

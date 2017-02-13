@@ -10,9 +10,27 @@
  * @link        http://www.chanzhi.org
 */
 ?>
+<?php 
+  $isWidthSearchBar = false;
+  if($setting->top->right and strpos(',searchAndLogin,search,loginAndSearch,', ',' . $setting->top->right . ',') !== false)
+  {
+      $isWidthSearchBar = true;
+  }
+  if($setting->top->right == 'custom')
+  {
+    foreach(array('searchAndLogin', 'search', 'loginAndSearch') as $searchItem)
+    {
+        if(strpos($setting->topRightContent, strtoupper($searchItem)) !== false) 
+        {
+            $isWidthSearchBar = true;
+            break;
+        }
+    }
+  }
+?>
 <header id='header' class='<?php if($setting->bottom) echo 'without-navbar'; ?>'>
   <?php if($setting->top->left or $setting->top->right):?>
-  <div id='headNav' class='<?php if($setting->top->left == 'slogan') echo 'with-slogan' ?><?php if($setting->top->right and strpos(',searchAndLogin,search,loginAndSearch,', ',' . $setting->top->right . ',') !== false) echo ' with-searchbar' ?>'>
+  <div id='headNav' class='<?php if($setting->top->left == 'slogan') echo 'with-slogan' ?><?php if($isWidthSearchBar) echo ' with-searchbar' ?>'>
     <div class='row'>
       <?php if($setting->top->left == 'slogan'):?>
       <div id='siteSlogan' class='nobr'><span><?php echo $this->config->site->slogan;?></span></div>
@@ -29,6 +47,57 @@
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');?>
       <?php elseif($setting->top->right == 'search'):?>
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
+      <?php endif;?>
+      <?php if($setting->top->right == 'custom'):?>
+      <?php
+        if(strpos($setting->topRightContent, '$LOGIN') === false and strpos($setting->topRightContent, '$SEARCH') === false)
+        {
+            echo " <div class='custom-top-right'>" . htmlspecialchars_decode($setting->topRightContent, ENT_QUOTES) .  "</div> ";
+        }
+        else
+        {
+            echo " <div class='custom-top-right'>";
+            $loginPos  = strpos($setting->topRightContent, '$LOGIN');
+            $searchPos = strpos($setting->topRightContent, '$SEARCH');
+            
+            if($loginPos !== false and $searchPos !== false)
+            {
+                if($loginPos > $searchPos)
+                {
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, $loginPos + 6), ENT_QUOTES) . "</div>";
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, $searchPos + 7, $loginPos - $searchPos - 7), ENT_QUOTES) . "</div>";
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, 0, $searchPos), ENT_QUOTES) . "</div>";
+                }
+                else
+                {
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, $searchPos + 7), ENT_QUOTES) . "</div>";
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, $loginPos + 6, $searchPos - $loginPos - 6), ENT_QUOTES) . "</div>";
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, 0, $loginPos), ENT_QUOTES) . "</div>";
+                }
+            } 
+            else
+            {
+                if($loginPos !== false)
+                {
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, $loginPos + 6), ENT_QUOTES) . "</div>";
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, 0, $loginPos), ENT_QUOTES) . "</div>";
+                }
+                else
+                {
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, $searchPos + 7), ENT_QUOTES) . "</div>";
+                    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');
+                    echo "<div class='custom-top-right-content'>" . htmlspecialchars_decode(substr($setting->topRightContent, 0, $searchPos), ENT_QUOTES) . "</div>";
+                }
+            }
+            
+            echo "</div>";
+        }
+      ?>
       <?php endif;?>
     </div>
   </div>
@@ -52,6 +121,21 @@
     </div>
   </div>
 </header>
+
+<?php if($setting->top->right == 'custom'):?>
+<style>
+#searchbar{padding-left: 10px;}
+.custom-top-right {display:inline-block; width:auto; float:right; position:relative;margin-right: 5px;margin-left: 5px;}
+.custom-top-right-content {display:inline-block; width:auto; float:right; position:relative;margin-right: 5px;margin-left: 5px;}
+<?php if($this->config->template->desktop->theme != 'wide'):?>
+#searchbar .form-control{height: 25px; line-height: 25px;}
+#searchbar .btn{line-height: 10px;}
+<?php endif;?>
+#searchbar {float: right;}
+#searchbar > form {float: none; margin: 4px 0}
+@media (max-width: 767px){#headNav > .row > #searchbar {display: none}}
+</style>
+<?php endif;?>
 
 <?php if(strpos(strtolower($setting->bottom), 'nav') !== false) include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
 <style>

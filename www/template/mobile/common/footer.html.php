@@ -14,7 +14,8 @@
     <?php if(empty($config->site->icpLink) and !empty($config->site->icpSN))  echo $config->site->icpSN;?>
   </div>
   <div class='powerby pull-right' id='powerby'>
-    <?php printf($lang->poweredBy, $config->version, k(), "<object style='position: relative; top: 2px' data='{$templateCommonRoot}img/chanzhi.xml' type='image/svg+xml'>{$lang->chanzhiEPSx}</object> <span class='name hide'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?>
+    <?php $footerLogo = $app->getClientLang() == 'en' ? "<span style='background: url({$templateCommonRoot}img/chanzhi-en.png) no-repeat top left; display: inline-block; width: 50px; height: 11px; position: relative; top: 1px; opacity: .7'></span>" : "<object style='position: relative; top: 2px' data='{$templateCommonRoot}img/chanzhi.xml' type='image/svg+xml'>{$lang->chanzhiEPSx}</object>"; ?>
+    <?php printf($lang->poweredBy, $config->version, k(), "{$footerLogo} <span class='name hide'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?>
   </div>
 </div>
 

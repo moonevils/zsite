@@ -67,7 +67,7 @@ class fileModel extends model
      * @access public
      * @return array
      */
-    public function getInvalidList($pager)
+    public function getInvalidList($pager = null)
     {
         $dataRoot     = $this->app->getDataRoot();
         $uploadFiles  = glob($dataRoot . "/upload/*/*"); 
@@ -92,11 +92,13 @@ class fileModel extends model
                   
             $unusedFiles[] = $unusedFile;
         }   
+        if($pager !== null)
+        {
+            $pager->recTotal  = count($unusedFiles);
+            $pager->pageTotal = ceil($pager->recTotal / $pager->recPerPage);
+            $unusedFiles      = array_slice($unusedFiles, ($pager->pageID - 1) * $pager->recPerPage, $pager->recPerPage);
+        }
 
-        $pager->recTotal  = count($unusedFiles);
-        $pager->pageTotal = ceil($pager->recTotal / $pager->recPerPage);
-        $unusedFiles      = array_slice($unusedFiles, ($pager->pageID - 1) * $pager->recPerPage, $pager->recPerPage);
-        
         return $unusedFiles;
     }
 

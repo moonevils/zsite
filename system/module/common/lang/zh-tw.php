@@ -42,7 +42,7 @@ $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.or
 $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查詢：<b>%s</b> 次<br>內存占用：<b>%s</b><br> PHP 執行時間：<b>%s</b> 秒</span></span>";
 $lang->customCssError = "不能生成樣式檔案，如果您是網站管理員，請到網站後台外觀管理重新設置樣式檔案";
-$lang->redirecting    = "<span class='text-muted'>正在跳轉請稍後......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳轉</a>";
+$lang->redirecting    = "<span class='text-muted'><span id='countDown'>3</span>秒後跳轉到類目管理頁面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳轉</a>";
 
 /* Global lang items. */
 $lang->home             = '首頁';
@@ -130,10 +130,9 @@ $lang->getUserByApi       = '獲取綁定信息';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['zh-tw'] = array();
-$lang->selectLangTip['zh-tw']['zh-cn'] = '切換到簡體中文站點';
-$lang->selectLangTip['zh-tw']['zh-tw'] = '切換到繁體中文站點';
-$lang->selectLangTip['zh-tw']['en']    = '切換到英文站點';
+$lang->selectLangTip['zh-tw'] = '切換到簡體中文站點';
+$lang->selectLangTip['zh-tw'] = '切換到繁體中文站點';
+$lang->selectLangTip['en']    = '切換到英文站點';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -193,9 +192,7 @@ $lang->menu->product      = '產品|product|admin|';
 $lang->menu->orderSetting = '設置|product|setting|';
 
 $lang->menu->user         = '會員|user|admin|';
-$lang->menu->message      = '留言|message|admin|type=message';
-$lang->menu->comment      = '評論|message|admin|type=comment';
-$lang->menu->reply        = '回覆|message|admin|type=reply';
+$lang->menu->message      = '反饋|message|admin|';
 $lang->menu->forum        = '論壇|forum|admin|';
 $lang->menu->thread       = '主題|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';

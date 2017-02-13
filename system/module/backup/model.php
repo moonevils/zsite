@@ -20,6 +20,8 @@ class backupModel extends model
     public function backupAll()
     {
         $this->backupPath = $this->app->getTmpRoot() . 'backup/';
+        if(!is_dir($this->backupPath)) mkdir($this->backupPath, 0777, true);
+
         set_time_limit(7200);
         $fileName = date('YmdHis') . mt_rand(0, 9);
         $result = $this->backSQL($this->backupPath . $fileName . '.sql.php');
@@ -43,7 +45,16 @@ class backupModel extends model
             $time = time();
             foreach($backupFiles as $file)
             {
-                if($time - filemtime($file) > $this->config->backup->holdDays * 24 * 3600) unlink($file);
+                if($time - filemtime($file) > $this->config->backup->holdDays * 24 * 3600)
+                {
+                    if(isset($this->config->backup->reservedFiles))
+                    {
+                        $baseInfo = explode('.', basename($file));
+                        $basename = zget($baseInfo, 0);
+                        if(strpos($this->config->backup->reservedFiles, $basename) !== false) continue;
+                    }
+                    unlink($file);
+                }
             }
         }
 

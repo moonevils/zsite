@@ -97,6 +97,7 @@ $lang->block->header->top->rightOptions['login']          = 'Login/Register + Sw
 $lang->block->header->top->rightOptions['search']         = 'Search bar';
 $lang->block->header->top->rightOptions['loginAndSearch'] = 'Login/Register Language + Search Box';
 $lang->block->header->top->rightOptions['searchAndLogin'] = 'Search Box + Login/Register Language';
+$lang->block->header->top->rightOptions['custom']         = 'Custom';
 
 $lang->block->header->middle->leftOptions['']     = 'Hide';
 $lang->block->header->middle->leftOptions['logo'] = 'Logo';
@@ -115,6 +116,7 @@ $lang->block->header->bottomOptions['navAndSearch'] = 'Naviagtion + Search Box';
 $lang->block->admin        = "Widget";
 $lang->block->pages        = "Layout";
 $lang->block->add          = "Add";
+$lang->block->insertLink   = 'Insert';
 $lang->block->addChild     = "Child";
 $lang->block->template     = "Template";
 $lang->block->create       = 'Add';
@@ -129,6 +131,7 @@ $lang->block->cloneLayout  = 'Save';
 $lang->block->switchLayout = 'Switch';
 $lang->block->removeLayout = 'Remove';
 $lang->block->planIsUseing = 'You cannot remove a Layout in use.';
+$lang->block->noInsertTip  = 'Need delete the original before insert the new one';
 
 $lang->block->paddingTop    = 'Top';
 $lang->block->paddingBottom = 'Bottom';

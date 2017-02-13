@@ -50,6 +50,7 @@ $lang->ui->offcial         = "Official";
 $lang->ui->score           = "score";
 $lang->ui->reset           = "Reset";
 $lang->ui->themePackage    = "Theme Package";
+$lang->ui->refreshPage     = "Refresh";
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";
@@ -129,6 +130,7 @@ $lang->ui->themeSaved      = 'Theme saved!';
 $lang->ui->unWritable      = "File cannot be created. Please check the privilege of %s.";
 $lang->ui->codeHolder      = "Theme ID, a combination of numbers and letter.";
 $lang->ui->unWritableFile  = "Fail to generate the css file, please check the privilege of %s";
+$lang->ui->openMobileTemplate = "Open mobile template？";
 
 $lang->ui->blocks2Merge  = "Widgets can be merged";
 $lang->ui->blocks2Create = "New";
@@ -250,7 +252,7 @@ $lang->ui->sideGrid      = 'Grid';
 $lang->ui->height        = 'Height';
 
 $lang->ui->primaryColor    = 'Primary Color';
-$lang->ui->backcolor       = 'Color';
+$lang->ui->backcolor       = 'Background Color';
 $lang->ui->forecolor       = 'Foreground Color';
 $lang->ui->backgroundImage = 'Image';
 $lang->ui->repeat          = 'Repeat Mode';

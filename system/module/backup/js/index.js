@@ -34,4 +34,18 @@ $(function()
         });
         return false;
     })
+    $('.reserver').click(function(){
+        btn = $(this);
+        url = btn.attr('href');
+        $.getJSON(url, function(response)
+        {
+            if(response.result == 'success') 
+            {
+              btn.text(v.lang.deleteing); 
+              location.reload();
+            }
+        });
+
+        return false;
+    });
 })

@@ -75,7 +75,7 @@ class file extends control
                 break;
             }
         }
-        if($result) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'locate' => inlink('admin', 'type=invalid')));
     }
     
     /**

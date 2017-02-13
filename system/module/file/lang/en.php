@@ -78,6 +78,9 @@ $lang->file->updateInvalidFiles = 'Update Invalid List';
 $lang->file->clearAllInvalid    = 'Delete All Invalid Files';
 $lang->file->fileTip            = 'Tips: Red represent the file has been deleted while there is data in database';
 
-$lang->file->dragFile    = 'Please drag files here';
-$lang->file->addFile     = 'Add';
-$lang->file->beginUpload = 'Upload';
+$lang->file->dragFile      = 'Please drag files here';
+$lang->file->addFile       = 'Add';
+$lang->file->beginUpload   = 'Upload';
+$lang->file->deletingTip   = 'Deleting';
+$lang->file->deletedTip    = 'Deleted';
+$lang->file->failDeleteTip = 'Delete failed';

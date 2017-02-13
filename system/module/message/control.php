@@ -105,14 +105,14 @@ class message extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'message', $status = '0', $recTotal = 0, $recPerPage = 5, $pageID = 1)
+    public function admin($type = 'all', $status = '0', $recTotal = 0, $recPerPage = 5, $pageID = 1)
     {
         if(!($this->loadModel('wechat')->getList())) unset($this->lang->message->menu->wechat);
-        $this->lang->menuGroups->message = $type;
+        $this->lang->menuGroups->message = 'message';
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title    = $type == 'reply' ? $this->lang->message->reply : $this->lang->$type->common;
+        $this->view->title    = $this->lang->message->common;
         $this->view->messages = $this->message->getList($type, $status, $pager);
         $this->view->pager    = $pager;
         $this->view->type     = $type;
