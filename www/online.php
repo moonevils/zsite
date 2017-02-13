@@ -118,10 +118,9 @@ $lang->upgrade = '升级';
           }
           else
           {
-              echo json_encode(array('result' => 'fail', 'message' => 'sssss'));
+              echo json_encode(array('result' => 'fail', 'message' => $downloadPath . '不可写，请运行命令 sudo chmod -R 777 ' . $downloadPath));
           }
           die();
-          break;
       case 'start-download':
           set_time_limit(0);
           if ($fp = fopen($packageUrl, "rb")) 
@@ -280,8 +279,8 @@ $lang->upgrade = '升级';
           <div class='error-box'>
               <?php if(!$config->userChecked):?>
               <?php 
-              $checkFilename = md5(time() . mt_rand());
-              $checkFileContent = md5(time() . mt_rand());
+              $checkFilename = substr(md5(time() . mt_rand()), 0, 5);
+              $checkFileContent = substr(md5(time() . mt_rand()), 0, 5);
               if(!isset($_SESSION['filename'])) $_SESSION['filename']    = $checkFilename;
               if(!isset($_SESSION['filecontent'])) $_SESSION['filecontent'] = $checkFileContent;
               ?>
