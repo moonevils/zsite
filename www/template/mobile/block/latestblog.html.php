@@ -49,7 +49,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
           <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . ']', "class='text-special'");?>
           <?php endif;?>
           <?php endif;?>
-          <?php if($article->sticky):?><span class='text-danger'><i class="icon icon-flag"></i></span><?php endif;?>
+          <?php if($article->sticky):?><span class='<?php if($article->sticky == '2') echo 'red';?>'><i class="icon icon-flag"></i></span><?php endif;?>
           <strong><?php echo html::a($url, $article->title);?></strong>
         </div>
         <div class='table-layout'>
