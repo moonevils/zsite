@@ -78,7 +78,9 @@ $lang->upgrade = '升级';
   $result = curl_exec($curl);
   curl_close($curl);
   $result = json_decode(json_decode($result, true), true);
-
+  
+  $config->extractFile  = basename($result['releasePackage']);
+  
   function copyDir($source, $destination)
   {
       if(!is_dir($destination) and $destination != '.')
@@ -174,8 +176,23 @@ $lang->upgrade = '升级';
           }
           break;
       case 'check-file':
-          echo json_encode(array('result' => 'success'));
-          die();
+          if(isset($result['md5']))
+          {
+              if(md5($downloadFile) == $result['md5'])
+              {
+                  echo json_encode(array('result' => 'success'));
+              }
+              else
+              {
+                  echo json_encode(array('result' => 'fail', 'message' => '文件校验失败，请重新下载文件'));
+              }
+              die();
+          }
+          else
+          {
+              echo json_encode(array('result' => 'success'));
+              die();
+          }
       case 'extract-file':
           if(!file_exists($config->extractPath . '/' . $config->extractFile)) echo json_encode(array('result' => 'fail', 'message' => '文件不存在'));
           $zip = new pclzip($config->extractPath . '/' . $config->extractFile);
@@ -267,13 +284,13 @@ $lang->upgrade = '升级';
           <?php endif;?>
           <?php if($config->envReady and $config->userChecked):?>
           <ul class='result-box'>
-            <li id='hasError' class='hidden'><span id='error'>ssssssssssss</span></li>
             <li id='downloading' class='hidden'><?php echo '正在下载安装包';?> <span id='progress'>0</span>%</li>
             <li id='downloaded' class='hidden'><?php echo '安装包下载完成';?></li>
             <li id='checking' class='hidden'><?php echo '正在校验安装包';?></li>
             <li id='checked' class='hidden'><?php echo '安装包校验完成';?></li>
             <li id='extracting' class='hidden'><?php echo '正在解压安装包';?></li>
             <li id='extracted' class='hidden'><?php echo '安装包解压完成';?></li>
+            <li id='hasError' class='hidden' style='color:red;'><span id='error'>ssssssssssss</span></li>
           </ul>
           <?php else:?>
           <div class='error-box'>
@@ -335,7 +352,6 @@ $(document).ready(function()
                     {
                         size = response.size;
                         progress = size / fullSize;
-                        console.log(progress.toFixed(2));
                         progress = progress * 100;
                         progress = progress.toFixed(2);
                         $('#progress').text(progress);
@@ -364,12 +380,14 @@ $(document).ready(function()
                                         else
                                         {
                                             $('#error').text(response.message);
+                                            $('#hasError').removeClass('hidden');
                                         }
                                     });
                                 }
                                 else
                                 {
                                     $('#error').text(response.message);
+                                    $('#hasError').removeClass('hidden');
                                 }
                             });
                         }
