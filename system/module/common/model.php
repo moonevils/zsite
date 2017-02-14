@@ -206,6 +206,7 @@ class commonModel extends model
             if($app->user->admin == 'no') return false;
             if($app->user->admin == 'super') return true;
             if($app->user->admin != 'no' and $module == 'admin' and $method == 'index') return true;
+            if($module == 'file' and strtolower($method) == 'uploadfile' and isset($rights['file']['upload'])) return true;
             if(isset($rights[$module][$method])) return true;
             return false;
         }
@@ -235,7 +236,7 @@ class commonModel extends model
     public function setUser()
     {
         if($this->session->user) return $this->app->user = $this->session->user;
-
+        
         /* Create a guest account. */
         $user           = new stdclass();
         $user->id       = 0;
