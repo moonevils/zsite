@@ -186,7 +186,17 @@ class messageModel extends model
         if($message->objectType == 'article') $objectTitle = $this->dao->select('title')->from(TABLE_ARTICLE)->where('id')->eq($message->objectID)->fetch('title');
         if($message->objectType == 'product') $objectTitle = $this->dao->select('name')->from(TABLE_PRODUCT)->where('id')->eq($message->objectID)->fetch('name');
         if($message->objectType == 'book')    $objectTitle = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($message->objectID)->fetch('title');
-        if($message->objectType == 'message' or $message->objectType == 'comment') $objectTitle = $this->getByID($message->objectID)->from;
+        if($message->objectType == 'message' or $message->objectType == 'comment') 
+        {
+            if(!isset($this->getByID($message->objectID)->from))
+            {
+                $objectTitle = '';
+            }
+            else
+            {
+                $objectTitle = $this->getByID($message->objectID)->from;
+            }
+        }
         return $objectTitle;
     }
 
