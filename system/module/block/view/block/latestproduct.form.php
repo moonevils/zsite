@@ -52,12 +52,9 @@
   </td>
 </tr>
 <tr>
-  <th><?php echo $lang->block->showTitle;?></th>
+  <th><?php echo $lang->block->titleAlign;?></th>
   <td>
-    <div class='input-group'>
-      <span class='input-group-addon'>
-        <input type='checkbox' name='params[showTitle]' <?php if(!isset($block->content->showTitle) or (isset($block->content->showTitle) && $block->content->showTitle)) echo 'checked';?> value='1' />
-      </span>
+    <div class='input-group' style='width:290px;'>
       <?php echo html::select('params[alignTitle]', $lang->block->alignList, isset($block->content->alignTitle) ? $block->content->alignTitle : 'left', "class='form-control'");?>
     </div>
   </td>
