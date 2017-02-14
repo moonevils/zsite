@@ -73,9 +73,9 @@
       <tr>
         <td class='text-center'><?php echo $article->id;?></td>
         <td title="<?php echo $article->title;?>">
-          <?php echo $article->title;?>
-          <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
+          <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
+          <?php echo $article->title;?>
         </td>
         <?php if($type != 'page' and $type != 'submission'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
