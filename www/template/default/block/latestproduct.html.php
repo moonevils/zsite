@@ -39,6 +39,49 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading' style='min-height:20px;'>
+            <?php if(isset($content->alignTitle) and $content->alignTitle == 'middle'):?>
+            <?php $showPriceOrViews = (isset($content->showPrice) and $content->showPrice) or (isset($content->showViews) and $content->showViews);?>
+            <ul style="list-style:none;overflow:hidden;margin:0 auto;padding:0;">
+                <li style='float:left;width:100%;list-style:none;text-align:center;'>
+                <span style='<?php if($showPriceOrViews) echo 'width:50%;'?>height:15px;display:inline-block;overflow:hidden;'>
+                <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+                <?php if($content->categoryName == 'abbr'):?>
+                <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
+                <?php echo  $categoryName;?>
+                <?php else:?>
+                <?php echo ' [' . $product->category->name . '] ';?>
+                <?php endif;?>
+                <?php endif;?>
+                <?php echo $product->name;?>
+                </span>
+                <span style='display:inline-block;'>
+                <?php if(isset($content->showPrice) and $content->showPrice):?>
+                <?php
+                $currencySymbol = $this->config->product->currencySymbol;
+                if(!$product->unsaleable)
+                {
+                    if($product->promotion != 0)
+                    {
+                        echo "&nbsp;&nbsp;";
+                        echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
+                    }
+                    else
+                    {
+                        if($product->price != 0)
+                        {
+                            echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
+                        }
+                    }
+                }
+                ?>
+                <?php endif;?>
+                <?php if(isset($content->showViews) and $content->showViews):?>
+                <i class="icon icon-eye-open"></i> <?php echo $product->views;?>
+                <?php endif;?>
+                </span>
+                </li>
+            </ul> 
+            <?php else:?>
             <span style='width:60%;float:left; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>
             <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
             <?php if($content->categoryName == 'abbr'):?>
@@ -76,6 +119,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
             ?>
             </span>
+            <?php endif;?>
             <?php endif;?>
           </div>
         </a>
