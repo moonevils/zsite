@@ -17,7 +17,6 @@
   }
   if(!commonModel::isAvailable('user'))
   {
-    unset($lang->groups->shop);
     unset($lang->groups->user);
   }
   foreach ($lang->groups as $menuGroup => $groupSetting)
