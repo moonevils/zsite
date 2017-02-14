@@ -73,22 +73,37 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
                     echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ', "class='text-special'");
                 }
             }
-            echo "<a href='{$url}'>{$product->name}</a>";
+            if(isset($content->alignTitle) and $content->alignTitle == 'middle')
+            {
+                echo "<div style='text-align:center;'><a href='{$url}'>{$product->name}</a></div>";
+            }
+            else
+            {
+                echo "<div><a href='{$url}'>{$product->name}</a></div>";
+            }
+            echo "<div>";
             if(!$product->unsaleable)
             {
                 if($product->promotion != 0)
                 {
-                    echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
                     if($product->price != 0)
                     {
-                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small></div>';
+                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
                     }
                 }
                 else if($product->price != 0)
                 {
-                    echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong></div>';
+                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
                 }
             }
+            if(isset($content->showViews) and $content->showViews)
+            {
+                echo " <span> ";
+                echo "<i class='icon icon-eye-open'> </i>" . $product->views;
+                echo "</span>";
+            }
+            echo "</div>";
             ?>
           </div>
         </div>
