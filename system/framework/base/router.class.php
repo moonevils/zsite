@@ -1060,6 +1060,10 @@ class baseRouter
         {
             $value = $_SERVER['ORIG_PATH_INFO'];
         }
+        elseif(isset($_SERVER['REQUEST_URI']))
+        {
+            $value = $_SERVER['REQUEST_URI'];
+        }
         else
         {
             $value = @getenv('PATH_INFO');
