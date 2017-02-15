@@ -66,7 +66,7 @@ class wechatModel extends model
 
         foreach($publics as $public)
         {
-            $public->url    = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
+            $public->url    = rtrim(commonModel::getSysURL(), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
             $public->qrcode = $this->computeQRCodeURL($public);
         }
 
@@ -521,7 +521,7 @@ class wechatModel extends model
             $article->url         = commonModel::getSysURL() . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}", $viewType);
             $article->description = $category->desc;
 
-            if($isFirst) $article->picUrl = getWebRoot(true) . "theme/default/default/images/main/wechat{$type}.png";
+            if($isFirst) $article->picUrl = rtrim(commonModel::getSysURL(), '/') . "/theme/default/default/images/main/wechat{$type}.png";
 
             $isFirst = false;
             $response->articles[] = $article;
@@ -579,12 +579,12 @@ class wechatModel extends model
         {
             $item = new stdclass();
             $item->title       = $article->title;
-            $item->url         = commonModel::getSysURL() . $this->article->createPreviewLink($article->id, $viewType);
+            $item->url         = rtrim(commonModel::getSysURL(), '/') . $this->article->createPreviewLink($article->id, $viewType);
             $item->description = $article->summary;
             if(!empty($article->image))
             {
                 $image = $isFirst ?  $article->image->primary->middleURL : $article->image->primary->smallURL;
-                $item->picUrl = rtrim(getWebRoot(true), '/') . $image;
+                $item->picUrl = rtrim(commonModel::getSysURL(), '/') . $image;
             }
             $response->articles[] = $item;
             $isFirst = false;
@@ -646,7 +646,7 @@ class wechatModel extends model
             $article->title       = $product->name;
             $article->url         = commonModel::getSysURL() . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias", $viewType);
             $article->description = isset($product->summary) ? $product->summary : '';
-            if(!empty($product->image)) $article->picUrl = rtrim(getWebRoot(true), '/') . $product->image->primary->smallURL;
+            if(!empty($product->image)) $article->picUrl = rtrim(commonModel::getSysURL(), '/') . $product->image->primary->smallURL;
             $response->articles[] = $article;
         }
         return $response;
