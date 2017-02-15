@@ -5961,7 +5961,7 @@ $lang->upgrade = '升级';
   <title>蝉知安装程序</title>
   <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.5.0/css/zui.min.css">
   <style>
-    body{background:white; margin-top:50px; padding-top:60px;}
+    body{background:#f1f1f1; margin-top:50px; padding-top:60px;}
     .main-body{border:1px solid rgba(0,0,0,.2);border-radius:3px;background-color:#fff;box-shadow: 0 5px 15px rgba(0,0,0,.5)}
     .box-header{border-bottom: 1px solid #e5e5e5; padding: 15px; min-height: 16px;}
     .box-body{border-bottom: 1px solid #e5e5e5; padding: 15px;}
@@ -6094,7 +6094,7 @@ $(document).ready(function()
                             });
                         }
                     });
-                }, 500);
+                }, 300);
                 $.get('<?php echo $config->url['start-download'];?>');
             }
             else
