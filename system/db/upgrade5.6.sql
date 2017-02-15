@@ -1,4 +1,3 @@
-ALTER table `eps_article`  CHANGE `submittion` `submission` enum('0', '1', '2', '3') NOT NULL DEFAULT '0';
 UPDATE `eps_article`    SET `type` = 'submission' WHERE `type` = 'submittion';
 UPDATE `eps_config`     SET `value` = replace(value, 'submittion', 'submission') WHERE `key` = 'modules';
 UPDATE `eps_config`     SET `value` = replace(value, 'submittion', 'submission') WHERE `key` = 'home';
