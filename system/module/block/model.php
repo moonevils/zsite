@@ -1155,6 +1155,7 @@ class blockModel extends model
         $this->app->loadLang('tree');
         $this->lang->category->name = $this->lang->block->planName;
 
+        $clonedPlanID = isset($plan->id) ? $plan->id : '0';
         if(isset($plan->id)) unset($plan->id);
         if(isset($plan->pathNames))unset($plan->pathNames);
 
@@ -1166,8 +1167,13 @@ class blockModel extends model
             ->check('name', 'unique', "type='{$plan->type}'")
             ->exec();
 
+        $newPlanID      = $this->dao->lastInsertID();
+        $layoutDatabase = TABLE_LAYOUT;
+        $sql = "REPLACE INTO $layoutDatabase(template, plan, page,region, object, blocks, import, lang) SELECT template,$newPlanID,page,region,object,blocks,import,lang FROM $layoutDatabase WHERE plan = $clonedPlanID;";
+        
+        $this->dao->query($sql);
         if(dao::isError()) return false;
-        return $this->dao->lastInsertID();
+        return $newPlanID;
     }
 
     /**
