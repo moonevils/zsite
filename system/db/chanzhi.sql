@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `eps_config` (
   `owner` char(30) NOT NULL DEFAULT '',
   `module` varchar(30) NOT NULL,
   `section` char(30) NOT NULL DEFAULT '',
-  `key` char(30) DEFAULT NULL,
+  `key` char(50) DEFAULT NULL,
   `value` text NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
