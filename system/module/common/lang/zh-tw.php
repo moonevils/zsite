@@ -107,6 +107,7 @@ $lang->fail           = '失敗';
 $lang->noResultsMatch = '沒有匹配的選項';
 $lang->alias          = '搜索引擎優化使用，可使用英文或數字';
 $lang->keywordsHolder = '多個關鍵字中間用逗號隔開';
+$lang->autoUpgrade    = '自動升級';
 
 $lang->setOkFile = <<<EOT
 <h5>請按照下面的步驟操作以確認您的管理員身份。</h5>

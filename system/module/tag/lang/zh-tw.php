@@ -10,6 +10,7 @@ $lang->tag->inputLink     = '請輸入連結';
 $lang->tag->inputTag      = '請輸入關鍵詞';
 $lang->tag->linkFormatTip = '當輸入的連結為外鏈時，連結應該以http或者https開頭';
 $lang->tag->search        = '搜索';
+$lang->tag->delete        = '刪除';
 
 $lang->tag->sourceList['article']  = '文章';
 $lang->tag->sourceList['blog']     = '博客';

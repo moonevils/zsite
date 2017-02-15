@@ -10,6 +10,7 @@ $lang->tag->inputLink     = 'Enter a Link';
 $lang->tag->inputTag      = 'Enter a Keyword';
 $lang->tag->linkFormatTip = 'When the link inputed is external, the link should start with http or https';
 $lang->tag->search        = 'Search';
+$lang->tag->delete        = 'Delete';
 
 $lang->tag->sourceList['article']  = 'Article';
 $lang->tag->sourceList['blog']     = 'Blog';
