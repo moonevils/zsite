@@ -33,7 +33,7 @@ $config->framework->detectDevice['zh-tw'] = true; // 在zh-tw语言情况下，�
 $config->framework->detectDevice['en']    = true; // 在en语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
 
 /* The basic settings. */
-$config->version     = '5.7';           // The version number, don't change.
+$config->version     = '6.0';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
