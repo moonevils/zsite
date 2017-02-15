@@ -692,7 +692,7 @@ class blockModel extends model
      * @access private
      * @return string
      */
-    private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
+    public function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
         $withGrid = ($withGrid and isset($block->grid));
         $isRegion = isset($block->type) && $block->type === 'region';
