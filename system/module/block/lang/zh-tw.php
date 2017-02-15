@@ -32,6 +32,9 @@ $lang->block->maxWidth        = '最大寬度';
 $lang->block->showCategory    = '顯示類目';
 $lang->block->showBoard       = '顯示版塊';
 $lang->block->showTime        = '顯示時間';
+$lang->block->showPrice       = '顯示價格';
+$lang->block->showViews       = '顯示瀏覽次數';
+$lang->block->titleAlign      = '標題對齊方式';
 $lang->block->product         = '產品';
 $lang->block->slide           = '幻燈片';
 $lang->block->titleless       = '無標題';
@@ -204,3 +207,7 @@ $lang->block->navTypeList->mobile_blog   = '移動版博客';
 
 $lang->block->sideGrid  = '側邊欄寬度';
 $lang->block->sideFloat = '側邊欄位置';
+
+$lang->block->alignList = array();
+$lang->block->alignList['left']   = '居左';
+$lang->block->alignList['middle'] = '居中';

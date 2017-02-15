@@ -32,6 +32,9 @@ $lang->block->maxWidth        = 'Max Width ';
 $lang->block->showCategory    = 'Display Category';
 $lang->block->showBoard       = 'Display Board';
 $lang->block->showTime        = 'Display Time';
+$lang->block->showPrice       = 'Display Price';
+$lang->block->showViews       = 'Display views';
+$lang->block->titleAlign      = 'Title align';
 $lang->block->product         = 'Product';
 $lang->block->slide           = 'Slide';
 $lang->block->titleless       = 'No Title';
@@ -204,6 +207,10 @@ $lang->block->navTypeList->mobile_blog   = 'Mobile Blog';
 
 $lang->block->sideGrid  = 'Sidebar Width';
 $lang->block->sideFloat = 'Sidebar Position ';
+
+$lang->block->alignList = array();
+$lang->block->alignList['left']   = 'Left';
+$lang->block->alignList['middle'] = 'Middle';
 
 $lang->block->sideFloatOptions          = array();
 $lang->block->sideFloatOptions['left']  = 'Left';
