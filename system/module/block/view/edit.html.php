@@ -78,7 +78,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
               </tr>
               <?php endif;?>
               <?php echo $this->fetch('block', 'blockForm', 'type=' . $type . '&id=' . $block->id);?>
-              <?php if(isset($config->block->defaultMoreUrl[$block->type])):?>
+              <?php if(isset($config->block->defaultMoreUrl[$type])):?>
               <tr>
                 <th><?php echo $lang->block->moreLink;?></th>
                 <td>
