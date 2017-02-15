@@ -83,7 +83,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
       ?>
       <?php if(isset($content->time)):?>
       <li class='addDataList'>
-        <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
+        <span>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -93,11 +93,12 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
+        </span>
         <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
       <li class='notDataList'>
-        <span><?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?></span>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -107,6 +108,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <span><?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?></span>
       </li>
       <?php endif;?>
       
