@@ -214,7 +214,7 @@ class backup extends control
     }
     
     /**
-     * Reseve the backup. 
+     * Reserve the backup. 
      * 
      * @access public
      * @return void
