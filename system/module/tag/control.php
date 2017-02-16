@@ -97,10 +97,10 @@ class tag extends control
     }
 
     /**
-     * Delete the tag
-     *
+     * Delete a tag.
+     * 
+     * @param  int    $tagID 
      * @access public
-     * @param  string
      * @return void
      */
     public function delete($tagID)
