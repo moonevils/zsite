@@ -1167,11 +1167,8 @@ class blockModel extends model
             ->check('name', 'unique', "type='{$plan->type}'")
             ->exec();
 
-        $newPlanID      = $this->dao->lastInsertID();
-        $layoutDatabase = TABLE_LAYOUT;
-        $sql = "REPLACE INTO $layoutDatabase(template, plan, page,region, object, blocks, import, lang) SELECT template,$newPlanID,page,region,object,blocks,import,lang FROM $layoutDatabase WHERE plan = $clonedPlanID;";
-        
-        $this->dao->query($sql);
+        $newPlanID = $this->dao->lastInsertID();
+        $this->dao->query("REPLACE INTO " . TABLE_LAYOUT . " (template, plan, page,region, object, blocks, import, lang) SELECT template,$newPlanID,page,region,object,blocks,import,lang FROM " . TABLE_LAYOUT . " WHERE plan = $clonedPlanID;");
         if(dao::isError()) return false;
         return $newPlanID;
     }
