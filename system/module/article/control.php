@@ -543,4 +543,37 @@ class article extends control
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submission&tab=feedback")));
     }
+    
+    /**
+     * Setting.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting($type = 'blog')
+    {
+        if($type == 'blog')
+        {
+            $this->lang->article->menu = $this->lang->blog->menu;
+            $this->lang->menuGroups->article = 'blog';
+            if($_POST)
+            {
+                $data = new stdclass();
+                $data->showCategory  = $this->post->showCategory;
+                $data->categoryAbbr  = $this->post->categoryAbbr;
+                $data->categoryLevel = $this->post->categoryLevel;
+                $this->loadModel('setting')->setItems('system.blog', $data);
+
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            }
+
+            $this->view->title     = $this->lang->setting; 
+            $this->display();
+        }
+        else
+        {
+            $this->locate(inlink('admin'));
+        }
+    }
 }

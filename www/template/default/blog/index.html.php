@@ -55,10 +55,27 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
             <?php echo $stick->summary;?>
           </div>
           <div class="card-actions text-muted">
-            <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($stick->addedDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($stick->addedDate));?></span>
+            &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($stick->addedDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($stick->addedDate));?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $stick->author);?>'><i class="icon-user"></i> <?php echo $stick->author;?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder);?>'><i class="icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder;?></span>
             <?php if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $stick->comments);?>'><i class="icon-comments-alt"></i> <?php echo $stick->comments;?></span></a><?php endif;?>
+            <?php 
+              if($config->blog->showCategory)
+              {
+                if($config->blog->categoryLevel == 'first')
+                {
+                    echo "<span>[";
+                    echo ($config->blog->categoryAbbr == 'name' or empty(zget($topCategoryList, $stick->category->id)->abbr)) ? zget($topCategoryList, $stick->category->id)->name : zget($topCategoryList, $stick->category->id)->abbr;
+                    echo "]</span>";
+                }
+                else
+                {
+                    echo "<span>[";
+                    echo ($config->blog->categoryAbbr == 'name' or empty($stick->category->abbr)) ? $stick->category->name : $stick->category->abbr;
+                    echo "]</span>";
+                } 
+              }            
+            ?>
           </div>
         </div>
       <?php unset($articles[$stick->id]);?>
@@ -84,6 +101,23 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class="icon-user"></i> <?php echo $article->author;?></span>
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder);?>'><i class="icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?></span>
             <?php if(commonModel::isAvailable('message') and $article->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $article->comments);?>'><i class="icon-comments-alt"></i> <?php echo $article->comments;?></span></a><?php endif;?>
+            <?php 
+              if($config->blog->showCategory)
+              {
+                if($config->blog->categoryLevel == 'first')
+                {
+                    echo "<span>[";
+                    echo ($config->blog->categoryAbbr == 'name' or empty(zget($topCategoryList, $article->category->id)->abbr)) ? zget($topCategoryList, $article->category->id)->name : zget($topCategoryList, $article->category->id)->abbr;
+                    echo "]</span>";
+                }
+                else
+                {
+                    echo "<span>[";
+                    echo ($config->blog->categoryAbbr == 'name' or empty($article->category->abbr)) ? $article->category->name : $article->category->abbr;
+                    echo "]</span>";
+                } 
+              }            
+            ?>
           </div>
         </div>
       <?php endforeach;?>
