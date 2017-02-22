@@ -36,10 +36,24 @@ class blog extends control
         $sticks = $this->article->getSticks($families, 'blog');
         $sticks = $this->file->processImages($sticks, 'blog');
         $articleList = '';
-        foreach($articles as $article) $articleList .= $article->id . ',';
-        foreach($sticks as $stick) $articleList .= $stick->id . ',';
+        foreach($articles as $article) 
+        {
+            $articleList .= $article->id . ',';
+            $articleCategoryList[] = $article->category->id;
+        }
+        foreach($sticks as $stick)
+        {
+            $articleList .= $stick->id . ',';
+            $articleCategoryList[] = $article->category->id;
+        }
         $this->view->articleList = $articleList;
-        
+
+        $articleCategoryList = array_unique($articleCategoryList);
+        if($this->config->blog->categoryLevel == 'first') 
+        {
+            $topCategoryList = $this->loadModel('tree')->getTopCategroyList($articleCategoryList, 'blog');
+            $this->view->topCategoryList = $topCategoryList;
+        }
         $this->view->title      = $this->lang->blog->common;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
