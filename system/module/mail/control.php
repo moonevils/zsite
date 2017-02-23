@@ -200,7 +200,7 @@ class mail extends control
         if(empty($email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->noEmail));
         if(!validater::checkEmail($email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->error));
 
-        if(!$lastSendTime or time() - $lastSendTime > 1800 or !$this->session->verifyCode) $this->session->set('verifyCode', mt_rand());
+        if(!$lastSendTime or time() - $lastSendTime > 1800 or !$this->session->verifyCode) $this->session->set('verifyCode', mt_rand(100000, 999999));
 
         $content = sprintf($this->lang->mail->sendContent, $account, $this->config->site->name, $this->server->http_host, $this->session->verifyCode, $this->config->site->name);
         $this->loadModel('mail')->send($email, $this->lang->mail->captcha, $content, true); 
