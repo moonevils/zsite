@@ -32,7 +32,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <div class='input-group'>
             <?php echo html::input('title', $thread->title, "class='form-control'");?>
             <div class='input-group-addon colorplate clearfix'>
-                <div class='input-group color active' data="<?php echo $thread->color?>">
+              <div class='input-group color active' data="<?php echo $thread->color?>">
                 <label class='input-group-addon'><?php echo $lang->color;?></label>
                 <?php echo html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                 <span class='input-group-btn'>
