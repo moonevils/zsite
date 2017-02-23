@@ -20,3 +20,4 @@
 .btn-oauth .icon:before{display: none;}
 
 @media (max-width: 767px) {#reg.panel {margin: 20px auto;width: 100%;} #reg .panel-heading {padding: 0 0 10px 0;} #reg .panel-body {padding: 10px 0; min-height: inherit;} .btn-oauth {padding-left: 80px;} .btn-oauth .icon {left: 20px;}}
+#registerAgreement {margin-left: 10px;}
