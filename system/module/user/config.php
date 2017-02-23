@@ -3,7 +3,7 @@ $config->user = new stdclass();
 $config->user->resetExpired = 3*86400;
 
 $config->user->skipedFields = new stdclass();
-$config->user->skipedFields->create = 'ip,fingerprint,private,emailCertified,mobileCertified';
+$config->user->skipedFields->create = 'ip,fingerprint,private,emailCertified,mobileCertified,registerAgreement';
 $config->user->skipedFields->update = 'ip,admin,email,groups,account,join,visits,fingerprint,locked,token,private,emailCertified,mobileCertified,bindSite';
 
 $config->user->skipedFields->adminUpdate = 'groups,fingerprint';
@@ -45,3 +45,6 @@ $config->user->relatedTables[TABLE_ADDRESS][]  = 'account';
 $config->user->relatedTables[TABLE_CART][]     = 'account';
 $config->user->relatedTables[TABLE_ORDER][]    = 'account';
 $config->user->relatedTables[TABLE_ARTICLE][]  = 'addedBy';
+
+$config->user->editor = new stdclass();
+$config->user->editor->setting = array('id' => 'registerAgreementContent', 'tools' => 'full');
