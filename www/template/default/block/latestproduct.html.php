@@ -44,15 +44,14 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             <ul style="list-style:none;overflow:hidden;margin:0 auto;padding:0;">
                 <li style='float:left;width:100%;list-style:none;text-align:center;'>
                 <span style='<?php if($showPriceOrViews) echo 'width:50%;'?>height:15px;display:inline-block;overflow:hidden;'>
-                <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-                <?php if($content->categoryName == 'abbr'):?>
-                <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
-                <?php echo  $categoryName;?>
-                <?php else:?>
-                <?php echo ' [' . $product->category->name . '] ';?>
-                <?php endif;?>
-                <?php endif;?>
-                <?php echo $product->name;?>
+                <?php 
+                  if(isset($content->showCategory) and $content->showCategory == 1)
+                  {
+                    $categoryName = ($content->categoryName == 'abbr') ? '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ' : ' [' . $product->category->name . '] ';
+                    echo $categoryName;
+                  }
+                  echo $product->name;
+                ?>
                 </span>
                 <span style='display:inline-block;'>
                 <?php if(isset($content->showPrice) and $content->showPrice):?>
