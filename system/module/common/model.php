@@ -770,7 +770,6 @@ class commonModel extends model
             $orderBy   = $fieldName . '_' . 'asc';
             $className = 'header';
         }
-
         $link = helper::createLink($module, $method, sprintf($vars, $orderBy));
         echo "<div class='$className'>" . html::a($link, $label) . '</div>';
     }

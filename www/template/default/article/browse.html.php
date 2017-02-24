@@ -20,7 +20,14 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
   <?php endif;?>
     <div class='list list-condensed'>
     <div class='row blocks' data-region='article_browse-top'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
-      <header><h2><?php echo $category->name;?></h2></header>
+      <header id='articleHeader'>
+        <h2><?php echo $category->name;?></h2>
+        <?php 
+          $vars = "categoryID={$category->id}&pageID=$pageID&orderBy=%s";
+          commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->common . $lang->article->id);
+          commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->viewsCount);
+        ?>
+      </header>
       <section class='items items-hover' id='articles'>
         <?php foreach($articles as $article):?>
         <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
