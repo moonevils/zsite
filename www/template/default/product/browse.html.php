@@ -34,6 +34,11 @@ js::set('pageLayout', $this->block->getLayoutScope('product_browse', $category->
       <div class='row blocks' data-region='product_browse-top'><?php $this->block->printRegion($layouts, 'product_browse', 'top', true);?></div>
       <header>
         <strong><i class='icon-th'></i> <?php echo $category->name;?></strong>
+        <?php 
+          $vars = "categoryID={$category->id}&pageID=$pageID&orderBy=%s";
+          commonModel::printOrderLink('id', $orderBy, $vars, $lang->product->common . $lang->product->id);
+          commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->viewsCount);
+        ?>
         <div class='pull-right btn-group' id="modeControl">
           <?php foreach($lang->product->listMode as $mode => $text):?>
           <?php echo html::a("javascript:;", $text, "data-mode='{$mode}' class='btn'");?>
