@@ -29,11 +29,11 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
     $wwwPath = $this->app->getWwwRoot();
     if(isset($content->image))
     {
-        include $wwwPath . 'template/default/block/latestproductWithImage.html.php';
+        include $wwwPath . 'template/default/block/latestproductwithimage.html.php';
     }
     else
     {
-        include $wwwPath . 'template/default/block/latestproductWidthoutImage.html.php';
+        include $wwwPath . 'template/default/block/latestproductwithoutimage.html.php';
     }
   ?>
 </div>
