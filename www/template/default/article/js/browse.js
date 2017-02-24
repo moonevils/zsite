@@ -1,14 +1,20 @@
 $(document).ready(function()
 {
     var orderBy = $.cookie('articleOrderBy');
-    var fieldName = orderBy.split('_')[0];
-    var orderType = orderBy.split('_')[1];
-
+    if(typeof(orderBy) != 'string')
+    {
+        orderBy = 'place_place';
+    }
+    else 
+    { 
+        var fieldName = orderBy.split('_')[0];
+        var orderType = orderBy.split('_')[1];
+    }
     if(orderType == 'asc')
     {
         $("#articleHeader ." + fieldName).parent().removeClass('header').addClass('headerSortUp');
     }
-    else
+    if(orderType == 'desc')
     {
         $("#articleHeader ." + fieldName).parent().removeClass('header').addClass('headerSortDown');
     }
