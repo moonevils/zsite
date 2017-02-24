@@ -54,15 +54,14 @@
             </ul> 
             <?php else:?>
             <span style='width:60%;float:left; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>
-            <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-            <?php if($content->categoryName == 'abbr'):?>
-            <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
-            <?php echo  $categoryName;?>
-            <?php else:?>
-            <?php echo ' [' . $product->category->name . '] ';?>
-            <?php endif;?>
-            <?php endif;?>
-            <?php echo $product->name;?>
+            <?php 
+              if(isset($content->showCategory) and $content->showCategory == 1)
+              {
+                $categoryName = ($content->categoryName == 'abbr') ? '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ' : ' [' . $product->category->name . '] ';
+                echo $categoryName;
+              }
+              echo $product->name;
+            ?>
             </span>
             <?php if(isset($content->showViews) and $content->showViews):?>
             <span style='float:right;margin-left:5px;'>
