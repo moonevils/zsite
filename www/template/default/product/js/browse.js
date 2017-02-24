@@ -30,14 +30,21 @@ $(function()
     });
     
     var orderBy = $.cookie('productOrderBy');
-    var fieldName = orderBy.split('_')[0];
-    var orderType = orderBy.split('_')[1];
+    if(typeof(orderBy) != 'string')
+    {
+        orderBy = 'place_place';
+    }
+    else 
+    { 
+        var fieldName = orderBy.split('_')[0];
+        var orderType = orderBy.split('_')[1];
+    }
 
     if(orderType == 'asc')
     {
         $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortUp');
     }
-    else
+    if
     {
         $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortDown');
     }
