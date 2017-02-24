@@ -43,8 +43,16 @@ class product extends control
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $pageID = 1, $orderBy = 'order_desc')
+    public function browse($categoryID = 0, $pageID = 1)
     {  
+        if($this->cookie->productOrderBy !== false) 
+        {
+            $orderBy = $this->cookie->productOrderBy;    
+        }
+        else
+        {
+            $orderBy = 'order_desc';
+        }
         $category = $this->loadModel('tree')->getByID($categoryID, 'product');
 
         if($category && $category->link) helper::header301($category->link);

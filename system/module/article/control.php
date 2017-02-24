@@ -32,8 +32,16 @@ class article extends control
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $pageID = 1, $orderBy = 'addedDate_desc')
+    public function browse($categoryID = 0, $pageID = 1)
     {   
+        if($this->cookie->articleOrderBy !== false) 
+        {
+            $orderBy = $this->cookie->articleOrderBy;    
+        }
+        else
+        {
+            $orderBy = 'addedDate_desc';
+        }
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
         if($category->link) helper::header301($category->link);
