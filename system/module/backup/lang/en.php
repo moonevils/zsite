@@ -7,6 +7,9 @@ $lang->backup->backup   = 'Back Up';
 $lang->backup->restore  = 'Restore';
 $lang->backup->change   = 'Hold Time';
 $lang->backup->changeAB = 'Change';
+$lang->backup->note     = 'Note';
+$lang->backup->reserve  = 'Reserve Backup';
+$lang->backup->reserved = 'Reserved';
 
 $lang->backup->time  = 'Hold Time';
 $lang->backup->files = 'Files';

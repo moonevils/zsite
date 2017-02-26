@@ -13,6 +13,16 @@
 <?php
 include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 ?>
+<?php 
+  if(isset($this->config->site->registerAgreement) and $this->config->site->registerAgreement == 'open')
+  {
+    js::set('registerAgreement', 'open');
+  }
+  else
+  {
+    js::set('registerAgreement', 'close');
+  }
+?>
 <hr class='space'>
 <div class='panel-section'>
   <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
@@ -53,6 +63,13 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
       <label class='control-label' for='phone'><?php echo $lang->user->phone;?></label>
       <?php echo html::input('phone', '', "class='form-control'");?>
     </div>
+    <?php if(isset($this->config->site->registerAgreement) and $this->config->site->registerAgreement == 'open'):?>
+    <div class='form-group'>
+      <label class='control-label' for='registerAgreement'></label>
+      <input type="checkbox" id="registerAgreement" name="registerAgreement" value="1">
+      <span><?php echo $lang->user->agreeRegisterAgreement . '《'. html::a(helper::createLink('user', 'viewRegisterAgreement'), $this->config->site->registerAgreementTitle) . '》';?></span>
+    </div>
+    <?php endif;?>
     <div class='form-group'><?php echo html::submitButton($lang->register, 'btn primary block');?><?php echo html::hidden('referer', $referer);?></div>
   </form>
   </div>

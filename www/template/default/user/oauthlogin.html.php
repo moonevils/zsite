@@ -1,5 +1,4 @@
 <?php
-$yangcongConfig = json_decode(zget($this->config->site, 'yangcong', ""));
 foreach($lang->user->oauth->providers as $providerCode => $providerName)
 {
     if(isset($config->oauth->$providerCode)) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
@@ -17,10 +16,6 @@ if(!empty($providerConfig)):
         if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
 
         echo html::a(inlink('oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"), "class='btn-oauth'");  
-    }
-    if(zget($yangcongConfig, 'appID', 0)) 
-    {
-        echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)),  html::image(getWebRoot() . "theme/default/default/images/main/yangconglogin.png"), "data-toggle='modal'");
     }
     ?>
   </span>

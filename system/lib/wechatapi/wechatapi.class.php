@@ -550,7 +550,7 @@ class wechatapi
         $response = curl_exec($curl);
         curl_close($curl);
         return $response;
-    }   
+    }
 
     /**
      * Make a http post request.

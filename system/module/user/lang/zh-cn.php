@@ -81,7 +81,6 @@ $lang->user->myScore         = '当前积分';
 $lang->user->buyScore        = '积分充值';
 $lang->user->addScore        = '奖励积分';
 $lang->user->reduceScore     = '扣除积分';
-$lang->user->yangcongLogin   = '洋葱登录';
 $lang->user->bindAccount     = '绑定帐号';
 $lang->user->batchDelete     = '批量删除用户';
 $lang->user->deleteHistory   = '删除用户及历史数据';
@@ -202,8 +201,13 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
-$lang->user->oauth->providers['sina'] = '新浪微博';
-$lang->user->oauth->providers['qq']   = 'QQ';
+$lang->user->oauth->github = new stdclass();
+$lang->user->oauth->github->clientID     = 'Client ID';
+$lang->user->oauth->github->clientSecret = 'Client Secret';
+
+$lang->user->oauth->providers['sina']   = '新浪微博';
+$lang->user->oauth->providers['qq']     = 'QQ';
+$lang->user->oauth->providers['github'] = 'Github';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博会员';
 $lang->user->oauth->typeList['qq']     = 'QQ会员';
@@ -261,7 +265,6 @@ $lang->user->locationDenied       = '登录地区受限，请按提示操作。'
 $lang->user->loginLocationChanged = '登录地址发生变化，请按提示操作。';
 $lang->user->verifyFail           = '请填写正确的验证码';
 $lang->user->confirmUnbind        = '您确定要解除绑定吗？';
-$lang->user->forceYangcong        = '已开启强制洋葱登录，普通登录需要进行验证。';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';
@@ -273,6 +276,16 @@ $lang->user->filterUsernameSensitiveList = array();
 $lang->user->filterUsernameSensitiveList['open']  = '开启';
 $lang->user->filterUsernameSensitiveList['close'] = '关闭';
 
-$lang->user->usernameSensitive    = '用户名敏感词';
-$lang->user->usernameIsSensitive  = '用户名或者真实姓名不能含有敏感词，请修改后再提交';
-$lang->user->usernameSensitiveTip = '多个敏感词之间请用英文逗号分隔';
+$lang->user->registerAgreement = '用户注册协议';
+
+$lang->user->registerAgreementList = array();
+$lang->user->registerAgreementList['open']  = '开启';
+$lang->user->registerAgreementList['close'] = '关闭';
+
+$lang->user->registerAgreementContent = '注册协议内容';
+$lang->user->registerAgreementTitle   = '注册协议标题';
+    
+$lang->user->usernameSensitive      = '用户名敏感词';
+$lang->user->usernameIsSensitive    = '用户名或者真实姓名不能含有敏感词，请修改后再提交';
+$lang->user->usernameSensitiveTip   = '多个敏感词之间请用英文逗号分隔';
+$lang->user->agreeRegisterAgreement = '我已阅读并同意';

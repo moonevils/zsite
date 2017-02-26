@@ -149,7 +149,7 @@ class guarder extends control
             foreach($keywords as $keyword)
             {
                 if(empty($keyword)) continue;
-                $this->guarder->punish('keywords', $keyword, 'thread');
+                $this->guarder->punish('keywords', $keyword, 'thread', '');
                 if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             }
 

@@ -95,4 +95,24 @@ class tag extends control
         $this->view->tag   = $this->dao->select('*')->from(TABLE_TAG)->where('id')->eq($tagID)->fetch();
         $this->display();
     }
+
+    /**
+     * Delete a tag.
+     * 
+     * @param  int    $tagID 
+     * @access public
+     * @return void
+     */
+    public function delete($tagID)
+    {
+        $this->dao->delete()->from(TABLE_TAG)->where('id')->eq($tagID)->exec();
+        if(!dao::isError())
+        {
+            $this->send(array('result' => 'success'));
+        }
+        else
+        {
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+    }
 }

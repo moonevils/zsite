@@ -38,7 +38,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
     ?>
     <div class='item'>
       <div class='item-heading'>
-        <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+        <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -80,10 +80,10 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
       $article->alias = isset($article->alias) ? $article->alias : '';
       $alias       = "category={$article->category->alias}&name={$article->alias}";
       $url         = helper::createLink('article', 'view', "id={$article->id}", $alias);
-      $stickLabel  = $article->sticky ? 'withStick' : 'withoutStick';
       ?>
       <?php if(isset($content->time)):?>
-      <li class='addDataList <?php echo $stickLabel;?>'>
+      <li class='addDataList'>
+        <span>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -93,13 +93,12 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
-        <span class='pull-right'>
-            <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
-            <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
-        </span>      
+        <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
+        </span>
+        <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
-      <li class='notDataList <?php echo $stickLabel;?>'>
+      <li class='notDataList'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
@@ -109,9 +108,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
-        <span class='pull-right'>
-            <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
-        </span>
+        <span><?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?></span>
       </li>
       <?php endif;?>
       

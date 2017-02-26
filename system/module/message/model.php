@@ -186,7 +186,17 @@ class messageModel extends model
         if($message->objectType == 'article') $objectTitle = $this->dao->select('title')->from(TABLE_ARTICLE)->where('id')->eq($message->objectID)->fetch('title');
         if($message->objectType == 'product') $objectTitle = $this->dao->select('name')->from(TABLE_PRODUCT)->where('id')->eq($message->objectID)->fetch('name');
         if($message->objectType == 'book')    $objectTitle = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($message->objectID)->fetch('title');
-        if($message->objectType == 'message' or $message->objectType == 'comment') $objectTitle = $this->getByID($message->id)->from;
+        if($message->objectType == 'message' or $message->objectType == 'comment') 
+        {
+            if(!isset($this->getByID($message->objectID)->from))
+            {
+                $objectTitle = '';
+            }
+            else
+            {
+                $objectTitle = $this->getByID($message->objectID)->from;
+            }
+        }
         return $objectTitle;
     }
 
@@ -232,7 +242,9 @@ class messageModel extends model
     public function getList($type, $status, $pager = null)
     {
         $messages = $this->dao->select('*')->from(TABLE_MESSAGE)
-            ->where('type')->eq($type)
+            ->where(1)
+            ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
+            ->beginIf($type == 'all')->andWhere('type')->in('message,comment,reply')->fi()
             ->andWhere('status')->eq($status)
             ->beginIf(RUN_MODE == 'front')->andWhere('public')->eq(1)->fi()
             ->orderBy('id_desc')
@@ -469,7 +481,7 @@ class messageModel extends model
             ->from(TABLE_MESSAGE)
             ->where('type')->eq($message->type)
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
-            ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->andWhere('status')->ne('1')->fi()
+            ->beginIF($mode == 'pre')->andWhere('id')->le($messageID)->andWhere('status')->ne('1')->fi()
             ->exec();
 
         return !dao::isError();
@@ -491,7 +503,7 @@ class messageModel extends model
             ->where('status')->eq(0)
             ->andWhere('type')->eq($message->type)
             ->beginIF($type == 'single')->andWhere('id')->eq($messageID)->fi()
-            ->beginIF($type == 'pre')->andWhere('id')->ge($messageID)->fi()
+            ->beginIF($type == 'pre')->andWhere('id')->le($messageID)->fi()
             ->exec();
         return !dao::isError();
     }

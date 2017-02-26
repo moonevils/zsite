@@ -28,4 +28,42 @@ $(function()
              return false;
          }
     });
+    
+    var orderBy = $.cookie('productOrderBy');
+    if(typeof(orderBy) != 'string')
+    {
+        orderBy = 'place_place';
+    }
+    else 
+    { 
+        var fieldName = orderBy.split('_')[0];
+        var orderType = orderBy.split('_')[1];
+    }
+
+    if(orderType == 'asc')
+    {
+        $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortUp');
+    }
+    if
+    {
+        $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortDown');
+    }
+
+    $(".setOrder").click(function(){
+        if(this.id == fieldName)
+        {
+            var setOrderType = 'asc';
+            if(orderType == 'asc') setOrderType = 'desc';
+            var setOrderBy = fieldName + '_' + setOrderType;
+            $.cookie('productOrderBy', setOrderBy);
+        }
+        else
+        {
+            var setOrderType = 'asc';
+            if(orderType == 'asc') setOrderType = 'desc';
+            var setOrderBy = this.id + '_' + setOrderType;
+            $.cookie('productOrderBy', setOrderBy);
+        }
+        location.href = location.href;
+    });
 })

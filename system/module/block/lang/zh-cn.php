@@ -32,6 +32,9 @@ $lang->block->maxWidth        = '最大宽度';
 $lang->block->showCategory    = '显示类目';
 $lang->block->showBoard       = '显示版块';
 $lang->block->showTime        = '显示时间';
+$lang->block->showPrice       = '显示价格';
+$lang->block->showViews       = '显示浏览次数';
+$lang->block->titleAlign      = '标题对齐方式';
 $lang->block->product         = '产品';
 $lang->block->slide           = '幻灯片';
 $lang->block->titleless       = '无标题';
@@ -131,6 +134,7 @@ $lang->block->cloneLayout  = '布局另存为';
 $lang->block->switchLayout = '切换布局';
 $lang->block->removeLayout = '删除布局方案';
 $lang->block->planIsUseing = '此方案正在使用，不能删除';
+$lang->block->noInsertTip  = '插入新选项需要删除原有的选项';
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';
@@ -203,3 +207,7 @@ $lang->block->navTypeList->mobile_blog   = '移动版博客';
 
 $lang->block->sideGrid  = '侧边栏宽度';
 $lang->block->sideFloat = '侧边栏位置';
+
+$lang->block->alignList = array();
+$lang->block->alignList['left']   = '居左';
+$lang->block->alignList['middle'] = '居中';

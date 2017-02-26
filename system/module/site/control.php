@@ -287,11 +287,6 @@ class site extends control
         }
         $this->view->setting = array();
 
-        if(!empty($this->config->site->yangcong))
-        {
-            $this->view->setting = json_decode($this->config->site->yangcong);
-        }
-
         $this->view->title = $this->lang->site->setOauth;
         $this->display();
     }
@@ -397,24 +392,6 @@ class site extends control
         $this->display();
     }
   
-    /**
-     * set yangcong configure.
-     * 
-     * @access public
-     * return void
-     */
-    public function setYangcong()
-    {
-        if(!empty($_POST))
-        {
-            $setting = fixer::input('post')->get();
-            foreach($setting as $key => $value) $value = trim($value);
-            $result  = $this->loadModel('setting')->setItem('system.common.site.yangcong', helper::jsonEncode($setting), "all");
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-    }
-
     /**
      * Set api config.
      * 
