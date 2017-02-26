@@ -88,7 +88,7 @@
       <h4><?php sprintf($lang->package->installFailed, 'install');?></h4>
       <p><?php echo $error;?></p>
       <hr>
-      <?php echo html::a('javascript:;', $lang->package->refreshPage, "class='btn btn-reload'");?>
+      <?php echo html::a('javascript:;', $lang->ui->refreshPage, "class='btn btn-reload'");?>
     </div>
   </div>
 <?php endif;?>

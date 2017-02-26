@@ -5,8 +5,11 @@ $lang->backup->history  = '备份历史';
 $lang->backup->delete   = '删除备份';
 $lang->backup->backup   = '备份';
 $lang->backup->restore  = '还原';
-$lang->backup->change   = '修改保留时间';
+$lang->backup->change   = '修改保存时间';
 $lang->backup->changeAB = '修改';
+$lang->backup->note     = '备注';
+$lang->backup->reserve  = '保留备份';
+$lang->backup->reserved = '已保留';
 
 $lang->backup->time  = '备份时间';
 $lang->backup->files = '备份文件';
@@ -15,7 +18,7 @@ $lang->backup->size  = '大小';
 $lang->backup->waitting       = '<span id="backupType"></span>正在进行中，请稍候...';
 $lang->backup->confirmDelete  = '是否删除备份？';
 $lang->backup->confirmRestore = '是否还原该备份？';
-$lang->backup->holdDays       = '备份保留最近 %s 天';
+$lang->backup->holdDays       = '除已保留备份外，其他备份只保存最近 %s 天';
 
 $lang->backup->success = new stdclass();
 $lang->backup->success->backup  = '备份成功！';

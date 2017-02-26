@@ -56,6 +56,22 @@ class file extends control
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
+    public function batchDeleteInvalid()
+    {
+        if($_POST)
+        {
+            $fileList = $_POST['fileList'];
+            foreach($fileList as $pathname)
+            {
+                $pathname = urldecode($pathname);
+                $pathname = realpath($this->app->getDataRoot() . 'upload/' . $pathname); 
+                $this->file->deleteInvalidFile($pathname);
+            }
+            $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin', 'type=invalid')));
+        }
+        $this->send(array('result' => 'success', 'locate' => inlink('admin', 'type=invalid')));
+    }
+
     /**
      * Delete all the invalid file
      *
@@ -713,5 +729,26 @@ class file extends control
             $lastImage = $lastImage + $limit;
             $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildthumbs', "imageDirKey=$imageDirKey&lastImage=$lastImage&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildThumbs, $rate)));
         }
+    }
+
+    /**
+     * Batch delete file
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchDelete()
+    {
+        if($_POST)
+        {
+            $fileList = $_POST['fileList'];
+            foreach($fileList as $fileID)
+            {
+                $this->file->delete($fileID);
+            }
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
+        }
+        $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
     }
 }

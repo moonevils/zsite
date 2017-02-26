@@ -32,6 +32,9 @@ $lang->block->maxWidth        = '最大寬度';
 $lang->block->showCategory    = '顯示類目';
 $lang->block->showBoard       = '顯示版塊';
 $lang->block->showTime        = '顯示時間';
+$lang->block->showPrice       = '顯示價格';
+$lang->block->showViews       = '顯示瀏覽次數';
+$lang->block->titleAlign      = '標題對齊方式';
 $lang->block->product         = '產品';
 $lang->block->slide           = '幻燈片';
 $lang->block->titleless       = '無標題';
@@ -97,6 +100,7 @@ $lang->block->header->top->rightOptions['login']          = '登錄註冊 + 語�
 $lang->block->header->top->rightOptions['search']         = '搜索框';
 $lang->block->header->top->rightOptions['loginAndSearch'] = '登錄註冊語言 + 搜索框';
 $lang->block->header->top->rightOptions['searchAndLogin'] = '搜索框 + 登錄註冊語言';
+$lang->block->header->top->rightOptions['custom']         = '自定義';
 
 $lang->block->header->middle->leftOptions['']     = '不顯示';
 $lang->block->header->middle->leftOptions['logo'] = 'Logo';
@@ -115,6 +119,7 @@ $lang->block->header->bottomOptions['navAndSearch'] = '導航 + 搜索框';
 $lang->block->admin        = "區塊管理";
 $lang->block->pages        = "佈局";
 $lang->block->add          = "添加";
+$lang->block->insertLink   = '插入';
 $lang->block->addChild     = "子區塊";
 $lang->block->template     = "模板";
 $lang->block->create       = '添加區塊';
@@ -129,6 +134,7 @@ $lang->block->cloneLayout  = '佈局另存為';
 $lang->block->switchLayout = '切換佈局';
 $lang->block->removeLayout = '刪除佈局方案';
 $lang->block->planIsUseing = '此方案正在使用，不能刪除';
+$lang->block->noInsertTip  = '插入新選項需要刪除原有的選項';
 
 $lang->block->paddingTop    = '上';
 $lang->block->paddingBottom = '下';
@@ -201,3 +207,7 @@ $lang->block->navTypeList->mobile_blog   = '移動版博客';
 
 $lang->block->sideGrid  = '側邊欄寬度';
 $lang->block->sideFloat = '側邊欄位置';
+
+$lang->block->alignList = array();
+$lang->block->alignList['left']   = '居左';
+$lang->block->alignList['middle'] = '居中';

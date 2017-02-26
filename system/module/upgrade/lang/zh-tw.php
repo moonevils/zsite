@@ -16,13 +16,13 @@ $lang->upgrade->fail    = '升級失敗';
 $lang->upgrade->success = '升級成功';
 $lang->upgrade->tohome  = '返迴首頁';
 
-$lang->upgrade->backup        = '備份數據';
-$lang->upgrade->prepair       = '準備升級';
-$lang->upgrade->selectVersion = '確認升級之前的版本';
-$lang->upgrade->confirm       = '確認要執行的SQL語句';
-$lang->upgrade->execute       = '確認執行';
-$lang->upgrade->next          = '下一步';
-$lang->upgrade->updateLicense = '蟬知 4.0 已更換授權協議至 Z PUBLIC LICENSE(ZPL) 1.2。';
+$lang->upgrade->backup           = '備份數據';
+$lang->upgrade->prepair          = '準備升級';
+$lang->upgrade->selectVersion    = '確認升級之前的版本';
+$lang->upgrade->confirm          = '確認要執行的SQL語句';
+$lang->upgrade->execute          = '確認執行';
+$lang->upgrade->next             = '下一步';
+$lang->upgrade->updateLicense    = '蟬知 4.0 已更換授權協議至 Z PUBLIC LICENSE(ZPL) 1.2。';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
@@ -92,3 +92,6 @@ $lang->upgrade->fromVersions['5_3_4']    = '5.3.4';
 $lang->upgrade->fromVersions['5_4']      = '5.4';
 $lang->upgrade->fromVersions['5_4_1']    = '5.4.1';
 $lang->upgrade->fromVersions['5_5']      = '5.5';
+$lang->upgrade->fromVersions['5_6']      = '5.6';
+$lang->upgrade->fromVersions['5_7']      = '5.7';
+$lang->upgrade->fromVersions['6_0']      = '6.0';

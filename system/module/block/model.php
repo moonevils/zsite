@@ -692,7 +692,7 @@ class blockModel extends model
      * @access private
      * @return string
      */
-    private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
+    public function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
         $withGrid = ($withGrid and isset($block->grid));
         $isRegion = isset($block->type) && $block->type === 'region';
@@ -1155,6 +1155,7 @@ class blockModel extends model
         $this->app->loadLang('tree');
         $this->lang->category->name = $this->lang->block->planName;
 
+        $clonedPlanID = isset($plan->id) ? $plan->id : '0';
         if(isset($plan->id)) unset($plan->id);
         if(isset($plan->pathNames))unset($plan->pathNames);
 
@@ -1166,8 +1167,10 @@ class blockModel extends model
             ->check('name', 'unique', "type='{$plan->type}'")
             ->exec();
 
+        $newPlanID = $this->dao->lastInsertID();
+        $this->dao->query("REPLACE INTO " . TABLE_LAYOUT . " (template, plan, page,region, object, blocks, import, lang) SELECT template,$newPlanID,page,region,object,blocks,import,lang FROM " . TABLE_LAYOUT . " WHERE plan = $clonedPlanID;");
         if(dao::isError()) return false;
-        return $this->dao->lastInsertID();
+        return $newPlanID;
     }
 
     /**

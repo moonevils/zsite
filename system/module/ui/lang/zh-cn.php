@@ -50,6 +50,7 @@ $lang->ui->offcial         = "官方";
 $lang->ui->score           = "积分";
 $lang->ui->reset           = "重置为默认";
 $lang->ui->themePackage    = "主题包";
+$lang->ui->refreshPage     = "刷新页面";
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
@@ -123,23 +124,24 @@ $lang->ui->template->qq              = 'QQ';
 $lang->ui->template->email           = 'Email';
 $lang->ui->template->site            = 'site';
 
-$lang->ui->appearance      = '外观';
-$lang->ui->custom          = '自定义';
-$lang->ui->themeSaved      = '主题配置已保存';
-$lang->ui->unWritable      = "不能生成样式文件，请检查 %s目录的权限";
-$lang->ui->codeHolder      = "字母加数字组合成的主题代号";
-$lang->ui->unWritableFile  = "不能生成样式文件，请检查 %s文件的权限";
+$lang->ui->appearance         = '外观';
+$lang->ui->custom             = '自定义';
+$lang->ui->themeSaved         = '主题配置已保存';
+$lang->ui->unWritable         = "不能生成样式文件，请检查 %s目录的权限";
+$lang->ui->codeHolder         = "字母加数字组合成的主题代号";
+$lang->ui->unWritableFile     = "不能生成样式文件，请检查 %s文件的权限";
+$lang->ui->openMobileTemplate = "确认开启移动模板？";
 
 $lang->ui->blocks2Merge  = "可合并区块";
 $lang->ui->blocks2Create = "新创建区块";
 
 $lang->ui->theme = new stdclass();
-$lang->ui->theme->reset                                = '重置为默认';
+$lang->ui->theme->reset                                = '全部外观重置为默认';
 $lang->ui->theme->online                               = '在线主题';
 $lang->ui->theme->default                              = '默认';
 $lang->ui->theme->all                                  = '全部';
 $lang->ui->theme->noTheme                              = '此分类下没有主题';
-$lang->ui->theme->resetTip                             = '参数已重置，保存后生效';
+$lang->ui->theme->resetTip                             = '全部外观参数已重置，保存后生效';
 $lang->ui->theme->sizeTip                              = '默认单位为像素，如1px';
 $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
 $lang->ui->theme->positionTip                          = '如: 100px, 50%, left, top, center';

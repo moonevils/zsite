@@ -14,6 +14,7 @@
 
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
+<?php js::set('noInsertTip', $lang->block->noInsertTip);?>
 <tr class='top'>
   <th id='tableHeadingtop' rowspan='2'><?php echo $lang->block->header->top->common;?></th>
   <td class='w-p45'>
@@ -39,10 +40,8 @@
   <td>
     <?php echo html::textarea("params[topRightContent]", isset($block->content->topRightContent) ? $block->content->topRightContent : '', "class='form-control textarea-withchosen' rows='5'");?>
     <div class='textarea-chosen'>
-        <?php foreach($lang->block->header->top->rightOptions as $rightOption => $optionName):?>
-          <?php if($rightOption == '' or $rightOption == 'custom') continue;?>
-          <?php echo html::a('javascript:;', $optionName, "class='btn btn-xs btn-default btn-select'");?>
-        <?php endforeach;?>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['login'], "id='login' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
+        <?php echo html::a('javascript:;', $lang->block->header->top->rightOptions['search'], "id='search' class='btn btn-xs btn-addChoice btn-default btn-select'");?>
     </div>
     <p></p>
   </td>
@@ -72,43 +71,32 @@
   </td>
 </tr>
 <script>
-var insertable = true;
-var addChoice = function(choiceItem)
-{
+$(".btn-addChoice").click(function(){
+    choiceItem      = this.id;
     topRightContent = $("[name*=params][name*=topRightContent]").val();
-    topRightContent += '__' + choiceItem.toUpperCase() + '__ ';
-    if(checkChoiceInserted($("[name*=params][name*=topRightContent]").val()))
-    {
-        insertable = false;
-    }
-    else
-    {
-        insertable = true;
-    }
-    if(insertable) 
+    topRightContent += '$' + choiceItem.toUpperCase() + ' ';
+
+    if(!checkChoiceInserted($("[name*=params][name*=topRightContent]").val(), choiceItem)) 
     {
         $("[name*=params][name*=topRightContent]").val(topRightContent); 
     }
-    else
+});
+
+var checkChoiceInserted = function(searchedStr, searchItem){
+    if(searchItem == 'login')
     {
-        alert('Please delete the existed one');
+        if(searchedStr.indexOf('$LOGIN') >= 0) return true;
     }
-};
-var checkChoiceInserted = function(searchedStr){
-    var choices = ['__LOGIN__', '__SEARCH__', '__LOGINANDSEARCH__', '__SEARCHANDLOGIN__'];
-    for(var i = 0, l = choices.length; i < l; i++)
+    if(searchItem == 'search')
     {
-       if(searchedStr.indexOf(choices[i]) >= 0) return true;
+        if(searchedStr.indexOf('$SEARCH') >= 0) return true;
     }
+    
     return false;
 };
+
 $(function()
 {
-    if(checkChoiceInserted($("[name*=params][name*=topRightContent]").val()))
-    {
-       insertable = false; 
-    } 
-    
     $('#compatible').change(function()
     {
         $('tr.top, tr.middle, tr.bottom').toggle(!$(this).is(':checked'));
@@ -170,8 +158,6 @@ $(function()
             }
         }
     })
-    $("[name*=params][name*=topRightContent]").bind('input propertychange', function() {
-    });
     $("[name*=params][name*=top][name*=left]").change();
     $("[name*=params][name*=top][name*=right]").change();
 })

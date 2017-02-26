@@ -162,6 +162,17 @@ class backup extends control
             $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->backup->error->noDelete, $this->backupPath . $fileName . '.file.zip.php')));
         }
 
+        $this->dao->delete()->from(TABLE_CONFIG)
+            ->where('module')->eq('backup')
+            ->andWhere('section')->eq('note')
+            ->andWhere('`key`')->eq($fileName)
+            ->exec();
+
+        if(isset($this->config->backup->reservedFiles) and strpos($this->config->backup->reservedFiles, $fileName) !== false)
+        {
+            $newReservedFiles = str_replace(',' . $fileName, '', $this->config->backup->reservedFiles);
+            $this->loadModel('setting')->setItem('system.backup.reservedFiles', $newReservedFiles);
+        }
         $this->send(array('result' => 'success', 'locate' => inlink('index')));
     }
 
@@ -181,5 +192,37 @@ class backup extends control
         }
         $this->view->title = $this->lang->backup->change;
         $this->display();
+    }
+    
+    /**
+     * Add the backup a note. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function note($fileName)
+    {
+        if($_POST)
+        {
+            $data = fixer::input('post')->get();
+            $this->loadModel('setting')->setItem('system.backup.note.' . $fileName, $data->note);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('index')));
+        }
+        $this->view->title    = $this->lang->backup->note;
+        $this->view->fileName = $fileName;
+        $this->display();
+    }
+    
+    /**
+     * Reserve the backup. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function reserve($fileName)
+    {
+        $reservedFiles = isset($this->config->backup->reservedFiles) ? $this->config->backup->reservedFiles : '';
+        $this->loadModel('setting')->setItem('system.backup.reservedFiles', $reservedFiles . ',' . $fileName);
+        $this->send(array('result' => 'success', 'locate' => inlink('index')));
     }
 }

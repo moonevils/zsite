@@ -206,6 +206,7 @@ class commonModel extends model
             if($app->user->admin == 'no') return false;
             if($app->user->admin == 'super') return true;
             if($app->user->admin != 'no' and $module == 'admin' and $method == 'index') return true;
+            if($module == 'file' and strtolower($method) == 'uploadfile' and isset($rights['file']['upload'])) return true;
             if(isset($rights[$module][$method])) return true;
             return false;
         }
@@ -235,7 +236,7 @@ class commonModel extends model
     public function setUser()
     {
         if($this->session->user) return $this->app->user = $this->session->user;
-
+        
         /* Create a guest account. */
         $user           = new stdclass();
         $user->id       = 0;
@@ -321,13 +322,12 @@ class commonModel extends model
     {
         $module = strtolower($module);
         $method = strtolower($method);
-        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey|yangconglogin|oauthbind|', $method)) return true;
+        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey|oauthbind|', $method)) return true;
         if($module == 'mail' and $method == 'sendmailcode') return true;
         if($module == 'guarder' and $method == 'validate') return true;
         if($module == 'misc' and $method == 'ajaxgetfingerprint') return true;
         if($module == 'wechat' and $method == 'response') return true;
         if($module == 'sitemap' and $method == 'index') return true;
-        if($module == 'yangcong') return true;
         if(RUN_MODE == 'admin' and $this->app->user->admin != 'no' and isset($this->config->rights->admin[$module][$method])) return true;
         if(RUN_MODE == 'admin' and $module == 'farm' and $method == 'register') return true;
         if(RUN_MODE == 'admin' and $module == 'farm' and (strpos($method, 'api') !== false)) return true;
@@ -770,7 +770,6 @@ class commonModel extends model
             $orderBy   = $fieldName . '_' . 'asc';
             $className = 'header';
         }
-
         $link = helper::createLink($module, $method, sprintf($vars, $orderBy));
         echo "<div class='$className'>" . html::a($link, $label) . '</div>';
     }

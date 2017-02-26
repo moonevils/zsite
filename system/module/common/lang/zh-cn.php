@@ -92,6 +92,7 @@ $lang->preview        = '预览';
 $lang->goback         = '返回';
 $lang->more           = '更多';
 $lang->refresh        = '刷新';
+$lang->setting        = '设置';
 $lang->actions        = '操作';
 $lang->feature        = '未来';
 $lang->year           = '年';
@@ -107,6 +108,7 @@ $lang->fail           = '失败';
 $lang->noResultsMatch = '没有匹配的选项';
 $lang->alias          = '搜索引擎优化使用，可使用英文或数字';
 $lang->keywordsHolder = '多个关键字中间用逗号隔开';
+$lang->autoUpgrade    = '自动升级';
 
 $lang->setOkFile = <<<EOT
 <h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
@@ -130,10 +132,9 @@ $lang->getUserByApi       = '获取绑定信息';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['zh-cn'] = array();
-$lang->selectLangTip['zh-cn']['zh-cn'] = '切换到简体中文站点';
-$lang->selectLangTip['zh-cn']['zh-tw'] = '切换到繁体中文站点';
-$lang->selectLangTip['zh-cn']['en']    = '切换到英文站点';
+$lang->selectLangTip['zh-cn'] = '切换到简体中文站点';
+$lang->selectLangTip['zh-tw'] = '切换到繁体中文站点';
+$lang->selectLangTip['en']    = '切换到英文站点';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -193,9 +194,7 @@ $lang->menu->product      = '产品|product|admin|';
 $lang->menu->orderSetting = '设置|product|setting|';
 
 $lang->menu->user         = '会员|user|admin|';
-$lang->menu->message      = '留言|message|admin|type=message';
-$lang->menu->comment      = '评论|message|admin|type=comment';
-$lang->menu->reply        = '回复|message|admin|type=reply';
+$lang->menu->message      = '反馈|message|admin|';
 $lang->menu->forum        = '论坛|forum|admin|';
 $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';

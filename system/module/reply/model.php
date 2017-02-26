@@ -206,7 +206,10 @@ class replyModel extends model
 
             $urlInfo = $this->getPosition($replyID, 'anchor');
             
-            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID&pageID=" . $urlInfo['pageID'], "pageID=" . $urlInfo['pageID']) . "?rand=" . rand(1, 100) . "#" . $urlInfo['anchorID']);
+            if($this->config->requestType == 'GET') $locate = helper::createLink('thread', 'view', "threadID=$threadID&pageID=" . $urlInfo['pageID'] . "&noice=" . rand(1, 100) . "#" . $urlInfo['anchorID']);
+            if($this->config->requestType != 'GET') $locate = helper::createLink('thread', 'view', "threadID=$threadID&pageID=" . $urlInfo['pageID']) . "?rand=" . rand(1, 100) . "#" . $urlInfo['anchorID'];
+
+            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate);
         }
         return array('result' => 'fail', 'message' => dao::getError());
     }

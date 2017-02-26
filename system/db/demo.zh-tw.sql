@@ -153,9 +153,3 @@ INSERT INTO `eps_thread` (`id`, `board`, `title`, `color`, `content`, `author`, 
 
 INSERT INTO `eps_user` (`id`, `account`, `password`, `realname`, `realnames`, `nickname`, `admin`, `avatar`, `birthday`, `gender`, `email`, `skype`, `qq`, `yahoo`, `gtalk`, `wangwang`, `site`, `mobile`, `phone`, `company`, `address`, `zipcode`, `visits`, `ip`, `last`, `fails`, `referer`, `join`, `reset`, `locked`, `public`, `emailCertified`, `lang`) VALUES
 (2,	'demo',	'629313c380e0defefbd6267651c72a9d',	'demo',	'',	'',	'super',	'',	'0000-00-00',	'u',	'',	'',	'',	'',	'',	'',	'',	'',	'',	'',	'',	'',	0,	'14.159.71.121',	'0000-00-00 00:00:00',	0,	'',	'0000-00-00 00:00:00',	'',	'0000-00-00 00:00:00',	'0',	'0',	'zh-tw');
-
-INSERT INTO `eps_wx_public` (`id`, `account`, `name`, `appID`, `appSecret`, `url`, `token`, `qrcode`, `primary`, `type`, `status`, `certified`, `addedDate`, `lang`) VALUES
-(1,	'gh_safdasf',	'sues',	'asfasdf',	'sadfasdfa',	'',	'lasfdkjklasdfjaklsdf',	'',	0,	'subscribe',	'wait',	'1',	'2014-10-08 17:07:12',	'zh-tw');
-
-INSERT INTO `eps_wx_response` (`id`, `public`, `key`, `group`, `type`, `source`, `content`, `lang`) VALUES
-(1,	1,	'm_9',	'menu',	'link',	'http://demo.chanzhi.org/index/',	'',	'zh-tw');

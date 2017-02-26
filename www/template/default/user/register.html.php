@@ -1,4 +1,14 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
+<?php 
+  if(isset($this->config->site->registerAgreement) and $this->config->site->registerAgreement == 'open')
+  {
+    js::set('registerAgreement', 'open');
+  }
+  else
+  {
+    js::set('registerAgreement', 'close');
+  }
+?>
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class='panel panel-body' id='reg'>
   <div id='login-region'>
@@ -42,6 +52,13 @@
             <label class="col-sm-3 control-label"><?php echo $lang->user->phone;?></label>
             <div class='col-sm-9'><?php echo html::input('phone', '', "class='form-control'");?></div>
           </div>
+          <?php if(isset($this->config->site->registerAgreement) and $this->config->site->registerAgreement == 'open'):?>
+          <div class='form-group registerAgreement-form'>
+            <label class="col-sm-3 control-label"></label>
+            <input type="checkbox" id="registerAgreement" name="registerAgreement" value="1">
+            <span><?php echo $lang->user->agreeRegisterAgreement . '《'. html::a(helper::createLink('user', 'viewRegisterAgreement'), $this->config->site->registerAgreementTitle, "target='__blank'") . '》';?></span>
+          </div>
+          <?php endif;?>
           <div class='form-group'>
             <div class="col-sm-3"></div>
             <div class='col-sm-9'><?php echo html::submitButton($lang->register,'btn btn-primary btn-block') . html::hidden('referer', $referer);?></div>

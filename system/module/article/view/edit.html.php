@@ -15,6 +15,13 @@
 <?php js::set('type',$type);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php
+$colorPlates = '';
+foreach (explode('|', $lang->colorPlates) as $value)
+{
+    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+}
+?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $type == 'blog' ? $lang->blog->edit : ($type == 'page' ? $lang->page->edit : $lang->article->edit);?></strong></div>
   <div class='panel-body'>
@@ -43,28 +50,42 @@
       </tr>
       </tbody>
       <?php endif; ?>
-        <tr>
-          <th class='w-100px'><?php echo $lang->article->title;?></th>
-          <td colspan='2'>
-            <div class='order  input-group'>
-              <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?>"><?php echo html::input('title', $article->title, "class='form-control'");?></div>
-              <?php if($type == 'page'):?>
-              <div class='col-sm-3 order'>
-                <div class='input-group'>
-                  <span class="fix-border input-group-addon"><?php echo $lang->article->order;?></span>
-                  <?php echo html::input('order', $article->order == '0' ? $article->id : $article->order, "class='form-control'");?>
-                </div>
+      <tr>
+        <th class='w-100px'><?php echo $lang->article->title;?></th>
+        <td colspan='2'>
+          <div class='order  input-group'>
+            <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?>"><?php echo html::input('title', $article->title, "class='form-control'");?></div>
+            <?php if($type == 'page'):?>
+            <div class='col-sm-3 order'>
+              <div class='input-group'>
+                <span class="fix-border input-group-addon"><?php echo $lang->article->order;?></span>
+                <?php echo html::input('order', $article->order == '0' ? $article->id : $article->order, "class='form-control'");?>
               </div>
-              <?php endif;?>
-              <span class="input-group-addon w-70px">
-                <label class='checkbox-inline'>
-                <?php $checked = $article->link ? 'checked' : '';?>
-                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->article->isLink}</span>" ?>
-                </label>
-              </span>
             </div>
-          </td>
-        </tr>
+            <?php endif;?>
+            <?php if($type != 'page'):?>
+            <div class='input-group-addon colorplate clearfix'>
+              <div class='input-group color active' data="<?php echo $article->titleColor?>">
+                <label class='input-group-addon'><?php echo $lang->color;?></label>
+                <?php echo html::input('titleColor', $article->titleColor, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+                <span class='input-group-btn'>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                  <div class='dropdown-menu colors'>
+                    <?php echo $colorPlates; ?>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <?php endif;?>
+            <span class="input-group-addon w-70px">
+              <label class='checkbox-inline'>
+              <?php $checked = $article->link ? 'checked' : '';?>
+              <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->article->isLink}</span>" ?>
+              </label>
+            </span>
+          </div>
+        </td>
+      </tr>
       <tr class='link'>
         <th><?php echo $lang->article->link;?></th>
         <td colspan='2'>

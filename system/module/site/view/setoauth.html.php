@@ -25,7 +25,7 @@
       <div class='panel-body'>
         <form method='post' id='<?php echo $providerCode;?>AjaxForm' class='form-horizontal'>
           <table class="table table-form">
-            <?php if($providerCode != 'qq'):?>
+            <?php if($providerCode == 'sina'):?>
             <tr>
               <th class='w-100px'><?php echo $lang->user->oauth->verification;?></th>
               <td class='w-p75'>
@@ -61,6 +61,15 @@
                 <?php else:?>
                 <?php echo commonModel::getSysURL() . $this->config->webRoot. 'index.php/user-oauthCallback-qq.html';?>
                 <?php endif;?>
+              </td>
+            </tr>
+            <?php endif;?>
+            <?php if($providerCode == 'github'):?>
+            <tr>
+              <th><?php echo $lang->user->oauth->callbackURL;?></th>
+              <td>
+                <?php $callbackURL = commonModel::createFrontLink('user', 'oauthCallback', "provider=github");?>
+                <?php echo commonModel::getSysURL() . $callbackURL;?>
               </td>
             </tr>
             <?php endif;?>
