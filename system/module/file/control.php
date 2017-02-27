@@ -751,4 +751,23 @@ class file extends control
         }
         $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
     }
+
+    public function setWatermark()
+    {
+        $this->lang->menuGroups->file = 'site';
+        $this->lang->file->menu       = $this->lang->site->menu;
+        
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.file', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwatermark')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+        
+        $this->view->title = $this->lang->file->setWatermark;
+        $this->display();
+    }
 }
