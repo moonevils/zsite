@@ -13,7 +13,7 @@ $config->themeSetting->backColor    = '#FFFFFF';
 $config->themeSetting->borderRadius = '4px';
 $config->themeSetting->fontSize     = '14px';
 
-$config->cdn->fileList[] = '/theme/default/default/all.admin.css';
-$config->cdn->fileList[] = '/js/all.admin.js';
-$config->cdn->fileList[] = '/theme/default/default/all.css';
-$config->cdn->fileList[] = '/js/all.js';
+$config->cdn->fileList[] = '/theme/default/default/chanzhi.all.admin.css';
+$config->cdn->fileList[] = '/js/chanzhi.all.admin.js';
+$config->cdn->fileList[] = '/theme/default/default/chanzhi.all.css';
+$config->cdn->fileList[] = '/js/chanzhi.all.js';
