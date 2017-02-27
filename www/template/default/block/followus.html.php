@@ -12,7 +12,6 @@
 $block->content = json_decode($block->content);
 $publicList = $this->loadModel('wechat')->getList();
 ?>
-<?php if(!empty($publicList)):?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block hidden-sm hidden-xs <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
@@ -20,16 +19,22 @@ $publicList = $this->loadModel('wechat')->getList();
     <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
     <?php endif;?>
   </div>
-  <table class='w-p100'>
-    <?php foreach($publicList as $public):?>
-    <?php if(!$public->qrcode) continue;?>
-    <tr class='text-center'>
-      <td class='wechat-block'>
-        <div class='name'><i class='icon-weixin'>&nbsp;</i><?php echo $public->name;?></div>
-        <div class='qrcode'><?php echo html::image($public->qrcode, "class='w-220px'");?></div>
-      </td>
-    </tr>
-    <?php endforeach;?>
-  </table>
+  <?php if(isset($block->content->imageType) and $block->content->imageType == 'custom'):?>
+    <table class='w-p100'>
+    </table>
+  <?php else:?>
+    <?php if(!empty($publicList)):?>
+    <table class='w-p100'>
+      <?php foreach($publicList as $public):?>
+      <?php if(!$public->qrcode) continue;?>
+      <tr class='text-center'>
+        <td class='wechat-block'>
+          <div class='name'><i class='icon-weixin'>&nbsp;</i><?php echo $public->name;?></div>
+          <div class='qrcode'><?php echo html::image($public->qrcode, "class='w-220px'");?></div>
+        </td>
+      </tr>
+      <?php endforeach;?>
+    </table>
+    <?php endif;?>
+  <?php endif;?>
 </div>
-<?php endif;?>
