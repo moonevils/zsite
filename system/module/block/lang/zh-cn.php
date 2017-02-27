@@ -67,6 +67,7 @@ $lang->block->planName        = '方案名称';
 $lang->block->saveLayoutAs    = '复制布局：%s';
 $lang->block->defaultPlan     = '默认方案';
 $lang->block->image           = '图片';
+$lang->block->uploadImage     = '上传图片';
 
 $lang->block->layout            = '布局';
 $lang->block->logoPosition      = 'Logo';
@@ -211,3 +212,7 @@ $lang->block->sideFloat = '侧边栏位置';
 $lang->block->alignList = array();
 $lang->block->alignList['left']   = '居左';
 $lang->block->alignList['middle'] = '居中';
+
+$lang->block->imageTypeList = array();
+$lang->block->imageTypeList['wechat'] = '微信二维码';
+$lang->block->imageTypeList['custom'] = '自定义图片';
