@@ -63,13 +63,13 @@ $(document).ready(function()
                  $('#execButton').removeClass('disabled');
                  setTimeout(function(){$('#execButton').next('.total').hide();}, 2000);
                  return false;
-             }   
-             else
-             {   
-                 $('#execButton').next('.total').text(response.completed).show();
-                 $('#execButton').attr('href', response.next);
-                 return $('#execButton').click();
-             }   
+            }   
+            else
+            {   
+                $('#execButton').next('.total').text(response.completed).show();
+                $('#execButton').attr('href', response.next);
+                return $('#execButton').click();
+            }   
         }); 
         return false;
     }); 
