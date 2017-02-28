@@ -13,7 +13,7 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::set('goToPay', $lang->order->goToPay);?>
 <?php js::set('paid', $lang->order->paid);?>
-<div class='panel'>
+<div class='panel order-check'>
   <div class='panel-heading'><strong><?php echo $lang->order->selectPayment;?></strong></div>
   <form id='checkForm' action='<?php echo helper::createLink('order', 'pay', "orderID=$order->id");?>' method='post' target='_blank'>
     <div class='panel-body'>

@@ -43,7 +43,7 @@ $adminFiles[] = 'my';
 $adminFiles[] = 'my.admin';
 
 /* Combine these js files. */
-$allJSFile  = $jsRoot . 'all.js';
+$allJSFile  = $jsRoot . 'chanzhi.all.js';
 $jsCode = '';
 foreach($frontFiles as $jsFile)
 {
@@ -52,10 +52,10 @@ foreach($frontFiles as $jsFile)
     $jsCode .= "\n". file_get_contents($jsFiles[$jsFile]);
 }
 $result = file_put_contents($allJSFile, $jsCode);
-if($result) echo "create all.js success.\n";
+if($result) echo "create chanzhi.all.js success.\n";
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type js $allJSFile -o $allJSFile`;
 
-$adminAllJSFile  = $jsRoot . 'all.admin.js';
+$adminAllJSFile  = $jsRoot . 'chanzhi.all.admin.js';
 $jsCode = '';
 foreach($adminFiles as $file)
 {
@@ -63,19 +63,19 @@ foreach($adminFiles as $file)
     $jsCode .= file_get_contents($jsFiles[$file]);
 }
 $result = file_put_contents($adminAllJSFile, $jsCode);
-if($result) echo "create all.admin.js success\n";
+if($result) echo "create chanzhi.all.admin.js success\n";
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type js $adminAllJSFile -o $adminAllJSFile`;
 
 $ie8Code = file_get_contents($jsRoot . 'html5shiv/min.js');
 $ie8Code .= file_get_contents($jsRoot . 'respond/min.js');
 
-$result = file_put_contents($jsRoot . 'all.ie8.js', $ie8Code);
-if($result) echo "create all.ie8.js success\n";
+$result = file_put_contents($jsRoot . 'chanzhi.all.ie8.js', $ie8Code);
+if($result) echo "create chanzhi.all.ie8.js success\n";
 
 $ie9Code = file_get_contents($jsRoot . 'jquery/placeholder/min.js');
 
-$result = file_put_contents($jsRoot . 'all.ie9.js', $ie9Code);
-if($result) echo "create all.ie9.js success\n";
+$result = file_put_contents($jsRoot . 'chanzhi.all.ie9.js', $ie9Code);
+if($result) echo "create chanzhi.all.ie9.js success\n";
 
 //-------------------------------- PROCESS CSS FILES ------------------------------ //
 $cssFiles = array();
@@ -108,7 +108,7 @@ foreach($adminCSS as $file)
     $adminCssCode .= $css;
 }
 
-$adminCssFile = $themeRoot . 'default/all.admin.css';
+$adminCssFile = $themeRoot . 'default/chanzhi.all.admin.css';
 $result = file_put_contents($adminCssFile, $adminCssCode);
 if($result) echo "Compress Admin Css success!\n";
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type css $adminCssFile -o $adminCssFile`;
@@ -124,7 +124,7 @@ foreach($frontCSS as $file)
     $frontCssCode .= $css;
 }
 
-$frontCssFile = $themeRoot . 'default/all.css';
+$frontCssFile = $themeRoot . 'default/chanzhi.all.css';
 $result = file_put_contents($frontCssFile, $frontCssCode);
 if($result) echo "Compress Front Css success!\n";
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type css $frontCssFile -o $frontCssFile`;
