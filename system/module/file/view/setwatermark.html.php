@@ -57,7 +57,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <div class='input-group color active' data="<?php echo isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '';?>">
                 <label class='input-group-addon'><?php echo $lang->color;?></label>
                 <?php echo html::input('watermarkColor', isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
-                <span class='input-group-btn'>
+                <span class='input-group-btn' style='border-right: 1px solid rgb(204, 204, 204);'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>
                     <?php echo $colorPlates; ?>
