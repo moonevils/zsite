@@ -15,7 +15,7 @@
 <?php js::set('checkStock', isset($this->config->product->stock) ? $this->config->product->stock : false);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
-<div class='panel'>
+<div class='panel my-order'>
   <div class='panel-heading'><strong><?php echo $lang->order->confirm;?></strong></div>
   <form id='confirmForm' action='<?php echo helper::createLink('order', 'create'); ?>' method='post'>
     <div class='panel-body'>

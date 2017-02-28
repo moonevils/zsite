@@ -46,19 +46,19 @@ $themeRoot = $webRoot . "theme/default/";
       {
           if(!empty($this->config->cdn->site))
           {
-              css::import(rtrim($this->config->cdn->site, '/') . '/theme/default/default/all.admin.css');
-              js::import(rtrim($this->config->cdn->site, '/')  . '/js/all.admin.js');
+              css::import(rtrim($this->config->cdn->site, '/') . '/theme/default/default/chanzhi.all.admin.css');
+              js::import(rtrim($this->config->cdn->site, '/')  . '/js/chanzhi.all.admin.js');
           }
           else
           {
-              css::import($this->config->cdn->host . $this->config->version . '/theme/default/default/all.admin.css', '', $version = false);
-              js::import($this->config->cdn->host  . $this->config->version . '/js/all.admin.js', $version = false);
+              css::import($this->config->cdn->host . $this->config->version . '/theme/default/default/chanzhi.all.admin.css', '', $version = false);
+              js::import($this->config->cdn->host  . $this->config->version . '/js/chanzhi.all.admin.js', $version = false);
           }
       }
       else
       {
-          css::import($themeRoot . 'default/all.admin.css');
-          js::import($jsRoot     . 'all.admin.js');
+          css::import($themeRoot . 'default/chanzhi.all.admin.css');
+          js::import($jsRoot     . 'chanzhi.all.admin.js');
       }
   }
 
@@ -76,7 +76,7 @@ if($config->debug)
 }
 else
 {
-    js::import($jsRoot . 'all.ie8.js');
+    js::import($jsRoot . 'chanzhi.all.ie8.js');
 }
 ?>
 <![endif]-->
@@ -88,7 +88,7 @@ if($config->debug)
 }
 else
 {
-    js::import($jsRoot . 'all.ie9.js');
+    js::import($jsRoot . 'chanzhi.all.ie9.js');
 }
 ?>
 <![endif]-->

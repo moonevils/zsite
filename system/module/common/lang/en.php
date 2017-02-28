@@ -308,6 +308,7 @@ $lang->site->menu->cache     = 'Cache Settings|site|setcache|';
 $lang->site->menu->home      = 'Homepage Menu|site|sethomemenu|';
 $lang->site->menu->search    = 'Full Text Retrieval|search|buildindex|';
 $lang->site->menu->backup    = 'Backup/Restore|backup|index|';
+$lang->site->menu->watermark = 'File Watermark|file|setwatermark|';
 //$lang->site->menu->api      = 'API|site|setapi|';
 
 /* Menu of company module. */

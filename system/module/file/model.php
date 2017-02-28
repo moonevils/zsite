@@ -1177,4 +1177,73 @@ class fileModel extends model
 
         return $file;
     }
+    
+    /**
+     * Set watermark to image according to the config
+     * 
+     * @param  string    $imagePath 
+     * @access public
+     * @return void
+     */
+    public function setWatermark($imagePath)
+    {
+        $imageInfo = pathinfo($imagePath);
+        if(!extension_loaded('gd')) return false;
+        if(!is_writable($imageInfo['dirname'])) return false;
+
+        $rawFilename = str_replace('f_', '', $imageInfo['filename']);
+        $rawFilePath = $imageInfo['dirname'] . DIRECTORY_SEPARATOR . $rawFilename . '.' . $imageInfo['extension'];
+        if(!file_exists($rawFilePath))
+        {
+            copy($imagePath, $rawFilePath); 
+        }
+        
+        $fileTypeList = array('f', 'l', 'm', 's');
+        foreach($fileTypeList as $fileType)
+        {
+            $thumbPath = str_replace('f_', $fileType . '_', $imagePath);
+            if(file_exists($thumbPath))
+            {
+                $this->addTextWatermark($rawFilePath, $thumbPath);
+            }
+        }
+    }
+
+    /**
+     * Add Text Watermark to file
+     * 
+     * @param  string    $srcPath 
+     * @param  string    $destPath 
+     * @access public
+     * @return void
+     */
+    public function addTextWatermark($srcPath, $destPath)
+    {
+        $imageCreateFunArr = array('image/jpeg' => 'imagecreatefromjpeg', 'image/png' => 'imagecreatefrompng', 'image/gif' => 'imagecreatefromgif');
+        $imageOutputFunArr = array('image/jpeg' => 'imagejpeg', 'image/png' => 'imagepng', 'image/gif' => 'imagegif');
+
+        $rawFileInfo   = getimagesize($srcPath);
+        $rawFileWidth  = $rawFileInfo[0];
+        $rawFileHeight = $rawFileInfo[1];
+        $rawFileMime   = $rawFileInfo['mime'];
+
+        if (!isset($imageCreateFunArr[$rawFileMime])) return false;
+        if (!isset($imageOutputFunArr[$rawFileMime])) return false;
+        $imageCreateFun = $imageCreateFunArr[$rawFileMime];
+        $imageOutputFun = $imageOutputFunArr[$rawFileMime];
+        
+        $color      = helper::hex2Rgb($this->config->file->watermarkColor);
+        $opacity    = $this->config->file->watermarkOpacity;
+        $fontSize   = (isset($this->config->file->watermarkSize) and intval($this->config->file->watermarkSize)) > 0 ? intval($this->config->file->watermarkSize) : 14;
+        $text       = $this->config->file->watermarkContent;
+        $position   = $this->config->file->watermarkPosition;
+        $angle      = 0;
+        $fontPath   = './simhei.ttf';
+
+        $im = $imageCreateFun($srcPath);
+        $text_color = imagecolorallocatealpha($im, intval($color['r']), intval($color['g']), intval($color['b']), intval($opacity));
+        imagettftext($im, $fontSize, $angle, 20, 20, $text_color, $fontPath, $text);
+        $imageOutputFun($im, $destPath);
+        imagedestroy($im);
+    }
 }
