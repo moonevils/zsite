@@ -276,6 +276,16 @@ $lang->user->filterUsernameSensitiveList = array();
 $lang->user->filterUsernameSensitiveList['open']  = '开启';
 $lang->user->filterUsernameSensitiveList['close'] = '关闭';
 
-$lang->user->usernameSensitive    = '用户名敏感词';
-$lang->user->usernameIsSensitive  = '用户名或者真实姓名不能含有敏感词，请修改后再提交';
-$lang->user->usernameSensitiveTip = '多个敏感词之间请用英文逗号分隔';
+$lang->user->registerAgreement = '用户注册协议';
+
+$lang->user->registerAgreementList = array();
+$lang->user->registerAgreementList['open']  = '开启';
+$lang->user->registerAgreementList['close'] = '关闭';
+
+$lang->user->registerAgreementContent = '注册协议内容';
+$lang->user->registerAgreementTitle   = '注册协议标题';
+    
+$lang->user->usernameSensitive      = '用户名敏感词';
+$lang->user->usernameIsSensitive    = '用户名或者真实姓名不能含有敏感词，请修改后再提交';
+$lang->user->usernameSensitiveTip   = '多个敏感词之间请用英文逗号分隔';
+$lang->user->agreeRegisterAgreement = '我已阅读并同意';

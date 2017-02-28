@@ -146,14 +146,23 @@ class fileModel extends model
         $filesHtml  = '';
         foreach($files as $file)
         {
-            if($file->editor) continue;
+            if($file->editor and $file->objectType != 'article') continue;
             if($file->isVideo) continue;
             $file->title = $file->title . ".$file->extension";
-            $fileMD5 = md5_file(rtrim($this->app->getWwwRoot(), '/') . $file->fullURL);
+            $fileMD5  = md5_file(rtrim($this->app->getWwwRoot(), '/') . $file->fullURL);
+            $fileName = explode('.', basename($file->fullURL));
+            $fileName = $fileName[0];
             if($file->isImage)
             {
                 if($file->objectType == 'product') continue;
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                if($file->editor)
+                {
+                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                }
+                else
+                {
+                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                }
             }
             else
             {

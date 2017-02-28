@@ -1175,4 +1175,10 @@ class user extends control
         $this->view->title = $this->lang->user->setting;
         $this->display();
     }
+
+    public function viewRegisterAgreement()
+    {
+        $this->view->title = isset($this->config->site->registerAgreementTitle) ? $this->config->site->registerAgreementTitle : $this->lang->user->registerAgreement;
+        $this->display();
+    }
 }

@@ -48,15 +48,16 @@ $config->rights->guest['book']['index']  = 'index';
 $config->rights->guest['book']['browse'] = 'browse';
 $config->rights->guest['book']['read']   = 'read';
 
-$config->rights->guest['user']['login']         = 'login';
-$config->rights->guest['user']['register']      = 'register';
-$config->rights->guest['user']['oauthlogin']    = 'oauthlogin';
-$config->rights->guest['user']['oauthcallback'] = 'oauthcallback';
-$config->rights->guest['user']['oauthregister'] = 'oauthregister';
-$config->rights->guest['user']['oauthbind']     = 'oauthbind';
-$config->rights->guest['user']['oauthunbind']   = 'oauthunbind';
-$config->rights->guest['user']['ignorebind']    = 'ignorebind';
-$config->rights->guest['user']['message']       = 'message';
+$config->rights->guest['user']['login']                 = 'login';
+$config->rights->guest['user']['register']              = 'register';
+$config->rights->guest['user']['oauthlogin']            = 'oauthlogin';
+$config->rights->guest['user']['oauthcallback']         = 'oauthcallback';
+$config->rights->guest['user']['oauthregister']         = 'oauthregister';
+$config->rights->guest['user']['oauthbind']             = 'oauthbind';
+$config->rights->guest['user']['oauthunbind']           = 'oauthunbind';
+$config->rights->guest['user']['ignorebind']            = 'ignorebind';
+$config->rights->guest['user']['message']               = 'message';
+$config->rights->guest['user']['viewregisteragreement'] = 'viewregisteragreement';
 
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';

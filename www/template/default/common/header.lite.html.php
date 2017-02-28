@@ -57,13 +57,13 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
   {
       if($cdnRoot)
       {
-          css::import($cdnRoot . '/theme/default/default/all.css', '', $version = false);
-          js::import($cdnRoot  . '/js/all.js', $version = false);
+          css::import($cdnRoot . '/theme/default/default/chanzhi.all.css', '', $version = false);
+          js::import($cdnRoot  . '/js/chanzhi.all.js', $version = false);
       }
       else
       {
-          css::import($themeRoot . 'default/all.css');
-          js::import($jsRoot     . 'all.js');
+          css::import($themeRoot . 'default/chanzhi.all.css');
+          js::import($jsRoot     . 'chanzhi.all.js');
       }
   }
 
@@ -99,7 +99,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
       }
       else
       {
-          js::import($jsRoot . 'all.ie8.js');
+          js::import($jsRoot . 'chanzhi.all.ie8.js');
       }
   }
   ?>
@@ -112,7 +112,7 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
   }
   else
   {
-      js::import($jsRoot . 'all.ie9.js');
+      js::import($jsRoot . 'chanzhi.all.ie9.js');
   }
   ?>
   <![endif]-->
