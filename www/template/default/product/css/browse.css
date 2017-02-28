@@ -20,3 +20,9 @@
 .table-list td{vertical-align:middle;}
 #cardMode .text-ellipsis{padding-right:44px;position:relative;}
 #cardMode .text-ellipsis .views-count{position:absolute;top:0;right:0;}
+.headerSortUp {display:inline-block; margin-left: 5px; margin-right: 5px;}
+.headerSortDown {display:inline-block; margin-left: 5px; margin-right: 5px;}
+#products .header {display:inline-block; margin-left: 5px; margin-right: 5px;}
+#products .header:after {font-family: ZenIcon;font-weight: normal;content: " \e6bd";font-size: 14px;}
+.headerSortUp:after {font-family: ZenIcon;font-weight: normal;content: " \e6b9";font-size: 14px;color: #2973EA;}
+.headerSortDown:after {font-family: ZenIcon;font-weight: normal;content: " \e6b8";font-size: 14px;color: #2973EA;}

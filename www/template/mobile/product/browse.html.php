@@ -53,7 +53,7 @@
           </a>
           <div class='card-content'>
             <?php
-            echo "<a href='{$url}'>{$product->name}</a>";
+            echo "<a href='{$url}' style='color:{$product->titleColor}'>{$product->name}</a>";
             if(!$product->unsaleable)
             {
                 if($product->promotion != 0)

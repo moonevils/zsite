@@ -309,6 +309,7 @@ $lang->site->menu->cache     = '缓存设置|site|setcache|';
 $lang->site->menu->home      = '首页菜单|site|sethomemenu|';
 $lang->site->menu->search    = '全文检索|search|buildindex|';
 $lang->site->menu->backup    = '备份还原|backup|index|';
+$lang->site->menu->watermark = '图片水印|file|setwatermark|';
 //$lang->site->menu->api    = 'API|site|setapi|';
 
 /* Menu of company module. */

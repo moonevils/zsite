@@ -34,6 +34,12 @@
           <th class='w-200px'><?php echo $lang->ui->execInfo;?></th>
           <td class='w-p30'><?php echo html::radio('execInfo', $lang->ui->execInfoOptions, isset($this->config->site->execInfo) ? $this->config->site->execInfo : 'show');?></td><td></td>
         </tr>
+        <?php if($this->config->framework->detectDevice[$this->app->clientLang]):?>
+        <tr>
+          <th class='w-200px'><?php echo $lang->ui->mobileBottomNav;?></th>
+          <td class='w-p30'><?php echo html::radio('mobileBottomNav', $lang->ui->execInfoOptions, isset($this->config->site->mobileBottomNav) ? $this->config->site->mobileBottomNav : 'show');?></td><td></td>
+        </tr>
+        <?php endif;?>
         <?php if(strpos($this->config->site->modules, 'article') !== false):?>
         <tr>
           <th><?php echo $lang->site->customizableList->article;?></th> 

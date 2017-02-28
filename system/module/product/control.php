@@ -45,6 +45,14 @@ class product extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {  
+        if($this->cookie->productOrderBy !== false) 
+        {
+            $orderBy = $this->cookie->productOrderBy;    
+        }
+        else
+        {
+            $orderBy = 'order_desc';
+        }
         $category = $this->loadModel('tree')->getByID($categoryID, 'product');
 
         if($category && $category->link) helper::header301($category->link);
@@ -54,7 +62,7 @@ class product extends control
         $pager = new pager(0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), '`order` desc', $pager);
+        $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), $orderBy, $pager);
         $products   = $this->loadModel('file')->processImages($products, 'product');
 
         if(!$category and $categoryID != 0) die($this->fetch('error', 'index'));
@@ -84,6 +92,8 @@ class product extends control
         $this->view->category   = $category;
         $this->view->products   = $products;
         $this->view->pager      = $pager;
+        $this->view->pageID     = $pageID;
+        $this->view->orderBy    = $orderBy;
         $this->view->contact    = $this->loadModel('company')->getContact();
         $this->view->mobileURL  = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'html');

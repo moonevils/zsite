@@ -34,6 +34,14 @@ class article extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {   
+        if($this->cookie->articleOrderBy !== false) 
+        {
+            $orderBy = $this->cookie->articleOrderBy;    
+        }
+        else
+        {
+            $orderBy = 'addedDate_desc';
+        }
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
         if($category->link) helper::header301($category->link);
@@ -45,7 +53,7 @@ class article extends control
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
         $sticks     = $this->article->getSticks($families, 'article');
-        $articles   = $this->article->getList('article', $families, 'addedDate_desc', $pager);
+        $articles   = $this->article->getList('article', $families, $orderBy, $pager);
         $articles   = $sticks + $articles;
 
         $articles   = $this->loadModel('file')->processImages($articles, 'article');
@@ -73,6 +81,8 @@ class article extends control
         $this->view->category   = $category;
         $this->view->articles   = $articles;
         $this->view->pager      = $pager;
+        $this->view->pageID     = $pageID;
+        $this->view->orderBy    = $orderBy;
         $this->view->contact    = $this->loadModel('company')->getContact();
         $this->view->mobileURL  = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'mhtml');
         $this->view->desktopURL = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'html');

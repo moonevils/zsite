@@ -1,7 +1,5 @@
 $(document).ready(function()
 {
-    $('#source').change();
-    $('#isLink').change();
     var parseColor = function(c)
     {
         try {return new Color(c);}

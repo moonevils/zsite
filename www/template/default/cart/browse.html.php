@@ -14,7 +14,7 @@
 <?php js::set('currencySymbol', $currencySymbol);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
-<div class='panel'>
+<div class='panel my-cart'>
   <div class='panel-heading'>
     <strong><?php echo $lang->cart->browse;?></strong>
   </div>

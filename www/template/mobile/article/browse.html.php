@@ -37,7 +37,7 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
           <small class='bg-danger-pale text-danger'><?php echo $lang->article->stick;?></small>
         </div>
         <?php endif;?>
-        <h5><?php echo $article->title?></h5>
+        <h5 style='color:<?php echo $article->titleColor;?>'><?php echo $article->title?></h5>
       </div>
       <div class='table-layout'>
         <div class='table-cell'>

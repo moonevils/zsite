@@ -19,6 +19,8 @@
   </div>
 </div>
 
+<?php if(isset($this->config->site->mobileBottomNav) and ($this->config->site->mobileBottomNav == 'hide')):?>
+<?php else:?>
 <?php $bottomNavs = $this->loadModel('nav')->getNavs('mobile_bottom');?>
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
   <ul class="nav">
@@ -41,6 +43,7 @@
     <?php endforeach;?>
   </ul>
 </footer>
+<?php endif;?>
 <?php
 if(isset($pageJS)) js::execute($pageJS);
 

@@ -440,7 +440,7 @@ class uri
     public static function createProductBrowse($params, $alias, $viewType = '')
     {
         global $config;
-
+        
         $link = 'product/c' . array_shift($params);
         if(!empty($alias['category'])) $link = $alias['category'];
 
