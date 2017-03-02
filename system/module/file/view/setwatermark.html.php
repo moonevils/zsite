@@ -18,6 +18,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
 }
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('rebuildWatermark', $lang->file->rebuildWatermark);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->file->setWatermark;?></strong></div>
   <div class='panel-body'>
@@ -38,13 +39,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
         </tr>
         <tr>
           <th><?php echo $lang->file->watermarkSize;?></th>
-          <td class='w-500px'>
+          <td class='w-200px'>
             <div class='input-group' style='margin-bottom: 10px'>
-              <span class='input-group-addon'><?php echo $lang->file->image['width'];?></span>
-              <?php echo html::input("watermarkSizeX", isset($this->config->file->watermarkSizeX) ? $this->config->file->watermarkSizeX : '20', "class='form-control fix-border'");?>
-              <span class="input-group-addon">px</span>
-              <span class='input-group-addon fix-border'><?php echo $lang->file->image['height'];?></span>
-              <?php echo html::input("watermarkSizeY", isset($this->config->file->watermarkSizeY) ? $this->config->file->watermarkSizeY : '20', "class='form-control'");?>
+              <?php echo html::input('watermarkSize', isset($this->config->file->watermarkSize) ? $this->config->file->watermarkSize : '14', "class='form-control'");?>
               <span class="input-group-addon">px</span>
             </div>
           </td>
@@ -88,8 +85,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
         </tr>
         <tr>
           <th></th>
-          <td>
+          <td colspan='2'>
             <?php echo html::submitButton();?>
+            <?php echo html::a(helper::createLink('file', 'rebuildWatermark'), $lang->file->rebuildWatermark, "class='btn btn-primary' id='execButton'");?>
+            <span class='alert alert-success total hide'></span>
           </td>
         </tr>
       </table>

@@ -402,7 +402,14 @@ class fileModel extends model
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                if($objectType != 'source' and $objectType != 'slide') $this->compressImage($this->savePath . $file['pathname']);
+                if($objectType != 'source' and $objectType != 'slide') 
+                {
+                    $this->compressImage($this->savePath . $file['pathname']);
+                    if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+                    {
+                        $this->setWatermark($this->savePath . $file['pathname']);
+                    }
+                }
                 $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
             }
 
@@ -725,6 +732,10 @@ class fileModel extends model
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) and $fileInfo->objectType != 'slide' and $fileInfo->objectType != 'source' )
             {
                 $this->compressImage($realPathName);
+                if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+                {
+                    $this->setWatermark($realPathName);
+                }
                 $imageSize = $this->getImageSize($realPathName);
             }
 
@@ -883,6 +894,10 @@ class fileModel extends model
 
             file_put_contents($this->savePath . $file['pathname'], $imageData);
             $this->compressImage($this->savePath . $file['pathname']);
+            if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+            {
+                $this->setWatermark($this->savePath . $file['pathname']);
+            }
 
             $imageSize      = $this->getImageSize($this->savePath . $file['pathname']);
             $file['width']  = $imageSize['width'];
@@ -1148,7 +1163,14 @@ class fileModel extends model
         {
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                if($objectType != 'source' and $objectType != 'slide') $this->compressImage($this->savePath . $file['pathname']);
+                if($objectType != 'source' and $objectType != 'slide') 
+                {
+                    $this->compressImage($this->savePath . $file['pathname']);
+                    if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+                    {
+                        $this->setWatermark($this->savePath . $file['pathname']);
+                    }
+                }
                 $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
             }
 
@@ -1176,5 +1198,121 @@ class fileModel extends model
         }
 
         return $file;
+    }
+    
+    /**
+     * Set watermark to image according to the config
+     * 
+     * @param  string    $imagePath 
+     * @access public
+     * @return void
+     */
+    public function setWatermark($imagePath)
+    {
+        $imageInfo = pathinfo($imagePath);
+        if(!extension_loaded('gd')) return false;
+        if(!is_writable($imageInfo['dirname'])) return false;
+
+        $rawFilename = str_replace('f_', '', $imageInfo['filename']);
+        $rawFilePath = $imageInfo['dirname'] . DIRECTORY_SEPARATOR . $rawFilename . '.' . $imageInfo['extension'];
+        if(!file_exists($rawFilePath))
+        {
+            copy($imagePath, $rawFilePath); 
+        }
+        
+        $fileTypeList = array('f', 'l', 'm', 's');
+        foreach($fileTypeList as $fileType)
+        {
+            $thumbPath = str_replace('f_', $fileType . '_', $imagePath);
+            if(file_exists($thumbPath))
+            {
+                $this->addTextWatermark($rawFilePath, $thumbPath);
+            }
+        }
+    }
+
+    /**
+     * Add Text Watermark to file
+     * 
+     * @param  string    $srcPath 
+     * @param  string    $destPath 
+     * @access public
+     * @return void
+     */
+    public function addTextWatermark($srcPath, $destPath)
+    {
+        $imageCreateFunArr = array('image/jpeg' => 'imagecreatefromjpeg', 'image/png' => 'imagecreatefrompng', 'image/gif' => 'imagecreatefromgif');
+        $imageOutputFunArr = array('image/jpeg' => 'imagejpeg', 'image/png' => 'imagepng', 'image/gif' => 'imagegif');
+
+        $rawFileInfo   = getimagesize($srcPath);
+        $rawFileWidth  = $rawFileInfo[0];
+        $rawFileHeight = $rawFileInfo[1];
+        $rawFileMime   = $rawFileInfo['mime'];
+
+        if (!isset($imageCreateFunArr[$rawFileMime])) return false;
+        if (!isset($imageOutputFunArr[$rawFileMime])) return false;
+        $imageCreateFun = $imageCreateFunArr[$rawFileMime];
+        $imageOutputFun = $imageOutputFunArr[$rawFileMime];
+        
+        $color      = helper::hex2Rgb($this->config->file->watermarkColor);
+        $opacity    = isset($this->config->file->watermarkOpacity) ? $this->config->file->watermarkOpacity : 60;
+        $fontSize   = (isset($this->config->file->watermarkSize) and intval($this->config->file->watermarkSize)) > 0 ? intval($this->config->file->watermarkSize) : 14;
+        $text       = $this->config->file->watermarkContent;
+        $position   = isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'topLeft';
+        $angle      = 0;
+        $fontPath   = './simhei.ttf';
+        $textLength = mb_strlen($text, 'utf8') * $fontSize;
+
+        if($position == 'topLeft')
+        {
+            $positionX = 10;
+            $positionY = 10 + $fontSize;
+        }
+        elseif($position == 'topMiddle')
+        {
+            $positionX = $rawFileWidth / 2 - $textLength / 2;
+            $positionY = 10 + $fontSize;
+        }
+        elseif($position == 'topRight')
+        {
+            $positionX = $rawFileWidth - $textLength - 20;
+            $positionY = 10 + $fontSize;
+        }
+        elseif($position == 'middleLeft')
+        {
+            $positionX = 10;
+            $positionY = $rawFileHeight / 2 - $fontSize / 2;
+        }
+        elseif($position == 'middleMiddle')
+        {
+            $positionX = $rawFileWidth / 2 - $textLength / 2;
+            $positionY = $rawFileHeight / 2 - $fontSize / 2;
+        }
+        elseif($position == 'middleRight')
+        {
+            $positionX = $rawFileWidth - $textLength - 20;
+            $positionY = $rawFileHeight / 2 - $fontSize / 2;
+        }
+        elseif($position == 'bottomLeft')
+        {
+            $positionX = 10;
+            $positionY = $rawFileHeight - $fontSize;
+        }
+        elseif($position == 'bottomMiddle')
+        {
+            $positionX = $rawFileWidth / 2 - $textLength / 2;
+            $positionY = $rawFileHeight - $fontSize;
+        }
+        else
+        {
+            $positionX = $rawFileWidth - $textLength - 20;
+            $positionY = $rawFileHeight - $fontSize;
+        }
+
+        $im = $imageCreateFun($srcPath);
+        $text_color = imagecolorallocatealpha($im, intval($color['r']), intval($color['g']), intval($color['b']), intval($opacity));
+        imagettftext($im, $fontSize, $angle, $positionX, $positionY, $text_color, $fontPath, $text);
+        $imageOutputFun($im, $destPath);
+        imagedestroy($im);
     }
 }
