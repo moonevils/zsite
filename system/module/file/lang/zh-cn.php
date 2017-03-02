@@ -43,6 +43,8 @@ $lang->file->watermarkSize     = '水印大小';
 $lang->file->watermarkColor    = '水印颜色';
 $lang->file->watermarkOpacity  = '水印透明度';
 $lang->file->watermarkPosition = '水印位置';
+$lang->file->rebuildWatermark  = '重新生成图片水印';
+$lang->file->rebuildWatermarks  = "已完成 %s";
 
 $lang->file->watermarkPositionList = array();
 $lang->file->watermarkPositionList['topLeft']      = '左上';
