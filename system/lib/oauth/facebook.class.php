@@ -1,6 +1,6 @@
 <?php
 /**
- * The github client class for OAuth.
+ * The facebook client class for OAuth.
  * 
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @author      chunsheng wang <chunsheng@cnezsoft.com> 
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @Link        http://www.chanzhi.org
  */
-class github extends OAuth
+class facebook extends OAuth
 {
     /**
      * The authorize api.
@@ -17,7 +17,7 @@ class github extends OAuth
      * @var string
      * @access public
      */
-    public $authorizeAPI = 'https://github.com/login/oauth/authorize?';
+    public $authorizeAPI = 'https://www.facebook.com/v2.8/dialog/oauth?';
 
     /**
      * The authorize scope.
@@ -25,7 +25,7 @@ class github extends OAuth
      * @var string
      * @access public
      */
-    public $authorizeScope = 'user user:email';
+    public $authorizeScope = 'get_user_info,add_share,list_album,add_album,upload_pic,add_topic,add_one_blog,add_weibo,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idolist,add_idol,del_idol,get_tenpay_addr';
 
     /**
      * The token api.
@@ -33,7 +33,7 @@ class github extends OAuth
      * @var string
      * @access public
      */
-    public $tokenAPI ='https://github.com/login/oauth/access_token';
+    public $tokenAPI = 'https://graph.facebook.com/v2.8/oauth/access_token?';
 
     /**
      * The open id api.
@@ -41,7 +41,7 @@ class github extends OAuth
      * @var string
      * @access public
      */
-    public $openIdAPI = 'https://api.github.com/user?';
+    public $openIdAPI = 'https://graph.facebook.com/me?';
 
     /**
      * The user info api.
@@ -49,7 +49,7 @@ class github extends OAuth
      * @var string
      * @access public
      */
-    public $userInfoAPI = 'https://api.github.com/user?';
+    public $userInfoAPI = 'https://graph.facebook.com/me?';
 
     /**
      * Create the api of authorize.
@@ -59,12 +59,10 @@ class github extends OAuth
      */
     public function createAuthorizeAPI()
     {
-        $params['response_type'] = 'code';
         $params['client_id']     = $this->clientID;
         $params['redirect_uri']  = $this->redirectURI;
         $params['state']         = $this->state;
-        $params['scope']         = $this->authorizeScope;
-
+        
         return $this->authorizeAPI . http_build_query($params);
     }
 
@@ -77,13 +75,26 @@ class github extends OAuth
      */
     public function getToken($code)
     {
+        $data = $this->get($this->createTokenAPI($code));
+        $return = json_decode($data, true);
+        return $return['access_token'];
+    }
+
+    /**
+     * Create the api of token.
+     * 
+     * @param  string   $code 
+     * @access public
+     * @return string
+     */
+    public function createTokenAPI($code)
+    {
         $params['client_id']     = $this->clientID;
+        $params['redirect_uri']  = $this->redirectURI;
         $params['client_secret'] = $this->clientSecret;
         $params['code']          = $code;
-        
-        $data = $this->post($this->tokenAPI, $params);
-        parse_str($data, $tokens);
-        return $tokens['access_token'];
+
+        return $this->tokenAPI . http_build_query($params);
     }
 
     /**
@@ -136,6 +147,8 @@ class github extends OAuth
      */
     public function createUserInfoAPI($token, $openID)
     {
-        return $this->userInfoAPI . "access_token=$token";
+        $params['access_token']       = $token;
+
+        return $this->userInfoAPI . http_build_query($params);
     }
 }
