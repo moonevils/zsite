@@ -92,6 +92,7 @@ $lang->preview        = '预览';
 $lang->goback         = '返回';
 $lang->more           = '更多';
 $lang->refresh        = '刷新';
+$lang->setting        = '设置';
 $lang->actions        = '操作';
 $lang->feature        = '未来';
 $lang->year           = '年';
@@ -308,6 +309,7 @@ $lang->site->menu->cache     = '缓存设置|site|setcache|';
 $lang->site->menu->home      = '首页菜单|site|sethomemenu|';
 $lang->site->menu->search    = '全文检索|search|buildindex|';
 $lang->site->menu->backup    = '备份还原|backup|index|';
+$lang->site->menu->watermark = '图片水印|file|setwatermark|';
 //$lang->site->menu->api    = 'API|site|setapi|';
 
 /* Menu of company module. */

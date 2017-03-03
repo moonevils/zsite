@@ -753,4 +753,38 @@ class treeModel extends model
         if(!isset($this->lang->tree->adminLinks->$type) and isset($this->lang->$menuGroup->menu)) $this->lang->tree->menu = $this->lang->$menuGroup->menu;
         $this->lang->menuGroups->tree = $menuGroup;
     }
+
+    
+    /**
+     * Get top CategroyList 
+     * 
+     * @param  array    $categoryList 
+     * @param  string   $type 
+     * @access public
+     * @return array
+     */
+    public function getTopCategroyList($categoryList, $type)
+    {
+        $allCategoryList = $this->dao->select('*')->from(TABLE_CATEGORY)
+                        ->where('id')->in($categoryList)
+                        ->andWhere('type')->eq('blog')
+                        ->fetchAll('id');
+
+        
+        foreach($categoryList as $category)
+        {
+            if($allCategoryList[$category]->grade == '1')
+            {
+                $selectedList[$category] = $allCategoryList[$category];
+            }
+            else
+            {
+                $topCategroy = explode(',', trim($allCategoryList[$category]->path, ',')); 
+                $topCategroy = $topCategroy[0];
+                $selectedList[$category] = $allCategoryList[$topCategroy];
+            }
+        }
+        
+        return $selectedList;    
+    }
 }

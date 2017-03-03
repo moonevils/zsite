@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The user module zh-cn file of chanzhiEPS.
@@ -201,12 +202,35 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
-$lang->user->oauth->providers['sina'] = '新浪微博';
-$lang->user->oauth->providers['qq']   = 'QQ';
+$lang->user->oauth->github = new stdclass();
+$lang->user->oauth->github->clientID     = 'Client ID';
+$lang->user->oauth->github->clientSecret = 'Client Secret';
+
+$lang->user->oauth->twitter= new stdclass();
+$lang->user->oauth->twitter->clientID     = 'API ID';
+$lang->user->oauth->twitter->clientSecret = 'API Secret';
+
+$lang->user->oauth->facebook= new stdclass();
+$lang->user->oauth->facebook->clientID     = 'API ID';
+$lang->user->oauth->facebook->clientSecret = 'API Secret';
+
+$lang->user->oauth->google= new stdclass();
+$lang->user->oauth->google->clientID     = 'API ID';
+$lang->user->oauth->google->clientSecret = 'API Secret';
+
+$lang->user->oauth->providers['sina']   = '新浪微博';
+$lang->user->oauth->providers['qq']     = 'QQ';
+$lang->user->oauth->providers['github'] = 'Github';
+$lang->user->oauth->providers['twitter'] = 'Twitter';
+$lang->user->oauth->providers['facebook'] = 'Facebook';
+$lang->user->oauth->providers['google'] = 'Google';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博会员';
 $lang->user->oauth->typeList['qq']     = 'QQ会员';
 $lang->user->oauth->typeList['wechat'] = '微信会员';
+$lang->user->oauth->typeList['github'] = 'Github';
+$lang->user->oauth->typeList['facebook'] = 'Facebook';
+$lang->user->oauth->typeList['google'] = 'Google';
 
 $lang->user->oauth->lblWelcome       = '开放登录，快捷方便';
 $lang->user->oauth->lblOtherLogin    = '其他方式 : ';

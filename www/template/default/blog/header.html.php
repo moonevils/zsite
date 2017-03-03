@@ -71,11 +71,11 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
   {
       if($this->config->cdn->open == 'open') 
       {
-          js::import($this->config->cdn->host . $this->config->version . '/js/all.js', $version = false);
+          js::import($this->config->cdn->host . $this->config->version . '/js/chanzhi.all.js', $version = false);
       } 
       else
       {
-          js::import($jsRoot . 'all.js');
+          js::import($jsRoot . 'chanzhi.all.js');
       }
   }
 
@@ -101,7 +101,7 @@ if($config->debug)
 }
 else
 {
-    js::import($jsRoot . 'all.ie8.js');
+    js::import($jsRoot . 'chanzhi.all.ie8.js');
 }
 ?>
 <![endif]-->
@@ -113,7 +113,7 @@ if($config->debug)
 }
 else
 {
-    js::import($jsRoot . 'all.ie9.js');
+    js::import($jsRoot . 'chanzhi.all.ie9.js');
 }
 ?>
 <![endif]-->
