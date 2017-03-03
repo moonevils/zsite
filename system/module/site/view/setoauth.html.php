@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The setbasic view file of site module of chanzhiEPS.
@@ -64,12 +65,12 @@
               </td>
             </tr>
             <?php endif;?>
-            <?php if($providerCode == 'github'):?>
+            <?php if(in_array($providerCode, ['github', 'twitter', 'facebook', 'google'])):?>
             <tr>
               <th><?php echo $lang->user->oauth->callbackURL;?></th>
               <td>
-                <?php $callbackURL = commonModel::createFrontLink('user', 'oauthCallback', "provider=github");?>
-                <?php echo commonModel::getSysURL() . $callbackURL;?>
+                <?php $callbackURL = $this->loadModel('user')->createOAuthCallbackURL($providerCode);?>
+                <?php echo $callbackURL;?>
               </td>
             </tr>
             <?php endif;?>
