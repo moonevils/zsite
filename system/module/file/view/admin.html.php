@@ -14,8 +14,9 @@
       </div>
     <?php endif;?>
   </div>
+  <?php if($type == 'valid'):?>
+  <form method='post' id='ajaxForm' action='<?php echo inlink('batchdelete');?>'>
   <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
-    <?php if($type == 'valid'):?>
     <thead>
       <tr class='text-center'>
         <th class=' w-60px'><?php echo $lang->file->id;?></th>
@@ -31,7 +32,10 @@
     <tbody>
       <?php foreach($files as $file):?>
         <tr class='text-center text-middle'>
-          <td><?php echo $file->id;?></td>
+          <td>
+            <input type='checkbox' name='fileList[]'  value='<?php echo $file->id;?>'/>
+            <?php echo $file->id;?>
+          </td>
           <td class='text-center'>
             <?php 
               if($file->isImage and $file->existStatus == 'yes')
@@ -66,8 +70,23 @@
         </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='3' class='text-left'><?php echo $lang->file->fileTip;?></td><td colspan='5'><?php $pager->show('right', 'lite');?></td></tr></tfoot>
-    <?php else:?>
+    <tfoot>
+      <tr>
+        <td colspan='8'>
+          <div class='btn-group'>
+            <?php echo html::selectButton();?> 
+          </div>
+          <?php echo html::submitButton($lang->delete);?>
+          <?php echo $lang->file->fileTip;?>
+          <?php $pager->show('right', 'lite');?>
+        </td>
+      </tr>
+    </tfoot>
+    </form>
+  </table>
+  <?php else:?>
+  <form method='post' id='ajaxForm' action='<?php echo inlink('batchdeleteinvalid');?>'>
+  <table class='table table-hover table-striped tablesorter table-fixed' id='orderList'>
     <thead>
       <tr class='text-center'>
         <th><?php echo $lang->file->common;?></th>
@@ -80,7 +99,10 @@
     <tbody>
       <?php foreach($files as $file):?>
         <tr class='text-center text-middle'>
-          <td class='text-left'><?php echo $file->pathname;?></td>
+          <td class='text-left'>
+            <input type='checkbox' name='fileList[]'  value='<?php echo $file->pathname;?>'/>
+            <?php echo $file->pathname;?>
+          </td>
           <td><?php echo $file->extension;?></td>
           <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
           <td><?php echo $file->addedDate;?></td>
@@ -93,8 +115,19 @@
         </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='5'><?php $pager->show('right', 'lite');?></td></tr></tfoot>
-    <?php endif;?>
+    <tfoot>
+      <tr>
+        <td colspan='5'>
+          <div class='btn-group'>
+            <?php echo html::selectButton();?> 
+          </div>
+          <?php echo html::submitButton($lang->delete);?>
+          <?php $pager->show('right', 'lite');?>
+        </td>
+      </tr>
+    </tfoot>
   </table>
+  </form>
+  <?php endif;?>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

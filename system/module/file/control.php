@@ -56,6 +56,22 @@ class file extends control
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
+    public function batchDeleteInvalid()
+    {
+        if($_POST)
+        {
+            $fileList = $_POST['fileList'];
+            foreach($fileList as $pathname)
+            {
+                $pathname = urldecode($pathname);
+                $pathname = realpath($this->app->getDataRoot() . 'upload/' . $pathname); 
+                $this->file->deleteInvalidFile($pathname);
+            }
+            $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin', 'type=invalid')));
+        }
+        $this->send(array('result' => 'success', 'locate' => inlink('admin', 'type=invalid')));
+    }
+
     /**
      * Delete all the invalid file
      *
@@ -130,6 +146,10 @@ class file extends control
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
             {
                 $this->file->compressImage($this->file->savePath . $file['pathname']);
+                if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+                {
+                    $this->file->setWatermark($this->file->savePath . $file['pathname']);
+                }
                 $imageSize = $this->file->getImageSize($this->file->savePath . $file['pathname']);
                 $file['width']  = $imageSize['width'];
                 $file['height'] = $imageSize['height'];
@@ -712,6 +732,105 @@ class file extends control
         {
             $lastImage = $lastImage + $limit;
             $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildthumbs', "imageDirKey=$imageDirKey&lastImage=$lastImage&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildThumbs, $rate)));
+        }
+    }
+
+    /**
+     * Batch delete file
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchDelete()
+    {
+        if($_POST)
+        {
+            $fileList = $_POST['fileList'];
+            foreach($fileList as $fileID)
+            {
+                $this->file->delete($fileID);
+            }
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
+        }
+        $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
+    }
+
+    /**
+     * Set file watermark 
+     * 
+     * @access public
+     * @return void
+     */
+    public function setWatermark()
+    {
+        $this->lang->menuGroups->file = 'site';
+        $this->lang->file->menu       = $this->lang->site->menu;
+        
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.file', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwatermark')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+        
+        $this->view->title = $this->lang->file->setWatermark;
+        $this->display();
+    }
+    
+    /**
+     * Rebuild file watermark 
+     * 
+     * @param  int    $imageDirKey 
+     * @param  int    $lastImage 
+     * @param  int    $completed 
+     * @param  int    $total 
+     * @access public
+     * @return void
+     */
+    public function rebuildWatermark($imageDirKey = 0, $lastImage = 0, $completed = 0, $total = 0)
+    {
+        $imageDirs = glob($this->app->getDataRoot() . "upload/*");
+        if($total == 0)
+        {
+            foreach($imageDirs as $dir)
+            {
+                $images = glob($dir . '/f_*');
+                $total  += count($images);
+            }
+        }
+        $rate = round($completed / $total * 100) . $this->lang->percent;
+
+        $imageDir   = $imageDirs[$imageDirKey];
+        $images     = glob($imageDir . '/f_*');
+        $imageCount = count($images);
+        $limit      = $imageCount - $lastImage >= 10 ? 10 : $imageCount - $lastImage; 
+        $rawImages  = array_slice($images, $lastImage, $limit);
+        $completed += $limit;
+        
+        foreach($rawImages as $image)
+        {
+            $extension = $this->file->getExtension($image);
+            if(in_array(strtolower($extension), $this->config->file->imageExtensions, true) === false) continue;
+            $this->file->setWatermark($image);
+        }
+        
+        if($lastImage + $limit == $imageCount)
+        { 
+            if($imageDirKey == count($imageDirs) - 1) $this->send(array('result' => 'finished', 'message' => $this->lang->createSuccess));
+            if($imageDirKey < count($imageDirs) - 1)
+            {
+                $imageDirKey = $imageDirKey + 1;
+                $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildWatermark', "imageDirKey=$imageDirKey&lastImage=0&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildWatermarks, $rate)));
+            }
+        }
+        else
+        {
+            $lastImage = $lastImage + $limit;
+            $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildWatermark', "imageDirKey=$imageDirKey&lastImage=$lastImage&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildWatermarks, $rate)));
         }
     }
 }

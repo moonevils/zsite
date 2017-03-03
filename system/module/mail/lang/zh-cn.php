@@ -48,9 +48,10 @@ $lang->mail->trySendlater   = '三分钟内不能重复发送邮件。';
 $lang->mail->captcha     = '验证码';
 $lang->mail->sendContent = <<<EOT
 %s 您好：
+<br/>
 <br />您在<strong>%s</strong>(%s)上面的验证码为：%s
+<br/>
 <br />如非您本人操作，请忽略。
 <br />
-<br /><strong>%s</strong>由<a href='http://www.chanzhi.org' target='_blank'>蝉知企业门户系统</a>搭建。
-<br /><a href='http://www.cnezsoft.com' target='_blank'>易软天创</a>为天下企业提供专业的管理工具。
+<br /><strong>%s</strong>由<a href='http://www.chanzhi.org' target='_blank'>蝉知建站系统</a>搭建。
 EOT;

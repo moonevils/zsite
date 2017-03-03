@@ -36,6 +36,27 @@ $lang->file->selectImage   = '选择素材';
 $lang->file->fileList      = '文件列表';
 $lang->file->invalidFile   = '无效文件';
 
+$lang->file->setWatermark      = '设置图片水印';
+$lang->file->watermark         = '图片水印';
+$lang->file->watermarkContent  = '水印内容';
+$lang->file->watermarkSize     = '水印大小';
+$lang->file->watermarkColor    = '水印颜色';
+$lang->file->watermarkOpacity  = '水印透明度';
+$lang->file->watermarkPosition = '水印位置';
+$lang->file->rebuildWatermark  = '重新生成图片水印';
+$lang->file->rebuildWatermarks  = "已完成 %s";
+
+$lang->file->watermarkPositionList = array();
+$lang->file->watermarkPositionList['topLeft']      = '左上';
+$lang->file->watermarkPositionList['topMiddle']    = '中上';
+$lang->file->watermarkPositionList['topRight']     = '右上';
+$lang->file->watermarkPositionList['middleLeft']   = '中左';
+$lang->file->watermarkPositionList['middleMiddle'] = '正中';
+$lang->file->watermarkPositionList['middleRight']  = '中右';
+$lang->file->watermarkPositionList['bottomLeft']   = '左下';
+$lang->file->watermarkPositionList['bottomMiddle'] = '中下';
+$lang->file->watermarkPositionList['bottomRight']  = '右下';
+
 $lang->file->id        = '编号';
 $lang->file->title     = '名称';
 $lang->file->pathname  = '存储路径';
@@ -84,3 +105,11 @@ $lang->file->beginUpload   = '开始上传';
 $lang->file->deletingTip   = '删除中';
 $lang->file->deletedTip    = '已删除';
 $lang->file->failDeleteTip = '删除失败';
+
+$lang->file->watermarkList = array();
+$lang->file->watermarkList['open']  = '开启';
+$lang->file->watermarkList['close'] = '关闭';
+
+$lang->file->image = array();
+$lang->file->image['width']  = '宽度';
+$lang->file->image['height'] = '高度';

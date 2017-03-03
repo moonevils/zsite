@@ -20,7 +20,13 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
   <?php endif;?>
     <div class='list list-condensed'>
     <div class='row blocks' data-region='article_browse-top'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
-      <header><h2><?php echo $category->name;?></h2></header>
+      <header id='articleHeader'>
+        <h2><?php echo $category->name;?></h2>
+        <?php 
+          echo "<div class='header'>" . html::a('javascript:;', $lang->article->common . $lang->article->id, "id='id' class='id setOrder'") . "</div>";
+          echo "<div class='header'>" . html::a('javascript:;', $lang->article->viewsCount, "id='views' class='views setOrder'") . "</div>";
+        ?>
+      </header>
       <section class='items items-hover' id='articles'>
         <?php foreach($articles as $article):?>
         <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
@@ -32,7 +38,9 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
               <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>
             </div>
             <h4>
-              <?php echo html::a($url, $article->title);?>
+              <?php 
+                echo empty($article->titleColor) ? html::a($url, $article->title) : html::a($url, $article->title, "style='color:$article->titleColor;'");
+              ?>
               <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
             </h4>
           </div>

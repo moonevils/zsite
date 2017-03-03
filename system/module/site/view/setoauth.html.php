@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The setbasic view file of site module of chanzhiEPS.
@@ -25,7 +26,7 @@
       <div class='panel-body'>
         <form method='post' id='<?php echo $providerCode;?>AjaxForm' class='form-horizontal'>
           <table class="table table-form">
-            <?php if($providerCode != 'qq'):?>
+            <?php if($providerCode == 'sina'):?>
             <tr>
               <th class='w-100px'><?php echo $lang->user->oauth->verification;?></th>
               <td class='w-p75'>
@@ -61,6 +62,15 @@
                 <?php else:?>
                 <?php echo commonModel::getSysURL() . $this->config->webRoot. 'index.php/user-oauthCallback-qq.html';?>
                 <?php endif;?>
+              </td>
+            </tr>
+            <?php endif;?>
+            <?php if(in_array($providerCode, ['github', 'twitter', 'facebook', 'google'])):?>
+            <tr>
+              <th><?php echo $lang->user->oauth->callbackURL;?></th>
+              <td>
+                <?php $callbackURL = $this->loadModel('user')->createOAuthCallbackURL($providerCode);?>
+                <?php echo $callbackURL;?>
               </td>
             </tr>
             <?php endif;?>

@@ -14,6 +14,13 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php js::set('key', count($product->attributes));?>
+<?php
+$colorPlates = '';
+foreach (explode('|', $lang->colorPlates) as $value)
+{
+    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+}
+?>
 <div class='panel'>
   <div class='panel-heading'><?php echo $lang->product->edit;?></div>
   <div class='panel-body'>
@@ -31,9 +38,21 @@
           <th><?php echo $lang->product->name;?></th>
           <td colspan='2'>
             <div class='row order'>
-              <div class='col-sm-9'><?php echo html::input('name', $product->name, "class='form-control'");?></div>
-              <div class='col-sm-3'>
+              <div class='col-sm-6'><?php echo html::input('name', $product->name, "class='form-control'");?></div>
+              <div class='col-sm-6 color-line'>
                 <div class="input-group">
+                  <div class='input-group-addon colorplate clearfix'>
+                    <div class='input-group color active' data="<?php echo $product->titleColor?>">
+                      <label class='input-group-addon'><?php echo $lang->color;?></label>
+                      <?php echo html::input('titleColor', $product->titleColor, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+                      <span class='input-group-btn'>
+                        <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                        <div class='dropdown-menu colors'>
+                          <?php echo $colorPlates; ?>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
                   <span class="input-group-addon"><?php echo $lang->product->order;?></span>
                   <?php echo html::input('order', $product->order, "class='form-control'");?>
                   <span class="input-group-addon">

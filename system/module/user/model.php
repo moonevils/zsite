@@ -41,7 +41,6 @@ class userModel extends model
             $user->realname  = $this->computeRealname($user);
             $user->realnames = json_decode($user->realnames);
         }
-
         return $users;
     }
 
@@ -266,7 +265,7 @@ class userModel extends model
         $user->nickname = $fan->nickname;
         $user->realname = $fan->nickname;
         $user->address  = $fan->country . ' ' . $fan->province . ' ' . $fan->city;
-        $user->join     = date('Y-m-d H:i:s', $fan->subscribe_time);
+        $user->join     = date('Y-m-d H:i:s', zget($fan, 'subscribe_time', time()));
 
         if($fan->sex == 0) $user->gender = 'u';
         if($fan->sex == 1) $user->gender = 'm';

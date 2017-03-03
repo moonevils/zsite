@@ -16,7 +16,13 @@
 <?php js::set('categoryID', $currentCategory);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-
+<?php
+$colorPlates = '';
+foreach (explode('|', $lang->colorPlates) as $value)
+{
+    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+}
+?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-plus'></i>&nbsp;
     <?php if($type == 'blog'):?>
@@ -63,6 +69,20 @@
                 <div class='input-group'>
                   <span class="input-group-addon fix-border"><?php echo $lang->article->order;?></span>
                   <?php echo html::input('order', $order, "class='form-control'");?>
+                </div>
+              </div>
+              <?php endif;?>
+              <?php if($type != 'page'):?>
+              <div class='input-group-addon colorplate clearfix'>
+                <div class='input-group color active' data="<?php echo $article->titleColor?>">
+                  <label class='input-group-addon'><?php echo $lang->color;?></label>
+                  <?php echo html::input('titleColor', '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+                  <span class='input-group-btn'>
+                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                    <div class='dropdown-menu colors'>
+                      <?php echo $colorPlates; ?>
+                    </div>
+                  </span>
                 </div>
               </div>
               <?php endif;?>

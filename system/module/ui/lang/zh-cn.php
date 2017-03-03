@@ -51,6 +51,7 @@ $lang->ui->score           = "积分";
 $lang->ui->reset           = "重置为默认";
 $lang->ui->themePackage    = "主题包";
 $lang->ui->refreshPage     = "刷新页面";
+$lang->ui->mobileBottomNav = '移动版底部导航';
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
@@ -136,12 +137,12 @@ $lang->ui->blocks2Merge  = "可合并区块";
 $lang->ui->blocks2Create = "新创建区块";
 
 $lang->ui->theme = new stdclass();
-$lang->ui->theme->reset                                = '重置为默认';
+$lang->ui->theme->reset                                = '全部外观重置为默认';
 $lang->ui->theme->online                               = '在线主题';
 $lang->ui->theme->default                              = '默认';
 $lang->ui->theme->all                                  = '全部';
 $lang->ui->theme->noTheme                              = '此分类下没有主题';
-$lang->ui->theme->resetTip                             = '参数已重置，保存后生效';
+$lang->ui->theme->resetTip                             = '全部外观参数已重置，保存后生效';
 $lang->ui->theme->sizeTip                              = '默认单位为像素，如1px';
 $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
 $lang->ui->theme->positionTip                          = '如: 100px, 50%, left, top, center';

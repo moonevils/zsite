@@ -34,7 +34,6 @@ class seo
 
         $params = array();
 
-        if(strpos($uri, '_') !== false) $uri = substr($uri, 0, strpos($uri, '_'));
         /* Is there a pageID variable in the url?  */
         $pageID = 0;
         if(preg_match('/\/p\d+$/', $uri, $matches))
@@ -441,7 +440,7 @@ class uri
     public static function createProductBrowse($params, $alias, $viewType = '')
     {
         global $config;
-
+        
         $link = 'product/c' . array_shift($params);
         if(!empty($alias['category'])) $link = $alias['category'];
 
