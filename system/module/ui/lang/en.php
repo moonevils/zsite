@@ -130,7 +130,7 @@ $lang->ui->themeSaved      = 'Theme saved!';
 $lang->ui->unWritable      = "File cannot be created. Please check the privilege of %s.";
 $lang->ui->codeHolder      = "Theme ID, a combination of numbers and letter.";
 $lang->ui->unWritableFile  = "Fail to generate the css file, please check the privilege of %s";
-$lang->ui->openMobileTemplate = "Open mobile template？";
+$lang->ui->openMobileTemplate = "Do you want to switch on mobile template？";
 
 $lang->ui->blocks2Merge  = "Widgets can be merged";
 $lang->ui->blocks2Create = "New";
