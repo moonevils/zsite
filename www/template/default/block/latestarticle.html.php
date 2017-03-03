@@ -52,7 +52,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
       <div class='item-content'>
         
         <div class='text small text-muted'>
-          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px';?>">
+          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '100px';?>">
           <?php 
           if(!empty($article->image))
           {
