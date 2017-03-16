@@ -325,7 +325,7 @@ $lang->security->menu->filter      = 'Filter|site|setfilter|';
 $lang->security->menu->blacklist   = 'Blacklist|guarder|setblacklist|';
 $lang->security->menu->whitelist   = 'Whitelist|guarder|setwhitelist|';
 $lang->security->menu->sensitive   = 'Sensitive Words|site|setsensitive|';
-$lang->security->menu->userSetting = '会员设置|user|setting|';
+$lang->security->menu->userSetting = 'Users|user|setting|';
 $lang->security->menu->captcha     = 'Security Questions|guarder|setcaptcha|';
 $lang->security->menu->upload      = 'File Upload|site|setupload|';
 $lang->security->menu->admin       = 'Administrators|user|admin|admin=1';
