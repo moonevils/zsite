@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The user module zh-cn file of chanzhiEPS.
@@ -205,13 +206,31 @@ $lang->user->oauth->github = new stdclass();
 $lang->user->oauth->github->clientID     = 'Client ID';
 $lang->user->oauth->github->clientSecret = 'Client Secret';
 
+$lang->user->oauth->twitter= new stdclass();
+$lang->user->oauth->twitter->clientID     = 'API ID';
+$lang->user->oauth->twitter->clientSecret = 'API Secret';
+
+$lang->user->oauth->facebook= new stdclass();
+$lang->user->oauth->facebook->clientID     = 'API ID';
+$lang->user->oauth->facebook->clientSecret = 'API Secret';
+
+$lang->user->oauth->google= new stdclass();
+$lang->user->oauth->google->clientID     = 'API ID';
+$lang->user->oauth->google->clientSecret = 'API Secret';
+
 $lang->user->oauth->providers['sina']   = '新浪微博';
 $lang->user->oauth->providers['qq']     = 'QQ';
 $lang->user->oauth->providers['github'] = 'Github';
+$lang->user->oauth->providers['twitter'] = 'Twitter';
+$lang->user->oauth->providers['facebook'] = 'Facebook';
+$lang->user->oauth->providers['google'] = 'Google';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博会员';
 $lang->user->oauth->typeList['qq']     = 'QQ会员';
 $lang->user->oauth->typeList['wechat'] = '微信会员';
+$lang->user->oauth->typeList['github'] = 'Github';
+$lang->user->oauth->typeList['facebook'] = 'Facebook';
+$lang->user->oauth->typeList['google'] = 'Google';
 
 $lang->user->oauth->lblWelcome       = '开放登录，快捷方便';
 $lang->user->oauth->lblOtherLogin    = '其他方式 : ';
@@ -276,16 +295,6 @@ $lang->user->filterUsernameSensitiveList = array();
 $lang->user->filterUsernameSensitiveList['open']  = '开启';
 $lang->user->filterUsernameSensitiveList['close'] = '关闭';
 
-$lang->user->registerAgreement = '用户注册协议';
-
-$lang->user->registerAgreementList = array();
-$lang->user->registerAgreementList['open']  = '开启';
-$lang->user->registerAgreementList['close'] = '关闭';
-
-$lang->user->registerAgreementContent = '注册协议内容';
-$lang->user->registerAgreementTitle   = '注册协议标题';
-    
-$lang->user->usernameSensitive      = '用户名敏感词';
-$lang->user->usernameIsSensitive    = '用户名或者真实姓名不能含有敏感词，请修改后再提交';
-$lang->user->usernameSensitiveTip   = '多个敏感词之间请用英文逗号分隔';
-$lang->user->agreeRegisterAgreement = '我已阅读并同意';
+$lang->user->usernameSensitive    = '用户名敏感词';
+$lang->user->usernameIsSensitive  = '用户名或者真实姓名不能含有敏感词，请修改后再提交';
+$lang->user->usernameSensitiveTip = '多个敏感词之间请用英文逗号分隔';

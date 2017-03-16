@@ -447,7 +447,7 @@ class user extends control
                 if(!trim($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->user->verifyFail));
             }
 
-            $this->user->updateEmail($account);
+            $this->user->checkEmail($account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $locate = inlink('control');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));

@@ -146,6 +146,10 @@ class file extends control
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
             {
                 $this->file->compressImage($this->file->savePath . $file['pathname']);
+                if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+                {
+                    $this->file->setWatermark($this->file->savePath . $file['pathname']);
+                }
                 $imageSize = $this->file->getImageSize($this->file->savePath . $file['pathname']);
                 $file['width']  = $imageSize['width'];
                 $file['height'] = $imageSize['height'];
