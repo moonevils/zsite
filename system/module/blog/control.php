@@ -49,7 +49,7 @@ class blog extends control
         $this->view->articleList = $articleList;
 
         $articleCategoryList = array_unique($articleCategoryList);
-        if($this->config->blog->categoryLevel == 'first') 
+        if(isset($this->config->blog->categoryLevel) and $this->config->blog->categoryLevel == 'first') 
         {
             $topCategoryList = $this->loadModel('tree')->getTopCategroyList($articleCategoryList, 'blog');
             $this->view->topCategoryList = $topCategoryList;
