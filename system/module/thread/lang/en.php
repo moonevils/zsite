@@ -65,6 +65,9 @@ $lang->thread->successShow     = 'Done!';
 $lang->thread->readonlyMessage = 'This post is <strong>Read Only</strong>. You cannot reply to it.';
 $lang->thread->successTransfer = 'Done!';
 $lang->thread->thanks          = 'It will be posted once approved.';
+$lang->thread->replySuccess    = 'Replies successful.';
+$lang->thread->toLastPage      = 'Go to the latest replies page.';
+$lang->thread->goback          = 'Go back';
 
 $lang->thread->score    = 'Points';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";

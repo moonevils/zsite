@@ -65,6 +65,9 @@ $lang->thread->successShow     = '显示成功';
 $lang->thread->readonlyMessage = '该帖已被设置为 <strong>只读</strong>，您暂时无法发表新的回复。';
 $lang->thread->successTransfer = '转移成功';
 $lang->thread->thanks          = '帖子将在审核通过后显示';
+$lang->thread->replySuccess    = '回帖成功。';
+$lang->thread->toLastPage      = '去最新回帖页面';
+$lang->thread->goback          = '返回';
 
 $lang->thread->score    = '奖励积分';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";

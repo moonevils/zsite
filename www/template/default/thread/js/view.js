@@ -4,7 +4,25 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            setTimeout(function(){ location.href = response.locate;}, 1200);
+            bootbox.dialog(
+            {  
+                message: response.replySuccess,  
+                buttons:
+                {  
+                    lastPage:
+                    {  
+                        label:     v.toLastPage,
+                        className: 'btn-primary',  
+                        callback:  function(){location.href = response.locate;}  
+                    },
+                    back:
+                    {  
+                        label:     v.goback,  
+                        className: 'btn-primary',  
+                        callback:  function(){location.href = removeAnchor(location.href) + '#' + response.replyID;}  
+                    }  
+                }  
+            });
         }
         else
         {
@@ -23,4 +41,9 @@ $(document).ready(function()
 
     /* remove empty element */
     $('.speaker > ul > li > span:empty').closest('li').remove();
+
+    $('.thread-reply-btn').click(function()
+    {
+        $('#replyID').val($(this).data('reply'));
+    })
 });
