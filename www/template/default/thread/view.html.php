@@ -12,6 +12,9 @@
 include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/kindeditor.html.php';
 
+js::set('toLastPage', $lang->thread->toLastPage);
+js::set('goback', $lang->thread->goback);
+
 echo "<div class='row blocks' data-grid='4' data-region='thread_view-top'>";
 $this->block->printRegion($layouts, 'thread_view', 'top', true);
 echo "</div>";
