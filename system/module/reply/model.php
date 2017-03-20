@@ -53,7 +53,7 @@ class replyModel extends model
             return array('pageID' => $pageID + 1, 'anchorID' => $replies + 2);
         }
 
-        $position   = $pageID ? "pageID=" . ($pageID + 1) . "&replyID=$replyID": "replyID=$replyID";
+        $position = $pageID ? "pageID=" . ($pageID + 1) . "&replyID=$replyID" : "replyID=$replyID";
 
         return $position;
     }
@@ -159,7 +159,7 @@ class replyModel extends model
             ->setForce('editedDate', helper::now())
             ->setForce('thread', $threadID)
             ->stripTags('content', $allowedTags)
-            ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
+            ->remove('recTotal, recPerPage, pageID, replyID, files, labels, hidden')
             ->get();
 
         if(strlen($reply->content) > 40)
@@ -207,9 +207,9 @@ class replyModel extends model
             $urlInfo = $this->getPosition($replyID, 'anchor');
             
             if($this->config->requestType == 'GET') $locate = helper::createLink('thread', 'view', "threadID=$threadID&pageID=" . $urlInfo['pageID'] . "&noice=" . rand(1, 100) . "#" . $urlInfo['anchorID']);
-            if($this->config->requestType != 'GET') $locate = helper::createLink('thread', 'view', "threadID=$threadID&pageID=" . $urlInfo['pageID']) . "?rand=" . rand(1, 100) . "#" . $urlInfo['anchorID'];
+            if($this->config->requestType != 'GET') $locate = helper::createLink('thread', 'view', "threadID=$threadID", "pageID=" . $urlInfo['pageID']) . "?rand=" . rand(1, 100) . "#" . $urlInfo['anchorID'];
 
-            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate);
+            return array('result' => 'success', 'replySuccess' => $this->lang->thread->replySuccess, 'replyID' => $this->post->replyID, 'locate' => $locate);
         }
         return array('result' => 'fail', 'message' => dao::getError());
     }

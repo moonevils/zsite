@@ -11,7 +11,7 @@
 */
 ?>
 <?php $publicList = $this->loadModel('wechat')->getList();?>
-<?php if(!empty($publicList)):?>
+<?php if(empty($publicList)):?>
 <tr>
   <th><?php echo $lang->block->image;?></th>
   <td>
@@ -20,16 +20,38 @@
     </div>
   </td>
 </tr>
-<tr class=''>
+<?php if(!empty($block->content->customImage)):?>
+<tr class='custom-image hidden'>
   <th><?php echo $lang->block->uploadImage;?></th>
-  <td>
-    <input type='file' name='params[customImage]' id='file' class='form-control'>
-  </td>
+  <td><?php echo html::image($block->content->customImage);?></td>
+</tr>
+<tr class='custom-image hidden'>
+  <th></th>
+  <td><input type='file' name='params[customImage]' class='form-control'></td>
+</tr>
+<?php else:?>
+<tr class='custom-image hidden'>
+  <th><?php echo $lang->block->uploadImage;?></th>
+  <td><input type='file' name='params[customImage]' class='form-control'></td>
+</tr>
+<?php endif;?>
+<?php else:?>
+<?php if(!empty($block->content->customImage)):?>
+<tr>
+  <th><?php echo $lang->block->image;?></th>
+  <td><?php echo html::image($block->content->customImage);?></td>
+</tr>
+<tr>
+  <th></th>
+  <td><input type='file' name='params[customImage]' class='form-control'></td>
 </tr>
 <?php else:?>
 <tr>
-  <th><?php echo $lang->block->image;?></th>
+  <th><?php echo $lang->block->uploadImage;?></th>
   <td>
+    <?php echo html::hidden('params[imageType]', 'custom')?>
+    <input type='file' name='params[customImage]' class='form-control'>
   </td>
 </tr>
+<?php endif;?>
 <?php endif;?>

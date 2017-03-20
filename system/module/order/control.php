@@ -113,7 +113,7 @@ class order extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'shop', $mode = 'all', $param = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
+    public function admin($type = 'shop', $mode = 'all', $param = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 15,  $pageID = 1)
     {
         if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
@@ -260,7 +260,7 @@ class order extends control
      * @access public
      * @return void
      */
-    public function browse($recTotal = 0, $recPerPage = 0, $pageID = 1)
+    public function browse($recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);

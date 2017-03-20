@@ -20,8 +20,9 @@ $publicList = $this->loadModel('wechat')->getList();
     <?php endif;?>
   </div>
   <?php if(isset($block->content->imageType) and $block->content->imageType == 'custom'):?>
-    <table class='w-p100'>
-    </table>
+  <div class='panel-body text-center' style='max-width: 100%'>
+    <?php echo html::image($block->content->customImage);?>
+  </div>
   <?php else:?>
     <?php if(!empty($publicList)):?>
     <table class='w-p100'>

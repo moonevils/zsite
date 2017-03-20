@@ -357,7 +357,7 @@ class user extends control
      * @access public
      * @return void
      */
-    public function message($recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function message($recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
@@ -1047,7 +1047,7 @@ class user extends control
      * @access public
      * @return void
      */
-    public function score($recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function score($recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         if(!commonModel::isAvailable('score')) die();
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));

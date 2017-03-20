@@ -143,7 +143,7 @@ class seo
                 else
                 {
                     $params = array('articleID' => $items[2]);
-                    return seo::convertURI('book', 'read', $params);
+                    return seo::convertURI('book', 'browse', $params);
                 }
             }
             if(count($items) == 2 )

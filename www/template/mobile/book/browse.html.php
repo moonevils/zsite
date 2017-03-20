@@ -32,7 +32,7 @@
         <?php $orginsTree = $bookModel->getOriginsTree($node); ?>
         <?php if(!empty($orginsTree)): ?>
         <?php foreach ($orginsTree as $originTree):?>
-        <div class='dropdown selector sub'>
+        <div class='dropdown selector'>
           <a href='###' data-toggle='dropdown' class='btn strong block default text-left'><i class='icon icon-list-ul'></i> <?php echo $serials[$originTree->current->id] . " {$originTree->current->title}" ?><div class='pull-right'><i class='icon-caret-down pull-right'></i></div></a>
           <ul class='dropdown-menu responsive'>
             <?php foreach ($originTree->nodes as $nodeChild)
@@ -96,7 +96,7 @@
     <?php $orginsTree = $bookModel->getOriginsTree($node); ?>
     <?php if(!empty($orginsTree)): ?>
     <?php foreach ($orginsTree as $originTree):?>
-    <div class='dropdown selector sub'>
+    <div class='dropdown selector'>
       <a href='###' data-toggle='dropdown' class='btn strong block default text-left'><i class='icon icon-list-ul'></i> <?php echo $serials[$originTree->current->id] . " {$originTree->current->title}" ?><div class='pull-right'><i class='icon-caret-down pull-right'></i></div></a>
       <ul class='dropdown-menu responsive'>
         <?php foreach ($originTree->nodes as $nodeChild)

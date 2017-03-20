@@ -18,7 +18,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'valid', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10,  $pageID = 1)
+    public function admin($type = 'valid', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 6,  $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
