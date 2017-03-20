@@ -41,7 +41,7 @@ class github extends OAuth
      * @var string
      * @access public
      */
-    public $openIdAPI = 'https://graph.qq.com/oauth2.0/me?';
+    public $openIdAPI = 'https://api.github.com/user?';
 
     /**
      * The user info api.
@@ -49,7 +49,7 @@ class github extends OAuth
      * @var string
      * @access public
      */
-    public $userInfoAPI = 'https://graph.qq.com/user/get_user_info?';
+    public $userInfoAPI = 'https://api.github.com/user?';
 
     /**
      * Create the api of authorize.
@@ -77,27 +77,13 @@ class github extends OAuth
      */
     public function getToken($code)
     {
-        $data = $this->get($this->createTokenAPI($code));
-        parse_str($data, $tokens);
-        return $tokens['access_token'];
-    }
-
-    /**
-     * Create the api of token.
-     * 
-     * @param  string   $code 
-     * @access public
-     * @return string
-     */
-    public function createTokenAPI($code)
-    {
-        $params['grant_type']    = 'authorization_code';
         $params['client_id']     = $this->clientID;
         $params['client_secret'] = $this->clientSecret;
-        $params['redirect_uri']  = $this->redirectURI;
         $params['code']          = $code;
-
-        return $this->tokenAPI . http_build_query($params);
+        
+        $data = $this->post($this->tokenAPI, $params);
+        parse_str($data, $tokens);
+        return $tokens['access_token'];
     }
 
     /**
@@ -110,16 +96,8 @@ class github extends OAuth
     public function getOpenID($token)
     {
         $data = $this->get($this->createOpenIDAPI($token));
-
-        if(strpos($data, 'callback') !== false)
-        {
-            $left  = strpos($data, '(');
-            $right = strrpos($data, ')');
-            $data = substr($data, $left + 1, $right - $left -1);
-        }
-
         $data = json_decode($data);
-        return $data->openid;
+        return $data->id;
     }
 
     /**
@@ -158,11 +136,6 @@ class github extends OAuth
      */
     public function createUserInfoAPI($token, $openID)
     {
-        $params['oauth_consumer_key'] = $this->clientID;
-        $params['access_token']       = $token;
-        $params['openid']             = $openID;
-        $params['format']             = 'json';
-
-        return $this->userInfoAPI . http_build_query($params);
+        return $this->userInfoAPI . "access_token=$token";
     }
 }

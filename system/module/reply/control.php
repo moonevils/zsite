@@ -48,7 +48,7 @@ class reply extends control
      * @access public
      * @return void
      */
-    public function admin($orderBy = 'addedDate_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($orderBy = 'addedDate_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager($recTotal, $recPerPage, $pageID);
@@ -97,7 +97,12 @@ class reply extends control
             $return = $this->reply->update($replyID);
             if(is_array($return)) $this->send($return);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'view', "threaID=$thread->id")));
+
+            $urlInfo = $this->reply->getPosition($replyID);
+            if($this->config->requestType == 'GET') $locate = helper::createLink('thread', 'view', "threadID=$thread->id&" . $urlInfo);
+            if($this->config->requestType != 'GET') $locate = helper::createLink('thread', 'view', "threadID=$thread->id", $urlInfo);
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 
         $this->view->title      = $this->lang->reply->edit . $this->lang->colon . $thread->title;

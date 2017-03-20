@@ -431,6 +431,7 @@ class blockModel extends model
     public function create($template, $theme)
     {
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
+
         $block->content = helper::decodeXSS($block->content);
         $block->css     = helper::decodeXSS($block->css);
         $block->js      = helper::decodeXSS($block->js);
@@ -471,6 +472,18 @@ class blockModel extends model
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
 
+        if($block->type == 'followUs' and $block->params['imageType'] == 'custom' and !empty($_FILES['params']))
+        {
+            $fileTitles = $this->loadModel('file')->saveUpload('followUs', $blockID, '', 'params');
+            if(!empty($fileTitles))
+            {
+                $file = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('followUs')->andWhere('objectID')->eq($blockID)->fetch();
+                $block->params['customImage'] = $this->app->getWebRoot() . 'data/upload/' . $file->pathname;
+
+                $this->dao->update(TABLE_BLOCK)->set('content')->eq(helper::jsonEncode($block->params))->where('id')->eq($blockID)->exec();
+            }
+        }
+
         return $blockID;
     }
 
@@ -486,6 +499,21 @@ class blockModel extends model
         $block = $this->getByID($this->post->blockID);
 
         $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
+        $data->params['customImage'] = $block->content->customImage;
+
+        if($data->type == 'followUs' && $data->params['imageType'] == 'custom' && !empty($_FILES))
+        {
+            $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq('followUs')->andWhere('objectID')->eq($block->id)->fetchAll('id');
+            foreach($oldFiles as $file) $this->loadModel('file')->delete($file->id);
+
+            $fileTitles = $this->loadModel('file')->saveUpload('followUs', $block->id, '', 'params');
+            if(!empty($fileTitles))
+            {
+                $file = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('followUs')->andWhere('objectID')->eq($block->id)->fetch();
+                $data->params['customImage'] = $this->app->getWebRoot() . 'data/upload/' . $file->pathname;
+            }
+        }
+
         $data->content = helper::decodeXSS($data->content);
         $data->css     = helper::decodeXSS($data->css);
         $data->js      = helper::decodeXSS($data->js);

@@ -493,7 +493,7 @@ class control extends baseControl
                 {
                     if(!empty($data['message']))
                     {
-                        $message = json_decode(json_encode((array)$data['message']));
+                        $message = json_decode(json_encode((array)$data['message']), true);
                         $result  = array(); 
                         foreach((array)$message as $item => $errors)
                         {

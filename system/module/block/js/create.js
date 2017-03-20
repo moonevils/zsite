@@ -22,4 +22,18 @@ $(document).ready(function()
        $('#title').val($(this).find("option:selected").text()); 
     });
     $('[name*=group]').change();
+
+    $(document).on('change', '[name*=imageType]', function()
+    {
+        if($(this).find('option:selected').val() == 'custom')
+        {
+            $('tr.custom-image').removeClass('hidden');
+        }
+        else
+        {
+            $('tr.custom-image').addClass('hidden');
+        }
+    });
+
+    $('[name*=imageType]').change();
 })

@@ -62,7 +62,7 @@ class package extends control
      * @access public
      * @return void
      */
-    public function obtain($type = 'byUpdatedTime', $param = '', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function obtain($type = 'byUpdatedTime', $param = '', $recTotal = 0, $recPerPage = 5, $pageID = 1)
     {
         /* Init vars. */
         $type     = strtolower($type);
