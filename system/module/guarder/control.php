@@ -24,7 +24,7 @@ class guarder extends control
 
         /* Load the pager. */
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal=0, $recPerPage=30, $pageID);
+        $pager = new pager($recTotal=0, $recPerPage=15, $pageID);
 
         $blacklist = $this->dao->select('*')->from(TABLE_BLACKLIST)
             ->beginIf($mode != 'all')->where('type')->eq($mode)->fi()
