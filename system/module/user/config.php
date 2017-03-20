@@ -19,7 +19,7 @@ $config->user->default->method = RUN_MODE == 'front' ? 'control' : 'index';
 
 $config->user->recPerPage = new stdclass();
 $config->user->recPerPage->thread = 10;
-$config->user->recPerPage->reply  = 20;
+$config->user->recPerPage->reply  = 10;
 
 $config->user->level[1] = 0;
 $config->user->level[2] = 500;

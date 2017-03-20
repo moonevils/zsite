@@ -104,7 +104,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
     {   
         if($this->get->tab == 'user') 
         {
@@ -514,7 +514,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function submission($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function submission($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         if(!commonModel::isAvailable('submission')) die();
         $this->app->loadLang('user');

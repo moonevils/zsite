@@ -46,7 +46,7 @@
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='4'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
