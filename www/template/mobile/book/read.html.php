@@ -75,15 +75,11 @@
       </div>
 
       <?php if(commonModel::isAvailable('message')):?>
-      <div id='commentBox'></div>
+      <div id='commentBox'>
+        <?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?>
+      </div>
       <?php endif;?>
       <div class='block-region region-bottom blocks' data-region='book_read-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'bottom');?></div>
-      <script>
-      $(function()
-      {
-          $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=book&objectID=$article->id", 'mhtml');?>');
-      });
-      </script>
     </div>
   </div>
 </div>
@@ -155,15 +151,11 @@ js::set('fullScreen', 0);
   </div>
 
   <?php if(commonModel::isAvailable('message')):?>
-  <div id='commentBox'></div>
+  <div id='commentBox'>
+    <?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?>
+  </div>
   <?php endif;?>
   <div class='block-region region-bottom blocks' data-region='book_read-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'bottom');?></div>
-  <script>
-  $(function()
-  {
-      $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=book&objectID=$article->id", 'mhtml');?>');
-  });
-  </script>
 </div>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
 <?php endif;?>

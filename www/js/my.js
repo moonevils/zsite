@@ -89,8 +89,6 @@ $(document).ready(function()
         }
     };
 
-    $('#commentBox').load( createLink('message', 'comment', 'objectType=' + v.objectType + '&objectID=' + v.objectID) );
-
     // init tree
     $('.tree').not('[data-ride="tree"]').each(function()
     {

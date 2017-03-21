@@ -85,7 +85,9 @@ js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id)
     </div>
     <div class='row blocks' data-region='article_view-bottom'><?php $this->block->printRegion($layouts, 'article_view', 'bottom', true);?></div>
     <?php if(commonModel::isAvailable('message')):?>
-    <div id='commentBox'></div>
+    <div id='commentBox'>
+      <?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?>
+    </div>
     <?php endif;?>
   </div>
   <?php if(!empty($layouts['article_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
