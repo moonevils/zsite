@@ -139,7 +139,7 @@ class bookModel extends model
         if(!$node) return '';
 
         $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title')->from(TABLE_BOOK)->where('path')->like("{$node->path}%")->orderBy('grade_desc,`order`')->fetchGroup('parent');
-        $book = zget(end($nodeList), '0', '');
+        $book = $node->type == 'book' ? zget(end($nodeList), '0', '') : $this->getBookByNode($node);
         foreach($nodeList as $parent => $nodes)
         {
             if($parent === 'catalog') continue;
