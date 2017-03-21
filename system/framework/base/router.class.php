@@ -1070,6 +1070,8 @@ class baseRouter
             if(empty($value)) $value = @getenv('ORIG_PATH_INFO');
         }
 
+        $subpath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $_SERVER['SCRIPT_FILENAME']);
+        if($subpath != '/') $value = substr($value, strlen($subpath));
         if(RUN_MODE == 'front' and strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
 
         if(strpos($value, '?') === false) return trim($value, '/');
