@@ -21,7 +21,6 @@ if(isset($pageCSS)) css::internal($pageCSS);
         <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), "<i class='icon icon-reply text-info'> </i>", "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?>
       </div>
       <div class='panel-body'><?php echo nl2br($comment->content);?></div>
-      <div>
       <?php $this->message->getFrontReplies($comment);?>
     </div>
     <?php endforeach;?>
