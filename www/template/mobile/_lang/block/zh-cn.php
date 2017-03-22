@@ -35,6 +35,7 @@ $lang->block->mobile->typeList['followUs']        = '关注我们';
 $lang->block->mobile->typeList['about']           = '公司简介';
 $lang->block->mobile->typeList['links']           = '友情链接';
 $lang->block->mobile->typeList['slide']           = '幻灯片';
+$lang->block->mobile->typeList['header']          = '网站头部';
 
 $lang->block->mobile->typeGroups = array();
 $lang->block->mobile->typeGroups['html']     = 'input';
@@ -62,6 +63,7 @@ $lang->block->mobile->typeGroups['followUs'] = 'system';
 $lang->block->mobile->typeGroups['about']    = 'system';
 $lang->block->mobile->typeGroups['links']    = 'system';
 $lang->block->mobile->typeGroups['slide']    = 'system';
+$lang->block->mobile->typeGroups['header']   = 'system';
 
 $lang->block->mobile->pages['all']            = '全部页面';
 $lang->block->mobile->pages['index_index']    = '首页';
@@ -141,6 +143,5 @@ $lang->block->mobile->regions->message_index['bottom']       = '底部';
 
 $lang->block->mobile->regions->page_view['top']          = '上部';
 $lang->block->mobile->regions->page_view['bottom']       = '底部';
-$lang->block->mobile->regions->page_index['top']          = '上部';
-$lang->block->mobile->regions->page_index['bottom']       = '底部';
-
+$lang->block->mobile->regions->page_index['top']         = '上部';
+$lang->block->mobile->regions->page_index['bottom']      = '底部';
