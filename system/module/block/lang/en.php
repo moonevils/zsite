@@ -212,6 +212,16 @@ $lang->block->alignList = array();
 $lang->block->alignList['left']   = 'Left';
 $lang->block->alignList['middle'] = 'Middle';
 
+$lang->block->imageTypeList = array();
+$lang->block->imageTypeList['wechat'] = 'Wechat qrcode';
+$lang->block->imageTypeList['custom'] = 'Custom Image';
+
+$lang->block->subscribe = new stdclass();
+$lang->block->subscribe->fixInNav = 'Fix in nav';
+$lang->block->subscribe->fixInNavList = array();
+$lang->block->subscribe->fixInNavList[1] = 'Yes';
+$lang->block->subscribe->fixInNavList[0] = 'No';
+
 $lang->block->sideFloatOptions          = array();
 $lang->block->sideFloatOptions['left']  = 'Left';
 $lang->block->sideFloatOptions['right'] = 'Right';

@@ -14,7 +14,7 @@ $config->block->categoryList = new stdclass();
 $config->block->categoryList->custom  = ',html,htmlcode,phpcode,';
 $config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,';
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
-$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,bottomNav,';
+$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,bottomNav,subscribe,';
 
 $config->block->pageGroupList = new stdclass();
 $config->block->pageGroupList->system   = array('all', 'index_index', 'company_index', 'page_view');
