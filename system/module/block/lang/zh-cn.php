@@ -216,3 +216,9 @@ $lang->block->alignList['middle'] = '居中';
 $lang->block->imageTypeList = array();
 $lang->block->imageTypeList['wechat'] = '微信二维码';
 $lang->block->imageTypeList['custom'] = '自定义图片';
+
+$lang->block->subscribe = new stdclass();
+$lang->block->subscribe->fixInNav = '固定到导航';
+$lang->block->subscribe->fixInNavList = array();
+$lang->block->subscribe->fixInNavList[1] = '是';
+$lang->block->subscribe->fixInNavList[0] = '否';
