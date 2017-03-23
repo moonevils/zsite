@@ -153,3 +153,13 @@ $lang->article->blog->showCategoryList['abbr']   = '简称';
 $lang->article->blog->showCategoryList['name']   = '全称';
 $lang->article->blog->categoryLevelList['first'] = '一级类目';
 $lang->article->blog->categoryLevelList['last']  = '最低一级类目';
+
+$lang->article->browseImage = new stdclass();
+$lang->article->browseImage->common   = '列表图片';
+$lang->article->browseImage->maxWidth = '最大宽度';
+
+$lang->article->browseImage->positionList['left']  = '居左';
+$lang->article->browseImage->positionList['right'] = '居右';
+
+$lang->article->browseImage->sizeList['small']  = '小图';
+$lang->article->browseImage->sizeList['middle'] = '中图';
