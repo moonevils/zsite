@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `score` mediumint(8) unsigned NOT NULL DEFAULT 0,
   `downloads` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `extra` varchar(255) NOT NULL,
-  `primary` enum('1','0') DEFAULT '0',
+  `order` smallint(5) unsigned NOT NULL,
   `editor` enum('1','0') NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
