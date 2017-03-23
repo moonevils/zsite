@@ -128,8 +128,7 @@ class seo
             {
                 if(preg_match('/^c\d+$/', $items[2])) 
                 {
-                    $params = array('articleID' => str_replace('c', '', $items[2]));
-                    
+                    $params = array('nodeID' => str_replace('c', '', $items[2]));
                     return seo::convertURI('book', 'browse', $params);
                 }
 
@@ -140,9 +139,14 @@ class seo
                     
                     return seo::convertURI('book', 'read', $params);
                 }
-                else
+                elseif(is_numeric($items[2]))
                 {
                     $params = array('articleID' => $items[2]);
+                    return seo::convertURI('book', 'read', $params);
+                }
+                else
+                {
+                    $params = array('nodeID' => $items[2]);
                     return seo::convertURI('book', 'browse', $params);
                 }
             }

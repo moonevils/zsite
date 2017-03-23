@@ -34,14 +34,14 @@ $setting->topRightContent = zget($setting, 'topRightContent', '');
 ?>
 
 <div data-ve='block' data-id="<?php echo $block->id;?>">
-<?php
-if($setting->compatible)
-{
-    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default');
-}
-else
-{
-    include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout');
-}
-?>
+  <?php
+  if($setting->compatible)
+  {
+      include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default');
+  }
+  else
+  {
+      include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout');
+  }
+  ?>
 </div>

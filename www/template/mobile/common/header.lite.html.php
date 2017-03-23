@@ -75,4 +75,19 @@ if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js
 $this->block->printRegion($layouts, 'all', 'header');
 ?>
 </head>
+<?php
+$top = false;
+foreach($layouts as $blocks)
+{
+    foreach($blocks['top'] as $block)
+    {
+        if($block->type == 'header') $top = true;
+    }
+}
+?>
+
+<?php if($top):?>
 <body class='with-appbar-top with-appbar-bottom with-appnav'>
+<?php else:?>
+<body class='with-appbar-bottom'>
+<?php endif;?>
