@@ -282,13 +282,14 @@ class basePager
         }
 
         parse_str(strip_tags(urldecode($_SERVER['QUERY_STRING'])), $query);
+        if(!empty($query['m']) && !empty($query['f']) && $query['m'] == $this->moduleName && $query['f'] == $this->methodName)
+        {
+            unset($query['m']);
+            unset($query['f']);
+            unset($query['t']);
 
-        unset($query['m']);
-        unset($query['f']);
-        unset($query['t']);
-
-        $this->params = array_merge($this->params, $query);
-
+            $this->params = array_merge($this->params, $query);
+        }
     }
 
     /**

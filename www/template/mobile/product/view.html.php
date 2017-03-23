@@ -183,7 +183,9 @@ foreach($product->attributes as $attribute)
 </div>
 </div>
 <?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'></div>
+<div id='commentBox'>
+  <?php echo $this->fetch('message', 'comment', "objectType=product&objectID={$product->id}");?>
+</div>
 <?php endif;?>
 
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_view', 'bottom');?></div>
@@ -191,11 +193,4 @@ foreach($product->attributes as $attribute)
   #productSlide{height:320px;text-align:center;}
   #productSlide .carousel-inner{width:320px;height:320px;display:inline-block;}
 </style>
-<script>
-$(function()
-{
-    $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=product&objectID=$product->id", 'mhtml');?>');
-});
-</script>
-
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

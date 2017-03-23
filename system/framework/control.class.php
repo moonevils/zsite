@@ -396,6 +396,161 @@ class control extends baseControl
     }
 
     /**
+     * 获取一个方法的输出内容，这样我们可以在一个方法里获取其他模块方法的内容。
+     * 如果模块名为空，则调用该模块、该方法；如果设置了模块名，调用指定模块指定方法。
+     *
+     * Get the output of one module's one method as a string, thus in one module's method, can fetch other module's content.
+     * If the module name is empty, then use the current module and method. If set, use the user defined module and method.
+     *
+     * @param   string  $moduleName    module name.
+     * @param   string  $methodName    method name.
+     * @param   array   $params        params.
+     * @access  public
+     * @return  string  the parsed html.
+     */
+    public function fetch($moduleName = '', $methodName = '', $params = array(), $appName = '')
+    {
+        if($moduleName == '') $moduleName = $this->moduleName;
+        if($methodName == '') $methodName = $this->methodName;
+        if($appName == '')    $appName    = $this->appName;
+        if($moduleName == $this->moduleName and $methodName == $this->methodName) 
+        {
+            $this->parse($moduleName, $methodName);
+            return $this->output;
+        }
+
+        $currentModuleName = $this->moduleName;
+        $currentMethodName = $this->methodName;
+        $currentAppName    = $this->appName;
+
+        $this->app->setModuleName($moduleName);
+        $this->app->setMethodName($methodName);
+
+        if(!is_array($params)) parse_str($params, $params);
+        if($this->config->requestType != 'GET')
+        {
+            $this->app->setParamsByPathInfo($params, $type = 'fetch');
+        }
+        else
+        {
+            $this->app->setParamsByGET($params, $type = 'fetch');
+        }
+
+        $currentPWD = getcwd();
+
+        /**
+         * 设置引用的文件和路径。
+         * Set the pathes and files to included.
+         **/
+        $modulePath        = $this->app->getModulePath($appName, $moduleName);
+        $moduleControlFile = $modulePath . 'control.php';
+        $actionExtPath     = $this->app->getModuleExtPath($appName, $moduleName, 'control');
+        $file2Included     = $moduleControlFile;
+
+        if(!empty($actionExtPath))
+        {
+            $commonActionExtFile = $actionExtPath['common'] . strtolower($methodName) . '.php';
+            $file2Included       = file_exists($commonActionExtFile) ? $commonActionExtFile : $moduleControlFile;
+
+            if(!empty($actionExtPath['site']))
+            {
+                $siteActionExtFile = $actionExtPath['site'] . strtolower($methodName) . '.php';
+                $file2Included     = file_exists($siteActionExtFile) ? $siteActionExtFile : $file2Included;
+            }
+        }
+
+        /**
+         * 加载控制器文件。
+         * Load the control file. 
+         */
+        if(!is_file($file2Included)) $this->app->triggerError("The control file $file2Included not found", __FILE__, __LINE__, $exit = true);
+        chdir(dirname($file2Included));
+        if($moduleName != $this->moduleName) helper::import($file2Included);
+
+        /**
+         * 设置调用的类名。
+         * Set the name of the class to be called. 
+         */
+        $className = class_exists("my$moduleName") ? "my$moduleName" : $moduleName;
+        if(!class_exists($className)) $this->app->triggerError(" The class $className not found", __FILE__, __LINE__, $exit = true);
+
+        /**
+         * 解析参数，创建模块control对象。
+         * Parse the params, create the $module control object. 
+         */
+        $module = new $className($moduleName, $methodName, $appName);
+
+        /**
+         * 调用对应方法，使用ob方法获取输出内容。
+         * Call the method and use ob function to get the output. 
+         */
+        ob_start();
+        call_user_func_array(array($module, $methodName), $params);
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        /**
+         * 返回内容。
+         * Return the content. 
+         */
+        unset($module);
+
+        $this->app->setModuleName($currentModuleName);
+        $this->app->setMethodName($currentMethodName);
+
+        $currentClassName = class_exists("my$currentModuleName") ? "my$currentModuleName" : $currentModuleName;
+        if(!class_exists($currentClassName)) $this->app->triggerError(" The class $currentClassName not found", __FILE__, __LINE__, $exit = true);
+
+        /* include default value for module*/
+        $defaultValueFiles = glob($this->app->getTmpRoot() . "defaultvalue/*.php");
+        if($defaultValueFiles) foreach($defaultValueFiles as $file) include $file;
+
+        /* 
+         * 使用反射机制获取函数参数的默认值。
+         * Get the default settings of the method to be called using the reflecting. 
+         *
+         * */
+        $defaultParams = array();
+        $methodReflect = new reflectionMethod($currentClassName, $currentMethodName);
+        foreach($methodReflect->getParameters() as $param)
+        {
+            $name = $param->getName();
+
+            $default = '_NOT_SET';
+            if(isset($paramDefaultValue[$currentAppName][$currentClassName][$currentMethodName][$name]))
+            {
+                $default = $paramDefaultValue[$currentAppName][$currentClassName][$currentMethodName][$name];
+            }
+            elseif(isset($paramDefaultValue[$currentClassName][$currentMethodName][$name]))
+            {
+                $default = $paramDefaultValue[$currentClassName][$currentMethodName][$name];
+            }
+            elseif($param->isDefaultValueAvailable())
+            {
+                $default = $param->getDefaultValue();
+            }
+
+            $defaultParams[$name] = $default;
+        }
+
+        /** 
+         * 根据PATH_INFO或者GET方式设置请求的参数。
+         * Set params according PATH_INFO or GET.
+         */
+        if($this->config->requestType != 'GET')
+        {
+            $this->app->setParamsByPathInfo($defaultParams);
+        }
+        else
+        {
+            $this->app->setParamsByGET($defaultParams);
+        }
+
+        chdir($currentPWD);
+        return $output;
+    }
+
+    /**
      * Print the content of the view. 
      * 
      * @param   string  $moduleName    module name

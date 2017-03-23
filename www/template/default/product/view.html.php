@@ -178,7 +178,9 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
     <div class='row blocks' data-region='product_view-bottom'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
     <?php if(commonModel::isAvailable('message')):?>
     <div id='comments'>
-      <div id='commentBox'></div>
+      <div id='commentBox'>
+        <?php echo $this->fetch('message', 'comment', "objectType=product&objectID={$product->id}");?>
+      </div>
       <?php echo html::a('', '', "name='comment'");?>
     </div>
     <?php endif;?>

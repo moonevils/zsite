@@ -81,14 +81,10 @@ js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id)
 </div> 
 
 <?php if(commonModel::isAvailable('message')):?>
-<div id='commentBox'></div>
+<div id='commentBox'>
+  <?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}")?>
+</div>
 <?php endif;?>
 
 <div class='block-region region-article-view-bottom blocks' data-region='article_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'bottom');?></div>
-<script>
-$(function()
-{
-    $('#commentBox').load('<?php echo helper::createLink('message', 'comment', "objectType=article&objectID=$article->id", 'mhtml');?>');
-});
-</script>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>

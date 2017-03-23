@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
+<?php if($this->app->clientDevice == 'desktop'):?>
 <?php include '../../common/view/kindeditor.html.php';?>
 
 <?php if(!isset($block)) $block = new stdclass();?>
@@ -162,3 +163,4 @@ $(function()
     $("[name*=params][name*=top][name*=right]").change();
 })
 </script>
+<?php endif;?>
