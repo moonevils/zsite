@@ -40,7 +40,7 @@
             <div class='input-group'>
               <?php echo html::select('imagePosition', $lang->article->browseImage->positionList, isset($this->config->$type->browseImage->position) ? $this->config->$type->browseImage->position : 'right', "class='form-control'");?>
               <span class='input-group-addon'></span>
-              <?php echo html::select('imageSize', $lang->article->browseImage->sizeList, isset($this->config->$type->browseImage->size) ? $this->config->$type->browse->size : 'middle', "class='form-control'");?>
+              <?php echo html::select('imageSize', $lang->article->browseImage->sizeList, isset($this->config->$type->browseImage->size) ? $this->config->$type->browseImage->size : 'small', "class='form-control'");?>
               <span class='input-group-addon'><?php echo $lang->article->browseImage->maxWidth;?></span>
               <?php echo html::input('imageWidth', isset($this->config->$type->browseImage->width) ? $this->config->$type->browseImage->width : '100', "class='form-control'");?>
               <span class='input-group-addon'>px</span>
