@@ -195,7 +195,7 @@ class fileModel extends model
             ->andWhere('objectID')->in($objectID)
             ->beginIf(isset($isImage) and $isImage)->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
             ->beginIf(isset($isImage) and !$isImage)->andWhere('extension')->notin($this->config->file->imageExtensions)->fi()
-            ->orderBy('`primary`, editor_desc') 
+            ->orderBy('`order`, editor_desc') 
             ->fetchGroup('objectID');
 
         /* Process these files. */
@@ -425,7 +425,10 @@ class fileModel extends model
             unset($file['tmpname']);
             unset($file['id']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
-            $fileTitles[$this->dao->lastInsertId()] = $file['title'];
+
+            $fileID = $this->dao->lastInsertId();
+            $this->dao->update(TABLE_FILE)->set('`order`')->eq($fileID)->where('id')->eq($fileID)->exec();
+            $fileTitles[$fileID] = $file['title'];
         }
         $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
         return $fileTitles;
@@ -1261,7 +1264,7 @@ class fileModel extends model
         $text       = $this->config->file->watermarkContent;
         $position   = isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'topLeft';
         $angle      = 0;
-        $fontPath   = './simhei.ttf';
+        $fontPath   = $this->app->getTmpRoot() . 'simhei.ttf';
         $textLength = mb_strlen($text, 'utf8') * $fontSize;
 
         if($position == 'topLeft')

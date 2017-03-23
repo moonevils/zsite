@@ -94,6 +94,7 @@ $lang->file->copySuccess      = "已复制到剪贴板";
 $lang->file->evilChar         = "包含非法字符";
 $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";
+$lang->file->fontNotDownload  = "字体文件没有下载成功";
 
 $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '删除全部';

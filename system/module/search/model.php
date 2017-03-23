@@ -48,7 +48,7 @@ class searchModel extends model
         $images = $this->dao->setAutoLang(false)->select('*')->from(TABLE_FILE)
             ->where('extension')->in($this->config->file->imageExtensions)
             ->andWhere('objectType')->in('article,product')
-            ->orderBy('`primary`, editor_desc') 
+            ->orderBy('`order`, editor_desc') 
             ->fetchGroup('objectID');
 
         foreach($images as $objectImages) $this->file->batchProcessFile($objectImages);
