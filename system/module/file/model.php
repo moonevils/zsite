@@ -885,6 +885,7 @@ class fileModel extends model
 
             $file['id']        = $key;
             $file['extension'] = $out[2][$key];
+            if(!in_array($file['extension'], $this->config->file->imageExtensions)) return false;
             $file['size']      = strlen($imageData);
             $file['addedBy']   = $this->app->user->account;
             $file['addedDate'] = helper::today();
