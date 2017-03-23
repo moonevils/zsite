@@ -90,9 +90,10 @@
             <div class='text-right'>
               <?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?>
               <?php 
-                if($this->moduleName == 'article' and $this->methodName == 'admin' and isset($_GET['type']) and $_GET['type'] == 'blog')
+                if($this->moduleName == 'article' and $this->methodName == 'admin' and (!isset($_GET['type']) or (isset($_GET['type']) and (strpos('article,blog', $_GET['type']) !== false))))
                 {
-                    echo html::a(helper::createLink('article', 'setting', 'type=blog'), $lang->setting);
+                    $type = isset($_GET['type']) ? $_GET['type'] : 'article';
+                    echo html::a(helper::createLink('article', 'setting', "type={$type}"), $lang->setting);
                 }
               ?>
             </div>

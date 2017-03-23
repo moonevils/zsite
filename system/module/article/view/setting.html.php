@@ -13,9 +13,10 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='col-md-12'>
   <div class='panel'>
-    <div class='panel-heading'><strong><i class='icon-cog'></i> <?php echo $lang->article->blog->setting;?></strong></div>
+    <div class='panel-heading'><strong><i class='icon-cog'></i> <?php echo $type == 'article' ? $lang->article->setting : $lang->article->blog->setting;?></strong></div>
     <form method='post' id='ajaxForm' class='form-inline' style='margin-top:10px;'>
       <table class='table table-form'>
+        <?php if($type == 'blog'):?>
         <tr>
           <th><?php echo $lang->article->blog->showCategory;?></th>
           <td>
@@ -30,6 +31,21 @@
         <tr>
           <th class='w-120px'><?php echo $lang->article->blog->categoryLevel;?></th>
           <td class='w-p40'><?php echo html::select('categoryLevel', $lang->article->blog->categoryLevelList, isset($this->config->blog->categoryLevel) ? $this->config->blog->categoryLevel : '', "class='form-control'");?></td>
+          <td></td>
+        </tr>
+        <?php endif;?>
+        <tr>
+          <th class='w-120px'><?php echo $lang->article->browseImage->common;?></th>
+          <td class='w-p40'>
+            <div class='input-group'>
+              <?php echo html::select('imagePosition', $lang->article->browseImage->positionList, isset($this->config->$type->browseImage->position) ? $this->config->$type->browseImage->position : 'right', "class='form-control'");?>
+              <span class='input-group-addon'></span>
+              <?php echo html::select('imageSize', $lang->article->browseImage->sizeList, isset($this->config->$type->browseImage->size) ? $this->config->$type->browse->size : 'middle', "class='form-control'");?>
+              <span class='input-group-addon'><?php echo $lang->article->browseImage->maxWidth;?></span>
+              <?php echo html::input('imageWidth', isset($this->config->$type->browseImage->width) ? $this->config->$type->browseImage->width : '100', "class='form-control'");?>
+              <span class='input-group-addon'>px</span>
+            </div>
+          </td>
           <td></td>
         </tr>
         <tr>

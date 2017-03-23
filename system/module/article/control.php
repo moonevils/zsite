@@ -562,23 +562,21 @@ class article extends control
      */
     public function setting($type = 'blog')
     {
-        if($type == 'blog')
+        if($type == 'blog' or $type == 'article')
         {
-            $this->lang->article->menu = $this->lang->blog->menu;
-            $this->lang->menuGroups->article = 'blog';
+            $this->lang->article->menu = $this->lang->$type->menu;
+            $this->lang->menuGroups->article = $type;
+
             if($_POST)
             {
-                $data = new stdclass();
-                $data->showCategory  = $this->post->showCategory;
-                $data->categoryAbbr  = $this->post->categoryAbbr;
-                $data->categoryLevel = $this->post->categoryLevel;
-                $this->loadModel('setting')->setItems('system.blog', $data);
-
+                $data = fixer::input('post')->get();
+                $this->loadModel('setting')->setItems("system.$type", $data);
                 if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
                 $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             }
 
-            $this->view->title     = $this->lang->setting; 
+            $this->view->title = $this->lang->setting; 
+            $this->view->type  = $type;
             $this->display();
         }
         else
