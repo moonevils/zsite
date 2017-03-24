@@ -31,10 +31,11 @@ $lang->block->mobile->typeList['productTree'] = 'Product Categories';
 $lang->block->mobile->typeList['blogTree']    = 'Blog Categories';
 
 $lang->block->mobile->typeList['contact']  = 'Contact';
-$lang->block->mobile->typeList['followUs']  = 'Follow Us';
+$lang->block->mobile->typeList['followUs'] = 'Follow Us';
 $lang->block->mobile->typeList['about']    = 'About';
 $lang->block->mobile->typeList['links']    = 'Links';
 $lang->block->mobile->typeList['slide']    = 'Slide';
+$lang->block->mobile->typeList['header']   = 'Header';
 
 $lang->block->mobile->typeGroups = array();
 $lang->block->mobile->typeGroups['html']     = 'input';
@@ -62,6 +63,7 @@ $lang->block->mobile->typeGroups['followUs'] = 'system';
 $lang->block->mobile->typeGroups['about']    = 'system';
 $lang->block->mobile->typeGroups['links']    = 'system';
 $lang->block->mobile->typeGroups['slide']    = 'system';
+$lang->block->mobile->typeGroups['header']   = 'system';
 
 $lang->block->mobile->pages['all']            = 'All';
 $lang->block->mobile->pages['index_index']    = 'Home';

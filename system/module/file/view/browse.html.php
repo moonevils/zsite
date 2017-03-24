@@ -118,7 +118,7 @@ $('#uploader').uploader(
         <?php if($showSetPrimary):?>
         if(file.isImage && !$file.find('.btn-set-primary').length)
         {
-            $file.find('.file-status').after(' <a href="javascript:;"  class="btn-set-primary btn btn-link"><?php echo $lang->file->setPrimary;?></a>');
+            $file.find('.file-status').after(' <a href="javascript:;"  class="btn-set-primary btn btn-link"><i class="icon icon-move"></i></a>');
         }
         <?php endif;?>
         $file.toggleClass('can-set-primary', status === 'done' && file.isImage && !(file.primary && file.primary !== '0'));

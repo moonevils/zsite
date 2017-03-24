@@ -46,10 +46,12 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
           </div>
           <div class='item-content'>
             <?php if(!empty($article->image)):?>
-            <div class='media pull-right'>
+            <?php $pull     = (isset($this->config->article->imagePosition) and $this->config->article->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
+            <?php $imageURL = !empty($this->config->article->imageSize) ? $this->config->article->imageSize . 'URL' : 'smallURL';?>
+            <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->article->imageWidth) ? $this->config->article->imageWidth . 'px' : '100px';?>">
               <?php
               $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-              echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+              echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
               ?>
             </div>
             <?php endif;?>

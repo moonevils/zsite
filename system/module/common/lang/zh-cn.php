@@ -216,11 +216,12 @@ $lang->menu->effect   = "特效|ui|effect|";
 $lang->menu->visual   = "可视化|visual|index|";
 $lang->menu->edit     = "编辑模板|ui|edittemplate|";
 
-$lang->menu->site      = '站点|site|setbasic|';
-$lang->menu->security  = '安全|site|setsecurity|';
-$lang->menu->company   = '公司|company|setbasic|';
-$lang->menu->score     = '积分|score|setcounts|';
-$lang->menu->interface = '接口|site|setoauth|';
+$lang->menu->site          = '站点|site|setbasic|';
+$lang->menu->security      = '安全|site|setsecurity|';
+$lang->menu->company       = '公司|company|setbasic|';
+$lang->menu->score         = '积分|score|setcounts|';
+$lang->menu->interface     = '接口|site|setoauth|';
+$lang->menu->wechatSetting = '微信设置|wechat|admin|';
 
 $lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主题|ui|themestore|';
@@ -229,7 +230,7 @@ $lang->menu->community  = '社区|admin|register|';
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
 $lang->menuGroups->mail    = 'interface';
-$lang->menuGroups->wechat  = 'interface';
+$lang->menuGroups->wechat  = 'wechatSetting';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
@@ -337,7 +338,6 @@ $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
 $lang->interface->menu->oauth  = '开放登录|site|setoauth|';
 $lang->interface->menu->mail   = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->interface->menu->wechat = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
 $lang->score->menu = new stdclass();
@@ -355,10 +355,6 @@ $lang->tree->menu = $lang->article->menu;
 /* Menu of reply module. */
 $lang->reply = new stdclass();
 $lang->reply->menu = $lang->forum->menu;
-
-/* Menu of wechat module. */
-$lang->wechat = new stdclass();
-$lang->wechat->menu = $lang->site->menu;
 
 /* Menu of search module. */
 $lang->search = new stdclass();

@@ -87,12 +87,14 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
           <div class='card-content text-muted'>
             <?php if(!empty($article->image)):?>
-              <div class='media pull-right'>
-                <?php
-                $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
-                ?>
-              </div>
+            <?php $pull     = (isset($this->config->blog->imagePosition) and $this->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
+            <?php $imageURL = !empty($this->config->blog->imageSize) ? $this->config->blog->imageSize . 'URL' : 'smallURL';?>
+            <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->blog->imageWidth) ? $this->config->blog->imageWidth . 'px' : '100px';?>">
+              <?php
+              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+              echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
+              ?>
+            </div>
             <?php endif;?>
             <?php echo $article->summary;?>
           </div>
@@ -128,7 +130,6 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
   <?php if(!empty($layouts['blog_index']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
   <div class='col-md-<?php echo $sideGrid ?> col-side'>
     <side class='page-side'>
-      <div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div>
       <div class='blocks' data-region='blog_index-side'><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></div>
     </side>
   </div>

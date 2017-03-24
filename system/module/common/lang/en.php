@@ -215,11 +215,12 @@ $lang->menu->effect   = "Effect|ui|effect|";
 $lang->menu->visual   = "<i class='icon icon-magic'></i>Visual Editor|visual|index|";
 $lang->menu->edit     = "Custom|ui|edittemplate|";
 
-$lang->menu->site      = 'Site|site|setbasic|';
-$lang->menu->security  = 'Security|site|setsecurity|';
-$lang->menu->company   = 'Company|company|setbasic|';
-$lang->menu->score     = 'Points|score|setcounts|';
-$lang->menu->interface = 'API|site|setoauth|';
+$lang->menu->site          = 'Site|site|setbasic|';
+$lang->menu->security      = 'Security|site|setsecurity|';
+$lang->menu->company       = 'Company|company|setbasic|';
+$lang->menu->score         = 'Points|score|setcounts|';
+$lang->menu->interface     = 'API|site|setoauth|';
+$lang->menu->wechatSetting = 'Wechat Setting|wechat|admin|';
 
 $lang->menu->package    = 'Extensions|package|browse|';
 $lang->menu->themestore = 'Themes|ui|themestore|';
@@ -228,7 +229,7 @@ $lang->menu->community  = 'Community|admin|register|';
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
 $lang->menuGroups->mail    = 'interface';
-$lang->menuGroups->wechat  = 'interface';
+$lang->menuGroups->wechat  = 'wechatSetting';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
@@ -354,10 +355,6 @@ $lang->tree->menu = $lang->article->menu;
 /* Menu of reply module. */
 $lang->reply = new stdclass();
 $lang->reply->menu = $lang->forum->menu;
-
-/* Menu of wechat module. */
-$lang->wechat = new stdclass();
-$lang->wechat->menu = $lang->site->menu;
 
 /* Menu of search module. */
 $lang->search = new stdclass();

@@ -30,8 +30,7 @@ class tree extends control
         {
             $this->lang->tree             = $this->lang->wechatMenu;
             $this->lang->category         = $this->lang->wechatMenu;
-            $this->lang->tree->menu       = $this->lang->interface->menu;
-            $this->lang->menuGroups->tree = 'interface';
+            $this->lang->menuGroups->tree = 'wechatSetting';
         }
         else
         {
