@@ -160,6 +160,15 @@ class thread extends control
         $pager   = new pager(0, $recPerPage, $pageID);
         $replies = $this->loadModel('reply')->getByThread($threadID, $pager);
 
+        foreach($replies as $reply)
+        {
+            if(strpos($reply->content, '[quote]') !== false)
+            {
+                $reply->content = str_replace('[quote]', "<div class='alert'>", $reply->content);
+                $reply->content = str_replace('[/quote]', '</div>', $reply->content);
+            }
+        }
+
         /* Get all speakers. */
         $speakers = $this->thread->getSpeakers($thread, $replies);
         $speakers = $this->loadModel('user')->getBasicInfo($speakers);

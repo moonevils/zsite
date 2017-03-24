@@ -56,6 +56,7 @@
       <?php if($this->thread->canManage($board->id, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
     </span>
     <a href="#reply" data-reply='<?php echo $reply->id;?>' class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common;?></a>
+    <a href="#reply" data-reply='<?php echo $reply->id;?>' class="thread-reply-btn quote"><i class="icon-quote-left"></i> <?php echo $lang->thread->quote;?></a>
     <?php else: ?>
     <a data-reply='<?php echo $reply->id;?>' href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true) . '#' . $reply->id));?>" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common;?></a>
     <?php endif; ?>

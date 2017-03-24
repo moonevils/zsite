@@ -46,4 +46,24 @@ $(document).ready(function()
     {
         $('#replyID').val($(this).data('reply'));
     })
+
+    $(document).on('click', '.quote', function()
+    {
+        var $quote     = $(this).parents('.panel.reply');
+        var date       = $quote.find('.panel-heading span.muted').html();
+        var user       = $quote.find('.table .speaker .thread-author').html();
+        var quoteTitle = v.quoteTitle;
+
+        date = date.substr(32);
+        user = user.substr(25);
+        quoteTitle = quoteTitle.replace('\%\s', user).replace('%s', date);
+        
+        var quoteContent = '[quote]';
+        quoteContent += quoteTitle;
+        quoteContent += $quote.find('.table .thread-wrapper .thread-content').html();
+        quoteContent += '[/quote]';
+        $('#content').val(quoteContent);
+
+        location.reload(); 
+    })
 });
