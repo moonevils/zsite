@@ -6,7 +6,7 @@ $config->menus->shop    = 'order,product,orderSetting';
 $config->menus->user    = 'user,message,comment,reply,forum,wechat,submission,userSetting';
 $config->menus->promote = 'stat,tag,links';
 $config->menus->design  = 'ui,logo,slide,nav,block,visual,others,edit';
-$config->menus->setting = 'site,company,score,interface,security';
+$config->menus->setting = 'site,company,score,interface,security,wechatSetting';
 $config->menus->open    = 'package,themestore,effect,community,';
 
 $config->menuGroups = new stdclass();

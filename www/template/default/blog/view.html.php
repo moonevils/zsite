@@ -86,7 +86,9 @@ $common->printPositionBar($category, $article, '', $root);
       </footer>
     </div>
     <?php if(commonModel::isAvailable('message')):?>
-    <div id='commentBox'></div>
+    <div id='commentBox'>
+      <?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?>
+    </div>
     <?php endif;?>
     <div class='row blocks' data-region='blog_view-bottom'><?php $this->block->printRegion($layouts, 'blog_view', 'bottom', true);?></div>
   </div>

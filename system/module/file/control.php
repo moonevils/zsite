@@ -429,35 +429,24 @@ class file extends control
     }
 
     /**
-     * set a image as primary image.
+     * Order image.
      * 
-     * @param  int  $fileID 
      * @access public
      * @return void
      */
-    public function setPrimary($fileID)
+    public function order()
     {
-        $file = $this->file->getByID($fileID);
-        if(!$file or !$file->isImage) $this->send(array( 'result' => 'fail', 'message' => $this->lang->fail));
+        if($_POST)
+        {   
+            $orders = $_POST;
+            foreach($orders as $id => $order)
+            {        
+                $this->dao->update(TABLE_FILE)->set('order')->eq($order)->where('id')->eq($id)->exec();
+            }        
 
-        if(!$file->primary)
-        {
-            $this->dao->update(TABLE_FILE)
-                ->set('primary')->eq(0)
-                ->where('id')->ne($fileID)
-                ->andWhere('objectType')->eq($file->objectType)
-                ->andWhere('objectID')->eq($file->objectID)
-                ->exec();
-
-            $this->dao->update(TABLE_FILE)->set('primary')->eq(1)->where('id')->eq($fileID)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
-        else
-        {
-            $this->dao->update(TABLE_FILE)->set('primary')->eq(0)->where('id')->eq($fileID)->exec();
-        }
-
-        if(dao::isError()) $this->send(array( 'result' => 'fail', 'message' => dao::getError()));
-        $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
     }
 
     /**
@@ -769,8 +758,15 @@ class file extends control
         
         if(!empty($_POST))
         {
+            $tmpRoot  = $this->app->getTmpRoot();
+            $fontPath = $tmpRoot . 'simhei.ttf';
+            if(!file_exists($fontPath))
+            {
+                if(!is_writable($tmpRoot)) $this->send(array('result' => 'fail', 'message' => 'tmp' . $this->lang->file->unWritable));
+                if(!copy('http://cnd.chanzhi.org/simhei.ttf', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
+            }
+            
             $setting = fixer::input('post')->get();
-
             $result = $this->loadModel('setting')->setItems('system.common.file', $setting);
 
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwatermark')));
