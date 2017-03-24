@@ -50,13 +50,9 @@ $(document).ready(function()
     $(document).on('click', '.quote', function()
     {
         var $quote     = $(this).parents('.panel.reply');
-        var date       = $quote.find('.panel-heading span.muted').html();
-        var user       = $quote.find('.table .speaker .thread-author').html();
-        var quoteTitle = v.quoteTitle;
-
-        date = date.substr(32);
-        user = user.substr(25);
-        quoteTitle = quoteTitle.replace('\%\s', user).replace('%s', date);
+        var date       = $quote.find('.panel-heading span.muted')[0].childNodes[1].textContent;
+        var user       = $quote.find('.table .speaker .thread-author')[0].childNodes[1].textContent;
+        var quoteTitle = v.quoteTitle.replace('\%\s', user).replace('%s', date);
         
         var quoteContent = '[quote]';
         quoteContent += quoteTitle;
