@@ -56,6 +56,12 @@ foreach (explode('|', $lang->colorPlates) as $value)
                 <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
               </label>
             </span>
+            <span class='input-group-addon threadInfo'>
+              <?php $checked  = $board->discussion ? "checked='checked'" : '';?>
+              <label class='checkbox-inline'>
+                <input type='checkbox' name='discussion' value='1' <?php echo $checked;?>/><span><?php echo $lang->thread->discussion;?></span>
+              </label>
+            </span>
           </div>
           <?php else:?>
           <?php echo html::input($titleInput, '', "class='form-control'");?>

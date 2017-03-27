@@ -35,7 +35,7 @@ class treeModel extends model
             if(!$category) return false;
         }
 
-        if($type == 'forum') 
+        if($category->type == 'forum') 
         {
             $speakers = array();
             $category->moderators = explode(',', trim($category->moderators, ','));
@@ -43,6 +43,12 @@ class treeModel extends model
             $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
             foreach($category->moderators as $key => $moderators) $category->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
             $category->moderators = implode(',', $category->moderators);
+
+            if($category->parent and !$category->discussion)
+            {
+                $parent = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($category->parent)->fetch();
+                if($parent->discussion) $category->discussion = $parent->discussion;
+            }
         }
 
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();

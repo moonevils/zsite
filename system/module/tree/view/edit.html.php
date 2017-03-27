@@ -49,6 +49,15 @@ $themeRoot = $webRoot . "theme/";
               </label>
             </span>
             <?php endif;?>
+            <?php if($category->type == 'forum'):?>
+            <span class="input-group-addon">
+              <label class='checkbox-inline'>
+                <?php $checked = $category->discussion ? 'checked' : '';?>
+                <input type='checkbox' name='discussion' id='discussion' value='1' <?php echo $checked;?> />
+                <span><?php echo $lang->category->discussion;?></span>
+              </label>
+            </span>
+            <?php endif;?>
           </div>
         </div>
       </div>

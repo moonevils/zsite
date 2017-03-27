@@ -23,6 +23,7 @@ $lang->thread->views       = '阅读';
 $lang->thread->lastReply   = '最后回帖';
 $lang->thread->isLink      = '跳转';
 $lang->thread->link        = '链接';
+$lang->thread->discussion  = '讨论模式';
 
 $lang->thread->post           = '发帖';
 $lang->thread->postTo         = '发布帖子到';
