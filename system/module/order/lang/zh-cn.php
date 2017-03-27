@@ -35,6 +35,7 @@ $lang->order->phone             = '手机号';
 $lang->order->zipcode           = '邮编';
 $lang->order->deliveryStatus    = '发货状态';
 $lang->order->last              = '最后处理时间';
+$lang->order->comment           = '备注';
 
 $lang->order->deliverList['not_send']  = '待发货';
 $lang->order->deliverList['send']      = '已发货';
@@ -52,6 +53,7 @@ $lang->order->cancel         = '取消';
 $lang->order->pay            = '支付';
 $lang->order->goToPay        = '订单创建成功，请到支付页面完成付款。';
 $lang->order->return         = '收款';
+$lang->order->refund         = '退款';
 $lang->order->delivery       = '发货';
 $lang->order->delete         = '删除';
 $lang->order->finish         = '完成';
