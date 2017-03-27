@@ -53,7 +53,12 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php endif;?>
             <span class='input-group-addon threadInfo'>
               <label class='checkbox-inline'>
-                  <?php echo "<input type='checkbox' name='readonly' value='1'  $readonly/><span>{$lang->thread->readonly}</span>" ?>
+                  <?php echo "<input type='checkbox' name='readonly' value='1' $readonly/><span>{$lang->thread->readonly}</span>" ?>
+              </label>
+            </span>
+            <span class='input-group-addon threadInfo'>
+              <label class='checkbox-inline'>
+                <input type='checkbox' name='discussion' value='1'/><span><?php echo $lang->thread->discussion;?></span>
               </label>
             </span>
           </div>
