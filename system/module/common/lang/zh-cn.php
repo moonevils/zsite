@@ -76,6 +76,8 @@ $lang->qrcodeTip        = '移动访问';
 $lang->language         = '语言';
 $lang->custom           = '自定义';
 $lang->productMenu      = '产品';
+$lang->history          = '历史记录';
+$lang->reverse          = '切换顺序';
 
 /* Global action items. */
 $lang->reset          = '重置';

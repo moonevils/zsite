@@ -177,6 +177,8 @@ class order extends control
             $result  = $this->order->setPayment($orderID, $payment);
             if(!$result) exit;
 
+            $this->loadModel('action')->create('order', $orderID, 'Paied');
+
             if($payment == 'COD')
             {
                 $this->locate(inlink('browse'));
@@ -369,6 +371,7 @@ class order extends control
         {   
             $result = $this->order->savePayment($orderID);
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('order', $orderID, 'SavedPayment');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }   
         $this->view->order    = $this->order->getByID($orderID);
