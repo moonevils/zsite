@@ -332,6 +332,7 @@ CREATE TABLE IF NOT EXISTS `eps_relation` (
 CREATE TABLE IF NOT EXISTS `eps_reply` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `thread` mediumint(8) unsigned NOT NULL,
+  `reply` mediumint(8) unsigned NOT NULL,
   `content` text NOT NULL,
   `author` char(30) NOT NULL,
   `editor` char(30) NOT NULL,

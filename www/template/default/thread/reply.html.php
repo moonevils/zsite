@@ -33,6 +33,9 @@
         <?php if(!empty($reply->files)):?>
         <div class='article-files'><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?></div>
         <?php endif;?>
+        <?php if($thread->discussion):?>
+        <?php $this->reply->getByReply($reply);?>
+        <?php endif;?>
       </td>
     </tr>
   </table>
@@ -93,7 +96,7 @@
       echo html::hidden('recTotal',   $pager->recTotal);
       echo html::hidden('recPerPage', $pager->recPerPage);
       echo html::hidden('pageID',     $pager->pageTotal);
-      echo html::hidden('replyID',    0);
+      echo html::hidden('reply',      0);
       ?>
     </form>
   </div>
