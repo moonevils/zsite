@@ -1,3 +1,17 @@
+-- DROP TABLE IF EXISTS `eps_action`;
+CREATE TABLE IF NOT EXISTS `eps_action` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `objectType` varchar(30) NOT NULL default '',
+  `objectID` mediumint(8) unsigned NOT NULL default '0',
+  `actor` varchar(30) NOT NULL default '',
+  `action` varchar(30) NOT NULL default '',
+  `date` datetime NOT NULL,
+  `comment` text NOT NULL,
+  `extra` varchar(255) NOT NULL,
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 -- DROP TABLE IF EXISTS `eps_article`;
 CREATE TABLE IF NOT EXISTS `eps_article` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -692,11 +706,12 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `balance`  decimal(10,2) unsigned  NOT NULL DEFAULT 0.00,
   `payment` char(30) NOT NULL,
   `sn` char(50) NOT NULL,
+  `refundSN` char(50) NOT NULL,
   `address` text NOT NULL,
   `note` text NOT NULL,
   `createdDate` datetime NOT NULL,
   `paidDate` datetime NOT NULL,
-  `payStatus` enum('not_paid', 'paid') NOT NULL DEFAULT 'not_paid',
+  `payStatus` enum('not_paid', 'paid', 'refunded') NOT NULL DEFAULT 'not_paid',
   `deliveriedDate` datetime NOT NULL,
   `deliveriedBy` char(30) NOT NULL,
   `deliveryStatus` enum('not_send', 'send', 'confirmed') NOT NULL DEFAULT 'not_send',
@@ -705,7 +720,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `confirmedDate` datetime NOT NULL,
   `finishedDate` datetime NOT NULL,
   `finishedBy` char(30) NOT NULL,
-  `status` enum('normal', 'canceled', 'finished','deleted','expired') NOT NULL DEFAULT 'normal',
+  `status` enum('normal', 'canceled', 'finished', 'deleted', 'expired') NOT NULL DEFAULT 'normal',
   `last` datetime NOT NULL,
   `type` varchar(30) NOT NULL default 'shop',
   `lang` char(30) NOT NULL,

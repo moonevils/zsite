@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<form method='post' action='<?php echo inlink('savepayment', "orderID={$order->id}");?>' id='ajaxForm'>
+<form method='post' action='<?php echo inlink('refund', "orderID={$order->id}");?>' id='ajaxForm'>
   <table class='table table-form'>
     <tr>
       <th class='w-80px'><?php echo $lang->order->sn;?></th>
@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->order->amount;?></th>
-      <td><?php echo html::input('refundAmount', '', "class='form-control'");?></td>
+      <td><?php echo html::input('amount', '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->order->comment;?></th>
