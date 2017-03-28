@@ -57,8 +57,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
               </label>
             </span>
             <span class='input-group-addon threadInfo'>
+              <?php $discussion = $thread->discussion ? 'checked' : '';?>
               <label class='checkbox-inline'>
-                <input type='checkbox' name='discussion' value='1'/><span><?php echo $lang->thread->discussion;?></span>
+                <input type='checkbox' name='discussion' value='1' <?php echo $discussion;?>/><span><?php echo $lang->thread->discussion;?></span>
               </label>
             </span>
           </div>

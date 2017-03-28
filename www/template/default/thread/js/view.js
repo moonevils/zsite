@@ -44,7 +44,7 @@ $(document).ready(function()
 
     $('.thread-reply-btn').click(function()
     {
-        $('#replyID').val($(this).data('reply'));
+        if($(this).data('reply')) $('input[name=reply]').val($(this).data('reply'));
     })
 
     $(document).on('click', '.quote', function()
