@@ -99,6 +99,15 @@ class replyModel extends model
             }
         }
 
+        foreach($replies as $reply)
+        {
+            if(strpos($reply->content, '[quote]') !== false)
+            {
+                $reply->content = str_replace('[quote]', "<div class='alert'>", $reply->content);
+                $reply->content = str_replace('[/quote]', '</div>', $reply->content);
+            }
+        }
+
         return $replies;
     }
 
@@ -128,16 +137,25 @@ class replyModel extends model
 
         if(!$reply->reply) echo "<div class='alert alert-replies'>";
 
+        foreach($replies as $reply)
+        {
+            if(strpos($reply->content, '[quote]') !== false)
+            {
+                $reply->content = str_replace('[quote]', "<div class='alert alert-primary'>", $reply->content);
+                $reply->content = str_replace('[/quote]', '</div>', $reply->content);
+            }
+        }
+
         foreach($replies as $data)
         {
-            echo "<div class='thread-content'><span class='text-primary'>" . zget($users, $data->author) . $this->lang->colon . '</span>'. $data->content . '</div>';
+            echo "<div class='thread-content'><span class='reply-author text-primary'>" . zget($users, $data->author) . $this->lang->colon . "</span><div class='reply-content'>" . $data->content . '</div>';
             if(!empty($data->files))
             {
                 echo "<div class='article-files'>";
                 echo $this->printFiles($data, $canManage);
                 echo "</div>";
             }
-            echo "<div class='text-right'><span class='text-muted reply-date'>" . formatTime($data->addedDate, 'Y-m-d') . "</span>";
+            echo "<div class='text-right reply-actions'><span class='text-muted reply-date'>" . formatTime($data->addedDate, 'Y-m-d') . "</span>";
             if($this->app->user->account != 'guest')
             {
                 if(commonModel::isAvailable('score') and $canManage)
@@ -155,7 +173,7 @@ class replyModel extends model
                 $url = helper::createLink('user', 'login', "referer=helper::safe64Encode($this->app->getURI(true) . '#' . $data->id)");
                 echo "<a data-reply='{$data->id}' href='{$url}' class='thread-reply-btn'><i class='icon-reply'></i> {$this->lang->reply->common}</a>";
             }
-            echo "</div><hr>";
+            echo "</div></div><hr>";
             $this->getByReply($data);
         }
         if(!$reply->reply) echo "</div>";
