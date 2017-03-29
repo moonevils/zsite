@@ -763,7 +763,7 @@ class file extends control
             if(!file_exists($fontPath))
             {
                 if(!is_writable($tmpRoot)) $this->send(array('result' => 'fail', 'message' => 'tmp' . $this->lang->file->unWritable));
-                if(!copy('http://cnd.chanzhi.org/simhei.ttf', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
+                if(!copy('http://cdn.chanzhi.org/fonts/simhei.ttf', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
             }
             
             $setting = fixer::input('post')->get();
