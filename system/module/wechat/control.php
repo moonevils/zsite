@@ -92,8 +92,8 @@ class wechat extends control
      */
     public function admin()
     {
-        $this->lang->wechat->menu       = $this->lang->interface->menu;
-        
+        if(!commonModel::isAvailable('user')) die(js::alert($this->lang->wechat->userDisabled) . js::locate($this->createLink('site', 'setbasic')));
+
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 
@@ -111,8 +111,6 @@ class wechat extends control
      */
     public function create()
     {
-        $this->lang->wechat->menu       = $this->lang->interface->menu;
-        
         if($_POST) 
         {
             $publicID = $this->wechat->create();
@@ -133,8 +131,6 @@ class wechat extends control
      */
     public function integrate($publicID)
     {
-        $this->lang->wechat->menu       = $this->lang->interface->menu;
-        
         $this->view->title  = $this->lang->wechat->integrate;
         $this->view->public = $this->wechat->getByID($publicID);
         $this->display();
@@ -149,8 +145,6 @@ class wechat extends control
      */
     public function edit($publicID)
     {
-        $this->lang->wechat->menu       = $this->lang->interface->menu;
-        
         if($_POST) 
         {
             $this->wechat->update($publicID);       
@@ -185,8 +179,6 @@ class wechat extends control
      */
     public function adminResponse($publicID)
     {
-        $this->lang->wechat->menu       = $this->lang->interface->menu;
-
         $this->view->title           = $this->lang->wechat->response->keywords;
         $this->view->publicID        = $publicID;
         $this->view->responseList    = $this->wechat->getResponseList($publicID);

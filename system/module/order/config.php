@@ -5,6 +5,9 @@ $config->order->require->create   = 'account,address';
 $config->order->require->delivery = 'deliveriedDate,express,waybill,deliveriedBy';
 $config->order->require->setting  = 'payment,pid,key,confirmLimit,email';
 
+$config->order->editor = new stdclass();
+$config->order->editor->view = array('id' => 'lastComment', 'tools' => 'simple');
+
 $config->order->statusFields = new stdclass();
 $config->order->statusFields->not_paid  = 'payStatus';
 $config->order->statusFields->paid      = 'payStatus';

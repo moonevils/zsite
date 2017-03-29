@@ -61,15 +61,18 @@ class replyModel extends model
     /**
      * Get replies of a thread.
      * 
-     * @param  int    $thread 
+     * @param  int    $threadID
      * @param  object $pager 
      * @access public
      * @return array
      */
-    public function getByThread($thread, $pager = null)
+    public function getByThread($threadID, $pager = null)
     {
+        $thread = $this->loadModel('thread')->getByID($threadID);
+
         $replies = $this->dao->select('*')->from(TABLE_REPLY)
-            ->where('thread')->eq($thread)
+            ->where('thread')->eq($thread->id)
+            ->beginIF($thread->discussion)->andWhere('reply')->eq(0)->fi()
             ->orderBy('id')
             ->page($pager)
             ->fetchAll('id');
@@ -96,7 +99,84 @@ class replyModel extends model
             }
         }
 
+        foreach($replies as $reply)
+        {
+            if(strpos($reply->content, '[quote]') !== false)
+            {
+                $reply->content = str_replace('[quote]', "<div class='alert'>", $reply->content);
+                $reply->content = str_replace('[/quote]', '</div>', $reply->content);
+            }
+        }
+
         return $replies;
+    }
+
+    /**
+     * Get replies by reply.
+     * 
+     * @param  object    $reply 
+     * @access public
+     * @return void
+     */
+    public function getByReply($reply)
+    {
+        $replies = $this->dao->select('*')->from(TABLE_REPLY)
+            ->where('reply')->eq($reply->id)
+            ->orderBy('id')
+            ->fetchAll('id');
+
+        if(!$replies) return false;
+
+        $thread = $this->loadModel('thread')->getByID($reply->thread);
+        $users  = $this->loadModel('user')->getPairs();
+        $canManage = $this->thread->canManage($thread->board, $reply->author);
+
+        /* Get files for these replies. */
+        $files = $this->loadModel('file')->getByObject('reply', array_keys($replies));
+        foreach($files as $replyID => $file) $replies[$replyID]->files = $file;
+
+        if(!$reply->reply) echo "<div class='alert alert-replies'>";
+
+        foreach($replies as $reply)
+        {
+            if(strpos($reply->content, '[quote]') !== false)
+            {
+                $reply->content = str_replace('[quote]', "<div class='alert alert-primary'>", $reply->content);
+                $reply->content = str_replace('[/quote]', '</div>', $reply->content);
+            }
+        }
+
+        foreach($replies as $data)
+        {
+            echo "<div class='thread-content'><span class='reply-author text-primary'>" . zget($users, $data->author) . $this->lang->colon . "</span><div class='reply-content'>" . $data->content . '</div>';
+            if(!empty($data->files))
+            {
+                echo "<div class='article-files'>";
+                echo $this->printFiles($data, $canManage);
+                echo "</div>";
+            }
+            echo "<div class='text-right reply-actions'><span class='text-muted reply-date'>" . formatTime($data->addedDate, 'Y-m-d') . "</span>";
+            if($this->app->user->account != 'guest')
+            {
+                if(commonModel::isAvailable('score') and $canManage)
+                {
+                    $account = helper::safe64Encode($data->author);
+                    echo html::a(inlink('addScore', "account={$account}&objectType=reply&objectID={$data->id}"), $this->lang->thread->score, "data-toggle=modal");
+                }
+                if($canManage) echo html::a(helper::createLink('reply', 'delete', "replyID=$data->id"), '<i class="icon-trash"></i> ' . $this->lang->delete, "class='deleter'");
+                if($canManage) echo html::a(helper::createLink('reply', 'edit',   "replyID=$data->id"), '<i class="icon-pencil"></i> ' . $this->lang->edit);
+                echo "<a href='#reply' data-reply='{$data->id}' class='thread-reply-btn'><i class='icon-reply'></i> {$this->lang->reply->common} </a>";
+                echo "<a href='#reply' data-reply='{$data->id}' class='thread-reply-btn quote'><i class='icon-quote-left'></i> {$this->lang->thread->quote} </a>";
+            }
+            else
+            {
+                $url = helper::createLink('user', 'login', "referer=helper::safe64Encode($this->app->getURI(true) . '#' . $data->id)");
+                echo "<a data-reply='{$data->id}' href='{$url}' class='thread-reply-btn'><i class='icon-reply'></i> {$this->lang->reply->common}</a>";
+            }
+            echo "</div></div><hr>";
+            $this->getByReply($data);
+        }
+        if(!$reply->reply) echo "</div>";
     }
 
     /**
@@ -159,7 +239,7 @@ class replyModel extends model
             ->setForce('editedDate', helper::now())
             ->setForce('thread', $threadID)
             ->stripTags('content', $allowedTags)
-            ->remove('recTotal, recPerPage, pageID, replyID, files, labels, hidden')
+            ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
         if(strlen($reply->content) > 40)
@@ -209,7 +289,7 @@ class replyModel extends model
             if($this->config->requestType == 'GET') $locate = helper::createLink('thread', 'view', "threadID=$threadID&pageID=" . $urlInfo['pageID'] . "&noice=" . rand(1, 100) . "#" . $urlInfo['anchorID']);
             if($this->config->requestType != 'GET') $locate = helper::createLink('thread', 'view', "threadID=$threadID", "pageID=" . $urlInfo['pageID']) . "?rand=" . rand(1, 100) . "#" . $urlInfo['anchorID'];
 
-            return array('result' => 'success', 'replySuccess' => $this->lang->thread->replySuccess, 'replyID' => $this->post->replyID, 'locate' => $locate);
+            return array('result' => 'success', 'replySuccess' => $this->lang->thread->replySuccess, 'replyID' => $this->post->reply, 'locate' => $locate);
         }
         return array('result' => 'fail', 'message' => dao::getError());
     }
@@ -369,8 +449,8 @@ class replyModel extends model
 
         foreach($replies as $reply) 
         {
-           $reply->authorRealname    = !empty($reply->author) ? $speakers[$reply->author] : '';
-           $reply->editorRealname    = !empty($reply->editor) ? $speakers[$reply->editor] : '';
+           $reply->authorRealname = !empty($reply->author) ? $speakers[$reply->author] : '';
+           $reply->editorRealname = !empty($reply->editor) ? $speakers[$reply->editor] : '';
         }
     }
 

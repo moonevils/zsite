@@ -763,3 +763,16 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .panel-heading > .nav-tabs > li > a.active, .panel-heading > .nav-tabs > li > a:focus {outline: none;}
 .panel-heading > .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
 .panel-heading > #typeNav {margin: -4px -8px -9px;}
+
+.history{border: 1px solid #ccc; background: #f2f2f2; padding: 10px; margin-top: 10px; margin-bottom: 10px; color: #333; line-height: 20px;}
+.change-show, .change-hide, .log-desc, .log-asc, .diff-all, .diff-sort {font-family: ZenIcon;}
+.change-show:before {content: "\e661";}
+.change-hide:before {content: "\e662";}
+.log-desc:before {content: "\e65d";}
+.log-asc:before {content: "\e65c";}
+.diff-all:before {content: "\e6a3";}
+.diff-sort:before {content: "\e633";}
+
+#historyItem {padding-left: 25px;}
+#historyItem > li {line-height: 23px;}
+#historyItem .changes {border: 1px solid #e5e5e5; background: #f7f7f7; font-size: 12px; padding: 2px 5px; margin-top: 5px;}

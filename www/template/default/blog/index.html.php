@@ -87,12 +87,14 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
           <div class='card-content text-muted'>
             <?php if(!empty($article->image)):?>
-              <div class='media pull-right'>
-                <?php
-                $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
-                ?>
-              </div>
+            <?php $pull     = (isset($this->config->blog->imagePosition) and $this->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
+            <?php $imageURL = !empty($this->config->blog->imageSize) ? $this->config->blog->imageSize . 'URL' : 'smallURL';?>
+            <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->blog->imageWidth) ? $this->config->blog->imageWidth . 'px' : '100px';?>">
+              <?php
+              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+              echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
+              ?>
+            </div>
             <?php endif;?>
             <?php echo $article->summary;?>
           </div>

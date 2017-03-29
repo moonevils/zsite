@@ -369,12 +369,34 @@ class order extends control
         {   
             $result = $this->order->savePayment($orderID);
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->loadModel('action')->create('order', $orderID, 'SavedPayment');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }   
         $this->view->order    = $this->order->getByID($orderID);
         $this->view->title    = $this->lang->order->savePay;
         $this->display();
     }   
+
+    /**
+     * Order refund.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function refund($orderID)
+    {
+        if($_POST)
+        {
+            $result = $this->order->refund($orderID);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title = $this->lang->order->refund;
+        $this->view->order = $this->order->getByID($orderID);
+        $this->display();
+    }
 
     /**
      * Edit the order
