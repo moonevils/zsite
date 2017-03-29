@@ -434,8 +434,9 @@ class commonModel extends model
             $moduleMenu = $lang->menu->{$menu};
             $class = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
-
-            if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
+            
+            if($module == 'wechat' and $method != 'admin' and !commonModel::isAvailable($module)) continue;
+            if($module != 'wechat' and $module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
 
             /* Just whether article/blog/page menu should shown. */
             if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;
@@ -446,7 +447,7 @@ class commonModel extends model
 
             if($menu == 'wechat' and !commonModel::hasPublic()) continue;
             
-            if(commonModel::hasPriv($module, $method))
+            if(($module == 'wechat' && $method == 'admin') || commonModel::hasPriv($module, $method))
             {
                 $link  = helper::createLink($module, $method, $vars);
                 $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";

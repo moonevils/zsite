@@ -62,6 +62,7 @@ $lang->board->readonly   = 'Access Control';
 $lang->board->moderators = 'Board Moderator';
 $lang->board->isLink     = 'Jump';
 $lang->board->link       = 'Link';
+$lang->board->discussion = 'Discussion Mode';
 
 $lang->board->readonlyList[0] = 'Public';
 $lang->board->readonlyList[1] = 'Read Only';

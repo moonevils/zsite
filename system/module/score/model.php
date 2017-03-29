@@ -300,6 +300,8 @@ class scoreModel extends model
         if(dao::isError()) return false;
         $orderID = $this->dao->lastInsertID();
 
+        $this->loadModel('action')->create('order', $orderID, 'Created');
+
         $goods = new stdclass();
         $goods->orderID     = $orderID;
         $goods->productID   = 0;

@@ -166,6 +166,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('5.7'));
             case '6_0':
                 $this->execSQL($this->getUpgradeFile('6.0'));
+                $this->addSubscribeBlock();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2138,5 +2139,52 @@ class upgradeModel extends model
         }
         if(isset($sql)) $this->dao->query($sql);
     }
-}
 
+    /**
+     * Add subscribe block.
+     * 
+     * @access public
+     * @return void
+     */
+    public function addSubscribeBlock()
+    {
+        $blocks = array();
+        $blocks['zh-cn'] = array('type' => 'subscribe', 'title' => '订阅博客',  'content' => '', 'lang' => 'zh-cn');
+        $blocks['en']    = array('type' => 'subscribe', 'title' => 'Subscribe', 'content' => '', 'lang' => 'en');
+        $blocks['zh-tw'] = array('type' => 'subscribe', 'title' => '訂閱博客',  'content' => '', 'lang' => 'zh-tw');
+
+        foreach($blocks as $block)
+        {
+            $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+            $blockID = $this->dao->lastInsertID();
+
+            $layouts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)
+                ->where('page')->eq('blog_index')
+                ->andWhere('region')->eq('side')
+                ->andWhere('lang')->eq($block['lang'])
+                ->fetchAll();
+
+            foreach($layouts as $layout)
+            {
+                $subscribeBlock = new stdclass();
+                $subscribeBlock->id         = $blockID;
+                $subscribeBlock->grid       = 0;
+                $subscribeBlock->titleless  = 0;
+                $subscribeBlock->borderless = 0;
+
+                $blogBlocks = json_decode($layout->blocks);
+                array_unshift($blogBlocks, $subscribeBlock);
+
+                $this->dao->setAutoLang(false)->update(TABLE_LAYOUT)->set('blocks')->eq(helper::jsonEncode($blogBlocks))
+                    ->where('template')->eq($layout->template)
+                    ->andWhere('plan')->eq($layout->plan)
+                    ->andWhere('page')->eq($layout->page)
+                    ->andWhere('region')->eq($layout->region)
+                    ->andWhere('lang')->eq($layout->lang)
+                    ->exec();
+            }
+        }
+
+        return !dao::isError();
+    }
+}

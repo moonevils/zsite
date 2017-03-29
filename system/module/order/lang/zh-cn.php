@@ -35,6 +35,7 @@ $lang->order->phone             = '手机号';
 $lang->order->zipcode           = '邮编';
 $lang->order->deliveryStatus    = '发货状态';
 $lang->order->last              = '最后处理时间';
+$lang->order->comment           = '备注';
 
 $lang->order->deliverList['not_send']  = '待发货';
 $lang->order->deliverList['send']      = '已发货';
@@ -52,6 +53,7 @@ $lang->order->cancel         = '取消';
 $lang->order->pay            = '支付';
 $lang->order->goToPay        = '订单创建成功，请到支付页面完成付款。';
 $lang->order->return         = '收款';
+$lang->order->refund         = '退款';
 $lang->order->delivery       = '发货';
 $lang->order->delete         = '删除';
 $lang->order->finish         = '完成';
@@ -109,11 +111,13 @@ $lang->order->statusList['confirmed'] = '已收货';
 $lang->order->statusList['normal']    = '进行中';
 $lang->order->statusList['finished']  = '已完成';
 $lang->order->statusList['canceled']  = '已取消';
+$lang->order->statusList['refunded']  = '已退款';
 $lang->order->statusList['expired']   = '已过期';
 
 $lang->order->payStatusList = array();
 $lang->order->payStatusList['not_paid'] = '未付款';
 $lang->order->payStatusList['paid']     = '已付款';
+$lang->order->payStatusList['refunded'] = '已退款';
 
 $lang->order->types = array();
 $lang->order->types['shop']  = '商品';
@@ -132,5 +136,6 @@ $lang->order->searchLabels->waitSend    = '待发货|mode=deliveryStatus&param=n
 $lang->order->searchLabels->waitConfirm = '待收货|mode=deliveryStatus&param=send';
 $lang->order->searchLabels->confirmed   = '已收货|mode=deliveryStatus&param=confirmed';
 $lang->order->searchLabels->finished    = '已完成|mode=status&param=finished';
+$lang->order->searchLabels->refunded    = '已退款|mode=payStatus&param=refunded';
 $lang->order->searchLabels->canceled    = '已取消|mode=status&param=canceled';
 $lang->order->searchLabels->expired     = '已过期|mode=status&param=expired';

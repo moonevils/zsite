@@ -73,7 +73,6 @@ class thread extends control
         $this->view->canManage    = $this->thread->canManage($boardID);
         $this->view->titleInput   = $titleInput;
         $this->view->contentInput = $contentInput;
-        $this->view->board        = $board;
         $this->view->mobileURL    = helper::createLink('thread', 'post', "boardID=$boardID", '', 'mhtml');
         $this->view->desktopURL   = helper::createLink('thread', 'post', "boardID=$boardID", '', 'html');
 

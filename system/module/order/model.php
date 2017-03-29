@@ -126,6 +126,8 @@ class orderModel extends model
 
         $orderID = $this->dao->lastInsertID();
 
+        $this->loadModel('action')->create('order', $orderID, 'Created');
+
         $goods = new stdclass();
         $goods->orderID = $orderID;
         
@@ -203,6 +205,7 @@ class orderModel extends model
      */
     public function createPayLink($order, $type = '')
     {
+        if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $type);
         if($order->payment and is_callable(array($this, "create{$order->payment}PayLink"))) return call_user_func(array($this,"create{$order->payment}PayLink"), $order);
         return helper::createLink('order', 'check', "orderID=$order->id");
     }
@@ -350,6 +353,7 @@ class orderModel extends model
             ->where('id')->eq($order->id)->exec();
 
         if(dao::isError()) return false;
+        $this->loadModel('action')->create('order', $order->id, 'Paid');
 
         if(is_callable(array($this, "process{$order->type}Order"))) call_user_func(array($this, "process{$order->type}Order"), $order);
         return true;
@@ -426,6 +430,10 @@ class orderModel extends model
             ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
+
+        if(dao::isError()) return false;
+
+        $this->loadModel('action')->create('order', $orderID, 'Finished');
         return !dao::isError();
     }
 
@@ -444,6 +452,10 @@ class orderModel extends model
             ->where('id')->eq($orderID)
             ->andWhere('account')->eq($this->app->user->account)
             ->exec();
+
+        if(dao::isError()) return false;
+
+        $this->loadModel('action')->create('order', $orderID, 'Canceled');
         return !dao::isError();
     }
 
@@ -545,12 +557,12 @@ class orderModel extends model
             if($this->commonLink['savePayment'])
             {
                 /* Save payment link. */
-                $disabled = ($order->status == 'normal' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";
+                $disabled = ($order->status == 'normal' and $order->payStatus == 'not_paid') ? '' : "disabled='disabled'";
                 echo $disabled ? html::a('javascript:;', $this->lang->order->return, "$disabled  class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "{$toggle} class='$class'"); 
             }
-            
+
             /* Delete order link. */
-            $disabled = ($order->status == 'expired' or $order->status == 'canceled' or $order->status == 'finished') ? '' : "disabled='disabled'";
+            $disabled = ($order->status == 'expired' or $order->status == 'canceled' or $order->status == 'finished' or $order->payStatus == 'refunded') ? '' : "disabled='disabled'";
             echo $disabled ? html::a('javascript:;', $this->lang->order->delete, "$disabled class='$class'") : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, " class='$class deleter'"); 
         }
 
@@ -596,15 +608,19 @@ class orderModel extends model
             $class  = $btnLink ? 'btn btn-ajax-loader' : '';
 
             /* Edit link. */
-            $disabled = $order->status == 'normal' ? '' : "disabled = 'disabled'";
+            $disabled = ($order->status == 'normal' and $order->payStatus != 'refunded') ? '' : "disabled = 'disabled'";
             echo $disabled ? html::a('javascript:;', $this->lang->order->edit, "$disabled  class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "{$toggle} class='$class'");
             
             /* Send link. */
             $disabled = ($order->status == 'normal' and $order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
             echo $disabled ?  html::a('javascript:;', $this->lang->order->delivery, "$disabled class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "{$toggle} class='$class'");
 
+            /* Refund link. */
+            $disabled = ($order->deliveryStatus != 'confirmed' and $order->status == 'normal' and $order->payStatus == 'paid') ? '' : "disabled='disabled'"; 
+            echo $disabled ?  html::a('javascript:;', $this->lang->order->refund, "$disabled class='$class'") : html::a(helper::createLink('order', 'refund', "orderID=$order->id"), $this->lang->order->refund, "{$toggle} class='$class'");
+
             /* Finish link. */
-            $disabled = ($order->status == 'normal' and $order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
+            $disabled = ($order->status == 'normal' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
             echo $disabled ? html::a('javascript:;', $this->lang->order->finish, "$disabled class='$class'"): html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher $class'");
         }
 
@@ -668,6 +684,10 @@ class orderModel extends model
             ->where('id')->eq($orderID)
             ->andWhere('account')->eq($this->app->user->account)
             ->exec();
+
+        if(dao::isError()) return false;
+
+        $this->loadModel('action')->create('order', $orderID, 'ConfirmedDelivery');
         return !dao::isError();
     }
 
@@ -719,6 +739,8 @@ class orderModel extends model
         $this->dao->update(TABLE_ORDER)->data($delivery)->where('id')->eq($orderID)->exec();
 
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+
+        $this->loadModel('action')->create('order', $orderID, 'Deliveried');
 
         if(isset($this->config->product->stock) and $this->config->product->stock)
         {
@@ -969,6 +991,29 @@ class orderModel extends model
             ->batchCheck($this->config->order->require->savepay, 'notempty')
             ->where('id')->eq($orderID)
             ->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Refund an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return bool
+     */
+    public function refund($orderID)
+    {
+        $this->dao->update(TABLE_ORDER)
+            ->set('refundSN')->eq($this->post->sn)
+            ->set('payStatus')->eq('refunded')
+            ->set('last')->eq(helper::now())
+            ->where('id')->eq($orderID)
+            ->exec();
+
+        if(dao::isError()) return false;
+
+        $this->loadModel('action')->create('order', $orderID, 'Refunded', $this->post->comment, $this->post->amount);
         return !dao::isError();
     }
 
