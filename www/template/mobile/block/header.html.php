@@ -40,7 +40,7 @@ $themeName    = $this->config->template->{$this->app->clientDevice}->theme;
     </div>
     <?php endif; ?>
     <?php if(commonModel::isAvailable('shop')):?>
-    <a class='btn with-badge' href='<?php echo $this->createLink('cart', 'browse');?>'><i class='icon icon-shopping-cart'></i><strong class='cart-count badge small text-danger circle hide'>12</strong></a>
+    <a class='btn with-badge' href='<?php echo helper::createLink('cart', 'browse');?>'><i class='icon icon-shopping-cart'></i><strong class='cart-count badge small text-danger circle hide'>12</strong></a>
     <?php endif; ?>
     <?php
     $isMultiLangAvailable = count(explode(',', $this->config->enabledLangs)) > 1;
