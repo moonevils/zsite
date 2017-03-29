@@ -19,19 +19,19 @@
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
       <div class='col-md-6'>
         <div class='box'>
-        <div class='card'>
-        <?php if(isset($logo->webPath)) echo html::a('javascript:;', html::image($logo->webPath, "class='logo'"), "class='btn-upload'");?>
-        <?php if(!isset($logo->webPath)) echo html::a('javascript:;', $lang->ui->uploadLogo, "class='text-lg btn-upload'");?>
-        </div>
-        <span class='actions'>
-        <?php if(isset($logo->webPath)) echo html::a('javascript:;', "<i class='icon icon-lg icon-edit-sign'> </i>", "class='text-info btn-editor'");?>
-        <?php if(isset($logo->webPath)) commonModel::printLink('ui', 'deleteLogo', '', "<i class='icon icon-lg icon-remove-sign'> </i>", "class='text-danger btn-deleter'");?>
-        </span>
-        <div class='text-important'>
-          <?php if($this->app->clientDevice == 'desktop') printf($lang->ui->suitableLogoSize, '50px-80px', '80px-240px');?>
-          <?php if($this->app->clientDevice == 'mobile') printf($lang->ui->suitableLogoSize, '<50px', '50px-200px');?>
-          <div class='hide'><?php echo html::file('logo', "class='form-control'");?></div>
-        </div>
+          <div class='card'>
+          <?php if(isset($logo->webPath)) echo html::a('javascript:;', html::image($logo->webPath, "class='logo'"), "class='btn-upload'");?>
+          <?php if(!isset($logo->webPath)) echo html::a('javascript:;', $lang->ui->uploadLogo, "class='text-lg btn-upload'");?>
+          </div>
+          <span class='actions'>
+          <?php if(isset($logo->webPath)) echo html::a('javascript:;', "<i class='icon icon-lg icon-edit-sign'> </i>", "class='text-info btn-editor'");?>
+          <?php if(isset($logo->webPath)) commonModel::printLink('ui', 'deleteLogo', '', "<i class='icon icon-lg icon-remove-sign'> </i>", "class='text-danger btn-deleter'");?>
+          </span>
+          <div class='text-important'>
+            <?php if($this->app->clientDevice == 'desktop') printf($lang->ui->suitableLogoSize, '50px-80px', '80px-240px');?>
+            <?php if($this->app->clientDevice == 'mobile') printf($lang->ui->suitableLogoSize, '<50px', '50px-200px');?>
+            <div class='hide'><?php echo html::file('logo', "class='form-control'");?></div>
+          </div>
         </div>
       </div>
       <div class='col-md-6'>
