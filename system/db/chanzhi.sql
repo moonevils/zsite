@@ -830,7 +830,7 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('product_browse', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"10","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
 ('product_view', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"10","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
 ('message_index', 'side', '[{"id":"10","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
-('blog_index', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('blog_index', 'side', '[{"id":"15","grid":"","titleless":0,"borderless":0},{"id":"8","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
 ('blog_view', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
 ('page_index', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0},{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"10","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
 ('page_view', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0},{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"10","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
@@ -844,7 +844,7 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('product_browse', 'side', '[{"id":"104","grid":"","titleless":0,"borderless":0},{"id":"107","grid":"","titleless":0,"borderless":0},{"id":"110","grid":"","titleless":0,"borderless":0}]', 'default','en'),
 ('product_view', 'side', '[{"id":"104","grid":"","titleless":0,"borderless":0},{"id":"107","grid":"","titleless":0,"borderless":0},{"id":"110","grid":"","titleless":0,"borderless":0}]', 'default','en'),
 ('message_index', 'side', '[{"id":"110","grid":"","titleless":0,"borderless":0}]', 'default','en'),
-('blog_index', 'side', '[{"id":"108","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('blog_index', 'side', '[{"id":"115","grid":"","titleless":0,"borderless":0},{"id":"108","grid":"","titleless":0,"borderless":0}]', 'default','en'),
 ('blog_view', 'side', '[{"id":"108","grid":"","titleless":0,"borderless":0}]', 'default','en'),
 ('page_index', 'side', '[{"id":"109","grid":"","titleless":0,"borderless":0},{"id":"102","grid":"","titleless":0,"borderless":0},{"id":"110","grid":"","titleless":0,"borderless":0}]', 'default','en'),
 ('page_view', 'side', '[{"id":"109","grid":"","titleless":0,"borderless":0},{"id":"102","grid":"","titleless":0,"borderless":0},{"id":"110","grid":"","titleless":0,"borderless":0}]', 'default','en'),
@@ -858,7 +858,7 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('product_browse', 'side', '[{"id":"204","grid":"","titleless":0,"borderless":0},{"id":"207","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
 ('product_view', 'side', '[{"id":"204","grid":"","titleless":0,"borderless":0},{"id":"207","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
 ('message_index', 'side', '[{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
-('blog_index', 'side', '[{"id":"208","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('blog_index', 'side', '[{"id":"215","grid":"","titleless":0,"borderless":0},{"id":"208","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
 ('blog_view', 'side', '[{"id":"208","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
 ('page_index', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
 ('page_view', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw');
@@ -888,7 +888,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (11, 'about', '公司简介', '', 'default','zh-cn'),
 (12, 'links', '友情链接', '', 'default','zh-cn'),
 (13, 'header', '网站头部', '', 'default','zh-cn'),
-(14, 'followUs', '关注我们', '', 'default','zh-cn');
+(14, 'followUs', '关注我们', '', 'default','zh-cn'),
+(15, 'subscribe', '订阅博客', '', 'default','zh-cn');
 
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (21, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'mobile','zh-cn'),
@@ -903,7 +904,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (30, 'contact', '联系我们', '', 'mobile','zh-cn'),
 (31, 'about', '公司简介', '', 'mobile','zh-cn'),
 (32, 'links', '友情链接', '', 'mobile','zh-cn'),
-(33, 'followUs', '关注我们', '', 'mobile','zh-cn');
+(33, 'followUs', '关注我们', '', 'mobile','zh-cn'),
+(34, 'subscribe', '订阅博客', '', 'mobile','zh-cn');
 
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (101, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default','en'),
@@ -919,7 +921,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (111, 'about', 'About Us', '', 'default','en'),
 (112, 'links', 'Link', '', 'default','en'),
 (113, 'header', 'Header', '', 'default','en'),
-(114, 'followUs', 'Follow Us', '', 'default','en');
+(114, 'followUs', 'Follow Us', '', 'default','en'),
+(115, 'subscribe', 'Subscribe', '', 'default','en');
 
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (121, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'mobile','en'),
@@ -934,7 +937,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (130, 'contact', 'Contact Us', '', 'mobile','en'),
 (131, 'about', 'About Us', '', 'mobile','en'),
 (132, 'links', 'Link', '', 'mobile','en'),
-(133, 'followUs', 'Follow Us', '', 'mobile','en');
+(133, 'followUs', 'Follow Us', '', 'mobile','en'),
+(134, 'subscribe', 'Subscribe', '', 'mobile','en');
 
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (201, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
@@ -950,7 +954,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (211, 'about', '公司簡介', '', 'default','zh-tw'),
 (212, 'links', '友情鏈接', '', 'default','zh-tw'),
 (213, 'header', '網站頭部', '', 'default','zh-tw'),
-(214, 'followUs', '關注我們', '', 'default','zh-tw');
+(214, 'followUs', '關注我們', '', 'default','zh-tw'),
+(215, 'subscribe', '訂閱博客', '', 'default','zh-tw');
 
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (221, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'mobile','zh-tw'),
@@ -965,7 +970,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (230, 'contact', '聯繫我們', '', 'mobile','zh-tw'),
 (231, 'about', '公司簡介', '', 'mobile','zh-tw'),
 (232, 'links', '友情鏈接', '', 'mobile','zh-tw'),
-(233, 'followUs', '關注我們', '', 'mobile','zh-tw');
+(233, 'followUs', '關注我們', '', 'mobile','zh-tw'),
+(234, 'subscribe', '訂閱博客', '', 'mobile','zh-tw');
 
 INSERT INTO `eps_group` (`id`, `name`, `role`, `desc`, `lang`) VALUES
 (1, '管理员', '', '拥有后台所有权限', 'zh-cn'),
