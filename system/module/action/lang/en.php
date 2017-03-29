@@ -23,7 +23,7 @@ $lang->action->objectTypes['order'] = 'Order';
 $lang->action->desc = new stdclass();
 $lang->action->desc->common            = '$date, <strong>$action</strong> by <strong>$actor</strong>' . "\n";
 $lang->action->desc->created           = '$date, created by <strong>$actor</strong>.';
-$lang->action->desc->paied             = '$date, paid by <strong>$actor</strong>.' . "\n";
+$lang->action->desc->paid              = '$date, paid by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->savedpayment      = '$date, saved payment by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->refunded          = '$date, refunded $extra by <strong>$actor</strong>.' . "\n";
 $lang->action->desc->deliveried        = '$date, deliveried by <strong>$actor</strong>.' . "\n";
@@ -36,7 +36,7 @@ $lang->action->desc->deleted           = '$date, 由 <strong>$actor</strong> 删
 /* The action labels. */
 $lang->action->label = new stdclass();
 $lang->action->label->created           = 'created';
-$lang->action->label->paied             = 'paid';
+$lang->action->label->paid              = 'paid';
 $lang->action->label->savedpayment      = 'saved payment';
 $lang->action->label->refunded          = 'refunded';
 $lang->action->label->deliveried        = 'deliveried';

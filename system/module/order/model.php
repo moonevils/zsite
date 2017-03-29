@@ -353,6 +353,7 @@ class orderModel extends model
             ->where('id')->eq($order->id)->exec();
 
         if(dao::isError()) return false;
+        $this->loadModel('action')->create('order', $order->id, 'Paid');
 
         if(is_callable(array($this, "process{$order->type}Order"))) call_user_func(array($this, "process{$order->type}Order"), $order);
         return true;
@@ -560,10 +561,6 @@ class orderModel extends model
                 echo $disabled ? html::a('javascript:;', $this->lang->order->return, "$disabled  class='$class'") : html::a(inlink('savepayment', "orderID=$order->id"), $this->lang->order->return, "{$toggle} class='$class'"); 
             }
 
-            /* Refund link. */
-            $disabled = ($order->deliveryStatus != 'confirmed' and $order->status == 'normal' and $order->payStatus == 'paid') ? '' : "disabled='disabled'"; 
-            echo $disabled ?  html::a('javascript:;', $this->lang->order->refund, "$disabled class='$class'") : html::a(helper::createLink('order', 'refund', "orderID=$order->id"), $this->lang->order->refund, "{$toggle} class='$class'");
-            
             /* Delete order link. */
             $disabled = ($order->status == 'expired' or $order->status == 'canceled' or $order->status == 'finished' or $order->payStatus == 'refunded') ? '' : "disabled='disabled'";
             echo $disabled ? html::a('javascript:;', $this->lang->order->delete, "$disabled class='$class'") : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, " class='$class deleter'"); 
@@ -617,6 +614,10 @@ class orderModel extends model
             /* Send link. */
             $disabled = ($order->status == 'normal' and $order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
             echo $disabled ?  html::a('javascript:;', $this->lang->order->delivery, "$disabled class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "{$toggle} class='$class'");
+
+            /* Refund link. */
+            $disabled = ($order->deliveryStatus != 'confirmed' and $order->status == 'normal' and $order->payStatus == 'paid') ? '' : "disabled='disabled'"; 
+            echo $disabled ?  html::a('javascript:;', $this->lang->order->refund, "$disabled class='$class'") : html::a(helper::createLink('order', 'refund', "orderID=$order->id"), $this->lang->order->refund, "{$toggle} class='$class'");
 
             /* Finish link. */
             $disabled = ($order->status == 'normal' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
@@ -1005,7 +1006,7 @@ class orderModel extends model
     {
         $this->dao->update(TABLE_ORDER)
             ->set('refundSN')->eq($this->post->sn)
-            ->set('deliveryStatus')->eq('refunded')
+            ->set('payStatus')->eq('refunded')
             ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();

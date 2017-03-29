@@ -177,8 +177,6 @@ class order extends control
             $result  = $this->order->setPayment($orderID, $payment);
             if(!$result) exit;
 
-            $this->loadModel('action')->create('order', $orderID, 'Paied');
-
             if($payment == 'COD')
             {
                 $this->locate(inlink('browse'));
