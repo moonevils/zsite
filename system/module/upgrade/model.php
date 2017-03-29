@@ -167,6 +167,7 @@ class upgradeModel extends model
             case '6_0':
                 $this->execSQL($this->getUpgradeFile('6.0'));
                 $this->addSubscribeBlock();
+                $this->addHeaderBlock();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2159,29 +2160,125 @@ class upgradeModel extends model
             $blockID = $this->dao->lastInsertID();
 
             $layouts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)
-                ->where('page')->eq('blog_index')
+                ->where('template')->eq('default')
+                ->andWhere('page')->eq('blog_index')
                 ->andWhere('region')->eq('side')
                 ->andWhere('lang')->eq($block['lang'])
                 ->fetchAll();
 
-            foreach($layouts as $layout)
+            if(empty($layouts))
             {
+                $blogBlocks = array();
                 $subscribeBlock = new stdclass();
                 $subscribeBlock->id         = $blockID;
                 $subscribeBlock->grid       = 0;
                 $subscribeBlock->titleless  = 0;
                 $subscribeBlock->borderless = 0;
+                $blogBlocks[] = $subscribeBlock;
 
-                $blogBlocks = json_decode($layout->blocks);
-                array_unshift($blogBlocks, $subscribeBlock);
+                $layout = new stdclass();
+                $layout->template = 'default';
+                $layout->plan     = '0';
+                $layout->page     = 'blog_index';
+                $layout->region   = 'side';
+                $layout->lang     = $block['lang'];
+                $layout->blocks   = helper::jsonEncode($blogBlocks);
 
-                $this->dao->setAutoLang(false)->update(TABLE_LAYOUT)->set('blocks')->eq(helper::jsonEncode($blogBlocks))
-                    ->where('template')->eq($layout->template)
-                    ->andWhere('plan')->eq($layout->plan)
-                    ->andWhere('page')->eq($layout->page)
-                    ->andWhere('region')->eq($layout->region)
-                    ->andWhere('lang')->eq($layout->lang)
-                    ->exec();
+                $this->dao->insert(TABLE_LAYOUT)->data($layout)->autoCheck()->exec();
+            }
+            else
+            {
+                foreach($layouts as $layout)
+                {
+                    $subscribeBlock = new stdclass();
+                    $subscribeBlock->id         = $blockID;
+                    $subscribeBlock->grid       = 0;
+                    $subscribeBlock->titleless  = 0;
+                    $subscribeBlock->borderless = 0;
+
+                    $blogBlocks = json_decode($layout->blocks);
+                    array_unshift($blogBlocks, $subscribeBlock);
+
+                    $this->dao->setAutoLang(false)->update(TABLE_LAYOUT)->set('blocks')->eq(helper::jsonEncode($blogBlocks))
+                        ->where('template')->eq($layout->template)
+                        ->andWhere('plan')->eq($layout->plan)
+                        ->andWhere('page')->eq($layout->page)
+                        ->andWhere('region')->eq($layout->region)
+                        ->andWhere('lang')->eq($layout->lang)
+                        ->exec();
+                }
+            }
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Add header block form mobile template.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function addHeaderBlock()
+    {
+        $blocks = array();
+        $blocks['zh-cn'] = array('type' => 'header', 'title' => '网站头部',  'content' => '', 'template' => 'mobile', 'lang' => 'zh-cn');
+        $blocks['en']    = array('type' => 'header', 'title' => 'Header', 'content' => '', 'template' => 'mobile', 'lang' => 'en');
+        $blocks['zh-tw'] = array('type' => 'header', 'title' => '網站頭部',  'content' => '', 'template' => 'mobile', 'lang' => 'zh-tw');
+
+        foreach($blocks as $block)
+        {
+            $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+            $blockID = $this->dao->lastInsertID();
+
+            $layouts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)
+                ->where('page')->eq('all')
+                ->andWhere('region')->eq('top')
+                ->andWhere('template')->eq('mobile')
+                ->andWhere('lang')->eq($block['lang'])
+                ->fetchAll();
+
+            if(empty($layouts))
+            {
+                $topBlocks = array();
+                $headerBlock = new stdclass();
+                $headerBlock->id         = $blockID;
+                $headerBlock->grid       = 0;
+                $headerBlock->titleless  = 0;
+                $headerBlock->borderless = 0;
+                $topBlocks[] = $headerBlock;
+
+                $layout = new stdclass();
+                $layout->template = 'mobile';
+                $layout->plan     = '0';
+                $layout->page     = 'all';
+                $layout->region   = 'top';
+                $layout->lang     = $block['lang'];
+                $layout->blocks   = helper::jsonEncode($topBlocks);
+
+                $this->dao->insert(TABLE_LAYOUT)->data($layout)->autoCheck()->exec();
+            }
+            else
+            {
+                foreach($layouts as $layout)
+                {
+                    $headerBlock = new stdclass();
+                    $headerBlock->id         = $blockID;
+                    $headerBlock->grid       = 0;
+                    $headerBlock->titleless  = 0;
+                    $headerBlock->borderless = 0;
+
+                    $topBlocks = json_decode($layout->blocks);
+                    array_unshift($topBlocks, $headerBlock);
+
+                    $this->dao->setAutoLang(false)->update(TABLE_LAYOUT)->set('blocks')->eq(helper::jsonEncode($topBlocks))
+                        ->where('template')->eq('mobile')
+                        ->andWhere('plan')->eq($layout->plan)
+                        ->andWhere('page')->eq('all')
+                        ->andWhere('region')->eq('top')
+                        ->andWhere('lang')->eq($layout->lang)
+                        ->exec();
+                }
             }
         }
 
