@@ -23,7 +23,7 @@ $lang->action->objectTypes['order'] = '订单';
 $lang->action->desc = new stdclass();
 $lang->action->desc->common            = '$date, <strong>$action</strong> by <strong>$actor</strong>' . "\n";
 $lang->action->desc->created           = '$date, 由 <strong>$actor</strong> 创建。' . "\n";
-$lang->action->desc->paied             = '$date, 由 <strong>$actor</strong> 付款。' . "\n";
+$lang->action->desc->paid              = '$date, 由 <strong>$actor</strong> 付款。' . "\n";
 $lang->action->desc->savedpayment      = '$date, 由 <strong>$actor</strong> 收款。' . "\n";
 $lang->action->desc->refunded          = '$date, 由 <strong>$actor</strong> 退款$extra。' . "\n";
 $lang->action->desc->deliveried        = '$date, 由 <strong>$actor</strong> 发货' . "\n";
@@ -36,7 +36,7 @@ $lang->action->desc->deleted           = '$date, 由 <strong>$actor</strong> 删
 /* 用来显示动态信息。*/
 $lang->action->label = new stdclass();
 $lang->action->label->created           = '创建了';
-$lang->action->label->paied             = '付款';
+$lang->action->label->paid              = '付款';
 $lang->action->label->savedpayment      = '收款';
 $lang->action->label->refunded          = '退款';
 $lang->action->label->deliveried        = '发货';
