@@ -16,6 +16,7 @@ $(function()
         $('#' + $(this).data('mode') + 'Mode').show();
         $.cookie('productViewType', $(this).data('mode'), {path: "/"});
     })
+
     var type = $.cookie('productViewType');
     if(typeof(type) == 'undefined' || type == '') type = 'card';
     $('#modeControl').find('[data-mode=' + type +']').click();
@@ -44,7 +45,7 @@ $(function()
     {
         $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortUp');
     }
-    if
+    else 
     {
         $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortDown');
     }
