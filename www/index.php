@@ -21,7 +21,7 @@ define('RUN_MODE', 'front');
 /* Load the framework. */
 include 'loader.php';
 
-if(isset($_GET['requestType']) && $_GET['requestType'] == 'pathinfo') die(true);
+if(isset($_GET['requestType']) && $_GET['requestType'] == 'pathinfo') die('pathinfo');
 
 /* Instance the app and run it. */
 $app = router::createApp('chanzhi', $systemRoot);
