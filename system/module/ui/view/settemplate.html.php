@@ -30,7 +30,7 @@
       <div class='col-theme'>
         <div class='card theme <?php if($isCurrent) echo 'current';?>' data-url='<?php echo $url?>'>
           <i class='icon-ok icon'></i>
-          <?php echo html::a($url, html::image($themeRoot . $code . '/preview.png'), "class='media-wrapper theme-img'");?>
+          <?php echo html::a($url, html::image($webRoot . 'theme/' . $template['code'] . '/' . $code . '/preview.png'), "class='media-wrapper theme-img'");?>
           <div class='text-center theme-name text-ellipsis'>
             <?php echo $theme;?>
           </div>
