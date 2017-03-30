@@ -84,7 +84,7 @@ class install extends control
         $result = $http->get($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/pathinfo.php?requestType=pathinfo');
 
         $this->view->title       = $this->lang->install->setConfig;
-        $this->view->requestType = $result === true ? 'PATH_INFO' : 'PATH_INFO2';
+        $this->view->requestType = $result == 'pathinfo' ? 'PATH_INFO' : 'PATH_INFO2';
         $this->display();
     }
 
