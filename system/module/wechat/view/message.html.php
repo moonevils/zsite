@@ -38,7 +38,7 @@
       <tr class='text-center'>
         <td class='w-100px text-right'><?php echo zget($message, 'fromUserName', $message->wid) . $lang->colon;?></td>
         <td class='text-left'><?php echo $message->content;?></td>
-        <td><?php echo $lang->wechat->message->typeList[$message->type];?></td>
+        <td><?php echo zget($lang->wechat->message->typeList, $message->type);?></td>
         <td><?php echo $message->time;?></td>
         <td>
           <?php if($message->type != 'unsubscribe' and $replyPriv) echo html::a(inlink('reply', "message={$message->id}"), $lang->wechat->message->reply, "data-toggle=modal");?>

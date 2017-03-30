@@ -16,7 +16,7 @@ $groupID = !empty($block->content->group) ? $block->content->group : '';
 $slides  = $this->loadModel('slide')->getList($groupID);
 $slideId = 'slide' . $block->id . '-' . $groupID;
 $group   = $this->loadModel('tree')->getByID($groupID);
-$globalButtons = $group->desc ? json_decode($group->desc, true) : array();
+$globalButtons = !empty($group->desc) ? json_decode($group->desc, true) : array();
 $slideStyle    = !empty($block->content->style) ? $block->content->style : 'carousel';
 if($slides):
 ?>
