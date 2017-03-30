@@ -674,8 +674,18 @@ class baseDAO
         /* If any error, return an empty statement object to make sure the remain method to execute. */
         if(!empty(dao::$errors)) return new PDOStatement();   
 
-        if($sql) $this->sqlobj->sql = $sql;
-        $sql = $this->processSQL();
+        if($sql)
+        {
+            $sql       = trim($sql);
+            $sqlMethod = strtolower(substr($sql, 0, strpos($sql, ' ')));
+            $this->setMethod($sqlMethod);
+            $this->sqlobj = new sql();
+            $this->sqlobj->sql = $sql;
+        }
+        else
+        {
+            $sql = $this->processSQL();
+        }
         $key = md5($sql);
 
         try
@@ -685,7 +695,7 @@ class baseDAO
 
             if($this->slaveDBH and $method == 'select')
             {
-                if(isset(dao::$cache['dbh'][$key])) return dao::$cache[$key];
+                if(isset(dao::$cache[$key])) return dao::$cache[$key];
                 $result = $this->slaveDBH->query($sql);
                 dao::$cache[$key] = $result;
                 return $result;
@@ -694,9 +704,9 @@ class baseDAO
             {
                 if($this->method == 'select')
                 {
-                    if(isset(dao::$cache['dbh'][$key])) return dao::$cache[$key];
+                    if(isset(dao::$cache[$key])) return dao::$cache[$key];
                     $result = $this->slaveDBH->query($sql);
-                    dao::$cache['dbh'][$key] = $result;
+                    dao::$cache[$key] = $result;
                     return $result;
                 }
 
@@ -747,8 +757,15 @@ class baseDAO
     {
         if(!empty(dao::$errors)) return new PDOStatement();   // If any error, return an empty statement object to make sure the remain method to execute.
 
-        if($sql) $this->sqlobj->sql = $sql;
-        $sql = $this->processSQL();
+        if($sql)
+        {
+            $this->sqlobj = new sql();
+            $this->sqlobj->sql = $sql;
+        }
+        else
+        {
+            $sql = $this->processSQL();
+        }
 
         try
         {
@@ -775,13 +792,9 @@ class baseDAO
     public function fetch($field = '')
     {
         if(empty($field)) return $this->query()->fetch();
-
         $this->setFields($field);
         $result = $this->query()->fetch(PDO::FETCH_OBJ);
-        if($result)
-        {
-            return $result->$field;
-        }
+        if($result) return $result->$field;
     }
 
     /**
@@ -1904,14 +1917,14 @@ class baseSQL
     {
         if($this->inCondition and !$this->conditionIsTrue) return $this;
 
-        $order = str_replace(array('|', '', '_'), ' ', $order);
+        $order = str_replace(array('|', '', '_'), ' ', $order);
+        if(!preg_match('/^(`\w+`|\w+)( +(desc|asc))?( *(, *(`\w+`|\w+)( +(desc|asc))?)?)*$/i', $order))die("Order is bad request, The order is $order");
 
         /* Add "`" in order string. */
         /* When order has limit string. */
-        $pos      = stripos($order, 'limit');
-        $instrpos = stripos($order, 'instr');
-        $orders   = $pos ? substr($order, 0, $pos) : $order;
-        $limit    = $pos ? substr($order, $pos) : '';
+        $pos    = stripos($order, 'limit');
+        $orders = $pos ? substr($order, 0, $pos) : $order;
+        $limit  = $pos ? substr($order, $pos) : '';
 
         $orders = explode(',', $orders);
         foreach($orders as $i => $order)
@@ -1921,17 +1934,17 @@ class baseSQL
             {
                 $value = trim($value);
                 if(empty($value) or strtolower($value) == 'desc' or strtolower($value) == 'asc') continue;
-                $field = trim($value, '`');
 
+                $field = $value;
                 /* such as t1.id field. */
                 if(strpos($value, '.') !== false) list($table, $field) = explode('.', $field);
-                /* Ignore order with function e.g. order by length(tag) asc. */
-                if($instrpos === false && strpos($field, '(') === false) $field = "`$field`";
+                if(strpos($field, '`') === false) $field = "`$field`";
 
                 $orderParse[$key] = isset($table) ? $table . '.' . $field :  $field;
                 unset($table);
             }
             $orders[$i] = join(' ', $orderParse);
+            if(empty($orders[$i])) unset($orders[$i]);
         }
         $order = join(',', $orders) . ' ' . $limit;
 
@@ -1951,7 +1964,11 @@ class baseSQL
     {
         if($this->inCondition and !$this->conditionIsTrue) return $this;
         if(empty($limit)) return $this;
-        stripos($limit, 'limit') !== false ? $this->sql .= " $limit " : $this->sql .= ' ' . DAO::LIMIT . " $limit ";
+
+        /* filter limit. */
+        $limit = trim(str_ireplace('limit', '', $limit));
+        if(!preg_match('/^[0-9]+ *(, *[0-9]+)?$/', $limit)) die("Limit is bad query, The limit is $limit");
+        $this->sql .= ' ' . DAO::LIMIT . " $limit ";
         return $this;
     }
 
