@@ -40,7 +40,7 @@ class tagModel extends model
     public function addLink($content)
     {
         /* Get tags order by tag length desc. */
-        $tags = $this->dao->select('*')->from(TABLE_TAG)->where('link')->ne('')->orderBy('length(tag)_desc')->fetchAll('id');
+        $tags = $this->dao->select('*, length(tag) as length')->from(TABLE_TAG)->where('link')->ne('')->orderBy('length_desc')->fetchAll('id');
 
         /* Mark tags need to added link. */
         foreach($tags as $tag) $content = $this->markTag($content, $tag);
