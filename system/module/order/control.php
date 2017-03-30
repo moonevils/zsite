@@ -390,7 +390,7 @@ class order extends control
         {
             $result = $this->order->refund($orderID);
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
         }
 
         $this->view->title = $this->lang->order->refund;
