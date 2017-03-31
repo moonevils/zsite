@@ -23,8 +23,8 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
       <header id='articleHeader'>
         <h2><?php echo $category->name;?></h2>
         <?php 
-          echo "<div class='header'>" . html::a('javascript:;', $lang->article->common . $lang->article->id, "id='id' class='id setOrder'") . "</div>";
-          echo "<div class='header'>" . html::a('javascript:;', $lang->article->viewsCount, "id='views' class='views setOrder'") . "</div>";
+        echo "<div class='header'>" . html::a('javascript:;', $lang->article->common . $lang->article->id, "id='id' class='id setOrder'") . "</div>";
+        echo "<div class='header'>" . html::a('javascript:;', $lang->article->viewsCount, "id='views' class='views setOrder'") . "</div>";
         ?>
       </header>
       <section class='items items-hover' id='articles'>
