@@ -172,10 +172,12 @@ class replyModel extends model
             }
             else
             {
-                $url = helper::createLink('user', 'login', "referer=helper::safe64Encode($this->app->getURI(true) . '#' . $data->id)");
+                $referer = helper::safe64Encode($this->app->getURI(true) . '#' . $data->id);
+                $url = helper::createLink('user', 'login', "referer=$referer");
                 echo "<a data-reply='{$data->id}' href='{$url}' class='thread-reply-btn'><i class='icon-reply'></i> {$this->lang->reply->common}</a>";
             }
             echo "</div></div><hr>";
+
             $this->getByReply($data);
         }
         if(!$reply->reply) echo "</div>";
