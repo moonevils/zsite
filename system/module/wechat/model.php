@@ -853,14 +853,16 @@ class wechatModel extends model
 
         $this->dao->update(TABLE_WX_MESSAGE)->set('replied')->eq('1')->where('id')->eq($message->id)->exec();
 
+        $wid = !empty($message->wid) ? $message->wid : $message->id;
         $this->dao->insert(TABLE_WX_MESSAGE)
             ->set('public')->eq($message->public)
-            ->set('wid')->eq($message->wid)
+            ->set('wid')->eq($wid)
             ->set('`from`')->eq($this->app->user->account)
             ->set('to')->eq($message->from)
             ->set('content')->eq($this->post->content)
             ->set('type')->eq('reply')
             ->set('time')->eq(helper::now())
+            ->set('lang')->eq($this->app->clientLang)
             ->autoCheck()
             ->exec();
 
@@ -882,7 +884,8 @@ class wechatModel extends model
 
         foreach($records as $record)
         {
-             if(isset($replies[$record->wid])) $record->replies = $replies[$record->wid];
+             $wid = $record->wid ? $record->wid : $record->id;
+             if(isset($replies[$wid]) and $record->replied) $record->replies = $replies[$wid];
         }
         return $records;
     }
