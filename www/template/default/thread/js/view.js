@@ -13,19 +13,15 @@ $(document).ready(function()
                     {  
                         lastPage:
                         {  
-                            label:     v.toLastPage,
+                            label:     v.viewReplies,
                             className: 'btn-primary',  
                             callback:  function(){location.href = response.locate;}  
                         },
                         back:
                         {  
-                            label:     v.goback,  
+                            label:     v.stayCurrent,  
                             className: 'btn-primary',  
-                            callback:  function()
-                                       {
-                                           if(response.replyID == 0) location.href = removeAnchor(location.href);
-                                           if(response.replyID != 0) location.href = removeAnchor(location.href) + '#' + response.replyID;
-                                       }  
+                            callback:  function(){location.href = removeAnchor(location.href);}  
                         }  
                     }  
                 });
