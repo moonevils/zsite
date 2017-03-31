@@ -252,7 +252,7 @@ class articleModel extends model
                 ->andWhere('t1.status')->eq('normal')
                 ->fi()
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-                ->orderBy('t1.sticky_desc, t1.addedDate_desc')
+                ->orderBy('sticky_desc, addedDate_desc')
                 ->fetchAll('id');
 
         if(!$sticks) return array();
@@ -337,7 +337,7 @@ class articleModel extends model
            ->where('t2.category')->eq($category)
            ->andWhere('t1.status')->eq('normal')
            ->andWhere('t1.addedDate')->lt($current->addedDate)
-           ->orderBy('t1.addedDate_desc')
+           ->orderBy('addedDate_desc')
            ->limit(1)
            ->fetch();
 
@@ -347,7 +347,7 @@ class articleModel extends model
            ->andWhere('t1.addedDate')->le(helper::now())
            ->andWhere('t1.status')->eq('normal')
            ->andWhere('t1.addedDate')->gt($current->addedDate)
-           ->orderBy('t1.addedDate')
+           ->orderBy('addedDate')
            ->limit(1)
            ->fetch();
 

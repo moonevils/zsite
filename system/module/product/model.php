@@ -238,7 +238,7 @@ class productModel extends model
            ->where('t2.category')->eq($category)
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
            ->andWhere('t1.order')->lt($current)
-           ->orderBy('t1.order_desc')
+           ->orderBy('order_desc')
            ->limit(1)
            ->fetch();
 
@@ -247,7 +247,7 @@ class productModel extends model
            ->where('t2.category')->eq($category)
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
            ->andWhere('t1.order')->gt($current)
-           ->orderBy('t1.order')
+           ->orderBy('order')
            ->limit(1)
            ->fetch();
 
