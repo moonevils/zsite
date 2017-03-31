@@ -11,7 +11,7 @@
 */
 ?>
 <?php $publicList = $this->loadModel('wechat')->getList();?>
-<?php if(empty($publicList)):?>
+<?php if(!empty($publicList)):?>
 <tr>
   <th><?php echo $lang->block->image;?></th>
   <td>

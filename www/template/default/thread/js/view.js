@@ -4,25 +4,36 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            bootbox.dialog(
-            {  
-                message: response.replySuccess,  
-                buttons:
+            if(v.discussion == '0' || (v.discussion == '1' && response.replyID == 0))
+            {
+                bootbox.dialog(
                 {  
-                    lastPage:
+                    message: response.replySuccess,  
+                    buttons:
                     {  
-                        label:     v.toLastPage,
-                        className: 'btn-primary',  
-                        callback:  function(){location.href = response.locate;}  
-                    },
-                    back:
-                    {  
-                        label:     v.goback,  
-                        className: 'btn-primary',  
-                        callback:  function(){location.href = removeAnchor(location.href) + '#' + response.replyID;}  
+                        lastPage:
+                        {  
+                            label:     v.toLastPage,
+                            className: 'btn-primary',  
+                            callback:  function(){location.href = response.locate;}  
+                        },
+                        back:
+                        {  
+                            label:     v.goback,  
+                            className: 'btn-primary',  
+                            callback:  function()
+                                       {
+                                           if(response.replyID == 0) location.href = removeAnchor(location.href);
+                                           if(response.replyID != 0) location.href = removeAnchor(location.href) + '#' + response.replyID;
+                                       }  
+                        }  
                     }  
-                }  
-            });
+                });
+            }
+            else
+            {
+                setTimeout(function(){ location.href = response.locate;}, 1200);
+            }
         }
         else
         {
