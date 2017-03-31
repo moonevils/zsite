@@ -12,8 +12,8 @@
 include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/kindeditor.html.php';
 
-js::set('toLastPage', $lang->thread->toLastPage);
-js::set('goback', $lang->thread->goback);
+js::set('viewReplies', $lang->thread->viewReplies);
+js::set('stayCurrent', $lang->thread->stayCurrent);
 js::set('quoteTitle', $lang->thread->quoteTitle);
 js::set('discussion', $thread->discussion);
 
