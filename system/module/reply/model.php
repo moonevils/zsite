@@ -39,8 +39,10 @@ class replyModel extends model
         $reply = $this->getByID($replyID);
         if(!$reply) return '';
 
+        $thread = $this->loadModel('thread')->getByID($reply->thread);
         $replies = $this->dao->select('COUNT(id) as id')->from(TABLE_REPLY)
             ->where('thread')->eq($reply->thread)
+            ->beginIF($thread->discussion)->andWhere('reply')->eq(0)->fi()
             ->andWhere('id')->lt($replyID)
             ->andWhere('hidden')->eq('0')
             ->fetch('id');
