@@ -280,7 +280,7 @@ class searchModel extends model
                     ->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")
                     ->where('t2.type')->in('article,video')
                     ->beginIF($lastID)->andWhere('t1.id')->gt($lastID)->fi()
-                    ->orderBy('t1.id')
+                    ->orderBy('id')
                     ->limit($limit)
                     ->fetchAll('id');
 
