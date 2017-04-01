@@ -24,6 +24,11 @@
         </div>
       </div>
       <section class='card-content article-content'><?php echo $reply->content;?></section>
+      <section>
+        <?php if($thread->discussion):?>
+        <?php $this->reply->getByReply($reply);?>
+        <?php endif;?>
+      </section>
       <?php if(!empty($reply->files)):?>
       <div class='card-content'><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?></div>
       <?php endif;?>
@@ -71,6 +76,7 @@
           echo html::hidden('recTotal',   $pager->recTotal);
           echo html::hidden('recPerPage', $pager->recPerPage);
           echo html::hidden('pageID',     $pager->pageTotal);
+          echo html::hidden('reply',      0);
           ?>
         </form>
       </div>
@@ -104,6 +110,11 @@ $(function()
             $replyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
     }});
+
+    $('.thread-reply-btn').click(function()
+    {
+        if($(this).data('reply')) $('input[name=reply]').val($(this).data('reply'));
+    })
 });
 </script>
 <?php endif;?>
