@@ -1,18 +1,22 @@
-<?php $i = 1 + ($pager->pageID - 1) * $pager->recPerPage;?>
 <?php foreach($replies as $reply):?>
-<div id = "<?php echo $reply->id;?>" class="panel panel thread reply <?php echo $i%2!=0?'striped':'';?>">
+<?php $floor = $floors[$reply->id];?>
+<div id = "<?php echo $reply->id;?>" class="panel panel thread reply <?php echo $floor%2!=0?'striped':'';?>">
   <div class='panel-heading'>
     <div class='panel-actions'>
-      <?php $i++;?>
-      <strong><?php if($i > 3) echo '#' . $i;?></strong>
-      <?php echo html::a('', '', "name=$i");?>
-      <?php if($i == 2):?>
+      <strong><?php if($floor > 2) echo '#' . $floor;?></strong>
+      <?php echo html::a('', '', "name=$floor");?>
+      <?php if($floor == 1):?>
       <strong class='text-danger'><?php echo $lang->reply->sofa;?></strong>
-      <?php elseif($i == 3):?>
+      <?php elseif($floor == 2):?>
       <strong class='text-success'><?php echo $lang->reply->stool;?></strong>
       <?php endif;?>
     </div>
-    <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?></span>
+    <span class='muted'>
+      <i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?>
+      <?php if(!$thread->discussion and $reply->reply):?>
+      <strong><?php echo ' 回复#' . $floors[$reply->reply];?></strong>
+      <?php endif;?>
+    </span>
   </div>
   <table class='table'>
     <tr>

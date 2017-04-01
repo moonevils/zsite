@@ -114,6 +114,28 @@ class replyModel extends model
     }
 
     /**
+     * Get floors for replies.
+     * 
+     * @param  int    $threadID 
+     * @access public
+     * @return array
+     */
+    public function getFloors($threadID)
+    {
+        $replies = $this->dao->select('*')->from(TABLE_REPLY)->where('thread')->eq($threadID)->orderBy('id')->fetchAll('id');
+
+        $i = 1;
+        $floors = array();
+        foreach($replies as $reply)
+        {
+            $floors[$reply->id] = $i;
+            $i++;
+        }
+
+        return $floors;
+    }
+
+    /**
      * Get replies by reply.
      * 
      * @param  object    $reply 
