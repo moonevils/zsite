@@ -139,17 +139,14 @@ class replyModel extends model
 
         if(!$reply->reply) echo "<div class='alert alert-replies'>";
 
-        foreach($replies as $reply)
-        {
-            if(strpos($reply->content, '[quote]') !== false)
-            {
-                $reply->content = str_replace('[quote]', "<div class='alert alert-primary'>", $reply->content);
-                $reply->content = str_replace('[/quote]', '</div>', $reply->content);
-            }
-        }
-
         foreach($replies as $data)
         {
+            if(strpos($data->content, '[quote]') !== false)
+            {
+                $data->content = str_replace('[quote]', "<div class='alert alert-primary'>", $data->content);
+                $data->content = str_replace('[/quote]', '</div>', $data->content);
+            }
+
             echo "<div class='thread-content'><span class='reply-author text-primary'>" . zget($users, $data->author) . $this->lang->colon . "</span><div class='reply-content'>" . $data->content . '</div>';
             if(!empty($data->files))
             {
@@ -178,7 +175,13 @@ class replyModel extends model
             }
             echo "</div></div><hr>";
 
-            $this->getByReply($data);
+            $replies = $this->dao->select('*')->from(TABLE_REPLY)->where('reply')->eq($data->id)->orderBy('id')->fetchAll('id');
+            if($replies)
+            {
+                if(!$reply->reply) echo "<div class='second-replies'>";
+                $this->getByReply($data);
+                if(!$reply->reply) echo "</div>";
+            }
         }
         if(!$reply->reply) echo "</div>";
     }
@@ -220,7 +223,7 @@ class replyModel extends model
         $replies = $this->dao->select('t1.*, t2.title')->from(TABLE_REPLY)->alias('t1')
             ->leftJoin(TABLE_THREAD)->alias('t2')->on('t1.thread = t2.id')
             ->where('t1.author')->eq($account)
-            ->orderBy('t1.id desc')
+            ->orderBy('id desc')
             ->page($pager)
             ->fetchAll('id');
         return $replies;
