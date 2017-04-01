@@ -1,19 +1,27 @@
 <div class='panel panel-section' id='repliesListWrapper'>
   <div id='repliesList' class='panel-body cards cards-list'>
-    <?php $i = 2 + ($pager->pageID - 1) * $pager->recPerPage;?>
     <?php foreach($replies as $reply):?>
+    <?php $floor = $floors[$reply->id];?>
     <div class='card thread reply' id='<?php echo $reply->id;?>'>
       <div class='card-heading'>
         <div class='pull-right'>
-          <?php if($i > 3):?>
-          <strong class='level-number'>#<?php echo $i; ?></strong>
-          <?php elseif($i === 2): ?>
+          <?php if($floor > 2):?>
+          <strong class='level-number'>#<?php echo $floor; ?></strong>
+          <?php elseif($floor === 1): ?>
           <strong class='level-number'><?php echo $lang->reply->sofa;?></strong>
-          <?php elseif($i === 3): ?>
+          <?php elseif($floor === 2): ?>
           <strong class='level-number'><?php echo $lang->reply->stool;?></strong>
           <?php endif; ?>
         </div>
-        <div><span class='reply-time'><i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?></span> &nbsp;&nbsp; <span class='reply-user<?php if($this->app->user->account == $reply->author) echo ' text-danger'; ?>'><i class='icon-user'></i> <?php echo isset($speakers[$reply->author]) ? $speakers[$reply->author]->realname : $reply->author ?></span></div>
+        <div>
+          <span class='reply-time'>
+            <i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?>
+            <?php if(!$thread->discussion and $reply->reply) echo sprintf($lang->thread->replyFloor, zget($floors, $reply->reply));?>
+          </span> &nbsp;&nbsp; 
+          <span class='reply-user<?php if($this->app->user->account == $reply->author) echo ' text-danger'; ?>'>
+            <i class='icon-user'></i> <?php echo isset($speakers[$reply->author]) ? $speakers[$reply->author]->realname : $reply->author ?>
+          </span>
+        </div>
       </div>
       <section class='card-content article-content'><?php echo $reply->content;?></section>
       <?php if(!empty($reply->files)):?>
@@ -38,7 +46,6 @@
         </div>
       </div>
     </div>
-    <?php $i++;?>
     <?php endforeach;?>
     <?php $pager->show('justify');?>
     <hr class='space' id='bottomSpace'>
