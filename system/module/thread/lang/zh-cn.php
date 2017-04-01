@@ -71,6 +71,7 @@ $lang->thread->replySuccess    = '回帖成功。';
 $lang->thread->viewReplies     = '查看回帖内容';
 $lang->thread->stayCurrent     = '留在当前页面';
 $lang->thread->quoteTitle      = "<div class='quote-title'>原帖由 %s 于 %s 发表</div>";    
+$lang->thread->replyFloor      = "回复<strong>#%s</strong>";    
 
 $lang->thread->score    = '奖励积分';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";

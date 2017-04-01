@@ -14,7 +14,7 @@
     <span class='muted'>
       <i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?>
       <?php if(!$thread->discussion and $reply->reply):?>
-      <strong><?php echo ' 回复#' . $floors[$reply->reply];?></strong>
+      <?php echo sprintf($lang->thread->replyFloor, zget($floors, $reply->reply));?>
       <?php endif;?>
     </span>
   </div>
