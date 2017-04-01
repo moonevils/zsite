@@ -174,6 +174,7 @@ class thread extends control
         $this->view->board      = $board;
         $this->view->thread     = $thread;
         $this->view->replies    = $replies;
+        $this->view->floors     = $this->reply->getFloors($thread->id);
         $this->view->pager      = $pager;
         $this->view->speakers   = $speakers;
         $this->view->mobileURL  = helper::createLink('thread', 'view', "threadID=$threadID&pageID=$pageID", '', 'mhtml');
