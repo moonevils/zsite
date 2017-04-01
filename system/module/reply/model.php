@@ -179,15 +179,34 @@ class replyModel extends model
             echo "<div class='text-right reply-actions'><span class='text-muted reply-date'>" . formatTime($data->addedDate, 'Y-m-d') . "</span>";
             if($this->app->user->account != 'guest')
             {
-                if(commonModel::isAvailable('score') and $canManage)
+                if(commonModel::isAvailable('score') and $canManage and $this->app->clientDevice == 'desktop')
                 {
                     $account = helper::safe64Encode($data->author);
                     echo html::a(inlink('addScore', "account={$account}&objectType=reply&objectID={$data->id}"), $this->lang->thread->score, "data-toggle=modal");
                 }
-                if($canManage) echo html::a(helper::createLink('reply', 'delete', "replyID=$data->id"), '<i class="icon-trash"></i> ' . $this->lang->delete, "class='deleter'");
-                if($canManage) echo html::a(helper::createLink('reply', 'edit',   "replyID=$data->id"), '<i class="icon-pencil"></i> ' . $this->lang->edit);
-                echo "<a href='#reply' data-reply='{$data->id}' class='thread-reply-btn'><i class='icon-reply'></i> {$this->lang->reply->common} </a>";
-                echo "<a href='#reply' data-reply='{$data->id}' class='thread-reply-btn quote'><i class='icon-quote-left'></i> {$this->lang->thread->quote} </a>";
+                if($this->app->clientDevice == 'mobile')
+                {
+                    if($canManage) echo html::a(helper::createLink('reply', 'delete', "replyID=$data->id"), '<i class="icon-trash"></i> ' . $this->lang->delete, "class='deleter text-muted'");
+                    if($canManage) echo html::a(helper::createLink('reply', 'edit',   "replyID=$data->id"), '<i class="icon-pencil"></i> ' . $this->lang->edit, "data-toggle='modal' class='text-muted'");
+                }
+                else
+                {
+                    if($canManage) echo html::a(helper::createLink('reply', 'delete', "replyID=$data->id"), '<i class="icon-trash"></i> ' . $this->lang->delete, "class='deleter'");
+                    if($canManage) echo html::a(helper::createLink('reply', 'edit',   "replyID=$data->id"), '<i class="icon-pencil"></i> ' . $this->lang->edit);
+                }
+                if(!$thread->readonly)
+                {
+                    if($this->app->clientDevice == 'mobile')
+                    {
+                        echo "<a href='#replyDialog' data-toggle='modal' data-reply='{$data->id}' class='text-muted thread-reply-btn'><i class='icon-reply'></i> {$this->lang->reply->common} </a>";
+                        echo "<a href='#replyDialog' data-toggle='modal' data-reply='{$data->id}' class='text-muted thread-reply-btn quote'><i class='icon-quote-left'></i> {$this->lang->thread->quote} </a>";
+                    }
+                    else
+                    {
+                        echo "<a href='#reply' data-reply='{$data->id}' class='thread-reply-btn'><i class='icon-reply'></i> {$this->lang->reply->common} </a>";
+                        echo "<a href='#reply' data-reply='{$data->id}' class='thread-reply-btn quote'><i class='icon-quote-left'></i> {$this->lang->thread->quote} </a>";
+                    }
+                }
             }
             else
             {

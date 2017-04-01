@@ -13,6 +13,9 @@
 <?php
 include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 include TPL_ROOT . 'common/files.html.php';
+
+js::set('quoteTitle', $lang->thread->quoteTitle);
+js::set('discussion', $thread->discussion);
 ?>
 <div class='block-region region-top blocks' data-region='thread_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'thread_view', 'top');?></div>
 <hr class='space'>
