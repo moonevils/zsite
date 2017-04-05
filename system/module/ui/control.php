@@ -183,10 +183,15 @@ class ui extends control
         /* Get configs of list number. */
         $this->app->loadModuleConfig('file');
         $this->app->loadLang('file');
-        if(strpos($this->config->site->modules, 'article') !== false) $this->app->loadModuleConfig('article');
         if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadModuleConfig('product');
         if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
         if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadModuleConfig('message');
+
+        if(strpos($this->config->site->modules, 'article') !== false)
+        {
+            $this->app->loadModuleConfig('article');
+            $this->app->loadLang('article');
+        }
         if(strpos($this->config->site->modules, 'forum') !== false)
         {
             $this->app->loadModuleConfig('forum');
@@ -205,19 +210,25 @@ class ui extends control
                     if(!copy($this->config->cdn->host . 'fonts/simhei.ttf', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
                 }
             }
-                
-            $result = $this->loadModel('setting')->setItems('system.common.file', $this->post->files);
+
+            $result = $this->loadModel('setting')->setItems('system.blog', $this->post->blog);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
+            $result = $this->loadModel('setting')->setItems('system.article', $this->post->article);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+                
             $thumbs = helper::jsonEncode($this->post->thumbs);
             $result = $this->loadModel('setting')->setItem('system.common.file.thumbs', $thumbs);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $result = $this->loadModel('setting')->setItems('system.common.file', $this->post->files);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             $setting = fixer::input('post')->get('productView,QRCode');
             $result  = $this->loadModel('setting')->setItems('system.common.ui', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            $setting = fixer::input('post')->remove('productView,QRCode,thumbs,files')->get();
+            $setting = fixer::input('post')->remove('productView,QRCode,blog,article,thumbs,files')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));

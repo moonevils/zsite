@@ -553,35 +553,4 @@ class article extends control
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submission&tab=feedback")));
     }
-    
-    /**
-     * Setting.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setting($type = 'blog')
-    {
-        if($type == 'blog' or $type == 'article')
-        {
-            $this->lang->article->menu = $this->lang->$type->menu;
-            $this->lang->menuGroups->article = $type;
-
-            if($_POST)
-            {
-                $data = fixer::input('post')->get();
-                $this->loadModel('setting')->setItems("system.$type", $data);
-                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-            }
-
-            $this->view->title = $this->lang->setting; 
-            $this->view->type  = $type;
-            $this->display();
-        }
-        else
-        {
-            $this->locate(inlink('admin'));
-        }
-    }
 }

@@ -65,13 +65,13 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
                 if($config->blog->categoryLevel == 'first')
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty(zget($topCategoryList, $stick->category->id)->abbr)) ? zget($topCategoryList, $stick->category->id)->name : zget($topCategoryList, $stick->category->id)->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty(zget($topCategoryList, $stick->category->id)->abbr)) ? zget($topCategoryList, $stick->category->id)->name : zget($topCategoryList, $stick->category->id)->abbr;
                     echo "]</span>";
                 }
                 else
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty($stick->category->abbr)) ? $stick->category->name : $stick->category->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty($stick->category->abbr)) ? $stick->category->name : $stick->category->abbr;
                     echo "]</span>";
                 } 
               }            
@@ -109,13 +109,13 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
                 if($config->blog->categoryLevel == 'first')
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty(zget($topCategoryList, $article->category->id)->abbr)) ? zget($topCategoryList, $article->category->id)->name : zget($topCategoryList, $article->category->id)->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty(zget($topCategoryList, $article->category->id)->abbr)) ? zget($topCategoryList, $article->category->id)->name : zget($topCategoryList, $article->category->id)->abbr;
                     echo "]</span>";
                 }
                 else
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty($article->category->abbr)) ? $article->category->name : $article->category->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty($article->category->abbr)) ? $article->category->name : $article->category->abbr;
                     echo "]</span>";
                 } 
               }            

@@ -97,6 +97,52 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <td><?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?></td><td></td>
             </tr>
             <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
+            <tr>
+              <th><?php echo $lang->article->blog->category;?></th>
+              <td><?php echo html::radio('blog[showCategory]', $lang->article->blog->categoryList, isset($this->config->blog->showCategory) ? $this->config->blog->showCategory : '0');?></td>
+              <td></td>
+            </tr>
+            <tr class='blog-setting <?php echo (!isset($this->config->blog->showCategory) || !$this->config->blog->showCategory) ? "hide" : "";?>'>
+              <th><?php echo $lang->article->blog->category;?></th>
+              <td>
+                <div class='input-group'>
+                  <?php echo html::select('blog[categoryName]', $lang->article->blog->categoryNameList, isset($this->config->blog->categoryName) ? $this->config->blog->categoryName : '', "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->article->blog->categoryLevel;?></span>
+                  <?php echo html::select('blog[categoryLevel]', $lang->article->blog->categoryLevelList, isset($this->config->blog->categoryLevel) ? $this->config->blog->categoryLevel : '', "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th class='w-120px'><?php echo $lang->blog->common . $lang->article->browseImage->common;?></th>
+              <td colspan='2'>
+                <div class='input-group'>
+                  <?php echo html::select('blog[imagePosition]', $lang->article->browseImage->positionList, isset($this->config->blog->imagePosition) ? $this->config->blog->imagePosition : 'right', "class='form-control'");?>
+                  <span class='input-group-addon'></span>
+                  <?php echo html::select('blog[imageSize]', $lang->article->browseImage->sizeList, isset($this->config->blog->imageSize) ? $this->config->blog->imageSize : 'small', "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->article->browseImage->maxWidth;?></span>
+                  <?php echo html::input('blog[imageWidth]', isset($this->config->blog->imageWidth) ? $this->config->blog->imageWidth : '100', "class='form-control'");?>
+                  <span class='input-group-addon'>px</span>
+                </div>
+              </td>
+            </tr>
+            <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'article') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->article->common . $lang->article->browseImage->common;?></th>
+              <td colspan='2'>
+                <div class='input-group'>
+                  <?php echo html::select('article[imagePosition]', $lang->article->browseImage->positionList, isset($this->config->article->imagePosition) ? $this->config->article->imagePosition : 'right', "class='form-control'");?>
+                  <span class='input-group-addon'></span>
+                  <?php echo html::select('article[imageSize]', $lang->article->browseImage->sizeList, isset($this->config->article->imageSize) ? $this->config->article->imageSize : 'small', "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->article->browseImage->maxWidth;?></span>
+                  <?php echo html::input('article[imageWidth]', isset($this->config->article->imageWidth) ? $this->config->article->imageWidth : '100', "class='form-control'");?>
+                  <span class='input-group-addon'>px</span>
+                </div>
+              </td>
+            </tr>
+            <?php endif;?>
           </table>
         </div>
 
@@ -128,13 +174,14 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <td><?php echo html::radio('files[watermark]', $lang->file->watermarkList, isset($this->config->file->watermark) ? $this->config->file->watermark : 'close');?></td>
             </tr>
             <tr class='watermark-info'>
+            <tr class='watermark-info <?php echo (!isset($this->config->file->watermark) || $this->config->file->watermark == 'close') ? "hide" : "";?>'>
               <th><?php echo $lang->file->watermarkContent;?></th>
               <td class='watermark-content'><?php echo html::input('files[watermarkContent]', !empty($this->config->file->watermarkContent) ? $this->config->file->watermarkContent : $this->config->site->name, "class='form-control'");?></td>
               <td class='w-160px watermark-attribute'>
                 <div class='input-group colorplate clearfix'>
                   <div class='input-group color active' data="<?php echo isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '';?>">
                     <label class='input-group-addon fix-border'><?php echo $lang->color;?></label>
-                    <?php echo html::input('watermarkColor', isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+                    <?php echo html::input('files[watermarkColor]', isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     <span class='input-group-btn'>
                       <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                       <div class='dropdown-menu colors'>

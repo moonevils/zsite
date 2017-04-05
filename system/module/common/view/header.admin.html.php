@@ -87,16 +87,7 @@
           <div class='panel-body'>
             <?php echo $treeModuleMenu;?>
             <?php if(!empty($treeManageLink)):?>
-            <div class='text-right'>
-              <?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?>
-              <?php 
-                if($this->moduleName == 'article' and $this->methodName == 'admin' and (!isset($_GET['type']) or (isset($_GET['type']) and (strpos('article,blog', $_GET['type']) !== false))))
-                {
-                    $type = isset($_GET['type']) ? $_GET['type'] : 'article';
-                    echo html::a(helper::createLink('article', 'setting', "type={$type}"), $lang->setting);
-                }
-              ?>
-            </div>
+            <div class='text-right'><?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?></div>
             <?php endif;?>
           </div>
         </div>
