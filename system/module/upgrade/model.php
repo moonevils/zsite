@@ -31,6 +31,7 @@ class upgradeModel extends model
      */
     public function execute($fromVersion)
     {
+        if(!isset($this->lang->upgrade->fromVersions[$fromVersion])) return false;
         switch($fromVersion)
         {
             case '1_0': $this->execSQL($this->getUpgradeFile('1.0'));
