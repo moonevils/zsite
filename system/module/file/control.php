@@ -180,15 +180,15 @@ class file extends control
      */
     public function browse($objectType, $objectID, $isImage = null)
     {
-        $this->view->title          = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
-        $this->view->files          = $this->file->getByObject($objectType, $objectID, $isImage);
-        $this->view->showSetPrimary = true;
+        $this->view->title    = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
+        $this->view->files    = $this->file->getByObject($objectType, $objectID, $isImage);
+        $this->view->showSort = true;
         
         if($objectType == 'source')
         {
-            $this->view->title          = "<i class='icon-paper-clip'></i> " . $this->lang->file->sourceList;
-            $this->view->files          = array();
-            $this->view->showSetPrimary = false;
+            $this->view->title    = "<i class='icon-paper-clip'></i> " . $this->lang->file->sourceList;
+            $this->view->files    = array();
+            $this->view->showSort = false;
         }
 
         $this->view->modalWidth = 800;

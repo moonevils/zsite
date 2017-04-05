@@ -8,7 +8,7 @@ $(document).ready(function()
         {
             var orders = {};     
             var orderNext = 1;
-            $('.file-list .file.can-set-primary').each(function()
+            $('.file-list .file').each(function()
             {
                 orders[$(this).data('id')] = orderNext ++;
             });
