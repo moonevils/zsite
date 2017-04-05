@@ -146,13 +146,15 @@ $lang->article->noCategories['blog']    = '您还没有为博客添加类目，�
 $lang->article->noCategories['video']   = '您还没有为视频添加类目，请添加类目。';
 
 $lang->article->blog = new stdclass();
-$lang->article->blog->setting                    = '博客设置';
-$lang->article->blog->showCategory               = '列表显示类目';
-$lang->article->blog->categoryLevel              = '类目级别';
-$lang->article->blog->showCategoryList['abbr']   = '简称';
-$lang->article->blog->showCategoryList['name']   = '全称';
-$lang->article->blog->categoryLevelList['first'] = '一级类目';
-$lang->article->blog->categoryLevelList['last']  = '最低一级类目';
+$lang->article->blog->category                   = '博客列表类目';
+$lang->article->blog->categoryLevel              = '级别';
+$lang->article->blog->categoryNameList['abbr']   = '简称';
+$lang->article->blog->categoryNameList['full']   = '全称';
+$lang->article->blog->categoryLevelList['first'] = '顶级';
+$lang->article->blog->categoryLevelList['last']  = '底级';
+
+$lang->article->blog->categoryList['1'] = '显示';
+$lang->article->blog->categoryList['0'] = '不显示';
 
 $lang->article->browseImage = new stdclass();
 $lang->article->browseImage->common   = '列表图片';

@@ -102,4 +102,28 @@ $(document).ready(function()
         }); 
         return false;
     }); 
+
+    $('#browseTab input[name*=showCategory]').click(function()
+    {
+        if($(this).val() == '1')
+        {
+            $('#browseTab .blog-setting').show();
+        }
+        else
+        {
+            $('#browseTab .blog-setting').hide();
+        }
+    });
+
+    $('#watermarkTab input[name*=watermark][type=radio]').click(function()
+    {
+        if($(this).val() == 'open')
+        {
+            $('#watermarkTab .watermark-info').show();
+        }
+        else
+        {
+            $('#watermarkTab .watermark-info').hide();
+        }
+    });
 });
