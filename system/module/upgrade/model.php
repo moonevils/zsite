@@ -2098,6 +2098,7 @@ class upgradeModel extends model
             file_put_contents($myFile, "\n", FILE_APPEND);
             foreach($mobileTemplateConfigList as $mobileTemplateConfig)
             {
+                if(!isset($this->config->langs[$mobileTemplateConfig->lang])) return false;
                 $fixedConfig = '$config->framework->detectDevice[' . "'{$mobileTemplateConfig->lang}'] = ";
                 $fixedConfig .= $mobileTemplateConfig->value == 'open' ? 'true' : 'false';
                 $fixedConfig .= ";\n";
