@@ -25,8 +25,7 @@ css::import($jsRoot . 'uploader/min.css');
 .file-info-addedBy {min-width: 80px;}
 .file-info-addedDate {min-width: 130px;}
 .file-info-downloads {min-width: 50px;}
-.btn-set-primary {display: none; margin-left: 10px; padding-left: 5px; padding-right: 5px; margin-left: 0}
-.file-list .file.can-set-primary .actions>.btn-set-primary,
+.file-list .file[data-status=done] .actions>.btn-sort-file,
 .file-list .file[data-status=done] .actions>.btn-edit-file {display: inline-block;}
 .file-list .file-wrapper > .actions {width: 210px;}
 #uploader {margin-bottom: 0}
@@ -96,13 +95,6 @@ $('#uploader').uploader(
         var downloadUrl = (status == 'done' && file.url) ? file.url : null;
         var nameText = (file.remoteId) ? ('<span class="file-label-id">#' + file.remoteId + '</span> ') : '';
         nameText += '<span>' + file.name + '</span>';
-        if(status == 'done' && file.isImage)
-        {
-            if(file.primary && file.primary !== '0')
-            {
-                nameText += ' <small class="label label-success"><?php echo $lang->file->primary ?></small>';
-            }
-        }
         $file.find('.file-name').html(nameText);
         var infoText = '<span class="file-info-size" data-tip-class="tooltip-in-modal" data-toggle="tooltip" title="<?php echo $lang->file->size;?>">' + (status == 'uploading' ? (window.plupload.formatSize(Math.floor(file.size*file.percent/100)).toUpperCase() + '/') : '') + window.plupload.formatSize(file.size).toUpperCase() + '</span>';
         if(file.addedBy) infoText += '<span class="file-info-addedBy" data-tip-class="tooltip-in-modal" data-toggle="tooltip" title="<?php echo $lang->file->addedBy;?>"><i class="icon icon-user"></i> ' + file.addedBy + '</span>';
@@ -115,13 +107,12 @@ $('#uploader').uploader(
 
             $file.find('.btn-delete-file').before('<button type="button" data-tip-class="tooltip-in-modal" data-toggle="tooltip" class="btn btn-link btn-edit-file" title="<?php echo $lang->edit ?>"><i class="icon icon-pencil"></i></button>');
         }
-        <?php if($showSetPrimary):?>
-        if(file.isImage && !$file.find('.btn-set-primary').length)
+        <?php if($showSort):?>
+        if(status == 'done' && !$file.find('.btn-sort-file').length)
         {
-            $file.find('.file-status').after(' <a href="javascript:;"  class="btn-set-primary btn btn-link"><i class="icon icon-move"></i></a>');
+            $file.find('.btn-delete-file').after(' <a href="javascript:;"  class="btn-sort-file btn btn-link"><i class="icon icon-move"></i></a>');
         }
         <?php endif;?>
-        $file.toggleClass('can-set-primary', status === 'done' && file.isImage && !(file.primary && file.primary !== '0'));
         $file.find('.file-icon').html(this.createFileIcon(file)).css('color', 'hsl(' + $.zui.strCode(file.type || file.ext) + ', 70%, 40%)');
         if(file.percent !== undefined) $file.find('.file-progress-bar').css('width', file.percent + '%');
         var $status = $file.find('.file-status').attr('title', this.lang[status]);
@@ -173,25 +164,6 @@ $('#uploader').uploader(
         }
     });
 
-}).on('click', '.btn-set-primary', function()
-{
-    var $file = $(this).closest('.file');
-    var file = $file.data('file');
-    $.getJSON(createLink('file', 'setPrimary', 'id=' + file.remoteId), function(data)
-    {
-        var uploader = $('#uploader').data('zui.uploader');
-        if(data && data.result === 'success')
-        {
-            file.primary = true;
-            $('#uploader .file').each(function()
-            {
-                var f = $(this).data('file');
-                if(f.id !== file.id) f.primary = false;
-                uploader.showFile(f);
-            });
-        }
-        else uploader.showMessage(data.message, 'danger');
-    });
 });
 </script>
 <?php include '../../common/view/footer.modal.html.php';?>
