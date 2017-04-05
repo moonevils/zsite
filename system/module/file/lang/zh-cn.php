@@ -38,13 +38,13 @@ $lang->file->invalidFile   = '无效文件';
 
 $lang->file->setWatermark      = '设置图片水印';
 $lang->file->watermark         = '图片水印';
-$lang->file->watermarkContent  = '水印内容';
-$lang->file->watermarkSize     = '水印大小';
-$lang->file->watermarkColor    = '水印颜色';
-$lang->file->watermarkOpacity  = '水印透明度';
-$lang->file->watermarkPosition = '水印位置';
+$lang->file->watermarkContent  = '内容';
+$lang->file->watermarkSize     = '大小';
+$lang->file->watermarkColor    = '颜色';
+$lang->file->watermarkOpacity  = '透明度';
+$lang->file->watermarkPosition = '位置';
 $lang->file->rebuildWatermark  = '重新生成图片水印';
-$lang->file->rebuildWatermarks  = "已完成 %s";
+$lang->file->rebuildWatermarks = "已完成 %s";
 
 $lang->file->watermarkPositionList = array();
 $lang->file->watermarkPositionList['topLeft']      = '左上';
@@ -95,6 +95,7 @@ $lang->file->evilChar         = "包含非法字符";
 $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";
 $lang->file->fontNotDownload  = "字体文件没有下载成功";
+$lang->file->fontPosition     = '开启图片水印功能后字体文件下载到tmp/fonts目录下。';
 
 $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '删除全部';

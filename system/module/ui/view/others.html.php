@@ -13,97 +13,179 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('rebuildThumbs', $lang->ui->rebuildThumbs);?>
 <?php js::set('thumbs', $this->config->file->thumbs);?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class='icon-cogs'> </i><?php echo $lang->ui->others;?></strong>
+<?php js::set('rebuildWatermark', $lang->file->rebuildWatermark);?>
+<?php
+$colorPlates = '';
+foreach (explode('|', $lang->colorPlates) as $value)
+{
+    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+}
+?>
+<form method='post' id='ajaxForm' enctype='multipart/form-data'>
+  <div class='panel' id='mainPanel'>
+    <div class='panel-heading'>
+      <ul class='nav nav-tabs'>
+        <?php foreach($lang->ui->settingList as $key => $name):?>
+        <li><?php echo html::a('#' . $key . 'Tab', $name, "data-toggle='tab' class='setting-control-tab'");?></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <div class='panel-body'>
+      <div class='tab-content'>
+        <div class='tab-pane setting-control-tab-pane' id='displayTab'>
+          <table class='table table-form w-p60 table-fixed'>
+            <?php if(strpos($this->config->site->modules, 'product') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->ui->productView;?></th>
+              <td class='w-p30'><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td><td></td>
+            </tr>
+            <?php endif;?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->ui->QRCode;?></th>
+              <td class='w-p30'><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->ui->execInfo;?></th>
+              <td class='w-p30'><?php echo html::radio('execInfo', $lang->ui->execInfoOptions, isset($this->config->site->execInfo) ? $this->config->site->execInfo : 'show');?></td><td></td>
+            </tr>
+            <?php if($this->config->framework->detectDevice[$this->app->clientLang]):?>
+            <tr>
+              <th><?php echo $lang->ui->mobileBottomNav;?></th>
+              <td class='w-p30'><?php echo html::radio('mobileBottomNav', $lang->ui->execInfoOptions, isset($this->config->site->mobileBottomNav) ? $this->config->site->mobileBottomNav : 'show');?></td><td></td>
+            </tr>
+            <?php endif;?>
+          </table>
+        </div>
+
+        <div class='tab-pane setting-control-tab-pane' id='browseTab'>
+          <table class='table table-form w-p60 table-fixed'>
+            <?php if(strpos($this->config->site->modules, 'article') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->site->customizableList->article;?></th> 
+              <td class='w-p30'><?php echo html::input('articleRec', !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'product') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->site->customizableList->product;?></th> 
+              <td class='w-p30'><?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->site->customizableList->blog;?></th> 
+              <td class='w-p30'><?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'message') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->site->customizableList->message;?></th> 
+              <td class='w-p30'><?php echo html::input('messageRec', !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->site->customizableList->comment;?></th> 
+              <td><?php echo html::input('commentRec', !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'forum') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->site->customizableList->forum;?></th> 
+              <td class='w-p30'><?php echo html::input('forumRec', !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->site->customizableList->reply;?></th> 
+              <td><?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <?php endif;?>
+          </table>
+        </div>
+
+        <div class='tab-pane setting-control-tab-pane' id='thumbTab'>
+          <table class='table table-form w-p60 table-fixed'>
+            <tr>
+              <th class='w-120px'><?php echo $lang->site->setImageSize;?></th>
+              <td colspan='2'>
+                <?php foreach($this->config->file->thumbs as $key => $thumb):?> 
+                <div class='input-group' style='margin-bottom: 10px'>
+                  <span class='input-group-addon'><?php echo $lang->site->imageSize[$key];?></span>
+                  <span class='input-group-addon'><?php echo $lang->site->image['width'];?></span>
+                  <?php echo html::input("thumbs[$key][width]", $thumb['width'], "class='form-control fix-border' placeholder='{$thumb['width']}'");?>
+                  <span class="input-group-addon">px</span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->site->image['height'];?></span>
+                  <?php echo html::input("thumbs[$key][height]", $thumb['height'], "class='form-control' placeholder='{$thumb['height']}'");?>
+                  <span class="input-group-addon">px</span>
+                </div>
+                <?php endforeach;?>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class='tab-pane setting-control-tab-pane' id='watermarkTab'>
+          <table class='table table-form w-p65'>
+            <tr>
+              <th class='w-120px'><?php echo $lang->file->watermark;?></th>
+              <td><?php echo html::radio('files[watermark]', $lang->file->watermarkList, isset($this->config->file->watermark) ? $this->config->file->watermark : 'close');?></td>
+            </tr>
+            <tr class='watermark-info'>
+              <th><?php echo $lang->file->watermarkContent;?></th>
+              <td class='watermark-content'><?php echo html::input('files[watermarkContent]', !empty($this->config->file->watermarkContent) ? $this->config->file->watermarkContent : $this->config->site->name, "class='form-control'");?></td>
+              <td class='w-160px watermark-attribute'>
+                <div class='input-group colorplate clearfix'>
+                  <div class='input-group color active' data="<?php echo isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '';?>">
+                    <label class='input-group-addon fix-border'><?php echo $lang->color;?></label>
+                    <?php echo html::input('watermarkColor', isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+                    <span class='input-group-btn'>
+                      <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                      <div class='dropdown-menu colors'>
+                        <?php echo $colorPlates; ?>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td class='w-150px watermark-attribute'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->file->watermarkOpacity;?></span>
+                  <?php echo html::input('files[watermarkOpacity]', !empty($this->config->file->watermarkOpacity) ? $this->config->file->watermarkOpacity : '50', "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->percent;?></span>
+                </div>
+              </td>
+              <td class='w-140px watermark-attribute'>
+                <div class='input-group'>
+                  <span class='input-group-addon fix-border'><?php echo $lang->file->watermarkSize;?></span>
+                  <?php echo html::input('files[watermarkSize]', isset($this->config->file->watermarkSize) ? $this->config->file->watermarkSize : '14', "class='form-control'");?>
+                  <span class='input-group-addon'>px</span>
+                </div>
+              </td>
+              <td class='w-120px watermark-attribute'>
+                <div class='input-group'>
+                  <span class='input-group-addon fix-border'><?php echo $lang->file->watermarkPosition;?></span>
+                  <?php echo html::select('files[watermarkPosition]', $lang->file->watermarkPositionList, isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'middleMiddle', "class='form-control'");?>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th></th>
+              <td colspan='3'>
+                <div class='alert alert-danger'><?php echo $lang->file->fontPosition;?></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class='form-footer'>
+        <?php echo html::submitButton();?>
+        <div class='thumb-footer hide'>
+          <?php echo html::a(helper::createLink('file', 'rebuildthumbs'), $lang->ui->rebuildThumbs, "class='btn btn-primary' id='execButton'");?>
+          <span class='alert alert-success total hide'></span>
+        </div>
+        <div class='watermark-footer hide'>
+          <?php if($this->config->file->watermark == 'open') echo html::a(helper::createLink('file', 'rebuildWatermark'), $lang->file->rebuildWatermark, "class='btn btn-primary' id='execButton'");?>
+          <span class='alert alert-success total hide'></span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class='panel-body'>
-    <form method='post' id='ajaxForm' enctype='multipart/form-data'>
-      <table class='table table-form w-p60 table-fixed'>
-        <?php if(strpos($this->config->site->modules, 'product') !== false):?>
-        <tr>
-          <th class='w-200px'><?php echo $lang->ui->productView;?></th>
-          <td class='w-p30'><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td><td></td>
-        </tr>
-        <?php endif;?>
-        <tr>
-          <th class='w-200px'><?php echo $lang->ui->QRCode;?></th>
-          <td class='w-p30'><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td>
-        </tr>
-        <tr>
-          <th class='w-200px'><?php echo $lang->ui->execInfo;?></th>
-          <td class='w-p30'><?php echo html::radio('execInfo', $lang->ui->execInfoOptions, isset($this->config->site->execInfo) ? $this->config->site->execInfo : 'show');?></td><td></td>
-        </tr>
-        <?php if($this->config->framework->detectDevice[$this->app->clientLang]):?>
-        <tr>
-          <th class='w-200px'><?php echo $lang->ui->mobileBottomNav;?></th>
-          <td class='w-p30'><?php echo html::radio('mobileBottomNav', $lang->ui->execInfoOptions, isset($this->config->site->mobileBottomNav) ? $this->config->site->mobileBottomNav : 'show');?></td><td></td>
-        </tr>
-        <?php endif;?>
-        <?php if(strpos($this->config->site->modules, 'article') !== false):?>
-        <tr>
-          <th><?php echo $lang->site->customizableList->article;?></th> 
-          <td><?php echo html::input('articleRec', !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage, "class='form-control'");?></td><td></td>
-        </tr>
-        <?php endif;?>
-        <?php if(strpos($this->config->site->modules, 'product') !== false):?>
-        <tr>
-          <th><?php echo $lang->site->customizableList->product;?></th> 
-          <td><?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?></td><td></td>
-        </tr>
-        <?php endif;?>
-        <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
-        <tr>
-          <th><?php echo $lang->site->customizableList->blog;?></th> 
-          <td><?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?></td><td></td>
-        </tr>
-        <?php endif;?>
-        <?php if(strpos($this->config->site->modules, 'message') !== false):?>
-        <tr>
-          <th><?php echo $lang->site->customizableList->message;?></th> 
-          <td><?php echo html::input('messageRec', !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->customizableList->comment;?></th> 
-          <td><?php echo html::input('commentRec', !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
-        </tr>
-        <?php endif;?>
-        <?php if(strpos($this->config->site->modules, 'forum') !== false):?>
-        <tr>
-          <th><?php echo $lang->site->customizableList->forum;?></th> 
-          <td><?php echo html::input('forumRec', !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage, "class='form-control'");?></td><td></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->customizableList->reply;?></th> 
-          <td><?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?></td><td></td>
-        </tr>
-        <?php endif;?>
-        <tr>
-          <th><?php echo $lang->site->setImageSize;?></th>
-          <td colspan='2'>
-            <?php foreach($this->config->file->thumbs as $key => $thumb):?> 
-            <div class='input-group' style='margin-bottom: 10px'>
-              <span class='input-group-addon'><?php echo $lang->site->imageSize[$key];?></span>
-              <span class='input-group-addon'><?php echo $lang->site->image['width'];?></span>
-              <?php echo html::input("thumbs[$key][width]", $thumb['width'], "class='form-control fix-border' placeholder='{$thumb['width']}'");?>
-              <span class="input-group-addon">px</span>
-              <span class='input-group-addon fix-border'><?php echo $lang->site->image['height'];?></span>
-              <?php echo html::input("thumbs[$key][height]", $thumb['height'], "class='form-control' placeholder='{$thumb['height']}'");?>
-              <span class="input-group-addon">px</span>
-            </div>
-            <?php endforeach;?>
-          </td>
-        </tr>
-        <tr>
-          <th></th>
-          <td colspan='2'>
-            <?php echo html::submitButton();?>
-            <?php echo html::a(helper::createLink('file', 'rebuildthumbs'), $lang->ui->rebuildThumbs, "class='btn btn-primary' id='execButton'");?>
-            <span class='alert alert-success total hide'></span>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
-</div>
+</form>
 <?php include '../../common/view/footer.admin.html.php';?>

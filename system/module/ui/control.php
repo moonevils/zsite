@@ -182,6 +182,7 @@ class ui extends control
     {
         /* Get configs of list number. */
         $this->app->loadModuleConfig('file');
+        $this->app->loadLang('file');
         if(strpos($this->config->site->modules, 'article') !== false) $this->app->loadModuleConfig('article');
         if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadModuleConfig('product');
         if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
@@ -194,6 +195,20 @@ class ui extends control
 
         if(!empty($_POST))
         {
+            if($this->post->files['watermark'] == 'open')
+            {
+                $fontRoot = $this->app->getTmpRoot() . 'fonts/';
+                $fontPath = $fontRoot . 'simhei.ttf';
+                if(!file_exists($fontPath))
+                {
+                    if(!is_writable($fontRoot)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->unWritable));
+                    if(!copy($this->config->cdn->host . 'fonts/simhei.ttf', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
+                }
+            }
+                
+            $result = $this->loadModel('setting')->setItems('system.common.file', $this->post->files);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
             $thumbs = helper::jsonEncode($this->post->thumbs);
             $result = $this->loadModel('setting')->setItem('system.common.file.thumbs', $thumbs);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
@@ -202,7 +217,7 @@ class ui extends control
             $result  = $this->loadModel('setting')->setItems('system.common.ui', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            $setting = fixer::input('post')->remove('productView,QRCode,thumbs')->get();
+            $setting = fixer::input('post')->remove('productView,QRCode,thumbs,files')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
