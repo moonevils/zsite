@@ -34,14 +34,10 @@ class article extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {   
-        if($this->cookie->articleOrderBy !== false) 
-        {
-            $orderBy = $this->cookie->articleOrderBy;    
-        }
-        else
-        {
-            $orderBy = 'addedDate_desc';
-        }
+        $orderBy = $this->cookie->articleOrderBy !== false ? $this->cookie->articleOrderBy : 'addedDate_desc';    
+        $orderField = substr($orderBy, 0, strpos($orderBy, '_'));
+        if(strpos('id,views,addedDate', $orderField) === false) $orderBy = 'addedDate_desc';
+
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
         if($category->link) helper::header301($category->link);
