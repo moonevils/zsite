@@ -82,14 +82,20 @@ $(document).ready(function()
     var $resetThemeBtn = $('#resetTheme');
     $resetThemeBtn.click(function()
     {
-        $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
+        bootbox.confirm($resetThemeBtn.data('success-tip'), function(result)
         {
-            var $this = $(this);
-            $this.val($this.attr('data-origin-default') || $this.attr('data-default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
+            if(result)
+            {
+                $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
+                {
+                    var $this = $(this);
+                    $this.val($this.attr('data-origin-default') || $this.attr('data-default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
+                });
+                $('#submit').click();
+                return true;
+            }
+            return true;
         });
-
-        $resetThemeBtn.popover({trigger:'manual', content: $resetThemeBtn.data('success-tip'), placement:'right'}).popover('show');
-        setTimeout(function(){$resetThemeBtn.popover('destroy')},2000);
     });
 
     $form.submit(function()
