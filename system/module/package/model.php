@@ -854,13 +854,13 @@ class packageModel extends model
         $dbFile = $this->getDBFile($package, $method, $type);
         if(!file_exists($dbFile)) return $return;
 
+        $this->app->loadClass('zdb');
         $sqls = file_get_contents($this->getDBFile($package, $method, $type));
-        $sqls = explode("');\n", $sqls);
-
+        $sqls = explode(zdb::LINE_ENDER, $sqls);
         foreach($sqls as $sql)
         {
             if(empty($sql)) continue;
-            $sql = trim($sql) . "');";
+            $sql = trim($sql) . ";";
 
             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
             try

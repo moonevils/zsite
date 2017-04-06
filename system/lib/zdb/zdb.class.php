@@ -20,6 +20,14 @@ class zdb
     public $dbh;
 
     /**
+     * Line ender.
+     * 
+     * @var string
+     * @access public
+     */
+    const LINE_ENDER = ";_ZDB_LINE_ENDER_\n";
+
+    /**
      * Construct 
      * 
      * @access public
@@ -74,7 +82,7 @@ class zdb
 
         /* Open this file. */
         $fp = fopen($fileName, 'w');
-        fwrite($fp, "SET NAMES utf8;\n");
+        fwrite($fp, "SET NAMES utf8" . self::LINE_ENDER);
         foreach($tables as $table)
         {
             /* Check table exists. */
@@ -82,7 +90,7 @@ class zdb
 
             /* Create sql code. */
             $backupSql = '';
-            if(strpos($mode, 'schema') !== false) $backupSql .= "DROP TABLE IF EXISTS `$table`;\n";
+            if(strpos($mode, 'schema') !== false) $backupSql .= "DROP TABLE IF EXISTS `$table`" . self::LINE_ENDER;
             if(strpos($mode, 'schema') !== false) $backupSql .= $this->getSchemaSQL($table);
             if(strpos($mode, 'data') !== false)   $backupSql .= $this->getDataSQL($table, zget($condations, $table), zget($fields, $table, '*'), zget($replaces, $table));
 
@@ -116,6 +124,7 @@ class zdb
         $sqlEnd = 0;
         while(($buffer = fgets($fp)) !== false)
         {
+            $buffer = str_replace(self::LINE_ENDER, ';', $buffer);
             $line = trim($buffer);
             if(empty($line)) continue;
 
@@ -173,7 +182,7 @@ class zdb
     public function getSchemaSQL($table)
     {
         $createSql = $this->dbh->query("show create table `$table`")->fetch(PDO::FETCH_ASSOC);
-        return $createSql['Create Table'] . ";\n";
+        return $createSql['Create Table'] . self::LINE_ENDER;
     }
 
     /**
@@ -208,8 +217,8 @@ class zdb
                 $values[] = "($value)";
             }
 
-            if(!$replace) $sql .= "INSERT INTO `$table`($keys) VALUES" . join(',', $values) . ";\n";
-            if($replace)  $sql .= "REPLACE INTO `$table`($keys) VALUES" . join(',', $values) . ";\n";
+            if(!$replace) $sql .= "INSERT  INTO `$table`($keys) VALUES" . join(',', $values) . self::LINE_ENDER;
+            if($replace)  $sql .= "REPLACE INTO `$table`($keys) VALUES" . join(',', $values) . self::LINE_ENDER;
         }
         return $sql;
     }

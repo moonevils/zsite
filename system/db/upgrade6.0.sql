@@ -6,7 +6,7 @@ ALTER TABLE `eps_thread`   ADD `discussion` enum('0', '1') NOT NULL DEFAULT '0' 
 ALTER TABLE `eps_reply`    ADD `reply` mediumint(8) unsigned NOT NULL AFTER `thread`;
 ALTER TABLE `eps_order`    ADD `refundSN` char(50) NOT NULL AFTER `sn`;
 
-ALTER TABLE `eps_order` CHANGE `payStatus` `payStatus` enum('not_paid', 'paid', 'refunded') NOT NULL DEFAULT 'not_paid';
+ALTER TABLE `eps_order` CHANGE `payStatus` `payStatus` enum('not_paid', 'paid', 'refunding', 'refunded') NOT NULL DEFAULT 'not_paid';
 ALTER TABLE `eps_file`  CHANGE `primary` `order` smallint(5) unsigned NOT NULL;
 
 UPDATE `eps_file` SET `order` = 2 WHERE `order` = 0;

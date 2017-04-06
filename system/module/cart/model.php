@@ -21,6 +21,7 @@ class cartModel extends model
      */
     public function add($productID, $count)
     {
+        if(!is_numeric($count)) return false;
         $hasProduct = $this->dao->select('count(id) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->andWhere('product')->eq($productID)->fetch('count');
 
         if(!$hasProduct)
