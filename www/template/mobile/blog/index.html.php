@@ -29,7 +29,7 @@
         <div class='pull-right'>
           <small class='bg-danger-pale text-danger'><?php echo $lang->article->stick;?></small>
         </div>
-        <h5><?php echo $stick->title?></h5>
+        <h5 style='color:<?php echo $stick->titleColor;?>'><?php echo $stick->title?></h5>
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
@@ -58,7 +58,7 @@
     <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
     <a class='card' href='<?php echo $url?>' id="blog<?php echo $article->id?>" data-ve='blog'>
       <div class='card-heading'>
-        <h5><?php echo $article->title?></h5>
+        <h5 style='color:<?php echo $article->titleColor;?>'><?php echo $article->title?></h5>
       </div>
       <div class='table-layout'>
         <div class='table-cell'>

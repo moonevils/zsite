@@ -72,7 +72,7 @@
       <?php $maxOrder = 0; foreach($articles as $article):?>
       <tr>
         <td class='text-center'><?php echo $article->id;?></td>
-        <td title="<?php echo $article->title;?>">
+        <td title="<?php echo $article->title;?>" style="color:<?php echo $article->titleColor;?>">
           <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
           <?php echo $article->title;?>
