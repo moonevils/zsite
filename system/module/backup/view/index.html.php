@@ -25,7 +25,7 @@
   <table class='table table-condensed table-bordered table-fixed'>
     <thead>
       <tr>
-        <th class='w-150px text-center'><?php echo $lang->backup->time?></th>
+        <th class='w-300px text-center'><?php echo $lang->backup->time?></th>
         <th><?php echo $lang->backup->files?></th>
         <th class='w-150px text-center'><?php echo $lang->backup->size?></th>
         <th class='w-180px text-center'><?php echo $lang->actions?></th>
@@ -38,7 +38,7 @@
       <?php foreach($backupFile->files as $file => $size):?>
       <tr>
         <?php if($i == 0):?>
-        <td <?php if($rowspan > 1) echo "rowspan='$rowspan'"?>>
+        <td <?php if($rowspan > 1) echo "rowspan='$rowspan'"?> class='text-middle'>
           <?php echo date(DT_DATETIME1, $backupFile->time);?>
           <?php
             if(isset($config->backup->note->{$backupFile->name})) 
