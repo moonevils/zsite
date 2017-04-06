@@ -24,7 +24,7 @@
     </tr>
     <tr>
       <th class='w-80px'><?php echo $lang->order->savePay;?></th>
-      <td><?php echo html::input('savepay', $order->amount, "class='form-control'");?></td>
+      <td><?php echo html::input('amount', $order->amount, "class='form-control'");?></td>
     </tr>
     <tr>
       <th class='w-80px'><?php echo $lang->order->paidDate;?></th>
