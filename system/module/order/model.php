@@ -981,10 +981,7 @@ class orderModel extends model
      */
     public function savePayment($orderID)
     {   
-        $data = fixer::input('post')
-            ->add('last', helper::now())
-            ->remove('savepay')
-            ->get();
+        $data = fixer::input('post')->add('last', helper::now())->get();
 
         $order     = $this->getByID($orderID);
         $order->sn = $data->sn;
