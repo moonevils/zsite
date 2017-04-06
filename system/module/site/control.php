@@ -551,4 +551,20 @@ class site extends control
              echo $clearResult;
         }
     }
+
+    /**
+     * Open one module of chanzhi.
+     * 
+     * @param  string $module 
+     * @access public
+     * @return void
+     */
+    public function openModule($module = '')
+    {
+        $enabledModules = trim(zget($this->config->site, 'modules', ''), ',');
+        $enabledModules .= ',' . $module;
+        $result = $this->loadModel('setting')->setItem('system.common.site.modules', $enabledModules);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+    }
 }
