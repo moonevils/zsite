@@ -711,7 +711,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `note` text NOT NULL,
   `createdDate` datetime NOT NULL,
   `paidDate` datetime NOT NULL,
-  `payStatus` enum('not_paid', 'paid', 'refunded') NOT NULL DEFAULT 'not_paid',
+  `payStatus` enum('not_paid', 'paid', 'refunding', 'refunded') NOT NULL DEFAULT 'not_paid',
   `deliveriedDate` datetime NOT NULL,
   `deliveriedBy` char(30) NOT NULL,
   `deliveryStatus` enum('not_send', 'send', 'confirmed') NOT NULL DEFAULT 'not_send',

@@ -249,9 +249,16 @@ class user extends control
     {
         $this->app->loadLang($module);
         $this->app->loadLang('index');
+        if(!$this->app->checkAlnum($module) or !$this->app->checkAlnum($method)) die();
+
+        $referer = helper::safe64Decode($refererBeforeDeny);
+        $referer = validater::filterSuper($referer);
+        if(strpos($referer, '<script') !== false) die();
+        if(strpos($referer, '"') !== false) die();
+        if(strpos($referer, "'") !== false) die();
+        $refererBeforeDeny = helper::safe64Encode($referer);
 
         $this->setReferer();
-
         $this->view->title             = $this->lang->user->deny;
         $this->view->module            = $module;
         $this->view->method            = $method;

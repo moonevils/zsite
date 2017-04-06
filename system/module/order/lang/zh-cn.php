@@ -73,6 +73,7 @@ $lang->order->selectPayment  = '选择支付方式';
 $lang->order->settlement     = '去结算';
 $lang->order->check          = '订单结算';
 $lang->order->all            = '所有';
+$lang->order->applyRefund    = '申请退款';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->expireLimit          = '订单过期时间';
@@ -111,13 +112,15 @@ $lang->order->statusList['confirmed'] = '已收货';
 $lang->order->statusList['normal']    = '进行中';
 $lang->order->statusList['finished']  = '已完成';
 $lang->order->statusList['canceled']  = '已取消';
+$lang->order->statusList['refunding'] = '待退款';
 $lang->order->statusList['refunded']  = '已退款';
 $lang->order->statusList['expired']   = '已过期';
 
 $lang->order->payStatusList = array();
-$lang->order->payStatusList['not_paid'] = '未付款';
-$lang->order->payStatusList['paid']     = '已付款';
-$lang->order->payStatusList['refunded'] = '已退款';
+$lang->order->payStatusList['not_paid']  = '未付款';
+$lang->order->payStatusList['paid']      = '已付款';
+$lang->order->payStatusList['refunding'] = '待退款';
+$lang->order->payStatusList['refunded']  = '已退款';
 
 $lang->order->types = array();
 $lang->order->types['shop']  = '商品';
@@ -134,6 +137,7 @@ $lang->order->searchLabels->all         = '所有|mode=all';
 $lang->order->searchLabels->waitPay     = '待付款|mode=payStatus&param=not_paid';
 $lang->order->searchLabels->waitSend    = '待发货|mode=deliveryStatus&param=not_send';
 $lang->order->searchLabels->waitConfirm = '待收货|mode=deliveryStatus&param=send';
+$lang->order->searchLabels->refunding   = '待退款|mode=payStatus&param=refunding';
 $lang->order->searchLabels->confirmed   = '已收货|mode=deliveryStatus&param=confirmed';
 $lang->order->searchLabels->finished    = '已完成|mode=status&param=finished';
 $lang->order->searchLabels->refunded    = '已退款|mode=payStatus&param=refunded';

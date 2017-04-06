@@ -578,7 +578,7 @@ class orderModel extends model
             if($this->commonLink['cancelLink'])
             {
                 /* Cancel link. */
-                $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
+                $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus == 'not_paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
                 $class    = $isMobile ? "  btn btn-link " : "";
                 echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}'" );
             }
@@ -616,7 +616,7 @@ class orderModel extends model
             echo $disabled ?  html::a('javascript:;', $this->lang->order->delivery, "$disabled class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "{$toggle} class='$class'");
 
             /* Refund link. */
-            $disabled = ($order->deliveryStatus != 'confirmed' and $order->status == 'normal' and $order->payStatus == 'paid') ? '' : "disabled='disabled'"; 
+            $disabled = ($order->deliveryStatus != 'confirmed' and $order->status == 'normal' and ($order->payStatus == 'paid' or $order->payStatus == 'refunding')) ? '' : "disabled='disabled'"; 
             echo $disabled ?  html::a('javascript:;', $this->lang->order->refund, "$disabled class='$class'") : html::a(helper::createLink('order', 'refund', "orderID=$order->id"), $this->lang->order->refund, "{$toggle} class='$class'");
 
             /* Finish link. */
@@ -630,19 +630,23 @@ class orderModel extends model
             $class = $isMobile ? "  btn btn-link " : "";
              
             /* Pay link. */
-            $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
+            $disabled = ($order->payment != 'COD' and $order->payStatus == 'not_paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
             echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-goToPay $class'");
            
             /* Edit link. */
-            $disabled = ($order->deliveryStatus == 'not_send') ? '' : "disabled='disabled'";
+            $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'refunded') ? '' : "disabled='disabled'";
             echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "{$toggle} class='$class'");
 
             /* Track link. */
             $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
             echo $disabled ? '' : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='$class'");
 
+            /* Refund link. */
+            $disabled = ($order->payStatus == 'paid' and $order->deliveryStatus != 'confirmed') ? '' : "disabled='disabled'";
+            echo $disabled ? '' : html::a(inlink('applyRefund', "orderID={$order->id}"), $this->lang->order->applyRefund, "class='applyRefund $class' data-toggle='modal'");
+
             /* Confirm link. */
-            $disabled = ($order->deliveryStatus == 'send') ? '' : "disabled='disabled'";
+            $disabled = ($order->deliveryStatus == 'send' and $order->payStatus == 'paid') ? '' : "disabled='disabled'";
             echo $disabled ? '' : html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery $class'");
         }
     }
@@ -1011,6 +1015,22 @@ class orderModel extends model
         if(dao::isError()) return false;
 
         $this->loadModel('action')->create('order', $orderID, 'Refunded', $this->post->comment, $this->post->amount);
+        return !dao::isError();
+    }
+
+    /**
+     * Apply refund.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function applyRefund($orderID)
+    {
+        $this->dao->update(TABLE_ORDER)->set('payStatus')->eq('refunding')->set('last')->eq(helper::now())->where('id')->eq($orderID)->exec();
+        if(dao::isError()) return false;
+
+        $this->loadModel('action')->create('order', $orderID, 'applyRefunded', $this->post->comment);
         return !dao::isError();
     }
 

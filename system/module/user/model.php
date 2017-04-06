@@ -718,6 +718,14 @@ class userModel extends model
             ->where('id')->in($this->post->threads)
             ->exec();
 
+        $replies = $this->dao->setAutolang(false)->select('thread')->from(TABLE_REPLY)
+            ->where('id')->in($this->post->replies)
+            ->fetchAll('thread');
+        $threads = array_keys($replies);
+        $this->loadModel('thread');
+        foreach($threads as $threadID) $this->thread->updateStats();
+
+
         $this->dao->setAutolang(false)->delete()->from(TABLE_REPLY)
             ->where('thread')->in($this->post->threads)
             ->orWhere('id')->in($this->post->replies)

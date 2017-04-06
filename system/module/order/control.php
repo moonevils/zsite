@@ -399,6 +399,27 @@ class order extends control
     }
 
     /**
+     * Apply refund.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function applyRefund($orderID)
+    {
+        if($_POST)
+        {
+            $result = $this->order->applyRefund($orderID);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->server->http_referer));
+        }
+
+        $this->view->title   = $this->lang->order->applyRefund;
+        $this->view->orderID = $orderID;
+        $this->display();
+    }
+
+    /**
      * Edit the order
      *
      * @access public
