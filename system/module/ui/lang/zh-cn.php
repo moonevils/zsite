@@ -312,6 +312,11 @@ $lang->ui->folderList->user    = '会员';
 $lang->ui->folderList->message = '评论留言';
 $lang->ui->folderList->forum   = '论坛';
 
+$lang->ui->settingList['display']   = '显示设置';
+$lang->ui->settingList['browse']    = '列表设置';
+$lang->ui->settingList['thumb']     = '缩略图设置';
+$lang->ui->settingList['watermark'] = '图片水印';
+
 $lang->ui->files = new stdclass();
 $lang->ui->files->default = new stdclass();
 

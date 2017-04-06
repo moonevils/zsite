@@ -34,14 +34,10 @@ class article extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {   
-        if($this->cookie->articleOrderBy !== false) 
-        {
-            $orderBy = $this->cookie->articleOrderBy;    
-        }
-        else
-        {
-            $orderBy = 'addedDate_desc';
-        }
+        $orderBy = $this->cookie->articleOrderBy !== false ? $this->cookie->articleOrderBy : 'addedDate_desc';    
+        $orderField = substr($orderBy, 0, strpos($orderBy, '_'));
+        if(strpos('id,views,addedDate', $orderField) === false) $orderBy = 'addedDate_desc';
+
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
         if($category->link) helper::header301($category->link);
@@ -552,36 +548,5 @@ class article extends control
         $result = $this->article->reject($articleID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=submission&tab=feedback")));
-    }
-    
-    /**
-     * Setting.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setting($type = 'blog')
-    {
-        if($type == 'blog' or $type == 'article')
-        {
-            $this->lang->article->menu = $this->lang->$type->menu;
-            $this->lang->menuGroups->article = $type;
-
-            if($_POST)
-            {
-                $data = fixer::input('post')->get();
-                $this->loadModel('setting')->setItems("system.$type", $data);
-                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-            }
-
-            $this->view->title = $this->lang->setting; 
-            $this->view->type  = $type;
-            $this->display();
-        }
-        else
-        {
-            $this->locate(inlink('admin'));
-        }
     }
 }

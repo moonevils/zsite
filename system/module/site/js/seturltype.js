@@ -14,22 +14,9 @@ $(document).ready(function()
 
     $('[name^=requestType]').change(function()
     {
-        if(!$('[value=PATH_INFO]').prop('checked'))
+        if(!$('[value=PATH_INFO]').prop('checked') && v.requestType == 'pathinfo')
         {
-            $.ajax(
-            {
-                type: 'get',
-                url: '/index',
-                dataType: 'json',
-                success: function(data){return false;},  
-                error: function(data)
-                {
-                    if(data.status == '200') 
-                    {
-                        $('#requestTypeTip').fadeIn();
-                    }
-                }
-            });
+            $('#requestTypeTip').fadeIn();
         }
         else
         {

@@ -484,7 +484,10 @@ class site extends control
             $this->send($result);
         }
 
-        $this->view->title = $this->lang->site->setUrlType;
+        $http = $this->app->loadClass('http');
+
+        $this->view->title       = $this->lang->site->setUrlType;
+        $this->view->requestType = $http->get($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/pathinfo.php?requestType=pathinfo');
         $this->display();
     }
 

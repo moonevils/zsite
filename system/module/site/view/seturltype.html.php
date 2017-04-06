@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('requestTypeTip', $lang->site->requestTypeTip);?>
+<?php js::set('requestType', $requestType);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setUrlType;?></strong></div>
   <div class='panel-body'>
@@ -19,9 +20,7 @@
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->site->requestType;?></th> 
-          <td>
-            <?php echo html::radio('requestType', $lang->site->requestTypeList, $this->config->frontRequestType);?>
-          </td>
+          <td class='w-280px'><?php echo html::radio('requestType', $lang->site->requestTypeList, $this->config->frontRequestType);?></td>
           <td><span id='requestTypeTip' class='text-important'><?php echo $lang->site->requestTypeTip?></span></td>
         </tr>
         <tr>
