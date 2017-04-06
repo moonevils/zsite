@@ -67,6 +67,10 @@ $lang->product->setting      = '设置';
 $lang->product->soldout      = '已售罄';
 $lang->product->layout       = '布局';
 
+$lang->product->orderBy = new stdclass();
+$lang->product->orderBy->time = '时间';
+$lang->product->orderBy->hot  = '热度';
+
 $lang->product->congratulations  = "恭喜";
 $lang->product->addToCartSuccess = "成功加入购物车。";
 $lang->product->gotoCart         = "去购物车结算";
