@@ -50,7 +50,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
-        <strong><?php echo html::a($url, $article->title);?></strong>
+        <strong><?php echo html::a($url, $article->title, "style='color:{$article->titleColor}'");?></strong>
       </div>
       <div class='table-layout'>
         <?php
@@ -93,7 +93,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
-        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <?php echo html::a($url, $article->title, "title='{$article->title}' style='color:{$article->titleColor}'");?>
         <span class='pull-right text-muted'><?php echo substr($article->addedDate, 0, 10);?></span>
       </div>
       <?php else:?>
@@ -107,7 +107,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php endif;?>
         <?php endif;?>
         <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
-        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <?php echo html::a($url, $article->title, "title='{$article->title}' style='color:{$article->titleColor}'");?>
       </div>
       <?php endif;?>
       

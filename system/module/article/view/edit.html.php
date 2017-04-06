@@ -67,13 +67,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <div class='input-group-addon colorplate clearfix'>
               <div class='input-group color active' data="<?php echo $article->titleColor?>">
                 <label class='input-group-addon'><?php echo $lang->color;?></label>
-                <?php echo html::input('titleColor', $article->titleColor, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>
                     <?php echo $colorPlates; ?>
                   </div>
                 </span>
+                <?php echo html::input('titleColor', $article->titleColor, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
               </div>
             </div>
             <?php endif;?>
