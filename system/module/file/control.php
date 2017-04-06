@@ -56,6 +56,12 @@ class file extends control
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
+    /**
+     * Batch delete invalid files.
+     * 
+     * @access public
+     * @return void
+     */
     public function batchDeleteInvalid()
     {
         if($_POST)
@@ -725,7 +731,7 @@ class file extends control
     }
 
     /**
-     * Batch delete file
+     * Batch delete files.
      * 
      * @access public
      * @return void

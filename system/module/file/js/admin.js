@@ -1,20 +1,12 @@
 $(document).ready(function()
 {
-    $('#deleteAllButton').click(function()
+    $('#submit').click(function()
     {
-        $(this).text(v.deletingTip);
-        $.getJSON($(this).attr('href'), function(response)
+        bootbox.confirm(v.lang.confirmDelete, function(result)
         {
-            if(response.result == 'success')
-            {
-                $("#deleteAllButton").text(v.deletedTip);
-                location.href=response.locate;
-            }
-            else
-            {
-                $("#deleteAllButton").text(v.failDeleteTip);
-            }
-        }); 
+            if(result) $('#ajaxForm').submit();
+        });
+
         return false;
     });
 })
