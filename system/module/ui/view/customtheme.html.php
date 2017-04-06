@@ -49,7 +49,8 @@
         <?php endif;?>
       </div>
       <div class="form-footer">
-        <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?> <button type='button' id='resetTheme' class='btn btn-link btn-sm text-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button>
+        <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?>
+        <button type='button' id='resetTheme' class='btn btn-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button>
       </div>
     </div>
   </div>
