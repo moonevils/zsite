@@ -40,7 +40,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
         <?php $url = inlink('view', "id=$stick->id", "category={$category->alias}&name=$stick->alias"); ?>
         <div class="card" data-ve='blog' id='blog<?php echo $stick->id;?>'>
           <h4 class='card-heading'>
-            <?php echo html::a($url, $stick->title);?>
+            <?php echo html::a($url, $stick->title, "style='color:{$stick->titleColor}'");?>
             <span class='label label-danger'><?php echo $lang->article->stick;?></span>
           </h4>
           <div class='card-content text-muted'>
@@ -65,13 +65,13 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
                 if($config->blog->categoryLevel == 'first')
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty(zget($topCategoryList, $stick->category->id)->abbr)) ? zget($topCategoryList, $stick->category->id)->name : zget($topCategoryList, $stick->category->id)->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty(zget($topCategoryList, $stick->category->id)->abbr)) ? zget($topCategoryList, $stick->category->id)->name : zget($topCategoryList, $stick->category->id)->abbr;
                     echo "]</span>";
                 }
                 else
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty($stick->category->abbr)) ? $stick->category->name : $stick->category->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty($stick->category->abbr)) ? $stick->category->name : $stick->category->abbr;
                     echo "]</span>";
                 } 
               }            
@@ -84,7 +84,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
       <?php if(!isset($category)) $category = array_shift($article->categories);?>
         <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
         <div class="card" data-ve='blog' id='blog<?php echo $article->id;?>'>
-          <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
+          <h4 class='card-heading'><?php echo html::a($url, $article->title, "style='color:{$article->titleColor}'");?></h4>
           <div class='card-content text-muted'>
             <?php if(!empty($article->image)):?>
             <?php $pull     = (isset($this->config->blog->imagePosition) and $this->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
@@ -109,13 +109,13 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
                 if($config->blog->categoryLevel == 'first')
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty(zget($topCategoryList, $article->category->id)->abbr)) ? zget($topCategoryList, $article->category->id)->name : zget($topCategoryList, $article->category->id)->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty(zget($topCategoryList, $article->category->id)->abbr)) ? zget($topCategoryList, $article->category->id)->name : zget($topCategoryList, $article->category->id)->abbr;
                     echo "]</span>";
                 }
                 else
                 {
                     echo "<span>[";
-                    echo ($config->blog->categoryAbbr == 'name' or empty($article->category->abbr)) ? $article->category->name : $article->category->abbr;
+                    echo ($config->blog->categoryName == 'full' or empty($article->category->abbr)) ? $article->category->name : $article->category->abbr;
                     echo "]</span>";
                 } 
               }            

@@ -56,6 +56,12 @@ class file extends control
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
+    /**
+     * Batch delete invalid files.
+     * 
+     * @access public
+     * @return void
+     */
     public function batchDeleteInvalid()
     {
         if($_POST)
@@ -180,15 +186,15 @@ class file extends control
      */
     public function browse($objectType, $objectID, $isImage = null)
     {
-        $this->view->title          = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
-        $this->view->files          = $this->file->getByObject($objectType, $objectID, $isImage);
-        $this->view->showSetPrimary = true;
+        $this->view->title    = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
+        $this->view->files    = $this->file->getByObject($objectType, $objectID, $isImage);
+        $this->view->showSort = true;
         
         if($objectType == 'source')
         {
-            $this->view->title          = "<i class='icon-paper-clip'></i> " . $this->lang->file->sourceList;
-            $this->view->files          = array();
-            $this->view->showSetPrimary = false;
+            $this->view->title    = "<i class='icon-paper-clip'></i> " . $this->lang->file->sourceList;
+            $this->view->files    = array();
+            $this->view->showSort = false;
         }
 
         $this->view->modalWidth = 800;
@@ -725,7 +731,7 @@ class file extends control
     }
 
     /**
-     * Batch delete file
+     * Batch delete files.
      * 
      * @access public
      * @return void
@@ -743,38 +749,6 @@ class file extends control
             $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
         }
         $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
-    }
-
-    /**
-     * Set file watermark 
-     * 
-     * @access public
-     * @return void
-     */
-    public function setWatermark()
-    {
-        $this->lang->menuGroups->file = 'site';
-        $this->lang->file->menu       = $this->lang->site->menu;
-        
-        if(!empty($_POST))
-        {
-            $tmpRoot  = $this->app->getTmpRoot();
-            $fontPath = $tmpRoot . 'simhei.ttf';
-            if(!file_exists($fontPath))
-            {
-                if(!is_writable($tmpRoot)) $this->send(array('result' => 'fail', 'message' => 'tmp' . $this->lang->file->unWritable));
-                if(!copy($this->config->cdn->host . 'fonts/simhei.ttf', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
-            }
-            
-            $setting = fixer::input('post')->get();
-            $result = $this->loadModel('setting')->setItems('system.common.file', $setting);
-
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwatermark')));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-        
-        $this->view->title = $this->lang->file->setWatermark;
-        $this->display();
     }
     
     /**

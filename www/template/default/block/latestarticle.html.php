@@ -47,7 +47,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php echo '[' . $article->category->name . '] ';?>
         <?php endif;?>
         <?php endif;?>
-        <strong><?php echo html::a($url, $article->title);?></strong>
+        <strong><?php echo html::a($url, $article->title, "style='color: {$article->titleColor}'");?></strong>
       </div>
       <div class='item-content'>
         
@@ -92,7 +92,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
         <?php endif;?>
         <?php endif;?>
-        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <?php echo html::a($url, $article->title, "title='{$article->title}' style='color:{$article->titleColor}'");?>
         <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
         </span>
         <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
@@ -107,7 +107,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
         <?php endif;?>
         <?php endif;?>
-        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <?php echo html::a($url, $article->title, "title='{$article->title}' style='color:{$article->titleColor}'");?>
         <span><?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?></span>
       </li>
       <?php endif;?>

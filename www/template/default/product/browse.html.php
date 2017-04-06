@@ -35,8 +35,8 @@ js::set('pageLayout', $this->block->getLayoutScope('product_browse', $category->
       <header id='productHeader'>
         <strong><i class='icon-th'></i> <?php echo $category->name;?></strong>
         <?php 
-          echo "<div class='header'>" . html::a('javascript:;', $lang->product->common . $lang->product->id, "id='id' class='id setOrder'") . "</div>";
-          echo "<div class='header'>" . html::a('javascript:;', $lang->product->viewsCount, "id='views' class='views setOrder'") . "</div>";
+          echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->time, "id='id' class='id setOrder'") . "</div>";
+          echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->hot, "id='views' class='views setOrder'") . "</div>";
         ?>
         <div class='pull-right btn-group' id="modeControl">
           <?php foreach($lang->product->listMode as $mode => $text):?>
