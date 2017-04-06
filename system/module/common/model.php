@@ -1343,7 +1343,8 @@ class commonModel extends model
                 $id = str_replace('page-view-', '', $uri); 
             }
         }
-        
+
+        $id = str_replace('.', '-', $id);
         return $id;
     }
 
