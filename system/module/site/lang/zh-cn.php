@@ -95,6 +95,7 @@ $lang->site->useLocation   = "使用当前登录地址: <span>%s</span>";
 $lang->site->changeSetting = "更改设置";
 $lang->site->setStat       = "流量统计设置";
 $lang->site->setHomeMenu   = "首页菜单";
+$lang->site->openModule    = "开启模块";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
