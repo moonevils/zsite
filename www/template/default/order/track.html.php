@@ -22,7 +22,7 @@
   </tr>
   <tr>
     <th class='w-100px'><?php echo $lang->order->express;?></th>
-    <td><?php echo $expressList[$order->express];?></td>
+    <td><?php echo zget($expressList, $order->express, '');?></td>
   </tr>
   <tr>
     <th class='w-100px'><?php echo $lang->order->waybill;?></th>
