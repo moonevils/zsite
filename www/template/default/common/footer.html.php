@@ -6,7 +6,6 @@
       <div id='footNav'>
         <?php
         echo html::a($this->createLink('sitemap', 'index'), "<i class='icon-sitemap'></i> " . $lang->sitemap->common, "class='text-link'");
-
         if(empty($this->config->links->index) && !empty($this->config->links->all)) echo '&nbsp;' . html::a($this->createLink('links', 'index'), "<i class='icon-link'></i> " . $this->lang->link);
         ?>
       </div>
@@ -24,7 +23,12 @@
         <?php if(!empty($config->site->policeLink) and !empty($config->site->policeSN)) echo html::a(strpos($config->site->policeLink, 'http://') !== false ? $config->site->policeLink : 'http://' . $config->site->policeLink, html::image($webRoot . 'theme/default/default/images/main/police.png'), "target='_blank'");?>
       </span>
       <div id='powerby'>
-        <?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?>
+        <?php
+        $chanzhiVersion                   = $config->version;
+        $isProVersion                     = strpos($chanzhiVersion, 'pro') !== false;
+        if($isProVersion) $chanzhiVersion = str_replace('pro', '', $chanzhiVersion);
+        ?>
+        <?php printf($lang->poweredBy, $config->version, k(), "<span class='img-chanzhi" . ($isProVersion ? ' img-chanzhi-pro' : '') . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion); ?>
       </div>
       <?php if($this->config->site->execInfo == 'show') echo $this->config->execPlaceholder; ?>
     </div>

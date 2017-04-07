@@ -49,7 +49,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
           <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . ']', "class='text-special'");?>
           <?php endif;?>
           <?php endif;?>
-          <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
+          <?php if($article->sticky):?><span class='red'><i class="icon icon-arrow-up"></i></span><?php endif;?>
           <strong><?php echo html::a($url, $article->title, "style='color:{$article->titleColor}'");?></strong>
         </div>
         <div class='table-layout'>
