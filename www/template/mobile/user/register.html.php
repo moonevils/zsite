@@ -14,7 +14,7 @@
 include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 ?>
 <?php 
-  if(isset($this->config->site->registerAgreement) and $this->config->site->registerAgreement == 'open')
+  if(isset($this->config->site->regAgreement) and $this->config->site->regAgreement == 'open')
   {
     js::set('registerAgreement', 'open');
   }
@@ -63,11 +63,11 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
       <label class='control-label' for='phone'><?php echo $lang->user->phone;?></label>
       <?php echo html::input('phone', '', "class='form-control'");?>
     </div>
-    <?php if(isset($this->config->site->registerAgreement) and $this->config->site->registerAgreement == 'open'):?>
+    <?php if(isset($this->config->site->regAgreement) and $this->config->site->regAgreement == 'open'):?>
     <div class='form-group'>
       <label class='control-label' for='registerAgreement'></label>
       <input type="checkbox" id="registerAgreement" name="registerAgreement" value="1">
-      <span><?php echo $lang->user->agreeRegisterAgreement . '《'. html::a(helper::createLink('user', 'viewRegisterAgreement'), $this->config->site->registerAgreementTitle) . '》';?></span>
+      <span><?php echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'viewRegAgreement'), $this->config->site->regAgreementTitle ? $this->config->site->regAgreementTitle : $this->lang->user->register->agreement) . '》';?></span>
     </div>
     <?php endif;?>
     <div class='form-group'><?php echo html::submitButton($lang->register, 'btn primary block');?><?php echo html::hidden('referer', $referer);?></div>

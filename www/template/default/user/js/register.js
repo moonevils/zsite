@@ -1,6 +1,6 @@
 $(function()
 {
-    if(v.registerAgreement == 'open')
+    if(v.regAgreement == 'open')
     {
         $('#submit').attr("disabled",true);
         $("input[name=registerAgreement]").change(function()
