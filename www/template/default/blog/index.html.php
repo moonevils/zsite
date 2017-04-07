@@ -39,19 +39,21 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
       <?php if(!isset($category)) $category = array_shift($stick->categories);?>
         <?php $url = inlink('view', "id=$stick->id", "category={$category->alias}&name=$stick->alias"); ?>
         <div class="card" data-ve='blog' id='blog<?php echo $stick->id;?>'>
+          <?php if(!empty($stick->image)):?>
+          <?php $pull     = (isset($this->config->blog->imagePosition) and $this->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
+          <?php $imageURL = !empty($this->config->blog->imageSize) ? $this->config->blog->imageSize . 'URL' : 'smallURL';?>
+          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->blog->imageWidth) ? $this->config->blog->imageWidth . 'px' : '180px';?>">
+            <?php
+            $title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title;
+            echo html::a($url, html::image($stick->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
+            ?>
+          </div>
+          <?php endif;?>
           <h4 class='card-heading'>
             <?php echo html::a($url, $stick->title, "style='color:{$stick->titleColor}'");?>
             <span class='label label-danger'><?php echo $lang->article->stick;?></span>
           </h4>
           <div class='card-content text-muted'>
-            <?php if(!empty($stick->image)):?>
-              <div class='media pull-right'>
-                <?php
-                $title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title;
-                echo html::a($url, html::image($stick->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
-                ?>
-              </div>
-            <?php endif;?>
             <?php echo $stick->summary;?>
           </div>
           <div class="card-actions text-muted">
@@ -84,18 +86,18 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
       <?php if(!isset($category)) $category = array_shift($article->categories);?>
         <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
         <div class="card" data-ve='blog' id='blog<?php echo $article->id;?>'>
+          <?php if(!empty($article->image)):?>
+          <?php $pull     = (isset($this->config->blog->imagePosition) and $this->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
+          <?php $imageURL = !empty($this->config->blog->imageSize) ? $this->config->blog->imageSize . 'URL' : 'smallURL';?>
+          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->blog->imageWidth) ? $this->config->blog->imageWidth . 'px' : '180px';?>">
+            <?php
+            $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+            echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
+            ?>
+          </div>
+          <?php endif;?>
           <h4 class='card-heading'><?php echo html::a($url, $article->title, "style='color:{$article->titleColor}'");?></h4>
           <div class='card-content text-muted'>
-            <?php if(!empty($article->image)):?>
-            <?php $pull     = (isset($this->config->blog->imagePosition) and $this->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
-            <?php $imageURL = !empty($this->config->blog->imageSize) ? $this->config->blog->imageSize . 'URL' : 'smallURL';?>
-            <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->blog->imageWidth) ? $this->config->blog->imageWidth . 'px' : '100px';?>">
-              <?php
-              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-              echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
-              ?>
-            </div>
-            <?php endif;?>
             <?php echo $article->summary;?>
           </div>
           <div class="card-actions text-muted">

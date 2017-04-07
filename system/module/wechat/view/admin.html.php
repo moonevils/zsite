@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php if(commonModel::isAvailable('user')):?>
 <?php $version = curl_version();?>
 <?php if(!($version['features'] & CURL_VERSION_SSL)):?>
   <div class='alert alert-danger'>
@@ -63,5 +64,26 @@
     </tbody>
   </table>
 </div>
+<?php endif;?>
+<?php else:?>
+<script>
+$(document).ready(function()
+{
+    bootbox.confirm('<?php echo $lang->wechat->openUserModule?>', function(result)
+    {
+        if(result)
+        {
+            $.getJSON(createLink('site', 'openModule', 'module=user'), function(response)
+            {
+                if(response.result == 'success')
+                {
+                    location.reload();
+                }
+            });
+        }
+        return true;
+    });         
+});
+</script>
 <?php endif;?>
 <?php include '../../common/view/footer.admin.html.php';?>

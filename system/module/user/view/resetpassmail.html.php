@@ -22,16 +22,12 @@ div{padding-left:30px;}
 </head>
 <body>
 <div style='margin-top:20px;'>
-<p>
-{$this->lang->user->resetMail->account} {$account}
-<br>
-{$resetUrlTip}
-<br>
-<a href='{$resetURL}' target='_blank'>{$resetURL}</a>
-</p>
+  <p> {$this->lang->user->resetMail->account} {$account}{$this->lang->colon} </p>
+  <p>{$resetUrlTip}</p>
+  <a href='{$resetURL}' target='_blank'>{$resetURL}</a>
 </div>
-<div style='height:20px;border-bottom:1px solid #ddd;'></div>
 <div style='margin:20px 0 0 0 ;'>{$this->lang->user->resetMail->notice}</div>
+<p> <a href='http://www.chanzhi.org' style='font-size:12px;color:grey;text-decoration:none;' target='_blank'>powered by {$this->lang->chanzhiEPSx}</a> </p>
 </body>
 </html>
 EOT;

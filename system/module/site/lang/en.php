@@ -95,6 +95,7 @@ $lang->site->useLocation   = "Use <span>%s</span>";
 $lang->site->changeSetting = "Change Settings";
 $lang->site->setStat       = "Traffic Report";
 $lang->site->setHomeMenu   = "Homepage Menu";
+$lang->site->openModule    = "Open module";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Enterprise Portal';
