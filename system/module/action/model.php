@@ -47,13 +47,25 @@ class actionModel extends model
      */
     public function getList($objectType, $objectID, $action = '', $pager = null, $origin = '')
     {
-        return $this->dao->select('*')->from(TABLE_ACTION)
+        $actions = $this->dao->select('*')->from(TABLE_ACTION)
             ->where('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
             ->beginIF($action)->andWhere('action')->eq($action)->fi()
             ->orderBy('id_asc')
             ->page($pager)
             ->fetchAll('id');
+
+        $histories = $this->getHistory(array_keys($actions));
+        $this->loadModel('file');
+
+        foreach($actions as $actionID => $action)
+        {
+            $action->history = isset($histories[$actionID]) ? $histories[$actionID] : array();
+            $action->files = $this->loadModel('file')->getByObject('action', $actionID);
+            $actions[$actionID] = $action;
+        }
+
+        return $actions;
     }
 
     /**
@@ -66,6 +78,35 @@ class actionModel extends model
     public function getById($actionID)
     {
         return $this->dao->findById((int)$actionID)->from(TABLE_ACTION)->fetch();
+    }
+
+    /**
+     * Get histories of an action.
+     * 
+     * @param  int    $actionID 
+     * @access public
+     * @return array
+     */
+    public function getHistory($actionID)
+    {
+        return $this->dao->select()->from(TABLE_HISTORY)->where('action')->in($actionID)->orderBy('id')->fetchGroup('action');
+    }
+
+    /**
+     * Log histories for an action.
+     * 
+     * @param  int    $actionID 
+     * @param  array  $changes 
+     * @access public
+     * @return void
+     */
+    public function logHistory($actionID, $changes)
+    {
+        foreach($changes as $change) 
+        {
+            $change['action'] = $actionID;
+            $this->dao->insert(TABLE_HISTORY)->data($change)->exec();
+        }
     }
 
     /**
@@ -135,6 +176,65 @@ class actionModel extends model
             else
             {
                 echo $desc; 
+            }
+        }
+    }
+
+    /**
+     * Print changes of every action.
+     * 
+     * @param  string    $objectType 
+     * @param  array     $histories 
+     * @param  string    $action 
+     * @access public
+     * @return void
+     */
+    public function printChanges($objectType, $histories, $action)
+    {
+        if(empty($histories)) return;
+
+        $maxLength            = 0;          // The max length of fields names.
+        $historiesWithDiff    = array();    // To save histories without diff info.
+        $historiesWithoutDiff = array();    // To save histories with diff info.
+
+        /* Diff histories by hasing diff info or not. Thus we can to make sure the field with diff show at last. */
+        foreach($histories as $history)
+        {
+            if($history->field == 'assignedTo')
+            {
+                $users = $this->loadModel('user')->getPairs();
+                $history->old = $users[$history->old];
+                $history->new = $users[$history->new];
+            }
+
+            $fieldName = $history->field;
+            $history->fieldLabel = isset($this->lang->$objectType->$fieldName) ? $this->lang->$objectType->$fieldName : $fieldName;
+            if(isset($this->config->action->actionModules[$action]))
+            {
+                $module = $this->config->action->actionModules[$action];
+                $history->fieldLabel = isset($this->lang->$module->$fieldName) ? $this->lang->$module->$fieldName : $fieldName;
+            }
+            if(($length = strlen($history->fieldLabel)) > $maxLength) $maxLength = $length;
+            $history->diff ? $historiesWithDiff[] = $history : $historiesWithoutDiff[] = $history;
+        }
+        $histories = array_merge($historiesWithoutDiff, $historiesWithDiff);
+
+        foreach($histories as $history)
+        {
+            $history->fieldLabel = str_pad($history->fieldLabel, $maxLength, $this->lang->action->label->space);
+
+            if($history->diff != '')
+            {
+                $history->diff      = str_replace(array('<ins>', '</ins>', '<del>', '</del>'), array('[ins]', '[/ins]', '[del]', '[/del]'), $history->diff);
+                $history->diff      = ($history->field != 'subversion' and $history->field != 'git') ? htmlspecialchars($history->diff) : $history->diff;   // Keep the diff link.
+                $history->diff      = str_replace(array('[ins]', '[/ins]', '[del]', '[/del]'), array('<ins>', '</ins>', '<del>', '</del>'), $history->diff);
+                $history->diff      = nl2br($history->diff);
+                $history->noTagDiff = preg_replace('/&lt;\/?([a-z][a-z0-9]*)[^\/]*\/?&gt;/Ui', '', $history->diff);
+                printf($this->lang->action->desc->diff2, $history->fieldLabel, $history->noTagDiff, $history->diff);
+            }
+            else
+            {
+                printf($this->lang->action->desc->diff1, $history->fieldLabel, $history->old, $history->new);
             }
         }
     }

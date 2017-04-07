@@ -38,26 +38,38 @@
         ?>
         <span>
           <?php $this->action->printAction($action);?>
+          <?php if(!empty($action->history)) echo "<span id='switchButton$i' class='hand toggle change-show btn btn-mini'></span>";?>
         </span>
-        <?php if(!empty($action->comment)):?>
-        <div class='history'>
-          <?php if($canEditComment):?>
-          <span class='link-button pull-right text-muted comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit"></i>', "onclick='toggleComment($action->id)'")?></span>
-          <?php endif;?>
-          <?php 
-          echo "<div class='comment$action->id wordwrap'>";
-          echo strip_tags($action->comment) == $action->comment ? nl2br($action->comment) : $action->comment; 
-          echo "</div>";
-          ?>
-          <?php if($canEditComment):?>
-          <div id='lastCommentBox' style='display:none'>
-            <form method='post' id='ajaxForm' action='<?php echo $this->createLink('action', 'editComment', "actionID=$action->id")?>'>
-              <p><?php echo html::textarea('lastComment', $action->comment);?></p>
-              <p><?php echo html::submitButton() . html::commonButton($lang->goback, 'btn btn-default', "onclick='toggleComment($action->id)'");?></p>
-            </form>
-          </div>
-          <?php endif;?>
+ 
+        <?php if(!empty($action->comment) or !empty($action->history)):?>
+        <?php if(!empty($action->comment)) echo "<div class='history'>";?>
+        <div class='changes history' style='display:none;'>
+          <?php echo $this->action->printChanges($action->objectType, $action->history, $action->action);?>
         </div>
+        <?php if($canEditComment):?>
+        <span class='link-button pull-right text-muted comment<?php echo $action->id;?>'><?php echo html::a('#lastCommentBox', '<i class="icon-edit"></i>', "onclick='toggleComment($action->id)'")?></span>
+        <?php endif;?>
+        <?php 
+        echo "<div class='comment$action->id wordwrap'>";
+        echo strip_tags($action->comment) == $action->comment ? nl2br($action->comment) : $action->comment; 
+        echo "</div>";
+        ?>
+        <?php if($canEditComment):?>
+        <div id='lastCommentBox' style='display:none'>
+          <form method='post' id='ajaxForm' action='<?php echo $this->createLink('action', 'editComment', "actionID=$action->id")?>'>
+            <p><?php echo html::textarea('lastComment', $action->comment);?></p>
+            <p><?php echo html::submitButton() . html::commonButton($lang->goback, 'btn btn-default', "onclick='toggleComment($action->id)'");?></p>
+          </form>
+        </div>
+        <?php endif;?>
+
+        <?php if(!empty($action->files)):?>
+        <p class='files'>
+          <span><strong><?php echo $lang->action->record->uploadFile;?></strong></span>
+          <?php foreach($action->files as $file) echo "<span style='margin-right:5px'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</span>';?>
+        </ul>
+        <?php endif;?>
+        <?php if(!empty($action->comment)) echo "</div>";?>
         <?php endif;?>
       </li>
       <?php endforeach;?>

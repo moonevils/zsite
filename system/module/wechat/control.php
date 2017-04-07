@@ -92,8 +92,6 @@ class wechat extends control
      */
     public function admin()
     {
-        if(!commonModel::isAvailable('user')) die(js::alert($this->lang->wechat->userDisabled) . js::locate($this->createLink('site', 'setbasic')));
-
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 

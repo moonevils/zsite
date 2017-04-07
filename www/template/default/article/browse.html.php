@@ -31,6 +31,16 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
         <?php foreach($articles as $article):?>
         <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
         <div class='item' id="article<?php echo $article->id?>" data-ve='article'>
+          <?php if(!empty($article->image)):?>
+          <?php $pull     = (isset($this->config->article->imagePosition) and $this->config->article->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
+          <?php $imageURL = !empty($this->config->article->imageSize) ? $this->config->article->imageSize . 'URL' : 'smallURL';?>
+          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->article->imageWidth) ? $this->config->article->imageWidth . 'px' : '120px';?>">
+            <?php
+            $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+            echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
+            ?>
+          </div>
+          <?php endif;?>
           <div class='item-heading'>
             <div class="text-muted pull-right">
               <span title="<?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?></span> &nbsp;
@@ -43,16 +53,6 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
             </h4>
           </div>
           <div class='item-content'>
-            <?php if(!empty($article->image)):?>
-            <?php $pull     = (isset($this->config->article->imagePosition) and $this->config->article->imagePosition == 'left') ? 'pull-left' : 'pull-right';?>
-            <?php $imageURL = !empty($this->config->article->imageSize) ? $this->config->article->imageSize . 'URL' : 'smallURL';?>
-            <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->article->imageWidth) ? $this->config->article->imageWidth . 'px' : '100px';?>">
-              <?php
-              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-              echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'"));
-              ?>
-            </div>
-            <?php endif;?>
             <div class='text text-muted'><?php echo helper::substr($article->summary, 120, '...');?></div>
           </div>
         </div>

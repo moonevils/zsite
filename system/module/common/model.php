@@ -1055,6 +1055,57 @@ class commonModel extends model
     }
 
     /**
+     * Create changes of one object.
+     * 
+     * @param mixed $old    the old object
+     * @param mixed $new    the new object
+     * @static
+     * @access public
+     * @return array
+     */
+    public static function createChanges($old, $new)
+    {   
+        global $config;
+        $changes    = array();
+        $magicQuote = get_magic_quotes_gpc();
+        foreach($new as $key => $value)
+        {   
+            if(!isset($old->$key))                   continue;
+            if(strtolower($key) == 'last')           continue;
+            if(strtolower($key) == 'lastediteddate') continue;
+            if(strtolower($key) == 'lasteditedby')   continue;
+            if(strtolower($key) == 'assigneddate')   continue;
+            if(strtolower($key) == 'editedby')       continue;
+            if(strtolower($key) == 'editeddate')     continue;
+
+            if(is_array($value))
+            {
+                if(is_string(reset($value))) $value = join(',', $value);
+                else $value = join(',', array_keys($value)); 
+            }
+            if(is_array($old->$key)) 
+            {
+                if(is_string(reset($old->$key))) $old->$key = join(',', $old->$key);
+                else $old->$key = join(',', array_keys($old->$key)); 
+            }
+
+            if($magicQuote) $value = stripslashes($value);
+            if($value != stripslashes($old->$key))
+            {
+                $diff = '';
+                if(substr_count($value, "\n") > 1     or
+                   substr_count($old->$key, "\n") > 1 or
+                   strpos('name,title,desc,content,summary', strtolower($key)) !== false)
+                {
+                    $diff = commonModel::diff($old->$key, $value);
+                }
+                $changes[] = array('field' => $key, 'old' => $old->$key, 'new' => $value, 'diff' => $diff);
+            }
+        }
+        return $changes;
+    }
+
+    /**
      * Get the run info.
      *
      * @param mixed $startTime  the start time of this execution

@@ -2,12 +2,16 @@
 <div class='block-region region-all-bottom blocks' data-region='all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?></div>
 <div class='appinfo clearfix'>
   <div class='copyright pull-left'>
-    <?php
+    <span style='overflow:hidden; max-width: 200px; height: 20px; line-height: 20px; display:inline-block;'>
+      <?php
       $contact   = json_decode($config->company->contact);
       $company   = (empty($contact->site) or $contact->site == $this->server->http_host) ? $config->company->name : html::a('http://' . $contact->site, $config->company->name, "target='_blank'");
       echo "&copy; $company";
-      if($this->config->site->execInfo == 'show') echo $this->config->execPlaceholder;
-    ?>
+      ?>
+    </span>
+    <div class='pull-right'>
+    <?php if($this->config->site->execInfo == 'show') echo $this->config->execPlaceholder;?>
+    </div>
   </div>
   <div class='icpinfo hide'>
     <?php if(!empty($config->site->icpLink) and !empty($config->site->icpSN)) echo html::a(strpos($config->site->icpLink, 'http://') !== false ? $config->site->icpLink : 'http://' . $config->site->icpLink, $config->site->icpSN, "target='_blank'");?>

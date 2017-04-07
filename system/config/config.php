@@ -285,6 +285,7 @@ define('TABLE_BLACKLIST',      $config->db->prefix . 'blacklist');
 define('TABLE_OPERATIONLOG',   $config->db->prefix . 'operationlog');
 define('TABLE_WIDGET',         $config->db->prefix . 'widget');
 define('TABLE_ACTION',         $config->db->prefix . 'action');
+define('TABLE_HISTORY',        $config->db->prefix . 'history');
 
 /* Include cache config file. */
 include $configRoot . 'cache.php';
