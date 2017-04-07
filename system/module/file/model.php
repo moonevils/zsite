@@ -1319,4 +1319,22 @@ class fileModel extends model
         $imageOutputFun($im, $destPath);
         imagedestroy($im);
     }
+
+    /**
+     * Scan images uploaded.
+     * 
+     * @access public
+     * @return array
+     */
+    public function scanImages()
+    {
+        $files = glob($this->app->getDataRoot() . "upload/*/f_*");
+        $images = array();
+        foreach($files as $key => $file)
+        {
+            $fileInfo = pathinfo($file);
+            if(in_array(strtolower($fileInfo['extension']), $this->config->file->imageExtensions, true)) $images[] = $file;
+        }
+        return $files;
+    }
 }
