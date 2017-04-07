@@ -1090,8 +1090,24 @@ class orderModel extends model
         $content->last = helper::now();
         
         $this->dao->update(TABLE_ORDER)->data($content)->where('id')->eq($orderID)->exec();
-        
-        return !dao::isError();
+
+        $orderAddress   = json_decode($order->address);
+        $contentAddress = json_decode($content->address);
+
+        unset($order->address);
+        unset($content->address);
+
+        $order->contact = $orderAddress->contact;
+        $order->address = $orderAddress->address;
+        $order->phone   = $orderAddress->phone;
+        $order->zipcode = $orderAddress->zipcode;
+
+        $content->contact = $contentAddress->contact;
+        $content->address = $contentAddress->address;
+        $content->phone   = $contentAddress->phone;
+        $content->zipcode = $contentAddress->zipcode;
+
+        return commonModel::createChanges($order, $content);
     }
 
     /**
