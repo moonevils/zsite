@@ -18,15 +18,7 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='w-150px'><?php echo $lang->user->filterUsernameSensitive;?></th>
-          <td><?php echo html::radio('filterUsernameSensitive', $lang->user->filterUsernameSensitiveList, isset($this->config->site->filterUsernameSensitive) ? $this->config->site->filterUsernameSensitive : 'close');?></td>
-        </tr>
-        <tr class='<?php if(isset($this->config->site->filterUsernameSensitive) and $this->config->site->filterUsernameSensitive == 'close') echo 'hidden';?>'>
-          <th><?php echo $lang->user->usernameSensitive;?></th>
-          <td><?php echo html::textarea('usernameSensitive', !empty($this->config->site->usernameSensitive) ? $this->config->site->usernameSensitive : '', "class='form-control' rows=4 placeholder='{$lang->user->usernameSensitiveTip}'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->user->registerAgreement;?></th>
+          <th class='w-100px'><?php echo $lang->user->registerAgreement;?></th>
           <td><?php echo html::radio('registerAgreement', $lang->user->registerAgreementList, isset($this->config->site->registerAgreement) ? $this->config->site->registerAgreement : 'close');?></td>
         </tr>
         <tr class='<?php if(isset($this->config->site->registerAgreement) and $this->config->site->registerAgreement == 'close') echo 'hidden';?>'>

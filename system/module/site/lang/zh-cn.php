@@ -130,6 +130,10 @@ $lang->site->checkEmailList = array();
 $lang->site->checkEmailList['open']  = '开启';
 $lang->site->checkEmailList['close'] = '关闭';
 
+$lang->site->sensitiveList = array();
+$lang->site->sensitiveList['content'] = '内容敏感词';
+$lang->site->sensitiveList['user']    = '用户名敏感词';
+
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[1] = '检查';
 $lang->site->sessionIpoptions[0] = '不检查';
@@ -216,6 +220,7 @@ $lang->site->useDefaultCdn    = '使用默认地址';
 $lang->site->defaultTip       = '站点维护中……';
 $lang->site->icpTip           = '仅支持中国大陆网站';
 $lang->site->requestTypeTip   = '经检测，您可使用PATH_INFO模式，SEO效果更佳。';
+$lang->site->sensitiveTip     = '多个敏感词之间请用英文逗号分隔';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';

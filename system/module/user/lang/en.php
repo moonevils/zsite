@@ -265,12 +265,4 @@ $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your password.';
 $lang->user->placeholder->verifyCode = 'Please enter verification code received by Email.';
 
-$lang->user->filterUsernameSensitive = 'Username Filter';
-
-$lang->user->filterUsernameSensitiveList = array(); 
-$lang->user->filterUsernameSensitiveList['open']  = 'open';
-$lang->user->filterUsernameSensitiveList['close'] = 'close';
-
-$lang->user->usernameSensitive    = 'Sensitive Username';
-$lang->user->usernameIsSensitive  = 'Username can not be sensitive, please change it';
-$lang->user->usernameSensitiveTip = 'Mutiple sensitive usernames should be devided by quote';
+$lang->user->isSensitive = 'Username can not be sensitive, please change it';
