@@ -570,4 +570,25 @@ class site extends control
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
+
+    /**
+     * Set registe agreement.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setRegAgreement()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setregagreement')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setRegAgreement;
+        $this->display();
+
+    }
 }

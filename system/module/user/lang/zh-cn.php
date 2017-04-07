@@ -166,6 +166,8 @@ $lang->user->register->lblAccount  = '必须是三位以上的英文字母或数
 $lang->user->register->lblPassword = '数字和字母组成，六位以上';
 $lang->user->register->login       = '请登录';
 $lang->user->register->loginTip    = '已有帐号';
+$lang->user->register->agreement   = '注册协议';
+$lang->user->register->agree       = '我已经知晓并同意';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和数字组合，最少六位';

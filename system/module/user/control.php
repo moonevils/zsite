@@ -1148,45 +1148,14 @@ class user extends control
     }
 
     /**
-     * Set the setting of user
-     *
+     * View register agreement.
+     * 
      * @access public
-     * @param  void
-     * @return string
+     * @return void
      */
-    public function setting()
+    public function viewRegAgreement()
     {
-        if($this->session->currentGroup == 'user')
-        {
-            unset($this->lang->user->menu);
-            $this->lang->user->menu       = $this->lang->userSetting->menu;
-            $this->lang->menuGroups->user = 'userSetting';     
-        }
-
-        if($this->session->currentGroup == 'setting')
-        {
-            unset($this->lang->user->menu);
-            $this->lang->user->menu       = $this->lang->security->menu;
-            $this->lang->menuGroups->user = 'security';     
-        }
-        
-        if(!empty($_POST))
-        {
-            $setting = fixer::input('post')->get();
-
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
-
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setting')));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title = $this->lang->user->setting;
-        $this->display();
-    }
-
-    public function viewRegisterAgreement()
-    {
-        $this->view->title = isset($this->config->site->registerAgreementTitle) ? $this->config->site->registerAgreementTitle : $this->lang->user->registerAgreement;
+        $this->view->title = !empty($this->config->site->regAgreementTitle) ? $this->config->site->regAgreementTitle : $this->lang->site->regAgreement;
         $this->display();
     }
 }

@@ -45,6 +45,3 @@ $config->user->relatedTables[TABLE_ADDRESS][]  = 'account';
 $config->user->relatedTables[TABLE_CART][]     = 'account';
 $config->user->relatedTables[TABLE_ORDER][]    = 'account';
 $config->user->relatedTables[TABLE_ARTICLE][]  = 'addedBy';
-
-$config->user->editor = new stdclass();
-$config->user->editor->setting = array('id' => 'registerAgreementContent', 'tools' => 'full');
