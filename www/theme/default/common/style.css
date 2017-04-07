@@ -433,32 +433,15 @@ td #aliasLabel {display: table-row;}
 #msgBox .label.label-badge {font-weight: bold; background-color: #fff;border: 1px solid #ccc; color: #666;padding: 3px;min-width: 20px}
 #msgBox.hiding {display: none;}
 
-/* Icon chanzhi */
-.icon-chanzhi {display: inline-block!important; width: 32px; height: 12px; position: relative; top: 1px;}
-.icon-chanzhi > i, .icon-chanzhi > i:before, .icon-chanzhi > i:after {display: block; border: 1px solid #777; position: absolute; content: ''; left: -1000em; top: 0; transition: all .5s cubic-bezier(.175,.885,.32,1);}
-.icon-chanzhi > .ic1 {width: 5px; height: 5px; left: 0; top: 3px;}
-.icon-chanzhi > .ic1:before {width: 1px; height: 10px; left: 1px; top: -4px; border-right: none}
-.icon-chanzhi > .ic1:after {width: 4px; height: 2px; left: 0; top: 6px; border-top: none}
-.icon-chanzhi > .ic2 {width: 6px; left: 0; top: 11px; border-bottom: none}
-.icon-chanzhi > .ic2:before {width: 10px; height: 1px; left: 5px; top: -2px; border-bottom: none}
-.icon-chanzhi > .ic2:after {height: 8px; width: 1px; border-right: none; left: 9px; top: -8px}
-.icon-chanzhi > .ic3 {width: 9px; height: 5px; left: 6px; top: 4px}
-.icon-chanzhi > .ic3:before {width: 8px; height: 1px; border-bottom: none; left: 0; top: 1px}
-.icon-chanzhi > .ic3:after {width: 4px; height: 3px; left: -1px; top: -5px}
-.icon-chanzhi > .ic4 {width: 4px; height: 3px; left: 11px;}
-.icon-chanzhi > .ic4:before {width: 1px; height: 1px; border-right: none; left: 5px; top: -1px;}
-.icon-chanzhi > .ic4:after {width: 7px; height: 4px; border-left: none; border-right: none; left: 5px; top: 1px}
-.icon-chanzhi > .ic5 {width: 1px; height: 6px; top: 2px; left: 20px; border-right: none}
-.icon-chanzhi > .ic5:before {width: 3px; border-bottom: none; border-top: none; height: 1px; left: -2px; top: 5px;}
-.icon-chanzhi > .ic5:after {width: 5px; border-bottom: none; border-top: none; height: 1px; left: -3px; top: 6px;}
-.icon-chanzhi > .ic6 {width: 7px; border-bottom: none; border-top: none; height: 1px; left: 17px; top: 10px;}
-.icon-chanzhi > .ic6:before {width: 9px; border-bottom: none; border-top: none; height: 1px; left: -2px; top: 1px;}
-.icon-chanzhi > .ic7 {width: 7px; height: 10px; left: 25px; top: 1px; border-left: none;}
-.icon-chanzhi > .ic7:before {width: 4px; height: 5px; border-bottom: none; left: 0; top: 2px}
-.icon-chanzhi > .ic7:after {width: 1px; height: 2px; border-right: none; left: 0; top: 7px;}
-
-[lang="en"] .icon-chanzhi {height: 11px; width: 50px; background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAWCAMAAAC13D+jAAAAY1BMVEUAAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAAD///8AAADRi0JcAAAAH3RSTlMAv79AQH9/ICCfn2Bgz89QUDAwj48QEO/vcHDf36+vEpEwHgAAAbFJREFUOMtkkQGqxCAMRIcQwhCKiJRSSln2/qf8HSu17BccjeYlJAE8woGFuASPcMgSwe4T4bykAvDiXhrMAZi896pbShyR7sZ+OOUaCXwI1HUiNVfdTnak6CUQAUXXf9n6I5eJJKW2pJCm+8Y3Yg1faE3EkE1m8hI5aU1kMzxIMbMdaCvqIYQ5EHUnTjOD72bF8ZslqgLJTN6IH7OWvn9r6ck2mcxRi78R2N0xfzrGD4DjjpCno/xHdJLmGMiiQbbsJr+ay8asYy43ohS5zulXHThe0++/Y/qK5w34K4sMWCAGQSj8RERkRMSIMcZx//9fXs/FOu6CXll+iqpmCmyOIXjEp2xmnj7Dy4dUAFpUS4MoAKH3UXkLisJCVTwPdbpaAC8H6r6QGjtvlydS+GIwA6Pzv/R89G0h4VTZgkjjvfs3Ig1vcC1EEI1m+BA6cS2kCx6kiMgBtB31JOIxEXbHrvELPUSK4jeLVQaiGX4jeq5acv/Wksk6TY9Ziy4kfbJj+nTMXwDOO0JcivKP8HQXxUQ2DrJFmv7mXLpHnXO5EaaIfU2/8sD5Nf38ndNnPG0fuxASQVOwqJEAAAAASUVORK5CYII=") no-repeat top left; top: 1px; opacity: .7}
-[lang="en"] .icon-chanzhi > i, [lang="en"] .icon-chanzhi > i:before, [lang="en"] .icon-chanzhi > i:after {display: none;}
+/* Image chanzhi in footer */
+.img-chanzhi, .img-chanzhi-pro {background: url(/theme/default/common/images/chanzhi.gif) no-repeat 0 0; display: inline-block; width: 32px; height: 12px; opacity: .55; filter: Alpha(opacity=50); transition: opacity .4s;}
+.img-chanzhi:hover {opacity: .75; filter: Alpha(opacity=75);}
+.img-chanzhi-inverse,
+.img-chanzhi.img-chanzhi-inverse,
+.img-chanzhi-pro.img-chanzhi-inverse {background-position: 0 -12px}
+.img-chanzhi-pro {background-image: url(/theme/default/common/images/chanzhi-pro.gif); width: 52px;}
+html[lang="en"] .img-chanzhi {background-image: url(/theme/default/common/images/chanzhi-en.gif); width: 37px;}
+html[lang="en"] .img-chanzhi-pro {background-image: url(/theme/default/common/images/chanzhi-pro-en.gif); width: 52px;}
 
 /* Footer */
 #footer {padding: 20px 0; text-align: center; position: relative; border-top: 1px solid #ddd;}
@@ -468,8 +451,8 @@ td #aliasLabel {display: table-row;}
 #copyrightInfo, #icpInfo {color: #999; font-size: 12px;}
 #powerby {position: absolute; right: 0; top: 20px; padding: 0; overflow: hidden;}
 #powerby a {margin: 0; display: block;}
-#powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: #1152b7; text-decoration: none}
-[lang="en"] #powerby:hover .icon-chanzhi {opacity: 1}
+#powerby a:hover {border-color: #1152b7; text-decoration: none}
+#powerby a:hover .img-chanzhi {opacity: .75; filter: Alpha(opacity=75);}
 #powerby a > .name {display: block; width: 0; overflow: hidden; position: absolute;}
 @media (max-width: 767px) {
   #footNav, #icpInfo {display: none;}

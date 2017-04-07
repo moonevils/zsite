@@ -143,7 +143,7 @@ class mail extends control
      */
     public function test()
     {
-        $this->lang->mail->menu       = $this->lang->interface->menu;
+        $this->lang->mail->menu = $this->lang->interface->menu;
         
         if(!$this->config->mail->turnon)
         {
