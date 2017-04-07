@@ -289,12 +289,4 @@ $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';
 $lang->user->placeholder->verifyCode = '请输入验证邮件里面收到的验证码';
 
-$lang->user->filterUsernameSensitive = '用户名过滤';
-
-$lang->user->filterUsernameSensitiveList = array(); 
-$lang->user->filterUsernameSensitiveList['open']  = '开启';
-$lang->user->filterUsernameSensitiveList['close'] = '关闭';
-
-$lang->user->usernameSensitive    = '用户名敏感词';
-$lang->user->usernameIsSensitive  = '用户名或者真实姓名不能含有敏感词，请修改后再提交';
-$lang->user->usernameSensitiveTip = '多个敏感词之间请用英文逗号分隔';
+$lang->user->isSensitive = '用户名或者真实姓名不能含有敏感词，请修改后再提交';

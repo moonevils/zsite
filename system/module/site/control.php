@@ -77,12 +77,13 @@ class site extends control
     }
 
     /**
-     * set sensitive.
+     * Set sensitive.
      *
+     * @param  string $type
      * @access public
      * @return void
      */
-    public function setSensitive()
+    public function setSensitive($type = 'content')
     {
         $this->lang->site->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
@@ -91,13 +92,15 @@ class site extends control
         {
             $setting = fixer::input('post')->get();
 
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if($type == 'content') $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if($type == 'user')    $result = $this->loadModel('setting')->setItems('system.user', $setting);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsensitive')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsensitive', "type={$type}")));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
         $this->view->title = $this->lang->site->setsensitive;
+        $this->view->type  = $type;
         $this->display();
     }
 

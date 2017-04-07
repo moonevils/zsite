@@ -1,11 +1,5 @@
 $(document).ready(function()
 {
-    $('[name=filterUsernameSensitive]').change(function()
-    {
-        var filterUsernameSensitive = $('[name=filterUsernameSensitive]:checked').val(); 
-        if(filterUsernameSensitive == 'close') $('#usernameSensitive').parents('tr').addClass('hidden');
-        else $('#usernameSensitive').parents('tr').removeClass('hidden');
-    });
     $('[name=registerAgreement]').change(function()
     {
         var registerAgreement = $('[name=registerAgreement]:checked').val(); 
@@ -20,6 +14,5 @@ $(document).ready(function()
             $('#registerAgreementTitle').parents('tr').removeClass('hidden');
         }
     });
-    $('[name=filterUsernameSensitive]').change();
     $('[name=registerAgreement]').change();
 });

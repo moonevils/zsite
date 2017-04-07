@@ -35,17 +35,18 @@ class user extends control
         {
             $this->loadModel('guarder')->logOperation('ip', 'register', helper::getRemoteIP());
             
-            if(isset($this->config->site->filterUsernameSensitive) and $this->config->site->filterUsernameSensitive == 'open' and isset($_POST['account']) and isset($_POST['realname']))
+            if(isset($this->config->user->filterSensitive) and $this->config->user->filterSensitive == 'open' and isset($_POST['account']) and isset($_POST['realname']))
             {
-                $dicts = !empty($this->config->site->usernameSensitive) ? $this->config->site->usernameSensitive : $this->config->sensitive;
+                $dicts = !empty($this->config->user->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
                 $dicts = explode(',', $dicts);
-                if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->usernameIsSensitive));
+                if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->isSensitive));
             }
+
             if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open' and isset($_POST['account']) and isset($_POST['realname']))
             {
                 $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
                 $dicts = explode(',', $dicts);
-                if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->usernameIsSensitive));
+                if(!validater::checkSensitive(array($_POST['account'], $_POST['realname']), $dicts)) $this->send(array('result' => 'fail', 'message' => $this->lang->user->isSensitive));
             }
             
             $this->user->create();
