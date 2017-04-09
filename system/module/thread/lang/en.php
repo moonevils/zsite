@@ -54,6 +54,7 @@ $lang->thread->confirmHideReply    = "Do you want to hide it?";
 $lang->thread->confirmHideThread   = "Do you want to hide it?";
 $lang->thread->confirmDeleteReply  = "Do you want to delete it?";
 $lang->thread->confirmDeleteFile   = "Do you want to delete it?";
+$lang->thread->canNotDelete        = "Delete thread faild, the reason is no authority.";
 
 $lang->thread->lblEdited       = 'Last edited by %s on %s';
 $lang->thread->message         = '%s replied in #%s the thread %s, which is %s';
