@@ -56,6 +56,7 @@ $lang->thread->confirmHideReply    = "您确定隐藏回帖吗？";
 $lang->thread->confirmHideThread   = "您确定隐藏该主题吗？";
 $lang->thread->confirmDeleteReply  = "您确定删除该回帖吗？";
 $lang->thread->confirmDeleteFile   = "您确定删除该附件吗？";
+$lang->thread->canNotDelete        = "删除失败，您没有删除权限。";
 
 $lang->thread->lblEdited       = '%s 最后编辑, %s';
 $lang->thread->message         = '%s在论坛#%s回复了主题：%s，内容为：%s';
