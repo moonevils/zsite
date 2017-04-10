@@ -202,7 +202,6 @@ $lang->menu->thread       = '主题|forum|admin|';
 $lang->menu->forumreply   = '回帖|reply|admin|';
 $lang->menu->submission   = '投稿|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
-$lang->menu->userSetting  = '设置|user|setting|';
 
 $lang->menu->stat    = '统计|stat|traffic|';
 $lang->menu->tag     = '关键词|tag|admin|';
@@ -264,7 +263,6 @@ $lang->orderSetting->menu->express      = '快递|tree|browse|type=express';
 
 $lang->userSetting = new stdclass();
 $lang->userSetting->menu = new stdclass();
-$lang->userSetting->menu->userSetting   = '会员设置|user|setting|';
 $lang->userSetting->menu->score         = '积分规则|score|setcounts|';
 $lang->userSetting->menu->stateinfo     = '积分结算|score|showstateinfo|';
 
@@ -329,7 +327,6 @@ $lang->security->menu->filter      = '过滤设置|site|setfilter|';
 $lang->security->menu->blacklist   = '黑名单管理|guarder|setblacklist|';
 $lang->security->menu->whitelist   = '白名单管理|guarder|setwhitelist|';
 $lang->security->menu->sensitive   = '敏感词设置|site|setsensitive|';
-$lang->security->menu->userSetting = '会员设置|user|setting|';
 $lang->security->menu->captcha     = '验证码设置|guarder|setcaptcha|';
 $lang->security->menu->upload      = '附件上传|site|setupload|';
 $lang->security->menu->admin       = '管理员|user|admin|admin=1';
