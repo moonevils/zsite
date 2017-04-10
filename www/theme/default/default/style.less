@@ -591,6 +591,7 @@ a:active, a:focus
     .border(@footer-border-style, @footer-border-color, @border-width, @border-radius);
 }
 #footNav a:hover, #powerby a:hover {color: @link-hover-color;}
+#powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @link-hover-color;}
 
 .footerLayout(@footer-border-style, @footer-backcolor);
 
@@ -619,3 +620,17 @@ a:active, a:focus
 .m-message .comment-item {border-radius:0;}
 .m-message .panel-heading.content-heading {background: rgb(249, 249, 249);}
 .m-message .panel-heading.reply-heading {background: rgb(249, 249, 249);}
+
+/*cart*/
+#cartBox{
+    margin-right: 20px;
+}
+#cartBox a{
+    text-decoration: none;
+}
+#cartBox .label{
+    background-color: #ea644a;
+}
+#cartBox:hover a{
+    color: #ea644a;
+}
