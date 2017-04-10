@@ -33,7 +33,7 @@ if(isset($content->image)) $pages = $this->loadModel('file')->processImages($pag
     $url = helper::createLink('page', 'view', "id=$page->id", "name=$page->alias");
     ?>
     <div class='item'>
-      <div class='item-heading'><strong><?php echo html::a($url, $page->title);?></strong></div>
+      <div class='item-heading'><strong><?php echo html::a($url, $page->title, "style='color:{$page->titleColor}'");?></strong></div>
       <div class='item-content'>
         
         <div class='text small text-muted'>
@@ -63,11 +63,11 @@ if(isset($content->image)) $pages = $this->loadModel('file')->processImages($pag
       <?php $url = helper::createLink('page', 'view', "id={$page->id}", "name={$page->alias}");?>
       <?php if(isset($content->time)):?>
       <li>
-        <?php echo html::a($url, $page->title, "title='{$page->title}'");?>
+        <?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?>
         <span class='pull-right'><?php echo substr($page->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
-      <li><?php echo html::a($url, $page->title, "title='{$page->title}'");?></li>
+      <li><?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?></li>
       <?php endif;?>
       
       <?php endforeach;?>

@@ -63,26 +63,21 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <th class='w-100px'><?php echo $lang->article->title;?></th>
           <td colspan='2'>
             <div class='order input-group'>
+              <span class='input-group-btn colorplate'>
+                <span class='current color active' data=''>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                  <div class='dropdown-menu colors'>
+                    <?php echo $colorPlates; ?>
+                  </div>
+                </span>
+                <?php echo html::input('titleColor', '', "class='form-control input-color hidden' placeholder='" . $lang->colorTip . "'");?>
+              </span>
               <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?>"><?php echo html::input('title', '', "class='form-control'");?></div>
               <?php if($type == 'page'):?>
               <div class='col-sm-3 order'>
                 <div class='input-group'>
                   <span class="input-group-addon fix-border"><?php echo $lang->article->order;?></span>
                   <?php echo html::input('order', $order, "class='form-control'");?>
-                </div>
-              </div>
-              <?php endif;?>
-              <?php if($type != 'page'):?>
-              <div class='input-group-addon colorplate clearfix'>
-                <div class='input-group color active' data="<?php echo $article->titleColor?>">
-                  <label class='input-group-addon'><?php echo $lang->color;?></label>
-                  <span class='input-group-btn'>
-                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
-                    <div class='dropdown-menu colors'>
-                      <?php echo $colorPlates; ?>
-                    </div>
-                  </span>
-                  <?php echo html::input('titleColor', '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                 </div>
               </div>
               <?php endif;?>

@@ -30,7 +30,7 @@ $pages   = $this->loadModel('article')->getPageList($content->limit);
     $url = helper::createLink('page', 'view', "id=$page->id", "name=$page->alias");
     ?>
     <a class='card' href='<?php echo $url ?>'>
-      <div class='card-heading'><strong><?php echo $page->title;?></strong></div>
+      <div class='card-heading' style='color:<?php echo $page->titleColor;?>'><strong><?php echo $page->title;?></strong></div>
       <div class='table-layout'>
         <div class='table-cell'>
           <div class='card-content text-muted small'>
@@ -57,11 +57,11 @@ $pages   = $this->loadModel('article')->getPageList($content->limit);
       <?php $url = helper::createLink('page', 'view', "id={$page->id}", "name={$page->alias}");?>
       <?php if(isset($content->time)):?>
       <div class='list-group-item'>
-        <?php echo html::a($url, $page->title, "title='{$page->title}'");?>
+        <?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?>
         <span class='pull-right text-muted'><?php echo substr($page->addedDate, 0, 10);?></span>
       </div>
       <?php else:?>
-      <div class='list-group-item'><?php echo html::a($url, $page->title, "title='{$page->title}'");?></div>
+      <div class='list-group-item'><?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?></div>
       <?php endif;?>
       
       <?php endforeach;?>
