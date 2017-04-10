@@ -80,6 +80,10 @@ $lang->article->submission     = 'Submit';
 $lang->article->submissionTime = 'Submit On';
 $lang->article->noSubmission   = 'You have no submissions yet. Submit and earn points NOW!';
 
+$lang->article->orderBy = new stdclass();
+$lang->article->orderBy->time = 'Time';
+$lang->article->orderBy->hot  = 'Hot';
+
 $lang->article->submissionOptions = new stdclass;
 $lang->article->submissionOptions->open  = 'On';
 $lang->article->submissionOptions->close = 'Off';
@@ -143,3 +147,24 @@ $lang->article->noCategories = array();
 $lang->article->noCategories['article'] = 'You have not added the categories for article, please add the categories at first.';
 $lang->article->noCategories['blog']    = 'You have not added the categories for blog, please add the categories at first.';
 $lang->article->noCategories['video']   = 'You have not added the categories for video, please add the categories at first.';
+
+$lang->article->blog = new stdclass();
+$lang->article->blog->category                   = 'Category of blog page';
+$lang->article->blog->categoryLevel              = 'Level';
+$lang->article->blog->categoryNameList['abbr']   = 'Abbr';
+$lang->article->blog->categoryNameList['full']   = 'Full';
+$lang->article->blog->categoryLevelList['first'] = 'Root';
+$lang->article->blog->categoryLevelList['final'] = 'Final';
+
+$lang->article->blog->categoryOptions['1'] = 'Show';
+$lang->article->blog->categoryOptions['0'] = 'Hide';
+
+$lang->article->browseImage = new stdclass();
+$lang->article->browseImage->common   = 'Image on browse page';
+$lang->article->browseImage->maxWidth = 'max width';
+
+$lang->article->browseImage->positionList['left']  = 'Left';
+$lang->article->browseImage->positionList['right'] = 'Right';
+
+$lang->article->browseImage->sizeList['small']  = 'Small';
+$lang->article->browseImage->sizeList['middle'] = 'Middle';

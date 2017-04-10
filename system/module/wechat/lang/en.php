@@ -132,4 +132,5 @@ $lang->wechat->curlSSLRequired = "This function requires curl module with ssl en
 $lang->wechat->needCertified   = "This feature needs the account to be certified.";
 $lang->wechat->integrateInfo   = "Please interate in the wechat control panel. <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>Help</a>";
 $lang->wechat->integrateDone   = "I have interated with wechat server";
+$lang->wechat->openUserModule  = "You should open user module first, open?";
 $lang->wechat->userDisabled    = "Wechat needs to open uesr module.";

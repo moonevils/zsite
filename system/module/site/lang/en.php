@@ -54,6 +54,9 @@ $lang->site->failClear       = 'Failed';
 $lang->site->clearCacheTip   = '<td>You do NOT have the privilege to clear cahce. Please update your privilege of <code>%s</code>.<td>';
 $lang->site->hour            = 'Hour';
 $lang->site->homeMenus       = 'Homepage Menu';
+$lang->site->agreement        = 'Agreement';
+$lang->site->agreementTitle   = 'Title';
+$lang->site->agreementContent = 'Content';
 
 $lang->site->importantOption  = 'Key Action Verification';
 $lang->site->resetPassword    = 'Reset Password';
@@ -96,6 +99,7 @@ $lang->site->changeSetting = "Change Settings";
 $lang->site->setStat       = "Traffic Report";
 $lang->site->setHomeMenu   = "Homepage Menu";
 $lang->site->openModule    = "Open module";
+$lang->site->setAgreement  = "Set Agreement";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Enterprise Portal';
@@ -109,6 +113,10 @@ $lang->site->requestTypeList['GET']        = 'GET';
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
 $lang->site->statusList->pause  = 'Down';
+
+$lang->site->agreementList = array();
+$lang->site->agreementList['open']  = 'Open';
+$lang->site->agreementList['close'] = 'Close';
 
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = 'On';
@@ -129,6 +137,10 @@ $lang->site->checkLocationList['close'] = 'Off';
 $lang->site->checkEmailList = array();
 $lang->site->checkEmailList['open']  = 'On';
 $lang->site->checkEmailList['close'] = 'Off';
+
+$lang->site->sensitiveList = array();
+$lang->site->sensitiveList['content'] = 'Content';
+$lang->site->sensitiveList['user']    = 'User Name';
 
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[1] = 'On';
@@ -216,6 +228,7 @@ $lang->site->useDefaultCdn    = 'Use default address';
 $lang->site->defaultTip       = 'Sorry, the site is currently down for maintenance……';
 $lang->site->icpTip           = 'Mainland China Only';
 $lang->site->requestTypeTip   = 'Select PATH_INFO for SEO.';
+$lang->site->sensitiveTip     = 'Use "," to separate sensitive.';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots %s is not writable. Please update your permissions.';
