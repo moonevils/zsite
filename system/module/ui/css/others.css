@@ -26,3 +26,5 @@
 
 #ajaxForm .form-footer{padding: 10px 10px 10px 127px;}
 #ajaxForm .table, #watermarkTab .alert-danger{margin-bottom: 0;}
+
+.watermark-footer, .thumb-footer{display: inline-block;}

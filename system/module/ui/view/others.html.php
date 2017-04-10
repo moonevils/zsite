@@ -223,12 +223,12 @@ foreach (explode('|', $lang->colorPlates) as $value)
       </div>
       <div class='form-footer'>
         <?php echo html::submitButton();?>
-        <div class='thumb-footer hide'>
-          <?php echo html::a(helper::createLink('file', 'rebuildthumbs'), $lang->ui->rebuildThumbs, "class='btn btn-primary' id='execButton'");?>
+        <div class='thumb-footer hidden'>
+          <?php echo html::a(helper::createLink('file', 'rebuildthumbs'), $lang->ui->rebuildThumbs, "class='btn btn-primary' id='thumbExecButton'");?>
           <span class='alert alert-success total hide'></span>
         </div>
-        <div class='watermark-footer hide'>
-          <?php if($this->config->file->watermark == 'open') echo html::a(helper::createLink('file', 'rebuildWatermark'), $lang->file->rebuildWatermark, "class='btn btn-primary' id='execButton'");?>
+        <div class='watermark-footer hidden'>
+          <?php if($this->config->file->watermark == 'open') echo html::a(helper::createLink('file', 'rebuildWatermark'), $lang->file->rebuildWatermark, "class='btn btn-primary' id='watermarkExecButton'");?>
           <span class='alert alert-success total hide'></span>
         </div>
       </div>
