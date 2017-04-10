@@ -66,7 +66,7 @@ $lang->thread->successShow     = 'Done!';
 $lang->thread->readonlyMessage = 'This post is <strong>Read Only</strong>. You cannot reply to it.';
 $lang->thread->successTransfer = 'Done!';
 $lang->thread->thanks          = 'It will be posted once approved.';
-$lang->thread->replySuccess    = 'Replies successful.';
+$lang->thread->replySuccess    = 'Replies successfully.';
 $lang->thread->viewReplies     = 'View your reply';
 $lang->thread->stayCurrent     = 'Stay on the current page';
 $lang->thread->quoteTitle      = "<div class='quote-title'>Post by %s on %s</div>";    
