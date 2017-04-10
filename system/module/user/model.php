@@ -882,7 +882,7 @@ class userModel extends model
     public function createOAuthCallbackURL($provider)
     {
         if($this->config->requestType == 'GET' and $provider == 'qq') return commonModel::getSysURL() . '/index.php/user-oauthCallback-qq.html';
-        return rtrim(commonModel::getSysURL(), '/') . helper::createLink('user', 'oauthCallback', "provider=$provider");
+        return rtrim(commonModel::getSysURL(), '/') . commonModel::createFrontLink('user', 'oauthCallback', "provider=$provider");
     }
 
     /**
