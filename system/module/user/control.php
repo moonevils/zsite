@@ -1153,9 +1153,9 @@ class user extends control
      * @access public
      * @return void
      */
-    public function viewRegAgreement()
+    public function agreement()
     {
-        $this->view->title = !empty($this->config->site->regAgreementTitle) ? $this->config->site->regAgreementTitle : $this->lang->site->regAgreement;
+        $this->view->title = !empty($this->config->site->agreementTitle) ? $this->config->site->agreementTitle : $this->lang->site->agreement;
         $this->display();
     }
 }

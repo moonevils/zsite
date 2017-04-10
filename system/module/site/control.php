@@ -577,17 +577,17 @@ class site extends control
      * @access public
      * @return void
      */
-    public function setRegAgreement()
+    public function setAgreement()
     {
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setregagreement')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setagreement')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title = $this->lang->site->setRegAgreement;
+        $this->view->title = $this->lang->site->setAgreement;
         $this->display();
 
     }
