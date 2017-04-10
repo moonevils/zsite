@@ -1,17 +1,18 @@
 $(function()
 {
-    if(v.regAgreement == 'open')
+    if(v.agreement == 'open')
     {
-        $('#submit').attr("disabled",true);
-        $("input[name=registerAgreement]").change(function()
+        $('#submit').attr('disabled', true);
+
+        $('input[name=agreement]').change(function()
         {
-            if($('input[name=registerAgreement]').prop('checked'))
+            if($('input[name=agreement]').prop('checked'))
             {
-                $('#submit').attr("disabled", false);
+                $('#submit').attr('disabled', false);
             }
-            if(!$('input[name=registerAgreement]').prop('checked'))
+            if(!$('input[name=agreement]').prop('checked'))
             {
-                $('#submit').attr("disabled", true);
+                $('#submit').attr('disabled', true);
             }
         });
     }
