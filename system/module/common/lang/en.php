@@ -199,7 +199,6 @@ $lang->menu->thread       = 'Thread|forum|admin|';
 $lang->menu->forumreply   = 'Post|reply|admin|';
 $lang->menu->submission   = 'Submission|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
-$lang->menu->userSetting  = 'Setting|user|setting|';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
 $lang->menu->tag     = 'Keywords|tag|admin|';
@@ -261,7 +260,6 @@ $lang->orderSetting->menu->express      = 'Shipping Carrier|tree|browse|type=exp
 
 $lang->userSetting = new stdclass();
 $lang->userSetting->menu = new stdclass();
-$lang->userSetting->menu->userSetting   = 'User Setting|user|setting|';
 $lang->userSetting->menu->score         = 'Score Rule|score|setcounts|';
 $lang->userSetting->menu->stateinfo     = 'Score Compute|score|showstateinfo|';
 
@@ -326,7 +324,6 @@ $lang->security->menu->filter      = 'Filter|site|setfilter|';
 $lang->security->menu->blacklist   = 'Blacklist|guarder|setblacklist|';
 $lang->security->menu->whitelist   = 'Whitelist|guarder|setwhitelist|';
 $lang->security->menu->sensitive   = 'Sensitive Words|site|setsensitive|';
-$lang->security->menu->userSetting = 'Users|user|setting|';
 $lang->security->menu->captcha     = 'Security Questions|guarder|setcaptcha|';
 $lang->security->menu->upload      = 'File Upload|site|setupload|';
 $lang->security->menu->admin       = 'Administrators|user|admin|admin=1';
