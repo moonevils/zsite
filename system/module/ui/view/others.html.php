@@ -100,7 +100,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
             <tr>
               <th><?php echo $lang->article->blog->category;?></th>
-              <td><?php echo html::radio('blog[showCategory]', $lang->article->blog->categoryList, isset($this->config->blog->showCategory) ? $this->config->blog->showCategory : '0');?></td>
+              <td><?php echo html::radio('blog[showCategory]', $lang->article->blog->categoryOptions, isset($this->config->blog->showCategory) ? $this->config->blog->showCategory : '0');?></td>
               <td></td>
             </tr>
             <tr class='blog-setting <?php echo (!isset($this->config->blog->showCategory) || !$this->config->blog->showCategory) ? "hide" : "";?>'>
