@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `eps_action` (
 CREATE TABLE IF NOT EXISTS `eps_article` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
+  `titleColor` varchar(10) NOT NULL,
   `alias` varchar(100) NOT NULL,
   `keywords` varchar(150) NOT NULL,
   `summary` text NOT NULL,
@@ -312,6 +313,7 @@ CREATE TABLE IF NOT EXISTS `eps_oauth` (
 CREATE TABLE IF NOT EXISTS `eps_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
+  `titleColor` varchar(10) NOT NULL, 
   `alias` varchar(100) NOT NULL,
   `unsaleable` enum('0', '1') NOT NULL DEFAULT '0',
   `mall` text NOT NULL,
@@ -573,6 +575,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `public` varchar(30) NOT NULL DEFAULT '0',
   `emailCertified` enum('0', '1') NOT NULL DEFAULT '0',
   `security` text,
+  `notification`   varchar(20) NOT NULL DEFAULT '',
   `os` char(30) NOT NULL,
   `browser` varchar(100) NOT NULL,
   `lang` char(30) NOT NULL,
