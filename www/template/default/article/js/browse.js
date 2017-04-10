@@ -36,6 +36,9 @@ $(document).ready(function()
 
         $.cookie('articleOrderBy' + v.categoryID, fieldName + '_' + orderType);
 
-        $('#mainContainer').load(location.href + ' #articleList', function(){ setSorterClass()});
+        r = Math.random();
+        url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #articleList' : location.href + '?r=' + r + ' #articleList';
+
+        $('#mainContainer').load(url, function(){ setSorterClass()});
     });
 });
