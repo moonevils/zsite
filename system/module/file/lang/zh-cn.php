@@ -95,7 +95,7 @@ $lang->file->evilChar         = "包含非法字符";
 $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，请手动复制";
 $lang->file->fontNotDownload  = "字体文件没有下载成功";
-$lang->file->fontPosition     = '开启图片水印功能后字体文件下载到tmp/fonts目录下。';
+$lang->file->fontPosition     = '图片水印功能需要下载字体文件到 %s 目录。';
 
 $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '删除全部';

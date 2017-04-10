@@ -761,46 +761,18 @@ class file extends control
      * @access public
      * @return void
      */
-    public function rebuildWatermark($imageDirKey = 0, $lastImage = 0, $completed = 0, $total = 0)
+    public function rebuildWatermark($last = 0, $total = 0)
     {
-        $imageDirs = glob($this->app->getDataRoot() . "upload/*");
-        if($total == 0)
-        {
-            foreach($imageDirs as $dir)
-            {
-                $images = glob($dir . '/f_*');
-                $total  += count($images);
-            }
-        }
-        $rate = round($completed / $total * 100) . $this->lang->percent;
-
-        $imageDir   = $imageDirs[$imageDirKey];
-        $images     = glob($imageDir . '/f_*');
-        $imageCount = count($images);
-        $limit      = $imageCount - $lastImage >= 10 ? 10 : $imageCount - $lastImage; 
-        $rawImages  = array_slice($images, $lastImage, $limit);
-        $completed += $limit;
+        $images = $this->file->scanImages();
+        if($total == 0) $total = count($images);
+        $limit      = $total - $last >= 10 ? 10 : $total - $last; 
+        $rawImages  = array_slice($images, $last, $limit);
+        $last       += $limit;
+        $progress   = round($last / $total * 100) . $this->lang->percent;
         
-        foreach($rawImages as $image)
-        {
-            $extension = $this->file->getExtension($image);
-            if(in_array(strtolower($extension), $this->config->file->imageExtensions, true) === false) continue;
-            $this->file->setWatermark($image);
-        }
+        foreach($rawImages as $image) $this->file->setWatermark($image);
         
-        if($lastImage + $limit == $imageCount)
-        { 
-            if($imageDirKey == count($imageDirs) - 1) $this->send(array('result' => 'finished', 'message' => $this->lang->createSuccess));
-            if($imageDirKey < count($imageDirs) - 1)
-            {
-                $imageDirKey = $imageDirKey + 1;
-                $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildWatermark', "imageDirKey=$imageDirKey&lastImage=0&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildWatermarks, $rate)));
-            }
-        }
-        else
-        {
-            $lastImage = $lastImage + $limit;
-            $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildWatermark', "imageDirKey=$imageDirKey&lastImage=$lastImage&completed=$completed&total=$total"), 'completed' => sprintf($this->lang->file->rebuildWatermarks, $rate)));
-        }
+        if($last >= $total) $this->send(array('result' => 'finished', 'message' => $this->lang->createSuccess));
+        $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildWatermark', "last=$last&total=$total"), 'completed' => sprintf($this->lang->file->rebuildWatermarks, $progress)));
     }
 }

@@ -251,7 +251,7 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
-        if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
+        if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail', 'message' => $this->lang->canNotDelete));
 
         if(RUN_MODE == 'admin') $locate = helper::createLink('forum', 'admin');
         if(RUN_MODE == 'front') $locate = helper::createLink('forum', 'board', "board=$thread->board");

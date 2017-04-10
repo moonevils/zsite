@@ -1216,45 +1216,33 @@ class fileModel extends model
         $imageInfo = pathinfo($imagePath);
         if(!extension_loaded('gd')) return false;
         if(!is_writable($imageInfo['dirname'])) return false;
+        $rawImage = str_replace('f_', '', $imagePath);
 
-        $rawFilename = str_replace('f_', '', $imageInfo['filename']);
-        $rawFilePath = $imageInfo['dirname'] . DIRECTORY_SEPARATOR . $rawFilename . '.' . $imageInfo['extension'];
-        if(!file_exists($rawFilePath))
-        {
-            copy($imagePath, $rawFilePath); 
-        }
-        
-        $fileTypeList = array('f', 'l', 'm', 's');
-        foreach($fileTypeList as $fileType)
-        {
-            $thumbPath = str_replace('f_', $fileType . '_', $imagePath);
-            if(file_exists($thumbPath))
-            {
-                $this->addTextWatermark($rawFilePath, $thumbPath);
-            }
-        }
+        if(!file_exists($rawImage)) copy($imagePath, $rawImage); 
+        $this->addTextWatermark($rawImage, $imagePath);
+        $this->compressImage($imagePath);
     }
 
     /**
      * Add Text Watermark to file
      * 
-     * @param  string    $srcPath 
+     * @param  string    $rawImage 
      * @param  string    $destPath 
      * @access public
      * @return void
      */
-    public function addTextWatermark($srcPath, $destPath)
+    public function addTextWatermark($rawImage, $destPath)
     {
         $imageCreateFunArr = array('image/jpeg' => 'imagecreatefromjpeg', 'image/png' => 'imagecreatefrompng', 'image/gif' => 'imagecreatefromgif');
         $imageOutputFunArr = array('image/jpeg' => 'imagejpeg', 'image/png' => 'imagepng', 'image/gif' => 'imagegif');
 
-        $rawFileInfo   = getimagesize($srcPath);
+        $rawFileInfo   = getimagesize($rawImage);
         $rawFileWidth  = $rawFileInfo[0];
         $rawFileHeight = $rawFileInfo[1];
         $rawFileMime   = $rawFileInfo['mime'];
 
-        if (!isset($imageCreateFunArr[$rawFileMime])) return false;
-        if (!isset($imageOutputFunArr[$rawFileMime])) return false;
+        if(!isset($imageCreateFunArr[$rawFileMime])) return false;
+        if(!isset($imageOutputFunArr[$rawFileMime])) return false;
         $imageCreateFun = $imageCreateFunArr[$rawFileMime];
         $imageOutputFun = $imageOutputFunArr[$rawFileMime];
         
@@ -1264,7 +1252,7 @@ class fileModel extends model
         $text       = $this->config->file->watermarkContent;
         $position   = isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'topLeft';
         $angle      = 0;
-        $fontPath   = $this->app->getTmpRoot() . 'simhei.ttf';
+        $fontPath   = $this->app->getTmpRoot() . 'fonts' . DS . 'simhei.ttf';
         $textLength = mb_strlen($text, 'utf8') * $fontSize;
 
         if($position == 'topLeft')
@@ -1313,10 +1301,28 @@ class fileModel extends model
             $positionY = $rawFileHeight - $fontSize;
         }
 
-        $im = $imageCreateFun($srcPath);
+        $im = $imageCreateFun($rawImage);
         $text_color = imagecolorallocatealpha($im, intval($color['r']), intval($color['g']), intval($color['b']), intval($opacity));
         imagettftext($im, $fontSize, $angle, $positionX, $positionY, $text_color, $fontPath, $text);
         $imageOutputFun($im, $destPath);
         imagedestroy($im);
+    }
+
+    /**
+     * Scan images uploaded.
+     * 
+     * @access public
+     * @return array
+     */
+    public function scanImages()
+    {
+        $files = glob($this->app->getDataRoot() . "upload/*/f_*");
+        $images = array();
+        foreach($files as $key => $file)
+        {
+            $fileInfo = pathinfo($file);
+            if(in_array(strtolower($fileInfo['extension']), $this->config->file->imageExtensions, true)) $images[] = $file;
+        }
+        return $files;
     }
 }
