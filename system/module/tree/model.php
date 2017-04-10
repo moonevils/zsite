@@ -771,26 +771,21 @@ class treeModel extends model
      */
     public function getTopCategroyList($categoryList, $type)
     {
+        if(empty($categoryList)) return null;
         $allCategoryList = $this->dao->select('*')->from(TABLE_CATEGORY)
                         ->where('id')->in($categoryList)
                         ->andWhere('type')->eq('blog')
                         ->fetchAll('id');
 
-        
+        if(empty($allCategoryList)) return null;
         foreach($categoryList as $category)
         {
-            if($allCategoryList[$category]->grade == '1')
-            {
-                $selectedList[$category] = $allCategoryList[$category];
-            }
-            else
-            {
-                $topCategroy = explode(',', trim($allCategoryList[$category]->path, ',')); 
-                $topCategroy = $topCategroy[0];
-                $selectedList[$category] = $allCategoryList[$topCategroy];
-            }
+            if(!isset($allCategoryList[$category])) continue;
+            $topCategroy = explode(',', trim($allCategoryList[$category]->path, ',')); 
+            $topCategroy = $topCategroy[0];
+            $selectedList[$category] = $allCategoryList[$topCategroy];
         }
-        
+
         return $selectedList;    
     }
 }
