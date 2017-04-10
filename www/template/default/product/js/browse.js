@@ -8,7 +8,7 @@ $(function()
 
     $('[data-toggle="tooltip"]').tooltip({container: 'body'});
 
-    $('#modeControl a').click(function()
+    $(document).on('click', '#modeControl a', function()
     {
         $('#modeControl a').removeClass('active');
         $(this).addClass('active');
@@ -30,41 +30,47 @@ $(function()
          }
     });
     
-    var orderBy = $.cookie('productOrderBy');
+    var orderBy = $.cookie('productOrderBy' + v.categoryID);
     if(typeof(orderBy) != 'string')
     {
         orderBy = 'place_place';
     }
-    else 
-    { 
-        var fieldName = orderBy.split('_')[0];
-        var orderType = orderBy.split('_')[1];
-    }
 
-    if(orderType == 'asc')
-    {
-        $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortUp');
-    }
-    else 
-    {
-        $("#productHeader ." + fieldName).parent().removeClass('header').addClass('headerSortDown');
-    }
+    var fieldName = orderBy.split('_')[0];
+    var orderType = orderBy.split('_')[1];
 
-    $(".setOrder").click(function(){
-        if(this.id == fieldName)
+    function setSorterClass()
+    {
+        if(orderType == 'asc')
         {
-            var setOrderType = 'asc';
-            if(orderType == 'asc') setOrderType = 'desc';
-            var setOrderBy = fieldName + '_' + setOrderType;
-            $.cookie('productOrderBy', setOrderBy);
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortUp');
+        }
+        if(orderType == 'desc')
+        {
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortDown');
+        }
+        $('#modeControl').find('[data-mode=' + type +']').click();
+    }
+
+    setSorterClass();
+    $(document).on('click', '.setOrder', function()
+    {
+        if($(this).data('field') == fieldName)
+        {
+            orderType = orderType == 'asc' ? 'desc' : 'asc';
+            fieldName = $(this).data('field');
         }
         else
         {
-            var setOrderType = 'asc';
-            if(orderType == 'asc') setOrderType = 'desc';
-            var setOrderBy = this.id + '_' + setOrderType;
-            $.cookie('productOrderBy', setOrderBy);
+            orderType = 'desc';
+            fieldName = $(this).data('field');
         }
-        location.href = location.href;
+
+        $.cookie('productOrderBy' + v.categoryID, fieldName + '_' + orderType);
+
+        r = Math.random();
+        url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #products' : location.href + '?r=' + r + ' #products';
+        $('#mainContainer').load(url, function(){ setSorterClass()});
     });
+
 })
