@@ -23,6 +23,7 @@ $lang->thread->views       = '閲讀';
 $lang->thread->lastReply   = '最後回帖';
 $lang->thread->isLink      = '跳轉';
 $lang->thread->link        = '連結';
+$lang->thread->discussion  = '討論模式';
 
 $lang->thread->post           = '發帖';
 $lang->thread->postTo         = '發佈帖子到';
@@ -38,6 +39,7 @@ $lang->thread->transfer       = '轉移';
 $lang->thread->switchStatus   = '隱藏/顯示';
 $lang->thread->deleteFile     = '刪除附件';
 $lang->thread->unreplied      = "<span class='text-important'>未回覆</span>";
+$lang->thread->quote          = '引用';
 
 $lang->thread->sticks[0] = '不置頂';
 $lang->thread->sticks[1] = '版塊置頂';
@@ -54,6 +56,7 @@ $lang->thread->confirmHideReply    = "您確定隱藏回帖嗎？";
 $lang->thread->confirmHideThread   = "您確定隱藏該主題嗎？";
 $lang->thread->confirmDeleteReply  = "您確定刪除該回帖嗎？";
 $lang->thread->confirmDeleteFile   = "您確定刪除該附件嗎？";
+$lang->thread->canNotDelete        = "刪除失敗，您沒有刪除權限。";
 
 $lang->thread->lblEdited       = '%s 最後編輯, %s';
 $lang->thread->message         = '%s在論壇#%s回覆了主題：%s，內容為：%s';
@@ -65,6 +68,11 @@ $lang->thread->successShow     = '顯示成功';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
 $lang->thread->successTransfer = '轉移成功';
 $lang->thread->thanks          = '帖子將在審核通過後顯示';
+$lang->thread->replySuccess    = '回帖成功。';
+$lang->thread->viewReplies     = '查看回帖內容';
+$lang->thread->stayCurrent     = '留在當前頁面';
+$lang->thread->quoteTitle      = "<div class='quote-title'>原帖由 %s 于 %s 發表</div>";    
+$lang->thread->replyFloor      = "回覆<strong>#%s</strong>";    
 
 $lang->thread->score    = '獎勵積分';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";

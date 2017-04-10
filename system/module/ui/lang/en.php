@@ -51,6 +51,7 @@ $lang->ui->score           = "score";
 $lang->ui->reset           = "Reset";
 $lang->ui->themePackage    = "Theme Package";
 $lang->ui->refreshPage     = "Refresh";
+$lang->ui->mobileBottomNav = 'Bottom Nav of mobile';
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";
@@ -310,6 +311,11 @@ $lang->ui->folderList->order   = 'Order';
 $lang->ui->folderList->user    = 'User';
 $lang->ui->folderList->message = 'Message';
 $lang->ui->folderList->forum   = 'Forum';
+
+$lang->ui->settingList['display']   = 'Display';
+$lang->ui->settingList['browse']    = 'Browse Page';
+$lang->ui->settingList['thumb']     = 'Thumb';
+$lang->ui->settingList['watermark'] = 'Watermark';
 
 $lang->ui->files = new stdclass();
 $lang->ui->files->default = new stdclass();

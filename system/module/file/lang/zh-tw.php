@@ -36,6 +36,27 @@ $lang->file->selectImage   = '選擇素材';
 $lang->file->fileList      = '檔案列表';
 $lang->file->invalidFile   = '無效檔案';
 
+$lang->file->setWatermark      = '設置圖片水印';
+$lang->file->watermark         = '圖片水印';
+$lang->file->watermarkContent  = '內容';
+$lang->file->watermarkSize     = '大小';
+$lang->file->watermarkColor    = '顏色';
+$lang->file->watermarkOpacity  = '透明度';
+$lang->file->watermarkPosition = '位置';
+$lang->file->rebuildWatermark  = '重新生成圖片水印';
+$lang->file->rebuildWatermarks = "已完成 %s";
+
+$lang->file->watermarkPositionList = array();
+$lang->file->watermarkPositionList['topLeft']      = '左上';
+$lang->file->watermarkPositionList['topMiddle']    = '中上';
+$lang->file->watermarkPositionList['topRight']     = '右上';
+$lang->file->watermarkPositionList['middleLeft']   = '中左';
+$lang->file->watermarkPositionList['middleMiddle'] = '正中';
+$lang->file->watermarkPositionList['middleRight']  = '中右';
+$lang->file->watermarkPositionList['bottomLeft']   = '左下';
+$lang->file->watermarkPositionList['bottomMiddle'] = '中下';
+$lang->file->watermarkPositionList['bottomRight']  = '右下';
+
 $lang->file->id        = '編號';
 $lang->file->title     = '名稱';
 $lang->file->pathname  = '存儲路徑';
@@ -73,14 +94,21 @@ $lang->file->copySuccess      = "已複製到剪貼板";
 $lang->file->evilChar         = "包含非法字元";
 $lang->file->rebuildThumbs    = "已完成 %s";
 $lang->file->noFlashTip       = "Flash插件被禁用，請手動複製";
+$lang->file->fontNotDownload  = "字型檔沒有下載成功";
+$lang->file->fontPosition     = '圖片水印功能需要下載字型檔到 %s 目錄。';
 
 $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '刪除全部';
 $lang->file->fileTip            = '提示：紅色代表資料庫中有檔案記錄，但是檔案實際已經被刪除';
 
-$lang->file->dragFile      = '請拖拽檔案到此處';
-$lang->file->addFile       = '添加檔案';
-$lang->file->beginUpload   = '開始上傳';
-$lang->file->deletingTip   = '刪除中';
-$lang->file->deletedTip    = '已刪除';
-$lang->file->failDeleteTip = '刪除失敗';
+$lang->file->dragFile    = '請拖拽檔案到此處';
+$lang->file->addFile     = '添加檔案';
+$lang->file->beginUpload = '開始上傳';
+
+$lang->file->watermarkList = array();
+$lang->file->watermarkList['open']  = '開啟';
+$lang->file->watermarkList['close'] = '關閉';
+
+$lang->file->image = array();
+$lang->file->image['width']  = '寬度';
+$lang->file->image['height'] = '高度';

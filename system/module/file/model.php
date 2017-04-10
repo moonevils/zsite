@@ -1325,4 +1325,33 @@ class fileModel extends model
         }
         return $files;
     }
+
+    /**
+     * Sort the file. 
+     * 
+     * @access public
+     * @return void
+     */
+    static public function sort($a, $b)
+    {
+        if(isset($a['is_dir']) && !isset($b['is_dir']))
+        {
+            return -1;
+        }
+        elseif(!isset($a['is_dir']) && isset($b['is_dir']))
+        {
+            return 1;
+        }
+        else
+        {
+            if($a['order'] == 'size')
+            {
+                if($a['filesize'] > $b['filesize']) return 1;
+                if($a['filesize'] < $b['filesize']) return -1;
+                if($a['filesize'] = $b['filesize']) return 0;
+            }
+            if($a['order'] == 'type') return strcmp($a['filetype'], $b['filetype']);
+            if($a['order'] == 'name') return strcmp($a['filename'], $b['filename']);
+        }
+    }
 }
