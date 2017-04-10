@@ -215,6 +215,7 @@ $lang->resource->site->setsensitive = 'setsensitive';
 $lang->resource->site->setstat      = 'setStat';
 $lang->resource->site->setCache     = 'setCache';
 $lang->resource->site->openModule   = 'openModule';
+$lang->resource->site->setAgreement = 'setAgreement';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();
