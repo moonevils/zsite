@@ -35,19 +35,21 @@ class blog extends control
 
         $sticks = $this->article->getSticks($families, 'blog');
         $sticks = $this->file->processImages($sticks, 'blog');
-        $articleList = '';
+
+        $articleIdList = '';
         $articleCategoryList = array();
+
         foreach($articles as $article) 
         {
-            $articleList .= $article->id . ',';
+            $articleIdList .= $article->id . ',';
             $articleCategoryList[] = $article->category->id;
         }
+
         foreach($sticks as $stick)
         {
-            $articleList .= $stick->id . ',';
+            $articleIdList .= $stick->id . ',';
             $articleCategoryList[] = $article->category->id;
         }
-        $this->view->articleList = $articleList;
 
         $articleCategoryList = array_unique($articleCategoryList);
         if(isset($this->config->blog->categoryLevel) and $this->config->blog->categoryLevel == 'first') 
@@ -55,13 +57,15 @@ class blog extends control
             $topCategoryList = $this->loadModel('tree')->getTopCategroyList($articleCategoryList, 'blog');
             $this->view->topCategoryList = $topCategoryList;
         }
-        $this->view->title      = $this->lang->blog->common;
-        $this->view->categoryID = $categoryID;
-        $this->view->articles   = $articles;
-        $this->view->sticks     = $sticks;
-        $this->view->pager      = $pager;
-        $this->view->mobileURL  = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'html');
+
+        $this->view->title         = $this->lang->blog->common;
+        $this->view->articleIdList = $articleIdList;
+        $this->view->categoryID    = $categoryID;
+        $this->view->articles      = $articles;
+        $this->view->sticks        = $sticks;
+        $this->view->pager         = $pager;
+        $this->view->mobileURL     = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'mhtml');
+        $this->view->desktopURL    = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'html');
  
         if($category)
         {

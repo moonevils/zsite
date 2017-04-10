@@ -22,7 +22,7 @@ $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
 <?php if(isset($articleList)):?>
-<script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';";?></script>
+<script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleIdList . $config->idListPlaceHolder . "';";?></script>
 <?php else:?>
 <script><?php echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';";?></script>
 <?php endif;?>

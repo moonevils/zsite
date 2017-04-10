@@ -224,14 +224,14 @@ $lang->user->oauth->providers['qq']     = 'QQ';
 $lang->user->oauth->providers['github'] = 'Github';
 $lang->user->oauth->providers['twitter'] = 'Twitter';
 $lang->user->oauth->providers['facebook'] = 'Facebook';
-$lang->user->oauth->providers['google'] = 'Google';
+#$lang->user->oauth->providers['google'] = 'Google';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博会员';
 $lang->user->oauth->typeList['qq']     = 'QQ会员';
 $lang->user->oauth->typeList['wechat'] = '微信会员';
 $lang->user->oauth->typeList['github'] = 'Github';
 $lang->user->oauth->typeList['facebook'] = 'Facebook';
-$lang->user->oauth->typeList['google'] = 'Google';
+#$lang->user->oauth->typeList['google'] = 'Google';
 
 $lang->user->oauth->lblWelcome       = '开放登录，快捷方便';
 $lang->user->oauth->lblOtherLogin    = '其他方式 : ';

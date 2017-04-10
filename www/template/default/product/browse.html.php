@@ -26,17 +26,17 @@ js::set('pageLayout', $this->block->getLayoutScope('product_browse', $category->
 <div class='row blocks' data-region='product_browse-topBanner'><?php $this->block->printRegion($layouts, 'product_browse', 'topBanner', true);?></div>
 <div class='row' id='columns' data-page='product_browse'>
   <?php if(!empty($layouts['product_browse']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
-  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
+  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>" id='mainContainer'>
   <?php else:?>
-  <div class='col-md-12'>
+  <div class='col-md-12' id='mainContainer'>
   <?php endif;?>
     <div class='list list-condensed' id='products'>
       <div class='row blocks' data-region='product_browse-top'><?php $this->block->printRegion($layouts, 'product_browse', 'top', true);?></div>
       <header id='productHeader'>
         <strong><i class='icon-th'></i> <?php echo $category->name;?></strong>
         <?php 
-          echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->time, "id='id' class='id setOrder'") . "</div>";
-          echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->hot, "id='views' class='views setOrder'") . "</div>";
+          echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->time, "data-field='order' class='order setOrder'") . "</div>";
+          echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->hot, "data-field='views' class='views setOrder'") . "</div>";
         ?>
         <div class='pull-right btn-group' id="modeControl">
           <?php foreach($lang->product->listMode as $mode => $text):?>

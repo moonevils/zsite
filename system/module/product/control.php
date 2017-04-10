@@ -45,10 +45,6 @@ class product extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {  
-        $orderBy = $this->cookie->productOrderBy !== false ? $this->cookie->productOrderBy : 'order_desc';    
-        $orderField = substr($orderBy, 0, strpos($orderBy, '_'));
-        if(strpos('id,views,order', $orderField) === false) $orderBy = 'order_desc';
-
         $category = $this->loadModel('tree')->getByID($categoryID, 'product');
 
         if($category && $category->link) helper::header301($category->link);
@@ -58,6 +54,11 @@ class product extends control
         $pager = new pager(0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
+        $orderBy    = zget($_COOKIE, 'productOrderBy' . $categoryID, 'order_desc');
+        $orderField = str_replace('_asc', '', $orderBy);
+        $orderField = str_replace('_desc', '', $orderField);
+        if(!in_array($orderField, array('id', 'views', 'order'))) $orderBy = 'order_desc';
+
         $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), $orderBy, $pager);
         $products   = $this->loadModel('file')->processImages($products, 'product');
 
