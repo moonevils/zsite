@@ -674,9 +674,20 @@ class baseControl
 
         $currentModuleName = $this->moduleName;
         $currentMethodName = $this->methodName;
+        $currentAppName    = $this->appName;
 
         $this->app->setModuleName($moduleName);
         $this->app->setMethodName($methodName);
+
+        if(!is_array($params)) parse_str($params, $params);
+        if($this->config->requestType != 'GET')
+        {
+            $this->app->setParamsByPathInfo($params, $type = 'fetch');
+        }
+        else
+        {
+            $this->app->setParamsByGET($params, $type = 'fetch');
+        }
 
         $currentPWD = getcwd();
 
@@ -720,7 +731,6 @@ class baseControl
          * 解析参数，创建模块control对象。
          * Parse the params, create the $module control object. 
          */
-        if(!is_array($params)) parse_str($params, $params);
         $module = new $className($moduleName, $methodName, $appName);
 
         /**
@@ -740,6 +750,54 @@ class baseControl
 
         $this->app->setModuleName($currentModuleName);
         $this->app->setMethodName($currentMethodName);
+
+        $currentClassName = class_exists("my$currentModuleName") ? "my$currentModuleName" : $currentModuleName;
+        if(!class_exists($currentClassName)) $this->app->triggerError(" The class $currentClassName not found", __FILE__, __LINE__, $exit = true);
+
+        /* include default value for module*/
+        $defaultValueFiles = glob($this->app->getTmpRoot() . "defaultvalue/*.php");
+        if($defaultValueFiles) foreach($defaultValueFiles as $file) include $file;
+
+        /* 
+         * 使用反射机制获取函数参数的默认值。
+         * Get the default settings of the method to be called using the reflecting. 
+         *
+         * */
+        $defaultParams = array();
+        $methodReflect = new reflectionMethod($currentClassName, $currentMethodName);
+        foreach($methodReflect->getParameters() as $param)
+        {
+            $name = $param->getName();
+
+            $default = '_NOT_SET';
+            if(isset($paramDefaultValue[$currentAppName][$currentClassName][$currentMethodName][$name]))
+            {
+                $default = $paramDefaultValue[$currentAppName][$currentClassName][$currentMethodName][$name];
+            }
+            elseif(isset($paramDefaultValue[$currentClassName][$currentMethodName][$name]))
+            {
+                $default = $paramDefaultValue[$currentClassName][$currentMethodName][$name];
+            }
+            elseif($param->isDefaultValueAvailable())
+            {
+                $default = $param->getDefaultValue();
+            }
+
+            $defaultParams[$name] = $default;
+        }
+
+        /** 
+         * 根据PATH_INFO或者GET方式设置请求的参数。
+         * Set params according PATH_INFO or GET.
+         */
+        if($this->config->requestType != 'GET')
+        {
+            $this->app->setParamsByPathInfo($defaultParams);
+        }
+        else
+        {
+            $this->app->setParamsByGET($defaultParams);
+        }
 
         chdir($currentPWD);
         return $output;
