@@ -1,15 +1,15 @@
 $(function()
 {
-    if(v.registerAgreement == 'open')
+    if(v.agreement == 'open')
     {
         $('#submit').attr("disabled",true);
-        $("input[name=registerAgreement]").change(function()
+        $("input[name=agreement]").change(function()
         {
-            if($('input[name=registerAgreement]').prop('checked'))
+            if($('input[name=agreement]').prop('checked'))
             {
                 $('#submit').removeAttr("disabled");
             }
-            if(!$('input[name=registerAgreement]').prop('checked'))
+            if(!$('input[name=agreement]').prop('checked'))
             {
                 $('#submit').attr("disabled", true);
             }
