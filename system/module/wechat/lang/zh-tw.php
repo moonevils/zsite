@@ -132,3 +132,4 @@ $lang->wechat->curlSSLRequired = "微信公眾號功能需要curl模組，並支
 $lang->wechat->needCertified   = "此功能需要公眾號認證後使用。";
 $lang->wechat->integrateInfo   = "請到微信的公眾平台完成接入，以獲取appID和appSecret信息。 <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>幫助</a>";
 $lang->wechat->integrateDone   = "已完成接入";
+$lang->wechat->openUserModule  = "微信功能需要啟用會員模組，確認開啟？";

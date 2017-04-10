@@ -51,6 +51,7 @@ $lang->ui->score           = "積分";
 $lang->ui->reset           = "重置為預設";
 $lang->ui->themePackage    = "主題包";
 $lang->ui->refreshPage     = "刷新頁面";
+$lang->ui->mobileBottomNav = '移動版底部導航';
 
 $lang->ui->uploadLogo             = "上傳Logo";
 $lang->ui->uploadFavicon          = "上傳小表徵圖";
@@ -136,12 +137,12 @@ $lang->ui->blocks2Merge  = "可合併區塊";
 $lang->ui->blocks2Create = "新創建區塊";
 
 $lang->ui->theme = new stdclass();
-$lang->ui->theme->reset                                = '重置為預設';
+$lang->ui->theme->reset                                = '重置';
 $lang->ui->theme->online                               = '在綫主題';
 $lang->ui->theme->default                              = '預設';
 $lang->ui->theme->all                                  = '全部';
 $lang->ui->theme->noTheme                              = '此分類下沒有主題';
-$lang->ui->theme->resetTip                             = '參數已重置，保存後生效';
+$lang->ui->theme->resetTip                             = '確認重置所有外觀設置？';
 $lang->ui->theme->sizeTip                              = '預設單位為像素，如1px';
 $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
 $lang->ui->theme->positionTip                          = '如: 100px, 50%, left, top, center';
@@ -310,6 +311,11 @@ $lang->ui->folderList->order   = '訂單';
 $lang->ui->folderList->user    = '會員';
 $lang->ui->folderList->message = '評論留言';
 $lang->ui->folderList->forum   = '論壇';
+
+$lang->ui->settingList['display']   = '顯示設置';
+$lang->ui->settingList['browse']    = '列表設置';
+$lang->ui->settingList['thumb']     = '縮略圖設置';
+$lang->ui->settingList['watermark'] = '圖片水印';
 
 $lang->ui->files = new stdclass();
 $lang->ui->files->default = new stdclass();
