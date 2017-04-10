@@ -13,7 +13,7 @@ $(document).ready(function()
                 orders[$(this).data('id')] = orderNext ++;
             });
 
-             $.post(createLink('file', 'order'), orders, function(data)
+             $.post(createLink('file', 'sort'), orders, function(data)
              {
                  if(data.result == 'success')
                  {
