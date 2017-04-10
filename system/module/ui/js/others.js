@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $('#execButton').click(function()
+    $('#thumbExecButton').click(function()
     {   
         $(this).text(v.lang.doing);
         $(this).addClass('disabled');
@@ -9,18 +9,18 @@ $(document).ready(function()
         {   
             if(response.result == 'finished')
             {   
-                 $('#execButton').attr('href', createLink('file', 'rebuildthumbs'));
-                 $('#execButton').text(v.rebuildThumbs);
-                 $('#execButton').next('.total').text(response.message);
-                 $('#execButton').removeClass('disabled');
-                 setTimeout(function(){$('#execButton').next('.total').hide();}, 2000);
+                 $('#thumbExecButton').attr('href', createLink('file', 'rebuildthumbs'));
+                 $('#thumbExecButton').text(v.rebuildThumbs);
+                 $('#thumbExecButton').next('.total').text(response.message);
+                 $('#thumbExecButton').removeClass('disabled');
+                 setTimeout(function(){$('#thumbExecButton').next('.total').hide();}, 2000);
                  return false;
              }   
              else
              {   
-                 $('#execButton').next('.total').text(response.completed).show();
-                 $('#execButton').attr('href', response.next);
-                 return $('#execButton').click();
+                 $('#thumbExecButton').next('.total').text(response.completed).show();
+                 $('#thumbExecButton').attr('href', response.next);
+                 return $('#thumbExecButton').click();
              }   
         }); 
         return false;
@@ -77,7 +77,7 @@ $(document).ready(function()
         }
     });
     
-    $('#execButton').click(function()
+    $('#watermarkExecButton').click(function()
     {   
         $(this).text(v.lang.doing);
         $(this).addClass('disabled');
@@ -86,18 +86,18 @@ $(document).ready(function()
         {   
             if(response.result == 'finished')
             {   
-                 $('#execButton').attr('href', createLink('file', 'rebuildWatermark'));
-                 $('#execButton').text(v.rebuildWatermark);
-                 $('#execButton').next('.total').text(response.message);
-                 $('#execButton').removeClass('disabled');
-                 setTimeout(function(){$('#execButton').next('.total').hide();}, 2000);
+                 $('#watermarkExecButton').attr('href', createLink('file', 'rebuildWatermark'));
+                 $('#watermarkExecButton').text(v.rebuildWatermark);
+                 $('#watermarkExecButton').next('.total').text(response.message);
+                 $('#watermarkExecButton').removeClass('disabled');
+                 setTimeout(function(){$('#watermarkExecButton').next('.total').hide();}, 2000);
                  return false;
             }   
             else
             {   
-                $('#execButton').next('.total').text(response.completed).show();
-                $('#execButton').attr('href', response.next);
-                return $('#execButton').click();
+                $('#watermarkExecButton').next('.total').text(response.completed).show();
+                $('#watermarkExecButton').attr('href', response.next);
+                return $('#watermarkExecButton').click();
             }   
         }); 
         return false;
@@ -115,7 +115,7 @@ $(document).ready(function()
         }
     });
 
-    $('#watermarkTab input[name*=watermark][type=radio]').click(function()
+    $('#watermarkTab input[name*=watermark][type=radio]').change(function()
     {
         if($(this).val() == 'open')
         {
@@ -126,4 +126,25 @@ $(document).ready(function()
             $('#watermarkTab .watermark-info').hide();
         }
     });
+
+    $('.nav-tabs > li > a').click(function()
+    {
+        if($(this).attr('href') == '#watermarkTab')
+        {
+            $('.watermark-footer').removeClass('hidden');
+        }
+        else
+        {
+            $('.watermark-footer').addClass('hidden');
+        }
+
+        if($(this).attr('href') == '#thumbTab')
+        {
+            $('.thumb-footer').removeClass('hidden');
+        }
+        else
+        {
+            $('.thumb-footer').addClass('hidden');
+        }
+    })
 });
