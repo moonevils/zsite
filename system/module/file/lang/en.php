@@ -36,6 +36,27 @@ $lang->file->selectImage   = 'Select';
 $lang->file->fileList      = 'List';
 $lang->file->invalidFile   = 'Invalid File';
 
+$lang->file->setWatermark      = 'Set Watermark';
+$lang->file->watermark         = 'watermark';
+$lang->file->watermarkContent  = 'Text';
+$lang->file->watermarkSize     = 'Font Size';
+$lang->file->watermarkColor    = 'color';
+$lang->file->watermarkOpacity  = 'Opacity';
+$lang->file->watermarkPosition = 'Position';
+$lang->file->rebuildWatermark  = 'Rebuild Watermarks';
+$lang->file->rebuildWatermarks = "Finished %s";
+
+$lang->file->watermarkPositionList = array();
+$lang->file->watermarkPositionList['topLeft']      = 'Top Left';
+$lang->file->watermarkPositionList['topMiddle']    = 'Top Middle';
+$lang->file->watermarkPositionList['topRight']     = 'Top Right';
+$lang->file->watermarkPositionList['middleLeft']   = 'Middle ';
+$lang->file->watermarkPositionList['middleMiddle'] = '正中';
+$lang->file->watermarkPositionList['middleRight']  = '中右';
+$lang->file->watermarkPositionList['bottomLeft']   = '左下';
+$lang->file->watermarkPositionList['bottomMiddle'] = '中下';
+$lang->file->watermarkPositionList['bottomRight']  = '右下';
+
 $lang->file->id        = 'ID';
 $lang->file->title     = 'Title';
 $lang->file->pathname  = 'Path Name';
@@ -73,6 +94,8 @@ $lang->file->copySuccess      = "Copy to clipboard";
 $lang->file->evilChar         = "Invalid Character";
 $lang->file->rebuildThumbs    = "%s has been finished.";
 $lang->file->noFlashTip       = "Flash extension is forbidden，please do the paste manually";
+$lang->file->fontNotDownload  = "Download Font faild";
+$lang->file->fontPosition     = 'To build watermark need font file in %s path。';
 
 $lang->file->updateInvalidFiles = 'Update Invalid List';
 $lang->file->clearAllInvalid    = 'Delete All Invalid Files';
@@ -81,6 +104,11 @@ $lang->file->fileTip            = 'Tips: Red represent the file has been deleted
 $lang->file->dragFile      = 'Please drag files here';
 $lang->file->addFile       = 'Add';
 $lang->file->beginUpload   = 'Upload';
-$lang->file->deletingTip   = 'Deleting';
-$lang->file->deletedTip    = 'Deleted';
-$lang->file->failDeleteTip = 'Delete failed';
+
+$lang->file->watermarkList = array();
+$lang->file->watermarkList['open']  = '开启';
+$lang->file->watermarkList['close'] = '关闭';
+
+$lang->file->image = array();
+$lang->file->image['width']  = 'Width';
+$lang->file->image['height'] = 'Height';
