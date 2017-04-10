@@ -23,6 +23,7 @@ $lang->thread->views       = 'View';
 $lang->thread->lastReply   = 'Last Reply';
 $lang->thread->isLink      = 'Link';
 $lang->thread->link        = 'Link';
+$lang->thread->discussion  = 'Discussion';
 
 $lang->thread->post           = 'Post';
 $lang->thread->postTo         = 'Post to';
@@ -38,6 +39,7 @@ $lang->thread->transfer       = 'Repost';
 $lang->thread->switchStatus   = 'Hide/Display';
 $lang->thread->deleteFile     = 'Delete File';
 $lang->thread->unreplied      = "<span class='text-important'> Not Replied</span>";
+$lang->thread->quote          = 'Quote';
 
 $lang->thread->sticks[0] = 'No Sticky';
 $lang->thread->sticks[1] = 'Sticky';
@@ -70,6 +72,7 @@ $lang->thread->replySuccess    = 'Replies successfully.';
 $lang->thread->viewReplies     = 'View your reply';
 $lang->thread->stayCurrent     = 'Stay on the current page';
 $lang->thread->quoteTitle      = "<div class='quote-title'>Post by %s on %s</div>";    
+$lang->thread->replyFloor      = "Reply <strong>#%s</strong>";    
 
 $lang->thread->score    = 'Points';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";

@@ -67,6 +67,10 @@ $lang->product->setting      = 'Settings';
 $lang->product->soldout      = 'Out of Stock!';
 $lang->product->layout       = 'Layout';
 
+$lang->product->orderBy = new stdclass();
+$lang->product->orderBy->time = 'Time';
+$lang->product->orderBy->hot  = 'Hot';
+
 $lang->product->congratulations  = "Congrats!";
 $lang->product->addToCartSuccess = "Added to your shopping cart!";
 $lang->product->gotoCart         = "Check Out";

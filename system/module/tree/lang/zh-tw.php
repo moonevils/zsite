@@ -62,6 +62,7 @@ $lang->board->readonly   = '訪問權限';
 $lang->board->moderators = '版主';
 $lang->board->isLink     = '跳轉';
 $lang->board->link       = '連結';
+$lang->board->discussion = '討論模式';
 
 $lang->board->readonlyList[0] = '開放';
 $lang->board->readonlyList[1] = '只讀';

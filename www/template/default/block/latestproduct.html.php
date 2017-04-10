@@ -26,14 +26,13 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
     <?php endif;?>
   </div>
   <?php 
-    $wwwPath = $this->app->getWwwRoot();
     if(isset($content->image))
     {
-        include $wwwPath . 'template/default/block/latestproductwithimage.html.php';
+        include TPL_ROOT . 'block' . DS . 'latestproduct.image.html.php';
     }
     else
     {
-        include $wwwPath . 'template/default/block/latestproductwithoutimage.html.php';
+        include TPL_ROOT . 'block' . DS . 'latestproduct.noimage.html.php';
     }
   ?>
 </div>

@@ -80,6 +80,10 @@ $lang->article->submission     = '投稿';
 $lang->article->submissionTime = '投遞時間';
 $lang->article->noSubmission   = '您還沒有投稿記錄，歡迎您提交投稿賺取積分，分享宣傳。';
 
+$lang->article->orderBy = new stdclass();
+$lang->article->orderBy->time = '時間';
+$lang->article->orderBy->hot  = '熱度';
+
 $lang->article->submissionOptions = new stdclass;
 $lang->article->submissionOptions->open  = '開啟';
 $lang->article->submissionOptions->close = '關閉';
@@ -143,3 +147,24 @@ $lang->article->noCategories = array();
 $lang->article->noCategories['article'] = '您還沒有為文章添加類目，請添加類目。';
 $lang->article->noCategories['blog']    = '您還沒有為博客添加類目，請添加類目。';
 $lang->article->noCategories['video']   = '您還沒有為視頻添加類目，請添加類目。';
+
+$lang->article->blog = new stdclass();
+$lang->article->blog->category                   = '博客列表類目';
+$lang->article->blog->categoryLevel              = '級別';
+$lang->article->blog->categoryNameList['abbr']   = '簡稱';
+$lang->article->blog->categoryNameList['full']   = '全稱';
+$lang->article->blog->categoryLevelList['first'] = '頂級';
+$lang->article->blog->categoryLevelList['final'] = '終級';
+
+$lang->article->blog->categoryOptions['1'] = '顯示';
+$lang->article->blog->categoryOptions['0'] = '不顯示';
+
+$lang->article->browseImage = new stdclass();
+$lang->article->browseImage->common   = '列表圖片';
+$lang->article->browseImage->maxWidth = '最大寬度';
+
+$lang->article->browseImage->positionList['left']  = '居左';
+$lang->article->browseImage->positionList['right'] = '居右';
+
+$lang->article->browseImage->sizeList['small']  = '小圖';
+$lang->article->browseImage->sizeList['middle'] = '中圖';

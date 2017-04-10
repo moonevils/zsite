@@ -440,7 +440,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function order()
+    public function sort()
     {
         if($_POST)
         {   
@@ -600,7 +600,7 @@ class file extends control
             closedir($fileDir);
         }
 
-        usort($fileList, "file::sort");
+        usort($fileList, "fileModel::sort");
 
         $result = array();
         $result['moveup_dir_path']  = $moveupDirPath;
@@ -610,35 +610,6 @@ class file extends control
         $result['file_list']        = $fileList;
 
         die(json_encode($result));
-    }
-
-    /**
-     * Sort the file. 
-     * 
-     * @access public
-     * @return void
-     */
-    static public function sort($a, $b)
-    {
-        if(isset($a['is_dir']) && !isset($b['is_dir']))
-        {
-            return -1;
-        }
-        elseif(!isset($a['is_dir']) && isset($b['is_dir']))
-        {
-            return 1;
-        }
-        else
-        {
-            if($a['order'] == 'size')
-            {
-                if($a['filesize'] > $b['filesize']) return 1;
-                if($a['filesize'] < $b['filesize']) return -1;
-                if($a['filesize'] = $b['filesize']) return 0;
-            }
-            if($a['order'] == 'type') return strcmp($a['filetype'], $b['filetype']);
-            if($a['order'] == 'name') return strcmp($a['filename'], $b['filename']);
-        }
     }
 
     /**

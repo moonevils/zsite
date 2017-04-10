@@ -76,6 +76,8 @@ $lang->qrcodeTip        = '移動訪問';
 $lang->language         = '語言';
 $lang->custom           = '自定義';
 $lang->productMenu      = '產品';
+$lang->history          = '歷史記錄';
+$lang->reverse          = '切換順序';
 
 /* Global action items. */
 $lang->reset          = '重置';
@@ -92,6 +94,7 @@ $lang->preview        = '預覽';
 $lang->goback         = '返回';
 $lang->more           = '更多';
 $lang->refresh        = '刷新';
+$lang->setting        = '設置';
 $lang->actions        = '操作';
 $lang->feature        = '未來';
 $lang->year           = '年';
@@ -214,11 +217,12 @@ $lang->menu->effect   = "特效|ui|effect|";
 $lang->menu->visual   = "可視化|visual|index|";
 $lang->menu->edit     = "編輯模板|ui|edittemplate|";
 
-$lang->menu->site      = '站點|site|setbasic|';
-$lang->menu->security  = '安全|site|setsecurity|';
-$lang->menu->company   = '公司|company|setbasic|';
-$lang->menu->score     = '積分|score|setcounts|';
-$lang->menu->interface = '介面|site|setoauth|';
+$lang->menu->site          = '站點|site|setbasic|';
+$lang->menu->security      = '安全|site|setsecurity|';
+$lang->menu->company       = '公司|company|setbasic|';
+$lang->menu->score         = '積分|score|setcounts|';
+$lang->menu->interface     = '介面|site|setoauth|';
+$lang->menu->wechatSetting = '微信設置|wechat|admin|';
 
 $lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主題|ui|themestore|';
@@ -227,7 +231,7 @@ $lang->menu->community  = '社區|admin|register|';
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
 $lang->menuGroups->mail    = 'interface';
-$lang->menuGroups->wechat  = 'interface';
+$lang->menuGroups->wechat  = 'wechatSetting';
 $lang->menuGroups->group   = 'security';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->search  = 'site';
@@ -299,13 +303,14 @@ $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = '站點設置|site|setbasic|';
 $lang->site->menu->langs     = '語言設置|site|setlanguage|';
-$lang->site->menu->request   = '地址類型 |site|seturltype|';
+$lang->site->menu->request   = '地址類型|site|seturltype|';
 $lang->site->menu->domain    = '域名設置|site|setdomain|';
 $lang->site->menu->cdn       = 'CDN設置|site|setcdn|';
 $lang->site->menu->cache     = '緩存設置|site|setcache|';
 $lang->site->menu->home      = '首頁菜單|site|sethomemenu|';
 $lang->site->menu->search    = '全文檢索|search|buildindex|';
 $lang->site->menu->backup    = '備份還原|backup|index|';
+$lang->site->menu->agreement = '註冊協議|site|setagreement|';
 //$lang->site->menu->api    = 'API|site|setapi|';
 
 /* Menu of company module. */
@@ -332,7 +337,6 @@ $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
 $lang->interface->menu->oauth  = '開放登錄|site|setoauth|';
 $lang->interface->menu->mail   = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->interface->menu->wechat = array('link' => '微信設置|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
 $lang->score->menu = new stdclass();
@@ -350,10 +354,6 @@ $lang->tree->menu = $lang->article->menu;
 /* Menu of reply module. */
 $lang->reply = new stdclass();
 $lang->reply->menu = $lang->forum->menu;
-
-/* Menu of wechat module. */
-$lang->wechat = new stdclass();
-$lang->wechat->menu = $lang->site->menu;
 
 /* Menu of search module. */
 $lang->search = new stdclass();
@@ -408,6 +408,7 @@ $lang->error->token        = '必須為英文或數字，長度為3-32字元！'
 $lang->error->sensitive    = '內容中不能存在敏感詞!';
 $lang->error->noRepeat     = '主題或內容已存在，禁止重複';
 $lang->error->between      = '<strong>%s</strong>必須在<strong>%s</strong>之中。';
+$lang->error->idcard       = '<strong>%s</strong>應當為合法的身份證號。';
 
 /* The pager items. */
 $lang->pager = new stdclass();

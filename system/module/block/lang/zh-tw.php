@@ -67,6 +67,7 @@ $lang->block->planName        = '方案名稱';
 $lang->block->saveLayoutAs    = '複製佈局：%s';
 $lang->block->defaultPlan     = '預設方案';
 $lang->block->image           = '圖片';
+$lang->block->uploadImage     = '上傳圖片';
 
 $lang->block->layout            = '佈局';
 $lang->block->logoPosition      = 'Logo';
@@ -211,3 +212,13 @@ $lang->block->sideFloat = '側邊欄位置';
 $lang->block->alignList = array();
 $lang->block->alignList['left']   = '居左';
 $lang->block->alignList['middle'] = '居中';
+
+$lang->block->imageTypeList = array();
+$lang->block->imageTypeList['wechat'] = '微信二維碼';
+$lang->block->imageTypeList['custom'] = '自定義圖片';
+
+$lang->block->subscribe = new stdclass();
+$lang->block->subscribe->fixInNav = '固定到導航';
+$lang->block->subscribe->fixInNavList = array();
+$lang->block->subscribe->fixInNavList[1] = '是';
+$lang->block->subscribe->fixInNavList[0] = '否';

@@ -47,10 +47,8 @@ $lang->mail->trySendlater   = '三分鐘內不能重複發送郵件。';
 
 $lang->mail->captcha     = '驗證碼';
 $lang->mail->sendContent = <<<EOT
-%s 您好：
-<br />您在<strong>%s</strong>(%s)上面的驗證碼為：%s
-<br />如非您本人操作，請忽略。
-<br />
-<br /><strong>%s</strong>由<a href='http://www.chanzhi.org' target='_blank'>蟬知企業門戶系統</a>搭建。
-<br /><a href='http://www.cnezsoft.com' target='_blank'>易軟天創</a>為天下企業提供專業的管理工具。
+<p>%s 您好：</p>
+<p>您在<strong>%s</strong>(%s)上面的驗證碼為：%s </p>
+<p>如非您本人操作，請忽略。</p>
+<p> <a style="color:gray;font-size:12px;text-decoration:none" href="http://www.chanzhi.org" target="_blank">Powerd By 蟬知</a> </p>
 EOT;

@@ -166,6 +166,8 @@ $lang->user->register->lblAccount  = 'must be a combination of letter and number
 $lang->user->register->lblPassword = 'must be a combination of letter and numbers, 6 charaters at least.';
 $lang->user->register->login       = 'Login';
 $lang->user->register->loginTip    = 'Already have an Account';
+$lang->user->register->agreement   = 'Agreement';
+$lang->user->register->agree       = 'I have read and accept';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = 'must be a combination of letter and numbers, 6 charaters at least.';
@@ -201,12 +203,35 @@ $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
+$lang->user->oauth->github = new stdclass();
+$lang->user->oauth->github->clientID     = 'Client ID';
+$lang->user->oauth->github->clientSecret = 'Client Secret';
+
+$lang->user->oauth->twitter= new stdclass();
+$lang->user->oauth->twitter->clientID     = 'API ID';
+$lang->user->oauth->twitter->clientSecret = 'API Secret';
+
+$lang->user->oauth->facebook= new stdclass();
+$lang->user->oauth->facebook->clientID     = 'API ID';
+$lang->user->oauth->facebook->clientSecret = 'API Secret';
+
+$lang->user->oauth->google= new stdclass();
+$lang->user->oauth->google->clientID     = 'API ID';
+$lang->user->oauth->google->clientSecret = 'API Secret';
+
 $lang->user->oauth->providers['sina'] = 'Weibo';
 $lang->user->oauth->providers['qq']   = 'QQ';
+$lang->user->oauth->providers['github'] = 'Github';
+#$lang->user->oauth->providers['twitter'] = 'Twitter';
+$lang->user->oauth->providers['facebook'] = 'Facebook';
+#$lang->user->oauth->providers['google'] = 'Google';
 
 $lang->user->oauth->typeList['sina']   = 'Weibo User';
 $lang->user->oauth->typeList['qq']     = 'QQ User';
 $lang->user->oauth->typeList['wechat'] = 'Wechat User';
+$lang->user->oauth->typeList['github'] = 'Github';
+$lang->user->oauth->typeList['facebook'] = 'Facebook';
+#$lang->user->oauth->typeList['google'] = 'Google';
 
 $lang->user->oauth->lblWelcome       = 'Open Login';
 $lang->user->oauth->lblOtherLogin    = 'Other Login';

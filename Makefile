@@ -32,6 +32,7 @@ zip:
 	mkdir -p chanzhieps/system/tmp/theme/
 	mkdir -p chanzhieps/system/tmp/template/
 	mkdir -p chanzhieps/system/tmp/effect/
+	mkdir -p chanzhieps/system/tmp/fonts/
 	# combine js and css files.
 	mkdir -pv chanzhieps/system/build/ && cp system/build/minifyfront.php chanzhieps/system/build/
 	cd chanzhieps/system/build/ && php ./minifyfront.php && php ./createcustomercss.php

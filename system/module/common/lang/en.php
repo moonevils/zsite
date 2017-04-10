@@ -76,6 +76,8 @@ $lang->qrcodeTip        = 'QR Code';
 $lang->language         = 'Language';
 $lang->custom           = 'Custom';
 $lang->productMenu      = 'Product';
+$lang->history          = 'History';
+$lang->reverse          = 'Reverse';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
@@ -92,6 +94,7 @@ $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
 $lang->more           = 'More';
 $lang->refresh        = 'Refresh';
+$lang->setting        = 'Setting';
 $lang->actions        = 'Action';
 $lang->feature        = 'Feature';
 $lang->year           = 'Year';
@@ -307,8 +310,8 @@ $lang->site->menu->cache     = 'Cache Settings|site|setcache|';
 $lang->site->menu->home      = 'Homepage Menu|site|sethomemenu|';
 $lang->site->menu->search    = 'Full Text Retrieval|search|buildindex|';
 $lang->site->menu->backup    = 'Backup/Restore|backup|index|';
-$lang->site->menu->watermark = 'File Watermark|file|setwatermark|';
-//$lang->site->menu->api      = 'API|site|setapi|';
+$lang->site->menu->agreement = 'Agreement|site|setagreement|';
+//$lang->site->menu->api     = 'API|site|setapi|';
 
 /* Menu of company module. */
 if(!isset($lang->company)) $lang->company = new stdclass();
@@ -334,7 +337,6 @@ $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
 $lang->interface->menu->oauth  = 'Social Login|site|setoauth|';
 $lang->interface->menu->mail   = array('link' => 'Email|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->interface->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,edit,adminresponse,integrate');
 
 /* Menu of score module. */
 $lang->score->menu = new stdclass();
@@ -406,6 +408,7 @@ $lang->error->token        = 'Must be letters/numbers and the characters between
 $lang->error->sensitive    = 'No sensitive words allowed!';
 $lang->error->noRepeat     = 'No duplicated content!';
 $lang->error->between      = '<strong>%s</strong>should in between<strong>%s</strong>.';
+$lang->error->idcard       = '<strong>%s</strong> should be valid idcard.';
 
 /* The pager items. */
 $lang->pager = new stdclass();

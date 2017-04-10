@@ -1694,15 +1694,21 @@ class baseRouter
      * @access  public
      * @return  void
      */
-    public function setParamsByGET($defaultParams)
+    public function setParamsByGET($defaultParams, $type = '')
     {
-        /* Unset moduleVar, methodVar, viewVar and session 变量， 剩下的作为参数。 */
-        /* Unset the moduleVar, methodVar, viewVar and session var, all the left are the params. */
-        unset($_GET[$this->config->moduleVar]);
-        unset($_GET[$this->config->methodVar]);
-        unset($_GET[$this->config->viewVar]);
-        unset($_GET[$this->config->sessionVar]);
-        $this->params = $this->mergeParams($defaultParams, $_GET);
+        $params = array();
+        if($type != 'fetch')
+        {
+            /* Unset moduleVar, methodVar, viewVar and session 变量， 剩下的作为参数。 */
+            /* Unset the moduleVar, methodVar, viewVar and session var, all the left are the params. */
+            unset($_GET[$this->config->moduleVar]);
+            unset($_GET[$this->config->methodVar]);
+            unset($_GET[$this->config->viewVar]);
+            unset($_GET[$this->config->sessionVar]);
+            $params = $_GET;
+        }
+
+        $this->params = $this->mergeParams($defaultParams, $params);
     }
 
     /**

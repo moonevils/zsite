@@ -222,7 +222,7 @@ $lang->user->oauth->google->clientSecret = 'API Secret';
 $lang->user->oauth->providers['sina']   = '新浪微博';
 $lang->user->oauth->providers['qq']     = 'QQ';
 $lang->user->oauth->providers['github'] = 'Github';
-$lang->user->oauth->providers['twitter'] = 'Twitter';
+#$lang->user->oauth->providers['twitter'] = 'Twitter';
 $lang->user->oauth->providers['facebook'] = 'Facebook';
 #$lang->user->oauth->providers['google'] = 'Google';
 
