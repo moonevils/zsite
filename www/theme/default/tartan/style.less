@@ -209,6 +209,9 @@ form .star {display: none;}/* hide star */
 .input-append .add-on {display: block;position: absolute;right: 0;top: 0;}
 
 /* nav */
+.panel-block .nav-secondary > li > a {
+    border-bottom: 1px dotted #ddd;
+}
 .nav-primary > li > a {background: #fff;}
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 .nav li.active i.icon-chevron-right,.nav li:hover i.icon-chevron-right{opacity: .9;}
@@ -294,7 +297,6 @@ a.tag-link {color: inherit;}
 
 #headNav
 {
-    background-color: @header-backcolor !important;
     height: @header-height !important;
     min-height: @header-height !important;
     line-height: @header-height !important;
@@ -744,8 +746,23 @@ a:visited
     .border(@footer-border-style, @footer-border-color, @border-width, @border-radius);
 }
 #footNav a:hover, #powerby a:hover {color: @link-hover-color;}
+#powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @link-hover-color;}
 
 .footerLayout(@footer-border-style, @footer-backcolor);
 
 /* bottom nav block */
 .nav-bottom li > a:hover {background-color: transparent}
+
+/*cart*/
+#cartBox{
+    margin-right: 20px;
+}
+#cartBox a{
+    text-decoration: none;
+}
+#cartBox .label{
+    background-color: #ea644a;
+}
+#cartBox:hover a{
+    color: #ea644a;
+}
