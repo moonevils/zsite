@@ -723,7 +723,7 @@ class userModel extends model
             ->fetchAll('thread');
         $threads = array_keys($replies);
         $this->loadModel('thread');
-        foreach($threads as $threadID) $this->thread->updateStats();
+        foreach($threads as $threadID) $this->thread->updateStats($threadID);
 
 
         $this->dao->setAutolang(false)->delete()->from(TABLE_REPLY)
