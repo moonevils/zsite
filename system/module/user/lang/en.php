@@ -203,6 +203,10 @@ $lang->user->oauth->qq->clientSecret = 'APP KEY';
 
 $lang->user->oauth->providers['sina'] = 'Weibo';
 $lang->user->oauth->providers['qq']   = 'QQ';
+$lang->user->oauth->providers['github'] = 'Github';
+#$lang->user->oauth->providers['twitter'] = 'Twitter';
+$lang->user->oauth->providers['facebook'] = 'Facebook';
+#$lang->user->oauth->providers['google'] = 'Google';
 
 $lang->user->oauth->typeList['sina']   = 'Weibo User';
 $lang->user->oauth->typeList['qq']     = 'QQ User';
