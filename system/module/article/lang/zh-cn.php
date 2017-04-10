@@ -156,8 +156,8 @@ $lang->article->blog->categoryNameList['full']   = '全称';
 $lang->article->blog->categoryLevelList['first'] = '顶级';
 $lang->article->blog->categoryLevelList['last']  = '底级';
 
-$lang->article->blog->categoryList['1'] = '显示';
-$lang->article->blog->categoryList['0'] = '不显示';
+$lang->article->blog->categoryOptions['1'] = '显示';
+$lang->article->blog->categoryOptions['0'] = '不显示';
 
 $lang->article->browseImage = new stdclass();
 $lang->article->browseImage->common   = '列表图片';
