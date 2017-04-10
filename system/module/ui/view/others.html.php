@@ -215,7 +215,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <tr>
               <th></th>
               <td colspan='3'>
-                <div class='alert alert-danger'><?php echo $lang->file->fontPosition;?></div>
+                <div class='alert alert-info'><?php printf($lang->file->fontPosition, $fontsPath);?></div>
               </td>
             </tr>
           </table>
