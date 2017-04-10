@@ -369,31 +369,6 @@ class router extends baseRouter
     }
 
     /**
-     * 设置请求的参数(GET 方式)。
-     * Set the params by GET.
-     * 
-     * @param   array $defaultParams the default settings of the params.
-     * @access  public
-     * @return  void
-     */
-    public function setParamsByGET($defaultParams, $type = '')
-    {
-        $params = array();
-        if($type != 'fetch')
-        {
-            /* Unset moduleVar, methodVar, viewVar and session 变量， 剩下的作为参数。 */
-            /* Unset the moduleVar, methodVar, viewVar and session var, all the left are the params. */
-            unset($_GET[$this->config->moduleVar]);
-            unset($_GET[$this->config->methodVar]);
-            unset($_GET[$this->config->viewVar]);
-            unset($_GET[$this->config->sessionVar]);
-            $params = $_GET;
-        }
-
-        $this->params = $this->mergeParams($defaultParams, $params);
-    }
-
-    /**
      * 加载语言文件，返回全局$lang对象。
      * Load lang and return it as the global lang object.
      * 
