@@ -154,7 +154,7 @@ $lang->article->blog->categoryLevel              = '级别';
 $lang->article->blog->categoryNameList['abbr']   = '简称';
 $lang->article->blog->categoryNameList['full']   = '全称';
 $lang->article->blog->categoryLevelList['first'] = '顶级';
-$lang->article->blog->categoryLevelList['last']  = '底级';
+$lang->article->blog->categoryLevelList['final'] = '终级';
 
 $lang->article->blog->categoryOptions['1'] = '显示';
 $lang->article->blog->categoryOptions['0'] = '不显示';
