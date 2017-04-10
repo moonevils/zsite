@@ -1,14 +1,5 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php 
-  if(isset($this->config->site->regAgreement) and $this->config->site->regAgreement == 'open')
-  {
-    js::set('regAgreement', 'open');
-  }
-  else
-  {
-    js::set('regAgreement', 'close');
-  }
-?>
+<?php js::set('agreement', (!empty($this->config->site->agreement) and $this->config->site->agreement == 'open') ? 'open' : 'close');?>
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class='panel panel-body' id='reg'>
   <div id='login-region'>
@@ -52,11 +43,11 @@
             <label class="col-sm-3 control-label"><?php echo $lang->user->phone;?></label>
             <div class='col-sm-9'><?php echo html::input('phone', '', "class='form-control'");?></div>
           </div>
-          <?php if(isset($this->config->site->regAgreement) and $this->config->site->regAgreement == 'open'):?>
-          <div class='form-group registerAgreement-form'>
+          <?php if(isset($this->config->site->agreement) and $this->config->site->agreement == 'open'):?>
+          <div class='form-group agreement-form'>
             <label class="col-sm-3 control-label"></label>
-            <input type="checkbox" id="registerAgreement" name="registerAgreement" value="1">
-            <span><?php echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'viewRegAgreement'), $this->config->site->regAgreementTitle ? $this->config->site->regAgreementTitle : $lang->user->register->agreement, "target='__blank'") . '》';?></span>
+            <input type='checkbox' id='agreement' name='agreement' value='1'>
+            <span><?php echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'agreement'), $this->config->site->agreementTitle ? $this->config->site->agreementTitle : $lang->user->register->agreement, "data-toggle='modal'") . '》';?></span>
           </div>
           <?php endif;?>
           <div class='form-group'>

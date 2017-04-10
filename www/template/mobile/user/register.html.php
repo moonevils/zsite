@@ -14,13 +14,13 @@
 include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 ?>
 <?php 
-  if(isset($this->config->site->regAgreement) and $this->config->site->regAgreement == 'open')
+  if(isset($this->config->site->agreement) and $this->config->site->agreement == 'open')
   {
-    js::set('registerAgreement', 'open');
+    js::set('agreement', 'open');
   }
   else
   {
-    js::set('registerAgreement', 'close');
+    js::set('agreement', 'close');
   }
 ?>
 <hr class='space'>
@@ -63,11 +63,11 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
       <label class='control-label' for='phone'><?php echo $lang->user->phone;?></label>
       <?php echo html::input('phone', '', "class='form-control'");?>
     </div>
-    <?php if(isset($this->config->site->regAgreement) and $this->config->site->regAgreement == 'open'):?>
+    <?php if(isset($this->config->site->agreement) and $this->config->site->agreement == 'open'):?>
     <div class='form-group'>
-      <label class='control-label' for='registerAgreement'></label>
-      <input type="checkbox" id="registerAgreement" name="registerAgreement" value="1">
-      <span><?php echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'viewRegAgreement'), $this->config->site->regAgreementTitle ? $this->config->site->regAgreementTitle : $this->lang->user->register->agreement) . '》';?></span>
+      <label class='control-label' for='agreement'></label>
+      <input type="checkbox" id="agreement" name="agreement" value="1">
+      <span><?php echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'agreement'), $this->config->site->agreementTitle ? $this->config->site->agreementTitle : $this->lang->user->register->agreement, "data-toggle='modal'") . '》';?></span>
     </div>
     <?php endif;?>
     <div class='form-group'><?php echo html::submitButton($lang->register, 'btn primary block');?><?php echo html::hidden('referer', $referer);?></div>

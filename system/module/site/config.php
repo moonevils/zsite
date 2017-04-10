@@ -4,7 +4,7 @@ $config->site->help['qq']   = 'http://www.chanzhi.org/book/chanzhieps/57.html';
 
 $config->site->editor = new stdclass();
 $config->site->editor->setbasic = array('id' => 'pauseTip', 'tools' => 'simple');
-$config->site->editor->setregagreement = array('id' => 'regAgreementContent', 'tools' => 'simple');
+$config->site->editor->setagreement = array('id' => 'agreementContent', 'tools' => 'simple');
 
 if(!isset($config->site->mobileTemplate)) $config->site->mobileTemplate = 'close';
 
