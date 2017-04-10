@@ -34,10 +34,6 @@ class article extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {   
-        $orderBy = $this->cookie->articleOrderBy !== false ? $this->cookie->articleOrderBy : 'addedDate_desc';    
-        $orderField = substr($orderBy, 0, strpos($orderBy, '_'));
-        if(strpos('id,views,addedDate', $orderField) === false) $orderBy = 'addedDate_desc';
-
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
         if($category->link) helper::header301($category->link);
@@ -47,6 +43,11 @@ class article extends control
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
+        $orderBy    = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
+        $orderField = str_replace('_asc', '', $orderBy);
+        $orderField = str_replace('_desc', '', $orderField);
+        if(!in_array($orderField, array('id', 'views', 'addedDate'))) $orderBy = 'addedDate_desc';
+
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
         $sticks     = $this->article->getSticks($families, 'article');
         $articles   = $this->article->getList('article', $families, $orderBy, $pager);
