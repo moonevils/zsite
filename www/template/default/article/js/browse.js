@@ -1,39 +1,44 @@
 $(document).ready(function()
 {
-    var orderBy = $.cookie('articleOrderBy');
+    var orderBy = $.cookie('articleOrderBy' + v.categoryID);
     if(typeof(orderBy) != 'string')
     {
         orderBy = 'place_place';
     }
-    else 
-    { 
-        var fieldName = orderBy.split('_')[0];
-        var orderType = orderBy.split('_')[1];
-    }
-    if(orderType == 'asc')
-    {
-        $("#articleHeader ." + fieldName).parent().removeClass('header').addClass('headerSortUp');
-    }
-    if(orderType == 'desc')
-    {
-        $("#articleHeader ." + fieldName).parent().removeClass('header').addClass('headerSortDown');
-    }
 
-    $(".setOrder").click(function(){
-        if(this.id == fieldName)
+    var fieldName = orderBy.split('_')[0];
+    var orderType = orderBy.split('_')[1];
+
+    function setSorterClass()
+    {
+        if(orderType == 'asc')
         {
-            var setOrderType = 'asc';
-            if(orderType == 'asc') setOrderType = 'desc';
-            var setOrderBy = fieldName + '_' + setOrderType;
-            $.cookie('articleOrderBy', setOrderBy);
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortUp');
+        }
+        if(orderType == 'desc')
+        {
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortDown');
+        }
+    }
+    setSorterClass();
+    $(document).on('click', '.setOrder', function()
+    {
+        if($(this).data('field') == fieldName)
+        {
+            orderType = orderType == 'asc' ? 'desc' : 'asc';
+            fieldName = $(this).data('field');
         }
         else
         {
-            var setOrderType = 'asc';
-            if(orderType == 'asc') setOrderType = 'desc';
-            var setOrderBy = this.id + '_' + setOrderType;
-            $.cookie('articleOrderBy', setOrderBy);
+            orderType = 'desc';
+            fieldName = $(this).data('field');
         }
-        location.href = location.href;
+
+        $.cookie('articleOrderBy' + v.categoryID, fieldName + '_' + orderType);
+
+        r = Math.random();
+        url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #articleList' : location.href + '?r=' + r + ' #articleList';
+
+        $('#mainContainer').load(url, function(){ setSorterClass()});
     });
 });
