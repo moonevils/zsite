@@ -21,7 +21,7 @@ if(!empty($category->id)) js::set('pageLayout', $this->block->getLayoutScope('bl
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
-<?php if(isset($articleList)):?>
+<?php if(isset($articleIdList)):?>
 <script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleIdList . $config->idListPlaceHolder . "';";?></script>
 <?php else:?>
 <script><?php echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';";?></script>
