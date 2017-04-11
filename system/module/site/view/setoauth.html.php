@@ -64,7 +64,7 @@
               </td>
             </tr>
             <?php endif;?>
-            <?php if(in_array($providerCode, ['github', 'twitter', 'facebook', 'google'])):?>
+            <?php if(in_array($providerCode, array('github', 'twitter', 'facebook', 'google'))):?>
             <tr>
               <th><?php echo $lang->user->oauth->callbackURL;?></th>
               <td>
