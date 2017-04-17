@@ -884,6 +884,9 @@ class wechatModel extends model
 
         foreach($records as $record)
         {
+             $content = json_decode($record->content);
+             if(is_object($content)) $record->content = $content;
+
              $wid = $record->wid ? $record->wid : $record->id;
              if(isset($replies[$wid]) and $record->replied) $record->replies = $replies[$wid];
         }
