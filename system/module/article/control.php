@@ -323,7 +323,7 @@ class article extends control
      */
     public function view($articleID)
     {
-        $article  = $this->article->getByID($articleID);
+        $article = $this->article->getByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
 
         if($article->link) helper::header301($article->link);
