@@ -71,8 +71,8 @@ $(document).ready(function()
         else
         {
             var $quote     = $(this).parents('.panel.reply');
-            var date       = $quote.find('.panel-heading span.muted')[0].childNodes[1].textContent;
-            var user       = $quote.find('.table .speaker .thread-author')[0].childNodes[1].textContent;
+            var date       = $quote.find('.panel-heading span.muted').html().replace(/<[^>]+>/g,'');
+            var user       = $quote.find('.table .speaker .thread-author').html().replace(/<[^>]+>/g, '');
             var quoteTitle = v.quoteTitle.replace('\%\s', user).replace('%s', date);
             
             var quoteContent = '[quote]';
@@ -80,9 +80,8 @@ $(document).ready(function()
             quoteContent += $quote.find('.table .thread-wrapper .thread-content').html();
             quoteContent += '[/quote]';
         }
-        $('#content').val(quoteContent);
 
-        location.reload(); 
+        KindEditor.html('#content', quoteContent);
     })
     
     $('.alert-primary').parent('.reply-content').css('display', 'block');

@@ -12,8 +12,8 @@
 ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'header');?>
 <?php if(!empty($category->id)) js::set('pageLayout', $this->block->getLayoutScope('blog_index', $category->id));?>
-<?php if(isset($articleList)):?>
-<script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';";?></script>
+<?php if(isset($articleIdList)):?>
+<script><?php echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleIdList . $config->idListPlaceHolder . "';";?></script>
 <?php else:?>
 <script><?php echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';";?></script>
 <?php endif;?>
