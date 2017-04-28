@@ -40,7 +40,7 @@ $config->ui->selectorOptions['basic']['aHover']['underline'] = array('type' => '
 
 $config->ui->selectorOptions['basic']['column'] = array();
 $config->ui->selectorOptions['basic']['column']['sideFloat'] = array('type' => 'sidebarLayout', 'default' => 'false', 'name' => 'sideFloat');
-$config->ui->selectorOptions['basic']['column']['sideGrid']  = array('type' => 'sidebarWidth', 'default' => '25%', 'name' => 'sideGrid');
+$config->ui->selectorOptions['basic']['column']['sideGrid']  = array('type' => 'sidebarWidth', 'default' => '3', 'name' => 'sideGrid');
 
 $config->ui->selectorOptions['navbar']['layout'] = array();
 $config->ui->selectorOptions['navbar']['layout']['layout'] = array('type' => 'navLayout', 'default' => 'true', 'name' => 'navbar-table-layout');
@@ -270,6 +270,8 @@ unset($config->ui->themes['default']['colorful']['navbar']);
 unset($config->ui->themes['default']['colorful']['button']);
 unset($config->ui->themes['default']['colorful']['block']);
 $config->ui->themes['default']['colorful']['basic']['colorset']['primary']['default'] = '#D1270A';
+
+$config->ui->themes['default']['side'] = $config->ui->themes['default']['wide'];
 
 /* Default theme of mobile template */
 $config->ui->themes['mobile']['default'] = $config->ui->selectorOptions;
