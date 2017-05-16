@@ -43,12 +43,13 @@
         <th class='text-center w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
         <th class='text-center'><?php commonModel::printOrderLink('title', $orderBy, $vars, $lang->article->title);?></th>
         <?php if($type != 'page' and $type != 'submission'):?>
-        <th class='text-center w-200px'><?php echo $lang->article->category;?></th>
+        <th class='text-center w-160px'><?php echo $lang->article->category;?></th>
+        <th class='text-center w-80px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->article->author);?></th>
         <?php endif;?>
-        <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
-        <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
+        <th class='text-center w-150px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
+        <th class='text-center w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
         <?php if($type != 'page' and commonModel::isAvailable('submission')):?>
-        <th class='text-center w-70px'> <?php commonModel::printOrderLink('submission', $orderBy, $vars, $lang->article->status);?></th>
+        <th class='text-center w-60px'> <?php commonModel::printOrderLink('submission', $orderBy, $vars, $lang->article->status);?></th>
         <?php endif;?>
         <?php $actionClass = $type == 'page' ? 'w-250px' : 'w-300px';?>
         <?php 
@@ -79,6 +80,7 @@
         </td>
         <?php if($type != 'page' and $type != 'submission'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
+        <td class='text-center'><?php echo $article->author;?></td>
         <?php endif;?>
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
@@ -152,7 +154,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <?php $col = commonModel::isAvailable('submission') ? 7 : 6;?>
+        <?php $col = commonModel::isAvailable('submission') ? 8 : 6;?>
         <?php if($type == 'page') $col = 5;?>
         <?php if($type == 'submission') $col = 6;?>
         <td colspan="<?php echo $col;?>"><?php $pager->show();?></td>
