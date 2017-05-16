@@ -41,7 +41,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php if($article->sticky):?><span class='red'><i class="icon icon-arrow-up"></i></span><?php endif;?>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $block->title) . '] ';?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
         <?php else:?>
         <?php echo '[' . $article->category->name . '] ';?>
@@ -86,7 +86,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <span>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $block->title) . '] ';?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
         <?php else:?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
@@ -101,7 +101,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
       <li class='notDataList'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $block->title) . '] ';?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
         <?php else:?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
