@@ -169,55 +169,75 @@ foreach (explode('|', $lang->colorPlates) as $value)
 
         <div class='tab-pane setting-control-tab-pane' id='watermarkTab'>
           <table class='table table-form w-p65'>
+            <!--watermark open or close -->
             <tr>
               <th class='w-120px'><?php echo $lang->file->watermark;?></th>
               <td><?php echo html::radio('files[watermark]', $lang->file->watermarkList, isset($this->config->file->watermark) ? $this->config->file->watermark : 'close');?></td>
             </tr>
-            <tr class='watermark-info'>
-            <tr class='watermark-info <?php echo (!isset($this->config->file->watermark) || $this->config->file->watermark == 'close') ? "hide" : "";?>'>
-              <th><?php echo $lang->file->watermarkContent;?></th>
-              <td class='watermark-content'><?php echo html::input('files[watermarkContent]', !empty($this->config->file->watermarkContent) ? $this->config->file->watermarkContent : $this->config->site->name, "class='form-control'");?></td>
-              <td class='w-160px watermark-attribute'>
-                <div class='input-group colorplate clearfix'>
-                  <div class='input-group color active' data="<?php echo isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '';?>">
-                    <label class='input-group-addon fix-border'><?php echo $lang->color;?></label>
-                    <?php echo html::input('files[watermarkColor]', isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
-                    <span class='input-group-btn'>
-                      <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
-                      <div class='dropdown-menu colors'>
-                        <?php echo $colorPlates; ?>
-                      </div>
-                    </span>
+
+            <?php $waterHide = (!isset($this->config->file->watermark) || $this->config->file->watermark == 'close') ? "hide" : "";?>
+
+            <!--watermark content -->
+            <tr class='watermark-info <?php echo $waterHide;?>'>
+              <th class='w-120px'><?php echo $lang->file->watermarkContent;?></th> 
+              <td class='w-p30'><?php echo html::input('files[watermarkContent]', !empty($this->config->file->watermarkContent) ? $this->config->file->watermarkContent : $this->config->site->name, "class='form-control'");?></td><td></td>
+            </tr>
+
+            <!--watermark color -->
+            <tr class='watermark-info <?php echo $waterHide;?>'>
+              <th class='w-120px'><?php echo $lang->color;?></th> 
+              <td class='w-p30'>
+                <div class="input-group">
+                  <?php echo html::input('files[watermarkColor]', isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+                  <div class='input-group-btn'>
+                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                      <span class='caret'></span>
+                    </button>
+                    <div class='dropdown-menu colors'>
+                      <?php echo $colorPlates; ?>
+                    </div>
                   </div>
                 </div>
               </td>
-              <td class='w-150px watermark-attribute'>
+            </tr>
+
+            <!--watermark opacity -->
+            <tr class='watermark-info <?php echo $waterHide;?>'>
+              <th class='w-120px'><?php echo $lang->file->watermarkOpacity;?></th> 
+              <td class='w-p30'>
                 <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->file->watermarkOpacity;?></span>
                   <?php echo html::input('files[watermarkOpacity]', !empty($this->config->file->watermarkOpacity) ? $this->config->file->watermarkOpacity : '50', "class='form-control'");?>
                   <span class='input-group-addon'><?php echo $lang->percent;?></span>
                 </div>
               </td>
-              <td class='w-140px watermark-attribute'>
+            </tr>
+
+            <!--watermark size -->
+            <tr class='watermark-info <?php echo $waterHide;?>'>
+              <th class='w-120px'><?php echo $lang->file->watermarkSize;?></th> 
+              <td class='w-p30'>
                 <div class='input-group'>
-                  <span class='input-group-addon fix-border'><?php echo $lang->file->watermarkSize;?></span>
-                  <?php echo html::input('files[watermarkSize]', isset($this->config->file->watermarkSize) ? $this->config->file->watermarkSize : '14', "class='form-control'");?>
-                  <span class='input-group-addon'>px</span>
-                </div>
-              </td>
-              <td class='w-120px watermark-attribute'>
-                <div class='input-group'>
-                  <span class='input-group-addon fix-border'><?php echo $lang->file->watermarkPosition;?></span>
-                  <?php echo html::select('files[watermarkPosition]', $lang->file->watermarkPositionList, isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'middleMiddle', "class='form-control'");?>
+                <?php echo html::input('files[watermarkSize]', isset($this->config->file->watermarkSize) ? $this->config->file->watermarkSize : '14', "class='form-control'");?>
+                <span class='input-group-addon'>px</span>
                 </div>
               </td>
             </tr>
+
+            <!--watermark position -->
+            <tr class='watermark-info <?php echo $waterHide;?>'>
+              <th><?php echo $lang->file->watermarkPosition;?></th> 
+              <td>
+                <?php echo html::select('files[watermarkPosition]', $lang->file->watermarkPositionList, isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'middleMiddle', "class='form-control'");?>
+              </td>
+            </tr>
+
             <tr>
               <th></th>
               <td colspan='3'>
                 <div class='alert alert-info'><?php printf($lang->file->fontPosition, $fontsPath);?></div>
               </td>
             </tr>
+
           </table>
         </div>
       </div>
