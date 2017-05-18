@@ -42,7 +42,11 @@
         foreach($navs as $nav)
         {
             echo "<li class='liGrade1'>";
-            echo $this->nav->createEntry(1, $nav, $type);
+
+            $hover = false;
+            if(isset($nav->children) && sizeof($nav->children)) $hover = true;
+
+            echo $this->nav->createEntry(1, $nav, $type, $hover);
             echo "<ul class='ulGrade2 hide'>";
             if(isset($nav->children))
             {
