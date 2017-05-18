@@ -20,7 +20,11 @@ $(document).ready(function()
     {
         if($(this).val() == 'full') 
         {
-            if($(this).parents('#typeCheckBox').find('#typeTip').size() == 0) $(this).parent().after(" <span id='typeTip' class='text-danger'>" + v.lang.fullImportTip + '</span>');
+            $('#typeTip').text( v.lang.fullImportTip );
+        }
+        else
+        {
+            $('#typeTip').text( v.lang.importTip );
         }
     })
 });
