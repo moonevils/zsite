@@ -112,7 +112,7 @@ class navModel extends model
      * @param array $nav
      * @return string
      */
-    public function createEntry($grade = 1, $nav = null, $type = 'desktop_top')
+    public function createEntry($grade = 1, $nav = null, $type = 'desktop_top',$hover = false)
     {
         if(empty($nav))
         {
@@ -136,6 +136,7 @@ class navModel extends model
         $pageHidden    = ($nav->type == 'page')    ? '' : 'hide'; 
         $system        = ($nav->type == 'system')  ? '' : 'hide'; 
         $urlHidden     = ($nav->type == 'custom')  ? '' : 'hide'; 
+        $hoverHidden   = $hover ? '' : 'hide'; 
 
         $entry = '<i class="icon-folder-open-alt shut"></i><i class="icon icon-circle text-muted"></i>';
         if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i>';
@@ -176,6 +177,12 @@ class navModel extends model
         /* nav target select. */
         if(strpos($type, 'desktop_') !== false) unset($this->lang->nav->targetList['modal']);
         $entry .= html::select("nav[$grade][target][]", $this->lang->nav->targetList, isset($nav->target) ? $nav->target : '_self', "class='form-control'");
+
+        /* hover select */
+        if($type == 'desktop_top' || $type == 'desktop_blog') 
+        {
+            $entry .= html::select("nav[$grade][hover][]", $this->lang->nav->dropdown, isset($nav->hover) ? $nav->hover : '', "class='form-control {$hoverHidden}'");
+        }
 
         /* operate buttons. */
         $entry .= html::a('javascript:;', "<i class='icon icon-plus'> </i>", "class='plus{$grade}' title='{$this->lang->nav->add}'");
