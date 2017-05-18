@@ -154,9 +154,9 @@
     </tbody>
     <tfoot>
       <tr>
-        <?php $col = commonModel::isAvailable('submission') ? 8 : 6;?>
-        <?php if($type == 'page') $col = 5;?>
-        <?php if($type == 'submission') $col = 6;?>
+        <?php $col = commonModel::isAvailable('submission') ? 8 : 7;?>
+        <?php if($type == 'page') $col = 6;?>
+        <?php if($type == 'submission') $col = 7;?>
         <td colspan="<?php echo $col;?>"><?php $pager->show();?></td>
       </tr>
     </tfoot>
