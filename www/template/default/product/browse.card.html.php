@@ -21,20 +21,20 @@
           {
               if($product->promotion != 0)
               {
-                  echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
+                  echo "<strong class='text-danger' style='margin:-3px;'>" . $currencySymbol . $product->promotion . '</strong>';
               }
               else
               {
                   if($product->price != 0)
                   {
-                      echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
+                      echo "<strong class='text-danger' style='margin:-3px;'>" . $currencySymbol . $product->price . '</strong>';
                   }
               }
           }
           ?>
         </div>
         <div class='text-nowrap text-ellipsis'>
-          <span><?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $product->name, "style='color:{$product->titleColor}'");?></span>
+          <span><?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $product->name, "color:{$product->titleColor} '");?></span>
           <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
           <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $product->id . $config->viewsPlaceholder;?></span><?php endif;?>
         </div>
