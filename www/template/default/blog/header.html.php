@@ -161,7 +161,7 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
           <?php if(empty($nav1->children)):?>
             <li class='<?php echo $nav1->class?>'><?php echo html::a($nav1->url, $nav1->title, "target='$nav1->target'");?></li>
             <?php else: ?>
-              <li class="dropdown <?php echo $nav1->class?>">
+            <li class="<?php echo $nav1->hover . " " . $nav1->class?>">
                 <?php echo html::a($nav1->url, $nav1->title . " <b class='caret'></b>", 'class="dropdown-toggle" data-toggle="dropdown"');?>
                 <ul class='dropdown-menu' role='menu'>
                   <?php foreach($nav1->children as $nav2):?>
@@ -190,5 +190,19 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
       <?php endif;?>
     </div>
   </nav>
+
+<script>
+$(document).ready(function()
+{
+    $('li.dropdown-hover').mouseover(function()
+    {   
+        $(this).addClass('open');
+    }).mouseout(function()
+    {
+        $(this).removeClass('open');    
+    }); 
+})
+</script>
+
   <div class='page-wrapper'>
     <div class='page-content'>

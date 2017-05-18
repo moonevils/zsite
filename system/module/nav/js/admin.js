@@ -36,6 +36,7 @@ $(document).ready(function()
         if(0 == container.size())
         { 
             $(this).parents('.liGrade1').find('.ulGrade2').show().prepend($('#grade2NavSource ul').html());
+            $(this).parents('.liGrade1').find("select[name='nav[1][hover][]']").removeClass('hide');
         }
         else
         {
