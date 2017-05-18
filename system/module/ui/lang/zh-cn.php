@@ -284,7 +284,8 @@ $lang->ui->top             = '上边距';
 $lang->ui->bottom          = '下边距';
 
 $lang->ui->importType    = '导入方式';
-$lang->js->fullImportTip = "完整导入将会替换站点的文章、产品等数据";
+$lang->js->importTip     = "只导入主题的风格和样式";
+$lang->js->fullImportTip = "将会导入测试数据以及替换站点文章、产品等数据";
 
 $lang->ui->importTypes = new stdclass();
 $lang->ui->importTypes->theme = '只导入主题';

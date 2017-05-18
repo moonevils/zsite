@@ -63,7 +63,10 @@ if(!$.zui.strCode)
 }
 </script>
 <?php if($canManage['result'] == 'success'):?>
-<div id='typeCheckBox'><?php echo html::radio('type', $lang->ui->importTypes, 'theme', "class='checkbox'")?></div>
+<div id='typeCheckBox'>
+  <?php echo html::radio('type', $lang->ui->importTypes, 'theme', "class='checkbox'")?>
+  <span id="typeTip" class="text-danger"><?php echo $lang->js->importTip ?></span>
+</div>
 <div class='uploader' id='uploader' data-url='<?php echo helper::createLink('file', 'uploadFile', "objectType=$objectType&objectID=$objectID");?>'>
   <div class='uploader-message text-center'>
     <div class='content'></div>
