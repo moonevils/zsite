@@ -517,4 +517,16 @@ class router extends baseRouter
         if($this->config->cache->type != 'close') $this->clearCache();
         parent::shutdown();
     }
+    
+    /**
+     * Set super vars.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSuperVars()
+    {
+        parent::setSuperVars();
+        $_POST = validater::filterConfigPlaceholder($_POST);
+    }
 }

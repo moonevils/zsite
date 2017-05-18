@@ -20,6 +20,41 @@ helper::import(dirname(dirname(__FILE__)) . '/base/filter/filter.class.php');
  */
 class validater extends baseValidater
 {
+    /**
+     * Filter config placeholder for POST.
+     * 
+     * @param  array    $post 
+     * @static
+     * @access public
+     * @return array
+     */
+    public static function filterConfigPlaceholder($post)
+    {
+        if(empty($post)) return $post;
+
+        global $config;
+        $evils = array($config->execPlaceholder, $config->siteNavHolder, $config->viewsPlaceholder, $config->idListPlaceHolder, $config->searchWordPlaceHolder);
+
+        $replaces = array();
+        foreach($evils as $i => $evil) $replaces[$i] = strtr($evil, '_', ' ');
+
+        foreach($post as $key => $item)
+        {
+            if(is_array($item))
+            {
+                foreach($item as $subkey => $subItem)
+                {
+                    if(is_array($subItem)) continue;
+                    $post[$key][$subkey] = str_replace($evils, $replaces, $subItem);
+                }
+            }
+            else
+            {
+                $post[$key] = str_replace($evils, $replaces, $item);
+            }
+        }
+        return $post;
+    }
 }
 
 /**
