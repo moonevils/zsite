@@ -20,14 +20,15 @@ css::import($jsRoot . 'uploader/min.css');
 .icon-file-movie:before {content: '\f1c8';}
 .icon-file-video:before {content: '\f1c8';}
 .icon-file-code:before {content: '\f1c9';}
-.file-size > span {display: inline-block; padding-right: 10px;}
+.file-size > span {display: block; text-align:left; padding-right: 0px; z-index:99999;}
+.file-list .file[data-status=done] .file-size{top:-60px; width:115px}
 .file-info-size {min-width: 60px;}
 .file-info-addedBy {min-width: 80px;}
 .file-info-addedDate {min-width: 130px;}
 .file-info-downloads {min-width: 50px;}
 .file-list .file[data-status=done] .actions>.btn-sort-file,
 .file-list .file[data-status=done] .actions>.btn-edit-file {display: inline-block;}
-.file-list .file-wrapper > .actions {width: 210px;}
+.file-list .file-wrapper > .actions {width: 120px;}
 #uploader {margin-bottom: 0}
 .file-label-id {display: inline-block; padding: 0 2px; border: 1px solid #ccc; line-height: 14px; font-size: 12px; color: #999; margin-right: 5px;}
 </style>
@@ -39,10 +40,7 @@ if(!$.zui.strCode)
         var code = 0;
         if(str && str.length)
         {
-            for(var i = 0; i < str.length; ++i)
-            {
-                code += i * str.charCodeAt(i);
-            }
+            for(var i = 0; i < str.length; ++i) code += i * str.charCodeAt(i);
         }
         return code;
     };
@@ -53,7 +51,7 @@ if(!$.zui.strCode)
     <div class='content'></div>
     <button type='button' class='close'>×</button>
   </div>
-  <div class='file-list file-list-lg' data-drag-placeholder="<?php echo $lang->file->dragFile;?>"></div>
+  <div class='file-list file-list-grid' data-drag-placeholder="<?php echo $lang->file->dragFile;?>"></div>
   <div>
     <div class='uploader-status pull-right text-muted'></div>
     <button type='button' class='btn btn-primary uploader-btn-browse'><i class='icon icon-plus'></i><?php echo $lang->file->addFile;?></button>
@@ -67,10 +65,12 @@ if(!empty($files))
 {
     foreach($files as $file)
     {
-        $file->url      = inlink('download', "id=$file->id");
-        $file->name     = $file->title . '.' . $file->extension;
-        $file->ext      = $file->extension;
-        $file->remoteId = $file->id;
+        $file->url       = inlink('download', "id=$file->id");
+        $file->name      = $file->title . '.' . $file->extension;
+        $file->size      = filesize($this->app->getWwwRoot() . $file->fullURL);
+        $file->ext       = $file->extension;
+        $file->addedDate = substr($file->addedDate, 2, 14);
+        $file->remoteId  = $file->id;
         if($file->isImage) $file->previewImage = $file->smallURL;
         $filesArray[] = $file;
     }
@@ -102,9 +102,9 @@ $('#uploader').uploader(
         if(file.downloads > 0) infoText += ' &nbsp; <span class="file-info-downloads" data-tip-class="tooltip-in-modal" data-toggle="tooltip" title="<?php echo $lang->file->downloads;?>"><i class="icon icon-download"></i> ' + file.downloads + '</span>';
         $file.find('.file-size').html(infoText);
         if(file.static) $file.find('.file-status').hide();
+        $file.find('.btn-delete-file i').removeClass('text-danger');
         if(status == 'done' && !$file.find('.btn-edit-file').length)
         {
-
             $file.find('.btn-delete-file').before('<button type="button" data-tip-class="tooltip-in-modal" data-toggle="tooltip" class="btn btn-link btn-edit-file" title="<?php echo $lang->edit ?>"><i class="icon icon-pencil"></i></button>');
         }
         <?php if($showSort):?>
