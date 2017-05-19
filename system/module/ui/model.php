@@ -876,9 +876,10 @@ class uiModel extends model
         $this->directories->exportSourcePath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->exportSlidePath  = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->directories->exportUploadPath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'upload' . DS;
+        $this->directories->exportEffectPath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'effect' . DS;
         $this->directories->exportConfigPath = $this->directories->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
-        $this->directories->encryptPath       = $this->directories->exportPath . 'encrypt' . DS;
+        $this->directories->encryptPath       = $this->directories->exportPath  . 'encrypt' . DS;
         $this->directories->encryptDocPath    = $this->directories->encryptPath . 'doc' . DS;
         $this->directories->encryptDbPath     = $this->directories->encryptPath . 'db'  . DS;
         $this->directories->encryptCssPath    = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'css' . DS;
@@ -886,6 +887,7 @@ class uiModel extends model
         $this->directories->encryptSourcePath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->directories->encryptSlidePath  = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->directories->encryptUploadPath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'upload' . DS;
+        $this->directories->encryptEffectPath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'effect' . DS;
         $this->directories->encryptConfigPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
         if(is_dir($this->directories->exportPath)) $this->app->loadClass('zfile')->removeDir($this->directories->exportPath);
@@ -895,7 +897,7 @@ class uiModel extends model
         }
 
         foreach($this->directories as $path)
-        {
+        { 
             if(!is_dir($path)) return false;
         }
 
@@ -1161,6 +1163,10 @@ class uiModel extends model
         $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $template . DS . $theme;
         if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->directories->exportSourcePath);
 
+        /* Copy effect files. */
+        $effectPath = $this->app->getDataRoot() . 'effect';
+        if(is_dir($effectPath)) $zfile->copyDir($effectPath, $this->directories->exportEffectPath);
+
         /* Copy slide files. */
         $groups = $this->getUsedSlideGroups($template, $theme);
         $slidePath = $this->app->getWwwRoot() . 'data' . DS . 'slides';
@@ -1252,6 +1258,7 @@ class uiModel extends model
         $zfile->copyDir($this->directories->exportUploadPath, $this->directories->encryptUploadPath);
         $zfile->copyDir($this->directories->exportLessPath,   $this->directories->encryptLessPath);
         $zfile->copyDir($this->directories->exportConfigPath, $this->directories->encryptConfigPath);
+        $zfile->copyDir($this->directories->exportEffectPath, $this->directories->encryptEffectPath);
 
         return true;
     }
