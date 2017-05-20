@@ -147,7 +147,7 @@ class book extends control
         if(!$nodeID or !$node) ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
         if(!$node) $this->locate(inlink('create'));
         $this->view->title    = $this->lang->book->common;
-        $this->view->bookList = $this->book->getBookList();
+        $this->view->bookList = $this->book->getBookPairs();
         $this->view->book     = $book;
         $this->view->node     = $node;
         $this->view->catalog  = $this->book->getAdminCatalog($nodeID, $this->book->computeSN($book->id));
@@ -205,7 +205,7 @@ class book extends control
         $this->view->title    = $this->lang->book->catalog;
         $this->view->node     = $this->book->getNodeByID($node);
         $this->view->children = $this->book->getChildren($node);
-        $this->view->bookList = $this->book->getBookList();
+        $this->view->bookList = $this->book->getBookPairs();
 
         $this->display(); 
     }
@@ -219,9 +219,6 @@ class book extends control
      */
     public function edit($nodeID)
     {
-        $node = $this->book->getNodeByID($nodeID, false);
-        $book = $node->book;
-
         if($_POST)
         {
             $result = $this->book->update($nodeID);
@@ -229,15 +226,24 @@ class book extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        /* Get option menu without this node's family nodes. */
-        $optionMenu = $this->book->getOptionMenu($book->id, $removeRoot = true);
-        $families   = $this->book->getFamilies($node);
-        foreach($families as $member) unset($optionMenu[$member->id]);
+        $node = $this->book->getNodeByID($nodeID, false);
+        $book = $node->book;
+        $bookList = $this->book->getBookPairs();
+
+        $optionMenus = array();
+        foreach($bookList as $bookID => $bookTitle)
+        {
+            /* Get option menu without this node's family nodes. */
+            $optionMenu = $this->book->getOptionMenu($bookID, $removeRoot = true);
+            $families   = $this->book->getFamilies($node);
+            foreach($families as $member) unset($optionMenu[$member->id]);
+            $optionMenus[$bookID] = $optionMenu;
+        }
 
         $this->view->title      = $this->lang->edit . $this->lang->book->typeList[$node->type];
         $this->view->node       = $node;
-        $this->view->optionMenu = $optionMenu;
-        $this->view->bookList   = $this->book->getBookList();
+        $this->view->optionMenus = $optionMenus;
+        $this->view->bookList   = $bookList;
         $this->display();
     }
 

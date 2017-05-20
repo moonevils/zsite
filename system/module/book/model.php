@@ -625,7 +625,6 @@ class bookModel extends model
     public function update($nodeID)
     {
         $oldNode = $this->getNodeByID($nodeID);
-
         $node = fixer::input('post')
             ->add('id',            $nodeID)
             ->add('editor',        $this->app->user->account)
@@ -636,8 +635,26 @@ class bookModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
+        $parentNode = $this->getNodeByID($node->parent);
+
+        if($node->type != "book")
+        {
+            $nodePaths = $this->dao->select("id,path")->from(TABLE_BOOK)->where('path')->like("$oldNode->path%")->fetchPairs('id');
+            list($id,$path) = each($nodePaths);
+            $position = strpos($path,$oldNode->parent);
+
+            foreach($nodePaths as $id => $path)
+            {
+                $updatePath['path'] = $parentNode->path . substr($path,$position);
+
+                $this->dao->update(TABLE_BOOK)->data($updatePath)
+                ->where('id')->eq($id)
+                ->exec();
+            }
+        }
+
         $this->dao->update(TABLE_BOOK)
-            ->data($node, $skip = 'uid,referer')
+            ->data($node, $skip = 'uid,referer,book')
             ->autoCheck()
             ->batchCheckIF($node->type == 'book', $this->config->book->require->book, 'notempty')
             ->batchCheckIF($node->type != 'book', $this->config->book->require->node, 'notempty')
@@ -647,7 +664,7 @@ class bookModel extends model
 
         if(dao::isError()) return false;
 
-        $this->fixPath($oldNode->book->id);
+        $this->fixPath($node->book);
         if(dao::isError()) return false;
 
         $this->loadModel('tag')->save($node->keywords);
