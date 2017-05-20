@@ -20,7 +20,7 @@ $lang->book->inputArticleTitle = '請輸入文章標題';
 
 $lang->book->id          = '編號';
 $lang->book->type        = '類型';
-$lang->book->parent      = '類目';
+$lang->book->parent      = '章節';
 $lang->book->author      = '作者';
 $lang->book->editor      = '編輯者';
 $lang->book->addedDate   = '發佈時間';

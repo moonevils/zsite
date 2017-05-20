@@ -16,6 +16,8 @@
 <?php 
 $path = explode(',', $node->path);
 js::set('path', $path);
+js::set('optionMenus',$optionMenus);
+js::set('nodeParent',$node->parent);
 ?>
 <?php include './side.html.php';?>
 <div class='col-md-10'>
@@ -33,8 +35,12 @@ js::set('path', $path);
           </tr>
           <?php if($node->type != 'book'):?>
           <tr>
+            <th><?php echo $lang->book->common;?></th>
+            <td><?php echo html::select('book', $bookList, $node->book->id, "class='chosen form-control'");?></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->book->parent;?></th>
-            <td><?php echo html::select('parent', $optionMenu, $node->parent, "class='chosen form-control'");?></td>
+            <td><?php echo html::select('parent', $optionMenus[$node->book->id], $node->parent, "class='chosen form-control'");?></td>
           </tr>
           <?php endif; ?>
           <tr>
@@ -100,3 +106,4 @@ js::set('path', $path);
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
+

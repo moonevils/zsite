@@ -20,7 +20,7 @@ $lang->book->inputArticleTitle = '请输入文章标题';
 
 $lang->book->id          = '编号';
 $lang->book->type        = '类型';
-$lang->book->parent      = '类目';
+$lang->book->parent      = '章节';
 $lang->book->author      = '作者';
 $lang->book->editor      = '编辑者';
 $lang->book->addedDate   = '发布时间';
