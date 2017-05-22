@@ -171,7 +171,7 @@ class book extends control
         }
 
         $this->view->title    = $this->lang->book->createBook;
-        $this->view->bookList = $this->book->getBookList();
+        $this->view->bookList = $this->book->getBookPairs();
         $this->display(); 
     }
 
@@ -300,7 +300,7 @@ class book extends control
         $this->view->title    = $this->lang->book->searchResults;
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
-        $this->view->bookList = $this->book->getBookList();
+        $this->view->bookList = $this->book->getBookPairs();
 
         $this->display();
     }
@@ -330,7 +330,7 @@ class book extends control
         $this->view->title     = $this->lang->book->setting; 
         $this->view->books     = array('list' => $this->lang->book->list) + $books;
         $this->view->firstBook = key($books);
-        $this->view->bookList  = $this->book->getBookList();
+        $this->view->bookList  = $this->book->getBookPairs();
         $this->display();
     }
 }    
