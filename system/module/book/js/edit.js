@@ -16,4 +16,28 @@ $(document).ready(function()
             $('select#parent').append("<option value=\"" + index + "\">" + value + "</option>");
         })
     });
+
+    function linkChecked()
+    {
+        if($('#isLink').prop('checked'))
+        {   
+            $('tr#isLinked').hide();
+            $('#trlink').show();
+        }   
+        else
+        {   
+            $('tr#isLinked').show();
+            $('#trlink').hide();
+        }
+    }
+
+    if(v.linkChecked == 'checked')
+    {
+        linkChecked();
+    }
+
+    $('#isLink').change(function()
+    {   
+        linkChecked();
+    }); 
 });

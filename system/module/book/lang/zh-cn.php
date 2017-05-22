@@ -20,6 +20,8 @@ $lang->book->inputArticleTitle = '请输入文章标题';
 
 $lang->book->id          = '编号';
 $lang->book->type        = '类型';
+$lang->book->link        = '链接';
+$lang->book->isLink      = '跳转';
 $lang->book->parent      = '章节';
 $lang->book->author      = '作者';
 $lang->book->editor      = '编辑者';
@@ -63,3 +65,7 @@ $lang->book->confirmDelete = "<span class='text-danger'>此操作将删除该手
 
 $lang->book->note = new stdclass();
 $lang->book->note->addedDate = '可以延迟到选定的时间发布。';
+
+$lang->book->placeholder  = new stdclass();
+$lang->book->placeholder->link = '请输入链接，可以是站外链接';
+

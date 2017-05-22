@@ -138,7 +138,8 @@ class bookModel extends model
         $node = $this->getNodeByID($nodeID);
         if(!$node) return '';
 
-        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title')->from(TABLE_BOOK)->where('path')->like("{$node->path}%")->orderBy('grade_desc,`order`')->fetchGroup('parent');
+        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title,link')->from(TABLE_BOOK)->where('path')->like("{$node->path}%")->orderBy('grade_desc,`order`')->fetchGroup('parent');
+
         $book = $node->type == 'book' ? zget(end($nodeList), '0', '') : $this->getBookByNode($node);
         foreach($nodeList as $parent => $nodes)
         {
@@ -157,12 +158,20 @@ class bookModel extends model
                     else
                     {
                         $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+                        if($node->link != '')
+                        {
+                            $link =  $node->link;
+                        }
                         $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><span><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</span></dd>';
                     }
                 }
                 elseif($node->type == 'article')
                 {
                     $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+                    if($node->link != '')
+                    {
+                        $link =  $node->link;
+                    }
                     $catalog .= "<dd id='article{$node->id}' class='catalogue article text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
                 }
                 if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog'])) $catalog .= $nodeList[$node->id]['catalog'];
@@ -635,6 +644,16 @@ class bookModel extends model
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
+        if(isset($node->isLink) && $node->isLink == 'on')
+        {
+            $node->content = html::a($node->link, "Link: " . $node->link);
+        }
+        else
+        {
+            $node->link = '';
+            $node->isLink = 'off';
+        }
+
         $parentNode = $this->getNodeByID($node->parent);
 
         if($node->type != "book")
@@ -654,10 +673,11 @@ class bookModel extends model
         }
 
         $this->dao->update(TABLE_BOOK)
-            ->data($node, $skip = 'uid,referer,book')
+            ->data($node, $skip = 'uid,referer,book,isLink')
             ->autoCheck()
             ->batchCheckIF($node->type == 'book', $this->config->book->require->book, 'notempty')
             ->batchCheckIF($node->type != 'book', $this->config->book->require->node, 'notempty')
+            ->batchCheckIF($node->type != 'book' and $node->isLink == 'on', $this->config->book->require->link, 'notempty')
             ->checkIF($node->type == 'book', 'alias', 'unique', "`type` = 'book' AND id != '$nodeID' AND `lang` = '{$this->app->getClientLang()}'")
             ->where('id')->eq($nodeID)
             ->exec();
