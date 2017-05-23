@@ -22,9 +22,9 @@
 
 /* Visual editable area */
 .ve {position: relative; overflow: visible;}
-.ve-cover {pointer-events:none; cursor: pointer; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid rgba(0, 255, 0, .2); z-index: 960; cursor: pointer; background: rgba(0, 255, 0, .1);}
+.ve-cover {pointer-events:none; cursor: pointer; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid transparent; z-index: 960; cursor: pointer; transition: all .2s;}
 .ve-device-mobile .ve-cover {z-index: 110;}
-.ve:hover > .ve-cover, .ve.ve-editing > .ve-cover {animation: hightlight .8s alternate infinite ease-in-out; background: transparent; border: 1px solid #38b03f!important}
+.ve:hover > .ve-cover, .ve.ve-editing > .ve-cover {box-shadow: 0 0 18px rgba(26,128,26, 0.8),0 0 12px rgba(71,164,71, 0.5); background: transparent; border: 1px solid #38b03f!important}
 
 .ve-heading {pointer-events:auto; background-color: #38b03f; background-color: rgba(56, 176, 63, 0.9); color: #fff; font-size: 13px; position: absolute; top: 0; padding: 0; z-index: 960; line-height: 20px; right: 0; transition: opacity .2s; opacity: 0; visibility: hidden; border-radius: 0 0 0 2px;}
 .ve-device-mobile .ve-heading {z-index: 112}
@@ -100,7 +100,7 @@
 
 .ve-device-mobile .blocks:before, .ve-device-mobile .ve-show-border:before {left: 0; right: 0}
 
-.blocks > .ve-block-actions .btn-ve {color: #F1A325; border-color: #F1A325}
+.blocks > .ve-block-actions .btn-ve {color: #BD7B46; border: none; background-color:#FFF0D5}
 .blocks > .ve-block-actions .btn-ve:hover {color: #fff; background-color: #F1A325}
 .blocks .row > .ve-block-actions .btn-ve {color: #03b8cf; border-color: #03b8cf}
 .blocks .row > .ve-block-actions .btn-ve:hover {color: #fff; background-color: #03b8cf}
