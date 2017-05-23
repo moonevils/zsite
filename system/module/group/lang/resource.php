@@ -252,6 +252,7 @@ $lang->resource->tree->redirect = 'redirect';
 /* Ui module. */
 $lang->resource->ui = new stdclass();
 $lang->resource->ui->setTemplate   = 'setTemplate';
+$lang->resource->ui->setDevice     = 'setDevice';
 $lang->resource->ui->customTheme   = 'custom';
 $lang->resource->ui->setLogo       = 'setLogo';
 $lang->resource->ui->deleteFavicon = 'deleteFavicon';
