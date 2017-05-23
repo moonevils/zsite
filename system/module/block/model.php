@@ -150,14 +150,16 @@ class blockModel extends model
                             }
 
                             $mergedChild = new stdclass();
-                            $mergedChild->id         = $child->id;
-                            $mergedChild->title      = $child->title;
-                            $mergedChild->type       = $child->type;
-                            $mergedChild->content    = $child->content;
-                            $mergedChild->template   = $child->template;
-                            $mergedChild->grid       = $child->grid;
-                            $mergedChild->titleless  = $child->titleless;
-                            $mergedChild->borderless = $child->borderless;
+                            $mergedChild->id          = $child->id;
+                            $mergedChild->title       = $child->title;
+                            $mergedChild->type        = $child->type;
+                            $mergedChild->content     = $child->content;
+                            $mergedChild->template    = $child->template;
+                            $mergedChild->grid        = $child->grid;
+                            $mergedChild->probability = $child->probability;
+                            $mergedChild->isRandom    = $child->isRandom;
+                            $mergedChild->titleless   = $child->titleless;
+                            $mergedChild->borderless  = $child->borderless;
                             $children[] = $mergedChild;
                         }
                         $mergedBlock->children = $children;
@@ -171,9 +173,11 @@ class blockModel extends model
                         $mergedBlock->template = $block->template;
                     }
 
-                    if(isset($block->grid))       $mergedBlock->grid       = $block->grid;
-                    if(isset($block->titleless))  $mergedBlock->titleless  = $block->titleless;
-                    if(isset($block->borderless)) $mergedBlock->borderless = $block->borderless;
+                    if(isset($block->grid))        $mergedBlock->grid        = $block->grid;
+                    if(isset($block->probability)) $mergedBlock->probability = $block->probability;
+                    if(isset($block->isRandom))    $mergedBlock->isRandom    = $block->isRandom;
+                    if(isset($block->titleless))   $mergedBlock->titleless   = $block->titleless;
+                    if(isset($block->borderless))  $mergedBlock->borderless  = $block->borderless;
                     $layouts[$page][$region][] = $mergedBlock;
                 }
             }
@@ -244,14 +248,15 @@ class blockModel extends model
                     }
 
                     $rawChild = new stdclass();
-                    $rawChild->grid       = $child->grid;
-                    $rawChild->titleless  = $child->titleless;
-                    $rawChild->borderless = $child->borderless;
-                    $rawChild->id         = $child->id;
-                    $rawChild->title      = $child->title;
-                    $rawChild->type       = $child->type;
-                    $rawChild->content    = $child->content;
-                    $rawChild->template   = $child->template;
+                    $rawChild->grid        = $child->grid;
+                    $rawChild->probability = $child->probability;
+                    $rawChild->titleless   = $child->titleless;
+                    $rawChild->borderless  = $child->borderless;
+                    $rawChild->id          = $child->id;
+                    $rawChild->title       = $child->title;
+                    $rawChild->type        = $child->type;
+                    $rawChild->content     = $child->content;
+                    $rawChild->template    = $child->template;
                     $children[] = $rawChild;
                 }
                 $rawBlock->children = $children;
@@ -265,9 +270,11 @@ class blockModel extends model
                 $rawBlock->template = $block->template;
             }
 
-            $rawBlock->grid       = $block->grid;
-            $rawBlock->titleless  = $block->titleless;
-            $rawBlock->borderless = $block->borderless;
+            $rawBlock->grid        = $block->grid;
+            $rawBlock->probability = $block->probability;
+            $rawBlock->isRandom    = $block->isRandom;
+            $rawBlock->titleless   = $block->titleless;
+            $rawBlock->borderless  = $block->borderless;
 
             $sortedBlocks[] = $rawBlock;
         }
@@ -354,14 +361,16 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function createEntry($template, $region, $block = null, $key, $grade = 1)
+    public function createEntry($template, $region, $block = null, $key, $grade = 1, $random = false)
     {
         $blockOptions[''] = $this->lang->block->select;
         $blockOptions += $this->getPairs($template);
 
-        $blockID = isset($block->id) ? $block->id : '';
-        $type    = isset($block->type) ? $block->type : '';
-        $grid    = isset($block->grid) ? $block->grid : '';
+        $blockID     = isset($block->id) ? $block->id : '';
+        $type        = isset($block->type) ? $block->type : '';
+        $grid        = isset($block->grid) ? $block->grid : '';
+        $probability = isset($block->probability) ? $block->probability : '';
+        $isRandom    = isset($block->isRandom) ? $block->isRandom : 0;
 
         $entry    = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
         $readonly = !empty($block->children) ? "readonly='readonly'" : '';
@@ -369,17 +378,17 @@ class blockModel extends model
         {
             $entry .= "<div class='col col-type text-center'>" . html::hidden("blocks[{$key}]", $blockID) . html::input('', $this->lang->block->subRegion, "class='form-control text-center' readonly") . "</div>";
             $entry .= html::hidden('isRegion', 1);
+            $entry .= html::hidden("isRandom[$key]", $isRandom ? 1 : 0);
         }
         else
         {
             $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}' $readonly") . "</div>";
             $entry .= html::hidden('isRegion', 0);
+            $entry .= html::hidden("isRandom[$key]", 0);
         }
-
-        if($template != 'mobile')
-        {
-            $entry   .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
-        }
+        
+        if($template != 'mobile' and !$random and !$probability) $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
+        if($random or $probability) $entry .= "<div class='col col-probability'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->probability}</span>" . html::select("probability[{$key}]", $this->lang->block->probabilityOptions, $probability, "class='form-control'") . '</div></div>';
 
         $titlelessChecked  = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
@@ -400,6 +409,7 @@ class blockModel extends model
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
         $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit loadInModal'");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
+        if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addRandom, "class='btn-add-random'");
         $entry .= '</div>';
         $entry .= "<div class='col col-move'><span class='sort-handle sort-handle-{$grade}'><i class='icon-move'></i> {$this->lang->block->sort}</span></div>";
         if($grade == 1)
@@ -623,10 +633,12 @@ class blockModel extends model
         foreach($this->post->blocks as $key => $block)
         {
             if($block == 0) $block = $this->createRegion($template, $page, $region);
-            $blocks[$key]['id']         = $block;
-            $blocks[$key]['grid']       = $this->post->grid[$key];
-            $blocks[$key]['titleless']  = $this->post->titleless[$key];
-            $blocks[$key]['borderless'] = $this->post->borderless[$key];
+            $blocks[$key]['id']          = $block;
+            $blocks[$key]['grid']        = isset($this->post->grid[$key]) ? $this->post->grid[$key] : '';
+            $blocks[$key]['probability'] = isset($this->post->probability[$key]) ? $this->post->probability[$key] : '';
+            $blocks[$key]['titleless']   = $this->post->titleless[$key];
+            $blocks[$key]['borderless']  = $this->post->borderless[$key];
+            $blocks[$key]['isRandom']    = isset($this->post->isRandom[$key]) ? $this->post->isRandom[$key] : 0;
         }
 
         /* Compute children blocks. */
@@ -728,11 +740,15 @@ class blockModel extends model
         {
             if($withGrid)
             {
-                if($block->grid == 0) echo "<div class='col col-row'><div class='row' data-id='{$block->id}'>";
-                else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row' data-id='{$block->id}'>";
+                $randomClass = $block->isRandom ? 'random-block-list' : '';
+                if($block->grid == 0) echo "<div class='col col-row'><div class='row $randomClass' data-id='{$block->id}'>";
+                else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row $randomClass' data-id='{$block->id}'>";
             }
 
-            if(!empty($block->children)) foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
+            if(!empty($block->children))
+            {
+                foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
+            }
 
             if($withGrid) echo '</div></div>';
         }
@@ -743,7 +759,8 @@ class blockModel extends model
                 if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
-                    echo "<div class='col'>";
+                    $probability = !empty($block->probability) ? "data-probability={$block->probability}" : '';
+                    echo "<div class='col' $probability>";
                 }
                 else
                 {
