@@ -22,6 +22,7 @@ $lang->ui->manageTheme     = 'Manage Theme';
 $lang->ui->installTemplate = 'Import Template';
 $lang->ui->exportTheme     = 'Export Theme';
 $lang->ui->setTheme        = 'Theme Settings';
+$lang->ui->setDevice       = 'Device Settings';
 $lang->ui->setFavicon      = "Favicon Settings";
 $lang->ui->deleteFavicon   = "Delete Favicon";
 $lang->ui->deleteLogo      = "Delete Logo";

@@ -20,6 +20,7 @@
   <div class='hide'>
     <div id='entry'><?php echo $this->block->createEntry($template, $region, null, 'key');?></div>
     <div id='child'><?php echo $this->block->createEntry($template, $region, null, 'key', 2);?></div>
+    <div id='random'><?php echo $this->block->createEntry($template, $region, null, 'key', 2, true);?></div>
   </div>
 </div>
 <div class='modal-footer'>

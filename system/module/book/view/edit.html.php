@@ -16,6 +16,11 @@
 <?php 
 $path = explode(',', $node->path);
 js::set('path', $path);
+js::set('optionMenus',$optionMenus);
+js::set('nodeParent',$node->parent);
+
+$linkChecked = $node->link ? checked : '';
+js::set('linkChecked',$linkChecked);
 ?>
 <?php include './side.html.php';?>
 <div class='col-md-10'>
@@ -26,22 +31,37 @@ js::set('path', $path);
     <div class='panel-body'>
       <form id='ajaxForm' method='post' class='form-inline' action='<?php echo inlink('edit', "nodeID=$node->id")?>'>
         <table class='table table-form'>
-          <tr>
+          <tr id='isLinked'>
             <th class='col-xs-1'><?php echo $lang->book->author;?></th>
             <td class='w-p40'><?php echo html::input('author', $node->author, "class='form-control'");?></td>
             <td></td>
           </tr>
           <?php if($node->type != 'book'):?>
           <tr>
+            <th class='col-xs-1'><?php echo $lang->book->common;?></th>
+            <td class='w-p40'><?php echo html::select('book', $bookList, $node->book->id, "class='chosen form-control'");?></td>
+            <td></td>
+          </tr>
+          <tr>
             <th><?php echo $lang->book->parent;?></th>
-            <td><?php echo html::select('parent', $optionMenu, $node->parent, "class='chosen form-control'");?></td>
+            <td><?php echo html::select('parent', $optionMenus[$node->book->id], $node->parent, "class='chosen form-control'");?></td>
           </tr>
           <?php endif; ?>
           <tr>
             <th><?php echo $lang->book->title;?></th>
             <td colspan='2'>
               <div class='row order'>
-                <div class="col-sm-<?php echo $node->type == 'book' ? '9' : '12';?>"><?php echo html::input('title', $node->title, 'class="form-control"');?></div>
+                <div class="col-sm-<?php echo $node->type == 'book' ? '9' : '12';?>">
+                  <div class="input-group">
+                    <?php echo html::input('title', $node->title, 'class="form-control"');?>
+                    <span class="input-group-addon">              
+                      <label class='checkbox-inline'>
+                      <input type="checkbox" name="isLink" id="isLink" <?php echo $linkChecked; ?>><span><?php echo $lang->book->isLink;?></span>
+                      </label>
+                    </span>
+                    <div class='required required-wrapper'></div>
+                  </div>
+                </div>
                 <?php if($node->type == 'book'):?>
                 <div class='col-sm-3 order'>
                   <div class='input-group'>
@@ -53,7 +73,14 @@ js::set('path', $path);
               </div>
             </td>
           </tr>
-          <tr>
+          <tr class= 'trlink hide' id='trlink'>
+            <th><?php echo $lang->book->link;?></th>
+            <td colspan='2'>
+              <div class='required required-wrapper'></div>
+              <?php echo html::input('link', $node->link, "class='form-control' placeholder='{$lang->book->placeholder->link}'");?>
+            </td>
+          </tr>
+          <tr id='isLinked'>
             <th><?php echo $lang->book->alias;?></th>
             <td colspan='2'>
               <?php if($node->type == 'book'):?>
@@ -66,20 +93,20 @@ js::set('path', $path);
               </div>
             </td>
           </tr>
-          <tr>
+          <tr id='isLinked'>
             <th><?php echo $lang->book->keywords;?></th>
             <td colspan='2'><?php echo html::input('keywords', $node->keywords, "class='form-control'");?></td>
           </tr>
-          <tr>
+          <tr id='isLinked'>
             <th><?php echo $lang->book->summary;?></th>
             <td colspan='2'><?php echo html::textarea('summary', $node->summary, "class='form-control' rows='2'");?></td>
           </tr>
           <?php if($node->type == 'article' or $node->type == 'book'):?>
-          <tr>
+          <tr id='isLinked'>
             <th><?php echo $lang->book->content;?></th>
             <td colspan='2' valign='middle' <?php if($node->type == 'book') echo "class='required required-wrapper'";?>><?php echo html::textarea('content', htmlspecialchars($node->content), "rows='15' class='form-control'");?></td>
           </tr>
-          <tr>
+          <tr id='isLinked'>
             <th><?php echo $lang->book->addedDate;?></th>
             <td>
               <div class="input-append date">
@@ -100,3 +127,4 @@ js::set('path', $path);
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
+

@@ -880,10 +880,13 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('page_view', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw');
 
 INSERT INTO `eps_layout` (`template`, `plan`, `page`, `region`, `blocks`, `import`, `lang`) VALUES
+('mobile', 0, 'all',        'top','[{"id":"35","grid":"","titleless":0,"borderless":0}]', 'no','zh-cn'),
 ('mobile','0','index_index','top','[{"id":"25","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
 ('mobile','0','index_index','middle','[{"id":"31","grid":"0","titleless":"0","borderless":"0"},{"id":"23","grid":"12","titleless":"0","borderless":"0"},{"id":"21","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile', 0, 'all',        'top','[{"id":"135","grid":"","titleless":0,"borderless":0}]', 'no','en'),
 ('mobile','0','index_index','top','[{"id":"125","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
 ('mobile','0','index_index','middle','[{"id":"131","grid":"0","titleless":"0","borderless":"0"},{"id":"123","grid":"12","titleless":"0","borderless":"0"},{"id":"121","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile', 0, 'all',        'top','[{"id":"235","grid":"","titleless":0,"borderless":0}]', 'no','zh-tw'),
 ('mobile','0','index_index','top','[{"id":"225","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
 ('mobile','0','index_index','middle','[{"id":"231","grid":"0","titleless":"0","borderless":"0"},{"id":"223","grid":"12","titleless":"0","borderless":"0"},{"id":"221","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw');
 
@@ -921,7 +924,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (31, 'about', '公司简介', '', 'mobile','zh-cn'),
 (32, 'links', '友情链接', '', 'mobile','zh-cn'),
 (33, 'followUs', '关注我们', '', 'mobile','zh-cn'),
-(34, 'subscribe', '订阅博客', '', 'mobile','zh-cn');
+(34, 'subscribe', '订阅博客', '', 'mobile','zh-cn'),
+(35, 'header', '网站头部', '', 'mobile','zh-cn');
 
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (101, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default','en'),
@@ -954,7 +958,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (131, 'about', 'About Us', '', 'mobile','en'),
 (132, 'links', 'Link', '', 'mobile','en'),
 (133, 'followUs', 'Follow Us', '', 'mobile','en'),
-(134, 'subscribe', 'Subscribe', '', 'mobile','en');
+(134, 'subscribe', 'Subscribe', '', 'mobile','en'),
+(135, 'header', 'Header', '', 'mobile','en');
 
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (201, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
@@ -987,7 +992,8 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (231, 'about', '公司簡介', '', 'mobile','zh-tw'),
 (232, 'links', '友情鏈接', '', 'mobile','zh-tw'),
 (233, 'followUs', '關注我們', '', 'mobile','zh-tw'),
-(234, 'subscribe', '訂閱博客', '', 'mobile','zh-tw');
+(234, 'subscribe', '訂閱博客', '', 'mobile','zh-tw'),
+(235, 'header', '網站頭部', '', 'mobile','zh-tw');
 
 INSERT INTO `eps_group` (`id`, `name`, `role`, `desc`, `lang`) VALUES
 (1, '管理员', '', '拥有后台所有权限', 'zh-cn'),
@@ -1072,6 +1078,7 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (1, 'group', 'managePriv', 'zh-cn'),
 (1, 'group', 'manageMember', 'zh-cn'),
 (1, 'ui', 'setTemplate', 'zh-cn'),
+(1, 'ui', 'setDevice', 'zh-cn'),
 (1, 'ui', 'customTheme', 'zh-cn'),
 (1, 'ui', 'setLogo', 'zh-cn'),
 (1, 'ui', 'setBaseStyle', 'zh-cn'),
@@ -1168,6 +1175,7 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (2, 'file', 'selectImage', 'zh-cn'),
 (2, 'file', 'browseSource', 'zh-cn'),
 (2, 'ui', 'setTemplate', 'zh-cn'),
+(2, 'ui', 'setDevice', 'zh-cn'),
 (2, 'tag', 'link', 'zh-cn'),
 (2, 'site', 'setRecPerPage', 'zh-cn'),
 (2, 'links', 'admin', 'zh-cn'),

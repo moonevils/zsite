@@ -1,12 +1,37 @@
 $(document).ready(function()
 {
     $('.blogTD').hide();
+    $('tr#trBook').hide();
+
     $('[name=type]').change(function()
     {
         type = $(this).val();
-        $('.articleTD, .blogTD').hide();
-        $('.' + type + 'TD').show();
+        if(type == 'book')
+        {
+            $('tr#trAB').hide();
+            $('tr#trBook').show();
+        }
+        else
+        {
+            $('tr#trAB').show();
+            $('tr#trBook').hide();
+
+            $('.articleTD, .blogTD').hide();
+            $('.' + type + 'TD').show();
+        }
     });
+
+    $('select#bookList').change(function()
+    {   
+        var bookID=$(this).children('option:selected').val();
+        $('select#bookCatalogs').empty();
+
+        $.each(v.bookCatalogs[bookID],function(index,value)
+        {   
+            $('select#bookCatalogs').append("<option value=\"" + index + "\">" + value + "</option>");
+        })  
+    }); 
+
     $('#source').change();
     $(document).on('click', '.rejecter', function()
     {

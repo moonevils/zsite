@@ -48,3 +48,8 @@ $lang->nav->targetList = array();
 $lang->nav->targetList['_self']  = '当前窗口';
 $lang->nav->targetList['_blank'] = '新开窗口';
 $lang->nav->targetList['modal']  = '弹出窗口';
+
+$lang->nav->dropdown = array();
+$lang->nav->dropdown['dropdown']  = '点击展开';
+$lang->nav->dropdown['dropdown-hover']  = '悬停展开';
+

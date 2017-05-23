@@ -22,6 +22,7 @@ $lang->ui->manageTheme     = '主题管理';
 $lang->ui->installTemplate = '导入模板';
 $lang->ui->exportTheme     = '导出主题';
 $lang->ui->setTheme        = '主题设置';
+$lang->ui->setDevice       = '设备设置';
 $lang->ui->setFavicon      = "Favicon设置";
 $lang->ui->deleteFavicon   = "不显示Favicon";
 $lang->ui->deleteLogo      = "删除Logo";
@@ -284,7 +285,8 @@ $lang->ui->top             = '上边距';
 $lang->ui->bottom          = '下边距';
 
 $lang->ui->importType    = '导入方式';
-$lang->js->fullImportTip = "完整导入将会替换站点的文章、产品等数据";
+$lang->js->importTip     = "只导入主题的风格和样式";
+$lang->js->fullImportTip = "将会导入测试数据以及替换站点文章、产品等数据";
 
 $lang->ui->importTypes = new stdclass();
 $lang->ui->importTypes->theme = '只导入主题';
