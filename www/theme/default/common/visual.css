@@ -63,7 +63,7 @@
 
 .block.ve {min-height: 22px; margin-bottom: 14px;}
 
-.btn-ve {border-radius: 2px; border: 2px solid #38b03f; color: #38b03f; background: #fff; text-shadow: none; font-size: 14px; display: block; width: 100%}
+.btn-ve {border-radius: 2px; color: #38b03f; background: #DDF4DF; text-shadow: none; font-size: 14px; display: block; width: 100%; border: none;}
 .btn-ve:hover {background: #38b03f; color: #fff; text-shadow: none;}
 
 .ve-actions-bar {margin: 0 -5px}
@@ -102,7 +102,7 @@
 
 .blocks > .ve-block-actions .btn-ve {color: #BD7B46; border: none; background-color:#FFF0D5}
 .blocks > .ve-block-actions .btn-ve:hover {color: #fff; background-color: #F1A325}
-.blocks .row > .ve-block-actions .btn-ve {color: #03b8cf; border-color: #03b8cf}
+.blocks .row > .ve-block-actions .btn-ve {color: #03b8cf; border-color: #03b8cf; background-color: #DDF3F5}
 .blocks .row > .ve-block-actions .btn-ve:hover {color: #fff; background-color: #03b8cf}
 
 .blocks.row > .col.col-row > .row.ve {margin: 0 0 14px; padding: 14px 7px 0;}
@@ -138,3 +138,11 @@ body.ve-preview-in .blocks.row > .col.col-row > .row.ve, body.ve-preview-hover .
 .ve-mode #columns > .ve-cover, .ve-mode .row-columns > .ve-cover {background-color: transparent; border: none}
 .ve-mode #columns:hover > .ve-cover, .ve-mode .row-columns:hover > .ve-cover {animation: none; border: none!important;}
 .ve-mode #columns > .ve-cover > .ve-heading, .ve-mode .row-columns > .ve-cover > .ve-heading {opacity: 1; visibility: visible; background: #03B8CF; right: 8px}
+
+#veQuerySelector {position: fixed; z-index: 10000000; pointer-events: none;}
+#veQuerySelectorName {background-color: #333; background-color: rgba(0,0,0,.8); color: #fff; pointer-events: auto; font-size: 12px; display: block; padding: 0 5px; line-height: 18px; position: absolute; top: -18px; left: 0;}
+#veQuerySelectorName .text-name {color: #ea80fc; font-weight: bold;}
+#veQuerySelectorName .text-id {color: #ffe57f}
+#veQuerySelectorName .text-class {color: #84ffff}
+#veQuerySelectorCover {position: absolute; width: 100%; top: 0; bottom: 0; box-shadow: 0 0 14px rgba(224, 64, 251, 0.8), 0 0 8px rgba(224, 64, 251, 0.5);}
+.ve-sm-offset-top #veQuerySelectorName {top: 0;}
