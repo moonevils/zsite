@@ -64,6 +64,7 @@ $lang->submission->status[3] = '驳回';
 $lang->submission->typeList = array();
 $lang->submission->typeList['article'] = '文章';
 $lang->submission->typeList['blog']    = '博客';
+$lang->submission->typeList['book']    = '手册';
 
 $lang->article->onlyBody = '不显示头部、侧边和底部(可定制性更强)';
 

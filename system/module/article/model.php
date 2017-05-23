@@ -749,13 +749,53 @@ class articleModel extends model
      */
     public function approve($articleID, $type, $categories)
     {
+        $article = $this->getByID($articleID);
+        if($type == "book")
+        {
+            $bookModel = $this->loadModel('book');
+            $parentNode = $bookModel->getNodeByID($categories[0]);
+
+            $node = new stdclass();
+            $node->parent = $parentNode ? $parentNode->id : 0;
+            $node->grade  = $parentNode ? $parentNode->grade + 1 : 1;
+
+            /* First, save the child without path field. */
+            $node->title     = $article->title;
+            $node->type      = "article";
+            $node->author    = $article->author;
+            $node->alias     = $article->alias;
+            $node->keywords  = $article->keywords;
+            $node->summary   = $article->summary;
+            $node->content   = $article->content;
+            $node->addedDate = $article->addedDate;
+            $node->order     = 0;
+            $node->keywords  = seo::unify($node->keywords, ',');
+
+            $this->dao->insert(TABLE_BOOK)->data($node)->exec();
+
+            /* After saving, update it's path. */
+            $nodeID   = $this->dao->lastInsertID();
+            $nodePath = $parentNode->path . "$nodeID,";
+            $this->dao->update(TABLE_BOOK)->set('path')->eq($nodePath)->where('id')->eq($nodeID)->exec();
+
+            $bookArticle = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
+            $this->loadModel('search')->save("article", $bookArticle);
+
+            $articeFileIDs = $this->dao->select('id')->from(TABLE_FILE)->where('objectID')->eq($articleID)->fetchPairs('id');
+            $uid = uniqid();
+            $_SESSION['album'][$uid] = array_keys($articeFileIDs);
+            $this->loadModel('file')->updateObjectID($uid, $nodeID, 'book');
+        }
+        else
+        {
+            $this->loadModel('search')->save($article->type, $article);
+            $this->loadModel('file')->updateObjectType($articleID, 'submission', $type);
+        }
+
         $this->processCategories($articleID, $type, $categories);
         $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submission')->eq(2)->where('id')->eq($articleID)->exec();
-        $article = $this->getByID($articleID);
+
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmission', 'article', $articleID, '', $article->addedBy);
-        
-        $this->loadModel('file')->updateObjectType($articleID, 'submission', $type);
-        $this->loadModel('search')->save($article->type, $article);
         $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmission));
 
         return !dao::isError();
