@@ -129,6 +129,7 @@ $lang->wechat->placeholder->account  = 'gh_xxx format';
 $lang->wechat->placeholder->token    = 'English letter or number, length of 3-32 characters.';
 
 $lang->wechat->curlSSLRequired = "This function requires curl module with ssl encryption transmission supports.";
+$lang->wechat->opensslRequired = "This function requires openssl module. Please open the PHP module";
 $lang->wechat->needCertified   = "This feature needs the account to be certified.";
 $lang->wechat->integrateInfo   = "Please interate in the wechat control panel. <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>Help</a>";
 $lang->wechat->integrateDone   = "I have interated with wechat server";

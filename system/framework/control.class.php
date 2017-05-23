@@ -31,7 +31,7 @@ class control extends baseControl
      */
     public function __construct($moduleName = '', $methodName = '')
     {
-        parent::__construct();
+        parent::__construct($moduleName, $methodName);
 
         $this->setClientDevice();
         $this->setTplRoot();
