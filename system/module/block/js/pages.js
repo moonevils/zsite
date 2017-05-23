@@ -10,8 +10,16 @@ $(document).ready(function()
     $(document).on('click', 'a.plus-child', function()
     {
         v.key ++;
-        $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
-        var child = $('#child').html().replace(/key/g, v.key);
+        if($(this).parent().prev().prev().hasClass('col-probability'))
+        {
+            $('#random').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
+            var child = $('#random').html().replace(/key/g, v.key);
+        }
+        else
+        {
+            $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
+            var child = $('#child').html().replace(/key/g, v.key);
+        }
         $(this).parent().parent().after(child);
         computeParent();
     });
@@ -19,9 +27,24 @@ $(document).ready(function()
     $(document).on('click', 'a.btn-add-child', function()
     {
         v.key ++;
+        $(this).parent().parent().find('[name*=isRandom]').val('0');
         $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
         var entry = $('#child').html().replace(/key/g, v.key);
-        $(this).parent().parent().find('.children').append(entry);
+        $(this).parent().parent().find('.children').empty().append(entry);
+        if($(this).parent().parent().find('[name=isRegion]').val() != 1)
+        {
+            $(this).parent().siblings(0).children('.block').val(0).attr('readonly', true);
+        }
+        computeParent();
+    });
+
+    $(document).on('click', 'a.btn-add-random', function()
+    {
+        v.key ++;
+        $(this).parent().parent().find('[name*=isRandom]').val('1');
+        $('#random').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
+        var entry = $('#random').html().replace(/key/g, v.key);
+        $(this).parent().parent().find('.children').empty().append(entry);
         if($(this).parent().parent().find('[name=isRegion]').val() != 1)
         {
             $(this).parent().siblings(0).children('.block').val(0).attr('readonly', true);

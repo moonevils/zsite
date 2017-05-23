@@ -34,7 +34,7 @@ $(document).ready(function()
         $(this).parents('.block-item').find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).find('option:selected').val()));
     });
 
-    $('#blockList').on('click', '.plus, .plus-child, .btn-add-child', function()
+    $('#blockList').on('click', '.plus, .plus-child, .btn-add-child, .btn-add-random', function()
     {
         setTimeout(hideEmptyChildren, 100);
         setTimeout(initSortable, 200);
