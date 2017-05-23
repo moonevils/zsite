@@ -255,7 +255,11 @@ class article extends control
         if($_POST)
         {
             $type = $this->post->type;
-            $categories = $type == 'article' ? $this->post->articleCategories : $this->post->blogCategories;
+            $categories = '';
+            if($type == 'article') $categories = $this->post->articleCategories;
+            if($type == 'blog')    $categories = $this->post->blogCategories;
+            if($type == 'book')    $categories = array($this->post->bookCatalogs);
+
             if(empty($categories))$this->send(array('result' => 'fail', 'message' => $this->lang->article->categoryEmpty));
             $result = $this->article->approve($id, $type, $categories);
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -264,13 +268,24 @@ class article extends control
 
         unset($this->lang->article->menu);
         $this->lang->menuGroups->article = 'user';
-        
+
+        $bookModel = $this->loadModel('book');
+        $bookList  = $bookModel->getBookPairs();
+        $bookCatalogs = array();
+        foreach($bookList as $bookID => $bookTitle)
+        {
+            $bookCatalog = $bookModel->getOptionMenu($bookID, $removeRoot = true);
+            $bookCatalogs[$bookID] = $bookCatalog;
+        }
+
         $this->view->title             = $this->lang->submission->check;
         $this->view->article           = $this->article->getByID($id);
         $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->blogCategories    = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
-        $this->display();
+        $this->view->bookList          = $bookList;
+        $this->view->bookCatalogs      = $bookCatalogs;
 
+        $this->display();
     }
 
     /**
