@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php js::set('confirmReject', $lang->article->confirmReject);?>
+<?php js::set('bookCatalogs',$bookCatalogs);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->submission->check;?></strong></div>
   <div class='panel-body'>
@@ -55,10 +56,19 @@
         <th class='w-100px'><?php echo $lang->article->type;?></th>
         <td><?php echo html::radio("type", $lang->submission->typeList, 'article');?></td><td></td>
       </tr>
-      <tr>
+      <tr id='trAB'>
         <th class='w-100px'><?php echo $lang->article->category;?></th>
         <td class='articleTD'><?php echo html::select("articleCategories[]", $articleCategories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td>
         <td class='blogTD'><?php echo html::select("blogCategories[]", $blogCategories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td>
+      </tr>
+      <tr id='trBook'>
+        <th class='w-100px'><?php echo "手册";?></th>
+        <td class='w-p40'><?php echo html::select("bookList", $bookList, '', "class='form-control'");?></td>
+      </tr>
+      <tr id='trBook'>
+        <th class='w-100px'><?php echo "章节";?></th>
+        <?php $bookIDs = array_keys($bookList)?>
+        <td class='w-p40'><?php echo html::select("bookCatalogs", $bookCatalogs[$bookIDs[0]], '', "class='form-control'");?></td>
       </tr>
       <tr>
         <th></th><td colspan='2'><?php echo html::submitButton($lang->submission->publish) . html::a(inlink('reject', "id={$article->id}"), $lang->submission->reject, "class='btn btn-warning rejecter'");?></td>

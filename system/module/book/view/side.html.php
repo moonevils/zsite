@@ -15,8 +15,8 @@
     <div class='panel book-list'>
       <div class='panel-body'>
         <ul class='tree tree-lines' data-idx='0'>
-          <?php foreach($bookList as $bookMenu):?> 
-          <li data-idx='1' data-id="<?php echo $bookMenu->id;?>"><?php echo html::a($this->createLink('book', 'admin', "bookID=$bookMenu->id"), $bookMenu->title);?></li>
+          <?php foreach($bookList as $bookID => $bookTitle):?> 
+          <li data-idx='1' data-id="<?php echo $bookID;?>"><?php echo html::a($this->createLink('book', 'admin', "bookID=$bookID"), $bookTitle);?></li>
           <?php endforeach;?>
         </ul>
         <div class='text-right'>

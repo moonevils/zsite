@@ -704,6 +704,7 @@ function setGo2Top()
             if(disableGrid) return;
 
             var grid = $col.attr('data-grid');
+            var probability = $col.attr('data-probability');
             if(!grid)
             {
                 grid = options.grid || 12;
@@ -713,7 +714,7 @@ function setGo2Top()
                 grid = parseInt(grid);
             }
             $col.attr('data-grid', grid)
-                .attr('class', 'col col-' + grid + (isColRow ? ' col-row' : ''));
+                .attr('class', 'col col-' + grid + (isColRow ? ' col-row' : '') + (probability ? ' hide' : ''));
 
             var row = rows[rowIndex];
             var colHeight = $child.height();

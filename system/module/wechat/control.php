@@ -28,6 +28,24 @@ class wechat extends control
     public $api;
 
     /**
+     * Construct.
+     * 
+     * @param  string $moduleName 
+     * @param  string $methodName 
+     * @access public
+     * @return void
+     */
+    public function __construct($moduleName = '', $methodName = '')
+    {
+        parent::__construct($moduleName, $methodName);
+        if(!extension_loaded('openssl'))
+        {
+            echo js::alert($this->lang->wechat->opensslRequired);
+            die(js::locate('back'));
+        }
+    }
+
+    /**
      * Set the wechat api.
      * 
      * @param  int    $public 
@@ -97,7 +115,6 @@ class wechat extends control
 
         $this->view->title     = $this->lang->wechat->common;
         $this->view->publics   = $publics;
-        $this->view->sslLoaded = extension_loaded('openssl');
         $this->display();
     }
 
