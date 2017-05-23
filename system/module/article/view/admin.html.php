@@ -42,8 +42,13 @@
         <?php $vars = "type=$type&categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='text-center w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
         <th class='text-center'><?php commonModel::printOrderLink('title', $orderBy, $vars, $lang->article->title);?></th>
+        <?php if($type == 'submission'):?>
+        <th class='text-center w-80px'><?php echo $lang->article->type;?></th>
+        <?php endif;?>
         <?php if($type != 'page' and $type != 'submission'):?>
         <th class='text-center w-160px'><?php echo $lang->article->category;?></th>
+        <?php endif;?>
+        <?php if($type != 'page'):?>
         <th class='text-center w-80px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->article->author);?></th>
         <?php endif;?>
         <th class='text-center w-150px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
@@ -78,8 +83,13 @@
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
           <?php echo $article->title;?>
         </td>
+        <?php if($type == 'submission'):?>
+        <td class='text-center'><?php echo $lang->submission->typeList[$article->type];?></td>
+        <?php endif;?>
         <?php if($type != 'page' and $type != 'submission'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
+        <?php endif;?>
+        <?php if($type != 'page'):?>
         <td class='text-center'><?php echo $article->author;?></td>
         <?php endif;?>
         <td class='text-center'><?php echo $article->addedDate;?></td>
@@ -155,8 +165,8 @@
     <tfoot>
       <tr>
         <?php $col = commonModel::isAvailable('submission') ? 8 : 7;?>
-        <?php if($type == 'page') $col = 6;?>
-        <?php if($type == 'submission') $col = 7;?>
+        <?php if($type == 'page') $col = 5;?>
+        <?php if($type == 'submission') $col = 8;?>
         <td colspan="<?php echo $col;?>"><?php $pager->show();?></td>
       </tr>
     </tfoot>
