@@ -950,6 +950,110 @@
 
         setTimeout(tidyBlocks, 500);
 
+        // Init element query string helper
+        var $queryElement = null;
+        var $querySelector = $$('<div id="veQuerySelector" class="ve-element"><div id="veQuerySelectorName"></div><div id="veQuerySelectorCover"></div></div>').appendTo($$body);
+        var $querySelectorName = $querySelector.find('#veQuerySelectorName');
+        var querySelector = null;
+        var isAltKeyPress = false;
+        var lastEleId = 0;
+        var updateQuerySelectorPosition = function()
+        {
+            $$body.toggleClass('ve-show-query-selector', !!$queryElement);
+            if(!$queryElement) return;
+
+            var offset = $queryElement.offset();
+            $querySelector.toggleClass('ve-sm-offset-top', offset.top < 18).css(
+            {
+                width: $queryElement.outerWidth(),
+                height: $queryElement.outerHeight(),
+                top:  offset.top - $$body.scrollTop(),
+                left: offset.left - $$body.scrollLeft()
+            });
+        };
+
+        var updateQuerySelector = function()
+        {
+            var selector = querySelector;
+            var queryText = selector.name 
+                + (selector.id ? ('#' + selector.id) : '') 
+                + (selector['class'] ? ('.' + selector['class'].join('.')) : '');
+            var queryHtml = '<span class="text-name">' + selector.name + '</span>' 
+                + (selector.id ? ('<span class="text-id">#' + selector.id + '</span>') : '') 
+                + (selector['class'] ? ('<span class="text-class">.' + selector['class'].join('.') + '</span>') : '');
+            $querySelectorName.attr('title', queryText).html(queryHtml).attr('contenteditable', null);
+        };
+
+        var getElementSelector = function($ele)
+        {
+                var selector =
+                {
+                    id: $ele.attr('id') || '',
+                    name: $ele.prop('tagName').toLowerCase(),
+                    'class': ''
+                };
+                var classes = [];
+                $.each(($ele.attr('class') || '').split(' '), function(idx, clasx)
+                {
+                    if(clasx.length && clasx !== 've' && clasx.indexOf('ve-') !== 0) classes.push(clasx);
+                });
+                if(classes.length) selector['class'] = classes;
+                return selector;
+        };
+
+        var selectQueryText = function()
+        {
+            var doc = $$.iframe.document;
+            var element = $querySelectorName[0],
+                range;
+            if(doc.body.createTextRange)
+            {
+                range = doc.body.createTextRange();
+                range.moveToElementText(element);
+                range.select();
+            } else if($$.iframe.getSelection)
+            {
+                var selection = $$.iframe.getSelection();
+                range = doc.createRange();
+                range.selectNodeContents(element);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        };
+
+        $$body.on('mousemove', function(e)
+        {
+            $queryElement = $$(e.target);
+            var eleId = $queryElement.data('ve-id');
+            if(!eleId)
+            {
+                eleId = lastEleId + 1;
+                $queryElement.data('ve-id', eleId);
+            }
+            if(eleId === lastEleId) return;
+
+            if($queryElement.closest('.ve-actions-bar,.ve-block-actions,.ve-cover,.ve-element').length)
+            {
+                $queryElement = null;
+            }
+            else
+            {
+                lastEleId = eleId;
+                querySelector = getElementSelector($queryElement);
+                updateQuerySelector();
+            }
+            updateQuerySelectorPosition();
+            e.stopPropagation();
+        });
+        $$($$.iframe).on('scroll', updateQuerySelectorPosition);
+
+        $querySelectorName.on('click', function()
+        {
+            $querySelectorName.attr('contenteditable', 'true');
+            selectQueryText();
+            $querySelectorName.focus();
+        }).on('blur', updateQuerySelector);
+
         if(DEBUG) console.log('visual page inited.');
     };
 
