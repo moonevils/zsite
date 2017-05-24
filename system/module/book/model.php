@@ -678,8 +678,7 @@ class bookModel extends model
             ->batchCheckIF($node->type == 'book', $this->config->book->require->book, 'notempty')
             ->batchCheckIF($node->type != 'book', $this->config->book->require->node, 'notempty')
             ->batchCheckIF($node->type != 'book' and $node->isLink == 'on', $this->config->book->require->link, 'notempty')
-            ->batchCheckIF($node->alias != '', 'alias', 'unique')
-            ->checkIF($node->type == 'book', 'alias', 'unique', "`type` = 'book' AND id != '$nodeID' AND `lang` = '{$this->app->getClientLang()}'")
+            ->checkIF($node->alias != '', 'alias', 'unique', "id != '$nodeID' AND `lang` = '{$this->app->getClientLang()}'")
             ->where('id')->eq($nodeID)
             ->exec();
 
