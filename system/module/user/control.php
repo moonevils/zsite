@@ -111,7 +111,7 @@ class user extends control
     public function login($referer = '')
     {
         dao::$changedTables[] = TABLE_CONFIG;
-        $this->setReferer($referer);
+        $referer == ''? $this->referer = urlencode($_SERVER['HTTP_REFERER']) : $this->setReferer($referer);
 
         /* Load mail config for reset password. */
         $this->app->loadModuleConfig('mail');
