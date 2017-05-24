@@ -80,7 +80,51 @@ class installModel extends model
     public function checkTmpRoot()
     {
         $tmpRoot = $this->app->getTmpRoot();
-        return $result = (is_dir($tmpRoot) and is_writable($tmpRoot)) ? 'ok' : 'fail';
+
+        $pathArray = $this->getDir($tmpRoot);
+        if(is_dir($tmpRoot) && !is_writable($tmpRoot))
+        {
+            $pathArray[] = $tmpRoot;
+        }
+
+        $pathResult = array();
+        foreach($pathArray as $path)
+        {
+            if(!is_writable($path))
+            {
+                $pathResult[] = $path;
+            }
+        }
+        
+        return $pathResult;
+    }
+
+    /**
+     * get the temp subdirectory.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getDir($dir)
+    {
+        static $arr = array();
+        if(is_dir($dir)){
+            $hadle = @opendir($dir);
+            while($file=readdir($hadle) )
+            {
+                if(!in_array($file,array('.','..')) )
+                {
+                    $dirr = $dir.$file."/";
+                    if(is_dir($dirr))
+                    {
+                        array_push($arr,$dirr);
+                        $this->getDir( $dirr);
+                    }
+                }
+            }
+        }
+
+        return $arr;
     }
 
     /**

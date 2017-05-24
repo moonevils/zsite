@@ -776,7 +776,7 @@ class articleModel extends model
             /* After saving, update it's path. */
             $nodeID   = $this->dao->lastInsertID();
             $nodePath = $parentNode->path . "$nodeID,";
-            $this->dao->update(TABLE_BOOK)->set('path')->eq($nodePath)->where('id')->eq($nodeID)->exec();
+            $this->dao->update(TABLE_BOOK)->set('path')->eq($nodePath)->set('order')->eq($nodeID)->where('id')->eq($nodeID)->exec();
 
             $bookArticle = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
             $this->loadModel('search')->save("article", $bookArticle);
