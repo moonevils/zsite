@@ -25,19 +25,31 @@ class searchModel extends model
         $words   = explode(' ', seo::unify($keywords, ' '));
 
         $against = '';
+        $againstCond   = '';
+        $likeCondition = '';
         foreach($words as $word)
         {
             $splitedWords = $spliter->utf8Split($word);
-            $against .= '"' . $splitedWords['words'] . '"'; 
+
+            $trimedWord     = trim($splitedWords['words']);
+            $against       .= '"' . $trimedWord . '" '; 
+            $againstCond   .= '+"' . $trimedWord . '" '; 
+            if(is_numeric($word) and strlen($word) == 5) $againstCond .= "-\" $word \" ";
+
+            $likeWord      = is_numeric($word) ? $word : $trimedWord;
+            if(is_numeric($word) and strlen($word) < 5) $likeWord = " $likeWord ";
+            $condition = "OR title like '%{$likeWord}%' OR content like '%{$likeWord}%'";
+            if(is_numeric($word) and strlen($word) == 5) $condition = "OR title REGEXP '[^ ]{$likeWord}[^ ]' OR content REGEXP '[^ ]{$likeWord}[^ ]'";
+            $likeCondition .= $condition;
         }
         
         $words = str_replace('"', '', $against);
         $words = str_pad($words, 5, '_');
     
-        $scoreColumn = "((1 * (MATCH(title) AGAINST('{$against}' IN BOOLEAN MODE))) + (0.6 * (MATCH(title) AGAINST('{$against}' IN BOOLEAN MODE))) )";
+        $scoreColumn = "((1 * (MATCH(title) AGAINST('{$against}' IN BOOLEAN MODE))) + (0.6 * (MATCH(content) AGAINST('{$against}' IN BOOLEAN MODE))) )";
         $results = $this->dao->select("*, {$scoreColumn} as score")
             ->from(TABLE_SEARCH_INDEX)
-            ->where("MATCH(title,content) AGAINST('+{$against}' IN BOOLEAN MODE) >= 1")
+            ->where("(MATCH(title,content) AGAINST('{$againstCond}' IN BOOLEAN MODE) >= 1 $likeCondition)")
             ->andWhere('status')->eq('normal')
             ->andWhere('addedDate')->le(helper::now())
             ->orderBy('score_desc, editedDate_desc')
@@ -62,7 +74,16 @@ class searchModel extends model
 
             if(empty($images[$record->objectID])) continue;
             $record->image = new stdclass();
-            if(isset($images[$record->objectID]))  $record->image->list = $images[$record->objectID];
+
+            /* For match right objectType. */
+            if(isset($images[$record->objectID]))
+            {
+                foreach($images[$record->objectID] as $image)
+                {
+                    if($image->objectType == $record->objectType) $record->image->list[] = $image;
+                }
+            }
+
             if(!empty($record->image->list)) $record->image->primary = $record->image->list[0];
         }
 
@@ -139,8 +160,12 @@ class searchModel extends model
     public function decode($string)
     {
         if(strpos($string, ' ') === false and !is_numeric($string)) return $string;
-        $dict   = $this->dao->select("concat(`key`, ' ') as `key`, value")->from(TABLE_SEARCH_DICT)->fetchPairs();
-        $dict['|'] = '';
+        static $dict;
+        if(empty($dict))
+        {
+            $dict = $this->dao->select("concat(`key`, ' ') as `key`, value")->from(TABLE_SEARCH_DICT)->fetchPairs();
+            $dict['|'] = '';
+        }
         return str_replace(array_keys($dict), array_values($dict), $string . ' ');
     }
 
@@ -232,8 +257,19 @@ class searchModel extends model
 
         foreach($words as $key => $word)
         {
-            if(is_numeric($words))$words[$key] = $word . ' ';
-            if(!is_numeric($words))$words[$key] = $word;
+            if(preg_match('/^\|[0-9]+\|$/', $word))
+            {
+                $words[$key] = trim($word, '|');
+            }
+            elseif(is_numeric($word))
+            {
+                $words[$key] = $word . ' ';
+            }
+            else
+            {
+                $words[$key] = strlen($word) == 5 ? str_replace('_', '', $word) : $word;
+            }
+
             $markedWords[] = "<span class='text-danger'>" . $this->decode($word) . "</span > ";
         }
 
