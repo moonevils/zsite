@@ -58,7 +58,7 @@ $lang->book->chapter  = 'Back to Contents';
 $lang->book->back2Top = 'Back to Top';
 $lang->book->goHome   = 'Back to Homepage';
 
-$lang->book->aliasRepeat   = 'Alias <strong> %s </strong> cannot be repeatedly added.';
+$lang->book->aliasRepeat   = 'Alias %s cannot be repeatedly added.';
 $lang->book->confirmDelete = "<span class='text-danger'>You will delete all chapters and articles in this manual. Do you want to delete it?</span>";
 
 $lang->book->note = new stdclass();

@@ -57,7 +57,7 @@ js::set('wholeResult', $wholeResult);
           <td class='small hide-on-ok'>
             <?php 
             if(!$tmpRootInfo['exists'])   printf($lang->install->mkdir, $tmpRootInfo['path'], $tmpRootInfo['path']);
-            if(!$tmpRootInfo['writable']) printf($lang->install->chmod, $tmpRootInfo['path'], $tmpRootInfo['path']);
+            foreach($failPaths as $path) printf($lang->install->chmod, $path, $path);
             ?>
           </td>
         </tr>

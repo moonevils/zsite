@@ -58,7 +58,7 @@ $lang->book->chapter  = '返回目錄';
 $lang->book->back2Top = '返回頂部';
 $lang->book->goHome   = '返迴首頁';
 
-$lang->book->aliasRepeat   = '別名:<strong> %s </strong>不能重複添加。';
+$lang->book->aliasRepeat   = '別名: %s 不能重複添加。';
 $lang->book->confirmDelete = "<span class='text-danger'>此操作將刪除該手冊所有章節和文章，確認刪除?</span>";
 
 $lang->book->note = new stdclass();
