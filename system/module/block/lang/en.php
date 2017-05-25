@@ -132,6 +132,7 @@ $lang->block->edit         = 'Edit';
 $lang->block->view         = 'View';
 $lang->block->setPage      = 'Page Layout';
 $lang->block->setregion    = 'Layout';
+$lang->block->resetRegion  = 'Reset';
 $lang->block->switchPlan   = 'Switch';
 $lang->block->cloneLayout  = 'Save';
 $lang->block->switchLayout = 'Switch';

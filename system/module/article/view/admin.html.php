@@ -121,6 +121,7 @@
               <?php foreach($lang->block->$template->regions->$page as $region => $regionName):?>
               <li><?php commonModel::printLink('block', 'setregion', "page=$page&region=$region&object=$article->id", $regionName, "data-toggle='modal'");?></li>
               <?php endforeach;?>
+              <li><?php commonModel::printLink('block', 'resetRegion', "page=$page&object=$article->id", $lang->block->resetRegion, "class='deleter'");?></li>
             </ul>
           </span>
           <?php if($type != 'page'):?>
