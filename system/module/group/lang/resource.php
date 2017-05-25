@@ -17,6 +17,7 @@ $lang->moduelGroups->content = array();
 $lang->moduelGroups->content[] = 'article';
 $lang->moduelGroups->content[] = 'book';
 $lang->moduelGroups->content[] = 'file';
+$lang->moduelGroups->content[] = 'tree';
 
 $lang->moduelGroups->shop = array();
 $lang->moduelGroups->shop[] = 'product';
@@ -45,6 +46,7 @@ $lang->moduelGroups->design[] = 'visual';
 $lang->moduelGroups->open = array();
 $lang->moduelGroups->open[] = 'package';
 $lang->moduelGroups->open[] = 'theme';
+
 $lang->moduelGroups->community[] = 'community';
 
 $lang->moduelGroups->setting = array();
