@@ -643,8 +643,20 @@ class articleModel extends model
      * @access public
      * @return string
      */
-    public function createPreviewLink($articleID, $viewType = '')
+    public function createPreviewLink($articleID, $viewType = '',$articleType = '')
     {
+        if($articleType == 'book')
+        {
+            $bookModel = $this->loadModel('book');
+            $bookNode = $bookModel->getNodeByID($articleID);
+
+            $book = $bookNode->book->alias ? $bookNode->book->alias : $bookNode->book->title;
+            $node = $bookNode->alias ? $bookNode->alias : $bookNode->title;
+
+            $link = helper::createLink('book', 'read', "articleID=$bookNode->id", "book=$book&node=$node");
+            return $link;
+        }
+
         $article = $this->getByID($articleID);
         if(empty($article)) return null;
         $module  = $article->type;
@@ -760,6 +772,7 @@ class articleModel extends model
             $node->grade  = $parentNode ? $parentNode->grade + 1 : 1;
 
             /* First, save the child without path field. */
+            $node->articleID = $articleID;
             $node->title     = $article->title;
             $node->type      = "article";
             $node->author    = $article->author;
@@ -788,7 +801,7 @@ class articleModel extends model
         }
         else
         {
-            $this->loadModel('search')->save($article->type, $article);
+            $this->loadModel('search')->save($type, $article);
             $this->loadModel('file')->updateObjectType($articleID, 'submission', $type);
         }
 
