@@ -17,13 +17,26 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='w-100px'><?php echo $lang->site->saveDays;?></th> 
+          <th class='w-130px'><?php echo $lang->site->saveDays;?></th> 
           <td class='w-180px'>
             <div class='input-group'>
               <?php echo html::input('saveDays', isset($this->config->site->saveDays) ? $this->config->site->saveDays : '30', "class='form-control'");?>
               <span class='input-group-addon'><?php echo $lang->date->day;?></span>
             </div>
           </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->stat->maxDays;?></th> 
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('maxDays', isset($this->config->stat->maxDays) ? $this->config->stat->maxDays : '365', "class='form-control'");?>
+              <span class='input-group-addon'><?php echo $lang->date->day;?></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th></th> 
           <td><?php echo html::submitButton();?></td>
         </tr>
       </table>
