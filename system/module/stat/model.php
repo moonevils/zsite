@@ -177,6 +177,7 @@ class statModel extends model
     public function getDayLabels($begin, $end)
     {
         $days = (strtotime($end) - strtotime($begin)) / (24 * 60 * 60);
+        if($days > $this->config->stat->maxDays) $days = $this->config->stat->maxDays;
         for($i = $days; $i >= 0;  $i--) $dayLabels[] = date('Ymd', strtotime("-{$i} day", strtotime($end)));
         return $dayLabels;
     }
