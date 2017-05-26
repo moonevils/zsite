@@ -31,6 +31,7 @@ $lang->block->default->typeList['productTree']     = '产品分类';
 $lang->block->default->typeList['blogTree']        = '博客分类';
 
 $lang->block->default->typeList['contact']         = '联系我们';
+$lang->block->default->typeList['message']         = '留言';
 $lang->block->default->typeList['followUs']        = '关注我们';
 $lang->block->default->typeList['about']           = '公司简介';
 $lang->block->default->typeList['links']           = '友情链接';
