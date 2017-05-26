@@ -21,11 +21,8 @@
     <?php
     $chanzhiVersion                   = $config->version;
     $isProVersion                     = strpos($chanzhiVersion, 'pro') !== false;
-    $isEnglishVersion                 = $app->getClientLang() == 'en';
     if($isProVersion) $chanzhiVersion = str_replace('pro', '', $chanzhiVersion);
-    $footerLogoImg = "{$templateCommonRoot}img/chanzhi" . ($isProVersion ? '-pro' : '') . ($isEnglishVersion ? '-en' : '') . '.gif';
-    $footerLogoWidth = $isProVersion ? 52 : ($isEnglishVersion ? 37 : 32);
-    $footerLogo = "<span class='icon-chanzhi' style='background: url({$footerLogoImg}) no-repeat 0 0; display: inline-block; width: {$footerLogoWidth}px; height: 12px; opacity: .55; filter: Alpha(opacity=50); position: relative; top: 1px'></span>";
+    $footerLogo = "<span class='" . ($isProVersion ? 'icon-chanzhi-pro' : 'icon-chanzhi') . "' style='font-size:12px;'></span>";
     ?>
     <?php printf($lang->poweredBy, $config->version, k(), "{$footerLogo} <span class='name hide'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion); ?>
   </div>
