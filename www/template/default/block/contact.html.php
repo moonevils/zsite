@@ -9,9 +9,13 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-$block->content = json_decode($block->content);
 ?>
-<?php $contact = $this->loadModel('company')->getContact();?>
+
+<?php 
+$block->content = json_decode($block->content);
+$contact = $this->loadModel('company')->getContact();
+?>
+
 <div id="block<?php echo $block->id;?>" class='panel-block-contact panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>

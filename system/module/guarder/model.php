@@ -42,7 +42,7 @@ class guarderModel extends model
      * @access public
      * @return string
      */
-    public function create4Comment()
+    public function create4Comment($showTitle = true)
     {
         $guarder = $this->createCaptcha();
         $input   = helper::createRandomStr(8, $skip='A-Z'); 
@@ -53,9 +53,22 @@ class guarderModel extends model
         list($leftTag, $rightTag) = explode('|', $htmlTag);
         $equal = empty($this->config->guarder->captchas) ? "</td><td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td><td>" : '';
 
+        if($showTitle)
         return <<<EOT
 <label for='captcha' class='col-sm-1 control-label'>{$this->lang->guarder->captcha}</label>
-<div class='col-sm-11 required'>
+  <table class='captcha'>
+      <tr class='text-middle'>
+        <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
+        {$equal}
+        <input type='text' name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/></td>
+      </tr>
+  </table>
+</div>
+EOT;
+        else
+
+    return <<<EOT
+<div class='col-sm-12 required'>
   <table class='captcha'>
       <tr class='text-middle'>
         <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
