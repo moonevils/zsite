@@ -12,7 +12,7 @@
     $isProVersion                     = strpos($chanzhiVersion, 'pro') !== false;
     if($isProVersion) $chanzhiVersion = str_replace('pro', '', $chanzhiVersion);
     ?>
-    <?php printf($lang->poweredBy, $config->version, k(), "<span class='img-chanzhi" . ($isProVersion ? ' img-chanzhi-pro' : '') . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);?>
+    <?php printf($lang->poweredBy, $config->version, k(), "<span class='" . ($isProVersion ? 'icon-chanzhi-pro' : 'icon-chanzhi') . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);?>
     
   </div>
 </nav>
