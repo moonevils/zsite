@@ -135,7 +135,7 @@ class user extends control
             {
                 if(helper::isAjaxRequest())
                 {
-                    if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->send(array('result' => 'success', 'locate' => $this->referer));
+                    if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->send(array('result' => 'success', 'locate' => urldecode($this->referer)));
                     $this->send(array('result' => 'success', 'locate' => $this->createLink($this->config->default->module)));
                 }
 
