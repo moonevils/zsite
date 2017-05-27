@@ -65,3 +65,6 @@ $lang->stat->dataTypes->ip = 'IP数';
 $lang->stat->page = new stdclass();
 $lang->stat->page->common = '页面访问量';
 $lang->stat->page->url    = '页面地址';
+
+$lang->stat->maxDays    = '概况图显示最大天数';
+$lang->stat->maxDaysTip = '最大天数必须为为 >0 的数字。';

@@ -25,8 +25,17 @@
               <td class='text-center'><?php echo $article->id;?></td>
               <td>
                 <?php 
-                    if($article->submission == 2) echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
-                    else echo $article->title;
+                    if($article->submission == 2)
+                    {
+                        if($article->type == 'book')
+                        {
+                            echo html::a($this->article->createPreviewLink($article->bookID, '', $article->type), $article->title, "target='_blank'");
+                        }
+                        else
+                            echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
+                    }
+                    else 
+                        echo $article->title;
                 ?>
               </td>
               <td class='text-center'><?php echo $article->editedDate;?></td>

@@ -381,7 +381,7 @@ class treeModel extends model
 
         $gradeLimit = zget($config->tree->gradeLimits, $category->type, 999); 
         if($category->grade < $gradeLimit) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
-        if(strpos('article,blog,product', $category->type) !== false)
+        if(strpos('article,blog,product', $category->type) !== false and commonModel::hasPriv('block', 'setregion'))
         {
             $device   = $app->clientDevice;
             $template = $config->template->{$device}->name;
@@ -393,6 +393,7 @@ class treeModel extends model
             foreach($lang->block->$template->regions->$page as $region => $regionName):
             $linkHtml .= "<dd>" . html::a(helper::createLink('block', 'setregion', "page=$page&region=$region&object=$category->id"), $regionName, "data-toggle='modal'") . "</dd>";
             endforeach;
+            if(commonModel::hasPriv('block', 'resetRegion')) $linkHtml .= "<dd>" . html::a(helper::createLink('block', 'resetRegion', "page=$page&object=$category->id"), $lang->block->resetRegion, "class='deleter'") . "</dd>";
             $linkHtml .= "</dl>";
             $linkHtml .= "</span>";
         }

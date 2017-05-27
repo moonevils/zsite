@@ -54,12 +54,13 @@ js::set('linkChecked',$linkChecked);
                 <div class="col-sm-<?php echo $node->type == 'book' ? '9' : '12';?>">
                   <div class="input-group">
                     <?php echo html::input('title', $node->title, 'class="form-control"');?>
+                    <?php if($node->type != 'book'):?>
                     <span class="input-group-addon">              
                       <label class='checkbox-inline'>
-                      <input type="checkbox" name="isLink" id="isLink" <?php echo $linkChecked; ?>><span><?php echo $lang->book->isLink;?></span>
+                      <input type="checkbox" name="isLink" id="isLink" autocomplete="off" <?php echo $linkChecked; ?>><span><?php echo $lang->book->isLink;?></span>
                       </label>
                     </span>
-                    <div class='required required-wrapper'></div>
+                    <?php endif;?>
                   </div>
                 </div>
                 <?php if($node->type == 'book'):?>

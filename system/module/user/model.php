@@ -686,6 +686,7 @@ class userModel extends model
     public function delete($account, $id = null) 
     {
         $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('account')->eq($account)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_OAUTH)->where('account')->eq($account)->exec();
 
         return !dao::isError();
     }
@@ -700,6 +701,7 @@ class userModel extends model
     public function batchDelete($users) 
     {
         $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('account')->in($users)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_OAUTH)->where('account')->in($users)->exec();
 
         return !dao::isError();
     }

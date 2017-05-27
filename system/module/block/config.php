@@ -14,7 +14,7 @@ $config->block->categoryList = new stdclass();
 $config->block->categoryList->custom  = ',html,htmlcode,phpcode,';
 $config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,';
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
-$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,bottomNav,subscribe,';
+$config->block->categoryList->system  = ',contact,message,followUs,about,links,slide,header,bottomNav,subscribe,';
 
 $config->block->pageGroupList = new stdclass();
 $config->block->pageGroupList->system   = array('all', 'index_index', 'company_index', 'page_view');
@@ -38,11 +38,13 @@ $config->block->defaultIcons['latestThread']  = 'icon-list-ul';
 $config->block->defaultIcons['latestProduct'] = 'icon-th';
 $config->block->defaultIcons['hotProduct']    = 'icon-th';
 
-$config->block->defaultIcons['pageList'] = 'icon-list-ul';
+$config->block->defaultIcons['pageList']      = 'icon-list-ul';
 
 $config->block->defaultIcons['articleTree']   = 'icon-folder-close';
 $config->block->defaultIcons['productTree']   = 'icon-folder-close';
 $config->block->defaultIcons['blogTree']      = 'icon-folder-close';
+
+$config->block->defaultIcons['message']       = 'icon-comment-alt';
 
 $config->block->defaultIcons['bottomNav'] = '';
 

@@ -344,7 +344,7 @@ class messageModel extends model
      * @access public
      * @return void
      */
-    public function post($type)
+    public function post($type,$block='')
     {
         $account = $this->app->user->account;
         $admin   = $this->app->user->admin;
@@ -359,6 +359,12 @@ class messageModel extends model
             ->setIF($admin == 'super', 'status', '1')
             ->add('ip', helper::getRemoteIP())
             ->get();
+
+        if($block == 'block')
+        {
+            $message->from = $message->blockFrom;
+            $message->content = $message->blockContent;
+        }
 
         if(strlen($message->content) > 29)
         {
@@ -375,7 +381,18 @@ class messageModel extends model
             if(!validater::checkSensitive($message, $dicts)) return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
         }
 
-        $this->dao->insert(TABLE_MESSAGE)
+        if($block == 'block')
+            $this->dao->insert(TABLE_MESSAGE)
+            ->data($message, $skip = $this->session->captchaInput . ', secret, blockFrom, blockContent')
+            ->autoCheck()
+            ->check($this->session->captchaInput, 'captcha')
+            ->check('type', 'in', $this->config->message->types)
+            ->checkIF(!empty($message->email), 'email', 'email')
+            ->checkIF(!empty($message->phone), 'phone', 'phone')
+            ->batchCheck($this->config->message->require->blockPost, 'notempty')
+            ->exec();
+        else
+            $this->dao->insert(TABLE_MESSAGE)
             ->data($message, $skip = $this->session->captchaInput . ', secret')
             ->autoCheck()
             ->check($this->session->captchaInput, 'captcha')

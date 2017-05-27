@@ -107,11 +107,6 @@ class article extends control
         {
             $type = 'submission';
             $this->lang->menuGroups->article = 'submission';
-            if($this->app->cookie->currentGroup == 'home')
-            {
-                $this->session->currentGroup = 'user';
-                $this->app->cookie->currentGroup = 'user';
-            }
             unset($this->lang->article->menu);
             $this->view->title = $this->lang->submission->common;
         }
@@ -534,18 +529,19 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
-            ->where('submission')->ne(0)
-            ->andWhere('addedBy')->eq($this->app->user->account)
+        $articles = $this->dao->select('t1.*,t2.id as bookID')->from(TABLE_ARTICLE)->alias('t1')
+            ->leftJoin(TABLE_BOOK)->alias('t2')->on('t1.id = t2.articleID')
+            ->where('t1.submission')->ne(0)
+            ->andWhere('t1.addedBy')->eq($this->app->user->account)
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchall('id'); 
-        
-        $this->view->title    = $this->lang->user->submission;
-        $this->view->articles = $articles;
 
-        $this->view->pager      = $pager;
-        $this->view->orderBy    = $orderBy;
+        $this->view->title        = $this->lang->user->submission;
+        $this->view->articles     = $articles;
+        $this->view->bookArticles = $bookArticles;
+        $this->view->pager        = $pager;
+        $this->view->orderBy      = $orderBy;
 
         $this->view->mobileURL  = helper::createLink('article', 'submission', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('article', 'submission', '', '', 'html');
