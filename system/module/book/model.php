@@ -138,7 +138,12 @@ class bookModel extends model
         $node = $this->getNodeByID($nodeID);
         if(!$node) return '';
 
-        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title,link')->from(TABLE_BOOK)->where('path')->like("{$node->path}%")->orderBy('grade_desc,`order`')->fetchGroup('parent');
+        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title,link')->from(TABLE_BOOK)
+            ->where('path')->like("{$node->path}%")
+            ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
+            ->orderBy('grade_desc,`order`')
+            ->fetchGroup('parent');
 
         $book = $node->type == 'book' ? zget(end($nodeList), '0', '') : $this->getBookByNode($node);
         foreach($nodeList as $parent => $nodes)
@@ -256,6 +261,10 @@ class bookModel extends model
         $nodes = $this->dao->select('id, parent, `order`, path')->from(TABLE_BOOK)
             ->where('path')->like(",$bookID,%")
             ->andWhere('type')->ne('book')
+            ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')
+            ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
+            ->fi()
             ->orderBy('grade, `order`')
             ->fetchAll('id');
 
@@ -278,9 +287,12 @@ class bookModel extends model
                 if($nodeID == $bookID) continue;
 
                 /* Compute the serial. */
-                $parentID = $nodes[$nodeID]->parent;
-                $brothers = $groupedNodes[$parentID];
-                $serial  .= array_search($nodeID, array_keys($brothers)) + 1 . '.';
+                if(isset($nodes[$nodeID]))
+                {
+                    $parentID = $nodes[$nodeID]->parent;
+                    $brothers = $groupedNodes[$parentID];
+                    $serial  .= array_search($nodeID, array_keys($brothers)) + 1 . '.';
+                }
             }
 
             $serials[$node->id] = rtrim($serial, '.');
@@ -298,13 +310,7 @@ class bookModel extends model
      */
     public function getNodeByID($nodeID, $replaceTag = true)
     {
-        $node = $this->dao->select('*')->from(TABLE_BOOK)
-            ->where('id')->eq($nodeID)
-            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-            ->andWhere('addedDate')->le(helper::now())
-            ->fi()
-            ->fetch();
-
+        $node = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
         if(!$node) $node = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($nodeID)->fetch();
         if(!$node) return false;
                 
@@ -338,8 +344,18 @@ class bookModel extends model
      */
     public function getPrevAndNext($current)
     {
-        $families = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->orderBy('`order`')->fetchGroup('parent', 'id');
-        $allNodes = $this->dao->select('*')->from(TABLE_BOOK)->where('path')->like("%,{$current->book->id},%")->fetchAll('id');
+        $families = $this->dao->select('*')->from(TABLE_BOOK)
+            ->where('path')->like("%,{$current->book->id},%")
+            ->andWhere('status')->eq('normal')
+            ->andWhere('addedDate')->le(helper::now())
+            ->orderBy('`order`')
+            ->fetchGroup('parent', 'id');
+
+        $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
+            ->where('path')->like("%,{$current->book->id},%")
+            ->andWhere('status')->eq('normal')
+            ->andWhere('addedDate')->le(helper::now())
+            ->fetchAll('id');
         $idList = explode(',', $this->getArticleIdList($current->book->id, $families, $allNodes));
         $idListFlip = array_flip($idList);
 
@@ -537,6 +553,7 @@ class bookModel extends model
             $node->alias     = $this->post->alias[$key];
             $node->keywords  = $this->post->keywords[$key];
             $node->addedDate = $this->post->addedDate[$key];
+            $node->status    = $this->post->status[$key];
             $node->order     = $this->post->order[$key];
             $node->alias     = seo::unify($node->alias, '-', true);
             $node->keywords  = seo::unify($node->keywords, ',');
