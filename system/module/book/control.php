@@ -62,11 +62,15 @@ class book extends control
             {
                 $families = $this->dao->select('id,parent,type,`order`')->from(TABLE_BOOK)
                     ->where('path')->like(",{$nodeID},%")
+                    ->andWhere('addedDate')->le(helper::now())
+                    ->andWhere('status')->eq('normal')
                     ->orderBy('`order`')
                     ->fetchGroup('parent', 'id');
                 
                 $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
                     ->where('path')->like("%,{$nodeID},%")
+                    ->andWhere('addedDate')->le(helper::now())
+                    ->andWhere('status')->eq('normal')
                     ->fetchAll('id');
                 $articles = $this->book->getArticleIdList($nodeID, $families, $allNodes);
                 
