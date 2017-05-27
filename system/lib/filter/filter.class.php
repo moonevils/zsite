@@ -69,9 +69,6 @@ class validater extends baseValidater
         if(!is_array($super)) return $super;
         if(!defined('RUN_MODE') or RUN_MODE != 'admin') return parent::filterSuper($super);
 
-        global $app;
-        if(!isset($app->user->admin) or $app->user->admin == 'no') return parent::filterSuper($super);
-
         return self::filterBadKeys($super);
     }
 }
