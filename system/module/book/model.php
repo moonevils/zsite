@@ -138,7 +138,12 @@ class bookModel extends model
         $node = $this->getNodeByID($nodeID);
         if(!$node) return '';
 
-        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title,link')->from(TABLE_BOOK)->where('path')->like("{$node->path}%")->orderBy('grade_desc,`order`')->fetchGroup('parent');
+        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title,link')->from(TABLE_BOOK)
+            ->where('path')->like("{$node->path}%")
+            ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
+            ->orderBy('grade_desc,`order`')
+            ->fetchGroup('parent');
 
         $book = $node->type == 'book' ? zget(end($nodeList), '0', '') : $this->getBookByNode($node);
         foreach($nodeList as $parent => $nodes)
@@ -543,6 +548,7 @@ class bookModel extends model
             $node->alias     = $this->post->alias[$key];
             $node->keywords  = $this->post->keywords[$key];
             $node->addedDate = $this->post->addedDate[$key];
+            $node->status    = $this->post->status[$key];
             $node->order     = $this->post->order[$key];
             $node->alias     = seo::unify($node->alias, '-', true);
             $node->keywords  = seo::unify($node->keywords, ',');
