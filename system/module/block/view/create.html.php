@@ -27,11 +27,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
   <div class='panel-heading'>
     <ul class='nav nav-tabs'>
       <li><a href='#contentTab' data-toggle='tab'><?php echo $lang->block->content;?></a></li>
+      <?php if($type != 'baidustat'):?>
       <?php if(strpos(',htmlcode, phpcode, header', $type) == false or $type == 'html'):?>
       <li><a href='#customTab' data-toggle='tab'><?php echo $lang->block->style;?></a></li>
       <?php endif;?>
       <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
       <li><a href='#jsTab' data-toggle='tab'><?php echo $lang->ui->theme->extraScript; ?></a></li>
+      <?php endif;?>
     </ul>
   </div>
   <div class='panel-body'>
@@ -76,7 +78,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <tbody id='blockForm'></tbody>
           </table>
         </div>
-        <?php if(strpos(',htmlcode, phpcode, header', $type) == false or $type == 'html'):?>
+        <?php if(strpos(',htmlcode, phpcode, header, baidustat', $type) == false or $type == 'html'):?>
         <div class='tab-pane theme-control-tab-pane' id='customTab'>
           <table class='table table-form mg-0'>
             <?php if(isset($config->block->defaultIcons[$type])):?>
@@ -232,7 +234,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <?php if($this->app->clientDevice == 'desktop'):?><p class='text-info text-tip'><?php echo $lang->block->placeholder->desktopCustomScriptTip;?></p><?php endif;?>
         </div>
       </div>
-      <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
+      <?php if(strpos(',htmlcode, phpcode, slide, header, baidustat', $type) == false or $type == 'html'):?>
       <div id='panelPreview' class='panel-preview table-cell'>
         <div class='heading'><strong><?php echo $lang->block->preview?></strong></div>
         <div class='panel panel-block'>

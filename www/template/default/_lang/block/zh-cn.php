@@ -10,9 +10,10 @@
  * @link        http://www.chanzhi.org
  */
 if(!isset($lang->block->default)) $lang->block->default = new stdclass();
-$lang->block->default->typeList['html']     = '自定义区块';
-$lang->block->default->typeList['htmlcode'] = 'html源代码';
-$lang->block->default->typeList['phpcode']  = 'php源代码';
+$lang->block->default->typeList['html']      = '自定义区块';
+$lang->block->default->typeList['htmlcode']  = 'html源代码';
+$lang->block->default->typeList['phpcode']   = 'php源代码';
+$lang->block->default->typeList['baidustat'] = '百度统计';
 
 $lang->block->default->typeList['latestArticle']   = '最新文章';
 $lang->block->default->typeList['hotArticle']      = '热门文章';
@@ -42,9 +43,10 @@ $lang->block->default->typeList['subscribe']       = '订阅博客';
 $lang->block->default->typeList['login']           = '登录';
 
 $lang->block->default->typeGroups = array();
-$lang->block->default->typeGroups['html']     = 'input';
-$lang->block->default->typeGroups['htmlcode'] = 'input';
-$lang->block->default->typeGroups['phpcode']  = 'input';
+$lang->block->default->typeGroups['html']      = 'input';
+$lang->block->default->typeGroups['htmlcode']  = 'input';
+$lang->block->default->typeGroups['phpcode']   = 'input';
+$lang->block->default->typeGroups['baidustat'] = 'input';
 
 $lang->block->default->typeGroups['latestArticle'] = 'article';
 $lang->block->default->typeGroups['hotArticle']    = 'article';
