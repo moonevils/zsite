@@ -14,7 +14,8 @@ $(document).ready(function()
 
          var listTitleHeight = $(".book-catalog .panel-heading").height();
 
-         $(".book-catalog").css({"max-height": "600px","overflow":"auto"});
+         var catalogHeight = $(window).height() - 20;
+         $(".book-catalog").css({'max-height': catalogHeight, 'overflow': 'auto'});
 
          if($('.books .active').length)
          {
