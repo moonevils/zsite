@@ -1,21 +1,21 @@
 <?php
-foreach($lang->user->oauth->providers as $providerCode => $providerName)
+foreach($this->lang->user->oauth->providers as $providerCode => $providerName)
 {
-    if(isset($config->oauth->$providerCode)) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
+    if(isset($this->config->oauth->$providerCode)) $providerConfig[$providerCode] = json_decode($this->config->oauth->$providerCode);
 }
 if(!empty($providerConfig)):
 ?>
   <span class='span-oauth'>
-    <span class='login-heading'><?php echo  $lang->user->oauth->lblOtherLogin;?></span>
+    <span class='login-heading'><?php echo  $this->lang->user->oauth->lblOtherLogin;?></span>
     <?php
-    foreach($lang->user->oauth->providers as $providerCode => $providerName) 
+    foreach($this->lang->user->oauth->providers as $providerCode => $providerName) 
     {
-        $providerConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
+        $providerConfig = isset($this->config->oauth->$providerCode) ? json_decode($this->config->oauth->$providerCode) : '';
         if(empty($providerConfig->clientID)) continue;
         $params = "provider=$providerCode&fingerprint=fingerprintval";
         if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
 
-        echo html::a(inlink('oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"), "class='btn-oauth'");  
+        echo html::a(helper::createLink('user', 'oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"), "class='btn-oauth'");
     }
     ?>
   </span>
