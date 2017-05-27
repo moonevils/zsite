@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   `editor` varchar(60) NOT NULL,
   `addedDate` datetime NOT NULL,
   `editedDate` datetime NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'normal',
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,

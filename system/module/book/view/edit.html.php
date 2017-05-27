@@ -118,6 +118,12 @@ js::set('linkChecked',$linkChecked);
             <td><span class="help-inline"><?php echo $lang->book->note->addedDate;?></span></td>
           </tr>
           <?php endif;?>
+          <?php if($node->type != 'book'):?>
+          <tr id='isLinked'>
+            <th><?php echo $lang->book->status;?></th>
+            <td><?php echo html::radio('status', $lang->book->statusList, $node->status);?></td>
+          </tr>
+          <?php endif;?>
           <tr>
             <th></th>
             <td><?php echo html::submitButton() . html::hidden('referer', $this->server->http_referer);?></td>

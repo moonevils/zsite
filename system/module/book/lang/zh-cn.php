@@ -20,6 +20,7 @@ $lang->book->inputArticleTitle = '请输入文章标题';
 
 $lang->book->id          = '编号';
 $lang->book->type        = '类型';
+$lang->book->status      = '状态';
 $lang->book->link        = '链接';
 $lang->book->isLink      = '跳转';
 $lang->book->parent      = '章节';
@@ -43,6 +44,9 @@ $lang->book->fullScreen  = '全屏显示';
 $lang->book->typeList['book']    = '手册';
 $lang->book->typeList['chapter'] = '章节';
 $lang->book->typeList['article'] = '文章';
+
+$lang->book->statusList['normal'] = '正常';
+$lang->book->statusList['draft']  = '草稿';
 
 $lang->book->chapterTypeList['home'] = '只在首页显示';
 $lang->book->chapterTypeList['left'] = '一直显示在左侧';
