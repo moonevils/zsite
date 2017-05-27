@@ -1252,7 +1252,7 @@ class fileModel extends model
         $text       = $this->config->file->watermarkContent;
         $position   = isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'topLeft';
         $angle      = 0;
-        $fontPath   = $this->app->getTmpRoot() . 'fonts' . DS . 'simhei.ttf';
+        $fontPath   = $this->app->getTmpRoot() . 'fonts' . DS . 'wqy-zenhei.ttc';
         $textLength = mb_strlen($text, 'utf8') * $fontSize;
 
         if($position == 'topLeft')

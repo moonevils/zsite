@@ -489,15 +489,11 @@ body {padding-left: 50px;}
 .avatar-empty {display: block; overflow: hidden; font-size: 28px; color: #fff; background-color: #ddd; border: 1px solid #ccc; width: 36px; height: 36px; line-height: 35px; text-align: center; border-radius: 6px;}
 
 /* Image chanzhi in footer */
-.img-chanzhi, .img-chanzhi-pro {background: url(/theme/default/common/images/chanzhi.gif) no-repeat 0 0; display: inline-block; width: 32px; height: 12px; opacity: .55; filter: Alpha(opacity=50); transition: opacity .4s;}
-.img-chanzhi:hover {opacity: .75; filter: Alpha(opacity=75);}
-.img-chanzhi-inverse,
-.img-chanzhi.img-chanzhi-inverse,
-.img-chanzhi-pro.img-chanzhi-inverse {background-position: 0 -12px}
-.img-chanzhi-pro {background-image: url(/theme/default/common/images/chanzhi-pro.gif); width: 52px;}
-html[lang="en"] .img-chanzhi {background-image: url(/theme/default/common/images/chanzhi-en.gif); width: 37px;}
-html[lang="en"] .img-chanzhi-pro {background-image: url(/theme/default/common/images/chanzhi-pro-en.gif); width: 52px;}
-#powerby a:hover .img-chanzhi {opacity: .75; filter: Alpha(opacity=75);}
+.icon-chanzhi:hover {opacity: .75; filter: Alpha(opacity=75);}
+.icon-chanzhi-inverse,
+.icon-chanzhi.icon-chanzhi-inverse,
+.icon-chanzhi-pro.icon-chanzhi-inverse {background-position: 0 -12px}
+#powerby a:hover .icon-chanzhi {opacity: .75; filter: Alpha(opacity=75);}
 
 /* modal with iframe */
 body.body-modal {padding: 20px;}

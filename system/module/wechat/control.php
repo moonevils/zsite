@@ -249,6 +249,32 @@ class wechat extends control
     }
 
     /**
+     * Set Remind.
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function remind($public)
+    {
+        if($_POST) 
+        {
+            $this->wechat->setRemind($public);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $response['result']  = 'success';
+            $response['message'] = $this->lang->saveSuccess;
+            $response['locate']  = inlink('admin');
+            $this->send($response);
+        }
+
+        $this->view->users  = $this->loadModel('user')->getPairs('admin');
+        $this->view->title  = $this->lang->wechat->remind;
+        $this->view->public = $this->wechat->getByID($public);
+        $this->display();
+    }
+
+    /**
      * Delete a response.
      * 
      * @param  int    $response 

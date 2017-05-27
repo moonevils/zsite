@@ -38,6 +38,7 @@ $lang->wechat->reply          = 'Reply';
 $lang->wechat->commitMenu     = 'Menu';
 $lang->wechat->deleteMenu     = 'Delete Menu';
 $lang->wechat->messageList    = 'Messages';
+$lang->wechat->remind         = 'Remind';
 
 $lang->wechat->typeList['subscribe'] = 'Subscribe';
 $lang->wechat->typeList['service']   = 'Service';
@@ -128,6 +129,8 @@ $lang->wechat->placeholder->name     = 'Name of public';
 $lang->wechat->placeholder->account  = 'gh_xxx format';
 $lang->wechat->placeholder->token    = 'English letter or number, length of 3-32 characters.';
 
+$lang->wechat->mailSubject     = "From %s wechat";
+$lang->wechat->remindUsers     = "Mail to selected";
 $lang->wechat->curlSSLRequired = "This function requires curl module with ssl encryption transmission supports.";
 $lang->wechat->opensslRequired = "This function requires openssl module. Please open the PHP module";
 $lang->wechat->needCertified   = "This feature needs the account to be certified.";

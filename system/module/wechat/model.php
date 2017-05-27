@@ -363,6 +363,21 @@ class wechatModel extends model
     }
 
     /**
+     * Set remind.
+     * 
+     * @param  int    $publicID 
+     * @access public
+     * @return bool
+     */
+    public function setRemind($publicID)
+    {
+        $data = fixer::input('post')->join('remindUsers', ',')->get();
+        $this->dao->update(TABLE_WX_PUBLIC)->set('remindUsers')->eq($data->remindUsers)->where('id')->eq($publicID)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Get menu to commit.
      * 
      * @param  int    $public 
@@ -686,6 +701,14 @@ class wechatModel extends model
 
         $message->replied = isset($data->replied) ? $data->replied : 0;
         $message->time    = helper::now();
+
+        /* Send message conent by mail. */
+        $this->loadModel('mail');
+        if($this->config->mail->turnon)
+        {
+            $publicInfo = $this->getByID($public);
+            if($publicInfo->remindUsers) $this->mail->send($publicInfo->remindUsers, sprintf($this->lang->wechat->mailSubject, $message->from), $message->content);
+        }
 
         $this->dao->insert(TABLE_WX_MESSAGE)->data($message)->autoCheck()->exec();
         return !dao::isError();

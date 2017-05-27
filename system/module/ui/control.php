@@ -203,11 +203,11 @@ class ui extends control
             if($this->post->files['watermark'] == 'open')
             {
                 $fontRoot = $this->app->getTmpRoot() . 'fonts/';
-                $fontPath = $fontRoot . 'simhei.ttf';
+                $fontPath = $fontRoot . 'wqy-zenhei.ttc';
                 if(!file_exists($fontPath))
                 {
                     if(!is_writable($fontRoot)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->unWritable));
-                    if(!copy($this->config->cdn->host . 'fonts/simhei.ttf', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
+                    if(!copy($this->config->cdn->host . 'fonts/wqy-zenhei.ttc', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
                 }
             }
 
@@ -234,7 +234,7 @@ class ui extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->fontsPath = $this->app->getTmpRoot() . DS . 'fonts';
+        $this->view->fontsPath = $this->app->getTmpRoot() . 'fonts';
         $this->lang->menuGroups->ui = 'others';
         $this->view->title = $this->lang->ui->others;
         $this->display();

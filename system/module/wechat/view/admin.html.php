@@ -54,6 +54,7 @@
           commonModel::printLink('wechat', 'adminResponse', "publicID=$public->id", $lang->wechat->response->keywords);
           commonModel::printLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default", $lang->wechat->response->default, "data-toggle='modal'");
           commonModel::printLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe", $lang->wechat->response->subscribe, "data-toggle='modal'");
+          commonModel::printLink('wechat', 'remind', "publicID=$public->id", $lang->wechat->remind, "data-toggle='modal'");
           commonModel::printLink('wechat', 'delete', "publicID=$public->id", $lang->delete, "class='deleter'");
           commonModel::printLink('wechat', 'integrate', "publicID=$public->id", $lang->wechat->integrate);
           commonModel::printLink('wechat', 'qrcode', "publicID=$public->id", $lang->wechat->qrcode, "data-toggle=modal");

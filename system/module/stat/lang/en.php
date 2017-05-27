@@ -65,3 +65,6 @@ $lang->stat->dataTypes->ip = 'IP Count';
 $lang->stat->page = new stdclass();
 $lang->stat->page->common = 'Page Visits';
 $lang->stat->page->url    = 'Page URL';
+
+$lang->stat->maxDays    = 'The maximum days for chart';
+$lang->stat->maxDaysTip = 'Number of days should be >0.';

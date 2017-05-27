@@ -404,7 +404,11 @@ class stat extends control
         {
             $setting = fixer::input('post')->get();
             if(!$setting->saveDays or !validater::checkInt($setting->saveDays)) $this->send(array('result' => 'fail', 'message' => $this->lang->site->saveDaysTip));
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if(!$setting->maxDays or !validater::checkInt($setting->maxDays))   $this->send(array('result' => 'fail', 'message' => $this->lang->stat->maxDaysTip));
+
+            $this->loadModel('setting');
+            $this->setting->setItem('system.stat.maxDays', $setting->maxDays);
+            $result = $this->setting->setItem('system.common.site.saveDays', $setting->saveDays);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }

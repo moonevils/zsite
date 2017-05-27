@@ -38,6 +38,7 @@ $lang->wechat->reply          = '回复';
 $lang->wechat->commitMenu     = '菜单';
 $lang->wechat->deleteMenu     = '删除菜单';
 $lang->wechat->messageList    = '消息';
+$lang->wechat->remind         = '消息提醒';
 
 $lang->wechat->typeList['subscribe'] = '订阅号';
 $lang->wechat->typeList['service']   = '服务号';
@@ -128,6 +129,8 @@ $lang->wechat->placeholder->name     = '公众号名称';
 $lang->wechat->placeholder->account  = '请输入gh_xxx 格式的原始ID';
 $lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32字符';
 
+$lang->wechat->mailSubject     = "来自%s的微信";
+$lang->wechat->remindUsers     = "给选中的人员发邮件";
 $lang->wechat->curlSSLRequired = "微信公众号功能需要curl模块，并支持ssl加密传输。";
 $lang->wechat->opensslRequired = "微信公众号功能需要openssl模块，请开启PHP该模块。";
 $lang->wechat->needCertified   = "此功能需要公众号认证后使用。";

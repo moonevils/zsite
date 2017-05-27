@@ -163,20 +163,14 @@ class bookModel extends model
                     else
                     {
                         $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
-                        if($node->link != '')
-                        {
-                            $link =  $node->link;
-                        }
+                        if($node->link != '') $link =  $node->link;
                         $catalog .= "<dd class='catalogue chapter text-nowrap text-ellipsis' title='{$node->title}'><span><span class='order'>$serial</span>&nbsp;" . html::a($link, $node->title) . '</span></dd>';
                     }
                 }
                 elseif($node->type == 'article')
                 {
                     $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
-                    if($node->link != '')
-                    {
-                        $link =  $node->link;
-                    }
+                    if($node->link != '') $link =  $node->link;
                     $catalog .= "<dd id='article{$node->id}' class='catalogue article text-nowrap text-ellipsis' title='{$node->title}'><strong><span class='order'>$serial</span></strong>&nbsp;" . html::a($link, $node->title) . '</dd>';
                 }
                 if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog'])) $catalog .= $nodeList[$node->id]['catalog'];
@@ -684,7 +678,7 @@ class bookModel extends model
             ->batchCheckIF($node->type == 'book', $this->config->book->require->book, 'notempty')
             ->batchCheckIF($node->type != 'book', $this->config->book->require->node, 'notempty')
             ->batchCheckIF($node->type != 'book' and $node->isLink == 'on', $this->config->book->require->link, 'notempty')
-            ->checkIF($node->type == 'book', 'alias', 'unique', "`type` = 'book' AND id != '$nodeID' AND `lang` = '{$this->app->getClientLang()}'")
+            ->checkIF($node->alias != '', 'alias', 'unique', "id != '$nodeID' AND `lang` = '{$this->app->getClientLang()}'")
             ->where('id')->eq($nodeID)
             ->exec();
 

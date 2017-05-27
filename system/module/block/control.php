@@ -154,6 +154,28 @@ class block extends control
     }
 
     /**
+     * Reset region.
+     * 
+     * @param  string $page 
+     * @param  string $object 
+     * @access public
+     * @return void
+     */
+    public function resetRegion($page, $object = '')
+    {
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        $this->dao->delete()->from(TABLE_LAYOUT)
+            ->where('page')->eq($page)
+            ->andWhere('object')->eq($object)
+            ->andWhere('template')->eq($template)
+            ->andWhere('plan')->eq('all')
+            ->exec();
+
+        if(!dao::isError()) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
      * Delete a block from page region.
      * 
      * @param string $blockID 
