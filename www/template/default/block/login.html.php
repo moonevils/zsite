@@ -65,22 +65,27 @@ $(function()
                     dataType:'json',
                     success:function(data)
                     {
-                        if(data.result == 'fail') showFormError(data.message);
+                        if(data.result == 'fail') blockShowError($form.find('#formError'), data.message);
                         if(data.result == 'success') location.href=data.locate;
-                        if(typeof(data) != 'object') showFormError(data);
+                        if(typeof(data) != 'object') blockShowError($form.find('#formError'), data);
                     },
-                    error:function(data){showFormError(data.responseText);}
+                    error:function(data){blockShowError($form.find('#formError'), data.responseText);}
                 })
             },
             error:function(data)
             {
-                var error = $form.find('#formError').text(data.responseText);
-                var parent = error.closest('.form-group');
-                if(parent.length) parent.show();
-                else error.show();
+                blockShowError($form.find('#formError'), data.responseText)
             }
         })
         return false;
     });
 });
+
+function blockShowError(obj, message)
+{
+    var error = obj.text(message);
+    var parent = error.closest('.form-group');
+    if(parent.length) parent.show();
+    else error.show();
+}
 </script>
