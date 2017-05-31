@@ -262,7 +262,7 @@ class article extends control
         }
 
         unset($this->lang->article->menu);
-        $this->lang->menuGroups->article = 'user';
+        $this->lang->menuGroups->article = 'submission';
 
         $bookModel = $this->loadModel('book');
         $bookList  = $bookModel->getBookPairs();

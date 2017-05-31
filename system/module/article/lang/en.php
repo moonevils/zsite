@@ -64,6 +64,7 @@ $lang->submission->status[3] = 'Reject';
 $lang->submission->typeList = array();
 $lang->submission->typeList['article'] = 'Article';
 $lang->submission->typeList['blog']    = 'Blog';
+$lang->submission->typeList['book']    = 'Book';
 
 $lang->article->onlyBody = 'Display body only (for custom).';
 
