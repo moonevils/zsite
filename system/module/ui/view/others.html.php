@@ -234,13 +234,14 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <tr>
               <th></th>
               <td colspan='3'>
-                <div class='alert alert-info'><?php printf($lang->file->fontPosition, $fontsPath);?></div>
+                <div class='alert alert-info' style='margin: 1px;'><?php printf($lang->file->fontPosition, $fontsPath);?></div>
               </td>
             </tr>
 
           </table>
         </div>
       </div>
+
       <div class='form-footer'>
         <?php echo html::submitButton();?>
         <div class='thumb-footer hidden'>
