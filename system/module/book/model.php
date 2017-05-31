@@ -667,6 +667,7 @@ class bookModel extends model
 
         if(isset($node->isLink) && $node->isLink == 'on')
         {
+            $node->status  = 'normal';
             $node->content = html::a($node->link, "Link: " . $node->link);
         }
         else
