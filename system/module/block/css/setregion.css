@@ -39,6 +39,7 @@
 .block-item .input-group-addon {border: none; border-radius: 0; background-color: #f1f1f1;}
 .block-item .col-type {width: 25%;}
 .block-item .col-grid {width: 20%;}
+.block-item .col-probability {width: 20%;}
 .block-item .col-style {width: 25%;}
 .block-item .col-actions {width: 22%;}
 .block-item .col-move {width: 8%;}
@@ -50,6 +51,7 @@
 #blockList .block-item .children > .block-item:last-child, #blockList .block-item .children > .block-item.drag-from {border-radius: 0 0 3px 3px}
 #blockList .block-item .children > .block-item .col-type {width: 23%;}
 #blockList .block-item .children > .block-item .col-grid {width: 21%;}
+#blockList .block-item .children > .block-item .col-probability {width: 21%;}
 #blockList .block-item .children > .block-item .col-style {width: 26%;}
 #blockList .block-item .children > .block-item .col-actions {width: 22%;}
 #blockList .block-item .children > .block-item .col-move {width: 8%;}
