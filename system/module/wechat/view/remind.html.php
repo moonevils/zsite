@@ -28,5 +28,6 @@ include '../../common/view/chosen.html.php';
       <td><?php echo html::submitButton();?></td>
     </tr>
   </table>
+  <div class='alert alert-warning'><?php echo $lang->wechat->remindNotice?></div>
 </form>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
