@@ -21,11 +21,8 @@ css::import($jsRoot . 'uploader/min.css');
 .icon-file-video:before {content: '\f1c8';}
 .icon-file-code:before {content: '\f1c9';}
 .file-size > span {display: block; text-align:left; padding-right: 0px; z-index:99999;}
-.file-list .file[data-status=done] .file-size{top:-60px; width:115px}
 .file-info-size {min-width: 60px;}
-.file-info-addedBy {min-width: 80px;}
-.file-info-addedDate {min-width: 130px;}
-.file-info-downloads {min-width: 50px;}
+.file-list .file[data-status=done] .actions>.btn{padding:3px 4px;}
 .file-list .file[data-status=done] .actions>.btn-sort-file,
 .file-list .file[data-status=done] .actions>.btn-edit-file {display: inline-block;}
 .file-list .file-wrapper > .actions {width: 120px;}
@@ -81,6 +78,7 @@ $('#uploader').uploader(
     staticFiles: <?php echo json_encode($filesArray) ?>,
     fileFormater: function($file, file, status)
     {
+        $('#uploader .file-list').removeAttr('data-drag-placeholder');
         if(file.remoteData && file.remoteData.file)
         {
             var remoteData = file.remoteData.file;
@@ -97,9 +95,6 @@ $('#uploader').uploader(
         nameText += '<span>' + file.name + '</span>';
         $file.find('.file-name').html(nameText);
         var infoText = '<span class="file-info-size" data-tip-class="tooltip-in-modal" data-toggle="tooltip" title="<?php echo $lang->file->size;?>">' + (status == 'uploading' ? (window.plupload.formatSize(Math.floor(file.size*file.percent/100)).toUpperCase() + '/') : '') + window.plupload.formatSize(file.size).toUpperCase() + '</span>';
-        if(file.addedBy) infoText += '<span class="file-info-addedBy" data-tip-class="tooltip-in-modal" data-toggle="tooltip" title="<?php echo $lang->file->addedBy;?>"><i class="icon icon-user"></i> ' + file.addedBy + '</span>';
-        if(file.addedDate && file.addedDate !== '0000-00-00 00:00:00') infoText += '<span class="file-info-addedDate" data-tip-class="tooltip-in-modal" data-toggle="tooltip" title="<?php echo $lang->file->addedDate;?>"><i class="icon icon-time"></i> ' + file.addedDate + '</span>';
-        if(file.downloads > 0) infoText += ' &nbsp; <span class="file-info-downloads" data-tip-class="tooltip-in-modal" data-toggle="tooltip" title="<?php echo $lang->file->downloads;?>"><i class="icon icon-download"></i> ' + file.downloads + '</span>';
         $file.find('.file-size').html(infoText);
         if(file.static) $file.find('.file-status').hide();
         $file.find('.btn-delete-file i').removeClass('text-danger');
@@ -110,7 +105,7 @@ $('#uploader').uploader(
         <?php if($showSort):?>
         if(status == 'done' && !$file.find('.btn-sort-file').length)
         {
-            $file.find('.btn-delete-file').after(' <a href="javascript:;"  class="btn-sort-file btn btn-link"><i class="icon icon-move"></i></a>');
+            $file.find('.btn-delete-file').after('<a href="javascript:;" class="btn-sort-file btn btn-link"><i class="icon icon-move"></i></a>');
         }
         <?php endif;?>
         $file.find('.file-icon').html(this.createFileIcon(file)).css('color', 'hsl(' + $.zui.strCode(file.type || file.ext) + ', 70%, 40%)');
