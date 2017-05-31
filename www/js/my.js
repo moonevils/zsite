@@ -54,32 +54,6 @@ $(document).ready(function()
         else $('#navbar .dropdown').css('position', 'relative');
     }
 
-    /* Display random block randomly. */
-    $('.random-block-list').each(function()
-    {
-        var sum = 0;
-        $(this).find('.col').each(function(){ sum += $(this).data('probability');})
-    
-        var rand    = Math.floor((Math.random()) * sum + 1);
-        var tmpRand = 0;
-    
-        $(this).find('.col').each(function()
-        {
-            probability = $(this).data('probability') + tmpRand;
-            if(rand < probability || rand == probability)
-            {
-                $(this).show();
-                return false;
-            }
-            else
-            {
-                $(this).hide();
-                tmpRand += $(this).data('probability');
-            }
-        })
-    })
-
-
     /* set right docker */
     var $dockerBtn = $('#rightDockerBtn');
     $dockerBtn.popover({container: 'body', html:true, trigger:'manual', tipId: 'dockerPopover'}).click(function(e)

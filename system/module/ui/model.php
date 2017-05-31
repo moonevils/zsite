@@ -164,6 +164,13 @@ class uiModel extends model
         return json_decode($result);
     }
 
+    /**
+     * Get effect by api.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return object
+     */
     public function getEffectByApi($id)
     {
         $result = $this->loadModel('admin')->getByApi("effect-apigetbyid-{$id}.json");
