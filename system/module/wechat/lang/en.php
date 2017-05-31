@@ -131,7 +131,8 @@ $lang->wechat->placeholder->token    = 'English letter or number, length of 3-32
 
 $lang->wechat->mailSubject     = "From %s wechat";
 $lang->wechat->remindUsers     = "Mail to selected";
-$lang->wechat->remindNotice    = "Note: The site sending function must be configured successfully and open, and the selected staff's mailbox has been set, or can not receive mail.";
+$lang->wechat->remindNotice    = "Note: The site sending function must be configured successfully, and the selected staff's mailbox has been set, or can not receive mail.";
+$lang->wechat->remindNoMail    = "The site sending function is not enabled. Configure in the Set -> API -> Email page.";
 $lang->wechat->curlSSLRequired = "This function requires curl module with ssl encryption transmission supports.";
 $lang->wechat->opensslRequired = "This function requires openssl module. Please open the PHP module";
 $lang->wechat->needCertified   = "This feature needs the account to be certified.";
