@@ -578,13 +578,13 @@ class baseValidater
                 foreach($item as $subkey => $subItem)
                 {
                     if(is_array($subItem)) continue;
-                    $super[$key][$subkey] = self::filterTrojan($subItem);
+                    $subItem = self::filterTrojan($subItem);
                     $super[$key][$subkey] = self::filterXSS($subItem);
                 }
             }
             else
             {
-                $super[$key] = self::filterTrojan($item);
+                $item = self::filterTrojan($item);
                 $super[$key] = self::filterXSS($item);
             }
         }
