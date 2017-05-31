@@ -284,7 +284,8 @@ $lang->ui->top             = '上邊距';
 $lang->ui->bottom          = '下邊距';
 
 $lang->ui->importType    = '導入方式';
-$lang->js->fullImportTip = "完整導入將會替換站點的文章、產品等數據";
+$lang->js->importTip     = "導入主題的風格和樣式";
+$lang->js->fullImportTip = "將會導入測試數據以及替換站點文章、產品等數據";
 
 $lang->ui->importTypes = new stdclass();
 $lang->ui->importTypes->theme = '只導入主題';

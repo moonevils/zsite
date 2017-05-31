@@ -20,7 +20,10 @@ $lang->book->inputArticleTitle = 'Pleae enter the title of an article';
 
 $lang->book->id          = 'ID';
 $lang->book->type        = 'Type';
-$lang->book->parent      = 'chapter';
+$lang->book->status      = 'Status';
+$lang->book->link        = 'Link';
+$lang->book->isLink      = 'Link';
+$lang->book->parent      = 'Chapter';
 $lang->book->author      = 'Author';
 $lang->book->editor      = 'Editor';
 $lang->book->addedDate   = 'Added On';
