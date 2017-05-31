@@ -102,7 +102,7 @@ js::set('linkChecked',$linkChecked);
             <th><?php echo $lang->book->summary;?></th>
             <td colspan='2'><?php echo html::textarea('summary', $node->summary, "class='form-control' rows='2'");?></td>
           </tr>
-          <?php if($node->type == 'article' or $node->type == 'book'):?>
+          <?php if($node->type == 'article'):?>
           <tr id='isLinked'>
             <th><?php echo $lang->book->content;?></th>
             <td colspan='2' valign='middle' <?php if($node->type == 'book') echo "class='required required-wrapper'";?>><?php echo html::textarea('content', htmlspecialchars($node->content), "rows='15' class='form-control'");?></td>
