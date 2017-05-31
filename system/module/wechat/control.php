@@ -267,6 +267,7 @@ class wechat extends control
             $response['locate']  = inlink('admin');
             $this->send($response);
         }
+        $this->app->loadModuleConfig('mail');
 
         $this->view->users  = $this->loadModel('user')->getPairs('admin');
         $this->view->title  = $this->lang->wechat->remind;

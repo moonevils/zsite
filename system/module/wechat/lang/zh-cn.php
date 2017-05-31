@@ -131,7 +131,8 @@ $lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32
 
 $lang->wechat->mailSubject     = "来自%s的微信";
 $lang->wechat->remindUsers     = "给选中的人员发邮件";
-$lang->wechat->remindNotice    = "注：站点发信功能必须配置成功并开启，并且所选人员的邮箱已经设置，否则无法收到邮件。";
+$lang->wechat->remindNotice    = "注：站点发信功能必须配置成功，并且所选人员的邮箱已经设置，否则无法收到邮件。";
+$lang->wechat->remindNoMail    = "站点发信功能没有开启，请到设置->接口->发信设置页面配置发信。";
 $lang->wechat->curlSSLRequired = "微信公众号功能需要curl模块，并支持ssl加密传输。";
 $lang->wechat->opensslRequired = "微信公众号功能需要openssl模块，请开启PHP该模块。";
 $lang->wechat->needCertified   = "此功能需要公众号认证后使用。";
