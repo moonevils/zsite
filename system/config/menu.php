@@ -27,6 +27,7 @@ $config->multiEntrances[] = 'reply_admin';
 $config->multiEntrances[] = 'article_admin';
 $config->multiEntrances[] = 'article_create';
 $config->multiEntrances[] = 'article_edit';
+$config->multiEntrances[] = 'article_check';
 $config->multiEntrances[] = 'product_admin';
 $config->multiEntrances[] = 'product_create';
 $config->multiEntrances[] = 'product_edit';
