@@ -285,7 +285,8 @@ $lang->ui->top             = 'Top';
 $lang->ui->bottom          = 'Bottom';
 
 $lang->ui->importType    = 'Import type';
-$lang->js->fullImportTip = "Old article, product, layout data will be replaced";
+$lang->js->importTip     = "Old layout data will be replaced";
+$lang->js->fullImportTip = "Old article, product, layout data will be replaced and import test data";
 
 $lang->ui->importTypes = new stdclass();
 $lang->ui->importTypes->theme = 'Theme data';
