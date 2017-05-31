@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php $this->app->loadLang('book');?>
 <?php js::set('confirmReject', $lang->article->confirmReject);?>
 <?php js::set('bookCatalogs',$bookCatalogs);?>
 <div class='panel'>
@@ -62,11 +63,11 @@
         <td class='blogTD'><?php echo html::select("blogCategories[]", $blogCategories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td>
       </tr>
       <tr id='trBook'>
-        <th class='w-100px'><?php echo "手册";?></th>
+        <th class='w-100px'><?php echo $lang->book->common;?></th>
         <td class='w-p40'><?php echo html::select("bookList", $bookList, '', "class='form-control'");?></td>
       </tr>
       <tr id='trBook'>
-        <th class='w-100px'><?php echo "章节";?></th>
+        <th class='w-100px'><?php echo $lang->book->catalog;?></th>
         <?php $bookIDs = array_keys($bookList)?>
         <td class='w-p40'><?php echo html::select("bookCatalogs", $bookCatalogs[$bookIDs[0]], '', "class='form-control'");?></td>
       </tr>

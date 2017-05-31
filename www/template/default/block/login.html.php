@@ -21,15 +21,19 @@ js::set('random', $this->session->random);
 ?>
   <div class='panel-heading'><strong><?php echo $icon . $block->title;?></strong></div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' role='form' data-checkfingerprint='1'>
-      <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
-      <div class='form-group'><?php echo html::input('account','',"placeholder='{$this->lang->user->inputAccountOrEmail}' class='form-control input-lg'");?></div>
-      <div class='form-group'><?php echo html::password('password','',"placeholder='{$this->lang->user->inputPassword}' class='form-control input-lg'");?></div>
-      <?php if($this->config->mail->turnon and $this->config->site->resetPassword == 'open') echo html::a(helper::createLink('user', 'resetpassword'), $this->lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'");?>
-      <?php echo html::a(helper::createLink('user', 'register'), $this->lang->user->register->instant, "id='register' style='float:right;right:5px;margin-bottom:8px;'");?>
-      <?php echo html::submitButton($this->lang->user->login->common, 'btn btn-primary btn-wider btn-lg btn-block');?> 
-    </form>
-    <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
+    <div style='max-width:500px;margin:0px auto'>
+      <form method='post' id='ajaxForm' role='form' data-checkfingerprint='1' style='max-width:500px;margin'>
+        <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
+        <div class='form-group'><?php echo html::input('account','',"placeholder='{$this->lang->user->inputAccountOrEmail}' class='form-control'");?></div>
+        <div class='form-group'><?php echo html::password('password','',"placeholder='{$this->lang->user->inputPassword}' class='form-control'");?></div>
+        <?php echo html::submitButton($this->lang->user->login->common, 'btn btn-primary btn-wider btn-block');?> 
+      </form>
+      <div style='margin:5px 0px;'>
+        <?php if($this->config->mail->turnon and $this->config->site->resetPassword == 'open') echo html::a(helper::createLink('user', 'resetpassword'), $this->lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'");?>
+        <?php echo html::a(helper::createLink('user', 'register'), $this->lang->user->register->instant, "id='register' style='float:right;right:5px;margin-bottom:8px;'");?>
+      </div>
+      <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
+    </div>
   </div>
 </div>
 <script>
@@ -63,22 +67,27 @@ $(function()
                     dataType:'json',
                     success:function(data)
                     {
-                        if(data.result == 'fail') showFormError(data.message);
+                        if(data.result == 'fail') blockShowError($form.find('#formError'), data.message);
                         if(data.result == 'success') location.href=data.locate;
-                        if(typeof(data) != 'object') showFormError(data);
+                        if(typeof(data) != 'object') blockShowError($form.find('#formError'), data);
                     },
-                    error:function(data){showFormError(data.responseText);}
+                    error:function(data){blockShowError($form.find('#formError'), data.responseText);}
                 })
             },
             error:function(data)
             {
-                var error = $form.find('#formError').text(data.responseText);
-                var parent = error.closest('.form-group');
-                if(parent.length) parent.show();
-                else error.show();
+                blockShowError($form.find('#formError'), data.responseText)
             }
         })
         return false;
     });
 });
+
+function blockShowError(obj, message)
+{
+    var error = obj.text(message);
+    var parent = error.closest('.form-group');
+    if(parent.length) parent.show();
+    else error.show();
+}
 </script>

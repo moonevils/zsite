@@ -16,6 +16,7 @@ $jsRoot  = $webRoot . "js/";
 if(isset($pageCSS)) css::internal($pageCSS);
 include '../../common/view/chosen.html.php';
 ?>
+<?php if($config->mail->turnon):?>
 <form method='post' action='<?php echo inlink('remind', "public={$public->id}");?>' id='ajaxForm'>
   <table class='table table-form'>
     <tr>
@@ -28,5 +29,9 @@ include '../../common/view/chosen.html.php';
       <td><?php echo html::submitButton();?></td>
     </tr>
   </table>
+  <div class='alert alert-warning'><?php echo $lang->wechat->remindNotice?></div>
 </form>
+<?php else:?>
+<div class='alert alert-danger'><?php echo $lang->wechat->remindNoMail?></div>
+<?php endif;?>
 <?php if(isset($pageJS)) js::execute($pageJS);?>

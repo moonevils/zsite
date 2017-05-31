@@ -55,6 +55,22 @@ class validater extends baseValidater
         }
         return $post;
     }
+
+    /**
+     * Filter super. 
+     * 
+     * @param  array $super 
+     * @static
+     * @access public
+     * @return array
+     */
+    public static function filterSuper($super)
+    {
+        if(!is_array($super)) return $super;
+        if(!defined('RUN_MODE') or RUN_MODE != 'admin') return parent::filterSuper($super);
+
+        return self::filterBadKeys($super);
+    }
 }
 
 /**
