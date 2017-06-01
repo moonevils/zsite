@@ -16,11 +16,10 @@
 <?php 
 $path = explode(',', $node->path);
 js::set('path', $path);
-js::set('optionMenus',$optionMenus);
-js::set('nodeParent',$node->parent);
+js::set('optionMenus', $optionMenus);
+js::set('nodeParent', $node->parent);
 
 $linkChecked = $node->link ? checked : '';
-js::set('linkChecked',$linkChecked);
 ?>
 <?php include './side.html.php';?>
 <div class='col-md-10'>
