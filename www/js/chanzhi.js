@@ -682,25 +682,12 @@ function setGo2Top()
         });
     };
 
-    function tidy($blocks, options)
+    $.fn.tidyRandomBlocks = function()
     {
-        $blocks = $blocks || $(this);
-        options = $.extend({}, $blocks.data(), options);
-
-        var winWidth = $(window).width();
-        if(!options.force && winWidth == $blocks.data('tidyWinWidth')) return;
-        else $blocks.data('tidyWinWidth', winWidth);
-
-        var rows = {};
-        var rowIndex = 0;
-        var disableGrid = winWidth < 992;
+        $blocks = $(this);
         $blocks.children('.col').each(function()
         {
             var $col = $(this);
-            var $child = $col.children().not('style, script').first().css('height', 'auto');
-            var isColRow = $child.hasClass('row');
-            if(isColRow) tidy($child);
-
             $col.find('.random-block-list').each(function()
             {
                 var $random = $(this);
@@ -729,7 +716,29 @@ function setGo2Top()
                     }
                 });
             });
+        })
+    }
 
+    function tidy($blocks, options)
+    {
+        $blocks = $blocks || $(this);
+        options = $.extend({}, $blocks.data(), options);
+
+        var winWidth = $(window).width();
+        if(!options.force && winWidth == $blocks.data('tidyWinWidth')) return;
+        else $blocks.data('tidyWinWidth', winWidth);
+
+        var rows = {};
+        var rowIndex = 0;
+        var disableGrid = winWidth < 992;
+        $blocks.children('.col').each(function()
+        {
+            var $col = $(this);
+            if($col.is(':hidden')) return;
+
+            var $child = $col.children().not('style, script').first().css('height', 'auto');
+            var isColRow = $child.hasClass('row');
+            if(isColRow) tidy($child);
             if(disableGrid) return;
 
             var grid = $col.attr('data-grid');
@@ -806,6 +815,7 @@ function setGo2Top()
         lastTidyTask = setTimeout(function()
         {
             $('.cards-custom').tidyCards();
+            $('.row.blocks').tidyRandomBlocks();
             $('.row.blocks').tidy({force: true});
         }, 300);
     };
