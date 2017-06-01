@@ -56,6 +56,7 @@ class guarderModel extends model
         if($showTitle)
         return <<<EOT
 <label for='captcha' class='col-sm-1 control-label'>{$this->lang->guarder->captcha}</label>
+<div class='col-sm-11 required'>
   <table class='captcha'>
       <tr class='text-middle'>
         <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
