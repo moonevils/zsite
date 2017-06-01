@@ -217,11 +217,13 @@ class userModel extends model
             ->remove($this->config->user->skipedFields->create)
             ->get();
         
+        if(!isset($user->agreement)) $user->agreement = 0;
+
         if(RUN_MODE != 'admin') $user->admin = 'no';
         $user->password = $this->createPassword($this->post->password1, $user->account); 
         
         $this->dao->insert(TABLE_USER)
-            ->data($user, $skip = 'password1,password2,groups')
+            ->data($user, $skip = 'password1,password2,groups,agreement')
             ->autoCheck()
             ->batchCheck($this->config->user->require->register, 'notempty')
             ->check('account', 'unique')
