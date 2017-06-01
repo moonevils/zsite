@@ -699,8 +699,36 @@ function setGo2Top()
             var $col = $(this);
             var $child = $col.children().not('style, script').first().css('height', 'auto');
             var isColRow = $child.hasClass('row');
-            var isProbability = $child.hasClass('random-block-list');
             if(isColRow) tidy($child);
+
+            $col.find('.random-block-list').each(function()
+            {
+                var $random = $(this);
+                var sum = 0;
+                $random.find('.col').each(function()
+                { 
+                    sum += $(this).data('probability');
+                    $(this).hide();
+                });
+                
+                var tmpRand = 0;
+                var rand    = Math.floor((Math.random()) * sum + 1);
+                
+                $random.find('.col').each(function()
+                {
+                    probability = $(this).data('probability') + tmpRand;
+                    if(rand < probability || rand == probability)
+                    {
+                        $(this).show();
+                        return false;
+                    }
+                    else
+                    {
+                        $(this).hide();
+                        tmpRand += $(this).data('probability');
+                    }
+                });
+            });
 
             if(disableGrid) return;
 
@@ -716,11 +744,13 @@ function setGo2Top()
             $col.attr('data-grid', grid)
                 .attr('class', 'col col-' + grid + (isColRow ? ' col-row' : ''));
 
+            var isRandom = typeof($col.data('probability')) != 'undefined';
+            if(isRandom) return;
+
             var row = rows[rowIndex];
             var colHeight = $child.height();
-            var isRandom = typeof($col.data('probability')) != 'undefined';
             if(isColRow) colHeight += 14 * (($child.outerHeight() - colHeight > 7) ? 1 : -1);
-            if(!row || (row.grid + grid > 12 && !isRandom))
+            if(!row || (row.grid + grid > 12))
             {
                 rowIndex++;
                 row =
@@ -738,34 +768,6 @@ function setGo2Top()
             }
             $col.attr('data-row', rowIndex);
             rows[rowIndex] = row;
-
-            if(isProbability)
-            {
-                var sum = 0;
-                $child.find('.col').each(function()
-                { 
-                    sum += $(this).data('probability');
-                    $(this).addClass('hide');
-                });
-                
-                var tmpRand = 0;
-                var rand    = Math.floor((Math.random()) * sum + 1);
-                
-                $child.find('.col').each(function()
-                {
-                    probability = $(this).data('probability') + tmpRand;
-                    if(rand < probability || rand == probability)
-                    {
-                        $(this).removeClass('hide');
-                        return false;
-                    }
-                    else
-                    {
-                        $(this).addClass('hide');
-                        tmpRand += $(this).data('probability');
-                    }
-                })
-            }
         });
 
         $.each(rows, function(rIndex, row)
