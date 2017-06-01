@@ -653,6 +653,38 @@ function setGo2Top()
  */
 +(function($)
 {
+
+    $.fn.refreshRandomBlock = function()
+    {
+        return $(this).each(function()
+        {
+            var $random = $(this);
+            if($random.data('random-refresh')) return;
+            $random.data('random-refresh', true);
+            var sum = 0;
+            var $cols = $random.children('.col');
+            $cols.each(function()
+            { 
+                var $col = $(this).attr('data-random', null).hide();
+                $col.data('probMin', sum);
+                sum += $col.data('probability');
+                $col.data('probMax', sum);
+            });
+            
+            var rand = Math.random() * sum;
+            $cols.each(function()
+            {
+                var $col = $(this);
+                var colData = $col.data();
+                if(rand >= colData.probMin && rand < colData.probMax)
+                {
+                    $col.attr('data-random', true).show();
+                    return false;
+                }
+            });
+        });
+    };
+
     $.fn.tidyCards = function()
     {
         var winWidth = $(window).width();
@@ -682,47 +714,11 @@ function setGo2Top()
         });
     };
 
-    $.fn.tidyRandomBlocks = function()
-    {
-        $blocks = $(this);
-        $blocks.children('.col').each(function()
-        {
-            var $col = $(this);
-            $col.find('.random-block-list').each(function()
-            {
-                var $random = $(this);
-                var sum = 0;
-                $random.find('.col').each(function()
-                { 
-                    sum += $(this).data('probability');
-                    $(this).hide();
-                });
-                
-                var tmpRand = 0;
-                var rand    = Math.floor((Math.random()) * sum + 1);
-                
-                $random.find('.col').each(function()
-                {
-                    probability = $(this).data('probability') + tmpRand;
-                    if(rand < probability || rand == probability)
-                    {
-                        $(this).show();
-                        return false;
-                    }
-                    else
-                    {
-                        $(this).hide();
-                        tmpRand += $(this).data('probability');
-                    }
-                });
-            });
-        })
-    }
-
     function tidy($blocks, options)
     {
         $blocks = $blocks || $(this);
         options = $.extend({}, $blocks.data(), options);
+
 
         var winWidth = $(window).width();
         if(!options.force && winWidth == $blocks.data('tidyWinWidth')) return;
@@ -731,33 +727,27 @@ function setGo2Top()
         var rows = {};
         var rowIndex = 0;
         var disableGrid = winWidth < 992;
+        var isRandomRow = $blocks.hasClass('random-block-list');
         $blocks.children('.col').each(function()
         {
             var $col = $(this);
             if($col.is(':hidden')) return;
 
-            var $child = $col.children().not('style, script').first().css('height', 'auto');
+            var $child = $col.children().not('style,script').first().css('height', 'auto');
             var isColRow = $child.hasClass('row');
             if(isColRow) tidy($child);
             if(disableGrid) return;
 
+            if(isRandomRow) return;
+
             var grid = $col.attr('data-grid');
-            if(!grid)
-            {
-                grid = options.grid || 12;
-            }
-            if(typeof grid === 'string')
-            {
-                grid = parseInt(grid);
-            }
+            if(!grid) grid = options.grid || 12;
+            if(typeof grid === 'string') grid = parseInt(grid);
             $col.attr('data-grid', grid)
                 .attr('class', 'col col-' + grid + (isColRow ? ' col-row' : ''));
 
-            var isRandom = typeof($col.data('probability')) != 'undefined';
-            if(isRandom) return;
-
             var row = rows[rowIndex];
-            var colHeight = $child.height();
+            var colHeight = $child.outerHeight();
             if(isColRow) colHeight += 14 * (($child.outerHeight() - colHeight > 7) ? 1 : -1);
             if(!row || (row.grid + grid > 12))
             {
@@ -785,7 +775,8 @@ function setGo2Top()
             {
                 row.cols.each(function()
                 {
-                    $(this).children().not('style, script').first().css('height', row.height);
+                    var $child = $(this).children().not('style, script').first().css('height', row.height);
+                    if($child.hasClass('random-block-list')) $child.find('[data-random]').children().not('style, script').first().css('height', row.height);
                 });
             }
         });
@@ -811,11 +802,11 @@ function setGo2Top()
     var lastTidyTask = null;
     var tidyBlocks = function()
     {
+        $('.random-block-list').refreshRandomBlock();
         clearTimeout(lastTidyTask);
         lastTidyTask = setTimeout(function()
         {
             $('.cards-custom').tidyCards();
-            $('.row.blocks').tidyRandomBlocks();
             $('.row.blocks').tidy({force: true});
         }, 300);
     };

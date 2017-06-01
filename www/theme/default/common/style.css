@@ -547,6 +547,8 @@ body.body-modal {padding: 20px;}
 
 .blocks .searchbar, .blocks .usermenu, .blocks .site-logo, .blocks .site-name, .blocks .site-slogan  {margin-bottom: 20px}
 
+.random-block-list > .col {display: none}
+
 /**slide**/
 .carousel-inner .carousel-caption li{text-shadow: none;}
 
