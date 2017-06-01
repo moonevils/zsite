@@ -955,7 +955,6 @@
         var $querySelector = $$('<div id="veQuerySelector" class="ve-element"><div id="veQuerySelectorName"></div><div id="veQuerySelectorCover"></div></div>').appendTo($$body);
         var $querySelectorName = $querySelector.find('#veQuerySelectorName');
         var querySelector = null;
-        var isAltKeyPress = false;
         var lastEleId = 0;
         var updateQuerySelectorPosition = function()
         {
@@ -978,10 +977,44 @@
             var queryText = selector.name 
                 + (selector.id ? ('#' + selector.id) : '') 
                 + (selector['class'] ? ('.' + selector['class'].join('.')) : '');
-            var queryHtml = '<span class="text-name">' + selector.name + '</span>' 
+
+            var queryHtml = '';
+            if(selector.id)
+            {
+                queryHtml = '<span class="text-id">#' + selector.id + '</span>';
+            }
+            else if(selector.parentId || selector.parentName)
+            {
+                if(selector.parentName) queryHtml += '<span class="text-name">' + selector.parentName + '</span>';
+                if(selector.parentId) queryHtml += '<span class="text-id">#' + selector.parentId + '</span>';
+                if(selector.parents)
+                {
+                    $.each(selector.parents, function(idx, parentName)
+                    {
+                        queryHtml += '<span class="text-name">>' + parentName + '</span>';
+                    });
+                }
+                queryHtml += '<span class="text-name">>' + selector.name + '</span>' 
                 + (selector.id ? ('<span class="text-id">#' + selector.id + '</span>') : '') 
                 + (selector['class'] ? ('<span class="text-class">.' + selector['class'].join('.') + '</span>') : '');
+            }
+            else
+            {
+                queryHtml = '<span class="text-name">' + selector.name + '</span>' 
+                + (selector.id ? ('<span class="text-id">#' + selector.id + '</span>') : '') 
+                + (selector['class'] ? ('<span class="text-class">.' + selector['class'].join('.') + '</span>') : '');
+            }
             $querySelectorName.attr('title', queryText).html(queryHtml).attr('contenteditable', null);
+        };
+
+        var getElementClasses = function($ele)
+        {
+            var classes = [];
+            $.each(($ele.attr('class') || '').split(' '), function(idx, clasx)
+            {
+                if(clasx.length && clasx !== 've' && clasx.indexOf('ve-') !== 0) classes.push(clasx);
+            });
+            return classes.length ? classes : null;
         };
 
         var getElementSelector = function($ele)
@@ -990,14 +1023,26 @@
                 {
                     id: $ele.attr('id') || '',
                     name: $ele.prop('tagName').toLowerCase(),
-                    'class': ''
+                    'class': getElementClasses($ele)
                 };
-                var classes = [];
-                $.each(($ele.attr('class') || '').split(' '), function(idx, clasx)
+
+                if(!selector.id && (!selector['class'] || $$('.' + selector['class'].join('.')).length !== 1))
                 {
-                    if(clasx.length && clasx !== 've' && clasx.indexOf('ve-') !== 0) classes.push(clasx);
-                });
-                if(classes.length) selector['class'] = classes;
+                    var parents = [];
+                    var parentId, $parent = $ele, parentName;
+                    do {
+                        $parent = $parent.parent();
+                        parentId = $parent.attr('id') || '';
+                        parentName = $parent.prop('tagName').toLowerCase();
+                        if(!parentId && parentName !== 'body')
+                        {
+                            parents.push(parentName);
+                        }
+                    } while(!parentId && parentName !== 'body');
+                    if(parentId) selector.parentId = parentId;
+                    if(parentName === 'body') selector.parentIsBody = true;
+                    if(parents.length) selector.parents = parents.reverse();
+                }
                 return selector;
         };
 
@@ -1024,6 +1069,10 @@
         $$body.on('mousemove', function(e)
         {
             $queryElement = $$(e.target);
+            while(!$queryElement.attr('id') && (($queryElement.is('i,strong,b,code,q,s,small,u,em,p,tr,tbody,thead,tfoot,td,th,font,sub,sup') && !$queryElement.attr('class')) || $queryElement.css('display') === 'inline'))
+            {
+                $queryElement = $queryElement.parent();
+            }
             var eleId = $queryElement.data('ve-id');
             if(!eleId)
             {
