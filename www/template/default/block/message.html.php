@@ -28,31 +28,31 @@
     ?>
 
     <div class='form-group'>
-    <label for='blockFrom' class='col-sm-3 control-label' style="padding-right:0px;"><?php echo $this->lang->message->from; ?></label>
-      <div class='col-sm-9 required'>
+    <label for='blockFrom' class='col-sm-2 control-label'><?php echo $this->lang->message->from; ?></label>
+      <div class='col-sm-10 required'>
         <?php echo html::input('blockFrom', $from, "class='form-control'"); ?>
       </div>
     </div>
 
     <div class='form-group'>
-      <label for='mobile' class='col-sm-3 control-label'><?php echo $this->lang->message->mobile; ?></label>
-      <div class='col-sm-9'>
+      <label for='mobile' class='col-sm-2 control-label'><?php echo $this->lang->message->mobile; ?></label>
+      <div class='col-sm-10'>
         <?php echo html::input('mobile', $mobile, "class='form-control'"); ?>
       </div>
     </div>
 
     <div class='form-group'>
-      <label for='qq' class='col-sm-3 control-label'><?php echo $this->lang->message->qq;?></label>
-      <div class='col-sm-9'>
+      <label for='qq' class='col-sm-2 control-label'><?php echo $this->lang->message->qq;?></label>
+      <div class='col-sm-10'>
         <?php echo html::input('qq', $qq, "class='form-control'"); ?>
       </div>
     </div>
 
     <div class='form-group'>
-      <label for='blockContent' class='col-sm-3 control-label'><?php echo $this->lang->message->content;?></label>
-      <div class='col-sm-9 required'>
+      <label for='blockContent' class='col-sm-2 control-label'><?php echo $this->lang->message->content;?></label>
+      <div class='col-sm-10 required'>
         <?php
-          echo html::textarea('blockContent', '', "class='form-control' rows='3'");
+          echo html::textarea('blockContent', '', "class='form-control' rows='2'");
           echo html::hidden('objectType', 'message');
           echo html::hidden('objectID', 0);
         ?>
@@ -74,7 +74,8 @@
       </div>
     </div>
 
-</form>
+    </form>
+  </div>
 </div>
 
 <script>
