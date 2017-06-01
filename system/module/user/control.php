@@ -116,12 +116,14 @@ class user extends control
         {
             $this->referer = urlencode($_SERVER['HTTP_REFERER']);
         }
-        else if(strpos($_SERVER['HTTP_REFERER'], 'register'))
+        elseif(strpos($_SERVER['HTTP_REFERER'], 'register'))
         {
             $this->referer = $this->createLink('user', 'control');
         }
         else
+        {
             $this->setReferer($referer);
+        }
 
         /* Load mail config for reset password. */
         $this->app->loadModuleConfig('mail');

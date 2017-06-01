@@ -17,8 +17,8 @@ $(document).ready(function()
         })
     });
 
-    function linkChecked()
-    {
+    $('#isLink').change(function()
+    {   
         if($('#isLink').prop('checked'))
         {   
             $('tr#isLinked').hide();
@@ -29,15 +29,7 @@ $(document).ready(function()
             $('tr#isLinked').show();
             $('#trlink').hide();
         }
-    }
-
-    if(v.linkChecked == 'checked')
-    {
-        linkChecked();
-    }
-
-    $('#isLink').change(function()
-    {   
-        linkChecked();
     }); 
+
+    $('#isLink').change();
 });

@@ -20,7 +20,7 @@ css::import($jsRoot . 'uploader/min.css');
 .icon-file-movie:before {content: '\f1c8';}
 .icon-file-video:before {content: '\f1c8';}
 .icon-file-code:before {content: '\f1c9';}
-.file-size > span {display: block; text-align:left; padding-right: 0px; z-index:99999;}
+.file-size > span {display: block; text-align:left; padding-right: 0px;}
 .file-info-size {min-width: 60px;}
 .file-list .file[data-status=done] .actions>.btn{padding:3px 4px;}
 .file-list .file[data-status=done] .actions>.btn-sort-file,
