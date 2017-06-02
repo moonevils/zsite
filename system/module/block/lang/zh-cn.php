@@ -153,6 +153,7 @@ $lang->block->placeholder->customStyleTip         = '样式表支持Less语法�
 $lang->block->placeholder->desktopCustomScriptTip = '已包含 jQuery 1.9.0，可以用#blockID作为id选择器。';
 $lang->block->placeholder->mobileCustomScriptTip  = '支持基本的jQuery语法，可以用#blockID作为id选择器。';
 $lang->block->placeholder->class                  = '多个类名之间用空格隔开';
+$lang->block->placeholder->reset                  = '是否恢复此页面的统一布局设置？';
 
 $lang->block->gridOptions[0]  = '自动';
 $lang->block->gridOptions[6]  = '1/2';

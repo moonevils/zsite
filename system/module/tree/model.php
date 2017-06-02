@@ -393,7 +393,7 @@ class treeModel extends model
             foreach($lang->block->$template->regions->$page as $region => $regionName):
             $linkHtml .= "<dd>" . html::a(helper::createLink('block', 'setregion', "page=$page&region=$region&object=$category->id"), $regionName, "data-toggle='modal'") . "</dd>";
             endforeach;
-            if(commonModel::hasPriv('block', 'resetRegion')) $linkHtml .= "<dd>" . html::a(helper::createLink('block', 'resetRegion', "page=$page&object=$category->id"), $lang->block->resetRegion, "class='deleter'") . "</dd>";
+            if(commonModel::hasPriv('block', 'resetRegion')) $linkHtml .= "<dd>" . html::a(helper::createLink('block', 'resetRegion', "page=$page&object=$category->id"), $lang->block->resetRegion, "class='deleter' data-message='{$lang->block->placeholder->reset}'") . "</dd>";
             $linkHtml .= "</dl>";
             $linkHtml .= "</span>";
         }
