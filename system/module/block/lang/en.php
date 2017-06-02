@@ -153,6 +153,7 @@ $lang->block->placeholder->customStyleTip         = 'Less is supported in style 
 $lang->block->placeholder->desktopCustomScriptTip = 'jQuery 1.9.0 is included. You can use #blockID as ID selector.';
 $lang->block->placeholder->mobileCustomScriptTip  = 'jQuery id supported. You can use #blockID as ID selector.';
 $lang->block->placeholder->class                  = 'Use space as class delimitor.';
+$lang->block->placeholder->reset                  = "Do you want to restore this page to unified layout settings?";
 
 $lang->block->gridOptions[0]  = 'Auto';
 $lang->block->gridOptions[6]  = '1/2';
