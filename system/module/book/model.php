@@ -225,9 +225,14 @@ class bookModel extends model
             foreach($children as $child) $childrenHtml .=  $this->getAdminCatalog($child->id, $serials);
             $childrenHtml .= '</dl>';
         }
+
         if($node->type == 'book')    $catalog .= "<dt class='book' data-id='" . $node->id . "'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>' . $childrenHtml;
+
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
-        if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong>' . ($node->status == 'draft' ? "<span class='label label-warning'>{$this->lang->book->statusList['draft']}</span>" : '') . '<span class="actions">' . $editLink . $filesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
+
+        $draft = $node->status == 'draft' ? "<span class='label label-warning'>{$this->lang->book->statusList['draft']}</span>" : '';
+        if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong>' . $draft . '<span class="actions">' . $editLink . $filesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
+
         return $catalog;
     }
 
@@ -672,13 +677,13 @@ class bookModel extends model
         }
         else
         {
-            $node->link = '';
+            $node->link   = '';
             $node->isLink = 'off';
         }
 
         $parentNode = $this->getNodeByID($node->parent);
 
-        if($node->type != "book")
+        if($node->type != "book" && strpos($oldNode->path, ",$node->book,") === false)
         {
             $nodePaths = $this->dao->select("id,path")->from(TABLE_BOOK)->where('path')->like("$oldNode->path%")->fetchPairs('id');
             list($id,$path) = each($nodePaths);
