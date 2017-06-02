@@ -42,6 +42,11 @@ $(document).ready(function()
         {
             $(this).parent().after($('#grade2NavSource ul').html()); 
         }
+
+        if($(this).parent().find('ul li').size())
+        {
+            $(this).parent().children('.shut').removeClass('icon-folder-close').addClass('icon-folder-open-alt'); 
+        }
         fixForm();
     });
 
