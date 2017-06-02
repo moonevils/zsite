@@ -57,16 +57,16 @@
         <th class='w-100px'><?php echo $lang->article->type;?></th>
         <td><?php echo html::radio("type", $lang->submission->typeList, 'article');?></td><td></td>
       </tr>
-      <tr id='trAB'>
+      <tr id='categories'>
         <th class='w-100px'><?php echo $lang->article->category;?></th>
         <td class='articleTD'><?php echo html::select("articleCategories[]", $articleCategories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td>
         <td class='blogTD'><?php echo html::select("blogCategories[]", $blogCategories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td>
       </tr>
-      <tr id='trBook'>
+      <tr class='trBook'>
         <th class='w-100px'><?php echo $lang->book->common;?></th>
         <td class='w-p40'><?php echo html::select("bookList", $bookList, '', "class='form-control'");?></td>
       </tr>
-      <tr id='trBook'>
+      <tr class='trBook'>
         <th class='w-100px'><?php echo $lang->book->catalog;?></th>
         <?php $bookIDs = array_keys($bookList)?>
         <td class='w-p40'><?php echo html::select("bookCatalogs", $bookCatalogs[$bookIDs[0]], '', "class='form-control'");?></td>

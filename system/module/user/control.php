@@ -112,11 +112,11 @@ class user extends control
     {
         dao::$changedTables[] = TABLE_CONFIG;
 
-        if($referer == '' && strpos($_SERVER['HTTP_REFERER'], 'register') === false)
+        if($referer == '' && strpos($_SERVER['HTTP_REFERER'], 'register') === false && strpos($_SERVER['HTTP_REFERER'], 'login') === false)
         {
             $this->referer = urlencode($_SERVER['HTTP_REFERER']);
         }
-        elseif(strpos($_SERVER['HTTP_REFERER'], 'register'))
+        elseif(strpos($_SERVER['HTTP_REFERER'], 'register') || strpos($_SERVER['HTTP_REFERER'], 'login'))
         {
             $this->referer = $this->createLink('user', 'control');
         }

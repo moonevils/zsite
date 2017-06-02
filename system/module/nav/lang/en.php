@@ -48,3 +48,7 @@ $lang->nav->targetList = array();
 $lang->nav->targetList['_self']  = 'Active Window';
 $lang->nav->targetList['_blank'] = 'New Window';
 $lang->nav->targetList['modal']  = 'Popout Window';
+
+$lang->nav->dropdown = array();
+$lang->nav->dropdown['dropdown']        = 'dropdown';
+$lang->nav->dropdown['dropdown-hover']  = 'dropdownHover';

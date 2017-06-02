@@ -11,12 +11,13 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/chosen.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <?php 
 $path = explode(',', $node->path);
 js::set('path', $path);
-js::set('optionMenus', $optionMenus);
+js::set('nodeID', $node->id);
 js::set('nodeParent', $node->parent);
 
 $linkChecked = $node->link ? checked : '';
@@ -43,7 +44,7 @@ $linkChecked = $node->link ? checked : '';
           </tr>
           <tr>
             <th><?php echo $lang->book->parent;?></th>
-            <td><?php echo html::select('parent', $optionMenus[$node->book->id], $node->parent, "class='chosen form-control'");?></td>
+            <td id='parentBox'><?php echo html::select('parent', $optionMenu, $node->parent, "class='chosen form-control'");?></td>
           </tr>
           <?php endif; ?>
           <tr>
@@ -133,4 +134,3 @@ $linkChecked = $node->link ? checked : '';
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
-
