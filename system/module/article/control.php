@@ -288,6 +288,12 @@ class article extends control
      */
     public function edit($articleID, $type)
     {
+        if($type == 'book')
+        {
+            $node = $this->dao->select('*')->from(TABLE_BOOK)->where('articleID')->eq($articleID)->fetch();
+            if($node) $this->locate($this->createLink('book', 'edit', "nodeID=$node->id"));
+        }
+
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
