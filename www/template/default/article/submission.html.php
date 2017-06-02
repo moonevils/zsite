@@ -32,10 +32,14 @@
                             echo html::a($this->article->createPreviewLink($article->bookID, '', $article->type), $article->title, "target='_blank'");
                         }
                         else
+                        {
                             echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
+                        }
                     }
                     else 
+                    {
                         echo $article->title;
+                    }
                 ?>
               </td>
               <td class='text-center'><?php echo $article->editedDate;?></td>

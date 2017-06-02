@@ -4,9 +4,10 @@
 <?php $clientLang = $this->app->getClientLang(); ?>
 
 <script language='javascript'> 
+var defaultChosenOptions = {no_results_text: '<?php echo $lang->noResultsMatch;?>', width:'100%', allow_single_deselect: true, disable_search_threshold: 1, placeholder_text_single: ' ', placeholder_text_multiple: ' ', search_contains: true};
 $(document).ready(function()
 {
-    $(".chosen").chosen({no_results_text: '<?php echo $lang->noResultsMatch;?>', placeholder_text:' ', disable_search_threshold: 10, width: '100%', search_contains: true});
+    $(".chosen").chosen(defaultChosenOptions);
     $('select.chosen-icons').chosenIcons({lang: '<?php echo $clientLang; ?>'});
 });
 </script>
