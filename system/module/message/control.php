@@ -127,7 +127,7 @@ class message extends control
      * @access public
      * @return void
      */
-    public function post($type,$block='')
+    public function post($type, $block='')
     {
         $this->lang->message = $this->lang->$type;
         if($_POST)
@@ -140,10 +140,8 @@ class message extends control
             $captchaInput = $this->session->captchaInput;
             if($this->post->{$captchaInput} === false and $needCaptcha)
             {
-                if($block == "block")
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Comment(false))));
-                else
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Comment())));
+                $boolBlock = ($block != "block");
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Comment($boolBlock))));
             }
 
             $result = $this->message->post($type,$block);

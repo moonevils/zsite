@@ -45,16 +45,3 @@
   </div>
 </nav>
 
-<script>
-$(document).ready(function()
-{
-    $('li.dropdown-hover').mouseover(function()
-    {   
-        $(this).addClass('open');
-    }).mouseout(function()
-    {
-        $(this).removeClass('open');    
-    }); 
-})
-</script>
-

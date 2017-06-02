@@ -355,7 +355,6 @@ class ui extends control
             $backup = $this->loadModel('backup')->backupAll();
             if($backup['result'] != 'success')
             {
-                //$this->view->error = 'backupFail';       
                 $this->view->error = $backup['message'];       
                 die($this->display());
             }
