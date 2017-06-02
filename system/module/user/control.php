@@ -116,7 +116,7 @@ class user extends control
         {
             $this->referer = urlencode($_SERVER['HTTP_REFERER']);
         }
-        elseif(strpos($_SERVER['HTTP_REFERER'], 'register') || strpos($_SERVER['HTTP_REFERER'], 'login'))
+        elseif(RUN_MODE == "front" && (strpos($_SERVER['HTTP_REFERER'], 'register') || strpos($_SERVER['HTTP_REFERER'], 'login')))
         {
             $this->referer = $this->createLink('user', 'control');
         }
