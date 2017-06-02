@@ -45,6 +45,9 @@ $lang->book->typeList['book']    = 'Book';
 $lang->book->typeList['chapter'] = 'Chapter';
 $lang->book->typeList['article'] = 'Article';
 
+$lang->book->statusList['normal'] = 'Normal';
+$lang->book->statusList['draft']  = 'Draft';
+
 $lang->book->chapterTypeList['home'] = 'On homepage only';
 $lang->book->chapterTypeList['left'] = 'Always on the left';
 
@@ -66,3 +69,4 @@ $lang->book->confirmDelete = "<span class='text-danger'>You will delete all chap
 
 $lang->book->note = new stdclass();
 $lang->book->note->addedDate = 'You can publish it on selected date.';
+$lang->book->note->link      = 'Enter the link here. External link is OK.';
