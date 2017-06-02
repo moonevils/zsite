@@ -643,17 +643,14 @@ class articleModel extends model
      * @access public
      * @return string
      */
-    public function createPreviewLink($articleID, $viewType = '',$articleType = '')
+    public function createPreviewLink($articleID, $viewType = '', $articleType = '')
     {
         if($articleType == 'book')
         {
-            $bookModel = $this->loadModel('book');
-            $bookNode = $bookModel->getNodeByID($articleID);
+            $this->loadModel('book');
+            $bookNode = $this->book->getNodeByID($articleID);
 
-            $book = $bookNode->book->alias ? $bookNode->book->alias : $bookNode->book->title;
-            $node = $bookNode->alias ? $bookNode->alias : $bookNode->title;
-
-            $link = helper::createLink('book', 'read', "articleID=$bookNode->id", "book=$book&node=$node");
+            $link = helper::createLink('book', 'read', "articleID=$bookNode->id", "book={$bookNode->book->alias}&node={$bookNode->alias}");
             return $link;
         }
 
@@ -764,8 +761,8 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if($type == "book")
         {
-            $bookModel = $this->loadModel('book');
-            $parentNode = $bookModel->getNodeByID($categories[0]);
+            $this->loadModel('book');
+            $parentNode = $this->book->getNodeByID($categories[0]);
 
             $node = new stdclass();
             $node->parent = $parentNode ? $parentNode->id : 0;

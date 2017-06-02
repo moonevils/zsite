@@ -904,7 +904,7 @@ class uiModel extends model
         }
 
         foreach($this->directories as $path)
-        { 
+        {
             if(!is_dir($path)) return false;
         }
 

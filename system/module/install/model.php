@@ -82,10 +82,7 @@ class installModel extends model
         $tmpRoot = $this->app->getTmpRoot();
 
         $pathArray = $this->getDir($tmpRoot);
-        if(is_dir($tmpRoot) && !is_writable($tmpRoot))
-        {
-            $pathArray[] = $tmpRoot;
-        }
+        if(is_dir($tmpRoot)) $pathArray[] = $tmpRoot;
 
         $pathResult = array();
         foreach($pathArray as $path)
@@ -108,17 +105,18 @@ class installModel extends model
     public function getDir($dir)
     {
         static $arr = array();
-        if(is_dir($dir)){
+        if(is_dir($dir))
+        {
             $hadle = @opendir($dir);
-            while($file=readdir($hadle) )
+            while($file = readdir($hadle))
             {
-                if(!in_array($file,array('.','..')) )
+                if(!in_array($file, array('.', '..')))
                 {
-                    $dirr = $dir.$file."/";
+                    $dirr = $dir . $file . "/";
                     if(is_dir($dirr))
                     {
-                        array_push($arr,$dirr);
-                        $this->getDir( $dirr);
+                        array_push($arr, $dirr);
+                        $this->getDir($dirr);
                     }
                 }
             }
