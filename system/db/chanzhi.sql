@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
 -- DROP TABLE IF EXISTS `eps_book`;
 CREATE TABLE IF NOT EXISTS `eps_book` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `articleID` smallint(5) unsigned NOT NULL DEFAULT 0,
   `title` varchar(150) NOT NULL,
   `alias` varchar(100) NOT NULL,
   `keywords` varchar(150) NOT NULL,
@@ -104,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   `status` varchar(20) NOT NULL DEFAULT 'normal',
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `link` varchar(255) NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `type` (`type`),
@@ -626,6 +628,7 @@ CREATE TABLE IF NOT EXISTS `eps_wx_public` (
   `status`    enum('wait', 'normal') NOT NULL,
   `certified` enum('1', '0') NOT NULL DEFAULT '0',
   `addedDate` datetime NOT NULL,
+  `remindUsers` text NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
