@@ -85,6 +85,7 @@ $(document).ready(function()
     $(document).on('click', '.remove', function()
     {
         var navCount = $(this).parent().is('.liGrade1') && $('.navList .liGrade1').size();
+        var navGrade2Count = $(this).parent().is('.liGrade2') && $(this).parents('.ulGrade2').find('.liGrade2').size();
 
         if(navCount == 1)
         {
@@ -92,6 +93,11 @@ $(document).ready(function()
         }
         else 
         {
+            if(navGrade2Count == 1)
+            {
+                $(this).parents('.liGrade1').find("select[name='nav[1][hover][]']").addClass('hide');
+                $(this).parents('.liGrade1').find('.icon-circle, .shut').toggle();
+            }
             $(this).parent().remove();
         }
     });
