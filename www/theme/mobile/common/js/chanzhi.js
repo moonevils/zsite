@@ -307,4 +307,32 @@ $(function()
         var $row = $img.closest('.row');
         if($row.parent().hasClass('cards-products')) tidyCardsRow($row);
     })
+
+    $('.random-block-list').each(function()
+    {
+        var $random = $(this);
+        if($random.data('random-refresh')) return;
+        $random.data('random-refresh', true);
+        var sum = 0;
+        var $blocks = $random.children('.random-block');
+        $blocks.each(function()
+        { 
+            var $block = $(this).hide();
+            $block.data('probMin', sum);
+            sum += $block.data('probability');
+            $block.data('probMax', sum);
+        });
+        
+        var rand = Math.random() * sum;
+        $blocks.each(function()
+        {
+            var $block = $(this);
+            var blockData = $block.data();
+            if(rand >= blockData.probMin && rand < blockData.probMax)
+            {
+                $block.show();
+                return false;
+            }
+        });
+    });
 });
