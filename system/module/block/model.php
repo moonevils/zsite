@@ -738,9 +738,11 @@ class blockModel extends model
         $isRegion = isset($block->type) && $block->type === 'region';
         if($isRegion || !empty($block->children))
         {
+            $randomClass = !empty($block->isRandom) ? 'random-block-list' : '';
+            if(!empty($block->isRandom) && $this->app->clientDevice == 'mobile') echo "<div class='$randomClass' data-id='{$block->id}'>";
+
             if($withGrid)
             {
-                $randomClass = $block->isRandom ? 'random-block-list' : '';
                 if($block->grid == 0) echo "<div class='col col-row'><div class='row $randomClass' data-id='{$block->id}'>";
                 else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row $randomClass' data-id='{$block->id}'>";
             }
@@ -750,16 +752,18 @@ class blockModel extends model
                 foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
             }
 
+            if(!empty($block->isRandom) && $this->app->clientDevice == 'mobile') echo "</div>";
+            
             if($withGrid) echo '</div></div>';
         }
         else
         {
+            $probability = !empty($block->probability) ? "data-probability={$block->probability}" : '';
             if($withGrid)
             {
                 if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
-                    $probability = !empty($block->probability) ? "data-probability={$block->probability}" : '';
                     echo "<div class='col' $probability>";
                 }
                 else
@@ -767,6 +771,8 @@ class blockModel extends model
                     echo "<div class='col' data-grid='{$block->grid}'>";
                 }
             }
+
+            if($probability && $this->app->clientDevice == 'mobile') echo "<div class='random-block' $probability>";
 
             $device   = $this->app->clientDevice;
             $template = $this->config->template->{$device}->name;
@@ -863,6 +869,7 @@ class blockModel extends model
             echo $containerFooter;
 
             if($withGrid) echo "</div>";
+            if($probability && $this->app->clientDevice == 'mobile') echo "</div>";
         }
     }
 
