@@ -11,6 +11,7 @@ $(document).ready(function()
     function yrScroll()
     {
          if( $("#book").offset()) var headerHeight = $("#book").offset().top;
+         if( $('.col-md-9').offset()) { var footerHeight = $('.col-md-9').offset().top + $('.col-md-9').height() - $(window).height();}
 
          var listTitleHeight = $(".book-catalog .panel-heading").height();
 
@@ -39,6 +40,15 @@ $(document).ready(function()
                        "top":"0",
                        "width":"276"
                    });
+                   if($(document).scrollTop() > footerHeight)
+                   {
+                       catalogHeight2 = $(window).height() - $('.blocks.all-bottom').outerHeight() - $('#footer').outerHeight() - 60;
+                       $('.book-catalog').css({'max-height': catalogHeight2, 'overflow': 'auto'});
+                   }
+                   else
+                   {
+                       $('.book-catalog').css({'max-height': catalogHeight, 'overflow': 'auto'});
+                   }
               }
               else if( $(document).scrollTop() < headerHeight )
               {
