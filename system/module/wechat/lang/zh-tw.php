@@ -38,6 +38,7 @@ $lang->wechat->reply          = '回覆';
 $lang->wechat->commitMenu     = '菜單';
 $lang->wechat->deleteMenu     = '刪除菜單';
 $lang->wechat->messageList    = '消息';
+$lang->wechat->remind         = '消息提醒';
 
 $lang->wechat->typeList['subscribe'] = '訂閲號';
 $lang->wechat->typeList['service']   = '服務號';
@@ -128,7 +129,12 @@ $lang->wechat->placeholder->name     = '公眾號名稱';
 $lang->wechat->placeholder->account  = '請輸入gh_xxx 格式的原始ID';
 $lang->wechat->placeholder->token    = '必須為英文或數字，長度為3-32字元';
 
+$lang->wechat->mailSubject     = "來自%s的微信";
+$lang->wechat->remindUsers     = "給選中的人員發郵件";
+$lang->wechat->remindNotice    = "註：站點發信功能必須配置成功，並且所選人員的郵箱已經設置，否則無法收到郵件。";
+$lang->wechat->remindNoMail    = "站點發信功能沒有開啟，請到設置->介面->發信設置頁面配置發信。";
 $lang->wechat->curlSSLRequired = "微信公眾號功能需要curl模組，並支持ssl加密傳輸。";
+$lang->wechat->opensslRequired = "微信公眾號功能需要openssl模組，請開啟PHP該模組。";
 $lang->wechat->needCertified   = "此功能需要公眾號認證後使用。";
 $lang->wechat->integrateInfo   = "請到微信的公眾平台完成接入，以獲取appID和appSecret信息。 <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>幫助</a>";
 $lang->wechat->integrateDone   = "已完成接入";
