@@ -21,7 +21,7 @@ $lang->book->inputArticleTitle = '請輸入文章標題';
 $lang->book->id          = '編號';
 $lang->book->type        = '類型';
 $lang->book->status      = '狀態';
-$lang->book->link        = '鏈接';
+$lang->book->link        = '連結';
 $lang->book->isLink      = '跳轉';
 $lang->book->parent      = '章節';
 $lang->book->author      = '作者';
@@ -45,6 +45,9 @@ $lang->book->typeList['book']    = '手冊';
 $lang->book->typeList['chapter'] = '章節';
 $lang->book->typeList['article'] = '文章';
 
+$lang->book->statusList['normal'] = '正常';
+$lang->book->statusList['draft']  = '草稿';
+
 $lang->book->chapterTypeList['home'] = '只在首頁顯示';
 $lang->book->chapterTypeList['left'] = '一直顯示在左側';
 
@@ -66,3 +69,4 @@ $lang->book->confirmDelete = "<span class='text-danger'>此操作將刪除該手
 
 $lang->book->note = new stdclass();
 $lang->book->note->addedDate = '可以延遲到選定的時間發佈。';
+$lang->book->note->link      = '請輸入連結，可以是站外連結';
