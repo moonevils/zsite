@@ -43,9 +43,7 @@
         {
             echo "<li class='liGrade1'>";
 
-            $hover = false;
-            if(isset($nav->children) && sizeof($nav->children)) $hover = true;
-
+            $hover = (isset($nav->children) && sizeof($nav->children));
             echo $this->nav->createEntry(1, $nav, $type, $hover);
             echo "<ul class='ulGrade2 hide'>";
             if(isset($nav->children))

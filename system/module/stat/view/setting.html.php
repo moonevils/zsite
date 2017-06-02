@@ -30,7 +30,7 @@
           <th><?php echo $lang->stat->maxDays;?></th> 
           <td>
             <div class='input-group'>
-              <?php echo html::input('maxDays', isset($this->config->stat->maxDays) ? $this->config->stat->maxDays : '365', "class='form-control'");?>
+              <?php echo html::input('maxDays', $this->config->stat->maxDays, "class='form-control'");?>
               <span class='input-group-addon'><?php echo $lang->date->day;?></span>
             </div>
           </td>

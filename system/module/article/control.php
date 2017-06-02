@@ -265,20 +265,15 @@ class article extends control
         $this->lang->menuGroups->article = 'submission';
 
         $this->loadModel('book');
-        $bookList  = $this->book->getBookPairs();
-        $bookCatalogs = array();
-        foreach($bookList as $bookID => $bookTitle)
-        {
-            $bookCatalog = $this->book->getOptionMenu($bookID, $removeRoot = true);
-            $bookCatalogs[$bookID] = $bookCatalog;
-        }
+        $bookList = $this->book->getBookPairs();
+        $bookCatalog = $this->book->getOptionMenu(key($bookList), $removeRoot = true);
 
         $this->view->title             = $this->lang->submission->check;
         $this->view->article           = $this->article->getByID($id);
         $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->blogCategories    = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
         $this->view->bookList          = $bookList;
-        $this->view->bookCatalogs      = $bookCatalogs;
+        $this->view->bookCatalog       = $bookCatalog;
 
         $this->display();
     }

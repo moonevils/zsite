@@ -64,12 +64,11 @@
       </tr>
       <tr class='trBook'>
         <th class='w-100px'><?php echo $lang->book->common;?></th>
-        <td class='w-p40'><?php echo html::select("bookList", $bookList, '', "class='form-control'");?></td>
+        <td class='w-p40'><?php echo html::select("bookList", $bookList, '', "class='form-control chosen'");?></td>
       </tr>
       <tr class='trBook'>
         <th class='w-100px'><?php echo $lang->book->catalog;?></th>
-        <?php $bookIDs = array_keys($bookList)?>
-        <td class='w-p40'><?php echo html::select("bookCatalogs", $bookCatalogs[$bookIDs[0]], '', "class='form-control'");?></td>
+        <td class='w-p40' id='bookCatalogBox'><?php echo html::select("bookCatalogs", $bookCatalog, '', "class='form-control chosen'");?></td>
       </tr>
       <tr>
         <th></th><td colspan='2'><?php echo html::submitButton($lang->submission->publish) . html::a(inlink('reject', "id={$article->id}"), $lang->submission->reject, "class='btn btn-warning rejecter'");?></td>
