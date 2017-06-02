@@ -63,7 +63,7 @@ class bookModel extends model
      */
     public function getFirstBook()
     {
-        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->limit(1)->fetch();
+        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`, id')->limit(1)->fetch();
     }
 
     /**
@@ -74,7 +74,7 @@ class bookModel extends model
      */
     public function getBookList()
     {
-        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`, id')->fetchAll('id');
     }
 
     /**
@@ -85,7 +85,7 @@ class bookModel extends model
      */
     public function getBookPairs()
     {
-        return $this->dao->select('id, title')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->fetchPairs();
+        return $this->dao->select('id, title')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`, id')->fetchPairs();
     }
 
     /**
@@ -142,7 +142,7 @@ class bookModel extends model
             ->where('path')->like("{$node->path}%")
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('status')->eq('normal')
-            ->orderBy('grade_desc,`order`')
+            ->orderBy('grade_desc,`order`, id')
             ->fetchGroup('parent');
 
         $book = $node->type == 'book' ? zget(end($nodeList), '0', '') : $this->getBookByNode($node);
@@ -280,7 +280,7 @@ class bookModel extends model
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('status')->eq('normal')
             ->fi()
-            ->orderBy('grade, `order`')
+            ->orderBy('grade, `order`, id')
             ->fetchAll('id');
 
         /* Group them by their parent. */
@@ -346,7 +346,7 @@ class bookModel extends model
      */
     public function getChildren($nodeID)
     {
-        return $this->dao->select('*')->from(TABLE_BOOK)->where('parent')->eq($nodeID)->orderBy('`order`')->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_BOOK)->where('parent')->eq($nodeID)->orderBy('`order`, id')->fetchAll('id');
     }
 
     /**
@@ -363,7 +363,7 @@ class bookModel extends model
             ->where('path')->like("%,{$current->book->id},%")
             ->andWhere('status')->eq('normal')
             ->andWhere('addedDate')->le(helper::now())
-            ->orderBy('`order`')
+            ->orderBy('`order`, id')
             ->fetchGroup('parent', 'id');
 
         $allNodes = $this->dao->select('*')->from(TABLE_BOOK)
@@ -489,7 +489,7 @@ class bookModel extends model
         return $this->dao->select('*')->from(TABLE_BOOK)
             ->where('type')->ne('article')
             ->beginIF($startPath)->andWhere('path')->like($startPath)->fi()
-            ->orderBy('grade desc, `order`')
+            ->orderBy('grade desc, `order`, id')
             ->get();
     }
 

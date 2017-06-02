@@ -50,6 +50,7 @@ $linkChecked = $node->link ? checked : '';
           <tr>
             <th><?php echo $lang->book->title;?></th>
             <td colspan='2'>
+              <div class='required required-wrapper'></div>  
               <div class='row order'>
                 <div class="col-sm-<?php echo $node->type == 'book' ? '9' : '12';?>">
                   <div class="input-group">
