@@ -1,20 +1,20 @@
 $(document).ready(function()
 {
     $('.blogTD').hide();
-    $('tr#trBook').hide();
+    $('tr.trBook').hide();
 
     $('[name=type]').change(function()
     {
         type = $(this).val();
         if(type == 'book')
         {
-            $('tr#trAB').hide();
-            $('tr#trBook').show();
+            $('tr#categories').hide();
+            $('tr.trBook').show();
         }
         else
         {
-            $('tr#trAB').show();
-            $('tr#trBook').hide();
+            $('tr#categories').show();
+            $('tr.trBook').hide();
 
             $('.articleTD, .blogTD').hide();
             $('.' + type + 'TD').show();

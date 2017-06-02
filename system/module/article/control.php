@@ -264,12 +264,12 @@ class article extends control
         unset($this->lang->article->menu);
         $this->lang->menuGroups->article = 'submission';
 
-        $bookModel = $this->loadModel('book');
-        $bookList  = $bookModel->getBookPairs();
+        $this->loadModel('book');
+        $bookList  = $this->book->getBookPairs();
         $bookCatalogs = array();
         foreach($bookList as $bookID => $bookTitle)
         {
-            $bookCatalog = $bookModel->getOptionMenu($bookID, $removeRoot = true);
+            $bookCatalog = $this->book->getOptionMenu($bookID, $removeRoot = true);
             $bookCatalogs[$bookID] = $bookCatalog;
         }
 
@@ -539,7 +539,6 @@ class article extends control
 
         $this->view->title        = $this->lang->user->submission;
         $this->view->articles     = $articles;
-        $this->view->bookArticles = $bookArticles;
         $this->view->pager        = $pager;
         $this->view->orderBy      = $orderBy;
 

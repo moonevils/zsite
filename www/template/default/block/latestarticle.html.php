@@ -42,21 +42,21 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php 
-          $blockCntent = json_decode($block->content);
-          $blockCategories = '';
-          if(isset($blockCntent->category)) $blockCategories = $blockCntent->category;
+        $blockContent    = json_decode($block->content);
+        $blockCategories = '';
+        if(isset($blockContent->category)) $blockCategories = $blockContent->category;
 
-          $cName = '';
-          foreach($article->categories as $id => $categorie)
-          {
-              if(strpos($blockCategories,(string)$id) !== false) 
-              {
-                  $cName = $categorie->name;
-                  break;
-              }
-          }
+        $categoryName = '';
+        foreach($article->categories as $id => $category)
+        {
+            if(strpos(",$blockCategories,", ",$id,") !== false) 
+            {
+                $categoryName = $category->name;
+                break;
+            }
+        }
         ?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $cName) . '] ';?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] ';?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
         <?php else:?>
         <?php echo '[' . $article->category->name . '] ';?>
@@ -102,21 +102,21 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php 
-          $blockCntent = json_decode($block->content);
-          $blockCategories = '';
-          if(isset($blockCntent->category)) $blockCategories = $blockCntent->category;
+        $blockContent    = json_decode($block->content);
+        $blockCategories = '';
+        if(isset($blockContent->category)) $blockCategories = $blockContent->category;
 
-          $cName = '';
-          foreach($article->categories as $id => $categorie)
-          {
-              if(strpos($blockCategories,(string)$id) !== false) 
-              {
-                  $cName = $categorie->name;
-                  break;
-              }
-          }
+        $categoryName = '';
+        foreach($article->categories as $id => $categorie)
+        {
+            if(strpos(",$blockCategories,", ",$id,") !== false) 
+            {
+                $categoryName = $categorie->name;
+                break;
+            }
+        }
         ?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $cName) . '] ';?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] ';?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
         <?php else:?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
@@ -132,21 +132,21 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php 
-          $blockCntent = json_decode($block->content);
-          $blockCategories = '';
-          if(isset($blockCntent->category)) $blockCategories = $blockCntent->category;
+        $blockCntent     = json_decode($block->content);
+        $blockCategories = '';
+        if(isset($blockCntent->category)) $blockCategories = $blockCntent->category;
 
-          $cName = '';
-          foreach($article->categories as $id => $categorie)
-          {
-              if(strpos($blockCategories,(string)$id) !== false) 
-              {
-                  $cName = $categorie->name;
-                  break;
-              }
-          }
+        $categoryName = '';
+        foreach($article->categories as $id => $categorie)
+        {
+            if(strpos(",$blockCategories,", ",$id,") !== false) 
+            {
+                $categoryName = $categorie->name;
+                break;
+            }
+        }
         ?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $cName) . '] ';?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] ';?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
         <?php else:?>
         <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>

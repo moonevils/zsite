@@ -191,18 +191,5 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
     </div>
   </nav>
 
-<script>
-$(document).ready(function()
-{
-    $('li.dropdown-hover').mouseover(function()
-    {   
-        $(this).addClass('open');
-    }).mouseout(function()
-    {
-        $(this).removeClass('open');    
-    }); 
-})
-</script>
-
   <div class='page-wrapper'>
     <div class='page-content'>
