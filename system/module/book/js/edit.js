@@ -6,8 +6,7 @@ $(document).ready(function()
         $.get(createLink('book', 'ajaxGetModules', 'bookID=' + bookID + '&nodeID=' + v.nodeID), function(data)
         {
             $('#parentBox').html(data);
-            $('#parent').val(v.nodeParent);
-            $('#parent').chosen(defaultChosenOptions);
+            $('#parent').val(v.nodeParent).chosen(defaultChosenOptions);
         })
     });
 

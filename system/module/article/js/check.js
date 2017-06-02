@@ -23,13 +23,12 @@ $(document).ready(function()
 
     $('select#bookList').change(function()
     {   
-        var bookID=$(this).children('option:selected').val();
-        $('select#bookCatalogs').empty();
-
-        $.each(v.bookCatalogs[bookID],function(index,value)
-        {   
-            $('select#bookCatalogs').append("<option value=\"" + index + "\">" + value + "</option>");
-        })  
+        var bookID=$(this).val();
+        $.get(createLink('book', 'ajaxGetModules', 'bookID=' + bookID), function(data)
+        {
+            $('#bookCatalogBox').html(data);
+            $('#bookCatalogBox select').attr('name', 'bookCatalogs').attr('id', 'bookCatalogs').chosen(defaultChosenOptions);
+        });
     }); 
 
     $('#source').change();
