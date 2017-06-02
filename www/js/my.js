@@ -95,4 +95,13 @@ $(document).ready(function()
         var $e = $(this).addClass('tree-lines');
         $e.tree({initialState: $e.data('initialState') || 'preserve', name: config.currentModule + '-' + config.currentMethod + '-' + $e.data('type')});
     });
+
+    // nav dropdown-hover
+    $('.nav li.dropdown-hover').mouseover(function()
+    {   
+        $(this).addClass('open');
+    }).mouseout(function()
+    {
+        $(this).removeClass('open');    
+    }); 
 });
