@@ -332,6 +332,14 @@ class book extends control
         $this->display();
     }
 
+    /**
+     * Ajax get modules.
+     * 
+     * @param  int    $bookID 
+     * @param  int    $nodeID 
+     * @access public
+     * @return void
+     */
     public function ajaxGetModules($bookID, $nodeID = 0)
     {
         $node = '';
