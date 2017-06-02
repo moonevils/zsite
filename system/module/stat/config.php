@@ -12,4 +12,4 @@ $config->stat->monthLabels = array('00', '01', '02', '03', '04', '05', '06', '07
 
 $config->stat->chartColors = array('green', 'blue', 'red', '#F1A325', '#8666B8', '#333333', '#F745C1', '#EAF210', '#EDEDED', '#9A3AAD', '#34A4A8');
 
-$config->stat->maxDays = 365;
+$config->stat->maxDays = 60;

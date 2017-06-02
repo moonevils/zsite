@@ -112,7 +112,7 @@ class navModel extends model
      * @param array $nav
      * @return string
      */
-    public function createEntry($grade = 1, $nav = null, $type = 'desktop_top',$hover = false)
+    public function createEntry($grade = 1, $nav = null, $type = 'desktop_top', $hover = false)
     {
         if(empty($nav))
         {
@@ -179,7 +179,7 @@ class navModel extends model
         $entry .= html::select("nav[$grade][target][]", $this->lang->nav->targetList, isset($nav->target) ? $nav->target : '_self', "class='form-control'");
 
         /* hover select */
-        if($type == 'desktop_top' || $type == 'desktop_blog') 
+        if($type == 'desktop_top' || $type == 'desktop_blog')
         {
             $entry .= html::select("nav[$grade][hover][]", $this->lang->nav->dropdown, isset($nav->hover) ? $nav->hover : '', "class='form-control {$hoverHidden}'");
         }

@@ -232,21 +232,15 @@ class book extends control
 
         $node = $this->book->getNodeByID($nodeID, false);
         $book = $node->book;
-        $bookList = $this->book->getBookPairs();
 
-        $optionMenus = array();
-        foreach($bookList as $bookID => $bookTitle)
-        {
-            /* Get option menu without this node's family nodes. */
-            $optionMenu = $this->book->getOptionMenu($bookID, $removeRoot = true);
-            $families   = $this->book->getFamilies($node);
-            foreach($families as $member) unset($optionMenu[$member->id]);
-            $optionMenus[$bookID] = $optionMenu;
-        }
+        $bookList   = $this->book->getBookPairs();
+        $optionMenu = $this->book->getOptionMenu($book->id, $removeRoot = true);
+        $families   = $this->book->getFamilies($node);
+        foreach($families as $member) unset($optionMenu[$member->id]);
 
         $this->view->title      = $this->lang->edit . $this->lang->book->typeList[$node->type];
         $this->view->node       = $node;
-        $this->view->optionMenus = $optionMenus;
+        $this->view->optionMenu = $optionMenu;
         $this->view->bookList   = $bookList;
         $this->display();
     }
@@ -337,4 +331,18 @@ class book extends control
         $this->view->bookList  = $this->book->getBookPairs();
         $this->display();
     }
-}    
+
+    public function ajaxGetModules($bookID, $nodeID = 0)
+    {
+        $node = '';
+        if($nodeID) $node = $this->book->getNodeByID($nodeID, false);
+
+        $optionMenu = $this->book->getOptionMenu($bookID, $removeRoot = true);
+        if($node and $bookID == $node->book->id)
+        {
+            $families   = $this->book->getFamilies($node);
+            foreach($families as $member) unset($optionMenu[$member->id]);
+        }
+        die(html::select('parent', $optionMenu, '', "class='form-control'"));
+    }
+}

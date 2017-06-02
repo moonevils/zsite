@@ -44,7 +44,9 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
           <div class='card-content text-muted small'>
               <?php echo helper::substr($article->summary, 40, '...');?>
               <div><span title="<?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?>"><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder;?></span>
-                <?php if(isset($article->comments)):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
+                <?php if(isset($article->comments)):?>
+                &nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;
+                <?php endif;?>
                 &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span></div>
           </div>
 

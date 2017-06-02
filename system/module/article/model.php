@@ -791,18 +791,15 @@ class articleModel extends model
             $bookArticle = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
             $this->loadModel('search')->save("article", $bookArticle);
 
-            $articeFileIDs = $this->dao->select('id')->from(TABLE_FILE)->where('objectID')->eq($articleID)->fetchPairs('id');
-            $uid = uniqid();
-            $_SESSION['album'][$uid] = array_keys($articeFileIDs);
-            $this->loadModel('file')->updateObjectID($uid, $nodeID, 'book');
+            $this->dao->update(TABLE_FILE)->set('objectType')->eq('book')->set('objectID')->eq($nodeID)->where('objectID')->eq($articleID)->andWhere('objectType')->eq('article')->exec();
         }
         else
         {
             $this->loadModel('search')->save($type, $article);
             $this->loadModel('file')->updateObjectType($articleID, 'submission', $type);
+            $this->processCategories($articleID, $type, $categories);
         }
 
-        $this->processCategories($articleID, $type, $categories);
         $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submission')->eq(2)->where('id')->eq($articleID)->exec();
 
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmission', 'article', $articleID, '', $article->addedBy);
