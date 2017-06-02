@@ -114,6 +114,7 @@ $('#uploader').uploader(
         $status.find('.text').text(status == 'uploading' ? (file.percent + '%') : ((status == 'failed') ? that.lang[status] : ''));
         $file.find('a.btn-download-file, a.file-name').attr('href', downloadUrl);
         if($.fn.tooltip) $file.find('[data-toggle="tooltip"]').tooltip('fixTitle');
+        sortFile();
     },
     deleteConfirm: true,
     deleteActionOnDone: function(file, doDelete)
@@ -160,5 +161,36 @@ $('#uploader').uploader(
     });
 
 });
+
+function sortFile()
+{
+    $('.file-list').sortable(
+    {
+        trigger: '.icon-move',
+        selector: '.file-list .file',
+        finish: function()
+        {
+            var orders = {};     
+            var orderNext = 1;
+            $('.file-list .file').each(function()
+            {
+                orders[$(this).data('id')] = orderNext ++;
+            });
+
+             $.post(createLink('file', 'sort'), orders, function(data)
+             {
+                 if(data.result == 'success')
+                 {
+                     $('#ajaxModal').load($('#ajaxModal').attr('ref'));
+                 }
+                 else
+                 {
+                     alert(data.message);
+                     return location.reload(); 
+                 }
+             }, 'json');
+        }
+    });
+}
 </script>
 <?php include '../../common/view/footer.modal.html.php';?>
