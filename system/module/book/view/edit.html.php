@@ -78,7 +78,7 @@ js::set('linkChecked',$linkChecked);
             <th><?php echo $lang->book->link;?></th>
             <td colspan='2'>
               <div class='required required-wrapper'></div>
-              <?php echo html::input('link', $node->link, "class='form-control' placeholder='{$lang->book->placeholder->link}'");?>
+              <?php echo html::input('link', $node->link, "class='form-control' placeholder='{$lang->book->note->link}'");?>
             </td>
           </tr>
           <tr id='isLinked'>

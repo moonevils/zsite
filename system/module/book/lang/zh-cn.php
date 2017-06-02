@@ -69,7 +69,4 @@ $lang->book->confirmDelete = "<span class='text-danger'>此操作将删除该手
 
 $lang->book->note = new stdclass();
 $lang->book->note->addedDate = '可以延迟到选定的时间发布。';
-
-$lang->book->placeholder  = new stdclass();
-$lang->book->placeholder->link = '请输入链接，可以是站外链接';
-
+$lang->book->note->link      = '请输入链接，可以是站外链接';
