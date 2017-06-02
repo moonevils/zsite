@@ -139,7 +139,7 @@ class navModel extends model
         $hoverHidden   = $hover ? '' : 'hide'; 
 
         $entry = '<i class="icon-folder-open-alt shut"></i><i class="icon icon-circle text-muted"></i>';
-        if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i>';
+        if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i><i class="icon icon-circle text-muted"></i>';
         if(zget($this->config->site, 'type') == 'blog')
         {
             $this->lang->nav->system->blog = $this->lang->home;
