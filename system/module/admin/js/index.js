@@ -1,12 +1,6 @@
 $(document).ready(function()
 {
     $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
-
-    var $notice = $('#upgradeNotice');
-    if($notice.length)
-    {
-        $notice.hide();
-    }
 });
 
 
