@@ -83,7 +83,7 @@
 </form>
 <?php endif;?>
 <?php if(!$ignoreUpgrade):?>
-<div class='alert alert-success' id='upgradeNotice'>
+<div class='alert alert-success hide' id='upgradeNotice'>
   <div>
     <?php echo $lang->newVersion;?>
     <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
