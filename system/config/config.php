@@ -25,6 +25,7 @@ $config->framework->jsWithPrefix   = true;  // js::set()输出的时候是否增
 $config->framework->filterBadKeys  = true;  // 是否过滤不合要求的键值。          Whether filter bad keys or not.
 $config->framework->filterTrojan   = true;  // 是否过滤木马攻击代码。            Whether strip trojan code or not.
 $config->framework->filterXSS      = true;  // 是否过滤XSS攻击代码。             Whether strip xss code or not.
+$config->framework->filterParam    = 2;     // 是否开启过滤参数功能。            Whether strip param or not.
 $config->framework->purifier       = true;  // 是否对数据做purifier处理。        Whether purifier data or not.
 $config->framework->logDays        = 14;    // 日志文件保存的天数。              The days to save log files.
 
@@ -167,6 +168,35 @@ $config->file = new stdclass();
 $config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm'; // Dangerous file types.
 $config->file->allowed = ',txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm,csv,jpg,jpeg,png,psd,gif,ico,bmp,swf,avi,rmvb,rm,mp3,mp4,3gp,flv,mov,movie,rar,zip,bz,bz2,tar,gz,'; // Allowed file types.
 $config->file->maxSize = 2 * 1024 * 1024;  // Max size allowed(Byte).
+
+/* 配置参数过滤。Filter param settings. */
+/* Like $config->filterParam->param[moduleName][methodname][ruleType] = rule. */
+$config->filterParam = new stdclass();
+$config->filterParam->badKeys = '[^a-zA-Z0-9_\.]'; 
+$config->filterParam->module['reg'] = '/^[a-zA-Z0-9]+$/';
+$config->filterParam->method['common']['reg'] = '/^[a-zA-Z0-9]+$/';
+$config->filterParam->param['common']['name']['reg']  = '/^[a-zA-Z0-9_\.]+$/';
+$config->filterParam->param['common']['value']['reg'] = '/^[a-zA-Z0-9=_,`#+\^\/\.%\|\x7f-\xff]+$/';
+
+$config->filterParam->get['common']['hold'] = 'onlybody,HTTP_X_REQUESTED_WITH,recTotal,recPerPage,pageID,searchWord,categoryID,fullScreen,key';
+$config->filterParam->get['common']['params']['onlybody']['reg']                = '/^yes$|^no$/';
+$config->filterParam->get['common']['params']['HTTP_X_REQUESTED_WITH']['equal'] = 'XMLHttpRequest';
+$config->filterParam->get['common']['params']['recTotal']['reg']                = '/^[0-9]+$/';
+$config->filterParam->get['common']['params']['recPerPage']['reg']              = '/^[0-9]+$/';
+$config->filterParam->get['common']['params']['pageID']['reg']                  = '/^[0-9]+$/';
+$config->filterParam->get['common']['params']['searchWord']['reg']              = '/./';
+$config->filterParam->get['common']['params']['categoryID']['reg']              = '/^[0-9]+$/';
+$config->filterParam->get['common']['params']['fullScreen']['reg']              = '/^[0-9]+$/';
+$config->filterParam->get['common']['params']['key']['reg']                     = '/^[a-zA-Z0-9=_\-]+$/';
+
+$config->filterParam->cookie['common']['hold'] = 'adminLang,cart,currentGroup,device,lang,validate,cmts,vid,r,t,referer'; 
+$config->filterParam->cookie['common']['params']['adminLang']['reg']    = '/^[a-zA-Z\-]+$/'; 
+$config->filterParam->cookie['common']['params']['cart']['reg']         = '/./'; 
+$config->filterParam->cookie['common']['params']['currentGroup']['reg'] = '/^[a-zA-Z]+$/'; 
+$config->filterParam->cookie['common']['params']['device']['reg']       = '/^[a-zA-Z]+$/'; 
+$config->filterParam->cookie['common']['params']['lang']['reg']         = '/^[a-zA-Z\-]+$/'; 
+
+$config->filterParam->session['common']['hold'] = ''; 
 
 /*Thanks list*/
 $config->thanksList['IPIP.NET']            = 'http://www.ipip.net/';
