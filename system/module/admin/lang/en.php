@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 $lang->admin->common        = 'Admin';
 $lang->admin->index         = 'Home';
 $lang->admin->checked       = 'Checked';
@@ -21,23 +21,23 @@ $lang->admin->feedback     = 'New Feedback';
 $lang->admin->adminEntry     = 'Warning! The admin entry is admin.php. Please rename it for security reasons.';
 
 $lang->admin->connectApiFail = "Can't connect to the chanzhi community, please <a href='javascritp:loaction.reload()'>retry</a> after check the internet connection.";
-$lang->admin->registerInfo   = "The site has binded the account with Changer %s, %s";
+$lang->admin->registerInfo   = "The site has binded to Zsite %s, %s";
 $lang->admin->registerPage   = 'Register Page';
 $lang->admin->rebind         = "Rebind";
-$lang->admin->bindedInfo     = 'Chanzhi Account Info';
+$lang->admin->bindedInfo     = 'ZSite Account';
 
-$lang->js->confirmRebind = "Are you sure to rebind the account of Changer?";
+$lang->js->confirmRebind = "Are you sure to rebind the account of Zsite?";
 
 $lang->admin->register = new stdclass();
-$lang->admin->register->common     = 'The page registering account of Changer';
-$lang->admin->register->caption    = 'Register Changer account';
+$lang->admin->register->common     = 'The page is to register with Zsite.';
+$lang->admin->register->caption    = 'Register';
 $lang->admin->register->lblAccount = 'Only letters and numbers are allowed. ';
 $lang->admin->register->lblPasswd  = 'Only letters and numbers are allowed. ';
 $lang->admin->register->submit     = 'Submit';
-$lang->admin->register->success    = "Submit success";
+$lang->admin->register->success    = "Submitted.";
 $lang->admin->register->update     = "Update information";
 
 $lang->admin->bind = new stdclass();
-$lang->admin->bind->caption = 'The account of Changer';
+$lang->admin->bind->caption = 'Zsite Account';
 $lang->admin->bind->submit  = 'Bind account';
 $lang->admin->bind->success = "Bind account successfully";
