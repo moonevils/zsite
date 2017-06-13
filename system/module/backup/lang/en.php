@@ -18,7 +18,7 @@ $lang->backup->size  = 'Size';
 $lang->backup->waitting       = '<span id="backupType"></span>Processing. Please wait...';
 $lang->backup->confirmDelete  = 'Do you want to delete the backup?';
 $lang->backup->confirmRestore = 'Do you want to restore the backup?';
-$lang->backup->holdDays       = 'last %s days backup';
+$lang->backup->holdDays       = ' backup last %s days';
 
 $lang->backup->success = new stdclass();
 $lang->backup->success->backup  = 'Done!';
