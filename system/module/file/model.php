@@ -389,7 +389,7 @@ class fileModel extends model
         foreach($files as $id => $file)
         {   
             if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
-            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
+            if(stripos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
             {
                 if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'] . '.txt')) return false;
                 $file['pathname'] .= '.txt';
@@ -721,7 +721,7 @@ class fileModel extends model
 
             $realPathName = $this->savePath . $fileInfo->pathname;
             $imageSize    = array('width' => 0, 'height' => 0);
-            if(strpos($this->config->file->allowed, ',' . $extension . ',') === false)
+            if(stripos($this->config->file->allowed, ',' . $extension . ',') === false)
             {
                 if(!move_uploaded_file($file['tmpname'], $this->savePath . $fileInfo->pathname . '.txt')) return false;
                 $fileInfo->pathname .= '.txt';

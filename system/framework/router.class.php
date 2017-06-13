@@ -333,6 +333,7 @@ class router extends baseRouter
                 }
             }
         }
+
         parent::loadModule();
     }
 
