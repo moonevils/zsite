@@ -448,7 +448,7 @@ class fileModel extends model
 
         $uploadedFile = $this->savePath . $file['pathname'];
         $gbkName      = function_exists('iconv') ? iconv('utf-8', 'gbk', $file['title']) : $file['title'];
-        $tmpFile      = dirname($file['tmpname']) . DS . md5(uniqid()) . DS . $gbkName . '.' . $file['extension'];
+        $tmpFile      = $this->app->getCacheRoot() . DS . md5(uniqid()) . DS . $gbkName . '.' . $file['extension'];
 
         mkdir(dirname($tmpFile));
         copy($uploadedFile, $tmpFile);
