@@ -11,5 +11,4 @@ $config->thread->require->post = 'title, content';
 $config->thread->require->edit = 'title, content';
 $config->thread->require->link = 'title, link';
 
-$config->filterParam->cookie['thread']['common']['hold'] = 't';
-$config->filterParam->cookie['thread']['common']['params']['t']['reg'] = '/^[0-9,]+$/'; 
+$config->filterParam->cookie['thread']['common']['t']['reg'] = '/^[0-9,]+$/'; 

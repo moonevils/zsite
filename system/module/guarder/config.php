@@ -8,5 +8,4 @@ $config->guarder->captchaTags[] = "<em class='label label-danger'>|</em>";
 $config->guarder->require = new stdclass();
 $config->guarder->require->addblacklist = 'identity';
 
-$config->filterParam->cookie['guarder']['validate']['hold'] = 'validate';
-$config->filterParam->cookie['guarder']['validate']['params']['validate']['reg'] = '/^[a-zA-Z]+$/'; 
+$config->filterParam->cookie['guarder']['validate']['validate']['reg'] = '/^[a-zA-Z]+$/'; 

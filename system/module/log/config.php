@@ -976,5 +976,4 @@ $config->searchEngine->domains = array (
         'www.zxuso.com' => 'zxuso',
     );
 
-$config->filterParam->cookie['log']['record']['hold'] = 'vid';
-$config->filterParam->cookie['log']['record']['params']['vid']['reg'] = '/^[0-9]+$/'; 
+$config->filterParam->cookie['log']['record']['vid']['reg'] = '/^[0-9]+$/'; 

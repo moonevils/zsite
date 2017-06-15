@@ -14,6 +14,5 @@ $config->stat->chartColors = array('green', 'blue', 'red', '#F1A325', '#8666B8',
 
 $config->stat->maxDays = 60;
 
-$config->filterParam->get['stat']['common']['hold'] = 'begin,end';
-$config->filterParam->get['stat']['common']['params']['begin']['reg'] = '/^[0-9\-]+$/';
-$config->filterParam->get['stat']['common']['params']['end']['reg']   = '/^[0-9\-]+$/';
+$config->filterParam->get['stat']['common']['begin']['reg'] = '/^[0-9\-]+$/';
+$config->filterParam->get['stat']['common']['end']['reg']   = '/^[0-9\-]+$/';
