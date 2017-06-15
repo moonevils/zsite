@@ -48,8 +48,7 @@ $config->search->fields->book->addedDate  = 'addedDate';
 $config->search->fields->book->editedDate = 'editedDate';
 $config->search->fields->book->params     = 'book,alias';
 
-$config->filterParam->get['search']['index']['hold'] = 'words';
-$config->filterParam->get['search']['index']['params']['words']['reg'] = '/./';
+$config->filterParam->get['search']['index']['words']['reg'] = '/./';
 
 /* Set the recPerPage of search. */
 $config->search->recPerPage = 10;

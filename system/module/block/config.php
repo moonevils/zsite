@@ -58,5 +58,4 @@ $config->block->defaultMoreUrl['latestThread']  = '';
 $config->block->defaultMoreUrl['about']         = commonModel::createFrontLink('company', 'index');
 $config->block->defaultMoreUrl['contact']       = commonModel::createFrontLink('company', 'index');
 
-$config->filterParam->get['block']['edit']['hold'] = 'type';
-$config->filterParam->get['block']['edit']['params']['type']['reg'] = '/^[a-zA-Z]+$/';
+$config->filterParam->get['block']['edit']['type']['reg'] = '/^[a-zA-Z]+$/';

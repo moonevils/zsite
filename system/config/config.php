@@ -178,25 +178,21 @@ $config->filterParam->method['common']['reg'] = '/^[a-zA-Z0-9]+$/';
 $config->filterParam->param['common']['name']['reg']  = '/^[a-zA-Z0-9_\.]+$/';
 $config->filterParam->param['common']['value']['reg'] = '/^[a-zA-Z0-9=_,`#+\^\/\.%\|\x7f-\xff]+$/';
 
-$config->filterParam->get['common']['hold'] = 'onlybody,HTTP_X_REQUESTED_WITH,recTotal,recPerPage,pageID,searchWord,categoryID,fullScreen,key';
-$config->filterParam->get['common']['params']['onlybody']['reg']                = '/^yes$|^no$/';
-$config->filterParam->get['common']['params']['HTTP_X_REQUESTED_WITH']['equal'] = 'XMLHttpRequest';
-$config->filterParam->get['common']['params']['recTotal']['reg']                = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['recPerPage']['reg']              = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['pageID']['reg']                  = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['searchWord']['reg']              = '/./';
-$config->filterParam->get['common']['params']['categoryID']['reg']              = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['fullScreen']['reg']              = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['key']['reg']                     = '/^[a-zA-Z0-9=_\-]+$/';
+$config->filterParam->get['common']['onlybody']['reg']                = '/^yes$|^no$/';
+$config->filterParam->get['common']['HTTP_X_REQUESTED_WITH']['equal'] = 'XMLHttpRequest';
+$config->filterParam->get['common']['recTotal']['reg']                = '/^[0-9]+$/';
+$config->filterParam->get['common']['recPerPage']['reg']              = '/^[0-9]+$/';
+$config->filterParam->get['common']['pageID']['reg']                  = '/^[0-9]+$/';
+$config->filterParam->get['common']['searchWord']['reg']              = '/./';
+$config->filterParam->get['common']['categoryID']['reg']              = '/^[0-9]+$/';
+$config->filterParam->get['common']['fullScreen']['reg']              = '/^[0-9]+$/';
+$config->filterParam->get['common']['key']['reg']                     = '/^[a-zA-Z0-9=_\-]+$/';
 
-$config->filterParam->cookie['common']['hold'] = 'adminLang,cart,currentGroup,device,lang,validate,cmts,vid,r,t,referer'; 
-$config->filterParam->cookie['common']['params']['adminLang']['reg']    = '/^[a-zA-Z\-]+$/'; 
-$config->filterParam->cookie['common']['params']['cart']['reg']         = '/./'; 
-$config->filterParam->cookie['common']['params']['currentGroup']['reg'] = '/^[a-zA-Z]+$/'; 
-$config->filterParam->cookie['common']['params']['device']['reg']       = '/^[a-zA-Z]+$/'; 
-$config->filterParam->cookie['common']['params']['lang']['reg']         = '/^[a-zA-Z\-]+$/'; 
-
-$config->filterParam->session['common']['hold'] = ''; 
+$config->filterParam->cookie['common']['adminLang']['reg']    = '/^[a-zA-Z\-]+$/'; 
+$config->filterParam->cookie['common']['cart']['reg']         = '/./'; 
+$config->filterParam->cookie['common']['currentGroup']['reg'] = '/^[a-zA-Z]+$/'; 
+$config->filterParam->cookie['common']['device']['reg']       = '/^[a-zA-Z]+$/'; 
+$config->filterParam->cookie['common']['lang']['reg']         = '/^[a-zA-Z\-]+$/'; 
 
 /*Thanks list*/
 $config->thanksList['IPIP.NET']            = 'http://www.ipip.net/';

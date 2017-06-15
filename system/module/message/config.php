@@ -9,5 +9,4 @@ $config->message->require = new stdclass();
 $config->message->require->post  = 'from, type, content';
 $config->message->require->reply = 'from, type, content';
 
-$config->filterParam->cookie['message']['common']['hold'] = 'cmts';
-$config->filterParam->cookie['message']['common']['params']['cmts']['reg'] = '/./'; 
+$config->filterParam->cookie['message']['common']['cmts']['reg'] = '/./'; 

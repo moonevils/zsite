@@ -8,5 +8,4 @@ $config->reply->require = new stdclass();
 $config->reply->require->post = 'content';
 $config->reply->require->edit = 'content';
 
-$config->filterParam->cookie['reply']['post']['hold'] = 'r';
-$config->filterParam->cookie['reply']['post']['params']['r']['reg'] = '/^[0-9,]+$/'; 
+$config->filterParam->cookie['reply']['post']['r']['reg'] = '/^[0-9,]+$/'; 
