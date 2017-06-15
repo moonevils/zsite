@@ -100,6 +100,7 @@ class router extends baseRouter
         if($viewType == 'mhtml') $device = 'mobile';
         
         $this->clientDevice = $device;
+        setcookie('device', $this->clientDevice, $this->config->cookieLife, $this->config->webRoot);
         $this->cookie->set('device', $this->clientDevice);
         return $this->clientDevice;
     }
