@@ -1,6 +1,6 @@
 <?php
 $lang->book->common       = 'Book';
-$lang->book->list         = 'Book List';
+$lang->book->list         = 'Books';
 $lang->book->articles     = 'Articles';
 $lang->book->backtolist   = 'Back';
 
@@ -16,7 +16,7 @@ $lang->book->index      = 'Home';
 $lang->book->more       = 'More';
 
 $lang->book->searchResults     = 'Search Results';
-$lang->book->inputArticleTitle = 'Pleae enter the title of an article';
+$lang->book->inputArticleTitle = 'Pleae enter the title of the article';
 
 $lang->book->id          = 'ID';
 $lang->book->type        = 'Type';
@@ -54,7 +54,7 @@ $lang->book->chapterTypeList['left'] = 'Always on the left';
 $lang->book->fullScreenList['1'] = 'Yes';
 $lang->book->fullScreenList['0'] = 'No';
 
-$lang->book->lblAddedDate = 'Added time <strong>%s</strong> ';
+$lang->book->lblAddedDate = 'Added on <strong>%s</strong> ';
 $lang->book->lblAuthor    = 'Author <strong>%s</strong> ';
 $lang->book->lblViews     = 'Read <strong>%s</strong> ';
 $lang->book->lblEditor    = 'Last edited by %s on %s ';
@@ -64,7 +64,7 @@ $lang->book->chapter  = 'Back to Contents';
 $lang->book->back2Top = 'Back to Top';
 $lang->book->goHome   = 'Back to Homepage';
 
-$lang->book->aliasRepeat   = 'Alias %s cannot be repeatedly added.';
+$lang->book->aliasRepeat   = 'Alias %s cannot be added more than twice.';
 $lang->book->confirmDelete = "<span class='text-danger'>You will delete all chapters and articles in this manual. Do you want to delete it?</span>";
 
 $lang->book->note = new stdclass();

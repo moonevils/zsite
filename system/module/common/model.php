@@ -22,6 +22,7 @@ class commonModel extends model
         parent::__construct();
         if(!defined('FIRST_RUN'))
         {
+            if(!defined('SESSION_STARTED')) $this->startSession();
             $this->sendHeader();
             $this->setUser();
             $this->loadConfigFromDB();

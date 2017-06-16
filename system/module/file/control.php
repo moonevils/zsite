@@ -71,6 +71,11 @@ class file extends control
             {
                 $pathname = urldecode($pathname);
                 $pathname = realpath($this->app->getDataRoot() . 'upload/' . $pathname); 
+                if($pathname === false) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                if(strpos($pathname, $this->app->getDataRoot() . 'upload') === false)
+                {
+                    $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                }
                 $this->file->deleteInvalidFile($pathname);
             }
             $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin', 'type=invalid')));

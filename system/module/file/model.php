@@ -389,7 +389,7 @@ class fileModel extends model
         foreach($files as $id => $file)
         {   
             if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
-            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
+            if(stripos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
             {
                 if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'] . '.txt')) return false;
                 $file['pathname'] .= '.txt';
@@ -448,7 +448,7 @@ class fileModel extends model
 
         $uploadedFile = $this->savePath . $file['pathname'];
         $gbkName      = function_exists('iconv') ? iconv('utf-8', 'gbk', $file['title']) : $file['title'];
-        $tmpFile      = dirname($file['tmpname']) . DS . md5(uniqid()) . DS . $gbkName . '.' . $file['extension'];
+        $tmpFile      = $this->app->getCacheRoot() . DS . md5(uniqid()) . DS . $gbkName . '.' . $file['extension'];
 
         mkdir(dirname($tmpFile));
         copy($uploadedFile, $tmpFile);
@@ -555,7 +555,8 @@ class fileModel extends model
     public function getExtension($fileName)
     {
         $extension = strtolower(trim(pathinfo($fileName, PATHINFO_EXTENSION)));
-        if(empty($extension) or !preg_match('/^[a-z0-9]+$/', $extension) or strlen($extension) > 5) return 'txt';
+        if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
+        if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
         return $extension;
     }
 
@@ -721,7 +722,7 @@ class fileModel extends model
 
             $realPathName = $this->savePath . $fileInfo->pathname;
             $imageSize    = array('width' => 0, 'height' => 0);
-            if(strpos($this->config->file->allowed, ',' . $extension . ',') === false)
+            if(stripos($this->config->file->allowed, ',' . $extension . ',') === false)
             {
                 if(!move_uploaded_file($file['tmpname'], $this->savePath . $fileInfo->pathname . '.txt')) return false;
                 $fileInfo->pathname .= '.txt';

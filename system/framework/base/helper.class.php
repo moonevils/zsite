@@ -155,10 +155,10 @@ class baseHelper
      * @access public
      * @return string
      */
-    public static function processOnlyBodyParam($link, $onlyBody = true)
+    public static function processOnlyBodyParam($link, $onlyBody = false)
     {
         global $config;
-        if($onlyBody == false or !self::inOnlyBodyMode()) return $link;
+        if(!$onlyBody and !self::inOnlyBodyMode()) return $link;
         $onlybodyString = $config->requestType != 'GET' ? "?onlybody=yes" : "&onlybody=yes";
         return $link . $onlybodyString;
     }
@@ -503,8 +503,8 @@ class baseHelper
     }
 
     /**
-     * 切换目录。第一次调用的时候记录当前的路径，再次调用的时候切换会之前的路径。
-     * Change directory: firest call, save the $cwd, sencode call, change to $cwd.
+     * 切换目录。第一次调用的时候记录当前的路径，再次调用的时候切换回之前的路径。
+     * Change directory: first call, save the $cwd, secend call, change to $cwd.
      * 
      * @param  string $path 
      * @static
@@ -699,8 +699,11 @@ function getWebRoot($full = false)
 
     if(PHP_SAPI == 'cli')
     {
-        $url  = parse_url($_SERVER['argv'][1]);
-        $path = empty($url['path']) ? '/' : rtrim($url['path'], '/');
+        if(isset($_SERVER['argv'][1]))
+        {
+            $url  = parse_url($_SERVER['argv'][1]);
+            $path = empty($url['path']) ? '/' : rtrim($url['path'], '/');
+        }
         $path = empty($path) ? '/' : preg_replace('/\/www$/', '/www/', $path);
     }
     
@@ -710,7 +713,10 @@ function getWebRoot($full = false)
         return $http . $_SERVER['HTTP_HOST'] . substr($path, 0, (strrpos($path, '/') + 1));
     }
 
-    return substr($path, 0, (strrpos($path, '/') + 1));
+    $path = dirname(dirname($path));
+    $path = str_replace('\\', '/', $path);
+    if($path == '/') return '/';
+    return $path . '/';
 }
 
 /**

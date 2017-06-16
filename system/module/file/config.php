@@ -41,3 +41,6 @@ $config->file->tables[] = 'reply.content';
 $config->file->tables[] = 'thread.content';
 $config->file->tables[] = 'wx_message.content';
 $config->file->tables[] = 'slide.image';
+
+$config->filterParam->get['file']['fileManager']['order']['reg'] = '/^[a-zA-Z\-]+$/';
+$config->filterParam->get['file']['fileManager']['path']['reg'] = '/^[a-zA-Z0-9/=_\-]+$/';
