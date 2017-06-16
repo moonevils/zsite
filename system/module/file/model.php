@@ -910,9 +910,10 @@ class fileModel extends model
             $file['lang']   = 'all';
 
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
-            $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
+            $fileID = $this->dao->lastInsertID();
+            $_SESSION['album'][$uid][] = $fileID;
 
-            $data = str_replace($out[1][$key], $this->webPath . $file['pathname'], $data);
+            $data = str_replace($out[1][$key], helper::createLink('file', 'read', "fileID=$fileID"), $data);
         }
 
         return $data;
@@ -1354,5 +1355,47 @@ class fileModel extends model
             if($a['order'] == 'type') return strcmp($a['filetype'], $b['filetype']);
             if($a['order'] == 'name') return strcmp($a['filename'], $b['filename']);
         }
+    }
+
+    /**
+     * Process editor.
+     * 
+     * @param  object    $data 
+     * @param  string    $editorList 
+     * @access public
+     * @return object
+     */
+    public function processEditor($data, $editorList, $uid = '')
+    {
+        if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
+        $readLinkReg = helper::createLink('file', 'read', 'fileID=(%fileID%)');
+        $readLinkReg = preg_replace('/^' . str_replace('/', '\/', $this->app->getWebRoot()) . '/', '', $readLinkReg);
+        $readLinkReg = htmlspecialchars(str_replace(array('%fileID%', '/', '?'), array('[0-9]+', '\/', '\?'), $readLinkReg));
+        foreach($editorList as $editorID)
+        {
+            if(empty($editorID) or empty($data->$editorID)) continue;
+            $data->$editorID = $this->pasteImage($data->$editorID, $uid);
+            $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="{$1}" ', $data->$editorID);
+        }
+        return $data;
+    }
+
+    /**
+     * Revert real src. 
+     * 
+     * @param  object    $data 
+     * @param  string    $fields 
+     * @access public
+     * @return object
+     */
+    public function revertRealSRC($data, $fields)
+    {
+        if(is_string($fields)) $fields = explode(',', str_replace(' ', '', $fields));
+        foreach($fields as $field)
+        {
+            if(empty($field) or empty($data->$field)) continue;
+            $data->$field = preg_replace('/ src="{([0-9]+)}" /', ' src="' . helper::createLink('file', 'read', "fileID=$1")  . '" ', $data->$field);
+        }
+        return $data;
     }
 }
