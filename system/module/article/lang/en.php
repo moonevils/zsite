@@ -150,7 +150,7 @@ $lang->article->noCategories['blog']    = 'You have not added the categories for
 $lang->article->noCategories['video']   = 'You have not added the categories for video, please add the categories at first.';
 
 $lang->article->blog = new stdclass();
-$lang->article->blog->category                   = 'Category of blog page';
+$lang->article->blog->category                   = 'Category';
 $lang->article->blog->categoryLevel              = 'Level';
 $lang->article->blog->categoryNameList['abbr']   = 'Abbr';
 $lang->article->blog->categoryNameList['full']   = 'Full';

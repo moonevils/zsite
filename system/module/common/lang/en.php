@@ -34,12 +34,12 @@ $lang->about  = 'About';
 $lang->thanks = 'Thanks';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS     = 'CHANGER';
-$lang->chanzhiEPSx    = 'CHANGER';
-$lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, any signs/links of Changer shouldn't be removed, hidden or covered.</span>";
-$lang->poweredBy      = "<a href='http://www.changerpress.com/?v=%s' target='_blank' title='%s'>%s</a>";
-$lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.changerpress.com/?v=%s' target='_blank' title='%s'>Changer CMS %s</a></span>";
-$lang->newVersion     = "Note: Changer CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
+$lang->chanzhiEPS     = 'Zsite';
+$lang->chanzhiEPSx    = 'ZSite';
+$lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, any signs/links of Zsite shouldn't be removed, hidden or covered.</span>";
+$lang->poweredBy      = "<a href='http://http://www.zsite.net/?v=%s' target='_blank' title='%s'>%s</a>";
+$lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://http://www.zsite.net/?v=%s' target='_blank' title='%s'>Zsite CMS %s</a></span>";
+$lang->newVersion     = "Note: Zsite CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
 $lang->redirecting    = "<span class='text-muted'>After <span id='countDown'>3</span> seconds, Redirecting to manage categories......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Redirect</a>";
@@ -47,7 +47,7 @@ $lang->redirecting    = "<span class='text-muted'>After <span id='countDown'>3</
 /* Global lang items. */
 $lang->home             = 'Home';
 $lang->siteHome         = 'Homepage';
-$lang->welcome          = 'Welcome to Changer, <strong>%s</strong>!';
+$lang->welcome          = 'Welcome to Zsite, <strong>%s</strong>!';
 $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs          = 'Today is %s，';
 $lang->aboutUs          = 'About Us';
@@ -404,7 +404,7 @@ $lang->error->captcha      = 'Please enter correct verification code.';
 $lang->error->noWritable   = '%s is not writable. Please update your privilege!';
 $lang->error->fingerprint  = 'Authentication expired. Please try again!';
 $lang->error->token        = 'Must be letters/numbers and the characters between 3-32.';
-$lang->error->sensitive    = 'No sensitive words allowed!';
+$lang->error->sensitive    = 'No sensitive words are allowed!';
 $lang->error->noRepeat     = 'No duplicated content!';
 $lang->error->between      = '<strong>%s</strong>should in between<strong>%s</strong>.';
 $lang->error->idcard       = '<strong>%s</strong> should be valid idcard.';
@@ -440,8 +440,8 @@ define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
 
 /* Keywords for chanzhi. */
-$lang->k  = 'Open Source CMS - Changer;';
-$lang->k .= 'Changer, free and open source CMS;';
-$lang->k .= 'Changer, your #1 Choice;';
-$lang->k .= 'Website building, choose Changer;';
-$lang->k .= 'Changer, free and open source php CMS.';
+$lang->k  = 'Open Source CMS - Zsite;';
+$lang->k .= 'Zsite, free and open source CMS;';
+$lang->k .= 'Zsite, your #1 Choice;';
+$lang->k .= 'Website building, choose Zsite;';
+$lang->k .= 'Zsite, free and open source php CMS.';

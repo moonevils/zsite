@@ -102,11 +102,11 @@ class article extends control
      * @return void
      */
     public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
-    {   
+    {
         if($this->get->tab == 'user') 
         {
             $type = 'submission';
-            $this->lang->menuGroups->article = 'submission';
+            $this->lang->menuGroups->article = $type;
             unset($this->lang->article->menu);
             $this->view->title = $this->lang->submission->common;
         }

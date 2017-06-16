@@ -17,5 +17,7 @@ $config->article->editor->edit   = array('id' => 'content', 'tools' => 'full');
 $config->article->editor->post   = array('id' => 'content', 'tools' => 'simple');
 $config->article->editor->modify = array('id' => 'content', 'tools' => 'simple');
 
+$config->filterParam->get['article']['admin']['tab']['reg'] = '/^[a-zA-Z]+$/';
+
 /* Set the recPerPage of article. */
 $config->article->recPerPage = 5;

@@ -45,3 +45,18 @@ $config->user->relatedTables[TABLE_ADDRESS][]  = 'account';
 $config->user->relatedTables[TABLE_CART][]     = 'account';
 $config->user->relatedTables[TABLE_ORDER][]    = 'account';
 $config->user->relatedTables[TABLE_ARTICLE][]  = 'addedBy';
+
+$config->filterParam->get['user']['admin']['provider']['reg'] = '/^[a-z]+$/';
+$config->filterParam->get['user']['admin']['user']['reg']     = '/^[a-z]+$/';
+$config->filterParam->get['user']['admin']['admin']['reg']    = '/^[0-9]+$/';
+
+$config->filterParam->get['user']['adminLog']['account']['reg']  = '/^[a-zA-Z0-9_]+$/';
+$config->filterParam->get['user']['adminLog']['ip']['reg']       = '/^[0-9\.]+$/';
+$config->filterParam->get['user']['adminLog']['location']['reg'] = '/^[a-zA-Z0-9/=_\-]+$/';
+$config->filterParam->get['user']['adminLog']['date']['reg']     = '/^[0-9\-]+$/';
+
+$config->filterParam->get['user']['oauthCallback']['state']['reg']   = '/./';
+$config->filterParam->get['user']['oauthCallback']['code']['reg']    = '/^[a-zA-Z0-9/=_\-]+$/';
+$config->filterParam->get['user']['oauthCallback']['referer']['reg'] = '/^[a-zA-Z0-9/=_\-]+$/';
+
+$config->filterParam->cookie['user']['common']['referer']['reg'] = '/^[a-zA-Z0-9=_\-]+$/'; 

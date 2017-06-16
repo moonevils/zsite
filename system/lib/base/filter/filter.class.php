@@ -536,7 +536,7 @@ class baseValidater
                 foreach($files['name'] as $i => $fileName)
                 {
                     $extension = ltrim(strrchr($fileName, '.'), '.');
-                    if(strrpos(",{$config->file->dangers},", ",{$extension},") !== false)
+                    if(stripos(",{$config->file->dangers},", ",{$extension},") !== false)
                     {
                         unset($_FILES);
                         return array();
@@ -546,7 +546,7 @@ class baseValidater
             else
             {
                 $extension = ltrim(strrchr($files['name'], '.'), '.');
-                if(strrpos(",{$config->file->dangers},", ",{$extension},") !== false)
+                if(stripos(",{$config->file->dangers},", ",{$extension},") !== false)
                 {
                     unset($_FILES);
                     return array();
@@ -655,6 +655,83 @@ class baseValidater
         $var = preg_replace('/j\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t\s*:/Ui', 'j a v a s c r i p t :', $var);
 
         return $var;
+    }
+
+    /**
+     * Filter param.
+     * 
+     * @param  array    $var 
+     * @param  string   $type 
+     * @static
+     * @access public
+     * @return array
+     */
+    public static function filterParam($var, $type)
+    {
+        global $config, $app;
+
+        if(!isset($config->filterParam->$type)) return array();
+
+        $moduleName   = $app->getModuleName();
+        $methodName   = $app->getMethodName();
+        $params       = $app->getParams();
+        $filterConfig = $config->filterParam->$type;
+
+        if($type == 'cookie')
+        {
+            $pagerCookie = 'pager' . ucfirst($moduleName) . ucfirst($methodName);
+            $filterConfig['common'][$pagerCookie]['int'] = '';
+        }
+        foreach($var as $key => $value)
+        {
+            if($config->requestType == 'GET' and $type == 'get' and isset($params[$key])) continue;
+
+            $rules = '';
+            if(isset($filterConfig[$moduleName][$methodName][$key]))
+            {
+                $rules = $filterConfig[$moduleName][$methodName][$key];
+            }
+            elseif(isset($filterConfig[$moduleName]['common'][$key]))
+            {
+                $rules = $filterConfig[$moduleName]['common'][$key];
+            }
+            elseif(isset($filterConfig['common'][$key]))
+            {
+                $rules = $filterConfig['common'][$key];
+            }
+
+            if(!self::checkByRules($value, $rules)) unset($var[$key]);
+        }
+        return $var;
+    }
+
+    /**
+     * Check by rules.
+     * 
+     * @param  string   $var 
+     * @param  array    $rules 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkByRules($var, $rules)
+    {
+        if(empty($rules)) return false;
+        foreach($rules as $type => $rule)
+        {
+            $checkMethod = 'check' . $type;
+            if(method_exists('baseValidater', $checkMethod))
+            {
+                if(empty($rule)  and self::$checkMethod($var) === false) return false;
+                if(!empty($rule) and self::$checkMethod($var, $rule) === false) return false;
+            }
+            elseif(function_exists('is_' . $type))
+            {
+                $checkFunction = 'is_' . $type;
+                if(!$checkFunction($var)) return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -905,6 +982,8 @@ class baseFixer
                      * purifier会把&nbsp;替换空格，kindeditor在会吧行首的空格去掉。
                      * purifier will change &nbsp; to ' ', and edit it will no space in line head use kindeditor. 
                      **/
+                    $this->data->$fieldName = preg_replace('/<[^>]+</', '<', $this->data->$fieldName);
+                    $this->data->$fieldName = preg_replace('/>[^<]+>/', '>', $this->data->$fieldName);
                     if($usePurifier) $this->data->$fieldName = str_replace('&nbsp;', '&spnb;', $this->data->$fieldName);
                     $this->data->$fieldName = $usePurifier ? $purifier->purify($this->data->$fieldName) : strip_tags($this->data->$fieldName, $allowedTags);
                     if($usePurifier) $this->data->$fieldName = str_replace('&amp;spnb;', '&nbsp;', $this->data->$fieldName);

@@ -595,7 +595,7 @@ class wechatapi
         /* Init the signature. */
         if(!isset($_GET['signature'])) $_GET['signature'] = '';
 
-        $log  = date('H:i:s: ') . $_SERVER['REQUEST_URI'] . "\n\n";
+        $log  = date('H:i:s: ') . htmlspecialchars($_SERVER['REQUEST_URI'],ENT_QUOTES) . "\n\n";
         $log .= "[Signature]\n" . $_GET['signature'] . " got\n" . $this->signature . " computed\n\n";
         $log .= "[Message]\n" . $this->rawData . "\n";
         $log .= print_r($this->message, true) . "\n";
