@@ -94,7 +94,6 @@ $lang->preview        = '預覽';
 $lang->goback         = '返回';
 $lang->more           = '更多';
 $lang->refresh        = '刷新';
-$lang->setting        = '設置';
 $lang->actions        = '操作';
 $lang->feature        = '未來';
 $lang->year           = '年';
