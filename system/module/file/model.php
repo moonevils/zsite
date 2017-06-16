@@ -1370,7 +1370,7 @@ class fileModel extends model
         if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
         $readLinkReg = helper::createLink('file', 'read', 'fileID=(%fileID%)');
         $readLinkReg = preg_replace('/^' . str_replace('/', '\/', $this->app->getWebRoot()) . '/', '', $readLinkReg);
-        $readLinkReg = htmlspecialchars(str_replace(array('%fileID%', '/', '?'), array('[0-9]+', '\/', '\?'), $readLinkReg));
+        $readLinkReg = str_replace(array('%fileID%', '/', '?'), array('[0-9]+', '\/', '\?'), $readLinkReg);
         foreach($editorList as $editorID)
         {
             if(empty($editorID) or empty($data->$editorID)) continue;
