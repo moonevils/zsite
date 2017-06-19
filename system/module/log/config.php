@@ -975,5 +975,3 @@ $config->searchEngine->domains = array (
         'www.zoznam.sk' => 'zoznam',
         'www.zxuso.com' => 'zxuso',
     );
-
-$config->filterParam->cookie['log']['record']['vid']['reg'] = '/^[0-9]+$/'; 

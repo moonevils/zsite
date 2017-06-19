@@ -1368,15 +1368,16 @@ class fileModel extends model
     public function processEditor($data, $editorList, $uid = '')
     {
         if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
-        $readLinkReg = helper::createLink('file', 'read', 'fileID=(%fileID%)');
-        $readLinkReg = preg_replace('/^' . str_replace('/', '\/', $this->app->getWebRoot()) . '/', '', $readLinkReg);
-        $readLinkReg = str_replace(array('%fileID%', '/', '?'), array('[0-9]+', '\/', '\?'), $readLinkReg);
+        $readLinkReg = basename(helper::createLink('file', 'read', 'fileID=(%fileID%)'));
+        $readLinkReg = htmlspecialchars(str_replace(array('%fileID%', '?'), array('[0-9]+', '\?'), $readLinkReg));
+        a($data);exit;
         foreach($editorList as $editorID)
         {
             if(empty($editorID) or empty($data->$editorID)) continue;
             $data->$editorID = $this->pasteImage($data->$editorID, $uid);
             $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="{$1}" ', $data->$editorID);
         }
+
         return $data;
     }
 
@@ -1396,6 +1397,7 @@ class fileModel extends model
             if(empty($field) or empty($data->$field)) continue;
             $data->$field = preg_replace('/ src="{([0-9]+)}" /', ' src="' . helper::createLink('file', 'read', "fileID=$1")  . '" ', $data->$field);
         }
+
         return $data;
     }
 }
