@@ -31,7 +31,7 @@ class site extends control
                 ->stripTags('pauseTip', $allowedTags)
                 ->remove('uid,lang,cn2tw,defaultLang,requestType')
                 ->get();
-
+            
             if(strpos($setting->modules, 'shop') !== false  && strpos($setting->modules, 'user') === false) $setting->modules = 'user,' . $setting->modules;
             if($setting->modules == 'initial') unset($setting->modules);
 
@@ -582,11 +582,13 @@ class site extends control
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            $setting = $this->loadModel('file')->processEditor($setting, $this->config->site->editor->setagreement['id'], $this->post->uid);
+            $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setagreement')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->config->site = $this->loadModel('file')->revertRealSRC($this->config->site, $this->config->site->editor->setagreement['id']);
         $this->view->title = $this->lang->site->setAgreement;
         $this->display();
 

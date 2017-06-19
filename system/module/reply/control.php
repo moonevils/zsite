@@ -77,6 +77,7 @@ class reply extends control
 
         /* Judge current user has priviledge to edit the reply or not. */
         $reply = $this->reply->getByID($replyID);
+        $reply = $this->loadModel('file')->revertRealSRC($reply, $this->config->reply->editor->edit['id']);
         if(!$reply) die(js::locate('back'));
 
         $thread = $this->loadModel('thread')->getByID($reply->thread);

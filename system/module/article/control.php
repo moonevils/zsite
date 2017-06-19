@@ -224,6 +224,8 @@ class article extends control
     {
         if(!commonModel::isAvailable('submission')) die();
         $article = $this->article->getByID($articleID);
+        $article = $this->loadModel('file')->revertRealSRC($article, $this->config->article->editor->modify['id']);
+
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) return false;
 
         if($_POST)
