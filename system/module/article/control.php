@@ -65,7 +65,7 @@ class article extends control
         }
         else
         {
-            die($this->fetch('error', 'index'));
+            die($this->fetch('errors', 'index'));
         }
 
         $articleList = '';
@@ -337,7 +337,7 @@ class article extends control
     public function view($articleID)
     {
         $article = $this->article->getByID($articleID);
-        if(!$article) die($this->fetch('error', 'index'));
+        if(!$article) die($this->fetch('errors', 'index'));
 
         if($article->link) helper::header301($article->link);
 
