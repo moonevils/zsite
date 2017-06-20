@@ -326,6 +326,7 @@ class bookModel extends model
     public function getNodeByID($nodeID, $replaceTag = true)
     {
         $node = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
+        $node = $this->loadModel('file')->revertRealSRC($node, 'content');
         if(!$node) $node = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($nodeID)->fetch();
         if(!$node) return false;
                 
@@ -512,6 +513,7 @@ class bookModel extends model
             ->setForce('keywords', seo::unify($this->post->keywords, ','))
             ->get();
 
+        $book = $this->loadModel('file')->processEditor($book, $this->config->book->editor->create['id'], $this->post->uid);
         $this->dao->insert(TABLE_BOOK)
             ->data($book, $skip = 'uid')
             ->autoCheck()
@@ -699,6 +701,7 @@ class bookModel extends model
             }
         }
 
+        $node = $this->loadModel('file')->processEditor($node, $this->config->book->editor->edit['id'], $this->post->uid);
         $this->dao->update(TABLE_BOOK)
             ->data($node, $skip = 'uid,referer,book,isLink')
             ->autoCheck()

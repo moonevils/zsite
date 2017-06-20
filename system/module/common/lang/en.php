@@ -94,7 +94,6 @@ $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
 $lang->more           = 'More';
 $lang->refresh        = 'Refresh';
-$lang->setting        = 'Setting';
 $lang->actions        = 'Action';
 $lang->feature        = 'Feature';
 $lang->year           = 'Year';

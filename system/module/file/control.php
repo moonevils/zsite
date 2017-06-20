@@ -71,6 +71,11 @@ class file extends control
             {
                 $pathname = urldecode($pathname);
                 $pathname = realpath($this->app->getDataRoot() . 'upload/' . $pathname); 
+                if($pathname === false) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                if(strpos($pathname, $this->app->getDataRoot() . 'upload') === false)
+                {
+                    $this->send(array('result' => 'fail', 'message' => dao::getError()));
+                }
                 $this->file->deleteInvalidFile($pathname);
             }
             $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin', 'type=invalid')));
@@ -160,7 +165,6 @@ class file extends control
                 $file['width']  = $imageSize['width'];
                 $file['height'] = $imageSize['height'];
             }
-            $url =  $this->file->webPath . $file['pathname'];
 
             $file['addedBy']   = $this->app->user->account;
             $file['addedDate'] = helper::now();
@@ -169,7 +173,9 @@ class file extends control
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
-            $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
+            $fileID = $this->dao->lastInsertID();
+            $url    = $this->createLink('file', 'read', "fileID=$fileID");
+            $_SESSION['album'][$uid][] = $fileID;
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));
         }
@@ -745,5 +751,28 @@ class file extends control
         
         if($last >= $total) $this->send(array('result' => 'finished', 'message' => $this->lang->createSuccess));
         $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildWatermark', "last=$last&total=$total"), 'completed' => sprintf($this->lang->file->rebuildWatermarks, $progress)));
+    }
+
+    /**
+     * Read file. 
+     * 
+     * @param  int    $fileID 
+     * @access public
+     * @return void
+     */
+    public function read($fileID)
+    {
+        $file = $this->file->getById($fileID);
+        if(empty($file) or !file_exists($file->realPath)) return false;
+
+        $mime = in_array($file->extension, $this->config->file->imageExtensions) ? "image/{$file->extension}" : $this->config->file->mimes['default'];
+        header("Content-type: $mime");
+
+        $handle = fopen($file->realPath, "r");
+        if($handle)
+        {
+            while(!feof($handle)) echo fgets($handle);
+            fclose($handle);
+        }
     }
 }
