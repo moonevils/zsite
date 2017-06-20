@@ -109,7 +109,7 @@ class book extends control
     public function read($articleID)
     { 
         $article = $this->book->getNodeByID($articleID);
-        if(!$article) die($this->fetch('error', 'index'));
+        if(!$article) die($this->fetch('errors', 'index'));
         $book    = $article->book;
         $serials = $this->book->computeSN($book->id);
         $content = $this->book->addMenu($article->content);

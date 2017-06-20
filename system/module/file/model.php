@@ -1377,6 +1377,7 @@ class fileModel extends model
             $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="{$1}" ', $data->$editorID);
             $data->$editorID = preg_replace("/ src=\"" . htmlspecialchars($readLinkReg) . "\" /", ' src="{$1}" ', $data->$editorID);
         }
+
         return $data;
     }
 
@@ -1405,6 +1406,7 @@ class fileModel extends model
                 }
             }
         }
+
         return $data;
     }
 }

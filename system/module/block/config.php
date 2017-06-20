@@ -57,5 +57,3 @@ $config->block->defaultMoreUrl['hotProduct']    = '';
 $config->block->defaultMoreUrl['latestThread']  = '';
 $config->block->defaultMoreUrl['about']         = commonModel::createFrontLink('company', 'index');
 $config->block->defaultMoreUrl['contact']       = commonModel::createFrontLink('company', 'index');
-
-$config->filterParam->get['block']['edit']['type']['reg'] = '/^[a-zA-Z]+$/';

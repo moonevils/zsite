@@ -65,7 +65,7 @@ class article extends control
         }
         else
         {
-            die($this->fetch('error', 'index'));
+            die($this->fetch('errors', 'index'));
         }
 
         $articleList = '';
@@ -224,6 +224,8 @@ class article extends control
     {
         if(!commonModel::isAvailable('submission')) die();
         $article = $this->article->getByID($articleID);
+        $article = $this->loadModel('file')->revertRealSRC($article, $this->config->article->editor->modify['id']);
+
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) return false;
 
         if($_POST)
@@ -335,7 +337,7 @@ class article extends control
     public function view($articleID)
     {
         $article = $this->article->getByID($articleID);
-        if(!$article) die($this->fetch('error', 'index'));
+        if(!$article) die($this->fetch('errors', 'index'));
 
         if($article->link) helper::header301($article->link);
 
