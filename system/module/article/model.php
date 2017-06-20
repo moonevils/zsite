@@ -66,7 +66,7 @@ class articleModel extends model
     {
         /* Get article self. */
         if(!is_numeric($pageID)) $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($pageID)->andWhere('type')->eq('page')->fetch();
-        if(is_numeric($pageID))  $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->fetch();
+        if(is_numeric($pageID))  $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->andWhere('type')->eq('page')->fetch();
 
         if(!$page) return false;
         

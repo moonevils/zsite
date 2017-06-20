@@ -62,7 +62,7 @@ class product extends control
         $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), $orderBy, $pager);
         $products   = $this->loadModel('file')->processImages($products, 'product');
 
-        if(!$category and $categoryID != 0) die($this->fetch('error', 'index'));
+        if(!$category and $categoryID != 0) die($this->fetch('errors', 'index'));
 
         if($categoryID == 0)
         {
@@ -247,7 +247,7 @@ class product extends control
     public function view($productID)
     {
         $product = $this->product->getByID($productID);
-        if(!$product) die($this->fetch('error', 'index'));
+        if(!$product) die($this->fetch('errors', 'index'));
 
         /* fetch first category for display. */
         $category = array_slice($product->categories, 0, 1);
