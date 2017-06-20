@@ -96,7 +96,7 @@ class blog extends control
     public function view($articleID, $currentCategory = 0)
     {
         $article = $this->loadModel('article')->getByID($articleID);
-        if(!$article) die($this->fetch('error', 'index'));
+        if(!$article) die($this->fetch('errors', 'index'));
 
         if($article->link) 
         {
