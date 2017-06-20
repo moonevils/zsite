@@ -10,5 +10,3 @@ $config->thread->require = new stdclass();
 $config->thread->require->post = 'title, content';
 $config->thread->require->edit = 'title, content';
 $config->thread->require->link = 'title, link';
-
-$config->filterParam->cookie['thread']['common']['t']['reg'] = '/^[0-9,]+$/'; 

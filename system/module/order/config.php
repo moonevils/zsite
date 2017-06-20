@@ -40,7 +40,3 @@ $config->order->statusTypes['finished']  = 'status';
 $config->order->statusTypes['canceled']  = 'status';
 $config->order->statusTypes['expired']   = 'status';
 $config->order->statusTypes['all']       = 'status';
-
-$config->filterParam->get['order']['processAlipayOrder']['trade_status']['reg'] = '/^[A-Z_]+$/';
-$config->filterParam->get['order']['processAlipayOrder']['out_trade_no']['reg'] = '/^[a-zA-Z_]+$/';
-$config->filterParam->get['order']['processAlipayOrder']['trade_no']['reg']     = '/^[a-zA-Z0-9/=_\-]+$/';

@@ -66,7 +66,7 @@ class articleModel extends model
     {
         /* Get article self. */
         if(!is_numeric($pageID)) $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($pageID)->andWhere('type')->eq('page')->fetch();
-        if(is_numeric($pageID))  $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->fetch();
+        if(is_numeric($pageID))  $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->andWhere('type')->eq('page')->fetch();
 
         if(!$page) return false;
         
@@ -407,6 +407,7 @@ class articleModel extends model
         if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-', true);
         $article->content = $this->rtrimContent($article->content);
     
+        $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->create['id'], $this->post->uid);
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
@@ -555,6 +556,7 @@ class articleModel extends model
         $article->content  = $this->rtrimContent($article->content);
         if(!isset($article->categories)) $article->categories = '';
 
+        $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->edit['id'], $this->post->uid);
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()

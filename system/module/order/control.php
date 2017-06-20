@@ -70,7 +70,9 @@ class order extends control
      */
     public function view($orderID)
     {
-        $order                = $this->order->getByID($orderID);
+        $order = $this->order->getByID($orderID);
+        $order = $this->loadModel('file')->revertRealSRC($order, 'view');
+
         $this->view->title    = $this->lang->order->view;
         $this->view->order    = $order;
         $this->view->type     = $order->type;
