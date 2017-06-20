@@ -40,6 +40,7 @@ class page extends control
     public function view($pageID)
     {
         $page = $this->loadModel('article')->getPageByID($pageID);
+        if(!$page) die($this->fetch('errors', 'index'));
 
         if($page->link) helper::header301($page->link);
 
