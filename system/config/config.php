@@ -13,26 +13,6 @@
 if(!class_exists('config')){class config{}}
 if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
-/* Use these params to enable or disable some features of framework. */
-$config->framework = new stdclass();
-$config->framework->autoConnectDB  = true;  // 是否自动连接数据库。              Whether auto connect database or not.
-$config->framework->autoLang       = true;  // 是否自动连接数据库。              Whether auto connect database or not.
-$config->framework->multiLanguage  = true;  // 是否启用多语言功能。              Whether enable multi lanuage or not.
-$config->framework->multiTheme     = true;  // 是否启用多风格功能。              Whether enable multi theme or not.
-$config->framework->multiSite      = false; // 是否启用多站点模式。              Whether enable multi site mode or not.
-$config->framework->extensionLevel = 2;     // 0=>无扩展,1=>公共扩展,2=>站点扩展 0=>no extension, 1=> common extension, 2=> every site has it's extension.
-$config->framework->jsWithPrefix   = true;  // js::set()输出的时候是否增加前缀。 When us js::set(), add prefix or not.
-$config->framework->filterBadKeys  = true;  // 是否过滤不合要求的键值。          Whether filter bad keys or not.
-$config->framework->filterTrojan   = true;  // 是否过滤木马攻击代码。            Whether strip trojan code or not.
-$config->framework->filterXSS      = true;  // 是否过滤XSS攻击代码。             Whether strip xss code or not.
-$config->framework->filterParam    = 2;     // 是否开启过滤参数功能。            Whether strip param or not.
-$config->framework->purifier       = true;  // 是否对数据做purifier处理。        Whether purifier data or not.
-$config->framework->logDays        = 14;    // 日志文件保存的天数。              The days to save log files.
-
-$config->framework->detectDevice['zh-cn'] = true; // 在zh-cn语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
-$config->framework->detectDevice['zh-tw'] = true; // 在zh-tw语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
-$config->framework->detectDevice['en']    = true; // 在en语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
-
 /* The basic settings. */
 $config->version     = '6.2';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
@@ -52,7 +32,43 @@ $config->viewVar     = 't';               // RequestType=GET: the name of the vi
 $config->langVar     = 'l';               // RequestType=GET: the name of the view var.
 $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
+/* Use these params to enable or disable some features of framework. */
+$config->framework = new stdclass();
+$config->framework->autoConnectDB  = true;  // 是否自动连接数据库。              Whether auto connect database or not.
+$config->framework->autoLang       = true;  // 是否自动连接数据库。              Whether auto connect database or not.
+$config->framework->multiLanguage  = true;  // 是否启用多语言功能。              Whether enable multi lanuage or not.
+$config->framework->multiTheme     = true;  // 是否启用多风格功能。              Whether enable multi theme or not.
+$config->framework->multiSite      = false; // 是否启用多站点模式。              Whether enable multi site mode or not.
+$config->framework->extensionLevel = 2;     // 0=>无扩展,1=>公共扩展,2=>站点扩展 0=>no extension, 1=> common extension, 2=> every site has it's extension.
+$config->framework->jsWithPrefix   = true;  // js::set()输出的时候是否增加前缀。 When us js::set(), add prefix or not.
+$config->framework->filterBadKeys  = true;  // 是否过滤不合要求的键值。          Whether filter bad keys or not.
+$config->framework->filterTrojan   = true;  // 是否过滤木马攻击代码。            Whether strip trojan code or not.
+$config->framework->filterXSS      = true;  // 是否过滤XSS攻击代码。             Whether strip xss code or not.
+$config->framework->filterParam    = 2;     // 1=>默认过滤，2=>开启过滤参数功能。0=>default filter 2=>Whether strip param.
+$config->framework->purifier       = true;  // 是否对数据做purifier处理。        Whether purifier data or not.
+$config->framework->logDays        = 14;    // 日志文件保存的天数。              The days to save log files.
+
+$config->framework->detectDevice['zh-cn'] = true; // 在zh-cn语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
+$config->framework->detectDevice['zh-tw'] = true; // 在zh-tw语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
+$config->framework->detectDevice['en']    = true; // 在en语言情况下，是否启用设备检测功能。 Whether enable device detect or not.
+
 $config->devicePrefix['mhtml'] = 'm.';
+
+/* Default params. */
+$config->default = new stdclass();          
+$config->default->view   = 'html';    // Default view.
+$config->default->lang   = 'zh-cn';   // Default language.
+$config->default->theme  = 'default'; // Default theme.
+$config->default->module = 'index';   // Default module.
+$config->default->method = 'index';   // Default metho.d
+
+/* Database settings. */
+$config->db = new stdclass();          
+$config->db->persistant = false;      // Persistant connection or not.
+$config->db->driver     = 'mysql';    // The driver of pdo, only mysql yet.
+$config->db->encoding   = 'UTF8';     // The encoding of the database.
+$config->db->strictMode = false;      // Turn off the strict mode.
+$config->db->prefix     = 'eps_';     // The prefix of the table name.
 
 $config->execPlaceholder       = 'EXEC_PLACEHOLDER';
 $config->siteNavHolder         = 'SITENAV_PLACEHOLDER';
@@ -155,48 +171,11 @@ $config->langsShortcuts['zh-cn'] = 'cn';
 $config->langsShortcuts['zh-tw'] = 'tw';
 $config->langsShortcuts['en']    = 'en';
 
-/* Default params. */
-$config->default = new stdclass();          
-$config->default->view   = 'html';             // Default view.
-$config->default->lang   = 'zh-cn';            // Default language.
-$config->default->theme  = 'default';          // Default theme.
-$config->default->module = 'index';            // Default module.
-$config->default->method = 'index';            // Default metho.d
-
 /* Upload settings. */
 $config->file = new stdclass();          
 $config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm'; // Dangerous file types.
-$config->file->allowed = ',txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm,csv,jpg,jpeg,png,psd,gif,ico,bmp,swf,avi,rmvb,rm,mp3,mp4,3gp,flv,mov,movie,rar,zip,bz,bz2,tar,gz,'; // Allowed file types.
+$config->file->allowed = 'txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm,csv,jpg,jpeg,png,psd,gif,ico,bmp,swf,avi,rmvb,rm,mp3,mp4,3gp,flv,mov,movie,rar,zip,bz,bz2,tar,gz'; // Allowed file types.
 $config->file->maxSize = 2 * 1024 * 1024;  // Max size allowed(Byte).
-
-/* 配置参数过滤。Filter param settings. */
-/* Like $config->filterParam->param[moduleName][methodname][ruleType] = rule. */
-$config->filterParam = new stdclass();
-$config->filterParam->badKeys = '[^a-zA-Z0-9_\.]'; 
-$config->filterParam->module['reg'] = '/^[a-zA-Z0-9]+$/';
-$config->filterParam->method['common']['reg'] = '/^[a-zA-Z0-9]+$/';
-$config->filterParam->param['common']['name']['reg']  = '/^[a-zA-Z0-9_\.]+$/';
-$config->filterParam->param['common']['value']['reg'] = '/^[a-zA-Z0-9=_,`#+\^\/\.%\|\x7f-\xff]+$/';
-
-$config->filterParam->get['common']['hold'] = 'onlybody,HTTP_X_REQUESTED_WITH,recTotal,recPerPage,pageID,searchWord,categoryID,fullScreen,key';
-$config->filterParam->get['common']['params']['onlybody']['reg']                = '/^yes$|^no$/';
-$config->filterParam->get['common']['params']['HTTP_X_REQUESTED_WITH']['equal'] = 'XMLHttpRequest';
-$config->filterParam->get['common']['params']['recTotal']['reg']                = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['recPerPage']['reg']              = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['pageID']['reg']                  = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['searchWord']['reg']              = '/./';
-$config->filterParam->get['common']['params']['categoryID']['reg']              = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['fullScreen']['reg']              = '/^[0-9]+$/';
-$config->filterParam->get['common']['params']['key']['reg']                     = '/^[a-zA-Z0-9=_\-]+$/';
-
-$config->filterParam->cookie['common']['hold'] = 'adminLang,cart,currentGroup,device,lang,validate,cmts,vid,r,t,referer'; 
-$config->filterParam->cookie['common']['params']['adminLang']['reg']    = '/^[a-zA-Z\-]+$/'; 
-$config->filterParam->cookie['common']['params']['cart']['reg']         = '/./'; 
-$config->filterParam->cookie['common']['params']['currentGroup']['reg'] = '/^[a-zA-Z]+$/'; 
-$config->filterParam->cookie['common']['params']['device']['reg']       = '/^[a-zA-Z]+$/'; 
-$config->filterParam->cookie['common']['params']['lang']['reg']         = '/^[a-zA-Z\-]+$/'; 
-
-$config->filterParam->session['common']['hold'] = ''; 
 
 /*Thanks list*/
 $config->thanksList['IPIP.NET']            = 'http://www.ipip.net/';
@@ -241,14 +220,6 @@ $config->dependence->comment[]      = 'message';
 $config->dependence->wechat[]       = 'user';
 $config->dependence->tag[]          = 'article';
 $config->dependence->order[]        = 'shop';
-
-/* Database settings. */
-$config->db = new stdclass();          
-$config->db->persistant = false;               // Persistant connection or not.
-$config->db->driver     = 'mysql';             // The driver of pdo, only mysql yet.
-$config->db->encoding   = 'UTF8';              // The encoding of the database.
-$config->db->strictMode = false;               // Turn off the strict mode.
-$config->db->prefix     = 'eps_';              // The prefix of the table name.
 
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot      = dirname(__FILE__) . DS;
@@ -316,6 +287,10 @@ define('TABLE_OPERATIONLOG',   $config->db->prefix . 'operationlog');
 define('TABLE_WIDGET',         $config->db->prefix . 'widget');
 define('TABLE_ACTION',         $config->db->prefix . 'action');
 define('TABLE_HISTORY',        $config->db->prefix . 'history');
+
+/* 配置参数过滤。Filter param settings. */
+$filterConfig = dirname(__FILE__) . DS . 'filter.php';
+if(file_exists($filterConfig)) include $filterConfig;
 
 /* Include cache config file. */
 include $configRoot . 'cache.php';

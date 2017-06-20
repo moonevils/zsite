@@ -200,7 +200,12 @@ class block extends control
      */
     public function blockForm($type, $id = 0)
     {
-        if($id > 0) $this->view->block = $this->block->getByID($id); 
+
+        if($id > 0)
+        {
+            $block = $this->block->getByID($id); 
+            $this->view->block = $this->loadModel('file')->revertRealSRC($block, $this->config->block->editor->blockform['id']);
+        }
 
         $this->view->type = $type;
         $this->display();
