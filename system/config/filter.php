@@ -1,6 +1,21 @@
 <?php
 $filter = new stdclass();
-$filter->rules = new stdclass();
+$filter->rules   = new stdclass();
+$filter->default = new stdclass(); 
+$filter->stat    = new stdclass(); 
+$filter->article = new stdclass();
+$filter->block   = new stdclass();
+$filter->file    = new stdclass();
+$filter->search  = new stdclass();
+$filter->upgrade = new stdclass();
+$filter->order   = new stdclass();
+$filter->user    = new stdclass();
+$filter->message = new stdclass();
+$filter->thread  = new stdclass();
+$filter->guarder = new stdclass();
+$filter->log     = new stdclass();
+$filter->reply   = new stdclass();
+
 $filter->rules->md5        = '/^[a-z0-9]{32}$/';
 $filter->rules->base64     = '/^[a-zA-Z0-9\+\/\=]+$/';
 $filter->rules->checked    = '/^[0-9,]+$/';
@@ -18,7 +33,6 @@ $filter->rules->paramName  = '/^[a-zA-Z0-9_\.]+$/';
 $filter->rules->paramValue = '/^[a-zA-Z0-9=_,`#+\^\/\.%\|\x7f-\xff]+$/';
 $filter->rules->ip         = '/^[0-9\.]+$/';
 
-$filter->default = new stdclass(); 
 $filter->default->moduleName = 'code';
 $filter->default->methodName = 'code';
 $filter->default->paramName  = 'reg::paramName';
@@ -26,7 +40,6 @@ $filter->default->paramValue = 'reg::paramValue';
 
 $filter->default->get['onlybody'] = 'equal::yes';
 $filter->default->get['HTTP_X_REQUESTED_WITH'] = 'equal::XMLHttpRequest';
-
 $filter->default->get['recTotal']   = 'reg::number';
 $filter->default->get['recPerPage'] = 'reg::number';
 $filter->default->get['pageID']     = 'reg::number';
