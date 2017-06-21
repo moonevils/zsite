@@ -1402,7 +1402,7 @@ class fileModel extends model
                 foreach($matchs[0] as $i => $match)
                 {
                     $fileID = $matchs[1][$i];
-                    $data->$field = str_replace($match, ' src="' . helper::createLink('file', 'read', "fileID=$fileID", $files[$fileID])  . '" ', $data->$field);
+                    $data->$field = str_replace($match, ' src="' . helper::createLink('file', 'read', "fileID=$fileID", array(), $files[$fileID])  . '" ', $data->$field);
                 }
             }
         }
