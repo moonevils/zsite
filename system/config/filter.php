@@ -38,6 +38,7 @@ $filter->default->paramValue = 'reg::paramValue';
 
 $filter->default->get['onlybody'] = 'equal::yes';
 $filter->default->get['HTTP_X_REQUESTED_WITH'] = 'equal::XMLHttpRequest';
+
 $filter->default->get['recTotal']   = 'reg::number';
 $filter->default->get['recPerPage'] = 'reg::number';
 $filter->default->get['pageID']     = 'reg::number';
@@ -45,29 +46,6 @@ $filter->default->get['categoryID'] = 'reg::number';
 $filter->default->get['searchWord'] = 'reg::word';
 $filter->default->get['fullScreen'] = 'reg::number';
 $filter->default->get['key']        = 'reg::word';
-
-$filter->stat->default->get['begin'] = 'reg::date';
-$filter->stat->default->get['end']   = 'reg::date';
-
-$filter->article->get['admin']['tab']                     = 'reg::character';
-$filter->block->get['edit']['type']                       = 'reg::character';
-$filter->file->get['fileManager']['order']                = 'reg::character';
-$filter->file->get['fileManager']['path']                 = 'reg::path';
-$filter->search->get['index']['words']                    = 'reg::any';
-$filter->upgrade->get['upgradeLicense']['agree']          = 'reg::any';
-$filter->order->get['processAlipayOrder']['trade_status'] = 'reg::character';
-$filter->order->get['processAlipayOrder']['out_trade_no'] = 'reg::character';
-$filter->order->get['processAlipayOrder']['trade_no']     = 'reg::word';
-$filter->user->get['admin']['provider']                   = 'reg::character';
-$filter->user->get['admin']['user']                       = 'reg::character';
-$filter->user->get['admin']['admin']                      = 'reg::number';
-$filter->user->get['adminLog']['account']                 = 'account';
-$filter->user->get['adminLog']['ip']                      = 'ip';
-$filter->user->get['adminLog']['location']                = 'reg::base64';
-$filter->user->get['adminLog']['date']                    = 'reg::date';
-$filter->user->get['oauthCallback']['state']              = 'reg::base64';
-$filter->user->get['oauthCallback']['code']               = 'reg::base64';
-$filter->user->get['oauthCallback']['referer']            = 'reg::base64';
 
 $filter->default->cookie['adminLang']    = 'reg::lang';
 $filter->default->cookie['cart']         = 'reg::any';
@@ -77,10 +55,33 @@ $filter->default->cookie['lang']         = 'reg::lang';
 $filter->default->cookie['adminsid']     = 'reg::word';
 $filter->default->cookie['theme']        = 'reg::character';
 
+$filter->stat->default->get['begin'] = 'reg::date';
+$filter->stat->default->get['end']   = 'reg::date';
+
+$filter->article->admin->get['tab']                     = 'reg::character';
+$filter->block->edit->get['type']                       = 'reg::character';
+$filter->file->fileManager->get['order']                = 'reg::character';
+$filter->file->fileManager->get['path']                 = 'reg::path';
+$filter->search->index->get['words']                    = 'reg::any';
+$filter->upgrade->upgradeLicense->get['agree']          = 'reg::any';
+$filter->order->processAlipayOrder->get['trade_status'] = 'reg::character';
+$filter->order->processAlipayOrder->get['out_trade_no'] = 'reg::character';
+$filter->order->processAlipayOrder->get['trade_no']     = 'reg::word';
+$filter->user->admin->get['provider']                   = 'reg::character';
+$filter->user->admin->get['user']                       = 'reg::character';
+$filter->user->admin->get['admin']                      = 'reg::number';
+$filter->user->adminLog->get['account']                 = 'account';
+$filter->user->adminLog->get['ip']                      = 'ip';
+$filter->user->adminLog->get['location']                = 'reg::base64';
+$filter->user->adminLog->get['date']                    = 'reg::date';
+$filter->user->oauthCallback->get['state']              = 'reg::base64';
+$filter->user->oauthCallback->get['code']               = 'reg::base64';
+$filter->user->oauthCallback->get['referer']            = 'reg::base64';
+
 $filter->message->default->cookie['cmts'] = 'reg::any';
 $filter->thread->default->cookie['t']     = 'reg::checked';
 $filter->user->default->cookie['referer'] = 'reg::base64';
 
-$filter->guarder->cookie['validate']['validate'] = 'reg::character';
-$filter->log->cookie['record']['vid']            = 'reg::number';
-$filter->reply->cookie['post']['r']              = 'reg::checked';
+$filter->guarder->validate->cookie['validate'] = 'reg::character';
+$filter->log->record->cookie['vid']            = 'reg::number';
+$filter->reply->post->cookie['r']              = 'reg::checked';
