@@ -204,7 +204,7 @@ class block extends control
         if($id > 0)
         {
             $block = $this->block->getByID($id); 
-            $this->view->block = $this->loadModel('file')->revertRealSRC($block, $this->config->block->editor->blockform['id']);
+            $this->view->block = $this->loadModel('file')->replaceImgURL($block, $this->config->block->editor->blockform['id']);
         }
 
         $this->view->type = $type;

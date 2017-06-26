@@ -477,7 +477,7 @@ class blockModel extends model
 
         $block->content = helper::jsonEncode($block->params);
 
-        $block = $this->loadModel('file')->processEditor($block, $this->config->block->editor->create['id'], $this->post->uid);
+        $block = $this->loadModel('file')->processImgURL($block, $this->config->block->editor->create['id'], $this->post->uid);
         $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js,nav')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
@@ -574,7 +574,7 @@ class blockModel extends model
 
         $data->content = helper::jsonEncode($data->params);
 
-        $data = $this->loadModel('file')->processEditor($data, $this->config->block->editor->edit['id'], $this->post->uid);
+        $data = $this->loadModel('file')->processImgURL($data, $this->config->block->editor->edit['id'], $this->post->uid);
         $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js,nav')
             ->batchCheck($this->config->block->require->edit, 'notempty')
             ->autoCheck()

@@ -278,7 +278,7 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
         if(!isset($product->categories)) $product->categories = '';
 
-        $product = $this->loadModel('file')->processEditor($product, $this->config->product->editor->create['id'], $this->post->uid);
+        $product = $this->loadModel('file')->processImgURL($product, $this->config->product->editor->create['id'], $this->post->uid);
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product, $skip = 'categories,uid,label,value')
             ->autoCheck()
@@ -332,7 +332,7 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
         if(!isset($product->categories)) $product->categories = '';
 
-        $product = $this->loadModel('file')->processEditor($product, $this->config->product->editor->create['id'], $this->post->uid);
+        $product = $this->loadModel('file')->processImgURL($product, $this->config->product->editor->create['id'], $this->post->uid);
         $this->dao->update(TABLE_PRODUCT)
             ->data($product, $skip = 'categories,uid,label,value')
             ->autoCheck()
