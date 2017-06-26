@@ -203,7 +203,7 @@ class product extends control
 
         $product = $this->product->getByID($productID);
 
-        $product = $this->loadModel('file')->revertRealSRC($product, $this->config->product->editor->edit['id']);
+        $product = $this->loadModel('file')->replaceImgURL($product, $this->config->product->editor->edit['id']);
         if(empty($product->attributes))
         {
             $attribute = new stdclass();

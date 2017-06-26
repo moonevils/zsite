@@ -876,11 +876,12 @@ class fileModel extends model
      */
     public function pasteImage($data, $uid)
     {
+        if(empty($data)) return ''; 
         $data = str_replace('\"', '"', $data);
-
         if(!$this->checkSavePath()) return false;
 
-        ini_set('pcre.backtrack_limit', strlen($data));
+        $dataLength = strlen($data);
+        if(ini_get('pcre.backtrack_limit') < $dataLength) ini_set('pcre.backtrack_limit', $dataLength);
         preg_match_all('/<img src="(data:image\/(\S+);base64,(\S+))" .+ \/>/U', $data, $out);
         foreach($out[3] as $key => $base64Image)
         {
@@ -1365,7 +1366,7 @@ class fileModel extends model
      * @access public
      * @return object
      */
-    public function processEditor($data, $editorList, $uid = '')
+    public function processImgURL($data, $editorList, $uid = '')
     {
         if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
         $readLinkReg = basename(helper::createLink('file', 'read', 'fileID=(%fileID%)', '\w+'));
@@ -1389,7 +1390,7 @@ class fileModel extends model
      * @access public
      * @return object
      */
-    public function revertRealSRC($data, $fields)
+    public function replaceImgURL($data, $fields)
     {
         if(is_string($fields)) $fields = explode(',', str_replace(' ', '', $fields));
         foreach($fields as $field)

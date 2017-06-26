@@ -74,7 +74,7 @@ class tree extends control
     {
         /* Get current category. */
         $category = $this->tree->getById($categoryID);
-        $category = $this->loadModel('file')->revertRealSRC($category, $this->config->tree->editor->edit['id']);
+        $category = $this->loadModel('file')->replaceImgURL($category, $this->config->tree->editor->edit['id']);
 
         $this->tree->fixLang($category->type);
         $this->tree->fixMenu($category->type);

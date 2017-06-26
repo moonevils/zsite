@@ -360,7 +360,7 @@ class replyModel extends model
             ->remove('files,labels,hidden')
             ->get();
 
-        $reply = $this->loadModel('file')->processEditor($reply, $this->config->reply->editor->edit['id'], $this->post->uid);
+        $reply = $this->loadModel('file')->processImgURL($reply, $this->config->reply->editor->edit['id'], $this->post->uid);
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {
             $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
