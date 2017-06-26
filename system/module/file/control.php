@@ -152,16 +152,17 @@ class file extends control
         {
             if(!$this->file->checkSavePath()) $this->send(array('error' => 1, 'message' => $this->lang->file->errorUnwritable));
             if(!in_array(strtolower($file['extension']), $this->config->file->editorExtensions)) $this->send(array('error' => 1, 'message' => $this->lang->fail));
-            move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
+            $realPathName = $this->file->savePath . $this->file->getSaveName($file['pathname']);
+            move_uploaded_file($file['tmpname'], $realPathName);
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
             {
-                $this->file->compressImage($this->file->savePath . $file['pathname']);
+                $this->file->compressImage($realPathName);
                 if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
                 {
-                    $this->file->setWatermark($this->file->savePath . $file['pathname']);
+                    $this->file->setWatermark($realPathName);
                 }
-                $imageSize = $this->file->getImageSize($this->file->savePath . $file['pathname']);
+                $imageSize = $this->file->getImageSize($realPathName);
                 $file['width']  = $imageSize['width'];
                 $file['height'] = $imageSize['height'];
             }
