@@ -213,7 +213,7 @@ class threadModel extends model
             ->setForce('repliedDate', $now)
             ->get();
 
-        $thread = $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->post['id'], $this->post->uid);
+        $thread = $this->loadModel('file')->processImgURL($thread, $this->config->thread->editor->post['id'], $this->post->uid);
         $repeat = $this->loadModel('guarder')->checkRepeat($thread->content, $thread->title); 
         if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
         
@@ -328,7 +328,7 @@ class threadModel extends model
             ->remove('files,labels, views, replies, stick, hidden')
             ->get();
 
-        $thread = $this->loadModel('file')->processEditor($thread, $this->config->thread->editor->post['id'], $this->post->uid);
+        $thread = $this->loadModel('file')->processImgURL($thread, $this->config->thread->editor->post['id'], $this->post->uid);
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {
             $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;

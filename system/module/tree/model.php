@@ -474,7 +474,7 @@ class treeModel extends model
         $parent = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
 
-        $category = $this->loadModel('file')->processEditor($category, $this->config->tree->editor->edit['id'], $this->post->uid);
+        $category = $this->loadModel('file')->processImgURL($category, $this->config->tree->editor->edit['id'], $this->post->uid);
         $this->dao->update(TABLE_CATEGORY)
             ->data($category, $skip = 'uid,isLink')
             ->autoCheck()

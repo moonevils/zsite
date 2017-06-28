@@ -364,8 +364,10 @@ class fileModel extends model
     {
         $file = $this->dao->setAutoLang(false)->findById($fileID)->from(TABLE_FILE)->fetch();
         if(empty($file)) return false;
-        $file->realPath = $this->savePath . $file->pathname;
-        $file->webPath  = $this->getWebPath($file->objectType) . $file->pathname;
+
+        $realPathName   = $this->getRealPathName($file->pathname);
+        $file->realPath = $this->savePath . $realPathName;
+        $file->webPath  = $this->getWebPath($file->objectType) . $realPathName;
         return $this->processFile($file);
     }
 
@@ -385,32 +387,33 @@ class fileModel extends model
         $files      = $this->getUpload($htmlTagName, $objectType);
 
         $imageSize = array('width' => 0, 'height' => 0);
+        $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
 
         foreach($files as $id => $file)
         {   
             if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
             if(stripos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
             {
-                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'] . '.txt')) return false;
+                if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
                 $file['pathname'] .= '.txt';
                 $file = $this->saveZip($file);
             }
             else
             {
-                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
+                if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
             }
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
                 if($objectType != 'source' and $objectType != 'slide') 
                 {
-                    $this->compressImage($this->savePath . $file['pathname']);
+                    $this->compressImage($realPathName);
                     if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
                     {
-                        $this->setWatermark($this->savePath . $file['pathname']);
+                        $this->setWatermark($realPathName);
                     }
                 }
-                $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
+                $imageSize = $this->getImageSize($realPathName);
             }
 
             $file['objectType'] = $objectType;
@@ -558,6 +561,34 @@ class fileModel extends model
         if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
         if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
         return $extension;
+    }
+
+    /**
+     * Get save name.
+     * 
+     * @param  string    $pathName 
+     * @access public
+     * @return string
+     */
+    public function getSaveName($pathName)
+    {
+        $saveName = strpos($pathName, '.') === false ? $pathName : substr($pathName, 0, strpos($pathName, '.'));
+        return $saveName;
+    }
+
+    /**
+     * Get real path name.
+     * 
+     * @param  string    $pathName 
+     * @access public
+     * @return string
+     */
+    public function getRealPathName($pathName)
+    {
+        $realPath = $this->savePath . $pathName;
+        if(file_exists($realPath)) return $pathName;
+
+        return $this->getSaveName($pathName);
     }
 
     /**
@@ -720,17 +751,17 @@ class fileModel extends model
                 $fileInfo->extension = $extension;
             }
 
-            $realPathName = $this->savePath . $fileInfo->pathname;
+            $realPathName = $this->savePath . $this->getSaveName($fileInfo->pathname);
             $imageSize    = array('width' => 0, 'height' => 0);
             if(stripos($this->config->file->allowed, ',' . $extension . ',') === false)
             {
-                if(!move_uploaded_file($file['tmpname'], $this->savePath . $fileInfo->pathname . '.txt')) return false;
+                if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
                 $fileInfo->pathname .= '.txt';
                 $this->saveZip($file); 
             }
             else
             {
-                if(!move_uploaded_file($file['tmpname'], $this->savePath . $fileInfo->pathname)) return false;
+                if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
             }
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) and $fileInfo->objectType != 'slide' and $fileInfo->objectType != 'source' )
@@ -876,11 +907,12 @@ class fileModel extends model
      */
     public function pasteImage($data, $uid)
     {
+        if(empty($data)) return ''; 
         $data = str_replace('\"', '"', $data);
-
         if(!$this->checkSavePath()) return false;
 
-        ini_set('pcre.backtrack_limit', strlen($data));
+        $dataLength = strlen($data);
+        if(ini_get('pcre.backtrack_limit') < $dataLength) ini_set('pcre.backtrack_limit', $dataLength);
         preg_match_all('/<img src="(data:image\/(\S+);base64,(\S+))" .+ \/>/U', $data, $out);
         foreach($out[3] as $key => $base64Image)
         {
@@ -897,14 +929,15 @@ class fileModel extends model
             $file['pathname']  = $this->setPathName($file);
             $file['editor']    = 1;
 
-            file_put_contents($this->savePath . $file['pathname'], $imageData);
-            $this->compressImage($this->savePath . $file['pathname']);
+            $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
+            file_put_contents($realPathName, $imageData);
+            $this->compressImage($realPathName);
             if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
             {
-                $this->setWatermark($this->savePath . $file['pathname']);
+                $this->setWatermark($realPathName);
             }
 
-            $imageSize      = $this->getImageSize($this->savePath . $file['pathname']);
+            $imageSize      = $this->getImageSize($realPathName);
             $file['width']  = $imageSize['width'];
             $file['height'] = $imageSize['height'];
             $file['lang']   = 'all';
@@ -913,7 +946,7 @@ class fileModel extends model
             $fileID = $this->dao->lastInsertID();
             $_SESSION['album'][$uid][] = $fileID;
 
-            $data = str_replace($out[1][$key], helper::createLink('file', 'read', "fileID=$fileID", $file['extension']), $data);
+            $data = str_replace($out[1][$key], helper::createLink('file', 'read', "fileID=$fileID", '', $file['extension']), $data);
         }
 
         return $data;
@@ -1134,20 +1167,16 @@ class fileModel extends model
         {
             $file['pathname'] .= '.txt';
         }
+        $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
         if($file['chunks'] > 1)
         {
             $fileSavePath = $this->savePath . $file['chunkpath'];
-            if (!file_exists($fileSavePath)) {
-                mkdir(dirname($fileSavePath));
-            }
+            if(!file_exists($fileSavePath)) mkdir(dirname($fileSavePath));
             if($file['chunk'] > 0)
             {
                 $uploadedFile = fopen($fileSavePath, 'a+b');
                 $tmpChunkFile = fopen($file['tmpname'], 'rb');
-                while ($buff = fread($tmpChunkFile, 4096))
-                {
-                    fwrite($uploadedFile, $buff);
-                }
+                while($buff = fread($tmpChunkFile, 4096)) fwrite($uploadedFile, $buff);
                 fclose($uploadedFile);
                 fclose($tmpChunkFile);
             }
@@ -1157,12 +1186,12 @@ class fileModel extends model
             }
             if($file['chunk'] == ($file['chunks'] - 1))
             {
-                rename($fileSavePath, $this->savePath . $file['pathname']);
+                rename($fileSavePath, $realPathName);
             }
         }
         else
         {
-            if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return 'error3';
+            if(!move_uploaded_file($file['tmpname'], $realPathName)) return 'error3';
         }
 
         if(!$file['chunks'] || $file['chunk'] == ($file['chunks'] - 1))
@@ -1171,13 +1200,13 @@ class fileModel extends model
             {
                 if($objectType != 'source' and $objectType != 'slide') 
                 {
-                    $this->compressImage($this->savePath . $file['pathname']);
+                    $this->compressImage($realPathName);
                     if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
                     {
-                        $this->setWatermark($this->savePath . $file['pathname']);
+                        $this->setWatermark($realPathName);
                     }
                 }
-                $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
+                $imageSize = $this->getImageSize($realPathName);
             }
 
             $file['objectType'] = $objectType;
@@ -1365,19 +1394,20 @@ class fileModel extends model
      * @access public
      * @return object
      */
-    public function processEditor($data, $editorList, $uid = '')
+    public function processImgURL($data, $editorList, $uid = '')
     {
         if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
-        $readLinkReg = basename(helper::createLink('file', 'read', 'fileID=(%fileID%)'));
-        $readLinkReg = htmlspecialchars(str_replace(array('%fileID%', '?'), array('[0-9]+', '\?'), $readLinkReg));
-        $readLinkReg = basename(helper::createLink('file', 'read', 'fileID=(%fileID%)', '\w+'));
+        $readLinkReg = basename(helper::createLink('file', 'read', 'fileID=(%fileID%)', '', '(\w+)'));
         $readLinkReg = str_replace(array('%fileID%', '?'), array('[0-9]+', '\?'), $readLinkReg);
         foreach($editorList as $editorID)
         {
             if(empty($editorID) or empty($data->$editorID)) continue;
+
+            $imgURL = $this->config->requestType == 'GET' ? '{$2.$1}' : '{$1.$2}';
+
             $data->$editorID = $this->pasteImage($data->$editorID, $uid);
-            $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="{$1}" ', $data->$editorID);
-            $data->$editorID = preg_replace("/ src=\"" . htmlspecialchars($readLinkReg) . "\" /", ' src="{$1}" ', $data->$editorID);
+            $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="' . $imgURL . '" ', $data->$editorID);
+            $data->$editorID = preg_replace("/ src=\"" . htmlspecialchars($readLinkReg) . "\" /", ' src="' . $imgURL . '" ', $data->$editorID);
         }
 
         return $data;
@@ -1391,22 +1421,13 @@ class fileModel extends model
      * @access public
      * @return object
      */
-    public function revertRealSRC($data, $fields)
+    public function replaceImgURL($data, $fields)
     {
         if(is_string($fields)) $fields = explode(',', str_replace(' ', '', $fields));
         foreach($fields as $field)
         {
             if(empty($field) or empty($data->$field)) continue;
-            preg_match_all('/ src="{([0-9]+)}" /', $data->$field, $matchs);
-            if(!empty($matchs[1]))
-            {
-                $files = $this->dao->select('id,extension')->from(TABLE_FILE)->where('id')->in($matchs[1])->fetchPairs('id', 'extension');
-                foreach($matchs[0] as $i => $match)
-                {
-                    $fileID = $matchs[1][$i];
-                    $data->$field = str_replace($match, ' src="' . helper::createLink('file', 'read', "fileID=$fileID", array(), $files[$fileID])  . '" ', $data->$field);
-                }
-            }
+            $data->$field = preg_replace('/ src="{([0-9]+)(\.(\w+))?}" /', ' src="' . helper::createLink('file', 'read', "fileID=$1", '', "$3") . '" ', $data->$field);
         }
 
         return $data;

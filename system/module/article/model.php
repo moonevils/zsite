@@ -32,7 +32,6 @@ class articleModel extends model
         }
 
         if(!$article) return false;
-        
         /* Add link to content if necessary. */
         if($replaceTag) $article->content = $this->loadModel('tag')->addLink($article->content);
 
@@ -407,7 +406,7 @@ class articleModel extends model
         if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-', true);
         $article->content = $this->rtrimContent($article->content);
     
-        $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->create['id'], $this->post->uid);
+        $article = $this->loadModel('file')->processImgURL($article, $this->config->article->editor->create['id'], $this->post->uid);
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
@@ -556,7 +555,7 @@ class articleModel extends model
         $article->content  = $this->rtrimContent($article->content);
         if(!isset($article->categories)) $article->categories = '';
 
-        $article = $this->loadModel('file')->processEditor($article, $this->config->article->editor->edit['id'], $this->post->uid);
+        $article = $this->loadModel('file')->processImgURL($article, $this->config->article->editor->edit['id'], $this->post->uid);
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
@@ -582,6 +581,7 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if(empty($article)) return false;
         if($type == 'submission') return true;
+
         return $this->loadModel('search')->save($type, $article);
     }
         
