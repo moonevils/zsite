@@ -338,8 +338,8 @@ class article extends control
     public function view($articleID)
     {
         $article = $this->article->getByID($articleID);
-        if(!$article) die($this->fetch('errors', 'index'));
 
+        if(!$article) die($this->fetch('errors', 'index'));
         if($article->link) helper::header301($article->link);
 
         /* fetch category for display. */

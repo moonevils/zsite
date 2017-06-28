@@ -434,7 +434,7 @@ class ui extends control
                     continue;
                 }
 
-                if(strpos(',html,htmlcode,php,', ",{$block->type},") === false)
+                if(stripos(',html,htmlcode,php,', ",{$block->type},") === false)
                 {
                     if($block->type == $newBlock->type)
                     {
