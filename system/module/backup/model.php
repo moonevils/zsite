@@ -184,6 +184,26 @@ class backupModel extends model
         return $return;
     }
 
+    public function checkBackupPath()
+    {
+        $backupPath = $this->config->framework->multiSite ? $this->app->getTmpRoot() . 'backup/' . $this->app->siteCode . '/' :  $this->app->getTmpRoot() . 'backup/';
+        
+        if(!is_dir($backupPath))
+        {
+            if(!mkdir($backupPath, 0777, true)) $error = sprintf($this->lang->backup->error->noWritable, dirname($backupPath));
+        }
+        else
+        {
+            if(!is_writable($backupPath)) $error = sprintf($this->lang->backup->error->noWritable, $backupPath);
+        }
+
+        $return = new stdclass();
+        $return->backupPath = $backupPath;
+        $return->error      = isset($error) ? $error : '';
+
+        return $return; 
+    }
+
     /**
      * Add file header.
      * 
