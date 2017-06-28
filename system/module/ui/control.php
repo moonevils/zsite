@@ -467,7 +467,7 @@ class ui extends control
      */
     public function importFullSite($package, $downLink, $md5)
     {
-         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
+        $packageInfo = $this->package->parsePackageCFG($package, 'theme');
 
         /* Process theme code. */
         $installedThemes = $this->ui->getThemesByTemplate($packageInfo->template);
