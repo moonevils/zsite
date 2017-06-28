@@ -171,6 +171,7 @@ class upgradeModel extends model
                 $this->addHeaderBlock();
             case '6_1':
                 $this->execSQL($this->getUpgradeFile('6.1'));
+            case '6_2';
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -239,6 +240,7 @@ class upgradeModel extends model
             case '5_7'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.7'));
             case '6_0'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.0'));
             case '6_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.1'));
+            case '6_2'      ; 
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
