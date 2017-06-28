@@ -21,17 +21,9 @@ class backup extends control
     public function __construct($moduleName = '', $methodName = '')
     {
         parent::__construct($moduleName, $methodName);
-
-        $this->backupPath = $this->config->framework->multiSite ? $this->app->getTmpRoot() . 'backup/' . $this->app->siteCode . '/' :  $this->app->getTmpRoot() . 'backup/';
-        
-        if(!is_dir($this->backupPath))
-        {
-            if(!mkdir($this->backupPath, 0777, true)) $this->view->error = sprintf($this->lang->backup->error->noWritable, dirname($this->backupPath));
-        }
-        else
-        {
-            if(!is_writable($this->backupPath)) $this->view->error = sprintf($this->lang->backup->error->noWritable, $this->backupPath);
-        }
+        $result = $this->loadModel('backup')->checkBackupPath();
+        $this->backupPath = $result->backupPath;
+        if($result->error) $this->view->error = $result->error;
     }
 
     /**
