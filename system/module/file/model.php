@@ -48,11 +48,11 @@ class fileModel extends model
         {
             if($file->objectType == 'source' or $file->objectType == 'slide')
             {
-                $file->existStatus = file_exists($this->app->getDataRoot() . $file->pathname) ? 'yes' : 'no';
+                $file->existStatus = file_exists($this->app->getDataRoot() .  $this->getRealPathName($file->pathname, $file->objectType)) ? 'yes' : 'no';
             }
             else
             {
-                $file->existStatus = file_exists($this->app->getDataRoot() . 'upload/' . $file->pathname) ? 'yes' : 'no';
+                $file->existStatus = file_exists($this->app->getDataRoot() . 'upload/' . $this->getRealPathName($file->pathname)) ? 'yes' : 'no';
             }
             $this->processFile($file);
         }
@@ -317,7 +317,7 @@ class fileModel extends model
      */    
     public function processFile($file)
     {
-        $file->fullURL   = $this->getWebPath($file->objectType) . $file->pathname;
+        $file->fullURL   = $this->getWebPath($file->objectType) . $this->getRealPathName($file->pathname, $file->objectType);
         $file->middleURL = '';
         $file->smallURL  = '';
         $file->isImage   = false;
@@ -325,9 +325,9 @@ class fileModel extends model
 
         if(in_array(strtolower($file->extension), $this->config->file->imageExtensions, true) !== false)
         {
-            $file->middleURL = $this->getWebPath($file->objectType) . str_replace('f_', 'm_', $file->pathname);
-            $file->smallURL  = $this->getWebPath($file->objectType) . str_replace('f_', 's_', $file->pathname);
-            $file->largeURL  = $this->getWebPath($file->objectType) . str_replace('f_', 'l_', $file->pathname);
+            $file->middleURL = $this->getWebPath($file->objectType) . $this->getRealPathName(str_replace('f_', 'm_', $file->pathname), $file->objectType);
+            $file->smallURL  = $this->getWebPath($file->objectType) . $this->getRealPathName(str_replace('f_', 's_', $file->pathname), $file->objectType);
+            $file->largeURL  = $this->getWebPath($file->objectType) . $this->getRealPathName(str_replace('f_', 'l_', $file->pathname), $file->objectType);
 
             if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->middleURL))) $file->middleURL = $file->fullURL;
             if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->smallURL)))  $file->smallURL  = $file->fullURL;
@@ -583,9 +583,11 @@ class fileModel extends model
      * @access public
      * @return string
      */
-    public function getRealPathName($pathName)
+    public function getRealPathName($pathName, $objectType = '')
     {
-        $realPath = $this->savePath . $pathName;
+        $realPath = $this->app->getDataRoot() . 'upload/' . $pathName;
+        if($objectType == 'source' or $objectType == 'slide') $realPath = $this->app->getDataRoot() . $pathName;
+
         if(file_exists($realPath)) return $pathName;
 
         return $this->getSaveName($pathName);

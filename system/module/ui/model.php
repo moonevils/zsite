@@ -1367,16 +1367,42 @@ if(!function_exists('getJS'))
     {
         $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('templateCompatible')->eq($template)->andWhere('code')->eq($theme)->exec();
         if(dao::isError()) return false;
+         
+        $templateKey = "{$template}_{$theme}%";
+        $themeDifference = explode('_',$theme);
+        if(is_numeric($themeDifference[1])) 
+        {
+            $this->dao->setAutoLang(false)->delete()->from(TABLE_CONFIG)->where('`key`')->like($templateKey)->exec();
+        }
+        else
+        {
+            $deleteIDs = array();
+            $templateConfig = $this->dao->setAutoLang(false)->select("id,`key`")->from(TABLE_CONFIG)->where('`key`')->like($templateKey)->fetchAll();
+            foreach($templateConfig as $codeValue)
+            {
+                $temp = explode('_',$codeValue->key);
+                if(is_numeric($temp[2])) continue;
+
+                $deleteIDs[] = $codeValue->id;
+            }
+
+            $this->dao->setAutoLang(false)->delete()->from(TABLE_CONFIG)->where('`id`')->in($deleteIDs)->exec();
+        }
 
         if(dao::isError()) return false;
 
         $themeDirs = array();
-        $themeDirs[] = $this->app->getWwwRoot() . DS . 'data' . DS . 'source' . DS . $template . DS . $theme;
-        $themeDirs[] = $this->app->getWwwRoot() . DS . 'data' . DS . 'css' . DS . $template . DS . $theme;
-        $themeDirs[] = $this->app->getWwwRoot() . DS . 'template' . DS . $template . DS . 'theme' . DS . $theme;
+        $themeDirs[] = $this->app->getWwwRoot() . 'data'  . DS . 'source'  . DS . $template . DS . $theme;
+        $themeDirs[] = $this->app->getWwwRoot() . 'data'  . DS . 'css'     . DS . $template . DS . $theme;
+        $themeDirs[] = $this->app->getWwwRoot() . 'theme' . DS . $template . DS . $theme;
+        $themeDirs[] = $this->app->getModuleRoot() . 'ui' . DS . 'theme'   . DS . $theme;
+
+        $themeFile = $this->app->getModuleRoot() . 'ui' . DS . 'ext'   . DS . 'config' . DS . $theme . '.php';
 
         $zfile = $this->app->loadClass('zfile');
+        $zfile->removeFile($themeFile);
         foreach($themeDirs as $dir) $zfile->removeDir($dir);
+
         return true;
     }
 

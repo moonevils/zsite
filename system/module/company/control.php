@@ -37,6 +37,9 @@ class company extends control
         {
             $this->view->canonicalURL = helper::createLink('company', 'index', '', '', 'mhtml'); 
         }
+
+        $this->config->company = $this->loadModel('file')->replaceImgURL($this->config->company, $this->config->company->editor->setbasic['id']);
+
         $this->display();
     }
 
