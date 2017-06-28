@@ -1116,6 +1116,7 @@ class uiModel extends model
      */
     public function clearSources()
     {
+        $this->loadModel('file');
         $files = $this->dao->select('*')
             ->from(TABLE_FILE)
             ->where('objectType')->in('slide,source')
@@ -1123,7 +1124,7 @@ class uiModel extends model
         $filesToRemove = array();
         foreach($files as $file)
         {
-            $realPath = $this->app->getDataRoot() . $file->pathname;
+            $realPath = $this->file->savePath . $this->file->getRealPathName($file->pathname);
             if(!file_exists($realPath)) $filesToRemove[] = $file->id;
         }
         $this->dao->delete()->from(TABLE_FILE)->where('id')->in($filesToRemove)->exec();

@@ -152,16 +152,17 @@ class file extends control
         {
             if(!$this->file->checkSavePath()) $this->send(array('error' => 1, 'message' => $this->lang->file->errorUnwritable));
             if(!in_array(strtolower($file['extension']), $this->config->file->editorExtensions)) $this->send(array('error' => 1, 'message' => $this->lang->fail));
-            move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
+            $realPathName = $this->file->savePath . $this->file->getSaveName($file['pathname']);
+            move_uploaded_file($file['tmpname'], $realPathName);
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
             {
-                $this->file->compressImage($this->file->savePath . $file['pathname']);
+                $this->file->compressImage($realPathName);
                 if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
                 {
-                    $this->file->setWatermark($this->file->savePath . $file['pathname']);
+                    $this->file->setWatermark($realPathName);
                 }
-                $imageSize = $this->file->getImageSize($this->file->savePath . $file['pathname']);
+                $imageSize = $this->file->getImageSize($realPathName);
                 $file['width']  = $imageSize['width'];
                 $file['height'] = $imageSize['height'];
             }
@@ -174,7 +175,7 @@ class file extends control
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $fileID = $this->dao->lastInsertID();
-            $url    = $this->createLink('file', 'read', "fileID=$fileID", $file['extension']);
+            $url    = $this->createLink('file', 'read', "fileID=$fileID", '', $file['extension']);
             $_SESSION['album'][$uid][] = $fileID;
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));

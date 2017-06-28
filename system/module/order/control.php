@@ -71,7 +71,7 @@ class order extends control
     public function view($orderID)
     {
         $order = $this->order->getByID($orderID);
-        $order = $this->loadModel('file')->revertRealSRC($order, 'view');
+        $order = $this->loadModel('file')->replaceImgURL($order, 'view');
 
         $this->view->title    = $this->lang->order->view;
         $this->view->order    = $order;
