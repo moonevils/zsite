@@ -14,6 +14,7 @@ clean:
 	rm -fr *.zip
 zip:
 	mkdir chanzhieps
+	cp -fv VERSION chanzhieps/
 	cp -frv system chanzhieps/
 	rm -fr chanzhieps/system/config/my.php
 	cp -frv www chanzhieps && rm -fr chanzhieps/www/data/* && mkdir -p chanzhieps/www/data/upload/
