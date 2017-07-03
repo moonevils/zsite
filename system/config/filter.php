@@ -87,14 +87,11 @@ $filter->order->default->get['is_success']   = 'reg::character';
 $filter->order->default->get['notify_id']    = 'reg::any';
 $filter->order->default->get['notify_time']  = 'reg::time';
 $filter->order->default->get['notify_type']  = 'reg::character';
-$filter->order->default->get['out_trade_no'] = 'reg::character';
 $filter->order->default->get['param_type']   = 'reg::number';
 $filter->order->default->get['seller_email'] = 'email';
 $filter->order->default->get['seller_id']    = 'reg::number';
 $filter->order->default->get['subject']      = 'reg::any';
 $filter->order->default->get['total_fee']    = 'reg::float';
-$filter->order->default->get['trade_no']     = 'reg::word';
-$filter->order->default->get['trade_status'] = 'reg::character';
 $filter->order->default->get['sign']         = 'reg::md5';
 $filter->order->default->get['sign_type']    = 'equal::MD5';
 
