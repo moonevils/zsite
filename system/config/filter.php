@@ -30,7 +30,7 @@ $filter->rules->orderBy    = '/^\w+_(desc|asc)$/i';
 $filter->rules->word       = '/^\w+$/';
 $filter->rules->path       = '/(^//.|^/|^[a-zA-Z])?:?/.+(/$)?/';
 $filter->rules->paramName  = '/^[a-zA-Z0-9_\.]+$/';
-$filter->rules->paramValue = '/^[a-zA-Z0-9=_\-,`#+\^\/\.%\|\x7f-\xff]+$/';
+$filter->rules->paramValue = '/^[a-zA-Z0-9=_\-\@,`#+\^\/\.%\|\x7f-\xff]+$/';
 
 $filter->default->moduleName = 'code';
 $filter->default->methodName = 'code';
