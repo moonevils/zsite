@@ -61,9 +61,10 @@ $filter->stat->default->get['end']   = 'reg::date';
 
 $filter->article->admin->get['tab']                     = 'reg::character';
 $filter->block->edit->get['type']                       = 'reg::character';
-$filter->file->fileManager->get['order']                = 'reg::character';
-$filter->file->fileManager->get['path']                 = 'reg::path';
+$filter->file->filemanager->get['order']                = 'reg::character';
+$filter->file->filemanager->get['path']                 = 'reg::path';
 $filter->search->index->get['words']                    = 'reg::any';
+<<<<<<< HEAD
 $filter->upgrade->upgradeLicense->get['agree']          = 'reg::any';
 $filter->order->processalipayorder->get['trade_status'] = 'reg::character';
 $filter->order->processalipayorder->get['out_trade_no'] = 'reg::character';
@@ -87,16 +88,22 @@ $filter->order->processorder->get['trade_status'] = 'reg::character';
 $filter->order->processorder->get['sign']         = 'reg::md5';
 $filter->order->processorder->get['sign_type']    = 'equal::MD5';
 
+=======
+$filter->upgrade->upgradelicense->get['agree']          = 'reg::any';
+$filter->order->processalipayorder->get['trade_status'] = 'reg::character';
+$filter->order->processalipayorder->get['out_trade_no'] = 'reg::character';
+$filter->order->processalipayorder->get['trade_no']     = 'reg::word';
+>>>>>>> a3623e43977095da1026da1a0c4e0d54d31430da
 $filter->user->admin->get['provider']                   = 'reg::character';
 $filter->user->admin->get['user']                       = 'reg::character';
 $filter->user->admin->get['admin']                      = 'reg::number';
-$filter->user->adminLog->get['account']                 = 'account';
-$filter->user->adminLog->get['ip']                      = 'ip';
-$filter->user->adminLog->get['location']                = 'reg::base64';
-$filter->user->adminLog->get['date']                    = 'reg::date';
-$filter->user->oauthCallback->get['state']              = 'reg::base64';
-$filter->user->oauthCallback->get['code']               = 'reg::base64';
-$filter->user->oauthCallback->get['referer']            = 'reg::base64';
+$filter->user->adminlog->get['account']                 = 'account';
+$filter->user->adminlog->get['ip']                      = 'ip';
+$filter->user->adminlog->get['location']                = 'reg::base64';
+$filter->user->adminlog->get['date']                    = 'reg::date';
+$filter->user->oauthcallback->get['state']              = 'reg::base64';
+$filter->user->oauthcallback->get['code']               = 'reg::base64';
+$filter->user->oauthcallback->get['referer']            = 'reg::base64';
 
 $filter->message->default->cookie['cmts'] = 'reg::any';
 $filter->thread->default->cookie['t']     = 'reg::checked';

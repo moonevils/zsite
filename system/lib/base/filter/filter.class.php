@@ -674,6 +674,8 @@ class baseValidater
         $methodName   = $app->getMethodName();
         $params       = $app->getParams();
 
+        if(isset($filter->{$moduleName}->{$methodName}->{$type}) and $filter->{$moduleName}->{$methodName}->{$type} === 'all') return $var;
+
         if($type == 'cookie')
         {
             $pagerCookie = 'pager' . ucfirst($moduleName) . ucfirst($methodName);
