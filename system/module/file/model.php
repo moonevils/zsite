@@ -387,10 +387,10 @@ class fileModel extends model
         $files      = $this->getUpload($htmlTagName, $objectType);
 
         $imageSize = array('width' => 0, 'height' => 0);
-        $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
 
         foreach($files as $id => $file)
         {   
+            $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
             if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
             if(stripos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
             {
