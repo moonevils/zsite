@@ -200,11 +200,12 @@ class block extends control
      */
     public function blockForm($type, $id = 0)
     {
-
         if($id > 0)
         {
             $block = $this->block->getByID($id); 
-            $this->view->block = $this->loadModel('file')->replaceImgURL($block, $this->config->block->editor->blockform['id']);
+
+            $block->content    = $this->loadModel('file')->replaceImgURL($block->content, 'content');
+            $this->view->block = $block;
         }
 
         $this->view->type = $type;

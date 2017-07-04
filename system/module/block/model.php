@@ -441,6 +441,7 @@ class blockModel extends model
     public function create($template, $theme)
     {
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
+        $block = $this->loadModel('file')->processImgURL($block, $this->config->block->editor->create['id'], $this->post->uid);
 
         $block->content = helper::decodeXSS($block->content);
         $block->css     = helper::decodeXSS($block->css);
@@ -477,7 +478,6 @@ class blockModel extends model
 
         $block->content = helper::jsonEncode($block->params);
 
-        $block = $this->loadModel('file')->processImgURL($block, $this->config->block->editor->create['id'], $this->post->uid);
         $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js,nav')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
@@ -510,6 +510,7 @@ class blockModel extends model
         $block = $this->getByID($this->post->blockID);
 
         $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
+        $data = $this->loadModel('file')->processImgURL($data, $this->config->block->editor->edit['id'], $this->post->uid);
         $data->params['customImage'] = $block->content->customImage;
 
         if($data->type == 'followUs' && $data->params['imageType'] == 'custom' && !empty($_FILES))
@@ -574,7 +575,6 @@ class blockModel extends model
 
         $data->content = helper::jsonEncode($data->params);
 
-        $data = $this->loadModel('file')->processImgURL($data, $this->config->block->editor->edit['id'], $this->post->uid);
         $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js,nav')
             ->batchCheck($this->config->block->require->edit, 'notempty')
             ->autoCheck()
