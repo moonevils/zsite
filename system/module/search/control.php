@@ -22,6 +22,7 @@ class search extends control
     public function index($words = '', $pageID = 1)
     {
         if(empty($words)) $words = $this->get->words;
+        if(empty($words) and $pageID != 1) $words = $this->session->searchIngWord;
         $words = str_replace('"', '', $words);
         $words = str_replace("'", '', $words);
         $words = strip_tags(strtolower($words));
@@ -35,7 +36,7 @@ class search extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $this->config->search->recPerPage, $pageID);
 
-        $this->session->set('serachIngWord', $words);
+        $this->session->set('searchIngWord', $words);
 
         $begin = time();
         $this->view->results = $this->search->getList($words, $pager);
