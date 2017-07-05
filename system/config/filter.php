@@ -15,6 +15,7 @@ $filter->thread  = new stdclass();
 $filter->guarder = new stdclass();
 $filter->log     = new stdclass();
 $filter->reply   = new stdclass();
+$filter->wechat  = new stdclass();
 
 $filter->rules->md5        = '/^[a-z0-9]{32}$/';
 $filter->rules->base64     = '/^[a-zA-Z0-9\+\/\=]+$/';
@@ -126,3 +127,9 @@ $filter->log->record->cookie['vid'] = 'reg::number';
 
 $filter->reply->post = new stdclass();
 $filter->reply->post->cookie['r'] = 'reg::checked';
+
+$filter->wechat->default = new stdclass();
+$filter->wechat->default->get['signature'] = 'reg::base64';
+$filter->wechat->default->get['timestamp'] = 'reg::number';
+$filter->wechat->default->get['nonce']     = 'reg::number';
+$filter->wechat->default->get['echostr']   = 'reg::word';
