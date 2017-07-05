@@ -66,7 +66,7 @@ function initKindeditor(afterInit)
             items:editorTool,
             cssPath:[v.webRoot + 'zui/css/min.css'],
             bodyClass:'article-content',
-            urlType:'relative',
+            urlType:'absolute',
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
             imageTabIndex:1,
             filterMode:v.editors.filterMode,

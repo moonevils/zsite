@@ -101,6 +101,7 @@ class replyModel extends model
             }
         }
 
+        $this->loadModel('file');
         foreach($replies as $reply)
         {
             if(strpos($reply->content, '[quote]') !== false)
@@ -108,6 +109,7 @@ class replyModel extends model
                 $reply->content = str_replace('[quote]', "<div class='alert'>", $reply->content);
                 $reply->content = str_replace('[/quote]', '</div>', $reply->content);
             }
+            $reply = $this->file->replaceImgURL($reply, 'content');
         }
 
         return $replies;
@@ -290,6 +292,7 @@ class replyModel extends model
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
+        $reply = $this->loadModel('file')->processImgURL($reply, 'content', $this->post->uid);
         if(strlen($reply->content) > 40)
         {
             $repeat = $this->loadModel('guarder')->checkRepeat($reply->content); 
