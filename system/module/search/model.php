@@ -235,9 +235,9 @@ class searchModel extends model
             if($record->objectType == 'book')    $record->url = helper::createLink('book', 'read', "id={$record->objectID}", "book={$record->params->book}&node={$record->params->alias}");
 
             if(is_callable(array($this->loadModel('search'), "process{$record->objectType}Link")))
-            {   
+            {
                 call_user_func(array($this->loadModel('search'), "process{$record->objectType}Link"), $record);
-            }   
+            }
         }
 
         return $results;
