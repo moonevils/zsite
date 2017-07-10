@@ -348,20 +348,22 @@ class router extends baseRouter
      */
     public function setParamsByPathInfo($defaultParams = array(), $type = '')
     {
-        /* 分割URI。 Spit the URI. */
-        $items     = explode($this->config->requestFix, $this->URI);
-        $itemCount = count($items);
-        $params    = array();
-
-        /** 
-         * 前两项为模块名和方法名，参数从下标2开始。
-         * The first two item is moduleName and methodName. So the params should begin at 2.
-         **/
+        $params = array();
         if($type != 'fetch')
         {
+            /* 分割URI。 Spit the URI. */
+            $items     = explode($this->config->requestFix, $this->URI);
+            $itemCount = count($items);
+
+            /** 
+             * 前两项为模块名和方法名，参数从下标2开始。
+             * The first two item is moduleName and methodName. So the params should begin at 2.
+             **/
             for($i = 2; $i < $itemCount; $i ++)
             {
                 $key = key($defaultParams);     // Get key from the $defaultParams.
+                if(empty($key)) continue;
+
                 $params[$key] = str_replace('.', '-', $items[$i]);
                 next($defaultParams);
             }
