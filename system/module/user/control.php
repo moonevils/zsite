@@ -262,7 +262,7 @@ class user extends control
     {
         $this->app->loadLang($module);
         $this->app->loadLang('index');
-        if(!$this->app->checkAlnum($module) or !$this->app->checkAlnum($method)) die();
+        if(!$this->app->checkModuleName($module) or !$this->app->checkMethodName($method)) die();
 
         $referer = helper::safe64Decode($refererBeforeDeny);
         $referer = validater::filterSuper($referer);
