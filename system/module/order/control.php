@@ -71,6 +71,8 @@ class order extends control
     public function view($orderID)
     {
         $order = $this->order->getByID($orderID);
+        if($order->account != $this->app->user->account) die(js::locate('back'));
+
         $order = $this->loadModel('file')->replaceImgURL($order, 'view');
 
         $this->view->title    = $this->lang->order->view;
@@ -430,6 +432,8 @@ class order extends control
      */
     public function edit($orderID)
     {
+        $order = $this->order->getByID($orderID);
+        if($order->account != $this->app->user->account) die(js::locate('back'));
         if($_POST)
         {
             $changes = $this->order->edit($orderID);
@@ -444,7 +448,7 @@ class order extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
         $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
-        $this->view->order       = $this->order->getByID($orderID);
+        $this->view->order       = $order;
         $this->view->products    = $this->order->getOrderProducts($orderID);
         $this->view->title       = $this->lang->order->edit;
         $this->display();
@@ -459,6 +463,9 @@ class order extends control
      */
     public function delete($orderID)
     {
+        $order = $this->order->getByID($orderID);
+        if($order->account != $this->app->user->account) die(js::locate('back'));
+
         $result = $this->order->deleteOrder($orderID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess));
