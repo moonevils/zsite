@@ -75,6 +75,7 @@ class articleModel extends model
         
         /* Get it's files. */
         $page->files = $this->loadModel('file')->getByObject('page', $page->id);
+        $page = $this->file->replaceImgURL($page, $this->config->article->editor->modify['id']);
 
         return $page;
     }
