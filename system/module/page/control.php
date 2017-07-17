@@ -45,7 +45,7 @@ class page extends control
         if($page->link) helper::header301($page->link);
 
         $title    = $page->title;
-        $keywords = $page->keywords . ' ' . $this->config->site->keywords;
+        $keywords = (!empty($page->keywords) ? ($page->keywords . ' - ') : '') . $this->config->site->keywords;
         $desc     = $page->summary;
         
         $this->view->title      = $title;

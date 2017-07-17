@@ -75,7 +75,7 @@ class product extends control
         }
 
         $title    = $category->name;
-        $keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
+        $keywords = (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
         $desc     = strip_tags($category->desc) . ' ';
         $this->session->set('productCategory', $category->id);
 
@@ -84,7 +84,7 @@ class product extends control
         $this->view->productList = $productList;
 
         $this->view->title      = $title;
-        $this->view->keywords   = $keywords;
+        $this->view->keywords   = trim($keywords);
         $this->view->desc       = $desc;
         $this->view->category   = $category;
         $this->view->products   = $products;
@@ -271,7 +271,7 @@ class product extends control
         $category = $this->loadModel('tree')->getByID($category, 'product');
 
         $title    = $product->name . ' - ' . $category->name;
-        $keywords = $product->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
+        $keywords = (!empty($product->keywords) ? ($product->keywords . ' - ') : '') . (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
         $desc     = strip_tags($product->desc);
         
         $this->view->title       = $title;

@@ -59,7 +59,7 @@ class article extends control
         if($category)
         {
             $title    = $category->name;
-            $keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
+            $keywords = (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
             $desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
         }
@@ -73,7 +73,7 @@ class article extends control
         $this->view->articleList = $articleList;
         
         $this->view->title      = $title;
-        $this->view->keywords   = $keywords;
+        $this->view->keywords   = trim($keywords);
         $this->view->desc       = $desc;
         $this->view->category   = $category;
         $this->view->articles   = $articles;
@@ -366,7 +366,7 @@ class article extends control
         $this->session->set('articleCategory', $category->id);
 
         $title    = $article->title . ' - ' . $category->name;
-        $keywords = $article->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
+        $keywords = (!empty($article->keywords) ? ($article->keywords . ' - ') : '') . (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
         $desc     = strip_tags($article->summary);
         
         $this->view->title       = $title;

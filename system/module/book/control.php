@@ -86,7 +86,7 @@ class book extends control
             $serials = $this->book->computeSN($book->id);
 
             $this->view->title      = $book->title;
-            $this->view->keywords   = trim($node->keywords . ' ' . $this->config->site->keywords);
+            $this->view->keywords   = trim((!empty($node->keywords) ? ($node->keywords . ' - ') : '') . (!empty($book->keywords) ? ($book->keywords . ' - ') : '') . $this->config->site->keywords);
             $this->view->node       = $node;
             $this->view->book       = $book;
             $this->view->serials    = $serials;
@@ -124,7 +124,7 @@ class book extends control
         $this->view->bookInfoLink = html::a(inLink('read', "articleID=$book->id", "book=$book->alias&node=$article->alias"), $book->title . $this->lang->book->info, "class = $activeInfoLink");
         
         $this->view->title       = $article->title . ' - ' . $book->title;;
-        $this->view->keywords    = $article->keywords;
+        $this->view->keywords    = trim((!empty($article->keywords) ? ($article->keywords . ' - ') : '') . (!empty($node->keyword) ? ($node->keywords . ' - ') : '') . (!empty($book->keywords) ? ($book->keywords . ' - ') : '') . $this->config->site->keywords);
         $this->view->desc        = $article->summary;
         $this->view->article     = $article;
         $this->view->content     = $content;

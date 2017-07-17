@@ -73,7 +73,7 @@ class blog extends control
 
             $this->view->category = $category;
             $this->view->title    = $category->name;
-            $this->view->keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
+            $this->view->keywords = trim((!empty($category->keywords) ? ($category->keywords . ' - ') :  '') . $this->config->site->keywords);
             $this->view->desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
             $this->view->layouts    = $this->loadModel('block')->getPageBlocks('blog', 'index', $category->id);
@@ -112,7 +112,7 @@ class blog extends control
         $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $article->title . ' - ' . $category->name;
-        $keywords = $article->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
+        $keywords = (!empty($article->keywords) ? ($article->keywords . ' - ') : ' ') . (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
         $desc     = strip_tags($article->summary);
         
         $this->view->title       = $title;
