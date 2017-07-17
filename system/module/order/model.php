@@ -272,8 +272,9 @@ class orderModel extends model
         $alipay   = new alipay($alipayConfig);
 
         $subject  = $this->getSubject($order->id);
+        $extend  = "TRANS_MEMO^{$this->app->siteCode}/{$order->type}/{$this->app->user->account}/{$this->app->user->company}|ISV^";
 
-        return $alipay->createPayLink($this->getHumanOrder($order->id),  $subject, $order->amount);
+        return $alipay->createPayLink($this->getHumanOrder($order->id),  $subject, $order->amount, $body = '', $extra = '', $extend);
     }
 
     /**
