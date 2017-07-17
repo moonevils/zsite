@@ -35,6 +35,7 @@ $config->alipay->direct->map['subject'] = 'subject';
 $config->alipay->direct->map['money']   = 'total_fee';
 $config->alipay->direct->map['body']    = 'body';
 $config->alipay->direct->map['extra']   = 'extra_common';
+$config->alipay->direct->map['extend']  = 'extend_param';
 
 $config->alipay->secured = new stdclass();
 $config->alipay->secured->payGW         = 'https://mapi.alipay.com/gateway.do?';
