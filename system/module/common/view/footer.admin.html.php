@@ -32,5 +32,8 @@ $extHookRule  = $siteExtPath . 'footer.admin.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
+<?php if($this->app->user->account != 'guest' and commonModel::isAvailable('score') and (!isset($this->config->site->resetMaxLoginDate) or $this->config->site->resetMaxLoginDate < date('Y-m-d'))):?>
+<script>$.get(createLink('score', 'resetMaxLogin'));</script>
+<?php endif;?>
 </body>
 </html>
