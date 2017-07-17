@@ -10,7 +10,7 @@ class alipay
     }
 
     /* 生成支付链接。*/
-    public function createPayLink($orderNO, $subject, $money, $body = '', $extra = '')
+    public function createPayLink($orderNO, $subject, $money, $body = '', $extra = '', $extend = '')
     {
         /* 将这些参数设置到config对象中。*/
         $this->setConfig('orderNO', $orderNO);
@@ -18,6 +18,7 @@ class alipay
         $this->setConfig('money',   $money);
         $this->setConfig('body',    $body);
         $this->setConfig('extra',   $extra);
+        $this->setConfig('extend',  $extend);
 
         /* 生成支付所需要的参数，并生成链接。*/
         $params = $this->createPayParams();
