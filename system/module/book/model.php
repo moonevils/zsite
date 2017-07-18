@@ -218,6 +218,8 @@ class bookModel extends model
         $catalogLink = commonModel::hasPriv('book', 'catalog') ? html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog) : '';
         $moveLink    = commonModel::hasPriv('book', 'sort') ? html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'") : '';
 
+        if($node->type == 'article') $previewLink = commonModel::hasPriv('book', 'read') ? html::a($this->loadModel('article')->createPreviewLink($node->id, '', 'book'), $this->lang->preview) : '';
+
         $childrenHtml = '';
         if($children) 
         {
@@ -231,7 +233,7 @@ class bookModel extends model
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
 
         $draft = $node->status == 'draft' ? "<span class='label label-warning'>{$this->lang->book->statusList['draft']}</span>" : '';
-        if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong>' . $draft . '<span class="actions">' . $editLink . $filesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
+        if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong>' . $draft . '<span class="actions">' . $editLink . $previewLink . $filesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
 
         return $catalog;
     }
