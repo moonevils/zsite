@@ -654,7 +654,7 @@ class articleModel extends model
             $this->loadModel('book');
             $bookNode = $this->book->getNodeByID($articleID);
 
-            $link = helper::createLink('book', 'read', "articleID=$bookNode->id", "book={$bookNode->book->alias}&node={$bookNode->alias}");
+            $link = commonModel::createFrontLink('book', 'read', "articleID=$bookNode->id", "book={$bookNode->book->alias}&node={$bookNode->alias}", $viewType);
             return $link;
         }
 
