@@ -75,20 +75,28 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               $attributeHtml = '';
               if(!$product->unsaleable)
               {
-                  if($product->promotion != 0)
+                  if($product->negotiate)
+                  { 
+                      $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
+                      $attributeHtml .= "<span class='meta-value'><span class='text-danger text-lg text-latin'>" . $lang->product->negotiate . "</span> " . html::a($this->createLink('company', 'contact'), "<span class='label label-success'>" . $lang->product->contact . '</span>', "target='_blank'") . '</li>';
+                  }
+                  else
                   {
-                      if($product->price != 0)
+                      if($product->promotion != 0)
+                      {
+                          if($product->price != 0)
+                          {
+                              $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
+                              $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
+                          }
+                          $attributeHtml .= "<li id='promotionItem'><span class='meta-name'>" . $lang->product->promotion . "</span>";
+                          $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
+                      }
+                      else if($product->price != 0)
                       {
                           $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
-                          $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
+                          $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $this->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
                       }
-                      $attributeHtml .= "<li id='promotionItem'><span class='meta-name'>" . $lang->product->promotion . "</span>";
-                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
-                  }
-                  else if($product->price != 0)
-                  {
-                      $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
-                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $this->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
                   }
               }
               if($product->amount and $this->config->product->stock)
@@ -134,7 +142,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               ?>
             </ul>
             <?php if(empty($attributeHtml)) echo '<div class="product-summary">' . $product->desc . '</div>'; ?>
-            <?php if(!$product->unsaleable and commonModel::isAvailable('shop')):?>
+            <?php if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate):?>
             <?php if(!$stockOpened or $product->amount > 0):?>
             <ul class='list-unstyled meta-list'>
               <li id='countBox'>
@@ -158,7 +166,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               <?php endif;?>
             </span>
             <?php endif;?>
-            <?php if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall):?>
+            <?php if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall and !$product->negotiate):?>
             <hr>
             <div class='btn-gobuy'>
               <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>

@@ -56,18 +56,25 @@
             echo "<a href='{$url}' style='color:{$product->titleColor}'>{$product->name}</a>";
             if(!$product->unsaleable)
             {
-                if($product->promotion != 0)
+                if($product->negotiate)
                 {
-                    echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-                    if($product->price != 0)
-                    {
-                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
-                    }
-                    echo "</div>";
+                    echo "<div><strong class='text-danger'>" . $lang->product->negotiate . '</strong></div>';
                 }
-                else if($product->price != 0)
+                else
                 {
-                    echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong></div>';
+                    if($product->promotion != 0)
+                    {
+                        echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                        if($product->price != 0)
+                        {
+                            echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
+                        }
+                        echo "</div>";
+                    }
+                    else if($product->price != 0)
+                    {
+                        echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong></div>';
+                    }
                 }
             }
             ?>
