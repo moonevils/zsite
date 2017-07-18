@@ -23,16 +23,23 @@
           <?php
           if(!$product->unsaleable)
           {
-              if($product->promotion != 0)
+              if($product->negotiate)
               {
-                  echo "<strong class='text-muted'>"  .'</strong>';
-                  echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>&nbsp;&nbsp;';
+                  echo "<strong class='text-danger'>" . $lang->product->negotiate . '</strong>&nbsp;&nbsp;';
               }
               else
               {
-                  if($product->price != 0)
+                  if($product->promotion != 0)
                   {
-                      echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>&nbsp;&nbsp;';
+                      echo "<strong class='text-muted'>"  .'</strong>';
+                      echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>&nbsp;&nbsp;';
+                  }
+                  else
+                  {
+                      if($product->price != 0)
+                      {
+                          echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>&nbsp;&nbsp;';
+                      }
                   }
               }
           }

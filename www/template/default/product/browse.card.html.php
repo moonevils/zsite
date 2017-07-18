@@ -23,15 +23,22 @@
           $currencySymbol = $this->config->product->currencySymbol;
           if(!$product->unsaleable)
           {
-              if($product->promotion != 0)
+              if($product->negotiate)
               {
-                  echo "<strong class='text-danger' style='margin:-3px;'>" . $currencySymbol . $product->promotion . '</strong>';
+                  echo "<span class='text-danger'>" . $lang->product->negotiate . '</span>';
               }
               else
               {
-                  if($product->price != 0)
+                  if($product->promotion != 0)
                   {
-                      echo "<strong class='text-danger' style='margin:-3px;'>" . $currencySymbol . $product->price . '</strong>';
+                      echo "<strong class='text-danger' style='margin:-3px;'>" . $currencySymbol . $product->promotion . '</strong>';
+                  }
+                  else
+                  {
+                      if($product->price != 0)
+                      {
+                          echo "<strong class='text-danger' style='margin:-3px;'>" . $currencySymbol . $product->price . '</strong>';
+                      }
                   }
               }
           }

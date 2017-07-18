@@ -59,17 +59,24 @@ js::execute($product->js);
     if(!$product->unsaleable)
     {
         echo "<div class='caption'>";
-        if($product->promotion != 0)
+        if($product->negotiate)
         {
-            echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-            if($product->price != 0)
-            {
-                echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
-            }
+            echo "<strong class='text-danger'>" . $lang->product->negotiate . '</strong>';
         }
-        else if($product->price != 0)
+        else
         {
-            echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+            if($product->promotion != 0)
+            {
+                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                if($product->price != 0)
+                {
+                    echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
+                }
+            }
+            else if($product->price != 0)
+            {
+                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+            }
         }
         echo '</div>';
     }
@@ -134,7 +141,7 @@ foreach($product->attributes as $attribute)
         echo $attributeHtml;
     }
     ?>
-    <?php if(!$product->unsaleable and commonModel::isAvailable('shop')):?>
+    <?php if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate):?>
     <tr>
       <th><?php echo $lang->product->count; ?></th>
       <td>
@@ -158,10 +165,10 @@ foreach($product->attributes as $attribute)
       </td>
     </tr>
     <?php endif;?>
-    <?php if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall):?>
+    <?php if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall and !$product->negotiate):?>
     <tr>
       <td colspan='2'>
-      <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow . ' <i class="icon icon-external-link"></i>', "class='btn block primary' target='_blank'");?>
+        <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow . ' <i class="icon icon-external-link"></i>', "class='btn block primary' target='_blank'");?>
       </td>
     </tr>
     <?php endif;?>

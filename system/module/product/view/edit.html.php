@@ -155,6 +155,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->product->price;?></span>
                   <?php echo html::input('price', $product->price, "class='form-control'");?>
+                  <span class='input-group-addon'>
+                    <label class='checkbox-inline'>
+                      <?php $checked = $product->negotiate ? 'checked' : '';?>
+                      <input type='checkbox' name='negotiate' id='negotiate' value='1' <?php echo $checked;?>/>
+                      <?php echo $lang->product->negotiate;?>
+                    </label>
+                  </span>
                 </div>
               </div>
               <div class='col-sm-6 col-md-6'>

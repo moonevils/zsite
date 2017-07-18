@@ -52,4 +52,18 @@ $(document).ready(function()
     }); 
 
     $('#unsaleable').change();
+
+    $('#negotiate').change(function()
+    {   
+        if($(this).prop('checked'))
+        {   
+            $('#price, #promotion').attr('readonly', true);
+        }   
+        else
+        {   
+            $('#price, #promotion').attr('readonly', false);
+        }   
+    }); 
+
+    $('#negotiate').change();
 })

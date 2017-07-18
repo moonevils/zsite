@@ -46,8 +46,9 @@ $lang->product->sales      = '产品定价';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
 
-$lang->product->currency = '货币';
-$lang->product->stock    = '库存';
+$lang->product->currency  = '货币';
+$lang->product->stock     = '库存';
+$lang->product->negotiate = '面议';
 
 $lang->product->list         = '产品列表';
 $lang->product->hot          = '热门产品';
@@ -66,6 +67,7 @@ $lang->product->detail       = '查看详情';
 $lang->product->setting      = '设置';
 $lang->product->soldout      = '已售罄';
 $lang->product->layout       = '布局';
+$lang->product->contact      = '联系我们';
 
 $lang->product->orderBy = new stdclass();
 $lang->product->orderBy->time = '时间';
