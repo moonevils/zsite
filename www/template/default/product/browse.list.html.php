@@ -19,7 +19,7 @@
         <td id='listProduct<?php echo $product->id?>' data-ve='product' data-id='<?php echo $product->id?>'>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), "<strong style='color:{$product->titleColor}'>" . $product->name . '</strong>');?>
         </td>
-        <td>
+        <td class='w-100px'>
           <?php
           if(!$product->unsaleable)
           {

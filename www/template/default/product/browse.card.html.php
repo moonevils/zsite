@@ -14,6 +14,10 @@
       }
       ?>
       <div class='card-heading'>
+        <?php $showPrice    = isset($this->config->product->showPrice) ? $this->config->product->showPrice : true;?>
+        <?php $showViews    = isset($this->config->product->showViews) ? $this->config->product->showViews : true;?>
+        <?php $namePosition = isset($this->config->product->namePosition) ? 'text-' . $this->config->product->namePosition : '';?>
+        <?php if($showPrice):?>
         <div class='price'>
           <?php
           $currencySymbol = $this->config->product->currencySymbol;
@@ -33,10 +37,10 @@
           }
           ?>
         </div>
-        <div class='text-nowrap text-ellipsis'>
+        <?php endif;?>
+        <div class='text-nowrap text-ellipsis <?php echo $namePosition;?>'>
           <span><?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $product->name, "style='color:{$product->titleColor}'");?></span>
-          <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
-          <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $product->id . $config->viewsPlaceholder;?></span><?php endif;?>
+          <?php if($showViews):?><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $product->id . $config->viewsPlaceholder;?></span><?php endif;?>
         </div>
       </div>
     </div>

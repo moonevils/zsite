@@ -138,4 +138,16 @@ $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = '关闭';
 $lang->product->stockOptions[1] = '开启';
 
+$lang->product->viewsOptions = array();
+$lang->product->viewsOptions[1] = '显示';
+$lang->product->viewsOptions[0] = '不显示';
+
+$lang->product->priceOptions = array();
+$lang->product->priceOptions[1] = '显示';
+$lang->product->priceOptions[0] = '不显示';
+
+$lang->product->namePositionOptions = array();
+$lang->product->namePositionOptions['left']   = '居左';
+$lang->product->namePositionOptions['center'] = '居中';
+
 $lang->product->noCategoriesTip = '您还没有为产品添加类目，请添加类目';

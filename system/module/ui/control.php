@@ -183,7 +183,6 @@ class ui extends control
         /* Get configs of list number. */
         $this->app->loadModuleConfig('file');
         $this->app->loadLang('file');
-        if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadModuleConfig('product');
         if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
         if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadModuleConfig('message');
 
@@ -196,6 +195,11 @@ class ui extends control
         {
             $this->app->loadModuleConfig('forum');
             $this->app->loadModuleConfig('reply');
+        }
+        if(strpos($this->config->site->modules, 'product') !== false)
+        {
+            $this->app->loadModuleConfig('product');
+            $this->app->loadLang('product');
         }
 
         if(!empty($_POST))
@@ -216,6 +220,10 @@ class ui extends control
 
             $result = $this->loadModel('setting')->setItems('system.article', $this->post->article);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            if(!$_POST['product']['namePosition']) $_POST['product']['namePosition'] = 'left';
+            $result = $this->loadModel('setting')->setItems('system.product', $this->post->product);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
                 
             $thumbs = helper::jsonEncode($this->post->thumbs);
             $result = $this->loadModel('setting')->setItem('system.common.file.thumbs', $thumbs);
@@ -228,7 +236,7 @@ class ui extends control
             $result  = $this->loadModel('setting')->setItems('system.common.ui', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            $setting = fixer::input('post')->remove('productView,QRCode,blog,article,thumbs,files')->get();
+            $setting = fixer::input('post')->remove('productView,QRCode,blog,article,product,thumbs,files')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
