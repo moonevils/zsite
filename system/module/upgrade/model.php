@@ -172,6 +172,8 @@ class upgradeModel extends model
             case '6_1':
                 $this->execSQL($this->getUpgradeFile('6.1'));
             case '6_2';
+            case '6_3_beta':
+                $this->processProductViews();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2290,5 +2292,12 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    public function processProductViews()
+    {
+        $showViews = $this->loadModel('setting')->getItem('owner=system&module=common&section=ui&key=productView');
+        $this->setting->setItem('system.product.showViews', $showViews);
+        return dao::isError();
     }
 }

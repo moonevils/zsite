@@ -34,12 +34,6 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <div class='tab-content'>
         <div class='tab-pane setting-control-tab-pane' id='displayTab'>
           <table class='table table-form w-p60 table-fixed'>
-            <?php if(strpos($this->config->site->modules, 'product') !== false):?>
-            <tr>
-              <th class='w-120px'><?php echo $lang->ui->productView;?></th>
-              <td class='w-p30'><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td><td></td>
-            </tr>
-            <?php endif;?>
             <tr>
               <th class='w-120px'><?php echo $lang->ui->QRCode;?></th>
               <td class='w-p30'><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td>
@@ -139,6 +133,21 @@ foreach (explode('|', $lang->colorPlates) as $value)
                   <span class='input-group-addon'><?php echo $lang->article->browseImage->maxWidth;?></span>
                   <?php echo html::input('article[imageWidth]', isset($this->config->article->imageWidth) ? $this->config->article->imageWidth : '100', "class='form-control'");?>
                   <span class='input-group-addon'>px</span>
+                </div>
+              </td>
+            </tr>
+            <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'product') !== false):?>
+            <tr>
+              <th><?php echo $lang->product->list;?></th>
+              <td colspan='2'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->productView;?></span>
+                  <?php echo html::select('product[showViews]', $lang->product->viewsOptions, isset($this->config->product->showViews) ? $this->config->product->showViews : '1', "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->product->price;?></span>
+                  <?php echo html::select('product[showPrice]', $lang->product->priceOptions, isset($this->config->product->showPrice) ? $this->config->product->showPrice : '1', "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->product->name;?></span>
+                  <?php echo html::select('product[namePosition]', $lang->product->namePositionOptions, isset($this->config->product->namePosition) ? $this->config->product->namePosition : 'left', "class='form-control'");?>
                 </div>
               </td>
             </tr>

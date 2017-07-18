@@ -147,4 +147,18 @@ $(document).ready(function()
             $('.thumb-footer').addClass('hidden');
         }
     })
+
+    $('[name*=product][name*=showViews]').change(function()
+    {
+        if($(this).find('option:selected').val() == '1')
+        {
+            $('[name*=product][name*=namePosition]').val('left').attr('disabled', true);
+        }
+        else
+        {
+            $('[name*=product][name*=namePosition]').val('left').attr('disabled', false);
+        }
+    })
+
+    $('[name*=product][name*=showViews]').change();
 });
