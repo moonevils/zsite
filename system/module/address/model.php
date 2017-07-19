@@ -12,6 +12,18 @@
 class addressModel extends model
 {
     /**
+     * Get address by id. 
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return object
+     */
+    public function getByID($id)
+    {
+        return $this->dao->select('*')->from(TABLE_ADDRESS)->where('id')->eq($id)->fetch();
+    }
+
+    /**
      * create an address. 
      * 
      * @access public
