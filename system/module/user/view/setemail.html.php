@@ -21,7 +21,7 @@
     </tr>
     <tr>
       <th></th>
-      <td id='responser' class='alert alert-success'></td>
+      <td id='responser' class='alert alert-success hide'></td>
     </tr>
     <tr>
       <th></th><td colspan='2'><?php echo html::submitButton() . html::hidden('token', $token);?></td>
