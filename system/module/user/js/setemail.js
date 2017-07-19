@@ -12,7 +12,7 @@ $(document).ready(function()
         {
             if(response.result == 'success')
             {
-               $('#responser').html(response.message);
+               $('#responser').html(response.message).show();
                $('#mailSender').hide();
             }
             else
