@@ -156,7 +156,7 @@ class mail extends control
             if($this->mail->isError())
             {
                 $error = str_replace('\n', "<br />", join('', $this->mail->getError()));
-                $this->send(array('result' => 'fail', 'data' => $error));
+                $this->send(array('result' => 'fail', 'message' => $error));
             }
             $this->send(array('result' => 'success', 'message' => sprintf($this->lang->mail->successSended, $this->post->to)));
         }
