@@ -71,7 +71,7 @@ class order extends control
     public function view($orderID)
     {
         $order = $this->order->getByID($orderID);
-        if($order->account != $this->app->user->account) die(js::locate('back'));
+        if($order->account != $this->app->user->account and $this->app->user->admin != 'super') die(js::locate('back'));
 
         $order = $this->loadModel('file')->replaceImgURL($order, 'view');
 
@@ -93,6 +93,8 @@ class order extends control
     public function check($orderID)
     {
         $order = $this->order->getByID($orderID);
+        if($order->account != $this->app->user->account) die(js::locate('back'));
+
         $this->app->loadModuleConfig('product');
 
         $paymentList = explode(',', $this->config->shop->payment);
@@ -149,7 +151,7 @@ class order extends control
     public function track($orderID)
     {
         $order = $this->order->getByID($orderID);
-        if($order->account != $this->app->user->account) die();
+        if($order->account != $this->app->user->account) die(js::locate('back'));
         $this->view->order       = $order;
         $this->view->title       = $this->lang->order->track;
         $this->view->expressList = $this->loadModel('tree')->getPairs(0, 'express');
@@ -233,6 +235,7 @@ class order extends control
     public function cancel($orderID)
     {
         $order = $this->order->getByID($orderID);
+        if($order->account != $this->app->user->account) die(js::locate('back'));
 
         if($order->deliveryStatus != 'send' and $order->payStatus != 'paid') 
         {
@@ -253,7 +256,10 @@ class order extends control
      */
     public function confirmDelivery($orderID)
     {
-        $result =  $this->order->confirmDelivery($orderID);
+        $order = $this->order->getByID($orderID);
+        if($order->account != $this->app->user->account) die(js::locate('back'));
+
+        $result = $this->order->confirmDelivery($orderID);
         if($result) $this->send(array('result' => 'success', 'message' => $this->lang->order->deliveryConfirmed));
         $this->send(array('result' => 'fail', 'message' => dao::geterror()));
     }
@@ -348,7 +354,7 @@ class order extends control
     }
      
     /**
-     * setStatus 
+     * Finish order. 
      * 
      * @param  string    $orderID 
      * @access public
@@ -377,7 +383,7 @@ class order extends control
     }
     
     /** 
-     * Edit the return of order
+     * Edit the return of order.
      * 
      * @access public
      * @param  int
@@ -427,6 +433,9 @@ class order extends control
      */
     public function applyRefund($orderID)
     {
+        $order = $this->order->getByID($orderID);
+        if($order->account != $this->app->user->account) die(js::locate('back'));
+
         if($_POST)
         {
             $result = $this->order->applyRefund($orderID);
@@ -449,7 +458,8 @@ class order extends control
     public function edit($orderID)
     {
         $order = $this->order->getByID($orderID);
-        if($order->account != $this->app->user->account) die(js::locate('back'));
+        if($this->app->user->admin != 'super' and $order->account != $this->app->user->account) die(js::locate('back'));
+
         if($_POST)
         {
             $changes = $this->order->edit($orderID);
@@ -480,7 +490,7 @@ class order extends control
     public function delete($orderID)
     {
         $order = $this->order->getByID($orderID);
-        if($order->account != $this->app->user->account) die(js::locate('back'));
+        if($this->app->user->admin != 'super' and $order->account != $this->app->user->account) die(js::locate('back'));
 
         $result = $this->order->deleteOrder($orderID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
