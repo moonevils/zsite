@@ -309,7 +309,18 @@ class order extends control
 
         /* Get the orderID from the alipay. */
         $order = $this->order->getOrderFromAlipay($mode);
-        if(!$order) die('STOP!');
+        if(!$order)
+        {
+            if($mode == 'return')
+            {
+                if($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS') die('success');
+            }
+            elseif($mode == 'notify')
+            {
+                if($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS') die('success');
+            }
+            die('STOP!');
+        }
 
         /* Process the order. */
         $result = $this->order->processOrder($order);
