@@ -421,6 +421,11 @@ EOT;
 
         $importantValidate = explode(',', $importantValidate);
         if(empty($importantValidate)) return true;;
+        
+        $lastVerifyVar  = "lastVerify{$this->app->user->account}";
+        $lastVerifyTime = $this->session->$lastVerifyVar;
+
+        if((time() - $lastVerifyTime) < 180) return true;
 
         if($this->session->verify == 'pass') return true;
 

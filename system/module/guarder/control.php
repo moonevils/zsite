@@ -212,12 +212,14 @@ class guarder extends control
                 if(!($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->emailFail));
                 $this->session->set('verifyCode', '');
                 $this->session->set('verify', 'pass');
+                $this->session->set("lastVerify{$account}", time());
             }
             elseif($validateType == 'setSecurity')
             {
                 if(!($this->post->answer) or md5(trim($this->post->answer)) != $question->answer) $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->questionFail));
                 $this->session->set('verify', 'pass');
             }
+
             $this->send(array('result' => 'success', 'message' => $this->lang->mail->verifySuccess, 'locate' => helper::safe64Decode($url), 'target' => $target));
         }
 
