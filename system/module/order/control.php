@@ -311,15 +311,20 @@ class order extends control
         $order = $this->order->getOrderFromAlipay($mode);
         if(!$order)
         {
-            if($mode == 'return')
+            $orderID = 0;
+            if($mode == 'return' and ($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS'))
             {
-                if($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS') die('success');
+                $orderID = $this->get->out_trade_no;
             }
-            elseif($mode == 'notify')
+            elseif($mode == 'notify' and ($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS'))
             {
-                if($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS') die('success');
+                $orderID = $this->post->out_trade_no;
             }
-            die('STOP!');
+
+            if($orderID) $orderID = $this->order->getRawOrder($orderID);
+            $order = $this->order->getByID($orderID);
+
+            if(!$order) die('STOP');
         }
 
         /* Process the order. */
