@@ -54,13 +54,16 @@ class address extends control
      */
     public function edit($id)
     {
+        $address = $this->address->getByID($id);
+        if(!$address or $address->account != $this->app->user->account) die();
+
         if($_POST)
         {
             $result = $this->address->update($id);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->address = $this->dao->select('*')->from(TABLE_ADDRESS)->where('id')->eq($id)->fetch();
+        $this->view->address = $address;
         $this->display();
     }
 
