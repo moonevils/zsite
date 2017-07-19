@@ -264,14 +264,13 @@ class orderModel extends model
         $alipayConfig->notifyURL = commonModel::getSysURL() . $notifyURL;
         $alipayConfig->returnURL = commonModel::getSysURL() . $returnURL;
         $alipayConfig->showURL   = $clientDevice == 'mobile' ? commonModel::getSysURL() . $showURL : ''; 
-        $alipayConfig->pid    = $this->config->alipay->pid;
-        $alipayConfig->key    = $this->config->alipay->key;
-        $alipayConfig->email  = $this->config->alipay->email;
-        $alipayConfig->device = $clientDevice; 
+        $alipayConfig->pid       = $this->config->alipay->pid;
+        $alipayConfig->key       = $this->config->alipay->key;
+        $alipayConfig->email     = $this->config->alipay->email;
+        $alipayConfig->device    = $clientDevice; 
         
-        $alipay   = new alipay($alipayConfig);
-
-        $subject  = $this->getSubject($order->id);
+        $alipay  = new alipay($alipayConfig);
+        $subject = $this->getSubject($order->id);
         $extend  = "TRANS_MEMO^{$this->app->siteCode}/{$order->type}/{$this->app->user->account}/{$this->app->user->company}|ISV^";
 
         return $alipay->createPayLink($this->getHumanOrder($order->id),  $subject, $order->amount, $body = '', $extra = '', $extend);
@@ -943,8 +942,7 @@ class orderModel extends model
             ->set('last')->eq(helper::now())
             ->where('id')->eq($orderID)
             ->exec();
-        if(dao::isError()) return false;
-        return true;
+        return !dao::isError();
     }
 
     /**
