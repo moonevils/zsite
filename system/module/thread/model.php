@@ -73,6 +73,28 @@ class threadModel extends model
     }
 
     /**
+     * Get thread fist for sitemap. 
+     * 
+     * @param  int    $limit 
+     * @access public
+     * @return void
+     */
+    public function getListForSitemap($limit = '100')
+    {
+        $threads = $this->dao->select('*')->from(TABLE_THREAD)
+            ->where(1)
+            ->andWhere('hidden')->eq('0')
+            ->andWhere('addedDate')->le(helper::now())
+            ->beginIf($this->config->forum->postReview == 'open')->andWhere('status')->eq('approved')->fi()
+            ->orderBy('id_desc')
+            ->limit($limit)
+            ->fetchAll('id');
+
+        if(!$threads) return array();
+        return $this->process($threads);
+    }
+
+    /**
      * Get thread fist for widget 
      * 
      * @param  int    $limit 

@@ -35,16 +35,27 @@ class sitemap extends control
     public function sitemapHTML($onlyBody)
     {
         $this->loadModel('tree');
+        $bookAndArticleList = $this->loadModel('book')->getBookAndArticleList();
 
-        $this->view->articleTree = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
-        $this->view->productTree = $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
-        $this->view->blogTree    = $this->tree->getTreeMenu('blog',    0, array('treeModel', 'createBlogBrowseLink'));
-        $this->view->boards      = $this->loadModel('forum')->getBoards();
-        $this->view->books       = $this->dao->select('id, title, alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchAll();
-        $this->view->pages       = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
-        $this->view->articles    = $this->loadModel('article')->getList('article', $this->tree->getFamily(0, 'article'), 'id_desc');
-        $this->view->onlyBody    = $onlyBody;
+        $this->view->articleTree  = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
+        $this->view->productTree  = $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
+        $this->view->blogTree     = $this->tree->getTreeMenu('blog',    0, array('treeModel', 'createBlogBrowseLink'));
+        $this->view->boards       = $this->loadModel('forum')->getBoards();
+        $this->view->books        = $bookAndArticleList['book'];
+        $this->view->bookArticles = $bookAndArticleList['article'];
+        $this->view->pages        = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
+        $this->view->articles     = $this->loadModel('article')->getList('article', $this->tree->getFamily(0, 'article'), 'id_desc');
+        $this->view->products     = $this->loadModel('product')->getList(0, 'id_desc');
+        $this->view->threads      = $this->loadModel('thread')->getListForSitemap();
+        $this->view->onlyBody     = $onlyBody;
 
+        foreach($this->config->sitemap->modules as $module)
+        {
+            if(strpos('article,blog,page,product,book,forum,thread', $module) === false and is_callable(array($this->sitemap, "show{$module}")))
+            {
+                $this->view->{$this->config->sitemap->valueList[$module]} = call_user_func_array(array($this->sitemap, "show{$module}"), array());
+            }
+        }
         $this->display();
     }
 

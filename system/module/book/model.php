@@ -266,6 +266,34 @@ class bookModel extends model
     }
 
     /**
+     * Get book and article list.
+     * 
+     * @param  string $orderBy 
+     * @param  int $limit 
+     * @access public
+     * @return void
+     */
+    public function getBookAndArticleList($orderBy = 'id_desc', $limit = '100')
+    {
+        $books    = $this->getBookList();
+        $articles = $this->dao->select('*')->from(TABLE_BOOK)
+            ->where('type')->eq('article')
+            ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
+            ->orderBy($orderBy)
+            ->limit($limit)
+            ->fetchAll();
+
+        foreach($articles as $article)
+        {
+            $bookID = $this->extractBookID($article->path);
+            $article->book = $books[$bookID];
+        }
+
+        return array('book' => $books, 'article' => $articles);
+    }
+
+    /**
      * Compute the serial number for all nodes of a book.
      * 
      * @param  string    $path 
