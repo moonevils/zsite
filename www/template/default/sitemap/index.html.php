@@ -35,6 +35,17 @@
       </ul>
     </div>
     <?php endif;?>
+
+    <?php if(commonModel::isAvailable('product')):?>
+    <div class='clearfix sitemap-tree'> 
+      <h4><?php echo $lang->sitemap->productList;?></h4>
+      <ul class='tree'>
+        <?php foreach($products as $product):?>
+        <li class='productItem'><?php echo html::a(helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), $product->name);?></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <?php endif;?>
     
     <?php if(strpos($productTree, '<li>') !== false):?>
     <div class='clearfix sitemap-tree'> 
@@ -74,8 +85,20 @@
         <?php endforeach;?>
       </ul>
     </div>
+    <?php if(!empty($threads)):?>
+    <div class='clearfix sitemap-tree'>
+      <h4><?php echo $lang->sitemap->threadList;?></h4>
+      <ul class='tree'>
+        <?php foreach($threads as $thread):?>
+        <li><?php echo html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title);?></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+
     <?php endif;?>
-    <?php if(commonModel::isAvailable('book') && !empty($books)):?>
+    <?php endif;?>
+    <?php if(commonModel::isAvailable('book')):?>
+    <?php if(!empty($books)):?>
     <div class='clearfix sitemap-tree'>
       <h4><?php echo $lang->sitemap->books;?></h4>
       <ul class='tree'>
@@ -85,6 +108,23 @@
       </ul>
     </div>
     <?php endif;?>
+    <?php if(!empty($bookArticles)):?>
+    <div class='clearfix sitemap-tree'>
+      <h4><?php echo $lang->sitemap->bookArticles;?></h4>
+      <ul class='tree'>
+        <?php foreach($bookArticles as $bookArticle):?>
+        <li><?php echo html::a(helper::createLink('book', 'read', "articleID=$bookArticle->id", "book={$bookArticle->book->alias}&article=$bookArticle->alias"), $bookArticle->title);?></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <?php endif;?>
+    <?php endif;?>
+
+    <?php foreach($this->config->sitemap->modules as $module):?>
+    <?php if(strpos('article,blog,page,product,book,forum,thread', $module) === false and is_callable(array($this->sitemap, "show{$module}"))):?>
+    <?php include "./show{$module}.html.php";?>
+    <?php endif;?>
+    <?php endforeach;?>
   </div>
 </div>
 <?php if($onlyBody == 'no') include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
