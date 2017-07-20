@@ -238,6 +238,7 @@ $lang->resource->tag->link  = 'link';
 
 /* Thread module. */
 $lang->resource->thread = new stdclass();
+$lang->resource->thread->approve      = 'approve';
 $lang->resource->thread->transfer     = 'transfer';
 $lang->resource->thread->switchStatus = 'switchStatus';
 $lang->resource->thread->delete       = 'delete';
