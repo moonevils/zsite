@@ -326,6 +326,7 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   `origin` varchar(50) NOT NULL,
   `unit` char(20) NOT NULL,
   `price` decimal(10,2) NOT NULL,
+  `negotiate` enum('0','1') NOT NULL DEFAULT '0',
   `promotion` decimal(10,2) NOT NULL,
   `amount` mediumint(8) unsigned DEFAULT NULL,
   `keywords` varchar(150) NOT NULL,
