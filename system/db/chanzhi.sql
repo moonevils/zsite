@@ -421,7 +421,7 @@ CREATE TABLE IF NOT EXISTS `eps_statreferer`(
   `keywords` char(100) NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `url` (`url`(300)),
+  UNIQUE KEY `url` (`url`(255)),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
