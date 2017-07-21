@@ -48,7 +48,7 @@
           <th class='w-80px'><?php commonModel::printOrderLink('payStatus', $orderBy, $vars, $lang->order->payStatus);?></th>
           <th><?php echo $lang->order->note;?></th>
           <th class='w-100px'><?php echo $lang->order->last;?></th>
-          <th class='w-240px'><?php echo $lang->actions;?></th>
+          <th class="<?php echo ($this->app->clientLang == 'en') ? 'w-280px' : 'w-240px';?>"><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
