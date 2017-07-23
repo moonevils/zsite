@@ -868,6 +868,7 @@
             var setting = visuals['block'];
             var options = $.extend({parent: 0, allowregionblock: 0}, $blocksHolder.data(), $btn.data());
             if(options.parent) options.title = $blocksHolder.data('title') + '-' + options.title;
+            options.object = $$.pageLayoutObject || '';
 
             var action = setting.actions.add;
             openModal(createActionLink(setting, action, options),
