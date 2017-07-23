@@ -115,6 +115,8 @@ class slideModel extends model
             ->remove('files,globalButton')
             ->get();
 
+        if($data->backgroundType == 'image') $data->image = str_replace(rtrim($this->app->getWebRoot(), '/'), '', $data->image);
+
         $data->label        = helper::jsonEncode(array_values($data->label));
         $data->buttonClass  = helper::jsonEncode(array_values($data->buttonClass));
         $data->buttonUrl    = helper::jsonEncode(array_values($data->buttonUrl));
