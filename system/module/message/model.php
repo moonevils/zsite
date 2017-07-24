@@ -480,7 +480,7 @@ class messageModel extends model
      * @access public
      * @return void
      */
-    public function delete($messageID, $mode)
+    public function deleteMessage($messageID, $mode)
     {
         $message = $this->dao->select('id,type')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch();
         $this->dao->delete()

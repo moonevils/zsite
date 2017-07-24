@@ -234,7 +234,7 @@ class message extends control
      */
     public function delete($messageID, $type)
     {
-        $this->message->delete($messageID, $type);
+        $this->message->deleteMessage($messageID, $type);
         if(!dao::isError()) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
