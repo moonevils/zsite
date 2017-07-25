@@ -100,6 +100,7 @@ $lang->file->fontPosition     = 'To build watermark need font file in %s path。
 $lang->file->updateInvalidFiles = 'Update Invalid List';
 $lang->file->clearAllInvalid    = 'Delete All Invalid Files';
 $lang->file->fileTip            = 'Tips: Red represent the file has been deleted while there is data in database';
+$lang->file->productTip         = 'Please upload the images they have the same aspect ratio.';
 
 $lang->file->dragFile      = 'Please drag files here';
 $lang->file->addFile       = 'Add';
