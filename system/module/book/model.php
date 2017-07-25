@@ -218,7 +218,7 @@ class bookModel extends model
         $catalogLink = commonModel::hasPriv('book', 'catalog') ? html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog) : '';
         $moveLink    = commonModel::hasPriv('book', 'sort') ? html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'") : '';
 
-        if($node->type == 'article') $previewLink = commonModel::hasPriv('book', 'read') ? html::a($this->loadModel('article')->createPreviewLink($node->id, '', 'book'), $this->lang->preview) : '';
+        if($node->type == 'article') $previewLink = commonModel::hasPriv('book', 'read') ? html::a($this->loadModel('article')->createPreviewLink($node->id, '', 'book'), $this->lang->preview, "target='_blank'") : '';
 
         $childrenHtml = '';
         if($children) 
