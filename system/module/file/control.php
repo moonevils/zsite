@@ -196,6 +196,8 @@ class file extends control
         $this->view->title    = "<i class='icon-paper-clip'></i> " . ($isImage ? $this->lang->file->imageList : $this->lang->file->browse);
         $this->view->files    = $this->file->getByObject($objectType, $objectID, $isImage);
         $this->view->showSort = true;
+
+        if($objectType == 'product' and $isImage) $this->view->title .= "<span class='text-danger'> （{$this->lang->file->productTip}）</span>";
         
         if($objectType == 'source')
         {

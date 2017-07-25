@@ -100,6 +100,7 @@ $lang->file->fontPosition     = '图片水印功能需要下载字体文件到 %
 $lang->file->updateInvalidFiles = '更新列表';
 $lang->file->clearAllInvalid    = '删除全部';
 $lang->file->fileTip            = '提示：红色代表数据库中有文件记录，但是文件实际已经被删除';
+$lang->file->productTip         = '请上传长宽比一致的图片，保证页面的美观';
 
 $lang->file->dragFile    = '请拖拽文件到此处';
 $lang->file->addFile     = '添加文件';
