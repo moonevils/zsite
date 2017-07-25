@@ -128,31 +128,26 @@ class threadModel extends model
      */
     public function getLatest($boards, $count)
     { 
-        if(strpos($boards, ',') !== false)
-        {
-            $boards   = explode(',', $boards);
-            $parents  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
-            $children = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->ne(0)->andWhere('type')->eq('forum')->fetchAll('id');
+        if(strpos($boards, ',') !== false) $boards = explode(',', $boards);
+        $boards = (array)$boards;
 
-            $subBoards = array();
-            foreach($boards as $board)
+        $parents  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
+        $children = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->ne(0)->andWhere('type')->eq('forum')->fetchAll('id');
+
+        $subBoards = array();
+        foreach($boards as $board)
+        {
+            if(in_array($board, array_keys($parents)))
             {
-                if(in_array($board, $parents))
+                foreach($children as $child)
                 {
-                    foreach($children as $child)
-                    {
-                        if($child->parent == $board) $subBoards[] = $child->id;
-                    }
-                }
-                else
-                {
-                    $subBoards[] = $board;
+                    if($child->parent == $board) $subBoards[] = $child->id;
                 }
             }
-        }
-        else
-        {
-            $subBoards = $boards;
+            else
+            {
+                $subBoards[] = $board;
+            }
         }
 
         $this->app->loadClass('pager', true);
