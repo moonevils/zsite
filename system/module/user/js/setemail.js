@@ -4,7 +4,7 @@ $(document).ready(function()
     $('#mailSender').click(function()
     {
         text = $(this).text();
-        $(this).text('sending...');
+        $(this).text(v.sending);
         var data = {email: $('#email').val()};
         var url = $(this).attr('href');
 

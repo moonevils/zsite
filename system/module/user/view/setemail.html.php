@@ -1,5 +1,6 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
+<?php js::set('sending', $lang->sending);?>
 <form method='post' action='<?php echo inlink('setEmail');?>' id='emailForm' class='form' data-checkfingerprint='1'>
   <table class='table table-form borderless'>
     <tr>
