@@ -112,7 +112,7 @@ class user extends control
     {
         dao::$changedTables[] = TABLE_CONFIG;
 
-        if($referer == '' && strpos($_SERVER['HTTP_REFERER'], 'register') === false && strpos($_SERVER['HTTP_REFERER'], 'login') === false)
+        if($referer == '' && strpos($_SERVER['HTTP_REFERER'], 'deny') === false && strpos($_SERVER['HTTP_REFERER'], 'register') === false && strpos($_SERVER['HTTP_REFERER'], 'login') === false)
         {
             $this->referer = urlencode($_SERVER['HTTP_REFERER']);
         }
