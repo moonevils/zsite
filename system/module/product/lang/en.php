@@ -46,8 +46,9 @@ $lang->product->sales      = 'Price';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
 
-$lang->product->currency = 'Currency';
-$lang->product->stock    = 'Inventory';
+$lang->product->currency  = 'Currency';
+$lang->product->stock     = 'Inventory';
+$lang->product->negotiate = 'Negotiate';
 
 $lang->product->list         = 'Products';
 $lang->product->hot          = 'Hot';
@@ -66,6 +67,7 @@ $lang->product->detail       = 'Details';
 $lang->product->setting      = 'Settings';
 $lang->product->soldout      = 'Out of Stock!';
 $lang->product->layout       = 'Layout';
+$lang->product->contact      = 'Contact';
 
 $lang->product->orderBy = new stdclass();
 $lang->product->orderBy->time = 'Time';
@@ -137,5 +139,17 @@ $lang->product->currencySymbols['sgd']  = 'S$';
 $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = 'Off';
 $lang->product->stockOptions[1] = 'On';
+
+$lang->product->viewsOptions = array();
+$lang->product->viewsOptions[1] = 'Show';
+$lang->product->viewsOptions[0] = 'Hide';
+
+$lang->product->priceOptions = array();
+$lang->product->priceOptions[1] = 'Show';
+$lang->product->priceOptions[0] = 'Hide';
+
+$lang->product->namePositionOptions = array();
+$lang->product->namePositionOptions['left']   = 'Left';
+$lang->product->namePositionOptions['center'] = 'Center';
 
 $lang->product->noCategoriesTip = 'You have not added the categories, please add the categories at first.';

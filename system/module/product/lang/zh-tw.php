@@ -46,8 +46,9 @@ $lang->product->sales      = '產品定價';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
 
-$lang->product->currency = '貨幣';
-$lang->product->stock    = '庫存';
+$lang->product->currency  = '貨幣';
+$lang->product->stock     = '庫存';
+$lang->product->negotiate = '面議';
 
 $lang->product->list         = '產品列表';
 $lang->product->hot          = '熱門產品';
@@ -66,6 +67,7 @@ $lang->product->detail       = '查看詳情';
 $lang->product->setting      = '設置';
 $lang->product->soldout      = '已售罄';
 $lang->product->layout       = '佈局';
+$lang->product->contact      = '聯繫我們';
 
 $lang->product->orderBy = new stdclass();
 $lang->product->orderBy->time = '時間';
@@ -137,5 +139,17 @@ $lang->product->currencySymbols['sgd']  = 'S$';
 $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = '關閉';
 $lang->product->stockOptions[1] = '開啟';
+
+$lang->product->viewsOptions = array();
+$lang->product->viewsOptions[1] = '顯示';
+$lang->product->viewsOptions[0] = '不顯示';
+
+$lang->product->priceOptions = array();
+$lang->product->priceOptions[1] = '顯示';
+$lang->product->priceOptions[0] = '不顯示';
+
+$lang->product->namePositionOptions = array();
+$lang->product->namePositionOptions['left']   = '居左';
+$lang->product->namePositionOptions['center'] = '居中';
 
 $lang->product->noCategoriesTip = '您還沒有為產品添加類目，請添加類目';
