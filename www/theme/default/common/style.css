@@ -203,6 +203,8 @@ table.captcha td label {padding: 0;}
 .device-mobile .article-content img {max-width: 100% !important; height: auto !important;}
 .article-content ul, .article-content ol {margin-top: 10px;}
 
+textarea, .article-content{white-space: pre-line;}
+
 /* List */
 .list {border: 1px solid #ddd; border-radius: 2px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
 .list > header {padding: 8px 15px; background-color: #f1f1f1; color: #333}
