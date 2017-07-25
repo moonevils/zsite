@@ -5,6 +5,7 @@
 <?php include_once '../../common/view/header.modal.html.php';?>
 <?php endif;?>
 <?php js::set('emailSending', sprintf($lang->mail->sending, $this->app->user->email));?>
+<?php js::set('sending', $lang->sending);?>
 <?php if(isset($pass) and $pass):?>
 <script>
 $(document).ready(function()
@@ -115,7 +116,7 @@ $(document).ready(function()
   
           var url = $(this).attr('href');
           text = $(this).text();
-          $(this).text('sending...');
+          $(this).text(v.sending);
 
           $.getJSON(url, function(response)
           {
