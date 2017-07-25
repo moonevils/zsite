@@ -100,6 +100,7 @@ $lang->year           = 'Year';
 $lang->selectAll      = 'Select All';
 $lang->selectReverse  = 'Select Reverse';
 $lang->loading        = 'In progress...';
+$lang->sending        = 'Sending...';
 $lang->saveSuccess    = 'Done';
 $lang->setSuccess     = 'Done';
 $lang->createSuccess  = 'Done';

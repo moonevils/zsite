@@ -100,6 +100,7 @@ $lang->year           = '年';
 $lang->selectAll      = '全選';
 $lang->selectReverse  = '反選';
 $lang->loading        = '稍候...';
+$lang->sending        = '發送中...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
 $lang->createSuccess  = '創建成功';

@@ -12,8 +12,11 @@
 $lang->sitemap->productCategory = 'Products';
 $lang->sitemap->articleCategory = 'Article Category';
 $lang->sitemap->articleList     = 'Article List';
+$lang->sitemap->productList     = 'Product List';
 $lang->sitemap->blogCategory    = 'Blogs';
 $lang->sitemap->boards          = 'Boards';
+$lang->sitemap->threadList      = 'Thread List';
 $lang->sitemap->books           = 'Books';
+$lang->sitemap->bookArticles    = 'Book Article List';
 $lang->sitemap->pages           = 'Pages';
 $lang->sitemap->xmlVersion      = 'Visit XML';
