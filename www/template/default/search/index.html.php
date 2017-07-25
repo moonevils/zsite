@@ -25,10 +25,10 @@ else
             <h4><?php echo html::a($object->url, $object->title);?></h4>
           </div>
           <div class='item-content'>
-            <?php if(!empty($object->image)):?>
+            <?php if(!empty($object->image->primary)):?>
             <div class='media pull-right'>
               <?php
-              $title = $object->image->primary->title ? $object->image->primary->title : $object->title;
+              $title = $object->image->primary->title ? $object->image->primary->title : strip_tags($object->title);
               echo html::a($object->url, html::image($object->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
               ?>
             </div>
