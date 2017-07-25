@@ -19,10 +19,10 @@ class search extends control
      * @access public
      * @return void
      */
-    public function index($words = '', $pageID = 1)
+    public function index($words = '', $pageID = '')
     {
         if(empty($words)) $words = $this->get->words;
-        if(empty($words) and $pageID != 1) $words = $this->session->searchIngWord;
+        if(empty($words) and $pageID) $words = $this->session->searchIngWord;
         $words = str_replace('"', '', $words);
         $words = str_replace("'", '', $words);
         $words = strip_tags(strtolower($words));
@@ -33,6 +33,7 @@ class search extends control
             $words = cn2tw::reverse($words);
         }
 
+        if(!$pageID) $pageID = 1;
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $this->config->search->recPerPage, $pageID);
 
