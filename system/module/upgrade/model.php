@@ -173,6 +173,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('6.1'));
             case '6_2';
             case '6_3_beta':
+                $this->execSQL($this->getUpgradeFile('6.3.beta'));
                 $this->processProductViews();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -242,7 +243,8 @@ class upgradeModel extends model
             case '5_7'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.7'));
             case '6_0'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.0'));
             case '6_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.1'));
-            case '6_2'      ; 
+            case '6_2'      ;
+            case '6_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('6.3.beta'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
