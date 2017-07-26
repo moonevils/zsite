@@ -2296,10 +2296,20 @@ class upgradeModel extends model
         return !dao::isError();
     }
 
+    /**
+     * Process productViews setting.
+     * 
+     * @access public
+     * @return bool
+     */
     public function processProductViews()
     {
-        $showViews = $this->loadModel('setting')->getItem('owner=system&module=common&section=ui&key=productView');
-        $this->setting->setItem('system.product.showViews', $showViews);
-        return dao::isError();
+        if(isset($this->config->ui->productView))
+        {
+            $this->setting->setItem('system.product.showViews', $this->config->ui->productView);
+            return dao::isError();
+        }
+
+        return true;
     }
 }
