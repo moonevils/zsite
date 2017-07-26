@@ -561,9 +561,7 @@ class commonModel extends model
         $string .= '<li>' . html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user','logout'), $lang->logout) . '</li>';
-        $string .= '</ul></li>';
-        $string .= '<li class="link-chanzhi">' . sprintf($lang->poweredBy, $config->version, k(), html::image($config->webRoot . 'theme/default/default/images/main/chanzhi-white.png')) . '</li>';
-        $string .= '</ul>';
+        $string .= '</ul></li></ul>';
 
         return $string;
     }

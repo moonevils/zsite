@@ -173,7 +173,7 @@ $lang->sitemap->common = 'Sitemap';
 
 /* The groups navbar */
 $lang->groups = new stdclass();
-$lang->groups->home     = array('title' => 'Home', 'link' => 'admin|index|',               'icon' => 'home');
+$lang->groups->home     = array('title' => 'Zsite', 'link' => 'admin|index|',               'icon' => 'home');
 $lang->groups->content  = array('title' => 'CMS', 'link' => 'article|admin|type=article', 'icon' => 'edit');
 $lang->groups->shop     = array('title' => 'Mall', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => 'User', 'link' => 'user|admin|',                'icon' => 'group');
