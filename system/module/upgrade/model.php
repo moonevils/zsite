@@ -2306,7 +2306,7 @@ class upgradeModel extends model
     {
         if(isset($this->config->ui->productView))
         {
-            $this->setting->setItem('system.product.showViews', $this->config->ui->productView);
+            $this->loadModel('setting')->setItem('system.product.showViews', $this->config->ui->productView);
             return dao::isError();
         }
 
