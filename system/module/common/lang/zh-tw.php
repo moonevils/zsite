@@ -173,7 +173,7 @@ $lang->sitemap->common = '站點地圖';
 
 /* The primary navbar */
 $lang->groups = new stdclass();
-$lang->groups->home     = array('title' => '首頁', 'link' => 'admin|index|',               'icon' => 'home');
+$lang->groups->home     = array('title' => '蟬知', 'link' => 'admin|index|',               'icon' => 'home');
 $lang->groups->content  = array('title' => '內容', 'link' => 'article|admin|type=article', 'icon' => 'edit');
 $lang->groups->shop     = array('title' => '商城', 'link' => 'order|admin|',               'icon' => 'shopping-cart');
 $lang->groups->user     = array('title' => '會員', 'link' => 'user|admin|',                'icon' => 'group');

@@ -343,14 +343,13 @@ body {padding-left: 50px;}
 .navbar-fixed-bottom .navbar-text {line-height: 20px;}
 #primaryNavbar .nav.fixed-bottom {position: absolute; bottom: 0; left: 0; right: 0}
 #primaryNavbar .nav.fixed-bottom > li {padding: 5px;}
-#primaryNavbar .nav.fixed-bottom > li > a {height: 30px; padding: 0;}
+#primaryNavbar .nav.fixed-bottom > li > a {height: 30px; padding: 5px 0;}
 #primaryNavbar .nav.fixed-bottom > li > a > .text-username {display: none;}
 #primaryNavbar .nav.fixed-bottom > li.dropdown.open .dropdown-menu {bottom: 0; top: auto; bottom: 35px}
 #primaryNavbar .dropdown-menu {min-width: 120px;}
 #primaryNavbar .dropdown-menu > .heading {color: #333; padding: 3px 15px 0;}
 #primaryNavbar .dropdown-menu > li > a {padding: 3px 15px;}
 #primaryNavbar .dropdown-menu > .heading > .icon {display: inline-block; width: 30px; height: 30px; text-align: center; border-radius: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.2); color: #fff; background-color: #3280fc; line-height: 28px; margin-right: 5px;}
-#primaryNavbar .nav.fixed-bottom > li.link-chanzhi > a > img {height: 24px; margin: 3px}
 
 #mainNavbar {font-size: 13px; background-color: #EEE; border-bottom: 1px solid #d5d5d5;}
 #mainNavbar .navbar-nav > li > a {padding: 10px 12px;}
