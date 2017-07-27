@@ -461,13 +461,17 @@ class user extends control
 
         if(!empty($_POST))
         {
+            $user = $this->loadModel('user')->identify($this->app->user->account, $this->post->oldPwd);
+            if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
+
             if(!$this->user->checkToken($this->post->token, $this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
-            if($user->email != '')
+            $email = $this->post->email ? $this->post->email : $user->email;
+            if($email)
             {
                 if(!trim($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->user->verifyFail));
             }
 
-            $this->user->checkEmail($this->post->email);
+            $this->user->checkEmail($email);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $locate = inlink('control');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
