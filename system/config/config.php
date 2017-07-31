@@ -118,9 +118,9 @@ $shopConfig       = $configRoot . 'shop.php';
 $sensitiveConfig  = $configRoot . 'sensitive.php';
 $customConfig     = $configRoot . 'custom.php';
 
+if(file_exists($myConfig))         include $myConfig;
 if(file_exists($chanzhiepsConfig)) include $chanzhiepsConfig;
 if(file_exists($guarderConfig))    include $guarderConfig;
-if(file_exists($myConfig))         include $myConfig;
 if(file_exists($routeConfig))      include $routeConfig;
 if(file_exists($modeConfig))       include $modeConfig;
 if(file_exists($shopConfig))       include $shopConfig;
