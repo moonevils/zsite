@@ -1407,7 +1407,9 @@ class fileModel extends model
 
             $imgURL = $this->config->requestType == 'GET' ? '{$2.$1}' : '{$1.$2}';
 
-            $data->$editorID = $this->pasteImage($data->$editorID, $uid);
+            $pasteData = $this->pasteImage($data->$editorID, $uid);
+            if($pasteData) $data->$editorID = $pasteData;
+
             $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="' . $imgURL . '" ', $data->$editorID);
             $data->$editorID = preg_replace("/ src=\"" . htmlspecialchars($readLinkReg) . "\" /", ' src="' . $imgURL . '" ', $data->$editorID);
         }
