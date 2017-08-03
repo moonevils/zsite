@@ -57,6 +57,8 @@ class productModel extends model
         $product->image->list    = $product->images;
         $product->image->primary = !empty($product->image->list) ? $product->image->list[0] : ''; 
 
+        $product = $this->loadModel('file')->replaceImgURL($product, $this->config->product->editor->create['id']);
+
         return $product;
     }   
 
