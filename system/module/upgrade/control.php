@@ -76,6 +76,8 @@ class upgrade extends control
         $version = str_replace(array(' ', '.'), array('', '_'), $this->config->installedVersion);
         $version = strtolower($version);
 
+        if(!isset($this->lang->upgrade->fromVersions[$version])) $this->lang->upgrade->fromVersions[$version] = $this->config->installedVersion;
+
         $this->view->title   = $this->lang->upgrade->common . $this->lang->colon . $this->lang->upgrade->selectVersion;
         $this->view->version = $version;
         $this->display();
