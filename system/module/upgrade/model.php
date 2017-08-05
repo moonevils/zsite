@@ -175,6 +175,7 @@ class upgradeModel extends model
             case '6_3_beta':
                 $this->execSQL($this->getUpgradeFile('6.3.beta'));
                 $this->processProductViews();
+            case '6_4';
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
