@@ -47,7 +47,8 @@
             }
             else
             {
-                echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$product->image->primary->middleURL}'> ";
+                $imgsrc = helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}");
+                echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imgsrc}'> ";
             }
             ?>
           </a>

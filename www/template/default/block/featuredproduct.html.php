@@ -23,7 +23,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-body'>
     <div class='card'>
-      <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></div>
+      <div class='media' style='background-image: url(<?php echo helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}");?>);'><?php echo html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}"), "title='{$product->name}' alt='{$product->name}'"); ?></div>
       <div class='card-heading'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>

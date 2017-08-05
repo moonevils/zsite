@@ -193,7 +193,7 @@ class slideModel extends model
             $file['title']    = $groupID . '_' .$fileID;
             $file['pathname'] = 'slides/' . $file['title'] . '.' . $file['extension'];
 
-            $imagePath = $this->app->getDataRoot() . $file['pathname'];
+            $imagePath = $this->app->getDataRoot() . $this->loadModel('file')->getSaveName($file['pathname']);
             if(!move_uploaded_file($file['tmpname'], $imagePath))
             {
                 $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
@@ -299,6 +299,6 @@ class slideModel extends model
         $slide->buttonClass  = json_decode($slide->buttonClass);
         $slide->buttonUrl    = json_decode($slide->buttonUrl);
         $slide->buttonTarget = json_decode($slide->buttonTarget);
-        if($slide->backgroundType == 'image') $slide->image = rtrim($this->app->getWebRoot(), '/') . $slide->image;
+        if($slide->backgroundType == 'image') $slide->image = $this->dao->select('*') ->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('objectID')->eq($slide->id)->fetch();
     }
 }

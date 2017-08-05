@@ -36,7 +36,7 @@ js::execute($product->js);
     $indicators = '';
     ?>
     <?php foreach($product->image->list as $image):?>
-      <div class='item<?php if($imgIndex === 0) echo ' active';?>'><?php echo html::image($image->middleURL, "title='{$title}' alt='{$product->name}'");?></div>
+      <div class='item<?php if($imgIndex === 0) echo ' active';?>'><?php echo html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}"), "title='{$title}' alt='{$product->name}'");?></div>
       <?php $indicators .= "<li data-target='#productSlide' data-slide-to='{$imgIndex}' class='" . ($imgIndex === 0 ? 'active':'') . "'></li>"; ?>
     <?php $imgIndex++; ?>
     <?php endforeach;?>
@@ -50,7 +50,7 @@ js::execute($product->js);
     </a>
   </div>
   <?php else:?>
-  <?php echo html::image($product->image->primary->largeURL, "title='{$title}' alt='{$product->name}'");?>
+  <?php echo html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=largeURL", '', "{$product->image->primary->extension}"), "title='{$title}' alt='{$product->name}'");?>
   <?php endif;?>
 <?php endif;?>
   <div class='heading'>

@@ -38,7 +38,7 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
             <?php
             $maxWidth = !empty($this->config->article->imageWidth) ? $this->config->article->imageWidth . 'px' : '120px';
             $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-            echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' style='{$maxWidth}' class='thumbnail'"));
+            echo html::a($url, html::image(helper::createLink('file', 'read', "fileID={$article->image->primary->id}&type=smallURL", '', "{$article->image->primary->extension}"), "title='{$title}' style='{$maxWidth}' class='thumbnail'"));
             ?>
           </div>
           <?php endif;?>

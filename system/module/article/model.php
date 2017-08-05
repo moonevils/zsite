@@ -290,6 +290,8 @@ class articleModel extends model
             $article->category   = current($article->categories);
         }
 
+        $articles = $this->loadModel('file')->processImages($articles, $type);
+
         return $articles;
     }
 

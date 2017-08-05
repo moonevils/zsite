@@ -26,6 +26,8 @@ class blockModel extends model
         if(strpos($block->type, 'code') === false) $block->content = json_decode($block->content);
         if(strpos($block->type, 'code') !== false) $block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);
         if(empty($block->content)) $block->content = new stdclass();
+
+        $block->content = $this->loadModel('file')->replaceImgURL($block->content, 'content');
         return $block;
     }
 
@@ -98,6 +100,10 @@ class blockModel extends model
         }
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
+        foreach($blocks as $id => $block)
+        {
+            if($block->type == 'html') $blocks[$id]->content = json_encode($this->loadModel('file')->replaceImgURL(json_decode($block->content), 'content'));
+        }
 
         $layouts = array();
         foreach($rawLayouts as $page => $pageBlocks)
@@ -205,6 +211,10 @@ class blockModel extends model
         if(empty($regionBlocks)) return array();
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
+        foreach($blocks as $id => $block)
+        {
+            if($block->type == 'html') $blocks[$id]->content = json_encode($this->loadModel('file')->replaceImgURL(json_decode($block->content), 'content'));
+        }
 
         $sortedBlocks = array();
         foreach($regionBlocks as $block)

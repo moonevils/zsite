@@ -25,7 +25,7 @@
         if($file->isImage)
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
-            $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
+            $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image(helper::createLink('file', 'read', "fileID={$file->id}&type=fullURL", '', "{$file->extension}")), "target='_blank' data-toggle='lightbox'");
             $imageHtml .= "<div class='file-source'><div class='input-group'><input disabled='disabled' id='fullURL{$file->id}' type='text' value='{$file->fullURL}' class='form-control file-url'/><span class='input-group-btn'><button class='copyBtn btn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></span></div></div>";
             $imageHtml .= "<div class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'deletesource', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
@@ -73,7 +73,7 @@
             <?php
             if($file->isImage)
             {
-                echo html::a(inlink('download', "id=$file->id"), html::image($file->smallURL, "class='image-small' title='{$file->title}'"), "data-toggle='lightbox' target='_blank'");
+                echo html::a(inlink('download', "id=$file->id"), html::image(helper::createLink('file', 'read', "fileID={$file->id}&type=smallURL", '', "{$file->extension}"), "class='image-small' title='{$file->title}'"), "data-toggle='lightbox' target='_blank'");
             }
             else
             {

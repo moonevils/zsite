@@ -32,7 +32,7 @@
               <div class='carousel-inner'>
                 <?php if ($slide->backgroundType == 'image'): ?>
                 <div class='item active'>
-                  <?php print(html::image($slide->image));?>
+                  <?php print(html::image(helper::createLink('file', 'read', "fileID={$slide->image->id}", '', "{$slide->image->extension}")));?>
                 <?php else: ?>
                 <div class='item active' style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
                 <?php endif ?>

@@ -10,7 +10,7 @@
       else
       {
           $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-          echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+          echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}"), "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
       }
       ?>
       <div class='card-heading'>

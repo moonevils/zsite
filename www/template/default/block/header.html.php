@@ -18,6 +18,7 @@ $template          = $this->config->template->{$device}->name;
 $theme             = $this->config->template->{$device}->theme;
 $logoSetting       = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
 $logo              = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
+if($logo) $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
 
 /* Set default header layout setting. */
 $setting->top             = isset($setting->top) ? $setting->top : new stdclass();

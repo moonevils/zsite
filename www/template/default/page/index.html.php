@@ -17,7 +17,7 @@
             <div class='media pull-right'>
               <?php
               $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-              echo html::a($url, html::image($page->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+              echo html::a($url, html::image(helper::createLink('file', 'read', "fileID={$page->image->primary->id}&type=smallURL", '', "{$page->image->primary->extension}"), "title='{$title}' class='thumbnail'" ));
               ?>
             </div>
             <?php endif;?>

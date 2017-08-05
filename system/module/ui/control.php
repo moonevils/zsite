@@ -127,6 +127,8 @@ class ui extends control
         $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
 
         $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
+        if($logo) $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
+
         unset($this->lang->ui->menu);
         $this->view->title          = $this->lang->ui->setLogo;
         $this->view->logo           = $logo;

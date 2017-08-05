@@ -763,15 +763,17 @@ class file extends control
      * @access public
      * @return void
      */
-    public function read($fileID)
+    public function read($fileID, $type = 'realPath')
     {
         $file = $this->file->getById($fileID);
-        if(empty($file) or !file_exists($file->realPath)) return false;
+
+        $filePath = $type == 'realPath' ? $file->$type : rtrim($this->app->getWwwRoot(), '/') . $file->$type;
+        if(empty($file) or !file_exists($filePath)) return false;
 
         $mime = in_array($file->extension, $this->config->file->imageExtensions) ? "image/{$file->extension}" : $this->config->file->mimes['default'];
         header("Content-type: $mime");
 
-        $handle = fopen($file->realPath, "r");
+        $handle = fopen($filePath, "r");
         if($handle)
         {
             while(!feof($handle)) echo fgets($handle);

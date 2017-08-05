@@ -9,7 +9,8 @@
       $logo = isset($logoSetting->$templateName->themes->$themeName) ? $logoSetting->$templateName->themes->$themeName : (isset($logoSetting->$templateName->themes->all) ? $logoSetting->$templateName->themes->all : false);
       if($logo)
       {
-          echo html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'");
+          $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
+          echo html::image(helper::createLink('file', 'read', "fileID={$logo->fileID}&type=webPath", '', "{$logo->extension}"), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
       }
       else
       {

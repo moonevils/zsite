@@ -106,7 +106,7 @@
     <div class='row'>
       <div id='siteTitle'>
         <?php if($logo):?>
-        <div id='siteLogo' data-ve='logo'><?php echo html::a(helper::createLink('index'), html::image($logo->webPath, "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'"));?></div>
+        <div id='siteLogo' data-ve='logo'><?php echo html::a(helper::createLink('index'), html::image(helper::createLink('file', 'read', "fileID={$logo->fileID}&type=webPath", '', "{$logo->extension}"), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'"));?></div>
         <?php else: ?>
         <div id='siteName' data-ve='logo'><h2><?php echo html::a(helper::createLink('index'), $this->config->site->name);?></h2></div>
         <?php endif;?>
