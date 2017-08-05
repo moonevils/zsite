@@ -985,6 +985,7 @@ class baseFixer
             $app->loadClass('purifier', true);
             $purifierConfig = HTMLPurifier_Config::createDefault();
             $purifierConfig->set('Filter.YouTube', 1);
+            $purifierConfig->set('HTML.SafeEmbed', 1);
 
             /* Disable caching. */
             $purifierConfig->set('Cache.DefinitionImpl', null);
