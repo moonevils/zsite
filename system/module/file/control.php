@@ -767,7 +767,7 @@ class file extends control
     {
         $file = $this->file->getById($fileID);
 
-        $filePath = $type == 'realPath' ? $file->$type : rtrim($this->app->getWwwRoot(), '/') . $file->$type;
+        $filePath = $this->file->getRealPath($file, $type);
         if(empty($file) or !file_exists($filePath)) return false;
 
         $mime = in_array($file->extension, $this->config->file->imageExtensions) ? "image/{$file->extension}" : $this->config->file->mimes['default'];

@@ -596,6 +596,28 @@ class fileModel extends model
     }
 
     /**
+     * Get realpath.
+     * 
+     * @param  object   $file 
+     * @param  string   $type 
+     * @access public
+     * @return void
+     */
+    public function getRealPath($file, $type)
+    {
+        if($type == 'realPath') return $file->realPath;
+
+        $this->setSavePath($file->objectType);
+        $realPath = $this->savePath . $this->getRealPathName($file->pathname, $file->objectType);
+
+        if($type == 'smallURL')  $realPath = str_replace('f_', 's_', $realPath);
+        if($type == 'middleURL') $realPath = str_replace('f_', 'm_', $realPath);
+        if($type == 'largeURL')  $realPath = str_replace('f_', 'l_', $realPath);
+
+        return $realPath;
+    }
+
+    /**
      * Get image width and height.
      * 
      * @param  string    $imagePath 
