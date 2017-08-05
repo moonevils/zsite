@@ -326,6 +326,7 @@ class productModel extends model
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
             ->setDefault('unsaleable', 0)
+            ->setDefault('negotiate', 0)
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
