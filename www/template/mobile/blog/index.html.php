@@ -44,7 +44,7 @@
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title;
-          echo html::image($stick->image->primary->smallURL, "title='{$title}' class='thumbnail'" );
+          echo html::image(helper::createLink('file', 'read', "fileID={$stick->image->primary->id}&type=smallURL", '', "{$stick->image->primary->extension}"), "title='{$title}' class='thumbnail'");
         ?>
         </div>
         <?php endif;?>
@@ -73,7 +73,7 @@
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-          echo html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" );
+          echo html::image(helper::createLink('file', 'read', "fileID={$article->image->primary->id}&type=smallURL", '', "{$article->image->primary->extension}"), "title='{$title}' class='thumbnail'");
         ?>
         </div>
         <?php endif;?>

@@ -72,7 +72,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
           if(!empty($article->image))
           {
               $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-              echo html::a($url, html::image($article->image->primary->$imageURL, "title='{$title}' class='thumbnail'" ));
+              echo html::a($url, html::image(helper::createLink('file', 'read', "fileID={$article->image->primary->id}&type={$imageURL}", '', "{$article->image->primary->extension}"), "title='{$title}' class='thumbnail'" ));
           }
           ?>
           </div>

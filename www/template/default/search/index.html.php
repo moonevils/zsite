@@ -29,7 +29,7 @@ else
             <div class='media pull-right'>
               <?php
               $title = $object->image->primary->title ? $object->image->primary->title : strip_tags($object->title);
-              echo html::a($object->url, html::image($object->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+              echo html::a($object->url, html::image(helper::createLink('file', 'read', "fileID={$object->image->primary->id}&type=smallURL", '', "{$object->image->primary->extension}"), "title='{$title}' class='thumbnail'" ));
               ?>
             </div>
             <?php endif;?>

@@ -53,7 +53,6 @@ class article extends control
         $articles   = $this->article->getList('article', $families, $orderBy, $pager);
         $articles   = $sticks + $articles;
 
-        $articles   = $this->loadModel('file')->processImages($articles, 'article');
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'article');
 
         if($category)

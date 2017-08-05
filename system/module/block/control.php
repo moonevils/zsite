@@ -203,8 +203,6 @@ class block extends control
         if($id > 0)
         {
             $block = $this->block->getByID($id); 
-
-            $block->content    = $this->loadModel('file')->replaceImgURL($block->content, 'content');
             $this->view->block = $block;
         }
 

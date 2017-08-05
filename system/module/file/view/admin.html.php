@@ -37,7 +37,7 @@
               <?php 
                 if($file->isImage and $file->existStatus == 'yes')
                 {
-                  echo html::a(helper::createLink('file', 'download', "fileID=$file->id"), html::image($file->fullURL, "class='image-small'"), "target='_blank' data-toggle='lightbox'");
+                  echo html::a(helper::createLink('file', 'download', "fileID=$file->id"), html::image(helper::createLink('file', 'read', "fileID={$file->id}&type=fullURL", '', "{$file->extension}"), "class='image-small'"), "target='_blank' data-toggle='lightbox'");
                 }
                 else
                 {

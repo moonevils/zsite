@@ -31,7 +31,7 @@ class site extends control
                 ->stripTags('pauseTip', $allowedTags)
                 ->remove('uid,lang,cn2tw,defaultLang,requestType')
                 ->get();
-            
+
             if(strpos($setting->modules, 'shop') !== false  && strpos($setting->modules, 'user') === false) $setting->modules = 'user,' . $setting->modules;
             if($setting->modules == 'initial') unset($setting->modules);
 
@@ -52,6 +52,7 @@ class site extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
 
+        $this->config->site = $this->loadModel('file')->replaceImgURL($this->config->site, $this->config->site->editor->setbasic['id']);
         $this->view->title = $this->lang->site->common;
         $this->display();
     }

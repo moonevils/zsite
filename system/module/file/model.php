@@ -157,11 +157,11 @@ class fileModel extends model
                 if($file->objectType == 'product') continue;
                 if($file->editor)
                 {
-                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image(helper::createLink('file', 'read', "fileID=$file->id&type=smallURL", '', "{$file->extension}")), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
                 else
                 {
-                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image(helper::createLink('file', 'read', "fileID=$file->id&type=smallURL", '', "{$file->extension}")), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
             }
             else
@@ -217,7 +217,7 @@ class fileModel extends model
     {
         if(empty($objects)) return $objects;
         $idList = array_keys($objects);
-        $images = $this->loadModel('file')->getByObject($type, $idList, $isImage = true);
+        $images = $this->getByObject($type, $idList, $isImage = true);
 
         foreach($objects as $object)
         {
@@ -365,7 +365,9 @@ class fileModel extends model
         $file = $this->dao->setAutoLang(false)->findById($fileID)->from(TABLE_FILE)->fetch();
         if(empty($file)) return false;
 
-        $realPathName   = $this->getRealPathName($file->pathname);
+        $this->setSavePath($file->objectType);
+
+        $realPathName   = $this->getRealPathName($file->pathname, $file->objectType);
         $file->realPath = $this->savePath . $realPathName;
         $file->webPath  = $this->getWebPath($file->objectType) . $realPathName;
         return $this->processFile($file);
@@ -659,6 +661,12 @@ class fileModel extends model
             $template = $this->config->template->{$this->app->clientDevice}->name;
             $theme    = $this->config->template->{$this->app->clientDevice}->theme;
             $savePath = $this->app->getDataRoot() . "source/{$template}/{$theme}/";
+            $this->savePath = $this->app->getDataRoot();
+        }
+
+        if($objectType == 'slide')
+        {
+            $savePath = $this->app->getDataRoot() . "slides/";
             $this->savePath = $this->app->getDataRoot();
         }
 

@@ -20,7 +20,7 @@
       <div class='col-md-6'>
         <div class='box'>
           <div class='card'>
-          <?php if(isset($logo->webPath)) echo html::a('javascript:;', html::image($logo->webPath, "class='logo'"), "class='btn-upload'");?>
+          <?php if(isset($logo->webPath)) echo html::a('javascript:;', html::image(helper::createLink('file', 'read', "fileID={$logo->fileID}&type=webPath", '', "{$logo->extension}"), "class='logo'"), "class='btn-upload'");?>
           <?php if(!isset($logo->webPath)) echo html::a('javascript:;', $lang->ui->uploadLogo, "class='text-lg btn-upload'");?>
           </div>
           <span class='actions'>
@@ -37,7 +37,7 @@
       <div class='col-md-6'>
         <div class='box'>
         <div class='card'>
-          <?php if(isset($favicon->webPath)) echo html::a('javascript:;', html::image($favicon->webPath, "class='favicon'"), "class='btn-upload'");?>
+          <?php if(isset($favicon->webPath)) echo html::a('javascript:;', html::image(helper::createLink('file', 'read', "fileID=$favicon->fileID&type=webPath", '', 'ico'), "class='favicon'"), "class='btn-upload'");?>
           <?php if(!isset($favicon->webPath)) echo html::a('javascript:;', $lang->ui->uploadFavicon, "class='text-lg btn-upload'");?>
         </div>
         <span class='actions'>
