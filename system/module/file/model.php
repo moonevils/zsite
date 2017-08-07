@@ -285,7 +285,7 @@ class fileModel extends model
         foreach($fileList as $file)
         {
             $info = pathinfo($file);
-            if(!in_array($info['extension'], $this->config->file->imageExtensions)) continue;
+            if(!isset($info['extension']) or !in_array($info['extension'], $this->config->file->imageExtensions)) continue;
             $file = str_replace($this->app->getDataRoot(), '', $file);
             $filesCount = $this->dao->select('count(*) as count')->from(TABLE_FILE)->where('pathname')->eq($file)->fetch('count');
             if($filesCount) continue;
