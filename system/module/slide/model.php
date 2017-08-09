@@ -216,9 +216,8 @@ class slideModel extends model
 
         $imageIdList = array_keys($fileTitles);
         $image = $this->dao->select('*')->from(TABLE_FILE)->where('id')->eq($imageIdList[0])->fetch(); 
-        $image->webPath = '/data/' . $image->pathname;
 
-        return $image->webPath;
+        return helper::createLink('file', 'read', "fileID={$image->id}&type=fullURL", '', $image->extension);
     }
 
     /**
@@ -299,6 +298,9 @@ class slideModel extends model
         $slide->buttonClass  = json_decode($slide->buttonClass);
         $slide->buttonUrl    = json_decode($slide->buttonUrl);
         $slide->buttonTarget = json_decode($slide->buttonTarget);
-        if($slide->backgroundType == 'image') $slide->image = $this->dao->select('*') ->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('objectID')->eq($slide->id)->fetch();
+        if($slide->backgroundType == 'image')
+        {
+            $slide->image = rtrim($this->app->getWebRoot(), '/') . $slide->image;
+        }
     }
 }

@@ -27,7 +27,7 @@
             <?php if(!empty($group->slides)): ?>
             <div class='slide-item'>
               <?php if ($slide->backgroundType == 'image'): ?>
-              <?php print(html::image(helper::createLink('file', 'read', "fileID={$slide->image->id}", '', "{$slide->image->extension}")));?>
+              <?php print(html::image($slide->image));?>
               <?php else: ?>
               <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
               <?php endif; ?>
