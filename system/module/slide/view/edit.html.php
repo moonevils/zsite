@@ -90,7 +90,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         </tr>
         <tr class='bg-section' data-id='image'>
           <th rowspan='2'><?php echo $lang->slide->image;?></th>
-          <td colspan='3'><?php echo html::image(helper::createLink('file', 'read', "fileID={$slide->image->id}", '', "{$slide->image->extension}"), "class='image'");?></td>
+          <td colspan='3'><?php echo html::image($slide->image, "class='image'");?></td>
         </tr>
         <tr class='bg-section' data-id='image'>
           <td>

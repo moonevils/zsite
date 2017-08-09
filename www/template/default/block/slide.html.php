@@ -37,7 +37,7 @@ if($slides):
       ?>
       <?php if($slide->backgroundType == 'image'): ?>
       <div data-id='<?php echo $slide->id?>' class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?>>
-      <?php print(html::image(helper::createLink('file', 'read', "fileID={$slide->image->id}", '', "{$slide->image->extension}")));?>
+      <?php print(html::image($slide->image));?>
       <?php else:?>
       <div data-id='<?php echo $slide->id?>' class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
       <?php endif;?>
