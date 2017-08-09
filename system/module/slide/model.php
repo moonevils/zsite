@@ -298,9 +298,6 @@ class slideModel extends model
         $slide->buttonClass  = json_decode($slide->buttonClass);
         $slide->buttonUrl    = json_decode($slide->buttonUrl);
         $slide->buttonTarget = json_decode($slide->buttonTarget);
-        if($slide->backgroundType == 'image')
-        {
-            $slide->image = rtrim($this->app->getWebRoot(), '/') . $slide->image;
-        }
+        if($slide->backgroundType == 'image') $slide->image = rtrim($this->app->getWebRoot(), '/') . $slide->image;
     }
 }
