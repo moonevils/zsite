@@ -14,8 +14,10 @@
 /* Start output buffer. */
 ob_start();
 
+$static = isset($_GET['mode']) && $_GET['mode'] == 'static';
+
 /* Define the run mode as admin. */
-define('RUN_MODE', 'admin');
+define('RUN_MODE', $static ? 'front' : 'admin');
 
 /* Load the framework.*/
 include 'loader.php';
@@ -33,11 +35,20 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 
 $common = $app->loadCommon();
 
+$requestType = $static ? 'PATH_INFO' : 'GET';
+$module      = ($static && isset($_GET[$config->moduleVar])) ? $_GET[$config->moduleVar] : 'admin';
+$method      = ($static && isset($_GET[$config->methodVar])) ? $_GET[$config->methodVar] : 'index';
+if($static) 
+{
+    unset($_SERVER['HTTP_X_REQUESTED_WITH']);
+    unset($_GET['HTTP_X_REQUESTED_WITH']);
+}
+
 /* Change the request settings. */
 $config->frontRequestType = $config->requestType;
-$config->requestType = 'GET';
-$config->default->module = 'admin'; 
-$config->default->method = 'index';
+$config->requestType      = $requestType; 
+$config->default->module  = $module;
+$config->default->method  = $method;
 
 /* Run it. */
 $app->parseRequest();
