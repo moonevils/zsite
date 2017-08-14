@@ -84,17 +84,24 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             echo "<div>";
             if(!$product->unsaleable)
             {
-                if($product->promotion != 0)
-                {
-                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-                    if($product->price != 0)
-                    {
-                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
-                    }
+                if($product->negotiate)
+                { 
+                    echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
                 }
-                else if($product->price != 0)
+                else
                 {
-                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+                    if($product->promotion != 0)
+                    {
+                        echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                        if($product->price != 0)
+                        {
+                            echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
+                        }
+                    }
+                    else if($product->price != 0)
+                    {
+                        echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+                    }
                 }
             }
             if(isset($content->showViews) and $content->showViews)
@@ -127,17 +134,24 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         <?php
         if(!$product->unsaleable)
         {
-            if($product->promotion != 0)
-            {
-                if($product->price != 0)
-                {
-                    echo "<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>&nbsp;&nbsp;';
-                }
-                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+            if($product->negotiate)
+            { 
+                echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
             }
-            else if($product->price != 0)
+            else
             {
-                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+                if($product->promotion != 0)
+                {
+                    if($product->price != 0)
+                    {
+                        echo "<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>&nbsp;&nbsp;';
+                    }
+                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                }
+                else if($product->price != 0)
+                {
+                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+                }
             }
         }
         ?>

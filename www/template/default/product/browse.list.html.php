@@ -47,7 +47,11 @@
         </td>
         <td class="w-100px">
           <?php if(!$product->unsaleable and commonModel::isAvailable('shop')):?>
+          <?php if($product->negotiate):?>
+          <?php echo html::a(helper::createLink('company', 'contact'), $lang->product->contact, "class='btn btn-xs btn-success'")?>
+          <?php else:?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $lang->product->buyNow, "class='btn btn-xs btn-success'")?>
+          <?php endif;?>
           <?php else:?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $lang->product->detail, "class='btn btn-xs btn-success'")?>
           <?php endif;?>

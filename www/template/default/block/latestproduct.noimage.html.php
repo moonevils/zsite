@@ -11,20 +11,28 @@
         <?php
         if(!$product->unsaleable)
         {
-            if($product->promotion != 0)
-            {
-                if($product->price != 0)
-                {
-                    echo "<small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
-                    echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
-                }
-                echo "&nbsp; <small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
-                echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
+            if($product->negotiate)
+            { 
+                echo "&nbsp;&nbsp;";
+                echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
             }
-            else if($product->price != 0)
+            else
             {
-                echo "&nbsp; <small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
-                echo "<strong class='text-important'>" . $product->price . "</strong>";
+                if($product->promotion != 0)
+                {
+                    if($product->price != 0)
+                    {
+                        echo "<small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
+                        echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
+                    }
+                    echo "&nbsp; <small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
+                    echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
+                }
+                else if($product->price != 0)
+                {
+                    echo "&nbsp; <small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
+                    echo "<strong class='text-important'>" . $product->price . "</strong>";
+                }
             }
         }
         ?>

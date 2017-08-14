@@ -38,20 +38,28 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         <?php
         if(!$product->unsaleable)
         {
-            if($product->promotion != 0)
-            {
-                echo "&nbsp;&nbsp;<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-                if($product->price != 0)
-                {
-                    echo "&nbsp;&nbsp;<del class='text-muted'>" . $this->config->product->currencySymbol . $product->price .'</del>';
-                }
+            if($product->negotiate)
+            { 
+                echo "&nbsp;&nbsp;";
+                echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
             }
             else
             {
-                if($product->price != 0)
+                if($product->promotion != 0)
                 {
-                    echo "<span class='text-muted'> " . $this->config->product->currencySymbol . "</span> ";
-                    echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                    echo "&nbsp;&nbsp;<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                    if($product->price != 0)
+                    {
+                        echo "&nbsp;&nbsp;<del class='text-muted'>" . $this->config->product->currencySymbol . $product->price .'</del>';
+                    }
+                }
+                else
+                {
+                    if($product->price != 0)
+                    {
+                        echo "<span class='text-muted'> " . $this->config->product->currencySymbol . "</span> ";
+                        echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                    }
                 }
             }
         }

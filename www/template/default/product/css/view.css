@@ -29,7 +29,7 @@
 .product-property, .product-image-menu {margin-bottom: 20px;}
 .product-property h1{font-size: 22px;}
 .product-property h1,.btn-buy {padding-left: 15px; padding-right: 15px;}
-@media (min-width: 992px){.product-property h1,.btn-buy {  padding-left: 0;   padding-right: 0;} .product-property.product-lack-img h1,.product-lack-img .btn-buy {padding-left: 15px;   padding-right: 15px;}}
+@media (min-width: 992px){.product-property h1,.btn-buy { padding-left: 0; padding-right: 0;} .product-property.product-lack-img h1,.product-lack-img .btn-buy {padding-left: 15px;   padding-right: 15px;}}
 .article-content {padding:0; margin-bottom: 10px;}
 .product-property.product-lack-img h1{margin-top: 20px; padding-left: 0; padding-right: 0;}
 .article-files {margin: 0 -15px; padding: 10px 15px; background: none}

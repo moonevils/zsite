@@ -38,17 +38,24 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         <?php
         if(!$product->unsaleable)
         {
-            if($product->promotion != 0)
-            {
-                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-                if($product->price != 0)
-                {
-                    echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
-                }
+            if($product->negotiate)
+            { 
+                echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
             }
-            else if($product->price != 0)
+            else
             {
-                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+                if($product->promotion != 0)
+                {
+                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                    if($product->price != 0)
+                    {
+                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
+                    }
+                }
+                else if($product->price != 0)
+                {
+                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
+                }
             }
         }
         ?>
