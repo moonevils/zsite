@@ -31,16 +31,24 @@
                 $currencySymbol = $this->config->product->currencySymbol;
                 if(!$product->unsaleable)
                 {
-                    if($product->promotion != 0)
-                    {
+                    if($product->negotiate)
+                    { 
                         echo "&nbsp;&nbsp;";
-                        echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
+                        echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
                     }
                     else
                     {
-                        if($product->price != 0)
+                        if($product->promotion != 0)
                         {
-                            echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
+                            echo "&nbsp;&nbsp;";
+                            echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
+                        }
+                        else
+                        {
+                            if($product->price != 0)
+                            {
+                                echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
+                            }
                         }
                     }
                 }
@@ -74,16 +82,24 @@
             $currencySymbol = $this->config->product->currencySymbol;
             if(!$product->unsaleable)
             {
-                if($product->promotion != 0)
-                {
+                if($product->negotiate)
+                { 
                     echo "&nbsp;&nbsp;";
-                    echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
+                    echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
                 }
                 else
                 {
-                    if($product->price != 0)
+                    if($product->promotion != 0)
                     {
-                        echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
+                        echo "&nbsp;&nbsp;";
+                        echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
+                    }
+                    else
+                    {
+                        if($product->price != 0)
+                        {
+                            echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
+                        }
                     }
                 }
             }

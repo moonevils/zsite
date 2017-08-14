@@ -78,7 +78,6 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
                   if($product->negotiate)
                   { 
                       $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
-                      $attributeHtml .= "<span class='meta-value'><span class='text-danger text-lg text-latin'>" . $lang->product->negotiate . "</span> " . html::a($this->createLink('company', 'contact'), "<span class='label label-success'>" . $lang->product->contact . '</span>', "target='_blank'") . '</li>';
                   }
                   else
                   {
@@ -142,7 +141,12 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               ?>
             </ul>
             <?php if(empty($attributeHtml)) echo '<div class="product-summary">' . $product->desc . '</div>'; ?>
-            <?php if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate):?>
+            <?php if(!$product->unsaleable and commonModel::isAvailable('shop')):?>
+            <?php if($product->negotiate):?>
+            <span id='buyBtnBox'>
+              <?php echo html::a(helper::createLink('company', 'contact'), $lang->product->contact, "class='btn btn-primary'");?>
+            </span>
+            <?php else:?>
             <?php if(!$stockOpened or $product->amount > 0):?>
             <ul class='list-unstyled meta-list'>
               <li id='countBox'>
@@ -165,6 +169,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               <label class='btn-cart'><?php echo $lang->product->addToCart;?></label>
               <?php endif;?>
             </span>
+            <?php endif;?>
             <?php endif;?>
             <?php if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall and !$product->negotiate):?>
             <hr>
