@@ -2336,7 +2336,7 @@ class upgradeModel extends model
             {
                 foreach($fields as $field)
                 {
-                    if(preg_match('/ src=\\\"{([0-9]+)(\.(\w+))?}\\\" /', '<img src=\"{16.jpg}\" alt=\"\" \/>', $matches))
+                    if(preg_match('/ src=\\\"{([0-9]+)(\.(\w+))?}\\\" /', $row->$field, $matches))
                     {
                         $fileID = $matches[1];
                         $file   = $this->loadModel('file')->getByID($fileID);
