@@ -44,7 +44,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
         <div class='col-sm-5' id='productImageWrapper'>
           <div class='product-image media-wrapper' id='productImage'>
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
-            <?php echo html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=fullURL", '', "{$product->image->primary->extension}"), "title='{$title}' alt='{$product->name}'");?>
+            <?php echo html::image("/file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=&extension={$product->image->primary->extension}", "title='{$title}' alt='{$product->name}'");?>
             <div class='image-zoom-region'></div>
           </div>
           <?php if(count($product->image->list) > 1):?>
@@ -56,7 +56,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               <?php $title = $image->title ? $image->title : $product->name;?>
               <div class="product-image-wrapper">
                 <div class='product-image little-image'>
-                  <?php echo html::image(helper::createLink('file', 'read', "fileID={$image->id}&type=fullURL", '', "{$image->extension}"), "title='{$title}' alt='{$product->name}'");?>
+                  <?php echo html::image("/file.php?pathname={$image->pathname}&objectType=product&imageSize=&extension={$image->extension}", "title='{$title}' alt='{$product->name}'");?>
                 </div>
               </div>
               <?php endforeach;?>

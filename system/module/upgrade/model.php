@@ -176,6 +176,8 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('6.3.beta'));
                 $this->processProductViews();
             case '6_4';
+            case '6_4_1':
+                $this->fixFileURLOfEditor();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2312,5 +2314,47 @@ class upgradeModel extends model
         }
 
         return true;
+    }
+
+    /**
+     * Fix file url for editor.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function fixFileURLOfEditor()
+    {
+        $this->dbh->exec('USE ' . $this->config->db->name);
+        $tables = $this->dbh->query('show tables')->fetchAll(PDO::FETCH_COLUMN );
+
+        foreach($tables as $table)
+        {
+            $fields = $this->dbh->query("DESC {$table}")->fetchAll(PDO::FETCH_COLUMN );
+            $rows   = $this->dao->select('*')->from($table)->fetchAll();
+
+            foreach($rows as $row)
+            {
+                foreach($fields as $field)
+                {
+                    if(preg_match('/ src=\\\"{([0-9]+)(\.(\w+))?}\\\" /', '<img src=\"{16.jpg}\" alt=\"\" \/>', $matches))
+                    {
+                        $fileID = $matches[1];
+                        $file   = $this->loadModel('file')->getByID($fileID);
+                        $src    = str_replace(array('/', '"'), array('\/', '\"'), ' src="{' . $file->pathname . '}" ');
+                        $value  = preg_replace('/ src=\\\"{([0-9]+)(\.(\w+))?}\\\" /', " {$src}", $row->$field);
+                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where("`{$field}`")->eq($row->$field)->exec();
+                    }
+                    elseif(preg_match('/ src="{([0-9]+)(\.(\w+))?}" /', $row->$field, $matches))
+                    {
+                        $fileID = $matches[1];
+                        $file   = $this->loadModel('file')->getByID($fileID);
+                        $value  = preg_replace('/ src="{([0-9]+)(\.(\w+))?}" /', ' src= "{' . $file->pathname . '}" ', $row->$field);
+                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where("`{$field}`")->eq($row->$field)->exec();
+                    }
+                }
+            }
+        }
+
+        return !dao::isError();
     }
 }

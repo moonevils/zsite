@@ -28,7 +28,7 @@
           <div class='card-content text-muted small'><?php echo helper::substr($page->summary, 60, '...');?></div>
           <div class='card-footer small text-muted'>
             <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $page->views;?></span>
-            <?php if($page->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $page->comments;?></span> &nbsp;<?php endif;?>
+            <?php if(!empty($page->comments)):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $page->comments;?></span> &nbsp;<?php endif;?>
             &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($page->addedDate, 0, 10);?></span>
           </div>
         </div>
@@ -36,7 +36,7 @@
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-          echo html::a($url, html::image(helper::createLink('file', 'read', "fileID={$page->image->primary->id}&type=smallURL", '', "{$page->image->primary->extension}"), "title='{$title}' class='thumbnail'" ));
+          echo html::a($url, html::image("/file.php?pathname={$page->image->primary->pathname}&imageSize=smallURL&extension={$page->image->primary->extension}", "title='{$title}' class='thumbnail'" ));
         ?>
         </div>
         <?php endif;?>

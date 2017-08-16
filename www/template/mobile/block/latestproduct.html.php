@@ -55,7 +55,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
             else
             {
-                echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$product->image->primary->middleURL}'> ";
+                echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='/file.php?pathname={$product->image->primary->pathname}&imageSize=middleURL&extension={$product->image->primary->extension}'> ";
             }
             ?>
           </a>

@@ -55,7 +55,7 @@ js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-          echo html::image(helper::createLink('file', 'read', "fileID={$article->image->primary->id}&type=smallURL", '', "{$article->image->primary->extension}"), "title='{$title}' class='thumbnail'");
+          echo html::image("/file.php?pathname={$article->image->primary->pathname}&objectType=article&imageSize=smallURL&extension={$article->image->primary->extension}", "title='{$title}' class='thumbnail'");
         ?>
         </div>
         <?php endif;?>

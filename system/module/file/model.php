@@ -157,11 +157,11 @@ class fileModel extends model
                 if($file->objectType == 'product') continue;
                 if($file->editor)
                 {
-                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image(helper::createLink('file', 'read', "fileID=$file->id&type=smallURL", '', "{$file->extension}")), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image("/file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}"), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
                 else
                 {
-                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image(helper::createLink('file', 'read', "fileID=$file->id&type=smallURL", '', "{$file->extension}")), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image("/file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}"), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
             }
             else
@@ -332,7 +332,7 @@ class fileModel extends model
             if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->middleURL))) $file->middleURL = $file->fullURL;
             if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->smallURL)))  $file->smallURL  = $file->fullURL;
             if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->largeURL)))  $file->largeURL  = $file->fullURL;
-
+            
             $file->isImage = true;
         }
 
@@ -978,7 +978,7 @@ class fileModel extends model
             $fileID = $this->dao->lastInsertID();
             $_SESSION['album'][$uid][] = $fileID;
 
-            $data = str_replace($out[1][$key], helper::createLink('file', 'read', "fileID=$fileID", '', $file['extension']), $data);
+            $data = str_replace($out[1][$key], "/file.php?pathname={$file['pathname']}&objectType={$file['objectType']}&imageSize=&extension={$file['extension']}", $data);
         }
 
         return $data;
@@ -1429,17 +1429,16 @@ class fileModel extends model
     public function processImgURL($data, $editorList, $uid = '')
     {
         if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
-        $readLinkReg = helper::createLink('file', 'read', 'fileID=(%fileID%)', '', '(%viewType%)');
-        $readLinkReg = str_replace(array('%fileID%', '%viewType%', '?', '/'), array('[0-9]+', '\w+', '\?', '\/'), $readLinkReg);
+        $readLinkReg = '/file.php?pathname=(%pathname%)&extension=(%viewType%)';
+        $readLinkReg = str_replace(array('%pathname%', '%viewType%', '?', '/'), array('[0-9]{6}/f_[a-z0-9]{32}', '\w+', '\?', '\/'), $readLinkReg);
         foreach($editorList as $editorID)
         {
             if(empty($editorID) or empty($data->$editorID)) continue;
 
-            $imgURL = $this->config->requestType == 'GET' ? '{$2.$1}' : '{$1.$2}';
-
             $pasteData = $this->pasteImage($data->$editorID, $uid);
             if($pasteData) $data->$editorID = $pasteData;
 
+            $imgURL = '{$1.$2}';
             $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="' . $imgURL . '" ', $data->$editorID);
             $data->$editorID = preg_replace("/ src=\"" . htmlspecialchars($readLinkReg) . "\" /", ' src="' . $imgURL . '" ', $data->$editorID);
         }
@@ -1461,7 +1460,7 @@ class fileModel extends model
         foreach($fields as $field)
         {
             if(empty($field) or empty($data->$field)) continue;
-            $data->$field = preg_replace('/ src="{([0-9]+)(\.(\w+))?}" /', ' src="' . helper::createLink('file', 'read', "fileID=$1", '', "$3") . '" ', $data->$field);
+            $data->$field = preg_replace('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}" /', ' src="/file.php?pathname=$1&extension=$3" ', $data->$field);
         }
 
         return $data;

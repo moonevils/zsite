@@ -56,7 +56,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
             if(!empty($article->image))
             {
                 $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                echo html::a($url, html::image(helper::createLink('file', 'read', "fileID={$article->image->primary->id}&type={$imageURL}", '', "{$article->image->primary->extension}"), "title='{$title}' class='thumbnail'" ));
+                echo html::a($url, html::image("/file.php?&pathname={$article->image->primary->pathname}&objectType=article&imageSize={$imageURL}&extension={$article->image->primary->extension}", "title='{$title}' class='thumbnail'" ));
             }
             ?>
             </div>

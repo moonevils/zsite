@@ -34,7 +34,7 @@
             }
             else
             {
-                echo html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}"), "title='{$product->name}' alt='{$product->name}'");
+                echo html::image("/file.php?pathname={$product->image->primary->pathname}&imageSize=middleURL&extension={$product->image->primary->extension}", "title='{$product->name}' alt='{$product->name}'");
             }
             ?>
           </div>
