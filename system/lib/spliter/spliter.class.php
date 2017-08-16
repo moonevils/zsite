@@ -109,7 +109,7 @@ class spliter
         if($ord >= ord('a') and $ord <= ord('z'))  return true;
         if($ord >= ord('A') and $ord <= ord('Z'))  return true;
         if($ord >= ord(0)   and $ord <= ord(9))    return true;
-        if(strpos('._/->:<?&', $letter) !== false) return true;
+        if($letter and strpos('._/->:<?&', $letter) !== false) return true;
         return false;
     }
 }
