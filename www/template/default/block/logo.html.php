@@ -3,7 +3,7 @@
 <?php if($logo):?>
 <?php $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);?>
 <div class='site-logo' data-ve='block' data-id='<?php echo $block->id; ?>'>
-  <?php echo html::a(helper::createLink('index'), html::image("/file.php?pathname={$logo->pathname}&objectType=logo&imageSize=realPath&extension={$logo->extension}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'"));?></div>
+  <?php echo html::a(helper::createLink('index'), html::image("{$this->config->webRoot}file.php?pathname={$logo->pathname}&objectType=logo&imageSize=realPath&extension={$logo->extension}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'"));?></div>
 </div>
 <?php else: ?>
 <div class='site-name' data-ve='block' data-id='<?php echo $block->id; ?>'><h2 data-ve='logo'><?php echo html::a($this->config->webRoot, $this->config->site->name);?></h2></div>

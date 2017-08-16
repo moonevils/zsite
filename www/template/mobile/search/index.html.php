@@ -29,7 +29,7 @@ else
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $object->image->primary->title ? $object->image->primary->title : $object->title;
-          echo html::image("/file.php?pathname={$object->image->primary->pathname}&imageSize=smallURL&extension={$object->image->primary->extension}", "title='{$title}' class='thumbnail'" );
+          echo html::image("{$config->webRoot}file.php?pathname={$object->image->primary->pathname}&imageSize=smallURL&extension={$object->image->primary->extension}", "title='{$title}' class='thumbnail'" );
         ?>
         </div>
         <?php endif;?>

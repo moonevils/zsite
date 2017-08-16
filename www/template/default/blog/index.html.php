@@ -45,7 +45,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->blog->imageWidth) ? $this->config->blog->imageWidth . 'px' : '180px';?>">
             <?php
             $title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title;
-            echo html::a($url, html::image("/file.php?pathname={$stick->image->primary->pathname}&objectType=blog&imageSize={$imageURL}&extension={$stick->image->primary->extension}", "title='{$title}' class='thumbnail'"));
+            echo html::a($url, html::image("{$config->webRoot}file.php?pathname={$stick->image->primary->pathname}&objectType=blog&imageSize={$imageURL}&extension={$stick->image->primary->extension}", "title='{$title}' class='thumbnail'"));
             ?>
           </div>
           <?php endif;?>
@@ -92,7 +92,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($this->config->blog->imageWidth) ? $this->config->blog->imageWidth . 'px' : '180px';?>">
             <?php
             $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-            echo html::a($url, html::image("/file.php?pathname={$article->image->primary->pathname}&objectType=blog&imageSize={$imageURL}&extension={$article->image->primary->extension}", "title='{$title}' class='thumbnail'"));
+            echo html::a($url, html::image("{$config->webRoot}file.php?pathname={$article->image->primary->pathname}&objectType=blog&imageSize={$imageURL}&extension={$article->image->primary->extension}", "title='{$title}' class='thumbnail'"));
             ?>
           </div>
           <?php endif;?>

@@ -133,7 +133,7 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
         <?php if($logo):?>
         <?php $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);?>
         <div id='siteLogo' data-ve='logo'>
-          <?php echo html::a(helper::createLink('index'), html::image("/file.php?pathname={$logo->pathname}&objectType=logo&imageSize=&extension={$logo->extension}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'"));?>
+          <?php echo html::a(helper::createLink('index'), html::image("{$config->webRoot}file.php?pathname={$logo->pathname}&objectType=logo&imageSize=&extension={$logo->extension}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'"));?>
         </div>
         <?php else: ?>
         <div id='siteName' data-ve='logo'><h2><?php echo html::a(helper::createLink('index'), $this->config->site->name);?></h2></div>

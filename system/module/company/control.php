@@ -19,6 +19,8 @@ class company extends control
      */
     public function index()
     {
+        $this->config->company = $this->loadModel('file')->replaceImgURL($this->config->company, $this->config->company->editor->setbasic['id']);
+
         $this->view->title      = $this->config->company->name;
         $this->view->keywords   = $this->config->company->name;
         $this->view->company    = $this->config->company;
@@ -37,8 +39,6 @@ class company extends control
         {
             $this->view->canonicalURL = helper::createLink('company', 'index', '', '', 'mhtml'); 
         }
-
-        $this->config->company = $this->loadModel('file')->replaceImgURL($this->config->company, $this->config->company->editor->setbasic['id']);
 
         $this->display();
     }
