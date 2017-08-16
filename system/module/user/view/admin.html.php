@@ -96,7 +96,7 @@ js::set('admin', $this->get->admin);
         <td><?php echo substr($user->join, 0, 10);?></td>
         <?php endif;?>
         <td><?php echo $user->visits;?></td>
-        <td><?php echo date('y-m-d H:i', strtotime($user->last));?></td>
+        <td><?php if(formatTime($user->last)) echo date('y-m-d H:i', strtotime($user->last));?></td>
         <td><?php echo $user->ip;?></td>
         <td>
         <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
