@@ -61,7 +61,7 @@
 </tr>
 <tr>
   <th><?php echo $lang->block->showPrice;?></th>
-  <td><input type='checkbox' name='params[showPrice]' <?php if(!isset($block->content->showPrice) or (isset($block->content->showPrice) && $block->content->showPrice)) echo 'checked';?> value='1' /></td>
+  <td><input type='checkbox' name='params[showPrice]' <?php if(isset($block->content->showPrice) && $block->content->showPrice) echo 'checked';?> value='1' /></td>
 </tr>
 <tr>
   <th><?php echo $lang->block->showViews;?></th>
