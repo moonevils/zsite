@@ -12,7 +12,7 @@
         else
         {
             $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-            echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image("/file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=middleURL&extension={$product->image->primary->extension}", "width='80' title='{$title}' alt='{$product->name}'"), "class='w-80px'");
+            echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image("{$config->webRoot}file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=middleURL&extension={$product->image->primary->extension}", "width='80' title='{$title}' alt='{$product->name}'"), "class='w-80px'");
         }
         ?>
         </td>

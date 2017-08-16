@@ -36,7 +36,7 @@
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-          echo html::a($url, html::image("/file.php?pathname={$page->image->primary->pathname}&imageSize=smallURL&extension={$page->image->primary->extension}", "title='{$title}' class='thumbnail'" ));
+          echo html::a($url, html::image("{$config->webRoot}file.php?pathname={$page->image->primary->pathname}&imageSize=smallURL&extension={$page->image->primary->extension}", "title='{$title}' class='thumbnail'" ));
         ?>
         </div>
         <?php endif;?>

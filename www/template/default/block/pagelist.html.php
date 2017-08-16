@@ -42,7 +42,7 @@ if(isset($content->image)) $pages = $this->loadModel('file')->processImages($pag
           if(!empty($page->image))
           {
               $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-              echo html::a($url, html::image("/file.php?pathname={$page->image->primary->pathname}&objectType=page&imageSize={$imageURL}&extension={$page->image->primary->extension}", "title='{$title}' class='thumbnail'" ));
+              echo html::a($url, html::image("{$this->config->webRoot}file.php?pathname={$page->image->primary->pathname}&objectType=page&imageSize={$imageURL}&extension={$page->image->primary->extension}", "title='{$title}' class='thumbnail'" ));
           }
           ?>
           </div>

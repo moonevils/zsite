@@ -22,7 +22,7 @@
         $imageHtml = '';
         $fileHtml  = '';
         $fullURL   = html::input('', $file->fullURL, "size='" . strlen($file->fullURL) . "' style='border:none; background:none;' onmouseover='this.select()'");
-        $imagePath = "/file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=&extension={$file->extension}";
+        $imagePath = "{$config->webRoot}file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=&extension={$file->extension}";
         if($file->isImage)
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
@@ -74,7 +74,7 @@
             <?php
             if($file->isImage)
             {
-                echo html::a(inlink('download', "id=$file->id"), html::image("/file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}", "class='image-small' title='{$file->title}'"), "data-toggle='lightbox' target='_blank'");
+                echo html::a(inlink('download', "id=$file->id"), html::image("{$config->webRoot}file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}", "class='image-small' title='{$file->title}'"), "data-toggle='lightbox' target='_blank'");
             }
             else
             {
@@ -82,7 +82,7 @@
             }
             ?>
           </td>
-          <td class='text-left'><?php echo "./file.php?pathname={$file->pathname}&objectTyp={$file->objectType}&imageSize=&extension{$file->extension}";?></td>
+          <td class='text-left'><?php echo "{$config->webRoot}file.php?pathname={$file->pathname}&objectTyp={$file->objectType}&imageSize=&extension{$file->extension}";?></td>
           <td><?php echo $file->extension;?></td>
           <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
           <td><?php echo isset($users[$file->addedBy]) ? $users[$file->addedBy] : '';?></td>

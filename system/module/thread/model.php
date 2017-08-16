@@ -487,7 +487,7 @@ class threadModel extends model
             if($file->isImage)
             {
                 if($file->editor) continue;
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image("/file.php?pathname={$file->pathname}&objectTyp={$file->objectType}&imageSize=&extension={$file->extension}"), "target='_blank' data-toggle='lightbox'");
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image("{$this->config->webRoot}file.php?pathname={$file->pathname}&objectTyp={$file->objectType}&imageSize=&extension={$file->extension}"), "target='_blank' data-toggle='lightbox'");
                 if($canManage) $imagesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('thread', 'deleteFile', "threadID=$thread->id&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $imagesHtml .= '</li>';
             }

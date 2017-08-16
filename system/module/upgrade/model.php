@@ -2348,7 +2348,7 @@ class upgradeModel extends model
                     {
                         $fileID = $matches[1];
                         $file   = $this->loadModel('file')->getByID($fileID);
-                        $value  = preg_replace('/ src="{([0-9]+)(\.(\w+))?}" /', ' src= "{' . $file->pathname . '}" ', $row->$field);
+                        $value  = preg_replace('/ src="{([0-9]+)(\.(\w+))?}" /', ' src="{' . $file->pathname . '}" ', $row->$field);
                         $this->dao->update($table)->set("`{$field}`")->eq($value)->where("`{$field}`")->eq($row->$field)->exec();
                     }
                 }
