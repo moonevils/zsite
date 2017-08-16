@@ -57,7 +57,7 @@
             if(!empty($product->image)) 
             {
                 $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-                echo html::a($productLink, html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=smallURL", '', "{$product->image->primary->extension}"), "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+                echo html::a($productLink, html::image("/file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=smallURL&extension={$product->image->primary->extension}", "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
             }
             ?>
             <h6 class='visible-xs'><?php echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");?></h6>

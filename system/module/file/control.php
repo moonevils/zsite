@@ -152,7 +152,9 @@ class file extends control
         {
             if(!$this->file->checkSavePath()) $this->send(array('error' => 1, 'message' => $this->lang->file->errorUnwritable));
             if(!in_array(strtolower($file['extension']), $this->config->file->editorExtensions)) $this->send(array('error' => 1, 'message' => $this->lang->fail));
-            $realPathName = $this->file->savePath . $this->file->getSaveName($file['pathname']);
+
+            $saveName = $this->file->getSaveName($file['pathname']);
+            $realPathName = $this->file->savePath . $saveName;
             move_uploaded_file($file['tmpname'], $realPathName);
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
@@ -175,7 +177,7 @@ class file extends control
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $fileID = $this->dao->lastInsertID();
-            $url    = $this->createLink('file', 'read', "fileID=$fileID", '', $file['extension']);
+            $url    = "/file.php?pathname={$saveName}&extension={$file['extension']}";
             $_SESSION['album'][$uid][] = $fileID;
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));

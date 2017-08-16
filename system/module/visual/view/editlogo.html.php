@@ -21,7 +21,7 @@
         </strong>
       </td>
     </tr>
-    <tr><td></td><td colspan='2'><?php if(isset($logo->webPath)) echo html::image(helper::createLink('file', 'read', "fileID={$logo->fileID}&type=webPath", '', "{$logo->extension}"), "class='logo'");?></td></tr>
+    <tr><td></td><td colspan='2'><?php if(isset($logo->webPath)) echo html::image("/file.php?pathname={$logo->pathname}&objectType=logo&imageSite=extension={$logo->extension}", "class='logo'");?></td></tr>
     <tr>
       <td></td>
       <td colspan='2'>

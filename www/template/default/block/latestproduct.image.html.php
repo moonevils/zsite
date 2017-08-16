@@ -9,7 +9,7 @@
       <div class='col-md-12' style="width:<?php echo 100 / $recPerRow;?>%" data-recperrow="<?php echo $recPerRow;?>">
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
-          <div class='media' style='background-image: url(<?php echo helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}");?>);'><?php echo html::image(helper::createLink('file', 'read', "fileID={$product->image->primary->id}&type=middleURL", '', "{$product->image->primary->extension}"), "title='{$title}' alt='{$product->name}'"); ?></div>
+          <div class='media' style='background-image: url(<?php echo "/file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=middleURL&extension={$product->image->primary->extension}";?>);'><?php echo html::image("/file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=middleURL&extension={$product->image->primary->extension}", "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading' style='min-height:20px;'>
             <?php if(isset($content->alignTitle) and $content->alignTitle == 'middle'):?>
             <?php $showPriceOrViews = (isset($content->showPrice) and $content->showPrice) or (isset($content->showViews) and $content->showViews);?>

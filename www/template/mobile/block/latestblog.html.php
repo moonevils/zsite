@@ -57,7 +57,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
           if(!empty($article->image))
           {
               $thumbnailTitle = $article->image->primary->title ? $article->image->primary->title : $article->title;
-              $thumbnailLink = html::a($url, html::image(helper::createLink('file', 'read', "fileID={$article->image->primary->id}&type={$imageURL}", '', "{$article->image->primary->extension}"), "title='{$thumbnailTitle}' class='thumbnail'" ));
+              $thumbnailLink = html::a($url, html::image("/file.php?pathname={$article->image->primary->pathname}&imageSize={$imageURL}&extension={$article->image->primary->extension}", "title='{$thumbnailTitle}' class='thumbnail'" ));
               $thumbnailMaxWidth = !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px';
               $thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: {$thumbnailMaxWidth};'>{$thumbnailLink}</div>";
               if($content->imagePosition == 'left') echo $thumbnail;

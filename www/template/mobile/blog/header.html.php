@@ -10,7 +10,7 @@
       if($logo)
       {
           $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
-          echo html::image(helper::createLink('file', 'read', "fileID={$logo->fileID}&type=webPath", '', "{$logo->extension}"), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
+          echo html::image("/file.php?pathname={$logo->pathname}&extension={$logo->extension}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
       }
       else
       {
