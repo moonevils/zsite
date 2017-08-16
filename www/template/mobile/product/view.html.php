@@ -21,6 +21,8 @@ js::set('categoryPath', explode(',', trim($category->path, ',')));
 js::set('addToCartSuccess', $lang->product->addToCartSuccess);
 js::set('gotoCart', $lang->product->gotoCart);
 js::set('goback', $lang->product->goback);
+js::set('stockOpened', $stockOpened);
+js::set('stock', $product->amount);
 css::internal($product->css);
 js::execute($product->js);
 ?>
@@ -86,9 +88,9 @@ js::execute($product->js);
 
 <?php
 $attributeHtml = '';
-if($product->amount)
+if($product->amount and $this->config->product->stock)
 {
-    $attributeHtml .= "<tr><th>" . $lang->product->amount . "</th>";
+    $attributeHtml .= "<tr><th>" . $lang->product->stock . "</th>";
     $attributeHtml .= "<td>" . $product->amount . " <small>" . $product->unit . "</small></td></tr>";
 }
 if($product->brand)
@@ -142,6 +144,7 @@ foreach($product->attributes as $attribute)
     }
     ?>
     <?php if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate):?>
+    <?php if(!$stockOpened or $product->amount > 0):?>
     <tr>
       <th><?php echo $lang->product->count; ?></th>
       <td>
@@ -156,12 +159,17 @@ foreach($product->attributes as $attribute)
         </div>
       </td>
     </tr>
+    <?php endif;?>
     <tr>
       <td colspan='2'>
+        <?php if($stockOpened and $product->amount < 1):?>
+        <button type='button' class='btn block  btn-soldout'><?php echo $lang->product->soldout;?></button></div>
+        <?php else:?>
         <div class='row'>
           <div class='col-6'><button type='button' class='btn block primary btn-buy' data-url='<?php echo $this->createLink('order', 'confirm', "product={$product->id}&count=productcount");?>'><?php echo $lang->product->buyNow;?></button></div>
           <div class='col-6'><button type='button' class='btn block warning btn-cart' data-url='<?php echo $this->createLink('cart', 'add', "product={$product->id}&count=productcount");?>'><?php echo $lang->product->addToCart;?></button></div>
         </div>
+        <?php endif;?>
       </td>
     </tr>
     <?php endif;?>

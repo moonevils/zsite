@@ -63,4 +63,12 @@ $(function()
             $btn.removeClass('disabled');
         });
     });
+
+    if(v.stockOpened) 
+    {
+       $('#count').change(function()
+       {
+          if($('#count').val() > v.stock) $(this).val(v.stock);
+       })
+    }
 });
