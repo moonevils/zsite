@@ -15,8 +15,9 @@ $(document).ready(function()
 
          var listTitleHeight = $(".book-catalog .panel-heading").height();
 
+         var catalogWidth  = $('.book-catalog').width();
          var catalogHeight = $(window).height() - 10;
-         $(".book-catalog").css({'max-height': catalogHeight, 'overflow': 'auto'});
+         $(".book-catalog").css({'max-height': catalogHeight, 'overflow-y': 'auto', 'overflow-x': 'hidden'});
 
          if($('.books .active').length)
          {
@@ -29,30 +30,28 @@ $(document).ready(function()
              );
          }
 
+
          /* Bind scroll event */
          $(document).on("scroll", function ()
          {
               $(".page-wrapper").css({"min-height":$(".book-catalog").height()})
               if($(document).scrollTop() > headerHeight )
               {
-                   $(".book-catalog").css({
-                       "position":"fixed",
-                       "top":"0",
-                       "width":"276"
-                   });
+                   $('.book-catalog').css({'position': 'fixed', 'top':'0', 'width': catalogWidth});
+
                    if($(document).scrollTop() > footerHeight)
                    {
                        catalogHeight2 = $(window).height() - $('.blocks.all-bottom').outerHeight() - $('#footer').outerHeight() - 60;
-                       $('.book-catalog').css({'max-height': catalogHeight2, 'overflow': 'auto'});
+                       $('.book-catalog').css({'max-height': catalogHeight2, 'overflow-y': 'auto', 'overflow-x': 'hidden'});
                    }
                    else
                    {
-                       $('.book-catalog').css({'max-height': catalogHeight, 'overflow': 'auto'});
+                       $('.book-catalog').css({'max-height': catalogHeight, 'overflow-y': 'auto', 'overflow-x': 'hidden'});
                    }
               }
               else if( $(document).scrollTop() < headerHeight )
               {
-                   $(".book-catalog").css({ "position":"relative" });
+                   $('.book-catalog').css({'position': 'relative' });
               }
          });
     };
