@@ -258,7 +258,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <span class='alert alert-success total hide'></span>
         </div>
         <div class='watermark-footer hidden'>
-          <?php if($this->config->file->watermark == 'open') echo html::a(helper::createLink('file', 'rebuildWatermark'), $lang->file->rebuildWatermark, "class='btn btn-primary' id='watermarkExecButton'");?>
+          <?php if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open') echo html::a(helper::createLink('file', 'rebuildWatermark'), $lang->file->rebuildWatermark, "class='btn btn-primary' id='watermarkExecButton'");?>
           <span class='alert alert-success total hide'></span>
         </div>
       </div>

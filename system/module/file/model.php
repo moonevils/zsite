@@ -421,7 +421,7 @@ class fileModel extends model
                 if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
             }
 
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
+            if(strtolower($file['extension']) != 'gif' and in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
                 if($objectType != 'source' and $objectType != 'slide') 
                 {
@@ -812,7 +812,7 @@ class fileModel extends model
                 if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
             }
 
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) and $fileInfo->objectType != 'slide' and $fileInfo->objectType != 'source' )
+            if(strtolower($file['extension']) != 'gif' and in_array(strtolower($file['extension']), $this->config->file->imageExtensions) and $fileInfo->objectType != 'slide' and $fileInfo->objectType != 'source' )
             {
                 $this->compressImage($realPathName);
                 if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
@@ -980,7 +980,7 @@ class fileModel extends model
             $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
             file_put_contents($realPathName, $imageData);
             $this->compressImage($realPathName);
-            if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+            if(strtolower($file['extension']) != 'gif' and isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
             {
                 $this->setWatermark($realPathName);
             }
@@ -1244,7 +1244,7 @@ class fileModel extends model
 
         if(!$file['chunks'] || $file['chunk'] == ($file['chunks'] - 1))
         {
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
+            if(strtolower($file['extension']) != 'gif' and in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
                 if($objectType != 'source' and $objectType != 'slide') 
                 {
@@ -1400,7 +1400,7 @@ class fileModel extends model
         foreach($files as $key => $file)
         {
             $fileInfo = pathinfo($file);
-            if(in_array(strtolower($fileInfo['extension']), $this->config->file->imageExtensions, true)) $images[] = $file;
+            if(strtolower($fileInfo['extension']) != 'gif' and in_array(strtolower($fileInfo['extension']), $this->config->file->imageExtensions, true)) $images[] = $file;
         }
         return $files;
     }
