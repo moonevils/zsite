@@ -511,6 +511,11 @@ class site extends control
             $this->view->okFile = $okFile;
             if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
 
+            if(!$this->post->enabledLangs)
+            {
+                $this->send(array('result' => 'fail', 'message' => sprintf(strip_tags($this->lang->error->notempty), $this->lang->site->lang)));
+            }
+
             if(!in_array($this->post->defaultLang, $this->post->enabledLangs)) 
             {
                 $enabledLangsName = '';
