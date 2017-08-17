@@ -62,7 +62,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
             &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder);?>'><i class="icon-eye-open"></i> <?php echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder;?></span>
             <?php if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $stick->comments);?>'><i class="icon-comments-alt"></i> <?php echo $stick->comments;?></span></a><?php endif;?>
             <?php 
-              if($config->blog->showCategory)
+              if(!empty($config->blog->showCategory))
               {
                 if($config->blog->categoryLevel == 'first')
                 {
