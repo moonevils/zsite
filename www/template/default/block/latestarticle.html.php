@@ -46,7 +46,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
         $blockCategories = '';
         if(isset($blockContent->category)) $blockCategories = $blockContent->category;
 
-        $categoryName = '';
+        $categoryName = $article->category->name;
         foreach($article->categories as $id => $category)
         {
             if(strpos(",$blockCategories,", ",$id,") !== false) 
