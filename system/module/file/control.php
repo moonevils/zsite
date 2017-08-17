@@ -157,7 +157,7 @@ class file extends control
             $realPathName = $this->file->savePath . $saveName;
             move_uploaded_file($file['tmpname'], $realPathName);
 
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
+            if(strtolower($file['extension']) != 'gif' and in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
             {
                 $this->file->compressImage($realPathName);
                 if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
