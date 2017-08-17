@@ -82,7 +82,7 @@
             }
             ?>
           </td>
-          <td class='text-left'><?php echo "{$config->webRoot}file.php?pathname={$file->pathname}&objectTyp={$file->objectType}&imageSize=&extension{$file->extension}";?></td>
+          <td class='text-left'><?php echo "{$config->webRoot}file.php?pathname={$file->pathname}&objectTyp={$file->objectType}&imageSize=&extension={$file->extension}";?></td>
           <td><?php echo $file->extension;?></td>
           <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
           <td><?php echo isset($users[$file->addedBy]) ? $users[$file->addedBy] : '';?></td>
