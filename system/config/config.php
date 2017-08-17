@@ -110,6 +110,7 @@ $config->file->allowed = 'txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot       = dirname(__FILE__) . DS;
 $chanzhiepsConfig = $configRoot . 'chanzhieps.php';
+$tableConfig      = $configRoot . 'table.php';
 $guarderConfig    = $configRoot . 'guarder.php';
 $myConfig         = $configRoot . 'my.php';
 $routeConfig      = $configRoot . 'route.php';
@@ -118,8 +119,9 @@ $shopConfig       = $configRoot . 'shop.php';
 $sensitiveConfig  = $configRoot . 'sensitive.php';
 $customConfig     = $configRoot . 'custom.php';
 
-if(file_exists($myConfig))         include $myConfig;
 if(file_exists($chanzhiepsConfig)) include $chanzhiepsConfig;
+if(file_exists($myConfig))         include $myConfig;
+if(file_exists($tableConfig))      include $tableConfig;
 if(file_exists($guarderConfig))    include $guarderConfig;
 if(file_exists($routeConfig))      include $routeConfig;
 if(file_exists($modeConfig))       include $modeConfig;
