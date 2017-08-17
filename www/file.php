@@ -26,6 +26,8 @@ if($imageSize == 'smallURL')  $filePath = str_replace('f_', 's_', $realPath);
 if($imageSize == 'middleURL') $filePath = str_replace('f_', 'm_', $realPath);
 if($imageSize == 'largeURL')  $filePath = str_replace('f_', 'l_', $realPath);
 
+if(!file_exists($filePath)) $filePath = $realPath;
+
 if(!file_exists($filePath)) die('The file does not exist!');
 
 $imageExtensions = array('jpeg', 'jpg', 'gif', 'png');
