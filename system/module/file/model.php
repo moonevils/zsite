@@ -1402,7 +1402,7 @@ class fileModel extends model
             $fileInfo = pathinfo($file);
             if(strtolower($fileInfo['extension']) != 'gif' and in_array(strtolower($fileInfo['extension']), $this->config->file->imageExtensions, true)) $images[] = $file;
         }
-        return $files;
+        return $images;
     }
 
     /**
