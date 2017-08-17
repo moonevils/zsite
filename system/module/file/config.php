@@ -14,6 +14,8 @@ else
     $config->file->thumbs = json_decode($config->file->thumbs, true);
 }
 
+$config->file->imageTypeList = array('1' => 'GIF', '2' => 'JPG', '3' => 'PNG');
+
 $config->file->imageExtensions  = array('jpeg', 'jpg', 'gif', 'png');
 $config->file->videoExtensions  = array('flv', 'webmv', 'wav', 'rtmp', 'ogg', 'mp3', 'mp4', 'm4v', 'swf');
 
