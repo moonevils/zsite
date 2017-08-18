@@ -4,11 +4,17 @@
   <table class='table table-form form-inline'>
     <tr>
       <th><?php echo $lang->user->account;?></th>
-      <td><?php echo html::input('account', '', "class='form-control'")?></td><td></td>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input('account', '', "class='form-control'")?>
+      </td><td></td>
     </tr>  
     <tr>
       <th class='w-100px'><?php echo $lang->user->realname;?></th>
-      <td><?php echo html::input("realname", '', "class='form-control'")?></td>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input("realname", '', "class='form-control'")?>
+      </td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->user->type;?></th>
@@ -16,15 +22,21 @@
     </tr>
     <tr class="groups" style='display:none'>
       <th><?php echo $lang->user->privilege;?></th>
-      <td><?php echo html::checkbox('groups', $groups, '');?></td>
+      <td><?php echo html::checkbox('groups', $groups, '');?></td><td></td>
     </tr>
     <tr>
       <th><?php echo $lang->user->email;?></th>
-      <td><?php echo html::input('email', '', "class='form-control'");?></td><td></td>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input('email', '', "class='form-control'");?>
+      </td><td></td>
     </tr>  
     <tr>
       <th><?php echo $lang->user->password;?></th>
-      <td><?php echo html::password('password1', '', "class='form-control' autocomplete='off'")?></td>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::password('password1', '', "class='form-control' autocomplete='off'")?>
+      </td><td></td>
     </tr>  
     <tr>
       <th><?php echo $lang->user->password2;?></th>
