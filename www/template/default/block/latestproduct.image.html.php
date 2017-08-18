@@ -15,7 +15,7 @@
             <?php $showPriceOrViews = (isset($content->showPrice) and $content->showPrice) or (isset($content->showViews) and $content->showViews);?>
             <ul style="list-style:none;overflow:hidden;margin:0 auto;padding:0;">
                 <li style='float:left;width:100%;list-style:none;text-align:center;'>
-                <span style='<?php if($showPriceOrViews) echo 'width:50%;'?>height:15px;display:inline-block;overflow:hidden;'>
+                <span style='<?php if($showPriceOrViews) echo 'width:50%;'?>height:16px;line-height:16px;display:inline-block;overflow:hidden;'>
                 <?php 
                   if(isset($content->showCategory) and $content->showCategory == 1)
                   {
@@ -109,14 +109,15 @@
             <?php endif;?>
           </div>
         </a>
-         <?php if(isset($content->showInfo) and isset($content->infoAmount)):?>
-         <?php 
-           $productInfo = empty($product->desc) ? $product->content : $product->desc; 
-           $productInfo = strip_tags($productInfo);
-           $productInfo = (mb_strlen($productInfo) > $content->infoAmount) ? mb_substr($productInfo, 0 , $content->infoAmount, 'utf8') : $productInfo;
-         ?>
-         <div style='padding-left:10px;'><?php echo $productInfo;?></div>
-         <?php endif;?>
+
+        <?php if(isset($content->showInfo) and isset($content->infoAmount)):?>
+        <?php 
+        $productInfo = empty($product->desc) ? $product->content : $product->desc; 
+        $productInfo = strip_tags($productInfo);
+        $productInfo = (mb_strlen($productInfo) > $content->infoAmount) ? mb_substr($productInfo, 0 , $content->infoAmount, 'utf8') : $productInfo;
+        ?>
+        <div class='with-padding'><?php echo $productInfo;?></div>
+        <?php endif;?>
       </div>
       <?php endif;?>
       <?php endforeach;?>
