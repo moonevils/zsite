@@ -78,6 +78,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
                   if($product->negotiate)
                   { 
                       $attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>";
+                      $attributeHtml .= "<span class='meta-value'><span class='text-danger text-lg text-latin'>" . $lang->product->negotiate . "</span></li>";
                   }
                   else
                   {
