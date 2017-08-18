@@ -93,11 +93,11 @@ $lang->block->default->pages['page_view']      = '單頁';
 
 /* page layout list. */
 if(!isset($lang->block->default->regions)) $lang->block->default->regions = new stdclass();
-$lang->block->default->regions->all['header'] = 'Header(不可見)';
+$lang->block->default->regions->all['header'] = 'Header';
 $lang->block->default->regions->all['top']    = '頁頭';
 $lang->block->default->regions->all['banner'] = 'Banner';
 $lang->block->default->regions->all['bottom'] = '頁尾';
-$lang->block->default->regions->all['footer'] = 'Footer(不可見)';
+$lang->block->default->regions->all['footer'] = 'Footer';
 
 $lang->block->default->regions->index_index['top']     = '上部';
 $lang->block->default->regions->index_index['middle']  = '中部';

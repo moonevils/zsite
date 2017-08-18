@@ -92,11 +92,11 @@ $lang->block->mobile->pages['page_index']     = '單頁列表';
 
 /* page layout list. */
 $lang->block->mobile->regions = new stdclass();
-$lang->block->mobile->regions->all['header'] = 'Header(不可見)';
+$lang->block->mobile->regions->all['header'] = 'Header';
 $lang->block->mobile->regions->all['top']    = '頁頭';
 $lang->block->mobile->regions->all['banner'] = 'Banner';
 $lang->block->mobile->regions->all['bottom'] = '頁尾';
-$lang->block->mobile->regions->all['footer'] = 'Footer(不可見)';
+$lang->block->mobile->regions->all['footer'] = 'Footer';
 
 $lang->block->mobile->regions->index_index['top']     = '上部';
 $lang->block->mobile->regions->index_index['middle']  = '中部';

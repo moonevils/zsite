@@ -94,11 +94,11 @@ $lang->block->mobile->pages['page_index']     = 'Page list';
 
 /* page layou>mobile-> list. */
 $lang->block->mobile->regions = new stdclass();
-$lang->block->mobile->regions->all['header'] = 'Header(invisible)';
+$lang->block->mobile->regions->all['header'] = 'Header';
 $lang->block->mobile->regions->all['top']    = 'Top';
 $lang->block->mobile->regions->all['banner'] = 'Banner';
 $lang->block->mobile->regions->all['bottom'] = 'Bottom';
-$lang->block->mobile->regions->all['footer'] = 'Footer(invisible)';
+$lang->block->mobile->regions->all['footer'] = 'Footer';
 
 $lang->block->mobile->regions->index_index['top']     = 'Top';
 $lang->block->mobile->regions->index_index['middle']  = 'Middle';
