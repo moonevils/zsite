@@ -51,7 +51,14 @@ class forum extends control
         if(!$board) die(js::locate('back'));
 
         if($board->link) helper::header301($board->link); 
- 
+
+        $speakers = array();
+        $board->moderators = explode(',', trim($board->moderators, ','));
+        foreach($board->moderators as $moderators) $speakers[] = $moderators;
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+        foreach($board->moderators as $key => $moderators) $board->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
+        $board->moderators = implode(',', $board->moderators);
+
         /* Get common threads. */
         $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
         $this->app->loadClass('pager', $static = true);
