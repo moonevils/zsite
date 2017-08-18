@@ -623,7 +623,10 @@ EOT;
         /* Then check the user is a moderator or not. */
         $user       = ",{$this->app->user->account},";
         $board      = $this->loadModel('tree')->getByID($boardID);
-        $moderators = ',' . str_replace(' ', '', $board->moderators) . ',';
+        $parent     = $this->loadModel('tree')->getByID($board->parent);
+
+        $moderators = array_merge(explode(',', trim(str_replace(' ', '', $board->moderators), ',')), explode(',', trim(str_replace(' ', '', $parent->moderators), ',')));
+        $moderators = implode(',', $moderators);
 
         $users = ($board->readonly) ? $moderators : $moderators . str_replace(' ', '', $users) . ',';
         

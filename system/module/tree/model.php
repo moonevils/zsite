@@ -37,16 +37,6 @@ class treeModel extends model
 
         if($category->type == 'forum') 
         {
-            if(RUN_MODE == 'front')
-            {
-                $speakers = array();
-                $category->moderators = explode(',', trim($category->moderators, ','));
-                foreach($category->moderators as $moderators) $speakers[] = $moderators;
-                $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
-                foreach($category->moderators as $key => $moderators) $category->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
-                $category->moderators = implode(',', $category->moderators);
-            }
-
             if($category->parent and !$category->discussion)
             {
                 $parent = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($category->parent)->fetch();
