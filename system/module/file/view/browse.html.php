@@ -181,7 +181,7 @@ function sortFile()
              {
                  if(data.result == 'success')
                  {
-                     $('#ajaxModal').load($('#ajaxModal').attr('ref'));
+                     $('#ajaxModal').load($('#ajaxModal').attr('ref'), function(){$.ajustModalPosition('fit', '#ajaxModal');});
                  }
                  else
                  {
