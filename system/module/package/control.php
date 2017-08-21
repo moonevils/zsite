@@ -420,7 +420,7 @@ class package extends control
             $tmpName  = $_FILES['file']['tmp_name'];
             $fileName = $_FILES['file']['name'];
             $package  = basename($fileName, '.zip');
-            move_uploaded_file($tmpName, $this->app->getTmpRoot() . "/package/$fileName");
+            move_uploaded_file($tmpName, $this->app->getTmpRoot() . "/package/$package");
 
             $info = $this->package->getInfoFromDB($package);
             $option = (!empty($info) and $info->status == 'installed') ? 'upgrade' : 'install';

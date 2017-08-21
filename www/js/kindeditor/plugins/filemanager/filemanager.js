@@ -71,6 +71,7 @@ KindEditor.plugin('filemanager', function(K) {
 		orderTypeBox = K('[name="orderType"]', div);
 		function reloadPage(path, order, func) {
 			var param = 'path=' + path + '&order=' + order + '&dir=' + dirName;
+      alert(param);
 			dialog.showLoading(self.lang('ajaxLoading'));
 			K.ajax(K.addParam(fileManagerJson, param + '&' + new Date().getTime()), function(data) {
 				dialog.hideLoading();
