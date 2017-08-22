@@ -703,7 +703,7 @@ class blockModel extends model
                 $type = zget($block, 'type', '');
                 $key  = strtolower("block/{$type}_{$block->id}");
                 if($withGrid and $block->grid) $key = "block/{$type}_{$block->id}_{$block->grid}";
-                if(strpos($key, 'Tree') !== false)
+                if(strpos($key, 'tree') !== false)
                 {
                     if($this->session->articleCategory) $key .= "_{$this->session->articleCategory}";
                     if($this->session->productCategory) $key .= "_{$this->session->productCategory}";
