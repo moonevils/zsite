@@ -78,6 +78,10 @@ class blog extends control
             $this->session->set('articleCategory', $category->id);
             $this->view->layouts    = $this->loadModel('block')->getPageBlocks('blog', 'index', $category->id);
         }
+        else
+        {
+            $this->session->set('articleCategory', 0);
+        }
 
         $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
