@@ -473,8 +473,7 @@ class user extends control
 
             $this->user->checkEmail($email);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $locate = inlink('control');
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => inlink('profile')));
         }
 
         $this->view->title      = $this->lang->user->setEmail;
