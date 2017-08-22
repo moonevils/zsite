@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $('#mailSender').click(function()
+    $('#mailSender').unbind('click').click(function()
     {
         var data = {email: $('#email').val()};
         var url = $(this).attr('href');
