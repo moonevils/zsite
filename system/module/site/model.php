@@ -84,9 +84,17 @@ class siteModel extends model
     {
         $errors ='';
         if(empty($config)) $config = fixer::input('post')->get();
+
         $myFile = $this->app->getConfigRoot() . 'my.php';
+        if($this->config->framework->multiSite)
+        {
+            $myFile = $this->app->getCOnfigRoot() . 'sites' . DS . $this->app->siteCode . '.php';
+            if(!file_exists(dirname($myFile))) mkdir(dirname($myFile));
+            if(!file_exists($myFile)) fopen($myFile, 'w');
+        }
 
         $rawContent = file_get_contents($myFile);
+        if(empty($rawContent)) $rawContent = '<?php ';
 
         if(isset($config->requestType)) $rawContent = preg_replace('/.*config\->requestType.*\n/', '', $rawContent);
         if(isset($config->detectDevice)) $rawContent = preg_replace("/.*config\->framework\->detectDevice\['" . $this->app->clientLang . "'\].*\n/", '', $rawContent);
@@ -100,7 +108,7 @@ class siteModel extends model
         $rawContent = str_replace("\n\n", "\n", $rawContent);
         $rawContent = str_replace('?>', '', $rawContent);
 
-        if(strpos($rawContent, "config->db->name") === false) return array('result' => 'fail');
+        if(!$this->config->framework->multiSite && strpos($rawContent, "config->db->name") === false) return array('result' => 'fail');
 
         if(is_writable($myFile) !== true)
         {
