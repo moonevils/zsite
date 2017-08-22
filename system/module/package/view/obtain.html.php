@@ -85,7 +85,7 @@
             <div class='btn-group'>
             <?php
             echo html::a($package->viewLink, $lang->package->view, 'class="btn package" target="_blank"');
-            if($currentRelease->public)
+            if($currentRelease->public and !$currentRelease->charge)
             {
                 if($package->type != 'computer' and $package->type != 'mobile')
                 {
@@ -107,7 +107,7 @@
                     }
                 }
             }
-            echo html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual btn"');
+            echo html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual btn" target="_blank"');
             echo html::a($package->site, $lang->package->site, "class='btn' target='_blank'");
             ?>
             </div>
