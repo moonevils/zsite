@@ -22,5 +22,5 @@ if(isset($pageCSS)) css::internal($pageCSS);
   <div class='blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
   <div class='page-wrapper'>
     <div class='page-content'>
-      <div class='blocks' data-region='all-banner'><?php $this->block->printRegion($layouts, 'all', 'banner');?></div>
+      <div class='blocks row' data-region='all-banner'><?php $this->block->printRegion($layouts, 'all', 'banner', true);?></div>
 <?php endif;?>
