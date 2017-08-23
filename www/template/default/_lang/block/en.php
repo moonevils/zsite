@@ -13,6 +13,7 @@ if(!isset($lang->block->default)) $lang->block->default = new stdclass();
 $lang->block->default->typeList['html']     = 'Html widget';
 $lang->block->default->typeList['htmlcode'] = 'Html code';
 $lang->block->default->typeList['phpcode']  = 'php code';
+$lang->block->default->typeList['baidustat']= 'Baidu stat';
 
 $lang->block->default->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->default->typeList['hotArticle']    = 'Hot Articles';
@@ -31,6 +32,7 @@ $lang->block->default->typeList['productTree'] = 'Product Categories';
 $lang->block->default->typeList['blogTree']    = 'Blog Categories';
 
 $lang->block->default->typeList['contact']   = 'Contact';
+$lang->block->default->typeList['message']   = 'Message';
 $lang->block->default->typeList['followUs']  = 'Follow Us';
 $lang->block->default->typeList['about']     = 'About';
 $lang->block->default->typeList['links']     = 'Links';
@@ -38,6 +40,7 @@ $lang->block->default->typeList['slide']     = 'Slide';
 $lang->block->default->typeList['header']    = 'Header';
 $lang->block->default->typeList['bottomNav'] = 'Footer Nav';
 $lang->block->default->typeList['subscribe'] = 'Subscribe';
+$lang->block->default->typeList['login']     = 'Login';
 
 $lang->block->default->typeGroups = array();
 $lang->block->default->typeGroups['html']     = 'input';
