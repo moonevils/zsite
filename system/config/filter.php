@@ -69,7 +69,7 @@ $filter->block->edit->get['type'] = 'reg::character';
 
 $filter->file->filemanager = new stdclass();
 $filter->file->filemanager->get['order'] = 'reg::character';
-$filter->file->filemanager->get['path']  = 'reg::path';
+$filter->file->filemanager->get['path']  = 'reg::/^[0-9]{6}\/+$/';
 
 $filter->search->index = new stdclass();
 $filter->search->index->get['words'] = 'reg::any';

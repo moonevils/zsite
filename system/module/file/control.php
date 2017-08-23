@@ -559,7 +559,7 @@ class file extends control
         }
         else
         {
-            $currentPath    = $this->file->savePath . '/' . $this->get->path;
+            $currentPath    = $this->file->savePath . $this->get->path;
             $currentUrl     = $this->file->webPath . $this->get->path;
             $currentDirPath = $this->get->path;
             $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
@@ -568,6 +568,8 @@ class file extends control
         if(preg_match('/\.\./', $currentPath)) die($this->lang->file->noAccess);
         if(!preg_match('/\/$/', $currentPath)) die($this->lang->file->invalidParameter);
         if(!file_exists($currentPath) || !is_dir($currentPath)) die($this->lang->file->unWritable);
+
+        $files = $this->dao->select('*')->from(TABLE_FILE)->where('pathname')->like("{$this->get->path}%")->fetchAll();
 
         $fileList = array();
         if($fileDir = opendir($currentPath))
@@ -589,10 +591,36 @@ class file extends control
                 else
                 {
                     $fileExtension = $this->file->getExtension($file);
+                    if($fileExtension == 'txt')
+                    {
+                        foreach($files as $fileInfo)
+                        {
+                            if(strpos($fileInfo->pathname, $filename) !== false)
+                            {
+                                $fileExtension = $fileInfo->extension;
+                                break;
+                            }
+                        }
+                    }
+
                     if(!in_array($fileExtension, $this->config->file->editorExtensions, true))
                     {
                         unset($fileList[$i]);
                         continue;
+                    }
+
+                    $imageSize = 'fullURL';
+                    if(strpos($filename, 's_') !== false) $imageSize = 'smallURL';
+                    if(strpos($filename, 'm_') !== false) $imageSize = 'middleURL';
+                    if(strpos($filename, 'l_') !== false) $imageSize = 'largeURL';
+
+                    if(strpos($filename, '.') !== false)
+                    {
+                        $pathname = $this->get->path . str_replace(array('s_', 'm_', 'l_'), 'f_', substr($filename, 0, strpos($filename, '.'))) . '.' . $fileExtension;
+                    }
+                    else
+                    {
+                        $pathname = $this->get->path . $filename . '.' . $fileExtension;
                     }
 
                     $fileList[$i]['is_dir']    = false;
@@ -601,6 +629,8 @@ class file extends control
                     $fileList[$i]['dir_path']  = '';
                     $fileList[$i]['is_photo']  = in_array($fileExtension, $fileTypes);
                     $fileList[$i]['filetype']  = $fileExtension;
+                    $fileList[$i]['pathname']  = $pathname;
+                    $fileList[$i]['imagesize'] = $imageSize;
                     $fileList[$i]['filename']  = $filename . "?fromSpace=y";
                 }
 
