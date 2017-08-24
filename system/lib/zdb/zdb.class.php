@@ -157,6 +157,8 @@ class zdb
 
             if($sqlEnd == 0)
             {
+                if(strtolower($sql) == 'set names utf8;' and !$this->dbh->query($sql)) $sql = 'SET CHARACTER SET utf8;';
+
                 try
                 {
                     $this->dbh->query($sql);
