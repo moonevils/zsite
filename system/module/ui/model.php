@@ -1496,14 +1496,20 @@ if(!function_exists('getJS'))
      */
     public function getThemesAvailable()
     {
-        $packages = glob($this->app->getTmpRoot() . 'package' . DS . '*.zip');
+        $packages = glob($this->app->getTmpRoot() . 'package' . DS . '*');
         $themes   = array();
 
         foreach($packages as $package)
         {
+            $finfo    = finfo_open(FILEINFO_MIME); 
+            $mimetype = finfo_file($finfo, $package); 
+            finfo_close($finfo);
+
+            if(strpos($mimetype, 'zip') === false) continue;
+
             $theme = new stdclass();
             $theme->name = basename($package, '.zip');
-            $theme->size = filesize($package);
+            $theme->size = $packageSize;
             $theme->time = date('Y-m-d', fileatime($package));
             $themes[] = $theme;
         }
