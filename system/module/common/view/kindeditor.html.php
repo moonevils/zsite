@@ -79,6 +79,7 @@ function initKindeditor(afterInit)
             htmlTags:{
             '<?php echo str_replace(array("<",">"), array('', ''), $config->allowedTags->{RUN_MODE});?>':["class","id","style"],
             video: ["id", "class", "width", "height", "src", "controls"],
+            object: ["type", "data", "width", "height"], param: ["name", "value"],
             audio: ["src", "controls", "id", "class", "width", "height"],
             font:["id","class","color","size","face",".background-color"],span:["id","class",".color",".background-color",".font-size",".font-family",".background",".font-weight",".font-style",".text-decoration",".vertical-align",".line-height"],div:["id","class","align",".border",".margin",".padding",".text-align",".color",".background-color",".font-size",".font-family",
             ".font-weight",".background",".font-style",".text-decoration",".vertical-align",".margin-left"],table:["id","class","border","cellspacing","cellpadding","width","height","align","bordercolor",".padding",".margin",".border","bgcolor",".text-align",".color",".background-color",".font-size",".font-family",".font-weight",".font-style",".text-decoration",".background",".width",".height",".border-collapse"],"td,th":["id","class","align","valign","width","height","colspan","rowspan","bgcolor",".text-align",
