@@ -84,7 +84,7 @@
           <?php echo $article->title;?>
         </td>
         <?php if($type == 'submission'):?>
-        <td class='text-center'><?php echo $lang->submission->typeList[$article->type];?></td>
+        <td class='text-center'><?php echo zget($lang->submission->typeList, $article->type, $lang->article->submission);?></td>
         <?php endif;?>
         <?php if($type != 'page' and $type != 'submission'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
