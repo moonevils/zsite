@@ -1332,52 +1332,57 @@ class fileModel extends model
         $position   = isset($this->config->file->watermarkPosition) ? $this->config->file->watermarkPosition : 'topLeft';
         $angle      = 0;
         $fontPath   = $this->app->getTmpRoot() . 'fonts' . DS . 'wqy-zenhei.ttc';
-        $textLength = mb_strlen($text, 'utf8') * $fontSize;
+
+        $textInfo   = imagettfbbox($fontSize, 0, $fontPath, $text);
+        $textWidth  = $textInfo[2] - $textInfo[0];
+        $textHeight = $textInfo[1] - $textInfo[7];
+
+        if($rawFileWidth - $textWidth < 10 or $rawFileHeight - $textHeight < 10) return false;
 
         if($position == 'topLeft')
         {
-            $positionX = 10;
-            $positionY = 10 + $fontSize;
+            $positionX = 5;
+            $positionY = $textHeight;
         }
         elseif($position == 'topMiddle')
         {
-            $positionX = $rawFileWidth / 2 - $textLength / 2;
-            $positionY = 10 + $fontSize;
+            $positionX = $rawFileWidth / 2 - $textWidth / 2;
+            $positionY = $textHeight;
         }
         elseif($position == 'topRight')
         {
-            $positionX = $rawFileWidth - $textLength - 20;
-            $positionY = 10 + $fontSize;
+            $positionX = $rawFileWidth - $textWidth - 5;
+            $positionY = $textHeight;
         }
         elseif($position == 'middleLeft')
         {
-            $positionX = 10;
-            $positionY = $rawFileHeight / 2 - $fontSize / 2;
+            $positionX = 5;
+            $positionY = $rawFileHeight / 2 + $textHeight / 2;
         }
         elseif($position == 'middleMiddle')
         {
-            $positionX = $rawFileWidth / 2 - $textLength / 2;
-            $positionY = $rawFileHeight / 2 - $fontSize / 2;
+            $positionX = $rawFileWidth / 2 - $textWidth / 2;
+            $positionY = $rawFileHeight / 2 + $textHeight / 2;
         }
         elseif($position == 'middleRight')
         {
-            $positionX = $rawFileWidth - $textLength - 20;
-            $positionY = $rawFileHeight / 2 - $fontSize / 2;
+            $positionX = $rawFileWidth - $textWidth - 5;
+            $positionY = $rawFileHeight / 2 + $textHeight / 2;
         }
         elseif($position == 'bottomLeft')
         {
-            $positionX = 10;
-            $positionY = $rawFileHeight - $fontSize;
+            $positionX = 5;
+            $positionY = $rawFileHeight - 5;
         }
         elseif($position == 'bottomMiddle')
         {
-            $positionX = $rawFileWidth / 2 - $textLength / 2;
-            $positionY = $rawFileHeight - $fontSize;
+            $positionX = $rawFileWidth / 2 - $textWidth / 2;
+            $positionY = $rawFileHeight - 5;
         }
         else
         {
-            $positionX = $rawFileWidth - $textLength - 20;
-            $positionY = $rawFileHeight - $fontSize;
+            $positionX = $rawFileWidth - $textWidth - 5;
+            $positionY = $rawFileHeight - 5;
         }
 
         $im = $imageCreateFun($rawImage);
