@@ -285,7 +285,7 @@ class fileModel extends model
         foreach($fileList as $file)
         {
             $info = pathinfo($file);
-            if(isset($info['extension']) and !in_array($info['extension'], $this->config->file->imageExtensions)) continue;
+            if(!isset($info['extension']) or !in_array($info['extension'], $this->config->file->imageExtensions)) continue;
             $file = str_replace($this->app->getDataRoot(), '', $file);
             $filesCount = $this->dao->select('count(*) as count')->from(TABLE_FILE)->where('pathname')->eq($file)->fetch('count');
             if($filesCount) continue;
@@ -294,21 +294,6 @@ class fileModel extends model
 
         foreach($newFiles as $path)
         {
-            if(!isset($info['extension']))
-            {
-                $imageInfo = getimagesize($this->app->getDataRoot() . $path);
-                if(!$imageInfo) continue;
-
-                $imageType = $imageInfo[2];
-                if(!isset($this->config->file->imageTypeList[$imageType])) continue;
-
-                $extension = strtolower($this->config->file->imageTypeList[$imageType]);
-            }
-            else
-            {
-                $extension = $info['extension'];
-            }
-
             $info = pathinfo($path);
             $file = new stdclass();
             $file->pathname   = $path;
@@ -317,7 +302,7 @@ class fileModel extends model
             $file->objectType = 'source';
             $file->objectID   = "{$template}_{$theme}";
             $file->addedDate  = helper::now();
-            $file->extension  = $extension;
+            $file->extension  = $info['extension'];
             $file->size       = filesize($this->app->getDataRoot() . $path);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
         }
