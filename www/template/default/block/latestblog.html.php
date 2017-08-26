@@ -60,7 +60,7 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
             }
             ?>
             </div>
-            <strong class='text-important'>
+            <strong class='text-important text-nowrap'>
               <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?>
             </strong> 
             &nbsp;<?php echo $article->summary;?>
