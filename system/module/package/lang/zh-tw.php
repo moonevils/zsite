@@ -95,6 +95,7 @@ $lang->package->types = new stdclass();
 $lang->package->types->theme     = '主題';
 $lang->package->types->extension = '插件';
 $lang->package->types->ext       = '插件';
+$lang->package->types->patch     = '補丁';
 
 $lang->package->waring = '警告';
 
