@@ -14,18 +14,18 @@
             <?php if(isset($content->alignTitle) and $content->alignTitle == 'middle'):?>
             <?php $showPriceOrViews = (isset($content->showPrice) and $content->showPrice) or (isset($content->showViews) and $content->showViews);?>
             <ul style="list-style:none;overflow:hidden;margin:0 auto;padding:0;">
-                <li style='float:left;width:100%;list-style:none;text-align:center;'>
-                <span style='<?php if($showPriceOrViews) echo 'width:50%;'?>height:16px;line-height:16px;display:inline-block;overflow:hidden;'>
-                <?php 
+              <li style='float:left;width:100%;list-style:none;text-align:center;'>
+                <span style='<?php if($showPriceOrViews) echo 'width:50%;'?> display:inline-block;white-space:nowrap;overflow:hidden;'>
+                  <?php 
                   if(isset($content->showCategory) and $content->showCategory == 1)
                   {
                     $categoryName = ($content->categoryName == 'abbr') ? '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ' : ' [' . $product->category->name . '] ';
                     echo $categoryName;
                   }
                   echo $product->name;
-                ?>
+                  ?>
                 </span>
-                <span style='display:inline-block;'>
+                <span style='display:inline-block; white-space:nowrap; overflow:hidden'>
                 <?php if(isset($content->showPrice) and $content->showPrice):?>
                 <?php
                 $currencySymbol = $this->config->product->currencySymbol;
@@ -58,7 +58,7 @@
                 <i class="icon icon-eye-open"></i> <?php echo $product->views;?>
                 <?php endif;?>
                 </span>
-                </li>
+              </li>
             </ul> 
             <?php else:?>
             <span style='width:60%;float:left; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>
