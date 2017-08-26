@@ -46,7 +46,7 @@ if(isset($content->image)) $pages = $this->loadModel('file')->processImages($pag
           }
           ?>
           </div>
-          <strong class='text-important'>
+          <strong class='text-important text-nowrap'>
             <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($page->addedDate, DT_DATE4);?>
           </strong> 
           &nbsp;<?php echo $page->summary;?>
