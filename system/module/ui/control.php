@@ -383,7 +383,13 @@ class ui extends control
             die($this->display());
         }
 
-        $packageInfo = $this->loadModel('package')->parsePackageCFG($package, 'theme');
+        /* Extract the package. */
+        $return = $this->package->extractPackage($package, 'theme');
+        if($return->result != 'ok')
+        {
+            $this->view->error = sprintf($this->lang->package->errorExtracted, $packageFile, $return->error);
+            die($this->display());
+        }
 
         /* Checking the package pathes. */
         $return = $this->package->checkPackagePathes($package, 'theme');
@@ -391,14 +397,6 @@ class ui extends control
         if($return->result != 'ok')
         {
             $this->view->error = $return->errors;
-            die($this->display());
-        }
-
-        /* Extract the package. */
-        $return = $this->package->extractPackage($package, 'theme');
-        if($return->result != 'ok')
-        {
-            $this->view->error = sprintf($this->lang->package->errorExtracted, $packageFile, $return->error);
             die($this->display());
         }
 

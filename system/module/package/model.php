@@ -538,10 +538,19 @@ class packageModel extends model
 
         $appRoot = $this->app->getAppRoot();
         $pathes  = $this->getPathesFromPackage($package);
+        $themeInfo = $this->parsePackageCFG($package, 'theme');
 
         $groupedPaths = array();
         foreach($pathes as $path)
         {
+            if($path == "www/theme/{$themeInfo->template}/$themeInfo->code")
+            {
+                $i = 1;
+                $installedThemes = $this->loadModel('ui')->getThemesByTemplate($themeInfo->template);
+                while(isset($installedThemes[$themeInfo->code . '_' . $i])) $i ++ ;
+                $newCode = $themeInfo->code . '_' . $i;
+                $path = "www/theme/{$themeInfo->template}/$newCode";
+            }
             if(substr($path, 0, 6) == 'system') $groupedPaths['system'][]   = $path;
             if(substr($path, 0, 3) == 'www')    $groupedPaths['www'][]      = $path;
             if($type == 'template' and (substr($path, 0, 3) != 'www') and (substr($path, 0, 6) != 'system')) $groupedPaths['template'][] = $path;
@@ -858,6 +867,8 @@ class packageModel extends model
         $this->app->loadClass('zdb');
         $sqls = file_get_contents($this->getDBFile($package, $method, $type));
         $sqls = explode(zdb::LINE_ENDER, $sqls);
+
+        $ignoreCode   = '|1050|1060|1062|1091|1169|1061|';
         foreach($sqls as $sql)
         {
             if(empty($sql)) continue;
@@ -870,7 +881,9 @@ class packageModel extends model
             }
             catch (PDOException $e) 
             {
-                $return->error .= '<p>' . $e->getMessage() . "<br />THE SQL IS: $sql</p>";
+                $errorInfo = $e->errorInfo;
+                $errorCode = $errorInfo[1];
+                if(strpos($ignoreCode, "|$errorCode|") === false) $return->error .= '<p>' . $e->getMessage() . "<br />THE SQL IS: $sql</p>";
             }
         }
         if($return->error) $return->result = 'fail';
