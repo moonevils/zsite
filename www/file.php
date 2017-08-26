@@ -8,10 +8,12 @@ $dataRoot = rtrim(dirname($_SERVER['SCRIPT_FILENAME']), '/') . '/data/';
 
 if($objectType == 'source' or $objectType == 'slide')
 {
+    if($objectType == 'slide' and !preg_match('/^slides\/[0-9_0-9]/', $pathname)) die('The file does not exist!');
     $savePath = $dataRoot;
 }
 else
 {
+    if(!preg_match('/^[0-9]{6}\/f_[a-z0-9]{32}/', $pathname)) die('The file does not exist!');
     $savePath = $dataRoot . 'upload/';
 }
 
