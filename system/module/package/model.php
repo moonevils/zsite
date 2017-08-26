@@ -1054,10 +1054,15 @@ class packageModel extends model
         $themeInfo = $this->parsePackageCFG($package, 'theme');
         $themeInfo->templateCompatible = $themeInfo->template;
 
-        $code = $themeInfo->code;
-        $i    = 1;
-        while(isset($themes[$themeInfo->code . '_' . $i])) $i ++ ;
-        $newCode = $themeInfo->code . '_' . $i;
+        $code    = $themeInfo->code;
+        $newCode = $code;
+
+        if(isset($themes[$code]))
+        {
+            $i = 1;
+            while(isset($themes[$themeInfo->code . '_' . $i])) $i ++ ;
+            $newCode = $themeInfo->code . '_' . $i;
+        }
         
         $themeInfo->code = $newCode;
         $newPackage = $newCode;
