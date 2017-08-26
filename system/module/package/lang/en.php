@@ -95,6 +95,7 @@ $lang->package->types = new stdclass();
 $lang->package->types->theme     = 'Theme';
 $lang->package->types->extension = 'Extensions';
 $lang->package->types->ext       = 'Extensions';
+$lang->package->types->patch     = 'Patch';
 
 $lang->package->waring = 'Warning';
 
