@@ -545,11 +545,14 @@ class packageModel extends model
         {
             if($path == "www/theme/{$themeInfo->template}/$themeInfo->code")
             {
-                $i = 1;
                 $installedThemes = $this->loadModel('ui')->getThemesByTemplate($themeInfo->template);
-                while(isset($installedThemes[$themeInfo->code . '_' . $i])) $i ++ ;
-                $newCode = $themeInfo->code . '_' . $i;
-                $path = "www/theme/{$themeInfo->template}/$newCode";
+                if(isset($installedThemes[$themeInfo->code]))
+                {
+                    $i = 1;
+                    while(isset($themes[$themeInfo->code . '_' . $i])) $i ++ ;
+                    $newCode = $themeInfo->code . '_' . $i;
+                    $path = "www/theme/{$themeInfo->template}/$newCode";
+                }
             }
             if(substr($path, 0, 6) == 'system') $groupedPaths['system'][]   = $path;
             if(substr($path, 0, 3) == 'www')    $groupedPaths['www'][]      = $path;
@@ -1078,30 +1081,33 @@ class packageModel extends model
         $content = str_replace('THEME_CODEFIX', $newCode, $content);
         file_put_contents($dbFile, $content);
 
-        /* Write new newCode to yaml file. */
-        $yaml     = $this->app->loadClass('spyc')->dump($themeInfo);      
-        $lang     = $this->app->getClientLang();
-        $infoFile = "theme/$package/doc/$lang.yaml";
-        file_put_contents($infoFile, $yaml);
-
-        /* Change code in config file. */
-        $configCode = file_get_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php");
-        $configCode = str_replace('$config->ui->themes["' . $themeInfo->template . '"]["' . $code . '"] =', '$config->ui->themes["' . $themeInfo->template . '"]["' . $newCode . '"] =', $configCode);
-        file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
-
-        /* Rename files named by old newCode. */
-        $files2Move = array();
-        $files2Move["./theme/{$package}/www/data/css/{$themeInfo->template}_{$code}.css"] = "./theme/{$package}/www/data/css/{$themeInfo->template}_{$newCode}.css";
-        $files2Move["./theme/{$package}/www/data/source/{$themeInfo->template}/{$code}"]  = "./theme/{$package}/www/data/source/{$themeInfo->template}/{$newCode}";
-        $files2Move["./theme/{$package}/system/module/ui/ext/config/{$code}.php"]         = "./theme/{$package}/system/module/ui/ext/config/{$newCode}.php";
-        $files2Move["./theme/{$package}/www/theme/{$themeInfo->template}/{$code}"]        = "./theme/{$package}/www/theme/{$themeInfo->template}/{$newCode}";
-        foreach($files2Move as $oldFile => $newFile)
+        if(isset($themes[$code]))
         {
-            rename($oldFile, $newFile);
-        }
+            /* Write new newCode to yaml file. */
+            $yaml     = $this->app->loadClass('spyc')->dump($themeInfo);      
+            $lang     = $this->app->getClientLang();
+            $infoFile = "theme/$package/doc/$lang.yaml";
+            file_put_contents($infoFile, $yaml);
 
-        $this->classFile->copyDir("theme/{$package}", "theme/{$newPackage}");
-        $this->classFile->removeDir("theme/{$package}");
+            /* Change code in config file. */
+            $configCode = file_get_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php");
+            $configCode = str_replace('$config->ui->themes["' . $themeInfo->template . '"]["' . $code . '"] =', '$config->ui->themes["' . $themeInfo->template . '"]["' . $newCode . '"] =', $configCode);
+            file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
+
+            /* Rename files named by old newCode. */
+            $files2Move = array();
+            $files2Move["./theme/{$package}/www/data/css/{$themeInfo->template}_{$code}.css"] = "./theme/{$package}/www/data/css/{$themeInfo->template}_{$newCode}.css";
+            $files2Move["./theme/{$package}/www/data/source/{$themeInfo->template}/{$code}"]  = "./theme/{$package}/www/data/source/{$themeInfo->template}/{$newCode}";
+            $files2Move["./theme/{$package}/system/module/ui/ext/config/{$code}.php"]         = "./theme/{$package}/system/module/ui/ext/config/{$newCode}.php";
+            $files2Move["./theme/{$package}/www/theme/{$themeInfo->template}/{$code}"]        = "./theme/{$package}/www/theme/{$themeInfo->template}/{$newCode}";
+            foreach($files2Move as $oldFile => $newFile)
+            {
+                rename($oldFile, $newFile);
+            }
+
+            $this->classFile->copyDir("theme/{$package}", "theme/{$newPackage}");
+            $this->classFile->removeDir("theme/{$package}");
+        }
 
         return $newPackage;
     }
