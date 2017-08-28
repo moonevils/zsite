@@ -1730,10 +1730,11 @@ class baseSQL
      * @access public
      * @return object the sql object.
      */
-    public function orWhere($condition)
+    public function orWhere($condition, $addMark = false)
     {
         if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= " OR $condition ";
+        $mark = $addMark ? '(' : '';
+        $this->sql .= " OR {$mark} $condition ";
         return $this;
     }
 

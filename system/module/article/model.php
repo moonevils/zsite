@@ -339,8 +339,10 @@ class articleModel extends model
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
            ->andWhere('t1.status')->eq('normal')
-           ->andWhere('t1.addedDate')->le($current->addedDate)
+           ->andWhere('t1.addedDate')->lt($current->addedDate)
+           ->orWhere('t1.addedDate', true)->eq($current->addedDate)
            ->andWhere('t1.id')->lt($current->id)
+           ->markRight(1)
            ->orderBy('addedDate_desc, id_desc')
            ->limit(1)
            ->fetch();
@@ -350,8 +352,10 @@ class articleModel extends model
            ->where('t2.category')->eq($category)
            ->andWhere('t1.addedDate')->le(helper::now())
            ->andWhere('t1.status')->eq('normal')
-           ->andWhere('t1.addedDate')->ge($current->addedDate)
+           ->andWhere('t1.addedDate')->gt($current->addedDate)
+           ->orWhere('t1.addedDate', true)->eq($current->addedDate)
            ->andWhere('t1.id')->gt($current->id)
+           ->markRight(1)
            ->orderBy('addedDate, id')
            ->limit(1)
            ->fetch();
