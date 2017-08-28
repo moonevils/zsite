@@ -12,14 +12,14 @@ $(function()
             h             = $embed.height(),
             containerID   = 'media_container_' + index,
             id            = 'media_' + index,
-            reg           = /\.flv$|\.flv\?|\.webm$|\.webm\?|\.wmv$|\.rtmp\?|\.rtmp$|\.mp3\?|\.mp3$|\.ogg\?|\.ogg$|\.mp4\?|\.mp4$|\.mp4\?/,
+            reg           = /\.flv$|\.flv\?|=flv$|=flv\?|\.webm$|\.webm\?|=webm$|=webm\?|\.wmv$|\.rtmp\?|=wmv$|=rtmp\?|\.rtmp$|\.mp3\?|\.mp3$|=mp3\?|=mp3$|\.ogg\?|\.ogg$|=ogg\?|=ogg$|\.mp4\?|\.mp4$|=mp4\?|=mp4$/,
             mediaType     = reg.exec(src),
             mediaTypeList = null,
             mediaSetting  = {title: ''};
 
         if(mediaType)
         {
-            mediaType     = mediaType.toString().replace('.', '').replace('?', '');
+            mediaType     = mediaType.toString().replace('.', '').replace('=', '').replace('?', '');
             mediaTypeList = <?php echo json_encode($this->config->file->mediaTypes);?>;
             mediaType     = mediaTypeList[mediaType.toLowerCase()];
         }
