@@ -605,12 +605,16 @@ class orderModel extends model
         $toggle = $btnLink ? '' : "data-toggle='modal'";
         if(RUN_MODE == 'admin' )
         {
-            $class  = $btnLink ? 'btn btn-ajax-loader' : '';
+            $class = $btnLink ? 'btn btn-ajax-loader' : '';
 
             /* Edit link. */
             $disabled = ($order->status == 'normal' and $order->payStatus != 'refunded') ? '' : "disabled = 'disabled'";
             echo $disabled ? html::a('javascript:;', $this->lang->order->edit, "$disabled  class='$class'") : html::a(inlink('edit', "orderID=$order->id"), $this->lang->order->edit, "{$toggle} class='$class'");
             
+            /* Edit price link */
+            $disabled = ($order->status == 'normal' and $order->payStatus !== 'paid') ? '' : "disabled='disabled'";
+            echo $disabled ? html::a('javascript:;', $this->lang->order->editPrice, "$disabled class='$class'") : html::a(helper::createLink('order', 'editprice', "orderID=$order->id"), $this->lang->order->editPrice, "class='$class' {$toggle}");
+           
             /* Send link. */
             $disabled = ($order->status == 'normal' and $order->deliveryStatus == 'not_send' and ($order->payment == 'COD' or ($order->payment != 'COD' and $order->payStatus == 'paid'))) ? '' : "disabled='disabled'"; 
             echo $disabled ?  html::a('javascript:;', $this->lang->order->delivery, "$disabled class='$class'") : html::a(helper::createLink('order', 'delivery', "orderID=$order->id"), $this->lang->order->delivery, "{$toggle} class='$class'");
@@ -632,7 +636,7 @@ class orderModel extends model
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus == 'not_paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
             echo $disabled ? '' : html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-goToPay $class'");
-           
+
             /* Edit link. */
             $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus != 'refunded') ? '' : "disabled='disabled'";
             echo $disabled ? '' : html::a(inlink('edit', "orderID={$order->id}"), $this->lang->order->edit, "{$toggle} class='$class'");
@@ -1108,6 +1112,20 @@ class orderModel extends model
 
         return commonModel::createChanges($order, $content);
     }
+
+    /**
+     * Edit price of an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return bool
+     */
+    public function editPrice($orderID)
+    {
+        $this->dao->update(TABLE_ORDER)->set('amount')->eq($this->post->amount)->set('last')->eq(helper::now())->where('id')->eq($orderID)->exec();
+        return !dao::isError();
+    }
+
 
     /**
      * Delete the order
