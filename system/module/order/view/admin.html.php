@@ -7,7 +7,7 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     order 
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.chanzhi.org
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>

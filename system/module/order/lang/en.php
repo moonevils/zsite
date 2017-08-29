@@ -52,6 +52,7 @@ $lang->order->submit         = 'Submit';
 $lang->order->cancel         = 'Cancel';
 $lang->order->pay            = 'Checkout';
 $lang->order->goToPay        = 'Order has been placed. Please continue with your payment.';
+$lang->order->editPrice      = 'Edit Price';
 $lang->order->return         = 'Collect';
 $lang->order->refund         = 'Refund';
 $lang->order->delivery       = 'Ship';

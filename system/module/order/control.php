@@ -479,9 +479,29 @@ class order extends control
         $this->view->title       = $this->lang->order->edit;
         $this->display();
     }
+
+    /**
+     * Edit price.
+     * 
+     * @access public
+     * @return void
+     */
+    public function editPrice($orderID)
+    {
+        if($_POST)
+        {   
+            $result = $this->order->editPrice($orderID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }   
+
+        $this->view->title = $this->lang->order->editPrice;
+        $this->view->order = $this->order->getByID($orderID);
+        $this->display();
+    }
     
     /**
-     * Edit the order
+     * Delete the order
      *
      * @access public
      * @param  string

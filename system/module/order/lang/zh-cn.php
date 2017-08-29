@@ -52,6 +52,7 @@ $lang->order->submit         = '提交订单';
 $lang->order->cancel         = '取消';
 $lang->order->pay            = '支付';
 $lang->order->goToPay        = '订单创建成功，请到支付页面完成付款。';
+$lang->order->editPrice      = '改价';
 $lang->order->return         = '收款';
 $lang->order->refund         = '退款';
 $lang->order->delivery       = '发货';
