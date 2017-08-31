@@ -1,5 +1,4 @@
 <?php
-
 /* The tables. */
 define('TABLE_CONFIG',         $config->db->prefix . 'config');
 define('TABLE_CATEGORY',       $config->db->prefix . 'category');
