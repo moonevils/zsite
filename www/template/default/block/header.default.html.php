@@ -20,7 +20,7 @@
     <div class="wrapper">
       <?php if($logo):?>
       <div id='siteLogo' data-ve='logo'>
-        <?php echo html::a(helper::createLink('index'), html::image("{$this->config->webRoot}file.php?pathname={$logo->pathname}&objectType=logo&imageSize=&extension={$logo->extension}", '', "{$logo->extension}"), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'"));?>
+        <?php echo html::a(helper::createLink('index'), html::image("{$this->config->webRoot}file.php?pathname={$logo->pathname}&objectType=logo&imageSize=&extension={$logo->extension}", '', "{$logo->extension}"), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");?>
       </div>
       <?php else: ?>
       <div id='siteName' data-ve='logo'><h2><?php echo html::a(helper::createLink('index'), $this->config->site->name);?></h2></div>
