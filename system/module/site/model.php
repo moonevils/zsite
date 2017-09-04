@@ -88,7 +88,7 @@ class siteModel extends model
         $myFile = $this->app->getConfigRoot() . 'my.php';
         if($this->config->framework->multiSite)
         {
-            $myFile = $this->app->getCOnfigRoot() . 'sites' . DS . $this->app->siteCode . '.php';
+            $myFile = $this->app->getConfigRoot() . 'sites' . DS . $this->app->siteCode . '.php';
             if(!file_exists(dirname($myFile))) mkdir(dirname($myFile));
             if(!file_exists($myFile)) fopen($myFile, 'w');
         }

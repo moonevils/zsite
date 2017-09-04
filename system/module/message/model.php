@@ -382,7 +382,7 @@ class messageModel extends model
         }
 
         $this->dao->insert(TABLE_MESSAGE)
-            ->data($message, $skip = $this->session->captchaInput . ', secret, blockFrom, blockContent')
+            ->data($message, $skip = $this->session->captchaInput . ', secret, blockFrom, blockContent, uid')
             ->autoCheck()
             ->check($this->session->captchaInput, 'captcha')
             ->check('type', 'in', $this->config->message->types)
@@ -438,7 +438,7 @@ class messageModel extends model
             ->get();
 
         $this->dao->insert(TABLE_MESSAGE)
-            ->data($reply, $skip = $this->session->captchaInput)
+            ->data($reply, $skip = $this->session->captchaInput . ',uid')
             ->autoCheck()
             ->check($this->session->captchaInput, 'captcha')
             ->check('type', 'in', $this->config->message->types)
