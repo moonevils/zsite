@@ -848,7 +848,7 @@ class user extends control
         {
             if($this->user->login($user->account, md5($user->password . $this->session->random)))
             {
-                if($referer) $this->locate(helper::safe64Decode($referer));
+                if($referer) $this->locate(urldecode(helper::safe64Decode($referer)));
 
                 /* No referer, go to the user control panel. */
                 $default = $this->config->user->default;
