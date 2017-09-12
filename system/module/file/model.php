@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of file module of chanzhiEPS.
@@ -1389,9 +1390,13 @@ class fileModel extends model
         $images = array();
         foreach($files as $key => $file)
         {
-            $fileInfo = pathinfo($file);
-            if(strtolower($fileInfo['extension']) != 'gif' and in_array(strtolower($fileInfo['extension']), $this->config->file->imageExtensions, true)) $images[] = $file;
+            $mimeType = mime_content_type($file);
+            if(substr($mimeType, 0, 6) != 'image/') continue;
+            if(strpos($mimeType, 'gif') !== false) continue;
+            if(strpos($mimeType, 'ico') !== false) continue;
+            $images[] = $file;
         }
+
         return $images;
     }
 
