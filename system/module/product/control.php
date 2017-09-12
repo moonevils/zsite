@@ -53,7 +53,7 @@ class product extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $recPerPage, $pageID);
 
-        $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
+        $categoryID = is_numeric($categoryID) ? $categoryID : ($category ? $category->id : 0);
         $orderBy    = zget($_COOKIE, 'productOrderBy' . $categoryID, 'order_desc');
         $orderField = str_replace('_asc', '', $orderBy);
         $orderField = str_replace('_desc', '', $orderField);

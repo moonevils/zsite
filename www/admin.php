@@ -38,11 +38,6 @@ $common = $app->loadCommon();
 $requestType = $static ? 'PATH_INFO' : 'GET';
 $module      = ($static && isset($_GET[$config->moduleVar])) ? $_GET[$config->moduleVar] : 'admin';
 $method      = ($static && isset($_GET[$config->methodVar])) ? $_GET[$config->methodVar] : 'index';
-if($static) 
-{
-    unset($_SERVER['HTTP_X_REQUESTED_WITH']);
-    unset($_GET['HTTP_X_REQUESTED_WITH']);
-}
 
 /* Change the request settings. */
 $config->frontRequestType = $config->requestType;
