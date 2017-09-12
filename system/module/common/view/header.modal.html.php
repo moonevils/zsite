@@ -4,6 +4,13 @@ $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 if(isset($pageCSS)) css::internal($pageCSS);
+
+/* set requiredField. */
+if(isset($config->$moduleName->require->$methodName)) 
+{
+    $requiredFields = str_replace(' ', '', $config->$moduleName->require->$methodName);
+    js::execute("config.requiredFields = \"$requiredFields\"; setRequiredFields();");
+}
 ?>
 <?php js::set('lang', $lang->js);?>
 <div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 600 : $modalWidth;?>px;">

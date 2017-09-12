@@ -176,20 +176,25 @@ class html
      * @param  string $attrib     other attribs.
      * @return string
      */
-    static public function radio($name = '', $options = array(), $checked = '', $attrib = '')
+    static public function radio($name = '', $options = array(), $checked = '', $attrib = '', $type = 'inline')
     {
         $options = (array)($options);
         if(!is_array($options) or empty($options)) return false;
+        $isBlock = $type == 'block';
 
         $string  = '';
 
         $i = 1;
         foreach($options as $key => $value)
         {
-            $string .= "<label class='radio-inline' for='{$name}{$i}'><input type='radio' id='{$name}{$i}' name='$name' value='$key' ";
+            if($isBlock) $string .= "<div class='radio'><label for='{$name}{$i}'>";
+            else $string .= "<label class='radio-inline' for='{$name}{$i}'>";
+            $string .= "<input type='radio' id='{$name}{$i}' name='$name' value='$key' ";
             $string .= ($key == $checked) ? " checked ='checked'" : "";
             $string .= $attrib;
-            $string .= " /> $value</label>\n";
+            $string .= " /> $value";
+            if($isBlock) $string .= "</label></div>\n";
+            else $string .= "</label>\n";
 
             $i++;
         }
@@ -203,23 +208,31 @@ class html
      * @param  array  $options   the array to create checkbox tag from.
      * @param  string $checked   the value to checked by default, can be item1,item2
      * @param  string $attrib    other attribs.
+     * @param  string $type      inline or block
      * @return string
      */
-    static public function checkbox($name, $options, $checked = "", $attrib = "")
+    static public function checkbox($name, $options, $checked = "", $attrib = "", $type = 'inline')
     {
         $options = (array)($options);
         if(!is_array($options) or empty($options)) return false;
+
+        if(is_array($checked)) $checked = implode(',', $checked);
         $string  = '';
         $checked = ",$checked,";
+        $isBlock = $type == 'block';
 
         $i = 1;
         foreach($options as $key => $value)
         {
             $key     = str_replace('item', '', $key);
-            $string .= "<label class='checkbox-inline'><input type='checkbox' id='{$name}{$i}'  name='{$name}[]' value='$key' ";
+            if($isBlock) $string .= "<div class='checkbox'><label>";
+            else $string .= "<label class='checkbox-inline'>";
+            $string .= "<input type='checkbox' id='{$name}{$i}' name='{$name}[]' value='$key' ";
             $string .= strpos($checked, ",$key,") !== false ? " checked ='checked'" : "";
             $string .= $attrib;
-            $string .= " /> $value</label>\n";
+            $string .= " /> $value";
+            if($isBlock) $string .= "</label></div>\n";
+            else $string .= "</label>\n";
 
             $i++;
         }
