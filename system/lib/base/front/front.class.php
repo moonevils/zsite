@@ -264,7 +264,7 @@ class baseHTML
      * @param  array  $options   the array to create checkbox tag from.
      * @param  string $checked   the value to checked by default, can be item1,item2
      * @param  string $attrib    other attribs.
-     * @param  string $type       inline or block
+     * @param  string $type      inline or block
      * @static
      * @access public
      * @return string

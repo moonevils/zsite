@@ -36,13 +36,13 @@ class article extends control
     {   
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
-        if($category->link) helper::header301($category->link);
+        if($category && $category->link) helper::header301($category->link);
 
         $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
-        $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
+        $categoryID = is_numeric($categoryID) ? $categoryID : ($category ? $category->id : 0);
         $orderBy    = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
         $orderField = str_replace('_asc', '', $orderBy);
         $orderField = str_replace('_desc', '', $orderField);
@@ -127,7 +127,7 @@ class article extends control
         if($type != 'page' and $type != 'submission') 
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
-            $this->view->treeManageLink =  html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
+            $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
         if($type == 'page') unset($this->lang->article->menu);
 
