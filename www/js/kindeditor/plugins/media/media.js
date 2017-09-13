@@ -27,7 +27,7 @@ KindEditor.plugin('media', function(K) {
 				'<span class="ke-button-common ke-button-outer">',
 				'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 				'</span>',
-				'</div>',
+        '</div>',
 				//width
 				'<div class="ke-dialog-row">',
 				'<label for="keWidth" style="width:60px;">' + lang.width + '</label>',
@@ -40,15 +40,20 @@ KindEditor.plugin('media', function(K) {
 				'</div>',
 				//autostart
 				'<div class="ke-dialog-row">',
-				'<label for="keAutostart">' + lang.autostart + '</label>',
+				'<label for="keAutostart" style="width:60px">' + lang.autostart + '</label>',
 				'<input type="checkbox" id="keAutostart" name="autostart" value="" /> ',
+				'</div>',
+				//fullscreen
+				'<div class="ke-dialog-row">',
+				'<label for="keFullscreen" style="width:60px">' + lang.fullscreen + '</label>',
+				'<input type="checkbox" id="keFullscreen" name="fullscreen" value="" /> ',
 				'</div>',
 				'</div>'
 			].join('');
 			var dialog = self.createDialog({
 				name : name,
 				width : 450,
-				height : 230,
+				height : 270,
 				title : self.lang(name),
 				body : html,
 				yesBtn : {
@@ -78,6 +83,7 @@ KindEditor.plugin('media', function(K) {
 								width : width,
 								height : height,
 								autostart : autostartBox[0].checked ? 'true' : 'false',
+								allowFullscreen : fullscreenBox[0].checked ? 'true' : 'false',
 								loop : 'true'
 							});
 						self.insertHtml(html).hideDialog().focus();
@@ -90,6 +96,7 @@ KindEditor.plugin('media', function(K) {
 			widthBox = K('[name="width"]', div),
 			heightBox = K('[name="height"]', div),
 			autostartBox = K('[name="autostart"]', div);
+			fullscreenBox = K('[name="fullscreen"]', div);
 			urlBox.val('http://');
 
 			if (allowMediaUpload) {
@@ -156,6 +163,7 @@ KindEditor.plugin('media', function(K) {
 				widthBox.val(K.removeUnit(img.css('width')) || attrs.width || 0);
 				heightBox.val(K.removeUnit(img.css('height')) || attrs.height || 0);
 				autostartBox[0].checked = (attrs.autostart === 'true');
+				fullscreenBox[0].checked = (attrs.fullscreen === 'true');
 			}
 			urlBox[0].focus();
 			urlBox[0].select();

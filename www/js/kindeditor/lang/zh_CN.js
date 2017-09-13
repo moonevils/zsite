@@ -125,6 +125,7 @@ KindEditor.lang({
 	'media.width' : '宽度',
 	'media.height' : '高度',
 	'media.autostart' : '自动播放',
+	'media.fullscreen' : '全屏',
 	'media.upload' : '上传',
 	'media.viewServer' : '文件空间',
 	'image.remoteImage' : '网络图片',
