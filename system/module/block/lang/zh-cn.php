@@ -220,6 +220,15 @@ $lang->block->navTypeList->mobile_top    = '移动版顶部';
 $lang->block->navTypeList->mobile_bottom = '移动版底部';
 $lang->block->navTypeList->mobile_blog   = '移动版博客';
 
+$lang->block->book = new stdclass();
+$lang->block->book->showType = '显示';
+
+$lang->block->book->sortList['order'] = '排序';
+$lang->block->book->sortList['time']  = '时间';
+
+$lang->block->book->showTypeList['block'] = '区块';
+$lang->block->book->showTypeList['list']  = '列表';
+
 $lang->block->sideGrid  = '侧边栏宽度';
 $lang->block->sideFloat = '侧边栏位置';
 

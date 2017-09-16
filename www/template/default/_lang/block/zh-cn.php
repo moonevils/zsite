@@ -31,6 +31,8 @@ $lang->block->default->typeList['articleTree']     = '文章分类';
 $lang->block->default->typeList['productTree']     = '产品分类';
 $lang->block->default->typeList['blogTree']        = '博客分类';
 
+$lang->block->default->typeList['latestBook']      = '最新手册';
+
 $lang->block->default->typeList['contact']         = '联系我们';
 $lang->block->default->typeList['message']         = '留言';
 $lang->block->default->typeList['followUs']        = '关注我们';
@@ -63,6 +65,8 @@ $lang->block->default->typeGroups['pageList']        = 'page';
 $lang->block->default->typeGroups['articleTree'] = 'category';
 $lang->block->default->typeGroups['productTree'] = 'category';
 $lang->block->default->typeGroups['blogTree']    = 'category';
+
+$lang->block->default->typeGroups['latestBook']  = 'book';
 
 $lang->block->default->typeGroups['contact']   = 'system';
 $lang->block->default->typeGroups['followUs']  = 'system';

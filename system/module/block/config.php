@@ -12,7 +12,7 @@ $config->block->require->edit   = 'title';
 
 $config->block->categoryList = new stdclass();
 $config->block->categoryList->custom  = ',html,htmlcode,phpcode,baidustat,';
-$config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,';
+$config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,latestBook,';
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
 $config->block->categoryList->system  = ',contact,message,followUs,about,links,slide,header,bottomNav,subscribe,login,';
 
@@ -44,6 +44,8 @@ $config->block->defaultIcons['pageList']      = 'icon-list-ul';
 $config->block->defaultIcons['articleTree']   = 'icon-folder-close';
 $config->block->defaultIcons['productTree']   = 'icon-folder-close';
 $config->block->defaultIcons['blogTree']      = 'icon-folder-close';
+
+$config->block->defaultIcons['latestBook']    = 'icon-th';
 
 $config->block->defaultIcons['message']       = 'icon-comment-alt';
 
