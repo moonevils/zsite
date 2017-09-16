@@ -435,6 +435,7 @@ td #aliasLabel {display: table-row;}
 #msgBox.hiding {display: none;}
 
 /* Image chanzhi in footer */
+.icon-chanzhi,icon-chanzhi-pro{font-size: 13px;}
 .icon-chanzhi:hover {opacity: .75; filter: Alpha(opacity=75);}
 .icon-chanzhi-inverse,
 .icon-chanzhi.icon-chanzhi-inverse,
