@@ -586,7 +586,7 @@ class uri
         $viewType = $viewType ? $viewType : $config->default->view;
 
         $link = 'book/' . $alias['book'] . '/';
-        if(isset($alias['node'])) $link .= $alias['node'] . '-';
+        if(!empty($alias['node'])) $link .= $alias['node'] . '-';
         $link .= array_shift($params);
 
         return $config->webRoot . $link . '.' . $viewType;
