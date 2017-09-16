@@ -56,4 +56,11 @@ $(document).ready(function()
          });
     };
     yrScroll();
+
+    $('.previous > a, .next > a').css('width', (($('.pager').width() - $('.pager > .back > a').width()) * 0.45));
+
+    previousSpanWidth = $('.previous > a').width() - 17;
+    nextSpanWidth     = $('.next > a').width() - 17;
+    $('.previous > a > span').css('width', previousSpanWidth);
+    $('.next > a > span').css('width', nextSpanWidth);
 });
