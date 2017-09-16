@@ -41,7 +41,7 @@ class uiModel extends model
             {
                 $templates[$templateName]['themes'] = array('default' => 'default');
 
-                $themePath = $this->app->getWwwRoot() . 'template' . DS . $templateName . '/theme/default';
+                $themePath = $this->app->getAppRoot() . 'template' . DS . $templateName . '/theme/default';
                 if(!is_dir($themePath)) mkdir($themePath, 0777, true);
             }
         }
@@ -1433,7 +1433,7 @@ if(!function_exists('getJS'))
      */
     public function removeTemplateFiles($template)
     {
-        $templatePath = $this->app->getWwwRoot() . 'template' . DS . $template;
+        $templatePath = $this->app->getAppRoot() . 'template' . DS . $template;
         $customPath   = $this->app->getWwwRoot() . 'data' . DS . 'css' . DS . $template;
         $sourcePath   = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $template;
 
@@ -1485,7 +1485,7 @@ if(!function_exists('getJS'))
     public function getEffectViewFile($template, $module, $file)
     {
         $extFile = $this->getExtFile($template, $module, $file);
-        return file_exists($extFile) ? $extFile : $this->app->getWwwroot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
+        return file_exists($extFile) ? $extFile : $this->app->getApproot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
     }
 
     /**
