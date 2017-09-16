@@ -186,6 +186,20 @@ $(function()
     });
 
     $('[name="params\\[image\\]"]').change();
+
+    $('[name="params\\[showType\\]"]').change(function()
+    {
+        if($(this).val() == 'block')
+        {
+            $('tr.recperrow').show();
+        }
+        else
+        {
+            $('tr.recperrow').hide();
+        }
+    });
+
+    $('[name="params\\[showType\\]"]').change();
 });
 
 /**
