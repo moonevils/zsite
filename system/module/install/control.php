@@ -91,6 +91,7 @@ class install extends control
     public function step2()
     {
         $http = $this->app->loadClass('http');
+        $http->read_timeout = 5;
         $result = $http->get($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/pathinfo.php?requestType=pathinfo');
 
         $this->view->title       = $this->lang->install->setConfig;
