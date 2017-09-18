@@ -78,6 +78,23 @@ class bookModel extends model
     }
 
     /**
+     * Get latest book list.
+     * 
+     * @param  int    $limit 
+     * @param  string    $orderBy 
+     * @access public
+     * @return array
+     */
+    public function getLatestBookList($limit, $orderBy)
+    {
+        return $this->dao->select('*')->from(TABLE_BOOK)
+            ->where('type')->eq('book')
+            ->orderBy($orderBy)
+            ->limit($limit)
+            ->fetchAll('id');
+    }
+
+    /**
      * Get book pairs.
      *
      * @access public

@@ -71,12 +71,12 @@ js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id)
         <?php extract($prevAndNext);?>
         <ul class='pager pager-justify'>
           <?php if($prev): ?>
-          <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $prev->title); ?></li>
+          <li class='previous' title='<?php echo $prev->title;?>'><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> <span>' . $prev->title . '</span>'); ?></li>
           <?php else: ?>
           <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a></li>
           <?php endif; ?>
           <?php if($next):?>
-          <li class='next'><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title . ' <i class="icon-arrow-right"></i>'); ?></li>
+          <li class='next' title='<?php echo $next->title;?>'><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), '<span>' . $next->title . '</span> <i class="icon-arrow-right"></i>'); ?></li>
           <?php else:?>
           <li class='next disabled'><a href='###'> <?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a></li>
           <?php endif; ?>
