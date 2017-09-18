@@ -317,7 +317,7 @@ class packageModel extends model
         /* Append the pathes to stored the extracted files. */
         $pathes[] = "system/module/package/ext/";
         $pathes[] = "system/module/ui/theme/";
-        $pathes[] = "www/template/";
+        $pathes[] = "system/template/";
 
         return array_unique($pathes);
     }

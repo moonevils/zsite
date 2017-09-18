@@ -1485,7 +1485,7 @@ if(!function_exists('getJS'))
     public function getEffectViewFile($template, $module, $file)
     {
         $extFile = $this->getExtFile($template, $module, $file);
-        return file_exists($extFile) ? $extFile : $this->app->getApproot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
+        return file_exists($extFile) ? $extFile : $this->app->getAppRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php';
     }
 
     /**
