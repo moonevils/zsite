@@ -41,6 +41,53 @@ if($app->config->site->status == 'pause')
     die("<div style='text-align:center'>" . htmlspecialchars_decode($app->config->site->pauseTip, ENT_QUOTES) . '</div>');
 }
 
+/* Check site static status. */
+if(empty($_SERVER['REQUEST_URI']) or strpos($_SERVER['REQUEST_URI'], '/index.php?') !== 0)
+{
+    if(isset($app->config->site->staticStatus) && $app->config->site->staticStatus == 'open' && isset($app->config->site->staticDeploy) && $app->config->site->staticDeploy == 'localhost')
+    {
+        $pathInfo   = $app->getPathInfo();
+        $staticRoot = $app->getTmpRoot() . 'www' . DS;
+        if($app->clientDevice == 'mobile')
+        {
+            $mobileRoot = $staticRoot . 'mobile' . DS;
+            if($pathInfo)
+            {
+                if(strpos($pathInfo, '.mhtml') === false && strpos($pathInfo, '.xml') === false)
+                {
+                    $filePath = $mobileRoot . $pathInfo . DS . 'index.mhtml';
+                }
+                else
+                {
+                    $filePath = $mobileRoot . $pathInfo;
+                }  
+            }
+            else
+            {
+                $filePath = $mobileRoot . 'index.mhtml';
+            }
+            if(is_file($filePath)) die(file_get_contents($filePath));
+        }
+        $desktopRoot = $staticRoot . 'desktop' . DS;
+        if($pathInfo)
+        {
+            if(strpos($pathInfo, '.html') === false && strpos($pathInfo, '.xml') === false)
+            {
+                $filePath = $desktopRoot . $pathInfo . DS . 'index.html';
+            }
+            else
+            {
+                $filePath = $desktopRoot . $pathInfo;
+            }  
+        }
+        else
+        {
+            $filePath = $desktopRoot . 'index.html';
+        }
+        if(is_file($filePath)) die(file_get_contents($filePath));
+    }
+}
+
 $app->parseRequest();
 $common->checkPriv();
 $app->loadModule();
