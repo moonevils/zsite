@@ -58,7 +58,7 @@
         <?php extract($prevAndNext);?>
         <ul class='pager pager-justify'>
           <?php if($prev): ?>
-          <li class='previous'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title); ?></li>
+          <li class='previous' title='<?php echo $prev->title;?>'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>'); ?></li>
           <?php else: ?>
           <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
           <?php endif; ?>
@@ -66,7 +66,7 @@
           <li class='back'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
           <?php endif; ?>
           <?php if($next):?>
-          <li class='next'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $next->title . " <i class='icon-arrow-right'></i>"); ?></li>
+          <li class='next' title='<?php echo $next->title;?>'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), '<span>' . $next->title . "</span> <i class='icon-arrow-right'></i>"); ?></li>
           <?php else:?>
           <li class='next disabled'><a href='###'> <?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a></li>
           <?php endif; ?>
@@ -150,7 +150,7 @@
     <?php extract($prevAndNext);?>
     <ul class='pager pager-justify'>
       <?php if($prev): ?>
-      <li class='previous'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title); ?></li>
+      <li class='previous' title='<?php echo $prev->title;?>'><?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>'); ?></li>
       <?php else: ?>
       <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a></li>
       <?php endif; ?>
@@ -158,7 +158,7 @@
       <li class='back'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter);?></li>
       <?php endif; ?>
       <?php if($next):?>
-      <li class='next'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $next->title . " <i class='icon-arrow-right'></i>"); ?></li>
+      <li class='next' title='<?php echo $next->title;?>'><?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), '<span>' . $next->title . "</span> <i class='icon-arrow-right'></i>"); ?></li>
       <?php else:?>
       <li class='next disabled'><a href='###'> <?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a></li>
       <?php endif; ?>

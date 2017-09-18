@@ -83,7 +83,7 @@ class control extends baseControl
      */
     public function setTplRoot()
     {
-        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS);
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getAppRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS);
     }
 
     /**
@@ -108,7 +108,7 @@ class control extends baseControl
 
         if(RUN_MODE == 'front')
         {
-            $templatePath = $this->app->getWwwRoot() . 'template' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $moduleName;
+            $templatePath = TPL_ROOT .  DS . $moduleName;
             $viewFile     = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
             
             if($this->devicePrefix == 'm.' and !is_file($viewFile))
@@ -118,7 +118,7 @@ class control extends baseControl
             $mainViewFile = $viewFile;
 
             $tmpViewFolder = $this->config->framework->multiSite ? $this->app->getTmpRoot() . 'template' . DS . $this->app->siteCode : $this->app->getTmpRoot() . 'template';
-            $customedFile  = str_replace($this->app->getWwwRoot() . 'template', $tmpViewFolder, $mainViewFile);
+            $customedFile  = str_replace($this->app->getAppRoot() . 'template', $tmpViewFolder, $mainViewFile);
             if(file_exists($customedFile))
             {
                 $viewFile     = $customedFile;  

@@ -4,3 +4,7 @@
 .nav-content > li > a { padding:5px 20px; text-shadow: #FFF 0px 1px 0px; }
 #bookInfoLink{margin-left:20px;}
 .activeBookInfo{font-weight:bold;}
+
+.previous > a, .next > a{overflow:hidden;}
+.previous > a > span, .next > a > span{display: inline-block;overflow:hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle;}
+.icon-arrow-left, .icon-arrow-right{vertical-align: middle;}

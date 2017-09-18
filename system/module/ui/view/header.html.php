@@ -1,3 +1,4 @@
+<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
 <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
