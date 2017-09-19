@@ -1500,4 +1500,19 @@ class commonModel extends model
             return $views;
         }
     }
+
+    /**
+     * Print powerdBy.
+     * 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function printPowerdBy()
+    {
+        global $config, $lang;
+        $chanzhiVersion = $config->version;
+        if($isProVersion) $chanzhiVersion = str_replace('pro', '', $chanzhiVersion);
+        printf($lang->poweredBy, $config->version, k(), "<span class='" . ($isProVersion ? 'icon-chanzhi-pro' : 'icon-chanzhi') . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);
+    }
 }
