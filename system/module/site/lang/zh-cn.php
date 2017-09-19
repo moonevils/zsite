@@ -71,6 +71,7 @@ $lang->site->setsensitive     = '敏感词设置';
 $lang->site->filterSensitive  = '敏感词过滤';
 $lang->site->setBlacklist     = '黑名单管理';
 $lang->site->mobileTemplate   = '移动模板';
+$lang->site->gzipOutput       = 'gzip输出';
 $lang->site->score            = '积分';
 $lang->site->setCounts        = '积分规则';
 $lang->site->front            = '网站浏览';
@@ -174,6 +175,9 @@ $lang->site->frontList['guest'] = '不需要登录';
 $lang->site->mobileTemplateList['open']  = '启用';
 $lang->site->mobileTemplateList['close'] = '禁用';
 
+$lang->site->gzipOutputList['open']  = '启用';
+$lang->site->gzipOutputList['close'] = '禁用';
+
 $lang->site->scoreList['open']  = '启用';
 $lang->site->scoreList['close'] = '禁用';
 
@@ -273,3 +277,5 @@ $lang->site->fileAuthority = '需要修改写入文件的权限，Linux下的运
 $lang->site->fileRequired  = '需要创建文件，Linux下的运行命令为<code>%s</code>';
 
 $lang->site->wechatLoginTip = '使用微信登录需要开启PHP的openssl扩展';
+$lang->site->noZlib         = '启用gz输出需要开启PHP的zlib扩展';
+$lang->site->gzipOn         = 'apache已经安装gzip扩展，无需再启用gzip输出';
