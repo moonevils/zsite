@@ -64,7 +64,7 @@ class router extends baseRouter
      */
     public function getTplRoot()
     {
-        return $this->wwwRoot . 'template' . DS;
+        return $this->appRoot . 'template' . DS;
     }
 
     /**
