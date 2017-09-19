@@ -317,7 +317,7 @@ class packageModel extends model
         /* Append the pathes to stored the extracted files. */
         $pathes[] = "system/module/package/ext/";
         $pathes[] = "system/module/ui/theme/";
-        $pathes[] = "www/template/";
+        $pathes[] = "system/template/";
 
         return array_unique($pathes);
     }
@@ -566,7 +566,7 @@ class packageModel extends model
                 if($path == 'db' or $path == 'doc' or $path == 'hook') continue;
                 if($baseDir == 'system') $path = dirname($appRoot) . DS . $path;
                 if($baseDir == 'www')    $path = $this->app->getWwwRoot() . substr($path, 4);
-                if($baseDir == 'template' and $type == 'template')  $path = $this->app->getWwwRoot() . 'template' . DS . $package . DS . $path;
+                if($baseDir == 'template' and $type == 'template')  $path = $this->app->getAppRoot() . 'template' . DS . $package . DS . $path;
 
                 if(is_dir($path))
                 {
@@ -711,7 +711,7 @@ class packageModel extends model
         foreach($templatePathes as $path)
         {
             if($path == '..' or $path == '.') continue;
-            $copiedTemplateFiles = $copiedTemplateFiles + $this->classFile->copyDir($packageDir . $path, $this->app->getWwwRoot() . 'template' . DS . $package . DS . $path);
+            $copiedTemplateFiles = $copiedTemplateFiles + $this->classFile->copyDir($packageDir . $path, $this->app->getAppRoot() . 'template' . DS . $package . DS . $path);
         }
 
         $copiedFiles = $copiedSystemFiles + $copiedWwwFiles + $copiedTemplateFiles;

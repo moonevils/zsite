@@ -19,77 +19,109 @@ KindEditor.plugin('media', function(K) {
 		edit : function() {
 			var html = [
 				'<div style="padding:20px;">',
-				//url
 				'<div class="ke-dialog-row">',
+        '<label for="isThird" style="width:60px;">' + lang.third + '</label>',
+				'<input type="checkbox" id="isThird" name="isThird" value="" />',
+        '</div>',
+				//url
+				'<div class="ke-dialog-row url">',
 				'<label for="keUrl" style="width:60px;">' + lang.url + '</label>',
 				'<input class="ke-input-text" type="text" id="keUrl" name="url" value="" style="width:160px;" /> &nbsp;',
 				'<input type="button" class="ke-upload-button" value="' + lang.upload + '" /> &nbsp;',
 				'<span class="ke-button-common ke-button-outer">',
 				'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 				'</span>',
-				'</div>',
+        '</div>',
+				//html
+				'<div class="ke-dialog-row html hide">',
+				'<label for="keUrl" style="width:60px;">' + lang.html + '</label>',
+				'<textarea class="ke-textarea" id="keHtml" name="html" value="" style="width:360px;height:160px;display:inline-block;margin-left:-5px;"></textarea>',
+        '</div>',
 				//width
-				'<div class="ke-dialog-row">',
+				'<div class="ke-dialog-row width">',
 				'<label for="keWidth" style="width:60px;">' + lang.width + '</label>',
 				'<input type="text" id="keWidth" class="ke-input-text ke-input-number" name="width" value="550" maxlength="4" />',
 				'</div>',
 				//height
-				'<div class="ke-dialog-row">',
+				'<div class="ke-dialog-row height">',
 				'<label for="keHeight" style="width:60px;">' + lang.height + '</label>',
 				'<input type="text" id="keHeight" class="ke-input-text ke-input-number" name="height" value="400" maxlength="4" />',
 				'</div>',
 				//autostart
-				'<div class="ke-dialog-row">',
-				'<label for="keAutostart">' + lang.autostart + '</label>',
+				'<div class="ke-dialog-row autostart">',
+				'<label for="keAutostart" style="width:60px">' + lang.autostart + '</label>',
 				'<input type="checkbox" id="keAutostart" name="autostart" value="" /> ',
+				'</div>',
+				//fullscreen
+				'<div class="ke-dialog-row fullscreen">',
+				'<label for="keFullscreen" style="width:60px">' + lang.fullscreen + '</label>',
+				'<input type="checkbox" id="keFullscreen" name="fullscreen" value="" /> ',
 				'</div>',
 				'</div>'
 			].join('');
+
 			var dialog = self.createDialog({
 				name : name,
-				width : 450,
-				height : 230,
+				width : 500,
+				height : 310,
 				title : self.lang(name),
 				body : html,
 				yesBtn : {
 					name : self.lang('yes'),
 					click : function(e) {
-						var url = K.trim(urlBox.val()),
-							width = widthBox.val(),
-							height = heightBox.val();
-						if (url == 'http://' || K.invalidUrl(url)) {
-							alert(self.lang('invalidUrl'));
-							urlBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(width)) {
-							alert(self.lang('invalidWidth'));
-							widthBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(height)) {
-							alert(self.lang('invalidHeight'));
-							heightBox[0].focus();
-							return;
-						}
-						var html = K.mediaImg(self.themesPath + 'common/blank.gif', {
-								src : url,
-								type : K.mediaType(url),
-								width : width,
-								height : height,
-								autostart : autostartBox[0].checked ? 'true' : 'false',
-								loop : 'true'
-							});
+            if(isThirdBox[0].checked)
+            {
+					      html = htmlBox.val();
+                if(K.trim(html) === '')
+                {
+                    alert(lang.pleaseInput);
+                    textarea[0].focus();
+                    return;
+                }
+            }
+            else
+            {
+                var url = K.trim(urlBox.val()),
+                  width = widthBox.val(),
+                  height = heightBox.val();
+                if (url == 'http://' || K.invalidUrl(url)) {
+                  alert(self.lang('invalidUrl'));
+                  urlBox[0].focus();
+                  return;
+                }
+                if (!/^\d*$/.test(width)) {
+                  alert(self.lang('invalidWidth'));
+                  widthBox[0].focus();
+                  return;
+                }
+                if (!/^\d*$/.test(height)) {
+                  alert(self.lang('invalidHeight'));
+                  heightBox[0].focus();
+                  return;
+                }
+                var html = K.mediaImg(self.themesPath + 'common/blank.gif', {
+                    src : url,
+                    type : K.mediaType(url),
+                    width : width,
+                    height : height,
+                    autostart : autostartBox[0].checked ? 'true' : 'false',
+                    allowFullscreen : fullscreenBox[0].checked ? 'true' : 'false',
+                    loop : 'true'
+                  });
+            }
 						self.insertHtml(html).hideDialog().focus();
 					}
 				}
 			}),
 			div = dialog.div,
+			isThirdBox = K('[name="isThird"]', div),
+			htmlBox = K('[name="html"]', div),
 			urlBox = K('[name="url"]', div),
 			viewServerBtn = K('[name="viewServer"]', div),
 			widthBox = K('[name="width"]', div),
 			heightBox = K('[name="height"]', div),
 			autostartBox = K('[name="autostart"]', div);
+			fullscreenBox = K('[name="fullscreen"]', div);
 			urlBox.val('http://');
 
 			if (allowMediaUpload) {
@@ -149,6 +181,20 @@ KindEditor.plugin('media', function(K) {
 				viewServerBtn.hide();
 			}
 
+      $('#isThird').click(function()
+      {
+          if($(this).prop('checked'))
+          {
+              $('.ke-dialog-row.url, .ke-dialog-row.width, .ke-dialog-row.height, .ke-dialog-row.autostart, .ke-dialog-row.fullscreen').hide();
+              $('.ke-dialog-row.html').show();
+          }
+          else
+          {
+              $('.ke-dialog-row.url, .ke-dialog-row.width, .ke-dialog-row.height, .ke-dialog-row.autostart, .ke-dialog-row.fullscreen').show();
+              $('.ke-dialog-row.html').hide();
+          }
+      })
+
 			var img = self.plugin.getSelectedMedia();
 			if (img) {
 				var attrs = K.mediaAttrs(img.attr('data-ke-tag'));
@@ -156,6 +202,7 @@ KindEditor.plugin('media', function(K) {
 				widthBox.val(K.removeUnit(img.css('width')) || attrs.width || 0);
 				heightBox.val(K.removeUnit(img.css('height')) || attrs.height || 0);
 				autostartBox[0].checked = (attrs.autostart === 'true');
+				fullscreenBox[0].checked = (attrs.fullscreen === 'true');
 			}
 			urlBox[0].focus();
 			urlBox[0].select();
@@ -166,5 +213,6 @@ KindEditor.plugin('media', function(K) {
 			self.addBookmark();
 		}
 	};
+
 	self.clickToolbar(name, self.plugin.media.edit);
 });
