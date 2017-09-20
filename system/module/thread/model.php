@@ -129,24 +129,27 @@ class threadModel extends model
     public function getLatest($boards, $count)
     { 
         if(strpos($boards, ',') !== false) $boards = explode(',', $boards);
-        $boards = (array)$boards;
-
-        $parents  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
-        $children = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->ne(0)->andWhere('type')->eq('forum')->fetchAll('id');
+        $boards = empty($boards) ? array() : (array)$boards;
 
         $subBoards = array();
-        foreach($boards as $board)
+        if(!empty($boards))
         {
-            if(in_array($board, array_keys($parents)))
+            $parents  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
+            $children = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->ne(0)->andWhere('type')->eq('forum')->fetchAll('id');
+
+            foreach($boards as $board)
             {
-                foreach($children as $child)
+                if(in_array($board, array_keys($parents)))
                 {
-                    if($child->parent == $board) $subBoards[] = $child->id;
+                    foreach($children as $child)
+                    {
+                        if($child->parent == $board) $subBoards[] = $child->id;
+                    }
                 }
-            }
-            else
-            {
-                $subBoards[] = $board;
+                else
+                {
+                    $subBoards[] = $board;
+                }
             }
         }
 
@@ -163,10 +166,14 @@ class threadModel extends model
      * @access public
      * @return array
      */
-    public function getSticks($board)
+    public function getSticks($board = 0)
     {
         $sticks  = $this->dao->select('*')->from(TABLE_THREAD)->where('stick')->eq(2)->orderBy('id desc')->fetchAll();
-        $sticks += $this->dao->select('*')->from(TABLE_THREAD)->where('board')->eq($board)->andWhere('stick')->eq(1)->orderBy('id desc')->fetchAll();
+        $sticks += $this->dao->select('*')->from(TABLE_THREAD)
+            ->where(1)
+            ->beginIF($board)->andWhere('board')->eq($board)->fi()
+            ->andWhere('stick')->eq(1)
+            ->orderBy('id desc')->fetchAll();
         return $this->setRealNames($sticks);
     }
 

@@ -17,23 +17,31 @@ class forum extends control
      * @access public
      * @return void
      */
-    public function index()
+    public function index($mode = 'board')
     {
         $this->forum->updateStats();
-        $boards = $this->forum->getBoards();
-        $this->view->title      = $this->lang->forumHome;
-        $this->view->boards     = $boards;
-        $this->view->mobileURL  = helper::createLink('forum', 'index', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('forum', 'index', '', '', 'html');
 
-        if($this->app->clientDevice == 'desktop') 
+        $this->loadModel('thread');
+        if($mode == 'latest')
         {
-            $this->view->canonicalURL = helper::createLink('forum', 'index', "", "", 'html'); 
+            $this->view->title   = $this->lang->thread->latest;
+            $this->view->threads = $this->loadModel('thread')->getLatest(0, 20);
+        }
+        elseif($mode == 'stick')
+        {
+            $this->view->title   = $this->lang->thread->stick . $this->lang->thread->common;
+            $this->view->threads = $this->loadModel('thread')->getSticks();
         }
         else
         {
-            $this->view->canonicalURL = helper::createLink('forum', 'index', "", "", 'mhtml'); 
+            $this->view->title = $this->lang->forumHome;
         }
+
+        $this->view->mode         = $mode;
+        $this->view->boards       = $this->forum->getBoards();
+        $this->view->mobileURL    = helper::createLink('forum', 'index', "mode=$mode", '', 'mhtml');
+        $this->view->desktopURL   = helper::createLink('forum', 'index', "mode=$mode", '', 'html');
+        $this->view->canonicalURL = $this->app->clientDevice == 'desktop' ? helper::createLink('forum', 'index', "mode=$mode", "", 'html') : helper::createLink('forum', 'index', "mode=$mode", "", 'mhtml'); 
         $this->display();
     }
 
@@ -71,6 +79,7 @@ class forum extends control
         $this->view->board      = $board;
         $this->view->sticks     = $this->thread->getSticks($board->id);
         $this->view->threads    = $threads;
+        $this->view->boards     = $this->forum->getBoards();
         $this->view->pager      = $pager;
         $this->view->mobileURL  = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'html');

@@ -3,9 +3,26 @@
 <?php $common->printPositionBar($board);?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-comments-alt icon-large'></i>&nbsp;
-    <?php echo $board->name; ?>
-    </strong>
+    <div class='btn-group'>
+      <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+        <?php echo $board->name;?> <span class="caret"></span>
+      </button>
+      <ul class='dropdown-menu' role='menu'>
+        <li><?php echo html::a(inlink('index', 'mode=board'), $lang->forum->board);?></li>
+        <?php foreach($boards as $parentBoard):?>
+        <li class='dropdown-submenu'>
+          <?php echo html::a('#', $parentBoard->name);?>
+          <ul class='dropdown-menu'>
+            <?php foreach($parentBoard->children as $childBoard):?>
+            <li><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></li>
+            <?php endforeach;?>
+          </ul>
+        </li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <?php echo html::a(inlink('index', "mode=latest"), $lang->thread->latest, "class='btn'");?>
+    <?php echo html::a(inlink('index', "mode=stick"), $lang->thread->stick . $lang->thread->common, "class='btn'");?>
     <?php if($board->moderators) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim($board->moderators, ',')); ?>
     <div class='panel-actions'>
       <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary'");?>
