@@ -185,11 +185,12 @@ class orderModel extends model
     {
         $address = new stdclass();
         $this->loadModel('address');
+        $post = fixer::input('post')->get();
         $address->account = $this->app->user->account;
-        $address->address = $this->post->address;
-        $address->contact = $this->post->contact;
-        $address->phone   = $this->post->phone;
-        $address->zipcode = $this->post->zipcode;
+        $address->address = $post->address;
+        $address->contact = $post->contact;
+        $address->phone   = $post->phone;
+        $address->zipcode = $post->zipcode;
 
         $this->dao->insert(TABLE_ADDRESS)->data($address)->check('phone', 'phone')->batchCheck($this->config->address->require->create, 'notempty')->exec();
         if(dao::isError()) return false;
