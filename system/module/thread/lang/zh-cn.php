@@ -40,6 +40,7 @@ $lang->thread->switchStatus   = '隐藏/显示';
 $lang->thread->deleteFile     = '删除附件';
 $lang->thread->unreplied      = "<span class='text-important'>未回复</span>";
 $lang->thread->quote          = '引用';
+$lang->thread->latest         = '最新帖子';
 
 $lang->thread->sticks[0] = '不置顶';
 $lang->thread->sticks[1] = '版块置顶';
