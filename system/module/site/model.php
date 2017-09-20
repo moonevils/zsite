@@ -75,6 +75,36 @@ class siteModel extends model
     }
 
     /**
+     * Check gzip.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkGzip()
+    {
+        $url = $this->server->request_scheme . '://' . $this->server->http_host;
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, TRUE);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($curl, CURLOPT_ENCODING, '');
+        $response = curl_exec($curl); 
+
+        if(!curl_errno($curl))
+        {
+            $info = curl_getinfo($curl);
+            $headerSize = $info['header_size'];  //header字符串体积
+            $headerInfo = substr($response, 0, $headerSize); //获得header字符串
+
+            preg_match('/Content-Encoding: (.*)\s/i', $headerInfo, $matches);
+            if(isset($matches[1]) and trim($matches[1]) == 'gzip') return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Set the site language, request type and detectDevice options.
      *
      * @access public

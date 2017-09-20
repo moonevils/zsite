@@ -37,6 +37,10 @@
           <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, $this->config->framework->detectDevice[$this->app->clientLang] ? 'open' : 'close', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->gzipOutput;?></th> 
+          <td><?php echo html::radio('gzipOutput', $lang->site->gzipOutputList, isset($this->config->site->gzipOutput) ? $this->config->site->gzipOutput : 'close', "class='checkbox'");?></td><td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->name;?></th> 
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>

@@ -549,6 +549,8 @@ class upgradeModel extends model
             }
 
             $sql = str_replace(array('eps_', 'xr_'), $this->config->db->prefix, $sql);
+            if(strpos($sql, $this->config->db->prefix) === false) continue;
+
             try
             {
                 $this->dbh->exec($sql);
