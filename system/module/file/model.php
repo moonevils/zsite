@@ -746,7 +746,10 @@ class fileModel extends model
     public function edit($fileID)
     {
         $this->replaceFile($fileID);
-        $fileInfo = fixer::input('post')->remove('upFile')->get();
+        $fileInfo = fixer::input('post')
+            ->remove('pathname')
+            ->remove('upFile')
+            ->get();
         if(!validater::checkFileName($fileInfo->title)) return false;
         $fileInfo->lang = 'all';
         $this->dao->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck($this->config->file->require->edit, 'notempty')->where('id')->eq($fileID)->exec();
