@@ -124,7 +124,9 @@ $filter->guarder->validate->cookie['validate'] = 'reg::character';
 
 $filter->log->record = new stdclass();
 $filter->log->record->cookie['vid'] = 'reg::number';
-$filter->log->record->get['resolution'] = 'reg::any';
+
+$filter->log->record->paramValue = array();
+$filter->log->record->paramValue['resolution'] = 'reg::any';
 
 $filter->reply->post = new stdclass();
 $filter->reply->post->cookie['r'] = 'reg::checked';
