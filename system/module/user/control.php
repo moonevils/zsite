@@ -92,12 +92,14 @@ class user extends control
 
         if($_POST)
         {
+            if(!$this->user->checkToken($this->post->token, $this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
             $this->user->create();
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "user={$this->post->account}")));
         }
         $this->view->title  = $this->lang->user->create;
         $this->view->groups = $this->loadModel('group')->getPairs();
+        $this->view->token = $this->user->getToken();
         $this->display();
     }
 

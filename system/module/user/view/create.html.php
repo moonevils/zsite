@@ -1,6 +1,7 @@
 <?php include '../../common/view/header.modal.html.php';?>
+<?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <?php if($pass):?>
-<form method='post' action='<?php echo inlink('create')?>' id='ajaxForm' class='form form-inline'>
+<form method='post' action='<?php echo inlink('create')?>' id='ajaxForm' class='form form-inline' data-checkfingerprint='1'>
   <table class='table table-form form-inline'>
     <tr>
       <th><?php echo $lang->user->account;?></th>
@@ -44,7 +45,7 @@
     </tr>  
     <tr>
       <th></th>
-      <td colspan="2"><?php echo html::submitButton();?></td>
+      <td colspan="2"><?php echo html::submitButton() . html::hidden('token', $token);?></td>
     </tr>
   </table>
 </form>        
