@@ -20,7 +20,7 @@ class article extends control
     public function index()
     {   
         $category = $this->loadModel('tree')->getFirst('article');
-        if($category) $this->locate(inlink('browse', "category=$category->id"));
+        if($category) $this->locate(inlink('browse', "category=$category->id", array('category' => $category->alias)));
         $this->locate($this->createLink('index'));
     }   
 
