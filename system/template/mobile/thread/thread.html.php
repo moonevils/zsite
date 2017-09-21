@@ -20,6 +20,9 @@
     <div class='card-content'><?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?></div>
     <?php endif;?>
     <div class="card-footer">
+      <?php if(commonModel::isAvailable('score') and !empty($thread->scoreSum)):?>
+      <span class='pull-left'><?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?></span>
+      <?php endif;?>
       <?php if($thread->editor): ?>
       <small class='hide last-edit'><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate); ?></small>
       <?php endif; ?>
@@ -44,6 +47,10 @@
           ?>
           </ul>
         </span> &nbsp;
+        <?php if(commonModel::isAvailable('score') and $this->thread->canManage($board->id)):?>
+        <?php $account = helper::safe64Encode($thread->author);?>
+        <?php echo html::a(inlink('addScore', "account={$account}&objectType=thread&objectID={$thread->id}"), $lang->thread->score, "data-toggle=modal class='text-muted'");?>
+        <?php endif;?>
         <?php
         if($thread->hidden)
         {
