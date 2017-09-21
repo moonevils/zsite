@@ -620,6 +620,7 @@ class commonModel extends model
             $messages = '';
             if(commonModel::isAvailable('message'))
             {
+                $app->loadLang('user');
                 $messages = $app->loadClass('dao')->select('COUNT(*) as count')->from(TABLE_MESSAGE)->where('`to`')->eq($app->user->account)->andWhere('readed')->eq(0)->fetch('count');
                 if($messages) $messages = html::a(helper::createLink('user', 'message'), sprintf($lang->user->message->mine, $messages));
             }
