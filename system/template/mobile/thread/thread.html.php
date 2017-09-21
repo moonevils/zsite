@@ -21,13 +21,13 @@
     <?php endif;?>
     <div class="card-footer">
       <?php if(commonModel::isAvailable('score') and !empty($thread->scoreSum)):?>
-      <span class='pull-left'><?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?></span>
+      <span><?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?></span>
       <?php endif;?>
       <?php if($thread->editor): ?>
       <small class='hide last-edit'><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate); ?></small>
       <?php endif; ?>
       <?php if($this->app->user->account != 'guest'): ?>
-      <div class="actions text-right">
+      <div class="actions text-right pull-right">
         <?php if($this->thread->canManage($board->id)): ?>
         <span class='dropdown dropup'>
           <a data-toggle='dropdown' href='###' class='text-muted'><i class='icon-flag-alt'></i> <?php echo $lang->thread->sticks[$thread->stick]; ?> <i class='icon-caret-up'></i></a>
