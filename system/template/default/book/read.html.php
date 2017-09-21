@@ -82,7 +82,7 @@
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php include TPL_ROOT . 'common/video.html.php'; ?>
 <?php if($config->debug) js::import($jsRoot . 'jquery/form/min.js');?>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
 </body>
@@ -172,6 +172,6 @@
   </div>
 </div>
 <?php endif;?>
-<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php include TPL_ROOT . 'common/video.html.php'; ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>
 <?php endif;?>

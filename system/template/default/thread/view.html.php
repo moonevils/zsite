@@ -30,5 +30,5 @@ echo "<div class='blocks' data-region='thread_view-bottom'>";
 $this->block->printRegion($layouts, 'thread_view', 'bottom');
 echo "</div>";
 
-include TPL_ROOT . 'common/jplayer.html.php';
+include TPL_ROOT . 'common/video.html.php';
 include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');

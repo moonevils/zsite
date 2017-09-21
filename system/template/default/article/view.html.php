@@ -95,5 +95,5 @@ js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id)
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='article_view-bottomBanner'><?php $this->block->printRegion($layouts, 'article_view', 'bottomBanner', true);?></div>
-<?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/jplayer.html.php'; ?>
+<?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/video.html.php'; ?>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>
