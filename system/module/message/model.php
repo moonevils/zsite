@@ -344,7 +344,7 @@ class messageModel extends model
      * @access public
      * @return void
      */
-    public function post($type, $block='')
+    public function post($type, $block = '')
     {
         $account = $this->app->user->account;
         $admin   = $this->app->user->admin;

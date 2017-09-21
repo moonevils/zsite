@@ -127,7 +127,7 @@ class message extends control
      * @access public
      * @return void
      */
-    public function post($type, $block='')
+    public function post($type, $block = '')
     {
         $this->lang->message = $this->lang->$type;
         if($_POST)
@@ -144,7 +144,7 @@ class message extends control
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Comment($boolBlock))));
             }
 
-            $result = $this->message->post($type,$block);
+            $result = $this->message->post($type, $block);
             $this->send($result);
         }
     }
