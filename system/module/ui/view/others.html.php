@@ -71,6 +71,12 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <td class='w-p30'><?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?></td><td></td>
             </tr>
             <?php endif;?>
+            <?php if(strpos($this->config->site->modules, 'book') !== false):?>
+            <tr>
+              <th class='w-120px'><?php echo $lang->site->customizableList->book;?></th> 
+              <td class='w-p30'><?php echo html::input('bookRec', !empty($this->config->site->bookRec) ? $this->config->site->bookRec : $this->config->book->recPerPage, "class='form-control'");?></td><td></td>
+            </tr>
+            <?php endif;?>
             <?php if(strpos($this->config->site->modules, 'message') !== false):?>
             <tr>
               <th class='w-120px'><?php echo $lang->site->customizableList->message;?></th> 
