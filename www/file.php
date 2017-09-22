@@ -33,7 +33,7 @@ if(!file_exists($filePath)) $filePath = $realPath;
 if(!file_exists($filePath)) die('The file does not exist!');
 
 $imageExtensions = array('jpeg', 'jpg', 'gif', 'png');
-$mime = in_array($extension, $imageExtensions) ? "image/{$extension}" : 'application/octet-stream';
+$mime = mime_content_type($realPath);
 header("Content-type: $mime");
 
 $handle = fopen($filePath, "r");
