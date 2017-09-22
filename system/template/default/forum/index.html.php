@@ -8,10 +8,10 @@
     <?php $stickActive  = $mode == 'stick' ? 'btn-primary' : '';?>
     <div class='btn-group'>
       <button type='button' class='btn <?php echo $boardActive;?> dropdown-toggle' data-toggle='dropdown'>
-        <?php echo $lang->forum->board;?> <span class='caret'></span>
+        <?php echo $lang->forum->allBoards;?> <span class='caret'></span>
       </button>
       <ul class='dropdown-menu' role='menu'>
-        <li><?php echo html::a(inlink('index', 'mode=board'), $lang->forum->board);?></li>
+        <li><?php echo html::a(inlink('index', 'mode=board'), $lang->forum->allBoards);?></li>
         <?php foreach($boards as $board):?>
         <li class='dropdown-submenu'>
           <?php echo html::a('#', $board->name);?>
