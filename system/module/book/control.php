@@ -22,12 +22,17 @@ class book extends control
      * @access public
      * @return void
      */
-    public function index()
+    public function index($pageID = 1)
     {
+        $recPerPage = !empty($this->config->site->bookRec) ? $this->config->site->bookRec : $this->config->book->recPerPage;
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal = 0, $recPerPage, $pageID);
+
         if(isset($this->config->book->index) and $this->config->book->index == 'list')
         {
             $this->view->title = $this->lang->book->list;
-            $this->view->books = $this->book->getBookList();
+            $this->view->books = $this->book->getBookList($pager);
+            $this->view->pager = $pager;
             $this->display();
         }
         else
