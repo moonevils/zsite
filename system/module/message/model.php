@@ -92,9 +92,9 @@ class messageModel extends model
                 {
                     echo "<div class='reply-panel'>";
                     echo "<div class='panel-heading reply-heading'>";
-                    echo "<i class='icon icon-user'> {$reply->from}</i> ";
-                    echo "<i class='text-muted'>" . $reply->date . "</i>";
-                    echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), "<i class='icon icon-reply'> </i>", " data-toggle='modal' data-type='iframe' class='text-info pull-right' id='reply{$reply->id}' data-icon='reply' data-title='{$this->lang->message->reply}'");
+                    echo "<span class='text-primary'><i class='icon icon-reply'> {$reply->from}</i> </span>";
+                    echo "<span class='text-muted'>" . $reply->date . "</span>";
+                    echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' class='pull-right' id='reply{$reply->id}' data-icon='reply' data-title='{$this->lang->message->reply}'");
                     echo '</div>';
                     echo "<div class='panel-body'>";
                     echo nl2br($reply->content);

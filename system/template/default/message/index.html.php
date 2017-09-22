@@ -28,9 +28,9 @@
     <?php $class = $class == 'success' ? '' : 'success';?>
     <div class='w-p100 panel comment-item commment-panel' id="comment<?php echo $message->id?>">
       <div class='panel-heading content-heading'>
-        <i class='icon icon-user'> <?php echo $message->from;?></i>
-        <i class='text-muted'> <?php echo $message->date;?></i>
-        <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply text-info'> </i>", "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?>
+        <span class='text-special'> <?php echo $message->from;?></span>
+        <span class='text-muted'> <?php echo $message->date;?></span>
+        <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?>
       </div>
       <div class='panel-body'><?php echo nl2br($message->content);?></div>
       <?php $this->message->getFrontReplies($message);?>
