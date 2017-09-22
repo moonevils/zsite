@@ -28,42 +28,41 @@
     <?php echo html::a(inlink('index', "mode=stick"), $lang->thread->stick . $lang->thread->common, "class='btn {$stickActive}'");?>
   </div>
   <?php if($mode == 'latest' or $mode == 'stick'):?>
-    <table class='table table-hover table-striped'>
-      <thead>
-        <tr class='text-center hidden-xxxs'>
-          <th colspan='2'><?php echo $lang->thread->title;?></th>
-          <th class='w-150px hidden-xxs'><?php echo $lang->thread->author;?></th>
-          <th class='w-100px hidden-xs'><?php echo $lang->thread->postedDate;?></th>
-          <th class='w-50px hidden-xs'><?php echo $lang->thread->views;?></th>
-          <th class='w-50px'><?php echo $lang->thread->replies;?></th>
-          <th class='w-200px hidden-sm hidden-xs'><?php echo $lang->thread->lastReply;?></th>
-        </tr>  
-      </thead>
-      <tbody>
-        <?php foreach($threads as $thread):?>
-        <?php $style = $thread->color ? "style='color:{$thread->color}'" : '';?>
-        <tr class='text-center'>
-          <td class='w-10px'><?php echo ($mode == 'latest' && $thread->isNew) ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
-          <td class='text-left'>
-            <div data-ve='thread' id='thread<?php echo $thread->id;?>'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?></td></div>
-          <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
-          <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
-          <td class='hidden-xs'><?php echo $thread->views;?></td>
-          <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
-          <td class='hidden-sm hidden-xs'>
-            <?php 
-            if($thread->replies)
-            {
-                echo substr($thread->repliedDate, 5, -3) . ' ';
-               echo html::a($this->createLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}"), $thread->repliedByRealname);
-            }
-            ?>
-          </td>  
-        </tr>  
-        <?php endforeach;?>
-      </tbody>
-    </table>
-  </div>
+  <table class='table table-hover table-striped'>
+    <thead>
+      <tr class='text-center hidden-xxxs'>
+        <th colspan='2'><?php echo $lang->thread->title;?></th>
+        <th class='w-150px hidden-xxs'><?php echo $lang->thread->author;?></th>
+        <th class='w-100px hidden-xs'><?php echo $lang->thread->postedDate;?></th>
+        <th class='w-50px hidden-xs'><?php echo $lang->thread->views;?></th>
+        <th class='w-50px'><?php echo $lang->thread->replies;?></th>
+        <th class='w-200px hidden-sm hidden-xs'><?php echo $lang->thread->lastReply;?></th>
+      </tr>  
+    </thead>
+    <tbody>
+      <?php foreach($threads as $thread):?>
+      <?php $style = $thread->color ? "style='color:{$thread->color}'" : '';?>
+      <tr class='text-center'>
+        <td class='w-10px'><?php echo ($mode == 'latest' && $thread->isNew) ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
+        <td class='text-left'>
+          <div data-ve='thread' id='thread<?php echo $thread->id;?>'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?></td></div>
+        <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
+        <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td class='hidden-xs'><?php echo $thread->views;?></td>
+        <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
+        <td class='hidden-sm hidden-xs'>
+          <?php 
+          if($thread->replies)
+          {
+              echo substr($thread->repliedDate, 5, -3) . ' ';
+             echo html::a($this->createLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}"), $thread->repliedByRealname);
+          }
+          ?>
+        </td>  
+      </tr>  
+      <?php endforeach;?>
+    </tbody>
+  </table>
   <?php else:?>
   <div id='boards'>
     <?php foreach($boards as $parentBoard):?>
