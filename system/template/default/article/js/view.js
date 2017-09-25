@@ -22,8 +22,15 @@ $(document).ready(function()
         }
     });
 
-    previousSpanWidth = $('.previous > a').width() - 17;
-    nextSpanWidth     = $('.next > a').width() - 17;
-    $('.previous > a > span').css('width', previousSpanWidth);
-    $('.next > a > span').css('width', nextSpanWidth);
+    if($('.previous > a > span').width() > $('.previous > a').width())
+    {
+        previousSpanWidth = $('.previous > a').width() - $('.previous .icon-arrow-left').width() - 5;
+        $('.previous > a > span').css('width', previousSpanWidth);
+    }
+
+    if($('.next > a > span').width() > $('.next > a').width())
+    {
+        nextSpanWidth = $('.next > a').width() - $('.next .icon-arrow-right').width() - 5;
+        $('.next > a > span').css('width', nextSpanWidth);
+    }
 });
