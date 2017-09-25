@@ -82,7 +82,7 @@ class siteModel extends model
      */
     public function checkGzip()
     {
-        $url = $this->server->request_scheme . '://' . $this->server->http_host;
+        $url = $this->server->request_scheme . '://' . $this->server->http_host . helper::createLink('misc', 'ping');
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
