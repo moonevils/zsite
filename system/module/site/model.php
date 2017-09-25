@@ -94,8 +94,8 @@ class siteModel extends model
         if(!curl_errno($curl))
         {
             $info = curl_getinfo($curl);
-            $headerSize = $info['header_size'];  //header字符串体积
-            $headerInfo = substr($response, 0, $headerSize); //获得header字符串
+            $headerSize = $info['header_size'];
+            $headerInfo = substr($response, 0, $headerSize);
 
             preg_match('/Content-Encoding: (.*)\s/i', $headerInfo, $matches);
             if(isset($matches[1]) and trim($matches[1]) == 'gzip') return true;
