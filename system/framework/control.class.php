@@ -468,8 +468,8 @@ class control extends baseControl
             $this->output = gzencode($this->output, 9);
             header('Content-Encoding: gzip');
         }
-
-        echo $this->output;
+        
+		echo $this->output;
     }
 
     /**
@@ -583,8 +583,11 @@ class control extends baseControl
             $this->output = str_replace("</style>\n", '</style>', $this->output);
             $this->output = preg_replace('/<style>([\s\S]*?)<\/style>/', '', $this->output);
         }
-
-        $page = helper::safe64Encode($this->app->getURI());
+		
+		$params = $this->app->getParams();
+		$params['module'] = $this->moduleName;
+		$params['method'] = $this->methodName;
+        $page = helper::safe64Encode(http_build_query($params));
         $key  = strtolower("/css/{$page}");
 
         if($this->config->cache->type == 'close')
@@ -622,7 +625,11 @@ class control extends baseControl
         unset($scripts[1][0]);
 
         if(!empty($scripts[1])) $pageJS = join(';', $scripts[1]);
-        $page = helper::safe64Encode($this->app->getURI());
+
+   		$params = $this->app->getParams();
+		$params['module'] = $this->moduleName;
+		$params['method'] = $this->methodName;
+        $page = helper::safe64Encode(http_build_query($params));
         $key  = strtolower("/js/{$page}");
 
         if($this->config->cache->type == 'close')
