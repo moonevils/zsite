@@ -136,3 +136,7 @@ $filter->wechat->default->get['signature'] = 'reg::base64';
 $filter->wechat->default->get['timestamp'] = 'reg::number';
 $filter->wechat->default->get['nonce']     = 'reg::number';
 $filter->wechat->default->get['echostr']   = 'reg::word';
+
+$filter->source = new stdclass();
+$filter->source->default = new stdclass();
+$filter->source->default->get['page'] = 'reg::base64';
