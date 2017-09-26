@@ -92,6 +92,10 @@ $config->rights->guest['score']['noscore']      = 'noscore';
 $config->rights->guest['score']['processorder'] = 'processorder';
 
 $config->rights->guest['ui']['getencrypt'] = 'getencrypt';
+
+$config->rights->guest['source']['css'] = 'css';
+$config->rights->guest['source']['js']  = 'js';
+
 /* For logged member. */
 $config->rights->member['article']['submission'] = 'submission';
 $config->rights->member['article']['post']       = 'post';
