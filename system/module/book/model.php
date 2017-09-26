@@ -72,9 +72,9 @@ class bookModel extends model
      * @access public
      * @return array
      */
-    public function getBookList()
+    public function getBookList($pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`, id')->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`, id')->page($pager)->fetchAll('id');
     }
 
     /**

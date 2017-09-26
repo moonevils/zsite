@@ -463,7 +463,11 @@ class control extends baseControl
             if($this->config->site->execInfo == 'show') $this->output = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $this->output);
         }
 
-        if(!headers_sent() && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open' and extension_loaded('zlib') && strstr($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip"))
+        if(!headers_sent()
+            && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'
+            && extension_loaded('zlib')
+            && strstr($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip")
+            && $moduleName != 'misc' && $methodName != 'ping')
         {
             $this->output = gzencode($this->output, 9);
             header('Content-Encoding: gzip');

@@ -1,5 +1,5 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
-<div class='cards'>
+<div class='row'>
   <?php foreach($books as $book):?>
   <div class='col-xs-6 col-sm-4 col-md-3'>
     <div class='card'>
@@ -14,5 +14,8 @@
     </div>
   </div>
   <?php endforeach;?>
+  <?php if($pager->pageTotal > 1):?>
+  <div class='col-xs-12 col-sm-12 col-md-12 pull-left'><?php $pager->show('right', 'short');?></div>
+  <?php endif;?>
 </div>
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>

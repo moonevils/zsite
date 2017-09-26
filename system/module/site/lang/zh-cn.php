@@ -242,6 +242,7 @@ $lang->site->customizableList = new stdclass();
 $lang->site->customizableList->article = '文章列表数量';
 $lang->site->customizableList->product = '产品列表数量';
 $lang->site->customizableList->blog    = '博客列表数量';
+$lang->site->customizableList->book    = '手册列表数量';
 $lang->site->customizableList->forum   = '论坛列表数量';
 $lang->site->customizableList->reply   = '回帖列表数量';
 $lang->site->customizableList->message = '留言列表数量';
