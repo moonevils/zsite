@@ -19,16 +19,19 @@ KindEditor.plugin('media', function(K) {
 		edit : function() {
 			var html = [
 				'<div style="padding:20px;">',
-				'<div class="ke-dialog-row">',
-        '<label for="isThird" style="width:60px;">' + lang.third + '</label>',
-				'<input type="checkbox" id="isThird" name="isThird" value="" />',
-        '</div>',
+				//type
+			  '<div class="ke-dialog-row">',
+			  '<label for="type" style="width:60px;">' + lang.type + '</label>',
+			  '<input type="radio" name="type" class="ke-inline-block mg-0" value="upload" checked="checked" />&nbsp;' + lang.upload,
+			  '&nbsp;&nbsp;<input type="radio" name="type" class="ke-inline-block mg-0" value="viewServer"/>&nbsp;' + lang.viewServer,
+			  '&nbsp;&nbsp;<input type="radio"  name="type" class="ke-inline-block mg-0" value="third"/>&nbsp;' + lang.third,
+			  '</div>',
 				//url
 				'<div class="ke-dialog-row url">',
 				'<label for="keUrl" style="width:60px;">' + lang.url + '</label>',
-				'<input class="ke-input-text" type="text" id="keUrl" name="url" value="" style="width:160px;" /> &nbsp;',
+				'<input class="ke-input-text" type="text" id="keUrl" name="url" value="" style="width:200px;" /> &nbsp;',
 				'<input type="button" class="ke-upload-button" value="' + lang.upload + '" /> &nbsp;',
-				'<span class="ke-button-common ke-button-outer">',
+				'<span class="ke-button-common ke-button-outer viewServer hidden">',
 				'<input type="button" class="ke-button-common ke-button" name="viewServer" value="' + lang.viewServer + '" />',
 				'</span>',
         '</div>',
@@ -72,6 +75,7 @@ KindEditor.plugin('media', function(K) {
             if(isThirdBox[0].checked)
             {
 					      html = htmlBox.val();
+                alert(html);
                 if(K.trim(html) === '')
                 {
                     alert(lang.pleaseInput);
@@ -114,7 +118,7 @@ KindEditor.plugin('media', function(K) {
 				}
 			}),
 			div = dialog.div,
-			isThirdBox = K('[name="isThird"]', div),
+			isThirdBox = K('[value="third"]', div),
 			htmlBox = K('[name="html"]', div),
 			urlBox = K('[name="url"]', div),
 			viewServerBtn = K('[name="viewServer"]', div),
@@ -181,17 +185,28 @@ KindEditor.plugin('media', function(K) {
 				viewServerBtn.hide();
 			}
 
-      $('#isThird').click(function()
+      $('[name=type]').click(function()
       {
-          if($(this).prop('checked'))
-          {
-              $('.ke-dialog-row.url, .ke-dialog-row.width, .ke-dialog-row.height, .ke-dialog-row.autostart, .ke-dialog-row.fullscreen').hide();
-              $('.ke-dialog-row.html').show();
-          }
-          else
+          if($(this).val() == 'upload')
           {
               $('.ke-dialog-row.url, .ke-dialog-row.width, .ke-dialog-row.height, .ke-dialog-row.autostart, .ke-dialog-row.fullscreen').show();
               $('.ke-dialog-row.html').hide();
+
+              $('.ke-inline-block.ke-upload-button').show();
+              $('[name=viewServer]').parent('span').addClass('hidden');
+          }
+          else if($(this).val() == 'viewServer')
+          {
+              $('.ke-dialog-row.url, .ke-dialog-row.width, .ke-dialog-row.height, .ke-dialog-row.autostart, .ke-dialog-row.fullscreen').show();
+              $('.ke-dialog-row.html').hide();
+
+              $('.ke-inline-block.ke-upload-button').hide();
+              $('[name=viewServer]').parent('span').removeClass('hidden');
+          }
+          else
+          {
+              $('.ke-dialog-row.url, .ke-dialog-row.width, .ke-dialog-row.height, .ke-dialog-row.autostart, .ke-dialog-row.fullscreen').hide();
+              $('.ke-dialog-row.html').show();
           }
       })
 
