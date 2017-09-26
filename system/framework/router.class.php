@@ -533,49 +533,4 @@ class router extends baseRouter
         parent::setSuperVars();
         $_POST = validater::filterConfigPlaceholder($_POST);
     }
-
-    public function loadModel($moduleName = '', $appName = '')
-    {
-        if(empty($moduleName)) $moduleName = $this->moduleName;
-        if(empty($appName))    $appName    = $this->appName;
-
-        global $loadedModels;
-        if(isset($loadedModels[$appName][$moduleName]))
-        {
-            $this->$moduleName = $loadedModels[$appName][$moduleName];
-            $this->dao = $this->$moduleName->dao;
-            return $this->$moduleName;
-        }
-
-        $modelFile = $this->setModelFile($moduleName, $appName);
-
-        /**
-         * 如果没有model文件，尝试加载config配置信息。
-         * If no model file, try load config. 
-         */
-        if(!helper::import($modelFile)) 
-        {
-            $this->loadModuleConfig($moduleName, $appName);
-            $this->loadLang($moduleName, $appName);
-            $this->dao = new dao();
-            return false;
-        }
-
-        /** 
-         * 如果没有扩展文件，model类名是$moduleName + 'model'，如果有扩展，还需要增加ext前缀。
-         * If no extension file, model class name is $moduleName + 'model', else with 'ext' as the prefix.
-         */
-        $modelClass = class_exists('ext' . $appName . $moduleName. 'model') ? 'ext' . $appName . $moduleName . 'model' : $appName . $moduleName . 'model';
-        if(!class_exists($modelClass))
-        {
-            $modelClass = class_exists('ext' . $moduleName. 'model') ? 'ext' . $moduleName . 'model' : $moduleName . 'model';
-            if(!class_exists($modelClass)) $this->app->triggerError(" The model $modelClass not found", __FILE__, __LINE__, $exit = true);
-        }
-
-        $loadedModels[$appName][$moduleName] = new $modelClass($appName);
-        $this->$moduleName = $loadedModels[$appName][$moduleName];
-        $this->dao = $this->$moduleName->dao;
-        return $this->$moduleName;
-    }
-
 }
