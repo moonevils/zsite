@@ -554,6 +554,8 @@ body.body-modal {padding: 20px;}
 /**slide**/
 .carousel-inner .carousel-caption li{text-shadow: none;}
 
-.replies {padding: 8px 10px; padding-top: 0; padding-bottom: 10px;}
-.reply-panel {background-color: #F0F0F1;}
-.reply-panel .reply-panel {background-color: rgba(107, 107, 107, 0.08);)
+.replies {padding: 8px 10px; padding-top: 0;}
+.reply-panel .replies {padding: 0 0 0 10px;}
+.reply-panel {background-color: #ebf2f9;}
+.reply-panel .reply-panel {background-color: rgba(50,128,252,.08); margin-top: 8px;}
+.replies > .reply-panel:first-child{margin-top: 0;}

@@ -9,3 +9,5 @@ $config->book->editor->edit   = array('id' => 'content', 'tools' => 'full');
 $config->book->editor->create = array('id' => 'content', 'tools' => 'full');
 
 $config->book->chapter = 'left';
+
+$config->book->recPerPage = 12;

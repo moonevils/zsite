@@ -186,6 +186,7 @@ class ui extends control
         $this->app->loadModuleConfig('file');
         $this->app->loadLang('file');
         if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
+        if(strpos($this->config->site->modules, 'book') !== false)    $this->app->loadModuleConfig('book');
         if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadModuleConfig('message');
 
         if(strpos($this->config->site->modules, 'article') !== false)

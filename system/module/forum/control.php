@@ -17,7 +17,7 @@ class forum extends control
      * @access public
      * @return void
      */
-    public function index($mode = 'board')
+    public function index($mode = 'latest')
     {
         $this->forum->updateStats();
 
@@ -25,7 +25,7 @@ class forum extends control
         if($mode == 'latest')
         {
             $this->view->title   = $this->lang->thread->latest;
-            $this->view->threads = $this->loadModel('thread')->getLatest(0, 20);
+            $this->view->threads = $this->loadModel('thread')->getLatest(0, $this->config->forum->latestCount);
         }
         elseif($mode == 'stick')
         {
