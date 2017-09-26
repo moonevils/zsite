@@ -121,6 +121,7 @@ KindEditor.lang({
 	'flash.height' : '高度',
 	'flash.upload' : '上传',
 	'flash.viewServer' : '文件空间',
+	'media.type' : '类型',
 	'media.url' : 'URL',
 	'media.html' : 'html代码',
 	'media.width' : '宽度',
