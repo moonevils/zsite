@@ -105,6 +105,7 @@ KindEditor.plugin('media', function(K) {
                 }
                 var html = K.mediaImg(self.themesPath + 'common/blank.gif', {
                     src : url,
+                    class: 'videojs',
                     type : K.mediaType(url),
                     width : width,
                     height : height,
