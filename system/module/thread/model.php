@@ -169,11 +169,14 @@ class threadModel extends model
     public function getSticks($board = 0)
     {
         $sticks  = $this->dao->select('*')->from(TABLE_THREAD)->where('stick')->eq(2)->orderBy('id desc')->fetchAll();
-        $sticks += $this->dao->select('*')->from(TABLE_THREAD)
+        $sticks1 = $this->dao->select('*')->from(TABLE_THREAD)
             ->where(1)
             ->beginIF($board)->andWhere('board')->eq($board)->fi()
             ->andWhere('stick')->eq(1)
             ->orderBy('id desc')->fetchAll();
+
+        foreach($sticks1 as $stick) $sticks[] = $stick;
+
         return $this->setRealNames($sticks);
     }
 
