@@ -472,7 +472,11 @@ class control extends baseControl
             $this->output = gzencode($this->output, 9);
             header('Content-Encoding: gzip');
         }
-        
+
+        if($this->config->inFetch == false and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
+        {
+            $this->output = helper::tidy($this->output);
+        }
 		echo $this->output;
     }
 
@@ -608,8 +612,11 @@ class control extends baseControl
         $sourceURL  = helper::createLink('source', 'css', "page=$page", '', 'css');
         $importHtml = "<link rel='stylesheet' href='$sourceURL' type='text/css' media='screen' />\n";
 
-        if(strpos($this->output, '</head>') != false) $this->output = str_replace('</head>', "{$importHtml}</head>", $this->output);
-        if(strpos($this->output, '</head>') == false) $this->output = $importHtml . $this->output;
+        if(strpos($this->output, $importHtml) === false)
+        {
+            if(strpos($this->output, '</head>') != false) $this->output = str_replace('</head>', "{$importHtml}</head>", $this->output);
+            if(strpos($this->output, '</head>') == false) $this->output = $importHtml . $this->output;
+        }
     }
 
     /**
@@ -654,8 +661,11 @@ class control extends baseControl
         {
             $this->output = str_replace("</script>\n", '</script>', $this->output);
             $this->output = preg_replace('/<script>([\s\S]*?)<\/script>/', '', $this->output);
-            if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "{$importHtml}</body>", $this->output);
-            if(strpos($this->output, '</body>') == false) $this->output .= $importHtml;
+            if(strpos($this->output, $importHtml) === false)
+            {
+                if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "{$importHtml}</body>", $this->output);
+                if(strpos($this->output, '</body>') == false) $this->output .= $importHtml;
+            }
         }
 
         $pos = strpos($this->output, '<script src=');
