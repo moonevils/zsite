@@ -80,7 +80,8 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : (file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '');
   echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
   ?>
-  <!--[if lt IE 9]>
+  <?php $browser = helper::getBrowser(); ?>
+  <?php if($browser['name'] == 'ie' and $browser['version'] <= 9):?>
   <?php
   if($config->debug)
   {
@@ -103,19 +104,14 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
       }
   }
   ?>
-  <![endif]-->
-  <!--[if lt IE 10]>
+  <?php endif;?>
   <?php
-  if($config->debug)
+  if($browser['name'] == 'ie' and $browser['version'] <= 10)
   {
-      js::import($jsRoot . 'jquery/placeholder/min.js');
-  }
-  else
-  {
-      js::import($jsRoot . 'chanzhi.all.ie9.js');
-  }
+      if($config->debug)  js::import($jsRoot . 'jquery/placeholder/min.js');
+      if(!$config->debug) js::import($jsRoot . 'chanzhi.all.ie9.js');
+  }    
   ?>
-  <![endif]-->
   <?php
   js::set('lang', $lang->js);
 
