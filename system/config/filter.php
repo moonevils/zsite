@@ -113,6 +113,21 @@ $filter->user->oauthcallback->get['referer'] = 'reg::base64';
 $filter->message->default = new stdclass();
 $filter->message->default->cookie['cmts'] = 'reg::any';
 
+$filter->product->view = new stdclass();
+$filter->product->view->cookie['cmts'] = 'reg::any';
+
+$filter->article->view = new stdclass();
+$filter->article->view->cookie['cmts'] = 'reg::any';
+
+$filter->blog->view = new stdclass();
+$filter->blog->view->cookie['cmts'] = 'reg::any';
+
+$filter->book->default = new stdclass();
+$filter->book->default->cookie['cmts'] = 'reg::any';
+
+$filter->page->default = new stdclass();
+$filter->page->default->cookie['cmts'] = 'reg::any';
+
 $filter->thread->default = new stdclass();
 $filter->thread->default->cookie['t'] = 'reg::checked';
 
