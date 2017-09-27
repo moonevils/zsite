@@ -153,11 +153,11 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               <li id='countBox'>
                 <span class='meta-name'><?php echo $lang->product->count; ?></span>
                 <span class='meta-value'>
-                  <div class='input-group'>
+                  <span class='input-group'>
                     <span class='input-group-addon'><i class='icon icon-minus'></i></span>
                     <?php echo html::input('count', 1, "class='form-control'"); ?>
                     <span class='input-group-addon'><i class='icon icon-plus'></i></span>
-                  </div>
+                  </span>
                 </span>
               </li>
             </ul>
