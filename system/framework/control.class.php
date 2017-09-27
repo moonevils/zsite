@@ -412,7 +412,7 @@ class control extends baseControl
             $this->output = cn2tw::translate($this->output);
         }
 
-        if(RUN_MODE == 'front') 
+        if(RUN_MODE == 'front' and $this->moduleName != 'source') 
         {
             $this->mergeCSS();
             $this->mergeJS();
@@ -463,13 +463,21 @@ class control extends baseControl
             if($this->config->site->execInfo == 'show') $this->output = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $this->output);
         }
 
-        if(!headers_sent() && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open' and extension_loaded('zlib') && strstr($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip"))
+        if(!headers_sent()
+            && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'
+            && extension_loaded('zlib')
+            && strstr($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip")
+            && $moduleName != 'misc' && $methodName != 'ping')
         {
             $this->output = gzencode($this->output, 9);
             header('Content-Encoding: gzip');
         }
 
-        echo $this->output;
+        if(zget($this->config, 'inFetch') == false and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
+        {
+            $this->output = helper::tidy($this->output);
+        }
+		echo $this->output;
     }
 
     /**
@@ -577,12 +585,37 @@ class control extends baseControl
         $pageCSS = '';
         preg_match_all('/<style>([\s\S]*?)<\/style>/', $this->output, $styles);
         if(!empty($styles[1])) $pageCSS = join('', $styles[1]);
+
         if(!empty($pageCSS))
         {
             $this->output = str_replace("</style>\n", '</style>', $this->output);
             $this->output = preg_replace('/<style>([\s\S]*?)<\/style>/', '', $this->output);
-            if(strpos($this->output, '</head>') != false) $this->output = str_replace('</head>', "<style>{$pageCSS}</style></head>", $this->output);
-            if(strpos($this->output, '</head>') == false) $this->output = "<style>{$pageCSS}</style>" . $this->output;
+        }
+		
+		$params = $this->app->getParams();
+		$params['module'] = $this->moduleName;
+		$params['method'] = $this->methodName;
+        $page = helper::safe64Encode(http_build_query($params));
+        $key  = strtolower("/css/{$page}");
+
+        if($this->config->cache->type == 'close')
+        {
+            $cachePath = $this->app->getTmpRoot() . 'cache' . DS . $this->app->getClientLang() . DS . 'css';
+            if(!is_dir($cachePath)) mkdir($cachePath, 0777, true);
+            file_put_contents($cachePath . DS . $page . ".css", $pageCSS);
+        }
+        else
+        {
+            $this->app->cache->set($key, $pageCSS);
+        }
+
+        $sourceURL  = helper::createLink('source', 'css', "page=$page", '', 'css');
+        $importHtml = "<link rel='stylesheet' href='$sourceURL' type='text/css' media='screen' />\n";
+
+        if(strpos($this->output, $importHtml) === false)
+        {
+            if(strpos($this->output, '</head>') != false) $this->output = str_replace('</head>', "{$importHtml}</head>", $this->output);
+            if(strpos($this->output, '</head>') == false) $this->output = $importHtml . $this->output;
         }
     }
 
@@ -598,17 +631,43 @@ class control extends baseControl
         preg_match_all('/<script>([\s\S]*?)<\/script>/', $this->output, $scripts);
         if(empty($scripts[1][1])) return true;
         $configCode = $scripts[1][0] . $scripts[1][1];
+
         unset($scripts[1][1]);
         unset($scripts[1][0]);
-        
+
         if(!empty($scripts[1])) $pageJS = join(';', $scripts[1]);
+
+   		$params = $this->app->getParams();
+		$params['module'] = $this->moduleName;
+		$params['method'] = $this->methodName;
+        $page = helper::safe64Encode(http_build_query($params));
+        $key  = strtolower("/js/{$page}");
+
+        if($this->config->cache->type == 'close')
+        {
+            $cachePath = $this->app->getTmpRoot() . 'cache' . DS . $this->app->getClientLang() . DS . 'js';
+            if(!is_dir($cachePath)) mkdir($cachePath, 0777, true);
+            file_put_contents($cachePath . DS . $page . ".js", $pageJS);
+        }
+        else
+        {
+            $this->app->cache->set($key, $pageJS);
+        }
+
+        $sourceURL  = helper::createLink('source', 'js', "page=$page", '', 'js');
+        $importHtml =  "<script src='{$sourceURL}' type='text/javascript'></script>\n";
+
         if(!empty($pageJS))
         {
             $this->output = str_replace("</script>\n", '</script>', $this->output);
             $this->output = preg_replace('/<script>([\s\S]*?)<\/script>/', '', $this->output);
-            if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "<script>{$pageJS}</script></body>", $this->output);
-            if(strpos($this->output, '</body>') == false) $this->output .= "<script>$pageJS</script>";
+            if(strpos($this->output, $importHtml) === false)
+            {
+                if(strpos($this->output, '</body>') != false) $this->output = str_replace('</body>', "{$importHtml}</body>", $this->output);
+                if(strpos($this->output, '</body>') == false) $this->output .= $importHtml;
+            }
         }
+
         $pos = strpos($this->output, '<script src=');
         $this->output = substr_replace($this->output, '<script>' . $configCode . '</script>', $pos) . substr($this->output, $pos);
         return true;
