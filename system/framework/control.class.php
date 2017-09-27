@@ -412,7 +412,7 @@ class control extends baseControl
             $this->output = cn2tw::translate($this->output);
         }
 
-        if(RUN_MODE == 'front' and $this->moduleName != 'source') 
+        if(RUN_MODE == 'front' and $this->moduleName != 'source' and in_array($this->viewType, array('html', 'mhtml'))) 
         {
             $this->mergeCSS();
             $this->mergeJS();
