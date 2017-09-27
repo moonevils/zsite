@@ -12,6 +12,7 @@
 $lang->site->common        = "Site";
 
 $lang->site->type            = 'Site Type';
+$lang->site->tidy            = 'Tiny Html';
 $lang->site->requestType     = 'Request Type';
 $lang->site->status          = 'Site Status';
 $lang->site->pauseTip        = 'Message';
@@ -122,6 +123,10 @@ $lang->site->agreementList['close'] = 'Close';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = 'On';
 $lang->site->resetPasswordList['close'] = 'Off';
+
+$lang->site->tidyOptions = array();
+$lang->site->tidyOptions['open']  = 'Open';
+$lang->site->tidyOptions['close'] = 'Close';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = 'On';
