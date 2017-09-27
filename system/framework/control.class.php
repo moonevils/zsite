@@ -412,12 +412,7 @@ class control extends baseControl
             $this->output = cn2tw::translate($this->output);
         }
 
-        if(RUN_MODE == 'front' and $this->moduleName != 'source' and in_array($this->viewType, array('html', 'mhtml'))) 
-        {
-            $this->mergeCSS();
-            $this->mergeJS();
-        }
-        
+       
         $moduleName = $this->moduleName;
         $methodName = $this->methodName;
         if(RUN_MODE == 'front')
@@ -461,6 +456,13 @@ class control extends baseControl
 
             /* Hide execinfo if output has no powerby btn. */
             if($this->config->site->execInfo == 'show') $this->output = str_replace($this->config->execPlaceholder, helper::getExecInfo(), $this->output);
+
+            if($this->moduleName != 'source' and in_array($this->viewType, array('html', 'mhtml'))) 
+            {
+                $this->mergeCSS();
+                $this->mergeJS();
+            }
+
         }
 
         if(!headers_sent()
