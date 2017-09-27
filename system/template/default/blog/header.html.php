@@ -92,7 +92,8 @@ if(!empty($sina->verification)) echo $sina->verification;
 if(!empty($qq->verification))   echo $qq->verification;
 if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 ?>
-<!--[if lt IE 9]>
+<?php $browser = helper::getBrowser(); ?>
+<?php if($browser['name'] == 'ie' and $browser['version'] <= 9):?>
 <?php
 if($config->debug)
 {
@@ -104,19 +105,14 @@ else
     js::import($jsRoot . 'chanzhi.all.ie8.js');
 }
 ?>
-<![endif]-->
-<!--[if lt IE 10]>
+<?php endif;?>
 <?php
-if($config->debug)
+if($browser['name'] == 'ie' and $browser['version'] <= 10)
 {
-    js::import($jsRoot . 'jquery/placeholder/min.js');
-}
-else
-{
-    js::import($jsRoot . 'chanzhi.all.ie9.js');
+    if($config->debug)  js::import($jsRoot . 'jquery/placeholder/min.js');
+    if(!$config->debug) js::import($jsRoot . 'chanzhi.all.ie9.js');
 }
 ?>
-<![endif]-->
 <?php
 $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
