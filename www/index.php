@@ -21,6 +21,28 @@ define('RUN_MODE', 'front');
 /* Load the framework. */
 include 'loader.php';
 
+/* If static site deployed in localhost. */
+if(is_file('static.txt'))
+{
+    helper::import($systemRoot . 'lib/mobile/mobile.class.php');    
+
+    if(class_exists('mobile')) 
+    {
+        $mobile = new mobile();
+        $device = ($mobile->isMobile() and !$mobile->isTablet()) ? 'mobile' : 'desktop';
+    }
+    else
+    {
+        $device = 'desktop';
+    }
+
+    if($device == 'mobile')
+    {
+        if(is_file('home.mhtml')) die(file_get_contents('home.mhtml'));
+    }
+    if(is_file('home.html')) die(file_get_contents('home.html'));
+}
+
 if(isset($_GET['requestType']) && $_GET['requestType'] == 'pathinfo') die('pathinfo');
 
 /* Instance the app and run it. */
@@ -39,53 +61,6 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 if($app->config->site->status == 'pause')
 {
     die("<div style='text-align:center'>" . htmlspecialchars_decode($app->config->site->pauseTip, ENT_QUOTES) . '</div>');
-}
-
-/* Check site static status. */
-if(empty($_SERVER['REQUEST_URI']) or strpos($_SERVER['REQUEST_URI'], '/index.php?') !== 0)
-{
-    if(isset($app->config->site->staticStatus) && $app->config->site->staticStatus == 'open' && isset($app->config->site->staticDeploy) && $app->config->site->staticDeploy == 'localhost')
-    {
-        $pathInfo   = $app->getPathInfo();
-        $staticRoot = $app->getTmpRoot() . 'www' . DS;
-        if($app->clientDevice == 'mobile')
-        {
-            $mobileRoot = $staticRoot . 'mobile' . DS;
-            if($pathInfo)
-            {
-                if(strpos($pathInfo, '.mhtml') === false && strpos($pathInfo, '.xml') === false)
-                {
-                    $filePath = $mobileRoot . $pathInfo . DS . 'index.mhtml';
-                }
-                else
-                {
-                    $filePath = $mobileRoot . $pathInfo;
-                }  
-            }
-            else
-            {
-                $filePath = $mobileRoot . 'index.mhtml';
-            }
-            if(is_file($filePath)) die(file_get_contents($filePath));
-        }
-        $desktopRoot = $staticRoot . 'desktop' . DS;
-        if($pathInfo)
-        {
-            if(strpos($pathInfo, '.html') === false && strpos($pathInfo, '.xml') === false)
-            {
-                $filePath = $desktopRoot . $pathInfo . DS . 'index.html';
-            }
-            else
-            {
-                $filePath = $desktopRoot . $pathInfo;
-            }  
-        }
-        else
-        {
-            $filePath = $desktopRoot . 'index.html';
-        }
-        if(is_file($filePath)) die(file_get_contents($filePath));
-    }
 }
 
 $app->parseRequest();
