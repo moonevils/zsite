@@ -675,6 +675,7 @@ class baseControl
      */
     public function fetch($moduleName = '', $methodName = '', $params = array(), $appName = '')
     {
+        $this->config->inFetch = true;
         /**
          * 如果模块名为空，则调用该模块、该方法。
          * If the module name is empty, then use the current module and method.
@@ -776,6 +777,7 @@ class baseControl
 
         chdir($currentPWD);
 
+        $this->config->inFetch = false;
         /**
          * 返回内容。
          * Return the content. 
