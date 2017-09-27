@@ -473,7 +473,7 @@ class control extends baseControl
             header('Content-Encoding: gzip');
         }
 
-        if($this->config->inFetch == false and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
+        if(zget($this->config, 'inFetch') == false and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
         {
             $this->output = helper::tidy($this->output);
         }
