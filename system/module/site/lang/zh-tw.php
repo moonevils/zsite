@@ -71,6 +71,7 @@ $lang->site->setsensitive     = '敏感詞設置';
 $lang->site->filterSensitive  = '敏感詞過濾';
 $lang->site->setBlacklist     = '黑名單管理';
 $lang->site->mobileTemplate   = '移動模板';
+$lang->site->gzipOutput       = 'gzip輸出';
 $lang->site->score            = '積分';
 $lang->site->setCounts        = '積分規則';
 $lang->site->front            = '網站瀏覽';
@@ -174,6 +175,9 @@ $lang->site->frontList['guest'] = '不需要登錄';
 $lang->site->mobileTemplateList['open']  = '啟用';
 $lang->site->mobileTemplateList['close'] = '禁用';
 
+$lang->site->gzipOutputList['open']  = '啟用';
+$lang->site->gzipOutputList['close'] = '禁用';
+
 $lang->site->scoreList['open']  = '啟用';
 $lang->site->scoreList['close'] = '禁用';
 
@@ -238,6 +242,7 @@ $lang->site->customizableList = new stdclass();
 $lang->site->customizableList->article = '文章列表數量';
 $lang->site->customizableList->product = '產品列表數量';
 $lang->site->customizableList->blog    = '博客列表數量';
+$lang->site->customizableList->book    = '手冊列表數量';
 $lang->site->customizableList->forum   = '論壇列表數量';
 $lang->site->customizableList->reply   = '回帖列表數量';
 $lang->site->customizableList->message = '留言列表數量';
@@ -273,3 +278,5 @@ $lang->site->fileAuthority = '需要修改寫入檔案的權限，Linux下的運
 $lang->site->fileRequired  = '需要創建檔案，Linux下的運行命令為<code>%s</code>';
 
 $lang->site->wechatLoginTip = '使用微信登錄需要開啟PHP的openssl擴展';
+$lang->site->noZlib         = '啟用gz輸出需要開啟PHP的zlib擴展';
+$lang->site->gzipOn         = 'apache已經安裝gzip擴展，無需再啟用gzip輸出';

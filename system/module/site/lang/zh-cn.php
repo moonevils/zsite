@@ -12,6 +12,7 @@
 $lang->site->common        = "站点";
 
 $lang->site->type             = '站点类型';
+$lang->site->tidy             = '代码美化';
 $lang->site->requestType      = '访问类型';
 $lang->site->status           = '站点状态';
 $lang->site->pauseTip         = '暂停提示';
@@ -122,6 +123,10 @@ $lang->site->agreementList['close'] = '关闭';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = '开启';
 $lang->site->resetPasswordList['close'] = '关闭';
+
+$lang->site->tidyOptions = array();
+$lang->site->tidyOptions['open']  = '开启';
+$lang->site->tidyOptions['close'] = '关闭';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '开启';

@@ -220,6 +220,15 @@ $lang->block->navTypeList->mobile_top    = 'Mobile Top';
 $lang->block->navTypeList->mobile_bottom = 'Mobile Bottom';
 $lang->block->navTypeList->mobile_blog   = 'Mobile Blog';
 
+$lang->block->book = new stdclass();
+$lang->block->book->showType = 'Show';
+
+$lang->block->book->sortList['order'] = 'Order';
+$lang->block->book->sortList['time']  = 'Time';
+
+$lang->block->book->showTypeList['block'] = 'Block';
+$lang->block->book->showTypeList['list']  = 'List';
+
 $lang->block->sideGrid  = 'Sidebar Width';
 $lang->block->sideFloat = 'Sidebar Position ';
 

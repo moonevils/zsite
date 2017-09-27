@@ -12,6 +12,7 @@
 $lang->site->common        = "Site";
 
 $lang->site->type            = 'Site Type';
+$lang->site->tidy            = 'Tiny Html';
 $lang->site->requestType     = 'Request Type';
 $lang->site->status          = 'Site Status';
 $lang->site->pauseTip        = 'Message';
@@ -71,6 +72,7 @@ $lang->site->setsensitive     = 'Sensitive Word Settings';
 $lang->site->filterSensitive  = 'Sensitive Word Filter';
 $lang->site->setBlacklist     = 'Blacklist';
 $lang->site->mobileTemplate   = 'Mobile Site';
+$lang->site->gzipOutput       = 'gzip output';
 $lang->site->score            = 'Points';
 $lang->site->setCounts        = 'Point Rules';
 $lang->site->front            = 'Website Access';
@@ -121,6 +123,10 @@ $lang->site->agreementList['close'] = 'Close';
 $lang->site->resetPasswordList = array();
 $lang->site->resetPasswordList['open']  = 'On';
 $lang->site->resetPasswordList['close'] = 'Off';
+
+$lang->site->tidyOptions = array();
+$lang->site->tidyOptions['open']  = 'Open';
+$lang->site->tidyOptions['close'] = 'Close';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = 'On';
@@ -173,6 +179,9 @@ $lang->site->frontList['guest'] = 'Guest';
 
 $lang->site->mobileTemplateList['open']  = 'On';
 $lang->site->mobileTemplateList['close'] = 'Off';
+
+$lang->site->gzipOutputList['open']  = 'On';
+$lang->site->gzipOutputList['close'] = 'Off';
 
 $lang->site->scoreList['open']  = 'On';
 $lang->site->scoreList['close'] = 'Off';
@@ -238,6 +247,7 @@ $lang->site->customizableList = new stdclass();
 $lang->site->customizableList->article = 'Article List';
 $lang->site->customizableList->product = 'Product List';
 $lang->site->customizableList->blog    = 'Blog List';
+$lang->site->customizableList->book    = 'Book List';
 $lang->site->customizableList->forum   = 'Forum List';
 $lang->site->customizableList->reply   = 'Reply List';
 $lang->site->customizableList->message = 'Message List';
@@ -273,3 +283,5 @@ $lang->site->fileAuthority = 'You have to edit the privilege to write the file. 
 $lang->site->fileRequired  = 'You have to to create the file. In Linux, run the command<code>%s</code>.';
 
 $lang->site->wechatLoginTip = 'It requires the extension openssl of php to use wechat login';
+$lang->site->noZlib         = 'It requires the extension zlib of php to use gzip output.';
+$lang->site->gzipOn         = 'Apache has been installed gzip extension, no need to enable gzip output.';

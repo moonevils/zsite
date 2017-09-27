@@ -233,6 +233,40 @@ class helper extends baseHelper
         }
         return $rgb;
     }
+
+    /**
+     * Tidy function.
+     * 
+     * @param  string    $html 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function tidy($html)
+    {
+        $config = array (
+            'show-errors' => 0,
+            'wrap' => 300,
+            'tab-size' => 4,
+            'write-back' => false,
+            'show-info' => true,
+            'quiet' => false,
+            'indent' => 2,
+            'indent-spaces' => 2,
+            'output-html' => true,
+            'clean' => false,
+            'drop-empty-elements' => false,
+            'drop-empty-paras' => false,
+            'fix-bad-comments' => false,
+            'split' => false,
+            'merge-divs' => false,
+            'merge-spans' => false
+        );
+
+        $html = tidy_parse_string($html, $config, "utf8");
+        $html->cleanRepair();
+        return $html->value;
+    }
 }
 
 /**
@@ -244,26 +278,26 @@ class helper extends baseHelper
  */
 function getHomeRoot($langCode = '')
 {
-    global $config, $app;
-    $requestType = $config->requestType;
-    if(RUN_MODE == 'admin') $config->requestType = zget($config, 'frontRequestType', $config->requestType);
+	global $config, $app;
+	$requestType = $config->requestType;
+	if(RUN_MODE == 'admin') $config->requestType = zget($config, 'frontRequestType', $config->requestType);
 
-    $langCode = $langCode == '' ? $config->langCode : $langCode;
-    $defaultLang = isset($config->defaultLang) ?  $config->defaultLang : $config->default->lang;
-    if($langCode == $config->langsShortcuts[$defaultLang])
-    {
-        $config->requestType = $requestType;
-        return $config->webRoot;
-    }
-    $homeRoot = $config->webRoot;
+	$langCode = $langCode == '' ? $config->langCode : $langCode;
+	$defaultLang = isset($config->defaultLang) ?  $config->defaultLang : $config->default->lang;
+	if($langCode == $config->langsShortcuts[$defaultLang])
+	{
+		$config->requestType = $requestType;
+		return $config->webRoot;
+	}
+	$homeRoot = $config->webRoot;
 
-    if($langCode and $config->requestType == 'PATH_INFO') $homeRoot = $config->webRoot . $langCode; 
-    if($langCode and $config->requestType == 'PATH_INFO2') $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
-    if($langCode and $config->requestType == 'GET') $homeRoot = $config->webRoot . 'index.php?l=' . "$langCode";
-    if($config->requestType != 'GET') $homeRoot = rtrim($homeRoot, '/') . '/';
+	if($langCode and $config->requestType == 'PATH_INFO') $homeRoot = $config->webRoot . $langCode; 
+	if($langCode and $config->requestType == 'PATH_INFO2') $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
+	if($langCode and $config->requestType == 'GET') $homeRoot = $config->webRoot . 'index.php?l=' . "$langCode";
+	if($config->requestType != 'GET') $homeRoot = rtrim($homeRoot, '/') . '/';
 
-    $config->requestType = $requestType;
-    return $homeRoot;
+	$config->requestType = $requestType;
+	return $homeRoot;
 }
 
 /**
@@ -274,19 +308,19 @@ function getHomeRoot($langCode = '')
  */
 function checkAdminEntry()
 {
-    if(strpos($_SERVER['PHP_SELF'], '/admin.php') === false) return true; 
+	if(strpos($_SERVER['PHP_SELF'], '/admin.php') === false) return true; 
 
-    $path  = dirname($_SERVER['SCRIPT_FILENAME']);
-    $files = scandir($path);
-    $defaultFiles = array('admin.php', 'index.php', 'install.php', 'loader.php', 'upgrade.php');
-    foreach($files as $file)
-    {
-        if(strpos($file, '.php') !== false and !in_array($file, $defaultFiles))
-        {
-            $contents = file_get_contents($path . '/' . $file);
-            if(strpos($contents, "'RUN_MODE', 'admin'") && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header("location: " . getWebRoot()));
-        }
-    }
+	$path  = dirname($_SERVER['SCRIPT_FILENAME']);
+	$files = scandir($path);
+	$defaultFiles = array('admin.php', 'index.php', 'install.php', 'loader.php', 'upgrade.php');
+	foreach($files as $file)
+	{
+		if(strpos($file, '.php') !== false and !in_array($file, $defaultFiles))
+		{
+			$contents = file_get_contents($path . '/' . $file);
+			if(strpos($contents, "'RUN_MODE', 'admin'") && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header("location: " . getWebRoot()));
+		}
+	}
 }
 
 /**
@@ -299,10 +333,10 @@ function checkAdminEntry()
  */
 function formatTime($time, $format = '')
 {
-    $time = str_replace('0000-00-00', '', $time);
-    $time = str_replace('00:00:00', '', $time);
-    if($format) return date($format, strtotime($time));
-    return trim($time);
+	$time = str_replace('0000-00-00', '', $time);
+	$time = str_replace('00:00:00', '', $time);
+	if($format) return date($format, strtotime($time));
+	return trim($time);
 }
 
 /**
@@ -314,13 +348,13 @@ function formatTime($time, $format = '')
  */
 function getFileMimeType($file)
 {
-    if(function_exists('mime_content_type')) return mime_content_type($file);
-    if(function_exists('finfo_open'))
-    {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        return finfo_file($finfo, $file); 
-    }
-    return false;
+	if(function_exists('mime_content_type')) return mime_content_type($file);
+	if(function_exists('finfo_open'))
+	{
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		return finfo_file($finfo, $file); 
+	}
+	return false;
 }
 
 /**
@@ -331,17 +365,17 @@ function getFileMimeType($file)
  */
 function k()
 {
-    global $app, $lang;
+	global $app, $lang;
 
-    $codeLen  = strlen($app->siteCode);
-    $keywords = explode(';', $lang->k);
-    $count    = count($keywords);
+	$codeLen  = strlen($app->siteCode);
+	$keywords = explode(';', $lang->k);
+	$count    = count($keywords);
 
-    $sum = 0;
-    for($i = 0; $i < $codeLen; $i++) $sum += ord($app->siteCode{$i});
+	$sum = 0;
+	for($i = 0; $i < $codeLen; $i++) $sum += ord($app->siteCode{$i});
 
-    $key = $sum % $count;
-    return $keywords[$key];
+	$key = $sum % $count;
+	return $keywords[$key];
 }
 
 /**
@@ -353,22 +387,22 @@ function k()
  */
 function saveInfoToFile($file, $info)
 {    
-    if(!file_exists($file)) return false;
-    if(!is_writable($file)) return false;
+	if(!file_exists($file)) return false;
+	if(!is_writable($file)) return false;
 
-    $time = helper::now(); 
-    $info = print_r($info);
-    file_put_contents($file, $time . "\n");
-    file_put_contents($file, $info . "\n", FILE_APPEND);
+	$time = helper::now(); 
+	$info = print_r($info);
+	file_put_contents($file, $time . "\n");
+	file_put_contents($file, $info . "\n", FILE_APPEND);
 }
 
 function http_build_url($data)
 {
-    $url  = isset( $data['scheme'])  ? "{$data['scheme']}://" : '';
-    $url .= !empty($data['host'])    ? $data['host'] : '';
-    $url .= !empty($data['port'])    ? ":{$data['port']}" : '';
-    $url .= $data['path'];
-    $url .= empty($data['query'])    ? '' : "?{$data['query']}";
-    $url .= empty($data['fragment']) ? '' : "#{$data['fragment']}";
-    return $url;
+	$url  = isset( $data['scheme'])  ? "{$data['scheme']}://" : '';
+	$url .= !empty($data['host'])    ? $data['host'] : '';
+	$url .= !empty($data['port'])    ? ":{$data['port']}" : '';
+	$url .= $data['path'];
+	$url .= empty($data['query'])    ? '' : "?{$data['query']}";
+	$url .= empty($data['fragment']) ? '' : "#{$data['fragment']}";
+	return $url;
 }
