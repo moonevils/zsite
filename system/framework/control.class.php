@@ -597,6 +597,8 @@ class control extends baseControl
 		$params = $this->app->getParams();
 		$params['module'] = $this->moduleName;
 		$params['method'] = $this->methodName;
+        $params['device'] = $this->clientDevice;
+        $params['lang']   = $this->app->getClientLang();
         $page = helper::safe64Encode(http_build_query($params));
         $key  = strtolower("/css/{$page}");
 
@@ -642,6 +644,8 @@ class control extends baseControl
    		$params = $this->app->getParams();
 		$params['module'] = $this->moduleName;
 		$params['method'] = $this->methodName;
+        $params['device'] = $this->clientDevice;
+        $params['lang']   = $this->app->getClientLang();
         $page = helper::safe64Encode(http_build_query($params));
         $key  = strtolower("/js/{$page}");
 
