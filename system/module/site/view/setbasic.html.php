@@ -34,7 +34,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->mobileTemplate;?></th> 
-          <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, $this->config->framework->detectDevice[$this->app->clientLang] ? 'open' : 'close', "class='checkbox'");?></td><td></td>
+          <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, $this->config->site->mobileTemplate, "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->gzipOutput;?></th> 

@@ -59,8 +59,6 @@ class source extends control
             $cacheFile = $this->app->getTmpRoot() . 'cache' . DS . $this->app->getClientLang() . DS . 'js' . DS . $page . '.js';
             $js        = file_get_contents($cacheFile);
         }
-
-        $key = strtolower("/js/$page");
         $page = helper::safe64Decode($page);
         echo "/* JS for $page */\n";
         echo $js;
