@@ -412,7 +412,6 @@ class control extends baseControl
             $this->output = cn2tw::translate($this->output);
         }
 
-       
         $moduleName = $this->moduleName;
         $methodName = $this->methodName;
         if(RUN_MODE == 'front')
@@ -465,20 +464,22 @@ class control extends baseControl
 
         }
 
+        if(!zget($this->config, 'inFetch') and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
+        {
+            $this->output = helper::tidy($this->output);
+        }
+
         if(!headers_sent()
             && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'
             && extension_loaded('zlib')
             && strstr($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip")
+            && !zget($this->config, 'inFetch')
             && $moduleName != 'misc' && $methodName != 'ping')
         {
             $this->output = gzencode($this->output, 9);
             header('Content-Encoding: gzip');
         }
 
-        if(zget($this->config, 'inFetch') == false and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
-        {
-            $this->output = helper::tidy($this->output);
-        }
 		echo $this->output;
     }
 
