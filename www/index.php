@@ -22,7 +22,7 @@ define('RUN_MODE', 'front');
 include 'loader.php';
 
 /* If static site deployed in localhost. */
-if(is_file('static.txt'))
+if(is_file('static.txt') && isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] == DIRECTORY_SEPARATOR . 'index.php')
 {
     helper::import($systemRoot . 'lib/mobile/mobile.class.php');    
 
