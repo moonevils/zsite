@@ -59,7 +59,6 @@ class backup extends control
                         $backupFile->files[$this->backupPath . $backupFile->name . '.template.zip.php'] = abs(filesize($this->backupPath . $backupFile->name . '.template.zip.php'));
                     }
 
-
                     $backups[$backupFile->name] = $backupFile;
                 }
             }

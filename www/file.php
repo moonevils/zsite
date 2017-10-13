@@ -32,7 +32,6 @@ if(!file_exists($filePath)) $filePath = $realPath;
 
 if(!file_exists($filePath)) die('The file does not exist!');
 
-$imageExtensions = array('jpeg', 'jpg', 'gif', 'png');
 $mime = getMimetype($_GET['extension']);
 header("Content-type: $mime");
 
@@ -586,5 +585,5 @@ function getMimetype($extension)
         'sisx' => 'x-epoc/x-sisx-app',
         'vrm' => 'x-world/x-vrml',
     );
-     return isset($mimeTypes[$extension]) ? $mimeTypes[$extension] : '';
+    return isset($mimeTypes[$extension]) ? $mimeTypes[$extension] : '';
 }
