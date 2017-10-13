@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `eps_action` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_history`;
-CREATE TABLE `eps_history` (
+CREATE TABLE IF NOT EXISTS `eps_history` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `action` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `field` varchar(30) NOT NULL DEFAULT '',
