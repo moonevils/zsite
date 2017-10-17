@@ -15,6 +15,7 @@ $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
 if(empty($content->category)) $content->category = 0;
+if(empty($content->limit))    $content->limit = 6;
 $image = isset($content->image) ? true : false;
 $products = $this->loadModel('product')->$method($content->category, $content->limit, $image);
 ?>
