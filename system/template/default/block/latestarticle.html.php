@@ -17,7 +17,7 @@ $themeRoot = $this->config->webRoot . 'theme/';
 /* Decode the content and get articles. */
 $content  = json_decode($block->content);
 $method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)));
-$articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
+$articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, !empty($content->limit) ? $content->limit : 6);
 if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
