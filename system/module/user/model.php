@@ -223,7 +223,7 @@ class userModel extends model
         $user->password = $this->createPassword($this->post->password1, $user->account); 
         
         $this->dao->insert(TABLE_USER)
-            ->data($user, $skip = 'password1,password2,groups,agreement')
+            ->data($user, $skip = 'password1,password2,groups,agreement,token')
             ->autoCheck()
             ->batchCheck($this->config->user->require->register, 'notempty')
             ->check('account', 'unique')
