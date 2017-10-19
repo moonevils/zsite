@@ -396,7 +396,7 @@ class fileModel extends model
         {   
             $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
             if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
-            if(stripos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
+            if(stripos(',' . trim($this->config->file->allowed, ',') . ',', ',' . $file['extension'] . ',') === false)
             {
                 if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
                 $file['pathname'] .= '.txt';
@@ -790,7 +790,7 @@ class fileModel extends model
 
             $realPathName = $this->savePath . $this->getSaveName($fileInfo->pathname);
             $imageSize    = array('width' => 0, 'height' => 0);
-            if(stripos($this->config->file->allowed, ',' . $extension . ',') === false)
+            if(stripos(",{$this->config->file->allowed},", ',' . $extension . ',') === false)
             {
                 if(!move_uploaded_file($file['tmpname'], $realPathName)) return false;
                 $fileInfo->pathname .= '.txt';
@@ -1201,7 +1201,7 @@ class fileModel extends model
         $now = helper::now();
         if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
         if($objectType == 'themePackage')  $this->config->file->allowed  = ',zip,';
-        if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
+        if(stripos(',' . trim($this->config->file->allowed, ',') . ',', ',' . $file['extension'] . ',') === false)
         {
             $file['pathname'] .= '.txt';
         }
