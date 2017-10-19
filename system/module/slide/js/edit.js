@@ -23,13 +23,14 @@ $(document).ready(function()
     $('.button-target').change();
     $('.global-button').change();
 
-    $('#image').hide();
+    $('#sourceImage').hide();
     $('#uploadFile').hide();
 })
 
 function fileHide()
 {
-    $('#image').show();
+    $('#sourceImage').attr('disabled', false);
+    $('#sourceImage').show();
     $('#uploadFile').show();
     $('[name*=files]').hide();
 }
@@ -37,6 +38,7 @@ function fileHide()
 function fileShow()
 {
     $('[name*=files]').show();
-    $('#image').hide();
+    $('#sourceImage').hide();
     $('#uploadFile').hide();
+    $('#sourceImage').attr('disabled', true);
 }

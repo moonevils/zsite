@@ -37,7 +37,7 @@
               <?php 
                 if($file->isImage and $file->existStatus == 'yes')
                 {
-                  echo html::a(helper::createLink('file', 'download', "fileID=$file->id"), html::image("{$config->webRoot}file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=&extension={$file->extension}", "class='image-small'"), "target='_blank' data-toggle='lightbox'");
+                  echo html::a(helper::createLink('file', 'download', "fileID=$file->id"), html::image("{$config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&t={$file->extension}&v={$this->config->site->lastUpload}", "class='image-small'"), "target='_blank' data-toggle='lightbox'");
                 }
                 else
                 {

@@ -68,7 +68,7 @@ if(!empty($files))
         $file->ext       = $file->extension;
         $file->addedDate = substr($file->addedDate, 2, 14);
         $file->remoteId  = $file->id;
-        if($file->isImage) $file->previewImage = "{$config->webRoot}file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}";
+        if($file->isImage) $file->previewImage = "{$config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&s=smallURL&t={$file->extension}&v={$this->config->site->lastUpload}";
         $filesArray[] = $file;
     }
 }

@@ -79,7 +79,7 @@ KindEditor.plugin('filemanager', function(K) {
 		}
 		var elList = [];
 		function bindEvent(el, result, data, createFunc) {
-		  var fileUrl = K.formatUrl(config.webRoot + 'file.php?pathname=' + data.pathname + '&imageSize=' + data.imagesize + '&extension=' + data.filetype, 'absolute'),
+		  var fileUrl = K.formatUrl(config.webRoot + 'file.php?f=' + data.pathname + '&s=' + data.imagesize + '&t=' + data.filetype, 'absolute'),
 				dirPath = encodeURIComponent(result.current_dir_path + data.filename + '/');
 			if (data.is_dir) {
 				el.click(function(e) {
@@ -167,7 +167,7 @@ KindEditor.plugin('filemanager', function(K) {
 						K(this).removeClass('ke-on');
 					});
 				div.append(photoDiv);
-				var fileUrl = config.webRoot + 'file.php?pathname=' + data.pathname + '&imageSize=' + data.imagesize + '&extension=' + data.filetype,
+				var fileUrl = config.webRoot + 'file.php?f=' + data.pathname + '&s=' + data.imagesize + '&t=' + data.filetype,
 					iconUrl = data.is_dir ? imgPath + 'folder-64.gif' : (data.is_photo ? fileUrl : imgPath + 'file-64.gif');
 				var img = K('<img src="' + iconUrl + '" style="max-width:80px;max-height:80px" alt="' + data.filename + '" />');
 				if (!data.is_dir || data.has_file) {

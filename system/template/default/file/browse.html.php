@@ -20,7 +20,7 @@
         <?php
         if($file->isImage)
         {
-            echo html::a(inlink('download', "id=$file->id"), html::image("{$config->webRoot}file.php?pathname={$file->pathname}objectType={$file->objectType}&imageSize=smallURL&extension="{$file->extension}", "class='image-small' title='{$file->title}'"), "target='_blank'");
+            echo html::a(inlink('download', "id=$file->id"), html::image("{$config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&s=smallURL&t={$file->extension}&v={$this->config->site->lastUpload}", "class='image-small' title='{$file->title}'"), "target='_blank'");
             if($file->primary == 1) echo '<small class="label label-success">'. $lang->file->primary .'</small>';
         }
         else

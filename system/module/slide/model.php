@@ -106,13 +106,13 @@ class slideModel extends model
     public function update($id)
     {
         $slide = $this->getByID($id);
-        $image = $this->uploadImage($slide->group);
+        $image = empty($_POST['sourceImage']) ? $this->uploadImage($slide->group) : $this->post->sourceImage;
 
         $data = fixer::input('post')
             ->stripTags('summary', $this->config->allowedTags->front)
             ->setIf(!empty($image), 'image', $image)
             ->setDefault('target', 0)
-            ->remove('files,globalButton')
+            ->remove('files,globalButton,sourceImage')
             ->get();
 
         if($data->backgroundType == 'image') $data->image = str_replace(rtrim($this->app->getWebRoot(), '/'), '', $data->image);
@@ -217,7 +217,7 @@ class slideModel extends model
         $imageIdList = array_keys($fileTitles);
         $image = $this->dao->select('*')->from(TABLE_FILE)->where('id')->eq($imageIdList[0])->fetch(); 
 
-        return "{$this->config->webRoot}file.php?pathname={$image->pathname}&objectType=slide&imageSize=&extension={$image->extension}";
+        return "{$this->config->webRoot}file.php?f={$image->pathname}&o=slide&t={$image->extension}&v={$this->config->site->lastUpload}";
     }
 
     /**
