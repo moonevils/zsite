@@ -158,11 +158,11 @@ class fileModel extends model
                 if($file->objectType == 'product') continue;
                 if($file->editor)
                 {
-                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image("{$this->config->webRoot}file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}"), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image("{$this->config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&s=smallURL&t={$file->extension}&v={$this->config->site->lastUpload}"), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
                 else
                 {
-                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image("{$this->config->webRoot}file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}"), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image("{$this->config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&s=smallURL&t={$file->extension}&v={$this->config->site->lastUpload}"), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
             }
             else
@@ -983,7 +983,8 @@ class fileModel extends model
             $fileID = $this->dao->lastInsertID();
             $_SESSION['album'][$uid][] = $fileID;
 
-            $data = str_replace($out[1][$key], "{$this->config->webRoot}file.php?pathname={$file['pathname']}&objectType={$file['objectType']}&imageSize=&extension={$file['extension']}", $data);
+            $saveName = $this->getSaveName($file['pathname']);
+            $data = str_replace($out[1][$key], "{$this->config->webRoot}file.php?f=$saveName&s=fullURL&t={$file['extension']}", $data);
         }
 
         return $data;
@@ -1443,8 +1444,8 @@ class fileModel extends model
     public function processImgURL($data, $editorList, $uid = '')
     {
         if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
-        $readLinkReg = $this->config->webRoot . 'file.php?pathname=(%pathname%)&extension=(%viewType%)';
-        $readLinkReg = str_replace(array('%pathname%', '%viewType%', '?', '/'), array('[0-9]{6}/f_[a-z0-9]{32}', '\w+', '\?', '\/'), $readLinkReg);
+        $readLinkReg = $this->config->webRoot . 'file.php?f=(%pathname%)&s=(%imageSize%)&t=(%viewType%)';
+        $readLinkReg = str_replace(array('%pathname%', '%imageSize%', '%viewType%', '?', '/'), array('[0-9]{6}/f_[a-z0-9]{32}', '\w+', '\w+', '\?', '\/'), $readLinkReg);
         foreach($editorList as $editorID)
         {
             if(empty($editorID) or empty($data->$editorID)) continue;
@@ -1452,7 +1453,7 @@ class fileModel extends model
             $pasteData = $this->pasteImage($data->$editorID, $uid);
             if($pasteData) $data->$editorID = $pasteData;
 
-            $imgURL = '{$1.$2}';
+            $imgURL = '{$1-$2.$3}';
             $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="' . $imgURL . '" ', $data->$editorID);
             $data->$editorID = preg_replace("/ src=\"" . htmlspecialchars($readLinkReg) . "\" /", ' src="' . $imgURL . '" ', $data->$editorID);
         }
@@ -1474,7 +1475,8 @@ class fileModel extends model
         foreach($fields as $field)
         {
             if(empty($field) or empty($data->$field)) continue;
-            $data->$field = preg_replace('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}" /', ' src="' . $this->config->webRoot . 'file.php?pathname=$1&extension=$3" ', $data->$field);
+            $data->$field = preg_replace('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}" /', ' src="' . $this->config->webRoot . 'file.php?f=$1&t=$3&v=' . $this->config->site->lastUpload . '" ', $data->$field);
+            $data->$field = preg_replace('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\-(\w+))(\.(\w+))?}" /', ' src="' . $this->config->webRoot . 'file.php?f=$1&s=$3&t=$5&v=' . $this->config->site->lastUpload . '" ', $data->$field);
         }
 
         return $data;

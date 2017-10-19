@@ -9,7 +9,7 @@
       <div class='col-md-12' style="width:<?php echo 100 / $recPerRow;?>%" data-recperrow="<?php echo $recPerRow;?>">
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
-          <div class='media' style='background-image: url(<?php echo "{$this->config->webRoot}file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=middleURL&extension={$product->image->primary->extension}";?>);'><?php echo html::image("{$this->config->webRoot}file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=middleURL&extension={$product->image->primary->extension}", "title='{$title}' alt='{$product->name}'"); ?></div>
+          <div class='media' style='background-image: url(<?php echo "{$this->config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}";?>);'><?php echo html::image("{$this->config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading' style='min-height:20px;'>
             <?php if(isset($content->alignTitle) and $content->alignTitle == 'middle'):?>
             <?php $showPriceOrViews = (isset($content->showPrice) and $content->showPrice) or (isset($content->showViews) and $content->showViews);?>

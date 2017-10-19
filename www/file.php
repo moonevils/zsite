@@ -1,8 +1,9 @@
 <?php
-$pathname   = isset($_GET['pathname']) ? $_GET['pathname'] : '';
-$objectType = isset($_GET['objectType']) ? $_GET['objectType'] : '';
-$imageSize  = isset($_GET['imageSize']) ? $_GET['imageSize'] : '';
-$extension  = isset($_GET['extension']) ? $_GET['extension'] : '';
+$pathname   = isset($_GET['f']) ? $_GET['f'] : '';
+$objectType = isset($_GET['o']) ? $_GET['o'] : '';
+$imageSize  = isset($_GET['s']) ? $_GET['s'] : '';
+$extension  = isset($_GET['t']) ? $_GET['t'] : '';
+$version    = isset($_GET['v']) ? $_GET['v'] : '';
 
 $dataRoot = rtrim(dirname($_SERVER['SCRIPT_FILENAME']), '/') . '/data/';
 
@@ -32,7 +33,7 @@ if(!file_exists($filePath)) $filePath = $realPath;
 
 if(!file_exists($filePath)) die('The file does not exist!');
 
-$mime = getMimetype($_GET['extension']);
+$mime = getMimetype($extension);
 header("Content-type: $mime");
 
 $handle = fopen($filePath, "r");

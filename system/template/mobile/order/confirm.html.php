@@ -46,7 +46,7 @@
                 }
                 else
                 {
-                    echo html::image("{$config->webRoot}file.php?pathname={$product->image->primary->pathname}&imageSize=middleURL&extension={$product->image->primary->extension}", "title='{$product->name}' alt='{$product->name}'");
+                    echo html::image("{$config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$product->name}' alt='{$product->name}'");
                 }
                 ?>
               </div>
