@@ -26,10 +26,12 @@ class companyModel extends model
             {
                 if($item == 'qq') 
                 {
+                    $value = str2Entity($value);
                     $contact->qq = html::a("http://wpa.qq.com/msgrd?v=3&uin={$value}&site={$this->config->company->name}&menu=yes", $value, "target='_blank'");
                 }
                 else if($item == 'email')
                 {
+                    $value = str2Entity($value);
                     $contact->email = html::mailto($value, $value);
                 }
                 else if($item == 'weibo')
@@ -52,6 +54,7 @@ class companyModel extends model
                     $phones = array();
                     foreach($values as $value) 
                     {
+                        $value = str2Entity($value);
                         if($mobile->isMobile())
                         {
                             $phones[] = html::a("tel:$value", $value);

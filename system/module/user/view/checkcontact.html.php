@@ -11,7 +11,7 @@
   <tr>
     <th class='w-80px'><?php echo $lang->user->email;?></th>
     <td>
-      <?php echo $user->email;?>
+      <?php echo str2Entity($user->email);?>
       <?php if(zget($user, 'emailCertified', 0) == 1) echo "<i class='icon icon-envelope'> </i>";?>
     </td>
   </tr> 
@@ -19,7 +19,7 @@
   <tr>
     <th class='w-80px'><?php echo $lang->user->mobile;?></th>
     <td>
-      <?php echo $user->mobile;?>
+      <?php echo str2Entity($user->mobile);?>
       <?php if(zget($user, 'mobileCertified', 0) == 1) echo "<i class='icon icon-mobile' title='{$lang->user->certified}'> </i>";?>
     </td>
   </tr> 
@@ -27,13 +27,13 @@
   <?php if(!empty($user->phone)):?>
   <tr>
     <th class='w-80px'><?php echo $lang->user->phone;?></th>
-    <td><?php echo $user->phone;?></td>
+    <td><?php echo str2Entity($user->phone);?></td>
   </tr> 
   <?php endif;?>
   <?php if(!empty($user->qq)):?>
   <tr>
     <th class='w-80px'><?php echo $lang->user->qq;?></th>
-    <td><?php echo $user->qq;?></td>
+    <td><?php echo str2Entity($user->qq);?></td>
   </tr> 
   <?php endif;?>
   <?php if(!empty($user->company)):?>

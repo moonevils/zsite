@@ -51,7 +51,7 @@
       <th><?php echo $lang->order->address;?></th>
       <td>
         <?php $address = json_decode($order->address);?>
-        <?php echo $address->contact . ',' . $address->address . ',' . $address->phone . ',' . $address->zipcode;?>
+        <?php echo $address->contact . ',' . $address->address . ',' . str2Entity($address->phone) . ',' . $address->zipcode;?>
       </td>
     </tr> 
     <?php endif;?>
