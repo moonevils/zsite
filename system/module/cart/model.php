@@ -144,7 +144,7 @@ class cartModel extends model
             $cart[$productID] = $tmp;
         }
 
-        setcookie('cart', json_encode($cart), time() + 60 * 60 * 24);
+        setcookie('cart', json_encode($cart), time() + 60 * 60 * 24, '', '', false, true);
     }
 
     /**
@@ -158,7 +158,7 @@ class cartModel extends model
     {
         $cart = $this->getListByCookie();
         if(isset($cart[$productID])) unset($cart[$productID]);
-        setcookie('cart', json_encode($cart), time() + 60 * 60 * 24);
+        setcookie('cart', json_encode($cart), time() + 60 * 60 * 24, '', '', false, true);
     }
 
     /**
@@ -177,7 +177,7 @@ class cartModel extends model
             $this->dao->insert(TABLE_CART)->data($goods)->exec();
             unset($goodsList[$id]);
         }
-        setcookie('cart', json_encode($goodsList), time() + 60 * 60 * 24);
+        setcookie('cart', json_encode($goodsList), time() + 60 * 60 * 24, '', '', false, true);
     }
 
     /**

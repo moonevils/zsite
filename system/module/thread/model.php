@@ -345,7 +345,7 @@ class threadModel extends model
         $thread = "$thread,";
         $cookie = $this->cookie->t != false ? $this->cookie->t : ',';
         if(strpos($cookie, $thread) === false) $cookie .= $thread;
-        setcookie('t', $cookie , time() + 60 * 60 * 24 * 30);
+        setcookie('t', $cookie , time() + 60 * 60 * 24 * 30, '', '', false, true);
     }
 
     /**
