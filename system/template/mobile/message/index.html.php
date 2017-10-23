@@ -92,7 +92,7 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
             <span class='signed-user-info'>
               <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->realname ;?></strong>
               <?php if($this->session->user->email != ''): ?>
-              <span class='text-muted'>&nbsp;(<?php echo $this->session->user->email;?>)</span>
+              <span class='text-muted'>&nbsp;(<?php echo str2Entity($this->session->user->email);?>)</span>
               <?php endif; ?>
             </span>
             <?php

@@ -33,7 +33,7 @@
               <span><input type='radio' <?php echo $checked;?> name='deliveryAddress' value='<?php echo $address->id;?>'/></span>
               <?php endif;?>
               <strong><?php echo $address->contact;?></strong>
-              <span> <?php echo $address->phone;?></span>
+              <span> <?php echo str2Entity($address->phone);?></span>
               <span class='text-muted'> <?php echo $address->address;?></span>
               <span class='text-muted'> <?php echo $address->zipcode;?></span>
               <span class='pull-right'>

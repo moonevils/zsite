@@ -16,13 +16,12 @@
   <tr>
     <th class='w-80px'><?php echo $lang->order->productInfo;?></th>
     <td>
-        <?php foreach($products as $product):?>
-        <div>
-          <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
-          <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
-        </div>
-        <?php endforeach;?>
-      </dl>
+      <?php foreach($products as $product):?>
+      <div>
+        <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
+        <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
+      </div>
+      <?php endforeach;?>
     </td>
   </tr>
   <tr>
@@ -44,7 +43,7 @@
     <th class='w-80px'><?php echo $lang->order->address;?></th>
     <td>
       <?php $address = json_decode($order->address);?>
-      <?php echo $address->contact . ',' . $address->address . ',' . $address->phone . ',' . $address->zipcode;?>
+      <?php echo $address->contact . ',' . $address->address . ',' . str2Entity($address->phone) . ',' . $address->zipcode;?>
     </td>
   </tr> 
   <tr>

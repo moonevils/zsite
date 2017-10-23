@@ -406,3 +406,41 @@ function http_build_url($data)
 	$url .= empty($data['fragment']) ? '' : "#{$data['fragment']}";
 	return $url;
 }
+
+/**
+ * Set string to entity.
+ * 
+ * @param  string    $string 
+ * @access public
+ * @return string
+ */
+function str2Entity($string)
+{
+    $str2Entities = array();
+    $str2Entities['0'] = '&#x30;';
+    $str2Entities['1'] = '&#x31;';
+    $str2Entities['2'] = '&#x32;';
+    $str2Entities['3'] = '&#x33;';
+    $str2Entities['4'] = '&#x34;';
+    $str2Entities['5'] = '&#x35;';
+    $str2Entities['6'] = '&#x36;';
+    $str2Entities['7'] = '&#x37;';
+    $str2Entities['8'] = '&#x38;';
+    $str2Entities['9'] = '&#x39;';
+    $str2Entities['@'] = '&#x40;';
+
+    $entity = '';
+    for($i = 0; $i < strlen($string); $i++)
+    {
+        if(isset($str2Entities[$string{$i}]))
+        {
+            $entity .= $str2Entities[$string{$i}];
+        }
+        else
+        {
+            $entity .= htmlentities($string{$i});
+        }
+    }
+
+    return $entity;
+}

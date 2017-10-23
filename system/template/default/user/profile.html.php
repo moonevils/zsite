@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->email;?></th>
-            <td id='emailTD'><?php echo $user->email;?></td>
+            <td id='emailTD'><?php echo str2Entity($user->email);?></td>
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->company;?></th>
@@ -34,15 +34,15 @@
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->mobile;?></th>
-            <td id='mobileTD'><?php echo $user->mobile;?></td>
+            <td id='mobileTD'><?php echo str2Entity($user->mobile);?></td>
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->phone;?></th>
-            <td><?php echo $user->phone;?></td>
+            <td><?php echo str2Entity($user->phone);?></td>
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->qq;?></th>
-            <td><?php echo $user->qq;?></td>
+            <td><?php echo str2Entity($user->qq);?></td>
           </tr>
           <tr>
             <th class='text-right'><?php echo $lang->user->gtalk;?></th>
