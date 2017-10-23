@@ -326,7 +326,7 @@ class adminModel extends model
     public function switchLang($lang)
     {
         $langCookieVar = RUN_MODE . 'Lang';
-        setcookie($langCookieVar, $lang, $this->config->cookieLife, $this->config->cookiePath);
+        setcookie($langCookieVar, $lang, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
 
         $user = $this->app->user;
         $user->rights = $this->loadModel('user')->authorize($user);

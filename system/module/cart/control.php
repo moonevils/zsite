@@ -77,7 +77,7 @@ class cart extends control
             if(count($cart) > 0)
             {
                 foreach($cart as $product) $this->cart->add($product->product, $product->count);
-                setcookie('cart', '[]', time() + 60 * 60 * 24);
+                setcookie('cart', '[]', time() + 60 * 60 * 24, '', '', false, true);
             }
             $count = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->fetch('count');
         }

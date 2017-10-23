@@ -548,7 +548,7 @@ class messageModel extends model
                 $messages .= ',' . $messageID;
             }
         }
-        setcookie('cmts', $messages);
+        setcookie('cmts', $messages, 0, '', '', false, true);
     }
 
     /**

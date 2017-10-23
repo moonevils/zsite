@@ -1125,7 +1125,7 @@ class fileModel extends model
     public function sendDownHeader($fileName, $fileType, $content, $fileSize = 0)
     {
         /* Set the downloading cookie, thus the export form page can use it to judge whether to close the window or not. */
-        setcookie('downloading', 1);
+        setcookie('downloading', 1, 0, '', '', false, true);
 
         /* Append the extension name auto. */
         $extension = '.' . $fileType;
