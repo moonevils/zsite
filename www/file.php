@@ -32,6 +32,12 @@ if(!file_exists($filePath)) $filePath = $realPath;
 
 if(!file_exists($filePath)) die('The file does not exist!');
 
+$seconds = 3600 * 24 * 30; 
+$expires = gmdate("D, d M Y H:i:s", time() + $seconds) . " GMT";
+header("Expires: $expires"); 
+header("Pragma: cache");
+header("Cache-Control: max-age=$seconds");
+
 $mime = getMimetype($_GET['extension']);
 header("Content-type: $mime");
 
