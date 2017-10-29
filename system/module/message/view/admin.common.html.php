@@ -31,10 +31,10 @@ EOT;
       <?php echo "<span class='gray'>$original->date</span>";?>
       <?php if(!empty($original->link))  echo html::a($original->link, $original->link, "target='_blank'");?>
       <br/>
-      <?php if(!empty($original->phone))  echo "<i class='icon-phone text-info icon'></i> {$original->phone} &nbsp; ";?>
-      <?php if(!empty($original->mobile)) echo "<i class='icon-mobile text-info icon'></i> {$original->mobile} &nbsp; ";?>
-      <?php if(!empty($original->email))  echo "<i class='icon-envelope text-warning icon'></i> {$original->email} &nbsp; ";?>
-      <?php if(!empty($original->qq))     echo "<strong class='text-danger'>QQ</strong> {$original->qq} &nbsp; ";?>
+      <?php if(!empty($message->phone))  echo "<i class='icon-phone text-info icon'></i> " . str2Entity($original->phone) . "&nbsp; ";?>
+      <?php if(!empty($message->mobile)) echo "<i class='icon-mobile text-info icon'></i> " . str2Entity($original->mobile) . "&nbsp; ";?>
+      <?php if(!empty($message->email))  echo "<i class='icon-envelope text-warning icon'></i> " . str2Entity($original->email) . "&nbsp; ";?>
+      <?php if(!empty($message->qq))     echo "<strong class='text-danger'>QQ</strong> " . str2Entity($original->qq) . "&nbsp; ";?>
     </td>
     <?php endif;?>
   </tr>

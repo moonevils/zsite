@@ -345,7 +345,7 @@ class threadModel extends model
         $thread = "$thread,";
         $cookie = $this->cookie->t != false ? $this->cookie->t : ',';
         if(strpos($cookie, $thread) === false) $cookie .= $thread;
-        setcookie('t', $cookie , time() + 60 * 60 * 24 * 30);
+        setcookie('t', $cookie , time() + 60 * 60 * 24 * 30, '', '', false, true);
     }
 
     /**
@@ -497,7 +497,7 @@ class threadModel extends model
             if($file->isImage)
             {
                 if($file->editor) continue;
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image("{$this->config->webRoot}file.php?pathname={$file->pathname}&objectTyp={$file->objectType}&imageSize=&extension={$file->extension}"), "target='_blank' data-toggle='lightbox'");
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image("{$this->config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&t={$file->extension}&v={$this->config->site->lastUpload}"), "target='_blank' data-toggle='lightbox'");
                 if($canManage) $imagesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('thread', 'deleteFile', "threadID=$thread->id&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $imagesHtml .= '</li>';
             }

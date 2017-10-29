@@ -38,7 +38,7 @@
             if(!empty($product->image)) 
             {
                 $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-                echo html::a($productLink, html::image("{$config->webRoot}file.php?pathname={$product->image->primary->pathname}&objectType=product&imageSize=smallURL&extension={$product->image->primary->extension}", "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+                echo html::a($productLink, html::image("{$config->webRoot}file.php?f={$product->image->primary->pathname}&s=smallURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
             }
             ?>
           </td>

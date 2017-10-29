@@ -20,7 +20,7 @@
       <div class='col-md-6'>
         <div class='box'>
           <div class='card'>
-          <?php if(isset($logo->webPath)) echo html::a('javascript:;', html::image("{$config->webRoot}file.php?pathname={$logo->pathname}&objectType=logo&imageSize=&extension={$logo->extension}", "class='logo'"), "class='btn-upload'");?>
+          <?php if(isset($logo->webPath)) echo html::a('javascript:;', html::image("{$config->webRoot}file.php?f={$logo->pathname}&t={$logo->extension}&v={$this->config->site->lastUpload}", "class='logo'"), "class='btn-upload'");?>
           <?php if(!isset($logo->webPath)) echo html::a('javascript:;', $lang->ui->uploadLogo, "class='text-lg btn-upload'");?>
           </div>
           <span class='actions'>
@@ -37,7 +37,7 @@
       <div class='col-md-6'>
         <div class='box'>
         <div class='card'>
-          <?php if(isset($favicon->webPath)) echo html::a('javascript:;', html::image("{$config->webRoot}file.php?pathname={$favicon->pathname}&objectType=favicon&imageSize=&extension=ico", "class='favicon'"), "class='btn-upload'");?>
+          <?php if(isset($favicon->webPath)) echo html::a('javascript:;', html::image("{$config->webRoot}file.php?f={$favicon->pathname}&t=ico&v={$this->config->site->lastUpload}", "class='favicon'"), "class='btn-upload'");?>
           <?php if(!isset($favicon->webPath)) echo html::a('javascript:;', $lang->ui->uploadFavicon, "class='text-lg btn-upload'");?>
         </div>
         <span class='actions'>

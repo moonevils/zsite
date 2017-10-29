@@ -35,7 +35,7 @@
       <tr>
         <th class='text-right'><?php echo $lang->user->email;?></th>
         <td>
-          <?php echo $bindedUser->email;?>
+          <?php echo str2Entity($bindedUser->email);?>
           <?php if($bindedUser->emailCertified)  echo "<i class='label label-success icon icon-check'>{$lang->user->certified}</i>"; ?>
           <?php if(!$bindedUser->emailCertified) echo html::a(inlink('checkemail'), $lang->user->certifyNow, "class='btn btn-xs btn-primary' data-toggle='modal'"); ?>
         </td>
@@ -43,7 +43,7 @@
       <tr>
         <th class='text-right'><?php echo $lang->user->mobile;?></th>
         <td>
-          <?php echo $bindedUser->mobile;?>
+          <?php echo str2Entity($bindedUser->mobile);?>
           <?php if($bindedUser->mobileCertified) echo "<i class='label label-success icon icon-check'>{$lang->user->certified}</span>"?>
           <?php if(!$bindedUser->mobileCertified) echo html::a(inlink('checkMobile'), $lang->user->certifyNow, "data-toggle='modal' class='btn btn-xs btn-primary'");?>
         </td>

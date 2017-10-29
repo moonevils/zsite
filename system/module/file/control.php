@@ -177,7 +177,7 @@ class file extends control
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $fileID = $this->dao->lastInsertID();
-            $url    = "{$this->config->webRoot}file.php?pathname={$saveName}&extension={$file['extension']}";
+            $url    = "{$this->config->webRoot}file.php?f={$saveName}&s=fullURL&t={$file['extension']}";
             $_SESSION['album'][$uid][] = $fileID;
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));
@@ -394,7 +394,19 @@ class file extends control
         /* If the mode is open, locate directly. */
         if($mode == 'open')
         {
-            if(file_exists($file->realPath) or (isset($file->syncStatus) and $file->syncStatus == 'synced')) $this->locate($file->webPath);
+            if(file_exists($file->realPath) or (isset($file->syncStatus) and $file->syncStatus == 'synced'))
+            {
+                $mime = zget($this->config->file->mimes, $file->extension, 'default');
+                header("content-type: $mime");
+
+                $handle = fopen($file->realPath, "r");
+                if($handle)
+                {
+                    while(!feof($handle)) echo fgets($handle);
+                    fclose($handle);
+                }
+                exit;
+            }
             $this->app->triggerError("The file you visit $fileID not found.", __FILE__, __LINE__, true);
         }
         else
