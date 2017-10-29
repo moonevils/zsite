@@ -47,7 +47,7 @@ class logModel extends model
         $visitor->new = true;
         $vid = $this->dao->lastInsertId();
 
-        setcookie('vid', $vid, strtotime('+5 year'));
+        setcookie('vid', $vid, strtotime('+5 year'), '', '', false, true);
         $visitor->id = $vid;
         return $visitor;
     }

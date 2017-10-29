@@ -157,7 +157,7 @@ class order extends control
         $this->view->expressList = $this->loadModel('tree')->getPairs(0, 'express');
 
         $address = json_decode($order->address);
-        $this->view->subtitle    = "<span class='text-important'>{$address->contact} [{$address->phone}] {$address->address} {$address->zipcode}</span>";
+        $this->view->subtitle    = "<span class='text-important'>" . $address->contact . '[' . str2Entity($address->phone) . ']' . $address->address . $address->zipcode . "</span>";
         $this->view->fullAddress = $this->view->subtitle;
         $this->view->mobileURL   = helper::createLink('order', 'track', "orderID=$orderID", '', 'mhtml');
         $this->view->desktopURL  = helper::createLink('order', 'track', "orderID=$orderID", '', 'html');
@@ -220,7 +220,7 @@ class order extends control
         $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
 
         $address = json_decode($order->address);
-        $this->view->subtitle = "<span class='text-important'>{$address->contact} [{$address->phone}] {$address->address} {$address->zipcode}</span>";
+        $this->view->subtitle = "<span class='text-important'>" . $address->contact . '[' . str2Entity($address->phone) . ']' . $address->address . $address->zipcode . "</span>";
 
         $this->display();
     }

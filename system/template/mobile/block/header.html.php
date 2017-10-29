@@ -13,7 +13,7 @@ $themeName    = $this->config->template->{$this->app->clientDevice}->theme;
       if($logo)
       {
          $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
-          echo html::image("{$this->config->webRoot}file.php?pathname={$logo->pathname}objectType=logo&extension={$logo->extension}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
+          echo html::image("{$this->config->webRoot}file.php?f={$logo->pathname}&t={$logo->extension}&v={$this->config->site->lastUpload}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
       }
       else
       {

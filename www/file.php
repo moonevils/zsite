@@ -1,8 +1,9 @@
 <?php
-$pathname   = isset($_GET['pathname']) ? $_GET['pathname'] : '';
-$objectType = isset($_GET['objectType']) ? $_GET['objectType'] : '';
-$imageSize  = isset($_GET['imageSize']) ? $_GET['imageSize'] : '';
-$extension  = isset($_GET['extension']) ? $_GET['extension'] : '';
+$pathname   = isset($_GET['f']) ? $_GET['f'] : '';
+$objectType = isset($_GET['o']) ? $_GET['o'] : '';
+$imageSize  = isset($_GET['s']) ? $_GET['s'] : '';
+$extension  = isset($_GET['t']) ? $_GET['t'] : '';
+$version    = isset($_GET['v']) ? $_GET['v'] : '';
 
 $dataRoot = rtrim(dirname($_SERVER['SCRIPT_FILENAME']), '/') . '/data/';
 
@@ -38,14 +39,76 @@ header("Expires: $expires");
 header("Pragma: cache");
 header("Cache-Control: max-age=$seconds");
 
-$mime = getMimetype($_GET['extension']);
+$mime = getMimetype($extension);
 header("Content-type: $mime");
 
 $handle = fopen($filePath, "r");
 if($handle)
 {
-    while(!feof($handle)) echo fgets($handle);
-    fclose($handle);
+    if($mime == 'video/mp4')
+    {
+        $length = filesize($filePath); 
+        $start  = 0;
+        $end    = $length - 1;
+
+        header("Accept-Ranges: 0-$length");
+        if(isset($_SERVER['HTTP_RANGE']))
+        {
+            $cStart = $start;
+            $cEnd   = $end;
+
+            list(, $range) = explode('=', $_SERVER['HTTP_RANGE'], 2);
+            if(strpos($range, ',') !== false)
+            {
+                header('HTTP/1.1 416 Requested Range Not Satisfiable');
+                header("Content-Range: bytes $start-$end/$length");
+                exit;
+            }
+            if($range == '-')
+            {
+                $cStart = $length - substr($range, 1);
+            }
+            else
+            {
+                $range = explode('-', $range);
+                $cStart = $range[0];
+                $cEnd   = (isset($range[1]) && is_numeric($range[1])) ? $range[1] : $length;
+            }
+
+            $cEnd = ($cEnd > $end) ? $end : $cEnd;
+            if ($cStart > $cEnd || $cStart > $length - 1 || $cEnd >= $length)
+            {
+                header('HTTP/1.1 416 Requested Range Not Satisfiable');
+                header("Content-Range: bytes $start-$end/$length");
+                exit;
+            }
+
+            $start  = $cStart;
+            $end    = $cEnd;
+            $length = $end - $start + 1;
+            fseek($handle, $start);
+            header('HTTP/1.1 206 Partial Content');
+        }
+        header("Content-Range: bytes $start-$end/$length");
+        header("Content-Length: " . $length);
+
+        $buffer = 1024 * 8;
+        while(!feof($handle) && ($p = ftell($handle)) <= $end)
+        {
+            if($p + $buffer > $end) $buffer = $end - $p + 1;
+            set_time_limit(0);
+            echo fread($handle, $buffer);
+            flush();
+        }
+
+        fclose($handle);
+        exit;
+    }
+    else
+    {
+        while(!feof($handle)) echo fgets($handle);
+        fclose($handle);
+    }
 }
 
 function getMimetype($extension)

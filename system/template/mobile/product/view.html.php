@@ -38,7 +38,7 @@ js::execute($product->js);
     $indicators = '';
     ?>
     <?php foreach($product->image->list as $image):?>
-      <div class='item<?php if($imgIndex === 0) echo ' active';?>'><?php echo html::image("{$config->webRoot}file.php?pathname={$product->image->primary->pathname}&imageSize=middleURL&extension={$product->image->primary->extension}", "title='{$title}' alt='{$product->name}'");?></div>
+      <div class='item<?php if($imgIndex === 0) echo ' active';?>'><?php echo html::image("{$config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' alt='{$product->name}'");?></div>
       <?php $indicators .= "<li data-target='#productSlide' data-slide-to='{$imgIndex}' class='" . ($imgIndex === 0 ? 'active':'') . "'></li>"; ?>
     <?php $imgIndex++; ?>
     <?php endforeach;?>
@@ -52,7 +52,7 @@ js::execute($product->js);
     </a>
   </div>
   <?php else:?>
-  <?php echo html::image("{$config->webRoot}file.php?pathname={$product->image->primary->pathname}&imageSize=largeURL&extension={$product->image->primary->extension}", "title='{$title}' alt='{$product->name}'");?>
+  <?php echo html::image("{$config->webRoot}file.php?f={$product->image->primary->pathname}&s=largeURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' alt='{$product->name}'");?>
   <?php endif;?>
 <?php endif;?>
   <div class='heading'>

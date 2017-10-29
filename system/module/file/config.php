@@ -16,7 +16,7 @@ else
 
 $config->file->imageTypeList = array('1' => 'GIF', '2' => 'JPG', '3' => 'PNG');
 
-$config->file->imageExtensions  = array('jpeg', 'jpg', 'gif', 'png');
+$config->file->imageExtensions  = array('jpeg', 'jpg', 'gif', 'png', 'bmp');
 $config->file->videoExtensions  = array('flv', 'webmv', 'wav', 'rtmp', 'ogg', 'mp3', 'mp4', 'm4v', 'swf');
 
 $config->file->mediaTypes = new stdclass();
@@ -32,6 +32,14 @@ $config->file->mediaTypes->wav  = 'wav';
 $config->file->editorExtensions = array_merge($config->file->imageExtensions, $config->file->videoExtensions);
 
 $config->file->mimes['default'] = 'application/octet-stream';
+$config->file->mimes['txt']  = 'text/plain';
+$config->file->mimes['jpg']  = 'image/jpeg';
+$config->file->mimes['jpeg'] = 'image/jpeg';
+$config->file->mimes['gif']  = 'image/gif';
+$config->file->mimes['png']  = 'image/png';
+$config->file->mimes['bmp']  = 'image/x-ms-bmp';
+$config->file->mimes['xml']  = 'application/xml';
+$config->file->mimes['html'] = 'text/html';
 
 $config->file->tables   = array();
 $config->file->tables[] = 'file.pathname';

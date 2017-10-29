@@ -451,7 +451,7 @@ class replyModel extends model
             if($file->isImage)
             {
                 if($file->editor) continue;
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image("{$this->config->webRoot}file.php?pathname={$file->pathname}&objectType={$file->objectType}&imageSize=smallURL&extension={$file->extension}"), "target='_blank' data-toggle='lightbox'");
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image("{$this->config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&s=smallURL&t={$file->extension}&v={$this->config->site->lastUpload}"), "target='_blank' data-toggle='lightbox'");
                 if($canManage) $imagesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('reply', 'deleteFile', "replyID=$reply->id&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $imagesHtml .= '</li>';
             }
@@ -478,7 +478,7 @@ class replyModel extends model
         $reply = "$reply,";
         $cookie = $this->cookie->r != false ? $this->cookie->r : ',';
         if(strpos($cookie, $reply) === false) $cookie .= $reply;
-        setcookie('r', $cookie , time() + 60 * 60 * 24 * 30);
+        setcookie('r', $cookie , time() + 60 * 60 * 24 * 30, '', '', false, true);
     }
 
     /**

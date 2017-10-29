@@ -95,10 +95,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <tr class='bg-section' data-id='image'>
           <td>
             <?php echo html::file('files[]', "tabindex='-1' class='form-control'");?>
-            <?php echo html::input('image', '', "class='form-control image-select' disabled='disabled'");?>
+            <?php echo html::input('sourceImage', '', "class='form-control image-select' disabled='disabled'");?>
           </td>
           <td colspan='2'>
-            <?php echo html::a($this->createLink('file', 'selectimage', 'callback=fileHide&id=image'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
+            <?php echo html::a($this->createLink('file', 'selectimage', 'callback=fileHide&id=sourceImage'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
             <?php echo html::a('javascript:void(0)', $lang->slide->upload, "class='btn btn-primary' onclick='fileShow()' id='uploadFile'")?>
             <label class='text-info'><?php echo $lang->slide->suitableSize;?></label>
           </td>
