@@ -91,7 +91,7 @@ class book extends control
             $serials = $this->book->computeSN($book->id);
 
             $this->view->title      = $book->title;
-            $this->view->keywords   = trim((!empty($node->keywords) ? ($node->keywords . ' - ') : '') . (!empty($book->keywords) ? ($book->keywords . ' - ') : '') . $this->config->site->keywords);
+            $this->view->keywords   = trim(trim($node->keywords . ' - ' . $book->keywords), '-');
             $this->view->node       = $node;
             $this->view->book       = $book;
             $this->view->serials    = $serials;
