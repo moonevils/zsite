@@ -283,22 +283,18 @@ class bookModel extends model
     }
 
     /**
-     * Get book and article list.
+     * Get all (books and articles) for sitemap.
      * 
-     * @param  string $orderBy 
-     * @param  int $limit 
      * @access public
-     * @return void
+     * @return array
      */
-    public function getBookAndArticleList($orderBy = 'id_desc', $limit = '100')
+    public function getAll()
     {
         $books    = $this->getBookList();
         $articles = $this->dao->select('*')->from(TABLE_BOOK)
             ->where('type')->eq('article')
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('status')->eq('normal')
-            ->orderBy($orderBy)
-            ->limit($limit)
             ->fetchAll();
 
         foreach($articles as $article)
