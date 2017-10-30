@@ -629,7 +629,7 @@ EOT;
     {
         /* First check the user is admin or not. */
         if($this->app->user->admin == 'super') return true; 
-
+        
         /* Then check the user is a moderator or not. */
         $user       = ",{$this->app->user->account},";
         $board      = $this->loadModel('tree')->getByID($boardID);
@@ -638,8 +638,7 @@ EOT;
         $moderators = array_merge(explode(',', trim(str_replace(' ', '', $board->moderators), ',')), explode(',', trim(str_replace(' ', '', $parent->moderators), ',')));
         $moderators = implode(',', $moderators);
 
-        $users = ($board->readonly) ? $moderators : $moderators . str_replace(' ', '', $users) . ',';
-        
+        $users = ($board->readonly) ? $moderators : $moderators . ',' . str_replace(' ', '', $users) . ',';
         if(strpos($users, $user) !== false) return true;
 
         return false;

@@ -104,10 +104,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <?php if($type == 'page'):?>
               <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot;?>page/</span>
               <?php else:?>
-              <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot . $type;?>/id_</span>
+              <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot . $type;?>/</span>
               <?php endif;?>
               <?php echo html::input('alias', '', "class='form-control' placeholder='{$lang->alias}'");?>
-              <span class="input-group-addon w-70px">.html</span>
+              <span class="input-group-addon w-70px">-id.html</span>
             </div>
           </td>
         </tr>
