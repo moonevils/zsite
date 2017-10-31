@@ -233,8 +233,9 @@ $lang->resource->slide->removeGroup = 'removeGroup';
 
 /* Tag module. */
 $lang->resource->tag = new stdclass();
-$lang->resource->tag->admin = 'admin';
-$lang->resource->tag->link  = 'link';
+$lang->resource->tag->admin  = 'admin';
+$lang->resource->tag->link   = 'link';
+$lang->resource->tag->source = 'source';
 
 /* Thread module. */
 $lang->resource->thread = new stdclass();
