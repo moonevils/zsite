@@ -26,8 +26,6 @@ class blockModel extends model
         if(strpos($block->type, 'code') === false) $block->content = json_decode($block->content);
         if(strpos($block->type, 'code') !== false) $block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);
         if(empty($block->content)) $block->content = new stdclass();
-
-        $block->content = $this->loadModel('file')->replaceImgURL($block->content, 'content');
         return $block;
     }
 
@@ -100,10 +98,6 @@ class blockModel extends model
         }
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
-        foreach($blocks as $id => $block)
-        {
-            if($block->type == 'html') $blocks[$id]->content = json_encode($this->loadModel('file')->replaceImgURL(json_decode($block->content), 'content'));
-        }
 
         $layouts = array();
         foreach($rawLayouts as $page => $pageBlocks)
@@ -211,10 +205,6 @@ class blockModel extends model
         if(empty($regionBlocks)) return array();
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
-        foreach($blocks as $id => $block)
-        {
-            if($block->type == 'html') $blocks[$id]->content = json_encode($this->loadModel('file')->replaceImgURL(json_decode($block->content), 'content'));
-        }
 
         $sortedBlocks = array();
         foreach($regionBlocks as $block)
@@ -451,7 +441,6 @@ class blockModel extends model
     public function create($template, $theme)
     {
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
-        $block = $this->loadModel('file')->processImgURL($block, $this->config->block->editor->create['id'], $this->post->uid);
 
         $block->content = helper::decodeXSS($block->content);
         $block->css     = helper::decodeXSS($block->css);
@@ -520,7 +509,6 @@ class blockModel extends model
         $block = $this->getByID($this->post->blockID);
 
         $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
-        $data = $this->loadModel('file')->processImgURL($data, $this->config->block->editor->edit['id'], $this->post->uid);
         $data->params['customImage'] = $block->content->customImage;
 
         if($data->type == 'followUs' && $data->params['imageType'] == 'custom' && !empty($_FILES))

@@ -138,7 +138,6 @@ class thread extends control
     {
         $this->loadModel('guarder');
         $thread = $this->thread->getByID($threadID);
-        $thread = $this->loadModel('file')->replaceImgURL($thread, $this->config->thread->editor->view['id']);
         if(!$thread or $thread->hidden) die(js::locate('back'));
 
         if($thread->link)

@@ -73,8 +73,6 @@ class order extends control
         $order = $this->order->getByID($orderID);
         if($order->account != $this->app->user->account and $this->app->user->admin != 'super') die(js::locate('back'));
 
-        $order = $this->loadModel('file')->replaceImgURL($order, 'view');
-
         $this->view->title    = $this->lang->order->view;
         $this->view->order    = $order;
         $this->view->type     = $order->type;

@@ -19,8 +19,6 @@ class company extends control
      */
     public function index()
     {
-        $this->config->company = $this->loadModel('file')->replaceImgURL($this->config->company, $this->config->company->editor->setbasic['id']);
-
         $this->view->title      = $this->config->company->name;
         $this->view->keywords   = $this->config->company->name;
         $this->view->company    = $this->config->company;
@@ -76,13 +74,11 @@ class company extends control
             ->remove('uid')
             ->get();
 
-            $company = $this->loadModel('file')->processImgURL($company, $this->config->company->editor->setbasic['id'], $this->post->uid);
             $result = $this->loadModel('setting')->setItems('system.common.company', $company);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->config->company = $this->loadModel('file')->replaceImgURL($this->config->company, $this->config->company->editor->setbasic['id']);
         $this->view->title   = $this->lang->company->setBasic;
         $this->view->display = $display;
 
