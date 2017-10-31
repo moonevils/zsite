@@ -653,7 +653,6 @@ function setGo2Top()
  */
 +(function($)
 {
-
     $.fn.refreshRandomBlock = function()
     {
         return $(this).each(function()
@@ -718,7 +717,6 @@ function setGo2Top()
     {
         $blocks = $blocks || $(this);
         options = $.extend({}, $blocks.data(), options);
-
 
         var winWidth = $(window).width();
         if(!options.force && winWidth == $blocks.data('tidyWinWidth')) return;
