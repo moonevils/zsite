@@ -19,10 +19,15 @@ class search extends control
      * @access public
      * @return void
      */
-    public function index($words = '', $pageID = '')
+    public function index($words = '', $pageID = 1)
     {
-        if(empty($words)) $words = $this->get->words;
-        if(empty($words) and $pageID) $words = $this->session->searchIngWord;
+        if(empty($words) and $this->get->words)
+        {   
+            $words = urlencode($this->get->words);
+            helper::header301(inlink('index', "words={$words}&pageID=$pageID"));
+        }   
+     
+        $words = urldecode($words);
         $words = str_replace('"', '', $words);
         $words = str_replace("'", '', $words);
         $words = strip_tags(strtolower($words));
@@ -36,8 +41,6 @@ class search extends control
         if(!$pageID) $pageID = 1;
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $this->config->search->recPerPage, $pageID);
-
-        $this->session->set('searchIngWord', $words);
 
         $begin = time();
         $this->view->results = $this->search->getList($words, $pager);
