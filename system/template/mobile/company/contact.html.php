@@ -27,7 +27,7 @@
     <i class='icon icon-s3 icon-phone bg-special circle'></i>
     <div class='card-content'>
       <small class='text-muted'><?php echo $this->lang->company->phone?></small>
-      <div class='lead'><?php echo str2Entity($contact->phone);?></div>
+      <div class='lead'><?php echo $contact->phone;?></div>
     </div>
   </div>
   <?php endif; ?>
@@ -36,7 +36,7 @@
     <i class='icon icon-s3 icon-envelope bg-special circle'></i>
     <div class='card-content'>
       <small class='text-muted'><?php echo $this->lang->company->email?></small>
-      <div class='lead'><?php echo str2Entity($contact->email);?></div>
+      <div class='lead'><?php echo $contact->email;?></div>
     </div>
   </div>
   <?php endif; ?>
@@ -45,7 +45,7 @@
     <i class='icon icon-s3 icon-qq bg-info circle'></i>
     <div class='card-content'>
       <small class='text-muted'><?php echo $this->lang->company->qq?></small>
-      <div class='lead'><?php echo str2Entity($contact->qq);?></div>
+      <div class='lead'><?php echo $contact->qq;?></div>
     </div>
   </div>
   <?php endif; ?>
