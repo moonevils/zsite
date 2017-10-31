@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class='panel-body'>
-    <div id='links<?php echo $block->id;?>' data-ve='links'><?php $this->config->links = $this->loadModel('file')->replaceImgURL($this->config->links, 'index,all'); echo $this->config->links->index;?></div>
+    <div id='links<?php echo $block->id;?>' data-ve='links'><?php echo $this->config->links->index;?></div>
   </div>
 </div>
 <?php endif;?>

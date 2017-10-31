@@ -35,13 +35,11 @@ class links extends control
     {
         if(!empty($_POST))
         {
-            $links  = $this->loadModel('file')->processImgURL((object)$_POST, $this->config->links->editor->admin['id'], $this->post->uid);
-            $result = $this->loadModel('setting')->setItems('system.common.links', $links);
+            $result = $this->loadModel('setting')->setItems('system.common.links', (object)$_POST);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->config->links = $this->loadModel('file')->replaceImgURL($this->config->links, $this->config->links->editor->admin['id']);
         $this->view->title = $this->lang->links->common;
         $this->display();
     }

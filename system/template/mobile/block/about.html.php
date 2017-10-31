@@ -10,7 +10,6 @@
  * @link        http://www.chanzhi.org
 */
 $block->content = json_decode($block->content);
-$this->config->company = $this->loadModel('file')->replaceImgURL($this->config->company, 'desc');
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block panel-block-about <?php echo $blockClass;?>'>
   <div class='panel-heading'>

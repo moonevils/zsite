@@ -109,7 +109,6 @@ class replyModel extends model
                 $reply->content = str_replace('[quote]', "<div class='alert'>", $reply->content);
                 $reply->content = str_replace('[/quote]', '</div>', $reply->content);
             }
-            $reply = $this->file->replaceImgURL($reply, 'content');
         }
 
         return $replies;
@@ -292,7 +291,6 @@ class replyModel extends model
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
-        $reply = $this->loadModel('file')->processImgURL($reply, 'content', $this->post->uid);
         if(strlen($reply->content) > 40)
         {
             $repeat = $this->loadModel('guarder')->checkRepeat($reply->content); 
@@ -363,7 +361,6 @@ class replyModel extends model
             ->remove('files,labels,hidden')
             ->get();
 
-        $reply = $this->loadModel('file')->processImgURL($reply, $this->config->reply->editor->edit['id'], $this->post->uid);
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {
             $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;

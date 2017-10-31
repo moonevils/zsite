@@ -50,8 +50,6 @@ class articleModel extends model
 
         /* Get it's files. */
         $article->files = $this->loadModel('file')->getByObject($article->type, $articleID);
-
-        $article = $this->loadModel('file')->replaceImgURL($article, $this->config->article->editor->modify['id']);
         return $article;
     }   
 
@@ -75,8 +73,6 @@ class articleModel extends model
         
         /* Get it's files. */
         $page->files = $this->loadModel('file')->getByObject('page', $page->id);
-        $page = $this->file->replaceImgURL($page, $this->config->article->editor->modify['id']);
-
         return $page;
     }
 
@@ -416,7 +412,6 @@ class articleModel extends model
         if(!empty($article->alias)) $article->alias = seo::unify($article->alias, '-', true);
         $article->content = $this->rtrimContent($article->content);
     
-        $article = $this->loadModel('file')->processImgURL($article, $this->config->article->editor->create['id'], $this->post->uid);
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
@@ -565,7 +560,6 @@ class articleModel extends model
         $article->content  = $this->rtrimContent($article->content);
         if(!isset($article->categories)) $article->categories = '';
 
-        $article = $this->loadModel('file')->processImgURL($article, $this->config->article->editor->edit['id'], $this->post->uid);
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
