@@ -9,6 +9,7 @@ $config->user->skipedFields->update = 'ip,admin,email,groups,account,join,visits
 $config->user->skipedFields->adminUpdate = 'groups,fingerprint';
 
 $config->user->require = new stdclass();
+$config->user->require->create      = 'account,realname,email,password1';
 $config->user->require->register    = 'account,realname,email,password1';
 $config->user->require->edit        = 'realname';
 $config->user->require->setSecurity = 'question, answer, security';
