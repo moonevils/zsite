@@ -28,3 +28,4 @@ $config->alipay->map['subject'] = 'subject';
 $config->alipay->map['money']   = 'total_fee';
 $config->alipay->map['body']    = 'body';
 $config->alipay->map['extra']   = 'extra_common';
+$config->alipay->map['extend']  = 'extend_param';
