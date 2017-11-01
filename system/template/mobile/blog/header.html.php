@@ -10,7 +10,7 @@
       if($logo)
       {
           $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
-          echo html::image("{$config->webRoot}file.php?f={$logo->pathname}&t={$logo->extension}&v={$this->config->site->lastUpload}", "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
+          echo html::image($this->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
       }
       else
       {

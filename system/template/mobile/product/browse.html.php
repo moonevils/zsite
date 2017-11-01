@@ -47,7 +47,7 @@
             }
             else
             {
-                $imgsrc = "{$config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}";
+                $imgsrc = $this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL');
                 echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imgsrc}'> ";
             }
             ?>

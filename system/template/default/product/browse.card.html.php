@@ -10,7 +10,7 @@
       else
       {
           $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-          echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image("{$config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+          echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'middleURL'), "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
       }
       ?>
       <div class='card-heading'>

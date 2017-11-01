@@ -29,7 +29,7 @@ else
             <div class='media pull-right'>
               <?php
               $title = $object->image->primary->title ? $object->image->primary->title : strip_tags($object->title);
-              echo html::a($object->url, html::image("{$config->webRoot}file.php?f={$object->image->primary->pathname}&o={$object->objectType}&s=smallURL&t={$object->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' class='thumbnail'" ));
+              echo html::a($object->url, html::image($this->loadModel('file')->printFileURL($object->image->primary->pathname, $object->image->primary->extension, $object->objectType, 'smallURL'), "title='{$title}' class='thumbnail'" ));
               ?>
             </div>
             <?php endif;?>

@@ -25,12 +25,12 @@ else
             <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($object->addedDate, 0, 10);?></span>
           </div>
         </div>
-        <?php if(!empty($object->image)):?>
+        <?php if(!empty($object->image->primary)):?>
         <div class='table-cell thumbnail-cell'>
-        <?php
+          <?php
           $title = $object->image->primary->title ? $object->image->primary->title : $object->title;
-          echo html::image("{$config->webRoot}file.php?f={$object->image->primary->pathname}&s=smallURL&t={$object->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' class='thumbnail'" );
-        ?>
+          echo html::image($this->loadModel('file')->printFileURL($object->image->primary->pathname, $object->image->primary->extension, '', 'smallURL'), "title='{$title}' class='thumbnail'" );
+          ?>
         </div>
         <?php endif;?>
       </div>

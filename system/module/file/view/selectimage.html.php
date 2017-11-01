@@ -2,7 +2,7 @@
 <?php js::set('id', $id);?>
 <ul class='files-list clearfix'>
   <?php foreach($files as $file):?>
-  <?php $fullURL = "{$config->webRoot}file.php?f={$file->pathname}&o={$file->objectType}&t={$file->extension}&v={$this->config->site->lastUpload}";?>
+  <?php $fullURL = $this->file->printFileURL($file->pathname, $file->extension, $file->objectType);?>
   <?php echo "<li class='file-image file-{$file->extension}'>" . html::a('javascript:void(0);', html::image($fullURL), "onclick=\"selectFile(this, $callback)\" data-url={$fullURL}") . "</li>";?>
   <?php endforeach;?>          
 </ul>

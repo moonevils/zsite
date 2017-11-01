@@ -217,7 +217,7 @@ class slideModel extends model
         $imageIdList = array_keys($fileTitles);
         $image = $this->dao->select('*')->from(TABLE_FILE)->where('id')->eq($imageIdList[0])->fetch(); 
 
-        return "{$this->config->webRoot}file.php?f={$image->pathname}&o=slide&t={$image->extension}&v={$this->config->site->lastUpload}";
+        return $this->loadModel('file')->printFileURL($image->pathname, $image->extension, 'slide');
     }
 
     /**
