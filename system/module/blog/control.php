@@ -73,7 +73,7 @@ class blog extends control
 
             $this->view->category = $category;
             $this->view->title    = $category->name;
-            $this->view->keywords = trim((!empty($category->keywords) ? ($category->keywords . ' - ') :  '') . $this->config->site->keywords);
+            $this->view->keywords = trim($category->keywords);
             $this->view->desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
             $this->view->layouts    = $this->loadModel('block')->getPageBlocks('blog', 'index', $category->id);
@@ -115,13 +115,10 @@ class blog extends control
         if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
         $category = $this->loadModel('tree')->getByID($category);
 
-        $title    = $article->title . ' - ' . $category->name;
-        $keywords = (!empty($article->keywords) ? ($article->keywords . ' - ') : ' ') . (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
-        $desc     = strip_tags($article->summary);
         
-        $this->view->title       = $title;
-        $this->view->keywords    = $keywords;
-        $this->view->desc        = $desc;
+        $this->view->title       = $article->title . ' - ' . $category->name;
+        $this->view->keywords    = trim(trim($article->keywords . ' - ' . $category->keywords), '-');
+        $this->view->desc        = strip_tags($article->summary);
         $this->view->article     = $article;
         $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($article, $category->id);
         $this->view->category    = $category;
