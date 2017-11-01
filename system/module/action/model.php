@@ -140,9 +140,12 @@ class actionModel extends model
         {
             $desc = $action->extra ? $this->lang->action->desc->extra : $this->lang->action->desc->common;
         }
+
         /* Cycle actions, replace vars. */
         foreach($action as $key => $value)
         {
+            if($key == 'history' or $key == 'files') continue;
+
             /* Desc can be an array or string. */
             if(is_array($desc))
             {
