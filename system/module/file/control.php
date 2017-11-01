@@ -177,7 +177,7 @@ class file extends control
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $fileID = $this->dao->lastInsertID();
-            $url    = "{$this->config->webRoot}file.php?f={$saveName}&s=fullURL&t={$file['extension']}";
+            $url    = "{$this->config->webRoot}file.php?f={$saveName}&t={$file['extension']}";
             $_SESSION['album'][$uid][] = $fileID;
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));
@@ -571,8 +571,8 @@ class file extends control
         }
         else
         {
-            $currentPath    = $this->file->savePath . $this->get->path;
-            $currentUrl     = $this->file->webPath . $this->get->path;
+            $currentPath    = rtrim($this->file->savePath, '/') . '/' . $this->get->path;
+            $currentUrl     = rtrim($this->file->webPath, '/') . '/' . $this->get->path;
             $currentDirPath = $this->get->path;
             $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
         }
@@ -798,30 +798,5 @@ class file extends control
         
         if($last >= $total) $this->send(array('result' => 'finished', 'message' => $this->lang->createSuccess));
         $this->send(array('result' => 'unfinished', 'next' => inlink('rebuildWatermark', "last=$last&total=$total"), 'completed' => sprintf($this->lang->file->rebuildWatermarks, $progress)));
-    }
-
-    /**
-     * Read file. 
-     * 
-     * @param  int    $fileID 
-     * @access public
-     * @return void
-     */
-    public function read($fileID, $type = 'realPath')
-    {
-        $file = $this->file->getById($fileID);
-
-        $filePath = $this->file->getRealPath($file, $type);
-        if(empty($file) or !file_exists($filePath)) return false;
-
-        $mime = in_array($file->extension, $this->config->file->imageExtensions) ? "image/{$file->extension}" : $this->config->file->mimes['default'];
-        header("Content-type: $mime");
-
-        $handle = fopen($filePath, "r");
-        if($handle)
-        {
-            while(!feof($handle)) echo fgets($handle);
-            fclose($handle);
-        }
     }
 }
