@@ -246,7 +246,7 @@ class fileModel extends model
         $template = $this->config->template->{$this->app->clientDevice}->name;
         $theme    = $this->config->template->{$this->app->clientDevice}->theme;
 
-        $this->syncSources($template, $theme);
+        $this->scanSources($template, $theme);
 
         $files = $this->dao->setAutoLang(false)->select('*')
             ->from(TABLE_FILE)
@@ -278,7 +278,7 @@ class fileModel extends model
      * @access public
      * @return void
      */
-    public function syncSources($template, $theme)
+    public function scanSources($template, $theme)
     {
         $fileList = glob($this->app->getDataRoot() . "source/$template/$theme/*");
         $newFiles = array();
@@ -595,28 +595,6 @@ class fileModel extends model
         if(file_exists($realPath)) return $pathName;
 
         return $this->getSaveName($pathName);
-    }
-
-    /**
-     * Get realpath.
-     * 
-     * @param  object   $file 
-     * @param  string   $type 
-     * @access public
-     * @return void
-     */
-    public function getRealPath($file, $type)
-    {
-        if($type == 'realPath') return $file->realPath;
-
-        $this->setSavePath($file->objectType);
-        $realPath = $this->savePath . $this->getRealPathName($file->pathname, $file->objectType);
-
-        if($type == 'smallURL')  $realPath = str_replace('f_', 's_', $realPath);
-        if($type == 'middleURL') $realPath = str_replace('f_', 'm_', $realPath);
-        if($type == 'largeURL')  $realPath = str_replace('f_', 'l_', $realPath);
-
-        return $realPath;
     }
 
     /**
@@ -984,7 +962,7 @@ class fileModel extends model
             $_SESSION['album'][$uid][] = $fileID;
 
             $saveName = $this->getSaveName($file['pathname']);
-            $data = str_replace($out[1][$key], "{$this->config->webRoot}file.php?f=$saveName&s=fullURL&t={$file['extension']}", $data);
+            $data = str_replace($out[1][$key], "{$this->config->webRoot}file.php?f=$saveName&t={$file['extension']}", $data);
         }
 
         return $data;
@@ -1431,54 +1409,5 @@ class fileModel extends model
             if($a['order'] == 'type') return strcmp($a['filetype'], $b['filetype']);
             if($a['order'] == 'name') return strcmp($a['filename'], $b['filename']);
         }
-    }
-
-    /**
-     * Process editor.
-     * 
-     * @param  object    $data 
-     * @param  string    $editorList 
-     * @access public
-     * @return object
-     */
-    public function processImgURL($data, $editorList, $uid = '')
-    {
-        if(is_string($editorList)) $editorList = explode(',', str_replace(' ', '', $editorList));
-        $readLinkReg = $this->config->webRoot . 'file.php?f=(%pathname%)&s=(%imageSize%)&t=(%viewType%)';
-        $readLinkReg = str_replace(array('%pathname%', '%imageSize%', '%viewType%', '?', '/'), array('[0-9]{6}/f_[a-z0-9]{32}', '\w+', '\w+', '\?', '\/'), $readLinkReg);
-        foreach($editorList as $editorID)
-        {
-            if(empty($editorID) or empty($data->$editorID)) continue;
-
-            $pasteData = $this->pasteImage($data->$editorID, $uid);
-            if($pasteData) $data->$editorID = $pasteData;
-
-            $imgURL = '{$1-$2.$3}';
-            $data->$editorID = preg_replace("/ src=\"$readLinkReg\" /", ' src="' . $imgURL . '" ', $data->$editorID);
-            $data->$editorID = preg_replace("/ src=\"" . htmlspecialchars($readLinkReg) . "\" /", ' src="' . $imgURL . '" ', $data->$editorID);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Revert real src. 
-     * 
-     * @param  object    $data 
-     * @param  string    $fields 
-     * @access public
-     * @return object
-     */
-    public function replaceImgURL($data, $fields)
-    {
-        if(is_string($fields)) $fields = explode(',', str_replace(' ', '', $fields));
-        foreach($fields as $field)
-        {
-            if(empty($field) or empty($data->$field)) continue;
-            $data->$field = preg_replace('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}" /', ' src="' . $this->config->webRoot . 'file.php?f=$1&t=$3&v=' . $this->config->site->lastUpload . '" ', $data->$field);
-            $data->$field = preg_replace('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\-(\w+))(\.(\w+))?}" /', ' src="' . $this->config->webRoot . 'file.php?f=$1&s=$3&t=$5&v=' . $this->config->site->lastUpload . '" ', $data->$field);
-        }
-
-        return $data;
     }
 }
