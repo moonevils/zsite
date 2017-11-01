@@ -74,18 +74,15 @@ class product extends control
             $category->desc     = '';
         }
 
-        $title    = $category->name;
-        $keywords = (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
-        $desc     = strip_tags($category->desc) . ' ';
         $this->session->set('productCategory', $category->id);
 
         $productList = '';
         foreach($products as $product) $productList .= $product->id . ',';
         $this->view->productList = $productList;
 
-        $this->view->title      = $title;
-        $this->view->keywords   = trim($keywords);
-        $this->view->desc       = $desc;
+        $this->view->title      = $category->name;
+        $this->view->keywords   = trim($category->keywords);
+        $this->view->desc       = strip_tags($category->desc) . ' ';
         $this->view->category   = $category;
         $this->view->products   = $products;
         $this->view->pager      = $pager;
@@ -269,13 +266,9 @@ class product extends control
         }
         $category = $this->loadModel('tree')->getByID($category, 'product');
 
-        $title    = $product->name . ' - ' . $category->name;
-        $keywords = (!empty($product->keywords) ? ($product->keywords . ' - ') : '') . (!empty($category->keywords) ? ($category->keywords . ' - ') : '') . $this->config->site->keywords;
-        $desc     = strip_tags($product->desc);
-        
-        $this->view->title       = $title;
-        $this->view->keywords    = $keywords;
-        $this->view->desc        = $desc;
+        $this->view->title       = $product->name . ' - ' . $category->name;
+        $this->view->keywords    = trim(trim($product->keywords . ' - ' . $category->keywords), '-');
+        $this->view->desc        = strip_tags($product->desc);
         $this->view->product     = $product;
         $this->view->prevAndNext = $this->product->getPrevAndNext($product->order, $category->id);
         $this->view->category    = $category;
