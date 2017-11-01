@@ -44,7 +44,7 @@
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title;
-          echo html::image("{$config->webRoot}file.php?f={$stick->image->primary->pathname}&s=smallURL&t={$stick->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' class='thumbnail'");
+          echo html::image($this->loadModel('file')->printFileURL($stick->image->primary->pathname, $stick->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'");
         ?>
         </div>
         <?php endif;?>
@@ -73,7 +73,7 @@
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-          echo html::image("{$config->webRoot}file.php?f={$article->image->primary->pathname}&s=smallURL&t={$article->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' class='thumbnail'");
+          echo html::image($this->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'");
         ?>
         </div>
         <?php endif;?>

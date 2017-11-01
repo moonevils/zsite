@@ -41,7 +41,7 @@ $pages   = $this->loadModel('article')->getPageList($content->limit);
         <div class='table-cell thumbnail-cell'>
         <?php
           $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-          echo html::a($url, html::image("{$this->config->webRoot}file.php?f={$page->image->primary->pathname}&s=smallURL&t={$page->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' class='thumbnail'" ));
+          echo html::image($this->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'" );
         ?>
         </div>
         <?php endif; ?>

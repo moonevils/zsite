@@ -23,7 +23,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-body'>
     <div class='card'>
-      <div class='media' style='background-image: url(<?php echo "{$this->config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}";?>);'><?php echo html::image("{$this->config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$product->name}' alt='{$product->name}'"); ?></div>
+      <div class='media' style='background-image: url(<?php echo $this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL');?>);'><?php echo html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{$product->name}' alt='{$product->name}'"); ?></div>
       <div class='card-heading'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>

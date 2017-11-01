@@ -17,7 +17,7 @@
             <div class='media pull-right'>
               <?php
               $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-              echo html::a($url, html::image("{$config->webRoot}file.php?f={$page->image->primary->pathname}&s=smallURL&t={$page->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' class='thumbnail'" ));
+              echo html::a($url, html::image($this->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, '', 'smallURL'), "title='{$title}' class='thumbnail'" ));
               ?>
             </div>
             <?php endif;?>

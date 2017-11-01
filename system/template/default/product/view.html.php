@@ -44,7 +44,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
         <div class='col-sm-5' id='productImageWrapper'>
           <div class='product-image media-wrapper' id='productImage'>
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
-            <?php echo html::image("{$config->webRoot}file.php?f={$product->image->primary->pathname}&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$title}' alt='{$product->name}'");?>
+            <?php echo html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension), "title='{$title}' alt='{$product->name}'");?>
             <div class='image-zoom-region'></div>
           </div>
           <?php if(count($product->image->list) > 1):?>
@@ -56,7 +56,7 @@ js::set('pageLayout', $this->block->getLayoutScope('product_view', $product->id)
               <?php $title = $image->title ? $image->title : $product->name;?>
               <div class="product-image-wrapper">
                 <div class='product-image little-image'>
-                  <?php echo html::image("{$config->webRoot}file.php?f={$image->pathname}&t={$image->extension}&v={$this->config->site->lastUpload}", "title='{$title}' alt='{$product->name}'");?>
+                  <?php echo html::image($this->file->printFileURL($image->pathname, $image->extension), "title='{$title}' alt='{$product->name}'");?>
                 </div>
               </div>
               <?php endforeach;?>

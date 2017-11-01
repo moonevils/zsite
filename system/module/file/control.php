@@ -177,7 +177,7 @@ class file extends control
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $fileID = $this->dao->lastInsertID();
-            $url    = "{$this->config->webRoot}file.php?f={$saveName}&t={$file['extension']}";
+            $url    = $this->file->printFileURL($saveName, $file['extension']);
             $_SESSION['album'][$uid][] = $fileID;
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));
@@ -644,6 +644,7 @@ class file extends control
                     $fileList[$i]['pathname']  = $pathname;
                     $fileList[$i]['imagesize'] = $imageSize;
                     $fileList[$i]['filename']  = $filename . "?fromSpace=y";
+                    $fileList[$i]['fileurl']   = $this->file->printFileURL($pathname, $fileExtension);
                 }
 
                 $fileList[$i]['datetime'] = date('Y-m-d H:i:s', filemtime($file));

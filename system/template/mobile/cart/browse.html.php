@@ -34,7 +34,7 @@
             }
             else
             {
-                echo html::image("{$config->webRoot}file.php?f={$product->image->primary->pathname}&s=middleURL&t={$product->image->primary->extension}&v={$this->config->site->lastUpload}", "title='{$product->name}' alt='{$product->name}'");
+                echo html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{$product->name}' alt='{$product->name}'");
             }
             ?>
           </div>
