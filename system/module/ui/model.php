@@ -1501,10 +1501,7 @@ if(!function_exists('getJS'))
 
         foreach($packages as $package)
         {
-            $finfo    = finfo_open(FILEINFO_MIME); 
-            $mimetype = finfo_file($finfo, $package); 
-            finfo_close($finfo);
-
+            $mimetype = helper::checkZip($package);
             if(strpos($mimetype, 'zip') === false) continue;
 
             $theme = new stdclass();
