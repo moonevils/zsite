@@ -607,6 +607,26 @@ class baseHelper
 
         return $ip;
     }
+
+    /**
+     * Check whether a file is zip.
+     * 
+     * @param  int    $file 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function checkZip($file)
+    {
+        $fh = @fopen($file, "r");
+        if(!$fh) return false;
+        $header = fgets($fh, 5);
+        fclose($fh);
+
+        if(strpos($header, 'Rar') !== false) return 'rar';
+        if(strpos($header, 'PK') !== false)  return 'zip';
+        return '';
+    }
 }
 
 //------------------------------- 常用函数。Some tool functions.-------------------------------//
