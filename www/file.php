@@ -1,9 +1,20 @@
 <?php
-$pathname   = isset($_GET['f']) ? $_GET['f'] : '';
-$objectType = isset($_GET['o']) ? $_GET['o'] : '';
-$imageSize  = isset($_GET['s']) ? $_GET['s'] : '';
-$extension  = isset($_GET['t']) ? $_GET['t'] : '';
-$version    = isset($_GET['v']) ? $_GET['v'] : '';
+$pathname   = '';
+$objectType = '';
+$imageSize  = '';
+$extension  = '';
+$version    = '';
+
+if(isset($_GET['pathname']))   $pathname   = $_GET['pathname'];
+if(isset($_GET['objectType'])) $objectType = $_GET['objectType'];
+if(isset($_GET['imageSize']))  $imageSize  = $_GET['imageSize'];
+if(isset($_GET['extension']))  $extension  = $_GET['extension'];
+
+if(isset($_GET['f'])) $pathname   = $_GET['f'];
+if(isset($_GET['o'])) $objectType = $_GET['o'];
+if(isset($_GET['s'])) $imageSize  = $_GET['s'];
+if(isset($_GET['t'])) $extension  = $_GET['t'];
+if(isset($_GET['v'])) $version    = $_GET['v'];
 
 $dataRoot = rtrim(dirname($_SERVER['SCRIPT_FILENAME']), '/') . '/data/';
 
