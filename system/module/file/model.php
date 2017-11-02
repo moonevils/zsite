@@ -1372,10 +1372,10 @@ class fileModel extends model
         $images = array();
         foreach($files as $key => $file)
         {
-            $mimeType = mime_content_type($file);
-            if(substr($mimeType, 0, 6) != 'image/') continue;
-            if(strpos($mimeType, 'gif') !== false) continue;
-            if(strpos($mimeType, 'ico') !== false) continue;
+            $size = getimagesize($file);
+            if(substr($size['mime'], 0, 6) != 'image/') continue;
+            if(strpos($size['mime'], 'gif') !== false) continue;
+            if(strpos($size['mime'], 'ico') !== false) continue;
             $images[] = $file;
         }
 
