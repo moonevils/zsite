@@ -2,4 +2,4 @@
 @media (max-width: 400px) { .hidden-xxxs {display: none}}
 
 .pager {margin: 0}
-.panel > .panel-heading > .btn-group ul > li > a:hover, .panel > .panel-heading > .btn-group ul > li.dropdown-submenu:hover > a{color: #fff;}
+.nav-pills {margin-bottom: 10px;}
