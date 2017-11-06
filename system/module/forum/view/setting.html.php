@@ -5,8 +5,12 @@
     <form id='ajaxForm' action="<?php echo inlink('setting');?>" method='post'>
       <table class='table table-form table-fixed'>
         <tr>
-          <th class='col-xs-2 w-100px'><?php echo $lang->forum->postReview;?></th> 
-          <td class='col-xs-2'><?php echo html::radio('postReview', $lang->forum->postReviewOptions, isset($config->forum->postReview) ? $config->forum->postReview : 'close', "class='checkbox'");?></td><td></td>
+          <th class='w-100px'><?php echo $lang->forum->postReview;?></th> 
+          <td><?php echo html::radio('postReview', $lang->forum->postReviewOptions, isset($config->forum->postReview) ? $config->forum->postReview : 'close', "class='checkbox'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->forum->browseType;?></th> 
+          <td><?php echo html::radio('browseType', $lang->forum->browseTypeOptions, isset($config->forum->browseType) ? $config->forum->browseType : 'board', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
           <th></th>

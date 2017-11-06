@@ -26,9 +26,15 @@ $lang->forum->update     = '更新数据';
 $lang->forum->setting    = '论坛设置';
 $lang->forum->postReview = '发帖审核';
 $lang->forum->allBoards  = '所有版块';
+$lang->forum->browseType = '浏览方式';
 
 $lang->forum->updateDesc    = '该更新操作会重新计算每个版块的发帖数据。';
 $lang->forum->successUpdate = '更新数据成功';
+
+$lang->forum->browseTypeOptions = array();
+$lang->forum->browseTypeOptions['board']  = '版块浏览';
+$lang->forum->browseTypeOptions['latest'] = '主题浏览';
+$lang->forum->browseTypeOptions['stick']  = '置顶主题';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';

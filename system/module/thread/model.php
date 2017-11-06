@@ -126,7 +126,7 @@ class threadModel extends model
      * @access public
      * @return array
      */
-    public function getLatest($boards, $count)
+    public function getLatest($boards, $count, $pager = null)
     { 
         if(strpos($boards, ',') !== false) $boards = explode(',', $boards);
         $boards = empty($boards) ? array() : (array)$boards;
@@ -166,16 +166,16 @@ class threadModel extends model
      * @access public
      * @return array
      */
-    public function getSticks($board = 0)
+    public function getSticks($board = 0, $pager = null)
     {
-        $sticks  = $this->dao->select('*')->from(TABLE_THREAD)->where('stick')->eq(2)->orderBy('id desc')->fetchAll();
-        $sticks1 = $this->dao->select('*')->from(TABLE_THREAD)
-            ->where(1)
+        $sticks = $this->dao->select('*')->from(TABLE_THREAD)
+            ->where('stick')->eq(2)
+            ->orWhere('stick', true)->eq(1)
             ->beginIF($board)->andWhere('board')->eq($board)->fi()
-            ->andWhere('stick')->eq(1)
-            ->orderBy('id desc')->fetchAll();
-
-        foreach($sticks1 as $stick) $sticks[] = $stick;
+            ->markRight(1)
+            ->orderBy('id desc')
+            ->page($pager)
+            ->fetchAll();
 
         return $this->setRealNames($sticks);
     }
