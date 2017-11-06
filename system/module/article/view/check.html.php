@@ -14,7 +14,7 @@
 <?php include '../../common/view/chosen.html.php';?>
 <?php $this->app->loadLang('book');?>
 <?php js::set('confirmReject', $lang->article->confirmReject);?>
-<?php js::set('bookCatalogs',$bookCatalogs);?>
+<?php js::set('bookCatalogs', $bookCatalog);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->submission->check;?></strong></div>
   <div class='panel-body'>
