@@ -19,7 +19,7 @@ class forum extends control
      */
     public function index($mode = '', $pageID = 1)
     {
-        $mode = $mode ? $mode : $this->config->forum->browseType;
+        $mode = $mode ? $mode : $this->config->forum->indexMode;
         $this->forum->updateStats();
 
         $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
