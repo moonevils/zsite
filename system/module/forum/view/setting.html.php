@@ -9,8 +9,8 @@
           <td><?php echo html::radio('postReview', $lang->forum->postReviewOptions, isset($config->forum->postReview) ? $config->forum->postReview : 'close', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->forum->browseType;?></th> 
-          <td><?php echo html::radio('browseType', $lang->forum->browseTypeOptions, isset($config->forum->browseType) ? $config->forum->browseType : 'board', "class='checkbox'");?></td><td></td>
+          <th><?php echo $lang->forum->index;?></th> 
+          <td><?php echo html::radio('indexMode', $lang->forum->indexModeOptions, isset($config->forum->indexMode) ? $config->forum->indexMode : 'board', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
           <th></th>

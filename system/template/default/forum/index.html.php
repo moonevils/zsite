@@ -4,9 +4,9 @@
 
 <?php if($mode == 'latest' or $mode == 'stick'):?>
 <ul class='nav nav-pills'>
-  <li <?php if($mode == 'board')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=board"), $lang->forum->browseTypeOptions['board']);?></li>
-  <li <?php if($mode == 'latest') echo "class='active'";?>><?php echo html::a(inlink('index', "mode=latest"), $lang->forum->browseTypeOptions['latest']);?></li>
-  <li <?php if($mode == 'stick')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=stick"), $lang->forum->browseTypeOptions['stick']);?></li>
+  <li <?php if($mode == 'board')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board']);?></li>
+  <li <?php if($mode == 'latest') echo "class='active'";?>><?php echo html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest']);?></li>
+  <li <?php if($mode == 'stick')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick']);?></li>
 </ul>
 <div class='panel'>
   <table class='table table-hover table-striped'>
@@ -52,9 +52,9 @@
 <?php else:?>
 <div id='boards'>
   <ul class='nav nav-pills'>
-    <li <?php if($mode == 'board')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=board"), $lang->forum->browseTypeOptions['board']);?></li>
-    <li <?php if($mode == 'latest') echo "class='active'";?>><?php echo html::a(inlink('index', "mode=latest"), $lang->forum->browseTypeOptions['latest']);?></li>
-    <li <?php if($mode == 'stick')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=stick"), $lang->forum->browseTypeOptions['stick']);?></li>
+    <li <?php if($mode == 'board')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board']);?></li>
+    <li <?php if($mode == 'latest') echo "class='active'";?>><?php echo html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest']);?></li>
+    <li <?php if($mode == 'stick')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick']);?></li>
   </ul>
   <?php foreach($boards as $parentBoard):?>
   <div class='panel'>
