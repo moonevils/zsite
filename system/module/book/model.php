@@ -640,6 +640,8 @@ class bookModel extends model
             if($node->type == 'article')
             {
                 $article = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
+                $book    = $this->getBookByNode($article);
+                $article->book = $book->alias;
                 $this->loadModel('search')->save('book', $article);
             }
         }
@@ -767,6 +769,7 @@ class bookModel extends model
             if(dao::isError()) return false;
         }
         $book = $this->getNodeByID($nodeID);
+        $book->book = $book->book->alias;
         return $this->loadModel('search')->save('book', $book);
     }
 
