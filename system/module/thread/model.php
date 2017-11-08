@@ -169,10 +169,14 @@ class threadModel extends model
     public function getSticks($board = 0, $pager = null)
     {
         $sticks = $this->dao->select('*')->from(TABLE_THREAD)
-            ->where('stick')->eq(2)
+            ->where('hidden')->eq('0')
+            ->andWhere('addedDate')->le(helper::now())
+
+            ->andWhere('stick', true)->eq(2)
             ->orWhere('stick', true)->eq(1)
             ->beginIF($board)->andWhere('board')->eq($board)->fi()
-            ->markRight(1)
+            ->markRight(2)
+
             ->orderBy('id desc')
             ->page($pager)
             ->fetchAll();
@@ -471,6 +475,9 @@ class threadModel extends model
 
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
+
+        $thread->hidden = $thread->hidden ? 0 : 1;
+        $this->loadModel('search')->save('thread', $thread);
         return !dao::isError();
     }
 

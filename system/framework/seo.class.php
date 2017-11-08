@@ -585,7 +585,8 @@ class uri
         global $config;
         $viewType = $viewType ? $viewType : $config->default->view;
 
-        $link = 'book/' . $alias['book'] . '/';
+        $link = 'book/';
+        if(!empty($alias['book'])) $link .= $alias['book'] . '/';
         if(!empty($alias['node'])) $link .= $alias['node'] . '-';
         $link .= array_shift($params);
 
