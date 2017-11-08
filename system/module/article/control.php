@@ -32,7 +32,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $pageID = 1)
+    public function browse($categoryID = 0, $orderBy = '', $pageID = 1)
     {   
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
@@ -43,15 +43,17 @@ class article extends control
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : ($category ? $category->id : 0);
-        $orderBy    = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
+
+        if(empty($orderBy)) $orderBy = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
         $orderField = str_replace('_asc', '', $orderBy);
         $orderField = str_replace('_desc', '', $orderField);
         if(!in_array($orderField, array('id', 'views', 'addedDate'))) $orderBy = 'addedDate_desc';
+        setcookie('articleOrderBy' . $categoryID, $orderBy, $this->config->cookieLife, $this->config->webRoot, '', false, true);
 
-        $families   = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
-        $sticks     = $this->article->getSticks($families, 'article');
-        $articles   = $this->article->getList('article', $families, $orderBy, $pager);
-        $articles   = $sticks + $articles;
+        $families = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
+        $sticks   = $this->article->getSticks($families, 'article');
+        $articles = $this->article->getList('article', $families, $orderBy, $pager);
+        $articles = $sticks + $articles;
 
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'article');
 
@@ -76,7 +78,7 @@ class article extends control
         $this->view->layouts    = $this->loadModel('block')->getPageBlocks('article', 'browse', $category->id);
         $this->view->sideGrid   = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat  = $this->ui->getThemeSetting('sideFloat', 'right');
-
+    
         $this->display();
     }
     
