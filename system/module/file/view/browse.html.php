@@ -111,7 +111,11 @@ $('#uploader').uploader(
         $file.find('.file-icon').html(this.createFileIcon(file)).css('color', 'hsl(' + $.zui.strCode(file.type || file.ext) + ', 70%, 40%)');
         if(file.percent !== undefined) $file.find('.file-progress-bar').css('width', file.percent + '%');
         var $status = $file.find('.file-status').attr('title', this.lang[status]);
-        $status.find('.text').text(status == 'uploading' ? (file.percent + '%') : ((status == 'failed') ? that.lang[status] : ''));
+
+        if(status == 'uploading') $statusText = file.percent + '%';
+        if(status != 'uploading') $statusText = status == 'failed' ? that.lang[status] : '';
+        $status.find('.text').text($statusText);
+
         $file.find('a.btn-download-file, a.file-name').attr('href', downloadUrl);
         if($.fn.tooltip) $file.find('[data-toggle="tooltip"]').tooltip('fixTitle');
         sortFile();
