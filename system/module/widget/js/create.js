@@ -7,7 +7,6 @@ $().ready(function()
      })
 });
 
-
 $(function()
 {
     $(document).on('click', '.dropdown-menu.buttons .btn', function()

@@ -163,7 +163,6 @@ $('#uploader').uploader(
             $.ajustModalPosition('fit', $modal);
         }
     });
-
 });
 
 function sortFile()

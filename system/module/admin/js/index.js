@@ -3,7 +3,6 @@ $(document).ready(function()
     $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
 });
 
-
 /**
  * index new order module,finisher button
  * click event
@@ -23,7 +22,6 @@ $(document).ready(function()
         return true;
     });
 });
-
 
 /**
  * Delete widget.

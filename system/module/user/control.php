@@ -895,7 +895,7 @@ class user extends control
             {
                 $default = $this->config->user->default;    // Redefine the default module and method in dashbaord scene.
 
-                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> helper::safe64Decode($this->post->referer)));
+                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> urldecode(helper::safe64Decode($this->post->referer))));
                 if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
                 exit;
             }
@@ -926,7 +926,7 @@ class user extends control
                 if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->openID))
                 {
                     $default = $this->config->user->default;
-                    if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> helper::safe64Decode($this->post->referer)));
+                    if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> urldecode(helper::safe64Decode($this->post->referer))));
                     if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
                 }
                 else
