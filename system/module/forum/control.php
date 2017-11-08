@@ -17,28 +17,37 @@ class forum extends control
      * @access public
      * @return void
      */
-    public function index($mode = 'latest')
+    public function index($mode = '', $pageID = 1)
     {
+        $mode = $mode ? $mode : $this->config->forum->indexMode;
         $this->forum->updateStats();
+
+        $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager(0, $recPerPage, $pageID);
 
         $this->loadModel('thread');
         if($mode == 'latest')
         {
             $this->view->title   = $this->lang->thread->latest;
-            $this->view->threads = $this->loadModel('thread')->getLatest(0, $this->config->forum->latestCount);
+            $this->view->threads = $this->loadModel('thread')->getList(0, 'addedDate_desc', $pager);
+            $this->view->boards  = $this->loadModel('tree')->getAbbrPairs('', 'forum');
+            $this->view->pager   = $pager;
         }
         elseif($mode == 'stick')
         {
             $this->view->title   = $this->lang->thread->stick . $this->lang->thread->common;
-            $this->view->threads = $this->loadModel('thread')->getSticks();
+            $this->view->threads = $this->loadModel('thread')->getSticks(0, $pager);
+            $this->view->boards  = $this->loadModel('tree')->getAbbrPairs('', 'forum');
+            $this->view->pager   = $pager;
         }
         else
         {
-            $this->view->title = $this->lang->forumHome;
+            $this->view->title  = $this->lang->forumHome;
+            $this->view->boards = $this->forum->getBoards();
         }
 
         $this->view->mode         = $mode;
-        $this->view->boards       = $this->forum->getBoards();
         $this->view->mobileURL    = helper::createLink('forum', 'index', "mode=$mode", '', 'mhtml');
         $this->view->desktopURL   = helper::createLink('forum', 'index', "mode=$mode", '', 'html');
         $this->view->canonicalURL = $this->app->clientDevice == 'desktop' ? helper::createLink('forum', 'index', "mode=$mode", "", 'html') : helper::createLink('forum', 'index', "mode=$mode", "", 'mhtml'); 

@@ -53,7 +53,7 @@
         <?php endif;?>
         <th class='text-center w-150px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php if($type != 'page' and commonModel::isAvailable('submission')):?>
+        <?php if($type == 'submission'):?>
         <th class='text-center w-60px'> <?php commonModel::printOrderLink('submission', $orderBy, $vars, $lang->article->status);?></th>
         <?php endif;?>
         <?php $actionClass = $type == 'page' ? 'w-250px' : 'w-300px';?>
@@ -94,12 +94,7 @@
         <?php endif;?>
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
-        <?php
-        if($type != 'page' and commonModel::isAvailable('submission'))
-        {
-            echo "<td class='text-center'>" . $lang->submission->status[$article->submission] . '</td>';
-        }
-        ?>
+        <?php if($type == 'submission') echo "<td class='text-center'>" . $lang->submission->status[$article->submission] . '</td>';?>
         <td class='text-center nofixed'>
           <?php if($type == 'submission'):?>
           <?php
@@ -165,7 +160,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <?php $col = commonModel::isAvailable('submission') ? 8 : 7;?>
+        <?php $col = 7;?>
         <?php if($type == 'page') $col = 5;?>
         <?php if($type == 'submission') $col = 8;?>
         <td colspan="<?php echo $col;?>"><?php $pager->show();?></td>

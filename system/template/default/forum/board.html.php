@@ -1,28 +1,14 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header'); ?>
 <div class='row blocks' data-grid='4' data-region='forum_board-top'><?php $this->block->printRegion($layouts, 'forum_board', 'top', true);?></div>
 <?php $common->printPositionBar($board);?>
+<ul class='nav nav-pills'>
+  <li class='active'><?php echo html::a(inlink('index', "mode=board"), $lang->forum->indexModeOptions['board']);?></li>
+  <li><?php echo html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest']);?></li>
+  <li><?php echo html::a(inlink('index', "mode=stick"), $lang->forum->indexModeOptions['stick']);?></li>
+</ul>
 <div class='panel'>
   <div class='panel-heading'>
-    <div class='btn-group'>
-      <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
-        <?php echo $board->name;?> <span class="caret"></span>
-      </button>
-      <ul class='dropdown-menu' role='menu'>
-        <li><?php echo html::a(inlink('index', 'mode=board'), $lang->forum->board);?></li>
-        <?php foreach($boards as $parentBoard):?>
-        <li class='dropdown-submenu'>
-          <?php echo html::a('#', $parentBoard->name);?>
-          <ul class='dropdown-menu'>
-            <?php foreach($parentBoard->children as $childBoard):?>
-            <li><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></li>
-            <?php endforeach;?>
-          </ul>
-        </li>
-        <?php endforeach;?>
-      </ul>
-    </div>
-    <?php echo html::a(inlink('index', "mode=latest"), $lang->thread->latest, "class='btn'");?>
-    <?php echo html::a(inlink('index', "mode=stick"), $lang->thread->stick . $lang->thread->common, "class='btn'");?>
+    <strong><?php echo $board->name;?></strong>
     <?php if($board->moderators) printf(" &nbsp;<span class='moderators hidden-xxs'>" . $lang->forum->lblOwner . '</span>', trim($board->moderators, ',')); ?>
     <div class='panel-actions'>
       <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary'");?>

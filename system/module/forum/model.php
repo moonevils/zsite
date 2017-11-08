@@ -166,6 +166,7 @@ class forumModel extends model
     {
         $setting = new stdclass();
         $setting->postReview = $this->post->postReview; 
+        $setting->indexMode  = $this->post->indexMode; 
         $this->loadModel('setting')->setItems('system.common.forum', $setting);
         return !dao::isError();
     }
