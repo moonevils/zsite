@@ -42,7 +42,6 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
-
         $categoryID = is_numeric($categoryID) ? $categoryID : zget($category, 'id', 0);
 
         $orderBy    = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
