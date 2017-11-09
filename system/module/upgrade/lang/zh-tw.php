@@ -101,3 +101,4 @@ $lang->upgrade->fromVersions['6_3_beta'] = '6.3.beta';
 $lang->upgrade->fromVersions['6_4']      = '6.4';
 $lang->upgrade->fromVersions['6_4_1']    = '6.4.1';
 $lang->upgrade->fromVersions['6_5']      = '6.5';
+$lang->upgrade->fromVersions['6_6']      = '6.6';
