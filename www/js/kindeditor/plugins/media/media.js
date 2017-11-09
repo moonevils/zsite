@@ -75,7 +75,6 @@ KindEditor.plugin('media', function(K) {
             if(isThirdBox[0].checked)
             {
 					      html = htmlBox.val();
-                alert(html);
                 if(K.trim(html) === '')
                 {
                     alert(lang.pleaseInput);
@@ -110,7 +109,7 @@ KindEditor.plugin('media', function(K) {
                     width : width,
                     height : height,
                     autostart : autostartBox[0].checked ? 'true' : 'false',
-                    allowFullscreen : fullscreenBox[0].checked ? 'true' : 'false',
+                    fullscreen : fullscreenBox[0].checked ? 'true' : 'false',
                     loop : 'true'
                   });
             }
