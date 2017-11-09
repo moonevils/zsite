@@ -424,7 +424,6 @@ class commonModel extends model
 
         $menus  = explode(',', $config->menus->{$group});
         $string = "<ul class='nav navbar-nav'>\n";
-
         foreach($menus as $menu)
         {
             $extra = zget($config->menuExtra, $menu, '');
@@ -433,9 +432,10 @@ class commonModel extends model
                 if(!commonModel::isAvailable($config->menuDependence->$menu)) continue;
             }
             if(!isset($lang->menu->{$menu})) continue;
-            $moduleMenu = $lang->menu->{$menu};
+
+            $mainMenu = $lang->menu->{$menu};
             $class = $menu == $currentModule ? " class='active'" : '';
-            list($label, $module, $method, $vars) = explode('|', $moduleMenu);
+            list($label, $module, $method, $vars) = explode('|', $mainMenu);
             
             if($module == 'wechat' and $method != 'admin' and !commonModel::isAvailable($module)) continue;
             if($module != 'wechat' and $module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
@@ -454,7 +454,25 @@ class commonModel extends model
                 $link  = helper::createLink($module, $method, $vars);
                 $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
             }
+            else
+            {
+                foreach($lang->$menu->menu as $moduleMenuKey => $moduleMenu)
+                {
+                    $extra = zget($config->menuExtra, $moduleMenuKey, '');
+
+                    if(is_array($moduleMenu)) $moduleMenu = $moduleMenu['link'];
+                    list($moduleLabel, $moduleName, $methodName, $moduleVars) = explode('|', $moduleMenu);
+
+                    if(commonModel::hasPriv($moduleName, $methodName))
+                    {
+                        $link  = helper::createLink($moduleName, $methodName, $moduleVars);
+                        $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
+                        break;
+                    }
+                }
+            }
         }
+
         if($group == 'home') $string .= "<li>" . html::a(helper::createLink('site', 'sethomemenu'), "<i class='icon icon-plus'> </i>" . $lang->custom) . "</li>";
         
         $string .= "</ul>\n";
