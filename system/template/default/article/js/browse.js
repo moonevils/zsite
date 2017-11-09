@@ -20,6 +20,7 @@ $(document).ready(function()
             $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortDown');
         }
     }
+
     setSorterClass();
     $(document).on('click', '.setOrder', function()
     {
@@ -34,10 +35,7 @@ $(document).ready(function()
             fieldName = $(this).data('field');
         }
 
-        $.cookie('articleOrderBy' + v.categoryID, fieldName + '_' + orderType);
-
-        r = Math.random();
-        url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #articleList' : location.href + '?r=' + r + ' #articleList';
+        url = createLink('article', 'browse', 'category=' + v.categoryID + '&orderBy=' + fieldName + '_' + orderType) + ' #articleList';
 
         $('#mainContainer').load(url, function(){ setSorterClass()});
     });

@@ -11,3 +11,5 @@ www/data
 /www/theme/default/all.css
 ext
 _*
+.idea
+.DS_Store

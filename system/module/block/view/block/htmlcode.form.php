@@ -10,7 +10,14 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $content = (isset($block->content) and !is_object($block->content)) ? $block->content : (isset($block->content->content) ? $block->content->content : '');?>
+<?php
+$content = '';
+if(isset($block->content))
+{
+    if(!is_object($block->content) $content = $block->content;
+    if(is_object($block->content)  $content = isset($block->content->content) ? $block->content->content : '';
+}
+?>
 <?php $content = htmlspecialchars($content);?>
 <tr>
   <th><?php echo $lang->block->htmlcode;?></th>
