@@ -35,7 +35,7 @@
       <?php if($setting->top->left == 'slogan'):?>
       <div id='siteSlogan' class='nobr'><span><?php echo $this->config->site->slogan;?></span></div>
       <?php elseif($setting->topLeftContent):?>
-      <div id='siteSlogan' class='nobr'><span><?php echo htmlspecialchars_decode($setting->topLeftContent, ENT_QUOTES);?></span></div>
+      <div id='selfSiteSlogan' class='nobr'><span><?php echo htmlspecialchars_decode($setting->topLeftContent, ENT_QUOTES);?></span></div>
       <?php endif;?>
       <?php if($setting->top->right == 'loginAndSearch'):?>
       <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
