@@ -6,7 +6,7 @@ css::import($jsRoot . 'videojs/video-js.min.css');
 $videoHtml = <<<EOT
 <video id="VIDEO_ID"
 class="video-js vjs-default-skin vjs-big-play-centered "
-controls preload="auto" loop='loop' autosplay="VIDEO_AUTOSTART" allowfullscreen=VIDEO_FULLSCREEN
+controls preload="auto" loop='loop' autoplay="VIDEO_AUTOSTART" allowfullscreen=VIDEO_FULLSCREEN
 width="VIDEO_WIDTH" height="VIDEO_HEIGHT">
 <source src="VIDEO_SRC" />
 </video>
