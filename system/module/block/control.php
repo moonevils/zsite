@@ -95,6 +95,7 @@ class block extends control
         $template = $this->config->template->{$this->app->clientDevice}->name;
         $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $this->block->loadTemplateLang($template);
+        $this->app->loadLang('ui');
 
         if(!$blockID) $this->locate($this->inlink('admin'));
 
