@@ -30,7 +30,7 @@ class forum extends control
         if($mode == 'latest')
         {
             $this->view->title   = $this->lang->thread->latest;
-            $this->view->threads = $this->loadModel('thread')->getList(0, 'addedDate_desc', $pager);
+            $this->view->threads = $this->loadModel('thread')->getList(0, 'addedDate_desc', $pager, $mode);
             $this->view->boards  = $this->loadModel('tree')->getAbbrPairs('', 'forum');
             $this->view->pager   = $pager;
         }

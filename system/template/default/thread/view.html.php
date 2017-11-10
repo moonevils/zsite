@@ -16,6 +16,7 @@ js::set('viewReplies', $lang->thread->viewReplies);
 js::set('stayCurrent', $lang->thread->stayCurrent);
 js::set('quoteTitle', $lang->thread->quoteTitle);
 js::set('discussion', $thread->discussion);
+js::set('isCurrentPage', ceil(($pager->recTotal + 1) / $pager->recPerPage) == $pager->pageID);
 
 echo "<div class='row blocks' data-grid='4' data-region='thread_view-top'>";
 $this->block->printRegion($layouts, 'thread_view', 'top', true);

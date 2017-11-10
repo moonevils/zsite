@@ -96,12 +96,7 @@
       </div>
       
       <div class='form-group'><?php echo html::submitButton(); ?></div>
-      <?php 
-      echo html::hidden('recTotal',   $pager->recTotal);
-      echo html::hidden('recPerPage', $pager->recPerPage);
-      echo html::hidden('pageID',     $pager->pageTotal);
-      echo html::hidden('reply',      0);
-      ?>
+      <?php echo html::hidden('reply', 0);?>
     </form>
   </div>
 </div>
