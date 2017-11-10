@@ -4,7 +4,7 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            if(v.discussion == '0' || (v.discussion == '1' && response.replyID == 0))
+            if(!v.isCurrentPage && (v.discussion == '0' || (v.discussion == '1' && response.replyID == 0)))
             {
                 bootbox.dialog(
                 {  
