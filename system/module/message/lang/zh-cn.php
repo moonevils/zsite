@@ -32,6 +32,7 @@ $lang->message->noSelectedMessage = '您没有选择任何留言。';
 $lang->message->needCheck         = '留言通过审核后显示。';
 $lang->message->showDetail        = '显示全部';
 $lang->message->hideDetail        = '收起';
+$lang->message->submit            = '提交';
 
 $lang->message->admin          = '后台首页';
 $lang->message->pass           = '通过';
