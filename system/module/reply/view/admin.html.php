@@ -1,7 +1,8 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'>
-  <div class='panel-actions'>
+    <strong><i class='icon-comments'></i> <?php echo $lang->reply->list;?></strong>
+    <div class='panel-actions'>
       <form method='get' class='form-inline form-search'>
         <?php echo html::hidden('m', 'reply');?>
         <?php echo html::hidden('f', 'admin');?>
@@ -15,7 +16,7 @@
         </div>
       </form>
     </div>
-  <strong><i class='icon-comments'></i> <?php echo $lang->reply->list;?></strong></div>
+  </div>
   <table class='table table-hover table-bordered table-fixed table-striped' id='replyList'>
     <thead>
       <tr class='text-center'>
@@ -31,9 +32,7 @@
       <tr class='text-center'>
         <td><?php echo $reply->id;?></td>
         <td class='text-left relpy-content'>
-          <?php 
-          echo html::a(commonModel::createFrontLink('thread', 'locate', "threadID={$reply->thread}&replyID={$reply->id}"), $reply->content, "target=_blank");
-          ?>
+          <?php echo html::a(commonModel::createFrontLink('thread', 'locate', "threadID={$reply->thread}&replyID={$reply->id}"), $reply->content, "target=_blank");?>
         </td>
         <td><?php echo $reply->authorRealname;?></td>
         <td><?php echo substr($reply->addedDate, 5, -3);?></td>

@@ -288,7 +288,7 @@ class replyModel extends model
             ->setForce('editedDate', helper::now())
             ->setForce('thread', $threadID)
             ->stripTags('content', $allowedTags)
-            ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
+            ->remove('files, labels, hidden')
             ->get();
 
         if(strlen($reply->content) > 40)

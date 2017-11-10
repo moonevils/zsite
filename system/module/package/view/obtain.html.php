@@ -47,7 +47,7 @@
             <?php 
             if($latestRelease and $latestRelease->releaseVersion != $currentRelease->releaseVersion) 
             {
-                printf($lang->package->latest, $latestRelease->viewLink, $latestRelease->releaseVersion, $latestRelease->zentaoCompatible);
+                printf($lang->package->latest, $latestRelease->viewLink, $latestRelease->releaseVersion, $latestRelease->chanzhiCompatible);
             }?>
           </small>
           <h5 class='mg-0'><?php echo $package->name . "($currentRelease->releaseVersion)";?></h5>
@@ -118,7 +118,7 @@
     </div>
     <?php if($pager):?>
     <div class='clearfix'>
-      <?php $pager->show()?>
+      <?php $pager->show('right', 'short')?>
     </div>
     <?php endif; ?>
     <?php else:?>
