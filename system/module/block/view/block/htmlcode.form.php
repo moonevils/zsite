@@ -11,11 +11,13 @@
 */
 ?>
 <?php
-$content = '';
-if(isset($block->content))
+if(isset($block->content) and !is_object($block->content))
 {
-    if(!is_object($block->content) $content = $block->content;
-    if(is_object($block->content)  $content = isset($block->content->content) ? $block->content->content : '';
+    $content = $block->content;
+}
+else
+{
+    $content = isset($block->content->content) ? $block->content->content : '';
 }
 ?>
 <?php $content = htmlspecialchars($content);?>
