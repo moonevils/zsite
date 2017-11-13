@@ -99,7 +99,7 @@ class reply extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $urlInfo = $this->reply->getPosition($replyID);
-            if($this->config->requestType == 'GET') $locate = helper::createLink('thread', 'view', "threadID=$thread->id&" . $urlInfo);
+            if($this->config->requestType == 'GET') $locate = helper::createLink('thread', 'view', "threadID=$thread->id" . $urlInfo);
             if($this->config->requestType != 'GET') $locate = helper::createLink('thread', 'view', "threadID=$thread->id", $urlInfo);
 
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
