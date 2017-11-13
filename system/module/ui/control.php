@@ -122,11 +122,14 @@ class ui extends control
         }
 
         $this->lang->menuGroups->ui = 'logo';
-        $template = $this->config->template->{$this->app->clientDevice}->name;
-        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
-        $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
+        $template    = $this->config->template->{$this->app->clientDevice}->name;
+        $theme       = $this->config->template->{$this->app->clientDevice}->theme;
+        $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
 
-        $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
+        $logo = false;
+        if(isset($logoSetting->$template->themes->all))    $logo = $logoSetting->$template->themes->all;
+        if(isset($logoSetting->$template->themes->$theme)) $logo = $logoSetting->$template->themes->$theme;
+
         if($logo) $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
 
         unset($this->lang->ui->menu);
