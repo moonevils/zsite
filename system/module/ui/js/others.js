@@ -131,6 +131,10 @@ $(document).ready(function()
     {
         if($(this).attr('href') == '#watermarkTab')
         {
+            if(v.gdCheck == 0)
+            {
+                $('.form-footer').hide();
+            }
             $('.watermark-footer').removeClass('hidden');
         }
         else
