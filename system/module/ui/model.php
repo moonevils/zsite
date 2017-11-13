@@ -1121,9 +1121,11 @@ class uiModel extends model
             ->from(TABLE_FILE)
             ->where('objectType')->in('slide,source')
             ->fetchAll();
+
         $filesToRemove = array();
         foreach($files as $file)
         {
+            $this->file->setSavePath($file->objectType);
             $realPath = $this->file->savePath . $this->file->getRealPathName($file->pathname);
             if(!file_exists($realPath)) $filesToRemove[] = $file->id;
         }
