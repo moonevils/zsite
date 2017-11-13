@@ -75,8 +75,8 @@ if(!$.zui.strCode)
   <div class='file-list file-list-lg' data-drag-placeholder="<?php echo $lang->file->dragFile;?>"></div>
   <div>
     <div class='uploader-status pull-right text-muted'></div>
-    <button type='button' class='btn btn-primary uploader-btn-browse'><i class='icon icon-plus'></i><?php echo $lang->file->addFile;?></button>
-    <button type='button' class='btn btn-success uploader-btn-start'><i class='icon icon-cloud-upload'></i><?php echo $lang->file->beginUpload;?></button>
+    <button type='button' class='btn btn-primary uploader-btn-browse'><i class='icon icon-plus'></i> <?php echo $lang->file->addFile;?></button>
+    <button type='button' class='btn btn-success uploader-btn-start'><i class='icon icon-cloud-upload'></i> <?php echo $lang->file->beginUpload;?></button>
   </div>
 </div>
 <?php else:?>
