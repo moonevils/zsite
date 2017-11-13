@@ -549,13 +549,13 @@ class packageModel extends model
                 if(isset($installedThemes[$themeInfo->code]))
                 {
                     $i = 1;
-                    while(isset($themes[$themeInfo->code . '_' . $i])) $i ++ ;
+                    while(isset($themes[$themeInfo->code . '_' . $i])) $i ++;
                     $newCode = $themeInfo->code . '_' . $i;
                     $path = "www/theme/{$themeInfo->template}/$newCode";
                 }
             }
-            if(substr($path, 0, 6) == 'system') $groupedPaths['system'][]   = $path;
-            if(substr($path, 0, 3) == 'www')    $groupedPaths['www'][]      = $path;
+            if(substr($path, 0, 6) == 'system') $groupedPaths['system'][] = $path;
+            if(substr($path, 0, 3) == 'www')    $groupedPaths['www'][]    = $path;
             if($type == 'template' and (substr($path, 0, 3) != 'www') and (substr($path, 0, 6) != 'system')) $groupedPaths['template'][] = $path;
         }
 
@@ -566,7 +566,7 @@ class packageModel extends model
                 if($path == 'db' or $path == 'doc' or $path == 'hook') continue;
                 if($baseDir == 'system') $path = dirname($appRoot) . DS . $path;
                 if($baseDir == 'www')    $path = $this->app->getWwwRoot() . substr($path, 4);
-                if($baseDir == 'template' and $type == 'template')  $path = $this->app->getAppRoot() . 'template' . DS . $package . DS . $path;
+                if($baseDir == 'template' and $type == 'template') $path = $this->app->getAppRoot() . 'template' . DS . $package . DS . $path;
 
                 if(is_dir($path))
                 {
