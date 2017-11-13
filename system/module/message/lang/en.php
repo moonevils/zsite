@@ -32,6 +32,7 @@ $lang->message->noSelectedMessage = 'You have not selected any message.';
 $lang->message->needCheck         = 'Message will be posted once reivewed.';
 $lang->message->showDetail        = 'Show all';
 $lang->message->hideDetail        = 'Hide';
+$lang->message->submit            = 'Submit';
 
 $lang->message->admin          = 'Backend Home';
 $lang->message->pass           = 'Pass';

@@ -11,6 +11,8 @@
  */
 $lang->ui->common = "UI";
 
+$lang->ui->gdHelp          = 'Check the installation';
+$lang->ui->gdTip           = 'Image watermark features need to be installed in the PHP-gd extension.';
 $lang->ui->clientDesktop   = 'Desktop';
 $lang->ui->clientMobile    = 'Mobile';
 $lang->ui->logo            = 'Logo';

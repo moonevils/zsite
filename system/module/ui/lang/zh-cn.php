@@ -11,6 +11,8 @@
  */
 $lang->ui->common = "界面";
 
+$lang->ui->gdHelp          = '查看安装方式';
+$lang->ui->gdTip           = '蝉知图片水印功能需要安装php-gd扩展才能使用。';
 $lang->ui->clientDesktop   = '桌面';
 $lang->ui->clientMobile    = '移动';
 $lang->ui->logo            = 'Logo';
