@@ -241,8 +241,20 @@ class messageModel extends model
      */
     public function getList($type, $status, $pager = null)
     {
-        $messages = $this->dao->select('*')->from(TABLE_MESSAGE)
-            ->where(1)
+        $messages = $this->dao->select('*')->from(TABLE_MESSAGE)->orderBy('id_desc')->fetchAll('id');
+
+        /* Get message id list with replies or not. */
+        $messagesWithReply = array();
+        foreach($messages as $message)
+        {
+            if($message->type == 'reply' and isset($messages[$message->objectID]) and $messages[$message->objectID]->type != 'reply')
+            {
+                $messagesWithReply[] = $message->objectID;
+            }
+        }
+
+        $messageIDList = $this->dao->select('id')->from(TABLE_MESSAGE)
+            ->where('id')->notin($messagesWithReply)
             ->beginIf($type != 'all')->andWhere('type')->eq($type)->fi()
             ->beginIf($type == 'all')->andWhere('type')->in('message,comment,reply')->fi()
             ->andWhere('status')->eq($status)
@@ -250,6 +262,11 @@ class messageModel extends model
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');
+
+        foreach($messages as $key => $message)
+        {   
+            if(!isset($messageIDList[$message->id])) unset($messages[$key]);
+        }   
 
         $messages = $this->getTitlesByList($messages);
 
