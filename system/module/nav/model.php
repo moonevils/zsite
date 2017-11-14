@@ -130,6 +130,24 @@ class navModel extends model
         $productTree = $this->loadModel('tree')->getOptionMenu('product');
         $pages       = $this->loadModel('article')->getPagePairs();
 
+        /* Get data list of extend modules. */
+        $enabledModules = array();
+        foreach($this->config->nav->extend->modules as $module => $properties)
+        {
+            $moduleName = isset($properties['module']) ? $properties['module'] : '';
+            $methodName = isset($properties['method']) ? $properties['method'] : '';
+            $params     = isset($properties['params']) ? $properties['params'] : '';
+
+            if($moduleName && $methodName)
+            {
+                $enabledModules[] = $module;
+
+                parse_str($params, $params);
+                $model = $this->loadModel($moduleName);
+                ${"{$module}List"} = call_user_func_array(array($model, $methodName), $params);
+            }
+        }
+
         $articleHidden = ($nav->type == 'article') ? '' : 'hide'; 
         $blogHidden    = ($nav->type == 'blog')    ? '' : 'hide'; 
         $productHidden = ($nav->type == 'product') ? '' : 'hide'; 
@@ -137,6 +155,12 @@ class navModel extends model
         $system        = ($nav->type == 'system')  ? '' : 'hide'; 
         $urlHidden     = ($nav->type == 'custom')  ? '' : 'hide'; 
         $hoverHidden   = $hover ? '' : 'hide'; 
+
+        /* Set css class of extend modules.*/
+        foreach($enabledModules as $module)
+        {
+            ${"{$module}Hidden"} = ($nav->type == $module) ? '' : 'hide';
+        }
 
         $entry = '<i class="icon-folder-open-alt shut"></i><i class="icon icon-circle text-muted"></i>';
         if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i><i class="icon icon-circle text-muted"></i>';
@@ -152,6 +176,9 @@ class navModel extends model
             unset($this->lang->nav->system->forum);
             unset($this->lang->nav->system->book);
             unset($this->lang->nav->system->message);
+
+            /* Unset lang variables of extend modules. */
+            foreach($enabledModules as $module) unset($this->lang->nav->system->$module);
         }
         /* nav type select tag. */
         $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");
@@ -162,6 +189,13 @@ class navModel extends model
             $entry .= html::select("nav[{$grade}][article][]", $articleTree, isset($nav->article) ? $nav->article : '', "class='navSelector form-control {$articleHidden}'");
             $entry .= html::select("nav[{$grade}][product][]", $productTree, isset($nav->product) ? $nav->product : '', "class='navSelector form-control {$productHidden}'");
             $entry .= html::select("nav[{$grade}][page][]", $pages, isset($nav->page) ? $nav->page : '', "class='navSelector form-control {$pageHidden}'");
+
+            /* Tags of extend modules. */
+            foreach($enabledModules as $module)
+            {
+                $class  = ${"{$module}Hidden"};
+                $entry .= html::select("nav[{$grade}][{$module}][]", ${"{$module}List"}, isset($nav->$module) ? $nav->$module : '', "class='navSelector form-control {$class}'");
+            }
         }
         $entry .= html::select("nav[{$grade}][blog][]", $blogTree, isset($nav->blog) ? $nav->blog : '', "class='navSelector form-control {$blogHidden}'");
         $entry .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector form-control {$system}'");
@@ -286,6 +320,15 @@ class navModel extends model
             $page = $this->loadModel('article')->getByID($nav->page);
             if(empty($page)) return '';
             return commonModel::createFrontLink('page', 'view', "pageID={$nav->page}", "name={$page->alias}");
+        }
+
+        /* Get url of extend modules. */
+        if(isset($this->config->nav->extend->modules[$nav->type]))
+        {
+            $properties = $this->config->nav->extend->modules[$nav->type];
+            $extension  = isset($properties['extension']) ? $properties['extension'] : '';
+
+            if($extension) return $this->loadExtension($extension)->getUrl($nav);
         }
 
         return $nav->url;
