@@ -50,14 +50,10 @@ class replyModel extends model
         $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
         $pageID     = (int)($replies / $recPerPage);
         
-        if($mode == 'anchor')
-        {
-            return array('pageID' => $pageID + 1, 'anchorID' => $replies + 2);
-        }
+        if($mode == 'anchor') return array('pageID' => $pageID + 1, 'anchorID' => $reply->id);
 
-        $position = $pageID ? "pageID=" . ($pageID + 1) . "&replyID=$replyID" : "replyID=$replyID";
-
-        return $position;
+        if($this->config->requestType == 'GET') return $pageID ? "&pageID=" . ($pageID + 1) . "#$replyID" : "#$replyID";
+        if($this->config->requestType != 'GET') return $pageID ? "&pageID=" . ($pageID + 1) . "&replyID=$replyID" : "replyID=$replyID";
     }
 
     /**
