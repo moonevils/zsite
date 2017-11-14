@@ -11,4 +11,6 @@
 */
 ?>
 <?php $block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);?>
-<?php echo !is_object($block->content) ? $block->content : (isset($block->content->content) ? $block->content->content : '');?>
+<?php if(!is_object($block->content)) echo $block->content;?>
+<?php if(is_object($block->content))  echo isset($block->content->content) ? $block->content->content : '';?>
+
