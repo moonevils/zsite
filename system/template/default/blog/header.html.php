@@ -125,7 +125,8 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
     <div id='headTitle'>
       <div class="wrapper">
         <?php $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();?>
-        <?php $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);?>
+        <?php if(isset($logoSetting->$template->themes->$theme))  $logo = $logoSetting->$template->themes->$theme;?>
+        <?php if(!isset($logoSetting->$template->themes->$theme)) $logo = isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false;?>
         <?php if($logo):?>
         <?php $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);?>
         <div id='siteLogo' data-ve='logo'>

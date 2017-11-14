@@ -77,7 +77,14 @@ $cdnRoot        = ($this->config->cdn->open == 'open') ? (!empty($this->config->
  
   if(isset($pageCSS)) css::internal($pageCSS);
 
-  echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : (file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '');
+  if(isset($this->config->site->favicon))
+  {
+      echo html::icon(json_decode($this->config->site->favicon)->webPath);
+  }
+  else
+  {
+      echo file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '';
+  }
   echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
   ?>
   <?php $browser = helper::getBrowser(); ?>
