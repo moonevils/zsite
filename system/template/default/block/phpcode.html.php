@@ -11,7 +11,10 @@
 */
 ?>
 <div id="block<?php echo $block->id;?>" class='block'>
-<?php $block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);?>
-<?php $content = !is_object($block->content) ? $block->content : (isset($block->content->content) ? $block->content->content : '');?>
-<?php eval('?>' . htmlspecialchars_decode($content, ENT_QUOTES));?>
+<?php 
+$block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);
+if(!is_object($block->content)) $content = $block->content;
+if(is_object($block->content))  $content = isset($block->content->content) ? $block->content->content : '';
+eval('?>' . htmlspecialchars_decode($content, ENT_QUOTES));
+?>
 </div>
