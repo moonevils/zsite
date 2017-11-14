@@ -9,10 +9,17 @@ $themeName    = $this->config->template->{$this->app->clientDevice}->theme;
     <a href='<?php echo $this->config->webRoot;?>' id='logo'>
       <?php
       $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
-      $logo = isset($logoSetting->$templateName->themes->$themeName) ? $logoSetting->$templateName->themes->$themeName : (isset($logoSetting->$templateName->themes->all) ? $logoSetting->$templateName->themes->all : false);
+      if(isset($logoSetting->$templateName->themes->$themeName))
+      {
+          $logo = $logoSetting->$templateName->themes->$themeName;
+      }
+      else
+      {
+          $logo = isset($logoSetting->$templateName->themes->all) ? $logoSetting->$templateName->themes->all : false;
+      }
       if($logo)
       {
-         $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
+          $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
           echo html::image($this->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
       }
       else
