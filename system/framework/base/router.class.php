@@ -1516,7 +1516,7 @@ class baseRouter
         $code = trim(file_get_contents($fileName));
         if(strpos($code, '<?php') === 0)     $code = ltrim($code, '<?php');
         if(strrpos($code, '?>')   !== false) $code = rtrim($code, '?>');
-        return trim($code);
+        return trim($code) . "\n\n";
     }
 
     //-------------------- 路由相关方法(Routing related methods) --------------------//
