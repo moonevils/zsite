@@ -18,3 +18,6 @@ $config->nav->system->forum   = 'forum|index';
 $config->nav->system->blog    = 'blog|index';
 $config->nav->system->book    = 'book|index';
 $config->nav->system->message = 'message|index';
+
+$config->nav->extend = new stdclass();
+$config->nav->extend->modules = array();
