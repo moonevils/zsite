@@ -45,15 +45,14 @@ class product extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {  
-        $category = $this->loadModel('tree')->getByID($categoryID, 'product');
-
+        $category   = $this->loadModel('tree')->getByID($categoryID, 'product');
+        $categoryID = is_numeric($categoryID) ? $categoryID : zget($category, 'id', 0);
         if($category && $category->link) helper::header301($category->link);
 
         $recPerPage = !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage;
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $recPerPage, $pageID);
 
-        $categoryID = is_numeric($categoryID) ? $categoryID : ($category ? $category->id : 0);
         $orderBy    = zget($_COOKIE, 'productOrderBy' . $categoryID, 'order_desc');
         $orderField = str_replace('_asc', '', $orderBy);
         $orderField = str_replace('_desc', '', $orderField);
@@ -68,10 +67,10 @@ class product extends control
         {
             $category = new stdclass();
             $category->id       = 0;
-            $category->name     = $this->lang->product->home;
-            $category->alias    = '';
-            $category->keywords = '';
             $category->desc     = '';
+            $category->alias    = '';
+            $category->name     = $this->lang->product->home;
+            $category->keywords = '';
         }
 
         $this->session->set('productCategory', $category->id);

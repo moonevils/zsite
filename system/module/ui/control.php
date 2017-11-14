@@ -387,6 +387,33 @@ class ui extends control
             die($this->display());
         }
 
+        $this->app->loadClass('pclzip', true);
+        $zip = new pclzip($packageFile);
+        $licenseFiles = $zip->extract(PCLZIP_OPT_BY_PREG, '/system\/config\/license\/*/');
+
+        $zendEncrypt = false;
+        foreach($licenseFiles as $licenseFile)
+        {
+            if($licenseFile['folder']) continue;
+            if(strpos($licenseFile['filename'], '.txt') !== false) 
+            {
+                $zendEncrypt = true;
+                break;
+            }
+        }
+
+        if($zendEncrypt and !extension_loaded('Zend Guard Loader'))
+        {
+            $this->view->error = $this->lang->ui->theme->encryptTip->zend;
+            die($this->display());
+        }
+
+        if(!$zendEncrypt and !empty($licenseFiles) and !extension_loaded('ionCube Loader'))
+        {
+            $this->view->error = $this->lang->ui->theme->encryptTip->ioncube;
+            die($this->display());
+        }
+
         /* Extract the package. */
         $return = $this->package->extractPackage($package, 'theme');
         if($return->result != 'ok')
