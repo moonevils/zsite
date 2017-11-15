@@ -49,8 +49,9 @@ class seo
         /* Use book instead of help. */
         if($module == 'help') $module = $items[0] = 'book';
 
+        $isFormModule = isset($config->formModules) && is_array($config->formModules) && in_array($module, $config->formModules);
         /* There's no '/' in uri. */
-        if(strpos($uri, '/') === false && !in_array($module, $config->formModules))
+        if(strpos($uri, '/') === false && !$isFormModule)
         {
             /* Use book instead of help. */
             if($uri == 'help') $uri = 'book';
@@ -262,7 +263,7 @@ class seo
         }
 
         /* Form modules. */
-        if(in_array($module, $config->formModules))
+        if($isFormModule)
         {
             $method = isset($items[1]) ? $methodAlias['form']['view'] : $methodAlias['form']['browse'];
             $params = isset($items[1]) ? array('formID' => $items[1]) : array('type' => $module);
