@@ -18,7 +18,7 @@ class source extends control
      * @access public
      * @return void
      */
-    public function css($page)
+    public function css($page, $version = '')
     {
         header('Content-type: text/css');
 
@@ -45,7 +45,7 @@ class source extends control
      * @access public
      * @return void
      */
-    public function js($page = '')
+    public function js($page = '', $version = '')
     {
         header('Content-type: text/js');
 

@@ -443,14 +443,10 @@ class router extends baseRouter
         $langCookieVar = RUN_MODE . 'Lang';
         if((RUN_MODE == 'front' or RUN_MODE == 'admin') and $this->config->installed)
         {
-            $enabledLangs  = $this->config->enabledLangs;
-            $defaultLang   = $this->config->defaultLang;
+            $enabledLangs = $this->config->enabledLangs;
+            $defaultLang  = $this->config->defaultLang;
                 
-            if(!empty($enabledLangs))
-            {
-                $enabledLangs = explode(',', $enabledLangs);
-            }
-            
+            if(!empty($enabledLangs)) $enabledLangs = explode(',', $enabledLangs);
             if(isset($defaultLang) && isset($this->config->langs[$defaultLang])) $this->config->default->lang = $defaultLang;
         }
 
@@ -519,6 +515,7 @@ class router extends baseRouter
     {
         /* If cache on, clear caches. */
         if($this->config->cache->type != 'close') $this->clearCache();
+        if(RUN_MODE == 'admin') $this->setUpdatedTime();
         parent::shutdown();
     }
     
@@ -532,5 +529,27 @@ class router extends baseRouter
     {
         parent::setSuperVars();
         $_POST = validater::filterConfigPlaceholder($_POST);
+    }
+
+	/**
+	 * Set updatedTime to refresh source.
+	 * 
+	 * @access public
+	 * @return void
+	 */
+	public function setUpdatedTime()
+	{
+		if(empty(dao::$changedTables)) return true;
+
+		$setting = new stdclass;
+		$setting->owner   = 'system';
+		$setting->module  = 'common';
+		$setting->section = 'site';
+		$setting->key     = 'updatedTime';
+		$setting->value   = time();
+		$setting->lang    = 'all';
+
+        $dao = new dao();
+		$dao->replace(TABLE_CONFIG)->data($setting)->exec();
     }
 }
