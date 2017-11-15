@@ -87,7 +87,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
       <?php endif;?>
        <div class='form-group'>
         <div class='col-sm-11 col-sm-offset-1'>
-          <span><?php echo html::submitButton('', 'btn btn-primary', 'data-popover-container="false"');?></span>
+          <span><?php echo html::submitButton($lang->message->submit, 'btn btn-primary', 'data-popover-container="false"');?></span>
           <span><small class="text-important"><?php echo $lang->comment->needCheck;?></small></span>
         </div>
       </div>
