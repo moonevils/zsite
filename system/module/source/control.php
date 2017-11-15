@@ -20,7 +20,13 @@ class source extends control
      */
     public function css($page, $version = '')
     {
+        $seconds = 3600 * 24 * 30; 
+        $expires = gmdate("D, d M Y H:i:s", time() + $seconds) . " GMT";
+
         header('Content-type: text/css');
+        header("Expires: $expires");
+        header("Pragma: cache");
+        header("Cache-Control: max-age=$seconds");
 
         if($this->config->cache->type != 'close')
         {
@@ -33,8 +39,7 @@ class source extends control
             $css       = file_get_contents($cacheFile);
         }
         $page = helper::safe64Decode($page);
-        echo "/* Css for $page */\n";
-        echo $css;
+        echo "/* Css for $page, Version=$version */\n $css";
         exit;
     }
 
@@ -47,7 +52,13 @@ class source extends control
      */
     public function js($page = '', $version = '')
     {
+        $seconds = 3600 * 24 * 30; 
+        $expires = gmdate("D, d M Y H:i:s", time() + $seconds) . " GMT";
+
         header('Content-type: text/js');
+        header("Expires: $expires");
+        header("Pragma: cache");
+        header("Cache-Control: max-age=$seconds");
 
         if($this->config->cache->type != 'close')
         {
@@ -60,8 +71,7 @@ class source extends control
             $js        = file_get_contents($cacheFile);
         }
         $page = helper::safe64Decode($page);
-        echo "/* JS for $page */\n";
-        echo $js;
+        echo "/* Js for $page, Version=$version */\n $js";
         exit;
     }
 }
