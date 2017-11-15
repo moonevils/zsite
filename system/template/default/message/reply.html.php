@@ -28,7 +28,7 @@ $email = $this->session->user->account == 'guest' ? '' : $this->session->user->e
     <?php else:?>
     <tr id='captchaBox' class='hiding'></tr>
    <?php endif;?>
-    <tr><td></td><td><?php echo html::submitButton();?></td></tr>
+    <tr><td></td><td><?php echo html::submitButton($lang->message->submit);?></td></tr>
   </table>
 </form>
 <?php if($config->debug) js::import($jsRoot . 'jquery/form/min.js');?>
