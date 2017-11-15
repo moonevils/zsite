@@ -88,11 +88,11 @@ class article extends control
     /**
      * Browse article in admin.
      * 
-     * @param string $type        the article type
-     * @param int    $categoryID  the category id
-     * @param int    $recTotal 
-     * @param int    $recPerPage 
-     * @param int    $pageID 
+     * @param  string $type        the article type
+     * @param  int    $categoryID  the category id
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
