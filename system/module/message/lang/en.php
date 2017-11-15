@@ -76,6 +76,7 @@ $lang->comment->viewComment  = 'Comment';
 $lang->comment->needCheck    = 'Comment will be posted once reviewed.';
 $lang->comment->receiveEmail = 'Email notification';
 
+$lang->comment->submit        = 'Submit';
 $lang->comment->pass          = 'Pass';
 $lang->comment->reply         = 'Reply';
 $lang->comment->replyAt       = 'Replied on';
