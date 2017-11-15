@@ -25,13 +25,13 @@ $config->cache->relation[TABLE_SLIDE]['pages']  = '/';
 $config->cache->relation[TABLE_CONFIG]['blocks'] = '/';
 $config->cache->relation[TABLE_CONFIG]['pages']  = '/';
 
-$config->cache->relation[TABLE_ARTICLE]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist,';
+$config->cache->relation[TABLE_ARTICLE]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist';
 $config->cache->relation[TABLE_ARTICLE]['pages']  = 'article.browse,article.view,page.view,blog.index,blog.view';
 
 $config->cache->relation[TABLE_CATEGORY]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist,articletree,producttree,blogtree,slide';
 $config->cache->relation[TABLE_CATEGORY]['pages']  = 'article.browse,article.view,page.view,blog.index,blog.view,product.browse,index.index';
 
-$config->cache->relation[TABLE_PRODUCT]['blocks'] = 'latestproduct,hotproduct,featuredproduct,';
+$config->cache->relation[TABLE_PRODUCT]['blocks'] = 'latestproduct,hotproduct,featuredproduct';
 $config->cache->relation[TABLE_PRODUCT]['pages']  = 'product.browse,product.view';
 
 $config->cache->relation[TABLE_FILE]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist,articletree,producttree,blogtree,slide,featuredproduct';
@@ -39,7 +39,7 @@ $config->cache->relation[TABLE_FILE]['pages']  = 'article.browse,article.view,pa
 
 $config->cache->relation[TABLE_BOOK]['pages']  = 'book.browse,book.index,book.read';
 
-$config->cache->relation[TABLE_THREAD]['blocks'] = 'latestproduct,hotproduct,';
+$config->cache->relation[TABLE_THREAD]['blocks'] = 'latestproduct,hotproduct';
 
-$config->cache->relation[TABLE_RELATION]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist,';
+$config->cache->relation[TABLE_RELATION]['blocks'] = 'latestarticle,hotarticle,latestblog,pagelist';
 $config->cache->relation[TABLE_RELATION]['pages']  = '/';
