@@ -76,6 +76,7 @@ $lang->comment->viewComment  = '评论';
 $lang->comment->needCheck    = '评论通过审核后显示。';
 $lang->comment->receiveEmail = '接收邮件提醒';
 
+$lang->comment->submit        = '提交';
 $lang->comment->pass          = '通过';
 $lang->comment->reply         = '回复';
 $lang->comment->replyAt       = '回复于';

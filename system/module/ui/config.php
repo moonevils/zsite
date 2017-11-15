@@ -2,7 +2,7 @@
 $config->ui->systemThemes = array('default.default', 'default.tartan', 'default.wide', 'default.clean', 'default.blank', 'mobile.default', 'mobile.colorful', 'mobile.blank');
 
 $config->ui->themeSnapRoot = 'http://www.chanzhi.org/data/upload/';
-$config->ui->gdInstallLink = 'http://www.chanzhi.org';
+$config->ui->gdInstallLink = 'http://www.chanzhi.org/book/chanzhieps/gd-235.html';
 
 $config->ui->groups = array('basic', 'navbar', 'block', 'button', 'header', 'footer');
 $config->ui->require = new stdclass();
