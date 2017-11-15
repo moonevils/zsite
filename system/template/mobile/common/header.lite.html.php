@@ -77,7 +77,7 @@ if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
 if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
 if(!empty($sina->verification)) echo $sina->verification;
 if(!empty($qq->verification))   echo $qq->verification;
-if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
+if(!empty($sina->widget)) js::import('https://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 
 $this->block->printRegion($layouts, 'all', 'header');
 ?>
