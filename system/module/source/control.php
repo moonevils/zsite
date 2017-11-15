@@ -20,13 +20,21 @@ class source extends control
      */
     public function css($page, $version = '')
     {
-        $seconds = 3600 * 24 * 30; 
-        $expires = gmdate("D, d M Y H:i:s", time() + $seconds) . " GMT";
+        $seconds      = 3600 * 24 * 30; 
+        $expires      = gmdate("D, d M Y H:i:s", time() + $seconds) . " GMT";
+        $lastModified = date('D, d M Y H:i:s \G\M\T', $version);
+
+        /* Check if the client has the same page cached. */
+        if(isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && ($_SERVER["HTTP_IF_MODIFIED_SINCE"] == $lastModified))
+        {
+            header("HTTP/1.1 304 Not Modified"); exit;
+        }
 
         header('Content-type: text/css');
         header("Expires: $expires");
         header("Pragma: cache");
         header("Cache-Control: max-age=$seconds");
+        header("Last-Modified: " . $lastModified);
 
         if($this->config->cache->type != 'close')
         {
@@ -52,13 +60,21 @@ class source extends control
      */
     public function js($page = '', $version = '')
     {
-        $seconds = 3600 * 24 * 30; 
-        $expires = gmdate("D, d M Y H:i:s", time() + $seconds) . " GMT";
+        $seconds      = 3600 * 24 * 30; 
+        $expires      = gmdate("D, d M Y H:i:s", time() + $seconds) . " GMT";
+        $lastModified = date('D, d M Y H:i:s \G\M\T', $version);
+
+        /* Check if the client has the same page cached. */
+        if(isset($_SERVER["HTTP_IF_MODIFIED_SINCE"]) && ($_SERVER["HTTP_IF_MODIFIED_SINCE"] == $lastModified))
+        {
+            header("HTTP/1.1 304 Not Modified"); exit;
+        }
 
         header('Content-type: text/js');
         header("Expires: $expires");
         header("Pragma: cache");
         header("Cache-Control: max-age=$seconds");
+        header("Last-Modified: " . $lastModified);
 
         if($this->config->cache->type != 'close')
         {
