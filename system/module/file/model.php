@@ -148,7 +148,8 @@ class fileModel extends model
         foreach($files as $file)
         {
             if($file->editor and $file->objectType != 'article') continue;
-            if($file->isVideo) continue;
+            if($file->isVideo and $file->editor) continue;
+
             $file->title = $file->title . ".$file->extension";
             $fileMD5  = md5_file(rtrim($this->app->getWwwRoot(), '/') . $file->fullURL);
             $fileName = explode('.', basename($file->fullURL));
