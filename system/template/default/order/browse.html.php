@@ -1,5 +1,6 @@
 <?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
 <?php js::set('confirmWarning', $lang->order->confirmWarning);?>
+<?php js::set('cancelWarning',  $lang->order->cancelWarning);?>
 <div class="page-user-control">
   <div class="row">
     <?php include TPL_ROOT . 'user/side.html.php';?>
