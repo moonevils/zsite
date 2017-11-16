@@ -122,6 +122,13 @@ class seo
             return seo::convertURI($module, 'view', $params, $pageID);
         }
 
+        /* Form modules. */
+        if($isFormModule)
+        {
+            $params['formID'] = $items[1];
+            return seo::convertURI('form', 'view', $params, $pageID);
+        }
+
         if($module == 'book')
         {
             if(count($items) > 2)
@@ -260,14 +267,6 @@ class seo
             if(isset($items[3])) $params['orderBy'] = $items['3'];
             $method = $methodAlias[$module]['browse'];
             return seo::convertURI($module, $method, $params, $pageID);
-        }
-
-        /* Form modules. */
-        if($isFormModule)
-        {
-            $method = isset($items[1]) ? $methodAlias['form']['view'] : $methodAlias['form']['browse'];
-            $params = isset($items[1]) ? array('formID' => $items[1]) : array('type' => $module);
-            return seo::convertURI('form', $method, $params, $pageID);
         }
 
         /*  If the first param is a category id, like news/c123.html. */
@@ -441,26 +440,6 @@ class uri
     }
 
     /**
-     * Create form browse.
-     *
-     * @param  array  $params
-     * @param  array  $alias
-     * @param  string $viewType
-     * @static
-     * @access public
-     * @return string
-     */
-    public static function createFormBrowse($params, $alias, $viewType = '')
-    {
-        global $config;
-
-        $link     = array_shift($params);
-        $viewType = $viewType ? $viewType : $config->default->view;
-
-        return $config->webRoot . $link . '.' . $viewType;
-    }
-
-    /**
      * Create form view.
      *
      * @param  array  $params
@@ -475,7 +454,7 @@ class uri
         global $config;
 
         $link = 'form/';
-        if(!empty($alias['category'])) $link = $alias['category'] . '/';
+        if(!empty($alias['type'])) $link = $alias['type'] . '/';
         $link .= array_shift($params);
 
         $viewType = $viewType ? $viewType : $config->default->view;
