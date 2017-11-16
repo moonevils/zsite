@@ -581,7 +581,7 @@ class orderModel extends model
                 /* Cancel link. */
                 $disabled = ($order->deliveryStatus == 'not_send' and $order->payStatus == 'not_paid' and $order->status == 'normal') ? '' : "disabled='disabled'";
                 $class    = $isMobile ? "  btn btn-link " : "";
-                echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "class='cancelLink {$class}'" );
+                echo $disabled ? '' : html::a(helper::createLink('order', 'cancel', "orderID=$order->id"), $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID={$order->id}") . "' class='cancelLink {$class}'" );
             }
 
             /* Delete order link. */
@@ -644,7 +644,7 @@ class orderModel extends model
 
             /* Track link. */
             $disabled = ($order->deliveryStatus != 'not_send') ? '' : "disabled='disabled'";
-            echo $disabled ? '' : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='$class'");
+            echo $disabled ? '' : html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'track', "orderID=$order->id") . "' data-toggle='modal' class='$class'");
 
             /* Refund link. */
             $disabled = ($order->payStatus == 'paid' and $order->deliveryStatus != 'confirmed') ? '' : "disabled='disabled'";
