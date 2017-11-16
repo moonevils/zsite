@@ -823,6 +823,8 @@ class ui extends control
         $community = $this->loadModel('admin')->getRegisterInfo();
         if(!$community)
         {
+            $this->lang->redirecting = $this->lang->effect->redirecting; 
+
             $this->view->reason = $this->lang->effect->bindCommunity;
             $this->view->locate = helper::createLink('admin', 'register');
             $this->display('common', 'redirect');
