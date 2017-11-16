@@ -2330,45 +2330,91 @@ class upgradeModel extends model
      * @access public
      * @return bool
      */
-    public function fixFileURLOfEditor()
+    public function fixFileURLOfEditor($type = 'article', $lastID = 0)
     {
-        $this->dbh->exec('USE ' . $this->config->db->name);
-        $tables = $this->dbh->query('show tables')->fetchAll(PDO::FETCH_COLUMN );
+        $fixOrder = new stdclass();
+        $fixOrder->article  = 'product';
+        $fixOrder->product  = 'book';
+        $fixOrder->book     = 'thread';
+        $fixOrder->thread   = 'reply';
+        $fixOrder->reply    = 'block';
+        $fixOrder->block    = 'slide';
+        $fixOrder->slide    = 'category';
+        $fixOrder->category = 'config';
+        if(!isset($fixOrder->$type)) return true;
 
-        foreach($tables as $table)
+        $tables = new stdclass();
+        $tables->article  = TABLE_ARTICLE;
+        $tables->product  = TABLE_PRODUCT; 
+        $tables->book     = TABLE_BOOK;
+        $tables->thread   = TABLE_THREAD;
+        $tables->reply    = TABLE_REPLY;
+        $tables->block    = TABLE_BLOCK;
+        $tables->slide    = TABLE_SLIDE;
+        $tables->config   = TABLE_CONFIG;
+        $tables->category = TABLE_CATEGORY;
+
+        $fields = new stdclass();
+        $fields->article  = array('content');
+        $fields->product  = array('desc', 'content');
+        $fields->book     = array('content');
+        $fields->thread   = array('content');
+        $fields->reply    = array('content');
+        $fields->block    = array('content');
+        $fields->slide    = array('summary');
+        $fields->category = array('desc');
+        $fields->config   = array('value');
+
+        $limit = 100;
+        $table = $tables->$type;
+        $datas = $this->dao->select('*')
+            ->from($table)
+            ->where(1)
+            ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
+            ->orderBy('id')
+            ->limit($limit)
+            ->fetchAll('id');
+
+        if(empty($datas))
         {
-            $fields = $this->dbh->query("DESC {$table}")->fetchAll(PDO::FETCH_COLUMN );
-            $rows   = $this->dao->select('*')->from($table)->fetchAll();
-
-            foreach($rows as $row)
+            $type   = $fixOrder->$type;
+            $lastID = 0;
+            $this->fixFileURLOfEditor($type, $lastID);
+        }
+        else
+        {
+            foreach($datas as $data) 
             {
-                foreach($fields as $field)
+                foreach($fields->$type as $field)
                 {
-                    if(preg_match_all('/ src=\\\"{([0-9]+)(\.(\w+))?}\\\" /', $row->$field, $matches))
+                    $value = $data->$field;
+                    if(preg_match_all('/ src=\\\"{([0-9]+)(\.(\w+))?}\\\" /', $value, $matches))
                     {
-                        $value = $row->$field;
                         foreach($matches[1] as $fileID)
                         {
                             $file   = $this->loadModel('file')->getByID($fileID);
-                            $src    = str_replace(array('/', '"'), array('\/', '\"'), ' src="{' . $file->pathname . '}" ');
-                            $value  = preg_replace('/ src=\\\"{(' . $fileID . ')(\.(\w+))?}\\\" /', " {$src}", $value);
+                            $src    = str_replace(array('/', '"'), array('\/', '\"'), ' src="' . $this->config->webRoot .  'file.php?f=' . $file->pathname . '&t=' . $file->extension . '" ');
+                            $value  = preg_replace('/ src=\\\"{(' . $fileID . ')(\.(\w+))?}\\\" /', " {$src} ", $value);
                         }
 
-                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where("`{$field}`")->eq($row->$field)->exec();
+                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where('id')->eq($data->id)->exec();
                     }
-                    elseif(preg_match_all('/ src="{([0-9]+)(\.(\w+))?}" /', $row->$field, $matches))
+                    elseif(preg_match_all('/ src="{([0-9]+)(\.(\w+))?}" /', $value, $matches))
                     {
-                        $value = $row->$field;
                         foreach($matches[1] as $fileID)
                         {
                             $file  = $this->loadModel('file')->getByID($fileID);
-                            $value = preg_replace('/ src="{(' . $fileID . ')(\.(\w+))?}" /', ' src="{' . $file->pathname . '}" ', $value);
+                            $src   = ' src="' . $this->config->webRoot .  'file.php?f=' . $file->pathname . '&t=' . $file->extension . '" ';
+                            $value = preg_replace('/ src="{(' . $fileID . ')(\.(\w+))?}" /', " {$src} ", $value);
                         }
 
-                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where("`{$field}`")->eq($row->$field)->exec();
+                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where('id')->eq($data->id)->exec();
                     }
                 }
             }
+
+            $lastID = max(array_keys($datas));
+            $this->fixFileURLOfEditor($type, $lastID);
         }
 
         return !dao::isError();
@@ -2380,46 +2426,90 @@ class upgradeModel extends model
      * @access public
      * @return bool
      */
-    public function processFileURLOfEditor()
+    public function processFileURLOfEditor($type = 'article', $lastID = 0)
     {
-        $this->dbh->exec('USE ' . $this->config->db->name);
-        $tables = $this->dbh->query('show tables')->fetchAll(PDO::FETCH_COLUMN );
+        $processOrder = new stdclass();
+        $processOrder->article  = 'product';
+        $processOrder->product  = 'book';
+        $processOrder->book     = 'thread';
+        $processOrder->thread   = 'reply';
+        $processOrder->reply    = 'block';
+        $processOrder->block    = 'slide';
+        $processOrder->slide    = 'category';
+        $processOrder->category = 'config';
+        if(!isset($processOrder->$type)) return true;
 
-        foreach($tables as $table)
+        $tables = new stdclass();
+        $tables->article  = TABLE_ARTICLE;
+        $tables->product  = TABLE_PRODUCT; 
+        $tables->book     = TABLE_BOOK;
+        $tables->thread   = TABLE_THREAD;
+        $tables->reply    = TABLE_REPLY;
+        $tables->block    = TABLE_BLOCK;
+        $tables->slide    = TABLE_SLIDE;
+        $tables->config   = TABLE_CONFIG;
+        $tables->category = TABLE_CATEGORY;
+
+        $fields = new stdclass();
+        $fields->article  = array('content');
+        $fields->product  = array('desc', 'content');
+        $fields->book     = array('content');
+        $fields->thread   = array('content');
+        $fields->reply    = array('content');
+        $fields->block    = array('content');
+        $fields->slide    = array('summary');
+        $fields->category = array('desc');
+        $fields->config   = array('value');
+
+        $limit = 100;
+        $table = $tables->$type;
+        $datas = $this->dao->select('*')
+            ->from($table)
+            ->where(1)
+            ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
+            ->orderBy('id')
+            ->limit($limit)
+            ->fetchAll('id');
+
+        if(empty($datas))
         {
-            $fields = $this->dbh->query("DESC {$table}")->fetchAll(PDO::FETCH_COLUMN );
-            $rows   = $this->dao->select('*')->from($table)->fetchAll();
-
-            foreach($rows as $row)
+            $type   = $processOrder->$type;
+            $lastID = 0;
+            $this->processFileURLOfEditor($type, $lastID);
+        }
+        else
+        {
+            foreach($datas as $data) 
             {
-                foreach($fields as $field)
+                foreach($fields->$type as $field)
                 {
-                    if(empty($row->$field)) continue;
+                    $value = $data->$field;
 
-                    if(preg_match_all('/ src=\\\"{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}\\\" /', $row->$field, $matches))
+                    if(preg_match_all('/ src=\\\"{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}\\\" /', $value, $matches))
                     {
-                        $value = $row->$field;
                         foreach($matches[1] as $pathname)
                         {
                             $pathname = str_replace('/', '\/', $pathname);
                             $value = preg_replace('/ src=\\\"{(' . $pathname . ')(\.(\w+))?}\\\" /', ' src="' . $this->config->webRoot .  'file.php?f=$1&t=$3" ', $value); 
                         }
 
-                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where("`{$field}`")->eq($row->$field)->exec();
+                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where('id')->eq($data->id)->exec();
                     }
-                    elseif(preg_match_all('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}" /', $row->$field, $matches))
+                    elseif(preg_match_all('/ src="{([0-9]{6}\/f_[a-z0-9]{32})(\.(\w+))?}" /', $value, $matches))
                     {
-                        $value = $row->$field;
                         foreach($matches[1] as $pathname)
                         {
                             $pathname = str_replace('/', '\/', $pathname);
                             $value = preg_replace('/ src="{(' . $pathname . ')(\.(\w+))?}" /', ' src="' . $this->config->webRoot .  'file.php?f=$1&t=$3" ', $value); 
                         }
 
-                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where("`{$field}`")->eq($row->$field)->exec();
+                        $this->dao->update($table)->set("`{$field}`")->eq($value)->where('id')->eq($data->id)->exec();
                     }
                 }
             }
+
+            $lastID = max(array_keys($datas));
+            $this->processFileURLOfEditor($type, $lastID);
         }
 
         return !dao::isError();
