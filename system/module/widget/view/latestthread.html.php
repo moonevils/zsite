@@ -15,7 +15,7 @@ $threads = $this->thread->getListForWidget($limit);
       echo $realName[$thread->author];
       echo "</td>";
     ?>
-    <?php if($this->config->forum->postReview == 'open'):?>
+    <?php if(!empty($this->config->forum->postReview) and $this->config->forum->postReview == 'open'):?>
     <td class='w-50px text-center'><?php echo zget($lang->thread->statusList, $thread->status);?></td>
     <?php endif;?>
     <td class='w-80px'><?php echo formatTime($thread->addedDate, 'm-d H:i');?></td>
