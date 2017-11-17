@@ -941,8 +941,8 @@ class fileModel extends model
             $file['size']      = strlen($imageData);
             $file['addedBy']   = $this->app->user->account;
             $file['addedDate'] = helper::today();
-            $file['title']     = basename($file['pathname']);
             $file['pathname']  = $this->setPathName($file);
+            $file['title']     = basename($file['pathname']);
             $file['editor']    = 1;
 
             $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
