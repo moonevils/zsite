@@ -401,76 +401,47 @@ class commonModel extends model
      */
     public static function createMainMenu($currentModule)
     {
+        $group = self::computeMenuGroup($currentModule);
+
         global $config, $app, $lang;
-
-        self::fixGroups();
-        $currentModule = zget($lang->menuGroups, $currentModule);
-
-        $group = 'home';
-        /* Set current module. */
-        $currentGroup = $app->cookie->currentGroup;
-        if(!in_array($app->getModuleName() . '_' . $app->getMethodName(), $config->multiEntrances)) $currentGroup = false;
-
-        if($currentGroup and isset($config->menus->{$currentGroup}) and strpos($config->menus->$currentGroup, $currentModule) !== false) 
-        {
-            $group = $currentGroup;
-        }
-        else
-        {
-            if(isset($config->menuGroups->$currentModule)) $group = $config->menuGroups->$currentModule;
-        }
-
         $app->session->set('currentGroup', $group);
 
         $menus  = explode(',', $config->menus->{$group});
         $string = "<ul class='nav navbar-nav'>\n";
+
         foreach($menus as $menu)
         {
             $extra = zget($config->menuExtra, $menu, '');
-            if(isset($config->menuDependence->$menu))
-            {
-                if(!commonModel::isAvailable($config->menuDependence->$menu)) continue;
-            }
+
+            if(isset($config->menuDependence->$menu) and !commonModel::isAvailable($config->menuDependence->$menu)) continue;
+            if($menu == 'wechat' and !commonModel::hasPublic()) continue;
             if(!isset($lang->menu->{$menu})) continue;
 
-            $mainMenu = $lang->menu->{$menu};
-            $class = $menu == $currentModule ? " class='active'" : '';
+            $mainMenu      = $lang->menu->{$menu};
+            $currentModule = zget($lang->menuGroups, $currentModule);
+            $class         = $menu == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $mainMenu);
-            
-            if($module == 'wechat' and $method != 'admin' and !commonModel::isAvailable($module)) continue;
-            if($module != 'wechat' and $module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
 
-            /* Just whether article/blog/page menu should shown. */
+            /* Judge whether article/blog/page menu should shown. */
             if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;
             if(!commonModel::isAvailable('video') && $vars == 'type=video') continue;
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
             if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
             if(!commonModel::isAvailable('submission') && $vars == 'type=submission') continue;
+           
+            if($module == 'wechat' and $method != 'admin' and !commonModel::isAvailable($module)) continue;
+            if($module != 'wechat' and $module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
 
-            if($menu == 'wechat' and !commonModel::hasPublic()) continue;
-            
-            if(($module == 'wechat' && $method == 'admin') || commonModel::hasPriv($module, $method))
+            if(commonModel::hasPriv($module, $method) || ($module == 'wechat' && $method == 'admin') )
             {
-                $link  = helper::createLink($module, $method, $vars);
-                $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
+                $link = helper::createLink($module, $method, $vars);
             }
             else
             {
-                foreach($lang->$menu->menu as $moduleMenuKey => $moduleMenu)
-                {
-                    $extra = zget($config->menuExtra, $moduleMenuKey, '');
-
-                    if(is_array($moduleMenu)) $moduleMenu = $moduleMenu['link'];
-                    list($moduleLabel, $moduleName, $methodName, $moduleVars) = explode('|', $moduleMenu);
-
-                    if(commonModel::hasPriv($moduleName, $methodName))
-                    {
-                        $link  = helper::createLink($moduleName, $methodName, $moduleVars);
-                        $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
-                        break;
-                    }
-                }
+                $link = self::getLinkFromSubmenu($menu);
             }
+
+            if($link != '') $string .= "<li$class><a href='$link' $extra>$label</a></li>\n";
         }
 
         if($group == 'home') $string .= "<li>" . html::a(helper::createLink('site', 'sethomemenu'), "<i class='icon icon-plus'> </i>" . $lang->custom) . "</li>";
@@ -479,6 +450,64 @@ class commonModel extends model
         return $string;
     }
      
+    /**
+     * Compute admin menu group of a module.
+     * 
+     * @param  string    $module 
+     * @access public
+     * @return void
+     */
+    public static function computeMenuGroup($module)
+    {
+        global $config, $app, $lang;
+
+        self::fixGroups();
+        $module = zget($lang->menuGroups, $module);
+
+        /* Use home as default admin menu group. */
+        $group = 'home';
+
+        /* Set current module. */
+        $currentGroup = $app->cookie->currentGroup;
+
+        /* Methods not in multiEntrances can not change their menu group. */
+        if(!in_array($app->getModuleName() . '_' . $app->getMethodName(), $config->multiEntrances)) $currentGroup = false;
+
+        if($currentGroup and isset($config->menus->{$currentGroup}) and strpos($config->menus->$currentGroup, $module) !== false) 
+        {
+            $group = $currentGroup;
+        }
+        else
+        {
+            if(isset($config->menuGroups->$module)) $group = $config->menuGroups->$module;
+        }
+
+        return $group;
+    }
+
+    /**
+     * Get Link From Submenu.
+     * 
+     * @param  string    $menuGroup 
+     * @access public
+     * @return string
+     */
+    public static function getLinkFromSubmenu($menuGroup)
+    {
+        global $lang, $config;
+
+        foreach($lang->$menuGroup->menu as $code => $menu)
+        {
+            $extra = zget($config->menuExtra, $code, '');
+            if(is_array($menu)) $menu = $menu['link'];
+            list($label, $moduleName, $methodName, $vars) = explode('|', $menu);
+
+            if(commonModel::hasPriv($moduleName, $methodName)) return helper::createLink($moduleName, $methodName, $vars);
+        }
+
+        return '';
+    }
+
     /**
      * Check  has wechat public.
      * 
@@ -1159,7 +1188,7 @@ class commonModel extends model
      * Get client IP.
      *
      * @access public
-     * @return void
+     * @return string
      */
     public function getIP()
     {
@@ -1278,7 +1307,7 @@ class commonModel extends model
      * 
      * @static
      * @access public
-     * @return void
+     * @return bool
      */
     public static function fixGroups()
     {
