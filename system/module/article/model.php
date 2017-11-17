@@ -373,6 +373,7 @@ class articleModel extends model
         $article = fixer::input('post')
             ->join('categories', ',')
             ->setDefault('addedDate', $now)
+            ->setDefault('submission', 0)
             ->add('editedDate', $now)
             ->add('type', $type)
             ->add('addedBy', $this->app->user->account)
