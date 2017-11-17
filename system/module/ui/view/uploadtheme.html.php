@@ -81,7 +81,7 @@ if(!$.zui.strCode)
 </div>
 <?php else:?>
 <div>
-  <?php printf($lang->guarder->okFileVerify, $canManage['name'], $canManage['content']);?>
+  <?php printf($lang->guarder->okFileVerify, $canManage['name']);?>
   <div class='text-right'><?php echo html::a($this->inlink('uploadtheme'), $lang->confirm, "class='btn btn-primary okFile loadInModal'");?></div>
 </div>
 <?php endif;?>
