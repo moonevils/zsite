@@ -395,6 +395,15 @@ class searchModel extends model
                     ->limit($limit)
                     ->fetchAll('id');
 
+                $attributes = $this->dao->select('*')->from(TABLE_PRODUCT_CUSTOM)->where('product')->in(array_keys($products))->fetchGroup('product');
+
+                foreach($products as $product)
+                {
+                    $product->attributes = '';
+                    $productAttributes = isset($attributes[$product->id]) ? $attributes[$product->id] : array();
+                    foreach($productAttributes as $attribute) $product->attributes .= $attribute->value;
+                }
+
                 if(empty($products))
                 {
                     $type   = $this->config->search->buildOrder['product'];
