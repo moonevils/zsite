@@ -47,7 +47,7 @@ $lang->guarder->noConfigure   = "Email settings cannot be found.";
 $lang->guarder->noEmail       = "No Email address entered";
 $lang->guarder->noQuestion    = "No security questions set up.";
 $lang->guarder->noCaptcha     = "Email verification is disabled.";
-$lang->guarder->okFileVerify  = "Please create <span class='red'>%s</span> on your server and enter <span class='red'>%s</span>.";
+$lang->guarder->okFileVerify  = "Please create <span class='red'>%s</span> on your server.";
 $lang->guarder->sendSuccess   = 'Verification code has been sent to %s';
 $lang->guarder->options       = 'Verification';
 

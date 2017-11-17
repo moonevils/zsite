@@ -57,7 +57,7 @@
 <?php endif;?>
 <?php else:?>
 <div>
-  <?php printf($lang->guarder->okFileVerify, $canManage['name'], $canManage['content']);?>
+  <?php printf($lang->guarder->okFileVerify, $canManage['name']);?>
   <div class='text-right'><?php echo html::a('javascript:;', $lang->confirm, "class='btn btn-primary okFile' onclick='$.reloadAjaxModal()'");?></div>
 </div>
 <?php endif;?>

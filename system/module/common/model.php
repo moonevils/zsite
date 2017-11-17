@@ -1049,30 +1049,29 @@ class commonModel extends model
      */
     public function verifyAdmin()
     {
-        if($this->session->okFileName == false or $this->session->okFileName == '')
-        {
-            $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
-            $this->session->set('okFileContent', helper::createRandomStr(4, $skip = '0-9A-Z'));
-        }
+        if(!$this->session->okFileName) $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
         $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
 
-        if(file_exists($okFile) and (trim(file_get_contents($okFile)) != $this->session->okFileContent) or !$this->session->okFileContent)
+        if(file_exists($okFile))
         {
-            @unlink($okFile);
-            $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
-            $this->session->set('okFileContent', helper::createRandomStr(4, $skip = '0-9A-Z'));
-            $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
+            if(!$this->session->okFileTime) $this->session->set('okFileTime', time());
+
+            if(time() - $this->session->okFileTime > 180)
+            {
+                @unlink($okFile);
+                $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
+                $this->session->set('okFileTime', '');
+
+                $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
+            }
+            else
+            {
+                $this->session->set('verify', 'pass');
+                return array('result' => 'success');
+            }
         }
 
-        if(!file_exists($okFile) or trim(file_get_contents($okFile)) != $this->session->okFileContent)
-        {
-            return array('result' => 'fail', 'name' => $okFile, 'content' => $this->session->okFileContent);
-        }
-
-        $this->session->set('verify', 'pass');
-        $this->session->set('okFileName', '');
-
-        return array('result' => 'success');
+        if(!file_exists($okFile)) return array('result' => 'fail', 'name' => $okFile);
     }
 
     /**
