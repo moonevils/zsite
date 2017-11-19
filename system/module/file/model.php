@@ -1420,7 +1420,7 @@ class fileModel extends model
      * @param  string  $objectType 
      * @param  string  $size 
      * @access public
-     * @return void
+     * @return string
      */
     public function printFileURL($pathname, $extension, $objectType = '', $size = '')
     {
