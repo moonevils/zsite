@@ -1083,7 +1083,8 @@ class commonModel extends model
 
         if(file_exists($okFile))
         {
-            if(!$this->session->okFileTime) $this->session->set('okFileTime', time());
+            $fileUpdateTime = filemtime($okFile);
+            if(!$this->session->okFileTime) $this->session->set('okFileTime', $fileUpdateTime);
 
             if(time() - $this->session->okFileTime > 180)
             {
