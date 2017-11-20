@@ -177,10 +177,10 @@ class upgradeModel extends model
                 $this->processProductViews();
             case '6_4';
             case '6_4_1':
-                $this->fixFileURLOfEditor();
+                $this->fixFileURLInEditor();
             case '6_5';
             case '6_6':
-                $this->processFileURLOfEditor();
+                $this->processFileURLInEditor();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2325,12 +2325,12 @@ class upgradeModel extends model
     }
 
     /**
-     * Fix file url for editor.
+     * Fix file url in editor.
      * 
      * @access public
      * @return bool
      */
-    public function fixFileURLOfEditor($type = 'article', $lastID = 0)
+    public function fixFileURLInEditor($type = 'article', $lastID = 0)
     {
         $fixOrder = new stdclass();
         $fixOrder->article  = 'product';
@@ -2365,12 +2365,15 @@ class upgradeModel extends model
         $fields->category = array('desc');
         $fields->config   = array('value');
 
-        $limit = 100;
+        $limit = 300;
         $table = $tables->$type;
         $datas = $this->dao->select('*')
             ->from($table)
             ->where(1)
             ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
+            ->beginIF(strpos("$tables->article,$tables->thread,$tables->reply,$tables->book", $table) !== false )
+            ->andWhere('content')->like("src=\"{")
+            ->fi()
             ->orderBy('id')
             ->limit($limit)
             ->fetchAll('id');
@@ -2379,7 +2382,7 @@ class upgradeModel extends model
         {
             $type   = $fixOrder->$type;
             $lastID = 0;
-            $this->fixFileURLOfEditor($type, $lastID);
+            $this->fixFileURLInEditor($type, $lastID);
         }
         else
         {
@@ -2392,9 +2395,9 @@ class upgradeModel extends model
                     {
                         foreach($matches[1] as $fileID)
                         {
-                            $file   = $this->loadModel('file')->getByID($fileID);
-                            $src    = str_replace(array('/', '"'), array('\/', '\"'), ' src="' . $this->config->webRoot .  'file.php?f=' . $file->pathname . '&t=' . $file->extension . '" ');
-                            $value  = preg_replace('/ src=\\\"{(' . $fileID . ')(\.(\w+))?}\\\" /', " {$src} ", $value);
+                            $file  = $this->loadModel('file')->getByID($fileID);
+                            $src   = str_replace(array('/', '"'), array('\/', '\"'), ' src="' . $this->config->webRoot .  'file.php?f=' . $file->pathname . '&t=' . $file->extension . '" ');
+                            $value = preg_replace('/ src=\\\"{(' . $fileID . ')(\.(\w+))?}\\\" /', " {$src} ", $value);
                         }
 
                         $this->dao->update($table)->set("`{$field}`")->eq($value)->where('id')->eq($data->id)->exec();
@@ -2414,7 +2417,7 @@ class upgradeModel extends model
             }
 
             $lastID = max(array_keys($datas));
-            $this->fixFileURLOfEditor($type, $lastID);
+            $this->fixFileURLInEditor($type, $lastID);
         }
 
         return !dao::isError();
@@ -2426,7 +2429,7 @@ class upgradeModel extends model
      * @access public
      * @return bool
      */
-    public function processFileURLOfEditor($type = 'article', $lastID = 0)
+    public function processFileURLInEditor($type = 'article', $lastID = 0)
     {
         $processOrder = new stdclass();
         $processOrder->article  = 'product';
@@ -2461,12 +2464,15 @@ class upgradeModel extends model
         $fields->category = array('desc');
         $fields->config   = array('value');
 
-        $limit = 100;
+        $limit = 300;
         $table = $tables->$type;
         $datas = $this->dao->select('*')
             ->from($table)
             ->where(1)
             ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
+            ->beginIF(strpos("$tables->article,$tables->thread,$tables->reply,$tables->book", $table) !== false )
+            ->andWhere('content')->like("src=\"{")
+            ->fi()
             ->orderBy('id')
             ->limit($limit)
             ->fetchAll('id');
@@ -2475,7 +2481,7 @@ class upgradeModel extends model
         {
             $type   = $processOrder->$type;
             $lastID = 0;
-            $this->processFileURLOfEditor($type, $lastID);
+            $this->processFileURLInEditor($type, $lastID);
         }
         else
         {
@@ -2509,7 +2515,7 @@ class upgradeModel extends model
             }
 
             $lastID = max(array_keys($datas));
-            $this->processFileURLOfEditor($type, $lastID);
+            $this->processFileURLInEditor($type, $lastID);
         }
 
         return !dao::isError();
