@@ -113,6 +113,8 @@ $filter->user->adminlog->get['date']         = 'reg::date';
 $filter->user->oauthcallback->get['state']   = 'reg::base64';
 $filter->user->oauthcallback->get['code']    = 'reg::base64';
 $filter->user->oauthcallback->get['referer'] = 'reg::base64';
+$filter->user->delete->get['admin']          = 'reg::number';
+$filter->user->batchdelete->get['admin']     = 'reg::number';
 
 $filter->message->default = new stdclass();
 $filter->message->default->cookie['cmts'] = 'reg::any';

@@ -770,8 +770,7 @@ class treeModel extends model
     public function fixMenu($type = 'article')
     {
         $menuGroup = zget($this->config->tree->menuGroups, $type);
-        if(isset($this->lang->tree->adminLinks->$type)) unset($this->lang->tree->menu);
-        if(!isset($this->lang->tree->adminLinks->$type) and isset($this->lang->$menuGroup->menu)) $this->lang->tree->menu = $this->lang->$menuGroup->menu;
+        if(isset($this->lang->tree->adminLinks->$type)) unset($this->lang->$menuGroup->menu);
         $this->lang->menuGroups->tree = $menuGroup;
     }
 

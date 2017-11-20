@@ -20,10 +20,8 @@ foreach (explode('|', $lang->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
-
-$gd = extension_loaded('gd') ? 1 : 0;
-js::set('gdCheck', $gd);
-
+$gdInstalled = extension_loaded('gd') ? 1 : 0;
+js::set('gdInstalled', $gdInstalled);
 ?>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
   <div class='panel' id='mainPanel'>
@@ -188,17 +186,16 @@ js::set('gdCheck', $gd);
 
         <div class='tab-pane setting-control-tab-pane' id='watermarkTab'>
           <table class='table table-form w-p65'>
-            <!--watermark open or close -->
-
-            <?php if(!extension_loaded('gd')):?>
-            <div class='gd-check'>
-              <th></th>
-              <td colspan='3'>
-                <p style='color:red'><?php echo $lang->ui->gdTip;?></p>
-                <p><?php echo html::a($config->ui->gdInstallLink, $lang->ui->gdHelp)?></p>
+            <?php if(!$gdInstalled):?>
+            <tr class='gd-check'>
+              <td>
+                <p class='text-danger'><?php echo $lang->ui->gdTip;?></p>
+                <p><?php echo html::a($config->ui->gdHelpLink, $lang->ui->gdHelp, "target='_blank'")?></p>
               </td>
-            </div>
+            </tr>
             <?php else:?>
+
+            <!--watermark open or close -->
             <tr>
               <th class='w-120px'><?php echo $lang->file->watermark;?></th>
               <td><?php echo html::radio('files[watermark]', $lang->file->watermarkList, isset($this->config->file->watermark) ? $this->config->file->watermark : 'close');?></td>

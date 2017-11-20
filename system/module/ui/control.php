@@ -318,7 +318,7 @@ class ui extends control
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'])));
 
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => $this->lang->ui->filesRequired));
 
@@ -791,7 +791,7 @@ class ui extends control
         {
             $canManage = array('result' => 'success');
             if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'warning' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'warning' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'])));
             $result = $this->ui->writeViewFile($template, $this->post->module, $this->post->file);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('editTemplate', "moduel=$module&file=$file")));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
@@ -823,6 +823,8 @@ class ui extends control
         $community = $this->loadModel('admin')->getRegisterInfo();
         if(!$community)
         {
+            $this->lang->redirecting = $this->lang->effect->redirecting; 
+
             $this->view->reason = $this->lang->effect->bindCommunity;
             $this->view->locate = helper::createLink('admin', 'register');
             $this->display('common', 'redirect');
