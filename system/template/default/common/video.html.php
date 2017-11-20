@@ -5,10 +5,10 @@ css::import($jsRoot . 'videojs/video-js.min.css');
 <?php
 $videoHtml = <<<EOT
 <video id="VIDEO_ID"
-class="video-js vjs-default-skin vjs-big-play-centered "
-controls preload="auto" loop='loop' autoplay="VIDEO_AUTOSTART" allowfullscreen=VIDEO_FULLSCREEN
-width="VIDEO_WIDTH" height="VIDEO_HEIGHT">
-<source src="VIDEO_SRC" />
+class="video-js vjs-default-skin vjs-big-play-centered"
+controls preload="auto" loop='loop'
+data-setup='{"autoplay": VIDEO_AUTOSTART, "width": VIDEO_WIDTH, "height": VIDEO_HEIGHT, "controlBar": {"fullscreenToggle": VIDEO_FULLSCREEN}}'>
+<source src="VIDEO_SRC" type="video/mp4" />
 </video>
 EOT;
 ?>
@@ -35,8 +35,6 @@ $(function()
             $container = $container.replace(/VIDEO_AUTOSTART/, autostart);
             $container = $container.replace(/VIDEO_FULLSCREEN/, fullscreen);
             $(this).replaceWith($container);
-            $('#'+containerID).width(w);
-            $('#'+containerID).height(h);
         }
     })
 });

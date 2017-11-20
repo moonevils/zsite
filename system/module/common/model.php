@@ -496,6 +496,8 @@ class commonModel extends model
     {
         global $lang, $config;
 
+        if(!isset($lang->$menuGroup->menu)) return '';
+
         foreach($lang->$menuGroup->menu as $code => $menu)
         {
             $extra = zget($config->menuExtra, $code, '');
