@@ -71,7 +71,7 @@ $(document).ready(function()
       <tr class='option-okfile'>
         <th></th>
         <td colspan='3'>
-          <p><?php printf($lang->guarder->okFileVerify, $okFile['name'], $okFile['content']);?></p>
+          <p><?php printf($lang->guarder->okFileVerify, $okFile['name']);?></p>
           <p><?php echo $fileBtn?></p>
         </td>
       </tr>

@@ -11,16 +11,13 @@
 */
 ?>
 <?php
-if(isset($block->content) and !is_object($block->content))
-{
-    $content = $block->content;
-}
-else
-{
-    $content = isset($block->content->content) ? $block->content->content : '';
-}
+if(!isset($block->content)) $block->content = '';
+
+if(!is_object($block->content)) $content = $block->content;
+if(is_object($block->content))  $content = isset($block->content->content) ? $block->content->content : '';
+
+$content = htmlspecialchars($content);
 ?>
-<?php $content = htmlspecialchars($content);?>
 <tr>
   <th><?php echo $lang->block->htmlcode;?></th>
   <td><?php echo html::textarea('content', $content, "rows=20 class='form-control codeeditor' data-height='350'");?></td>

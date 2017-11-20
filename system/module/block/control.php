@@ -43,7 +43,6 @@ class block extends control
         $this->block->loadTemplateLang($template);
 
         $this->lang->menuGroups->block = 'ui';
-        $this->lang->block->menu = $this->lang->theme->menu;
 
         $this->view->title    = $this->lang->block->pages;
         $this->view->plans    = $this->block->getPlans($template);

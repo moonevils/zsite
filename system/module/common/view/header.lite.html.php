@@ -64,36 +64,36 @@ $themeRoot = $webRoot . "theme/default/";
 
   if(isset($pageCSS)) css::internal($pageCSS);
 
-  if(isset($this->config->site->favicon))  echo html::icon(json_decode($this->config->site->favicon)->webPath);
-  if(!isset($this->config->site->favicon)) echo file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '';
+  if(!isset($this->config->site->favicon) and file_exists($this->app->getWwwRoot() . 'favicon.ico')) echo html::icon($webRoot . 'favicon.ico');
+  if(isset($this->config->site->favicon)) echo html::icon(json_decode($this->config->site->favicon)->webPath);
 
   echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
-?>
-<!--[if lt IE 9]>
-<?php
-if($config->debug)
-{
-    js::import($jsRoot . 'html5shiv/min.js');
-    js::import($jsRoot . 'respond/min.js');
-}
-else
-{
-    js::import($jsRoot . 'chanzhi.all.ie8.js');
-}
-?>
-<![endif]-->
-<!--[if lt IE 10]>
-<?php
-if($config->debug)
-{
-    js::import($jsRoot . 'jquery/placeholder/min.js');
-}
-else
-{
-    js::import($jsRoot . 'chanzhi.all.ie9.js');
-}
-?>
-<![endif]-->
-<?php js::set('lang', $lang->js);?>
+  ?>
+  <!--[if lt IE 9]>
+  <?php
+  if($config->debug)
+  {
+      js::import($jsRoot . 'html5shiv/min.js');
+      js::import($jsRoot . 'respond/min.js');
+  }
+  else
+  {
+      js::import($jsRoot . 'chanzhi.all.ie8.js');
+  }
+  ?>
+  <![endif]-->
+  <!--[if lt IE 10]>
+  <?php
+  if($config->debug)
+  {
+      js::import($jsRoot . 'jquery/placeholder/min.js');
+  }
+  else
+  {
+      js::import($jsRoot . 'chanzhi.all.ie9.js');
+  }
+  ?>
+  <![endif]-->
+  <?php js::set('lang', $lang->js);?>
 </head>
 <body>

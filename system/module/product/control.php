@@ -366,8 +366,6 @@ class product extends control
      */
     public function setting()
     {
-        unset($this->lang->product->menu);
-        $this->lang->product->menu = $this->lang->orderSetting->menu;
         $this->lang->menuGroups->product = 'orderSetting';
         if(commonModel::isAvailable('shop')) $this->app->loadLang('order');
         if($_POST)

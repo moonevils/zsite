@@ -63,6 +63,15 @@ if(!$.zui.strCode)
 }
 </script>
 <?php if($canManage['result'] == 'success'):?>
+<div>
+  <?php
+  $encryptTip = '';
+  if(!extension_loaded('zend guard loader') && extension_loaded('ioncube loader'))  $encryptTip = $lang->ui->theme->encryptTip->noZend;
+  if(extension_loaded('zend guard loader') && !extension_loaded('ioncube loader'))  $encryptTip = $lang->ui->theme->encryptTip->noIoncube;
+  if(!extension_loaded('Zend Guard Loader') && !extension_loaded('ionCube Loader')) $encryptTip = $lang->ui->theme->encryptTip->none;
+  echo $encryptTip ? "<p class='text-danger'>" . $lang->ui->theme->encryptTip->common . $encryptTip . '</p>' : '';
+  ?>
+</div>
 <div id='typeCheckBox'>
   <?php echo html::radio('type', $lang->ui->importTypes, 'theme', "class='checkbox'")?>
   <span id="typeTip" class="text-danger"><?php echo $lang->js->importTip ?></span>
@@ -81,7 +90,7 @@ if(!$.zui.strCode)
 </div>
 <?php else:?>
 <div>
-  <?php printf($lang->guarder->okFileVerify, $canManage['name'], $canManage['content']);?>
+  <?php printf($lang->guarder->okFileVerify, $canManage['name']);?>
   <div class='text-right'><?php echo html::a($this->inlink('uploadtheme'), $lang->confirm, "class='btn btn-primary okFile loadInModal'");?></div>
 </div>
 <?php endif;?>
@@ -156,15 +165,11 @@ $('#uploader').uploader(
         $file.toggleClass('can-set-primary', status === 'done' && file.isImage && !(file.primary && file.primary !== '0'));
         $file.find('.file-icon').html(this.createFileIcon(file)).css('color', 'hsl(' + $.zui.strCode(file.type || file.ext) + ', 70%, 40%)');
         if(file.percent !== undefined) $file.find('.file-progress-bar').css('width', file.percent + '%');
-        var $status = $file.find('.file-status').attr('title', this.lang[status]);
-        if(status == 'uploading')
-        {
-            $status.find('.text').text(file.percent + '%');
-        }
-        else
-        {
-            $status.find('.text').text(status == 'failed'? that.lang[status] : '');
-        }
+
+        var $statusContainer = $file.find('.file-status').attr('title', this.lang[status]);
+        if(status == 'uploading') $statusContainer.find('.text').text(file.percent + '%');
+        if(status != 'uploading') $statusContainer.find('.text').text(status == 'failed' ? that.lang[status] : '');
+
         $file.find('a.btn-download-file, a.file-name').attr('href', downloadUrl);
         if($.fn.tooltip) $file.find('[data-toggle="tooltip"]').tooltip('fixTitle');
     },
