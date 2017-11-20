@@ -192,8 +192,8 @@ js::set('gdInstalled', $gdInstalled);
             <div class='gd-check'>
               <th></th>
               <td colspan='3'>
-                <p style='color:red'><?php echo $lang->ui->gdTip;?></p>
-                <p><?php echo html::a($config->ui->gdInstallLink, $lang->ui->gdHelp)?></p>
+                <p class='text-danger'><?php echo $lang->ui->gdTip;?></p>
+                <p><?php echo html::a($config->ui->gdHelpLink, $lang->ui->gdHelp)?></p>
               </td>
             </div>
             <?php else:?>
