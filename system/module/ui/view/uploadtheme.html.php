@@ -63,6 +63,15 @@ if(!$.zui.strCode)
 }
 </script>
 <?php if($canManage['result'] == 'success'):?>
+<div>
+  <?php
+  $encryptTip = '';
+  if(!extension_loaded('zend guard loader') && extension_loaded('ioncube loader'))  $encryptTip = $lang->ui->theme->encryptTip->noZend;
+  if(extension_loaded('zend guard loader') && !extension_loaded('ioncube loader'))  $encryptTip = $lang->ui->theme->encryptTip->noIoncube;
+  if(!extension_loaded('Zend Guard Loader') && !extension_loaded('ionCube Loader')) $encryptTip = $lang->ui->theme->encryptTip->none;
+  echo $encryptTip ? "<p class='text-danger'>" . $lang->ui->theme->encryptTip->common . $encryptTip . '</p>' : '';
+  ?>
+</div>
 <div id='typeCheckBox'>
   <?php echo html::radio('type', $lang->ui->importTypes, 'theme', "class='checkbox'")?>
   <span id="typeTip" class="text-danger"><?php echo $lang->js->importTip ?></span>
