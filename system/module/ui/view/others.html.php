@@ -186,24 +186,16 @@ js::set('gdInstalled', $gdInstalled);
 
         <div class='tab-pane setting-control-tab-pane' id='watermarkTab'>
           <table class='table table-form w-p65'>
-            <!--watermark open or close -->
-
             <?php if(!$gdInstalled):?>
-<<<<<<< HEAD
             <tr class='gd-check'>
               <td>
                 <p class='text-danger'><?php echo $lang->ui->gdTip;?></p>
-                <p><?php echo html::a($config->ui->gdInstallLink, $lang->ui->gdHelp, "target='_blank'")?></p>
-=======
-            <div class='gd-check'>
-              <th></th>
-              <td colspan='3'>
-                <p class='text-danger'><?php echo $lang->ui->gdTip;?></p>
-                <p><?php echo html::a($config->ui->gdHelpLink, $lang->ui->gdHelp)?></p>
->>>>>>> f1734d2302711af209dfc625f8a3bccf0b28de50
+                <p><?php echo html::a($config->ui->gdHelpLink, $lang->ui->gdHelp, "target='_blank'")?></p>
               </td>
             </tr>
             <?php else:?>
+
+            <!--watermark open or close -->
             <tr>
               <th class='w-120px'><?php echo $lang->file->watermark;?></th>
               <td><?php echo html::radio('files[watermark]', $lang->file->watermarkList, isset($this->config->file->watermark) ? $this->config->file->watermark : 'close');?></td>
