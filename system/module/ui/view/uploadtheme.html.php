@@ -156,15 +156,11 @@ $('#uploader').uploader(
         $file.toggleClass('can-set-primary', status === 'done' && file.isImage && !(file.primary && file.primary !== '0'));
         $file.find('.file-icon').html(this.createFileIcon(file)).css('color', 'hsl(' + $.zui.strCode(file.type || file.ext) + ', 70%, 40%)');
         if(file.percent !== undefined) $file.find('.file-progress-bar').css('width', file.percent + '%');
-        var $status = $file.find('.file-status').attr('title', this.lang[status]);
-        if(status == 'uploading')
-        {
-            $status.find('.text').text(file.percent + '%');
-        }
-        else
-        {
-            $status.find('.text').text(status == 'failed'? that.lang[status] : '');
-        }
+
+        var $statusContainer = $file.find('.file-status').attr('title', this.lang[status]);
+        if(status == 'uploading') $statusContainer.find('.text').text(file.percent + '%');
+        if(status != 'uploading') $statusContainer.find('.text').text(status == 'failed' ? that.lang[status] : '');
+
         $file.find('a.btn-download-file, a.file-name').attr('href', downloadUrl);
         if($.fn.tooltip) $file.find('[data-toggle="tooltip"]').tooltip('fixTitle');
     },
