@@ -189,13 +189,12 @@ js::set('gdInstalled', $gdInstalled);
             <!--watermark open or close -->
 
             <?php if(!$gdInstalled):?>
-            <div class='gd-check'>
-              <th></th>
-              <td colspan='3'>
-                <p style='color:red'><?php echo $lang->ui->gdTip;?></p>
-                <p><?php echo html::a($config->ui->gdInstallLink, $lang->ui->gdHelp)?></p>
+            <tr class='gd-check'>
+              <td>
+                <p class='text-danger'><?php echo $lang->ui->gdTip;?></p>
+                <p><?php echo html::a($config->ui->gdInstallLink, $lang->ui->gdHelp, "target='_blank'")?></p>
               </td>
-            </div>
+            </tr>
             <?php else:?>
             <tr>
               <th class='w-120px'><?php echo $lang->file->watermark;?></th>
