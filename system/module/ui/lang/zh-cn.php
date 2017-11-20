@@ -295,8 +295,12 @@ $lang->ui->importTypes->theme = '只导入主题';
 $lang->ui->importTypes->full  = '完整导入';
 
 $lang->ui->theme->encryptTip = new stdclass();
-$lang->ui->theme->encryptTip->zend    = '您导入的主题是zend方式加密的，需要环境安装Zend Guard Loader解密程序，<a href="http://www.chanzhi.org/book/chanzhieps/133.html" target="_blank">Zend Guard Loader安装文档</a> 。';
-$lang->ui->theme->encryptTip->ioncube = '导入的主题是ioncube软件加密的，需要环境安装ioncube扩展，<a href="http://www.chanzhi.org/book/chanzhieps/189.html" target="_blank">ioncube扩展安装文档</a> 。';
+$lang->ui->theme->encryptTip->common    = '提示：';
+$lang->ui->theme->encryptTip->zend      = '您导入的主题是zend方式加密的，需要环境安装Zend Guard Loader解密程序，<a href="http://www.chanzhi.org/book/chanzhieps/133.html" target="_blank">Zend Guard Loader安装文档</a> 。';
+$lang->ui->theme->encryptTip->ioncube   = '导入的主题是ioncube软件加密的，需要环境安装ioncube扩展，<a href="http://www.chanzhi.org/book/chanzhieps/189.html" target="_blank">ioncube扩展安装文档</a> 。';
+$lang->ui->theme->encryptTip->noZend    = '您没有安装Zend Guard Loader解密程序。';
+$lang->ui->theme->encryptTip->noIoncube = '您没有安装ioncube扩展。';
+$lang->ui->theme->encryptTip->none      = '您还没有安装任何解密程序。';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
