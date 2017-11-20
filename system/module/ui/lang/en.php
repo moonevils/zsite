@@ -11,8 +11,6 @@
  */
 $lang->ui->common = "UI";
 
-$lang->ui->gdHelp          = 'Check the installation';
-$lang->ui->gdTip           = 'Image watermark features need to be installed in the PHP-gd extension.';
 $lang->ui->clientDesktop   = 'Desktop';
 $lang->ui->clientMobile    = 'Mobile';
 $lang->ui->logo            = 'Logo';
@@ -74,6 +72,8 @@ $lang->ui->packagePathUnwriteable = 'Upload directory %s is not writable.';
 $lang->ui->selectSourceImage      = 'from Library';
 $lang->ui->rebuildThumbs          = 'Rebuild Thumbnail';
 $lang->ui->packagePathTip         = 'Please upload the zip file to %s, then install';
+$lang->ui->gdHelp                 = 'How to install';
+$lang->ui->gdTip                  = 'Image watermark features need PHP-gd extension.';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> Desktop";

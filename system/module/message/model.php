@@ -233,7 +233,7 @@ class messageModel extends model
     {
         $messages = $this->dao->select('*')->from(TABLE_MESSAGE)->orderBy('id_desc')->fetchAll('id');
 
-        /* Get message id list with replies or not. */
+        /* Get message id list with replies. */
         $messagesWithReply = array();
         foreach($messages as $message)
         {

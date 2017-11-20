@@ -20,10 +20,8 @@ foreach (explode('|', $lang->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
-
-$gd = extension_loaded('gd') ? 1 : 0;
-js::set('gdCheck', $gd);
-
+$gdInstalled = extension_loaded('gd') ? 1 : 0;
+js::set('gdInstalled', $gdInstalled);
 ?>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
   <div class='panel' id='mainPanel'>
@@ -190,7 +188,7 @@ js::set('gdCheck', $gd);
           <table class='table table-form w-p65'>
             <!--watermark open or close -->
 
-            <?php if(!extension_loaded('gd')):?>
+            <?php if(!$gdInstalled):?>
             <div class='gd-check'>
               <th></th>
               <td colspan='3'>
