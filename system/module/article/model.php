@@ -668,7 +668,7 @@ class articleModel extends model
         if($article->type != 'page')
         {
             $categories    = $article->categories;
-            $categoryAlias = current($categories)->alias;
+            $categoryAlias = !empty($categories) ? current($categories)->alias : '';
             $alias         = "category=$categoryAlias&name=$article->alias";
         }
         else
