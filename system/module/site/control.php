@@ -91,7 +91,6 @@ class site extends control
      */
     public function setSensitive($type = 'content')
     {
-        $this->lang->site->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
         if(!empty($_POST))
@@ -148,7 +147,6 @@ class site extends control
      */
     public function setSecurity()
     {
-        $this->lang->site->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
         $captcha        = (isset($this->config->site->captcha) and ($this->config->site->captcha == 'open' and ($this->post->captcha == 'close' or $this->post->captcha == 'auto')) or ((!isset($this->config->site->captcha) or $this->config->site->captcha == 'auto') and $this->post->captcha == 'close'));
@@ -233,7 +231,6 @@ class site extends control
      */
     public function setUpload()
     {
-        $this->lang->site->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
         $this->loadModel('file');
@@ -284,7 +281,6 @@ class site extends control
     public function setOauth()
     {
         $this->lang->menuGroups->site = 'interface';
-        $this->lang->site->menu       = $this->lang->interface->menu;
         if(!empty($_POST))
         {
             $provider = $this->post->provider;
@@ -358,7 +354,6 @@ class site extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
         }
 
-        $this->lang->site->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
         $this->view->title = $this->lang->site->setFilter;

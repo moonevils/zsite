@@ -19,7 +19,6 @@ class guarder extends control
      */
     public function setBlacklist($mode='all', $pageID = 1)
     {
-        $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
         /* Load the pager. */
@@ -47,7 +46,6 @@ class guarder extends control
      */
     public function setWhitelist()
     {
-        $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
         if($_POST)
@@ -85,7 +83,6 @@ class guarder extends control
      */
     public function setCaptcha()
     {
-        $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
         $captchas = isset($this->config->guarder->captchas) ? $this->config->guarder->captchas : array();

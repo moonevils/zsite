@@ -95,12 +95,10 @@ class article extends control
         {
             $type = 'submission';
             $this->lang->menuGroups->article = $type;
-            unset($this->lang->article->menu);
             $this->view->title = $this->lang->submission->common;
         }
         else
         {
-            $this->lang->article->menu = isset($this->lang->$type->menu) ? $this->lang->$type->menu : null;
             $this->lang->menuGroups->article = $type;
             $this->view->title = $this->lang->$type->common;
         }
@@ -142,7 +140,6 @@ class article extends control
      */
     public function create($type = 'article', $categoryID = '')
     {
-        $this->lang->article->menu = $this->lang->{$type}->menu;
         $this->lang->menuGroups->article = $type;
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
@@ -283,7 +280,6 @@ class article extends control
             if($node) $this->locate($this->createLink('book', 'edit', "nodeID=$node->id"));
         }
 
-        $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
         $article  = $this->article->getByID($articleID, $replaceTag = false);

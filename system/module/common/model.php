@@ -548,12 +548,13 @@ class commonModel extends model
     {
         global $lang, $app, $config;
 
-        if(!isset($lang->$currentModule->menu)) return false;
+        $currentModuleAlias = zget($lang->menuGroups, $currentModule);
+        if(!isset($lang->$currentModuleAlias->menu)) return false;
 
         $string = "<ul class='nav " . $navClass . "'>\n";
 
         /* Get menus of current module and current method. */
-        $moduleMenus   = $lang->$currentModule->menu;
+        $moduleMenus   = $lang->$currentModuleAlias->menu;
         $currentMethod = $app->getMethodName();
 
         /* Cycling to print every menus of current module. */

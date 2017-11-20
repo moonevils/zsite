@@ -19,9 +19,6 @@ class mail extends control
      */
     public function admin()
     {
-        $this->lang->menuGroups->mail = 'interface';
-        $this->lang->mail->menu       = $this->lang->interface->menu;
-        
         if($this->config->mail->turnon) $this->locate(inlink('edit'));
         $this->locate(inlink('detect'));
     }
@@ -34,9 +31,6 @@ class mail extends control
      */
     public function detect()
     {
-        $this->lang->menuGroups->mail = 'interface';
-        $this->lang->mail->menu       = $this->lang->interface->menu;
-        
         if($_POST)
         {
             $error = '';
@@ -68,8 +62,6 @@ class mail extends control
      */
     public function edit()
     {
-        $this->lang->mail->menu       = $this->lang->interface->menu;
-        
         if($this->config->mail->turnon)
         {
             $mailConfig = $this->config->mail->smtp;
@@ -103,8 +95,6 @@ class mail extends control
      */
     public function save()
     {
-        $this->lang->mail->menu       = $this->lang->interface->menu;
-        
         if(!empty($_POST))
         {
             $mailConfig = new stdclass();
@@ -143,8 +133,6 @@ class mail extends control
      */
     public function test()
     {
-        $this->lang->mail->menu = $this->lang->interface->menu;
-        
         if(!$this->config->mail->turnon)
         {
             die(js::alert($this->lang->mail->needConfigure) . js::locate('back'));
