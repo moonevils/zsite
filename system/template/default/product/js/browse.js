@@ -31,7 +31,7 @@ $(function()
     });
     
     var fieldName = 'order';
-    var orderType = 'asc';
+    var orderType = 'desc';
     $(document).on('click', '.setOrder', function()
     {
         if($(this).data('field') == fieldName)
