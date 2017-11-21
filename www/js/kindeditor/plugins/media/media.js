@@ -58,7 +58,7 @@ KindEditor.plugin('media', function(K) {
 				//fullscreen
 				'<div class="ke-dialog-row fullscreen">',
 				'<label for="keFullscreen" style="width:60px">' + lang.fullscreen + '</label>',
-				'<input type="checkbox" id="keFullscreen" name="fullscreen" value="" /> ',
+				'<input type="checkbox" id="keFullscreen" name="allowfullscreen" value="" /> ',
 				'</div>',
 				'</div>'
 			].join('');
@@ -109,7 +109,7 @@ KindEditor.plugin('media', function(K) {
                     width : width,
                     height : height,
                     autostart : autostartBox[0].checked ? 'true' : 'false',
-                    fullscreen : fullscreenBox[0].checked ? 'true' : 'false',
+                    allowfullscreen : fullscreenBox[0].checked ? 'true' : 'false',
                     loop : 'true'
                   });
             }
@@ -125,7 +125,7 @@ KindEditor.plugin('media', function(K) {
 			widthBox = K('[name="width"]', div),
 			heightBox = K('[name="height"]', div),
 			autostartBox = K('[name="autostart"]', div);
-			fullscreenBox = K('[name="fullscreen"]', div);
+			fullscreenBox = K('[name="allowfullscreen"]', div);
 			urlBox.val('http://');
 
 			if (allowMediaUpload) {
@@ -217,7 +217,7 @@ KindEditor.plugin('media', function(K) {
 				widthBox.val(K.removeUnit(img.css('width')) || attrs.width || 0);
 				heightBox.val(K.removeUnit(img.css('height')) || attrs.height || 0);
 				autostartBox[0].checked = (attrs.autostart === 'true');
-				fullscreenBox[0].checked = (attrs.fullscreen === 'true');
+				fullscreenBox[0].checked = (attrs.allowfullscreen === 'true');
 			}
 			urlBox[0].focus();
 			urlBox[0].select();

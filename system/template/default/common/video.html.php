@@ -8,7 +8,7 @@ $videoHtml = <<<EOT
 class="video-js vjs-default-skin vjs-big-play-centered"
 controls preload="auto" loop='loop'
 data-setup='{"autoplay": VIDEO_AUTOSTART, "width": VIDEO_WIDTH, "height": VIDEO_HEIGHT, "controlBar": {"fullscreenToggle": VIDEO_FULLSCREEN}}'>
-<source src="VIDEO_SRC" type="video/mp4" />
+<source src="VIDEO_SRC" type="video/VIDEO_TYPE" />
 </video>
 EOT;
 ?>
@@ -24,16 +24,18 @@ $(function()
                 src         = $embed.attr('src'),
                 w           = $embed.width(),
                 h           = $embed.height(),
-                autostart   = $embed.attr('autostart');
-                fullscreen  = $embed.attr('allowfullscreen');
+                type        = src.match(/t=\w+/g),
+                autostart   = $embed.attr('autostart'),
+                fullscreen  = $embed.attr('allowfullscreen'),
                 containerID = 'video_' + index;
 
-            $container = videoContainer.replace(/VIDEO_SRC/, src);
+            $container = videoContainer.replace(/VIDEO_SRC/g, src);
             $container = $container.replace(/VIDEO_WIDTH/, w);
             $container = $container.replace(/VIDEO_HEIGHT/, h);
             $container = $container.replace(/VIDEO_ID/, containerID);
             $container = $container.replace(/VIDEO_AUTOSTART/, autostart);
             $container = $container.replace(/VIDEO_FULLSCREEN/, fullscreen);
+            $container = $container.replace(/VIDEO_TYPE/, type[0].replace('t=', ''));
             $(this).replaceWith($container);
         }
     })
