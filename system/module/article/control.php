@@ -32,7 +32,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $orderBy = '', $pageID = 1)
+    public function browse($categoryID = 0, $orderBy = 'addedDate_desc', $pageID = 1)
     {   
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
         if(!$category) die($this->fetch('errors', 'index'));
@@ -41,9 +41,6 @@ class article extends control
         $this->session->set('articleCategory', $categoryID);
 
         if($category && $category->link) helper::header301($category->link);
-
-        if(empty($orderBy)) $orderBy = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
-        setcookie('articleOrderBy' . $categoryID, $orderBy, $this->config->cookieLife, $this->config->webRoot, '', false, true);
 
         $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
         $this->app->loadClass('pager', $static = true);
