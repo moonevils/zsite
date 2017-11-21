@@ -1,12 +1,11 @@
   <div class='blocks all-bottom row' data-region='all-bottom'>{function="$control->block->printRegion($layouts, 'all', 'bottom', true)"}</div>
   </div></div>
-  {* end div.page-content then div.page-wrapper in header.html.php *}
+  {* End div.page-content then div.page-wrapper in header.html.php *}
   <footer id='footer' class='clearfix'>
     <div class='wrapper'>
       <div id='footNav'>
         {function="html::a(helper::createLink('sitemap', 'index'), '<i class=\'icon-sitemap\'></i>' . $lang->sitemap->common, "class='text-linki'")"}
         {if(empty($config->links->index) && !empty($config->links->all))} 
-        &nbsp;
         {function="html::a(helper::createLink('links', 'index'), "<i class='icon-link'></i> " . $lang->link)"}
         {/if}
       </div>
@@ -45,7 +44,7 @@
 </div>{* end "div.page-container" in "header.html.php" *}
 {$qrcode=isset($config->ui->QRCode) ? $config->ui->QRCode : 1}
 {if($qrcode)} 
-  {$qrcodeTpl=getActiveTpl('default', 'common', 'qrcode')}
+  {$qrcodeTpl=$control->loadModel('ui')->getEffectViewFile('default', 'common', 'qrcode')}
   {include="$qrcodeTpl"}
 {/if}
 <div class='hide'>{function="$control->loadModel('block')->printRegion($layouts, 'all', 'footer')"}</div>

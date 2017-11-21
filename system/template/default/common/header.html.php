@@ -15,9 +15,9 @@
   {$extView=$control->getExtViewFile(__FILE__)}
   {if($extView)}
     {include="$extView"}
-    {$tmp=helper::cd())}
+    {$tmp=helper::cd()}
   {/if}
-  {$headerLite=getActiveTpl('default', 'common', 'header.lite')}
+  {$headerLite=$control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
   {include="$headerLite"}
   <div class='page-container'>
     <div class='blocks' data-region='all-top'>{function="$control->block->printRegion($layouts, 'all', 'top')"}</div>
