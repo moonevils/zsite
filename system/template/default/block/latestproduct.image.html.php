@@ -1,5 +1,7 @@
 <style>
-.panel-body .cards-custom .card > .card-heading {min-height: 20px; height: 20px; padding: 10px; font-size: 13px;}
+.panel-body .cards-custom .card > .card-heading {min-height: 40px; height: 40px; padding: 10px; font-size: 13px; position: relative;}
+.panel-body .cards-custom .card > .card-heading > strong {display: inline-block; vertical-align: middle; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.panel-body .cards-custom .card > .card-heading > .views {position: absolute; right: 0; top: 10px;}
 .panel-body .cards-custom .card > .card-content {padding: 0 10px 10px 10px; margin-bottom: 10px;}
 </style>
 
@@ -47,7 +49,7 @@
           <?php endif;?>
 
           <?php if(isset($content->showViews) and $content->showViews):?>
-          <div class='pull-right'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></div>
+          <div class='views'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></div>
           <?php endif;?>
         </div>
 
