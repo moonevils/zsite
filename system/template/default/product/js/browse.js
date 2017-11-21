@@ -30,29 +30,8 @@ $(function()
          }
     });
     
-    var orderBy = $.cookie('productOrderBy' + v.categoryID);
-    if(typeof(orderBy) != 'string')
-    {
-        orderBy = 'place_place';
-    }
-
-    var fieldName = orderBy.split('_')[0];
-    var orderType = orderBy.split('_')[1];
-
-    function setSorterClass()
-    {
-        if(orderType == 'asc')
-        {
-            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortUp');
-        }
-        if(orderType == 'desc')
-        {
-            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortDown');
-        }
-        $('#modeControl').find('[data-mode=' + type +']').click();
-    }
-
-    setSorterClass();
+    var fieldName = 'order';
+    var orderType = 'asc';
     $(document).on('click', '.setOrder', function()
     {
         if($(this).data('field') == fieldName)
@@ -66,11 +45,23 @@ $(function()
             fieldName = $(this).data('field');
         }
 
-        $.cookie('productOrderBy' + v.categoryID, fieldName + '_' + orderType);
+        $.cookie('productOrderBy[' + v.categoryID + ']', fieldName + '_' + orderType);
 
         r = Math.random();
         url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #products' : location.href + '?r=' + r + ' #products';
         $('#mainContainer').load(url, function(){ setSorterClass()});
     });
 
+    function setSorterClass()
+    {
+        if(orderType == 'asc')
+        {
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortUp');
+        }
+        if(orderType == 'desc')
+        {
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortDown');
+        }
+        $('#modeControl').find('[data-mode=' + type +']').click();
+    }
 })
