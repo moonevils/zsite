@@ -53,7 +53,7 @@ class product extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $recPerPage, $pageID);
 
-        $orderBy    = zget($_COOKIE['productOrderBy'], $categoryID, 'order_desc');
+        $orderBy    = isset($_COOKIE['productOrderBy'][$categoryID]) ? $_COOKIE['productOrderBy'][$categoryID] : 'order_desc';
         $orderField = str_replace('_asc', '', $orderBy);
         $orderField = str_replace('_desc', '', $orderField);
         if(!in_array($orderField, array('id', 'views', 'order'))) $orderBy = 'order_desc';
