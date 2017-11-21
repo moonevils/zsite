@@ -6,14 +6,9 @@
     <a href='<?php echo $webRoot;?>'>
       <?php
       $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
-      if(isset($logoSetting->$templateName->themes->$themeName))
-      {
-          $logo = $logoSetting->$templateName->themes->$themeName;
-      }
-      else
-      {
-          $logo = isset($logoSetting->$templateName->themes->all) ? $logoSetting->$templateName->themes->all : false;
-      }
+      $logo        = false;
+      if(isset($logoSetting->$templateName->themes->all))        $logo = $logoSetting->$templateName->themes->all;
+      if(isset($logoSetting->$templateName->themes->$themeName)) $logo = $logoSetting->$templateName->themes->$themeName; 
       if($logo)
       {
           $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
