@@ -42,7 +42,7 @@ class article extends control
 
         if($category && $category->link) helper::header301($category->link);
 
-        $orderBy = zget($_COOKIE['articleOrderBy'], $categoryID, 'addedDate_desc');
+        $orderBy = isset($_COOKIE['articleOrderBy'][$categoryID]) ? $_COOKIE['articleOrderBy'][$categoryID] : 'addedDate_desc';
 
         $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
         $this->app->loadClass('pager', $static = true);
