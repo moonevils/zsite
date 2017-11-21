@@ -261,11 +261,6 @@ $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = '設置|product|setting|';
 $lang->orderSetting->menu->express      = '快遞|tree|browse|type=express';
 
-$lang->userSetting = new stdclass();
-$lang->userSetting->menu = new stdclass();
-$lang->userSetting->menu->score         = '積分規則|score|setcounts|';
-$lang->userSetting->menu->stateinfo     = '積分結算|score|showstateinfo|';
-
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -329,7 +324,7 @@ $lang->security->menu->whitelist   = '白名單管理|guarder|setwhitelist|';
 $lang->security->menu->sensitive   = '敏感詞設置|site|setsensitive|';
 $lang->security->menu->captcha     = '驗證碼設置|guarder|setcaptcha|';
 $lang->security->menu->upload      = '附件上傳|site|setupload|';
-$lang->security->menu->admin       = '管理員|user|admin|admin=1';
+$lang->security->menu->admin       = array('link' => '管理員|user|admin|admin=1', 'alias' => 'delete,batchdelete');
 $lang->security->menu->group       = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log         = '登錄日誌|user|adminlog|';
 

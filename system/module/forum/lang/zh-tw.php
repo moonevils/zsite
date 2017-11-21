@@ -26,9 +26,15 @@ $lang->forum->update     = '更新數據';
 $lang->forum->setting    = '論壇設置';
 $lang->forum->postReview = '發帖審核';
 $lang->forum->allBoards  = '所有版塊';
+$lang->forum->index      = '首頁';
 
 $lang->forum->updateDesc    = '該更新操作會重新計算每個版塊的發帖數據。';
 $lang->forum->successUpdate = '更新數據成功';
+
+$lang->forum->indexModeOptions = array();
+$lang->forum->indexModeOptions['board']  = '版塊瀏覽';
+$lang->forum->indexModeOptions['latest'] = '最新主題';
+$lang->forum->indexModeOptions['stick']  = '置頂主題';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';
