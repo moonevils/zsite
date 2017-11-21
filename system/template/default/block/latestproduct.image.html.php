@@ -1,6 +1,5 @@
 <style>
 .panel-body .cards-custom .card > .card-heading {min-height: 40px; height: 40px; padding: 10px; font-size: 13px; position: relative;}
-.panel-body .cards-custom .card > .card-heading > strong {width: 40px; height: 40px; padding: 10px; font-size: 13px;}
 .panel-body .cards-custom .card > .card-heading > .views {position: absolute; right: 0; top: 10px;}
 .panel-body .cards-custom .card > .card-content {padding: 0 10px 10px 10px; margin-bottom: 10px;}
 </style>
