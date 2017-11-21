@@ -32,6 +32,7 @@ $lang->message->noSelectedMessage = '您沒有選擇任何留言。';
 $lang->message->needCheck         = '留言通過審核後顯示。';
 $lang->message->showDetail        = '顯示全部';
 $lang->message->hideDetail        = '收起';
+$lang->message->submit            = '提交';
 
 $lang->message->admin          = '後台首頁';
 $lang->message->pass           = '通過';
@@ -75,6 +76,7 @@ $lang->comment->viewComment  = '評論';
 $lang->comment->needCheck    = '評論通過審核後顯示。';
 $lang->comment->receiveEmail = '接收郵件提醒';
 
+$lang->comment->submit        = '提交';
 $lang->comment->pass          = '通過';
 $lang->comment->reply         = '回覆';
 $lang->comment->replyAt       = '回覆于';
