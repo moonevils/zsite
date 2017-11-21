@@ -62,14 +62,8 @@ $sysURL             = $common->getSysURL();
 
   if(isset($pageCSS)) css::internal($pageCSS);
 
-  if(isset($this->config->site->favicon))
-  {
-      echo html::icon(json_decode($this->config->site->favicon)->webPath);
-  }
-  else
-  {
-      echo file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '';
-  }
+  if(!isset($this->config->site->favicon) and file_exists($this->app->getWwwRoot() . 'favicon.ico')) echo html::icon($webRoot . 'favicon.ico');
+  if(isset($this->config->site->favicon)) echo html::icon(json_decode($this->config->site->favicon)->webPath);
   echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
 ?>
 <?php

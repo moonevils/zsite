@@ -12,10 +12,8 @@
 ?>
 <?php
 if(!isset($block->content)) $block->content = '';
-
 if(!is_object($block->content)) $content = $block->content;
 if(is_object($block->content))  $content = isset($block->content->content) ? $block->content->content : '';
-
 $content = htmlspecialchars($content);
 ?>
 <tr>
