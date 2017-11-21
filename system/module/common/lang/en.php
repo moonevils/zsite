@@ -261,11 +261,6 @@ $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = 'Settings|product|setting|';
 $lang->orderSetting->menu->express      = 'Shipping Carrier|tree|browse|type=express';
 
-$lang->userSetting = new stdclass();
-$lang->userSetting->menu = new stdclass();
-$lang->userSetting->menu->score         = 'Score Rule|score|setcounts|';
-$lang->userSetting->menu->stateinfo     = 'Score Compute|score|showstateinfo|';
-
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
