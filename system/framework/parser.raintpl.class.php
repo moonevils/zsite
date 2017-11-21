@@ -51,12 +51,12 @@ class raintplParser
 
         $this->tpl = new RainTPL();
         $tplConfig = array();
-        $tplConfig["base_url"]        = null;
-        $tplConfig["tpl_dir"]         = TPL_ROOT;
-        $tplConfig["tpl_ext"]         = 'php';
-        $tplConfig["cache_dir"]       = $app->getTmpRoot() . 'cache' . DS . 'raintpl' . DS;
-        $tplConfig["debug"]           = $config->debug;
-        $tplConfig["remove_comments"] = true;
+        $tplConfig["baseUrl"]        = null;
+        $tplConfig["tplDir"]         = TPL_ROOT;
+        $tplConfig["tplExt"]         = 'php';
+        $tplConfig["cacheDir"]       = $app->getTmpRoot() . 'cache' . DS . 'raintpl' . DS;
+        $tplConfig["debug"]          = $config->debug;
+        $tplConfig["removeComments"] = true;
         
         $this->tpl->configure($tplConfig);
 
@@ -69,7 +69,7 @@ class raintplParser
 
         if(is_array($viewFile)) extract($viewFile);
 
-        $this->tpl->configure('tpl_dir', dirname($viewFile) . DS);
+        $this->tpl->configure('tplDir', dirname($viewFile) . DS);
 
         /* Assign hook files. */        
         if(!isset($hookFiles)) $hookFiles = array();
@@ -79,7 +79,7 @@ class raintplParser
         foreach($this->control->view as $key => $value) $this->tpl->assign($key, $value);
 
 		$viewFile = basename($viewFile, ".php");
-        return $this->tpl->draw($viewFile);
+        return $this->tpl->draw($viewFile, true);
     }
 
     /**
@@ -98,7 +98,7 @@ class raintplParser
 
         $device =  $this->app->getclientDevice($device);
         $this->tpl->assign('device', $device);
-        a($this->config->template);
+
         if(!defined('CHANZHI_TEMPLATE'))
         {
             $template = $this->config->template->{$device}->name;
@@ -125,27 +125,5 @@ class raintplParser
         $defaultFavicon =  file_exists($this->app->getWwwRoot() . 'favicon.ico') ? $this->config->webRoot . 'favicon.ico' : '';
         $favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon)->webPath : $defaultFavicon;
         $this->tpl->assign('favicon', $favicon);
-
     }
-}
-
-/* Function append for raintpl templates. */
-function getActiveTpl($template, $module, $file)
-{
-    global $app;
-    return $app->loadModel('ui')->getEffectViewFile($template, $module, $file);
-}
-
-/**
- * Call function.
- * 
- * @param  object    $object 
- * @param  string    $function 
- * @param  array     $params 
- * @access public
- * @return void
- */
-function callFunction($object, $function, $params)
-{
-    return call_user_func_array(array($object, $function), $params);
 }
