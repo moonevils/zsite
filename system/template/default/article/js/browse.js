@@ -2,7 +2,6 @@ $(document).ready(function()
 {
     var fieldName = 'addedDate';
     var orderType = 'desc';
-
     $(document).on('click', '.setOrder', function()
     {
         if($(this).data('field') == fieldName)
@@ -16,8 +15,10 @@ $(document).ready(function()
             fieldName = $(this).data('field');
         }
 
-        url = createLink('article', 'browse', 'category=' + v.categoryID + '&orderBy=' + fieldName + '_' + orderType) + ' #articleList';
+        $.cookie('articleOrderBy[' + v.categoryID + ']', fieldName + '_' + orderType);
 
+        r = Math.random();
+        url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #articleList' : location.href + '?r=' + r + ' #articleList';
         $('#mainContainer').load(url, function(){ setSorterClass()});
     });
 
