@@ -17,8 +17,11 @@ $(document).ready(function()
 
         $.cookie('articleOrderBy[' + v.categoryID + ']', fieldName + '_' + orderType);
 
-        r = Math.random();
-        url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #articleList' : location.href + '?r=' + r + ' #articleList';
+        r = Math.ceil(Math.random() * 1000000);
+        url = location.href;
+        url = url.indexOf('r=') != -1 ? url.substring(0, url.indexOf('r=') - 1) : url;
+        if(config.requestType == 'GET' && url.indexOf('pageID') < 0) url = url + '&pageID=1';
+        url = config.requestType == 'GET' ? url + '&r=' + r + ' #articleList' : url + '?r=' + r + ' #articleList';
         $('#mainContainer').load(url, function(){ setSorterClass()});
     });
 
