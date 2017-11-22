@@ -22,7 +22,16 @@ $(document).ready(function()
         url = url.indexOf('r=') != -1 ? url.substring(0, url.indexOf('r=') - 1) : url;
         if(config.requestType == 'GET' && url.indexOf('pageID') < 0) url = url + '&pageID=1';
         url = config.requestType == 'GET' ? url + '&r=' + r + ' #articleList' : url + '?r=' + r + ' #articleList';
-        $('#mainContainer').load(url, function(){ setSorterClass()});
+        $('#mainContainer').load(url, function()
+        {
+            setSorterClass()
+            $('.pager > a').each(function()
+            {
+                href = $(this).attr('href');
+                if(href.indexOf('r=') < 0) return true;
+                $(this).attr('href', href.substring(0, href.indexOf('r=') - 1));
+            });
+        });
     });
 
     function setSorterClass()
