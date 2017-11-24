@@ -1,7 +1,7 @@
 {$extView=$control->getExtViewFile(__FILE__)}
 {if($extView)}
-{include="$extView"}
-{$tmp=raincall('helper', 'cd')}
+{include $extView}
+{$tmp=helper::cd()}
 {/if}
 {$sysURL=rtrim($sysURL, '/')}
 {if(isset($mobileURL))}

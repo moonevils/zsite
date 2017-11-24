@@ -182,7 +182,7 @@ class RainTPL
         /* Set the cacheID. */
         $this->cacheID = $cacheID;
 
-        if( !$this->check_template($tplName) && file_exists($this->tpl['cacheFile']) && ( time() - filemtime($this->tpl['cacheFile']) < $expireTime) )
+        if(!$this->prepareCompile($tplName) && file_exists($this->tpl['cacheFile']) && ( time() - filemtime($this->tpl['cacheFile']) < $expireTime) )
 		{
             /* return the cached file as HTML. It remove the first 43 character, which are a PHP code to secure the file <?php if(!class_exists('raintpl')){exit;}? >*/
             return substr(file_get_contents( $this->tpl['cacheFile'] ), 43);
@@ -342,7 +342,7 @@ class RainTPL
         $tagPatterns['noparse_close'] = '(\{\/noparse\})';
         $tagPatterns['ignore']        = '(\{ignore\}|\{\*)';
         $tagPatterns['ignore_close']  = '(\{\/ignore\}|\*\})';
-        $tagPatterns['include']       = '(\{include="[^"]*"(?: cache="[^"]*")?\})';
+        $tagPatterns['include']       = '(\{include\s+.+\})';
         $tagPatterns['template_info'] = '(\{\$template_info\})';
         $tagPatterns['function']      = '(\{function="(\w*?)(?:.*?)"\})';
 
@@ -399,7 +399,7 @@ class RainTPL
             {
                 $commentIsOpen = true;
             }
-            elseif( preg_match( '/\{include="([^"]*)"(?: cache="([^"]*)"){0,1}\}/', $html, $code ) )
+            elseif( preg_match( '/\{include(\s+)(.*)\}/', $html, $code ) )
             {
                 if(preg_match("/http/", $code[1]))
                 {
@@ -409,7 +409,7 @@ class RainTPL
                 else
                 {
                     /* Variables substitution. */
-                    $include_var = $this->var_replace( $code[ 1 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $loop_level );
+                    $include_var = $this->var_replace( $code[ 2 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $loop_level );
 
                     /* Get the folder of the actual template. */
                     $actual_folder = substr( $this->tpl['templateDir'], strlen(self::$tplDir) );
@@ -422,18 +422,6 @@ class RainTPL
 
                     /* If the cache is active. */
                     if( isset($code[ 2 ]) )
-                    {
-                        $compiledCode .= '<?php $tpl = new '.get_called_class().';' .
-                            'if( $cache = $tpl->cache( "'.$include_template.'" ) )' .
-                            '	echo $cache;' .
-                            'else{' .
-                            '$tpl->assign( $this->var );' .
-                            ( !$loop_level ? null : '$tpl->assign( "key", $key'.$loop_level.' ); $tpl->assign( "value", $value'.$loop_level.' );' ).
-                            '$tpl->draw( "'.$include_template.'" );'. '}'
-                            . self::PHP_END;
-
-                    }
-                    else
                     {
                         $compiledCode .= '<?php $tpl = new '.get_called_class().';' .
                             '$tpl->assign( $this->var );' .
