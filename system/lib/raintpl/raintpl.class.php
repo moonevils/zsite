@@ -344,7 +344,7 @@ class RainTPL
         $tagPatterns['ignore_close']  = '(\{\/ignore\}|\*\})';
         $tagPatterns['include']       = '(\{include\s+.+\})';
         $tagPatterns['template_info'] = '(\{\$template_info\})';
-        $tagPatterns['function']      = '(\{function="(\w*?)(?:.*?)"\})';
+        $tagPatterns['function']      = '(\{!(\w*?)(?:.*?)\})';
 
         $tagRegexp = "/" . join( "|", $tagPatterns ) . "/";
         
@@ -582,7 +582,7 @@ class RainTPL
             }
 
             //function
-            elseif( preg_match( '/\{function="(\w*)(.*?)"\}/', $html, $code ) ){
+            elseif( preg_match( '/\{!(\w*)(.*?)\}/', $html, $code ) ){
 
                 //tag
                 $tag = $code[ 0 ];

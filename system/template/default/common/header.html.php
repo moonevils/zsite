@@ -1,5 +1,7 @@
 {if(helper::isAjaxRequest())}
-  {if(isset($pageCSS))} {function="css::internal($pageCSS)"} {/if}
+  {if(isset($pageCSS))} 
+  {!css::internal($pageCSS)}
+  {/if}
   {$modalWidth=empty($modalWidth) ? 1000 : $modalWidth;}
   <div class="modal-dialog" style="width:{$modalWidth}px;">
     <div class="modal-content">
@@ -20,8 +22,8 @@
   {$headerLite=$control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
   {include $headerLite}
   <div class='page-container'>
-    <div class='blocks' data-region='all-top'>{function="$control->block->printRegion($layouts, 'all', 'top')"}</div>
+    <div class='blocks' data-region='all-top'>{$control->block->printRegion($layouts, 'all', 'top')}</div>
     <div class='page-wrapper'>
       <div class='page-content'>
-        <div class='blocks row' data-region='all-banner'>{function="$control->block->printRegion($layouts, 'all', 'banner', true)"}</div>
+        <div class='blocks row' data-region='all-banner'>{$control->block->printRegion($layouts, 'all', 'banner', true)}</div>
 {/if}

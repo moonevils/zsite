@@ -32,60 +32,64 @@
   {if(!empty($keywords))} {$keywords=$config->site->keywords} {/if}
   {if(!empty($desc))} {$desc=$title=$config->site->desc} {/if}
 
-  {function="html::title($title . $config->site->name)"}
-  {function="html::meta('keywords', $keywords)"}
-  {function="html::meta('description', $desc)"}
+  {!html::title($title . $config->site->name)}
+  {!html::meta('keywords', $keywords)}
+  {!html::meta('description', $desc)}
   {if(isset($config->site->meta))}{$config->site->meta}{/if}
 
-  {function="js::exportConfigVars()"}
-  {function="js::set('theme', array('template' => CHANZHI_TEMPLATE, 'theme' => CHANZHI_THEME, 'device' => $app->clientDevice))"}
+  {!js::exportConfigVars()}
+  {!js::set('theme', array('template' => CHANZHI_TEMPLATE, 'theme' => CHANZHI_THEME, 'device' => $app->clientDevice))}
 
 {if($config->debug)}
-    {function="js::import($jsRoot . 'jquery/min.js')"}
-    {function="js::import($jsRoot . 'zui/min.js')"}
-    {function="js::import($jsRoot . 'chanzhi.js')"}
-    {function="js::import($jsRoot . 'my.js')"}
-    {function="css::import($webRoot . 'zui/css/min.css')"}
-    {function="css::import($themeRoot . 'common/style.css')"}
+    {!js::import($jsRoot . 'jquery/min.js')}
+    {!js::import($jsRoot . 'zui/min.js')}
+    {!js::import($jsRoot . 'chanzhi.js')}
+    {!js::import($jsRoot . 'my.js')}
+    {!css::import($webRoot . 'zui/css/min.css')}
+    {!css::import($themeRoot . 'common/style.css')}
 {else}
     {if($cdnRoot)}
-        {function="css::import($cdnRoot . '/theme/default/default/chanzhi.all.css', '', $version = false)"}
-        {function=js::import($cdnRoot  . '/js/chanzhi.all.js', $version = false)"}
+        {!css::import($cdnRoot . '/theme/default/default/chanzhi.all.css', '', $version = false)}
+        {!js::import($cdnRoot  . '/js/chanzhi.all.js', $version = false)}
         {else}
-        {function="css::import($themeRoot . 'default/chanzhi.all.css')"}
-        {function="js::import($jsRoot     . 'chanzhi.all.js')"}
+        {!css::import($themeRoot . 'default/chanzhi.all.css')}
+        {!js::import($jsRoot     . 'chanzhi.all.js')}
     {/if}
 {/if}
-{if(file_exists($customCssFile))}{function="css::import($customCssURI, "id='themeStyle'")"}{/if}
-{if(isset($pageCSS))}{function="css::internal($pageCSS)"}{/if}
-{function="html::icon($favicon)"}
-{function="html::rss(helper::createLink('rss', 'index', '', '', 'xml'), $config->site->name)"}
+{if(file_exists($customCssFile))}
+{!css::import($customCssURI, "id='themeStyle'")}
+{/if}
+{if(isset($pageCSS))}
+{!css::internal($pageCSS)}
+{/if}
+{!html::icon($favicon)}
+{!html::rss(helper::createLink('rss', 'index', '', '', 'xml'), $config->site->name)}
 
 <!--[if lt IE 9]>
 {if($config->debug)}
-{function="js::import($jsRoot . 'html5shiv/min.js')"}
-{function="js::import($jsRoot . 'respond/min.js')"}
+{!js::import($jsRoot . 'html5shiv/min.js')}
+{!js::import($jsRoot . 'respond/min.js')}
 {else}
   {if($cdnRoot)}
     <link href="' . $cdnRoot . '/js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
     <link href="/js/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
-    {function="js::import($jsRoot . 'html5shiv/min.js')"}
-    {function="js::import($jsRoot . 'respond/min.js')"}
-    {function="js::import($jsRoot . 'respond/cross-domain/respond.proxy.js')"}
+    {!js::import($jsRoot . 'html5shiv/min.js')}
+    {!js::import($jsRoot . 'respond/min.js')}
+    {!js::import($jsRoot . 'respond/cross-domain/respond.proxy.js')}
   {else}
-    js::import($jsRoot . 'chanzhi.all.ie8.js');
-    {function="js::import($jsRoot . 'chanzhi.all.ie8.js')"}
+    {!js::import($jsRoot . 'chanzhi.all.ie8.js');}
+    {!js::import($jsRoot . 'chanzhi.all.ie8.js')}
   {/if}
 {/if}
 <![endif]-->
 <!--[if lt IE 10]>
 {if($config->debug)}
-{function="js::import($jsRoot . 'jquery/placeholder/min.js')"}
+{!js::import($jsRoot . 'jquery/placeholder/min.js')}
 {else}
-{function="js::import($jsRoot . 'chanzhi.all.ie9.js')"}
+{!js::import($jsRoot . 'chanzhi.all.ie9.js')}
 {/if}
 <![endif]-->
-{function="js::set('lang', $lang->js)"}
+{!js::set('lang', $lang->js)}
 {if(!empty($config->oauth->sina) and !is_object($config->oauth->sina))}
   {$sina=json_decode($config->oauth->sina)}
 {/if}
@@ -95,13 +99,13 @@
 {if(!empty($sina->verification))} {$sina->verification} {/if}
 {if(!empty($qq->verification))} {$qq->verification} {/if}
 {if(!empty($sina->widget))}
-{function="js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js')"}
+{!js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js')}
 {/if}
 {$baseCustom=isset($config->template->custom) ? json_decode($config->template->custom, true) : array()}
 {if(!empty($baseCustom[$template][$theme]['js']))}
-{function="js::execute($baseCustom[$template][$theme]['js'])"}
+{!js::execute($baseCustom[$template][$theme]['js'])}
 {/if}
-{function="$control->block->printRegion($layouts, 'all', 'header')"};
+{$control->block->printRegion($layouts, 'all', 'header')}
 </head>
 <body>
 {if(isset($resultCustomCss) and $resultCustomCss['result'] != 'success')}
