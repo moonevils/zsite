@@ -1,10 +1,13 @@
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php
-$clientLang = $this->app->getClientLang();
-css::import($jsRoot . 'datetimepicker/css/min.css');
-js::import($jsRoot  . 'datetimepicker/js/min.js'); 
-if($clientLang != 'en') js::import($jsRoot . 'datetimepicker/js/locales/' . $clientLang . '.js'); 
-?>
+{if($extView = $this->getExtViewFile(__FILE__))}
+{include $extView;}
+{return helper::cd();}
+{/if}
+{$clientLang=$this->app->getClientLang();}
+{!css::import($jsRoot . 'datetimepicker/css/min.css');}
+{!js::import($jsRoot  . 'datetimepicker/js/min.js');}
+{if($clientLang != 'en')}
+{!js::import($jsRoot . 'datetimepicker/js/locales/' . $clientLang . '.js');}
+{/if}
 <script language='javascript'>
 $(function()
 {
@@ -17,7 +20,7 @@ $(function()
         todayBtn: true,
         autoclose: true,
         keyboardNavigation:false,
-        language:'<?php echo $clientLang?>'
+        language:'{$clientLang}'
     })
 });
 </script>

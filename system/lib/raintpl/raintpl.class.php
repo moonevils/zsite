@@ -349,9 +349,13 @@ class RainTPL
         $tagRegexp = "/" . join( "|", $tagPatterns ) . "/";
         
         /* Path replace (src of img, background and href of link) . */
+        $templateCode = str_replace("{{", "SOT_MARK", $templateCode);
+        $templateCode = str_replace("}}", "EOT_MARK", $templateCode);
         $templateCode = $this->pathReplace( $templateCode, $tplBasedir );
         $templateCode = preg_split($tagRegexp, $templateCode, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         $compiledCode = $this->compileCode($templateCode);
+        $templateCode = str_replace("SOT_MARK", "{{", $templateCode);
+        $templateCode = str_replace("EOT_MARK", "}}",  $templateCode);
 
         return $compiledCode;
     }
@@ -409,7 +413,8 @@ class RainTPL
                 else
                 {
                     /* Variables substitution. */
-                    $include_var = $this->var_replace( $code[ 2 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $loop_level );
+                    $include_var = $this->var_replace($code[ 2 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $loop_level );
+                    $include_var = $code[2];
 
                     /* Get the folder of the actual template. */
                     $actual_folder = substr( $this->tpl['templateDir'], strlen(self::$tplDir) );
@@ -426,7 +431,7 @@ class RainTPL
                         $compiledCode .= '<?php $tpl = new '.get_called_class().';' .
                             '$tpl->assign( $this->var );' .
                             ( !$loop_level ? null : '$tpl->assign( "key", $key'.$loop_level.' ); $tpl->assign( "value", $value'.$loop_level.' );' ).
-                            '$tpl->draw( "'.$include_template.'" );'
+                            '$tpl->draw(' . $include_template . ');'
                             . self::PHP_END;
                     }
                 }
@@ -584,23 +589,23 @@ class RainTPL
             //function
             elseif( preg_match( '/\{!(\w*)(.*?)\}/', $html, $code ) ){
 
-                //tag
-                $tag = $code[ 0 ];
+                $tag      = $code[0];
+                $function = $code[1];
 
-                //function
-                $function = $code[ 1 ];
-
-                // check if there's any function disabled by blackList
                 $this->function_check( $tag );
 
-                if( empty( $code[ 2 ] ) )
+                if(empty($code[2]))
+                {
                     $parsed_function = $function . "()";
+                }
                 else
-                    // parse the function
+                {
                     $parsed_function = $function . $this->var_replace( $code[ 2 ], $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level );
+                }
 
-                //if code
-                $compiledCode .=   "<?php echo $parsed_function; ?>";
+                /* Add echo if neccesory. */
+                if($code[1] != 'echo') $parsed_function = 'echo ' . $parsed_function;
+                $compiledCode .= "<?php $parsed_function; ?>";
             }
 
             // show all vars
