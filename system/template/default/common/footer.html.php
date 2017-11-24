@@ -37,7 +37,7 @@
   {$extHookFiles=glob($extHookRule)}
   {if(!empty($extHookFiles))} 
     {loop="extHookFiles"}
-    {include="$value"}
+    {include $value}
     {/loop}
   {/if}
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='{$lang->back2Top}'></a>
@@ -45,15 +45,15 @@
 {$qrcode=isset($config->ui->QRCode) ? $config->ui->QRCode : 1}
 {if($qrcode)} 
   {$qrcodeTpl=$control->loadModel('ui')->getEffectViewFile('default', 'common', 'qrcode')}
-  {include="$qrcodeTpl"}
+  {include $qrcodeTpl}
 {/if}
 <div class='hide'>{function="$control->loadModel('block')->printRegion($layouts, 'all', 'footer')"}</div>
 {if(commonModel::isAvailable('shop'))}
   {$cartTpl=TPL_ROOT . 'common/cart.html.php'}
-  {include="$cartTpl"}
+  {include $cartTpl}
 {/if}
 {$logTpl=TPL_ROOT . 'common/log.html.php';}
-{include="$logTpl"}
+{include $logTpl}
 {if($app->user->account != 'guest' and commonModel::isAvailable('score') and (!isset($config->site->resetMaxLoginDate) or $config->site->resetMaxLoginDate < date('Y-m-d')))}
 <script>$.get(createLink('score', 'resetMaxLogin'));</script>
 {/if}
