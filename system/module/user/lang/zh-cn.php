@@ -156,7 +156,7 @@ $lang->user->genderList->m = '男';
 $lang->user->genderList->f = '女';
 $lang->user->genderList->u = '';
 
-$lang->user->register  = new stdclass();
+$lang->user->register = new stdclass();
 $lang->user->register->common      = '注册';
 $lang->user->register->instant     = '立即注册';
 $lang->user->register->welcome     = '欢迎注册成为会员';
@@ -172,7 +172,7 @@ $lang->user->register->agree       = '我已经知晓并同意';
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和数字组合，最少六位';
 
-$lang->user->login  = new stdclass();
+$lang->user->login = new stdclass();
 $lang->user->login->common  = "登录";
 $lang->user->login->welcome = '已有帐号';
 $lang->user->login->why     = '欢迎登陆，享用会员专属服务！';
