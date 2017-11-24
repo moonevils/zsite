@@ -569,7 +569,7 @@ class control extends baseControl
     public function loadThemeHooks()
     {
         $theme     = $this->config->template->{$this->app->clientDevice}->theme;
-        $hookPath  = $this->app->getWwwRoot() . 'theme' . DS . $this->config->template->{$this->app->clientDevice}->name. DS . $theme . DS;
+        $hookPath  = $this->app->getWwwRoot() . 'theme' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
 
         if(empty($hookFiles)) return array();
