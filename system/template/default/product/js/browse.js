@@ -30,29 +30,8 @@ $(function()
          }
     });
     
-    var orderBy = $.cookie('productOrderBy' + v.categoryID);
-    if(typeof(orderBy) != 'string')
-    {
-        orderBy = 'place_place';
-    }
-
-    var fieldName = orderBy.split('_')[0];
-    var orderType = orderBy.split('_')[1];
-
-    function setSorterClass()
-    {
-        if(orderType == 'asc')
-        {
-            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortUp');
-        }
-        if(orderType == 'desc')
-        {
-            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortDown');
-        }
-        $('#modeControl').find('[data-mode=' + type +']').click();
-    }
-
-    setSorterClass();
+    var fieldName = 'order';
+    var orderType = 'desc';
     $(document).on('click', '.setOrder', function()
     {
         if($(this).data('field') == fieldName)
@@ -66,11 +45,37 @@ $(function()
             fieldName = $(this).data('field');
         }
 
-        $.cookie('productOrderBy' + v.categoryID, fieldName + '_' + orderType);
+        $.cookie('productOrderBy[' + v.categoryID + ']', fieldName + '_' + orderType);
 
-        r = Math.random();
-        url = config.requestType == 'GET' ? location.href + '&r=' + r + ' #products' : location.href + '?r=' + r + ' #products';
+        r = Math.ceil(Math.random() * 1000000);
+        url = location.href;
+        url = url.indexOf('r=') != -1 ? url.substring(0, url.indexOf('r=') - 1) : url;
+        if(config.requestType == 'GET' && url.indexOf('pageID') < 0) url = url + '&pageID=1';
+        url = config.requestType == 'GET' ? url + '&r=' + r + ' #products' : url + '?r=' + r + ' #products';
         $('#mainContainer').load(url, function(){ setSorterClass()});
+
+        $('#mainContainer').load(url, function()
+        {
+            setSorterClass()
+            $('.pager > a').each(function()
+            {
+                href = $(this).attr('href');
+                if(href.indexOf('r=') < 0) return true;
+                $(this).attr('href', href.substring(0, href.indexOf('r=') - 1));
+            });
+        });
     });
 
+    function setSorterClass()
+    {
+        if(orderType == 'asc')
+        {
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortUp');
+        }
+        if(orderType == 'desc')
+        {
+            $("[data-field=" + fieldName + "]").parent().removeClass('header').addClass('headerSortDown');
+        }
+        $('#modeControl').find('[data-mode=' + type +']').click();
+    }
 })

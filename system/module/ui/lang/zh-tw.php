@@ -72,6 +72,8 @@ $lang->ui->packagePathUnwriteable = '上傳目錄：%s 不可寫';
 $lang->ui->selectSourceImage      = '從素材庫選擇';
 $lang->ui->rebuildThumbs          = '重新生成縮略圖';
 $lang->ui->packagePathTip         = '請將主題包的zip檔案上傳至 %s 目錄，進行安裝。';
+$lang->ui->gdHelp                 = '查看安裝方式';
+$lang->ui->gdTip                  = '蟬知圖片水印功能需要安裝php-gd擴展才能使用。';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
@@ -292,6 +294,14 @@ $lang->ui->importTypes = new stdclass();
 $lang->ui->importTypes->theme = '只導入主題';
 $lang->ui->importTypes->full  = '完整導入';
 
+$lang->ui->theme->encryptTip = new stdclass();
+$lang->ui->theme->encryptTip->common    = '提示：';
+$lang->ui->theme->encryptTip->zend      = '您導入的主題是zend方式加密的，需要環境安裝Zend Guard Loader解密程序，<a href="http://www.chanzhi.org/book/chanzhieps/133.html" target="_blank">Zend Guard Loader安裝文檔</a> 。';
+$lang->ui->theme->encryptTip->ioncube   = '導入的主題是ioncube軟件加密的，需要環境安裝ioncube擴展，<a href="http://www.chanzhi.org/book/chanzhieps/189.html" target="_blank">ioncube擴展安裝文檔</a> 。';
+$lang->ui->theme->encryptTip->noZend    = '您沒有安裝Zend Guard Loader解密程序。';
+$lang->ui->theme->encryptTip->noIoncube = '您沒有安裝ioncube擴展。';
+$lang->ui->theme->encryptTip->none      = '您還沒有安裝任何解密程序。';
+
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
 $lang->ui->themeColors[] = 'F8F100';
@@ -451,3 +461,4 @@ $lang->effect->imported      = '已導入';
 $lang->effect->importSuccess = '導入成功';
 $lang->effect->bindCommunity = '蟬知特效只對蟬知社區認證用戶開放，請先註冊並綁定蟬知社區賬號後，獲取蟬知特效。';
 $lang->effect->noRsults      = "你還沒有任何特效，請登錄蟬知特效平台，<a href='http://www.chanzhi.org/effect.html' target='_blank'>獲取特效</a>。";
+$lang->effect->redirecting   = "<span class='text-muted'><span id='countDown'>3</span>秒後跳轉到社區賬號註冊/綁定頁面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳轉</a>";

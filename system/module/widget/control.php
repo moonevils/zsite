@@ -115,7 +115,8 @@ class widget extends control
         $block = $this->widget->getByID($id);
         if($block)
         {
-            $block->grid = $grid;
+            $block->params = helper::jsonEncode($block->params);
+            $block->grid   = $grid;
             $this->dao->replace(TABLE_WIDGET)->data($block)->exec();
             if(dao::isError()) $this->send(array('result' => 'fail'));
             $this->send(array('result' => 'success'));

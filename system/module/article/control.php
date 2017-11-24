@@ -32,26 +32,21 @@ class article extends control
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $orderBy = '', $pageID = 1)
+    public function browse($categoryID = 0, $pageID = 1)
     {   
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
+        if(!$category) die($this->fetch('errors', 'index'));
+
+        $categoryID = is_numeric($categoryID) ? $categoryID : zget($category, 'id', 0);
+        $this->session->set('articleCategory', $categoryID);
 
         if($category && $category->link) helper::header301($category->link);
+
+        $orderBy = isset($_COOKIE['articleOrderBy'][$categoryID]) ? $_COOKIE['articleOrderBy'][$categoryID] : 'addedDate_desc';
 
         $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
-
-        $categoryID = is_numeric($categoryID) ? $categoryID : zget($category, 'id', 0);
-
-        $orderBy    = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
-
-        if(empty($orderBy)) $orderBy = zget($_COOKIE, 'articleOrderBy' . $categoryID, 'addedDate_desc');
-
-        $orderField = str_replace('_asc', '', $orderBy);
-        $orderField = str_replace('_desc', '', $orderField);
-        if(!in_array($orderField, array('id', 'views', 'addedDate'))) $orderBy = 'addedDate_desc';
-        setcookie('articleOrderBy' . $categoryID, $orderBy, $this->config->cookieLife, $this->config->webRoot, '', false, true);
 
         $families = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
         $sticks   = $this->article->getSticks($families, 'article');
@@ -59,9 +54,6 @@ class article extends control
         $articles = $sticks + $articles;
 
         if(commonModel::isAvailable('message')) $articles = $this->article->computeComments($articles, 'article');
-
-        if(!$category) die($this->fetch('errors', 'index'));
-        $this->session->set('articleCategory', $category->id);
 
         $articleList = '';
         foreach($articles as $article) $articleList .= $article->id . ',';
@@ -102,12 +94,10 @@ class article extends control
         {
             $type = 'submission';
             $this->lang->menuGroups->article = $type;
-            unset($this->lang->article->menu);
             $this->view->title = $this->lang->submission->common;
         }
         else
         {
-            $this->lang->article->menu = isset($this->lang->$type->menu) ? $this->lang->$type->menu : null;
             $this->lang->menuGroups->article = $type;
             $this->view->title = $this->lang->$type->common;
         }
@@ -149,7 +139,6 @@ class article extends control
      */
     public function create($type = 'article', $categoryID = '')
     {
-        $this->lang->article->menu = $this->lang->{$type}->menu;
         $this->lang->menuGroups->article = $type;
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
@@ -290,7 +279,6 @@ class article extends control
             if($node) $this->locate($this->createLink('book', 'edit', "nodeID=$node->id"));
         }
 
-        $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
         $article  = $this->article->getByID($articleID, $replaceTag = false);
