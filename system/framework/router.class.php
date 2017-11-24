@@ -535,7 +535,7 @@ class router extends baseRouter
 	 * Set updatedTime to refresh source.
 	 * 
 	 * @access public
-	 * @return void
+	 * @return bool
 	 */
 	public function setUpdatedTime()
 	{
@@ -551,5 +551,6 @@ class router extends baseRouter
 
         $dao = new dao();
 		$dao->replace(TABLE_CONFIG)->data($setting)->exec();
+        return !dao::isError();
     }
 }

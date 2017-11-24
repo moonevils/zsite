@@ -496,12 +496,9 @@ class user extends control
     public function delete($account)
     {
         $this->app->loadLang('guarder');
+
         /* Change menu when browse all admin user. */
-        if($this->get->admin == 1)
-        {
-            $this->lang->user->menu = $this->lang->security->menu;
-            $this->lang->menuGroups->user = 'security';
-        }
+        if($this->get->admin == 1) $this->lang->menuGroups->user = 'security';
 
         if($_POST)
         {
@@ -532,12 +529,9 @@ class user extends control
     public function batchDelete()
     {
         $this->app->loadLang('guarder');
+
         /* Change menu when browse all admin user. */
-        if($this->get->admin == 1)
-        {
-            $this->lang->user->menu = $this->lang->security->menu;
-            $this->lang->menuGroups->user = 'security';
-        }
+        if($this->get->admin == 1) $this->lang->menuGroups->user = 'security';
 
         if($_POST)
         {
@@ -573,11 +567,7 @@ class user extends control
     public function admin()
     {
         /* Change menu when browse all admin user. */
-        if($this->get->admin == 1)
-        {
-            $this->lang->user->menu = $this->lang->security->menu;
-            $this->lang->menuGroups->user = 'security';
-        }
+        if($this->get->admin == 1) $this->lang->menuGroups->user = 'security';
         
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
@@ -1007,7 +997,6 @@ class user extends control
      */
     public function adminLog()
     {
-        $this->lang->user->menu = $this->lang->security->menu;
         $this->lang->menuGroups->user = 'security';
 
         $get = fixer::input('get')

@@ -106,7 +106,7 @@ class threadModel extends model
     {
          $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where(1)
-            ->beginIf($this->config->forum->postReview == 'open')
+            ->beginIf(!empty($this->config->forum->postReview) and $this->config->forum->postReview == 'open')
             ->andWhere('status')->eq('wait')
             ->fi()
             ->orderBy('id desc')

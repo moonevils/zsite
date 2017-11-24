@@ -254,7 +254,6 @@ class file extends control
     public function browseSource($type = '', $orderBy = 'id_desc', $pageID = 1)
     {
         $this->file->setSavePath('source');
-        $this->lang->file->menu = $this->lang->theme->menu;
         $this->lang->menuGroups->file = 'ui';
 
         $this->app->loadClass('pager', $static = true);

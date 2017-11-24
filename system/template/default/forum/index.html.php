@@ -2,17 +2,17 @@
 <div class='row blocks' data-grid='4' data-region='forum_index-top'><?php $this->block->printRegion($layouts, 'forum_index', 'top', true);?></div>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 
-<?php if($mode == 'latest' or $mode == 'stick'):?>
 <ul class='nav nav-pills'>
   <li <?php if($mode == 'board')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board']);?></li>
   <li <?php if($mode == 'latest') echo "class='active'";?>><?php echo html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest']);?></li>
   <li <?php if($mode == 'stick')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick']);?></li>
 </ul>
+<?php if($mode == 'latest' or $mode == 'stick'):?>
 <div class='panel'>
   <table class='table table-hover table-striped'>
     <thead>
       <tr class='text-center hidden-xxxs'>
-        <th colspan='2'><?php echo $lang->thread->title;?></th>
+        <th><?php echo $lang->thread->title;?></th>
         <th class='w-150px hidden-xxs'><?php echo $lang->thread->author;?></th>
         <th class='w-100px hidden-xs'><?php echo $lang->thread->postedDate;?></th>
         <th class='w-50px hidden-xs'><?php echo $lang->thread->views;?></th>
@@ -24,9 +24,9 @@
       <?php foreach($threads as $thread):?>
       <?php $style = $thread->color ? "style='color:{$thread->color}'" : '';?>
       <tr class='text-center'>
-        <td class='w-10px'><?php echo ($mode == 'latest' && $thread->isNew) ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
         <td class='text-left'>
-          <div data-ve='thread' id='thread<?php echo $thread->id;?>'><?php echo '[' . zget($boards, $thread->board, $thread->board). '] ' . html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?></div>
+          <?php echo ($mode == 'latest' && $thread->isNew) ? "<i class='icon-comment-alt icon-large text-success'> </i>" : "<i class='icon-comment-alt icon-large text-muted'> </i>";?>
+          <span data-ve='thread' id='thread<?php echo $thread->id;?>'><?php echo '[' . zget($boards, $thread->board, $thread->board). '] ' . html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?></span>
         </td>
         <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
         <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
@@ -51,20 +51,12 @@
 </div>
 <?php else:?>
 <div id='boards'>
-  <ul class='nav nav-pills'>
-    <li <?php if($mode == 'board')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board']);?></li>
-    <li <?php if($mode == 'latest') echo "class='active'";?>><?php echo html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest']);?></li>
-    <li <?php if($mode == 'stick')  echo "class='active'";?>><?php echo html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick']);?></li>
-  </ul>
   <?php foreach($boards as $parentBoard):?>
   <div class='panel'>
-    <div class='panel-heading'>
-      <p><strong><i class="icon-comments icon-large"></i> <?php echo $parentBoard->name;?></strong></p>
-    </div>
     <table class='table table-hover table-striped'>
       <thead>
         <tr class='text-center hidden-xxxs'>
-          <th colspan='2'><i class='icon-comments icon-large'></i> <?php echo $lang->forum->common;?></th>
+          <th class='text-left'><i class='icon-comments icon-large'> </i><?php echo $parentBoard->name;?></th>
           <th class='hidden-xs'><?php echo $lang->forum->owners;?></th>
           <th><?php echo $lang->forum->threadCount;?></th>
           <th class='hidden-xxs'><?php echo $lang->forum->postCount;?></th>
@@ -74,9 +66,9 @@
       <tbody>
         <?php foreach($parentBoard->children as $childBoard):?>
         <tr class='text-center text-middle'>
-          <td class='w-20px'><?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment icon-large'></i></span>"; ?></td>
           <td class='text-left'>
-            <strong><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></strong><br />
+            <?php echo $this->forum->isNew($childBoard) ? "<i class='icon-comment icon-large text-success'> </i>" : "<i class='icon-comment icon-large text-muted'> </i>"; ?>
+            <?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?><br />
             <small class='text-muted'><?php echo $childBoard->desc;?></small>
           </td>
           <td class='w-120px hidden-xs'><strong><nobr><?php foreach($childBoard->moderators as $moderators) echo $moderators . ' ';?></nobr></strong></td>

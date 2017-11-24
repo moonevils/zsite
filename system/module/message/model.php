@@ -183,21 +183,11 @@ class messageModel extends model
      */
     public function getObjectTitle($message)
     {
+        if($message->objectType == 'message' or $message->objectType == 'comment') return zget($this->getByID($message->objectID), 'from', '');
         if($message->objectType == 'article') $objectTitle = $this->dao->select('title')->from(TABLE_ARTICLE)->where('id')->eq($message->objectID)->fetch('title');
         if($message->objectType == 'product') $objectTitle = $this->dao->select('name')->from(TABLE_PRODUCT)->where('id')->eq($message->objectID)->fetch('name');
         if($message->objectType == 'book')    $objectTitle = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($message->objectID)->fetch('title');
-        if($message->objectType == 'message' or $message->objectType == 'comment') 
-        {
-            if(!isset($this->getByID($message->objectID)->from))
-            {
-                $objectTitle = '';
-            }
-            else
-            {
-                $objectTitle = $this->getByID($message->objectID)->from;
-            }
-        }
-        return $objectTitle;
+        return isset($objectTitle) ? $objectTitle : '';
     }
 
     /**
@@ -243,7 +233,7 @@ class messageModel extends model
     {
         $messages = $this->dao->select('*')->from(TABLE_MESSAGE)->orderBy('id_desc')->fetchAll('id');
 
-        /* Get message id list with replies or not. */
+        /* Get message id list with replies. */
         $messagesWithReply = array();
         foreach($messages as $message)
         {
@@ -499,10 +489,9 @@ class messageModel extends model
      */
     public function deleteMessage($messageID, $mode)
     {
-        $message = $this->dao->select('id,type')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch();
         $this->dao->delete()
             ->from(TABLE_MESSAGE)
-            ->where('type')->eq($message->type)
+            ->where(1)
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($mode == 'pre')->andWhere('id')->le($messageID)->andWhere('status')->ne('1')->fi()
             ->exec();
@@ -520,13 +509,13 @@ class messageModel extends model
      */
     public function pass($messageID, $type)
     {
-        $message = $this->dao->select('id,type')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch();
         $this->dao->update(TABLE_MESSAGE)
             ->set('status')->eq(1)
             ->where('status')->eq(0)
             ->beginIF($type == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($type == 'pre')->andWhere('id')->le($messageID)->fi()
             ->exec();
+
         return !dao::isError();
     }
 

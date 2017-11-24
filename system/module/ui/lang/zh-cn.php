@@ -11,8 +11,6 @@
  */
 $lang->ui->common = "界面";
 
-$lang->ui->gdHelp          = '查看安装方式';
-$lang->ui->gdTip           = '蝉知图片水印功能需要安装php-gd扩展才能使用。';
 $lang->ui->clientDesktop   = '桌面';
 $lang->ui->clientMobile    = '移动';
 $lang->ui->logo            = 'Logo';
@@ -74,6 +72,8 @@ $lang->ui->packagePathUnwriteable = '上传目录：%s 不可写';
 $lang->ui->selectSourceImage      = '从素材库选择';
 $lang->ui->rebuildThumbs          = '重新生成缩略图';
 $lang->ui->packagePathTip         = '请将主题包的zip文件上传至 %s 目录，进行安装。';
+$lang->ui->gdHelp                 = '查看安装方式';
+$lang->ui->gdTip                  = '蝉知图片水印功能需要安装php-gd扩展才能使用。';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
@@ -295,8 +295,12 @@ $lang->ui->importTypes->theme = '只导入主题';
 $lang->ui->importTypes->full  = '完整导入';
 
 $lang->ui->theme->encryptTip = new stdclass();
-$lang->ui->theme->encryptTip->zend    = '您导入的主题是zend方式加密的，需要环境安装Zend Guard Loader解密程序，<a href="http://www.chanzhi.org/book/chanzhieps/133.html" target="_blank">Zend Guard Loader安装文档</a> 。';
-$lang->ui->theme->encryptTip->ioncube = '导入的主题是ioncube软件加密的，需要环境安装ioncube扩展，<a href="http://www.chanzhi.org/book/chanzhieps/189.html" target="_blank">ioncube扩展安装文档</a> 。';
+$lang->ui->theme->encryptTip->common    = '提示：';
+$lang->ui->theme->encryptTip->zend      = '您导入的主题是zend方式加密的，需要环境安装Zend Guard Loader解密程序，<a href="http://www.chanzhi.org/book/chanzhieps/133.html" target="_blank">Zend Guard Loader安装文档</a> 。';
+$lang->ui->theme->encryptTip->ioncube   = '导入的主题是ioncube软件加密的，需要环境安装ioncube扩展，<a href="http://www.chanzhi.org/book/chanzhieps/189.html" target="_blank">ioncube扩展安装文档</a> 。';
+$lang->ui->theme->encryptTip->noZend    = '您没有安装Zend Guard Loader解密程序。';
+$lang->ui->theme->encryptTip->noIoncube = '您没有安装ioncube扩展。';
+$lang->ui->theme->encryptTip->none      = '您还没有安装任何解密程序。';
 
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
@@ -457,3 +461,4 @@ $lang->effect->imported      = '已导入';
 $lang->effect->importSuccess = '导入成功';
 $lang->effect->bindCommunity = '蝉知特效只对蝉知社区认证用户开放，请先注册并绑定蝉知社区账号后，获取蝉知特效。';
 $lang->effect->noRsults      = "你还没有任何特效，请登录蝉知特效平台，<a href='http://www.chanzhi.org/effect.html' target='_blank'>获取特效</a>。";
+$lang->effect->redirecting   = "<span class='text-muted'><span id='countDown'>3</span>秒后跳转到社区账号注册/绑定页面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳转</a>";

@@ -52,7 +52,7 @@ js::set('admin', $this->get->admin);
       <?php echo html::a(inlink('create'), "<i class='icon icon-plus'></i> " .  $lang->user->create, "data-toggle='modal' class='btn btn-primary'");?>
     </div>
   </div>
-  <form method='post' action='<?php echo inlink('batchdelete');?>'>
+  <form method='post' action='<?php echo inlink('batchdelete', "admin={$this->get->admin}");?>'>
     <table class='table table-fixed table-hover tablesorter table-striped able-condensed' id='userList'>
       <thead>
         <tr class='text-center'>
@@ -115,7 +115,7 @@ js::set('admin', $this->get->admin);
             </ul>
           </span>
           <?php endif;?>
-          <?php commonModel::printLink('user', 'delete', "account=$user->account", $lang->delete); ?>
+          <?php commonModel::printLink('user', 'delete', "account=$user->account&admin={$this->get->admin}", $lang->delete); ?>
           <?php if($user->locked <= helper::now() and $forbidPriv):?>
           <span class="dropdown">
             <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>

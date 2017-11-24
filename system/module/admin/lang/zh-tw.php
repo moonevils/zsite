@@ -30,7 +30,7 @@ $lang->js->confirmRebind = "確認要重新綁定蟬知賬號？";
 
 $lang->admin->register = new stdclass();
 $lang->admin->register->common     = '蟬知社區';
-$lang->admin->register->caption    = '沒有蟬知社區帳號？馬上註冊一個!';
+$lang->admin->register->caption    = '沒有蟬知社區賬號？馬上註冊一個!';
 $lang->admin->register->lblAccount = '請設置您的用戶名，英文字母和數字的組合，三位以上。';
 $lang->admin->register->lblPasswd  = '請設置您的密碼。數字和字母的組合，六位以上。';
 $lang->admin->register->submit     = '註冊';

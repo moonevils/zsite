@@ -1,5 +1,7 @@
 <style>
-.panel-body .cards-custom .card > .card-heading {min-height: 20px; height: 20px; padding: 10px; font-size: 13px;}
+.panel-body .cards-custom .card > .card-heading {min-height: 40px; height: 40px; padding: 10px; font-size: 13px; position: relative;}
+.panel-body .cards-custom .card > .card-heading > strong {display: inline-block; vertical-align: middle; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.panel-body .cards-custom .card > .card-heading > .views {position: absolute; right: 0; top: 10px;}
 .panel-body .cards-custom .card > .card-content {padding: 0 10px 10px 10px; margin-bottom: 10px;}
 </style>
 
@@ -20,35 +22,34 @@
         <div class="card-heading <?php if(isset($content->alignTitle) && $content->alignTitle == 'middle') echo 'text-center';?>">
           <strong>
             <?php 
-            if(isset($content->showCategory) and $content->showCategory == 1)
-            {
-              $categoryName = ($content->categoryName == 'abbr') ? '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ' : ' [' . $product->category->name . '] ';
-              $categoryName = ($content->categoryName == 'abbr') ? '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ' : ' [' . $product->category->name . '] ';
-              echo $categoryName;
-            }
+            if(zget($content, 'showCategory') == 1) echo '[' . ($content->categoryName == 'abbr' and $product->category->abbr) ? $product->category->abbr : $product->category->name . ']';
             echo $product->name;
             ?>
           </strong>
 
           <?php if(isset($content->showPrice) and $content->showPrice):?>
           <span>
-          <?php
-          $currencySymbol = $this->config->product->currencySymbol;
-          if(!$product->unsaleable)
-          {
-              if($product->negotiate) echo "&nbsp;&nbsp;<span class='text-danger'>" . $this->lang->product->negotiate . '</span>';
-              if(!$product->negotiate)
-              {
-                  if($product->promotion) echo "&nbsp;&nbsp;<span class='text-danger'>" . $currencySymbol . $product->promotion . '</span>';
-                  if(!$product->promotion and $product->price) echo "&nbsp;&nbsp;<span class='text-danger'>" . $currencySymbol . $product->price . '</span>';
-              }
-          }
-          ?>
+            <?php
+            $currencySymbol = $this->config->product->currencySymbol;
+            if(!$product->unsaleable)
+            {
+                if($product->negotiate)
+                {
+                    $priceLabel = $this->lang->product->negotiate;
+                }
+                else
+                {
+                    if($product->promotion) $priceLabel = $currencySymbol . $product->promotion;
+                    if(!$product->promotion and $product->price) $priceLabel = $currencySymbol . $product->price;
+                }
+            }
+            if(isset($priceLabel)) echo "&nbsp;&nbsp;<span class='text-danger'>" . $priceLabel . '</span>';
+            ?>
           </span>
           <?php endif;?>
 
           <?php if(isset($content->showViews) and $content->showViews):?>
-          <div class='pull-right'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></div>
+          <div class='views'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></div>
           <?php endif;?>
         </div>
 
@@ -56,7 +57,7 @@
         <?php 
         $productInfo = empty($product->desc) ? $product->content : $product->desc; 
         $productInfo = strip_tags($productInfo);
-        $productInfo = (mb_strlen($productInfo) > $content->infoAmount) ? mb_substr($productInfo, 0 , $content->infoAmount, 'utf8') : $productInfo;
+        $productInfo = helper::substr($productInfo, $content->infoAmount);
         ?>
         <div class='card-content text-muted with-padding'><?php echo $productInfo;?></div>
         <?php endif;?>

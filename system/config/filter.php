@@ -113,6 +113,8 @@ $filter->user->adminlog->get['date']         = 'reg::date';
 $filter->user->oauthcallback->get['state']   = 'reg::base64';
 $filter->user->oauthcallback->get['code']    = 'reg::base64';
 $filter->user->oauthcallback->get['referer'] = 'reg::base64';
+$filter->user->delete->get['admin']          = 'reg::number';
+$filter->user->batchdelete->get['admin']     = 'reg::number';
 
 $filter->message->default = new stdclass();
 $filter->message->default->cookie['cmts'] = 'reg::any';
@@ -120,8 +122,14 @@ $filter->message->default->cookie['cmts'] = 'reg::any';
 $filter->product->view = new stdclass();
 $filter->product->view->cookie['cmts'] = 'reg::any';
 
+$filter->product->browse = new stdclass();
+$filter->product->browse->cookie['productOrderBy'] = 'array';
+
 $filter->article->view = new stdclass();
 $filter->article->view->cookie['cmts'] = 'reg::any';
+
+$filter->article->browse = new stdclass();
+$filter->article->browse->cookie['articleOrderBy'] = 'array';
 
 $filter->blog->view = new stdclass();
 $filter->blog->view->cookie['cmts'] = 'reg::any';

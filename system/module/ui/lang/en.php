@@ -11,8 +11,6 @@
  */
 $lang->ui->common = "UI";
 
-$lang->ui->gdHelp          = 'Check the installation';
-$lang->ui->gdTip           = 'Image watermark features need to be installed in the PHP-gd extension.';
 $lang->ui->clientDesktop   = 'Desktop';
 $lang->ui->clientMobile    = 'Mobile';
 $lang->ui->logo            = 'Logo';
@@ -74,6 +72,8 @@ $lang->ui->packagePathUnwriteable = 'Upload directory %s is not writable.';
 $lang->ui->selectSourceImage      = 'from Library';
 $lang->ui->rebuildThumbs          = 'Rebuild Thumbnail';
 $lang->ui->packagePathTip         = 'Please upload the zip file to %s, then install';
+$lang->ui->gdHelp                 = 'How to install';
+$lang->ui->gdTip                  = 'Image watermark features need PHP-gd extension.';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> Desktop";
@@ -294,6 +294,14 @@ $lang->ui->importTypes = new stdclass();
 $lang->ui->importTypes->theme = 'Theme data';
 $lang->ui->importTypes->full  = 'Full data';
 
+$lang->ui->theme->encryptTip = new stdclass();
+$lang->ui->theme->encryptTip->common    = 'Prompt:';
+$lang->ui->theme->encryptTip->zend      = 'The theme you imported is encrypted by zend, so you have to install Zend Guard Loader to decrypt it. <a href="http://www.chanzhi.org/book/chanzhieps/133.html" target="_blank">Zend Guard Loader installation documentation</a>.';
+$lang->ui->theme->encryptTip->ioncube   = 'The imported theme is encrypted by ioncube, so you have to install the ioncube, <a href="http://www.chanzhi.org/book/chanzhieps/189.html" target="_blank">ioncube extension installation documentation</a>.';
+$lang->ui->theme->encryptTip->noZend    = 'You did not install the Zend Guard Loader.';
+$lang->ui->theme->encryptTip->noIoncube = 'You did not install ioncube.';
+$lang->ui->theme->encryptTip->none      = 'You did not have any decryption program installed.';
+
 $lang->ui->themeColors = array();
 $lang->ui->themeColors[] = 'FF2A2A';
 $lang->ui->themeColors[] = 'F8F100';
@@ -453,3 +461,4 @@ $lang->effect->imported      = 'Imported';
 $lang->effect->importSuccess = 'Imported';
 $lang->effect->bindCommunity = 'Please bind the account of Changer before get effect';
 $lang->effect->noRsults      = "You have no effect, please login the platform of Changer <a href='http://www.chanzhi.org/effect.html' target='_blank'>get effect</a>。";
+$lang->effect->redirecting   = "<span class='text-muted'><span id='countDown'>3</span>seconds. Redirecting to the community page...</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Link</a>";
