@@ -242,17 +242,14 @@ $lang->menuGroups->guarder = 'security';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse       = '文章列表|article|admin|';
+$lang->article->menu->browse = '文章列表|article|admin|';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse       = '博客列表|article|admin|type=blog';
+$lang->blog->menu->browse = '博客列表|article|admin|type=blog';
 
-/* Menu of page module. */
 $lang->page = new stdclass();
-$lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'create, edit');
 
 $lang->express = new stdclass();
 

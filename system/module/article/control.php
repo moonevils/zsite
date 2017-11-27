@@ -115,7 +115,6 @@ class article extends control
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
             $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
-        if($type == 'page') unset($this->lang->article->menu);
 
         $this->loadModel('block');
 
