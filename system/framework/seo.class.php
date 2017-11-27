@@ -456,6 +456,7 @@ class uri
         $link = 'form/';
         if(!empty($alias['type'])) $link = $alias['type'] . '/';
         $link .= array_shift($params);
+        if(!empty($params['pageID'])) $link .= '/p' . $params['pageID'];
 
         $viewType = $viewType ? $viewType : $config->default->view;
 
