@@ -249,10 +249,8 @@ $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse       = '博客列表|article|admin|type=blog';
 
-/* Menu of page module. */
+/* Init page. */
 $lang->page = new stdclass();
-$lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '單頁列表|article|admin|type=page', 'alias' => 'create, edit');
 
 $lang->express = new stdclass();
 
