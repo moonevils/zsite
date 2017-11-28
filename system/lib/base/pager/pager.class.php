@@ -540,7 +540,7 @@ class basePager
                 recPerPage = perPage;
                 pageID = 1;
             }
-            $.cookie(pageCookie, recPerPage, {expires:config.cookieLife, path:config.cookiePath});
+            $.cookie(pageCookie, recPerPage, {expires:config.cookieLife, path:config.webRoot});
 
             vars = vars.replace('_recTotal_', recTotal)
             vars = vars.replace('_recPerPage_', recPerPage)
