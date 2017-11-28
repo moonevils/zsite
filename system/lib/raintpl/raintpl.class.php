@@ -60,6 +60,9 @@ class RainTPL
      */
     static $blackList = array( '\$this', 'raintpl::', 'self::', '_SESSION', '_SERVER', '_ENV',  'eval', 'exec', 'unlink', 'rmdir' );
 
+
+    static $noEchoFunctions = array('extract');
+
     /**
      * Check template.
      * true: checks template update time, if changed it compile them
@@ -105,8 +108,6 @@ class RainTPL
     protected $cacheID = null;       // identify only one cache
 
     protected static $configNameSum = array();   // takes all the config to create the md5 of the file
-
-    // -------------------------
 
     const CACHE_EXPIRE_TIME = 3600; // default cache expire time = hour
     const PHP_START         = '<?php'; // default cache expire time = hour
@@ -235,13 +236,14 @@ class RainTPL
             if(strpos($tplName, "/") === 0) $this->tpl['templateDir'] = dirname($tplName) . DS;
 
             $this->tpl['tplFile']      = self::$rootDir . $this->tpl['templateDir'] . $tplBasename . '.' . self::$tplExt;    // template file name
-            $tempCmpiledFile           = self::$rootDir . self::$cacheDir . $tplBasename . "." . md5( $this->tpl['templateDir'] . serialize(self::$configNameSum));
-            $this->tpl['compiledFile'] = $tempCmpiledFile . '.rtpl.php';	// cache file name
-            $this->tpl['cacheFile']    = $tempCmpiledFile . '.s_' . $this->cacheID . '.rtpl.php';	// static cache filename
-            $this->tpl['checked']      = true;
-
             /* If tplFile is not exists append extension to it. */
             if(!file_exists($this->tpl['tplFile'])) $this->tpl['tplFile'] = dirname($this->tpl['tplFile']) . DS . basename($this->tpl['tplFile'], "." . self::$tplExt);
+
+            $tempCmpiledFile = str_replace(TPL_ROOT, self::$rootDir . self::$cacheDir, $this->tpl['tplFile']);
+            if(!is_dir(dirname($tempCmpiledFile))) mkdir(dirname($tempCmpiledFile), 0777, true);
+            $this->tpl['compiledFile'] = $tempCmpiledFile;
+            $this->tpl['cacheFile']    = $tempCmpiledFile . 'cache.rtpl.php';
+            $this->tpl['checked']      = true;
 
             /* If the template doesn't exist and is not an external source throw an error. */
             if( self::$checkTemplateUpdate && !file_exists( $this->tpl['tplFile'] ) && !preg_match('/http/', $tplName) )
@@ -296,7 +298,7 @@ class RainTPL
         $templateCode = preg_replace("/<\?xml(.*?)" . "\?" . ">/s", "##XML\\1XML##", $templateCode);
 
         /* Disable php tag. */
-        if(!self::$phpEnabled) $templateCode = str_replace(array("<?", PHP_END), array("&lt;?","?&gt;"), $templateCode);
+        if(!self::$phpEnabled) $templateCode = str_replace(array("<?", self::PHP_END), array("&lt;?","?&gt;"), $templateCode);
 
         /* Xml re-substitution. */
         $templateCode = preg_replace_callback ("/##XML(.*?)XML##/s", array($this, 'xml_reSubstitution'), $templateCode); 
@@ -316,6 +318,32 @@ class RainTPL
         file_put_contents($compiledFile, $templateCompiled);
     }
 
+    public function getTagPatterns()
+    {
+        $tagPatterns = array();
+        $tagPatterns['loop']          = '(\{loop(?: name){0,1}="\${0,1}[^"]*"\})';
+        $tagPatterns['break']	      = '(\{break\})';
+        $tagPatterns['continue']      = '(\{continue\})';
+        $tagPatterns['loop_close']    = '(\{\/loop\})';
+        $tagPatterns['if']            = '(\{if(?: condition){0,1}="[^"]*"\})';
+        $tagPatterns['if']            = '(\{if\(.*\)\})';
+        $tagPatterns['foreach']       = '(\{foreach\(.*\)\})';
+        $tagPatterns['elseif']        = '(\{elseif(?: condition){0,1}="[^"]*"\})';
+        $tagPatterns['elseif']        = '(\{elseif\(.*\)\})';
+        $tagPatterns['else']          = '(\{else\})';
+        $tagPatterns['if_close']      = '(\{\/if\})';
+        $tagPatterns['foreach_close'] = '(\{\/foreach\})';
+        $tagPatterns['function']      = '(\{function="[^"]*"\})';
+        $tagPatterns['noparse']       = '(\{noparse\})';
+        $tagPatterns['noparse_close'] = '(\{\/noparse\})';
+        $tagPatterns['ignore']        = '(\{ignore\}|\{\*)';
+        $tagPatterns['ignore_close']  = '(\{\/ignore\}|\*\})';
+        $tagPatterns['include']       = '(\{include\s+.+\})';
+        $tagPatterns['template_info'] = '(\{\$template_info\})';
+        $tagPatterns['function']      = '(\{!(\w*?)(?:.*?)\})';
+        return $tagPatterns;
+    }
+
     /**
      * Compile template code.
      * 
@@ -326,36 +354,21 @@ class RainTPL
      */
     protected function compileTemplate($templateCode, $tplBasedir)
     {
-        $tagPatterns = array();
-        $tagPatterns['loop']          = '(\{loop(?: name){0,1}="\${0,1}[^"]*"\})';
-        $tagPatterns['break']	      = '(\{break\})';
-        $tagPatterns['continue']      = '(\{continue\})';
-        $tagPatterns['loop_close']    = '(\{\/loop\})';
-        $tagPatterns['if']            = '(\{if(?: condition){0,1}="[^"]*"\})';
-        $tagPatterns['if']            = '(\{if\(.*\)\})';
-        $tagPatterns['elseif']        = '(\{elseif(?: condition){0,1}="[^"]*"\})';
-        $tagPatterns['elseif']        = '(\{elseif\(.*\)\})';
-        $tagPatterns['else']          = '(\{else\})';
-        $tagPatterns['if_close']      = '(\{\/if\})';
-        $tagPatterns['function']      = '(\{function="[^"]*"\})';
-        $tagPatterns['noparse']       = '(\{noparse\})';
-        $tagPatterns['noparse_close'] = '(\{\/noparse\})';
-        $tagPatterns['ignore']        = '(\{ignore\}|\{\*)';
-        $tagPatterns['ignore_close']  = '(\{\/ignore\}|\*\})';
-        $tagPatterns['include']       = '(\{include\s+.+\})';
-        $tagPatterns['template_info'] = '(\{\$template_info\})';
-        $tagPatterns['function']      = '(\{!(\w*?)(?:.*?)\})';
 
-        $tagRegexp = "/" . join( "|", $tagPatterns ) . "/";
+        $tagPatterns = $this->getTagPatterns();
+        $tagRegexp   = "/" . join( "|", $tagPatterns ) . "/";
         
-        /* Path replace (src of img, background and href of link) . */
+        /* Replace start mark and end mark of text. */
         $templateCode = str_replace("{{", "SOT_MARK", $templateCode);
         $templateCode = str_replace("}}", "EOT_MARK", $templateCode);
+
+        /* Path replace (src of img, background and href of link) . */
         $templateCode = $this->pathReplace( $templateCode, $tplBasedir );
         $templateCode = preg_split($tagRegexp, $templateCode, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         $compiledCode = $this->compileCode($templateCode);
-        $templateCode = str_replace("SOT_MARK", "{{", $templateCode);
-        $templateCode = str_replace("EOT_MARK", "}}",  $templateCode);
+
+        $compiledCode = str_replace("SOT_MARK", "{", $compiledCode);
+        $compiledCode = str_replace("EOT_MARK", "}", $compiledCode);
 
         return $compiledCode;
     }
@@ -391,55 +404,29 @@ class RainTPL
             {
                 $commentIsOpen = false;
             }
-            elseif( $commentIsOpen )
+            elseif($commentIsOpen)
             {
                 $compiledCode .= $html;
             }
-            elseif( strpos( $html, '{ignore}' ) !== FALSE || strpos( $html, '{*' ) !== FALSE )
+            elseif(strpos($html, '{ignore}') !== FALSE || strpos($html, '{*') !== FALSE)
             {
                 $ignoreIsOpen = true;
             }
-            elseif( strpos( $html, '{noparse}' ) !== FALSE )
+            elseif(strpos($html, '{noparse}') !== FALSE)
             {
                 $commentIsOpen = true;
             }
-            elseif( preg_match( '/\{include(\s+)(.*)\}/', $html, $code ) )
+            elseif(preg_match('/\{foreach(\()(.*)\}/', $html, $code ))
             {
-                if(preg_match("/http/", $code[1]))
-                {
-                    $content = file_get_contents($code[1]);
-                    $compiledCode .= $content;
-                }
-                else
-                {
-                    /* Variables substitution. */
-                    $include_var = $this->var_replace($code[ 2 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $loop_level );
-                    $include_var = $code[2];
-
-                    /* Get the folder of the actual template. */
-                    $actual_folder = substr( $this->tpl['templateDir'], strlen(self::$tplDir) );
-
-                    /* Get the included template. */
-                    $include_template = $actual_folder . $include_var;
-
-                    /* Reduce the path. */
-                    $include_template = $this->reduce_path( $include_template );
-
-                    /* If the cache is active. */
-                    if( isset($code[ 2 ]) )
-                    {
-                        $compiledCode .= '<?php $tpl = new '.get_called_class().';' .
-                            '$tpl->assign( $this->var );' .
-                            ( !$loop_level ? null : '$tpl->assign( "key", $key'.$loop_level.' ); $tpl->assign( "value", $value'.$loop_level.' );' ).
-                            '$tpl->draw(' . $include_template . ');'
-                            . self::PHP_END;
-                    }
-                }
+                $compiledCode .= $this->compileForeach($html, $code);
             }
-
+            elseif(preg_match('/\{include(\s+)(.*)\}/', $html, $code ))
+            {
+                $compiledCode .= $this->compileInclude($html, $code);
+            }
             //loop
-            elseif( preg_match( '/\{loop(?: name){0,1}="\${0,1}([^"]*)"\}/', $html, $code ) ){
-
+            elseif(preg_match('/\{loop(?: name){0,1}="\${0,1}([^"]*)"\}/', $html, $code))
+            {
                 //increase the loop counter
                 $loop_level++;
 
@@ -452,30 +439,22 @@ class RainTPL
                 $value = "\$value$loop_level";           // value
 
                 //loop code
-                $compiledCode .=  "<?php $counter=-1; if( !is_null($var) && is_array($var) && sizeof($var) ) foreach( $var as $key => $value ){ $counter++; ?>";
+                $compiledCode .= self::wrapPHP(" $counter=-1; if( !is_null($var) && is_array($var) && sizeof($var) ) foreach( $var as $key => $value ){ $counter++;");
 
             }
+            elseif( strpos( $html, '{break}' ) !== FALSE )
+            {
 
-            // loop break
-            elseif( strpos( $html, '{break}' ) !== FALSE ) {
-
-                //else code
-                $compiledCode .=   '<?php break; ?>';
+                $compiledCode .=  self::wrapPHP('break;');
 
             }
-
-            // loop continue
-            elseif( strpos( $html, '{continue}' ) !== FALSE ) {
-
-                //else code
-                $compiledCode .=   '<?php continue; ?>';
-
+            elseif( strpos( $html, '{continue}' ) !== FALSE )
+            {
+                $compiledCode .=  self::wrapPHP('continue;');
             }
-
-
-            //close loop tag
-            elseif( strpos( $html, '{/loop}' ) !== FALSE ) {
-
+            elseif( strpos( $html, '{/loop}' ) !== FALSE )
+            {
+                //close loop tag
                 //iterator
                 $counter = "\$counter$loop_level";
 
@@ -483,13 +462,14 @@ class RainTPL
                 $loop_level--;
 
                 //close loop code
-                $compiledCode .=  "<?php } ?>";
-
+                $compiledCode .=  self::wrapPHP('}');
             }
-
-            //if
-            elseif( preg_match( '/\{if(?: condition){0,1}="([^"]*)"\}/', $html, $code ) ){
-
+            elseif(strpos($html, '{/foreach}') !== FALSE)
+            {
+                $compiledCode .=  self::wrapPHP('endforeach;');
+            }
+            elseif(preg_match('/\{if(?: condition){0,1}="([^"]*)"\}/', $html, $code))
+            {
                 //increase open if counter (for intendation)
                 $openIf++;
 
@@ -506,13 +486,11 @@ class RainTPL
                 $parsed_condition = $this->var_replace( $condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level );
 
                 //if code
-                $compiledCode .=   "<?php if( $parsed_condition ){ ?>";
+                $compiledCode .=  self::wrapPHP("if( $parsed_condition ){");
 
             }
-
-            //short if
-            elseif( preg_match( '/\{if\((.*)\)\}/', $html, $code ) ){
-
+            elseif( preg_match( '/\{if\((.*)\)\}/', $html, $code ) )
+            {
                 //increase open if counter (for intendation)
                 $openIf++;
 
@@ -520,25 +498,22 @@ class RainTPL
                 $tag = $code[ 0 ];
 
                 //condition attribute
-                $condition = $code[ 1 ];
+                $condition = $code[1];
 
                 // check if there's any function disabled by blackList
-                $this->function_check( $tag );
+                $this->function_check($tag);
 
                 //variable substitution into condition (no delimiter into the condition)
                 $parsed_condition = $this->var_replace( $condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level );
 
                 //if code
-                $compiledCode .=   "<?php if( $parsed_condition ){ ?>";
+                $compiledCode .= self::wrapPHP("if( $parsed_condition ){");
 
             }
-
-
-            //elseif
-            elseif( preg_match( '/\{elseif(?: condition){0,1}="([^"]*)"\}/', $html, $code ) ){
-
+            elseif(preg_match( '/\{elseif(?: condition){0,1}="([^"]*)"\}/', $html, $code ))
+            {
                 //tag
-                $tag = $code[ 0 ];
+                $tag = $code[0];
 
                 //condition attribute
                 $condition = $code[ 1 ];
@@ -547,47 +522,38 @@ class RainTPL
                 $parsed_condition = $this->var_replace( $condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level );
 
                 //elseif code
-                $compiledCode .=   "<?php }elseif( $parsed_condition ){ ?>";
+                $compiledCode .= self::wrapPHP("}elseif( $parsed_condition ){");
             }
+            elseif( preg_match( '/\{elseif\(.*\)\}/', $html, $code ) )
+            {
+                $tag = $code[ 0 ];       //tag
+                $condition = $code[ 1 ]; //condition attribute
 
-            //elseif short
-            elseif( preg_match( '/\{elseif\(.*\)\}/', $html, $code ) ){
-
-                //tag
-                $tag = $code[ 0 ];
-
-                //condition attribute
-                $condition = $code[ 1 ];
-
-                //variable substitution into condition (no delimiter into the condition)
+                /* Variable substitution into condition (no delimiter into the condition) */
                 $parsed_condition = $this->var_replace( $condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level );
 
                 //elseif code
-                $compiledCode .=   "<?php }elseif( $parsed_condition ){ ?>";
+                $compiledCode .= self::wrapPHP("}elseif( $parsed_condition ){");
             }
-
-
-            //else
-            elseif( strpos( $html, '{else}' ) !== FALSE ) {
-
+            elseif( strpos( $html, '{else}' ) !== FALSE )
+            {
                 //else code
-                $compiledCode .=   '<?php }else{ ?>';
+                $compiledCode .= self::wrapPHP('}else{');
 
             }
-
             //close if tag
-            elseif( strpos( $html, '{/if}' ) !== FALSE ) {
+            elseif( strpos( $html, '{/if}' ) !== FALSE )
+            {
 
                 //decrease if counter
                 $openIf--;
 
                 // close if code
-                $compiledCode .=   '<?php } ?>';
+                $compiledCode .= self::wrapPHP('}');
 
             }
-
-            //function
-            elseif( preg_match( '/\{!(\w*)(.*?)\}/', $html, $code ) ){
+            elseif( preg_match( '/\{!(\w*)(.*?)\}/', $html, $code ) )
+            {
 
                 $tag      = $code[0];
                 $function = $code[1];
@@ -604,30 +570,25 @@ class RainTPL
                 }
 
                 /* Add echo if neccesory. */
-                if($code[1] != 'echo') $parsed_function = 'echo ' . $parsed_function;
-                $compiledCode .= "<?php $parsed_function; ?>";
+                if($function != 'echo' and !in_array($function, self::$noEchoFunctions)) 
+                {
+                    $parsed_function = 'echo ' . $parsed_function;
+                }
+                $compiledCode .= self::wrapPHP("$parsed_function;");
             }
-
-            // show all vars
-            elseif ( strpos( $html, '{$template_info}' ) !== FALSE ) {
-
-                //tag
-                $tag  = '{$template_info}';
-
-                //if code
-                $compiledCode .=   '<?php echo "<pre>"; print_r( $this->var ); echo "</pre>"; ?>';
+            elseif(strpos($html, '{$template_info}' ) !== FALSE)
+            {
+                $tag = '{$template_info}';
+                $compiledCode .= self::wrapPHP('echo "<pre>"; print_r( $this->var ); echo "</pre>";');
             }
-
-
-            //all html code
-            else{
-
+            else
+            {
                 //variables substitution (es. {$title})
-                $html = $this->var_replace( $html, $left_delimiter = '\{', $right_delimiter = '\}', $php_left_delimiter = '<?php ', $php_right_delimiter = ';?>', $loop_level, $echo = true );
+                $html = $this->var_replace( $html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $php_right_delimiter = ';' . self::PHP_END, $loop_level, $echo = true );
                 //const substitution (es. {#CONST#})
-                $html = $this->const_replace( $html, $left_delimiter = '\{', $right_delimiter = '\}', $php_left_delimiter = '<?php ', $php_right_delimiter = ';?>', $loop_level, $echo = true );
+                $html = $this->const_replace( $html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $php_right_delimiter = ';' . self::PHP_END, $loop_level, $echo = true );
                 //functions substitution (es. {"string"|functions})
-                $compiledCode .= $this->func_replace( $html, $left_delimiter = '\{', $right_delimiter = '\}', $php_left_delimiter = '<?php ', $php_right_delimiter = ';?>', $loop_level, $echo = true );
+                $compiledCode .= $this->func_replace( $html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $php_right_delimiter = ';' . self::PHP_END, $loop_level, $echo = true );
             }
         }
 
@@ -636,6 +597,52 @@ class RainTPL
             throw $e->setTemplateFile($this->tpl['tplFile']);
         }
         return $compiledCode;
+    }
+
+    /**
+     * Compile foreach sentence.
+     * 
+     * @param  string    $html 
+     * @access public
+     * @return string
+     */
+    public function compileForeach($html = '', $code)
+    {
+        if(!isset($code[2])) return $html;
+        return self::wrapPHP('foreach( ' .  $code[2] . ':');
+    }
+
+    public function compileInclude($html, $code = null)
+    {
+        if(preg_match("/http/", $code[1])) return file_get_contents($code[1]);
+
+        /* Variables substitution. */
+        $include_var = $this->var_replace($code[ 2 ], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."', $loop_level );
+        $include_var = $code[2];
+
+        /* Get the folder of the actual template. */
+        $actual_folder = substr( $this->tpl['templateDir'], strlen(self::$tplDir) );
+
+        /* Get the included template. */
+        $include_template = $actual_folder . $include_var;
+
+        /* Reduce the path. */
+        $include_template = $this->reduce_path( $include_template );
+
+        /* If the cache is active. */
+        if( isset($code[ 2 ]) )
+        {
+           return '<?php $tpl = new '.get_called_class().';' .
+                '$tpl->assign( $this->var );' .
+                (!$loop_level ? null : '$tpl->assign( "key", $key'.$loop_level.' ); $tpl->assign( "value", $value' . $loop_level .' );' ).
+                '$tpl->draw(' . $include_template . ');'
+                . self::PHP_END;
+        }
+    }
+
+    public function wrapPHP($code)
+    {
+        return self::PHP_START . ' ' . $code . ' ' . self::PHP_END;
     }
 
     /**
@@ -781,8 +788,8 @@ class RainTPL
 
 
     // replace functions/modifiers on constants and strings
-    function func_replace( $html, $tag_left_delimiter, $tag_right_delimiter, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level = null, $echo = null ){
-
+    function func_replace( $html, $tag_left_delimiter, $tag_right_delimiter, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level = null, $echo = null )
+    {
         preg_match_all( '/' . '\{\#{0,1}(\"{0,1}.*?\"{0,1})(\|\w.*?)\#{0,1}\}' . '/', $html, $matches );
 
         for( $i=0, $n=count($matches[0]); $i<$n; $i++ ){
@@ -856,8 +863,9 @@ class RainTPL
 
             }
             else
+            {
                 $function = $params = null;
-
+            }
             $php_var = $var_name . $variable_path;
 
             // compile the variable for php
@@ -902,19 +910,19 @@ class RainTPL
                 $extra_var = $this->var_replace( $extra_var, null, null, null, null, $loop_level );
 
                 // check if there's an operator = in the variable tags, if there's this is an initialization so it will not output any value
-                $is_init_variable = preg_match( "/^[a-z_A-Z\.\[\](\-\>)]*=[^=]*$/", $extra_var );
+                $is_init_variable = preg_match( "/^[a-z_A-Z\.\[\](\-\>)]*(\s)*(=){1}[^=]*.*$/", $extra_var );
 
                 //function associate to variable
                 $function_var = ( $extra_var and $extra_var[0] == '|') ? substr( $extra_var, 1 ) : null;
 
                 //variable path split array (ex. $news.title o $news[title]) or object (ex. $news->title)
-                $temp = preg_split( "/\.|\[|\-\>/", $var );
+                $temp = preg_split("/\.|\[|\-\>/", $var);
 
                 //variable name
-                $var_name = $temp[ 0 ];
+                $var_name = $temp[0];
 
                 //variable path
-                $variable_path = substr( $var, strlen( $var_name ) );
+                $variable_path = substr($var, strlen($var_name));
 
                 //parentesis transform [ e ] in [" e in "]
                 $variable_path = str_replace( '[', '["', $variable_path );
@@ -925,7 +933,9 @@ class RainTPL
 
                 // if is an assignment also assign the variable to $this->var['value']
                 if( $is_init_variable )
+                {
                     $extra_var = "=\$this->var['{$var_name}']{$variable_path}" . $extra_var;
+                }
 
 
 
@@ -1001,8 +1011,8 @@ class RainTPL
         $preg = '#(\W|\s)' . implode( '(\W|\s)|(\W|\s)', self::$blackList ) . '(\W|\s)#';
 
         // check if the function is in the black list (or not in white list)
-        if( count(self::$blackList) && preg_match( $preg, $code, $match ) ){
-
+        if(count(self::$blackList) && preg_match($preg, $code, $match))
+        {
             // find the line of the error
             $line = 0;
             $rows=explode("\n",$this->tpl['source']);

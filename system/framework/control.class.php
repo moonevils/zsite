@@ -108,7 +108,7 @@ class control extends baseControl
 
         if(RUN_MODE == 'front')
         {
-            $templatePath = TPL_ROOT .  DS . $moduleName;
+            $templatePath = TPL_ROOT . $moduleName;
             $viewFile     = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
             
             if($this->devicePrefix == 'm.' and !is_file($viewFile))

@@ -1,4 +1,6 @@
-  <div class='blocks all-bottom row' data-region='all-bottom'>{!$control->block->printRegion($layouts, 'all', 'bottom', true)}</div>
+  <div class='blocks all-bottom row' data-region='all-bottom'>
+  {!$control->block->printRegion($layouts, 'all', 'bottom', true)}
+  </div>
   </div></div>
   {* End div.page-content then div.page-wrapper in header.html.php *}
   <footer id='footer' class='clearfix'>
@@ -41,11 +43,9 @@
   {$extPath=TPL_ROOT . 'common' . DS . 'ext' . DS}
   {$extHookRule=$extPath . 'footer.front.*.hook.php'}
   {$extHookFiles=glob($extHookRule)}
-  {if(!empty($extHookFiles))} 
-    {loop="extHookFiles"}
-    {include $value}
-    {/loop}
-  {/if}
+  {foreach($extHookFiles as $hook)}
+  {include $hook}
+  {/foreach}
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='{$lang->back2Top}'></a>
 </div>{* end "div.page-container" in "header.html.php" *}
 {$qrcode=isset($config->ui->QRCode) ? $config->ui->QRCode : 1}

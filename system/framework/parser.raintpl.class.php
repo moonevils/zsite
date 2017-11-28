@@ -75,10 +75,8 @@ class raintplParser
         if(!isset($hookFiles)) $hookFiles = array();
         $this->tpl->assign('hookFiles', $hookFiles);
 
-
         foreach($this->control->view as $key => $value) $this->tpl->assign($key, $value);
 
-		$viewFile = basename($viewFile, ".php");
         return $this->tpl->draw($viewFile, true);
     }
 

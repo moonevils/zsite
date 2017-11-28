@@ -11,21 +11,21 @@
 {/if}
 <div class='row blocks' data-region='article_browse-topBanner'>{$control->block->printRegion($layouts, 'article_browse', 'topBanner', true);}</div>
 <div class='row' id='columns' data-page='article_browse'>
-  {if(!empty($layouts['article_browse']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')}
-  <div class="col-md-{!echo 12 - $sideGrid;} col-main{ echo ($sideFloat === 'left') ? ' pull-right' : ''}" id="mainContainer">
+  {if(!empty($layouts['article_browse']['side']) and !empty($sideFloat) and $sideFloat != 'hidden')}
+  <div class="col-md-{!echo 12 - $sideGrid;} col-main{!echo ($sideFloat === 'left') ? ' pull-right' : ''}" id="mainContainer">
   {else}
   <div class="col-md-12" id="mainContainer">
   {/if}
     <div class='list list-condensed' id='articleList'>
     <div class='row blocks' data-region='article_browse-top'>{$control->block->printRegion($layouts, 'article_browse', 'top', true);}</div>
       <header id='articleHeader'>
-        <h2>{$category->name;}</h2>
+        <h2>{$category->name}</h2>
         {!echo "<div class='header'>" . html::a('javascript:;', $lang->article->orderBy->time, "data-field='addedDate' class='addedDate setOrder'") . "</div>";}
         {!echo "<div class='header'>" . html::a('javascript:;', $lang->article->orderBy->hot, "data-field='views' class='views setOrder'") . "</div>";}
       </header>
       <section class='items items-hover' id='articles'>
-        {foreach($articles as $article):}
-        {$url=inlink('view', "id=$article->id", "category=$article->category->alias&name=$article->alias")}
+        {foreach($articles as $article)}
+        {$url=inlink('view', "id=$article->id", "category={{$article->category->alias}}&name={{$article->alias}}")}
         <div class='item' id="article{$article->id}" data-ve='article'>
           {if(!empty($article->image))}
           {$pull     = (isset($control->config->article->imagePosition) and $control->config->article->imagePosition == 'left') ? 'pull-left' : 'pull-right'}
@@ -34,7 +34,6 @@
             {$maxWidth = !empty($control->config->article->imageWidth) ? $control->config->article->imageWidth . 'px' : '120px';}
             {$title    = $article->image->primary->title ? $article->image->primary->title : $article->title}
             {!echo html::a($url, html::image("{{$config->webRoot}}file.php?pathname={{$article->image->primary->pathname}}&objectType=article&imageSize=smallURL&extension={{$article->image->primary->extension}}", "title='$title' style='$maxWidth' class='thumbnail'"))}
-            ?>
           </div>
           {/if}
           <div class='item-heading'>
@@ -66,12 +65,12 @@
     <div class='row blocks' data-region='article_browse-bottom'>{$control->block->printRegion($layouts, 'article_browse', 'bottom', true)}</div>
   </div>
   {if(!empty($layouts['article_browse']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden'))}
-  <div class='col-md-{!echo $sideGrid ?> col-side'>
+  <div class='col-md-{!echo $sideGrid} col-side'>
     <side class='page-side blocks' data-region='article_browse-side'>
       {$control->block->printRegion($layouts, 'article_browse', 'side')}
     </side>
   </div>
   {/if}
 </div>
-<div class='row blocks' data-region='article_browse-bottomBanner'><?php $control->block->printRegion($layouts, 'article_browse', 'bottomBanner', true)}</div>
-<?php include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}
+<div class='row blocks' data-region='article_browse-bottomBanner'>{$control->block->printRegion($layouts, 'article_browse', 'bottomBanner', true)}</div>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}
