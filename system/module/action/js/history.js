@@ -29,12 +29,12 @@ $(document).ready(function()
           if(orderClass == 'log-asc')
           {
               $(this).find('span').attr('class', 'log-desc');
-              $.cookie('historyOrder', 'log-desc', {path: v.webRoot});
+              $.cookie('historyOrder', 'log-desc', {path: config.cookiePath});
           }
           else
           {
               $(this).find('span').attr('class', 'log-asc');
-              $.cookie('historyOrder', 'log-asc', {path: v.webRoot});
+              $.cookie('historyOrder', 'log-asc', {path: config.cookiePath});
           }
 
           $(this).parents('.panel').find('.panel-body li').reverseOrder();
