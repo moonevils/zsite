@@ -391,6 +391,7 @@ $lang->error->email        = '<strong>%s</strong> should be valid Email.';
 $lang->error->phone        = '<strong>%s</strong> should be valid phone number.';
 $lang->error->mobile       = '<strong>%s</strong> should be valid mobile phone number.';
 $lang->error->URL          = '<strong>%s</strong> should be valid URL.';
+$lang->error->IP           = '<strong>%s</strong> should be valid ip.';
 $lang->error->date         = '<strong>%s</strong> should be valid date.';
 $lang->error->account      = '<strong>%s</strong> should be any combination of letters and numbers and must be a minimum of 3 characters.';
 $lang->error->passwordsame = 'Passwords should match.';

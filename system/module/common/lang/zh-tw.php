@@ -390,6 +390,7 @@ $lang->error->email        = '<strong>%s</strong>應當為合法的EMAIL。';
 $lang->error->phone        = '<strong>%s</strong>應當為合法的電話號碼。';
 $lang->error->mobile       = '<strong>%s</strong>應當為合法的手機號碼。';
 $lang->error->URL          = '<strong>%s</strong>應當為合法的URL。';
+$lang->error->IP           = '<strong>%s</strong>應當為合法的IP。';
 $lang->error->date         = '<strong>%s</strong>應當為合法的日期。';
 $lang->error->account      = '<strong>%s</strong>應當為字母和數字的組合，至少三位';
 $lang->error->passwordsame = '兩次密碼應當相等。';
