@@ -249,22 +249,16 @@ $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse       = 'Blogs|article|admin|type=blog';
 
-/* Menu of page module. */
+/* Init page. */
 $lang->page = new stdclass();
-$lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => 'Pages|article|admin|type=page', 'alias' => 'create, edit');
 
+/* Init express. */
 $lang->express = new stdclass();
 
 $lang->orderSetting = new stdclass();
 $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = 'Settings|product|setting|';
 $lang->orderSetting->menu->express      = 'Shipping Carrier|tree|browse|type=express';
-
-$lang->userSetting = new stdclass();
-$lang->userSetting->menu = new stdclass();
-$lang->userSetting->menu->score         = 'Score Rule|score|setcounts|';
-$lang->userSetting->menu->stateinfo     = 'Score Compute|score|showstateinfo|';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -397,6 +391,7 @@ $lang->error->email        = '<strong>%s</strong> should be valid Email.';
 $lang->error->phone        = '<strong>%s</strong> should be valid phone number.';
 $lang->error->mobile       = '<strong>%s</strong> should be valid mobile phone number.';
 $lang->error->URL          = '<strong>%s</strong> should be valid URL.';
+$lang->error->IP           = '<strong>%s</strong> should be valid ip.';
 $lang->error->date         = '<strong>%s</strong> should be valid date.';
 $lang->error->account      = '<strong>%s</strong> should be any combination of letters and numbers and must be a minimum of 3 characters.';
 $lang->error->passwordsame = 'Passwords should match.';

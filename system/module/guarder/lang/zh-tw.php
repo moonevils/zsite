@@ -47,7 +47,7 @@ $lang->guarder->noConfigure   = "無法找到發信配置信息";
 $lang->guarder->noEmail       = "未填寫個人郵箱";
 $lang->guarder->noQuestion    = "未設置密保問題";
 $lang->guarder->noCaptcha     = "郵箱驗證無法啟用。";
-$lang->guarder->okFileVerify  = "請在伺服器創建 <span class='red'>%s</span> 檔案。";
+$lang->guarder->okFileVerify  = "請在伺服器創建 <span class='red'>%s</span> 檔案，如果存在該檔案，使用編輯軟件打開，重新保存一遍。";
 $lang->guarder->sendSuccess   = '驗證碼已發送至 %s';
 $lang->guarder->options       = '驗證方式';
 

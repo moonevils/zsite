@@ -42,7 +42,7 @@ class article extends control
 
         if($category && $category->link) helper::header301($category->link);
 
-        $orderBy = zget($_COOKIE['articleOrderBy'], $categoryID, 'addedDate_desc');
+        $orderBy = isset($_COOKIE['articleOrderBy'][$categoryID]) ? $_COOKIE['articleOrderBy'][$categoryID] : 'addedDate_desc';
 
         $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
         $this->app->loadClass('pager', $static = true);
@@ -115,7 +115,6 @@ class article extends control
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
             $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
-        if($type == 'page') unset($this->lang->article->menu);
 
         $this->loadModel('block');
 

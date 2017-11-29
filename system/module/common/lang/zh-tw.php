@@ -249,10 +249,8 @@ $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse       = '博客列表|article|admin|type=blog';
 
-/* Menu of page module. */
+/* Init page. */
 $lang->page = new stdclass();
-$lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '單頁列表|article|admin|type=page', 'alias' => 'create, edit');
 
 $lang->express = new stdclass();
 
@@ -260,11 +258,6 @@ $lang->orderSetting = new stdclass();
 $lang->orderSetting->menu = new stdclass();
 $lang->orderSetting->menu->orderSetting = '設置|product|setting|';
 $lang->orderSetting->menu->express      = '快遞|tree|browse|type=express';
-
-$lang->userSetting = new stdclass();
-$lang->userSetting->menu = new stdclass();
-$lang->userSetting->menu->score         = '積分規則|score|setcounts|';
-$lang->userSetting->menu->stateinfo     = '積分結算|score|showstateinfo|';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -329,7 +322,7 @@ $lang->security->menu->whitelist   = '白名單管理|guarder|setwhitelist|';
 $lang->security->menu->sensitive   = '敏感詞設置|site|setsensitive|';
 $lang->security->menu->captcha     = '驗證碼設置|guarder|setcaptcha|';
 $lang->security->menu->upload      = '附件上傳|site|setupload|';
-$lang->security->menu->admin       = '管理員|user|admin|admin=1';
+$lang->security->menu->admin       = array('link' => '管理員|user|admin|admin=1', 'alias' => 'delete,batchdelete');
 $lang->security->menu->group       = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log         = '登錄日誌|user|adminlog|';
 
@@ -397,6 +390,7 @@ $lang->error->email        = '<strong>%s</strong>應當為合法的EMAIL。';
 $lang->error->phone        = '<strong>%s</strong>應當為合法的電話號碼。';
 $lang->error->mobile       = '<strong>%s</strong>應當為合法的手機號碼。';
 $lang->error->URL          = '<strong>%s</strong>應當為合法的URL。';
+$lang->error->IP           = '<strong>%s</strong>應當為合法的IP。';
 $lang->error->date         = '<strong>%s</strong>應當為合法的日期。';
 $lang->error->account      = '<strong>%s</strong>應當為字母和數字的組合，至少三位';
 $lang->error->passwordsame = '兩次密碼應當相等。';
