@@ -389,6 +389,7 @@ $lang->error->email        = '<strong>%s</strong>应当为合法的EMAIL。';
 $lang->error->phone        = '<strong>%s</strong>应当为合法的电话号码。';
 $lang->error->mobile       = '<strong>%s</strong>应当为合法的手机号码。';
 $lang->error->URL          = '<strong>%s</strong>应当为合法的URL。';
+$lang->error->IP           = '<strong>%s</strong>应当为合法的IP。';
 $lang->error->date         = '<strong>%s</strong>应当为合法的日期。';
 $lang->error->account      = '<strong>%s</strong>应当为字母和数字的组合，至少三位';
 $lang->error->passwordsame = '两次密码应当相等。';
