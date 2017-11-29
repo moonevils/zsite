@@ -1,10 +1,10 @@
 $().ready(function()
 {
-     $('.loadInModal').click(function()
-     {
+    $('.loadInModal').click(function()
+    {
         $('#ajaxModal').load($(this).attr('href'));
         return false;
-     })
+    })
 });
 
 

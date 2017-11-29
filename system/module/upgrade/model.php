@@ -181,6 +181,7 @@ class upgradeModel extends model
             case '6_5';
             case '6_6':
                 $this->processFileURLInEditor();
+            case '6_6_1':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -2372,7 +2373,7 @@ class upgradeModel extends model
             ->where(1)
             ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
             ->beginIF(strpos("$tables->article,$tables->thread,$tables->reply,$tables->book", $table) !== false )
-            ->andWhere('content')->like("src=\"{")
+            ->andWhere('content')->like("%src=\"{%")
             ->fi()
             ->orderBy('id')
             ->limit($limit)
@@ -2471,7 +2472,7 @@ class upgradeModel extends model
             ->where(1)
             ->beginIF($lastID)->andWhere('id')->gt($lastID)->fi()
             ->beginIF(strpos("$tables->article,$tables->thread,$tables->reply,$tables->book", $table) !== false )
-            ->andWhere('content')->like("src=\"{")
+            ->andWhere('content')->like("%src=\"{%")
             ->fi()
             ->orderBy('id')
             ->limit($limit)

@@ -68,6 +68,35 @@ class router extends baseRouter
     }
 
     /**
+     * Set client theme.
+     *
+     * @param   string $theme   
+     * @access  public
+     * @return  void
+     */
+    public function setClientTheme($theme = '')
+    {
+        if(isset($this->config->client->theme)) $this->clientTheme = $this->config->client->theme;
+        if(isset($_COOKIE['theme']))            $this->clientTheme = $_COOKIE['theme'];
+        if(!empty($theme))                      $this->clientTheme = $theme;
+
+        if(!empty($this->clientTheme))
+        {
+            $this->clientTheme = strtolower($this->clientTheme);
+            if(!isset($this->lang->themes[$this->clientTheme])) $this->clientTheme = $this->config->default->theme;
+        }    
+        else
+        {
+            $this->clientTheme = $this->config->default->theme;
+        }
+
+        setcookie('theme', $this->clientTheme, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
+        if(!isset($_COOKIE['theme'])) $_COOKIE['theme'] = $this->clientTheme;
+
+        return true;
+    }
+
+    /**
      * Set client device.
      * 
      * @access public
@@ -100,7 +129,7 @@ class router extends baseRouter
         if($viewType == 'mhtml') $device = 'mobile';
         
         $this->clientDevice = $device;
-        setcookie('device', $this->clientDevice, $this->config->cookieLife, $this->config->webRoot, '', false, true);
+        setcookie('device', $this->clientDevice, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
         $this->cookie->set('device', $this->clientDevice);
         return $this->clientDevice;
     }

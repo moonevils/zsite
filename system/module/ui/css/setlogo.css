@@ -2,7 +2,7 @@
 .row-logo .card{text-align:center;padding-top:30px; border:none; height:150px;}
 .row-logo .text-lg{line-height:90px;}
 .row-logo .card a, .row-logo .card .icon-spin{line-height:80px;}
-.row-logo a{text-decoration: none;}
+.row-logo a{text-decoration: none; outline: none;}
 .row-logo img.logo{height:80px;}
 .row-logo img.favicon{max-height:64px;}
 .row-logo .actions{position:absolute; right:20px;top:10px;}

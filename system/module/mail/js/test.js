@@ -9,7 +9,7 @@ $(document).ready(function()
         }
         else
         {
-            $('#result').html(response.data);
+            $('#result').html(response.message);
             $('.panel-notice').removeClass('hidden')
         }
         return false;

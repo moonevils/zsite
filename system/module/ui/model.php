@@ -846,13 +846,13 @@ class uiModel extends model
      */
     public function exportTheme($template, $theme, $code)
     {
-        $themeInfo  = fixer::input('post')
+        $themeInfo = fixer::input('post')
             ->add('type', 'theme')
             ->add('fromVersion', $this->config->version)
             ->add('templateCompatible', $this->post->template)
             ->get();
 
-        $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);
+        $yaml = $this->app->loadClass('spyc')->dump($themeInfo);
         file_put_contents($this->directories->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
 
         $this->clearSources();
@@ -959,14 +959,13 @@ class uiModel extends model
     public function exportThemeDB($template, $theme)
     {
         $lang        = $this->app->getClientLang();
-        $dbFile      = $this->directories->exportDbPath  . 'install.sql';
+        $dbFile      = $this->directories->exportDbPath . 'install.sql';
         $encryptFile = $this->directories->encryptDbPath . 'install.sql';
         $plan        = zget($this->config->layout, "{$template}_{$theme}");
 
         $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE, TABLE_CONFIG);
-
         $groups = $this->getUsedSlideGroups($template, $theme);
-        $groups = join(",", $groups);
+        $groups = join(',', $groups);
         if(!empty($groups))
         {
             $tables[] = TABLE_SLIDE;
@@ -1073,12 +1072,12 @@ class uiModel extends model
     {
         $sqls = file_get_contents($file);
 
-        $sqls = str_replace(TABLE_BLOCK,    "eps_block",  $sqls);
-        $sqls = str_replace(TABLE_LAYOUT,   "eps_layout", $sqls);
-        $sqls = str_replace(TABLE_SLIDE,    "eps_slide",  $sqls);
-        $sqls = str_replace(TABLE_CONFIG,   "eps_config", $sqls);
+        $sqls = str_replace(TABLE_BLOCK,    "eps_block",    $sqls);
+        $sqls = str_replace(TABLE_LAYOUT,   "eps_layout",   $sqls);
+        $sqls = str_replace(TABLE_SLIDE,    "eps_slide",    $sqls);
+        $sqls = str_replace(TABLE_CONFIG,   "eps_config",   $sqls);
         $sqls = str_replace(TABLE_CATEGORY, "eps_category", $sqls);
-        $sqls = str_replace(TABLE_FILE,     "eps_file", $sqls);
+        $sqls = str_replace(TABLE_FILE,     "eps_file",     $sqls);
         $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("\/{$template}\/{$theme}\/", "/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("\"$theme\"", "\"THEME_CODEFIX\"", $sqls);
@@ -1091,7 +1090,7 @@ class uiModel extends model
         /* Replace theme code in custom params of themes. */
         $sqls = str_replace('\"' . $theme . '\":{\"background', '\"THEME_CODEFIX\":{\"background', $sqls);
 
-        /* Replace theme code in custom params of clrean and wide theme. */
+        /* Replace theme code in custom params of clean and wide theme. */
         $sqls = str_replace('\"' . $theme . '\":{\"color-primary', '\"THEME_CODEFIX\":{\"color-primary', $sqls);
 
         /* Replace theme code in block custom. */
@@ -1117,10 +1116,7 @@ class uiModel extends model
     public function clearSources()
     {
         $this->loadModel('file');
-        $files = $this->dao->select('*')
-            ->from(TABLE_FILE)
-            ->where('objectType')->in('slide,source')
-            ->fetchAll();
+        $files = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->in('slide,source')->fetchAll();
 
         $filesToRemove = array();
         foreach($files as $file)
@@ -1234,14 +1230,14 @@ class uiModel extends model
         {
             $fileInfo = pathinfo($file);
             if($fileInfo['extension'] == 'php') continue;
-            $target   = $this->directories->encryptSourcePath . $fileInfo['filename'] . '.php'; 
+            $target = $this->directories->encryptSourcePath . $fileInfo['filename'] . '.php'; 
 
             $encryptFiles[$fileInfo['basename']] = $fileInfo['filename'] . '.php';
             $this->save2php($file, $target);
         }
 
         /* Save slides to php sources. */
-        $slideList =  glob($this->directories->exportSlidePath . '*');
+        $slideList = glob($this->directories->exportSlidePath . '*');
         foreach($slideList as $file)
         {
             $fileInfo = pathinfo($file);
@@ -1328,7 +1324,7 @@ EOT;
         $jsCodes  = serialize($js);
         $cssCode  = var_export($cssCodes, true);
         $jsCodes  = var_export($jsCodes, true);
-        $codes = "<?php
+        $codes    = "<?php
 if(!function_exists('getCSS'))
 {
     function getCSS(\$code)
@@ -1352,8 +1348,7 @@ if(!function_exists('getJS'))
         }
         return \$js;
     }
-}
-";
+}";
         return file_put_contents($hookFile, $codes);
     }
 

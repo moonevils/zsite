@@ -1247,6 +1247,8 @@ class fileModel extends model
                 $this->dao->insert(TABLE_FILE)->data($file)->exec();
                 $file['id'] = $this->dao->lastInsertId();
             }
+
+            $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
         }
 
         return $file;
@@ -1424,6 +1426,7 @@ class fileModel extends model
      */
     public function printFileURL($pathname, $extension, $objectType = '', $size = '')
     {
-        return $this->config->webRoot . "file.php?f={$pathname}&t={$extension}&o={$objectType}&s={$size}&v={$this->config->site->lastUpload}";
+        $version = isset($this->config->site->lastUpload) ? $this->config->site->lastUpload : '';
+        return $this->config->webRoot . "file.php?f={$pathname}&t={$extension}&o={$objectType}&s={$size}&v={$version}";
     }
 }
