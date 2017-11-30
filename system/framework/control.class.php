@@ -108,7 +108,7 @@ class control extends baseControl
 
         if(RUN_MODE == 'front')
         {
-            $templatePath = TPL_ROOT .  DS . $moduleName;
+            $templatePath = TPL_ROOT . $moduleName;
             $viewFile     = str_replace(($this->app->getModulePath('', $moduleName) . 'view'), $templatePath, $viewFile);
             
             if($this->devicePrefix == 'm.' and !is_file($viewFile))
@@ -297,6 +297,7 @@ class control extends baseControl
 
         if($this->viewType == 'json') return $this->parseJSON($moduleName, $methodName);
 
+        $this->parseCssAndJs($moduleName, $methodName);
         /* If the parser is default or run mode is admin, install, upgrade, call default parser.  */
         if(RUN_MODE != 'front' or $this->config->template->parser == 'default')
         {
@@ -314,7 +315,8 @@ class control extends baseControl
         if(!class_exists($parserClassName)) $this->app->triggerError(" Can not find class : $parserClassName not found in $parserClassFile <br/>", __FILE__, __LINE__, $exit = true);
 
         $parser = new $parserClassName($this);
-        return $parser->parse($moduleName, $methodName);
+        $this->output = $parser->parse($moduleName, $methodName);
+        return $this->output;
     }
 
     /**
@@ -332,6 +334,34 @@ class control extends baseControl
         $viewFile = $results;
         if(is_array($results)) extract($results);
 
+        $this->parseCssAndJs($moduleName, $methodName);
+
+        /* Change the dir to the view file to keep the relative pathes work. */
+        $currentPWD = getcwd();
+        chdir(dirname($viewFile));
+
+        extract((array)$this->view);
+
+        ob_start();
+        include $viewFile;
+        if(isset($hookFiles)) foreach($hookFiles as $hookFile) if(file_exists($hookFile)) include $hookFile;
+        $this->output .= ob_get_contents();
+        ob_end_clean();
+
+        /* At the end, chang the dir to the previous. */
+        chdir($currentPWD);
+    }
+
+    /**
+     * parseCssAndJs 
+     * 
+     * @param  int    $moduleName 
+     * @param  int    $methodName 
+     * @access public
+     * @return void
+     */
+    public function parseCssAndJs($moduleName, $methodName)
+    {
         /* Get css and js. */
         $css = $this->getCSS($moduleName, $methodName);
         $js  = $this->getJS($moduleName, $methodName);
@@ -378,21 +408,7 @@ class control extends baseControl
 
         if($css) $this->view->pageCSS = $css;
         if($js)  $this->view->pageJS  = $js;
-        
-        /* Change the dir to the view file to keep the relative pathes work. */
-        $currentPWD = getcwd();
-        chdir(dirname($viewFile));
-
-        extract((array)$this->view);
-
-        ob_start();
-        include $viewFile;
-        if(isset($hookFiles)) foreach($hookFiles as $hookFile) if(file_exists($hookFile)) include $hookFile;
-        $this->output .= ob_get_contents();
-        ob_end_clean();
-
-        /* At the end, chang the dir to the previous. */
-        chdir($currentPWD);
+    
     }
 
     /**
@@ -614,6 +630,7 @@ class control extends baseControl
             $this->app->cache->set($key, $pageCSS);
         }
 
+        if($this->config->debug)$this->config->site->updatedTime = time();
         $sourceURL  = helper::createLink('source', 'css', "page=$page&version={$this->config->site->updatedTime}", '', 'css');
         $importHtml = "<link rel='stylesheet' href='$sourceURL' type='text/css' media='screen' />\n";
 
