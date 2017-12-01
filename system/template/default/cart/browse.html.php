@@ -1,4 +1,4 @@
-<?php 
+{*
 /**
  * The cart view of cart module of chanzhiEPS.
  *
@@ -9,91 +9,88 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php js::set('currencySymbol', $currencySymbol);?>
-<?php if(!empty($products)):?>
-<?php $total = 0;?>
+*}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{!js::set('currencySymbol', $currencySymbol)}
+{if(!empty($products))}
+{$total = 0}
 <div class='panel my-cart'>
   <div class='panel-heading'>
-    <strong><?php echo $lang->cart->browse;?></strong>
+    <strong>{!echo $lang->cart->browse}</strong>
   </div>
-  <form action='<?php echo helper::createLink('order', 'confirm'); ?>' method='post'>
+  <form action='{!echo helper::createLink('order', 'confirm')}' method='post'>
     <div class='panel-body'>
       <table class='table table-list'>
         <thead>
           <tr class='text-center'>
-            <td colspan='2' class='text-left'><?php echo $lang->order->productInfo;?></td>
-            <td class='text-left'><?php echo $lang->order->price;?></td>
-            <td><?php echo $lang->order->count;?></td>
-            <td><?php echo $lang->order->amount;?></td>
-            <td><?php echo $lang->actions;?></td>
+            <td colspan='2' class='text-left'>{!echo $lang->order->productInfo}</td>
+            <td class='text-left'>{!echo $lang->order->price}</td>
+            <td>{!echo $lang->order->count}</td>
+            <td>{!echo $lang->order->amount}</td>
+            <td>{!echo $lang->actions}</td>
           </tr>
         </thead>
-        <?php foreach($products as $productID => $product): ?>
-        <?php $productLink = helper::createLink('product', 'view', "id=$productID", "category={$product->categories[$product->category]->alias}&name=$product->alias");?>
+        {foreach($products as $productID => $product)}
+        {$productLink = helper::createLink('product', 'view', "id=$productID", "category={{$product->categories[$product->category]->alias}}&name=$product->alias")}
         <tr>
           <td class='w-100px'>
-            <?php 
-            if(!empty($product->image)) 
-            {
-                $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-                echo html::a($productLink, html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'smallURL'), "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
-            }
-            ?>
+            {if(!empty($product->image))}
+                {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
+                {!echo html::a($productLink, html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'smallURL'), "title='$title' alt='$product->name'"), "class='media-wrapper'")}
+            {/if}
           </td>
           <td class='text-left text-middle'>
-            <?php echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");?>
+            {!echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'")}
           </td>
           <td class='w-100px text-middle'> 
-            <?php if($product->promotion != 0):?>
-            <?php $price = $product->promotion;?>
-            <div class='text-muted'><del><?php echo $currencySymbol . $product->price;?></del></div>
-            <div class='text-price'><?php echo $currencySymbol . $product->promotion;?></div>
-            <?php else:?>
-            <?php $price  = $product->price;?>
-            <div class='text-price'><?php echo $currencySymbol . $product->price;?></div>
-            <?php endif;?>
-            <?php echo html::hidden("price[$product->id]", $price);?>
-            <?php $amount = $product->count * $price;?>
-            <?php $total += $amount;?>
+            {if($product->promotion != 0)}
+              {$price = $product->promotion}
+              <div class='text-muted'><del>{!echo $currencySymbol . $product->price}</del></div>
+              <div class='text-price'>{!echo $currencySymbol . $product->promotion}</div>
+            {else}
+              {$price  = $product->price}
+              <div class='text-price'>{!echo $currencySymbol . $product->price}</div>
+            {/if}
+            {!echo html::hidden("price[$product->id]", $price)}
+            {$amount = $product->count * $price}
+            {$total += $amount}
           </td>
           <td class='w-140px text-middle'>
             <div class='input-group'>
               <span class='input-group-addon'><i class='icon icon-minus'></i></span>
-              <?php echo html::input("count[$product->id]", $product->count, "class='form-control'"); ?>
+              {!echo html::input("count[$product->id]", $product->count, "class='form-control'")}
               <span class='input-group-addon'><i class='icon icon-plus'></i></span>
             </div>
           </td>
           <td class='w-200px text-center text-middle'>
-            <strong class='text-danger'><?php echo $currencySymbol;?></strong>
-            <strong class='text-danger amountContainer'><?php echo $amount?></strong>
+            <strong class='text-danger'>{!echo $currencySymbol}</strong>
+            <strong class='text-danger amountContainer'>{!echo $amount?></strong>
           </td>
           <td class='text-middle text-center'>
-            <?php echo html::a(inlink('delete', "product={$product->id}"), $lang->delete, "class='deleter'");?>
-            <?php echo html::hidden("product[]", $product->id);?>
+            {!echo html::a(inlink('delete', "product=$product->id"), $lang->delete, "class='deleter'")}
+            {!echo html::hidden("product[]", $product->id)}
           </td>
         </tr>
-        <?php endforeach;?>
+        {/foreach}
       </table>
     </div>
     <div class='panel-footer text-right'>
-      <?php printf($lang->order->selectProducts, count($products));?>
-      <?php printf($lang->order->totalToPay, $currencySymbol . $total);?>
-      <?php echo html::submitButton($lang->cart->goAccount, 'btn-order-submit'); ?>
+      {!printf($lang->order->selectProducts, count($products))}
+      {!printf($lang->order->totalToPay, $currencySymbol . $total)}
+      {!echo html::submitButton($lang->cart->goAccount, 'btn-order-submit')}
     </div>
   </form>
 </div>
-<?php else:?>
+{else}
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><?php echo $lang->cart->browse;?></strong>
+    <strong>{!echo $lang->cart->browse}</strong>
   </div>
   <div class='panel-body'>
-    <?php echo $lang->cart->noProducts;?>
-    <?php echo html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn btn-xs btn-primary'");?>
-    <?php echo html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn btn-xs btn-default'");?>
+    {!echo $lang->cart->noProducts}
+    {!echo html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn btn-xs btn-primary'")}
+    {!echo html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn btn-xs btn-default'")}
   </div>
 </div>
-<?php endif;?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{/if}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}
