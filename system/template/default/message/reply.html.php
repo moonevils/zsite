@@ -1,38 +1,36 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
-<?php 
-$from  = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
-$email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 
-?>
-<form id='replyForm' method='post' action="<?php echo inlink('reply', "messageID={$message->id}");?>">
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
+{$from  = $control->session->user->account == 'guest' ? '' : $control->session->user->realname}
+{$email = $control->session->user->account == 'guest' ? '' : $control->session->user->email} 
+<form id='replyForm' method='post' action="{!echo inlink('reply', "messageID={{$message->id}}")}">
   <table class='table table-form'>
     <tr>
-      <th class='w-60px'><?php echo $lang->message->from;?></th>
+      <th class='w-60px'>{!echo $lang->message->from}</th>
       <td>
         <div class='required required-wrapper'></div>
-        <?php echo html::input('from', $from, "class='form-control'");?>
+        {!echo html::input('from', $from, "class='form-control'")}
       </td>
     </tr>
     <tr>
-      <th><?php echo $lang->message->email;?></th>
-      <td><?php echo html::input('email', $email, "class='form-control'"); ?></td>
+      <th>{!echo $lang->message->email}</th>
+      <td>{!echo html::input('email', $email, "class='form-control'")}</td>
     </tr>
     <tr>
-      <th><?php echo $lang->message->content;?></th>
+      <th>{!echo $lang->message->content}</th>
       <td>
         <div class='required required-wrapper'></div>
-        <?php echo html::textarea('content', '', "class='form-control' rows='5'");?>
+        {!echo html::textarea('content', '', "class='form-control' rows='5'")}
       </td>
     </tr>
-    <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
-    <tr id='captchaBox'><?php echo $this->loadModel('guarder')->create4MessageReply();?></tr>
-    <?php else:?>
+    {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
+    <tr id='captchaBox'>{!echo $control->loadModel('guarder')->create4MessageReply()}</tr>
+    {else}
     <tr id='captchaBox' class='hiding'></tr>
-   <?php endif;?>
-    <tr><td></td><td><?php echo html::submitButton($lang->message->submit);?></td></tr>
+   {/if}
+    <tr><td></td><td>{!echo html::submitButton($lang->message->submit)}</td></tr>
   </table>
 </form>
-<?php if($config->debug) js::import($jsRoot . 'jquery/form/min.js');?>
-<?php if(isset($pageJS)) js::execute($pageJS);?>
-<?php include TPL_ROOT . 'common/log.html.php';?>
+{if($config->debug)} {!js::import($jsRoot . 'jquery/form/min.js')} {/if}
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
+{include TPL_ROOT . 'common/log.html.php'}
 </body>
 </html>
