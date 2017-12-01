@@ -55,7 +55,6 @@ function initKindeditor(afterInit)
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.uid + ">");
     var nextFormControl = 'input:not([type="hidden"]), textarea:not(.ke-edit-textarea), button[type="submit"], select';
 
-        alert(v.editors);
     $.each(v.editors.id, function(key, editorID)
     {
         if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
