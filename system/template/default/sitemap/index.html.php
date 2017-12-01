@@ -129,4 +129,4 @@
     {/foreach}
   </div>
 </div>
-{if($onlyBody == 'no')} {!include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')} {/if}
+{if($onlyBody == 'no')} {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')} {/if}
