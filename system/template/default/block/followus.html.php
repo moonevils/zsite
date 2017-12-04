@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The wechat qrcode front view file of block module of chanzhiEPS.
  *
@@ -9,27 +9,27 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-$block->content = json_decode($block->content);
-$publicList = $this->loadModel('wechat')->getList();
-?>
-<?php if(!empty($publicList)):?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block hidden-sm hidden-xs <?php echo $blockClass;?>'>
+{$block->content = json_decode($block->content)}
+{$publicList = $model->loadModel('wechat')->getList()}
+*}
+{if(!empty($publicList))}
+<div id="block{!echo $block->id}" class='panel panel-block hidden-sm hidden-xs {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    {/if}
   </div>
   <table class='w-p100'>
-    <?php foreach($publicList as $public):?>
-    <?php if(!$public->qrcode) continue;?>
+    {foreach($publicList as $public)}
+    {if(!$public->qrcode) continue}
     <tr class='text-center'>
       <td class='wechat-block'>
-        <div class='name'><i class='icon-weixin'>&nbsp;</i><?php echo $public->name;?></div>
-        <div class='qrcode'><?php echo html::image($public->qrcode, "class='w-220px'");?></div>
+        <div class='name'><i class='icon-weixin'>&nbsp;</i>{!echo $public->name}</div>
+        <div class='qrcode'>{!echo html::image($public->qrcode, "class='w-220px'")}</div>
       </td>
     </tr>
-    <?php endforeach;?>
+    {/foreach}
   </table>
 </div>
-<?php endif;?>
+{/if}

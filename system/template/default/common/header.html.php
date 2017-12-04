@@ -1,26 +1,22 @@
-<?php if(helper::isAjaxRequest()):?>
-<?php
-$webRoot   = $config->webRoot;
-$jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "theme/";
-if(isset($pageCSS)) css::internal($pageCSS);
-?>
-<div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 1000 : $modalWidth;?>px;">
-  <div class="modal-content">
-    <div class="modal-header">
-      <?php echo html::closeButton();?>
-      <strong class="modal-title"><?php if(!empty($title)) echo $title; ?></strong>
-      <?php if(!empty($subtitle)):?>
-      <small><?php echo $subtitle;?></small>
-      <?php endif;?>
-    </div>
-    <div class="modal-body">
-<?php else:?>
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
-<div class='page-container'>
-  <div class='blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
-  <div class='page-wrapper'>
-    <div class='page-content'>
-      <div class='blocks row' data-region='all-banner'><?php $this->block->printRegion($layouts, 'all', 'banner', true);?></div>
-<?php endif;?>
+{if(helper::isAjaxRequest())}
+  {if(isset($pageCSS))} {!echo css::internal($pageCSS)} {/if}
+  <div class="modal-dialog" style="width:{!echo empty($modalWidth) ? 1000 : $modalWidth}px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        {!echo html::closeButton()}
+        <strong class="modal-title">{if(!empty($title)) echo $title}</strong>
+        {if(!empty($subtitle))} <small>{!echo $subtitle}</small> {/if}
+      </div>
+      <div class="modal-body">
+{else}
+  {if($extView = $control->getExtViewFile(__FILE__))}
+    {include $extView;}
+    {@helper::cd()}
+  {/if}
+  {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
+  <div class='page-container'>
+    <div class='blocks' data-region='all-top'>{$control->block->printRegion($layouts, 'all', 'top')}</div>
+    <div class='page-wrapper'>
+      <div class='page-content'>
+        <div class='blocks row' data-region='all-banner'>{$control->block->printRegion($layouts, 'all', 'banner', true)}</div>
+{/if}

@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The header view file of block module of chanzhiEPS.
  *
@@ -9,25 +9,25 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<header id='header' class='compatible clearfix<?php if($isSearchAvaliable) echo ' with-searchbar';?>'>
+*}
+<header id='header' class='compatible clearfix {if($isSearchAvaliable)} with-searchbar {/if}'>
   <div id='headNav'>
     <div class='wrapper'>
-      <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav');?>
+      {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'sitenav')}
     </div>
   </div>
   <div id='headTitle'>
     <div class="wrapper">
-      <?php if($logo):?>
-      <div id='siteLogo' data-ve='logo'>
-        <?php echo html::a(helper::createLink('index'), html::image($this->loadModel('file')->printFileURL($logo->pathname, $logo->extension)), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");?>
-      </div>
-      <?php else: ?>
-      <div id='siteName' data-ve='logo'><h2><?php echo html::a(helper::createLink('index'), $this->config->site->name);?></h2></div>
-      <?php endif;?>
-      <div id='siteSlogan' data-ve='slogan'><span><?php echo $this->config->site->slogan;?></span></div>
+      {if($logo)}
+        <div id='siteLogo' data-ve='logo'>
+          {!echo html::a(helper::createLink('index'), html::image($model->loadModel('file')->printFileURL($logo->pathname, $logo->extension)), "class='logo' alt='{{$lang->company->name}}' title='{{$lang->company->name}}'")}
+        </div>
+      {else}
+        <div id='siteName' data-ve='logo'><h2>{!echo html::a(helper::createLink('index'), $config->site->name)}</h2></div>
+      {/if}
+      <div id='siteSlogan' data-ve='slogan'><span>{!echo $config->site->slogan}</span></div>
     </div>
   </div>
-  <?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar');?>
+  {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar')}
 </header>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'nav');?>
+{include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'nav')}

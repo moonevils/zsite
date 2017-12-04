@@ -65,7 +65,7 @@
         {if($article->keywords)}
           <p class='small'><strong class='text-muted'>{!echo $lang->article->keywords}</strong><span class='article-keywords'>{!echo $lang->colon . $article->keywords}</span></p>
         {/if}
-        {!extract($prevAndNext)}
+        {@extract($prevAndNext)}
         <ul class='pager pager-justify'>
           {if($prev)}
             <li class='previous'>{!echo html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> ' . $prev->title)}</li>

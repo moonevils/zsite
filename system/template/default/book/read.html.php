@@ -55,7 +55,7 @@
         <p class='small'><strong class='text-muted'>{$lang->book->keywords}</strong><span class='article-keywords'>{!echo $lang->colon . $article->keywords}</span></p>
         {/if}
         {if(isset($prevAndNext))}
-        {!extract($prevAndNext)}
+        {@extract($prevAndNext)}
         <ul class='pager pager-justify'>
           {if($prev)}
           <li class='previous' title='{!echo $prev->title}'>{!echo html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>')}</li>
@@ -148,7 +148,7 @@
     <p class='small'><strong class='text-muted'>{!echo $lang->book->keywords}</strong><span class='article-keywords'>{!echo $lang->colon . $article->keywords}</span></p>
     {/if}
     {if(isset($prevAndNext))}
-    {!extract($prevAndNext)}
+    {@extract($prevAndNext)}
     <ul class='pager pager-justify'>
       {if($prev)}
       <li class='previous' title='{!echo $prev->title}'>{!echo html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>')}</li>

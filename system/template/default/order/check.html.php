@@ -1,4 +1,4 @@
-<?php 
+{*php*}
 /**
  * The check view of order module of chanzhiEPS.
  *
@@ -9,53 +9,53 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php js::set('goToPay', $lang->order->goToPay);?>
-<?php js::set('paid', $lang->order->paid);?>
+{*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{!js::set('goToPay', $lang->order->goToPay)}
+{!js::set('paid', $lang->order->paid)}
 <div class='panel order-check'>
-  <div class='panel-heading'><strong><?php echo $lang->order->selectPayment;?></strong></div>
-  <form id='checkForm' action='<?php echo helper::createLink('order', 'pay', "orderID=$order->id");?>' method='post' target='_blank'>
+  <div class='panel-heading'><strong>{!echo $lang->order->selectPayment}</strong></div>
+  <form id='checkForm' action='{!echo helper::createLink('order', 'pay', "orderID=$order->id")}' method='post' target='_blank'>
     <div class='panel-body'>
       <div id='products'>
         <table class='table table-list'>
           <thead>
             <tr class='text-center'>
-              <td class='text-left'><strong><?php echo $lang->order->productInfo;?></strong></td>
-              <td><?php echo $lang->order->count;?></td>
-              <td><?php echo $lang->order->amount;?></td>
+              <td class='text-left'><strong>{!echo $lang->order->productInfo}</strong></td>
+              <td>{!echo $lang->order->count}</td>
+              <td>{!echo $lang->order->amount}</td>
             </tr>
           </thead>
-          <?php foreach($products as $productID => $product): ?>
+          {foreach($products as $productID => $product)}
           <tr>
             <td class='text-left text-middle'>
-              <?php echo $product->productName;?>
+              {!echo $product->productName}
             </td>
             <td class='w-140px text-middle text-center'>
-              <div class='text-count'><?php echo $product->count;?></div>
+              <div class='text-count'>{!echo $product->count}</div>
             </td>
             <td class='w-100px text-middle text-danger'> 
-              <div class='text-price'><?php echo $currencySymbol . number_format($product->price * $product->count, 2);?></div>
+              <div class='text-price'>{!echo $currencySymbol . number_format($product->price * $product->count, 2)}</div>
             </td>
           </tr>
-          <?php endforeach;?>
+          {/foreach}
         </table>
       </div>
       <div id='paymentBox'>
-        <h5><?php echo $lang->order->payment;?></h5>
+        <h5>{!echo $lang->order->payment}</h5>
         <dl>
-          <dd id='payment'><?php echo html::radio('payment', $paymentList);?></dd>
+          <dd id='payment'>{!echo html::radio('payment', $paymentList)}</dd>
         </dl>
       </div>
     </div>
     <div class='panel-footer text-right'>
-      <?php printf($lang->order->totalToPay, $currencySymbol . $order->amount);?>
-      <?php echo html::submitButton($lang->order->settlement, 'btn-order-submit'); ?>
+      {!printf($lang->order->totalToPay, $currencySymbol . $order->amount)}
+      {!echo html::submitButton($lang->order->settlement, 'btn-order-submit')}
     </div>
   </form>
-  <form class='hide' id='payForm' method='post' action="<?php echo inlink('redirect')?>" target='_blank'>
-    <?php echo html::hidden('payLink', '');?>
-    <input class='submitBtn' type='submit' value="<?php echo $lang->confirm;?>" />
+  <form class='hide' id='payForm' method='post' action="{!echo inlink('redirect')?>" target='_blank'>
+    {!echo html::hidden('payLink', '')}
+    <input class='submitBtn' type='submit' value="{!echo $lang->confirm}" />
   </form>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

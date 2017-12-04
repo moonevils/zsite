@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The code block view file of block module of chanzhiEPS.
  *
@@ -9,14 +9,12 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<div id="block<?php echo $block->id;?>" class='block'>
-<?php
-$block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);
+*}
+<div id="block{!echo $block->id}" class='block'>
+{$block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content)}
 
-if(!is_object($block->content)) $blockContent = $block->content;
-if(is_object($block->content))  $blockContent = isset($block->content->content) ? $block->content->content : '';
+{if(!is_object($block->content))} {$blockContent = $block->content} {/if}
+{if(is_object($block->content))}  {$blockContent = isset($block->content->content) ? $block->content->content : ''} {/if}
 
-echo str_ireplace('#blockID', "#block{$block->id}", $blockContent);
-?>
+{echo str_ireplace('#blockID', "#block{$block->id}", $blockContent)}
 </div>

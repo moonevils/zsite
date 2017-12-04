@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The setCounts view file of score of chanzhiEPS.
  *
@@ -9,38 +9,38 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php $common->printPositionBar();?>
+{*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{$common->printPositionBar()}
 <div class='panel'>
   <div class='panel-heading'>
-    <?php if(count($this->config->score->ruleNav) > 1):?>
+    {if(count($control->config->score->ruleNav) > 1)}
     <ul id='typeNav' class='nav nav-tabs'>
-    <?php foreach($this->config->score->ruleNav as $nav):?>
-      <li data-type='internal' <?php echo $type == $nav ? "class='active'" : '';?>>
-        <?php echo html::a(inlink($nav), $lang->score->$nav);?>
+    {foreach($control->config->score->ruleNav as $nav)}
+      <li data-type='internal' {!echo $type == $nav ? "class='active'" : ''}>
+        {!echo html::a(inlink($nav), $lang->score->$nav)}
       </li>
-    <?php endforeach;?>
+    {/foreach}
     </ul>
-    <?php else:?>
-    <strong><?php echo $lang->score->rule;?></strong>
-    <?php endif;?>
+    {else}
+    <strong>{!echo $lang->score->rule}</strong>
+    {/if}
   </div>
   <div class='panel-body'>
     <ol>
-      <?php foreach($config->score->methodOptions as $item => $type):?>
-        <?php if($type != 'award' and $type != 'punish') continue;?>
-        <?php $count = zget($this->config->score->counts, $item, '0');?>
-        <?php if($count == '0' or $count == '') continue;?>
-        <?php if($item == 'expend') $item = 'expendproduct';?>
-        <?php if($item == 'recharge') $item = 'rechargebalance';?>
-        <?php $count = ($type == 'award' ? '+' : '-') . $count;?>
+      {foreach($config->score->methodOptions as $item => $type)}
+        {if($type != 'award' and $type != 'punish') continue}
+        {$count = zget($control->config->score->counts, $item, '0')}
+        {if($count == '0' or $count == '') continue}
+        {if($item == 'expend') $item = 'expendproduct'}
+        {if($item == 'recharge') $item = 'rechargebalance'}
+        {$count = ($type == 'award' ? '+' : '-') . $count}
         <li class='w-120px'>
-          <span class='method'><?php echo $lang->score->methods[$item];?></span>
-          <span class='pull-right <?php echo $type == 'award' ? 'green' : 'red';?>'><?php echo $count;?></span>
+          <span class='method'>{!echo $lang->score->methods[$item]}</span>
+          <span class='pull-right {!echo $type == 'award' ? 'green' : 'red'}'>{!echo $count}</span>
         </li>
-      <?php endforeach;?>
+      {/foreach}
     </ol>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

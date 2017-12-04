@@ -1,1 +1,1 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'articletree');?>
+{include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'articletree')}

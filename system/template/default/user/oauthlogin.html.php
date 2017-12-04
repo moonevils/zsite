@@ -1,25 +1,23 @@
-<?php
-foreach($this->lang->user->oauth->providers as $providerCode => $providerName)
-{
-    if(isset($this->config->oauth->$providerCode)) $providerConfig[$providerCode] = json_decode($this->config->oauth->$providerCode);
-}
-if(!empty($providerConfig)):
-?>
+{foreach($controllang->user->oauth->providers as $providerCode => $providerName)}
+  {if(isset($controlconfig->oauth->$providerCode))} 
+    {$providerConfig[$providerCode] = json_decode($controlconfig->oauth->$providerCode)}
+  {/if}
+{/foreach}
+{if(!empty($providerConfig))}
   <span class='span-oauth'>
-    <span class='login-heading'><?php echo  $this->lang->user->oauth->lblOtherLogin;?></span>
-    <?php
-    foreach($this->lang->user->oauth->providers as $providerCode => $providerName) 
-    {
-        $providerConfig = isset($this->config->oauth->$providerCode) ? json_decode($this->config->oauth->$providerCode) : '';
-        if(empty($providerConfig->clientID)) continue;
-        $params = "provider=$providerCode&fingerprint=fingerprintval";
-        if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
-
-        echo html::a(helper::createLink('user', 'oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{$providerCode}login.png", "class='{$providerCode}'"), "class='btn-oauth'");
-    }
-    ?>
+    <span class='login-heading'>{$control->lang->user->oauth->lblOtherLogin}</span>
+    {foreach($controllang->user->oauth->providers as $providerCode => $providerName)}
+      {$providerConfig = isset($controlconfig->oauth->$providerCode) ? json_decode($controlconfig->oauth->$providerCode) : ''}
+      {if(empty($providerConfig->clientID))} {continue} {/if}
+      {$params = "provider=$providerCode&fingerprint=fingerprintval"}
+      {if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth'))}
+        {$params .= "&referer=" . helper::safe64Encode($referer)}
+      {/if}
+      {!html::a(helper::createLink('user', 'oauthLogin', $params), html::image(getWebRoot() . "theme/default/default/images/main/{{$providerCode}}" . 'login.png', "class='$providerCode'"), "class='btn-oauth'")}
+    {/foreach}
   </span>
-<?php endif;?>
+{/if}
+{noparse}
 <script>
 $().ready(function()
 {
@@ -36,3 +34,4 @@ $().ready(function()
 .span-oauth a > img{height: 24px; width:24px;}
 .span-oauth a > img.qq{height: 18px; width:18px;}
 </style>
+{/noparse}

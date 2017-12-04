@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The html template file of deny method of user module of chanzhiEPS.
  *
@@ -8,9 +8,9 @@
  * @package     chanzhiEPS
  * @version     $Id: deny.html.php 824 2010-05-02 15:32:06Z wwccss $
  */
-include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');
-?>
-<?php if(isset($locate)) echo " <meta http-equiv='refresh' content=\"5;url=$locate\">"?>
+include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');
+{*/php*}
+{if(isset($locate)) echo " <meta http-equiv='refresh' content=\"5;url=$locate\">"?>
 <style>
 .alert.with-icon > .icon, .alert.with-icon > .icon + .content {padding: 20px 20px 20px;}
 .alert.with-icon > .icon {padding-left: 35px;}
@@ -23,8 +23,8 @@ include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.l
   <div class='alert with-icon alert-deny'>
     <i class='icon-info-sign icon'></i>
     <div class='content'>
-      <div id='mainInfo'><?php echo $reason;?></div>
-      <div class='actions'><?php printf($lang->redirecting, $locate);?></div>
+      <div id='mainInfo'>{!echo $reason}</div>
+      <div class='actions'>{!printf($lang->redirecting, $locate)}</div>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The about front view file of block module of chanzhiEPS.
  *
@@ -8,17 +8,17 @@
  * @package     block
  * @version     $Id$
  * @link        http://www.chanzhi.org
-*/
-$block->content = json_decode($block->content);
-?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+*}
+{$block->content = json_decode($block->content)}
+{*/php*}
+<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
+      <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    {/if}
   </div>
   <div class='panel-body'>
-    <div id='companyDesc<?php echo $block->id;?>' data-ve='companyDesc'><?php echo $this->config->company->desc;?></div>
+    <div id='companyDesc{!echo $block->id}' data-ve='companyDesc'>{!echo $lang->company->desc}</div>
   </div>
 </div>
