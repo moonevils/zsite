@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The hot product front view file of block module of chanzhiEPS.
  *
@@ -9,5 +9,5 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php include TPL_ROOT . 'block/latestproduct.html.php';?>
+*}
+{include TPL_ROOT . 'block/latestproduct.html.php'}

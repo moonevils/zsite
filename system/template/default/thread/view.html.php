@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The view file of thread module of chanzhiEPS.
  *
@@ -9,27 +9,28 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
-include TPL_ROOT . 'common/kindeditor.html.php';
+ *}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{include TPL_ROOT . 'common/kindeditor.html.php'}
 
-js::set('viewReplies', $lang->thread->viewReplies);
-js::set('stayCurrent', $lang->thread->stayCurrent);
-js::set('quoteTitle', $lang->thread->quoteTitle);
-js::set('discussion', $thread->discussion);
-js::set('isCurrentPage', ceil(($pager->recTotal + 1) / $pager->recPerPage) == $pager->pageID);
+{!js::set('viewReplies', $lang->thread->viewReplies)}
+{!js::set('stayCurrent', $lang->thread->stayCurrent)}
+{!js::set('quoteTitle', $lang->thread->quoteTitle)}
+{!js::set('discussion', $thread->discussion)}
+{!js::set('isCurrentPage', ceil(($pager->recTotal + 1) / $pager->recPerPage) == $pager->pageID)}
 
-echo "<div class='row blocks' data-grid='4' data-region='thread_view-top'>";
-$this->block->printRegion($layouts, 'thread_view', 'top', true);
-echo "</div>";
+{!echo "<div class='row blocks' data-grid='4' data-region='thread_view-top'>"}
+{$control->block->printRegion($layouts, 'thread_view', 'top', true)}
+{!echo "</div>"}
 
-$common->printPositionBar($board, $thread);
+{$common->printPositionBar($board, $thread)}
 
-if($pager->pageID == 1) include $this->loadModel('ui')->getEffectViewFile('default', 'thread', 'thread');
-include $this->loadModel('ui')->getEffectViewFile('default', 'thread', 'reply');
+{if($pager->pageID == 1)} {include $control->loadModel('ui')->getEffectViewFile('default', 'thread', 'thread')} {/if}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'thread', 'reply')}
 
-echo "<div class='blocks' data-region='thread_view-bottom'>";
-$this->block->printRegion($layouts, 'thread_view', 'bottom');
-echo "</div>";
+{!echo "<div class='blocks' data-region='thread_view-bottom'>"}
+{$control->block->printRegion($layouts, 'thread_view', 'bottom')}
+{!echo "</div>"}
 
-include TPL_ROOT . 'common/video.html.php';
-include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');
+{include TPL_ROOT . 'common/video.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

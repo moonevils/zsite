@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The page form view file of block module of chanzhiEPS.
  *
@@ -9,57 +9,57 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php $this->app->loadLang('message');?>
+{*/php*}
+{$app->loadLang('message')}
 
-<div id="block<?php echo $block->id;?>" class='panel-block-message panel panel-block <?php echo $blockClass;?>'>
-  <div class='panel-heading'><strong><?php echo $icon . $block->title;?></strong></div>
+<div id="block{!echo $block->id}" class='panel-block-message panel panel-block {!echo $blockClass}'>
+  <div class='panel-heading'><strong>{!echo $icon . $block->title}</strong></div>
   <div class='panel-body'>
-    <form method='post' class='form-horizontal' id='messageForm' action="<?php echo helper::createLink('message', 'post', 'type=message&block=block','',false);?>">
-      <?php
-      $from   = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
-      $mobile = $this->session->user->account == 'guest' ? '' : $this->session->user->mobile;
-      $qq     = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
-      ?>
+    <form method='post' class='form-horizontal' id='messageForm' action="{!echo helper::createLink('message', 'post', 'type=message&block=block','',false)}">
+{*php*}
+      $from   = $control->session->user->account == 'guest' ? '' : $control->session->user->realname;
+      $mobile = $control->session->user->account == 'guest' ? '' : $control->session->user->mobile;
+      $qq     = $control->session->user->account == 'guest' ? '' : $control->session->user->qq;
+{*/php*}
       <div class='form-group'>
-        <label for='blockFrom' class='col-sm-2 control-label'><?php echo $this->lang->message->from; ?></label>
+        <label for='blockFrom' class='col-sm-2 control-label'>{!echo $lang->message->from}</label>
         <div class='col-sm-10 required'>
-          <?php echo html::input('blockFrom', $from, "class='form-control'"); ?>
+          {!echo html::input('blockFrom', $from, "class='form-control'")}
         </div>
       </div>
       <div class='form-group'>
-        <label for='mobile' class='col-sm-2 control-label'><?php echo $this->lang->message->mobile; ?></label>
+        <label for='mobile' class='col-sm-2 control-label'>{!echo $lang->message->mobile}</label>
         <div class='col-sm-10'>
-          <?php echo html::input('mobile', $mobile, "class='form-control'"); ?>
+          {!echo html::input('mobile', $mobile, "class='form-control'")}
         </div>
       </div>
       <div class='form-group'>
-        <label for='qq' class='col-sm-2 control-label'><?php echo $this->lang->message->qq;?></label>
+        <label for='qq' class='col-sm-2 control-label'>{!echo $lang->message->qq}</label>
         <div class='col-sm-10'>
-          <?php echo html::input('qq', $qq, "class='form-control'"); ?>
+          {!echo html::input('qq', $qq, "class='form-control'")}
         </div>
       </div>
       <div class='form-group'>
-        <label for='blockContent' class='col-sm-2 control-label'><?php echo $this->lang->message->content;?></label>
+        <label for='blockContent' class='col-sm-2 control-label'>{!echo $lang->message->content}</label>
         <div class='col-sm-10 required'>
-          <?php
+{*php*}
             echo html::textarea('blockContent', '', "class='form-control' rows='2'");
             echo html::hidden('objectType', 'message');
             echo html::hidden('objectID', 0);
-          ?>
+{*/php*}
         </div>
       </div>
-      <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+      {if(zget($lang->site, 'captcha', 'auto') == 'open')}
       <div class='form-group' id='blockCaptchaBox'>
-        <?php echo $this->loadModel('guarder')->create4Comment(false);?>
+        {!echo $model->loadModel('guarder')->create4Comment(false)}
       </div>
-      <?php else:?>
+      {else}
       <div class='form-group hiding' id='blockCaptchaBox'></div>
-      <?php endif;?>
+      {/if}
       <div class='form-group' align="center">
         <div class='col-sm-1'></div>
           <div class='col-sm-11 col-sm-offset-1'>
-          <span><?php echo html::submitButton();?></span>
+          <span>{!echo html::submitButton()}</span>
         </div>
       </div>
     </form>
@@ -78,7 +78,7 @@ $(document).ready(function()
                 $('#blockCaptchaBox').html(Base64.decode(response.captcha)).show();
             }
         }   
-        else
+{else}
         {
            location.href=createLink('message', 'index'); 
         }

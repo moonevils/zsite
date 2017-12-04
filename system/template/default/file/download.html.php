@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The html template file of download method of file module of ZenTaoCMS.
  *
@@ -8,12 +8,12 @@
  * @version     $Id$
  */
 include TPL_ROOT . 'common/header.lite.html.php';
-?>
+{*/php*}
 <div class='row' style='margin-top:100px'>
   <div class='col-md-8 col-md-offset-2'>
-  <?php echo $this->fetch('score', 'noscore', array('method' => 'download', 'score' => $score));?>
+  {!echo $control->fetch('score', 'noscore', array('method' => 'download', 'score' => $score))}
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
 </body>
 </html>

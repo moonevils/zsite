@@ -1,5 +1,5 @@
-<?php js::import($jsRoot . 'jplayer/dist/jplayer/jquery.jplayer.min.js');?>
-<?php css::import($jsRoot . 'jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css');?>
+{!js::import($jsRoot . 'jplayer/dist/jplayer/jquery.jplayer.min.js')}
+<?php css::import($jsRoot . 'jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css')}
  
 <script>
 $(function()
@@ -20,7 +20,7 @@ $(function()
         if(mediaType)
         {
             mediaType     = mediaType.toString().replace('.', '').replace('=', '').replace('?', '');
-            mediaTypeList = <?php echo json_encode($this->config->file->mediaTypes);?>;
+            mediaTypeList = {!echo json_encode($control->config->file->mediaTypes)};
             mediaType     = mediaTypeList[mediaType.toLowerCase()];
         }
 

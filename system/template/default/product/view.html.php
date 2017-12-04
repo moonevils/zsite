@@ -83,16 +83,16 @@
                  {$attributeHtml .= "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>"}
               {/if}
               {if(!$product->brand and $product->model)}
-                 {$attributeHtml .= "<li id='modelItem'><span class='meta-name'>" . $lang->product->model . "</span>"}
-                 {$attributeHtml .= "<span class='meta-value'>" . $product->model . "</span></li>"}
+                {$attributeHtml .= "<li id='modelItem'><span class='meta-name'>" . $lang->product->model . "</span>"}
+                {$attributeHtml .= "<span class='meta-value'>" . $product->model . "</span></li>"}
               {/if}
               {if($product->color)}
-               {$attributeHtml .= "<li><span class='meta-name'>" . $lang->product->color . "</span>"}
-               {$attributeHtml .= "<span class='meta-value'>" . $product->color . "</span></li>"}
+                {$attributeHtml .= "<li><span class='meta-name'>" . $lang->product->color . "</span>"}
+                {$attributeHtml .= "<span class='meta-value'>" . $product->color . "</span></li>"}
               {/if}
               {if($product->origin)}
-               {$attributeHtml .= "<li><span class='meta-name'>" . $lang->product->origin . "</span>"}
-               {$attributeHtml .= "<span class='meta-value'>" . $product->origin . "</span></li>"}
+                {$attributeHtml .= "<li><span class='meta-name'>" . $lang->product->origin . "</span>"}
+                {$attributeHtml .= "<span class='meta-value'>" . $product->origin . "</span></li>"}
               {/if}
               {foreach($product->attributes as $attribute)}
                   {if(empty($attribute->label) and empty($attribute->value))} {continue} {/if}

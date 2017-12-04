@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The featured product front view file of block module of chanzhiEPS.
  *
@@ -9,65 +9,53 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php 
-$content  = json_decode($block->content);
-$product  = $this->loadModel('product')->getByID($content->product);
-?>
-<?php if(!empty($product)):?>
-<?php
-$category = array_shift($product->categories);
-$alias    = !empty($category) ? $category->alias : '';
-$url      = helper::createLink('product', 'view', "id={$product->id}", "category={$alias}&name={$product->alias}");
-?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
-  <div class='panel-body'>
-    <div class='card'>
-      <div class='media' style='background-image: url(<?php echo $this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL');?>);'><?php echo html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{$product->name}' alt='{$product->name}'"); ?></div>
-      <div class='card-heading'>
-        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-        <?php if($content->categoryName == 'abbr'):?>
-        <?php $categoryName = '[' . ($category->abbr ? $category->abbr : $category->name) . '] ';?>
-        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $categoryName);?>
-        <?php else:?>
-        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), '[' . $category->name . '] ');?>
-        <?php endif;?>
-        <?php endif;?>
-        <strong><?php echo html::a($url, $product->name);?></strong>
-        <span class='text-latin'>
-        <?php
-        if(!$product->unsaleable)
-        {
-            if($product->negotiate)
-            { 
-                echo "&nbsp;&nbsp;";
-                echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
-            }
-            else
-            {
-                if($product->promotion != 0)
-                {
-                    echo "&nbsp;&nbsp;<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-                    if($product->price != 0)
-                    {
-                        echo "&nbsp;&nbsp;<del class='text-muted'>" . $this->config->product->currencySymbol . $product->price .'</del>';
-                    }
-                }
-                else
-                {
-                    if($product->price != 0)
-                    {
-                        echo "<span class='text-muted'> " . $this->config->product->currencySymbol . "</span> ";
-                        echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
-                    }
-                }
-            }
-        }
-        ?>
-        </span>
+*}
+{$content  = json_decode($block->content)}
+{$product  = $model->loadModel('product')->getByID($content->product)}
+{if(!empty($product))}
+  {$category = array_shift($product->categories)}
+  {$alias    = !empty($category) ? $category->alias : ''}
+  {$url      = helper::createLink('product', 'view', "id=$product->id", "category={{$alias}}&name={{$product->alias}}")}
+  {$image = $model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL')}
+  <div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
+    <div class='panel-body'>
+      <div class='card'>
+        <div class='media' style='background-image: url({$image});'>
+          {!html::image($image, "title='{{$product->name}}]' alt='{{$product->name}}'")}
+        </div>
+        <div class='card-heading'>
+          {if(isset($content->showCategory) and $content->showCategory == 1)}
+            {if($content->categoryName == 'abbr')}
+              {$categoryName = '[' . ($category->abbr ? $category->abbr : $category->name) . '] '}
+              {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), $categoryName)}
+            {else}
+              {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), '[' . $category->name . '] ')}
+            {/if}
+          {/if}
+          <strong>{!echo html::a($url, $product->name)}</strong>
+          <span class='text-latin'>
+          {if(!$product->unsaleable)}
+            {if($product->negotiate)}
+              {!echo "&nbsp;&nbsp;"}
+              {!echo "<strong class='text-danger'>" . $lang->product->negotiate . '</strong>'}
+            {else}
+              {if($product->promotion != 0)}
+                {!echo "&nbsp;&nbsp;<strong class='text-danger'>" . $config->product->currencySymbol . $product->promotion . '</strong>'}
+                {if($product->price != 0)}
+                  {!echo "&nbsp;&nbsp;<del class='text-muted'>" . $config->product->currencySymbol . $product->price .'</del>'}
+                {/if}
+              {else}
+                {if($product->price != 0)}
+                  {!echo "<span class='text-muted'> " . $config->product->currencySymbol . "</span> "}
+                  {!echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;'}
+                {/if}
+              {/if}
+            {/if}
+          {/if}
+          </span>
+        </div>
+        <div class='card-content text-muted'>{!echo helper::substr(strip_tags($product->desc), 80)}</div>
       </div>
-      <div class='card-content text-muted'><?php echo helper::substr(strip_tags($product->desc), 80);?></div>
     </div>
   </div>
-</div>
-<?php endif;?>
+{/if}

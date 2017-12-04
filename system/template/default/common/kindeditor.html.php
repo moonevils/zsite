@@ -1,40 +1,40 @@
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php
-/* Get current module and method. */
-$module = $this->moduleName;
-$method = $this->methodName;
+{if($extView = $control->getExtViewFile(__FILE__))}
+  {include $extView;}
+  {!return helper::cd();}
+{/if}
+{$module = $control->moduleName}
+{$method = $control->methodName}
 
-if(!isset($config->$module->editor->$method)) return;
+{if(!isset($config->$module->editor->$method))} {!return ;} {/if}
 
-/* Export $jsRoot var. */
-js::set('jsRoot', $jsRoot);
-js::set('webRoot', $webRoot);
+{* Export $jsRoot var. *}
+{!js::set('jsRoot', $jsRoot)}
+{!js::set('webRoot', $webRoot)}
 
-/* Get editor settings for current page. */
-$editors = $config->$module->editor->$method;
+{* Get editor settings for current page. *}
+{$editors = $config->{{$module}}->editor->$method}
+{$temp = $editors['id'] = explode(',', $editors['id'])}
+{!js::set('editors', $editors)}
 
-$editors['id'] = explode(',', $editors['id']);
-js::set('editors', $editors);
+{$control->app->loadLang('file')}
+{!js::set('errorUnwritable', $lang->file->errorUnwritable)}
 
-$this->app->loadLang('file');
-js::set('errorUnwritable', $lang->file->errorUnwritable);
+{* Get current lang. *}
+{$editorLangs = array('en' => 'en', 'zh-cn' => 'zh_CN', 'zh-tw' => 'zh_TW')}
+{$editorLang  = isset($editorLangs[$app->getClientLang()]) ? $editorLangs[$app->getClientLang()] : 'en'}
+{!js::set('editorLang', $editorLang)}
 
-/* Get current lang. */
-$editorLangs = array('en' => 'en', 'zh-cn' => 'zh_CN', 'zh-tw' => 'zh_TW');
-$editorLang  = isset($editorLangs[$app->getClientLang()]) ? $editorLangs[$app->getClientLang()] : 'en';
-js::set('editorLang', $editorLang);
+{* Import css and js for kindeditor. *}
+{!css::import($jsRoot . 'kindeditor/themes/default/default.css')}
+{!js::import($jsRoot  . 'kindeditor/kindeditor-min.js')}
+{!js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js')}
 
-/* Import css and js for kindeditor. */
-css::import($jsRoot . 'kindeditor/themes/default/default.css');
-js::import($jsRoot  . 'kindeditor/kindeditor-min.js');
-js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js');
-
-/* set uid for upload. */
-$uid = uniqid('');
-js::set('uid', $uid);
-?>
+{* set uid for upload. *}
+{$uid = uniqid('')}
+{!js::set('uid', $uid)}
 
 <script>
+{noparse}
 var simple = 
 [ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|', 
 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|',
@@ -73,7 +73,9 @@ function initKindeditor(afterInit)
             allowFileManager:false,
             langType:v.editorLang,
             htmlTags:{
-            '<?php echo str_replace(array("<",">"), array('', ''), $config->allowedTags->{RUN_MODE});?>':["class","id","style"],
+            {/noparse}
+            '{!echo str_replace(array("<",">"), array('', ''), $config->allowedTags->{{RUN_MODE}})}':["class","id","style"],
+            {noparse}
             video: ["id", "class", "width", "height", "src", "controls"],
             object: ["type", "data", "width", "height"], param: ["name", "value"],
             audio: ["src", "controls", "id", "class", "width", "height"],
@@ -84,12 +86,14 @@ function initKindeditor(afterInit)
             afterBlur: function(){this.sync();$('#' + editorID).prev('.ke-container').removeClass('focus');},
             afterFocus: function(){$('#' + editorID).prev('.ke-container').addClass('focus');},
             afterChange: function(){$('#' + editorID ).change().hide();},
-            <?php if(!$this->loadModel('file')->canUpload()) echo "showLocal:false, imageTabIndex:0,";?>
+            {/noparse}
+            {if(!$control->loadModel('file')->canUpload())} {!echo "showLocal:false, imageTabIndex:0,"} {/if}
+            {noparse}
             afterCreate : function()
             {
                 var doc = this.edit.doc; 
                 var cmd = this.edit.cmd; 
-                /* Paste in chrome.*/
+                /* Paste in chrome. */
                 /* Code reference from http://www.foliotek.com/devblog/copy-images-from-clipboard-in-javascript/. */
                 if(K.WEBKIT)
                 {
@@ -165,4 +169,5 @@ function initKindeditor(afterInit)
 
     if($.isFunction(afterInit)) afterInit();
 }
+{/noparse}
 </script>

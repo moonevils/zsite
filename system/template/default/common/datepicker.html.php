@@ -1,9 +1,9 @@
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php
-$clientLang = $this->app->getClientLang();
+{if($extView = $control->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+{*php*}
+$clientLang = $control->app->getClientLang();
 css::import($jsRoot . 'datetimepicker/css/min.css');
 js::import($jsRoot  . 'datetimepicker/js/min.js'); 
-?>
+{*/php*}
 <script language='javascript'>
 $(function()
 {
@@ -12,12 +12,12 @@ $(function()
         return $(this).each(function()
         {
             var $this = $(this);
-            if($this.offset().top + 200 > $(window).height())
+{if($this.offset().top + 200 > $(window).height())
             {
                 $this.attr('data-picker-position', 'top-right');
             }
 
-            if($this.val() == '0000-00-00')
+{if($this.val() == '0000-00-00')
             {
                 $this.focus(function(){if($this.val() == '0000-00-00') $this.val('').datetimepicker('update');}).blur(function(){if($this.val() == '') $this.val('0000-00-00')});
             }
@@ -27,7 +27,7 @@ $(function()
     var startDate = new Date(2000, 1, 1);
     var options = 
     {
-        language: '<?php echo $clientLang; ?>',
+        language: '{!echo $clientLang}',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,

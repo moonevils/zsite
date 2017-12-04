@@ -1,20 +1,20 @@
 <div class='panel-body'>
   <div class='cards cards-custom'>
-    <?php foreach($books as $book):?>
-    <?php $recPerRow = $content->recPerRow;?>
-    <div class='pull-left with-padding' style="width:<?php echo 100 / $recPerRow;?>%" data-recperrow="<?php echo $recPerRow;?>">
+    {foreach($books as $book)}
+    {$recPerRow = $content->recPerRow}
+    <div class='pull-left with-padding' style="width:{!echo 100 / $recPerRow}%" data-recperrow="{!echo $recPerRow}">
       <div class='card with-margin'>
         <div class='card-heading text-center'>
-          <?php echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $book->title);?>
+          {!echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), $book->title)}
         </div>
-        <div class='card-content text-muted text-center'><?php echo $book->content;?></div>
+        <div class='card-content text-muted text-center'>{!echo $book->content}</div>
         <div class='card-actions'>
-          <span class='text-muted'><i class='icon-user'></i> <?php echo $book->author;?></span>
-          <span class='text-muted'><i class='icon-time'></i> <?php echo formatTime($book->addedDate, 'Y-m-d');?></span>
+          <span class='text-muted'><i class='icon-user'></i> {!echo $book->author}</span>
+          <span class='text-muted'><i class='icon-time'></i> {!echo formatTime($book->addedDate, 'Y-m-d')}</span>
         </div>
       </div>
     </div>
-    <?php endforeach;?>
+    {/foreach}
   </div>
 </div>
 <style>

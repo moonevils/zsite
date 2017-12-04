@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The latest article front view file of block module of chanzhiEPS.
  *
@@ -9,41 +9,40 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php 
-/* Set $themRoot. */
-$themeRoot = $this->config->webRoot . 'theme/';
-$this->app->loadModuleConfig('forum');
+*}
+{* Set $themRoot. *}
+{$themeRoot = $lang->webRoot . 'theme/'}
+{$app->loadModuleConfig('forum')}
 
-/* Decode the content and get articles. */
-$content = json_decode($block->content);
-$method  = 'get' . ucfirst(str_replace('thread', '', strtolower($block->type)));
-$threads = $this->loadModel('thread')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
-$boards  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('forum')->andWhere('grade')->eq(2)->fetchAll('id');
-?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+{* Decode the content and get articles. *}
+{$content = json_decode($block->content)}
+{$method  = 'get' . ucfirst(str_replace('thread', '', strtolower($block->type)))}
+{$threads = $model->loadModel('thread')->$method(empty($content->category) ? 0 : $content->category, $content->limit)}
+{$boards  = $model->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('forum')->andWhere('grade')->eq(2)->fetchAll('id')}
+{*/php*}
+<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($content->moreText) and !empty($content->moreUrl))}
+      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    {/if}
   </div>
   <div class='panel-body'>
     <ul class='ul-list'>
-      <?php foreach($threads as $thread): ?>
+      {foreach($threads as $thread)}
       <li>
-        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-        <?php if($content->categoryName == 'abbr'):?>
-        <?php $boardName = '[' . ($boards[$thread->board]->abbr ? $boards[$thread->board]->abbr : $boards[$thread->board]->name) . '] ';?>
-        <?php echo html::a(helper::createLink('forum', 'board', "boardID={$thread->board}", "category={$boards[$thread->board]->alias}"), $boardName);?>
-        <?php else:?>
-        <?php echo html::a(helper::createLink('forum', 'board', "boardID={$thread->board}", "category={$boards[$thread->board]->alias}"), '[' . $boards[$thread->board]->name . '] ');?>
-        <?php endif;?>
-        <?php endif;?>
-        <?php echo html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
-        <span class='pull-right'><?php echo substr($thread->addedDate, 0, 10);?></span>
+        {if(isset($content->showCategory) and $content->showCategory == 1)}
+          {if($content->categoryName == 'abbr')}
+            {$boardName = '[' . ($boards[$thread->board]->abbr ? $boards[$thread->board]->abbr : $boards[$thread->board]->name) . '] '}
+            {!echo html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), $boardName)}
+          {else}
+            {!echo html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), '[' . $boards[$thread->board]->name . '] ')}
+          {/if}
+        {/if}
+        {!echo html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}
+        <span class='pull-right'>{!echo substr($thread->addedDate, 0, 10)}</span>
       </li>
-      <?php endforeach;?>
+      {/foreach}
     </ul>
   </div>
 </div>

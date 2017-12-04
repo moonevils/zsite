@@ -1,4 +1,4 @@
-<?php 
+{*
 /**
  * The order view of order module of chanzhiEPS.
  *
@@ -9,30 +9,30 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php js::set('currencySymbol', $currencySymbol);?>
-<?php js::set('checkStock', isset($this->config->product->stock) ? $this->config->product->stock : false);?>
-<?php if(!empty($products)):?>
-<?php $total = 0;?>
+*}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{!js::set('currencySymbol', $currencySymbol)}
+{!js::set('checkStock', isset($control->config->product->stock) ? $control->config->product->stock : false)}
+{if(!empty($products))}
+{$total = 0}
 <div class='panel my-order'>
-  <div class='panel-heading'><strong><?php echo $lang->order->confirm;?></strong></div>
-  <form id='confirmForm' action='<?php echo helper::createLink('order', 'create'); ?>' method='post'>
+  <div class='panel-heading'><strong>{!echo $lang->order->confirm}</strong></div>
+  <form id='confirmForm' action='{!echo helper::createLink('order', 'create')}' method='post'>
     <div class='panel-body'>
       <div id='addressBox'>
         <div>
-          <strong><?php echo $lang->order->address;?></strong>
-          <?php echo html::a(helper::createLink('address', 'create') . ' form', $lang->address->create, "class='createAddress'");?>
-          <?php echo html::hidden("createAddress", '');?>
+          <strong>{!echo $lang->order->address}</strong>
+          {!echo html::a(helper::createLink('address', 'create') . ' form', $lang->address->create, "class='createAddress'")}
+          {!echo html::hidden("createAddress", '')}
         </div>
         <div id='addressList'></div>
         <div class='div-create-address hide'>
           <table class='table table-borderless address-form table-list'>
             <tr>
-              <td class='w-100px'><?php echo html::input('contact', '', "class='form-control' placeholder='{$lang->address->contact}'");?></td>
-              <td class='w-130px'><?php echo html::input('phone', '', "class='form-control' placeholder='{$lang->address->phone}'");?></td>
-              <td><?php echo html::input('address', '', "class='form-control' placeholder='{$lang->address->address}'");?></td>
-              <td class='w-100px'><?php echo html::input('zipcode', '', "class='form-control' placeholder='{$lang->address->zipcode}'");?></td>
+              <td class='w-100px'>{!echo html::input('contact', '', "class='form-control' placeholder='{{$lang->address->contact}}'")}</td>
+              <td class='w-130px'>{!echo html::input('phone', '', "class='form-control' placeholder='{{$lang->address->phone}}'")}</td>
+              <td>{!echo html::input('address', '', "class='form-control' placeholder='{{$lang->address->address}}'")}</td>
+              <td class='w-100px'>{!echo html::input('zipcode', '', "class='form-control' placeholder='{{$lang->address->zipcode}}'")}</td>
               <td class='w-50px text-middle'><strong class='icon icon-remove' style='cursor:pointer'> </i></td>
             </tr>
           </table>
@@ -41,87 +41,84 @@
       <table class='table table-list'>
         <thead>
           <tr class='text-center'>
-            <td class='text-left'><strong><?php echo $lang->order->productInfo;?></strong></td>
+            <td class='text-left'><strong>{!echo $lang->order->productInfo}</strong></td>
             <td class='hidden-xs'></td>
-            <td class='text-left hidden-xs'><?php echo $lang->order->price;?></td>
-            <td><?php echo $lang->order->count;?></td>
-            <td><?php echo $lang->order->amount;?></td>
-            <td><?php echo $lang->actions;?></td>
+            <td class='text-left hidden-xs'>{!echo $lang->order->price}</td>
+            <td>{!echo $lang->order->count}</td>
+            <td>{!echo $lang->order->amount}</td>
+            <td>{!echo $lang->actions}</td>
           </tr>
         </thead>
-        <?php foreach($products as $productID => $product): ?>
-        <?php $productLink = helper::createLink('product', 'view', "id=$productID", "category={$product->categories[$product->category]->alias}&name=$product->alias");?>
+        {foreach($products as $productID => $product)}
+        {$productLink = helper::createLink('product', 'view', "id=$productID", "category={{$product->categories[$product->category]->alias}}&name=$product->alias")}
         <tr>
           <td class='w-100px'>
-            <?php 
-            if(!empty($product->image)) 
-            {
-                $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-                echo html::a($productLink, html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'smallURL'), "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
-            }
-            ?>
-            <h6 class='visible-xs'><?php echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");?></h6>
+            {if(!empty($product->image))}
+                {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
+                {!echo html::a($productLink, html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'smallURL'), "title='$title' alt='$product->name'"), "class='media-wrapper'")}
+            {/if}
+            <h6 class='visible-xs'>{!echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'")}</h6>
           </td>
           <td class='text-left text-middle hidden-xs'>
-            <?php echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");?>
+            {!echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'")}
           </td>
           <td class='w-100px text-middle hidden-xs'> 
-            <?php if($product->promotion != 0):?>
-            <?php $price = $product->promotion;?>
-            <div class='text-muted'><del><?php echo $currencySymbol . $product->price;?></del></div>
-            <div class='text-price'><?php echo $currencySymbol . $product->promotion;?></div>
-            <?php else:?>
-            <?php $price  = $product->price;?>
-            <div class='text-price'><?php echo $currencySymbol . $product->price;?></div>
-            <?php endif;?>
-            <?php echo html::hidden("price[$product->id]", $price);?>
-            <?php $amount = $product->count * $price;?>
-            <?php $total += $amount;?>
+            {if($product->promotion != 0)}
+            {$price = $product->promotion}
+            <div class='text-muted'><del>{!echo $currencySymbol . $product->price}</del></div>
+            <div class='text-price'>{!echo $currencySymbol . $product->promotion}</div>
+            {else}
+            {$price  = $product->price}
+            <div class='text-price'>{!echo $currencySymbol . $product->price}</div>
+            {/if}
+            {!echo html::hidden("price[$product->id]", $price)}
+            {$amount = $product->count * $price}
+            {$total += $amount}
           </td>
           <td class='w-140px text-middle'>
             <div class='input-group'>
               <span class='input-group-addon'><i class='icon icon-minus'></i></span>
-              <?php echo html::input("count[$product->id]", $product->count, "data-stock='{$product->amount}' class='form-control'"); ?>
+              {!echo html::input("count[$product->id]", $product->count, "data-stock='{$product->amount}' class='form-control'")}
               <span class='input-group-addon'><i class='icon icon-plus'></i></span>
             </div>
           </td>
           <td class='w-200px text-center text-middle'>
-            <strong class='text-danger'><?php echo $currencySymbol;?></strong>
-            <strong class='text-danger amountContainer'><?php echo $amount?></strong>
+            <strong class='text-danger'>{!echo $currencySymbol}</strong>
+            <strong class='text-danger amountContainer'>{!echo $amount?></strong>
           </td>
           <td class='text-middle text-center'>
-            <?php echo html::a(helper::createLink('cart', 'delete', "product={$product->id}"), $lang->delete, "class='cartDeleter'");?>
-            <?php echo html::hidden("product[]", $product->id);?>
+            {!echo html::a(helper::createLink('cart', 'delete', "product={$product->id}"), $lang->delete, "class='cartDeleter'")}
+            {!echo html::hidden("product[]", $product->id)}
           </td>
         </tr>
-        <?php endforeach;?>
+        {/foreach}
         <tr>
-          <th class='text-left text-middle'><?php echo $lang->order->note?></th>
-          <td colspan='5'><?php echo html::textarea('note', '', "class='form-control' rows=1")?></td>
+          <th class='text-left text-middle'>{!echo $lang->order->note?></th>
+          <td colspan='5'>{!echo html::textarea('note', '', "class='form-control' rows=1")?></td>
         </tr>
       </table>
     </div>
     <div class='panel-footer text-right'>
-      <?php printf($lang->order->selectProducts, count($products));?>
-      <?php printf($lang->order->totalToPay, $currencySymbol . $total);?>
-      <?php echo html::submitButton($lang->order->submit, 'btn-order-submit'); ?>
+      {!printf($lang->order->selectProducts, count($products))}
+      {!printf($lang->order->totalToPay, $currencySymbol . $total)}
+      {!echo html::submitButton($lang->order->submit, 'btn-order-submit')}
     </div>
   </form>
-  <form class='hide' id='payForm' method='post' action="<?php echo inlink('redirect')?>" target='_blank'>
-    <?php echo html::hidden('payLink', '');?>
-    <input class='submitBtn' type='submit' value="<?php echo $lang->confirm;?>" />
+  <form class='hide' id='payForm' method='post' action="{!echo inlink('redirect')?>" target='_blank'>
+    {!echo html::hidden('payLink', '')}
+    <input class='submitBtn' type='submit' value="{!echo $lang->confirm}" />
   </form>
 </div>
-<?php else:?>
+{else}
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><?php echo $lang->order->browse;?></strong>
+    <strong>{!echo $lang->order->browse}</strong>
   </div>
   <div class='panel-body'>
-    <?php echo $lang->order->noProducts;?>
-    <?php echo html::a(helper::createLink('product', 'browse'), $lang->order->pickProducts, "class='btn btn-xs btn-primary'");?>
-    <?php echo html::a(helper::createLink('index', 'index'), $lang->order->goHome, "class='btn btn-xs btn-default'");?>
+    {!echo $lang->order->noProducts}
+    {!echo html::a(helper::createLink('product', 'browse'), $lang->order->pickProducts, "class='btn btn-xs btn-primary'")}
+    {!echo html::a(helper::createLink('index', 'index'), $lang->order->goHome, "class='btn btn-xs btn-default'")}
   </div>
 </div>
-<?php endif;?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{/if}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}
