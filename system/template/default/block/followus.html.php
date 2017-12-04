@@ -9,9 +9,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
+*}
 {$block->content = json_decode($block->content)}
 {$publicList = $model->loadModel('wechat')->getList()}
-*}
 {if(!empty($publicList))}
 <div id="block{!echo $block->id}" class='panel panel-block hidden-sm hidden-xs {!echo $blockClass}'>
   <div class='panel-heading'>
@@ -22,7 +22,7 @@
   </div>
   <table class='w-p100'>
     {foreach($publicList as $public)}
-    {if(!$public->qrcode) continue}
+    {if(!$public->qrcode)} {continue} {/if}
     <tr class='text-center'>
       <td class='wechat-block'>
         <div class='name'><i class='icon-weixin'>&nbsp;</i>{!echo $public->name}</div>
