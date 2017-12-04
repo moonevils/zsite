@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The page form view file of block module of chanzhiEPS.
  *
@@ -9,18 +9,16 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-{*/php*}
+*/php*}
 {$app->loadLang('message')}
 
 <div id="block{!echo $block->id}" class='panel-block-message panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'><strong>{!echo $icon . $block->title}</strong></div>
   <div class='panel-body'>
     <form method='post' class='form-horizontal' id='messageForm' action="{!echo helper::createLink('message', 'post', 'type=message&block=block','',false)}">
-{*php*}
-      $from   = $control->session->user->account == 'guest' ? '' : $control->session->user->realname;
-      $mobile = $control->session->user->account == 'guest' ? '' : $control->session->user->mobile;
-      $qq     = $control->session->user->account == 'guest' ? '' : $control->session->user->qq;
-{*/php*}
+      {$from   = $control->session->user->account == 'guest' ? '' : $control->session->user->realname}
+      {$mobile = $control->session->user->account == 'guest' ? '' : $control->session->user->mobile}
+      {$qq     = $control->session->user->account == 'guest' ? '' : $control->session->user->qq}
       <div class='form-group'>
         <label for='blockFrom' class='col-sm-2 control-label'>{!echo $lang->message->from}</label>
         <div class='col-sm-10 required'>
@@ -42,11 +40,9 @@
       <div class='form-group'>
         <label for='blockContent' class='col-sm-2 control-label'>{!echo $lang->message->content}</label>
         <div class='col-sm-10 required'>
-{*php*}
-            echo html::textarea('blockContent', '', "class='form-control' rows='2'");
-            echo html::hidden('objectType', 'message');
-            echo html::hidden('objectID', 0);
-{*/php*}
+          {!html::textarea('blockContent', '', "class='form-control' rows='2'")}
+          {!html::hidden('objectType', 'message')}
+          {!html::hidden('objectID', 0)}
         </div>
       </div>
       {if(zget($lang->site, 'captcha', 'auto') == 'open')}
@@ -66,6 +62,7 @@
   </div>
 </div>
 
+{noparse}
 <script>
 $(document).ready(function()
 {
@@ -85,3 +82,4 @@ $(document).ready(function()
     }); 
 });
 </script>
+{/noparse}

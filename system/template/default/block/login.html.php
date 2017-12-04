@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The login view file of block module of ZenTaoPMS.
  *
@@ -9,27 +9,25 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-{*/php*}
-{if($model->loadModel('user')->isLogon()) return true}
+/php*}
+{if($model->loadModel('user')->isLogon())} {return true} {/if}
 <div id="block{!echo $block->id}" class='panel-block-login panel panel-block {!echo $blockClass}'>
-{*php*}
-if(!$control->session->random) $control->session->set('random', md5(time() . mt_rand()));
-$referer = $app->getURI();
-js::import($lang->webRoot . 'js/md5.js');
-js::import($lang->webRoot . 'js/fingerprint/fingerprint.js');
-js::set('random', $control->session->random);
-{*/php*}
+{if(!$control->session->random)} {$model->session->set('random', md5(time() . mt_rand()))} {/if}
+{$referer = $app->getURI()}
+{!js::import($lang->webRoot . 'js/md5.js')}
+{!js::import($lang->webRoot . 'js/fingerprint/fingerprint.js')}
+{!js::set('random', $model->control->session->random)}
   <div class='panel-heading'><strong>{!echo $icon . $block->title}</strong></div>
   <div class='panel-body'>
     <div style='max-width:500px;margin:0px auto'>
       <form method='post' id='ajaxForm' role='form' data-checkfingerprint='1' style='max-width:500px;margin'>
         <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
-        <div class='form-group'>{!echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='form-control'")}</div>
-        <div class='form-group'>{!echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control'")}</div>
+        <div class='form-group'>{!echo html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control'")}</div>
+        <div class='form-group'>{!echo html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
         {!echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-block')} 
       </form>
       <div style='margin:5px 0px;'>
-        {if($lang->mail->turnon and $lang->site->resetPassword == 'open') echo html::a(helper::createLink('user', 'resetpassword'), $lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'")}
+        {if($lang->mail->turnon and $lang->site->resetPassword == 'open')} {!echo html::a(helper::createLink('user', 'resetpassword'), $lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'")} {/if}
         {!echo html::a(helper::createLink('user', 'register'), $lang->user->register->instant, "id='register' style='float:right;right:5px;margin-bottom:8px;'")}
       </div>
       {include TPL_ROOT . 'user/oauthlogin.html.php'}
