@@ -17,29 +17,29 @@ ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
 {$control->loadModel('user')->fixMenus()}
 {if($extView = $control->getExtViewFile(__FILE__))}
 {include $extView}
-{return helper::cd()}
+{@helper::cd()}
 {/if}
 <div class='col-md-2'>
   {foreach($control->config->user->navGroups as $group => $items)}
   <ul class='nav nav-primary nav-stacked user-control-nav'>
     {if(isset($lang->user->navGroups->$group))}
-    <li class='nav-heading'> {!echo $lang->user->navGroups->$group}</li>
+      <li class='nav-heading'> {$lang->user->navGroups->$group}</li>
     {/if}
     {$navs = explode(',', $items)}
     {foreach($navs as $nav)}
-        {$class = ''}
-        {$menu = zget($lang->user->control->menus, $nav, '')}
-        {if(empty($menu))}{continue} {/if}
-        {!list($label, $module, $method) = explode('|', $menu)}
-        {$module = strtolower($module)}
-        {$method = strtolower($method)}
-        {$menuInfo = explode('|', $menu)}
-        {$params   = zget($menuInfo, 3 ,'')} 
-        {if(!commonModel::isAvailable($module))}{continue}{/if}
-        {if($module == $control->app->getModuleName() && $method == $control->app->getMethodName())}
-        {$result = $class .= 'active'}
-        {/if}
-        {!echo '<li class="nav-icon ' . $class . '">' . html::a($control->createLink($module, $method, $params), $label) . '</li>'}
+      {$class = ''}
+      {$menu = zget($lang->user->control->menus, $nav, '')}
+      {if(empty($menu))} {continue} {/if}
+      {@list($label, $module, $method) = explode('|', $menu)}
+      {$module = strtolower($module)}
+      {$method = strtolower($method)}
+      {$menuInfo = explode('|', $menu)}
+      {$params   = zget($menuInfo, 3 ,'')} 
+      {if(!commonModel::isAvailable($module))}{continue}{/if}
+      {if($module == $control->app->getModuleName() && $method == $control->app->getMethodName())}
+      {$class .= 'active'}
+      {/if}
+      {!echo '<li class="nav-icon ' . $class . '">' . html::a($control->createLink($module, $method, $params), $label) . '</li>'}
     {/foreach}
   </ul>
   {/foreach}

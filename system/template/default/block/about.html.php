@@ -19,6 +19,6 @@
     {/if}
   </div>
   <div class='panel-body'>
-    <div id='companyDesc{!echo $block->id}' data-ve='companyDesc'>{!echo $lang->company->desc}</div>
+    <div id='companyDesc{!echo $block->id}' data-ve='companyDesc'>{!echo $config->company->desc}</div>
   </div>
 </div>

@@ -11,7 +11,7 @@
 */
 *}
 {*php*}
-{$themeRoot = $lang->webRoot . 'theme/'}
+{$themeRoot = $config->webRoot . 'theme/'}
 
 {$content  = json_decode($block->content)}
 {$method   = 'get' . ucfirst(str_replace('blog', '', strtolower($block->type)))}

@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The check view of order module of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+*/php*}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 {!js::set('goToPay', $lang->order->goToPay)}
 {!js::set('paid', $lang->order->paid)}

@@ -14,8 +14,8 @@
 <div id="block{!echo $block->id}" class='panel-block-login panel panel-block {!echo $blockClass}'>
 {if(!$control->session->random)} {$model->session->set('random', md5(time() . mt_rand()))} {/if}
 {$referer = $app->getURI()}
-{!js::import($lang->webRoot . 'js/md5.js')}
-{!js::import($lang->webRoot . 'js/fingerprint/fingerprint.js')}
+{!js::import($config->webRoot . 'js/md5.js')}
+{!js::import($config->webRoot . 'js/fingerprint/fingerprint.js')}
 {!js::set('random', $model->control->session->random)}
   <div class='panel-heading'><strong>{!echo $icon . $block->title}</strong></div>
   <div class='panel-body'>

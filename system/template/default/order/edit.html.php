@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The edit view file of order module of chanzhiEPS.
  *
@@ -9,9 +9,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+*/php*}
 {include TPL_ROOT . 'common/header.modal.html.php'}
-<form method='post' id='editForm' class='form-inline' action="{!echo inlink('edit', "orderID={$order->id}")}">
+<form method='post' id='editForm' class='form-inline' action="{!echo inlink('edit', "orderID=$order->id")}">
   <table class='table table-form'>
     {$address = json_decode($order->address)}
     <tr>

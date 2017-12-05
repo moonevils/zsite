@@ -1,5 +1,5 @@
 {if(isset($config->wechatPublic->hasPublic) and $config->wechatPublic->hasPublic)} 
-{$publicList=$loadModel('wechat')->getList()}
+{$publicList=$control->loadModel('wechat')->getList()}
 {/if}
 <div id='rightDocker' class='hidden-xs'>
   {if(!empty($publicList) or extension_loaded('gd'))}
