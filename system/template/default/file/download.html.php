@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The html template file of download method of file module of ZenTaoCMS.
  *
@@ -7,8 +7,8 @@
  * @package     ZenTaoCMS
  * @version     $Id$
  */
-include TPL_ROOT . 'common/header.lite.html.php';
-{*/php*}
+/php*}
+{include TPL_ROOT . 'common/header.lite.html.php'}
 <div class='row' style='margin-top:100px'>
   <div class='col-md-8 col-md-offset-2'>
   {!echo $control->fetch('score', 'noscore', array('method' => 'download', 'score' => $score))}

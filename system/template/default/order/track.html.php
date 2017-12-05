@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The delivery view of order module of chanzhiEPS.
  *
@@ -9,24 +9,24 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-{*/php*}
+/php*}
 {include TPL_ROOT . 'common/header.modal.html.php'}
 <table class='table table-form'>
   <tr>
-    <th class='w-100px'>{!echo $lang->order->address}</th>
-    <td>{!echo $fullAddress}</td>
+    <th class='w-100px'>{$lang->order->address}</th>
+    <td>{$fullAddress}</td>
   </tr>
   <tr>
-    <th class='w-100px'>{!echo $lang->order->deliveriedDate}</th>
-    <td>{!echo $order->deliveriedDate}</td>
+    <th class='w-100px'>{$lang->order->deliveriedDate}</th>
+    <td>{$order->deliveriedDate}</td>
   </tr>
   <tr>
-    <th class='w-100px'>{!echo $lang->order->express}</th>
-    <td>{!echo zget($expressList, $order->express, '')}</td>
+    <th class='w-100px'>{$lang->order->express}</th>
+    <td>{!zget($expressList, $order->express, '')}</td>
   </tr>
   <tr>
-    <th class='w-100px'>{!echo $lang->order->waybill}</th>
-    <td>{!echo $order->waybill}</td>
+    <th class='w-100px'>{$lang->order->waybill}</th>
+    <td>{$order->waybill}</td>
   </tr>
 </table>
 {include TPL_ROOT .'/common/footer.modal.html.php'}

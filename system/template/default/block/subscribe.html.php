@@ -1,4 +1,4 @@
-{*php*
+{*php
 /**
  * The about front view file of block module of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-*/php*}
+/php*}
 
 {$block->content = json_decode($block->content)}
 {if(!empty($block->content->fixInNav))}

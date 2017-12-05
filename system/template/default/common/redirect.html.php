@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The html template file of deny method of user module of chanzhiEPS.
  *
@@ -8,9 +8,10 @@
  * @package     chanzhiEPS
  * @version     $Id: deny.html.php 824 2010-05-02 15:32:06Z wwccss $
  */
-include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');
-{*/php*}
-{if(isset($locate)) echo " <meta http-equiv='refresh' content=\"5;url=$locate\">"?>
+*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
+{if(isset($locate))} <meta http-equiv='refresh' content="5;url={$locate}"> {/if}
+{noparse}
 <style>
 .alert.with-icon > .icon, .alert.with-icon > .icon + .content {padding: 20px 20px 20px;}
 .alert.with-icon > .icon {padding-left: 35px;}
@@ -19,11 +20,12 @@ include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'heade
 #mainInfo{padding:10px 0; font-size:14px;}
 .btn-redirec{margin-left:14px;}
 </style>
+{/noparse}
 <div class='container w-600px'>
   <div class='alert with-icon alert-deny'>
     <i class='icon-info-sign icon'></i>
     <div class='content'>
-      <div id='mainInfo'>{!echo $reason}</div>
+      <div id='mainInfo'>{$reason}</div>
       <div class='actions'>{!printf($lang->redirecting, $locate)}</div>
     </div>
   </div>
