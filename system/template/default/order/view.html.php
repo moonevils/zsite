@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The view view of order module of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include TPL_ROOT . 'common/header.modal.html.php'}
 <table class='table table-form'>
   <tr>
@@ -27,16 +27,11 @@
   <tr>
     <th class='w-80px'>{!echo $lang->order->expressInfo}</th>
     <td>
-{*php*}
-{if($order->deliveryStatus !== 'not_send') 
-    {
-    echo $control->order->expressInfo($order) . '&nbsp;' . $order->waybill; 
-    }
-{else}
-    {
-        echo $lang->order->noRecord;
-    }
-{*/php*}
+    {if($order->deliveryStatus !== 'not_send')} 
+      {!echo $control->order->expressInfo($order) . '&nbsp;' . $order->waybill}
+    {else}
+      {$lang->order->noRecord}
+    {/if}
     </td>
   </tr>
   <tr>

@@ -45,7 +45,7 @@
           {!html::hidden('objectID', 0)}
         </div>
       </div>
-      {if(zget($lang->site, 'captcha', 'auto') == 'open')}
+      {if(zget($config->site, 'captcha', 'auto') == 'open')}
       <div class='form-group' id='blockCaptchaBox'>
         {!echo $model->loadModel('guarder')->create4Comment(false)}
       </div>

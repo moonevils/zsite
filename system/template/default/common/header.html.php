@@ -3,14 +3,14 @@
   <div class="modal-dialog" style="width:{!echo empty($modalWidth) ? 1000 : $modalWidth}px;">
     <div class="modal-content">
       <div class="modal-header">
-        {!echo html::closeButton()}
-        <strong class="modal-title">{if(!empty($title)) echo $title}</strong>
-        {if(!empty($subtitle))} <small>{!echo $subtitle}</small> {/if}
+        {!html::closeButton()}
+        <strong class="modal-title">{if(!empty($title))} {$title} {/if}</strong>
+        {if(!empty($subtitle))} <small>{$subtitle}</small> {/if}
       </div>
       <div class="modal-body">
 {else}
   {if($extView = $control->getExtViewFile(__FILE__))}
-    {include $extView;}
+    {include $extView}
     {@helper::cd()}
   {/if}
   {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}

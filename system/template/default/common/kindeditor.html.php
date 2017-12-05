@@ -1,11 +1,11 @@
 {if($extView = $control->getExtViewFile(__FILE__))}
   {include $extView;}
-  {!return helper::cd();}
+  {@helper::cd();}
 {/if}
 {$module = $control->moduleName}
 {$method = $control->methodName}
 
-{if(!isset($config->$module->editor->$method))} {!return ;} {/if}
+{if(!isset($config->$module->editor->$method))} {@return ;} {/if}
 
 {* Export $jsRoot var. *}
 {!js::set('jsRoot', $jsRoot)}

@@ -22,15 +22,15 @@
                 {
                     if($product->price != 0)
                     {
-                        echo "<small class='text-muted'>" . $lang->product->currencySymbol . "</small> ";
+                        echo "<small class='text-muted'>" . $config->product->currencySymbol . "</small> ";
                         echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
                     }
-                    echo "&nbsp; <small class='text-muted'>" . $lang->product->currencySymbol . "</small> ";
+                    echo "&nbsp; <small class='text-muted'>" . $config->product->currencySymbol . "</small> ";
                     echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
                 }
                 else if($product->price != 0)
                 {
-                    echo "&nbsp; <small class='text-muted'>" . $lang->product->currencySymbol . "</small> ";
+                    echo "&nbsp; <small class='text-muted'>" . $config->product->currencySymbol . "</small> ";
                     echo "<strong class='text-important'>" . $product->price . "</strong>";
                 }
             }

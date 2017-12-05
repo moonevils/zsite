@@ -35,7 +35,7 @@
               <td class='text-center text-middle'>
                 {!echo zget($lang->order->payStatusList, $order->payStatus, '')}
               </td>
-              <td class='text-left' title='{!echo $order->note?>'>{!echo $order->note}</td>
+              <td class='text-left' title='{$order->note}'>{$order->note}</td>
               <td class='text-center'>{!echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i')}</td>
               <td class='text-left text-middle'>{$control->order->printActions($order)}</td>
             </tr>

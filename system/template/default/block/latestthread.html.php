@@ -11,7 +11,7 @@
 */
 *}
 {* Set $themRoot. *}
-{$themeRoot = $lang->webRoot . 'theme/'}
+{$themeRoot = $config->webRoot . 'theme/'}
 {$app->loadModuleConfig('forum')}
 
 {* Decode the content and get articles. *}

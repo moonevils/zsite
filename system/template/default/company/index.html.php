@@ -9,10 +9,10 @@
   {/if}
     <div class='row blocks' data-region='company_index-top'>{$control->block->printRegion($layouts, 'company_index', 'top', true)}</div>
     <div class='panel' id='company'>
-      <div class='panel-heading'><strong><i class='icon-group'></i> {!echo $lang->aboutUs}</strong></div>
+      <div class='panel-heading'><strong><i class='icon-group'></i> {$lang->aboutUs}</strong></div>
       <div class="panel-body">
         <div class='article-content'>
-          {!echo $company->content}
+          {$company->content}
         </div>
       </div>
     </div>

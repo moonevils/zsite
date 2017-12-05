@@ -134,8 +134,6 @@
   #siteNav {text-align: right; float: right; display: inline-block !important;}
   @media (max-width: 767px){#siteNav {padding-left: 8px; padding-right: 8px;}}
   
-  #searchbar {max-width: initial;}
-  #searchbar > form {max-width: 200px; float: right;}
   #navbar .navbar-nav {width: 100%}
   #navbarCollapse {padding: 0;}
   #navbar .navbar-nav {margin: 0;}

@@ -20,7 +20,7 @@
     <div class="wrapper">
       {if($logo)}
         <div id='siteLogo' data-ve='logo'>
-          {!echo html::a(helper::createLink('index'), html::image($model->loadModel('file')->printFileURL($logo->pathname, $logo->extension)), "class='logo' alt='{{$lang->company->name}}' title='{{$lang->company->name}}'")}
+          {!echo html::a(helper::createLink('index'), html::image($model->loadModel('file')->printFileURL($logo->pathname, $logo->extension)), "class='logo' alt='{{$config->company->name}}' title='{{$config->company->name}}'")}
         </div>
       {else}
         <div id='siteName' data-ve='logo'><h2>{!echo html::a(helper::createLink('index'), $config->site->name)}</h2></div>

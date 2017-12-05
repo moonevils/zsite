@@ -1,1 +1,1 @@
-<nav id='siteNav'>{!echo $lang->siteNavHolder}</nav> 
+<nav id='siteNav'>{$config->siteNavHolder}</nav> 
