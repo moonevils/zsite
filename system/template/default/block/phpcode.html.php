@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The php code block view file of block module of chanzhiEPS.
  *
@@ -9,12 +9,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-{*/php*}
+/php*}
 <div id="block{!echo $block->id}" class='block'>
-{*php*}
-$block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);
-if(!is_object($block->content)) $content = $block->content;
-if(is_object($block->content))  $content = isset($block->content->content) ? $block->content->content : '';
-eval('?>' . htmlspecialchars_decode($content, ENT_QUOTES));
-{*/php*}
+{$block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content)}
+{if(!is_object($block->content))} {$content = $block->content} {/if}
+{if(is_object($block->content))}  {$content = isset($block->content->content) ? $block->content->content : ''} {/if}
+{@eval('?>' . htmlspecialchars_decode($content, ENT_QUOTES))}
 </div>

@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The apply refund view of order module of chanzhiEPS.
  *
@@ -9,17 +9,17 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include TPL_ROOT . 'common/header.modal.html.php'}
-<form method='post' action='{!echo inlink('applyrefund', "orderID={$orderID}")}' id='ajaxForm'>
+<form method='post' action='{!echo inlink('applyrefund', "orderID=$orderID")}' id='ajaxForm'>
   <table class='table table-form'>
     <tr>
-      <th class='w-60px'>{!echo $lang->order->comment}</th>
-      <td>{!echo html::textarea('comment', '', "rows='3' class='form-control'")}</td>
+      <th class='w-60px'>{$lang->order->comment}</th>
+      <td>{!html::textarea('comment', '', "rows='3' class='form-control'")}</td>
     </tr>
     <tr>
       <th></th>
-      <td>{!echo html::submitButton()}</td>
+      <td>{!html::submitButton()}</td>
     </tr>
   </table>
 </form>
