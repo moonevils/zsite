@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The latest book front view file of block module of chanzhiEPS.
  *
@@ -9,27 +9,20 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php 
-$content = json_decode($block->content);
-$orderBy = $content->sort == 'order' ? 'order' : 'addedDate_desc';
-$books   = $this->loadModel('book')->getLatestBookList($content->limit, $orderBy);
-?>
-<div id="block<?php echo $block->id;?>" class="panel-cards panel panel-block <?php echo $blockClass;?>">
+*}
+{$content = json_decode($block->content)}
+{$orderBy = $content->sort == 'order' ? 'order' : 'addedDate_desc'}
+{$books   = $model->loadModel('book')->getLatestBookList($content->limit, $orderBy)}
+<div id="block{!echo $block->id}" class="panel-cards panel panel-block {!echo $blockClass}">
   <div class='panel-heading'>
-    <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
-    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon} {!echo $block->title}</strong>
+    {if(isset($content->moreText) and isset($content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    {/if}
   </div>
-  <?php 
-  if($content->showType == 'block')
-  {
-      include TPL_ROOT . 'block' . DS . 'latestbook.block.html.php';
-  }
-  else
-  {
-      include TPL_ROOT . 'block' . DS . 'latestbook.list.html.php';
-  }
-  ?>
+  {if($content->showType == 'block')}
+    {include TPL_ROOT . 'block' . DS . 'latestbook.block.html.php'}
+  {else}
+    {include TPL_ROOT . 'block' . DS . 'latestbook.list.html.php'}
+  {/if}
 </div>

@@ -1,108 +1,108 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php $common->printPositionBar('rankingList')?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{$common->printPositionBar('rankingList')}
 <div class='panel'>
   <div class='panel-heading' id='nav-heading'>
-    <?php if(count($this->config->score->ruleNav) > 1):?>
+    {if(count($control->config->score->ruleNav) > 1)}
     <ul id='typeNav' class='nav nav-tabs'>
-    <?php foreach($this->config->score->ruleNav as $nav):?>
-      <li data-type='internal' <?php echo $type == $nav ? "class='active'" : '';?>>
-        <?php echo html::a(inlink($nav), $lang->score->$nav);?>
+    {foreach($control->config->score->ruleNav as $nav)}
+      <li data-type='internal' {!echo $type == $nav ? "class='active'" : ''}>
+        {!echo html::a(inlink($nav), $lang->score->$nav)}
       </li>
-    <?php endforeach;?>
+    {/foreach}
     </ul>
-    <?php else:?>
-    <strong><?php echo $lang->score->rule;?></strong>
-    <?php endif;?>
+    {else}
+    <strong>{!echo $lang->score->rule}</strong>
+    {/if}
   </div>
   <div class='panel-body'>
     <div class='row'>
       <div class='col-md-3'>
         <div class='panel'>
-    	  <div class='panel-heading'><?php echo $lang->score->totalRank;?></div>
+    	  <div class='panel-heading'>{!echo $lang->score->totalRank}</div>
           <div class='panel-body'>
             <dl>
-              <?php $i = 1;?>
-              <?php foreach($allScore as $ranking):?>
-              <?php if($ranking->account == 'guest') continue;?>
+              {$i = 1}
+              {foreach($allScore as $ranking)}
+              {if($ranking->account == 'guest') continue}
               <dt>
-                <span class='strong'>Top<?php echo $i?></span>
-                <?php
+                <span class='strong'>Top{!echo $i?></span>
+{*php*}
                 $basicInfo = $users[$ranking->account];
                 echo $basicInfo->realname;
-                ?>
+{*/php*}
               </dt>
-              <dd><?php echo $ranking->score?></dd>
-              <?php $i++;?>
-              <?php endforeach;?>
+              <dd>{!echo $ranking->score?></dd>
+              {$i++}
+              {/foreach}
             </dl>
           </div>
         </div>
       </div>
       <div class='col-md-3'>
         <div class='panel'>
-          <div class='panel-heading'><?php echo $lang->score->monthRank;?></div>
+          <div class='panel-heading'>{!echo $lang->score->monthRank}</div>
           <div class='panel-body'>
             <dl>
-              <?php $i = 1;?>
-              <?php foreach($monthScore as $ranking):?>
-              <?php if($ranking->account == 'guest') continue;?>
+              {$i = 1}
+              {foreach($monthScore as $ranking)}
+              {if($ranking->account == 'guest') continue}
               <dt>
-                <span class='strong'>Top<?php echo $i?></span>
-                <?php
+                <span class='strong'>Top{!echo $i?></span>
+{*php*}
                 $ranking->account = trim($ranking->account);
                 $basicInfo = $users[$ranking->account];
                 echo $basicInfo->realname;
-                ?>
+{*/php*}
               </dt>
-              <dd><?php echo $ranking->sumScore?></dd>
-              <?php $i++;?>
-              <?php endforeach;?>
+              <dd>{!echo $ranking->sumScore?></dd>
+              {$i++}
+              {/foreach}
             </dl>
           </div>
         </div>
       </div>
       <div class='col-md-3'>
         <div class='panel'>
-          <div class='panel-heading'><?php echo $lang->score->weekRank;?></div>
+          <div class='panel-heading'>{!echo $lang->score->weekRank}</div>
           <div class='panel-body'>
             <dl>
-              <?php $i = 1;?>
-              <?php foreach($weekScore as $ranking):?>
-              <?php if($ranking->account == 'guest') continue;?>
+              {$i = 1}
+              {foreach($weekScore as $ranking)}
+              {if($ranking->account == 'guest') continue}
               <dt>
-                <span class='strong'>Top<?php echo $i?></span>
-                <?php
+                <span class='strong'>Top{!echo $i?></span>
+{*php*}
                 $ranking->account = trim($ranking->account);
                 $basicInfo = $users[$ranking->account];
                 echo $basicInfo->realname;
-                ?>
+{*/php*}
               </dt>
-              <dd><?php echo $ranking->sumScore?></dd>
-              <?php $i++;?>
-              <?php endforeach;?>
+              <dd>{!echo $ranking->sumScore?></dd>
+              {$i++}
+              {/foreach}
             </dl>
           </div>
         </div>
       </div>
       <div class='col-md-3'>
         <div class='panel'>
-          <div class='panel-heading'><?php echo $lang->score->dayRank;?></div>
+          <div class='panel-heading'>{!echo $lang->score->dayRank}</div>
           <div class='panel-body'>
             <dl>
-              <?php $i = 1;?>
-              <?php foreach($dayScore as $ranking):?>
-              <?php if($ranking->account == 'guest') continue;?>
+              {$i = 1}
+              {foreach($dayScore as $ranking)}
+              {if($ranking->account == 'guest') continue}
               <dt>
-                <span class='strong'>Top<?php echo $i?></span>
-                <?php
+                <span class='strong'>Top{!echo $i?></span>
+{*php*}
                 $ranking->account = trim($ranking->account);
                 $basicInfo = $users[$ranking->account];
                 echo $basicInfo->realname;
-                ?>
+{*/php*}
               </dt>
-              <dd><?php echo $ranking->sumScore?></dd>
-              <?php $i++;?>
-              <?php endforeach;?>
+              <dd>{!echo $ranking->sumScore?></dd>
+              {$i++}
+              {/foreach}
             </dl>
           </div>
         </div>
@@ -110,4 +110,4 @@
     </div>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

@@ -1,21 +1,22 @@
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+{if($extView = $control->getExtViewFile(__FILE__))} {include $extView} {@helper::cd();} {/if}
+{noparse}
 <style>
 .table-chart tr > td.chart-color {padding-left: 0!important; text-align: center; padding-right: 0!important; color: #f1f1f1}
 .chart-wrapper {padding: 10px; background-color: #f1f1f1; border: 1px solid #e5e5e5}
 </style>
+{/noparse}
 <!--[if lte IE 8]>
-<?php
-js::import($jsRoot . 'chart/excanvas.min.js');
-?>
+{!js::import($jsRoot . 'chart/excanvas.min.js')}
 <![endif]-->
-<?php js::import($jsRoot . 'chart/min.js'); ?>
+{!js::import($jsRoot . 'chart/min.js')}
+{noparse}
 <script>
 (function()
 {
     var colorIndex = 0;
     function nextAccentColor(idx)
     {
-        if(typeof idx === 'undefined') idx = colorIndex++;
+    if(typeof idx === 'undefined') idx = colorIndex++;
         return new $.zui.Color({h: idx * 67 % 360, s: 0.5, l: 0.55});
     }
 
@@ -87,3 +88,4 @@ js::import($jsRoot . 'chart/excanvas.min.js');
     });
 }());
 </script>
+{/noparse}
