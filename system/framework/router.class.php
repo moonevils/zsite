@@ -322,7 +322,7 @@ class router extends baseRouter
         $methodName = $this->methodName;
         if(RUN_MODE == 'front') commonModel::processPre($moduleName, $methodName);
 
-        if(RUN_MODE == 'front' and $this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
+        if(RUN_MODE == 'front' and $this->server->request_method != 'POST' and $this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
         {
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
