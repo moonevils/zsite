@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The page list front view file of block module of chanzhiEPS.
  *
@@ -9,69 +9,62 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php 
-/* Decode the content and get pages. */
-$content = json_decode($block->content);
-$pages   = $this->loadModel('article')->getPageList($content->limit);
-if(isset($content->image)) $pages = $this->loadModel('file')->processImages($pages, 'page');
-?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+*}
+{* Decode the content and get pages. *}
+{$content = json_decode($block->content)}
+{$pages   = $model->loadModel('article')->getPageList($content->limit)}
+{if(isset($content->image))} {$pages = $model->loadModel('file')->processImages($pages, 'page')} {/if}
+
+<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($content->moreText) and !empty($content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    {/if}
   </div>
-  <?php if(isset($content->image)):?>
-  <?php $pull     = $content->imagePosition == 'right' ? 'pull-right' : 'pull-left';?>
-  <?php $imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';?>
-  <div class='panel-body'>
-    <div class='items'>
-    <?php
-    foreach($pages as $page):
-    $url = helper::createLink('page', 'view', "id=$page->id", "name=$page->alias");
-    ?>
-    <div class='item'>
-      <div class='item-heading'><strong><?php echo html::a($url, $page->title, "style='color:{$page->titleColor}'");?></strong></div>
-      <div class='item-content'>
-        
-        <div class='text small text-muted'>
-          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px';?>">
-          <?php 
-          if(!empty($page->image))
-          {
-              $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-              echo html::a($url, html::image($this->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', $imageURL), "title='{$title}' class='thumbnail'" ));
-          }
-          ?>
+  {if(isset($content->image))}
+    {$pull     = $content->imagePosition == 'right' ? 'pull-right' : 'pull-left'}
+    {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
+    <div class='panel-body'>
+      <div class='items'>
+      {foreach($pages as $page)}
+      {$url = helper::createLink('page', 'view', "id=$page->id", "name=$page->alias")}
+      <div class='item'>
+        <div class='item-heading'><strong>{!echo html::a($url, $page->title, "style='color:{{$page->titleColor}}'")}</strong></div>
+        <div class='item-content'>
+          
+          <div class='text small text-muted'>
+            <div class='media {!echo $pull}' style="max-width: {!echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px'}">
+            {if(!empty($page->image))}
+              {$title = $page->image->primary->title ? $page->image->primary->title : $page->title}
+              {!echo html::a($url, html::image($model->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
+            {/if}
+            </div>
+            <strong class='text-important text-nowrap'>
+              {if(isset($content->time))} {!echo "<i class='icon-time'></i> " . formatTime($page->addedDate, DT_DATE4)} {/if}
+            </strong> 
+            &nbsp;{!echo $page->summary}
           </div>
-          <strong class='text-important text-nowrap'>
-            <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($page->addedDate, DT_DATE4);?>
-          </strong> 
-          &nbsp;<?php echo $page->summary;?>
         </div>
       </div>
+      {/foreach}
+      </div>
     </div>
-    <?php endforeach;?>
+  {else}
+    <div class='panel-body'>
+      <ul class='ul-list'>
+        {foreach($pages as $page)}
+          {$url = helper::createLink('page', 'view', "id={{$page->id}}", "name={{$page->alias}}")}
+          {if(isset($content->time))}
+          <li>
+            {!echo html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}
+            <span class='pull-right'>{!echo substr($page->addedDate, 0, 10)}</span>
+          </li>
+          {else}
+            <li>{!echo html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}</li>
+          {/if}
+        {/foreach}
+      </ul>
     </div>
-  </div>
-  <?php else:?>
-  <div class='panel-body'>
-    <ul class='ul-list'>
-      <?php foreach($pages as $page):?>
-      <?php $url = helper::createLink('page', 'view', "id={$page->id}", "name={$page->alias}");?>
-      <?php if(isset($content->time)):?>
-      <li>
-        <?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?>
-        <span class='pull-right'><?php echo substr($page->addedDate, 0, 10);?></span>
-      </li>
-      <?php else:?>
-      <li><?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?></li>
-      <?php endif;?>
-      
-      <?php endforeach;?>
-    </ul>
-  </div>
-  <?php endif;?>
+  {/if}
 </div>

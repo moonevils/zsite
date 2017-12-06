@@ -1,62 +1,55 @@
-<?php include TPL_ROOT . 'common/header.modal.html.php';?>
+{include TPL_ROOT . 'common/header.modal.html.php'}
 <table class='table table-bordered'>
   <thead>
     <tr>
-      <th class='text-center'><?php echo $lang->file->id;?></th>
-      <th class='text-center'><?php echo $lang->file->common;?></th>
-      <th class='text-center'><?php echo $lang->file->extension;?></th>
-      <th class='text-center'><?php echo $lang->file->size;?></th>
-      <th class='text-center'><?php echo $lang->file->addedBy;?></th>
-      <th class='text-center'><?php echo $lang->file->addedDate;?></th>
-      <th class='text-center'><?php echo $lang->file->downloads;?></th>
-      <th class='text-center'><?php echo $lang->actions;?></th>
+      <th class='text-center'>{!echo $lang->file->id}</th>
+      <th class='text-center'>{!echo $lang->file->common}</th>
+      <th class='text-center'>{!echo $lang->file->extension}</th>
+      <th class='text-center'>{!echo $lang->file->size}</th>
+      <th class='text-center'>{!echo $lang->file->addedBy}</th>
+      <th class='text-center'>{!echo $lang->file->addedDate}</th>
+      <th class='text-center'>{!echo $lang->file->downloads}</th>
+      <th class='text-center'>{!echo $lang->actions}</th>
     </tr>          
   </thead>
   <tbody>
-    <?php foreach($files as $file):?>
+    {foreach($files as $file)}
     <tr class='text-middle'>
-      <td><?php echo $file->id;?></td>
+      <td>{!echo $file->id}</td>
       <td>
-        <?php
-        if($file->isImage)
-        {
-            echo html::a(inlink('download', "id=$file->id"), html::image($this->loadModel('file')->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL'), "class='image-small' title='{$file->title}'"), "target='_blank'");
-            if($file->primary == 1) echo '<small class="label label-success">'. $lang->file->primary .'</small>';
-        }
-        else
-        {
-            echo html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'");
-        }
-        ?>
+        {if($file->isImage)
+            {!echo html::a(inlink('download', "id=$file->id"), html::image($control->loadModel('file')->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL'), "class='image-small' title='{$file->title}'"), "target='_blank'")}
+            {if($file->primary == 1)} {!echo '<small class="label label-success">'. $lang->file->primary .'</small>'} {/if}
+        {else}
+            {!echo html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'")}
+        {/if}
       </td>
-      <td><?php echo $file->extension;?></td>
-      <td><?php echo $file->size;?></td>
-      <td><?php echo $file->addedBy;?></td>
-      <td><?php echo $file->addedDate;?></td>
-      <td><?php echo $file->downloads;?></td>
+      <td>{!echo $file->extension}</td>
+      <td>{!echo $file->size}</td>
+      <td>{!echo $file->addedBy}</td>
+      <td>{!echo $file->addedDate}</td>
+      <td>{!echo $file->downloads}</td>
       <td>
-      <?php
-      echo html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'");
-      echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'");
-      if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'");
-      ?>
+      {!echo html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'")}
+      {!echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'")}
+      {if($file->isImage)} {!echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'")} {/if}
       </td>
     </tr>
-    <?php endforeach;?>          
+    {/foreach}          
   </tbody>
 
 </table>
-<form id="fileForm" method='post' enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=$objectType&objectID=$objectID");?>'>
+<form id="fileForm" method='post' enctype='multipart/form-data' action='{!echo inlink('upload', "objectType=$objectType&objectID=$objectID")}'>
   <table class='table table-form'>
-    <?php if($writeable):?>
+    {if($writeable)}
     <tr>
-      <td class='text-middle'><?php echo $lang->file->upload . sprintf($lang->file->limit, $this->config->file->maxSize / 1024 /1024);?></td>
-      <td><?php echo $this->fetch('file', 'buildForm');?></td>
+      <td class='text-middle'>{!echo $lang->file->upload . sprintf($lang->file->limit, $control->config->file->maxSize / 1024 /1024)}</td>
+      <td>{!echo $control->fetch('file', 'buildForm')}</td>
     </tr>
-    <tr><td colspan='2' class='text-center'><?php echo html::submitButton();?></td></tr>
-    <?php else:?>
-    <tr><td colspan='2'><h5 class='text-danger'><?php echo $lang->file->errorUnwritable;?></h5></td></tr>
-    <?php endif;?>
+    <tr><td colspan='2' class='text-center'>{!echo html::submitButton()}</td></tr>
+    {else}
+    <tr><td colspan='2'><h5 class='text-danger'>{!echo $lang->file->errorUnwritable}</h5></td></tr>
+    {/if}
   </table>
 </form>
-<?php include TPL_ROOT . 'common/footer.modal.html.php';?>
+{include TPL_ROOT . 'common/footer.modal.html.php'}

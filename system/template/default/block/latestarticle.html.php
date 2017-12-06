@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The latest article front view file of block module of chanzhiEPS.
  *
@@ -9,99 +9,85 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php 
-/* Set $themRoot. */
-$themeRoot = $this->config->webRoot . 'theme/';
+*}
+{$themeRoot = $model->config->webRoot . 'theme/'}
 
-/* Decode the content and get articles. */
-$content  = json_decode($block->content);
-$method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)));
-$articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, !empty($content->limit) ? $content->limit : 6);
-if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
-?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+{$content  = json_decode($block->content)}
+{$method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)))}
+{$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, !empty($content->limit) ? $content->limit : 6)}
+{if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'article')} {/if}
+<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(isset($content->moreText) and isset($content->moreUrl))}
+      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    {/if}
   </div>
-  <?php if(isset($content->image)):?>
-  <?php $pull     = $content->imagePosition == 'right' ? 'pull-right' : 'pull-left';?>
-  <?php $imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';?>
+  {if(isset($content->image))}
+  {$pull     = $content->imagePosition == 'right' ? 'pull-right' : 'pull-left'}
+  {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
   <div class='panel-body'>
     <div class='items'>
-    <?php
-    foreach($articles as $article):
-    $url = helper::createLink('article', 'view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");
-    ?>
-    <div class='item'>
-      <div class='item-heading'>
-        <?php if($article->sticky):?><span class='red'><i class="icon icon-arrow-up"></i></span><?php endif;?>
-        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-        <?php if($content->categoryName == 'abbr'):?>
-        <?php 
-        $blockContent    = json_decode($block->content);
-        $blockCategories = '';
-        if(isset($blockContent->category)) $blockCategories = $blockContent->category;
-
-        $categoryName = $article->category->name;
-        foreach($article->categories as $id => $category)
-        {
-            if(strpos(",$blockCategories,", ",$id,") !== false) 
-            {
-                $categoryName = $category->name;
-                break;
-            }
-        }
-        ?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] ';?>
-        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
-        <?php else:?>
-        <?php echo '[' . $article->category->name . '] ';?>
-        <?php endif;?>
-        <?php endif;?>
-        <strong><?php echo html::a($url, $article->title, "style='color: {$article->titleColor}'");?></strong>
-      </div>
-      <div class='item-content'>
-        
-        <div class='text small text-muted'>
-          <div class='media <?php echo $pull;?>' style="max-width: <?php echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '100px';?>">
-          <?php 
-          if(!empty($article->image))
-          {
-              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-              echo html::a($url, html::image($this->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='{$title}' class='thumbnail'" ));
-          }
-          ?>
+    {foreach($articles as $article)}
+      {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
+      <div class='item'>
+        <div class='item-heading'>
+          {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
+          {if(isset($content->showCategory) and $content->showCategory == 1)}
+            {if($content->categoryName == 'abbr')}
+              $blockContent    = json_decode($block->content);
+              $blockCategories = '';
+              {if(isset($blockContent->category))} {$blockCategories = $blockContent->category} {/if}
+       
+              $categoryName = $article->category->name;
+              {foreach($article->categories as $id => $category)}
+                {if(strpos(",$blockCategories,", ",$id,") !== false)}
+                   {$categoryName = $category->name}
+                   {break}
+                {/if}
+              {/foreach}
+     
+              {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
+              {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+            {else}
+              {!echo '[' . $article->category->name . '] '}
+            {/if}
+          {/if}
+          <strong>{!echo html::a($url, $article->title, "style='color: {{$article->titleColor}}'")}</strong>
+        </div>
+        <div class='item-content'>
+          
+          <div class='text small text-muted'>
+            <div class='media {!echo $pull}' style="max-width: {!echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '100px'}">
+            {if(!empty($article->image))}
+                {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+                {!echo html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
+            {/if}
+            </div>
+            <strong class='text-important text-nowrap'>
+              {if(isset($content->time))} {!echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4)} {/if}
+            </strong> 
+            {!echo $article->summary}
           </div>
-          <strong class='text-important text-nowrap'>
-            <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?>
-          </strong> 
-          <?php echo $article->summary;?>
         </div>
       </div>
-    </div>
-    <?php endforeach;?>
+    {/foreach}
     </div>
   </div>
-  <?php else:?>
+  {else}
   <div class='panel-body'>
     <ul class='ul-list'>
-      <?php foreach($articles as $article):?>
-      <?php 
-      $article->category->alias = isset($article->category->alias) ? $article->category->alias : '';
-      $article->alias = isset($article->alias) ? $article->alias : '';
-      $alias       = "category={$article->category->alias}&name={$article->alias}";
-      $url         = helper::createLink('article', 'view', "id={$article->id}", $alias);
-      ?>
-      <?php if(isset($content->time)):?>
+      {foreach($articles as $article)}
+        {$article->category->alias = isset($article->category->alias) ? $article->category->alias : ''}
+        {$article->alias = isset($article->alias) ? $article->alias : ''}
+        {$alias       = "category={{$article->category->alias}}&name={{$article->alias}}"}
+        {$url         = helper::createLink('article', 'view', "id=$article->id", $alias)}
+      {if(isset($content->time))}
       <li class='addDataList'>
         <span>
-        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-        <?php if($content->categoryName == 'abbr'):?>
-        <?php 
+        {if(isset($content->showCategory) and $content->showCategory == 1)}
+        {if($content->categoryName == 'abbr')}
+
         $blockContent    = json_decode($block->content);
         $blockCategories = '';
         if(isset($blockContent->category)) $blockCategories = $blockContent->category;
@@ -115,23 +101,23 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
                 break;
             }
         }
-        ?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] ';?>
-        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
-        <?php else:?>
-        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
-        <?php endif;?>
-        <?php endif;?>
-        <?php echo html::a($url, $article->title, "title='{$article->title}' style='color:{$article->titleColor}'");?>
-        <?php if($article->sticky):?><span class='red'><i class="icon icon-arrow-up"></i></span><?php endif;?>
+
+        {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
+        {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+        {else}
+        {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
+        {/if}
+        {/if}
+        {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+        {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
         </span>
-        <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
+        <span class='pull-right'>{!echo substr($article->addedDate, 0, 10)}</span>
       </li>
-      <?php else:?>
+      {else}
       <li class='notDataList'>
-        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-        <?php if($content->categoryName == 'abbr'):?>
-        <?php 
+        {if(isset($content->showCategory) and $content->showCategory == 1)}
+        {if($content->categoryName == 'abbr')}
+
         $blockCntent     = json_decode($block->content);
         $blockCategories = '';
         if(isset($blockCntent->category)) $blockCategories = $blockCntent->category;
@@ -145,27 +131,29 @@ if(isset($content->image)) $articles = $this->loadModel('file')->processImages($
                 break;
             }
         }
-        ?>
-        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] ';?>
-        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
-        <?php else:?>
-        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
-        <?php endif;?>
-        <?php endif;?>
-        <?php echo html::a($url, $article->title, "title='{$article->title}' style='color:{$article->titleColor}'");?>
-        <span><?php if($article->sticky):?><span class='red'><i class="icon icon-arrow-up"></i></span><?php endif;?></span>
+
+        {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
+          {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+        {else}
+          {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
+        {/if}
+        {/if}
+        {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+        <span>{if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
       </li>
-      <?php endif;?>
+      {/if}
       
-      <?php endforeach;?>
+      {/foreach}
     </ul>
   </div>
-  <?php endif;?>
+  {/if}
 </div>
+{noparse}
 <style>
     .ul-list .addDataList.withStick{padding-right:126px !important;}
     .ul-list .addDataList.withoutStick{padding-right:80px !important;}
     .ul-list .notDataList.withStick{padding-right:60px !important;}
     .ul-list .notDataList.withoutStick{padding-right:5px !important;}
 </style>
+{/noparse}
 

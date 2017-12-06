@@ -1,9 +1,8 @@
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php
-$clientLang = $this->app->getClientLang();
-css::import($jsRoot . 'datetimepicker/css/min.css');
-js::import($jsRoot  . 'datetimepicker/js/min.js'); 
-?>
+{if($extView = $control->getExtViewFile(__FILE__))} {include $extView} {@helper::cd();} {/if}
+{$clientLang = $control->app->getClientLang()}
+{!css::import($jsRoot . 'datetimepicker/css/min.css')}
+{!js::import($jsRoot  . 'datetimepicker/js/min.js')}
+{noparse}
 <script language='javascript'>
 $(function()
 {
@@ -27,7 +26,7 @@ $(function()
     var startDate = new Date(2000, 1, 1);
     var options = 
     {
-        language: '<?php echo $clientLang; ?>',
+        language: '{!echo $clientLang}',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,
@@ -56,3 +55,4 @@ $(function()
     }).find('input').datetimepicker($.extend({}, options, {pickerPosition: 'top-right'}));
 });
 </script>
+{/noparse}

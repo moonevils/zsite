@@ -18,7 +18,7 @@
     <div class='row blocks' data-region='article_view-top'>{$control->block->printRegion($layouts, 'article_view', 'top', true)}</div>
     <div class='article' id='article' data-id='{!echo $article->id}'>
       <header>
-        <h1>{!echo $article->title}</h1>
+        <h1>{$article->title}</h1>
         <dl class='dl-inline'>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblAddedDate, formatTime($article->addedDate))}'><i class='icon-time icon-large'></i> {!echo formatTime($article->addedDate)}</dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblAuthor, $article->author)}'><i class='icon-user icon-large'></i> {!echo $article->author}</dd>
@@ -38,7 +38,7 @@
           </dd>
         </dl>
         {if($article->summary)}
-          <section class='abstract'><strong>{!echo $lang->article->summary}</strong>{!echo $lang->colon . $article->summary}</section>
+          <section class='abstract'><strong>{$lang->article->summary}</strong>{!echo $lang->colon . $article->summary}</section>
         {/if}
       </header>
       <section class='article-content'>
@@ -57,7 +57,7 @@
           {/if}
           {if($article->keywords)} <p class='small'><strong class="text-muted">{!echo $lang->article->keywords}</strong><span class="article-keywords">{!echo $lang->colon . $article->keywords}</span></p> {/if}
         </div>
-        {!extract($prevAndNext)}
+        {@extract($prevAndNext)}
         <ul class='pager pager-justify'>
         {if($prev)}
           <li class='previous' title='{!echo $prev->title}'>{!echo html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> <span>' . $prev->title . '</span>')}</li>

@@ -51,7 +51,7 @@ class RainTPL
      *
      * @var array
      */
-    static $pathReplaceList = array('a', 'img', 'link', 'script', 'input');
+    static $pathReplaceList = array();
 
     /**
      * You can define in the black list what string are disabled into the template tags
@@ -60,8 +60,16 @@ class RainTPL
      */
     static $blackList = array('\$this', 'raintpl::', 'self::', '_SESSION', '_SERVER', '_ENV',  'eval', 'exec', 'unlink', 'rmdir');
 
+    /**
+     * outputFunctions 
+     * 
+     * @static
+     * @var string
+     * @access public
+     */
+    static $outputFunctions = ',a,var_dump,var_export,printf,print,print_r,';
 
-    static $noEchoFunctions = array('extract', 'list', 'print', 'printf', 'unset');
+    static $echoFunctions = array('html', '');
 
     /**
      * Check template.
@@ -334,11 +342,13 @@ class RainTPL
         $tagPatterns['if']            = '(\{if(?: condition){0,1}="[^"]*"\})';
         $tagPatterns['if']            = '(\{if\(.*\)\})';
         $tagPatterns['foreach']       = '(\{foreach\(.*\)\})';
+        $tagPatterns['for']           = '(\{for\(.*\)\})';
         $tagPatterns['elseif']        = '(\{elseif(?: condition){0,1}="[^"]*"\})';
         $tagPatterns['elseif']        = '(\{elseif\(.*\)\})';
         $tagPatterns['else']          = '(\{else\})';
         $tagPatterns['if_close']      = '(\{\/if\})';
         $tagPatterns['foreach_close'] = '(\{\/foreach\})';
+        $tagPatterns['for_close']     = '(\{\/for\})';
         $tagPatterns['function']      = '(\{function="[^"]*"\})';
         $tagPatterns['noparse']       = '(\{noparse\})';
         $tagPatterns['noparse_close'] = '(\{\/noparse\})';
@@ -347,6 +357,7 @@ class RainTPL
         $tagPatterns['include']       = '(\{include\s+.+\})';
         $tagPatterns['template_info'] = '(\{\$template_info\})';
         $tagPatterns['function']      = '(\{!(\w*?)(?:.*?)\})';
+        $tagPatterns['call']          = '(\{@(\w*?)(?:.*?)\})';
         return $tagPatterns;
     }
 
@@ -361,6 +372,7 @@ class RainTPL
     protected function compileTemplate($templateCode, $tplBasedir)
     {
         $templateCode = $this->compileInlineIf($templateCode);
+        $templateCode = $this->compileInlineFor($templateCode);
 
         $tagPatterns = $this->getTagPatterns();
         $tagRegexp   = "/" . join("|", $tagPatterns) . "/";
@@ -370,7 +382,7 @@ class RainTPL
         $templateCode = str_replace("}}", "EOT_MARK", $templateCode);
 
         /* Path replace (src of img, background and href of link) . */
-        $templateCode = $this->pathReplace($templateCode, $tplBasedir);
+        //$templateCode = $this->pathReplace($templateCode, $tplBasedir);
         $templateCode = preg_split($tagRegexp, $templateCode, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         $compiledCode = $this->compileCode($templateCode);
 
@@ -427,6 +439,10 @@ class RainTPL
             {
                 $compiledCode .= $this->compileForeach($html, $code);
             }
+            elseif(preg_match('/\{for(\()(.*)\}/', $html, $code))
+            {
+                $compiledCode .= $this->compileFor($html, $code);
+            }
             elseif(preg_match('/\{include(\s+)(.*)\}/', $html, $code))
             {
                 $compiledCode .= $this->compileInclude($html, $code);
@@ -450,6 +466,10 @@ class RainTPL
 
                 //close loop code
                 $compiledCode .=  self::wrapPHP('}');
+            }
+            elseif(strpos($html, '{/for}') !== FALSE)
+            {
+                $compiledCode .=  self::wrapPHP('endfor;');
             }
             elseif(strpos($html, '{/foreach}') !== FALSE)
             {
@@ -511,7 +531,7 @@ class RainTPL
                 //elseif code
                 $compiledCode .= self::wrapPHP("}elseif($parsedCondition){");
             }
-            elseif(preg_match('/\{elseif\(.*\)\}/', $html, $code))
+            elseif(preg_match('/\{elseif\((.*)\)\}/', $html, $code))
             {
                 $tag       = $code[0];       //tag
                 $condition = $code[1]; //condition attribute
@@ -531,7 +551,6 @@ class RainTPL
             //close if tag
             elseif(strpos($html, '{/if}') !== FALSE)
             {
-
                 //decrease if counter
                 $openIf--;
 
@@ -557,12 +576,32 @@ class RainTPL
                 }
 
                 /* Add echo if neccesory. */
-                if($function != 'echo' and !in_array($function, self::$noEchoFunctions)) 
+                if($function != 'echo' and strpos(self::$outputFunctions, ",$function,") === false)
                 {
                     $parsed_function = 'echo ' . $parsed_function;
                 }
                 $compiledCode .= self::wrapPHP("$parsed_function;");
             }
+            elseif(preg_match('/\{@(\w*)(.*?)\}/', $html, $code))
+            {
+
+                $tag      = $code[0];
+                $function = $code[1];
+
+                $this->function_check($tag);
+
+                if(empty($code[2]))
+                {
+                    $parsed_function = $function . "()";
+                }
+                else
+                {
+                    $parsed_function = $function . $this->var_replace($code[2], $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level);
+                }
+
+                $compiledCode .= self::wrapPHP("$parsed_function;");
+            }
+
             elseif(strpos($html, '{$template_info}') !== FALSE)
             {
                 $tag = '{$template_info}';
@@ -600,6 +639,19 @@ class RainTPL
     }
 
     /**
+     * Compile for sentence.
+     * 
+     * @param  string    $html 
+     * @access public
+     * @return string
+     */
+    public function compileFor($html = '', $code)
+    {
+        if(!isset($code[2])) return $html;
+        return self::wrapPHP('for(' .  $code[2] . ':');
+    }
+
+    /**
      * Compile include sentence.
      * 
      * @param  int    $html 
@@ -621,7 +673,6 @@ class RainTPL
         /* Reduce the path. */
         $include_template = $this->reduce_path($include_template);
         $include_template = trim($include_template, ';');
-
         /* If the cache is active. */
         if(isset($code[2]))
         {
@@ -632,6 +683,47 @@ class RainTPL
                 . self::PHP_END;
         }
     }
+
+    /**
+     * Compile inline for. 
+     * 
+     * @param  string    $code 
+     * @access public
+     * @return string
+     */
+    public function compileInlineFor($code)
+    {
+        preg_match_all('/\{for\(.*\{\/for\}/', $code, $ifLines);
+        foreach($ifLines[0] as $line)
+        {
+            if(preg_match('/\}\s*\{/', $line))
+            {
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $code         = str_replace($line, $compiledLine, $code);
+            }
+            else
+            {
+                $code = str_replace(')}', ")}\n", $code);
+            }
+        }
+
+        preg_match_all('/\}\s*\{\/for\}/', $code, $ifLines);
+        foreach($ifLines[0] as $line)
+        {
+            if(preg_match('/\}\s*\{/', $line))
+            {
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $code         = str_replace($line, $compiledLine, $code);
+            }
+            else
+            {
+                $code = str_replace(')}', ")}\n", $code);
+            }
+        }
+   
+        return $code;
+    }
+
 
     /**
      * CompileInlineIf 
@@ -647,14 +739,29 @@ class RainTPL
         {
             if(preg_match('/\}\s*\{/', $line))
             {
-                $compiledLine = preg_replace('/\}\s+\{/', "}\n{", $line);   
-                $code = str_replace($line, $compiledLine, $code);
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $code         = str_replace($line, $compiledLine, $code);
             }
             else
             {
                 $code = str_replace(')}', ")}\n", $code);
             }
         }
+
+        preg_match_all('/\}\s*\{\/if\}/', $code, $ifLines);
+        foreach($ifLines[0] as $line)
+        {
+            if(preg_match('/\}\s*\{/', $line))
+            {
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $code         = str_replace($line, $compiledLine, $code);
+            }
+            else
+            {
+                $code = str_replace(')}', ")}\n", $code);
+            }
+        }
+   
         return $code;
     }
 
@@ -764,8 +871,6 @@ class RainTPL
         return "<$tag$_$attr=\"$new_url\"";
     }
 
-
-
     /**
      * replace the path of image src, link href and a href.
      * @see rewrite_url for more information about how paths are replaced.
@@ -775,7 +880,7 @@ class RainTPL
      */
     protected function pathReplace($html, $tplBasedir)
     {
-
+        return $html;
         if(self::$pathReplace)
         {
             $tplDir = self::$baseUrl . self::$tplDir . $tplBasedir;
@@ -795,7 +900,6 @@ class RainTPL
 
             $tags = array_intersect(array("form"), self::$pathReplaceList);
             $exp[] = '/<(' . join('|', $tags) . ')(.*?)(action)="(' . $url . ')"/i';
-
             return preg_replace_callback($exp, 'self::single_pathReplace', $html);
         }
         return $html;
@@ -838,6 +942,7 @@ class RainTPL
             $is_init_variable = preg_match("/^(\s*?)\=[^=](.*?)$/", $extra_var);
             if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\.=(.*?)$/", $extra_var);
             if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\+=(.*?)$/", $extra_var);
+            if(!$is_init_variable) $is_init_variable = preg_match("/^\[.*\].*=.*$/", $extra_var);
 
             //function associate to variable
             $function_var = ($extra_var and $extra_var[0] == '|') ? substr($extra_var, 1) : null;
@@ -952,6 +1057,7 @@ class RainTPL
                 $is_init_variable = preg_match("/^[a-z_A-Z\.\[\](\-\>)]*(\s)*(=){1}[^=]*.*$/", $extra_var);
                 if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\.=(.*?)$/", $extra_var);
                 if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\+=(.*?)$/", $extra_var);
+                if(!$is_init_variable) $is_init_variable = preg_match("/^\[.*\].*=.*$/", $extra_var);
 
                 //function associate to variable
                 $function_var = ($extra_var and $extra_var[0] == '|') ? substr($extra_var, 1) : null;

@@ -861,9 +861,8 @@ class blockModel extends model
             }
             $style .= '</style>';
             $script = !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->js, ENT_QUOTES)) . "</script>" : '';
-
             echo $containerHeader;
-            if(file_exists($blockFile)) include $blockFile;
+            if(file_exists($blockFile)) echo $this->draw($blockFile, $block);
             echo $style;
             echo $script;
             echo $containerFooter;
@@ -1267,5 +1266,85 @@ class blockModel extends model
             ->andWhere('object')->eq($object)
             ->fetch('count');
         return $layout ? 'object' : 'global';
+    }
+
+    /**
+     * Use raintpl engin to draw one block.
+     * 
+     * @param  string    $viewFile 
+     * @access public
+     * @return string
+     */
+    public function draw($viewFile, $block)
+    {
+        /* Load smarty class and create smarty object. */
+        $this->tpl = $this->app->loadClass('raintpl');
+
+        $tplConfig = array();
+        $tplConfig["baseUrl"]        = null;
+        $tplConfig["tplDir"]         = TPL_ROOT;
+        $tplConfig["tplExt"]         = 'php';
+        $tplConfig["cacheDir"]       = $this->app->getTmpRoot() . 'cache' . DS . 'raintpl' . DS . $this->app->getClientDevice() . DS;
+        $tplConfig["debug"]          = $config->debug;
+        $tplConfig["removeComments"] = true;
+
+        $this->tpl->configure($tplConfig);
+
+        $this->tpl->assign('block', $block);
+        $this->assignCommon();
+
+        $raintpl = $this->tpl;
+
+        $this->tpl->configure('tplDir', dirname($viewFile) . DS);
+
+
+        foreach($this->this->view as $key => $value) $this->tpl->assign($key, $value);
+        return $this->tpl->draw($viewFile, true);
+    }
+
+    /**
+     * Assign common variables.
+     * 
+     * @access private
+     * @return void
+     */
+    private function assignCommon()
+    {
+        $this->tpl->assign('model', $this);
+
+        $this->tpl->assign('app', $this->app);
+        $this->tpl->assign('lang', $this->lang);
+        $this->tpl->assign('config', $this->config);
+
+        $device =  $this->app->getclientDevice($device);
+        $this->tpl->assign('device', $device);
+
+        if(!defined('CHANZHI_TEMPLATE'))
+        {
+            $template = $this->config->template->{$device}->name;
+            define('CHANZHI_TEMPLATE', $template);
+        }
+
+        if(!defined('CHANZHI_THEME'))
+        {
+            $theme = $this->config->template->{$device}->theme;
+            define('CHANZHI_THEME', $theme);
+        }
+
+        $this->tpl->assign('webRoot', $this->config->webRoot);
+        $this->tpl->assign('jsRoot',  $this->config->webRoot . 'js/');
+        $this->tpl->assign('themeRoot',  $this->config->webRoot . 'theme/' . CHANZHI_TEMPLATE . '/');
+        $this->tpl->assign('customCssFile', $this->loadModel('ui')->getCustomCssFile(CHANZHI_TEMPLATE, CHANZHI_THEME));
+        $this->tpl->assign('customCssURI', $this->loadModel('ui')->getThemeCssUrl(CHANZHI_TEMPLATE, CHANZHI_THEME));
+        $cdnRoot = ($this->config->cdn->open == 'open') ? (!empty($this->config->cdn->site) ? rtrim($this->config->cdn->site, '/') : $this->config->cdn->host . $this->config->version) : '';
+        $this->tpl->assign('cdnRoot', $cdnRoot);
+        $this->tpl->assign('sysURL', commonModel::getSysURL());
+
+        $this->tpl->assign('thisModuleName', $this->app->getModuleName());
+        $this->tpl->assign('thisMethodName', $this->app->getMethodName());
+        
+        $defaultFavicon =  file_exists($this->app->getWwwRoot() . 'favicon.ico') ? $this->config->webRoot . 'favicon.ico' : '';
+        $favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon)->webPath : $defaultFavicon;
+        $this->tpl->assign('favicon', $favicon);
     }
 }

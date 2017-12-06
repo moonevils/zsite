@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The view file of blog view method of chanzhiEPS.
  *
@@ -9,98 +9,93 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php
-include TPL_ROOT . 'blog/header.html.php';
-$path = !empty($category->pathNames) ? array_keys($category->pathNames) : array();
-js::set('path', $path);
-js::set('categoryID', $category->id);
-js::set('objectType', 'article');
-js::set('objectID', $article->id);
-if(isset($article->css)) css::internal($article->css);
-if(isset($article->js))  js::execute($article->js);
-js::set('pageLayout', $this->block->getLayoutScope('blog_view', $article->id));
-?>
-<?php
-$root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
-$common->printPositionBar($category, $article, '', $root);
-?>
-<div class='row blocks' data-region='blog_view-topBanner'><?php $this->block->printRegion($layouts, 'blog_view', 'topBanner', true);?></div>
+*}
+{include TPL_ROOT . 'blog/header.html.php'}
+{$path = !empty($category->pathNames) ? array_keys($category->pathNames) : array()}
+{!js::set('path', $path)}
+{!js::set('categoryID', $category->id)}
+{!js::set('objectType', 'article')}
+{!js::set('objectID', $article->id)}
+{if(isset($article->css))} {!css::internal($article->css)}  {/if}
+{if(isset($article->js))}  {!js::execute($article->js)}     {/if}
+{!js::set('pageLayout', $control->block->getLayoutScope('blog_view', $article->id))}
+{$root = '<li>' . $control->lang->currentPos . $control->lang->colon .  html::a($control->inlink('index'), $lang->blog->home) . '</li>'}
+{$common->printPositionBar($category, $article, '', $root)}
+<div class='row blocks' data-region='blog_view-topBanner'>{$control->block->printRegion($layouts, 'blog_view', 'topBanner', true)}</div>
 <div class='row' id='columns' data-page='blog_view'>
-  <?php if(!empty($layouts['blog_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
-  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
-  <?php else:?>
-  <div class="col-md-12">
-  <?php endif;?>
-    <div class='row blocks' data-region='blog_view-top'><?php $this->block->printRegion($layouts, 'blog_view', 'top', true);?></div>
-    <div class='article' id='blog' data-id='<?php echo $article->id;?>'>
+  {if(!empty($layouts['blog_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')} 
+    <div class="col-md-{!echo 12 - $sideGrid} col-main{!echo ($sideFloat === 'left') ? 'pull-right' : ''}">
+  {else}
+    <div class="col-md-12">
+  {/if}
+    <div class='row blocks' data-region='blog_view-top'>{$control->block->printRegion($layouts, 'blog_view', 'top', true)}</div>
+    <div class='article' id='blog' data-id='{!echo $article->id}'>
       <header>
-        <h1><?php echo $article->title;?></h1>
+        <h1>{!echo $article->title}</h1>
         <dl class='dl-inline'>
-          <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class="icon-time icon-large"></i> <?php echo formatTime($article->addedDate);?></dd>
-          <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
-          <?php if($article->source and $article->source != 'original' and $article->copyURL != ''):?>
-          <dt><?php echo $lang->article->lblSource; ?></dt>
-          <?php if($article->source == 'article') $article->copyURL = commonModel::getSysURL() . $this->article->createPreviewLink($article->copyURL);?>
-          <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
-          <?php endif; ?>
+          <dd data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblAddedDate, formatTime($article->addedDate))}'><i class="icon-time icon-large"></i> {!echo formatTime($article->addedDate)}</dd>
+          <dd data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblAuthor, $article->author)}'><i class='icon-user icon-large'></i> {!echo $article->author}</dd>
+          {if($article->source and $article->source != 'original' and $article->copyURL != '')}
+            <dt>{!echo $lang->article->lblSource}</dt>
+          {/if}
+          {if($article->source == 'article')}
+            {$article->copyURL = commonModel::getSysURL() . $control->article->createPreviewLink($article->copyURL)}
+            <dd>{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</dd>
+          {/if}
           <dd class='pull-right'>
-            <?php
-            if(!empty($this->config->oauth->sina))
-            {
-                $sina = json_decode($this->config->oauth->sina);
-                if($sina->widget) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
-            }
-            ?>
-            <?php if($article->source):?><span class='label label-success'><?php echo $lang->article->sourceList[$article->source]; ?></span><?php endif;?>
-            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $config->viewsPlaceholder);?>'><i class='icon-eye-open'></i> <?php echo $config->viewsPlaceholder; ?></span>
+            {if(!empty($control->config->oauth->sina))}
+                {$sina = json_decode($control->config->oauth->sina)}
+                {if($sina->widget)} {!echo "<div class='sina-widget'>" . $sina->widget . '</div>'} {/if}
+            {/if}
+            {if($article->source)}<span class='label label-success'>{!echo $lang->article->sourceList[$article->source]}</span>{/if}
+            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblViews, $config->viewsPlaceholder)}'><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder}</span>
           </dd>
         </dl>
-        <?php if($article->summary):?>
-        <section class='abstract'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
-        <?php endif; ?>
+        {if($article->summary)}
+          <section class='abstract'><strong>{!echo $lang->article->summary}</strong>{!echo $lang->colon . $article->summary}</section>
+        {/if}
       </header>
       <section class='article-content'>
-        <?php echo $article->content;?>
+        {!echo $article->content}
       </section>
       <section>
-        <?php $this->loadModel('file')->printFiles($article->files);?>
+        {$control->loadModel('file')->printFiles($article->files)}
       </section>
       <footer>
-        <?php if($article->keywords):?>
-        <p class='small'><strong class='text-muted'><?php echo $lang->article->keywords;?></strong><span class='article-keywords'><?php echo $lang->colon . $article->keywords;?></span></p>
-        <?php endif; ?>
-        <?php extract($prevAndNext);?>
+        {if($article->keywords)}
+          <p class='small'><strong class='text-muted'>{!echo $lang->article->keywords}</strong><span class='article-keywords'>{!echo $lang->colon . $article->keywords}</span></p>
+        {/if}
+        {@extract($prevAndNext)}
         <ul class='pager pager-justify'>
-          <?php if($prev): ?>
-          <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $prev->title); ?></li>
-          <?php else: ?>
-          <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a></li>
-          <?php endif; ?>
-          <?php if($next):?>
-          <li class='next'><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title . ' <i class="icon-arrow-right"></i>'); ?></li>
-          <?php else:?>
-          <li class='next disabled'><a href='###'> <?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a></li>
-          <?php endif; ?>
+          {if($prev)}
+            <li class='previous'>{!echo html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> ' . $prev->title)}</li>
+          {else}
+            <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> {!print($lang->article->none)}</a></li>
+          {/if}
+          {if($next)}
+            <li class='next'>{!echo html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), $next->title . ' <i class="icon-arrow-right"></i>')}</li>
+          {else}
+            <li class='next disabled'><a href='###'> {!print($lang->article->none)}<i class='icon-arrow-right'></i></a></li>
+          {/if}
         </ul>
       </footer>
     </div>
-    <?php if(commonModel::isAvailable('message')):?>
-    <div id='commentBox'>
-      <?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?>
-    </div>
-    <?php endif;?>
-    <div class='row blocks' data-region='blog_view-bottom'><?php $this->block->printRegion($layouts, 'blog_view', 'bottom', true);?></div>
+    {if(commonModel::isAvailable('message'))}
+      <div id='commentBox'>
+        {!echo $control->fetch('message', 'comment', "objectType=article&objectID=$article->id")}
+      </div>
+    {/if}
+    <div class='row blocks' data-region='blog_view-bottom'>{$control->block->printRegion($layouts, 'blog_view', 'bottom', true)}</div>
   </div>
-  <?php if(!empty($layouts['blog_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
-  <div class='col-md-<?php echo $sideGrid ?> col-side'>
+  {if(!empty($layouts['blog_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden'))}
+  <div class='col-md-{!echo $sideGrid} col-side'>
     <side class='page-side'>
-      <div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div>
-      <div class='blocks' data-region='blog_view-side'><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></div>
+      <div class='panel-pure panel'>{!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'")}</div>
+      <div class='blocks' data-region='blog_view-side'>{$control->block->printRegion($layouts, 'blog_view', 'side')}</div>
     </side>
   </div>
-  <?php endif;?>
+  {/if}
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'bottomBanner', true);?></div>
-<?php if(strpos($article->content, '<embed ') !== false) include TPL_ROOT . 'common/video.html.php'; ?>
-<?php include TPL_ROOT . 'blog/footer.html.php';?>
+<div class='row'>{$control->block->printRegion($layouts, 'blog_view', 'bottomBanner', true)}</div>
+{if(strpos($article->content, '<embed ') !== false)} {!include TPL_ROOT . 'common/video.html.php'} {/if}
+{include TPL_ROOT . 'blog/footer.html.php'}

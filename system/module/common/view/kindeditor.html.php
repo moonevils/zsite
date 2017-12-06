@@ -26,7 +26,7 @@ js::set('editorLang', $editorLang);
 
 /* Import css and js for kindeditor. */
 css::import($jsRoot . 'kindeditor/themes/default/default.css');
-js::import($jsRoot . 'kindeditor/kindeditor-min.js');
+js::import($jsRoot  . 'kindeditor/kindeditor-min.js');
 js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js');
 
 /* set uid for upload. */
