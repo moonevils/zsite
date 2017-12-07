@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The edit view file of address for mobile template of chanzhiEPS.
  *
@@ -9,29 +9,29 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-map-marker'></i> <?php echo $lang->address->edit;?></h5>
+      <h5 class='modal-title'><i class='icon-map-marker'></i> {$lang->address->edit}</h5>
     </div>
     <div class='modal-body'>
-      <form id='editForm' action='<?php echo inlink('edit', "id={$address->id}");?>' method='post'>
+      <form id='editForm' action='{!inlink('edit', "id={$address->id}")}' method='post'>
         <div class='form-group'>
-          <?php echo html::input('contact', $address->contact, "class='form-control' placeholder='{$lang->address->contact}'");?>
+          {!html::input('contact', $address->contact, "class='form-control' placeholder='{$lang->address->contact}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::input('phone', $address->phone, "class='form-control' placeholder='{$lang->address->phone}'");?>
+          {!html::input('phone', $address->phone, "class='form-control' placeholder='{$lang->address->phone}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::input('address', $address->address, "class='form-control' placeholder='{$lang->address->address}'");?>
+          {!html::input('address', $address->address, "class='form-control' placeholder='{$lang->address->address}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::input('zipcode', $address->zipcode, "class='form-control' placeholder='{$lang->address->zipcode}'");?>
+          {!html::input('zipcode', $address->zipcode, "class='form-control' placeholder='{$lang->address->zipcode}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block');?>
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
