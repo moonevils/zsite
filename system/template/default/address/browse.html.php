@@ -32,8 +32,8 @@
                 <span class='text-muted'> {!echo $address->address}</span>
                 <span class='text-muted'> {!echo $address->zipcode}</span>
                 <span class='pull-right'>
-                {!echo html::a(helper::createLink('address', 'edit', "id={$address->id}"), $lang->edit, "class='editor'")}
-                {!echo html::a(helper::createLink('address', 'delete', "id={$address->id}"), $lang->delete, "class='deleter'")}
+                {!echo html::a(helper::createLink('address', 'edit', "id=$address->id"), $lang->edit, "class='editor'")}
+                {!echo html::a(helper::createLink('address', 'delete', "id=$address->id"), $lang->delete, "class='deleter'")}
                 </span>
             </div>
             <div class='form-edit'>

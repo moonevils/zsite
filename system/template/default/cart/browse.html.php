@@ -64,7 +64,7 @@
           </td>
           <td class='w-200px text-center text-middle'>
             <strong class='text-danger'>{!echo $currencySymbol}</strong>
-            <strong class='text-danger amountContainer'>{!echo $amount?></strong>
+            <strong class='text-danger amountContainer'>{!echo $amount}</strong>
           </td>
           <td class='text-middle text-center'>
             {!echo html::a(inlink('delete', "product=$product->id"), $lang->delete, "class='deleter'")}

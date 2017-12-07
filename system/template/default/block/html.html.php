@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The html block form view file of block module of chanzhiEPS.
  *
@@ -9,14 +9,14 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php if(!is_object($block->content)) $block->content = json_decode($block->content);?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+*}
+{if(!is_object($block->content))} {$block->content = json_decode($block->content)} {/if}
+<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
+      <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    {/if}
   </div>
-  <div class='panel-body'><?php echo $block->content->content;?></div>
+  <div class='panel-body'>{$block->content->content}</div>
 </div>

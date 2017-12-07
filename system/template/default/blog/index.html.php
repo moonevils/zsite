@@ -69,7 +69,7 @@
                 {/if}            
             </div>
           </div>
-      {!unset($articles[$stick->id])}
+      {@unset($articles[$stick->id])}
       {/foreach}
       {foreach($articles as $article)}
       {if(!isset($category))}{$category = array_shift($article->categories)}{/if}
