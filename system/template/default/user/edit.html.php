@@ -12,28 +12,28 @@
               <label for='realname' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->realname}</label>
               <div class='col-md-6 col-sm-6'>
                 {if($user->admin == 'super')}
-                {if(count(explode(',', $control->config->enabledLangs)) > 1)}
-                <div class='input-group'>
-                  {if(strpos($control->config->enabledLangs, 'zh-cn') !== false)}
-                  <label class='input-group-addon'>{!echo $config->langs['zh-cn']?></label>
-                  {!echo html::input("realnames[cn]", isset($user->realnames->cn) ? $user->realnames->cn : '', "class='form-control'")}
+                  {if(count(explode(',', $control->config->enabledLangs)) > 1)}
+                    <div class='input-group'>
+                      {if(strpos($control->config->enabledLangs, 'zh-cn') !== false)}
+                        <label class='input-group-addon'>{$config->langs['zh-cn']}</label>
+                        {!html::input("realnames[cn]", isset($user->realnames->cn) ? $user->realnames->cn : '', "class='form-control'")}
+                      {/if}
+                      {if(strpos($control->config->enabledLangs, 'zh-tw') !== false)}
+                        <label class='input-group-addon'>{!echo $config->langs['zh-tw']}</label>
+                        {!html::input("realnames[tw]", isset($user->realnames->tw) ? $user->realnames->tw : '', "class='form-control'")}
+                      {/if}
+                      {if(strpos($control->config->enabledLangs, 'en') !== false)}
+                        <label class='input-group-addon'>{!echo $config->langs['en']}</label>
+                        {!echo html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'")}
+                      {/if}
+                    </div>
+                  {else}
+                    {$clientLang = $control->config->defaultLang}
+                    {$clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang}
+                    {!echo html::input("realnames[{{$clientLang}}]", $user->realname, "class='form-control'")}
                   {/if}
-                  {if(strpos($control->config->enabledLangs, 'zh-tw') !== false)}
-                  <label class='input-group-addon'>{!echo $config->langs['zh-tw']}</label>
-                  {!echo html::input("realnames[tw]", isset($user->realnames->tw) ? $user->realnames->tw : '', "class='form-control'")}
-                  {/if}
-                  {if(strpos($control->config->enabledLangs, 'en') !== false)}
-                  <label class='input-group-addon'>{!echo $config->langs['en']?></label>
-                  {!echo html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'")}
-                  {/if}
-                </div>
                 {else}
-                {$clientLang = $control->config->defaultLang}
-                {$clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang}
-                {!echo html::input("realnames[{$clientLang}]", $user->realname, "class='form-control'")}
-                {/if}
-                {else}
-                {!echo html::input('realname', $user->realname, "class='form-control'")}
+                  {!echo html::input('realname', $user->realname, "class='form-control'")}
                 {/if}
               </div>
             </div>

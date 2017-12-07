@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The setCounts view file of score of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 {$common->printPositionBar()}
 <div class='panel'>
@@ -23,21 +23,21 @@
     {/foreach}
     </ul>
     {else}
-    <strong>{!echo $lang->score->rule}</strong>
+    <strong>{$lang->score->rule}</strong>
     {/if}
   </div>
   <div class='panel-body'>
     <ol>
       {foreach($config->score->methodOptions as $item => $type)}
-        {if($type != 'award' and $type != 'punish') continue}
+        {if($type != 'award' and $type != 'punish')} {continue} {/if}
         {$count = zget($control->config->score->counts, $item, '0')}
-        {if($count == '0' or $count == '') continue}
-        {if($item == 'expend') $item = 'expendproduct'}
-        {if($item == 'recharge') $item = 'rechargebalance'}
+        {if($count == '0' or $count == '')} {continue} {/if}
+        {if($item == 'expend')} {$item = 'expendproduct'}     {/if}
+        {if($item == 'recharge')} {$item = 'rechargebalance'} {/if}
         {$count = ($type == 'award' ? '+' : '-') . $count}
         <li class='w-120px'>
-          <span class='method'>{!echo $lang->score->methods[$item]}</span>
-          <span class='pull-right {!echo $type == 'award' ? 'green' : 'red'}'>{!echo $count}</span>
+          <span class='method'>{$lang->score->methods[$item]}</span>
+          <span class='pull-right {!echo $type == 'award' ? 'green' : 'red'}'>{$count}</span>
         </li>
       {/foreach}
     </ol>

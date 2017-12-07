@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The score view file of score module of ZenTaoPMS.
  *
@@ -9,27 +9,27 @@
  * @version     $Id$
  * @link        http://www.chanzhi.net
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 <div class='row'>
   {include TPL_ROOT . 'user/side.html.php'}
   <div class='col-md-10'>
     <div class='panel'>
-      <div class='panel-heading'><strong>{!echo $lang->user->buyScore?></strong></div>
+      <div class='panel-heading'><strong>{!$lang->user->buyScore}</strong></div>
       <div class='panel-body'>
         <form method='post' id='ajaxForm'>
           <table class='table table-form'>
             <tr>
-              <th width='100'>{!echo $lang->score->setAmount?></th>
-              <td>{!echo html::input('amount', '', "style='width:45px' onkeyup='getScore()'")?>{!echo $lang->score->amountUnit} <span class='ml-10px red'>{!printf($lang->score->buyWaring, $config->score->buyScore->minAmount, $config->score->buyScore->perYuan)?></span></td>
+              <th width='100'>{!$lang->score->setAmount}</th>
+              <td>{!html::input('amount', '', "style='width:45px' onkeyup='getScore()'")}{!$lang->score->amountUnit} <span class='ml-10px red'>{!printf($lang->score->buyWaring, $config->score->buyScore->minAmount, $config->score->buyScore->perYuan)}</span></td>
             </tr>
             <tr>
-              <th>{!echo $lang->score->getScore?></th>
+              <th>{!echo $lang->score->getScore}</th>
               <td><span id='score'>0</span></td>
             </tr>
             <tr>
               <th></th>
-              <td>{!echo html::submitButton()?></td>
+              <td>{!echo html::submitButton()}</td>
             </tr>
           </table>
         </form>
@@ -38,7 +38,6 @@
   </div>
 </div>
 <script type='text/javascript'>
-var scoreConfig = {!echo $config->score->buyScore->perYuan?>;
+var scoreConfig = {!echo $config->score->buyScore->perYuan};
 </script>
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}
-

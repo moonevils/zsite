@@ -32,7 +32,7 @@
               {/if}
               <td class='w-50px hidden-xs'>{!echo $thread->views}</td>
               <td class='w-50px hidden-xxxs'>{!echo $thread->replies}</td>
-              <td class='w-200px text-left hidden-xxs'>{if($thread->replies) echo substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedByRealname}</td>  
+              <td class='w-200px text-left hidden-xxs'>{if($thread->replies)} {!substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedByRealname} {/if}</td>  
             </tr>  
             {/foreach}
           </tbody>
