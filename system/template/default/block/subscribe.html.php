@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The about front view file of block module of chanzhiEPS.
  *
@@ -9,22 +9,22 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
+/php*}
 
-<?php $block->content = json_decode($block->content);?>
-<?php if(!empty($block->content->fixInNav)):?>
+{$block->content = json_decode($block->content)}
+{if(!empty($block->content->fixInNav))}
 <div class='block-subscribe hidden'>
   <ul class='nav navbar-nav navbar-right'>
     <li class='nav-system-blog'>
-      <?php echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $this->lang->blog->subscribe, "target='_blank'"); ?>
+      {!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank'")}
     </li>
   </ul>
 </div>
 <script>
 $('#blogNav ul.navbar-nav').last().after($('.block-subscribe').html());
 </script>
-<?php else:?>
-<div id="block<?php echo $block->id;?>" class='panel-pure panel'>
-  <?php echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $this->lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?>
+{else}
+<div id="block{!echo $block->id}" class='panel-pure panel'>
+  {!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'")}
 </div>
-<?php endif;?>
+{/if}

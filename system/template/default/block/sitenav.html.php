@@ -1,1 +1,1 @@
-<nav id='siteNav'><?php echo $this->config->siteNavHolder;?></nav> 
+<nav id='siteNav'>{$config->siteNavHolder}</nav> 
