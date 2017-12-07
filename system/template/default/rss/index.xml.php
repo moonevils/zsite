@@ -12,7 +12,7 @@
     {$article->content = str_replace('src="/data/upload/', 'src="' . $sysUrl . 'data/upload/', $article->content)}
     {$article->content = str_replace("src='/data/upload/", "src='" . $sysUrl . 'data/upload/', $article->content)}
     <item>
-      <title>{$article->title?></title>
+      <title>{$article->title}</title>
       <description><![CDATA[  {$article->content}]]></description>
       <link>{!echo str_replace('&', '&amp;', $siteLink . $control->createLink('blog', 'view', "id=$article->id", "category={{$category->alias}}&name=$article->alias", 'html'))}</link>
       <category>{$category->name}</category>

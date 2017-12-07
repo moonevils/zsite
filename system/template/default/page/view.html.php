@@ -14,7 +14,7 @@
   <div class='row blocks' data-region='page_view-topBanner'>{$control->block->printRegion($layouts, 'page_view', 'topBanner', true)}</div>
   <div class='row' id='columns' data-page='page_view'>
     {if(!empty($layouts['page_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')}
-      <div class="col-md-{!echo 12 - $sideGrid} col-main{if($sideFloat === 'left') echo ' pull-right' ?>">
+      <div class="col-md-{!echo 12 - $sideGrid} col-main{if($sideFloat === 'left')} pull-right {/if}">
     {else}
       <div class="col-md-12">
     {/if}

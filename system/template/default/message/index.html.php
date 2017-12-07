@@ -17,7 +17,7 @@
 <div class='row blocks' data-region='message_index-topBanner'>{$control->block->printRegion($layouts, 'message_index', 'topBanner', true)}</div>
 <div class='row' id='columns' data-page='message_index'>
   {if(!empty($layouts['message_index']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')}
-  <div class="col-md-{!echo 12 - $sideGrid} col-main{if($sideFloat === 'left') echo ' pull-right' ?>">
+  <div class="col-md-{!echo 12 - $sideGrid} col-main {if($sideFloat === 'left')} pull-right {/if}">
   {else}
   <div class="col-md-12">
   {/if}
@@ -26,7 +26,7 @@
     {$class = 'success'}
     {foreach($messages as $number => $message)}
     {$class = $class == 'success' ? '' : 'success'}
-    <div class='w-p100 panel comment-item commment-panel' id="comment{!echo $message->id?>">
+    <div class='w-p100 panel comment-item commment-panel' id="comment{$message->id}">
       <div class='panel-heading content-heading'>
         <span class='text-special'> {!echo $message->from}</span>
         <span class='text-muted'> {!echo $message->date}</span>
