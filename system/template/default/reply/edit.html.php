@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The edit reply view file of block module of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 {include TPL_ROOT . 'common/kindeditor.html.php'}
 {$common->printPositionBar($board, $thread)}
@@ -25,16 +25,14 @@
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->file}</label>
         <div class='col-md-7 col-sm-8 col-xs-11'>
-{*php*}
-          $control->reply->printFiles($reply, $canManage = true);
-          echo $control->fetch('file', 'buildForm');
-{*/php*}
+          {$control->reply->printFiles($reply, $canManage = true)}
+          {$control->fetch('file', 'buildForm')}
         </div>
       </div>
       {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
-      <div class='form-group' id='captchaBox'>{!echo $control->loadModel('guarder')->create4thread()}</div>
+        <div class='form-group' id='captchaBox'>{!echo $control->loadModel('guarder')->create4thread()}</div>
       {else}
-      <div class='form-group hiding' id='captchaBox'></div>
+        <div class='form-group hiding' id='captchaBox'></div>
       {/if}
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
