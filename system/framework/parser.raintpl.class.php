@@ -54,7 +54,7 @@ class raintplParser
         $tplConfig["baseUrl"]        = null;
         $tplConfig["tplDir"]         = TPL_ROOT;
         $tplConfig["tplExt"]         = 'php';
-        $tplConfig["cacheDir"]       = $app->getTmpRoot() . 'cache' . DS . 'raintpl' . DS;
+        $tplConfig["cacheDir"]       = $app->getTmpRoot() . 'cache' . DS . 'raintpl' . DS . $app->getClientDevice() . DS;
         $tplConfig["debug"]          = $config->debug;
         $tplConfig["removeComments"] = true;
         
@@ -90,9 +90,9 @@ class raintplParser
     {
         $this->tpl->assign('control', $this->control);
 
-        $this->tpl->assign('app', $app);
-        $this->tpl->assign('lang', $lang);
-        $this->tpl->assign('config', $config);
+        $this->tpl->assign('app', $this->app);
+        $this->tpl->assign('lang', $this->lang);
+        $this->tpl->assign('config', $this->config);
 
         $device =  $this->app->getclientDevice($device);
         $this->tpl->assign('device', $device);
@@ -116,6 +116,7 @@ class raintplParser
         $this->tpl->assign('customCssURI', $this->control->loadModel('ui')->getThemeCssUrl(CHANZHI_TEMPLATE, CHANZHI_THEME));
         $cdnRoot = ($this->config->cdn->open == 'open') ? (!empty($this->config->cdn->site) ? rtrim($this->config->cdn->site, '/') : $this->config->cdn->host . $this->config->version) : '';
         $this->tpl->assign('cdnRoot', $cdnRoot);
+        $this->tpl->assign('sysURL', commonModel::getSysURL());
 
         $this->tpl->assign('thisModuleName', $this->app->getModuleName());
         $this->tpl->assign('thisMethodName', $this->app->getMethodName());
