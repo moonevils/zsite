@@ -78,9 +78,8 @@
   <div class='panel-body'>
     <ul class='ul-list'>
       {foreach($articles as $article)}
-        {$article->category->alias = isset($article->category->alias) ? $article->category->alias : ''}
-        {$article->alias = isset($article->alias) ? $article->alias : ''}
-        {$alias       = "category={{$article->category->alias}}&name={{$article->alias}}"}
+        {$categoryAlias = isset($article->category->alias) ? $article->category->alias : ''}
+        {$alias       = "category={{$categoryAlias}}&name={{$article->alias}}"}
         {$url         = helper::createLink('article', 'view', "id=$article->id", $alias)}
       {if(isset($content->time))}
       <li class='addDataList'>
@@ -103,7 +102,7 @@
         }
 
         {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
-        {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+        {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$categoryAlias}}"), $categoryName)}
         {else}
         {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
         {/if}
