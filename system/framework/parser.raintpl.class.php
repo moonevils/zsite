@@ -94,7 +94,7 @@ class raintplParser
         $this->tpl->assign('lang', $this->lang);
         $this->tpl->assign('config', $this->config);
 
-        $device =  $this->app->getclientDevice($device);
+        $device =  $this->app->getclientDevice();
         $this->tpl->assign('device', $device);
 
         if(!defined('CHANZHI_TEMPLATE'))
