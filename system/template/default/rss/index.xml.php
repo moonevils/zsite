@@ -9,8 +9,8 @@
   
   {foreach($articles as $article)}
     {$category = current($article->categories)}
-    {$article->content = str_replace('src="/data/upload/', 'src="' . $sysUrl . 'data/upload/', $article->content)}
-    {$article->content = str_replace("src='/data/upload/", "src='" . $sysUrl . 'data/upload/', $article->content)}
+    {$article->content = str_replace('src="/data/upload/', 'src="' . $sysURL . 'data/upload/', $article->content)}
+    {$article->content = str_replace("src='/data/upload/", "src='" . $sysURL . 'data/upload/', $article->content)}
     <item>
       <title>{$article->title}</title>
       <description><![CDATA[  {$article->content}]]></description>
