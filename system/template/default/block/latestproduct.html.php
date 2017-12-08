@@ -19,7 +19,7 @@
 {$products = $model->loadModel('product')->$method($content->category, $content->limit, $image)}
 <div id="block{!echo $block->id}" class="panel-cards panel panel-block {!echo $blockClass}">
   <div class='panel-heading'>
-    <strong>{!echo $icon} {!echo $block->title}</strong>
+    <strong>{!$icon} {!echo $block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
     <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
     {/if}

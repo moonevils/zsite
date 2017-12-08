@@ -23,8 +23,8 @@
   {if($thisModuleName == 'user' and $thisMethodName == 'deny')} <meta http-equiv='refresh' content="5;url='{$url= helper::createLink('index')}'"> {/if} 
   {if(!isset($title))} {$title=''} {/if}
   {if(!empty($title))} {$title="$title . $lang->minus"} {/if}
-  {if(!empty($keywords))} {$keywords=$config->site->keywords} {/if}
-  {if(!empty($desc))} {$desc=$title=$config->site->desc} {/if}
+  {if(!isset($keywords) or !empty($keywords))} {$keywords=$config->site->keywords} {/if}
+  {if(!isset($desc) or !empty($desc))} {$desc=$title=$config->site->desc} {/if}
 
   {!html::title($title . $config->site->name)}
   {!html::meta('keywords', $keywords)}
@@ -96,8 +96,8 @@
 {!js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js')}
 {/if}
 {$baseCustom=isset($config->template->custom) ? json_decode($config->template->custom, true) : array()}
-{if(!empty($baseCustom[$template][$theme]['js']))}
-{!js::execute($baseCustom[$template][$theme]['js'])}
+{if(!empty($baseCustom[CHANZHI_TEMPLATE][CHANZHI_THEME]['js']))}
+{!js::execute($baseCustom[CHANZHI_THEME][CHANZHI_THEME]['js'])}
 {/if}
 {$control->block->printRegion($layouts, 'all', 'header')}
 </head>
