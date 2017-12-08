@@ -59,30 +59,28 @@
 {!html::icon($favicon)}
 {!html::rss(helper::createLink('rss', 'index', '', '', 'xml'), $config->site->name)}
 
-<!--[if lt IE 9]>
-{if($config->debug)}
-{!js::import($jsRoot . 'html5shiv/min.js')}
-{!js::import($jsRoot . 'respond/min.js')}
-{else}
-  {if($cdnRoot)}
-    <link href="' . $cdnRoot . '/js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
-    <link href="/js/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
-    {!js::import($jsRoot . 'html5shiv/min.js')}
-    {!js::import($jsRoot . 'respond/min.js')}
-    {!js::import($jsRoot . 'respond/cross-domain/respond.proxy.js')}
+{$browser = helper::getBrowser()}
+{if($browser['name'] == 'ie' and $browser['version'] <= 9)}
+  {if($config->debug)}
+  	{!js::import($jsRoot . 'html5shiv/min.js')}
+  	{!js::import($jsRoot . 'respond/min.js')}
   {else}
-    {!js::import($jsRoot . 'chanzhi.all.ie8.js');}
-    {!js::import($jsRoot . 'chanzhi.all.ie8.js')}
+  	{if($cdnRoot)}
+	  <link href="{$cdnRoot}/js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+      <link href="/js/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+      {!js::import($jsRoot . 'html5shiv/min.js')}
+      {!js::import($jsRoot . 'respond/min.js')}
+      {!js::import($jsRoot . 'respond/cross-domain/respond.proxy.js')}
+  	{else}
+	  {!js::import($jsRoot . 'chanzhi.all.ie8.js')}
+  	{/if}
   {/if}
 {/if}
-<![endif]-->
-<!--[if lt IE 10]>
-{if($config->debug)}
-{!js::import($jsRoot . 'jquery/placeholder/min.js')}
-{else}
-{!js::import($jsRoot . 'chanzhi.all.ie9.js')}
+{if($browser['name'] == 'ie' and $browser['version'] <= 10)}
+  {if($config->debug)} {!js::import($jsRoot . 'jquery/placeholder/min.js')} {/if}
+  {if(!$config->debug)} {!js::import($jsRoot . 'chanzhi.all.ie9.js')} {/if}
 {/if}
-<![endif]-->
+
 {!js::set('lang', $lang->js)}
 {if(!empty($config->oauth->sina) and !is_object($config->oauth->sina))}
   {$sina=json_decode($config->oauth->sina)}
