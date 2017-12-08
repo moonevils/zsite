@@ -734,6 +734,7 @@ class blockModel extends model
      */
     public function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
+        $this->view = new stdclass();
         $withGrid = ($withGrid and isset($block->grid));
         $isRegion = isset($block->type) && $block->type === 'region';
         if($isRegion || !empty($block->children))
@@ -812,12 +813,13 @@ class blockModel extends model
 
             $content = is_object($block->content) ? $block->content : json_decode($block->content);
             if(isset($content->class)) $blockClass .= ' ' . $content->class;
+            $this->view->blockClass = $blockClass;
 
             if(isset($this->config->block->defaultIcons[$block->type]))
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
-                $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
-                $icon        = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
+                $iconClass = isset($content->icon) ? $content->icon : $defaultIcon;
+                $this->view->icon      = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
             }
 
             $style  = '<style>';
@@ -1285,7 +1287,7 @@ class blockModel extends model
         $tplConfig["tplDir"]         = TPL_ROOT;
         $tplConfig["tplExt"]         = 'php';
         $tplConfig["cacheDir"]       = $this->app->getTmpRoot() . 'cache' . DS . 'raintpl' . DS . $this->app->getClientDevice() . DS;
-        $tplConfig["debug"]          = $config->debug;
+        $tplConfig["debug"]          = $this->config->debug;
         $tplConfig["removeComments"] = true;
 
         $this->tpl->configure($tplConfig);
@@ -1297,8 +1299,7 @@ class blockModel extends model
 
         $this->tpl->configure('tplDir', dirname($viewFile) . DS);
 
-
-        foreach($this->this->view as $key => $value) $this->tpl->assign($key, $value);
+        foreach($this->view as $key => $value) $this->tpl->assign($key, $value);
         return $this->tpl->draw($viewFile, true);
     }
 
@@ -1316,7 +1317,7 @@ class blockModel extends model
         $this->tpl->assign('lang', $this->lang);
         $this->tpl->assign('config', $this->config);
 
-        $device =  $this->app->getclientDevice($device);
+        $device =  $this->app->getclientDevice();
         $this->tpl->assign('device', $device);
 
         if(!defined('CHANZHI_TEMPLATE'))
