@@ -93,6 +93,7 @@ class raintplParser
         $this->tpl->assign('app', $this->app);
         $this->tpl->assign('lang', $this->lang);
         $this->tpl->assign('config', $this->config);
+        $this->tpl->assign('session', $this->control->session);
 
         $device =  $this->app->getclientDevice();
         $this->tpl->assign('device', $device);
