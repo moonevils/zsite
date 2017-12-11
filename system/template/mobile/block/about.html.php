@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-{$block->content = json_decode($block->content)}
 /php*}
+{$block->content = json_decode($block->content)}
 <div id="block{!echo $block->id}" class='panel panel-block panel-block-about {!echo $blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>

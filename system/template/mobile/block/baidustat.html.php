@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The baidu stat block view file of block module of chanzhiEPS.
  *
@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-{*/php*}
+/php*}
 {$block->content = json_decode($block->content)}
 <div id="block{!echo $block->id}" class='hidden'>
-  {!echo $block->content->content}
+  {$block->content->content}
 </div>

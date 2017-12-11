@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The wechat qrcode front view file of block module of chanzhiEPS.
  *
@@ -9,9 +9,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-$block->content = json_decode($block->content);
-$publicList = $control->loadModel('wechat')->getList();
-{*/php*}
+/php*}
+{$block->content = json_decode($block->content)}
+{$publicList = $model->loadModel('wechat')->getList()}
 {if(!empty($publicList))}
 <div id="block{!echo $block->id}" class='panel panel-block hidden-sm hidden-xs {!echo $blockClass}'>
   <div class='panel-heading'>
@@ -27,11 +27,11 @@ $publicList = $control->loadModel('wechat')->getList();
       <div class='card-content'>
         {if($public->qrcode)}
         <div class='pull-right'>
-          <a href='###' class='bg-primary-pale text-primary block' data-toggle='modal' data-type='custom' data-custom="<div class='text-center'>{!echo html::image($public->qrcode)}</div>" data-icon='qrcode' data-title='{!echo $public->name ?>'><i class='icon icon-s3 icon-qrcode'></i></a>
+          <a href='###' class='bg-primary-pale text-primary block' data-toggle='modal' data-type='custom' data-custom="<div class='text-center'>{!html::image($public->qrcode)}</div>" data-icon='qrcode' data-title='{!echo $public->name}'><i class='icon icon-s3 icon-qrcode'></i></a>
         </div>
         {/if}
-        <small class="text-muted">{!echo $control->lang->wechatTip?></small>
-        <div class="lead">{!echo $public->name}</div>
+        <small class="text-muted">{$lang->wechatTip}</small>
+        <div class="lead">{$public->name}</div>
       </div>
     </div>
     {/foreach}

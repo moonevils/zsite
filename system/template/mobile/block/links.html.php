@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The link front view file of block module of chanzhiEPS.
  *
@@ -9,17 +9,17 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-{*/php*}
-{if($control->app->getModuleName() != 'links' and !empty($control->config->links->index))}
+/php*}
+{if($app->getModuleName() != 'links' and !empty($config->links->index))}
 <div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
     <strong><i class='icon'>{!echo $icon}</i>{!echo $block->title}</strong>
     <div class='pull-right'>
-      {if(trim(strip_tags($control->config->links->all, '<a>')))}
-      {!echo html::a(helper::createLink('links', 'index'), $control->lang->more)}
+      {if(trim(strip_tags($config->links->all, '<a>')))}
+        {!html::a(helper::createLink('links', 'index'), $lang->more)}
       {/if}
     </div>
   </div>
-  <div class='panel-body'>{!echo $control->config->links->index}</div>
+  <div class='panel-body'>{$config->links->index}</div>
 </div>
 {/if}

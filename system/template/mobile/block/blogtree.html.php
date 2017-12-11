@@ -1,1 +1,1 @@
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'block', 'articletree')}
+{include $model->loadModel('ui')->getEffectViewFile('mobile', 'block', 'articletree')}
