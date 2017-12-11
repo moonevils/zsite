@@ -44,15 +44,15 @@
             {else}
             <div class='form-group'>
               <span class='signed-user-info'>
-                <i class='icon-user text-muted'></i> <strong>{!echo $control->session->user->realname }</strong>
-                {if($control->session->user->email != '')}
-                <span class='text-muted'>&nbsp;({!echo str2Entity($control->session->user->email)})</span>
+                <i class='icon-user text-muted'></i> <strong>{!echo $sessiong->user->realname }</strong>
+                {if($sessiong->user->email != '')}
+                <span class='text-muted'>&nbsp;({!echo str2Entity($sessiong->user->email)})</span>
                 {/if}
               </span>
-              {!html::hidden('from',   $control->session->user->realname)}
-              {!html::hidden('email',  $control->session->user->email); 
-              {!html::hidden('qq',     $control->session->user->qq); 
-              {!html::hidden('phone',  $control->session->user->phone)}
+              {!html::hidden('from',   $sessiong->user->realname)}
+              {!html::hidden('email',  $sessiong->user->email); 
+              {!html::hidden('qq',     $sessiong->user->qq); 
+              {!html::hidden('phone',  $sessiong->user->phone)}
             </div>
             {/if}
             <div class='form-group'>
