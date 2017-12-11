@@ -1,5 +1,5 @@
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 <div class='panel-section'>
   <div class='panel-heading'>
     <button type='button' class='btn primary block' data-toggle='modal' data-remote="{!inlink('post')}"><i class='icon-plus'></i> {!$lang->article->post}</button>
@@ -15,7 +15,7 @@
           <small class='bg-danger-pale text-danger'>{$lang->submission->status[$article->submission]}</small>
         </div>
         <h5>
-          {if($article->submission == 2)} {!html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'")}
+          {if($article->submission == 2)} {!html::a($control->article->createPreviewLink($article->id), $article->title, "target='_blank'")}
           {if($article->submission != 2)} {$article->title}
          }
         </h5>
@@ -45,4 +45,4 @@
   <div class='panel-footer'>{$pager->show('justify')}</div>
 </div>
 {include TPL_ROOT . 'common/form.html.php'}
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

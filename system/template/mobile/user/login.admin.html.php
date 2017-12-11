@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The admin login view file of user for mobile template of chanzhiEPS.
  *
@@ -9,10 +9,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php
+{*/php*}
+{*php*}
 include TPL_ROOT . 'common/header.lite.html.php';
-?>
+{*/php*}
 <style>
 .table-row {display: table; width: 100%}
 .table-cell {padding: 20px; display: table-cell;}
@@ -24,14 +24,14 @@ body {background-color: #f1f1f1}
 </style>
 <div class='container'>
   <div class='alert alert-login'>
-    <h2 class='bg-gray-pale'><?php echo $this->config->site->name;?></h2>
+    <h2 class='bg-gray-pale'>{!echo $control->config->site->name}</h2>
     <div class='table-row'>
       <div class='img text-center table-cell'>
-        <?php if($this->app->clientLang == 'en'):?>
-        <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.en.png'); ?>
-        <?php else:?>
-        <?php echo html::image($this->config->webRoot . 'theme/default/default/images/main/logo.login.admin.png'); ?>
-        <?php endif;?>
+        {if($control->app->clientLang == 'en')}
+        {!echo html::image($control->config->webRoot . 'theme/default/default/images/main/logo.login.admin.en.png')}
+        {else}
+        {!echo html::image($control->config->webRoot . 'theme/default/default/images/main/logo.login.admin.png')}
+        {/if}
       </div>
       <div class='content table-cell'>
         <form method='post' id='loginForm' role='form' data-checkfingerprint='1'>
@@ -39,18 +39,18 @@ body {background-color: #f1f1f1}
             <i class='icon icon-info-sign icon-s1'></i>
             <div class='content'></div>
           </div>
-          <div class='form-group'><?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='form-control'");?></div>
-          <div class='form-group'><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control'");?></div>
-          <div class='form-group'><?php echo html::submitButton($lang->user->login->common, 'btn primary block');?></div>
+          <div class='form-group'>{!echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='form-control'")}</div>
+          <div class='form-group'>{!echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control'")}</div>
+          <div class='form-group'>{!echo html::submitButton($lang->user->login->common, 'btn primary block')}</div>
           <div class='form-group'>
-            <?php if($config->mail->turnon) echo html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' ';?>
-            <?php echo html::hidden('referer', $referer);?>
+            {if($config->mail->turnon) echo html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' '}
+            {!echo html::hidden('referer', $referer)}
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/form.html.php'; ?>
+{include TPL_ROOT . 'common/form.html.php'}
 </body>
 </html>

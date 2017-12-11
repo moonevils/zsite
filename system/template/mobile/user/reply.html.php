@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The reply view file of user for mobile template of chanzhiEPS.
  *
@@ -9,28 +9,28 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
+{*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-reply'></i> <?php echo $lang->user->reply?></div>
+    <div class='title strong'><i class='icon icon-reply'></i> {!echo $lang->user->reply?></div>
   </div>
   <div class='cards condensed cards-list'>
-    <?php foreach($replies as $reply):?>
-    <a href='<?php echo $this->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id";?>' class='card'>
+    {foreach($replies as $reply)}
+    <a href='{!echo $control->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id"}' class='card'>
       <div class='card-heading'>
-        <h5><?php echo $reply->title?></h5>
+        <h5>{!echo $reply->title?></h5>
       </div>
       <div class='card-content text-muted'>
-        <?php echo $lang->reply->addedDate;?> <?php echo substr($reply->addedDate, 2, -3);?>
+        {!echo $lang->reply->addedDate} {!echo substr($reply->addedDate, 2, -3)}
       </div>
     </a>
-    <?php endforeach;?>
+    {/foreach}
   </div>
   <div class='panel-footer'>
-    <?php $pager->show('justify');?>
+    {$pager->show('justify')}
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

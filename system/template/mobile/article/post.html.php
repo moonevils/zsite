@@ -22,7 +22,7 @@
           <div class='col-6'>
             <div class='form-group'>
               <label for='author' class='control-label'>{$lang->article->author}</label>
-              {!html::input('author', $this->app->user->account, "class='form-control'")}
+              {!html::input('author', $control->app->user->account, "class='form-control'")}
             </div>
           </div>
           <div class='col-6'>

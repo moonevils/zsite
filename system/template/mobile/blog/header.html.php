@@ -1,36 +1,36 @@
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
-<div class='block-region region-all-top blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
+{if($extView = $control->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
+<div class='block-region region-all-top blocks' data-region='all-top'>{$control->block->printRegion($layouts, 'all', 'top')}</div>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
-    <a href='<?php echo $webRoot;?>'>
-      <?php
-      $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
+    <a href='{!echo $webRoot}'>
+{*php*}
+      $logoSetting = isset($control->config->site->logo) ? json_decode($control->config->site->logo) : new stdclass();
       $logo        = false;
       if(isset($logoSetting->$templateName->themes->all))        $logo = $logoSetting->$templateName->themes->all;
       if(isset($logoSetting->$templateName->themes->$themeName)) $logo = $logoSetting->$templateName->themes->$themeName; 
       if($logo)
       {
-          $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
-          echo html::image($this->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{$this->config->company->name}' title='{$this->config->company->name}'");
+          $logo->extension = $control->loadModel('file')->getExtension($logo->pathname);
+          echo html::image($control->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{$control->config->company->name}' title='{$control->config->company->name}'");
       }
-      else
+{else}
       {
-          echo '<h4>' . $this->config->site->name . '</h4>';
+          echo '<h4>' . $control->config->site->name . '</h4>';
       }
-      ?>
+{*/php*}
     </a>
   </div>
   <div class='appbar-actions'>
-    <?php if(commonModel::isAvailable('search')):?>
+    {if(commonModel::isAvailable('search'))}
     <div class='dropdown'>
       <button type='button' class='btn' data-toggle='dropdown' id='searchToggle'><i class='icon-search'></i></button>
       <div class='dropdown-menu fade search-bar' id='searchbar'>
-        <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
+        <form action='{!echo helper::createLink('search')?>' method='get' role='search'>
           <div class='input-group'>
-            <?php $keywords = ($this->app->getModuleName() == 'search') ? $this->session->serachIngWord : '';?>
-            <?php echo html::input('words', $keywords, "class='form-control' placeholder=''");?>
-            <?php if($this->config->requestType == 'GET') echo html::hidden($this->config->moduleVar, 'search') . html::hidden($this->config->methodVar, 'index');?>
+            {$keywords = ($control->app->getModuleName() == 'search') ? $control->session->serachIngWord : ''}
+            {!echo html::input('words', $keywords, "class='form-control' placeholder=''")}
+            {if($control->config->requestType == 'GET') echo html::hidden($control->config->moduleVar, 'search') . html::hidden($control->config->methodVar, 'index')}
             <div class='input-group-btn'>
               <button class='btn default' type='submit'><i class='icon icon-search'></i></button>
             </div>
@@ -38,33 +38,33 @@
         </form>
       </div>
     </div>
-    <?php endif; ?>
+    {/if}
     <div class='dropdown'>
-      <?php if(!isset($this->config->site->type) or $this->config->site->type != 'blog'):?>
-      <?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i>', "class='btn'");?>
-      <?php endif; ?>
+      {if(!isset($control->config->site->type) or $control->config->site->type != 'blog')}
+      {!echo html::a($config->webRoot, '<i class="icon-home icon-large"></i>', "class='btn'")}
+      {/if}
 
       <button type='button' class='btn' data-toggle='dropdown'><i class='icon-bars'></i></button>
       <ul class='dropdown-menu dropdown-menu-right'>
-        <?php echo $this->config->siteNavHolder;;?>
+        {!echo $control->config->siteNavHolder;}
       </ul>
     </div>
   </div>
 </header>
 
-<?php $navs = $this->loadModel('nav')->getNavs('mobile_blog');?>
+{$navs = $control->loadModel('nav')->getNavs('mobile_blog')}
 <nav class='appnav fix-top appnav-auto' id='appnav'>
   <div class='mainnav'>
     <ul class='nav'>
-    <?php $subnavs = '';?>
-    <?php foreach($navs as $nav1):?>
-      <li class='<?php echo $nav1->class?>'>
-      <?php
+    {$subnavs = ''}
+    {foreach($navs as $nav1)}
+      <li class='{!echo $nav1->class?>'>
+{*php*}
       if(empty($nav1->children))
       {
           echo html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
       }
-      else
+{else}
       {
           echo html::a("#sub-{$nav1->class}", $nav1->title . " <i class='icon-caret-down'></i>", ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
           $subnavs .= "<ul class='nav' id='sub-{$nav1->class}'>\n";
@@ -75,7 +75,7 @@
               {
                   $subnavs .= html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : "data-toggle='modal' class='text-important'");
               }
-              else
+{else}
               {
                   $subnavs .= html::a("javascript:;", $nav2->title . " <i class='icon-caret-down'></i>", "data-toggle='dropdown' class='text-important'");
                   $subnavs .= "<ul class='dropdown-menu'>";
@@ -89,16 +89,16 @@
           }
           $subnavs .= "</ul>\n";
       }
-      ?>
+{*/php*}
       </li>
-    <?php endforeach;?><!-- end nav1 -->
+    {/foreach}<!-- end nav1 -->
     </ul>
   </div>
   <div class='subnavs fade'>
-    <?php echo $subnavs;?>
+    {!echo $subnavs}
   </div>
 </nav>
 
 <div class='block-region region-all-banner blocks' data-region='all-banner'>
-  <?php $this->block->printRegion($layouts, 'all', 'banner');?>
+  {$control->block->printRegion($layouts, 'all', 'banner')}
 </div>

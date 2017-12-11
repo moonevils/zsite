@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The oauth login view file of user for mobile template of chanzhiEPS.
  *
@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php
+{*/php*}
+{*php*}
 foreach($lang->user->oauth->providers as $providerCode => $providerName)
 {
     $thisConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
@@ -35,23 +35,23 @@ foreach($lang->user->oauth->providers as $providerCode => $providerName)
       }
 }
 if(!empty($providerConfig)):
-?>
+{*/php*}
 <div class="panel-heading">
-  <div class="title"><strong><?php echo $lang->user->oauth->lblWelcome;?></strong></div>
+  <div class="title"><strong>{!echo $lang->user->oauth->lblWelcome}</strong></div>
 </div>
 <div class="panel-body">
   <div class="row">
-    <?php $colClassWidth = count($providerConfig) > 1 ? 6 : 12;?>
-    <?php foreach ($providerConfig as $providerCode => $thisConfig): ?>
-    <div class="col-<?php echo $colClassWidth?>">
-    <?php
+    {$colClassWidth = count($providerConfig) > 1 ? 6 : 12}
+    {foreach ($providerConfig as $providerCode => $thisConfig)}
+    <div class="col-{!echo $colClassWidth?>">
+{*php*}
     $params = "provider=$providerCode&fingerprint=fingerprintval";
     $providerName = $lang->user->oauth->providers[$providerCode];
     if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
     echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$thisConfig->icon} icon'></i> " . $providerName, "class='btn btn-oauth block {$thisConfig->accent}' data-oauth='{$providerCode}'");
-    ?>
+{*/php*}
     </div>
-    <?php endforeach ?>
+    {/foreach ?>
   </div>
 </div>
 <script>
@@ -66,4 +66,4 @@ $(function()
 });
 </script>
 <hr>
-<?php endif; ?>
+{/if}

@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The wechat qrcode front view file of block module of chanzhiEPS.
  *
@@ -10,31 +10,31 @@
  * @link        http://www.chanzhi.org
 */
 $block->content = json_decode($block->content);
-$publicList = $this->loadModel('wechat')->getList();
-?>
-<?php if(!empty($publicList)):?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block hidden-sm hidden-xs <?php echo $blockClass;?>'>
+$publicList = $control->loadModel('wechat')->getList();
+{*/php*}
+{if(!empty($publicList))}
+<div id="block{!echo $block->id}" class='panel panel-block hidden-sm hidden-xs {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    {/if}
   </div>
   <div class='cards borderless with-icon'>
-    <?php foreach($publicList as $public):?>
+    {foreach($publicList as $public)}
     <div class='card'>
       <i class='icon icon-s3 icon-wechat bg-success circle'></i>
       <div class='card-content'>
-        <?php if($public->qrcode): ?>
+        {if($public->qrcode)}
         <div class='pull-right'>
-          <a href='###' class='bg-primary-pale text-primary block' data-toggle='modal' data-type='custom' data-custom="<div class='text-center'><?php echo html::image($public->qrcode);?></div>" data-icon='qrcode' data-title='<?php echo $public->name ?>'><i class='icon icon-s3 icon-qrcode'></i></a>
+          <a href='###' class='bg-primary-pale text-primary block' data-toggle='modal' data-type='custom' data-custom="<div class='text-center'>{!echo html::image($public->qrcode)}</div>" data-icon='qrcode' data-title='{!echo $public->name ?>'><i class='icon icon-s3 icon-qrcode'></i></a>
         </div>
-        <?php endif; ?>
-        <small class="text-muted"><?php echo $this->lang->wechatTip?></small>
-        <div class="lead"><?php echo $public->name;?></div>
+        {/if}
+        <small class="text-muted">{!echo $control->lang->wechatTip?></small>
+        <div class="lead">{!echo $public->name}</div>
       </div>
     </div>
-    <?php endforeach;?>
+    {/foreach}
   </div>
 </div>
-<?php endif;?>
+{/if}

@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The html template file of download method of file module of ZenTaoCMS.
  *
@@ -7,23 +7,23 @@
  * @package     ZenTaoCMS
  * @version     $Id$
  */
-?>
+{*/php*}
 <div class='panel'>
-<div class='panel-heading'><strong><?php echo $lang->score->lblNoScore;?></strong></div>
+<div class='panel-heading'><strong>{!echo $lang->score->lblNoScore}</strong></div>
 <table class='table table-form'> 
   <tr>
     <td>
-      <?php
+{*php*}
       printf($lang->score->lblNoScoreReason, $lang->score->methods[$method], $score, $app->user->score);
       echo '<ol>';
-      echo '<li>' . html::a($this->createLink('forum', 'index'), $lang->score->getByThread, "target='_blank'") . '</li>';
-      echo '<li>' . html::a($this->createLink('score', 'rule'), $lang->score->getScore, "target='_blank' class='btn'") . '</li>';
-      echo '<li>' . html::a($this->createLink('score', 'buyScore'), $lang->user->buyScore, "target='_blank'") . '</li>';
+      echo '<li>' . html::a($control->createLink('forum', 'index'), $lang->score->getByThread, "target='_blank'") . '</li>';
+      echo '<li>' . html::a($control->createLink('score', 'rule'), $lang->score->getScore, "target='_blank' class='btn'") . '</li>';
+      echo '<li>' . html::a($control->createLink('score', 'buyScore'), $lang->user->buyScore, "target='_blank'") . '</li>';
       echo '</ol>';
       echo $lang->score->lblDetail;
       echo html::a('#', $lang->goback, "onclick=history.go(-1) class='btn'");
-      echo html::a($this->createLink('user', 'logout'), $lang->login, "class='btn'");
-      ?>
+      echo html::a($control->createLink('user', 'logout'), $lang->login, "class='btn'");
+{*/php*}
     </td>
   </tr>  
 </table>

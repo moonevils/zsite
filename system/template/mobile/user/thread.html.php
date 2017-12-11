@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The thread view file of user for mobile template of chanzhiEPS.
  *
@@ -9,42 +9,42 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
+{*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-share'></i> <?php echo $lang->user->thread?></div>
+    <div class='title strong'><i class='icon icon-share'></i> {!echo $lang->user->thread?></div>
   </div>
   <div class='cards condensed cards-list'>
-    <?php foreach($threads as $thread):?>
-    <a href='<?php echo $this->createLink('thread', 'view', "id=$thread->id");?>' class='card'>
+    {foreach($threads as $thread)}
+    <a href='{!echo $control->createLink('thread', 'view', "id=$thread->id")}' class='card'>
       <div class='table-layout'>
         <div class='table-cell'>
           <div class='card-heading'>
-            <h5><?php echo $thread->title?></h5>
+            <h5>{!echo $thread->title?></h5>
           </div>
           <div class='card-content text-muted'>
-            <?php echo $lang->thread->postedDate;?> <?php echo substr($thread->addedDate, 2, -3);?>
+            {!echo $lang->thread->postedDate} {!echo substr($thread->addedDate, 2, -3)}
             &nbsp;&nbsp;
-            <i class='icon-eye-open'></i> <?php echo $thread->views;?>
+            <i class='icon-eye-open'></i> {!echo $thread->views}
           </div>
-          <?php if($thread->replies):?>
+          {if($thread->replies)}
           <div class='card-footer text-muted'>
-            <?php echo $lang->thread->lastReply;?> <?php echo substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedByRealname;?>
+            {!echo $lang->thread->lastReply} {!echo substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedByRealname}
           </div>
-          <?php endif; ?>
+          {/if}
         </div>
         <div class='table-cell middle thumbnail-cell text-right'>
-          <div class='counter text-right'><div class='title <?php echo $thread->replies > 0 ? '' : 'text-muted'; ?>'><?php echo $thread->replies;?></div><div class='caption text-muted small'><?php echo $lang->thread->replies;?></div></div>
+          <div class='counter text-right'><div class='title {!echo $thread->replies > 0 ? '' : 'text-muted'}'>{!echo $thread->replies}</div><div class='caption text-muted small'>{!echo $lang->thread->replies}</div></div>
         </div>
       </div>
     </a>
-    <?php endforeach;?>
+    {/foreach}
   </div>
   <div class='panel-footer'>
-    <?php $pager->show('justify');?>
+    {$pager->show('justify')}
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

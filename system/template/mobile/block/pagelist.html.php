@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The page list front view file of block module of chanzhiEPS.
  *
@@ -9,63 +9,63 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php 
+{*/php*}
+{*php*}
 /* Decode the content and get pages. */
 $content = json_decode($block->content);
-$pages   = $this->loadModel('article')->getPageList($content->limit);
-?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+$pages   = $control->loadModel('article')->getPageList($content->limit);
+{*/php*}
+<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($content->moreText) and !empty($content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    {/if}
   </div>
-  <?php if(isset($content->image)):?>
+  {if(isset($content->image))}
   <div class='panel-body no-padding'>
     <div class='cards condensed cards-list'>
-    <?php
+{*php*}
     foreach($pages as $page):
     $url = helper::createLink('page', 'view', "id=$page->id", "name=$page->alias");
-    ?>
-    <a class='card' href='<?php echo $url ?>'>
-      <div class='card-heading' style='color:<?php echo $page->titleColor;?>'><strong><?php echo $page->title;?></strong></div>
+{*/php*}
+    <a class='card' href='{!echo $url ?>'>
+      <div class='card-heading' style='color:{!echo $page->titleColor}'><strong>{!echo $page->title}</strong></div>
       <div class='table-layout'>
         <div class='table-cell'>
           <div class='card-content text-muted small'>
-            <strong class='text-important'><?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($page->addedDate, DT_DATE4);?></strong> &nbsp;<?php echo $page->summary;?>
+            <strong class='text-important'>{if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($page->addedDate, DT_DATE4)}</strong> &nbsp;{!echo $page->summary}
           </div>
         </div>
-        <?php if(!empty($page->image)): ?>
+        {if(!empty($page->image))}
         <div class='table-cell thumbnail-cell'>
-        <?php
+{*php*}
           $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-          echo html::image($this->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'" );
-        ?>
+          echo html::image($control->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'" );
+{*/php*}
         </div>
-        <?php endif; ?>
+        {/if}
       </div>
     </a>
-    <?php endforeach;?>
+    {/foreach}
     </div>
   </div>
-  <?php else:?>
+  {else}
   <div class='panel-body no-padding'>
     <div class='list-group simple'>
-      <?php foreach($pages as $page):?>
-      <?php $url = helper::createLink('page', 'view', "id={$page->id}", "name={$page->alias}");?>
-      <?php if(isset($content->time)):?>
+      {foreach($pages as $page)}
+      {$url = helper::createLink('page', 'view', "id={$page->id}", "name={$page->alias}")}
+      {if(isset($content->time))}
       <div class='list-group-item'>
-        <?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?>
-        <span class='pull-right text-muted'><?php echo substr($page->addedDate, 0, 10);?></span>
+        {!echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'")}
+        <span class='pull-right text-muted'>{!echo substr($page->addedDate, 0, 10)}</span>
       </div>
-      <?php else:?>
-      <div class='list-group-item'><?php echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'");?></div>
-      <?php endif;?>
+      {else}
+      <div class='list-group-item'>{!echo html::a($url, $page->title, "title='{$page->title}' style='color:{$page->titleColor}'")}</div>
+      {/if}
       
-      <?php endforeach;?>
+      {/foreach}
     </div>
   </div>
-  <?php endif;?>
+  {/if}
 </div>

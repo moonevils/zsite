@@ -10,15 +10,15 @@
  * @link        http://www.chanzhi.org
  */
 *}
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {include TPL_ROOT . 'common/files.html.php'}
 {!js::set('path', $article->path)}
 {!js::set('categoryID', $category->id)}
 {!js::set('categoryPath', explode(',', trim($category->path, ',')))}
 {!css::internal($article->css)}
 {!js::execute($article->js)}
-{!js::set('pageLayout', $this->block->getLayoutScope('article_view', $article->id))}
-<div class='block-region region-article-view-top blocks' data-region='article_view-top'>{$this->loadModel('block')->printRegion($layouts, 'article_view', 'top')}</div>
+{!js::set('pageLayout', $control->block->getLayoutScope('article_view', $article->id))}
+<div class='block-region region-article-view-top blocks' data-region='article_view-top'>{$control->loadModel('block')->printRegion($layouts, 'article_view', 'top')}</div>
 <div class='appheader'>
   <div class='heading'>
     <h2>{$article->title}</h2>
@@ -47,13 +47,13 @@
   </div>
   {if(!empty($article->files))}
   <section class="article-files">
-    {$this->loadModel('file')->printFiles($article->files)}
+    {$control->loadModel('file')->printFiles($article->files)}
   </section>
   {endif}
   <div class='panel-footer'>
     <div class='article-moreinfo clearfix hide'>
       {if($article->editor)}
-      {$editor = $this->loadModel('user')->getByAccount($article->editor)}
+      {$editor = $control->loadModel('user')->getByAccount($article->editor)}
       {if(!empty($editor))}
       <p class='text-right pull-right'>{printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate))}</p>
       {endif}
@@ -80,9 +80,9 @@
 
 {if(commonModel::isAvailable('message'))}
 <div id='commentBox'>
-  {!$this->fetch('message', 'comment', "objectType=article&objectID={$article->id}")}
+  {!$control->fetch('message', 'comment', "objectType=article&objectID={$article->id}")}
 </div>
 {endif}
 
-<div class='block-region region-article-view-bottom blocks' data-region='article_view-bottom'>{$this->loadModel('block')->printRegion($layouts, 'article_view', 'bottom')}</div>
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+<div class='block-region region-article-view-bottom blocks' data-region='article_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'article_view', 'bottom')}</div>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

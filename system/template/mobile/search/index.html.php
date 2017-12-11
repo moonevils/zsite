@@ -1,58 +1,58 @@
-<?php 
+{*php*}
 if(isset($config->site->type) and $config->site->type == 'blog')
 {
     include TPL_ROOT . 'blog/header.html.php';
 }
-else
+{else}
 {
-    include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
+    include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
 }
-?>
+{*/php*}
 <div class='panel panel-section'>
   <div class='panel-heading'>
-    <div class='titile'><i class='icon-search'></i> <?php echo $lang->search->index;?></div>
+    <div class='titile'><i class='icon-search'></i> {!echo $lang->search->index}</div>
   </div>
   <div class='cards condensed cards-list'>
-  <?php foreach($results as $object):?>
-    <a class='card' href='<?php echo $object->url?>'>
+  {foreach($results as $object)}
+    <a class='card' href='{!echo $object->url?>'>
       <div class='card-heading'>
-        <h5><?php echo $object->title?></h5>
+        <h5>{!echo $object->title?></h5>
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'><?php echo $object->summary;?></div>
+          <div class='card-content text-muted small'>{!echo $object->summary}</div>
           <div class='card-footer small text-muted'>
-            <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($object->addedDate, 0, 10);?></span>
+            <span title="{!echo $lang->article->addedDate}"><i class='icon-time'></i> {!echo substr($object->addedDate, 0, 10)}</span>
           </div>
         </div>
-        <?php if(!empty($object->image->primary)):?>
+        {if(!empty($object->image->primary))}
         <div class='table-cell thumbnail-cell'>
-          <?php
+{*php*}
           $title = $object->image->primary->title ? $object->image->primary->title : $object->title;
-          echo html::image($this->loadModel('file')->printFileURL($object->image->primary->pathname, $object->image->primary->extension, '', 'smallURL'), "title='{$title}' class='thumbnail'" );
-          ?>
+          echo html::image($control->loadModel('file')->printFileURL($object->image->primary->pathname, $object->image->primary->extension, '', 'smallURL'), "title='{$title}' class='thumbnail'" );
+{*/php*}
         </div>
-        <?php endif;?>
+        {/if}
       </div>
     </a>
-  <?php endforeach;?>
+  {/foreach}
   </div>
   <div class='panel-footer'>
-    <div class='small text-muted'><?php printf($lang->search->executeInfo, $pager->recTotal, $consumed);?></div>
+    <div class='small text-muted'>{!printf($lang->search->executeInfo, $pager->recTotal, $consumed)}</div>
     <hr class='space'>
-    <?php $pager->show('justify');?>
+    {$pager->show('justify')}
   </div>
 </div>
 <script>
 $(function(){$('#searchToggle').dropdown('toggle');});
 </script>
-<?php 
+{*php*}
 if(isset($config->site->type) and $config->site->type == 'blog')
 {
     include TPL_ROOT . 'blog/footer.html.php';
 }
-else
+{else}
 {
-    include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');
+    include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');
 }
-?>
+{*/php*}

@@ -1,19 +1,19 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <hr class='space'>
 <div class='panel-section'>
-  <div class='panel-heading'><strong><?php echo $lang->user->changePassword;?></strong></div>
+  <div class='panel-heading'><strong>{!echo $lang->user->changePassword}</strong></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='ajaxform'>
       <div class='form-group'>
-        <label class='control-label'><?php echo $lang->user->password;?></label>
-        <?php echo html::password('password1', '', "class='form-control'")?>
+        <label class='control-label'>{!echo $lang->user->password}</label>
+        {!echo html::password('password1', '', "class='form-control'")}
       </div>
       <div class='form-group'>
-        <label class='control-label'><?php echo $lang->user->password2;?></label>
-        <?php echo html::password('password2', '', "class='form-control'")?>
+        <label class='control-label'>{!echo $lang->user->password2}</label>
+        {!echo html::password('password2', '', "class='form-control'")}
       </div>
-      <?php echo html::submitButton($lang->user->submit,'btn primary block') . html::hidden('reset', $reset);?></td>
+      {!echo html::submitButton($lang->user->submit,'btn primary block') . html::hidden('reset', $reset)}</td>
     </form>
   </div>
 </div>  
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

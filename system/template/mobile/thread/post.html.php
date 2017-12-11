@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The post view file of thread for mobile template of chanzhiEPS.
  *
@@ -9,60 +9,60 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php $isRequestModal = helper::isAjaxRequest();?>
-<?php if($isRequestModal):?>
+{*/php*}
+{$isRequestModal = helper::isAjaxRequest()}
+{if($isRequestModal)}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> <?php echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'; ?></h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'}</h5>
     </div>
     <div class='modal-body'>
-<?php else: ?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
+{else}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <hr class='space'>
 <div class='panel-section'>
   <div class='panel-heading'>
-    <strong><i class='icon-pencil'></i> <?php echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'; ?></strong>
+    <strong><i class='icon-pencil'></i> {!echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'}</strong>
   </div>
   <div class='panel-body'>
-<?php endif;?>
-<form id='postThreadForm' method='post' action='<?php echo $this->createLink('thread', 'post', "boardID=$board->id");?>'>
+{/if}
+<form id='postThreadForm' method='post' action='{!echo $control->createLink('thread', 'post', "boardID=$board->id")}'>
   <div class='form-group'>
-    <?php echo html::input($titleInput, '', "class='form-control' placeholder='{$lang->thread->title}'");?>
+    {!echo html::input($titleInput, '', "class='form-control' placeholder='{$lang->thread->title}'")}
   </div>
   <div class='form-group'>
-    <?php echo html::textarea($contentInput, '', "class='form-control' rows='15' placeholder='{$lang->thread->content}'");?>
+    {!echo html::textarea($contentInput, '', "class='form-control' rows='15' placeholder='{$lang->thread->content}'")}
   </div>
-  <?php if($this->loadModel('file')->canUpload()):?>
+  {if($control->loadModel('file')->canUpload())}
   <?php // TODO: support upload files ?>
-  <?php endif;?>
-  <?php if($canManage):?>
+  {/if}
+  {if($canManage)}
   <div class='form-group'>
     <div class="checkbox">
       <label>
-        <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
+        {!echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
       </label>
     </div>
   </div>
-  <?php endif;?>
+  {/if}
   <table style='width: 100%'>
     <tr class='hide captcha-box'></tr>
   </table>
   <div class='form-group'>
-    <?php echo html::submitButton('', 'btn primary block');?>
+    {!echo html::submitButton('', 'btn primary block')}
   </div>
 </form>
-<?php if($isRequestModal):?>
+{if($isRequestModal)}
 </div><?php // end of modal-body ?>
   </div><?php // end of modal-content ?>
 </div><?php // end of modal-dialog ?>
-<?php else: ?>
+{else}
   </div><?php // end of panel-body ?>
 </div><?php // end of panel-section ?>
-<?php include TPL_ROOT . 'common/form.html.php';?>
-<?php endif;?>
+{include TPL_ROOT . 'common/form.html.php'}
+{/if}
 <script>
 $(function()
 {

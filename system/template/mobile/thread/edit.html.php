@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The edit view file of thread for mobile template of chanzhiEPS.
  *
@@ -9,36 +9,36 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+{*/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> <?php echo $lang->thread->edit . $lang->colon . $thread->title;?></h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->thread->edit . $lang->colon . $thread->title}</h5>
     </div>
     <div class='modal-body'>
-      <form id='editThreadForm' method='post' action='<?php echo $this->createLink('thread', 'edit', "threadID=$thread->id");?>'>
+      <form id='editThreadForm' method='post' action='{!echo $control->createLink('thread', 'edit', "threadID=$thread->id")}'>
         <div class='form-group'>
-          <?php echo html::input('title', $thread->title, "class='form-control' placeholder='{$lang->thread->title}'");?>
+          {!echo html::input('title', $thread->title, "class='form-control' placeholder='{$lang->thread->title}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::textarea('content', $thread->content, "class='form-control' rows='15' placeholder='{$lang->thread->content}'");?>
+          {!echo html::textarea('content', $thread->content, "class='form-control' rows='15' placeholder='{$lang->thread->content}'")}
         </div>
-        <?php if($canManage):?>
+        {if($canManage)}
         <div class='form-group'>
           <div class="checkbox">
             <label>
-              <?php $readonly = $thread->readonly ? 'checked' : '';?>
-              <?php echo "<input type='checkbox' name='readonly' value='1' {$readonly}/><span>{$lang->thread->readonly}</span>" ?>
+              {$readonly = $thread->readonly ? 'checked' : ''}
+              {!echo "<input type='checkbox' name='readonly' value='1' {$readonly}/><span>{$lang->thread->readonly}</span>" ?>
             </label>
           </div>
         </div>
-        <?php endif;?>
+        {/if}
         <table style='width: 100%'>
           <tr class='hide captcha-box'></tr>
         </table>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block');?>
+          {!echo html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
