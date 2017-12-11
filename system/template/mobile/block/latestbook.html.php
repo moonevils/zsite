@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The latest book view file of block module of chanzhiEPS.
  *
@@ -9,17 +9,15 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-{*/php*}
-{*php*}
-$content = json_decode($block->content);
-$orderBy = $content->sort == 'order' ? 'order' : 'addedDate_desc';
-$books   = $control->loadModel('book')->getLatestBookList($content->limit, $orderBy);
-{*/php*}
-<div id="block{!echo $block->id}" class="panel-cards panel panel-block {!echo $blockClass}">
+/php*}
+{$content = json_decode($block->content)}
+{$orderBy = $content->sort == 'order' ? 'order' : 'addedDate_desc'}
+{$books   = $model->loadModel('book')->getLatestBookList($content->limit, $orderBy)}
+<div id="block{$block->id}" class="panel-cards panel panel-block {$blockClass}">
   <div class='panel-heading'>
-    <strong>{!echo $icon} {!echo $block->title}</strong>
+    <strong>{$icon} {$block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if($content->showType == 'block')}
@@ -27,15 +25,15 @@ $books   = $control->loadModel('book')->getLatestBookList($content->limit, $orde
     <div class='cards cards-custom'>
       {foreach($books as $book)}
       {$recPerRow = $content->recPerRow}
-      <div class='pull-left with-padding' style="width:{!echo 100 / $recPerRow}%" data-recperrow="{!echo $recPerRow}">
+      <div class='pull-left with-padding' style="width:{!echo 100 / $recPerRow}%" data-recperrow="{$recPerRow}">
         <div class='card with-margin'>
           <div class='card-heading text-center'>
-            {!echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), $book->title)}
+            {!echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($model->get->fullScreen ? "?fullScreen={{$model->get->fullScreen}}" : ''), $book->title)}
           </div>
-          <div class='card-content text-muted text-center'>{!echo strip_tags($book->content)}</div>
+          <div class='card-content text-muted text-center'>{!strip_tags(htmlspecialchars_decode($book->content))}</div>
           <div class='card-actions'>
-            <span class='text-muted'><i class='icon-user'></i> {!echo $book->author}</span>
-            <span class='text-muted'><i class='icon-time'></i> {!echo formatTime($book->addedDate, 'Y-m-d')}</span>
+            <span class='text-muted'><i class='icon-user'></i> {$book->author}</span>
+            <span class='text-muted'><i class='icon-time'></i> {!formatTime($book->addedDate, 'Y-m-d')}</span>
           </div>
         </div>
       </div>
