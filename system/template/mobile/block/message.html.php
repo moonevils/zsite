@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The message view file of block module of chanzhiEPS.
  *
@@ -9,64 +9,64 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php $this->app->loadLang('message');?>
-<div id="block<?php echo $block->id;?>" class='panel-block-message panel panel-block <?php echo $blockClass;?>'>
-  <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $this->lang->message->post; ?></a>
+{*/php*}
+{$control->app->loadLang('message')}
+<div id="block{!echo $block->id}" class='panel-block-message panel panel-block {!echo $blockClass}'>
+  <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> {!echo $control->lang->message->post}</a>
   <div class='modal fade' id='commentDialog'>
     <div class='modal-dialog'>
       <div class='modal-content'>
         <div class='modal-header'>
           <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-          <h5 class='modal-title'><i class='icon-comment-alt'></i> <?php echo $this->lang->message->post;?></h5>
+          <h5 class='modal-title'><i class='icon-comment-alt'></i> {!echo $control->lang->message->post}</h5>
         </div>
         <div class='modal-body'>
-          <form method='post' id='commentForm' action="<?php echo helper::createLink('message', 'post', 'type=message');?>">
+          <form method='post' id='commentForm' action="{!echo helper::createLink('message', 'post', 'type=message')}">
             <div class='form-group'>
-              <?php 
-              echo html::textarea('content', '', "class='form-control' rows='3' placeholder='{$this->lang->message->content}'");
+{*php*}
+              echo html::textarea('content', '', "class='form-control' rows='3' placeholder='{$control->lang->message->content}'");
               echo html::hidden('objectType', 'message');
               echo html::hidden('objectID', 0);
-              ?>
+{*/php*}
             </div>
-            <?php if($this->session->user->account == 'guest'): ?>
+            {if($control->session->user->account == 'guest')}
             <div class='form-group required'>
-              <?php echo html::input('from', '', "class='form-control' placeholder='{$this->lang->message->from}'"); ?>
+              {!echo html::input('from', '', "class='form-control' placeholder='{$control->lang->message->from}'")}
             </div>
             <div class='form-group'>
-              <label><small class='text-important'><?php echo $this->lang->message->contactHidden;?></small></label>
-              <?php echo html::input('phone', '', "class='form-control' placeholder='{$this->lang->message->phone}'"); ?>
+              <label><small class='text-important'>{!echo $control->lang->message->contactHidden}</small></label>
+              {!echo html::input('phone', '', "class='form-control' placeholder='{$control->lang->message->phone}'")}
             </div>
             <div class='form-group'>
-              <?php echo html::input('qq', '', "class='form-control' placeholder='{$this->lang->message->qq}'"); ?>
+              {!echo html::input('qq', '', "class='form-control' placeholder='{$control->lang->message->qq}'")}
             </div>
             <div class='form-group'>
-              <?php echo html::input('email', '', "class='form-control' placeholder='{$this->lang->message->email}'"); ?>
+              {!echo html::input('email', '', "class='form-control' placeholder='{$control->lang->message->email}'")}
             </div>
-            <?php else: ?>
+            {else}
             <div class='form-group'>
               <span class='signed-user-info'>
-                <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->realname ;?></strong>
-                <?php if($this->session->user->email != ''): ?>
-                <span class='text-muted'>&nbsp;(<?php echo str2Entity($this->session->user->email);?>)</span>
-                <?php endif; ?>
+                <i class='icon-user text-muted'></i> <strong>{!echo $control->session->user->realname }</strong>
+                {if($control->session->user->email != '')}
+                <span class='text-muted'>&nbsp;({!echo str2Entity($control->session->user->email)})</span>
+                {/if}
               </span>
-              <?php
-              echo html::hidden('from',   $this->session->user->realname);
-              echo html::hidden('email',  $this->session->user->email); 
-              echo html::hidden('qq',     $this->session->user->qq); 
-              echo html::hidden('phone',  $this->session->user->phone); ?>
+{*php*}
+              echo html::hidden('from',   $control->session->user->realname);
+              echo html::hidden('email',  $control->session->user->email); 
+              echo html::hidden('qq',     $control->session->user->qq); 
+              echo html::hidden('phone',  $control->session->user->phone)}
             </div>
-            <?php endif; ?>
+            {/if}
             <div class='form-group'>
               <div class='checkbox'>
-                <label><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $this->lang->comment->receiveEmail; ?></label>
+                <label><input type='checkbox' name='receiveEmail' value='1' checked /> {!echo $control->lang->comment->receiveEmail}</label>
               </div>
             </div>
             <div class='form-group hide captcha-box'></div>
             <div class='form-group'>
-              <?php echo html::submitButton('', 'btn primary');?>&nbsp; 
-              <small class="text-important"><?php echo $this->lang->comment->needCheck;?></small>
+              {!echo html::submitButton('', 'btn primary')}&nbsp; 
+              <small class="text-important">{!echo $control->lang->comment->needCheck}</small>
             </div>
           </form>
         </div>

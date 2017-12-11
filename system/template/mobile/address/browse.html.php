@@ -10,8 +10,8 @@
  * @link        http://www.chanzhi.org
  */
 *}
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 
 <div class='panel-section'>
   <div class='panel-heading'>
@@ -59,4 +59,4 @@ $(function()
 </script>
 {/noparse}
 {include TPL_ROOT . 'common/form.html.php'}
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

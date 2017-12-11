@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The category front view file of block module of chanzhiEPS.
  *
@@ -9,41 +9,41 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php
-$this->loadModel('tree');
+{*/php*}
+{*php*}
+$control->loadModel('tree');
 $block->content  = json_decode($block->content);
 $type            = str_replace('tree', '', strtolower($block->type));
 $browseLink      = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($type) . 'BrowseLink';
 $startCategory = 0;
 if(isset($block->content->fromCurrent) and $block->content->fromCurrent)
 {
-    if($type == 'article' and $this->app->getModuleName() == 'article' and $this->session->articleCategory)
+    if($type == 'article' and $control->app->getModuleName() == 'article' and $control->session->articleCategory)
     {
-        $category = $this->tree->getByID($this->session->articleCategory);
+        $category = $control->tree->getByID($control->session->articleCategory);
         $startCategory = $category->parent;
     }
 
-    if($type == 'blog' and $this->app->getModuleName() == 'blog' and $this->session->articleCategory)
+    if($type == 'blog' and $control->app->getModuleName() == 'blog' and $control->session->articleCategory)
     {
-        $category = $this->tree->getByID($this->session->articleCategory);
+        $category = $control->tree->getByID($control->session->articleCategory);
         $startCategory = $category->parent;
     }
 
-    if($type == 'product' and $this->app->getModuleName() == 'product' and $this->session->productCategory)
+    if($type == 'product' and $control->app->getModuleName() == 'product' and $control->session->productCategory)
     {
-        $category = $this->tree->getByID($this->session->productCategory);
+        $category = $control->tree->getByID($control->session->productCategory);
         $startCategory = $category->parent;
     }
 }
-?>
-<?php if($block->content->showChildren):?>
-<?php $treeMenu = $this->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink));?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block panel-block-article-tree <?php echo $blockClass;?>'>
+{*/php*}
+{if($block->content->showChildren)}
+{$treeMenu = $control->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink))}
+<div id="block{!echo $block->id}" class='panel panel-block panel-block-article-tree {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
+    <strong>{!echo $icon . $block->title}</strong>
   </div>
-  <div class='panel-body'><?php echo $treeMenu;?></div>
+  <div class='panel-body'>{!echo $treeMenu}</div>
 </div>
 <style>
 .tree {padding: 0; margin: 0;}
@@ -57,23 +57,23 @@ if(isset($block->content->fromCurrent) and $block->content->fromCurrent)
 .tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 12px; height: 20px; border-top: 1px dashed #ccc;}
 .tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
 </style>
-<?php else:?>
-<?php $topCategories = $this->tree->getChildren($startCategory, $type);?>
-<div id="block<?php echo $block->id?>" class='panel panel-block panel-block-article-tree <?php echo $blockClass;?>'>
+{else}
+{$topCategories = $control->tree->getChildren($startCategory, $type)}
+<div id="block{!echo $block->id?>" class='panel panel-block panel-block-article-tree {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
+    <strong>{!echo $icon . $block->title}</strong>
   </div>
   <div class='panel-body no-padding'>
     <ul class='nav'>
-      <?php
+{*php*}
       foreach($topCategories as $topCategory)
       {
           $browseLink = helper::createLink($type, 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
           if($type == 'blog') $browseLink = helper::createLink('blog', 'index', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
           echo '<li>' . html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{$topCategory->id}'") . '</li>';
       }
-      ?>
+{*/php*}
     </ul>
   </div>
 </div>
-<?php endif;?>
+{/if}

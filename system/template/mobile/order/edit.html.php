@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The edit view file of order module of chanzhiEPS.
  *
@@ -9,38 +9,38 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+{*/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> <?php echo $lang->order->edit;?></h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->order->edit}</h5>
     </div>
     <div class='modal-body'>
-      <form method='post' id='editOrderForm' action="<?php echo inlink('edit', "orderID={$order->id}");?>">
-        <?php $address = json_decode($order->address);?>
+      <form method='post' id='editOrderForm' action="{!echo inlink('edit', "orderID={$order->id}")}">
+        {$address = json_decode($order->address)}
         <div class='form-group pad-lable-left'>
-          <?php echo html::input('contact', $address->contact, "class='form-control'");?>
-          <label for='contact'><?php echo $lang->order->contact;?></label>
+          {!echo html::input('contact', $address->contact, "class='form-control'")}
+          <label for='contact'>{!echo $lang->order->contact}</label>
         </div>
         <div class='form-group pad-lable-left'>
-          <?php echo html::input('phone', $address->phone, "class='form-control'");?>
-          <label for='phone'><?php echo $lang->order->phone;?></label>
+          {!echo html::input('phone', $address->phone, "class='form-control'")}
+          <label for='phone'>{!echo $lang->order->phone}</label>
         </div>
         <div class='form-group pad-lable-left'>
-          <?php echo html::input('address', $address->address, "class='form-control'");?>
-          <label for='address'><?php echo $lang->order->address;?></label>
+          {!echo html::input('address', $address->address, "class='form-control'")}
+          <label for='address'>{!echo $lang->order->address}</label>
         </div>
         <div class='form-group pad-lable-left'>
-          <?php echo html::input('zipcode', $address->zipcode, "class='form-control'");?>
-          <label for='zipcode'><?php echo $lang->order->zipcode;?></label>
+          {!echo html::input('zipcode', $address->zipcode, "class='form-control'")}
+          <label for='zipcode'>{!echo $lang->order->zipcode}</label>
         </div>
         <div class='form-group pad-lable-left'>
-          <?php echo html::input('note', $order->note, "class='form-control'");?>
-          <label for='note'><?php echo $lang->order->frontNote;?></label>
+          {!echo html::input('note', $order->note, "class='form-control'")}
+          <label for='note'>{!echo $lang->order->frontNote}</label>
         </div>
         <div class='form-group form-group-actions'>
-          <?php echo html::submitButton('', 'btn block primary');?>
+          {!echo html::submitButton('', 'btn block primary')}
         </div>
       </form>
     </div>

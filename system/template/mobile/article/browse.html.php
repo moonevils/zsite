@@ -10,15 +10,15 @@
  * @link        http://www.chanzhi.org
  */
 *}
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {$path = array_keys($category->pathNames)}
 {!js::set('path', $path)}
 {!js::set('categoryID', $category->id)}
-{!js::set('pageLayout', $this->block->getLayoutScope('article_browse', $category->id))}
+{!js::set('pageLayout', $control->block->getLayoutScope('article_browse', $category->id))}
 {if(isset($articleList))}<script>{!"place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';"}</script>
 {else}<script>{!"place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {/if}
-<div class='block-region blocks region-top' data-region='article_browse-top'>{$this->loadModel('block')->printRegion($layouts, 'article_browse', 'top')}</div>
+<div class='block-region blocks region-top' data-region='article_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'article_browse', 'top')}</div>
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
     <div class='title'><strong>{$category->name}</strong></div>
@@ -50,7 +50,7 @@
         {if(!empty($article->image))}
         <div class='table-cell thumbnail-cell'>
         {$title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-         !html::image($this->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'");
+         !html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'");
         }
         </div>
         {/if}
@@ -63,6 +63,6 @@
   </div>
 </div>
 
-<div class='block-region blocks region-bottom' data-region='article_browse-bottom'>{$this->loadModel('block')->printRegion($layouts, 'article_browse', 'bottom')}</div>
+<div class='block-region blocks region-bottom' data-region='article_browse-bottom'>{$control->loadModel('block')->printRegion($layouts, 'article_browse', 'bottom')}</div>
 
-{include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
