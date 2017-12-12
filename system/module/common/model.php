@@ -1564,6 +1564,7 @@ class commonModel extends model
     {
         global $config, $lang;
         $chanzhiVersion = $config->version;
+        $isProVersion   = strpos($chanzhiVersion, 'pro') !== false;
         if($isProVersion) $chanzhiVersion = str_replace('pro', '', $chanzhiVersion);
         printf($lang->poweredBy, $config->version, k(), "<span class='" . ($isProVersion ? 'icon-chanzhi-pro' : 'icon-chanzhi') . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);
     }

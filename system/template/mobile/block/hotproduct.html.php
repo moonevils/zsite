@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The hot product front view file of block module of chanzhiEPS.
  *
@@ -9,5 +9,5 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'block', 'latestproduct');?>
+/php*}
+{include $model->loadModel('ui')->getEffectViewFile('mobile', 'block', 'latestproduct')}

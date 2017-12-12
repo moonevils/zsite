@@ -19,7 +19,7 @@
           <tbody>
             {foreach($messages as $message)}
             <tr class='text-center'>
-              <td><input type='checkbox' name='messages[]' value="{!echo $message->id?>" /></td>
+              <td><input type='checkbox' name='messages[]' value="{$message->id}" /></td>
               <td class='hidden-xxxs'>{!echo $message->from}</td>
               <td class='hidden-xxs'>{!echo substr($message->date, 5)}</td>
               <td class='text-left break-all'>{!echo $message->content}</td>

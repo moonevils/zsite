@@ -47,13 +47,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
             {if($control->app->user->admin == 'super')}
             <span class='input-group-addon'>
               <label class='checkbox-inline'>
-                {!echo "<input type='checkbox' name='isLink' id='isLink' value='1'/><span>{$lang->thread->isLink}</span>" ?>
+                <input type='checkbox' name='isLink' id='isLink' value='1'/><span>{$lang->thread->isLink}</span>
               </label>
             </span>
             {/if}
             <span class='input-group-addon threadInfo'>
               <label class='checkbox-inline'>
-                {!echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
+                <input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>
               </label>
             </span>
             <span class='input-group-addon threadInfo'>

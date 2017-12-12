@@ -1,9 +1,9 @@
-<?php 
-include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
-?>
-<?php $common->printPositionBar($this->app->getModuleName());?>
+{*php*}
+include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
+{*/php*}
+{$common->printPositionBar($control->app->getModuleName())}
 <div class='panel' id='links'>
-  <div class='panel-heading'><strong><i class='icon-link'></i> <?php echo $lang->links->common;?></strong></div>
-  <div class='panel-body'><?php echo $links->all;?></div>
+  <div class='panel-heading'><strong><i class='icon-link'></i> {!echo $lang->links->common}</strong></div>
+  <div class='panel-body'>{!echo $links->all}</div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer'); ?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

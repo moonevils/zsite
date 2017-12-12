@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The edit mail view file of user for mobile template of chanzhiEPS.
  *
@@ -9,32 +9,32 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+{*/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->user->setEmail;?></h5>
+      <h5 class='modal-title'><i class='icon-edit'></i> {!echo $lang->user->setEmail}</h5>
     </div>
     <div class='modal-body'>
-      <form id='editMailForm' method='post' action="<?php echo inlink('setemail');?>">
+      <form id='editMailForm' method='post' action="{!echo inlink('setemail')}">
         <div class='form-group'>
-          <label for='oldPwd' class='control-label'><?php echo $lang->user->password;?></label>
-          <?php echo html::password('oldPwd', '', "class='form-control' placeholder='{$lang->user->placeholder->password}'");?>
+          <label for='oldPwd' class='control-label'>{!echo $lang->user->password}</label>
+          {!echo html::password('oldPwd', '', "class='form-control' placeholder='{$lang->user->placeholder->password}'")}
         </div>
-        <?php if($user->email != ''):?>
+        {if($user->email != '')}
         <div class='form-group'>
-          <label for='captcha' class='control-label'><?php echo $lang->user->captcha;?></label>
-          <?php echo html::input('captcha', '', "class='form-control' placeholder='{$lang->user->placeholder->verifyCode}'");?>
-          <?php echo html::a($this->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn default'");?>
+          <label for='captcha' class='control-label'>{!echo $lang->user->captcha}</label>
+          {!echo html::input('captcha', '', "class='form-control' placeholder='{$lang->user->placeholder->verifyCode}'")}
+          {!echo html::a($control->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn default'")}
         </div>
-        <?php endif;?>
+        {/if}
         <div class='form-group'>
-          <label for='email' class='control-label'><?php echo $lang->user->newEmail;?></label>
-          <?php echo html::input('email', '', "class='form-control'");?>
+          <label for='email' class='control-label'>{!echo $lang->user->newEmail}</label>
+          {!echo html::input('email', '', "class='form-control'")}
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block');?>
+          {!echo html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>

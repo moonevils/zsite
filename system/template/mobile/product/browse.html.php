@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The browse view file of product for mobile template of chanzhiEPS.
  *
@@ -9,51 +9,51 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<script><?php echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';";?></script>
-<?php js::set('pageLayout', $this->block->getLayoutScope('product_browse', $category->id));?>
-<div class='block-region region-top blocks' data-region='product_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'top');?></div>
+{*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+<script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
+{!js::set('pageLayout', $control->block->getLayoutScope('product_browse', $category->id))}
+<div class='block-region region-top blocks' data-region='product_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'product_browse', 'top')}</div>
 <div class='panel-section'>
   <div class='panel-heading page-header'>
-    <div class='title'><strong><?php echo $category->name;?></strong></div>
+    <div class='title'><strong>{!echo $category->name}</strong></div>
   </div>
   <div class='panel-body'>
-    <?php
+{*php*}
     $count = count($products);
     if($count == 0) $count = 1;
     $recPerRow = min($count, 2);
-    ?>
-    <div class='cards cards-products' data-cols='<?php echo $recPerRow?>' id='products'>
-      <style><?php echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"; ?></style>
-      <?php
+{*/php*}
+    <div class='cards cards-products' data-cols='{!echo $recPerRow?>' id='products'>
+      <style>{!echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"}</style>
+{*php*}
       $index = 0;
       foreach($products as $product):
-      ?>
-      <?php $rowIndex = $index % $recPerRow; ?>
-      <?php if($rowIndex === 0): ?>
+{*/php*}
+      {$rowIndex = $index % $recPerRow}
+      {if($rowIndex === 0)}
       <div class='row'>
-      <?php endif; ?>
+      {/if}
 
-      <div class='col col-custom-<?php echo $recPerRow?>'>
-      <?php $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"); ?>
-        <div class='card' id='product<?php echo $product->id?>' data-ve='product'>
-          <a class='card-img' href='<?php echo $url?>'>
-            <?php
+      <div class='col col-custom-{!echo $recPerRow?>'>
+      {$url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias")}
+        <div class='card' id='product{!echo $product->id?>' data-ve='product'>
+          <a class='card-img' href='{!echo $url?>'>
+{*php*}
             if(empty($product->image))
             {
                 $imgColor = $product->id * 57 % 360;
                 echo "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
             }
-            else
+{else}
             {
-                $imgsrc = $this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL');
+                $imgsrc = $control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL');
                 echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imgsrc}'> ";
             }
-            ?>
+{*/php*}
           </a>
           <div class='card-content'>
-            <?php
+{*php*}
             echo "<a href='{$url}' style='color:{$product->titleColor}'>{$product->name}</a>";
             if(!$product->unsaleable)
             {
@@ -61,37 +61,37 @@
                 {
                     echo "<div><strong class='text-danger'>" . $lang->product->negotiate . '</strong></div>';
                 }
-                else
+{else}
                 {
                     if($product->promotion != 0)
                     {
-                        echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
+                        echo "<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->promotion . '</strong>';
                         if($product->price != 0)
                         {
-                            echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
+                            echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $control->config->product->currencySymbol . $product->price . '</small>';
                         }
                         echo "</div>";
                     }
                     else if($product->price != 0)
                     {
-                        echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong></div>';
+                        echo "<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->price . '</strong></div>';
                     }
                 }
             }
-            ?>
+{*/php*}
           </div>
         </div>
       </div>
 
-      <?php if($recPerRow === 1 || $rowIndex === ($recPerRow - 1)): ?>
+      {if($recPerRow === 1 || $rowIndex === ($recPerRow - 1))}
       </div>
-      <?php endif; ?>
-      <?php $index++; ?>
-      <?php endforeach; ?>
+      {/if}
+      {$index++}
+      {/foreach}
     </div>
   </div>
-  <div class='panel-footer'><?php $pager->show('justify');?></div>
+  <div class='panel-footer'>{$pager->show('justify')}</div>
 </div>
 
-<div class='block-region region-bottom blocks' data-region='product_browse-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom');?></div>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+<div class='block-region region-bottom blocks' data-region='product_browse-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom')}</div>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

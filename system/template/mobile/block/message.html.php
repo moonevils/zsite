@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The message view file of block module of chanzhiEPS.
  *
@@ -9,64 +9,61 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php $this->app->loadLang('message');?>
-<div id="block<?php echo $block->id;?>" class='panel-block-message panel panel-block <?php echo $blockClass;?>'>
-  <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $this->lang->message->post; ?></a>
+/php*}
+{$app->loadLang('message')}
+<div id="block{$block->id}" class='panel-block-message panel panel-block {$blockClass}'>
+  <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> {$lang->message->post}</a>
   <div class='modal fade' id='commentDialog'>
     <div class='modal-dialog'>
       <div class='modal-content'>
         <div class='modal-header'>
           <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-          <h5 class='modal-title'><i class='icon-comment-alt'></i> <?php echo $this->lang->message->post;?></h5>
+          <h5 class='modal-title'><i class='icon-comment-alt'></i> {$lang->message->post}</h5>
         </div>
         <div class='modal-body'>
-          <form method='post' id='commentForm' action="<?php echo helper::createLink('message', 'post', 'type=message');?>">
+          <form method='post' id='commentForm' action="{! helper::createLink('message', 'post', 'type=message')}">
             <div class='form-group'>
-              <?php 
-              echo html::textarea('content', '', "class='form-control' rows='3' placeholder='{$this->lang->message->content}'");
-              echo html::hidden('objectType', 'message');
-              echo html::hidden('objectID', 0);
-              ?>
+              {!html::textarea('content', '', "class='form-control' rows='3' placeholder='{{$lang->message->content}}'")}
+              {!html::hidden('objectType', 'message')}
+              {!html::hidden('objectID', 0)}
             </div>
-            <?php if($this->session->user->account == 'guest'): ?>
+            {if($model->session->user->account == 'guest')}
             <div class='form-group required'>
-              <?php echo html::input('from', '', "class='form-control' placeholder='{$this->lang->message->from}'"); ?>
+              {!echo html::input('from', '', "class='form-control' placeholder='{{$lang->message->from}}'")}
             </div>
             <div class='form-group'>
-              <label><small class='text-important'><?php echo $this->lang->message->contactHidden;?></small></label>
-              <?php echo html::input('phone', '', "class='form-control' placeholder='{$this->lang->message->phone}'"); ?>
+              <label><small class='text-important'>{$lang->message->contactHidden}</small></label>
+              {!echo html::input('phone', '', "class='form-control' placeholder='{{$lang->message->phone}}'")}
             </div>
             <div class='form-group'>
-              <?php echo html::input('qq', '', "class='form-control' placeholder='{$this->lang->message->qq}'"); ?>
+              {!echo html::input('qq', '', "class='form-control' placeholder='{{$lang->message->qq}}'")}
             </div>
             <div class='form-group'>
-              <?php echo html::input('email', '', "class='form-control' placeholder='{$this->lang->message->email}'"); ?>
+              {!echo html::input('email', '', "class='form-control' placeholder='{{$lang->message->email}}'")}
             </div>
-            <?php else: ?>
+            {else}
             <div class='form-group'>
               <span class='signed-user-info'>
-                <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->realname ;?></strong>
-                <?php if($this->session->user->email != ''): ?>
-                <span class='text-muted'>&nbsp;(<?php echo str2Entity($this->session->user->email);?>)</span>
-                <?php endif; ?>
+                <i class='icon-user text-muted'></i> <strong>{!echo $session->user->realname }</strong>
+                {if($session->user->email != '')}
+                <span class='text-muted'>&nbsp;({!echo str2Entity($session->user->email)})</span>
+                {/if}
               </span>
-              <?php
-              echo html::hidden('from',   $this->session->user->realname);
-              echo html::hidden('email',  $this->session->user->email); 
-              echo html::hidden('qq',     $this->session->user->qq); 
-              echo html::hidden('phone',  $this->session->user->phone); ?>
+              {!html::hidden('from',   $session->user->realname)}
+              {!html::hidden('email',  $session->user->email)}
+              {!html::hidden('qq',     $session->user->qq)} 
+              {!html::hidden('phone',  $session->user->phone)}
             </div>
-            <?php endif; ?>
+            {/if}
             <div class='form-group'>
               <div class='checkbox'>
-                <label><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $this->lang->comment->receiveEmail; ?></label>
+                <label><input type='checkbox' name='receiveEmail' value='1' checked /> {!echo $lang->comment->receiveEmail}</label>
               </div>
             </div>
             <div class='form-group hide captcha-box'></div>
             <div class='form-group'>
-              <?php echo html::submitButton('', 'btn primary');?>&nbsp; 
-              <small class="text-important"><?php echo $this->lang->comment->needCheck;?></small>
+              {!html::submitButton('', 'btn primary')}&nbsp; 
+              <small class="text-important">{$lang->comment->needCheck}</small>
             </div>
           </form>
         </div>
@@ -74,7 +71,7 @@
     </div>
   </div>
 </div>
-
+{noparse}
 <script>
 $(function()
 {
@@ -87,13 +84,14 @@ $(function()
             if(window.v)
             {
                 $commentForm.find('#content').val('');
-                setTimeout($.refreshCommentList, 200)
+                setTimeout($.refreshCommentList, 200);
             }
         }
         if(response.reason == 'needChecking')
         {
             $commentForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
-    }});
+    } });
 });
 </script>
+{/noparse}

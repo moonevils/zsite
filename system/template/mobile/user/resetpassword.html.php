@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The reset password view file of user for mobile template of chanzhiEPS.
  *
@@ -9,19 +9,19 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php
-include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
-?>
+{*/php*}
+{*php*}
+include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
+{*/php*}
 <hr class='space'>
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title'><strong><?php echo $lang->user->sendRecoverEmail;?></strong></div>
+    <div class='title'><strong>{!echo $lang->user->sendRecoverEmail}</strong></div>
   </div>
   <div class='panel-body'>
     <div id='successMsg' class='hide alert bg-primary-pale text-center'>
       <i class='icon-info-sign icon icon-x3 block'></i>
-      <h5><?php echo $lang->user->resetPassword->success?></h5>
+      <h5>{!echo $lang->user->resetPassword->success?></h5>
     </div> 
     <form method='post' id='resetPwdForm'>
       <div class='form-group hide form-message alert text-danger bg-danger-pale'>
@@ -29,15 +29,15 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
         <div class='content'></div>
       </div>
       <div class='form-group'>
-        <?php echo html::input('account', '', "class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?>
+        {!echo html::input('account', '', "class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'")}
       </div>
       <div class='form-group'>
-        <?php echo html::submitButton($lang->user->submit,'btn primary block');?>
+        {!echo html::submitButton($lang->user->submit,'btn primary block')}
       </div>
     </form>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/form.html.php'; ?>
+{include TPL_ROOT . 'common/form.html.php'}
 <script>
 $(function()
 {
@@ -51,4 +51,4 @@ $(function()
     }});
 });
 </script>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

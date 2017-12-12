@@ -6,7 +6,7 @@
       <div class='panel'>
         <div class='panel-heading'><strong><i class='icon-envelope-alt'></i> {!echo $lang->user->submission}</strong>
           <div class='panel-actions'>
-            {!commonModel::printLink('article', 'post', '', '<i class="icon-plus"></i> ' . $lang->article->post, 'class="btn btn-primary"')}
+            {@commonModel::printLink('article', 'post', '', '<i class="icon-plus"></i> ' . $lang->article->post, 'class="btn btn-primary"')}
           </div>
         </div>
         {if(!empty($articles))}
@@ -42,8 +42,8 @@
               <td class='text-center'>{!echo $article->views}</td>
               <td class='text-center'>
               {if($article->submission != 2)}
-                 {!commonModel::printLink('article', 'modify', "articleID=$article->id", $lang->edit)}
-                 {!commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"')}
+                 {@commonModel::printLink('article', 'modify', "articleID=$article->id", $lang->edit)}
+                 {@commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"')}
               {else}
                  {!echo html::a('javascript:;', $lang->edit, "class='disabled'") . html::a('javascript:;', $lang->delete, "class='disabled'")}
               {/if}

@@ -1,5 +1,5 @@
 name:Default
-parser:default
+parser:raintpl
 code:default
 author:Chanzhi
 desc:This is the default template of chanzhieps.
