@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The html template file of deny method of user module of chanzhiEPS.
  *
@@ -8,11 +8,12 @@
  * @package     chanzhiEPS
  * @version     $Id: deny.html.php 824 2010-05-02 15:32:06Z wwccss $
  */
-$moduleName = isset($lang->$module->common)  ? $lang->$module->common  : $module;
-$methodName = isset($lang->$module->$method) ? $lang->$module->$method : $method;
-$methodName = is_object($methodName) ? $methodName->common : $methodName; 
-include TPL_ROOT . 'common/header.lite.html.php';
-{*/php*}
+/php*}
+{$moduleName = isset($lang->$module->common)  ? $lang->$module->common  : $module}
+{$methodName = isset($lang->$module->$method) ? $lang->$module->$method : $method}
+{$methodName = is_object($methodName) ? $methodName->common : $methodName}
+{include TPL_ROOT . 'common/header.lite.html.php'}
+{noparse}
 <script>
 $(function()
 {
@@ -32,6 +33,7 @@ $(function()
 .alert-deny {max-width: 500px; margin: 8% auto; padding: 0; background-color: #FFF; border: 1px solid #DDD; box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2); border-radius: 6px;}
 .btn-link {border-color: none!important}
 </style>
+{/noparse}
 <div class='container w-200px'>
   <div class='alert with-icon alert-deny'>
     <i class='icon-frown icon'></i>

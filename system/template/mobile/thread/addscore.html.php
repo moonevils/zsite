@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The award score view file of thread module of chanzhiEPS.
  *
@@ -9,25 +9,25 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+{*/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> <?php echo $lang->thread->score;?></h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->thread->score}</h5>
     </div>
     <div class='modal-body'>
-      <form id='addScoreForm' method='post' action='<?php echo $this->createLink('thread', 'addscore', "account=$account&objectType=$objectType&objectID=$objectID");?>'>
+      <form id='addScoreForm' method='post' action='{!echo $control->createLink('thread', 'addscore', "account=$account&objectType=$objectType&objectID=$objectID")}'>
         <div class='form-group'>
-          <label for='count' class='control-label'><?php echo $lang->score->count;?></label>
-          <?php echo html::input('count', '', "class='form-control'");?>
+          <label for='count' class='control-label'>{!echo $lang->score->count}</label>
+          {!echo html::input('count', '', "class='form-control'")}
         </div>
         <div class='form-group'>
-          <label for='note' class='control-label'><?php echo $lang->score->note;?></label>
-          <?php echo html::textarea('note', '', "class='form-control' rows='2'");?>
+          <label for='note' class='control-label'>{!echo $lang->score->note}</label>
+          {!echo html::textarea('note', '', "class='form-control' rows='2'")}
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block');?>
+          {!echo html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>

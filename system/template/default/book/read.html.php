@@ -118,7 +118,7 @@
     </div>
     <div class='col-md-9'>
   {/if}
-  <div class='article book-content' id='book' data-id='{!echo $article->id?>'>
+  <div class='article book-content' id='book' data-id='{$article->id}'>
     <header>
       <h2>{!echo $article->title}</h2>
       <dl class='dl-inline'>

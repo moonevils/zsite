@@ -23,8 +23,8 @@
   {if($thisModuleName == 'user' and $thisMethodName == 'deny')} <meta http-equiv='refresh' content="5;url='{$url= helper::createLink('index')}'"> {/if} 
   {if(!isset($title))} {$title=''} {/if}
   {if(!empty($title))} {$title="$title . $lang->minus"} {/if}
-  {if(!empty($keywords))} {$keywords=$config->site->keywords} {/if}
-  {if(!empty($desc))} {$desc=$title=$config->site->desc} {/if}
+  {if(!isset($keywords) or !empty($keywords))} {$keywords=$config->site->keywords} {/if}
+  {if(!isset($desc) or !empty($desc))} {$desc=$title=$config->site->desc} {/if}
 
   {!html::title($title . $config->site->name)}
   {!html::meta('keywords', $keywords)}
@@ -59,30 +59,28 @@
 {!html::icon($favicon)}
 {!html::rss(helper::createLink('rss', 'index', '', '', 'xml'), $config->site->name)}
 
-<!--[if lt IE 9]>
-{if($config->debug)}
-{!js::import($jsRoot . 'html5shiv/min.js')}
-{!js::import($jsRoot . 'respond/min.js')}
-{else}
-  {if($cdnRoot)}
-    <link href="' . $cdnRoot . '/js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
-    <link href="/js/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
-    {!js::import($jsRoot . 'html5shiv/min.js')}
-    {!js::import($jsRoot . 'respond/min.js')}
-    {!js::import($jsRoot . 'respond/cross-domain/respond.proxy.js')}
+{$browser = helper::getBrowser()}
+{if($browser['name'] == 'ie' and $browser['version'] <= 9)}
+  {if($config->debug)}
+  	{!js::import($jsRoot . 'html5shiv/min.js')}
+  	{!js::import($jsRoot . 'respond/min.js')}
   {else}
-    {!js::import($jsRoot . 'chanzhi.all.ie8.js');}
-    {!js::import($jsRoot . 'chanzhi.all.ie8.js')}
+  	{if($cdnRoot)}
+	  <link href="{$cdnRoot}/js/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+      <link href="/js/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+      {!js::import($jsRoot . 'html5shiv/min.js')}
+      {!js::import($jsRoot . 'respond/min.js')}
+      {!js::import($jsRoot . 'respond/cross-domain/respond.proxy.js')}
+  	{else}
+	  {!js::import($jsRoot . 'chanzhi.all.ie8.js')}
+  	{/if}
   {/if}
 {/if}
-<![endif]-->
-<!--[if lt IE 10]>
-{if($config->debug)}
-{!js::import($jsRoot . 'jquery/placeholder/min.js')}
-{else}
-{!js::import($jsRoot . 'chanzhi.all.ie9.js')}
+{if($browser['name'] == 'ie' and $browser['version'] <= 10)}
+  {if($config->debug)} {!js::import($jsRoot . 'jquery/placeholder/min.js')} {/if}
+  {if(!$config->debug)} {!js::import($jsRoot . 'chanzhi.all.ie9.js')} {/if}
 {/if}
-<![endif]-->
+
 {!js::set('lang', $lang->js)}
 {if(!empty($config->oauth->sina) and !is_object($config->oauth->sina))}
   {$sina=json_decode($config->oauth->sina)}
@@ -96,8 +94,8 @@
 {!js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js')}
 {/if}
 {$baseCustom=isset($config->template->custom) ? json_decode($config->template->custom, true) : array()}
-{if(!empty($baseCustom[$template][$theme]['js']))}
-{!js::execute($baseCustom[$template][$theme]['js'])}
+{if(!empty($baseCustom[CHANZHI_TEMPLATE][CHANZHI_THEME]['js']))}
+{!js::execute($baseCustom[CHANZHI_THEME][CHANZHI_THEME]['js'])}
 {/if}
 {$control->block->printRegion($layouts, 'all', 'header')}
 </head>

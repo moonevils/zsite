@@ -3,32 +3,24 @@
   {include TPL_ROOT . 'user/side.html.php'}
   <div class='col-md-10'>
     <div class='panel'>
-      <div class='panel-heading'><strong>{!echo $lang->score->confirm}</strong></div>
+      <div class='panel-heading'><strong>{$lang->score->confirm}</strong></div>
       <table class='table'>
         <tr>
-          <th>{!echo $lang->score->id}</th>
-          <th>{!echo $lang->score->product}</th>
-          {if(!empty($order->ip))}
-          <th>IP</th>
-          {/if}
-          {if(!empty($order->hostID))}
-          <th>MAC</th>
-          {/if}
-          <th width='50'>{!echo $lang->score->amount}</th>
+          <th>{$lang->score->id}</th>
+          <th>{$lang->score->product}</th>
+          {if(!empty($order->ip))} <th>IP</th> {/if}
+          {if(!empty($order->hostID))} <th>MAC</th> {/if}
+          <th width='50'>{$lang->score->amount}</th>
         </tr>
         <tr class='text-center'> 
-          <td>{!echo $order->humanOrder}</td>
-          <td>{!echo $order->subject}</td>
-          {if(!empty($order->ip))}
-          <td>{!echo $order->ip}</td>
-          {/if}
-          {if(!empty($order->hostID))}
-          <td>{!echo $order->hostID}</td>
-          {/if}
-          <td>{!echo $order->amount}</td>
+          <td>{$order->humanOrder}</td>
+          <td>{$order->subject}</td>
+          {if(!empty($order->ip))} <td>{$order->ip}</td> {/if}
+          {if(!empty($order->hostID))} <td>{$order->hostID}</td> {/if}
+          <td>{$order->amount}</td>
         </tr>
         <tr class='text-center'>
-          <td colspan='5'>{!echo html::a($payLink, $lang->score->alipay, "class='btn btn-primary btn-lg'")}</td>
+          <td colspan='5'>{!html::a($payLink, $lang->score->alipay, "class='btn btn-primary btn-lg'")}</td>
         </tr>
       </table>
     </div>

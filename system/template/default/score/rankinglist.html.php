@@ -11,28 +11,26 @@
     {/foreach}
     </ul>
     {else}
-    <strong>{!echo $lang->score->rule}</strong>
+      <strong>{!echo $lang->score->rule}</strong>
     {/if}
   </div>
   <div class='panel-body'>
     <div class='row'>
       <div class='col-md-3'>
         <div class='panel'>
-    	  <div class='panel-heading'>{!echo $lang->score->totalRank}</div>
+    	  <div class='panel-heading'>{$lang->score->totalRank}</div>
           <div class='panel-body'>
             <dl>
               {$i = 1}
               {foreach($allScore as $ranking)}
-              {if($ranking->account == 'guest') continue}
+              {if($ranking->account == 'guest')} {continue} {/if}
               <dt>
-                <span class='strong'>Top{!echo $i?></span>
-{*php*}
-                $basicInfo = $users[$ranking->account];
-                echo $basicInfo->realname;
-{*/php*}
+                <span class='strong'>Top{!echo $i}</span>
+                {$basicInfo = $users[$ranking->account]}
+                {$basicInfo->realname}
               </dt>
-              <dd>{!echo $ranking->score?></dd>
-              {$i++}
+              <dd>{!echo $ranking->score}</dd>
+              {@$i++}
               {/foreach}
             </dl>
           </div>
@@ -40,22 +38,20 @@
       </div>
       <div class='col-md-3'>
         <div class='panel'>
-          <div class='panel-heading'>{!echo $lang->score->monthRank}</div>
+          <div class='panel-heading'>{$lang->score->monthRank}</div>
           <div class='panel-body'>
             <dl>
               {$i = 1}
               {foreach($monthScore as $ranking)}
-              {if($ranking->account == 'guest') continue}
+              {if($ranking->account == 'guest')} {continue} {/if}
               <dt>
-                <span class='strong'>Top{!echo $i?></span>
-{*php*}
-                $ranking->account = trim($ranking->account);
-                $basicInfo = $users[$ranking->account];
-                echo $basicInfo->realname;
-{*/php*}
+                <span class='strong'>Top{!echo $i}</span>
+                {$ranking->account = trim($ranking->account)}
+                {$basicInfo = $users[$ranking->account]}
+                {$basicInfo->realname}
               </dt>
-              <dd>{!echo $ranking->sumScore?></dd>
-              {$i++}
+              <dd>{!echo $ranking->sumScore}</dd>
+              {@$i++}
               {/foreach}
             </dl>
           </div>
@@ -63,22 +59,20 @@
       </div>
       <div class='col-md-3'>
         <div class='panel'>
-          <div class='panel-heading'>{!echo $lang->score->weekRank}</div>
+          <div class='panel-heading'>{$lang->score->weekRank}</div>
           <div class='panel-body'>
             <dl>
               {$i = 1}
               {foreach($weekScore as $ranking)}
-              {if($ranking->account == 'guest') continue}
-              <dt>
-                <span class='strong'>Top{!echo $i?></span>
-{*php*}
-                $ranking->account = trim($ranking->account);
-                $basicInfo = $users[$ranking->account];
-                echo $basicInfo->realname;
-{*/php*}
-              </dt>
-              <dd>{!echo $ranking->sumScore?></dd>
-              {$i++}
+                {if($ranking->account == 'guest')} {continue} {/if}
+                <dt>
+                  <span class='strong'>Top{$i}</span>
+                  {$ranking->account = trim($ranking->account)}
+                  {$basicInfo = $users[$ranking->account]}
+                  {$basicInfo->realname}
+                </dt>
+                <dd>{$ranking->sumScore}</dd>
+                {@$i++}
               {/foreach}
             </dl>
           </div>
@@ -86,22 +80,20 @@
       </div>
       <div class='col-md-3'>
         <div class='panel'>
-          <div class='panel-heading'>{!echo $lang->score->dayRank}</div>
+          <div class='panel-heading'>{$lang->score->dayRank}</div>
           <div class='panel-body'>
             <dl>
               {$i = 1}
               {foreach($dayScore as $ranking)}
-              {if($ranking->account == 'guest') continue}
-              <dt>
-                <span class='strong'>Top{!echo $i?></span>
-{*php*}
-                $ranking->account = trim($ranking->account);
-                $basicInfo = $users[$ranking->account];
-                echo $basicInfo->realname;
-{*/php*}
-              </dt>
-              <dd>{!echo $ranking->sumScore?></dd>
-              {$i++}
+                {if($ranking->account == 'guest')} {continue} {/if}
+                <dt>
+                  <span class='strong'>Top{!echo $i}</span>
+                  {$ranking->account = trim($ranking->account)}
+                  {$basicInfo = $users[$ranking->account]}
+                  {$basicInfo->realname}
+                </dt>
+                <dd>{!echo $ranking->sumScore}</dd>
+                {@$i++}
               {/foreach}
             </dl>
           </div>

@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The control view file of user for mobile template of chanzhiEPS.
  *
@@ -9,13 +9,13 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
+{*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <hr class='space'>
 <div class='panel panel-body panel-section'>
-  <div class='alert bg-primary-pale'><?php printf($lang->user->control->welcome, $this->app->user->realname);?></div>
+  <div class='alert bg-primary-pale'>{!printf($lang->user->control->welcome, $control->app->user->realname)}</div>
 </div>
 
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

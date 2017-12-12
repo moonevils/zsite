@@ -11,6 +11,7 @@
 */
 ?>
 <?php
+if(!isset($block)) $block = new stdclass();
 if(!isset($block->content)) $block->content = '';
 if(!is_object($block->content)) $content = $block->content;
 if(is_object($block->content))  $content = isset($block->content->content) ? $block->content->content : '';

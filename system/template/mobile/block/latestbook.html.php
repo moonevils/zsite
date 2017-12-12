@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The latest book view file of block module of chanzhiEPS.
  *
@@ -9,58 +9,56 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php
-$content = json_decode($block->content);
-$orderBy = $content->sort == 'order' ? 'order' : 'addedDate_desc';
-$books   = $this->loadModel('book')->getLatestBookList($content->limit, $orderBy);
-?>
-<div id="block<?php echo $block->id;?>" class="panel-cards panel panel-block <?php echo $blockClass;?>">
+/php*}
+{$content = json_decode($block->content)}
+{$orderBy = $content->sort == 'order' ? 'order' : 'addedDate_desc'}
+{$books   = $model->loadModel('book')->getLatestBookList($content->limit, $orderBy)}
+<div id="block{$block->id}" class="panel-cards panel panel-block {$blockClass}">
   <div class='panel-heading'>
-    <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
-    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
-    <?php endif;?>
+    <strong>{$icon} {$block->title}</strong>
+    {if(isset($content->moreText) and isset($content->moreUrl))}
+      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    {/if}
   </div>
-  <?php if($content->showType == 'block'):?>
+  {if($content->showType == 'block')}
   <div class='panel-body'>
     <div class='cards cards-custom'>
-      <?php foreach($books as $book):?>
-      <?php $recPerRow = $content->recPerRow;?>
-      <div class='pull-left with-padding' style="width:<?php echo 100 / $recPerRow;?>%" data-recperrow="<?php echo $recPerRow;?>">
+      {foreach($books as $book)}
+      {$recPerRow = $content->recPerRow}
+      <div class='pull-left with-padding' style="width:{!echo 100 / $recPerRow}%" data-recperrow="{$recPerRow}">
         <div class='card with-margin'>
           <div class='card-heading text-center'>
-            <?php echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : ''), $book->title);?>
+            {!echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($model->get->fullScreen ? "?fullScreen={{$model->get->fullScreen}}" : ''), $book->title)}
           </div>
-          <div class='card-content text-muted text-center'><?php echo strip_tags($book->content);?></div>
+          <div class='card-content text-muted text-center'>{!strip_tags(htmlspecialchars_decode($book->content))}</div>
           <div class='card-actions'>
-            <span class='text-muted'><i class='icon-user'></i> <?php echo $book->author;?></span>
-            <span class='text-muted'><i class='icon-time'></i> <?php echo formatTime($book->addedDate, 'Y-m-d');?></span>
+            <span class='text-muted'><i class='icon-user'></i> {$book->author}</span>
+            <span class='text-muted'><i class='icon-time'></i> {!formatTime($book->addedDate, 'Y-m-d')}</span>
           </div>
         </div>
       </div>
-      <?php endforeach;?>
+      {/foreach}
     </div>
   </div>
-  <?php else:?>
+  {else}
   <div class='panel-body'>
     <div class='list-group simple'>
-      <?php foreach($books as $book):?>
+      {foreach($books as $book)}
       <div class='list-group-item'>
-        <?php echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias"), $book->title);?>
-        <span class='pull-right text-muted'><?php echo substr($book->addedDate, 0, 10);?></span>
+        {!echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias"), $book->title)}
+        <span class='pull-right text-muted'>{!echo substr($book->addedDate, 0, 10)}</span>
       </div>
-      <?php endforeach;?>
+      {/foreach}
     </div>
   </div>
-  <?php endif;?>
+  {/if}
 </div>
 
-<?php if($content->showType == 'block'):?>
+{if($content->showType == 'block')}
 <style>
 .card .card-heading{height: 100px; font-size: 15px; white-space: normal; display: table; width: 100%;}
 .card .card-heading a{display: table-cell; vertical-align: middle;}
 .card-content{height: 80px;}
 .card-actions{position: relative; bottom:5px; left: 5px;}
 </style>
-<?php endif;?>
+{/if}

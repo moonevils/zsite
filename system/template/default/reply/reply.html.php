@@ -1,6 +1,6 @@
-{*php*}
+{*php
 /**
- * The edit view file of reply module of chanzhiEPS.
+ * The reply view file of reply module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {if($control->thread->hasManagePriv($control->app->user->account, $board->owners)) $config->thread->editor->editreply['tools'] = 'full'}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 {include TPL_ROOT . 'common/kindeditor.html.php'}
@@ -26,13 +26,12 @@
     <tr>
       <th>{!echo $lang->thread->file}</th>
       <td>
-{*php*}
-{if($reply->files)
-      {
-          foreach($reply->files as $file) echo html::a($file->fullURL, $file->title . '.' . $file->extension, "target='_blank'") . ' ' . html::linkButton('Ｘ', inlink('deleteFile', "fileID=$file->id&objectID=$reply->id&objectType=reply"), 'btn btn-default', '', 'hiddenwin');
-      }
-      echo $control->fetch('file', 'buildForm');
-{*/php*}
+        {if($reply->files)}
+          {foreach($reply->files as $file)}
+            {!html::a($file->fullURL, $file->title . '.' . $file->extension, "target='_blank'") . ' ' . html::linkButton('Ｘ', inlink('deleteFile', "fileID=$file->id&objectID=$reply->id&objectType=reply"), 'btn btn-default', '', 'hiddenwin')}
+          {/foreach}
+          {$control->fetch('file', 'buildForm')}
+        {/if}
       </td>
     </tr>
     <tr>

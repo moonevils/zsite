@@ -20,7 +20,7 @@
 <div class='panel' id='panel-404'>
   <h1>404 <small> - {!echo $lang->error->pageNotFound}</small></h1>
   <p><small>{!echo $lang->error->searchTip}</small></p>
-  <form action='{!echo helper::createLink('search')?>' method='get' role='search'>
+  <form action='{!echo helper::createLink('search')}' method='get' role='search'>
     <div class='input-group'>
       {$keywords = ($control->app->getModuleName() == 'search') ? $control->session->serachIngWord : ''}
       {!echo html::input('words', $keywords, "class='form-control' placeholder=''")}

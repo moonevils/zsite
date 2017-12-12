@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The browse view file of order for mobile template of chanzhiEPS.
  * The file should be used as ajax content
@@ -10,26 +10,26 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
+{*/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-shopping-cart'></i> <?php echo $lang->order->admin?></div>
+    <div class='title strong'><i class='icon icon-shopping-cart'></i> {!echo $lang->order->admin?></div>
   </div>
   <div class='panel-body' id='orderListWrapper'>
     <div class='cards' id='orderList'>
-      <?php foreach($orders as $order):?>
+      {foreach($orders as $order)}
       <div class='card'>
         <div class='card-heading bg-gray-pale'>
-          #<?php echo $order->id;?> &nbsp; &nbsp;
-          <span><?php echo $lang->order->amount;?>: <strong class='text-danger'>
-            <?php 
+          #{!echo $order->id} &nbsp; &nbsp;
+          <span>{!echo $lang->order->amount}: <strong class='text-danger'>
+{*php*}
               echo isset($order->balance) ? $order->amount + $order->balance : $order->amount;
-              echo isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '';
+              echo isset($control->config->product->currencySymbol) ? $control->config->product->currencySymbol : '';
             ?></strong></span> 
           <div class='pull-right'>
-            <?php
+{*php*}
             switch ($order->status)
             {
                 case 'normal':
@@ -56,22 +56,22 @@
                   $statusClass = '';
                   break;
             }
-            ?>
-            <span class='text-<?php echo $statusClass?>'><?php echo $this->order->processStatus($order);?></span>
+{*/php*}
+            <span class='text-{!echo $statusClass?>'>{!echo $control->order->processStatus($order)}</span>
           </div>
         </div>
         <div class='list-group simple'>
-        <?php foreach($order->products as $product):?>
+        {foreach($order->products as $product)}
           <div class='list-group-item'>
-            <?php echo html::a(helper::createLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName, "class='text-primary'");?>
+            {!echo html::a(helper::createLink('product', 'view', "id={$product->productID}", "target='_blank'"), $product->productName, "class='text-primary'")}
             <div class='pull-right'>
-              <?php echo '<small class="text-muted">' . $lang->order->price . $lang->colon . '</small>' . $product->price . ' &nbsp;<small class="text-muted">' . $lang->order->count . $lang->colon . '</small>' . $product->count; ?>
+              {!echo '<small class="text-muted">' . $lang->order->price . $lang->colon . '</small>' . $product->price . ' &nbsp;<small class="text-muted">' . $lang->order->count . $lang->colon . '</small>' . $product->count}
             </div>
           </div>
-        <?php endforeach;?>
+        {/foreach}
         </div>
         <div class='card-footer'>
-          <?php
+{*php*}
             $history = '<li>' . $lang->order->createdDate . $lang->colon .  $order->createdDate . '</li>';
             if($order->payment != 'COD' and ($order->paidDate > $order->createdDate)) $history .= '<li>' . $lang->order->paidDate . $lang->colon .  $order->paidDate . '</li>';
             if($order->deliveriedDate > $order->createdDate) $history .= '<li>' . $lang->order->deliveriedDate . $lang->colon .  $order->deliveriedDate . '</li>';
@@ -79,17 +79,17 @@
             if($order->payment == 'COD' and ($order->paidDate > $order->createdDate)) $history .= '<li>' . $lang->order->paidDate . $lang->colon .  $order->paidDate . '</li>';
             if($order->note) $history .= '<li>' . $lang->order->note . $lang->colon . $order->note . '</li>';
             echo "<ul class='order-track-list text-muted'>{$history}</ul>";
-          ?>
+{*/php*}
         </div>
         <div class='card-footer order-actions text-right'>
-          <?php $this->order->printActions($order);?>
+          {$control->order->printActions($order)}
         </div>
       </div>
-      <?php endforeach;?>
+      {/foreach}
     </div>
   </div>
   <div class='panel-footer'>
-    <?php $pager->show('justify');?>
+    {$pager->show('justify')}
   </div>
 </div>
 <script>
@@ -103,17 +103,17 @@ $(function()
     $(document).on('click', '.cancelLink', function(e)
     {
         var $this   = $(this);
-        var options = $.extend({url: $this.data('rel'), confirm: '<?php echo $lang->order->cancelWarning?>', onSuccess: refreshOrderList}, $this.data());
+        var options = $.extend({url: $this.data('rel'), confirm: '{!echo $lang->order->cancelWarning?>', onSuccess: refreshOrderList}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     }).on('click', '.confirmDelivery', function(e)
     {
         var $this   = $(this);
-        var options = $.extend({url: $this.data('rel'), confirm: "<?php echo $lang->order->confirmWarning?>", onSuccess: refreshOrderList}, $this.data());
+        var options = $.extend({url: $this.data('rel'), confirm: "{!echo $lang->order->confirmWarning?>", onSuccess: refreshOrderList}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     });
 });
 </script>
-<?php include TPL_ROOT . 'common/form.html.php';?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include TPL_ROOT . 'common/form.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

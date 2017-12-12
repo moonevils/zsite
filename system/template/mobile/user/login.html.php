@@ -1,9 +1,9 @@
-<?php
-if(isset($this->config->site->front) and $this->config->site->front == 'login')
+{*php*}
+if(isset($control->config->site->front) and $control->config->site->front == 'login')
 {
     include  TPL_ROOT . 'user/login.admin.html.php';
 }
-else
+{else}
 {
-    include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'login.front');
+    include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'login.front');
 }

@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The browse view file of address for mobile template of chanzhiEPS.
  *
@@ -9,49 +9,45 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side');?>
+*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <button type='button' class='btn primary block' data-toggle='modal' data-remote='<?php echo inlink('create'); ?>'><i class='icon icon-plus'></i> <?php echo $lang->address->create?></button>
+    <button type='button' class='btn primary block' data-toggle='modal' data-remote='{inlink('create')}'><i class='icon icon-plus'></i>{$lang->address->create}</button>
   </div>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-map-marker'></i> <?php echo $lang->address->browse?></div>
+    <div class='title strong'><i class='icon icon-map-marker'></i>{$lang->address->browse}</div>
   </div>
   <div id='addressListWrapper'>
     <div class='cards condensed cards-list' id='addressList'>
-      <?php foreach($addresses as $address):?>
-      <?php
-        if(!isset($checked)) $checked = 'checked';
-        else $checked = '';
-      ?>
+      {foreach($addresses as $address)}
+        {$checked = isset($checked) ? '' : 'checked'}
       <div class='card'>
         <div class='card-heading'>
-          <?php if(helper::isAjaxRequest()):?>
-          <input type='radio' <?php echo $checked;?> name='deliveryAddress' value='<?php echo $address->id;?>'/>
-          <?php endif;?>
-          <strong class='lead'><?php echo $address->contact;?></strong>
-          &nbsp;&nbsp;<span class='text-special'><i class='icon icon-phone'></i> <?php echo str2Entity($address->phone);?></span>
+          {if(helper::isAjaxRequest())} <input type='radio' {$checked} name='deliveryAddress' value='{$address->id}'/>{/if}
+          <strong class='lead'>{$address->contact}</strong>
+          &nbsp;&nbsp;<span class='text-special'><i class='icon icon-phone'></i>{str2Entity($address->phone)}</span>
         </div>
         <div class='card-content'>
-          <?php echo $address->address;?> <span class='text-muted'>(<?php echo $lang->address->zipcode ?>: <?php echo $address->zipcode;?>)</span>
+          {$address->address}<span class='text-muted'>({$lang->address->zipcode} : {$address->zipcode})</span>
         </div>
         <div class='card-footer'>
-          <?php echo html::a(helper::createLink('address', 'edit', "id={$address->id}"), $lang->edit, "class='editor text-primary' data-toggle='modal'");?>&nbsp;&nbsp;
-          <?php echo html::a(helper::createLink('address', 'delete', "id={$address->id}"), $lang->delete, "class='deleter text-danger'");?>
+          {!html::a(helper::createLink('address', 'edit', "id={$address->id}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}&nbsp;&nbsp;
+          {!html::a(helper::createLink('address', 'delete', "id={$address->id}"), $lang->delete, "class='deleter text-danger'")}
         </div>
       </div>
-      <?php endforeach;?>
+      {/foreach}
     </div>
   </div>
-  <?php if(count($addresses) >= 5): ?>
+  {if(count($addresses) >= 5)}
   <div class='panel-footer'>
-    <button type='button' class='btn primary block' data-toggle='modal' data-remote='<?php echo inlink('create'); ?>'><i class='icon icon-plus'></i> <?php echo $lang->address->create?></button>
+    <button type='button' class='btn primary block' data-toggle='modal' data-remote='{!inlink('create')}'><i class='icon icon-plus'></i> {$lang->address->create}</button>
   </div>
-  <?php endif; ?>
+  {/if}
 </div>
+{noparse}
 <script>
 $(function()
 {
@@ -61,5 +57,6 @@ $(function()
     };
 });
 </script>
-<?php include TPL_ROOT . 'common/form.html.php';?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{/noparse}
+{include TPL_ROOT . 'common/form.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

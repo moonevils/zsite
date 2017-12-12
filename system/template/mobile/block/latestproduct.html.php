@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The hot product front view file of block module of chanzhiEPS.
  *
@@ -9,166 +9,121 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php
-$content  = json_decode($block->content);
-$type     = str_replace('product', '', strtolower($block->type));
-$method   = 'get' . $type;
-if(empty($content->category)) $content->category = 0;
-$showImage = isset($content->image) ? true : false;
-$products = $this->loadModel('product')->$method($content->category, $content->limit, $showImage);
-?>
-<div id="block<?php echo $block->id;?>" class="<?php echo $showImage ? 'panel-cards with-cards ' : '' ?>panel panel-block <?php echo $blockClass;?>">
+/php*}
+{$content  = json_decode($block->content)}
+{$type     = str_replace('product', '', strtolower($block->type))}
+{$method   = 'get' . $type}
+{if(empty($content->category))} {$content->category = 0} {/if}
+{$showImage = isset($content->image) ? true : false}
+{$products = $model->loadModel('product')->$method($content->category, $content->limit, $showImage)}
+{*/php*}
+<div id="block{!echo $block->id}" class="{!echo $showImage ? 'panel-cards with-cards ' : ''}panel panel-block {!echo $blockClass}">
   <div class='panel-heading'>
-    <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
-    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon} {!echo $block->title}</strong>
+    {if(isset($content->moreText) and isset($content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    {/if}
   </div>
-  <?php if($showImage):?>
+  {if($showImage)}
   <div class='panel-body no-padding'>
-    <?php
-    $count = count($products);
-    if($count == 0) $count = 1;
-    $recPerRow = min($count, max(1, zget($content, 'recPerRow', 1)));
-    ;?>
-    <div class='cards cards-products' data-cols='<?php echo $recPerRow?>'>
-      <style><?php echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"; ?></style>
-      <?php
-      $index = 0;
-      foreach($products as $product):
-      ?>
-      <?php $rowIndex = $index % $recPerRow; ?>
-      <?php if($rowIndex === 0): ?>
-      <div class='row'>
-      <?php endif; ?>
-
-      <div class='col col-custom-<?php echo $recPerRow?>' data-rowIndex='<?php echo $rowIndex ?>' data-index='<?php echo $index ?>'>
-      <?php $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"); ?>
+    {$count = count($products)}
+    {if($count == 0)} {$count = 1} {/if}
+    {$recPerRow = min($count, max(1, zget($content, 'recPerRow', 1)))}
+    <div class='cards cards-products' data-cols='{$recPerRow}'>
+      <style>.col-custom-{$recPerRow} { width: " . (100/{$recPerRow}) %}</style>
+      {$index = 0}
+      {foreach($products as $product)}
+        {$rowIndex = $index % $recPerRow}
+        {if($rowIndex === 0)} <div class='row'> {/if}
+      <div class='col col-custom-{$recPerRow}' data-rowIndex='{$rowIndex}' data-index='{$index}'>
+      {$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
         <div class='card'>
-          <a class='card-img' href='<?php echo $url?>'>
-            <?php
-            if(empty($product->image))
-            {
-                $imgColor = $product->id * 57 % 360;
-                echo "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
-            }
-            else
-            {
-                $imageSrc = $this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL');
-                echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imageSrc}'> ";
-            }
-            ?>
+          <a class='card-img' href='{$url}'>
+            {if(empty($product->image))}
+              {$imgColor = $product->id * 57 % 360}
+              <div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>
+            {else}
+                {$imageSrc = $model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL')}
+                <img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imageSrc}'>
+            {/if}
           </a>
           <div class='card-content'>
-            <?php
-            if(isset($content->showCategory) and $content->showCategory == 1)
-            {
-                if($content->categoryName == 'abbr')
-                {
-                    $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';
-                    echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName, "class='text-special'");
-                }
-                else
-                {
-                    echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ', "class='text-special'");
-                }
-            }
-            if(isset($content->alignTitle) and $content->alignTitle == 'middle')
-            {
-                echo "<div style='text-align:center;'><a href='{$url}'>{$product->name}</a></div>";
-            }
-            else
-            {
-                echo "<div><a href='{$url}'>{$product->name}</a></div>";
-            }
-            echo "<div>";
-            if(!$product->unsaleable)
-            {
-                if($product->negotiate)
-                { 
-                    echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
-                }
-                else
-                {
-                    if($product->promotion != 0)
-                    {
-                        echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-                        if($product->price != 0)
-                        {
-                            echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>';
-                        }
-                    }
-                    else if($product->price != 0)
-                    {
-                        echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
-                    }
-                }
-            }
-            if(isset($content->showViews) and $content->showViews)
-            {
-                echo " <span> ";
-                echo "<i class='icon icon-eye-open'> </i>" . $product->views;
-                echo "</span>";
-            }
-            echo "</div>";
-            ?>
+            {if(isset($content->showCategory) and $content->showCategory == 1)}
+                {if($content->categoryName == 'abbr')}
+                    {$categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] '}
+                    {!html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), $categoryName, "class='text-special'")}
+                {else}
+                    {!html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), '[' . $product->category->name . '] ', "class='text-special'")}
+                {/if}
+            {/if}
+            {if(isset($content->alignTitle) and $content->alignTitle == 'middle')}
+              <div style='text-align:center;'><a href='{$url}'>{$product->name}</a></div>
+            {else}
+              <div><a href='{$url}'>{$product->name}</a></div>
+            {/if}
+            <div>
+            {if(!$product->unsaleable)}
+              {if($product->negotiate)}
+                <strong class='text-danger'>{$model->lang->product->negotiate}</strong>
+              {else}
+                {if($product->promotion != 0)}
+                  <strong class='text-danger'>{$config->product->currencySymbol} {$product->promotion}</strong>
+                  {if($product->price != 0)}
+                    &nbsp;&nbsp;<small class='text-muted text-line-through'>{$config->product->currencySymbol} {$product->price}</small>
+                  {/if}
+                {elseif($product->price != 0)}
+                  <strong class='text-danger'>{$config->product->currencySymbol} {$product->price}</strong>
+                {/if}
+              {/if}
+            {/if}
+            {if(isset($content->showViews) and $content->showViews)}
+              <span> <i class='icon icon-eye-open'> </i>{$product->views} </span>
+            {/if}
+            </div>
           </div>
         </div>
       </div>
-      <?php if($recPerRow === 1 || $rowIndex === ($recPerRow - 1) || $count === ($index + 1)): ?>
-      </div>
-      <?php endif; ?>
-      <?php $index++; ?>
-      <?php endforeach; ?>
+      {if($recPerRow === 1 || $rowIndex === ($recPerRow - 1) || $count === ($index + 1))}
+        </div>
+      {/if}
+      {@$index++}
+      {/foreach}
     </div>
   </div>
-  <?php else:?>
+  {else}
   <div class='panel-body no-padding'>
     <div class='list-group simple'>
-      <?php
-      foreach($products as $product):
-      $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
-      ?>
+      {foreach($products as $product)}
+      {$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
       <div class='list-group-item'>
         <span class='text-latin pull-right'>
-        <?php
-        if(!$product->unsaleable)
-        {
-            if($product->negotiate)
-            { 
-                echo "<strong class='text-danger'>" . $this->lang->product->negotiate . '</strong>';
-            }
-            else
-            {
-                if($product->promotion != 0)
-                {
-                    if($product->price != 0)
-                    {
-                        echo "<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>&nbsp;&nbsp;';
-                    }
-                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
-                }
-                else if($product->price != 0)
-                {
-                    echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
-                }
-            }
-        }
-        ?>
+        {if(!$product->unsaleable)}
+          {if($product->negotiate)}
+            <strong class='text-danger'>{ $model->lang->product->negotiate}</strong>
+          {else}
+            {if($product->promotion != 0)}
+              {if($product->price != 0)}
+                 <small class='text-muted text-line-through'>{$config->product->currencySymbol} {$product->price}</small>&nbsp;&nbsp;
+              {/if}
+              <strong class='text-danger'>{$config->product->currencySymbol}{$product->promotion}</strong>
+            {elseif($product->price != 0)
+               <strong class='text-danger'>{$config->product->currencySymbol} {$product->price}</strong>
+            {/if}
+          {/if}
+        {/if}
         </span>
-        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-        <?php if($content->categoryName == 'abbr'):?>
-        <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
-        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName, "class='text-special'");?>
-        <?php else:?>
-        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ', "class='text-special'");?>
-        <?php endif;?>
-        <?php endif;?>
-        <?php echo html::a($url, $product->name);?>
+        {if(isset($content->showCategory) and $content->showCategory == 1)}
+          {if($content->categoryName == 'abbr')}
+            {$categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] '}
+            {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), $categoryName, "class='text-special'")}
+          {else}
+            {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), '[' . $product->category->name . '] ', "class='text-special'")}
+          {/if}
+        {/if}
+        {!html::a($url, $product->name)}
       </div>
-      <?php endforeach;?>
+      {/foreach}
     </div>
   </div>
-  <?php endif;?>
+  {/if}
 </div>

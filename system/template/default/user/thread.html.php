@@ -25,14 +25,14 @@
               <td class='w-120px hidden-xxs'>{!echo substr($thread->addedDate, 2, -3)}</td>
               {if(isset($control->config->forum->postReview) and $control->config->forum->postReview == 'open')}
               <td>
-                <span class="{!echo $thread->status == 'approved' ? 'text-success' : ''?>">
+                <span class="{!echo $thread->status == 'approved' ? 'text-success' : ''}">
                   {!echo zget($lang->thread->statusList, $thread->status)}
                 </span>
               </td>
               {/if}
               <td class='w-50px hidden-xs'>{!echo $thread->views}</td>
               <td class='w-50px hidden-xxxs'>{!echo $thread->replies}</td>
-              <td class='w-200px text-left hidden-xxs'>{if($thread->replies) echo substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedByRealname}</td>  
+              <td class='w-200px text-left hidden-xxs'>{if($thread->replies)} {!substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedByRealname} {/if}</td>  
             </tr>  
             {/foreach}
           </tbody>
