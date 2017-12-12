@@ -29,11 +29,13 @@ else
     $savePath = $dataRoot . 'upload/';
 }
 
-$realPath = $savePath . $pathname;
+$realPath = realpath($savePath . $pathname);
 if(!file_exists($realPath))
 {
-    $realPath = $savePath . (strpos($pathname, '.') === false ? $pathname : substr($pathname, 0, strpos($pathname, '.')));
+    $realPath = realpath($savePath . (strpos($pathname, '.') === false ? $pathname : substr($pathname, 0, strpos($pathname, '.'))));
 }
+
+if(strpos($realPath, $dataRoot) === false) die('The file does not exist!');
 
 $filePath = $realPath;
 if($imageSize == 'smallURL')  $filePath = str_replace('f_', 's_', $realPath);
