@@ -24,7 +24,7 @@
           <dd data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblAuthor, $article->author)}'><i class='icon-user icon-large'></i> {!echo $article->author}</dd>
           {if($article->source != 'original' and $article->copyURL != '')} <dt>{!echo $lang->article->sourceList[$article->source] . $lang->colon}</dt> {/if}
           {if($article->source == 'article')} 
-            {$article->copyURL = commomModel::getSysURL() . $control->article->createPreviewLink($article->copyURL)}
+            {$article->copyURL = $sysURL . $control->article->createPreviewLink($article->copyURL)}
             <dd>{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</dd>
           {else}
             <span class='label label-success'>{!echo $lang->article->sourceList[$article->source]}</span>
