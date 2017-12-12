@@ -8,17 +8,13 @@ table.captcha td {padding: 5px;}
 table.captcha td label {padding: 0;}
 .captcha-box > th {display: none}
 </style>
-{*php*}
-if(!isset($templateCommonRoot))
-{
-    $thisModuleName     = $control->app->getModuleName();
-    $thisMethodName     = $control->app->getMethodName();
-    $templateCommonRoot = $config->webRoot . "theme/" . $control->config->template->{$control->app->clientDevice}->name . "/common/";
-}
-if($thisModuleName === 'user' and $thisMethodName === 'login')
-{
-    js::import($jsRoot . 'md5.js');
-    js::import($jsRoot . 'fingerprint/fingerprint.js');
-    js::set('random', $control->session->random);
-}
-{*/php*}
+{if(!isset($templateCommonRoot))}
+  {$thisModuleName     = $control->app->getModuleName()}
+  {$thisMethodName     = $control->app->getMethodName()}
+  {$templateCommonRoot = $config->webRoot . "theme/" . $control->config->template->{{$app->clientDevice}}->name . "/common/"}
+{/if}
+{if($thisModuleName === 'user' and $thisMethodName === 'login')}
+  {!js::import($jsRoot . 'md5.js')}
+  {!js::import($jsRoot . 'fingerprint/fingerprint.js')}
+  {!js::set('random', $control->session->random)}
+{/if}
