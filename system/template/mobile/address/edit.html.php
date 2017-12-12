@@ -1,4 +1,4 @@
-{*
+{*php
 /**
  * The edit view file of address for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-*}
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -19,16 +19,16 @@
     <div class='modal-body'>
       <form id='editForm' action='{!inlink('edit', "id={$address->id}")}' method='post'>
         <div class='form-group'>
-          {!html::input('contact', $address->contact, "class='form-control' placeholder='{$lang->address->contact}'")}
+          {!html::input('contact', $address->contact, "class='form-control' placeholder='{{$lang->address->contact}}'")}
         </div>
         <div class='form-group'>
-          {!html::input('phone', $address->phone, "class='form-control' placeholder='{$lang->address->phone}'")}
+          {!html::input('phone', $address->phone, "class='form-control' placeholder='{{$lang->address->phone}}'")}
         </div>
         <div class='form-group'>
-          {!html::input('address', $address->address, "class='form-control' placeholder='{$lang->address->address}'")}
+          {!html::input('address', $address->address, "class='form-control' placeholder='{{$lang->address->address}}'")}
         </div>
         <div class='form-group'>
-          {!html::input('zipcode', $address->zipcode, "class='form-control' placeholder='{$lang->address->zipcode}'")}
+          {!html::input('zipcode', $address->zipcode, "class='form-control' placeholder='{{$lang->address->zipcode}}'")}
         </div>
         <div class='form-group'>
           {!html::submitButton('', 'btn primary block')}
