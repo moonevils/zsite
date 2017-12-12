@@ -480,10 +480,6 @@ class control extends baseControl
 
         }
 
-        if(!zget($this->config, 'inFetch') and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
-        {
-            $this->output = helper::tidy($this->output);
-        }
 
         if(!headers_sent()
             && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'
@@ -496,6 +492,7 @@ class control extends baseControl
             header('Content-Encoding: gzip');
         }
 
+        If(RUN_MODE == 'front') $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
 		echo $this->output;
     }
 
@@ -630,7 +627,7 @@ class control extends baseControl
             $this->app->cache->set($key, $pageCSS);
         }
 
-        if($this->config->debug)$this->config->site->updatedTime = time();
+        if($this->config->debug) $this->config->site->updatedTime = time();
         $sourceURL  = helper::createLink('source', 'css', "page=$page&version={$this->config->site->updatedTime}", '', 'css');
         $importHtml = "<link rel='stylesheet' href='$sourceURL' type='text/css' media='screen' />\n";
 
