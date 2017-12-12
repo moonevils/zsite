@@ -1,4 +1,4 @@
-{*
+{*php
 /**
  * The view file of article for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-*}
+php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {include TPL_ROOT . 'common/files.html.php'}
 {!js::set('path', $article->path)}
@@ -27,62 +27,61 @@
       <small><i class='icon-user icon-large'></i> {$article->author}</small> &nbsp;&nbsp;
       <small><i class='icon-eye-open'></i> {$config->viewsPlaceholder}</small> &nbsp;&nbsp;
       {if($article->source != 'original' and $article->copyURL != '')}
-      <small>{!$lang->article->sourceList[$article->source] . $lang->colon}{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</small>
+        <small>
+          {!$lang->article->sourceList[$article->source] . $lang->colon}
+          {$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}
+        </small>
       {else}
-      <small class='text-success bg-success-pale'>{!$lang->article->sourceList[$article->source]}</small>
-      {endif}
+        <small class='text-success bg-success-pale'>{!$lang->article->sourceList[$article->source]}</small>
+      {/if}
     </div>
   </div>
 </div>
 
 <div class='panel-section article' id="article{$article->id}" data-ve='article'>
   {if($article->summary)}
-  <section class='abstract hide bg-gray-pale small with-padding'><strong>{$lang->article->summary}</strong>{!$lang->colon . $article->summary}</section>
-  {endif}
+    <section class='abstract hide bg-gray-pale small with-padding'><strong>{$lang->article->summary}</strong>{!$lang->colon . $article->summary}</section>
+  {/if}
   <div class='panel-body'>
     <hr class="space">
-    <section class='article-content'>
-      {$article->content}
-    </section>
+    <section class='article-content'> {$article->content} </section>
   </div>
   {if(!empty($article->files))}
-  <section class="article-files">
-    {$control->loadModel('file')->printFiles($article->files)}
-  </section>
-  {endif}
+    <section class="article-files"> {$control->loadModel('file')->printFiles($article->files)} </section>
+  {/if}
   <div class='panel-footer'>
     <div class='article-moreinfo clearfix hide'>
       {if($article->editor)}
-      {$editor = $control->loadModel('user')->getByAccount($article->editor)}
+        {$editor = $control->loadModel('user')->getByAccount($article->editor)}
+      {/if}
       {if(!empty($editor))}
-      <p class='text-right pull-right'>{printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate))}</p>
-      {endif}
-      {endif}
+        <p class='text-right pull-right'>{printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate))}</p>
+      {/if}
       {if($article->keywords)}
-      <p class='small'><strong class="text-muted">{$lang->article->keywords}</strong><span class="article-keywords">{!$lang->colon . $article->keywords}</span></p>
-      {endif}
+        <p class='small'><strong class="text-muted">{$lang->article->keywords}</strong><span class="article-keywords">{!$lang->colon . $article->keywords}</span></p>
+      {/if}
     </div>
     {extract($prevAndNext)}
     <ul class='pager pager-justify'>
       {if($prev)}
-      <li class='previous'>{!html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $lang->article->previous, "title='{$prev->title}'")}</li>
+        <li class='previous'>{!html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> ' . $lang->article->previous, "title='{{$prev->title}}'")}</li>
       {else}
-      <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> {print($lang->article->none)}</a></li>
-      {endif}
+        <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> {print($lang->article->none)}</a></li>
+      {/if}
       {if($next)}
-      <li class='next'>{!html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $lang->article->next . ' <i class="icon-arrow-right"></i>', "title='{$next->title}'")}</li>
+        <li class='next'>{!html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), $lang->article->next . ' <i class="icon-arrow-right"></i>', "title='{{$next->title}}'")}</li>
       {else}
-      <li class='next disabled'><a href='###'>{print($lang->article->none)}<i class='icon-arrow-right'></i></a></li>
-      {endif}
+        <li class='next disabled'><a href='###'>{print($lang->article->none)}<i class='icon-arrow-right'></i></a></li>
+      {/if}
     </ul>
   </div>
 </div> 
 
 {if(commonModel::isAvailable('message'))}
 <div id='commentBox'>
-  {!$control->fetch('message', 'comment', "objectType=article&objectID={$article->id}")}
+  {!$control->fetch('message', 'comment', "objectType=article&objectID={{$article->id}}")}
 </div>
-{endif}
+{/if}
 
 <div class='block-region region-article-view-bottom blocks' data-region='article_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'article_view', 'bottom')}</div>
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

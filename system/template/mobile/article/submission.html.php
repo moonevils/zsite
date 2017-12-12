@@ -15,9 +15,8 @@
           <small class='bg-danger-pale text-danger'>{$lang->submission->status[$article->submission]}</small>
         </div>
         <h5>
-          {if($article->submission == 2)} {!html::a($control->article->createPreviewLink($article->id), $article->title, "target='_blank'")}
-          {if($article->submission != 2)} {$article->title}
-         }
+          {if($article->submission == 2)} {!html::a($control->article->createPreviewLink($article->id), $article->title, "target='_blank'")}{/if}
+          {if($article->submission != 2)} {$article->title}{/if}
         </h5>
       </div>
       <div class='table-layout'>
@@ -25,8 +24,8 @@
           <div class='card-content'>
             <div class='pull-right'>
               {if($article->submission != 2)}
-              {!html::a(helper::createLink('article', 'modify', "articleID={$article->id}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}&nbsp;&nbsp;
-              {!html::a(helper::createLink('article', 'delete', "articleID={$article->id}"), $lang->delete, "class='deleter text-danger' data-locate='self'")}
+                {!html::a(helper::createLink('article', 'modify', "articleID={{$article->id}}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}&nbsp;&nbsp;
+                {!html::a(helper::createLink('article', 'delete', "articleID={{$article->id}}"), $lang->delete, "class='deleter text-danger' data-locate='self'")}
               {else}
               <a class='disabled'>{$lang->edit}</a>
               <a class='disabled'>{$lang->delete}</a>

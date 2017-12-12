@@ -50,10 +50,10 @@
 
         </div>
         {if(!empty($article->image))}
-        <div class='table-cell thumbnail-cell'>
-          {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-          {!html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'")}
-        </div>
+          <div class='table-cell thumbnail-cell'>
+            {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+            {!html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+          </div>
         {/if}
       </div>
     </a>

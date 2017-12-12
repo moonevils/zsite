@@ -33,8 +33,8 @@ php*}
           </div>
         </div>
         <div class='row hidden' style='margin-bottom: 10px' id='sourceRow'>
-          <div class='col-6'>{!html::input('copySite', $article->copySite, "class='form-control' placeholder='{$lang->article->copySite}'")}</div>
-          <div class='col-6'>{!html::input('copyURL',  $article->copyURL, "class='form-control' placeholder='{$lang->article->copyURL}'")}</div>
+          <div class='col-6'>{!html::input('copySite', $article->copySite, "class='form-control' placeholder='{{$lang->article->copySite}}'")}</div>
+          <div class='col-6'>{!html::input('copyURL',  $article->copyURL, "class='form-control' placeholder='{{$lang->article->copyURL}}'")}</div>
         </div>
         <div class='form-group'>
           <label for='title' class='control-label'>{$lang->article->title}</label>
@@ -42,7 +42,7 @@ php*}
         </div>
         <div class='form-group'>
           <label for='keywords' class='control-label'>{$lang->article->keywords}</label>
-          {!html::input('keywords', $article->keywords, "class='form-control' placeholder='{$lang->keywordsHolder}'")}
+          {!html::input('keywords', $article->keywords, "class='form-control' placeholder='{{$lang->keywordsHolder}}'")}
         </div>
         <div class='form-group'>
           <label for='summary' class='control-label'>{$lang->article->summary}</label>
