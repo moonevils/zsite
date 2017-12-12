@@ -1,4 +1,4 @@
-{*
+{*php
 /**
  * The modify view file of article for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-*}
+php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
