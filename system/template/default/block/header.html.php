@@ -38,8 +38,8 @@
 
 <div data-ve='block' data-id="{$block->id}">
   {if($setting->compatible)}
-  {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default')}
+     include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default')}
   {else}
-  {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout')}
+    {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout')}
   {/if}
 </div>
