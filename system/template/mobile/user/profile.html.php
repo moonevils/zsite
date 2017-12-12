@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The profile view file of user for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {!js::import($control->config->webRoot . 'js/fingerprint/fingerprint.js')}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
@@ -19,11 +19,11 @@
       <td colspan='2'><strong><i class='icon icon-user'></i> {!echo $lang->user->profile?></strong></td>
     </tr>
     <tr>
-      <th>{!echo $lang->user->realname}</th>
+      <th>{$lang->user->realname}</th>
       <td>
-        {!echo $user->realname}
+        {$user->realname}
         {if(isset($user->provider) and isset($user->openID) and strpos($user->account, "{$user->provider}_") === false)}
-        <span class='bg-info-pale text-info'>{!echo $lang->user->oauth->typeList[$user->provider]}</span>
+          <span class='bg-info-pale text-info'>{!echo $lang->user->oauth->typeList[$user->provider]}</span>
         {/if}
       </td>
     </tr>

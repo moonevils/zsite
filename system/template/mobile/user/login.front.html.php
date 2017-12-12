@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The front login view file of user for mobile template of chanzhiEPS.
  *
@@ -9,13 +9,18 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
+{$isCleanMode = (isset($control->config->site->front) and $control->config->site->front == 'login')}
+{if(!$isCleanMode)}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
+{else}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{/if}
 <hr class='space'>
 <div class='panel-section'>
   {include TPL_ROOT . 'user/oauthlogin.html.php'}
   <div class='panel-heading'>
-    <div class='title'><strong>{!echo $lang->user->login->welcome}</strong></div>
+    <div class='title'><strong>{$lang->user->login->welcome}</strong></div>
   </div>
   <div class='panel-body'>
   <form method='post' id='loginForm' role='form' data-checkfingerprint='1'>
@@ -23,16 +28,22 @@
       <i class='icon icon-info-sign icon-s1'></i>
       <div class='content'></div>
     </div>
-    <div class='form-group'>{!echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='form-control'")}</div>
-    <div class='form-group'>{!echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control'")}</div>
+    <div class='form-group'>{!echo html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}]' class='form-control'")}</div>
+    <div class='form-group'>{!echo html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
     <div class='form-group'>{!echo html::submitButton($lang->user->login->common, 'btn primary block')}</div>
     <div class='form-group'>
-      {if($config->mail->turnon and $control->config->site->resetPassword == 'open') echo html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' '}
-      {!echo html::a(inlink('register'), $lang->user->register->common, "class='btn btn-link'")}
-      {!echo html::hidden('referer', $referer)}
+      {if($config->mail->turnon and $control->config->site->resetPassword == 'open')} {!html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' '} {/if}
+      {if(!$isCleanMode)} {!html::a(inlink('register'), $lang->user->register->common, "class='btn btn-link'")} {/if}
+      {!html::hidden('referer', $referer)}
     </div>
   </form>
   </div>
 </div>
 {include TPL_ROOT . 'common/form.html.php'}
+{if($isCleanMode)}
+</body>
+</html>
+{else}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{/if}
+
