@@ -627,7 +627,7 @@ class control extends baseControl
             $this->app->cache->set($key, $pageCSS);
         }
 
-        if($this->config->debug)$this->config->site->updatedTime = time();
+        if($this->config->debug) $this->config->site->updatedTime = time();
         $sourceURL  = helper::createLink('source', 'css', "page=$page&version={$this->config->site->updatedTime}", '', 'css');
         $importHtml = "<link rel='stylesheet' href='$sourceURL' type='text/css' media='screen' />\n";
 
