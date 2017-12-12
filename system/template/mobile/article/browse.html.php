@@ -15,8 +15,10 @@
 {!js::set('path', $path)}
 {!js::set('categoryID', $category->id)}
 {!js::set('pageLayout', $control->block->getLayoutScope('article_browse', $category->id))}
-{if(isset($articleList))}<script>{!"place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';"}</script>
-{else}<script>{!"place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
+{if(isset($articleList))}
+  <script>{!"place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';"}</script>
+{else}
+  <script>{!"place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {/if}
 <div class='block-region blocks region-top' data-region='article_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'article_browse', 'top')}</div>
 <div class='panel panel-section'>
@@ -25,8 +27,8 @@
   </div>
   <div class='cards condensed cards-list bordered' id='articles'>
     {foreach($articles as $article)}
-    {$url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias")}
-    <a class='card' href='{$url}' id="article{$article->id}" data-ve='article'>
+    {$url = inlink('view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
+    <a class='card' href='{$url}' id="article{{$article->id}}" data-ve='article'>
       <div class='card-heading'>
         {if($article->sticky)}
         <div class='pull-right'>
@@ -41,7 +43,7 @@
               {!helper::substr($article->summary, 40, '...')}
               <div><span title="{!$config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}"><i class='icon-eye-open'></i> {!$config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}</span>
                 {if(isset($article->comments))}
-                &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp;
+                  &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp;
                 {/if}
                 &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span></div>
           </div>
@@ -49,9 +51,8 @@
         </div>
         {if(!empty($article->image))}
         <div class='table-cell thumbnail-cell'>
-        {$title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-         !html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'");
-        }
+          {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+          {!html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'")}
         </div>
         {/if}
       </div>
