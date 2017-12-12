@@ -60,7 +60,7 @@ php*}
         {if($product->promotion != 0)}
           {!echo "<strong class='text-danger'>" . $control->config->product->currencySymbol . $product->promotion . '</strong>'}
           {if($product->price != 0)}
-            {!echo &nbsp;&nbsp;<small class='text-muted text-line-through'>" . $control->config->product->currencySymbol . $product->price . '</small>'}
+            &nbsp;&nbsp;{!echo "<small class='text-muted text-line-through'>" . $control->config->product->currencySymbol . $product->price . '</small>'}
           {/if}
         {elseif($product->price != 0)}
           {!echo "<strong class='text-danger'>" . $control->config->product->currencySymbol . $product->price . '</strong>'}
