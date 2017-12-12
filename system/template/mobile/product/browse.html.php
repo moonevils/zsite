@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The browse view file of product for mobile template of chanzhiEPS.
  *
@@ -9,84 +9,65 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {!js::set('pageLayout', $control->block->getLayoutScope('product_browse', $category->id))}
 <div class='block-region region-top blocks' data-region='product_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'product_browse', 'top')}</div>
 <div class='panel-section'>
   <div class='panel-heading page-header'>
-    <div class='title'><strong>{!echo $category->name}</strong></div>
+    <div class='title'><strong>{$category->name}</strong></div>
   </div>
   <div class='panel-body'>
-{*php*}
-    $count = count($products);
-    if($count == 0) $count = 1;
-    $recPerRow = min($count, 2);
-{*/php*}
-    <div class='cards cards-products' data-cols='{!echo $recPerRow?>' id='products'>
-      <style>{!echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"}</style>
-{*php*}
-      $index = 0;
-      foreach($products as $product):
-{*/php*}
-      {$rowIndex = $index % $recPerRow}
-      {if($rowIndex === 0)}
-      <div class='row'>
-      {/if}
+    {$count = count($products)}
+    {if($count == 0)} {$count = 1} {/if}
+    {$recPerRow = min($count, 2)}
+    <div class='cards cards-products' data-cols='{$recPerRow}' id='products'>
+    <style>{!".col-custom-{{$recPerRow}} {{width: " . (100/$recPerRow) . "%}}"}</style>
+      {$index = 0}
+      {foreach($products as $product)}
+        {$rowIndex = $index % $recPerRow}
+        {if($rowIndex === 0)}
+          <div class='row'>
+        {/if}
 
-      <div class='col col-custom-{!echo $recPerRow?>'>
-      {$url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias")}
-        <div class='card' id='product{!echo $product->id?>' data-ve='product'>
-          <a class='card-img' href='{!echo $url?>'>
-{*php*}
-            if(empty($product->image))
-            {
-                $imgColor = $product->id * 57 % 360;
-                echo "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
-            }
-{else}
-            {
-                $imgsrc = $control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL');
-                echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imgsrc}'> ";
-            }
-{*/php*}
-          </a>
-          <div class='card-content'>
-{*php*}
-            echo "<a href='{$url}' style='color:{$product->titleColor}'>{$product->name}</a>";
-            if(!$product->unsaleable)
-            {
-                if($product->negotiate)
-                {
-                    echo "<div><strong class='text-danger'>" . $lang->product->negotiate . '</strong></div>';
-                }
-{else}
-                {
-                    if($product->promotion != 0)
-                    {
-                        echo "<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->promotion . '</strong>';
-                        if($product->price != 0)
-                        {
-                            echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $control->config->product->currencySymbol . $product->price . '</small>';
-                        }
-                        echo "</div>";
-                    }
-                    else if($product->price != 0)
-                    {
-                        echo "<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->price . '</strong></div>';
-                    }
-                }
-            }
-{*/php*}
+        <div class='col col-custom-{$recPerRow}'>
+        {$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
+          <div class='card' id='product{$product->id}' data-ve='product'>
+            <a class='card-img' href='{$url}'>
+              {if(empty($product->image))}
+                {$imgColor = $product->id * 57 % 360}
+                <div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>
+              {else}
+                {$imgsrc = $control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL')}
+                <img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imgsrc}'>
+              {/if}
+            </a>
+            <div class='card-content'>
+              <a href='{$url}' style='color:{$product->titleColor}'>{$product->name}</a>
+              {if(!$product->unsaleable)}
+                {if($product->negotiate)}
+                  {!"<div><strong class='text-danger'>" . $lang->product->negotiate . '</strong></div>'}
+                {else}
+                  {if($product->promotion != 0)}
+                    {!"<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->promotion . '</strong>'}
+                    {if($product->price != 0)}
+                      {!"&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $control->config->product->currencySymbol . $product->price . '</small>'}
+                    {/if}
+                    {!"</div>"}
+                  {elseif($product->price != 0)}
+                    {!"<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->price . '</strong></div>'}
+                  {/if}
+                {/if}
+              {/if}
+            </div>
           </div>
         </div>
-      </div>
 
-      {if($recPerRow === 1 || $rowIndex === ($recPerRow - 1))}
-      </div>
-      {/if}
-      {$index++}
+        {if($recPerRow === 1 || $rowIndex === ($recPerRow - 1))}
+          </div>
+        {/if}
+        {$index++}
       {/foreach}
     </div>
   </div>
