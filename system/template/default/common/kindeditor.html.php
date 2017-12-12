@@ -1,8 +1,8 @@
-<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+{if($extView = $control->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php
 /* Get current module and method. */
-$module = $this->moduleName;
-$method = $this->methodName;
+$module = $control->moduleName;
+$method = $control->methodName;
 
 if(!isset($config->$module->editor->$method)) return;
 
@@ -16,7 +16,7 @@ $editors = $config->$module->editor->$method;
 $editors['id'] = explode(',', $editors['id']);
 js::set('editors', $editors);
 
-$this->app->loadLang('file');
+$control->app->loadLang('file');
 js::set('errorUnwritable', $lang->file->errorUnwritable);
 
 /* Get current lang. */
@@ -73,7 +73,7 @@ function initKindeditor(afterInit)
             allowFileManager:false,
             langType:v.editorLang,
             htmlTags:{
-            '<?php echo str_replace(array("<",">"), array('', ''), $config->allowedTags->{RUN_MODE});?>':["class","id","style"],
+            '{!echo str_replace(array("<",">"), array('', ''), $config->allowedTags->{RUN_MODE})}':["class","id","style"],
             video: ["id", "class", "width", "height", "src", "controls"],
             object: ["type", "data", "width", "height"], param: ["name", "value"],
             audio: ["src", "controls", "id", "class", "width", "height"],
@@ -84,7 +84,7 @@ function initKindeditor(afterInit)
             afterBlur: function(){this.sync();$('#' + editorID).prev('.ke-container').removeClass('focus');},
             afterFocus: function(){$('#' + editorID).prev('.ke-container').addClass('focus');},
             afterChange: function(){$('#' + editorID ).change().hide();},
-            <?php if(!$this->loadModel('file')->canUpload()) echo "showLocal:false, imageTabIndex:0,";?>
+            {if(!$control->loadModel('file')->canUpload()) echo "showLocal:false, imageTabIndex:0,"}
             afterCreate : function()
             {
                 var doc = this.edit.doc; 

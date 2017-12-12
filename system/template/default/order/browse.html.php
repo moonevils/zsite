@@ -1,49 +1,49 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php js::set('confirmWarning', $lang->order->confirmWarning);?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{!js::set('confirmWarning', $lang->order->confirmWarning)}
 <div class="page-user-control">
   <div class="row">
-    <?php include TPL_ROOT . 'user/side.html.php';?>
+    {include TPL_ROOT . 'user/side.html.php'}
     <div class="col-md-10">
       <div class='panel'>
         <div class='panel-heading'>
-        <strong><i class="icon-shopping-cart"> </i><?php echo $lang->order->admin;?></strong>
+        <strong><i class="icon-shopping-cart"> </i>{!echo $lang->order->admin}</strong>
         </div>
         <table class='table table-hover tablesorter table-fixed' table-layout='fixed'>
           <thead>
             <tr class='text-center'>
-              <td class='w-120px'><?php echo $lang->order->type;?></td>
-              <td class='w-280px text-left'><?php echo $lang->order->productInfo;?></td>
-              <td class='w-80px text-right'><?php echo $lang->order->amount;?></td>
-              <td class='w-80px'><?php echo $lang->product->status;?></td>
-              <td class='w-80px'><?php echo $lang->order->payStatus;?></td>
-              <td><?php echo $lang->order->note;?></td>
-              <td><?php echo $lang->order->last;?></td>
-              <td class='w-200px'><?php echo $lang->actions;?></td>
+              <td class='w-120px'>{!echo $lang->order->type}</td>
+              <td class='w-280px text-left'>{!echo $lang->order->productInfo}</td>
+              <td class='w-80px text-right'>{!echo $lang->order->amount}</td>
+              <td class='w-80px'>{!echo $lang->product->status}</td>
+              <td class='w-80px'>{!echo $lang->order->payStatus}</td>
+              <td>{!echo $lang->order->note}</td>
+              <td>{!echo $lang->order->last}</td>
+              <td class='w-200px'>{!echo $lang->actions}</td>
             </tr>
           </thead>
           <tbody>
-            <?php foreach($orders as $order):?>
-            <?php $goodsInfo = $this->order->printGoods($order);?>
+            {foreach($orders as $order)}
+            {$goodsInfo = $control->order->printGoods($order)}
             <tr>
-              <td class='text-center text-middle'><?php echo zget($lang->order->types, $order->type);?></td>
-              <td class='text-middle' title='<?php echo strip_tags($goodsInfo);?>'><?php echo $goodsInfo;?></td>
-              <td class='text-right text-middle'><?php echo $order->amount + $order->balance;?></td>
+              <td class='text-center text-middle'>{!echo zget($lang->order->types, $order->type)}</td>
+              <td class='text-middle' title='{!echo strip_tags($goodsInfo)}'>{!echo $goodsInfo}</td>
+              <td class='text-right text-middle'>{!echo $order->amount + $order->balance}</td>
               <td class='text-center text-middle'>
-                <?php echo $this->order->processStatus($order);?>
+                {!echo $control->order->processStatus($order)}
               </td>
               <td class='text-center text-middle'>
-                <?php echo zget($lang->order->payStatusList, $order->payStatus, '');?>
+                {!echo zget($lang->order->payStatusList, $order->payStatus, '')}
               </td>
-              <td class='text-left' title='<?php echo $order->note?>'><?php echo $order->note;?></td>
-              <td class='text-center'><?php echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i');?></td>
-              <td class='text-left text-middle'><?php $this->order->printActions($order);?></td>
+              <td class='text-left' title='{!echo $order->note}'>{!echo $order->note}</td>
+              <td class='text-center'>{!echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i')}</td>
+              <td class='text-left text-middle'>{$control->order->printActions($order)}</td>
             </tr>
-            <?php endforeach;?>
+            {/foreach}
           </tbody>
-          <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+          <tfoot><tr><td colspan='8'>{$pager->show()}</td></tr></tfoot>
         </table>
       </div>
     </div>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

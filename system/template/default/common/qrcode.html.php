@@ -11,14 +11,13 @@
       <table class='table table-borderless'>
         <tr>
           {if(isset($publicList))}
-            {loop="publicList"}
-              {if(!$value->qrcode)} {continue} {/if}
-              {$qrcode=$value->qrcode}
+            {foreach(publicList as $public)}
+              {if(!$public->qrcode)} {continue} {/if}
               <td>
                 <div class='heading'><i class='icon-weixin'>&nbsp;</i> {$value->name}</div>
-                {function="html::image('javascript:;', "data-src='$qrcode' width='200' height='200'")"}
+                {!html::image('javascript:;', "data-src='$public->qrcode' width='200' height='200'")}
               </td>
-            {/loop}
+            {/foreach}
           {/if}
           {if(extension_loaded('gd'))}
             <td>
@@ -26,7 +25,7 @@
                 <i class='icon-mobile-phone'></i>
                 {$lang->qrcodeTip}
               </div>
-              {function="html::image('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', "width='200' height='200' data-src='" . helper::createLink('misc', 'qrcode') . "'")"}
+              {!html::image('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', "width='200' height='200' data-src='" . helper::createLink('misc', 'qrcode') . "'")}
             </td>
           {/if}
         </tr>

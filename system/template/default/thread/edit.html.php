@@ -10,9 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php include TPL_ROOT . 'common/kindeditor.html.php';?>
-<?php $common->printPositionBar($board, $thread);?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{include TPL_ROOT . 'common/kindeditor.html.php'}
+{$common->printPositionBar($board, $thread)}
 <?php
 $colorPlates = '';
 foreach (explode('|', $lang->colorPlates) as $value)
@@ -22,79 +22,79 @@ foreach (explode('|', $lang->colorPlates) as $value)
 ?>
 
 <div class="panel">
-  <div class="panel-heading"><strong><i class="icon-edit"></i> <?php echo $lang->thread->edit . $lang->colon . $thread->title;?></strong></div>
+  <div class="panel-heading"><strong><i class="icon-edit"></i> {!echo $lang->thread->edit . $lang->colon . $thread->title}</strong></div>
   <div class="panel-body">
     <form method='post' class='form-horizontal' id='editForm' enctype='multipart/form-data'>
       <div class='form-group'>
-        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->title;?></label>
+        <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->title}</label>
         <div class='col-md-11 col-sm-10'>
-          <?php $readonly = $thread->readonly ? 'checked' : ''; if($canManage):?>
+          {$readonly = $thread->readonly ? 'checked' : ''; if($canManage)}
           <div class='input-group'>
-            <?php echo html::input('title', $thread->title, "class='form-control'");?>
+            {!echo html::input('title', $thread->title, "class='form-control'")}
             <div class='input-group-addon colorplate clearfix'>
-              <div class='input-group color active' data="<?php echo $thread->color?>">
-                <label class='input-group-addon'><?php echo $lang->color;?></label>
-                <?php echo html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+              <div class='input-group color active' data="{!echo $thread->color?>">
+                <label class='input-group-addon'>{!echo $lang->color}</label>
+                {!echo html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'")}
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>
-                    <?php echo $colorPlates; ?>
+                    {!echo $colorPlates}
                   </div>
                 </span>
               </div>
             </div>
-            <?php if($this->app->user->admin == 'super'):?>
+            {if($control->app->user->admin == 'super')}
             <span class='input-group-addon'>
               <label class='checkbox-inline'>
-                <?php $checked = $thread->link ? 'checked' : '';?>
-                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->thread->isLink}</span>" ?>
+                {$checked = $thread->link ? 'checked' : ''}
+                {!echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->thread->isLink}</span>" ?>
               </label>
             </span>
-            <?php endif;?>
+            {/if}
             <span class='input-group-addon threadInfo'>
               <label class='checkbox-inline'>
-                  <?php echo "<input type='checkbox' name='readonly' value='1' $readonly/><span>{$lang->thread->readonly}</span>" ?>
+                  {!echo "<input type='checkbox' name='readonly' value='1' $readonly/><span>{$lang->thread->readonly}</span>" ?>
               </label>
             </span>
             <span class='input-group-addon threadInfo'>
-              <?php $discussion = $thread->discussion ? 'checked' : '';?>
+              {$discussion = $thread->discussion ? 'checked' : ''}
               <label class='checkbox-inline'>
-                <input type='checkbox' name='discussion' value='1' <?php echo $discussion;?>/><span><?php echo $lang->thread->discussion;?></span>
+                <input type='checkbox' name='discussion' value='1' {!echo $discussion}/><span>{!echo $lang->thread->discussion}</span>
               </label>
             </span>
           </div>
-          <?php else:?>
-          <?php echo html::input('title', $thread->title, "class='form-control'");?>
-          <?php endif;?>
+          {else}
+          {!echo html::input('title', $thread->title, "class='form-control'")}
+          {/if}
         </div>
       </div>
       <div class='threadInfo'>
         <div class='form-group'>
-          <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>
-          <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', htmlspecialchars($thread->content), "rows='15' class='form-control'");?></div>
+          <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->content}</label>
+          <div class='col-md-11 col-sm-10'>{!echo html::textarea('content', htmlspecialchars($thread->content), "rows='15' class='form-control'")}</div>
         </div>
         <div class='form-group'>
-          <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
+          <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->file}</label>
           <div class='col-md-11 col-sm-10'>
             <?php
-            $this->thread->printFiles($thread, $canManage = true);
-            echo $this->fetch('file', 'buildForm');
+            $control->thread->printFiles($thread, $canManage = true);
+            echo $control->fetch('file', 'buildForm');
             ?>
           </div>
         </div>
         <div class='form-group hiding' id='captchaBox'></div>
       </div>
-      <?php if($this->app->user->admin == 'super'):?>
+      {if($control->app->user->admin == 'super')}
       <div class='form-group link'>
-        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->link;?></label>
-        <div class='col-md-11 col-sm-10 required'><?php echo html::input('link', $thread->link, "class='form-control' placeholder='{$lang->thread->placeholder->link}'");?></div>
+        <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->link}</label>
+        <div class='col-md-11 col-sm-10 required'>{!echo html::input('link', $thread->link, "class='form-control' placeholder='{$lang->thread->placeholder->link}'")}</div>
       </div>
-      <?php endif;?>
+      {/if}
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
-        <div class='col-md-11 col-sm-10'><?php echo html::submitButton() . html::backButton();;?></div>
+        <div class='col-md-11 col-sm-10'>{!echo html::submitButton() . html::backButton();}</div>
       </div>
     </form>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

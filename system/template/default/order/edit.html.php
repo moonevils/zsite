@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The edit view file of order module of chanzhiEPS.
  *
@@ -9,35 +9,35 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include TPL_ROOT . 'common/header.modal.html.php';?>
-<form method='post' id='editForm' class='form-inline' action="<?php echo inlink('edit', "orderID={$order->id}");?>">
+*}
+{include TPL_ROOT . 'common/header.modal.html.php'}
+<form method='post' id='editForm' class='form-inline' action="{!echo inlink('edit', "orderID={$order->id}")}">
   <table class='table table-form'>
-    <?php $address = json_decode($order->address);?>
+    {$address = json_decode($order->address)}
     <tr>
-      <th class='w-80px'><?php echo $lang->order->contact;?></th>
-      <td><?php echo html::input('contact', $address->contact, "class='form-control'");?></td>
+      <th class='w-80px'>{!echo $lang->order->contact}</th>
+      <td>{!echo html::input('contact', $address->contact, "class='form-control'")}</td>
     </tr> 
     <tr>
-      <th class='w-80px'><?php echo $lang->order->phone;?></th>
-      <td><?php echo html::input('phone', $address->phone, "class='form-control'");?></td>
+      <th class='w-80px'>{!echo $lang->order->phone}</th>
+      <td>{!echo html::input('phone', $address->phone, "class='form-control'")}</td>
     </tr> 
     <tr>
-      <th class='w-80px'><?php echo $lang->order->address;?></th>
-      <td><?php echo html::input('address', $address->address, "class='form-control'");?></td>
+      <th class='w-80px'>{!echo $lang->order->address}</th>
+      <td>{!echo html::input('address', $address->address, "class='form-control'")}</td>
     </tr> 
     <tr>
-      <th class='w-80px'><?php echo $lang->order->zipcode;?></th>
-      <td><?php echo html::input('zipcode', $address->zipcode, "class='form-control'");?></td>
+      <th class='w-80px'>{!echo $lang->order->zipcode}</th>
+      <td>{!echo html::input('zipcode', $address->zipcode, "class='form-control'")}</td>
     </tr>
     <tr>
-      <th class='w-80px'><?php echo $lang->order->frontNote;?></th>
-      <td><?php echo html::input('note', $order->note, "class='form-control'");?></td>
+      <th class='w-80px'>{!echo $lang->order->frontNote}</th>
+      <td>{!echo html::input('note', $order->note, "class='form-control'")}</td>
     </tr> 
     <tr>
       <th></th>
       <td colspan='2'>
-        <?php echo html::submitButton();?>
+        {!echo html::submitButton()}
       </td>
     </tr>
   </table>
@@ -51,5 +51,5 @@ $(document).ready(function()
     }); 
 });
 </script>
-<?php include TPL_ROOT .'/common/footer.modal.html.php';?>
+{include TPL_ROOT .'/common/footer.modal.html.php'}
 

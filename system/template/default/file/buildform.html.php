@@ -1,6 +1,6 @@
-<?php if(!$writeable):?>
-<h5 class='text-danger a-left'> <?php echo $this->lang->file->errorUnwritable;?> </h5>
-<?php else:?>
+{if(!$writeable)}
+<h5 class='text-danger a-left'> {!echo $control->lang->file->errorUnwritable} </h5>
+{else}
 <div class="file-form" id='fileform'>
   <?php 
   /* Define the html code of a file row. */
@@ -16,11 +16,11 @@
 EOT;
   for($i = 1; $i <= $fileCount; $i ++) echo str_replace('$i', $i, $fileRow);
   $fileLimit = trim(ini_get('upload_max_filesize'), 'M') > trim(ini_get('post_max_size'), 'M') ? trim(ini_get('post_max_size'), 'M') : trim(ini_get('upload_max_filesize'), 'M');
-  if(!is_numeric($fileLimit)) $fileLimit = $this->config->file->maxSize / 1024 / 1024;  
+  if(!is_numeric($fileLimit)) $fileLimit = $control->config->file->maxSize / 1024 / 1024;  
   printf($lang->file->sizeLimit, $fileLimit);
   ?>
 </div>
-<?php endif;?>
+{/if}
 
 <script language='javascript'>
 /**
@@ -32,7 +32,7 @@ EOT;
  */
 function addFile(clickedButton)
 {
-    fileRow = <?php echo json_encode($fileRow);?>;
+    fileRow = {!echo json_encode($fileRow)};
     fileRow = fileRow.replace('$i', $('.fileID').size() + 1);
     $(clickedButton).closest('.fileBox').after(fileRow);
 

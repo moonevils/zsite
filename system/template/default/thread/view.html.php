@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
+include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 include TPL_ROOT . 'common/kindeditor.html.php';
 
 js::set('viewReplies', $lang->thread->viewReplies);
@@ -18,17 +18,17 @@ js::set('quoteTitle', $lang->thread->quoteTitle);
 js::set('discussion', $thread->discussion);
 
 echo "<div class='row blocks' data-grid='4' data-region='thread_view-top'>";
-$this->block->printRegion($layouts, 'thread_view', 'top', true);
+$control->block->printRegion($layouts, 'thread_view', 'top', true);
 echo "</div>";
 
 $common->printPositionBar($board, $thread);
 
-if($pager->pageID == 1) include $this->loadModel('ui')->getEffectViewFile('default', 'thread', 'thread');
-include $this->loadModel('ui')->getEffectViewFile('default', 'thread', 'reply');
+if($pager->pageID == 1) include $control->loadModel('ui')->getEffectViewFile('default', 'thread', 'thread');
+include $control->loadModel('ui')->getEffectViewFile('default', 'thread', 'reply');
 
 echo "<div class='blocks' data-region='thread_view-bottom'>";
-$this->block->printRegion($layouts, 'thread_view', 'bottom');
+$control->block->printRegion($layouts, 'thread_view', 'bottom');
 echo "</div>";
 
 include TPL_ROOT . 'common/jplayer.html.php';
-include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');
+include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');

@@ -1,4 +1,4 @@
-{include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite');}
 {if(isset($locate))} 
 <meta http-equiv='refresh' content=\"5;url=$locate\">
 {/if}

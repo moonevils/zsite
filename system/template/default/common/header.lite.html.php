@@ -1,12 +1,7 @@
 {$extView=$control->getExtViewFile(__FILE__)}
-{if($extView)}
-{include $extView}
-{$tmp=helper::cd()}
-{/if}
+{if($extView)} {include $extView} {!return helper::cd()} {/if}
 {$sysURL=rtrim($sysURL, '/')}
-{if(isset($mobileURL))}
-{$mobileURL=ltrim($mobileURL, '/')}
-{/if}
+{if(isset($mobileURL))} {$mobileURL=ltrim($mobileURL, '/')} {/if}
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb" lang='{$app->getClientLang()}' class='m-{$thisModuleName} m-{$thisModuleName}-{$thisMethodName}'>
 <head profile="http://www.w3.org/2005/10/profile">
@@ -20,13 +15,10 @@
   {if(isset($sourceURL))}
     <link rel="canonical" href="{$sysURL}/{$sourceURL}" >
   {else}
-    {if(isset($canonicalURL))}
-    <link rel="canonical" href="{$sysURL}/{$canonicalURL}" >
-    {/if}
+
+    {if(isset($canonicalURL))} <link rel="canonical" href="{$sysURL}/{$canonicalURL}" > {/if}
   {/if}
-  {if($thisModuleName == 'user' and $thisMethodName == 'deny')}
-  <meta http-equiv='refresh' content="5;url='{$url= helper::createLink('index')}'">
-  {/if} 
+  {if($thisModuleName == 'user' and $thisMethodName == 'deny')} <meta http-equiv='refresh' content="5;url='{$url= helper::createLink('index')}'"> {/if} 
   {if(!isset($title))} {$title=''} {/if}
   {if(!empty($title))} {$title="$title . $lang->minus"} {/if}
   {if(!empty($keywords))} {$keywords=$config->site->keywords} {/if}

@@ -1,9 +1,9 @@
-{if($extView = $this->getExtViewFile(__FILE__))}
+{if($extView = $control->getExtViewFile(__FILE__))}
 {include $extView; return helper::cd();}
 {/if}
 {!css::import($jsRoot . 'jquery/chosen/min.css')}
 {!js::import($jsRoot . 'jquery/chosen/min.js');}
-{$clientLang = $this->app->getClientLang();}
+{$clientLang = $control->app->getClientLang();}
 
 <script language='javascript'> 
 $(document).ready(function()

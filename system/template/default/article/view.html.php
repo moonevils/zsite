@@ -4,18 +4,14 @@
 {!js::set('objectID', $article->id)}
 {!js::set('categoryID', $category->id)}
 {!js::set('categoryPath', explode(',', trim($category->path, ',')))}
-{if(isset($article->css))}
-{!css::internal($article->css)}
-{/if}
-{if(isset($article->js))}
-{!js::execute($article->js)}
-{/if}
+{if(isset($article->css))} {!css::internal($article->css)} {/if}
+{if(isset($article->js))} {!js::execute($article->js)} {/if}
 {!js::set('pageLayout', $control->block->getLayoutScope('article_view', $article->id))}
 {$common->printPositionBar($category, $article);}
 <div class='row blocks' data-region='article_view-topBanner'>{$control->block->printRegion($layouts, 'article_view', 'topBanner', true)}</div>
 <div class='row' id='columns' data-page='article_view'>
   {if(!empty($layouts['article_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')}
-  <div class="col-md-{!echo 12 - $sideGridg} col-main{!echo ($sideFloat === 'left') ? ' pull-right' : ''}">
+  <div class="col-md-{!echo 12 - $sideGrid} col-main{!echo ($sideFloat === 'left') ? ' pull-right' : ''}">
   {else}
   <div class='col-md-12'>
   {/if}

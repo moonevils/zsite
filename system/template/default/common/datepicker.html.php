@@ -1,8 +1,8 @@
-{if($extView = $this->getExtViewFile(__FILE__))}
+{if($extView = $control->getExtViewFile(__FILE__))}
 {include $extView;}
 {return helper::cd();}
 {/if}
-{$clientLang=$this->app->getClientLang();}
+{$clientLang=$control->app->getClientLang();}
 {!css::import($jsRoot . 'datetimepicker/css/min.css');}
 {!js::import($jsRoot  . 'datetimepicker/js/min.js');}
 {if($clientLang != 'en')}

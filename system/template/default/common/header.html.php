@@ -1,6 +1,6 @@
 {if(helper::isAjaxRequest())}
   {if(isset($pageCSS))} 
-  {!css::internal($pageCSS)}
+  {!echo css::internal($pageCSS)}
   {/if}
   {$modalWidth=empty($modalWidth) ? 1000 : $modalWidth;}
   <div class="modal-dialog" style="width:{$modalWidth}px;">
@@ -15,7 +15,7 @@
       <div class="modal-body">
 {else}
   {$extView=$control->getExtViewFile(__FILE__)}
-  {if($extView)}
+  {if(is_file($extView))}
     {include $extView}
     {$tmp=helper::cd()}
   {/if}

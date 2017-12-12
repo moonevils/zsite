@@ -1,23 +1,23 @@
 <?php 
-include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
+include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header');
 ?>
-<?php $common->printPositionBar($this->app->getModuleName());?>
+{$common->printPositionBar($control->app->getModuleName())}
 <div class='panel' id='companyContact'>
   <div class='panel-heading'>
-    <strong><i class='icon icon-comments-alt'></i> <?php echo $lang->company->contact;?></strong>
-    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
-    <?php endif;?>
+    <strong><i class='icon icon-comments-alt'></i> {!echo $lang->company->contact}</strong>
+    {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    {/if}
   </div>
   <div class='panel-body'>
     <table class='table table-data'>
-      <?php foreach($contact as $item => $value):?>
+      {foreach($contact as $item => $value)}
       <tr>
-        <th><?php echo $this->lang->company->$item . $this->lang->colon;?></th>
-        <td><?php echo $value;?></td>
+        <th>{!echo $control->lang->company->$item . $control->lang->colon}</th>
+        <td>{!echo $value}</td>
       </tr>
-      <?php endforeach;?>
+      {/foreach}
     </table>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer'); ?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

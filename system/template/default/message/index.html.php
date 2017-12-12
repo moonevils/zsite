@@ -10,81 +10,81 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php js::set('showDetail', $this->lang->message->showDetail);?>
-<?php js::set('hideDetail', $this->lang->message->hideDetail);?>
-<?php $common->printPositionBar();?>
-<div class='row blocks' data-region='message_index-topBanner'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{!js::set('showDetail', $control->lang->message->showDetail)}
+{!js::set('hideDetail', $control->lang->message->hideDetail)}
+{$common->printPositionBar()}
+<div class='row blocks' data-region='message_index-topBanner'>{$control->block->printRegion($layouts, 'message_index', 'topBanner', true)}</div>
 <div class='row' id='columns' data-page='message_index'>
-  <?php if(!empty($layouts['message_index']['side']) and !empty($sideFloat) && $sideFloat != 'hidden'):?>
-  <div class="col-md-<?php echo 12 - $sideGrid; ?> col-main<?php if($sideFloat === 'left') echo ' pull-right' ?>">
-  <?php else:?>
+  {if(!empty($layouts['message_index']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')}
+  <div class="col-md-{!echo 12 - $sideGrid} col-main{if($sideFloat === 'left') echo ' pull-right' ?>">
+  {else}
   <div class="col-md-12">
-  <?php endif;?>
-    <div class='row blocks' data-region='message_index-top'><?php $this->block->printRegion($layouts, 'message_index', 'top', true);?></div>
-    <?php if(!empty($messages)):?>
-    <?php $class = 'success';?>
-    <?php foreach($messages as $number => $message):?>
-    <?php $class = $class == 'success' ? '' : 'success';?>
-    <div class='w-p100 panel comment-item commment-panel' id="comment<?php echo $message->id?>">
+  {/if}
+    <div class='row blocks' data-region='message_index-top'>{$control->block->printRegion($layouts, 'message_index', 'top', true)}</div>
+    {if(!empty($messages))}
+    {$class = 'success'}
+    {foreach($messages as $number => $message)}
+    {$class = $class == 'success' ? '' : 'success'}
+    <div class='w-p100 panel comment-item commment-panel' id="comment{!echo $message->id?>">
       <div class='panel-heading content-heading'>
-        <i class='icon icon-user'> <?php echo $message->from;?></i>
-        <i class='text-muted'> <?php echo $message->date;?></i>
-        <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply text-info'> </i>", "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?>
+        <i class='icon icon-user'> {!echo $message->from}</i>
+        <i class='text-muted'> {!echo $message->date}</i>
+        {!echo html::a($control->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply text-info'> </i>", "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'")}
       </div>
-      <div class='panel-body'><?php echo nl2br($message->content);?></div>
-      <?php $this->message->getFrontReplies($message);?>
+      <div class='panel-body'>{!echo nl2br($message->content)}</div>
+      {$control->message->getFrontReplies($message)}
     </div>
-    <?php endforeach; ?>
-    <?php endif;?>
-    <div class='text-right'><div class='pager clearfix'><?php $pager->show('right', 'short');?></div></div>
+    {/foreach}
+    {/if}
+    <div class='text-right'><div class='pager clearfix'>{$pager->show('right', 'short')}</div></div>
     <div class='panel panel-form'>
-      <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
+      <div class='panel-heading'><strong><i class='icon-comment-alt'></i> {!echo $lang->message->post}</strong></div>
       <div class='panel-body'>
-        <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
+        <form method='post' class='form-horizontal' id='commentForm' action="{!echo $control->createLink('message', 'post', 'type=message')}">
           <?php
-          $from   = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
-          $phone  = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
-          $mobile = $this->session->user->account == 'guest' ? '' : $this->session->user->mobile;
-          $qq     = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
-          $email  = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
+          $from   = $control->session->user->account == 'guest' ? '' : $control->session->user->realname;
+          $phone  = $control->session->user->account == 'guest' ? '' : $control->session->user->phone;
+          $mobile = $control->session->user->account == 'guest' ? '' : $control->session->user->mobile;
+          $qq     = $control->session->user->account == 'guest' ? '' : $control->session->user->qq;
+          $email  = $control->session->user->account == 'guest' ? '' : $control->session->user->email;
           ?>
           <div class='form-group'>
-            <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
+            <label for='from' class='col-sm-1 control-label'>{!echo $lang->message->from}</label>
             <div class='col-sm-5 required'>
-              <?php echo html::input('from', $from, "class='form-control'"); ?>
+              {!echo html::input('from', $from, "class='form-control'")}
             </div>
           </div>
           <div class='form-group'>
-            <label for='phone' class='col-sm-1 control-label'><?php echo $lang->message->phone; ?></label>
+            <label for='phone' class='col-sm-1 control-label'>{!echo $lang->message->phone}</label>
             <div class='col-sm-5'>
-              <?php echo html::input('phone', $phone, "class='form-control'"); ?>
+              {!echo html::input('phone', $phone, "class='form-control'")}
             </div>
-            <div class='col-sm-6'><div class='help-block'><small class='text-important'><?php echo $lang->message->contactHidden;?></small></div></div>
+            <div class='col-sm-6'><div class='help-block'><small class='text-important'>{!echo $lang->message->contactHidden}</small></div></div>
           </div>
           <div class='form-group'>
-            <label for='mobile' class='col-sm-1 control-label'><?php echo $lang->message->mobile; ?></label>
+            <label for='mobile' class='col-sm-1 control-label'>{!echo $lang->message->mobile}</label>
             <div class='col-sm-5'>
-              <?php echo html::input('mobile', $mobile, "class='form-control'"); ?>
+              {!echo html::input('mobile', $mobile, "class='form-control'")}
             </div>
           </div>
           <div class='form-group'>
-            <label for='qq' class='col-sm-1 control-label'><?php echo $lang->message->qq;?></label>
+            <label for='qq' class='col-sm-1 control-label'>{!echo $lang->message->qq}</label>
              <div class='col-sm-5'>
-              <?php echo html::input('qq', $qq, "class='form-control'"); ?>
+              {!echo html::input('qq', $qq, "class='form-control'")}
             </div>
           </div>
           <div class='form-group'>
-            <label for='email' class='col-sm-1 control-label'><?php echo $lang->message->email;?></label>
+            <label for='email' class='col-sm-1 control-label'>{!echo $lang->message->email}</label>
             <div class='col-sm-5'>
-              <?php echo html::input('email', '', "class='form-control'");?>
+              {!echo html::input('email', '', "class='form-control'")}
             </div>
             <div class='col-sm-5'>
-              <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
+              <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> {!echo $lang->comment->receiveEmail}</label>
             </div>
           </div>
           <div class='form-group'>
-            <label for='content' class='col-sm-1 control-label'><?php echo $lang->message->content;?></label>
+            <label for='content' class='col-sm-1 control-label'>{!echo $lang->message->content}</label>
             <div class='col-sm-11 required'>
               <?php
                 echo html::textarea('content', '', "class='form-control' rows='3'");
@@ -93,37 +93,37 @@
               ?>
             </div>
           </div>
-          <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+          {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
           <div class='form-group' id='captchaBox'>
-            <?php echo $this->loadModel('guarder')->create4Comment();?>
+            {!echo $control->loadModel('guarder')->create4Comment()}
           </div>
-          <?php else:?>
+          {else}
           <div class='form-group hiding' id='captchaBox'></div>
-          <?php endif;?>
+          {/if}
           <div class='form-group'>
             <div class='col-sm-1'></div>
-            <div class='col-sm-11'><label class='checkbox-inline'><input type='checkbox' name='secret' value='1' /><?php echo $lang->message->secret;?></label></div>
+            <div class='col-sm-11'><label class='checkbox-inline'><input type='checkbox' name='secret' value='1' />{!echo $lang->message->secret}</label></div>
           </div>
           <div class='form-group'>
             <div class='col-sm-1'></div>
             <div class='col-sm-11 col-sm-offset-1'>
-              <span><?php echo html::submitButton();?></span>
-              <span><small class="text-important"><?php echo $lang->message->needCheck;?></small></span>
+              <span>{!echo html::submitButton()}</span>
+              <span><small class="text-important">{!echo $lang->message->needCheck}</small></span>
             </div>
           </div>
         </form>
       </div>
     </div>
-    <div class='row blocks' data-region='message_index-bottom'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
+    <div class='row blocks' data-region='message_index-bottom'>{$control->block->printRegion($layouts, 'message_index', 'bottom', true)}</div>
   </div>
-  <?php if(!empty($layouts['message_index']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden')):?>
-  <div class='col-md-<?php echo $sideGrid ?> col-side'>
+  {if(!empty($layouts['message_index']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden'))}
+  <div class='col-md-{!echo $sideGrid ?> col-side'>
     <div class='nav'>
-    <a href='#commentForm' class='btn btn-primary btn-lg w-p100'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
+    <a href='#commentForm' class='btn btn-primary btn-lg w-p100'><i class='icon-comment-alt'></i> {!echo $lang->message->post}</a>
     </div>
-    <side class='blocks' data-region='message_index-side'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></side>
+    <side class='blocks' data-region='message_index-side'>{$control->block->printRegion($layouts, 'message_index', 'side')}</side>
   </div>
-  <?php endif;?>
+  {/if}
 </div>
-<div class='row blocks' data-region='message_index-bottomBanner'><?php $this->block->printRegion($layouts, 'message_index', 'bottomBanner', true);?></div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+<div class='row blocks' data-region='message_index-bottomBanner'>{$control->block->printRegion($layouts, 'message_index', 'bottomBanner', true)}</div>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

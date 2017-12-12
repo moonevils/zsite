@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The common modal footer view file of RanZhi.
  *
@@ -9,14 +9,14 @@
  * @version     $Id$
  * @link        http://www.ranzhi.org
  */
-?>
+*}
 {if(helper::isAjaxRequest())}
+      </div>
     </div>
   </div>
-</div>
-{if(isset($pageJS))}
-{!js::execute($pageJS);}
-{/if}
+  {if(isset($pageJS))}
+    {!js::execute($pageJS);}
+  {/if}
 {else}
-{include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');}
+  {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');}
 {/if}
