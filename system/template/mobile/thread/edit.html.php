@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The edit view file of thread for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -17,19 +17,19 @@
       <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->thread->edit . $lang->colon . $thread->title}</h5>
     </div>
     <div class='modal-body'>
-      <form id='editThreadForm' method='post' action='{!echo $control->createLink('thread', 'edit', "threadID=$thread->id")}'>
+      <form id='editThreadForm' method='post' action='{$control->createLink('thread', 'edit', "threadID=$thread->id")}'>
         <div class='form-group'>
-          {!echo html::input('title', $thread->title, "class='form-control' placeholder='{$lang->thread->title}'")}
+          {!html::input('title', $thread->title, "class='form-control' placeholder='{{$lang->thread->title}}'")}
         </div>
         <div class='form-group'>
-          {!echo html::textarea('content', $thread->content, "class='form-control' rows='15' placeholder='{$lang->thread->content}'")}
+          {!html::textarea('content', $thread->content, "class='form-control' rows='15' placeholder='{{$lang->thread->content}}'")}
         </div>
         {if($canManage)}
         <div class='form-group'>
           <div class="checkbox">
             <label>
-              {$readonly = $thread->readonly ? 'checked' : ''}
-              {!echo "<input type='checkbox' name='readonly' value='1' {$readonly}/><span>{$lang->thread->readonly}</span>" ?>
+              {@$readonly = $thread->readonly ? 'checked' : ''}
+              <input type='checkbox' name='readonly' value='1' {$readonly}/><span>{$lang->thread->readonly}</span>
             </label>
           </div>
         </div>
@@ -38,12 +38,13 @@
           <tr class='hide captcha-box'></tr>
         </table>
         <div class='form-group'>
-          {!echo html::submitButton('', 'btn primary block')}
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
   </div>
 </div>
+{noparse}
 <script>
 $(function()
 {
@@ -51,15 +52,13 @@ $(function()
     $editThreadForm.ajaxform({onResultSuccess: function(response)
     {
         if(response.result == 'success')
-        {
-            $.closeModal();
-        }
+        { $.closeModal(); }
     }, onSuccess: function(response)
     {
         if(response.reason == 'needChecking')
-        {
-            $editThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
-        }
-    }});
+        { $editThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide'); }
+    }
+    });
 });
 </script>
+{/noparse}

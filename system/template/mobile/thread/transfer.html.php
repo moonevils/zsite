@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The transfer view file of thread for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -17,21 +17,22 @@
       <h5 class='modal-title'><i class='icon icon-location-arrow'></i> {!echo $lang->thread->transfer}</h5>
     </div>
     <div class='modal-body'>
-      <form id='threadTransferForm' method='post' action='{!echo inlink('transfer', "threadID={$thread->id}")?>'>
+      <form id='threadTransferForm' method='post' action='{!inlink('transfer', "threadID={{$thread->id}}")}'>
         <div class='form-group'>
-          <label for='targetBoard' class='control-label'>{!echo $lang->thread->board}</label>
-          {!echo html::select('targetBoard', $boards, '', "class='form-control chosen'")}
+          <label for='targetBoard' class='control-label'>{$lang->thread->board}</label>
+          {!html::select('targetBoard', $boards, '', "class='form-control chosen'")}
         </div>
         <table style='width: 100%'>
           <tr class='hide captcha-box'></tr>
         </table>
         <div class='form-group'>
-          {!echo html::submitButton('', 'btn primary block')}
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
   </div>
 </div>
+{/noparse}
 <script>
 $(function()
 {
@@ -48,9 +49,9 @@ $(function()
             }
         }
         if(response.reason == 'needChecking')
-        {
-            $threadTransferForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
-        }
-    }});
+        { $threadTransferForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide'); }
+    }
+    });
 });
 </script>
+{/noparse}
