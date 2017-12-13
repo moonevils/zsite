@@ -10,8 +10,8 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{$isCleanMode = (isset($control->config->site->front) and $control->config->site->front == 'login')}
-{if(!$isCleanMode)}
+{$isSimpleMode = (isset($control->config->site->front) and $control->config->site->front == 'login')}
+{if($isSimpleMode)}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
 {else}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
@@ -33,17 +33,16 @@
     <div class='form-group'>{!echo html::submitButton($lang->user->login->common, 'btn primary block')}</div>
     <div class='form-group'>
       {if($config->mail->turnon and $control->config->site->resetPassword == 'open')} {!html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' '} {/if}
-      {if(!$isCleanMode)} {!html::a(inlink('register'), $lang->user->register->common, "class='btn btn-link'")} {/if}
+      {if(!$isSimpleMode)} {!html::a(inlink('register'), $lang->user->register->common, "class='btn btn-link'")} {/if}
       {!html::hidden('referer', $referer)}
     </div>
   </form>
   </div>
 </div>
 {include TPL_ROOT . 'common/form.html.php'}
-{if($isCleanMode)}
-</body>
-</html>
+{if($isSimpleMode)}
+    </body>
+  </html>
 {else}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
 {/if}
-
