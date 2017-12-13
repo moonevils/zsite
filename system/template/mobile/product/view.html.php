@@ -112,7 +112,7 @@
 <table class='table table-layout small'>
   <tbody>
     {if(empty($attributeHtml))}
-      {!echo "<tr><td colspan='2' class='small'>{{$product->desc}}</td></tr>"}
+      <tr><td colspan='2' class='small'>{$product->desc}</td></tr>
     {else}
       {@$attributeHtml}
     {/if}
