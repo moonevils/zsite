@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {!js::set('pageLayout', $control->block->getLayoutScope('product_browse', $category->id))}
@@ -19,20 +19,20 @@ php*}
     <div class='title'><strong>{$category->name}</strong></div>
   </div>
   <div class='panel-body'>
-    {$count = count($products)}
+    {@$count = count($products)}
     {if($count == 0)} {$count = 1} {/if}
-    {$recPerRow = min($count, 2)}
+    {@$recPerRow = min($count, 2)}
     <div class='cards cards-products' data-cols='{$recPerRow}' id='products'>
-    <style>{!".col-custom-{{$recPerRow}} {{width: " . (100/$recPerRow) . "%}}"}</style>
-      {$index = 0}
+      <style>{!echo ".col-custom-{{$recPerRow}} {{width: " . (100/$recPerRow) . "%}}"}</style>
+      {@$index = 0}
       {foreach($products as $product)}
-        {$rowIndex = $index % $recPerRow}
+        {@$rowIndex = $index % $recPerRow}
         {if($rowIndex === 0)}
           <div class='row'>
         {/if}
 
         <div class='col col-custom-{$recPerRow}'>
-        {$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
+          {@$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
           <div class='card' id='product{$product->id}' data-ve='product'>
             <a class='card-img' href='{$url}'>
               {if(empty($product->image))}
@@ -47,16 +47,16 @@ php*}
               <a href='{$url}' style='color:{$product->titleColor}'>{$product->name}</a>
               {if(!$product->unsaleable)}
                 {if($product->negotiate)}
-                  {!"<div><strong class='text-danger'>" . $lang->product->negotiate . '</strong></div>'}
+                  <div><strong class='text-danger'>{$lang->product->negotiate}</strong></div>'
                 {else}
                   {if($product->promotion != 0)}
-                    {!"<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->promotion . '</strong>'}
-                    {if($product->price != 0)}
-                      {!"&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $control->config->product->currencySymbol . $product->price . '</small>'}
-                    {/if}
-                    {!"</div>"}
+                    <div><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->promotion}</strong>
+                      {if($product->price != 0)}
+                        &nbsp;&nbsp;<small class='text-muted text-line-through'>{!echo $control->config->product->currencySymbol . $product->price}</small>
+                      {/if}
+                    </div>
                   {elseif($product->price != 0)}
-                    {!"<div><strong class='text-danger'>" . $control->config->product->currencySymbol . $product->price . '</strong></div>'}
+                    <div><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->price}</strong></div>
                   {/if}
                 {/if}
               {/if}
@@ -67,7 +67,7 @@ php*}
         {if($recPerRow === 1 || $rowIndex === ($recPerRow - 1))}
           </div>
         {/if}
-        {$index++}
+        {@$index++}
       {/foreach}
     </div>
   </div>
