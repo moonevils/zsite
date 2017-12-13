@@ -9,8 +9,8 @@
     <a href='{!echo $webRoot}'>
      {$logoSetting = isset($control->config->site->logo) ? json_decode($control->config->site->logo) : new stdclass()}
      {$logo = false}
-     {if(isset($logoSetting->$templateName->themes->all))} {$logo = $logoSetting->$templateName->themes->all} {/if}
-     {if(isset($logoSetting->$templateName->themes->$themeName))} {$logo = $logoSetting->$templateName->themes->$themeName} {/if}
+     {if(isset($logoSetting->{{CHANZHI_TEMPLATE}}->themes->all))} {$logo = $logoSetting->{{CHANZHI_TEMPLATE}}->themes->all} {/if}
+     {if(isset($logoSetting->{{CHANZHI_TEMPLATE}}->themes->{{CHANZHI_THEME}}))} {$logo = $logoSetting->{{CHANZHI_TEMPLATE}}->themes->{{CHANZHI_THEME}}} {/if}
      {if($logo)}
        {$logo->extension = $control->loadModel('file')->getExtension($logo->pathname)}
        {!html::image($control->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{{$control->config->company->name}}' title='{{$control->config->company->name}}'")}
@@ -56,15 +56,14 @@
     <ul class='nav'>
     {$subnavs = ''}
     {foreach($navs as $nav1)}
-      <li class='{!echo $nav1->class?>'>
+      <li class='{!echo $nav1->class}'>
       {if(empty($nav1->children))}
         {!html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'")}
       {else}
-      {
-        {echo html::a("#sub-{$nav1->class}", $nav1->title . " <i class='icon-caret-down'></i>", ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'")}
-        {$subnavs .= "<ul class='nav' id='sub-{$nav1->class}'>\n"}
+        {!html::a("#sub-{{$nav1->class}}", $nav1->title . " <i class='icon-caret-down'></i>", ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'")}
+        {$subnavs .= "<ul class='nav' id='sub-{{$nav1->class}}'>\n"}
         {foreach($nav1->children as $nav2)}
-          {$subnavs .= "<li class='{$nav2->class}'>"}
+          {$subnavs .= "<li class='{{$nav2->class}}'>"}
           {if(empty($nav2->children))}
             {$subnavs .= html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : "data-toggle='modal' class='text-important'")}
           {else}
@@ -78,7 +77,7 @@
           {$subnavs .= "</li>\n"}
         {/foreach}
         {$subnavs .= "</ul>\n"}
-      }
+      {/if}
       </li>
     {/foreach}<!-- end nav1 -->
     </ul>
