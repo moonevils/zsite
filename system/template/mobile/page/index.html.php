@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The index view file of page for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <div class='block-region region-top blocks' data-region='page_index-top'>{$control->loadModel('block')->printRegion($layouts, 'page_index', 'top')}</div>
 <div class='panel panel-section'>
@@ -19,26 +19,26 @@
   <div class='cards condensed cards-list' id='pageList'>
     {foreach($pages as $page)}
     {$url = inlink('view', "id=$page->id", "name=$page->alias")}
-    <a class='card' href='{!echo $url?>' id='page{!echo $page->id?>' data-ve='page'>
+    <a class='card' href='{!echo $url}' id='page{!echo $page->id}' data-ve='page'>
       <div class='card-heading'>
-        <h5>{!echo $page->title?></h5>
+        <h5>{$page->title}</h5>
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'>{!echo helper::substr($page->summary, 60, '...')}</div>
+          <div class='card-content text-muted small'>{!helper::substr($page->summary, 60, '...')}</div>
           <div class='card-footer small text-muted'>
-            <span title="{!echo $lang->article->views}"><i class='icon-eye-open'></i> {!echo $page->views}</span>
-            {if(!empty($page->comments))}&nbsp;&nbsp; <span title="{!echo $lang->article->comments}"><i class='icon-comments-alt'></i> {!echo $page->comments}</span> &nbsp;{/if}
-            &nbsp;&nbsp; <span title="{!echo $lang->article->addedDate}"><i class='icon-time'></i> {!echo substr($page->addedDate, 0, 10)}</span>
+            <span title="{!echo $lang->article->views}"><i class='icon-eye-open'></i> {$page->views}</span>
+            {if(!empty($page->comments))}
+              &nbsp;&nbsp; <span title="{!echo $lang->article->comments}"><i class='icon-comments-alt'></i> {$page->comments}</span> &nbsp;
+            {/if}
+            &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($page->addedDate, 0, 10)}</span>
           </div>
         </div>
         {if(!empty($page->image))}
-        <div class='table-cell thumbnail-cell'>
-{*php*}
-          $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-          echo html::image($control->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'");
-{*/php*}
-        </div>
+          <div class='table-cell thumbnail-cell'>
+            {$title = $page->image->primary->title ? $page->image->primary->title : $page->title}
+            {!html::image($control->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+          </div>
         {/if}
       </div>
     </a>
