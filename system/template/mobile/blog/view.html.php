@@ -49,7 +49,7 @@
   <div class='panel-footer'>
     <div class='article-moreinfo hide clearfix'>
       {if($article->editor)}
-         {$editor = $control->loadModel('user')->getByAccount($article->editor)}
+        {$editor = $control->loadModel('user')->getByAccount($article->editor)}
       {/if}
       {if(!empty($editor))}
         <p class='text-right pull-right'>{!printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate))}</p>
