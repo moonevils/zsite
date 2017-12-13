@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The index view file of forum for mobile template of chanzhiEPS.
  *
@@ -9,20 +9,17 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
-{*php*}
-include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
-include TPL_ROOT . 'common/files.html.php';
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include TPL_ROOT . 'common/files.html.php'}
 
-js::set('quoteTitle', $lang->thread->quoteTitle);
-js::set('discussion', $thread->discussion);
-{*/php*}
+{!js::set('quoteTitle', $lang->thread->quoteTitle)}
+{!js::set('discussion', $thread->discussion)}
+
 <div class='block-region region-top blocks' data-region='thread_view-top'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'top')}</div>
 <hr class='space'>
-{*php*}
-if($pager->pageID == 1) include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'thread');
-include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'reply');
-{*/php*}
+{if($pager->pageID == 1)} {include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'thread')} {/if}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'reply')}
 <div class='block-region region-bottom blocks' data-region='thread_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'bottom')}</div>
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
