@@ -24,26 +24,28 @@
     {foreach($sticks as $stick)}
       {if(!isset($category))} {$category = array_shift($stick->categories)} {/if}
       {$url = inlink('view', "id=$stick->id", "category={{$category->alias}}&name=$stick->alias")}
-      <a class='card' href='{!echo $url?>' id="blog{!echo $stick->id?>" data-ve='blog'>
+      <a class='card' href='{$url}' id="blog{$stick->id}" data-ve='blog'>
         <div class='card-heading'>
           <div class='pull-right'>
             <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
           </div>
-          <h5 style='color:{$stick->titleColor}'>{$stick->title?></h5>
+          <h5 style='color:{$stick->titleColor}'>{$stick->title}</h5>
         </div>
         <div class='table-layout'>
           <div class='table-cell'>
             <div class='card-content text-muted small'>
               {$stick->summary}
-              <div><span title="{!echo $lang->article->views}"><i class='icon-eye-open'></i> {!$config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder}</span>
-                {if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments)}&nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$stick->comments}</span> &nbsp;{/if}
-                &nbsp;&nbsp; <span title="{!echo $lang->article->addedDate}"><i class='icon-time'></i> {!substr($stick->addedDate, 0, 10)}</span></div>
+              <div><span title="{$lang->article->views}"><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder}</span>
+                {if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments)}
+                  &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$stick->comments}</span> &nbsp;
+                {/if}
+                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($stick->addedDate, 0, 10)}</span></div>
             </div>
           </div>
           {if(!empty($stick->image))}
             <div class='table-cell thumbnail-cell'>
               {$title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title}
-              {!html::image($control->loadModel('file')->printFileURL($stick->image->primary->pathname, $stick->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'")}
+              {!html::image($control->loadModel('file')->printFileURL($stick->image->primary->pathname, $stick->image->primary->extension, 'article', 'smallURL'), "title='{{$title}}' class='thumbnail'")}
             </div>
           {/if}
         </div>
@@ -52,19 +54,21 @@
     {/foreach}
 
     {foreach($articles as $article)}
-      {if(!isset($category))} {$category = array_shift($article->categories)}{/if}
+      {if(!isset($category))} {$category = array_shift($article->categories)} {/if}
       {$url = inlink('view', "id=$article->id", "category={{$category->alias}}&name=$article->alias")}
-      <a class='card' href='{!echo $url?>' id="blog{$article->id}" data-ve='blog'>
+      <a class='card' href='{$url}' id="blog{$article->id}" data-ve='blog'>
         <div class='card-heading'>
-          <h5 style='color:{!echo $article->titleColor}'>{$article->title}</h5>
+          <h5 style='color:{$article->titleColor}'>{$article->title}</h5>
         </div>
         <div class='table-layout'>
           <div class='table-cell'>
             <div class='card-content text-muted small'>
               {$article->summary}
               <div><span title="{$lang->article->views}"><i class='icon-eye-open'></i> {!$config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}</span>
-                {if(commonModel::isAvailable('message') and $article->comments)} &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp;{/if}
-                &nbsp;&nbsp; <span title="{!$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span></div>
+              {if(commonModel::isAvailable('message') and $article->comments)}
+                &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp;
+              {/if}
+              &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span></div>
             </div>
           </div>
           {if(!empty($article->image))}

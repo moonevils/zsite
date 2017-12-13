@@ -3,7 +3,7 @@
   <ul class="nav">
     <li>{!html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> ", "target='_blank' class='text-important'")}</li>
     {if(!isset($control->config->site->type) or $control->config->site->type != 'blog')}
-      <li>{!html::a($config->webRoot, "<i class='icon icon-home'></i> {$lang->blog->siteHome}", "class='text-primary'")}</li>
+      <li>{!html::a($config->webRoot, "<i class='icon icon-home'></i> {{$lang->blog->siteHome}}", "class='text-primary'")}</li>
     {/if}
   </ul>
 </footer>
