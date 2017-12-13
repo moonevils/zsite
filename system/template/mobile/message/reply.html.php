@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The reply view file of message for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -17,44 +17,44 @@
       <h5 class='modal-title'><i class='icon-reply'></i> {!echo $lang->message->reply}</h5>
     </div>
     <div class='modal-body'>
-      <form id='replyForm' method='post' action="{!echo inlink('reply', "messageID={$message->id}")}">
+      <form id='replyForm' method='post' action="{!echo inlink('reply', "messageID=$message->id")}">
         <div class='form-group'>
-          {!echo html::textarea('content', '', "class='form-control' rows='5' placeholder='{$lang->message->content}'")}
+          {!html::textarea('content', '', "class='form-control' rows='5' placeholder='{{$lang->message->content}}'")}
         </div>
         {if($control->session->user->account == 'guest')}
-        <div class="form-group">
-          {!echo html::input('from', '', "class='form-control' placeholder='{$lang->message->from}'")}
-        </div>
-        <div class="form-group">
-          {!echo html::input('email', '', "class='form-control' placeholder='{$lang->message->email}'")}
-        </div>
+          <div class="form-group">
+            {!html::input('from', '', "class='form-control' placeholder='{{$lang->message->from}}'")}
+          </div>
+          <div class="form-group">
+            {!html::input('email', '', "class='form-control' placeholder='{{$lang->message->email}}'")}
+          </div>
         {else}
-        <div class='form-group'>
-          <span class='signed-user-info'>
-            <i class='icon-user text-muted'></i> <strong>{!echo $control->session->user->realname }</strong>
-            {!echo html::hidden('from', $control->session->user->realname)}
-            {if($control->session->user->email != '')}
-            <span class='text-muted'>&nbsp;({!echo str2Entity($control->session->user->email)})</span>
-            {!echo html::hidden('email', $control->session->user->email)}
-            {/if}
-          </span>
-        </div>
+          <div class='form-group'>
+            <span class='signed-user-info'>
+              <i class='icon-user text-muted'></i> <strong>{!echo $control->session->user->realname }</strong>
+              {!html::hidden('from', $control->session->user->realname)}
+              {if($control->session->user->email != '')}
+                <span class='text-muted'>&nbsp;({!echo str2Entity($control->session->user->email)})</span>
+                {!html::hidden('email', $control->session->user->email)}
+              {/if}
+            </span>
+          </div>
         {/if}
         <table style='width: 100%'>
           <tr class='hide captcha-box'></tr>
         </table>
         <div class='form-group'>
-          {!echo html::submitButton('', 'btn primary block')}
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
   </div>
 </div>
-{if(isset($pageJS)) js::execute($pageJS)}
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 <script>
 $(function()
 {
-    var $replyForm = $('#replyForm'),
+    var $replyForm  = $('#replyForm'),
         $commentBox = $('#commentBox');
     $replyForm.ajaxform({onSuccess: function(response)
     {
@@ -70,7 +70,7 @@ $(function()
         {
             $replyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
-    }});
+    } });
 
     $commentBox.find('.pager').on('click', 'a', function()
     {
