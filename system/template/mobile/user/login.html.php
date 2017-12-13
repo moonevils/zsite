@@ -1,1 +1,1 @@
-    {include  TPL_ROOT . 'user/login.front.html.php'}
+{include  TPL_ROOT . 'user/login.front.html.php'}
