@@ -17,7 +17,7 @@
       <h5 class='modal-title'><i class='icon-map-marker'></i> {$lang->address->edit}</h5>
     </div>
     <div class='modal-body'>
-      <form id='editForm' action='{!inlink('edit', "id={$address->id}")}' method='post'>
+      <form id='editForm' action='{!inlink('edit', "id={{$address->id}}")}' method='post'>
         <div class='form-group'>
           {!html::input('contact', $address->contact, "class='form-control' placeholder='{{$lang->address->contact}}'")}
         </div>

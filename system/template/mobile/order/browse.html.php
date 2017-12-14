@@ -30,31 +30,13 @@
               </strong>
             </span> 
             <div class='pull-right'>
-              {switch ($order->status)}
-                 {case 'normal':}
-                 {case 'not_paid':}
-                 {  $statusClass = 'danger';}
-                 {  break;}
-                 {case 'paid':}
-                 {case 'not_send':}
-                 {  $statusClass = 'important';}
-                 {  break;}
-                 {case 'send':}
-                 {  $statusClass = 'special';}
-                 {  break;}
-                 {case 'confirmed':}
-                 {  $statusClass = 'primary';}
-                 {  break;}
-                 {case 'finished':}
-                 {  $statusClass = 'success';}
-                 {  break;                   }   
-                 {case 'canceled':}
-                 {  $statusClass = 'muted';}
-                 {  break;}
-                 {default:}
-                 {  $statusClass = '';}
-                 {  break;}
-
+{$order->status == ''}
+{if($order->status == 'normal' and 'not_paid')} {$statusClass = 'danger'}    {/if}
+{if($order->status == 'paid' and 'not_send')}   {$statusClass = 'important'} {/if}
+{if($order->status == 'send')}                  {$statusClass = 'special'}   {/if}
+{if($order->status == 'confirmed')}             {$statusClass = 'primary'}   {/if}
+{if($order->status == 'finished')}              {$statusClass = 'success'}   {/if}
+{if($order->status == 'canceled')}              {$statusClass = 'muted'}     {/if}
               <span class='text-{$statusClass}'>{$control->order->processStatus($order)}</span>
             </div>
           </div>
