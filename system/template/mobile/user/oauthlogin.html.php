@@ -34,7 +34,7 @@
   <div class="row">
     {$colClassWidth = count($providerConfig) > 1 ? 6 : 12}
     {foreach($providerConfig as $providerCode => $thisConfig)}
-      <div class="col-{!echo $colClassWidth?>">
+      <div class="col-{!echo $colClassWidth}">
         {$params = "provider=$providerCode&fingerprint=fingerprintval"}
         {$providerName = $lang->user->oauth->providers[$providerCode]}
         {if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth'))} {$params .= "&referer=" . helper::safe64Encode($referer)} {/if}

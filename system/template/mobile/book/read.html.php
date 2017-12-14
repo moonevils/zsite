@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The read view file of book for mobile template of chanzhiEPS.
  *
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {if(!empty($control->config->book->fullScreen) or $control->get->fullScreen)}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
 {!js::set('fullScreen', 1)}
@@ -27,7 +27,7 @@
         </div>
       </div>
       
-      <div class='panel-section article' id='book' data-id='{!echo $article->id?>'>
+      <div class='panel-section article' id='book' data-id='{!echo $article->id}'>
         {if($article->summary)}
         <section class='abstract hidden bg-gray-pale small with-padding'><strong>{!echo $lang->book->summary}</strong>{!echo $lang->colon . $article->summary}</section>
         {/if}
@@ -106,7 +106,7 @@ js::set('fullScreen', 0);
     </div>
   </div>
   
-  <div class='panel-section article' id='book' data-id='{!echo $article->id?>'>
+  <div class='panel-section article' id='book' data-id='{!echo $article->id}'>
     {if($article->summary)}
     <section class='abstract hidden bg-gray-pale small with-padding'><strong>{!echo $lang->book->summary}</strong>{!echo $lang->colon . $article->summary}</section>
     {/if}
