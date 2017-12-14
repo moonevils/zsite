@@ -17,7 +17,7 @@
       <h5 class='modal-title'><i class='icon-edit'></i> {$lang->user->editProfile}</h5>
     </div>
     <div class='modal-body'>
-      <form id='editProfileForm' method='post' action="{!echo inlink('edit')}" data-checkfingerprint='1'>
+      <form id='editProfileForm' method='post' action="{!inlink('edit')}" data-checkfingerprint='1'>
         <div class='form-group form-pad-list'>
           <label for='realname' class='text-muted small'>{$lang->user->realname}</label>
           {if($user->admin == 'super')}
@@ -25,7 +25,7 @@
               {if(strpos($control->config->enabledLangs, 'zh-cn') !== false)}
               <div class='form-group pad-lable-left'>
                 {!echo html::input("realnames[cn]", isset($user->realnames->cn) ? $user->realnames->cn : '', "class='form-control'")}
-                <label>{$config->langs['zh-cn']?></label>
+                <label>{$config->langs['zh-cn']}</label>
               </div>
               {/if}
               {if(strpos($control->config->enabledLangs, 'zh-tw') !== false)}
@@ -37,13 +37,13 @@
               {if(strpos($control->config->enabledLangs, 'en') !== false)}
               <div class='form-group pad-lable-left'>
                 {!echo html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'")}
-                <label>{$config->langs['en']?></label>
+                <label>{$config->langs['en']}</label>
               </div>
               {/if}
             {else}
               {$clientLang = $control->config->defaultLang}
               {$clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang}
-              {!echo html::input("realnames[{$clientLang}]", $user->realname, "class='form-control'")}
+              {!echo html::input("realnames[{{$clientLang}}]", $user->realname, "class='form-control'")}
             {/if}
           {else}
             {!html::input('realname', $user->realname, "class='form-control'")}
@@ -111,6 +111,6 @@ $(function()
         {
             $.closeModal();
         }
-    }});
+    } });
 });
 </script>
