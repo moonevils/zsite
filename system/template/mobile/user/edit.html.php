@@ -112,12 +112,8 @@ $(function()
         {
             $.closeModal();
         }
-<<<<<<< HEAD
     }
     });
-=======
-    } });
->>>>>>> e58b97334299da33b3a769606327144e79d530b4
 });
 </script>
 {/noparse}

@@ -6,29 +6,29 @@
       <div class='panel-body'>
         <table class='table'>
           <tr> 
-            <th>{!echo $lang->score->id}</th>
-            <th>{!echo $lang->score->product}</th>
+            <th>{$lang->score->id}</th>
+            <th>{$lang->score->product}</th>
             {if(!empty($order->ip))}
-            <th>IP</th>
+              <th>IP</th>
             {/if}
             {if(!empty($order->hostID))}
-            <th>MAC</th>
+              <th>MAC</th>
             {/if}
-            <th width='50'>{!echo $lang->score->amount}</th>
+            <th width='50'>{$lang->score->amount}</th>
           </tr>
           <tr class='text-center'> 
-            <td>{!echo $order->humanOrder}</td>
-            <td>{!echo $order->subject}</td>
+            <td>{$order->humanOrder}</td>
+            <td>{$order->subject}</td>
             {if(!empty($order->ip))}
-            <td>{!echo $order->ip}</td>
+              <td>{$order->ip}</td>
             {/if}
             {if(!empty($order->hostID))}
-            <td>{!echo $order->hostID}</td>
+              <td>{$order->hostID}</td>
             {/if}
-            <td>{!echo $order->amount}</td>
+            <td>{$order->amount}</td>
           </tr>
           <tr class='text-center'>
-            <td colspan='5'>{!echo html::a($payLink, $lang->score->alipay, "class='btn primary block'")}</td>
+            <td colspan='5'>{!html::a($payLink, $lang->score->alipay, "class='btn primary block'")}</td>
           </tr>
         </table>
       </div>
