@@ -16,7 +16,7 @@
 <table class="table table-layout">
   <tbody>
     <tr>
-      <td colspan='2'><strong><i class='icon icon-user'></i> {!echo $lang->user->profile?></strong></td>
+      <td colspan='2'><strong><i class='icon icon-user'></i> {!echo $lang->user->profile}</strong></td>
     </tr>
     <tr>
       <th>{$lang->user->realname}</th>
