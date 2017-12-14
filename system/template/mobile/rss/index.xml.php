@@ -5,8 +5,8 @@ $templateRoot       = $webRoot . "template/{$templateName}/";
 $templateThemeRoot  = "{$templateRoot}theme/";
 $templateCommonRoot = "{$templateThemeRoot}common/";
 /php*}
-{!echo '<?xml version="1.0" encoding="utf-8"?>'}
-{!echo '<?xml-stylesheet type="text/css" href="' . $templateCommonRoot . 'css/rss.css" ?>' }
+{!echo '<?xml version="1.0" encoding="utf-8"}'}
+{!echo '<?xml-stylesheet type="text/css" href="' . $templateCommonRoot . 'css/rss.css" }' }
 <rss version="2.0">
 <channel>
   <title>{$title}</title>

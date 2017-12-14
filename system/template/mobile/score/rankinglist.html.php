@@ -12,13 +12,13 @@
           {foreach($allScore as $ranking)}
           {if($ranking->account == 'guest') continue}
           <dt>
-            <span class='strong'>Top{!echo $i?></span>
+            <span class='strong'>Top{!echo $i}</span>
 {*php*}
             $basicInfo = $users[$ranking->account];
             echo $basicInfo->realname;
 {*/php*}
           </dt>
-          <dd>{!echo $ranking->score?></dd>
+          <dd>{!echo $ranking->score}</dd>
           {$i++}
           {/foreach}
         </dl>
@@ -36,14 +36,14 @@
           {foreach($monthScore as $ranking)}
           {if($ranking->account == 'guest') continue}
           <dt>
-            <span class='strong'>Top{!echo $i?></span>
+            <span class='strong'>Top{!echo $i}</span>
 {*php*}
             $ranking->account = trim($ranking->account);
             $basicInfo = $users[$ranking->account];
             echo $basicInfo->realname;
 {*/php*}
           </dt>
-          <dd>{!echo $ranking->sumScore?></dd>
+          <dd>{!echo $ranking->sumScore}</dd>
           {$i++}
           {/foreach}
         </dl>
@@ -61,14 +61,14 @@
           {foreach($weekScore as $ranking)}
           {if($ranking->account == 'guest') continue}
           <dt>
-            <span class='strong'>Top{!echo $i?></span>
+            <span class='strong'>Top{!echo $i}</span>
 {*php*}
             $ranking->account = trim($ranking->account);
             $basicInfo = $users[$ranking->account];
             echo $basicInfo->realname;
 {*/php*}
           </dt>
-          <dd>{!echo $ranking->sumScore?></dd>
+          <dd>{!echo $ranking->sumScore}</dd>
           {$i++}
           {/foreach}
         </dl>
@@ -86,14 +86,14 @@
           {foreach($dayScore as $ranking)}
           {if($ranking->account == 'guest') continue}
           <dt>
-            <span class='strong'>Top{!echo $i?></span>
+            <span class='strong'>Top{!echo $i}</span>
 {*php*}
             $ranking->account = trim($ranking->account);
             $basicInfo = $users[$ranking->account];
             echo $basicInfo->realname;
 {*/php*}
           </dt>
-          <dd>{!echo $ranking->sumScore?></dd>
+          <dd>{!echo $ranking->sumScore}</dd>
           {$i++}
           {/foreach}
         </dl>
