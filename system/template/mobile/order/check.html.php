@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The check view file of order for mobile template of chanzhiEPS.
  * The file should be used as ajax content
@@ -10,37 +10,38 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<?php js::set('currencySymbol', $currencySymbol);?>
-<?php js::set('createdSuccess', $lang->order->createdSuccess);?>
-<?php js::set('goToPay', $lang->order->goToPay);?>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{!js::set('currencySymbol', $currencySymbol)}
+{!js::set('createdSuccess', $lang->order->createdSuccess)}
+{!js::set('goToPay', $lang->order->goToPay)}
 
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
-    <div class='title'><i class='icon icon-shopping-cart'></i> <strong><?php echo $lang->order->selectPayment;?></strong></div>
+    <div class='title'><i class='icon icon-shopping-cart'></i> <strong>{$lang->order->selectPayment}</strong></div>
   </div>
-  <form id='checkForm' action='<?php echo helper::createLink('order', 'pay', "orderID=$order->id"); ?>' method='post' target='_blank'>
+  <form id='checkForm' action='{!helper::createLink('order', 'pay', "orderID=$order->id")}' method='post' target='_blank'>
     <div class="panel-body">
-      <div class='alert bg-gray-pale'><strong><?php echo $lang->order->payment;?></strong></div>
+      <div class='alert bg-gray-pale'><strong>{$lang->order->payment}</strong></div>
       <div class="form-group">
-        <?php echo html::radio('payment', $paymentList);?>
+        {!html::radio('payment', $paymentList)}
       </div>
     </div>
     <div class='panel-body'>
       <div class='alert bg-primary-pale'>
-        <?php printf($lang->order->selectProducts, count($products));?>
-        <?php printf($lang->order->totalToPay, $currencySymbol . $order->amount);?>
+        {!printf($lang->order->selectProducts, count($products))}
+        {!printf($lang->order->totalToPay, $currencySymbol . $order->amount)}
       </div>
     </div>
     <div class='panel-footer'>
-      <?php echo html::submitButton($lang->order->settlement, 'btn-order-submit btn danger block'); ?>
-      <?php echo html::a(helper::createLink('order', 'browse'), $lang->order->admin, "class='btn default block'");?>
+      {!html::submitButton($lang->order->settlement, 'btn-order-submit btn danger block')}
+      {!html::a(helper::createLink('order', 'browse'), $lang->order->admin, "class='btn default block'")}
     </div>
   </form>
 </div>
 
-<?php include TPL_ROOT . 'common/form.html.php';?>
+{include TPL_ROOT . 'common/form.html.php'}
+{noparse}
 <script>
 $(function()
 {
@@ -48,7 +49,9 @@ $(function()
 
     $.refreshAddressList = function()
     {
-        $('#addressListWrapper').load('<?php echo helper::createLink('address', 'browse') ?> #addressList', function()
+{/noparse}
+       $('#addressListWrapper').load('{!helper::createLink('address', 'browse')} #addressList', function()
+        {noparse}
         {
             $('#addressList').find('.card-footer').remove();
         });
@@ -83,4 +86,5 @@ $(function()
     });
 });
 </script>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{/noparse}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

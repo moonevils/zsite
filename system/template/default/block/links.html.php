@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The link front view file of block module of chanzhiEPS.
  *
@@ -9,19 +9,19 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php if($this->app->getModuleName() != 'links' and !empty($this->config->links->index)):?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+*}
+{if($app->getModuleName() != 'links' and !empty($lang->links->index))}
+<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><i class='icon'><?php echo $icon;?></i><?php echo $block->title;?></strong>
+    <strong><i class='icon'>{!echo $icon}</i>{!echo $block->title}</strong>
     <div class='pull-right'>
-      <?php if(trim(strip_tags($this->config->links->all, '<a>'))):?>
-      <?php echo html::a(helper::createLink('links', 'index'), $this->lang->more); ?>
-      <?php endif;?>
+      {if(trim(strip_tags($lang->links->all, '<a>')))}
+      {!echo html::a(helper::createLink('links', 'index'), $lang->more)}
+      {/if}
     </div>
   </div>
   <div class='panel-body'>
-    <div id='links<?php echo $block->id;?>' data-ve='links'><?php echo $this->config->links->index;?></div>
+    <div id='links{!echo $block->id}' data-ve='links'>{!echo $lang->links->index}</div>
   </div>
 </div>
-<?php endif;?>
+{/if}

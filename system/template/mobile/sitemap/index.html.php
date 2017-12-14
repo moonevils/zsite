@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The sitemap view file of chanzhiEPS.
  *
@@ -9,85 +9,87 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php if($onlyBody == 'no') include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header'); ?>
+/php*}
+{if($onlyBody == 'no')} {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')} {/if}
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-sitemap'></i> <?php echo $lang->sitemap->common;?></strong>
+    <strong><i class='icon-sitemap'></i> {$lang->sitemap->common}</strong>
     <div class='panel-actions pull-right'>
-      <?php echo html::a($this->createLink('sitemap', 'index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn primary'");?>
+      {!html::a($control->createLink('sitemap', 'index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn primary'")}
     </div>
   </div>
   <div class='panel-body'>
     <div class='clearfix sitemap-tree'>
       <ul class='tree'>
-        <li><?php echo html::a(helper::createLink('company', 'index'), $lang->aboutUs);?></li>
-        <?php if(!empty($pages)) foreach($pages as $page):?>
-        <li><?php echo html::a(helper::createLink('page', 'view', "pageID={$page->id}", "name={$page->alias}"), $page->title);?></li>
-        <?php endforeach;?>
+        <li>{!html::a(helper::createLink('company', 'index'), $lang->aboutUs)}</li>
+        {if(!empty($pages))}
+          {foreach($pages as $page)}
+            <li>{!html::a(helper::createLink('page', 'view', "pageID={{$page->id}}", "name={{$page->alias}}"), $page->title)}</li>
+          {/foreach}
+        {/if}
       </ul>
     </div>
     
-    <?php if(commonModel::isAvailable('article')):?>
-    <div class='clearfix sitemap-tree'> 
-      <h4><?php echo $lang->sitemap->articleList;?></h4>
-      <ul class='tree'>
-        <?php foreach($articles as $article):?>
-        <li class='articleItem'><?php echo html::a(helper::createLink('article', 'view', "id=$article->id", "category={$article->category->alias}&name=$article->alias"), $article->title);?></li>
-        <?php endforeach;?>
-      </ul>
-    </div>
-    <?php endif;?>
+    {if(commonModel::isAvailable('article'))}
+      <div class='clearfix sitemap-tree'> 
+        <h4>{$lang->sitemap->articleList}</h4>
+        <ul class='tree'>
+          {foreach($articles as $article)}
+            <li class='articleItem'>{!html::a(helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias"), $article->title)}</li>
+          {/foreach}
+        </ul>
+      </div>
+    {/if}
     
-    <?php if(strpos($productTree, '<li>') !== false):?>
-    <div class='clearfix sitemap-tree'> 
-      <h4><?php echo $lang->sitemap->productCategory?></h4>
-      <?php echo $productTree?>
-    </div>
-    <?php endif;?>
+    {if(strpos($productTree, '<li>') !== false)}
+      <div class='clearfix sitemap-tree'> 
+        <h4>{$lang->sitemap->productCategory}</h4>
+        {$productTree}
+      </div>
+    {/if}
 
-    <?php if(strpos($articleTree, '<li>') !== false):?>
-    <div class='clearfix sitemap-tree'> 
-      <h4><?php echo $lang->sitemap->articleCategory?></h4>
-      <?php echo $articleTree?>
-    </div>
-    <?php endif;?>
-    <?php if(commonModel::isAvailable('blog') && strpos($blogTree, '<li>') !== false):?>
-    <div class='clearfix sitemap-tree'> 
-      <h4><?php echo $lang->sitemap->blogCategory?></h4>
-      <?php echo $blogTree?>
-    </div>
-    <?php endif;?>
+    {if(strpos($articleTree, '<li>') !== false)}
+      <div class='clearfix sitemap-tree'> 
+        <h4>{$lang->sitemap->articleCategory}</h4>
+        {$articleTree}
+      </div>
+    {/if}
+    {if(commonModel::isAvailable('blog') && strpos($blogTree, '<li>') !== false)}
+      <div class='clearfix sitemap-tree'> 
+        <h4>{$lang->sitemap->blogCategory}</h4>
+        {$blogTree}
+      </div>
+    {/if}
 
-    <?php if(commonModel::isAvailable('forum') && $boards):?>
-    <div class='clearfix sitemap-tree'>
-      <h4><?php echo $lang->sitemap->boards;?></h4>
-      <ul class='tree'>
-        <?php foreach($boards as $parentBoard):?>
-        <li>
-          <?php echo $parentBoard->name;?>
-          <?php if($parentBoard->children):?>
-          <ul>
-            <?php foreach($parentBoard->children as $child):?>
-            <li><?php echo html::a(helper::createLink('forum', 'board', "id=$child->id", "category={$child->alias}"), $child->name);?></li>
-            <?php endforeach;?>
-          </ul>
-          <?php endif;?>
-        </li>
-        <?php endforeach;?>
-      </ul>
-    </div>
-    <?php endif;?>
-    <?php if(commonModel::isAvailable('book') && !empty($books)):?>
-    <div class='clearfix sitemap-tree'>
-      <h4><?php echo $lang->sitemap->books;?></h4>
-      <ul class='tree'>
-        <?php foreach($books as $book):?>
-        <li><?php echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book={$book->alias}"), $book->title);?></li>
-        <?php endforeach;?>
-      </ul>
-    </div>
-    <?php endif;?>
+    {if(commonModel::isAvailable('forum') && $boards)}
+      <div class='clearfix sitemap-tree'>
+        <h4>{$lang->sitemap->boards}</h4>
+        <ul class='tree'>
+          {foreach($boards as $parentBoard)}
+          <li>
+            {$parentBoard->name}
+            {if($parentBoard->children)}
+              <ul>
+                {foreach($parentBoard->children as $child)}
+                  <li>{!html::a(helper::createLink('forum', 'board', "id=$child->id", "category={{$child->alias}}"), $child->name)}</li>
+                {/foreach}
+              </ul>
+            {/if}
+          </li>
+          {/foreach}
+        </ul>
+      </div>
+    {/if}
+    {if(commonModel::isAvailable('book') && !empty($books))}
+      <div class='clearfix sitemap-tree'>
+        <h4>{$lang->sitemap->books}</h4>
+        <ul class='tree'>
+          {foreach($books as $book)}
+            <li>{!html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book={{$book->alias}}"), $book->title)}</li>
+          {/foreach}
+        </ul>
+      </div>
+    {/if}
   </div>
 </div>
-<?php if($onlyBody == 'no') include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{if($onlyBody == 'no')} {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')} {/if}

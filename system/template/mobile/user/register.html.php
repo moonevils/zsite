@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The register view file of user for mobile template of chanzhiEPS.
  *
@@ -9,25 +9,18 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php
-include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
-?>
-<?php 
-  if(isset($this->config->site->agreement) and $this->config->site->agreement == 'open')
-  {
-    js::set('agreement', 'open');
-  }
-  else
-  {
-    js::set('agreement', 'close');
-  }
-?>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{if(isset($control->config->site->agreement) and $control->config->site->agreement == 'open')}
+  {!js::set('agreement', 'open')}
+{else}
+  {!js::set('agreement', 'close')}
+{/if}
 <hr class='space'>
 <div class='panel-section'>
-  <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
+  {include TPL_ROOT . 'user/oauthlogin.html.php'}
   <div class='panel-heading'>
-    <div class='title'><strong><?php echo $lang->user->register->welcome;?></strong></div>
+    <div class='title'><strong>{$lang->user->register->welcome}</strong></div>
   </div>
   <div class='panel-body'>
   <form class="ajaxform" method='post' id='regForm' role='form' data-checkfingerprint='1'>
@@ -36,43 +29,43 @@ include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
       <div class='content'></div>
     </div>
     <div class='form-group'>
-      <label class='control-label' for='account'><?php echo $lang->user->account;?></label>
-      <?php echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?>
+      <label class='control-label' for='account'>{$lang->user->account}</label>
+      {!html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'")}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='realname'><?php echo $lang->user->realname;?></label>
-      <?php echo html::input('realname', '', "class='form-control'");?>
+      <label class='control-label' for='realname'>{!echo $lang->user->realname}</label>
+      {!html::input('realname', '', "class='form-control'")}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='email'><?php echo $lang->user->email;?></label>
-      <?php echo html::input('email', '', "class='form-control' autocomplete='off'") . '';?>
+      <label class='control-label' for='email'>{!echo $lang->user->email}</label>
+      {!html::input('email', '', "class='form-control' autocomplete='off'") . ''}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='password1'><?php echo $lang->user->password;?></label>
-      <?php echo html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'");?>
+      <label class='control-label' for='password1'>{!echo $lang->user->password}</label>
+      {!html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'")}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='password2'><?php echo $lang->user->password2;?></label>
-      <?php echo html::password('password2', '', "class='form-control'");?>
+      <label class='control-label' for='password2'>{$lang->user->password2}</label>
+      {!html::password('password2', '', "class='form-control'")}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='company'><?php echo $lang->user->company;?></label>
-      <?php echo html::input('company', '', "class='form-control'");?>
+      <label class='control-label' for='company'>{$lang->user->company}</label>
+      {!html::input('company', '', "class='form-control'")}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='phone'><?php echo $lang->user->phone;?></label>
-      <?php echo html::input('phone', '', "class='form-control'");?>
+      <label class='control-label' for='phone'>{$lang->user->phone}</label>
+      {!html::input('phone', '', "class='form-control'")}
     </div>
-    <?php if(isset($this->config->site->agreement) and $this->config->site->agreement == 'open'):?>
+    {if(isset($control->config->site->agreement) and $control->config->site->agreement == 'open')}
     <div class='form-group'>
       <label class='control-label' for='agreement'></label>
       <input type="checkbox" id="agreement" name="agreement" value="1">
-      <span><?php echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'agreement'), $this->config->site->agreementTitle ? $this->config->site->agreementTitle : $this->lang->user->register->agreement, "data-toggle='modal'") . '》';?></span>
+      <span>{$lang->user->register->agree}《 {!html::a(helper::createLink('user', 'agreement'), $control->config->site->agreementTitle ? $control->config->site->agreementTitle : $control->lang->user->register->agreement, "data-toggle='modal'")}》</span>
     </div>
-    <?php endif;?>
-    <div class='form-group'><?php echo html::submitButton($lang->register, 'btn primary block');?><?php echo html::hidden('referer', $referer);?></div>
+    {/if}
+    <div class='form-group'>{!html::submitButton($lang->register, 'btn primary block')}{!html::hidden('referer', $referer)}</div>
   </form>
   </div>
 </div>
-<?php include TPL_ROOT . 'common/form.html.php'; ?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include TPL_ROOT . 'common/form.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

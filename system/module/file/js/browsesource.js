@@ -43,7 +43,7 @@ $(document).ready(function()
         $('.list-view').removeClass('active');
         $('#imageView').show();
         $('#listView').hide();
-        $.cookie('sourceViewType', 'image', {path: "/"});
+        $.cookie('sourceViewType', 'image', {path: config.cookiePath});
     });
 
     $('.list-view').click(function()
@@ -52,7 +52,7 @@ $(document).ready(function()
         $('.image-view').removeClass('active');
         $('#listView').show();
         $('#imageView').hide();
-        $.cookie('sourceViewType', 'list', {path: "/"});
+        $.cookie('sourceViewType', 'list', {path: config.cookiePath});
     });
 
     var type = $.cookie('sourceViewType');

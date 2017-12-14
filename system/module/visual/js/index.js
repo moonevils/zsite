@@ -2,7 +2,7 @@
 {
     'use strict';
 
-    $.cookie('visualDevice', v.device, {expires:config.cookieLife, path:config.webRoot});
+    $.cookie('visualDevice', v.device, {expires:config.cookieLife, path:config.cookiePath});
 
     var DEBUG = window.v.debug;
     var visualPage = $('#visualPage').get(0);

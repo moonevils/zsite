@@ -1,4 +1,4 @@
-<?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
+{$topNavs = $model->loadModel('nav')->getNavs('desktop_top')}
 <nav id='navbar' class='navbar' data-type='desktop_top'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
@@ -6,41 +6,41 @@
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
-    <a class='navbar-brand' href='<?php echo helper::createLink('index');?>'><i class='icon-home'></i></a>
+    <a class='navbar-brand' href='{!echo helper::createLink('index')}'><i class='icon-home'></i></a>
   </div>
   <div class='collapse navbar-collapse' id='navbarCollapse'>
     <ul class='nav navbar-nav'>
-      <?php $navCount = count($topNavs);?>
-      <?php $i =0;?>
-      <?php foreach($topNavs as $nav1):?>
-        <?php if(empty($nav1->children)):?>
-          <li class='<?php echo $nav1->class?>'><?php echo html::a($nav1->url, $nav1->title, "target='$nav1->target'");?></li>
-          <?php else: ?>
-          <li class="<?php echo $nav1->hover . " " . $nav1->class?>">
-              <?php echo html::a($nav1->url, $nav1->title . " <b class='caret'></b>", 'class="dropdown-toggle" data-toggle="dropdown"');?>
-              <ul class='dropdown-menu' role='menu'>
-                <?php foreach($nav1->children as $nav2):?>
-                  <?php if(empty($nav2->children)):?>
-                    <li class='<?php echo $nav2->class?>'><?php echo html::a($nav2->url, $nav2->title, "target='$nav2->target'");?></li>
-                  <?php else: ?>
-                  <li class="dropdown-submenu <?php echo $nav2->class?> <?php if($i == $navCount -1) echo 'pull-left'?>">
-                      <?php echo html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : '');?>
-                      <ul class='dropdown-menu' role='menu'>
-                        <?php foreach($nav2->children as $nav3):?>
-                        <li><?php echo html::a($nav3->url, $nav3->title, ($nav3->target != 'modal') ? "target='$nav3->target'" : '');?></li>
-                        <?php endforeach;?>
-                      </ul>
-                    </li>
-                  <?php endif;?>
-                <?php endforeach;?><!-- end nav2 -->
-              </ul>
+      {$navCount = count($topNavs)}
+      {$i =0}
+      {foreach($topNavs as $nav1)}
+        {if(empty($nav1->children))}
+          <li class='{!echo $nav1->class}'>{!echo html::a($nav1->url, $nav1->title, "target='$nav1->target'")}</li>
+          {else}
+          <li class="{!echo $nav1->hover . " " . $nav1->class}">
+            {!echo html::a($nav1->url, $nav1->title . " <b class='caret'></b>", 'class="dropdown-toggle" data-toggle="dropdown"')}
+            <ul class='dropdown-menu' role='menu'>
+              {foreach($nav1->children as $nav2)}
+                {if(empty($nav2->children))}
+                  <li class='{!echo $nav2->class}'>{!echo html::a($nav2->url, $nav2->title, "target='$nav2->target'")}</li>
+                {else}
+                <li class="dropdown-submenu {!echo $nav2->class} {if($i == $navCount -1)} pull-left {/if}">
+                    {!echo html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : '')}
+                    <ul class='dropdown-menu' role='menu'>
+                      {foreach($nav2->children as $nav3)}
+                      <li>{!echo html::a($nav3->url, $nav3->title, ($nav3->target != 'modal') ? "target='$nav3->target'" : '')}</li>
+                      {/foreach}
+                    </ul>
+                  </li>
+                {/if}
+              {/foreach}<!-- end nav2 -->
+            </ul>
           </li>
-        <?php endif;?>
-        <?php $i++; ?>
-      <?php endforeach;?><!-- end nav1 -->
-      <?php if(!$setting->compatible && ($setting->bottom == 'navAndSearch' or ($setting->middle->center == 'nav' and $setting->middle->right == 'search'))):?>
-      <li class='nav-item-searchbar'><?php include TPL_ROOT . 'block' . DS . "searchbar.html.php";?></li>
-      <?php endif; ?>
+        {/if}
+        {$i += 1}
+      {/foreach}<!-- end nav1 -->
+      {if(!$setting->compatible && ($setting->bottom == 'navAndSearch' or ($setting->middle->center == 'nav' and $setting->middle->right == 'search')))}
+      <li class='nav-item-searchbar'>{include TPL_ROOT . 'block' . DS . "searchbar.html.php"}</li>
+      {/if}
     </ul>
   </div>
 </nav>

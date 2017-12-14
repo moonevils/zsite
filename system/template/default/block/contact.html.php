@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The contact front view file of block module of chanzhiEPS.
  *
@@ -9,29 +9,27 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
+*}
 
-<?php 
-$block->content = json_decode($block->content);
-$contact = $this->loadModel('company')->getContact();
-?>
+{$block->content = json_decode($block->content)}
+{$contact = $model->loadModel('company')->getContact()}
 
-<div id="block<?php echo $block->id;?>" class='panel-block-contact panel panel-block <?php echo $blockClass;?>'>
+<div id="block{!echo $block->id}" class='panel-block-contact panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
-    <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
-    <?php endif;?>
+    <strong>{!echo $icon . $block->title}</strong>
+    {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
+    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    {/if}
   </div>
   <div class='panel-body'>
-    <div id='companyContact<?php echo $block->id;?>' data-ve='companyContact'>
+    <div id='companyContact{!echo $block->id}' data-ve='companyContact'>
       <table class='table table-data'>
-        <?php foreach($contact as $item => $value):?>
+        {foreach($contact as $item => $value)}
         <tr>
-          <th><?php echo $this->lang->company->$item . $this->lang->colon;?></th>
-          <td><?php echo $value;?></td>
+          <th>{!echo $lang->company->$item . $lang->colon}</th>
+          <td>{!echo $value}</td>
         </tr>
-        <?php endforeach;?>
+        {/foreach}
       </table>
     </div>
   </div>

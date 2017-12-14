@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  * The header view file of block module of chanzhiEPS.
  *
@@ -9,44 +9,37 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
-?>
-<?php
-$isSearchAvaliable = commonModel::isAvailable('search'); 
-$setting           = !empty($block->content) ? json_decode($block->content) : new stdclass();
-$device            = $this->app->clientDevice;
-$template          = $this->config->template->{$device}->name;
-$theme             = $this->config->template->{$device}->theme;
-$logoSetting       = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
-$logo              = '';
+*}
+{$isSearchAvaliable = commonModel::isAvailable('search')} 
+{$setting           = !empty($block->content) ? json_decode($block->content) : new stdclass()}
+{$device            = $model->app->clientDevice}
+{$template          = $model->config->template->{{$device}}->name}
+{$theme             = $model->config->template->{{$device}}->theme}
+{$logoSetting       = isset($model->config->site->logo) ? json_decode($model->config->site->logo) : new stdclass()}
+{$logo              = ''}
 
-if(isset($logoSetting->$template->themes->all))     $logo = $logoSetting->$template->themes->all;
-if(isset($logoSetting->$template->themes->$theme))  $logo = $logoSetting->$template->themes->$theme;
+{if(isset($logoSetting->$template->themes->all))}    {$logo = $logoSetting->$template->themes->all} {/if}
+{if(isset($logoSetting->$template->themes->$theme))}  {$logo = $logoSetting->$template->themes->$theme} {/if}
 
-if($logo != '') $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
+{if($logo != '')} {$logo->extension = $model->loadModel('file')->getExtension($logo->pathname)} {/if}
 
-/* Set default header layout setting. */
-$setting->top             = isset($setting->top) ? $setting->top : new stdclass();
-$setting->middle          = isset($setting->middle) ? $setting->middle : new stdclass();
-$setting->bottom          = zget($setting, 'bottom', 'nav');
-$setting->top->left       = zget($setting->top, 'left', '');
-$setting->top->right      = zget($setting->top, 'right', 'login');
-$setting->middle->left    = zget($setting->middle, 'left', 'nav');
-$setting->middle->center  = zget($setting->middle, 'center', 'slogan');
-$setting->middle->right   = zget($setting->middle, 'right', 'search');
-$setting->compatible      = zget($setting, 'compatible', '0');
-$setting->topLeftContent  = zget($setting, 'topLeftContent', '');
-$setting->topRightContent = zget($setting, 'topRightContent', '');
-?>
+{* Set default header layout setting. *}
+{$setting->top             = isset($setting->top) ? $setting->top : new stdclass()}
+{$setting->middle          = isset($setting->middle) ? $setting->middle : new stdclass()}
+{$setting->bottom          = zget($setting, 'bottom', 'nav')}
+{$setting->top->left       = zget($setting->top, 'left', '')}
+{$setting->top->right      = zget($setting->top, 'right', 'login')}
+{$setting->middle->left    = zget($setting->middle, 'left', 'nav')}
+{$setting->middle->center  = zget($setting->middle, 'center', 'slogan')}
+{$setting->middle->right   = zget($setting->middle, 'right', 'search')}
+{$setting->compatible      = zget($setting, 'compatible', '0')}
+{$setting->topLeftContent  = zget($setting, 'topLeftContent', '')}
+{$setting->topRightContent = zget($setting, 'topRightContent', '')}
 
-<div data-ve='block' data-id="<?php echo $block->id;?>">
-  <?php
-  if($setting->compatible)
-  {
-      include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default');
-  }
-  else
-  {
-      include $this->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout');
-  }
-  ?>
+<div data-ve='block' data-id="{$block->id}">
+  {if($setting->compatible)}
+     include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'header.default')}
+  {else}
+    {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'header.layout')}
+  {/if}
 </div>

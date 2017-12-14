@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The modify view file of article for mobile template of chanzhiEPS.
  *
@@ -9,56 +9,57 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> <?php echo $lang->article->edit;?></h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {$lang->article->edit}</h5>
     </div>
     <div class='modal-body'>
-      <form id='editArticleForm' method='post' action="<?php echo inlink('post');?>">
+      <form id='editArticleForm' method='post' action="{!inlink('post')}">
         <div class='row'>
           <div class='col-6'>
             <div class='form-group'>
-              <label for='author' class='control-label'><?php echo $lang->article->author;?></label>
-              <?php echo html::input('author', $article->author, "class='form-control'");?>
+              <label for='author' class='control-label'>{$lang->article->author}</label>
+              {!html::input('author', $article->author, "class='form-control'")}
             </div>
           </div>
           <div class='col-6'>
             <div class='form-group'>
-              <label for='source' class='control-label'><?php echo $lang->article->source;?></label>
-              <?php echo html::select('source', $lang->article->sourceList, $article->source, "class='form-control'");?>
+              <label for='source' class='control-label'>{$lang->article->source}</label>
+              {!html::select('source', $lang->article->sourceList, $article->source, "class='form-control'")}
             </div>
           </div>
         </div>
         <div class='row hidden' style='margin-bottom: 10px' id='sourceRow'>
-          <div class='col-6'><?php echo html::input('copySite', $article->copySite, "class='form-control' placeholder='{$lang->article->copySite}'"); ?></div>
-          <div class='col-6'><?php echo html::input('copyURL',  $article->copyURL, "class='form-control' placeholder='{$lang->article->copyURL}'"); ?></div>
+          <div class='col-6'>{!html::input('copySite', $article->copySite, "class='form-control' placeholder='{{$lang->article->copySite}}'")}</div>
+          <div class='col-6'>{!html::input('copyURL',  $article->copyURL, "class='form-control' placeholder='{{$lang->article->copyURL}}'")}</div>
         </div>
         <div class='form-group'>
-          <label for='title' class='control-label'><?php echo $lang->article->title;?></label>
-          <?php echo html::input('title', $article->title, "class='form-control'");?>
+          <label for='title' class='control-label'>{$lang->article->title}</label>
+          {!html::input('title', $article->title, "class='form-control'")}
         </div>
         <div class='form-group'>
-          <label for='keywords' class='control-label'><?php echo $lang->article->keywords;?></label>
-          <?php echo html::input('keywords', $article->keywords, "class='form-control' placeholder='{$lang->keywordsHolder}'");?>
+          <label for='keywords' class='control-label'>{$lang->article->keywords}</label>
+          {!html::input('keywords', $article->keywords, "class='form-control' placeholder='{{$lang->keywordsHolder}}'")}
         </div>
         <div class='form-group'>
-          <label for='summary' class='control-label'><?php echo $lang->article->summary;?></label>
-          <?php echo html::textarea('summary', $article->summary, "rows='2' class='form-control'");?>
+          <label for='summary' class='control-label'>{$lang->article->summary}</label>
+          {!html::textarea('summary', $article->summary, "rows='2' class='form-control'")}
         </div>
         <div class='form-group'>
-          <label for='content' class='control-label'><?php echo $lang->article->content;?></label>
-          <?php echo html::textarea('content', $article->content, "rows='10' class='form-control'");?>
+          <label for='content' class='control-label'>{$lang->article->content}</label>
+          {!html::textarea('content', $article->content, "rows='10' class='form-control'")}
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block');?>
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
   </div>
 </div>
+{noparse}
 <style>
 .form-group > .form-control + .form-control {margin-top: 5px}
 </style>
@@ -80,3 +81,4 @@ $(function()
     }});
 });
 </script>
+{/noparse}

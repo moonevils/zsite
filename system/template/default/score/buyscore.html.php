@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The score view file of score module of ZenTaoPMS.
  *
@@ -9,27 +9,27 @@
  * @version     $Id$
  * @link        http://www.chanzhi.net
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 <div class='row'>
-  <?php include TPL_ROOT . 'user/side.html.php';?>
+  {include TPL_ROOT . 'user/side.html.php'}
   <div class='col-md-10'>
     <div class='panel'>
-      <div class='panel-heading'><strong><?php echo $lang->user->buyScore?></strong></div>
+      <div class='panel-heading'><strong>{!$lang->user->buyScore}</strong></div>
       <div class='panel-body'>
         <form method='post' id='ajaxForm'>
           <table class='table table-form'>
             <tr>
-              <th width='100'><?php echo $lang->score->setAmount?></th>
-              <td><?php echo html::input('amount', '', "style='width:45px' onkeyup='getScore()'")?><?php echo $lang->score->amountUnit;?> <span class='ml-10px red'><?php printf($lang->score->buyWaring, $config->score->buyScore->minAmount, $config->score->buyScore->perYuan)?></span></td>
+              <th width='100'>{!$lang->score->setAmount}</th>
+              <td>{!html::input('amount', '', "style='width:45px' onkeyup='getScore()'")}{!$lang->score->amountUnit} <span class='ml-10px red'>{!printf($lang->score->buyWaring, $config->score->buyScore->minAmount, $config->score->buyScore->perYuan)}</span></td>
             </tr>
             <tr>
-              <th><?php echo $lang->score->getScore?></th>
+              <th>{!echo $lang->score->getScore}</th>
               <td><span id='score'>0</span></td>
             </tr>
             <tr>
               <th></th>
-              <td><?php echo html::submitButton()?></td>
+              <td>{!echo html::submitButton()}</td>
             </tr>
           </table>
         </form>
@@ -38,7 +38,6 @@
   </div>
 </div>
 <script type='text/javascript'>
-var scoreConfig = <?php echo $config->score->buyScore->perYuan?>;
+var scoreConfig = {!echo $config->score->buyScore->perYuan};
 </script>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
-
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

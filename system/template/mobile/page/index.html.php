@@ -1,4 +1,4 @@
-<?php
+{php
 /**
  * The index view file of page for mobile template of chanzhiEPS.
  *
@@ -9,43 +9,43 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<div class='block-region region-top blocks' data-region='page_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'top');?></div>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+<div class='block-region region-top blocks' data-region='page_index-top'>{$control->loadModel('block')->printRegion($layouts, 'page_index', 'top')}</div>
 <div class='panel panel-section'>
   <div class='panel-heading'>
-    <div class='title'><strong><?php echo $this->lang->page->list;?></strong></div>
+    <div class='title'><strong>{!echo $control->lang->page->list}</strong></div>
   </div>
   <div class='cards condensed cards-list' id='pageList'>
-    <?php foreach($pages as $page):?>
-    <?php $url = inlink('view', "id=$page->id", "name=$page->alias");?>
-    <a class='card' href='<?php echo $url?>' id='page<?php echo $page->id?>' data-ve='page'>
+    {foreach($pages as $page)}
+    {$url = inlink('view', "id=$page->id", "name=$page->alias")}
+    <a class='card' href='{!echo $url}' id='page{!echo $page->id}' data-ve='page'>
       <div class='card-heading'>
-        <h5><?php echo $page->title?></h5>
+        <h5>{$page->title}</h5>
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'><?php echo helper::substr($page->summary, 60, '...');?></div>
+          <div class='card-content text-muted small'>{!helper::substr($page->summary, 60, '...')}</div>
           <div class='card-footer small text-muted'>
-            <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $page->views;?></span>
-            <?php if(!empty($page->comments)):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $page->comments;?></span> &nbsp;<?php endif;?>
-            &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($page->addedDate, 0, 10);?></span>
+            <span title="{!echo $lang->article->views}"><i class='icon-eye-open'></i> {$page->views}</span>
+            {if(!empty($page->comments))}
+              &nbsp;&nbsp; <span title="{!echo $lang->article->comments}"><i class='icon-comments-alt'></i> {$page->comments}</span> &nbsp;
+            {/if}
+            &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($page->addedDate, 0, 10)}</span>
           </div>
         </div>
-        <?php if(!empty($page->image)):?>
-        <div class='table-cell thumbnail-cell'>
-          <?php
-          $title = $page->image->primary->title ? $page->image->primary->title : $page->title;
-          echo html::image($this->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'");
-          ?>
-        </div>
-        <?php endif;?>
+        {if(!empty($page->image))}
+          <div class='table-cell thumbnail-cell'>
+            {$title = $page->image->primary->title ? $page->image->primary->title : $page->title}
+            {!html::image($control->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+          </div>
+        {/if}
       </div>
     </a>
-    <?php endforeach;?>
+    {/foreach}
   </div>
 </div>
 
-<div class='block-region region-bottom blocks' data-region='page_index-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='page_index-bottom'>{$control->loadModel('block')->printRegion($layouts, 'page_index', 'bottom')}</div>
 
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

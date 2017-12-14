@@ -1,5 +1,5 @@
 name:Mobile
-parser:default
+parser:raintpl
 code:mobile
 type:template
 author:Chanzhi

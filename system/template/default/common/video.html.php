@@ -1,21 +1,12 @@
-<?php
-js::import($jsRoot . 'videojs/video.min.js');
-css::import($jsRoot . 'videojs/video-js.min.css');
-?>
-<?php
-$videoHtml = <<<EOT
-<video id="VIDEO_ID"
-class="video-js vjs-default-skin vjs-big-play-centered"
-controls preload="auto" loop='loop'
-data-setup='{"autoplay": VIDEO_AUTOSTART, "width": VIDEO_WIDTH, "height": VIDEO_HEIGHT, "controlBar": {"fullscreenToggle": VIDEO_FULLSCREEN}}'>
-<source src="VIDEO_SRC" type="video/VIDEO_TYPE" />
-</video>
-EOT;
-?>
+{!js::import($jsRoot . 'videojs/video.min.js')}
+{!css::import($jsRoot . 'videojs/video-js.min.css')}
+{$videoHtml = '<video id="VIDEO_ID" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" loop="loop" '}
+{$videoHtml .= 'data-setup=\'{{"autoplay": VIDEO_AUTOSTART, "width": VIDEO_WIDTH, "height": VIDEO_HEIGHT, "controlBar": {{"fullscreenToggle": VIDEO_FULLSCREEN}}}}\'>'}
+{$videoHtml .= '<source src="VIDEO_SRC" type="video/VIDEO_TYPE" /> </video>'}
 <script>
 $(function()
 {
-    var videoContainer = <?php echo json_encode($videoHtml);?>;
+    var videoContainer = {!echo json_encode($videoHtml)};
     $('embed').each(function(index)
     {
         if($(this).hasClass('videojs')) 

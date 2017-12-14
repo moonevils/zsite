@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The apply refund view file of order for mobile template of chanzhiEPS.
  * The file should be used as ajax content
@@ -10,27 +10,27 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> <?php echo $lang->order->applyRefund;?></h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {$lang->order->applyRefund}</h5>
     </div>
     <div class='modal-body'>
-      <form method='post' id='applyRefundForm' action="<?php echo inlink('applyRefund', "orderID={$orderID}");?>">
+      <form method='post' id='applyRefundForm' action="{!inlink('applyRefund', "orderID={{$orderID}}")}">
         <div class='form-group'>
-          <label for='comment'><?php echo $lang->order->comment;?></label>
-          <?php echo html::textarea('comment', '', "class='form-control' rows='3'");?>
+          <label for='comment'>{$lang->order->comment}</label>
+          {!html::textarea('comment', '', "class='form-control' rows='3'")}
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn block primary');?>
+          {!html::submitButton('', 'btn block primary')}
         </div>
       </form>
     </div>
   </div>
 </div>
-
+{noparse}
 <script>
 $(function()
 {
@@ -41,6 +41,8 @@ $(function()
         {
             $.closeModal();
         }
-    }});
+    }
+    });
 });
 </script>
+{/noparse}

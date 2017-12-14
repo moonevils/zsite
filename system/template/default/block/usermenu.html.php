@@ -1,5 +1,5 @@
-<nav data-ve='block' data-id='<?php echo $block->id; ?>' class='usermenu'>
+<nav data-ve='block' data-id='{!echo $block->id}' class='usermenu'>
   <span id='userMenu'></span>
-  <?php commonModel::printLanguageBar();?>
+  <?php commonModel::printLanguageBar()}
 </nav>
 

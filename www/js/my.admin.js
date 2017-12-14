@@ -6,7 +6,7 @@ $(function()
     $('#primaryNavbar a').click(function()
     {
         group = $(this).parent('li').data('id');
-        $.cookie('currentGroup', group, {expires:config.cookieLife, path:config.webRoot});
+        $.cookie('currentGroup', group, {expires:config.cookieLife, path:config.cookiePath});
     })
 });
 

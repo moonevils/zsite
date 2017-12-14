@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.webRoot});
+    $.cookie('currentGroup', 'home', {expires:config.cookieLife, path:config.cookiePath});
 });
 
 /**

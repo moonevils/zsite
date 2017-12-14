@@ -125,7 +125,8 @@ class seo
         /* Form modules. */
         if($isFormModule)
         {
-            $params['formID'] = $items[1];
+            $params['formID']   = isset($items[1]) ? $items[1] : 0;
+            $params['submited'] = isset($items[2]) ? $items[2] : 0;
             return seo::convertURI('form', 'view', $params, $pageID);
         }
 
@@ -456,6 +457,7 @@ class uri
         $link = 'form/';
         if(!empty($alias['type'])) $link = $alias['type'] . '/';
         $link .= array_shift($params);
+        if($params) $link .= '/' . array_shift($params);
 
         $viewType = $viewType ? $viewType : $config->default->view;
 

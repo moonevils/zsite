@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The aboutus view file of company for mobile template of chanzhiEPS.
  * The view should be used as ajax content
@@ -10,10 +10,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<div class='block-region region-top no-padding blocks' data-region='company_index-top'><?php $this->block->printRegion($layouts, 'company_index', 'top');?></div>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+<div class='block-region region-top no-padding blocks' data-region='company_index-top'>{$control->block->printRegion($layouts, 'company_index', 'top')}</div>
 <div class='article-content' id='company'>
-  <?php echo $company->content;?>
+  {$company->content}
 </div>
-<div class='block-region region-bottom no-padding blocks' data-region='company_index-bottom'><?php $this->block->printRegion($layouts, 'company_index', 'bottom');?></div>
+<div class='block-region region-bottom no-padding blocks' data-region='company_index-bottom'>{$control->block->printRegion($layouts, 'company_index', 'bottom')}</div>

@@ -1,66 +1,64 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
-<?php js::set('agreement', (!empty($this->config->site->agreement) and $this->config->site->agreement == 'open') ? 'open' : 'close');?>
-<?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
+{!js::set('agreement', (!empty($control->config->site->agreement) and $control->config->site->agreement == 'open') ? 'open' : 'close')}
+{!js::import($jsRoot . 'fingerprint/fingerprint.js')}
 <div class='panel panel-body' id='reg'>
   <div id='login-region'>
     <div class='panel panel-pure' id='panel-pure'>
       <div class='panel-heading'>
-        <div id="heading-title"><?php echo $lang->user->register->welcome;?></div>
+        <div id="heading-title">{!echo $lang->user->register->welcome}</div>
         <div id="heading-login">
-          <?php 
-          echo "<span id='heading-loginTip'>" . $lang->user->register->loginTip . " </span>";
-          echo html::a(inlink('login'), $lang->user->register->login);
-          ?>
+         {!echo "<span id='heading-loginTip'>" . $lang->user->register->loginTip . " </span>"}
+         {!echo html::a(inlink('login'), $lang->user->register->login)}
         </div>
       </div>
       <form method='post' id='ajaxForm' class='form-horizontal' role='form' data-checkfingerprint='1'>
         <div class='panel-body'>
           <div class='form-group'>
-            <label class='col-sm-3 control-label'><?php echo $lang->user->account;?></label>
-            <div class='col-sm-9'><?php echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?></div>
+            <label class='col-sm-3 control-label'>{!echo $lang->user->account}</label>
+            <div class='col-sm-9'>{!echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'")}</div>
           </div>
           <div class='form-group'>
-            <label class="col-sm-3 control-label"><?php echo $lang->user->realname;?></label>
-            <div class='col-sm-9'><?php echo html::input('realname', '', "class='form-control'");?></div>
+            <label class="col-sm-3 control-label">{!echo $lang->user->realname}</label>
+            <div class='col-sm-9'>{!echo html::input('realname', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
-            <label class="col-sm-3 control-label"><?php echo $lang->user->email;?></label>
-            <div class='col-sm-9'><?php echo html::input('email', '', "class='form-control' autocomplete='off'") . '';?></div>
+            <label class="col-sm-3 control-label">{!echo $lang->user->email}</label>
+            <div class='col-sm-9'>{!echo html::input('email', '', "class='form-control' autocomplete='off'") . ''}</div>
           </div>
           <div class='form-group'>
-            <label class="col-sm-3 control-label"><?php echo $lang->user->password;?></label>
-            <div class='col-sm-9'><?php echo html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'");?></div>
+            <label class="col-sm-3 control-label">{!echo $lang->user->password}</label>
+            <div class='col-sm-9'>{!echo html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'")}</div>
           </div>
           <div class='form-group'>
-            <label class="col-sm-3 control-label"><?php echo $lang->user->password2;?></label>
-            <div class='col-sm-9'><?php echo html::password('password2', '', "class='form-control'");?></div>
+            <label class="col-sm-3 control-label">{!echo $lang->user->password2}</label>
+            <div class='col-sm-9'>{!echo html::password('password2', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
-            <label class="col-sm-3 control-label"><?php echo $lang->user->company;?></label>
-            <div class='col-sm-9'><?php echo html::input('company', '', "class='form-control'");?></div>
+            <label class="col-sm-3 control-label">{!echo $lang->user->company}</label>
+            <div class='col-sm-9'>{!echo html::input('company', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
-            <label class="col-sm-3 control-label"><?php echo $lang->user->phone;?></label>
-            <div class='col-sm-9'><?php echo html::input('phone', '', "class='form-control'");?></div>
+            <label class="col-sm-3 control-label">{!echo $lang->user->phone}</label>
+            <div class='col-sm-9'>{!echo html::input('phone', '', "class='form-control'")}</div>
           </div>
-          <?php if(isset($this->config->site->agreement) and $this->config->site->agreement == 'open'):?>
+          {if(isset($control->config->site->agreement) and $control->config->site->agreement == 'open')}
           <div class='form-group agreement-form'>
             <label class="col-sm-3 control-label"></label>
             <input type='checkbox' id='agreement' name='agreement' value='1'>
-            <span><?php echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'agreement'), $this->config->site->agreementTitle ? $this->config->site->agreementTitle : $lang->user->register->agreement, "data-toggle='modal'") . '》';?></span>
+            <span>{!echo $lang->user->register->agree . '《'. html::a(helper::createLink('user', 'agreement'), $control->config->site->agreementTitle ? $control->config->site->agreementTitle : $lang->user->register->agreement, "data-toggle='modal'") . '》'}</span>
           </div>
-          <?php endif;?>
+          {/if}
           <div class='form-group'>
             <div class="col-sm-3"></div>
-            <div class='col-sm-9'><?php echo html::submitButton($lang->register,'btn btn-primary btn-block') . html::hidden('referer', $referer);?></div>
+            <div class='col-sm-9'>{!echo html::submitButton($lang->register,'btn btn-primary btn-block') . html::hidden('referer', $referer)}</div>
           </div>
           <div class='form-group'>
             <div class="col-sm-3"></div>
-            <div class='col-sm-9'><?php include TPL_ROOT . 'user/oauthlogin.html.php';?></div>
+            <div class='col-sm-9'>{include TPL_ROOT . 'user/oauthlogin.html.php'}</div>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

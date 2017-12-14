@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The award score view file of thread module of chanzhiEPS.
  *
@@ -9,31 +9,31 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> <?php echo $lang->thread->score;?></h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {$lang->thread->score}</h5>
     </div>
     <div class='modal-body'>
-      <form id='addScoreForm' method='post' action='<?php echo $this->createLink('thread', 'addscore', "account=$account&objectType=$objectType&objectID=$objectID");?>'>
+      <form id='addScoreForm' method='post' action='{!$control->createLink('thread', 'addscore', "account=$account&objectType=$objectType&objectID=$objectID")}'>
         <div class='form-group'>
-          <label for='count' class='control-label'><?php echo $lang->score->count;?></label>
-          <?php echo html::input('count', '', "class='form-control'");?>
+          <label for='count' class='control-label'>{$lang->score->count}</label>
+          {!html::input('count', '', "class='form-control'")}
         </div>
         <div class='form-group'>
-          <label for='note' class='control-label'><?php echo $lang->score->note;?></label>
-          <?php echo html::textarea('note', '', "class='form-control' rows='2'");?>
+          <label for='note' class='control-label'>{!$lang->score->note}</label>
+          {!html::textarea('note', '', "class='form-control' rows='2'")}
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block');?>
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
   </div>
 </div>
-
+{noparse}
 <script>
 $(function()
 {
@@ -41,9 +41,9 @@ $(function()
     $addScoreForm.ajaxform({onSuccess: function(response)
     {
         if(response.result == 'success')
-        {
-            $.closeModal();
-        }
-    }});
+        { $.closeModal(); }
+    }
+    });
 });
 </script>
+{/noparse}
