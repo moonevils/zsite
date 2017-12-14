@@ -21,17 +21,6 @@
         </thead>
         <tbody>
           {foreach($scores as $score)}
-<<<<<<< HEAD
-          <tr>
-            {$score->time = substr($score->time,0,10)}
-            <td>{$score->time}</td>
-            <td>{$lang->score->methods[$score->method]}</td>
-            <td>{!echo ($score->type == 'in' ? '+' : '-') . $score->count}</td>
-            <td>{$score->before}</td>
-            <td>{$score->after}</td>
-            <td>{$score->note}</td>
-          </tr>  
-=======
             <tr>
               {$score->time = substr($score->time,0,10)}
               <td>{$score->time}</td>
@@ -41,7 +30,6 @@
               <td>{$score->after}</td>
               <td>{$score->note}</td>
             </tr>  
->>>>>>> a3ec9bcf9be0acea61e2be3428106412d62f9454
           {/foreach}
         </tbody>
         <tfoot>
