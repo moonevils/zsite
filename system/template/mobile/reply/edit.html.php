@@ -1,4 +1,4 @@
-{php
+{*php
 /**
  * The edit view file of reply for mobile template of chanzhiEPS.
  *
@@ -51,7 +51,8 @@ $(function()
         {
             $eidtReplyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
         }
-    }});
+    }
+    });
 });
 </script>
 {/noparse}
