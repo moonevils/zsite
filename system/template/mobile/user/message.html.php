@@ -29,7 +29,6 @@
         </div>
         <div class='card-footer'>
           <span class='{!echo $message->readed ? 'text-muted' : 'text-success'}'>{$lang->message->readedStatus[$message->readed]}</span>
-          
           <div class="pull-right">
             {if(!$message->readed)}
               {!html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed, "class='text-primary markread'")}

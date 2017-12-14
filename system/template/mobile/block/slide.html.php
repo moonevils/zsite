@@ -18,11 +18,11 @@
 {$globalButtons = !empty($group->desc) ? json_decode($group->desc, true) : array()}
 {$slideStyle    = !empty($block->content->style) ? $block->content->style : 'carousel'}
 {if($slides)}
-<div class='block {!echo $blockClass}' id='block{!echo $block->id?>'>
+<div class='block {!echo $blockClass}' id='block{!echo $block->id}'>
   {if($slideStyle == 'tile')}
-  <div id="{!echo $slideID}" class='tile slide' data-id='{!echo $groupID?>'>
+  <div id="{!echo $slideID}" class='tile slide' data-id='{!echo $groupID}'>
   {else}
-  <div id='{!echo $slideID}' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='{!echo $groupID?>'>
+  <div id='{!echo $slideID}' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='{!echo $groupID}'>
     <div class='carousel-inner'>
   {/if}
   {$height = 0}
