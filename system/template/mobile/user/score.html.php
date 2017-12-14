@@ -3,7 +3,7 @@
   {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
   <div class='col-md-10'>
     <div class='panel-section'>
-      <div class='panel-heading'>{!echo html::a($control->createLink('score', 'buyScore'), $lang->user->buyScore, "class='btn primary block' data-toggle='modal'")?></div>
+      <div class='panel-heading'>{!echo html::a($control->createLink('score', 'buyScore'), $lang->user->buyScore, "class='btn primary block' data-toggle='modal'")}</div>
       <div class='panel-heading'>
         <strong class='red'>{!printf($lang->score->lblTotal, $user->score, $user->rank)}</strong>
       </div>

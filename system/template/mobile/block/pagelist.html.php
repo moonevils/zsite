@@ -24,7 +24,7 @@
     <div class='cards condensed cards-list'>
     {foreach($pages as $page)}
     {$url = helper::createLink('page', 'view', "id=$page->id", "name=$page->alias")}
-      <a class='card' href='{!echo $url ?>'>
+      <a class='card' href='{!echo $url }'>
         <div class='card-heading' style='color:{$page->titleColor}'><strong>{$page->title}</strong></div>
         <div class='table-layout'>
           <div class='table-cell'>

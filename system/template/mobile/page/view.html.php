@@ -16,7 +16,7 @@
 {!css::internal($page->css)}
 {!js::execute($page->js)}
 <div class='block-region region-top blocks' data-region='page_view-top'>{$control->loadModel('block')->printRegion($layouts, 'page_view', 'top')}</div>
-<div id='page' data-id='{!echo $page->id ?>'>
+<div id='page' data-id='{!echo $page->id }'>
 <div class='appheader'>
   <div class='heading'>
     <h2>{$page->title}</h2>

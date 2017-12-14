@@ -15,13 +15,13 @@
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-reply'></i> {!echo $lang->user->reply?></div>
+    <div class='title strong'><i class='icon icon-reply'></i> {!echo $lang->user->reply}</div>
   </div>
   <div class='cards condensed cards-list'>
     {foreach($replies as $reply)}
     <a href='{!echo $control->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id"}' class='card'>
       <div class='card-heading'>
-        <h5>{!echo $reply->title?></h5>
+        <h5>{!echo $reply->title}</h5>
       </div>
       <div class='card-content text-muted'>
         {!echo $lang->reply->addedDate} {!echo substr($reply->addedDate, 2, -3)}
