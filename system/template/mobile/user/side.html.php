@@ -14,20 +14,18 @@
 {/if}
 {foreach($control->config->user->navGroups as $group => $items)}
     {$navs = explode(',', $items)}
-    {foreach($navs as $nav)
-    {
-        $class = '';
-        $menu = zget($lang->user->control->menus, $nav, '');
-        if(empty($menu)) continue;
-        list($label, $module, $method) = explode('|', $menu);
-        $module = strtolower($module);
-        $method = strtolower($method);
-        $menuInfo = explode('|', $menu);
-        $params   = zget($menuInfo, 3 ,''); 
-        if(!commonModel::isAvailable($module)) continue;
-        if($module == $control->app->getModuleName() && $method == $control->app->getMethodName()) $class .= 'active';
-        echo '<li class="' . $class . '">' . html::a($control->createLink($module, $method, $params), $label, "class='btn default'") . '</li>';
-    }
-{*/php*}
+    {foreach($navs as $nav)}
+      {$class = ''}
+      {$menu = zget($lang->user->control->menus, $nav, '')}
+      {if(empty($menu))} {continue} {/if}
+      {@list($label, $module, $method) = explode('|', $menu)}
+      {$module = strtolower($module)}
+      {$method = strtolower($method)}
+      {$menuInfo = explode('|', $menu)}
+      {$params   = zget($menuInfo, 3 ,'')}
+      {if(!commonModel::isAvailable($module))} {continue} {/if}
+      {if($module == $control->app->getModuleName() && $method == $control->app->getMethodName())} {$class .= 'active'} {/if}
+      <li class="{$class}">{!html::a($control->createLink($module, $method, $params), $label, "class='btn default'")}</li>
+    {/foreach}
 {/foreach}
 </ul>
