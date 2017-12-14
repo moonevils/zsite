@@ -1,4 +1,4 @@
-{*php
+{php
 /**
  * The index view file of page for mobile template of chanzhiEPS.
  *
