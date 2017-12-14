@@ -16,14 +16,14 @@
 <table class="table table-layout">
   <tbody>
     <tr>
-      <td colspan='2'><strong><i class='icon icon-user'></i> {!echo $lang->user->profile}</strong></td>
+      <td colspan='2'><strong><i class='icon icon-user'></i> {$lang->user->profile}</strong></td>
     </tr>
     <tr>
       <th>{$lang->user->realname}</th>
       <td>
         {$user->realname}
-        {if(isset($user->provider) and isset($user->openID) and strpos($user->account, "{$user->provider}_") === false)}
-          <span class='bg-info-pale text-info'>{!echo $lang->user->oauth->typeList[$user->provider]}</span>
+        {if(isset($user->provider) and isset($user->openID) and strpos($user->account, "{$user->provider}}_") === false)}
+          <span class='bg-info-pale text-info'>{$lang->user->oauth->typeList[$user->provider]}</span>
         {/if}
       </td>
     </tr>
@@ -67,7 +67,7 @@
           {if(isset($user->provider) and isset($user->openID))}
             {if(strpos($user->account, "{{$user->provider}}_") === false)}
               <div class='col-6'>
-                {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'")}
+                {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-link'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'")}
               </div>
             {else}
               <br>

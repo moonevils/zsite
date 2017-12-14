@@ -11,6 +11,7 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
+{noparse}
 <style>
 .alert > .icon, .alert > .icon + .content {padding: 10px 15px;}
 .alert > .icon {display: block; text-align: center; font-size: 48px; float: none; line-height: 1; padding-bottom: 0; opacity: .7}
@@ -20,6 +21,7 @@
 .alert-deny h2 {margin: 0 0 20px}
 body {background-color: #f1f1f1}
 </style>
+{/noparse}
 <div class='container'>
   <div class='alert alert-deny'>
     <i class='icon-frown icon'></i>
