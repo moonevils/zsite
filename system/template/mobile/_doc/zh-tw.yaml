@@ -1,5 +1,5 @@
 name:移動設備模板
-parser:default
+parser:raintpl
 code:mobile
 type:template
 author:蟬知官方

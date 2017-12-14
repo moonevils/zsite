@@ -1,4 +1,4 @@
-<?php 
+{*php
 /**
  * The cart view of cart module of chanzhiEPS.
  *
@@ -9,115 +9,114 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');?>
-<?php js::set('currencySymbol', $currencySymbol);?>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{!js::set('currencySymbol', $currencySymbol)}
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
-    <div class='title'><i class='icon icon-shopping-cart'></i> <strong><?php echo $lang->cart->browse;?></strong><?php if(!empty($products)) echo ' (' . count($products) . ')' ?></div>
+    <div class='title'><i class='icon icon-shopping-cart'></i> <strong>{$lang->cart->browse}</strong>{if(!empty($products))} {!echo ' (' . count($products) . ')' } {/if}</div>
   </div>
-  <?php if(!empty($products)):?>
-  <form action='<?php echo helper::createLink('order', 'confirm'); ?>' method='post'>
-    <div class='cards condensed cards-list'>
-    <?php $total = 0;?>
-    <?php foreach($products as $productID => $product): ?>
-      <?php $productLink = helper::createLink('product', 'view', "id=$productID", "category={$product->categories[$product->category]->alias}&name=$product->alias");?>
-      <div class='card'>
-        <div class='table-layout'>
-          <div class='table-cell thumbnail-cell'>
-            <?php
-            if(empty($product->image)) 
-            {
-                $productName = helper::substr($product->name, 10, '...');
-                  $imgColor = $product->id * 57 % 360;
-                echo "<div class='media-holder'><div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$productName}</div></div>";
-            }
-            else
-            {
-                echo html::image($this->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{$product->name}' alt='{$product->name}'");
-            }
-            ?>
-          </div>
-          <div class='table-cell'>
-            <table class='table table-layout table-condensed'>
-              <tbody>
-                <tr>
-                  <td colspan='2'>
-                    <strong><?php echo html::a($productLink, $product->name);?></strong>
-                    <div class='pull-right'>
-                      <?php echo html::a(inlink('delete', "product={$product->id}"), $lang->delete, "class='deleter text-primary'");?>
-                      <?php echo html::hidden("product[]", $product->id);?>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th class='small'><?php echo $lang->order->price;?></th>
-                  <td>
-                    <?php if($product->promotion != 0):?>
-                    <?php $price = $product->promotion;?>
-                    <span><?php echo $currencySymbol . $product->promotion;?></span>&nbsp;
-                    <small class='text-muted text-line-through'><?php echo $currencySymbol . $product->price;?></small>
-                    <?php else:?>
-                    <?php $price  = $product->price;?>
-                    <span><?php echo $currencySymbol . $product->price;?></span>
-                    <?php endif;?>
-                    <?php echo html::hidden("price[$product->id]", $price);?>
-                    <?php $amount = $product->count * $price;?>
-                    <?php $total += $amount;?>
-                  </td>
-                </tr>
-                <tr>
-                  <th class='small'><?php echo $lang->order->amount;?></th>
-                  <td><strong class='text-danger'><?php echo $currencySymbol;?> <span class='product-amount'><?php echo $amount?></span></strong></td>
-                </tr>
-                <tr>
-                  <th class='small'><?php echo $lang->order->count;?></th>
-                  <td>
-                    <div class='input-group input-group-sm input-number'>
-                      <span class='input-group-btn'>
-                        <button class='btn default btn-minus' type='button'><i class='icon icon-minus'></i></button>
-                      </span>
-                      <?php echo html::input("count[$product->id]", $product->count, "class='form-control-number form-control' data-price='{$price}'"); ?>
-                      <span class='input-group-btn'>
-                        <button class='btn default btn-plus' type='button'><i class='icon icon-plus'></i></button>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  {if(!empty($products))}
+    <form action='{!helper::createLink('order', 'confirm')}' method='post'>
+      <div class='cards condensed cards-list'>
+      {$total = 0}
+      {foreach($products as $productID => $product)}
+        {$productLink = helper::createLink('product', 'view', "id=$productID", "category={{$product->categories[$product->category]->alias}}&name=$product->alias")}
+        <div class='card'>
+          <div class='table-layout'>
+            <div class='table-cell thumbnail-cell'>
+              {if(empty($product->image))}
+                {$productName = helper::substr($product->name, 10, '...')}
+                {$imgColor = $product->id * 57 % 360}
+                <div class='media-holder'>
+                  <div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>
+                    {$productName}
+                  </div>
+                </div>
+              {else}
+                {!html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{{$product->name}}' alt='{{$product->name}}'")}
+              {/if}
+            </div>
+            <div class='table-cell'>
+              <table class='table table-layout table-condensed'>
+                <tbody>
+                  <tr>
+                    <td colspan='2'>
+                      <strong>{!html::a($productLink, $product->name)}</strong>
+                      <div class='pull-right'>
+                        {!html::a(inlink('delete', "product={{$product->id}}"), $lang->delete, "class='deleter text-primary'")}
+                        {!html::hidden("product[]", $product->id)}
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class='small'>{$lang->order->price}</th>
+                    <td>
+                      {if($product->promotion != 0)}
+                        {$price = $product->promotion}
+                        <span>{!echo $currencySymbol . $product->promotion}</span>&nbsp;
+                        <small class='text-muted text-line-through'>{!echo $currencySymbol . $product->price}</small>
+                      {else}
+                        {$price  = $product->price}
+                        <span>{!echo $currencySymbol . $product->price}</span>
+                      {/if}
+                      {!html::hidden("price[$product->id]", $price)}
+                      {$amount = $product->count * $price}
+                      {$total += $amount}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class='small'>{$lang->order->amount}</th>
+                    <td><strong class='text-danger'>{$currencySymbol} <span class='product-amount'>{$amount}</span></strong></td>
+                  </tr>
+                  <tr>
+                    <th class='small'>{$lang->order->count}</th>
+                    <td>
+                      <div class='input-group input-group-sm input-number'>
+                        <span class='input-group-btn'>
+                          <button class='btn default btn-minus' type='button'><i class='icon icon-minus'></i></button>
+                        </span>
+                        {!html::input("count[$product->id]", $product->count, "class='form-control-number form-control' data-price='{{$price}}'")}
+                        <span class='input-group-btn'>
+                          <button class='btn default btn-plus' type='button'><i class='icon icon-plus'></i></button>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+      {/foreach}
       </div>
-    <?php endforeach;?>
-    </div>
-    <div class='panel-footer'>
-      <div class='bg-primary-pale alert text-center'>
-      <?php printf($lang->order->selectProducts, count($products));?>
-      <?php printf($lang->order->totalToPay, $currencySymbol . $total);?>
+      <div class='panel-footer'>
+        <div class='bg-primary-pale alert text-center'>
+        {!printf($lang->order->selectProducts, count($products))}
+        {!printf($lang->order->totalToPay, $currencySymbol . $total)}
+        </div>
+        {!html::submitButton($lang->cart->goAccount, 'btn-order-submit btn block danger')}
       </div>
-      <?php echo html::submitButton($lang->cart->goAccount, 'btn-order-submit btn block danger'); ?>
-    </div>
-  </form>
-  <?php else: ?>
-  <div class='panel-body'>
-    <div class='alert bg-warning-pale text-center'>
-      <p><i class='icon-smile icon-x3'></i></p>
-      <?php echo $lang->cart->noProducts;?>
-    </div>
-    <hr class='space'>
-    <div class='row'>
-      <div class='col-6'>
-        <?php echo html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn primary block'");?>
+    </form>
+  {else}
+    <div class='panel-body'>
+      <div class='alert bg-warning-pale text-center'>
+        <p><i class='icon-smile icon-x3'></i></p>
+        {$lang->cart->noProducts}
       </div>
-      <div class='col-6'>
-        <?php echo html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn default block'");?>
+      <hr class='space'>
+      <div class='row'>
+        <div class='col-6'>
+          {!html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn primary block'")}
+        </div>
+        <div class='col-6'>
+          {!html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn default block'")}
+        </div>
       </div>
     </div>
-  </div>
-  <?php endif; ?>
+  {/if}
 </div>
-
+{noparse}
 <script>
 +(function($){
     'use strict';
@@ -159,5 +158,6 @@ $(function()
     });
 });
 </script>
-<?php include TPL_ROOT . 'common/form.html.php';?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer');?>
+{/noparse}
+{include TPL_ROOT . 'common/form.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

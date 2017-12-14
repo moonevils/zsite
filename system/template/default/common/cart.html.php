@@ -1,3 +1,4 @@
+{noparse}
 <script>
 function loadCartInfo(twinkle)
 {
@@ -30,3 +31,4 @@ function loadCartInfo(twinkle)
     );
 }
 </script>
+{/noparse}

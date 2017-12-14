@@ -1,4 +1,4 @@
-<?php 
+{*php
 /**
  * The view view of order module of chanzhiEPS.
  *
@@ -9,99 +9,95 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-
+/php*}
+{noparse}
 <style>
 #orderDetailTable {margin-bottom: 0;}
 #orderDetailTable > tbody > tr > th {text-align: right; width: 90px;}
 #orderDetailTable > tbody > tr > th,
 #orderDetailTable > tbody > tr > td {border: none;}
 </style>
+{/noparse}
 <table class='table' id='orderDetailTable'>
   <tbody>
     <tr>
-      <th><?php echo $lang->order->productInfo;?></th>
+      <th>{$lang->order->productInfo}</th>
       <td>
-          <?php foreach($products as $product):?>
-          <div>
-            <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
-            <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
-          </div>
-          <?php endforeach;?>
+          {foreach($products as $product)}
+            <div>
+              <span>{!html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'")}</span>
+              <span>{!echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count}</span>
+            </div>
+          {/foreach}
         </dl>
       </td>
     </tr>
-    <?php if($type == 'shop'):?>
+    {if($type == 'shop')}
+      <tr>
+        <th>{$lang->order->expressInfo}</th>
+        <td>
+        {if($order->deliveryStatus !== 'not_send')}
+          {!echo $control->order->expressInfo($order) . '&nbsp;' . $order->waybill}
+        {else}
+          {$lang->order->noRecord}
+        {/if}
+        </td>
+      </tr>
+      <tr>
+        <th>{$lang->order->address}</th>
+        <td>
+          {$address = json_decode($order->address)}
+          {!echo $address->contact . ',' . $address->address . ',' . str2Entity($address->phone) . ',' . $address->zipcode}
+        </td>
+      </tr> 
+    {/if}
     <tr>
-      <th><?php echo $lang->order->expressInfo;?></th>
-      <td>
-      <?php
-      if($order->deliveryStatus !== 'not_send') 
-      {
-      echo $this->order->expressInfo($order) . '&nbsp;' . $order->waybill; 
-      }
-      else
-      {
-          echo $lang->order->noRecord;
-      }
-      ?>
-      </td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->order->address;?></th>
-      <td>
-        <?php $address = json_decode($order->address);?>
-        <?php echo $address->contact . ',' . $address->address . ',' . str2Entity($address->phone) . ',' . $address->zipcode;?>
-      </td>
-    </tr> 
-    <?php endif;?>
-    <tr>
-      <th><?php echo $lang->order->account;?></th>
-      <td><?php echo zget($users, $order->account, $order->account);?></td>
+      <th>{$lang->order->account}</th>
+      <td>{!zget($users, $order->account, $order->account)}</td>
     </tr> 
     <tr>
-      <th><?php echo $lang->order->status;?></th>
-      <td><?php echo $this->order->processStatus($order);?></td>
+      <th>{$lang->order->status}</th>
+      <td>{$control->order->processStatus($order)}</td>
     </tr> 
     <tr>
-      <th><?php echo $lang->order->amount;?></th>
-      <td class='text-price'><?php echo $order->amount;?></td>
+      <th>{$lang->order->amount}</th>
+      <td class='text-price'>{$order->amount}</td>
     </tr> 
     <tr>
-      <th><?php echo $lang->order->payment;?></th>
-      <td><?php echo zget($lang->order->paymentList, $order->payment);?></td>
+      <th>{$lang->order->payment}</th>
+      <td>{!zget($lang->order->paymentList, $order->payment)}</td>
     </tr> 
     <tr>
-      <th><?php echo $lang->order->note;?></th>
-      <td><?php echo $order->note;?></td>
+      <th>{$lang->order->note}</th>
+      <td>{$order->note}</td>
     </tr> 
     <tr>
-      <th><?php echo $lang->order->createdDate;?></th>
-      <td><?php echo $order->createdDate;?></td>
+      <th>{$lang->order->createdDate}</th>
+      <td>{$order->createdDate}</td>
     </tr> 
-    <?php if($order->payment != 'COD' and ($order->paidDate > $order->createdDate)):?>
-    <tr>
-      <th><?php echo $lang->order->paidDate;?></th>
-      <td><?php echo $order->paidDate;?></td>
-    </tr> 
-    <?php endif;?>
-    <?php if($order->deliveriedDate > $order->createdDate):?>
-    <tr>
-      <th><?php echo $lang->order->deliveriedDate;?></th>
-      <td><?php echo $order->deliveriedDate;?></td>
-    </tr> 
-    <?php endif;?>
-    <?php if($order->confirmedDate > $order->deliveriedDate):?>
-    <tr>
-      <th><?php echo $lang->order->confirmedDate;?></th>
-      <td><?php echo $order->confirmedDate;?></td>
-    </tr> 
-    <?php endif;?>
-    <?php if($order->payment == 'COD' and ($order->paidDate > $order->createdDate)):?>
-    <tr>
-      <th><?php echo $lang->order->paiedDate;?></th>
-      <td><?php echo $order->paiedDate;?></td>
-    </tr> 
-    <?php endif;?>
+    {if($order->payment != 'COD' and ($order->paidDate > $order->createdDate))}
+      <tr>
+        <th>{$lang->order->paidDate}</th>
+        <td>{$order->paidDate}</td>
+      </tr> 
+    {/if}
+    {if($order->deliveriedDate > $order->createdDate)}
+      <tr>
+        <th>{$lang->order->deliveriedDate}</th>
+        <td>{$order->deliveriedDate}</td>
+      </tr> 
+    {/if}
+    {if($order->confirmedDate > $order->deliveriedDate)}
+      <tr>
+        <th>{$lang->order->confirmedDate}</th>
+        <td>{$order->confirmedDate}</td>
+      </tr> 
+    {/if}
+    {if($order->payment == 'COD' and ($order->paidDate > $order->createdDate))}
+      <tr>
+        <th>{$lang->order->paiedDate}</th>
+        <td>{$order->paiedDate}</td>
+      </tr> 
+    {/if}
   </tbody>
 </table>

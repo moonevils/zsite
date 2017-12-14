@@ -1,4 +1,4 @@
-<?php
+{*php*}
 /**
  * The reset password mail view file of user module of chanzhiEPS.
  *
@@ -9,9 +9,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php
-$resetUrlTip = sprintf($this->lang->user->resetmail->resetUrl, $this->config->site->name, $this->server->http_host);
+{*/php*}
+{*php*}
+$resetUrlTip = sprintf($control->lang->user->resetmail->resetUrl, $control->config->site->name, $control->server->http_host);
 $mailContent = <<<EOT
 <html>
 <head>
@@ -23,7 +23,7 @@ div{padding-left:30px;}
 <body>
 <div style='margin-top:20px;'>
 <p>
-{$this->lang->user->resetmail->account} {$account}
+{$control->lang->user->resetmail->account} {$account}
 <br>
 {$resetUrlTip}
 <br>
@@ -31,7 +31,7 @@ div{padding-left:30px;}
 </p>
 </div>
 <div style='height:20px;border-bottom:1px solid #ddd;'></div>
-<div style='margin:20px 0 0 0 ;'>{$this->lang->user->resetmail->notice}</div>
+<div style='margin:20px 0 0 0 ;'>{$control->lang->user->resetmail->notice}</div>
 </body>
 </html>
 EOT;

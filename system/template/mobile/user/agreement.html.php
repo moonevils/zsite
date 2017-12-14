@@ -1,3 +1,3 @@
 <div class='article-content'>
-  <?php echo htmlspecialchars_decode($this->config->site->agreementContent);?>
+  {!htmlspecialchars_decode($control->config->site->agreementContent)}
 </div>

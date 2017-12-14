@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The create view file of address for mobile template of chanzhiEPS.
  *
@@ -9,34 +9,35 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-plus'></i> <?php echo $lang->address->create;?></h5>
+      <h5 class='modal-title'><i class='icon-plus'></i> {$lang->address->create}</h5>
     </div>
     <div class='modal-body'>
-      <form id='createForm' action='<?php echo inlink('create')?>' method='post'>
+      <form id='createForm' action='{!inlink('create')}' method='post'>
         <div class='form-group'>
-          <?php echo html::input('contact', '', "class='form-control' placeholder='{$lang->address->contact}'");?>
+          {!html::input('contact', '', "class='form-control' placeholder='{{$lang->address->contact}}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::input('phone', '', "class='form-control' placeholder='{$lang->address->phone}'");?>
+          {!html::input('phone', '', "class='form-control' placeholder='{{$lang->address->phone}}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::input('address', '', "class='form-control' placeholder='{$lang->address->address}'");?>
+          {!html::input('address', '', "class='form-control' placeholder='{{$lang->address->address}}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::input('zipcode', '', "class='form-control' placeholder='{$lang->address->zipcode}'");?>
+          {!html::input('zipcode', '', "class='form-control' placeholder='{{$lang->address->zipcode}}'")}
         </div>
         <div class='form-group'>
-          <?php echo html::submitButton('', 'btn primary block');?>
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
   </div>
 </div>
+{noparse}
 <script>
 $(function()
 {
@@ -49,6 +50,8 @@ $(function()
             setTimeout($.refreshAddressList, 200);
             response.locate = false;
         }
-    }});
+    }
+    });
 });
 </script>
+{/noparse}

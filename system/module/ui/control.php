@@ -395,7 +395,7 @@ class ui extends control
         foreach($licenseFiles as $licenseFile)
         {
             if($licenseFile['folder']) continue;
-            if(strpos($licenseFile['filename'], '.txt') !== false) 
+            if(strpos($licenseFile['filename'], '.txt') === false) 
             {
                 $zendEncrypt = true;
                 break;

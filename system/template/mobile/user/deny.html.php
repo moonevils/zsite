@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The deny view file of user for mobile template of chanzhiEPS.
  *
@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
 <style>
 .alert > .icon, .alert > .icon + .content {padding: 10px 15px;}
 .alert > .icon {display: block; text-align: center; font-size: 48px; float: none; line-height: 1; padding-bottom: 0; opacity: .7}
@@ -24,15 +24,13 @@ body {background-color: #f1f1f1}
   <div class='alert alert-deny'>
     <i class='icon-frown icon'></i>
     <div class='content'>
-      <h2 class='text-center'><?php echo $app->user->account, ' ', $lang->user->deny;?></h2>
-      <p><?php printf($lang->user->errorDeny, $moduleName, $methodName);?></p>
+      <h2 class='text-center'>{$app->user->account} {$lang->user->deny}</h2>
+      <p>{!printf($lang->user->errorDeny, $module, $method)}</p>
       <hr>
       <div class='actions'>
-        <?php
-        if($refererBeforeDeny) echo html::a(helper::safe64Decode($refererBeforeDeny), $lang->user->goback, "class='btn primary'");
-         echo html::a($this->createLink($config->default->module), $lang->index->common, "class='btn default'");
-         echo html::a($this->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin, "class='btn btn-link'");
-        ?>
+        {if($refererBeforeDeny)} {!html::a(helper::safe64Decode($refererBeforeDeny), $lang->user->goback, "class='btn primary'")} {/if}
+        {!html::a($control->createLink($config->default->module), $lang->index->common, "class='btn default'")}
+        {!html::a($control->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin, "class='btn btn-link'")}
       </div>
     </div>
   </div>

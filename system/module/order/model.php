@@ -265,9 +265,9 @@ class orderModel extends model
         $alipayConfig->notifyURL = commonModel::getSysURL() . $notifyURL;
         $alipayConfig->returnURL = commonModel::getSysURL() . $returnURL;
         $alipayConfig->showURL   = $clientDevice == 'mobile' ? commonModel::getSysURL() . $showURL : ''; 
-        $alipayConfig->pid       = $this->config->alipay->pid;
-        $alipayConfig->key       = $this->config->alipay->key;
-        $alipayConfig->email     = $this->config->alipay->email;
+        $alipayConfig->pid       = isset($this->config->alipay->pid)   ? $this->config->alipay->pid : '';
+        $alipayConfig->key       = isset($this->config->alipay->key)   ? $this->config->alipay->key : '';
+        $alipayConfig->email     = isset($this->config->alipay->email) ? $this->config->alipay->email : '';
         $alipayConfig->device    = $clientDevice; 
         
         $alipay  = new alipay($alipayConfig);
@@ -546,11 +546,12 @@ class orderModel extends model
         $this->commonLink = array();
         $this->commonLink['savePayment'] = true;
         $this->commonLink['cancelLink']  = true;
+
         $toggle = $btnLink ? '' : "data-toggle='modal'";
 
         if(RUN_MODE == 'admin')
         {
-            $class  = $btnLink ? 'btn btn-ajax-loader' : '';
+            $class = $btnLink ? 'btn btn-ajax-loader' : '';
             
             /* View order link */ 
             if(!$btnLink) echo html::a(inlink('view', "orderID=$order->id&btnLink=false"), $this->lang->order->view, $toggle);
@@ -604,6 +605,7 @@ class orderModel extends model
     public function printShopActions($order, $btnLink = false)
     {
         $toggle = $btnLink ? '' : "data-toggle='modal'";
+
         if(RUN_MODE == 'admin' )
         {
             $class = $btnLink ? 'btn btn-ajax-loader' : '';
@@ -631,8 +633,7 @@ class orderModel extends model
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
         {
-            $isMobile = ($this->app->clientDevice == 'mobile');
-            $class = $isMobile ? "  btn btn-link " : "";
+            $class = $this->app->clientDevice == 'mobile' ? " btn btn-link " : "";
              
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus == 'not_paid' and $order->status != 'canceled') ? '' : "disabled='disabled'";
@@ -668,8 +669,7 @@ class orderModel extends model
     {
         if(RUN_MODE == 'front' and $order->status == 'normal') 
         {
-            $isMobile = ($this->app->clientDevice == 'mobile');
-            $class    = $isMobile ? "  btn btn-link " : "";
+            $class = $this->app->clientDevice == 'mobile' ? " btn btn-link " : "";
             
             /* Pay link. */
             $disabled = ($order->payment != 'COD' and $order->payStatus != 'paid') ? '' : "disabled='disabled'";

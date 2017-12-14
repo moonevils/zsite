@@ -14,7 +14,7 @@ $(function()
         $(this).addClass('active');
         $('#modeControl').parents('.list-condensed').find('section').hide();
         $('#' + $(this).data('mode') + 'Mode').show();
-        $.cookie('productViewType', $(this).data('mode'), {path: "/"});
+        $.cookie('productViewType', $(this).data('mode'), {path: config.cookiePath});
     })
 
     var type = $.cookie('productViewType');

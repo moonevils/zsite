@@ -181,6 +181,7 @@ class upgradeModel extends model
             case '6_5';
             case '6_6':
                 $this->processFileURLInEditor();
+            case '6_6_1':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 

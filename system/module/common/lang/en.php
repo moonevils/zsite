@@ -37,8 +37,8 @@ $lang->thanks = 'Thanks';
 $lang->chanzhiEPS     = 'Zsite';
 $lang->chanzhiEPSx    = 'ZSite';
 $lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, any signs/links of Zsite shouldn't be removed, hidden or covered.</span>";
-$lang->poweredBy      = "<a href='http://http://www.zsite.net/?v=%s' target='_blank' title='%s'>%s</a>";
-$lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://http://www.zsite.net/?v=%s' target='_blank' title='%s'>Zsite CMS %s</a></span>";
+$lang->poweredBy      = "<a href='http://www.zsite.net/?v=%s' target='_blank' title='%s'>%s</a>";
+$lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.zsite.net/?v=%s' target='_blank' title='%s'>Zsite CMS %s</a></span>";
 $lang->newVersion     = "Note: Zsite CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
@@ -249,11 +249,10 @@ $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse       = 'Blogs|article|admin|type=blog';
 
-/* Menu of page module. */
+/* Init page. */
 $lang->page = new stdclass();
-$lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => 'Pages|article|admin|type=page', 'alias' => 'create, edit');
 
+/* Init express. */
 $lang->express = new stdclass();
 
 $lang->orderSetting = new stdclass();
@@ -392,6 +391,7 @@ $lang->error->email        = '<strong>%s</strong> should be valid Email.';
 $lang->error->phone        = '<strong>%s</strong> should be valid phone number.';
 $lang->error->mobile       = '<strong>%s</strong> should be valid mobile phone number.';
 $lang->error->URL          = '<strong>%s</strong> should be valid URL.';
+$lang->error->IP           = '<strong>%s</strong> should be valid ip.';
 $lang->error->date         = '<strong>%s</strong> should be valid date.';
 $lang->error->account      = '<strong>%s</strong> should be any combination of letters and numbers and must be a minimum of 3 characters.';
 $lang->error->passwordsame = 'Passwords should match.';

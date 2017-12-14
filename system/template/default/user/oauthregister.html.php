@@ -1,33 +1,33 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 <div class='panel'>
-  <div class='panel-heading'><strong><?php echo $lang->user->oauth->lblProfile;?></strong></div>
+  <div class='panel-heading'><strong>{!echo $lang->user->oauth->lblProfile}</strong></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-horizontal w-p50 center-block'>
       <div class='form-group'>
-        <label class='col-sm-2 control-label' for='username'><?php echo $lang->user->account;?></label>
-        <div class='col-sm-9 required'><?php echo html::input('account', '', "class='form-control' placeholder='{$lang->user->register->lblAccount}'");?></div>
+        <label class='col-sm-2 control-label' for='username'>{!echo $lang->user->account}</label>
+        <div class='col-sm-9 required'>{!echo html::input('account', '', "class='form-control' placeholder='{$lang->user->register->lblAccount}'")}</div>
       </div>
       <div class='form-group'>
-        <label class='col-sm-2 control-label' for='realname'><?php echo $lang->user->realname;?></label>
-        <div class='col-sm-9 required'><?php echo html::input('realname', '', "class='form-control'");?></div>
+        <label class='col-sm-2 control-label' for='realname'>{!echo $lang->user->realname}</label>
+        <div class='col-sm-9 required'>{!echo html::input('realname', '', "class='form-control'")}</div>
       </div>
       <div class='form-group'>
-        <label class='col-sm-2 control-label' for='email'><?php echo $lang->user->email;?></label>
-        <div class='col-sm-9 required'><?php echo html::input('email', '', "class='form-control'");?></div>
+        <label class='col-sm-2 control-label' for='email'>{!echo $lang->user->email}</label>
+        <div class='col-sm-9 required'>{!echo html::input('email', '', "class='form-control'")}</div>
       </div>
       <div class='form-group'>
-        <label class='col-sm-2 control-label' for='password'><?php echo $lang->user->password;?></label>
-        <div class='col-sm-9 required'><?php echo html::password('password1', '', "class='form-control'");?></div>
+        <label class='col-sm-2 control-label' for='password'>{!echo $lang->user->password}</label>
+        <div class='col-sm-9 required'>{!echo html::password('password1', '', "class='form-control'")}</div>
       </div>
       <div class='form-group'>
-        <label class='col-sm-2 control-label' for='password'><?php echo $lang->user->password2;?></label>
-        <div class='col-sm-9 required'><?php echo html::password('password2', '', "class='form-control'");?></div>
+        <label class='col-sm-2 control-label' for='password'>{!echo $lang->user->password2}</label>
+        <div class='col-sm-9 required'>{!echo html::password('password2', '', "class='form-control'")}</div>
       </div>
       <div class='form-group'>
         <label class='col-sm-2 control-label'></label>
-        <div class='col-sm-9'><?php echo html::submitButton('', 'btn btn-success') . html::hidden('referer', $referer);?></div>
+        <div class='col-sm-9'>{!echo html::submitButton('', 'btn btn-success') . html::hidden('referer', $referer)}</div>
       </div>
     </form>
   </div>
 </div>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer');?>
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

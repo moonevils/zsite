@@ -1,4 +1,4 @@
-<?php
+{*php
 /**
  * The process score view file of order for mobile template of chanzhiEPS.
  * The file should be used as ajax content
@@ -10,9 +10,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-?>
-<?php include $this->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite');?>
-<?php $this->app->loadLang('score');?>
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
+{$control->app->loadLang('score')}
+{noparse}
 <style>
 .alert > .icon, .alert > .icon + .content {padding: 10px 15px;}
 .alert > .icon {display: block; text-align: center; font-size: 48px; float: none; line-height: 1; padding-bottom: 0; opacity: .7}
@@ -23,26 +24,27 @@
 .alert-deny h2 {margin: 0 0 20px}
 body {background-color: #f1f1f1}
 </style>
+{/noparse}
 <div class='container w-200px'>
-  <?php if(false):?>
-  <div class='alert alert-deny'>
-    <i class='icon-ok-sign icon text-success'></i>
-    <div class='content'>
-      <h2 class='text-center'><?php echo $lang->order->paidSuccess;?></h2>
-      <div class='actions text-center'>
-        <?php echo html::a(helper::createLink('user', 'score'), $lang->score->details, "class='btn primary block'");?>
+  {if(false)}
+    <div class='alert alert-deny'>
+      <i class='icon-ok-sign icon text-success'></i>
+      <div class='content'>
+        <h2 class='text-center'>{$lang->order->paidSuccess}</h2>
+        <div class='actions text-center'>
+          {!html::a(helper::createLink('user', 'score'), $lang->score->details, "class='btn primary block'")}
+        </div>
       </div>
     </div>
-  </div>
-  <?php else:?>
-  <div class='alert alert-deny'>
-    <i class='icon icon-remove-sign text-danger'></i>
-    <div class='content'>
-      <h3 class='text-center text-danger'><?php echo $lang->score->payFail;?></h3>
+  {else}
+    <div class='alert alert-deny'>
+      <i class='icon icon-remove-sign text-danger'></i>
+      <div class='content'>
+        <h3 class='text-center text-danger'>{$lang->score->payFail}</h3>
+      </div>
     </div>
-  </div>
-  <?php endif;?>
+  {/if}
 </div>
-<?php if(isset($pageJS)) js::execute($pageJS);?>
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 </body>
 </html>
