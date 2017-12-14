@@ -3,8 +3,8 @@
   {foreach($books as $book)}
   <div class='col-xs-6 col-sm-4 col-md-3'>
     <div class='card book-card'>
-      <h5 class='card-heading text-center'>{!echo html::a($control->createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), $book->title)}</h5>
-      <div class='card-content text-muted'>{!echo $book->summary}</div>
+      <h5 class='card-heading text-center'>{!html::a($control->createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $book->title)}</h5>
+      <div class='card-content text-muted'>{$book->summary}</div>
       <div class='card-actions'>
         <span class='text-muted'><i class='icon-user'></i> {!echo $book->author}</span>
         <span class='text-muted'><i class='icon-time'></i> {!echo $book->addedDate}</span>
