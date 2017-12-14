@@ -58,7 +58,8 @@ class RainTPL
      *
      * @var unknown_type
      */
-    static $blackList = array('\$this', 'raintpl::', 'self::', '_SESSION', '_SERVER', '_ENV', 'exec', 'unlink', 'rmdir');
+    //static $blackList = array('\$this', 'raintpl::', 'self::', '_SESSION', '_SERVER', '_ENV', 'exec', 'unlink', 'rmdir');
+    static $blackList = array();
 
     /**
      * outputFunctions 
@@ -251,8 +252,13 @@ class RainTPL
             /* If tplFile is not exists append extension to it. */
             if(!file_exists($this->tpl['tplFile'])) $this->tpl['tplFile'] = dirname($this->tpl['tplFile']) . DS . basename($this->tpl['tplFile'], "." . self::$tplExt);
 
+            //$this->tpl['tplFile'] = str_replace(DS . 'tmp' . DS . 'template' . DS, DS . 'template' . DS, $this->tpl['tplFile']);
             $tempCmpiledFile = str_replace(TPL_ROOT, self::$rootDir . self::$cacheDir, $this->tpl['tplFile']);
-            if(strpos($tplName, TPL_ROOT) === false)
+            if(strpos($tplName, DS . 'tmp' . DS . 'template' . DS) !== false)
+            {
+                $tempCmpiledFile = str_replace($this->app->getBasePath() . 'tmp' . DS . 'template' . DS, self::$rootDir . self::$cacheDir, $this->tpl['tplFile']);
+            }
+            elseif(strpos($tplName, TPL_ROOT) === false)
             {
                 $tempCmpiledFile = str_replace($this->app->getBasePath() . 'module' . DS, self::$rootDir . self::$cacheDir, $this->tpl['tplFile']);
             }
