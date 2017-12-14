@@ -14,27 +14,27 @@
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-comments-alt'></i> {!echo $lang->user->messages?> <span>({!echo count($messages)?>)</span> </div>
+    <div class='title strong'><i class='icon icon-comments-alt'></i> {!echo $lang->user->messages} <span>({!echo count($messages)})</span> </div>
   </div>
   <div class='panel-body' id='cardListWarpper'>
     <div class='cards cards-list' id='cardList'>
     {foreach($messages as $message)}
       <div class='card'>
         <div class='card-heading'><strong class='{!echo $control->app->user->account === $message->from ? 'text-danger' : 
-        'text-special' ?>'>{!echo $message->from}</strong> &nbsp; <small class='text-muted'>{!echo substr($message->date, 5)}</small></div>
+        'text-special' }'>{!echo $message->from}</strong> &nbsp; <small class='text-muted'>{!echo substr($message->date, 5)}</small></div>
         <div class='card-content'>
           {!echo $message->content}
         </div>
         <div class='card-footer'>
-          <span class='{!echo $message->readed ? 'text-muted' : 'text-success'?>'>{!echo $lang->message->readedStatus[$message->readed]}</span>
+          <span class='{!echo $message->readed ? 'text-muted' : 'text-success'}'>{!echo $lang->message->readedStatus[$message->readed]}</span>
           
           <div class="pull-right">
             {if(!$message->readed)}
             {!echo html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed, "class='text-primary markread'")}
             {else}
-            {!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : ''?>
+            {!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : ''}
             {/if}
-            &nbsp; {!echo html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{$message->id}'") ?>
+            &nbsp; {!echo html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{$message->id}'") }
           </div>
         </div>
       </div>

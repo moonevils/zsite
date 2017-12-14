@@ -21,7 +21,7 @@ include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header
   <div class='panel-body'>
     <div id='successMsg' class='hide alert bg-primary-pale text-center'>
       <i class='icon-info-sign icon icon-x3 block'></i>
-      <h5>{!echo $lang->user->resetPassword->success?></h5>
+      <h5>{!echo $lang->user->resetPassword->success}</h5>
     </div> 
     <form method='post' id='resetPwdForm'>
       <div class='form-group hide form-message alert text-danger bg-danger-pale'>

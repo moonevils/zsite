@@ -78,7 +78,7 @@
   {$bookModel = $control->loadModel('book')}
   <div class='block-region region-top blocks' data-region='book_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'book_browse', 'top')}</div>
   <hr class='space'>
-  <div class='panel-section panel' id='bookCatalog' data-id='{!echo $node->id?>'>
+  <div class='panel-section panel' id='bookCatalog' data-id='{$node->id}'>
     <div class='panel-body'>
       <div class='dropdown selector'>
         <a data-toggle='dropdown' href='###' class='btn strong block primary text-left'>
