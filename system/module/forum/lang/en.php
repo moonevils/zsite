@@ -13,7 +13,7 @@ $lang->forum->common      = 'Forum';
 $lang->forum->board       = 'Board';
 $lang->forum->owners      = 'Moderator';
 $lang->forum->threadList  = 'Thread List';
-$lang->forum->threadCount = 'Thread';
+$lang->forum->threadCount = 'Thread'
 $lang->forum->postCount   = 'Post';
 $lang->forum->lastPost    = 'Last Post';
 $lang->forum->readonly    = 'Read Only';
@@ -32,7 +32,7 @@ $lang->forum->updateDesc    = 'Number of threads on each board will be updated.'
 $lang->forum->successUpdate = 'Done!';
 
 $lang->forum->indexModeOptions = array();
-$lang->forum->indexModeOptions['board']  = 'Board Browse';
+$lang->forum->indexModeOptions['board']  = 'Boards';
 $lang->forum->indexModeOptions['latest'] = 'Latest Thread';
 $lang->forum->indexModeOptions['stick']  = 'Sticky Thread';
 
