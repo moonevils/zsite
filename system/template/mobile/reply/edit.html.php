@@ -1,4 +1,4 @@
-{*php*}
+{php
 /**
  * The edit view file of reply for mobile template of chanzhiEPS.
  *
@@ -9,28 +9,29 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->reply->edit}</h5>
+      <h5 class='modal-title'><i class='icon-pencil'></i> {$lang->reply->edit}</h5>
     </div>
     <div class='modal-body'>
-      <form id='eidtReplyForm' method='post' action='{!echo $control->createLink('reply', 'edit', "replyID=$reply->id")}'>
+      <form id='eidtReplyForm' method='post' action='{$control->createLink('reply', 'edit', "replyID=$reply->id")}'>
         <div class='form-group'>
-          {!echo html::textarea('content', $reply->content, "class='form-control' rows='15' placeholder='{$lang->reply->content}'")}
+          {!html::textarea('content', $reply->content, "class='form-control' rows='15' placeholder='{{$lang->reply->content}}'")}
         </div>
         <table style='width: 100%'>
           <tr class='hide captcha-box'></tr>
         </table>
         <div class='form-group'>
-          {!echo html::submitButton('', 'btn primary block')}
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
   </div>
 </div>
+{noparse}
 <script>
 $(function()
 {
@@ -53,3 +54,4 @@ $(function()
     }});
 });
 </script>
+{/noparse}

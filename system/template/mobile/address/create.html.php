@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-php*}
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -50,7 +50,8 @@ $(function()
             setTimeout($.refreshAddressList, 200);
             response.locate = false;
         }
-    }});
+    }
+    });
 });
 </script>
 {/noparse}

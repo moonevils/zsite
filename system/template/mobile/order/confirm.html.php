@@ -158,7 +158,7 @@ $(function()
     var $confirmOrderForm = $('#confirmOrderForm');
     $confirmOrderForm.ajaxform({onResultSuccess: function(response)
     {
-/noparse}
+            {/noparse}
         $.messager.success('{$lang->order->createdSuccess}');
         window.location.href = response.locate ? response.locate : '{!helper::createLink('order', 'browse')}';
 {noparse}
