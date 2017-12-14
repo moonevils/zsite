@@ -12,9 +12,9 @@
 /php*}
 {$isSimpleMode = (isset($control->config->site->front) and $control->config->site->front == 'login')}
 {if($isSimpleMode)}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
+  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
 {else}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {/if}
 <hr class='space'>
 <div class='panel-section'>
@@ -28,9 +28,9 @@
       <i class='icon icon-info-sign icon-s1'></i>
       <div class='content'></div>
     </div>
-    <div class='form-group'>{!echo html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}]' class='form-control'")}</div>
-    <div class='form-group'>{!echo html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
-    <div class='form-group'>{!echo html::submitButton($lang->user->login->common, 'btn primary block')}</div>
+    <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}]' class='form-control'")}</div>
+    <div class='form-group'>{!html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
+    <div class='form-group'>{!html::submitButton($lang->user->login->common, 'btn primary block')}</div>
     <div class='form-group'>
       {if($config->mail->turnon and $control->config->site->resetPassword == 'open')} {!html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' '} {/if}
       {if(!$isSimpleMode)} {!html::a(inlink('register'), $lang->user->register->common, "class='btn btn-link'")} {/if}
