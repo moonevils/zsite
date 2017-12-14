@@ -23,10 +23,10 @@
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 <div class='panel panel-section'>
-  <div class='panel-heading'><strong>{!echo $lang->user->buyScore?></strong></div>
+  <div class='panel-heading'><strong>{!echo $lang->user->buyScore}</strong></div>
   <div class='panel-body'>
 {/if}
-    <form method='post' id='buyScoreForm' action="{!echo $control->createLink('score', 'buyScore')?>">
+    <form method='post' id='buyScoreForm' action="{!echo $control->createLink('score', 'buyScore')}">
       <div class='form-group'>
         {!echo html::input('amount', '', "class='form-control' placeholder='{$lang->score->setAmount}' onkeyup='getScore()'")}
       </div>
@@ -34,7 +34,7 @@
         {!printf($lang->score->buyWaring, $config->score->buyScore->minAmount, $config->score->buyScore->perYuan)}
       </div>
       <div class='form-group'>
-        <span>{!echo $lang->score->getScore?></span>
+        <span>{!echo $lang->score->getScore}</span>
          <span id='score'>0</span>
       </div> 
       <div class='form-group'>
@@ -60,7 +60,7 @@ $buyScoreForm.ajaxform({onSuccess: function(response)
     }
 }});
 
-var scoreConfig = {!echo $config->score->buyScore->perYuan?>;
+var scoreConfig = {!echo $config->score->buyScore->perYuan};
 function getScore()
 {
     $('#score').html(Math.round($('#amount').val() * scoreConfig));

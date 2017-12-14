@@ -15,7 +15,7 @@
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-share'></i> {!echo $lang->user->thread?></div>
+    <div class='title strong'><i class='icon icon-share'></i> {!echo $lang->user->thread}</div>
   </div>
   <div class='cards condensed cards-list'>
     {foreach($threads as $thread)}
@@ -23,7 +23,7 @@
       <div class='table-layout'>
         <div class='table-cell'>
           <div class='card-heading'>
-            <h5>{!echo $thread->title?></h5>
+            <h5>{!echo $thread->title}</h5>
           </div>
           <div class='card-content text-muted'>
             {!echo $lang->thread->postedDate} {!echo substr($thread->addedDate, 2, -3)}
