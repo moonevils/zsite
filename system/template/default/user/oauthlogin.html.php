@@ -1,13 +1,13 @@
-{foreach($controllang->user->oauth->providers as $providerCode => $providerName)}
-  {if(isset($controlconfig->oauth->$providerCode))} 
-    {$providerConfig[$providerCode] = json_decode($controlconfig->oauth->$providerCode)}
+{foreach($control->lang->user->oauth->providers as $providerCode => $providerName)}
+  {if(isset($config->oauth->$providerCode))} 
+    {$providerConfig[$providerCode] = json_decode($config->oauth->$providerCode)}
   {/if}
 {/foreach}
 {if(!empty($providerConfig))}
   <span class='span-oauth'>
     <span class='login-heading'>{$control->lang->user->oauth->lblOtherLogin}</span>
-    {foreach($controllang->user->oauth->providers as $providerCode => $providerName)}
-      {$providerConfig = isset($controlconfig->oauth->$providerCode) ? json_decode($controlconfig->oauth->$providerCode) : ''}
+    {foreach($control->lang->user->oauth->providers as $providerCode => $providerName)}
+      {$providerConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : ''}
       {if(empty($providerConfig->clientID))} {continue} {/if}
       {$params = "provider=$providerCode&fingerprint=fingerprintval"}
       {if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth'))}
