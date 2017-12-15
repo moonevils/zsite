@@ -25,14 +25,14 @@
           {!html::textarea('content', $thread->content, "class='form-control' rows='15' placeholder='{{$lang->thread->content}}'")}
         </div>
         {if($canManage)}
-        <div class='form-group'>
-          <div class="checkbox">
-            <label>
-              {@$readonly = $thread->readonly ? 'checked' : ''}
-              <input type='checkbox' name='readonly' value='1' {$readonly}/><span>{$lang->thread->readonly}</span>
-            </label>
+          <div class='form-group'>
+            <div class="checkbox">
+              <label>
+                {$readonly = $thread->readonly ? 'checked' : ''}
+                <input type='checkbox' name='readonly' value='1' {$readonly}/><span>{$lang->thread->readonly}</span>
+              </label>
+            </div>
           </div>
-        </div>
         {/if}
         <table style='width: 100%'>
           <tr class='hide captcha-box'></tr>
