@@ -14,10 +14,10 @@
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-reply'></i> {!echo $lang->message->reply}</h5>
+      <h5 class='modal-title'><i class='icon-reply'></i> {$lang->message->reply}</h5>
     </div>
     <div class='modal-body'>
-      <form id='replyForm' method='post' action="{!echo inlink('reply', "messageID=$message->id")}">
+      <form id='replyForm' method='post' action="{!inlink('reply', "messageID=$message->id")}">
         <div class='form-group'>
           {!html::textarea('content', '', "class='form-control' rows='5' placeholder='{{$lang->message->content}}'")}
         </div>
@@ -31,10 +31,10 @@
         {else}
           <div class='form-group'>
             <span class='signed-user-info'>
-              <i class='icon-user text-muted'></i> <strong>{!echo $control->session->user->realname }</strong>
+              <i class='icon-user text-muted'></i> <strong>{$control->session->user->realname }</strong>
               {!html::hidden('from', $control->session->user->realname)}
               {if($control->session->user->email != '')}
-                <span class='text-muted'>&nbsp;({!echo str2Entity($control->session->user->email)})</span>
+                <span class='text-muted'>&nbsp;({!str2Entity($control->session->user->email)})</span>
                 {!html::hidden('email', $control->session->user->email)}
               {/if}
             </span>
@@ -51,6 +51,7 @@
   </div>
 </div>
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
+{noparse}
 <script>
 $(function()
 {
@@ -79,3 +80,4 @@ $(function()
     });
 });
 </script>
+{/noparse}
