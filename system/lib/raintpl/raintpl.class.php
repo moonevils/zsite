@@ -165,21 +165,21 @@ class RainTPL
         }
 
         if(!$this->cache && !$returnString)
-		{
+        {
             extract($this->var);
             include $this->tpl['compiledFile'];
             unset($this->tpl);
         }
         else
-		{
-			ob_start();
-			extract($this->var);
-			include $this->tpl['compiledFile'];
-			$contents = ob_get_clean();
+        {
+            ob_start();
+            extract($this->var);
+            include $this->tpl['compiledFile'];
+            $contents = ob_get_clean();
             if($this->cache) file_put_contents($this->tpl['cacheFile'], "<?php if(!class_exists('raintpl')){exit;}" . self::PHP_END . $contents);
             unset($this->tpl);
             if($returnString) return trim($contents);
-			echo $contents;
+            echo $contents;
         }
     }
 
@@ -196,12 +196,12 @@ class RainTPL
         $this->cacheID = $cacheID;
 
         if(!$this->prepareCompile($tplName) && file_exists($this->tpl['cacheFile']) && (time() - filemtime($this->tpl['cacheFile']) < $expireTime))
-		{
+        {
             /* return the cached file as HTML. It remove the first 43 character, which are a PHP code to secure the file <?php if(!class_exists('raintpl')){exit;}? >*/
             return substr(file_get_contents($this->tpl['cacheFile']), 43);
         }
         else
-		{
+        {
             /* Delete the cache of the selected template. */
             if(file_exists($this->tpl['cacheFile'])) unlink($this->tpl['cacheFile']);
             $this->cache = true;
@@ -393,7 +393,7 @@ class RainTPL
 
         $tagPatterns = $this->getTagPatterns();
         $tagRegexp   = "/" . join("|", $tagPatterns) . "/";
-        
+
         /* Replace start mark and end mark of text. */
         $templateCode = str_replace("{{", "SOT_MARK", $templateCode);
         $templateCode = str_replace("}}", "EOT_MARK", $templateCode);
@@ -415,7 +415,7 @@ class RainTPL
      * @param  array     $parsedCode 
      * @access protected
      * @return string
-	 */
+     */
     protected function compileCode($parsedCode)
     {
         if(!$parsedCode) return "";
@@ -693,7 +693,7 @@ class RainTPL
         /* If the cache is active. */
         if(isset($code[2]))
         {
-           return '<?php $tpl = new '.get_called_class().';' .
+            return '<?php $tpl = new '.get_called_class().';' .
                 '$tpl->assign($this->var);' .
                 '$tpl->draw(' . $include_template . ');'
                 . self::PHP_END;
@@ -736,7 +736,7 @@ class RainTPL
                 $code = str_replace(')}', ")}\n", $code);
             }
         }
-   
+
         return $code;
     }
 
@@ -777,7 +777,7 @@ class RainTPL
                 $code = str_replace(')}', ")}\n", $code);
             }
         }
-   
+
         return $code;
     }
 
@@ -804,7 +804,7 @@ class RainTPL
     {
         return self::PHP_START . " echo '<?xml " . stripslashes($capture[1]) . self::PHP_END . self::PHP_END;
     } 
- 
+
 
     /**
      * Reduce a path, eg. www/library/../filepath//file => www/filepath/file
