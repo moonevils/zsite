@@ -6,7 +6,7 @@
 <div class='block-region region-all-top blocks' data-region='all-top'>{$control->block->printRegion($layouts, 'all', 'top')}</div>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
-    <a href='{!echo $webRoot}'>
+    <a href='{$webRoot}'>
      {$logoSetting = isset($control->config->site->logo) ? json_decode($control->config->site->logo) : new stdclass()}
      {$logo = false}
      {if(isset($logoSetting->{{CHANZHI_TEMPLATE}}->themes->all))} {$logo = $logoSetting->{{CHANZHI_TEMPLATE}}->themes->all} {/if}
@@ -15,27 +15,27 @@
        {$logo->extension = $control->loadModel('file')->getExtension($logo->pathname)}
        {!html::image($control->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{{$control->config->company->name}}' title='{{$control->config->company->name}}'")}
      {else}
-       {!echo '<h4>' . $control->config->site->name . '</h4>'}
+       <h4>{!$control->config->site->name}</h4>
      {/if}
     </a>
   </div>
   <div class='appbar-actions'>
     {if(commonModel::isAvailable('search'))}
-    <div class='dropdown'>
-      <button type='button' class='btn' data-toggle='dropdown' id='searchToggle'><i class='icon-search'></i></button>
-      <div class='dropdown-menu fade search-bar' id='searchbar'>
-        <form action='{!helper::createLink('search')}' method='get' role='search'>
-          <div class='input-group'>
-            {$keywords = ($control->app->getModuleName() == 'search') ? $control->session->serachIngWord : ''}
-            {!html::input('words', $keywords, "class='form-control' placeholder=''")}
-            {if($control->config->requestType == 'GET')} {!html::hidden($control->config->moduleVar, 'search') . html::hidden($control->config->methodVar, 'index')} {/if}
-            <div class='input-group-btn'>
-              <button class='btn default' type='submit'><i class='icon icon-search'></i></button>
+      <div class='dropdown'>
+        <button type='button' class='btn' data-toggle='dropdown' id='searchToggle'><i class='icon-search'></i></button>
+        <div class='dropdown-menu fade search-bar' id='searchbar'>
+          <form action='{!helper::createLink('search')}' method='get' role='search'>
+            <div class='input-group'>
+              {$keywords = ($control->app->getModuleName() == 'search') ? $control->session->serachIngWord : ''}
+              {!html::input('words', $keywords, "class='form-control' placeholder=''")}
+              {if($control->config->requestType == 'GET')} {!html::hidden($control->config->moduleVar, 'search') . html::hidden($control->config->methodVar, 'index')} {/if}
+              <div class='input-group-btn'>
+                <button class='btn default' type='submit'><i class='icon icon-search'></i></button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     {/if}
     <div class='dropdown'>
       {if(!isset($control->config->site->type) or $control->config->site->type != 'blog')}
@@ -56,7 +56,7 @@
     <ul class='nav'>
     {$subnavs = ''}
     {foreach($navs as $nav1)}
-      <li class='{!echo $nav1->class}'>
+      <li class='{$nav1->class}'>
       {if(empty($nav1->children))}
         {!html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'")}
       {else}

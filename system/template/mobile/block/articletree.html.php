@@ -39,6 +39,7 @@
     </div>
     <div class='panel-body'>{$treeMenu}</div>
   </div>
+  {noparse}
   <style>
   .tree {padding: 0; margin: 0;}
   .tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}
@@ -51,6 +52,7 @@
   .tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 12px; height: 20px; border-top: 1px dashed #ccc;}
   .tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
   </style>
+  {/noparse}
 {else}
   {$topCategories = $model->tree->getChildren($startCategory, $type)}
   <div id="block{$block->id}" class='panel panel-block panel-block-article-tree {$blockClass}'>
@@ -61,8 +63,8 @@
       <ul class='nav'>
         {foreach($topCategories as $topCategory)}
           {$browseLink = helper::createLink($type, 'browse', "categoryID={{$topCategory->id}}", "category={{$topCategory->alias}}")}
-          {if($type == 'blog')} {$browseLink = helper::createLink('blog', 'index', "categoryID={{$topCategory->id}}]", "category={{$topCategory->alias}}")} {/if}
-          {!echo '<li>' . html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{{$topCategory->id}}'") . '</li>'}
+          {if($type == 'blog')} {$browseLink = helper::createLink('blog', 'index', "categoryID={{$topCategory->id}}", "category={{$topCategory->alias}}")} {/if}
+          <li>{!html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{{$topCategory->id}}'")}</li>
         {/foreach}
       </ul>
     </div>

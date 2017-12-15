@@ -19,12 +19,19 @@
       <div class='fullScreen-inner'>
         <div class='panel-body'>
           <div class='dropdown selector'>
-            <a data-toggle='dropdown' href='###' class='btn strong block primary text-left'><i class='icon icon-book'></i> {if(!empty($book) && $book->title) echo $book->title; else echo $lang->book->list}<div class='pull-right'><i class='icon-caret-down pull-right'></i></div></a>
+            <a data-toggle='dropdown' href='###' class='btn strong block primary text-left'><i class='icon icon-book'></i>
+              {if(!empty($book) && $book->title)}
+                {$book->title}
+              {else}
+                {$lang->book->list}
+              {/if}
+              <div class='pull-right'><i class='icon-caret-down pull-right'></i></div>
+            </a>
             {if(!empty($books))}
               <ul class='dropdown-menu responsive'>
-                <li class='dropdown-header'>{!echo $lang->book->list}</li>
+                <li class='dropdown-header'>{$lang->book->list}</li>
                 {foreach($books as $menu)}
-                  <li{!echo $menu->title == $book->title ? " class='active'" : ''}>{!echo html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<i class="icon-book"></i> &nbsp;' . $menu->title)}</li>
+                  <li{!echo $menu->title == $book->title ? " class='active'" : ''}>{!html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<i class="icon-book"></i> &nbsp;' . $menu->title)}</li>
                 {/foreach}
               </ul>
             {/if}
@@ -50,15 +57,13 @@
               </div>
             {/foreach}
           {/if}
-  
           <hr class="space">
           <div class='list-group'>
             {foreach($bookModel->getChildren($node->id) as $nodeChild)}
-                {if($nodeChild->type != 'book')} {$serial = $serials[$nodeChild->id]} {/if}
-  
-                {if($nodeChild->type == 'chapter')} {$link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
-                {if($nodeChild->type == 'article')}  {$link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
-                {!html::a($link, ($nodeChild->type == 'chapter' ? "<i class='icon icon-list-ul'></i>" : "<i class='icon icon-file-text-o'></i>") . " {{$serial}} &nbsp;{{$nodeChild->title}} <i class='pull-right icon-chevron-right'></i>", "class='list-group-item" . ($nodeChild->type == 'chapter' ? ' strong' : '') . "'")}
+              {if($nodeChild->type != 'book')} {$serial = $serials[$nodeChild->id]} {/if}
+              {if($nodeChild->type == 'chapter')} {$link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
+              {if($nodeChild->type == 'article')}  {$link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
+              {!html::a($link, ($nodeChild->type == 'chapter' ? "<i class='icon icon-list-ul'></i>" : "<i class='icon icon-file-text-o'></i>") . " {{$serial}} &nbsp;{{$nodeChild->title}} <i class='pull-right icon-chevron-right'></i>", "class='list-group-item" . ($nodeChild->type == 'chapter' ? ' strong' : '') . "'")}
             {/foreach}
             {if(!$control->get->fullScreen)}
               <a href='/' class='btn block text-left default home'><i class='icon-home'></i> {$lang->book->goHome}</a>
@@ -91,7 +96,7 @@
             <li class='dropdown-header'>{$lang->book->list}</li>
             {foreach($books as $menu)}
               <li {!echo $menu->title == $book->title ? " class='active'" : ''}>
-                {!echo html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<i class="icon-book"></i> &nbsp;' . $menu->title)}
+                {!html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<i class="icon-book"></i> &nbsp;' . $menu->title)}
               </li>
             {/foreach}
           </ul>
@@ -109,7 +114,6 @@
             <ul class='dropdown-menu responsive'>
               {foreach($originTree->nodes as $nodeChild)}
                 {if($nodeChild->type != 'book')} {$serial = $serials[$nodeChild->id]} {/if}
-    
                 {if($nodeChild->type == 'chapter')} {$link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
                 {if($nodeChild->type == 'article')} {$link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
                 {$class =  $originTree->current->id === $nodeChild->id ? " class='active'" : ''}
