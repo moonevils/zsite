@@ -15,7 +15,7 @@
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <button type='button' class='btn primary block' data-toggle='modal' data-remote='{inlink('create')}'><i class='icon icon-plus'></i>{$lang->address->create}</button>
+    <button type='button' class='btn primary block' data-toggle='modal' data-remote='{!inlink('create')}'><i class='icon icon-plus'></i>{$lang->address->create}</button>
   </div>
   <div class='panel-heading'>
     <div class='title strong'><i class='icon icon-map-marker'></i>{$lang->address->browse}</div>
