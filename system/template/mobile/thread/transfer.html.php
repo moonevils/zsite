@@ -14,7 +14,7 @@
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon icon-location-arrow'></i> {!echo $lang->thread->transfer}</h5>
+      <h5 class='modal-title'><i class='icon icon-location-arrow'></i> {$lang->thread->transfer}</h5>
     </div>
     <div class='modal-body'>
       <form id='threadTransferForm' method='post' action='{!inlink('transfer', "threadID={{$thread->id}}")}'>
