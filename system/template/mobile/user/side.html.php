@@ -20,7 +20,7 @@
     {$class = ''}
     {$menu = zget($lang->user->control->menus, $nav, '')}
     {if(empty($menu))} {continue} {/if}
-    {list($label, $module, $method) = explode('|', $menu)}
+    {@list($label, $module, $method) = explode('|', $menu)}
     {$module = strtolower($module)}
     {$method = strtolower($method)}
     {$menuInfo = explode('|', $menu)}
