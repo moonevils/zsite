@@ -11,6 +11,6 @@
 */
 /php*}
 {$block->content = json_decode($block->content)}
-<div id="block{!echo $block->id}" class='hidden'>
+<div id="block{$block->id}" class='hidden'>
   {$block->content->content}
 </div>

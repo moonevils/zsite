@@ -29,7 +29,7 @@
       {if($article->source != 'original' and $article->copyURL != '')}
         <small>
           {!echo $lang->article->sourceList[$article->source] . $lang->colon}
-          {$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}
+          {!$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}
         </small>
       {else}
         <small class='text-success bg-success-pale'>{$lang->article->sourceList[$article->source]}</small>

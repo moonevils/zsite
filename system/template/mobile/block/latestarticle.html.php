@@ -15,95 +15,96 @@
 {$method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)))}
 {$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit)}
 {if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'article')} {/if}
+{noparse}
 <style>
 #block{$block->id} .card .thumbnail-cell {padding-left: 8px; padding-right: 0}
 #block{$block->id} .card .table-cell + .thumbnail-cell {padding-right: 8px; padding-left: 0}
 </style>
-<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
+{/noparse}
+<div id="block{$block->id}" class='panel panel-block {$blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
-      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if(isset($content->image))}
-  {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
-  <div class='panel-body no-padding'>
-    <div class='cards condensed cards-list'>
-    {foreach($articles as $article)}
-    {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
-    <div class='card'>
-      <div class='card-heading'>
-        {if(isset($content->showCategory) and $content->showCategory == 1)}
-          {if($content->categoryName == 'abbr')}
-            {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-            {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
-          {else}
-            {!echo '<span class="text-special">[' . $article->category->name . ']</span>'}
-          {/if}
-        {/if}
-        {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
-        <strong>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
-      </div>
-      <div class='table-layout'>
-        {if(!empty($article->image))}
-          {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
-          {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ));
-          {$thumbnailMaxWidth = !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px'}
-          {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: {{$thumbnailMaxWidth}};'>{{$thumbnailLink}}</div>"}
-          {if($content->imagePosition == 'left') echo $thumbnail;
-        {/if}
-        <div class='table-cell'>
-          <div class='card-content text-muted small'>
-            <strong class='text-important'>
-              {if(isset($content->time))} {!echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4)} {/if}
-            </strong>
-            &nbsp;{$article->summary}
+    {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
+    <div class='panel-body no-padding'>
+      <div class='cards condensed cards-list'>
+      {foreach($articles as $article)}
+        {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
+        <div class='card'>
+          <div class='card-heading'>
+            {if(isset($content->showCategory) and $content->showCategory == 1)}
+              {if($content->categoryName == 'abbr')}
+                {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
+                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
+              {else}
+                <span class="text-special">{[' . $article->category->name . ']}</span>
+              {/if}
+            {/if}
+            {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span> {/if}
+            <strong>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
+          </div>
+          <div class='table-layout'>
+            {if(!empty($article->image))}
+              {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
+              {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ));
+              {$thumbnailMaxWidth = !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px'}
+              {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: {{$thumbnailMaxWidth}};'>{{$thumbnailLink}}</div>"}
+              {if($content->imagePosition == 'left')} {$thumbnail} {/if}
+            {/if}
+            <div class='table-cell'>
+              <div class='card-content text-muted small'>
+                <strong class='text-important'>
+                  {if(isset($content->time))} <i class='icon-time'></i> {!formatTime($article->addedDate, DT_DATE4)} {/if}
+                </strong>
+                &nbsp;{$article->summary}
+              </div>
+            </div>
+            {if(!empty($article->image) && isset($thumbnail) && $content->imagePosition == 'right')} {$thumbnail} {/if}
           </div>
         </div>
-        {if(!empty($article->image) && isset($thumbnail) && $content->imagePosition == 'right')} {$thumbnail} {/if}
+      {/foreach}
       </div>
     </div>
-    {/foreach}
-    </div>
-  </div>
   {else}
-  <div class='panel-body no-padding'>
-    <div class='list-group simple'>
-      {foreach($articles as $article)}
-        {$alias = "category={{$article->category->alias}}&name={{$article->alias}}"}
-        {$url   = helper::createLink('article', 'view', "id={{$article->id}}", $alias)}
-        {if(isset($content->time))}
-        <div class='list-group-item'>
-          {if(isset($content->showCategory) and $content->showCategory == 1)}
-            {if($content->categoryName == 'abbr')}
-              {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-              {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
-            {else}
-              {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
+    <div class='panel-body no-padding'>
+      <div class='list-group simple'>
+        {foreach($articles as $article)}
+          {$alias = "category={{$article->category->alias}}&name={{$article->alias}}"}
+          {$url   = helper::createLink('article', 'view', "id={{$article->id}}", $alias)}
+          {if(isset($content->time))}
+          <div class='list-group-item'>
+            {if(isset($content->showCategory) and $content->showCategory == 1)}
+              {if($content->categoryName == 'abbr')}
+                {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
+                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
+              {else}
+                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
+              {/if}
             {/if}
-          {/if}
-          {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
-          {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
-          <span class='pull-right text-muted'>{!echo substr($article->addedDate, 0, 10)}</span>
-        </div>
-        {else}
-        <div class='list-group-item'>
-          {if(isset($content->showCategory) and $content->showCategory == 1)}
-            {if($content->categoryName == 'abbr')}
-              {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-              {echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
-            {else}
-              {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
+            {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span> {/if}
+            {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+            <span class='pull-right text-muted'>{!substr($article->addedDate, 0, 10)}</span>
+          </div>
+          {else}
+          <div class='list-group-item'>
+            {if(isset($content->showCategory) and $content->showCategory == 1)}
+              {if($content->categoryName == 'abbr')}
+                {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
+                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
+              {else}
+                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
+              {/if}
             {/if}
+            {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span> {/if}
+            {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+          </div>
           {/if}
-          {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
-          {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
-        </div>
-        {/if}
-        
-      {/foreach}
+        {/foreach}
+      </div>
     </div>
-  </div>
   {/if}
 </div>

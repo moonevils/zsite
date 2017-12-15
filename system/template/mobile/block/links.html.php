@@ -11,15 +11,15 @@
 */
 /php*}
 {if($app->getModuleName() != 'links' and !empty($config->links->index))}
-<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
-  <div class='panel-heading'>
-    <strong><i class='icon'>{!echo $icon}</i>{!echo $block->title}</strong>
-    <div class='pull-right'>
-      {if(trim(strip_tags($config->links->all, '<a>')))}
-        {!html::a(helper::createLink('links', 'index'), $lang->more)}
-      {/if}
+  <div id="block{$block->id}" class='panel panel-block {$blockClass}'>
+    <div class='panel-heading'>
+      <strong><i class='icon'>{$icon}</i>{$block->title}</strong>
+      <div class='pull-right'>
+        {if(trim(strip_tags($config->links->all, '<a>')))}
+          {!html::a(helper::createLink('links', 'index'), $lang->more)}
+        {/if}
+      </div>
     </div>
+    <div class='panel-body'>{$config->links->index}</div>
   </div>
-  <div class='panel-body'>{$config->links->index}</div>
-</div>
 {/if}
