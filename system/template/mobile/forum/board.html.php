@@ -26,7 +26,7 @@
 
   <div class='cards cards-list condensed bordered'>
     {foreach($sticks as $thread)}
-      {@$style = $thread->color ? " style='color:{{$thread->color}}'" : ''}
+      {$style = $thread->color ? " style='color:{{$thread->color}}'" : ''}
       <a class='card' href='{$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
         <div class='table-layout'>
           <div class='table-cell'>
@@ -42,7 +42,7 @@
     {/foreach}
 
     {foreach($threads as $thread)}
-      {@$style = $thread->color ? " style='color:{{$thread->color}}'" : ''}
+      {$style = $thread->color ? " style='color:{{$thread->color}}'" : ''}
       <a class='card' href='{!$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
         <div class='table-layout'>
           <div class='table-cell'>
