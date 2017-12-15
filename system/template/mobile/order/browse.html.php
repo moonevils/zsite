@@ -30,13 +30,13 @@
               </strong>
             </span> 
             <div class='pull-right'>
-{$order->status == ''}
-{if($order->status == 'normal' and 'not_paid')} {$statusClass = 'danger'}    {/if}
-{if($order->status == 'paid' and 'not_send')}   {$statusClass = 'important'} {/if}
-{if($order->status == 'send')}                  {$statusClass = 'special'}   {/if}
-{if($order->status == 'confirmed')}             {$statusClass = 'primary'}   {/if}
-{if($order->status == 'finished')}              {$statusClass = 'success'}   {/if}
-{if($order->status == 'canceled')}              {$statusClass = 'muted'}     {/if}
+              {$order->status == ''}
+              {if($order->status == 'normal' and 'not_paid')} {$statusClass = 'danger'}    {/if}
+              {if($order->status == 'paid' and 'not_send')}   {$statusClass = 'important'} {/if}
+              {if($order->status == 'send')}                  {$statusClass = 'special'}   {/if}
+              {if($order->status == 'confirmed')}             {$statusClass = 'primary'}   {/if}
+              {if($order->status == 'finished')}              {$statusClass = 'success'}   {/if}
+              {if($order->status == 'canceled')}              {$statusClass = 'muted'}     {/if}
               <span class='text-{$statusClass}'>{$control->order->processStatus($order)}</span>
             </div>
           </div>
@@ -93,17 +93,13 @@ $(function()
     $(document).on('click', '.cancelLink', function(e)
     {
         var $this   = $(this);
-            {/noparse}
-        var options = $.extend({url: $this.data('rel'), confirm: '{$lang->order->cancelWarning}', onSuccess: refreshOrderList}, $this.data());
-            {noparse}
+        var options = $.extend({url: $this.data('rel'), confirm: '{/noparse}{$lang->order->cancelWarning}{noparse}', onSuccess: refreshOrderList}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     }).on('click', '.confirmDelivery', function(e)
     {
         var $this   = $(this);
-            {/noparse}
-        var options = $.extend({url: $this.data('rel'), confirm: "{$lang->order->confirmWarning}", onSuccess: refreshOrderList}, $this.data());
-            {noparse}
+        var options = $.extend({url: $this.data('rel'), confirm: "{/noparse}{$lang->order->confirmWarning}{noparse}", onSuccess: refreshOrderList}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     });

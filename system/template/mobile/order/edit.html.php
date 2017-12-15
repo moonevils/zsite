@@ -46,8 +46,8 @@
     </div>
   </div>
 </div>
-<script>
 {noparse}
+<script>
 $(function()
 {
     var $editOrderForm = $('#editOrderForm');

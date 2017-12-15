@@ -49,9 +49,7 @@ $(function()
 
     $.refreshAddressList = function()
     {
-{/noparse}
-       $('#addressListWrapper').load('{!helper::createLink('address', 'browse')} #addressList', function()
-        {noparse}
+       $('#addressListWrapper').load('{/noparse}{!helper::createLink('address', 'browse'){noparse}} #addressList', function()
         {
             $('#addressList').find('.card-footer').remove();
         });
@@ -60,7 +58,7 @@ $(function()
     $.refreshAddressList();
 
     $('#submit').click(function(){
-        var payment = $('input:radio[name=payment]:checked').val();
+        var payment = $('{/noparse}input:radio[name=payment]:checked{noparse}').val();
         if(payment == 'COD')
         {
             $('#checkForm').attr('target', '');
