@@ -12,7 +12,7 @@
         <label class='control-label'>{$lang->user->password2}</label>
         {!html::password('password2', '', "class='form-control'")}
       </div>
-      {!echo html::submitButton($lang->user->submit,'btn primary block') . html::hidden('reset', $reset)}</td>
+      {!html::submitButton($lang->user->submit,'btn primary block') . html::hidden('reset', $reset)}</td>
     </form>
   </div>
 </div>  
