@@ -16,7 +16,7 @@
 {!css::internal($page->css)}
 {!js::execute($page->js)}
 <div class='block-region region-top blocks' data-region='page_view-top'>{$control->loadModel('block')->printRegion($layouts, 'page_view', 'top')}</div>
-<div id='page' data-id='{!echo $page->id }'>
+<div id='page' data-id='{$page->id }'>
 <div class='appheader'>
   <div class='heading'>
     <h2>{$page->title}</h2>
@@ -38,7 +38,7 @@
   <div class='panel-footer'>
     <div class='article-moreinfo clearfix'>
       {if($page->keywords)}
-      <p class='small'><strong class="text-muted">{$lang->article->keywords}</strong><span class="article-keywords">{$lang->colon}{$page->keywords}</span></p>
+        <p class='small'><strong class="text-muted">{$lang->article->keywords}</strong><span class="article-keywords">{$lang->colon}{$page->keywords}</span></p>
       {/if}
     </div>
   </div>
