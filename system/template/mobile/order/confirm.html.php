@@ -135,8 +135,7 @@ $(function()
 
     $.refreshAddressList = function()
         {
-            $('#addressListWrapper').load('{/noparse}{!helper::createLink('address', 'browse')}{noparse} #addressList', function()
-        {
+            $('#addressListWrapper').load('{/noparse}{!helper::createLink('address', 'browse')}{noparse}#addressList', function(){
             if($('#addressList').find('.card').size() == 0)
             {
                 $('#createAddress').val(1);
