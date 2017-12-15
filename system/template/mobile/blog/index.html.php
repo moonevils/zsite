@@ -35,7 +35,7 @@
           <div class='table-cell'>
             <div class='card-content text-muted small'>
               {$stick->summary}
-              <div><span title="{!echo $lang->article->views}"><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder}</span>
+              <div><span title="{$lang->article->views}"><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder}</span>
                 {if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments)}&nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$stick->comments}</span> &nbsp; {/if}
                 &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($stick->addedDate, 0, 10)}</span></div>
             </div>
@@ -64,7 +64,7 @@
               {$article->summary}
               <div><span title="{$lang->article->views}"><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}</span>
                 {if(commonModel::isAvailable('message') and $article->comments)} &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp; {/if}
-                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span></div>
+                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i>{!substr($article->addedDate, 0, 10)}</span></div>
             </div>
           </div>
           {if(!empty($article->image))}
