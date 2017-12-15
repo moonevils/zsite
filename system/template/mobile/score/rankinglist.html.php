@@ -37,7 +37,7 @@
               <span class='strong'>Top{$i}</span>
               {$ranking->account = trim($ranking->account)}
               {$basicInfo = $users[$ranking->account]}
-              {echo $basicInfo->realname}
+              {$basicInfo->realname}
             </dt>
             <dd>{$ranking->sumScore}</dd>
             {@$i++}
