@@ -19,20 +19,20 @@
     <div class='title'><strong>{$category->name}</strong></div>
   </div>
   <div class='panel-body'>
-    {@$count = count($products)}
+    {$count = count($products)}
     {if($count == 0)} {$count = 1} {/if}
-    {@$recPerRow = min($count, 2)}
+    {$recPerRow = min($count, 2)}
     <div class='cards cards-products' data-cols='{$recPerRow}' id='products'>
       <style>{!echo ".col-custom-{{$recPerRow}} {{width: " . (100/$recPerRow) . "%}}"}</style>
-      {@$index = 0}
+      {$index = 0}
       {foreach($products as $product)}
-        {@$rowIndex = $index % $recPerRow}
+        {$rowIndex = $index % $recPerRow}
         {if($rowIndex === 0)}
           <div class='row'>
         {/if}
 
         <div class='col col-custom-{$recPerRow}'>
-          {@$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
+          {$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
           <div class='card' id='product{$product->id}' data-ve='product'>
             <a class='card-img' href='{$url}'>
               {if(empty($product->image))}
