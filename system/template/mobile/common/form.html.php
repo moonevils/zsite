@@ -1,3 +1,4 @@
+{noparse}
 <style>
 .captcha {width: 100%; background-color: #fafafa; padding: 8px 10px; border: 1px solid #CCC; border-radius: 2px;}
 .captcha label {padding-top: 8px; margin-top: 0; margin-bottom: 0; line-height: 20px;}
@@ -8,6 +9,7 @@ table.captcha td {padding: 5px;}
 table.captcha td label {padding: 0;}
 .captcha-box > th {display: none}
 </style>
+{/noparse}
 {if(!isset($templateCommonRoot))}
   {$thisModuleName     = $control->app->getModuleName()}
   {$thisMethodName     = $control->app->getMethodName()}
