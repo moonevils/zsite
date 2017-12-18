@@ -18,56 +18,56 @@
 {$globalButtons = !empty($group->desc) ? json_decode($group->desc, true) : array()}
 {$slideStyle    = !empty($block->content->style) ? $block->content->style : 'carousel'}
 {if($slides)}
-<div class='block {!echo $blockClass}' id='block{!echo $block->id?>'>
-  {if($slideStyle == 'tile')}
-  <div id="{!echo $slideID}" class='tile slide' data-id='{!echo $groupID?>'>
-  {else}
-  <div id='{!echo $slideID}' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='{!echo $groupID?>'>
-    <div class='carousel-inner'>
-  {/if}
-  {$height = 0}
-  {$index = 0}
-  {foreach($slides as $slide)}
-    {$url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'"}
-    {$target = " data-target='" . (isset($slide->target) && $slide->target ? '_blank' : '_self') . "'"}
-    {if($height == 0 and $slide->height)} {$height = $slide->height} {/if}
-    {if($slide->backgroundType == 'image')}
-      <div class='item{!echo ($index === 0) ? ' active' : ''}' {!echo $url . ' ' . $target}>
-      {!print(html::image($slide->image))}
+  <div class='block{$blockClass}' id='block{$block->id}'>
+    {if($slideStyle == 'tile')}
+      <div id="{$slideID}" class='tile slide' data-id='{$groupID}'>
     {else}
-    <div class='item{!echo ($index === 0) ? ' active' : ''}' {!echo $url . ' ' . $target} style='{!echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px'}'>
+      <div id='{$slideID}' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='{$groupID}'>
+        <div class='carousel-inner'>
     {/if}
-      <div class="{$slideStyle}-caption">
-        <h2 style='color:{$slide->titleColor}'>{$slide->title}</h2>
-        <div>{!echo $slide->summary}</div>
-        {foreach($globalButtons as $id => $globalButton)}
-          {foreach($globalButton as $key => $global)}
-            {if(!$global)} {continue} {/if}
-            {if(trim($slides[$id]->label[$key]) != '')}
-              {if($slides[$id]->buttonUrl[$key])} {!html::a($slides[$id]->buttonUrl[$key], $slides[$id]->label[$key], "class='btn btn-{{$slides[$id]->buttonClass[$key]}}' target='{{$slides[$id]->buttonTarget[$key]}}'")} {/if}
-              {if(!$slides[$id]->buttonUrl[$key])} {!html::commonButton($slides[$id]->label[$key], "btn btn-{{$slides[$id]->buttonClass[$key]}}")} {/if}
+    {$height = 0}
+    {$index = 0}
+    {foreach($slides as $slide)}
+      {$url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'"}
+      {$target = " data-target='" . (isset($slide->target) && $slide->target ? '_blank' : '_self') . "'"}
+      {if($height == 0 and $slide->height)} {$height = $slide->height} {/if}
+      {if($slide->backgroundType == 'image')}
+        <div class='item{!echo ($index === 0) ? ' active' : ''}' {!echo $url . ' ' . $target}>
+        {!print(html::image($slide->image))}
+      {else}
+        <div class='item{!echo ($index === 0) ? ' active' : ''}' {!echo $url . ' ' . $target} style='{!echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px'}'>
+      {/if}
+        <div class="{$slideStyle}-caption">
+          <h2 style='color:{$slide->titleColor}'>{$slide->title}</h2>
+          <div>{$slide->summary}</div>
+          {foreach($globalButtons as $id => $globalButton)}
+            {foreach($globalButton as $key => $global)}
+              {if(!$global)} {continue} {/if}
+              {if(trim($slides[$id]->label[$key]) != '')}
+                {if($slides[$id]->buttonUrl[$key])} {!html::a($slides[$id]->buttonUrl[$key], $slides[$id]->label[$key], "class='btn btn-{{$slides[$id]->buttonClass[$key]}}' target='{{$slides[$id]->buttonTarget[$key]}}'")} {/if}
+                {if(!$slides[$id]->buttonUrl[$key])} {!html::commonButton($slides[$id]->label[$key], "btn btn-{{$slides[$id]->buttonClass[$key]}}")} {/if}
+              {/if}
+            {/foreach}
+          {/foreach}
+      
+          {foreach($slide->label as $key => $label)}
+            {if(!empty($globalButtons[$slide->id][$key]))} {continue} {/if}
+            {if(trim($label) != '')}
+              {if($slide->buttonUrl[$key])}  {!html::a($slide->buttonUrl[$key], $label, "class='btn btn-{{$slide->buttonClass[$key]}}' target='{{$slide->buttonTarget[$key]}}'")} {/if}
+              {if(!$slide->buttonUrl[$key])} {!html::commonButton($label, "btn {{$slide->buttonClass[$key]}}")} {/if}
             {/if}
           {/foreach}
-        {/foreach}
-    
-        {foreach($slide->label as $key => $label)}
-          {if(!empty($globalButtons[$slide->id][$key]))} {continue} {/if}
-          {if(trim($label) != '')}
-            {if($slide->buttonUrl[$key])}  {!html::a($slide->buttonUrl[$key], $label, "class='btn btn-{{$slide->buttonClass[$key]}}' target='{{$slide->buttonTarget[$key]}}'")} {/if}
-            {if(!$slide->buttonUrl[$key])} {!html::commonButton($label, "btn {{$slide->buttonClass[$key]}}")} {/if}
-          {/if}
-        {/foreach}
+        </div>
       </div>
-    </div>
-    {@$index++}
-  {/foreach}
-    {if($slideStyle == 'carousel')}
-      </div>
-      {if(count($slides) > 1)}
-        <a class='left carousel-control' href='#{$slideID}' data-slide='prev'> <i class='icon icon-chevron-left'></i> </a>
-        <a class='right carousel-control' href='#{$slideID}' data-slide='next'> <i class='icon icon-chevron-right'></i> </a>
+      {@$index++}
+    {/foreach}
+      {if($slideStyle == 'carousel')}
+        </div>
+        {if(count($slides) > 1)}
+          <a class='left carousel-control' href='#{$slideID}' data-slide='prev'> <i class='icon icon-chevron-left'></i> </a>
+          <a class='right carousel-control' href='#{$slideID}' data-slide='next'> <i class='icon icon-chevron-right'></i> </a>
+        {/if}
       {/if}
-    {/if}
+    </div>
   </div>
-</div>
 {/if}

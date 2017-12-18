@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The reply view file of user for mobile template of chanzhiEPS.
  *
@@ -9,24 +9,24 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-reply'></i> {!echo $lang->user->reply?></div>
+    <div class='title strong'><i class='icon icon-reply'></i> {$lang->user->reply}</div>
   </div>
   <div class='cards condensed cards-list'>
     {foreach($replies as $reply)}
-    <a href='{!echo $control->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id"}' class='card'>
-      <div class='card-heading'>
-        <h5>{!echo $reply->title?></h5>
-      </div>
-      <div class='card-content text-muted'>
-        {!echo $lang->reply->addedDate} {!echo substr($reply->addedDate, 2, -3)}
-      </div>
-    </a>
+      <a href='{$control->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id"}' class='card'>
+        <div class='card-heading'>
+          <h5>{$reply->title}</h5>
+        </div>
+        <div class='card-content text-muted'>
+          {$lang->reply->addedDate} {!substr($reply->addedDate, 2, -3)}
+        </div>
+      </a>
     {/foreach}
   </div>
   <div class='panel-footer'>

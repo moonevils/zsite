@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The check view file of order for mobile template of chanzhiEPS.
  * The file should be used as ajax content
@@ -10,7 +10,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {!js::set('currencySymbol', $currencySymbol)}
 {!js::set('createdSuccess', $lang->order->createdSuccess)}
@@ -18,13 +18,13 @@
 
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
-    <div class='title'><i class='icon icon-shopping-cart'></i> <strong>{!echo $lang->order->selectPayment}</strong></div>
+    <div class='title'><i class='icon icon-shopping-cart'></i> <strong>{$lang->order->selectPayment}</strong></div>
   </div>
-  <form id='checkForm' action='{!echo helper::createLink('order', 'pay', "orderID=$order->id")}' method='post' target='_blank'>
+  <form id='checkForm' action='{!helper::createLink('order', 'pay', "orderID=$order->id")}' method='post' target='_blank'>
     <div class="panel-body">
-      <div class='alert bg-gray-pale'><strong>{!echo $lang->order->payment}</strong></div>
+      <div class='alert bg-gray-pale'><strong>{$lang->order->payment}</strong></div>
       <div class="form-group">
-        {!echo html::radio('payment', $paymentList)}
+        {!html::radio('payment', $paymentList)}
       </div>
     </div>
     <div class='panel-body'>
@@ -34,13 +34,14 @@
       </div>
     </div>
     <div class='panel-footer'>
-      {!echo html::submitButton($lang->order->settlement, 'btn-order-submit btn danger block')}
-      {!echo html::a(helper::createLink('order', 'browse'), $lang->order->admin, "class='btn default block'")}
+      {!html::submitButton($lang->order->settlement, 'btn-order-submit btn danger block')}
+      {!html::a(helper::createLink('order', 'browse'), $lang->order->admin, "class='btn default block'")}
     </div>
   </form>
 </div>
 
 {include TPL_ROOT . 'common/form.html.php'}
+{noparse}
 <script>
 $(function()
 {
@@ -48,7 +49,7 @@ $(function()
 
     $.refreshAddressList = function()
     {
-        $('#addressListWrapper').load('{!echo helper::createLink('address', 'browse') ?> #addressList', function()
+       $('#addressListWrapper').load('{/noparse}{!helper::createLink('address', 'browse'){noparse}} #addressList', function()
         {
             $('#addressList').find('.card-footer').remove();
         });
@@ -57,12 +58,12 @@ $(function()
     $.refreshAddressList();
 
     $('#submit').click(function(){
-        var payment = $('input:radio[name=payment]:checked').val();
+        var payment = $('{/noparse}input:radio[name=payment]:checked{noparse}').val();
         if(payment == 'COD')
         {
             $('#checkForm').attr('target', '');
         }
-{else}
+        else
         {
             $('#checkForm').attr('target', '_blank');
 
@@ -83,4 +84,5 @@ $(function()
     });
 });
 </script>
+{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

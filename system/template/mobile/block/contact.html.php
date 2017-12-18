@@ -12,20 +12,20 @@
 /php*}
 {$block->content = json_decode($block->content)}
 {$contact = $model->loadModel('company')->getContact()}
-<div id="block{!echo $block->id}" class='panel-block-contact panel panel-block {!echo $blockClass}'>
+<div id="block{$block->id}" class='panel-block-contact panel panel-block {$blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
-    <div class='pull-right'>{!html::a($block->content->moreUrl, $block->content->moreText, "data-toggle='modal'")}</div>
+      <div class='pull-right'>{!html::a($block->content->moreUrl, $block->content->moreText, "data-toggle='modal'")}</div>
     {/if}
   </div>
   <div class='panel-body no-padding'>
     <table class='table table-data'>
       {foreach($contact as $item => $value)}
-      <tr>
-        <th>{!echo $model->lang->company->$item}</th>
-        <td>{$value}</td>
-      </tr>
+        <tr>
+          <th>{$model->lang->company->$item}</th>
+          <td>{$value}</td>
+        </tr>
       {/foreach}
     </table>
   </div>
