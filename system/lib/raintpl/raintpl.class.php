@@ -58,7 +58,8 @@ class RainTPL
      *
      * @var unknown_type
      */
-    static $blackList = array('\$this', 'raintpl::', 'self::', '_SESSION', '_SERVER', '_ENV',  'eval', 'exec', 'unlink', 'rmdir');
+    //static $blackList = array('\$this', 'raintpl::', 'self::', '_SESSION', '_SERVER', '_ENV', 'exec', 'unlink', 'rmdir');
+    static $blackList = array();
 
     /**
      * outputFunctions 
@@ -164,21 +165,21 @@ class RainTPL
         }
 
         if(!$this->cache && !$returnString)
-		{
+        {
             extract($this->var);
             include $this->tpl['compiledFile'];
             unset($this->tpl);
         }
         else
-		{
-			ob_start();
-			extract($this->var);
-			include $this->tpl['compiledFile'];
-			$contents = ob_get_clean();
+        {
+            ob_start();
+            extract($this->var);
+            include $this->tpl['compiledFile'];
+            $contents = ob_get_clean();
             if($this->cache) file_put_contents($this->tpl['cacheFile'], "<?php if(!class_exists('raintpl')){exit;}" . self::PHP_END . $contents);
             unset($this->tpl);
             if($returnString) return trim($contents);
-			echo $contents;
+            echo $contents;
         }
     }
 
@@ -195,12 +196,12 @@ class RainTPL
         $this->cacheID = $cacheID;
 
         if(!$this->prepareCompile($tplName) && file_exists($this->tpl['cacheFile']) && (time() - filemtime($this->tpl['cacheFile']) < $expireTime))
-		{
+        {
             /* return the cached file as HTML. It remove the first 43 character, which are a PHP code to secure the file <?php if(!class_exists('raintpl')){exit;}? >*/
             return substr(file_get_contents($this->tpl['cacheFile']), 43);
         }
         else
-		{
+        {
             /* Delete the cache of the selected template. */
             if(file_exists($this->tpl['cacheFile'])) unlink($this->tpl['cacheFile']);
             $this->cache = true;
@@ -251,8 +252,13 @@ class RainTPL
             /* If tplFile is not exists append extension to it. */
             if(!file_exists($this->tpl['tplFile'])) $this->tpl['tplFile'] = dirname($this->tpl['tplFile']) . DS . basename($this->tpl['tplFile'], "." . self::$tplExt);
 
+            //$this->tpl['tplFile'] = str_replace(DS . 'tmp' . DS . 'template' . DS, DS . 'template' . DS, $this->tpl['tplFile']);
             $tempCmpiledFile = str_replace(TPL_ROOT, self::$rootDir . self::$cacheDir, $this->tpl['tplFile']);
-            if(strpos($tplName, TPL_ROOT) === false)
+            if(strpos($tplName, DS . 'tmp' . DS . 'template' . DS) !== false)
+            {
+                $tempCmpiledFile = str_replace($this->app->getBasePath() . 'tmp' . DS . 'template' . DS, self::$rootDir . self::$cacheDir, $this->tpl['tplFile']);
+            }
+            elseif(strpos($tplName, TPL_ROOT) === false)
             {
                 $tempCmpiledFile = str_replace($this->app->getBasePath() . 'module' . DS, self::$rootDir . self::$cacheDir, $this->tpl['tplFile']);
             }
@@ -387,7 +393,7 @@ class RainTPL
 
         $tagPatterns = $this->getTagPatterns();
         $tagRegexp   = "/" . join("|", $tagPatterns) . "/";
-        
+
         /* Replace start mark and end mark of text. */
         $templateCode = str_replace("{{", "SOT_MARK", $templateCode);
         $templateCode = str_replace("}}", "EOT_MARK", $templateCode);
@@ -409,7 +415,7 @@ class RainTPL
      * @param  array     $parsedCode 
      * @access protected
      * @return string
-	 */
+     */
     protected function compileCode($parsedCode)
     {
         if(!$parsedCode) return "";
@@ -687,7 +693,7 @@ class RainTPL
         /* If the cache is active. */
         if(isset($code[2]))
         {
-           return '<?php $tpl = new '.get_called_class().';' .
+            return '<?php $tpl = new '.get_called_class().';' .
                 '$tpl->assign($this->var);' .
                 '$tpl->draw(' . $include_template . ');'
                 . self::PHP_END;
@@ -730,7 +736,7 @@ class RainTPL
                 $code = str_replace(')}', ")}\n", $code);
             }
         }
-   
+
         return $code;
     }
 
@@ -771,7 +777,7 @@ class RainTPL
                 $code = str_replace(')}', ")}\n", $code);
             }
         }
-   
+
         return $code;
     }
 
@@ -798,7 +804,7 @@ class RainTPL
     {
         return self::PHP_START . " echo '<?xml " . stripslashes($capture[1]) . self::PHP_END . self::PHP_END;
     } 
- 
+
 
     /**
      * Reduce a path, eg. www/library/../filepath//file => www/filepath/file
@@ -941,41 +947,41 @@ class RainTPL
             $var = $matches[ 1 ][ $i ];
 
             //function and parameters associate to the variable ex: substr:0,100
-            $extra_var = $matches[ 2 ][ $i ];
+            $extraVar = $matches[ 2 ][ $i ];
 
             // check if there's any function disabled by blackList
             $this->function_check($tag);
 
-            $extra_var = $this->var_replace($extra_var, null, null, null, null, $loop_level);
+            $extraVar = $this->var_replace($extraVar, null, null, null, null, $loop_level);
 
 
             // check if there's an operator = in the variable tags, if there's this is an initialization so it will not output any value
-            $is_init_variable = preg_match("/^(\s*?)\=[^=](.*?)$/", $extra_var);
-            if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\.=(.*?)$/", $extra_var);
-            if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\+=(.*?)$/", $extra_var);
-            if(!$is_init_variable) $is_init_variable = preg_match("/^\[.*\].*=.*$/", $extra_var);
+            $is_init_variable = preg_match("/^(\s*?)\=[^=](.*?)$/", $extraVar);
+            if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\.=(.*?)$/", $extraVar);
+            if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\+=(.*?)$/", $extraVar);
+            if(!$is_init_variable) $is_init_variable = preg_match("/^\[.*\].*=.*$/", $extraVar);
 
             //function associate to variable
-            $function_var = ($extra_var and $extra_var[0] == '|') ? substr($extra_var, 1) : null;
+            $function_var = ($extraVar and $extraVar[0] == '|') ? substr($extraVar, 1) : null;
 
             //variable path split array (ex. $news.title o $news[title]) or object (ex. $news->title)
             $temp = preg_split("/\.|\[|\-\>/", $var);
 
             //variable name
-            $var_name = $temp[ 0 ];
+            $varName = $temp[ 0 ];
 
             //variable path
-            $variable_path = substr($var, strlen($var_name));
+            $variablePath = substr($var, strlen($varName));
 
             //parentesis transform [ e ] in [" e in "]
-            $variable_path = str_replace('[', '["', $variable_path);
-            $variable_path = str_replace(']', '"]', $variable_path);
+            $variablePath = str_replace('[', '["', $variablePath);
+            $variablePath = str_replace(']', '"]', $variablePath);
 
             //transform .$variable in ["$variable"]
-            $variable_path = preg_replace('/\.\$(\w+)/', '["$\\1"]', $variable_path);
+            $variablePath = preg_replace('/\.\$(\w+)/', '["$\\1"]', $variablePath);
 
             //transform [variable] in ["variable"]
-            $variable_path = preg_replace('/\.(\w+)/', '["\\1"]', $variable_path);
+            $variablePath = preg_replace('/\.(\w+)/', '["\\1"]', $variablePath);
 
             //if there's a function
             if($function_var){
@@ -1008,7 +1014,7 @@ class RainTPL
             {
                 $function = $params = null;
             }
-            $php_var = $var_name . $variable_path;
+            $php_var = $varName . $variablePath;
 
             // compile the variable for php
             if(isset($function)){
@@ -1018,7 +1024,7 @@ class RainTPL
                     $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($params))" : "$function()") . $php_right_delimiter;
             }
             else
-                $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . $php_var . $extra_var . $php_right_delimiter;
+                $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . $php_var . $extraVar . $php_right_delimiter;
 
             $html = str_replace($tag, $php_var, $html);
 
@@ -1048,7 +1054,7 @@ class RainTPL
 
             for($parsed=array(), $i=0, $n=count($matches[0]); $i<$n; $i++)
             {
-                $parsed[$matches[0][$i]] = array('var'=>$matches[1][$i],'extra_var'=>$matches[2][$i]);
+                $parsed[$matches[0][$i]] = array('var'=>$matches[1][$i],'extraVar'=>$matches[2][$i]);
             }
 
             foreach($parsed as $tag => $array)
@@ -1057,45 +1063,48 @@ class RainTPL
                 $var = $array['var'];
 
                 //function and parameters associate to the variable ex: substr:0,100
-                $extra_var = $array['extra_var'];
+                $extraVar = $array['extraVar'];
 
                 // check if there's any function disabled by blackList
                 $this->function_check($tag);
 
-                $extra_var = $this->var_replace($extra_var, null, null, null, null, $loop_level);
+                $extraVar = $this->var_replace($extraVar, null, null, null, null, $loop_level);
 
                 // check if there's an operator = in the variable tags, if there's this is an initialization so it will not output any value
-                $is_init_variable = preg_match("/^[a-z_A-Z\.\[\](\-\>)]*(\s)*(=){1}[^=]*.*$/", $extra_var);
-                if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\.=(.*?)$/", $extra_var);
-                if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\+=(.*?)$/", $extra_var);
-                if(!$is_init_variable) $is_init_variable = preg_match("/^\[.*\].*=.*$/", $extra_var);
+                $is_init_variable = preg_match("/^[a-z_A-Z\.\[\](\-\>)]*(\s)*(=){1}[^=]*.*$/", $extraVar);
+                if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\.=(.*?)$/", $extraVar);
+                if(!$is_init_variable) $is_init_variable = preg_match("/^(\s)*\+=(.*?)$/", $extraVar);
+                if(!$is_init_variable) $is_init_variable = preg_match("/^\[.*\].*=.*$/", $extraVar);
 
                 //function associate to variable
-                $function_var = ($extra_var and $extra_var[0] == '|') ? substr($extra_var, 1) : null;
+                $function_var = ($extraVar and $extraVar[0] == '|') ? substr($extraVar, 1) : null;
 
                 //variable path split array (ex. $news.title o $news[title]) or object (ex. $news->title)
                 $temp = preg_split("/\.|\[|\-\>/", $var);
 
                 //variable name
-                $var_name = $temp[0];
+                $varName = $temp[0];
 
                 //variable path
-                $variable_path = substr($var, strlen($var_name));
+                $variablePath = substr($var, strlen($varName));
 
                 //parentesis transform [ e ] in [" e in "]
-                $variable_path = str_replace('[', '["', $variable_path);
-                $variable_path = str_replace(']', '"]', $variable_path);
+                $variablePath = str_replace('[', '["', $variablePath);
+                $variablePath = str_replace(']', '"]', $variablePath);
 
                 //transform .$variable in ["$variable"] and .variable in ["variable"]
-                $variable_path = preg_replace('/\.(\${0,1}\w+)/', '["\\1"]', $variable_path);
+                $variablePath = preg_replace('/\.(\${0,1}\w+)/', '["\\1"]', $variablePath);
 
                 // if is an assignment also assign the variable to $this->var['value']
                 if($is_init_variable)
                 {
-                    $extra_var = "=\$this->var['{$var_name}']{$variable_path}" . $extra_var;
+                    if(strpos($var, '->') === false) $extraVar = "=\$this->var['{$varName}']{$variablePath}" . $extraVar;
+                    if(strpos($var, '->') !== false)
+                    {
+                        $objectVar = '$this->var' . "['$varName'] = " . '$' . $varName; 
+                        $extraVar = $extraVar . ';' . $objectVar;
+                    }
                 }
-
-
 
                 //if there's a function
                 if($function_var){
@@ -1130,22 +1139,22 @@ class RainTPL
                 //if it is inside a loop
                 if($loop_level){
                     //verify the variable name
-                    if($var_name == 'key')
+                    if($varName == 'key')
                         $php_var = '$key' . $loop_level;
-                    elseif($var_name == 'value')
-                        $php_var = '$value' . $loop_level . $variable_path;
-                    elseif($var_name == 'counter')
+                    elseif($varName == 'value')
+                        $php_var = '$value' . $loop_level . $variablePath;
+                    elseif($varName == 'counter')
                         $php_var = '$counter' . $loop_level;
                     else
-                        $php_var = '$' . $var_name . $variable_path;
+                        $php_var = '$' . $varName . $variablePath;
                 }else
-                    $php_var = '$' . $var_name . $variable_path;
+                    $php_var = '$' . $varName . $variablePath;
 
                 // compile the variable for php
                 if(isset($function))
                     $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($php_var, $params))" : "$function($php_var)") . $php_right_delimiter;
                 else
-                    $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . $php_var . $extra_var . $php_right_delimiter;
+                    $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . $php_var . $extraVar . $php_right_delimiter;
 
                 $html = str_replace($tag, $php_var, $html);
             }

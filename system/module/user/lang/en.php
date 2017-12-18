@@ -86,11 +86,11 @@ $lang->user->batchDelete     = 'Batch Delete';
 $lang->user->deleteHistory   = 'Delete account and history';
 $lang->user->question        = 'Security Question';
 $lang->user->answer          = 'Answer';
-$lang->user->checkContact    = 'Check Contact';
-$lang->user->certifyNow      = 'Go certify';
+$lang->user->checkContact    = 'Contact';
+$lang->user->certifyNow      = 'Certify';
 
 $lang->user->checkMobile        = 'Check mobile';
-$lang->user->checkMobileSuccess = 'Check mobile successfully';
+$lang->user->checkMobileSuccess = 'Check mobile successfully.';
 
 $lang->user->type        = 'Type';
 $lang->user->profile     = 'Profile';

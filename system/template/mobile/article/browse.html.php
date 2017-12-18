@@ -16,9 +16,9 @@
 {!js::set('categoryID', $category->id)}
 {!js::set('pageLayout', $control->block->getLayoutScope('article_browse', $category->id))}
 {if(isset($articleList))}
-  <script>{!"place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';"}</script>
+  <script>{!echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleList . $config->idListPlaceHolder . "';"}</script>
 {else}
-  <script>{!"place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
+  <script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {/if}
 <div class='block-region blocks region-top' data-region='article_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'article_browse', 'top')}</div>
 <div class='panel panel-section'>
@@ -27,40 +27,39 @@
   </div>
   <div class='cards condensed cards-list bordered' id='articles'>
     {foreach($articles as $article)}
-    {$url = inlink('view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
-    <a class='card' href='{$url}' id="article{{$article->id}}" data-ve='article'>
-      <div class='card-heading'>
-        {if($article->sticky)}
-        <div class='pull-right'>
-          <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
+      {$url = inlink('view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
+      <a class='card' href='{$url}' id="article{{$article->id}}" data-ve='article'>
+        <div class='card-heading'>
+          {if($article->sticky)}
+            <div class='pull-right'>
+              <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
+            </div>
+          {/if}
+          <h5 style='color:{$article->titleColor}'>{$article->title}</h5>
         </div>
-        {/if}
-        <h5 style='color:{$article->titleColor}'>{$article->title}</h5>
-      </div>
-      <div class='table-layout'>
-        <div class='table-cell'>
-          <div class='card-content text-muted small'>
+        <div class='table-layout'>
+          <div class='table-cell'>
+            <div class='card-content text-muted small'>
               {!helper::substr($article->summary, 40, '...')}
-              <div><span title="{!$config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}"><i class='icon-eye-open'></i> {!$config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}</span>
-                {if(isset($article->comments))}
-                  &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp;
-                {/if}
-                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span></div>
+              <div>
+                <span title="{!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}"> <i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder} </span>
+                {if(isset($article->comments))} &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp; {/if}
+                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span>
+              </div>
+            </div>
           </div>
-
+          {if(!empty($article->image))}
+            <div class='table-cell thumbnail-cell'>
+              {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+              {!html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+            </div>
+          {/if}
         </div>
-        {if(!empty($article->image))}
-        <div class='table-cell thumbnail-cell'>
-          {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-          {!html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{$title}' class='thumbnail'")}
-        </div>
-        {/if}
-      </div>
-    </a>
+      </a>
     {/foreach}
   </div>
   <div class='panel-footer'>
-    {!$pager->show('justify')}
+    {$pager->show('justify')}
   </div>
 </div>
 

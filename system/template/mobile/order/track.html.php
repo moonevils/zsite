@@ -9,31 +9,31 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'>{!echo $lang->order->track}</h5>
+      <h5 class='modal-title'>{$lang->order->track}</h5>
     </div>
     <div class='modal-body'>
       <table class='table table-layout'>
         <tbody>
           <tr>
-            <th class='small'>{!echo $lang->order->address}</th>
-            <td>{!echo $fullAddress}</td>
+            <th class='small'>{$lang->order->address}</th>
+            <td>{$fullAddress}</td>
           </tr>
           <tr>
-            <th class='small'>{!echo $lang->order->deliveriedDate}</th>
-            <td>{!echo $order->deliveriedDate}</td>
+            <th class='small'>{$lang->order->deliveriedDate}</th>
+            <td>{$order->deliveriedDate}</td>
           </tr>
           <tr>
-            <th class='small'>{!echo $lang->order->express}</th>
-            <td>{if(!empty($order->express)) echo $expressList[$order->express]}</td>
+            <th class='small'>{$lang->order->express}</th>
+            <td>{if(!empty($order->express))} {$expressList[$order->express]} {/if}</td>
           </tr>
           <tr>
-            <th class='small'>{!echo $lang->order->waybill}</th>
-            <td>{!echo $order->waybill}</td>
+            <th class='small'>{$lang->order->waybill}</th>
+            <td>{$order->waybill}</td>
           </tr>
         </tbody>
       </table>

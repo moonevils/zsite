@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The message view file of user for mobile template of chanzhiEPS.
  *
@@ -9,32 +9,33 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-comments-alt'></i> {!echo $lang->user->messages?> <span>({!echo count($messages)?>)</span> </div>
+    <div class='title strong'><i class='icon icon-comments-alt'></i> {$lang->user->messages} <span>({!count($messages)})</span> </div>
   </div>
   <div class='panel-body' id='cardListWarpper'>
     <div class='cards cards-list' id='cardList'>
     {foreach($messages as $message)}
       <div class='card'>
-        <div class='card-heading'><strong class='{!echo $control->app->user->account === $message->from ? 'text-danger' : 
-        'text-special' ?>'>{!echo $message->from}</strong> &nbsp; <small class='text-muted'>{!echo substr($message->date, 5)}</small></div>
+        <div class='card-heading'>
+          <strong class='{!echo $control->app->user->account === $message->from ? 'text-danger' : 'text-special' }'>{$message->from}</strong> &nbsp; 
+          <small class='text-muted'>{!substr($message->date, 5)}</small>
+        </div>
         <div class='card-content'>
-          {!echo $message->content}
+          {$message->content}
         </div>
         <div class='card-footer'>
-          <span class='{!echo $message->readed ? 'text-muted' : 'text-success'?>'>{!echo $lang->message->readedStatus[$message->readed]}</span>
-          
+          <span class='{!echo $message->readed ? 'text-muted' : 'text-success'}'>{$lang->message->readedStatus[$message->readed]}</span>
           <div class="pull-right">
             {if(!$message->readed)}
-            {!echo html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed, "class='text-primary markread'")}
+              {!html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed, "class='text-primary markread'")}
             {else}
-            {!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : ''?>
+              {!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : ''}
             {/if}
-            &nbsp; {!echo html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{$message->id}'") ?>
+            &nbsp; {!html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{{$message->id}}'")}
           </div>
         </div>
       </div>
@@ -42,6 +43,7 @@
     </div>
   </div>
 </div>
+{noparse}
 <script>
 $(function()
 {
@@ -52,7 +54,7 @@ $(function()
         {
             var $response = $(response);
             $('#cardList').html($response.find('#cardList').html());
-            $.messager.success('{!echo $lang->message->readed}');
+            $.messager.success('{/noparse}{$lang->message->readed}{noparse}');
         }}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
@@ -70,11 +72,12 @@ $(function()
                 response.locate = null;
                 var $card = $this.closest('.card').addClass('fade');
                 setTimeout(function(){$card.remove();}, 300);
-                $.messager.success('{!echo $lang->deleteSuccess}');
+                $.messager.success('{/noparse}{$lang->deleteSuccess}{noparse}');
             }}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     });
 });
 </script>
+{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

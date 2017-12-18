@@ -480,10 +480,6 @@ class control extends baseControl
 
         }
 
-        if(!zget($this->config, 'inFetch') and RUN_MODE == 'front' and extension_loaded('tidy') and zget($this->config->site, 'tidy', 0) == 'open')
-        {
-            $this->output = helper::tidy($this->output);
-        }
 
         if(!headers_sent()
             && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'
@@ -496,6 +492,7 @@ class control extends baseControl
             header('Content-Encoding: gzip');
         }
 
+        If(RUN_MODE == 'front') $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
 		echo $this->output;
     }
 

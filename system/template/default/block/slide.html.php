@@ -29,7 +29,7 @@
       {foreach($slides as $slide)}
         {$url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'"}
         {$target = " data-target='" . ($slide->target ? '_blank' : '_self') . "'"}
-        {if($height == 0 and $slide->height) $height = $slide->height}
+        {if($height == 0 and $slide->height)} {$height = $slide->height} {/if}
         {$itemClass = 0 === $index++ ? 'item active' : 'item'}
         {if($slide->backgroundType == 'image')}
           <div data-id='{!echo $slide->id}' class='{!echo $itemClass }'{!echo $url . ' ' . $target}>
