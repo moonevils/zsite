@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 *}
-<form id='createForm' action='{!echo inlink('create')}' method='post'>
+<form id='createForm' action='{!inlink('create')}' method='post'>
   <table class='table table-borderless address-form table-list'>
     <tr>
       <td class='w-100px'>{!html::input('contact', '', "class='form-control' placeholder='{{$lang->address->contact}}'")}</td>

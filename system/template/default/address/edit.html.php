@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 *}
-<form class='editForm' action='{!echo inlink('edit', "id=$address->id")}' method='post'>
+<form class='editForm' action='{!inlink('edit', "id=$address->id")}' method='post'>
   <table class='table table-borderless address-form table-list'>
     <tr>
       <td class='w-100px'>{!html::input('contact', $address->contact, "class='form-control' placeholder='{{$lang->address->contact}}'")}</td>

@@ -11,7 +11,7 @@
  */
 */php*}
 {include TPL_ROOT . 'common/header.modal.html.php'}
-<form method='post' id='editForm' class='form-inline' action="{!echo inlink('edit', "orderID=$order->id")}">
+<form method='post' id='editForm' class='form-inline' action="{!inlink('edit', "orderID=$order->id")}">
   <table class='table table-form'>
     {$address = json_decode($order->address)}
     <tr>

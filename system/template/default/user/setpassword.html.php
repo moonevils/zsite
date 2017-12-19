@@ -1,5 +1,5 @@
 {include TPL_ROOT . 'common/header.modal.html.php'}
-<form method='post' action='{!echo inlink('setpassword')}' id='passwordForm' class='form'>
+<form method='post' action='{!inlink('setpassword')}' id='passwordForm' class='form'>
   <table class='table table-form borderless'>
     <tr>
       <th class="col-xs-4">{!echo $lang->user->account}</th>
