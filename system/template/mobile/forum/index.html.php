@@ -40,7 +40,7 @@
               <div class='card-content text-muted small'>{$childBoard->desc}</div>
               {if($childBoard->postedBy)}
                 <div class='card-footer small text-muted'>{$lang->forum->lastPost . ':'}
-                  {!echo substr($childBoard->postedDate, 5, -3) . " {{$childBoard->postedByRealname}}"}
+                  {!substr($childBoard->postedDate, 5, -3) . " {{$childBoard->postedByRealname}}"}
                 </div>
               {/if}
             </div>

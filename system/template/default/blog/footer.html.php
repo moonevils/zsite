@@ -3,7 +3,7 @@
   <footer id='footer'>
     <div class='wrapper'>
       <div id='footNav'>
-        {!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), '<i class="icon icon-rss-sign icon-large"></i>', "target='_blank'")}
+        {!html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), '<i class="icon icon-rss-sign icon-large"></i>', "target='_blank'")}
       </div>
       <span id='copyright'>
         {$copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-'}

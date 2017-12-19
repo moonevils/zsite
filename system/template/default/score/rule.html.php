@@ -18,7 +18,7 @@
     <ul id='typeNav' class='nav nav-tabs'>
     {foreach($control->config->score->ruleNav as $nav)}
       <li data-type='internal' {!echo $type == $nav ? "class='active'" : ''}>
-        {!echo html::a(inlink($nav), $lang->score->$nav)}
+        {!html::a(inlink($nav), $lang->score->$nav)}
       </li>
     {/foreach}
     </ul>

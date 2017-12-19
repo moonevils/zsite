@@ -24,81 +24,81 @@
                       {/if}
                       {if(strpos($control->config->enabledLangs, 'en') !== false)}
                         <label class='input-group-addon'>{!echo $config->langs['en']}</label>
-                        {!echo html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'")}
+                        {!html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'")}
                       {/if}
                     </div>
                   {else}
                     {$clientLang = $control->config->defaultLang}
                     {$clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang}
-                    {!echo html::input("realnames[{{$clientLang}}]", $user->realname, "class='form-control'")}
+                    {!html::input("realnames[{{$clientLang}}]", $user->realname, "class='form-control'")}
                   {/if}
                 {else}
-                  {!echo html::input('realname', $user->realname, "class='form-control'")}
+                  {!html::input('realname', $user->realname, "class='form-control'")}
                 {/if}
               </div>
             </div>
             <div class='form-group'>
               <label for='oldPwd' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->oldPwd}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::password('oldPwd', '', "class='form-control'")}
+                {!html::password('oldPwd', '', "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='password' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->password}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::password('password1', '', "class='form-control'")}
+                {!html::password('password1', '', "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='password2' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->password2}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::password('password2', '', "class='form-control'")}
+                {!html::password('password2', '', "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='company' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->company}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::input('company', $user->company, "class='form-control'")}
+                {!html::input('company', $user->company, "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='address' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->address}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::input('address', $user->address, "class='form-control'")}
+                {!html::input('address', $user->address, "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='zipcode' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->zipcode}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::input('zipcode', $user->zipcode, "class='form-control'")}
+                {!html::input('zipcode', $user->zipcode, "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='mobile' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->mobile}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::input('mobile', $user->mobile, "class='form-control'")}
+                {!html::input('mobile', $user->mobile, "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='phone' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->phone}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::input('phone', $user->phone, "class='form-control'")}
+                {!html::input('phone', $user->phone, "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='qq' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->qq}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::input('qq', $user->qq, "class='form-control'")}
+                {!html::input('qq', $user->qq, "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
               <label for='gtalk' class='col-md-2 col-sm-3 control-label'>{!echo $lang->user->gtalk}</label>
               <div class='col-md-6 col-sm-6'>
-                {!echo html::input('gtalk', $user->gtalk, "class='form-control'")}
+                {!html::input('gtalk', $user->gtalk, "class='form-control'")}
               </div>
             </div>
             <div class='form-group'>
-              <div class='col-md-6 col-sm-6 col-md-offset-2 col-sm-offset-3'>{!echo html::submitButton() . html::hidden('token', $token)}</div>
+              <div class='col-md-6 col-sm-6 col-md-offset-2 col-sm-offset-3'>{!html::submitButton() . html::hidden('token', $token)}</div>
             </div>
           </form>
         </div>

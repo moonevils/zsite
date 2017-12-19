@@ -27,12 +27,12 @@
           {if(isset($content->showCategory) and $content->showCategory == 1)}
             {if($content->categoryName == 'abbr')}
               {$categoryName = '[' . ($category->abbr ? $category->abbr : $category->name) . '] '}
-              {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), $categoryName)}
+              {!html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), $categoryName)}
             {else}
-              {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), '[' . $category->name . '] ')}
+              {!html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), '[' . $category->name . '] ')}
             {/if}
           {/if}
-          <strong>{!echo html::a($url, $product->name)}</strong>
+          <strong>{!html::a($url, $product->name)}</strong>
           <span class='text-latin'>
           {if(!$product->unsaleable)}
             {if($product->negotiate)}

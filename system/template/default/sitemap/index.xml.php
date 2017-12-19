@@ -8,14 +8,14 @@
 {*/php*}
   <url>
     <loc>{!echo $url}</loc>
-    <lastmod>{!echo substr($product->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($product->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{!echo $mobileUrl}</loc>
     <mobile:mobile type='mobile'/> 
-    <lastmod>{!echo substr($product->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($product->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -27,14 +27,14 @@
 {*/php*}
   <url>
     <loc>{!echo $url}</loc>
-    <lastmod>{!echo substr($article->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($article->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{!echo $mobileUrl}</loc>
     <mobile:mobile type='mobile'/>
-    <lastmod>{!echo substr($article->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($article->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -47,14 +47,14 @@
 {*/php*}
   <url>
     <loc>{!echo $url}</loc>
-    <lastmod>{!echo substr($blog->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($blog->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{!echo $mobileUrl}</loc>
     <mobile:mobile type='mobile'/>
-    <lastmod>{!echo substr($blog->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($blog->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -70,14 +70,14 @@
 {*/php*}
   <url>
     <loc>{!echo $url}</loc>
-    <lastmod>{!echo substr($node->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($node->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{!echo $mobileUrl}</loc>
     <mobile:mobile type='mobile'/>
-    <lastmod>{!echo substr($node->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($node->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -91,14 +91,14 @@
 {*/php*}
   <url>
     <loc>{!echo $url}</loc>
-    <lastmod>{!echo substr($editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{!echo $mobileUrl}</loc>
     <mobile:mobile type='mobile'/>
-    <lastmod>{!echo substr($editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -111,14 +111,14 @@
 {*/php*}
   <url>
     <loc>{!echo $url}</loc>
-    <lastmod>{!echo substr($page->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($page->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{!echo $mobileUrl}</loc>
     <mobile:mobile type='mobile'/>
-    <lastmod>{!echo substr($page->editedDate, 0, 10)}</lastmod>
+    <lastmod>{!substr($page->editedDate, 0, 10)}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
