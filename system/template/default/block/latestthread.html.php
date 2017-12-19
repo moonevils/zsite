@@ -40,7 +40,7 @@
           {/if}
         {/if}
         {!html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}
-        <span class='pull-right'>{!echo substr($thread->addedDate, 0, 10)}</span>
+        <span class='pull-right'>{!substr($thread->addedDate, 0, 10)}</span>
       </li>
       {/foreach}
     </ul>

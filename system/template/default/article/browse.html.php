@@ -40,7 +40,7 @@
             <div class="text-muted pull-right">
               <span title="{!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}"><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}</span> &nbsp;
               {if(commonModel::isAvailable('message') and $article->comments)}<span title="{!echo $lang->article->comments}"><i class='icon-comments-alt'></i> {!echo $article->comments}</span> &nbsp;{/if}
-              <span title="{!echo $lang->article->addedDate}"><i class='icon-time'></i> {!echo substr($article->addedDate, 0, 10)}</span>
+              <span title="{!echo $lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span>
             </div>
             <h4>
               {!echo empty($article->titleColor) ? html::a($url, $article->title) : html::a($url, $article->title, "style='color:$article->titleColor;'")}

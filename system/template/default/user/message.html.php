@@ -21,7 +21,7 @@
             <tr class='text-center'>
               <td><input type='checkbox' name='messages[]' value="{$message->id}" /></td>
               <td class='hidden-xxxs'>{!echo $message->from}</td>
-              <td class='hidden-xxs'>{!echo substr($message->date, 5)}</td>
+              <td class='hidden-xxs'>{!substr($message->date, 5)}</td>
               <td class='text-left break-all'>{!echo $message->content}</td>
               <td class='hidden-xs'>{!echo $lang->message->readedStatus[$message->readed]}</td>
               {if(!$message->readed)}
