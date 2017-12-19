@@ -22,19 +22,19 @@
       <div class='form-group'>
         <label for='blockFrom' class='col-sm-2 control-label'>{!echo $lang->message->from}</label>
         <div class='col-sm-10 required'>
-          {!echo html::input('blockFrom', $from, "class='form-control'")}
+          {!html::input('blockFrom', $from, "class='form-control'")}
         </div>
       </div>
       <div class='form-group'>
         <label for='mobile' class='col-sm-2 control-label'>{!echo $lang->message->mobile}</label>
         <div class='col-sm-10'>
-          {!echo html::input('mobile', $mobile, "class='form-control'")}
+          {!html::input('mobile', $mobile, "class='form-control'")}
         </div>
       </div>
       <div class='form-group'>
         <label for='qq' class='col-sm-2 control-label'>{!echo $lang->message->qq}</label>
         <div class='col-sm-10'>
-          {!echo html::input('qq', $qq, "class='form-control'")}
+          {!html::input('qq', $qq, "class='form-control'")}
         </div>
       </div>
       <div class='form-group'>
@@ -55,7 +55,7 @@
       <div class='form-group' align="center">
         <div class='col-sm-1'></div>
           <div class='col-sm-11 col-sm-offset-1'>
-          <span>{!echo html::submitButton()}</span>
+          <span>{!html::submitButton()}</span>
         </div>
       </div>
     </form>

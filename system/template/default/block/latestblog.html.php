@@ -21,7 +21,7 @@
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($content->moreText) and !empty($content->moreUrl))}
-      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if(isset($content->image))}
@@ -38,12 +38,12 @@
             {if(isset($content->showCategory) and $content->showCategory == 1)}
               {if($content->categoryName == 'abbr')}
                 {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
               {else}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
               {/if}
             {/if}
-            <strong>{!echo html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
+            <strong>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
           </div>
           <div class='item-content'>
             <div class='text small text-muted'>
@@ -74,12 +74,12 @@
               {if(isset($content->showCategory) and $content->showCategory == 1)}
                 {if($content->categoryName == 'abbr')}
                   {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                  {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+                  {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
                 {else}
-                  {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
+                  {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
                 {/if}
               {/if}
-              {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+              {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
               <span class='pull-right'>{!echo substr($article->addedDate, 0, 10)}</span>
             </li>
           {else}
@@ -87,12 +87,12 @@
               {if(isset($content->showCategory) and $content->showCategory == 1)}
               {if($content->categoryName == 'abbr')}
               {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-              {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+              {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
               {else}
-              {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
+              {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
               {/if}
               {/if}
-              {!echo html::a($url, $article->title, "title='$article->title' style='color:{{$article->titleColor}}'")}
+              {!html::a($url, $article->title, "title='$article->title' style='color:{{$article->titleColor}}'")}
             </li>
           {/if}
         {/foreach}

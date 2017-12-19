@@ -68,12 +68,12 @@
         {@extract($prevAndNext)}
         <ul class='pager pager-justify'>
           {if($prev)}
-            <li class='previous'>{!echo html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> ' . $prev->title)}</li>
+            <li class='previous'>{!html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> ' . $prev->title)}</li>
           {else}
             <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> {!print($lang->article->none)}</a></li>
           {/if}
           {if($next)}
-            <li class='next'>{!echo html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), $next->title . ' <i class="icon-arrow-right"></i>')}</li>
+            <li class='next'>{!html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), $next->title . ' <i class="icon-arrow-right"></i>')}</li>
           {else}
             <li class='next disabled'><a href='###'> {!print($lang->article->none)}<i class='icon-arrow-right'></i></a></li>
           {/if}
@@ -90,7 +90,7 @@
   {if(!empty($layouts['blog_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden'))}
   <div class='col-md-{!echo $sideGrid} col-side'>
     <side class='page-side'>
-      <div class='panel-pure panel'>{!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'")}</div>
+      <div class='panel-pure panel'>{!html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'")}</div>
       <div class='blocks' data-region='blog_view-side'>{$control->block->printRegion($layouts, 'blog_view', 'side')}</div>
     </side>
   </div>

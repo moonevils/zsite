@@ -20,7 +20,7 @@
     <tr>
       <th class='w-100px'>{!echo $lang->reply->content}</th>
       <td>
-        {!echo html::textarea('content', htmlspecialchars($reply->content), "rows=20 class='area-1' tabindex=1")}
+        {!html::textarea('content', htmlspecialchars($reply->content), "rows=20 class='area-1' tabindex=1")}
       </td>
     </tr>
     <tr>
@@ -36,7 +36,7 @@
     </tr>
     <tr>
       <th></th>
-      <td colspan='2' align='center'>{!echo html::submitButton('', 'btn btn-primary', 'onclick="return checkGarbage(\'content\')" tabindex=2' ) . html::backButton()}</td></tr>
+      <td colspan='2' align='center'>{!html::submitButton('', 'btn btn-primary', 'onclick="return checkGarbage(\'content\')" tabindex=2' ) . html::backButton()}</td></tr>
   </table>
 </form>
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

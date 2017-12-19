@@ -7,16 +7,16 @@
         <table class='table table-form'>
           <tr>
             <th>{!echo $lang->user->email}</th>
-            <td>{!echo html::input('email', $user->email, "class='form-control'")}</td>
-            <td>{!echo html::a($control->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-xs'")}</td>
+            <td>{!html::input('email', $user->email, "class='form-control'")}</td>
+            <td>{!html::a($control->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-xs'")}</td>
           </tr>
           <tr>
             <th>{!echo $lang->user->captcha}</th>
-            <td>{!echo html::input('captcha', '', "class='form-control'")}</td>
+            <td>{!html::input('captcha', '', "class='form-control'")}</td>
           </tr>
           <tr>
             <th></th>
-            <td>{!echo html::submitButton() . html::hidden('referer', $referer)}</td>
+            <td>{!html::submitButton() . html::hidden('referer', $referer)}</td>
           </tr>
         </table>
       </form>

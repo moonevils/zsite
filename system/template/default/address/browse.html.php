@@ -18,7 +18,7 @@
       <div class="panel">
         <div class='panel-heading'>
           <strong>{$lang->address->browse}</strong>
-          <div class='panel-actions'>{!echo html::a('javascript:;', $lang->address->create, "id='createBtn' class='btn btn-primary'")}</div>
+          <div class='panel-actions'>{!html::a('javascript:;', $lang->address->create, "id='createBtn' class='btn btn-primary'")}</div>
         </div>
         <div class="panel-body">
           <div id='createForm'></div>
@@ -32,8 +32,8 @@
                 <span class='text-muted'> {!echo $address->address}</span>
                 <span class='text-muted'> {!echo $address->zipcode}</span>
                 <span class='pull-right'>
-                {!echo html::a(helper::createLink('address', 'edit', "id=$address->id"), $lang->edit, "class='editor'")}
-                {!echo html::a(helper::createLink('address', 'delete', "id=$address->id"), $lang->delete, "class='deleter'")}
+                {!html::a(helper::createLink('address', 'edit', "id=$address->id"), $lang->edit, "class='editor'")}
+                {!html::a(helper::createLink('address', 'delete', "id=$address->id"), $lang->delete, "class='deleter'")}
                 </span>
             </div>
             <div class='form-edit'>

@@ -11,20 +11,20 @@
             <table class='table talbe-form table-borderless'>
               <tr>
                 <th class='text-right w-80px'>{!echo $lang->user->password}</th>
-                <td class='w-p50'>{!echo html::password('oldPwd', '', "class='form-control' placeholder='{$lang->user->placeholder->password}'")}</td><td></td>
+                <td class='w-p50'>{!html::password('oldPwd', '', "class='form-control' placeholder='{$lang->user->placeholder->password}'")}</td><td></td>
               </tr>
               <tr>
                 <th class='text-right'>{!echo $lang->user->newEmail}</th>
-                <td>{!echo html::input('email', '', "class='form-control'")}</td><td></td>
+                <td>{!html::input('email', '', "class='form-control'")}</td><td></td>
               </tr>
               <tr>
                 <th class='text-right'>{!echo $lang->user->captcha}</th>
-                <td>{!echo html::input('captcha', '', "class='form-control' placeholder='{$lang->user->placeholder->verifyCode}'")}</td>
-                <td class='text-middle'>{!echo html::a($control->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-sm btn-primary'")}</td>
+                <td>{!html::input('captcha', '', "class='form-control' placeholder='{$lang->user->placeholder->verifyCode}'")}</td>
+                <td class='text-middle'>{!html::a($control->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-sm btn-primary'")}</td>
               </tr>
               <tr>
                 <th></th>
-                <td colspan='2'>{!echo html::submitButton() . html::hidden('token', $token)}</td>
+                <td colspan='2'>{!html::submitButton() . html::hidden('token', $token)}</td>
               </tr>
             </table>
           </form>

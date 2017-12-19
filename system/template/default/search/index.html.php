@@ -17,7 +17,7 @@
               <div class="text-muted pull-right">
                 <span title="{!echo $lang->object->addedDate}"><i class='icon-time'></i> {!echo substr($object->editedDate, 0, 10)}</span>
               </div>
-              <h4>{!echo html::a($object->url, $object->title)}</h4>
+              <h4>{!html::a($object->url, $object->title)}</h4>
             </div>
             <div class='item-content'>
               {if(!empty($object->image->primary))}

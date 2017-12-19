@@ -21,7 +21,7 @@
           <tbody>
             {foreach($threads as $thread)}
             <tr class='text-center'>
-              <td class='text-left'>{!echo html::a($control->createLink('thread', 'view', "id=$thread->id"), $thread->title, "target='_blank'")}</td>
+              <td class='text-left'>{!html::a($control->createLink('thread', 'view', "id=$thread->id"), $thread->title, "target='_blank'")}</td>
               <td class='w-120px hidden-xxs'>{!echo substr($thread->addedDate, 2, -3)}</td>
               {if(isset($control->config->forum->postReview) and $control->config->forum->postReview == 'open')}
               <td>

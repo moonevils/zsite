@@ -33,7 +33,7 @@
           <div class='media {!echo $pull}'>
             {$maxWidth = !empty($control->config->article->imageWidth) ? $control->config->article->imageWidth . 'px' : '120px'}
             {$title    = $article->image->primary->title ? $article->image->primary->title : $article->title}
-            {!echo html::a($url, html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='$title' style='max-width:$maxWidth' class='thumbnail'"))}
+            {!html::a($url, html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='$title' style='max-width:$maxWidth' class='thumbnail'"))}
           </div>
           {/if}
           <div class='item-heading'>

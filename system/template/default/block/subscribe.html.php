@@ -16,7 +16,7 @@
 <div class='block-subscribe hidden'>
   <ul class='nav navbar-nav navbar-right'>
     <li class='nav-system-blog'>
-      {!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank'")}
+      {!html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank'")}
     </li>
   </ul>
 </div>
@@ -25,6 +25,6 @@ $('#blogNav ul.navbar-nav').last().after($('.block-subscribe').html());
 </script>
 {else}
 <div id="block{!echo $block->id}" class='panel-pure panel'>
-  {!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'")}
+  {!html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'")}
 </div>
 {/if}

@@ -17,7 +17,7 @@
     <td>
       {foreach($products as $product)}
       <div>
-        <span>{!echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'")}</span>
+        <span>{!html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'")}</span>
         <span>{!echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count}</span>
       </div>
       {/foreach}

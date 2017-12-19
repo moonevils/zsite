@@ -23,8 +23,8 @@
   <form action='{!echo helper::createLink('search')}' method='get' role='search'>
     <div class='input-group'>
       {$keywords = ($control->app->getModuleName() == 'search') ? $control->session->serachIngWord : ''}
-      {!echo html::input('words', $keywords, "class='form-control' placeholder=''")}
-      {if($control->config->requestType == 'GET')}{!echo html::hidden($control->config->moduleVar, 'search') . html::hidden($control->config->methodVar, 'index')} {/if}
+      {!html::input('words', $keywords, "class='form-control' placeholder=''")}
+      {if($control->config->requestType == 'GET')}{!html::hidden($control->config->moduleVar, 'search') . html::hidden($control->config->methodVar, 'index')} {/if}
       <div class='input-group-btn'>
         <button class='btn btn-default' type='submit'><i class='icon icon-search'></i></button>
       </div>

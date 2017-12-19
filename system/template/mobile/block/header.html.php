@@ -25,7 +25,7 @@
             <div class='input-group'>
               {$keywords = ($model->app->getModuleName() == 'search') ? $model->session->serachIngWord : ''}
               {!html::input('words', $keywords, "class='form-model' placeholder=''")}
-              {if($model->config->requestType == 'GET')} {!echo html::hidden($model->config->moduleVar, 'search') . html::hidden($model->config->methodVar, 'index')} {/if}
+              {if($model->config->requestType == 'GET')} {!html::hidden($model->config->moduleVar, 'search') . html::hidden($model->config->methodVar, 'index')} {/if}
                 <div class='input-group-btn'>
                   <button class='btn default' type='submit'><i class='icon icon-search'></i></button>
                 </div>
