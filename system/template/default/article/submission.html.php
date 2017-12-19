@@ -4,7 +4,7 @@
     {include TPL_ROOT . 'user/side.html.php'}
     <div class='col-md-10'>
       <div class='panel'>
-        <div class='panel-heading'><strong><i class='icon-envelope-alt'></i> {!echo $lang->user->submission}</strong>
+        <div class='panel-heading'><strong><i class='icon-envelope-alt'></i> {$lang->user->submission}</strong>
           <div class='panel-actions'>
             {@commonModel::printLink('article', 'post', '', '<i class="icon-plus"></i> ' . $lang->article->post, 'class="btn btn-primary"')}
           </div>
@@ -13,19 +13,19 @@
         <table class='table table-hover table-striped tablesorter'>
           <thead>
             <tr>
-              <th class='text-center w-50px'>{!echo $lang->article->id}</th>
-              <th class='text-center'>{!echo $lang->article->title}</th>
-              <th class='text-center w-160px'>{!echo $lang->article->submissionTime}</th>
-              <th class='text-center w-60px'>{!echo $lang->article->status}</th>
-              <th class='text-center w-60px'>{!echo $lang->article->views}</th>
-              <th class="text-center w-120px">{!echo $lang->actions}</th>
+              <th class='text-center w-50px'>{$lang->article->id}</th>
+              <th class='text-center'>{$lang->article->title}</th>
+              <th class='text-center w-160px'>{$lang->article->submissionTime}</th>
+              <th class='text-center w-60px'>{$lang->article->status}</th>
+              <th class='text-center w-60px'>{$lang->article->views}</th>
+              <th class="text-center w-120px">{$lang->actions}</th>
             </tr>
           </thead>
           <tbody>
           {$maxOrder = 0}
           {foreach($articles as $article)}
             <tr>
-              <td class='text-center'>{!echo $article->id}</td>
+              <td class='text-center'>{$article->id}</td>
               <td>
                 {if($article->submission == 2)}
                   {if($article->type == 'book')}
