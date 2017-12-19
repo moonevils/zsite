@@ -40,12 +40,6 @@
           <th><?php echo $lang->site->gzipOutput;?></th> 
           <td><?php echo html::radio('gzipOutput', $lang->site->gzipOutputList, isset($this->config->site->gzipOutput) ? $this->config->site->gzipOutput : 'close', "class='checkbox'");?></td><td></td>
         </tr>
-        <?php if(extension_loaded('tidy')):?>
-        <tr>
-          <th><?php echo $lang->site->tidy;?></th> 
-          <td><?php echo html::radio('tidy', $lang->site->tidyOptions, zget($this->config->site, 'tidy', 'open'), "class='checkbox'");?></td><td></td>
-        </tr>
-        <?php endif;?>
         <tr>
           <th><?php echo $lang->site->name;?></th> 
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
