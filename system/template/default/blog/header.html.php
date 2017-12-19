@@ -70,7 +70,7 @@
       {if(!$config->debug)} {!js::import($jsRoot . 'chanzhi.all.ie9.js')} {/if}
   {/if}
   {$baseCustom = isset($control->config->template->custom) ? json_decode($control->config->template->custom, true) : array()}
-  {if(!empty($baseCustom[$template][$theme]['js']))} {!js::execute($baseCustom[$template][$theme]['js'])} {/if}
+  {if(!empty($baseCustom[CHANZHI_TEMPLATE][CHANZHI_THEME]['js']))} {!js::execute($baseCustom[CHANZHI_TEMPLATE][CHANZHI_THEME]['js'])} {/if}
 </head>
 <body>
 <div class='m-blog page-container page-blog'>
@@ -80,8 +80,8 @@
       <div class="wrapper">
         {$logoSetting = isset($control->config->site->logo) ? json_decode($control->config->site->logo) : new stdclass()}
         {$logo = false}
-        {if(isset($logoSetting->$template->themes->all))}    {$logo = $logoSetting->$template->themes->all} {/if}
-        {if(isset($logoSetting->$template->themes->$theme))}  {$logo = $logoSetting->$template->themes->$theme} {/if}
+        {if(isset($logoSetting->{{CHANZHI_TEMPLATE}}->themes->all))}    {$logo = $logoSetting->{{CHANZHI_TEMPLATE}}->themes->all} {/if}
+        {if(isset($logoSetting->{{CHANZHI_TEMPLATE}}->themes->{{CHANZHI_THEME}}))}  {$logo = $logoSetting->{{CHANZHI_TEMPLATE}}->themes->{{CHANZHI_THEME}}} {/if}
         {if($logo)}
           {$logo->extension = $control->loadModel('file')->getExtension($logo->pathname)}
           <div id='siteLogo' data-ve='logo'>
