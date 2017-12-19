@@ -28,11 +28,11 @@
           {$readonly = $thread->readonly ? 'checked' : ''}
           {if($canManage)}
             <div class='input-group'>
-              {!echo html::input('title', $thread->title, "class='form-control'")}
+              {!html::input('title', $thread->title, "class='form-control'")}
               <div class='input-group-addon colorplate clearfix'>
                 <div class='input-group color active' data="{!echo $thread->color}">
                   <label class='input-group-addon'>{!echo $lang->color}</label>
-                  {!echo html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'")}
+                  {!html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'")}
                   <span class='input-group-btn'>
                     <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                     <div class='dropdown-menu colors'>
@@ -62,14 +62,14 @@
               </span>
             </div>
         {else}
-          {!echo html::input('title', $thread->title, "class='form-control'")}
+          {!html::input('title', $thread->title, "class='form-control'")}
         {/if}
         </div>
       </div>
       <div class='threadInfo'>
         <div class='form-group'>
           <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->content}</label>
-          <div class='col-md-11 col-sm-10'>{!echo html::textarea('content', htmlspecialchars($thread->content), "rows='15' class='form-control'")}</div>
+          <div class='col-md-11 col-sm-10'>{!html::textarea('content', htmlspecialchars($thread->content), "rows='15' class='form-control'")}</div>
         </div>
         <div class='form-group'>
           <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->file}</label>
@@ -83,12 +83,12 @@
       {if($control->app->user->admin == 'super')}
       <div class='form-group link'>
         <label class='col-md-1 col-sm-2 control-label'>{!echo $lang->thread->link}</label>
-        <div class='col-md-11 col-sm-10 required'>{!echo html::input('link', $thread->link, "class='form-control' placeholder='{{$lang->thread->placeholder->link}}'")}</div>
+        <div class='col-md-11 col-sm-10 required'>{!html::input('link', $thread->link, "class='form-control' placeholder='{{$lang->thread->placeholder->link}}'")}</div>
       </div>
       {/if}
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
-        <div class='col-md-11 col-sm-10'>{!echo html::submitButton() . html::backButton();}</div>
+        <div class='col-md-11 col-sm-10'>{!html::submitButton() . html::backButton();}</div>
       </div>
     </form>
   </div>

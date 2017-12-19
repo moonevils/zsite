@@ -17,7 +17,7 @@
           <a class='card' href="{!echo $url}">
             <div class='media' style='background-image: url({!echo $model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL')});'>
               {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
-              {!echo html::image($model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
+              {!html::image($model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
             </div>
 
             <div class="card-heading {if(isset($content->alignTitle) && $content->alignTitle == 'middle') echo 'text-center'}">

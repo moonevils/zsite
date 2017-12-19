@@ -49,18 +49,18 @@
             </span>
             {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
               {$account = helper::safe64Encode($thread->author)}
-              {!echo html::a(inlink('addScore', "account={{$account}}]&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal")}
+              {!html::a(inlink('addScore', "account={{$account}}]&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal")}
             {/if}
             {if($thread->hidden)}
-                {!echo html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-open"></i> ' . $lang->thread->show, "class='switcher'")}
+                {!html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-open"></i> ' . $lang->thread->show, "class='switcher'")}
             {else}
-                {!echo html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher'")}
+                {!html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher'")}
             {/if}
-            {!echo html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'")}
-            {!echo html::a(inlink('transfer',   "threadID=$thread->id"), '<i class="icon-location-arrow"></i> ' . $lang->thread->transfer, "data-toggle='modal'")}
+            {!html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'")}
+            {!html::a(inlink('transfer',   "threadID=$thread->id"), '<i class="icon-location-arrow"></i> ' . $lang->thread->transfer, "data-toggle='modal'")}
           </span>
         {/if}
-        {if($control->thread->canManage($board->id, $thread->author))} {!echo html::a(inlink('edit', "threadID=$thread->id"), '<i class="icon-pencil"></i> ' . $lang->edit)} {/if}
+        {if($control->thread->canManage($board->id, $thread->author))} {!html::a(inlink('edit', "threadID=$thread->id"), '<i class="icon-pencil"></i> ' . $lang->edit)} {/if}
         <a href='#reply' class='thread-reply-btn'><i class='icon-reply'></i> {!echo $lang->reply->common}</a>
      {else}
         <a href="{!echo $control->createLink('user', 'login', 'referer=' . helper::safe64Encode($control->app->getURI(true) . '#reply'))}" class="thread-reply-btn"><i class="icon-reply"></i> {!echo $lang->reply->common}</a>

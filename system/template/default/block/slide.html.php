@@ -53,8 +53,8 @@
             {foreach($slide->label as $key => $label)}
               {if(!empty($globalButtons[$slide->id][$key]))} {continue} {/if}
               {if(trim($label) != '')}
-                {if($slide->buttonUrl[$key])} {!echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{{$slide->buttonClass[$key]}}' target='{{$slide->buttonTarget[$key]}}'")} {/if}
-                {if(!$slide->buttonUrl[$key])} {!echo html::commonButton($label, "btn btn-lg btn-{{$slide->buttonClass[$key]}}")} {/if}
+                {if($slide->buttonUrl[$key])} {!html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{{$slide->buttonClass[$key]}}' target='{{$slide->buttonTarget[$key]}}'")} {/if}
+                {if(!$slide->buttonUrl[$key])} {!html::commonButton($label, "btn btn-lg btn-{{$slide->buttonClass[$key]}}")} {/if}
               {/if}
             {/foreach}
           </div>

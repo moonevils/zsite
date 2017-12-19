@@ -10,7 +10,7 @@
           {$url = inlink('view', "id=$page->id", "name=$page->alias")}
           <div class='item' id='page{!echo $page->id}' data-ve='page'>
             <div class='item-heading'>
-              <h4>{!echo html::a($url, $page->title)}</h4>
+              <h4>{!html::a($url, $page->title)}</h4>
             </div>
             <div class='item-content'>
               {if(!empty($page->image))}

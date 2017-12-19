@@ -114,11 +114,11 @@ class user extends control
     {
         dao::$changedTables[] = TABLE_CONFIG;
 
-        if($referer == '' && strpos($_SERVER['HTTP_REFERER'], 'deny') === false && strpos($_SERVER['HTTP_REFERER'], 'register') === false && strpos($_SERVER['HTTP_REFERER'], 'login') === false)
+        if($referer == '' && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'deny') === false && strpos($_SERVER['HTTP_REFERER'], 'register') === false && strpos($_SERVER['HTTP_REFERER'], 'login') === false)
         {
             $this->referer = urlencode($_SERVER['HTTP_REFERER']);
         }
-        elseif(RUN_MODE == "front" && (strpos($_SERVER['HTTP_REFERER'], 'register') || strpos($_SERVER['HTTP_REFERER'], 'login')))
+        elseif(RUN_MODE == "front" && isset($_SERVER['HTTP_REFERER']) && (strpos($_SERVER['HTTP_REFERER'], 'register') || strpos($_SERVER['HTTP_REFERER'], 'login')))
         {
             $this->referer = $this->createLink('user', 'control');
         }
@@ -153,7 +153,7 @@ class user extends control
                     $this->send(array('result' => 'success', 'locate' => $this->createLink($this->config->default->module)));
                 }
 
-                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate($this->referer);
+                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate(urldecode($this->referer));
                 $this->locate($this->createLink($this->config->default->module));
                 exit;
             }

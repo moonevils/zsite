@@ -19,7 +19,7 @@
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($content->moreText) and !empty($content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if(isset($content->image))}
@@ -30,14 +30,14 @@
       {foreach($pages as $page)}
       {$url = helper::createLink('page', 'view', "id=$page->id", "name=$page->alias")}
       <div class='item'>
-        <div class='item-heading'><strong>{!echo html::a($url, $page->title, "style='color:{{$page->titleColor}}'")}</strong></div>
+        <div class='item-heading'><strong>{!html::a($url, $page->title, "style='color:{{$page->titleColor}}'")}</strong></div>
         <div class='item-content'>
           
           <div class='text small text-muted'>
             <div class='media {!echo $pull}' style="max-width: {!echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px'}">
             {if(!empty($page->image))}
               {$title = $page->image->primary->title ? $page->image->primary->title : $page->title}
-              {!echo html::a($url, html::image($model->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
+              {!html::a($url, html::image($model->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
             {/if}
             </div>
             <strong class='text-important text-nowrap'>
@@ -57,11 +57,11 @@
           {$url = helper::createLink('page', 'view', "id={{$page->id}}", "name={{$page->alias}}")}
           {if(isset($content->time))}
           <li>
-            {!echo html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}
-            <span class='pull-right'>{!echo substr($page->addedDate, 0, 10)}</span>
+            {!html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}
+            <span class='pull-right'>{!substr($page->addedDate, 0, 10)}</span>
           </li>
           {else}
-            <li>{!echo html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}</li>
+            <li>{!html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}</li>
           {/if}
         {/foreach}
       </ul>

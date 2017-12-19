@@ -24,7 +24,7 @@
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($content->moreText) and !empty($content->moreUrl))}
-      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   <div class='panel-body'>
@@ -34,13 +34,13 @@
         {if(isset($content->showCategory) and $content->showCategory == 1)}
           {if($content->categoryName == 'abbr')}
             {$boardName = '[' . ($boards[$thread->board]->abbr ? $boards[$thread->board]->abbr : $boards[$thread->board]->name) . '] '}
-            {!echo html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), $boardName)}
+            {!html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), $boardName)}
           {else}
-            {!echo html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), '[' . $boards[$thread->board]->name . '] ')}
+            {!html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), '[' . $boards[$thread->board]->name . '] ')}
           {/if}
         {/if}
-        {!echo html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}
-        <span class='pull-right'>{!echo substr($thread->addedDate, 0, 10)}</span>
+        {!html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}
+        <span class='pull-right'>{!substr($thread->addedDate, 0, 10)}</span>
       </li>
       {/foreach}
     </ul>

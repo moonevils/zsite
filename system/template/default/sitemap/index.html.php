@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class='icon-sitemap'></i> {!echo $lang->sitemap->common}</strong>
     <div class='panel-actions'>
-      {!echo html::a($control->createLink('sitemap', 'index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-primary'")}
+      {!html::a($control->createLink('sitemap', 'index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-primary'")}
     </div>
   </div>
   <div class='panel-body'>
@@ -23,16 +23,16 @@
     <div class='clearfix sitemap-tree'> 
       <h4>{!echo $lang->sitemap->articleList}</h4>
       <ul class='tree'>
-        <li class='articleItem'>{!echo html::a(helper::createLink('company', 'index'), $lang->aboutUs)}</li>
+        <li class='articleItem'>{!html::a(helper::createLink('company', 'index'), $lang->aboutUs)}</li>
         {if(!empty($pages))}
         {foreach($pages as $page)}
-        <li class='articleItem'>{!echo html::a(helper::createLink('page', 'view', "pageID={{$page->id}}", "name={{$page->alias}}"), $page->title)}</li>
+        <li class='articleItem'>{!html::a(helper::createLink('page', 'view', "pageID={{$page->id}}", "name={{$page->alias}}"), $page->title)}</li>
         {/foreach}
         {/if}
       </ul>
       <ul class='tree'>
         {foreach($articles as $article)}
-        <li class='articleItem'>{!echo html::a(helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias"), $article->title)}</li>
+        <li class='articleItem'>{!html::a(helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias"), $article->title)}</li>
         {/foreach}
       </ul>
     </div>
@@ -43,7 +43,7 @@
       <h4>{!echo $lang->sitemap->productList}</h4>
       <ul class='tree'>
         {foreach($products as $product)}
-        <li class='productItem'>{!echo html::a(helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias"), $product->name)}</li>
+        <li class='productItem'>{!html::a(helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias"), $product->name)}</li>
         {/foreach}
       </ul>
     </div>
@@ -79,7 +79,7 @@
           {if($parentBoard->children)}
           <ul>
             {foreach($parentBoard->children as $child)}
-            <li>{!echo html::a(helper::createLink('forum', 'board', "id=$child->id", "category={{$child->alias}}"), $child->name)}</li>
+            <li>{!html::a(helper::createLink('forum', 'board', "id=$child->id", "category={{$child->alias}}"), $child->name)}</li>
             {/foreach}
           </ul>
           {/if}
@@ -92,7 +92,7 @@
       <h4>{!echo $lang->sitemap->threadList}</h4>
       <ul class='tree'>
         {foreach($threads as $thread)}
-        <li>{!echo html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}</li>
+        <li>{!html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}</li>
         {/foreach}
       </ul>
     </div>
@@ -105,7 +105,7 @@
           <h4>{!echo $lang->sitemap->books}</h4>
           <ul class='tree'>
             {foreach($books as $book)}
-            <li>{!echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book={{$book->alias}}"), $book->title)}</li>
+            <li>{!html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book={{$book->alias}}"), $book->title)}</li>
             {/foreach}
           </ul>
         </div>
@@ -115,7 +115,7 @@
           <h4>{!echo $lang->sitemap->bookArticles}</h4>
           <ul class='tree'>
             {foreach($bookArticles as $bookArticle)}
-            <li>{!echo html::a(helper::createLink('book', 'read', "articleID=$bookArticle->id", "book={{$bookArticle->book->alias}}&article=$bookArticle->alias"), $bookArticle->title)}</li>
+            <li>{!html::a(helper::createLink('book', 'read', "articleID=$bookArticle->id", "book={{$bookArticle->book->alias}}&article=$bookArticle->alias"), $bookArticle->title)}</li>
             {/foreach}
           </ul>
         </div>

@@ -39,7 +39,7 @@ class source extends control
             $css       = file_get_contents($cacheFile);
         }
         $page = helper::safe64Decode($page);
-        echo "/* Css for $page, Version=$version */\n $css";
+        echo "/* Css for {$this->server->http_referer}, Version=$version */\n $css";
         exit;
     }
 
@@ -72,7 +72,7 @@ class source extends control
         }
 
         $page = helper::safe64Decode($page);
-        echo "/* Js for $page, Version=$version */\n $js";
+        echo "/* Js for {$this->server->http_referer}, Version=$version */\n $js";
         exit;
     }
 }
