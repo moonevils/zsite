@@ -44,7 +44,7 @@
   {/if}
   <tr>
     <th class='w-80px'>{!echo $lang->order->account}</th>
-    <td>{!echo zget($users, $order->account, $order->account)}</td>
+    <td>{!zget($users, $order->account, $order->account)}</td>
   </tr> 
   <tr>
     <th>{!echo $lang->order->status}</th>
@@ -56,7 +56,7 @@
   </tr> 
   <tr>
     <th>{!echo $lang->order->payment}</th>
-    <td>{!echo zget($lang->order->paymentList, $order->payment)}</td>
+    <td>{!zget($lang->order->paymentList, $order->payment)}</td>
   </tr> 
   <tr>
     <th class='w-80px'>{!echo $lang->order->note}</th>

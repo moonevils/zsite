@@ -26,7 +26,7 @@
               {if(isset($control->config->forum->postReview) and $control->config->forum->postReview == 'open')}
               <td>
                 <span class="{!echo $thread->status == 'approved' ? 'text-success' : ''}">
-                  {!echo zget($lang->thread->statusList, $thread->status)}
+                  {!zget($lang->thread->statusList, $thread->status)}
                 </span>
               </td>
               {/if}
