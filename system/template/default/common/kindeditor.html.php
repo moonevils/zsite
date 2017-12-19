@@ -74,7 +74,7 @@ function initKindeditor(afterInit)
             langType:v.editorLang,
             htmlTags:{
             {/noparse}
-            '{!echo str_replace(array("<",">"), array('', ''), $config->allowedTags->{{RUN_MODE}})}':["class","id","style"],
+            '{!str_replace(array("<",">"), array('', ''), $config->allowedTags->{{RUN_MODE}})}':["class","id","style"],
             {noparse}
             video: ["id", "class", "width", "height", "src", "controls"],
             object: ["type", "data", "width", "height"], param: ["name", "value"],

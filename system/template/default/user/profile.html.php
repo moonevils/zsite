@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->email}</th>
-            <td id='emailTD'>{!echo str2Entity($user->email)}</td>
+            <td id='emailTD'>{!str2Entity($user->email)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->company}</th>
@@ -34,15 +34,15 @@
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->mobile}</th>
-            <td id='mobileTD'>{!echo str2Entity($user->mobile)}</td>
+            <td id='mobileTD'>{!str2Entity($user->mobile)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->phone}</th>
-            <td>{!echo str2Entity($user->phone)}</td>
+            <td>{!str2Entity($user->phone)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->qq}</th>
-            <td>{!echo str2Entity($user->qq)}</td>
+            <td>{!str2Entity($user->qq)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->gtalk}</th>

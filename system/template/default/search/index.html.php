@@ -32,7 +32,7 @@
         {/foreach}
       </section>
       <footer class='clearfix'>
-        {!echo str_replace($words, urlencode($words), $pager->get('right', 'short'))}
+        {!str_replace($words, urlencode($words), $pager->get('right', 'short'))}
         <span class='execute-info text-muted'>{!printf($lang->search->executeInfo, $pager->recTotal, $consumed)}</span> 
       </footer>
     </div>
