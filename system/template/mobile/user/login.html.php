@@ -33,7 +33,7 @@
     <div class='form-group'>{!html::submitButton($lang->user->login->common, 'btn primary block')}</div>
     <div class='form-group'>
       {if($config->mail->turnon and $control->config->site->resetPassword == 'open')} {!html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' '} {/if}
-      {if(!$isSimpleMode)} {!html::a(inlink('register'), $lang->user->register->common, f"class='btn btn-link'")} {/if}
+      {if(!$isSimpleMode)} {!html::a(inlink('register'), $lang->user->register->common, "class='btn btn-link'")} {/if}
       {!html::hidden('referer', $referer)}
     </div>
   </form>
