@@ -756,6 +756,8 @@ class user extends control
      */
     public function checkReset($reset)
     {
+        if(!$this->user->checkReset($reset)) header('location:/index.html'); 
+
         if(!empty($_POST))
         {
             $this->user->checkPassword();
@@ -765,18 +767,11 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->user->resetSuccess, 'locate' => inlink('login')));
         }
 
-        if(!$this->user->checkReset($reset))
-        {
-            header('location:index.html'); 
-        }
-        else
-        {
-            $this->view->title = $this->lang->user->resetPassword->common;
-            $this->view->reset = $reset;
-            $this->view->mobileURL  = helper::createLink('user', 'checkReset', "reset=$reset", '', 'mhtml');
-            $this->view->desktopURL = helper::createLink('user', 'checkReset', "reset=$reset", '', 'html');
-            $this->display();
-        }
+        $this->view->title = $this->lang->user->resetPassword->common;
+        $this->view->reset = $reset;
+        $this->view->mobileURL  = helper::createLink('user', 'checkReset', "reset=$reset", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'checkReset', "reset=$reset", '', 'html');
+        $this->display();
     }
 
     /**
