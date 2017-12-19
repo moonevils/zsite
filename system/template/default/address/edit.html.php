@@ -13,13 +13,13 @@
 <form class='editForm' action='{!echo inlink('edit', "id=$address->id")}' method='post'>
   <table class='table table-borderless address-form table-list'>
     <tr>
-      <td class='w-100px'>{!echo html::input('contact', $address->contact, "class='form-control' placeholder='{{$lang->address->contact}}'")}</td>
-      <td class='w-130px'>{!echo html::input('phone', $address->phone, "class='form-control' placeholder='{{$lang->address->phone}}'")}</td>
-      <td>{!echo html::input('address', $address->address, "class='form-control' placeholder='{{$lang->address->address}}'")}</td>
-      <td class='w-100px'>{!echo html::input('zipcode', $address->zipcode, "class='form-control' placeholder='{{$lang->address->zipcode}}'")}</td>
+      <td class='w-100px'>{!html::input('contact', $address->contact, "class='form-control' placeholder='{{$lang->address->contact}}'")}</td>
+      <td class='w-130px'>{!html::input('phone', $address->phone, "class='form-control' placeholder='{{$lang->address->phone}}'")}</td>
+      <td>{!html::input('address', $address->address, "class='form-control' placeholder='{{$lang->address->address}}'")}</td>
+      <td class='w-100px'>{!html::input('zipcode', $address->zipcode, "class='form-control' placeholder='{{$lang->address->zipcode}}'")}</td>
       <td class='w-80px text-middle'>
-        {!echo html::a('javascript:;', $lang->save, "class='submit'")}
-        {!echo html::a('javascript:;', $lang->cancel, "class='cancelEdit'")}
+        {!html::a('javascript:;', $lang->save, "class='submit'")}
+        {!html::a('javascript:;', $lang->cancel, "class='cancelEdit'")}
       </td>
     </tr>
   </table>

@@ -16,7 +16,7 @@
       <div class='panel-heading content-heading'>
         <span class='text-special'>{!echo $comment->from}</span>
         <span class='text-muted'> {!echo $comment->date}</span>
-        {!echo html::a($control->createLink('message', 'reply', "commentID=$comment->id"), $lang->message->reply, "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{{$lang->comment->reply}}'")}
+        {!html::a($control->createLink('message', 'reply', "commentID=$comment->id"), $lang->message->reply, "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{{$lang->comment->reply}}'")}
       </div>
       <div class='panel-body'>{!echo nl2br($comment->content)}</div>
       {$control->message->getFrontReplies($comment)}
@@ -36,13 +36,13 @@
       <div class='form-group'>
         <label for='from' class='col-sm-1 control-label'>{!echo $lang->message->from}</label>
         <div class='col-sm-5 required'>
-          {!echo html::input('from', '', "class='form-control'")}
+          {!html::input('from', '', "class='form-control'")}
         </div>
       </div>
       <div class='form-group'>
         <label for='email' class='col-sm-1 control-label'>{!echo $lang->message->email}</label>
         <div class='col-sm-5'>
-          {!echo html::input('email', '', "class='form-control'")}
+          {!html::input('email', '', "class='form-control'")}
         </div>
         <div class='col-sm-5'>
           <div class='checkbox'>
@@ -56,10 +56,10 @@
         <div class='col-sm-11'>
           <span class='signed-user-info'>
             <i class='icon-user text-muted'></i> <strong>{!echo $control->session->user->realname }</strong>
-            {!echo html::hidden('from', $control->session->user->realname)}
+            {!html::hidden('from', $control->session->user->realname)}
             {if($control->session->user->email != '')}
             <span class='text-muted'>&nbsp;({!echo str2Entity($control->session->user->email)})</span>
-            {!echo html::hidden('email', $control->session->user->email)}
+            {!html::hidden('email', $control->session->user->email)}
             {/if}
           </span>
           <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> {!echo $lang->comment->receiveEmail}</label>
@@ -69,9 +69,9 @@
       <div class='form-group'>
         <label for='content' class='col-sm-1 control-label'>{!echo $lang->message->content}</label>
         <div class='col-sm-11 required'>
-          {!echo html::textarea('content', '', "class='form-control'")}
-          {!echo html::hidden('objectType', $objectType)}
-          {!echo html::hidden('objectID', $objectID)}
+          {!html::textarea('content', '', "class='form-control'")}
+          {!html::hidden('objectType', $objectType)}
+          {!html::hidden('objectID', $objectID)}
         </div>
       </div>
       {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
@@ -83,7 +83,7 @@
       {/if}
        <div class='form-group'>
         <div class='col-sm-11 col-sm-offset-1'>
-          <span>{!echo html::submitButton($lang->message->submit, 'btn btn-primary', 'data-popover-container="false"')}</span>
+          <span>{!html::submitButton($lang->message->submit, 'btn btn-primary', 'data-popover-container="false"')}</span>
           <span><small class="text-important">{!echo $lang->comment->needCheck}</small></span>
         </div>
       </div>

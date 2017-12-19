@@ -44,17 +44,17 @@
       <div id='paymentBox'>
         <h5>{!echo $lang->order->payment}</h5>
         <dl>
-          <dd id='payment'>{!echo html::radio('payment', $paymentList)}</dd>
+          <dd id='payment'>{!html::radio('payment', $paymentList)}</dd>
         </dl>
       </div>
     </div>
     <div class='panel-footer text-right'>
       {!printf($lang->order->totalToPay, $currencySymbol . $order->amount)}
-      {!echo html::submitButton($lang->order->settlement, 'btn-order-submit')}
+      {!html::submitButton($lang->order->settlement, 'btn-order-submit')}
     </div>
   </form>
   <form class='hide' id='payForm' method='post' action="{!echo inlink('redirect')}" target='_blank'>
-    {!echo html::hidden('payLink', '')}
+    {!html::hidden('payLink', '')}
     <input class='submitBtn' type='submit' value="{!echo $lang->confirm}" />
   </form>
 </div>

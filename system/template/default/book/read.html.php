@@ -11,7 +11,7 @@
             <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><strong>{!echo $book->title}</strong> <i class='caret-down'></i></a>
             <ul role='menu' class='dropdown-menu'>
               {foreach($books as $bookMenu)}
-              <li>{!echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $bookMenu->title)}</li>
+              <li>{!html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $bookMenu->title)}</li>
               {/foreach}
             </ul>
           </div>
@@ -56,15 +56,15 @@
             {@extract($prevAndNext)}
             <ul class='pager pager-justify'>
               {if($prev)}
-                <li class='previous' title='{!echo $prev->title}'>{!echo html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>')}</li>
+                <li class='previous' title='{!echo $prev->title}'>{!html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>')}</li>
               {else}
                 <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> {!print($lang->book->none)}</a></li>
               {/if}
               {if($control->config->book->chapter == 'home' or !$control->get->fullScreen)}
-                <li class='back'>{!echo html::a(inlink('browse', "bookID{{$parent->id}}", "book={{$book->alias}}&title={{$parent->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter)}</li>
+                <li class='back'>{!html::a(inlink('browse', "bookID{{$parent->id}}", "book={{$book->alias}}&title={{$parent->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter)}</li>
               {/if}
               {if($next)}
-                <li class='next' title='{!echo $next->title}'>{!echo html::a(inlink('read', "articleID=$next->id", "book={{$book->alias}}&node={{$next->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<span>' . $next->title . "</span> <i class='icon-arrow-right'></i>")}</li>
+                <li class='next' title='{!echo $next->title}'>{!html::a(inlink('read', "articleID=$next->id", "book={{$book->alias}}&node={{$next->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<span>' . $next->title . "</span> <i class='icon-arrow-right'></i>")}</li>
               {else}
                 <li class='next disabled'><a href='###'> {!print($lang->book->none)}<i class='icon-arrow-right'></i></a></li>
               {/if}
@@ -101,7 +101,7 @@
             <a href='javascript:;' data-toggle='dropdown' class='dropdown-toggle'><i class="icon icon-book"></i><strong>{!echo $book->title}</strong> <span>{!echo $lang->book->more}<i class='icon icon-caret-down'></i></span></a>
               <ul role='menu' class='dropdown-menu'>
                 {foreach($books as $bookMenu)}
-                  <li>{!echo html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $bookMenu->title)}</li>
+                  <li>{!html::a(inlink("browse", "id=$bookMenu->id", "book=$bookMenu->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $bookMenu->title)}</li>
                 {/foreach}
               </ul>
             </div>
@@ -147,15 +147,15 @@
         {@extract($prevAndNext)}
         <ul class='pager pager-justify'>
           {if($prev)}
-            <li class='previous' title='{!echo $prev->title}'>{!echo html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>')}</li>
+            <li class='previous' title='{!echo $prev->title}'>{!html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> <span>" . $prev->title . '</span>')}</li>
           {else}
             <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> {!print($lang->book->none)}</a></li>
           {/if}
           {if($control->config->book->chapter == 'home' or !$control->get->fullScreen)}
-            <li class='back'> {!echo html::a(inlink('browse', "bookID={{$parent->id}}", "book={{$book->alias}}&title={{$parent->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter)} </li>
+            <li class='back'> {!html::a(inlink('browse', "bookID={{$parent->id}}", "book={{$book->alias}}&title={{$parent->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter)} </li>
           {/if}
           {if($next)}
-            <li class='next' title='{!echo $next->title}'>{!echo html::a(inlink('read', "articleID=$next->id", "book={{$book->alias}}&node={{$next->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<span>' . $next->title . "</span> <i class='icon-arrow-right'></i>")}</li>
+            <li class='next' title='{!echo $next->title}'>{!html::a(inlink('read', "articleID=$next->id", "book={{$book->alias}}&node={{$next->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), '<span>' . $next->title . "</span> <i class='icon-arrow-right'></i>")}</li>
           {else}
             <li class='next disabled'><a href='###'> {!print($lang->book->none)}<i class='icon-arrow-right'></i></a></li>
           {/if}

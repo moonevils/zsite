@@ -17,13 +17,13 @@
   <div class='form-group'>
     <label for='link' class='col-xs-2 control-label'>{!echo $lang->thread->board}</label>
     <div class='col-xs-8'>
-      {!echo html::select('targetBoard', $boards, '', "class='form-control chosen'")}
+      {!html::select('targetBoard', $boards, '', "class='form-control chosen'")}
     </div>
   </div>
   <div class='form-group'>
     <div class='col-xs-2'></div>
     <div class='col-xs-8'>
-      {!echo html::submitButton()}
+      {!html::submitButton()}
     </div>
   </div>
 </form>

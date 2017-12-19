@@ -18,10 +18,10 @@
       <td>{!echo $file->id}</td>
       <td>
         {if($file->isImage)
-            {!echo html::a(inlink('download', "id=$file->id"), html::image($control->loadModel('file')->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL'), "class='image-small' title='{$file->title}'"), "target='_blank'")}
+            {!html::a(inlink('download', "id=$file->id"), html::image($control->loadModel('file')->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL'), "class='image-small' title='{$file->title}'"), "target='_blank'")}
             {if($file->primary == 1)} {!echo '<small class="label label-success">'. $lang->file->primary .'</small>'} {/if}
         {else}
-            {!echo html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'")}
+            {!html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'")}
         {/if}
       </td>
       <td>{!echo $file->extension}</td>
@@ -30,9 +30,9 @@
       <td>{!echo $file->addedDate}</td>
       <td>{!echo $file->downloads}</td>
       <td>
-      {!echo html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'")}
-      {!echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'")}
-      {if($file->isImage)} {!echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'")} {/if}
+      {!html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'")}
+      {!html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'")}
+      {if($file->isImage)} {!html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'")} {/if}
       </td>
     </tr>
     {/foreach}          
@@ -46,7 +46,7 @@
       <td class='text-middle'>{!echo $lang->file->upload . sprintf($lang->file->limit, $control->config->file->maxSize / 1024 /1024)}</td>
       <td>{!echo $control->fetch('file', 'buildForm')}</td>
     </tr>
-    <tr><td colspan='2' class='text-center'>{!echo html::submitButton()}</td></tr>
+    <tr><td colspan='2' class='text-center'>{!html::submitButton()}</td></tr>
     {else}
     <tr><td colspan='2'><h5 class='text-danger'>{!echo $lang->file->errorUnwritable}</h5></td></tr>
     {/if}

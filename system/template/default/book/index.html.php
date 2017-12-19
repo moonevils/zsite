@@ -4,7 +4,7 @@
   <div class='col-xs-6 col-sm-4 col-md-3'>
     <div class='card'>
       <div class='card-heading text-center'>
-        {!echo html::a($control->createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $book->title)}
+        {!html::a($control->createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $book->title)}
       </div>
       <div class='card-content text-muted'>{!echo $book->summary}</div>
       <div class='card-actions'>

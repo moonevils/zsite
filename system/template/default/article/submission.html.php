@@ -29,9 +29,9 @@
               <td>
                 {if($article->submission == 2)}
                   {if($article->type == 'book')}
-                      {!echo html::a($control->article->createPreviewLink($article->bookID, '', $article->type), $article->title, "target='_blank'")}
+                      {!html::a($control->article->createPreviewLink($article->bookID, '', $article->type), $article->title, "target='_blank'")}
                   {else}
-                        {!echo html::a($control->article->createPreviewLink($article->id), $article->title, "target='_blank'")}
+                        {!html::a($control->article->createPreviewLink($article->id), $article->title, "target='_blank'")}
                   {/if}
                 {else}
                   {!echo $article->title}
@@ -45,7 +45,7 @@
                  {@commonModel::printLink('article', 'modify', "articleID=$article->id", $lang->edit)}
                  {@commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"')}
               {else}
-                 {!echo html::a('javascript:;', $lang->edit, "class='disabled'") . html::a('javascript:;', $lang->delete, "class='disabled'")}
+                 {!html::a('javascript:;', $lang->edit, "class='disabled'") . html::a('javascript:;', $lang->delete, "class='disabled'")}
               {/if}
               </td>
             </tr>
@@ -56,7 +56,7 @@
         {else}
         <div class='panel-body'>
           {!echo $lang->article->noSubmission}
-          {!echo html::a(inlink('post'), "<i class='icon icon-plus'> </i>{{$lang->article->post}}", "class='btn btn-success'")}
+          {!html::a(inlink('post'), "<i class='icon icon-plus'> </i>{{$lang->article->post}}", "class='btn btn-success'")}
         </div>
         {/if}
       </div>

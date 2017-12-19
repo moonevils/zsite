@@ -15,13 +15,13 @@
   <table class='table table-form borderless'>
     <tr>
       <th class="w-100px">{!echo $lang->score->count}</th>
-      <td>{!echo html::input('count', '', "class='form-control'")}</td><td></td>
+      <td>{!html::input('count', '', "class='form-control'")}</td><td></td>
     </tr>  
     <tr>
       <th>{!echo $lang->score->note}</th>
-      <td>{!echo html::textarea('note', '', "class='form-control'")}</td><td></td>
+      <td>{!html::textarea('note', '', "class='form-control'")}</td><td></td>
     </tr>  
-    <tr><td></td><td>{!echo html::submitButton()}</td></tr>
+    <tr><td></td><td>{!html::submitButton()}</td></tr>
   </table>
 </form>
 {include TPL_ROOT . 'common/footer.modal.html.php'}
