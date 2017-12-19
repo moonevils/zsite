@@ -3,15 +3,15 @@
   <div class='panel panel-pure' id='checkEmail'>
     <div class='panel-heading'><strong>{!echo $lang->user->checkEmail}</strong></div>
     <div class='panel-body'>
-      <form method='post' action='{!echo inlink('checkEmail')}' id='ajaxForm'>
+      <form method='post' action='{!inlink('checkEmail')}' id='ajaxForm'>
         <table class='table table-form'>
           <tr>
-            <th>{!echo $lang->user->email}</th>
+            <th>{$lang->user->email}</th>
             <td>{!html::input('email', $user->email, "class='form-control'")}</td>
             <td>{!html::a($control->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-xs'")}</td>
           </tr>
           <tr>
-            <th>{!echo $lang->user->captcha}</th>
+            <th>{$lang->user->captcha}</th>
             <td>{!html::input('captcha', '', "class='form-control'")}</td>
           </tr>
           <tr>
