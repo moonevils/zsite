@@ -53,7 +53,7 @@
       {!html::submitButton($lang->order->settlement, 'btn-order-submit')}
     </div>
   </form>
-  <form class='hide' id='payForm' method='post' action="{!echo inlink('redirect')}" target='_blank'>
+  <form class='hide' id='payForm' method='post' action="{!inlink('redirect')}" target='_blank'>
     {!html::hidden('payLink', '')}
     <input class='submitBtn' type='submit' value="{!echo $lang->confirm}" />
   </form>

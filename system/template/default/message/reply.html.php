@@ -1,7 +1,7 @@
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
 {$from  = $control->session->user->account == 'guest' ? '' : $control->session->user->realname}
 {$email = $control->session->user->account == 'guest' ? '' : $control->session->user->email} 
-<form id='replyForm' method='post' action="{!echo inlink('reply', "messageID={{$message->id}}")}">
+<form id='replyForm' method='post' action="{!inlink('reply', "messageID={{$message->id}}")}">
   <table class='table table-form'>
     <tr>
       <th class='w-60px'>{!echo $lang->message->from}</th>

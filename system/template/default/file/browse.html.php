@@ -39,7 +39,7 @@
   </tbody>
 
 </table>
-<form id="fileForm" method='post' enctype='multipart/form-data' action='{!echo inlink('upload', "objectType=$objectType&objectID=$objectID")}'>
+<form id="fileForm" method='post' enctype='multipart/form-data' action='{!inlink('upload', "objectType=$objectType&objectID=$objectID")}'>
   <table class='table table-form'>
     {if($writeable)}
     <tr>

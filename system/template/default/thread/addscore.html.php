@@ -11,7 +11,7 @@
  */
 *}
 {include TPL_ROOT . 'common/header.modal.html.php'}
-<form method='post' action='{!echo inlink('addScore', "account=$account&objectType=$objectType&objectID=$objectID")}' id='addScoreForm' class='form'>
+<form method='post' action='{!inlink('addScore', "account=$account&objectType=$objectType&objectID=$objectID")}' id='addScoreForm' class='form'>
   <table class='table table-form borderless'>
     <tr>
       <th class="w-100px">{!echo $lang->score->count}</th>
