@@ -27,7 +27,7 @@
             {$goodsInfo = $control->order->printGoods($order)}
             <tr>
               <td class='text-center text-middle'>{!echo zget($lang->order->types, $order->type)}</td>
-              <td class='text-middle' title='{!echo strip_tags($goodsInfo)}'>{!echo $goodsInfo}</td>
+              <td class='text-middle' title='{!strip_tags($goodsInfo)}'>{!echo $goodsInfo}</td>
               <td class='text-right text-middle'>{!echo $order->amount + $order->balance}</td>
               <td class='text-center text-middle'>
                 {!echo $control->order->processStatus($order)}

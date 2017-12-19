@@ -14,7 +14,7 @@
     <item>
       <title>{$article->title}</title>
       <description><![CDATA[  {$article->content}]]></description>
-      <link>{!echo str_replace('&', '&amp;', $siteLink . $control->createLink('blog', 'view', "id=$article->id", "category={{$category->alias}}&name=$article->alias", 'html'))}</link>
+      <link>{!str_replace('&', '&amp;', $siteLink . $control->createLink('blog', 'view', "id=$article->id", "category={{$category->alias}}&name=$article->alias", 'html'))}</link>
       <category>{$category->name}</category>
       <pubDate>{!echo $article->addedDate . ' +0800'}</pubDate>
     </item>

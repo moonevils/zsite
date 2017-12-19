@@ -16,5 +16,5 @@
 {if(!is_object($block->content))} {$blockContent = $block->content} {/if}
 {if(is_object($block->content))}  {$blockContent = isset($block->content->content) ? $block->content->content : ''} {/if}
 
-{!echo str_ireplace('#blockID', "#block{{$block->id}}", $blockContent)}
+{!str_ireplace('#blockID', "#block{{$block->id}}", $blockContent)}
 </div>

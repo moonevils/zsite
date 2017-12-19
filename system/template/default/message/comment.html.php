@@ -58,7 +58,7 @@
             <i class='icon-user text-muted'></i> <strong>{!echo $control->session->user->realname }</strong>
             {!html::hidden('from', $control->session->user->realname)}
             {if($control->session->user->email != '')}
-            <span class='text-muted'>&nbsp;({!echo str2Entity($control->session->user->email)})</span>
+            <span class='text-muted'>&nbsp;({!str2Entity($control->session->user->email)})</span>
             {!html::hidden('email', $control->session->user->email)}
             {/if}
           </span>

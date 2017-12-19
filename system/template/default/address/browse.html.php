@@ -28,7 +28,7 @@
               <div class='address-list'>
                 {if(helper::isAjaxRequest())} <span><input type='radio' {!echo $checked} name='deliveryAddress' value='{!echo $address->id}'/></span> {/if}
                 <strong>{!echo $address->contact}</strong>
-                <span> {!echo str2Entity($address->phone)}</span>
+                <span> {!str2Entity($address->phone)}</span>
                 <span class='text-muted'> {!echo $address->address}</span>
                 <span class='text-muted'> {!echo $address->zipcode}</span>
                 <span class='pull-right'>
