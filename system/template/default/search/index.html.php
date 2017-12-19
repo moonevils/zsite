@@ -15,7 +15,7 @@
           <div class='item'>
             <div class='item-heading'>
               <div class="text-muted pull-right">
-                <span title="{!echo $lang->object->addedDate}"><i class='icon-time'></i> {!echo substr($object->editedDate, 0, 10)}</span>
+                <span title="{!echo $lang->object->addedDate}"><i class='icon-time'></i> {!substr($object->editedDate, 0, 10)}</span>
               </div>
               <h4>{!html::a($object->url, $object->title)}</h4>
             </div>

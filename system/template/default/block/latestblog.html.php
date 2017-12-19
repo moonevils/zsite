@@ -80,7 +80,7 @@
                 {/if}
               {/if}
               {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
-              <span class='pull-right'>{!echo substr($article->addedDate, 0, 10)}</span>
+              <span class='pull-right'>{!substr($article->addedDate, 0, 10)}</span>
             </li>
           {else}
             <li>

@@ -110,7 +110,7 @@
         {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
         {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
         </span>
-        <span class='pull-right'>{!echo substr($article->addedDate, 0, 10)}</span>
+        <span class='pull-right'>{!substr($article->addedDate, 0, 10)}</span>
       </li>
       {else}
       <li class='notDataList'>

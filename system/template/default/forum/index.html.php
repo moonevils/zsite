@@ -29,12 +29,12 @@
             <span data-ve='thread' id='thread{!echo $thread->id}'>{!echo '[' . zget($boards, $thread->board, $thread->board). '] ' . html::a($control->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style)}</span>
           </td>
           <td class='hidden-xxs'><strong>{!echo $thread->authorRealname}</strong></td>
-          <td class='hidden-xs'>{!echo substr($thread->addedDate, 5, -3)}</td>
+          <td class='hidden-xs'>{!substr($thread->addedDate, 5, -3)}</td>
           <td class='hidden-xs'>{!echo $thread->views}</td>
           <td class='hidden-xxxs'>{!echo $thread->replies}</td>
           <td class='hidden-sm hidden-xs'>
           {if($thread->replies)}
-            {!echo substr($thread->repliedDate, 5, -3) . ' '}
+            {!substr($thread->repliedDate, 5, -3) . ' '}
             {!html::a($control->createLink('thread', 'locate', "threadID={{$thread->id}}&replyID={{$thread->replyID}}"), $thread->repliedByRealname)}
           {/if}
           </td>  
@@ -73,7 +73,7 @@
             <td class='w-70px hidden-xxs'>{!echo $childBoard->posts}</td>
             <td class='w-150px hidden-xs'>
               {if($childBoard->postedBy)}
-                  {!echo substr($childBoard->postedDate, 5, -3) . '<br/>'}
+                  {!substr($childBoard->postedDate, 5, -3) . '<br/>'}
                   {!html::a($control->createLink('thread', 'locate', "threadID={{$childBoard->postID}}&replyID={{$childBoard->replyID}}"), $childBoard->postedByRealname)}
               {/if}
             </td>

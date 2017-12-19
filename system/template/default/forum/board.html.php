@@ -34,12 +34,12 @@
           <div data-ve='thread' id='thread{!echo $thread->id}'>{!html::a($control->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style)} <span class='label label-danger'>{$lang->thread->stick}</span></div>
         </td>
         <td class='hidden-xxs'><strong>{!echo $thread->authorRealname}</strong></td>
-        <td class='hidden-xs'>{!echo substr($thread->addedDate, 5, -3)}</td>
+        <td class='hidden-xs'>{!substr($thread->addedDate, 5, -3)}</td>
         <td class='hidden-xs'>{!echo $thread->views}</td>
         <td class='hidden-xxxs'>{!echo $thread->replies}</td>
         <td class='hidden-sm hidden-xs'>
           {if($thread->replies)}
-            {!echo substr($thread->repliedDate, 5, -3) . ' '}
+            {!substr($thread->repliedDate, 5, -3) . ' '}
             {!html::a($control->createLink('thread', 'locate', "threadID={{$thread->id}}&replyID={{$thread->replyID}}"), $thread->repliedByRealname)}
           {/if}
         </td>  
@@ -54,12 +54,12 @@
         <td class='text-left'>
           <div data-ve='thread' id='thread{!echo $thread->id}'>{!html::a($control->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style)}</td></div>
         <td class='hidden-xxs'><strong>{!echo $thread->authorRealname}</strong></td>
-        <td class='hidden-xs'>{!echo substr($thread->addedDate, 5, -3)}</td>
+        <td class='hidden-xs'>{!substr($thread->addedDate, 5, -3)}</td>
         <td class='hidden-xs'>{!echo $thread->views}</td>
         <td class='hidden-xxxs'>{!echo $thread->replies}</td>
         <td class='hidden-sm hidden-xs'>
           {if($thread->replies)}
-              {!echo substr($thread->repliedDate, 5, -3) . ' '}
+              {!substr($thread->repliedDate, 5, -3) . ' '}
               {!html::a($control->createLink('thread', 'locate', "threadID={{$thread->id}}&replyID={{$thread->replyID}}"), $thread->repliedByRealname)}
           {/if}
         </td>  

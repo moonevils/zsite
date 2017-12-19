@@ -58,7 +58,7 @@
           {if(isset($content->time))}
           <li>
             {!html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}
-            <span class='pull-right'>{!echo substr($page->addedDate, 0, 10)}</span>
+            <span class='pull-right'>{!substr($page->addedDate, 0, 10)}</span>
           </li>
           {else}
             <li>{!html::a($url, $page->title, "title='{{$page->title}}' style='color:{{$page->titleColor}}'")}</li>
