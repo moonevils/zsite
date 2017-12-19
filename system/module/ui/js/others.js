@@ -35,6 +35,7 @@ $(document).ready(function()
     };
 
     var $css = $('#css');
+
     $('.color').each(function()
     {
         var $this = $(this);
@@ -45,6 +46,9 @@ $(document).ready(function()
         cc = cc.contrast().toCssStr();
 
         var $inputColor = ($this.hasClass('input-group') ? $this.find('.input-group-btn .dropdown-toggle') : $this).css({'background': c === 'transparent' ? '' : c, 'color': cc}).find('.caret').css('border-top-color', cc).closest('.input-group').find('.input-color');
+
+        if(!$this.hasClass('input-group') && $this.attr('data').toLowerCase() == $('.input-group.color').attr('data').toLowerCase()) $this.addClass('active');
+
         if(!$inputColor.attr('placeholder'))
         {
             $inputColor.attr('placeholder', c);
