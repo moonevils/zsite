@@ -511,7 +511,7 @@ class article extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $articles = $this->dao->select('t1.*,t2.id as bookID')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_BOOK)->alias('t2')->on('t1.id = t2.id')
+            ->leftJoin(TABLE_BOOK)->alias('t2')->on('t1.id = t2.articleID')
             ->where('t1.submission')->ne(0)
             ->andWhere('t1.addedBy')->eq($this->app->user->account)
             ->orderBy('id_desc')
