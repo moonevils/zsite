@@ -176,8 +176,10 @@ class RainTPL
             extract($this->var);
             include $this->tpl['compiledFile'];
             $contents = ob_get_clean();
+
             if($this->cache) file_put_contents($this->tpl['cacheFile'], "<?php if(!class_exists('raintpl')){exit;}" . self::PHP_END . $contents);
             unset($this->tpl);
+
             if($returnString) return trim($contents);
             echo $contents;
         }
@@ -312,6 +314,7 @@ class RainTPL
         $compileSetting = $this->prepareCompile($tplName);
         if(!$compileSetting) return true;
         extract($compileSetting);
+
         /* Read template file. */
         $this->tpl['source'] = $templateCode = file_get_contents($tplFile);
 
@@ -375,6 +378,7 @@ class RainTPL
         $tagPatterns['template_info'] = '(\{\$template_info\})';
         $tagPatterns['function']      = '(\{!(\w*?)(?:.*?)\})';
         $tagPatterns['call']          = '(\{@(\w*?)(?:.*?)\})';
+
         return $tagPatterns;
     }
 
@@ -398,8 +402,6 @@ class RainTPL
         $templateCode = str_replace("{{", "SOT_MARK", $templateCode);
         $templateCode = str_replace("}}", "EOT_MARK", $templateCode);
 
-        /* Path replace (src of img, background and href of link) . */
-        //$templateCode = $this->pathReplace($templateCode, $tplBasedir);
         $templateCode = preg_split($tagRegexp, $templateCode, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         $compiledCode = $this->compileCode($templateCode);
 
@@ -422,7 +424,7 @@ class RainTPL
 
         /* Variables initialization. */
         $compiledCode = $openIf = $commentIsOpen = $ignoreIsOpen = null;
-        $loop_level   = 0;
+        $loopLevel   = 0;
 
         /* Ead all parsed code. */
         foreach($parsedCode as $html)
@@ -476,10 +478,10 @@ class RainTPL
             {
                 //close loop tag
                 //iterator
-                $counter = "\$counter$loop_level";
+                $counter = "\$counter$loopLevel";
 
                 //decrease the loop counter
-                $loop_level--;
+                $loopLevel--;
 
                 //close loop code
                 $compiledCode .=  self::wrapPHP('}');
@@ -504,10 +506,10 @@ class RainTPL
                 $condition = $code[1];
 
                 // check if there's any function disabled by blackList
-                $this->function_check($tag);
+                $this->checkFunction($tag);
 
                 //variable substitution into condition (no delimiter into the condition)
-                $parsedCondition = $this->var_replace($condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level);
+                $parsedCondition = $this->replaceVar($condition, $tagLeft = null, $tagRight = null, $phpLeft = null, $phpRight = null, $loopLevel);
 
                 //if code
                 $compiledCode .=  self::wrapPHP("if($parsedCondition){");
@@ -525,10 +527,10 @@ class RainTPL
                 $condition = $code[1];
 
                 // check if there's any function disabled by blackList
-                $this->function_check($tag);
+                $this->checkFunction($tag);
 
                 //variable substitution into condition (no delimiter into the condition)
-                $parsedCondition = $this->var_replace($condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level);
+                $parsedCondition = $this->replaceVar($condition, $tagLeft = null, $tagRight = null, $phpLeft = null, $phpRight = null, $loopLevel);
 
                 //if code
                 $compiledCode .= self::wrapPHP("if($parsedCondition){");
@@ -543,7 +545,7 @@ class RainTPL
                 $condition = $code[1];
 
                 //variable substitution into condition (no delimiter into the condition)
-                $parsedCondition = $this->var_replace($condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level);
+                $parsedCondition = $this->replaceVar($condition, $tagLeft = null, $tagRight = null, $phpLeft = null, $phpRight = null, $loopLevel);
 
                 //elseif code
                 $compiledCode .= self::wrapPHP("}elseif($parsedCondition){");
@@ -554,7 +556,7 @@ class RainTPL
                 $condition = $code[1]; //condition attribute
 
                 /* Variable substitution into condition (no delimiter into the condition) */
-                $parsedCondition = $this->var_replace($condition, $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level);
+                $parsedCondition = $this->replaceVar($condition, $tagLeft = null, $tagRight = null, $phpLeft = null, $phpRight = null, $loopLevel);
 
                 //elseif code
                 $compiledCode .= self::wrapPHP("}elseif($parsedCondition){");
@@ -581,7 +583,7 @@ class RainTPL
                 $tag      = $code[0];
                 $function = $code[1];
 
-                $this->function_check($tag);
+                $this->checkFunction($tag);
 
                 if(empty($code[2]))
                 {
@@ -589,7 +591,7 @@ class RainTPL
                 }
                 else
                 {
-                    $parsed_function = $function . $this->var_replace($code[2], $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level);
+                    $parsed_function = $function . $this->replaceVar($code[2], $tagLeft = null, $tagRight = null, $phpLeft = null, $phpRight = null, $loopLevel);
                 }
 
                 /* Add echo if neccesory. */
@@ -605,7 +607,7 @@ class RainTPL
                 $tag      = $code[0];
                 $function = $code[1];
 
-                $this->function_check($tag);
+                $this->checkFunction($tag);
 
                 if(empty($code[2]))
                 {
@@ -613,7 +615,7 @@ class RainTPL
                 }
                 else
                 {
-                    $parsed_function = $function . $this->var_replace($code[2], $tag_left_delimiter = null, $tag_right_delimiter = null, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level);
+                    $parsed_function = $function . $this->replaceVar($code[2], $tagLeft = null, $tagRight = null, $phpLeft = null, $phpRight = null, $loopLevel);
                 }
 
                 $compiledCode .= self::wrapPHP("$parsed_function;");
@@ -627,15 +629,16 @@ class RainTPL
             else
             {
                 //variables substitution (es. {$title})
-                $html = $this->var_replace($html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $php_right_delimiter = ';' . self::PHP_END, $loop_level, $echo = true);
+                $html = $this->replaceVar($html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $phpRight = ';' . self::PHP_END, $loopLevel, $echo = true);
                 //const substitution (es. {#CONST#})
-                $html = $this->const_replace($html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $php_right_delimiter = ';' . self::PHP_END, $loop_level, $echo = true);
+                $html = $this->replaceConst($html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $phpRight = ';' . self::PHP_END, $loopLevel, $echo = true);
                 //functions substitution (es. {"string"|functions})
-                $compiledCode .= $this->func_replace($html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $php_right_delimiter = ';' . self::PHP_END, $loop_level, $echo = true);
+                $compiledCode .= $this->replaceFunc($html, $left_delimiter = '\{', $right_delimiter = '\}', self::PHP_START . ' ', $phpRight = ';' . self::PHP_END, $loopLevel, $echo = true);
             }
         }
 
-        if($openIf > 0) {
+        if($openIf > 0)
+        {
             $message = 'Error! You need to close an {if} tag in ' . $this->tpl['tplFile'] . ' template';
             $this->app->triggerError($message, __FILE__, __LINE__, true);
         }
@@ -681,7 +684,7 @@ class RainTPL
         if(preg_match("/http/", $code[1])) return file_get_contents($code[1]);
 
         /* Variables substitution. */
-        $include_var = $this->var_replace($code[2], $left_delimiter = null, $right_delimiter = null, $php_left_delimiter = '".' , $php_right_delimiter = '."');
+        $include_var = $this->replaceVar($code[2], $left_delimiter = null, $right_delimiter = null, $phpLeft = '".' , $phpRight = '."');
         $include_var = $code[2];
 
         /* Get the included template. */
@@ -805,7 +808,6 @@ class RainTPL
         return self::PHP_START . " echo '<?xml " . stripslashes($capture[1]) . self::PHP_END . self::PHP_END;
     } 
 
-
     /**
      * Reduce a path, eg. www/library/../filepath//file => www/filepath/file
      * @param type $path
@@ -818,13 +820,12 @@ class RainTPL
         $path = preg_replace("#(/\./+)#", "/", $path);
         $path = str_replace("@not_replace@", "://", $path);
 
-        while(preg_match('#\.\./#', $path)){
+        while(preg_match('#\.\./#', $path))
+        {
             $path = preg_replace('#\w+/\.\./#', '', $path);
         }
         return $path;
     }
-
-
 
     /**
      * Replace URL according to the following rules:
@@ -839,30 +840,36 @@ class RainTPL
      * @param string $path Path to prepend to relative URLs.
      * @return string rewritten url
      */
-    protected function rewrite_url($url, $tag, $path) {
+    protected function rewrite_url($url, $tag, $path)
+    {
         // If we don't have to rewrite for this tag, do nothing.
-        if(!in_array($tag, self::$pathReplaceList)) {
+        if(!in_array($tag, self::$pathReplaceList))
+        {
             return $url;
         }
 
         // Make protocol list. It is a little bit different for <a>.
         $protocol = 'http|https|ftp|file|apt|magnet';
-        if ($tag == 'a') {
+        if ($tag == 'a')
+        {
             $protocol .= '|mailto|javascript';
         }
 
         // Regex for URLs that should not change (except the leading #)
         $no_change = "/(^($protocol)\:)|(#$)/i";
-        if (preg_match($no_change, $url)) {
+        if (preg_match($no_change, $url))
+        {
             return rtrim($url, '#');
         }
 
         // Regex for URLs that need only base url (and not template dir)
         $base_only = '/^\//';
-        if ($tag == 'a' or $tag == 'form') {
+        if ($tag == 'a' or $tag == 'form')
+        {
             $base_only = '//';
         }
-        if (preg_match($base_only, $url)) {
+        if (preg_match($base_only, $url))
+        {
             return rtrim(self::$baseUrl, '/') . '/' . ltrim($url, '/');
         }
 
@@ -878,7 +885,8 @@ class RainTPL
      * @param array $matches
      * @return replacement string
      */
-    protected function single_pathReplace ($matches){
+    protected function single_pathReplace ($matches)
+    {
         $tag  = $matches[1];
         $_    = $matches[2];
         $attr = $matches[3];
@@ -889,11 +897,13 @@ class RainTPL
     }
 
     /**
-     * replace the path of image src, link href and a href.
+     * replace the path of image src, link href and a href. 
      * @see rewrite_url for more information about how paths are replaced.
      *
-     * @param string $html
-     * @return string html sostituito
+     * @param  string   $html 
+     * @param  string   $tplBasedir 
+     * @access protected
+     * @return string
      */
     protected function pathReplace($html, $tplBasedir)
     {
@@ -905,7 +915,8 @@ class RainTPL
             // Prepare reduced path not to compute it for each link
             $this->path = $this->reduce_path($tplDir);
 
-            $url = '(?:(?:\\{.*?\\})?[^{}]*?)*?'; // allow " inside {} for cases in which url contains {function="foo()"}
+            /* Allow " inside {} for cases in which url contains {function="foo()"} */
+            $url = '(?:(?:\\{.*?\\})?[^{}]*?)*?'; 
 
             $exp = array();
 
@@ -920,26 +931,45 @@ class RainTPL
             return preg_replace_callback($exp, 'self::single_pathReplace', $html);
         }
         return $html;
-
     }
 
-
-
-    // replace const
-    function const_replace($html, $tag_left_delimiter, $tag_right_delimiter, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level = null, $echo = null){
-        // const
-        return preg_replace('/\{\#(\w+)\#{0,1}\}/', $php_left_delimiter . ($echo ? " echo " : null) . '\\1' . $php_right_delimiter, $html);
+    /**
+     * replace const
+     * 
+     * @param  string    $html 
+     * @param  string    $tagLeft 
+     * @param  string    $tagRight 
+     * @param  string    $phpLeft 
+     * @param  string    $phpRight 
+     * @param  string    $loopLevel 
+     * @param  string    $echo 
+     * @access public
+     * @return string    $html
+     */
+    function replaceConst($html, $tagLeft, $tagRight, $phpLeft = null, $phpRight = null, $loopLevel = null, $echo = null)
+    {
+        return preg_replace('/\{\#(\w+)\#{0,1}\}/', $phpLeft . ($echo ? " echo " : null) . '\\1' . $phpRight, $html);
     }
 
-
-
-    // replace functions/modifiers on constants and strings
-    function func_replace($html, $tag_left_delimiter, $tag_right_delimiter, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level = null, $echo = null)
+    /**
+     * Replace functions/modifiers on constants and strings
+     * 
+     * @param  string    $html 
+     * @param  string    $tagLeft 
+     * @param  string    $tagRight 
+     * @param  string    $phpLeft 
+     * @param  string    $phpRight 
+     * @param  string    $loopLevel 
+     * @param  string    $echo 
+     * @access public
+     * @return html
+     */
+    function replaceFunc($html, $tagLeft, $tagRight, $phpLeft = null, $phpRight = null, $loopLevel = null, $echo = null)
     {
         preg_match_all('/' . '\{\#{0,1}(\"{0,1}.*?\"{0,1})(\|\w.*?)\#{0,1}\}' . '/', $html, $matches);
 
-        for($i=0, $n=count($matches[0]); $i<$n; $i++){
-
+        for($i=0, $n=count($matches[0]); $i<$n; $i++)
+        {
             //complete tag ex: {$news.title|substr:0,100}
             $tag = $matches[ 0 ][ $i ];
 
@@ -950,9 +980,9 @@ class RainTPL
             $extraVar = $matches[ 2 ][ $i ];
 
             // check if there's any function disabled by blackList
-            $this->function_check($tag);
+            $this->checkFunction($tag);
 
-            $extraVar = $this->var_replace($extraVar, null, null, null, null, $loop_level);
+            $extraVar = $this->replaceVar($extraVar, null, null, null, null, $loopLevel);
 
 
             // check if there's an operator = in the variable tags, if there's this is an initialization so it will not output any value
@@ -984,74 +1014,75 @@ class RainTPL
             $variablePath = preg_replace('/\.(\w+)/', '["\\1"]', $variablePath);
 
             //if there's a function
-            if($function_var){
-
+            if($function_var)
+            {
                 // check if there's a function or a static method and separate, function by parameters
                 $function_var = str_replace("::", "@double_dot@", $function_var);
 
                 // get the position of the first :
-                if($dot_position = strpos($function_var, ":")){
-
+                if($dot_position = strpos($function_var, ":"))
+                {
                     // get the function and the parameters
                     $function = substr($function_var, 0, $dot_position);
                     $params = substr($function_var, $dot_position+1);
-
                 }
-                else{
-
+                else
+                {
                     //get the function
                     $function = str_replace("@double_dot@", "::", $function_var);
                     $params = null;
-
                 }
 
                 // replace back the @double_dot@ with ::
                 $function = str_replace("@double_dot@", "::", $function);
                 $params = str_replace("@double_dot@", "::", $params);
-
             }
             else
             {
                 $function = $params = null;
             }
-            $php_var = $varName . $variablePath;
+            $phpVariable = $varName . $variablePath;
 
             // compile the variable for php
-            if(isset($function)){
-                if($php_var)
-                    $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($php_var, $params))" : "$function($php_var)") . $php_right_delimiter;
+            if(isset($function))
+            {
+                if($phpVariable)
+                {
+                    $phpVariable = $phpLeft . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($phpVariable, $params))" : "$function($phpVariable)") . $phpRight;
+                }
                 else
-                    $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($params))" : "$function()") . $php_right_delimiter;
+                {
+                    $phpVariable = $phpLeft . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($params))" : "$function()") . $phpRight;
+                }
             }
             else
-                $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . $php_var . $extraVar . $php_right_delimiter;
+            {
+                $phpVariable = $phpLeft . (!$is_init_variable && $echo ? 'echo ' : null) . $phpVariable . $extraVar . $phpRight;
+            }
 
-            $html = str_replace($tag, $php_var, $html);
-
+            $html = str_replace($tag, $phpVariable, $html);
         }
-
         return $html;
     }
 
     /**
-     * var_replace 
+     * replaceVar 
      * 
-     * @param  int    $html 
-     * @param  int    $tag_left_delimiter 
-     * @param  int    $tag_right_delimiter 
-     * @param  int    $php_left_delimiter 
-     * @param  int    $php_right_delimiter 
-     * @param  int    $loop_level 
-     * @param  int    $echo 
+     * @param  string    $html 
+     * @param  string    $tagLeft 
+     * @param  string    $tagRight 
+     * @param  string    $phpLeft 
+     * @param  string    $phpRight 
+     * @param  string    $loopLevel 
+     * @param  string    $echo 
      * @access public
-     * @return void
+     * @return string
      */
-    function var_replace($html, $tag_left_delimiter, $tag_right_delimiter, $php_left_delimiter = null, $php_right_delimiter = null, $loop_level = null, $echo = null)
+    function replaceVar($html, $tagLeft, $tagRight, $phpLeft = null, $phpRight = null, $loopLevel = null, $echo = null)
     {
         //all variables
-        if(preg_match_all('/' . $tag_left_delimiter . '\$(\w+(?:\.\${0,1}[A-Za-z0-9_]+)*(?:(?:\[\${0,1}[A-Za-z0-9_]+\])|(?:\-\>\${0,1}[A-Za-z0-9_]+))*)(.*?)' . $tag_right_delimiter . '/', $html, $matches))
+        if(preg_match_all('/' . $tagLeft . '\$(\w+(?:\.\${0,1}[A-Za-z0-9_]+)*(?:(?:\[\${0,1}[A-Za-z0-9_]+\])|(?:\-\>\${0,1}[A-Za-z0-9_]+))*)(.*?)' . $tagRight . '/', $html, $matches))
         {
-
             for($parsed=array(), $i=0, $n=count($matches[0]); $i<$n; $i++)
             {
                 $parsed[$matches[0][$i]] = array('var'=>$matches[1][$i],'extraVar'=>$matches[2][$i]);
@@ -1066,9 +1097,9 @@ class RainTPL
                 $extraVar = $array['extraVar'];
 
                 // check if there's any function disabled by blackList
-                $this->function_check($tag);
+                $this->checkFunction($tag);
 
-                $extraVar = $this->var_replace($extraVar, null, null, null, null, $loop_level);
+                $extraVar = $this->replaceVar($extraVar, null, null, null, null, $loopLevel);
 
                 // check if there's an operator = in the variable tags, if there's this is an initialization so it will not output any value
                 $is_init_variable = preg_match("/^[a-z_A-Z\.\[\](\-\>)]*(\s)*(=){1}[^=]*.*$/", $extraVar);
@@ -1107,22 +1138,21 @@ class RainTPL
                 }
 
                 //if there's a function
-                if($function_var){
-
+                if($function_var)
+                {
                     // check if there's a function or a static method and separate, function by parameters
                     $function_var = str_replace("::", "@double_dot@", $function_var);
 
-
                     // get the position of the first :
-                    if($dot_position = strpos($function_var, ":")){
-
+                    if($dot_position = strpos($function_var, ":"))
+                    {
                         // get the function and the parameters
                         $function = substr($function_var, 0, $dot_position);
                         $params = substr($function_var, $dot_position+1);
 
                     }
-                    else{
-
+                    else
+                    {
                         //get the function
                         $function = str_replace("@double_dot@", "::", $function_var);
                         $params = null;
@@ -1134,36 +1164,51 @@ class RainTPL
                     $params = str_replace("@double_dot@", "::", $params);
                 }
                 else
+                {
                     $function = $params = null;
+                }
 
                 //if it is inside a loop
-                if($loop_level){
+                if($loopLevel)
+                {
                     //verify the variable name
                     if($varName == 'key')
-                        $php_var = '$key' . $loop_level;
+                    {
+                        $phpVariable = '$key' . $loopLevel;
+                    }
                     elseif($varName == 'value')
-                        $php_var = '$value' . $loop_level . $variablePath;
+                    {
+                        $phpVariable = '$value' . $loopLevel . $variablePath;
+                    }
                     elseif($varName == 'counter')
-                        $php_var = '$counter' . $loop_level;
+                    {
+                        $phpVariable = '$counter' . $loopLevel;
+                    }
                     else
-                        $php_var = '$' . $varName . $variablePath;
-                }else
-                    $php_var = '$' . $varName . $variablePath;
-
+                    {
+                        $phpVariable = '$' . $varName . $variablePath;
+                    }
+                }
+                else
+                {
+                    $phpVariable = '$' . $varName . $variablePath;
+                }
                 // compile the variable for php
                 if(isset($function))
-                    $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($php_var, $params))" : "$function($php_var)") . $php_right_delimiter;
+                {
+                    $phpVariable = $phpLeft . (!$is_init_variable && $echo ? 'echo ' : null) . ($params ? "($function($phpVariable, $params))" : "$function($phpVariable)") . $phpRight;
+                }
                 else
-                    $php_var = $php_left_delimiter . (!$is_init_variable && $echo ? 'echo ' : null) . $php_var . $extraVar . $php_right_delimiter;
+                {
+                    $phpVariable = $phpLeft . (!$is_init_variable && $echo ? 'echo ' : null) . $phpVariable . $extraVar . $phpRight;
+                }
 
-                $html = str_replace($tag, $php_var, $html);
+                $html = str_replace($tag, $phpVariable, $html);
             }
         }
 
         return $html;
     }
-
-
 
     /**
      * Check if function is in black list (sandbox)
@@ -1171,8 +1216,8 @@ class RainTPL
      * @param string $code
      * @param string $tag
      */
-    protected function function_check($code){
-
+    protected function checkFunction($code)
+    {
         $preg = '#(\W|\s)' . implode('(\W|\s)|(\W|\s)', self::$blackList) . '(\W|\s)#';
 
         // check if the function is in the black list (or not in white list)
@@ -1181,7 +1226,7 @@ class RainTPL
             // find the line of the error
             $line = 0;
             $rows=explode("\n",$this->tpl['source']);
-            while(!strpos($rows[$line],$code)) $line++;
+            while(!strpos($rows[$line], $code)) $line++;
 
             // stop the execution of the script
             $message = 'Unallowed syntax in ' . $this->tpl['tplFile'] . ' template';
