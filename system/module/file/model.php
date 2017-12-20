@@ -1372,7 +1372,21 @@ class fileModel extends model
     public function scanImages()
     {
         $files = glob($this->app->getDataRoot() . "upload/*/f_*");
+        
+        $logos = $this->dao->select('pathname')
+            ->from(TABLE_FILE)
+            ->where('objectType')->eq('logo')
+            ->fetchAll();
+
         $images = array();
+        foreach($files as $key => $file)
+        {
+            foreach($logos as $logo)
+            {
+                if(strpos($file, substr($logo->pathname, 0, strpos($logo->pathname, '.'))) !== false) unset($files[$key]);
+            } 
+        }
+        
         foreach($files as $key => $file)
         {
             $size = getimagesize($file);
@@ -1381,7 +1395,6 @@ class fileModel extends model
             if(strpos($size['mime'], 'ico') !== false) continue;
             $images[] = $file;
         }
-
         return $images;
     }
 
