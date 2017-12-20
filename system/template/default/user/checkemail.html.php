@@ -1,6 +1,6 @@
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 <div class='panel panel-body'>
-  <div class='panel panel-pure' id='checkEmail'>
+  <div class='panel' id='checkEmail'>
     <div class='panel-heading'><strong>{!echo $lang->user->checkEmail}</strong></div>
     <div class='panel-body'>
       <form method='post' action='{!inlink('checkEmail')}' id='ajaxForm'>
