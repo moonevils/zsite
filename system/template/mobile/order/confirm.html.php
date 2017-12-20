@@ -135,11 +135,7 @@ $(function()
 
     $.refreshAddressList = function()
         {
-{/noparse}
-
-        $('#addressListWrapper').load('{!helper::createLink('address', 'browse')} #addressList', function()
-{noparse}
-        {
+            $('#addressListWrapper').load('{/noparse}{!helper::createLink('address', 'browse')}{noparse}#addressList', function(){
             if($('#addressList').find('.card').size() == 0)
             {
                 $('#createAddress').val(1);
@@ -158,10 +154,8 @@ $(function()
     var $confirmOrderForm = $('#confirmOrderForm');
     $confirmOrderForm.ajaxform({onResultSuccess: function(response)
     {
-            {/noparse}
-        $.messager.success('{$lang->order->createdSuccess}');
-        window.location.href = response.locate ? response.locate : '{!helper::createLink('order', 'browse')}';
-{noparse}
+        $.messager.success('{/noparse}{$lang->order->createdSuccess}{noparse}');
+        window.location.href = response.locate ? response.locate : '{/noparse}{!helper::createLink('order', 'browse')}{noparse}';
     }
     });
 });

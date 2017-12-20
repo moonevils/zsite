@@ -10,18 +10,18 @@
  * @link        http://www.chanzhi.org
 */
 *}
-{if($app->getModuleName() != 'links' and !empty($lang->links->index))}
-<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
+{if($app->getModuleName() != 'links' and !empty($config->links->index))}
+<div id="block{$block->id}" class='panel panel-block {$blockClass}'>
   <div class='panel-heading'>
-    <strong><i class='icon'>{!echo $icon}</i>{!echo $block->title}</strong>
+    <strong><i class='icon'>{$icon}</i>{$block->title}</strong>
     <div class='pull-right'>
-      {if(trim(strip_tags($lang->links->all, '<a>')))}
-      {!echo html::a(helper::createLink('links', 'index'), $lang->more)}
+      {if(trim(strip_tags($config->links->all, '<a>')))}
+        {!html::a(helper::createLink('links', 'index'), $lang->more)}
       {/if}
     </div>
   </div>
   <div class='panel-body'>
-    <div id='links{!echo $block->id}' data-ve='links'>{!echo $lang->links->index}</div>
+    <div id='links{$block->id}' data-ve='links'>{$config->links->index}</div>
   </div>
 </div>
 {/if}

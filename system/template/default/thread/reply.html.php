@@ -4,7 +4,7 @@
   <div class='panel-heading'>
     <div class='panel-actions'>
       <strong>{if($floor > 2)}{!echo '#' . $floor} {/if}</strong>
-      {!echo html::a('', '', "name=$floor")}
+      {!html::a('', '', "name=$floor")}
       {if($floor == 1)}
         <strong class='text-danger'>{!echo $lang->reply->sofa}</strong>
       {elseif($floor == 2)}
@@ -50,10 +50,10 @@
     <span class="thread-more-actions">
       {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
         {$account = helper::safe64Encode($reply->author)}
-        {!echo html::a(inlink('addScore', "account={{$account}}&objectType=reply&objectID={{$reply->id}}"), $lang->thread->score, "data-toggle=modal")}
+        {!html::a(inlink('addScore', "account={{$account}}&objectType=reply&objectID={{$reply->id}}"), $lang->thread->score, "data-toggle=modal")}
       {/if}
-      {if($control->thread->canManage($board->id))} {!echo html::a($control->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'")} {/if}
-      {if($control->thread->canManage($board->id, $reply->author))} {!echo html::a($control->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit)} {/if}
+      {if($control->thread->canManage($board->id))} {!html::a($control->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'")} {/if}
+      {if($control->thread->canManage($board->id, $reply->author))} {!html::a($control->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit)} {/if}
     </span>
     <a href="#reply" data-reply='{!echo $reply->id}' class="thread-reply-btn"><i class="icon-reply"></i> {!echo $lang->reply->common}</a>
     <a href="#reply" data-reply='{!echo $reply->id}' class="thread-reply-btn quote"><i class="icon-quote-left"></i> {!echo $lang->thread->quote}</a>
@@ -75,7 +75,7 @@
   <div class='panel-body'>
     <form method='post' enctype='multipart/form-data' id='replyForm' action='{!echo $control->createLink('reply', 'post', "thread=$thread->id")}'>
       <div class='form-group' id='reply'>
-        {!echo html::textarea('content', '', "rows='6' class='form-control'")}
+        {!html::textarea('content', '', "rows='6' class='form-control'")}
       </div>
       <div class='row'>
         <div class='col-md-8 col-sm-12'>
@@ -88,8 +88,8 @@
         </div>
       </div>
       
-      <div class='form-group'>{!echo html::submitButton()}</div>
-      {!echo html::hidden('reply', 0)}
+      <div class='form-group'>{!html::submitButton()}</div>
+      {!html::hidden('reply', 0)}
     </form>
   </div>
 </div>

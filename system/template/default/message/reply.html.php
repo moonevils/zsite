@@ -1,24 +1,24 @@
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
 {$from  = $control->session->user->account == 'guest' ? '' : $control->session->user->realname}
 {$email = $control->session->user->account == 'guest' ? '' : $control->session->user->email} 
-<form id='replyForm' method='post' action="{!echo inlink('reply', "messageID={{$message->id}}")}">
+<form id='replyForm' method='post' action="{!inlink('reply', "messageID={{$message->id}}")}">
   <table class='table table-form'>
     <tr>
       <th class='w-60px'>{!echo $lang->message->from}</th>
       <td>
         <div class='required required-wrapper'></div>
-        {!echo html::input('from', $from, "class='form-control'")}
+        {!html::input('from', $from, "class='form-control'")}
       </td>
     </tr>
     <tr>
       <th>{!echo $lang->message->email}</th>
-      <td>{!echo html::input('email', $email, "class='form-control'")}</td>
+      <td>{!html::input('email', $email, "class='form-control'")}</td>
     </tr>
     <tr>
       <th>{!echo $lang->message->content}</th>
       <td>
         <div class='required required-wrapper'></div>
-        {!echo html::textarea('content', '', "class='form-control' rows='5'")}
+        {!html::textarea('content', '', "class='form-control' rows='5'")}
       </td>
     </tr>
     {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
@@ -26,7 +26,7 @@
     {else}
     <tr id='captchaBox' class='hiding'></tr>
    {/if}
-    <tr><td></td><td>{!echo html::submitButton($lang->message->submit)}</td></tr>
+    <tr><td></td><td>{!html::submitButton($lang->message->submit)}</td></tr>
   </table>
 </form>
 {if($config->debug)} {!js::import($jsRoot . 'jquery/form/min.js')} {/if}

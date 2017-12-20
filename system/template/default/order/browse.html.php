@@ -26,14 +26,14 @@
             {foreach($orders as $order)}
             {$goodsInfo = $control->order->printGoods($order)}
             <tr>
-              <td class='text-center text-middle'>{!echo zget($lang->order->types, $order->type)}</td>
-              <td class='text-middle' title='{!echo strip_tags($goodsInfo)}'>{!echo $goodsInfo}</td>
+              <td class='text-center text-middle'>{!zget($lang->order->types, $order->type)}</td>
+              <td class='text-middle' title='{!strip_tags($goodsInfo)}'>{!echo $goodsInfo}</td>
               <td class='text-right text-middle'>{!echo $order->amount + $order->balance}</td>
               <td class='text-center text-middle'>
                 {!echo $control->order->processStatus($order)}
               </td>
               <td class='text-center text-middle'>
-                {!echo zget($lang->order->payStatusList, $order->payStatus, '')}
+                {!zget($lang->order->payStatusList, $order->payStatus, '')}
               </td>
               <td class='text-left' title='{$order->note}'>{$order->note}</td>
               <td class='text-center'>{!echo ($order->last == '0000-00-00 00:00:00') ? '' : formatTime($order->last, 'm-d H:i')}</td>

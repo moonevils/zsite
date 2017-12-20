@@ -48,15 +48,9 @@
   {/if}
   <div class='panel-footer'>
     <div class='article-moreinfo hide clearfix'>
-      {if($article->editor)}
-        {$editor = $control->loadModel('user')->getByAccount($article->editor)}
-      {/if}
-      {if(!empty($editor))}
-        <p class='text-right pull-right'>{!printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate))}</p>
-      {/if}
-      {if($article->keywords)}
-        <p class='small'><strong class="text-muted">{$lang->article->keywords}</strong><span class="article-keywords">{!echo $lang->colon . $article->keywords}</span></p>
-      {/if}
+      {if($article->editor)} {$editor = $control->loadModel('user')->getByAccount($article->editor)} {/if}
+      {if(!empty($editor))} <p class='text-right pull-right'>{!printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate))}</p> {/if}
+      {if($article->keywords)} <p class='small'><strong class="text-muted">{$lang->article->keywords}</strong><span class="article-keywords">{!echo $lang->colon . $article->keywords}</span></p> {/if}
     </div>
     {@extract($prevAndNext)}
     <ul class='pager pager-justify'>

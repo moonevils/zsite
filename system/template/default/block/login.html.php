@@ -22,13 +22,13 @@
     <div style='max-width:500px;margin:0px auto'>
       <form method='post' id='ajaxForm' role='form' data-checkfingerprint='1' style='max-width:500px;margin'>
         <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
-        <div class='form-group'>{!echo html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control'")}</div>
-        <div class='form-group'>{!echo html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
-        {!echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-block')} 
+        <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control'")}</div>
+        <div class='form-group'>{!html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
+        {!html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-block')} 
       </form>
       <div style='margin:5px 0px;'>
-        {if($lang->mail->turnon and $lang->site->resetPassword == 'open')} {!echo html::a(helper::createLink('user', 'resetpassword'), $lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'")} {/if}
-        {!echo html::a(helper::createLink('user', 'register'), $lang->user->register->instant, "id='register' style='float:right;right:5px;margin-bottom:8px;'")}
+        {if($lang->mail->turnon and $lang->site->resetPassword == 'open')} {!html::a(helper::createLink('user', 'resetpassword'), $lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'")} {/if}
+        {!html::a(helper::createLink('user', 'register'), $lang->user->register->instant, "id='register' style='float:right;right:5px;margin-bottom:8px;'")}
       </div>
       {include TPL_ROOT . 'user/oauthlogin.html.php'}
     </div>

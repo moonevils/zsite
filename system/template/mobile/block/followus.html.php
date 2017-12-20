@@ -13,28 +13,28 @@
 {$block->content = json_decode($block->content)}
 {$publicList = $model->loadModel('wechat')->getList()}
 {if(!empty($publicList))}
-<div id="block{!echo $block->id}" class='panel panel-block hidden-sm hidden-xs {!echo $blockClass}'>
-  <div class='panel-heading'>
-    <strong>{!echo $icon . $block->title}</strong>
-    {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
-    {/if}
-  </div>
-  <div class='cards borderless with-icon'>
-    {foreach($publicList as $public)}
-    <div class='card'>
-      <i class='icon icon-s3 icon-wechat bg-success circle'></i>
-      <div class='card-content'>
-        {if($public->qrcode)}
-        <div class='pull-right'>
-          <a href='###' class='bg-primary-pale text-primary block' data-toggle='modal' data-type='custom' data-custom="<div class='text-center'>{!html::image($public->qrcode)}</div>" data-icon='qrcode' data-title='{!echo $public->name}'><i class='icon icon-s3 icon-qrcode'></i></a>
-        </div>
-        {/if}
-        <small class="text-muted">{$lang->wechatTip}</small>
-        <div class="lead">{$public->name}</div>
-      </div>
+  <div id="block{$block->id}" class='panel panel-block hidden-sm hidden-xs {$blockClass}'>
+    <div class='panel-heading'>
+      <strong>{!echo $icon . $block->title}</strong>
+      {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
+        <div class='pull-right'>{!html::a($block->content->moreUrl, $block->content->moreText)}</div>
+      {/if}
     </div>
-    {/foreach}
+    <div class='cards borderless with-icon'>
+      {foreach($publicList as $public)}
+        <div class='card'>
+          <i class='icon icon-s3 icon-wechat bg-success circle'></i>
+          <div class='card-content'>
+            {if($public->qrcode)}
+              <div class='pull-right'>
+                <a href='###' class='bg-primary-pale text-primary block' data-toggle='modal' data-type='custom' data-custom="<div class='text-center'>{!html::image($public->qrcode)}</div>" data-icon='qrcode' data-title='{$public->name}'><i class='icon icon-s3 icon-qrcode'></i></a>
+              </div>
+            {/if}
+            <small class="text-muted">{$lang->wechatTip}</small>
+            <div class="lead">{$public->name}</div>
+          </div>
+        </div>
+      {/foreach}
+    </div>
   </div>
-</div>
 {/if}

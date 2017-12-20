@@ -1,3 +1,4 @@
+{noparse}
 <style>
 .files-list {display: block; padding: 5px; margin: 0; background-color: @color-gray-pale;}
 .files-list > li {position: relative; display: block; float: left; padding: 0; margin: 5px; position: relative;}
@@ -17,3 +18,4 @@
 .files-list > li.file > .file-md5 {display: none}
 .files-list > li.file > .file-download {top: 3px; right: 5px; position: absolute; font-size: 12px; opacity: .5}
 </style>
+{/noparse}

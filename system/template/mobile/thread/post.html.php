@@ -10,23 +10,23 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{@$isRequestModal = helper::isAjaxRequest()}
+{$isRequestModal = helper::isAjaxRequest()}
 {if($isRequestModal)}
-<div class='modal-dialog'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'}</h5>
-    </div>
-    <div class='modal-body'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
+        <h5 class='modal-title'><i class='icon-pencil'></i> {!echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'}</h5>
+      </div>
+      <div class='modal-body'>
 {else}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-<hr class='space'>
-<div class='panel-section'>
-  <div class='panel-heading'>
-    <strong><i class='icon-pencil'></i> {!echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'}</strong>
-  </div>
-  <div class='panel-body'>
+  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+  <hr class='space'>
+  <div class='panel-section'>
+    <div class='panel-heading'>
+      <strong><i class='icon-pencil'></i> {!echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'}</strong>
+    </div>
+    <div class='panel-body'>
 {/if}
 <form id='postThreadForm' method='post' action='{$control->createLink('thread', 'post', "boardID=$board->id")}'>
   <div class='form-group'>
@@ -55,13 +55,13 @@
   </div>
 </form>
 {if($isRequestModal)}
-</div>{* end of modal-body *}
-  </div>{* end of modal-content *}
-</div>{* end of modal-dialog *}
+  </div>{* end of modal-body *}
+    </div>{* end of modal-content *}
+  </div>{* end of modal-dialog *}
 {else}
-  </div>{* end of panel-body *}
-</div>{* end of panel-section *}
-{include TPL_ROOT . 'common/form.html.php'}
+    </div>{* end of panel-body *}
+  </div>{* end of panel-section *}
+  {include TPL_ROOT . 'common/form.html.php'}
 {/if}
 {noparse}
 <script>

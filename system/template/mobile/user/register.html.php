@@ -33,15 +33,15 @@
       {!html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'")}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='realname'>{!echo $lang->user->realname}</label>
+      <label class='control-label' for='realname'>{$lang->user->realname}</label>
       {!html::input('realname', '', "class='form-control'")}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='email'>{!echo $lang->user->email}</label>
+      <label class='control-label' for='email'>{$lang->user->email}</label>
       {!html::input('email', '', "class='form-control' autocomplete='off'") . ''}
     </div>
     <div class='form-group'>
-      <label class='control-label' for='password1'>{!echo $lang->user->password}</label>
+      <label class='control-label' for='password1'>{$lang->user->password}</label>
       {!html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'")}
     </div>
     <div class='form-group'>
@@ -57,11 +57,11 @@
       {!html::input('phone', '', "class='form-control'")}
     </div>
     {if(isset($control->config->site->agreement) and $control->config->site->agreement == 'open')}
-    <div class='form-group'>
-      <label class='control-label' for='agreement'></label>
-      <input type="checkbox" id="agreement" name="agreement" value="1">
-      <span>{$lang->user->register->agree}《 {!html::a(helper::createLink('user', 'agreement'), $control->config->site->agreementTitle ? $control->config->site->agreementTitle : $control->lang->user->register->agreement, "data-toggle='modal'")}》</span>
-    </div>
+      <div class='form-group'>
+        <label class='control-label' for='agreement'></label>
+        <input type="checkbox" id="agreement" name="agreement" value="1">
+        <span>{$lang->user->register->agree}《 {!html::a(helper::createLink('user', 'agreement'), $control->config->site->agreementTitle ? $control->config->site->agreementTitle : $control->lang->user->register->agreement, "data-toggle='modal'")}》</span>
+      </div>
     {/if}
     <div class='form-group'>{!html::submitButton($lang->register, 'btn primary block')}{!html::hidden('referer', $referer)}</div>
   </form>

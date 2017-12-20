@@ -3,9 +3,9 @@
 {$common->printPositionBar($control->app->getModuleName())}
 
 <ul class='nav nav-pills'>
-  <li {if($mode == 'board')}  {!echo "class='active'"} {/if}>{!echo html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board'])}</li>
-  <li {if($mode == 'latest')} {!echo "class='active'"} {/if}>{!echo html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest'])}</li>
-  <li {if($mode == 'stick')}  {!echo "class='active'"} {/if}>{!echo html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick'])}</li>
+  <li {if($mode == 'board')}  {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board'])}</li>
+  <li {if($mode == 'latest')} {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest'])}</li>
+  <li {if($mode == 'stick')}  {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick'])}</li>
 </ul>
 {if($mode == 'latest' or $mode == 'stick')}
   <div class='panel'>
@@ -29,13 +29,13 @@
             <span data-ve='thread' id='thread{!echo $thread->id}'>{!echo '[' . zget($boards, $thread->board, $thread->board). '] ' . html::a($control->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style)}</span>
           </td>
           <td class='hidden-xxs'><strong>{!echo $thread->authorRealname}</strong></td>
-          <td class='hidden-xs'>{!echo substr($thread->addedDate, 5, -3)}</td>
+          <td class='hidden-xs'>{!substr($thread->addedDate, 5, -3)}</td>
           <td class='hidden-xs'>{!echo $thread->views}</td>
           <td class='hidden-xxxs'>{!echo $thread->replies}</td>
           <td class='hidden-sm hidden-xs'>
           {if($thread->replies)}
-            {!echo substr($thread->repliedDate, 5, -3) . ' '}
-            {!echo html::a($control->createLink('thread', 'locate', "threadID={{$thread->id}}&replyID={{$thread->replyID}}"), $thread->repliedByRealname)}
+            {!substr($thread->repliedDate, 5, -3) . ' '}
+            {!html::a($control->createLink('thread', 'locate', "threadID={{$thread->id}}&replyID={{$thread->replyID}}"), $thread->repliedByRealname)}
           {/if}
           </td>  
         </tr>  
@@ -65,7 +65,7 @@
           <tr class='text-center text-middle'>
             <td class='text-left'>
               {!echo $control->forum->isNew($childBoard) ? "<i class='icon-comment icon-large text-success'> </i>" : "<i class='icon-comment icon-large text-muted'> </i>"}
-              {!echo html::a(inlink('board', "id=$childBoard->id", "category={{$childBoard->alias}}"), $childBoard->name)}<br />
+              {!html::a(inlink('board', "id=$childBoard->id", "category={{$childBoard->alias}}"), $childBoard->name)}<br />
               <small class='text-muted'>{!echo $childBoard->desc}</small>
             </td>
             <td class='w-120px hidden-xs'><strong><nobr>{foreach($childBoard->moderators as $moderators)} {!echo $moderators . ' '} {/foreach}</nobr></strong></td>
@@ -73,8 +73,8 @@
             <td class='w-70px hidden-xxs'>{!echo $childBoard->posts}</td>
             <td class='w-150px hidden-xs'>
               {if($childBoard->postedBy)}
-                  {!echo substr($childBoard->postedDate, 5, -3) . '<br/>'}
-                  {!echo html::a($control->createLink('thread', 'locate', "threadID={{$childBoard->postID}}&replyID={{$childBoard->replyID}}"), $childBoard->postedByRealname)}
+                  {!substr($childBoard->postedDate, 5, -3) . '<br/>'}
+                  {!html::a($control->createLink('thread', 'locate', "threadID={{$childBoard->postID}}&replyID={{$childBoard->replyID}}"), $childBoard->postedByRealname)}
               {/if}
             </td>
           </tr>

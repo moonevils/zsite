@@ -1,4 +1,4 @@
-#login .panel{ margin: 5% auto;}
+#login .panel{position:absolute; top:50%;left:50%; width:480px; height:240px;margin-left:-240px; margin-top:-120px;}
 #login .panel-heading{background-color: transparent; font-size:20px; }
 #ajaxForm{margin-bottom: -10px;}
 #login {padding:0px;}

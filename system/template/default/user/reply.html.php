@@ -15,8 +15,8 @@
           <tbody>
             {foreach($replies as $reply)}
             <tr>
-              <td>{!echo html::a($control->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id", $reply->title . " <i>(#$reply->id)</i>", "target='_blank'")}</td>
-              <td class='text-center'>{!echo substr($reply->addedDate, 2, -3)}</td>
+              <td>{!html::a($control->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id", $reply->title . " <i>(#$reply->id)</i>", "target='_blank'")}</td>
+              <td class='text-center'>{!substr($reply->addedDate, 2, -3)}</td>
             </tr>  
             {/foreach}
           </tbody>

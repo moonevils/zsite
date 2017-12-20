@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->email}</th>
-            <td id='emailTD'>{!echo str2Entity($user->email)}</td>
+            <td id='emailTD'>{!str2Entity($user->email)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->company}</th>
@@ -34,15 +34,15 @@
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->mobile}</th>
-            <td id='mobileTD'>{!echo str2Entity($user->mobile)}</td>
+            <td id='mobileTD'>{!str2Entity($user->mobile)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->phone}</th>
-            <td>{!echo str2Entity($user->phone)}</td>
+            <td>{!str2Entity($user->phone)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->qq}</th>
-            <td>{!echo str2Entity($user->qq)}</td>
+            <td>{!str2Entity($user->qq)}</td>
           </tr>
           <tr>
             <th class='text-right'>{!echo $lang->user->gtalk}</th>
@@ -50,14 +50,14 @@
           </tr>
           <tr>
             <td class='borderless text-center' id='btnBox' colspan='2'>
-              {!echo html::a(inlink('edit'), $lang->user->editProfile, "class='btn'")}
-              {!echo html::a(inlink('setemail'), $lang->user->setEmail, "class='btn'")}
+              {!html::a(inlink('edit'), $lang->user->editProfile, "class='btn'")}
+              {!html::a(inlink('setemail'), $lang->user->setEmail, "class='btn'")}
               {if(isset($user->provider) and isset($user->openID))}
               {if(strpos($user->account, "{$user->provider}_") === false)}
-              {!echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), $lang->user->oauth->lblUnbind, "class='btn unbind'")}
+              {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), $lang->user->oauth->lblUnbind, "class='btn unbind'")}
               {else}
-              {!echo html::a(inlink('oauthRegister'), $lang->user->oauth->lblProfile, "class='btn'")}
-              {!echo html::a(inlink('oauthBind'), $lang->user->oauth->lblBind, "class='btn'")}
+              {!html::a(inlink('oauthRegister'), $lang->user->oauth->lblProfile, "class='btn'")}
+              {!html::a(inlink('oauthBind'), $lang->user->oauth->lblBind, "class='btn'")}
               {/if}
               {/if}
             </td>

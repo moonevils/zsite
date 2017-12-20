@@ -60,12 +60,12 @@
         {@extract($prevAndNext)}
         <ul class='pager pager-justify'>
         {if($prev)}
-          <li class='previous' title='{!echo $prev->title}'>{!echo html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> <span>' . $prev->title . '</span>')}</li>
+          <li class='previous' title='{!echo $prev->title}'>{!html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> <span>' . $prev->title . '</span>')}</li>
         {else}
           <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> {!print($lang->article->none)}</a></li>
         {/if}
         {if($next)}
-          <li class='next' title='{!echo $next->title}'>{!echo html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), '<span>' . $next->title . '</span> <i class="icon-arrow-right"></i>')}</li>
+          <li class='next' title='{!echo $next->title}'>{!html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), '<span>' . $next->title . '</span> <i class="icon-arrow-right"></i>')}</li>
         {else}
           <li class='next disabled'><a href='###'> {!print($lang->article->none)}<i class='icon-arrow-right'></i></a></li>
         {/if}

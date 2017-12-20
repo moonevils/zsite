@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
-      <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+      <div class='pull-right'>{!html::a($block->content->moreUrl, $block->content->moreText)}</div>
     {/if}
   </div>
   <div class='panel-body'>{$block->content->content}</div>

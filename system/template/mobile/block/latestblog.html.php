@@ -19,14 +19,14 @@
 {$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit, 'blog')}
 {if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'blog')} {/if}
 <style>
-#block{!echo $block->id} .card .thumbnail-cell {padding-left: 8px; padding-right: 0}
-#block{!echo $block->id} .card .table-cell + .thumbnail-cell {padding-right: 8px; padding-left: 0}
+#block{$block->id} .card .thumbnail-cell {padding-left: 8px; padding-right: 0}
+#block{$block->id} .card .table-cell + .thumbnail-cell {padding-right: 8px; padding-left: 0}
 </style>
 <div id="block{$block->id}" class='panel panel-block {$blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($content->moreText) and !empty($content->moreUrl))}
-      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if(isset($content->image))}
@@ -40,13 +40,13 @@
             {if(isset($content->showCategory) and $content->showCategory == 1)}
               {if($content->categoryName == 'abbr')}
                 {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
               {else}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . ']', "class='text-special'")}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . ']', "class='text-special'")}
               {/if}
             {/if}
             {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
-            <strong>{!echo html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
+            <strong>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
           </div>
           <div class='table-layout'>
             {if(!empty($article->image))}
@@ -58,7 +58,7 @@
             {/if}
             <div class='table-cell'>
               <div class='card-content text-muted small'>
-                <strong class='text-important'>{if(isset($content->time))} {!echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4)} {/if}</strong> &nbsp;{$article->summary}
+                <strong class='text-important'>{if(isset($content->time))} <i class='icon-time'></i>{!formatTime($article->addedDate, DT_DATE4)} {/if}</strong> &nbsp;{$article->summary}
               </div>
             </div>
             {if(isset($thumbnail) && $content->imagePosition == 'right')} {$thumbnail} {/if}
@@ -78,12 +78,12 @@
             {if(isset($content->showCategory) and $content->showCategory == 1)}
               {if($content->categoryName == 'abbr')}
                 {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
               {else}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
               {/if}
             {/if}
-            {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+            {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
             <span class='pull-right text-muted'>{!substr($article->addedDate, 0, 10)}</span>
           </div>
         {else}
@@ -91,12 +91,12 @@
             {if(isset($content->showCategory) and $content->showCategory == 1)}
               {if($content->categoryName == 'abbr')}
                 {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
               {else}
-                {!echo html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
+                {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
               {/if}
             {/if}
-            {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+            {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
           </div>
         {/if}
       {/foreach}
