@@ -1372,13 +1372,12 @@ class fileModel extends model
     public function scanImages()
     {
         $files = glob($this->app->getDataRoot() . "upload/*/f_*");
-        
         $logos = $this->dao->select('pathname')
             ->from(TABLE_FILE)
             ->where('objectType')->eq('logo')
             ->fetchAll();
 
-        $images = array();
+        /* Delete logo  form files. */
         foreach($files as $key => $file)
         {
             foreach($logos as $logo)
@@ -1386,7 +1385,7 @@ class fileModel extends model
                 if(strpos($file, substr($logo->pathname, 0, strpos($logo->pathname, '.'))) !== false) unset($files[$key]);
             } 
         }
-        
+        $images = array();
         foreach($files as $key => $file)
         {
             $size = getimagesize($file);
