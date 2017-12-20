@@ -26,24 +26,24 @@
 
 {if(isset($control->config->site->mobileBottomNav) and ($control->config->site->mobileBottomNav == 'hide'))}
 {else}
-{$bottomNavs = $control->loadModel('nav')->getNavs('mobile_bottom')}
-<footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
-  <ul class="nav">
-    {foreach($bottomNavs as $nav)}
-      {$icon  = ''}
-      {$class = ''}
-      {if($nav->system == 'contact')}
-        {$icon = "<i class='icon icon-comments-alt'></i> "}
-        {$class = "class='text-primary'"}
-      {/if}
-      {if($nav->system == 'company')}
-        {$icon = "<i class='icon icon-group'></i> "}
-        {$class = "class='text-important'"}
-      {/if}
-      <li>{!echo html::a($nav->url, $icon . $nav->title, ($nav->target != 'modal') ? "target='$nav->target' $class" : "data-toggle='modal' $class")}</li>
-    {/foreach}
-  </ul>
-</footer>
+  {$bottomNavs = $control->loadModel('nav')->getNavs('mobile_bottom')}
+  <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
+    <ul class="nav">
+      {foreach($bottomNavs as $nav)}
+        {$icon  = ''}
+        {$class = ''}
+        {if($nav->system == 'contact')}
+          {$icon = "<i class='icon icon-comments-alt'></i> "}
+          {$class = "class='text-primary'"}
+        {/if}
+        {if($nav->system == 'company')}
+          {$icon = "<i class='icon icon-group'></i> "}
+          {$class = "class='text-important'"}
+        {/if}
+        <li>{!html::a($nav->url, $icon . $nav->title, ($nav->target != 'modal') ? "target='$nav->target' $class" : "data-toggle='modal' $class")}</li>
+      {/foreach}
+    </ul>
+  </footer>
 {/if}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 

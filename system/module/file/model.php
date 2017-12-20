@@ -410,7 +410,7 @@ class fileModel extends model
 
             if(strtolower($file['extension']) != 'gif' and in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                if($objectType != 'source' and $objectType != 'slide') 
+                if(strpos('source,slide,logo', $objectType) === false)
                 {
                     $this->compressImage($realPathName);
                     if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
@@ -1267,7 +1267,7 @@ class fileModel extends model
         if(!extension_loaded('gd')) return false;
         if(!is_writable($imageInfo['dirname'])) return false;
         $rawImage = str_replace('f_', '', $imagePath);
-
+        
         if(!file_exists($rawImage)) copy($imagePath, $rawImage); 
         $this->addTextWatermark($rawImage, $imagePath);
         $this->compressImage($imagePath);

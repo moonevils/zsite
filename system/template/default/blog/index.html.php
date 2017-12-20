@@ -1,4 +1,4 @@
-{*
+{*php
 /**
  * The index view file of blog module of chanzhiEPS.
  *
@@ -9,18 +9,18 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-*}
+/php*}
 {include TPL_ROOT . 'blog/header.html.php';}
-{if(isset($category))}       {$path = array_keys($category->pathNames)} {/if} 
-{if(!empty($path))}          {!js::set('path',  $path)} {/if}
-{if(!empty($category->id))}  {!js::set('categoryID', $category->id)} {/if}
-{if(!empty($category->id))}  {!js::set('pageLayout', $control->block->getLayoutScope('blog_index', $category->id))} {/if}
+{if(isset($category))}      {$path = array_keys($category->pathNames)} {/if} 
+{if(!empty($path))}         {!js::set('path', $path)} {/if}
+{if(!empty($category->id))} {!js::set('categoryID', $category->id)} {/if}
+{if(!empty($category->id))} {!js::set('pageLayout', $control->block->getLayoutScope('blog_index', $category->id))} {/if}
 {$root = '<li>' . $control->lang->currentPos . $control->lang->colon .  html::a($control->inlink('index'), $lang->blog->home) . '</li>'}
 {if(!empty($category))} {!echo $common->printPositionBar($category, '', '', $root)} {/if}
 {if(isset($articleIdList))}
-<script>{!echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleIdList . $config->idListPlaceHolder . "';"}</script>
+  <script>{!echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleIdList . $config->idListPlaceHolder . "';"}</script>
 {else}
-<script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
+  <script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {/if}
 <div class='row blocks' data-region='blog_index-topBanner'>{$control->block->printRegion($layouts, 'blog_index', 'topBanner', true)}</div>
 <div class='row' id='columns' data-page='blog_index'>
@@ -33,57 +33,52 @@
     <div id='blogList'>
       {foreach($sticks as $stick)}
         {if(!isset($category))} {$category = array_shift($stick->categories)} {/if}
-          {$url = inlink('view', "id=$stick->id", "category={{$category->alias}}&name=$stick->alias")}
-          <div class="card" data-ve='blog' id='blog{!echo $stick->id}'>
-            {if(!empty($stick->image))}
-            {$pull     = (isset($control->config->blog->imagePosition) and $control->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right'}
-            {$imageURL = !empty($control->config->blog->imageSize) ? $control->config->blog->imageSize . 'URL' : 'smallURL'}
-            <div class='media {!echo $pull}' style="max-width: {!echo !empty($control->config->blog->imageWidth) ? $control->config->blog->imageWidth . 'px' : '180px'}">
-              {$title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title}
-              {!echo html::a($url, html::image($control->loadModel('file')->printFileURL($stick->image->primary->pathname, $stick->image->primary->extension, 'blog', $imageURL), "title='$title' class='thumbnail'"))}
-{*/php*}
-            </div>
-            {/if}
-            <h4 class='card-heading'>
-              {!echo html::a($url, $stick->title, "style='color:{{$stick->titleColor}}'")}
-              <span class='label label-danger'>{!echo $lang->article->stick}</span>
-            </h4>
-            <div class='card-content text-muted'>
-              {!echo $stick->summary}
-            </div>
-            <div class="card-actions text-muted">
-              &nbsp; <span data-toggle='tooltip' title='{!printf($lang->article->lblAddedDate, formatTime($stick->addedDate))}'><i class="icon-time"></i> {!echo date('Y/m/d', strtotime($stick->addedDate))}</span>
-              &nbsp; <span data-toggle='tooltip' title='{!printf($lang->article->lblAuthor, $stick->author)}'><i class="icon-user"></i> {!echo $stick->author}</span>
-              &nbsp; <span data-toggle='tooltip' title='{!printf($lang->article->lblViews, $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder)}'><i class="icon-eye-open"></i> {!echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder}</span>
-              {if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments)}&nbsp; <a href="{!echo $url . '#commentForm'}"><span data-toggle='tooltip' title='{!printf($lang->article->lblComments, $stick->comments)}'><i class="icon-comments-alt"></i> {!echo $stick->comments}</span></a>{/if}
-                {if(!empty($config->blog->showCategory))}
-                  {if($config->blog->categoryLevel == 'first')}
-                    {!echo "<span>["}
-                    {!echo ($config->blog->categoryName == 'full' or empty(zget($topCategoryList, $stick->category->id)->abbr)) ? zget($topCategoryList, $stick->category->id)->name : zget($topCategoryList, $stick->category->id)->abbr}
-                    {!echo "]</span>"}
-                  {else}
-                    {!echo "<span>["}
-                    {!echo ($config->blog->categoryName == 'full' or empty($stick->category->abbr)) ? $stick->category->name : $stick->category->abbr}
-                    {!echo "]</span>"}
-                  {/if} 
-                {/if}            
-            </div>
+        {$url = inlink('view', "id=$stick->id", "category={{$category->alias}}&name=$stick->alias")}
+        <div class="card" data-ve='blog' id='blog{!echo $stick->id}'>
+          {if(!empty($stick->image))}
+          {$pull     = (isset($control->config->blog->imagePosition) and $control->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right'}
+          {$imageURL = !empty($control->config->blog->imageSize) ? $control->config->blog->imageSize . 'URL' : 'smallURL'}
+          <div class='media {!echo $pull}' style="max-width: {!echo !empty($control->config->blog->imageWidth) ? $control->config->blog->imageWidth . 'px' : '180px'}">
+            {$title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title}
+            {!html::a($url, html::image($control->loadModel('file')->printFileURL($stick->image->primary->pathname, $stick->image->primary->extension, 'blog', $imageURL), "title='$title' class='thumbnail'"))}
           </div>
-      {@unset($articles[$stick->id])}
+          {/if}
+          <h4 class='card-heading'>
+            {!html::a($url, $stick->title, "style='color:{{$stick->titleColor}}'")}
+            <span class='label label-danger'>{!echo $lang->article->stick}</span>
+          </h4>
+          <div class='card-content text-muted'>
+            {$stick->summary}
+          </div>
+          <div class="card-actions text-muted">
+            &nbsp; <span data-toggle='tooltip' title='{!printf($lang->article->lblAddedDate, formatTime($stick->addedDate))}'><i class="icon-time"></i> {!echo date('Y/m/d', strtotime($stick->addedDate))}</span>
+            &nbsp; <span data-toggle='tooltip' title='{!printf($lang->article->lblAuthor, $stick->author)}'><i class="icon-user"></i> {!echo $stick->author}</span>
+            &nbsp; <span data-toggle='tooltip' title='{!printf($lang->article->lblViews, $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder)}'><i class="icon-eye-open"></i> {!echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder}</span>
+            {if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments)}&nbsp; <a href="{!echo $url . '#commentForm'}"><span data-toggle='tooltip' title='{!printf($lang->article->lblComments, $stick->comments)}'><i class="icon-comments-alt"></i> {!echo $stick->comments}</span></a>{/if}
+              {if(!empty($config->blog->showCategory))}
+                {if($config->blog->categoryLevel == 'first')}
+                  <span>[ {!echo ($config->blog->categoryName == 'full' or empty(zget($topCategoryList, $stick->category->id)->abbr)) ? zget($topCategoryList, $stick->category->id)->name : zget($topCategoryList, $stick->category->id)->abbr} ]</span>
+                {else}
+                  <span>[ {!echo ($config->blog->categoryName == 'full' or empty($stick->category->abbr)) ? $stick->category->name : $stick->category->abbr} ]</span>
+                {/if} 
+              {/if}            
+          </div>
+        </div>
+        {@unset($articles[$stick->id])}
       {/foreach}
       {foreach($articles as $article)}
-      {if(!isset($category))}{$category = array_shift($article->categories)}{/if}
+        {if(!isset($category))}{$category = array_shift($article->categories)}{/if}
         {$url = inlink('view', "id=$article->id", "category={{$category->alias}}&name=$article->alias")}
-        <div class="card" data-ve='blog' id='blog{!echo $article->id}'>
+        <div class="card" data-ve='blog' id='blog{$article->id}'>
           {if(!empty($article->image))}
             {$pull     = (isset($control->config->blog->imagePosition) and $control->config->blog->imagePosition == 'left') ? 'pull-left' : 'pull-right'}
             {$imageURL = !empty($control->config->blog->imageSize) ? $control->config->blog->imageSize . 'URL' : 'smallURL'}
             <div class='media {!echo $pull}' style="max-width: {!echo !empty($control->config->blog->imageWidth) ? $control->config->blog->imageWidth . 'px' : '180px'}">
               {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {!echo html::a($url, html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'blog', $imageURL), "title='{{$title}}' class='thumbnail'"))}
+              {!html::a($url, html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'blog', $imageURL), "title='{{$title}}' class='thumbnail'"))}
             </div>
           {/if}
-          <h4 class='card-heading'>{!echo html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</h4>
+          <h4 class='card-heading'>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</h4>
           <div class='card-content text-muted'>
             {!echo $article->summary}
           </div>

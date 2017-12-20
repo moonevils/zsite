@@ -19,34 +19,36 @@
   <div id="block{$block->id}" class='panel panel-block {$blockClass} with-cards'>
     <div class='panel-body no-padding'>
       <div class='card'>
-        <a href='{$url}' class='card-img'>{!echo "<img class='lazy' alt='{{$product->name}}' title='{{$product->name}}' data-src='{{$product->image->primary->middleURL}}'> "}</a>
+        <a href='{$url}' class='card-img'>
+          <img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$product->image->primary->middleURL}'>
+        </a>
         <div class='card-heading'>
           {if(isset($content->showCategory) and $content->showCategory == 1)}
             {if($content->categoryName == 'abbr')}
               {$categoryName = '[' . ($category->abbr ? $category->abbr : $category->name) . '] '}
-              {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), $categoryName, "class='text-special'")}
+              {!html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), $categoryName, "class='text-special'")}
             {else}
-              {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), '[' . $category->name . '] ', "class='text-special'")}
+              {!html::a(helper::createLink('product', 'browse', "categoryID={{$category->id}}", "category={{$category->alias}}"), '[' . $category->name . '] ', "class='text-special'")}
             {/if}
           {/if}
-          <strong>{!echo $product->name}</strong>
+          <strong>{$product->name}</strong>
           <div class='product-price'>
           {if(!$product->unsaleable)}
             {if($product->negotiate)}
               <strong class='text-danger'>{$lang->product->negotiate}</strong>
             {else}
-                {if($product->promotion != 0)}
-                    <strong class='text-danger'>{$config->product->currencySymbol} {$product->promotion}</strong>
-                    {if($product->price != 0)}
-                      &nbsp;&nbsp;<small class='text-muted text-line-through'>{$config->product->currencySymbol} {$product->price}</small>
-                    {/if}
-                {elseif($product->price != 0)}
-                   <strong class='text-danger'>{$config->product->currencySymbol} {$product->price}</strong>
+              {if($product->promotion != 0)}
+                <strong class='text-danger'>{$config->product->currencySymbol} {$product->promotion}</strong>
+                {if($product->price != 0)}
+                  &nbsp;&nbsp;<small class='text-muted text-line-through'>{$config->product->currencySymbol} {$product->price}</small>
                 {/if}
+              {elseif($product->price != 0)}
+                <strong class='text-danger'>{$config->product->currencySymbol} {$product->price}</strong>
+              {/if}
             {/if}
           {/if}
           </div>
-          <div class='product-desc text-muted small'>{!echo helper::substr(strip_tags($product->desc), 80)}</div>
+          <div class='product-desc text-muted small'>{!helper::substr(strip_tags($product->desc), 80)}</div>
         </div>
       </div>
     </div>

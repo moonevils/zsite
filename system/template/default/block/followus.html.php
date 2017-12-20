@@ -17,7 +17,7 @@
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    <div class='pull-right'>{!html::a($block->content->moreUrl, $block->content->moreText)}</div>
     {/if}
   </div>
   <table class='w-p100'>
@@ -26,7 +26,7 @@
     <tr class='text-center'>
       <td class='wechat-block'>
         <div class='name'><i class='icon-weixin'>&nbsp;</i>{!echo $public->name}</div>
-        <div class='qrcode'>{!echo html::image($public->qrcode, "class='w-220px'")}</div>
+        <div class='qrcode'>{!html::image($public->qrcode, "class='w-220px'")}</div>
       </td>
     </tr>
     {/foreach}

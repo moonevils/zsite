@@ -36,11 +36,11 @@
           <td class='w-100px'>
             {if(!empty($product->image))}
                 {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
-                {!echo html::a($productLink, html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'smallURL'), "title='$title' alt='$product->name'"), "class='media-wrapper'")}
+                {!html::a($productLink, html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'smallURL'), "title='$title' alt='$product->name'"), "class='media-wrapper'")}
             {/if}
           </td>
           <td class='text-left text-middle'>
-            {!echo html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'")}
+            {!html::a($productLink, '<div class="" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'")}
           </td>
           <td class='w-100px text-middle'> 
             {if($product->promotion != 0)}
@@ -51,14 +51,14 @@
               {$price  = $product->price}
               <div class='text-price'>{!echo $currencySymbol . $product->price}</div>
             {/if}
-            {!echo html::hidden("price[$product->id]", $price)}
+            {!html::hidden("price[$product->id]", $price)}
             {$amount = $product->count * $price}
             {$total += $amount}
           </td>
           <td class='w-140px text-middle'>
             <div class='input-group'>
               <span class='input-group-addon'><i class='icon icon-minus'></i></span>
-              {!echo html::input("count[$product->id]", $product->count, "class='form-control'")}
+              {!html::input("count[$product->id]", $product->count, "class='form-control'")}
               <span class='input-group-addon'><i class='icon icon-plus'></i></span>
             </div>
           </td>
@@ -67,8 +67,8 @@
             <strong class='text-danger amountContainer'>{!echo $amount}</strong>
           </td>
           <td class='text-middle text-center'>
-            {!echo html::a(inlink('delete', "product=$product->id"), $lang->delete, "class='deleter'")}
-            {!echo html::hidden("product[]", $product->id)}
+            {!html::a(inlink('delete', "product=$product->id"), $lang->delete, "class='deleter'")}
+            {!html::hidden("product[]", $product->id)}
           </td>
         </tr>
         {/foreach}
@@ -77,7 +77,7 @@
     <div class='panel-footer text-right'>
       {!printf($lang->order->selectProducts, count($products))}
       {!printf($lang->order->totalToPay, $currencySymbol . $total)}
-      {!echo html::submitButton($lang->cart->goAccount, 'btn-order-submit')}
+      {!html::submitButton($lang->cart->goAccount, 'btn-order-submit')}
     </div>
   </form>
 </div>
@@ -88,8 +88,8 @@
   </div>
   <div class='panel-body'>
     {!echo $lang->cart->noProducts}
-    {!echo html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn btn-xs btn-primary'")}
-    {!echo html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn btn-xs btn-default'")}
+    {!html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn btn-xs btn-primary'")}
+    {!html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn btn-xs btn-default'")}
   </div>
 </div>
 {/if}

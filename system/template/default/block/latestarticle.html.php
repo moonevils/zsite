@@ -20,7 +20,7 @@
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
-      <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if(isset($content->image))}
@@ -48,12 +48,12 @@
               {/foreach}
      
               {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
-              {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+              {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
             {else}
               {!echo '[' . $article->category->name . '] '}
             {/if}
           {/if}
-          <strong>{!echo html::a($url, $article->title, "style='color: {{$article->titleColor}}'")}</strong>
+          <strong>{!html::a($url, $article->title, "style='color: {{$article->titleColor}}'")}</strong>
         </div>
         <div class='item-content'>
           
@@ -61,7 +61,7 @@
             <div class='media {!echo $pull}' style="max-width: {!echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '100px'}">
             {if(!empty($article->image))}
                 {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-                {!echo html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
+                {!html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
             {/if}
             </div>
             <strong class='text-important text-nowrap'>
@@ -102,15 +102,15 @@
         }
 
         {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
-        {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$categoryAlias}}"), $categoryName)}
+        {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$categoryAlias}}"), $categoryName)}
         {else}
-        {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
+        {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
         {/if}
         {/if}
-        {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+        {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
         {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
         </span>
-        <span class='pull-right'>{!echo substr($article->addedDate, 0, 10)}</span>
+        <span class='pull-right'>{!substr($article->addedDate, 0, 10)}</span>
       </li>
       {else}
       <li class='notDataList'>
@@ -132,12 +132,12 @@
         }
 
         {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
-          {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+          {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
         {else}
-          {!echo html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
+          {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
         {/if}
         {/if}
-        {!echo html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+        {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
         <span>{if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
       </li>
       {/if}

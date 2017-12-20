@@ -66,16 +66,16 @@
         <h4>{$lang->sitemap->boards}</h4>
         <ul class='tree'>
           {foreach($boards as $parentBoard)}
-          <li>
-            {$parentBoard->name}
-            {if($parentBoard->children)}
-              <ul>
-                {foreach($parentBoard->children as $child)}
-                  <li>{!html::a(helper::createLink('forum', 'board', "id=$child->id", "category={{$child->alias}}"), $child->name)}</li>
-                {/foreach}
-              </ul>
-            {/if}
-          </li>
+            <li>
+              {$parentBoard->name}
+              {if($parentBoard->children)}
+                <ul>
+                  {foreach($parentBoard->children as $child)}
+                    <li>{!html::a(helper::createLink('forum', 'board', "id=$child->id", "category={{$child->alias}}"), $child->name)}</li>
+                  {/foreach}
+                </ul>
+              {/if}
+            </li>
           {/foreach}
         </ul>
       </div>

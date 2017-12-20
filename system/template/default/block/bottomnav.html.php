@@ -21,11 +21,11 @@
     <ul class='nav nav-bottom nav-justified'>
       {foreach($navs as $nav)}
         <li>
-          {!echo html::a($control->nav->getUrl($nav), $nav->title, $nav->target ? "target='{$nav->target}'" : '')}
+          {!html::a($control->nav->getUrl($nav), $nav->title, $nav->target ? "target='{$nav->target}'" : '')}
           {if(!empty($nav->children))}
             <ul class='nav nav-stacked'>
               {foreach($nav->children as $child)}
-                <li>{!echo html::a($control->nav->getUrl($child), $child->title, $child->target ? "target='{$child->target}'" : '')}</li>
+                <li>{!html::a($control->nav->getUrl($child), $child->title, $child->target ? "target='{$child->target}'" : '')}</li>
               {/foreach}
             </ul>
           {/if}

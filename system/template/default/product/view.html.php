@@ -17,70 +17,70 @@
 <div class='row blocks' data-region='product_view-topBanner'>{$control->block->printRegion($layouts, 'product_view', 'topBanner', true)}</div>
 <div class='row' id='columns' data-page='product_view'>
   {if(!empty($layouts['product_view']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')}
-  <div class="col-md-{!echo 12 - $sideGrid} col-main{!echo ($sideFloat === 'left') ? ' pull-right' : ''}">
+    <div class="col-md-{!echo 12 - $sideGrid} col-main{!echo ($sideFloat === 'left') ? ' pull-right' : ''}">
   {else}
-  <div class='col-md-12'>
+    <div class='col-md-12'>
   {/if}
     <div class='row blocks' data-region='product_view-top'>{$control->block->printRegion($layouts, 'product_view', 'top', true)}</div>
-    <div class='panel panel-body panel-product' id='product' data-id='{!echo $product->id}'>
+    <div class='panel panel-body panel-product' id='product' data-id='{$product->id}'>
       <div class='row'>
         {if(!empty($product->image->list))}
-        <div class='col-sm-5' id='productImageWrapper'>
-          <div class='product-image media-wrapper' id='productImage'>
-            {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
-            {!echo html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension), "title='$title' alt='$product->name'")}
-            <div class='image-zoom-region'></div>
-          </div>
-          {if(count($product->image->list) > 1)}
-          <div class='product-image-menu-wrapper' id='imageMenuWrapper'>
-            <button type='button' class='btn btn-link btn-img-scroller btn-prev-img'><i class="icon icon-chevron-left"></i></button>
-            <button type='button' class='btn btn-link btn-img-scroller btn-next-img'><i class="icon icon-chevron-right"></i></button>
-            <div class='product-image-menu clearfix' id='imageMenu'>
-              {foreach($product->image->list as $image)}
-              {$title = $image->title ? $image->title : $product->name}
-              <div class="product-image-wrapper">
-                <div class='product-image little-image'>
-                  {!echo html::image($control->file->printFileURL($image->pathname, $image->extension), "title='{{$title}}' alt='{{$product->name}}'")}
+          <div class='col-sm-5' id='productImageWrapper'>
+            <div class='product-image media-wrapper' id='productImage'>
+              {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
+              {!html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension), "title='$title' alt='$product->name'")}
+              <div class='image-zoom-region'></div>
+            </div>
+            {if(count($product->image->list) > 1)}
+              <div class='product-image-menu-wrapper' id='imageMenuWrapper'>
+                <button type='button' class='btn btn-link btn-img-scroller btn-prev-img'><i class="icon icon-chevron-left"></i></button>
+                <button type='button' class='btn btn-link btn-img-scroller btn-next-img'><i class="icon icon-chevron-right"></i></button>
+                <div class='product-image-menu clearfix' id='imageMenu'>
+                  {foreach($product->image->list as $image)}
+                  {$title = $image->title ? $image->title : $product->name}
+                  <div class="product-image-wrapper">
+                    <div class='product-image little-image'>
+                      {!html::image($control->file->printFileURL($image->pathname, $image->extension), "title='{{$title}}' alt='{{$product->name}}'")}
+                    </div>
+                  </div>
+                  {/foreach}
                 </div>
               </div>
-              {/foreach}
-            </div>
+            {/if}
           </div>
-          {/if}
-        </div>
-        <div class='col-sm-7'>
+          <div class='col-sm-7'>
         {else}
         <div class='col-md-12'>
         {/if}
           <div class='product-property{!echo empty($product->image->list) ? ' product-lack-img' : ''}'>
-            <h1 class='header-dividing'>{!echo $product->name}</h1>
+            <h1 class='header-dividing'>{$product->name}</h1>
             <ul class='list-unstyled meta-list'>
               {$attributeHtml = ''}
               {if(!$product->unsaleable)}
-                  {if($product->negotiate)}
+                {if($product->negotiate)}
+                  {$attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>"}
+                  {$attributeHtml .= "<span class='meta-value'><span class='text-danger text-lg text-latin'>" . $lang->product->negotiate . "</span></li>"}
+                {else}
+                  {if($product->promotion != 0)}
+                    {if($product->price != 0)}
+                      {$attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>"}
+                      {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $control->config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>"}
+                    {/if}
+                    {$attributeHtml .= "<li id='promotionItem'><span class='meta-name'>" . $lang->product->promotion . "</span>"}
+                    {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $control->config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>"}
+                  {elseif($product->price != 0)}
                     {$attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>"}
-                    {$attributeHtml .= "<span class='meta-value'><span class='text-danger text-lg text-latin'>" . $lang->product->negotiate . "</span></li>"}
-                  {else}
-                     {if($product->promotion != 0)}
-                         {if($product->price != 0)}
-                           {$attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>"}
-                           {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $control->config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>"}
-                         {/if}
-                        {$attributeHtml .= "<li id='promotionItem'><span class='meta-name'>" . $lang->product->promotion . "</span>"}
-                        {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $control->config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>"}
-                     {elseif($product->price != 0)}
-                         {$attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>"}
-                         {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $control->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>"}
-                      {/if}
+                    {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $control->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>"}
                   {/if}
+                {/if}
               {/if}
               {if($product->amount and $control->config->product->stock)}
-                 {$attributeHtml .= "<li id='amountItem'><span class='meta-name'>" . $lang->product->stock . "</span>"}
-                 {$attributeHtml .= "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>"}
+                {$attributeHtml .= "<li id='amountItem'><span class='meta-name'>" . $lang->product->stock . "</span>"}
+                {$attributeHtml .= "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>"}
               {/if}
               {if($product->brand)}
-                 {$attributeHtml .= "<li id='brandItem'><span class='meta-name'>" . $lang->product->brand . "</span>"}
-                 {$attributeHtml .= "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>"}
+                {$attributeHtml .= "<li id='brandItem'><span class='meta-name'>" . $lang->product->brand . "</span>"}
+                {$attributeHtml .= "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>"}
               {/if}
               {if(!$product->brand and $product->model)}
                 {$attributeHtml .= "<li id='modelItem'><span class='meta-name'>" . $lang->product->model . "</span>"}
@@ -95,59 +95,59 @@
                 {$attributeHtml .= "<span class='meta-value'>" . $product->origin . "</span></li>"}
               {/if}
               {foreach($product->attributes as $attribute)}
-                  {if(empty($attribute->label) and empty($attribute->value))} {continue} {/if}
-                     {$attributeHtml .= "<li><span class='meta-name'>" . $attribute->label . "</span>"}
-                  {if(strpos($attribute->value, 'http://') === 0 or strpos($attribute->value, 'https://') === 0)}
-                     {$attributeHtml .= "<span class='meta-value'>" . html::a($attribute->value, $attribute->value, "target='_blank'") . "</span></li>"}
-                  {else}
-                     {$attributeHtml .= "<span class='meta-value'>" . $attribute->value . "</span></li>"}
-                  {/if}
+                {if(empty($attribute->label) and empty($attribute->value))} {continue} {/if}
+                  {$attributeHtml .= "<li><span class='meta-name'>" . $attribute->label . "</span>"}
+                {if(strpos($attribute->value, 'http://') === 0 or strpos($attribute->value, 'https://') === 0)}
+                  {$attributeHtml .= "<span class='meta-value'>" . html::a($attribute->value, $attribute->value, "target='_blank'") . "</span></li>"}
+                {else}
+                  {$attributeHtml .= "<span class='meta-value'>" . $attribute->value . "</span></li>"}
+                {/if}
               {/foreach}
-              {!echo $attributeHtml}
+              {$attributeHtml}
             </ul>
-            {if(empty($attributeHtml))} {!echo '<div class="product-summary">' . $product->desc . '</div>'} {/if}
+            {if(empty($attributeHtml))} <div class="product-summary">{$product->desc}</div> {/if}
             {if(!$product->unsaleable and commonModel::isAvailable('shop'))}
-            {if($product->negotiate)}
-            <span id='buyBtnBox'>
-              {!echo html::a(helper::createLink('company', 'contact'), $lang->product->contact, "class='btn btn-primary'")}
-            </span>
+              {if($product->negotiate)}
+              <span id='buyBtnBox'>
+                {!html::a(helper::createLink('company', 'contact'), $lang->product->contact, "class='btn btn-primary'")}
+              </span>
             {else}
-            {if(!$stockOpened or $product->amount > 0)}
-            <ul class='list-unstyled meta-list'>
-              <li id='countBox'>
-                <span class='meta-name'>{!echo $lang->product->count}</span>
-                <span class='meta-value'>
-                  <span class='input-group'>
-                    <span class='input-group-addon'><i class='icon icon-minus'></i></span>
-                    {!echo html::input('count', 1, "class='form-control'")}
-                    <span class='input-group-addon'><i class='icon icon-plus'></i></span>
-                  </span>
-                </span>
-              </li>
-            </ul>
-            {/if}
-            <span id='buyBtnBox'>
-              {if($stockOpened and $product->amount < 1)}
-              <label class='btn-soldout'>{!echo $lang->product->soldout}</label>
-              {else}
-              <label class='btn-buy'>{!echo $lang->product->buyNow}</label>
-              <label class='btn-cart'>{!echo $lang->product->addToCart}</label>
+              {if(!$stockOpened or $product->amount > 0)}
+                <ul class='list-unstyled meta-list'>
+                  <li id='countBox'>
+                    <span class='meta-name'>{$lang->product->count}</span>
+                    <span class='meta-value'>
+                      <span class='input-group'>
+                        <span class='input-group-addon'><i class='icon icon-minus'></i></span>
+                        {!html::input('count', 1, "class='form-control'")}
+                        <span class='input-group-addon'><i class='icon icon-plus'></i></span>
+                      </span>
+                    </span>
+                  </li>
+                </ul>
               {/if}
-            </span>
-            {/if}
+              <span id='buyBtnBox'>
+                {if($stockOpened and $product->amount < 1)}
+                  <label class='btn-soldout'>{$lang->product->soldout}</label>
+                {else}
+                  <label class='btn-buy'>{$lang->product->buyNow}</label>
+                  <label class='btn-cart'>{$lang->product->addToCart}</label>
+                {/if}
+              </span>
+              {/if}
             {/if}
             {if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall and !$product->negotiate)}
-            <hr>
-            <div class='btn-gobuy'>
-              {!echo html::a(inlink('redirect', "id={{$product->id}}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'")}
-            </div>
+              <hr>
+              <div class='btn-gobuy'>
+                {!html::a(inlink('redirect', "id={{$product->id}}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'")}
+              </div>
             {/if}
           </div>
         </div>
       </div>
-      <h5 class='header-dividing'><i class='icon-file-text-alt text-muted'></i> {!echo $lang->product->content}</h5>
+      <h5 class='header-dividing'><i class='icon-file-text-alt text-muted'></i> {$lang->product->content}</h5>
       <div class='article-content'>
-        {!echo $product->content}
+        {$product->content}
       </div>
       <div class="article-files">
         {$control->loadModel('file')->printFiles($product->files)}
@@ -159,12 +159,12 @@
       <div id='commentBox'>
         {!echo $control->fetch('message', 'comment', "objectType=product&objectID={{$product->id}}")}
       </div>
-      {!echo html::a('', '', "name='comment'")}
+      {!html::a('', '', "name='comment'")}
     </div>
     {/if}
   </div>
   {if(!empty($layouts['product_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden'))}
-  <div class='col-md-{!echo $sideGrid} col-side'>
+  <div class='col-md-{$sideGrid} col-side'>
     <side class='page-side blocks' data-region='product_view-side'>{$control->block->printRegion($layouts, 'product_view', 'side')}</side>
   </div>
   {/if}

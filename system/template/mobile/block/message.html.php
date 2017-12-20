@@ -12,7 +12,7 @@
 /php*}
 {$app->loadLang('message')}
 <div id="block{$block->id}" class='panel-block-message panel panel-block {$blockClass}'>
-  <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> {$lang->message->post}</a>
+  <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i>{$lang->message->post}</a>
   <div class='modal fade' id='commentDialog'>
     <div class='modal-dialog'>
       <div class='modal-content'>
@@ -28,36 +28,36 @@
               {!html::hidden('objectID', 0)}
             </div>
             {if($model->session->user->account == 'guest')}
-            <div class='form-group required'>
-              {!echo html::input('from', '', "class='form-control' placeholder='{{$lang->message->from}}'")}
-            </div>
-            <div class='form-group'>
-              <label><small class='text-important'>{$lang->message->contactHidden}</small></label>
-              {!echo html::input('phone', '', "class='form-control' placeholder='{{$lang->message->phone}}'")}
-            </div>
-            <div class='form-group'>
-              {!echo html::input('qq', '', "class='form-control' placeholder='{{$lang->message->qq}}'")}
-            </div>
-            <div class='form-group'>
-              {!echo html::input('email', '', "class='form-control' placeholder='{{$lang->message->email}}'")}
-            </div>
+              <div class='form-group required'>
+                {!html::input('from', '', "class='form-control' placeholder='{{$lang->message->from}}'")}
+              </div>
+              <div class='form-group'>
+                <label><small class='text-important'>{$lang->message->contactHidden}</small></label>
+                {!html::input('phone', '', "class='form-control' placeholder='{{$lang->message->phone}}'")}
+              </div>
+              <div class='form-group'>
+                {!html::input('qq', '', "class='form-control' placeholder='{{$lang->message->qq}}'")}
+              </div>
+              <div class='form-group'>
+                {!html::input('email', '', "class='form-control' placeholder='{{$lang->message->email}}'")}
+              </div>
             {else}
-            <div class='form-group'>
-              <span class='signed-user-info'>
-                <i class='icon-user text-muted'></i> <strong>{!echo $session->user->realname }</strong>
-                {if($session->user->email != '')}
-                <span class='text-muted'>&nbsp;({!echo str2Entity($session->user->email)})</span>
-                {/if}
-              </span>
-              {!html::hidden('from',   $session->user->realname)}
-              {!html::hidden('email',  $session->user->email)}
-              {!html::hidden('qq',     $session->user->qq)} 
-              {!html::hidden('phone',  $session->user->phone)}
-            </div>
+              <div class='form-group'>
+                <span class='signed-user-info'>
+                  <i class='icon-user text-muted'></i> <strong>{$session->user->realname}</strong>
+                  {if($session->user->email != '')}
+                    <span class='text-muted'>&nbsp;({!str2Entity($session->user->email)})</span>
+                  {/if}
+                </span>
+                {!html::hidden('from',   $session->user->realname)}
+                {!html::hidden('email',  $session->user->email)}
+                {!html::hidden('qq',     $session->user->qq)} 
+                {!html::hidden('phone',  $session->user->phone)}
+              </div>
             {/if}
             <div class='form-group'>
               <div class='checkbox'>
-                <label><input type='checkbox' name='receiveEmail' value='1' checked /> {!echo $lang->comment->receiveEmail}</label>
+                <label><input type='checkbox' name='receiveEmail' value='1' checked /> {$lang->comment->receiveEmail}</label>
               </div>
             </div>
             <div class='form-group hide captcha-box'></div>

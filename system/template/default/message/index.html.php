@@ -30,7 +30,7 @@
       <div class='panel-heading content-heading'>
         <span class='text-special'> {!echo $message->from}</span>
         <span class='text-muted'> {!echo $message->date}</span>
-        {!echo html::a($control->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{{$lang->message->reply}}'")}
+        {!html::a($control->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "class='pull-right' data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{{$lang->message->reply}}'")}
       </div>
       <div class='panel-body'>{!echo nl2br($message->content)}</div>
       {$control->message->getFrontReplies($message)}
@@ -50,32 +50,32 @@
           <div class='form-group'>
             <label for='from' class='col-sm-1 control-label'>{!echo $lang->message->from}</label>
             <div class='col-sm-5 required'>
-              {!echo html::input('from', $from, "class='form-control'")}
+              {!html::input('from', $from, "class='form-control'")}
             </div>
           </div>
           <div class='form-group'>
             <label for='phone' class='col-sm-1 control-label'>{!echo $lang->message->phone}</label>
             <div class='col-sm-5'>
-              {!echo html::input('phone', $phone, "class='form-control'")}
+              {!html::input('phone', $phone, "class='form-control'")}
             </div>
             <div class='col-sm-6'><div class='help-block'><small class='text-important'>{!echo $lang->message->contactHidden}</small></div></div>
           </div>
           <div class='form-group'>
             <label for='mobile' class='col-sm-1 control-label'>{!echo $lang->message->mobile}</label>
             <div class='col-sm-5'>
-              {!echo html::input('mobile', $mobile, "class='form-control'")}
+              {!html::input('mobile', $mobile, "class='form-control'")}
             </div>
           </div>
           <div class='form-group'>
             <label for='qq' class='col-sm-1 control-label'>{!echo $lang->message->qq}</label>
              <div class='col-sm-5'>
-              {!echo html::input('qq', $qq, "class='form-control'")}
+              {!html::input('qq', $qq, "class='form-control'")}
             </div>
           </div>
           <div class='form-group'>
             <label for='email' class='col-sm-1 control-label'>{!echo $lang->message->email}</label>
             <div class='col-sm-5'>
-              {!echo html::input('email', '', "class='form-control'")}
+              {!html::input('email', '', "class='form-control'")}
             </div>
             <div class='col-sm-5'>
               <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> {!echo $lang->comment->receiveEmail}</label>
@@ -84,9 +84,9 @@
           <div class='form-group'>
             <label for='content' class='col-sm-1 control-label'>{!echo $lang->message->content}</label>
             <div class='col-sm-11 required'>
-              {!echo html::textarea('content', '', "class='form-control' rows='3'")}
-              {!echo html::hidden('objectType', 'message')}
-              {!echo html::hidden('objectID', 0)}
+              {!html::textarea('content', '', "class='form-control' rows='3'")}
+              {!html::hidden('objectType', 'message')}
+              {!html::hidden('objectID', 0)}
             </div>
           </div>
           {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
@@ -103,7 +103,7 @@
           <div class='form-group'>
             <div class='col-sm-1'></div>
             <div class='col-sm-11 col-sm-offset-1'>
-              <span>{!echo html::submitButton($lang->message->submit)}</span>
+              <span>{!html::submitButton($lang->message->submit)}</span>
               <span><small class="text-important">{!echo $lang->message->needCheck}</small></span>
             </div>
           </div>

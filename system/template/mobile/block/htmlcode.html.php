@@ -12,5 +12,5 @@
 /php*}
 {$block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content)}
 {if(!is_object($block->content))} {$block->content} {/if}
-{if(is_object($block->content))}  {!echo isset($block->content->content) ? $block->content->content : ''} {/if}
+{if(is_object($block->content))} {!isset($block->content->content) ? $block->content->content : ''} {/if}
 

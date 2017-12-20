@@ -1,7 +1,7 @@
 <div class='panel panel-section' id='repliesListWrapper'>
   <div id='repliesList' class='panel-body cards cards-list'>
     {foreach($replies as $reply)}
-    {@$floor = $floors[$reply->id]}
+    {$floor = $floors[$reply->id]}
     <div class='card thread reply' id='{$reply->id}'>
       <div class='card-heading'>
         <div class='pull-right'>
@@ -18,7 +18,7 @@
             <i class='icon-comment-alt'></i> {$reply->addedDate}
             {if(!$thread->discussion and $reply->reply)} {!sprintf($lang->thread->replyFloor, zget($floors, $reply->reply))} {/if}
           </span> &nbsp;&nbsp; 
-          <span class='reply-user{if($control->app->user->account == $reply->author)} {echo ' text-danger'} {/if}'>
+          <span class='reply-user{if($control->app->user->account == $reply->author)} {!echo ' text-danger'} {/if}'>
             <i class='icon-user'></i> {!echo isset($speakers[$reply->author]) ? $speakers[$reply->author]->realname : $reply->author}
           </span>
         </div>
@@ -56,64 +56,64 @@
 </div>
 
 {if(!$thread->readonly)}
-<div class='modal fade' id='replyDialog'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-        <h5 class='modal-title'><i class='icon-reply'></i> {$lang->reply->common}</h5>
-      </div>
-      <div class='modal-body'>
-        <form method='post' enctype='multipart/form-data' id='replyForm' action='{$control->createLink('reply', 'post', "thread=$thread->id")}'>
-          <div class='form-group' id='reply'>
-            {!html::textarea('content', '', "rows='6' class='form-control' placeholder='{{$lang->reply->content}}'")}
-          </div>
-          <div class='form-group clearfix captcha-box hide'></div>
-          <div class='form-group'>{!html::submitButton('', 'btn primary block')}</div>
-            {!html::hidden('recTotal',   $pager->recTotal)}
-            {!html::hidden('recPerPage', $pager->recPerPage)}
-            {!html::hidden('pageID',     $pager->pageTotal)}
-            {!html::hidden('reply',      0)}
-        </form>
+  <div class='modal fade' id='replyDialog'>
+    <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
+          <h5 class='modal-title'><i class='icon-reply'></i> {$lang->reply->common}</h5>
+        </div>
+        <div class='modal-body'>
+          <form method='post' enctype='multipart/form-data' id='replyForm' action='{$control->createLink('reply', 'post', "thread=$thread->id")}'>
+            <div class='form-group' id='reply'>
+              {!html::textarea('content', '', "rows='6' class='form-control' placeholder='{{$lang->reply->content}}'")}
+            </div>
+            <div class='form-group clearfix captcha-box hide'></div>
+            <div class='form-group'>{!html::submitButton('', 'btn primary block')}</div>
+              {!html::hidden('recTotal',   $pager->recTotal)}
+              {!html::hidden('recPerPage', $pager->recPerPage)}
+              {!html::hidden('pageID',     $pager->pageTotal)}
+              {!html::hidden('reply',      0)}
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-{noparse}
-<script>
-$(function()
-{
-    $.refreshRepliesList = function()
-    {
-        $('#repliesListWrapper').load(window.location.href + ' #repliesList', function()
-        {
-            $(window).scrollTop($('#bottomSpace').offset().top);
-        });
-    };
-
-    var $replyForm = $('#replyForm');
-    $replyForm.ajaxform({onResultSuccess: function(response)
-    {
-        $('#replyDialog').modal('hide')
-        if($.isFunction($.refreshRepliesList))
-        {
-            response.locate = false;
-            setTimeout($.refreshRepliesList, 200);
-        }
-    }, onSuccess: function(response)
-    {
-        if(response.reason == 'needChecking')
-        {
-            $replyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
-        }
-    }
-    });
-
-    $('.thread-reply-btn').click(function()
-    {
-        if($(this).data('reply')) $('input[name=reply]').val($(this).data('reply'));
-    })
-});
-</script>
-{/noparse}
+  {noparse}
+  <script>
+  $(function()
+  {
+      $.refreshRepliesList = function()
+      {
+          $('#repliesListWrapper').load(window.location.href + ' #repliesList', function()
+          {
+              $(window).scrollTop($('#bottomSpace').offset().top);
+          });
+      };
+  
+      var $replyForm = $('#replyForm');
+      $replyForm.ajaxform({onResultSuccess: function(response)
+      {
+          $('#replyDialog').modal('hide')
+          if($.isFunction($.refreshRepliesList))
+          {
+              response.locate = false;
+              setTimeout($.refreshRepliesList, 200);
+          }
+      }, onSuccess: function(response)
+      {
+          if(response.reason == 'needChecking')
+          {
+              $replyForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
+          }
+      }
+      });
+  
+      $('.thread-reply-btn').click(function()
+      {
+          if($(this).data('reply')) $('input[name=reply]').val($(this).data('reply'));
+      })
+  });
+  </script>
+  {/noparse}
 {/if}

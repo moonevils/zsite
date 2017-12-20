@@ -18,7 +18,7 @@
       <h4><i class="text-success icon-ok-sign"></i> {$lang->order->paidSuccess}</h4>
     </div>
   </div>
-  <div class='modal-footer'>{!echo html::a(helper::createLink('order', 'browse'), $lang->order->bought, "class='btn btn-success'")}</div>
+  <div class='modal-footer'>{!html::a(helper::createLink('order', 'browse'), $lang->order->bought, "class='btn btn-success'")}</div>
 </div>
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 {include TPL_ROOT . 'common/log.html.php'}

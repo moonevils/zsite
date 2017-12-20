@@ -114,11 +114,11 @@ class user extends control
     {
         dao::$changedTables[] = TABLE_CONFIG;
 
-        if($referer == '' && strpos($_SERVER['HTTP_REFERER'], 'deny') === false && strpos($_SERVER['HTTP_REFERER'], 'register') === false && strpos($_SERVER['HTTP_REFERER'], 'login') === false)
+        if($referer == '' && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'deny') === false && strpos($_SERVER['HTTP_REFERER'], 'register') === false && strpos($_SERVER['HTTP_REFERER'], 'login') === false)
         {
             $this->referer = urlencode($_SERVER['HTTP_REFERER']);
         }
-        elseif(RUN_MODE == "front" && (strpos($_SERVER['HTTP_REFERER'], 'register') || strpos($_SERVER['HTTP_REFERER'], 'login')))
+        elseif(RUN_MODE == "front" && isset($_SERVER['HTTP_REFERER']) && (strpos($_SERVER['HTTP_REFERER'], 'register') || strpos($_SERVER['HTTP_REFERER'], 'login')))
         {
             $this->referer = $this->createLink('user', 'control');
         }
@@ -153,7 +153,7 @@ class user extends control
                     $this->send(array('result' => 'success', 'locate' => $this->createLink($this->config->default->module)));
                 }
 
-                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate($this->referer);
+                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate(urldecode($this->referer));
                 $this->locate($this->createLink($this->config->default->module));
                 exit;
             }
@@ -756,6 +756,8 @@ class user extends control
      */
     public function checkReset($reset)
     {
+        if(!$this->user->checkReset($reset)) header('location:/index.html'); 
+
         if(!empty($_POST))
         {
             $this->user->checkPassword();
@@ -765,18 +767,11 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->user->resetSuccess, 'locate' => inlink('login')));
         }
 
-        if(!$this->user->checkReset($reset))
-        {
-            header('location:index.html'); 
-        }
-        else
-        {
-            $this->view->title = $this->lang->user->resetPassword->common;
-            $this->view->reset = $reset;
-            $this->view->mobileURL  = helper::createLink('user', 'checkReset', "reset=$reset", '', 'mhtml');
-            $this->view->desktopURL = helper::createLink('user', 'checkReset', "reset=$reset", '', 'html');
-            $this->display();
-        }
+        $this->view->title = $this->lang->user->resetPassword->common;
+        $this->view->reset = $reset;
+        $this->view->mobileURL  = helper::createLink('user', 'checkReset', "reset=$reset", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'checkReset', "reset=$reset", '', 'html');
+        $this->display();
     }
 
     /**

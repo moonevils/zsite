@@ -17,7 +17,7 @@
   {foreach($files as $file)}
   <tr class='a-center'>
     <td>{!echo $i ++}</td>
-    <th class='a-left'>{!echo html::a($control->createLink('file', 'download', "id=$file->id"), $file->title, $file->isImage ? "target='_blank'" : '')}</th>
+    <th class='a-left'>{!html::a($control->createLink('file', 'download', "id=$file->id"), $file->title, $file->isImage ? "target='_blank'" : '')}</th>
     <td>{!echo $file->extension}</td>
     <td>{!echo $file->size}</td>
     <td>{!echo $file->addedDate}</td>
@@ -26,7 +26,7 @@
     <td>{!echo $file->score}
     {/if}
     <td>{!echo $file->downloads}</td>
-    <td>{!echo html::a($control->createLink('file', 'download', "id=$file->id"), $lang->file->download, $file->isImage ? "target='_blank' class='red'" : "class='red'")}</td>
+    <td>{!html::a($control->createLink('file', 'download', "id=$file->id"), $lang->file->download, $file->isImage ? "target='_blank' class='red'" : "class='red'")}</td>
   </tr>
   {/foreach}
   {if(commonModel::isAvailable('score'))}

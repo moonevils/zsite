@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The reset password view file of user for mobile template of chanzhiEPS.
  *
@@ -9,19 +9,17 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
-{*php*}
-include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header');
-{*/php*}
+/php*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <hr class='space'>
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title'><strong>{!echo $lang->user->sendRecoverEmail}</strong></div>
+    <div class='title'><strong>{$lang->user->sendRecoverEmail}</strong></div>
   </div>
   <div class='panel-body'>
     <div id='successMsg' class='hide alert bg-primary-pale text-center'>
       <i class='icon-info-sign icon icon-x3 block'></i>
-      <h5>{!echo $lang->user->resetPassword->success}</h5>
+      <h5>{$lang->user->resetPassword->success}</h5>
     </div> 
     <form method='post' id='resetPwdForm'>
       <div class='form-group hide form-message alert text-danger bg-danger-pale'>
@@ -29,15 +27,16 @@ include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header
         <div class='content'></div>
       </div>
       <div class='form-group'>
-        {!echo html::input('account', '', "class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'")}
+        {!html::input('account', '', "class='form-control' placeholder='{{$lang->user->inputAccountOrEmail}}'")}
       </div>
       <div class='form-group'>
-        {!echo html::submitButton($lang->user->submit,'btn primary block')}
+        {!html::submitButton($lang->user->submit,'btn primary block')}
       </div>
     </form>
   </div>
 </div>
 {include TPL_ROOT . 'common/form.html.php'}
+{noparse}
 <script>
 $(function()
 {
@@ -48,7 +47,9 @@ $(function()
     {
         $form.addClass('hide');
         $msg.removeClass('hide');
-    }});
+    }
+    });
 });
 </script>
+{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
