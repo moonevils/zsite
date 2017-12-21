@@ -35,11 +35,11 @@
           {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
           {if(isset($content->showCategory) and $content->showCategory == 1)}
             {if($content->categoryName == 'abbr')}
-              $blockContent    = json_decode($block->content);
-              $blockCategories = '';
+              {$blockContent    = json_decode($block->content);}
+              {$blockCategories = '';}
               {if(isset($blockContent->category))} {$blockCategories = $blockContent->category} {/if}
        
-              $categoryName = $article->category->name;
+              {$categoryName = $article->category->name;}
               {foreach($article->categories as $id => $category)}
                 {if(strpos(",$blockCategories,", ",$id,") !== false)}
                    {$categoryName = $category->name}
@@ -87,19 +87,16 @@
         {if(isset($content->showCategory) and $content->showCategory == 1)}
         {if($content->categoryName == 'abbr')}
 
-        $blockContent    = json_decode($block->content);
-        $blockCategories = '';
-        if(isset($blockContent->category)) $blockCategories = $blockContent->category;
+        {$blockContent    = json_decode($block->content);}
+        {$blockCategories = '';}
+        {if(isset($blockContent->category))} {$blockCategories = $blockContent->category;}{/if}
 
-        $categoryName = '';
-        foreach($article->categories as $id => $categorie)
-        {
-            if(strpos(",$blockCategories,", ",$id,") !== false) 
-            {
-                $categoryName = $categorie->name;
-                break;
-            }
-        }
+        {$categoryName = '';}
+        {foreach($article->categories as $id => $categorie)}
+          {if(strpos(",$blockCategories,", ",$id,") !== false)}
+            {$categoryName = $categorie->name;} {break;}
+          {/if}
+        {/foreach}
 
         {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
         {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$categoryAlias}}"), $categoryName)}
@@ -117,19 +114,16 @@
         {if(isset($content->showCategory) and $content->showCategory == 1)}
         {if($content->categoryName == 'abbr')}
 
-        $blockCntent     = json_decode($block->content);
-        $blockCategories = '';
-        if(isset($blockCntent->category)) $blockCategories = $blockCntent->category;
+        {$blockCntent     = json_decode($block->content);}
+        {$blockCategories = '';}
+        {if(isset($blockCntent->category))} {$blockCategories = $blockCntent->category;} {/if}
 
-        $categoryName = '';
-        foreach($article->categories as $id => $categorie)
-        {
-            if(strpos(",$blockCategories,", ",$id,") !== false) 
-            {
-                $categoryName = $categorie->name;
-                break;
-            }
-        }
+        {$categoryName = '';}
+        {foreach($article->categories as $id => $categorie)}
+          {if(strpos(",$blockCategories,", ",$id,") !== false)}
+            {$categoryName = $categorie->name;} {break;}
+          {/if}
+        {/foreach}
 
         {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $categoryName) . '] '}
           {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
@@ -155,4 +149,3 @@
     .ul-list .notDataList.withoutStick{padding-right:5px !important;}
 </style>
 {/noparse}
-
