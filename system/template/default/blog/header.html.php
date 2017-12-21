@@ -50,10 +50,10 @@
   {!echo isset($control->config->site->favicon) ? html::icon(json_decode($control->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico')}
   {!html::rss($control->createLink('rss', 'index', '', '', 'xml'), $config->site->name)}
   {!js::set('lang', $lang->js)}
-  {if(!empty($config->oauth->sina))}                        {sina = json_decode($config->oauth->sina)}{/if}
+  {if(!empty($config->oauth->sina))}                        {$sina = json_decode($config->oauth->sina)}{/if}
   {if(!empty($config->oauth->qq))}                          {$qq = json_decode($config->oauth->qq)}{/if}
-  {if(!empty($sina->verification))}                         {!echo $sina->verification} {/if}
-  {if(!empty($qq->verification))}                           {!echo $qq->verification}{/if}
+  {if(!empty($sina->verification))}                         {$sina->verification} {/if}
+  {if(!empty($qq->verification))}                           {$qq->verification}{/if}
   {if(empty($sina->verification) && !empty($sina->widget))} {!js::import('https://tjs.sjs.sinajs.cn/open/api/js/wb.js')}{/if}
 
   {$browser = helper::getBrowser()}
