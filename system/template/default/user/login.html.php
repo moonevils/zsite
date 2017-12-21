@@ -17,7 +17,7 @@
             <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
             <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control input-lg'")}</div>
             <div class='form-group'>{!html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control input-lg'")}</div>
-            {!html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg btn-block')} &nbsp; &nbsp; 
+            {!html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg btn-block')} 
             {!html::hidden('referer', $referer)}
             {include TPL_ROOT . 'user/oauthlogin.html.php'}
             <span class='regAndReset pull-right'>
@@ -41,7 +41,11 @@
   {if(isset($pageJS))}
     {!js::execute($pageJS)}
   {/if}
-  <style> #login{border:none;} </style>
+  <style>
+    html{height: 100%}
+    body{height: 100%}
+    #login{height: 100%; background-color: #F7F7F7; box-shadow: none; margin: 0; border: none;}
+  </style>
   </body>
   </html>
 {else}
