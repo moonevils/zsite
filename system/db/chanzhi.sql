@@ -1256,3 +1256,8 @@ INSERT INTO `eps_grouppriv` (`group`, `module`, `method`, `lang`) VALUES
 (3, 'reply', 'deleteFile', 'zh-cn'),
 (3, 'thread', 'transfer', 'zh-cn'),
 (3, 'thread', 'switchStatus', 'zh-cn');
+
+INSERT INTO `eps_config` (`owner`, `module`, `section`, `key`, `value`, `lang`) VALUES
+('system', 'common', 'template', 'parser', 'raintpl', 'zh-cn'),
+('system', 'common', 'template', 'parser', 'raintpl', 'zh-tw'),
+('system', 'common', 'template', 'parser', 'raintpl', 'en');
