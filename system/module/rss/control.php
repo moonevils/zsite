@@ -37,6 +37,8 @@ class rss extends control
         $this->view->articles = $articles;
         $this->view->lastDate = $latestArticle ? $latestArticle->addedDate : date('Y-m-d H:i:s') . ' +0800';
          
+        echo '<?xml version="1.0" encoding="UTF-8" ?>';
+        if($this->app->clientDevice == 'mobile') echo '<?xml-stylesheet type="text/css" href="' . $this->config->webRoot . 'theme/mobile/common/css/rss.css" ?>';
         $this->display();
     }
 }
