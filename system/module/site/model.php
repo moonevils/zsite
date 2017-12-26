@@ -36,19 +36,21 @@ class siteModel extends model
         $clearResult = array('result' => 'success', 'message' => '');
         $tmpRoot = $this->app->getTmpRoot();
         $cacheRoot = $tmpRoot . 'cache/'; 
-        if(!$this->deleteDir($cacheRoot)) $clearResult = array('result' => 'fail', 'message' => $this->lang->site->failClear);
+        if(!$this->deleteDir($cacheRoot, false)) $clearResult = array('result' => 'fail', 'message' => $this->lang->site->failClear);
         return $clearResult;
     }
 
     /**
-     * Delete dir
+     * Delete dir. 
      * 
+     * @param  string  $dir 
+     * @param  bool    $deleteSelf 
      * @access public
-     * @param  string
      * @return bool
      */
-    function deleteDir($dir) 
+    function deleteDir($dir, $deleteSelf = true) 
     {
+        if(!$deleteSelf) $selfDir = $dir;
         $dh = opendir($dir);
         while($file = readdir($dh)) 
         {
@@ -67,9 +69,16 @@ class siteModel extends model
         }
 
         closedir($dh);
-        if(rmdir($dir)) {
+        if($selfDir == $dir)
+        {
             return true;
-        } else {
+        }
+        if(rmdir($dir))
+        {   
+            return true;           
+        }
+        else
+        {
             return false;
         }
     }
