@@ -237,10 +237,17 @@ class navModel extends model
     {
         $navCount = count($navs['title']); // get count by common item title.
         $organizedNavs = array();
-
         for($i = 0; $i < $navCount; $i++)
         {
-            foreach($navs as $field => $values) $organizeNavs[$i][$field] = $values[$i];
+            foreach($navs as $field => $values)
+            {
+                /* if title if null, set title as the category name. */
+                if($organizeNavs[$i]['title'] == '')
+                {
+                    $organizeNavs[$i]['title'] = $this->lang->nav->types[$organizeNavs[$i]['type']];
+                }
+                $organizeNavs[$i][$field] = $values[$i];
+            }
         }
 
         foreach($organizeNavs as &$nav) $nav = $this->buildNav($nav);

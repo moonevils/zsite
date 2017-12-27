@@ -6,7 +6,7 @@
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
-    <a class='navbar-brand' href='{!echo helper::createLink('index')}'><i class='icon-home'></i></a>
+    <a class='navbar-brand' href='{!helper::createLink('index')}'><i class='icon-home'></i></a>
   </div>
   <div class='collapse navbar-collapse' id='navbarCollapse'>
     <ul class='nav navbar-nav'>
@@ -14,20 +14,20 @@
       {$i =0}
       {foreach($topNavs as $nav1)}
         {if(empty($nav1->children))}
-          <li class='{!echo $nav1->class}'>{!html::a($nav1->url, $nav1->title, "target='$nav1->target'")}</li>
-          {else}
+          <li class='{!$nav1->class}'>{!html::a($nav1->url, $nav1->title, "target='$nav1->target'")}</li>
+        {else}
           <li class="{!echo $nav1->hover . " " . $nav1->class}">
             {!html::a($nav1->url, $nav1->title . " <b class='caret'></b>", 'class="dropdown-toggle" data-toggle="dropdown"')}
             <ul class='dropdown-menu' role='menu'>
               {foreach($nav1->children as $nav2)}
                 {if(empty($nav2->children))}
-                  <li class='{!echo $nav2->class}'>{!html::a($nav2->url, $nav2->title, "target='$nav2->target'")}</li>
+                  <li class='{!$nav2->class}'>{!html::a($nav2->url, $nav2->title, "target='$nav2->target'")}</li>
                 {else}
-                <li class="dropdown-submenu {!echo $nav2->class} {if($i == $navCount -1)} pull-left {/if}">
+                  <li class="dropdown-submenu {!$nav2->class} {if($i == $navCount -1)} pull-left {/if}">
                     {!html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : '')}
                     <ul class='dropdown-menu' role='menu'>
                       {foreach($nav2->children as $nav3)}
-                      <li>{!html::a($nav3->url, $nav3->title, ($nav3->target != 'modal') ? "target='$nav3->target'" : '')}</li>
+                        <li>{!html::a($nav3->url, $nav3->title, ($nav3->target != 'modal') ? "target='$nav3->target'" : '')}</li>
                       {/foreach}
                     </ul>
                   </li>
