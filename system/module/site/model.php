@@ -50,7 +50,6 @@ class siteModel extends model
      */
     function deleteDir($dir, $deleteSelf = true) 
     {
-        if(!$deleteSelf) $selfDir = $dir;
         $dh = opendir($dir);
         while($file = readdir($dh)) 
         {
@@ -67,20 +66,11 @@ class siteModel extends model
                 }
             }
         }
-
         closedir($dh);
-        if($selfDir == $dir)
-        {
-            return true;
-        }
-        if(rmdir($dir))
-        {   
-            return true;           
-        }
-        else
-        {
-            return false;
-        }
+
+        if(!$deleteSelf) return true; 
+        if(rmdir($dir))  return true;           
+        return false;
     }
 
     /**
