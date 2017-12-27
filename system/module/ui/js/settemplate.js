@@ -53,7 +53,7 @@ $(document).ready(function()
         {
             if(response.result == 'success')
             {
-                $.zui.messager.success(response.message);
+                new $.zui.Messager(response.message, {type: 'success', placement: 'top', time: 2000}).show();
 
                 var $themes = $this.closest('.themes');
                 $themes.attr('data-theme', $this.data('theme'))
