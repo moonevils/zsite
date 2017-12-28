@@ -241,11 +241,9 @@ class navModel extends model
         {
             foreach($navs as $field => $values)
             {
-                /* if title if null, set title as the category name. */
-                if($organizeNavs[$i]['title'] == '')
-                {
-                    $organizeNavs[$i]['title'] = $this->lang->nav->types[$organizeNavs[$i]['type']];
-                }
+                /* if nav title if null, set title as all some type. */
+                if($organizeNavs[$i]['title'] == '') $organizeNavs[$i]['title'] = $this->lang->nav->all[$organizeNavs[$i]['type']];
+                
                 $organizeNavs[$i][$field] = $values[$i];
             }
         }
