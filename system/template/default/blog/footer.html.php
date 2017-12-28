@@ -20,7 +20,7 @@
     </div>
   </footer>
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='{!echo $lang->back2Top}'></a>
-</div>{* end .page-container in header.html.php */ }
+</div>{* end .page-container in header.html.php *}
 {include TPL_ROOT . 'common/qrcode.html.php'}
 {if($config->debug)} {!js::import($jsRoot . 'jquery/form/min.js')}{/if}
 {if(isset($pageJS))}  {!js::execute($pageJS)} {/if}
