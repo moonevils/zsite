@@ -55,16 +55,16 @@
             {if(isset($prevAndNext))}
               {@extract($prevAndNext)}
               {if($prev)}
-                {!html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'")}
+                {!html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'")}
               {else}
                 <a href='###' class='btn block text-left default disabled'><i class='icon-arrow-left'></i> {!print($lang->book->none)}</a>
               {/if}
               {if($next)}
-                {!html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'")}
+                {!html::a(inlink('read', "articleID=$next->id", "book={{$book->alias}}&node={{$next->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'")}
               {else}
                 <a href='###' class='btn block text-left default disabled'>{!print($lang->book->none)}<i class='icon-arrow-right'></i></a>
               {/if}
-              {!html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'")}
+              {!html::a(inlink('browse', "bookID={{$parent->id}}", "book={{$book->alias}}&title={{$parent->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'")}
               {if(!$control->get->fullScreen)} <a href='/' class='btn block text-left default home'><i class='icon-home'></i> {$lang->book->goHome}</a> {/if}
             {/if}
           </div>
@@ -130,16 +130,16 @@
         {if(isset($prevAndNext))}
           {@extract($prevAndNext)}
           {if($prev)}
-            {!html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'")}
+            {!html::a(inlink('read', "articleID=$prev->id", "book={{$book->alias}}&node={{$prev->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'")}
           {else}
             <a href='###' class='btn block text-left default disabled'><i class='icon-arrow-left'></i> {!print($lang->book->none)}</a>
           {/if}
           {if($next)}
-            {!html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'")}
+            {!html::a(inlink('read', "articleID=$next->id", "book={{$book->alias}}&node={{$next->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'")}
           {else}
             <a href='###' class='btn block text-left default disabled'>{!print($lang->book->none)}<i class='icon-arrow-right'></i></a>
           {/if}
-          {!html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}") . ($control->get->fullScreen ? "?fullScreen={$control->get->fullScreen}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'")}
+          {!html::a(inlink('browse', "bookID={{$parent->id}}", "book={{$book->alias}}&title={{$parent->alias}}") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'")}
         {/if}
       </div>
     </div>
