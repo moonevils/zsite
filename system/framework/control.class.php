@@ -477,9 +477,7 @@ class control extends baseControl
                 $this->mergeCSS();
                 $this->mergeJS();
             }
-
         }
-
 
         if(!headers_sent()
             && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'
