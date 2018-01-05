@@ -19,6 +19,12 @@ $lang->nav->inputUrl        = 'Enter a Link';
 $lang->nav->inputTitle      = 'Enter a Title';
 $lang->nav->cannotRemoveAll = 'Cannot remove all';
 
+/* nav show all some type. */
+$lang->nav->all['blog']    = 'All blog';
+$lang->nav->all['article'] = 'All article';
+$lang->nav->all['product'] = 'All product';
+$lang->nav->all['custom']  = 'Custom';
+
 /* nav type   */
 $lang->nav->types['system']  = 'System Module';
 $lang->nav->types['article'] = 'Article Category';
