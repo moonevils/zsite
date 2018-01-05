@@ -3,8 +3,9 @@
   {@helper::cd()}
 {/if}
 {!css::import($jsRoot . 'jquery/chosen/min.css')}
-{!js::import($jsRoot . 'jquery/chosen/min.js');}
-{$clientLang = $control->app->getClientLang();}
+{!js::import($jsRoot . 'jquery/chosen/min.js')}
+{$clientLang = $control->app->getClientLang()}
+{noparse}
 <script language='javascript'> 
 $(document).ready(function()
 {
@@ -12,3 +13,4 @@ $(document).ready(function()
     $('select.chosen-icons').chosenIcons({lang: '{$clientLang}'});
 });
 </script>
+{/noparse}
