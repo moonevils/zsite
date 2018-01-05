@@ -1,5 +1,5 @@
 {!js::import($jsRoot . 'jplayer/dist/jplayer/jquery.jplayer.min.js')}
-<?php css::import($jsRoot . 'jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css')}
+{!css::import($jsRoot . 'jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css')}
  
 <script>
 $(function()
