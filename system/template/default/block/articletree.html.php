@@ -20,8 +20,8 @@
     {$category = $model->tree->getByID($model->session->articleCategory)}
     {$startCategory = $category->parent}
   {/if}
-  {if($type == 'blog' and $app->getModuleName() == 'blog' and $model->session->articleCategory)}
-    {$category = $model->tree->getByID($model->session->articleCategory)}
+  {if($type == 'blog' and $app->getModuleName() == 'blog' and $model->session->blogCategory)}
+    {$category = $model->tree->getByID($model->session->blogCategory)}
     {$startCategory = $category->parent}
   {/if}
   {if($type == 'product' and $app->getModuleName() == 'product' and $model->session->productCategory)}
@@ -29,28 +29,18 @@
     {$startCategory = $category->parent}
   {/if}
 {/if}
-{if($block->content->showChildren)}
-  {$treeMenu = $model->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink), zget($block->content, 'initialExpand', 1))}
-  <div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
-    <div class='panel-heading'>
-      <strong>{!echo $icon . $block->title}</strong>
-    </div>
-    <div class='panel-body'>{!echo $treeMenu}</div>
+{$topCategories = $model->tree->getChildren($startCategory, $type)}
+<div id="block{$block->id}" class='panel panel-block {$blockClass}'>
+  <div class='panel-heading'>
+    <strong>{!echo $icon . $block->title}</strong>
   </div>
-{else}
-  {$topCategories = $model->tree->getChildren($startCategory, $type)}
-  <div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
-    <div class='panel-heading'>
-      <strong>{!echo $icon . $block->title}</strong>
-    </div>
-    <div class='panel-body'>
-      <ul class='nav nav-secondary nav-stacked'>
-        {foreach($topCategories as $topCategory)}
-          {$browseLink = helper::createLink($type, 'browse', "categoryID={{$topCategory->id}}", "category={{$topCategory->alias}}")}
-          {if($type == 'blog')} {$browseLink = helper::createLink('blog', 'index', "categoryID={{$topCategory->id}}", "category={{$topCategory->alias}}")} {/if}
-          {!echo '<li>' . html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{{$topCategory->id}}'") . '</li>'}
-        {/foreach}
-      </ul>
-    </div>
+  <div class='panel-body'>
+    <ul class='nav nav-secondary nav-stacked'>
+      {foreach($topCategories as $topCategory)}
+        {$browseLink = helper::createLink($type, 'browse', "categoryID={{$topCategory->id}}", "category={{$topCategory->alias}}")}
+        {if($type == 'blog')} {$browseLink = helper::createLink('blog', 'index', "categoryID={{$topCategory->id}}", "category={{$topCategory->alias}}")} {/if}
+        <li>{!html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{{$topCategory->id}}'")}</li>
+      {/foreach}
+    </ul>
   </div>
-{/if}
+</div>

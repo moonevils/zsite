@@ -62,8 +62,8 @@ class RainTPL
     static $blackList = array();
 
     /**
-     * outputFunctions 
-     * 
+     * outputFunctions
+     *
      * @static
      * @var string
      * @access public
@@ -81,7 +81,7 @@ class RainTPL
     static $checkTemplateUpdate = true;
 
     /**
-     * PHP tags <? ?> 
+     * PHP tags <? ?>
      * True: php tags are enabled into the template
      * False: php tags are disabled into the template and rendered as html
      *
@@ -155,11 +155,11 @@ class RainTPL
         global $app;
         $this->app = $app;
 
-        try 
+        try
         {
             $this->compileFile($tplName);
         }
-        catch(RainTpl_Exception $e) 
+        catch(RainTpl_Exception $e)
         {
             die($this->printDebug($e));
         }
@@ -212,9 +212,9 @@ class RainTPL
 
     /**
      * Configure the settings of RainTPL
-     * 
-     * @param  array|function    $setting 
-     * @param  mix               $value 
+     *
+     * @param  array|function    $setting
+     * @param  mix               $value
      * @static
      * @access public
      * @return void
@@ -234,8 +234,8 @@ class RainTPL
 
     /**
      * Prepare compile params.
-     * 
-     * @param  string    $tplName 
+     *
+     * @param  string    $tplName
      * @access public
      * @return array
      */
@@ -249,7 +249,7 @@ class RainTPL
             $this->tpl['templateDir'] = self::$tplDir . $tplBasedir;
             $this->tpl['templateDir'] = dirname($tplName) . DS;
 
-            $this->tpl['tplFile']      = self::$rootDir . $this->tpl['templateDir'] . $tplBasename . '.' . self::$tplExt;    // template file name
+            $this->tpl['tplFile']     = self::$rootDir . $this->tpl['templateDir'] . $tplBasename . '.' . self::$tplExt;    // template file name
 
             /* If tplFile is not exists append extension to it. */
             if(!file_exists($this->tpl['tplFile'])) $this->tpl['tplFile'] = dirname($this->tpl['tplFile']) . DS . basename($this->tpl['tplFile'], "." . self::$tplExt);
@@ -304,8 +304,8 @@ class RainTPL
 
     /**
      * Compile and write the compiled template file.
-     * 
-     * @param  string    $tplName 
+     *
+     * @param  string    $tplName
      * @access protected
      * @return void
      */
@@ -325,7 +325,7 @@ class RainTPL
         if(!self::$phpEnabled) $templateCode = str_replace(array("<?", self::PHP_END), array("&lt;?","?&gt;"), $templateCode);
 
         /* Xml re-substitution. */
-        $templateCode = preg_replace_callback ("/##XML(.*?)XML##/s", array($this, 'xml_reSubstitution'), $templateCode); 
+        $templateCode = preg_replace_callback ("/##XML(.*?)XML##/s", array($this, 'xml_reSubstitution'), $templateCode);
 
         /* Compile template. */
         $templateCompiled = self::PHP_START . " if(!class_exists('raintpl')){exit;}" . self::PHP_END . $this->compileTemplate($templateCode, $baseDir);
@@ -348,7 +348,7 @@ class RainTPL
 
     /**
      * Get Tag patterns.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -384,9 +384,9 @@ class RainTPL
 
     /**
      * Compile template code.
-     * 
-     * @param  string    $templateCode 
-     * @param  string    $tplBasedir 
+     *
+     * @param  string    $templateCode
+     * @param  string    $tplBasedir
      * @access protected
      * @return string
      */
@@ -413,8 +413,8 @@ class RainTPL
 
     /**
      * Compile the code
-     * 
-     * @param  array     $parsedCode 
+     *
+     * @param  array     $parsedCode
      * @access protected
      * @return string
      */
@@ -424,13 +424,13 @@ class RainTPL
 
         /* Variables initialization. */
         $compiledCode = $openIf = $commentIsOpen = $ignoreIsOpen = null;
-        $loopLevel   = 0;
+        $loopLevel    = 0;
 
         /* Ead all parsed code. */
         foreach($parsedCode as $html)
         {
             /* Close ignore tag. */
-            if(!$commentIsOpen && (strpos($html, '{/ignore}') !== FALSE || strpos($html, '*}') !== FALSE)) 
+            if(!$commentIsOpen && (strpos($html, '{/ignore}') !== FALSE || strpos($html, '*}') !== FALSE))
             {
                 $ignoreIsOpen = false;
             }
@@ -484,15 +484,15 @@ class RainTPL
                 $loopLevel--;
 
                 //close loop code
-                $compiledCode .=  self::wrapPHP('}');
+                $compiledCode .= self::wrapPHP('}');
             }
             elseif(strpos($html, '{/for}') !== FALSE)
             {
-                $compiledCode .=  self::wrapPHP('endfor;');
+                $compiledCode .= self::wrapPHP('endfor;');
             }
             elseif(strpos($html, '{/foreach}') !== FALSE)
             {
-                $compiledCode .=  self::wrapPHP('endforeach;');
+                $compiledCode .= self::wrapPHP('endforeach;');
             }
             elseif(preg_match('/\{if(?: condition){0,1}="([^"]*)"\}/', $html, $code))
             {
@@ -512,7 +512,7 @@ class RainTPL
                 $parsedCondition = $this->replaceVar($condition, $tagLeft = null, $tagRight = null, $phpLeft = null, $phpRight = null, $loopLevel);
 
                 //if code
-                $compiledCode .=  self::wrapPHP("if($parsedCondition){");
+                $compiledCode .= self::wrapPHP("if($parsedCondition){");
 
             }
             elseif(preg_match('/\{if\((.*)\)\}/', $html, $code))
@@ -647,8 +647,8 @@ class RainTPL
 
     /**
      * Compile foreach sentence.
-     * 
-     * @param  string    $html 
+     *
+     * @param  string    $html
      * @access public
      * @return string
      */
@@ -660,8 +660,8 @@ class RainTPL
 
     /**
      * Compile for sentence.
-     * 
-     * @param  string    $html 
+     *
+     * @param  string    $html
      * @access public
      * @return string
      */
@@ -673,9 +673,9 @@ class RainTPL
 
     /**
      * Compile include sentence.
-     * 
-     * @param  int    $html 
-     * @param  int    $code 
+     *
+     * @param  int    $html
+     * @param  int    $code
      * @access public
      * @return void
      */
@@ -704,9 +704,9 @@ class RainTPL
     }
 
     /**
-     * Compile inline for. 
-     * 
-     * @param  string    $code 
+     * Compile inline for.
+     *
+     * @param  string    $code
      * @access public
      * @return string
      */
@@ -717,7 +717,7 @@ class RainTPL
         {
             if(preg_match('/\}\s*\{/', $line))
             {
-                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);
                 $code         = str_replace($line, $compiledLine, $code);
             }
             else
@@ -731,7 +731,7 @@ class RainTPL
         {
             if(preg_match('/\}\s*\{/', $line))
             {
-                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);
                 $code         = str_replace($line, $compiledLine, $code);
             }
             else
@@ -745,9 +745,9 @@ class RainTPL
 
 
     /**
-     * CompileInlineIf 
-     * 
-     * @param  string    $code 
+     * CompileInlineIf
+     *
+     * @param  string    $code
      * @access public
      * @return string
      */
@@ -758,7 +758,7 @@ class RainTPL
         {
             if(preg_match('/\}\s*\{/', $line))
             {
-                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);
                 $code         = str_replace($line, $compiledLine, $code);
             }
             else
@@ -772,7 +772,7 @@ class RainTPL
         {
             if(preg_match('/\}\s*\{/', $line))
             {
-                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);   
+                $compiledLine = preg_replace('/\}\s*\{/', "}\n{", $line);
                 $code         = str_replace($line, $compiledLine, $code);
             }
             else
@@ -785,9 +785,9 @@ class RainTPL
     }
 
     /**
-     * wrapPHP 
-     * 
-     * @param  int    $code 
+     * wrapPHP
+     *
+     * @param  int    $code
      * @access public
      * @return void
      */
@@ -799,14 +799,14 @@ class RainTPL
     /**
      * Execute stripslaches() on the xml block. Invoqued by preg_replace_callback function below
      *
-     * @param  array      $capture 
+     * @param  array      $capture
      * @access protected
      * @return string
      */
     protected function xml_reSubstitution($capture)
     {
         return self::PHP_START . " echo '<?xml " . stripslashes($capture[1]) . self::PHP_END . self::PHP_END;
-    } 
+    }
 
     /**
      * Reduce a path, eg. www/library/../filepath//file => www/filepath/file
@@ -897,11 +897,11 @@ class RainTPL
     }
 
     /**
-     * replace the path of image src, link href and a href. 
+     * replace the path of image src, link href and a href.
      * @see rewrite_url for more information about how paths are replaced.
      *
-     * @param  string   $html 
-     * @param  string   $tplBasedir 
+     * @param  string   $html
+     * @param  string   $tplBasedir
      * @access protected
      * @return string
      */
@@ -916,7 +916,7 @@ class RainTPL
             $this->path = $this->reduce_path($tplDir);
 
             /* Allow " inside {} for cases in which url contains {function="foo()"} */
-            $url = '(?:(?:\\{.*?\\})?[^{}]*?)*?'; 
+            $url = '(?:(?:\\{.*?\\})?[^{}]*?)*?';
 
             $exp = array();
 
@@ -935,14 +935,14 @@ class RainTPL
 
     /**
      * replace const
-     * 
-     * @param  string    $html 
-     * @param  string    $tagLeft 
-     * @param  string    $tagRight 
-     * @param  string    $phpLeft 
-     * @param  string    $phpRight 
-     * @param  string    $loopLevel 
-     * @param  string    $echo 
+     *
+     * @param  string    $html
+     * @param  string    $tagLeft
+     * @param  string    $tagRight
+     * @param  string    $phpLeft
+     * @param  string    $phpRight
+     * @param  string    $loopLevel
+     * @param  string    $echo
      * @access public
      * @return string    $html
      */
@@ -953,14 +953,14 @@ class RainTPL
 
     /**
      * Replace functions/modifiers on constants and strings
-     * 
-     * @param  string    $html 
-     * @param  string    $tagLeft 
-     * @param  string    $tagRight 
-     * @param  string    $phpLeft 
-     * @param  string    $phpRight 
-     * @param  string    $loopLevel 
-     * @param  string    $echo 
+     *
+     * @param  string    $html
+     * @param  string    $tagLeft
+     * @param  string    $tagRight
+     * @param  string    $phpLeft
+     * @param  string    $phpRight
+     * @param  string    $loopLevel
+     * @param  string    $echo
      * @access public
      * @return html
      */
@@ -1024,23 +1024,24 @@ class RainTPL
                 {
                     // get the function and the parameters
                     $function = substr($function_var, 0, $dot_position);
-                    $params = substr($function_var, $dot_position+1);
+                    $params   = substr($function_var, $dot_position+1);
                 }
                 else
                 {
                     //get the function
                     $function = str_replace("@double_dot@", "::", $function_var);
-                    $params = null;
+                    $params   = null;
                 }
 
                 // replace back the @double_dot@ with ::
                 $function = str_replace("@double_dot@", "::", $function);
-                $params = str_replace("@double_dot@", "::", $params);
+                $params   = str_replace("@double_dot@", "::", $params);
             }
             else
             {
                 $function = $params = null;
             }
+
             $phpVariable = $varName . $variablePath;
 
             // compile the variable for php
@@ -1066,15 +1067,15 @@ class RainTPL
     }
 
     /**
-     * replaceVar 
-     * 
-     * @param  string    $html 
-     * @param  string    $tagLeft 
-     * @param  string    $tagRight 
-     * @param  string    $phpLeft 
-     * @param  string    $phpRight 
-     * @param  string    $loopLevel 
-     * @param  string    $echo 
+     * replaceVar
+     *
+     * @param  string    $html
+     * @param  string    $tagLeft
+     * @param  string    $tagRight
+     * @param  string    $phpLeft
+     * @param  string    $phpRight
+     * @param  string    $loopLevel
+     * @param  string    $echo
      * @access public
      * @return string
      */
@@ -1132,8 +1133,8 @@ class RainTPL
                     if(strpos($var, '->') === false) $extraVar = "=\$this->var['{$varName}']{$variablePath}" . $extraVar;
                     if(strpos($var, '->') !== false)
                     {
-                        $objectVar = '$this->var' . "['$varName'] = " . '$' . $varName; 
-                        $extraVar = $extraVar . ';' . $objectVar;
+                        $objectVar = '$this->var' . "['$varName'] = " . '$' . $varName;
+                        $extraVar  = $extraVar . ';' . $objectVar;
                     }
                 }
 
@@ -1148,20 +1149,20 @@ class RainTPL
                     {
                         // get the function and the parameters
                         $function = substr($function_var, 0, $dot_position);
-                        $params = substr($function_var, $dot_position+1);
+                        $params   = substr($function_var, $dot_position+1);
 
                     }
                     else
                     {
                         //get the function
                         $function = str_replace("@double_dot@", "::", $function_var);
-                        $params = null;
+                        $params   = null;
 
                     }
 
                     // replace back the @double_dot@ with ::
                     $function = str_replace("@double_dot@", "::", $function);
-                    $params = str_replace("@double_dot@", "::", $params);
+                    $params   = str_replace("@double_dot@", "::", $params);
                 }
                 else
                 {
@@ -1225,7 +1226,7 @@ class RainTPL
         {
             // find the line of the error
             $line = 0;
-            $rows=explode("\n",$this->tpl['source']);
+            $rows = explode("\n",$this->tpl['source']);
             while(!strpos($rows[$line], $code)) $line++;
 
             // stop the execution of the script
