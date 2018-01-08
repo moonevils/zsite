@@ -68,7 +68,6 @@
         {elseif($product->price != 0)}
           <strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->price}</strong>
         {/if}
-      }
       {/if}
       </div>
     {/if}
