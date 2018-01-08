@@ -12,7 +12,7 @@
 <div class='row blocks' data-region='article_browse-topBanner'>{$control->block->printRegion($layouts, 'article_browse', 'topBanner', true)}</div>
 <div class='row' id='columns' data-page='article_browse'>
   {if(!empty($layouts['article_browse']['side']) and !empty($sideFloat) && $sideFloat != 'hidden')}
-  <div class="col-md-{!echo 12 - $sideGrid} col-main{echo ($sideFloat === 'left') ? ' pull-right' : '' }" id="mainContainer">
+  <div class="col-md-{!echo 12 - $sideGrid} col-main{!echo ($sideFloat === 'left') ? ' pull-right' : '' }" id="mainContainer">
   {else}
   <div class="col-md-12" id="mainContainer">
   {/if}
