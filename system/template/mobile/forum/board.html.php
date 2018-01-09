@@ -50,7 +50,7 @@
             <div class='card-content text-muted small'><i class='icon icon-eye-open'></i> {$thread->views} &nbsp; <i class='icon-user'></i> {$thread->authorRealname} {!substr($thread->addedDate, 5, -3)}</div>
           </div>
           <div class='table-cell middle thumbnail-cell text-right'>
-            <div class='counter text-right'><div class='title{if($thread->isNew)} {echo ' text-success'} {/if}'>{$thread->replies}</div><div class='caption text-muted small'>{$lang->thread->replies}</div></div>
+            <div class='counter text-right'><div class='title{if($thread->isNew)} {!echo ' text-success'} {/if}'>{$thread->replies}</div><div class='caption text-muted small'>{$lang->thread->replies}</div></div>
           </div>
         </div>
       </a>
