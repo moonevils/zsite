@@ -82,7 +82,7 @@
   {if(!empty($layouts['article_view']['side']) and !(empty($sideFloat) || $sideFloat === 'hidden'))} <div class='col-md-{!echo $sideGrid} col-side'><side class='page-side blocks' data-region='article_view-side'>{$control->block->printRegion($layouts, 'article_view', 'side')}</side></div> {/if}
 </div>
 <div class='row blocks' data-region='article_view-bottomBanner'>{$control->block->printRegion($layouts, 'article_view', 'bottomBanner', true)}</div>
-{if(strpos($article->content, '<embed ') !== false)}
-{include TPL_ROOT . 'common/video.html.php'}
+{if(strpos($article->content, '<embed') !== false)}
+  {include TPL_ROOT . 'common/video.html.php'}
 {/if}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

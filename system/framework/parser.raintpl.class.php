@@ -77,7 +77,14 @@ class raintplParser
 
         foreach($this->control->view as $key => $value) $this->tpl->assign($key, $value);
 
-        return $this->tpl->draw($viewFile, true);
+        $html = $this->tpl->draw($viewFile, true);
+
+        foreach($hookFiles as $hook)
+        {
+            if(file_exists($hook)) $html .= $this->tpl->draw($hook, true);
+        }
+
+        return $html;
     }
 
     /**

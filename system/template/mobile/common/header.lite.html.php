@@ -19,7 +19,7 @@
     <link rel="alternate" href="{!echo $sysURL . $desktopURL}" >
   {/if}
   {if(isset($sourceURL))}
-     link rel="canonical" href="{!echo $sysURL . $sourceURL}" >
+    <link rel="canonical" href="{!echo $sysURL . $sourceURL}" >
   {elseif(isset($canonicalURL))}
     <link rel="canonical" href="{!echo $sysURL . $canonicalURL}" >
   {/if}
