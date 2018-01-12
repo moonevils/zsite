@@ -20,15 +20,15 @@
     {$startCategory = $category->parent}
   {/if}
   {if($type == 'blog' and $app->getModuleName() == 'blog' and $model->session->blogCategory)}
-    {$category = $model->tree->getByID($model->session->blogCategory)}
+    {$category = $model->loadModel('tree')->getByID($model->session->blogCategory)}
     {$startCategory = $category->parent}
   {/if}
   {if($type == 'product' and $app->getModuleName() == 'product' and $model->session->productCategory)}
-    {$category = $model->tree->getByID($model->session->productCategory)}
+    {$category = $model->loadModel('tree')->getByID($model->session->productCategory)}
     {$startCategory = $category->parent}
   {/if}
 {/if}
-{$topCategories = $model->tree->getChildren($startCategory, $type)}
+{$topCategories = $model->loadModel('tree')->getChildren($startCategory, $type)}
 <div id="block{$block->id}" class='panel panel-block {$blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
