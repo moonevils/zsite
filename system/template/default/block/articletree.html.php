@@ -10,14 +10,13 @@
  * @link        http://www.chanzhi.org
 */
 *}
-{$model->loadModel('tree')}
 {$block->content  = json_decode($block->content)}
 {$type            = str_replace('tree', '', strtolower($block->type))}
 {$browseLink      = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($type) . 'BrowseLink'}
 {$startCategory = 0}
 {if(isset($block->content->fromCurrent) and $block->content->fromCurrent)}
   {if($type == 'article' and $app->getModuleName() == 'article' and $model->session->articleCategory)}
-    {$category = $model->tree->getByID($model->session->articleCategory)}
+    {$category = $model->loadModel('tree')->getByID($model->session->articleCategory)}
     {$startCategory = $category->parent}
   {/if}
   {if($type == 'blog' and $app->getModuleName() == 'blog' and $model->session->blogCategory)}
