@@ -22,10 +22,10 @@
         <dl class='dl-inline'>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblAddedDate, formatTime($article->addedDate))}'><i class='icon-time icon-large'></i> {!echo formatTime($article->addedDate)}</dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='{!printf($lang->article->lblAuthor, $article->author)}'><i class='icon-user icon-large'></i> {!echo $article->author}</dd>
-          {if($article->source != 'original' and $article->copyURL != '')} <dt>{!echo $lang->article->sourceList[$article->source] . $lang->colon}</dt> {/if}
-          {if($article->source == 'article')} 
-            {$article->copyURL = $sysURL . $control->article->createPreviewLink($article->copyURL)}
-            <dd>{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</dd>
+          {if($article->source != 'original' and $article->copyURL != '')}
+            <dt>{!echo $lang->article->sourceList[$article->source] . $lang->colon}</dt>
+            {if($article->source == 'article')}{$article->copyURL = $sysURL . $control->article->createPreviewLink($article->copyURL)}{/if}
+            <dd>{!echo $article->copyURL ? html::a($article->copyURL, $article->copySite, "target='_blank'") : $article->copySite}</dd>
           {else}
             <span class='label label-success'>{!echo $lang->article->sourceList[$article->source]}</span>
           {/if}
