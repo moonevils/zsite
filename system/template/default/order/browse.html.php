@@ -12,14 +12,14 @@
         <table class='table table-hover tablesorter table-fixed' table-layout='fixed'>
           <thead>
             <tr class='text-center'>
-              <td class='w-120px'>{$lang->order->type}</td>
+              <td class='w-100px'>{$lang->order->type}</td>
               <td class='w-280px text-left'>{$lang->order->productInfo}</td>
               <td class='w-80px text-right'>{$lang->order->amount}</td>
               <td class='w-80px'>{$lang->product->status}</td>
               <td class='w-80px'>{$lang->order->payStatus}</td>
               <td>{$lang->order->note}</td>
               <td>{$lang->order->last}</td>
-              <td class='w-200px'>{$lang->actions}</td>
+              <td class='w-220px'>{$lang->actions}</td>
             </tr>
           </thead>
           <tbody>
