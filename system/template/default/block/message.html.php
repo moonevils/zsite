@@ -75,7 +75,7 @@ $(document).ready(function()
                 $('#blockCaptchaBox').html(Base64.decode(response.captcha)).show();
             }
         }   
-{else}
+        {else}
         {
            location.href=createLink('message', 'index'); 
         }

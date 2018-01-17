@@ -2,7 +2,7 @@
   <div class='panel-heading'>
     <i class='icon-comment-alt pull-left'></i>
     <div class='panel-actions'>
-      {if($thread->readonly)} <span class='label'><i class='icon-lock'></i>{$lang->thread->readonly}</span>{&nbsp;} {/if}
+      {if($thread->readonly)} <span class='label'><i class='icon-lock'></i>{$lang->thread->readonly}</span> {/if}
     </div>
     <strong>{$thread->title}</strong>
     <div class='text-muted'>{$thread->addedDate}</div>
