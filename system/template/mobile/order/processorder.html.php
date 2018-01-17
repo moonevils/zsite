@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The processorder view file of order for mobile template of chanzhiEPS.
  * The file should be used as ajax content
@@ -10,8 +10,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
+{noparse}
 <style>
 .alert > .icon, .alert > .icon + .content {padding: 10px 15px;}
 .alert > .icon {display: block; text-align: center; font-size: 48px; float: none; line-height: 1; padding-bottom: 0; opacity: .7}
@@ -21,17 +22,18 @@
 .alert-deny h2 {margin: 0 0 20px}
 body {background-color: #f1f1f1}
 </style>
+{/noparse}
 <div class='container w-200px'>
   <div class='alert alert-deny'>
     <i class='icon-ok-sign icon text-success'></i>
     <div class='content'>
-      <h2 class='text-center'>{!echo $lang->order->paidSuccess}</h2>
+      <h2 class='text-center'>{$lang->order->paidSuccess}</h2>
       <div class='actions text-center'>
-        {!echo html::a(inlink('browse'), $lang->order->bought, "class='btn primary block'")}
+        {!html::a(inlink('browse'), $lang->order->bought, "class='btn primary block'")}
       </div>
     </div>
   </div>
 </div>
-{if(isset($pageJS)) js::execute($pageJS)}
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 </body>
 </html>

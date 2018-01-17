@@ -598,7 +598,7 @@ class messageModel extends model
      */
     public function getListForWidget($limit)
     {
-        $admins = $this->dao->select('account')->from(TABLE_USER)->where('admin')->ne('no')->fetchAll('account');
+        $admins = $this->dao->setAutoLang(false)->select('account')->from(TABLE_USER)->where('admin')->ne('no')->fetchAll('account');
         $messages = $this->dao->select('*')
             ->from(TABLE_MESSAGE)
             ->where('status')->eq(0)

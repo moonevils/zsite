@@ -39,14 +39,14 @@ $lang->chanzhiEPSx    = 'ZSite';
 $lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, any signs/links of Zsite shouldn't be removed, hidden or covered.</span>";
 $lang->poweredBy      = "<a href='http://www.zsite.net/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.zsite.net/?v=%s' target='_blank' title='%s'>Zsite CMS %s</a></span>";
-$lang->newVersion     = "Note: Zsite CMS has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
+$lang->newVersion     = "Note: Zsite has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
 $lang->redirecting    = "<span class='text-muted'>After <span id='countDown'>3</span> seconds, Redirecting to manage categories......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Redirect</a>";
 
 /* Global lang items. */
 $lang->home             = 'Home';
-$lang->siteHome         = 'Homepage';
+$lang->siteHome         = 'Home';
 $lang->welcome          = 'Welcome to Zsite, <strong>%s</strong>!';
 $lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs          = 'Today is %s，';
@@ -99,7 +99,7 @@ $lang->feature        = 'Feature';
 $lang->year           = 'Year';
 $lang->selectAll      = 'Select All';
 $lang->selectReverse  = 'Select Reverse';
-$lang->loading        = 'In progress...';
+$lang->loading        = 'Loading...';
 $lang->sending        = 'Sending...';
 $lang->saveSuccess    = 'Done';
 $lang->setSuccess     = 'Done';
@@ -134,15 +134,15 @@ $lang->getUserByApi       = 'Get user info by api';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['zh-cn'] = 'Switch to simplified Chinese site';
-$lang->selectLangTip['zh-tw'] = 'Switch to traditional Chinese site';
-$lang->selectLangTip['en']    = 'Switch to English site';
+$lang->selectLangTip['zh-cn'] = 'Switch to simplified Chinese';
+$lang->selectLangTip['zh-tw'] = 'Switch to traditional Chinese';
+$lang->selectLangTip['en']    = 'Switch to English';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete    = 'Do you want to delete it?';
 $lang->js->deleteing        = 'Deleting';
-$lang->js->doing            = 'Processing';
+$lang->js->doing            = 'Doing';
 $lang->js->loading          = 'Loading';
 $lang->js->updating         = 'Updating';
 $lang->js->timeout          = 'Timeout. Please try it again.';
@@ -286,10 +286,10 @@ $lang->message = new stdclass();
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
-$lang->forum->menu->browse  = 'Threads|forum|admin|';
-$lang->forum->menu->reply   = 'Replies|reply|admin|';
-$lang->forum->menu->tree    = 'Boards|tree|browse|type=forum';
-$lang->forum->menu->update  = 'Updates|forum|update|';
+$lang->forum->menu->browse  = 'Thread|forum|admin|';
+$lang->forum->menu->reply   = 'Reply|reply|admin|';
+$lang->forum->menu->tree    = 'Board|tree|browse|type=forum';
+$lang->forum->menu->update  = 'Update|forum|update|';
 $lang->forum->menu->setting = 'Settings|forum|setting|';
 
 /* Menu of site module. */
@@ -301,7 +301,7 @@ $lang->site->menu->request   = 'Request Type|site|seturltype|';
 $lang->site->menu->domain    = 'Domain Settings|site|setdomain|';
 $lang->site->menu->cdn       = 'CDN Settings|site|setcdn|';
 $lang->site->menu->cache     = 'Cache Settings|site|setcache|';
-$lang->site->menu->home      = 'Homepage Menu|site|sethomemenu|';
+$lang->site->menu->home      = 'Home Menu|site|sethomemenu|';
 $lang->site->menu->search    = 'Full Text Retrieval|search|buildindex|';
 $lang->site->menu->backup    = 'Backup/Restore|backup|index|';
 $lang->site->menu->agreement = 'Agreement|site|setagreement|';

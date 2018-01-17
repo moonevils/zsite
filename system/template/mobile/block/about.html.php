@@ -11,14 +11,14 @@
 */
 /php*}
 {$block->content = json_decode($block->content)}
-<div id="block{!echo $block->id}" class='panel panel-block panel-block-about {!echo $blockClass}'>
+<div id="block{$block->id}" class='panel panel-block panel-block-about {$blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText, "data-toggle='modal' data-type='ajax'")}</div>
+      <div class='pull-right'>{!html::a($block->content->moreUrl, $block->content->moreText, "data-toggle='modal' data-type='ajax'")}</div>
     {/if}
   </div>
   <div class='panel-body'>
-    <div class='article-content'>{!echo $config->company->desc}</div>
+    <div class='article-content'>{$config->company->desc}</div>
   </div>
 </div>

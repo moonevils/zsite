@@ -17,7 +17,7 @@
   <div class='panel-heading'>
     <strong>{!echo $icon} {!echo $block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+    <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if($content->showType == 'block')}

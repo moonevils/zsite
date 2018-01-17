@@ -15,7 +15,7 @@
 
 <div class='panel-section'>
   <div class='panel-heading'>
-    <button type='button' class='btn primary block' data-toggle='modal' data-remote='{inlink('create')}'><i class='icon icon-plus'></i>{$lang->address->create}</button>
+    <button type='button' class='btn primary block' data-toggle='modal' data-remote='{!inlink('create')}'><i class='icon icon-plus'></i>{$lang->address->create}</button>
   </div>
   <div class='panel-heading'>
     <div class='title strong'><i class='icon icon-map-marker'></i>{$lang->address->browse}</div>
@@ -28,13 +28,13 @@
           <div class='card-heading'>
             {if(helper::isAjaxRequest())} <input type='radio' {$checked} name='deliveryAddress' value='{$address->id}'/> {/if}
             <strong class='lead'>{$address->contact}</strong>
-            &nbsp;&nbsp;<span class='text-special'><i class='icon icon-phone'></i>{echo str2Entity($address->phone)}</span>
+            &nbsp;&nbsp;<span class='text-special'><i class='icon icon-phone'></i>{!str2Entity($address->phone)}</span>
           </div>
           <div class='card-content'>
             {$address->address}<span class='text-muted'>({$lang->address->zipcode} : {$address->zipcode})</span>
           </div>
           <div class='card-footer'>
-            {!html::a(helper::createLink('address', 'edit', "id={{$address->id}}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}&nbsp;&nbsp}
+            {!html::a(helper::createLink('address', 'edit', "id={{$address->id}}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}&nbsp;&nbsp
             {!html::a(helper::createLink('address', 'delete', "id={{$address->id}}"), $lang->delete, "class='deleter text-danger'")}
           </div>
         </div>

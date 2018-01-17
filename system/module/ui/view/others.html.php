@@ -213,15 +213,16 @@ js::set('gdInstalled', $gdInstalled);
             <tr class='watermark-info <?php echo $waterHide;?>'>
               <th class='w-120px'><?php echo $lang->color;?></th> 
               <td class='w-p30'>
-                <div class="input-group">
-                  <?php echo html::input('files[watermarkColor]', isset($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
-                  <div class='input-group-btn'>
-                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                      <span class='caret'></span>
-                    </button>
-                    <div class='dropdown-menu colors'>
-                      <?php echo $colorPlates; ?>
-                    </div>
+                <div class='colorplate clearfix'>
+                  <?php $watermarkColor = !empty($this->config->file->watermarkColor) ? $this->config->file->watermarkColor : '#fff';?>
+                  <div class='input-group color ctive' data='<?php echo $watermarkColor;?>'>
+                    <?php echo html::input('files[watermarkColor]', $watermarkColor, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
+                    <span class='input-group-btn'>
+                      <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                      <div class='dropdown-menu colors'>
+                        <?php echo $colorPlates; ?>
+                      </div>
+                    </span>
                   </div>
                 </div>
               </td>

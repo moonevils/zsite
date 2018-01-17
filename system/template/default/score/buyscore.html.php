@@ -29,7 +29,7 @@
             </tr>
             <tr>
               <th></th>
-              <td>{!echo html::submitButton()}</td>
+              <td>{!html::submitButton()}</td>
             </tr>
           </table>
         </form>

@@ -44,3 +44,7 @@
 #theme-heading > span.active > a,
 #theme-heading > span > a:hover {color: #347aeb; text-decoration: none}
 #theme-heading > span.active > a {color: #333; font-weight: bold;}
+
+.messagers-holder{position: fixed; z-index: 99999; padding: 10px; pointer-events: none;}
+.messagers-holder.top{top: 0; left: 0; right: 0;}
+.messagers-holder.top .messager{position: static; display: table; margin: 10px auto; overflow: hidden;}

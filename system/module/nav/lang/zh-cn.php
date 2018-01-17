@@ -1,9 +1,4 @@
-<?php
-/**
- * The common simplified chinese file of chanzhiEPS.
- *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
+<?php /** * The common simplified chinese file of chanzhiEPS.  * * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com) * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      DaiTingting 
  * @package     chanzhiEPS
  * @version     $Id$
@@ -19,7 +14,13 @@ $lang->nav->inputUrl        = '请输入链接';
 $lang->nav->inputTitle      = '请输入标题';
 $lang->nav->cannotRemoveAll = '不能删除所有导航';
 
-/* nav type   */
+/* nav show all some type. */
+$lang->nav->all['blog']    = '所有博客';
+$lang->nav->all['article'] = '所有文章';
+$lang->nav->all['product'] = '所有产品';
+$lang->nav->all['custom']  = '自定义';
+
+/* nav type. */
 $lang->nav->types['system']  = '系统模块';
 $lang->nav->types['article'] = '文章类目';
 $lang->nav->types['blog']    = '博客类目';

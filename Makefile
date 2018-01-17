@@ -46,7 +46,7 @@ zip:
 	for path in `find chanzhieps/ -type d`; do touch "$$path/index.html"; done	
 	rm chanzhieps/www/index.html
 	# add header code to every php file.
-	sed -i '1i\<?php if(!defined("RUN_MODE")) die();?>' `find chanzhieps/system/template/ -name '*.php'`
+	sed -i '1i\{if(!defined("RUN_MODE"))} {!die()} {/if}' `find chanzhieps/system/template/ -name '*.html.php'`
 	sed -i '1i\<?php if(!defined("RUN_MODE")) die();?>' `find chanzhieps/system/module/ -name '*.php'`
 	# change mode.
 	chmod 777 -R chanzhieps/system/template

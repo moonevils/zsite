@@ -1,4 +1,4 @@
-{*php*}
+{*php
 /**
  * The error view file of chanzhiEPS.
  *
@@ -9,8 +9,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-{*/php*}
+/php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{noparse}
 <style>
 .container {padding: 20px;}
 .alert > .icon, .alert > .icon + .content {padding: 10px 15px;}
@@ -21,18 +22,19 @@
 .alert-error h2 {margin: 0 0 20px}
 body {background-color: #f1f1f1}
 </style>
+{/noparse}
 <div class='container'>
   <div class='alert alert-error'>
     <i class='icon-frown icon'></i>
     <div class='content'>
-      <h1 class='text-center'>404 <small> - {!echo $lang->error->pageNotFound}</small></h1>
-      <p class='text-center'><small>{!echo $lang->error->searchTip}</small></p>
+      <h1 class='text-center'>404 <small> - {$lang->error->pageNotFound}</small></h1>
+      <p class='text-center'><small>{$lang->error->searchTip}</small></p>
       <div class='actions'>
-        <form action='{!echo helper::createLink('search')?>' method='get' role='search'>
+        <form action='{!helper::createLink('search')}' method='get' role='search'>
           <div class='input-group'>
             {$keywords = ($control->app->getModuleName() == 'search') ? $control->session->serachIngWord : ''}
-            {!echo html::input('words', $keywords, "class='form-control' placeholder=''")}
-            {if($control->config->requestType == 'GET') echo html::hidden($control->config->moduleVar, 'search') . html::hidden($control->config->methodVar, 'index')}
+            {!html::input('words', $keywords, "class='form-control' placeholder=''")}
+            {if($control->config->requestType == 'GET')} {!html::hidden($control->config->moduleVar, 'search') . html::hidden($control->config->methodVar, 'index')} {/if}
             <div class='input-group-btn'>
               <button class='btn default' type='submit'><i class='icon icon-search'></i></button>
             </div>

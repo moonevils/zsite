@@ -1,5 +1,5 @@
 {include TPL_ROOT . 'common/header.modal.html.php'}
-<form method='post' action='{!echo inlink('setpassword')}' id='passwordForm' class='form'>
+<form method='post' action='{!inlink('setpassword')}' id='passwordForm' class='form'>
   <table class='table table-form borderless'>
     <tr>
       <th class="col-xs-4">{!echo $lang->user->account}</th>
@@ -7,13 +7,13 @@
     </tr>  
     <tr>
       <th>{!echo $lang->user->newPassword}</th>
-      <td>{!echo html::password('password1', '', "class='form-control'")}</td><td></td>
+      <td>{!html::password('password1', '', "class='form-control'")}</td><td></td>
     </tr>  
     <tr>
       <th>{!echo $lang->user->password2}</th>
-      <td>{!echo html::password('password2', '', "class='form-control'")}</td><td></td>
+      <td>{!html::password('password2', '', "class='form-control'")}</td><td></td>
     </tr>  
-    <tr><td></td><td>{!echo html::submitButton()}</td></tr>
+    <tr><td></td><td>{!html::submitButton()}</td></tr>
   </table>
 </form>
 {include TPL_ROOT . 'common/footer.modal.html.php'}

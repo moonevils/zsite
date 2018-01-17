@@ -410,7 +410,7 @@ class fileModel extends model
 
             if(strtolower($file['extension']) != 'gif' and in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                if($objectType != 'source' and $objectType != 'slide') 
+                if(strpos('source,slide,logo', $objectType) === false)
                 {
                     $this->compressImage($realPathName);
                     if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
@@ -1267,7 +1267,7 @@ class fileModel extends model
         if(!extension_loaded('gd')) return false;
         if(!is_writable($imageInfo['dirname'])) return false;
         $rawImage = str_replace('f_', '', $imagePath);
-
+        
         if(!file_exists($rawImage)) copy($imagePath, $rawImage); 
         $this->addTextWatermark($rawImage, $imagePath);
         $this->compressImage($imagePath);
@@ -1372,6 +1372,19 @@ class fileModel extends model
     public function scanImages()
     {
         $files = glob($this->app->getDataRoot() . "upload/*/f_*");
+        $logos = $this->dao->select('pathname')
+            ->from(TABLE_FILE)
+            ->where('objectType')->eq('logo')
+            ->fetchAll();
+
+        /* Delete logo  form files. */
+        foreach($files as $key => $file)
+        {
+            foreach($logos as $logo)
+            {
+                if(strpos($file, substr($logo->pathname, 0, strpos($logo->pathname, '.'))) !== false) unset($files[$key]);
+            } 
+        }
         $images = array();
         foreach($files as $key => $file)
         {
@@ -1381,7 +1394,6 @@ class fileModel extends model
             if(strpos($size['mime'], 'ico') !== false) continue;
             $images[] = $file;
         }
-
         return $images;
     }
 

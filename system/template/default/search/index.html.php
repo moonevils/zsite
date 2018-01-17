@@ -3,7 +3,7 @@
 {else}
   {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 {/if}
-{!echo $common->printPositionBar('search', null, $words)}
+{!$common->printPositionBar('search', null, $words)}
 <div class='row'>
   <div class='col-md-12'>
     <div class='list list-condensed'>
@@ -15,9 +15,9 @@
           <div class='item'>
             <div class='item-heading'>
               <div class="text-muted pull-right">
-                <span title="{!echo $lang->object->addedDate}"><i class='icon-time'></i> {!echo substr($object->editedDate, 0, 10)}</span>
+                <span title="{$lang->object->addedDate}"><i class='icon-time'></i> {!substr($object->editedDate, 0, 10)}</span>
               </div>
-              <h4>{!echo html::a($object->url, $object->title)}</h4>
+              <h4>{!html::a($object->url, $object->title)}</h4>
             </div>
             <div class='item-content'>
               {if(!empty($object->image->primary))}
@@ -26,13 +26,13 @@
                   {!html::a($object->url, html::image($control->loadModel('file')->printFileURL($object->image->primary->pathname, $object->image->primary->extension, $object->objectType, 'smallURL'), "title='$title' class='thumbnail'" ))}
                 </div>
               {/if}
-              <div class='text text-muted'>{!echo $object->summary}</div>
+              <div class='text text-muted'>{$object->summary}</div>
             </div>
           </div>
         {/foreach}
       </section>
       <footer class='clearfix'>
-        {!echo str_replace($words, urlencode($words), $pager->get('right', 'short'))}
+        {!str_replace($words, urlencode($words), $pager->get('right', 'short'))}
         <span class='execute-info text-muted'>{!printf($lang->search->executeInfo, $pager->recTotal, $consumed)}</span> 
       </footer>
     </div>

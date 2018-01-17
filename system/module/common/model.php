@@ -328,6 +328,8 @@ class commonModel extends model
         if($module == 'guarder' and $method == 'validate') return true;
         if($module == 'misc' and $method == 'ajaxgetfingerprint') return true;
         if($module == 'wechat' and $method == 'response') return true;
+        if($module == 'source' and $method == 'js') return true;
+        if($module == 'source' and $method == 'css') return true;
         if($module == 'sitemap' and $method == 'index') return true;
         if(RUN_MODE == 'admin' and $this->app->user->admin != 'no' and isset($this->config->rights->admin[$module][$method])) return true;
         if(RUN_MODE == 'admin' and $module == 'farm' and $method == 'register') return true;

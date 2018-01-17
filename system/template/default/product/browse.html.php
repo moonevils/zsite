@@ -24,7 +24,7 @@
          {!echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->hot, "data-field='views' class='views setOrder'") . "</div>"}
         <div class='pull-right btn-group' id="modeControl">
           {foreach($lang->product->listMode as $mode => $text)}
-          {!echo html::a("javascript:;", $text, "data-mode='$mode' class='btn'")}
+          {!html::a("javascript:;", $text, "data-mode='$mode' class='btn'")}
           {/foreach}
         </div>
       </header>

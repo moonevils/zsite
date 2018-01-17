@@ -33,12 +33,12 @@
           {if(isset($content->showCategory) and $content->showCategory == 1)}
             {if($content->categoryName == 'abbr')}
             {$categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] '}
-            {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), $categoryName)}
+            {!html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), $categoryName)}
             {else}
-            {!echo html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), '[' . $product->category->name . '] ')}
+            {!html::a(helper::createLink('product', 'browse', "categoryID={{$product->category->id}}", "category={{$product->category->alias}}"), '[' . $product->category->name . '] ')}
             {/if}
           {/if}
-          {!echo html::a($url, $product->name)}
+          {!html::a($url, $product->name)}
         </li>
         {if(isset($content->showInfo) and isset($content->infoAmount))}
           {$productInfo = empty($product->desc) ? $product->content : $product->desc}

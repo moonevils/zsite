@@ -4,7 +4,7 @@
   <div class='panel-heading'>
     <strong><i class='icon icon-comments-alt'></i> {!echo $lang->company->contact}</strong>
     {if(!empty($block->content->moreText) and !empty($block->content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($block->content->moreUrl, $block->content->moreText)}</div>
+    <div class='pull-right'>{!html::a($block->content->moreUrl, $block->content->moreText)}</div>
     {/if}
   </div>
   <div class='panel-body'>

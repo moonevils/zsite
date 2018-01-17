@@ -9,7 +9,7 @@ $(document).ready(function()
         })
     }
 
-   if(typeof(v.categoryID) != 'undefined') $('.tree #category' + v.categoryID).addClass('active');
+   if(typeof(v.categoryID) != 'undefined') $('#category' + v.categoryID).parent().addClass('active');
 
    $('body').tooltip(
     {

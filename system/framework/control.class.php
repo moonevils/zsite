@@ -138,8 +138,9 @@ class control extends baseControl
             $viewFile = (!empty($siteExtViewFile) and file_exists($siteExtViewFile)) ? $siteExtViewFile : $viewFile;
             if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
 
-            $commonExtHookFiles = glob($viewExtPath['common'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
-            $siteExtHookFiles   = empty($viewExtPath['site']) ? '' : glob($viewExtPath['site'] . $this->devicePrefix . $methodName . ".*.{$viewType}.hook.php");
+            $hookExtension      = RUN_MODE == 'front' ? 'hook.tpl.php' : 'hook.php';
+            $commonExtHookFiles = glob($viewExtPath['common'] . $this->devicePrefix . $methodName . ".*.{$viewType}.{$hookExtension}");
+            $siteExtHookFiles   = empty($viewExtPath['site']) ? '' : glob($viewExtPath['site'] . $this->devicePrefix . $methodName . ".*.{$viewType}.{$hookExtension}");
             $extHookFiles       = array_merge((array) $commonExtHookFiles, (array) $siteExtHookFiles);
         }
 
@@ -477,9 +478,7 @@ class control extends baseControl
                 $this->mergeCSS();
                 $this->mergeJS();
             }
-
         }
-
 
         if(!headers_sent()
             && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'
@@ -613,7 +612,7 @@ class control extends baseControl
 		$params['method'] = $this->methodName;
         $params['device'] = $this->clientDevice;
         $params['lang']   = $this->app->getClientLang();
-        $page = helper::safe64Encode(http_build_query($params));
+        $page = md5(http_build_query($params));
         $key  = strtolower("/css/{$page}");
 
         if($this->config->cache->type == 'close')
@@ -661,7 +660,7 @@ class control extends baseControl
 		$params['method'] = $this->methodName;
         $params['device'] = $this->clientDevice;
         $params['lang']   = $this->app->getClientLang();
-        $page = helper::safe64Encode(http_build_query($params));
+        $page = md5(http_build_query($params));
         $key  = strtolower("/js/{$page}");
 
         if($this->config->cache->type == 'close')
