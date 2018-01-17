@@ -1,13 +1,13 @@
 {if(!$writeable)}
-  <h5 class='text-danger a-left'> {!echo $control->lang->file->errorUnwritable} </h5>
+  <h5 class='text-danger a-left'> {$control->lang->file->errorUnwritable} </h5>
 {else}
   <div class="file-form" id='fileform'>
     {$fileRow = " <table class='fileBox' id='fileBox\$i'>"}
     {$fileRow .= "<tr>"}
     {$fileRow .= "  <td class='w-p45'><div class='form-control file-wrapper'><input type='file' name='files[]' class='fileControl'  tabindex='-1' /></div></td>"}
     {$fileRow .= "  <td class=''><input type='text' name='labels[]' class='form-control' placeholder='{{$lang->file->label}}' tabindex='-1' /></td>"}
-    {$fileRow .= "  <td class='w-30px'><a href='javascript:void()' onclick='addFile(this)' class='btn btn-block'><i class='icon-plus'></i></a></td>"}
-    {$fileRow .= "  <td class='w-30px'><a href='javascript:void()' onclick='delFile(this)' class='btn btn-block'><i class='icon-remove'></i></a></td>"}
+    {$fileRow .= "  <td class='w-30px'><a href='javascript:;' onclick='addFile(this)' class='btn btn-block'><i class='icon-plus'></i></a></td>"}
+    {$fileRow .= "  <td class='w-30px'><a href='javascript:;' onclick='delFile(this)' class='btn btn-block'><i class='icon-remove'></i></a></td>"}
     {$fileRow .= "</tr>"}
     {$fileRow .= "</table>"}
     {for($i = 1; $i <= $fileCount; $i ++)} {!str_replace('$i', $i, $fileRow)} {/for}
@@ -28,7 +28,7 @@
 function addFile(clickedButton)
 {
     {/noparse}
-    fileRow = {!echo json_encode($fileRow)};
+    fileRow = {!json_encode($fileRow)};
     {noparse}
     fileRow = fileRow.replace('$i', $('.fileID').size() + 1);
     $(clickedButton).closest('.fileBox').after(fileRow);

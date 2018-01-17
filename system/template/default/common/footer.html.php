@@ -61,7 +61,7 @@
 {$logTpl=TPL_ROOT . 'common/log.html.php';}
 {include $logTpl}
 {if($app->user->account != 'guest' and commonModel::isAvailable('score') and (!isset($config->site->resetMaxLoginDate) or $config->site->resetMaxLoginDate < date('Y-m-d')))}
-<script>$.get(createLink('score', 'resetMaxLogin'));</script>
+  <script>$.get(createLink('score', 'resetMaxLogin'));</script>
 {/if}
 </body>
 </html>
