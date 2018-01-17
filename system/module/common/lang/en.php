@@ -214,7 +214,7 @@ $lang->menu->block    = 'Widget|block|admin|';
 $lang->menu->slide    = 'Slide|slide|admin|';
 $lang->menu->others   = "Settings|ui|others|";
 $lang->menu->effect   = "Effect|ui|effect|";
-$lang->menu->visual   = "<i class='icon icon-magic'></i>Visual Editor|visual|index|";
+$lang->menu->visual   = "Visual Editor|visual|index|";
 $lang->menu->edit     = "Custom|ui|edittemplate|";
 
 $lang->menu->site          = 'Site|site|setbasic|';
