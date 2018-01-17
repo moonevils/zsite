@@ -1,3 +1,4 @@
+{noparse}
 <style>
 .cart-count {display: inline-block; margin-left: 4px; transition: all .2s; position: relative; top: 0;}
 .cart-count.hide {display: none}
@@ -12,7 +13,7 @@ $(function()
 {
     $.refreshCart = function(twinkle)
     {
-        $.getJSON('{!echo $control->createLink('cart', 'count')}', function(data)
+        $.getJSON('{/noparse}{$control->createLink('cart', 'count')}{noparse}', function(data)
         {
             if($.isPlainObject(data) && data.result === 'success')
             {
@@ -21,7 +22,7 @@ $(function()
                 {
                     $count.addClass('twinkle');
                     setTimeout(function(){{$count.removeClass('twinkle')}}, 200);
-                    if(window.v && window.v.addToCartSuccess) $.messager.success(window.v.addToCartSuccess + "<div><a class='btn success dismiss' href='{!echo $control->createLink('cart', 'browse')}'>" + window.v.gotoCart + " <i class='icon-arrow-right'></i></a><div class='msger-cart-count'><i class='icon icon-shopping-cart icon-s3'></i><strong class='cart-count badge'>" + data.count + "</strong></div></div>", {time: 10000, cssClass: 'msger-cart'});
+                    if(window.v && window.v.addToCartSuccess) $.messager.success(window.v.addToCartSuccess + "<div><a class='btn success dismiss' href='{/noparse}{$control->createLink('cart', 'browse')}{noparse}'>" + window.v.gotoCart + " <i class='icon-arrow-right'></i></a><div class='msger-cart-count'><i class='icon icon-shopping-cart icon-s3'></i><strong class='cart-count badge'>" + data.count + "</strong></div></div>", {time: 10000, cssClass: 'msger-cart'});
                 }
             }
         });
@@ -30,3 +31,4 @@ $(function()
     $.refreshCart();
 });
 </script>
+{/noparse}

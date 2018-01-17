@@ -31,13 +31,13 @@
   {if(count($product->image->list) > 1)}
     <div id='productSlide' class='carousel slide' data-ride='carousel'>
       <div class='carousel-inner'>
-        {@$imgIndex = 0}
-        {@$indicators = ''}
+        {$imgIndex = 0}
+        {$indicators = ''}
         {foreach($product->image->list as $image)}
           <div class="item{if($imgIndex === 0)} {!echo ' active'} {/if}">
             {!html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
           </div>
-          {@$indicators .= "<li data-target='#productSlide' data-slide-to='{{$imgIndex}}' class='" . ($imgIndex === 0 ? 'active' : '') . "'></li>"}
+          {$indicators .= "<li data-target='#productSlide' data-slide-to='{{$imgIndex}}' class='" . ($imgIndex === 0 ? 'active' : '') . "'></li>"}
           {@$imgIndex++}
         {/foreach}
       </div>
@@ -58,7 +58,7 @@
     {if(!$product->unsaleable)}
       <div class='caption'>
       {if($product->negotiate)}
-        <strong class='text-danger'>{!echo $lang->product->negotiate}</strong>
+        <strong class='text-danger'>{$lang->product->negotiate}</strong>
       {else}
         {if($product->promotion != 0)}
           <strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->promotion}</strong>
@@ -68,45 +68,44 @@
         {elseif($product->price != 0)}
           <strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->price}</strong>
         {/if}
-      }
       {/if}
       </div>
     {/if}
   </div>
 </div>
 
-{@$attributeHtml = ''}
+{$attributeHtml = ''}
 {if($product->amount and isset($control->config->product->stock))}
-  {@$attributeHtml .= "<tr><th>" . $lang->product->stock . "</th>"}
-  {@$attributeHtml .= "<td>" . $product->amount . " <small>" . $product->unit . "</small></td></tr>"}
+  {$attributeHtml .= "<tr><th>" . $lang->product->stock . "</th>"}
+  {$attributeHtml .= "<td>" . $product->amount . " <small>" . $product->unit . "</small></td></tr>"}
 {/if}
 {if($product->brand)}
-  {@$attributeHtml .= "<tr><th>" . $lang->product->brand . "</th>"}
-  {@$attributeHtml .= "<td>" . $product->brand . " <small>" . $product->model . "</small></td></tr>"}
+  {$attributeHtml .= "<tr><th>" . $lang->product->brand . "</th>"}
+  {$attributeHtml .= "<td>" . $product->brand . " <small>" . $product->model . "</small></td></tr>"}
 {/if}
 {if(!$product->brand and $product->model)}
-  {@$attributeHtml .= "<tr><th>" . $lang->product->model . "</th>"}
-  {@$attributeHtml .= "<td>" . $product->model . "</td></tr>"}
+  {$attributeHtml .= "<tr><th>" . $lang->product->model . "</th>"}
+  {$attributeHtml .= "<td>" . $product->model . "</td></tr>"}
 {/if}
 {if($product->color)}
-  {@$attributeHtml .= "<tr><th>" . $lang->product->color . "</th>"}
-  {@$attributeHtml .= "<td>" . $product->color . "</td></tr>"}
+  {$attributeHtml .= "<tr><th>" . $lang->product->color . "</th>"}
+  {$attributeHtml .= "<td>" . $product->color . "</td></tr>"}
 {/if}
 {if($product->origin)}
-  {@$attributeHtml .= "<tr><th>" . $lang->product->origin . "</th>"}
-  {@$attributeHtml .= "<td>" . $product->origin . "</td></tr>"}
+  {$attributeHtml .= "<tr><th>" . $lang->product->origin . "</th>"}
+  {$attributeHtml .= "<td>" . $product->origin . "</td></tr>"}
 {/if}
 {foreach($product->attributes as $attribute)}
   {if(empty($attribute->label) and empty($attribute->value))} {continue} {/if}
-  {@$attributeHtml .= "<tr><th>" . $attribute->label . "</th>"}
+  {$attributeHtml .= "<tr><th>" . $attribute->label . "</th>"}
 
-  {@$http  = strpos($attribute->value, 'https') !== false ? 'https://' : 'http://'}
-  {@$attribute->value = str_replace($http, '', $attribute->value)}
-  {@$value = strpos($attribute->value, ':') !== false ? substr($attribute->value, 0, strpos($attribute->value, ':')) : $attribute->value}
+  {$http  = strpos($attribute->value, 'https') !== false ? 'https://' : 'http://'}
+  {$attribute->value = str_replace($http, '', $attribute->value)}
+  {$value = strpos($attribute->value, ':') !== false ? substr($attribute->value, 0, strpos($attribute->value, ':')) : $attribute->value}
   {if(preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $value))}
-    {@$attributeHtml .= "<td>" . html::a($http . $attribute->value, $attribute->value, "target='_blank'") . "</td></tr>"}
+    {$attributeHtml .= "<td>" . html::a($http . $attribute->value, $attribute->value, "target='_blank'") . "</td></tr>"}
   {else}
-    {@$attributeHtml .= "<td>" . $attribute->value . "</td></tr>"}
+    {$attributeHtml .= "<td>" . $attribute->value . "</td></tr>"}
   {/if}
 {/foreach}
 <table class='table table-layout small'>
@@ -114,7 +113,7 @@
     {if(empty($attributeHtml))}
       <tr><td colspan='2' class='small'>{$product->desc}</td></tr>
     {else}
-      {@$attributeHtml}
+      {$attributeHtml}
     {/if}
     {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate)}
       {if($stockOpened or $product->amount > 0)}
@@ -171,7 +170,7 @@
 {/if}
 
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_view', 'bottom')}</div>
-{/noparse}
+{noparse}
 <style>
   #productSlide{height:320px;text-align:center;}
   #productSlide .carousel-inner{width:320px;height:320px;display:inline-block;}

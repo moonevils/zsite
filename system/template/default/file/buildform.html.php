@@ -10,7 +10,7 @@
     {$fileRow .= "  <td class='w-30px'><a href='javascript:void()' onclick='delFile(this)' class='btn btn-block'><i class='icon-remove'></i></a></td>"}
     {$fileRow .= "</tr>"}
     {$fileRow .= "</table>"}
-    {for($i = 1; $i <= $fileCount; $i ++)} {!echo str_replace('$i', $i, $fileRow)} {/for}
+    {for($i = 1; $i <= $fileCount; $i ++)} {!str_replace('$i', $i, $fileRow)} {/for}
     {$fileLimit = trim(ini_get('upload_max_filesize'), 'M') > trim(ini_get('post_max_size'), 'M') ? trim(ini_get('post_max_size'), 'M') : trim(ini_get('upload_max_filesize'), 'M')}
     {if(!is_numeric($fileLimit))} {$fileLimit = $control->config->file->maxSize / 1024 / 1024} {/if}
     {!printf($lang->file->sizeLimit, $fileLimit)}

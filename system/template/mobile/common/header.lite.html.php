@@ -9,7 +9,7 @@
 {$thisModuleName     = $app->getModuleName()}
 {$thisMethodName     = $app->getMethodName()}
 <!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang='{!echo $app->getClientLang()}' class='m-{$thisModuleName} m-{$thisModuleName}-{$thisMethodName}'>
+<html xmlns:wb="http://open.weibo.com/wb" lang='{$app->getClientLang()}' class='m-{$thisModuleName} m-{$thisModuleName}-{$thisMethodName}'>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta http-equiv="Cache-Control"  content="no-transform">
@@ -19,12 +19,12 @@
     <link rel="alternate" href="{!echo $sysURL . $desktopURL}" >
   {/if}
   {if(isset($sourceURL))}
-     link rel="canonical" href="{!echo $sysURL . $sourceURL}" >
+    <link rel="canonical" href="{!echo $sysURL . $sourceURL}" >
   {elseif(isset($canonicalURL))}
     <link rel="canonical" href="{!echo $sysURL . $canonicalURL}" >
   {/if}
   {if($thisModuleName == 'user' and $thisMethodName == 'deny')}
-    <meta http-equiv='refresh' content="5;url='{!echo helper::createLink('index')}'">
+    <meta http-equiv='refresh' content="5;url='{!helper::createLink('index')}'">
   {/if}
   {if(!isset($title))}   {$title    = ''} {/if}
   {if(!empty($title))}   {$title   .= $lang->minus} {/if}

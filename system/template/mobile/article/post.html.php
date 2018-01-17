@@ -78,7 +78,8 @@ $(function()
         {
             $.closeModal();
         }
-    }});
+    }
+    });
 });
 </script>
 {/noparse}

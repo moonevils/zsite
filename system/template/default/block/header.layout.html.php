@@ -98,7 +98,6 @@
     </div>
   </div>
 </header>
-{*
 {if($setting->top->right == 'custom')}
   <style>
   {noparse}
@@ -119,7 +118,6 @@
   {/noparse}
   </style>
 {/if}
-*}
 {if(strpos(strtolower($setting->bottom), 'nav') !== false)} {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'nav')} {/if}
 {noparse}
 <style>

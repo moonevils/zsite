@@ -21,10 +21,10 @@
     {if(isset($canonicalURL))} <link rel="canonical" href="{$sysURL}/{$canonicalURL}" > {/if}
   {/if}
   {if($thisModuleName == 'user' and $thisMethodName == 'deny')} <meta http-equiv='refresh' content="5;url='{$url= helper::createLink('index')}'"> {/if} 
-  {if(!isset($title))} {$title=''} {/if}
-  {if(!empty($title))} {$title="$title . $lang->minus"} {/if}
-  {if(!isset($keywords) or !empty($keywords))} {$keywords=$config->site->keywords} {/if}
-  {if(!isset($desc) or !empty($desc))} {$desc=$title=$config->site->desc} {/if}
+  {if(!isset($title))}   {$title    = ''} {/if}
+  {if(!empty($title))}   {$title   .= $lang->minus} {/if}
+  {if(empty($keywords))} {$keywords = $config->site->keywords} {/if}
+  {if(empty($desc))}     {$desc     = $config->site->desc} {/if}
 
   {!html::title($title . $config->site->name)}
   {!html::meta('keywords', $keywords)}

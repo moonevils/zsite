@@ -11,7 +11,7 @@
  */
 /php*}
 {include TPL_ROOT . 'common/header.modal.html.php'}
-<form method='post' action='{!echo inlink('applyrefund', "orderID=$orderID")}' id='ajaxForm'>
+<form method='post' action='{!inlink('applyrefund', "orderID=$orderID")}' id='ajaxForm'>
   <table class='table table-form'>
     <tr>
       <th class='w-60px'>{$lang->order->comment}</th>

@@ -9,28 +9,28 @@
         <form method='post' id='registerForm' class='form-horizontal' action='{!echo $control->createLink('user', 'oauthRegister')}' role='form'>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='username'>{!echo $lang->user->account}</label>
-            <div class='col-sm-9 required'>{!echo html::input('account', '', "class='form-control' placeholder='{$lang->user->register->lblAccount}'")}</div>
+            <div class='col-sm-9 required'>{!html::input('account', '', "class='form-control' placeholder='{$lang->user->register->lblAccount}'")}</div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='realname'>{!echo $lang->user->realname}</label>
-            <div class='col-sm-9 required'>{!echo html::input('realname', $realname, "class='form-control'")}</div>
+            <div class='col-sm-9 required'>{!html::input('realname', $realname, "class='form-control'")}</div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='email'>{!echo $lang->user->email}</label>
-            <div class='col-sm-9 required'>{!echo html::input('email', '', "class='form-control'")}</div>
+            <div class='col-sm-9 required'>{!html::input('email', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='password'>{!echo $lang->user->password}</label>
-            <div class='col-sm-9 required'>{!echo html::password('password1', '', "class='form-control'")}</div>
+            <div class='col-sm-9 required'>{!html::password('password1', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='password'>{!echo $lang->user->password2}</label>
-            <div class='col-sm-9 required'>{!echo html::password('password2', '', "class='form-control'")}</div>
+            <div class='col-sm-9 required'>{!html::password('password2', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label'></label>
             <div class='col-sm-9'>
-              {!echo html::submitButton('', 'btn btn-success') . html::a(inlink('ignoreBind'), $lang->user->oauth->ignore, "class='btn btn-primary'"). html::hidden('referer', $referer)}
+              {!html::submitButton('', 'btn btn-success') . html::a(inlink('ignoreBind'), $lang->user->oauth->ignore, "class='btn btn-primary'"). html::hidden('referer', $referer)}
             </div>
           </div>
         </form>
@@ -46,15 +46,15 @@
         <form method='post' id='bindForm' class='form-horizontal' action='{!echo $control->createLink('user', 'oauthBind')}' role='form'>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='useraccount'>{!echo $lang->user->account}</label>
-            <div class='col-sm-9'>{!echo html::input('account', '', "class='form-control'")}</div>
+            <div class='col-sm-9'>{!html::input('account', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='password'>{!echo $lang->user->password}</label>
-            <div class='col-sm-9'>{!echo html::password('password', '', "class='form-control'")}</div>
+            <div class='col-sm-9'>{!html::password('password', '', "class='form-control'")}</div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label'></label>
-            <div class='col-sm-9'>{!echo html::submitButton($lang->login, 'btn btn-success') . html::hidden('referer', $referer)}</div>
+            <div class='col-sm-9'>{!html::submitButton($lang->login, 'btn btn-success') . html::hidden('referer', $referer)}</div>
           </div>
         </form>
       </div>

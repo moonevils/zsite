@@ -21,11 +21,11 @@
             <tr class='text-center'>
               <td><input type='checkbox' name='messages[]' value="{$message->id}" /></td>
               <td class='hidden-xxxs'>{!echo $message->from}</td>
-              <td class='hidden-xxs'>{!echo substr($message->date, 5)}</td>
+              <td class='hidden-xxs'>{!substr($message->date, 5)}</td>
               <td class='text-left break-all'>{!echo $message->content}</td>
               <td class='hidden-xs'>{!echo $lang->message->readedStatus[$message->readed]}</td>
               {if(!$message->readed)}
-              <td class='hidden-xxs'>{!echo html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed)}</td>
+              <td class='hidden-xxs'>{!html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed)}</td>
               {else}
               <td class='hidden-xxs'>{!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : $lang->message->readed}</td>
               {/if}

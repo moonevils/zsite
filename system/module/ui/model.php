@@ -213,13 +213,13 @@ class uiModel extends model
         if($section != 'logo')
         {
             $clientLang = $this->app->getClientLang();
-            $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->andWhere('lang')->eq($clientLang)->fetchAll('id');
+            $oldFiles   = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->andWhere('lang')->eq($clientLang)->fetchAll('id');
             foreach($oldFiles as $file) $fileModel->delete($file->id);
             if(dao::isError()) return array('result' => false, 'message' => dao::getError());
         }
 
         /* Upload new logo. */
-        $uploadResult = $fileModel->saveUpload('', '', '', $htmlTagName);
+        $uploadResult = $fileModel->saveUpload('logo', '', '', $htmlTagName);
         if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
 
         $fileIdList = array_keys($uploadResult);
@@ -237,7 +237,7 @@ class uiModel extends model
         {
             $template = $this->config->template->{$this->app->clientDevice}->name;
             $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$this->app->clientDevice}->theme;
-            $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo, true) : array();
+            $logo     = isset($this->config->site->logo) ? json_decode($this->config->site->logo, true) : array();
             if(!isset($logo[$template])) $logo[$template] = array();
             $logo[$template]['themes'][$theme] = $setting;
 

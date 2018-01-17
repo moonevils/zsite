@@ -44,10 +44,10 @@ $(function()
       <p>{!printf($lang->user->noModuleDeny, $moduleName)}</p>
       {/if}
       <div class='actions'>
-      {if($refererBeforeDeny)} {!echo html::a(helper::safe64Decode($refererBeforeDeny), $lang->user->goback, "class='btn btn-primary'")} {/if}
-      {!echo html::a($control->createLink($config->default->module), $lang->index->common, "class='btn'")}
-      {if(commonModel::isAvailable($module) and $control->app->user->account == 'guest')} {!echo html::a($control->createLink('user', 'register'), $lang->user->register->common, "class='btn btn-link'")} {/if}
-      {if(commonModel::isAvailable($module))} {!echo html::a($control->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin, "class='btn btn-link'")} {/if}
+      {if($refererBeforeDeny)} {!html::a(helper::safe64Decode($refererBeforeDeny), $lang->user->goback, "class='btn btn-primary'")} {/if}
+      {!html::a($control->createLink($config->default->module), $lang->index->common, "class='btn'")}
+      {if(commonModel::isAvailable($module) and $control->app->user->account == 'guest')} {!html::a($control->createLink('user', 'register'), $lang->user->register->common, "class='btn btn-link'")} {/if}
+      {if(commonModel::isAvailable($module))} {!html::a($control->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin, "class='btn btn-link'")} {/if}
       </div>
     </div>
   </div>

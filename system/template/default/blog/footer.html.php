@@ -3,7 +3,7 @@
   <footer id='footer'>
     <div class='wrapper'>
       <div id='footNav'>
-        {!echo html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), '<i class="icon icon-rss-sign icon-large"></i>', "target='_blank'")}
+        {!html::a(helper::createLink('rss', 'index', 'type=blog', '', 'xml'), '<i class="icon icon-rss-sign icon-large"></i>', "target='_blank'")}
       </div>
       <span id='copyright'>
         {$copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-'}
@@ -20,10 +20,10 @@
     </div>
   </footer>
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='{!echo $lang->back2Top}'></a>
-</div>{* end .page-container in header.html.php */ }
+</div>{* end .page-container in header.html.php *}
 {include TPL_ROOT . 'common/qrcode.html.php'}
-{if($config->debug)} {!js::import($jsRoot . 'jquery/form/min.js')}{/if}
-{if(isset($pageJS))}  {!js::execute($pageJS)} {/if}
+{if($config->debug)} {!js::import($jsRoot . 'jquery/form/min.js')} {/if}
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 <div class='hide'>{if(RUN_MODE == 'front')} {$control->loadModel('block')->printRegion($layouts, 'all', 'footer')} {/if}</div>
 {include TPL_ROOT . 'common/log.html.php'}
 </body>

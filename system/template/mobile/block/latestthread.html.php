@@ -22,24 +22,24 @@
   <div class='panel-heading'>
     <strong>{$icon}{$block->title}</strong>
     {if(!empty($content->moreText) and !empty($content->moreUrl))}
-    <div class='pull-right'>{!echo html::a($content->moreUrl, $content->moreText)}</div>
+      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   <div class='panel-body no-padding'>
     <div class='list-group simple'>
       {foreach($threads as $thread)}
-      <div class='list-group-item'>
-        {if(isset($content->showCategory) and $content->showCategory == 1)}
-          {if($content->categoryName == 'abbr')}
-            {$boardName = '[' . ($boards[$thread->board]->abbr ? $boards[$thread->board]->abbr : $boards[$thread->board]->name) . '] '}
-            {!echo html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), $boardName, "class='text-special'")}
-          {else}
-            {!echo html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), '[' . $boards[$thread->board]->name . '] ', "class='text-special'")}
+        <div class='list-group-item'>
+          {if(isset($content->showCategory) and $content->showCategory == 1)}
+            {if($content->categoryName == 'abbr')}
+              {$boardName = '[' . ($boards[$thread->board]->abbr ? $boards[$thread->board]->abbr : $boards[$thread->board]->name) . '] '}
+              {!html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), $boardName, "class='text-special'")}
+            {else}
+              {!html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), '[' . $boards[$thread->board]->name . '] ', "class='text-special'")}
+            {/if}
           {/if}
-        {/if}
-        {!echo html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}
-        <span class='pull-right text-muted'>{!echo substr($thread->addedDate, 0, 10)}</span>
-      </div>
+          {!html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}
+          <span class='pull-right text-muted'>{!substr($thread->addedDate, 0, 10)}</span>
+        </div>
       {/foreach}
     </div>
   </div>
