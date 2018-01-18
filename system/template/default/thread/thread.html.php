@@ -40,7 +40,7 @@
               <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
                 {foreach($lang->thread->sticks as $stick => $label)}
                   {if($thread->stick != $stick)}
-                    <li>{html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='stickJsoner'")}</li>
+                    <li>{!html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='stickJsoner'")}</li>
                   {else}
                     <li class="active"><a href="###">{$label}</a></li>
                   {/if}
