@@ -43,10 +43,13 @@
     </div>
   </div>
 </div>
-{noparse}
 <script>
 $(function()
 {
+    var readed        = '{$lang->message->readed}';
+    var deleteSuccess = '{$lang->deleteSuccess}';
+
+    {noparse}
     $(document).on('click', '.markread', function(e) {
 
         var $this   = $(this);
@@ -54,8 +57,9 @@ $(function()
         {
             var $response = $(response);
             $('#cardList').html($response.find('#cardList').html());
-            $.messager.success('{/noparse}{$lang->message->readed}{noparse}');
-        }}, $this.data());
+            $.messager.success(readed);
+        }
+        }, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     }).on('click', '.delete', function(e) {
@@ -72,12 +76,13 @@ $(function()
                 response.locate = null;
                 var $card = $this.closest('.card').addClass('fade');
                 setTimeout(function(){$card.remove();}, 300);
-                $.messager.success('{/noparse}{$lang->deleteSuccess}{noparse}');
-            }}, $this.data());
+                $.messager.success(deleteSuccess)
+            }
+         }, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     });
+    {/noparse}
 });
 </script>
-{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

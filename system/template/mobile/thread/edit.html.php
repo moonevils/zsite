@@ -52,11 +52,15 @@ $(function()
     $editThreadForm.ajaxform({onResultSuccess: function(response)
     {
         if(response.result == 'success')
-        { $.closeModal(); }
+        {
+            $.closeModal();
+        }
     }, onSuccess: function(response)
     {
         if(response.reason == 'needChecking')
-        { $editThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide'); }
+        {
+            $editThreadForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
+        }
     }
     });
 });

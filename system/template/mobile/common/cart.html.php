@@ -1,4 +1,3 @@
-{noparse}
 <style>
 .cart-count {display: inline-block; margin-left: 4px; transition: all .2s; position: relative; top: 0;}
 .cart-count.hide {display: none}
@@ -11,9 +10,12 @@
 <script>
 $(function()
 {
+    var countLink  = '{$control->createLink('cart', 'count')}';
+    var browseLink = '{$control->createLink('cart', 'browse')}';
+    {noparse}
     $.refreshCart = function(twinkle)
     {
-        $.getJSON('{/noparse}{$control->createLink('cart', 'count')}{noparse}', function(data)
+        $.getJSON(countLink, function(data)
         {
             if($.isPlainObject(data) && data.result === 'success')
             {
@@ -21,14 +23,13 @@ $(function()
                 if(data.count > 0 && twinkle)
                 {
                     $count.addClass('twinkle');
-                    setTimeout(function(){{$count.removeClass('twinkle')}}, 200);
-                    if(window.v && window.v.addToCartSuccess) $.messager.success(window.v.addToCartSuccess + "<div><a class='btn success dismiss' href='{/noparse}{$control->createLink('cart', 'browse')}{noparse}'>" + window.v.gotoCart + " <i class='icon-arrow-right'></i></a><div class='msger-cart-count'><i class='icon icon-shopping-cart icon-s3'></i><strong class='cart-count badge'>" + data.count + "</strong></div></div>", {time: 10000, cssClass: 'msger-cart'});
+                    setTimeout(function(){$count.removeClass('twinkle')}, 200);
+                    if(window.v && window.v.addToCartSuccess) $.messager.success(window.v.addToCartSuccess + "<div><a class='btn success dismiss' href=" + browseLink + ">" + window.v.gotoCart + " <i class='icon-arrow-right'></i></a><div class='msger-cart-count'><i class='icon icon-shopping-cart icon-s3'></i><strong class='cart-count badge'>" + data.count + "</strong></div></div>", {time: 10000, cssClass: 'msger-cart'});
                 }
             }
         });
     };
-
+    {/noparse}
     $.refreshCart();
 });
 </script>
-{/noparse}

@@ -127,15 +127,17 @@
 </div>
 
 {include TPL_ROOT . 'common/form.html.php'}
-{noparse}
 <script>
 $(function()
 {
+    var addressBrowseLink = '{!helper::createLink('address', 'browse')}' + '#addressList';
+    var orderBrowseLink   = '{!helper::createLink('order', 'browse')}'; 
+    {noparse}
     $('[name=payment]').first().prop('checked', true);
 
     $.refreshAddressList = function()
         {
-            $('#addressListWrapper').load('{/noparse}{!helper::createLink('address', 'browse')}{noparse}#addressList', function(){
+            $('#addressListWrapper').load(addressBrowseLink, function(){
             if($('#addressList').find('.card').size() == 0)
             {
                 $('#createAddress').val(1);
@@ -148,17 +150,17 @@ $(function()
             $('#addressList').find('.card-footer').remove();
         });
     };
+    {/noparse}
 
     $.refreshAddressList();
 
     var $confirmOrderForm = $('#confirmOrderForm');
     $confirmOrderForm.ajaxform({onResultSuccess: function(response)
     {
-        $.messager.success('{/noparse}{$lang->order->createdSuccess}{noparse}');
-        window.location.href = response.locate ? response.locate : '{/noparse}{!helper::createLink('order', 'browse')}{noparse}';
+        $.messager.success('{$lang->order->createdSuccess}');
+        window.location.href = response.locate ? response.locate : orderBrowseLink;
     }
     });
 });
 </script>
-{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

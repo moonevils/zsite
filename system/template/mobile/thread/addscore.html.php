@@ -41,7 +41,9 @@ $(function()
     $addScoreForm.ajaxform({onSuccess: function(response)
     {
         if(response.result == 'success')
-        { $.closeModal(); }
+        {
+            $.closeModal();
+        }
     }
     });
 });

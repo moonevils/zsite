@@ -50,8 +50,7 @@
   </div>
 {include TPL_ROOT . 'common/form.html.php'}
 {/if}
-{noparse}
-<script type='text/javascript'>
+<script>
 var $buyScoreForm = $('#buyScoreForm');
 $buyScoreForm.ajaxform({onSuccess: function(response)
 {
@@ -62,10 +61,9 @@ $buyScoreForm.ajaxform({onSuccess: function(response)
 }
 });
 
-var scoreConfig ={/noparse} {$config->score->buyScore->perYuan} {noparse};
+var scoreConfig = {$config->score->buyScore->perYuan};
 function getScore()
 {
     $('#score').html(Math.round($('#amount').val() * scoreConfig));
 }
 </script>
-{/noparse}

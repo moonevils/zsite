@@ -81,10 +81,13 @@
     {$pager->show('justify')}
   </div>
 </div>
-{noparse}
 <script>
 $(function()
 {
+    var cancelWarning  = '{$lang->order->cancelWarning}';
+    var confirmWarning = '{$lang->order->confirmWarning}';
+
+    {noparse}
     var refreshOrderList = function()
     {
         $('#orderListWrapper').load(window.location.href + ' #orderList');
@@ -93,18 +96,18 @@ $(function()
     $(document).on('click', '.cancelLink', function(e)
     {
         var $this   = $(this);
-        var options = $.extend({url: $this.data('rel'), confirm: '{/noparse}{$lang->order->cancelWarning}{noparse}', onSuccess: refreshOrderList}, $this.data());
+        var options = $.extend({url: $this.data('rel'), confirm: cancelWarning, onSuccess: refreshOrderList}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     }).on('click', '.confirmDelivery', function(e)
     {
         var $this   = $(this);
-        var options = $.extend({url: $this.data('rel'), confirm: "{/noparse}{$lang->order->confirmWarning}{noparse}", onSuccess: refreshOrderList}, $this.data());
+        var options = $.extend({url: $this.data('rel'), confirm: confirmWarning, onSuccess: refreshOrderList}, $this.data());
         e.preventDefault();
         $.ajaxaction(options, $this);
     });
+    {/noparse}
 });
 </script>
-{/noparse}
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

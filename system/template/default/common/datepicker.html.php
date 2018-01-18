@@ -1,11 +1,11 @@
-{if($extView = $control->getExtViewFile(__FILE__))} {include $extView} {@helper::cd();} {/if}
+{if($extView = $control->getExtViewFile(__FILE__))} {include $extView} {@helper::cd()} {/if}
 {$clientLang = $control->app->getClientLang()}
 {!css::import($jsRoot . 'datetimepicker/css/min.css')}
 {!js::import($jsRoot  . 'datetimepicker/js/min.js')}
-{noparse}
-<script language='javascript'>
+<script>
 $(function()
 {
+    {noparse}
     $.fn.fixedDate = function()
     {
         return $(this).each(function()
@@ -22,11 +22,12 @@ $(function()
             }
         });
     };
+    {/noparse}
     
     var startDate = new Date(2000, 1, 1);
     var options = 
     {
-        language: '{!echo $clientLang}',
+        language: '{$clientLang}',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,
@@ -38,6 +39,7 @@ $(function()
         startDate: startDate
     };
 
+    {noparse}
     var dateOptions = $.extend({}, options, {minView: 2, format: 'yyyy-mm-dd'});
     var timeOptions = $.extend({}, options, {startView: 1, minView: 0, maxView: 1, format: 'hh:ii'});
 
@@ -53,6 +55,6 @@ $(function()
     $('.input-append.date').on('click', function(){
         $(this).find('input').datetimepicker('show').focus();
     }).find('input').datetimepicker($.extend({}, options, {pickerPosition: 'top-right'}));
+    {/noparse}
 });
 </script>
-{/noparse}
