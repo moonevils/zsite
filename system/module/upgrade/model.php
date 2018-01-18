@@ -32,6 +32,26 @@ class upgradeModel extends model
     public function execute($fromVersion)
     {
         if(!isset($this->lang->upgrade->fromVersions[$fromVersion])) return false;
+
+        /* Delete useless file.*/
+        $results = array();
+        foreach($this->config->delete as $deleteFiles)
+        {
+            $basePath = $this->app->getBasePath();
+            foreach($deleteFiles as $file)
+            {
+                $fullPath = realpath(dirname($basePath)) . DS . str_replace('/', DS, $file);
+                if(is_dir($fullPath)  && !rmdir($fullPath))  $results[] = sprintf($this->lang->upgrade->deleteDir, $fullPath);
+                if(is_file($fullPath) && !unlink($fullPath)) $results[] = sprintf($this->lang->upgrade->deleteFile, $fullPath);
+            }
+        }
+        if(!empty($results))
+        {
+            self::$errors[] = $this->lang->upgrade->deleteTips;
+            foreach($results as  $result) self::$errors[] = $result;
+            self::$errors[] = $this->lang->upgrade->afterDeleted;
+        }
+    
         switch($fromVersion)
         {
             case '1_0': $this->execSQL($this->getUpgradeFile('1.0'));
