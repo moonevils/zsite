@@ -70,10 +70,7 @@
             </div>
             <div class='form-group clearfix captcha-box hide'></div>
             <div class='form-group'>{!html::submitButton('', 'btn primary block')}</div>
-              {!html::hidden('recTotal',   $pager->recTotal)}
-              {!html::hidden('recPerPage', $pager->recPerPage)}
-              {!html::hidden('pageID',     $pager->pageTotal)}
-              {!html::hidden('reply',      0)}
+            {!html::hidden('reply', 0)}
           </form>
         </div>
       </div>

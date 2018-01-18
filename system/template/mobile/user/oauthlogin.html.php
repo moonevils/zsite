@@ -13,10 +13,10 @@
 {foreach($lang->user->oauth->providers as $providerCode => $providerName)}
   {$thisConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : ''}
   {if(!empty($thisConfig->clientID))}
-    {if(providerCode == 'qq')}
+    {if($providerCode == 'qq')}
       {$thisConfig->icon = 'qq'}
       {$thisConfig->accent = 'info'}
-    {elseif(providerCode == 'sina')}
+    {elseif($providerCode == 'sina')}
       {$thisConfig->icon = 'weibo'}
       {$thisConfig->accent = 'danger'}
     {else}
