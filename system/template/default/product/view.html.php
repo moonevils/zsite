@@ -64,17 +64,17 @@
                   {if($product->promotion != 0)}
                     {if($product->price != 0)}
                       {$attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>"}
-                      {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $control->config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>"}
+                      {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>"}
                     {/if}
                     {$attributeHtml .= "<li id='promotionItem'><span class='meta-name'>" . $lang->product->promotion . "</span>"}
-                    {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $control->config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>"}
+                    {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>"}
                   {elseif($product->price != 0)}
                     {$attributeHtml .= "<li id='priceItem'><span class='meta-name'>" . $lang->product->price . "</span>"}
-                    {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $control->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>"}
+                    {$attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>"}
                   {/if}
                 {/if}
               {/if}
-              {if($product->amount and $control->config->product->stock)}
+              {if($product->amount and isset($config->product->stock))}
                 {$attributeHtml .= "<li id='amountItem'><span class='meta-name'>" . $lang->product->stock . "</span>"}
                 {$attributeHtml .= "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>"}
               {/if}
