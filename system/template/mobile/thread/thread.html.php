@@ -36,22 +36,22 @@
                 {if($thread->stick != $stick)}
                    <li>{!html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='ajaxaction'")}</li>
                 {else}
-                  <li class="active"><a href="###">{$label}</a></li>';
+                  <li class="active"><a href="###">{$label}</a></li>
                 {/if}
               {/foreach}
               </ul>
-            </span> &nbsp;
+            </span>&nbsp;
             {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
               {@$account = helper::safe64Encode($thread->author)}
               {!html::a(inlink('addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal class='text-muted'")}
             {/if}
             {if($thread->hidden)}
-              {!html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-open"></i> ' . $lang->thread->show, "class='switcher ajaxaction text-muted'") . ' &nbsp; '}
+              {!html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-open"></i> ' . $lang->thread->show, "class='switcher ajaxaction text-muted'")} &nbsp;
             {else}
-              {!html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher ajaxaction text-muted'") . ' &nbsp; '}
+              {!html::a(inlink('switchstatus',   "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='switcher ajaxaction text-muted'")} &nbsp;
             {/if}
-          {!html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter text-muted'") . ' &nbsp; '}
-          {!html::a(inlink('transfer',   "threadID=$thread->id"), '<i class="icon-location-arrow"></i> ' . $lang->thread->transfer, "data-toggle='modal' class='text-muted'") . ' &nbsp; '}
+          {!html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter text-muted'")} &nbsp;
+          {!html::a(inlink('transfer',   "threadID=$thread->id"), '<i class="icon-location-arrow"></i> ' . $lang->thread->transfer, "data-toggle='modal' class='text-muted'")} &nbsp;
           {/if}
           {if($control->thread->canManage($board->id, $thread->author))} {!html::a(inlink('edit', "threadID=$thread->id"), '<i class="icon-pencil"></i> ' . $lang->edit, 'data-toggle="modal" class="text-muted"')} {/if}
         </div>

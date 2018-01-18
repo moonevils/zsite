@@ -47,7 +47,6 @@
     </div>
   {/if}
 </div>
-{noparse}
 <script>
 $(function()
 {
@@ -57,6 +56,5 @@ $(function()
     };
 });
 </script>
-{/noparse}
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

@@ -37,7 +37,7 @@
     </div>
   </div>
 </div>
-<script type='text/javascript'>
-var scoreConfig = {!echo $config->score->buyScore->perYuan};
+<script>
+var scoreConfig = {$config->score->buyScore->perYuan};
 </script>
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

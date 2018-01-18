@@ -16,8 +16,7 @@
     {!printf($lang->file->sizeLimit, $fileLimit)}
   </div>
 {/if}
-{noparse}
-<script language='javascript'>
+<script>
 /**
  * Add a file input control.
  * 
@@ -27,15 +26,14 @@
  */
 function addFile(clickedButton)
 {
-    {/noparse}
     fileRow = {!json_encode($fileRow)};
-    {noparse}
     fileRow = fileRow.replace('$i', $('.fileID').size() + 1);
     $(clickedButton).closest('.fileBox').after(fileRow);
 
     updateID();
 }
 
+{noparse}
 /**
  * Delete a file input control.
  * 
@@ -61,5 +59,5 @@ function updateID()
     i = 1;
     $('.fileID').each(function(){$(this).html(i ++)});
 }
-</script>
 {/noparse}
+</script>

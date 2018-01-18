@@ -36,8 +36,8 @@
         {/if}
         <div class='actions text-right'>
           {if($control->app->user->account != 'guest')}
-            {if($control->thread->canManage($board->id))} {!html::a($control->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter text-muted'") . ' &nbsp; '} {/if}
-            {if($control->thread->canManage($board->id, $reply->author))} {!html::a($control->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit, "data-toggle='modal' class='text-muted'") . ' &nbsp; '} {/if}
+            {if($control->thread->canManage($board->id))} {!html::a($control->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter text-muted'")} &nbsp; {/if}
+            {if($control->thread->canManage($board->id, $reply->author))} {!html::a($control->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit, "data-toggle='modal' class='text-muted'")} &nbsp; {/if}
             {if(!$thread->readonly)}
               <a href='#replyDialog' data-toggle='modal' class='text-muted thread-reply-btn'><i class='icon-reply'></i> {$lang->reply->common}</a>
             {/if}

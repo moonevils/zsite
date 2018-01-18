@@ -41,15 +41,16 @@
 </div>
 
 {include TPL_ROOT . 'common/form.html.php'}
-{noparse}
 <script>
 $(function()
 {
+    var browseLink = '{!helper::createLink('address', 'browse')}' + '#addressList';
+    {noparse}
     $('[name=payment]').first().prop('checked', true);
 
     $.refreshAddressList = function()
     {
-       $('#addressListWrapper').load('{/noparse}{!helper::createLink('address', 'browse'){noparse}} #addressList', function()
+       $('#addressListWrapper').load(browseLink, function()
         {
             $('#addressList').find('.card-footer').remove();
         });
@@ -58,7 +59,7 @@ $(function()
     $.refreshAddressList();
 
     $('#submit').click(function(){
-        var payment = $('{/noparse}input:radio[name=payment]:checked{noparse}').val();
+        var payment = $('input:radio[name=payment]:checked').val();
         if(payment == 'COD')
         {
             $('#checkForm').attr('target', '');
@@ -82,7 +83,7 @@ $(function()
             });
         }
     });
+    {/noparse}
 });
 </script>
-{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

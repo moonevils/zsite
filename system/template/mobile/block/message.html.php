@@ -71,7 +71,6 @@
     </div>
   </div>
 </div>
-{noparse}
 <script>
 $(function()
 {
@@ -94,4 +93,3 @@ $(function()
     } });
 });
 </script>
-{/noparse}
