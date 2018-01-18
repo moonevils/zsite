@@ -24,6 +24,11 @@ $lang->upgrade->execute          = '确认执行';
 $lang->upgrade->next             = '下一步';
 $lang->upgrade->updateLicense    = '蝉知 4.0 已更换授权协议至 Z PUBLIC LICENSE(ZPL) 1.2。';
 
+$lang->upgrade->deleteTips   = '需要删除部分文件。linux下面命令为：';
+$lang->upgrade->deleteDir    = '<code>rm -fr %s</code>';
+$lang->upgrade->deleteFile   = '<code>rm %s</code>';
+$lang->upgrade->afterDeleted = '<br />删除以上文件后刷新！';
+
 $lang->upgrade->backupData = <<<EOT
 <pre>
 <strong>使用phpMyAdmin或者mysqldump命令备份数据库。</strong>

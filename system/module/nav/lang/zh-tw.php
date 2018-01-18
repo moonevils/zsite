@@ -19,7 +19,13 @@ $lang->nav->inputUrl        = '請輸入連結';
 $lang->nav->inputTitle      = '請輸入標題';
 $lang->nav->cannotRemoveAll = '不能刪除所有導航';
 
-/* nav type   */
+/* nav show all some type. */
+$lang->nav->all['blog']    = '所有博客';
+$lang->nav->all['article'] = '所有文章';
+$lang->nav->all['product'] = '所有產品';
+$lang->nav->all['custom']  = '自定義';
+
+/* nav type. */
 $lang->nav->types['system']  = '系統模組';
 $lang->nav->types['article'] = '文章類目';
 $lang->nav->types['blog']    = '博客類目';

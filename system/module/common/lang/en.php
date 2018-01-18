@@ -249,10 +249,8 @@ $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse       = 'Blogs|article|admin|type=blog';
 
-/* Init page. */
 $lang->page = new stdclass();
 
-/* Init express. */
 $lang->express = new stdclass();
 
 $lang->orderSetting = new stdclass();
