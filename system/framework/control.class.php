@@ -491,7 +491,7 @@ class control extends baseControl
             header('Content-Encoding: gzip');
         }
 
-        If(RUN_MODE == 'front') $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
+        //if(RUN_MODE == 'front') $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
 		echo $this->output;
     }
 
