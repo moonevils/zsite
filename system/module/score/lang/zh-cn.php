@@ -46,8 +46,8 @@ $lang->score->methods['thread']      = '发贴';
 $lang->score->methods['reply']       = '回贴';
 $lang->score->methods['valuethread'] = '奖励主题';
 $lang->score->methods['valuereply']  = '奖励回复';
-$lang->score->methods['delThread']   = '删主题';
-$lang->score->methods['delReply']    = '删回复';
+$lang->score->methods['delthread']   = '删主题';
+$lang->score->methods['delreply']    = '删回复';
 $lang->score->methods['award']       = '奖励积分';
 $lang->score->methods['punish']      = '扣除积分';
 
