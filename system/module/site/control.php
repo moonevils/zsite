@@ -284,6 +284,10 @@ class site extends control
         if(!empty($_POST))
         {
             $provider = $this->post->provider;
+            foreach($_POST as $key => $value)
+            {
+                $_POST[$key] = trim($value);
+            }
             $oauth    = array($provider => helper::jsonEncode($_POST));
 
             $result   = $this->loadModel('setting')->setItems('system.common.oauth', $oauth);
