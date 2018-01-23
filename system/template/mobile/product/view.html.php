@@ -35,7 +35,7 @@
         {$indicators = ''}
         {foreach($product->image->list as $image)}
           <div class="item{if($imgIndex === 0)} {!echo ' active'} {/if}">
-            {!html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
+            {!html::image($control->loadModel('file')->printFileURL($image->pathname, $image->extension, 'product', 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
           </div>
           {$indicators .= "<li data-target='#productSlide' data-slide-to='{{$imgIndex}}' class='" . ($imgIndex === 0 ? 'active' : '') . "'></li>"}
           {@$imgIndex++}
