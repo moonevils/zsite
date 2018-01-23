@@ -142,8 +142,12 @@ class wechatModel extends model
     public function create()
     {
         if(!validater::checkReg($this->post->token, '|^[a-zA-Z0-9]{1}[a-zA-Z0-9]{1,30}[a-zA-Z0-9]{1}$|')) dao::$errors['token'][] = $this->lang->error->token;
-
+        
         $public = fixer::input('post')->add('addedDate', helper::now())->get();
+        foreach($public as $key => $value)
+        {
+            $public->$key = trim($value);
+        }
         $this->dao->insert(TABLE_WX_PUBLIC)
             ->data($public)
             ->autoCheck()
