@@ -16,7 +16,7 @@
 {$method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)))}
 {$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, !empty($content->limit) ? $content->limit : 6)}
 {if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'article')} {/if}
-<div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
+<div id="block{$block->id}" class='panel panel-block {$blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
@@ -85,10 +85,11 @@
             <li class='addDataList'>
               <span class='article-list'>
                 {if(isset($content->showCategory) and $content->showCategory == 1)}
+                  <span class='pull-left category'>
                   {if($content->categoryName == 'abbr')}
                     {$blockContent    = json_decode($block->content)}
                     {$blockCategories = ''}
-                    {if(isset($blockContent->category))} {$blockCategories = $blockContent->category}{/if}
+                    {if(isset($blockContent->category))} {$blockCategories = $blockContent->category} {/if}
                     {$categoryName = ''}
                     {foreach($article->categories as $id => $categorie)}
                       {if(strpos(",$blockCategories,", ",$id,") !== false)}
@@ -100,15 +101,17 @@
                   {else}
                     {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
                   {/if}
+                  </span>
                 {/if}
-                {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitle text-nowrap text-ellipsis pull-left' style='color:{{$article->titleColor}}'")}
+                {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitleA text-nowrap text-ellipsis pull-left' style='color:{{$article->titleColor}}'")}
                 <span class='pull-left sticky'>{if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
               </span>
-              <span class='pull-right' id='article-date'>{!substr($article->addedDate, 0, 10)}</span>
+              <span class='pull-right article-date'>{!substr($article->addedDate, 0, 10)}</span>
             </li>
           {else}
-            <li class='notDataList'>
+            <li class='notDataList' style='white-space: nowrap'>
               {if(isset($content->showCategory) and $content->showCategory == 1)}
+                <span class='pull-left category'>
                 {if($content->categoryName == 'abbr')}
                   {$blockCntent     = json_decode($block->content)}
                   {$blockCategories = ''}
@@ -125,8 +128,9 @@
                 {else}
                   {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
                 {/if}
+                </span>
               {/if}
-              {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitle text-nowrap text-ellipsis pull-left' style='color:{{$article->titleColor}}'")}
+              {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitleB text-nowrap text-ellipsis pull-left' style='color:{{$article->titleColor}}'")}
               <span class='pull-left sticky'>{if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
             </li>
           {/if}
@@ -141,16 +145,17 @@
 .ul-list .addDataList.withoutStick{padding-right:80px !important;}
 .ul-list .notDataList.withStick{padding-right:60px !important;}
 .ul-list .notDataList.withoutStick{padding-right:5px !important;}
-.articleTitle{display:inline-block;}
+.articleTitleA{display:inline-block;}
+.articleTitleB{display:inline-block;}
 .sticky{padding-left: 5px;}
 </style>
 <script>
-var width = $('.article-list').parent('li').width() - $('#article-date').width();
-$('.articleTitle').each(function()
+var width = $('.article-list').parent('li').width() - $('.article-date').width(); 
+$('.articleTitleA').each(function()
 {
     $(this).css('maxWidth', width - 20);
 })
-$('.articleTitle').each(function()
+$('.articleTitleB').each(function()
 {
     $(this).css('maxWidth', $(this).parent('li').width() - $(this).next('.sticky').width() - 10);
 })
