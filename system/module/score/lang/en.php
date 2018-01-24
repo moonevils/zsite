@@ -46,8 +46,8 @@ $lang->score->methods['thread']      = 'Post';
 $lang->score->methods['reply']       = 'Reply';
 $lang->score->methods['valuethread'] = 'Post Thread';
 $lang->score->methods['valuereply']  = 'Post Reply';
-$lang->score->methods['delthread']   = 'Delete Thread';
-$lang->score->methods['delreply']    = 'Delete Reply';
+$lang->score->methods['delThread']   = 'Delete Thread';
+$lang->score->methods['delReply']    = 'Delete Reply';
 $lang->score->methods['award']       = 'Reward';
 $lang->score->methods['punish']      = 'Deduct';
 
