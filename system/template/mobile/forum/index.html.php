@@ -35,9 +35,7 @@
         </a>
       {/foreach}
     </div>
-    <div class='panel-footer'>
-      {$pager->show('justify')}
-    </div>
+    <div class='panel-footer'>{$pager->show('justify')}</div>
   {elseif($mode == 'stick')}
     <div class='cards cards-list condensed bordered'>
       {foreach($threads as $thread)}
@@ -55,9 +53,7 @@
         </a>
       {/foreach}
     </div>
-    <div class='panel-footer'>
-      {$pager->show('justify')}
-    </div>
+    <div class='panel-footer'>{$pager->show('justify')}</div>
   {else}
     <div id='boards'>
     {foreach($boards as $parentBoard)}
