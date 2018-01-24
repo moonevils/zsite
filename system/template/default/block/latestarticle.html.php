@@ -109,7 +109,7 @@
               <span class='pull-right article-date'>{!substr($article->addedDate, 0, 10)}</span>
             </li>
           {else}
-            <li class='notDataList' style='white-space: nowrap'>
+            <li class='notDataList'>
               {if(isset($content->showCategory) and $content->showCategory == 1)}
                 <span class='pull-left category'>
                 {if($content->categoryName == 'abbr')}
@@ -150,14 +150,13 @@
 .sticky{padding-left: 5px;}
 </style>
 <script>
-var width = $('.article-list').parent('li').width() - $('.article-date').width(); 
 $('.articleTitleA').each(function()
 {
-    $(this).css('maxWidth', width - 20);
+    $(this).css('max-width', $(this).parents('li').width() - $(this).prev('.category').width() - $(this).next('.sticky').width() - $(this).parent().next('.article-date').width() - 10);
 })
 $('.articleTitleB').each(function()
 {
-    $(this).css('maxWidth', $(this).parent('li').width() - $(this).next('.sticky').width() - 10);
+    $(this).css('max-width', $(this).parent('li').width() - $(this).next('.sticky').width() - 10);
 })
 </script>
 {/noparse}
