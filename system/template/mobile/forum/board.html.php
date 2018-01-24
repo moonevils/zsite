@@ -43,7 +43,7 @@
 
     {foreach($threads as $thread)}
       {$style = $thread->color ? " style='color:{{$thread->color}}'" : ''}
-      <a class='card' href='{!$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
+      <a class='card' href='{$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
         <div class='table-layout'>
           <div class='table-cell'>
             <div class='card-heading{if($thread->isNew)} {!echo ' text-success'} {/if}'><h5{ $style}><i class='icon-comment-alt'></i> {$thread->title}</h5></div>
