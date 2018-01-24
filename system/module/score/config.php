@@ -25,8 +25,8 @@ $config->score->methodOptions['login']             = 'award';
 $config->score->methodOptions['thread']            = 'award';
 $config->score->methodOptions['reply']             = 'award';
 $config->score->methodOptions['approvesubmission'] = 'award';
-$config->score->methodOptions['delthread']         = 'punish';
-$config->score->methodOptions['delreply']          = 'punish';
+$config->score->methodOptions['delThread']         = 'punish';
+$config->score->methodOptions['delReply']          = 'punish';
 $config->score->methodOptions['maxlogin']          = '';
 
 $config->score->setCountsNav[] = 'setCounts';
