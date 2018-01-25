@@ -562,10 +562,18 @@ class fileModel extends model
      */
     public function getExtension($fileName)
     {
-        $extension = strtolower(trim(pathinfo($fileName, PATHINFO_EXTENSION)));
-        if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
-        if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
-        return $extension;
+        $allFiles = $this->dao->select('pathname')->from(TABLE_FILE)->fetchAll();
+        foreach($allFiles as $allFile)
+        {
+            $pathname = strtolower(pathinfo($allFile->pathname,PATHINFO_FILENAME));
+            if(strpos($fileName, $pathname))
+            {
+                $extension = strtolower(trim(pathinfo($allFile->pathname, PATHINFO_EXTENSION)));
+                if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
+                if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
+                return $extension;
+            }
+        } 
     }
 
     /**
