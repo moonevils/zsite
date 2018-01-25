@@ -17,7 +17,7 @@
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setBasic;?></strong></div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-inline'>
+    <form method='post' id='setBasicForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->status;?></th> 
@@ -114,7 +114,10 @@
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></td>
+          <td colspan='2'>
+            <?php echo html::submitButton();?>
+            <span class='hide alert alert-info' style='marging: 0.3px'></span>
+          </td>
         </tr>
       </table>
     </form>

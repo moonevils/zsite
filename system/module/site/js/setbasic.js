@@ -1,5 +1,13 @@
 $(document).ready(function()
 {
+    $.setAjaxForm('#setBasicForm', function(response)
+    {
+        if(response.result == 'fail')
+        {
+          $('.alert').html(response.message).show();
+        }
+    });
+
     $('input[name=status]').click(function()
     {
         if($('#status2').prop('checked'))
