@@ -17,7 +17,7 @@ js::set('random', $this->session->random);
           <ul class='dropdown-menu'>
             <?php foreach($config->langs as $key => $value):?>
             <li class="<?php echo $key == $this->app->getClientLang() ? 'active' : ''; ?>">
-              <a href='###' data-value="<?php echo $key;?>"><?php echo $value;?></a>
+              <?php echo html::a($this->createLink('admin', 'switchlang', "lang={$key}"), $value);?>
             </li>
             <?php endforeach;?>
           </ul>
