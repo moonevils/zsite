@@ -528,7 +528,7 @@ class router extends baseRouter
         if(strpos($this->config->enabledLangs, $this->clientLang) === false) $this->clientLang = $this->config->defaultLang; 
         if(RUN_MODE == 'admin' and isset($this->config->cn2tw) and $this->config->cn2tw and $this->clientLang == 'zh-tw') $this->clientLang = 'zh-cn';
 
-        setcookie($langCookieVar, $this->clientLang, $this->config->cookieLife, $this->config->cookiePath, '');
+        setcookie($langCookieVar, $this->clientLang, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
         if(!isset($_COOKIE[$langCookieVar])) $_COOKIE[$langCookieVar] = $this->clientLang;
         
         return $this->clientLang;
