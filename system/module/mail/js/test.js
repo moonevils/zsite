@@ -2,15 +2,10 @@ $(document).ready(function()
 {
     $.setAjaxForm('#mailForm', function(response)
     {
-        if(response.result == 'success')
+        if(response.result == 'fail' && typeof(response.error != 'undefined'))
         {
-            $('#result').html();
-            $('.panel-notice').addClass('hidden')
-        }
-        else
-        {
-            $('#result').html(response.message);
-            $('.panel-notice').removeClass('hidden')
+            $('.panel-notice').removeClass('hide');
+            $('#result').html(response.error);
         }
         return false;
     });

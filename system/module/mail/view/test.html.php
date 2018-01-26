@@ -10,6 +10,6 @@
       </div>
     </form>
   </div>
-  <div class='hidden panel-notice'><div id='result'></div></div>
+  <div class='hide panel-notice'><div class='alert alert-info' id='result'></div></div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

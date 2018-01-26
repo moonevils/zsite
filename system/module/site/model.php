@@ -142,7 +142,7 @@ class siteModel extends model
         if(is_writable($myFile) !== true)
         {
             $error = sprintf($this->lang->site->fileAuthority, 'chmod o=rwx ' . $myFile);
-            return array('result' => 'fail', 'message' => $error);
+            return array('result' => 'fail', 'error' => $error);
         }        
         else
         {

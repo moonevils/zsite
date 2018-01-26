@@ -2,10 +2,11 @@ $(document).ready(function()
 {
     $.setAjaxForm('#setBasicForm', function(response)
     {
-        if(response.result == 'fail')
+        if(response.result == 'fail' && typeof(response.error) != 'undefined')
         {
-          $('.alert').html(response.message).show();
+          $('.tip').html(response.error).show();
         }
+        return false;
     });
 
     $('input[name=status]').click(function()
