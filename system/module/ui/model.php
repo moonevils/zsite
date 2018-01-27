@@ -1556,6 +1556,9 @@ if(!function_exists('getJS'))
     public function importEffect($id)
     {
         $content = $this->loadModel('admin')->getByApi("effect-apigetpackage-{$id}.json");
+        $effectPath = $this->app->getTmpRoot() . 'effect';
+        if(!file_exists($effectPath)) mkdir($effectPath, 0777, true);
+        if(!is_writable($effectPath)) chmod($effectPath, 0777);
         $package = $this->app->getTmpRoot() . 'effect' . DS . 'effect_' . $id . '.zip';
         file_put_contents($package, $content);
         $result = $this->extractEffect($package, $id);
