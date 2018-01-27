@@ -28,7 +28,7 @@
       <i class='icon icon-info-sign icon-s1'></i>
       <div class='content'></div>
     </div>
-    <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}]' class='form-control'")}</div>
+    <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control'")}</div>
     <div class='form-group'>{!html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
     <div class='form-group'>{!html::submitButton($lang->user->login->common, 'btn primary block')}</div>
     <div class='form-group'>
