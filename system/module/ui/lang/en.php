@@ -459,6 +459,7 @@ $lang->effect->newBlock      = 'Import Widget';
 $lang->effect->obtan         = 'Get effect';
 $lang->effect->imported      = 'Imported';
 $lang->effect->importSuccess = 'Imported';
+$lang->effect->noWritable    = '<code>%s</code> Can not write! Please check the directory permissions, or can not be imported';
 $lang->effect->bindCommunity = 'Please bind the account of Changer before get effect';
 $lang->effect->noRsults      = "You have no effect, please login the platform of Changer <a href='http://www.chanzhi.org/effect.html' target='_blank'>get effect</a>。";
 $lang->effect->redirecting   = "<span class='text-muted'><span id='countDown'>3</span>seconds. Redirecting to the community page...</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Link</a>";

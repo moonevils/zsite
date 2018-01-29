@@ -1547,6 +1547,31 @@ if(!function_exists('getJS'))
     }
 
     /**
+     * Check export path.
+     *
+     * @access public
+     * @return object
+     */
+    public function checkEffectPath()
+    {
+        $effectPath = $this->config->framework->multiSite ? $this->app->getTmpRoot() . 'effect/' . $this->app->siteCode . '/' :  $this->app->getTmpRoot() . 'effect/';
+        
+        if(!is_dir($effectPath))
+        {
+            if(!mkdir($effectPath, 0777, true)) $error = sprintf($this->lang->effect->noWritable, dirname($effectPath));
+        }
+        else
+        {
+            if(!is_writable($effectPath)) $error = sprintf($this->lang->effect->noWritable, $effectPath);
+        }
+
+        $return = new stdclass();
+        $return->effectPath = $effectPath;
+        $return->error      = isset($error) ? $error : '';
+
+        return $return; 
+    }
+    /**
      * Import effect.
      * 
      * @param  int    $id 
@@ -1556,9 +1581,6 @@ if(!function_exists('getJS'))
     public function importEffect($id)
     {
         $content = $this->loadModel('admin')->getByApi("effect-apigetpackage-{$id}.json");
-        $effectPath = $this->app->getTmpRoot() . 'effect';
-        if(!file_exists($effectPath)) mkdir($effectPath, 0777, true);
-        if(!is_writable($effectPath)) chmod($effectPath, 0777);
         $package = $this->app->getTmpRoot() . 'effect' . DS . 'effect_' . $id . '.zip';
         file_put_contents($package, $content);
         $result = $this->extractEffect($package, $id);

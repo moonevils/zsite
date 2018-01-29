@@ -459,6 +459,7 @@ $lang->effect->newBlock      = '导入新区块';
 $lang->effect->obtan         = '获取特效';
 $lang->effect->imported      = '已导入';
 $lang->effect->importSuccess = '导入成功';
+$lang->effect->noWritable    = "<code>%s</code> 不可写！请检查该目录权限，否则无法导入。";
 $lang->effect->bindCommunity = '蝉知特效只对蝉知社区认证用户开放，请先注册并绑定蝉知社区账号后，获取蝉知特效。';
 $lang->effect->noRsults      = "你还没有任何特效，请登录蝉知特效平台，<a href='http://www.chanzhi.org/effect.html' target='_blank'>获取特效</a>。";
 $lang->effect->redirecting   = "<span class='text-muted'><span id='countDown'>3</span>秒后跳转到社区账号注册/绑定页面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳转</a>";
