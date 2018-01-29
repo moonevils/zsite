@@ -872,6 +872,7 @@ class ui extends control
         $blocks = array('0' => '');
         foreach($blockList as $block) $blocks[$block->id] = $block->title;
 
+        $this->view->error  = $this->ui->checkEffectPath();
         $this->view->id     = $id;
         $this->view->effect = $this->ui->getEffectByApi($id);
         $this->view->title  = $this->lang->effect->import;
