@@ -170,7 +170,7 @@ function sortFile()
     $('.file-list').sortable(
     {
         trigger: '.icon-move',
-        selector: '.file-list .file',
+        selector: '.file',
         finish: function()
         {
             var orders = {};     
@@ -180,18 +180,18 @@ function sortFile()
                 orders[$(this).data('id')] = orderNext ++;
             });
 
-             $.post(createLink('file', 'sort'), orders, function(data)
-             {
-                 if(data.result == 'success')
-                 {
-                     $('#ajaxModal').load($('#ajaxModal').attr('ref'), function(){$.ajustModalPosition('fit', '#ajaxModal');});
-                 }
-                 else
-                 {
-                     alert(data.message);
-                     return location.reload(); 
-                 }
-             }, 'json');
+            $.post(createLink('file', 'sort'), orders, function(data)
+            {
+                if(data.result == 'success')
+                {
+                    $('#ajaxModal').load($('#ajaxModal').attr('ref'), function(){$.ajustModalPosition('fit', '#ajaxModal');});
+                }
+                else
+                {
+                    alert(data.message);
+                    return location.reload(); 
+                }
+            }, 'json');
         }
     });
 }
