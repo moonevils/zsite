@@ -554,15 +554,14 @@ class fileModel extends model
     }
 
     /**
-     * Get extension name of a file.
+     * Get thubms extension name of a file.
      * 
      * @param string $fileName 
      * @access public
      * @return void
      */
-    public function getExtension($fileName)
+    public function getThumbsExtension($fileName, $allFiles)
     {
-        $allFiles = $this->dao->select('pathname')->from(TABLE_FILE)->fetchAll();
         foreach($allFiles as $allFile)
         {
             $pathname = strtolower(pathinfo($allFile->pathname,PATHINFO_FILENAME));
@@ -574,6 +573,20 @@ class fileModel extends model
                 return $extension;
             }
         } 
+    }
+    /**
+     * Get extension name of a file.
+     * 
+     * @param string $fileName 
+     * @access public
+     * @return void
+     */
+    public function getExtension($fileName)
+    {
+        $extension = strtolower(trim(pathinfo($fileName, PATHINFO_EXTENSION)));
+        if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
+        if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
+        return $extension;
     }
 
     /**
