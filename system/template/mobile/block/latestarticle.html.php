@@ -50,7 +50,8 @@
           <div class='table-layout'>
             {if(!empty($article->image))}
               {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
+              {$article->image->primary->objectType = 'article'}
+              {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
               {$thumbnailMaxWidth = !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px'}
               {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: {{$thumbnailMaxWidth}};'>{{$thumbnailLink}}</div>"}
               {if($content->imagePosition == 'left')} {$thumbnail} {/if}

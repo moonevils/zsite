@@ -42,8 +42,9 @@
                   {$imgColor = $product->id * 57 % 360}
                   <div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>
                 {else}
-                    {$imageSrc = $model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL')}
-                    <img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imageSrc}'>
+                  {$product->image->primary->objectType =  'product'}
+                  {$imageSrc = $model->loadModel('file')->printFileURL($product->image->primary, 'middleURL')}
+                  <img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imageSrc}'>
                 {/if}
               </a>
               <div class='card-content'>

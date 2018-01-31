@@ -13,7 +13,7 @@
      {if(isset($logoSetting->{{CHANZHI_TEMPLATE}}->themes->{{CHANZHI_THEME}}))} {$logo = $logoSetting->{{CHANZHI_TEMPLATE}}->themes->{{CHANZHI_THEME}}} {/if}
      {if($logo)}
        {$logo->extension = $control->loadModel('file')->getExtension($logo->pathname)}
-       {!html::image($control->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{{$control->config->company->name}}' title='{{$control->config->company->name}}'")}
+       {!html::image($control->loadModel('file')->printFileURL($logo), "class='logo' alt='{{$control->config->company->name}}' title='{{$control->config->company->name}}'")}
      {else}
        <h4>{!$control->config->site->name}</h4>
      {/if}

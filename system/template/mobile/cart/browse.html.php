@@ -34,7 +34,8 @@
                   </div>
                 </div>
               {else}
-                {!html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{{$product->name}}' alt='{{$product->name}}'")}
+                {$product->image->primary->objectType = 'product'}
+                {!html::image($control->loadModel('file')->printFileURL($product->image->primary, 'middleURL'), "title='{{$product->name}}' alt='{{$product->name}}'")}
               {/if}
             </div>
             <div class='table-cell'>
