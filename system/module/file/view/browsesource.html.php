@@ -22,7 +22,7 @@
         $imageHtml = '';
         $fileHtml  = '';
         $fullURL   = html::input('', $file->fullURL, "size='" . strlen($file->fullURL) . "' style='border:none; background:none;' onmouseover='this.select()'");
-        $imagePath = $this->file->printFileURL($file->pathname, $file->extension, $file->objectType);
+        $imagePath = $this->file->printFileURL($file);
         if($file->isImage)
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
@@ -74,7 +74,7 @@
             <?php
             if($file->isImage)
             {
-                echo html::a(inlink('download', "id=$file->id"), html::image($this->file->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL'), "class='image-small' title='{$file->title}'"), "data-toggle='lightbox' target='_blank'");
+                echo html::a(inlink('download', "id=$file->id"), html::image($this->file->printFileURL($file, 'smallURL'), "class='image-small' title='{$file->title}'"), "data-toggle='lightbox' target='_blank'");
             }
             else
             {
@@ -82,7 +82,7 @@
             }
             ?>
           </td>
-          <td class='text-left'><?php echo $this->file->printFileURL($file->pathname, $file->extension, $file->objectType);?></td>
+          <td class='text-left'><?php echo $this->file->printFileURL($file);?></td>
           <td><?php echo $file->extension;?></td>
           <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
           <td><?php echo isset($users[$file->addedBy]) ? $users[$file->addedBy] : '';?></td>
