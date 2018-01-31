@@ -18,7 +18,7 @@
       <td>{!echo $file->id}</td>
       <td>
         {if($file->isImage)
-            {!html::a(inlink('download', "id=$file->id"), html::image($control->loadModel('file')->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL'), "class='image-small' title='{$file->title}'"), "target='_blank'")}
+            {!html::a(inlink('download', "id=$file->id"), html::image($control->loadModel('file')->printFileURL($file, 'smallURL'), "class='image-small' title='{$file->title}'"), "target='_blank'")}
             {if($file->primary == 1)} {!echo '<small class="label label-success">'. $lang->file->primary .'</small>'} {/if}
         {else}
             {!html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'")}

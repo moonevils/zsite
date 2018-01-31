@@ -85,7 +85,7 @@
         {if($logo)}
           {$logo->extension = $control->loadModel('file')->getExtension($logo->pathname)}
           <div id='siteLogo' data-ve='logo'>
-            {!html::a(helper::createLink('index'), html::image($control->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{{$control->config->company->name}}' title='{{$control->config->company->name}}'"))}
+            {!html::a(helper::createLink('index'), html::image($control->loadModel('file')->printFileURL($logo), "class='logo' alt='{{$control->config->company->name}}' title='{{$control->config->company->name}}'"))}
           </div>
         {else}
           <div id='siteName' data-ve='logo'><h2>{!html::a(helper::createLink('index'), $control->config->site->name)}</h2></div>

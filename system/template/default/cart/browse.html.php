@@ -36,7 +36,7 @@
           <td class='w-100px'>
             {if(!empty($product->image))}
                 {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
-                {!html::a($productLink, html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, '', 'smallURL'), "title='$title' alt='$product->name'"), "class='media-wrapper'")}
+                {!html::a($productLink, html::image($control->loadModel('file')->printFileURL($product->image->primary, 'smallURL'), "title='$title' alt='$product->name'"), "class='media-wrapper'")}
             {/if}
           </td>
           <td class='text-left text-middle'>
