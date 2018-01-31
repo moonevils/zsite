@@ -68,7 +68,7 @@ if(!empty($files))
         $file->ext       = $file->extension;
         $file->addedDate = substr($file->addedDate, 2, 14);
         $file->remoteId  = $file->id;
-        if($file->isImage) $file->previewImage = $this->file->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL');
+        if($file->isImage) $file->previewImage = $this->file->printFileURL($file, 'smallURL');
         $filesArray[] = $file;
     }
 }
