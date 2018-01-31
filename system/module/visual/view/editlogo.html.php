@@ -21,7 +21,7 @@
         </strong>
       </td>
     </tr>
-    <tr><td></td><td colspan='2'><?php if(isset($logo->webPath)) echo html::image($this->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo'");?></td></tr>
+    <tr><td></td><td colspan='2'><?php if(isset($logo->webPath)) echo html::image($this->loadModel('file')->printFileURL($logo), "class='logo'");?></td></tr>
     <tr>
       <td></td>
       <td colspan='2'>
