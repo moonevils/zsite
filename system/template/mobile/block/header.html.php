@@ -10,7 +10,7 @@
       {if(isset($logoSetting->$templateName->themes->$themeName))} {$logo = $logoSetting->$templateName->themes->$themeName} {/if}
       {if($logo)}
         {$logo->extension = $model->loadModel('file')->getExtension($logo->pathname)}
-        {!html::image($model->loadModel('file')->printFileURL($logo->pathname, $logo->extension), "class='logo' alt='{{$model->config->company->name}}' title='{{$model->config->company->name}}'")}
+        {!html::image($model->loadModel('file')->printFileURL($logo), "class='logo' alt='{{$model->config->company->name}}' title='{{$model->config->company->name}}'")}
       {else}
        <h4>{$model->config->site->name}</h4>
       {/if}
