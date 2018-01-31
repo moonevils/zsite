@@ -23,7 +23,7 @@
               {if(!empty($object->image->primary))}
                 <div class='media pull-right'>
                   {$title = $object->image->primary->title ? $object->image->primary->title : strip_tags($object->title)}
-                  {!html::a($object->url, html::image($control->loadModel('file')->printFileURL($object->image->primary->pathname, $object->image->primary->extension, $object->objectType, 'smallURL'), "title='$title' class='thumbnail'" ))}
+                  {!html::a($object->url, html::image($control->loadModel('file')->printFileURL($object->image->primary, 'smallURL'), "title='$title' class='thumbnail'" ))}
                 </div>
               {/if}
               <div class='text text-muted'>{$object->summary}</div>

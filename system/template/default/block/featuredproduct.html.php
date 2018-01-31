@@ -16,7 +16,8 @@
   {$category = array_shift($product->categories)}
   {$alias    = !empty($category) ? $category->alias : ''}
   {$url      = helper::createLink('product', 'view', "id=$product->id", "category={{$alias}}&name={{$product->alias}}")}
-  {$image = $model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL')}
+  {$product->image->primary->objectType = 'product'}
+  {$image = $model->loadModel('file')->printFileURL($product->image->primary, 'middleURL')}
   <div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
     <div class='panel-body'>
       <div class='card'>

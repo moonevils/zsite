@@ -40,7 +40,8 @@
           {$imageURL = !empty($control->config->blog->imageSize) ? $control->config->blog->imageSize . 'URL' : 'smallURL'}
           <div class='media {!echo $pull}' style="max-width: {!echo !empty($control->config->blog->imageWidth) ? $control->config->blog->imageWidth . 'px' : '180px'}">
             {$title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title}
-            {!html::a($url, html::image($control->loadModel('file')->printFileURL($stick->image->primary->pathname, $stick->image->primary->extension, 'blog', $imageURL), "title='$title' class='thumbnail'"))}
+            {$stick->image->primary->objectType = 'blog'}
+            {!html::a($url, html::image($control->loadModel('file')->printFileURL($stick->image->primary, $imageURL), "title='$title' class='thumbnail'"))}
           </div>
           {/if}
           <h4 class='card-heading'>
@@ -75,7 +76,8 @@
             {$imageURL = !empty($control->config->blog->imageSize) ? $control->config->blog->imageSize . 'URL' : 'smallURL'}
             <div class='media {!echo $pull}' style="max-width: {!echo !empty($control->config->blog->imageWidth) ? $control->config->blog->imageWidth . 'px' : '180px'}">
               {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {!html::a($url, html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'blog', $imageURL), "title='{{$title}}' class='thumbnail'"))}
+              {$article->image->primary->objectType = 'blog'}
+              {!html::a($url, html::image($control->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$title}}' class='thumbnail'"))}
             </div>
           {/if}
           <h4 class='card-heading'>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</h4>
