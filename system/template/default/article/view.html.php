@@ -27,7 +27,7 @@
             {if($article->source == 'article')}{$article->copyURL = $sysURL . $control->article->createPreviewLink($article->copyURL)}{/if}
             <dd>{!echo $article->copyURL ? html::a($article->copyURL, $article->copySite, "target='_blank'") : $article->copySite}</dd>
           {else}
-            <span class='label label-success'>{lang->article->sourceList[$article->source]}</span>
+            <span class='label label-success'>{$lang->article->sourceList[$article->source]}</span>
           {/if}
           <dd class='pull-right'>
             {if(!empty($control->config->oauth->sina))}
