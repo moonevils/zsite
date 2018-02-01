@@ -742,10 +742,9 @@ class file extends control
         $rawImages  = array_slice($images, $lastImage, $limit);
         $completed += $limit;
 
-        $allFiles = $this->dao->select('pathname')->from(TABLE_FILE)->fetchAll();
         foreach($rawImages as $image)
         {
-            $extension = $this->file->getThumbsExtension($image,$allFiles);
+            $extension = $this->file->getExtension($image);
             if(in_array(strtolower($extension), $this->config->file->imageExtensions, true) === false) continue;
             $this->file->compressImage($image);
         }
