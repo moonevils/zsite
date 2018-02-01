@@ -554,27 +554,6 @@ class fileModel extends model
     }
 
     /**
-     * Get thubms extension name of a file.
-     * 
-     * @param string $fileName 
-     * @access public
-     * @return void
-     */
-    public function getThumbsExtension($fileName, $allFiles)
-    {
-        foreach($allFiles as $allFile)
-        {
-            $pathname = strtolower(pathinfo($allFile->pathname,PATHINFO_FILENAME));
-            if(strpos($fileName, $pathname))
-            {
-                $extension = strtolower(trim(pathinfo($allFile->pathname, PATHINFO_EXTENSION)));
-                if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
-                if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
-                return $extension;
-            }
-        } 
-    }
-    /**
      * Get extension name of a file.
      * 
      * @param string $fileName 
