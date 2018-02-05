@@ -299,7 +299,7 @@ class file extends control
                 $extension    = $this->file->getExtension($_FILES['upFile']['name']);
                 $sameUpFile   = $this->file->checkSameFile(str_replace('.' . $extension, '', $_FILES['upFile']['name']), $fileID);
                 $sameFilename = $this->file->checkSameFile($this->post->filename, $fileID);
-                if(!empty($sameUpFile) or !empty($sameFilename))$this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+                if(!empty($sameUpFile) or !empty($sameFilename))$this->send(array('result' => 'fail', 'message' => $this->lang->file->sameName));
             }
 
             $result = $this->file->editSource($file, $filename);
@@ -333,7 +333,7 @@ class file extends control
                 $extension    = $this->file->getExtension($name);
                 $filename     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
                 $sameFilename = $this->file->checkSameFile($filename);
-                if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'error' => $this->lang->file->sameName)));
+                if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'message' => $this->lang->file->sameName)));
             }
         }
 
