@@ -2,3 +2,4 @@
 .counter .title{font-size:20px}
 .counter .caption{font-size:12px}
 .row {padding:10px}
+.row .default{background-color:#f0f0f0; border:none}
