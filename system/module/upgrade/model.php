@@ -108,11 +108,11 @@ class upgradeModel extends model
             case '2_5_3':
                 $this->execSQL($this->getUpgradeFile('2.5.3'));
                 $this->fixCustomedCss();
-            case '3_0';
-            case '3_0_1';
+            case '3_0':
+            case '3_0_1':
             case '3_1':
                 $this->fixBasicSite();
-            case '3_2';
+            case '3_2':
             case '3_3':
                 $this->execSQL($this->getUpgradeFile('3.3'));
             case '4_0':
@@ -120,7 +120,7 @@ class upgradeModel extends model
                 $this->fillDefaultBlocks();
             case '4_1_beta':
                 $this->execSQL($this->getUpgradeFile('4.1.beta'));
-            case '4_2';
+            case '4_2':
             case '4_2_1':
                 $this->execSQL($this->getUpgradeFile('4.2.1'));
                 $this->reserveCurrentTheme();
@@ -144,7 +144,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('4.4.1'));
                 $this->computeScore();
                 $this->appendIDForRegion();
-            case '4_5';
+            case '4_5':
             case '4_5_1':
                 $this->execSQL($this->getUpgradeFile('4.5.1'));
                 $this->modifyLinksGrid();
@@ -153,7 +153,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('4.5.2'));
             case '4_6':
                 $this->execSQL($this->getUpgradeFile('4.6'));
-            case '5_0';
+            case '5_0':
             case '5_0_1':
                 $this->execSQL($this->getUpgradeFile('5.0.1'));
                 $this->fixLayoutPlans();
@@ -170,11 +170,11 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('5.3.1'));
             case '5_3_2':
                 $this->fixHeaderBlock();
-            case '5_3_3';
+            case '5_3_3':
             case '5_3_4':
                 $this->fixCustomConfig();
                 $this->execSQL($this->getUpgradeFile('5.3.4'));
-            case '5_4';
+            case '5_4':
             case '5_4_1':
                 $this->execSQL($this->getUpgradeFile('5.4.1'));
             case '5_5':
@@ -191,18 +191,20 @@ class upgradeModel extends model
                 $this->addHeaderBlock();
             case '6_1':
                 $this->execSQL($this->getUpgradeFile('6.1'));
-            case '6_2';
+            case '6_2':
             case '6_3_beta':
                 $this->execSQL($this->getUpgradeFile('6.3.beta'));
                 $this->processProductViews();
-            case '6_4';
+            case '6_4':
             case '6_4_1':
                 $this->fixFileURLInEditor();
-            case '6_5';
+            case '6_5':
             case '6_6':
                 $this->processFileURLInEditor();
             case '6_6_1':
                 $this->execSQL($this->getUpgradeFile('6.6.1'));
+            case '6_7':
+                $this->execSQL($this->getUpgradeFile('6.7'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -274,6 +276,7 @@ class upgradeModel extends model
             case '6_2'      ;
             case '6_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('6.3.beta'));
             case '6_6_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('6.6.1'));
+            case '6_7'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.7'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
