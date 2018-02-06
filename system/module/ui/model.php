@@ -1614,15 +1614,15 @@ if(!function_exists('getJS'))
         $files      = $zip->listContent();
         $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'effect' . DS . $effectID;
         $removePath = $files[0]['filename'];
-        $soureList = glob($sourcePath . '*');
+        $soureList  = glob($sourcePath . '*');
         if(!empty($soureList))
-        {   
+        {
             foreach($soureList as $source)
-            {   
+            {
                 if(is_dir($source)) $zfile->removeDir($source);
                 if(is_file($source)) $zfile->removeFile($source);
-            }   
-        }   
+            }
+        }
 
         $return = array();
         $return['result'] = 'success';
