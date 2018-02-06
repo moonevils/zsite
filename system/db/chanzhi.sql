@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `eps_action` (
   `extra` varchar(255) NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY  (`id`)
+  KEY `objectType` (`objectType`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_article`;
@@ -41,10 +42,13 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `onlyBody` enum('0', '1') NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `order` (`order`),
+  KEY `type` (`type`),
   KEY `lang` (`lang`),
+  KEY `order` (`order`),
   KEY `views` (`views`),
-  KEY `sticky` (`sticky`)
+  KEY `sticky` (`sticky`),
+  KEY `status` (`status`),
+  KEY `addedDate` (`addedDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_block`;
@@ -58,7 +62,9 @@ CREATE TABLE IF NOT EXISTS `eps_block` (
   `content` text NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `lang` (`lang`)
+  KEY `lang` (`lang`),
+  KEY `type` (`type`),
+  KEY `template` (`template`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_slide`;
@@ -82,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `lang` (`lang`)
+  KEY `group` (`group`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_book`;
@@ -112,6 +118,8 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   KEY `lang` (`lang`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
+  KEY `status` (`status`),
+  KEY `addedDate` (`addedDate`),
   KEY `path` (`path`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -145,7 +153,8 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   KEY `tree` (`type`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
-  KEY `path` (`path`)
+  KEY `path` (`path`),
+  KEY `grade` (`grade`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_config`;
@@ -184,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `eps_package` (
   PRIMARY KEY  (`id`),
   KEY `lang` (`lang`),
   UNIQUE KEY `code` (`code`),
-  KEY `name` (`name`),
+  KEY `type` (`type`),
   KEY `addedTime` (`installedTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -224,6 +233,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
+  KEY `pathname` (`pathname`),
   KEY `object` (`objectType`,`objectID`),
   KEY `extension` (`extension`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -299,6 +309,10 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
   KEY `status` (`status`),
+  KEY `type` (`type`),
+  KEY `to` (`to`),
+  KEY `account` (`account`),
+  KEY `readed` (`readed`),
   KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -348,6 +362,7 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   KEY `order` (`order`),
   KEY `views` (`views`),
   KEY `sticky` (`sticky`),
+  KEY `status` (`status`),
   KEY `model` (`model`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -358,7 +373,9 @@ CREATE TABLE IF NOT EXISTS `eps_relation` (
   `category` smallint(5) NOT NULL,
   `lang` char(30) NOT NULL,
   UNIQUE KEY `relation` (`type`,`id`,`category`),
-  KEY `lang` (`lang`)
+  KEY `lang` (`lang`),
+  KEY `id` (`id`),
+  KEY `category` (`category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_reply`;
@@ -376,6 +393,9 @@ CREATE TABLE IF NOT EXISTS `eps_reply` (
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
   KEY `thread` (`thread`),
+  KEY `reply` (`reply`),
+  KEY `hidden` (`hidden`),
+  KEY `editedDate` (`editedDate`),
   KEY `author` (`author`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -538,6 +558,9 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
   KEY `category` (`board`),
+  KEY `hidden` (`hidden`),
+  KEY `status` (`status`),
+  KEY `addedDate` (`addedDate`),
   KEY `stick` (`stick`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -586,6 +609,8 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
   KEY `admin` (`admin`),
+  KEY `score` (`score`),
+  KEY `rank` (`rank`),
   KEY `account` (`account`,`password`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -611,7 +636,11 @@ CREATE TABLE IF NOT EXISTS `eps_log` (
   `type` varchar(30) NOT NULL DEFAULT 'adminlogin',
   `lang` char(30) NOT NULL DEFAULT 'all',
   PRIMARY KEY  (`id`),
-  KEY `lang` (`lang`)
+  KEY `ip` (`ip`),
+  KEY `lang` (`lang`),
+  KEY `type` (`type`),
+  KEY `account` (`account`),
+  KEY `date` (`date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_public`;
@@ -664,6 +693,11 @@ CREATE TABLE IF NOT EXISTS `eps_wx_message` (
   `time` datetime NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `type` (`type`),
+  KEY `public` (`public`),
+  KEY `from` (`from`),
+  KEY `to` (`to`),
+  KEY `replied` (`replied`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -687,7 +721,9 @@ CREATE TABLE IF NOT EXISTS `eps_score` (
   KEY `method` (`method`),
   KEY `lang` (`lang`),
   KEY `objectType` (`objectType`),
-  KEY `objectID` (`objectID`)
+  KEY `objectID` (`objectID`),
+  KEY `time` (`time`),
+  KEY `type` (`type`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_search_index`;
@@ -750,6 +786,9 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   KEY `status` (`status`),
   KEY `createdDate` (`createdDate`),
   KEY `deliveriedDate` (`deliveriedDate`),
+  KEY `deliveriedStatus` (`deliveriedStatus`),
+  KEY `payStatus` (`payStatus`),
+  KEY `type` (`type`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -777,6 +816,7 @@ CREATE TABLE IF NOT EXISTS `eps_cart` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`),
+  KEY `product` (`product`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -836,6 +876,7 @@ CREATE TABLE `eps_widget` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
+  KEY `hidden` (`hidden`),
   UNIQUE KEY `accountAppOrder` (`account`, `order`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
