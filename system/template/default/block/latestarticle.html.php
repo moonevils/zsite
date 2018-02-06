@@ -80,8 +80,8 @@
       <ul class='ul-list'>
         {foreach($articles as $article)}
           {$categoryAlias = isset($article->category->alias) ? $article->category->alias : ''}
-          {$alias       = "category={{$categoryAlias}}&name={{$article->alias}}"}
-          {$url         = helper::createLink('article', 'view', "id=$article->id", $alias)}
+          {$alias         = "category={{$categoryAlias}}&name={{$article->alias}}"}
+          {$url           = helper::createLink('article', 'view', "id=$article->id", $alias)}
           {if(isset($content->time))}
             <li class='addDataList'>
               <span class='article-list'>
@@ -117,7 +117,6 @@
                   {$blockCntent     = json_decode($block->content)}
                   {$blockCategories = ''}
                   {if(isset($blockCntent->category))} {$blockCategories = $blockCntent->category} {/if}
-
                   {$categoryName = ''}
                   {foreach($article->categories as $id => $categorie)}
                     {if(strpos(",$blockCategories,", ",$id,") !== false)}
