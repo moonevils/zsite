@@ -1,63 +1,63 @@
-alter table `eps_action` add key(`objectType`);
+ALTER TABLE `eps_action` ADD key(`objectType`);
 
-alter table `eps_article` add key(`type`);
-alter table `eps_article` add key(`order`);
-alter table `eps_article` add key(`status`);
-alter table `eps_article` add key(`addedDate`);
+ALTER TABLE `eps_article` ADD key(`type`);
+ALTER TABLE `eps_article` ADD key(`order`);
+ALTER TABLE `eps_article` ADD key(`status`);
+ALTER TABLE `eps_article` ADD key(`ADDedDate`);
 
-alter table `eps_slide` add key(`group`);
+ALTER TABLE `eps_slide` ADD key(`group`);
 
-alter table `eps_block` add key(`type`);
-alter table `eps_block` add key(`template`);
+ALTER TABLE `eps_block` ADD key(`type`);
+ALTER TABLE `eps_block` ADD key(`template`);
 
-alter table `eps_book` add key(`status`);
-alter table `eps_book` add key(`addedDate`);
+ALTER TABLE `eps_book` ADD key(`status`);
+ALTER TABLE `eps_book` ADD key(`ADDedDate`);
 
-alter table `eps_category` add key(`grade`);
+ALTER TABLE `eps_category` ADD key(`grade`);
 
-alter table `eps_package` add key(`type`);
+ALTER TABLE `eps_package` ADD key(`type`);
 
-alter table `eps_file` add key(`pathname`);
+ALTER TABLE `eps_file` ADD key(`pathname`);
 
-alter table `eps_message` add key(`type`);
-alter table `eps_message` add key(`to`);
-alter table `eps_message` add key(`account`);
-alter table `eps_message` add key(`readed`);
+ALTER TABLE `eps_message` ADD key(`type`);
+ALTER TABLE `eps_message` ADD key(`to`);
+ALTER TABLE `eps_message` ADD key(`account`);
+ALTER TABLE `eps_message` ADD key(`readed`);
 
-alter table `eps_product` add key(`status`);
+ALTER TABLE `eps_product` ADD key(`status`);
 
-alter table `eps_relation` add key(`id`);
-alter table `eps_relation` add key(`category`);
+ALTER TABLE `eps_relation` ADD key(`id`);
+ALTER TABLE `eps_relation` ADD key(`category`);
 
-alter table `eps_reply` add key(`reply`);
-alter table `eps_reply` add key(`hidden`);
-alter table `eps_reply` add key(`editedDate`);
+ALTER TABLE `eps_reply` ADD key(`reply`);
+ALTER TABLE `eps_reply` ADD key(`hidden`);
+ALTER TABLE `eps_reply` ADD key(`editedDate`);
 
-alter table `eps_thread` add key(`hidden`);
-alter table `eps_thread` add key(`status`);
-alter table `eps_thread` add key(`addedDate`);
+ALTER TABLE `eps_thread` ADD key(`hidden`);
+ALTER TABLE `eps_thread` ADD key(`status`);
+ALTER TABLE `eps_thread` ADD key(`ADDedDate`);
 
-alter table `eps_user` add key(`score`);
-alter table `eps_user` add key(`rank`);
+ALTER TABLE `eps_user` ADD key(`score`);
+ALTER TABLE `eps_user` ADD key(`rank`);
 
-alter table `eps_log` add key(`ip`);
-alter table `eps_log` add key(`type`);
-alter table `eps_log` add key(`account`);
-alter table `eps_log` add key(`date`);
+ALTER TABLE `eps_log` ADD key(`ip`);
+ALTER TABLE `eps_log` ADD key(`type`);
+ALTER TABLE `eps_log` ADD key(`account`);
+ALTER TABLE `eps_log` ADD key(`date`);
 
-alter table `eps_wx_message` add key(`type`);
-alter table `eps_wx_message` add key(`public`);
-alter table `eps_wx_message` add key(`from`);
-alter table `eps_wx_message` add key(`to`);
-alter table `eps_wx_message` add key(`replied`);
+ALTER TABLE `eps_wx_message` ADD key(`type`);
+ALTER TABLE `eps_wx_message` ADD key(`public`);
+ALTER TABLE `eps_wx_message` ADD key(`from`);
+ALTER TABLE `eps_wx_message` ADD key(`to`);
+ALTER TABLE `eps_wx_message` ADD key(`replied`);
 
-alter table `eps_score` add key(`time`);
-alter table `eps_score` add key(`type`);
+ALTER TABLE `eps_score` ADD key(`time`);
+ALTER TABLE `eps_score` ADD key(`type`);
 
-alter table `eps_order` add key(`deliveryStatus`);
-alter table `eps_order` add key(`payStatus`);
-alter table `eps_order` add key(`type`);
+ALTER TABLE `eps_order` ADD key(`deliveryStatus`);
+ALTER TABLE `eps_order` ADD key(`payStatus`);
+ALTER TABLE `eps_order` ADD key(`type`);
 
-alter table `eps_cart` add key(`product`);
+ALTER TABLE `eps_cart` ADD key(`product`);
 
-alter table `eps_widget` add key(`hidden`);
+ALTER TABLE `eps_widget` ADD key(`hidden`);
