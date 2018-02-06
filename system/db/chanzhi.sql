@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `eps_action` (
   `comment` text NOT NULL,
   `extra` varchar(255) NOT NULL,
   `lang` char(30) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
   KEY `objectType` (`objectType`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -786,7 +786,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   KEY `status` (`status`),
   KEY `createdDate` (`createdDate`),
   KEY `deliveriedDate` (`deliveriedDate`),
-  KEY `deliveriedStatus` (`deliveriedStatus`),
+  KEY `deliveryStatus` (`deliveryStatus`),
   KEY `payStatus` (`payStatus`),
   KEY `type` (`type`),
   KEY `lang` (`lang`)
