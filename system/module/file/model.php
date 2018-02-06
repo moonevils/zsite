@@ -566,7 +566,7 @@ class fileModel extends model
         if(empty($extension))
         {
             $basename  = strtolower(trim(pathinfo($fileName, PATHINFO_BASENAME)));
-            $pathname  = $this->dao->select('pathname')->from(TABLE_FILE)->where('pathname')->like("%{$basename}%")->fetchAll();
+            $pathname  = $this->dao->select('pathname')->from(TABLE_FILE)->where('pathname')->like("%{$basename}")->fetchAll();
             $extension = pathinfo($pathname[0]->pathname, PATHINFO_EXTENSION);
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
         }
