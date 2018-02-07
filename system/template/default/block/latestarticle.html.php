@@ -150,6 +150,12 @@
 .sticky{padding-left: 5px;}
 </style>
 <script>
+{/noparse}
+var currentBlockID = {$block->id};
+
+{noparse}
+if($('#block' + currentBlockID).data('grid') === 'undefined') $(this).attr('data-grid', 4);
+
 $('.articleTitleA').each(function()
 {
     $(this).css('max-width', $(this).parents('li').width() - $(this).prev('.category').width() - $(this).next('.sticky').width() - $(this).parent().next('.article-date').width() - 10);
