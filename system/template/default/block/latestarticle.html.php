@@ -156,7 +156,10 @@ var currentBlockID = {$block->id};
 {noparse}
 if(typeof($('#block' + currentBlockID).parent('.col').data('grid')) === 'undefined')
 {
-    $('#block' + currentBlockID).parent('.col').attr('data-grid', 4).attr('class', 'col col-4');
+    var grid = $('#block' + currentBlockID).parents('.blocks').data('grid');
+    grid = typeof(grid) == 'undefined' ? 12 : grid;
+
+    $('#block' + currentBlockID).parent('.col').attr('data-grid', grid).attr('class', 'col col-' + grid);
 }
 
 $('.articleTitleA').each(function()
