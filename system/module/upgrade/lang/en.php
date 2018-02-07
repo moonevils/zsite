@@ -108,3 +108,4 @@ $lang->upgrade->fromVersions['6_4_1']    = '6.4.1';
 $lang->upgrade->fromVersions['6_5']      = '6.5';
 $lang->upgrade->fromVersions['6_6']      = '6.6';
 $lang->upgrade->fromVersions['6_6_1']    = '6.6.1';
+$lang->upgrade->fromVersions['6_7']      = '6.7';
