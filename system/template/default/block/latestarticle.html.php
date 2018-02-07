@@ -154,7 +154,10 @@
 var currentBlockID = {$block->id};
 
 {noparse}
-if($('#block' + currentBlockID).data('grid') === 'undefined') $(this).attr('data-grid', 4);
+if(typeof($('#block' + currentBlockID).parent('.col').data('grid')) === 'undefined')
+{
+    $('#block' + currentBlockID).parent('.col').attr('data-grid', 4).attr('class', 'col col-4');
+}
 
 $('.articleTitleA').each(function()
 {
