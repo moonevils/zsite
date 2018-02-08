@@ -809,7 +809,7 @@ class baseRouter
      */
     public function startSession()
     {
-        if(!defined('SESSION_STARTED'))
+        if(!defined('SESSION_STARTED') and RUN_MODE != 'install')
         {
             $sessionName = $this->config->sessionVar;
             session_name($sessionName);
