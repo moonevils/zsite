@@ -15,16 +15,16 @@
   {include TPL_ROOT . 'user/side.html.php'}
   <div class='col-md-10'>
     <div class='panel'>
-      <div class='panel-heading'><strong>{!$lang->user->buyScore}</strong></div>
+      <div class='panel-heading'><strong>{$lang->user->buyScore}</strong></div>
       <div class='panel-body'>
         <form method='post' id='ajaxForm'>
           <table class='table table-form'>
             <tr>
-              <th width='100'>{!$lang->score->setAmount}</th>
-              <td>{!html::input('amount', '', "style='width:45px' onkeyup='getScore()'")}{!$lang->score->amountUnit} <span class='ml-10px red'>{!printf($lang->score->buyWaring, $config->score->buyScore->minAmount, $config->score->buyScore->perYuan)}</span></td>
+              <th width='100'>{$lang->score->setAmount}</th>
+              <td>{!html::input('amount', '', "style='width:45px' onkeyup='getScore()'")}{$lang->score->amountUnit} <span class='ml-10px red'>{!printf($lang->score->buyWaring, $config->score->buyScore->minAmount, $config->score->buyScore->perYuan)}</span></td>
             </tr>
             <tr>
-              <th>{!echo $lang->score->getScore}</th>
+              <th>{$lang->score->getScore}</th>
               <td><span id='score'>0</span></td>
             </tr>
             <tr>
