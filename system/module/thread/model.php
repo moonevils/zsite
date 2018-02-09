@@ -249,8 +249,8 @@ class threadModel extends model
         $this->lang->thread->$contentInput = $this->lang->thread->content;
         $thread = fixer::input('post')
             ->remove("files, labels, views, replies, hidden, stick")
-            ->setForce('title', $this->post->$titleInput)
-            ->setForce('content', $this->post->$contentInput)
+            ->setForce('title', trim($this->post->$titleInput))
+            ->setForce('content', trim($this->post->$contentInput))
             ->stripTags('content,link', $allowedTags)
             ->setIF(!$canManage, 'readonly', 0)
             ->setIF(!$this->post->isLink, 'link', '')
@@ -262,6 +262,9 @@ class threadModel extends model
             ->setForce('editedDate', $now) 
             ->setForce('repliedDate', $now)
             ->get();
+
+        $thread->$titleInput   = trim($thread->$titleInput);
+        $thread->$contentInput = trim($thread->$contentInput);
 
         $repeat = $this->loadModel('guarder')->checkRepeat($thread->content, $thread->title); 
         if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
