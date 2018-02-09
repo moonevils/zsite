@@ -696,7 +696,7 @@ class RainTPL
         /* If the cache is active. */
         if(isset($code[2]))
         {
-            return '<?php $tpl = new '.get_called_class().';' .
+            return '<?php $tpl = new RainTPL;' .
                 '$tpl->assign($this->var);' .
                 '$tpl->draw(' . $include_template . ');'
                 . self::PHP_END;
