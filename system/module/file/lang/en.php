@@ -88,7 +88,7 @@ $lang->file->invalidParameter = 'Invalid Parameter';
 $lang->file->unWritable       = 'The directory is not writable.';
 $lang->file->uploadForbidden  = 'Uploading is disabled';
 $lang->file->sizeLimit        = "<p class='text-danger'>File size should be <= %sM</p>";
-$lang->file->sameName         = "File with the same name has existed. If continue，it will be overridden.";
+$lang->file->sameName         = "File with the same name has existed. Change failed.";
 $lang->file->nameEmpty        = "File name should not be blank.";
 $lang->file->copySuccess      = "Copy to clipboard";
 $lang->file->evilChar         = "Invalid Character";

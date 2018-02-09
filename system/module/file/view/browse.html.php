@@ -68,7 +68,7 @@ if(!empty($files))
         $file->ext       = $file->extension;
         $file->addedDate = substr($file->addedDate, 2, 14);
         $file->remoteId  = $file->id;
-        if($file->isImage) $file->previewImage = $this->file->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL');
+        if($file->isImage) $file->previewImage = $this->file->printFileURL($file, 'smallURL');
         $filesArray[] = $file;
     }
 }
@@ -113,7 +113,7 @@ $('#uploader').uploader(
         var $status = $file.find('.file-status').attr('title', this.lang[status]);
 
         if(status == 'uploading') $statusText = file.percent + '%';
-        if(status != 'uploading') $statusText = status == 'failed' ? that.lang[status] : '';
+        if(status != 'uploading') $statusText = status == 'failed' ? this.lang[status] : '';
         $status.find('.text').text($statusText);
 
         $file.find('a.btn-download-file, a.file-name').attr('href', downloadUrl);

@@ -5,10 +5,11 @@
       <tr>
         <td class='w-80px text-middle'>
         {if(empty($product->image))}
-            {!html::a(inlink('view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias"), '<div class="media-placeholder media-placeholder-list" data-id="' . $product->id . '">' . $product->name . '</div>', "class='w-80px'")}
+          {!html::a(inlink('view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias"), '<div class="media-placeholder media-placeholder-list" data-id="' . $product->id . '">' . $product->name . '</div>', "class='w-80px'")}
         {else}
-            {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
-            {!html::a(inlink('view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias"), html::image($control->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "width='80' title='{{$title}}' alt='{{$product->name}}'"), "class='w-80px'")}
+          {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
+          {$product->image->primary->objectType = 'product'}
+          {!html::a(inlink('view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias"), html::image($control->loadModel('file')->printFileURL($product->image->primary, 'middleURL'), "width='80' title='{{$title}}' alt='{{$product->name}}'"), "class='w-80px'")}
         {/if}
         </td>
         <td id='listProduct{!echo $product->id}' data-ve='product' data-id='{!echo $product->id}'>

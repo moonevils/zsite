@@ -43,7 +43,8 @@
           {if(!empty($stick->image))}
             <div class='table-cell thumbnail-cell'>
               {$title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title}
-              {!html::image($control->loadModel('file')->printFileURL($stick->image->primary->pathname, $stick->image->primary->extension, 'article', 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+              {$stick->image->primary->objectType = 'article'}
+              {!html::image($control->loadModel('file')->printFileURL($stick->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
             </div>
           {/if}
         </div>
@@ -70,7 +71,8 @@
           {if(!empty($article->image))}
             <div class='table-cell thumbnail-cell'>
               {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {!html::image($control->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+              {$stick->image->primary->objectType = 'article'}
+              {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
             </div>
           {/if}
         </div>

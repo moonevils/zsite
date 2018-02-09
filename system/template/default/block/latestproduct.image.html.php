@@ -13,11 +13,12 @@
       {$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
       {if(!empty($product->image))}
         {$recPerRow = (isset($content->recPerRow) and !empty($content->recPerRow)) ? $content->recPerRow : '3'}
-        <div class='col-md-12' data-recperrow="{!echo $recPerRow}">
-          <a class='card' href="{!echo $url}">
-            <div class='media' style='background-image: url({!echo $model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL')});'>
+        <div class='col-md-12' data-recperrow="{$recPerRow}">
+          <a class='card' href="{$url}">
+            {$product->image->primary->objectType = 'product'}
+            <div class='media' style='background-image: url({$model->loadModel('file')->printFileURL($product->image->primary, 'middleURL')});'>
               {$title = $product->image->primary->title ? $product->image->primary->title : $product->name}
-              {!html::image($model->loadModel('file')->printFileURL($product->image->primary->pathname, $product->image->primary->extension, 'product', 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
+              {!html::image($model->loadModel('file')->printFileURL($product->image->primary, 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
             </div>
 
             <div class="card-heading {if(isset($content->alignTitle) && $content->alignTitle == 'middle') echo 'text-center'}">

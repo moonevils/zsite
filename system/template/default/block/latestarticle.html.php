@@ -61,7 +61,8 @@
               <div class='media {$pull}' style="max-width: {!echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '100px'}">
               {if(!empty($article->image))}
                 {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-                {!html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary->pathname, $article->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
+                {$article->image->primary->objectType = 'article'}
+                {!html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='$title' class='thumbnail'" ))}
               {/if}
               </div>
               <strong class='text-important text-nowrap'>
@@ -79,8 +80,8 @@
       <ul class='ul-list'>
         {foreach($articles as $article)}
           {$categoryAlias = isset($article->category->alias) ? $article->category->alias : ''}
-          {$alias       = "category={{$categoryAlias}}&name={{$article->alias}}"}
-          {$url         = helper::createLink('article', 'view', "id=$article->id", $alias)}
+          {$alias         = "category={{$categoryAlias}}&name={{$article->alias}}"}
+          {$url           = helper::createLink('article', 'view', "id=$article->id", $alias)}
           {if(isset($content->time))}
             <li class='addDataList'>
               <span class='article-list'>
@@ -116,7 +117,6 @@
                   {$blockCntent     = json_decode($block->content)}
                   {$blockCategories = ''}
                   {if(isset($blockCntent->category))} {$blockCategories = $blockCntent->category} {/if}
-
                   {$categoryName = ''}
                   {foreach($article->categories as $id => $categorie)}
                     {if(strpos(",$blockCategories,", ",$id,") !== false)}
@@ -150,6 +150,18 @@
 .sticky{padding-left: 5px;}
 </style>
 <script>
+{/noparse}
+var currentBlockID = {$block->id};
+
+{noparse}
+if(typeof($('#block' + currentBlockID).parent('.col').data('grid')) === 'undefined')
+{
+    var grid = $('#block' + currentBlockID).parents('.blocks').data('grid');
+    grid = typeof(grid) == 'undefined' ? 12 : grid;
+
+    $('#block' + currentBlockID).parent('.col').attr('data-grid', grid).attr('class', 'col col-' + grid);
+}
+
 $('.articleTitleA').each(function()
 {
     $(this).css('max-width', $(this).parents('li').width() - $(this).prev('.category').width() - $(this).next('.sticky').width() - $(this).parent().next('.article-date').width() - 10);

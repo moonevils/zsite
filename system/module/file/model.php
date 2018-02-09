@@ -159,11 +159,11 @@ class fileModel extends model
                 if($file->objectType == 'product') continue;
                 if($file->editor)
                 {
-                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($this->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL')), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image hidden file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($this->printFileURL($file, 'smallURL')), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
                 else
                 {
-                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($this->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL')), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
+                    $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($this->printFileURL($file, 'smallURL')), "target='_blank' class='$fileName' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
                 }
             }
             else
@@ -554,27 +554,6 @@ class fileModel extends model
     }
 
     /**
-     * Get thubms extension name of a file.
-     * 
-     * @param string $fileName 
-     * @access public
-     * @return void
-     */
-    public function getThumbsExtension($fileName, $allFiles)
-    {
-        foreach($allFiles as $allFile)
-        {
-            $pathname = strtolower(pathinfo($allFile->pathname,PATHINFO_FILENAME));
-            if(strpos($fileName, $pathname))
-            {
-                $extension = strtolower(trim(pathinfo($allFile->pathname, PATHINFO_EXTENSION)));
-                if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
-                if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
-                return $extension;
-            }
-        } 
-    }
-    /**
      * Get extension name of a file.
      * 
      * @param string $fileName 
@@ -584,8 +563,15 @@ class fileModel extends model
     public function getExtension($fileName)
     {
         $extension = strtolower(trim(pathinfo($fileName, PATHINFO_EXTENSION)));
-        if(empty($extension) or stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
-        if(empty($extension) or stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
+        if(empty($extension))
+        {
+            $basename  = strtolower(trim(pathinfo($fileName, PATHINFO_BASENAME)));
+            $pathname  = $this->dao->select('pathname')->from(TABLE_FILE)->where('pathname')->like("%{$basename}")->fetchAll();
+            $extension = pathinfo($pathname[0]->pathname, PATHINFO_EXTENSION);
+            $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
+        }
+        if(stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
+        if(stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
         return $extension;
     }
 
@@ -983,8 +969,13 @@ class fileModel extends model
             $fileID = $this->dao->lastInsertID();
             $_SESSION['album'][$uid][] = $fileID;
 
-            $saveName = $this->getSaveName($file['pathname']);
-            $data = str_replace($out[1][$key], $this->printFileURL($saveName, $file['extension']), $data);
+            /* Build file url information */
+            $fileURL = array();
+            $fileURL['pathname']   = $this->getSaveName($file['pathname']);
+            $fileURL['extension']  = $file['extension'];
+            $fileURL['objectType'] = $data; 
+
+            $data = str_replace($out[1][$key], $this->printFileURL($fileURL));
         }
 
         return $data;
@@ -1450,16 +1441,18 @@ class fileModel extends model
     /**
      * Print file URL.
      * 
-     * @param  string  $pathname 
-     * @param  string  $extension 
-     * @param  string  $objectType 
+     * @param  array|object $file
      * @param  string  $size 
      * @access public
      * @return string
      */
-    public function printFileURL($pathname, $extension, $objectType = '', $size = '')
+    public function printFileURL($file, $size = '')
     {
-        $version = isset($this->config->site->lastUpload) ? $this->config->site->lastUpload : '';
-        return $this->config->webRoot . "file.php?f={$pathname}&t={$extension}&o={$objectType}&s={$size}&v={$version}";
+        if(!is_array($file) and !is_object($file)) return false;
+        $file = (array)$file;
+        if(empty($file['pathname']) or empty($file['extension'])) return false;
+        $objectType = isset($file['objectType']) ? $file['objectType'] : '';
+        $version    = isset($this->config->site->lastUpload) ? $this->config->site->lastUpload : '';
+        return $this->config->webRoot . "file.php?f={$file['pathname']}&t={$file['extension']}&o={$objectType}&s={$size}&v={$version}";
     }
 }

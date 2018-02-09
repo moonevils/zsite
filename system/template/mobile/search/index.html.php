@@ -23,7 +23,7 @@
         {if(!empty($object->image->primary))}
           <div class='table-cell thumbnail-cell'>
            {$title = $object->image->primary->title ? $object->image->primary->title : $object->title}
-           {!html::image($control->loadModel('file')->printFileURL($object->image->primary->pathname, $object->image->primary->extension, '', 'smallURL'), "title='{{$title}}' class='thumbnail'" )}
+           {!html::image($control->loadModel('file')->printFileURL($object->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'" )}
           </div>
         {/if}
       </div>
