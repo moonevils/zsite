@@ -177,7 +177,13 @@ class file extends control
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $fileID = $this->dao->lastInsertID();
-            $url    = $this->file->printFileURL($saveName, $file['extension']);
+
+            /* Build file url information */
+            $fileURL = array();
+            $fileURL['pathname']  = $saveName;
+            $fileURL['extension'] = $file['extension'];
+
+            $url = $this->file->printFileURL($fileURL);
             $_SESSION['album'][$uid][] = $fileID;
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));
@@ -293,7 +299,7 @@ class file extends control
                 $extension    = $this->file->getExtension($_FILES['upFile']['name']);
                 $sameUpFile   = $this->file->checkSameFile(str_replace('.' . $extension, '', $_FILES['upFile']['name']), $fileID);
                 $sameFilename = $this->file->checkSameFile($this->post->filename, $fileID);
-                if(!empty($sameUpFile) or !empty($sameFilename))$this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+                if(!empty($sameUpFile) or !empty($sameFilename))$this->send(array('result' => 'fail', 'message' => $this->lang->file->sameName));
             }
 
             $result = $this->file->editSource($file, $filename);
@@ -327,7 +333,7 @@ class file extends control
                 $extension    = $this->file->getExtension($name);
                 $filename     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
                 $sameFilename = $this->file->checkSameFile($filename);
-                if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'error' => $this->lang->file->sameName)));
+                if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'message' => $this->lang->file->sameName)));
             }
         }
 
@@ -643,7 +649,12 @@ class file extends control
                     $fileList[$i]['pathname']  = $pathname;
                     $fileList[$i]['imagesize'] = $imageSize;
                     $fileList[$i]['filename']  = $filename . "?fromSpace=y";
-                    $fileList[$i]['fileurl']   = $this->file->printFileURL($pathname, $fileExtension);
+
+                    /* Build file url information */
+                    $fileURL = array();
+                    $fileURL['pathname']  = $pathname;
+                    $fileURL['extension'] = $fileExtension;
+                    $fileList[$i]['fileurl']   = $this->file->printFileURL($fileURL);
                 }
 
                 $fileList[$i]['datetime'] = date('Y-m-d H:i:s', filemtime($file));
@@ -731,10 +742,9 @@ class file extends control
         $rawImages  = array_slice($images, $lastImage, $limit);
         $completed += $limit;
 
-        $allFiles = $this->dao->select('pathname')->from(TABLE_FILE)->fetchAll();
         foreach($rawImages as $image)
         {
-            $extension = $this->file->getThumbsExtension($image,$allFiles);
+            $extension = $this->file->getExtension($image);
             if(in_array(strtolower($extension), $this->config->file->imageExtensions, true) === false) continue;
             $this->file->compressImage($image);
         }

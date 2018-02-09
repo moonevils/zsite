@@ -40,7 +40,8 @@
             {if(!empty($page->image))}
               <div class='table-cell thumbnail-cell'>
                 {$title = $page->image->primary->title ? $page->image->primary->title : $page->title}
-                {!html::image($model->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', 'smallURL'), "title='$title' class='thumbnail'" )}
+                {$page->image->primary->objectType = 'article'}
+                {!html::image($model->loadModel('file')->printFileURL($page->image->primary, 'smallURL'), "title='$title' class='thumbnail'" )}
               </div>
             {/if}
           </div>

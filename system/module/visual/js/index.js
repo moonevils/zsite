@@ -603,12 +603,14 @@
 
             $blocksHolder.sortable(
             {
-                  trigger: function($e)
-                  {
-                      return $e.find(($e.hasClass('col-row') ? '.row.ve > .ve-cover ' : '') + '.ve-move-handler');
-                  },
+                  trigger: '.ve-move-handler',
                   selector: withGrid ? '.col' : '.ve',
                   dragCssClass: '',
+                  before: function(e) {
+                      if (e.element.hasClass('col-row') && !e.target.closest('.ve-cover').parent('.row.ve').length) {
+                          return false;
+                      }
+                  },
                   finish: function(e)
                   {
                       var orders = [];

@@ -37,7 +37,8 @@
             <div class='media {!echo $pull}' style="max-width: {!echo !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px'}">
             {if(!empty($page->image))}
               {$title = $page->image->primary->title ? $page->image->primary->title : $page->title}
-              {!html::a($url, html::image($model->loadModel('file')->printFileURL($page->image->primary->pathname, $page->image->primary->extension, 'article', $imageURL), "title='$title' class='thumbnail'" ))}
+              {$page->image->primary->objectType = 'article'}
+              {!html::a($url, html::image($model->loadModel('file')->printFileURL($page->image->primary, $imageURL), "title='$title' class='thumbnail'" ))}
             {/if}
             </div>
             <strong class='text-important text-nowrap'>

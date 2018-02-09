@@ -444,7 +444,7 @@ class replyModel extends model
             if($file->isImage)
             {
                 if($file->editor) continue;
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($this->loadModel('file')->printFileURL($file->pathname, $file->extension, $file->objectType, 'smallURL')), "target='_blank' data-toggle='lightbox'");
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($this->loadModel('file')->printFileURL($file, 'smallURL')), "target='_blank' data-toggle='lightbox'");
                 if($canManage) $imagesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('reply', 'deleteFile', "replyID=$reply->id&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $imagesHtml .= '</li>';
             }

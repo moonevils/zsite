@@ -627,7 +627,7 @@ class control extends baseControl
         }
 
         if($this->config->debug) $this->config->site->updatedTime = time();
-        $sourceURL  = helper::createLink('source', 'css', "page=$page&version={$this->config->site->updatedTime}", '', 'css');
+        $sourceURL  = helper::createLink('source', 'css', "page=$page&version={$this->config->site->updatedTime}", '', 'html');
         $importHtml = "<link rel='stylesheet' href='$sourceURL' type='text/css' media='screen' />\n";
 
         if(strpos($this->output, $importHtml) === false)
@@ -674,7 +674,7 @@ class control extends baseControl
             $this->app->cache->set($key, $pageJS);
         }
 
-        $sourceURL  = helper::createLink('source', 'js', "page=$page&version={$this->config->site->updatedTime}", '', 'js');
+        $sourceURL  = helper::createLink('source', 'js', "page=$page&version={$this->config->site->updatedTime}", '', 'html');
         $importHtml =  "<script src='{$sourceURL}' type='text/javascript'></script>\n";
 
         if(!empty($pageJS))

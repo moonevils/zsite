@@ -20,12 +20,12 @@
     <div class="wrapper">
       {if($logo)}
         <div id='siteLogo' data-ve='logo'>
-          {!html::a(helper::createLink('index'), html::image($model->loadModel('file')->printFileURL($logo->pathname, $logo->extension)), "class='logo' alt='{{$config->company->name}}' title='{{$config->company->name}}'")}
+          {!html::a(helper::createLink('index'), html::image($model->loadModel('file')->printFileURL($logo)), "class='logo' alt='{{$config->company->name}}' title='{{$config->company->name}}'")}
         </div>
       {else}
         <div id='siteName' data-ve='logo'><h2>{!html::a(helper::createLink('index'), $config->site->name)}</h2></div>
       {/if}
-      <div id='siteSlogan' data-ve='slogan'><span>{!echo $config->site->slogan}</span></div>
+      <div id='siteSlogan' data-ve='slogan'><span>{$config->site->slogan}</span></div>
     </div>
   </div>
   {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar')}

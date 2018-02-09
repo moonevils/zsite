@@ -134,7 +134,7 @@ $lang->getUserByApi       = '獲取綁定信息';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['zh-tw'] = '切換到簡體中文站點';
+$lang->selectLangTip['zh-cn'] = '切換到簡體中文站點';
 $lang->selectLangTip['zh-tw'] = '切換到繁體中文站點';
 $lang->selectLangTip['en']    = '切換到英文站點';
 

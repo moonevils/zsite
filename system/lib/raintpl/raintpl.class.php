@@ -444,6 +444,8 @@ class RainTPL
             }
             elseif($commentIsOpen)
             {
+                $html = str_replace("SOT_MARK", "{{", $html);
+                $html = str_replace("EOT_MARK", "}}", $html);
                 $compiledCode .= $html;
             }
             elseif(strpos($html, '{ignore}') !== FALSE || strpos($html, '{*') !== FALSE)
