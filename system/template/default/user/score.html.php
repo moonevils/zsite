@@ -27,7 +27,7 @@
               <th>{$score->id}</th>
               {$score->time = substr($score->time, 0, 10)}
               <td>{$score->time}</td>
-              <td>{$score->type == 'punish' ? $lang->score->methods[$score->type] : $lang->score->methods[$score->method]}</td>
+              <td>{!echo $score->type == 'punish' ? $lang->score->methods[$score->type] : $lang->score->methods[$score->method]}</td>
               <td>{!echo ($score->type == 'in' ? '+' : '-') . $score->count}</td>
               <td>{$score->before}</td>
               <td>{$score->after}</td>
