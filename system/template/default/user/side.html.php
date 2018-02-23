@@ -15,7 +15,7 @@ ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
 </style>
 {/noparse}
 {$control->loadModel('user')->fixMenus()}
-{if($extView = $control->getExtViewFile(__FILE__))}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'user/side.html.php'))}
 {include $extView}
 {@helper::cd()}
 {/if}

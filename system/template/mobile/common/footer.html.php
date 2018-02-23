@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(__FILE__))} {include $extView}  {@return helper::cd()} {/if}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/footer.html.php'))} {include $extView}  {@return helper::cd()} {/if}
 <div class='block-region region-all-bottom blocks' data-region='all-bottom'>{$control->loadModel('block')->printRegion($layouts, 'all', 'bottom')}</div>
 <div class='appinfo clearfix'>
   <div class='copyright pull-left'>
