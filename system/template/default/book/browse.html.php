@@ -2,7 +2,7 @@
 {if(isset($node))} {$common->printPositionBar($node->origins)} {/if}
 {!js::set('fullScreen', (!empty($control->config->book->fullScreen) or $control->get->fullScreen) ? 1 : 0)}
 <div class='row blocks' data-region='book_browse-topBanner'>{$control->block->printRegion($layouts, 'book_browse', 'topBanner', true)}</div>
-<div class='panel' id='bookCatalog' data-id='{$node->id}'>
+<div class='panel' id='bookCatalog' data-id='{if(isset($node))}{$node->id}{/if}'>
   {if(!empty($book) && $book->title)}
   <div class='panel-heading clearfix'>
     <div class='dropdown'>
