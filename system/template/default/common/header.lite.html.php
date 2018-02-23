@@ -1,4 +1,4 @@
-{$extView=$control->getExtViewFile(__FILE__)}
+{$extView=$control->getExtViewFile(TPL_ROOT . 'common/header.lite.html.php')}
 {if($extView)} {include $extView} {@helper::cd()} {/if}
 {$sysURL=rtrim($sysURL, '/')}
 {if(isset($mobileURL))} {$mobileURL=ltrim($mobileURL, '/')} {/if}
