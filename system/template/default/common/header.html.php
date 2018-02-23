@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
 {else}
-  {if($extView = $control->getExtViewFile(__FILE__))}
+  {if($extView = $control->getExtViewFile(TPL_ROOT . 'common/header.html.php'))}
     {include $extView}
     {@helper::cd()}
   {/if}

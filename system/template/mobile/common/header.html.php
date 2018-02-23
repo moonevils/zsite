@@ -14,7 +14,7 @@
       </div>
       <div class='modal-body'>
 {else}
-  {if($extView = $control->getExtViewFile(__FILE__))} {include $extView} {@return helper::cd()} {/if}
+  {if($extView = $control->getExtViewFile(TPL_ROOT . 'common/header.html.php'))} {include $extView} {@return helper::cd()} {/if}
   {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
   <div class='block-region region-all-top blocks' data-region='all-top'>
     {$control->block->printRegion($layouts, 'all', 'top')}

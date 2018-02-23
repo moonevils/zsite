@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(__FILE__))} {include $extView;} {return helper::cd()}{/if}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'blog/header.html.php'))} {include $extView} {@helper::cd()}{/if}
 {$navs       = $control->loadModel('nav')->getNavs('desktop_blog')}
 <!DOCTYPE html>
 {if(!empty($config->oauth->sina))}
