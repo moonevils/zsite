@@ -34,7 +34,7 @@
   </div>
   <div class='panel-body'>
     {if($block->content->showChildren)}
-    {$treeMenu = $model->tree->getTreeMenu($type, $startCategory, array('treeModel', $browseLink), zget($block->content, 'initialExpand', 1))}
+    {$treeMenu = $model->loadModel('tree')->getTreeMenu($type, $startCategory, array('treeModel', $browseLink), zget($block->content, 'initialExpand', 1))}
     {$treeMenu}
     {else}
     {$topCategories = $model->loadModel('tree')->getChildren($startCategory, $type)}
