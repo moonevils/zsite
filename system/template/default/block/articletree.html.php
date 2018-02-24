@@ -28,12 +28,16 @@
     {$startCategory = $category->parent}
   {/if}
 {/if}
-{$topCategories = $model->loadModel('tree')->getChildren($startCategory, $type)}
 <div id="block{$block->id}" class='panel panel-block {$blockClass}'>
   <div class='panel-heading'>
     <strong>{!echo $icon . $block->title}</strong>
   </div>
   <div class='panel-body'>
+    {if($block->content->showChildren)}
+    {$treeMenu = $model->loadModel('tree')->getTreeMenu($type, $startCategory, array('treeModel', $browseLink), zget($block->content, 'initialExpand', 1))}
+    {$treeMenu}
+    {else}
+    {$topCategories = $model->loadModel('tree')->getChildren($startCategory, $type)}
     <ul class='nav nav-secondary nav-stacked'>
       {foreach($topCategories as $topCategory)}
         {$browseLink = helper::createLink($type, 'browse', "categoryID={{$topCategory->id}}", "category={{$topCategory->alias}}")}
@@ -41,5 +45,6 @@
         <li>{!html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{{$topCategory->id}}'")}</li>
       {/foreach}
     </ul>
+    {/if}
   </div>
 </div>

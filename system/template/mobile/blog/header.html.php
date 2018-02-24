@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(__FILE__))}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'blog/header.html.php'))}
   {include $extView}
   {@return helper::cd()}
 {/if}
