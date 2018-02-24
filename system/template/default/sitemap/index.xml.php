@@ -1,4 +1,4 @@
-{<urlset xmlns="http://www.google.com/schemas/sitemap/0.84" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" >
+<urlset xmlns="http://www.google.com/schemas/sitemap/0.84" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" >
   {foreach($products as $product)}
     {$url = str_replace('&', '&amp;', $systemURL . helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias", 'html'))}
     {$mobileUrl = str_replace('&', '&amp;', $systemURL . helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias", 'mhtml'))}
