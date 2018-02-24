@@ -125,8 +125,8 @@ class seo
         /* Form modules. */
         if($isFormModule)
         {
-            $params['formID']   = isset($items[1]) ? $items[1] : 0;
-            $params['submited'] = isset($items[2]) ? $items[2] : 0;
+            $params['formID'] = isset($items[1]) ? $items[1] : 0;
+            $params['userID'] = isset($items[2]) ? $items[2] : 0;
             return seo::convertURI('form', 'view', $params, $pageID);
         }
 
