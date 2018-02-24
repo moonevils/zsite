@@ -233,7 +233,8 @@ class user extends control
             $this->view->desktopURL = helper::createLink('user', 'login', "referer=$referer", '', 'html');
         }
 
-        $this->display();
+        if(RUN_MODE == 'front') $this->display('user', 'login.front');
+        if(RUN_MODE == 'admin') $this->display('user', 'login.admin');
     }
 
     /**
