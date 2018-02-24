@@ -16,9 +16,9 @@
   <div class='panel-heading'><strong>{!echo $icon . $block->title}</strong></div>
   <div class='panel-body'>
     <form method='post' class='form-horizontal' id='messageForm' action="{!echo helper::createLink('message', 'post', 'type=message&block=block','',false)}">
-      {$from   = $control->session->user->account == 'guest' ? '' : $control->session->user->realname}
-      {$mobile = $control->session->user->account == 'guest' ? '' : $control->session->user->mobile}
-      {$qq     = $control->session->user->account == 'guest' ? '' : $control->session->user->qq}
+      {$from   = $session->user->account == 'guest' ? '' : $session->user->realname}
+      {$mobile = $session->user->account == 'guest' ? '' : $session->user->mobile}
+      {$qq     = $session->user->account == 'guest' ? '' : $session->user->qq}
       <div class='form-group'>
         <label for='blockFrom' class='col-sm-2 control-label'>{!echo $lang->message->from}</label>
         <div class='col-sm-10 required'>
