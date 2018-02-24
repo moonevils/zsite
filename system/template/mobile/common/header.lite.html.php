@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(__FILE__))} {include $extView} {@return helper::cd()} {/if}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/header.lite.html.php'))} {include $extView} {@return helper::cd()} {/if}
 {$templateName       = CHANZHI_TEMPLATE}
 {$themeName          = CHANZHI_THEME}
 {$templateRoot       = TPL_ROOT}
