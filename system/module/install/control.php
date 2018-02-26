@@ -173,7 +173,7 @@ class install extends control
      */
     public function step5()
     {
-        $this->loadModel('setting')->setItems('system.common.site', array('lang' => $_COOKIE['lang']), 'all');
+        $this->loadModel('setting')->setItems('system.common.site', array('lang' => zget($_COOKIE, 'lang', 'zh-cn')), 'all');
         session_destroy();
         $this->view->title = $this->lang->install->success;
         $this->display();
