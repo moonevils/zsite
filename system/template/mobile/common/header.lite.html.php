@@ -68,9 +68,11 @@
 </head>
 {$top = false}
 {foreach($layouts as $blocks)}
+  {if(isset($blocks['top']))}
   {foreach($blocks['top'] as $block)}
     {if($block->type == 'header')} {$top = true} {/if}
   {/foreach}
+  {/if}
 {/foreach}
 
 {if($top)}

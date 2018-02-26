@@ -35,7 +35,7 @@ class site extends control
             if(strpos($setting->modules, 'shop') !== false  && strpos($setting->modules, 'user') === false) $setting->modules = 'user,' . $setting->modules;
             if($setting->modules == 'initial') unset($setting->modules);
 
-            if($setting->gzipOutput == 'open')
+            if(isset($setting->gzipOutput) && $setting->gzipOutput == 'open')
             {
                 if(!extension_loaded('zlib')) $this->send(array('result' => 'fail', 'message' => $this->lang->site->noZlib));
                 if($this->site->checkGzip()) $this->send(array('result' => 'fail', 'message' => $this->lang->site->gzipOn));
