@@ -124,7 +124,7 @@
 
     {foreach($control->config->sitemap->modules as $module)}
       {if(strpos('article,blog,page,product,book,forum,thread', $module) === false and is_callable(array($control->sitemap, "show{{$module}}")))}
-        {include "./show{{$module}}.html.php"}
+        {include TPL_ROOT . "sitemap/show{{$module}}.html.php"}
       {/if}
     {/foreach}
   </div>
