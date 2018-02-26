@@ -55,7 +55,6 @@ $config->guarder->interval->ip->captchaFail     = 1;
 
 $config->guarder->interval->account = $config->guarder->interval->ip;
 
-
 $config->guarder->punishment = new stdclass();
 
 $config->guarder->punishment->account = new stdclass;
