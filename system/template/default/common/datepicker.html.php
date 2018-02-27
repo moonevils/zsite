@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/datepicker.html.php'))} {include $extView} {@helper::cd()} {/if}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/datepicker.html.php'))} {include $extView} {@return helper::cd()} {/if}
 {$clientLang = $control->app->getClientLang()}
 {!css::import($jsRoot . 'datetimepicker/css/min.css')}
 {!js::import($jsRoot  . 'datetimepicker/js/min.js')}
