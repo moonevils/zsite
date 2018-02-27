@@ -13,6 +13,12 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setLanguage;?></strong></div>
+  <?php $myFile = $this->app->getConfigRoot() . 'my.php';?>
+  <?php if(!is_writable($myFile)):?>
+  <div class='alert alert-info'>
+  <?php echo sprintf($lang->site->fileAuthority, 'chmod o=rwx ' . $myFile);?>
+  </div> 
+  <?php else:?>
   <div class='panel-body'>
     <form method='post' id='setSystemForm' class='form-inline'>
       <table class='table table-form'>
@@ -41,5 +47,6 @@
       </table>
     </form>
   </div>
+  <?php endif;?>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
