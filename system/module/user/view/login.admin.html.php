@@ -15,11 +15,16 @@ js::set('random', $this->session->random);
         <div class='dropdown' id='langs'>
           <button class='btn' style='width:81px' data-toggle='dropdown' title='Change Language/更换语言/更換語言'><?php echo $config->langs[$this->app->getClientLang()]; ?> <span class='caret'></span></button>
           <ul class='dropdown-menu'>
-            <?php foreach($config->langs as $key => $value):?>
-            <li class="<?php echo $key == $this->app->getClientLang() ? 'active' : ''; ?>">
-              <?php echo html::a($this->createLink('admin', 'switchlang', "lang={$key}"), $value);?>
-            </li>
-            <?php endforeach;?>
+          <?php
+          if(isset($config->cn2tw) and $config->cn2tw) unset($config->langs['zh-tw']);
+          $clientLang = $this->app->getClientLang();
+          unset($config->langs[$clientLang]);
+          ?>
+          <?php foreach($config->langs as $key => $value):?>
+          <li class="<?php echo $key == $clientLang ? 'active' : ''; ?>">
+            <?php echo html::a($this->createLink('admin', 'switchlang', "lang={$key}"), $value);?>
+          </li>
+          <?php endforeach;?>
           </ul>
         </div>
       </div>
