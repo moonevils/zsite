@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(TPL_ROOT . 'blog/header.html.php'))} {include $extView} {@helper::cd()}{/if}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'blog/header.html.php'))} {include $extView} {@return helper::cd()}{/if}
 {$navs       = $control->loadModel('nav')->getNavs('desktop_blog')}
 <!DOCTYPE html>
 {if(!empty($config->oauth->sina))}
@@ -56,19 +56,19 @@
   {if(!empty($qq->verification))}                           {$qq->verification}{/if}
   {if(empty($sina->verification) && !empty($sina->widget))} {!js::import('https://tjs.sjs.sinajs.cn/open/api/js/wb.js')}{/if}
 
-  {$browser = helper::getBrowser()}
-  {if($browser['name'] == 'ie' and $browser['version'] <= 9)}
+  <!--[if lt IE 9]>
     {if($config->debug)}
       {!js::import($jsRoot . 'html5shiv/min.js')}
       {!js::import($jsRoot . 'respond/min.js')}
     {else}
       {!js::import($jsRoot . 'chanzhi.all.ie8.js')}
     {/if}
-  {/if}
-  {if($browser['name'] == 'ie' and $browser['version'] <= 10)}
+  <![endif]-->
+  <!--[if lt IE 10]>
       {if($config->debug)}  {!js::import($jsRoot . 'jquery/placeholder/min.js')} {/if}
       {if(!$config->debug)} {!js::import($jsRoot . 'chanzhi.all.ie9.js')} {/if}
-  {/if}
+  <![endif]-->
+
   {$baseCustom = isset($control->config->template->custom) ? json_decode($control->config->template->custom, true) : array()}
   {if(!empty($baseCustom[CHANZHI_TEMPLATE][CHANZHI_THEME]['js']))} {!js::execute($baseCustom[CHANZHI_TEMPLATE][CHANZHI_THEME]['js'])} {/if}
 </head>

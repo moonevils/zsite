@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/chart.html.php'))} {include $extView} {@helper::cd()} {/if}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/chart.html.php'))} {include $extView} {@return helper::cd()} {/if}
 {noparse}
 <style>
 .table-chart tr > td.chart-color {padding-left: 0!important; text-align: center; padding-right: 0!important; color: #f1f1f1}

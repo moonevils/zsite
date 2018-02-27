@@ -1,5 +1,5 @@
 {$extView=$control->getExtViewFile(TPL_ROOT . 'common/header.lite.html.php')}
-{if($extView)} {include $extView} {@helper::cd()} {/if}
+{if($extView)} {include $extView} {@return helper::cd()} {/if}
 {$sysURL=rtrim($sysURL, '/')}
 {if(isset($mobileURL))} {$mobileURL=ltrim($mobileURL, '/')} {/if}
 <!DOCTYPE html>
@@ -59,8 +59,7 @@
 {!html::icon($favicon)}
 {!html::rss(helper::createLink('rss', 'index', '', '', 'xml'), $config->site->name)}
 
-{$browser = helper::getBrowser()}
-{if($browser['name'] == 'ie' and $browser['version'] <= 9)}
+<!--[if lt IE 9]>
   {if($config->debug)}
   	{!js::import($jsRoot . 'html5shiv/min.js')}
   	{!js::import($jsRoot . 'respond/min.js')}
@@ -75,11 +74,11 @@
 	  {!js::import($jsRoot . 'chanzhi.all.ie8.js')}
   	{/if}
   {/if}
-{/if}
-{if($browser['name'] == 'ie' and $browser['version'] <= 10)}
+<![endif]-->
+<!--[if lt IE 10]>
   {if($config->debug)} {!js::import($jsRoot . 'jquery/placeholder/min.js')} {/if}
   {if(!$config->debug)} {!js::import($jsRoot . 'chanzhi.all.ie9.js')} {/if}
-{/if}
+<![endif]-->
 
 {!js::set('lang', $lang->js)}
 {if(!empty($config->oauth->sina) and !is_object($config->oauth->sina))}

@@ -1,6 +1,6 @@
 {if($extView = $control->getExtViewFile(TPL_ROOT . 'common/chosen.html.php'))}
   {include $extView}
-  {@helper::cd()}
+  {@return helper::cd()}
 {/if}
 {!css::import($jsRoot . 'jquery/chosen/min.css')}
 {!js::import($jsRoot . 'jquery/chosen/min.js')}
