@@ -31,7 +31,7 @@ class ui extends control
             $setting[$this->app->clientDevice]['theme'] = $theme;
 
             $setting[$this->app->clientDevice] = helper::jsonEncode($setting[$this->app->clientDevice]);
-            $setting['parser']      = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
+            $setting['parser']      = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'raintpl';
             $setting['customTheme'] =  $custom ? $theme : '';
 
             $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
@@ -567,7 +567,7 @@ class ui extends control
         $setting[$this->app->clientDevice]['name']  = $packageInfo->template;
         $setting[$this->app->clientDevice]['theme'] = $packageInfo->code;
         $setting[$this->app->clientDevice]  = helper::jsonEncode($setting[$this->app->clientDevice]);
-        $setting['parser'] = isset($packageInfo->parser) ? $packageInfo->parser : 'default';
+        $setting['parser'] = isset($packageInfo->parser) ? $packageInfo->parser : 'raintpl';
 
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
 
