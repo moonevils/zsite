@@ -1,6 +1,6 @@
 {if($extView = $control->getExtViewFile(TPL_ROOT . 'common/kindeditor.html.php'))}
   {include $extView;}
-  {@helper::cd();}
+  {@return helper::cd();}
 {/if}
 {$module = $control->moduleName}
 {$method = $control->methodName}

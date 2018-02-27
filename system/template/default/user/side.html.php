@@ -15,9 +15,10 @@ ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
 </style>
 {/noparse}
 {$control->loadModel('user')->fixMenus()}
-{if($extView = $control->getExtViewFile(TPL_ROOT . 'user/side.html.php'))}
+{$extView = $control->getExtViewFile(TPL_ROOT . 'user/side.html.php')}
+{if($extView)}
 {include $extView}
-{@helper::cd()}
+{@return helper::cd()}
 {/if}
 <div class='col-md-2'>
   {foreach($control->config->user->navGroups as $group => $items)}
