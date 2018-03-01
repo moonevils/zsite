@@ -90,7 +90,7 @@
 {if(!empty($sina->verification))} {$sina->verification} {/if}
 {if(!empty($qq->verification))} {$qq->verification} {/if}
 {if(!empty($sina->widget))}
-{!js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js')}
+{!js::import('https://tjs.sjs.sinajs.cn/open/api/js/wb.js')}
 {/if}
 {$baseCustom=isset($config->template->custom) ? json_decode($config->template->custom, true) : array()}
 {if(!empty($baseCustom[CHANZHI_TEMPLATE][CHANZHI_THEME]['js']))}
