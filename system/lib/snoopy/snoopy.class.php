@@ -110,6 +110,141 @@ class Snoopy
 	
 	var $_isproxy		=	false;				// set if using a proxy server
 	var $_fp_timeout	=	30;					// timeout for socket connection
+    var $httpHeaders    = array();
+
+    protected static $uaHttpHeaders = array(
+        // The default User-Agent string.
+        'HTTP_USER_AGENT',
+        // Header can occur on devices using Opera Mini.
+        'HTTP_X_OPERAMINI_PHONE_UA',
+        // Vodafone specific header: http://www.seoprinciple.com/mobile-web-community-still-angry-at-vodafone/24/
+        'HTTP_X_DEVICE_USER_AGENT',
+        'HTTP_X_ORIGINAL_USER_AGENT',
+        'HTTP_X_SKYFIRE_PHONE',
+        'HTTP_X_BOLT_PHONE_UA',
+        'HTTP_DEVICE_STOCK_UA',
+        'HTTP_X_UCBROWSER_DEVICE_UA'
+    );
+
+    /**
+     * Construct.
+     * 
+     * @param  array   $headers 
+     * @param  string  $agent 
+     * @access public
+     * @return void
+     */
+    public function __construct(array $headers = null, $agent = null)
+    {
+        $this->setHttpHeaders($headers);
+        $this->setAgent($agent);
+    }
+
+    /**
+     * Set http headers.
+     * 
+     * @param  array    $httpHeaders 
+     * @access public
+     * @return void
+     */
+    public function setHttpHeaders($httpHeaders = null)
+    {
+        // use global _SERVER if $httpHeaders aren't defined
+        if(!is_array($httpHeaders) || !count($httpHeaders)) $httpHeaders = $_SERVER;
+
+        // clear existing headers
+        $this->httpHeaders = array();
+
+        // Only save HTTP headers. In PHP land, that means only _SERVER vars that
+        // start with HTTP_.
+        foreach($httpHeaders as $key => $value)
+        {
+            if (substr($key, 0, 5) === 'HTTP_')
+            {
+                $this->httpHeaders[$key] = $value;
+            }
+        }
+
+        // In case we're dealing with CloudFront, we need to know.
+        $this->setCfHeaders($httpHeaders);
+    }
+
+    /**
+     * Set clound front headers.
+     * 
+     * @param  array    $cfHeaders 
+     * @access public
+     * @return bool
+     */
+    public function setCfHeaders($cfHeaders = null)
+    {
+        // use global _SERVER if $cfHeaders aren't defined
+        if(!is_array($cfHeaders) || !count($cfHeaders)) $cfHeaders = $_SERVER;
+
+        // clear existing headers
+        $this->cloudfrontHeaders = array();
+
+        // Only save CLOUDFRONT headers. In PHP land, that means only _SERVER vars that
+        // start with cloudfront-.
+        $response = false;
+        foreach($cfHeaders as $key => $value)
+        {
+            if(substr(strtolower($key), 0, 16) === 'http_cloudfront_')
+            {
+                $this->cloudfrontHeaders[strtoupper($key)] = $value;
+                $response = true;
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * Set agent.
+     * 
+     * @param  string    $agent 
+     * @access public
+     * @return void
+     */
+    public function setAgent($agent = null)
+    {
+        // Invalidate cache due to #375
+        $this->cache = array();
+
+        if(empty($agent) === false)
+        {
+            return $this->agent = $agent;
+        }
+        else
+        {
+            $this->agent = null;
+
+            // @todo: should use getHttpHeader(), but it would be slow. (Serban)
+            foreach($this->getUaHttpHeaders() as $altHeader)
+            {
+                if(empty($this->httpHeaders[$altHeader])=== false)
+                { 
+                    $this->agent .= $this->httpHeaders[$altHeader] . " ";
+                }
+            }
+
+            if(!empty($this->agent)) return $this->agent = trim($this->agent);
+        }
+
+        if(count($this->getCfHeaders()) > 0) return $this->agent = 'Amazon CloudFront';
+        return $this->agent = 'Snoopy v1.2.4';
+    }
+
+    /**
+     * Get Ua http headers.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getUaHttpHeaders()
+    {
+        return self::$uaHttpHeaders;
+    }
 
 /*======================================================================*\
 	Function:	fetch
