@@ -290,14 +290,26 @@ class treeModel extends model
             if(isset($treeMenu[$category->id]) and !empty($treeMenu[$category->id]))
             {
                 if(!isset($treeMenu[$category->parent])) $treeMenu[$category->parent] = '';
-                $treeMenu[$category->parent] .= "<li>$linkHtml";  
-                $treeMenu[$category->parent] .= "<ul>".$treeMenu[$category->id]."</ul>\n";
+
+                if($this->app->clientDevice == 'mobile')
+                {
+                    $open = $expand ? 'open' : '';
+                    $treeMenu[$category->parent] .= "<li><details {$open}><summary>$linkHtml</summary>";  
+                    $treeMenu[$category->parent] .= "<ul class='details-content'>".$treeMenu[$category->id]."</ul>\n";
+                }
+                else
+                {
+                    $treeMenu[$category->parent] .= "<li>$linkHtml";  
+                    $treeMenu[$category->parent] .= "<ul>".$treeMenu[$category->id]."</ul>\n";
+                }
+
+                if($this->app->clientDevice == 'mobile') $treeMenu[$category->parent] .= "</detail>\n"; 
             }
             else
             {
                 if(isset($treeMenu[$category->parent]) and !empty($treeMenu[$category->parent]))
                 {
-                    $treeMenu[$category->parent] .= "<li>$linkHtml\n";  
+                        $treeMenu[$category->parent] .= "<li>$linkHtml\n";  
                 }
                 else
                 {
@@ -306,8 +318,16 @@ class treeModel extends model
             }
             $treeMenu[$category->parent] .= "</li>\n"; 
         }
-        $expand = $expand ? "data-ride='tree' data-initial-state='expand'" : '';
-        $lastMenu = "<ul class='tree' data-type='$type' $expand>" . @array_pop($treeMenu) . "</ul>\n";
+
+        if($this->app->clientDevice == 'mobile')
+        {
+            $lastMenu = "<ul class='details-tree' data-type='$type'>" . @array_pop($treeMenu) . "</ul>\n";
+        }
+        else
+        {
+            $expand = $expand ? "data-ride='tree' data-initial-state='expand'" : '';
+            $lastMenu = "<ul class='tree' data-type='$type' $expand>" . @array_pop($treeMenu) . "</ul>\n";
+        }
         return $lastMenu; 
     }
 
