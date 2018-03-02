@@ -11,7 +11,7 @@ $(document).ready(function()
             {
                 $('#clearButton').text(v.clear);
                 submitButton.popover({trigger:'manual', content:v.cleared, placement: 'right', tipClass: 'popover-success popover-ajaxform'}).popover('show');
-                setTimeout(function(){submitButton.popover('destroy');}, 2000);
+                setTimeout(function(){submitButton.popover('destroy');}, 3000);
                 return true;
             }
             else

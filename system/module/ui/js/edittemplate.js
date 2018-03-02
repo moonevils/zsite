@@ -11,7 +11,7 @@ $(document).ready(function()
             setTimeout(function()
             {
                 location.href = response.locate;  
-            }, 2000);
+            }, 3000);
         }
     });
 
