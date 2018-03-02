@@ -3,6 +3,12 @@
 <?php js::set('sending', $lang->sending);?>
 <form method='post' action='<?php echo inlink('setEmail');?>' id='emailForm' class='form' data-checkfingerprint='1'>
   <table class='table table-form borderless'>
+    <?php if(!empty($userEmail)):?>
+    <tr>
+      <th class='text-right w-100px'><?php echo $lang->user->registeredEmail;?></th>
+      <td><strong><?php echo $userEmail;?></strong></td><td></td>
+    </tr>
+    <?php endif;?> 
     <tr>
       <th class='w-100px'><?php echo $lang->user->password;?></th>
       <td colspan='2'>
