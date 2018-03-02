@@ -106,10 +106,10 @@
   .custom-top-right-content {display:inline-block; width:auto; float:right; position:relative;margin-right: 5px;margin-left: 5px;}
   {/noparse}
   {if($config->template->desktop->theme != 'wide')}
-  {noparse}
-  #searchbar .form-control{height: 25px; line-height: 25px;}
-  #searchbar .btn{line-height: 10px;}
-  {/noparse}
+    {noparse}
+    #searchbar .form-control{height: 25px; line-height: 25px;}
+    #searchbar .btn{line-height: 10px;}
+    {/noparse}
   {/if}
   {noparse}
   #searchbar {float: right;}

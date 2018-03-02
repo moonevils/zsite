@@ -5,7 +5,7 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            setTimeout(function(){location.reload();}, 2000);   
+            setTimeout(function(){location.reload();}, 3000);   
         }
         else
         {
