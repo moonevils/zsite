@@ -1,9 +1,17 @@
 {noparse}
 <style>
 .panel-body .cards-custom .card > .card-heading {min-height: 40px; height: 40px; padding: 10px; font-size: 13px; position: relative;}
-.panel-body .cards-custom .card > .card-heading > strong {display: inline-block; vertical-align: middle; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.panel-body .cards-custom .card > .card-heading > strong {display: inline-block; vertical-align: middle; max-width: 150px; white-space: nowrap; overflow: hidden;}
 .panel-body .cards-custom .card > .card-heading > .views {position: absolute; right: 0; top: 10px;}
 .panel-body .cards-custom .card > .card-content {padding: 0 10px 10px 10px; margin-bottom: 10px;}
+{/noparse}
+
+{if(empty($content->showPrice) and empty($conetnt->showViews))}
+.panel-body .cards-custom .card > .card-heading{display: block; overflow: hidden; white-space: nowrap;}
+.panel-body .cards-custom .card > .card-heading > strong{max-width:100%;}
+{/if}
+
+{noparse}
 </style>
 {/noparse}
 
@@ -21,10 +29,10 @@
               {!html::image($model->loadModel('file')->printFileURL($product->image->primary, 'middleURL'), "title='{{$title}}' alt='{{$product->name}}'")}
             </div>
 
-            <div class="card-heading {if(isset($content->alignTitle) && $content->alignTitle == 'middle') echo 'text-center'}">
-              <strong>
+            <div class="card-heading {if(isset($content->alignTitle) && $content->alignTitle == 'middle')} {!'text-center'} {/if}">
+              <strong title="{$product->name}">
                 {if(zget($content, 'showCategory') == 1)} {!echo '[' . ($content->categoryName == 'abbr' and $product->category->abbr) ? $product->category->abbr : $product->category->name . ']'} {/if}
-                {!echo $product->name}
+                {$product->name}
               </strong>
               {if(isset($content->showPrice) and $content->showPrice)}
                 <span>
