@@ -491,7 +491,7 @@ class control extends baseControl
             header('Content-Encoding: gzip');
         }
 
-        //if(RUN_MODE == 'front') $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
+        if(RUN_MODE == 'front') $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
 		echo $this->output;
     }
 
@@ -647,13 +647,23 @@ class control extends baseControl
     {
         $pageJS = '';
         preg_match_all('/<script>([\s\S]*?)<\/script>/', $this->output, $scripts);
-        if(empty($scripts[1][1])) return true;
-        $configCode = $scripts[1][0] . $scripts[1][1];
 
-        unset($scripts[1][1]);
-        unset($scripts[1][0]);
+        $hasHeader = strpos($this->output, "var config=") !== false;
+        if($hasHeader)
+        {
+            if(empty($scripts[1][1])) return true;
+            $configCode = $scripts[1][0] . $scripts[1][1];
 
-        if(!empty($scripts[1])) $pageJS = join(';', $scripts[1]);
+            unset($scripts[1][1]);
+            unset($scripts[1][0]);
+
+            if(!empty($scripts[1])) $pageJS = join(';', $scripts[1]);
+        }
+        else
+        {
+            if(empty($scripts[1])) return true;
+            $pageJS = join(';', $scripts[1]);
+        }
 
    		$params = $this->app->getParams();
 		$params['module'] = $this->moduleName;
@@ -688,8 +698,11 @@ class control extends baseControl
             }
         }
 
-        $pos = strpos($this->output, '<script src=');
-        $this->output = substr_replace($this->output, '<script>' . $configCode . '</script>', $pos) . substr($this->output, $pos);
+        if($hasHeader)
+        {
+            $pos = strpos($this->output, '<script src=');
+            $this->output = substr_replace($this->output, '<script>' . $configCode . '</script>', $pos) . substr($this->output, $pos);
+        }
         return true;
     }
 
