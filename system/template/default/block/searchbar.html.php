@@ -1,6 +1,6 @@
 {if($isSearchAvaliable)}
   <div id='searchbar' data-ve='search'>
-    <form action='{!echo helper::createLink('search')}' method='get' role='search'>
+    <form action='{!helper::createLink('search')}' method='get' role='search'>
       <div class='input-group'>
         {$config->searchWordPlaceHolder}
         {if($config->requestType == 'GET')} {!html::hidden($config->moduleVar, 'search') . html::hidden($config->methodVar, 'index')} {/if}

@@ -12,7 +12,7 @@ $(document).ready(function()
                  $('#mailSender').popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
                  $('#mailSender').next('.popover').addClass('popover-success');
                  function distroy(){$('#mailSender').popover('destroy')}
-                 setTimeout(distroy,2000);
+                 setTimeout(distroy,3000);
             }
             else
             {
