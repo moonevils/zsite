@@ -481,7 +481,6 @@ class user extends control
 
         $this->view->title      = $this->lang->user->setEmail;
         $this->view->token      = $this->user->getToken();
-        $this->view->userEmail  = $user->email;
         $this->view->user       = $user;
         $this->view->mobileURL  = helper::createLink('user', 'setEmail', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'setEmail', '', '', 'html');

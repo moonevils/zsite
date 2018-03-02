@@ -9,19 +9,13 @@
         <div class='panel-body'>
           <form method='post' id='ajaxForm' class='form form-horizontal' data-checkfingerprint='1'>
             <table class='table talbe-form table-borderless'>
-              {if(!empty($userEmail))}
               <tr>
-                <th class='text-right w-100px'>{$lang->user->registeredEmail}</th>
-                <td><strong>{$userEmail}</strong></td><td></td>
-              </tr>
-              {/if}
-              <tr>
-                <th class='text-right'>{$lang->user->password}</th>
+                <th class='text-right w-100px'>{$lang->user->password}</th>
                 <td class='w-p50'>{!html::password('oldPwd', '', "class='form-control' placeholder='{{$lang->user->placeholder->password}}'")}</td><td></td>
               </tr>
               <tr>
                 <th class='text-right'>{$lang->user->email}</th>
-                <td>{!html::input('email', '', "class='form-control'")}</td><td></td>
+                <td>{!html::input('email', $user->email, "class='form-control'")}</td><td></td>
               </tr>
               <tr>
                 <th class='text-right'>{$lang->user->captcha}</th>
