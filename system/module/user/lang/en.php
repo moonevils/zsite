@@ -53,7 +53,6 @@ $lang->user->edit            = "Edit";
 $lang->user->operate         = 'Action';
 $lang->user->changePassword  = "Change Password";
 $lang->user->changeEmail     = "Email Settings";
-$lang->user->registeredEmail = "Registered Email";
 $lang->user->recoverPassword = "Forgot Password";
 $lang->user->newPassword     = "New Password";
 $lang->user->update          = "Edit Users";

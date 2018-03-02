@@ -53,7 +53,6 @@ $lang->user->edit            = "编辑用户";
 $lang->user->operate         = '操作';
 $lang->user->changePassword  = "更改密码";
 $lang->user->changeEmail     = "邮箱设置";
-$lang->user->registeredEmail = "已注册的邮箱";
 $lang->user->recoverPassword = "忘记密码";
 $lang->user->newPassword     = "新密码";
 $lang->user->update          = "编辑用户";
