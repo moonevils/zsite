@@ -10,7 +10,7 @@ $(document).ready(function()
                 {
                     $.ajustModalPosition();
                 });
-            }, 2000);
+            }, 3000);
         }
     });
 
