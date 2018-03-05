@@ -13,7 +13,7 @@ $(document).ready(function()
                  $('#thumbExecButton').text(v.rebuildThumbs);
                  $('#thumbExecButton').next('.total').text(response.message);
                  $('#thumbExecButton').removeClass('disabled');
-                 setTimeout(function(){$('#thumbExecButton').next('.total').hide();}, 2000);
+                 setTimeout(function(){$('#thumbExecButton').next('.total').hide();}, 3000);
                  return false;
              }   
              else
@@ -94,7 +94,7 @@ $(document).ready(function()
                  $('#watermarkExecButton').text(v.rebuildWatermark);
                  $('#watermarkExecButton').next('.total').text(response.message);
                  $('#watermarkExecButton').removeClass('disabled');
-                 setTimeout(function(){$('#watermarkExecButton').next('.total').hide();}, 2000);
+                 setTimeout(function(){$('#watermarkExecButton').next('.total').hide();}, 3000);
                  return false;
             }   
             else

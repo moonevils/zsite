@@ -10,9 +10,9 @@
       </td>
     </tr>
     <tr>
-      <th><?php echo $lang->user->newEmail;?></th>
+      <th><?php echo $lang->user->email;?></th>
       <td colspan='2'>
-        <?php echo html::input('email', '', "class='form-control'");?>
+        <?php echo html::input('email', $user->email, "class='form-control'");?>
       </td>
     </tr>
     <tr>
