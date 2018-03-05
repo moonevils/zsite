@@ -410,7 +410,8 @@ class file extends control
         $file = $this->file->getUploadFile('file', $objectType);
         if($file) $file = $this->file->saveUploadFile($file, $objectType, $objectID);
 
-        die(json_encode(array('result' => 'success', 'file' => $file, 'message' => $this->lang->saveSuccess)));
+        $url = $this->file->printFileURL($file);
+        die(json_encode(array('result' => 'success', 'file' => $file, 'message' => $this->lang->saveSuccess, 'url' => $url)));
     }
 
     /**

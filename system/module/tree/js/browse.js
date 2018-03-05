@@ -21,7 +21,7 @@ $(document).ready(function()
                  button.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
                  button.next('.popover').addClass('popover-success');
                  function distroy(){button.popover('destroy')}
-                 setTimeout(distroy,2000);
+                 setTimeout(distroy,3000);
             }
             else
             {

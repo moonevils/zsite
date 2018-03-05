@@ -61,7 +61,7 @@ $(document).ready(function()
                  $('#execButton').text(v.rebuildWatermark);
                  $('#execButton').next('.total').text(response.message);
                  $('#execButton').removeClass('disabled');
-                 setTimeout(function(){$('#execButton').next('.total').hide();}, 2000);
+                 setTimeout(function(){$('#execButton').next('.total').hide();}, 3000);
                  return false;
             }   
             else

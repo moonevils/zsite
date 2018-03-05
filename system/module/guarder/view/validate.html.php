@@ -112,7 +112,7 @@ $(document).ready(function()
       {
           $('#mailSender').popover({trigger:'manual', content: v.emailSending, placement:'right'}).popover('show');
           $('#mailSender').next('.popover').addClass('popover-success');
-          setTimeout(function(){$('#mailSender').popover('destroy');}, 2000);
+          setTimeout(function(){$('#mailSender').popover('destroy');}, 3000);
   
           var url = $(this).attr('href');
           text = $(this).text();
@@ -165,12 +165,12 @@ $(document).ready(function()
                             $.ajustModalPosition('fit', target);
                         }
                     });
-                  }, 2000);
+                  }, 3000);
               }
               else
               {
                   setTimeout(function(){$('#ajaxModal button.close').click()}, 1200);
-                  return setTimeout(function(){location.href = response.locate;}, 2000);
+                  return setTimeout(function(){location.href = response.locate;}, 3000);
               }
           }
       });

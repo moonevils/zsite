@@ -55,7 +55,7 @@
   <th><?php echo $lang->block->titleAlign;?></th>
   <td>
     <div class='input-group' style='width:290px;'>
-      <?php echo html::select('params[alignTitle]', $lang->block->alignList, isset($block->content->alignTitle) ? $block->content->alignTitle : 'left', "class='form-control'");?>
+      <?php echo html::select('params[alignTitle]', $lang->block->alignList, isset($block->content->alignTitle) ? $block->content->alignTitle : 'middle', "class='form-control'");?>
     </div>
   </td>
 </tr>
