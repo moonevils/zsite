@@ -32,7 +32,11 @@
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
         <div class='item'>
           <div class='item-heading'>
-            {if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
+            {$blod = ''}
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}
+            {$blod = 'font-weight:bold;'}
+            {/if}
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))} <span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
             {if(isset($content->showCategory) and $content->showCategory == 1)}
               {if($content->categoryName == 'abbr')}
                 {$blockContent    = json_decode($block->content)}
@@ -104,8 +108,13 @@
                   {/if}
                   </span>
                 {/if}
-                {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitleA text-nowrap text-ellipsis pull-left' style='color:{{$article->titleColor}}'")}
-                <span class='pull-left sticky'>{if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
+
+                {$bold = ''}
+                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}
+                {$bold = 'font-weight:bold;'}
+                {/if}
+                {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitleA text-nowrap text-ellipsis pull-left' style='{{$bold}}color:{{$article->titleColor}}'")}
+                <span class='pull-left sticky'>{if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
               </span>
               <span class='pull-right article-date'>{!substr($article->addedDate, 0, 10)}</span>
             </li>
@@ -130,8 +139,11 @@
                 {/if}
                 </span>
               {/if}
-              {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitleB text-nowrap text-ellipsis pull-left' style='color:{{$article->titleColor}}'")}
-              <span class='pull-left sticky'>{if($article->sticky)}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
+
+              {$bold = ''}
+              {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}{$bold = 'font-weight:bold;'}{/if}
+              {!html::a($url, $article->title, "title='{{$article->title}}' class='articleTitleB text-nowrap text-ellipsis pull-left' style='{{$bold}}color:{{$article->titleColor}}'")}
+              <span class='pull-left sticky'>{if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
             </li>
           {/if}
         {/foreach}
