@@ -136,6 +136,48 @@ class file extends control
     }
 
     /**
+     * AJAX: get upload request from the web editor.
+     *
+     * @access public
+     * @return void
+     */
+    public function ajaxUeditorUpload($uid = '')
+    {
+        if($this->get->action == 'config')
+        {
+            die(json_encode($this->config->file->ueditor));
+        }
+
+        $file = $this->file->getUpload('upfile');
+        $file = $file[0];
+        if($file)
+        {
+            if($file['size'] == 0) die(json_encode(array('state' => $this->lang->file->errorFileUpload)));
+            if(@move_uploaded_file($file['tmpname'], $this->file->savePath . $this->file->getSaveName($file['pathname'])))
+            {
+                /* Compress image for jpg and bmp. */
+                $this->file->compressImage($this->file->savePath . $this->file->getSaveName($file['pathname']));
+
+                $file['addedBy']    = $this->app->user->account;
+                $file['addedDate']  = helper::today();
+                unset($file['tmpname']);
+                $this->dao->insert(TABLE_FILE)->data($file)->exec();
+
+                $fileID = $this->dao->lastInsertID();
+                $file   = $this->file->getById($fileID);
+                $url    = $this->file->printFileURL($file, 'full');
+                if($uid) $_SESSION['album'][$uid][] = $fileID;
+                die(json_encode(array('state' => 'SUCCESS', 'url' => $url)));
+            }
+            else
+            {
+                $error = strip_tags(sprintf($this->lang->file->errorCanNotWrite, $this->file->savePath, $this->file->savePath));
+                die(json_encode(array('state' => $error)));
+            }
+        }
+    }
+
+    /**
      * AJAX: the api to recive the file posted through ajax.
      * 
      * @param  string $uid 
