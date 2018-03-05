@@ -45,7 +45,7 @@
               </div>
               <h4>
                 {!echo empty($article->titleColor) ? html::a($url, $article->title) : html::a($url, $article->title, "style='color:$article->titleColor;'")}
-                {if($article->sticky)}<span class='label label-danger'>{$lang->article->stick}</span>{/if}
+                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='label label-danger'>{$lang->article->stick}</span>{/if}
               </h4>
             </div>
             <div class='item-content'>

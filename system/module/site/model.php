@@ -81,23 +81,22 @@ class siteModel extends model
      */
     public function checkGzip()
     {
-        $url = $this->server->request_scheme . '://' . $this->server->http_host . helper::createLink('misc', 'ping');
+        $file    = $this->app->wwwRoot . 'js/my.js';
+        $fileUrl = $this->server->request_scheme . '://' . $this->server->http_host . '/js/my.js';
 
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HEADER, TRUE);
+        curl_setopt($curl, CURLOPT_URL, $fileUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($curl, CURLOPT_ENCODING, '');
-        $response = curl_exec($curl); 
+        curl_exec($curl); 
 
         if(!curl_errno($curl))
         {
             $info = curl_getinfo($curl);
-            $headerSize = $info['header_size'];
-            $headerInfo = substr($response, 0, $headerSize);
+            $fileSize = $info['size_download'];
 
-            preg_match('/Content-Encoding: (.*)\s/i', $headerInfo, $matches);
-            if(isset($matches[1]) and trim($matches[1]) == 'gzip') return true;
+            if($fileSize < filesize($file)) return true;
+            return false;
         }
 
         return false;

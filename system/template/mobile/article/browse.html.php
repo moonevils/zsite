@@ -30,7 +30,7 @@
       {$url = inlink('view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
       <a class='card' href='{$url}' id="article{{$article->id}}" data-ve='article'>
         <div class='card-heading'>
-          {if($article->sticky)}
+          {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}
             <div class='pull-right'>
               <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
             </div>
