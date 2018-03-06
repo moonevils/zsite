@@ -81,8 +81,8 @@ class siteModel extends model
      */
     public function checkGzip()
     {
-        $file    = $this->app->wwwRoot . 'js/my.js';
-        $fileUrl = $this->server->request_scheme . '://' . $this->server->http_host . '/js/my.js';
+        $file    = $this->app->wwwRoot . 'readme.html';
+        $fileUrl = $this->server->request_scheme . '://' . $this->server->http_host . '/readme.html';
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $fileUrl);
