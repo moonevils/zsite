@@ -67,20 +67,25 @@ function initUeditor(afterInit)
         <?php if($editorLang != 'zh-cn' and $editorLang != 'zh-tw') echo "iframeCssUrl:'',"; //When lang is zh-cn or zh-tw then load ueditor/themes/iframe.css file for font-family and size of editor.?>
         enableAutoSave: false,
         elementPathEnabled: false,
-        initialFrameWidth: '100%'
+        initialFrameWidth: '100%',
+        zIndex: 5
     };
+    if(!window.editor) window.editor = {};
     $.each(editor.id, function(key, editorID)
     {
-        if(!window.editor) window.editor = {};
         var $editor = $('#' + editorID);
         if($editor.length)
         {
-            ueditor = UE.getEditor(editorID, options);
+            var ueditor = UE.getEditor(editorID, options);
             window.editor['#'] = window.editor[editorID] = ueditor;
             
             ueditor.addListener('ready', function()
             {
-                $('#' + editorID).removeClass('form-control').find('.edui-editor').css('z-index', '5');
+                $(this.container).parent().removeClass('form-control');
+            });
+            ueditor.addListener('fullscreenchanged', function(e, fullscreen)
+            {
+                $(this.container).css('z-index', fullscreen ? 1050 : 5);
             });
         }
     });
