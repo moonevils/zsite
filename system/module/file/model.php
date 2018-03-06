@@ -1455,4 +1455,36 @@ class fileModel extends model
         $version    = isset($this->config->site->lastUpload) ? $this->config->site->lastUpload : '';
         return $this->config->webRoot . "file.php?f={$file['pathname']}&t={$file['extension']}&o={$objectType}&s={$size}&v={$version}";
     }
+
+    /**
+     * Get list for ueditor.
+     * 
+     * @param  int    $start 
+     * @access public
+     * @return void
+     */
+    public function getListForUeditor($start = 0)
+    {
+        $start = $this->get->start ? $this->get->start : 0;
+        $count = $this->dao->select('count(*) as count')->from(TABLE_FILE)->where('extension')->in($this->config->file->imageExtensions)->fetch('count');
+        $total = $count;
+        $files = $this->dao->select('*')->from(TABLE_FILE)->where('extension')->in($this->config->file->imageExtensions)->limit("$start,{$this->config->file->ueditor['imageManagerListSize']}")->fetchAll();
+        $fileList = array();
+        foreach($files as $file)
+        {
+            $file = $this->processFile($file);
+            $item = new stdclass();
+            $item->url   = $this->printFileURL($file, 'm');
+            $item->mtime = time($file->addedDate);
+            $fileList[]  = $item;
+        }
+        
+        $result = new stdclass();
+        $result->state = 'SUCCESS';
+        $result->list  = $fileList;
+        $result->start = $start;
+        $result->total = $total;
+
+        return  $result;
+    }
 }

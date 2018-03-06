@@ -75,6 +75,9 @@ $filter->file->filemanager = new stdclass();
 $filter->file->filemanager->get['order'] = 'reg::character';
 $filter->file->filemanager->get['path']  = 'reg::/^[0-9]{6}\/+$/';
 
+$filter->file->apiforueditor = new stdclass();
+$filter->file->apiforueditor->get['action'] = 'equal::config';
+
 $filter->search->index = new stdclass();
 $filter->search->index->get['words'] = 'reg::any';
 
@@ -127,6 +130,9 @@ $filter->product->browse->cookie['productOrderBy'] = 'array';
 
 $filter->article->view = new stdclass();
 $filter->article->view->cookie['cmts'] = 'reg::any';
+
+$filter->article->edit = new stdclass();
+$filter->article->edit->get['e'] = 'reg::character';
 
 $filter->article->browse = new stdclass();
 $filter->article->browse->cookie['articleOrderBy'] = 'array';
