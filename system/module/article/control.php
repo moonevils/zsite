@@ -64,6 +64,7 @@ class article extends control
         $this->view->desc       = strip_tags($category->desc);
         $this->view->category   = $category;
         $this->view->articles   = $articles;
+        $this->view->sticks     = $sticks;
         $this->view->pager      = $pager;
         $this->view->pageID     = $pageID;
         $this->view->orderBy    = $orderBy;
@@ -121,6 +122,7 @@ class article extends control
         $this->view->type       = $type;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
+        $this->view->sticks     = $sticks;
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
         $this->view->template   = $this->config->template->{$this->app->clientDevice}->name;
