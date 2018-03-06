@@ -15,7 +15,11 @@ js::set('kuid', $uid);
 ?>
 <script charset="utf-8" src="<?php echo $this->app->getWebRoot() . "js/"?>ueditor/ueditor.config.js"></script>
 <script charset="utf-8" src="<?php echo $this->app->getWebRoot() . "js/"?>ueditor/ueditor.all.min.js"> </script>
-<style>.edui-default.form-control{height: auto; padding: 0; box-shadow: none; width: auto;}</style>
+<style>
+.edui-default.form-control{height: auto; padding: 0; box-shadow: none; width: auto;}
+#edui_fixedlayer {z-index: 1050!important;}
+.edui-editor-toolbarbox[style*="fixed"] {top: 41px!important;}
+</style>
 <script>
 var editor = <?php echo json_encode($editor);?>;
 var simple = [[
