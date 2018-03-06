@@ -311,20 +311,32 @@ class thread extends control
      * Set the stick level of a thread.
      *
      * @param  int    $threadID
-     * @param  int    $stick
      * @access public
      * @return void
      */
-    public function stick($threadID, $stick)
+    public function stick($threadID)
     {
         $thread = $this->thread->getByID($threadID);
         if(!$this->thread->canManage($thread->board)) exit;
 
-        $this->dao->update(TABLE_THREAD)->set('stick')->eq($stick)->where('id')->eq($threadID)->exec();
-        if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
+        if($_POST)
+        {
+            $data = new stdclass();
+            $data->stick     = $this->post->stick;
+            $data->stickBold = $this->post->stickBold ? $this->post->stickBold : 0;
+            $data->stickTime = $this->post->stickTime;
 
-        $message = $stick == 0 ? $this->lang->thread->successUnstick : $this->lang->thread->successStick;
-        $this->send(array('message' => $message, 'locate' => inlink('view', "threaID=$threadID")));
+            $this->dao->update(TABLE_THREAD)->data($data)->where('id')->eq($threadID)->exec();
+            if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
+
+            $message = $data->stick == 0 ? $this->lang->thread->successUnstick : $this->lang->thread->successStick;
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('view', "threaID=$threadID")));
+
+        }
+
+        $this->view->title  = $this->lang->thread->stick;
+        $this->view->thread = $thread;
+        $this->display();
     }
 
     /**

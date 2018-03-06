@@ -172,6 +172,7 @@ class threadModel extends model
         $sticks = $this->dao->select('*')->from(TABLE_THREAD)
             ->where('hidden')->eq('0')
             ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('stickTime')->ge(helper::now())
 
             ->andWhere('stick', true)->eq(2)
             ->orWhere('stick', true)->eq(1)
