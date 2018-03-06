@@ -431,19 +431,30 @@ class article extends control
      * Stick an article.
      * 
      * @param  int    $articleID 
-     * @param  int    $stick 
      * @access public
      * @return void
      */
-    public function stick($articleID, $stick)
+    public function stick($articleID)
     {
         $article = $this->article->getByID($articleID);
 
-        $this->dao->update(TABLE_ARTICLE)->set('sticky')->eq($stick)->where('id')->eq($articleID)->exec();
-        if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
+        if($_POST)
+        {
+            $data = new stdclass();
+            $data->sticky    = $this->post->sticky;
+            $data->stickBold = $this->post->stickBold ? $this->post->stickBold : 0;
+            $data->stickTime = $this->post->stickTime;
 
-        $message = $stick == 0 ? $this->lang->article->successUnstick : $this->lang->article->successStick;
-        $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('admin', "type={$article->type}")));
+            $this->dao->update(TABLE_ARTICLE)->data($data)->where('id')->eq($articleID)->exec();
+            if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
+
+            $message = $data->sticky == 0 ? $this->lang->article->successUnstick : $this->lang->article->successStick;
+            $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('admin', "type={$article->type}")));
+        }
+
+        $this->view->title   = $this->lang->article->stick;
+        $this->view->article = $article;
+        $this->display();
     }
 
     /**
