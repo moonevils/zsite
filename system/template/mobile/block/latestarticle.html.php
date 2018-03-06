@@ -44,8 +44,8 @@
                 <span class="text-special">{[' . $article->category->name . ']}</span>
               {/if}
             {/if}
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='red'><i class="icon icon-arrow-up"></i></span> {/if}
             <strong>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
           </div>
           <div class='table-layout'>
             {if(!empty($article->image))}
@@ -88,8 +88,8 @@
             {/if}
             {$bold = ''}
             {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}{$bold = 'font-weight:bold;'}{/if}
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='red'><i class="icon icon-arrow-up"></i></span> {/if}
             {!html::a($url, $article->title, "title='{{$article->title}}' style='{{$bold}}color:{{$article->titleColor}}'")}
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
             <span class='pull-right text-muted'>{!substr($article->addedDate, 0, 10)}</span>
           </div>
           {else}
@@ -104,8 +104,8 @@
             {/if}
             {$bold = ''}
             {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}{$bold = 'font-weight:bold;'}{/if}
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
             {!html::a($url, $article->title, "title='{{$article->title}}' style='{{$bold}}color:{{$article->titleColor}}'")}
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span>{/if}
           </div>
           {/if}
         {/foreach}

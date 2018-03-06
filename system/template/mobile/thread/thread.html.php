@@ -27,20 +27,9 @@
         <small class='hide last-edit'><i class="icon-pencil"></i> {!printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate)}</small>
       {/if}
       {if($control->app->user->account != 'guest')}
-        <div class="actions text-right pull-right">
+        <div class="actions text-right">
           {if($control->thread->canManage($board->id))}
-            <span class='dropdown dropup'>
-              <a data-toggle='dropdown' href='###' class='text-muted'><i class='icon-flag-alt'></i> {$lang->thread->sticks[$thread->stick]} <i class='icon-caret-up'></i></a>
-              <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
-              {foreach($lang->thread->sticks as $stick => $label)}
-                {if($thread->stick != $stick)}
-                   <li>{!html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='ajaxaction'")}</li>
-                {else}
-                  <li class="active"><a href="###">{$label}</a></li>
-                {/if}
-              {/foreach}
-              </ul>
-            </span>&nbsp;
+            {!html::a(inlink('stick', "thread=$thread->id"), "<i class='icon icon-flag'></i> {{$lang->thread->sticks[$thread->stick]}}", "data-toggle='modal'")}
             {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
               {@$account = helper::safe64Encode($thread->author)}
               {!html::a(inlink('addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal class='text-muted'")}

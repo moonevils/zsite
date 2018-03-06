@@ -27,7 +27,10 @@
     </thead>
     <tbody>
       {foreach($sticks as $thread)}
-      {$style = $thread->color ? "style='color:{{$thread->color}}'" : ''}
+      {$style = ($thread->color or $thread->stickBold) ? "style='" : ''}
+      {$style .= $thread->color ? "color:{{$thread->color}};" : ''}
+      {$style .= $thread->stickBold ? "font-weight:bold;" : ''}
+      {$style .= ($thread->color or $thread->stickBold) ? "'" : ''}
       <tr class='text-center'>
         <td class='w-10px'><span class='sticky-thread text-danger'><i class="icon-comment-alt icon-large"></i></span></td>
         <td class='text-left'>
