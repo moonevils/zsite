@@ -14,7 +14,7 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <?php js::set('type', $type);?>
 <?php js::set('categoryID', $currentCategory);?>
-<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/ueditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php
 $colorPlates = '';
@@ -35,11 +35,11 @@ foreach (explode('|', $lang->colorPlates) as $value)
   </strong></div>
   <div class='panel-body'>
     <form method='post' role='form' id='ajaxForm'>
-      <table class='table table-form'>
+      <table class='table table-form w-p100'>
         <?php if($type != 'page'):?>
         <tr>
           <th class='w-100px'><?php echo $lang->article->category;?></th>
-          <td class='w-p40'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></td><td></td>
+          <td class='w-p60'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></td><td></td>
         </tr>
         <tbody class='articleInfo'> 
         <tr>
@@ -123,7 +123,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <tbody class='articleInfo'>
         <tr>
           <th><?php echo $lang->article->content;?></th>
-          <td colspan='2'><?php echo html::textarea('content', '', "rows='10' class='form-control'");?></td>
+          <td colspan='2'> <?php echo html::textarea('content', '', "rows='10' class='h-400px'");?> </td>
         </tr>
         <tr>
           <th><?php echo $lang->article->addedDate;?></th>
