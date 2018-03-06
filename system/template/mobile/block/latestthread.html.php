@@ -37,7 +37,10 @@
               {!html::a(helper::createLink('forum', 'board', "boardID={{$thread->board}}", "category={{$boards[$thread->board]->alias}}"), '[' . $boards[$thread->board]->name . '] ', "class='text-special'")}
             {/if}
           {/if}
-          {!html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title)}
+          {$bold = ''}
+          {if($thread->stick && (!formatTime($thread->stickTime) || $thread->stickTime > date('Y-m-d H:i:s')) and $thread->stickBold)}{$bold = 'font-weight:bold;'}{/if}
+          {!html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title, "title='{{$thread->title}}' style='{{$bold}}color:{{$thread->color}}'")}
+          {if($thread->stick && (!formatTime($thread->stickTime) || $thread->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
           <span class='pull-right text-muted'>{!substr($thread->addedDate, 0, 10)}</span>
         </div>
       {/foreach}

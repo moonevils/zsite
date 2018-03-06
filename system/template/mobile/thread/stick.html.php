@@ -20,7 +20,7 @@
       <form id='stickForm' method='post' action='{!inlink('stick', "threadID={{$thread->id}}")}'>
         <div class='form-group'>
           <label for='stick' class='control-label'>{$lang->thread->stick}</label>
-          {!html::radio('stick', $lang->thread->sticks, '')}
+          {!html::radio('stick', $lang->thread->sticks, $thread->stick)}
         </div>
         <div class="form-group {if($thread->stick == 0)}{!'hide'}{/if}">
           <label for='stickBold' class='control-label'>{$lang->thread->stickBold}</label>

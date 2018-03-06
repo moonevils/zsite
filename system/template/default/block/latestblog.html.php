@@ -35,6 +35,12 @@
    
         <div class='item'>
           <div class='item-heading'>
+            {$blod = ''}
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}
+            {$blod = 'font-weight:bold;'}
+            {/if}
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))} <span class='red'><i class="icon icon-arrow-up"></i></span>{/if}
+
             {if(isset($content->showCategory) and $content->showCategory == 1)}
               {if($content->categoryName == 'abbr')}
                 {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
@@ -43,7 +49,7 @@
                 {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
               {/if}
             {/if}
-            <strong>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
+            <strong>{!html::a($url, $article->title, "style='{{$bold}}color:{{$article->titleColor}}'")}</strong>
           </div>
           <div class='item-content'>
             <div class='text small text-muted'>
@@ -80,7 +86,12 @@
                   {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
                 {/if}
               {/if}
-              {!html::a($url, $article->title, "title='{{$article->title}}' style='color:{{$article->titleColor}}'")}
+              {$bold = ''}
+              {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}
+              {$bold = 'font-weight:bold;'}
+              {/if}
+              {!html::a($url, $article->title, "title='{{$article->title}}' style='{{$bold}}color:{{$article->titleColor}}'")}
+              <span class='sticky'>{if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
               <span class='pull-right'>{!substr($article->addedDate, 0, 10)}</span>
             </li>
           {else}
@@ -93,7 +104,12 @@
               {!html::a(helper::createLink('blog', 'index', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ')}
               {/if}
               {/if}
-              {!html::a($url, $article->title, "title='$article->title' style='color:{{$article->titleColor}}'")}
+              {$bold = ''}
+              {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}
+              {$bold = 'font-weight:bold;'}
+              {/if}
+              {!html::a($url, $article->title, "title='{{$article->title}}' style='{{$bold}}color:{{$article->titleColor}}'")}
+              <span class='sticky'>{if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='red'><i class="icon icon-arrow-up"></i></span>{/if}</span>
             </li>
           {/if}
         {/foreach}
@@ -101,3 +117,6 @@
     </div>
   {/if}
 </div>
+<style>
+.sticky{padding-left: 5px;}
+</style>

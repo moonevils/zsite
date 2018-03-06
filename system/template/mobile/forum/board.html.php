@@ -33,7 +33,7 @@
       <a class='card' href='{$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
         <div class='table-layout'>
           <div class='table-cell'>
-            <div class='card-heading text-danger'><h5{$style}><i class='icon-comment-alt'></i> {$thread->title} [{$lang->thread->stick}]</h5></div>
+            <div class='card-heading'><h5 {$style}><i class='icon-comment-alt'></i> {$thread->title} <span class='text-danger'>[{$lang->thread->stick}]</span></h5></div>
             <div class='card-content text-muted small'><i class='icon icon-eye-open'></i> {$thread->views} &nbsp; <i class='icon-user'></i> {$thread->authorRealname} {!substr($thread->addedDate, 5, -3)}</div>
           </div>
           <div class='table-cell middle thumbnail-cell text-right'>

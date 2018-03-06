@@ -25,6 +25,7 @@
       </header>
       <section class='items items-hover' id='articles'>
         {foreach($articles as $article)}
+          {$stick = isset($sticks[$article->id]) ? true : false}
           {$url = inlink('view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
           <div class='item' id="article{$article->id}" data-ve='article'>
             {if(!empty($article->image))}
@@ -45,7 +46,7 @@
               </div>
               <h4>
                 {!echo empty($article->titleColor) ? html::a($url, $article->title) : html::a($url, $article->title, "style='color:$article->titleColor;'")}
-                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='label label-danger'>{$lang->article->stick}</span>{/if}
+                {if($stick)}<span class='label label-danger'>{$lang->article->stick}</span>{/if}
               </h4>
             </div>
             <div class='item-content'>

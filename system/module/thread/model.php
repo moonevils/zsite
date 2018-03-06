@@ -157,7 +157,7 @@ class threadModel extends model
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
 
-        return $this->getList($subBoards, 'addedDate_desc', $pager, 'latest');
+        return $this->getList($subBoards, 'stick_desc, addedDate_desc', $pager, 'latest');
     }
 
     /**
@@ -172,7 +172,9 @@ class threadModel extends model
         $sticks = $this->dao->select('*')->from(TABLE_THREAD)
             ->where('hidden')->eq('0')
             ->andWhere('addedDate')->le(helper::now())
-            ->andWhere('stickTime')->ge(helper::now())
+            ->andWhere('stickTime', true)->ge(helper::now())
+            ->orWhere('stickTime')->eq('0000-00-00 00:00:00')
+            ->markRight(1)
 
             ->andWhere('stick', true)->eq(2)
             ->orWhere('stick', true)->eq(1)
