@@ -41,4 +41,16 @@ $(function()
 
         $('#content').focus().val(quoteContent);
     })
+
+    $(document).on('click', 'input[name=stick]', function()
+    {
+        if($('#stick1').prop('checked'))
+        {
+            $(this).parents('.form-group').next(".form-group").hide().next('.form-group').hide();
+        }
+        else
+        {
+            $(this).parents('.form-group').next(".form-group").show().next('.form-group').show();
+        }
+    });
 });
