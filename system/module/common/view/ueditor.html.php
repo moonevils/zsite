@@ -18,22 +18,6 @@ js::set('kuid', $uid);
 <style>.edui-default.form-control{height: auto; padding: 0; box-shadow: none; width: auto;}</style>
 <script>
 var editor = <?php echo json_encode($editor);?>;
-
-var toolbars = [[
-    'paragraph', 'fontfamily', 'fontsize', '|',
-    'forecolor', 'backcolor', 'bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'pasteplain', '|',
-    'insertorderedlist', 'insertunorderedlist', 'justifyleft', 'justifycenter', 'justifyright', '|'],
-    ['simpleupload', 'insertcode', '|',
-    'link', 'unlink', '|',
-    'inserttable', '|',
-    'fullscreen', 'source', '|',
-    'preview', 'help'
-]];
-
-var simple =
-[ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|',
-'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|',
-'emoticons', 'image', 'link', '|', 'removeformat','undo', 'redo', 'source' ];
 var simple = [[
     'paragraph', 'fontfamily', 'fontsize', 'lineheight', '|',
     'bold', 'italic', 'underline', 'strikethrough', '|',
@@ -42,18 +26,22 @@ var simple = [[
     'link', 'unlink', 'anchor',
     'undo', 'redo', 'removeformat','insertorderedlist', 'insertunorderedlist', '|',
     'source', 'help']];
-
 var full = [[
-    'paragraph', 'fontfamily', 'fontsize', 'lineheight', '|',
-    'forecolor', 'backcolor', '|', 
+    'paragraph', 'fontfamily', 'fontsize','|',
+    'forecolor', 'backcolor', '|', 'lineheight', 'indent', '|', 
     'bold', 'italic', 'underline', 'strikethrough', '|',
     'justifyleft', 'justifycenter', 'justifyright', '|',
-    'pasteplain', 'emotion', 'simpleupload', 'insertimage', '|', 
-    'link', 'unlink', 'anchor', 'insertvideo', 'map'],
-    ['undo', 'redo', 'removeformat', 'insertcode', '|',
-    'insertorderedlist', 'insertunorderedlist', 'inserttable', '|',
-    'indent', 'fullscreen', '|',
-    'preview', 'source', 'searchreplace', 'help']];
+    'insertorderedlist', 'insertunorderedlist', 'pasteplain', 'preview',
+    'fullscreen'],
+    [
+    'undo', 'redo', 'removeformat', '|',
+    'link', 'unlink', 'anchor', '|', 
+    'inserttable', '|',
+    'emotion', 'simpleupload', 'insertimage','insertvideo', 'map', '|', 
+    'insertcode', 'source', 'searchreplace', 'help']
+    ];
+
+$(document).ready(initUeditor);
 function initUeditor(afterInit)
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.kuid + ">");
