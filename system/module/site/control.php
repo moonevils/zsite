@@ -45,7 +45,7 @@ class site extends control
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             /* Edit config->framework->detectDevice if mobile template closed. */
-            if(isset($setting->mobileTemplate))
+            if($setting->mobileTemplate != $this->config->site->mobileTemplate)
             {
                 $deviceConfig = new stdclass;
                 $deviceConfig->detectDevice = $setting->mobileTemplate == 'open' ? true : false;

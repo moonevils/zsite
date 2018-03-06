@@ -30,7 +30,7 @@ class forum extends control
         if($mode == 'latest')
         {
             $this->view->title   = $this->lang->thread->latest;
-            $this->view->threads = $this->loadModel('thread')->getList(0, 'addedDate_desc', $pager, $mode);
+            $this->view->threads = $this->loadModel('thread')->getList(0, 'repliedDate_desc', $pager, $mode);
             $this->view->boards  = $this->loadModel('tree')->getAbbrPairs('', 'forum');
             $this->view->pager   = $pager;
         }
@@ -45,7 +45,7 @@ class forum extends control
         {
             $this->view->title  = $this->lang->forumHome;
             $this->view->boards = $this->forum->getBoards();
-        }
+        } 
 
         $this->view->mode         = $mode;
         $this->view->mobileURL    = helper::createLink('forum', 'index', "mode=$mode", '', 'mhtml');
