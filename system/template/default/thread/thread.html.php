@@ -35,18 +35,7 @@
       {if($control->app->user->account != 'guest')}
         {if($control->thread->canManage($board->id))}
           <span class='thread-more-actions'>
-            <span class='dropdown dropup'>
-              <a data-toggle='dropdown' href='###'><i class='icon-flag-alt'></i> {$lang->thread->sticks[$thread->stick]} <span class='caret'></span></a>
-              <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
-                {foreach($lang->thread->sticks as $stick => $label)}
-                  {if($thread->stick != $stick)}
-                    <li>{!html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='stickJsoner'")}</li>
-                  {else}
-                    <li class="active"><a href="###">{$label}</a></li>
-                  {/if}
-                {/foreach}
-              </ul>
-            </span>
+            {!html::a(inlink('stick', "thread=$thread->id"), "<i class='icon-flag-alt'></i> " . zget($lang->thread->sticks, $thread->stick), "data-toggle='modal'")}
             {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
               {$account = helper::safe64Encode($thread->author)}
               {!html::a(inlink('addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal")}

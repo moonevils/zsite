@@ -548,6 +548,8 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `readonly` tinyint(1) NOT NULL DEFAULT '0',
   `views` smallint(5) unsigned NOT NULL DEFAULT '0',
   `stick` enum('0','1','2','3') NOT NULL DEFAULT '0',
+  `stickTime` datetime NOT NULL,
+  `stickBold` enum('0', '1') NOT NULL DEFAULT '0',
   `replies` smallint(6) NOT NULL,
   `repliedBy` varchar(30) NOT NULL,
   `repliedDate` datetime NOT NULL,
