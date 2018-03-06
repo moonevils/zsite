@@ -77,9 +77,10 @@
     <tbody>
       <?php $maxOrder = 0; foreach($articles as $article):?>
       <tr>
-        <td class='text-center'><?php echo $article->id;?></td>
-        <td title="<?php echo $article->title;?>" style="color:<?php echo $article->titleColor;?>">
-          <?php if($article->sticky):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
+        <td class='text-center'><?php echo $article->id;?></td>    
+        <?php $bold = ($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold) ? 'font-weight: bold;' : '';?>
+        <td title="<?php echo $article->title;?>" style="<?php echo $bold;?> color:<?php echo $article->titleColor;?>">
+          <?php if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s'))):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
           <?php echo $article->title;?>
         </td>
@@ -120,26 +121,7 @@
             </ul>
           </span>
           <?php if($type != 'page'):?>
-          <span class='dropdown'>
-            <a data-toggle='dropdown' href='###'><?php echo $lang->article->stick; ?><span class='caret'></span></a>
-            <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
-            <?php
-              foreach($lang->article->sticks as $stick => $label)
-              {
-                  if($article->sticky != $stick)
-                  {
-                      echo '<li>';
-                      commonModel::printLink('article', 'stick', "article=$article->id&stick=$stick", $label, "class='jsoner'");
-                      echo '</li>';
-                  }
-                  else
-                  {
-                      echo '<li class="active"><a href="###">' . $label . '</a></li>';
-                  }
-              }
-              ?>
-            </ul>
-          </span>
+          <?php commonModel::printLink('article', 'stick', "article=$article->id", $lang->article->stick, "data-toggle='modal'");?>
           <?php endif;?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
