@@ -141,23 +141,34 @@ class file extends control
      * @access public
      * @return void
      */
-    public function ajaxUeditorUpload($uid = '')
+    public function apiForUeditor($uid = '')
     {
-        if($this->get->action == 'config')
-        {
-            die(json_encode($this->config->file->ueditor));
-        }
+        if($this->get->action == 'config') die(json_encode($this->config->file->ueditor));
+        if($this->get->action == '') die(json_encode($this->file->getListForUeditor()));
 
         $file = $this->file->getUpload('upfile');
+
         $file = $file[0];
         if($file)
         {
             if($file['size'] == 0) die(json_encode(array('state' => $this->lang->file->errorFileUpload)));
-            if(@move_uploaded_file($file['tmpname'], $this->file->savePath . $this->file->getSaveName($file['pathname'])))
-            {
-                /* Compress image for jpg and bmp. */
-                $this->file->compressImage($this->file->savePath . $this->file->getSaveName($file['pathname']));
+            $saveName = $this->file->getSaveName($file['pathname']);
+            $realPathName = $this->file->savePath . $saveName;
 
+            if(@move_uploaded_file($file['tmpname'], $realPathName))
+            {
+                if(strtolower($file['extension']) != 'gif' and in_array(strtolower($file['extension']), $this->config->file->imageExtensions) !== false)
+                {
+                    /* Compress image for jpg and bmp. */
+                    $this->file->compressImage($this->file->savePath . $this->file->getSaveName($file['pathname']));
+                    if(isset($this->config->file->watermark) and $this->config->file->watermark == 'open')
+                    {
+                        $this->file->setWatermark($realPathName);
+                    }
+                    $imageSize = $this->file->getImageSize($realPathName);
+                    $file['width']  = $imageSize['width'];
+                    $file['height'] = $imageSize['height'];
+                }
                 $file['addedBy']    = $this->app->user->account;
                 $file['addedDate']  = helper::today();
                 unset($file['tmpname']);
