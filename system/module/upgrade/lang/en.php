@@ -22,7 +22,7 @@ $lang->upgrade->selectVersion = 'Confirm current version';
 $lang->upgrade->confirm       = 'Confirm SQL statement';
 $lang->upgrade->execute       = 'Confirm';
 $lang->upgrade->next          = 'Next';
-$lang->upgrade->updateLicense = 'Changer 4.0 has swtiched to use Z PUBLIC LICENSE(ZPL) 1.2.';
+$lang->upgrade->updateLicense = 'Zsite 4.0 has swtiched to use Z PUBLIC LICENSE(ZPL) 1.2.';
 
 $lang->upgrade->deleteTips   = 'Need to delete some files. The commands in Linux are:<br />';
 $lang->upgrade->deleteDir    = '<code>rm -fr %s</code>';

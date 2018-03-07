@@ -17,10 +17,10 @@ $lang->install->error   = 'Error';
 
 $lang->install->start            = 'Install';
 $lang->install->keepInstalling   = 'Continue installation';
-$lang->install->welcome          = 'Thank you for choosing Changer, the most powerful portal system!';
+$lang->install->welcome          = 'Thank you for choosing Zsite, the most powerful portal system!';
 $lang->install->license          = 'License';
 $lang->install->desc             = <<<EOT
-<p>With changer, you can do</p>
+<p>With Zsite, you can do</p>
 <blockquote>
   <ul>
     <li><strong>Branding</strong>: build official website and promote your brand to the world.</li>
@@ -31,7 +31,7 @@ $lang->install->desc             = <<<EOT
 </blockquote>
 EOT;
 
-$lang->install->newVersion = "Note: Changer has released <span id='version'></span> on <span id='releaseDate'></span>.<a href='' target='_blank' id='upgradeLink'>Download Now!</a>";
+$lang->install->newVersion = "Note: Zsite has released <span id='version'></span> on <span id='releaseDate'></span>.<a href='' target='_blank' id='upgradeLink'>Download Now!</a>";
 
 $lang->install->choice     = 'You can choose';
 $lang->install->checking   = 'System Checkup';
