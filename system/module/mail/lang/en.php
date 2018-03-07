@@ -50,5 +50,5 @@ $lang->mail->sendContent = <<<EOT
 <p>Hello, %s :</p>
 <p>Your <strong>%s</strong>(%s)verification code is %s</p>
 <p>Please ignore if you did not request it.</p>
-<p> <a style="color:gray;font-size:12px;text-decoration:none" href="http://www.chanzhi.org" target="_blank">Powerd By Changer</a> </p>
+<p> <a style="color:gray;font-size:12px;text-decoration:none" href="http://www.zsite.net" target="_blank">Powerd By Zsite</a> </p>
 EOT;

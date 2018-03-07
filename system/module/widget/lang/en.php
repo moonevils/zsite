@@ -61,7 +61,7 @@ $lang->widget->default['5']['title'] = 'Quick Entry';
 $lang->widget->default['5']['type']  = 'commonMenu';
 $lang->widget->default['5']['grid']  = 4;
 
-$lang->widget->default['6']['title'] = 'Changer Dynamic';
+$lang->widget->default['6']['title'] = 'Zsite Dynamic';
 $lang->widget->default['6']['type']  = 'chanzhiDynamic';
 $lang->widget->default['6']['grid']  = 4;
 
@@ -71,6 +71,6 @@ $lang->widget->typeList->latestThread   = 'Latest Thread';
 $lang->widget->typeList->message        = 'Feedback';
 $lang->widget->typeList->wechatMessage  = 'Wechat Message';
 $lang->widget->typeList->submission     = 'Latest Submission';
-$lang->widget->typeList->chanzhiDynamic = 'Changer Dynamic';
+$lang->widget->typeList->chanzhiDynamic = 'Zsite Dynamic';
 $lang->widget->typeList->commonMenu     = 'Quick Entry';
 $lang->widget->typeList->html           = 'Custom';
