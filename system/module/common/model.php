@@ -1565,10 +1565,15 @@ class commonModel extends model
      */
     public static function printPowerdBy()
     {
-        global $config, $lang;
+        global $config, $lang, $app;
         $chanzhiVersion = $config->version;
         $isProVersion   = strpos($chanzhiVersion, 'pro') !== false;
         if($isProVersion) $chanzhiVersion = str_replace('pro', '', $chanzhiVersion);
-        printf($lang->poweredBy, $config->version, k(), "<span class='" . ($isProVersion ? 'icon-chanzhi-pro' : 'icon-chanzhi') . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);
+
+        $icon = 'icon-chanzhi';
+        if($isProVersion) $icon = 'icon-chanzhi-pro';
+        if($app->clientLang == 'en') $icon = 'icon-zsite';
+        if($app->clientLang == 'en' && $isProVersion) $icon = 'icon-zsite-pro';
+        printf($lang->poweredBy, $config->version, k(), "<span class='" . $icon . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);
     }
 }
