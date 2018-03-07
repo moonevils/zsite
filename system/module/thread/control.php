@@ -66,7 +66,8 @@ class thread extends control
         $this->session->set('titleInput', $titleInput);
         $this->session->set('contentInput', $contentInput);
         $this->config->thread->require->post = "{$this->session->titleInput}, {$this->session->contentInput}";
-        $this->config->thread->editor->post = array('id' => $this->session->contentInput, 'tools' => 'simple');
+        $this->config->thread->editor->post  = array('id' => $this->session->contentInput, 'tools' => 'simple');
+        if($this->app->user->admin == 'super') $this->config->thread->editor->post  = array('id' => $this->session->contentInput, 'tools' => 'full');
 
         $this->view->title        = $board->name . $this->lang->minus . $this->lang->thread->post;
         $this->view->board        = $board;
