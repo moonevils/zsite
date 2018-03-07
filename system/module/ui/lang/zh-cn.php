@@ -28,6 +28,7 @@ $lang->ui->deleteFavicon   = "不显示Favicon";
 $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->others          = "其他设置";
 $lang->ui->productView     = "产品点击量";
+$lang->ui->viewMode        = "视图模式";
 $lang->ui->QRCode          = "移动二维码";
 $lang->ui->execInfo        = "运行信息";
 $lang->ui->templateName    = "模板";

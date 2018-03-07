@@ -136,6 +136,10 @@ $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
 
+$lang->product->browseOptions = array();
+$lang->product->browseOptions['card'] = '卡片模式';
+$lang->product->browseOptions['list'] = '列表模式';
+
 $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = '关闭';
 $lang->product->stockOptions[1] = '开启';

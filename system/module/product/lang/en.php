@@ -136,6 +136,10 @@ $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
 
+$lang->product->browseOptions = array();
+$lang->product->browseOptions['card'] = 'Card Mode';
+$lang->product->browseOptions['list'] = 'List Mode';
+
 $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = 'Off';
 $lang->product->stockOptions[1] = 'On';

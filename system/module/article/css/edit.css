@@ -5,7 +5,7 @@
 .color .icon-ok, .color .icon-question {display: none}
 .color.active > .icon-ok, .color.error > .icon-question, .color.active .input-group-btn > .dropdown-toggle > .icon-ok, .color.error .input-group-btn > .dropdown-toggle > .icon-question {display: inline;}
 .color.active.error .icon-ok {display: none}
-.color .input-group-addon {min-width: 40px; text-align: center; border-left: none; border-radius: 0;}
+.color .input-group-addon {min-width: 40px; text-align: right; border-left: none; border-radius: 0;}
 
 .input-group-btn > .dropdown-toggle {border-right: none; border-radius: 0;}
 .input-group-addon .checkbox-inline {padding-top: 0;}
