@@ -4,6 +4,7 @@
 {!js::set('categoryID', $category->id)}
 {!js::set('pageLayout', $control->block->getLayoutScope('product_browse', $category->id))}
 {$common->printPositionBar($category, isset($product) ? $product : '')}
+{!js::set('defaultMode', $config->product->browseType)}
 {if(isset($productList))}
   <script>{!echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $productList. $config->idListPlaceHolder . "';"}</script>
 {else}
@@ -24,7 +25,7 @@
          {!echo "<div class='header'>" . html::a('javascript:;', $lang->product->orderBy->hot, "data-field='views' class='views setOrder'") . "</div>"}
         <div class='pull-right btn-group' id="modeControl">
           {foreach($lang->product->listMode as $mode => $text)}
-          {!html::a("javascript:;", $text, "data-mode='$mode' class='btn'")}
+            {!html::a("javascript:;", $text, "data-mode='$mode' class='btn'")}
           {/foreach}
         </div>
       </header>
