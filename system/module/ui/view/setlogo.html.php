@@ -37,7 +37,7 @@
       <div class='col-md-6'>
         <div class='box'>
         <div class='card'>
-          <?php $favicon->extension = 'ico';?>
+          <?php if(!empty($favicon)) $favicon->extension = 'ico';?>
           <?php if(isset($favicon->webPath)) echo html::a('javascript:;', html::image($this->loadModel('file')->printFileURL($favicon), "class='favicon'"), "class='btn-upload'");?>
           <?php if(!isset($favicon->webPath)) echo html::a('javascript:;', $lang->ui->uploadFavicon, "class='text-lg btn-upload'");?>
         </div>
