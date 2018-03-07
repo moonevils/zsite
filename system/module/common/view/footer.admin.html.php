@@ -11,8 +11,12 @@
     $chanzhiVersion                   = $config->version;
     $isProVersion                     = strpos($chanzhiVersion, 'pro') !== false;
     if($isProVersion) $chanzhiVersion = str_replace('pro', '', $chanzhiVersion);
+    $icon = 'icon-chanzhi';
+    if($isProVersion) $icon = 'icon-chanzhi-pro';
+    if($this->app->clientLang == 'en') $icon = 'icon-zsite';
+    if($this->app->clientLang == 'en' and $isProVersion) $icon = 'icon-zsite-pro';
     ?>
-    <?php printf($lang->poweredBy, $config->version, k(), "<span class='" . ($isProVersion ? 'icon-chanzhi-pro' : 'icon-chanzhi') . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);?>
+    <?php printf($lang->poweredBy, $config->version, k(), "<span class='" . $icon . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);?>
     
   </div>
 </nav>
