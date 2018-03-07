@@ -89,7 +89,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
+    public function admin($type = 'article', $categoryID = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
     {
         if($this->get->tab == 'user') 
         {
@@ -156,7 +156,7 @@ class article extends control
             $this->article->create($type);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('submission')));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type&categoryID=$categoryID")));
         }
 
         if($type != 'page') 
