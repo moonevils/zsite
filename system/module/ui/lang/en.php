@@ -28,6 +28,7 @@ $lang->ui->deleteFavicon   = "Delete Favicon";
 $lang->ui->deleteLogo      = "Delete Logo";
 $lang->ui->others          = "Settings";
 $lang->ui->productView     = "Product Clicks";
+$lang->ui->viewMode        = "View Mode";
 $lang->ui->QRCode          = "QR Code";
 $lang->ui->execInfo        = "Operating Information";
 $lang->ui->templateName    = "Template";

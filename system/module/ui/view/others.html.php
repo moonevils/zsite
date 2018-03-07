@@ -150,6 +150,8 @@ js::set('gdInstalled', $gdInstalled);
               <th><?php echo $lang->product->list;?></th>
               <td colspan='2'>
                 <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->viewMode;?></span>
+                  <?php echo html::select('product[browseType]', $lang->product->browseOptions, isset($this->config->product->browseType) ? $this->config->product->browseType : 'card', "class='form-control'");?>
                   <span class='input-group-addon'><?php echo $lang->ui->productView;?></span>
                   <?php echo html::select('product[showViews]', $lang->product->viewsOptions, isset($this->config->product->showViews) ? $this->config->product->showViews : '1', "class='form-control'");?>
                   <span class='input-group-addon'><?php echo $lang->product->price;?></span>
