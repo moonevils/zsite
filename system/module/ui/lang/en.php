@@ -92,7 +92,7 @@ $lang->ui->logoList['current'] = 'Current Theme';
 $lang->ui->logoList['all']     = 'All Themes';
 
 $lang->ui->deleteThemeList['blue']       = 'Default';
-$lang->ui->deleteThemeList['brightdark'] = "Changer Checks";
+$lang->ui->deleteThemeList['brightdark'] = "Zsite Checks";
 $lang->ui->deleteThemeList['flat']       = 'Clear';
 $lang->ui->deleteThemeList['tree']       = 'Tree';
 $lang->ui->deleteThemeList['colorful']   = 'Colorful';
@@ -296,8 +296,8 @@ $lang->ui->importTypes->full  = 'Full data';
 
 $lang->ui->theme->encryptTip = new stdclass();
 $lang->ui->theme->encryptTip->common    = 'Prompt:';
-$lang->ui->theme->encryptTip->zend      = 'The theme you imported is encrypted by zend, so you have to install Zend Guard Loader to decrypt it. <a href="http://www.chanzhi.org/book/chanzhieps/133.html" target="_blank">Zend Guard Loader installation documentation</a>.';
-$lang->ui->theme->encryptTip->ioncube   = 'The imported theme is encrypted by ioncube, so you have to install the ioncube, <a href="http://www.chanzhi.org/book/chanzhieps/189.html" target="_blank">ioncube extension installation documentation</a>.';
+$lang->ui->theme->encryptTip->zend      = 'The theme you imported is encrypted by zend, so you have to install Zend Guard Loader to decrypt it. <a href="http://www.zsite.net/book/zsitemanual/162.html" target="_blank">Zend Guard Loader installation documentation</a>.';
+$lang->ui->theme->encryptTip->ioncube   = 'The imported theme is encrypted by ioncube, so you have to install the ioncube, <a href="http://www.zsite.net/book/zsitemanual/160.html" target="_blank">ioncube extension installation documentation</a>.';
 $lang->ui->theme->encryptTip->noZend    = 'You did not install the Zend Guard Loader.';
 $lang->ui->theme->encryptTip->noIoncube = 'You did not install ioncube.';
 $lang->ui->theme->encryptTip->none      = 'You did not have any decryption program installed.';
@@ -460,6 +460,6 @@ $lang->effect->obtan         = 'Get effect';
 $lang->effect->imported      = 'Imported';
 $lang->effect->importSuccess = 'Imported';
 $lang->effect->noWritable    = '<code>%s</code> Can not write! Please check the directory permissions, or can not be imported';
-$lang->effect->bindCommunity = 'Please bind the account of Changer before get effect';
-$lang->effect->noRsults      = "You have no effect, please login the platform of Changer <a href='http://www.chanzhi.org/effect.html' target='_blank'>get effect</a>。";
+$lang->effect->bindCommunity = 'Please bind the account of Zsite before get effect';
+$lang->effect->noRsults      = "You have no effect, please login the platform of Zsite <a href='http://www.zsite.net/effect.html' target='_blank'>get effect</a>。";
 $lang->effect->redirecting   = "<span class='text-muted'><span id='countDown'>3</span>seconds. Redirecting to the community page...</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Link</a>";
