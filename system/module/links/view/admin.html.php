@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/ueditor.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-link'></i> <?php echo $lang->links->common;?></strong>
