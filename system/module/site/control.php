@@ -287,6 +287,7 @@ class site extends control
             foreach($_POST as $key => $value)
             {
                 $_POST[$key] = trim($value);
+                if($key == 'isVertified') $_POST['verification'] = '';
             }
             $oauth    = array($provider => helper::jsonEncode($_POST));
 
