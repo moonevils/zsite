@@ -1,16 +1,17 @@
-{$module = $this->moduleName}
-{$method = $this->methodName}
+{$module = $control->moduleName}
+{$method = $control->methodName}
 {!js::set('themeRoot', $themeRoot)}
-{if(!isset($config->$module->editor->$method))} {return true;} {/if}
-{$editor = $config->$module->editor->$method}
-{$editor['id'] = explode(',', $editor['id'])}
+{if(!isset($config->$module->editor->$method))} {@return true} {/if}
+{$editor=$config->$module->editor->$method}
+{$editorIdList=explode(',', $editor['id'])}
+{!js::set('editorIdList', $editorIdList)}
 {$editorLangs  = array('en' => 'en', 'zh-cn' => 'zh-cn', 'zh-tw' => 'zh-tw')}
 {$editorLang   = isset($editorLangs[$app->getClientLang()]) ? $editorLangs[$app->getClientLang()] : 'en'}
 {$uid = uniqid('')}
 {!js::set('kuid', $uid)}
-<script type="text/javascript" charset="utf-8" src="{$this->app->getWebRoot()} 'js/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="{$this->app->getWebRoot()} 'js/ueditor/ueditor.all.js"> </script>
-<script language='javascript'>
+<script type="text/javascript" charset="utf-8" src="{$app->getWebRoot()}js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{$app->getWebRoot()}js/ueditor/ueditor.all.js"> </script>
+<script>
 var editor = {!json_encode($editor)};
 var simple = [[
     'paragraph', 'fontfamily', 'fontsize', 'lineheight', '|',
@@ -20,50 +21,61 @@ var simple = [[
     'link', 'unlink', 'anchor',
     'undo', 'redo', 'removeformat','insertorderedlist', 'insertunorderedlist', '|',
     'source', 'help']];
-
 var full = [[
-    'paragraph', 'fontfamily', 'fontsize', 'lineheight', '|',
-    'forecolor', 'backcolor', '|', 
+    'paragraph', 'fontfamily', 'fontsize','|',
+    'forecolor', 'backcolor', '|', 'lineheight', 'indent', '|', 
     'bold', 'italic', 'underline', 'strikethrough', '|',
     'justifyleft', 'justifycenter', 'justifyright', '|',
-    'pasteplain', 'emotion', 'simpleupload', 'insertimage', '|', 
-    'link', 'unlink', 'anchor', 'insertvideo', 'map'],
-    ['undo', 'redo', 'removeformat', 'insertcode', '|',
-    'insertorderedlist', 'insertunorderedlist', 'inserttable', '|',
-    'indent', 'fullscreen', '|',
-    'preview', 'source', 'searchreplace', 'help']];
+    'insertorderedlist', 'insertunorderedlist', 'pasteplain',
+    'fullscreen'],
+    [
+    'undo', 'redo', 'removeformat', '|',
+    'link', 'unlink', 'anchor', '|', 
+    'inserttable', '|',
+    'emotion', 'simpleupload', 'insertimage','insertvideo', 'map', '|', 
+    'insertcode', 'source', 'searchreplace', 'help']
+    ];
 
 $(document).ready(initUeditor);
 function initUeditor(afterInit)
 {
-    $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.kuid + ">");
+    $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.kuid + '>');
     var options = 
     {
         lang: '{$editorLang}',
         toolbars: {$editor['tools']},
-        serverUrl: '{$this->createLink('file', 'apiforueditor', "uid=$uid")}',
+        serverUrl: '{$control->createLink('file', 'apiforueditor', "uid=$uid")}',
         autoClearinitialContent:false,
         wordCount:false,
-        {if($editorLang != 'zh-cn' and $editorLang != 'zh-tw'}
+        {if($editorLang != 'zh-cn' and $editorLang != 'zh-tw')}
         iframeCssUrl:'',
         {/if}
         enableAutoSave:false,
-        elementPathEnabled:false
+        elementPathEnabled:false,
+        initialFrameWidth: '100%',
+        zIndex: 5
     };
-    $.each(editor.id, function(key, editorID)
+    if(!window.editor) window.editor = {};
+    $.each(v.editorIdList, function(key, editorID)
     {
-        if(!window.editor) window.editor = {};
-        if($('#' + editorID).size() != 0)
+        var $editor = $('#' + editorID);
+        if($editor.length)
         {
-            ueditor = UE.getEditor(editorID, options);
+            var ueditor = UE.getEditor(editorID, options);
             window.editor['#'] = window.editor[editorID] = ueditor;
+            
             ueditor.addListener('ready', function()
             {
-                $('#' + editorID).find('.edui-editor').css('z-index', '5');
+                $(this.container).parent().removeClass('form-control');
+            });
+            ueditor.addListener('fullscreenchanged', function(e, fullscreen)
+            {
+                $(this.container).css('z-index', fullscreen ? 1050 : 5);
             });
         }
     });
 
     if($.isFunction(afterInit)) afterInit();
 }
+$(document).ready(initUeditor);
 </script>

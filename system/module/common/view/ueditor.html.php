@@ -35,7 +35,7 @@ var full = [[
     'forecolor', 'backcolor', '|', 'lineheight', 'indent', '|', 
     'bold', 'italic', 'underline', 'strikethrough', '|',
     'justifyleft', 'justifycenter', 'justifyright', '|',
-    'insertorderedlist', 'insertunorderedlist', 'pasteplain', 'preview',
+    'insertorderedlist', 'insertunorderedlist', 'pasteplain',
     'fullscreen'],
     [
     'undo', 'redo', 'removeformat', '|',
