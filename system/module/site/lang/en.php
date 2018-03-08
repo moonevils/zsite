@@ -102,6 +102,7 @@ $lang->site->setStat       = "Traffic Report";
 $lang->site->setHomeMenu   = "Homepage Menu";
 $lang->site->openModule    = "Open module";
 $lang->site->setAgreement  = "Set Agreement";
+$lang->site->isVertified   = "Is Vertified";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Enterprise Portal';

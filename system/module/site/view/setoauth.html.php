@@ -32,8 +32,20 @@
             <tr>
               <th class='w-100px'><?php echo $lang->user->oauth->verification;?></th>
               <td class='w-p75'>
-                <?php echo html::input('verification', isset($oauth->verification) ? $oauth->verification : '', "class='form-control'");?>
-              </td><td></td>
+                <div class='input-group'>
+                  <?php if(isset($oauth->isVertified)):?> 
+                    <?php echo html::input('verification', '', "class='form-control'");?>
+                    <span class="input-group-addon">
+                      <?php echo "<input type='checkbox' name='isVertified' id='isVertified' value='1' checked='checked' /><span>{$lang->site->isVertified}</span>";?>
+                    </span>
+                  <?php else:?> 
+                    <?php echo html::input('verification', isset($oauth->verification) ? $oauth->verification : '', "class='form-control'");?>
+                    <span class="input-group-addon">
+                      <?php echo "<input type='checkbox' name='isVertified' id='isVertified' value='1' /><span>{$lang->site->isVertified}</span>";?>
+                    </span>
+                  <?php endif;?> 
+                </div>
+              </td>
             </tr>
             <?php endif;?>
             <tr>
