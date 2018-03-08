@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/ueditor.html.php';?>
 <?php
 js::set('key', count($slide->label));
 $colorPlates = '';

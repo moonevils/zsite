@@ -12,7 +12,7 @@
 ?>
 <?php if($this->thread->hasManagePriv($this->app->user->account, $board->owners)) $config->thread->editor->editreply['tools'] = 'full'; ?>
 <?php include '../../common/view/header.html.php';?>
-<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/ueditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
 <table class='table table-form'>

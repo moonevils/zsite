@@ -12,7 +12,7 @@
 ?>
 <?php $config->widget->editor->create =  array('id' => 'content', 'tools' => 'simple', 'filterMode' => false); ?>
 <?php $config->widget->editor->edit   =  array('id' => 'content', 'tools' => 'simple', 'filterMode' => false); ?>
-<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/ueditor.html.php';?>
 <tr>
   <th><?php echo $lang->widget->content;?></th>
   <td>

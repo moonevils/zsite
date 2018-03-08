@@ -11,7 +11,7 @@
 */
 ?>
 <?php if($this->app->clientDevice == 'desktop'):?>
-<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/ueditor.html.php';?>
 
 <?php if(!isset($block)) $block = new stdclass();?>
 <?php if(!isset($block->content)) $block->content = new stdclass();?>
