@@ -19,7 +19,10 @@
       <div class='panel-heading'>
         <strong><i class="icon-<?php echo $providerCode; ?>"></i> <?php echo $providerName;?></strong>
         <div class='panel-actions'>
-          <?php echo html::a('http://api.chanzhi.org/goto.php?item=help_' . $providerCode . 'oauth', '<i class="icon-question-sign"></i> ' . $lang->site->oauthHelp, "target='_blank' class='btn btn-link'");?>
+        <?php if($app->clientLang == 'zh-cn' or ($app->clientLang == 'en' and strpos('github,facebook', $providerCode) !== false)):?>
+        <?php $langParam = $app->clientLang == 'en' ? '&lang=en' : '';?>
+        <?php echo html::a('http://api.chanzhi.org/goto.php?item=help_' . $providerCode . 'oauth' . $langParam, '<i class="icon-question-sign"></i> ' . $lang->site->oauthHelp, "target='_blank' class='btn btn-link'");?>
+        <?php endif;?>
         </div>
       </div>
       <div class='panel-body'>
