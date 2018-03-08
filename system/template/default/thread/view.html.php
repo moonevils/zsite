@@ -11,7 +11,7 @@
  */
  *}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
-{include TPL_ROOT . 'common/kindeditor.html.php'}
+{include TPL_ROOT . 'common/ueditor.html.php'}
 
 {!js::set('viewReplies', $lang->thread->viewReplies)}
 {!js::set('stayCurrent', $lang->thread->stayCurrent)}
