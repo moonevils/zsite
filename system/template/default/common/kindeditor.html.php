@@ -1,4 +1,4 @@
-{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/kindeditor.html.php'))}
+{if($extView = $control->getExtViewFile(TPL_ROOT . 'common/ueditor.html.php'))}
   {include $extView;}
   {@return helper::cd();}
 {/if}

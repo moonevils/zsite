@@ -12,7 +12,7 @@
 /php*}
 {if($control->thread->hasManagePriv($control->app->user->account, $board->owners)) $config->thread->editor->editreply['tools'] = 'full'}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
-{include TPL_ROOT . 'common/kindeditor.html.php'}
+{include TPL_ROOT . 'common/ueditor.html.php'}
 {$common->printPositionBar($board, $thread)}
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
   <table class='table table-form'>
