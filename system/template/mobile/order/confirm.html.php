@@ -130,7 +130,7 @@
 <script>
 $(function()
 {
-    var addressBrowseLink = '{!helper::createLink('address', 'browse')}' + '#addressList';
+    var addressBrowseLink = '{!helper::createLink('address', 'browse')}' + ' #addressList';
     var orderBrowseLink   = '{!helper::createLink('order', 'browse')}'; 
     {noparse}
     $('[name=payment]').first().prop('checked', true);
