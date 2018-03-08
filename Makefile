@@ -58,6 +58,16 @@ zip:
 	chmod 777 chanzhieps/system/module/ui/theme
 	chmod a+rx chanzhieps/system/bin/*
 	#find chanzhieps/ -name ext |xargs chmod 777 -R
-	# zip it.
+	# zip zh.
 	zip -r -9 chanzhiEPS.$(VERSION).zip chanzhieps
+	#change favicon for english.
+	mv chanzhieps/www/favicon.en.ico chanzhieps/www/favicon.ico
+	#change default language as english.
+	sed -i "/^\$$config->default->lang/c \$$config->default->lang = 'en';" chanzhieps/system/config/config.php
+	sed -i "/^\$$config->defaultLang/c \$$config->defaultLang = 'en';" chanzhieps/system/config/chanzhieps.php
+	#set english license first.
+	sed -i '$$G;$$G' chanzhieps/system/doc/LICENSE
+	sed -i '1h;2,103H;1,105d;$$G' chanzhieps/system/doc/LICENSE
+	# zip en.
+	zip -r -9 chanzhiEPS.$(VERSION).en.zip chanzhieps
 	rm -fr chanzhieps

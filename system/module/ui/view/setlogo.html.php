@@ -47,7 +47,8 @@
         </span>
 
         <div class='text-important'>
-        <?php printf($lang->ui->faviconHelp, "http://api.chanzhi.org/goto.php?item=help_favicon");?>
+        <?php $langParam = $app->clientLang == 'en' ? '&lang=en' : '';?>
+        <?php printf($lang->ui->faviconHelp, "http://api.chanzhi.org/goto.php?item=help_favicon{$langParam}");?>
         </div>
         <div class='hide'><?php echo html::file('favicon', "class='form-control'");?></div>
         </div>
