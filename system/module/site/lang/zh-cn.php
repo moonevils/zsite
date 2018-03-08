@@ -102,6 +102,7 @@ $lang->site->setStat       = "流量统计设置";
 $lang->site->setHomeMenu   = "首页菜单";
 $lang->site->openModule    = "开启模块";
 $lang->site->setAgreement  = "设置注册协议";
+$lang->site->isVertified   = "已认证";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
