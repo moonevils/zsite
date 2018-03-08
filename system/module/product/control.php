@@ -116,7 +116,7 @@ class product extends control
      * @access public
      * @return void
      */
-    public function admin($categoryID = 0, $orderBy = 'order_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
+    public function admin($categoryID = '', $orderBy = 'order_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
     {   
         /* Set the session. */
         $this->session->set('productList', $this->app->getURI(true));
@@ -161,7 +161,7 @@ class product extends control
         {
             $productID = $this->product->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "categoryID=$categoryID")));
         }
 
         $maxID = $this->dao->select('max(id) as maxID')->from(TABLE_PRODUCT)->fetch('maxID');
