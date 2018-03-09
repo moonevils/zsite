@@ -32,7 +32,7 @@ class package extends control
                 $remoteReleases = $results->extensions;
                 foreach($remoteReleases as $release)
                 {
-                    if(!isset($packages[$release->code])) continue;
+                    if(!isset($release->code) or !isset($packages[$release->code])) continue;
 
                     $package = $packages[$release->code];
                     $package->viewLink = $release->viewLink;
