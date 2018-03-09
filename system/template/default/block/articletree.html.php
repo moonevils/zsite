@@ -48,3 +48,10 @@
     {/if}
   </div>
 </div>
+<script>
+$(document).ready(function()
+{
+    $('.tree .list-toggle').mousedown(function(){$(this).parents('.panel-block').height('auto');})
+    $('.row.blocks .tree').resize(function(){$(this).parents('.row.blocks').tidy({force: true});})
+})
+</script>
