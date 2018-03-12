@@ -48,11 +48,14 @@ zip:
 	# add header code to every php file.
 	sed -i '1i\{if(!defined("RUN_MODE"))} {!die()} {/if}' `find chanzhieps/system/template/ -name '*.html.php'`
 	sed -i '1i\<?php if(!defined("RUN_MODE")) die();?>' `find chanzhieps/system/module/ -name '*.php'`
+	# add cache directory for purifier.
+	mkdir -pv chanzhieps/system/lib/purifier/standalone/HTMLPurifier/DefinitionCache/Serializer/
 	# change mode.
 	chmod 777 -R chanzhieps/system/template
 	chmod 777 -R chanzhieps/system/tmp/
 	chmod 777 -R chanzhieps/www/data
 	chmod 777 -R chanzhieps/system/config
+	chmod 777 -R chanzhieps/system/lib/purifier/standalone/HTMLPurifier/DefinitionCache
 	chmod 777 chanzhieps/system/module
 	chmod 777 chanzhieps/system/module/package/ext
 	chmod 777 chanzhieps/system/module/ui/theme
