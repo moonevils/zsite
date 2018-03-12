@@ -14,9 +14,10 @@
 <div class='block-region region-top blocks' data-region='forum_index-top'>{$control->loadModel('block')->printRegion($layouts, 'forum_index', 'top')}</div>
 <div class='panel-section'>
   <div class='row'>
-    <div class='col-4'>{!html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board'],  "class='btn " . ($mode == 'board' ?  'primary' : 'default') . " block'")}</div> 
-    <div class='col-4'>{!html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest'], "class='btn " . ($mode == 'latest' ? 'primary' : 'default') . " block'")}</div> 
-    <div class='col-4'>{!html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick'],  "class='btn " . ($mode == 'stick' ?  'primary' : 'default') . " block'")}</div> 
+    {foreach($lang->forum->indexModeOptions as $modeCode => $modeName)}
+      {$class=($modeCode == $mode) ? 'primary' : ''}
+      <div class='col-4'>{!html::a(inlink('index', "mode=$modeCode"),  $modeName,  "class='btn $class block'")}</div> 
+    {/foreach}
   </div>
   {if($mode == 'latest')}
     <div class='cards cards-list condensed bordered'>
