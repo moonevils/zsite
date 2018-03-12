@@ -1581,6 +1581,7 @@ if(!function_exists('getJS'))
     public function importEffect($id)
     {
         $content = $this->loadModel('admin')->getByApi("effect-apigetpackage-{$id}.json");
+        if(empty($content)) return array('result' => 'fail', 'message' => $this->lang->ui->effectError); 
         $package = $this->app->getTmpRoot() . 'effect' . DS . 'effect_' . $id . '.zip';
         file_put_contents($package, $content);
         $result = $this->extractEffect($package, $id);
