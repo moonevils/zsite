@@ -56,11 +56,16 @@ class searchModel extends model
             ->orderBy('score_desc, editedDate_desc')
             ->page($pager)
             ->fetchAll('id');
+        
+        $objectIdList = array();
+        foreach($results as $result) $objectIdList[] = $result->objectID;
+
 
         $this->loadModel('file');
         $images = $this->dao->setAutoLang(false)->select('*')->from(TABLE_FILE)
             ->where('extension')->in($this->config->file->imageExtensions)
             ->andWhere('objectType')->in('article,product')
+            ->andWhere('objectID')->in($objectIdList)
             ->orderBy('`order`, editor_desc') 
             ->fetchGroup('objectID');
 
