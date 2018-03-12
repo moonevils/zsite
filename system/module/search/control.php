@@ -23,7 +23,8 @@ class search extends control
     {
         if(empty($words) and $this->get->words)
         {   
-            $words = urlencode($this->get->words);
+            $words = str_replace('-', '_', $this->get->words);
+            $words = urlencode($words);
             helper::header301(inlink('index', "words={$words}&pageID=$pageID"));
         }   
      
