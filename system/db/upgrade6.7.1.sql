@@ -7,8 +7,6 @@ ADD `stickTime` datetime NOT NULL AFTER `stick`,
 ADD `stickBold` enum('0', '1') NOT NULL DEFAULT '0' AFTER `stickTime`;
 
 ALTER TABLE `eps_statlog` 
-ADD KEY `time` (`year`,`month`,`day`,`hour`),
-ADD  KEY `location` (`country`,`province`,`city`),
 ADD  KEY `lang` (`lang`),
 ADD  KEY `month_lang` (`month`,`lang`),
 ADD  KEY `day_lang` (`day`,`lang`),
