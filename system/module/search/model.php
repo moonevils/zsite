@@ -77,17 +77,17 @@ class searchModel extends model
             $record->content = explode(' ', $record->content);
             foreach($record->title as $titleKey => $titleWord)
             {
-                if(strlen($titleWord) != 5) unset($record->title[$titleKey]);
+                if(is_numeric($titleWord) && strlen($titleWord) != 5) unset($record->title[$titleKey]);
             }
             foreach($record->content as $contentKey => $contentWord)
             {
-                if(strlen($contentWord) != 5) unset($record->content[$contentKey]);
+                if(is_numeric($contentWord) && strlen($contentWord) != 5) unset($record->content[$contentKey]);
             }
             $record->title   = implode(' ', $record->title);
             $record->content = implode(' ', $record->content);
 
             $record->title   = str_replace('</span> ', '</span>', $this->decode($this->markKeywords($record->title, $words)));
-            $record->title   = str_replace('_', '', $this->decode($this->markKeywords($record->title, $words)));
+            $record->title   = str_replace('_', '', $record->title);
             $record->summary = $this->getSummary($record->content, $words);
             $record->summary = str_replace('_', '', $record->summary);
 
@@ -292,12 +292,13 @@ class searchModel extends model
                 $words[$key] = strlen($word) == 5 ? str_replace('_', '', $word) : $word;
             }
 
-            $markedWords[] = "<span class='text-danger'>" . $this->decode($word) . "</span > ";
+            $markedWords[] = "[" . $this->decode($words[$key]) . "] ";
         }
 
         $content = str_replace($words, $markedWords, $content . ' ');
-        $content = str_replace("</span > <span class='text-danger'>", '', $content);
-        $content = str_replace("</span > ", '</span>', $content);
+        $content = str_replace("] [", '', $content);
+        $content = str_replace("[", "<span class='text-danger'>", $content);
+        $content = str_replace("] ", '</span>', $content);
 
         return $content;
     }
