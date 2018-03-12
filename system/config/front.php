@@ -62,8 +62,9 @@ $config->rights->guest['user']['agreement']     = 'agreement';
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';
 
-$config->rights->guest['file']['download']    = 'download';
-$config->rights->guest['file']['printfiles']  = 'printfiles';
+$config->rights->guest['file']['download']      = 'download';
+$config->rights->guest['file']['printfiles']    = 'printfiles';
+$config->rights->guest['file']['apiforueditor'] = 'apiforueditor';
 
 $config->rights->guest['errors']['index'] = 'index';
 
