@@ -477,10 +477,16 @@ CREATE TABLE IF NOT EXISTS `eps_statlog`(
   KEY `referer` (`referer`),
   KEY `searchEngine` (`searchEngine`),
   KEY `keywords` (`keywords`),
-  KEY `time` (`year`, `month`, `day`, `hour`),
-  KEY `location` (`country`, `province`, `city`),
+  KEY `time` (`year`,`month`,`day`,`hour`),
+  KEY `location` (`country`,`province`,`city`),
   KEY `mobile` (`mobile`),
-  KEY `lang` (`lang`)
+  KEY `lang` (`lang`),
+  KEY `month_lang` (`month`,`lang`),
+  KEY `day_lang` (`day`,`lang`),
+  KEY `hour_lang` (`hour`,`lang`),
+  KEY `osName` (`osName`),
+  KEY `browserName` (`browserName`),
+  KEY `year` (`year`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_statreport`;
