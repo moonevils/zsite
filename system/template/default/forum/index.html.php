@@ -2,10 +2,10 @@
 <div class='row blocks' data-grid='4' data-region='forum_index-top'>{$control->block->printRegion($layouts, 'forum_index', 'top', true)}</div>
 {$common->printPositionBar($control->app->getModuleName())}
 
-<ul class='nav nav-pills'>
-  <li {if($mode == 'board')}  {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=board"),  $lang->forum->indexModeOptions['board'])}</li>
-  <li {if($mode == 'latest')} {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest'])}</li>
-  <li {if($mode == 'stick')}  {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=stick"),  $lang->forum->indexModeOptions['stick'])}</li>
+<ul class='nav nav-secondary nav-nobottom'>
+  {foreach($lang->forum->indexModeOptions as $modeCode => $modeName)}
+  <li {if($mode == $modeCode)}  {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=$modeCode"),  $modeName)}</li>
+  {/foreach}
 </ul>
 {if($mode == 'latest' or $mode == 'stick')}
   <div class='panel'>
