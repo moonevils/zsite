@@ -27,7 +27,12 @@
     </tr>
     <tr class="{if($thread->stick == 0)} {!'hide'} {/if}">
       <th class='w-80px'>{$lang->thread->stickTime}</th>
-      <td>{!html::input('stickTime', formatTime($thread->stickTime), "class='form-control form-datetime'")}</td>
+      <td>
+        <div class='input-append date'>
+          {!html::input('stickTime', formatTime($thread->stickTime), "class='form-control form-datetime'")}
+          <span class='add-on'><button class='btn btn-default' type='button'><i class='icon-calendar'></i></button></span>
+        </div>
+      </td>
     </tr>
     <tr>
       <td></td>
