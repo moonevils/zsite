@@ -73,6 +73,19 @@ class searchModel extends model
 
         foreach($results as $record)
         {
+            $record->title   = explode(' ', $record->title);
+            $record->content = explode(' ', $record->content);
+            foreach($record->title as $titleKey => $titleWord)
+            {
+                if(strlen($titleWord) != 5) unset($record->title[$titleKey]);
+            }
+            foreach($record->content as $contentKey => $contentWord)
+            {
+                if(strlen($contentWord) != 5) unset($record->content[$contentKey]);
+            }
+            $record->title   = implode(' ', $record->title);
+            $record->content = implode(' ', $record->content);
+
             $record->title   = str_replace('</span> ', '</span>', $this->decode($this->markKeywords($record->title, $words)));
             $record->title   = str_replace('_', '', $this->decode($this->markKeywords($record->title, $words)));
             $record->summary = $this->getSummary($record->content, $words);
