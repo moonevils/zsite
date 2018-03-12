@@ -1,5 +1,6 @@
 <?php
 $config->product->recPerPage = 10;
+$config->product->browseType = 'card';
 
 $config->product->require = new stdclass();
 $config->product->require->create = 'categories, name, content';
