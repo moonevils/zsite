@@ -543,7 +543,7 @@ class packageModel extends model
         $groupedPaths = array();
         foreach($pathes as $path)
         {
-            if($path == "www/theme/{$themeInfo->template}/$themeInfo->code")
+            if(!empty($themeInfo->template) && $path == "www/theme/{$themeInfo->template}/$themeInfo->code")
             {
                 $installedThemes = $this->loadModel('ui')->getThemesByTemplate($themeInfo->template);
                 if(isset($installedThemes[$themeInfo->code]))
@@ -680,7 +680,7 @@ class packageModel extends model
      */
     public function copyPackageFiles($package, $type = 'ext')
     {
-        if($type == 'extension') $type = 'ext';
+        if($type != 'theme') $type = 'ext';
         $appRoot    = $this->app->getAppRoot();
         $packageDir = $type . DS . $package . DS;
 

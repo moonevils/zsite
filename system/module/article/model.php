@@ -242,16 +242,21 @@ class articleModel extends model
     { 
         $sticks = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
                 ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-                ->where('t1.sticky')->ne(0)
-                ->andWhere('t2.type')->eq($type)
+                ->where('t2.type')->eq($type)
                 ->andWhere('t1.stickTime', true)->ge(helper::now())
                 ->orWhere('t1.stickTime')->eq('0000-00-00 00:00:00')
                 ->markRight(1)
+
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
                 ->andWhere('t1.addedDate')->le(helper::now())
                 ->andWhere('t1.status')->eq('normal')
                 ->fi()
+
+                ->andWhere('t1.sticky', true)->eq(2)
+                ->orWhere('t1.sticky', true)->eq(1)
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+                ->markRight(2)
+
                 ->orderBy('sticky_desc, addedDate_desc')
                 ->fetchAll('id');
 

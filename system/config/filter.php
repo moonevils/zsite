@@ -76,7 +76,7 @@ $filter->file->filemanager->get['order'] = 'reg::character';
 $filter->file->filemanager->get['path']  = 'reg::/^[0-9]{6}\/+$/';
 
 $filter->file->apiforueditor = new stdclass();
-$filter->file->apiforueditor->get['action'] = 'equal::config';
+$filter->file->apiforueditor->get['action'] = 'reg::word';
 
 $filter->search->index = new stdclass();
 $filter->search->index->get['words'] = 'reg::any';
