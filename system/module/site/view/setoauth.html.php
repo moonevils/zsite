@@ -36,12 +36,12 @@
                   <?php if(isset($oauth->isVertified)):?> 
                     <?php echo html::input('verification', '', "class='form-control'");?>
                     <span class="input-group-addon">
-                      <?php echo "<input type='checkbox' name='isVertified' id='isVertified' value='1' checked='checked' /><span>{$lang->site->isVertified}</span>";?>
+                      <?php echo "<input type='checkbox' name='isVertified' id='isVertified' value='1' checked='checked' /> <span>{$lang->site->isVertified}</span>";?>
                     </span>
                   <?php else:?> 
                     <?php echo html::input('verification', isset($oauth->verification) ? $oauth->verification : '', "class='form-control'");?>
                     <span class="input-group-addon">
-                      <?php echo "<input type='checkbox' name='isVertified' id='isVertified' value='1' /><span>{$lang->site->isVertified}</span>";?>
+                      <?php echo "<input type='checkbox' name='isVertified' id='isVertified' value='1' /> <span>{$lang->site->isVertified}</span>";?>
                     </span>
                   <?php endif;?> 
                 </div>
