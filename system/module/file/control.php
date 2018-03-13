@@ -169,8 +169,10 @@ class file extends control
                     $file['width']  = $imageSize['width'];
                     $file['height'] = $imageSize['height'];
                 }
-                $file['addedBy']    = $this->app->user->account;
-                $file['addedDate']  = helper::today();
+                $file['addedBy']   = $this->app->user->account;
+                $file['addedDate'] = helper::today();
+                $file['editor']    = 1;
+                $file['lang']      = 'all';
                 unset($file['tmpname']);
                 $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
