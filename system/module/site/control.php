@@ -41,19 +41,17 @@ class site extends control
                 if($this->site->checkGzip()) $this->send(array('result' => 'fail', 'message' => $this->lang->site->gzipOn));
             }
 
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
-            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-
             /* Edit config->framework->detectDevice if mobile template closed. */
-            if($setting->mobileTemplate != $this->config->site->mobileTemplate)
+            $detectDevice = $setting->mobileTemplate == 'open' ? true : false;
+            if($detectDevice !== $this->config->framework->detectDevice[$this->app->clientLang])
             {
-                $deviceConfig = new stdclass;
-                $deviceConfig->detectDevice = $setting->mobileTemplate == 'open' ? true : false;
-
                 $result = $this->site->setSystem($deviceConfig);
                 if(isset($result['result']) and $result['result'] == 'fail') $this->send($result);
                 if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');
             }
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
