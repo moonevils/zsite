@@ -11,11 +11,11 @@
       <table class='table table-borderless'>
         <tr>
           {if(isset($publicList))}
-            {foreach(publicList as $public)}
+            {foreach($publicList as $public)}
               {if(!$public->qrcode)} {continue} {/if}
               <td>
-                <div class='heading'><i class='icon-weixin'>&nbsp;</i> {$value->name}</div>
-                {!html::image('javascript:;', "data-src='$public->qrcode' width='200' height='200'")}
+                <div class='heading'><i class='icon-weixin'>&nbsp;</i> {$public->name}</div>
+                {!html::image('data:image/png;base64', "data-src='$public->qrcode' width='200' height='200'")}
               </td>
             {/foreach}
           {/if}

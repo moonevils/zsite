@@ -81,7 +81,7 @@
         <td class='text-center'><?php echo $article->id;?></td>    
         <?php $bold = ($stick and $article->stickBold) ? 'font-weight: bold;' : '';?>
         <td title="<?php echo $article->title;?>" style="<?php echo $bold;?> color:<?php echo $article->titleColor;?>">
-          <?php if($stick):?><span class='red'><i class="icon icon-pushpin"></i></span><?php endif;?>
+          <?php if($stick):?><span class='red' title='<?php echo zget($lang->article->sticks, $article->sticky);?>'><i class="icon icon-pushpin"></i></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
           <?php echo $article->title;?>
         </td>

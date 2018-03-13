@@ -1,7 +1,6 @@
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 <div class='row blocks' data-grid='4' data-region='forum_index-top'>{$control->block->printRegion($layouts, 'forum_index', 'top', true)}</div>
 {$common->printPositionBar($control->app->getModuleName())}
-
 <ul class='nav nav-secondary nav-nobottom'>
   {foreach($lang->forum->indexModeOptions as $modeCode => $modeName)}
   <li {if($mode == $modeCode)}  {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=$modeCode"),  $modeName)}</li>
