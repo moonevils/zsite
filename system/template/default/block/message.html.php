@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 */php*}
-{$app->loadLang('message')}
+{@$app->loadLang('message')}
 
 <div id="block{!echo $block->id}" class='panel-block-message panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'><strong>{!echo $icon . $block->title}</strong></div>
@@ -75,7 +75,7 @@ $(document).ready(function()
                 $('#blockCaptchaBox').html(Base64.decode(response.captcha)).show();
             }
         }   
-        {else}
+        else
         {
            location.href=createLink('message', 'index'); 
         }
