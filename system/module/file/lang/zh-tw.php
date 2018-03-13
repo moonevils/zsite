@@ -88,7 +88,7 @@ $lang->file->invalidParameter = '參數無效。';
 $lang->file->unWritable       = '目錄不可寫或不存在。';
 $lang->file->uploadForbidden  = '附件上傳功能已禁用。';
 $lang->file->sizeLimit        = "<p class='text-danger'>附件大小不能大於%sM</p>";
-$lang->file->sameName         = "已存在同名檔案，如果繼續將覆蓋原檔案。";
+$lang->file->sameName         = "已存在同名檔案，更改失敗。";
 $lang->file->nameEmpty        = "檔案名不能為空";
 $lang->file->copySuccess      = "已複製到剪貼板";
 $lang->file->evilChar         = "包含非法字元";
