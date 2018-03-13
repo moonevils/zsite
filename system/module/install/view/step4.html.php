@@ -30,10 +30,12 @@
           <label for='password' class='col-xs-2 control-label'><?php echo $lang->install->password;?></label>
           <div class='col-xs-8'><?php echo html::input('password', '', "class='form-control'");?></div>
         </div>
+        <?php if($this->app->clientLang != 'en'):?>
         <div class='form-group'>
           <label class='col-xs-2'></label>
           <div class='col-xs-8'><?php echo html::checkBox('importDemoData', $lang->install->importDemoData);?></div>
         </div>
+        <?php endif;?>
       </div>
       <div class='modal-footer'><?php echo html::submitButton();?></div>
       <?php endif; ?>
