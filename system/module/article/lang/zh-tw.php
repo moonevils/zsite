@@ -113,6 +113,8 @@ $lang->article->sticks[0] = '不置頂';
 $lang->article->sticks[1] = '類目置頂';
 $lang->article->sticks[2] = '全局置頂';
 
+$lang->article->stickTime      = '結束時間';
+$lang->article->stickBold      = '標題加粗';
 $lang->article->successStick   = '置頂成功';
 $lang->article->successUnstick = '取消置頂成功';
 

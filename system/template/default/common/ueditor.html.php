@@ -79,3 +79,6 @@ function initUeditor(afterInit)
 }
 $(document).ready(initUeditor);
 </script>
+<style>
+.edui-editor-iframeholder{min-height:180px;}
+</style>
