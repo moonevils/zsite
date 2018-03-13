@@ -11,7 +11,7 @@
       <table class='table table-borderless'>
         <tr>
           {if(isset($publicList))}
-            {foreach(publicList as $public)}
+            {foreach($publicList as $public)}
               {if(!$public->qrcode)} {continue} {/if}
               <td>
                 <div class='heading'><i class='icon-weixin'>&nbsp;</i> {$value->name}</div>
