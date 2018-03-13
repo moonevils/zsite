@@ -56,11 +56,12 @@ function initUeditor(afterInit)
         serverUrl: '<?php echo $this->createLink('file', 'apiforueditor', "uid=$uid")?>',
         autoClearinitialContent: false,
         wordCount: false,
+        initialStyle: 'p{line-height:1em}.edui-upload-video{background:url(\'<?php echo $jsRoot?>ueditor/themes/default/images/videologo.gif\') no-repeat center center; border:1px solid gray;}',
         <?php if($editorLang != 'zh-cn' and $editorLang != 'zh-tw') echo "iframeCssUrl:'',"; //When lang is zh-cn or zh-tw then load ueditor/themes/iframe.css file for font-family and size of editor.?>
         enableAutoSave: false,
         elementPathEnabled: false,
         initialFrameWidth: '100%',
-        zIndex: 5
+        zIndex: 5 
     };
     if(!window.editor) window.editor = {};
     $.each(editor.id, function(key, editorID)
@@ -73,11 +74,15 @@ function initUeditor(afterInit)
             
             ueditor.addListener('ready', function()
             {
+                console.log('this.container', this.container);
                 $(this.container).parent().removeClass('form-control');
             });
             ueditor.addListener('fullscreenchanged', function(e, fullscreen)
             {
-                $(this.container).css('z-index', fullscreen ? 1050 : 5);
+                var $container = $(this.container).css('z-index', fullscreen ? 1050 : 5);
+                if (fullscreen && window.navigator.userAgent.indexOf('Firefox') > -1) {
+                    $container.css('top', 0);
+                }
             });
         }
     });
