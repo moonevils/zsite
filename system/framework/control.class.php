@@ -685,6 +685,7 @@ class control extends baseControl
             $this->app->cache->set($key, $pageJS);
         }
 
+        if(strpos($pageJS, 'editors') !== false) $this->config->site->updatedTime = uniqid('v');
         $sourceURL  = helper::createLink('source', 'js', "page=$page&version={$this->config->site->updatedTime}", '', 'html');
         $importHtml =  "<script src='{$sourceURL}' type='text/javascript'></script>\n";
 
