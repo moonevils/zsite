@@ -113,6 +113,8 @@ $lang->article->sticks[0] = 'No Sticky';
 $lang->article->sticks[1] = 'Categorical';
 $lang->article->sticks[2] = 'Global';
 
+$lang->article->stickTime      = 'Top End Time';
+$lang->article->stickBold      = 'Title Bold';
 $lang->article->successStick   = 'Sticky!';
 $lang->article->successUnstick = 'Sticky cancelled!';
 
