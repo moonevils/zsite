@@ -46,7 +46,7 @@ $.extend(
                     var container = submitButton.data('popoverContainer');
                     if(container === undefined) container = 'body';
                     submitButton.popover({container: container, trigger:'manual', content:message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-' + type + ' popover-ajaxform'}).popover('show');
-                    setTimeout(function(){submitButton.popover('destroy');}, 3000);
+                    setTimeout(function(){submitButton.popover('destroy');}, 2000);
                 };
 
                 /* The response.result is success. */
