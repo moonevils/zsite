@@ -161,7 +161,9 @@ class product extends control
         {
             $productID = $this->product->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "categoryID=$categoryID")));
+
+            $currentCategoryID = current($this->post->categories);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "categoryID=$currentCategoryID")));
         }
 
         $maxID = $this->dao->select('max(id) as maxID')->from(TABLE_PRODUCT)->fetch('maxID');
