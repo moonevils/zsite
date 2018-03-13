@@ -27,7 +27,10 @@
     </tr>
     <tr>
       <th></th>
-      <td><?php echo html::submitButton()?></td>
+      <td>
+        <?php echo html::submitButton();?>
+        <span id='responser' class='alert alert-danger hide'></span>
+      </td>
     </tr>
   </table>
 </form>
