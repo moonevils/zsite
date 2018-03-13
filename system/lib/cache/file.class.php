@@ -46,6 +46,7 @@ class fileCache extends cache
      */
     public function set($key, $value)
     {
+        if(strpos($key, '..') !== false) return false;
         $cacheFile = $this->config->savePath . strtolower($key) . '.' .  zget($this->config, 'cacheExtension', 'php');
         if(!is_dir(dirname($cacheFile))) mkdir(dirname($cacheFile), 0777, true);
         file_put_contents($cacheFile, $value);
@@ -60,6 +61,7 @@ class fileCache extends cache
      */
     public function get($key)
     {
+        if(strpos($key, '..') !== false) return false;
         $cacheFile = $this->config->savePath . $key . '.' .  zget($this->config, 'cacheExtension', 'php');
         if(!file_exists($cacheFile)) return false;
         if($this->expired and  (time() - filemtime($cacheFile) > $this->expired)) return false;
@@ -75,6 +77,7 @@ class fileCache extends cache
      */
     public function clear($key)
     {
+        if(strpos($key, '..') !== false) return false;
         $cacheItems = glob($this->config->savePath . strtolower($key));
         foreach($cacheItems as $cacheItem) 
         {
