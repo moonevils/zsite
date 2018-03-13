@@ -355,7 +355,7 @@ class router extends baseRouter
                         }
                     }
                     
-                    $keywords   = ($this->getModuleName() == 'search') ? $this->session->serachIngWord : '';
+                    $keywords   = ($this->getModuleName() == 'search') ? $this->session->searchIngWord : '';
                     $searchHtml = html::input('words', $keywords, "class='form-control' placeholder=''");
                     $cache      = str_replace($this->config->searchWordPlaceHolder, $searchHtml, $cache);
 

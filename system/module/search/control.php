@@ -29,6 +29,8 @@ class search extends control
         }   
      
         $words = urldecode($words);
+        $this->session->set('searchIngWord', $words);
+
         $words = str_replace('"', '', $words);
         $words = str_replace("'", '', $words);
         $words = strip_tags(strtolower($words));
