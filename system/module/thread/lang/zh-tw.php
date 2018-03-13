@@ -41,6 +41,8 @@ $lang->thread->deleteFile     = '刪除附件';
 $lang->thread->unreplied      = "<span class='text-important'>未回覆</span>";
 $lang->thread->quote          = '引用';
 $lang->thread->latest         = '最新帖子';
+$lang->thread->stickTime      = '結束時間';
+$lang->thread->stickBold      = '標題加粗';
 
 $lang->thread->sticks[0] = '不置頂';
 $lang->thread->sticks[1] = '版塊置頂';
