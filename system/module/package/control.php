@@ -254,6 +254,8 @@ class package extends control
         if($agreeLicense == 'no')
         {
             $packageInfo = $this->package->getInfoFromPackage($package);
+            $packageInfo->license = strtolower($packageInfo->license);
+            if((strpos($packageInfo->license, 'zpl') !== 'false') or (strpos($packageInfo->license, 'chanzhi' !== 'false'))) $packageInfo->license = 'zpl';
             $license     = $this->package->processLicense($packageInfo->license);
             $agreeLink   = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=$overridePackage&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=yes&upgrade=$upgrade");
 
