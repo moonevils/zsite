@@ -11,7 +11,7 @@
 */
 *}
 {$block->content = json_decode($block->content)}
-{$model->loadModel('nav')}
+{@$model->loadModel('nav')}
 {$navs = $block->content->nav}
 <div id="block{!echo $block->id}" class='panel panel-block {!echo $blockClass}'>
   <div class='panel-heading'>
