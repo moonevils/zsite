@@ -975,7 +975,7 @@ class fileModel extends model
             $fileURL['extension']  = $file['extension'];
             $fileURL['objectType'] = $data; 
 
-            $data = str_replace($out[1][$key], $this->printFileURL($fileURL));
+            $data = str_replace($out[1][$key], $this->printFileURL($fileURL), $data);
         }
 
         return $data;
