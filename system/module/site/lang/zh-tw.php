@@ -102,6 +102,7 @@ $lang->site->setStat       = "流量統計設置";
 $lang->site->setHomeMenu   = "首頁菜單";
 $lang->site->openModule    = "開啟模組";
 $lang->site->setAgreement  = "設置註冊協議";
+$lang->site->isVertified   = "已認證";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企業門戶';

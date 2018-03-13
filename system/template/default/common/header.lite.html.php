@@ -9,7 +9,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-Control"  content="no-transform">
+  {if($app->getClientLang() == 'en')}
+  <meta name="Generator" content="Zsite{$config->version} www.zsite.net'">
+  {else}
   <meta name="Generator" content="chanzhi{$config->version} www.chanzhi.org'">
+  {/if}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {if(isset($mobileURL))}
     <link rel="alternate" media="only screen and (max-width: 640px)" href="{$sysURL}/{$mobileURL}">
