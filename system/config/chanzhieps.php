@@ -1,5 +1,5 @@
 <?php
-$config->version    = '6.7.1';            // The version of ChanzhiEPS. Don't change it. 
+$config->version    = '7.0';              // The version of ChanzhiEPS. Don't change it. 
 
 $config->cookiePath  = '/';               // The path of cookies.
 $config->multi       = false;             // The config of multi site.
