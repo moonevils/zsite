@@ -374,7 +374,7 @@ class packageModel extends model
     {
         if(strlen($license) > 10) return $license;    // more then 10 letters, not zpl, gpl, lgpl, apache, bsd or mit.
 
-        $licenseFile = dirname(__FILE__) . '/license/' . strtolower($license) . '.txt';
+        $licenseFile = dirname(__FILE__) . '/license/' . $license . '.txt';
         if(file_exists($licenseFile)) return file_get_contents($licenseFile);
 
         return $license;
