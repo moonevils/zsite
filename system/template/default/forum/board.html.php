@@ -1,10 +1,10 @@
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 <div class='row blocks' data-grid='4' data-region='forum_board-top'>{$control->block->printRegion($layouts, 'forum_board', 'top', true)}</div>
+<ul class='nav nav-secondary nav-nobottom'>
 {$common->printPositionBar($board)}
-<ul class='nav nav-pills'>
-  <li class='active'>{!html::a(inlink('index', "mode=board"), $lang->forum->indexModeOptions['board'])}</li>
-  <li>{!html::a(inlink('index', "mode=latest"), $lang->forum->indexModeOptions['latest'])}</li>
-  <li>{!html::a(inlink('index', "mode=stick"), $lang->forum->indexModeOptions['stick'])}</li>
+  {foreach($lang->forum->indexModeOptions as $modeCode => $modeName)}
+  <li {if($modeCode == 'board')}  {!echo "class='active'"} {/if}>{!html::a(inlink('index', "mode=$modeCode"),  $modeName)}</li>
+  {/foreach}
 </ul>
 <div class='panel'>
   <div class='panel-heading'>
