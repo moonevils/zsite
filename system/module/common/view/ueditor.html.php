@@ -56,7 +56,7 @@ function initUeditor(afterInit)
         serverUrl: '<?php echo $this->createLink('file', 'apiforueditor', "uid=$uid")?>',
         autoClearinitialContent: false,
         wordCount: false,
-        initialStyle: 'p{line-height:1em}.edui-upload-video{background:url(\'<?php echo $jsRoot?>ueditor/themes/default/images/videologo.gif\') no-repeat center center; border:1px solid gray;}',
+        initialStyle: 'p{line-height:1em}embed,.edui-upload-video,.edui-faked-video{background:url(\'<?php echo $jsRoot?>ueditor/themes/default/images/videologo.gif\') no-repeat center center; border:1px solid gray;}',
         <?php if($editorLang != 'zh-cn' and $editorLang != 'zh-tw') echo "iframeCssUrl:'',"; //When lang is zh-cn or zh-tw then load ueditor/themes/iframe.css file for font-family and size of editor.?>
         enableAutoSave: false,
         elementPathEnabled: false,
