@@ -41,6 +41,8 @@ $lang->thread->deleteFile     = 'Delete File';
 $lang->thread->unreplied      = "<span class='text-important'> Not Replied</span>";
 $lang->thread->quote          = 'Quote';
 $lang->thread->latest         = 'Latest';
+$lang->thread->stickTime      = 'Top End Time';
+$lang->thread->stickBold      = 'Title Bold';
 
 $lang->thread->sticks[0] = 'No Sticky';
 $lang->thread->sticks[1] = 'Sticky';
