@@ -12,6 +12,11 @@
 class fileCache extends cache
 {
     /**
+     *  Header content.
+     */
+    const PREFIX_CODE = "<?php if(!defined('RUN_MODE')) die();?>";
+
+    /**
      * Set config params.
      * 
      * @param  object    $config 
@@ -47,6 +52,7 @@ class fileCache extends cache
     public function set($key, $value)
     {
         if(strpos($key, '..') !== false) return false;
+        $value = self::PREFIX_CODE . $value;
         $cacheFile = $this->config->savePath . strtolower($key) . '.' .  zget($this->config, 'cacheExtension', 'php');
         if(!is_dir(dirname($cacheFile))) mkdir(dirname($cacheFile), 0777, true);
         file_put_contents($cacheFile, $value);
@@ -65,7 +71,8 @@ class fileCache extends cache
         $cacheFile = $this->config->savePath . $key . '.' .  zget($this->config, 'cacheExtension', 'php');
         if(!file_exists($cacheFile)) return false;
         if($this->expired and  (time() - filemtime($cacheFile) > $this->expired)) return false;
-        return file_get_contents($cacheFile);
+        $content = file_get_contents($cacheFile);
+        return str_replace(self::PREFIX_CODE, '', $content);
     }
     
     /**
