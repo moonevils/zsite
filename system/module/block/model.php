@@ -407,7 +407,7 @@ class blockModel extends model
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         if($grade == 2) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus-child'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit loadInModal'");
+        $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit loadInModal' id='edit{$blockID}' ");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addRandom, "class='btn-add-random'");
         $entry .= '</div>';

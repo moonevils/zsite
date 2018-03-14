@@ -65,8 +65,9 @@ $(document).ready(function()
         }
     });
 
-    $(document).on('click', '.loadInModal.edit', function()
+    $(document).on('click', '.loadInModal', function()
     {
+        if($(this).attr('id') == 'edit') return false;
         $('#ajaxModal').load($(this).attr('href'), function(){ $.ajustModalPosition('fit', '#ajaxModal');});
         return false;
     });

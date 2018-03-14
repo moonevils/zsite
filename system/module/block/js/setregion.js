@@ -32,6 +32,7 @@ $(document).ready(function()
     $(document).on('change', 'select.block', function()
     {
         $(this).parents('.block-item').find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).find('option:selected').val()));
+        $(this).parents('.block-item').find('.edit').attr('id', 'edit' + $(this).find('option:selected').val());
     });
 
     $('#blockList').on('click', '.plus, .plus-child, .btn-add-child, .btn-add-random', function()
