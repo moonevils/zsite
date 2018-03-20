@@ -61,7 +61,10 @@ function initUeditor(afterInit)
         enableAutoSave: false,
         elementPathEnabled: false,
         initialFrameWidth: '100%',
-        zIndex: 5 
+        zIndex: 5,
+        removeFormatTags: 'big,dfn,font,ins,strike,tt,u',
+        removeFormatAttributes: 'lang,hspace',
+        allowDivTransToP: false
     };
     if(!window.editor) window.editor = {};
     $.each(editor.id, function(key, editorID)
