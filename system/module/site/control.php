@@ -43,8 +43,11 @@ class site extends control
 
             /* Edit config->framework->detectDevice if mobile template closed. */
             $detectDevice = $setting->mobileTemplate == 'open' ? true : false;
-            if($detectDevice !== $this->config->framework->detectDevice[$this->app->clientLang])
+            if($detectDevice != $this->config->framework->detectDevice[$this->app->clientLang])
             {
+                $deviceConfig = new stdclass;
+                $deviceConfig->detectDevice = $detectDevice;
+
                 $result = $this->site->setSystem($deviceConfig);
                 if(isset($result['result']) and $result['result'] == 'fail') $this->send($result);
                 if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');
