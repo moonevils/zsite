@@ -72,5 +72,6 @@ zip:
 	sed -i '$$G;$$G' chanzhieps/system/doc/LICENSE
 	sed -i '1h;2,103H;1,105d;$$G' chanzhieps/system/doc/LICENSE
 	# zip en.
-	zip -r -9 zsite.$(VERSION).zip chanzhieps
-	rm -fr chanzhieps
+	mv chanzhieps zsite
+	zip -r -9 zsite.$(VERSION).zip zsite
+	rm -fr zsite
