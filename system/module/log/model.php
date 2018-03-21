@@ -185,7 +185,9 @@ class logModel extends model
         $log->hour     = $hour;
         $log->new      = $visitor->new ? 1 : 0;
         $log->mobile   = $this->app->clientDevice == 'mobile' ? 1 : 0;
+
         $this->dao->insert(TABLE_STATLOG)->data($log)->exec();
+        $log->id = $this->dao->lastInsertID();
 
         /* Save basic report data. */
         $this->saveReportItem('basic', 'total', $time, $log);
@@ -230,16 +232,18 @@ class logModel extends model
     {
         $ipAndUv = new stdclass();
         $ipAndUv->ip = 0;
-        $ipAndUv->uv = 0;
+        $ipAndUv->uv = $log->new ? 1 : 0;
+
+        if($timeType == 'year') return $ipAndUv;
 
         $allowedTypes = array('basic', 'search', 'keywords', 'os', 'url', 'domain', 'browser', 'from', 'device');
         if(!in_array($type, $allowedTypes)) return $ipAndUv;
 
-        if($timeType == 'year') return $ipAndUv;
-
-        $ipAndUv = $this->dao->select('count(distinct(ip)) as ip, count(distinct(visitor)) as uv')
+        $ipCount = $this->dao->select('count(*) as count')
             ->from(TABLE_STATLOG)
             ->where($timeType)->eq($timeValue)
+            ->andWhere('id')->ne($log->id)
+            ->andWhere('ip')->eq($log->ip)
 
             ->beginIF($type == 'basic' and $item == 'return')
             ->andWhere('new')->eq(0)
@@ -294,14 +298,9 @@ class logModel extends model
             ->andWhere('searchEngine')->ne('')
             ->fi()
 
-            ->fetch();
+            ->fetch('count');
 
-        if(empty($ipAndUv))
-        {
-            $ipAndUv = new stdclass();
-            $ipAndUv->ip = 0;
-            $ipAndUv->uv = 0;
-        }
+        $ipAndUv->ip = $ipCount == 0 ? 1 : 0;
 
         return $ipAndUv;
     }
@@ -334,8 +333,8 @@ class logModel extends model
 
                 $this->dao->update(TABLE_STATREPORT)
                     ->set('pv = pv + 1')
-                    ->set('ip')->eq($ipAndUv->ip)
-                    ->set('uv')->eq($ipAndUv->uv)
+                    ->set("ip= ip + {$ipAndUv->ip}")
+                    ->set("uv= uv + {$ipAndUv->uv}")
                     ->where('id')->eq($oldReport->id)
                     ->exec();
             }
@@ -428,4 +427,5 @@ class logModel extends model
         $this->dao->delete()->from(TABLE_STATLOG)->where('day')->lt($date)->exec();
         return !dao::isError();
     }
+
 }
