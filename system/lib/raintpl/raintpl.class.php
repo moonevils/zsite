@@ -1132,7 +1132,12 @@ class RainTPL
                 // if is an assignment also assign the variable to $this->var['value']
                 if($is_init_variable)
                 {
-                    if(strpos($var, '->') === false) $extraVar = "=\$this->var['{$varName}']{$variablePath}" . $extraVar;
+                    if(strpos($var, '[') === false and strpos($var, '->') === false) $extraVar = "=\$this->var['{$varName}']{$variablePath}" . $extraVar;
+                    if(strpos($array['extraVar'], '[') === 0)
+                    {
+                        $objectVar = '$this->var' . "['$varName'] = " . '$' . $varName;
+                        $extraVar  = $array['extraVar'] . ';' . $objectVar;
+                    }
                     if(strpos($var, '->') !== false)
                     {
                         $objectVar = '$this->var' . "['$varName'] = " . '$' . $varName;
