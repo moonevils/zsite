@@ -1,4 +1,4 @@
- <?php 
+<?php
 $lang->admin->common        = 'Admin';
 $lang->admin->index         = 'Home';
 $lang->admin->checked       = 'Checked';
