@@ -868,10 +868,10 @@ class packageModel extends model
         if(!file_exists($dbFile)) return $return;
 
         $this->app->loadClass('zdb');
-        $sqls = file_get_contents($this->getDBFile($package, $method, $type));
+        $sqls = file_get_contents($dbFile);
         $sqls = explode(zdb::LINE_ENDER, $sqls);
 
-        $ignoreCode   = '|1050|1060|1062|1091|1169|1061|';
+        $ignoreCode = '|1050|1060|1062|1091|1169|1061|';
         foreach($sqls as $sql)
         {
             if(empty($sql)) continue;
