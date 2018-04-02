@@ -118,7 +118,7 @@
       {$attributeHtml}
     {/if}
     {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate)}
-      {if($stockOpened or $product->amount > 0)}
+      {if(!$stockOpened or $product->amount > 0)}
       <tr>
         <th>{$lang->product->count}</th>
         <td>
