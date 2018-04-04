@@ -77,6 +77,8 @@ $filter->file->filemanager->get['path']  = 'reg::/^[0-9]{6}\/+$/';
 
 $filter->file->apiforueditor = new stdclass();
 $filter->file->apiforueditor->get['action'] = 'reg::word';
+$filter->file->apiforueditor->get['start']  = 'reg::number';
+$filter->file->apiforueditor->get['size']   = 'reg::number';
 
 $filter->search->index = new stdclass();
 $filter->search->index->get['words'] = 'reg::any';
