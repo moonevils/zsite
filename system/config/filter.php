@@ -120,6 +120,8 @@ $filter->user->oauthcallback->get['code']    = 'reg::base64';
 $filter->user->oauthcallback->get['referer'] = 'reg::base64';
 $filter->user->delete->get['admin']          = 'reg::number';
 $filter->user->batchdelete->get['admin']     = 'reg::number';
+$filter->user->register->cookie['referer']   = 'reg::any';
+$filter->user->register->cookie['guestid']   = 'reg::any';
 
 $filter->message->default = new stdclass();
 $filter->message->default->cookie['cmts'] = 'reg::any';
