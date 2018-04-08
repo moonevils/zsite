@@ -1,4 +1,4 @@
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'header.modal');?>
+<?php include $app->getModuleRoot() . 'common/view/header.modal.html.php';?>
 <form method='post' action='<?php echo inlink('checkMobile');?>' id='ajaxForm'>
   <table class='table table-form'>
     <tr>
@@ -16,4 +16,4 @@
     </tr>
   </table>
 </form>
-<?php include $this->loadModel('ui')->getEffectViewFile('default', 'common', 'footer.modal');?>
+<?php include $app->getModuleRoot() . 'common/view/footer.modal.html.php';?>
