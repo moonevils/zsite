@@ -28,7 +28,9 @@ $(document).ready(function()
             }
             else
             {
-                setTimeout(function(){ location.href = response.locate;}, 1200);
+                $('#submit').popover({container: 'body', trigger:'manual', content:response.replySuccess, placement: 'right', tipClass: 'popover-success  popover-ajaxform'}).popover('show');
+                setTimeout(function(){$('#submit').popover('destroy');}, 2000);
+                setTimeout(function(){location.href = response.locate;}, 1200);
             }
         }
         else
