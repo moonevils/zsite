@@ -60,7 +60,6 @@ class searchModel extends model
         $objectIdList = array();
         foreach($results as $result) $objectIdList[] = $result->objectID;
 
-
         $this->loadModel('file');
         $images = $this->dao->setAutoLang(false)->select('*')->from(TABLE_FILE)
             ->where('extension')->in($this->config->file->imageExtensions)
