@@ -740,6 +740,8 @@ class baseDAO
             $recTotal = $this->count($distinctField);
             $pager->setRecTotal($recTotal);
             $pager->setPageTotal();
+
+            if($pager->pageID > $pager->pageTotal) $pager->pageID = 1;
         }
         $this->sqlobj->limit($pager->limit());
         return $this;
