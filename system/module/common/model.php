@@ -332,6 +332,7 @@ class commonModel extends model
         if($module == 'source' and $method == 'js') return true;
         if($module == 'source' and $method == 'css') return true;
         if($module == 'sitemap' and $method == 'index') return true;
+        if($module == 'file' and $method == 'apiforueditor') return true;
         if(RUN_MODE == 'admin' and $this->app->user->admin != 'no' and isset($this->config->rights->admin[$module][$method])) return true;
         if(RUN_MODE == 'admin' and $module == 'farm' and $method == 'register') return true;
         if(RUN_MODE == 'admin' and $module == 'farm' and (strpos($method, 'api') !== false)) return true;
