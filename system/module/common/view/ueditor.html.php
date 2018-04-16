@@ -21,6 +21,7 @@ js::set('kuid', $uid);
 .edui-editor-toolbarbox[style*="fixed"] {top: 41px!important;}
 </style>
 <script>
+window.UEDITOR_HOME_URL = '<?php echo $this->config->webRoot . 'js/ueditor/' ?>';
 var editor = <?php echo json_encode($editor);?>;
 var simple = [[
     'paragraph', 'fontfamily', 'fontsize', 'lineheight', '|',
