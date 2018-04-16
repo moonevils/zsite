@@ -31,11 +31,15 @@
   </tr>
   <tr>
     <th class='w-130px'><?php echo $lang->widget->title?></th>
-    <td><?php echo html::input('title', zget($lang->widget->typeList, $type, ''), "class='form-control w-300px'")?></td>
+    <td colspan='2'>
+      <?php echo html::input('title', zget($lang->widget->typeList, $type, ''), "class='form-control'")?>
+      <?php echo html::hidden('type', $type);?>
+    </td>
+    <td></td>
   </tr>
   <tr>
     <th><?php echo $lang->widget->style;?></th>
-    <td>
+    <td class='w-250px'>
       <div class='w-240px'>
         <div class='input-group'>
           <span class='input-group-addon'><?php echo $lang->widget->grid;?></span>
@@ -57,13 +61,13 @@
         </div>
       </div>
     </td>
+    <td></td>
   </tr>
   <?php if(file_exists(strtolower($type) . '.form.html.php')) include strtolower($type) . '.form.html.php';?>
   <tr>
     <th></th>
     <td>
       <?php echo html::submitButton();?>
-      <?php echo html::hidden('type', $type);?>
     </td>
   </tr>
 </table>

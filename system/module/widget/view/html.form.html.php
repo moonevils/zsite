@@ -15,7 +15,7 @@
 <?php include '../../common/view/ueditor.html.php';?>
 <tr>
   <th><?php echo $lang->widget->content;?></th>
-  <td>
-  <textarea class='form-control w-400px' name='params[content]' id="content" rows='10'><?php if(isset($widget)) echo $widget->params->content?></textarea>
+  <td colspan='2'>
+  <textarea class='form-control' name='params[content]' id="content" rows='10'><?php if(isset($widget)) echo $widget->params->content?></textarea>
   </td>
 </tr>
