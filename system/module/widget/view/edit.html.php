@@ -14,7 +14,7 @@
 <form action="<?php echo inlink('edit', "id=$widget->id");?>" method='post' id='ajaxForm'>
 <table class='table table-form'>
   <tr>
-    <th class='w-130px'><?php echo $lang->widget->type; ?></th>
+    <th class='w-80px'><?php echo $lang->widget->type; ?></th>
     <td>
       <div class="dropdown">
       <button data-toggle="dropdown" type="button" class="btn dropdown-toggle" style="width:<?php echo $this->app->clientLang == 'en' ? '148px' : '92px';?>">
@@ -30,12 +30,12 @@
     </td>
   </tr>
   <tr>
-    <th class='w-130px'><?php echo $lang->widget->title?></th>
-    <td><?php echo html::input('title', $widget->title, "class='form-control w-300px'")?></td>
+    <th><?php echo $lang->widget->title?></th>
+    <td colspan='2'><?php echo html::input('title', $widget->title, "class='form-control'")?></td>
   </tr>
   <tr>
     <th><?php echo $lang->widget->style;?></th>
-    <td>
+    <td class='w-250px'>
       <div class='w-240px'>
         <div class='input-group'>
           <span class='input-group-addon'><?php echo $lang->widget->grid;?></span>
@@ -58,6 +58,7 @@
         </div>
       </div>
     </td>
+    <td></td>
   </tr>
   <?php if(file_exists(strtolower($type) . '.form.html.php')) include strtolower($type) . '.form.html.php';?>
   <tr>
