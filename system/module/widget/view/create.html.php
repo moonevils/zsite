@@ -14,7 +14,7 @@
 <form action="<?php echo inlink('create', "type={$type}");?>" method='post' id='ajaxForm'>
 <table class='table table-form'>
   <tr>
-    <th class='w-130px'><?php echo $lang->widget->type; ?></th>
+    <th class='w-80px'><?php echo $lang->widget->type; ?></th>
     <td>
       <div class="dropdown">
       <button data-toggle="dropdown" type="button" class="btn dropdown-toggle" style="width:<?php echo $this->app->clientLang == 'en' ? '148px' : '92px';?>">
@@ -30,7 +30,7 @@
     </td>
   </tr>
   <tr>
-    <th class='w-130px'><?php echo $lang->widget->title?></th>
+    <th><?php echo $lang->widget->title?></th>
     <td colspan='2'>
       <?php echo html::input('title', zget($lang->widget->typeList, $type, ''), "class='form-control'")?>
       <?php echo html::hidden('type', $type);?>
