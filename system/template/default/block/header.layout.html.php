@@ -29,7 +29,7 @@
       {if($setting->top->left == 'slogan')}
         <div id='siteSlogan' class='nobr'><span>{$config->site->slogan}</span></div>
       {elseif($setting->topLeftContent)}
-        <div class='nobr'><span>{!htmlspecialchars_decode($setting->topLeftContent, ENT_QUOTES)}</span></div>
+        <div class='nobr pull-left'><span>{!htmlspecialchars_decode($setting->topLeftContent, ENT_QUOTES)}</span></div>
       {/if}
       {if($setting->top->right == 'loginAndSearch')}
         {include $model->loadModel('ui')->getEffectViewFile('default', 'block', 'searchbar')}
