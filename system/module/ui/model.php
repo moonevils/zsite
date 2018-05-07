@@ -1493,7 +1493,7 @@ if(!function_exists('getJS'))
      */
     public function getThemesAvailable()
     {
-        $packages = glob($this->app->getTmpRoot() . 'package' . DS . '*.zip');
+        $packages = glob($this->app->getTmpRoot() . 'package' . DS . '*');
         $themes   = array();
 
         foreach($packages as $package)
