@@ -11,6 +11,7 @@
  */
 $config->widget->require = new stdclass();
 $config->widget->require->create = 'type,title,grid';
+$config->widget->require->edit   = 'title,grid';
 
 $config->widget->editor = new stdclass();
 $config->widget->editor->set = array('id' => 'html', 'tools' => 'simple');

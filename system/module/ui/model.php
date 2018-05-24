@@ -1503,7 +1503,7 @@ if(!function_exists('getJS'))
 
             $theme = new stdclass();
             $theme->name = basename($package, '.zip');
-            $theme->size = $packageSize;
+            $theme->size = filesize($package);
             $theme->time = date('Y-m-d', fileatime($package));
             $themes[] = $theme;
         }
