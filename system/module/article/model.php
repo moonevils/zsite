@@ -89,7 +89,12 @@ class articleModel extends model
      */
     public function getList($type, $categories, $orderBy, $pager = null, $limit = 0)
     {
-        $this->dao->update(TABLE_ARTICLE)->set('sticky')->eq('0')->where('stickTime')->lt(date('Y-m-d H:i:s'))->exec();
+        $this->dao->update(TABLE_ARTICLE)
+            ->set('sticky')->eq('0')
+            ->where('stickTime')->ne('0000-00-00 00:00:00')
+            ->andWhere('sticky')->ne('0')
+            ->andWhere('stickTime')->lt(date('Y-m-d H:i:s'))
+            ->exec();
         $searchWord = $this->get->searchWord;
         $categoryID = $this->get->categoryID;
         if($type == 'page')
