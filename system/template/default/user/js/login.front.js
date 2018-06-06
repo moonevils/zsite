@@ -4,24 +4,34 @@ $('#submit').click(function()
 {
     var password = $('#password').val();
     var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+    var hasCaptcha = false;
     if(!reg.test($('#account').val())) password = md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
+    if($('.captcha').size() > 0)
+    {
+        hasCaptcha = true;
+        captchaInput = $('.captcha:last input:text').attr('id');
+    }
 
     fingerprint = getFingerprint();
 
     loginURL = createLink('user', 'login');
+    postData = "account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + fingerprint;
+    if(hasCaptcha) postData += '&' + captchaInput + '=' + $('#' + captchaInput).val();
     $.ajax(
     {
         type: "POST",
-        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + fingerprint,
+        data: postData,
         url:loginURL,
         dataType:'json',
         success:function(data)
         {
             if(data.result == 'success') return location.href=data.locate;
+            postData = "account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + fingerprint;
+            if(hasCaptcha) postData += '&' + captchaInput + '=' + $('#' + captchaInput).val();
             $.ajax(
             {
                 type: "POST",
-                data:"account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + fingerprint,
+                data: postData,
                 url:loginURL,
                 dataType:'json',
                 success:function(data)
