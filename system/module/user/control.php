@@ -34,7 +34,7 @@ class user extends control
         if(!empty($_POST))
         {
             $this->loadModel('guarder')->logOperation('ip', 'register', helper::getRemoteIP());
-            
+
             if(isset($this->config->user->filterSensitive) and $this->config->user->filterSensitive == 'open' and isset($_POST['account']) and isset($_POST['realname']))
             {
                 $dicts = !empty($this->config->user->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
@@ -183,6 +183,13 @@ class user extends control
                         $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                     }
                 }
+            }
+
+            if(RUN_MODE == 'front')
+            {
+                $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
+                $captchaInput  = $this->session->captchaInput;
+                if($captchaConfig == 'open' and !validater::checkCaptcha($this->post->$captchaInput)) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $this->lang->error->captcha));
             }
 
             if(!$this->user->login($this->post->account, $this->post->password))

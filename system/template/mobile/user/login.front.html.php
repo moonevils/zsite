@@ -30,6 +30,9 @@
     </div>
     <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control'")}</div>
     <div class='form-group'>{!html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
+    {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
+    <div class='form-group'>{!echo $control->loadModel('guarder')->create4Comment(false)}</div>
+    {/if}
     <div class='form-group'>{!html::submitButton($lang->user->login->common, 'btn primary block')}</div>
     <div class='form-group'>
       {if($config->mail->turnon and $control->config->site->resetPassword == 'open')} {!html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' '} {/if}
