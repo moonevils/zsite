@@ -222,14 +222,18 @@ class userModel extends model
         if(RUN_MODE != 'admin') $user->admin = 'no';
         $user->password = $this->createPassword($this->post->password1, $user->account); 
         
+        $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
+        if($captchaConfig != 'open') unset($_SESSION['captcha']);
+
         $this->dao->insert(TABLE_USER)
-            ->data($user, $skip = 'password1,password2,groups,agreement,token')
+            ->data($user, $skip = "password1,password2,groups,agreement,token,{$this->session->captchaInput}")
             ->autoCheck()
             ->batchCheck($this->config->user->require->register, 'notempty')
             ->check('account', 'unique')
             ->check('account', 'account')
             ->check('email', 'email')
             ->check('email', 'unique')
+            ->check($this->session->captchaInput, 'captcha')
             ->exec();
 
         if(dao::isError()) return false;
@@ -508,6 +512,7 @@ class userModel extends model
 
         /* First get the user from database by account or email. */
         $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
+            ->check($this->session->captchaInput, 'captcha')
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
