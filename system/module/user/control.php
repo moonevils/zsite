@@ -446,7 +446,7 @@ class user extends control
         {
             $this->view->mobileURL  = helper::createLink('user', 'edit', "account=$account", '', 'mhtml');
             $this->view->desktopURL = helper::createLink('user', 'edit', "account=$account", '', 'html');
-            $this->display();
+            $this->display('user', 'edit.front');
         }
     }
 
