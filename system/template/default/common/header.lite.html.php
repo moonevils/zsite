@@ -55,7 +55,7 @@
     {/if}
 {/if}
 {if(file_exists($customCssFile))}
-{!css::import($customCssURI, "id='themeStyle'")}
+{!css::import($customCssURI, "id='themeStyle'", $version = false)}
 {/if}
 {if(isset($pageCSS))}
 {!css::internal($pageCSS)}
