@@ -29,7 +29,7 @@ css::import($jsRoot . 'uploader/min.css');
 #uploader {margin-bottom: 0}
 .file-label-id {display: inline-block; padding: 0 2px; border: 1px solid #ccc; line-height: 14px; font-size: 12px; color: #999; margin-right: 5px;}
 
-/* 修复IE9下上传按钮不可点的问题 */
+/* Fix upload button not work in ie9 */
 #uploader {position: relative;}
 .moxie-shim.moxie-shim-flash {top: auto!important; width: 90px!important; height: 34px!important; bottom: 0px!important; border: 0px solid red; Z-index: 100}
 </style>
@@ -82,10 +82,11 @@ $('#uploader').uploader(
 	flash_swf_url: '<?php echo $jsRoot?>uploader/Moxie.swf',
 	silverlight_xap_url: '<?php echo $jsRoot?>uploader/Moxie.xap',
     staticFiles: <?php echo json_encode($filesArray) ?>,
+    autoResetFails: true,
     fileFormater: function($file, file, status)
     {
         $('#uploader .file-list').removeAttr('data-drag-placeholder');
-        if(file.remoteData && file.remoteData.file)
+        if(file.remoteData && file.remoteData.file && $.isPlainObject(file.remoteData.file))
         {
             var remoteData = file.remoteData.file;
             file.addedDate = remoteData.addedDate;
