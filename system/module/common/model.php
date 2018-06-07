@@ -30,7 +30,7 @@ class commonModel extends model
             if($this->config->cache->type != 'close')
             {
                 /* Code for task #2746. */
-                if($this->app->user->admin != 'no') $this->config->cache->expired = 1;
+                if($this->app->user->admin != 'no' and RUN_MODE == 'front') $this->config->cache->expired = 1;
                 $this->config->cache->file->expired = $this->config->cache->expired;
                 $this->app->loadCacheClass();
             }
