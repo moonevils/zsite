@@ -1,4 +1,4 @@
-{*php
+{*
 /**
  * The login view file of block module of ZenTaoPMS.
  *
@@ -9,27 +9,28 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-/php*}
-{if($model->loadModel('user')->isLogon())} {return true} {/if}
+*}
+{if(!$model->loadModel('user')->isLogon())}
 <div id="block{!echo $block->id}" class='panel-block-login panel panel-block {!echo $blockClass}'>
-{if(!$control->session->random)} {$model->session->set('random', md5(time() . mt_rand()))} {/if}
+{if(!$model->session->random)} {$model->session->set('random', md5(time() . mt_rand()))} {/if}
 {$referer = $app->getURI()}
 {!js::import($config->webRoot . 'js/md5.js')}
 {!js::import($config->webRoot . 'js/fingerprint/fingerprint.js')}
-{!js::set('random', $model->control->session->random)}
+{!js::set('random', $model->session->random)}
   <div class='panel-heading'><strong>{!echo $icon . $block->title}</strong></div>
   <div class='panel-body'>
     <div style='max-width:500px;margin:0px auto'>
       <form method='post' id='ajaxForm' role='form' data-checkfingerprint='1' style='max-width:500px;margin'>
         <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
-        <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control'")}</div>
-        <div class='form-group'>{!html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control'")}</div>
-        {!html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-block')} 
+        <div class='form-group'>{!html::input('account','',"placeholder='{{$model->lang->user->inputAccountOrEmail}}' class='form-control'")}</div>
+        <div class='form-group'>{!html::password('password','',"placeholder='{{$model->lang->user->inputPassword}}' class='form-control'")}</div>
+        {!html::submitButton($model->lang->user->login->common, 'btn btn-primary btn-wider btn-block')} 
       </form>
       <div style='margin:5px 0px;'>
-        {if($lang->mail->turnon and $lang->site->resetPassword == 'open')} {!html::a(helper::createLink('user', 'resetpassword'), $lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'")} {/if}
-        {!html::a(helper::createLink('user', 'register'), $lang->user->register->instant, "id='register' style='float:right;right:5px;margin-bottom:8px;'")}
+        {if($model->config->mail->turnon and $model->config->site->resetPassword == 'open')} {!html::a(helper::createLink('user', 'resetpassword'), $model->lang->user->recoverPassword, "id='reset-pass' style='margin-left:5px;color:gray;'")} {/if}
+        {!html::a(helper::createLink('user', 'register'), $model->lang->user->register->instant, "id='register' style='float:right;right:5px;margin-bottom:8px;'")}
       </div>
+      {$control = $model}
       {include TPL_ROOT . 'user/oauthlogin.html.php'}
     </div>
   </div>
@@ -89,3 +90,4 @@ function blockShowError(obj, message)
     else error.show();
 }
 </script>
+{/if}

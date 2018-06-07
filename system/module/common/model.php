@@ -27,7 +27,13 @@ class commonModel extends model
             $this->setUser();
             $this->loadConfigFromDB();
 
-            if($this->config->cache->type != 'close') $this->app->loadCacheClass();
+            if($this->config->cache->type != 'close')
+            {
+                /* Code for task #2746. */
+                if($this->app->user->admin != 'no' and RUN_MODE == 'front') $this->config->cache->expired = 1;
+                $this->config->cache->file->expired = $this->config->cache->expired;
+                $this->app->loadCacheClass();
+            }
             if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 1;
 
             $this->loadAlias();
@@ -1162,6 +1168,32 @@ class commonModel extends model
     }
 
     /**
+     * Diff two string. (see phpt)
+     *
+     * @param string $text1
+     * @param string $text2
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function diff($text1, $text2)
+    {
+        $text1 = str_replace('&nbsp;', '', trim($text1));
+        $text2 = str_replace('&nbsp;', '', trim($text2));
+        $w  = explode("\n", $text1);
+        $o  = explode("\n", $text2);
+        $w1 = array_diff_assoc($w,$o);
+        $o1 = array_diff_assoc($o,$w);
+        $w2 = array();
+        $o2 = array();
+        foreach($w1 as $idx => $val) $w2[sprintf("%03d<",$idx)] = sprintf("%03d- ", $idx+1) . "<del>" . trim($val) . "</del>";
+        foreach($o1 as $idx => $val) $o2[sprintf("%03d>",$idx)] = sprintf("%03d+ ", $idx+1) . "<ins>" . trim($val) . "</ins>";
+        $diff = array_merge($w2, $o2);
+        ksort($diff);
+        return implode("\n", $diff);
+    }
+
+    /**
      * Get the run info.
      *
      * @param mixed $startTime  the start time of this execution
@@ -1396,6 +1428,7 @@ class commonModel extends model
     {
         global $app;
         $isGetRequest = $app->config->requestType == 'GET' ? true : false;
+        $params       = $app->getParams();
         
         $uri = $app->URI;
         $id  = '0'; 
@@ -1404,7 +1437,9 @@ class commonModel extends model
         {
             if($isGetRequest)
             {
-                $id = isset($_GET['articleID']) ? $_GET['articleID'] : $_GET['id'];
+                if(isset($_GET['articleID'])) $id = $_GET['articleID'];
+                if(isset($_GET['id']))        $id = $_GET['id'];
+                if(empty($id) and $params)    $id = $params['articleID'];
             }
             else
             {
@@ -1416,7 +1451,9 @@ class commonModel extends model
         {
             if($isGetRequest)
             {
-                $id = isset($_GET['productID']) ? $_GET['productID'] : $_GET['id'];
+                if(isset($_GET['productID'])) $id = $_GET['productID'];
+                if(isset($_GET['id']))        $id = $_GET['id'];
+                if(empty($id) and $params)    $id = $params['productID'];
             }
             else
             {
@@ -1428,7 +1465,9 @@ class commonModel extends model
         {
             if($isGetRequest)
             {
-                $id = isset($_GET['articleID']) ? $_GET['articleID'] : $_GET['id'];
+                if(isset($_GET['articleID'])) $id = $_GET['articleID'];
+                if(isset($_GET['id']))        $id = $_GET['id'];
+                if(empty($id) and $params)    $id = $params['articleID'];
             }
             else
             {
@@ -1438,14 +1477,24 @@ class commonModel extends model
         
         if($moduleName == 'book' and $methodName == 'read')
         {
-            $id = $isGetRequest ? $_GET['articleID'] : str_replace('book-read-', '', $uri); 
+            if($isGetRequest)
+            {
+                if(isset($_GET['articleID'])) $id = $_GET['articleID'];
+                if(empty($id) and $params)    $id = $params['articleID'];
+            }
+            else
+            {
+                $id = str_replace('book-read-', '', $uri); 
+            }
         }
         
         if($moduleName == 'page' and $methodName == 'view')
         {
             if($isGetRequest)
             {
-                $id = isset($_GET['pageID']) ? $_GET['pageID'] : $_GET['id']; 
+                if(isset($_GET['pageID'])) $id = $_GET['pageID'];
+                if(isset($_GET['id']))     $id = $_GET['id'];
+                if(empty($id) and $params) $id = $params['pageID'];
             }
             else
             {
