@@ -215,15 +215,34 @@ class statModel extends model
      */
     public function getKeywordsList($begin, $end, $orderBy, $pager)
     {
-        return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
+        $keywords = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('type')->eq('keywords')
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
             ->andWhere('timeValue')->le($end)
-            ->groupBy('concat(item, extra)')
             ->orderBy($orderBy)
             ->page($pager)
-            ->fetchGroup('item', 'extra');
+            ->fetchAll();
+        if(empty($keywords)) return $keywords;
+
+        $keywordGroup = array();
+        foreach($keywords as $keyword)
+        {
+            if(!isset($keywordGroup[$keyword->item][$keyword->extra]))
+            {
+                $keywordGroup[$keyword->item][$keyword->extra] = $keyword;
+            }
+            else
+            {
+                $sumKeyword = $keywordGroup[$keyword->item][$keyword->extra];
+                $sumKeyword->pv += $keyword->pv;
+                $sumKeyword->uv += $keyword->uv;
+                $sumKeyword->ip += $keyword->ip;
+
+                $keywordGroup[$keyword->item][$keyword->extra] = $sumKeyword;
+            }
+        }
+        return $keywordGroup;
     }
 
     /**
