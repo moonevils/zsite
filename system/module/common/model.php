@@ -27,7 +27,13 @@ class commonModel extends model
             $this->setUser();
             $this->loadConfigFromDB();
 
-            if($this->config->cache->type != 'close') $this->app->loadCacheClass();
+            if($this->config->cache->type != 'close')
+            {
+                /* Code for task #2746. */
+                if($this->app->user->admin != 'no') $this->config->cache->expired = 1;
+                $this->config->cache->file->expired = $this->config->cache->expired;
+                $this->app->loadCacheClass();
+            }
             if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 1;
 
             $this->loadAlias();
