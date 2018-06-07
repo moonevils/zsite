@@ -379,17 +379,27 @@ class site extends control
         {
             if($this->post->site and $this->post->site != 'http://cdn.chanzhi.org/' . $this->config->version . '/')
             {
+                $cdnSite = rtrim($this->post->site, '/');
+                if(strpos($cdnSite, '//') === 0)
+                {
+                    $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';
+                    $cdnSite  = $httpType . ':' . $cdnSite;
+                }
+
                 foreach($this->config->cdn->fileList as $file)
                 {
-                    $ch = curl_init(rtrim($this->post->site, '/') . $file);
+                    $ch = curl_init($cdnSite . $file);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
                     curl_setopt($ch, CURLOPT_NOBODY, true);
                     curl_exec($ch);
                     $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                     curl_close($ch);
-                    if($retcode != 200) 
-                    {
-                        $lostFiles[] = $this->post->site . $file;
-                    }
+
+                    if($retcode != 200) $lostFiles[] = $this->post->site . $file;
                 }
                 if(!empty($lostFiles)) $this->send(array('result' => 'fail', 'message' => $lostFiles));
             }
