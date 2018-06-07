@@ -134,7 +134,7 @@ $lang->getUserByApi       = '獲取綁定信息';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['zh-cn'] = '切換到簡體中文站點';
+$lang->selectLangTip['zh-tw'] = '切換到簡體中文站點';
 $lang->selectLangTip['zh-tw'] = '切換到繁體中文站點';
 $lang->selectLangTip['en']    = '切換到英文站點';
 
@@ -393,7 +393,7 @@ $lang->error->IP           = '<strong>%s</strong>應當為合法的IP。';
 $lang->error->date         = '<strong>%s</strong>應當為合法的日期。';
 $lang->error->account      = '<strong>%s</strong>應當為字母和數字的組合，至少三位';
 $lang->error->passwordsame = '兩次密碼應當相等。';
-$lang->error->passwordrule = '密碼應該符合規則，長度至少為六位。';
+$lang->error->passwordrule = '密碼應該符合規則，長度至少為六位，並且不能含有中文字元。';
 $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 $lang->error->fingerprint  = '身份認證過期，請重試！';
