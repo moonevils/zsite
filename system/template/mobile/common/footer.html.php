@@ -24,7 +24,7 @@
   </div>
 </div>
 
-{if(isset($control->config->site->mobileBottomNav) and ($control->config->site->mobileBottomNav == 'hide'))}
+{if((isset($control->config->site->mobileBottomNav) and ($control->config->site->mobileBottomNav == 'hide')) or helper::isAjaxRequest())}
 {else}
   {$bottomNavs = $control->loadModel('nav')->getNavs('mobile_bottom')}
   <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
