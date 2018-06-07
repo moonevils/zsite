@@ -78,7 +78,6 @@ function initUeditor(afterInit)
             
             ueditor.addListener('ready', function()
             {
-                console.log('this.container', this.container);
                 $(this.container).parent().removeClass('form-control');
             });
             ueditor.addListener('fullscreenchanged', function(e, fullscreen)
