@@ -97,7 +97,7 @@ $lang->product->placeholder->currency = "Please enter currency symbol, such as ï
 
 $lang->product->listMode = new stdclass();
 $lang->product->listMode->card  = "<i class='icon icon-th-large'></i>";
-$lang->product->listMode->list  = "<i class='icon icon-list'></i>";
+$lang->product->listMode->list  = "<i class='icon icon-list-ul'></i>";
 
 $lang->product->currencyList['rmb']  = 'RMB';
 $lang->product->currencyList['usd']  = 'USD';

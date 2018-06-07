@@ -76,6 +76,7 @@ $lang->ui->packagePathTip         = '请将主题包的zip文件上传至 %s 目
 $lang->ui->gdHelp                 = '查看安装方式';
 $lang->ui->gdTip                  = '蝉知图片水印功能需要安装php-gd扩展才能使用。';
 $lang->ui->effectError            = '导入特效失败，请检查您的特效是否正常，查看地址：http://www.chanzhi.org/effect';
+$lang->ui->lengthOverflow         = '内容长度 %s 字节。请保持长度不超过65535字节，否则会导致部分内容丢失。';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
