@@ -418,7 +418,7 @@ class userModel extends model
         if($this->post->password1 != false)
         {
             if($this->post->password1 != $this->post->password2) dao::$errors['password1'][] = $this->lang->error->passwordsame;
-            if(!validater::checkReg($this->post->password1, '|(.){6,}|')) dao::$errors['password1'][] = $this->lang->error->passwordrule;
+            if(!validater::checkReg($this->post->password1, '|[\x20-\x7f]{6,}|')) dao::$errors['password1'][] = $this->lang->error->passwordrule;
         }
         else
         {
@@ -512,7 +512,6 @@ class userModel extends model
 
         /* First get the user from database by account or email. */
         $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
-            ->check($this->session->captchaInput, 'captcha')
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
