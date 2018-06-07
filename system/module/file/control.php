@@ -417,7 +417,7 @@ class file extends control
             $extension    = $this->file->getExtension($name);
             $filename     = !empty($_POST['label']) ? htmlspecialchars($_POST['label']) : str_replace('.' . $extension, '', $name);
             $sameFilename = $this->file->checkSameFile($filename);
-            if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'file' => $name, 'message' => $this->lang->file->sameName)));
+            if(!empty($sameFilename)) die(json_encode(array('result' => 'fail', 'file' => $name, 'message' => $filename . '.' . $extension . $this->lang->file->sameName)));
         }
 
         $file = $this->file->getUploadFile('file', $objectType);
