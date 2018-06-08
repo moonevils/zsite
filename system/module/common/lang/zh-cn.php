@@ -43,6 +43,7 @@ $lang->newVersion     = "提示：蝉知系统已于 <span id='releaseDate'></sp
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查询：<b>%s</b> 次<br>内存占用：<b>%s</b><br> PHP 执行时间：<b>%s</b> 秒</span></span>";
 $lang->customCssError = "不能生成样式文件，如果您是网站管理员，请到网站后台外观管理重新设置样式文件";
 $lang->redirecting    = "<span class='text-muted'><span id='countDown'>3</span>秒后跳转到类目管理页面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳转</a>";
+$lang->badrequestTips = "<div><div style='padding:30px; margin:80px auto; width:600px; color:#29a8cd; background:#e5f9ff;'>系统检测到您的行为存在异常，请稍后再试，或者联系管理员：<p>电话：%s</p><p>Email: %s</p></div></div>";
 
 /* Global lang items. */
 $lang->home             = '首页';
