@@ -132,7 +132,11 @@ class commonModel extends model
         {
             if($this->server->request_method == 'post') $inBlackList = $this->loadModel('guarder')->logOperation('ip', 'post');
             $inList = $this->loadModel('guarder')->inList();
-            if($inList) die('Request Forbidden');
+            if($inList)
+            {
+                $contact = json_decode($this->config->company->contact);
+                die(sprintf($this->lang->badrequestTips, $contact->phone, $contact->email));
+            }
         }
 
         if(RUN_MODE == 'admin' and !empty($this->config->group->unUpdatedAccounts) and strpos($this->config->group->unUpdatedAccounts, $this->app->user->account) !== false)
