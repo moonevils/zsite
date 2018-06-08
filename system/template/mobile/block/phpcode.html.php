@@ -10,7 +10,9 @@
  * @link        http://www.chanzhi.org
 */
 /php*}
+<div id="block{!echo $block->id}" class='block'>
 {$block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content)}
 {if(!is_object($block->content))} {$content = $block->content} {/if}
 {if(is_object($block->content))}  {$content = isset($block->content->content) ? $block->content->content : ''} {/if}
-{@eval(htmlspecialchars_decode($content, ENT_QUOTES))}
+{@eval('?'. '>' . htmlspecialchars_decode($content, ENT_QUOTES))}
+</div>
