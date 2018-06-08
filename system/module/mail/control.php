@@ -184,7 +184,7 @@ class mail extends control
 
         if((time() - $lastSendTime) < 180) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->trySendlater));
 
-        if(!$this->config->mail->turnon) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->noConfigure));
+        if(!$this->config->mail->turnon) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->needConfigure));
         if(empty($email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->noEmail));
         if(!validater::checkEmail($email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->error));
 

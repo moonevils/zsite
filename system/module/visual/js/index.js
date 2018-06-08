@@ -113,6 +113,7 @@
             icon               : 'pencil',
             title              : '',
             mergeOptions       : true,
+            backdrop           : 'static',
             hidden             : function(e)
             {
                 if(options.dismiss === 'update')
