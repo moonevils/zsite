@@ -43,6 +43,7 @@ $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></sp
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查詢：<b>%s</b> 次<br>內存占用：<b>%s</b><br> PHP 執行時間：<b>%s</b> 秒</span></span>";
 $lang->customCssError = "不能生成樣式檔案，如果您是網站管理員，請到網站後台外觀管理重新設置樣式檔案";
 $lang->redirecting    = "<span class='text-muted'><span id='countDown'>3</span>秒後跳轉到類目管理頁面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳轉</a>";
+$lang->badrequestTips = "<div><div style='padding:30px; margin:80px auto; width:600px; color:#29a8cd; background:#e5f9ff;'>系統檢測到您的行為存在異常，請稍後再試，或者聯繫管理員：<p>電話：%s</p><p>Email: %s</p></div></div>";
 
 /* Global lang items. */
 $lang->home             = '首頁';
