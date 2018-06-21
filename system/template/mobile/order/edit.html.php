@@ -19,23 +19,23 @@
     <div class='modal-body'>
       <form method='post' id='editOrderForm' action="{!inlink('edit', "orderID={{$order->id}}")}">
         {$address = json_decode($order->address)}
-        <div class='form-group pad-lable-left'>
+        <div class='form-group pad-label-left'>
           {!html::input('contact', $address->contact, "class='form-control'")}
           <label for='contact'>{$lang->order->contact}</label>
         </div>
-        <div class='form-group pad-lable-left'>
+        <div class='form-group pad-label-left'>
           {!html::input('phone', $address->phone, "class='form-control'")}
           <label for='phone'>{$lang->order->phone}</label>
         </div>
-        <div class='form-group pad-lable-left'>
+        <div class='form-group pad-label-left'>
           {!html::input('address', $address->address, "class='form-control'")}
           <label for='address'>{$lang->order->address}</label>
         </div>
-        <div class='form-group pad-lable-left'>
+        <div class='form-group pad-label-left'>
           {!html::input('zipcode', $address->zipcode, "class='form-control'")}
           <label for='zipcode'>{$lang->order->zipcode}</label>
         </div>
-        <div class='form-group pad-lable-left'>
+        <div class='form-group pad-label-left'>
           {!html::input('note', $order->note, "class='form-control'")}
           <label for='note'>{$lang->order->frontNote}</label>
         </div>

@@ -43,6 +43,7 @@ $lang->newVersion     = "Note: Zsite has released <span id='version'></span> on 
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL query：<b>%s</b> <br> Memory footprint: <b>%s</b><br> PHP E-time: <b>%s</b> s</span></span>";
 $lang->customCssError = "Fail to load the self-defined css file, if you are the administrator of this site, please reset the apperence of the site in the admin";
 $lang->redirecting    = "<span class='text-muted'>After <span id='countDown'>3</span> seconds, Redirecting to manage categories......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>Redirect</a>";
+$lang->badrequestTips = "<div><div style='padding:30px; margin:80px auto; width:600px; color:#29a8cd; background:#e5f9ff;'>The system has detected an abnormality in your behavior. Please try again later or contact administrator：<p>Tel：%s </p><p>Email: %s </p></div></div>";
 
 /* Global lang items. */
 $lang->home             = 'Home';
