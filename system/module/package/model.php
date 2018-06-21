@@ -284,7 +284,9 @@ class packageModel extends model
      */
     public function getPackageFile($package)
     {
-        return $this->app->getTmpRoot() . 'package/' . $package;
+        $packageFile = $this->app->getTmpRoot() . 'package/' . $package;
+        if(!is_file($packageFile) && is_file($this->app->getTmpRoot() . 'package/' . $package . '.zip')) $packageFile = $this->app->getTmpRoot() . 'package/' . $package . '.zip';
+        return $packageFile;
     }
 
     /**

@@ -97,7 +97,7 @@ $lang->product->placeholder->currency = "请填写产品价格的货币符号，
 
 $lang->product->listMode = new stdclass();
 $lang->product->listMode->card  = "<i class='icon icon-th-large'></i>";
-$lang->product->listMode->list  = "<i class='icon icon-list'></i>";
+$lang->product->listMode->list  = "<i class='icon icon-list-ul'></i>";
 
 $lang->product->currencyList['rmb']  = '人民币';
 $lang->product->currencyList['usd']  = '美元';
