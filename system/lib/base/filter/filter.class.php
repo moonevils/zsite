@@ -787,7 +787,7 @@ class baseFixer
      * 处理的数据。
      * The data to be fixed.
      * 
-     * @var ojbect
+     * @var object
      * @access public
      */
     public $data;
