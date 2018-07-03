@@ -96,7 +96,10 @@ class site extends control
 
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->get();
+            $setting = fixer::input('post')
+                ->setDefault('filterSensitive', 'close')
+                ->setForce('sensitive', seo::unify($this->post->sensitive, ','))
+                ->get();
 
             if($type == 'content') $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
             if($type == 'user')    $result = $this->loadModel('setting')->setItems('system.user', $setting);
@@ -183,7 +186,6 @@ class site extends control
         {
             $setting = fixer::input('post')
                 ->setDefault('captcha', 'auto')
-                ->setDefault('filterSensitive', 'close')
                 ->setDefault('checkIP', 'close')
                 ->setDefault('checkSessionIP', '0')
                 ->setDefault('checkLocation', 'close')
@@ -191,7 +193,6 @@ class site extends control
                 ->setDefault('allowedIP', '')
                 ->setDefault('importantValidate', '')
                 ->join('importantValidate', ',')
-                ->setForce('sensitive', seo::unify($this->post->sensitive, ','))
                 ->get();
 
             /* check IP. */

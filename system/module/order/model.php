@@ -627,7 +627,7 @@ class orderModel extends model
             echo $disabled ?  html::a('javascript:;', $this->lang->order->refund, "$disabled class='$class'") : html::a(helper::createLink('order', 'refund', "orderID=$order->id"), $this->lang->order->refund, "{$toggle} class='$class'");
 
             /* Finish link. */
-            $disabled = ($order->status == 'normal' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
+            $disabled = ($order->status == 'normal' and $order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
             echo $disabled ? html::a('javascript:;', $this->lang->order->finish, "$disabled class='$class'"): html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher $class'");
         }
 
