@@ -25,7 +25,7 @@ $lang->widget->create    = 'Add a Widget';
 $lang->widget->hidden    = 'Hide';
 $lang->widget->lblWidget = 'Widgets';
 $lang->widget->lblRss    = 'RSS';
-$lang->widget->lblNum    = 'No. od Entries';
+$lang->widget->lblNum    = 'No. of Entries';
 $lang->widget->content   = 'Content';
 
 $lang->widget->params = new stdclass();

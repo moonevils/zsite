@@ -65,9 +65,9 @@ class raintplParser
         $raintpl = $this->tpl;
 
         /* Get view files from control. */
-        $viewFile = $this->control->setViewFile($moduleName, $methodName);
-
-        if(is_array($viewFile)) extract($viewFile);
+        $results  = $this->control->setViewFile($moduleName, $methodName);
+        $viewFile = $results;
+        if(is_array($results)) extract($results);
 
         $this->tpl->configure('tplDir', dirname($viewFile) . DS);
 

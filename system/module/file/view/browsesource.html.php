@@ -8,7 +8,7 @@
     <span class='panel-actions'>
       <div class="btn-group">
         <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view active btn'")?>
-        <?php echo html::a('javascript:void(0)', "<i class='icon icon-list'></i>", "class='list-view btn'")?>
+        <?php echo html::a('javascript:void(0)', "<i class='icon icon-list-ul'></i>", "class='list-view btn'")?>
       </div>
       <?php $template = $this->config->template->{$this->app->clientDevice}->name;?>
       <?php $theme    = $this->config->template->{$this->app->clientDevice}->theme;?>

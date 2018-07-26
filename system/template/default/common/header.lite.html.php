@@ -24,7 +24,7 @@
   {else}
     {if(isset($canonicalURL))} <link rel="canonical" href="{$sysURL}/{$canonicalURL}" > {/if}
   {/if}
-  {if($thisModuleName == 'user' and $thisMethodName == 'deny')} <meta http-equiv='refresh' content="5;url='{$url= helper::createLink('index')}'"> {/if} 
+  {if($thisModuleName == 'user' and $thisMethodName == 'deny')} <meta http-equiv='refresh' content="5;url={!helper::createLink('index')}"> {/if} 
   {if(!isset($title))}   {$title    = ''} {/if}
   {if(!empty($title))}   {$title   .= $lang->minus} {/if}
   {if(empty($keywords))} {$keywords = $config->site->keywords} {/if}
@@ -55,7 +55,7 @@
     {/if}
 {/if}
 {if(file_exists($customCssFile))}
-{!css::import($customCssURI, "id='themeStyle'")}
+{!css::import($customCssURI, "id='themeStyle'", $version = false)}
 {/if}
 {if(isset($pageCSS))}
 {!css::internal($pageCSS)}

@@ -222,14 +222,18 @@ class userModel extends model
         if(RUN_MODE != 'admin') $user->admin = 'no';
         $user->password = $this->createPassword($this->post->password1, $user->account); 
         
+        $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
+        if($captchaConfig != 'open') unset($_SESSION['captcha']);
+
         $this->dao->insert(TABLE_USER)
-            ->data($user, $skip = 'password1,password2,groups,agreement,token')
+            ->data($user, $skip = "password1,password2,groups,agreement,token,{$this->session->captchaInput}")
             ->autoCheck()
             ->batchCheck($this->config->user->require->register, 'notempty')
             ->check('account', 'unique')
             ->check('account', 'account')
             ->check('email', 'email')
             ->check('email', 'unique')
+            ->check($this->session->captchaInput, 'captcha')
             ->exec();
 
         if(dao::isError()) return false;
@@ -414,7 +418,7 @@ class userModel extends model
         if($this->post->password1 != false)
         {
             if($this->post->password1 != $this->post->password2) dao::$errors['password1'][] = $this->lang->error->passwordsame;
-            if(!validater::checkReg($this->post->password1, '|(.){6,}|')) dao::$errors['password1'][] = $this->lang->error->passwordrule;
+            if(!validater::checkReg($this->post->password1, '|[\x20-\x7f]{6,}|')) dao::$errors['password1'][] = $this->lang->error->passwordrule;
         }
         else
         {

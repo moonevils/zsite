@@ -8,7 +8,7 @@ $(document).ready(function()
         }
         if('success' == response.result) 
         {
-          $.get(location.href, function(){window.location.reload();});
+            $.get(location.href, function(){window.location.reload();});
         }
     });
 

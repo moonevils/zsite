@@ -43,6 +43,7 @@ $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></sp
 $lang->execInfo       = "<span id='execInfoBar' class='hide'><span class='text-left'>SQL查詢：<b>%s</b> 次<br>內存占用：<b>%s</b><br> PHP 執行時間：<b>%s</b> 秒</span></span>";
 $lang->customCssError = "不能生成樣式檔案，如果您是網站管理員，請到網站後台外觀管理重新設置樣式檔案";
 $lang->redirecting    = "<span class='text-muted'><span id='countDown'>3</span>秒後跳轉到類目管理頁面......</span> <a class='btn-redirec' href='%s'><i class='icon icon-hand-right'></i>立即跳轉</a>";
+$lang->badrequestTips = "<div><div style='padding:30px; margin:80px auto; width:600px; color:#29a8cd; background:#e5f9ff;'>系統檢測到您的行為存在異常，請稍後再試，或者聯繫管理員：<p>電話：%s</p><p>Email: %s</p></div></div>";
 
 /* Global lang items. */
 $lang->home             = '首頁';
@@ -134,7 +135,7 @@ $lang->getUserByApi       = '獲取綁定信息';
 
 /* Select lang tip */
 $lang->selectLangTip = array();
-$lang->selectLangTip['zh-cn'] = '切換到簡體中文站點';
+$lang->selectLangTip['zh-tw'] = '切換到簡體中文站點';
 $lang->selectLangTip['zh-tw'] = '切換到繁體中文站點';
 $lang->selectLangTip['en']    = '切換到英文站點';
 
@@ -393,7 +394,7 @@ $lang->error->IP           = '<strong>%s</strong>應當為合法的IP。';
 $lang->error->date         = '<strong>%s</strong>應當為合法的日期。';
 $lang->error->account      = '<strong>%s</strong>應當為字母和數字的組合，至少三位';
 $lang->error->passwordsame = '兩次密碼應當相等。';
-$lang->error->passwordrule = '密碼應該符合規則，長度至少為六位。';
+$lang->error->passwordrule = '密碼應該符合規則，長度至少為六位，並且不能含有中文字元。';
 $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 $lang->error->fingerprint  = '身份認證過期，請重試！';

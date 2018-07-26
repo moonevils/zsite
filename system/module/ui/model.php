@@ -1078,12 +1078,11 @@ class uiModel extends model
         $sqls = str_replace(TABLE_CONFIG,   "eps_config",   $sqls);
         $sqls = str_replace(TABLE_CATEGORY, "eps_category", $sqls);
         $sqls = str_replace(TABLE_FILE,     "eps_file",     $sqls);
-        $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("\/{$template}\/{$theme}\/", "/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("\"$theme\"", "\"THEME_CODEFIX\"", $sqls);
         $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
-        $sqls = str_replace("data\/source\/{$template}\/{$theme}\/", "data\/source\/{$template}\/THEME_CODEFIX\/", $sqls);
-        $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
+        $sqls = str_replace("source\/{$template}\/{$theme}\/", "source\/{$template}\/THEME_CODEFIX\/", $sqls);
+        $sqls = str_replace("source\\\/{$template}\\\/{$theme}\\\/", "source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
         $sqls = str_replace("{$template}_{$theme}_", "{$template}_THEME_CODEFIX_", $sqls);
         $sqls = str_replace("'{$template}_{$theme}'", "'{$template}_THEME_CODEFIX'", $sqls);
 
@@ -1503,7 +1502,7 @@ if(!function_exists('getJS'))
 
             $theme = new stdclass();
             $theme->name = basename($package, '.zip');
-            $theme->size = $packageSize;
+            $theme->size = filesize($package);
             $theme->time = date('Y-m-d', fileatime($package));
             $themes[] = $theme;
         }
