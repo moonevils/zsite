@@ -12,7 +12,7 @@ $lang->score->back        = 'Back';
 $lang->score->rankingList = 'Ranking';
 $lang->score->rule        = 'Rules';
 $lang->score->statement   = 'Points Statement';
-$lang->score->stateDesc   = 'Point Statement is generated per user based on the total points acquired a month ago.';
+$lang->score->stateDesc   = 'Point Statement is generated per user based on the total points acquired in last month.';
 
 $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
@@ -62,13 +62,13 @@ $lang->score->methods['co']  = 'Partner';
 $lang->score->types['in']    = 'increase';
 $lang->score->types['out']   = 'decrease';
 
-$lang->score->getByThread = 'Post threads to get reward points.'; 
-$lang->score->getByReply  = 'Reply to get reward points.'; 
+$lang->score->getByThread = 'Post threads to get points.'; 
+$lang->score->getByReply  = 'Reply to get points.'; 
 
-$lang->score->lblTotal         = "You have %s points for consumption. The points for ranking is %s. ";
+$lang->score->lblTotal         = "You have %s points to use. Your points for ranking is %s. ";
 $lang->score->lblNoScore       = "Sorry, your points is insufficient.";
 $lang->score->lblNoScoreReason = "Sorry, your points is less than %s. You need <strong class='red'>%s</strong> Points. You have <strong class='red'>%s</strong> Points.";
-$lang->score->lblDetail        = "Please refer to<a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
+$lang->score->lblDetail        = "Please refer to <a href='http://www.zentao.net/thread-view-79915.html' target='_blank'>《如何获得积分》</a><br /><br />";
 $lang->score->lblBuySocre      = "Purchase Points %s";
 $lang->score->lblStateSuccess  = 'Point statement is generated.';
 
@@ -78,9 +78,9 @@ $lang->score->amountUnit  = 'Dollar';
 $lang->score->minAmount   = 'Minimum refill';
 $lang->score->buyWaring   = " Minimum refill is %s dollar，1 dollar=%s Points";
 $lang->score->errorAmount = "Refill amount should be more than %s Dollars.";
-$lang->score->alipay      = "Use AliPay right now!";
+$lang->score->alipay      = "Use PayPal right now!";
 $lang->score->paySuccess  = 'Thank you for your payment!';
-$lang->score->payFail     = 'Sorry, there is a problem with your payment. Contact us if any questions.';
+$lang->score->payFail     = 'Sorry, there is something wrong with your payment. Contact us if any questions.';
 $lang->score->viewHistory = 'Payment History';
 
 $lang->score->awardRule  = 'Reward Rules';

@@ -63,6 +63,13 @@
         <span>{$lang->user->register->agree}《 {!html::a(helper::createLink('user', 'agreement'), $control->config->site->agreementTitle ? $control->config->site->agreementTitle : $control->lang->user->register->agreement, "data-toggle='modal'")}》</span>
       </div>
     {/if}
+    {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
+    {$control->loadModel('guarder')} 
+    <div class='form-group'>
+      <label class='control-label' for='captcha'>{$lang->guarder->captcha}</label>
+      {!echo $control->guarder->create4Comment(false)}
+    </div>
+    {/if}
     <div class='form-group'>{!html::submitButton($lang->register, 'btn primary block')}{!html::hidden('referer', $referer)}</div>
   </form>
   </div>
