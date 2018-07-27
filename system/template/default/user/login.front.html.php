@@ -17,6 +17,11 @@
             <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
             <div class='form-group'>{!html::input('account','',"placeholder='{{$lang->user->inputAccountOrEmail}}' class='form-control input-lg'")}</div>
             <div class='form-group'>{!html::password('password','',"placeholder='{{$lang->user->inputPassword}}' class='form-control input-lg'")}</div>
+            {if(zget($control->config->site, 'captcha', 'auto') == 'open')}
+            <div class='form-group'>
+              <div class='row' id='captchaBox'>{!echo $control->loadModel('guarder')->create4Comment(false)}</div>
+            </div>
+            {/if}
             {!html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg btn-block')} 
             {!html::hidden('referer', $referer)}
             {include TPL_ROOT . 'user/oauthlogin.html.php'}

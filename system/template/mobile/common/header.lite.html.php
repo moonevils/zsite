@@ -51,7 +51,7 @@
 
   {* Import customed css file if it exists. *}
   {$customCssFile = $control->loadModel('ui')->getCustomCssFile(CHANZHI_TEMPLATE, CHANZHI_THEME)}
-  {if(file_exists($customCssFile))} {!css::import($control->ui->getThemeCssUrl(CHANZHI_TEMPLATE, CHANZHI_THEME), "id='themeStyle'")} {/if}
+  {if(file_exists($customCssFile))} {!css::import($control->ui->getThemeCssUrl(CHANZHI_TEMPLATE, CHANZHI_THEME), "id='themeStyle'", $version = false)} {/if}
 
   {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
 
