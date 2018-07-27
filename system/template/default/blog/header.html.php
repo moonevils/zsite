@@ -28,7 +28,7 @@
   {!css::import($themeRoot . 'common/style.css')}
 
   {$customCssFile = $control->loadModel('ui')->getCustomCssFile(CHANZHI_TEMPLATE, CHANZHI_THEME)}
-  {if(file_exists($customCssFile))} {!css::import($control->ui->getThemeCssUrl(CHANZHI_TEMPLATE, CHANZHI_THEME))} {/if}
+  {if(file_exists($customCssFile))} {!css::import($control->ui->getThemeCssUrl(CHANZHI_TEMPLATE, CHANZHI_THEME), '', $version = false)} {/if}
 
   {!js::exportConfigVars()}
   {!js::set('theme', array('template' => CHANZHI_TEMPLATE, 'theme' => CHANZHI_THEME, 'device' => $control->app->clientDevice))}

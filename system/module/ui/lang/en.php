@@ -76,6 +76,7 @@ $lang->ui->packagePathTip         = 'Please upload the zip file to %s, then inst
 $lang->ui->gdHelp                 = 'How to install';
 $lang->ui->gdTip                  = 'Image watermark features need PHP-gd extension.';
 $lang->ui->effectError            = 'Import effects fails, check your effects are normal. View the address: http://www.chanzhi.org/effect';
+$lang->ui->lengthOverflow         = 'The content length is %s bytes. Keep it be less than 65535 bytes, or part of content can not be saved.';
 
 $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> Desktop";

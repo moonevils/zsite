@@ -406,6 +406,7 @@ class article extends control
 
         $this->view->title   = $this->lang->article->css;
         $this->view->article = $article;
+        $this->view->modalWidth = 1000;
         $this->display();
     }
 

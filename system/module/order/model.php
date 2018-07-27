@@ -207,7 +207,7 @@ class orderModel extends model
     public function createPayLink($order, $type = '')
     {
         if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $type);
-        if($order->payment and is_callable(array($this, "create{$order->payment}PayLink"))) return call_user_func(array($this,"create{$order->payment}PayLink"), $order);
+        if(!empty($order->payment) and is_callable(array($this, "create{$order->payment}PayLink"))) return call_user_func(array($this,"create{$order->payment}PayLink"), $order);
         return helper::createLink('order', 'check', "orderID=$order->id");
     }
 
@@ -356,7 +356,7 @@ class orderModel extends model
         if(dao::isError()) return false;
         $this->loadModel('action')->create('order', $order->id, 'Paid');
 
-        if(is_callable(array($this, "process{$order->type}Order"))) call_user_func(array($this, "process{$order->type}Order"), $order);
+        if(!empty($order->type) && is_callable(array($this, "process{$order->type}Order"))) call_user_func(array($this, "process{$order->type}Order"), $order);
         return true;
     }
 
@@ -489,7 +489,7 @@ class orderModel extends model
      */
     public function printGoods($order)
     {
-        if(is_callable(array($this, "print{$order->type}Goods"))) return call_user_func(array($this, "print{$order->type}Goods"), $order);
+        if(!empty($order->type) && is_callable(array($this, "print{$order->type}Goods"))) return call_user_func(array($this, "print{$order->type}Goods"), $order);
         $goodsInfo = '';
         foreach($order->products as $product)
         {
@@ -591,7 +591,7 @@ class orderModel extends model
             echo $disabled ? '' : html::a(inlink('delete', "orderID=$order->id"), $this->lang->order->delete, "class='deleter $class'"); 
         }
 
-        if(is_callable(array($this, "print{$order->type}Actions"))) call_user_func(array($this, "print{$order->type}Actions"), $order, $btnLink);
+        if(!empty($order->type) && is_callable(array($this, "print{$order->type}Actions"))) call_user_func(array($this, "print{$order->type}Actions"), $order, $btnLink);
     }
 
     /**
@@ -627,7 +627,7 @@ class orderModel extends model
             echo $disabled ?  html::a('javascript:;', $this->lang->order->refund, "$disabled class='$class'") : html::a(helper::createLink('order', 'refund', "orderID=$order->id"), $this->lang->order->refund, "{$toggle} class='$class'");
 
             /* Finish link. */
-            $disabled = ($order->status == 'normal' and $order->payStatus != 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
+            $disabled = ($order->status == 'normal' and $order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') ? '' : "disabled='disabled'";
             echo $disabled ? html::a('javascript:;', $this->lang->order->finish, "$disabled class='$class'"): html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher $class'");
         }
 
