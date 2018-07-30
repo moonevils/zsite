@@ -319,7 +319,7 @@ class RainTPL
         $this->tpl['source'] = $templateCode = file_get_contents($tplFile);
         if(strpos($templateCode, self::PHP_START) !== false)
         {
-            $tplType  == (strpos($tplName, DS . 'block' . DS) !== false) ? 'model' : 'control';
+            $tplType  = (strpos($tplName, DS . 'block' . DS) !== false) ? 'model' : 'control';
             $compiledCode = $this->compiledPHPCode($templateCode, $tplType);
             file_put_contents($compiledFile, $compiledCode);
             return true;
