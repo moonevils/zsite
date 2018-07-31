@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of log module of ZenTaoCMS.
@@ -185,9 +186,7 @@ class logModel extends model
         $log->hour     = $hour;
         $log->new      = $visitor->new ? 1 : 0;
         $log->mobile   = $this->app->clientDevice == 'mobile' ? 1 : 0;
-
         $this->dao->insert(TABLE_STATLOG)->data($log)->exec();
-        $log->id = $this->dao->lastInsertID();
 
         /* Save basic report data. */
         $this->saveReportItem('basic', 'total', $time, $log);
@@ -232,18 +231,16 @@ class logModel extends model
     {
         $ipAndUv = new stdclass();
         $ipAndUv->ip = 0;
-        $ipAndUv->uv = $log->new ? 1 : 0;
-
-        if($timeType == 'year') return $ipAndUv;
+        $ipAndUv->uv = 0;
 
         $allowedTypes = array('basic', 'search', 'keywords', 'os', 'url', 'domain', 'browser', 'from', 'device');
         if(!in_array($type, $allowedTypes)) return $ipAndUv;
 
-        $ipCount = $this->dao->select('count(*) as count')
+        if($timeType == 'year') return $ipAndUv;
+
+        $ipAndUv = $this->dao->select('count(distinct(ip)) as ip, count(distinct(visitor)) as uv')
             ->from(TABLE_STATLOG)
             ->where($timeType)->eq($timeValue)
-            ->andWhere('id')->ne($log->id)
-            ->andWhere('ip')->eq($log->ip)
 
             ->beginIF($type == 'basic' and $item == 'return')
             ->andWhere('new')->eq(0)
@@ -298,9 +295,14 @@ class logModel extends model
             ->andWhere('searchEngine')->ne('')
             ->fi()
 
-            ->fetch('count');
+            ->fetch();
 
-        $ipAndUv->ip = $ipCount == 0 ? 1 : 0;
+        if(empty($ipAndUv))
+        {
+            $ipAndUv = new stdclass();
+            $ipAndUv->ip = 0;
+            $ipAndUv->uv = 0;
+        }
 
         return $ipAndUv;
     }
@@ -326,15 +328,14 @@ class logModel extends model
                 ->andWhere('timeValue')->eq($timeValue)
                 ->beginIf($extra)->andWhere('extra')->eq($extra)->fi()
                 ->fetch();
-
             if(!empty($oldReport))
             {
                 $ipAndUv = $this->getIpAndUv($type, $item, $timeType, $timeValue, $log, $extra);
 
                 $this->dao->update(TABLE_STATREPORT)
                     ->set('pv = pv + 1')
-                    ->set("ip= ip + {$ipAndUv->ip}")
-                    ->set("uv= uv + {$ipAndUv->uv}")
+                    ->set('ip')->eq($ipAndUv->ip)
+                    ->set('uv')->eq($ipAndUv->uv)
                     ->where('id')->eq($oldReport->id)
                     ->exec();
             }
@@ -362,6 +363,7 @@ class logModel extends model
      */
     public function saveRegion()
     {
+        return true;
         $year  = date('Y');
         $month = date('Ym');
         $day   = date('Ymd');
@@ -427,5 +429,4 @@ class logModel extends model
         $this->dao->delete()->from(TABLE_STATLOG)->where('day')->lt($date)->exec();
         return !dao::isError();
     }
-
 }
