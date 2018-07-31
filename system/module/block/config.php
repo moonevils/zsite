@@ -54,6 +54,7 @@ $config->block->defaultIcons['bottomNav'] = '';
 $config->block->defaultMoreUrl['html']          = '';
 $config->block->defaultMoreUrl['latestArticle'] = '';
 $config->block->defaultMoreUrl['hotArticle']    = '';
+$config->block->defaultMoreUrl['latestBlog']    = '';
 $config->block->defaultMoreUrl['latestProduct'] = '';
 $config->block->defaultMoreUrl['hotProduct']    = '';
 $config->block->defaultMoreUrl['latestThread']  = '';
