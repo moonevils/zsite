@@ -43,8 +43,7 @@ class nav extends control
 
                 foreach($navs[2] as &$navList)
                 {
-                    foreach($navList as &$nav)
-                        $nav['children'] = isset($navs[3][$nav['key']]) ?  $navs[3][$nav['key']] : array();
+                    foreach($navList as &$nav) $nav['children'] = isset($navs[3][$nav['key']]) ?  $navs[3][$nav['key']] : array();
                 }
             }
 
