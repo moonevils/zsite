@@ -114,7 +114,8 @@ class navModel extends model
      */
     public function createEntry($grade = 1, $nav = null, $type = 'desktop_top', $hover = false)
     {
-        if(empty($nav))
+        $isNullNav = empty($nav);
+        if($isNullNav)
         {
             $nav = new stdclass();
             $nav->type  = 'system';
@@ -181,49 +182,53 @@ class navModel extends model
             foreach($enabledModules as $module) unset($this->lang->nav->system->$module);
         }
         /* nav type select tag. */
-        $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");
+        $navInput = html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");
 
         if(zget($this->config->site, 'type') != 'blog')
         {
             /* artcle and system select tag. */
-            $entry .= html::select("nav[{$grade}][article][]", $articleTree, isset($nav->article) ? $nav->article : '', "class='navSelector form-control {$articleHidden}'");
-            $entry .= html::select("nav[{$grade}][product][]", $productTree, isset($nav->product) ? $nav->product : '', "class='navSelector form-control {$productHidden}'");
-            $entry .= html::select("nav[{$grade}][page][]", $pages, isset($nav->page) ? $nav->page : '', "class='navSelector form-control {$pageHidden}'");
+            $navInput .= html::select("nav[{$grade}][article][]", $articleTree, isset($nav->article) ? $nav->article : '', "class='navSelector form-control {$articleHidden}'");
+            $navInput .= html::select("nav[{$grade}][product][]", $productTree, isset($nav->product) ? $nav->product : '', "class='navSelector form-control {$productHidden}'");
+            $navInput .= html::select("nav[{$grade}][page][]", $pages, isset($nav->page) ? $nav->page : '', "class='navSelector form-control {$pageHidden}'");
 
             /* Tags of extend modules. */
             foreach($enabledModules as $module)
             {
                 $class  = ${"{$module}Hidden"};
-                $entry .= html::select("nav[{$grade}][{$module}][]", ${"{$module}List"}, isset($nav->$module) ? $nav->$module : '', "class='navSelector form-control {$class}'");
+                $navInput .= html::select("nav[{$grade}][{$module}][]", ${"{$module}List"}, isset($nav->$module) ? $nav->$module : '', "class='navSelector form-control {$class}'");
             }
         }
-        $entry .= html::select("nav[{$grade}][blog][]", $blogTree, isset($nav->blog) ? $nav->blog : '', "class='navSelector form-control {$blogHidden}'");
-        $entry .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector form-control {$system}'");
-        $entry .= html::input("nav[{$grade}][title][]", $nav->title, "placeholder='{$this->lang->nav->inputTitle}' class='input-default form-control titleInput'");
+        $navInput .= html::select("nav[{$grade}][blog][]", $blogTree, isset($nav->blog) ? $nav->blog : '', "class='navSelector form-control {$blogHidden}'");
+        $navInput .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector form-control {$system}'");
+        $navInput .= html::input("nav[{$grade}][title][]", $nav->title, "placeholder='{$this->lang->nav->inputTitle}' class='input-default form-control titleInput'");
 
         /* url input tag. */
-        $entry .= html::input("nav[{$grade}][url][]", $nav->url, "placeholder='{$this->lang->nav->inputUrl}' class='urlInput form-control {$urlHidden}'");
+        $navInput .= html::input("nav[{$grade}][url][]", $nav->url, "placeholder='{$this->lang->nav->inputUrl}' class='urlInput form-control {$urlHidden}'");
 
         /* hidden tags. */
-        if($grade > 1 ) $entry .= html::hidden("nav[{$grade}][parent][]", '', "class='grade{$grade}parent'");
-        $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
+        if($grade > 1 ) $navInput .= html::hidden("nav[{$grade}][parent][]", '', "class='grade{$grade}parent'");
+        $navInput .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
         if(strpos($type, 'desktop_') !== false) unset($this->lang->nav->targetList['modal']);
-        $entry .= html::select("nav[$grade][target][]", $this->lang->nav->targetList, isset($nav->target) ? $nav->target : '_self', "class='form-control'");
+        $navInput .= html::select("nav[$grade][target][]", $this->lang->nav->targetList, isset($nav->target) ? $nav->target : '_self', "class='form-control'");
 
         /* hover select */
         if($type == 'desktop_top' || $type == 'desktop_blog')
         {
-            $entry .= html::select("nav[$grade][hover][]", $this->lang->nav->dropdown, isset($nav->hover) ? $nav->hover : '', "class='form-control {$hoverHidden}'");
+            $navInput .= html::select("nav[$grade][hover][]", $this->lang->nav->dropdown, isset($nav->hover) ? $nav->hover : '', "class='form-control {$hoverHidden}'");
         }
 
         /* operate buttons. */
-        $entry .= html::a('javascript:;', "<i class='icon icon-plus'> </i>", "class='plus{$grade}' title='{$this->lang->nav->add}'");
-        $entry .= html::a('javascript:;', "<i class='icon icon-remove'> </i>", "class='remove' title='{$this->lang->delete}'");
-        if($childGrade < 4) $entry .= html::a('javascript:;', "<i class='icon icon-sitemap'> </i>", "title='{$this->lang->nav->addChild}' class='plus{$childGrade}'");
-        $entry .= "<a href='javascript:;'><i class='icon-move sort-handle sort-handle-" . $grade . "'></i></a>";
+        $options  = html::a('javascript:;', "<i class='icon icon-plus'> </i>", "class='plus{$grade}' title='{$this->lang->nav->add}'");
+        $options .= html::a('javascript:;', "<i class='icon icon-remove'> </i>", "class='remove' title='{$this->lang->delete}'");
+        if($childGrade < 4) $options .= html::a('javascript:;', "<i class='icon icon-sitemap'> </i>", "title='{$this->lang->nav->addChild}' class='plus{$childGrade}'");
+        $options .= "<a href='javascript:;'><i class='icon-move sort-handle sort-handle-" . $grade . "'></i></a>";
 
+        $editOption = html::a('javascript:;', "<i class='icon icon-edit'> </i>", "class='edit' title='{$this->lang->edit}'");
+        $hideClass  = $isNullNav ? '' : 'hide';
+        if(!$isNullNav) $entry .= "<span class='showBox'>{$nav->title}<span class='options'>{$editOption}{$options}</span></span>";
+        $entry .= "<span class='editBox $hideClass'>$navInput<span class='options'>$options</span></span>";
         return $entry;
     }
 
