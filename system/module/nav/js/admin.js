@@ -1,5 +1,12 @@
 $(document).ready(function()
 {
+    $(document).on('mousedown', '.options', function(){$('#submitBox .hidden').removeClass('hidden');});
+    $(document).on('mouseover', '#navList li', function()
+    {
+        if($(this).find('.opacity').size() == 0) $(this).find('.showBox .options:first').addClass('opacity');
+    });
+    $(document).on('mouseout', '#navList li', function(){$(this).find('.opacity').removeClass('opacity')});
+
     var fixForm = function()
     {
         $('#navList').sortable({trigger: '.sort-handle-1', selector: 'li', dragCssClass: ''});
@@ -7,7 +14,7 @@ $(document).ready(function()
         $('#navList .ulGrade3').sortable({trigger: '.sort-handle-3', selector: 'li', dragCssClass: ''});
         $('.shut').each(function()
         {
-            if(!$(this).parent().find('ul li').size())
+            if(!$(this).closest('li').find('ul li').size())
             {
                 $(this).hide();
                 $(this).next('.icon-circle').show();
@@ -23,29 +30,35 @@ $(document).ready(function()
     fixForm();
 
     /* add grade1 memu options */
+    $(document).on('click', '.edit', function()
+    {
+        $(this).closest('li').find('.showBox:first').addClass('hide');
+        $(this).closest('li').find('.editBox:first').removeClass('hide');
+        fixForm();
+    });
     $(document).on('click', '.plus1', function()
     {
-        $(this).parent().after($('#grade1NavSource').html());
+        $(this).closest('li').after($('#grade1NavSource').html());
         fixForm();
     });
 
     /* add grade2 memu options */
     $(document).on('click', '.plus2', function() 
     {
-        var container = $(this).parents('.liGrade2');
+        var container = $(this).closest('.liGrade2');
         if(0 == container.size())
         { 
-            $(this).parents('.liGrade1').find('.ulGrade2').show().prepend($('#grade2NavSource ul').html());
-            $(this).parents('.liGrade1').find("select[name='nav[1][hover][]']").removeClass('hide');
+            $(this).closest('.liGrade1').find('.ulGrade2').show().prepend($('#grade2NavSource ul').html());
+            $(this).closest('.liGrade1').find("select[name='nav[1][hover][]']").removeClass('hide');
         }
         else
         {
-            $(this).parent().after($('#grade2NavSource ul').html()); 
+            $(this).closest('li').after($('#grade2NavSource ul').html()); 
         }
 
-        if($(this).parent().find('ul li').size())
+        if($(this).closest('li').find('ul li').size())
         {
-            $(this).parent().children('.shut').removeClass('icon-folder-close').addClass('icon-folder-open-alt'); 
+            $(this).closest('li').children('.shut').removeClass('icon-folder-close').addClass('icon-folder-open-alt'); 
         }
         fixForm();
     });
@@ -53,14 +66,14 @@ $(document).ready(function()
     /* add grade3 memu options */
     $(document).on('click', '.plus3', function() 
     {
-        var container = $(this).parents('.liGrade3');
+        var container = $(this).closest('.liGrade3');
         if(0 == container.size())
         { 
-            $(this).parents('.liGrade2').find('.ulGrade3').show().prepend($('#grade3NavSource ul').html());
+            $(this).closest('.liGrade2').find('.ulGrade3').show().prepend($('#grade3NavSource ul').html());
         }
         else
         {
-            $(this).parent().after($('#grade3NavSource ul').html()); 
+            $(this).closest('li').after($('#grade3NavSource ul').html()); 
         }
         fixForm();
     });
@@ -68,29 +81,16 @@ $(document).ready(function()
     /* toggle children nav. */
     $(document).on('click', '.shut', function()
     {
-        $(this).parent().find("ul").toggle();
-        if($(this).parent().find('ul li').size() != 0)
+        $(this).closest('li').find("ul").toggle();
+        if($(this).closest('li').find('ul li').size() != 0)
         $(this).toggleClass('icon-folder-close').toggleClass('icon-folder-open-alt'); 
-    });
-
-    /* sort up. */
-    $(document).on('click', '.icon-arrow-up', function()
-    {
-        $(this).parent().prev().before($(this).parent()); 
-    });
-
-    /* sort down. */
-    $(document).on('click', '.icon-arrow-down', function()
-    { 
-        var hasNext = $(this).parent().next().find('input').size() > 0;
-        if(hasNext) $(this).parent().next().after($(this).parent()); 
     });
 
     /* delete nav. */
     $(document).on('click', '.remove', function()
     {
-        var navCount = $(this).parent().is('.liGrade1') && $('.navList .liGrade1').size();
-        var navGrade2Count = $(this).parent().is('.liGrade2') && $(this).parents('.ulGrade2').find('.liGrade2').size();
+        var navCount = $(this).closest('li').is('.liGrade1') && $('.navList .liGrade1').size();
+        var navGrade2Count = $(this).closest('li').is('.liGrade2') && $(this).closest('.ulGrade2').find('.liGrade2').size();
 
         if(navCount == 1)
         {
@@ -100,10 +100,10 @@ $(document).ready(function()
         {
             if(navGrade2Count == 1)
             {
-                $(this).parents('.liGrade1').find("select[name='nav[1][hover][]']").addClass('hide');
-                $(this).parents('.liGrade1').find('.icon-circle, .shut').toggle();
+                $(this).closest('.liGrade1').find("select[name='nav[1][hover][]']").addClass('hide');
+                $(this).closest('.liGrade1').find('.icon-circle, .shut').toggle();
             }
-            $(this).parent().remove();
+            $(this).closest('li').remove();
         }
     });
 
@@ -149,7 +149,7 @@ function submitForm()
 {
     $('.navList .grade1key').each(function(index,obj) { $(this).val(index); });
     $('.navList .grade2key').each(function(index){ $(this).val(1000+(parseInt(index))); })
-    $('.navList .grade2parent').each(function(index){ $(this).val( $(this).parents('.liGrade1').children('.grade1key').val()); });
-    $('.navList .grade3parent').each(function(i){ p = $(this).parents('.liGrade2').children('.grade2key').val(); $(this).val(p); });
+    $('.navList .grade2parent').each(function(index){ $(this).val( $(this).closest('.liGrade1').find('.grade1key').val()); });
+    $('.navList .grade3parent').each(function(i){ p = $(this).closest('.liGrade2').find('.grade2key').val(); $(this).val(p); });
     $('#navForm').submit();
 }
