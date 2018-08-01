@@ -350,6 +350,7 @@ body {padding-left: 50px;}
 #primaryNavbar .dropdown-menu > .heading {color: #333; padding: 3px 15px 0;}
 #primaryNavbar .dropdown-menu > li > a {padding: 3px 15px;}
 #primaryNavbar .dropdown-menu > .heading > .icon {display: inline-block; width: 30px; height: 30px; text-align: center; border-radius: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.2); color: #fff; background-color: #3280fc; line-height: 28px; margin-right: 5px;}
+#primaryNavbar  ul.nav-sub > li{margin-top: 0;}
 
 #mainNavbar {font-size: 13px; background-color: #EEE; border-bottom: 1px solid #d5d5d5;}
 #mainNavbar .navbar-nav > li > a {padding: 10px 12px;}
