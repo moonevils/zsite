@@ -11,6 +11,7 @@
  */
 $lang->ui->common = "界面";
 
+$lang->ui->component       = '常用组件';
 $lang->ui->clientDesktop   = '桌面';
 $lang->ui->clientMobile    = '移动';
 $lang->ui->logo            = 'Logo';

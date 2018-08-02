@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->slide->common     = '幻灯片';
-$lang->slide->group      = '幻灯片分组';
+$lang->slide->common     = '轮播图';
+$lang->slide->group      = '轮播图分组';
 $lang->slide->title      = '标题';
 $lang->slide->groupName  = '分组名称';
 $lang->slide->titleColor = '标题颜色';
