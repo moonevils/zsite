@@ -40,10 +40,10 @@ $lang->slide->buttonColor = '颜色';
 $lang->slide->sourceImage = '素材库图片';
 
 $lang->slide->sort        = '排序';
-$lang->slide->admin       = '幻灯片设置';
-$lang->slide->browse      = '浏览幻灯片';
-$lang->slide->create      = '添加幻灯片';
-$lang->slide->edit        = '编辑幻灯片';
+$lang->slide->admin       = '轮播图设置';
+$lang->slide->browse      = '浏览轮播图';
+$lang->slide->create      = '添加轮播图';
+$lang->slide->edit        = '编辑轮播图';
 $lang->slide->createGroup = '添加分组';
 $lang->slide->editGroup   = '编辑分组';
 $lang->slide->removeGroup = '删除分组';
