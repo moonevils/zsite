@@ -56,7 +56,7 @@ INSERT INTO `eps_config` (`id`, `owner`, `module`, `section`, `key`, `value`, `l
 (470,	'system',	'common',	'site',	'meta',	'',	'en'),
 (438,	'system',	'common',	'site',	'uid',	'554d6de00a0b7',	'en');
 
-UPDATE `eps_layout` SET `blocks` = '[{\"id\":\"101\",\"grid\":\"4\",\"titleless\":\"0\",\"borderless\":\"0\"},{\"id\":\"111\",\"grid\":\"4\",\"titleless\":\"0\",\"borderless\":\"0\"},{\"id\":\"110\",\"grid\":\"4\",\"titleless\":\"0\",\"borderless\":\"0\"}]' WHERE template = 'default' AND plan = '0' AND page = 'index_index' AND region = 'middle';
+UPDATE `eps_layout` SET `blocks` = '[{\"id\":\"101\",\"grid\":\"4\",\"titleless\":\"0\",\"borderless\":\"0\"},{\"id\":\"111\",\"grid\":\"4\",\"titleless\":\"0\",\"borderless\":\"0\"},{\"id\":\"110\",\"grid\":\"4\",\"titleless\":\"0\",\"borderless\":\"0\"}]' WHERE template = 'default' AND page = 'index_index' AND region = 'middle';
 
 INSERT INTO `eps_order` (`id`, `account`, `amount`, `payment`, `sn`, `address`, `note`, `createdDate`, `paidDate`, `payStatus`, `deliveriedDate`, `deliveriedBy`, `deliveryStatus`, `express`, `waybill`, `confirmedDate`, `finishedDate`, `finishedBy`, `status`, `lang`) VALUES
 (1,	'demo',	0.01,	'COD',	'',	'John [598-889-8558] is located in Zone 5o, USA 66555',	'',	'2015-02-12 14:24:53',	'0000-00-00 00:00:00',	'not_paid',	'0000-00-00 00:00:00',	'',	'not_send',	0,	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'',	'normal',	'en'),
