@@ -6,8 +6,37 @@ $(document).ready(function()
     })
     $('input[type=file]').change(function()
     {
-        $(this).parents('.col-md-6').find('.btn-upload').replaceWith('<i class="icon icon-lg icon-spin icon-refresh"></i>');
+        $(this).parents('.col-md-6').find('.btn-upload').hide();
+        $(this).parents('.col-md-6').find('.btn-upload').after('<i class="icon icon-lg icon-spin icon-refresh"></i>');
         $(this).parents('form').submit();
+    });
+    $.setAjaxForm('#logoForm', function(response)
+    {
+        if(response.result === 'success')
+        {
+            location.href = response.locate;
+        }
+        else
+        {
+            ($.zui.messager || $.zui.messager).warning(response.message);
+            $('#logoForm').find('.col-md-6').find('.btn-upload').show();
+            $('#logoForm').find('.col-md-6').find('.card .icon-refresh').remove();
+        }
+    });
+    $('#setLogo #logoForm a.btn-deleter').click(function()
+    {
+        $.get($(this).attr('href'), function(response)
+        {
+            if(response.result === 'success')
+            {
+                location.href = response.locate;
+            }
+            else
+            {
+                ($.zui.messager || $.zui.messager).warning(response.message);
+            }
+        });
+        return false;
     })
 
     var $editGroupForm = $('#editGroupForm');

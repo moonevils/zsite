@@ -3,6 +3,7 @@
 #mainMenu #navMenu a{font-size:16px; padding:0 50px;color:#010101;text-decoration: none;}
 #mainMenu #navMenu a.active{font-weight:bold;}
 .component{margin:0 20px;}
+.component .panel-heading{background:#fff;}
 
 #setLogo .row-logo .col-md-6 .box{border: 1px solid #DDD; height:200px; text-align:center;}
 #setLogo .row-logo .card{text-align:center;padding-top:30px; border:none; height:150px;}
