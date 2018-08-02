@@ -210,6 +210,10 @@ class upgradeModel extends model
             case '7_0':
             case '7_0_1':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
+            case '7_1_stable':
+                $this->execSQL($this->getUpgradeFile('7.1.stable'));
+                $this->removePlan();
+                    
         }
 
         $this->createCustomerCss();
@@ -2552,5 +2556,45 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * fixPlan 
+     * 
+     * @access public
+     * @return void
+     */
+    public function revertLayoutPlans()
+    {
+        /* Get all themes list. */
+        $plans = $this->dao->setAutoLang(false)
+            ->select("concat(lang,'_', `key`) as theme,value")->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('layout')
+            ->fetchPairs();
+
+        $langs     = explode(',', $this->config->enabledLangs);
+        $templates = $this->loadModel('ui')->getTemplates();
+        foreach($templates as $template)
+        {
+            $themes = $template['themes'];
+            foreach($themes as $theme => $themeName)
+            {
+                foreach($langs as $lang)
+                {
+                    $plan = zget($plans, "{$lang}_{$template['code']}_{$theme}", 0);
+                    if($plan)
+                    {
+                       $this->dao->query('REPLACE into ' . TABLE_LAYOUT . "(template,theme,page,region,object,blocks,import,lang ) select template,'$theme',page,region,object,blocks,import,lang from " . TABLE_LAYOUT . " where theme = $plan and lang = '$lang'"); 
+                    }
+                    else
+                    {
+                       $this->dao->query('REPLACE into ' . TABLE_LAYOUT . "(template,theme,page,region,object,blocks,import,lang ) select template,'$theme',page,region,object,blocks,import,lang from " . TABLE_LAYOUT . " where theme = 0 and lang = '$lang'"); 
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

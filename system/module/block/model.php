@@ -54,7 +54,6 @@ class blockModel extends model
         $device   = $this->app->clientDevice;
         $template = $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
-        $plan     = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
         $pages    = "all,{$module}_{$method}";
 
         $layoutsInCurrent = array();
@@ -63,7 +62,7 @@ class blockModel extends model
             $layoutsInCurrent = $this->dao->select('*')->from(TABLE_LAYOUT)
                 ->where('page')->eq("{$module}_{$method}")
                 ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-                ->andWhere('plan')->in($plan)
+                ->andWhere('theme')->in($theme)
                 ->andWhere('object')->eq($object)
                 ->fetchAll('region');
         }
@@ -71,7 +70,7 @@ class blockModel extends model
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-            ->andWhere('plan')->in($plan)
+            ->andWhere('theme')->eq($theme)
             ->andWhere('object')->eq('')
             ->fetchGroup('page', 'region');
 
