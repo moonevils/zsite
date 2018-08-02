@@ -27,7 +27,7 @@ $lang->file->label         = '标题：';
 $lang->file->lblInfo       = '<i>(类型：%s, 大小：%s, 添加于：%s，下载%s次)</i>';
 $lang->file->limit         = "(<span class='text-danger'>%sM以内</span>)";
 $lang->file->source        = '素材';
-$lang->file->sourceList    = '素材列表';
+$lang->file->sourceList    = '素材库';
 $lang->file->uploadSource  = '上传素材';
 $lang->file->sourceURI     = '地址';
 $lang->file->deleteSource  = '删除素材';

@@ -145,7 +145,7 @@ class slide extends control
             if(!$this->post->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->groupNotEmpty));
 
             $result = $this->loadModel('tree')->createSlideGroup();
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->createSuccess, 'locate' => inlink('admin')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->createSuccess, 'locate' => $this->createLink('ui', 'component')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
@@ -170,7 +170,7 @@ class slide extends control
             if($this->post->groupName == $group->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noChange));
 
             $result = $this->loadModel('tree')->editSlideGroup($groupID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('component')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
     }
