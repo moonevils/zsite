@@ -75,7 +75,7 @@
               <?php echo html::submitButton($lang->delete);?>
               <?php echo $lang->file->fileTip;?>
             </div>
-            <?php $pager->show('right', 'lite');?>
+            <?php $pager->show('right', 'full');?>
           </td>
         </tr>
       </tfoot>
@@ -119,7 +119,7 @@
               <div class='btn-group'><?php echo html::selectButton();?></div>
               <?php echo html::submitButton($lang->delete);?>
             </div>
-            <?php $pager->show('right', 'lite');?>
+            <?php $pager->show('right', 'full');?>
           </td>
         </tr>
       </tfoot>
