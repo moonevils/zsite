@@ -581,6 +581,7 @@ class control extends baseControl
      */
     public function loadThemeHooks()
     {
+        if(isset($this->config->inFetch) and $this->config->inFetch) return true;
         $theme     = $this->config->template->{$this->app->clientDevice}->theme;
         $hookPath  = $this->app->getWwwRoot() . 'theme' . DS . $this->config->template->{$this->app->clientDevice}->name . DS . $theme . DS;
         $hookFiles = glob("{$hookPath}*.php");
