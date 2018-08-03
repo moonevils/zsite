@@ -49,6 +49,7 @@ $lang->ui->editTemplate    = "编辑模板";
 $lang->ui->installedThemes = "已安装主题";
 $lang->ui->enableTheme     = "使用此主题";
 $lang->ui->industry        = "行业";
+$lang->ui->byIndustry      = "行业筛选";
 $lang->ui->offcial         = "官方";
 $lang->ui->score           = "积分";
 $lang->ui->reset           = "重置为默认";
@@ -148,6 +149,8 @@ $lang->ui->blocks2Create = "新创建区块";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置';
+$lang->ui->theme->upgrade                              = '升级';
+$lang->ui->theme->installed                            = '已安装';
 $lang->ui->theme->online                               = '在线主题';
 $lang->ui->theme->default                              = '默认';
 $lang->ui->theme->all                                  = '全部';
