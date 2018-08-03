@@ -52,9 +52,11 @@ $lang->ui->industry        = "行业";
 $lang->ui->offcial         = "官方";
 $lang->ui->score           = "积分";
 $lang->ui->reset           = "重置为默认";
-$lang->ui->themePackage    = "主题包";
+$lang->ui->themePackage    = "待导入主题包";
 $lang->ui->refreshPage     = "刷新页面";
 $lang->ui->mobileBottomNav = '移动版底部导航';
+$lang->ui->searchTheme     = '搜索已安装主题';
+$lang->ui->addTheme        = '添加主题';
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
@@ -444,6 +446,7 @@ unset($this->lang->ui->files->mobile->forum['reply/reply']);
 
 if(!isset($lang->effect)) $lang->effect = new stdclass();
 
+$lang->effect->common      = '特效';
 $lang->effect->category    = '分类';
 $lang->effect->name        = '名称';
 $lang->effect->account     = '设计师';
