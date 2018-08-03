@@ -11,27 +11,35 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div class='panel'>
+<div id='mainMenu' class='clearfix'>
+  <div id='navMenu'>
+    <?php echo html::a(inlink('setTemplate'), $lang->ui->files->default->user['thread']);?>
+    <?php echo html::a(inlink('themestore'), $lang->ui->themeStore, "class='active'");?>
+  </div>
+  <div id='deviceMenu' class='btn-toolbar pull-right'>
+    <?php
+    echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
+    echo "|";
+    echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
+    ?>
+  </div>
+</div>
+<div class='panel' id='mainPanel'>
   <div class='panel-heading'>
     <ul id='typeNav' class='nav nav-tabs'>
-      <li data-type='internal' <?php echo $type == 'installed' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('themestore', "type=installed"), $lang->package->installed);?>
+      <li data-type='internal' <?php echo ($type == 'byindustry' and $param == 'all') ? "class='active'" : '';?>><?php echo html::a(inlink('themestore'), $lang->ui->theme->all, "id='theme-all'");?></li>
+      <?php foreach($lang->ui->theme->searchLabels as $code => $label):?>
+      <li data-type='internal' <?php echo $type == $code ? "class='active'" : '';?>>
+      <?php echo html::a(inlink('themestore', "type={$code}"), $label);?>
       </li>
-      <li data-type='internal' <?php echo $type != 'installed' ? "class='active'" : '';?>>
-        <?php echo html::a(inlink('themestore'), $lang->ui->theme->online);?>
+      <?php endforeach;?>
+      <li data-type='internal' <?php echo ($type == 'byindustry' and $param != 'all') ? "class='active'" : '';?>>
+        <?php echo html::a('javascript:;', "<i class='icon icon-cog'></i> " . $lang->ui->byIndustry, "id='byindustry'");?>
       </li>
     </ul> 
   </div>
   <div id='mainArea'>
-    <?php if($type != 'installed'):?>
-    <div id='industryBox'>
-      <?php if($type != 'installed') echo $industryTree;?>
-      <?php echo html::a(inlink('themestore'), $lang->ui->theme->all, "id='theme-all'");?>
-      <?php foreach($lang->ui->theme->searchLabels as $code => $label):?>
-      <?php echo html::a(inlink('themestore', "type={$code}"), $label);?>
-      <?php endforeach;?>
-    </div>
-    <?php endif;?>
+    <div id='industryBox' class='hide'><?php echo $industryTree;?></div>
     <?php if($themes):?>
     <div id='storeThemes' class='cards cards-borderless themes row' data-param='<?php echo $param ?>'>
       <?php foreach($themes as $theme):?>
@@ -51,37 +59,33 @@
           <div class='theme-info'>
             <div class='theme-price'>
               <?php if($theme->latestRelease->lifePrice):?>
-              <?php echo "<strong class='text-danger price'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
+              <?php echo "<strong class='price'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
               <?php elseif($theme->latestRelease->score):?>
-                  <?php echo "<strong class='text-danger price'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
+                  <?php echo "<strong class='price'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
               <?php endif;?>
               <span class='pull-right'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
               <span class='pull-right'><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
             </div>
             <div class='theme-desc'>
-              <?php echo html::a($theme->viewLink, $theme->name, "target='_blank'");?>
-              <div class="dropdown dropup pull-right">
-                <button type="button" data-toggle="dropdown" class="btn btn-mini" role="button"><span class='icon icon-theme-store icon-cog'></span></button>
-                <ul class="dropdown-menu pull-right">
-                  <li><?php echo html::a($theme->viewLink, $lang->package->buy, 'target="_blank"');?></li>
+              <?php echo html::a($theme->viewLink, $theme->name, "target='_blank' title='{$theme->name}'");?>
+              <div class="actions">
                   <?php
-                  if($theme->type != 'computer' and $theme->type != 'mobile')
+                  if($theme->type != 'computer' and $theme->type != 'mobile' and isset($installeds[$theme->code]))
                   {
-                      if(isset($installeds[$theme->code]))
+                      if($installeds[$theme->code]->version != $theme->latestRelease->releaseVersion and $this->theme->checkVersion($theme->latestRelease->chanzhiCompatible))
                       {
-                          if($installeds[$theme->code]->version != $theme->latestRelease->releaseVersion and $this->theme->checkVersion($theme->latestRelease->chanzhiCompatible))
-                          {
-                              echo '<li>';
-                              commonModel::printLink('theme', 'upgrade', "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$theme->type", $lang->theme->upgrade, "data-toggle='modal'");
-                              echo '</li>';
-                          }
-                          else
-                          {
-                              echo '<li>' . html::a('javascript:;', $lang->theme->installed, "class='disabled'") . '</li>';
-                          }
+                          commonModel::printLink('theme', 'upgrade', "theme=$theme->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$theme->type", $lang->ui->theme->upgrade, "data-toggle='modal' class='btn radius-btn btn-sm'");
+                      }
+                      else
+                      {
+                          echo html::a('javascript:;', $lang->ui->theme->installed, "class='disabled btn radius-btn btn-sm'");
                       }
                   }
-                  echo '<li>' . html::a($theme->site, $lang->package->site, "target='_blank'") . '</li>';
+                  else
+                  {
+                      echo html::a($theme->viewLink, $lang->package->buy, 'target="_blank" class="btn radius-btn btn-sm"');
+                  }
+                  echo html::a($theme->site, $lang->package->site, "target='_blank' class='btn radius-btn btn-sm'");
                   ?>
                 </ul>
               </div>
@@ -165,13 +169,21 @@
     </div>
   </div>
   <?php endif; ?>
-  <?php elseif($type != 'installed'):?>
-  <div class='panel-body'>
-    <?php echo $lang->ui->theme->noTheme;?>
-  </div>
-  <?php elseif($type == 'installed'):?>
+  <?php else:?>
   <div class='panel-body'>
   </div>
   <?php endif;?>
 </div>
+<script>
+$(function()
+{
+    <?php if($type == 'byindustry' and $param != 'all'):?>
+    $('#industryBox').toggleClass('hide');
+    <?php endif;?>
+    $('#byindustry').click(function()
+    {
+        $('#industryBox').toggleClass('hide');
+    })
+})
+</script>
 <?php include '../../common/view/footer.admin.html.php';?>
