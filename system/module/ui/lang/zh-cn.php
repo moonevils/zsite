@@ -444,6 +444,7 @@ unset($this->lang->ui->files->mobile->forum['reply/reply']);
 
 if(!isset($lang->effect)) $lang->effect = new stdclass();
 
+$lang->effect->common      = '特效';
 $lang->effect->category    = '分类';
 $lang->effect->name        = '名称';
 $lang->effect->account     = '设计师';

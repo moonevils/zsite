@@ -1,0 +1,7 @@
+.row-main{background:#efefef;padding:0px;}
+#mainMenu{padding:20px; text-align:center; background:#fff; margin-bottom:20px; margin-top:-20px;}
+#mainMenu #navMenu a{font-size:16px; padding:0 50px;color:#010101;text-decoration: none;}
+#mainMenu #navMenu a.active{font-weight:bold;}
+.panel{margin:0 20px;}
+.panel .panel-heading{background:#fff;}
+#effects a{color:#353535;}
