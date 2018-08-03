@@ -45,8 +45,6 @@ class block extends control
         $this->lang->menuGroups->block = 'ui';
 
         $this->view->title    = $this->lang->block->pages;
-        $this->view->plans    = $this->block->getPlans($template);
-        $this->view->plan     = zget($this->config->layout, $template . '_' . $theme, 0);
         $this->view->template = $template;
         $this->view->uiHeader = true;
         $this->display();       
@@ -168,7 +166,6 @@ class block extends control
             ->where('page')->eq($page)
             ->andWhere('object')->eq($object)
             ->andWhere('template')->eq($template)
-            ->andWhere('plan')->eq('all')
             ->exec();
 
         if(!dao::isError()) $this->send(array('result' => 'success'));
@@ -208,98 +205,6 @@ class block extends control
 
         $this->view->type = $type;
         $this->display();
-    }
-
-    /**
-     * Switch layout plan of current theme.
-     * 
-     * @param  string    $plan 
-     * @access public
-     * @return void
-     */
-    public function switchLayout($plan)
-    {
-        $template = $this->config->template->{$this->app->clientDevice}->name;
-        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
-
-        $result = $this->block->setPlan($plan, $template, $theme);
-        if($result) $this->locate($this->server->http_referer);
-    }
-
-    /**
-     * Clone a layout plan.
-     * 
-     * @param  int    $plan 
-     * @access public
-     * @return void
-     */
-    public function cloneLayout($plan)
-    {
-        $template = $this->config->template->{$this->app->clientDevice}->name;
-        $theme    = $this->config->template->{$this->app->clientDevice}->theme;
-
-        if($plan)
-        {
-            $plan = $this->loadModel('tree')->getByID($plan);
-        }
-        else
-        {
-            $plan = new stdclass();
-            $plan->type = "layout_{$template}";
-        }
-
-        if($_POST)
-        {
-            $newPlan = $this->block->cloneLayout($plan);
-            if($newPlan) 
-            {
-                $result = $this->block->setPlan($newPlan, $template, $theme);
-                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
-            }
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-
-        $this->view->title = sprintf($this->lang->block->saveLayoutAs, $plan->name);
-        $this->view->plan  = $plan;
-        $this->display();
-    }
-
-    /**
-     * Remove a layout.
-     * 
-     * @param  int    $plan 
-     * @access public
-     * @return void
-     */
-    public function removeLayout($plan)
-    {
-        $setting = (array) $this->config->layout;
-        if(array_search($plan, $setting) != false) $this->send(array('result' => 'fail', 'message' => $this->lang->block->planIsUseing));
-        $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($plan)->exec();
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
-    }
-
-    /**
-     * Rename a layout.
-     * 
-     * @param  int    $plan 
-     * @access public
-     * @return void
-     */
-    public function renameLayout($plan)
-    {
-        $plan = $this->loadModel('tree')->getByID($plan);
-        if($_POST)
-        {
-            $result = $this->block->renameLayout($plan);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('pages'), 'blockID' => $blockID));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-
-        $this->view->title = $this->lang->block->renameLayout . $this->lang->colon . $plan->name;
-        $this->view->plan  = $plan;
-        $this->display(); 
     }
 
     /**
