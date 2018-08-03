@@ -850,7 +850,6 @@ class ui extends control
             die();
         }
 
-        $this->lang->menuGroups->ui = 'effect';
         $this->view->title = $this->lang->effect->admin;
         $result = $this->ui->getEffectListByApi($pageID);
         if($result->result == 'success')

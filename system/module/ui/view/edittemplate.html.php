@@ -5,7 +5,7 @@
     <?php
     echo $lang->ui->editTemplate . ': ';
     echo "<div class='dropdown' id='moduleBox'>";
-    echo "<a href='###' data-toggle='dropdown'>" . zget($lang->ui->folderList, $currentModule) . "<span class='caret'></span></a>";
+    echo "<a href='###' data-toggle='dropdown'>" . zget($lang->ui->folderList, $currentModule) . " <span class='icon-angle-down'></span></a>";
     echo "<ul class='dropdown-menu'>";
     foreach($lang->ui->folderList as $folder => $name)
     {
@@ -17,7 +17,7 @@
     if(isset($files->$currentModule))
     {
     echo "<div class='dropdown' id='fileBox'>";
-    echo "<a href='###' data-toggle='dropdown'>" . zget($files->$currentModule, $currentFile) . "<span class='caret'></span></a>";
+    echo "<a href='###' data-toggle='dropdown'>" . zget($files->$currentModule, $currentFile) . " <span class='icon-angle-down'></span></a>";
     echo "<ul class='dropdown-menu'>";
     foreach($files->$currentModule as $file => $name)
     {

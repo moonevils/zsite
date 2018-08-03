@@ -15,7 +15,7 @@
   <div id='navMenu'>
     <?php
     echo html::a($this->createLink('ui', 'component'), $lang->ui->component, "class='active'");
-    echo html::a($this->createLink('ui', 'component'), $lang->ui->component);
+    echo html::a($this->createLink('ui', 'effect'), $lang->effect->common);
     echo html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList);
     ?>
   </div>
