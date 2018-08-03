@@ -961,7 +961,6 @@ class uiModel extends model
         $lang        = $this->app->getClientLang();
         $dbFile      = $this->directories->exportDbPath . 'install.sql';
         $encryptFile = $this->directories->encryptDbPath . 'install.sql';
-        $plan        = zget($this->config->layout, "{$template}_{$theme}");
 
         $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE, TABLE_CONFIG);
         $groups = $this->getUsedSlideGroups($template, $theme);
@@ -974,7 +973,7 @@ class uiModel extends model
 
         $condations = array();
         $condations[TABLE_BLOCK]    = "where template='{$template}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_LAYOUT]   = "where template='{$template}' and plan = '{$plan}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_LAYOUT]   = "where template='{$template}' and theme = '{$theme}' and lang in ('all', '{$lang}')";
         $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and section='template' and `key` = 'custom'";
         $condations[TABLE_CATEGORY] = "where type = 'slide'";
         $condations[TABLE_SLIDE]    = "where `group` in ({$groups})";
@@ -982,7 +981,7 @@ class uiModel extends model
 
         $fields = array();
         $fields[TABLE_BLOCK]    = "id as originID,`template`,`type`,`title`,`content`, 'lang' as lang";
-        $fields[TABLE_LAYOUT]   = "*, 'plan' as plan, 'lang' as lang";
+        $fields[TABLE_LAYOUT]   = "*, 'THEME_CODEFIX' as theme, 'lang' as lang";
         $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, 'lang' as lang";
         $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'lang' as lang,`order`";
         $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type, 'lang' as lang";
@@ -1018,13 +1017,12 @@ class uiModel extends model
         $lang        = $this->app->getClientLang();
         $dbFile      = $this->directories->exportDbPath  . 'full.sql';
         $encryptFile = $this->directories->encryptDbPath . 'full.sql';
-        $plan        = zget($this->config->layout, "{$template}_{$theme}");
 
         $tables = array(TABLE_CATEGORY, TABLE_PRODUCT, TABLE_FILE, TABLE_ARTICLE, TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_RELATION, TABLE_SLIDE);
 
         $condations = array();
         $condations[TABLE_BLOCK]    = "where template='{$template}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_LAYOUT]   = "where template='{$template}' and plan = '{$plan}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_LAYOUT]   = "where template='{$template}' and theme = '{$theme}' and lang in ('all', '{$lang}')";
         $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and section='template' and `key` = 'custom'";
         $condations[TABLE_CATEGORY] = '';
         $condations[TABLE_SLIDE]    = "where lang in('all', '{$lang}')";
@@ -1051,7 +1049,7 @@ class uiModel extends model
 
         $this->zdb->dump($encryptFile, $tables, $fields, 'data', $condations, $replaces);
 
-        /* Dump layout plan, css and js config. */
+        /* Dump layout, css and js config. */
         $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or (section in('css', 'js', 'layout') and `key` like '{$template}_{$theme}%') )";
         $this->zdb->dump($dbFile, $tables, $fields, 'data', $condations, $replaces);
 
