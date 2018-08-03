@@ -23,10 +23,10 @@
 <div id='setLogo' class='component'>
   <div class='panel'>
     <div class='panel-heading'>
-      <strong><i class='icon-certificate'></i> <?php echo $lang->ui->setLogo;?></strong>
+      <strong><?php echo $lang->ui->setLogo;?> <i class='icon-certificate'></i></strong>
     </div>
     <div class='panel-body row row-logo'>
-      <form method='post' id='ajaxForm' enctype='multipart/form-data' action='<?php echo $this->createLink('ui', 'setLogo');?>'>
+      <form method='post' id='logoForm' enctype='multipart/form-data' action='<?php echo $this->createLink('ui', 'setLogo');?>'>
         <div class='col-md-6'>
           <div class='box'>
             <div class='card'>
@@ -46,21 +46,30 @@
         </div>
         <div class='col-md-6'>
           <div class='box'>
-          <div class='card'>
-            <?php if(!empty($favicon)) $favicon->extension = 'ico';?>
-            <?php if(isset($favicon->webPath)) echo html::a('javascript:;', html::image($this->loadModel('file')->printFileURL($favicon), "class='favicon'"), "class='btn-upload'");?>
-            <?php if(!isset($favicon->webPath)) echo html::a('javascript:;', $lang->ui->uploadFavicon, "class='text-lg btn-upload'");?>
-          </div>
-          <span class='actions'>
-            <?php if(isset($favicon->webPath)) echo html::a('javascript:;', "<i class='icon icon-lg icon-edit-sign'> </i>", "class='text-info btn-editor'");?>
-            <?php if($favicon or $defaultFavicon) commonModel::printLink('ui', 'deleteFavicon', '', "<i class='icon icon-lg icon-remove-sign'> </i>", "class='text-danger btn-deleter'");?>
-          </span>
+            <div class='card'>
+              <?php if(!empty($favicon)) $favicon->extension = 'ico';?>
+              <?php
+              if(isset($favicon->webPath) or $defaultFavicon)
+              {
+                  $imagePath = isset($favicon->webPath) ? $this->loadModel('file')->printFileURL($favicon) : $config->webRoot . 'favicon.ico';
+                  echo html::a('javascript:;', html::image($imagePath, "class='favicon'"), "class='btn-upload'");
+              }
+              else
+              {
+                  echo html::a('javascript:;', $lang->ui->uploadFavicon, "class='text-lg btn-upload'");
+              }
+              ?>
+            </div>
+            <span class='actions'>
+              <?php if(isset($favicon->webPath) or $defaultFavicon) echo html::a('javascript:;', "<i class='icon icon-lg icon-edit-sign'> </i>", "class='text-info btn-editor'");?>
+              <?php if($favicon or $defaultFavicon) commonModel::printLink('ui', 'deleteFavicon', '', "<i class='icon icon-lg icon-remove-sign'> </i>", "class='text-danger btn-deleter'");?>
+            </span>
   
-          <div class='text-important'>
-          <?php $langParam = $app->clientLang == 'en' ? '&lang=en' : '';?>
-          <?php printf($lang->ui->faviconHelp, "http://api.chanzhi.org/goto.php?item=help_favicon{$langParam}");?>
-          </div>
-          <div class='hide'><?php echo html::file('favicon', "class='form-control'");?></div>
+            <div class='text-important'>
+            <?php $langParam = $app->clientLang == 'en' ? '&lang=en' : '';?>
+            <?php printf($lang->ui->faviconHelp, "http://api.chanzhi.org/goto.php?item=help_favicon{$langParam}");?>
+            </div>
+            <div class='hide'><?php echo html::file('favicon', "class='form-control'");?></div>
           </div>
         </div>
       </form>
@@ -70,7 +79,7 @@
 <div id='slide' class='component'>
   <div class='panel'>
     <div class='panel-heading'>
-      <i class='icon-th'></i> <strong><?php echo $lang->slide->common;?></strong>
+      <strong><?php echo $lang->slide->common;?> <i class='icon-th'></i></strong>
     </div>
     <div class='panel-body'>
       <section class='row cards-borderless'>
@@ -99,12 +108,14 @@
               <?php endif; ?>
             </div>
           </a>
-          <div class='card-heading text-center'>
+          <div class='card-heading text-left'>
             <div class='group-title' data-id='<?php echo $group->id;?>' data-action="<?php echo $this->createLink('slide', 'editGroup', "groupID=$group->id");?>">
+              <?php echo html::a('javascript:;', "<i class='icon icon-edit'></i>", "class='edit-group-btn'");?>
               <span class='group-name'><?php echo $group->name;?></span>&nbsp;&nbsp;
-              <?php echo html::a($this->createLink('slide', 'browse', "groupID=$group->id"), $lang->edit);?>
-              <?php echo html::a('javascript:;', $lang->slide->rename, "class='edit-group-btn'");?>
-              <?php echo html::a($this->createLink('slide', 'removeGroup', "groupID=$group->id"), $lang->delete, "class='deleter'");?>
+              <span class='pull-right'>
+              <?php echo html::a($this->createLink('slide', 'browse', "groupID=$group->id"), $lang->edit, "class='btn btn-sm'");?>
+              <?php echo html::a($this->createLink('slide', 'removeGroup', "groupID=$group->id"), $lang->delete, "class='deleter btn btn-sm'");?>
+              </span>
             </div>
           </div>
         </div>
