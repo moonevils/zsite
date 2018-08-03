@@ -212,6 +212,8 @@ class ui extends control
             if(isset($_FILES['favicon'])) $faviconReturn = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
 
             if($setNameResult || $logoReturn['result'] || $faviconReturn['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=> inlink('component')));
+            if(isset($logoReturn)) $this->send($logoReturn);
+            if(isset($faviconReturn)) $this->send($faviconReturn);
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
     }
@@ -224,14 +226,14 @@ class ui extends control
      */
     public function deleteFavicon()
     {
-        $defaultFavicon = $this->app->getWwwRoot() . 'favicon.ico';
-        if(file_exists($defaultFavicon)) unlink($defaultFavicon);
-
         $favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=favicon");
         if($favicon) $this->loadModel('file')->delete($favicon->fileID);
 
-        $this->locate(inlink('component'));
+        $defaultFavicon = $this->app->getWwwRoot() . 'favicon.ico';
+        if(file_exists($defaultFavicon) and !unlink($defaultFavicon)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->deleteFaviconFail, $defaultFavicon)));
+
+        $this->send(array('result' => 'success', 'locate' => inlink('component')));
     }
 
     /**
@@ -249,7 +251,7 @@ class ui extends control
         $logo = isset($this->config->logo->$theme) ? json_decode($this->config->logo->$theme) : false;
         if($logo) $this->loadModel('file')->delete($logo->fileID);
 
-        $this->locate(inlink('component'));
+        $this->send(array('result' => 'success', 'locate' => inlink('component')));
     }
 
     /**
