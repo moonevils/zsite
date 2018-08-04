@@ -29,13 +29,15 @@
 <div class='panel' id='mainPanel'>
   <form method='post'>
     <div class='panel-heading'>
-      <?php echo html::a('#internalSection', $lang->ui->installedThemes, "data-toggle='tab' class='active'");?>
-      <?php if($app->clientLang != 'en'):?>
-      <?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?>
-      <?php endif;?>
-      <?php echo html::a('#', $lang->ui->addTheme . "<i class='icon-plus-sign'></i>", "class='radius-btn'");?>
-      <?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . "<i class='icon icon-download'></i>", "class='radius-btn'");?>
-      <?php echo html::input('searchTheme', '', "placeholder={$lang->ui->searchTheme}")?>
+      <ul class='nav nav-tabs' id='typeNav'>
+        <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->installedThemes, "data-toggle='tab' class='active'");?></li>
+        <?php if($app->clientLang != 'en'):?>
+        <li data-type='internal'><?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?></li>
+        <?php endif;?>
+        <li data-type='internal'><?php echo html::a('#', $lang->ui->addTheme . "<i class='icon-plus-sign'></i>", "class='radius-btn'");?></li>
+        <li data-type='internal'><?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . "<i class='icon icon-download'></i>", "class='radius-btn'");?></li>
+        <?php echo html::input('searchTheme', '', "placeholder={$lang->ui->searchTheme}")?>
+      </ul>
     </div>
   </form>
   <div class='panel-body tab-content'>
