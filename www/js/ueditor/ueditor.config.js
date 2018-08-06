@@ -227,10 +227,12 @@
         //    {tag:'span',name:'hi', label:'', style:'font-style:italic;font-weight:bold;color:rgb(51, 153, 204)'}
         //]
 
+        // Fix paste command not work in chrome, @see http://xirang.5upm.com/task-view-2770.html
+        // 参考 https://blog.csdn.net/master_yao/article/details/80240579
         //打开右键菜单功能
-        //,enableContextMenu: true
+        ,enableContextMenu: true
         //右键菜单的内容，可以参考plugins/contextmenu.js里边的默认菜单的例子，label留空支持国际化，否则以此配置为准
-        //,contextMenu:[
+        ,contextMenu:[
         //    {
         //        label:'',       //显示的名称
         //        cmdName:'selectall',//执行的command命令，当点击这个右键菜单时
@@ -240,7 +242,7 @@
         //            //this.ui._dialogs['inserttableDialog'].open();
         //        }
         //    }
-        //]
+        ]
 
         //快捷菜单
         //,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline", "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
