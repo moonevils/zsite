@@ -13,29 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong class='pull-left text-danger'> <?php printf($lang->block->currentLayout, $plans[$plan]);?> </strong> &nbsp;
-    <ul class='pull-left'>
-      <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-          <?php echo $lang->block->switchPlan;?> <i class="icon icon-chevron-down"></i>
-        </a>
-        <ul class="dropdown-menu layout-menu">
-          <?php foreach($plans as $planID => $name):?>
-          <li<?php if($plan == $planID) echo " class='active'";?>>
-            <?php echo html::a(inlink('switchlayout', "plan={$planID}"), $name);?>
-            <div class='actions'>
-              <?php if($planID) echo html::a(inlink('renamelayout',   "plan={$planID}"), "<i class='icon icon-pencil'></i>", "data-toggle='modal'");?>
-              <?php if($planID) echo html::a(inlink('removelayout',   "plan={$planID}"), "<i class='icon icon-remove'></i>", "class='deleter'");?>
-            </div>
-          </li>
-          <?php endforeach;?>
-        </ul>
-      </li>
-    </ul>
-    <div class='panel-actions'>
-      <?php if($plan != 0) echo html::a(inlink('renamelayout', "plan={$plan}"), $lang->block->renameLayout, "class='btn btn-sm btn-default' data-toggle='modal'");?>
-      <?php echo html::a(inlink('clonelayout', "plan={$plan}"), $lang->block->cloneLayout, "class='btn btn-primary' data-toggle='modal'");?>
-    </div>
+    <strong><?php echo $lang->block->pages;?></strong>
   </div>
   <table class='table' style='margin-top:10px;'>
     <tr>

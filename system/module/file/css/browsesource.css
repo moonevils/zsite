@@ -26,3 +26,18 @@
 .file-source .input-group {width: auto; margin: 0 -1px -1px -1px; z-index: 2}
 .copyBtn {padding-left: 8px; padding-right: 8px;}
 .noflashTip > .popover-content{z-index:1000;width:205px;}
+
+.row-main{background-color:#e2e2e2;padding:0}
+#mainMenu{padding:20px; text-align:center; background:#fff; margin-bottom:20px; margin-top:-20px;}
+#mainMenu #navMenu a{font-size:16px; padding:0 50px;color:#010101;text-decoration: none;}
+#mainMenu #navMenu a.active{font-weight:bold;}
+.panel {margin:0 40px;}
+.panel #listView{margin:15px;}
+.panel table th{background-color:#fff !important;border-top:1px solid #ddd}
+.panel table tfoot td{border:none}
+.panel .panel-heading{background-color:#fff;border:none;margin:10px 0 -15px 0}
+.panel .panel-heading .btn-group a{text-decoration:none;}
+.panel .panel-heading .btn-group .active .icon{color:#000}
+.panel .panel-heading .btn-group a:last-child{padding-left:10px}
+.panel .panel-heading .btn-group .icon{font-size:25px;color:#9b9a9b}
+.panel .radius-btn{text-decoration:none;border:1px solid #ccc;border-radius:6px;font-size:14px;color:#000;margin-left:8px}

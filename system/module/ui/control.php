@@ -48,6 +48,100 @@ class ui extends control
     }
 
     /**
+     * Edit template files.
+     * 
+     * @param  string $module 
+     * @param  string $file 
+     * @access public
+     * @return void
+     */
+    public function editTemplate($module = 'common', $file = 'header')
+    {
+        $template = $this->config->template->{$this->app->clientDevice}->name;
+        if($_POST)
+        {
+            $canManage = array('result' => 'success');
+            if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'warning' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'])));
+            $result = $this->ui->writeViewFile($template, $this->post->module, $this->post->file);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('editTemplate', "moduel=$module&file=$file")));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->lang->menuGroups->ui = 'edit';
+
+        $this->view->title         = $this->lang->ui->editTemplate;
+        $this->view->currentModule = $module;
+        $this->view->currentFile   = $file;
+        $this->view->uiHeader      = false;
+        $this->view->files         = $this->lang->ui->files->$template;
+        $this->view->realFile      = $this->ui->getExtFile($template, $module, $file);
+        $this->view->content       = file_get_contents($this->ui->getEffectViewFile($template, $module, $file));
+        $this->view->rawContent    = file_get_contents($this->app->getAppRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php');
+
+        $this->display();
+    }
+
+    /**
+     * Manage component. Such as logo, slide and setting.
+     * 
+     * @access public
+     * @return void
+     */
+    public function component()
+    {
+        $template    = $this->config->template->{$this->app->clientDevice}->name;
+        $theme       = $this->config->template->{$this->app->clientDevice}->theme;
+        $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
+
+        $logo = false;
+        if(isset($logoSetting->$template->themes->all))    $logo = $logoSetting->$template->themes->all;
+        if(isset($logoSetting->$template->themes->$theme)) $logo = $logoSetting->$template->themes->$theme;
+
+        if($logo) $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
+
+        unset($this->lang->ui->menu);
+        $this->view->logo           = $logo;
+        $this->view->favicon        = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
+        $this->view->defaultFavicon = file_exists($this->app->getWwwRoot() . 'favicon.ico');
+
+        $groups = $this->loadModel('slide')->getCategory();
+        foreach($groups as $group)
+        {
+            $group->slides = $this->slide->getList($group->id);
+            $group->slide = $this->slide->getFirstSlide($group->id);
+        }
+        $this->view->groups = $groups;
+
+        /* Get configs of list number. */
+        $this->app->loadModuleConfig('file');
+        $this->app->loadLang('file');
+        if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
+        if(strpos($this->config->site->modules, 'book') !== false)    $this->app->loadModuleConfig('book');
+        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadModuleConfig('message');
+
+        if(strpos($this->config->site->modules, 'article') !== false)
+        {
+            $this->app->loadModuleConfig('article');
+            $this->app->loadLang('article');
+        }
+        if(strpos($this->config->site->modules, 'forum') !== false)
+        {
+            $this->app->loadModuleConfig('forum');
+            $this->app->loadModuleConfig('reply');
+        }
+        if(strpos($this->config->site->modules, 'product') !== false)
+        {
+            $this->app->loadModuleConfig('product');
+            $this->app->loadLang('product');
+        }
+
+        $this->view->fontsPath = $this->app->getTmpRoot() . 'fonts';
+        $this->view->title     = $this->lang->ui->component;
+        $this->display();
+    }
+
+    /**
      * Custom theme.
      *
      * @param  string $theme
@@ -117,28 +211,11 @@ class ui extends control
             if(isset($_FILES['logo']))    $logoReturn    = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
             if(isset($_FILES['favicon'])) $faviconReturn = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
 
-            if($setNameResult || $logoReturn['result'] || $faviconReturn['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
+            if($setNameResult || $logoReturn['result'] || $faviconReturn['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=> inlink('component')));
+            if(isset($logoReturn)) $this->send($logoReturn);
+            if(isset($faviconReturn)) $this->send($faviconReturn);
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
-
-        $this->lang->menuGroups->ui = 'logo';
-        $template    = $this->config->template->{$this->app->clientDevice}->name;
-        $theme       = $this->config->template->{$this->app->clientDevice}->theme;
-        $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
-
-        $logo = false;
-        if(isset($logoSetting->$template->themes->all))    $logo = $logoSetting->$template->themes->all;
-        if(isset($logoSetting->$template->themes->$theme)) $logo = $logoSetting->$template->themes->$theme;
-
-        if($logo) $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
-
-        unset($this->lang->ui->menu);
-        $this->view->title          = $this->lang->ui->setLogo;
-        $this->view->logo           = $logo;
-        $this->view->favicon        = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
-        $this->view->defaultFavicon = file_exists($this->app->getWwwRoot() . 'favicon.ico');
-
-        $this->display();
     }
 
     /**
@@ -149,14 +226,14 @@ class ui extends control
      */
     public function deleteFavicon()
     {
-        $defaultFavicon = $this->app->getWwwRoot() . 'favicon.ico';
-        if(file_exists($defaultFavicon)) unlink($defaultFavicon);
-
         $favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=favicon");
         if($favicon) $this->loadModel('file')->delete($favicon->fileID);
 
-        $this->locate(inlink('setLogo'));
+        $defaultFavicon = $this->app->getWwwRoot() . 'favicon.ico';
+        if(file_exists($defaultFavicon) and !unlink($defaultFavicon)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->deleteFaviconFail, $defaultFavicon)));
+
+        $this->send(array('result' => 'success', 'locate' => inlink('component')));
     }
 
     /**
@@ -174,7 +251,7 @@ class ui extends control
         $logo = isset($this->config->logo->$theme) ? json_decode($this->config->logo->$theme) : false;
         if($logo) $this->loadModel('file')->delete($logo->fileID);
 
-        $this->locate(inlink('setLogo'));
+        $this->send(array('result' => 'success', 'locate' => inlink('component')));
     }
 
     /**
@@ -185,29 +262,6 @@ class ui extends control
      */
     public function others()
     {
-        /* Get configs of list number. */
-        $this->app->loadModuleConfig('file');
-        $this->app->loadLang('file');
-        if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
-        if(strpos($this->config->site->modules, 'book') !== false)    $this->app->loadModuleConfig('book');
-        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadModuleConfig('message');
-
-        if(strpos($this->config->site->modules, 'article') !== false)
-        {
-            $this->app->loadModuleConfig('article');
-            $this->app->loadLang('article');
-        }
-        if(strpos($this->config->site->modules, 'forum') !== false)
-        {
-            $this->app->loadModuleConfig('forum');
-            $this->app->loadModuleConfig('reply');
-        }
-        if(strpos($this->config->site->modules, 'product') !== false)
-        {
-            $this->app->loadModuleConfig('product');
-            $this->app->loadLang('product');
-        }
-
         if(!empty($_POST))
         {
             if($this->post->files['watermark'] == 'open')
@@ -247,11 +301,6 @@ class ui extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
-
-        $this->view->fontsPath = $this->app->getTmpRoot() . 'fonts';
-        $this->lang->menuGroups->ui = 'others';
-        $this->view->title = $this->lang->ui->others;
-        $this->display();
     }
 
     /**
@@ -782,41 +831,6 @@ class ui extends control
     }
 
     /**
-     * Edit template files.
-     * 
-     * @param  string $module 
-     * @param  string $file 
-     * @access public
-     * @return void
-     */
-    public function editTemplate($module = 'common', $file = 'header')
-    {
-        $template = $this->config->template->{$this->app->clientDevice}->name;
-        if($_POST)
-        {
-            $canManage = array('result' => 'success');
-            if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'warning' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'])));
-            $result = $this->ui->writeViewFile($template, $this->post->module, $this->post->file);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('editTemplate', "moduel=$module&file=$file")));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->lang->menuGroups->ui = 'edit';
-
-        $this->view->title         = $this->lang->ui->editTemplate;
-        $this->view->currentModule = $module;
-        $this->view->currentFile   = $file;
-        $this->view->uiHeader      = false;
-        $this->view->files         = $this->lang->ui->files->$template;
-        $this->view->realFile      = $this->ui->getExtFile($template, $module, $file);
-        $this->view->content       = file_get_contents($this->ui->getEffectViewFile($template, $module, $file));
-        $this->view->rawContent    = file_get_contents($this->app->getAppRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php');
-
-        $this->display();
-    }
-
-    /**
      * Admin effect page.
      * 
      * @param  int    $pageID 
@@ -836,7 +850,6 @@ class ui extends control
             die();
         }
 
-        $this->lang->menuGroups->ui = 'effect';
         $this->view->title = $this->lang->effect->admin;
         $result = $this->ui->getEffectListByApi($pageID);
         if($result->result == 'success')
