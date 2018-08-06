@@ -194,6 +194,77 @@ class order extends control
     }
 
     /**
+     * Wechat pay.
+     * 
+     * @param  int    $orderID 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function wechatpay($orderID, $type = '')
+    {
+        $order = $this->order->getByID($orderID);
+
+        if($order->payStatus == 'paid')
+        {
+            $order = $this->order->getOrderByRawID($orderID);
+
+            $this->view->order  = $order;
+            $this->view->result = true;
+
+            $this->display('order', 'processorder');
+        }
+        else
+        {
+            $this->app->loadClass('wechatpay', true);
+            $wechatConfig = $this->order->getWechatpayConfig();
+            $wechatpay = new wechatPay($wechatConfig);
+
+            $subject = $this->order->getSubject($orderID);
+            $tradeID = uniqid('order' . $orderID . 'wechat');
+
+            if($this->app->clientDevice != 'mobile')
+            {
+                $this->view->url = $wechatpay->getCodeUrl($subject, $tradeID, $order->amount * 100, 0);
+            }
+            else
+            {
+                a('dd');
+                if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false)
+                {
+                a('ee');
+                    $openID = $this->loadModel('user')->getOpenID($this->app->user->account, 'wechat');
+                    if(!$openID)
+                    {
+                        $currentURL = helper::createLink('order', 'wechatpay', "orderID=$orderID&type=$type");
+                        $currentURL = base64_encode($currentURL);
+
+                        $redirectURL = getWebRoot(true) .  ltrim(helper::createLink('user', 'wechatbind', "url=$currentURL"), '/');
+                        $this->locate($wechatpay->getAuthURL($redirectURL));
+                    }
+                    $config = $wechatpay->getJSAPIConfig($subject, $tradeID, $order->amount * 100, $openID);
+                    $this->view->payConfig = $config;
+                }
+                else
+                {
+                    $this->view->payConfig = $wechatConfig;
+                    $this->view->url       = $wechatpay->getWAPPayUrl($subject, $tradeID, $order->amount * 100, 0);
+                }
+            }
+                    var_dump($this->view->url);exit;
+
+            $notifyURL = empty($type) ? inlink('processorder', "type=wechatpay&mode=notify") : helper::createLink($type, 'processorder', "type=wechat&mode=notify");
+
+            $this->app->loadModuleConfig('product');
+            $this->view->order   = $order;
+            $this->view->tradeID = $tradeID;
+            $this->view->currencySymbol = $this->config->product->currencySymbol;
+
+            $this->display();
+        }
+    }
+
+    /**
      * Delivery order.
      * 
      * @param  int    $orderID 
@@ -295,7 +366,14 @@ class order extends control
      */
     public function processOrder($type = 'alipay', $mode = 'return')
     {
-        if($type == 'alipay') $this->processAlipayOrder($mode);
+        if($type == 'alipay')
+        {
+            $this->processAlipayOrder($mode);
+        }
+        else if($type == 'wechat')
+        {
+            $this->processWechatpayOrder($mode);
+        }
         $this->display('order', zget($this->config->order->processViews, $this->view->order->type, 'processorder')); 
     }
 
@@ -350,7 +428,32 @@ class order extends control
 
         return $order;
     }
-     
+
+    /**
+     * Process wechatpay order.
+     * 
+     * @param  string $mode 
+     * @access public
+     * @return void
+     */
+    public function processWechatpayOrder($mode = 'return')
+    {
+        /* Get the orderID from the wechatpay. */
+        $order = $this->order->getOrderFromWechatpay($mode);
+        if(!$order) die('STOP!');
+
+        /* Process the order. */
+        $result = $this->order->processOrder($order);
+
+        /* Notify mode. */
+        if($mode == 'notify')
+        {
+            $this->order->saveWechatpayLog();
+            if($result) die('success');
+            die('fail');
+        }
+    }
+
     /**
      * Finish order. 
      * 
@@ -513,5 +616,54 @@ class order extends control
         $result = $this->order->deleteOrder($orderID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess));
+    }
+
+    /**
+     * Qrcode.
+     * 
+     * @param  string    $url 
+     * @access public
+     * @return void
+     */
+    public function qrcode($url)
+    {
+        $url = base64_decode($url);
+        header("Content-Type: image/png");
+
+        $this->app->loadClass('qrcode', true);
+        echo qrcode::png($url, false, QR_ECLEVEL_L, 4);
+    }
+
+    /**
+     * Ajax check order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return string
+     */
+    public function ajaxCheckOrder($orderID)
+    {
+        $order = $this->order->getByID($orderID);
+        echo $order->payStatus;
+    }
+
+    /**
+     * Ajax query.
+     * 
+     * @param  int    $orderID 
+     * @param  int    $tradeID 
+     * @access public
+     * @return void
+     */
+    public function ajaxQuery($orderID, $tradeID)
+    {
+        $this->app->loadClass('wechatpay', true);
+        $wechatConfig = $this->order->getWechatpayConfig();
+        $wechatpay = new wechatPay($wechatConfig);
+
+        $data = $wechatpay->orderQuery(null, $tradeID);
+        if($data['trade_state'] == 'SUCCESS') $this->order->updatePayStatus($orderID, 'paid');
+
+        echo json_encode($data);
     }
 }
