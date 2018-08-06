@@ -72,4 +72,16 @@ $(document).ready(function()
       $(this).popover({trigger:'manual', content:v.noFlashTip, placement:'bottom', tipClass:'noflashTip'}).popover('toggle');
       $(this).parent().prev().focus();
     })}
+
+    $('input[name="checkAll[]"]').change(function()
+    {
+        if(this.checked)
+        {
+            $("input[name='imageID[]']").prop('checked', true);
+        }
+        else
+        {
+            $("input[name='imageID[]']").prop('checked', false);
+        }
+    });
 });
