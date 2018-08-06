@@ -90,8 +90,8 @@
           <td><?php echo $file->addedDate;?></td>
           <td class='text-center'>
             <?php
-            commonModel::printLink('file', 'editsource',   "id=$file->id", $lang->edit, "data-toggle='modal'");
-            commonModel::printLink('file', 'deletesource', "id=$file->id", $lang->delete, "class='deleter'");
+            commonModel::printLink('file', 'editsource',   "id=$file->id", $lang->edit, "data-toggle='modal' class='btn'");
+            commonModel::printLink('file', 'deletesource', "id=$file->id", $lang->delete, "class='deleter btn'");
             ?>
           </td>
         </tr>
@@ -99,7 +99,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td class='text-left' colspan='2'><?php echo html::checkbox('checkAll', $lang->selectAll) . html::a(inlink('delete'), $lang->delete, "class='deleter radius-btn'")?></td>
+          <td class='text-left' colspan='2'><?php echo html::checkbox('checkAll', $lang->selectAll) . html::a(inlink('delete'), $lang->delete, "class='deleter btn'")?></td>
           <td colspan='8'><?php $pager->show();?></td>
         </tr>
       </tfoot>
