@@ -57,7 +57,6 @@ $lang->ui->themePackage    = "待导入主题包";
 $lang->ui->refreshPage     = "刷新页面";
 $lang->ui->mobileBottomNav = '移动版底部导航';
 $lang->ui->searchTheme     = '搜索已安装主题';
-$lang->ui->addTheme        = '添加主题';
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";

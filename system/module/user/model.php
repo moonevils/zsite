@@ -1069,6 +1069,88 @@ class userModel extends model
     }
 
     /**
+     * Auto login.
+     * 
+     * @param  string    $account 
+     * @access public
+     * @return void
+     */
+    public function autoLogin($account)
+    {
+        $this->session->set('random', md5(time() . mt_rand()));
+
+        $user = $this->getByAccount($account);
+        if(!$user) return false;
+
+        $user = $this->identify($user->account, md5($user->password . $this->session->random));
+        if(!$user) return false;
+
+        $browserInfo = helper::getBrowser();
+        $browser = $browserInfo['name'] . ' ' . $browserInfo['version'];
+        $os      = helper::getOS();
+        $this->dao->update(TABLE_USER)->set('browser')->eq($browser)->set('os')->eq($os)->where('id')->eq($user->id)->exec();
+        if(dao::isError()) return false;
+
+        $user->rights  = $this->authorize($user);
+        $user->loginIP = helper::getRemoteIP();
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+    }
+
+    /**
+     * add oauth account
+     * @access public
+     * @param  string  
+     * @return bool 
+     */
+    public function addOAuthAccount($account, $provider, $userInfo)
+    {
+        a($userInfo);exit;
+        $openUser = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq($provider)->andWhere('openID')->eq($userInfo->openid)->fetch();
+
+        if($account != 'guest')
+        {
+            if(empty($openUser))
+            {
+                return $this->dao->replace(TABLE_OAUTH)
+                    ->set('account')->eq($account)
+                    ->set('provider')->eq($provider)
+                    ->set('openID')->eq($userInfo->openid)
+                    ->set('lang')->eq('all')
+                    ->exec();
+            }
+        }
+        else
+        {
+            if(empty($openUser))
+            {
+                $oauth = new stdclass();
+                $oauth->openID   = $userInfo->openid;
+                $oauth->provider = 'wechat';
+                $oauth->account  = uniqid('wx_');
+                $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
+
+                $user = new stdclass();
+                $user->account  = $oauth->account;
+                $user->password = $this->createPassword(md5(mt_rand()), $openID);
+                $user->nickname = $userInfo->nickname;
+                $user->realname = $userInfo->nickname;
+                $user->address  = $userInfo->country . ' ' . $userInfo->province . ' ' . $userInfo->city;
+                $user->join     = helper::now();
+
+                if($userInfo->sex == 0) $user->gender = 'u';
+                if($userInfo->sex == 1) $user->gender = 'm';
+                if($userInfo->sex == 2) $user->gender = 'f';
+
+                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+                $this->autoLogin($user->account);
+            }
+            $this->autoLogin($openUser->account);
+        }
+        return true;
+    }
+
+    /**
      * Save admin login log. 
      * 
      * @param  string $account 
