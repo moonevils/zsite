@@ -22,6 +22,7 @@ $lang->ui->manageTemplate  = '模板管理';
 $lang->ui->manageTheme     = '主题管理';
 $lang->ui->installTemplate = '导入模板';
 $lang->ui->exportTheme     = '导出主题';
+$lang->ui->addTheme        = '添加主题';
 $lang->ui->setTheme        = '主题设置';
 $lang->ui->setDevice       = '设备设置';
 $lang->ui->setFavicon      = "Favicon设置";
