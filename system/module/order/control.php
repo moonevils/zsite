@@ -173,22 +173,22 @@ class order extends control
     public function pay($orderID)
     {
         $order = $this->order->getByID($orderID);
-        if($order->payStatus == 'paid') die($this->lang->order->statusList['paid']);
+        if($order->payStatus == 'paid') $this->send(array('result' => 'success', 'message' => $this->lang->order->statusList['paid'], 'locate' => inlink('browse')));
  
         if($_POST)
         {
             $payment = $this->post->payment;
             $result  = $this->order->setPayment($orderID, $payment);
-            if(!$result) exit;
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             if($payment == 'COD')
             {
-                $this->locate(inlink('browse'));
+                $this->send(array('result' => 'success', 'locate' => inlink('browse')));
             }
             else
             {
                 $order->payment = $payment;
-                $this->locate($this->order->createPayLink($order));
+                $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order)));
             }
         }
     }
