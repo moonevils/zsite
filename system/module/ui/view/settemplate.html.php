@@ -34,7 +34,7 @@
         <?php if($app->clientLang != 'en'):?>
         <li data-type='internal'><?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?></li>
         <?php endif;?>
-        <li data-type='internal'><?php echo html::a('#', $lang->ui->addTheme . "<i class='icon-plus-sign'></i>", "class='radius-btn'");?></li>
+        <li data-type='internal'><?php echo html::a('#', $lang->ui->exportTheme . "<i class='icon-plus-sign'></i>", "class='radius-btn'");?></li>
         <li data-type='internal'><?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . "<i class='icon icon-download'></i>", "class='radius-btn'");?></li>
         <?php echo html::input('searchTheme', '', "placeholder={$lang->ui->searchTheme}")?>
       </ul>
