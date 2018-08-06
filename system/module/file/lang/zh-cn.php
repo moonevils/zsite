@@ -35,6 +35,7 @@ $lang->file->editSource    = '编辑素材';
 $lang->file->selectImage   = '选择素材';
 $lang->file->fileList      = '文件列表';
 $lang->file->invalidFile   = '无效文件';
+$lang->file->batchSelect   = '批量选择';
 
 $lang->file->setWatermark      = '设置图片水印';
 $lang->file->watermark         = '图片水印';

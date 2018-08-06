@@ -207,7 +207,8 @@ class orderModel extends model
     public function createPayLink($order, $type = '')
     {
         if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $type);
-        if(!empty($order->payment) and is_callable(array($this, "create{$order->payment}PayLink"))) return call_user_func(array($this,"create{$order->payment}PayLink"), $order);
+        if($order->payment == 'wechatpay') return $this->createWechatpayLink($order, $type);
+        if($order->payment and is_callable(array($this, "create{$order->payment}PayLink"))) return call_user_func(array($this,"create{$order->payment}PayLink"), $order);
         return helper::createLink('order', 'check', "orderID=$order->id");
     }
 
@@ -237,6 +238,30 @@ class orderModel extends model
     public function getRawOrder($humanOrder)
     {
         return (int)substr($humanOrder, 4, 7);
+    }
+
+    /**
+     * Get wechatpay config.
+     * 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function getWechatpayConfig($type = '')
+    {
+        if(empty($this->config->wechatpay->appid)) return false;
+
+        $notifyURL = empty($type) ? inlink('processorder', "type=wechatpay&mode=notify") : helper::createLink($type, 'processorder', "type=wechat&mode=notify");
+
+        $wechatpayConfig = array();
+        $wechatpayConfig['appid']       = $this->config->wechatpay->appid;
+        $wechatpayConfig['mch_id']      = $this->config->wechatpay->mch_id;
+        $wechatpayConfig['apikey']      = $this->config->wechatpay->apikey;
+        $wechatpayConfig['appsecret']   = $this->config->wechatpay->appsecret;
+        $wechatpayConfig['notify_url']  = getWebRoot(true) . ltrim($notifyURL, '/');
+        $wechatpayConfig['device_info'] = 'WEB';
+
+        return $wechatpayConfig;
     }
 
     /**
@@ -275,6 +300,19 @@ class orderModel extends model
         $extend  = "TRANS_MEMO^{$this->app->siteCode}/{$order->type}/{$this->app->user->account}/{$this->app->user->realname}/{$this->app->user->company}|ISV^";
 
         return $alipay->createPayLink($this->getHumanOrder($order->id),  $subject, $order->amount, $body = '', $extra = '', $extend);
+    }
+
+    /**
+     * Create wechatPay link.
+     * 
+     * @param  string $order
+     * @param  string $type
+     * @access public
+     * @return void
+     */
+    public function createWechatPayLink($order, $type = '')
+    {
+        return inlink('wechatpay', "orderID=$order->id&type=$type");
     }
 
     /**
@@ -319,6 +357,35 @@ class orderModel extends model
     }
 
     /**
+     * Get order from wechatpay.
+     * 
+     * @param  string mode 
+     * @access public
+     * @return void
+     */
+    public function getOrderFromWechatpay($mode)
+    {
+        $this->app->loadClass('wechatpay', true);
+        $wechatpay = new wechatpay($this->getWechatConfig());
+        $data      = $wechatpay->get_back_data();
+
+        if($data['return_code'] == 'SUCCESS')
+        {
+            $orderID = $data['out_trade_no'];
+            if(!$orderID) return false;
+
+            $orderID = $this->getRawOrder($orderID);
+            $order = $this->getByID($orderID);                                                                                                           
+
+            if(!$order) return false;
+
+            $order->sn = $data['transaction_id'];
+            return $order;
+        }
+        return false;
+    }
+
+    /**
      * Save the request date from alipay to log file.
      * 
      * @access public
@@ -330,6 +397,23 @@ class orderModel extends model
         foreach($_POST as $key => $val) $content .= "$key = $val\n";
         $content .= "----------------\n";
         $logFile = $this->app->getTmpRoot() . 'log/alipay.log';
+        $handle = fopen($logFile, 'a');
+        fwrite($handle, $content);
+        fclose($handle);
+    }
+
+    /**
+     * Save wechatPay log. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function saveWechatpayLog()
+    {   
+        $content = date('Y-m-d H:i:s') . "\n";
+        foreach($_POST as $key => $val) $content .= "$key = $val\n";
+        $content .= "----------------\n";
+        $logFile = $this->app->getTmpRoot() . 'log/wechatpay.log';
         $handle = fopen($logFile, 'a');
         fwrite($handle, $content);
         fclose($handle);
@@ -413,6 +497,23 @@ class orderModel extends model
             if($order->payStatus == 'paid') return $this->lang->order->statusList[$order->deliveryStatus];
             return $this->lang->order->statusList[$order->payStatus];
         }
+    }
+
+    /**
+     * Update status after pay.
+     * 
+     * @param  int    $orderID 
+     * @param  int    $status 
+     * @access public
+     * @return void
+     */
+    public function updatePayStatus($orderID, $status)
+    {
+        $this->dao->update(TABLE_ORDER)
+            ->set('payStatus')->eq($status)
+            ->set('last')->eq(helper::now())
+            ->where('id')->eq($orderID)
+            ->exec();
     }
 
     /**
@@ -850,11 +951,20 @@ class orderModel extends model
     public function saveSetting()
     {
         $errors = '';
-        if(!$this->post->payment) $errors['payment'] = array($this->lang->order->paymentRequired);
+        if(!$this->post->payment) $errors = $this->lang->order->paymentRequired;
         if(!$this->post->confirmLimit) $errors['confirmLimit'] = array($this->lang->order->confirmLimitRequired);
         if(in_array('alipay', $this->post->payment) and strlen($this->post->pid) != 16) $errors['pid'] = array($this->lang->order->placeholder->pid);
         if(in_array('alipay', $this->post->payment) and strlen($this->post->key) != 32) $errors['key'] = array($this->lang->order->placeholder->key);
-        if(in_array('alipay', $this->post->payment) and !validater::checkEmail($this->post->email)) $errors['email'] = array(sprintf($this->lang->error->email, $this->lang->order->alipayEmail)); 
+        if(in_array('alipay', $this->post->payment) and !validater::checkEmail($this->post->email)) $errors['email'] = array(sprintf($this->lang->error->email, $this->lang->order->alipayEmail));
+        if(in_array('wechatpay', $this->post->payment))
+        {
+            $wechatpaySetting = $this->post->wechat;
+            foreach($wechatpaySetting as $item => $value)
+            {
+                if(empty($value)) $errors["wechat_$item"] = array(zget($this->lang->order->placeholder, $item));
+            }
+        }
+
         if(!empty($errors)) return array('result' => 'fail', 'message' => $errors);
 
         $shopSetting = array();
@@ -869,6 +979,8 @@ class orderModel extends model
         $alipaySetting['email'] = $this->post->email;
         $result = $this->loadModel('setting')->setItems('system.common.alipay', $alipaySetting);
 
+        if(!empty($wechatpaySetting)) $this->loadModel('setting')->setItems('system.common.wechatpay', $wechatpaySetting);
+        
         return array('result' => 'success', 'message' => $this->lang->saveSuccess);
     }
 
