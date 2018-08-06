@@ -11,15 +11,24 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<div id='mainMenu' class='clearfix'>
+  <div id='navMenu'>
+    <?php
+    echo html::a($this->createLink('ui', 'component'), $lang->ui->component);
+    echo html::a($this->createLink('ui', 'effect'), $lang->effect->common, "class='active'");
+    $this->app->loadLang('file');
+    echo html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList);
+    ?>
+  </div>
+</div>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><?php echo $lang->effect->admin?></strong>
-    <div class='panel-actions'><?php echo html::a($this->config->admin->apiRoot . 'effect.html', $lang->effect->obtan, "target='_blank' class='btn btn-primary'");?></div>
+    <?php echo html::a($this->config->admin->apiRoot . 'effect.html', $lang->effect->obtan, "target='_blank' class='btn'");?>
   </div>
   <?php if(!empty($effects)):?>
-  <table class='table table-hover table-striped'>
+  <table class='table table-hover' id='effects'>
     <thead>
-      <tr class='text-center'>
+      <tr class='text-left'>
         <th><?php echo $lang->effect->name;?></th>
         <th><?php echo $lang->effect->category;?></th>
         <th class='w-150px'><?php echo $lang->effect->createdTime;?></th>
@@ -32,17 +41,17 @@
       <?php if(!is_object($effect)) continue;?>
       <?php $viewLink    = $this->config->admin->apiRoot . "effect-view-{$effect->id}-{$record->id}";?> 
       <?php $previewLink = $this->config->admin->apiRoot . 'user-login-'. helper::safe64Encode("/effect-preview-{$effect->id}-{$record->id}");?> 
-      <tr class='text-center'>
-        <td class='text-left'>
+      <tr class='text-left'>
+        <td>
           <?php echo html::a($viewLink, $effect->name, "target='_blank'");?>
-          <?php if(isset($blocks[$record->id])) echo "<span class='text-success'>{$lang->effect->imported}</span>";?>
+          <?php if(isset($blocks[$record->id])) echo "<span title='{$lang->effect->imported}'><i class='icon icon-check-sign'></i></span>";?>
         </td>
         <td><?php echo zget($categories, $effect->category);?></td>
         <td><?php echo $effect->createdTime;?></td>
         <td>
           <?php 
-          echo html::a($previewLink, $lang->preview, "target='_blank'");
-          echo html::a(inlink('importEffect', "id={$record->id}"), $lang->effect->import, "data-toggle='modal'");
+          echo html::a($previewLink, $lang->preview, "target='_blank' class='btn btn-sm'");
+          if(!isset($blocks[$record->id]))echo html::a(inlink('importEffect', "id={$record->id}"), $lang->effect->import, "data-toggle='modal' class='btn btn-sm'");
           ?>
         </td> 
       </tr>

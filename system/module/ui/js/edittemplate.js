@@ -23,26 +23,7 @@ $(document).ready(function()
         $('#editForm').submit();
     });
 
-    btn = $('.btn-file.active');
-    file = btn.parents('.panel').find('span').html() + ' / ' + btn.html();
-    $('#fileName').prepend(file);
-
-    $('.panel-folder').each(function()
-    {
-        $(this).toggle($(this).find('a.active').size() > 0);
-        if($(this).find('a.active').size() > 0)
-        {
-            $(this).css("display", "block");
-        }
-    });
-
-    $('.folder-menu').find('.panel-heading').click(function()
-    {
-        $('.folder-menu .panel-folder').hide(); 
-        $(this).next().show();
-    });
-
-    var extraHeight = $('#mainNavbar').outerHeight() + $('#menu').outerHeight() + $('#mainPanel > .panel-heading').outerHeight() + $('#mainPanel > .panel-footer').outerHeight() + 80;;
+    var extraHeight = $('#mainNavbar').outerHeight() + $('#menu').outerHeight() + $('#mainPanel > .panel-heading').outerHeight() + $('#mainPanel > .panel-footer').outerHeight() + 80 + $('#mainMenu').outerHeight();
     var resizeEditors = function()
     {
         $('.codeeditor').each(function()

@@ -54,6 +54,7 @@ $lang->ui->reset           = "Reset";
 $lang->ui->themePackage    = "Theme Package";
 $lang->ui->refreshPage     = "Refresh";
 $lang->ui->mobileBottomNav = 'Bottom Nav of mobile';
+$lang->ui->searchTheme     = 'Search Installed Theme';
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";

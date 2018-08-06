@@ -244,7 +244,7 @@ $lang->designMenus = new stdclass();
 $lang->designMenus->theme     = '主题|ui|settemplate|';
 $lang->designMenus->nav       = '导航|nav|admin|';
 $lang->designMenus->component = '组件|ui|component|';
-$lang->designMenus->senior    = '高级|ui|component|';
+$lang->designMenus->senior    = '高级|ui|editTemplate|';
 
 /* Menu of article module. */
 $lang->article = new stdclass();

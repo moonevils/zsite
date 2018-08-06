@@ -2,18 +2,24 @@
 <?php js::import($jsRoot . 'zeroclipboard/zeroclipboard.min.js');?>
 <?php js::set('copySuccess', $lang->file->copySuccess);?>
 <?php js::set('noFlashTip', $lang->file->noFlashTip);?>
+<div id='mainMenu' class='clearfix'>
+  <div id='navMenu'>
+    <?php
+    echo html::a($this->createLink('ui', 'component'), $lang->ui->component);
+    echo html::a($this->createLink('ui', 'component'), $lang->ui->component);
+    echo html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList, "class='active'");
+    ?>
+  </div>
+</div>
 <div class='panel'>
   <div class='panel-heading'>
-    <?php echo $lang->file->sourceList?>
-    <span class='panel-actions'>
-      <div class="btn-group">
-        <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view active btn'")?>
-        <?php echo html::a('javascript:void(0)', "<i class='icon icon-list-ul'></i>", "class='list-view btn'")?>
-      </div>
-      <?php $template = $this->config->template->{$this->app->clientDevice}->name;?>
-      <?php $theme    = $this->config->template->{$this->app->clientDevice}->theme;?>
-      <?php commonModel::printLink('file', 'browse', "objectType=source&objectID={$template}_{$theme}", $lang->file->uploadSource, "data-toggle='modal' class='btn btn-primary'");?>
-    </span>
+    <div class="btn-group">
+      <?php echo html::a('javascript:void(-1)', "<i class='icon icon-list-ul'></i>", "class='list-view'")?>
+      <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view active'")?>
+    </div>
+    <?php $template = $this->config->template->{$this->app->clientDevice}->name;?>
+    <?php $theme    = $this->config->template->{$this->app->clientDevice}->theme;?>
+    <?php commonModel::printLink('file', 'browse', "objectType=source&objectID={$template}_{$theme}", $lang->file->uploadSource . '<i class="icon icon-upload-alt"></i>', "data-toggle='modal' class='radius-btn'");?>
   </div>
   <div id='imageView' class='panel-body'>
     <ul class='files-list clearfix'>
@@ -53,24 +59,21 @@
     <div class='clearfix'><?php $pager->show();?></div>
   </div>
   <div id='listView' class='hide'>
-    <table class='table table-bordered'>
+    <table class='table'>
       <thead>
         <tr class='text-center'>
-          <th class=' w-60px'><?php echo $lang->file->id;?></th>
-          <th><?php echo $lang->file->source;?></th>
+          <th colspan='2'><?php echo $lang->file->source;?></th>
           <th><?php echo $lang->file->sourceURI;?></th>
-          <th class='w-60px'><?php echo $lang->file->extension;?></th>
-          <th class='w-80px'><?php echo $lang->file->size;?></th>
-          <th class='w-100px'><?php echo $lang->file->addedBy;?></th>
+          <th class='w-150px'><?php echo $lang->file->addedBy;?></th>
           <th class='w-160px'><?php echo $lang->file->addedDate;?></th>
-          <th class='w-80px'><?php echo $lang->actions;?></th>
+          <th class='w-150px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
         <?php foreach($files as $file):?>
         <tr class='text-center text-middle'>
-          <td><?php echo $file->id;?></td>
-          <td>
+          <td> <?php echo html::checkbox('imageID', ''); ?> </td>
+          <td class='text-left'>
             <?php
             if($file->isImage)
             {
@@ -83,8 +86,6 @@
             ?>
           </td>
           <td class='text-left'><?php echo $this->file->printFileURL($file);?></td>
-          <td><?php echo $file->extension;?></td>
-          <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
           <td><?php echo isset($users[$file->addedBy]) ? $users[$file->addedBy] : '';?></td>
           <td><?php echo $file->addedDate;?></td>
           <td class='text-center'>
@@ -96,7 +97,12 @@
         </tr>
         <?php endforeach;?>          
       </tbody>
-      <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+      <tfoot>
+        <tr>
+          <td class='text-left' colspan='2'><?php echo html::checkbox('checkAll', $lang->selectAll) . html::a(inlink('delete'), $lang->delete, "class='deleter radius-btn'")?></td>
+          <td colspan='8'><?php $pager->show();?></td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </div>
