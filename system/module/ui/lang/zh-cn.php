@@ -22,6 +22,7 @@ $lang->ui->manageTemplate  = '模板管理';
 $lang->ui->manageTheme     = '主题管理';
 $lang->ui->installTemplate = '导入模板';
 $lang->ui->exportTheme     = '导出主题';
+$lang->ui->addTheme        = '添加主题';
 $lang->ui->setTheme        = '主题设置';
 $lang->ui->setDevice       = '设备设置';
 $lang->ui->setFavicon      = "Favicon设置";
@@ -57,7 +58,6 @@ $lang->ui->themePackage    = "待导入主题包";
 $lang->ui->refreshPage     = "刷新页面";
 $lang->ui->mobileBottomNav = '移动版底部导航';
 $lang->ui->searchTheme     = '搜索已安装主题';
-$lang->ui->addTheme        = '添加主题';
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";

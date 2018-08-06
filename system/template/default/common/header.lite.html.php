@@ -103,6 +103,10 @@
 {$control->block->printRegion($layouts, 'all', 'header')}
 </head>
 <body>
+{$customCssFile = $control->loadModel('ui')->getCustomCssFile(CHANZHI_TEMPLATE, CHANZHI_THEME)}
+{if(!file_exists($customCssFile) or !is_readable($customCssFile))}
+  {$resultCustomCss = $control->loadModel('ui')->createCustomerCss(CHANZHI_TEMPLATE, CHANZHI_THEME)}
+{/if}
 {if(isset($resultCustomCss) and $resultCustomCss['result'] != 'success')}
   {if(!empty($resultCustomCss['message']))}
     <div class='alert alert-danger'> {$lang->customCssError;} </div>

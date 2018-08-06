@@ -75,6 +75,9 @@ $lang->order->settlement     = '去结算';
 $lang->order->check          = '订单结算';
 $lang->order->all            = '所有';
 $lang->order->applyRefund    = '申请退款';
+$lang->order->wechatpay      = '微信支付';
+$lang->order->scanCode       = '微信扫码支付';
+$lang->order->wechatScan     = '请使用微信扫一扫<br>扫描二维码支付';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->expireLimit          = '订单过期时间';
@@ -88,21 +91,36 @@ $lang->order->confirmLimitRequired = '需要设定确认收货周期';
 $lang->order->finishWarning        = "确认完成订单？";
 $lang->order->noProducts           = "订单中没有产品";
 $lang->order->lowStocks            = "<strong>%s</strong> 库存不足";
+$lang->order->invokeWechatpay      = '正在调用微信支付';
+
+$lang->order->alipayParam    = '支付宝参数';
+$lang->order->wechatpayParam = '微信支付参数';
 
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';
 $lang->order->alipayEmail = '支付宝邮箱';
 
+$lang->order->wechatpayAppid     = '公众号APPID';
+$lang->order->wechatpayMchid     = '商户号';
+$lang->order->wechatpayApiKey    = '支付密钥';
+$lang->order->wechatpayAppSecret = '公众号密钥';
+$lang->order->wechatpayNote      = '如果微信长时间未打开，建议您返回选择其他方式';
+
 $lang->order->placeholder = new stdclass();
-$lang->order->placeholder->pid   = '合作身份者id，以2088开头的16位纯数字';
-$lang->order->placeholder->key   = '安全检验码，以数字和字母组成的32位字符';
-$lang->order->placeholder->email = '支付宝商家邮箱';
+$lang->order->placeholder->pid       = '合作身份者id，以2088开头的16位纯数字';
+$lang->order->placeholder->key       = '安全检验码，以数字和字母组成的32位字符';
+$lang->order->placeholder->email     = '支付宝商家邮箱';
+$lang->order->placeholder->appid     = '微信分配的公众账号ID';
+$lang->order->placeholder->mchid     = '微信支付分配的商户号';
+$lang->order->placeholder->apikey    = '微信支付API安全密钥';
+$lang->order->placeholder->appsecret = '微信公众号密钥';
 
 $lang->order->paymentList = array();
 $lang->order->paymentList['alipay']        = '支付宝即时到帐';
 $lang->order->paymentList['alipaySecured'] = '支付宝担保交易';
 $lang->order->paymentList['COD']           = '货到付款';
 $lang->order->paymentList['offlinepay']    = '线下支付';
+$lang->order->paymentList['wechatpay']     = '微信支付';
 
 $lang->order->statusList = array();
 $lang->order->statusList['not_paid']  = '待付款';

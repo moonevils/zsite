@@ -127,17 +127,18 @@
 </div>
 
 {include TPL_ROOT . 'common/form.html.php'}
+{noparse}
 <script>
 $(function()
 {
-    var addressBrowseLink = '{!helper::createLink('address', 'browse')}' + ' #addressList';
-    var orderBrowseLink   = '{!helper::createLink('order', 'browse')}'; 
-    {noparse}
+    var addressBrowseLink = createLink('address', 'browse') + ' #addressList';
+    var orderBrowseLink   = createLink('order', 'browse'); 
     $('[name=payment]').first().prop('checked', true);
 
     $.refreshAddressList = function()
+    {
+        $('#addressListWrapper').load(addressBrowseLink, function()
         {
-            $('#addressListWrapper').load(addressBrowseLink, function(){
             if($('#addressList').find('.card').size() == 0)
             {
                 $('#createAddress').val(1);
@@ -149,8 +150,7 @@ $(function()
             }
             $('#addressList').find('.card-footer').remove();
         });
-    };
-    {/noparse}
+    }
 
     $.refreshAddressList();
 
@@ -163,4 +163,5 @@ $(function()
     });
 });
 </script>
+{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

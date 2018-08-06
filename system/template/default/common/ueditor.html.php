@@ -10,7 +10,7 @@
 {$uid = uniqid('')}
 {!js::set('kuid', $uid)}
 <script type="text/javascript" charset="utf-8" src="{$app->getWebRoot()}js/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="{$app->getWebRoot()}js/ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="{$app->getWebRoot()}js/ueditor/ueditor.all.min.js"> </script>
 <script>
 var editor = {!json_encode($editor)};
 var simple = [[
@@ -36,7 +36,6 @@ var full = [[
     'insertcode', 'source', 'searchreplace', 'help']
     ];
 
-$(document).ready(initUeditor);
 function initUeditor(afterInit)
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.kuid + '>');

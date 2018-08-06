@@ -21,6 +21,7 @@ $lang->ui->manageTemplate  = 'Manage Template';
 $lang->ui->manageTheme     = 'Manage Theme';
 $lang->ui->installTemplate = 'Import Template';
 $lang->ui->exportTheme     = 'Export Theme';
+$lang->ui->addTheme        = 'Add Theme';
 $lang->ui->setTheme        = 'Theme Settings';
 $lang->ui->setDevice       = 'Device Settings';
 $lang->ui->setFavicon      = "Favicon Settings";
@@ -55,7 +56,6 @@ $lang->ui->themePackage    = "Theme Package";
 $lang->ui->refreshPage     = "Refresh";
 $lang->ui->mobileBottomNav = 'Bottom Nav of mobile';
 $lang->ui->searchTheme     = 'Search Installed Theme';
-$lang->ui->addTheme        = 'Add Theme';
 
 $lang->ui->uploadLogo             = "Upload Logo";
 $lang->ui->uploadFavicon          = "Upload Favicon";
