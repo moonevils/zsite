@@ -159,6 +159,30 @@ class user extends control
             }
         }
 
+        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) 
+        {
+            $wechatConfig = $this->loadModel('order')->getWechatpayConfig();
+            if($wechatConfig)
+            {
+                $this->app->loadClass('wechatpay', true);
+                $wechatpay = new wechatPay($wechatConfig);
+
+                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false)
+                {
+                    $url = $this->referer;
+                }
+                else
+                {
+                    $url = $this->createLink($this->config->default->module);
+                }
+
+                $url = base64_encode($url);
+                $redirectURL = getWebRoot(true) .  ltrim(helper::createLink('user', 'wechatbind', "url=$url"), '/');
+                $this->locate($wechatpay->getAuthURL($redirectURL));
+                exit;
+            }
+        }
+
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
@@ -935,6 +959,29 @@ class user extends control
         $this->view->mobileURL  = helper::createLink('user', 'oauthBind', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'oauthBind', '', '', 'html');
         $this->display();
+    }
+
+    /**
+     * Bind an open id to an account of chanzhi system for wechat.
+     * 
+     * @param  string    $redirectURL 
+     * @access public
+     * @return void
+     */
+    public function wechatbind($redirectURL)
+    {
+        $code = $_GET['code'];
+        $redirectURL = base64_decode($redirectURL);
+
+        $this->app->loadClass('wechatpay', true);
+        $wechatpay = new wechatPay($this->loadModel('order')->getWechatpayConfig());
+        $userInfo  = $wechatpay->getUserInfo($code);
+
+        a($userInfo);exit;
+        if($this->user->addOAuthAccount($this->app->user->account, 'wechat', $userInfo))
+        {
+            $this->locate($redirectURL);
+        }
     }
 
     /**

@@ -41,49 +41,22 @@
 </div>
 
 {include TPL_ROOT . 'common/form.html.php'}
+{noparse}
 <script>
 $(function()
 {
-    var browseLink = '{!helper::createLink('address', 'browse')}' + '#addressList';
-    {noparse}
-    $('[name=payment]').first().prop('checked', true);
+    $('[name=payment]').eq(0).prop('checked', true);
 
-    $.refreshAddressList = function()
+    $('#checkForm').ajaxform(
     {
-       $('#addressListWrapper').load(browseLink, function()
+        onSuccess: function(response)
         {
-            $('#addressList').find('.card-footer').remove();
-        });
-    };
-
-    $.refreshAddressList();
-
-    $('#submit').click(function(){
-        var payment = $('input:radio[name=payment]:checked').val();
-        if(payment == 'COD')
-        {
-            $('#checkForm').attr('target', '');
-        }
-        else
-        {
-            $('#checkForm').attr('target', '_blank');
-
-            bootbox.dialog(
-            {  
-                message: v.goToPay,  
-                buttons:
-                {  
-                    paySuccess:
-                    {
-                        label:     v.paid,  
-                        className: 'btn-primary',  
-                        callback:  function() { setTimeout(function(){location.href = createLink('order', 'browse');}, 600); }  
-                    }
-                }
-            });
+            $.messager.success(response.message);
+            if(response.locate) window.location.href = response.locate;
         }
     });
-    {/noparse}
+
 });
 </script>
+{/noparse}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

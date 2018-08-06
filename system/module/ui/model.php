@@ -1031,7 +1031,8 @@ class uiModel extends model
 
         $fields = array();
         $fields[TABLE_BLOCK]    = "*";
-        $fields[TABLE_LAYOUT]   = "*";
+        $fields[TABLE_LAYOUT]   = "`template`, 'THEME_CODEFIX' as theme, `page`, `region`, `blocks`, `import`, `lang`";
+        $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, lang";
         $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, lang";
         $fields[TABLE_SLIDE]    = "*";
         $fields[TABLE_CATEGORY] = "*";
@@ -1052,6 +1053,24 @@ class uiModel extends model
         /* Dump layout, css and js config. */
         $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and (`key` = 'custom' or (section in('css', 'js', 'layout') and `key` like '{$template}_{$theme}%') )";
         $this->zdb->dump($dbFile, $tables, $fields, 'data', $condations, $replaces);
+
+        $condations = array();
+        $condations[TABLE_LAYOUT] = "where template='{$template}' and theme = 'all' and lang in ('all', '{$lang}')";
+        $replaces[TABLE_LAYOUT]   = true;
+        $fields[TABLE_LAYOUT]     = "*";
+
+        $this->zdb->dump($encryptFile . ".tmp.sql", $tables, $fields, 'data', $condations, $replaces);
+        $this->zdb->dump($dbFile . ".tmp.sql", $tables, $fields, 'data', $condations, $replaces);
+        
+        $fp = fopen($encryptFile, "a+");
+        fwrite($fp, file_get_contents($encryptFile . ".tmp.sql"));
+        unlink($encryptFile . ".tmp.sql");
+        fclose($fp);
+
+        $fp = fopen($dbFile, "a+");
+        fwrite($fp, file_get_contents($dbFile . ".tmp.sql"));
+        unlink($dbFile . ".tmp.sql");
+        fclose($fp);
 
         $this->fixSqlFile($template, $theme, $encryptFile);
         $this->fixSqlFile($template, $theme, $dbFile);
@@ -1361,6 +1380,8 @@ if(!function_exists('getJS'))
     {
         $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('templateCompatible')->eq($template)->andWhere('code')->eq($theme)->exec();
         if(dao::isError()) return false;
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_LAYOUT)->where('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
+        if(dao::isError()) return false;
          
         $templateKey = "{$template}_{$theme}%";
         $themeDifference = explode('_',$theme);
@@ -1632,4 +1653,26 @@ if(!function_exists('getJS'))
 
         return $return;
     }   
+
+    /**
+     * Clone layout to installed themes.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function cloneLayout($template, $theme)
+    {
+        $templates = $this->getTemplates();
+        $template = zget($templates, $template, null);
+        if(!$template) return false;
+
+        foreach($template['themes'] as $themeCode => $themeName)
+        {
+            if($themeCode == $theme) continue;
+            $this->dao->setAutoLang(false)->exec('Insert into ' . TABLE_LAYOUT . " (`template`, `theme`, `page`, `region`, `blocks`, `import`, `lang`)  select `template`,  '$themeCode', `page`, `region`, `blocks`, `import`, `lang` from " . TABLE_LAYOUT . " where theme='$theme'");
+        }
+        return true;
+    }
 }
