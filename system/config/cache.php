@@ -6,7 +6,7 @@ $config->cache->expired   = 86400;
 $config->cache->cachePage = 'open';
 
 $config->cache->type = 'file';
-$config->cache->cachedPages = 'index.index,article.browse,article.view,product.browse,product.view,page.view,blog.index,blog.view,book.browse,book.index,book.read,';
+$config->cache->cachedPages = 'index.index,article.browse,article.view,product.browse,product.view,page.view,blog.index,blog.view,book.browse,book.index,book.read,user.login,';
 
 $config->cache->file = new stdclass();
 $config->cache->file->expired = $config->cache->expired;

@@ -23,7 +23,7 @@ $(document).ready(function()
                $(this).addClass('pull-left');
             }
         }
-    })
+    });
 
     setRequiredFields();
 
