@@ -12,9 +12,9 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='row'>
-<?php foreach($lang->user->oauth->providers as $providerCode => $providerName):?>
-<?php isset($this->config->oauth->$providerCode) ? $oauth = json_decode($this->config->oauth->$providerCode) : $oauth = '';?>
-<div class='col-sm-6 panel-box <?php echo $providerCode . '-panel';?>'>
+  <?php foreach($lang->user->oauth->providers as $providerCode => $providerName):?>
+  <?php isset($this->config->oauth->$providerCode) ? $oauth = json_decode($this->config->oauth->$providerCode) : $oauth = '';?>
+  <div class='col-sm-6 panel-box <?php echo $providerCode . '-panel';?>'>
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class="icon-<?php echo $providerCode; ?>"></i> <?php echo $providerName;?></strong>
@@ -88,9 +88,30 @@
               </td>
             </tr>
             <?php endif;?>
+            <?php if($providerCode == 'wechat'):?>
             <tr>
-             <th></th> <td><?php echo html::submitButton() . html::hidden('provider', $providerCode);?></td>
+              <th><?php echo $lang->user->oauth->wechat->autoLogin;?></th>
+              <td><?php echo html::radio('autoLogin', $lang->user->oauth->wechat->autoLoginList, isset($oauth->autoLogin) ? $oauth->autoLogin : 'off', "class='checkbox'");?></td>
             </tr>
+            <?php endif;?>
+            <tr>
+             <th></th> 
+             <td>
+                <?php
+                if($providerCode == 'wechat' and !extension_loaded('openssl'))
+                {
+                  echo html::submitButton('', "btn btn-primary", 'disabled') . html::hidden('provider', $providerCode);
+                }
+                else
+                {
+                  echo html::submitButton() . html::hidden('provider', $providerCode);
+                }
+                ?>
+             </td>
+            </tr>
+            <?php if($providerCode == 'wechat' and !extension_loaded('openssl')):?>
+            <tr><th></th><td class='red'><?php echo $lang->site->wechatLoginTip;?></td></tr>    
+            <?php endif;?>
           </table>
         </form>
       </div>
