@@ -52,16 +52,56 @@
           <td colspan='2'><?php echo html::checkbox('payment', $lang->order->paymentList, isset($this->config->shop->payment) ? $this->config->shop->payment : 'COD,alipay', "class='checkbox'");?></td>
         </tr>
         <tr class='alipay-item'>
-          <th><?php echo $lang->order->alipayPid;?></th>
-          <td colspan='2'><?php echo html::input('pid', isset($this->config->alipay->pid) ? $this->config->alipay->pid : '', "class='form-control' placeholder='{$lang->order->placeholder->pid}'" );?>
+          <th><?php echo $lang->order->alipayParam;?></th>
+          <td colspan='2'>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->alipayPid;?></span>
+              <?php echo html::input('pid', isset($this->config->alipay->pid) ? $this->config->alipay->pid : '', "class='form-control' placeholder='{$lang->order->placeholder->pid}'" );?>
+              </div>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->alipayKey;?></span>
+              <?php echo html::input('key', isset($this->config->alipay->key) ? $this->config->alipay->key : '', "class='form-control' placeholder='{$lang->order->placeholder->key}'" );?>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->alipayEmail;?></span>
+              <?php echo html::input('email', isset($this->config->alipay->email) ? $this->config->alipay->email : '', "class='form-control' placeholder='{$lang->order->placeholder->email}'" );?>
+            </div>
+          </td>
         </tr>
-        <tr class='alipay-item'>
-          <th><?php echo $lang->order->alipayKey;?></th>
-          <td colspan='2'><?php echo html::input('key', isset($this->config->alipay->key) ? $this->config->alipay->key : '', "class='form-control' placeholder='{$lang->order->placeholder->key}'" );?>
+        <tr class='wechatpay-item'>
+          <th><?php echo $lang->order->wechatpayParam;?></th>
+          <td colspan='2'>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->wechatpayAppid;?></span>
+              <?php echo html::input('wechat[appid]', isset($this->config->wechatpay->appid) ? $this->config->wechatpay->appid : '', "class='form-control' placeholder='{$lang->order->placeholder->appid}'" );?>
+              <?php echo html::hidden('wechat_appid');?>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->wechatpayMchid;?></span>
+              <?php echo html::input('wechat[mch_id]', isset($this->config->wechatpay->mch_id) ? $this->config->wechatpay->mch_id : '', "class='form-control' placeholder='{$lang->order->placeholder->mchid}'" );?>
+              <?php echo html::hidden('wechat_mch_id');?>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->wechatpayApiKey;?></span>
+              <?php echo html::input('wechat[apikey]', isset($this->config->wechatpay->apikey) ? $this->config->wechatpay->apikey : '', "class='form-control' placeholder='{$lang->order->placeholder->apikey}'" );?>
+              <?php echo html::hidden('wechat_apikey');?>
+            </div>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->wechatpayAppSecret;?></span>
+              <?php echo html::input('wechat[appsecret]', isset($this->config->wechatpay->appsecret) ? $this->config->wechatpay->appsecret : '', "class='form-control' placeholder='{$lang->order->placeholder->appsecret}'");?>
+              <?php echo html::hidden('wechat_appsecret');?>
+            </div>
+          </td>
         </tr>
-        <tr class='alipay-item'>
-          <th><?php echo $lang->order->alipayEmail;?></th>
-          <td colspan='2'><?php echo html::input('email', isset($this->config->alipay->email) ? $this->config->alipay->email : '', "class='form-control' placeholder='{$lang->order->placeholder->email}'" );?>
+        <tr class='paypal-item'>
+          <th><?php echo $lang->order->paypalParam;?></th>
+          <td colspan='2'>
+            <div class='input-group'>
+              <span class='input-group-addon w-110px'><?php echo $lang->order->paypalAccount;?></span>
+              <?php echo html::input('paypal[account]', isset($this->config->paypal->account) ? $this->config->paypal->account : '', "class='form-control' placeholder='{$lang->order->placeholder->account}'" );?>
+              <?php echo html::hidden('paypal_account');?>
+            </div>
+         </td>
         </tr>
         <?php endif;?>
         <tr>
