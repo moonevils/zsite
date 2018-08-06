@@ -46,7 +46,6 @@ var full = [[
     'insertcode', 'source', 'searchreplace', 'help']
     ];
 
-$(document).ready(initUeditor);
 function initUeditor(afterInit)
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.kuid + ">");

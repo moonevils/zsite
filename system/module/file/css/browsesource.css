@@ -41,3 +41,5 @@
 .panel .panel-heading .btn-group a:last-child{padding-left:10px}
 .panel .panel-heading .btn-group .icon{font-size:25px;color:#9b9a9b}
 .panel .radius-btn{text-decoration:none;border:1px solid #ccc;border-radius:6px;font-size:14px;color:#000;margin-left:8px}
+
+#imageView .pager{margin:0px;}
