@@ -10,37 +10,23 @@ function onBridgeReady()
     );
 }
 
-$(document).ready(function()
+if (typeof WeixinJSBridge == "undefined")
 {
-    $.getJSON(v.url, function(data){
-        if(data.return_code == 'SUCCESS')
-        {
-            if(data.trade_state == 'SUCCESS')
-            {
-                window.location.href = v.orderLink;
-            }
-        }
-    })
-
-    if (typeof WeixinJSBridge == "undefined")
+    if( document.addEventListener )
     {
-        if( document.addEventListener )
-        {
-            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-        }
-        else if (document.attachEvent)
-        {
-            document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-        }
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
     }
-    else
+    else if (document.attachEvent)
     {
-        onBridgeReady();
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
     }
-
-    $('.paid').click(checkPay());
-})
+}
+else
+{
+    onBridgeReady();
+}
+$('.paid').click(checkPay());
 
 function checkPay()
 {
