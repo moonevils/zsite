@@ -229,29 +229,20 @@ class order extends control
             }
             else
             {
-                a('dd');
-                if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false)
-                {
-                a('ee');
-                    $openID = $this->loadModel('user')->getOpenID($this->app->user->account, 'wechat');
-                    if(!$openID)
-                    {
-                        $currentURL = helper::createLink('order', 'wechatpay', "orderID=$orderID&type=$type");
-                        $currentURL = base64_encode($currentURL);
+                //$this->view->url = $wechatpay->getWAPPayUrl($subject, 'order' . $orderID, $order->amount * 100, 0);
 
-                        $redirectURL = getWebRoot(true) .  ltrim(helper::createLink('user', 'wechatbind', "url=$currentURL"), '/');
-                        $this->locate($wechatpay->getAuthURL($redirectURL));
-                    }
-                    $config = $wechatpay->getJSAPIConfig($subject, $tradeID, $order->amount * 100, $openID);
-                    $this->view->payConfig = $config;
-                }
-                else
+                $openID = $this->loadModel('user')->getOpenID($this->app->user->account, 'wechat');
+                if(!$openID)
                 {
-                    $this->view->payConfig = $wechatConfig;
-                    $this->view->url       = $wechatpay->getWAPPayUrl($subject, $tradeID, $order->amount * 100, 0);
+                    $currentURL = helper::createLink('order', 'wechatpay', "orderID=$orderID&type=$type");
+                    $currentURL = base64_encode($currentURL);
+
+                    $redirectURL = getWebRoot(true) .  ltrim(helper::createLink('user', 'wechatbind', "url=$currentURL"), '/');
+                    $this->locate($wechatpay->getAuthURL($redirectURL));
                 }
+                $config = $wechatpay->getJSAPIConfig($subject, $tradeID, $order->amount * 100, $openID);
+                $this->view->payConfig = $config;
             }
-                    var_dump($this->view->url);exit;
 
             $notifyURL = empty($type) ? inlink('processorder', "type=wechatpay&mode=notify") : helper::createLink($type, 'processorder', "type=wechat&mode=notify");
 

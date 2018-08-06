@@ -1,7 +1,6 @@
 {include TPL_ROOT . 'common/header.html.php'}
 {!js::set('orderID', $order->id)}
 {!js::set('payConfig', $payConfig)}
-{!js::set('url', $url)}
 {!js::set('orderLink', helper::createLink('order', 'browse'))}
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
