@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of package module of ChanZhiEPS.
@@ -1146,7 +1147,7 @@ class packageModel extends model
  
         $blocks2Merge  = $this->post->blocks2Merge;
         $blocks2Create = $this->post->blocks2Create;
-        $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
+        $oldBlocks     = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
 
         $blocks2Delete  = array();
         $blockRelations = array();
@@ -1185,7 +1186,7 @@ class packageModel extends model
         }
 
         /* Replace old blockID in layout data with selected old blockID. */
-        $layouts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('plan')->eq('plan')->fetchAll();
+        $layouts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('lang')->eq('lang')->fetchAll();
         foreach($layouts as $layout)
         {
             $blocks = json_decode($layout->blocks);
@@ -1266,21 +1267,11 @@ class packageModel extends model
      */
     public function fixLayout($package)
     {
-        $plan = new stdclass();
-        $plan->name  = $package->name;
-        $plan->type  = 'layout_' . $package->template;
-        $plan->grade = 0;
-
-        $this->dao->insert(TABLE_CATEGORY)->data($plan)->exec();
-        $planID = $this->dao->lastInsertID();
-
         $this->dao->setAutoLang(false)->update(TABLE_LAYOUT)
-            ->set('plan')->eq($planID)
+            ->set('theme')->eq($package->code)
             ->set('lang')->eq($this->app->getClientLang())
-            ->where('plan')->eq('plan')
+            ->where('theme')->eq('plan')
             ->exec();
-
-        $this->loadModel('block')->setPlan($planID, $package->template, $package->code);
         return true;
     }
 

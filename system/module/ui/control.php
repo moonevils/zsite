@@ -582,8 +582,7 @@ class ui extends control
         }
 
         $this->package->fixLang();
-        $themeCode = $packageInfo->template . '_' . $packageInfo->code;
-        if(!isset($this->config->layout->{$themeCode}))  $this->loadModel('block')->setPlan(0, $packageInfo->template, $packageInfo->code);
+        $this->ui->cloneLayout($packageInfo->template, $package);
 
         $setting = array();
         $device = $packageInfo->template == 'default' ? 'desktop' : 'mobile';
