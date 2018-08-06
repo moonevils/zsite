@@ -82,10 +82,12 @@
   <div id='headTitle' class='{if($setting->middle->center == 'nav')} {!echo 'with-navbar'} {/if} {if($setting->middle->center == 'slogan')} {!echo ' with-slogan'} {/if} '>
     <div class='row'>
       <div id='siteTitle'>
-        {if($logo)}
-        <div id='siteLogo' data-ve='logo'>{!html::a(helper::createLink('index'), html::image($model->loadModel('file')->printFileURL($logo), "class='logo' alt='{{$config->company->name}}' title='{{$config->company->name}}'"))}</div>
-        {else}
-        <div id='siteName' data-ve='logo'><h2>{!html::a(helper::createLink('index'), $config->site->name)}</h2></div>
+        {if($setting->middle->left == 'logo')}
+          {if($logo)}
+          <div id='siteLogo' data-ve='logo'>{!html::a(helper::createLink('index'), html::image($model->loadModel('file')->printFileURL($logo), "class='logo' alt='{{$config->company->name}}' title='{{$config->company->name}}'"))}</div>
+          {else}
+          <div id='siteName' data-ve='logo'><h2>{!html::a(helper::createLink('index'), $config->site->name)}</h2></div>
+          {/if}
         {/if}
         {if($setting->middle->center == 'slogan')}
         <div id='siteSlogan' data-ve='slogan'><span>{$config->site->slogan}</span></div>
