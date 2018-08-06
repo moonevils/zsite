@@ -54,7 +54,6 @@ class blockModel extends model
         $device   = $this->app->clientDevice;
         $template = $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
-        $plan     = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
         $pages    = "all,{$module}_{$method}";
 
         $layoutsInCurrent = array();
@@ -63,7 +62,7 @@ class blockModel extends model
             $layoutsInCurrent = $this->dao->select('*')->from(TABLE_LAYOUT)
                 ->where('page')->eq("{$module}_{$method}")
                 ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-                ->andWhere('plan')->in($plan)
+                ->andWhere('theme')->in("all,$theme")
                 ->andWhere('object')->eq($object)
                 ->fetchAll('region');
         }
@@ -71,7 +70,7 @@ class blockModel extends model
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-            ->andWhere('plan')->in($plan)
+            ->andWhere('theme')->eq($theme)
             ->andWhere('object')->eq('')
             ->fetchGroup('page', 'region');
 
@@ -196,10 +195,8 @@ class blockModel extends model
      */
     public function getRegionBlocks($page, $region, $object, $template, $theme)
     {
-        $plan = 'all,' . zget($this->config->layout, "{$template}_{$theme}");
-
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq($object)->andWhere('template')->eq($template)->andWhere('plan')->in($plan)->fetch('blocks');
-        if($object and empty($regionBlocks)) $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq('')->andWhere('template')->eq($template)->andWhere('plan')->in($plan)->fetch('blocks');
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq($object)->andWhere('template')->eq($template)->andWhere('theme')->in("all,$theme")->fetch('blocks');
+        if($object and empty($regionBlocks)) $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('object')->eq('')->andWhere('template')->eq($template)->andWhere('theme')->in($theme)->fetch('blocks');
 
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
@@ -614,7 +611,7 @@ class blockModel extends model
         $layout->region   = $region;
         $layout->template = $template;
         $layout->object   = $object;
-        $layout->plan     = $object ? 'all' : zget($this->config->layout, $template . '_' . $theme);
+        $layout->theme    = $object ? 'all' : $theme;
 
         if(!$this->post->blocks and !$object)
         {
@@ -623,7 +620,7 @@ class blockModel extends model
                 ->andWhere('region')->eq($region)
                 ->andWhere('object')->eq($object)
                 ->andWhere('template')->eq($template)
-                ->andWhere('plan')->eq($layout->plan)
+                ->andWhere('theme')->eq($layout->theme)
                 ->exec();
 
             if(!dao::isError()) return true;
@@ -903,7 +900,7 @@ class blockModel extends model
         {
             $layout = $this->dao->select('*')->from(TABLE_LAYOUT)
                 ->where('template')->eq($template)
-                ->andWhere('plan')->eq('all')
+                ->andWhere('theme')->eq('all')
                 ->andWhere('page')->eq($page)
                 ->andWhere('object')->eq($object)
                 ->andWhere('region')->eq($region)
@@ -911,10 +908,9 @@ class blockModel extends model
             if(!empty($layout)) return $layout;
         }
 
-        $plan = zget($this->config->layout, $template . '_' . $theme);
         return $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('template')->eq($template)
-            ->andWhere('plan')->eq($plan)
+            ->andWhere('theme')->eq($theme)
             ->andWhere('page')->eq($page)
             ->andWhere('region')->eq($region)
             ->fetch();
@@ -954,8 +950,7 @@ class blockModel extends model
             if($block->id != $blockID) $newBlocks[] = $block;
         }
 
-        $plan           = zget($this->config->layout, $template . '_' . $theme);
-        $layout->plan   = $object ? 'all' : $plan;
+        $layout->theme  = $object ? 'all' : $theme;
         $layout->object = $object ? $object : '';
 
         $layout->blocks = helper::jsonEncode($newBlocks);
@@ -986,7 +981,7 @@ class blockModel extends model
         {
             $layout = new stdclass();
             $layout->template = $template;
-            $layout->plan     = zget($this->config->layout, "{$template}_{$theme}");
+            $layout->theme    = $theme;
             $layout->page     = $page;
             $layout->region   = $region;
             $layout->blocks   = json_encode(array());
@@ -1026,8 +1021,7 @@ class blockModel extends model
 
         $layout->blocks = helper::jsonEncode($blocks);
 
-        $plan           = zget($this->config->layout, $template . '_' . $theme);
-        $layout->plan   = $object ? 'all' : $plan;
+        $layout->theme  = $object ? 'all' : $theme;
         $layout->object = $object ? $object : '';
 
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
@@ -1118,8 +1112,7 @@ class blockModel extends model
 
         $layout->blocks = helper::jsonEncode($blocks);
 
-        $plan           = zget($this->config->layout, $template . '_' . $theme);
-        $layout->plan   = $object ? 'all' : $plan;
+        $layout->theme  = $object ? 'all' : $theme;
         $layout->object = $object ? $object : '';
 
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
@@ -1166,89 +1159,6 @@ class blockModel extends model
         if(!isset($this->lang->block->{$template}->regions->{$page}[$region])) return false;
         return true;
     }
-    
-    /**
-     * Get layout plans.
-     * 
-     * @param  string template
-     * @access public
-     * @return array
-     */
-    public function getPlans($template)
-    {
-        $plans = $this->loadModel('tree')->getPairs(0, 'layout_' . $template);
-        $plans = array(0 => $this->lang->block->defaultPlan) + (array)$plans;   
-        return $plans;
-    }
-
-    /**
-     * Set layout plan for a theme.
-     * 
-     * @param  int    $plan 
-     * @param  string $template 
-     * @param  string $theme 
-     * @access public
-     * @return void
-     */
-    public function setPlan($plan, $template = '' , $theme = '')
-    {
-        $setting["{$template}_{$theme}"] = $plan;
-        return $this->loadModel('setting')->setItems('system.common.layout', $setting);
-    }
-    
-    /**
-     * Clone an layout plan.
-     * 
-     * @param  object    $plan 
-     * @access public
-     * @return int|bool
-     */
-    public function cloneLayout($plan)
-    {
-        $this->app->loadLang('tree');
-        $this->lang->category->name = $this->lang->block->planName;
-
-        $clonedPlanID = isset($plan->id) ? $plan->id : '0';
-        if(isset($plan->id)) unset($plan->id);
-        if(isset($plan->pathNames))unset($plan->pathNames);
-
-        $plan->name = $this->post->name;  
-
-        $this->dao->insert(TABLE_CATEGORY)
-            ->data($plan)
-            ->check('name', 'notempty')
-            ->check('name', 'unique', "type='{$plan->type}'")
-            ->exec();
-
-        $newPlanID = $this->dao->lastInsertID();
-        $this->dao->query("REPLACE INTO " . TABLE_LAYOUT . " (template, plan, page,region, object, blocks, import, lang) SELECT template,$newPlanID,page,region,object,blocks,import,lang FROM " . TABLE_LAYOUT . " WHERE plan = $clonedPlanID;");
-        if(dao::isError()) return false;
-        return $newPlanID;
-    }
-
-    /**
-     * Rename a layout.
-     * 
-     * @param  object    $plan 
-     * @access public
-     * @return bool
-     */
-    public function renameLayout($plan)
-    {
-        $this->app->loadLang('tree');
-        $this->lang->category->name = $this->lang->block->planName;
-        $type   = $plan->type;
-        $planID = $plan->id;
-
-        $this->dao->update(TABLE_CATEGORY)
-            ->data(array('name' => $this->post->name))
-            ->check('name', 'notempty')
-            ->check('name', 'unique', "type='{$type}'")
-            ->where('id')->eq($planID)
-            ->exec();
-
-        return !dao::isError();
-    }
 
     /**
      * Get layout setting's scope.
@@ -1263,7 +1173,7 @@ class blockModel extends model
         $template = $this->loadModel('common')->getCurrentTemplate();
         $layout   = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)
             ->where('template')->eq($template)
-            ->andWhere('plan')->eq('all')
+            ->andWhere('theme')->eq('all')
             ->andWhere('page')->eq($page)
             ->andWhere('object')->eq($object)
             ->fetch('count');

@@ -48,3 +48,19 @@
 .messagers-holder{position: fixed; z-index: 99999; padding: 10px; pointer-events: none;}
 .messagers-holder.top{top: 0; left: 0; right: 0;}
 .messagers-holder.top .messager{position: static; display: table; margin: 10px auto; overflow: hidden;}
+
+#mainMenu{padding:20px; text-align:left; background:#fff; margin-bottom:20px; margin-top:-20px;}
+#mainMenu #navMenu{font-size:16px; padding:0 20px;text-align:center}
+#mainMenu #navMenu a{font-size:16px; padding:0 20px; color:#010101;text-decoration: none;}
+#mainMenu #navMenu a.active{font-weight: bold;}
+#mainMenu #deviceMenu {margin-top:-25px;}
+#mainMenu #deviceMenu a{color:#999;text-decoration: none;}
+#mainMenu #deviceMenu a.active{font-weight: bold; color:#010101; font-size:15px;}
+.panel{margin:0 40px;}
+.panel .panel-heading{background-color:#fff;border-bottom: 2px solid #efefef; width: 98%; margin-left: 10px;margin-top:5px;padding: 8px 0px;}
+.panel .panel-heading a{text-decoration: none;font-size:16px;color:#000;}
+.panel .panel-heading .radius-btn{border:1px solid #ccc;border-radius:8px}
+.panel .panel-heading .active a{border-bottom:2px solid #000}
+.panel .panel-heading li:hover a{border-bottom:2px solid #000}
+.panel .panel-heading #searchTheme{float:right;border-radius:15px;outline: none;border:1px solid #ccc}
+.panel .panel-heading a:last-child{margin-left:10px}

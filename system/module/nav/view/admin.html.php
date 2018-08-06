@@ -13,28 +13,35 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('type', $type);?>
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
-<div class='panel'>
-  <div class='panel-heading'>
-    <ul id='typeNav' class='nav nav-tabs'>
-      <?php if($this->config->site->type != 'blog'):?>
-      <li data-type='internal' <?php echo $type == 'desktop_top' ? "class='active'" : '';?>>
-        <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop);?>
-      </li>
-      <li data-type='internal' <?php echo $type == 'mobile_top' ? "class='active'" : '';?>>
-        <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top);?>
-      </li>
-      <li data-type='internal' <?php echo $type == 'mobile_bottom' ? "class='active'" : '';?>>
-        <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom);?>
-      </li>
-      <?php endif;?>
-      <li data-type='internal' <?php echo $type == 'desktop_blog' ? "class='active'" : '';?>>
-        <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_blog"), $lang->nav->desktop_blog);?>
-      </li>
-      <li data-type='internal' <?php echo $type == 'mobile_blog' ? "class='active'" : '';?>>
-        <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog);?>
-      </li>
-    </ul> 
+<div id='mainMenu' class='clearfix'>
+  <div id='navMenu'>
+    <?php
+    if(empty($_SESSION['device']) or $this->session->device == 'desktop')
+    {
+        if($this->config->site->type != 'blog') echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop, $type == 'desktop_top' ? "class='active'" : '');
+        echo html::a(helper::createLink('nav', 'admin', "type=desktop_blog"), $lang->nav->desktop_blog, $type == 'desktop_blog' ? "class='active'" : '');
+    }
+    elseif($this->session->device == 'mobile')
+    {
+        if($this->config->site->type != 'blog')
+        {
+            echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $type == 'mobile_top' ? "class='active'" : '');
+            echo html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom, $type == 'mobile_bottom' ? "class='active'" : '');
+        }
+        echo html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog, $type == 'mobile_blog' ? "class='active'" : '');
+    }
+    ?>
   </div>
+  <div id='deviceMenu' class='btn-toolbar pull-right'>
+    <?php
+    echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
+    echo "|";
+    echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
+    ?>
+  </div>
+</div>
+<div class='panel'>
+  <div class='panel-heading'><?php echo $lang->nav->common;?></div>
   <div class='panel-body'>
     <form class='form-inline ve-form' id='navForm' method='post'>
       <ul class='navList ulGrade1' id='navList'>
@@ -69,7 +76,7 @@
         }
         ?>
       </ul>
-      <div><?php echo html::a('javascript:;', $lang->save, "class='btn btn-primary submit' onclick='return submitForm()'")?></div>
+      <div id='submitBox'><?php echo html::a('javascript:;', $lang->save, "class='btn btn-primary submit hidden' onclick='return submitForm()'")?></div>
     </form>
   </div>
 </div>

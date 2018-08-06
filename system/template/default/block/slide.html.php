@@ -33,7 +33,7 @@
         {$itemClass = 0 === $index++ ? 'item active' : 'item'}
         {if($slide->backgroundType == 'image')}
           <div data-id='{!echo $slide->id}' class='{!echo $itemClass }'{!echo $url . ' ' . $target}>
-          {!print(html::image($slide->image))}
+          {!print(html::image($slide->image,"alt ='$slide->title' title = '$slide->title'"))}
         {else}
           <div data-id='{!echo $slide->id}' class='{!echo $itemClass }'{!echo $url . ' ' . $target} style='{!echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px'}'>
         {/if}
