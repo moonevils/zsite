@@ -11,6 +11,7 @@
  */
 $lang->ui->common = "界面";
 
+$lang->ui->component       = '常用组件';
 $lang->ui->clientDesktop   = '桌面';
 $lang->ui->clientMobile    = '移动';
 $lang->ui->logo            = 'Logo';
@@ -21,6 +22,7 @@ $lang->ui->manageTemplate  = '模板管理';
 $lang->ui->manageTheme     = '主题管理';
 $lang->ui->installTemplate = '导入模板';
 $lang->ui->exportTheme     = '导出主题';
+$lang->ui->addTheme        = '添加主题';
 $lang->ui->setTheme        = '主题设置';
 $lang->ui->setDevice       = '设备设置';
 $lang->ui->setFavicon      = "Favicon设置";
@@ -48,12 +50,14 @@ $lang->ui->editTemplate    = "编辑模板";
 $lang->ui->installedThemes = "已安装主题";
 $lang->ui->enableTheme     = "使用此主题";
 $lang->ui->industry        = "行业";
+$lang->ui->byIndustry      = "行业筛选";
 $lang->ui->offcial         = "官方";
 $lang->ui->score           = "积分";
 $lang->ui->reset           = "重置为默认";
-$lang->ui->themePackage    = "主题包";
+$lang->ui->themePackage    = "待导入主题包";
 $lang->ui->refreshPage     = "刷新页面";
 $lang->ui->mobileBottomNav = '移动版底部导航';
+$lang->ui->searchTheme     = '搜索已安装主题';
 
 $lang->ui->uploadLogo             = "上传Logo";
 $lang->ui->uploadFavicon          = "上传小图标";
@@ -76,6 +80,7 @@ $lang->ui->packagePathTip         = '请将主题包的zip文件上传至 %s 目
 $lang->ui->gdHelp                 = '查看安装方式';
 $lang->ui->gdTip                  = '蝉知图片水印功能需要安装php-gd扩展才能使用。';
 $lang->ui->effectError            = '导入特效失败，请检查您的特效是否正常，查看地址：http://www.chanzhi.org/effect';
+$lang->ui->deleteFaviconFail      = '删除 %s 失败。';
 $lang->ui->lengthOverflow         = '内容长度 %s 字节。请保持长度不超过65535字节，否则会导致部分内容丢失。';
 
 $lang->ui->deviceList = new stdclass();
@@ -144,6 +149,8 @@ $lang->ui->blocks2Create = "新创建区块";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置';
+$lang->ui->theme->upgrade                              = '升级';
+$lang->ui->theme->installed                            = '已安装';
 $lang->ui->theme->online                               = '在线主题';
 $lang->ui->theme->default                              = '默认';
 $lang->ui->theme->all                                  = '全部';
@@ -442,6 +449,7 @@ unset($this->lang->ui->files->mobile->forum['reply/reply']);
 
 if(!isset($lang->effect)) $lang->effect = new stdclass();
 
+$lang->effect->common      = '特效';
 $lang->effect->category    = '分类';
 $lang->effect->name        = '名称';
 $lang->effect->account     = '设计师';

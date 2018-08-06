@@ -317,6 +317,13 @@ class RainTPL
 
         /* Read template file. */
         $this->tpl['source'] = $templateCode = file_get_contents($tplFile);
+        if(strpos($templateCode, self::PHP_START) !== false)
+        {
+            $tplType  = (strpos($tplName, DS . 'block' . DS) !== false) ? 'model' : 'control';
+            $compiledCode = $this->compiledPHPCode($templateCode, $tplType);
+            file_put_contents($compiledFile, $compiledCode);
+            return true;
+        }
 
         /* Xml substitution. */
         $templateCode = preg_replace("/<\?xml(.*?)" . "\?" . ">/s", "##XML\\1XML##", $templateCode);
@@ -479,7 +486,6 @@ class RainTPL
             elseif(strpos($html, '{/loop}') !== FALSE)
             {
                 //close loop tag
-                //iterator
                 $counter = "\$counter$loopLevel";
 
                 //decrease the loop counter
@@ -698,7 +704,7 @@ class RainTPL
         /* If the cache is active. */
         if(isset($code[2]))
         {
-            return '<?php $tpl = new RainTPL;' .
+            return self::PHP_START . ' $tpl = new RainTPL;' .
                 '$tpl->assign($this->var);' .
                 '$tpl->draw(' . $include_template . ');'
                 . self::PHP_END;
@@ -1240,5 +1246,35 @@ class RainTPL
             $message = 'Unallowed syntax in ' . $this->tpl['tplFile'] . ' template';
             $this->app->triggerError($message, $this->tpl['tplFile'], $line, true);
         }
+    }
+
+    /**
+     * Compiled php view code. 
+     * 
+     * @param  string    $templateCode 
+     * @param  string    $tplType 
+     * @access private
+     * @return string
+     */
+    private function compiledPHPCode($templateCode, $tplType)
+    {
+        $compiledCode = str_replace('$this->', '$' . $tplType . '->', $templateCode);
+        $includePreg  = '/ include\s+(.+);/';
+        preg_match_all($includePreg, $compiledCode, $matches);
+        foreach($matches[1] as $key => $code)
+        {
+            $raintplCode =  " \$tpl = new RainTPL; \$tpl->assign(\$this->var);" . "\$tpl->draw($code);";
+            $compiledCode = str_replace($matches[0][$key], $raintplCode, $compiledCode);
+        }
+
+        $includePreg  = '/ include\s+(.+)\s+\?\>/';
+        preg_match_all($includePreg, $compiledCode, $matches);
+        foreach($matches[1] as $key => $code)
+        {
+            $raintplCode =  " \$tpl = new RainTPL;\$tpl->assign(\$this->var);" . "\$tpl->draw($code);" . self::PHP_END;
+            $compiledCode = str_replace($matches[0][$key], $raintplCode, $compiledCode);
+        }
+
+        return $compiledCode;
     }
 }

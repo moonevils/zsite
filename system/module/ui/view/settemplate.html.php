@@ -13,16 +13,33 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
 <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
-<div class='panel' id='mainPanel'>
-  <div class='panel-heading'>
-    <ul class='nav nav-tabs' id='typeNav'>
-      <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->internalTheme, "data-toggle='tab'");?></li>
-      <?php if($app->clientLang != 'en'):?>
-      <li data-type='store'><?php echo html::a('#storeSection', $lang->ui->themeStore, "data-toggle='tab'");?></li>
-      <li data-type='store'><?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?></li>
-      <?php endif;?>
-    </ul>
+<div id='mainMenu' class='clearfix'>
+  <div id='navMenu'>
+    <?php echo html::a('#internalSection', $lang->ui->files->default->user['thread'], "data-toggle='tab' class='active'");?>
+    <?php echo html::a(inlink('themestore'), $lang->ui->themeStore);?>
   </div>
+  <div id='deviceMenu' class='btn-toolbar pull-right'>
+    <?php
+    echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
+    echo "|";
+    echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
+    ?>
+  </div>
+</div>
+<div class='panel' id='mainPanel'>
+  <form method='post'>
+    <div class='panel-heading'>
+      <ul class='nav nav-tabs' id='typeNav'>
+        <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->installedThemes, "data-toggle='tab' class='active'");?></li>
+        <?php if($app->clientLang != 'en'):?>
+        <li data-type='internal'><?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?></li>
+        <?php endif;?>
+        <li data-type='internal'><?php echo html::a(inlink('themestore'), $lang->ui->addTheme . " <i class='icon-plus-sign'></i>", "class=''");?></li>
+        <li data-type='internal'><?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . " <i class='icon icon-download'></i>", "data-toggle='modal'");?></li>
+        <?php echo html::input('searchTheme', '', "placeholder={$lang->ui->searchTheme}")?>
+      </ul>
+    </div>
+  </form>
   <div class='panel-body tab-content'>
     <section class='cards cards-borderless themes tab-pane active' id='internalSection'>
       <?php foreach($template['themes'] as $code => $theme):?>

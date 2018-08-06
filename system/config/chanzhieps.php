@@ -36,10 +36,7 @@ $config->replaceViewsListPages[] = 'article_browse';
 $config->replaceViewsListPages[] = 'blog_index';
 $config->replaceViewsListPages[] = 'product_browse';
 
-/* Views and themes. */
-
-$config->product = new stdclass();
-
+/* Items for languages. */
 $config->enabledLangs = 'zh-cn,zh-tw,en';
 $config->defaultLang  = 'zh-cn';
 
@@ -149,3 +146,5 @@ $config->dependence->comment[]      = 'message';
 $config->dependence->wechat[]       = 'user';
 $config->dependence->tag[]          = 'article';
 $config->dependence->order[]        = 'shop';
+
+$config->product = new stdclass();

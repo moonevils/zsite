@@ -27,8 +27,23 @@
       
       list($module, $method, $params) = explode('|', $groupSetting['link']);
       $groupClass = $menuGroup == $this->session->currentGroup ? 'active' : '';
+      if($menuGroup == 'design') $groupClass = 'design';
       $groupUrl = helper::createLink($module, $method, $params);
-      echo "<li class='{$groupClass}' data-id='{$menuGroup}'><a data-toggle='tooltip' href='{$groupUrl}'>{$groupSetting['title']}</a></li>";
+      echo "<li class='{$groupClass}' data-id='{$menuGroup}'>";
+      echo "<a data-toggle='tooltip' href='{$groupUrl}'>{$groupSetting['title']}</a>";
+      if($menuGroup == 'design' and $menuGroup == $this->session->currentGroup)
+      {
+          echo "<ul class='nav nav-sub'>";
+          foreach($lang->designMenus as $submenu)
+          {
+              list($title, $module, $method) = explode('|', $submenu);
+              echo "<li class='active'>";
+              echo html::a(helper::createLink($module, $method), $title);
+              echo "</li>";
+          }
+          echo "</ul>";
+      }
+      echo "</li>";
   }
   ?>
   </ul>

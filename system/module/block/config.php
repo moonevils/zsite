@@ -11,7 +11,7 @@ $config->block->require->create = 'title, template';
 $config->block->require->edit   = 'title';
 
 $config->block->categoryList = new stdclass();
-$config->block->categoryList->custom  = ',html,htmlcode,phpcode,baidustat,';
+$config->block->categoryList->custom  = ',html,htmlcode,phpcode,baidustat,test,';
 $config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,latestBook,';
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
 $config->block->categoryList->system  = ',contact,message,followUs,about,links,slide,header,bottomNav,subscribe,login,';
@@ -54,6 +54,7 @@ $config->block->defaultIcons['bottomNav'] = '';
 $config->block->defaultMoreUrl['html']          = '';
 $config->block->defaultMoreUrl['latestArticle'] = '';
 $config->block->defaultMoreUrl['hotArticle']    = '';
+$config->block->defaultMoreUrl['latestBlog']    = '';
 $config->block->defaultMoreUrl['latestProduct'] = '';
 $config->block->defaultMoreUrl['hotProduct']    = '';
 $config->block->defaultMoreUrl['latestThread']  = '';
