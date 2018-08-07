@@ -116,6 +116,7 @@ $lang->visual->design->code           = '代码';
 $lang->visual->design->hidePageTmpl   = '隐藏页面模版';
 $lang->visual->design->dragAndAdd     = '拖到布局中添加';
 $lang->visual->design->noBlockTip     = '此类目下没有可用区块。';
+$lang->visual->design->setColumns     = '分栏设置';
 
 
 $lang->visual->design->placeholders                = array();
@@ -124,3 +125,4 @@ $lang->visual->design->placeholders['page_header'] = '页面头部';
 $lang->visual->design->placeholders['page_footer'] = '页面底部';
 $lang->visual->design->placeholders['breadcrumb']  = '面包屑导航';
 $lang->visual->design->placeholders['article']     = '正文内容';
+$lang->visual->design->placeholders['category']    = '目录';

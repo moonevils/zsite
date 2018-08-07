@@ -187,19 +187,6 @@ class visual extends control
         $layout       = $blockData->layout->$page;
         $region       = $blockData->regions->$page;
 
-        foreach($layout as $layoutIndex => $layoutItem)
-        {
-            if($layoutItem['type'] === 'placeholder')
-            {
-                $layoutItem['title'] = $this->lang->visual->design->placeholders[$layoutItem['name']];
-            }
-            else
-            {
-                $layoutItem['title'] = $region[$layoutItem['name']];
-            }
-            $layout[$layoutIndex] = $layoutItem;
-        }
-
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 
         $this->view->title           = $this->lang->visual->common;

@@ -32,9 +32,10 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 
 #dsBox {top: 50px; right: 10px; left: 60px; bottom: 50px; background: #fff; border: #ddd 1px solid;}
 #dsMenu {width: 200px; border-right: 1px solid #ddd; z-index: 2;}
-#dsPreview {left: 200px; right: 360px; border-right: 1px solid #ddd; transition: left .2s;}
-#dsPreview > header {transition: padding .2s}
+#dsPreview {left: 200px; right: 360px; border-right: 1px solid #ddd; transition: left .2s; background: #eee;}
+#dsPreview > header {transition: padding .2s; padding: 10px 15px; border: none;}
 #dsTool {width: 360px;}
+#dsPreview > header > .actions {right: 5px;}
 #dsTool > header {padding: 0; border-bottom: none;}
 #dsTool > header .nav > li > a {padding: 10px 10px 9px 10px; border-bottom: 1px solid #e5e5e5; position: relative;}
 #dsTool > header .nav > li.active > a:before {content: ' '; display: block; position: absolute; left: 25px; right: 25px; bottom: 0; background: #3280fc; height: 2px;}
@@ -51,7 +52,11 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 
 .ds-hide-menu #dsPreview {left: 0;}
 .ds-hide-menu #dsPreview > header {padding-left: 210px;}
-.ds-hide-menu #dsMenu {bottom: auto; height: 40px;}
+.ds-hide-menu #dsMenu {bottom: auto; height: 40px; border-right: none;}
+.ds-hide-menu #dsMenu > header {border: none; overflow: hidden;}
+.ds-hide-menu #dsMenu > header:before,
+.ds-hide-menu #dsMenu > header:after {position: absolute; top: 5px; right: 0; display: block; width: 0; height: 0; content: ' '; border-color: transparent transparent transparent #ccc; border-style: solid; border-width: 15px 0 15px 7px;}
+.ds-hide-menu #dsMenu > header:after {right: 1px; border-color: transparent transparent transparent #eee; border-width: 15px 0 15px 7px;}
 .ds-hide-menu #dsMenu > header > .actions {position: static;}
 .ds-hide-menu #dsMenu > header .ds-menu-toggle {position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: block; width: 100%; z-index: 10;}
 .ds-hide-menu #dsMenu > header .ds-menu-toggle:focus,
@@ -89,3 +94,25 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 #customThemeForm .theme-group {padding: 8px;}
 #customThemeForm .theme-group-name {font-weight: bold; color: #808080; margin-bottom: 4px;}
 #customThemeForm .theme-item + .theme-item {margin-top: 4px;}
+
+#preview {padding: 5px 15px 15px; background: #eeeeee;}
+.preview-page {background: #fff; box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12); padding: 20px 30px; border-radius: 2px;}
+.layout-item {display: block; min-height: 50px; position: relative}
+.layout-item:before {content: attr(data-title); position: absolute; display: block; left: 0; top: 0;}
+.layout-placeholder {min-height: 40px; line-height: 40px; border: none; position: relative; cursor: not-allowed;}
+.layout-placeholder[data-name="category"],
+.layout-placeholder[data-name="article"],
+.layout-placeholder[data-name="main"] {height: 100px; line-height: 100px;}
+.layout-placeholder:before {line-height: inherit; right: 0; bottom: 0; background: transparent; color: #808080; text-align: center; background: #eee;}
+.layout-item + .layout-item {margin-top: 10px;}
+.layout-item.col {float: left;}
+.layout-item.col + .col {margin-top: 0}
+.layout-container {border: 1px dotted #aaa;}
+.layout-container:before {background: #eff7ff; color: #3280fc; line-height: 20px; padding: 0 5px; border-radius: 0 0 4px 0;}
+.layout-container:hover {border: 1px solid #3280fc;}
+.layout-container:hover:before {color: #eff7ff; background: #3280fc;}
+.layout-row {padding: 10px 0; border: 2px dashed transparent;}
+.layout-row:hover {border-color: #03B8CF}
+.layout-item > .actions {text-align: center; padding: 0; margin-bottom: 10px;}
+.layout-item > .actions > a {display: inline-block; border-radius: 10px; line-height: 20px; padding: 0 8px; background: #03B8CF; color: #fff;}
+.layout-item > .actions > a:hover {background: #0493A5; text-decoration: none;}

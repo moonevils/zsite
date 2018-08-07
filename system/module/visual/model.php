@@ -19,29 +19,66 @@ class visualModel extends model
      * @access public
      * @return void
      */
-    public function printLayoutItem($item)
+    public function printLayoutItem($item, $region, $page)
     {
-        echo "<div class='layout-item type-{$item['type']}' data-title='{$item['title']}' data-name='{$item['name']}'>";
+        if(!isset($item['title']))
+        {
+            if($item['type'] === 'placeholder')
+            {
+                $item['title'] = $this->lang->visual->design->placeholders[$item['name']];
+            }
+            else if($item['type'] !== 'col')
+            {
+                $item['title'] = $region[$item['name']];
+            }
+        }
+
+        $attrs = '';
+        $class = '';
+        switch ($item['type'])
+        {
+            case 'placeholder':
+                $class .= 'layout-placeholder';
+                break;
+            case 'row':
+                $class .= 'layout-row row';
+                break;
+            case 'col':
+                $class .= 'layout-col col';
+                $attrs .= " style='width: {$item['colWidth']}'";
+                break;
+            default:
+                $class .= 'layout-container';
+                break;
+        }
+
+        echo "<div class='layout-item type-{$item['type']} {$class}' data-title='{$item['title']}' data-name='{$item['name']}' {$attrs}>";
         $footer = '';
 
-        if($item['type'] === 'grid' || $item['type'] === 'row')
+        if($item['type'] === 'grid')
         {
             echo '<div class="row">';
             $footer = '</div>';
         }
         else if($item['type'] === 'col')
         {
-            echo '<div class="col" style=>';
+            echo '<div class="col-container">';
+            $footer = '</div>';
+        }
+        else if($item['type'] === 'row')
+        {
+            echo '<div class="actions">' . html::a(helper::createLink('block', 'setColumns', "page={$page}"), '<i class="icon icon-columns"></i> ' . $this->lang->visual->design->setColumns, "data-toggle='modal' data-type='iframe' data-width='600'") . '</div>';
         }
         
-
+        if($item['children'])
+        {
+            foreach ($item['children'] as $child)
+            {
+                $this->printLayoutItem($child, $region, $page);
+            }
+        }
+        
         echo $footer;
         echo '</div>';
-        switch ($item['type'])
-        {
-            default:
-                echo "<div class='layout-item type-{$item['type']}' data-title='{$item['title']}'></div>";
-                break;
-        }
     }
 }
