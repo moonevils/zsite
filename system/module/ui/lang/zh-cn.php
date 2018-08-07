@@ -80,6 +80,7 @@ $lang->ui->packagePathTip         = '请将主题包的zip文件上传至 %s 目
 $lang->ui->gdHelp                 = '查看安装方式';
 $lang->ui->gdTip                  = '蝉知图片水印功能需要安装php-gd扩展才能使用。';
 $lang->ui->effectError            = '导入特效失败，请检查您的特效是否正常，查看地址：http://www.chanzhi.org/effect';
+$lang->ui->errorGetEffect         = '获取特效失败，可能是网络方面的原因，请检查后重新导入。';
 $lang->ui->deleteFaviconFail      = '删除 %s 失败。';
 $lang->ui->lengthOverflow         = '内容长度 %s 字节。请保持长度不超过65535字节，否则会导致部分内容丢失。';
 
@@ -470,6 +471,7 @@ $lang->effect->newBlock      = '导入新区块';
 $lang->effect->obtan         = '获取特效';
 $lang->effect->imported      = '已导入';
 $lang->effect->importSuccess = '导入成功';
+$lang->effect->noEffect      = "<code>%s</code> 不可写！请检查该目录权限，否则无法导入。";
 $lang->effect->noWritable    = "<code>%s</code> 不可写！请检查该目录权限，否则无法导入。";
 $lang->effect->bindCommunity = '蝉知特效只对蝉知社区认证用户开放，请先注册并绑定蝉知社区账号后，获取蝉知特效。';
 $lang->effect->noRsults      = "你还没有任何特效，请登录蝉知特效平台，<a href='http://www.chanzhi.org/effect.html' target='_blank'>获取特效</a>。";
