@@ -17,7 +17,7 @@
     <?php $theme    = $this->config->template->{$this->app->clientDevice}->theme;?>
     <?php commonModel::printLink('file', 'browse', "objectType=source&objectID={$template}_{$theme}", $lang->file->uploadSource . '<i class="icon icon-upload-alt"></i>', "data-toggle='modal' class='radius-btn'");?>
     <?php echo html::a('javascript:;', $lang->file->batchSelect, "class='btn radius-btn batchSelect hide'")?>
-    <div class="btn-group">
+    <div class="btn-group pull-right">
       <?php echo html::a('javascript:void(-1)', "<i class='icon icon-list-ul'></i>", "class='list-view'")?>
       <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view'")?>
     </div>
