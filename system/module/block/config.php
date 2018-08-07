@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 $config->block->allowedTags = $config->allowedTags->admin . '<script><style><object><param><embed><form><button><textarea>';
 
@@ -11,7 +12,7 @@ $config->block->require->create = 'title, template';
 $config->block->require->edit   = 'title';
 
 $config->block->categoryList = new stdclass();
-$config->block->categoryList->custom  = ',html,htmlcode,phpcode,baidustat,test,';
+$config->block->categoryList->custom  = ',html,htmlcode,phpcode,baidustat,group,';
 $config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,latestBook,';
 $config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
 $config->block->categoryList->system  = ',contact,message,followUs,about,links,slide,header,bottomNav,subscribe,login,';
@@ -25,6 +26,7 @@ $config->block->pageGroupList->feedback = array('forum_index', 'forum_board', 't
 $config->block->defaultIcons = array();
 $config->block->defaultIcons['about']         = 'icon-group';
 $config->block->defaultIcons['html']          = '';
+$config->block->defaultIcons['group']         = '';
 $config->block->defaultIcons['contact']       = 'icon-phone';
 $config->block->defaultIcons['followUs']      = 'icon-weixin';
 $config->block->defaultIcons['links']         = 'icon-link';
@@ -54,7 +56,6 @@ $config->block->defaultIcons['bottomNav'] = '';
 $config->block->defaultMoreUrl['html']          = '';
 $config->block->defaultMoreUrl['latestArticle'] = '';
 $config->block->defaultMoreUrl['hotArticle']    = '';
-$config->block->defaultMoreUrl['latestBlog']    = '';
 $config->block->defaultMoreUrl['latestProduct'] = '';
 $config->block->defaultMoreUrl['hotProduct']    = '';
 $config->block->defaultMoreUrl['latestThread']  = '';

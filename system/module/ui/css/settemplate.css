@@ -64,4 +64,13 @@
 .panel .panel-heading li:hover a{border-bottom:2px solid #000}
 .panel .panel-heading #searchTheme{float:right;border-radius:15px;outline: none;border:1px solid #ccc}
 .panel .panel-heading a:last-child{margin-left:10px}
-.row-main{background:#efefef;padding:0px;}
+
+.input-control{position: relative;}
+.input-control.has-icon-right > .form-control{padding-right: 30px;}
+.input-control.has-icon-left > .form-control{padding-left: 30px;}
+.search-box-circle .input-control-icon-left, .search-box-circle .input-control-icon-right, .search-box-circle > .form-control{border-radius: 16px;}
+.input-control-icon-left, .input-control-label-left{left: 1px;}
+.input-control-icon-right, .input-control-label-right{right: 1px;}
+.input-control-icon-left, .input-control-icon-right{width: 30px; text-align: center;}
+.input-control-icon-left, .input-control-icon-right, .input-control-label-left, .input-control-label-right{position: absolute; top: 1px; z-index: 5; height: 30px; line-height: 30px; opacity: .5;}
+input:placeholder-shown + .search-clear-btn, input:placeholder-shown + .search-icon + .search-clear-btn{opacity: 0!important;}

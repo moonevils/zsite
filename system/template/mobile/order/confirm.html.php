@@ -149,7 +149,7 @@ $(function()
                 $('#createAddress').val(0);
             }
             $('#addressList').find('.card-footer').remove();
-         });
+        });
     }
 
     $.refreshAddressList();

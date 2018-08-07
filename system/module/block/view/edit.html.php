@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The edit view file of block module of chanzhiEPS.
@@ -45,7 +46,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
     </div>
     <div class='panel-body'>
       <div class='table-row'>
-        <?php if(strpos(',htmlcode, phpcode, slide, header, baidustat', $type) == false):?>
+        <?php if(strpos(',htmlcode, phpcode, slide, header, baidustat', $type) === false):?>
         <div class='tab-content table-cell col-xs-7'>
         <?php elseif($type == 'html'):?>
         <div class='tab-content table-cell col-xs-9'>
@@ -56,27 +57,22 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <table align='center' class='table table-form mg-0'>
               <tr>
                 <th class='w-120px'><?php echo $lang->block->type;?></th>
+                <?php if(strpos(',htmlcode, phpcode, slide, header, baidustat', $type) === false):?>
+                <td class='w-400px'><?php echo $this->block->createTypeSelector($template, $type, $block->id);?></td>
+                <td></td>
+                <?php else:?>
                 <td><?php echo $this->block->createTypeSelector($template, $type, $block->id);?></td>
+                <?php endif;?>
               </tr>
               <tr>
                 <th><?php echo $lang->block->title;?></th>
-                <td id='titleTDCell'>
-                  <div class='row'>
-                    <div class='col-sm-6'><?php echo html::input('title', $block->title, "class='form-control'");?></div>
-                  </div>
-                </td>
+                <td id='titleTDCell'><?php echo html::input('title', $block->title, "class='form-control'");?> </td>
               </tr>
               <?php if(isset($config->block->defaultIcons[$type])):?>
               <?php if(!isset($block->content->icon)) $block->content->icon = $config->block->defaultIcons[$type];?>
               <tr>
                 <th><?php echo $lang->block->icon;?></th>
-                <td>
-                  <div class='row'>
-                    <div class='col-sm-6'><?php echo html::select('params[icon]', '', '', "class='chosen-icons' data-value='{$block->content->icon}'");?></div>
-                    <div class='col-sm-6'>
-                    </div>
-                  </div>
-                </td>
+                <td> <?php echo html::select('params[icon]', '', '', "class='chosen-icons' data-value='{$block->content->icon}'");?> </td>
               </tr>
               <?php endif;?>
               <?php echo $this->fetch('block', 'blockForm', 'type=' . $type . '&id=' . $block->id);?>
@@ -250,24 +246,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php if($this->app->clientDevice == 'desktop'):?><p class='text-info text-tip'><?php echo $lang->block->placeholder->desktopCustomScriptTip;?></p><?php endif;?>
           </div>
         </div>
-        <?php if(strpos(',htmlcode, phpcode, slide, header, baidustat', $type) == false or $type == 'html'):?>
-        <div id='panelPreview' class=' table-cell'>
-          <div class='panel-preview'>
-            <div class='heading'><strong><?php echo $lang->block->preview?></strong></div>
-            <div class='panel panel-block'>
-              <div class='panel-heading'><i class='icon-heart-empty <?php echo isset($block->content->icon) ? $block->content->icon : '';?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
-              <div class='panel-body text-center'><?php echo $lang->block->textExample;?></div>
-            </div>
-          </div>
-        </div>
-        <?php endif;?>
       </div>
       <div class='form-footer'>
         <?php echo html::submitButton() . html::hidden('blockID', $block->id);?>
-        <?php if(helper::isAjaxRequest()):?>
-        <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "class='hidden captchaModal loadInModal'")?>
-        <?php echo html::commonButton($this->lang->goback, 'btn btn-default reloadModal');?>
-        <?php else:?>
+        <?php if(!helper::isAjaxRequest()):?>
         <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?>
         <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default btn-cancel hidden-ve'");?>
         <?php endif;?>

@@ -13,9 +13,11 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <form method='post' action= '<?php echo inlink('importeffect', "id={$id}");?>' id='ajaxForm'>
- <?php if(!empty($error->error)):?>
+ <?php if(!empty($error->error) or !$effect):?>
  <div id="notice" class='alert alert-success'>
-   <div class="content"><i class='icon-info-sign'></i> <?php echo $error->error;?></div>
+   <div class="content">
+     <i class='icon-info-sign'></i> <?php echo !empty($error->error) ? $error->error : $lang->ui->errorGetEffect;?>
+   </div>
  </div>
   <table class='table table-form hide'>
  <?php else:?>
@@ -29,7 +31,6 @@
       <th></th>
       <td>
         <?php echo html::submitButton();?>
-        <span id='responser' class='alert alert-danger hide'></span>
       </td>
     </tr>
   </table>
