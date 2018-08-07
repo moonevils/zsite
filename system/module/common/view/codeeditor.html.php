@@ -7,7 +7,7 @@ body.codeeditor-fullscreen .form-action {position: fixed; bottom: 5px; left: 50p
 .editor-wrapper .actions {position: absolute; right: 0; bottom: 15px; z-index: 3;}
 .editor-wrapper .actions > a {opacity: .8; color: #808080; border: 1px solid #ccc; min-width: 14px; height: 16px; line-height: 16px; text-align: center; display: block; width: 16px; text-align: center;}
 .editor-wrapper .actions > a:hover {color: #fff; background-color: #3280fc; border-color: #3280fc}
-.editor-wrapper.fullscreen {position: fixed; left: 0; top: 40px; bottom: 40px; right: 0; z-index: 10}
+.editor-wrapper.fullscreen {position: fixed; left: 50px; top: 40px; bottom: 40px; right: 0; z-index: 10}
 .editor-wrapper.fullscreen .pre {height: 100%; width: 100%}
 .editor-wrapper.fullscreen .actions > a {background-color: #ea644a; color: #fff; border-color: #ea644a; opacity: 1}
 
@@ -45,7 +45,8 @@ jQuery.fn.codeeditor = function(options)
         });
 
         $this.data('editor', editor).data('editorId', id);
-        $wrapper.on('click', '.btn-fullscreen', function(){
+        $wrapper.on('click', '.btn-fullscreen', function()
+        {
             $wrapper.toggleClass('fullscreen');
             $wrapper.closest('.modal-dialog').toggleClass('editor-fullscreen');
             $('body').toggleClass('codeeditor-fullscreen');
@@ -59,12 +60,14 @@ jQuery.fn.codeeditor = function(options)
                 $editor.height($editor.data('origin-height'));
             }
             editor.resize();
-        }).on('mousedown', '.editor-resizer', function(e){
+        }).on('mousedown', '.editor-resizer', function(e)
+        {
             var dragStartData = {y: e.screenY, height: $editor.outerHeight()};
             $wrapper.data('dragStartData', dragStartData);
             e.preventDefault();
         });
-        $(document).on('mousemove', function(e){
+        $(document).on('mousemove', function(e)
+        {
             var dragStartData = $wrapper.data('dragStartData');
             if(dragStartData) {
                 var newHeight = dragStartData.height + e.screenY - dragStartData.y - 21;
@@ -72,7 +75,8 @@ jQuery.fn.codeeditor = function(options)
                 e.preventDefault();
                 editor.resize();
             }
-        }).on('mouseup', function(){
+        }).on('mouseup', function()
+        {
             $wrapper.data('dragStartData', null);
         });
     });
