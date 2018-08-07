@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The browse view file of block module of chanzhiEPS.
@@ -24,7 +25,7 @@
         <?php if(strpos($blockList, ",$block->type,") !== false):?>
         <?php if(strpos($block->type, 'code') === false) $block->content = json_decode($block->content); ?>
         <span class='block-item'>
-          <a href='<?php echo inlink('edit', "block={$block->id}")?>' title="<?php echo $block->title?>"> <?php echo helper::subStr($block->title, 20);?> </a>
+          <?php echo html::a(inlink('edit',"block={$block->id}"), $block->title, "data-toggle='modal' title='$block->title'");?>
           <?php echo html::a(helper::createLink('block', 'delete', "blockID=$block->id"), "<i class='icon icon-remove-sign text-important '></i>", "class='deleter pull-right'");?>
         </span>
         <?php endif;?>
