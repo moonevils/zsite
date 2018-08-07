@@ -1600,10 +1600,13 @@ if(!function_exists('getJS'))
     {
         $content = $this->loadModel('admin')->getByApi("effect-apigetpackage-{$id}.json");
         if(empty($content)) return array('result' => 'fail', 'message' => $this->lang->ui->effectError); 
+
         $package = $this->app->getTmpRoot() . 'effect' . DS . 'effect_' . $id . '.zip';
         file_put_contents($package, $content);
+
         $result = $this->extractEffect($package, $id);
         if($result['result'] != 'success') return $result;
+
         $block = new stdclass();
         $block->title    = $this->post->block;
         $block->type     = 'htmlcode';
@@ -1612,6 +1615,7 @@ if(!function_exists('getJS'))
         $block->content  = file_get_contents($this->app->getWwwRoot() . 'data' . DS . 'effect' . DS . $id . DS . 'data.html'); 
         $block->content  = helper::decodeXSS($block->content);
         $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         return array('result' => 'success', 'message' => $this->lang->effect->importSuccess, 'locate' => $this->server->http_referer);
     }
