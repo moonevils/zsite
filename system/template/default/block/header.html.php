@@ -29,7 +29,7 @@
 {$setting->bottom          = zget($setting, 'bottom', 'nav')}
 {$setting->top->left       = zget($setting->top, 'left', '')}
 {$setting->top->right      = zget($setting->top, 'right', 'login')}
-{$setting->middle->left    = zget($setting->middle, 'left', 'nav')}
+{$setting->middle->left    = zget($setting->middle, 'left', 'logo')}
 {$setting->middle->center  = zget($setting->middle, 'center', 'slogan')}
 {$setting->middle->right   = zget($setting->middle, 'right', 'search')}
 {$setting->compatible      = zget($setting, 'compatible', '0')}
