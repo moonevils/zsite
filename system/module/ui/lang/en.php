@@ -21,6 +21,7 @@ $lang->ui->manageTemplate  = 'Manage Template';
 $lang->ui->manageTheme     = 'Manage Theme';
 $lang->ui->installTemplate = 'Import Template';
 $lang->ui->exportTheme     = 'Export Theme';
+$lang->ui->addTheme        = 'Add Theme';
 $lang->ui->setTheme        = 'Theme Settings';
 $lang->ui->setDevice       = 'Device Settings';
 $lang->ui->setFavicon      = "Favicon Settings";
@@ -77,6 +78,7 @@ $lang->ui->packagePathTip         = 'Please upload the zip file to %s, then inst
 $lang->ui->gdHelp                 = 'How to install';
 $lang->ui->gdTip                  = 'Image watermark features need PHP-gd extension.';
 $lang->ui->effectError            = 'Import effects fails, check your effects are normal. View the address: http://www.chanzhi.org/effect';
+$lang->ui->errorGetEffect         = 'Get effect failed. Please check your network and your effect. View the address: http://www.chanzhi.org/effect';
 $lang->ui->lengthOverflow         = 'The content length is %s bytes. Keep it be less than 65535 bytes, or part of content can not be saved.';
 
 $lang->ui->deviceList = new stdclass();

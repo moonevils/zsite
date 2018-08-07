@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The block module zh-cn file of chanzhiEPS.
@@ -75,6 +76,7 @@ $lang->block->logoPosition      = 'Logo';
 $lang->block->navPosition       = '导航';
 $lang->block->searchbarPosition = '搜索框';
 $lang->block->sloganPosition    = '站点口号';
+$lang->block->childBlock        = '子区块';
 
 $lang->block->header = new stdclass();
 

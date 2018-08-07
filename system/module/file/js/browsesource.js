@@ -42,6 +42,7 @@ $(document).ready(function()
         $('.image-view').addClass('active');
         $('.list-view').removeClass('active');
         $('#imageView').show();
+        $('.batchSelect').show();
         $('#listView').hide();
         $.cookie('sourceViewType', 'image', {path: config.cookiePath});
     });
@@ -52,6 +53,7 @@ $(document).ready(function()
         $('.image-view').removeClass('active');
         $('#listView').show();
         $('#imageView').hide();
+        $('.batchSelect').hide();
         $.cookie('sourceViewType', 'list', {path: config.cookiePath});
     });
 
@@ -73,15 +75,19 @@ $(document).ready(function()
       $(this).parent().prev().focus();
     })}
 
-    $('input[name="checkAll[]"]').change(function()
+    $('.checkAll').click(function()
     {
-        if(this.checked)
-        {
-            $("input[name='imageID[]']").prop('checked', true);
-        }
-        else
-        {
-            $("input[name='imageID[]']").prop('checked', false);
-        }
+        $(this).closest('#' + $(this).val()).find(':checkbox').prop('checked', $(this).prop('checked'));
+    });
+
+    $('.batchSelect').click(function()
+    {
+        $('#imageView .file-source .input-group .input-group-addon').toggleClass('hidden');
+        $('#imageView .clearfix .actions').toggleClass('hidden');
+    })
+
+    $.setAjaxForm('.deleteForm', function(response)
+    {
+        if(response.result == 'success') location.href = location.href;
     });
 });

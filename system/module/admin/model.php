@@ -227,6 +227,8 @@ class adminModel extends model
     public function getByApi($api)
     {
         $api = $this->processApi($api);
+        if(!$api) return false;
+
         return file_get_contents($this->config->admin->apiRoot . $api);
     }
 
@@ -241,6 +243,7 @@ class adminModel extends model
     {
         $config = $this->getRegisterInfo();
         if(empty($config)) return false;
+
         $pathInfo = parse_url($api);
 
         if(!isset($pathInfo['query']))
