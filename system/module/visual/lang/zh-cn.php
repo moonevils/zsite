@@ -105,3 +105,22 @@ $lang->visual->setting->boards                             = array('name' => '�
 $lang->visual->setting->boards['actions']['add']           = array('text' => '板块管理');
 $lang->visual->setting->thread                             = array('name' => '帖子', 'actions' => array());
 $lang->visual->setting->thread['actions']['edit']          = array('text' => '转移');
+
+$lang->visual->design                 = new stdclass();
+$lang->visual->design->pageTemplate   = '页面模板';
+$lang->visual->design->currentTheme   = '当前主题：';
+$lang->visual->design->layout         = '布局';
+$lang->visual->design->block          = '区块';
+$lang->visual->design->skin           = '外观';
+$lang->visual->design->code           = '代码';
+$lang->visual->design->hidePageTmpl   = '隐藏页面模版';
+$lang->visual->design->dragAndAdd     = '拖到布局中添加';
+$lang->visual->design->noBlockTip     = '此类目下没有可用区块。';
+
+
+$lang->visual->design->placeholders                = array();
+$lang->visual->design->placeholders['main']        = '主要内容';
+$lang->visual->design->placeholders['page_header'] = '页面头部';
+$lang->visual->design->placeholders['page_footer'] = '页面底部';
+$lang->visual->design->placeholders['breadcrumb']  = '面包屑导航';
+$lang->visual->design->placeholders['article']     = '正文内容';

@@ -110,6 +110,7 @@ $lang->block->default->pages['page_view']      = '单页';
 
 /* page layout list. */
 if(!isset($lang->block->default->regions)) $lang->block->default->regions = new stdclass();
+
 $lang->block->default->regions->all['header'] = 'Header';
 $lang->block->default->regions->all['top']    = '页头';
 $lang->block->default->regions->all['banner'] = 'Banner';
@@ -205,3 +206,38 @@ $lang->block->headerLayout->searchbar = array();
 $lang->block->headerLayout->searchbar['besideSlogan'] = '站点口号右侧';
 $lang->block->headerLayout->searchbar['topRight']     = '右上角';
 $lang->block->headerLayout->searchbar['insideNav']    = '导航右侧';
+
+
+if(!isset($lang->block->default->layout)) $lang->block->default->layout = new stdclass();
+
+$lang->block->default->layout->all = array();
+$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'header');
+$lang->block->default->layout->all[] = array('type' => 'container', 'name' => 'top');
+$lang->block->default->layout->all[] = array('type' => 'grid', 'name' => 'banner');
+$lang->block->default->layout->all[] = array('type' => 'placeholder', 'name' => 'main');
+$lang->block->default->layout->all[] = array('type' => 'grid', 'name' => 'bottom');
+$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'footer');
+
+$lang->block->default->layout->index_index = array();
+$lang->block->default->layout->index_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->index_index[] = array('type' => 'grid', 'name' => 'top');
+$lang->block->default->layout->index_index[] = array('type' => 'grid', 'name' => 'middle');
+$lang->block->default->layout->index_index[] = array('type' => 'grid', 'name' => 'bottom');
+$lang->block->default->layout->index_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->default->layout->company_index = array();
+$lang->block->default->layout->company_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->company_index[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
+$lang->block->default->layout->company_index[] = array('type' => 'grid', 'name' => 'topBanner');
+$company_index_mainColumns = array();
+$company_index_mainColumn = array('type' => 'col', 'name' => 'main', 'colWidth' => '75%', 'children' => array());
+$company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'top');
+$company_index_mainColumn['children'][] = array('type' => 'placeholder', 'name' => 'article');
+$company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'bottom');
+$company_index_sideColumn = array('type' => 'col', 'name' => 'side', 'colWidth' => '25%', 'children' => array());
+$company_index_sideColumn['children'][] = array('type' => 'grid', 'name' => 'side');
+$company_index_mainColumns[] = $company_index_mainColumn;
+$company_index_mainColumns[] = $company_index_sideColumn;
+$lang->block->default->layout->company_index[] = array('type' => 'row', 'name' => 'main', 'children' => $company_index_mainColumns);
+$lang->block->default->layout->company_index[] = array('type' => 'grid', 'name' => 'bottomBanner');
+$lang->block->default->layout->company_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
