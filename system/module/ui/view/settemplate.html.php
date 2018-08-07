@@ -27,17 +27,24 @@
   </div>
 </div>
 <div class='panel' id='mainPanel'>
-  <form method='post'>
-    <div class='panel-heading'>
-      <ul class='nav nav-tabs' id='typeNav'>
+    <div class='panel-heading clearfix'>
+      <ul class='nav nav-tabs pull-left' id='typeNav'>
         <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->installedThemes, "data-toggle='tab' class='active'");?></li>
         <?php if($app->clientLang != 'en'):?>
         <li data-type='internal'><?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?></li>
         <?php endif;?>
         <li data-type='internal'><?php echo html::a(inlink('themestore'), $lang->ui->addTheme . " <i class='icon-plus-sign'></i>", "class=''");?></li>
         <li data-type='internal'><?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . " <i class='icon icon-download'></i>", "data-toggle='modal'");?></li>
-        <?php echo html::input('searchTheme', '', "placeholder={$lang->ui->searchTheme}")?>
       </ul>
+      <div class='panel-actions'>
+        <form method='post' class='search-form'>
+          <div class='input-control search-box search-box-circle has-icon-left has-icon-right'>
+            <input id='searchTheme' type='search' class='form-control search-input' name='searchTheme' value='<?php echo $this->post->searchTheme;?>' placeholder='<?php echo $lang->ui->searchTheme;?>'>
+            <label for='inputSearchTheme' class='input-control-icon-left search-icon'><i class='icon icon-search'></i></label>
+            <a href='javascript:;' class='input-control-icon-right search-clear-btn'><i class='icon icon-remove'></i></a>
+          </div>
+        </form>
+      </div>
     </div>
   </form>
   <div class='panel-body tab-content'>
