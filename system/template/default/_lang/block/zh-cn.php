@@ -14,6 +14,7 @@ $lang->block->default->typeList['html']      = '自定义区块';
 $lang->block->default->typeList['htmlcode']  = 'html源代码';
 $lang->block->default->typeList['phpcode']   = 'php源代码';
 $lang->block->default->typeList['baidustat'] = '百度统计';
+$lang->block->default->typeList['group']     = '组合区块';
 
 $lang->block->default->typeList['latestArticle']   = '最新文章';
 $lang->block->default->typeList['hotArticle']      = '热门文章';
@@ -44,8 +45,6 @@ $lang->block->default->typeList['bottomNav']       = '底部导航';
 $lang->block->default->typeList['subscribe']       = '订阅博客';
 $lang->block->default->typeList['login']           = '登录';
 
-$lang->block->default->typeList['test']           = '测试区块';
-
 $lang->block->default->typeGroups = array();
 $lang->block->default->typeGroups['html']      = 'input';
 $lang->block->default->typeGroups['htmlcode']  = 'input';
@@ -69,7 +68,6 @@ $lang->block->default->typeGroups['productTree'] = 'category';
 $lang->block->default->typeGroups['blogTree']    = 'category';
 
 $lang->block->default->typeGroups['latestBook']  = 'book';
-$lang->block->default->typeGroups['test']  = 'input';
 
 $lang->block->default->typeGroups['contact']   = 'system';
 $lang->block->default->typeGroups['followUs']  = 'system';
