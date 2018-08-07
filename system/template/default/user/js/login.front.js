@@ -2,6 +2,8 @@
 needPing = true;
 $('#submit').click(function()
 {
+    var loginText = $(this).val();
+    $(this).val($(this).data('loading'));
     var password = $('#password').val();
     var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
     var hasCaptcha = false;
@@ -25,6 +27,7 @@ $('#submit').click(function()
         dataType:'json',
         success:function(data)
         {
+            $('#submit').val(loginText);
             if(data.result == 'success') return location.href=data.locate;
             postData = "account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + fingerprint;
             if(hasCaptcha) postData += '&' + captchaInput + '=' + $('#' + captchaInput).val();
@@ -43,7 +46,7 @@ $('#submit').click(function()
                 error:function(data){showFormError(data.responseText);}
             })
         },
-        error:function(data){showFormError(data.responseText);}
+        error:function(data){showFormError(data.responseText); $('#submit').val(loginText);}
     })
     return false;
 });

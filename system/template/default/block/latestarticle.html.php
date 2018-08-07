@@ -71,8 +71,8 @@
               </div>
               <strong class='text-important text-nowrap'>
                 {if(isset($content->time))} <i class='icon-time'></i> {!formatTime($article->addedDate, DT_DATE4)} {/if}
-              </strong> 
-              {$article->summary}
+              </strong>
+              <span>{$article->summary}</span>
             </div>
           </div>
         </div>
