@@ -13,7 +13,6 @@ $(document).ready(function()
         $('#packageSection').load(url);
     }
 
-
     var storeContentLoaded   = false;
     var packageContentLoaded = false;
     var $loader = $('#storeSection > .load-icon').clone();
@@ -34,7 +33,6 @@ $(document).ready(function()
             packageContentLoaded = true;
         }
     });
-
 
     $('#storeSection').on('click', '#industryBox a', function(e)
     {
@@ -70,4 +68,14 @@ $(document).ready(function()
             }
         });
     });
+
+    $('.search-box .search-clear-btn').click(function()
+    {
+        $(this).parent('.search-box').find('.search-input').val('');
+    })
+
+    $('.search-box .search-icon').click(function()
+    {
+        $('.search-form').submit();
+    })
 });
