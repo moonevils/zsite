@@ -9,7 +9,7 @@ js::set('debug', $config->debug);
 js::set('device', $this->app->clientDevice);
 js::set('pageGroupList', $config->block->pageGroupList);
 js::set('template', $template);
-js::set('test', $layout);
+js::set('test', $region);
 ?>
 
 <div id='dsBox' class='dock'>
@@ -49,7 +49,7 @@ js::set('test', $layout);
         <?php
           foreach ($layout as $layoutItem)
           {
-              $this->visual->printLayoutItem($layoutItem);
+              $this->visual->printLayoutItem($layoutItem, $region, $page);
           }
         ?>
       </div>
