@@ -167,4 +167,54 @@ class visual extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
     }
+
+    /**
+     * Visual design page
+     *
+     * @access public
+     * @return void
+     */
+    public function design($page = 'all')
+    {
+        $this->loadModel('block')->loadTemplateLang($template);
+
+        $clientDevice = $this->app->clientDevice;
+        $theme        = $this->config->template->{$clientDevice}->theme;
+        $template     = $this->config->template->{$clientDevice}->name;
+        $cssFile      = $this->loadModel('ui')->getCustomCssFile($template, $theme);
+        $savePath     = dirname($cssFile);
+        $blockData    = $this->lang->block->{$template};
+        $layout       = $blockData->layout->$page;
+        $region       = $blockData->regions->$page;
+
+        $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+
+        $this->view->title           = $this->lang->visual->common;
+        $this->view->blockData       = $blockData;
+
+        $this->view->templateData    = $this->ui->getTemplates()[$template];
+        $this->view->template        = $template;
+        $this->view->theme           = $theme;
+        $this->view->page            = $page;
+        $this->view->isPageAll       = $page == 'all';
+        $this->view->blocks          = $this->block->getList($template);;
+        $this->view->categoryList    = array_reverse((array) $this->config->block->categoryList);
+        
+        $this->view->setting         = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
+        $this->view->layout          = $layout;
+        $this->view->region          = $region;
+
+        if(!file_exists($savePath)) mkdir($savePath, 0777, true);
+        if(!is_writable($savePath))
+        {
+            $this->view->hasPriv = false;
+            $this->view->errors  = sprintf($this->lang->ui->unWritable, str_replace(dirname($this->app->getWwwRoot()), '', $savePath));
+        }
+        else
+        {
+            $this->view->hasPriv = true;
+        }
+
+        $this->display();
+    }
 }

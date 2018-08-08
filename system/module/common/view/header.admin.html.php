@@ -75,7 +75,6 @@
           <?php endforeach;?>
         </ul>
       </li>
-      <li class='divider'></li>
     </ul>
     <?php endif;?>
     <?php echo $mainMenu;?>

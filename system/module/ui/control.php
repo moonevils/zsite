@@ -806,17 +806,23 @@ class ui extends control
         {
             $post = fixer::input('post')->stripTags('css,js', $this->config->allowedTags->admin)->get();
 
-            $cssSetting["{$template}_{$theme}_{$page}"] = helper::decodeXSS(trim($post->css));
-            $jsSetting["{$template}_{$theme}_{$page}"]  = helper::decodeXSS(trim($post->js));
+            if(isset($post->css))
+            {
+                $cssSetting["{$template}_{$theme}_{$page}"] = helper::decodeXSS(trim($post->css));
+                $cssLength = strlen($cssSetting["{$template}_{$theme}_{$page}"]);
+                if($cssLength > 65535) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->lengthOverflow, $cssLength)));
+                $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
+            }
 
-            $cssLength = strlen($cssSetting["{$template}_{$theme}_{$page}"]);
-            $jsLength  = strlen($jsSetting["{$template}_{$theme}_{$page}"]);
-            if($cssLength > 65535) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->lengthOverflow, $cssLength)));
-            if($jsLength  > 65535) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->lengthOverflow, $jsLength)));
+            if(isset($post->js))
+            {
+                $jsSetting["{$template}_{$theme}_{$page}"]  = helper::decodeXSS(trim($post->js));
+                $jsLength  = strlen($jsSetting["{$template}_{$theme}_{$page}"]);
+                if($jsLength  > 65535) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->lengthOverflow, $jsLength)));
+                $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
+            }
 
-            $this->loadModel('setting')->setItems('system.common.css', $cssSetting);
-            $this->loadModel('setting')->setItems('system.common.js', $jsSetting);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'data' => $post));
         }
 
         $this->app->loadLang('block');
