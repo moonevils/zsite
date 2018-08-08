@@ -195,3 +195,95 @@ $lang->block->headerLayout->searchbar = array();
 $lang->block->headerLayout->searchbar['besideSlogan'] = 'Right of slogan';
 $lang->block->headerLayout->searchbar['topRight']     = 'Top right';
 $lang->block->headerLayout->searchbar['insideNav']    = 'Right of navigation';
+
+if(!isset($lang->block->default->layout)) $lang->block->default->layout = new stdclass();
+
+$lang->block->default->layout->all = array();
+$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'header', 'title' => '<head> (Invisible)');
+$lang->block->default->layout->all[] = array('type' => 'container', 'name' => 'top');
+$lang->block->default->layout->all[] = array('type' => 'grid', 'name' => 'banner');
+$lang->block->default->layout->all[] = array('type' => 'placeholder', 'name' => 'main');
+$lang->block->default->layout->all[] = array('type' => 'grid', 'name' => 'bottom');
+$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'footer', 'title' => '<footer> (Invisible)');
+
+$lang->block->default->layout->index_index = array();
+$lang->block->default->layout->index_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->index_index[] = array('type' => 'grid', 'name' => 'top');
+$lang->block->default->layout->index_index[] = array('type' => 'grid', 'name' => 'middle');
+$lang->block->default->layout->index_index[] = array('type' => 'grid', 'name' => 'bottom');
+$lang->block->default->layout->index_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->default->layout->company_index = array();
+$lang->block->default->layout->company_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->company_index[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
+$lang->block->default->layout->company_index[] = array('type' => 'grid', 'name' => 'topBanner');
+$company_index_mainColumns = array();
+$company_index_mainColumn = array('type' => 'col', 'name' => 'main', 'colWidth' => '75%', 'children' => array());
+$company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'top');
+$company_index_mainColumn['children'][] = array('type' => 'placeholder', 'name' => 'article');
+$company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'bottom');
+$company_index_sideColumn = array('type' => 'col', 'name' => 'side', 'colWidth' => '25%', 'children' => array());
+$company_index_sideColumn['children'][] = array('type' => 'grid', 'name' => 'side');
+$company_index_mainColumns[] = $company_index_mainColumn;
+$company_index_mainColumns[] = $company_index_sideColumn;
+$lang->block->default->layout->company_index[] = array('type' => 'row', 'name' => 'main', 'children' => $company_index_mainColumns);
+$lang->block->default->layout->company_index[] = array('type' => 'grid', 'name' => 'bottomBanner');
+$lang->block->default->layout->company_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->default->layout->article_browse = $lang->block->default->layout->company_index;
+$lang->block->default->layout->article_view = $lang->block->default->layout->company_index;
+$lang->block->default->layout->product_browse = $lang->block->default->layout->company_index;
+$lang->block->default->layout->product_view = $lang->block->default->layout->company_index;
+$lang->block->default->layout->blog_index = $lang->block->default->layout->company_index;
+$lang->block->default->layout->blog_view = $lang->block->default->layout->company_index;
+
+$lang->block->default->layout->book_browse = array();
+$lang->block->default->layout->book_browse[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->book_browse[] = array('type' => 'grid', 'name' => 'topBanner');
+$lang->block->default->layout->book_browse[] = array('type' => 'placeholder', 'name' => 'main', 'title' => 'Book List');
+$lang->block->default->layout->book_browse[] = array('type' => 'grid', 'name' => 'bottomBanner');
+$lang->block->default->layout->book_browse[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->default->layout->book_read = array();
+$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->book_read[] = array('type' => 'grid', 'name' => 'top');
+$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
+$book_read_mainColumns = array();
+$book_read_mainColumn = array('type' => 'col', 'name' => 'main', 'colWidth' => '75%', 'children' => array());
+$book_read_mainColumn['children'][] = array('type' => 'placeholder', 'name' => 'article');
+$book_read_mainColumn['children'][] = array('type' => 'grid', 'name' => 'bottom');
+$book_read_sideColumn = array('type' => 'col', 'name' => 'side', 'colWidth' => '25%', 'children' => array());
+$book_read_sideColumn['children'][] = array('type' => 'placeholder', 'name' => 'category');
+$book_read_mainColumns[] = $book_read_sideColumn;
+$book_read_mainColumns[] = $book_read_mainColumn;
+$lang->block->default->layout->book_read[] = array('type' => 'row', 'name' => 'main', 'children' => $book_read_mainColumns);
+$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+
+$lang->block->default->layout->forum_index = array();
+$lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->forum_index[] = array('type' => 'grid', 'name' => 'top');
+$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
+$lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'main', 'title' => 'Forum Boards');
+$lang->block->default->layout->forum_index[] = array('type' => 'grid', 'name' => 'bottom');
+$lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->default->layout->forum_board = array();
+$lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->forum_board[] = array('type' => 'grid', 'name' => 'top');
+$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
+$lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'main', 'title' => 'Board Thread List');
+$lang->block->default->layout->forum_board[] = array('type' => 'grid', 'name' => 'bottom');
+$lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->default->layout->thread_view = array();
+$lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->default->layout->thread_view[] = array('type' => 'grid', 'name' => 'top');
+$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
+$lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'article', 'title' => 'Thread Detail');
+$lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'form', 'title' => 'Replies');
+$lang->block->default->layout->thread_view[] = array('type' => 'grid', 'name' => 'bottom');
+$lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->default->layout->message_index = $lang->block->default->layout->company_index;
+$lang->block->default->layout->page_view = $lang->block->default->layout->company_index;

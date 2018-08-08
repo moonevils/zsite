@@ -1,0 +1,118 @@
+body {background: #f1f1f1;}
+.dock, .dock-right, .dock-left, .dock-top, .dock-bottom {position: absolute; overflow: auto; left: 0; right: 0; bottom: 0; top: 0;}
+.dock-right {left: auto}
+.dock-left {right: auto}
+.dock-top {bottom: auto}
+.dock-bottom {top: auto}
+.relative {position: relative;}
+.box > header {border-bottom: 1px solid #e5e5e5; padding: 10px; overflow: hidden; height: 40px; line-height: 20px;}
+.box > header > .actions {padding: 3px;}
+.box > header > .actions > .btn {padding: 5px 8px;}
+.box > header > .actions > .btn-sm {margin-top: 2px;}
+.box > .content {top: 40px;}
+
+.icon-expand-full:before {content: '\e6a3'}
+.icon-collapse-full:before {content: '\e682'}
+.icon-collapse-top:before {content: '\e726'}
+.icon-collapse:before {content: '\e725'}
+
+.color-tile {display: block; float: left; width: 30px; height: 30px; border-radius: 4px; border: 1px solid #ccc; margin: 2px 2px 0 0; cursor: pointer; transition: all 0.4s; text-align: center; line-height: 30px;}
+.color-tile[data="transparent"] {background-color: #eee; background-image: linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #999),
+linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #999); background-size:12px 12px; background-position:0 0, 6px 6px}
+.color-tile:hover, .color-tile.active {border-color: #333; box-shadow: 0 1px 4px rgba(0,0,0,0.5)}
+.colorplate {width: 100%;}
+.colorplate .input-group-btn {width: 50%}
+.colorplate .input-group-btn > .btn {width: 100%; border-right: none}
+.color .icon-ok, .color .icon-question {display: none}
+.color.active > .icon-ok, .color.error > .icon-question, .color.active .input-group-btn > .dropdown-toggle > .icon-ok, .color.error .input-group-btn > .dropdown-toggle > .icon-question {display: inline;}
+.color.active.error .icon-ok {display: none}
+.color .input-group-addon {min-width: 40px; text-align: center;}
+.color .btn{text-shadow: none;}
+.dropdown-menu.colors {padding: 5px; width: 205px}
+
+#dsBox {top: 50px; right: 10px; left: 60px; bottom: 50px; background: #fff; border: #ddd 1px solid;}
+#dsMenu {width: 200px; border-right: 1px solid #ddd; z-index: 2;}
+#dsPreview {left: 200px; right: 360px; border-right: 1px solid #ddd; transition: left .2s; background: #eee;}
+#dsPreview > header {transition: padding .2s; padding: 10px 15px; border: none;}
+#dsTool {width: 360px;}
+#dsPreview > header > .actions {right: 5px;}
+#dsTool > header {padding: 0; border-bottom: none;}
+#dsTool > header .nav > li > a {padding: 10px 10px 9px 10px; border-bottom: 1px solid #e5e5e5; position: relative;}
+#dsTool > header .nav > li.active > a:before {content: ' '; display: block; position: absolute; left: 25px; right: 25px; bottom: 0; background: #3280fc; height: 2px;}
+@media (max-width: 991px) {#dsBox {bottom: 10px}}
+
+#pageList, #pageList ul {list-style: none; padding: 0;}
+#pageList li.item > a {padding: 8px 10px 8px 15px; display: block}
+#pageList li.item > a:hover {text-decoration: none; background: #eff7ff; color: #347aeb;}
+#pageList li.item.active > a {background: #3571CE; color: #fff;}
+#pageList li.item.active > a:hover {background: #347aeb;}
+#pageList li.heading {padding: 5px 10px; font-weight: bold; background: #f5f5f5;}
+#pageList li.group {padding: 0 0;}
+#pageList li.group + li.group {border-top: 1px solid #e5e5e5;}
+
+.ds-hide-menu #dsPreview {left: 0;}
+.ds-hide-menu #dsPreview > header {padding-left: 210px;}
+.ds-hide-menu #dsMenu {bottom: auto; height: 40px; border-right: none;}
+.ds-hide-menu #dsMenu > header {border: none; overflow: hidden;}
+.ds-hide-menu #dsMenu > header:before,
+.ds-hide-menu #dsMenu > header:after {position: absolute; top: 5px; right: 0; display: block; width: 0; height: 0; content: ' '; border-color: transparent transparent transparent #ccc; border-style: solid; border-width: 15px 0 15px 7px;}
+.ds-hide-menu #dsMenu > header:after {right: 1px; border-color: transparent transparent transparent #eee; border-width: 15px 0 15px 7px;}
+.ds-hide-menu #dsMenu > header > .actions {position: static;}
+.ds-hide-menu #dsMenu > header .ds-menu-toggle {position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: block; width: 100%; z-index: 10;}
+.ds-hide-menu #dsMenu > header .ds-menu-toggle:focus,
+.ds-hide-menu #dsMenu > header .ds-menu-toggle:hover {background: rgba(0,0,0,.05)}
+.ds-hide-menu #dsMenu > header .ds-menu-toggle > .icon {visibility: hidden;}
+.ds-hide-menu #dsMenu > .content {position: static; overflow: visible;}
+.ds-hide-menu #dsMenu > .content .group {border: none}
+.ds-hide-menu #pageList .item {display: none;}
+.ds-hide-menu #pageList .item.active {display: block; position: absolute; top: 10px; right: 10px;}
+.ds-hide-menu #pageList .item.active > a {padding: 0 5px; border-radius: 10px;background: #eff7ff; color: #347aeb;}
+
+#blocks > header {background: #f5f5f5; border: none;}
+#blocks > header > .form-group {width: 100px; margin-top: -6px; margin-left: -5px;}
+#blocks > header > .form-group > .form-control {background: transparent; box-shadow: none;}
+#blocks .block-list {padding: 5px;}
+#blocks .block-item {float: left; width: 100%; padding: 5px 50px 5px 5px; position: relative;}
+#blocks .block-item:before {content: ' '; background: #fafafa; position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px; border: 1px solid #ddd; z-index: 1; pointer-events: none;}
+#blocks .block-item:hover {cursor: move;}
+#blocks .block-item:hover:before {border-color: #3280fc; background: #eff7ff;}
+#blocks .block-item > .title {line-height: 20px; padding: 8px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; position: relative; z-index: 2;}
+#blocks .block-item > .actions {position: absolute; top: 6px; right: 6px; bottom: 5px; line-height: 20px; z-index: 3;}
+#blocks .block-item > .actions .btn {padding: 6px 5px;}
+#blocks .block-item > .actions .btn-move {cursor: move;}
+
+#dsTool .editor-resizer {display: none;}
+#dsTool .editor-wrapper .actions {bottom: 0;}
+#dsTool .ace-editor {border: none; border-bottom: 1px solid #e5e5e5;}
+#tabCss > footer, #tabJS > footer {padding: 4px 8px;}
+
+#customThemeForm > header {padding: 4px 0 0 0; border: none;}
+#customThemeForm .nav-tabs {padding: 0 4px;}
+#customThemeForm .nav-tabs > li > a {padding: 6px 8px;}
+#customThemeForm > .content {bottom: 40px}
+#customThemeForm > footer {padding: 4px 8px;}
+#customThemeForm .theme-group {padding: 8px;}
+#customThemeForm .theme-group-name {font-weight: bold; color: #808080; margin-bottom: 4px;}
+#customThemeForm .theme-item + .theme-item {margin-top: 4px;}
+
+#preview {padding: 5px 15px 15px; background: #eeeeee;}
+.preview-page {background: #fff; box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12); padding: 20px 30px; border-radius: 2px;}
+.layout-item {display: block; min-height: 50px; position: relative}
+.layout-item:before {content: attr(data-title); position: absolute; display: block; left: 0; top: 0;}
+.layout-placeholder {min-height: 40px; line-height: 40px; border: none; position: relative; cursor: not-allowed;}
+.layout-placeholder[data-name="category"],
+.layout-placeholder[data-name="article"],
+.layout-placeholder[data-name="main"] {height: 100px; line-height: 100px;}
+.layout-placeholder:before {line-height: inherit; right: 0; bottom: 0; background: transparent; color: #808080; text-align: center; background: #eee;}
+.layout-item + .layout-item {margin-top: 10px;}
+.layout-item.col {float: left;}
+.layout-item.col + .col {margin-top: 0}
+.layout-container {border: 1px dotted #aaa;}
+.layout-container:before {background: #eff7ff; color: #3280fc; line-height: 20px; padding: 0 5px; border-radius: 0 0 4px 0;}
+.layout-container:hover {border: 1px solid #3280fc;}
+.layout-container:hover:before {color: #eff7ff; background: #3280fc;}
+.layout-row {padding: 10px 0; border: 2px dashed transparent;}
+.layout-row:hover {border-color: #03B8CF}
+.layout-item > .actions {text-align: center; padding: 0; margin-bottom: 10px;}
+.layout-item > .actions > a {display: inline-block; border-radius: 10px; line-height: 20px; padding: 0 8px; background: #03B8CF; color: #fff;}
+.layout-item > .actions > a:hover {background: #0493A5; text-decoration: none;}

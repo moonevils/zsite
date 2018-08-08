@@ -105,3 +105,5 @@ $lang->visual->setting->boards                             = array('name' => 'Bo
 $lang->visual->setting->boards['actions']['add']           = array('text' => 'Board Admin');
 $lang->visual->setting->thread                             = array('name' => 'Thread', 'actions' => array());
 $lang->visual->setting->thread['actions']['edit']          = array('text' => 'Transfer');
+
+$lang->design->page = 'Page template';
