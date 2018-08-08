@@ -1,15 +1,14 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/codeeditor.html.php';?>
 <?php
-js::set('visuals', $config->visual->setting);
-js::set('visualsLang', $lang->visual->setting);
-js::set('visualLang', $lang->visual->js);
-js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
 js::set('device', $this->app->clientDevice);
-js::set('pageGroupList', $config->block->pageGroupList);
 js::set('template', $template);
-js::set('test', $region);
+js::set('theme', $theme);
+js::set('regionBlocks', $regionBlocks);
+js::set('region', $region);
+js::set('page', $page);
+js::set('visualLang', $lang->visual->js);
 ?>
 
 <div id='dsBox' class='dock'>
@@ -49,10 +48,11 @@ js::set('test', $region);
         <?php
           foreach ($layout as $layoutItem)
           {
-              $this->visual->printLayoutItem($layoutItem, $region, $page);
+              $this->visual->printLayoutItem($layoutItem, $region, $page, $regionBlocks);
           }
         ?>
       </div>
+      <div class='load-indicator'><i class='icon icon-spin icon-spinner icon-2x text-primary'></i></div>
     </div>
   </div>
   <div id='dsTool' class='dock-right box'>
@@ -97,7 +97,7 @@ js::set('test', $region);
                   <div class='title' title='<?php echo $block->title;?>'><?php echo $block->title;?></div>
                   <div class='actions'>
                     <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
-                    <?php commonModel::printLink('block', 'edit', "block={$block->id}", '<i class="icon icon-pencil"></i>', "class='btn btn-link' data-toggle='modal' data-width='80%' title='$lang->edit'");?>
+                    <?php commonModel::printLink('block', 'edit', "block={$block->id}", '<i class="icon icon-pencil"></i>', "class='btn btn-link' data-toggle='modal' data-width='80%' data-type='iframe' title='$lang->edit'");?>
                   </div>
                 </div>
               <?php endforeach;?>
