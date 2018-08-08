@@ -14,12 +14,16 @@
 class visualModel extends model
 {
     /**
-     * Get templates available.
+     * Print layout item
      *
      * @access public
+     * @param object $item
+     * @param string $region
+     * @param string $page
+     * @param object $regionBlocks
      * @return void
      */
-    public function printLayoutItem($item, $region, $page)
+    public function printLayoutItem($item, $region, $page, $regionBlocks)
     {
         if(!isset($item['title']))
         {
@@ -33,8 +37,10 @@ class visualModel extends model
             }
         }
 
-        $attrs = '';
-        $class = '';
+        $attrs    = '';
+        $class    = '';
+        $isRegion = false;
+        $inGrid   = false;
         switch ($item['type'])
         {
             case 'placeholder':
@@ -48,7 +54,8 @@ class visualModel extends model
                 $attrs .= " style='width: {$item['colWidth']}'";
                 break;
             default:
-                $class .= 'layout-container';
+                $class .= 'layout-region';
+                $isRegion = true;
                 break;
         }
 
@@ -59,6 +66,7 @@ class visualModel extends model
         {
             echo '<div class="row">';
             $footer = '</div>';
+            $inGrid = true;
         }
         else if($item['type'] === 'col')
         {
@@ -74,7 +82,7 @@ class visualModel extends model
         {
             foreach ($item['children'] as $child)
             {
-                $this->printLayoutItem($child, $region, $page);
+                $this->printLayoutItem($child, $region, $page, $regionBlocks);
             }
         }
         
