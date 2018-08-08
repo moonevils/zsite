@@ -219,7 +219,6 @@ class blockModel extends model
                 $block->type     = '';
                 $block->template = '';
                 $block->content  = '';
-
             }
 
             $rawBlock = new stdclass();
