@@ -116,7 +116,7 @@
           <th></th>
           <td colspan='2'>
             <?php echo html::submitButton();?>
-            <span class='hide tip alert alert-info' style='marging: 0.3px'></span>
+            <span class='hidden tip alert alert-info' style='marging: 0.3px'></span>
           </td>
         </tr>
       </table>
