@@ -247,15 +247,15 @@ class navModel extends model
             foreach($navs as $field => $values)
             {
                 /* if nav title if null, set title as all some type. */
-                if($organizeNavs[$i]['title'] == '') $organizeNavs[$i]['title'] = $this->lang->nav->all[$organizeNavs[$i]['type']];
+                if($organizedNavs[$i]['title'] == '') $organizedNavs[$i]['title'] = $this->lang->nav->all[$organizedNavs[$i]['type']];
                 
-                $organizeNavs[$i][$field] = $values[$i];
+                $organizedNavs[$i][$field] = $values[$i];
             }
         }
 
-        foreach($organizeNavs as &$nav) $nav = $this->buildNav($nav);
+        foreach($organizedNavs as &$nav) $nav = $this->buildNav($nav);
 
-        return $organizeNavs;
+        return $organizedNavs;
     }
 
     /**

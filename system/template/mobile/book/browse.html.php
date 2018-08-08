@@ -47,6 +47,7 @@
                 </a>
                 <ul class='dropdown-menu responsive'>
                   {foreach($originTree->nodes as $nodeChild)}
+                    {if($nodeChild->status != 'normal')} {continue} {/if}
                     {if($nodeChild->type != 'book')}    {$serial = $serials[$nodeChild->id]} {/if}
                     {if($nodeChild->type == 'chapter')} {$link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
                     {if($nodeChild->type == 'article')} {$link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
@@ -60,6 +61,7 @@
           <hr class="space">
           <div class='list-group'>
             {foreach($bookModel->getChildren($node->id) as $nodeChild)}
+              {if($nodeChild->status != 'normal')} {continue} {/if}
               {if($nodeChild->type != 'book')} {$serial = $serials[$nodeChild->id]} {/if}
               {if($nodeChild->type == 'chapter')} {$link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
               {if($nodeChild->type == 'article')}  {$link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
@@ -113,6 +115,7 @@
             </a>
             <ul class='dropdown-menu responsive'>
               {foreach($originTree->nodes as $nodeChild)}
+                {if($nodeChild->status != 'normal')} {continue} {/if}
                 {if($nodeChild->type != 'book')} {$serial = $serials[$nodeChild->id]} {/if}
                 {if($nodeChild->type == 'chapter')} {$link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
                 {if($nodeChild->type == 'article')} {$link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
@@ -127,6 +130,7 @@
       <hr class="space">
       <div class='list-group'>
         {foreach($bookModel->getChildren($node->id) as $nodeChild)}
+            {if($nodeChild->status != 'normal')} {continue} {/if}
             {if($nodeChild->type != 'book')} {$serial = $serials[$nodeChild->id]} {/if}
             {if($nodeChild->type == 'chapter')} {$link = helper::createLink('book', 'browse', "nodeID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}
             {if($nodeChild->type == 'article')} {$link = helper::createLink('book', 'read', "articleID=$nodeChild->id", "book=$book->alias&node=$nodeChild->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : '')} {/if}

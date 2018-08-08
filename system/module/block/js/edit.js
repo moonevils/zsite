@@ -6,11 +6,23 @@ $(document).ready(function()
         if(data.result == 'success') setTimeout($.closeModal, 1500);
     });
 
+    
     $.setAjaxForm('#editForm', function(response)
     {   
-        if(response.result == 'success' && response.locate != '')
+        if(response.result == 'success')
         {
-            location.href = response.locate;
+            if(response.locate)
+            {
+                location.href = response.locate;
+            }
+            else if($('body').hasClass('body-modal'))
+            {
+                if (window.parent && window.parent.handleBlockEdit)
+                {
+                    window.parent.handleBlockEdit();
+                }
+                $.closeModal();
+            }
         }
         if(response.result == 'fail' && response.reason == 'captcha')
         {
@@ -23,7 +35,7 @@ $(document).ready(function()
 
     $('[name*=group]').change(function()
     {
-       $('#title').val($(this).find("option:selected").text()); 
+        $('#title').val($(this).find("option:selected").text()); 
     });
 
     $(document).on('change', '[name*=imageType]', function()
