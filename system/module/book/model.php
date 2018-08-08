@@ -132,6 +132,7 @@ class bookModel extends model
                 $childNode->alias   = $child->alias;
                 $childNode->title   = $child->title;
                 $childNode->type    = $child->type;
+                $childNode->status  = $child->status;
                 $childNode->current = stripos($node->path, ',' . $child->id . ',') !== false;
                 if($childNode->current) $subNode->current = $childNode;
                 $subTree[] = $childNode;
