@@ -1,5 +1,13 @@
 var clientLang = $.zui.clientLang().replace('zh-', '');
 
+/**
+ * Open iframe modal
+ * 
+ * @param {string} url Remote iframe modal url
+ * @param {?object} options ZUI ModalTrigger options
+ * @access public
+ * @return void
+ */
 function openModal(url, options)
 {
     window.modalTrigger.show($.extend(
@@ -16,6 +24,26 @@ function openModal(url, options)
     }, options));
 }
 
+/**
+ * Show messager for remote operation result
+ * 
+ * @param {?boolean} [result=true] true: success message, false: failure message
+ * @access public
+ * @return void
+ */
+function showRemoteResult(result)
+{
+    if(result === false) $.zui.messager.warning(v.visualLang.operateFail);
+    else $.zui.messager.success(v.visualLang.saved);
+}
+
+/**
+ * Toggle show or hide menu
+ * 
+ * @param {?boolean} toggle true: show menu, false: hide menu, undefined: toggle show/hide menu
+ * @access public
+ * @return void
+ */
 function toggleDSMenu(toggle)
 {
     var $dsBox = $('#dsBox');
@@ -24,6 +52,13 @@ function toggleDSMenu(toggle)
     $.zui.store.set('ds-menu-collapsed', !toggle);
 }
 
+/**
+ * Toggle show block list
+ * 
+ * @param {?string} name Hide others and show the named one
+ * @access public
+ * @return void
+ */
 function toggleBlockList(name)
 {
     var $blockListSelector = $('#blockListSelector');
@@ -33,6 +68,13 @@ function toggleBlockList(name)
     $blockList.filter('[data-id="' + name + '"]').removeClass('hidden');
 }
 
+/**
+ * Resize code editor
+ * 
+ * @param {string} name 'js' or 'css' or ''
+ * @access public
+ * @return void
+ */
 function resizeCodeEditor(name)
 {
     if(!name) return $.each(['css', 'js'], function(_, iName){resizeCodeEditor(iName)});
@@ -41,6 +83,12 @@ function resizeCodeEditor(name)
     $('#' + name).data('editor').resize();
 }
 
+/**
+ * Init code editor
+ * 
+ * @access public
+ * @return void
+ */
 function initCodeEditor()
 {
     $('#dsTool').on('resize', function(){resizeCodeEditor();});
@@ -50,6 +98,12 @@ function initCodeEditor()
     $.setAjaxForm('#tabJS');
 }
 
+/**
+ * Init custom theme form
+ * 
+ * @access public
+ * @return void
+ */
 function initCustomThemeForm()
 {
     var parseColor = function(c)
@@ -154,6 +208,14 @@ function initCustomThemeForm()
     });
 }
 
+/**
+ * Get region blocks data from remote server
+ * 
+ * @param {?string} region
+ * @param {?function} callback
+ * @access public
+ * @return void
+ */
 function getRegionBlocks(region, callback)
 {
     if ($.isFunction(region))
@@ -167,34 +229,63 @@ function getRegionBlocks(region, callback)
     });
 }
 
+/**
+ * Render block item
+ * 
+ * @param {object} block
+ * @param {boolean} [isGrid=false]
+ * @access public
+ * @return void
+ */
 function renderBlock(block, isGrid)
 {
     var blockTitle = block.title;
-    if(block.children && !blockTitle) blockTitle = v.visualLang.subRegion + '-' + block.id;
+    var isSubRegion = block.children || block.type === 'region';
+    if(isSubRegion && !blockTitle) blockTitle = v.visualLang.subRegion + '-' + block.id;
     blockTitle = blockTitle || '';
 
     var $block = $('<div class="block" data-id="' + block.id + '" data-title="' + blockTitle + '" data-region="' + block.region + '"></div>');
     var $blockTitle = $('<div class="block-title">' + blockTitle + '</div>');
     var $blockActions = $('<div class="block-actions clearfix"><a class="btn-edit" data-toggle="tooltip" title="' + v.visualLang.actions.edit + '"><i class="icon icon-pencil"></i></a><a class="btn-delete" data-toggle="tooltip" title="' + v.visualLang.actions.delete + '"><i class="icon icon-remove"></i></a><a class="btn-layout" data-toggle="tooltip" title="' + v.visualLang.changeLayout + '"><i class="icon icon-list-alt"></i></a></div>');
     $block.append($blockTitle).append($blockActions);
-    if(block.children)
+    if(isSubRegion)
     {
         $block.addClass('block-container');
         var $row = $('<div class="row"></div>');
-        $.each(block.children, function(childIndex, child)
+        if(block.children && block.children.length)
         {
-            $row.append(renderBlock(child, true));
-        });
+            $.each(block.children, function(childIndex, child)
+            {
+                child.region = block.region;
+                var $subBlock = renderBlock(child, true);
+                $subBlock.addClass('block-sub');
+                $row.append($subBlock);
+            });
+        }
+        else $block.addClass('empty');
         $block.append($row);
     }
     if(isGrid)
     {
         $block.append('<div class="block-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
-        return $('<div class="col-sm-' + (block.grid || 12) + '"></div>').append($block);
+        var grid = (block.grid || 4);
+        return $('<div data-grid="' + grid + '" class="col block-wrapper"></div>').append($block);
+    }
+    else
+    {
+        $block.addClass('block-wrapper');
     }
     return $block;
 }
 
+/**
+ * Update region blocks from remote
+ * 
+ * @param {?string} region if region not set then update all regions in page
+ * @param {?function} callback
+ * @access public
+ * @return void
+ */
 function updateRegionBlocks(region, callback)
 {
     if ($.isFunction(region))
@@ -238,6 +329,15 @@ function updateRegionBlocks(region, callback)
     });
 }
 
+/**
+ * Delete block from remote server
+ * 
+ * @param {object} block block item object
+ * @param {?string} confirmMessage
+ * @param {?function} callback
+ * @access public
+ * @return void
+ */
 function deleteBlock(block, confirmMessage, callback)
 {
     if(confirmMessage)
@@ -261,14 +361,23 @@ function deleteBlock(block, confirmMessage, callback)
         if(response && response.result === 'success')
         {
             callback && callback(true);
+            showRemoteResult();
         }
         else
         {
             callback(false);
+            showRemoteResult(false);
         }
     });
 }
 
+/**
+ * Show block edit modal
+ * 
+ * @param {object} block block item object
+ * @access public
+ * @return void
+ */
 function editBlock(block)
 {
     openModal(createLink('block', 'edit', 'blockID=' + block.id),
@@ -278,25 +387,64 @@ function editBlock(block)
     });
 }
 
-function changeBlockLayout(block)
+/**
+ * Change block layout setting on remote server
+ * 
+ * @param {object} block block item object
+ * @param {object} postData setting data for post to server
+ * @param {?function} callback
+ * @access public
+ * @return void
+ */
+function changeBlockLayout(block, postData, callback)
 {
-    var dialogUrl = createLink('visual', 'fixBlock', 'page=' + v.page + '&region=' + block.region + '&blockID=' + block.id + '&object=&l=' + clientLang);
-    openModal(dialogUrl, 
+    if ($.isFunction(postData))
     {
-        title: v.visualLang.changeLayout + ' [' + block.title + ']',
-        width: 600,
-        loaded: function(e)
+        callback = postData;
+        postData = null;
+    }
+    var dialogUrl = createLink('visual', 'fixBlock', 'page=' + v.page + '&region=' + block.region + '&blockID=' + block.id + '&object=&l=' + clientLang);
+    if(postData)
+    {
+        $.post(dialogUrl, postData, function(response)
         {
-            var modal$ = e.jQuery;
-            if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
+            if(response && response.result === 'success')
             {
-                $.closeModal();
                 updateRegionBlocks(block.region);
-            });
-        },
-    });
+                showRemoteResult();
+            }
+            else showRemoteResult(false);
+            callback && callback();
+        }, 'json');
+    }
+    else
+    {
+        openModal(dialogUrl, 
+        {
+            title: v.visualLang.changeLayout + ' [' + block.title + ']',
+            width: 600,
+            loaded: function(e)
+            {
+                var modal$ = e.jQuery;
+                if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
+                {
+                    $.closeModal();
+                    updateRegionBlocks(block.region);
+                    callback && callback();
+                    showRemoteResult();
+                });
+            },
+            hidden: callback
+        });
+    }
 }
 
+/**
+ * Show page columns setting modal
+ * 
+ * @access public
+ * @return void
+ */
 function setPageColumns()
 {
     var dialogUrl = createLink('block', 'setColumns', 'page=' + v.page + '&object=&l=' + clientLang);
@@ -316,6 +464,12 @@ function setPageColumns()
     });
 }
 
+/**
+ * Init region blocks
+ * 
+ * @access public
+ * @return void
+ */
 function initRegionBlocks()
 {
     updateRegionBlocks();
@@ -335,9 +489,62 @@ function initRegionBlocks()
     {
         var $block = $(this).closest('.block');
         changeBlockLayout($block.data());
-    }).on('click', '.btn-setPageColumns', setPageColumns);
+    }).on('click', '.btn-setPageColumns', setPageColumns).on('mousedown', '.block-resize-handler', function(e)
+    {
+        var $handler = $(this);
+        var $block = $handler.closest('.block');
+        var $col = $block.parent().addClass('block-resizing');
+        var $row = $block.closest('.row');
+        var startX = e.pageX;
+        var startWidth = $col.width();
+        var rowWidth = $row.width();
+        var oldGrid = $col.attr('data-grid');
+        var lastGrid = oldGrid;
+
+        var mouseMove = function(event)
+        {
+            $block.addClass('block-editing block-editing-resize');
+            var x = event.pageX;
+            var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
+            if(lastGrid != grid)
+            {
+                $col.attr('data-grid', grid);
+                lastGrid = grid;
+                $handler.attr('title', grid + '/12');
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        };
+
+        var mouseUp = function(event)
+        {
+            $block.removeClass('block-editing block-editing-resize');
+            $col.removeClass('block-resizing');
+
+            lastGrid = $col.attr('data-grid');
+            if(oldGrid !== lastGrid)
+            {
+                changeBlockLayout($block.data(), {grid: lastGrid});
+            }
+
+            $('body').off('mousemove.ve.resize', mouseMove).off('mouseup.ve.resize', mouseUp);
+            event.preventDefault();
+            event.stopPropagation();
+        };
+
+        $('body').on('mousemove.ve.resize', mouseMove).on('mouseup.ve.resize', mouseUp);
+        e.preventDefault();
+        e.stopPropagation();
+    });
 }
 
+/**
+ * Update block list from remote server
+ * 
+ * @param {?function} callback
+ * @access public
+ * @return void
+ */
 function updateBlockList(callback)
 {
     $('#blockLists').load(window.location.href + ' #blockLists .block-list', function()
@@ -347,13 +554,26 @@ function updateBlockList(callback)
     });
 }
 
+/**
+ * Handle things after edit block on modal dialog
+ * 
+ * @access public
+ * @return void
+ */
 function handleBlockEdit()
 {
     updateBlockList();
     updateRegionBlocks();
+    showRemoteResult();
 }
 
-$(function()
+/**
+ * Init design menu
+ * 
+ * @access public
+ * @return void
+ */
+function initDSMenu()
 {
     var $dsBox = $('#dsBox');
     var isDsMenuCollapsed = !!$.zui.store.get('ds-menu-collapsed');
@@ -362,18 +582,148 @@ $(function()
     {
         toggleDSMenu();
     });
+}
 
+/**
+ * Init block list
+ * 
+ * @access public
+ * @return void
+ */
+function initBlockList()
+{
     toggleBlockList();
     $('#blockListSelector').on('change', function()
     {
         toggleBlockList();
     });
+}
 
+/**
+ * Add block to region container and post to remote server
+ * 
+ * @param {object} block block item object
+ * @param {object} $target jquery element
+ * @param {?function} callback
+ * @access public
+ * @return void
+ */
+function addBlock(block, $target, callback)
+{
+    var isContainer = $target.is('.block-container');
+    var $region = $target.closest('.layout-region') ;
+    var parentId = isContainer ? $target.data('id') : '';
+    var region = $region.data('name');
+    var allowregionblock = $target.is('.block-container,.type-grid') ? true : '';
+    if(!allowregionblock && block.id === 'region')
+    {
+        return $.zui.messager.warning(v.visualLang.addRegionAlert.format($region.data('title')));
+    }
+    var postUrl = createLink('visual', 'appendBlock', 'page=' + v.page + '&region=' + region + '&parent=' + parentId + '&allowregionblock=' + allowregionblock + '&object=&l=' + clientLang);
+    $.post(postUrl, {block: block.id}, function(response)
+    {
+        if(response && response.result === 'success')
+        {
+            updateRegionBlocks(region);
+            showRemoteResult();
+        } else showRemoteResult(false);
+        callback && callback();
+    }, 'json');
+}
+
+/**
+ * Sort blocks in region container and post to remote server
+ * 
+ * @param {object} $target jquery element
+ * @param {?function} callback
+ * @access public
+ * @return void
+ */
+function sortBlocks($target, callback)
+{
+    var $region = $target.closest('.layout-region') ;
+    var region = $region.data('name');
+    var $container = $target.closest('.block-container');
+    var parentId = $container.length ? $container.data('id') : '';
+    var postUrl = createLink('visual', 'sortblocks', 'page=' + v.page + '&region=' + region + '&parent=' + parentId + '&object=&l=' + clientLang);
+    var orders = [];
+    $target.parent().children('.block-wrapper').each(function()
+    {
+        var $wrapper = $(this);
+        orders.push($wrapper.is('.col') ? $wrapper.children('.block').data('id') : $wrapper.data('id'));
+    });
+
+    $.post(postUrl, {orders: orders.join(',')}, function(response)
+    {
+        if(response && response.result === 'success')
+        {
+            updateRegionBlocks(region);
+            showRemoteResult();
+        } else showRemoteResult(false);
+        callback && callback();
+    }, 'json');
+}
+
+/**
+ * Init drag and drop events.
+ * 
+ * @access public
+ * @return void
+ */
+function initDnDAddBlock()
+{
+    var $preview = $('#preview');
+    $('#blocks').droppable(
+    {
+        container: '#dsBox',
+        nested: true,
+        // target: '.layout-region .block,.layout-region',
+        target: '.layout-region .block-container,.layout-region',
+        selector: '.block-item',
+        start: function() {
+            $preview.addClass('drag-and-drop');
+        },
+        drop: function(event) {
+            var $element = event.element;
+            if(event.isIn) addBlock($element.data(), event.target);
+        },
+        finish: function()
+        {
+            $preview.removeClass('drag-and-drop');
+        }
+    });
+
+    $preview.sortable(
+    {
+        container: '#dsBox',
+        dropToClass: 'sort-to',
+        nested: true,
+        selector: '.block-wrapper',
+        stopPropagation: true,
+        targetSelector: function($ele, $root)
+        {
+            var $parent = $ele.parent();
+            if($parent.is('.col')) $ele = $parent;
+            var $container = $ele.closest('.row,.layout-region');
+            return $container.children('.block,.col');
+        },
+        finish: function(e)
+        {
+            sortBlocks(e.element);
+        }
+    })
+}
+
+$(function()
+{
+    // Init UI elements
+    initDSMenu();
+    initBlockList();
     initCodeEditor();
-
     initCustomThemeForm();
-
     initRegionBlocks();
+    initDnDAddBlock();
 
+    // Init tooltip
     $('[data-toggle="tooltip"]').tooltip({container: '#dsBox'});
 });

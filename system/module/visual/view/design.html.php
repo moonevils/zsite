@@ -93,8 +93,8 @@ js::set('visualLang', $lang->visual->js);
                 if(strpos($block->type, 'code') === false) $block->content = json_decode($block->content);
                 $isCategoryEmpty = false;
                 ?>
-                <div class='block-item' data-type='<?php echo $block->type;?>' data-id='<?php echo $block->id;?>'>
-                  <div class='title' title='<?php echo $block->title;?>'><?php echo $block->title;?>&nbsp; <small class='text-muted nobr'><?php echo $lang->block->categoryList[$category];?> / <?php echo $typeList[$block->type] ?></small></div>
+                <div class='block-item' data-type='<?php echo $block->type;?>' data-id='<?php echo $block->id;?>' data-title='<?php echo $block->title;?>'>
+                  <div class='title' title='<?php echo $block->title;?>'><?php echo $block->title;?>&nbsp; <small class='text-muted nobr'><?php echo $typeList[$block->type] ?></small></div>
                   <div class='actions'>
                     <?php commonModel::printLink('block', 'edit', "block={$block->id}", '<i class="icon icon-pencil"></i>', "class='btn btn-link' data-toggle='modal' data-width='80%' data-type='iframe' title='$lang->edit'");?>
                     <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
@@ -102,7 +102,7 @@ js::set('visualLang', $lang->visual->js);
                 </div>
               <?php endforeach;?>
               <?php if($category == 'system'):?>
-                <div class='block-item' data-type='region' data-id='region'>
+                <div class='block-item' data-type='region' data-id='region' data-title='<?php echo $lang->visual->js->subRegion;?>'>
                   <div class='title' title='<?php echo $lang->visual->js->subRegionDesc;?>'><?php echo $lang->visual->js->subRegion;?> &nbsp; <small class='text-muted nobr'><?php echo $lang->visual->js->subRegionDesc;?></small></div>
                   <div class='actions'>
                     <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
