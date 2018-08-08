@@ -55,6 +55,9 @@ $lang->visual->js->alreadyFirstSlide = 'First Silde';
 $lang->visual->js->slideOrder        = 'Play Order';
 $lang->visual->js->gridWidth         = 'Grid Width';
 $lang->visual->js->pageLayoutPrefix  = 'Current Only';
+$lang->visual->js->deleteConfirm     = 'Confirm to delete the block “{0}”?';
+$lang->visual->js->changeLayout      = 'Change Layout';
+$lang->visual->js->setColumns        = 'Set Columns';
 $lang->visual->js->actions           = array('edit' => 'Edit', 'delete' => 'Delete', 'move' => 'Move', 'add' => 'Add');
 
 /* Language for config */

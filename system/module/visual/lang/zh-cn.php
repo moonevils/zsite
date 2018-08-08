@@ -55,6 +55,9 @@ $lang->visual->js->alreadyFirstSlide = '已是第一张';
 $lang->visual->js->slideOrder        = '当前播放顺序';
 $lang->visual->js->gridWidth         = '栅格宽度';
 $lang->visual->js->pageLayoutPrefix  = '仅当前';
+$lang->visual->js->deleteConfirm     = '确定从布局中删除【{0}】？';
+$lang->visual->js->changeLayout      = '更改布局';
+$lang->visual->js->setColumns        = '分栏设置';
 $lang->visual->js->actions           = array('edit' => '编辑', 'delete' => '删除', 'move' => '移动', 'add' => '添加');
 
 /* Language for config */
