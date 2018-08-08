@@ -54,7 +54,7 @@ $.extend(
                 {
                     if(response.message && response.message.length) showPopover();
 
-                    if($.isFunction(callback)) return setTimeout(function(){callback(response)}, 600);
+                    if($.isFunction(callback)) return callback(response);
 
                     if($('#responser').length && response.message && response.message.length)
                     {
