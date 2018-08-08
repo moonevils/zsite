@@ -75,7 +75,7 @@ class visualModel extends model
         }
         else if($item['type'] === 'row')
         {
-            echo '<div class="actions">' . html::a(helper::createLink('block', 'setColumns', "page={$page}"), '<i class="icon icon-columns"></i> ' . $this->lang->visual->design->setColumns, "data-toggle='modal' data-type='iframe' data-width='600'") . '</div>';
+            echo '<div class="actions">' . html::a('javascript:;', '<i class="icon icon-columns"></i> ' . $this->lang->visual->design->setColumns, "class='btn-setPageColumns' data-page='$page'") . '</div>';
         }
         
         if($item['children'])

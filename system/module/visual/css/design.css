@@ -81,6 +81,7 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 #blocks .block-item:hover {cursor: move;}
 #blocks .block-item:hover:before {border-color: #3280fc; background: #eff7ff;}
 #blocks .block-item > .title {line-height: 20px; padding: 8px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; position: relative; z-index: 2;}
+#blocks .block-item > .title > small {opacity: .75;}
 #blocks .block-item > .actions {position: absolute; top: 6px; right: 6px; bottom: 5px; line-height: 20px; z-index: 3;}
 #blocks .block-item > .actions .btn {padding: 6px 5px;}
 #blocks .block-item > .actions .btn-move {cursor: move;}
@@ -121,7 +122,7 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .layout-item > .actions > a {display: inline-block; border-radius: 10px; line-height: 20px; padding: 0 8px; background: #03B8CF; color: #fff;}
 .layout-item > .actions > a:hover {background: #0493A5; text-decoration: none;}
 .layout-region {padding: 30px 10px 10px 10px;}
-.layout-item .block {display: block; border: 2px solid #aaa; border-radius: 4px; padding: 10px; min-height: 80px; position: relative; margin-bottom: 10px;}
+.layout-item .block {display: block; border: 2px solid #aaa; border-radius: 4px; padding: 10px; min-height: 80px; position: relative; margin-bottom: 10px; cursor: move;}
 .layout-item .block-title {position: absolute; top: 0; right: 0; left: 0; bottom: 0; line-height: 60px; text-align: center; padding: 10px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-weight: bold;}
 .layout-item .block-actions {position: absolute; right: 0; top: 0; background: #38b03f; padding: 0 5px; transition: opacity .2s; border-radius: 0 0 0 4px; opacity: 0;}
 .layout-item .block:hover > .block-actions {opacity: 1;}
@@ -133,8 +134,16 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .layout-item .block:hover > .block-resize-handler {opacity: 1;}
 .layout-item .block-resize-handler:hover {background: rgba(0, 255, 0, .3); cursor: ew-resize;}
 .layout-item .block-container {padding-top: 30px; padding-bottom: 0;}
-.layout-item .block-container > .block-title {right: auto; bottom: auto; line-height: 20px; padding: 0 5px; color: #03b8cf; font-weight: normal;}
+.layout-item .block-container > .block-title {top: 5px; left: 5px; right: auto; bottom: auto; line-height: 20px; padding: 0 5px; color: #03b8cf; font-weight: normal;}
 .layout-item .block-container:hover {border-color: #03b8cf;}
 .layout-item .block-container > .block-actions {background: #03b8cf;}
+.layout-item .block-container > .block-actions .btn-edit {display: none;}
 .layout-item .block-container > .block-resize-handler:hover {background: rgba(3, 184, 207, 0.2)}
 .layout-item .block-container > .block-resize-handler > .icon {background: rgba(3, 184, 207, 0.2); color: #03b8cf;}
+.layout-item .block-container .block {min-height: 50px;}
+.layout-item .block-container .block > .block-title {line-height: 26px;}
+
+.ds-side-float-hidden .layout-row > .layout-col[data-name="main"] {width: 100%!important}
+.ds-side-float-hidden .layout-row > .layout-col[data-name="side"] {display: none!important}
+.ds-side-float-left .layout-row > .layout-col[data-name="main"] {float: right!important}
+.ds-side-float-left .layout-row > .layout-col[data-name="side"] {float: left!important}

@@ -200,6 +200,7 @@ class visual extends control
         $this->view->isPageAll       = $page == 'all';
         $this->view->blocks          = $this->block->getList($template);;
         $this->view->categoryList    = array_reverse((array) $this->config->block->categoryList);
+        $this->view->typeList        = $this->lang->block->{$template}->typeList;
         
         $this->view->setting         = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
         $this->view->layout          = $layout;
@@ -238,6 +239,9 @@ class visual extends control
         $regionBlocks = array();
         $regionEmpty  = empty($region);
 
+        $sideGrid    = $regionEmpty ? (int) $this->loadModel('ui')->getThemeSetting('sideGrid', 3) : '';
+        $sideFloat   = $regionEmpty ? $this->ui->getThemeSetting('sideFloat', 'right') : '';
+
         foreach ($regionData as $regionName => $regionTitle)
         {
             if($regionEmpty || $region == $regionName)
@@ -246,6 +250,6 @@ class visual extends control
             }
         }
 
-        $this->send($regionBlocks);
+        $this->send(array('blocks' => $regionBlocks, 'side' => array('float' => $sideFloat, 'grid' => $sideGrid)));
     }
 }

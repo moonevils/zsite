@@ -1,3 +1,21 @@
+var clientLang = $.zui.clientLang().replace('zh-', '');
+
+function openModal(url, options)
+{
+    window.modalTrigger.show($.extend(
+    {
+        iframeBodyClass    : 'body-modal-ve',
+        name               : 'vModal',
+        url                : url,
+        type               : 'iframe',
+        width              : '80%',
+        icon               : 'pencil',
+        title              : '',
+        mergeOptions       : true,
+        backdrop           : 'static'
+    }, options));
+}
+
 function toggleDSMenu(toggle)
 {
     var $dsBox = $('#dsBox');
@@ -143,14 +161,21 @@ function getRegionBlocks(region, callback)
         callback = region;
         region = '';
     }
-    $.getJSON(createLink('visual', 'ajaxGetRegionBlocks', 'page=' + v.page + '&region=' + (region || '')), callback);
+    $.getJSON(createLink('visual', 'ajaxGetRegionBlocks', 'page=' + v.page + '&region=' + (region || '')), function(data)
+    {
+        if(callback) callback(data.blocks, data.side);
+    });
 }
 
 function renderBlock(block, isGrid)
 {
-    var $block = $('<div class="block" data-id="' + block.id + '"></div>');
-    var $blockTitle = $('<div class="block-title">' + (block.title || ('Block-' + block.id)) + '</div>');
-    var $blockActions = $('<div class="block-actions clearfix"><a class="btn-edit"><i class="icon icon-pencil"></i></a><a class="btn-delete"><i class="icon icon-remove"></i></a><a class="btn-layout"><i class="icon icon-list-alt"></i></a></div>');
+    var blockTitle = block.title;
+    if(block.children && !blockTitle) blockTitle = v.visualLang.subRegion + '-' + block.id;
+    blockTitle = blockTitle || '';
+
+    var $block = $('<div class="block" data-id="' + block.id + '" data-title="' + blockTitle + '" data-region="' + block.region + '"></div>');
+    var $blockTitle = $('<div class="block-title">' + blockTitle + '</div>');
+    var $blockActions = $('<div class="block-actions clearfix"><a class="btn-edit" data-toggle="tooltip" title="' + v.visualLang.actions.edit + '"><i class="icon icon-pencil"></i></a><a class="btn-delete" data-toggle="tooltip" title="' + v.visualLang.actions.delete + '"><i class="icon icon-remove"></i></a><a class="btn-layout" data-toggle="tooltip" title="' + v.visualLang.changeLayout + '"><i class="icon icon-list-alt"></i></a></div>');
     $block.append($blockTitle).append($blockActions);
     if(block.children)
     {
@@ -161,7 +186,6 @@ function renderBlock(block, isGrid)
             $row.append(renderBlock(child, true));
         });
         $block.append($row);
-        $blockTitle.text(v.visualLang.subRegion + '-' + block.id);
     }
     if(isGrid)
     {
@@ -179,7 +203,7 @@ function updateRegionBlocks(region, callback)
         region = '';
     }
     var $preview = $('#preview').addClass('loading');
-    getRegionBlocks(region, function(regionBlocks)
+    getRegionBlocks(region, function(regionBlocks, side)
     {
         $.each(regionBlocks, function(regionName, blocks)
         {
@@ -188,24 +212,145 @@ function updateRegionBlocks(region, callback)
             var isGrid = $region.hasClass('type-grid');
             var $regionWrapper = isGrid ? $region.children('.row').first() : $region;
             $regionWrapper.empty();
-            $.each(blocks, function(blockIdx, block)
+            if(blocks && blocks.length)
             {
-                $regionWrapper.append(renderBlock(block, isGrid));
-            });
+                $.each(blocks, function(blockIdx, block)
+                {
+                    block.region = regionName;
+                    $regionWrapper.append(renderBlock(block, isGrid));
+                });
+                $region.removeClass('empty');
+            }
+            else
+            {
+                $region.addClass('empty');
+            }
         });
-        $preview.removeClass('loading');
+        $preview.removeClass('loading').find('[data-toggle="tooltip"]').tooltip({container: '#preview'});
+        if(side)
+        {
+            $preview.toggleClass('ds-side-float-left', side.float === 'left').toggleClass('ds-side-float-right', side.float === 'right').toggleClass('ds-side-float-hidden', side.float === 'hidden');
+            var $mainRow = $preview.find('.layout-row');
+            $mainRow.find('.layout-col[data-name="main"]').css('width', (100*(12 - side.grid)/12) + '%');
+            $mainRow.find('.layout-col[data-name="side"]').css('width', (100*side.grid/12) + '%');
+        }
         if(callback) callback(region);
+    });
+}
+
+function deleteBlock(block, confirmMessage, callback)
+{
+    if(confirmMessage)
+    {
+        if(bootbox && bootbox.confirm)
+        {
+            bootbox.confirm({size: 'small', message: confirmMessage, callback: function(result)
+            {
+                if(result) deleteBlock(block, false, callback);
+            }});
+        }
+        else if(confirm(confirmMessage))
+        {
+            deleteBlock(block, false, callback);
+        }
+        return;
+    }
+    var deleteUrl = createLink('visual', 'removeBlock', 'blockID=' + block.id + '&page=' + v.page + '&region=' + block.region + '&object=&l=' + clientLang);
+    $.getJSON(deleteUrl, response =>
+    {
+        if(response && response.result === 'success')
+        {
+            callback && callback(true);
+        }
+        else
+        {
+            callback(false);
+        }
+    });
+}
+
+function editBlock(block)
+{
+    openModal(createLink('block', 'edit', 'blockID=' + block.id),
+    {
+        title: v.visualLang.actions.edit + ' [' + block.title + ']',
+        width: '80%'
+    });
+}
+
+function changeBlockLayout(block)
+{
+    var dialogUrl = createLink('visual', 'fixBlock', 'page=' + v.page + '&region=' + block.region + '&blockID=' + block.id + '&object=&l=' + clientLang);
+    openModal(dialogUrl, 
+    {
+        title: v.visualLang.changeLayout + ' [' + block.title + ']',
+        width: 600,
+        loaded: function(e)
+        {
+            var modal$ = e.jQuery;
+            if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
+            {
+                $.closeModal();
+                updateRegionBlocks(block.region);
+            });
+        },
+    });
+}
+
+function setPageColumns()
+{
+    var dialogUrl = createLink('block', 'setColumns', 'page=' + v.page + '&object=&l=' + clientLang);
+    openModal(dialogUrl, 
+    {
+        title: v.visualLang.setColumns,
+        width: 600,
+        loaded: function(e)
+        {
+            var modal$ = e.jQuery;
+            if(modal$ && modal$.setAjaxForm) modal$.setAjaxForm('.ve-form', function(response)
+            {
+                $.closeModal();
+                updateRegionBlocks();
+            });
+        },
     });
 }
 
 function initRegionBlocks()
 {
     updateRegionBlocks();
+    var $preview = $('#preview');
+    $preview.on('click', '.btn-delete', function()
+    {
+        var $block = $(this).closest('.block');
+        deleteBlock($block.data(), v.visualLang.deleteConfirm.format($block.data('title')), function(result)
+        {
+            if(result) updateRegionBlocks($block.closest('.layout-region').data('name'));
+        });
+    }).on('click', '.btn-edit', function()
+    {
+        var $block = $(this).closest('.block');
+        editBlock($block.data());
+    }).on('click', '.btn-layout', function()
+    {
+        var $block = $(this).closest('.block');
+        changeBlockLayout($block.data());
+    }).on('click', '.btn-setPageColumns', setPageColumns);
+}
+
+function updateBlockList(callback)
+{
+    $('#blockLists').load(window.location.href + ' #blockLists .block-list', function()
+    {
+        toggleBlockList();
+        if(callback) callback();
+    });
 }
 
 function handleBlockEdit()
 {
-    console.log('after');
+    updateBlockList();
+    updateRegionBlocks();
 }
 
 $(function()

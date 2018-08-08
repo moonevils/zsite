@@ -80,10 +80,10 @@ js::set('visualLang', $lang->visual->js);
               </select>
             </div>
             <div class='actions dock-right'>
-              <?php commonModel::printLink('block', 'create', '', '<i class="icon icon-plus"></i> ' . $lang->block->create, "class='btn btn-sm btn-link' data-toggle='modal' data-width='80%'");?>
+              <?php commonModel::printLink('block', 'create', '', '<i class="icon icon-plus"></i> ' . $lang->block->create, "class='btn btn-sm btn-link' data-toggle='modal' data-width='80%' data-type='iframe'");?>
             </div>
           </header>
-          <div class='content dock'>
+          <div class='content dock' id='blockLists'>
             <?php foreach($categoryList as $category => $blockList):?>
               <div class='block-list clearfix hidden' data-id='<?php echo $category;?>'>
               <?php $isCategoryEmpty = true;?>
@@ -94,13 +94,22 @@ js::set('visualLang', $lang->visual->js);
                 $isCategoryEmpty = false;
                 ?>
                 <div class='block-item' data-type='<?php echo $block->type;?>' data-id='<?php echo $block->id;?>'>
-                  <div class='title' title='<?php echo $block->title;?>'><?php echo $block->title;?></div>
+                  <div class='title' title='<?php echo $block->title;?>'><?php echo $block->title;?>&nbsp; <small class='text-muted nobr'><?php echo $lang->block->categoryList[$category];?> / <?php echo $typeList[$block->type] ?></small></div>
                   <div class='actions'>
-                    <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
                     <?php commonModel::printLink('block', 'edit', "block={$block->id}", '<i class="icon icon-pencil"></i>', "class='btn btn-link' data-toggle='modal' data-width='80%' data-type='iframe' title='$lang->edit'");?>
+                    <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
                   </div>
                 </div>
               <?php endforeach;?>
+              <?php if($category == 'system'):?>
+                <div class='block-item' data-type='region' data-id='region'>
+                  <div class='title' title='<?php echo $lang->visual->js->subRegionDesc;?>'><?php echo $lang->visual->js->subRegion;?> &nbsp; <small class='text-muted nobr'><?php echo $lang->visual->js->subRegionDesc;?></small></div>
+                  <div class='actions'>
+                    <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
+                  </div>
+                </div>
+              <?php $isCategoryEmpty = false;?>
+              <?php endif; ?>
               <?php if($isCategoryEmpty):?>
               <div class='with-padding text-muted text-center'><?php echo $lang->visual->design->noBlockTip;?></div>
               <?php endif; ?>
