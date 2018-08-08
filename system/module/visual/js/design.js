@@ -136,6 +136,78 @@ function initCustomThemeForm()
     });
 }
 
+function getRegionBlocks(region, callback)
+{
+    if ($.isFunction(region))
+    {
+        callback = region;
+        region = '';
+    }
+    $.getJSON(createLink('visual', 'ajaxGetRegionBlocks', 'page=' + v.page + '&region=' + (region || '')), callback);
+}
+
+function renderBlock(block, isGrid)
+{
+    var $block = $('<div class="block" data-id="' + block.id + '"></div>');
+    var $blockTitle = $('<div class="block-title">' + (block.title || ('Block-' + block.id)) + '</div>');
+    var $blockActions = $('<div class="block-actions clearfix"><a class="btn-edit"><i class="icon icon-pencil"></i></a><a class="btn-delete"><i class="icon icon-remove"></i></a><a class="btn-layout"><i class="icon icon-list-alt"></i></a></div>');
+    $block.append($blockTitle).append($blockActions);
+    if(block.children)
+    {
+        $block.addClass('block-container');
+        var $row = $('<div class="row"></div>');
+        $.each(block.children, function(childIndex, child)
+        {
+            $row.append(renderBlock(child, true));
+        });
+        $block.append($row);
+        $blockTitle.text(v.visualLang.subRegion + '-' + block.id);
+    }
+    if(isGrid)
+    {
+        $block.append('<div class="block-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
+        return $('<div class="col-sm-' + (block.grid || 12) + '"></div>').append($block);
+    }
+    return $block;
+}
+
+function updateRegionBlocks(region, callback)
+{
+    if ($.isFunction(region))
+    {
+        callback = region;
+        region = '';
+    }
+    var $preview = $('#preview').addClass('loading');
+    getRegionBlocks(region, function(regionBlocks)
+    {
+        $.each(regionBlocks, function(regionName, blocks)
+        {
+            var $region = $preview.find('.layout-region[data-name="' + regionName + '"]');
+            if(!$region.length) return;
+            var isGrid = $region.hasClass('type-grid');
+            var $regionWrapper = isGrid ? $region.children('.row').first() : $region;
+            $regionWrapper.empty();
+            $.each(blocks, function(blockIdx, block)
+            {
+                $regionWrapper.append(renderBlock(block, isGrid));
+            });
+        });
+        $preview.removeClass('loading');
+        if(callback) callback(region);
+    });
+}
+
+function initRegionBlocks()
+{
+    updateRegionBlocks();
+}
+
+function handleBlockEdit()
+{
+    console.log('after');
+}
+
 $(function()
 {
     var $dsBox = $('#dsBox');
@@ -155,6 +227,8 @@ $(function()
     initCodeEditor();
 
     initCustomThemeForm();
+
+    initRegionBlocks();
 
     $('[data-toggle="tooltip"]').tooltip({container: '#dsBox'});
 });

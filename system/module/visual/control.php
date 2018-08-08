@@ -172,6 +172,7 @@ class visual extends control
      * Visual design page
      *
      * @access public
+     * @param string $page default value is 'all'
      * @return void
      */
     public function design($page = 'all')
@@ -216,5 +217,35 @@ class visual extends control
         }
 
         $this->display();
+    }
+
+    /**
+     * Get region block data with ajax request
+     *
+     * @access public
+     * @param string $page default value is 'all'
+     * @param string $region default value is ''
+     * @return void
+     */
+    public function ajaxGetRegionBlocks($page = 'all', $region = '')
+    {
+        $this->loadModel('block')->loadTemplateLang($template);
+
+        $clientDevice = $this->app->clientDevice;
+        $theme        = $this->config->template->{$clientDevice}->theme;
+        $template     = $this->config->template->{$clientDevice}->name;
+        $regionData   = $this->lang->block->{$template}->regions->$page;
+        $regionBlocks = array();
+        $regionEmpty  = empty($region);
+
+        foreach ($regionData as $regionName => $regionTitle)
+        {
+            if($regionEmpty || $region == $regionName)
+            {
+                $regionBlocks[$regionName] = $this->block->getRegionBlocks($page, $regionName, '', $template, $theme);
+            }
+        }
+
+        $this->send($regionBlocks);
     }
 }

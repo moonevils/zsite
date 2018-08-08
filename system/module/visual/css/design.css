@@ -16,6 +16,10 @@ body {background: #f1f1f1;}
 .icon-collapse-top:before {content: '\e726'}
 .icon-collapse:before {content: '\e725'}
 
+.load-indicator {position: absolute; z-index: 1000; top: 0; right: 0; bottom: 0; left: 0; background: rgba(255,255,255,.75); opacity: 0; visibility: hidden; transition: opacity .5s; pointer-events: none;}
+.load-indicator > .icon {display: block; width: 40px; height: 40px; line-height: 40px; text-align: center; margin: 0 auto; position: relative; top: 50%; margin-top: -20px;}
+.loading > .load-indicator {opacity: 1; visibility: visible;}
+
 .color-tile {display: block; float: left; width: 30px; height: 30px; border-radius: 4px; border: 1px solid #ccc; margin: 2px 2px 0 0; cursor: pointer; transition: all 0.4s; text-align: center; line-height: 30px;}
 .color-tile[data="transparent"] {background-color: #eee; background-image: linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #999),
 linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #999); background-size:12px 12px; background-position:0 0, 6px 6px}
@@ -107,12 +111,30 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .layout-item + .layout-item {margin-top: 10px;}
 .layout-item.col {float: left;}
 .layout-item.col + .col {margin-top: 0}
-.layout-container {border: 1px dotted #aaa;}
-.layout-container:before {background: #eff7ff; color: #3280fc; line-height: 20px; padding: 0 5px; border-radius: 0 0 4px 0;}
-.layout-container:hover {border: 1px solid #3280fc;}
-.layout-container:hover:before {color: #eff7ff; background: #3280fc;}
+.layout-region {border: 1px dotted #aaa;}
+.layout-region:before {background: #eff7ff; color: #3280fc; line-height: 20px; padding: 0 5px; border-radius: 0 0 4px 0;}
+.layout-region:hover {border: 1px solid #3280fc;}
+.layout-region:hover:before {color: #eff7ff; background: #3280fc;}
 .layout-row {padding: 10px 0; border: 2px dashed transparent;}
 .layout-row:hover {border-color: #03B8CF}
 .layout-item > .actions {text-align: center; padding: 0; margin-bottom: 10px;}
 .layout-item > .actions > a {display: inline-block; border-radius: 10px; line-height: 20px; padding: 0 8px; background: #03B8CF; color: #fff;}
 .layout-item > .actions > a:hover {background: #0493A5; text-decoration: none;}
+.layout-region {padding: 30px 10px 10px 10px;}
+.layout-item .block {display: block; border: 2px solid #aaa; border-radius: 4px; padding: 10px; min-height: 80px; position: relative; margin-bottom: 10px;}
+.layout-item .block-title {position: absolute; top: 0; right: 0; left: 0; bottom: 0; line-height: 60px; text-align: center; padding: 10px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-weight: bold;}
+.layout-item .block-actions {position: absolute; right: 0; top: 0; background: #38b03f; padding: 0 5px; transition: opacity .2s; border-radius: 0 0 0 4px; opacity: 0;}
+.layout-item .block:hover > .block-actions {opacity: 1;}
+.layout-item .block-actions > a {display: block; float: left; width: 20px; height: 20px; line-height: 20px; text-align: center; color: #fff;}
+.layout-item .block-actions > a:hover {cursor: pointer; text-decoration: none; background: rgba(0,0,0,.2);}
+.layout-item .block:hover {border-color: #38b03f;}
+.layout-item .block-resize-handler {position: absolute; right: -6px; top: 0; bottom: 0; width: 12px; text-align: center; opacity: 0; transition: opacity .2s, backgroound .2s; color: #38b03f;}
+.layout-item .block-resize-handler > .icon {position: absolute; width: 20px; height: 20px; line-height: 20px; text-align: center; left: -3px; top: 50%; margin-top: -10px; background: rgba(0, 255, 0, .3);}
+.layout-item .block:hover > .block-resize-handler {opacity: 1;}
+.layout-item .block-resize-handler:hover {background: rgba(0, 255, 0, .3); cursor: ew-resize;}
+.layout-item .block-container {padding-top: 30px; padding-bottom: 0;}
+.layout-item .block-container > .block-title {right: auto; bottom: auto; line-height: 20px; padding: 0 5px; color: #03b8cf; font-weight: normal;}
+.layout-item .block-container:hover {border-color: #03b8cf;}
+.layout-item .block-container > .block-actions {background: #03b8cf;}
+.layout-item .block-container > .block-resize-handler:hover {background: rgba(3, 184, 207, 0.2)}
+.layout-item .block-container > .block-resize-handler > .icon {background: rgba(3, 184, 207, 0.2); color: #03b8cf;}
