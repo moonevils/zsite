@@ -205,12 +205,12 @@ $lang->block->headerLayout->searchbar['insideNav']    = '导航右侧';
 if(!isset($lang->block->default->layout)) $lang->block->default->layout = new stdclass();
 
 $lang->block->default->layout->all = array();
-$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'header', 'title' => '<head>（不可见）');
+$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'header', 'title' => 'Head（不可见）');
 $lang->block->default->layout->all[] = array('type' => 'container', 'name' => 'top');
 $lang->block->default->layout->all[] = array('type' => 'grid', 'name' => 'banner');
 $lang->block->default->layout->all[] = array('type' => 'placeholder', 'name' => 'main');
 $lang->block->default->layout->all[] = array('type' => 'grid', 'name' => 'bottom');
-$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'footer', 'title' => '<footer>（不可见）');
+$lang->block->default->layout->all[] = array('type' => 'invisible', 'name' => 'footer', 'title' => 'Footer（不可见）');
 
 $lang->block->default->layout->index_index = array();
 $lang->block->default->layout->index_index[] = array('type' => 'placeholder', 'name' => 'page_header');

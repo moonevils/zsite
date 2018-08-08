@@ -250,6 +250,6 @@ class visual extends control
             }
         }
 
-        $this->send(array('blocks' => $regionBlocks, 'side' => array('float' => $sideFloat, 'grid' => $sideGrid)));
+        $this->send(array('blocks' => $regionBlocks, 'side' => !$regionEmpty ? false : array('float' => $sideFloat, 'grid' => $sideGrid)));
     }
 }

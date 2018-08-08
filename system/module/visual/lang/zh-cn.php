@@ -58,6 +58,7 @@ $lang->visual->js->pageLayoutPrefix  = '仅当前';
 $lang->visual->js->deleteConfirm     = '确定从布局中删除【{0}】？';
 $lang->visual->js->changeLayout      = '更改布局';
 $lang->visual->js->setColumns        = '分栏设置';
+$lang->visual->js->addRegionAlert    = '不允许将布局区块添加到【{0}】。';
 $lang->visual->js->actions           = array('edit' => '编辑', 'delete' => '删除', 'move' => '移动', 'add' => '添加');
 
 /* Language for config */
@@ -120,7 +121,6 @@ $lang->visual->design->hidePageTmpl   = '隐藏页面模版';
 $lang->visual->design->dragAndAdd     = '拖到布局中添加';
 $lang->visual->design->noBlockTip     = '此类目下没有可用区块。';
 $lang->visual->design->setColumns     = '分栏设置';
-
 
 $lang->visual->design->placeholders                = array();
 $lang->visual->design->placeholders['main']        = '主要内容';
