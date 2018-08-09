@@ -5,7 +5,6 @@ js::set('debug', $config->debug);
 js::set('device', $this->app->clientDevice);
 js::set('template', $template);
 js::set('theme', $theme);
-js::set('regionBlocks', $regionBlocks);
 js::set('region', $region);
 js::set('page', $page);
 js::set('visualLang', $lang->visual->js);

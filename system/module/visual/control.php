@@ -177,16 +177,18 @@ class visual extends control
      */
     public function design($page = 'all')
     {
-        $this->loadModel('block')->loadTemplateLang($template);
 
         $clientDevice = $this->app->clientDevice;
-        $theme        = $this->config->template->{$clientDevice}->theme;
         $template     = $this->config->template->{$clientDevice}->name;
+        $theme        = $this->config->template->{$clientDevice}->theme;
         $cssFile      = $this->loadModel('ui')->getCustomCssFile($template, $theme);
         $savePath     = dirname($cssFile);
-        $blockData    = $this->lang->block->{$template};
-        $layout       = $blockData->layout->$page;
-        $region       = $blockData->regions->$page;
+
+        $this->loadModel('block')->loadTemplateLang($template);
+
+        $blockData = $this->lang->block->{$template};
+        $layout    = $blockData->layout->$page;
+        $region    = $blockData->regions->$page;
 
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 
@@ -201,7 +203,7 @@ class visual extends control
         $this->view->blocks          = $this->block->getList($template);;
         $this->view->categoryList    = array_reverse((array) $this->config->block->categoryList);
         $this->view->typeList        = $this->lang->block->{$template}->typeList;
-        
+
         $this->view->setting         = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
         $this->view->layout          = $layout;
         $this->view->region          = $region;
@@ -230,11 +232,12 @@ class visual extends control
      */
     public function ajaxGetRegionBlocks($page = 'all', $region = '')
     {
-        $this->loadModel('block')->loadTemplateLang($template);
-
         $clientDevice = $this->app->clientDevice;
         $theme        = $this->config->template->{$clientDevice}->theme;
         $template     = $this->config->template->{$clientDevice}->name;
+
+        $this->loadModel('block')->loadTemplateLang($template);
+
         $regionData   = $this->lang->block->{$template}->regions->$page;
         $regionBlocks = array();
         $regionEmpty  = empty($region);
