@@ -21,7 +21,6 @@
   }
   foreach ($lang->groups as $menuGroup => $groupSetting)
   {
-      
       $print = false;
       $groupMenus = explode(',', $this->config->menus->$menuGroup);
       
@@ -63,19 +62,6 @@
     <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
     <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
     <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
-    <ul class='nav navbar-nav'>
-      <li class='device-nav'>
-        <a href='javascript:;' data-toggle='dropdown'>
-          <?php echo "<strong>" . strip_tags($lang->ui->deviceList->{$currentDevice}) . "</strong>";?> <i class='icon-caret-down'></i>
-        </a>
-        <ul class='dropdown-menu'>
-          <?php foreach($lang->ui->deviceList as $device => $name):?>
-          <?php $class = $device == $currentDevice ? "class='active'" : '';?>
-          <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
-          <?php endforeach;?>
-        </ul>
-      </li>
-    </ul>
     <?php endif;?>
     <?php echo $mainMenu;?>
     <ul class='nav navbar-nav navbar-right'>
