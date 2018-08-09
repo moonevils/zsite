@@ -23,7 +23,7 @@ class visualModel extends model
      * @param object $regionBlocks
      * @return void
      */
-    public function printLayoutItem($item, $region, $page, $regionBlocks)
+    public function printLayoutItem($item, $region, $page)
     {
         if(!isset($item['title']))
         {
@@ -82,7 +82,7 @@ class visualModel extends model
         {
             foreach ($item['children'] as $child)
             {
-                $this->printLayoutItem($child, $region, $page, $regionBlocks);
+                $this->printLayoutItem($child, $region, $page);
             }
         }
         

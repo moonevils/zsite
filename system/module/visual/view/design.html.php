@@ -48,7 +48,7 @@ js::set('visualLang', $lang->visual->js);
         <?php
           foreach ($layout as $layoutItem)
           {
-              $this->visual->printLayoutItem($layoutItem, $region, $page, $regionBlocks);
+              $this->visual->printLayoutItem($layoutItem, $region, $page);
           }
         ?>
       </div>
