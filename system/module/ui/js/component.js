@@ -241,20 +241,6 @@ $(document).ready(function()
     })
 
     $('[name*=product][name*=showViews]').change();
-    $.setAjaxForm('#settingForm', function(response)
-    {
-        $settingForm = $('#settingForm');
-        $settingForm.find('#submit').popover('destroy');
-        if(response.result === 'success')
-        {
-            if(response.message)
-            {
-                ($.zui.messager || $.zui.messager).success(response.message);
-            }
-        }
-        else
-        {
-            ($.zui.messager || $.zui.messager).warning(response.message);
-        }
-    });
+
+    $.setAjaxForm('#settingForm');
 })
