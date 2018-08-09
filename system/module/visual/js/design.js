@@ -1,5 +1,22 @@
 var clientLang = $.zui.clientLang().replace('zh-', '');
 
+/// Set default values for future Ajax requests
+$.ajaxSetup(
+{
+    beforeSend: function()
+    {
+        $('#preview').addClass('loading');
+    },
+    error: function()
+    {
+        $.zui.messager.danger(v.lang.timeout);
+    },
+    complete: function()
+    {
+        $('#preview').removeClass('loading');
+    }
+});
+
 /**
  * Open iframe modal
  * 
@@ -22,6 +39,19 @@ function openModal(url, options)
         mergeOptions       : true,
         backdrop           : 'static'
     }, options));
+}
+
+/**
+ * Toggle show/remove loading state
+ * 
+ * @param {?boolean} [result=true] true: show loading ui, false: remove loading ui
+ * @access public
+ * @return void
+ */
+function toggleLoadingState(loading)
+{
+    if(loading === false) $('#preview').removeClass('loading');
+    else $('#preview').addClass('loading');
 }
 
 /**
@@ -709,7 +739,10 @@ function initDnDAddBlock()
         },
         finish: function(e)
         {
-            sortBlocks(e.element);
+            if(e.changed)
+            {
+                sortBlocks(e.element);
+            }
         }
     })
 }
