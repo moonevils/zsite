@@ -734,25 +734,18 @@ class blockModel extends model
         $this->view = new stdclass();
         $withGrid = ($withGrid and isset($block->grid));
         $isRegion = isset($block->type) && $block->type === 'region';
-        if($isRegion || !empty($block->children))
+        if($isRegion)
         {
-            $randomClass = !empty($block->isRandom) ? 'random-block-list' : '';
-            if(!empty($block->isRandom) && $this->app->clientDevice == 'mobile') echo "<div class='$randomClass' data-id='{$block->id}'>";
-
+            $this->parseRegion($block, $withGrid, $containerHeader, $containerFooter);
+        }
+        elseif($block->type == 'group')
+        {
             if($withGrid)
             {
-                if($block->grid == 0) echo "<div class='col col-row'><div class='row $randomClass' data-id='{$block->id}'>";
-                else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row $randomClass' data-id='{$block->id}'>";
+                if($block->grid == 0) echo "<div class='col col-row'><div class='row' data-id='{$block->id}'>";
+                if($block->grid != 0) echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row $randomClass' data-id='{$block->id}'>";
             }
-
-            if(!empty($block->children))
-            {
-                foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
-            }
-
-            if(!empty($block->isRandom) && $this->app->clientDevice == 'mobile') echo "</div>";
-            
-            if($withGrid) echo '</div></div>';
+            $this->parseGroup($block, $withGrid, $containerHeader, $containerFooter);
         }
         else
         {
@@ -869,6 +862,67 @@ class blockModel extends model
             if($withGrid) echo "</div>";
             if($probability && $this->app->clientDevice == 'mobile') echo "</div>";
         }
+    }
+
+    /**
+     * Parse region block
+     * 
+     * @param  object    $block 
+     * @param  bool      $withGrid 
+     * @param  string    $containerHeader 
+     * @param  string    $containerFooter 
+     * @access public
+     * @return string
+     */
+    public function parseRegion($block, $withGrid, $containerHeader, $containerFooter)
+    {
+        $randomClass = !empty($block->isRandom) ? 'random-block-list' : '';
+        if(!empty($block->isRandom) && $this->app->clientDevice == 'mobile') echo "<div class='$randomClass' data-id='{$block->id}'>";
+
+        if($withGrid)
+        {
+            if($block->grid == 0) echo "<div class='col col-row'><div class='row $randomClass' data-id='{$block->id}'>";
+            else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row $randomClass' data-id='{$block->id}'>";
+        }
+
+        if(!empty($block->children))
+        {
+            foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
+        }
+
+        if(!empty($block->isRandom) && $this->app->clientDevice == 'mobile') echo "</div>";
+
+        if($withGrid) echo '</div></div>';
+    }
+
+    /**
+     * Parse group block
+     * 
+     * @param  object    $block 
+     * @param  bool      $withGrid 
+     * @param  string    $containerHeader 
+     * @param  string    $containerFooter 
+     * @access public
+     * @return string
+     */
+    public function parseGroup($block, $withGrid, $containerHeader, $containerFooter)
+    {
+        $block->content = json_decode($block->content);
+        $block->children = $block->content->children;
+        $children = array();
+        if(!empty($block->children))
+        {
+            foreach($block->children as $child)
+            {
+                $child = $this->dao->findByID($child)->from(TABLE_BLOCK)->fetch();
+                $child->titleless = true;
+                $child->borderless = true;
+                $children[] = $this->parseBlockContent($child, false, '', '');
+            }
+        }
+
+        if($withGrid) echo '</div></div>';
+        return $block;
     }
 
     /**
