@@ -167,4 +167,89 @@ class visual extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
     }
+
+    /**
+     * Visual design page
+     *
+     * @access public
+     * @param string $page default value is 'all'
+     * @return void
+     */
+    public function design($page = 'all')
+    {
+        $this->loadModel('block')->loadTemplateLang($template);
+
+        $clientDevice = $this->app->clientDevice;
+        $theme        = $this->config->template->{$clientDevice}->theme;
+        $template     = $this->config->template->{$clientDevice}->name;
+        $cssFile      = $this->loadModel('ui')->getCustomCssFile($template, $theme);
+        $savePath     = dirname($cssFile);
+        $blockData    = $this->lang->block->{$template};
+        $layout       = $blockData->layout->$page;
+        $region       = $blockData->regions->$page;
+
+        $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+
+        $this->view->title           = $this->lang->visual->common;
+        $this->view->blockData       = $blockData;
+
+        $this->view->templateData    = $this->ui->getTemplates()[$template];
+        $this->view->template        = $template;
+        $this->view->theme           = $theme;
+        $this->view->page            = $page;
+        $this->view->isPageAll       = $page == 'all';
+        $this->view->blocks          = $this->block->getList($template);;
+        $this->view->categoryList    = array_reverse((array) $this->config->block->categoryList);
+        $this->view->typeList        = $this->lang->block->{$template}->typeList;
+        
+        $this->view->setting         = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
+        $this->view->layout          = $layout;
+        $this->view->region          = $region;
+
+        if(!file_exists($savePath)) mkdir($savePath, 0777, true);
+        if(!is_writable($savePath))
+        {
+            $this->view->hasPriv = false;
+            $this->view->errors  = sprintf($this->lang->ui->unWritable, str_replace(dirname($this->app->getWwwRoot()), '', $savePath));
+        }
+        else
+        {
+            $this->view->hasPriv = true;
+        }
+
+        $this->display();
+    }
+
+    /**
+     * Get region block data with ajax request
+     *
+     * @access public
+     * @param string $page default value is 'all'
+     * @param string $region default value is ''
+     * @return void
+     */
+    public function ajaxGetRegionBlocks($page = 'all', $region = '')
+    {
+        $this->loadModel('block')->loadTemplateLang($template);
+
+        $clientDevice = $this->app->clientDevice;
+        $theme        = $this->config->template->{$clientDevice}->theme;
+        $template     = $this->config->template->{$clientDevice}->name;
+        $regionData   = $this->lang->block->{$template}->regions->$page;
+        $regionBlocks = array();
+        $regionEmpty  = empty($region);
+
+        $sideGrid    = $regionEmpty ? (int) $this->loadModel('ui')->getThemeSetting('sideGrid', 3) : '';
+        $sideFloat   = $regionEmpty ? $this->ui->getThemeSetting('sideFloat', 'right') : '';
+
+        foreach ($regionData as $regionName => $regionTitle)
+        {
+            if($regionEmpty || $region == $regionName)
+            {
+                $regionBlocks[$regionName] = $this->block->getRegionBlocks($page, $regionName, '', $template, $theme);
+            }
+        }
+
+        $this->send(array('blocks' => $regionBlocks, 'side' => !$regionEmpty ? false : array('float' => $sideFloat, 'grid' => $sideGrid)));
+    }
 }

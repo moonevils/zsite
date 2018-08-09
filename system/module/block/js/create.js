@@ -13,7 +13,18 @@ $(document).ready(function()
         }   
         if(response.result == 'success' && response.locate != '')
         {
-            location.href = response.locate;
+            if($('body').hasClass('body-modal'))
+            {
+                if (window.parent && window.parent.handleBlockEdit)
+                {
+                    window.parent.handleBlockEdit();
+                }
+                $.closeModal();
+            }
+            else if(response.locate)
+            {
+                location.href = response.locate;
+            }
         }   
     }); 
 

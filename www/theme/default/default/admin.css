@@ -363,7 +363,7 @@ body {padding-left: 50px;}
 #mainNavbar .nav > li.divider.angle:after {z-index: 2; left: -1px; border-color: transparent transparent transparent #fff;}
 #mainNavbar .nav > li + li.divider.angle:after { border-left-color: #E2E9F1;}
 
-#mainNavbar .navbar-nav {margin-left: -9px;}
+#mainNavbarCollapse > .navbar-nav:first-child {margin-left: -10px;}
 #mainNavbar .navbar-nav > li.device-nav > a {padding-bottom: 9px; background-color: #36B2E8; color:#fff; font-weight: normal;}
 #mainNavbar .navbar-nav > li.device-nav > a > .icon-tablet{margin: 0; }
 #mainNavbar .device-nav .dropdown-menu  {width: 187px; padding: 8px 4px;}

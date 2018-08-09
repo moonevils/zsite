@@ -140,18 +140,4 @@ $(function()
         $themePicker.attr('data-template', template).attr('data-theme', theme);
         refreshPicker(template, theme);
     };
-
-    $('#deviceMenu a').click(function()
-    {
-        $.getJSON($(this).attr('href'), function(response)
-        {
-            if(response.result == 'success')
-            {
-                $.zui.messager.success(response.message);
-                location.reload();
-            }
-            return false;
-        })
-        return false;
-    });
 });

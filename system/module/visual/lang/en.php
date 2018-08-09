@@ -55,6 +55,10 @@ $lang->visual->js->alreadyFirstSlide = 'First Silde';
 $lang->visual->js->slideOrder        = 'Play Order';
 $lang->visual->js->gridWidth         = 'Grid Width';
 $lang->visual->js->pageLayoutPrefix  = 'Current Only';
+$lang->visual->js->deleteConfirm     = 'Confirm to delete the block “{0}”?';
+$lang->visual->js->changeLayout      = 'Change Layout';
+$lang->visual->js->setColumns        = 'Set Columns';
+$lang->visual->js->addRegionAlert    = 'Not allowed to add Region block to “{0}”.';
 $lang->visual->js->actions           = array('edit' => 'Edit', 'delete' => 'Delete', 'move' => 'Move', 'add' => 'Add');
 
 /* Language for config */
@@ -105,3 +109,5 @@ $lang->visual->setting->boards                             = array('name' => 'Bo
 $lang->visual->setting->boards['actions']['add']           = array('text' => 'Board Admin');
 $lang->visual->setting->thread                             = array('name' => 'Thread', 'actions' => array());
 $lang->visual->setting->thread['actions']['edit']          = array('text' => 'Transfer');
+
+$lang->design->page = 'Page template';

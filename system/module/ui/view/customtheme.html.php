@@ -4,10 +4,8 @@
 <div class='col-xs-12'>
 <?php if(!$hasPriv):?>
 <div class='alert alert-danger'>
-  <div>
-    <?php echo $errors;?>
-    <span class='pull-right'><?php commonModel::printLink('ui', 'customtheme', "theme={$theme}&template={$template}", $lang->ui->template->reload, "class='btn btn-primary'");?></span>
-  </div>
+  <?php echo $errors;?>
+  <span class='pull-right'><?php commonModel::printLink('ui', 'customtheme', "theme={$theme}&template={$template}", $lang->ui->template->reload, "class='btn btn-primary'");?></span>
 </div>
 <?php else:?>
 <form method='post' action='<?php echo inlink('customtheme', "theme={$theme}&template={$template}");?>' id='customThemeForm' class='form ve-form' data-theme='<?php echo $theme?>' data-template='<?php echo $template?>'>
