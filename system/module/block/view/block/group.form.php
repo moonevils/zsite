@@ -17,7 +17,8 @@
 <tr>
   <th><?php echo $lang->block->childBlock;?></th>
   <td>
-    <?php echo html::select('params[children][]', $blocks, $block->content->children, "class='form-control chosen' multiple");?>
+    <?php if(isset($block))  echo html::select('params[children][]', $blocks, zget($block->content, 'children'), "class='form-control chosen' multiple");?>
+    <?php if(!isset($block)) echo html::select('params[children][]', $blocks, '', "class='form-control chosen' multiple");?>
   </div>
   </td>
 </tr>
