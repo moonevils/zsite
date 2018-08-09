@@ -18,7 +18,7 @@
       </td>
       <td>
         <label>
-          <input type='checkbox' name='titleless' value='1' <?php if(zget($block, 'borderless') == 1) echo 'checked';?>/>
+          <input type='checkbox' name='titleless' value='1' <?php if(zget($block, 'titleless') == 1) echo 'checked';?>/>
           <?php echo $this->lang->block->titleless?>
         <label>
       </td>
