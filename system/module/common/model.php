@@ -1360,7 +1360,7 @@ class commonModel extends model
         {
             $groupMenus = explode(',', $config->menus->$menuGroup);
       
-            $showGroup = false;
+            $showGroup = $menuGroup == 'design' ? true : false;
             foreach($groupMenus as $groupMenu)
             {
                 if($showGroup) continue;

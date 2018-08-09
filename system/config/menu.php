@@ -5,9 +5,11 @@ $config->menus->content = 'article,page,blog,book,submission,attachment';
 $config->menus->shop    = 'order,product,orderSetting';
 $config->menus->user    = 'user,message,comment,reply,forum,wechat,submission';
 $config->menus->promote = 'stat,tag,links';
-$config->menus->design  = 'ui,logo,slide,nav,block,visual,others,edit';
+$config->menus->design  = '';
 $config->menus->setting = 'site,company,score,interface,security,wechatSetting';
 $config->menus->open    = 'package,themestore,effect,community,';
+
+$designMenus = array('ui', 'logo', 'slide', 'nav', 'block', 'visual', 'others', 'edit');
 
 $config->menuGroups = new stdclass();
 foreach($config->menus as $group => $modules)
@@ -17,6 +19,8 @@ foreach($config->menus as $group => $modules)
     {
         if($menu) $config->menuGroups->$menu = $group;
     }
+
+    foreach($designMenus as $menu) $config->menuGroups->$menu = 'design';
 }
 
 $config->multiEntrances = array();
