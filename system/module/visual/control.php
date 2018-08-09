@@ -232,11 +232,12 @@ class visual extends control
      */
     public function ajaxGetRegionBlocks($page = 'all', $region = '')
     {
-        $this->loadModel('block')->loadTemplateLang($template);
-
         $clientDevice = $this->app->clientDevice;
         $theme        = $this->config->template->{$clientDevice}->theme;
         $template     = $this->config->template->{$clientDevice}->name;
+
+        $this->loadModel('block')->loadTemplateLang($template);
+
         $regionData   = $this->lang->block->{$template}->regions->$page;
         $regionBlocks = array();
         $regionEmpty  = empty($region);
