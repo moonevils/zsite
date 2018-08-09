@@ -315,7 +315,7 @@ function tidyRowBlocks($row)
         $rowCols.each(function()
         {
             var $col = $(this);
-            $col.children('.block').css('min-height', maxHeight);
+            $col.children('.block').css('min-height', maxHeight).not('.block-container').children('.block-title').css('line-height', (maxHeight - 20) + 'px');
         });
     }
 }
