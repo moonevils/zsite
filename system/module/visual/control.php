@@ -201,7 +201,7 @@ class visual extends control
         $this->view->blocks          = $this->block->getList($template);;
         $this->view->categoryList    = array_reverse((array) $this->config->block->categoryList);
         $this->view->typeList        = $this->lang->block->{$template}->typeList;
-        
+
         $this->view->setting         = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
         $this->view->layout          = $layout;
         $this->view->region          = $region;
