@@ -110,4 +110,22 @@ $lang->visual->setting->boards['actions']['add']           = array('text' => 'Bo
 $lang->visual->setting->thread                             = array('name' => 'Thread', 'actions' => array());
 $lang->visual->setting->thread['actions']['edit']          = array('text' => 'Transfer');
 
-$lang->design->page = 'Page template';
+$lang->visual->design                 = new stdclass();
+$lang->visual->design->pageTemplate   = 'Page Template';
+$lang->visual->design->currentTheme   = 'Current Theme:';
+$lang->visual->design->layout         = 'Layout';
+$lang->visual->design->block          = 'Block';
+$lang->visual->design->skin           = 'Skin';
+$lang->visual->design->code           = 'Code';
+$lang->visual->design->hidePageTmpl   = 'Toggle show/hide Page Template Menu';
+$lang->visual->design->dragAndAdd     = 'Drag and Drop to Add Block';
+$lang->visual->design->noBlockTip     = 'No block in current category.';
+$lang->visual->design->setColumns     = 'Set Columns';
+
+$lang->visual->design->placeholders                = array();
+$lang->visual->design->placeholders['main']        = 'Main Content';
+$lang->visual->design->placeholders['page_header'] = 'Page Header';
+$lang->visual->design->placeholders['page_footer'] = 'Page Footer';
+$lang->visual->design->placeholders['breadcrumb']  = 'Breadcrumb Menu';
+$lang->visual->design->placeholders['article']     = 'Article Content';
+$lang->visual->design->placeholders['category']    = 'Category Content';

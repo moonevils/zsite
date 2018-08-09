@@ -16,6 +16,8 @@ body {background: #f1f1f1;}
 .icon-collapse-top:before {content: '\e726'}
 .icon-collapse:before {content: '\e725'}
 
+.scroll-none {overflow: hidden;}
+
 .load-indicator {position: absolute; z-index: 1000; top: 0; right: 0; bottom: 0; left: 0; background: rgba(255,255,255,.75); opacity: 0; visibility: hidden; transition: opacity .5s; pointer-events: none;}
 .load-indicator > .icon {display: block; width: 40px; height: 40px; line-height: 40px; text-align: center; margin: 0 auto; position: relative; top: 50%; margin-top: -20px;}
 .loading > .load-indicator {opacity: 1; visibility: visible;}
@@ -36,10 +38,14 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 
 #dsBox {top: 50px; right: 10px; left: 60px; bottom: 50px; background: #fff; border: #ddd 1px solid;}
 #dsMenu {width: 200px; border-right: 1px solid #ddd; z-index: 2;}
+#backBtn {padding: 9px 10px;}
+#backBtn > .icon {font-size: 18px;}
 #dsPreview {left: 200px; right: 360px; border-right: 1px solid #ddd; transition: left .2s; background: #eee;}
-#dsPreview > header {transition: padding .2s; padding: 10px 15px; border: none;}
+#dsPreview > header {transition: padding .2s; padding: 10px 15px 10px 40px; border: none;}
 #dsTool {width: 360px;}
-#dsPreview > header > .actions {right: 5px;}
+#dsPreview > header > .actions.dock-left,
+#dsPreview > header > .actions.dock-right {right: 5px; top: 2px; overflow: visible;}
+#dsPreview > header > .actions.dock-left {left: 0; right: auto;}
 #dsTool > header {padding: 0; border-bottom: none;}
 #dsTool > header .nav > li > a {padding: 10px 10px 9px 10px; border-bottom: 1px solid #e5e5e5; position: relative;}
 #dsTool > header .nav > li.active > a:before {content: ' '; display: block; position: absolute; left: 25px; right: 25px; bottom: 0; background: #3280fc; height: 2px;}
@@ -55,12 +61,16 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 #pageList li.group + li.group {border-top: 1px solid #e5e5e5;}
 
 .ds-hide-menu #dsPreview {left: 0;}
-.ds-hide-menu #dsPreview > header {padding-left: 210px;}
-.ds-hide-menu #dsMenu {bottom: auto; height: 40px; border-right: none;}
-.ds-hide-menu #dsMenu > header {border: none; overflow: hidden;}
+.ds-hide-menu #dsPreview > header {padding-left: 380px; border-bottom: 1px solid #ddd;}
+.ds-hide-menu #dsMenu {bottom: auto; height: 40px; border-right: none; overflow: visible;}
+.ds-hide-menu #dsPreview > header > .actions.dock-left {left: 200px; right: auto; width: 160px; z-index: 10; padding: 0; top: 0;}
+.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn {display: block; width: 100%; height: 40px;}
+.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn:hover {background: rgba(0,0,0,.1)}
+.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn > .icon {display: none;}
+.ds-hide-menu #dsMenu > header {overflow: hidden; border-bottom: 1px solid #ddd;}
 .ds-hide-menu #dsMenu > header:before,
-.ds-hide-menu #dsMenu > header:after {position: absolute; top: 5px; right: 0; display: block; width: 0; height: 0; content: ' '; border-color: transparent transparent transparent #ccc; border-style: solid; border-width: 15px 0 15px 7px;}
-.ds-hide-menu #dsMenu > header:after {right: 1px; border-color: transparent transparent transparent #eee; border-width: 15px 0 15px 7px;}
+.ds-hide-menu #dsMenu > header:after {position: absolute; top: 1px; right: 0; display: block; width: 0; height: 0; content: ' '; border-color: transparent transparent transparent #ccc; border-style: solid; border-width: 19px 0 19px 9px;}
+.ds-hide-menu #dsMenu > header:after {right: 1px; border-color: transparent transparent transparent #eee; border-width: 19px 0 19px 9px;}
 .ds-hide-menu #dsMenu > header > .actions {position: static;}
 .ds-hide-menu #dsMenu > header .ds-menu-toggle {position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: block; width: 100%; z-index: 10;}
 .ds-hide-menu #dsMenu > header .ds-menu-toggle:focus,
@@ -68,9 +78,15 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .ds-hide-menu #dsMenu > header .ds-menu-toggle > .icon {visibility: hidden;}
 .ds-hide-menu #dsMenu > .content {position: static; overflow: visible;}
 .ds-hide-menu #dsMenu > .content .group {border: none}
-.ds-hide-menu #pageList .item {display: none;}
-.ds-hide-menu #pageList .item.active {display: block; position: absolute; top: 10px; right: 10px;}
-.ds-hide-menu #pageList .item.active > a {padding: 0 5px; border-radius: 10px;background: #eff7ff; color: #347aeb;}
+.ds-hide-menu #pageList .heading {display: block; position: absolute; left: 200px; width: 80px; text-align: right; background: none; top: 5px; font-weight: normal;}
+.ds-hide-menu #pageList .heading:after {content: ':'}
+.ds-hide-menu #pageList .item {display: none}
+.ds-hide-menu #pageList .item.active {display: block; position: absolute; top: 0; left: 270px; padding: 9px 0;}
+.ds-hide-menu #pageList .item.active:before,
+.ds-hide-menu #pageList .item.active:after {position: absolute; top: 1px; right: 0; display: block; width: 0; height: 0; content: ' '; border-color: transparent transparent transparent #ccc; border-style: solid; border-width: 19px 0 19px 9px;}
+.ds-hide-menu #pageList .item.active:after {right: 1px; border-color: transparent transparent transparent #eee; border-width: 19px 0 19px 9px;}
+.ds-hide-menu #pageList .item.active > a {width: 100px; text-align: left; padding: 0 5px; line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: transparent; color: #333; font-weight: bold; transition: none;}
+.ds-hide-menu #pageList .item.active > a:hover {background: none;}
 
 #blocks > header {background: #f5f5f5; border: none;}
 #blocks > header > .form-group {width: 100px; margin-top: -6px; margin-left: -5px;}
@@ -116,7 +132,7 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 #preview .col[data-grid='11'], #preview .col-11 {width: 91.66666667%}
 #preview .col[data-grid='12'], #preview .col-12 {width: 100%}
 
-.preview-page {background: #fff; box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12); padding: 20px 30px; border-radius: 2px;}
+.preview-page {background: #fff; box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12); padding: 20px 30px; border-radius: 2px; max-width: 1400px; margin: 0 auto;}
 .layout-item {display: block; min-height: 50px; position: relative; background: #fff;}
 .layout-item:before {content: attr(data-title); position: absolute; display: block; left: 0; top: 0;}
 .layout-placeholder {min-height: 40px; line-height: 40px; border: none; position: relative; cursor: not-allowed;}
