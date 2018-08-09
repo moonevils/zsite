@@ -336,7 +336,7 @@ function renderBlock(block, isGrid)
     blockTitle = blockTitle || '';
 
     var $block = $('<div class="block" data-id="' + block.id + '" data-title="' + blockTitle + '" data-region="' + block.region + '"></div>');
-    var $blockTitle = $('<div class="block-title">' + blockTitle + '</div>');
+    var $blockTitle = $('<div class="block-title" title="' + blockTitle + '">' + blockTitle + '</div>');
     var $blockActions = $('<div class="block-actions clearfix"><a class="btn-edit" data-toggle="tooltip" title="' + v.visualLang.actions.edit + '"><i class="icon icon-pencil"></i></a><a class="btn-delete" data-toggle="tooltip" title="' + v.visualLang.actions.delete + '"><i class="icon icon-remove"></i></a><a class="btn-layout" data-toggle="tooltip" title="' + v.visualLang.changeLayout + '"><i class="icon icon-list-alt"></i></a></div>');
     $block.append($blockTitle).append($blockActions);
     if(isSubRegion)
