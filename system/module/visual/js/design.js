@@ -260,6 +260,67 @@ function getRegionBlocks(region, callback)
 }
 
 /**
+ * Tidy row blocks, make all blocks in same row has same height
+ * 
+ * @param {object} $row 
+ * @access public
+ * @return void
+ */
+function tidyRowBlocks($row)
+{
+    if(!$row)
+    {
+        var $rows = $('#preview').find('.layout-region>.row,.block-container>.row');
+        var rowsLength = $rows.length;
+        for(var i = (rowsLength - 1); i >= 0; i--)
+        {
+            tidyRowBlocks($rows.eq(i));
+        }
+        return;
+    }
+    
+    // Caculate real rows
+    var row = 0, gridValue = 0;
+    var $cols = $row.children('.col');
+    $cols.each(function()
+    {
+        var $col = $(this);
+        var grid = $col.data('grid');
+        if((grid + gridValue) > 12)
+        {
+            row++;
+            gridValue = grid;
+        }
+        else
+        {
+            gridValue+= grid;
+        }
+        $col.attr('data-row', row).data('row', row);
+    });
+
+    // Set blocks height
+    for(var j = 0; j <= row; ++j)
+    {
+        var $rowCols = $cols.filter('[data-row="' + j + '"]');
+
+        // Get max block height
+        var maxHeight = 0;
+        $rowCols.each(function()
+        {
+            var $col = $(this);
+            var $block = $col.children('.block');
+            var blockHeight = $block.outerHeight();
+            maxHeight = Math.max(maxHeight, blockHeight);
+        });
+        $rowCols.each(function()
+        {
+            var $col = $(this);
+            $col.children('.block').css('min-height', maxHeight);
+        });
+    }
+}
+
+/**
  * Render block item
  * 
  * @param {object} block
@@ -355,6 +416,7 @@ function updateRegionBlocks(region, callback)
             $mainRow.find('.layout-col[data-name="main"]').css('width', (100*(12 - side.grid)/12) + '%');
             $mainRow.find('.layout-col[data-name="side"]').css('width', (100*side.grid/12) + '%');
         }
+        tidyRowBlocks();
         if(callback) callback(region);
     });
 }
