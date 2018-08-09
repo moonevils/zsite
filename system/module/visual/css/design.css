@@ -182,6 +182,8 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .layout-region.type-grid > .row > .col > .block.block-container.drop-to:before {opacity: 0;}
 .block-container.drop-to:after {top: 30px; bottom: 10px; height: auto; content: ' '; display: block; position: absolute; left: 10px; width: 8px; background: #FFF0D5; border: 2px dashed #F1A325; transition: transform .4s, opacity .4s; opacity: 0; transform: scaleX(0);}
 .block-container.empty.drop-to:after {opacity: 1; transform: scaleX(1) scaleY(1);}
+.block-sorting .block-actions,
+.block-sorting .block-resize-handler {opacity: 0!important;}
 
 .layout-item .col.block-resizing {transition: width .2s;}
 
