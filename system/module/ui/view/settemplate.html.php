@@ -60,7 +60,7 @@
           <?php echo html::a($url, html::image($webRoot . 'theme/' . $template['code'] . '/' . $code . '/preview.png'), "class='media-wrapper theme-img' data-url=$url");?>
           <div class='text-center theme-name text-ellipsis'>
             <span id='currentTheme'><?php echo $theme;?></span>
-            <span id='custom'><?php if($isCurrent) echo html::a($this->createLink('visual', 'design'), '<i class="icon icon-cog"> </i>' . $lang->ui->custom, "target='_blank'")?></span>
+            <span id='custom'><?php if($isCurrent) echo html::a($this->createLink('visual', 'design'), '<i class="icon icon-cog"> </i>' . $lang->ui->custom)?></span>
           </div>
           <div class='actions'>
             <?php if(!in_array("$currentTemplate.$code", $this->config->ui->systemThemes)) commonModel::printLink('ui', 'deleteTheme', "template={$currentTemplate}&theme={$code}", "<span class='icon-trash'></span>", "title='{$lang->delete}' class='deleter btn btn-link btn-mini' data-type='ajax' data-backdrop='true'") ?>
