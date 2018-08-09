@@ -1066,7 +1066,7 @@ class blockModel extends model
         $blocks  = json_decode($layout->blocks);
 
         $newBlock = new stdclass();
-        $newBlock->grid       = 4;
+        $newBlock->grid       = !empty($parent) ? 6 : ($region == 'side' ? 12 : 4);
         $newBlock->borderless = 0;
         $newBlock->titleless  = 0;
 
