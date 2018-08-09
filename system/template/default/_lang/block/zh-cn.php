@@ -265,7 +265,6 @@ $book_read_mainColumns[] = $book_read_mainColumn;
 $lang->block->default->layout->book_read[] = array('type' => 'row', 'name' => 'main', 'children' => $book_read_mainColumns);
 $lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'page_footer');
 
-
 $lang->block->default->layout->forum_index = array();
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_header');
 $lang->block->default->layout->forum_index[] = array('type' => 'grid', 'name' => 'top');
