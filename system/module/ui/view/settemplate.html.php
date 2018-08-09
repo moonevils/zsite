@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('custom', $lang->ui->custom);?>
 <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
 <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
 <div id='mainMenu' class='clearfix'>
@@ -56,9 +57,10 @@
       <div class='col-theme'>
         <div class='card theme <?php if($isCurrent) echo 'current';?>' data-url='<?php echo $url?>'>
           <i class='icon-ok icon'></i>
-          <?php echo html::a($url, html::image($webRoot . 'theme/' . $template['code'] . '/' . $code . '/preview.png'), "class='media-wrapper theme-img'");?>
+          <?php echo html::a($url, html::image($webRoot . 'theme/' . $template['code'] . '/' . $code . '/preview.png'), "class='media-wrapper theme-img' data-url=$url");?>
           <div class='text-center theme-name text-ellipsis'>
-            <?php echo $theme;?>
+            <span id='currentTheme'><?php echo $theme;?></span>
+            <span id='custom'><?php if($isCurrent) echo html::a($this->createLink('visual', 'design'), '<i class="icon icon-cog"> </i>' . $lang->ui->custom, "target='_blank'")?></span>
           </div>
           <div class='actions'>
             <?php if(!in_array("$currentTemplate.$code", $this->config->ui->systemThemes)) commonModel::printLink('ui', 'deleteTheme', "template={$currentTemplate}&theme={$code}", "<span class='icon-trash'></span>", "title='{$lang->delete}' class='deleter btn btn-link btn-mini' data-type='ajax' data-backdrop='true'") ?>
