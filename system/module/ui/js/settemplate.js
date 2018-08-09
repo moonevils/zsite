@@ -60,7 +60,7 @@ $(document).ready(function()
                 $this.addClass('current');
 
                 url = createLink('visual', 'design');
-                $this.find('.theme-name').append("<span id='custom'><a target='_blank' href=" + url + ">" + '<i class="icon icon-cog"> </i>' + v.custom + "</a></span>");
+                $this.find('.theme-name').append("<span id='custom'><a href=" + url + ">" + '<i class="icon icon-cog"> </i>' + v.custom + "</a></span>");
 
                 var $menu = $('#menu');
                 $menu.find('.menu-theme-img').attr('src', $this.find('.theme-img img').attr('src'));
