@@ -269,7 +269,6 @@ $lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'nam
 $lang->block->default->layout->forum_index = array();
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_header');
 $lang->block->default->layout->forum_index[] = array('type' => 'grid', 'name' => 'top');
-$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'main', 'title' => '板块列表');
 $lang->block->default->layout->forum_index[] = array('type' => 'grid', 'name' => 'bottom');
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
@@ -277,7 +276,6 @@ $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'n
 $lang->block->default->layout->forum_board = array();
 $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_header');
 $lang->block->default->layout->forum_board[] = array('type' => 'grid', 'name' => 'top');
-$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
 $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'main', 'title' => '帖子列表');
 $lang->block->default->layout->forum_board[] = array('type' => 'grid', 'name' => 'bottom');
 $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_footer');
@@ -285,7 +283,6 @@ $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'n
 $lang->block->default->layout->thread_view = array();
 $lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'page_header');
 $lang->block->default->layout->thread_view[] = array('type' => 'grid', 'name' => 'top');
-$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
 $lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'article', 'title' => '帖子详情');
 $lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'form', 'title' => '回帖');
 $lang->block->default->layout->thread_view[] = array('type' => 'grid', 'name' => 'bottom');

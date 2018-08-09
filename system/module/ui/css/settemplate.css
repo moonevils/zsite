@@ -73,3 +73,6 @@
 .input-control-icon-left, .input-control-icon-right{width: 30px; text-align: center;}
 .input-control-icon-left, .input-control-icon-right, .input-control-label-left, .input-control-label-right{position: absolute; top: 1px; z-index: 5; height: 30px; line-height: 30px; opacity: .5;}
 input:placeholder-shown + .search-clear-btn, input:placeholder-shown + .search-icon + .search-clear-btn{opacity: 0!important;}
+.theme #currentTheme{float:left}
+.theme #custom{float:right}
+.theme #custom a{text-decoration:none; color:#000}

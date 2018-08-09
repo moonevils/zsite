@@ -41,7 +41,7 @@ $(document).ready(function()
         loadStoreContent($(this).attr('href'));
     });
 
-    $('.theme').on('click', '.theme-img, .theme-name', function(e)
+    $('.theme').on('click', '.theme-img', function(e)
     {
         e.preventDefault();
         var $this = $(this).closest('.theme');
@@ -54,9 +54,13 @@ $(document).ready(function()
                 new $.zui.Messager(response.message, {type: 'success', placement: 'top', time: 2000}).show();
 
                 var $themes = $this.closest('.themes');
+                $themes.attr('data-theme', $this.data('theme')).find('.theme-name').find('#custom').remove();
                 $themes.attr('data-theme', $this.data('theme'))
                        .find('.theme.current').removeClass('current');
                 $this.addClass('current');
+
+                url = createLink('visual', 'design');
+                $this.find('.theme-name').append("<span id='custom'><a href=" + url + ">" + '<i class="icon icon-cog"> </i>' + v.custom + "</a></span>");
 
                 var $menu = $('#menu');
                 $menu.find('.menu-theme-img').attr('src', $this.find('.theme-img img').attr('src'));
