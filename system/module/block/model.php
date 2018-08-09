@@ -289,6 +289,40 @@ class blockModel extends model
     }
 
     /**
+     * Get view file  of a block.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return string
+     */
+    public function getViewFile($block)
+    {
+        $device   = $this->app->clientDevice;
+        $template = $this->config->template->{$device}->name;
+        $theme    = $this->config->template->{$device}->theme;
+        $tplPath  = $this->app->getTplRoot() . $template . DS . 'block' . DS;
+
+        /* First try block/ext/sitecode/block/ */
+        $extBlockRoot = $tplPath . "/ext/_{$this->app->siteCode}/";
+        $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
+
+        /* Then try block/ext//block/ */
+        if(!file_exists($blockFile))
+        {
+            $extBlockRoot = $tplPath . 'ext' . DS;
+            $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
+
+            /* No ext file, use the block/block/. */
+            if(!file_exists($blockFile))
+            {
+                $blockFile = $this->loadModel('ui')->getEffectViewFile($template, 'block', strtolower($block->type));
+                if(!file_exists($blockFile)) return false;
+            }
+        }
+        return $blockFile;
+    }
+
+    /**
      * Create block type dropdown menu.
      *
      * @param  string    $template
@@ -730,21 +764,18 @@ class blockModel extends model
      */
     public function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
-        $this->view = new stdclass();
+        $device    = $this->app->clientDevice;
+        $template  = $this->config->template->{$device}->name;
+        $theme     = $this->config->template->{$device}->theme;
+        $blockFile = $this->getViewFile($block);
+
         $withGrid = ($withGrid and isset($block->grid));
         $isRegion = isset($block->type) && $block->type === 'region';
+        $this->view = new stdclass();
+
         if($isRegion)
         {
             $this->parseRegion($block, $withGrid, $containerHeader, $containerFooter);
-        }
-        elseif($block->type == 'group')
-        {
-            if($withGrid)
-            {
-                if($block->grid == 0) echo "<div class='col col-row'><div class='row' data-id='{$block->id}'>";
-                if($block->grid != 0) echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row $randomClass' data-id='{$block->id}'>";
-            }
-            $this->parseGroup($block, $withGrid, $containerHeader, $containerFooter);
         }
         else
         {
@@ -763,32 +794,11 @@ class blockModel extends model
             }
 
             if($probability && $this->app->clientDevice == 'mobile') echo "<div class='random-block' $probability>";
-
-            $device   = $this->app->clientDevice;
-            $template = $this->config->template->{$device}->name;
-            $theme    = $this->config->template->{$device}->theme;
-            $tplPath  = $this->app->getTplRoot() . $template . DS . 'block' . DS;
-
-            /* First try block/ext/sitecode/block/ */
-            $extBlockRoot = $tplPath . "/ext/_{$this->app->siteCode}/";
-            $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
-
-            /* Then try block/ext//block/ */
-            if(!file_exists($blockFile))
+            $blockFile = $this->getViewFile($block);
+            if(!$blockFile or !file_exists($blockFile))
             {
-                $extBlockRoot = $tplPath . 'ext' . DS;
-                $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
-
-                /* No ext file, use the block/block/. */
-                if(!file_exists($blockFile))
-                {
-                    $blockFile = $this->loadModel('ui')->getEffectViewFile($template, 'block', strtolower($block->type));
-                    if(!file_exists($blockFile))
-                    {
-                        if($withGrid) echo '</div>';
-                        return '';
-                    }
-                }
+                if($withGrid) echo '</div>';
+                return '';
             }
 
             foreach($this->config->block->categoryList as $category => $typeList)
@@ -811,56 +821,63 @@ class blockModel extends model
                 $this->view->icon      = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
             }
 
-            $style  = '<style>';
-            if(isset($content->custom->$theme))
-            {
-                $style .= '#block' . $block->id . '{';
-                $style .= !empty($content->custom->$theme->backgroundColor) ? 'background-color:' . $content->custom->$theme->backgroundColor . ' !important;' : '';
-                $style .= !empty($content->custom->$theme->textColor) ? 'color:' . $content->custom->$theme->textColor . ' !important;;' : '';
-                $style .= !empty($content->custom->$theme->borderColor) ? 'border-color:' . $content->custom->$theme->borderColor . ' !important;' : '';
-                $style .= '}';
-                $style .= '#block' . $block->id . ' .panel-heading{';
-                $style .= !empty($content->custom->$theme->titleColor) ? 'color:' .$content->custom->$theme->titleColor . ';' : '';
-                $style .= !empty($content->custom->$theme->titleBackground) ? 'background:' .$content->custom->$theme->titleBackground . ' !important;;' : '';
-                $style .= '}';
-                $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' .panel-icon {color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
-                $style .= !empty($content->custom->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->custom->$theme->linkColor . ' !important;}' : '';
-                $style .= isset($content->custom->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->custom->$theme->paddingTop . 'px !important;}' : '';
-                $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
-                $style .= isset($content->custom->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->custom->$theme->paddingBottom . 'px !important;}' : '';
-                $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
-                if(!empty($content->custom->$theme->css))
-                {
-                    $customStyle     = str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->css, ENT_QUOTES));
-                    $customStyleBack = $customStyle;
-                    $lessc           = $this->app->loadClass('lessc');
-                    $lessc->setFormatter("compressed");
-                    
-                    $customStyle = htmlspecialchars_decode($customStyle, ENT_QUOTES);
-                    try
-                    {
-                        $customStyle = $lessc->compile($customStyle);
-                    }
-                    catch(Exception $e)
-                    {
-                        $lessc->errors[] = $e->getMessage();
-                    }
-                    if(isset($lessc->errors) and !empty($lessc->errors)) $customStyle = $customStyleBack;
 
-                    $style .= $customStyle;
-                }
-            }
-            $style .= '</style>';
-            $script = !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->js, ENT_QUOTES)) . "</script>" : '';
             echo $containerHeader;
             if(file_exists($blockFile)) echo $this->draw($blockFile, $block);
-            echo $style;
-            echo $script;
+            echo $this->parseCSS($block, $theme);
+            echo !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->js, ENT_QUOTES)) . "</script>" : '';
             echo $containerFooter;
 
+            if($block->type == 'group') $this->parseGroup($block);
+            if($block->type == 'group') echo "</div>";
             if($withGrid) echo "</div>";
             if($probability && $this->app->clientDevice == 'mobile') echo "</div>";
         }
+    }
+
+    public function parseCSS($block, $theme)
+    {
+        $style  = '<style>';
+        if(isset($content->custom->$theme))
+        {
+            $style .= '#block' . $block->id . '{';
+            $style .= !empty($content->custom->$theme->backgroundColor) ? 'background-color:' . $content->custom->$theme->backgroundColor . ' !important;' : '';
+            $style .= !empty($content->custom->$theme->textColor) ? 'color:' . $content->custom->$theme->textColor . ' !important;;' : '';
+            $style .= !empty($content->custom->$theme->borderColor) ? 'border-color:' . $content->custom->$theme->borderColor . ' !important;' : '';
+            $style .= '}';
+            $style .= '#block' . $block->id . ' .panel-heading{';
+            $style .= !empty($content->custom->$theme->titleColor) ? 'color:' .$content->custom->$theme->titleColor . ';' : '';
+            $style .= !empty($content->custom->$theme->titleBackground) ? 'background:' .$content->custom->$theme->titleBackground . ' !important;;' : '';
+            $style .= '}';
+            $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' .panel-icon {color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
+            $style .= !empty($content->custom->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->custom->$theme->linkColor . ' !important;}' : '';
+            $style .= isset($content->custom->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->custom->$theme->paddingTop . 'px !important;}' : '';
+            $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
+            $style .= isset($content->custom->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->custom->$theme->paddingBottom . 'px !important;}' : '';
+            $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
+            if(!empty($content->custom->$theme->css))
+            {
+                $customStyle     = str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->css, ENT_QUOTES));
+                $customStyleBack = $customStyle;
+                $lessc           = $this->app->loadClass('lessc');
+                $lessc->setFormatter("compressed");
+
+                $customStyle = htmlspecialchars_decode($customStyle, ENT_QUOTES);
+                try
+                {
+                    $customStyle = $lessc->compile($customStyle);
+                }
+                catch(Exception $e)
+                {
+                    $lessc->errors[] = $e->getMessage();
+                }
+                if(isset($lessc->errors) and !empty($lessc->errors)) $customStyle = $customStyleBack;
+
+                $style .= $customStyle;
+            }
+        }
+        $style .= '</style>';
+
     }
 
     /**
@@ -898,29 +915,36 @@ class blockModel extends model
      * Parse group block
      * 
      * @param  object    $block 
-     * @param  bool      $withGrid 
-     * @param  string    $containerHeader 
-     * @param  string    $containerFooter 
      * @access public
      * @return string
      */
-    public function parseGroup($block, $withGrid, $containerHeader, $containerFooter)
+    public function parseGroup($block)
     {
         $block->content = json_decode($block->content);
         $block->children = $block->content->children;
-        $children = array();
+
+        $viewFile = $this->getViewFile($block);
         if(!empty($block->children))
         {
+            echo "<ul class='nav nav-tabs block-tabs-nav'>";
             foreach($block->children as $child)
             {
                 $child = $this->dao->findByID($child)->from(TABLE_BLOCK)->fetch();
-                $child->titleless = true;
+                echo "<li>" . html::a('javascript:;', $child->title) . "</li>";
+            }
+            echo "</ul>";
+
+            foreach($block->children as $child)
+            {
+                $child = $this->dao->findByID($child)->from(TABLE_BLOCK)->fetch();
+                $child->titleless  = true;
                 $child->borderless = true;
-                $children[] = $this->parseBlockContent($child, false, '', '');
+                $blocks[] = $this->parseBlockContent($child, false, "<div class='block-tabs'>", '</div>');
+                $titles[] = $child->title;
             }
         }
-
-        if($withGrid) echo '</div></div>';
+        $block->titles = $titles;
+        $block->blocks = $blocks;
         return $block;
     }
 
