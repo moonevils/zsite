@@ -78,7 +78,7 @@ class visualModel extends model
             echo '<div class="actions">' . html::a('javascript:;', '<i class="icon icon-columns"></i> ' . $this->lang->visual->design->setColumns, "class='btn-setPageColumns' data-page='$page'") . '</div>';
         }
         
-        if($item['children'])
+        if(!empty($item['children']))
         {
             foreach ($item['children'] as $child)
             {
