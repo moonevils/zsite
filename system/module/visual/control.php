@@ -192,7 +192,7 @@ class visual extends control
 
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 
-        $this->view->title           = $this->lang->visual->common;
+        $this->view->title           = $this->lang->visual->customTheme;
         $this->view->blockData       = $blockData;
 
         $this->view->templateData    = $this->ui->getTemplates()[$template];
