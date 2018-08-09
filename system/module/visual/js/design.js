@@ -772,10 +772,12 @@ function initDnDAddBlock()
         // target: '.layout-region .block,.layout-region',
         target: '.layout-region .block-container,.layout-region',
         selector: '.block-item',
-        start: function() {
+        start: function()
+        {
             $preview.addClass('drag-and-drop');
         },
-        drop: function(event) {
+        drop: function(event)
+        {
             var $element = event.element;
             if(event.isIn) addBlock($element.data(), event.target);
         },
@@ -799,12 +801,17 @@ function initDnDAddBlock()
             var $container = $ele.closest('.row,.layout-region');
             return $container.children('.block,.col');
         },
+        start: function()
+        {
+            $preview.addClass('block-sorting');
+        },
         finish: function(e)
         {
             if(e.changed)
             {
                 sortBlocks(e.element);
             }
+            $preview.removeClass('block-sorting');
         }
     })
 }
