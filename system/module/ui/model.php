@@ -322,6 +322,8 @@ class uiModel extends model
      */
     public function createCustomerCss($template, $theme, $params = null)
     {
+        dao::$changedTables[] = TABLE_CONFIG;
+
         $lessc   = $this->app->loadClass('lessc');
         $cssFile = $this->getCustomCssFile($template, $theme);
 
