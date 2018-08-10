@@ -75,6 +75,7 @@ $lang->block->logoPosition      = 'Logo';
 $lang->block->navPosition       = '導航';
 $lang->block->searchbarPosition = '搜索框';
 $lang->block->sloganPosition    = '站點口號';
+$lang->block->childBlock        = '子區塊';
 
 $lang->block->header = new stdclass();
 
