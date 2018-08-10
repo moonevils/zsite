@@ -10,8 +10,6 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $config->block->editor->blockform =  array('id' => 'content', 'tools' => 'full', 'filterMode' => false); ?>
-<?php include '../../common/view/ueditor.html.php';?>
 <?php $template = $this->config->template->{$this->app->clientDevice}->name;?>
 <?php $blocks = $this->block->getPairs($template);?>
 <tr>
