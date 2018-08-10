@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 $config->block->allowedTags = $config->allowedTags->admin . '<script><style><object><param><embed><form><button><textarea>';
 
