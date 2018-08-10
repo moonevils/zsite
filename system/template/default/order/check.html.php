@@ -51,6 +51,7 @@
     <div class='panel-footer text-right'>
       {!printf($lang->order->totalToPay, $currencySymbol . $order->amount)}
       {!html::submitButton($lang->order->settlement, 'btn-order-submit')}
+      {!html::a('javascript:;', ' ', "target='_blank' class='locate2pay hidden'")}
     </div>
   </form>
   <form class='hide' id='payForm' method='post' action="{!inlink('redirect')}" target='_blank'>
