@@ -11,6 +11,7 @@
  */
 $lang->ui->common = "界面";
 
+$lang->ui->component       = '常用組件';
 $lang->ui->clientDesktop   = '桌面';
 $lang->ui->clientMobile    = '移動';
 $lang->ui->logo            = 'Logo';
@@ -21,6 +22,7 @@ $lang->ui->manageTemplate  = '模板管理';
 $lang->ui->manageTheme     = '主題管理';
 $lang->ui->installTemplate = '導入模板';
 $lang->ui->exportTheme     = '導出主題';
+$lang->ui->addTheme        = '添加主題';
 $lang->ui->setTheme        = '主題設置';
 $lang->ui->setDevice       = '設備設置';
 $lang->ui->setFavicon      = "Favicon設置";
@@ -48,12 +50,14 @@ $lang->ui->editTemplate    = "編輯模板";
 $lang->ui->installedThemes = "已安裝主題";
 $lang->ui->enableTheme     = "使用此主題";
 $lang->ui->industry        = "行業";
+$lang->ui->byIndustry      = "行業篩選";
 $lang->ui->offcial         = "官方";
 $lang->ui->score           = "積分";
 $lang->ui->reset           = "重置為預設";
-$lang->ui->themePackage    = "主題包";
+$lang->ui->themePackage    = "待導入主題包";
 $lang->ui->refreshPage     = "刷新頁面";
 $lang->ui->mobileBottomNav = '移動版底部導航';
+$lang->ui->searchTheme     = '搜索已安裝主題';
 
 $lang->ui->uploadLogo             = "上傳Logo";
 $lang->ui->uploadFavicon          = "上傳小表徵圖";
@@ -76,6 +80,8 @@ $lang->ui->packagePathTip         = '請將主題包的zip檔案上傳至 %s 目
 $lang->ui->gdHelp                 = '查看安裝方式';
 $lang->ui->gdTip                  = '蟬知圖片水印功能需要安裝php-gd擴展才能使用。';
 $lang->ui->effectError            = '導入特效失敗，請檢查您的特效是否正常，查看地址：http://www.chanzhi.org/effect';
+$lang->ui->errorGetEffect         = '獲取特效失敗，可能是網絡方面的原因，請檢查您的特效是否正常，查看地址：http://www.chanzhi.org/effect';
+$lang->ui->deleteFaviconFail      = '刪除 %s 失敗。';
 $lang->ui->lengthOverflow         = '內容長度 %s 位元組。請保持長度不超過65535位元組，否則會導致部分內容丟失。';
 
 $lang->ui->deviceList = new stdclass();
@@ -144,6 +150,8 @@ $lang->ui->blocks2Create = "新創建區塊";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置';
+$lang->ui->theme->upgrade                              = '升級';
+$lang->ui->theme->installed                            = '已安裝';
 $lang->ui->theme->online                               = '在綫主題';
 $lang->ui->theme->default                              = '預設';
 $lang->ui->theme->all                                  = '全部';
@@ -442,6 +450,7 @@ unset($this->lang->ui->files->mobile->forum['reply/reply']);
 
 if(!isset($lang->effect)) $lang->effect = new stdclass();
 
+$lang->effect->common      = '特效';
 $lang->effect->category    = '分類';
 $lang->effect->name        = '名稱';
 $lang->effect->account     = '設計師';
@@ -462,6 +471,7 @@ $lang->effect->newBlock      = '導入新區塊';
 $lang->effect->obtan         = '獲取特效';
 $lang->effect->imported      = '已導入';
 $lang->effect->importSuccess = '導入成功';
+$lang->effect->noEffect      = "<code>%s</code> 不可寫！請檢查該目錄權限，否則無法導入。";
 $lang->effect->noWritable    = "<code>%s</code> 不可寫！請檢查該目錄權限，否則無法導入。";
 $lang->effect->bindCommunity = '蟬知特效只對蟬知社區認證用戶開放，請先註冊並綁定蟬知社區賬號後，獲取蟬知特效。';
 $lang->effect->noRsults      = "你還沒有任何特效，請登錄蟬知特效平台，<a href='http://www.chanzhi.org/effect.html' target='_blank'>獲取特效</a>。";

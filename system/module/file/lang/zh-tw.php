@@ -27,7 +27,7 @@ $lang->file->label         = '標題：';
 $lang->file->lblInfo       = '<i>(類型：%s, 大小：%s, 添加于：%s，下載%s次)</i>';
 $lang->file->limit         = "(<span class='text-danger'>%sM以內</span>)";
 $lang->file->source        = '素材';
-$lang->file->sourceList    = '素材列表';
+$lang->file->sourceList    = '素材庫';
 $lang->file->uploadSource  = '上傳素材';
 $lang->file->sourceURI     = '地址';
 $lang->file->deleteSource  = '刪除素材';
@@ -35,6 +35,7 @@ $lang->file->editSource    = '編輯素材';
 $lang->file->selectImage   = '選擇素材';
 $lang->file->fileList      = '檔案列表';
 $lang->file->invalidFile   = '無效檔案';
+$lang->file->batchSelect   = '批量選擇';
 
 $lang->file->setWatermark      = '設置圖片水印';
 $lang->file->watermark         = '圖片水印';
