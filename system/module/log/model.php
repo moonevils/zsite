@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of log module of ZenTaoCMS.

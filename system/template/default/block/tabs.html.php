@@ -12,7 +12,7 @@
 /php*}
 <div id="block{$block->id}" class='panel panel-block {$blockClass}'>
   <div class='panel-heading'>
-    <strong>{!echo $icon . $block->title}</strong>
+    <strong>{$block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
       <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}

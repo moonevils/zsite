@@ -212,7 +212,7 @@ class upgradeModel extends model
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
             case '7_1_stable':
                 $this->execSQL($this->getUpgradeFile('7.1.stable'));
-                $this->removePlan();
+                $this->revertLayoutPlans();
                     
         }
 

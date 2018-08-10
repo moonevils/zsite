@@ -10,7 +10,7 @@ js::set('page', $page);
 js::set('visualLang', $lang->visual->js);
 ?>
 
-<div id='dsBox' class='dock'>
+<div id='dsBox' class='dock fade'>
   <div id='dsMenu' class='box dock-left'>
     <header class='dock-top text-right'>
       <div class='dock-left scroll-none'><?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon icon-remove-circle"></i>', "class='btn btn-link' title='{$lang->ui->setTheme}' id='backBtn'");?></div>

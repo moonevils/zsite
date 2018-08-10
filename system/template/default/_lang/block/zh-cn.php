@@ -14,7 +14,7 @@ $lang->block->default->typeList['html']      = '自定义区块';
 $lang->block->default->typeList['htmlcode']  = 'html源代码';
 $lang->block->default->typeList['phpcode']   = 'php源代码';
 $lang->block->default->typeList['baidustat'] = '百度统计';
-$lang->block->default->typeList['group']     = '组合区块';
+$lang->block->default->typeList['tabs']      = '组合区块';
 
 $lang->block->default->typeList['latestArticle']   = '最新文章';
 $lang->block->default->typeList['hotArticle']      = '热门文章';
@@ -229,7 +229,7 @@ $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'top
 $company_index_mainColumn['children'][] = array('type' => 'placeholder', 'name' => 'article');
 $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'bottom');
 $company_index_sideColumn = array('type' => 'col', 'name' => 'side', 'colWidth' => '25%', 'children' => array());
-$company_index_sideColumn['children'][] = array('type' => 'grid', 'name' => 'side');
+$company_index_sideColumn['children'][] = array('type' => 'container', 'name' => 'side');
 $company_index_mainColumns[] = $company_index_mainColumn;
 $company_index_mainColumns[] = $company_index_sideColumn;
 $lang->block->default->layout->company_index[] = array('type' => 'row', 'name' => 'main', 'children' => $company_index_mainColumns);

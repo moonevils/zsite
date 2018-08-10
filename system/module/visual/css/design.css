@@ -202,6 +202,7 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .block-container.empty.drop-to:after {opacity: 1; transform: scaleX(1) scaleY(1);}
 .block-sorting .block-actions,
 .block-sorting .block-resize-handler {opacity: 0!important;}
+#preview  .drag-shadow > .block-container {background: #fff;}
 
 .layout-item .col.block-resizing {transition: width .2s;}
 
