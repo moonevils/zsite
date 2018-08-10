@@ -17,11 +17,11 @@ class visualModel extends model
      * Print layout item
      *
      * @access public
-     * @param object $item
-     * @param string $region
-     * @param string $page
-     * @param object $regionBlocks
-     * @return void
+     * @param  object $item
+     * @param  string $region
+     * @param  string $page
+     * @param  object $regionBlocks
+     * @return string
      */
     public function printLayoutItem($item, $region, $page)
     {
@@ -41,7 +41,7 @@ class visualModel extends model
         $class    = '';
         $isRegion = false;
         $inGrid   = false;
-        switch ($item['type'])
+        switch($item['type'])
         {
             case 'placeholder':
                 $class .= 'layout-placeholder';
@@ -60,8 +60,8 @@ class visualModel extends model
         }
 
         echo "<div class='layout-item type-{$item['type']} {$class}' data-title='{$item['title']}' data-name='{$item['name']}' {$attrs}>";
-        $footer = '';
 
+        $footer = '';
         if($item['type'] === 'grid')
         {
             echo '<div class="row">';
