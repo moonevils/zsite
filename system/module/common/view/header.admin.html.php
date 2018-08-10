@@ -132,3 +132,8 @@ $(document).ready(function()
 });
 </script>  
 <?php endif;?>
+<?php if($this->session->currentGroup == 'design'):?>
+<style>
+body{background-color: #efefef;}
+</style>
+<?php endif;?>
