@@ -143,3 +143,61 @@ $lang->block->mobile->regions->message_index['bottom']       = 'Bottom';
 
 $lang->block->mobile->regions->page_view['top']          = 'Top';
 $lang->block->mobile->regions->page_view['bottom']       = 'Bottom';
+
+if(!isset($lang->block->mobile->layout)) $lang->block->mobile->layout = new stdclass();
+
+$lang->block->mobile->layout->all = array();
+$lang->block->mobile->layout->all[] = array('type' => 'invisible', 'name' => 'header', 'title' => 'Head (invisible)');
+$lang->block->mobile->layout->all[] = array('type' => 'container', 'name' => 'top');
+$lang->block->mobile->layout->all[] = array('type' => 'container', 'name' => 'banner');
+$lang->block->mobile->layout->all[] = array('type' => 'placeholder', 'name' => 'main');
+$lang->block->mobile->layout->all[] = array('type' => 'container', 'name' => 'bottom');
+$lang->block->mobile->layout->all[] = array('type' => 'invisible', 'name' => 'footer', 'title' => 'Footer (invisible)');
+
+$lang->block->mobile->layout->index_index = array();
+$lang->block->mobile->layout->index_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->mobile->layout->index_index[] = array('type' => 'container', 'name' => 'top');
+$lang->block->mobile->layout->index_index[] = array('type' => 'container', 'name' => 'middle');
+$lang->block->mobile->layout->index_index[] = array('type' => 'container', 'name' => 'bottom');
+$lang->block->mobile->layout->index_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->mobile->layout->company_index = array();
+$lang->block->mobile->layout->company_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->mobile->layout->company_index[] = array('type' => 'container', 'name' => 'top');
+$lang->block->mobile->layout->company_index[] = array('type' => 'placeholder', 'name' => 'article');
+$lang->block->mobile->layout->company_index[] = array('type' => 'container', 'name' => 'bottom');
+$lang->block->mobile->layout->company_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->mobile->layout->article_browse = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->article_view = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->product_browse = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->product_view = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->blog_index = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->blog_view = $lang->block->mobile->layout->company_index;
+
+$lang->block->mobile->layout->forum_index = array();
+$lang->block->mobile->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->mobile->layout->forum_index[] = array('type' => 'container', 'name' => 'top');
+$lang->block->mobile->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'mian', 'title' => 'Boards List');
+$lang->block->mobile->layout->forum_index[] = array('type' => 'container', 'name' => 'bottom');
+$lang->block->mobile->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->mobile->layout->forum_board = array();
+$lang->block->mobile->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->mobile->layout->forum_board[] = array('type' => 'container', 'name' => 'top');
+$lang->block->mobile->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'mian', 'title' => 'Thread List');
+$lang->block->mobile->layout->forum_board[] = array('type' => 'container', 'name' => 'bottom');
+$lang->block->mobile->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->mobile->layout->thread_view = array();
+$lang->block->mobile->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'page_header');
+$lang->block->mobile->layout->thread_view[] = array('type' => 'container', 'name' => 'top');
+$lang->block->mobile->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'mian', 'title' => 'Thread View');
+$lang->block->mobile->layout->thread_view[] = array('type' => 'container', 'name' => 'bottom');
+$lang->block->mobile->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'page_footer');
+
+$lang->block->mobile->layout->book_browse = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->book_read = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->message_index = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->page_view = $lang->block->mobile->layout->company_index;
+$lang->block->mobile->layout->page_index = $lang->block->mobile->layout->company_index;
