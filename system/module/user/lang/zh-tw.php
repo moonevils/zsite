@@ -219,12 +219,22 @@ $lang->user->oauth->google= new stdclass();
 $lang->user->oauth->google->clientID     = 'API ID';
 $lang->user->oauth->google->clientSecret = 'API Secret';
 
+$lang->user->oauth->wechat = new stdclass();
+$lang->user->oauth->wechat->clientID     = 'AppID';
+$lang->user->oauth->wechat->clientSecret = 'AppSecret';
+$lang->user->oauth->wechat->autoLogin    = '自動登錄';
+
+$lang->user->oauth->wechat->autoLoginList = array();
+$lang->user->oauth->wechat->autoLoginList['on']  = '打開';
+$lang->user->oauth->wechat->autoLoginList['off'] = '關閉';
+
 $lang->user->oauth->providers['sina']   = '新浪微博';
 $lang->user->oauth->providers['qq']     = 'QQ';
 $lang->user->oauth->providers['github'] = 'Github';
 #$lang->user->oauth->providers['twitter'] = 'Twitter';
 $lang->user->oauth->providers['facebook'] = 'Facebook';
 #$lang->user->oauth->providers['google'] = 'Google';
+$lang->user->oauth->providers['wechat']   = '微信';
 
 $lang->user->oauth->typeList['sina']   = '新浪微博會員';
 $lang->user->oauth->typeList['qq']     = 'QQ會員';

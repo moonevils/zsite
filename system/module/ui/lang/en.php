@@ -11,6 +11,7 @@
  */
 $lang->ui->common = "UI";
 
+$lang->ui->component       = 'Component';
 $lang->ui->clientDesktop   = 'Desktop';
 $lang->ui->clientMobile    = 'Mobile';
 $lang->ui->logo            = 'Logo';
@@ -49,6 +50,7 @@ $lang->ui->editTemplate    = "Edit current template";
 $lang->ui->installedThemes = "Installed Themes";
 $lang->ui->enableTheme     = "Apply this theme";
 $lang->ui->industry        = "Industry";
+$lang->ui->byIndustry      = "By industry";
 $lang->ui->offcial         = "Official";
 $lang->ui->score           = "score";
 $lang->ui->reset           = "Reset";
@@ -79,6 +81,7 @@ $lang->ui->gdHelp                 = 'How to install';
 $lang->ui->gdTip                  = 'Image watermark features need PHP-gd extension.';
 $lang->ui->effectError            = 'Import effects fails, check your effects are normal. View the address: http://www.chanzhi.org/effect';
 $lang->ui->errorGetEffect         = 'Get effect failed. Please check your network and your effect. View the address: http://www.chanzhi.org/effect';
+$lang->ui->deleteFaviconFail      = 'Delete %s fail.';
 $lang->ui->lengthOverflow         = 'The content length is %s bytes. Keep it be less than 65535 bytes, or part of content can not be saved.';
 
 $lang->ui->deviceList = new stdclass();
@@ -147,6 +150,8 @@ $lang->ui->blocks2Create = "New";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = 'Set as Default';
+$lang->ui->theme->upgrade                              = 'Upgrade';
+$lang->ui->theme->installed                            = 'Installed';
 $lang->ui->theme->online                               = 'Online Themes';
 $lang->ui->theme->default                              = 'Default';
 $lang->ui->theme->all                                  = 'All';
@@ -445,6 +450,7 @@ unset($this->lang->ui->files->mobile->forum['reply/reply']);
 
 if(!isset($lang->effect)) $lang->effect = new stdclass();
 
+$lang->effect->common      = 'Effect';
 $lang->effect->category    = 'Category';
 $lang->effect->name        = 'Name';
 $lang->effect->account     = 'Designer';
@@ -465,6 +471,7 @@ $lang->effect->newBlock      = 'Import Widget';
 $lang->effect->obtan         = 'Get effect';
 $lang->effect->imported      = 'Imported';
 $lang->effect->importSuccess = 'Imported';
+$lang->effect->noEffect      = '<code>%s</code> Can not write! Please check the directory permissions, or can not be imported';
 $lang->effect->noWritable    = '<code>%s</code> Can not write! Please check the directory permissions, or can not be imported';
 $lang->effect->bindCommunity = 'Please bind the account of Zsite before get effect';
 $lang->effect->noRsults      = "You have no effect, please login the platform of Zsite <a href='http://www.zsite.net/effect.html' target='_blank'>get effect</a>。";
