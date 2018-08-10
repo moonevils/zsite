@@ -14,7 +14,7 @@ $lang->block->default->typeList['html']      = '自定义区块';
 $lang->block->default->typeList['htmlcode']  = 'html源代码';
 $lang->block->default->typeList['phpcode']   = 'php源代码';
 $lang->block->default->typeList['baidustat'] = '百度统计';
-$lang->block->default->typeList['group']     = '组合区块';
+$lang->block->default->typeList['tabs']      = '组合区块';
 
 $lang->block->default->typeList['latestArticle']   = '最新文章';
 $lang->block->default->typeList['hotArticle']      = '热门文章';
