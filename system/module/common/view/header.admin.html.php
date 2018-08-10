@@ -26,7 +26,7 @@
       
       list($module, $method, $params) = explode('|', $groupSetting['link']);
       $groupClass = $menuGroup == $this->session->currentGroup ? 'active' : '';
-      if($menuGroup == 'design') $groupClass = 'design';
+      if($menuGroup == 'design' and $this->session->currentGroup == 'design') $groupClass = 'design';
       $groupUrl = helper::createLink($module, $method, $params);
       echo "<li class='{$groupClass}' data-id='{$menuGroup}'>";
       echo "<a data-toggle='tooltip' href='{$groupUrl}'>{$groupSetting['title']}</a>";
