@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of visual module of chanzhiEPS.
@@ -33,7 +34,11 @@ class visualModel extends model
             }
             else if($item['type'] !== 'col')
             {
-                $item['title'] = $region[$item['name']];
+                $item['title'] = zget($region, $item['name'], '');
+            }
+            else
+            {
+                $item['title'] = '';
             }
         }
 
