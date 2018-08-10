@@ -10,10 +10,11 @@
  * @link        http://www.chanzhi.org
  */
 if(!isset($lang->block->default)) $lang->block->default = new stdclass();
-$lang->block->default->typeList['html']     = 'Html widget';
-$lang->block->default->typeList['htmlcode'] = 'Html code';
-$lang->block->default->typeList['phpcode']  = 'php code';
-$lang->block->default->typeList['baidustat']= 'Baidu stat';
+$lang->block->default->typeList['html']      = 'Html widget';
+$lang->block->default->typeList['htmlcode']  = 'Html code';
+$lang->block->default->typeList['phpcode']   = 'php code';
+$lang->block->default->typeList['baidustat'] = 'Baidu stat';
+$lang->block->default->typeList['tabs']      = 'Block tabs';
 
 $lang->block->default->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->default->typeList['hotArticle']    = 'Hot Articles';

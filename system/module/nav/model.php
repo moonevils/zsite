@@ -114,8 +114,8 @@ class navModel extends model
      */
     public function createEntry($grade = 1, $nav = null, $type = 'desktop_top', $hover = false)
     {
-        $isNullNav = empty($nav);
-        if($isNullNav)
+        $navEmpty = empty($nav);
+        if($navEmpty)
         {
             $nav = new stdclass();
             $nav->type  = 'system';
@@ -226,8 +226,8 @@ class navModel extends model
         $options .= "<a href='javascript:;'><i class='icon-move sort-handle sort-handle-" . $grade . "'></i></a>";
 
         $editOption = html::a('javascript:;', "<i class='icon icon-edit'> </i>", "class='edit' title='{$this->lang->edit}'");
-        $hideClass  = $isNullNav ? '' : 'hide';
-        if(!$isNullNav) $entry .= "<span class='showBox'>{$nav->title}<span class='options'>{$editOption}{$options}</span></span>";
+        $hideClass  = $navEmpty ? '' : 'hide';
+        if(!$navEmpty) $entry .= "<span class='showBox'>{$nav->title}<span class='options'>{$editOption}{$options}</span></span>";
         $entry .= "<span class='editBox $hideClass'>$navInput<span class='options'>$options</span></span>";
         return $entry;
     }

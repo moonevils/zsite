@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The browse view file of block module of chanzhiEPS.

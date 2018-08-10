@@ -977,7 +977,6 @@ class user extends control
         $wechatpay = new wechatPay($this->loadModel('order')->getWechatpayConfig());
         $userInfo  = $wechatpay->getUserInfo($code);
 
-        a($userInfo);exit;
         if($this->user->addOAuthAccount($this->app->user->account, 'wechat', $userInfo))
         {
             $this->locate($redirectURL);

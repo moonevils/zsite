@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->slide->common     = '幻燈片';
-$lang->slide->group      = '幻燈片分組';
+$lang->slide->common     = '輪播圖';
+$lang->slide->group      = '輪播圖分組';
 $lang->slide->title      = '標題';
 $lang->slide->groupName  = '分組名稱';
 $lang->slide->titleColor = '標題顏色';
@@ -40,10 +40,10 @@ $lang->slide->buttonColor = '顏色';
 $lang->slide->sourceImage = '素材庫圖片';
 
 $lang->slide->sort        = '排序';
-$lang->slide->admin       = '幻燈片設置';
-$lang->slide->browse      = '瀏覽幻燈片';
-$lang->slide->create      = '添加幻燈片';
-$lang->slide->edit        = '編輯幻燈片';
+$lang->slide->admin       = '輪播圖設置';
+$lang->slide->browse      = '瀏覽輪播圖';
+$lang->slide->create      = '添加輪播圖';
+$lang->slide->edit        = '編輯輪播圖';
 $lang->slide->createGroup = '添加分組';
 $lang->slide->editGroup   = '編輯分組';
 $lang->slide->removeGroup = '刪除分組';
