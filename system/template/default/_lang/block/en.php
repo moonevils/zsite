@@ -10,10 +10,11 @@
  * @link        http://www.chanzhi.org
  */
 if(!isset($lang->block->default)) $lang->block->default = new stdclass();
-$lang->block->default->typeList['html']     = 'Html widget';
-$lang->block->default->typeList['htmlcode'] = 'Html code';
-$lang->block->default->typeList['phpcode']  = 'php code';
-$lang->block->default->typeList['baidustat']= 'Baidu stat';
+$lang->block->default->typeList['html']      = 'Html widget';
+$lang->block->default->typeList['htmlcode']  = 'Html code';
+$lang->block->default->typeList['phpcode']   = 'php code';
+$lang->block->default->typeList['baidustat'] = 'Baidu stat';
+$lang->block->default->typeList['tabs']      = 'Block tabs';
 
 $lang->block->default->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->default->typeList['hotArticle']    = 'Hot Articles';
@@ -223,7 +224,7 @@ $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'top
 $company_index_mainColumn['children'][] = array('type' => 'placeholder', 'name' => 'article');
 $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'bottom');
 $company_index_sideColumn = array('type' => 'col', 'name' => 'side', 'colWidth' => '25%', 'children' => array());
-$company_index_sideColumn['children'][] = array('type' => 'grid', 'name' => 'side');
+$company_index_sideColumn['children'][] = array('type' => 'container', 'name' => 'side');
 $company_index_mainColumns[] = $company_index_mainColumn;
 $company_index_mainColumns[] = $company_index_sideColumn;
 $lang->block->default->layout->company_index[] = array('type' => 'row', 'name' => 'main', 'children' => $company_index_mainColumns);

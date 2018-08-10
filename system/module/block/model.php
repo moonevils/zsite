@@ -794,6 +794,7 @@ class blockModel extends model
             }
 
             if($probability && $this->app->clientDevice == 'mobile') echo "<div class='random-block' $probability>";
+
             $blockFile = $this->getViewFile($block);
             if(!$blockFile or !file_exists($blockFile))
             {
@@ -817,10 +818,9 @@ class blockModel extends model
             if(isset($this->config->block->defaultIcons[$block->type]))
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
-                $iconClass = isset($content->icon) ? $content->icon : $defaultIcon;
-                $this->view->icon      = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
+                $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
+                $this->view->icon = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
             }
-
 
             echo $containerHeader;
             if(file_exists($blockFile)) echo $this->draw($blockFile, $block);
@@ -828,13 +828,21 @@ class blockModel extends model
             echo !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->js, ENT_QUOTES)) . "</script>" : '';
             echo $containerFooter;
 
-            if($block->type == 'group') $this->parseGroup($block);
-            if($block->type == 'group') echo "</div>";
+            if($block->type == 'tabs') $this->parseGroup($block);
+            if($block->type == 'tabs') echo "</div>";
             if($withGrid) echo "</div>";
             if($probability && $this->app->clientDevice == 'mobile') echo "</div>";
         }
     }
 
+    /**
+     * Parse css code of a block. 
+     * 
+     * @param  object    $block 
+     * @param  string    $theme 
+     * @access public
+     * @return string
+     */
     public function parseCSS($block, $theme)
     {
         $style  = '<style>';
