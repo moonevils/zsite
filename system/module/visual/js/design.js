@@ -387,6 +387,7 @@ function updateRegionBlocks(region, callback)
     var $preview = $('#preview').addClass('loading');
     getRegionBlocks(region, function(regionBlocks, side)
     {
+        $preview.find('[data-toggle="tooltip"]').tooltip('hide');
         $.each(regionBlocks, function(regionName, blocks)
         {
             var $region = $preview.find('.layout-region[data-name="' + regionName + '"]');
