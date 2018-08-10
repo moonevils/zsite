@@ -46,10 +46,10 @@ js::set('visualLang', $lang->visual->js);
     <div class='content dock' id='preview'>
       <div class='preview-page'>
         <?php
-          foreach ($layout as $layoutItem)
-          {
-              $this->visual->printLayoutItem($layoutItem, $region, $page);
-          }
+        foreach ($layout as $layoutItem)
+        {
+            $this->visual->printLayoutItem($layoutItem, $region, $page);
+        }
         ?>
       </div>
       <div class='load-indicator'><i class='icon icon-spin icon-spinner icon-2x text-primary'></i></div>
