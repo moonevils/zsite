@@ -794,6 +794,7 @@ class blockModel extends model
             }
 
             if($probability && $this->app->clientDevice == 'mobile') echo "<div class='random-block' $probability>";
+
             $blockFile = $this->getViewFile($block);
             if(!$blockFile or !file_exists($blockFile))
             {
@@ -817,10 +818,9 @@ class blockModel extends model
             if(isset($this->config->block->defaultIcons[$block->type]))
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
-                $iconClass = isset($content->icon) ? $content->icon : $defaultIcon;
-                $this->view->icon      = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
+                $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
+                $this->view->icon = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
             }
-
 
             echo $containerHeader;
             if(file_exists($blockFile)) echo $this->draw($blockFile, $block);
@@ -835,6 +835,14 @@ class blockModel extends model
         }
     }
 
+    /**
+     * Parse css code of a block. 
+     * 
+     * @param  object    $block 
+     * @param  string    $theme 
+     * @access public
+     * @return string
+     */
     public function parseCSS($block, $theme)
     {
         $style  = '<style>';
