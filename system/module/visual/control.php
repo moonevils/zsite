@@ -177,7 +177,6 @@ class visual extends control
      */
     public function design($page = 'all')
     {
-
         $clientDevice = $this->app->clientDevice;
         $template     = $this->config->template->{$clientDevice}->name;
         $theme        = $this->config->template->{$clientDevice}->theme;
