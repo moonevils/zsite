@@ -229,7 +229,7 @@ $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'top
 $company_index_mainColumn['children'][] = array('type' => 'placeholder', 'name' => 'article');
 $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'bottom');
 $company_index_sideColumn = array('type' => 'col', 'name' => 'side', 'colWidth' => '25%', 'children' => array());
-$company_index_sideColumn['children'][] = array('type' => 'grid', 'name' => 'side');
+$company_index_sideColumn['children'][] = array('type' => 'container', 'name' => 'side');
 $company_index_mainColumns[] = $company_index_mainColumn;
 $company_index_mainColumns[] = $company_index_sideColumn;
 $lang->block->default->layout->company_index[] = array('type' => 'row', 'name' => 'main', 'children' => $company_index_mainColumns);
@@ -264,7 +264,6 @@ $book_read_mainColumns[] = $book_read_sideColumn;
 $book_read_mainColumns[] = $book_read_mainColumn;
 $lang->block->default->layout->book_read[] = array('type' => 'row', 'name' => 'main', 'children' => $book_read_mainColumns);
 $lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'page_footer');
-
 
 $lang->block->default->layout->forum_index = array();
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_header');

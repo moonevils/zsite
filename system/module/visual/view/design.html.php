@@ -10,7 +10,7 @@ js::set('page', $page);
 js::set('visualLang', $lang->visual->js);
 ?>
 
-<div id='dsBox' class='dock'>
+<div id='dsBox' class='dock fade'>
   <div id='dsMenu' class='box dock-left'>
     <header class='dock-top text-right'>
       <div class='dock-left scroll-none'><?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon icon-remove-circle"></i>', "class='btn btn-link' title='{$lang->ui->setTheme}' id='backBtn'");?></div>
@@ -46,10 +46,10 @@ js::set('visualLang', $lang->visual->js);
     <div class='content dock' id='preview'>
       <div class='preview-page'>
         <?php
-          foreach ($layout as $layoutItem)
-          {
-              $this->visual->printLayoutItem($layoutItem, $region, $page);
-          }
+        foreach ($layout as $layoutItem)
+        {
+            $this->visual->printLayoutItem($layoutItem, $region, $page);
+        }
         ?>
       </div>
       <div class='load-indicator'><i class='icon icon-spin icon-spinner icon-2x text-primary'></i></div>

@@ -12,8 +12,5 @@ a.btn-file.active{font-weight:bold;}
 #mainMenu #navMenu .dropdown{display:inline-block; margin-left:10px;}
 #mainMenu #navMenu #fileBox .dropdown-menu{max-height:600px; overflow:auto;}
 #mainMenu #navMenu a{color:#010101;text-decoration: none;}
-#mainMenu #deviceMenu {margin-top:-25px;}
-#mainMenu #deviceMenu a{color:#999;text-decoration: none;}
-#mainMenu #deviceMenu a.active{font-weight: bold; color:#010101; font-size:15px;}
 #mainPanel{margin:0 20px;}
 #mainPanel .panel-heading, #mainPanel .panel-footer{background:#fff;}

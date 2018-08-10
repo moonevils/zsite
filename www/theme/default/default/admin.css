@@ -754,3 +754,8 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #historyItem {padding-left: 25px;}
 #historyItem > li {line-height: 23px;}
 #historyItem .changes {border: 1px solid #e5e5e5; background: #f7f7f7; font-size: 12px; padding: 2px 5px; margin-top: 5px;}
+
+#mainMenu #deviceMenu {margin-top:-25px;}
+#mainMenu #deviceMenu a{color:#999;text-decoration: none; padding: 0 10px;}
+#mainMenu #deviceMenu a:first-child{border-right: 1px solid #ddd;}
+#mainMenu #deviceMenu a.active{font-weight: bold; color:#010101; font-size:15px;}

@@ -31,7 +31,6 @@
   <div id='deviceMenu' class='btn-toolbar pull-right'>
     <?php
     echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
-    echo "|";
     echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
     ?>
   </div>

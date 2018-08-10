@@ -387,6 +387,7 @@ function updateRegionBlocks(region, callback)
     var $preview = $('#preview').addClass('loading');
     getRegionBlocks(region, function(regionBlocks, side)
     {
+        $preview.find('[data-toggle="tooltip"]').tooltip('hide');
         $.each(regionBlocks, function(regionName, blocks)
         {
             var $region = $preview.find('.layout-region[data-name="' + regionName + '"]');
@@ -667,6 +668,13 @@ function handleBlockEdit()
  */
 function initDSMenu()
 {
+    // Make active page list item visible
+    var activeItemElement = $('#pageList .item.active')[0];
+    if(activeItemElement && activeItemElement.scrollIntoView)
+    {
+        activeItemElement.scrollIntoView({behavior: 'instant', block: 'center', inline: "nearest"});
+    }
+
     var $dsBox = $('#dsBox');
     var isDsMenuCollapsed = !!$.zui.store.get('ds-menu-collapsed');
     if(isDsMenuCollapsed) toggleDSMenu(false);
@@ -828,4 +836,10 @@ $(function()
 
     // Init tooltip
     $('[data-toggle="tooltip"]').tooltip({container: '#dsBox'});
+
+    // Show UI delay
+    setTimeout(function()
+    {
+        $('#dsBox').addClass('in');
+    }, 100);
 });
