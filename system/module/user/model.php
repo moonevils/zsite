@@ -1105,7 +1105,6 @@ class userModel extends model
      */
     public function addOAuthAccount($account, $provider, $userInfo)
     {
-        a($userInfo);exit;
         $openUser = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq($provider)->andWhere('openID')->eq($userInfo->openid)->fetch();
 
         if($account != 'guest')

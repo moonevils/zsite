@@ -183,12 +183,12 @@ class order extends control
 
             if($payment == 'COD')
             {
-                $this->send(array('result' => 'success', 'locate' => inlink('browse')));
+                $this->send(array('result' => 'success', 'locate' => inlink('browse'), 'payment' => 'COD'));
             }
             else
             {
                 $order->payment = $payment;
-                $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order)));
+                $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
             }
         }
     }
