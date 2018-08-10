@@ -113,8 +113,8 @@
               <?php echo html::a('javascript:;', "<i class='icon icon-edit'></i>", "class='edit-group-btn'");?>
               <span class='group-name'><?php echo $group->name;?></span>&nbsp;&nbsp;
               <span class='pull-right'>
-              <?php echo html::a($this->createLink('slide', 'browse', "groupID=$group->id"), $lang->edit, "class='btn btn-sm'");?>
-              <?php echo html::a($this->createLink('slide', 'removeGroup', "groupID=$group->id"), $lang->delete, "class='deleter btn btn-sm'");?>
+              <?php echo html::a($this->createLink('slide', 'browse', "groupID=$group->id"), $lang->edit, "class='btn-sm'");?>
+              <?php echo html::a($this->createLink('slide', 'removeGroup', "groupID=$group->id"), $lang->delete, "class='deleter btn-sm'");?>
               </span>
             </div>
           </div>
@@ -143,7 +143,7 @@
 $colorPlates = '';
 foreach (explode('|', $lang->colorPlates) as $value)
 {
-    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+    $colorPlates .= "<div class='color color-tile' data='#{$value}'><i class='icon-ok'></i></div>";
 }
 $gdInstalled = extension_loaded('gd') ? 1 : 0;
 js::set('gdInstalled', $gdInstalled);
