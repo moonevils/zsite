@@ -828,8 +828,8 @@ class blockModel extends model
             echo !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", htmlspecialchars_decode($content->custom->$theme->js, ENT_QUOTES)) . "</script>" : '';
             echo $containerFooter;
 
-            if($block->type == 'group') $this->parseGroup($block);
-            if($block->type == 'group') echo "</div>";
+            if($block->type == 'tabs') $this->parseGroup($block);
+            if($block->type == 'tabs') echo "</div>";
             if($withGrid) echo "</div>";
             if($probability && $this->app->clientDevice == 'mobile') echo "</div>";
         }
