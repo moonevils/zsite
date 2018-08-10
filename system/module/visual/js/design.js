@@ -668,12 +668,16 @@ function handleBlockEdit()
  */
 function initDSMenu()
 {
-    // Make active page list item visible
-    var activeItemElement = $('#pageList .item.active')[0];
-    if(activeItemElement && activeItemElement.scrollIntoView)
+    var lastMenuScrollTop = $.zui.store.get('lastDSMenuScrollTop');
+    var $dsMenuContent = $('#dsMenu > .content');
+    if(lastMenuScrollTop)
     {
-        activeItemElement.scrollIntoView({behavior: 'instant', block: 'center', inline: "nearest"});
+        $dsMenuContent.scrollTop(lastMenuScrollTop);
     }
+    $dsMenuContent.on('scroll', function()
+    {
+        $.zui.store.set('lastDSMenuScrollTop', $dsMenuContent.scrollTop());
+    });
 
     var $dsBox = $('#dsBox');
     var isDsMenuCollapsed = !!$.zui.store.get('ds-menu-collapsed');
