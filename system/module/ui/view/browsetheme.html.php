@@ -5,7 +5,7 @@
   <div class='col-md-3'>
     <div class='panel theme-panel'>
       <div class='panel-body'>
-        <div class='theme-title'>
+      <div class='theme-title' title="<?php echo $theme->name . '.zip'?>">
           <?php echo $theme->name . ".zip";?>
         </div>
         <div class='text-muted'>
