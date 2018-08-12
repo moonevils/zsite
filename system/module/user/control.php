@@ -856,8 +856,14 @@ class user extends control
         $token  = $client->getToken($this->get->code);    // Step1: get token by the code.
         $openID = $client->getOpenID($token);             // Step2: get open id by the token.
 
-        $openUser = $client->getUserInfo($token, $openID);                    // Get open user info.
-        if(isset($openUser->unionid)) $openID = $openUser->unionid; // wechat need to use unionid instead of openID.
+        $openUser = $client->getUserInfo($token, $openID);          // Get open user info.
+        if($provider == 'wechat' and isset($openUser->unionid))
+        {
+            /* Wechat need to use unionid instead of openID. */
+            $oldUser = $this->user->getByOpenID($openUser->openid, 'wechat');
+            $openID = $openUser->unionid;
+        }
+
         $this->session->set('openUser', $openUser);
         $this->session->set('openID', $openID);                     // Save the openID to session.
 
@@ -868,6 +874,7 @@ class user extends control
         {
             if($this->user->login($user->account, md5($user->password . $this->session->random)))
             {
+                if($provider == 'wechat' and !empty($oldUser)) $this->user->mergeWechatUser($oldUser, $user);
                 if($referer) $this->locate(urldecode(helper::safe64Decode($referer)));
 
                 /* No referer, go to the user control panel. */
@@ -977,10 +984,12 @@ class user extends control
         $this->app->loadClass('wechatpay', true);
         $wechatpay = new wechatPay($this->loadModel('order')->getWechatpayConfig());
         $userInfo  = $wechatpay->getUserInfo($code);
+        $oldUser   = $this->user->getByOpenID($user->info->openid, 'wechat');
         $userInfo->openid = $userInfo->unionid;
 
         if($this->user->addOAuthAccount($this->app->user->account, 'wechat', $userInfo))
         {
+            if(!empty($oldUser)) $this->user->mergeWechatUser($oldUser, $this->app->user);
             $this->locate($redirectURL);
         }
     }
