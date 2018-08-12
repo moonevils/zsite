@@ -770,7 +770,7 @@ class blockModel extends model
         $blockFile = $this->getViewFile($block);
 
         $withGrid = ($withGrid and isset($block->grid));
-        $isRegion = isset($block->type) && $block->type === 'region';
+        $isRegion = ($block->type != 'tabs') && !empty($block->children);
         $this->view = new stdclass();
 
         if($isRegion)
