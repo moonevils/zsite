@@ -1717,4 +1717,21 @@ class userModel extends model
     
         return true;
     }
+
+    /**
+     * Merge wechatUser. 
+     * 
+     * @param  object    $oldUser 
+     * @param  object    $user 
+     * @access public
+     * @return bool
+     */
+    public function mergeWechatUser($oldUser, $user)
+    {
+        $this->updateRelated($oldSser->account, $user->account);
+        $this->dao->delete()->from(TABLE_USER)->where('account')->eq($oldUser->account)->exec();
+        $this->dao->delete()->from(TABLE_OAUTH)->where('account')->eq($oldUser->account)->exec();
+        return true;
+        
+    }
 }
