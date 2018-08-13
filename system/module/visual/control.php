@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of visual module of chanzhiEPS.
@@ -190,11 +191,11 @@ class visual extends control
         $region    = $blockData->regions->$page;
 
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+        $templates = $this->ui->getTemplates();
 
         $this->view->title           = $this->lang->visual->customTheme;
         $this->view->blockData       = $blockData;
-
-        $this->view->templateData    = $this->ui->getTemplates()[$template];
+        $this->view->templateData    = $templates[$template];
         $this->view->template        = $template;
         $this->view->theme           = $theme;
         $this->view->page            = $page;
