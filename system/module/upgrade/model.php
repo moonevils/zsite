@@ -210,8 +210,8 @@ class upgradeModel extends model
             case '7_0':
             case '7_0_1':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
-            case '7_1_stable':
-                $this->execSQL($this->getUpgradeFile('7.1.stable'));
+            case '7_1':
+                $this->execSQL($this->getUpgradeFile('7.1'));
                 $this->revertLayoutPlans();
                     
         }
@@ -286,9 +286,9 @@ class upgradeModel extends model
             case '6_6_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('6.6.1'));
             case '6_7'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.7'));
             case '6_7_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('6.7.1'));
-            case '7_0':
-            case '7_0_1':
-            case '7_1_stable' : $confirmContent .= file_get_contents($this->getUpgradeFile('7.1.stable'));
+            case '7_0'      :
+            case '7_0_1'    :
+            case '7_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
