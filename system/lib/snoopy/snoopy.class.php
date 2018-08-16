@@ -96,21 +96,22 @@ class Snoopy
 	
 	/**** Private variables ****/	
 	
-	var	$_maxlinelen	=	4096;				// max line length (headers)
+	var	$_maxlinelen	   =	4096;				// max line length (headers)
 	
-	var $_httpmethod	=	"GET";				// default http request method
-	var $_httpversion	=	"HTTP/1.0";			// default http request version
-	var $_submit_method	=	"POST";				// default submit method
-	var $_submit_type	=	"application/x-www-form-urlencoded";	// default submit type
-	var $_mime_boundary	=   "";					// MIME boundary for multipart/form-data submit type
-	var $_redirectaddr	=	false;				// will be set if page fetched is a redirect
-	var $_redirectdepth	=	0;					// increments on an http redirect
-	var $_frameurls		= 	array();			// frame src urls
-	var $_framedepth	=	0;					// increments on frame depth
+	var $_httpmethod	   =	"GET";				// default http request method
+	var $_httpversion	   =	"HTTP/1.0";			// default http request version
+	var $_submit_method	   =	"POST";				// default submit method
+	var $_submit_type	   =	"application/x-www-form-urlencoded";	// default submit type
+	var $_mime_boundary	   =   "";					// MIME boundary for multipart/form-data submit type
+	var $_redirectaddr	   =	false;				// will be set if page fetched is a redirect
+	var $_redirectdepth	   =	0;					// increments on an http redirect
+	var $_frameurls		   = 	array();			// frame src urls
+	var $_framedepth	   =	0;					// increments on frame depth
 	
-	var $_isproxy		=	false;				// set if using a proxy server
-	var $_fp_timeout	=	30;					// timeout for socket connection
-    var $httpHeaders    = array();
+	var $_isproxy		   =	false;				// set if using a proxy server
+	var $_fp_timeout	   =	30;					// timeout for socket connection
+    var $httpHeaders       = array();
+    var $cloudfrontHeaders = array();
 
     protected static $uaHttpHeaders = array(
         // The default User-Agent string.
@@ -197,6 +198,16 @@ class Snoopy
         }
 
         return $response;
+    }
+
+    /**
+     * Retrieves the cloudfront headers.
+     *
+     * @return array
+     */
+    public function getCfHeaders()
+    {
+        return $this->cloudfrontHeaders;
     }
 
     /**
