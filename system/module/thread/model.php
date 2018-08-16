@@ -651,6 +651,7 @@ EOT;
         $moderators = implode(',', $moderators);
 
         $users = ($board->readonly) ? $moderators : $moderators . ',' . str_replace(' ', '', $users) . ',';
+        $users = ',' . trim($users, ',') . ',';
         if(strpos($users, $user) !== false) return true;
 
         return false;
