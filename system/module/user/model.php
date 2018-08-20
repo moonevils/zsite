@@ -1131,7 +1131,7 @@ class userModel extends model
 
                 $user = new stdclass();
                 $user->account  = $oauth->account;
-                $user->password = $this->createPassword(md5(mt_rand()), $openID);
+                $user->password = $this->createPassword(md5(mt_rand()), $userInfo->openid);
                 $user->nickname = $userInfo->nickname;
                 $user->realname = $userInfo->nickname;
                 $user->address  = $userInfo->country . ' ' . $userInfo->province . ' ' . $userInfo->city;

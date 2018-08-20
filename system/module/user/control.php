@@ -984,7 +984,7 @@ class user extends control
         $this->app->loadClass('wechatpay', true);
         $wechatpay = new wechatPay($this->loadModel('order')->getWechatpayConfig());
         $userInfo  = $wechatpay->getUserInfo($code);
-        $oldUser   = $this->user->getByOpenID($user->info->openid, 'wechat');
+        $oldUser   = $this->user->getByOpenID($userInfo->openid, 'wechat');
         $userInfo->openid = $userInfo->unionid;
 
         if($this->user->addOAuthAccount($this->app->user->account, 'wechat', $userInfo))
