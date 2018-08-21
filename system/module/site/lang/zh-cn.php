@@ -102,6 +102,7 @@ $lang->site->setStat       = "流量统计设置";
 $lang->site->setHomeMenu   = "首页菜单";
 $lang->site->openModule    = "开启模块";
 $lang->site->setAgreement  = "设置注册协议";
+$lang->site->setWxApplet   = "微信小程序设置";
 $lang->site->isVertified   = "已认证";
 
 $lang->site->typeList = new stdclass();
@@ -221,6 +222,10 @@ $lang->site->moduleAvailable->mall['product'] = '产品';
 $lang->site->moduleAvailable->score = array();
 $lang->site->moduleAvailable->score['search'] = '搜索';
 $lang->site->moduleAvailable->score['stat']   = '统计';
+
+$lang->site->wxApplet = new stdclass();
+$lang->site->wxApplet->appID       = 'AppID';
+$lang->site->wxApplet->projectName = '项目名称';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签。';
 $lang->site->fileAllowedRole  = '多个后缀名之间请用 "," 隔开';
