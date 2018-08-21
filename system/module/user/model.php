@@ -1728,7 +1728,7 @@ class userModel extends model
      */
     public function mergeWechatUser($oldUser, $user)
     {
-        $this->updateRelated($oldSser->account, $user->account);
+        $this->updateRelated($oldUser->account, $user->account);
         $this->dao->delete()->from(TABLE_USER)->where('account')->eq($oldUser->account)->exec();
         $this->dao->delete()->from(TABLE_OAUTH)->where('account')->eq($oldUser->account)->exec();
         return true;
