@@ -853,22 +853,23 @@ class user extends control
         $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
 
         /* Begin OAuth authing. */
-        $token  = $client->getToken($this->get->code);    // Step1: get token by the code.
-        $openID = $client->getOpenID($token);             // Step2: get open id by the token.
+        $token    = $client->getToken($this->get->code);    // Step1: get token by the code.
+        $openID   = $client->getOpenID($token);             // Step2: get open id by the token.
+        $openUser = $client->getUserInfo($token, $openID);  // Get open user info.
+        $unionID  = isset($openUser->unionid) ? $openUser->unionid : '';
 
-        $openUser = $client->getUserInfo($token, $openID);          // Get open user info.
         if($provider == 'wechat' and isset($openUser->unionid))
         {
             /* Wechat need to use unionid instead of openID. */
             $oldUser = $this->user->getByOpenID($openUser->openid, 'wechat');
-            $openID = $openUser->unionid;
         }
 
         $this->session->set('openUser', $openUser);
-        $this->session->set('openID', $openID);                     // Save the openID to session.
+        $this->session->set('openID', $openID);      // Save the openID to session.
+        $this->session->set('unionID', $unionID);    // Save the unionID to session.
 
         /* Step3: Try to get user by the open id, if got, login him. */
-        $user = $this->user->getUserByOpenID($provider, $openID);
+        $user = $this->user->getUserByOpenID($provider, $openID, $unionID);
         $this->session->set('random', md5(time() . mt_rand()));
         if($user)
         {
@@ -910,7 +911,7 @@ class user extends control
 
         if($_POST)
         {
-            $this->user->registerOauthAccount($this->session->oauthProvider, $this->session->openID);
+            $this->user->registerOauthAccount($this->session->oauthProvider, $this->session->openID, $this->session->unionID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
@@ -948,7 +949,7 @@ class user extends control
             if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
             if($this->user->login($this->post->account, md5($this->user->createPassword($this->post->password, $this->post->account) . $this->session->random)))
             {
-                if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->openID))
+                if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->openID, $this->session->unionID))
                 {
                     $default = $this->config->user->default;
                     if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> urldecode(helper::safe64Decode($this->post->referer))));
@@ -985,7 +986,6 @@ class user extends control
         $wechatpay = new wechatPay($this->loadModel('order')->getWechatpayConfig());
         $userInfo  = $wechatpay->getUserInfo($code);
         $oldUser   = $this->user->getByOpenID($userInfo->openid, 'wechat');
-        $userInfo->openid = $userInfo->unionid;
 
         if($this->user->addOAuthAccount($this->app->user->account, 'wechat', $userInfo))
         {
@@ -1003,16 +1003,16 @@ class user extends control
      * @access public
      * @return void
      */
-    public function oauthUnbind($account, $provider, $openID)
+    public function oauthUnbind($account, $provider, $openID, $unionID = '')
     {
-        $result = $this->user->unbindOAuthAccount($account, $provider, $openID);
+        $result = $this->user->unbindOAuthAccount($account, $provider, $openID, $unionID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblUnbindFailed));
 
         $account = uniqid("{$provider}_");
         $this->post->set('account', $account);                           // Create a uniq account.
         if($provider == 'qq')   $this->post->set('realname', ($this->session->openUser->nickname ? htmlspecialchars($this->session->openUser->nickname) : $account));  // Set the realname.
         if($provider == 'sina') $this->post->set('realname', ($this->session->openUser->name ? htmlspecialchars($this->session->openUser->name) : $account));  // Set the realname.
-        $result = $this->user->registerOauthAccount($provider, $openID);
+        $result = $this->user->registerOauthAccount($provider, $openID, $unionID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblUnbindFailed));
         $this->send(array('result' => 'success', 'message' => $this->lang->user->oauth->lblUnbindSuccess, 'locate' => helper::createLink('user', 'profile')));
     }
@@ -1027,13 +1027,14 @@ class user extends control
     {
         $provider = $this->session->oauthProvider;
         $openID   = $this->session->openID;
+        $unionID  = $this->session->unionID;
 
         $this->post->set('account', uniqid("{$provider}_"));        // Create a uniq account.
         if($provider == 'qq')   $this->post->set('realname', htmlspecialchars($this->session->openUser->nickname));  // Set the realname.
         if($provider == 'sina') $this->post->set('realname', htmlspecialchars($this->session->openUser->name));  // Set the realname.
-        $this->user->registerOauthAccount($provider, $openID);
+        $this->user->registerOauthAccount($provider, $openID, $unionID);
 
-        $user = $this->user->getUserByOpenID($provider, $openID);
+        $user = $this->user->getUserByOpenID($provider, $openID, $unionID);
         $this->session->set('random', md5(time() . mt_rand()));
         if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
         {

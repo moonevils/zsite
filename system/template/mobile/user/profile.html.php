@@ -67,7 +67,7 @@
           {if(isset($user->provider) and isset($user->openID))}
             {if(strpos($user->account, "{{$user->provider}}_") === false)}
               <div class='col-6'>
-                {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'")}
+                {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID&unionID=$user->unionID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'")}
               </div>
             {else}
               <br>
