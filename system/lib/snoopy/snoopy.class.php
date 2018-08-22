@@ -242,7 +242,7 @@ class Snoopy
             if(!empty($this->agent)) return $this->agent = trim($this->agent);
         }
 
-        if(count($this->getCfHeaders()) > 0) return $this->agent = 'Amazon CloudFront';
+        if(count($this->cloudfrontHeaders) > 0) return $this->agent = 'Amazon CloudFront';
         return $this->agent = 'Snoopy v1.2.4';
     }
 
