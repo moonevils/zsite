@@ -240,6 +240,12 @@ $lang->menuGroups->company = 'company';
 $lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
+$lang->designMenus = new stdclass();
+$lang->designMenus->theme     = 'Theme|ui|settemplate|';
+$lang->designMenus->nav       = 'Nav|nav|admin|';
+$lang->designMenus->component = 'CMPT|ui|component|';
+$lang->designMenus->senior    = 'Senior|ui|editTemplate|';
+
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();

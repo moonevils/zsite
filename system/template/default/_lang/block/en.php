@@ -10,10 +10,11 @@
  * @link        http://www.chanzhi.org
  */
 if(!isset($lang->block->default)) $lang->block->default = new stdclass();
-$lang->block->default->typeList['html']     = 'Html widget';
-$lang->block->default->typeList['htmlcode'] = 'Html code';
-$lang->block->default->typeList['phpcode']  = 'php code';
-$lang->block->default->typeList['baidustat']= 'Baidu stat';
+$lang->block->default->typeList['html']      = 'Html widget';
+$lang->block->default->typeList['htmlcode']  = 'Html code';
+$lang->block->default->typeList['phpcode']   = 'php code';
+$lang->block->default->typeList['baidustat'] = 'Baidu stat';
+$lang->block->default->typeList['tabs']      = 'Block tabs';
 
 $lang->block->default->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->default->typeList['hotArticle']    = 'Hot Articles';
@@ -223,7 +224,7 @@ $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'top
 $company_index_mainColumn['children'][] = array('type' => 'placeholder', 'name' => 'article');
 $company_index_mainColumn['children'][] = array('type' => 'grid', 'name' => 'bottom');
 $company_index_sideColumn = array('type' => 'col', 'name' => 'side', 'colWidth' => '25%', 'children' => array());
-$company_index_sideColumn['children'][] = array('type' => 'grid', 'name' => 'side');
+$company_index_sideColumn['children'][] = array('type' => 'container', 'name' => 'side');
 $company_index_mainColumns[] = $company_index_mainColumn;
 $company_index_mainColumns[] = $company_index_sideColumn;
 $lang->block->default->layout->company_index[] = array('type' => 'row', 'name' => 'main', 'children' => $company_index_mainColumns);
@@ -259,11 +260,9 @@ $book_read_mainColumns[] = $book_read_mainColumn;
 $lang->block->default->layout->book_read[] = array('type' => 'row', 'name' => 'main', 'children' => $book_read_mainColumns);
 $lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'page_footer');
 
-
 $lang->block->default->layout->forum_index = array();
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_header');
 $lang->block->default->layout->forum_index[] = array('type' => 'grid', 'name' => 'top');
-$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'main', 'title' => 'Forum Boards');
 $lang->block->default->layout->forum_index[] = array('type' => 'grid', 'name' => 'bottom');
 $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'name' => 'page_footer');
@@ -271,7 +270,6 @@ $lang->block->default->layout->forum_index[] = array('type' => 'placeholder', 'n
 $lang->block->default->layout->forum_board = array();
 $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_header');
 $lang->block->default->layout->forum_board[] = array('type' => 'grid', 'name' => 'top');
-$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
 $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'main', 'title' => 'Board Thread List');
 $lang->block->default->layout->forum_board[] = array('type' => 'grid', 'name' => 'bottom');
 $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'name' => 'page_footer');
@@ -279,7 +277,6 @@ $lang->block->default->layout->forum_board[] = array('type' => 'placeholder', 'n
 $lang->block->default->layout->thread_view = array();
 $lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'page_header');
 $lang->block->default->layout->thread_view[] = array('type' => 'grid', 'name' => 'top');
-$lang->block->default->layout->book_read[] = array('type' => 'placeholder', 'name' => 'breadcrumb');
 $lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'article', 'title' => 'Thread Detail');
 $lang->block->default->layout->thread_view[] = array('type' => 'placeholder', 'name' => 'form', 'title' => 'Replies');
 $lang->block->default->layout->thread_view[] = array('type' => 'grid', 'name' => 'bottom');

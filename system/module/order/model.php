@@ -207,8 +207,7 @@ class orderModel extends model
     public function createPayLink($order, $type = '')
     {
         if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $type);
-        if($order->payment == 'wechatpay') return $this->createWechatpayLink($order, $type);
-        if($order->payment and is_callable(array($this, "create{$order->payment}PayLink"))) return call_user_func(array($this,"create{$order->payment}PayLink"), $order);
+        if($order->payment and is_callable(array($this, "create{$order->payment}Link"))) return call_user_func(array($this,"create{$order->payment}Link"), $order, $type);
         return helper::createLink('order', 'check', "orderID=$order->id");
     }
 

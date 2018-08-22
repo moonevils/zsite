@@ -35,6 +35,7 @@ $lang->file->editSource    = 'Edit';
 $lang->file->selectImage   = 'Select';
 $lang->file->fileList      = 'List';
 $lang->file->invalidFile   = 'Invalid File';
+$lang->file->batchSelect   = 'Batch select';
 
 $lang->file->setWatermark      = 'Set Watermark';
 $lang->file->watermark         = 'watermark';

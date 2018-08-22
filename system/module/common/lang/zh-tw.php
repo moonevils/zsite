@@ -215,7 +215,7 @@ $lang->menu->block    = '區塊|block|admin|';
 $lang->menu->slide    = '幻燈片|slide|admin|';
 $lang->menu->others   = "設置|ui|others|";
 $lang->menu->effect   = "特效|ui|effect|";
-$lang->menu->visual   = "可視化|visual|index|";
+$lang->menu->visual   = "可視化|visual|design|";
 $lang->menu->edit     = "編輯模板|ui|edittemplate|";
 
 $lang->menu->site          = '站點|site|setbasic|';
@@ -239,6 +239,12 @@ $lang->menuGroups->search  = 'site';
 $lang->menuGroups->company = 'company';
 $lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
+
+$lang->designMenus = new stdclass();
+$lang->designMenus->theme     = '主題|ui|settemplate|';
+$lang->designMenus->nav       = '導航|nav|admin|';
+$lang->designMenus->component = '組件|ui|component|';
+$lang->designMenus->senior    = '高級|ui|editTemplate|';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
