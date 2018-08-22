@@ -628,6 +628,8 @@ class site extends control
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
+            if(!isset($this->config->wxApplet->private)) $setting->private = md5(rand());
+
             $result = $this->loadModel('setting')->setItems('system.common.wxApplet', $setting);
 
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwxapplet')));
