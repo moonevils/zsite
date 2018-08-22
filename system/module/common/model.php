@@ -1637,7 +1637,7 @@ class commonModel extends model
      * @access public
      * @return bool
      */
-    public function checkWXApp()
+    public function checkWMP()
     {
         $config = $this->config->wxApplet;
         $token  = '';
