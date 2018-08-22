@@ -1,0 +1,43 @@
+.heading {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+.heading > .title {
+    display: block;
+    padding: 20rpx 20rpx;
+    flex: 1;
+}
+.heading > .nav {
+    align-self: flex-start;
+}
+.heading > .avatar {
+    margin-left: 10rpx;
+}
+.heading > .headline {
+    font-size: 32rpx;
+    padding: 20rpx 20rpx;
+    width: 100%;
+}
+.heading > .headline.indent {
+    margin-left: 80rpx;
+}
+.heading-lg > .nav,
+.heading.affix > .nav {
+    margin: 8rpx;
+}
+.heading-lg > .title,
+.heading.affix > .title {
+    font-size: 32rpx;
+    padding: 26rpx 20rpx;
+}
+.heading.affix {
+    background-color: #ffffff;
+}
+.with-heading-top {
+    padding-top: 96rpx;
+}
+.with-heading-bottom {
+    padding-bottom: 96rpx;
+}

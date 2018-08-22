@@ -1,0 +1,56 @@
+/**
+ * 基础样式
+ */
+
+/* 颜色定义
+
+// 基础颜色
+@color-primary:              #3280fc;
+@color-accent:               #fcae32;
+@color-accent-pale:          #fff8e1;
+@color-secondary:            #145ccd;
+@color-secondary-pale:       #e1f5fe;
+@color-pale:                 #ebf2f9;
+@color-fore:                 #333;
+@color-back:                 #fff;
+@color-focus:                #2196F3;
+@color-highlight:            #c6ff00;
+
+
+// Grays
+
+@color-gray-darker:          #222;
+@color-gray-dark:            #333;
+@color-gray:                 #808080;
+@color-gray-light:           #ddd;
+@color-gray-lighter:         #e5e5e5;
+@color-gray-pale:            #f8f8f8;
+
+
+// 特殊颜色
+
+@color-white:                #fff;
+@color-black:                #000;
+@color-dark:                 ##808080;
+@color-red:                  #ea644a;
+@color-yellow:               #f1a325;
+@color-green:                #38b03f;
+@color-blue:                 #03b8cf;
+@color-purple:               #8666b8;
+@color-brown:                #bd7b46;
+
+@color-green-pale:           #ddf4df;
+@color-yellow-pale:          #fff0d5;
+@color-red-pale:             #ffe5e0;
+@color-blue-pale:            #ddf3f5;
+@color-brown-pale:           #f7ebe1;
+@color-purple-pale:          #f5eeff;
+*/
+
+page {
+  background: #f8f8f8;
+  font-family: -apple-system-font, 'Helvetica Neue', Helvetica, 'Microsoft Yahei', 'PingFang SC', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.4285714286;
+  color: #333;
+}

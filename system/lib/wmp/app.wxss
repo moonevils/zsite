@@ -1,0 +1,2 @@
+/* 载入 MZUI 全局样式表 */
+@import 'lib/mzui/style/mzui.wxss';

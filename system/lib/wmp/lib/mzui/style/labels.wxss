@@ -1,0 +1,36 @@
+.label {
+    display: inline-flex;
+    font-size: 24rpx;
+    height: 40rpx;
+    min-width: 40rpx;
+    padding: 0 10rpx;
+    background-color: rgba(0, 0, 0, 0.10300000000000001);
+    border: 2rpx solid transparent;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    line-height: 1;
+    vertical-align: middle;
+}
+.label > .icon {
+    line-height: 1;
+}
+.label.circle {
+    border-radius: 20rpx;
+    padding: 2rpx 10rpx;
+}
+.label-sm {
+    height: 36rpx;
+    min-width: 36rpx;
+    padding: 0 2.5rpx;
+}
+.label-sm.circle {
+    border-radius: 18rpx;
+    padding: 0 4rpx;
+}
+.label.badge {
+    position: absolute;
+    top: -20rpx;
+    right: -20rpx;
+    z-index: 1;
+}

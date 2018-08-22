@@ -1,0 +1,37 @@
+/* 定位辅助类 */
+
+.dock     {position: absolute!important;}
+.affix    {position: fixed!important;}
+.relative {position: relative!important;}
+.static   {position: static!important;}
+
+.affix,
+.dock,
+.dock-top,
+.dock-bottom,
+.dock-left,
+.dock-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.dock-top    {bottom: auto;}
+.dock-bottom {top: auto;}
+.dock-left   {right: auto}
+.dock-right  {left: auto}
+
+
+/* 容器类 */
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20rpx;
+    box-sizing: border-box;
+}
