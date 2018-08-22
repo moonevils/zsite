@@ -623,12 +623,14 @@ class site extends control
      */
     public function setWxApplet()
     {
+        $this->lang->menuGroups->site = 'interface';
+
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            $result = $this->loadModel('setting')->setItems('system.common.wxApplet', $setting);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => 'reload'));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwxapplet')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
