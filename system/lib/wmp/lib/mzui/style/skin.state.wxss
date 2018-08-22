@@ -1,0 +1,152 @@
+.state,
+.btn,
+.nav > .item,
+.list > .item {
+    position: relative;
+}
+.state:after,
+.btn:after,
+.nav > .item:after,
+.list > .item:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    opacity: 0;
+    box-shadow: 0 0 0 2rpx rgba(0, 0, 0, 0.09);
+    transform: scale(0.6);
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1);
+    pointer-events: none;
+}
+.state.circle:after,
+.btn.circle:after,
+.nav > .item.circle:after,
+.list > .item.circle:after {
+    border-radius: 50%;
+}
+.state.rounded:after,
+.btn.rounded:after,
+.nav > .item.rounded:after,
+.list > .item.rounded:after {
+    border-radius: 6rpx;
+}
+.state:hover:after,
+.btn:hover:after,
+.nav > .item:hover:after,
+.list > .item:hover:after,
+.state.hover:after,
+.btn.hover:after,
+.nav > .item.hover:after,
+.list > .item.hover:after {
+    box-shadow: 0 0 0 2rpx rgba(0, 0, 0, 0.07);
+    background-color: rgba(0, 0, 0, 0.07);
+    opacity: 1;
+    transform: scale(1);
+}
+.state.focus,
+.btn.focus,
+.nav > .item.focus,
+.list > .item.focus,
+.state:focus,
+.btn:focus,
+.nav > .item:focus,
+.list > .item:focus {
+    outline: none;
+}
+.state.focus:after,
+.btn.focus:after,
+.nav > .item.focus:after,
+.list > .item.focus:after,
+.state:focus:after,
+.btn:focus:after,
+.nav > .item:focus:after,
+.list > .item:focus:after {
+    box-shadow: inset 0 0 0 2rpx rgba(33, 150, 243, 0.4), 0 0 0 4rpx rgba(33, 150, 243, 0.4);
+    background-color: rgba(0, 0, 0, 0.07);
+    transform: scale(1);
+    opacity: 1;
+}
+.open > .state:after,
+.open > .btn:after,
+.open > .nav > .item:after,
+.open > .list > .item:after,
+.state.open:after,
+.btn.open:after,
+.nav > .item.open:after,
+.list > .item.open:after,
+.state.active:after,
+.btn.active:after,
+.nav > .item.active:after,
+.list > .item.active:after,
+.state:active:after,
+.btn:active:after,
+.nav > .item:active:after,
+.list > .item:active:after {
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.07);
+    opacity: 1;
+    transform: scale(1);
+}
+.state:active:after,
+.btn:active:after,
+.nav > .item:active:after,
+.list > .item:active:after {
+    box-shadow: inset 0 0 0 2rpx rgba(33, 150, 243, 0.2), 0 0 0 4rpx rgba(33, 150, 243, 0.2);
+    background-color: rgba(0, 0, 0, 0.09);
+    transform: scale(0.95);
+}
+.disabled,
+.disabled > .item,
+[disabled] {
+    cursor: not-allowed !important;
+    pointer-events: none!important;
+    filter: grayscale(100%);
+    opacity: 0.5 !important;
+    box-shadow: none!important;
+}
+.disabled:after,
+.disabled > .item:after,
+[disabled]:after {
+    display: none !important;
+}
+.as-load-indicator,
+.loading {
+    color: transparent!important;
+}
+.as-load-indicator > .ele,
+.loading > .ele {
+    visibility: hidden;
+}
+.as-load-indicator:before,
+.loading:before {
+    animation: spin 2s infinite linear;
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -18rpx;
+    margin-left: -18rpx;
+    border: 6rpx dotted rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.6);
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 50%;
+    transition: opacity 0.2s cubic-bezier(0.175, 0.885, 0.32, 1);
+}
+.as-load-indicator.loading-light:before,
+.loading.loading-light:before {
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.4);
+}
+.as-load-indicator:before {
+    opacity: 0;
+    animation: none;
+}
+.as-load-indicator.loading:before {
+    opacity: 1;
+    animation: spin 2s infinite linear;
+}

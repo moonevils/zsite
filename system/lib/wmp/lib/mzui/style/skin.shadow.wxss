@@ -1,0 +1,25 @@
+.shadow-divider {
+    box-shadow: inset 0 -2rpx 0 rgba(0, 0, 0, 0.1);
+}
+.shadow-divider-outside {
+    box-shadow: 0 2rpx 0 rgba(0, 0, 0, 0.1);
+}
+.shadow-none {
+    box-shadow: none !important;
+}
+.shadow,
+.shadow-1 {
+    box-shadow: rgba(0, 0, 0, 0.05) 0 2rpx 8rpx, rgba(0, 0, 0, 0.12) 0 2rpx 4rpx;
+}
+.shadow-2 {
+    box-shadow: rgba(0, 0, 0, 0.12) 0 2rpx 12rpx, rgba(0, 0, 0, 0.15) 0 2rpx 8rpx;
+}
+.shadow-3 {
+    box-shadow: rgba(0, 0, 0, 0.15) 0 6rpx 20rpx, rgba(0, 0, 0, 0.25) 0 6rpx 20rpx;
+}
+.text-shadow-white {
+    text-shadow: 0 2rpx 4rpx rgba(255, 255, 255, 0.5);
+}
+.text-shadow-black {
+    text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.5);
+}

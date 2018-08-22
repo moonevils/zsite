@@ -1,0 +1,22 @@
+.canvas {
+    background: #ffffff;
+}
+.layer {
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 6rpx 20rpx, rgba(0, 0, 0, 0.25) 0 6rpx 20rpx;
+}
+.section {
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 2rpx 8rpx, rgba(0, 0, 0, 0.12) 0 2rpx 4rpx;
+    margin-bottom: 40rpx;
+}
+.box {
+    background: #ffffff;
+    border: 2rpx solid transparent;
+    padding: 20rpx 20rpx;
+}
+.well {
+    padding: 20rpx 20rpx;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: inset rgba(0, 0, 0, 0.1) 0 2rpx 12rpx, inset rgba(0, 0, 0, 0.12) 0 2rpx 8rpx;
+}
