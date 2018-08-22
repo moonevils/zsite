@@ -614,4 +614,29 @@ class site extends control
         $this->display();
 
     }
+
+    /**
+     * Set wechat applet.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setWxApplet()
+    {
+        $this->lang->menuGroups->site = 'interface';
+
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+            if(!isset($this->config->wxApplet->private)) $setting->private = md5(rand());
+
+            $result = $this->loadModel('setting')->setItems('system.common.wxApplet', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwxapplet')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setWxApplet;
+        $this->display();
+    }
 }

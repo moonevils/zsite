@@ -55,6 +55,10 @@ $lang->visual->js->alreadyFirstSlide = '已是第一張';
 $lang->visual->js->slideOrder        = '當前播放順序';
 $lang->visual->js->gridWidth         = '柵格寬度';
 $lang->visual->js->pageLayoutPrefix  = '僅當前';
+$lang->visual->js->deleteConfirm     = '確定從佈局中刪除【{0}】？';
+$lang->visual->js->changeLayout      = '更改佈局';
+$lang->visual->js->setColumns        = '分欄設置';
+$lang->visual->js->addRegionAlert    = '不允許將佈局區塊添加到【{0}】。';
 $lang->visual->js->actions           = array('edit' => '編輯', 'delete' => '刪除', 'move' => '移動', 'add' => '添加');
 
 /* Language for config */
@@ -105,3 +109,23 @@ $lang->visual->setting->boards                             = array('name' => '�
 $lang->visual->setting->boards['actions']['add']           = array('text' => '板塊管理');
 $lang->visual->setting->thread                             = array('name' => '帖子', 'actions' => array());
 $lang->visual->setting->thread['actions']['edit']          = array('text' => '轉移');
+
+$lang->visual->design                 = new stdclass();
+$lang->visual->design->pageTemplate   = '頁面模板';
+$lang->visual->design->currentTheme   = '當前主題：';
+$lang->visual->design->layout         = '佈局';
+$lang->visual->design->block          = '區塊';
+$lang->visual->design->skin           = '外觀';
+$lang->visual->design->code           = '代碼';
+$lang->visual->design->hidePageTmpl   = '切換顯示/隱藏頁面模版';
+$lang->visual->design->dragAndAdd     = '拖到佈局中添加';
+$lang->visual->design->noBlockTip     = '此類目下沒有可用區塊。';
+$lang->visual->design->setColumns     = '分欄設置';
+
+$lang->visual->design->placeholders                = array();
+$lang->visual->design->placeholders['main']        = '主要內容';
+$lang->visual->design->placeholders['page_header'] = '頁面頭部';
+$lang->visual->design->placeholders['page_footer'] = '頁面底部';
+$lang->visual->design->placeholders['breadcrumb']  = '麵包屑導航';
+$lang->visual->design->placeholders['article']     = '正文內容';
+$lang->visual->design->placeholders['category']    = '目錄';

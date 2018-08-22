@@ -75,6 +75,7 @@ $lang->block->logoPosition      = 'Logo';
 $lang->block->navPosition       = 'Navigation';
 $lang->block->searchbarPosition = 'Search bar';
 $lang->block->sloganPosition    = 'Slogan';
+$lang->block->childBlock        = 'Blocks';
 
 $lang->block->header = new stdclass();
 

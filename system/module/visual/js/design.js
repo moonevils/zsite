@@ -315,7 +315,7 @@ function tidyRowBlocks($row)
         $rowCols.each(function()
         {
             var $col = $(this);
-            $col.children('.block').css('min-height', maxHeight);
+            $col.children('.block').css('min-height', maxHeight).not('.block-container').children('.block-title').css('line-height', (maxHeight - 20) + 'px');
         });
     }
 }
@@ -336,7 +336,7 @@ function renderBlock(block, isGrid)
     blockTitle = blockTitle || '';
 
     var $block = $('<div class="block" data-id="' + block.id + '" data-title="' + blockTitle + '" data-region="' + block.region + '"></div>');
-    var $blockTitle = $('<div class="block-title">' + blockTitle + '</div>');
+    var $blockTitle = $('<div class="block-title" title="' + blockTitle + '">' + blockTitle + '</div>');
     var $blockActions = $('<div class="block-actions clearfix"><a class="btn-edit" data-toggle="tooltip" title="' + v.visualLang.actions.edit + '"><i class="icon icon-pencil"></i></a><a class="btn-delete" data-toggle="tooltip" title="' + v.visualLang.actions.delete + '"><i class="icon icon-remove"></i></a><a class="btn-layout" data-toggle="tooltip" title="' + v.visualLang.changeLayout + '"><i class="icon icon-list-alt"></i></a></div>');
     $block.append($blockTitle).append($blockActions);
     if(isSubRegion)
@@ -387,6 +387,7 @@ function updateRegionBlocks(region, callback)
     var $preview = $('#preview').addClass('loading');
     getRegionBlocks(region, function(regionBlocks, side)
     {
+        $preview.find('[data-toggle="tooltip"]').tooltip('hide');
         $.each(regionBlocks, function(regionName, blocks)
         {
             var $region = $preview.find('.layout-region[data-name="' + regionName + '"]');
@@ -667,6 +668,17 @@ function handleBlockEdit()
  */
 function initDSMenu()
 {
+    var lastMenuScrollTop = $.zui.store.get('lastDSMenuScrollTop');
+    var $dsMenuContent = $('#dsMenu > .content');
+    if(lastMenuScrollTop)
+    {
+        $dsMenuContent.scrollTop(lastMenuScrollTop);
+    }
+    $dsMenuContent.on('scroll', function()
+    {
+        $.zui.store.set('lastDSMenuScrollTop', $dsMenuContent.scrollTop());
+    });
+
     var $dsBox = $('#dsBox');
     var isDsMenuCollapsed = !!$.zui.store.get('ds-menu-collapsed');
     if(isDsMenuCollapsed) toggleDSMenu(false);
@@ -772,10 +784,12 @@ function initDnDAddBlock()
         // target: '.layout-region .block,.layout-region',
         target: '.layout-region .block-container,.layout-region',
         selector: '.block-item',
-        start: function() {
+        start: function()
+        {
             $preview.addClass('drag-and-drop');
         },
-        drop: function(event) {
+        drop: function(event)
+        {
             var $element = event.element;
             if(event.isIn) addBlock($element.data(), event.target);
         },
@@ -799,12 +813,17 @@ function initDnDAddBlock()
             var $container = $ele.closest('.row,.layout-region');
             return $container.children('.block,.col');
         },
+        start: function()
+        {
+            $preview.addClass('block-sorting');
+        },
         finish: function(e)
         {
             if(e.changed)
             {
                 sortBlocks(e.element);
             }
+            $preview.removeClass('block-sorting');
         }
     })
 }
@@ -821,4 +840,10 @@ $(function()
 
     // Init tooltip
     $('[data-toggle="tooltip"]').tooltip({container: '#dsBox'});
+
+    // Show UI delay
+    setTimeout(function()
+    {
+        $('#dsBox').addClass('in');
+    }, 100);
 });

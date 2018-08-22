@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of visual module of chanzhiEPS.
@@ -177,23 +178,24 @@ class visual extends control
      */
     public function design($page = 'all')
     {
-        $this->loadModel('block')->loadTemplateLang($template);
-
         $clientDevice = $this->app->clientDevice;
-        $theme        = $this->config->template->{$clientDevice}->theme;
         $template     = $this->config->template->{$clientDevice}->name;
+        $theme        = $this->config->template->{$clientDevice}->theme;
         $cssFile      = $this->loadModel('ui')->getCustomCssFile($template, $theme);
         $savePath     = dirname($cssFile);
-        $blockData    = $this->lang->block->{$template};
-        $layout       = $blockData->layout->$page;
-        $region       = $blockData->regions->$page;
+
+        $this->loadModel('block')->loadTemplateLang($template);
+
+        $blockData = $this->lang->block->{$template};
+        $layout    = $blockData->layout->$page;
+        $region    = $blockData->regions->$page;
 
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+        $templates = $this->ui->getTemplates();
 
-        $this->view->title           = $this->lang->visual->common;
+        $this->view->title           = $this->lang->visual->customTheme;
         $this->view->blockData       = $blockData;
-
-        $this->view->templateData    = $this->ui->getTemplates()[$template];
+        $this->view->templateData    = $templates[$template];
         $this->view->template        = $template;
         $this->view->theme           = $theme;
         $this->view->page            = $page;
@@ -230,11 +232,12 @@ class visual extends control
      */
     public function ajaxGetRegionBlocks($page = 'all', $region = '')
     {
-        $this->loadModel('block')->loadTemplateLang($template);
-
         $clientDevice = $this->app->clientDevice;
         $theme        = $this->config->template->{$clientDevice}->theme;
         $template     = $this->config->template->{$clientDevice}->name;
+
+        $this->loadModel('block')->loadTemplateLang($template);
+
         $regionData   = $this->lang->block->{$template}->regions->$page;
         $regionBlocks = array();
         $regionEmpty  = empty($region);

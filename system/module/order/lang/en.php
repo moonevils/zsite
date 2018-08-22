@@ -51,7 +51,7 @@ $lang->order->paidSuccess    = 'Thank you for your payment!';
 $lang->order->submit         = 'Submit';
 $lang->order->cancel         = 'Cancel';
 $lang->order->pay            = 'Checkout';
-$lang->order->goToPay        = 'Order has been placed. Please continue with your payment.';
+$lang->order->goToPay        = 'Order has been placed. If paid, please go to My Order/My License to find your license.';
 $lang->order->editPrice      = 'Edit Price';
 $lang->order->return         = 'Collect';
 $lang->order->refund         = 'Refund';
@@ -75,6 +75,9 @@ $lang->order->settlement     = 'Checkout';
 $lang->order->check          = 'Settle Order';
 $lang->order->all            = 'All';
 $lang->order->applyRefund    = 'Apply Refund';
+$lang->order->wechatpay      = 'Wechat pay';
+$lang->order->scanCode       = 'Pay by wechat qrcode';
+$lang->order->wechatScan     = 'Please scan the qrcode <br> by wechat.';
 
 $lang->order->confirmLimit         = 'Receiving Cyle';
 $lang->order->expireLimit          = 'Order Expiration';
@@ -88,21 +91,36 @@ $lang->order->confirmLimitRequired = 'Set receiving cycle';
 $lang->order->finishWarning        = "Do you want to finish this order?";
 $lang->order->noProducts           = "No product in this order";
 $lang->order->lowStocks            = "<strong>%s</strong> is out of stock!";
+$lang->order->invokeWechatpay      = 'Invoking wechatpay.';
+
+$lang->order->alipayParam    = 'Params of alipay';
+$lang->order->wechatpayParam = 'Params of wechatpay';
 
 $lang->order->alipayPid   = 'Partner ID';
 $lang->order->alipayKey   = 'Partner KEY';
 $lang->order->alipayEmail = 'Alipay Email';
 
+$lang->order->wechatpayAppid     = 'APPID of wechat public';
+$lang->order->wechatpayMchid     = "Merchant's id";
+$lang->order->wechatpayApiKey    = "wechatpay's key";
+$lang->order->wechatpayAppSecret = "wechat public's key";
+$lang->order->wechatpayNote      = 'Please return and pay by other method, if wechat timeout';
+
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid   = 'Corporate identity to ID, 16 number begin with 2088.';
 $lang->order->placeholder->key   = 'Security checking code, 32 characters of numbers and letters.';
 $lang->order->placeholder->email = 'Alipay Email';
+$lang->order->placeholder->appid     = 'ID of wechat public';
+$lang->order->placeholder->mchid     = 'Merchant id assigned by wechatpay';
+$lang->order->placeholder->apikey    = 'Key of wechatpay API';
+$lang->order->placeholder->appsecret = "wechat public's key";
 
 $lang->order->paymentList = array();
 $lang->order->paymentList['alipay']        = 'Alipay Payment';
 $lang->order->paymentList['alipaySecured'] = 'Alipay Secured';
 $lang->order->paymentList['COD']           = 'Cash on Delivery';
 $lang->order->paymentList['offlinepay']    = 'Offline Payment';
+$lang->order->paymentList['wechatpay']     = 'Wechatpay';
 
 $lang->order->statusList = array();
 $lang->order->statusList['not_paid']  = 'Not Paid';

@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The model file of visual module of chanzhiEPS.
@@ -17,11 +18,11 @@ class visualModel extends model
      * Print layout item
      *
      * @access public
-     * @param object $item
-     * @param string $region
-     * @param string $page
-     * @param object $regionBlocks
-     * @return void
+     * @param  object $item
+     * @param  string $region
+     * @param  string $page
+     * @param  object $regionBlocks
+     * @return string
      */
     public function printLayoutItem($item, $region, $page)
     {
@@ -33,7 +34,11 @@ class visualModel extends model
             }
             else if($item['type'] !== 'col')
             {
-                $item['title'] = $region[$item['name']];
+                $item['title'] = zget($region, $item['name'], '');
+            }
+            else
+            {
+                $item['title'] = '';
             }
         }
 
@@ -41,7 +46,7 @@ class visualModel extends model
         $class    = '';
         $isRegion = false;
         $inGrid   = false;
-        switch ($item['type'])
+        switch($item['type'])
         {
             case 'placeholder':
                 $class .= 'layout-placeholder';
@@ -60,8 +65,8 @@ class visualModel extends model
         }
 
         echo "<div class='layout-item type-{$item['type']} {$class}' data-title='{$item['title']}' data-name='{$item['name']}' {$attrs}>";
-        $footer = '';
 
+        $footer = '';
         if($item['type'] === 'grid')
         {
             echo '<div class="row">';
@@ -78,7 +83,7 @@ class visualModel extends model
             echo '<div class="actions">' . html::a('javascript:;', '<i class="icon icon-columns"></i> ' . $this->lang->visual->design->setColumns, "class='btn-setPageColumns' data-page='$page'") . '</div>';
         }
         
-        if($item['children'])
+        if(!empty($item['children']))
         {
             foreach ($item['children'] as $child)
             {

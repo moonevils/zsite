@@ -10,16 +10,15 @@ js::set('page', $page);
 js::set('visualLang', $lang->visual->js);
 ?>
 
-<div id='dsBox' class='dock'>
+<div id='dsBox' class='dock fade'>
   <div id='dsMenu' class='box dock-left'>
-    <header class='dock-top'>
-      <strong><?php echo $lang->visual->design->pageTemplate;?></strong>
-      <div class='actions dock-right'>
-        <button data-toggle='tooltip' title='<?php echo $lang->visual->design->hidePageTmpl?>' type='button' class='ds-menu-toggle btn btn-link'><i class='icon icon-double-angle-left'></i></button>
-      </div>
+    <header class='dock-top text-right'>
+      <div class='dock-left scroll-none'><?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon icon-remove-circle"></i>', "class='btn btn-link' title='{$lang->ui->setTheme}' id='backBtn'");?></div>
+      <?php echo $lang->visual->design->currentTheme;?><?php echo $templateData['themes'][$theme];?>
     </header>
-    <div class='content dock'>
+    <div class='content dock box'>
       <ul class='nav' id='pageList'>
+        <li class="heading"><?php echo $lang->visual->design->pageTemplate;?></li>
         <?php foreach($config->block->pageGroupList as $group => $pageList):?>
         <li class='group'>
           <ul>
@@ -36,8 +35,10 @@ js::set('visualLang', $lang->visual->js);
   </div>
   <div id='dsPreview' class='dock box'>
     <header class='dock-top'>
+      <div class='actions dock-left'>
+        <button data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->visual->design->hidePageTmpl?>' type='button' class='ds-menu-toggle btn btn-link'><i class='icon icon-double-angle-left'></i></button>
+      </div>
       <strong><?php echo $lang->visual->design->layout;?></strong>
-      <span class='theme-name text-muted'>(<?php echo $lang->visual->design->currentTheme . $templateData['themes'][$theme];?>)</span>
       <div class='actions dock-right'>
         <?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon icon-download"></i> ' . $lang->ui->exportTheme, "class='btn btn-sm btn-link' data-toggle='modal' data-width='600'");?>
       </div>
@@ -45,10 +46,10 @@ js::set('visualLang', $lang->visual->js);
     <div class='content dock' id='preview'>
       <div class='preview-page'>
         <?php
-          foreach ($layout as $layoutItem)
-          {
-              $this->visual->printLayoutItem($layoutItem, $region, $page);
-          }
+        foreach ($layout as $layoutItem)
+        {
+            $this->visual->printLayoutItem($layoutItem, $region, $page);
+        }
         ?>
       </div>
       <div class='load-indicator'><i class='icon icon-spin icon-spinner icon-2x text-primary'></i></div>

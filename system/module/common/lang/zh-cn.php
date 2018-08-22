@@ -334,8 +334,9 @@ $lang->security->menu->log         = '登录日志|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
-$lang->interface->menu->oauth  = '开放登录|site|setoauth|';
-$lang->interface->menu->mail   = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->oauth    = '开放登录|site|setoauth|';
+$lang->interface->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->wxapplet = '微信小程序|site|setwxapplet|';
 
 /* Menu of score module. */
 $lang->score->menu = new stdclass();

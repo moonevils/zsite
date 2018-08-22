@@ -19,6 +19,7 @@ $(document).ready(function()
             {
                 if (window.parent && window.parent.handleBlockEdit)
                 {
+                    $('#editForm').find('#submit').popover('destroy');
                     window.parent.handleBlockEdit();
                 }
                 $.closeModal();

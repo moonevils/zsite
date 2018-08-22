@@ -53,9 +53,6 @@
 #mainMenu #navMenu{font-size:16px; padding:0 20px;text-align:center}
 #mainMenu #navMenu a{font-size:16px; padding:0 20px; color:#010101;text-decoration: none;}
 #mainMenu #navMenu a.active{font-weight: bold;}
-#mainMenu #deviceMenu {margin-top:-25px;}
-#mainMenu #deviceMenu a{color:#999;text-decoration: none;}
-#mainMenu #deviceMenu a.active{font-weight: bold; color:#010101; font-size:15px;}
 .panel{margin:0 40px;}
 .panel .panel-heading{background-color:#fff;border-bottom: 2px solid #efefef; width: 98%; margin-left: 10px;margin-top:5px;padding: 8px 0px;}
 .panel .panel-heading a{text-decoration: none;font-size:16px;color:#000;}
@@ -73,3 +70,6 @@
 .input-control-icon-left, .input-control-icon-right{width: 30px; text-align: center;}
 .input-control-icon-left, .input-control-icon-right, .input-control-label-left, .input-control-label-right{position: absolute; top: 1px; z-index: 5; height: 30px; line-height: 30px; opacity: .5;}
 input:placeholder-shown + .search-clear-btn, input:placeholder-shown + .search-icon + .search-clear-btn{opacity: 0!important;}
+.theme #currentTheme{float:left}
+.theme #custom{float:right}
+.theme #custom a{text-decoration:none; color:#000}
