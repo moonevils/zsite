@@ -862,6 +862,9 @@ class user extends control
         {
             /* Wechat need to use unionid instead of openID. */
             $oldUser = $this->user->getByOpenID($openUser->openid, 'wechat');
+
+            /* Save openID and unionID if save unionid in openID field. */
+            $this->user->updateOpenIDAndUnionID();
         }
 
         $this->session->set('openUser', $openUser);
@@ -985,11 +988,18 @@ class user extends control
         $this->app->loadClass('wechatpay', true);
         $wechatpay = new wechatPay($this->loadModel('order')->getWechatpayConfig());
         $userInfo  = $wechatpay->getUserInfo($code);
-        $oldUser   = $this->user->getByOpenID($userInfo->openid, 'wechat');
+
+        if(!empty($userInfo->unionid))
+        {
+            $oldUser = $this->user->getByOpenID($userInfo->openid, 'wechat');
+            if(!empty($oldUser)) $this->user->mergeWechatUser($oldUser);
+
+            /* Save openID and unionID if save unionid in openID field. */
+            $this->user->updateOpenIDAndUnionID();
+        }
 
         if($this->user->addOAuthAccount($this->app->user->account, 'wechat', $userInfo))
         {
-            if(!empty($oldUser)) $this->user->mergeWechatUser($oldUser, $this->app->user);
             $this->locate($redirectURL);
         }
     }
