@@ -127,6 +127,7 @@ class router extends baseRouter
         $dotPos   = strrpos($pathInfo, '.');
         $viewType = substr($pathInfo, $dotPos + 1);
         if($viewType == 'mhtml') $device = 'mobile';
+        if($viewType == 'wxml') $device = 'mobile';
         
         $this->clientDevice = $device;
         setcookie('device', $this->clientDevice, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
