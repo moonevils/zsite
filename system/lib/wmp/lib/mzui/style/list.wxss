@@ -1,0 +1,133 @@
+.list-item,
+.list > .item {
+    position: relative;
+    display: flex;
+    padding: 20rpx 20rpx;
+}
+.list-item > .icon,
+.list > .item > .icon {
+    display: block;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+.list-item > .ele,
+.list > .item > .ele {
+    margin-left: 20rpx;
+}
+.list-item > .ele:first-child,
+.list > .item > .ele:first-child {
+    margin-left: 0;
+    min-width: 28rpx;
+}
+.list-item > .title,
+.list > .item > .title {
+    padding: 10rpx 0;
+}
+.list-item > .title,
+.list > .item > .title,
+.list-item > .content,
+.list > .item > .content {
+    flex: 1;
+}
+.list-item > .label,
+.list > .item > .label {
+    position: relative;
+    top: 10rpx;
+}
+.list-item > .label + .label,
+.list > .item > .label + .label {
+    margin-left: 10rpx;
+}
+.list-item > .content > .subtitle,
+.list > .item > .content > .subtitle {
+    font-size: 24rpx;
+    opacity: 0.5;
+}
+.list-item.multi-lines > .ele,
+.list > .item.multi-lines > .ele {
+    margin-top: 5rpx;
+}
+.list-item.multi-lines > .content,
+.list > .item.multi-lines > .content {
+    margin-top: 0;
+}
+.list-item.active:after,
+.list > .item.active:after {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.09);
+    opacity: 1;
+}
+.list > .heading .title {
+    opacity: 0.5;
+    font-size: 24rpx;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+.list-item.compact,
+.list.compact > .item {
+    padding: 10rpx 20rpx;
+}
+.list.with-divider {
+    border: 2rpx solid rgba(0, 0, 0, 0.1);
+    border-width: 2rpx 0;
+}
+.list.with-divider > .item:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 20rpx;
+    right: 0;
+    height: 2rpx;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.list.with-divider > .item:last-of-type:before {
+    display: none;
+}
+.list.with-divider.with-avatar > .item:before,
+.list.with-divider .item.with-avatar:before {
+    left: 100rpx;
+}
+.list-item + .divider,
+.list > .item + .divider {
+    margin-left: 20rpx;
+}
+.list-item.with-avatar + .divider,
+.list > .item.with-avatar + .divider {
+    margin-left: 100rpx;
+}
+.list > .list {
+    margin-left: 80rpx;
+}
+.dropdown-menu {
+    padding: 10rpx 0;
+}
+.dropdown-menu > .divider {
+    margin: 10rpx 0 !important;
+}
+.dropdown-menu > .item {
+    padding: 0 20rpx;
+    font-size: 26rpx;
+    align-items: center!important;
+    white-space: nowrap;
+}
+.dropdown-menu > .item > .title {
+    margin: 0 20rpx;
+}
+.dropdown-menu.has-icon-left > .item {
+    padding-left: 48rpx;
+}
+.dropdown-menu.has-icon-left > .item > .title {
+    margin-left: 16rpx;
+}
+.dropdown-menu.has-icon-left > .item > .icon:first-child {
+    opacity: .5;
+    width: 48rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 8rpx;
+    left: 12rpx;
+}

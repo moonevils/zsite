@@ -1639,7 +1639,7 @@ class commonModel extends model
      */
     public function checkWMP()
     {
-        $config = $this->config->wxApplet;
+        $config = $this->config->wmp;
         $token  = '';
         $random = '';
 

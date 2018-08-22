@@ -1,0 +1,15 @@
+.divider {
+    border-bottom: 2rpx solid rgba(0, 0, 0, 0.1);
+}
+.divider-top {
+    border-top: 2rpx solid rgba(0, 0, 0, 0.1);
+}
+.divider-left {
+    border-left: 2rpx solid rgba(0, 0, 0, 0.1);
+}
+.divider-right {
+    border-right: 2rpx solid rgba(0, 0, 0, 0.1);
+}
+.divider-all {
+    border: 2rpx solid rgba(0, 0, 0, 0.1);
+}

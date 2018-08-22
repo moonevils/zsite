@@ -1,0 +1,112 @@
+.nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.nav > .item {
+    flex: 0 0 auto;
+    display: flex;
+    min-width: 80rpx;
+    opacity: .8;
+    padding: 0 20rpx;
+    align-items: center;
+    justify-content: center;
+    height: 80rpx;
+}
+.nav > .item.active {
+    opacity: 1;
+    font-weight: bold;
+}
+.nav > .item > .icon + .text {
+    display: inline-block;
+    margin-left: 10rpx;
+}
+.nav-secondary {
+    box-shadow: inset 0 -2rpx 0 rgba(0, 0, 0, 0.1);
+}
+.nav-secondary > .active {
+    box-shadow: inset 0 -4rpx 0 #ffffff;
+}
+.nav-secondary.primary-pale > .active {
+    box-shadow: inset 0 -4rpx 0 #3280fc;
+}
+.nav-secondary.success-pale > .active {
+    box-shadow: inset 0 -4rpx 0 #38b03f;
+}
+.nav-secondary.danger-pale > .active {
+    box-shadow: inset 0 -4rpx 0 #ea644a;
+}
+.nav-secondary.warning-pale > .active {
+    box-shadow: inset 0 -4rpx 0 #f1a325;
+}
+.nav-secondary.important-pale > .active {
+    box-shadow: inset 0 -4rpx 0 #bd7b46;
+}
+.nav-secondary.special-pale > .active {
+    box-shadow: inset 0 -4rpx 0 #8666b8;
+}
+.nav.circle {
+    border-radius: 40rpx;
+}
+.nav.outline > .item {
+    border-right: 2rpx solid transparent;
+    border-right-color: inherit;
+}
+.nav.outline > .item:last-child {
+    border-right: none;
+}
+.nav.outline > .item.active {
+    color: #333333;
+    background-color: #ffffff;
+}
+.nav-lg > .item,
+.nav.affix > .item {
+    height: 96rpx;
+}
+.nav-sm > .item {
+    height: 60rpx;
+    min-width: 60rpx;
+    padding: 0 10rpx;
+}
+.nav.affix {
+    background-color: #ffffff;
+}
+.with-nav-top {
+    padding-top: 96rpx;
+}
+.with-nav-bottom {
+    padding-bottom: 96rpx;
+}
+.with-heading-top.with-nav-top {
+    padding-top: 192rpx;
+}
+.with-heading-top.with-nav-top > .nav.affix.dock-top {
+    top: 96rpx;
+}
+.in-scroll.scroll-down.with-heading-top > .nav.dock-top,
+.in-scroll.scroll-down .with-heading-top > .nav.dock-top {
+    transform: translate(0, -100%);
+}
+.in-scroll.scroll-down.with-heading-top > .nav.dock-top.dock-auto,
+.in-scroll.scroll-down .with-heading-top > .nav.dock-top.dock-auto {
+    transform: translate(0, -199%);
+}
+.nav-tabs > .active {
+    background-color: #ffffff;
+    border: #3280fc solid 2rpx;
+    border-bottom-color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+.nav-tabs > .active:after {
+    bottom: -2rpx;
+}
+.nav-tabs.nav-sm > .item {
+    padding-top: 4rpx;
+}
+.nav-tabs.nav-sm > .item.active {
+    padding-top: 0;
+    height: 56rpx;
+    margin-top: 4rpx;
+}

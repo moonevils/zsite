@@ -1,0 +1,12 @@
+.blur {
+    filter: blur(20rpx);
+}
+.blur-lg {
+    filter: blur(40rpx);
+}
+.blur-sm {
+    filter: blur(10rpx);
+}
+.grayscale {
+    filter: grayscale(100%);
+}

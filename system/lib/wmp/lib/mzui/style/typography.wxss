@@ -1,0 +1,29 @@
+.h1 {font-size: 80rpx; /* 40px */}
+.h2 {font-size: 40rpx; /* 20px */}
+.h3 {font-size: 36rpx; /* 18px */}
+.h4 {font-size: 32rpx; /* 16px */}
+.h5 {font-size: 28rpx; /* 14px */}
+.h6 {font-size: 24rpx; /* 12px */}
+
+.small {font-size: 24rpx; /* 12px */}
+.large {font-size: 32rpx; /* 16px */}
+
+.strong    {font-weight: bold;}
+.mark      {background-color: #fff0d5;}
+.underline {text-decoration: underline;}
+
+.text-left     {text-align: left;}
+.text-right    {text-align: right;}
+.text-center   {text-align: center;}
+.text-nowrap   {white-space: nowrap;}
+.text-pre      {white-space: pre;}
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-lowercase      {text-transform: lowercase;}
+.text-uppercase      {text-transform: uppercase;}
+.text-capitalize     {text-transform: capitalize;}
+.text-line-through   {text-decoration: line-through;}

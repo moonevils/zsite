@@ -1,0 +1,79 @@
+.code,
+.kbd,
+.pre,
+.samp {
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+.kbd,
+.code {
+    padding: 4rpx 10rpx;
+    font-size: 24rpx;
+    color: #0d47a1;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.kbd {
+    border: 2rpx solid rgba(0, 0, 0, 0.1);
+    border-radius: .1rem;
+    border-bottom-width: .1rem;
+    color: #666;
+    font-weight: bold;
+}
+.pre {
+    display: block;
+    font-size: 24rpx;
+    padding: 20rpx;
+    border: 2rpx solid transparent;
+    background-color: rgba(0, 0, 0, 0.05);
+    word-break: normal;
+    word-wrap: normal;
+    max-width: 100%;
+    overflow: auto;
+}
+.pre .code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+.com {
+    color: #93a1a1;
+}
+.lit {
+    color: #195f91;
+}
+.pun,
+.opn,
+.clo {
+    color: #93a1a1;
+}
+.fun {
+    color: #dc322f;
+}
+.str,
+.atv {
+    color: #D14;
+}
+.kwd,
+.prettyprint .tag {
+    color: #1e347b;
+}
+.typ,
+.atn,
+.dec,
+.var {
+    color: teal;
+}
+.pln {
+    color: #48484c;
+}
+.prettyprint.linenums {
+    border: 2rpx solid rgba(0, 0, 0, 0.1);
+    padding: 10rpx 20rpx 10rpx 0;
+    box-shadow: inset 2rem 0 0 #fbfbfc, inset 2.05rem 0 0 #ececf0;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.prettyprint.linenums code {
+    white-space: pre-wrap;
+}
