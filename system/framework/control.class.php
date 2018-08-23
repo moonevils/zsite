@@ -378,7 +378,7 @@ class control extends baseControl
         unset($this->view->pager->lang);
 
         $output['status']  = is_object($this->view) ? 'success' : 'fail';
-        $output['data']    = json_encode($this->view);
+        $output['data']    = $this->view;
         $output['company'] = $this->config->company;
         $output['site']    = $this->config->site;
         $output['layouts'] = $this->loadModel('block')->getWmpLayouts($moduleName, $methodName);
