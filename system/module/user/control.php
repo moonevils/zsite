@@ -861,7 +861,7 @@ class user extends control
         if($provider == 'wechat' and isset($openUser->unionid))
         {
             /* Wechat need to use unionid instead of openID. */
-            $oldUser = $this->user->getByOpenID($openUser->openid, 'wechat');
+            $oldUser = $this->user->getNoUnionIDUser($openUser->openid);
 
             /* Save openID and unionID if save unionid in openID field. */
             $this->user->updateOpenIDAndUnionID();
@@ -991,7 +991,7 @@ class user extends control
 
         if(!empty($userInfo->unionid))
         {
-            $oldUser = $this->user->getByOpenID($userInfo->openid, 'wechat');
+            $oldUser = $this->user->getNoUnionIDUser($userInfo->openid);
             if(!empty($oldUser)) $this->user->mergeWechatUser($oldUser);
 
             /* Save openID and unionID if save unionid in openID field. */
