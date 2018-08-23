@@ -1729,6 +1729,22 @@ class userModel extends model
     }
 
     /**
+     * Get the wechat user without unionid.
+     * 
+     * @param  int    $openID 
+     * @access public
+     * @return object
+     */
+    public function getNoUnionIDUser($openID)
+    {
+        return $this->dao->select('*')->from(TABLE_OAUTH)
+            ->where('provider')->eq('wechat')
+            ->andWhere('openID')->eq($openID)
+            ->andWhere('unionID')->eq('')
+            ->fetch();
+    }
+
+    /**
      * Merge wechatUser. 
      * 
      * @param  object    $oldUser 
