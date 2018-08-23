@@ -295,7 +295,8 @@ class control extends baseControl
     {
         if(empty($moduleName)) $moduleName = $this->moduleName;
         if(empty($methodName)) $methodName = $this->methodName;
-
+    
+        if($this->viewType == 'wxml') return $this->parseWXML($moduleName, $methodName);
         if($this->viewType == 'json') return $this->parseJSON($moduleName, $methodName);
 
         $this->parseCssAndJs($moduleName, $methodName);
@@ -351,6 +352,38 @@ class control extends baseControl
 
         /* At the end, chang the dir to the previous. */
         chdir($currentPWD);
+    }
+
+    /**
+     * Parse wxml. 
+     * 
+     * @param  string   $moduleName 
+     * @param  string   $methodName 
+     * @access public
+     * @return string   JSON
+     */
+    public function parseWXML($moduleName, $methodName)
+    {
+        $this->app->setClientDevice('mobile');
+        //$this->loadModel('common')->checkWMP();
+
+        unset($this->view->app);
+        unset($this->view->config);
+        unset($this->view->lang);
+        unset($this->view->header);
+        unset($this->view->position);
+        unset($this->view->moduleTree);
+        unset($this->view->common);
+        unset($this->view->pager->app);
+        unset($this->view->pager->lang);
+
+        $output['status']  = is_object($this->view) ? 'success' : 'fail';
+        $output['data']    = $this->view;
+        $output['company'] = $this->config->company;
+        $output['site']    = $this->config->site;
+        $output['layouts'] = $this->loadModel('block')->getWmpLayouts($moduleName, $methodName);
+
+        die(json_encode($output));
     }
 
     /**

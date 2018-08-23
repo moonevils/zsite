@@ -1129,13 +1129,13 @@ class userModel extends model
         {
             if(empty($openUser))
             {
-                if(!empty($userInfo->openid)) $oldUser = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq($provider)->andWhere('unionID')->eq($userInfo->unionid)->fetch();
+                if(!empty($userInfo->unionid)) $unionUser = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq($provider)->andWhere('unionID')->eq($userInfo->unionid)->fetch();
 
                 $oauth = new stdclass();
                 $oauth->openID   = $userInfo->openid;
                 $oauth->unionID  = isset($userInfo->unionid) ? $userInfo->unionid : '';
                 $oauth->provider = 'wechat';
-                $oauth->account  = !empty($oldUser) ? $oldUser->account : uniqid('wechat_');
+                $oauth->account  = !empty($unionUser) ? $unionUser->account : uniqid('wechat_');
                 $oauth->lang     = 'all';
                 $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
 
@@ -1729,6 +1729,22 @@ class userModel extends model
     }
 
     /**
+     * Get the wechat user without unionid.
+     * 
+     * @param  int    $openID 
+     * @access public
+     * @return object
+     */
+    public function getNoUnionIDUser($openID)
+    {
+        return $this->dao->select('*')->from(TABLE_OAUTH)
+            ->where('provider')->eq('wechat')
+            ->andWhere('openID')->eq($openID)
+            ->andWhere('unionID')->eq('')
+            ->fetch();
+    }
+
+    /**
      * Merge wechatUser. 
      * 
      * @param  object    $oldUser 
@@ -1736,12 +1752,30 @@ class userModel extends model
      * @access public
      * @return bool
      */
-    public function mergeWechatUser($oldUser, $user)
+    public function mergeWechatUser($oldUser, $user = null)
     {
-        $this->updateRelated($oldUser->account, $user->account);
+        if(!empty($user)) $this->updateRelated($oldUser->account, $user->account);
+
         $this->dao->delete()->from(TABLE_USER)->where('account')->eq($oldUser->account)->exec();
         $this->dao->delete()->from(TABLE_OAUTH)->where('account')->eq($oldUser->account)->exec();
         return true;
         
+    }
+
+    /**
+     * Update openID and unionID for wechat user.
+     * 
+     * @param  int    $userInfo 
+     * @access public
+     * @return void
+     */
+    public function updateOpenIDAndUnionID($userInfo)
+    {
+        $user = $this->dao->select('*')->from(TABLE_OAUTH)->where('openID')->eq($userInfo->unionid)->fetch();
+        if(!$user) return false;
+
+        $this->dao->update(TABLE_OAUTH)->set('openID')->eq($userInfo->openid)->set('unionID')->eq($userInfo->unionid)->where('openID')->eq($userInfo->unionid)->exec();
+
+        return !dao::isError();
     }
 }
