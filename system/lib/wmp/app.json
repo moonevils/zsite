@@ -1,15 +1,17 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
-  ],
-  "window":{
-    "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#f8f8f8",
-    "navigationBarTitleText": "蝉知",
-    "navigationBarTextStyle":"black",
-    "enablePullDownRefresh": true,
-    "backgroundColorTop": "#f8f8f8",
-    "backgroundColorBottom": "#f8f8f8"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/error/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#f8f8f8",
+        "navigationBarTitleText": "蝉知",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": true,
+        "backgroundColorTop": "#f8f8f8",
+        "backgroundColorBottom": "#f8f8f8"
+    },
+    "debug": false
 }

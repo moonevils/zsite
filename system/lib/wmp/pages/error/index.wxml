@@ -1,0 +1,7 @@
+<!--pages/error/index.wxml-->
+<view class="container">
+  <view class="with-padding text-center">
+    <icon type="warn" size="100"/>
+    <text class="block has-margin muted">{{message}}</text>
+  </view>
+</view>

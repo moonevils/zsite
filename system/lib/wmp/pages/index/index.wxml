@@ -1,9 +1,4 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button class="btn red"><text class="icon icon-star"></text><text class="text">MZUI</text></button>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view>
+<mzui-layout-page loading="{{false}}">
+    <view slot="header">这里是插入到组件slot name="before"中的内容</view>
+</mzui-layout-page>

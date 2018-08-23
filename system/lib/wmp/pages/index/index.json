@@ -1,1 +1,5 @@
-{}
+{
+    "usingComponents": {
+        "mzui-layout-page": "../../lib/mzui/components/layout-page"
+    }
+}

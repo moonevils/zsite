@@ -19,10 +19,10 @@ export const ajax = (options, onSuccess, onError) => {
     let wxRequest = null;
     const promise = new Promise((resolve, reject) => {
         wxRequest = wx.request(Object.assign({}, options, {
-            success: (data, statusCode, header) => {
-                resolve({data, statusCode, header});
+            success: response => {
+                resolve(response);
                 if (onSuccess) {
-                    onSuccess(data, statusCode, header);
+                    onSuccess(response);
                 }
                 promise.working = false;
             },
@@ -47,7 +47,7 @@ export const ajax = (options, onSuccess, onError) => {
 };
 
 /**
- * 使用 GET 方式发起 JSON 对象请求，返回的 JSON 对象如果 result 属性值为 'success' 则视为请求成功，其他情况视为请求失败
+ * 使用 GET 方式发起 JSON 对象请求，返回的 JSON 对象如果 status 属性值为 'success' 则视为请求成功，其他情况视为请求失败
  * 
  * @param {string|object} 请求地址或者请求参数对象，@see https://developers.weixin.qq.com/miniprogram/dev/api/network-request.html
  * @param {?function(data: object, statusCode: number, header: object)} onSuccess 请求成功回调函数
@@ -72,7 +72,7 @@ export const getJSON = (options, onSuccess, onError) => {
 };
 
 /**
- * 使用 POST 方式发起 JSON 对象请求，返回的 JSON 对象如果 result 属性值为 'success' 则视为请求成功，其他情况视为请求失败
+ * 使用 POST 方式发起 JSON 对象请求，返回的 JSON 对象如果 status 属性值为 'success' 则视为请求成功，其他情况视为请求失败
  * 
  * @param {string|object} 请求地址或者请求参数对象，@see https://developers.weixin.qq.com/miniprogram/dev/api/network-request.html
  * @param {?object} data POST 请求的参数
@@ -109,7 +109,7 @@ export const postJSON = (options, data, onSuccess, onError) => {
  * @type {object}
  */
 export default {
-    request,
+    ajax,
     getJSON,
     postJSON
 };

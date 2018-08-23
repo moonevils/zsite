@@ -1,0 +1,16 @@
+<!--lib/mzui/components/layout-page.wxml-->
+<view wx:if="{{loading}}" class="layout-page loading">
+    <view class="icon spin icon-spinner-indicator icon-2x"></view>
+    <view class="box has-margin">{{loading === true ? '正在努力加载中...' : loading}}</view>
+</view>
+<view wx:else class="layout-page container">
+    <view class="header">
+        <slot name="before"></slot>
+    </view>
+    <view class="content">
+        <slot name="content"></slot>
+    </view>
+    <view class="footer">
+        <slot name="footer"></slot>
+    </view>
+</view>
