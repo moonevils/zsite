@@ -4,5 +4,6 @@
  * @type {object}
  */
 export default {
-    token: 'abcdefghijklmnopqrstuvwxyz'
+    token: 'abcdefghijklmnopqrstuvwxyz',
+    siteName: '蝉知企业门户系统'
 };

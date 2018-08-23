@@ -3,7 +3,7 @@
 .icon,
 [class^="icon-"],
 [class*=" icon-"] {
-    font-family: "Material Design Icons";
+    font-family: "ZenIcon";
     speak: none;
     font-size: 28rpx;
     font-style: normal;
