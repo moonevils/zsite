@@ -621,22 +621,55 @@ class site extends control
      * @access public
      * @return void
      */
-    public function setWxApplet()
+    public function setWmp()
     {
         $this->lang->menuGroups->site = 'interface';
 
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
-            if(!isset($this->config->wxApplet->private)) $setting->private = md5(rand());
+            if(!isset($this->config->wmp->private)) $setting->private = md5(rand());
 
-            $result = $this->loadModel('setting')->setItems('system.common.wxApplet', $setting);
+            $result = $this->loadModel('setting')->setItems('system.common.wmp', $setting);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwxapplet')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setwmp')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title = $this->lang->site->setWxApplet;
+        $this->view->title = $this->lang->site->setWmp;
         $this->display();
+    }
+
+    /**
+     * Download wmp package.
+     * 
+     * @access public
+     * @return void
+     */
+    public function downloadWmpPackage()
+    {
+        $tmpRoot           = $this->app->getTmpRoot();
+        $wmpZipfile        = $tmpRoot . '/wmp.zip';
+        $wmpPath           = $tmpRoot . '/wmp';
+        $projectConfigFile = $tmpRoot . '/wmp/project.config.json';
+
+        $commads   = array();
+        $commads[] = "rm -f {$wmpZipfile}";
+        $commads[] = "rm -rf {$wmpPath}";
+
+        $commads[] = "mkdir -p {$wmpPath}";
+        $commads[] = "touch {$projectConfigFile}";
+
+        foreach($commads as $commad) `$commad`;
+
+        file_put_contents($projectConfigFile, sprintf($this->config->wmp->projectConfigContent, $this->lang->site->wmp->description, $this->config->wmp->appID, $this->config->wmp->projectName));
+
+        `cd {$tmpRoot}; zip -r wmp.zip wmp`;
+
+        header('Content-Description: File Transfer');
+        header('Content-type: application/octet-stream');
+        header("Content-Disposition: attachment; filename=wmp.zip");
+        header('Content-Length: ' . filesize($wmpZipfile));
+        readfile($wmpZipfile);
     }
 }

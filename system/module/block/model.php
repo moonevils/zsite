@@ -836,6 +836,249 @@ class blockModel extends model
     }
 
     /**
+     * Get layouts for wmp.
+     * 
+     * @param  string    $moduleName 
+     * @param  string    $methodName 
+     * @access public
+     * @return array
+     */
+    public function getWmpLayouts($moduleName, $methodName)
+    {
+        $layouts = $this->getPageBlocks($moduleName, $methodName);
+        foreach($layouts as $page => $layout)
+        {
+            foreach($layout as $region => $blocks)
+            {
+                $processedBlocks = array();
+                foreach($blocks as $block) 
+                {
+                    if(strpos($this->config->block->wxmlTypes, $block->type) === false) continue;
+                    $processedBlocks[] = $this->processData($block);
+                }
+                $layouts[$page][$region] = $processedBlocks;
+            }
+        }
+        return $layouts;
+    }
+
+    /**
+     * Process data of a block.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processData($block)
+    {
+        if(is_callable(array($this, "process{$block->type}Data"))) return call_user_func(array($this,"process{$block->type}Data"), $block);
+        return $block;
+    }
+
+    /**
+     * Process Html Data.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processHtmlData($block)
+    {
+        return $block;
+    }
+
+    /**
+     * Process Htmlcode Data.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processHtmlcodeData($block)
+    {
+        return $block;
+    }
+
+    /**
+     * Process about data.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processAboutData($block)
+    {
+        $block->data = array('content' => $this->config->company->desc);
+        return $block;
+    }
+
+    /**
+     * Process contact Data.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processContactData($block)
+    {
+        $block->contact = json_decode($this->config->company->contact);
+        return $block;
+    }
+
+    /**
+     * Process header Data.
+     * 
+     * @param  int    $block 
+     * @access public
+     * @return void
+     */
+    public function processHeaderData($block)
+    {
+        $navs  = $this->loadModel('nav')->getNavs('mobile_top');
+        $theme = $this->config->template->mobile->theme;
+        $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
+
+        $logo  = false;
+        if(isset($logoSetting->mobile->themes->all)) $logo = $logoSetting->mobile->themes->all;
+        if(isset($logoSetting->mobile->themes->$theme)) $logo = $logoSetting->mobile->themes->$theme;
+
+        if($logo)
+        {
+            $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
+            $logo = $this->loadModel('file')->printFileURL($logo);
+        }
+
+        $block->navs = $navs;
+        $block->logo = $logo;
+        return $block;
+    }
+
+    /**
+     * Process LatestArticle Data 
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processLatestArticleData($block)
+    {
+        $content  = json_decode($block->content);
+        $method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)));
+        $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
+        if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
+
+        $block->articles = $articles;
+        return $block;
+    }
+
+    /**
+     * Process hotArticle data.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processHotArticleData($block)
+    {
+        return $this->processLatestArticleData($block);
+    }
+
+    /**
+     * Process latestProduct data.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processLatestProductData($block)
+    {
+        $content  = json_decode($block->content);
+        $type     = str_replace('product', '', strtolower($block->type));
+        $method   = 'get' . $type;
+        if(empty($content->category)) $content->category = 0;
+        $showImage = isset($content->image) ? true : false;
+        $block->products = $this->loadModel('product')->$method($content->category, $content->limit, $showImage);
+        return $block;
+    }
+
+    /**
+     * Process hotProduct data.
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processHotProductData($block)
+    {
+        return $this->processLatestProductData($block);
+    }
+
+    /**
+     * Process latestBlog data 
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processLatestBlogData($block)
+    {
+        $content  = json_decode($block->content);
+        $method   = 'get' . ucfirst(str_replace('blog', '', strtolower($block->type)));
+        $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit, 'blog');
+        if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
+
+        $block->articles = $articles;
+        return $block;
+    }
+
+    /**
+     * Process slide data.
+     * 
+     * @param  int    $block 
+     * @access public
+     * @return void
+     */
+    public function processSlideData($block)
+    {
+        $block->content = json_decode($block->content);
+        $groupID = !empty($block->content->group) ? $block->content->group : '';
+        $group   = $this->loadModel('tree')->getByID($groupID);
+        $block->slideID = 'slide' . $block->id . '-' . $groupID;
+        $block->globalButtons = !empty($group->desc) ? json_decode($group->desc, true) : array();
+        $block->slideStyle    = !empty($block->content->style) ? $block->content->style : 'carousel';
+        $block->slides  = $this->loadModel('slide')->getList($groupID);
+        return $block;
+    }
+
+    /**
+     * Process featuredProduct data .
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processFeaturedProductData($block)
+    {
+        $content = json_decode($block->content);
+        $block->product = $this->loadModel('product')->getByID($content->product);
+        return $block;
+    }
+
+    /**
+     * Process pagelist Data 
+     * 
+     * @param  object    $block 
+     * @access public
+     * @return object
+     */
+    public function processpagelistData($block)
+    {
+        $content = json_decode($block->content);
+        $block->pages = $model->loadModel('article')->getPageList($content->limit);
+        return $block;
+    }
+
+    /**
      * Parse css code of a block. 
      * 
      * @param  object    $block 

@@ -1,5 +1,6 @@
 <?php
 $config->block->allowedTags = $config->allowedTags->admin . '<script><style><object><param><embed><form><button><textarea>';
+$config->block->wxmlTypes   = "header,slide,about,contact,html,htmlcode,latestArticle,hotArticle,latestBlog,pageList,latestProduct,hotProduct,featuredProduct,";
 
 $config->block->editor = new stdclass();
 $config->block->editor->create    = array('id' => 'content', 'tools' => 'full');
