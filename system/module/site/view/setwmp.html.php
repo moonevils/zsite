@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class='icon-globe'></i> <?php echo $lang->site->setWmp;?></strong>
     <div class='panel-actions'>
-      <?php commonModel::printLink('site', 'downloadwmppackage', '', '<i class="icon-download-alt"></i> ' . $lang->site->download, 'class="btn btn-primary"');?>
+      <?php commonModel::printLink('site', 'downloadwmppackage', '', '<i class="icon-download-alt"></i> ' . $lang->site->downloadWmp, 'class="btn btn-primary"');?>
     </div>
   </div>
   <div class='panel-body'>
