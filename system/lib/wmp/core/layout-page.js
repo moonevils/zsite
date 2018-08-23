@@ -29,7 +29,8 @@ export default (options = {}) => {
          * 页面绑定的数据
          */
         data: {
-            loading: true
+            loading: true,
+            layouts: {}
         },
 
         /**
@@ -94,11 +95,14 @@ export default (options = {}) => {
                 this.setData({loading: true});
             }
 
+            wx.showNavigationBarLoading();
+
             // 发起 ajax 请求
             this.request = chanzhi.ajaxGet({
                 url: this.serverUrl,
                 complete: () => {
                     wx.hideNavigationBarLoading();
+                    wx.stopPullDownRefresh();
                     this.request = null;
                 }
             }).then(data => {
@@ -117,6 +121,10 @@ export default (options = {}) => {
 
                 // 更新界面
                 this.setData(data);
+
+                if (config.debug) {
+                    console.log('LayoutPage.data', this.data);
+                }
             }).catch(error => {
                 wx.showModal({
                     title: '无法从服务器获取数据。（Cannot get data from remote server.）',

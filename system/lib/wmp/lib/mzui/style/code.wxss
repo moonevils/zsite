@@ -1,6 +1,7 @@
 .code,
 .kbd,
 .pre,
+.text-code,
 .samp {
     font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
 }

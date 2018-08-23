@@ -1,4 +1,26 @@
 <!--index.wxml-->
-<mzui-layout-page loading="{{false}}">
-    <view slot="header">这里是插入到组件slot name="before"中的内容</view>
-</mzui-layout-page>
+<view wx:if="{{!loading}}">
+    <!-- 导入 header -->
+    <include src="../common/header.wxml" />
+
+    <!-- 导入布局模版 -->
+    <import src="../block/layout.tpl.wxml" />
+
+    <!-- 首页顶部布局 -->
+    <view class="layout layout-top">
+        <template wx:if="{{layouts.index_index && layouts.index_index.top}}" is="layout" data="{{blocks: layouts.index_index.top}}" />
+    </view>
+
+    <!-- 首页中部布局 -->
+    <view class="layout layout-middle">
+        <template wx:if="{{layouts.index_index && layouts.index_index.middle}}" is="layout" data="{{blocks: layouts.index_index.middle}}" />
+    </view>
+
+    <!-- 首页底部布局 -->
+    <view class="layout layout-bottom">
+        <template wx:if="{{layouts.index_index && layouts.index_index.bottom}}" is="layout" data="{{blocks: layouts.index_index.bottom}}" />
+    </view>
+
+    <!-- 导入 footer -->
+    <include src="../common/footer.wxml" />
+</view>

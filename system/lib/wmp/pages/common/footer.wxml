@@ -1,0 +1,5 @@
+<view id="footer">
+    <import src="../block/layout.tpl.wxml" />
+
+    <template wx:if="{{layouts.all && layouts.all.bottom}}" is="layout" data="{{blocks: layouts.all.bottom, grid: false}}" />
+</view>

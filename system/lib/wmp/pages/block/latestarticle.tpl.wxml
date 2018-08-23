@@ -1,0 +1,6 @@
+<template name="latestArticle">
+  <view class="box yellow-pale well">
+    <view class="">latestArticle 区块尚未就绪</view>
+    <view class="code">pages/block/latestarticle.tpl.wxml</view>
+  </view>
+</template>

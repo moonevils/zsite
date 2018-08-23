@@ -1,0 +1,6 @@
+<template name="about">
+  <view class="box yellow-pale well">
+    <view class="">about 区块尚未就绪</view>
+    <view class="code">pages/block/about.tpl.wxml</view>
+  </view>
+</template>

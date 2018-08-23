@@ -1,0 +1,6 @@
+<template name="slide">
+  <view class="box yellow-pale well">
+    <view class="">slide 区块尚未就绪</view>
+    <view class="code">pages/block/slide.tpl.wxml</view>
+  </view>
+</template>
