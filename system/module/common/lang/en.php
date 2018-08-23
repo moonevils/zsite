@@ -334,8 +334,9 @@ $lang->security->menu->log         = 'Login Log|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
-$lang->interface->menu->oauth  = 'Social Login|site|setoauth|';
-$lang->interface->menu->mail   = array('link' => 'Email|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->oauth = 'Social Login|site|setoauth|';
+$lang->interface->menu->mail  = array('link' => 'Email|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->wmp   = 'Wechat Applet|wmp|setting|';
 
 /* Menu of score module. */
 $lang->score->menu = new stdclass();
