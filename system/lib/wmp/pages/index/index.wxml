@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<!-- 如果正在从服务器加载数据则不渲染界面 -->
 <view wx:if="{{!loading}}">
     <!-- 导入 header -->
     <include src="../common/header.wxml" />

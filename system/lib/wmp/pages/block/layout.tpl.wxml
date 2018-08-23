@@ -7,6 +7,9 @@
 
 <template name="layout">
   <view wx:for="{{blocks}}" wx:for-item="block" wx:key="unique" class="block">
+    <view class="heading primary">
+        <text class="title">{{block.title}}</text>
+    </view>
     <template is="{{block.type}}" data="{{block: block}}" />
   </view>
 </template>
