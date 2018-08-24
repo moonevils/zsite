@@ -11,7 +11,7 @@
         </view>
     </view>
 
-    <!-- 区块内 -->
+    <!-- 区块内容 -->
     <view class="content has-padding">
         <rich-text nodes="{{block.content.content}}" />
     </view>

@@ -1,3 +1,5 @@
+import WxParse from '../lib/wxParse/wxParse.js';
+
 /**
  * 获取当前页面 URL
  * 
@@ -124,6 +126,14 @@ export default (options = {}) => {
                             blocks.forEach(block => {
                                 if (block && block.content && typeof block.content === 'string') {
                                     block.content = JSON.parse(block.content);
+                                    if (block.type === 'htmlcode' && block.content.content) {
+                                        block.content.setData = data => {
+                                            if (data.article) {
+                                                block.content.article = data.article;
+                                            }
+                                        };
+                                        WxParse.wxParse('article', 'html', block.content.content, block.content, 5);
+                                    }
                                 }
                             });
                         })

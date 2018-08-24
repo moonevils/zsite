@@ -5,6 +5,7 @@
 <import src="./latestarticle.tpl.wxml" />
 <import src="./latestproduct.tpl.wxml" />
 <import src="./html.tpl.wxml" />
+<import src="./htmlcode.tpl.wxml" />
 
 <template name="layout">
   <view wx:for="{{blocks}}" wx:for-item="block" wx:key="unique" class="block">

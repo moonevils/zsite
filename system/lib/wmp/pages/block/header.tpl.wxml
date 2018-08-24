@@ -1,6 +1,7 @@
 <template name="header">
-  <view class="box yellow-pale well">
-    <view class="">header 区块尚未就绪</view>
-    <view class="code">pages/block/header.tpl.wxml</view>
+  <view class="nav space-sm shadow-1">
+    <block wx:for="{{block.navs}}" wx:key="uniq">
+        <navigator wx:if="{{item.type === 'system'}}" class="item">{{item.title}}</navigator>
+    </block>
   </view>
 </template>

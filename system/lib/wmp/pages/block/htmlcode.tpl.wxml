@@ -1,0 +1,9 @@
+<import src="../../lib/wxParse/wxParse.wxml"/>
+
+<template name="htmlcode">
+  <!-- 此模版绑定的数据即为区块对象，例如 {{title}} 就是区块标题 -->
+  <view class='content has-padding'>
+      <!-- <rich-text nodes="{{block.content.content}}" /> -->
+      <template is="wxParse" data="{{wxParseData: block.content.article.nodes}}"/>
+  </view>
+</template>
