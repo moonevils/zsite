@@ -14,3 +14,4 @@
 @import './list.wxss';
 @import './skin.wxss';
 @import './code.wxss';
+@import './panel.wxss';

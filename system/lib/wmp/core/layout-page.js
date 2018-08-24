@@ -9,7 +9,9 @@ const getCurrentPageUrl = () => {
     return currentPage.route;
 };
 
+// 获取全局 app 对象
 const app = getApp();
+// 获取 chanzhi 和 config 对象
 const {chanzhi, config} = app;
 
 /**
@@ -24,6 +26,7 @@ export default (options = {}) => {
     delete options.moduleName;
     delete options.methodName;
 
+    // 注册页面
     Page(Object.assign({}, options, {
         /**
          * 页面绑定的数据
@@ -116,6 +119,21 @@ export default (options = {}) => {
                     });
                 }
 
+                // 格式化布局中的区块对象，将 content 字段从字符串转换为 js 对象
+                if (data.layouts) {
+                    Object.keys(data.layouts).forEach(pageName => {
+                        const pageLayout = data.layouts[pageName];
+                        Object.keys(pageLayout).forEach(layoutName => {
+                            const blocks = pageLayout[layoutName];
+                            blocks.forEach(block => {
+                                if (block && block.content && typeof block.content === 'string') {
+                                    block.content = JSON.parse(block.content);
+                                }
+                            });
+                        })
+                    });
+                }
+
                 // 取消显示正在加载的提示
                 data.loading = false;
 
@@ -138,6 +156,9 @@ export default (options = {}) => {
          * 处理下拉刷新请求
          */
         onPullDownRefresh: function() {
+            if (options.onPullDownRefresh && options.onPullDownRefresh() === false) {
+                return;
+            }
             return this.tryLoadData();
         }
     }));
