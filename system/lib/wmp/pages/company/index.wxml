@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<!-- 如果正在从服务器加载数据则不渲染界面 -->
+<view wx:if="{{!loading}}">
+    <!-- 导入公共 header -->
+    <include src="../common/header.wxml" />
+    
+    <!-- 导入布局模版 -->
+    <import src="../block/layout.tpl.wxml" />
+    
+    <!-- 首页顶部布局 -->
+    <view class="layout layout-top">
+        <template wx:if="{{layouts.company_index && layouts.company_index.top}}" is="layout" data="{{blocks: layouts.company_index.top}}" />
+    </view>
+    
+    <!-- 首页中部布局 -->
+    <view class="content has-padding">
+        <rich-text nodes="{{data.company.content}}" />
+    </view>
+    
+    <!-- 首页底部布局 -->
+    <view class="layout layout-bottom">
+        <template wx:if="{{layouts.company_index && layouts.company_index.bottom}}" is="layout" data="{{blocks: layouts.company_index.bottom}}" />
+    </view>
+    
+    <!-- 导入公共 footer -->
+    <include src="../common/footer.wxml" />
+</view>
