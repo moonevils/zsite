@@ -967,6 +967,10 @@ class blockModel extends model
         $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
         if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
 
+        $imageSize = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';
+        foreach($articles as $article) $article->image = $this->loadModel('file')->printFileURL($article->image->primary, $imageSize);
+
+        $block->content  = $content;
         $block->articles = $articles;
         return $block;
     }
@@ -998,6 +1002,7 @@ class blockModel extends model
         if(empty($content->category)) $content->category = 0;
         $showImage = isset($content->image) ? true : false;
         $block->products = $this->loadModel('product')->$method($content->category, $content->limit, $showImage);
+        $block->content  = $content;
         return $block;
     }
 
@@ -1027,6 +1032,7 @@ class blockModel extends model
         $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit, 'blog');
         if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
 
+        $block->content  = $content;
         $block->articles = $articles;
         return $block;
     }
@@ -1047,6 +1053,7 @@ class blockModel extends model
         $block->globalButtons = !empty($group->desc) ? json_decode($group->desc, true) : array();
         $block->slideStyle    = !empty($block->content->style) ? $block->content->style : 'carousel';
         $block->slides  = $this->loadModel('slide')->getList($groupID);
+        $block->content  = $content;
         return $block;
     }
 
@@ -1061,6 +1068,7 @@ class blockModel extends model
     {
         $content = json_decode($block->content);
         $block->product = $this->loadModel('product')->getByID($content->product);
+        $block->content  = $content;
         return $block;
     }
 
@@ -1075,6 +1083,7 @@ class blockModel extends model
     {
         $content = json_decode($block->content);
         $block->pages = $model->loadModel('article')->getPageList($content->limit);
+        $block->content  = $content;
         return $block;
     }
 
