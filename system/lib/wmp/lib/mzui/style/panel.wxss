@@ -1,2 +1,3 @@
 .panel {margin: 20rpx; border: 2rpx solid #ddd;}
 .panel > .heading {background: #f1f1f1;}
+.panel > .content {background: #fff;}

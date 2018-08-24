@@ -94,10 +94,6 @@ export default (options = {}) => {
             }
 
             // 显示正在加载提示
-            if (!this.data.loading) {
-                this.setData({loading: true});
-            }
-
             wx.showNavigationBarLoading();
 
             // 发起 ajax 请求
