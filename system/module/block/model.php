@@ -967,11 +967,22 @@ class blockModel extends model
         $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
         if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
 
-        $imageSize = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';
-        foreach($articles as $article) $article->image = $this->loadModel('file')->printFileURL($article->image->primary, $imageSize);
+        $block->articles = $articles;
+        if($content->image)
+        {
+            $imageSize = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';
+            $articlesWithImage = array();
+            foreach($articles as $article)
+            {
+                if(!isset($article->image->primary)) continue;
+                $article->image->primary->objectType = 'article';
+                $article->image = $this->loadModel('common')->getSysUrl() . $this->loadModel('file')->printFileURL($article->image->primary, $imageSize);
+                $articlesWithImage[] = $article;
+            }
+            $block->articles = $articlesWithImage;
+        }
 
         $block->content  = $content;
-        $block->articles = $articles;
         return $block;
     }
 
