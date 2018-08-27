@@ -68,8 +68,27 @@ var convertUrl = function(url) {
     return '';
 };
 
+/**
+ * 格式化服务器端 URL
+ * @param {string} url 要格式化的服务器地址
+ * @return {string} 格式化之后的服务器地址
+ */
+var formatServerUrl = function(url, configRoot, decode) {
+    if (typeof configRoot === 'object') {
+        configRoot = configRoot.root;
+    }
+    if (decode) {
+        url = decodeURIComponent(url);
+    }
+    if (url.indexOf('https://') === -1 && url.indexOf('http://') === -1) {
+        url = configRoot + url;
+    }
+    return url.replace(getRegExp('&amp;', 'g'), '&');
+};
+
 module.exports = {
     test: 'test',
     convertUrl: convertUrl,
-    getSearchParam: getSearchParam
+    getSearchParam: getSearchParam,
+    formatServerUrl: formatServerUrl
 };

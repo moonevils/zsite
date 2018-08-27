@@ -35,7 +35,8 @@ export default (options = {}) => {
          */
         data: {
             loading: true,
-            layouts: {}
+            layouts: {},
+            config
         },
 
         /**
@@ -152,6 +153,7 @@ export default (options = {}) => {
 
                 if (config.debug) {
                     console.log('LayoutPage.data', this.data);
+                    global.layoutData = this.data;
                 }
             }).catch(error => {
                 wx.showModal({

@@ -13,17 +13,17 @@
 
     <!-- 首页顶部布局 -->
     <view class="layout layout-top">
-        <template wx:if="{{layouts.index_index && layouts.index_index.top}}" is="layout" data="{{blocks: layouts.index_index.top}}" />
+        <template wx:if="{{layouts.index_index && layouts.index_index.top}}" is="layout" data="{{blocks: layouts.index_index.top, config: config}}" />
     </view>
 
     <!-- 首页中部布局 -->
     <view class="layout layout-middle">
-        <template wx:if="{{layouts.index_index && layouts.index_index.middle}}" is="layout" data="{{blocks: layouts.index_index.middle}}" />
+        <template wx:if="{{layouts.index_index && layouts.index_index.middle}}" is="layout" data="{{blocks: layouts.index_index.middle, config: config}}" />
     </view>
 
     <!-- 首页底部布局 -->
     <view class="layout layout-bottom">
-        <template wx:if="{{layouts.index_index && layouts.index_index.bottom}}" is="layout" data="{{blocks: layouts.index_index.bottom}}" />
+        <template wx:if="{{layouts.index_index && layouts.index_index.bottom}}" is="layout" data="{{blocks: layouts.index_index.bottom, config: config}}" />
     </view>
 
     <!-- 导入公共 footer -->
