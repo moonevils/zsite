@@ -133,6 +133,12 @@ export default (options = {}) => {
                         Object.keys(pageLayout).forEach(layoutName => {
                             const blocks = pageLayout[layoutName];
                             blocks.forEach(block => {
+                                if (block.titleless === '0') {
+                                    block.titleless = false;
+                                }
+                                if (block.borderless === '0') {
+                                    block.borderless = false;
+                                }
                                 if (block && block.content && typeof block.content === 'string') {
                                     block.content = JSON.parse(block.content);
                                     if (block.type === 'htmlcode' && block.content.content) {
