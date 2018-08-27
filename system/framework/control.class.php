@@ -380,6 +380,7 @@ class control extends baseControl
         $output['status']  = is_object($this->view) ? 'success' : 'fail';
         $output['data']    = $this->view;
         $output['company'] = $this->config->company;
+        $output['lang']    = $this->lang;
         $output['site']    = $this->config->site;
         $output['layouts'] = $this->loadModel('block')->getWmpLayouts($moduleName, $methodName);
 
