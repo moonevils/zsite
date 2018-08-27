@@ -4,8 +4,8 @@
 <template name="slide">
     <swiper class="block-slides slides" indicator-dots="true" autoplay="true" indicator-color="rgba(255,255,255,.5)" indicator-active-color="#fff">
         <block wx:for="{{block.slides}}">
-            <swiper-item height="150">
-                <image mode="aspectFill" data-src="{{item.image}}" item-id="{{item.id}}" src="{{helper.formatServerUrl(item.image, config, true)}}" class="slide-image"/>
+            <swiper-item item-id="{{item.id}}">
+                <image mode="aspectFill" data-src="{{item.image}}" src="{{helper.formatServerUrl(item.image, config, true)}}" class="slide-image"/>
             </swiper-item>
         </block>
     </swiper>

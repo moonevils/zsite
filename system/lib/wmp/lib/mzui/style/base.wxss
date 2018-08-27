@@ -48,7 +48,7 @@
 */
 
 page {
-  background: #f8f8f8;
+  background: #fff;
   font-family: -apple-system-font, 'Helvetica Neue', Helvetica, 'Microsoft Yahei', 'PingFang SC', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
   font-size: 28rpx;
   line-height: 1.4285714286;
