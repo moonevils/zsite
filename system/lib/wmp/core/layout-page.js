@@ -140,6 +140,10 @@ export default (options = {}) => {
                     });
                 }
 
+                if (this.onDataLoad) {
+                    data = this.onDataLoad.call(this, data);
+                }
+
                 // 取消显示正在加载的提示
                 data.loading = false;
 
