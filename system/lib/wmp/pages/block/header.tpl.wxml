@@ -7,7 +7,8 @@
     </navigator>
     <view class="nav space-sm divider">
         <block wx:for="{{block.navs}}" wx:key="uniq">
-            <navigator open-type="{{helper.isHomeUrl(item.url) ? 'reLaunch' : 'navigate'}}" class="item" url="{{helper.convertUrl(item.url)}}" data-url="{{item.url}}">{{item.title}}</navigator>
+            <navigator wx:if="{{!item.children || !item.children.length}}" open-type="{{helper.isHomeUrl(item.url) ? 'reLaunch' : 'navigate'}}" class="item" url="{{helper.convertUrl(item.url)}}" data-url="{{item.url}}">{{item.title}}</navigator>
+            <action-sheet-link wx:else class="item" actions="{{item.children}}">{{item.title}} <text class="icon icon-caret-down muted"></text></action-sheet-link>
         </block>
     </view>
 </template>
