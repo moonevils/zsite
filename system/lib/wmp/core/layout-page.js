@@ -118,14 +118,6 @@ export default (options = {}) => {
                 // 格式化服务器端数据
                 delete data.status;
 
-                // 更新导航栏标题
-                if (data.data && data.data.title) {
-                    wx.setNavigationBarTitle({
-                        title: data.data.title
-                    });
-                    pageTitleCache[this.serverUrl] = data.data.title;
-                }
-
                 // 格式化布局中的区块对象，将 content 字段从字符串转换为 js 对象
                 if (data.layouts) {
                     Object.keys(data.layouts).forEach(pageName => {
@@ -157,6 +149,21 @@ export default (options = {}) => {
 
                 if (this.onDataLoad) {
                     data = this.onDataLoad.call(this, data);
+                }
+
+                // 更新导航栏标题
+                if (data.data && data.data.title) {
+                    wx.setNavigationBarTitle({
+                        title: data.data.title
+                    });
+                    pageTitleCache[this.serverUrl] = data.data.title;
+                }
+                // 如果服务器端有设置导航条样式则应用服务器上的设置
+                if (data.navigationStyle) {
+                    wx.setNavigationBarColor({
+                        frontColor: data.navigationStyle.frontColor,
+                        backgroundColor: data.navigationStyle.backgroundColor,
+                    });
                 }
 
                 // 取消显示正在加载的提示
