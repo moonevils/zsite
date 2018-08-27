@@ -2,7 +2,7 @@
 <wxs src="../common/helper.wxs" module="helper" />
 
 <template name="header">
-    <image mode="aspectFit" data-src="{{block.logo}}" src="{{helper.formatServerUrl(block.logo, config)}}" class="logo fluid" style="height: 100rpx; width: auto" />
+    <image wx:if="{{block.logo}}" mode="aspectFit" data-src="{{block.logo}}" src="{{helper.formatServerUrl(block.logo, config)}}" class="logo fluid" style="height: 100rpx; width: auto" />
     <view class="nav space-sm divider">
         <block wx:for="{{block.navs}}" wx:key="uniq">
             <navigator class="item" url="{{helper.convertUrl(item.url)}}" data-url="{{item.url}}">{{item.title}}</navigator>
