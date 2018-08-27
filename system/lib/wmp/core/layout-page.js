@@ -21,7 +21,7 @@ const pageTitleCache = {};
 /**
  * 注册蝉知通用布局页面
  * 
- * @param {object} 注册参数
+ * @param {object} options 注册参数
  */
 export default (options = {}) => {
     let {moduleName, methodName} = options;
