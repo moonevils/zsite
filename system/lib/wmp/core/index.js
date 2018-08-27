@@ -102,6 +102,31 @@ export const getServerUrl = (moduleName, methodName, params) => {
 };
 
 /**
+ * 将蝉知服务器上的链接转换为小程序页面链接
+ * @param {string} url 蝉知服务器生成的链接
+ * @return {string} 小程序页面链接
+ */
+export const convertUrl = (url) => {
+    const paramsStart = url.indexOf('?');
+    if (paramsStart > -1) {
+        const params = getSearchParam(url.substring(paramsStart));
+        const urlSegs = ['/pages/', params.m, '/', params.f];
+        const searchSegs = [];
+        for (let i = 0; i < params.$keys.length; ++i) {
+            const key = params.$keys[i];
+            if (key !== 'm' && key !== 'f' && key !== 't') {
+                searchSegs.push(key + '=' + params[key]);
+            }
+        }
+        if (searchSegs.length) {
+            urlSegs.push('?', searchSegs.join('&'));
+        }
+        return urlSegs.join('');
+    }
+    return '';
+};
+
+/**
  * 导出蝉知核心模块
  */
 export default {
@@ -115,7 +140,8 @@ export default {
 
     getServerUrl,
     ajaxGet,
-    ajaxPost
+    ajaxPost,
+    convertUrl
 };
 
 if (config.debug) {
@@ -130,6 +156,7 @@ if (config.debug) {
 
         getServerUrl,
         ajaxGet,
-        ajaxPost
+        ajaxPost,
+        convertUrl
     });
 }

@@ -1,4 +1,8 @@
 <!--index.wxml-->
+
+<!-- 引入公共辅助模块（<wxs> 模块只能在定义模块的 WXML 文件中被访问到。使用 <include> 或 <import> 时，<wxs> 模块不会被引入到对应的 WXML 文件中。） -->
+<wxs src="../common/helper.wxs" module="helper" />
+
 <!-- 如果正在从服务器加载数据则不渲染界面 -->
 <view wx:if="{{!loading}}">
     <!-- 导入公共 header -->
