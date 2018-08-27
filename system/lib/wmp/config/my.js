@@ -8,7 +8,7 @@ export default {
     token: 'abcdefghijklmnopqrstuvwxyz',
     siteName: '蝉知企业门户系统',
     root: 'https://aiux.chanzhi.org/',
-    requestType: 'PATH_INFO',
+    requestType: 'GET',
     requestFix: '-',
     moduleVar: 'm',
     methodVar: 'f',

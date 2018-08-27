@@ -29,7 +29,7 @@ if (!config.error && !isWebUrl(config.root)) {
 }
 
 if (config.debug) {
-    console.log('Chanzhi.Config', config);
+    console.log('getApp().config =', config);
 }
 
 /**

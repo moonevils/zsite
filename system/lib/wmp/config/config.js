@@ -14,7 +14,7 @@ export default {
     siteName: '蝉知企业门户系统',
 
     // 其他配置
-    requestType: 'PATH_INFO',
+    requestType: 'GET',
     requestFix: '-',
     moduleVar: 'm',
     methodVar: 'f',

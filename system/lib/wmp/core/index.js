@@ -117,3 +117,19 @@ export default {
     ajaxGet,
     ajaxPost
 };
+
+if (config.debug) {
+    console.log('getApp().chanzhi =', {
+        get config() {
+            return config;
+        },
+
+        get error() {
+            return config.error;
+        },
+
+        getServerUrl,
+        ajaxGet,
+        ajaxPost
+    });
+}
