@@ -1,6 +1,17 @@
+
 <template name="about">
-  <view class="box yellow-pale well">
-    <view class="">about 区块尚未就绪</view>
-    <view class="code">pages/block/about.tpl.wxml</view>
+  <!-- 此模版绑定的数据即为区块对象 block，例如 {{block.title}} 就是区块标题 -->
+  <view class="panel">
+     <!-- 区块头部 -->   
+    <view class="heading">
+        <text class="title strong">{{block.title}}</text>
+        <view class="nav" wx:if="{{block.content.moreUrl && block.content.moreText}}">
+            <view class="item">{{block.content.moreText}}</view>
+        </view>
+    </view>
+
+    <view class="content has-padding">
+        <rich-text nodes="{{block.content.content}}" />
+    </view>
   </view>
 </template>
