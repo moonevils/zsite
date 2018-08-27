@@ -70,6 +70,7 @@ var convertUrl = function(url) {
 
 /**
  * 格式化服务器端 URL
+ * 
  * @param {string} url 要格式化的服务器地址
  * @return {string} 格式化之后的服务器地址
  */
@@ -86,9 +87,20 @@ var formatServerUrl = function(url, configRoot, decode) {
     return url.replace(getRegExp('&amp;', 'g'), '&');
 };
 
+/**
+ * 判断一个服务器网址是否指向首页
+ * 
+ * @param {string} url 要判断的地址
+ * @return {boolean}
+ */
+var isHomeUrl = function(url) {
+    return url.indexOf('?m=index&f=index&') > -1;
+};
+
 module.exports = {
     test: 'test',
     convertUrl: convertUrl,
     getSearchParam: getSearchParam,
-    formatServerUrl: formatServerUrl
+    formatServerUrl: formatServerUrl,
+    isHomeUrl: isHomeUrl
 };
