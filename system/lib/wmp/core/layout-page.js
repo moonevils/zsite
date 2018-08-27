@@ -16,6 +16,8 @@ const app = getApp();
 // 获取 chanzhi 和 config 对象
 const {chanzhi, config} = app;
 
+const pageTitleCache = {};
+
 /**
  * 注册蝉知通用布局页面
  * 
@@ -23,10 +25,6 @@ const {chanzhi, config} = app;
  */
 export default (options = {}) => {
     let {moduleName, methodName} = options;
-
-    // 删除不用的属性作为 Page 参数
-    delete options.moduleName;
-    delete options.methodName;
 
     // 注册页面
     Page(Object.assign({}, options, {
@@ -47,9 +45,11 @@ export default (options = {}) => {
             const currentPageUrlSegs = currentPageUrl.split('/');
             if (!moduleName) {
                 moduleName = currentPageUrlSegs[currentPageUrlSegs.length - 2];
+                this.moduleName = moduleName;
             }
             if (!methodName) {
                 methodName = currentPageUrlSegs[currentPageUrlSegs.length - 1];
+                this.methodName = methodName;
             }
 
             const errorMessage = chanzhi.error;
@@ -61,6 +61,13 @@ export default (options = {}) => {
                 return;
             }
             this.serverUrl = chanzhi.getServerUrl(moduleName, methodName, params);
+
+            if (pageTitleCache[this.serverUrl]) {
+                wx.setNavigationBarTitle({
+                    title: pageTitleCache[this.serverUrl],
+                });
+            }
+
             this.loadData();
             if (options.onLoad) {
                 options.onLoad(params);
@@ -116,6 +123,7 @@ export default (options = {}) => {
                     wx.setNavigationBarTitle({
                         title: data.data.title
                     });
+                    pageTitleCache[this.serverUrl] = data.data.title;
                 }
 
                 // 格式化布局中的区块对象，将 content 字段从字符串转换为 js 对象
