@@ -15,3 +15,4 @@
 @import './skin.wxss';
 @import './code.wxss';
 @import './panel.wxss';
+@import './slides.wxss';

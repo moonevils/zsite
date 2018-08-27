@@ -10,7 +10,7 @@
     "window": {
         "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#f8f8f8",
-        "navigationBarTitleText": "蝉知",
+        "navigationBarTitleText": "",
         "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true,
         "backgroundColorTop": "#f8f8f8",

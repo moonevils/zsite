@@ -1,0 +1,7 @@
+.slides {
+    height: 150px;
+}
+.slide-image {
+    height: 150px;
+    width: 100%;
+}

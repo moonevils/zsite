@@ -1,11 +1,11 @@
-
 <!-- 引入公共辅助模块（<template> 标签中，只能使用定义该 <template> 的 WXML 文件中定义的 <wxs> 模块。） -->
 <wxs src="../common/helper.wxs" module="helper" />
 
 <template name="header">
-  <view class="nav space-sm shadow-1">
-    <block wx:for="{{block.navs}}" wx:key="uniq">
-        <navigator class="item" url="{{helper.convertUrl(item.url)}}" data-url="{{item.url}}">{{item.title}}</navigator>
-    </block>
-  </view>
+    <image wx:if="{{block.logo}}" mode="aspectFit" data-src="{{block.logo}}" src="{{helper.formatServerUrl(block.logo, config)}}" class="logo fluid" style="height: 100rpx; margin-top: 10rpx;" />
+    <view class="nav space-sm divider">
+        <block wx:for="{{block.navs}}" wx:key="uniq">
+            <navigator class="item" url="{{helper.convertUrl(item.url)}}" data-url="{{item.url}}">{{item.title}}</navigator>
+        </block>
+    </view>
 </template>
