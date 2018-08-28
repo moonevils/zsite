@@ -11,7 +11,7 @@
     </view>
 
     <view class="content has-padding">
-        <rich-text nodes="{{block.content.content}}" />
+        <rich-text nodes="{{block.data.content}}" />
     </view>
   </view>
 </template>
