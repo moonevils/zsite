@@ -8,8 +8,8 @@
             <view class="item">{{block.content.moreText}}</view>
         </view>
     </view>
-    <view class="content has-padding">
-        <rich-text nodes="{{block.content.content}}" />
+    <view wx:for="{{block.contact}}" wx:key="contact" class="content has-padding">
+        <rich-text nodes="{{item}}" />
     </view>
   </view>
 </template>
