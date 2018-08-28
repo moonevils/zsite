@@ -976,7 +976,7 @@ class blockModel extends model
             {
                 if(!isset($article->image->primary)) continue;
                 $article->image->primary->objectType = 'article';
-                $article->image = $this->loadModel('common')->getSysUrl() . $this->loadModel('file')->printFileURL($article->image->primary, $imageSize);
+                $article->image = $this->loadModel('file')->printFileURL($article->image->primary, $imageSize);
                 $articlesWithImage[] = $article;
             }
             $block->articles = $articlesWithImage;
