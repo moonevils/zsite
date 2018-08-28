@@ -12,24 +12,26 @@
  * const option = getSearchParam('blockID=3&page=all');
  */
 export const getSearchParam = (search, key = null) => {
-    const params = {};
+    const params = {$keys: []};
     if (search.length > 1) {
         if (search[0] === '?') {
             search = search.substr(1);
         }
         const searchArr = search.split('&');
-        for (const pair of searchArr) {
+        searchArr.forEach(pair => {
             const pairValues = pair.split('=', 2);
+            const pairKey = pairValues[0];
             if (pairValues.length > 1) {
                 try {
-                    params[pairValues[0]] = decodeURIComponent(pairValues[1]);
+                    params[pairKey] = decodeURIComponent(pairValues[1]);
                 } catch (_) {
-                    params[pairValues[0]] = '';
+                    params[pairKey] = '';
                 }
             } else {
-                params[pairValues[0]] = '';
+                params[pairKey] = '';
             }
-        }
+            params.$keys.push(pairKey);
+        });
     }
     return key ? params[key] : params;
 };

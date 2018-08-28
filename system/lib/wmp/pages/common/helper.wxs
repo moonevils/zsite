@@ -1,0 +1,106 @@
+/**
+ *  Helper 模块提供一些简单的辅助方法，可以在页面（wxml）直接调用
+ * 调用方法
+ *     <wxs src="../common/helper.wxs" module="helper" />
+ * 
+ * wxs 是一种不同于 javascript 的脚本语言，语法参考 
+ * https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxs/
+ */
+
+/**
+ * 将URL搜索字符串解析为键值表
+ * 
+ * @param {string} search 要解析的搜索字符串，例如 'blockID=3&page=all'
+ * @param {?string} key 要解析的键名，如果忽略则返回包含所有键值的对象，否则返回指定键名的值
+ * @return {object|string} 返回指定键名的值或者包含所有键值的对象
+ * @example <caption>返回指定键名的值</caption>
+ * // blockID 的值为 '3'
+ * var blockID = getSearchParam('blockID=3&page=all', 'blockID');
+ * @example <caption>返回包含所有键值的对象</caption>
+ * // option 的值为 {blockID: '3', page: 'all'}
+ * var option = getSearchParam('blockID=3&page=all');
+ */
+var getSearchParam = function(search, key, decode = false) {
+    var params = {_KEYS: []}, keyValue;
+    if (search.length > 1) {
+        if (search[0] === '?') {
+            search = search.substring(1);
+        }
+        var searchArr = search.split('&');
+        for (var i = 0; i < searchArr.length; ++i) {
+            var pairValues = searchArr[i].split('=', 2);
+            var paramName = pairValues[0];
+            var paramValue = pairValues.length > 1 ? (decode ? decodeURIComponent(pairValues[1]) : pairValues[1]) : '';
+            if (paramName === key) {
+                keyValue = paramValue;
+                break;
+            }
+            params[paramName] = paramValue;
+            params._KEYS.push(paramName);
+        }
+    }
+    return key ? params[key] : params;
+};
+
+
+/**
+ * 将蝉知服务器上的链接转换为小程序页面链接
+ * @param {string} url 蝉知服务器生成的链接
+ * @return {string} 小程序页面链接
+ */
+var convertUrl = function(url) {
+    var paramsStart = url.indexOf('?');
+    if (paramsStart > -1) {
+        var params = getSearchParam(url.substring(paramsStart));
+        var urlSegs = ['/pages/', params.m, '/', params.f];
+        var searchSegs = [];
+        for (var i = 0; i < params._KEYS.length; ++i) {
+            var key = params._KEYS[i];
+            if (key !== 'm' && key !== 'f' && key !== 't') {
+                searchSegs.push(key + '=' + params[key]);
+            }
+        }
+        if (searchSegs.length) {
+            urlSegs.push('?', searchSegs.join('&'));
+        }
+        return urlSegs.join('');
+    }
+    return '';
+};
+
+/**
+ * 格式化服务器端 URL
+ * 
+ * @param {string} url 要格式化的服务器地址
+ * @return {string} 格式化之后的服务器地址
+ */
+var formatServerUrl = function(url, configRoot, decode) {
+    if (typeof configRoot === 'object') {
+        configRoot = configRoot.root;
+    }
+    if (decode) {
+        url = decodeURIComponent(url);
+    }
+    if (url.indexOf('https://') === -1 && url.indexOf('http://') === -1) {
+        url = configRoot + url;
+    }
+    return url.replace(getRegExp('&amp;', 'g'), '&');
+};
+
+/**
+ * 判断一个服务器网址是否指向首页
+ * 
+ * @param {string} url 要判断的地址
+ * @return {boolean}
+ */
+var isHomeUrl = function(url) {
+    return url.indexOf('?m=index&f=index&') > -1;
+};
+
+module.exports = {
+    test: 'test',
+    convertUrl: convertUrl,
+    getSearchParam: getSearchParam,
+    formatServerUrl: formatServerUrl,
+    isHomeUrl: isHomeUrl
+};

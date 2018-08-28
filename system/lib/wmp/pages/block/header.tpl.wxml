@@ -1,7 +1,14 @@
+<!-- 引入公共辅助模块（<template> 标签中，只能使用定义该 <template> 的 WXML 文件中定义的 <wxs> 模块。） -->
+<wxs src="../common/helper.wxs" module="helper" />
+
 <template name="header">
-  <view class="nav space-sm shadow-1">
-    <block wx:for="{{block.navs}}" wx:key="uniq">
-        <navigator wx:if="{{item.type === 'system'}}" class="item">{{item.title}}</navigator>
-    </block>
-  </view>
+     <navigator wx:if="{{block.logo}}" open-type="reLaunch" class="state block" url="/pages/index/index">
+        <image mode="aspectFit" data-src="{{block.logo}}" src="{{helper.formatServerUrl(block.logo, config)}}" class="logo fluid" style="height: 100rpx; margin-top: 10rpx;" />
+    </navigator>
+    <view class="nav space-sm divider">
+        <block wx:for="{{block.navs}}" wx:key="uniq">
+            <navigator wx:if="{{!item.children || !item.children.length}}" open-type="{{helper.isHomeUrl(item.url) ? 'reLaunch' : 'navigate'}}" class="item" url="{{helper.convertUrl(item.url)}}" data-url="{{item.url}}">{{item.title}}</navigator>
+            <action-sheet-link wx:else class="item" actions="{{item.children}}">{{item.title}} <text class="icon icon-caret-down muted"></text></action-sheet-link>
+        </block>
+    </view>
 </template>

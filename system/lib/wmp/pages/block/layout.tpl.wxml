@@ -10,6 +10,6 @@
 
 <template name="layout">
   <view wx:for="{{blocks}}" wx:for-item="block" wx:key="unique" class="block">
-    <template is="{{block.type}}" data="{{block: block}}" />
+    <template is="{{block.type}}" data="{{block: block, config: config}}" />
   </view>
 </template>

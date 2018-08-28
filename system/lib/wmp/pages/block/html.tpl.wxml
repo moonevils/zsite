@@ -1,9 +1,9 @@
 <template name="html">
-  <!-- 此模版绑定的数据即为区块对象，例如 {{title}} 就是区块标题 -->
-  <view class="panel">
+  <!-- 此模版绑定的数据即为区块对象，例如 {{block.title}} 就是区块标题 -->
+  <view class="panel{{block.borderless ? ' borderless' : ''}}">
 
  	<!-- 区块头部 -->   
-    <view class="heading">
+    <view class="heading" wx:if="{{!block.titleless}}">
         <view class="avatar" wx:if="{{block.content.icon}}"><text class="icon {{block.content.icon}}"></text></view>
         <text class="title strong">{{block.title}}</text>
         <view class="nav" wx:if="{{block.content.moreUrl && block.content.moreText}}">

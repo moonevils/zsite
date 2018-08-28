@@ -1,0 +1,4 @@
+<!--components/action-sheet-link.wxml-->
+<view bindtap="onTap">
+    <slot></slot>
+</view>
