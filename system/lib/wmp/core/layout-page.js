@@ -16,17 +16,15 @@ const app = getApp();
 // 获取 chanzhi 和 config 对象
 const {chanzhi, config} = app;
 
+const pageTitleCache = {};
+
 /**
  * 注册蝉知通用布局页面
  * 
- * @param {object} 注册参数
+ * @param {object} options 注册参数
  */
 export default (options = {}) => {
     let {moduleName, methodName} = options;
-
-    // 删除不用的属性作为 Page 参数
-    delete options.moduleName;
-    delete options.methodName;
 
     // 注册页面
     Page(Object.assign({}, options, {
@@ -35,7 +33,8 @@ export default (options = {}) => {
          */
         data: {
             loading: true,
-            layouts: {}
+            layouts: {},
+            config
         },
 
         /**
@@ -46,9 +45,11 @@ export default (options = {}) => {
             const currentPageUrlSegs = currentPageUrl.split('/');
             if (!moduleName) {
                 moduleName = currentPageUrlSegs[currentPageUrlSegs.length - 2];
+                this.moduleName = moduleName;
             }
             if (!methodName) {
                 methodName = currentPageUrlSegs[currentPageUrlSegs.length - 1];
+                this.methodName = methodName;
             }
 
             const errorMessage = chanzhi.error;
@@ -60,6 +61,13 @@ export default (options = {}) => {
                 return;
             }
             this.serverUrl = chanzhi.getServerUrl(moduleName, methodName, params);
+
+            if (pageTitleCache[this.serverUrl]) {
+                wx.setNavigationBarTitle({
+                    title: pageTitleCache[this.serverUrl],
+                });
+            }
+
             this.loadData();
             if (options.onLoad) {
                 options.onLoad(params);
@@ -110,13 +118,6 @@ export default (options = {}) => {
                 // 格式化服务器端数据
                 delete data.status;
 
-                // 更新导航栏标题
-                if (data.data && data.data.title) {
-                    wx.setNavigationBarTitle({
-                        title: data.data.title
-                    });
-                }
-
                 // 格式化布局中的区块对象，将 content 字段从字符串转换为 js 对象
                 if (data.layouts) {
                     Object.keys(data.layouts).forEach(pageName => {
@@ -124,6 +125,12 @@ export default (options = {}) => {
                         Object.keys(pageLayout).forEach(layoutName => {
                             const blocks = pageLayout[layoutName];
                             blocks.forEach(block => {
+                                if (block.titleless === '0') {
+                                    block.titleless = false;
+                                }
+                                if (block.borderless === '0') {
+                                    block.borderless = false;
+                                }
                                 if (block && block.content && typeof block.content === 'string') {
                                     block.content = JSON.parse(block.content);
                                     if (block.type === 'htmlcode' && block.content.content) {
@@ -140,6 +147,25 @@ export default (options = {}) => {
                     });
                 }
 
+                if (this.onDataLoad) {
+                    data = this.onDataLoad.call(this, data);
+                }
+
+                // 更新导航栏标题
+                if (data.data && data.data.title) {
+                    wx.setNavigationBarTitle({
+                        title: data.data.title
+                    });
+                    pageTitleCache[this.serverUrl] = data.data.title;
+                }
+                // 如果服务器端有设置导航条样式则应用服务器上的设置
+                if (data.navigationStyle) {
+                    wx.setNavigationBarColor({
+                        frontColor: data.navigationStyle.frontColor,
+                        backgroundColor: data.navigationStyle.backgroundColor,
+                    });
+                }
+
                 // 取消显示正在加载的提示
                 data.loading = false;
 
@@ -148,6 +174,7 @@ export default (options = {}) => {
 
                 if (config.debug) {
                     console.log('LayoutPage.data', this.data);
+                    global.layoutData = this.data;
                 }
             }).catch(error => {
                 wx.showModal({

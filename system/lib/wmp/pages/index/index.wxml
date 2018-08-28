@@ -1,4 +1,8 @@
 <!--index.wxml-->
+
+<!-- 引入公共辅助模块（<wxs> 模块只能在定义模块的 WXML 文件中被访问到。使用 <include> 或 <import> 时，<wxs> 模块不会被引入到对应的 WXML 文件中。） -->
+<wxs src="../common/helper.wxs" module="helper" />
+
 <!-- 如果正在从服务器加载数据则不渲染界面 -->
 <view wx:if="{{!loading}}">
     <!-- 导入公共 header -->
@@ -9,17 +13,17 @@
 
     <!-- 首页顶部布局 -->
     <view class="layout layout-top">
-        <template wx:if="{{layouts.index_index && layouts.index_index.top}}" is="layout" data="{{blocks: layouts.index_index.top}}" />
+        <template wx:if="{{layouts.index_index && layouts.index_index.top}}" is="layout" data="{{blocks: layouts.index_index.top, config: config}}" />
     </view>
 
     <!-- 首页中部布局 -->
     <view class="layout layout-middle">
-        <template wx:if="{{layouts.index_index && layouts.index_index.middle}}" is="layout" data="{{blocks: layouts.index_index.middle}}" />
+        <template wx:if="{{layouts.index_index && layouts.index_index.middle}}" is="layout" data="{{blocks: layouts.index_index.middle, config: config}}" />
     </view>
 
     <!-- 首页底部布局 -->
     <view class="layout layout-bottom">
-        <template wx:if="{{layouts.index_index && layouts.index_index.bottom}}" is="layout" data="{{blocks: layouts.index_index.bottom}}" />
+        <template wx:if="{{layouts.index_index && layouts.index_index.bottom}}" is="layout" data="{{blocks: layouts.index_index.bottom, config: config}}" />
     </view>
 
     <!-- 导入公共 footer -->

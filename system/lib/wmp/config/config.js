@@ -7,7 +7,7 @@ export default {
     // 是否开启 debug
     debug: true,
 
-    // defaultLang: 'zh-cn',
+    defaultLang: 'zh-cn',
     // token: 'abcdefghijklmnopqrstuvwxyz',
 
     // 站点名称
@@ -18,5 +18,8 @@ export default {
     requestFix: '-',
     moduleVar: 'm',
     methodVar: 'f',
-    viewVar: 't'
+    viewVar: 't',
+
+    // 外观配置
+    // navigationBarStyle: { frontColor: 'black', backgroundColor: '#fff' }
 };

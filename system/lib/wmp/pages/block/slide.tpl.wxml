@@ -1,6 +1,12 @@
+<!-- 引入公共辅助模块（<wxs> 模块只能在定义模块的 WXML 文件中被访问到。使用 <include> 或 <import> 时，<wxs> 模块不会被引入到对应的 WXML 文件中。） -->
+<wxs src="../common/helper.wxs" module="helper" />
+
 <template name="slide">
-  <view class="box yellow-pale well">
-    <view class="">slide 区块尚未就绪</view>
-    <view class="code">pages/block/slide.tpl.wxml</view>
-  </view>
+    <swiper class="block-slides slides" indicator-dots="true" autoplay="true" indicator-color="rgba(255,255,255,.5)" indicator-active-color="#fff">
+        <block wx:for="{{block.slides}}" wx:key="slide">
+            <swiper-item item-id="{{item.id}}">
+                <image mode="aspectFill" data-src="{{item.image}}" src="{{helper.formatServerUrl(item.image, config, true)}}" class="slide-image"/>
+            </swiper-item>
+        </block>
+    </swiper>
 </template>

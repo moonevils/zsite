@@ -5,8 +5,9 @@ import {getJSON, postJSON} from '../lib/mzui/js/ajax.js';
 
 /**
  * 生成指定区间的随机数
- * @param {number} 最小值
- * @param {number} 最大值
+ * 
+ * @param {number} min 最小值
+ * @param {number} max 最大值
  * @return {number}
  */
 const createRandom = (min, max) => {
@@ -45,7 +46,7 @@ export const ajaxGet = (options, onSuccess, onFail) => {
     if (typeof options === 'string') {
         options = { url: options };
     }
-    options.header = Object.assign({}, options.header, getToken());
+    options.header = Object.assign({'wmp-default-lang': config.defaultLang}, options.header, getToken());
     return getJSON(options, onSuccess, onFail);
 };
 
@@ -68,15 +69,17 @@ export const ajaxPost = (options, data, onSuccess, onFail) => {
     if (typeof options === 'string') {
         options = { url: options };
     }
-    options.header = Object.assign({}, options.header, getToken());
+    options.header = Object.assign({ 'wmp-default-lang': config.defaultLang }, options.header, getToken());
     return getJSON(options, data, onSuccess, onFail);
 };
 
 /**
  * 获取服务器 API 地址
  * 
- * @param {stirng} moduleName 模块名
+ * @param {string} moduleName 模块名
  * @param {string} methodName 方法名
+ * @param {object} params 其他参数
+ * @return {string} API 地址
  */
 export const getServerUrl = (moduleName, methodName, params) => {
     const urlPath = [config.root];
@@ -102,6 +105,32 @@ export const getServerUrl = (moduleName, methodName, params) => {
 };
 
 /**
+ * 将蝉知服务器上的链接转换为小程序页面链接
+ * 
+ * @param {string} url 蝉知服务器生成的链接
+ * @return {string} 小程序页面链接
+ */
+export const convertUrl = (url) => {
+    const paramsStart = url.indexOf('?');
+    if (paramsStart > -1) {
+        const params = getSearchParam(url.substring(paramsStart));
+        const urlSegs = ['/pages/', params.m, '/', params.f];
+        const searchSegs = [];
+        for (let i = 0; i < params.$keys.length; ++i) {
+            const key = params.$keys[i];
+            if (key !== 'm' && key !== 'f' && key !== 't') {
+                searchSegs.push(key + '=' + params[key]);
+            }
+        }
+        if (searchSegs.length) {
+            urlSegs.push('?', searchSegs.join('&'));
+        }
+        return urlSegs.join('');
+    }
+    return '';
+};
+
+/**
  * 导出蝉知核心模块
  */
 export default {
@@ -115,7 +144,8 @@ export default {
 
     getServerUrl,
     ajaxGet,
-    ajaxPost
+    ajaxPost,
+    convertUrl
 };
 
 if (config.debug) {
@@ -130,6 +160,7 @@ if (config.debug) {
 
         getServerUrl,
         ajaxGet,
-        ajaxPost
+        ajaxPost,
+        convertUrl
     });
 }
