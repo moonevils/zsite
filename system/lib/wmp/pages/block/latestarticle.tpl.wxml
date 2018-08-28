@@ -1,3 +1,4 @@
+<wxs src="../common/helper.wxs" module="helper" />
 <template name='latestArticle'>
   <view class="panel">
     <view class="heading">
@@ -8,7 +9,7 @@
     </view>  
   <view class="box blue-pale">
     <view wx:for="{{block.articles}}" wx:for-item="article" class="article-list">
-      <image wx:if="{{article.image}}" src="{{article.image}}" class='image-article-list'/>
+      <image wx:if="{{article.image}}" src="{{helper.formatServerUrl(article.image, config, true)}}" class='image-article-list'/>
       <text bindtap='viewArticle' class='list-li' data-url="/pages/article/view?id={{article.id}}" open-type='navigate' hover-class="navigator-hover" data-objectID="{{article.id}}">
       <text>{{article.title}}</text> 
       </text>
