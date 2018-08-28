@@ -2,6 +2,7 @@
 <import src="./header.tpl.wxml" />
 <import src="./slide.tpl.wxml" />
 <import src="./about.tpl.wxml" />
+<import src="./contact.tpl.wxml" />
 <import src="./latestarticle.tpl.wxml" />
 <import src="./latestproduct.tpl.wxml" />
 <import src="./html.tpl.wxml" />
