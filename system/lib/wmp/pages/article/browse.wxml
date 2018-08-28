@@ -1,7 +1,8 @@
+<wxs src="../common/helper.wxs" module="helper" />
 <view wx:if="{{!loading}}">
   <!-- 导入公共 header -->
   <include src="../common/header.wxml" />
-
+  
   <!-- 导入布局模版 -->
   <import src="../block/layout.tpl.wxml" />
 
@@ -28,17 +29,18 @@
           </view>
         </view>
       </block>
-      <block wx:for="{{data.articles}}">
+      <block wx:for="{{data.articles}}" wx:for-item="article">
         <view class="content has-padding">
-          <text class='title strong'> {{item.title}} </text>
-          <view class='content'> {{item.summary}}</view>
+          <text class='title strong'> {{article.title}} </text>
+          <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}"/>
+          <view class='content'> {{article.summary}}</view>
           <view>
             <icon class='icon-eye-open'></icon>
-            <text> {{data.config.viewsPlaceholder}}{{item.id}}{{data.config.viewsPlaceholder}} </text>
-            <icon wx:if="{{item.comments}}" class='icon-comments-alt'></icon>
-            <text wx:if="{{item.comments}}"> {{item.comments}}</text>
+            <text> {{data.config.viewsPlaceholder}}{{article.id}}{{data.config.viewsPlaceholder}} </text>
+            <icon wx:if="{{article.comments}}" class='icon-comments-alt'></icon>
+            <text wx:if="{{article.comments}}"> {{article.comments}}</text>
             <icon class='icon-time'></icon>
-            <text> {{item.addedDate}} </text>
+            <text> {{article.addedDate}} </text>
           </view>
         </view>
       </block>

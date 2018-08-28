@@ -88,6 +88,25 @@ var formatServerUrl = function(url, configRoot, decode) {
 };
 
 /**
+ * 
+ * 输出图片
+ * @param {object} file 
+ * @param {object} config 
+ * @param {string} size     fullURL|largeURL|middleURL|smallURL 
+ * @return {string}
+ */
+var printFileURL = function(file, config, size)
+{
+    if(typeof(size) === 'undefined') size = 'middleURL';
+    if(typeof(file) == 'object')
+    {
+        if(typeof(file.objectType) == 'undefined') file.objectType = '';
+        return config.root + 'file.php?f=' + file.pathname + '&t=' + file.extension + '&o=' + file.objectType + '&s=' + size;
+    }
+    return '';
+};
+
+/**
  * 判断一个服务器网址是否指向首页
  * 
  * @param {string} url 要判断的地址
@@ -102,5 +121,6 @@ module.exports = {
     convertUrl: convertUrl,
     getSearchParam: getSearchParam,
     formatServerUrl: formatServerUrl,
-    isHomeUrl: isHomeUrl
+    isHomeUrl: isHomeUrl,
+    printFileURL: printFileURL
 };

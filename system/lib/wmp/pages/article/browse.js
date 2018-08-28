@@ -1,6 +1,4 @@
 import LayoutPage from '../../core/layout-page.js';
-
-// 注册页面
 LayoutPage({
   onDataLoad: data => {
     Object.keys(data.data.articles).forEach(articleID => {
