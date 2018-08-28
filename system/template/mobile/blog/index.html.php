@@ -71,7 +71,7 @@
           {if(!empty($article->image))}
             <div class='table-cell thumbnail-cell'>
               {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {$stick->image->primary->objectType = 'article'}
+              {$article->image->primary->objectType = 'article'}
               {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
             </div>
           {/if}
