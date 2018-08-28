@@ -1,0 +1,37 @@
+<wxs src="../common/helper.wxs" module="helper" />
+<view wx:if="{{!loading}}">
+  <!-- 导入公共 header -->
+  <include src="../common/header.wxml" />
+
+  <!-- 导入布局模版 -->
+  <import src="../block/layout.tpl.wxml" />
+
+  <!-- 首页顶部布局 -->
+  <view class="layout layout-top">
+    <template wx:if="{{layouts.article_view && layouts.article_view.top}}" is="layout" data="{{blocks: layouts.article_view.top}}" />
+  </view>
+
+  <view class="container">
+    <view class="heading">
+      <text class="title strong no-padding">{{data.article.title}}</text>
+    </view>
+
+    <view class="caption small">
+      <icon class='icon-time icon-large'></icon> {{data.article.addedDate}}
+      <icon class='icon-user icon-large'></icon> {{data.article.author}}
+      <icon class='icon-eye-open'></icon> {{data.article.views}}
+    </view>
+
+    <view class="content has-padding">
+      <rich-text nodes="{{data.article.content}}" />
+    </view>
+  </view>
+
+  <!-- 首页底部布局 -->
+  <view class="layout layout-bottom">
+    <template wx:if="{{layouts.article_view && layouts.article_view.bottom}}" is="layout" data="{{blocks: layouts.article_view.bottom}}" />
+  </view>
+
+  <!-- 导入公共 footer -->
+  <include src="../common/footer.wxml" />
+</view>
