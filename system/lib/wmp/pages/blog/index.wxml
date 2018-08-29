@@ -33,7 +33,6 @@
 
       <block wx:for="{{data.articles}}" wx:for-item="article">
         <view class="content has-padding">
-        {{index}}
           <text class='title strong'> {{article.title}} </text>
           <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}" />
           <view class='content'> {{article.summary}}</view>
