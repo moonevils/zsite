@@ -15,8 +15,7 @@
     <view class="article-list">
       <block wx:for="{{data.sticks}}" wx:for-item="article">
         <view class="content has-padding">
-          <text class='title strong'> {{article.title}} </text>
-          <icon class="icon-arrow-up text-red"></icon>
+          <navigator class='title strong' url="/pages/article/view?id={{article.id}}"> {{article.title}} <icon class="icon-arrow-up text-red"></icon></navigator>
           <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}" />
           <view class='content'> {{article.summary}}</view>
           <view>
@@ -31,7 +30,7 @@
       </block>
       <block wx:for="{{data.articles}}" wx:for-item="article">
         <view class="content has-padding">
-          <text class='title strong'> {{article.title}} </text>
+          <navigator class='title strong'  url="/pages/article/view?id={{article.id}}"> {{article.title}} </navigator>
           <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}" />
           <view class='content'> {{article.summary}}</view>
           <view>
