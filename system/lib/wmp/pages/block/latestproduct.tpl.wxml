@@ -1,6 +1,20 @@
-<template name="latestProduct">
-  <view class="box yellow-pale well">
-    <view class="">latestProduct 区块尚未就绪</view>
-    <view class="code">pages/block/latestproduct.tpl.wxml</view>
+<wxs src="../common/helper.wxs" module="helper" />
+<template name='latestProduct'>
+  <view class="panel">
+    <view class="heading">
+      <text class="title strong">{{block.title}}</text>
+      <navigator wx:if="{{block.content.moreUrl && block.content.moreText}}" class="pull-right" url="{{helper.convertUrl(block.content.moreUrl)}}" data-url="{{block.content.moreUrl}}" >
+        {{block.content.moreText}}
+      </navigator>
+    </view>  
+  <view class="box blue-pale article">
+    <view wx:for="{{block.products}}" wx:for-item="product" class="product-list">
+      <navigator class="item lead" url="/pages/product/view?id={{product.id}}">
+        <image wx:if="{{product.image.primary}}" src="{{helper.printFileURL(product.image.primary, config, 'middleURL')}}" class='image-product-list'/>
+        {{product.name}}
+        <text class="text-warning strong">{{product.price}}</text>
+      </navigator>
+    </view>
   </view>
+</view>
 </template>
