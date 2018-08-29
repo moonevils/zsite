@@ -1,0 +1,17 @@
+.contact-lang{
+  font-size: 26rpx;
+  color: #777777;
+  margin-left: 30rpx;
+}
+.main-view{
+  margin-top: 40rpx;
+}
+.contact-value{
+  margin-left: 108rpx;
+}
+.avatar{
+  float: left;
+}
+.content{
+  margin-top:-25rpx;
+}

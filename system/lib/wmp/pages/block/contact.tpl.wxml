@@ -8,8 +8,42 @@
             <view class="item">{{block.content.moreText}}</view>
         </view>
     </view>
-    <view wx:for="{{block.contact}}" wx:key="contact" class="content has-padding">
-        <rich-text nodes="{{item}}" />
+    <view class="content has-padding">
+        <view class='main-view'>
+          <view class='avatar circle brown avatar-lg'><i class="icon icon-user"></i></view>
+          <text class='contact-lang'>{{block.lang.contacts}}</text>
+          <view class='contact-value'>{{block.contact.contacts}}</view>
+        </view>
+        <view class='main-view'>
+          <view class='avatar circle purple avatar-lg'><i class="icon icon-phone"></i></view>
+          <text class='contact-lang'>{{block.lang.phone}}</text>
+          <view class='contact-value'>{{block.contact.phone}}</view>
+        </view>
+        <view class='main-view'>
+          <view class='avatar circle purple avatar-lg'><i class="icon icon-envelope"></i></view>
+          <text class='contact-lang'>{{block.lang.email}}</text>
+          <view class='contact-value'>{{block.contact.email}}</view>
+        </view>
+        <view class='main-view'>
+          <view class='avatar circle blue avatar-lg'><i class="icon icon-qq"></i></view>
+          <text class='contact-lang'>{{block.lang.qq}}</text>
+          <view class='contact-value'>{{block.contact.qq}}</view>
+        </view>
+        <view class='main-view'>
+          <view class='avatar circle green avatar-lg'><i class="icon icon-wechat"></i></view>
+          <text class='contact-lang'>{{block.lang.weixin}}</text>
+          <view class='contact-value'>{{block.contact.weixin}}</view>
+        </view>
+        <view class='main-view'>
+          <view class='avatar circle blue avatar-lg'><i class="icon icon-globe"></i></view>
+          <text class='contact-lang'>{{block.lang.site}}</text>
+          <view class='contact-value'>{{block.contact.site}}</view>
+        </view>
+        <view class='main-view'>
+          <view class='avatar circle black avatar-lg'><i class="icon icon-map-marker"></i></view>
+          <text class='contact-lang'>{{block.lang.address}}</text>
+          <view class='contact-value'>{{block.contact.address}}</view>
+        </view>
     </view>
   </view>
 </template>
