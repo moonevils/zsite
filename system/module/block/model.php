@@ -922,6 +922,7 @@ class blockModel extends model
     public function processContactData($block)
     {
         $block->contact = json_decode($this->config->company->contact);
+        $block->lang    = $this->lang->company;
         return $block;
     }
 
