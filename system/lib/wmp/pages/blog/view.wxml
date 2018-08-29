@@ -22,7 +22,7 @@
       <icon class='icon-eye-open'></icon> {{data.article.views}}
     </view>
 
-    <view class="content has-padding">
+    <view class="content fluid has-padding">
       <rich-text nodes="{{data.article.content}}" />
     </view>
   </view>
