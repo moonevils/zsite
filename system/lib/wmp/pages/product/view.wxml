@@ -1,0 +1,86 @@
+<wxs src="../common/helper.wxs" module="helper" />
+<view wx:if="{{!loading}}">
+  <!-- 导入公共 header -->
+  <include src="../common/header.wxml" />
+
+  <!-- 导入布局模板 -->
+  <import src="../block/layout.tpl.wxml" />
+
+  <!-- 产品详情顶部布局 -->
+  <view class="layout layout-top">
+    <template wx:if="{{layouts.product_view && layouts.product_view.top}}" is="layout" data="{{blocks:layouts.product_view.top}}" />
+  </view>
+
+  <view class="container">
+    <swiper wx:if="{{data.product.image.list}}" class="product-image-list" indicator-dots="true" autoplay="true" indicator-color="rgba(0,0,0,.5)" indicator-active-color="#000">
+      <block wx:for="{{data.product.image.list}}" wx:for-item="image">
+        <swiper-item item-id="{{index}}">
+          <image mode="aspectFill" src="{{helper.printFileURL(image, config)}}" class="product-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <view class="heading">
+      <text class="title strong">{{data.product.name}}</text>
+    </view>
+
+    <view wx:if="{{data.product.unsaleable == 0}}" class="space-sm">
+      <view wx:if="{{data.product.negotiate != 0}}" class="text-red"> 面议 </view>
+      <view wx:else>
+        <view wx:if="{{data.product.promotion != 0}}">
+          <text class="text-red strong">￥{{data.product.promotion}}</text>
+          <text wx:if="{{data.product.price}}" class='text-muted text-line-through has-padding-h'>￥{{data.product.price}}</text>
+        </view>
+        <view wx:else>
+          <text wx:if="{{data.product.price}}" class="text-red strong">￥{{data.product.price}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="attribute divider-top has-padding-v">
+      <view wx:if="{{data.product.amount}}">
+        <text class="attribute-label">库存</text>
+        <text class="attribute-value">{{data.product.amount}}{{data.product.unit}}</text>
+      </view>
+
+      <view wx:if="{{data.product.brand}}">
+        <text class="attribute-label">品牌</text>
+        <text class="attribute-value">{{data.product.brand}} {{data.product.model}}</text>
+      </view>
+
+      <view wx:if="{{!data.product.brand && data.product.model}}">
+        <text class="attribute-label">型号</text>
+        <text class="attribute-value">{{data.product.model}}</text>
+      </view>
+
+      <view wx:if="{{data.product.color}}">
+        <text class="attribute-label">颜色</text>
+        <text class="attribute-value">{{data.product.color}}</text>
+      </view>
+
+      <view wx:if="{{data.product.origin}}">
+        <text class="attribute-label">产地</text>
+        <text class="attribute-value">{{data.product.origin}}</text>
+      </view>
+      
+      <block wx:for="{{data.product.attributes}}" wx:for-item="attribute">
+        <view wx:if="{{attribute.label && attribute.label && attribute.value && attribute.value}}">
+          <text class="attribute-label">{{attribute.label}}</text>
+          <text class="attribute-value">{{attribute.value}}</text>
+        </view>
+      </block>
+    </view>
+
+    <view class="content has-padding-v divider-top">
+      <rich-text nodes="{{data.product.content}}" />
+    </view>
+  </view>
+
+  <!-- 产品详情底部布局 -->
+  <view class="layout layout-bottom">
+    <template wx:if="{{layouts.product_view && layouts.product_view.bottom}}" is="layout" data="{{blocks:layouts.product_view.bottom}}" />
+  </view>
+
+  <!-- 导入公共 header -->
+  <include src="../common/footer.wxml" />
+</view>
