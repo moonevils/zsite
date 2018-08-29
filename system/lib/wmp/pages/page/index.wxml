@@ -1,0 +1,39 @@
+<wxs src="../common/helper.wxs" module="helper" />
+<view wx:if="{{!loading}}">
+  <!-- 导入公共 header -->
+  <include src="../common/header.wxml" />
+
+  <!-- 导入布局模版 -->
+  <import src="../block/layout.tpl.wxml" />
+
+  <!-- 单页顶部布局 -->
+  <view class="layout layout-top">
+    <template wx:if="{{layouts.page_index && layouts.page_index.top}}" is="layout" data="{{blocks: layouts.page_index.top}}" />
+  </view>
+
+  <view class="panel">
+    <view class="page-list">
+      <block wx:for="{{data.pages}}" wx:for-item="page">
+        <view class="content has-padding">
+          <navigator class='title strong'  url="/pages/page/view?id={{page.id}}"> {{page.title}} </navigator>
+          <image wx:if="{{page.image.primary}}" src="{{helper.printFileURL(page.image.primary, config)}}" />
+          <view class='content'> {{page.summary}}</view>
+          <view>
+            <icon class='icon-eye-open'></icon>
+            <text> {{page.views}} </text>
+            <icon class='icon-time'></icon>
+            <text> {{page.addedDate}} </text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 单页底部布局 -->
+  <view class="layout layout-bottom">
+    <template wx:if="{{layouts.page_index && layouts.page_index.bottom}}" is="layout" data="{{blocks: layouts.page_index.bottom}}" />
+  </view>
+
+  <!-- 导入公共 footer -->
+  <include src="../common/footer.wxml" />
+</view>
