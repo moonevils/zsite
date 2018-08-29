@@ -8,12 +8,10 @@
       </view>
     </view>  
   <view class="box blue-pale">
-    <view wx:for="{{block.articles}}" wx:for-item="article" class="article-list">
-      <image wx:if="{{article.image}}" src="{{helper.formatServerUrl(article.image, config, true)}}" class='image-article-list'/>
-      <text bindtap='viewArticle' class='list-li' data-url="/pages/article/view?id={{article.id}}" open-type='navigate' hover-class="navigator-hover" data-objectID="{{article.id}}">
+    <navigator wx:for="{{block.articles}}" wx:for-item="article" class="item lead" url="/pages/article/view?id={{article.id}}">
+      <image wx:if="{{article.image && block.content.image}}" src="{{helper.formatServerUrl(article.image, config, true)}}" class='image-article-list'/>
       <text>{{article.title}}</text> 
-      </text>
-    </view>
+    </navigator>
   </view>
 </view>
 </template>

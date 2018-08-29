@@ -1,6 +1,36 @@
-<template name="latestProduct">
-  <view class="box yellow-pale well">
-    <view class="">latestProduct 区块尚未就绪</view>
-    <view class="code">pages/block/latestproduct.tpl.wxml</view>
+<wxs src="../common/helper.wxs" module="helper" />
+<template name='latestProduct'>
+  <view class="panel">
+    <view class="heading">
+      <text class="title strong">{{block.title}}</text>
+      <navigator wx:if="{{block.content.moreUrl && block.content.moreText}}" class="pull-right" url="{{helper.convertUrl(block.content.moreUrl)}}" data-url="{{block.content.moreUrl}}" >
+        {{block.content.moreText}}
+      </navigator>
+    </view>  
+  <view class="box blue-pale article">
+    <block wx:for="{{block.products}}" wx:for-item="product">
+      <view class="product-info has-padding-v">
+        <image wx:if="{{product.image.primary && block.content.image}}" src="{{helper.printFileURL(product.image.primary, config)}}" />
+        <navigator class='title strong has-padding-v' style="color:{{product.titleColor}}" url="/pages/product/view?id={{product.id}}"> {{product.name}} </navigator>
+        <view wx:if="{{block.content.showPrice && block.content.image}}">
+          <view wx:if="{{!product.unsaleable}}">
+            <view wx:if="{{product.negotiate != 0}}"> 面议 </view>
+            <view wx:else>
+              <view wx:if="{{product.promotion != 0}}">
+                <text class="text-red">￥{{product.promotion}}</text>
+                <text wx:if="{{product.price}}" class='text-muted text-line-through has-padding-h'>￥{{product.price}}</text>
+              </view>
+              <view wx:else>
+                <text wx:if="{{product.price}}" class="text-red">￥{{product.price}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{block.content.showInfo}}">
+          <text>{{product.desc}}</text>
+        </view>
+      </view>
+    </block>
   </view>
+</view>
 </template>
