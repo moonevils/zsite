@@ -44,21 +44,34 @@ class wmp extends control
      */
     public function downloadPackage()
     {
+        $libRoot           = $this->app->getCoreLibRoot();
         $tmpRoot           = $this->app->getTmpRoot();
-        $wmpZipfile        = $tmpRoot . '/wmp.zip';
-        $wmpPath           = $tmpRoot . '/wmp';
-        $projectConfigFile = $tmpRoot . '/wmp/project.config.json';
+        $wmpPath           = $libRoot . 'wmp';
+        $wmpTmpPath        = $tmpRoot . 'wmp';
+        $projectConfigFile = $tmpRoot . 'wmp/project.config.json';
+        $myConfigFile      = $tmpRoot . 'wmp/config/my.js';
+        $wmpZipfile        = $tmpRoot . 'wmp.zip';
 
         $commads   = array();
         $commads[] = "rm -f {$wmpZipfile}";
-        $commads[] = "rm -rf {$wmpPath}";
+        $commads[] = "rm -rf {$wmpTmpPath}";
 
-        $commads[] = "mkdir -p {$wmpPath}";
-        $commads[] = "touch {$projectConfigFile}";
+        $commads[] = "cp -rf {$wmpPath} {$tmpRoot}";
 
         foreach($commads as $commad) `$commad`;
 
-        file_put_contents($projectConfigFile, sprintf($this->config->wmp->projectConfigContent, $this->config->company->name, $this->config->wmp->appID, $this->config->wmp->projectName));
+        $projectConfigContent = file_get_contents($projectConfigFile);
+        if(isset($this->config->wmp->appID))       $projectConfigContent = preg_replace("/appid.*/", 'appid": "' . $this->config->wmp->appID . '",', $projectConfigContent);
+        if(isset($this->config->wmp->projectName)) $projectConfigContent = preg_replace("/projectname.*/", 'projectname": "' . $this->config->wmp->projectName . '",', $projectConfigContent);
+        file_put_contents($projectConfigFile, $projectConfigContent);
+
+        $webRoot = getWebRoot(true);
+        $myConfigContent = file_get_contents($myConfigFile);
+        if(isset($this->config->wmp->private))  $myConfigContent = preg_replace("/token.*/", 'token: \'' . $this->config->wmp->private . '\',', $myConfigContent);
+        if(isset($this->config->company->name)) $myConfigContent = preg_replace("/siteName.*/", 'siteName: \'' . $this->config->company->name . '\',', $myConfigContent);
+        $myConfigContent = preg_replace("/root.*/", 'root: \'' . getWebRoot($full = true) . '\',', $myConfigContent);
+        $myConfigContent = preg_replace("/requestType.*/", 'requestType: \'' . $this->config->requestType . '\',', $myConfigContent);
+        file_put_contents($myConfigFile, $myConfigContent);
 
         `cd {$tmpRoot}; zip -r wmp.zip wmp`;
 
