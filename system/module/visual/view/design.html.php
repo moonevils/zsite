@@ -97,6 +97,7 @@ js::set('visualLang', $lang->visual->js);
                   <div class='title' title='<?php echo $block->title;?>'><?php echo $block->title;?>&nbsp; <small class='text-muted nobr'><?php echo $typeList[$block->type] ?></small></div>
                   <div class='actions'>
                     <?php commonModel::printLink('block', 'edit', "block={$block->id}", '<i class="icon icon-pencil"></i>', "class='btn btn-link' data-toggle='modal' data-width='80%' data-type='iframe' title='$lang->edit'");?>
+                    <?php commonModel::printLink('block', 'delete', "block={$block->id}", '<i class="icon icon-remove"></i>', "class='btn btn-link deleter' title='$lang->delete'");?>
                     <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
                   </div>
                 </div>
