@@ -3,7 +3,11 @@
         "pages/index/index",
         "pages/company/index",
         "pages/article/browse",
+        "pages/article/view",
+        "pages/product/browse",
+        "pages/product/view",
         "pages/blog/index",
+        "pages/blog/view",
         "pages/logs/logs",
         "pages/error/index"
     ],
