@@ -1650,7 +1650,7 @@ class commonModel extends model
         if($this->get->random)  $random = $this->get->random;
 
         if(!$token or !$random) die('key error.');
-        if(md5($config->private . $config->appID . $random) === $token) return true;
+        if(md5($config->private . $random) === $token) return true;
         die('key error.');
     }
 }
