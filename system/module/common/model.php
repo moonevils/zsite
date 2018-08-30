@@ -1638,19 +1638,13 @@ class commonModel extends model
      * @return bool
      */
     public function checkWMP()
-    {
+    {    
         $config = $this->config->wmp;
-        $token  = '';
-        $random = '';
-
-        if($this->post->token) $token = $this->post->token;
-        if($this->get->token)  $token = $this->get->token;
-
-        if($this->post->random) $random = $this->post->random;
-        if($this->get->random)  $random = $this->get->random;
-
+        $headers = getallheaders();
+        $token   = zget($headers, 'wmp-token');
+        $random  = zget($headers, 'wmp-random');
         if(!$token or !$random) die('key error.');
-        if(md5($config->private . $config->appID . $random) === $token) return true;
+        if(md5($config->private . $random) == $token) return true;
         die('key error.');
-    }
+    } 
 }
