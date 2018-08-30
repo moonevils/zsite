@@ -1,1 +1,6 @@
 /**index.wxss**/
+.block .article-list{
+  margin-top: 20rpx;
+  text-align: center;
+  border-bottom: 1px dashed #ddd;
+}
