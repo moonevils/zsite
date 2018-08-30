@@ -1,0 +1,3 @@
+.article-list>.content{
+  border-bottom:1px dashed #ddd;
+}
