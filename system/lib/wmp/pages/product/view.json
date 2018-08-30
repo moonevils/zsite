@@ -1,1 +1,9 @@
-{}
+{
+    "usingComponents": {
+        "action-sheet-link": "/components/action-sheet-link"
+    }
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> b7599d230a406f332720635a226f0f91642aee8e
