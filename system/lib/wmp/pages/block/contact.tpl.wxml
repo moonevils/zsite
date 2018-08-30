@@ -1,48 +1,57 @@
 <template name="contact">
   <!-- 此模版绑定的数据即为区块对象 block，例如 {{block.title}} 就是区块标题 -->
-  <view class="panel">
-     <!-- 区块头部 -->   
-    <view class="heading">
-        <text class="title strong">{{block.title}}</text>
-        <view class="nav" wx:if="{{block.content.moreUrl && block.content.moreText}}">
-            <view class="item">{{block.content.moreText}}</view>
+  <view class="panel{{block.borderless ? ' borderless' : ''}}">
+    <include src="./block.header.wxml" />
+    
+    <view class="content list compact">
+        <view class='item with-avatar multi-lines' wx:if="{{block.contact.contacts}}">
+          <view class='avatar circle ele brown'><i class="icon icon-user"></i></view>
+          <view class='content ele'>
+            <text class='subtitle'>{{block.lang.contacts}}</text>
+            <view class='title'>{{block.contact.contacts}}</view>
+          </view>
         </view>
-    </view>
-    <view class="content has-padding">
-        <view class='main-view'>
-          <view class='avatar circle brown avatar-lg'><i class="icon icon-user"></i></view>
-          <text class='contact-lang'>{{block.lang.contacts}}</text>
-          <view class='contact-value'>{{block.contact.contacts}}</view>
+        <view class='item with-avatar multi-lines' wx:if="{{block.contact.phone}}">
+          <view class='avatar circle ele purple'><i class="icon icon-phone"></i></view>
+          <view class='content ele'>
+            <text class='subtitle'>{{block.lang.phone}}</text>
+            <view class='title'>{{block.contact.phone}}</view>
+          </view>
         </view>
-        <view class='main-view'>
-          <view class='avatar circle purple avatar-lg'><i class="icon icon-phone"></i></view>
-          <text class='contact-lang'>{{block.lang.phone}}</text>
-          <view class='contact-value'>{{block.contact.phone}}</view>
+        <view class='item with-avatar multi-lines' wx:if="{{block.contact.email}}">
+          <view class='avatar circle ele purple'><i class="icon icon-envelope"></i></view>
+          <view class='content ele'>
+            <text class='subtitle'>{{block.lang.email}}</text>
+            <view class='title'>{{block.contact.email}}</view>
+          </view>
         </view>
-        <view class='main-view'>
-          <view class='avatar circle purple avatar-lg'><i class="icon icon-envelope"></i></view>
-          <text class='contact-lang'>{{block.lang.email}}</text>
-          <view class='contact-value'>{{block.contact.email}}</view>
+        <view class='item with-avatar multi-lines' wx:if="{{block.contact.qq}}">
+          <view class='avatar circle ele blue'><i class="icon icon-qq"></i></view>
+          <view class='content ele'>
+            <text class='subtitle'>{{block.lang.qq}}</text>
+            <view class='title'>{{block.contact.qq}}</view>
+          </view>
         </view>
-        <view class='main-view'>
-          <view class='avatar circle blue avatar-lg'><i class="icon icon-qq"></i></view>
-          <text class='contact-lang'>{{block.lang.qq}}</text>
-          <view class='contact-value'>{{block.contact.qq}}</view>
+        <view class='item with-avatar multi-lines' wx:if="{{block.contact.weixin}}">
+          <view class='avatar circle ele green'><i class="icon icon-wechat"></i></view>
+          <view class='content ele'>
+            <text class='subtitle'>{{block.lang.weixin}}</text>
+            <view class='title'>{{block.contact.weixin}}</view>
+          </view>
         </view>
-        <view class='main-view'>
-          <view class='avatar circle green avatar-lg'><i class="icon icon-wechat"></i></view>
-          <text class='contact-lang'>{{block.lang.weixin}}</text>
-          <view class='contact-value'>{{block.contact.weixin}}</view>
+        <view class='item with-avatar multi-lines' wx:if="{{block.contact.site}}">
+          <view class='avatar circle ele blue'><i class="icon icon-globe"></i></view>
+          <view class='content ele'>
+            <text class='subtitle'>{{block.lang.site}}</text>
+            <view class='title'>{{block.contact.site}}</view>
+          </view>
         </view>
-        <view class='main-view'>
-          <view class='avatar circle blue avatar-lg'><i class="icon icon-globe"></i></view>
-          <text class='contact-lang'>{{block.lang.site}}</text>
-          <view class='contact-value'>{{block.contact.site}}</view>
-        </view>
-        <view class='main-view'>
-          <view class='avatar circle black avatar-lg'><i class="icon icon-map-marker"></i></view>
-          <text class='contact-lang'>{{block.lang.address}}</text>
-          <view class='contact-value'>{{block.contact.address}}</view>
+        <view class='item with-avatar multi-lines' wx:if="{{block.contact.address}}">
+          <view class='avatar circle ele black'><i class="icon icon-map-marker"></i></view>
+          <view class='content ele'>
+            <text class='subtitle'>{{block.lang.address}}</text>
+            <view class='title'>{{block.contact.address}}</view>
+          </view>
         </view>
     </view>
   </view>

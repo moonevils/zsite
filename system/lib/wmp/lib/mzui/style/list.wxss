@@ -45,7 +45,7 @@
 }
 .list-item.multi-lines > .ele,
 .list > .item.multi-lines > .ele {
-    margin-top: 5rpx;
+    margin-top: 10rpx;
 }
 .list-item.multi-lines > .content,
 .list > .item.multi-lines > .content {

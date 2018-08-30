@@ -1,4 +1,4 @@
-import LayoutPage from '../../core/layout-page.js';
+import { createLayoutPage } from '../../core/layout-page.js';
 
 // 注册页面
-LayoutPage();
+Page(createLayoutPage());
