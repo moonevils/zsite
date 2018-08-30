@@ -43,6 +43,12 @@
           </view>
         </view>
       </block>
+      <block class='panel-foot'>
+      <view wx:if="{{data.pager}}">
+        <import src="/pages/common/pager.wxml" />
+        <template is="pager" data="{{pager:data.pager, url:data.desktopURL}}"/>
+      </view>
+      </block>
     </view>
   </view>
 
