@@ -6,7 +6,7 @@
             <!-- ⚠️ 此处 block.products 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
             <block wx:for="{{block.products}}" wx:for-item="product">
                 <view class="shadow-1 rounded" style="overflow: hidden; margin-top: 20rpx">
-                    <image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(product.image.primary, config)}}" />
+                    <navigator class="title state text-ellipsis ele" url="/pages/product/view?id={{product.id}}"><image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(product.image.primary, config)}}" /></navigator>
                     <view class="heading">
                         <block wx:if="{{block.content.showCategory === '1'}}">
                             <navigator wx:if="{{block.content.categoryName === 'abbr'}}" class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.abbr || product.category.name}}]</navigator>
@@ -17,7 +17,7 @@
                             <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
                             <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
                                 <block wx:if="{{product.price && product.price !== '0' && product.price !== '0.00'}}">
-                                    <text class="text-line-through muted">￥{{product.price}}</text>
+                                    <text class="text-line-through muted small">￥{{product.price}}</text>
                                     <text class="text-danger strong">￥{{product.promotion}}</text>
                                 </block>
                             </block>
@@ -40,7 +40,7 @@
                         <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
                         <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
                             <block wx:if="{{product.price && product.price !== '0' && product.price !== '0.00'}}">
-                                <text class="text-line-through muted">￥{{product.price}}</text>
+                                <text class="text-line-through muted small">￥{{product.price}}</text>
                                 <text class="text-danger strong">￥{{product.promotion}}</text>
                             </block>
                         </block>
