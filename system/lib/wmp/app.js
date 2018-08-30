@@ -14,10 +14,12 @@ App({
             });
         } else if (this.config.theme) {
             const {theme} = this.config;
-            wx.setNavigationBarColor({
-                frontColor: this.config.theme.navigationFrontColor,
-                backgroundColor: this.config.theme.navigationBackgroundColor,
-            });
+            if (theme.navigationFrontColor) {
+                wx.setNavigationBarColor({
+                    frontColor: theme.navigationFrontColor,
+                    backgroundColor: theme.navigationBackgroundColor,
+                });
+            }
         }
     },
     get config() {

@@ -13,5 +13,5 @@ export default {
     moduleVar: 'm',
     methodVar: 'f',
     viewVar: 't',
-    theme: 'blue'
+    theme: 'default'
 };

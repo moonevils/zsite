@@ -212,10 +212,12 @@ export const createLayoutPage = (options = {}) => {
                 });
             } else if (config.theme) {
                 const { theme } = config;
-                wx.setNavigationBarColor({
-                    frontColor: config.theme.navigationFrontColor,
-                    backgroundColor: config.theme.navigationBackgroundColor,
-                });
+                if (theme.navigationFrontColor) {
+                    wx.setNavigationBarColor({
+                        frontColor: theme.navigationFrontColor,
+                        backgroundColor: theme.navigationBackgroundColor,
+                    });
+                }
             }
 
             if (options.onReady) {

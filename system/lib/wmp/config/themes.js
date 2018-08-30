@@ -5,7 +5,7 @@ export default {
     'blue': {
         navigationBackgroundColor: '#3280fc',
         navigationFrontColor: '#ffffff',
-        paleColor: '#3280fc',
+        paleColor: '#ebf2f9',
         primaryColor: '#3280fc',
         secondaryColor: '#145ccd',
     }
