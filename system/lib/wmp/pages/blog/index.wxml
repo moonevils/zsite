@@ -8,7 +8,7 @@
 
     <!-- 首页顶部布局 -->
     <view class="layout layout-top">
-        <template wx:if="{{layouts.blog_index && layouts.blog_index.top}}" is="layout" data="{{blocks: layouts.blog_index.top}}" />
+        <template wx:if="{{layouts.blog_index && layouts.blog_index.top}}" is="layout" data="{{blocks: layouts.blog_index.top, config: config}}" />
     </view>
 
     <view class="has-padding-h">
@@ -55,7 +55,7 @@
     </view>
     <!-- 首页底部布局 -->
     <view class="layout layout-bottom">
-        <template wx:if="{{layouts.blog_index && layouts.blog_index.bottom}}" is="layout" data="{{blocks: layouts.blog_index.bottom}}" />
+        <template wx:if="{{layouts.blog_index && layouts.blog_index.bottom}}" is="layout" data="{{blocks: layouts.blog_index.bottom, config: config}}" />
     </view>
 
     <!-- 导入公共 footer -->

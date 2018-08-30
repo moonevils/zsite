@@ -8,7 +8,7 @@
 
     <!-- 首页顶部布局 -->
     <view class="layout layout-top">
-        <template wx:if="{{layouts.product_browse && layouts.product_browse.top}}" is="layout" data="{{blocks:layouts.product_browse.top}}" />
+        <template wx:if="{{layouts.product_browse && layouts.product_browse.top}}" is="layout" data="{{blocks:layouts.product_browse.top, config: config}}" />
     </view>
 
     <view class="header has-padding">
@@ -40,7 +40,7 @@
 
     <!-- 首页底部布局 -->
     <view class="layout layout-bottom">
-        <template wx:if="{{layouts.product_browse && layouts.product_browse.bottom}}" is="layout" data="{{blocks:layouts.product_browse.bottom}}" />
+        <template wx:if="{{layouts.product_browse && layouts.product_browse.bottom}}" is="layout" data="{{blocks:layouts.product_browse.bottom, config: config}}" />
     </view>
 
     <!-- 导入公共 header -->
