@@ -8,7 +8,7 @@
 
     <!-- 首页顶部布局 -->
     <view class="layout layout-top">
-        <template wx:if="{{layouts.blog_view && layouts.blog_view.top}}" is="layout" data="{{blocks: layouts.blog_view.top}}" />
+        <template wx:if="{{layouts.blog_view && layouts.blog_view.top}}" is="layout" data="{{blocks: layouts.blog_view.top, config: config}}" />
     </view>
 
     <view class="header has-padding divider">
@@ -22,7 +22,7 @@
         </view>
     </view>
 
-    <view class="container white fluid">
+    <view class="content has-padding white fluid">
         <rich-text nodes="{{data.article.content}}" />
     </view>
 
@@ -39,7 +39,7 @@
 
     <!-- 首页底部布局 -->
     <view class="layout layout-bottom">
-        <template wx:if="{{layouts.blog_view && layouts.blog_view.bottom}}" is="layout" data="{{blocks: layouts.blog_view.bottom}}" />
+        <template wx:if="{{layouts.blog_view && layouts.blog_view.bottom}}" is="layout" data="{{blocks: layouts.blog_view.bottom, config: config}}" />
     </view>
 
     <!-- 导入公共 footer -->

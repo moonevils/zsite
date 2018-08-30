@@ -67,7 +67,7 @@
         </block>
     </view>
 
-    <view class="content has-padding white">
+    <view class="content has-padding white fluid">
         <rich-text nodes="{{data.product.content}}" />
     </view>
 
