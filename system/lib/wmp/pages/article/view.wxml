@@ -6,7 +6,7 @@
   <!-- 导入布局模版 -->
   <import src="../block/layout.tpl.wxml" />
 
-  <!-- 首页顶部布局 -->
+  <!-- 文章详情顶部布局 -->
   <view class="layout layout-top">
     <template wx:if="{{layouts.article_view && layouts.article_view.top}}" is="layout" data="{{blocks: layouts.article_view.top}}" />
   </view>
@@ -25,9 +25,22 @@
     <view class="content fluid has-padding">
       <rich-text nodes="{{data.article.content}}" />
     </view>
+
+    <view class="article-footer fluid clearfix">
+      <view class="pull-left">
+        <navigator wx:if="{{data.prevAndNext.prev}}" url="/pages/article/view?id={{data.prevAndNext.prev.id}}" class='btn outline'>
+          <text>上一篇</text>
+        </navigator>
+      </view>
+      <view class="pull-right">
+        <navigator wx:if="{{data.prevAndNext.next}}" url="/pages/article/view?id={{data.prevAndNext.next.id}}" class='btn outline'>
+          <text>下一篇</text>
+        </navigator>
+      </view>
+    </view>
   </view>
 
-  <!-- 首页底部布局 -->
+  <!-- 文章详情底部布局 -->
   <view class="layout layout-bottom">
     <template wx:if="{{layouts.article_view && layouts.article_view.bottom}}" is="layout" data="{{blocks: layouts.article_view.bottom}}" />
   </view>

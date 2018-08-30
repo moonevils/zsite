@@ -6,7 +6,7 @@
   <!-- 导入布局模版 -->
   <import src="../block/layout.tpl.wxml" />
 
-  <!-- 首页顶部布局 -->
+  <!-- 文章列表顶部布局 -->
   <view class="layout layout-top">
     <template wx:if="{{layouts.article_browse && layouts.article_browse.top}}" is="layout" data="{{blocks: layouts.article_browse.top}}" />
   </view>
@@ -15,8 +15,7 @@
     <view class="article-list">
       <block wx:for="{{data.sticks}}" wx:for-item="article">
         <view class="content has-padding">
-          <text class='title strong'> {{article.title}} </text>
-          <icon class="icon-arrow-up text-red"></icon>
+          <navigator class='title strong' url="/pages/article/view?id={{article.id}}"> {{article.title}} <icon class="icon-arrow-up text-red"></icon></navigator>
           <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}" />
           <view class='content'> {{article.summary}}</view>
           <view>
@@ -31,7 +30,7 @@
       </block>
       <block wx:for="{{data.articles}}" wx:for-item="article">
         <view class="content has-padding">
-          <text class='title strong'> {{article.title}} </text>
+          <navigator class='title strong'  url="/pages/article/view?id={{article.id}}"> {{article.title}} </navigator>
           <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}" />
           <view class='content'> {{article.summary}}</view>
           <view>
@@ -47,7 +46,7 @@
     </view>
   </view>
 
-  <!-- 首页底部布局 -->
+  <!-- 文章列表底部布局 -->
   <view class="layout layout-bottom">
     <template wx:if="{{layouts.article_browse && layouts.article_browse.bottom}}" is="layout" data="{{blocks: layouts.article_browse.bottom}}" />
   </view>
