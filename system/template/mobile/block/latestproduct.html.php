@@ -106,7 +106,7 @@
                    <small class='text-muted text-line-through'>{$config->product->currencySymbol} {$product->price}</small>&nbsp;&nbsp;
                 {/if}
                 <strong class='text-danger'>{$config->product->currencySymbol}{$product->promotion}</strong>
-              {elseif($product->price != 0)
+              {elseif($product->price != 0)}
                  <strong class='text-danger'>{$config->product->currencySymbol} {$product->price}</strong>
               {/if}
             {/if}
