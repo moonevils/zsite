@@ -1,2 +1,11 @@
 /* 载入 MZUI 全局样式表 */
 @import 'lib/mzui/style/mzui.wxss';
+
+/* 导航样式 */
+#header .nav > .item.active {
+    color: #3280fc;
+    box-shadow: inset 0 -4rpx 0 #3280fc;
+}
+#header .nav > .item.active:after {
+    display: none;
+}
