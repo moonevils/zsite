@@ -1,5 +1,5 @@
-import LayoutPage from '../../core/layout-page.js';
-LayoutPage({
+import { createLayoutPage } from '../../core/layout-page.js';
+Page(createLayoutPage({
   onDataLoad: data => {
     Object.keys(data.data.articles).forEach(articleID => {
       const article = data.data.articles[articleID];
@@ -9,4 +9,4 @@ LayoutPage({
     })
     return data;
   }
-});
+}));

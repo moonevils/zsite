@@ -1,7 +1,7 @@
-import LayoutPage from '../../core/layout-page.js';
+import { createLayoutPage } from '../../core/layout-page.js';
 
 // 注册页面
-LayoutPage({
+Page(createLayoutPage({
   onDataLoad: data => {
     Object.keys(data.data.articles).forEach(articleID => {
       const article = data.data.articles[articleID];
@@ -11,4 +11,4 @@ LayoutPage({
     })
     return data;
   }
-})
+}));
