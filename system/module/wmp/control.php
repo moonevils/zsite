@@ -55,7 +55,6 @@ class wmp extends control
         $commads   = array();
         $commads[] = "rm -f {$wmpZipfile}";
         $commads[] = "rm -rf {$wmpTmpPath}";
-
         $commads[] = "cp -rf {$wmpPath} {$tmpRoot}";
 
         foreach($commads as $commad) `$commad`;
