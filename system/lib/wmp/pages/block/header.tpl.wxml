@@ -2,7 +2,7 @@
 <wxs src="../common/helper.wxs" module="helper" />
 
 <template name="header">
-     <navigator wx:if="{{block.logo}}" open-type="reLaunch" class="state block" url="/pages/index/index">
+     <navigator wx:if="{{!config.hideLogo && block.logo}}" open-type="reLaunch" class="state block" url="/pages/index/index">
         <image mode="aspectFit" data-src="{{block.logo}}" src="{{helper.formatServerUrl(block.logo, config)}}" class="logo fluid" style="height: 100rpx; margin-top: 10rpx;" />
     </navigator>
     <view class="nav space-sm divider">

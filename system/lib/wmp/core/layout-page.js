@@ -126,6 +126,13 @@ export const createLayoutPage = (options = {}) => {
                         Object.keys(pageLayout).forEach(layoutName => {
                             const blocks = pageLayout[layoutName];
                             blocks.forEach(block => {
+                                if (block.type === 'hotArticle') {
+                                    block.layoutType = 'latestArticle';
+                                } else if (block.type === 'hotProduct') {
+                                    block.layoutType = 'latestProduct';
+                                } else {
+                                    block.layoutType = block.type;
+                                }
                                 if (block.titleless === '0') {
                                     block.titleless = false;
                                 }

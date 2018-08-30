@@ -7,6 +7,9 @@ export default {
     // 是否开启 debug
     debug: true,
 
+    // 是否隐藏头部 logo
+    hideLogo: false,
+
     defaultLang: 'zh-cn',
     // token: 'abcdefghijklmnopqrstuvwxyz',
 
