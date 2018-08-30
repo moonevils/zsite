@@ -13,12 +13,12 @@
     ],
     "window": {
         "backgroundTextStyle": "dark",
-        "navigationBarBackgroundColor": "#f8f8f8",
+        "navigationBarBackgroundColor": "#f1f1f1",
         "navigationBarTitleText": "",
         "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true,
-        "backgroundColorTop": "#f8f8f8",
-        "backgroundColorBottom": "#f8f8f8",
+        "backgroundColorTop": "#f1f1f1",
+        "backgroundColorBottom": "#f1f1f1",
         "navigationStyle": "default"
     },
     "debug": false
