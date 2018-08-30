@@ -4,7 +4,7 @@
         <include src="./block.header.wxml" />
         <view wx:if="{{block.content.image}}">
             <!-- ⚠️ 此处 block.products 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
-            <block wx:for="{{block.products}}" wx:for-item="product">
+            <block wx:for="{{block.products}}" wx:for-item="product" wx:key="product">
                 <view class="shadow-1 rounded" style="overflow: hidden; margin-top: 20rpx">
                     <navigator class="title state text-ellipsis ele" url="/pages/product/view?id={{product.id}}"><image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(product.image.primary, config)}}" /></navigator>
                     <view class="heading">
@@ -29,7 +29,7 @@
         </view>
         <view wx:else class="list compact content">
             <!-- ⚠️ 此处 block.products 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
-            <block wx:for="{{block.products}}" wx:for-item="product">
+            <block wx:for="{{block.products}}" wx:for-item="product" wx:key="product">
                 <view class="item">
                     <block wx:if="{{block.content.showCategory === '1'}}">
                         <navigator wx:if="{{block.content.categoryName === 'abbr'}}" class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.abbr || product.category.name}}]</navigator>
