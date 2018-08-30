@@ -23,12 +23,12 @@
                     <view class="title space-xs">
                         <navigator class="ele strong inline" url="/pages/article/view?id={{article.id}}" style="{{article.titleColor ? ('color: ' + article.titleColor) : ''}}"><text class="icon icon-pushpin text-red"></text>{{article.title}}</navigator>
                     </view>
-                    <navigator wx:if="{{article.summary}}" class="subtitle space-xs" url="/pages/article/browse?categoryID={{article.category.id}}">{{article.summary}}</navigator>
+                    <navigator wx:if="{{article.summary}}" class="subtitle space-xs" url="/pages/article/view?id={{article.id}}">{{article.summary}}</navigator>
                     <view class="subtitle">
                         <text space="nbsp"><icon class='icon-time icon-large'></icon>{{article.addedDate}}  </text>
                         <text space="nbsp"><icon class='icon-user icon-large'></icon>{{article.author}}  </text>
                         <text space="nbsp"><icon class='icon-eye-open'></icon>{{article.views}}  </text>
-                        <text wx:if="{{article.source !== 'original' && article.copyURL}}" class="text-green green-pale" space="nbsp">转自：{{article.copySite}} </text>
+                        <text wx:if="{{article.source !== 'original' && article.copyURL}}" class="text-brown hidden green-pale" space="nbsp">转自：{{article.copySite}} </text>
                         <text wx:else class="text-green green-pale" space="nbsp">原创</text>
                     </view>
                 </view>
@@ -41,12 +41,12 @@
                     <view class="title space-xs">
                         <navigator class="ele strong inline" url="/pages/article/view?id={{article.id}}" style="{{article.titleColor ? ('color: ' + article.titleColor) : ''}}">{{article.title}}</navigator>
                     </view>
-                    <navigator wx:if="{{article.summary}}" class="subtitle  space-xs" url="/pages/article/browse?categoryID={{article.category.id}}">{{article.summary}}</navigator>
+                    <navigator wx:if="{{article.summary}}" class="subtitle  space-xs" url="/pages/article/view?id={{article.id}}">{{article.summary}}</navigator>
                     <view class="subtitle">
                         <text space="nbsp"><icon class='icon-time icon-large'></icon>{{article.addedDate}}  </text>
                         <text space="nbsp"><icon class='icon-user icon-large'></icon>{{article.author}}  </text>
                         <text space="nbsp"><icon class='icon-eye-open'></icon>{{article.views}}  </text>
-                        <text wx:if="{{article.source !== 'original' && article.copyURL}}" class="text-green green-pale" space="nbsp">转自：{{article.copySite}} </text>
+                        <text wx:if="{{article.source !== 'original' && article.copyURL}}" class="text-brown hidden green-pale" space="nbsp">转自：{{article.copySite}} </text>
                         <text wx:else class="text-green green-pale" space="nbsp">原创</text>
                     </view>
                 </view>

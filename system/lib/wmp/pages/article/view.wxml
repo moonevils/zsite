@@ -17,7 +17,7 @@
             <text class="muted" space="nbsp"><icon class='icon-time icon-large'></icon>{{data.article.addedDate}}  </text>
             <text class="muted" space="nbsp"><icon class='icon-user icon-large'></icon>{{data.article.author}}  </text>
             <text class="muted" space="nbsp"><icon class='icon-eye-open'></icon>{{data.article.views}}  </text>
-            <text wx:if="{{data.article.source !== 'original' && data.article.copyURL}}" class="text-green green-pale" space="nbsp">转自：{{data.article.copySite}} </text>
+            <text wx:if="{{data.article.source !== 'original' && data.article.copyURL}}" class="text-brown hidden green-pale" space="nbsp">转自：{{data.article.copySite}} </text>
             <text wx:else class="text-green green-pale" space="nbsp">原创</text>
         </view>
     </view>
