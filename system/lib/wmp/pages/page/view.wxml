@@ -1,6 +1,6 @@
 <wxs src="../common/helper.wxs" module="helper" />
 
-<view wx:if="{{!loading}}">
+<view wx:if="{{!loading}}" class="theme-{{config.theme && config.theme.name}}">
     <!-- 导入公共 header -->
     <include src="../common/header.wxml" />
 

@@ -7,6 +7,9 @@ export default {
     // 是否开启 debug
     debug: true,
 
+    // 界面主题，目前可以为 'default'（默认主题），'blue'（蓝色主题）
+    theme: 'default',
+
     // 是否隐藏头部 logo
     hideLogo: false,
 

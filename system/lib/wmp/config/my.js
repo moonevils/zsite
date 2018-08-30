@@ -12,5 +12,6 @@ export default {
     requestFix: '-',
     moduleVar: 'm',
     methodVar: 'f',
-    viewVar: 't'
+    viewVar: 't',
+    theme: 'blue'
 };

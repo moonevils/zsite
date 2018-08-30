@@ -73,6 +73,7 @@ export const createLayoutPage = (options = {}) => {
             if (options.onLoad) {
                 options.onLoad(params);
             }
+
             if (config.debug) {
                 console.log('LayoutPage.onLoad', this);
             }
@@ -201,6 +202,25 @@ export const createLayoutPage = (options = {}) => {
                 return;
             }
             return this.tryLoadData();
+        },
+
+        onReady: function() {
+            if (config.navigationBarStyle) {
+                wx.setNavigationBarColor({
+                    frontColor: config.navigationBarStyle.frontColor,
+                    backgroundColor: config.navigationBarStyle.backgroundColor,
+                });
+            } else if (config.theme) {
+                const { theme } = config;
+                wx.setNavigationBarColor({
+                    frontColor: config.theme.navigationFrontColor,
+                    backgroundColor: config.theme.navigationBackgroundColor,
+                });
+            }
+
+            if (options.onReady) {
+                options.onReady();
+            }
         }
     });
 };
