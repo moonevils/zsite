@@ -14,7 +14,7 @@
   <view class="container">
     <block wx:for="{{data.products}}" wx:for-item="product">
       <view class="product-info has-padding-v">
-        <image wx:if="{{product.image.primary}}" src="{{helper.printFileURL(product.image.primary, config)}}" />
+        <image wx:if="{{product.image.primary}}" mode="aspectFit" src="{{helper.printFileURL(product.image.primary, config)}}" />
         <navigator class='title strong has-padding-v' style="color:{{product.titleColor}}" url="/pages/product/view?id={{product.id}}"> {{product.name}} </navigator>
         <view wx:if="{{!product.unsaleable}}">
           <view wx:if="{{product.negotiate != 0}}"> 面议 </view>

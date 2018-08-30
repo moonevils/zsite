@@ -10,7 +10,7 @@
   <view class="box blue-pale article">
     <block wx:for="{{block.products}}" wx:for-item="product">
       <view class="product-info has-padding-v">
-        <image wx:if="{{product.image.primary && block.content.image}}" src="{{helper.printFileURL(product.image.primary, config)}}" />
+        <image wx:if="{{product.image.primary && block.content.image}}" mode="aspectFit" src="{{helper.printFileURL(product.image.primary, config)}}" />
         <navigator class='title strong has-padding-v' style="color:{{product.titleColor}}" url="/pages/product/view?id={{product.id}}"> {{product.name}} </navigator>
         <view wx:if="{{block.content.showPrice && block.content.image}}">
           <view wx:if="{{!product.unsaleable}}">

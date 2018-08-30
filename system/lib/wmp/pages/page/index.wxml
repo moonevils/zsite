@@ -16,7 +16,7 @@
       <block wx:for="{{data.pages}}" wx:for-item="page">
         <view class="content has-padding">
           <navigator class='title strong'  url="/pages/page/view?id={{page.id}}"> {{page.title}} </navigator>
-          <image wx:if="{{page.image.primary}}" src="{{helper.printFileURL(page.image.primary, config)}}" />
+          <image wx:if="{{page.image.primary}}" mode="aspectFit" src="{{helper.printFileURL(page.image.primary, config)}}" />
           <view class='content'> {{page.summary}}</view>
           <view>
             <icon class='icon-eye-open'></icon>
