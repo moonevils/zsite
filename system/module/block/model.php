@@ -1109,6 +1109,7 @@ class blockModel extends model
      */
     public function parseCSS($block, $theme)
     {
+        $content = is_object($block->content) ? $block->content : json_decode($block->content);
         $style  = '<style>';
         if(isset($content->custom->$theme))
         {
@@ -1150,6 +1151,7 @@ class blockModel extends model
         }
         $style .= '</style>';
 
+        return $style;
     }
 
     /**
