@@ -1,3 +1,4 @@
 .panel {margin: 20rpx; border: 2rpx solid #ddd;}
 .panel > .heading {background: #fafafa; border-bottom: 1px solid #e5e5e5}
 .panel > .content {background: #fff;}
+.panel > .heading > .avatar + .title {padding-left: 5rpx}
