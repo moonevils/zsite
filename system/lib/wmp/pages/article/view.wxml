@@ -29,7 +29,7 @@
     <view class="article-footer fluid clearfix">
       <view class="pull-left">
         <navigator wx:if="{{data.prevAndNext.prev}}" url="/pages/article/view?id={{data.prevAndNext.prev.id}}" class='btn outline'>
-          <text>上一篇 </text>
+          <text>上一篇</text>
         </navigator>
       </view>
       <view class="pull-right">

@@ -6,7 +6,7 @@
   <!-- 导入布局模版 -->
   <import src="../block/layout.tpl.wxml" />
 
-  <!-- 首页顶部布局 -->
+  <!-- 文章列表顶部布局 -->
   <view class="layout layout-top">
     <template wx:if="{{layouts.article_browse && layouts.article_browse.top}}" is="layout" data="{{blocks: layouts.article_browse.top}}" />
   </view>
@@ -46,7 +46,7 @@
     </view>
   </view>
 
-  <!-- 首页底部布局 -->
+  <!-- 文章列表底部布局 -->
   <view class="layout layout-bottom">
     <template wx:if="{{layouts.article_browse && layouts.article_browse.bottom}}" is="layout" data="{{blocks: layouts.article_browse.bottom}}" />
   </view>
