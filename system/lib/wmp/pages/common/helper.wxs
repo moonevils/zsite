@@ -97,10 +97,14 @@ var formatServerUrl = function(url, configRoot, decode) {
  */
 var printFileURL = function(file, config, size)
 {
-    if(typeof(size) === 'undefined') size = 'middleURL';
-    if(typeof(file) == 'object')
+    if (!size) {
+        size = 'middleURL';
+    }
+    if(typeof file == 'object')
     {
-        if(typeof(file.objectType) == 'undefined') file.objectType = '';
+        if(!file.objectType) {
+            file.objectType = '';
+        }
         return config.root + 'file.php?f=' + file.pathname + '&t=' + file.extension + '&o=' + file.objectType + '&s=' + size;
     }
     return '';

@@ -1,36 +1,53 @@
 <wxs src="../common/helper.wxs" module="helper" />
 <template name='latestProduct'>
-  <view class="panel">
-    <view class="heading">
-      <text class="title strong">{{block.title}}</text>
-      <navigator wx:if="{{block.content.moreUrl && block.content.moreText}}" class="pull-right" url="{{helper.convertUrl(block.content.moreUrl)}}" data-url="{{block.content.moreUrl}}" >
-        {{block.content.moreText}}
-      </navigator>
-    </view>  
-  <view class="box blue-pale article">
-    <block wx:for="{{block.products}}" wx:for-item="product">
-      <view class="product-info has-padding-v">
-        <image wx:if="{{product.image.primary && block.content.image}}" src="{{helper.printFileURL(product.image.primary, config)}}" />
-        <navigator class='title strong has-padding-v' style="color:{{product.titleColor}}" url="/pages/product/view?id={{product.id}}"> {{product.name}} </navigator>
-        <view wx:if="{{block.content.showPrice && block.content.image}}">
-          <view wx:if="{{!product.unsaleable}}">
-            <view wx:if="{{product.negotiate != 0}}"> 面议 </view>
-            <view wx:else>
-              <view wx:if="{{product.promotion != 0}}">
-                <text class="text-red">￥{{product.promotion}}</text>
-                <text wx:if="{{product.price}}" class='text-muted text-line-through has-padding-h'>￥{{product.price}}</text>
-              </view>
-              <view wx:else>
-                <text wx:if="{{product.price}}" class="text-red">￥{{product.price}}</text>
-              </view>
-            </view>
-          </view>
+    <view class="panel{{block.borderless ? ' borderless' : ''}}">
+        <include src="./block.header.wxml" />
+        <view wx:if="{{block.content.image}}">
+            <!-- ⚠️ 此处 block.products 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
+            <block wx:for="{{block.products}}" wx:for-item="product">
+                <view class="shadow-1 rounded" style="overflow: hidden; margin-top: 20rpx">
+                    <image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(product.image.primary, config)}}" />
+                    <view class="heading">
+                        <block wx:if="{{block.content.showCategory === '1'}}">
+                            <navigator wx:if="{{block.content.categoryName === 'abbr'}}" class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.abbr || product.category.name}}]</navigator>
+                            <navigator wx:else class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.name}}]</navigator>
+                        </block>
+                        <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}">{{product.name}}</navigator>
+                        <view wx:if="{{!product.unsaleable}}" class="flex-none title ele">
+                            <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
+                            <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
+                                <block wx:if="{{product.price && product.price !== '0' && product.price !== '0.00'}}">
+                                    <text class="text-line-through muted">￥{{product.price}}</text>
+                                    <text class="text-danger strong">￥{{product.promotion}}</text>
+                                </block>
+                            </block>
+                            <text wx:elif="{{product.price && product.price !== '0' && product.price !== '0.00'}}">￥{{product.price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
         </view>
-        <view wx:if="{{block.content.showInfo}}">
-          <text>{{product.desc}}</text>
+        <view wx:else class="list compact content">
+            <!-- ⚠️ 此处 block.products 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
+            <block wx:for="{{block.products}}" wx:for-item="product">
+                <view class="item">
+                    <block wx:if="{{block.content.showCategory === '1'}}">
+                        <navigator wx:if="{{block.content.categoryName === 'abbr'}}" class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.abbr || product.category.name}}]</navigator>
+                        <navigator wx:else class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.name}}]</navigator>
+                    </block>
+                    <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}">{{product.name}}</navigator>
+                    <view wx:if="{{!product.unsaleable}}" class="flex-none title ele">
+                        <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
+                        <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
+                            <block wx:if="{{product.price && product.price !== '0' && product.price !== '0.00'}}">
+                                <text class="text-line-through muted">￥{{product.price}}</text>
+                                <text class="text-danger strong">￥{{product.promotion}}</text>
+                            </block>
+                        </block>
+                        <text wx:elif="{{product.price && product.price !== '0' && product.price !== '0.00'}}">￥{{product.price}}</text>
+                    </view>
+                </view>
+            </block>
         </view>
-      </view>
-    </block>
-  </view>
-</view>
+    </view>
 </template>
