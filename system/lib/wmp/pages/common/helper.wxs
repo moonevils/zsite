@@ -116,11 +116,22 @@ var isHomeUrl = function(url) {
     return url.indexOf('?m=index&f=index&') > -1;
 };
 
+/**
+ * 判断一个网址是否是服务器内部地址
+ *
+ * @param {string} url 要判断的地址
+ * @return {boolean}
+ */
+var isInternalUrl = function(url) {
+    return url.indexOf('https://') !== 0 && url.indexOf('http://') !== 0;
+};
+
 module.exports = {
     test: 'test',
     convertUrl: convertUrl,
     getSearchParam: getSearchParam,
     formatServerUrl: formatServerUrl,
     isHomeUrl: isHomeUrl,
-    printFileURL: printFileURL
+    printFileURL: printFileURL,
+    isInternalUrl: isInternalUrl
 };
