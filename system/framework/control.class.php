@@ -365,7 +365,7 @@ class control extends baseControl
     public function parseWXML($moduleName, $methodName)
     {
         $this->app->setClientDevice('mobile');
-        //$this->loadModel('common')->checkWMP();
+        $this->loadModel('common')->checkWMP();
 
         unset($this->view->app);
         unset($this->view->config);
@@ -374,6 +374,7 @@ class control extends baseControl
         unset($this->view->position);
         unset($this->view->moduleTree);
         unset($this->view->common);
+        unset($this->view->layouts);
         unset($this->view->pager->app);
         unset($this->view->pager->lang);
 
