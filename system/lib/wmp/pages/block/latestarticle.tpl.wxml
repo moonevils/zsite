@@ -15,7 +15,7 @@
                             </block>
                             <navigator class="ele strong inline" url="/pages/article/view?id={{article.id}}" style="{{article.titleColor ? ('color: ' + article.titleColor) : ''}}">{{article.title}}</navigator>
                         </view>
-                        <view wx:if="{{article.summary}}" class="subtitle">{{article.summary}}</view>
+                        <navigator wx:if="{{article.summary}}" class="subtitle" url="/pages/article/browse?categoryID={{article.category.id}}">{{article.summary}}</navigator>
                     </view>
                 </view>
             </block>
