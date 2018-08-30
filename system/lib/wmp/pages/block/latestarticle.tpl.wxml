@@ -9,7 +9,7 @@
     </view>  
   <view class="box blue-pale">
     <navigator wx:for="{{block.articles}}" wx:for-item="article" class="item lead" url="/pages/article/view?id={{article.id}}">
-      <image wx:if="{{article.image && block.content.image}}" src="{{helper.formatServerUrl(article.image, config, true)}}" class='image-article-list'/>
+      <image wx:if="{{article.image && block.content.image}}" mode="aspectFit" src="{{helper.formatServerUrl(article.image, config, true)}}" class='image-article-list'/>
       <text>{{article.title}}</text> 
     </navigator>
   </view>

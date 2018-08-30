@@ -12,10 +12,10 @@
   </view>
 
   <view class="container">
-    <swiper wx:if="{{data.product.image.list}}" class="product-image-list" indicator-dots="true" autoplay="true" indicator-color="rgba(0,0,0,.5)" indicator-active-color="#000">
+    <swiper wx:if="{{data.product.image.list}}" class="product-image-list" indicator-dots="true" autoplay="true" indicator-color="rgba(255,255,255,.5)" indicator-active-color="#fff">
       <block wx:for="{{data.product.image.list}}" wx:for-item="image">
         <swiper-item item-id="{{index}}">
-          <image mode="aspectFill" src="{{helper.printFileURL(image, config)}}" class="product-image" />
+          <image mode="aspectFit" src="{{helper.printFileURL(image, config)}}" class="product-image" />
         </swiper-item>
       </block>
     </swiper>

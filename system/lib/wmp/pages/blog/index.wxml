@@ -17,7 +17,7 @@
       <block wx:for="{{data.sticks}}" wx:for-item="article">
         <view class="content has-padding">
           <navigator class='title strong' url="/pages/blog/view?id={{article.id}}"> {{article.title}} <icon class="icon-arrow-up text-red"></icon></navigator>
-          <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}" />
+          <image wx:if="{{article.image.primary}}" mode="aspectFit" src="{{helper.printFileURL(article.image.primary, config)}}" />
           <view class='content'> {{article.summary}}</view>
           <view>
             <icon class='icon-eye-open'></icon>
@@ -33,7 +33,7 @@
       <block wx:for="{{data.articles}}" wx:for-item="article">
         <view class="content has-padding">
           <navigator class='title strong'  url="/pages/blog/view?id={{article.id}}"> {{article.title}} </navigator>
-          <image wx:if="{{article.image.primary}}" src="{{helper.printFileURL(article.image.primary, config)}}" />
+          <image wx:if="{{article.image.primary}}" mode="aspectFit" src="{{helper.printFileURL(article.image.primary, config)}}" />
           <view class='content'> {{article.summary}}</view>
           <view>
             <icon class='icon-eye-open'></icon>
