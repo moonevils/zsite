@@ -25,6 +25,19 @@
     <view class="content fluid has-padding">
       <rich-text nodes="{{data.article.content}}" />
     </view>
+
+    <view class="article-footer fluid clearfix">
+      <view class="pull-left">
+        <navigator wx:if="{{data.prevAndNext.prev}}" url="/pages/blog/view?id={{data.prevAndNext.prev.id}}" class='btn outline'>
+          <text>上一篇</text>
+        </navigator>
+      </view>
+      <view class="pull-right">
+        <navigator wx:if="{{data.prevAndNext.next}}" url="/pages/blog/view?id={{data.prevAndNext.next.id}}" class='btn outline'>
+          <text>下一篇</text>
+        </navigator>
+      </view>
+    </view>
   </view>
 
   <!-- 首页底部布局 -->
