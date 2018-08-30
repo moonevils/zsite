@@ -9,6 +9,8 @@
         "pages/blog/index",
         "pages/blog/view",
         "pages/logs/logs",
+        "pages/page/index",
+        "pages/page/view",
         "pages/error/index"
     ],
     "window": {
