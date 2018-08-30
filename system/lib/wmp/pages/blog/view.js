@@ -1,2 +1,3 @@
-import { createLayoutPage } from '../../core/layout-page.js';
-Page(createLayoutPage());
+import LayoutPage from '../../core/layout-page.js';
+
+LayoutPage();
