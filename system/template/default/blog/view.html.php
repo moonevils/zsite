@@ -42,6 +42,9 @@
             {$article->copyURL = commonModel::getSysURL() . $control->article->createPreviewLink($article->copyURL)}
             <dd>{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</dd>
           {/if}
+          {if($article->source == 'copied')}
+            <dd>{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</dd>
+          {/if}
           <dd class='pull-right'>
             {if(!empty($control->config->oauth->sina))}
                 {$sina = json_decode($control->config->oauth->sina)}
