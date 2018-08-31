@@ -949,7 +949,7 @@ class orderModel extends model
      */
     public function saveSetting()
     {
-        $errors = '';
+        $errors = array();
         if(!$this->post->payment) $errors = $this->lang->order->paymentRequired;
         if(!$this->post->confirmLimit) $errors['confirmLimit'] = array($this->lang->order->confirmLimitRequired);
         if(in_array('alipay', $this->post->payment) and strlen($this->post->pid) != 16) $errors['pid'] = array($this->lang->order->placeholder->pid);
