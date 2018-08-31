@@ -98,13 +98,20 @@ var formatServerUrl = function(url, configRoot, decode) {
  * @param {string} size     fullURL|largeURL|middleURL|smallURL 
  * @return {string}
  */
-var printFileURL = function(file, config, size) {
-  if (typeof(size) === 'undefined') size = 'middleURL';
-  if (typeof(file) == 'object') {
-    if (typeof(file.objectType) == 'undefined') file.objectType = '';
-    return config.root + 'file.php?f=' + file.pathname + '&t=' + file.extension + '&o=' + file.objectType + '&s=' + size;
-  }
-  return '';
+
+var printFileURL = function(file, config, size)
+{
+    if (!size) {
+        size = 'middleURL';
+    }
+    if(typeof file == 'object')
+    {
+        if(!file.objectType) {
+            file.objectType = '';
+        }
+        return config.root + 'file.php?f=' + file.pathname + '&t=' + file.extension + '&o=' + file.objectType + '&s=' + size;
+    }
+    return '';
 };
 
 /**
@@ -158,16 +165,28 @@ var pager = {
     }
     return url;
   }
+};
 
+/**
+ * 判断导航网址是否高亮
+ * 
+ * @param {string} url 要判断的导航地址
+ * @param {string} url 当前页面地址
+ * @return {boolean}
+ */
+var isActiveNavUrl = function(navUrl, currentPageUrl) {
+    currentPageUrl = currentPageUrl ? currentPageUrl.replace('mhtml', 'wxml') : currentPageUrl;
+    return navUrl && currentPageUrl && (navUrl.indexOf(currentPageUrl) === 0 || currentPageUrl.indexOf(navUrl) === 0);
 };
 
 module.exports = {
-  test: 'test',
-  convertUrl: convertUrl,
-  getSearchParam: getSearchParam,
-  formatServerUrl: formatServerUrl,
-  isHomeUrl: isHomeUrl,
-  printFileURL: printFileURL,
-  pager: pager,
-  isInternalUrl: isInternalUrl
+    test: 'test',
+    convertUrl: convertUrl,
+    getSearchParam: getSearchParam,
+    formatServerUrl: formatServerUrl,
+    isHomeUrl: isHomeUrl,
+    printFileURL: printFileURL,
+    isInternalUrl: isInternalUrl,
+    pager: pager,
+    isActiveNavUrl: isActiveNavUrl
 };

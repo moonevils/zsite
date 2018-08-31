@@ -1,4 +1,5 @@
 import LayoutPage from '../../core/layout-page.js';
+
 LayoutPage({
   onDataLoad: data => {
     Object.keys(data.data.articles).forEach(articleID => {

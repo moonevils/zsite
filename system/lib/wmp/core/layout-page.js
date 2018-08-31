@@ -19,15 +19,16 @@ const {chanzhi, config} = app;
 const pageTitleCache = {};
 
 /**
- * 注册蝉知通用布局页面
- * 
+ * 创建蝉知通用布局注册页面时的配置对象
+ *
  * @param {object} options 注册参数
+ * @return {object}
  */
-export default (options = {}) => {
-    let {moduleName, methodName} = options;
+export const createLayoutPage = (options = {}) => {
+    let { moduleName, methodName } = options;
 
-    // 注册页面
-    Page(Object.assign({}, options, {
+    // 获取注册页面配置
+    return Object.assign({}, options, {
         /**
          * 页面绑定的数据
          */
@@ -40,7 +41,7 @@ export default (options = {}) => {
         /**
          * 处理页面加载完成事件
          */
-        onLoad: function(params) {
+        onLoad: function (params) {
             const currentPageUrl = getCurrentPageUrl();
             const currentPageUrlSegs = currentPageUrl.split('/');
             if (!moduleName) {
@@ -80,7 +81,7 @@ export default (options = {}) => {
         /**
          * 尝试从服务器获取数据并刷新页面，如果当前已经正在获取数据过程中，则放弃此次请求
          */
-        tryLoadData: function() {
+        tryLoadData: function () {
             if (this.request && this.request.working) {
                 return;
             }
@@ -90,7 +91,7 @@ export default (options = {}) => {
         /**
          * 从服务器获取数据并刷新页面，如果当前已经正在获取数据过程中，则放弃之前的请求，重新获取数据
          */
-        loadData: function() {
+        loadData: function () {
             // 检查是否有上个请求进行中，如果有则取消上次的请求
             if (this.request && this.request.working) {
                 this.request.abort();
@@ -125,6 +126,13 @@ export default (options = {}) => {
                         Object.keys(pageLayout).forEach(layoutName => {
                             const blocks = pageLayout[layoutName];
                             blocks.forEach(block => {
+                                if (block.type === 'hotArticle') {
+                                    block.layoutType = 'latestArticle';
+                                } else if (block.type === 'hotProduct') {
+                                    block.layoutType = 'latestProduct';
+                                } else {
+                                    block.layoutType = block.type;
+                                }
                                 if (block.titleless === '0') {
                                     block.titleless = false;
                                 }
@@ -188,11 +196,21 @@ export default (options = {}) => {
         /**
          * 处理下拉刷新请求
          */
-        onPullDownRefresh: function() {
+        onPullDownRefresh: function () {
             if (options.onPullDownRefresh && options.onPullDownRefresh() === false) {
                 return;
             }
             return this.tryLoadData();
         }
-    }));
+    });
+};
+
+/**
+ * 注册蝉知通用布局页面
+ * 
+ * @param {object} options 注册参数
+ */
+export default (options) => {
+    // 注册页面
+    Page(createLayoutPage(options));
 };

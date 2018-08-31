@@ -11,4 +11,4 @@ LayoutPage({
     })
     return data;
   }
-})
+});
