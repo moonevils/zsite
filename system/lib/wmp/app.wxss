@@ -9,3 +9,17 @@
 #header .nav > .item.active:after {
     display: none;
 }
+
+.theme-blue #header .nav {
+    background: #3280fc;
+    color: #fff;
+    border-bottom: none!important;
+}
+.theme-blue #header .nav > .item.active {
+    color: #fff;
+    background: rgba(255,255,255,.1);
+    box-shadow: inset 0 -4rpx 0 rgba(255,255,255,.5);
+}
+.theme-blue .panel > .heading {
+    background: #ebf2f9;
+}

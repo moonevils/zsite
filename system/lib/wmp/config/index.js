@@ -1,6 +1,7 @@
 import config       from './config.js';
 import my           from './my.js';
 import { isWebUrl } from '../lib/mzui/js/html-helper.js';
+import themes       from './themes.js';
 
 // 合并配置
 Object.assign(config, my);
@@ -26,6 +27,23 @@ if (!config.root.endsWith('/')) {
 // 最终检查站点根地址是否是一个合格的 URL 地址
 if (!config.error && !isWebUrl(config.root)) {
     config.error = '站点配置错误：root 字段不能使用 http:// 开头，站点根地址需要使用 https 协议。';
+}
+
+// 检查主题
+if (typeof config.theme !== 'object') {
+    const theme = themes[config.theme];
+    if (!theme) {
+        config.error = `站点配置错误：所指定的主题"${config.theme}"不可用。`;
+    } else {
+        theme.name = config.theme;
+        config.theme = theme;
+    }
+    if (typeof config.theme !== 'object') {
+        config.theme = {};
+    }
+}
+if (config.themeSetting) {
+    Object.assign(config.theme, config.themeSetting);
 }
 
 if (config.debug) {

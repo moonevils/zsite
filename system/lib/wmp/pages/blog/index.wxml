@@ -1,59 +1,63 @@
 <wxs src="../common/helper.wxs" module="helper" />
-<view wx:if="{{!loading}}">
-  <!-- 导入公共 header -->
-  <include src="../common/header.wxml" />
+<view wx:if="{{!loading}}" class="theme-{{config.theme && config.theme.name}}">
+    <!-- 导入公共 header -->
+    <include src="../common/header.wxml" />
 
-  <!-- 导入布局模版 -->
-  <import src="../block/layout.tpl.wxml" />
+    <!-- 导入布局模版 -->
+    <import src="../block/layout.tpl.wxml" />
 
-  <!-- 首页顶部布局 -->
-  <view class="layout layout-top">
-    <template wx:if="{{layouts.blog_index && layouts.blog_index.top}}" is="layout" data="{{blocks: layouts.blog_index.top}}" />
-  </view>
-
-
-  <view class="panel">
-    <view class="blog-list">
-      <block wx:for="{{data.sticks}}" wx:for-item="article">
-        <view class="content has-padding">
-          <navigator class='title strong' url="/pages/blog/view?id={{article.id}}"> {{article.title}} <icon class="icon-arrow-up text-red"></icon></navigator>
-          <image wx:if="{{article.image.primary}}" mode="aspectFit" src="{{helper.printFileURL(article.image.primary, config)}}" />
-          <view class='content'> {{article.summary}}</view>
-          <view>
-            <icon class='icon-eye-open'></icon>
-            <text> {{data.config.viewsPlaceholder}}{{article.id}}{{data.config.viewsPlaceholder}} </text>
-            <icon wx:if="{{article.comments}}" class='icon-comments-alt'></icon>
-            <text wx:if="{{article.comments}}"> {{article.comments}}</text>
-            <icon class='icon-time'></icon>
-            <text> {{article.addedDate}} </text>
-          </view>
-        </view>
-      </block>
-
-      <block wx:for="{{data.articles}}" wx:for-item="article">
-        <view class="content has-padding">
-          <navigator class='title strong'  url="/pages/blog/view?id={{article.id}}"> {{article.title}} </navigator>
-          <image wx:if="{{article.image.primary}}" mode="aspectFit" src="{{helper.printFileURL(article.image.primary, config)}}" />
-          <view class='content'> {{article.summary}}</view>
-          <view>
-            <icon class='icon-eye-open'></icon>
-            <text> {{data.config.viewsPlaceholder}}{{article.id}}{{data.config.viewsPlaceholder}} </text>
-            <icon wx:if="{{article.comments}}" class='icon-comments-alt'></icon>
-            <text wx:if="{{article.comments}}"> {{article.comments}}</text>
-            <icon class='icon-time'></icon>
-            <text> {{article.addedDate}} </text>
-          </view>
-        </view>
-      </block>
+    <!-- 首页顶部布局 -->
+    <view class="layout layout-top">
+        <template wx:if="{{layouts.blog_index && layouts.blog_index.top}}" is="layout" data="{{blocks: layouts.blog_index.top, config: config}}" />
     </view>
-  </view>
 
+    <view class="has-padding-h">
+        <view class="list with-divider article-list divider-all canvas">
+            <!-- ⚠️ 此处 data.sticks 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
+            <view class="item" wx:for="{{data.sticks}}" wx:for-item="article" wx:key="article">
+                <view class="content ele">
+                    <view class="title space-xs">
+                        <navigator class="ele strong inline" url="/pages/blog/view?id={{article.id}}" style="{{article.titleColor ? ('color: ' + article.titleColor) : ''}}">
+                            <text class="icon icon-pushpin text-red"></text>{{article.title}}</navigator>
+                    </view>
+                    <navigator wx:if="{{article.summary}}" class="subtitle space-xs" url="/pages/blog/view?id={{article.id}}">{{article.summary}}</navigator>
+                    <view class="subtitle">
+                        <text space="nbsp"><icon class='icon-time icon-large'></icon>{{article.addedDate}}  </text>
+                        <text space="nbsp"><icon class='icon-user icon-large'></icon>{{article.author}}  </text>
+                        <text space="nbsp"><icon class='icon-eye-open'></icon>{{article.views}}  </text>
+                        <text wx:if="{{article.source !== 'original' && article.copyURL}}" class="text-brown hidden green-pale" space="nbsp">转自：{{article.copySite}} </text>
+                        <text wx:else class="text-green green-pale" space="nbsp">原创</text>
+                    </view>
+                </view>
+                <navigator wx:if="{{article.image}}" class="avatar avatar-xl flex-none ele" url="/pages/blog/view?id={{article.id}}">
+                    <image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(article.image.primary, config)}}" />
+                </navigator>
+            </view>
+            <view class="item" wx:for="{{data.articles}}" wx:for-item="article" wx:key="article">
+                <view class="content ele">
+                    <view class="title space-xs">
+                        <navigator class="ele strong inline" url="/pages/blog/view?id={{article.id}}" style="{{article.titleColor ? ('color: ' + article.titleColor) : ''}}">{{article.title}}</navigator>
+                    </view>
+                    <navigator wx:if="{{article.summary}}" class="subtitle  space-xs" url="/pages/blog/view?id={{article.id}}">{{article.summary}}</navigator>
+                    <view class="subtitle">
+                        <text space="nbsp"><icon class='icon-time icon-large'></icon>{{article.addedDate}}  </text>
+                        <text space="nbsp"><icon class='icon-user icon-large'></icon>{{article.author}}  </text>
+                        <text space="nbsp"><icon class='icon-eye-open'></icon>{{article.views}}  </text>
+                        <text wx:if="{{article.source !== 'original' && article.copyURL}}" class="text-brown hidden green-pale" space="nbsp">转自：{{article.copySite}} </text>
+                        <text wx:else class="text-green green-pale" space="nbsp">原创</text>
+                    </view>
+                </view>
+                <navigator wx:if="{{article.image}}" class="avatar avatar-xl flex-none ele" url="/pages/blog/view?id={{article.id}}">
+                    <image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(article.image.primary, config)}}" />
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <!-- 首页底部布局 -->
+    <view class="layout layout-bottom">
+        <template wx:if="{{layouts.blog_index && layouts.blog_index.bottom}}" is="layout" data="{{blocks: layouts.blog_index.bottom, config: config}}" />
+    </view>
 
-  <!-- 首页底部布局 -->
-  <view class="layout layout-bottom">
-    <template wx:if="{{layouts.blog_index && layouts.blog_index.bottom}}" is="layout" data="{{blocks: layouts.blog_index.bottom}}" />
-  </view>
-
-  <!-- 导入公共 footer -->
-  <include src="../common/footer.wxml" />
+    <!-- 导入公共 footer -->
+    <include src="../common/footer.wxml" />
 </view>

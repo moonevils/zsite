@@ -12,7 +12,7 @@
                             <navigator wx:if="{{block.content.categoryName === 'abbr'}}" class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.abbr || product.category.name}}]</navigator>
                             <navigator wx:else class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.name}}]</navigator>
                         </block>
-                        <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}">{{product.name}}</navigator>
+                        <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}" style="{{product.titleColor ? ('color: ' + product.titleColor) : ''}}">{{product.name}}</navigator>
                         <view wx:if="{{!product.unsaleable}}" class="flex-none title ele">
                             <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
                             <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
@@ -35,7 +35,7 @@
                         <navigator wx:if="{{block.content.categoryName === 'abbr'}}" class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.abbr || product.category.name}}]</navigator>
                         <navigator wx:else class="title text-special flex-none" url="/pages/product/browse?categoryID={{product.category.id}}">[{{product.category.name}}]</navigator>
                     </block>
-                    <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}">{{product.name}}</navigator>
+                    <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}" style="{{product.titleColor ? ('color: ' + product.titleColor) : ''}}">{{product.name}}</navigator>
                     <view wx:if="{{!product.unsaleable}}" class="flex-none title ele">
                         <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
                         <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
