@@ -1,15 +1,9 @@
 <wxs src="../common/helper.wxs" module="helper" />
-
 <template name="html">
-  <!-- 此模版绑定的数据即为区块对象，例如 {{block.title}} 就是区块标题 -->
   <view class="panel{{block.borderless ? ' borderless' : ''}}">
-
- 	<!-- 区块头部 -->   
     <include src="./block.header.wxml" />
-
-    <!-- 区块内容 -->
     <view class="content has-padding">
-        <rich-text nodes="{{block.content.content}}" />
+      <rich-text nodes="{{block.content.content}}" />
     </view>
   </view>
 </template>

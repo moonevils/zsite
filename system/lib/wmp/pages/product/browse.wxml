@@ -1,48 +1,52 @@
 <wxs src="../common/helper.wxs" module="helper" />
 <view wx:if="{{!loading}}" class="theme-{{config.theme && config.theme.name}}">
-    <!-- 导入公共 header -->
-    <include src="../common/header.wxml" />
+  <!-- 导入公共 header -->
+  <include src="../common/header.wxml" />
 
-    <!-- 导入布局模版 -->
-    <import src="../block/layout.tpl.wxml" />
+  <!-- 导入布局模版 -->
+  <import src="../block/layout.tpl.wxml" />
 
-    <!-- 首页顶部布局 -->
-    <view class="layout layout-top">
-        <template wx:if="{{layouts.product_browse && layouts.product_browse.top}}" is="layout" data="{{blocks:layouts.product_browse.top, config: config}}" />
+  <!-- 首页顶部布局 -->
+  <view class="layout layout-top">
+    <template wx:if="{{layouts.product_browse && layouts.product_browse.top}}" is="layout" data="{{blocks:layouts.product_browse.top, config: config}}" />
+  </view>
+
+  <view class="header has-padding">
+    <text class="strong">{{data.title}}</text>
+  </view>
+
+  <view class="products-list has-padding-h">
+    <block wx:for="{{data.products}}" wx:for-item="product" wx:key="product">
+      <view class="shadow-1 rounded space-sm" style="overflow: hidden;">
+        <navigator class="title state text-ellipsis ele" url="/pages/product/view?id={{product.id}}">
+          <image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(product.image.primary, config)}}" />
+        </navigator>
+        <view class="heading">
+          <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}" style="{{product.titleColor ? ('color: ' + product.titleColor) : ''}}">{{product.name}}</navigator>
+          <view wx:if="{{!product.unsaleable}}" class="flex-none title ele">
+            <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
+            <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
+              <block wx:if="{{product.price && product.price !== '0' && product.price !== '0.00'}}">
+                <text class="text-line-through muted small">￥{{product.price}}</text>
+                <text class="text-danger strong">￥{{product.promotion}}</text>
+              </block>
+            </block>
+            <text wx:elif="{{product.price && product.price !== '0' && product.price !== '0.00'}}">￥{{product.price}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class='item' wx:if="{{data.pager}}">
+      <import src="/pages/common/pager.wxml" />
+      <template is="pager" data="{{pager:data.pager, url:data.desktopURL}}" />
     </view>
+  </view>
 
-    <view class="header has-padding">
-        <text class="strong">{{data.title}}</text>
-    </view>
+  <!-- 首页底部布局 -->
+  <view class="layout layout-bottom">
+    <template wx:if="{{layouts.product_browse && layouts.product_browse.bottom}}" is="layout" data="{{blocks:layouts.product_browse.bottom, config: config}}" />
+  </view>
 
-    <view class="products-list has-padding-h">
-        <block wx:for="{{data.products}}" wx:for-item="product" wx:key="product">
-            <view class="shadow-1 rounded space-sm" style="overflow: hidden;">
-                <navigator class="title state text-ellipsis ele" url="/pages/product/view?id={{product.id}}">
-                    <image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(product.image.primary, config)}}" />
-                </navigator>
-                <view class="heading">
-                    <navigator class="title text-ellipsis ele" url="/pages/product/view?id={{product.id}}" style="{{product.titleColor ? ('color: ' + product.titleColor) : ''}}">{{product.name}}</navigator>
-                    <view wx:if="{{!product.unsaleable}}" class="flex-none title ele">
-                        <text wx:if="{{product.negotiate === '1'}}" class="text-brown">面议</text>
-                        <block wx:elif="{{product.promotion && product.promotion !== '0' && product.promotion !== '0.00'}}">
-                            <block wx:if="{{product.price && product.price !== '0' && product.price !== '0.00'}}">
-                                <text class="text-line-through muted small">￥{{product.price}}</text>
-                                <text class="text-danger strong">￥{{product.promotion}}</text>
-                            </block>
-                        </block>
-                        <text wx:elif="{{product.price && product.price !== '0' && product.price !== '0.00'}}">￥{{product.price}}</text>
-                    </view>
-                </view>
-            </view>
-        </block>
-    </view>
-
-    <!-- 首页底部布局 -->
-    <view class="layout layout-bottom">
-        <template wx:if="{{layouts.product_browse && layouts.product_browse.bottom}}" is="layout" data="{{blocks:layouts.product_browse.bottom, config: config}}" />
-    </view>
-
-    <!-- 导入公共 header -->
-    <include src="../common/footer.wxml" />
+  <!-- 导入公共 header -->
+  <include src="../common/footer.wxml" />
 </view>

@@ -1,5 +1,4 @@
 <view id="header">
-    <import src="../block/layout.tpl.wxml" />
-
-    <template wx:if="{{layouts.all && layouts.all.top}}" is="layout" data="{{blocks: layouts.all.top, grid: false, config: config, data: data}}" />
+  <import src="../block/layout.tpl.wxml" />
+  <template wx:if="{{layouts.all && layouts.all.top}}" is="layout" data="{{blocks: layouts.all.top, grid: false, config: config, data: data}}" />
 </view>
