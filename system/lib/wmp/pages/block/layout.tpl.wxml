@@ -9,9 +9,9 @@
 <import src="./htmlcode.tpl.wxml" />
 
 <template name="layout">
-    <block wx:if="{{blocks.length}}">
-        <view wx:for="{{blocks}}" wx:for-item="block" wx:key="unique" class="block block-{{block.type}}">
-            <template is="{{block.layoutType}}" data="{{block: block, config: config, data: data}}" />
-        </view>
-    </block>
+  <block wx:if="{{blocks.length}}">
+    <view wx:for="{{blocks}}" wx:for-item="block" wx:key="unique" class="block block-{{block.type}}">
+      <template is="{{block.layoutType}}" data="{{block: block, config: config, data: data}}" />
+    </view>
+  </block>
 </template>

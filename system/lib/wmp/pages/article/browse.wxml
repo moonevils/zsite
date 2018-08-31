@@ -17,7 +17,7 @@
   </view>
   <view class="has-padding-h">
     <view class="list with-divider article-list divider-all canvas">
-      <!-- ⚠️ 此处 data.sticks 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
+      <!-- 此处 data.sticks 应该输出纯 JS 数组，而不是 JS 对象，否则 for 循环无法保证输出顺序 -->
       <view class="item" wx:for="{{data.sticks}}" wx:for-item="article" wx:key="article">
         <view class="content ele">
           <view class="title space-xs">
