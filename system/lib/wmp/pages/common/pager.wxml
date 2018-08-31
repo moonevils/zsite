@@ -1,9 +1,9 @@
 <wxs src="../common/helper.wxs" module="helper" />
 <template name="pager">
-<view class='pager'>
-  <navigator wx:if="{{pager.pageID > 1}}" class='label txt-gray pull-left' url="{{helper.pager.getPrevLink(url, pager.pageID)}}">上一页</navigator>
-  <navigator wx:if="{{pager.pageID < pager.pageTotal}}" class='label pull-right' url="{{helper.pager.getNextLink(url, pager.pageID)}}">下一页</navigator>
-  <text wx:if="{{pager.pageID == 1}}" class='label disabled pull-left'>上一页</text>
-  <text wx:if="{{pager.pageID == pager.pageTotal}}" class='label disabled pull-right'>下一页</text>
-  </view>
+  <block class='pager w-p100'>
+    <navigator wx:if="{{pager.pageID > 1}}" class='label txt-gray pull-left' url="{{helper.pager.getPrevLink(url, pager.pageID)}}">上一页</navigator>
+    <text wx:if="{{pager.pageID == 1}}" class='label disabled pull-left'>上一页</text>
+    <navigator wx:if="{{pager.pageID < pager.pageTotal}}" class='label pull-right' url="{{helper.pager.getNextLink(url, pager.pageID)}}">下一页</navigator>
+    <text wx:if="{{pager.pageID == pager.pageTotal}}" class='label disabled pull-right'>下一页</text>
+  </block>
 </template>

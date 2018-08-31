@@ -98,7 +98,6 @@ var formatServerUrl = function(url, configRoot, decode) {
  * @param {string} size     fullURL|largeURL|middleURL|smallURL 
  * @return {string}
  */
-
 var printFileURL = function(file, config, size)
 {
     if (!size) {

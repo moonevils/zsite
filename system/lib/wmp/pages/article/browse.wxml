@@ -54,11 +54,10 @@
                     <image class="fluid" mode="scaleToFill" src="{{helper.printFileURL(article.image.primary, config)}}" />
                 </navigator>
             </view>
-            <view wx:if="{{data.pager}}">
+            <view class='item' wx:if="{{data.pager}}">
               <import src="/pages/common/pager.wxml" />
               <template is="pager" data="{{pager:data.pager, url:data.desktopURL}}" />
             </view>
-
         </view>
     </view>
 
