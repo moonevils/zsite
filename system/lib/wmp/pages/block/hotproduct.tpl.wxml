@@ -1,0 +1,4 @@
+<import src="./latestproduct.tpl.wxml" />
+<template name='hotProduct'>
+  <template is="{{block.layoutType}}" data="{{block: block, config: config, data: data}}" />
+</template>
