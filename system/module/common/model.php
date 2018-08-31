@@ -135,7 +135,7 @@ class commonModel extends model
             if($inList)
             {
                 $contact = json_decode($this->config->company->contact);
-                die(sprintf($this->lang->badrequestTips, $contact->phone, $contact->email));
+                $this->app->moduleName == 'user' ? die(sprintf(strip_tags($this->lang->badrequestTips), $contact->phone, $contact->email)) : die(sprintf($this->lang->badrequestTips, $contact->phone, $contact->email));
             }
         }
 

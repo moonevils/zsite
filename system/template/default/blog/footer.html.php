@@ -9,7 +9,17 @@
         {$copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-'}
         {!echo "&copy; $copyright" . date('Y') . ' ' . $config->company->name . '&nbsp;&nbsp;'}
       </span>
-      <span id='icpInfo'>{!echo $config->site->icpSN}</span>
+      <span id='icpInfo'>
+        {if(!empty($config->site->icpLink) and !empty($config->site->icpSN))}
+          {!html::a(strpos($config->site->icpLink, 'http://') !== false ? $config->site->icpLink : 'http://' . $config->site->icpLink, $config->site->icpSN, "target='_blank'")}
+        {/if}
+        {if(empty($config->site->icpLink) and !empty($config->site->icpSN))}
+          {$config->site->icpSN}
+        {/if}
+        {if(!empty($config->site->policeLink) and !empty($config->site->policeSN))}
+          {!html::a(strpos($config->site->policeLink, 'http://') !== false ? $config->site->policeLink : 'http://' . $config->site->policeLink, html::image($webRoot . 'theme/default/default/images/main/police.png'), "target='_blank'")}
+        {/if}
+      </span>
       <div id='powerby'>
         {$chanzhiVersion                   = $config->version}
         {$isProVersion                     = strpos($chanzhiVersion, 'pro') !== false}
