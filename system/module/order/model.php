@@ -864,7 +864,7 @@ class orderModel extends model
             }
         }
 
-        if($order->payment == 'COD' and isset($this->config->product->stock) and $this->config->product->stock) $this->fixStocks($orderID);
+        if(isset($this->config->product->stock) and $this->config->product->stock) $this->fixStocks($orderID);
 
         return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin'));
     }
