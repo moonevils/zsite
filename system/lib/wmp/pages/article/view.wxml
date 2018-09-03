@@ -22,7 +22,7 @@
     </view>
   </view>
 
-  <view class="content has-padding white fluid">
+  <view class="content has-padding white">
     <rich-text nodes="{{data.article.content}}" />
   </view>
 

@@ -120,6 +120,32 @@ export const createLayoutPage = (options = {}) => {
                 // 格式化服务器端数据
                 delete data.status;
 
+                // 处理富文本编辑器中图片路径以及图片大小 
+                Object.keys(data).forEach(key1 => {
+                    const data1 = data[key1];
+                    if(data1 && typeof data1 === 'object')
+                    {
+                        Object.keys(data1).forEach(key2 => {
+                            const data2 = data1[key2];
+                            if(data2 && typeof data2 === 'object')
+                            {
+                                Object.keys(data2).forEach(key3 => {
+                                    const data3 = data2[key3];
+                                    if(data3 && typeof data3 === 'string' && data3.indexOf('src="/file.php?f=') > -1)
+                                    {
+                                         data[key1][key2][key3] = data3.replace('src="/file.php?f=', 'src="' + config.root + '/file.php?f=');
+                                    }
+
+                                    if(data3 && typeof data3 === 'string' && data3.indexOf('<img ') > -1)
+                                    {
+                                         data[key1][key2][key3] = data[key1][key2][key3].replace(/\<img/gi, '<img style="width:100%;height: auto" ');
+                                    }
+                                })
+                            }
+                        })
+                    }
+                });
+
                 // 格式化布局中的区块对象，将 content 字段从字符串转换为 js 对象
                 if (data.layouts) {
                     Object.keys(data.layouts).forEach(pageName => {
