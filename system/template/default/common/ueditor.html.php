@@ -50,8 +50,10 @@ function initUeditor(afterInit)
         iframeCssUrl:'',
         {/if}
         enableAutoSave:false,
+        autoHeightEnabled: false,
         elementPathEnabled:false,
         initialFrameWidth: '100%',
+        initialFrameHeight: 400,
         zIndex: 5
     };
     if(!window.editor) window.editor = {};
