@@ -1,9 +1,0 @@
-<wxs src="../common/helper.wxs" module="helper" />
-<template name="html">
-  <view class="panel{{block.borderless ? ' borderless' : ''}}">
-    <include src="./block.header.wxml" />
-    <view class="content has-padding">
-      <rich-text nodes="{{block.content.content}}" />
-    </view>
-  </view>
-</template>
