@@ -1,4 +1,0 @@
-<import src="./latestarticle.tpl.wxml" />
-<template name='hotArticle'>
-  <template is="{{block.layoutType}}" data="{{block: block, config: config, data: data}}" />
-</template>

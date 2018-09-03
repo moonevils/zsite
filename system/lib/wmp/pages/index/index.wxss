@@ -1,6 +1,0 @@
-/**index.wxss**/
-.box .item{
-  margin-top: 20rpx;
-  text-align: center;
-  border-bottom: 1px dashed #ddd;
-}

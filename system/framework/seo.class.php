@@ -81,7 +81,7 @@ class seo
         /* Is the module an alias of a category? */
         if(isset($categoryAlias[$module]))
         {
-            $category = $categoryAlias[$module]->category;      // Get the category.
+            $category = $categoryAlias[$module]->category;  // Get the category.
             $module   = $categoryAlias[$module]->module;    // Get the module of the alias category.
 
             /* If the first param is number, like article/123.html, should call view method. */
