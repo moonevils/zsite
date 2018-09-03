@@ -1,5 +1,0 @@
-/* pages/product/view.wxss */
-.product-image-list {height: 200px; margin-top: -20rpx;}
-.product-image {height: 200px; width: 100%;}
-.attributes view {padding: 10rpx 20rpx; display: flex;}
-.attribute-label {flex: none; width: 140rpx;}

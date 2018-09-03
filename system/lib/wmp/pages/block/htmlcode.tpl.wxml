@@ -1,6 +1,0 @@
-<import src="../../lib/wxParse/wxParse.wxml"/>
-<template name="htmlcode">
-  <view class='content has-padding'>
-    <template is="wxParse" data="{{wxParseData: block.content.article.nodes}}"/>
-  </view>
-</template>

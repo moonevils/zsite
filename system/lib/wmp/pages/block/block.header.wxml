@@ -1,5 +1,0 @@
-<!-- 区块头部 -->   
-<view class="heading" wx:if="{{!block.titleless}}">
-  <view class="avatar" wx:if="{{block.content.icon}}"><text class="icon {{block.content.icon}}"></text></view>
-  <text class="title strong">{{block.title}}</text>
-</view>

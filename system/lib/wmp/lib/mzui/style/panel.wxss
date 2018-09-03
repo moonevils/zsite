@@ -1,7 +1,0 @@
-.panel {margin: 40rpx 20rpx;}
-.panel > .heading {background: #f5f5f5; border: 2rpx solid #ddd;}
-.panel > .content {background: #fff; border: 2rpx solid #ddd;}
-.panel > .heading + .content {border-top: none;}
-.panel > .heading > .avatar + .title {padding-left: 5rpx}
-.panel.borderless > .heading,
-.panel.borderless > .content {border: none;}
