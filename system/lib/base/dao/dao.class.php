@@ -1995,7 +1995,7 @@ class baseSQL
     public function groupBy($groupBy)
     {
         if($this->inCondition and !$this->conditionIsTrue) return $this;
-        if(!preg_match('/^\w+[a-zA-Z0-9_`.]+$/', $groupBy))
+        if(!preg_match('/^`?\w+[a-zA-Z0-9_`.]+$/', $groupBy))
         {
             $groupBy = htmlspecialchars($groupBy);
             die("Group is bad query, The group is $groupBy");
