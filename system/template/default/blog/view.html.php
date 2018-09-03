@@ -40,10 +40,10 @@
           {/if}
           {if($article->source == 'article')}
             {$article->copyURL = commonModel::getSysURL() . $control->article->createPreviewLink($article->copyURL)}
-            <dd>{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</dd>
+            <dd>{!echo $article->copyURL ? html::a($article->copyURL, $article->copySite, "target='_blank'") : $article->copySite}</dd>
           {/if}
           {if($article->source == 'copied')}
-            <dd>{$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}</dd>
+            <dd>{!echo $article->copyURL ? html::a($article->copyURL, $article->copySite, "target='_blank'") : $article->copySite}</dd>
           {/if}
           <dd class='pull-right'>
             {if(!empty($control->config->oauth->sina))}
