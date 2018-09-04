@@ -336,7 +336,6 @@ $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
 $lang->interface->menu->oauth = '開放登錄|site|setoauth|';
 $lang->interface->menu->mail  = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-//$lang->interface->menu->wmp   = '微信小程序|wmp|setting|';
 
 /* Menu of score module. */
 $lang->score->menu = new stdclass();
