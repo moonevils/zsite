@@ -61,6 +61,8 @@ function initUeditor(afterInit)
         enableAutoSave: false,
         elementPathEnabled: false,
         initialFrameWidth: '100%',
+        autoHeightEnabled: false,
+        initialFrameHeight: 400,
         zIndex: 5,
         removeFormatTags: 'big,dfn,font,ins,strike,tt,u',
         removeFormatAttributes: 'lang,hspace',

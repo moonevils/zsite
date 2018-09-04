@@ -1630,21 +1630,4 @@ class commonModel extends model
         if($app->clientLang == 'en' && $isProVersion) $icon = 'icon-zsite-pro';
         printf($lang->poweredBy, $config->version, k(), "<span class='" . $icon . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);
     }
-
-    /**
-     * Check wx App by token.
-     * 
-     * @access public
-     * @return bool
-     */
-    public function checkWMP()
-    {    
-        $config = $this->config->wmp;
-        $headers = getallheaders();
-        $token   = zget($headers, 'wmp-token');
-        $random  = zget($headers, 'wmp-random');
-        if(!$token or !$random) die('key error.');
-        if(md5($config->private . $random) == $token) return true;
-        die('key error.');
-    } 
 }
