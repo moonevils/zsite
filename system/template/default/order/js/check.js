@@ -8,7 +8,7 @@ $(document).ready(function()
         {
             if(response.payment == 'COD')
             {
-                location.href == response.locate;
+                location.href = response.locate;
             }
             else
             {
