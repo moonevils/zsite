@@ -221,6 +221,7 @@ class router extends baseRouter
      */
     public function parseRequest()
     {
+        if(isset($_GET['m']) and isset($_GET['f'])) $this->config->requestType = 'GET';
         if($this->config->requestType != 'GET')
         {
             $this->parsePathInfo();
