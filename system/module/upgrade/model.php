@@ -50,6 +50,7 @@ class upgradeModel extends model
             self::$errors[] = $this->lang->upgrade->deleteTips;
             foreach($results as  $result) self::$errors[] = $result;
             self::$errors[] = $this->lang->upgrade->afterDeleted;
+            return false;
         }
     
         switch($fromVersion)
