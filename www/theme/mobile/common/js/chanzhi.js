@@ -34,7 +34,7 @@ function createLink(moduleName, methodName, vars, viewType)
             link = config.webRoot + 'index.php/'  + moduleName + config.requestFix + methodName;
             if(config.langCode != '') link = config.webRoot + 'index.php/' + config.langCode + '/' + moduleName + config.requestFix + methodName;
         }
-          
+
         if(vars)
         {
             if(config.pathType == "full")
@@ -158,7 +158,7 @@ function createLink(moduleName, methodName, vars, viewType)
         });
     };
 
-    $.ajaxaction = ajaxaction; 
+    $.ajaxaction = ajaxaction;
 
     $.fn.ajaxaction = function(options)
     {
@@ -228,7 +228,7 @@ $(function()
                 $appNav.find('li > a').each(function()
                 {
                     var $a        = $(this);
-                    var href      = $a.attr('href'), 
+                    var href      = $a.attr('href'),
                         $li       = $a.parents('li'),
                         pathName  = document.location.pathname;
                     var hrefIndex = href.indexOf(pathName);
@@ -316,13 +316,13 @@ $(function()
         var sum = 0;
         var $blocks = $random.children('.random-block');
         $blocks.each(function()
-        { 
+        {
             var $block = $(this).hide();
             $block.data('probMin', sum);
             sum += $block.data('probability');
             $block.data('probMax', sum);
         });
-        
+
         var rand = Math.random() * sum;
         $blocks.each(function()
         {
@@ -333,6 +333,21 @@ $(function()
                 $block.show();
                 return false;
             }
+        });
+    });
+
+    // Make script file load in iframe modal work
+    // See https://stackoverflow.com/questions/610995/cant-append-script-element
+    $(document).on('loaded.ajax.modal', function(e)
+    {
+        var $modal = $(e.target);
+        var $scripts = $modal.find('script[src]');
+        $scripts.remove();
+        $scripts.each(function()
+        {
+            var scriptEle = document.createElement('script');
+            scriptEle.src = this.src;
+            $modal[0].appendChild(scriptEle);
         });
     });
 });
