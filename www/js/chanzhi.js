@@ -95,7 +95,7 @@ $.extend(
 
                         /* Create the error message. */
                         var errorMSG = '<span id="' + errorLabel + '" for="' + key + '" class="text-error red">';
-                        errorMSG += $.type(value) == 'string' ? value : value.join(';');
+                        errorMSG += $.type(value) == 'string' ? value : value.join('<br />');
                         errorMSG += '</span>';
 
                         /* Append error message, set style and set the focus events. */
