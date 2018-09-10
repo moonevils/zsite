@@ -311,7 +311,7 @@ class orderModel extends model
      */
     public function createWechatPayLink($order, $type = '')
     {
-        return inlink('wechatpay', "orderID=$order->id&type=$type");
+        return helper::createLink('order', 'wechatpay', "orderID=$order->id&type=$type");
     }
 
     /**
