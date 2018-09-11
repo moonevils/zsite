@@ -17,7 +17,7 @@ $.extend(
             if(ajaxForms.indexOf(formID) != -1) return;
             ajaxForms = ',' + formID  + ',';
         }
-        
+
         appendFingerprint(formID);
         form = $(formID);
 
@@ -40,7 +40,8 @@ $.extend(
                     return bootbox.alert('No response.');
                 }
 
-                var showPopover = function(type, message) {
+                var showPopover = function(type, message)
+                {
                     type = type || 'success';
                     message = message || response.message;
                     var container = submitButton.data('popoverContainer');
@@ -94,7 +95,7 @@ $.extend(
 
                         /* Create the error message. */
                         var errorMSG = '<span id="' + errorLabel + '" for="' + key + '" class="text-error red">';
-                        errorMSG += $.type(value) == 'string' ? value : value.join(';');
+                        errorMSG += $.type(value) == 'string' ? value : value.join('<br />');
                         errorMSG += '</span>';
 
                         /* Append error message, set style and set the focus events. */
@@ -159,6 +160,17 @@ $.extend(
             /* Call ajaxSubmit to sumit the form. */
             $(document).on('submit.ajaxform', formID, function()
             {
+                // Fix ueditor not changed in html source mode, see http://xirang.5upm.com/task-view-2836.html
+                var $ueditor = form.find('textarea.ueditor');
+                if ($ueditor.length)
+                {
+                    ueditor = $ueditor.data('ueditor');
+                    if (ueditor &&  ueditor.queryCommandState('source') == 1)
+                    {
+                        ueditor.execCommand('source');
+                    }
+                }
+
                 $.disableForm(formID);
                 var $this = $(this);
                 $this.ajaxSubmit($this.data('ajaxFormOptions') || $.ajaxFormOptions[formID]);
@@ -542,7 +554,7 @@ function createLink(moduleName, methodName, vars, viewType)
             link = config.webRoot + 'index.php/'  + moduleName + config.requestFix + methodName;
             if(config.langCode != '') link = config.webRoot + 'index.php/' + config.langCode + '/' + moduleName + config.requestFix + methodName;
         }
-          
+
         if(vars)
         {
             if(config.pathType == "full")
@@ -663,13 +675,13 @@ function setGo2Top()
             var sum = 0;
             var $cols = $random.children('.col');
             $cols.each(function()
-            { 
+            {
                 var $col = $(this).attr('data-random', null).hide();
                 $col.data('probMin', sum);
                 sum += $col.data('probability');
                 $col.data('probMax', sum);
             });
-            
+
             var rand = Math.random() * sum;
             $cols.each(function()
             {

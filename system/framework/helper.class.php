@@ -41,6 +41,13 @@ class helper extends baseHelper
         $clientLang = $app->getClientLang();
         $lang       = $config->langCode;
 
+        if(empty($viewType) and $app->getViewType() == 'wxml')
+        {
+            $viewType = 'wxml';
+            $currentRequestType = $config->requestType;
+            $config->requestType = 'GET';
+        }
+
         /* Set viewType is mhtml if visit with mobile.*/
         if(!$viewType and RUN_MODE == 'front' and $app->clientDevice == 'mobile' and $methodName != 'oauthCallback') $viewType = 'mhtml';
 
@@ -102,6 +109,7 @@ class helper extends baseHelper
             if($viewType != 'html') $link .= "&{$config->viewVar}=" . $viewType;
             foreach($vars as $key => $value) $link .= "&$key=$value";
             if($lang and RUN_MODE != 'admin') $link .= "&l=$lang";
+            if(isset($currentRequestType)) $config->requestType = $currentRequestType;
         }
         return $link;
     }

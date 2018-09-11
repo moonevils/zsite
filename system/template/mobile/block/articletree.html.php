@@ -27,8 +27,8 @@
     {/if}
 
     {if($type == 'product' and $model->app->getModuleName() == 'product' and $model->session->productCategory)}
-      {category = $model->tree->getByID($model->session->productCategory)}
-      {startCategory = $category->parent}
+      {$category = $model->tree->getByID($model->session->productCategory)}
+      {$startCategory = $category->parent}
     {/if}
 {/if}
 {if($block->content->showChildren)}

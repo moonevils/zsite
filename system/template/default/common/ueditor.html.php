@@ -17,29 +17,29 @@ var simple = [[
     'paragraph', 'fontfamily', 'fontsize', 'lineheight', '|',
     'bold', 'italic', 'underline', 'strikethrough', '|',
     'justifyleft', 'justifycenter', 'justifyright', '|',
-    'pasteplain', 'emotion', 'simpleupload', '|', 
+    'pasteplain', 'emotion', 'simpleupload', '|',
     'link', 'unlink', 'anchor',
     'undo', 'redo', 'removeformat','insertorderedlist', 'insertunorderedlist', '|',
     'source', 'help']];
 var full = [[
     'paragraph', 'fontfamily', 'fontsize','|',
-    'forecolor', 'backcolor', '|', 'lineheight', 'indent', '|', 
+    'forecolor', 'backcolor', '|', 'lineheight', 'indent', '|',
     'bold', 'italic', 'underline', 'strikethrough', '|',
     'justifyleft', 'justifycenter', 'justifyright', '|',
     'insertorderedlist', 'insertunorderedlist', 'pasteplain',
     'fullscreen'],
     [
     'undo', 'redo', 'removeformat', '|',
-    'link', 'unlink', 'anchor', '|', 
+    'link', 'unlink', 'anchor', '|',
     'inserttable', '|',
-    'emotion', 'simpleupload', 'insertimage','insertvideo', 'map', '|', 
+    'emotion', 'simpleupload', 'insertimage','insertvideo', 'map', '|',
     'insertcode', 'source', 'searchreplace', 'help']
     ];
 
 function initUeditor(afterInit)
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.kuid + '>');
-    var options = 
+    var options =
     {
         lang: '{$editorLang}',
         toolbars: {$editor['tools']},
@@ -50,8 +50,10 @@ function initUeditor(afterInit)
         iframeCssUrl:'',
         {/if}
         enableAutoSave:false,
+        autoHeightEnabled: false,
         elementPathEnabled:false,
         initialFrameWidth: '100%',
+        initialFrameHeight: 400,
         zIndex: 5
     };
     if(!window.editor) window.editor = {};
@@ -62,7 +64,8 @@ function initUeditor(afterInit)
         {
             var ueditor = UE.getEditor(editorID, options);
             window.editor['#'] = window.editor[editorID] = ueditor;
-            
+            $editor.addClass('ueditor').data('ueditor', ueditor);
+
             ueditor.addListener('ready', function()
             {
                 $(this.container).parent().removeClass('form-control');

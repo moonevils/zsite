@@ -127,6 +127,7 @@ class router extends baseRouter
         $dotPos   = strrpos($pathInfo, '.');
         $viewType = substr($pathInfo, $dotPos + 1);
         if($viewType == 'mhtml') $device = 'mobile';
+        if($viewType == 'wxml') $device = 'mobile';
         
         $this->clientDevice = $device;
         setcookie('device', $this->clientDevice, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
@@ -220,6 +221,7 @@ class router extends baseRouter
      */
     public function parseRequest()
     {
+        if(isset($_GET['m']) and isset($_GET['f'])) $this->config->requestType = 'GET';
         if($this->config->requestType != 'GET')
         {
             $this->parsePathInfo();

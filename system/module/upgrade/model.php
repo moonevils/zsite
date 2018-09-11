@@ -50,6 +50,7 @@ class upgradeModel extends model
             self::$errors[] = $this->lang->upgrade->deleteTips;
             foreach($results as  $result) self::$errors[] = $result;
             self::$errors[] = $this->lang->upgrade->afterDeleted;
+            return false;
         }
     
         switch($fromVersion)
@@ -212,6 +213,8 @@ class upgradeModel extends model
             case '7_1':
                 $this->execSQL($this->getUpgradeFile('7.1'));
                 $this->revertLayoutPlans();
+            case '7_2':
+                $this->execSQL($this->getUpgradeFile('7.2'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
                     
         }
@@ -289,6 +292,7 @@ class upgradeModel extends model
             case '7_0'      :
             case '7_0_1'    :
             case '7_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.1'));
+            case '7_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.2'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }

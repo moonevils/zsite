@@ -334,8 +334,8 @@ $lang->security->menu->log         = '登錄日誌|user|adminlog|';
 
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
-$lang->interface->menu->oauth  = '開放登錄|site|setoauth|';
-$lang->interface->menu->mail   = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->interface->menu->oauth = '開放登錄|site|setoauth|';
+$lang->interface->menu->mail  = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of score module. */
 $lang->score->menu = new stdclass();

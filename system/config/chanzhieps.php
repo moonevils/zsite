@@ -1,10 +1,11 @@
 <?php
-$config->version    = '7.2';              // The version of ChanzhiEPS. Don't change it. 
+$config->version    = '7.3';              // The version of ChanzhiEPS. Don't change it. 
 
 $config->cookiePath  = '/';               // The path of cookies.
 $config->multi       = false;             // The config of multi site.
 $config->seoMode     = true;              // Whether turn on seo mode or not.
 $config->langVar     = 'l';               // RequestType=GET: the name of the view var.
+$config->views       = ',html,json,mhtml,xml,wxml,'; // Add wxml to supported view formats. 
 
 $config->framework->autoLang = true;
 

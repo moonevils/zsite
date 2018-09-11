@@ -311,7 +311,7 @@ class orderModel extends model
      */
     public function createWechatPayLink($order, $type = '')
     {
-        return inlink('wechatpay', "orderID=$order->id&type=$type");
+        return helper::createLink('order', 'wechatpay', "orderID=$order->id&type=$type");
     }
 
     /**
@@ -864,7 +864,7 @@ class orderModel extends model
             }
         }
 
-        if($order->payment == 'COD' and isset($this->config->product->stock) and $this->config->product->stock) $this->fixStocks($orderID);
+        if(isset($this->config->product->stock) and $this->config->product->stock) $this->fixStocks($orderID);
 
         return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin'));
     }
@@ -949,7 +949,7 @@ class orderModel extends model
      */
     public function saveSetting()
     {
-        $errors = '';
+        $errors = array();
         if(!$this->post->payment) $errors = $this->lang->order->paymentRequired;
         if(!$this->post->confirmLimit) $errors['confirmLimit'] = array($this->lang->order->confirmLimitRequired);
         if(in_array('alipay', $this->post->payment) and strlen($this->post->pid) != 16) $errors['pid'] = array($this->lang->order->placeholder->pid);

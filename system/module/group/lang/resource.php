@@ -297,7 +297,7 @@ if(!isset($lang->resource->order))$lang->resource->order = new stdclass();
 $lang->resource->order->admin    = 'admin';
 $lang->resource->order->delivery = 'delivery';
 $lang->resource->order->finish   = 'finish';
-$lang->resource->order->pay      = 'pay';
+$lang->resource->order->return   = 'return';
 
 /* Stat module. */
 $lang->resource->stat = new stdclass();
