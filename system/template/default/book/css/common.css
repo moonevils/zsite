@@ -31,8 +31,8 @@ dl.drop-area {background-color: #f1f1f1}
 
 .fullScreen-book{display: block; width: 100%; height: 100%;}
 .fullScreen-book > .panel{border: none; box-shadow: none;}
-.fullScreen-book .fullScreen-catalog{position: absolute; top: 0; left: 0; z-index: 1; width: 300px; overflow-y:auto; height: 100%; border-right: 1px solid #ddd;}
-.fullScreen-book .fullScreen-content{position: absolute; top: 0; left: 320px; height: 100%; overflow-y: auto; right: 0;}
+.fullScreen-book .fullScreen-catalog{position: absolute; top: 0; left: 0; z-index: 1; width: 300px; overflow-y:auto; height: 100%; border-right: 1px solid #ddd; padding-bottom:20px;}
+.fullScreen-book .fullScreen-content{position: absolute; top: 0; left: 320px; height: 100%; overflow-y: auto; right: 0; padding-bottom:20px;}
 .fullScreen-book .fullScreen-inner{max-width: 960px; margin: 0 auto;}
 .fullScreen-book .fullScreen-content footer ul{background: #fafafa; display: block; position: fixed; bottom: 0; right: 20px; left: 320px; margin: 0; z-index: 1000;}
 .fullScreen-book .home{margin: 0;}
