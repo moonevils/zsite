@@ -5,7 +5,7 @@
     <form method='post' id='ajaxForm' class='form-horizontal w-p50 center-block'>
       <div class='form-group'>
         <label class='col-sm-2 control-label' for='username'>{!echo $lang->user->account}</label>
-        <div class='col-sm-9 required'>{!html::input('account', '', "class='form-control' placeholder='{$lang->user->register->lblAccount}'")}</div>
+        <div class='col-sm-9 required'>{!html::input('account', '', "class='form-control' placeholder='{{$lang->user->register->lblAccount}}'")}</div>
       </div>
       <div class='form-group'>
         <label class='col-sm-2 control-label' for='realname'>{!echo $lang->user->realname}</label>
