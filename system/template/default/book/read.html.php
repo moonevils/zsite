@@ -3,6 +3,7 @@
   {!js::set('objectType', 'book')}
   {!js::set('objectID', $article->id)}
   {!js::set('fullScreen', 1)}
+  <style>body{overflow:hidden;}</style>
   <div class='fullScreen-book'>
     <div class='fullScreen-catalog pANeli bookScrollListsBox'>
       {if(!empty($book) && $book->title)}
