@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of order of chanzhiEPS.
@@ -183,12 +184,26 @@ class order extends control
 
             if($payment == 'COD')
             {
-                $this->send(array('result' => 'success', 'locate' => inlink('browse'), 'payment' => 'COD'));
+                if($this->app->clientDevice == 'mobile')
+                {
+                    $this->send(array('result' => 'success', 'locate' => inlink('browse'), 'payment' => 'COD'));
+                }
+                else
+                {
+                    $this->locate(inlink('browse'));
+                }
             }
             else
             {
                 $order->payment = $payment;
-                $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
+                if($this->app->clientDevice == 'mobile')
+                {
+                    $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
+                }
+                else
+                {
+                    $this->locate($this->order->createPayLink($order));
+                }
             }
         }
     }

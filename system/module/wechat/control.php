@@ -184,7 +184,7 @@ class wechat extends control
         if($this->wechat->delete($publicID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
-    
+
     /**
      * Admin response for a public.
      * 
@@ -338,18 +338,10 @@ class wechat extends control
 
         $messageList = $this->wechat->getMessage($mode, $query, $orderBy, $pager);
 
-        $users = $this->loadModel('user')->getList();
-
-        $wechatUsers = array();
-        foreach($users as $user)
-        {
-            if(!$user->openID) continue;
-            $wechatUsers[$user->openID] = $user->realname;
-        }
-
+        $userPairs = $this->dao->select("o.openID, if(u.realname <> '', u.realname, u.account)")->from(TABLE_OAUTH)->alias('o')->leftJoin(TABLE_USER)->alias('u')->on('u.account = o.account')->fetchPairs();
         foreach($messageList as $message)
         {
-            if(isset($wechatUsers[$message->from])) $message->fromUserName = $wechatUsers[$message->from];
+            if(isset($userPairs[$message->from])) $message->fromUserName = $userPairs[$message->from];
         }
 
         $this->view->title       = $this->lang->wechat->common;

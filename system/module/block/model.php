@@ -149,16 +149,16 @@ class blockModel extends model
                             }
 
                             $mergedChild = new stdclass();
-                            $mergedChild->id          = $child->id;
-                            $mergedChild->title       = $child->title;
-                            $mergedChild->type        = $child->type;
-                            $mergedChild->content     = $child->content;
-                            $mergedChild->template    = $child->template;
-                            $mergedChild->grid        = $child->grid;
-                            $mergedChild->probability = $child->probability;
-                            $mergedChild->isRandom    = $child->isRandom;
-                            $mergedChild->titleless   = $child->titleless;
-                            $mergedChild->borderless  = $child->borderless;
+                            $mergedChild->id          = zget($child, 'id', '');
+                            $mergedChild->title       = zget($child, 'title', '');
+                            $mergedChild->type        = zget($child, 'type', '');
+                            $mergedChild->content     = zget($child, 'content', '');
+                            $mergedChild->template    = zget($child, 'template', '');
+                            $mergedChild->grid        = zget($child, 'grid', '');
+                            $mergedChild->probability = zget($child, 'probability', '');
+                            $mergedChild->isRandom    = zget($child, 'isRandom', '');
+                            $mergedChild->titleless   = zget($child, 'titleless', '');
+                            $mergedChild->borderless  = zget($child, 'borderless', '');
                             $children[] = $mergedChild;
                         }
                         $mergedBlock->children = $children;
@@ -297,6 +297,7 @@ class blockModel extends model
      */
     public function getViewFile($block)
     {
+        if(empty($block->type)) return false;
         $device   = $this->app->clientDevice;
         $template = $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
@@ -770,7 +771,7 @@ class blockModel extends model
         $blockFile = $this->getViewFile($block);
 
         $withGrid = ($withGrid and isset($block->grid));
-        $isRegion = ($block->type != 'tabs') && !empty($block->children);
+        $isRegion = (zget($block, 'type') != 'tabs') && !empty($block->children);
         $this->view = new stdclass();
 
         if($isRegion)

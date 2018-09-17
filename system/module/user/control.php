@@ -130,9 +130,11 @@ class user extends control
         /* Load mail config for reset password. */
         $this->app->loadModuleConfig('mail');
 
-        $loginLink = $this->createLink('user', 'login');
-        $denyLink  = $this->createLink('user', 'deny');
-        $regLink   = $this->createLink('user', 'register');
+	    $webRoot      = getWebRoot(true);
+        $loginLink    = rtrim($webRoot, '/') . $this->createLink('user', 'login');
+        $denyLink     = rtrim($webRoot, '/') . $this->createLink('user', 'deny');
+        $regLink      = rtrim($webRoot, '/') . $this->createLink('user', 'register');
+        $oauthRegLink = rtrim($webRoot, '/') . $this->createLink('user', 'oauthRegister');
 
         /* If the user logon already, goto the pre page. */
         if($this->app->getViewType() == 'json')
@@ -149,11 +151,11 @@ class user extends control
             {
                 if(helper::isAjaxRequest())
                 {
-                    if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->send(array('result' => 'success', 'locate' => urldecode($this->referer)));
+                    if($this->referer and strpos($loginLink . $denyLink . $regLink . $oauthRegLink, urldecode($this->referer)) === false and strpos(urldecode($this->referer), $loginLink) === false) $this->send(array('result' => 'success', 'locate' => urldecode($this->referer)));
                     $this->send(array('result' => 'success', 'locate' => $this->createLink($this->config->default->module)));
                 }
 
-                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate(urldecode($this->referer));
+                if($this->referer and strpos($loginLink . $denyLink . $regLink . $oauthRegLink, urldecode($this->referer)) === false and strpos(urldecode($this->referer), $loginLink) === false) $this->locate(urldecode($this->referer));
                 $this->locate($this->createLink($this->config->default->module));
                 exit;
             }
@@ -167,9 +169,9 @@ class user extends control
                 $this->app->loadClass('wechatpay', true);
                 $wechatpay = new wechatPay($wechatConfig);
 
-                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false)
+                if($this->referer and strpos($loginLink . $denyLink . $regLink . $oauthRegLink, urldecode($this->referer)) === false and strpos(urldecode($this->referer), $loginLink) === false)
                 {
-                    $url = $this->referer;
+                    $url = urldecode($this->referer);
                 }
                 else
                 {
@@ -858,27 +860,25 @@ class user extends control
         $openUser = $client->getUserInfo($token, $openID);  // Get open user info.
         $unionID  = isset($openUser->unionid) ? $openUser->unionid : '';
 
-        if($provider == 'wechat' and isset($openUser->unionid))
-        {
-            /* Wechat need to use unionid instead of openID. */
-            $oldUser = $this->user->getNoUnionIDUser($openUser->openid);
-
-            /* Save openID and unionID if save unionid in openID field. */
-            $this->user->updateOpenIDAndUnionID();
-        }
-
         $this->session->set('openUser', $openUser);
         $this->session->set('openID', $openID);      // Save the openID to session.
         $this->session->set('unionID', $unionID);    // Save the unionID to session.
+        $this->session->set('random', md5(time() . mt_rand()));
+
+        /* Wechat need to use unionid instead of openID. */
+        if($provider == 'wechat' and isset($openUser->unionid)) $oldUser = $this->user->getNoUnionIDUser($openUser->openid);
 
         /* Step3: Try to get user by the open id, if got, login him. */
         $user = $this->user->getUserByOpenID($provider, $openID, $unionID);
-        $this->session->set('random', md5(time() . mt_rand()));
         if($user)
         {
             if($this->user->login($user->account, md5($user->password . $this->session->random)))
             {
                 if($provider == 'wechat' and !empty($oldUser)) $this->user->mergeWechatUser($oldUser, $user);
+
+                /* Save openID and unionID if save unionid in openID field. */
+                if($provider == 'wechat' and isset($openUser->unionid)) $this->user->updateOpenIDAndUnionID($openUser, $user->account);
+
                 if($referer) $this->locate(urldecode(helper::safe64Decode($referer)));
 
                 /* No referer, go to the user control panel. */
@@ -995,7 +995,7 @@ class user extends control
             if(!empty($oldUser)) $this->user->mergeWechatUser($oldUser);
 
             /* Save openID and unionID if save unionid in openID field. */
-            $this->user->updateOpenIDAndUnionID();
+            $this->user->updateOpenIDAndUnionID($userInfo);
         }
 
         if($this->user->addOAuthAccount($this->app->user->account, 'wechat', $userInfo))
@@ -1020,8 +1020,9 @@ class user extends control
 
         $account = uniqid("{$provider}_");
         $this->post->set('account', $account);                           // Create a uniq account.
-        if($provider == 'qq')   $this->post->set('realname', ($this->session->openUser->nickname ? htmlspecialchars($this->session->openUser->nickname) : $account));  // Set the realname.
-        if($provider == 'sina') $this->post->set('realname', ($this->session->openUser->name ? htmlspecialchars($this->session->openUser->name) : $account));  // Set the realname.
+        if($provider == 'qq')     $this->post->set('realname', ($this->session->openUser->nickname ? htmlspecialchars($this->session->openUser->nickname) : $account));  // Set the realname.
+        if($provider == 'wechat') $this->post->set('realname', ($this->session->openUser->nickname ? htmlspecialchars($this->session->openUser->nickname) : $account));  // Set the realname.
+        if($provider == 'sina')   $this->post->set('realname', ($this->session->openUser->name ? htmlspecialchars($this->session->openUser->name) : $account));  // Set the realname.
         $result = $this->user->registerOauthAccount($provider, $openID, $unionID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblUnbindFailed));
         $this->send(array('result' => 'success', 'message' => $this->lang->user->oauth->lblUnbindSuccess, 'locate' => helper::createLink('user', 'profile')));
@@ -1040,8 +1041,9 @@ class user extends control
         $unionID  = $this->session->unionID;
 
         $this->post->set('account', uniqid("{$provider}_"));        // Create a uniq account.
-        if($provider == 'qq')   $this->post->set('realname', htmlspecialchars($this->session->openUser->nickname));  // Set the realname.
-        if($provider == 'sina') $this->post->set('realname', htmlspecialchars($this->session->openUser->name));  // Set the realname.
+        if($provider == 'qq')     $this->post->set('realname', htmlspecialchars($this->session->openUser->nickname));  // Set the realname.
+        if($provider == 'wechat') $this->post->set('realname', htmlspecialchars($this->session->openUser->nickname));  // Set the realname.
+        if($provider == 'sina')   $this->post->set('realname', htmlspecialchars($this->session->openUser->name));  // Set the realname.
         $this->user->registerOauthAccount($provider, $openID, $unionID);
 
         $user = $this->user->getUserByOpenID($provider, $openID, $unionID);

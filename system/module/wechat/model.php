@@ -142,7 +142,7 @@ class wechatModel extends model
     public function create()
     {
         if(!validater::checkReg($this->post->token, '|^[a-zA-Z0-9]{1}[a-zA-Z0-9]{1,30}[a-zA-Z0-9]{1}$|')) dao::$errors['token'][] = $this->lang->error->token;
-        
+
         $public = fixer::input('post')->add('addedDate', helper::now())->get();
         foreach($public as $key => $value)
         {
@@ -153,9 +153,9 @@ class wechatModel extends model
             ->autoCheck()
             ->batchCheck($this->config->wechat->require->create, 'notempty')
             ->exec();
-        
+
         $publicID = $this->dao->lastInsertID();
-        
+
         $this->loadModel('setting')->setItem('system.common.wechatPublic.hasPublic', '1');
 
         return $publicID;
@@ -240,7 +240,7 @@ class wechatModel extends model
             $message->response = $response->id;
             if(isset($message->event) && $message->event == 'VIEW') 
             {
-                 $message->response = $this->dao->select('id')->from(TABLE_WX_RESPONSE)->where('`key`')->like('m_%')->andWhere('concat(content, source)')->eq($message->eventKey)->fetch('id');
+                $message->response = $this->dao->select('id')->from(TABLE_WX_RESPONSE)->where('`key`')->like('m_%')->andWhere('concat(content, source)')->eq($message->eventKey)->fetch('id');
             }
 
             if($response->type == 'text' or $response->type == 'link')
@@ -271,13 +271,14 @@ class wechatModel extends model
     {
         $public = $this->getByID($publicID);
         $openID = $message->fromUserName;
-        $users  = $this->loadModel('user')->getByOpenID($openID, 'wechat');
-        if($users) return true;
 
-        $api  = $this->loadApi($publicID);
-        $fan  = $api->getUserInfo($openID);
+        $api = $this->loadApi($publicID);
+        $fan = $api->getUserInfo($openID);
 
         if(empty($fan) or !isset($fan->openid)) return false;
+
+        $user = $this->loadModel('user')->getUserByOpenID('wechat', $openID, $fan->unionid);
+        if($user) return true;
 
         return $this->loadModel('user')->createWechatUser($fan, $public->account);
     }
@@ -310,7 +311,7 @@ class wechatModel extends model
     public function processResponse($response)
     {
         if(empty($response)) return $response;
-        
+
         if($response->type == 'text')
         {
             if($response->source != 'manual')
@@ -329,7 +330,7 @@ class wechatModel extends model
         {
             if($response->source != 'manual')
             {
-               $response->content = $response->source;
+                $response->content = $response->source;
             }
             $response->content = htmlspecialchars_decode($response->content);
         }
@@ -911,11 +912,11 @@ class wechatModel extends model
 
         foreach($records as $record)
         {
-             $content = json_decode($record->content);
-             if(is_object($content)) $record->content = $content;
+            $content = json_decode($record->content);
+            if(is_object($content)) $record->content = $content;
 
-             $wid = $record->wid ? $record->wid : $record->id;
-             if(isset($replies[$wid]) and $record->replied) $record->replies = $replies[$wid];
+            $wid = $record->wid ? $record->wid : $record->id;
+            if(isset($replies[$wid]) and $record->replied) $record->replies = $replies[$wid];
         }
         return $records;
     }
