@@ -80,7 +80,17 @@ class visual extends control
         $blocks   = json_decode($layout->blocks);
         foreach($blocks as $block)
         {
-            if($block->id == $blockID) $this->view->block = $block;
+            if($block->id == $blockID) 
+            {
+                $this->view->block = $block;
+            }
+            else
+            {
+                foreach($block->children as $children)
+                {
+                    if($children->id == $blockID) $this->view->block = $children;
+                }
+            }
         }
 
         if($_POST)
