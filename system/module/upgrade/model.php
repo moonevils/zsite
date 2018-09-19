@@ -2189,7 +2189,7 @@ class upgradeModel extends model
                 {
                     if($row->Field == 'submittion')   $field = 'submittion';
                     if($row->Field == 'contribution') $field = 'contribution';
-                    if($row->Field == 'submission')   $field = 'submission';
+                    if($row->Field == 'submission')   return true;
                 }
             }
         }
