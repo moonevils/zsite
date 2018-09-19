@@ -216,7 +216,6 @@ class upgradeModel extends model
             case '7_2':
                 $this->execSQL($this->getUpgradeFile('7.2'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
-                    
         }
 
         $this->createCustomerCss();
