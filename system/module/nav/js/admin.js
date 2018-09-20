@@ -135,7 +135,13 @@ $(document).ready(function()
         $(this).parent().children('.titleInput').val( categories[categories.length-1] );
     });
     
-    $.setAjaxForm('#navForm');
+    $.setAjaxForm('#navForm', function(response)
+    {
+        if(response.result == 'success')
+        {
+            setTimeout(location.reload(), 1200);
+        }
+    });
 
     if(v.type == 'mobile_bottom') $('.plus2, .plus3').hide();
 });
