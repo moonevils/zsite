@@ -1,10 +1,10 @@
 {if(isset($config->wechatPublic->hasPublic) and $config->wechatPublic->hasPublic)} 
 {$publicList=$control->loadModel('wechat')->getList()}
 {/if}
+{$qrcode=isset($config->ui->QRCode) ? $config->ui->QRCode : 1}
+{if(!empty($publicList) or (extension_loaded('gd') && $qrcode))}
 <div id='rightDocker' class='hidden-xs'>
-  {if(!empty($publicList) or extension_loaded('gd'))}
   <button id='rightDockerBtn' class='btn' data-toggle="popover" data-placement="left" data-target='$next'><i class='icon-qrcode'></i></button>
-  {/if}
   <div class='popover fade'>
     <div class='arrow'></div>
     <div class='popover-content docker-right'>
@@ -19,7 +19,7 @@
               </td>
             {/foreach}
           {/if}
-          {if(extension_loaded('gd'))}
+          {if(extension_loaded('gd') && $qrcode)}
             <td>
               <div class='heading'>
                 <i class='icon-mobile-phone'></i>
@@ -33,3 +33,4 @@
     </div>
   </div>
 </div>
+{/if}
