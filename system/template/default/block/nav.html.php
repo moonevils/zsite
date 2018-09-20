@@ -6,7 +6,6 @@
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
-    <a class='navbar-brand' href='{!helper::createLink('index')}'><i class='icon-home'></i></a>
   </div>
   <div class='collapse navbar-collapse' id='navbarCollapse'>
     <ul class='nav navbar-nav'>
