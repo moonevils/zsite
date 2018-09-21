@@ -12,6 +12,7 @@
 /php*}
 
 {$block->content = json_decode($block->content)}
+{$app->loadLang('blog')}
 {if(!empty($block->content->fixInNav))}
 <div class='block-subscribe hidden'>
   <ul class='nav navbar-nav navbar-right'>
