@@ -11,7 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<?php include '../../common/view/ueditor.html.php';?>
 <table class='table table-form'>
   <tr>
     <th class='w-80px'><?php echo $lang->order->productInfo;?></th>
