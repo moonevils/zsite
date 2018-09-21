@@ -56,7 +56,7 @@ js::set('admin', $this->get->admin);
     <table class='table table-fixed table-hover tablesorter table-striped able-condensed' id='userList'>
       <thead>
         <tr class='text-center'>
-          <?php $vars = "orderBy=%s&admin={$this->get->admin}&provider={$this->get->provider}";?>
+          <?php $vars = "user={$this->get->user}&orderBy=%s";?>
           <th class='w-60px'><?php echo commonModel::printOrderLink('id', $orderBy, $vars, $lang->user->id);?></th>
           <th class='w-120px'><?php echo $lang->user->realname;?></th>
           <th class='w-100px'><?php echo commonModel::printOrderLink('account', $orderBy, $vars, $lang->user->account);?></th>
