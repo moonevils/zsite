@@ -598,27 +598,22 @@ class user extends control
      * @access public
      * @return void
      */
-    public function admin()
+    public function admin($user = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 15, $pageID = 1)
     {
         /* Change menu when browse all admin user. */
         if($this->get->admin == 1) $this->lang->menuGroups->user = 'security';
-        
+
         $get = fixer::input('get')
-            ->setDefault('recTotal', 0)
-            ->setDefault('recPerPage', 10)
-            ->setDefault('pageID', 1)
-            ->setDefault('user', '')
             ->setDefault('provider', '')
             ->setDefault('admin', '')
-            ->setDefault('orderBy', 'id_desc')
             ->get();
 
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $users = $this->user->getList($pager, $get->user, $get->provider, $get->admin, $get->orderBy);
+        $users = $this->user->getList($pager, $user, $this->get->provider, $this->get->admin, $orderBy);
         
-        $this->view->orderBy  = $get->orderBy;
+        $this->view->orderBy  = $orderBy;
         $this->view->users    = $users;
         $this->view->pager    = $pager;
         $this->view->title    = $this->lang->user->common;
