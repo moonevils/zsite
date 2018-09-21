@@ -104,34 +104,31 @@ class router extends baseRouter
      */
     public function setClientDevice()
     {
-        if(strpos('mobile,desktop', $this->cookie->device) === false) 
+        $deviceCookieVar = RUN_MODE . 'Device';
+
+        if(strpos('mobile,desktop', $this->cookie->{$deviceCookieVar}) === false) 
         {
             $mobile = new mobile();
             $device = ($mobile->isMobile() and !$mobile->isTablet()) ? 'mobile' : 'desktop';
         }
         else
         {
-            $device = $this->cookie->device;
+            $device = $this->cookie->{$deviceCookieVar};
         }
 
-        if(RUN_MODE == 'admin')
-        {
-            if(strpos('mobile,desktop', $this->session->device) !== false)  $device = $this->session->device;
-        }
-        elseif(RUN_MODE == 'front')
-        {
-            if(isset($_COOKIE['visualDevice']) and strpos('mobile,desktop', $_COOKIE['visualDevice']) !== false) $device = $_COOKIE['visualDevice'];
-        }
+        if(RUN_MODE == 'admin' && strpos('mobile,desktop', $this->session->device) !== false)  $device = $this->session->device;
         
         $pathInfo = $this->getPathInfo();
         $dotPos   = strrpos($pathInfo, '.');
         $viewType = substr($pathInfo, $dotPos + 1);
         if($viewType == 'mhtml') $device = 'mobile';
-        if($viewType == 'wxml') $device = 'mobile';
+        if($viewType == 'wxml')  $device = 'mobile';
         
         $this->clientDevice = $device;
-        setcookie('device', $this->clientDevice, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
-        $this->cookie->set('device', $this->clientDevice);
+
+        setcookie($deviceCookieVar, $this->clientDevice, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
+        $this->cookie->set($deviceCookieVar, $this->clientDevice);
+
         return $this->clientDevice;
     }
 
