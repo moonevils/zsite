@@ -1061,9 +1061,10 @@ class blockModel extends model
      * @access public
      * @return array     result for send
      */
-    public function appendBlock($template, $theme, $page, $region, $object, $parent, $block)
+    public function appendBlock($template, $theme, $page, $region, $object, $parent, $block, $isRandom)
     {
         if(!$this->checkRegion($template, $theme, $page, $region)) return array('result' => 'fail', 'message' => 'region not exisits.');
+
         $layout  = $this->getLayout($template, $theme, $page, $region, $object);
         if(empty($layout))
         {
@@ -1074,7 +1075,7 @@ class blockModel extends model
             $layout->region   = $region;
             $layout->blocks   = json_encode(array());
         }
-        $blocks  = json_decode($layout->blocks);
+        $blocks = json_decode($layout->blocks);
 
         $newBlock = new stdclass();
         $newBlock->grid       = !empty($parent) ? 6 : ($region == 'side' ? 12 : 4);
@@ -1098,12 +1099,20 @@ class blockModel extends model
                 if($block->id == $parent)
                 {
                     if(!isset($block->children)) $block->children = array();
+
+                    if(!empty($block->isRandom))
+                    {
+                        $newBlock->probability = 1;
+                        $newBlock->grid = 0;
+                    }
+
                     $block->children[] = $newBlock; 
                 } 
             }
         }
         else
         {
+            $newBlock->isRandom = $isRandom ? 1 : 0;
             $blocks[] = $newBlock;
         }
 
@@ -1136,16 +1145,23 @@ class blockModel extends model
                 $block->titleless  = $setting->titleless;
                 $block->borderless = $setting->borderless;
             }
+
             if(isset($block->children))
             {
                 foreach($block->children as $child)
                 {
                     if($child->id == $setting->id)
                     {
-                        $child->grid       = $setting->grid;
-                        $child->titleless  = $setting->titleless;
-                        $child->borderless = $setting->borderless;
+                        $child->grid        = isset($setting->grid) ? $setting->grid : 0;
+                        $child->probability = isset($setting->probability) ? $setting->probability : '';
+                        $child->titleless   = $setting->titleless;
+                        $child->borderless  = $setting->borderless;
                     }
+
+                    if($block->isRandom && !empty($child->grid))         $child->grid        = 0;
+                    if($block->isRandom && empty($child->probability))   $child->probability = 1;
+                    if(!$block->isRandom && empty($child->grid))         $child->grid        = 6;
+                    if(!$block->isRandom && !empty($child->probability)) $child->probability = '';
                 }
             }
         }

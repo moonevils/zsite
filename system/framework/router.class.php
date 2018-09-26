@@ -327,6 +327,12 @@ class router extends baseRouter
 
         if(RUN_MODE == 'front' and $this->server->request_method != 'POST' and $this->config->cache->type != 'close' and $this->config->cache->cachePage == 'open')
         {
+            if(commonModel::needClearCache())
+            {
+                dao::$changedTables[] = TABLE_CONFIG;
+                $this->clearCache();
+            }
+
             if(strpos($this->config->cache->cachedPages, "$moduleName.$methodName") !== false)
             {
                 if(!isset($this->clientDevice) or empty($this->clientDevice)) $this->clientDevice = 'desktop';

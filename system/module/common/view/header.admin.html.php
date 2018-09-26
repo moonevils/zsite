@@ -35,9 +35,12 @@
           echo "<ul class='nav nav-sub'>";
           foreach($lang->designMenus as $submenu)
           {
-              list($title, $module, $method) = explode('|', $submenu);
+              $active = '';
+              list($title, $module, $method) = explode('|', $submenu['link']);
+              if((strtolower($method) == strtolower($this->app->methodName) && strtolower($module == $this->app->moduleName)) || strpos($submenu['alias'], strtolower($this->app->methodName)) !== false) $active = 'active';
+              
               echo "<li class='active'>";
-              echo html::a(helper::createLink($module, $method), $title);
+              echo html::a(helper::createLink($module, $method), $title, "class=$active");
               echo "</li>";
           }
           echo "</ul>";
