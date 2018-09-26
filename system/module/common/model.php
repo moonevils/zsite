@@ -1222,7 +1222,7 @@ class commonModel extends model
     public static function getSysURL()
     {
         global $config;
-        $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';
+        $httpType = isset($config->site->scheme) && $config->site->scheme == 'https' ? 'https' : 'http';
         $httpHost = rtrim($_SERVER['HTTP_HOST'], '/');
         return "$httpType://$httpHost";
     }
