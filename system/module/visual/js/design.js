@@ -331,8 +331,10 @@ function tidyRowBlocks($row)
 function renderBlock(block, isGrid)
 {
     var blockTitle = block.title;
-    var isSubRegion = block.children || block.type === 'region';
+    var isSubRegion    = block.children || block.type === 'region';
+    var isRandomRegion = block.isRandom === 1;
     if(isSubRegion && !blockTitle) blockTitle = v.visualLang.subRegion + '-' + block.id;
+    if(isRandomRegion) blockTitle = v.visualLang.randomRegion + '-' + block.id;
     blockTitle = blockTitle || '';
 
     var $block = $('<div class="block" data-id="' + block.id + '" data-title="' + blockTitle + '" data-region="' + block.region + '"></div>');
@@ -347,8 +349,8 @@ function renderBlock(block, isGrid)
         {
             $.each(block.children, function(childIndex, child)
             {
-                child.region = block.region;
-                var $subBlock = renderBlock(child, true);
+                child.region  = block.region;
+                var $subBlock = renderBlock(child, !isRandomRegion);
                 $subBlock.addClass('block-sub');
                 $row.append($subBlock);
             });
@@ -717,13 +719,14 @@ function addBlock(block, $target, callback)
     var isContainer = $target.is('.block-container');
     var $region = $target.closest('.layout-region') ;
     var parentId = isContainer ? $target.data('id') : '';
+    var isRandom = block.random === undefined ? '' : block.random;
     var region = $region.data('name');
     var allowregionblock = $target.is('.block-container,.type-grid') ? true : '';
     if(!allowregionblock && block.id === 'region')
     {
         return $.zui.messager.warning(v.visualLang.addRegionAlert.format($region.data('title')));
     }
-    var postUrl = createLink('visual', 'appendBlock', 'page=' + v.page + '&region=' + region + '&parent=' + parentId + '&allowregionblock=' + allowregionblock + '&object=&l=' + clientLang);
+    var postUrl = createLink('visual', 'appendBlock', 'page=' + v.page + '&region=' + region + '&parent=' + parentId + '&allowregionblock=' + allowregionblock + '&object=&isRandom=' + isRandom + '&l=' + clientLang);
     $.post(postUrl, {block: block.id}, function(response)
     {
         if(response && response.result === 'success')
