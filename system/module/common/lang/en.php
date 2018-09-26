@@ -241,11 +241,11 @@ $lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 $lang->designMenus = new stdclass();
-$lang->designMenus->theme     = 'Theme|ui|settemplate|';
-$lang->designMenus->block     = 'Widget|block|admin|';
-$lang->designMenus->nav       = 'Nav|nav|admin|';
-$lang->designMenus->component = 'CMPT|ui|component|';
-$lang->designMenus->senior    = 'Senior|ui|editTemplate|';
+$lang->designMenus->theme     = array('link' => 'Theme|ui|settemplate|', 'alias' => 'themestore');
+$lang->designMenus->block     = array('link' => 'Widget|block|admin|', 'alias' => 'create');
+$lang->designMenus->nav       = array('link' => 'Nav|nav|admin|');
+$lang->designMenus->component = array('link' => 'CMPT|ui|component|', 'alias' => 'effect,browsesource');
+$lang->designMenus->senior    = array('link' => 'Senior|ui|editTemplate|');
 
 /* Menu of article module. */
 $lang->article = new stdclass();

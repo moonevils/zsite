@@ -242,11 +242,11 @@ $lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 $lang->designMenus = new stdclass();
-$lang->designMenus->theme     = '主题|ui|settemplate|';
-$lang->designMenus->block     = '区块|block|admin|';
-$lang->designMenus->nav       = '导航|nav|admin|';
-$lang->designMenus->component = '组件|ui|component|';
-$lang->designMenus->senior    = '高级|ui|editTemplate|';
+$lang->designMenus->theme     = array('link' => '主题|ui|settemplate|', 'alias' => 'themestore');
+$lang->designMenus->block     = array('link' => '区块|block|admin|', 'alias' => 'create');
+$lang->designMenus->nav       = array('link' => '导航|nav|admin|');
+$lang->designMenus->component = array('link' => '组件|ui|component|', 'alias' => 'effect,browsesource');
+$lang->designMenus->senior    = array('link' => '高级|ui|editTemplate|');
 
 /* Menu of article module. */
 $lang->article = new stdclass();
