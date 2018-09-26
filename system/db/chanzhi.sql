@@ -323,6 +323,7 @@ CREATE TABLE IF NOT EXISTS `eps_oauth` (
   `account` varchar(30) NOT NULL,
   `provider` varchar(30) NOT NULL,
   `openID` varchar(60) NOT NULL,
+  `unionID` varchar(60) NOT NULL,
   `lang` char(30) NOT NULL,
   UNIQUE KEY `account` (`account`,`provider`,`openID`),
   KEY `lang` (`lang`)

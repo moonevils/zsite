@@ -50,7 +50,7 @@ $filter->default->get['recPerPage'] = 'reg::number';
 $filter->default->get['pageID']     = 'reg::number';
 $filter->default->get['categoryID'] = 'reg::number';
 $filter->default->get['searchWord'] = 'reg::paramValue';
-$filter->default->get['fullScreen'] = 'reg::number';
+$filter->default->get['fullScreen'] = 'code';
 $filter->default->get['key']        = 'reg::word';
 
 $filter->default->cookie['adminLang']    = 'reg::lang';

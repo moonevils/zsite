@@ -1247,7 +1247,7 @@ class uiModel extends model
         foreach($sourceList as $file)
         {
             $fileInfo = pathinfo($file);
-            if($fileInfo['extension'] == 'php') continue;
+            if(zget($fileInfo, 'extension') == 'php') continue;
             $target = $this->directories->encryptSourcePath . $fileInfo['filename'] . '.php'; 
 
             $encryptFiles[$fileInfo['basename']] = $fileInfo['filename'] . '.php';

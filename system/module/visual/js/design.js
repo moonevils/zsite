@@ -19,7 +19,7 @@ $.ajaxSetup(
 
 /**
  * Open iframe modal
- * 
+ *
  * @param {string} url Remote iframe modal url
  * @param {?object} options ZUI ModalTrigger options
  * @access public
@@ -43,7 +43,7 @@ function openModal(url, options)
 
 /**
  * Toggle show/remove loading state
- * 
+ *
  * @param {?boolean} [result=true] true: show loading ui, false: remove loading ui
  * @access public
  * @return void
@@ -56,7 +56,7 @@ function toggleLoadingState(loading)
 
 /**
  * Show messager for remote operation result
- * 
+ *
  * @param {?boolean} [result=true] true: success message, false: failure message
  * @access public
  * @return void
@@ -69,7 +69,7 @@ function showRemoteResult(result)
 
 /**
  * Toggle show or hide menu
- * 
+ *
  * @param {?boolean} toggle true: show menu, false: hide menu, undefined: toggle show/hide menu
  * @access public
  * @return void
@@ -84,7 +84,7 @@ function toggleDSMenu(toggle)
 
 /**
  * Toggle show block list
- * 
+ *
  * @param {?string} name Hide others and show the named one
  * @access public
  * @return void
@@ -100,7 +100,7 @@ function toggleBlockList(name)
 
 /**
  * Resize code editor
- * 
+ *
  * @param {string} name 'js' or 'css' or ''
  * @access public
  * @return void
@@ -115,7 +115,7 @@ function resizeCodeEditor(name)
 
 /**
  * Init code editor
- * 
+ *
  * @access public
  * @return void
  */
@@ -130,7 +130,7 @@ function initCodeEditor()
 
 /**
  * Init custom theme form
- * 
+ *
  * @access public
  * @return void
  */
@@ -240,7 +240,7 @@ function initCustomThemeForm()
 
 /**
  * Get region blocks data from remote server
- * 
+ *
  * @param {?string} region
  * @param {?function} callback
  * @access public
@@ -261,8 +261,8 @@ function getRegionBlocks(region, callback)
 
 /**
  * Tidy row blocks, make all blocks in same row has same height
- * 
- * @param {object} $row 
+ *
+ * @param {object} $row
  * @access public
  * @return void
  */
@@ -278,7 +278,7 @@ function tidyRowBlocks($row)
         }
         return;
     }
-    
+
     // Caculate real rows
     var row = 0, gridValue = 0;
     var $cols = $row.children('.col');
@@ -322,7 +322,7 @@ function tidyRowBlocks($row)
 
 /**
  * Render block item
- * 
+ *
  * @param {object} block
  * @param {boolean} [isGrid=false]
  * @access public
@@ -331,8 +331,10 @@ function tidyRowBlocks($row)
 function renderBlock(block, isGrid)
 {
     var blockTitle = block.title;
-    var isSubRegion = block.children || block.type === 'region';
+    var isSubRegion    = block.children || block.type === 'region';
+    var isRandomRegion = block.isRandom === 1;
     if(isSubRegion && !blockTitle) blockTitle = v.visualLang.subRegion + '-' + block.id;
+    if(isRandomRegion) blockTitle = v.visualLang.randomRegion + '-' + block.id;
     blockTitle = blockTitle || '';
 
     var $block = $('<div class="block" data-id="' + block.id + '" data-title="' + blockTitle + '" data-region="' + block.region + '"></div>');
@@ -347,8 +349,8 @@ function renderBlock(block, isGrid)
         {
             $.each(block.children, function(childIndex, child)
             {
-                child.region = block.region;
-                var $subBlock = renderBlock(child, true);
+                child.region  = block.region;
+                var $subBlock = renderBlock(child, !isRandomRegion);
                 $subBlock.addClass('block-sub');
                 $row.append($subBlock);
             });
@@ -371,7 +373,7 @@ function renderBlock(block, isGrid)
 
 /**
  * Update region blocks from remote
- * 
+ *
  * @param {?string} region if region not set then update all regions in page
  * @param {?function} callback
  * @access public
@@ -424,7 +426,7 @@ function updateRegionBlocks(region, callback)
 
 /**
  * Delete block from remote server
- * 
+ *
  * @param {object} block block item object
  * @param {?string} confirmMessage
  * @param {?function} callback
@@ -449,7 +451,7 @@ function deleteBlock(block, confirmMessage, callback)
         return;
     }
     var deleteUrl = createLink('visual', 'removeBlock', 'blockID=' + block.id + '&page=' + v.page + '&region=' + block.region + '&object=&l=' + clientLang);
-    $.getJSON(deleteUrl, response =>
+    $.getJSON(deleteUrl, function(response)
     {
         if(response && response.result === 'success')
         {
@@ -466,7 +468,7 @@ function deleteBlock(block, confirmMessage, callback)
 
 /**
  * Show block edit modal
- * 
+ *
  * @param {object} block block item object
  * @access public
  * @return void
@@ -482,7 +484,7 @@ function editBlock(block)
 
 /**
  * Change block layout setting on remote server
- * 
+ *
  * @param {object} block block item object
  * @param {object} postData setting data for post to server
  * @param {?function} callback
@@ -512,7 +514,7 @@ function changeBlockLayout(block, postData, callback)
     }
     else
     {
-        openModal(dialogUrl, 
+        openModal(dialogUrl,
         {
             title: v.visualLang.changeLayout + ' [' + block.title + ']',
             width: 600,
@@ -534,14 +536,14 @@ function changeBlockLayout(block, postData, callback)
 
 /**
  * Show page columns setting modal
- * 
+ *
  * @access public
  * @return void
  */
 function setPageColumns()
 {
     var dialogUrl = createLink('block', 'setColumns', 'page=' + v.page + '&object=&l=' + clientLang);
-    openModal(dialogUrl, 
+    openModal(dialogUrl,
     {
         title: v.visualLang.setColumns,
         width: 600,
@@ -559,7 +561,7 @@ function setPageColumns()
 
 /**
  * Init region blocks
- * 
+ *
  * @access public
  * @return void
  */
@@ -633,7 +635,7 @@ function initRegionBlocks()
 
 /**
  * Update block list from remote server
- * 
+ *
  * @param {?function} callback
  * @access public
  * @return void
@@ -649,7 +651,7 @@ function updateBlockList(callback)
 
 /**
  * Handle things after edit block on modal dialog
- * 
+ *
  * @access public
  * @return void
  */
@@ -662,7 +664,7 @@ function handleBlockEdit()
 
 /**
  * Init design menu
- * 
+ *
  * @access public
  * @return void
  */
@@ -690,7 +692,7 @@ function initDSMenu()
 
 /**
  * Init block list
- * 
+ *
  * @access public
  * @return void
  */
@@ -705,7 +707,7 @@ function initBlockList()
 
 /**
  * Add block to region container and post to remote server
- * 
+ *
  * @param {object} block block item object
  * @param {object} $target jquery element
  * @param {?function} callback
@@ -717,13 +719,14 @@ function addBlock(block, $target, callback)
     var isContainer = $target.is('.block-container');
     var $region = $target.closest('.layout-region') ;
     var parentId = isContainer ? $target.data('id') : '';
+    var isRandom = block.random === undefined ? '' : block.random;
     var region = $region.data('name');
     var allowregionblock = $target.is('.block-container,.type-grid') ? true : '';
     if(!allowregionblock && block.id === 'region')
     {
         return $.zui.messager.warning(v.visualLang.addRegionAlert.format($region.data('title')));
     }
-    var postUrl = createLink('visual', 'appendBlock', 'page=' + v.page + '&region=' + region + '&parent=' + parentId + '&allowregionblock=' + allowregionblock + '&object=&l=' + clientLang);
+    var postUrl = createLink('visual', 'appendBlock', 'page=' + v.page + '&region=' + region + '&parent=' + parentId + '&allowregionblock=' + allowregionblock + '&object=&isRandom=' + isRandom + '&l=' + clientLang);
     $.post(postUrl, {block: block.id}, function(response)
     {
         if(response && response.result === 'success')
@@ -737,7 +740,7 @@ function addBlock(block, $target, callback)
 
 /**
  * Sort blocks in region container and post to remote server
- * 
+ *
  * @param {object} $target jquery element
  * @param {?function} callback
  * @access public
@@ -770,7 +773,7 @@ function sortBlocks($target, callback)
 
 /**
  * Init drag and drop events.
- * 
+ *
  * @access public
  * @return void
  */

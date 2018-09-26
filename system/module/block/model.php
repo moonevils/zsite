@@ -149,16 +149,16 @@ class blockModel extends model
                             }
 
                             $mergedChild = new stdclass();
-                            $mergedChild->id          = $child->id;
-                            $mergedChild->title       = $child->title;
-                            $mergedChild->type        = $child->type;
-                            $mergedChild->content     = $child->content;
-                            $mergedChild->template    = $child->template;
-                            $mergedChild->grid        = $child->grid;
-                            $mergedChild->probability = $child->probability;
-                            $mergedChild->isRandom    = $child->isRandom;
-                            $mergedChild->titleless   = $child->titleless;
-                            $mergedChild->borderless  = $child->borderless;
+                            $mergedChild->id          = zget($child, 'id', '');
+                            $mergedChild->title       = zget($child, 'title', '');
+                            $mergedChild->type        = zget($child, 'type', '');
+                            $mergedChild->content     = zget($child, 'content', '');
+                            $mergedChild->template    = zget($child, 'template', '');
+                            $mergedChild->grid        = zget($child, 'grid', '');
+                            $mergedChild->probability = zget($child, 'probability', '');
+                            $mergedChild->isRandom    = zget($child, 'isRandom', '');
+                            $mergedChild->titleless   = zget($child, 'titleless', '');
+                            $mergedChild->borderless  = zget($child, 'borderless', '');
                             $children[] = $mergedChild;
                         }
                         $mergedBlock->children = $children;
@@ -297,6 +297,7 @@ class blockModel extends model
      */
     public function getViewFile($block)
     {
+        if(empty($block->type)) return false;
         $device   = $this->app->clientDevice;
         $template = $this->config->template->{$device}->name;
         $theme    = $this->config->template->{$device}->theme;
@@ -770,7 +771,7 @@ class blockModel extends model
         $blockFile = $this->getViewFile($block);
 
         $withGrid = ($withGrid and isset($block->grid));
-        $isRegion = ($block->type != 'tabs') && !empty($block->children);
+        $isRegion = (zget($block, 'type') != 'tabs') && !empty($block->children);
         $this->view = new stdclass();
 
         if($isRegion)
@@ -836,270 +837,6 @@ class blockModel extends model
     }
 
     /**
-     * Get layouts for wmp.
-     * 
-     * @param  string    $moduleName 
-     * @param  string    $methodName 
-     * @access public
-     * @return array
-     */
-    public function getWmpLayouts($moduleName, $methodName)
-    {
-        $layouts = $this->getPageBlocks($moduleName, $methodName);
-        foreach($layouts as $page => $layout)
-        {
-            foreach($layout as $region => $blocks)
-            {
-                $processedBlocks = array();
-                foreach($blocks as $block) 
-                {
-                    if(strpos($this->config->block->wxmlTypes, $block->type) === false) continue;
-                    $processedBlocks[] = $this->processData($block);
-                }
-                $layouts[$page][$region] = $processedBlocks;
-            }
-        }
-        return $layouts;
-    }
-
-    /**
-     * Process data of a block.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processData($block)
-    {
-        if(is_callable(array($this, "process{$block->type}Data"))) return call_user_func(array($this,"process{$block->type}Data"), $block);
-        return $block;
-    }
-
-    /**
-     * Process Html Data.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processHtmlData($block)
-    {
-        return $block;
-    }
-
-    /**
-     * Process Htmlcode Data.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processHtmlcodeData($block)
-    {
-        return $block;
-    }
-
-    /**
-     * Process about data.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processAboutData($block)
-    {
-        $block->data = array('content' => $this->config->company->desc);
-        return $block;
-    }
-
-    /**
-     * Process contact Data.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processContactData($block)
-    {
-        $block->contact = json_decode($this->config->company->contact);
-        $block->lang    = $this->lang->company;
-        return $block;
-    }
-
-    /**
-     * Process header Data.
-     * 
-     * @param  int    $block 
-     * @access public
-     * @return void
-     */
-    public function processHeaderData($block)
-    {
-        $navs  = $this->loadModel('nav')->getNavs('mobile_top');
-        $theme = $this->config->template->mobile->theme;
-        $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
-
-        $logo  = false;
-        if(isset($logoSetting->mobile->themes->all)) $logo = $logoSetting->mobile->themes->all;
-        if(isset($logoSetting->mobile->themes->$theme)) $logo = $logoSetting->mobile->themes->$theme;
-
-        if($logo)
-        {
-            $logo->extension = $this->loadModel('file')->getExtension($logo->pathname);
-            $logo = $this->loadModel('file')->printFileURL($logo);
-        }
-
-        $block->navs = $navs;
-        $block->logo = $logo;
-        return $block;
-    }
-
-    /**
-     * Process LatestArticle Data 
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processLatestArticleData($block)
-    {
-        $content  = json_decode($block->content);
-        $method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)));
-        $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
-        if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
-
-        $block->articles = $articles;
-        if($content->image)
-        {
-            $imageSize = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL';
-            $articlesWithImage = array();
-            foreach($articles as $article)
-            {
-                if(!isset($article->image->primary)) continue;
-                $article->image->primary->objectType = 'article';
-                $article->image = $this->loadModel('file')->printFileURL($article->image->primary, $imageSize);
-                $articlesWithImage[] = $article;
-            }
-            $block->articles = $articlesWithImage;
-        }
-
-        $block->content  = $content;
-        return $block;
-    }
-
-    /**
-     * Process hotArticle data.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processHotArticleData($block)
-    {
-        return $this->processLatestArticleData($block);
-    }
-
-    /**
-     * Process latestProduct data.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processLatestProductData($block)
-    {
-        $content  = json_decode($block->content);
-        $type     = str_replace('product', '', strtolower($block->type));
-        $method   = 'get' . $type;
-        if(empty($content->category)) $content->category = 0;
-        $showImage = isset($content->image) ? true : false;
-        $block->products = $this->loadModel('product')->$method($content->category, $content->limit, $showImage);
-        $block->content  = $content;
-        return $block;
-    }
-
-    /**
-     * Process hotProduct data.
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processHotProductData($block)
-    {
-        return $this->processLatestProductData($block);
-    }
-
-    /**
-     * Process latestBlog data 
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processLatestBlogData($block)
-    {
-        $content  = json_decode($block->content);
-        $method   = 'get' . ucfirst(str_replace('blog', '', strtolower($block->type)));
-        $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit, 'blog');
-        if(isset($content->image)) $articles = $this->loadModel('file')->processImages($articles, 'article');
-
-        $block->content  = $content;
-        $block->articles = $articles;
-        return $block;
-    }
-
-    /**
-     * Process slide data.
-     * 
-     * @param  int    $block 
-     * @access public
-     * @return void
-     */
-    public function processSlideData($block)
-    {
-        $block->content = json_decode($block->content);
-        $groupID = !empty($block->content->group) ? $block->content->group : '';
-        $group   = $this->loadModel('tree')->getByID($groupID);
-        $block->slideID = 'slide' . $block->id . '-' . $groupID;
-        $block->globalButtons = !empty($group->desc) ? json_decode($group->desc, true) : array();
-        $block->slideStyle    = !empty($block->content->style) ? $block->content->style : 'carousel';
-        $block->slides  = $this->loadModel('slide')->getList($groupID);
-        $block->content  = $content;
-        return $block;
-    }
-
-    /**
-     * Process featuredProduct data .
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processFeaturedProductData($block)
-    {
-        $content = json_decode($block->content);
-        $block->product = $this->loadModel('product')->getByID($content->product);
-        $block->content  = $content;
-        return $block;
-    }
-
-    /**
-     * Process pagelist Data 
-     * 
-     * @param  object    $block 
-     * @access public
-     * @return object
-     */
-    public function processpagelistData($block)
-    {
-        $content = json_decode($block->content);
-        $block->pages = $model->loadModel('article')->getPageList($content->limit);
-        $block->content  = $content;
-        return $block;
-    }
-
-    /**
      * Parse css code of a block. 
      * 
      * @param  object    $block 
@@ -1109,6 +846,7 @@ class blockModel extends model
      */
     public function parseCSS($block, $theme)
     {
+        $content = is_object($block->content) ? $block->content : json_decode($block->content);
         $style  = '<style>';
         if(isset($content->custom->$theme))
         {
@@ -1150,6 +888,7 @@ class blockModel extends model
         }
         $style .= '</style>';
 
+        return $style;
     }
 
     /**
@@ -1322,9 +1061,10 @@ class blockModel extends model
      * @access public
      * @return array     result for send
      */
-    public function appendBlock($template, $theme, $page, $region, $object, $parent, $block)
+    public function appendBlock($template, $theme, $page, $region, $object, $parent, $block, $isRandom)
     {
         if(!$this->checkRegion($template, $theme, $page, $region)) return array('result' => 'fail', 'message' => 'region not exisits.');
+
         $layout  = $this->getLayout($template, $theme, $page, $region, $object);
         if(empty($layout))
         {
@@ -1335,7 +1075,7 @@ class blockModel extends model
             $layout->region   = $region;
             $layout->blocks   = json_encode(array());
         }
-        $blocks  = json_decode($layout->blocks);
+        $blocks = json_decode($layout->blocks);
 
         $newBlock = new stdclass();
         $newBlock->grid       = !empty($parent) ? 6 : ($region == 'side' ? 12 : 4);
@@ -1359,12 +1099,20 @@ class blockModel extends model
                 if($block->id == $parent)
                 {
                     if(!isset($block->children)) $block->children = array();
+
+                    if(!empty($block->isRandom))
+                    {
+                        $newBlock->probability = 1;
+                        $newBlock->grid = 0;
+                    }
+
                     $block->children[] = $newBlock; 
                 } 
             }
         }
         else
         {
+            $newBlock->isRandom = $isRandom ? 1 : 0;
             $blocks[] = $newBlock;
         }
 
@@ -1397,16 +1145,23 @@ class blockModel extends model
                 $block->titleless  = $setting->titleless;
                 $block->borderless = $setting->borderless;
             }
+
             if(isset($block->children))
             {
                 foreach($block->children as $child)
                 {
                     if($child->id == $setting->id)
                     {
-                        $child->grid       = $setting->grid;
-                        $child->titleless  = $setting->titleless;
-                        $child->borderless = $setting->borderless;
+                        $child->grid        = isset($setting->grid) ? $setting->grid : 0;
+                        $child->probability = isset($setting->probability) ? $setting->probability : '';
+                        $child->titleless   = $setting->titleless;
+                        $child->borderless  = $setting->borderless;
                     }
+
+                    if($block->isRandom && !empty($child->grid))         $child->grid        = 0;
+                    if($block->isRandom && empty($child->probability))   $child->probability = 1;
+                    if(!$block->isRandom && empty($child->grid))         $child->grid        = 6;
+                    if(!$block->isRandom && !empty($child->probability)) $child->probability = '';
                 }
             }
         }

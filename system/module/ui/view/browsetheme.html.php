@@ -25,13 +25,19 @@
   </div>
   <?php endforeach;?>
 </div>
-<div class='div-tip text-danger'><?php printf($lang->ui->packagePathTip, $packagePath);?></div>
+<div class='div-tip text-danger'>
+  <?php printf($lang->ui->packagePathTip, $packagePath);?>
+  <div class="panel-actions">
+    <?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . " <i class='icon icon-upload'></i>", "data-toggle='modal' class='btn btn-primary'");?>
+  </div>
+</div>
 <style>
 .theme-panel > .panel-body{padding-top:4px !important; cursor:pointer;}
 .theme-panel > .panel-body > .theme-title{font-size:16px; padding: 10px 0; color:#555; font-weight:bold;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 .theme-panel .span-size{margin-left:20px;}
 .p-actions{margin-right:10px; padding-left:12px;}
 .p-actions > i {font-size:13px; padding:4px; font-weight:bold;}
+.panel-actions{margin-right: 0px}
 </style>
 <script>
 $().ready(function()

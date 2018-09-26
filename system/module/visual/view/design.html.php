@@ -109,6 +109,12 @@ js::set('visualLang', $lang->visual->js);
                     <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
                   </div>
                 </div>
+                <div class='block-item' data-type='region' data-id='region' data-random=true data-title='<?php echo $lang->visual->js->randomRegion;?>'>
+                  <div class='title' title='<?php echo $lang->visual->js->randomRegionDesc;?>'><?php echo $lang->visual->js->randomRegion;?> &nbsp; <small class='text-muted nobr'><?php echo $lang->visual->js->randomRegionDesc;?></small></div>
+                  <div class='actions'>
+                    <a class='btn btn-link btn-move' data-toggle='tooltip' title='<?php echo $lang->visual->design->dragAndAdd;?>'><i class="icon icon-move"></i></a>
+                  </div>
+                </div>
               <?php $isCategoryEmpty = false;?>
               <?php endif; ?>
               <?php if($isCategoryEmpty):?>

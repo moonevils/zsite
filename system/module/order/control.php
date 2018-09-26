@@ -1,3 +1,4 @@
+<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of order of chanzhiEPS.
@@ -93,6 +94,9 @@ class order extends control
         $order = $this->order->getByID($orderID);
         if($order->account != $this->app->user->account) die(js::locate('back'));
 
+        $isWechat = false;
+        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) $isWechat = true;
+
         $this->app->loadModuleConfig('product');
 
         $paymentList = explode(',', $this->config->shop->payment);
@@ -101,10 +105,12 @@ class order extends control
             $paymentOptions[$payment] = $this->lang->order->paymentList[$payment];
         }
 
+        if($isWechat && $paymentOptions['alipay']) unset($paymentOptions['alipay']);
         if($order->type != 'shop') unset($paymentOptions['COD']);
 
         $this->view->title          = $this->lang->order->check;
         $this->view->order          = $order;
+        $this->view->isWechat       = $isWechat;
         $this->view->products       = $this->order->getOrderProducts($orderID);
         $this->view->paymentList    = $paymentOptions;
         $this->view->currencySymbol = $this->config->product->currencySymbol;
@@ -183,12 +189,26 @@ class order extends control
 
             if($payment == 'COD')
             {
-                $this->send(array('result' => 'success', 'locate' => inlink('browse'), 'payment' => 'COD'));
+                if($this->app->clientDevice == 'mobile')
+                {
+                    $this->send(array('result' => 'success', 'locate' => inlink('browse'), 'payment' => 'COD'));
+                }
+                else
+                {
+                    $this->locate(inlink('browse'));
+                }
             }
             else
             {
                 $order->payment = $payment;
-                $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
+                if($this->app->clientDevice == 'mobile')
+                {
+                    $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
+                }
+                else
+                {
+                    $this->locate($this->order->createPayLink($order));
+                }
             }
         }
     }

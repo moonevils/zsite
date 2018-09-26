@@ -135,7 +135,7 @@ class commonModel extends model
             if($inList)
             {
                 $contact = json_decode($this->config->company->contact);
-                die(sprintf($this->lang->badrequestTips, $contact->phone, $contact->email));
+                $this->app->moduleName == 'user' ? die(sprintf(strip_tags($this->lang->badrequestTips), $contact->phone, $contact->email)) : die(sprintf($this->lang->badrequestTips, $contact->phone, $contact->email));
             }
         }
 
@@ -524,7 +524,7 @@ class commonModel extends model
     }
 
     /**
-     * Check  has wechat public.
+     * Check has wechat public.
      * 
      * @static
      * @access public
@@ -1632,25 +1632,28 @@ class commonModel extends model
     }
 
     /**
-     * Check wx App by token.
+     * Check cache need cache or not.
      * 
+     * @static
      * @access public
      * @return bool
      */
-    public function checkWMP()
+    public static function needClearCache()
     {
-        $config = $this->config->wmp;
-        $token  = '';
-        $random = '';
+        global $app;
 
-        if($this->post->token) $token = $this->post->token;
-        if($this->get->token)  $token = $this->get->token;
+        $overdueSticks = $app->loadClass('dao')->select('id')->from(TABLE_ARTICLE)->where('stickTime')->lt(helper::now())->andWhere('stickTime')->ne('0000-00-00 00:00:00')->fetchPairs();
 
-        if($this->post->random) $random = $this->post->random;
-        if($this->get->random)  $random = $this->get->random;
+        if(!empty($overdueSticks))
+        {
+            $app->loadClass('dao')->update(TABLE_ARTICLE)
+                ->set('sticky')->eq('0')
+                ->set('stickTime')->eq('0000-00-00 00:00:00')
+                ->where('id')->in($overdueSticks)
+                ->exec();
 
-        if(!$token or !$random) die('key error.');
-        if(md5($config->private . $config->appID . $random) === $token) return true;
-        die('key error.');
+            return true;
+        }
+        return false;
     }
 }

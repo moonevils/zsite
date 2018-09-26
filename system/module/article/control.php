@@ -471,8 +471,6 @@ class article extends control
      */
     public function forward2Blog($articleID)
     {
-        $categories = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
-
         if($_POST)
         {
             $result = $this->article->forward2Blog($articleID);
@@ -480,9 +478,12 @@ class article extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->title      = $this->lang->article->forward2Blog;
-        $this->view->categories = $categories;
-        $this->view->articleID  = $articleID;
+        $article = $this->article->getByID($articleID);
+
+        $this->view->title           = $this->lang->article->forward2Blog;
+        $this->view->categories      = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+        $this->view->articleID       = $articleID;
+        $this->view->defaultPostDate = (formatTime($article->addedDate, 'Y-m-d') == date('Y-m-d')) ? date('Y-m-d H:i', strtotime('+2 day')) : helper::now();
         $this->display();
     }
     
@@ -495,7 +496,6 @@ class article extends control
      */
     public function forward2Forum($articleID)
     {
-        $categories = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
         if($_POST)
         {
             $result = $this->article->forward2Forum($articleID);
@@ -503,12 +503,14 @@ class article extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $article = $this->article->getByID($articleID);
         $parents = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
 
-        $this->view->title      = $this->lang->article->forward2Forum;
-        $this->view->parents    = array_keys($parents);
-        $this->view->categories = $categories;
-        $this->view->articleID  = $articleID;
+        $this->view->title           = $this->lang->article->forward2Forum;
+        $this->view->parents         = array_keys($parents);
+        $this->view->categories      = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
+        $this->view->articleID       = $articleID;
+        $this->view->defaultPostDate = (formatTime($article->addedDate, 'Y-m-d') == date('Y-m-d')) ? date('Y-m-d H:i', strtotime('+2 day')) : helper::now();
         $this->display();
     }
 

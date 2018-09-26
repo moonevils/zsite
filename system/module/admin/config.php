@@ -1,2 +1,2 @@
 <?php
-$config->admin->apiRoot = 'http://www.chanzhi.org/';
+$config->admin->apiRoot = 'https://www.chanzhi.org/';

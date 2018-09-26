@@ -144,7 +144,7 @@ class userModel extends model
             $user->realnames->$clientLang = $user->realname;
         }
 
-         return $user;
+        return $user;
     }
 
     /**
@@ -216,12 +216,12 @@ class userModel extends model
             ->setIF($this->cookie->referer == '', 'referer', '')
             ->remove($this->config->user->skipedFields->create)
             ->get();
-        
+
         if(!isset($user->agreement)) $user->agreement = 0;
 
         if(RUN_MODE != 'admin') $user->admin = 'no';
         $user->password = $this->createPassword($this->post->password1, $user->account); 
-        
+
         $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
         if($captchaConfig != 'open') unset($_SESSION['captcha']);
 
@@ -264,7 +264,8 @@ class userModel extends model
     public function createWechatUser($fan, $public)
     {
         if(!isset($fan->subscribe) or $fan->subscribe != 1) return false;
-        $fan->openID = $fan->openid;
+        $fan->openID  = $fan->openid;
+        $fan->unionID = $fan->unionid;
 
         $user = new stdclass();
         $user->public   = $public;
@@ -279,28 +280,53 @@ class userModel extends model
 
         $pulledFan = $this->dao->setAutolang(false)->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('openID')->eq($fan->openID)->fetch();
 
+        if($fan->unionID) $unionUser = $this->dao->setAutolang(false)->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('unionID')->eq($fan->unionID)->fetch();
+
         if(empty($pulledFan))
         {
             $oauth = new stdclass();
             $oauth->openID   = $fan->openID;
+            $oauth->unionID  = $fan->unionID;
             $oauth->provider = 'wechat';
-            $oauth->account  = uniqid('wx_');
-            $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
+            if(!empty($unionUser))
+            {
+                $oauth->account = $unionUser->account;
+                $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
+            }
+            else
+            {
+                $oauth->account  = uniqid('wx_');
+                $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
 
-            $user->account = $oauth->account;
-            $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+                $user->account = $oauth->account;
+                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+            }
         }
         else
         {
-            $userInfo = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)->where('account')->eq($pulledFan->account)->fetch();
-            $user->account = $pulledFan->account;
-            if(empty($userInfo))
+            if(!empty($unionUser) and $unionUser->account != $pulledFan->account)
             {
-                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+                $this->mergeWechatUser($pulledFan, $unionUser);
+
+                $oauth = new stdclass();
+                $oauth->openID   = $fan->openID;
+                $oauth->unionID  = $fan->unionID;
+                $oauth->provider = 'wechat';
+                $oauth->account  = $unionUser->account;
+                $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
             }
-            elseif(!$userInfo->nickname) 
+            else
             {
-                $this->dao->update(TABLE_USER)->data($user, $skip = 'openID,provider')->where('account')->eq($pulledFan->account)->exec();
+                $userInfo = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)->where('account')->eq($pulledFan->account)->fetch();
+                $user->account = $pulledFan->account;
+                if(empty($userInfo))
+                {
+                    $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+                }
+                elseif(!$userInfo->nickname) 
+                {
+                    $this->dao->update(TABLE_USER)->data($user, $skip = 'openID,provider')->where('account')->eq($pulledFan->account)->exec();
+                }
             }
         }
 
@@ -447,7 +473,7 @@ class userModel extends model
         }
         return !dao::isError();
     }
-    
+
     /**     
      * Update password 
      *          
@@ -753,7 +779,7 @@ class userModel extends model
             ->where('id')->in($this->post->messages)
             ->orWhere('id')->in($this->post->comments)
             ->exec();
-        
+
         /* Delete orders of user. */
         $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER)->where('id')->in($this->post->orders)->exec();
         $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER_PRODUCT)->where('orderID')->in($this->post->orders)->exec();
@@ -844,9 +870,9 @@ class userModel extends model
     public function resetPassword($reset, $password)
     {
         $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
-                ->where('reset')->eq($reset)
-                ->fetch();
-        
+            ->where('reset')->eq($reset)
+            ->fetch();
+
         $this->dao->setAutolang(false)->update(TABLE_USER)
             ->set('password')->eq($this->createPassword($password, $user->account))
             ->set('reset')->eq('')
@@ -997,7 +1023,7 @@ class userModel extends model
         if(!$account or !$provider or !$openID) return false;
 
         $openUser = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq($provider)->andWhere('openID')->eq($openID)->andWhere('unionID')->eq($unionID)->fetch();
-          
+
         if(empty($openUser))
         {
             $this->dao->replace(TABLE_OAUTH)
@@ -1065,8 +1091,8 @@ class userModel extends model
     {
         $account = $this->dao->setAutolang(false)->select('account')->from(TABLE_OAUTH)
             ->where('provider')->eq($provider)
-            ->andWhere('openID')->eq($openID)
-            ->andWhere('unionID')->eq($unionID)
+            ->beginIF(!$unionID)->andWhere('openID')->eq($openID)->fi()
+            ->beginIF($unionID)->andWhere('unionID')->eq($unionID)->fi()
             ->fetch('account');
 
         if(!$account) return false;
@@ -1116,13 +1142,17 @@ class userModel extends model
         {
             if(empty($openUser))
             {
-                return $this->dao->replace(TABLE_OAUTH)
-                    ->set('account')->eq($account)
-                    ->set('provider')->eq($provider)
-                    ->set('openID')->eq($userInfo->openid)
-                    ->setIF(!empty($userInfo->unionid), 'unionID', $userInfo->unionid)
-                    ->set('lang')->eq('all')
-                    ->exec();
+                $oauthInfo = new stdclass();
+                $oauthInfo->account  = $account;
+                $oauthInfo->provider = $provider;
+                $oauthInfo->openID   = $userInfo->openid;
+                $oauthInfo->unionID  = isset($userInfo->unionid) ? $userInfo->unionid : '';
+                $oauthInfo->lang     = 'all';
+                return $this->dao->replace(TABLE_OAUTH)->data($oauthInfo)->exec();
+            }
+            else
+            {
+                if(!$openUser->unionID && $userInfo->unionid) $this->dao->update(TABLE_OAUTH)->set('unionID')->eq($userInfo->unionid)->where('openID')->eq($openUser->openID)->andWhere('account')->eq($openUser->account)->exec();
             }
         }
         else
@@ -1139,21 +1169,25 @@ class userModel extends model
                 $oauth->lang     = 'all';
                 $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
 
-                $user = new stdclass();
-                $user->account  = $oauth->account;
-                $user->password = $this->createPassword(md5(mt_rand()), (isset($userInfo->unionid) ? $userInfo->unionid : $userInfo->openid));
-                $user->nickname = $userInfo->nickname;
-                $user->realname = $userInfo->nickname;
-                $user->address  = $userInfo->country . ' ' . $userInfo->province . ' ' . $userInfo->city;
-                $user->join     = helper::now();
+                if(!$unionUser)
+                {
+                    $user = new stdclass();
+                    $user->account  = $oauth->account;
+                    $user->password = $this->createPassword(md5(mt_rand()), (isset($userInfo->unionid) ? $userInfo->unionid : $userInfo->openid));
+                    $user->nickname = $userInfo->nickname;
+                    $user->realname = $userInfo->nickname;
+                    $user->address  = $userInfo->country . ' ' . $userInfo->province . ' ' . $userInfo->city;
+                    $user->join     = helper::now();
 
-                if($userInfo->sex == 0) $user->gender = 'u';
-                if($userInfo->sex == 1) $user->gender = 'm';
-                if($userInfo->sex == 2) $user->gender = 'f';
+                    if($userInfo->sex == 0) $user->gender = 'u';
+                    if($userInfo->sex == 1) $user->gender = 'm';
+                    if($userInfo->sex == 2) $user->gender = 'f';
 
-                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
-                $this->autoLogin($user->account);
+                    $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+                }
+                $this->autoLogin($oauth->account);
             }
+            if(!$openUser->unionID && $userInfo->unionid) $this->dao->update(TABLE_OAUTH)->set('unionID')->eq($userInfo->unionid)->where('openID')->eq($openUser->openID)->andWhere('account')->eq($openUser->account)->exec();
             $this->autoLogin($openUser->account);
         }
         return true;
@@ -1253,7 +1287,7 @@ class userModel extends model
 
         return $realname ? $realname : $user->account;
     }
-    
+
     /**
      * Get realname by userID.
      * 
@@ -1371,13 +1405,13 @@ class userModel extends model
      */
     public function checkToken($token, $fingerprint)
     {
-       if($fingerprint != $this->app->user->fingerprint) return false;
+        if($fingerprint != $this->app->user->fingerprint) return false;
 
-       if($token != $this->getToken()) return false;
+        if($token != $this->getToken()) return false;
 
-       if(strpos($token, md5($this->app->user->fingerprint . $this->app->user->tokenExpired)) === 0) return true;
+        if(strpos($token, md5($this->app->user->fingerprint . $this->app->user->tokenExpired)) === 0) return true;
 
-       return false;
+        return false;
     }
 
     /**
@@ -1402,7 +1436,7 @@ class userModel extends model
 
         return !dao::isError();
     }
-    
+
     /**
      * Get user history by user account. 
      * 
@@ -1476,16 +1510,16 @@ class userModel extends model
         $history = array();
         foreach($users as $user)
         {
-           $history[$user] = new stdClass();
-           $history[$user]->thread     = isset($threads[$user]) ? $threads[$user] : 0;
-           $history[$user]->reply      = isset($replies[$user]) ? $replies[$user] : 0;
-           $history[$user]->submission = isset($submissions[$user]) ? $submissions[$user] : 0;
-           $history[$user]->comment    = isset($fromComments[$user]) ? $fromComments[$user] : 0;
-           $history[$user]->comment   += isset($toComments[$user]) ? $toComments[$user] : 0;
-           $history[$user]->message    = isset($fromMessages[$user]) ? $fromMessages[$user] : 0;
-           $history[$user]->message   += isset($toMessages[$user]) ? $toMessages[$user] : 0;
-           $history[$user]->order      = isset($orders[$user]) ? $orders[$user] : 0;
-           $history[$user]->address    = isset($addresses[$user]) ? $addresses[$user] : 0;
+            $history[$user] = new stdClass();
+            $history[$user]->thread     = isset($threads[$user]) ? $threads[$user] : 0;
+            $history[$user]->reply      = isset($replies[$user]) ? $replies[$user] : 0;
+            $history[$user]->submission = isset($submissions[$user]) ? $submissions[$user] : 0;
+            $history[$user]->comment    = isset($fromComments[$user]) ? $fromComments[$user] : 0;
+            $history[$user]->comment   += isset($toComments[$user]) ? $toComments[$user] : 0;
+            $history[$user]->message    = isset($fromMessages[$user]) ? $fromMessages[$user] : 0;
+            $history[$user]->message   += isset($toMessages[$user]) ? $toMessages[$user] : 0;
+            $history[$user]->order      = isset($orders[$user]) ? $orders[$user] : 0;
+            $history[$user]->address    = isset($addresses[$user]) ? $addresses[$user] : 0;
         }
         return $history;
     }
@@ -1503,7 +1537,7 @@ class userModel extends model
         $threads = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_THREAD)
             ->where('author')->eq($account)
             ->fetchAll();
-        
+
         if(dao::isError()) return dao::getError();
         return $threads;
     }
@@ -1520,7 +1554,7 @@ class userModel extends model
         $replies = $this->dao->setAutoLang(false)->select('id, content, thread')->from(TABLE_REPLY)
             ->where('author')->eq($account)
             ->fetchAll();
-        
+
         if(dao::isError()) return dao::getError();
         return $replies;
     }
@@ -1545,7 +1579,7 @@ class userModel extends model
         if(dao::isError()) return dao::getError();
         return $messages;
     }
-    
+
     /**
      * Get orders by user account. 
      * 
@@ -1562,7 +1596,7 @@ class userModel extends model
         $products = $this->dao->setAutoLang(false)->select('orderID, productID, productName')->from(TABLE_ORDER_PRODUCT)
             ->where('orderID')->in(array_keys($orders))
             ->fetchGroup('orderID');
-        
+
         if(dao::isError()) return dao::getError();
         return $products;
     }
@@ -1579,7 +1613,7 @@ class userModel extends model
         $addresses = $this->dao->setAutoLang(false)->select('id, address')->from(TABLE_ADDRESS)
             ->where('account')->eq($account)
             ->fetchAll();
-        
+
         if(dao::isError()) return dao::getError();
         return $addresses;
     }
@@ -1596,7 +1630,7 @@ class userModel extends model
         $submissions = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_ARTICLE)
             ->where('addedBy')->eq($account)
             ->fetchAll();
-        
+
         if(dao::isError()) return dao::getError();
         return $submissions;
     }
@@ -1622,7 +1656,7 @@ class userModel extends model
 
         return !dao::isError();
     }
-    
+
     /**
      * Fix menus for profile.
      * 
@@ -1674,10 +1708,10 @@ class userModel extends model
      */
     public function getScore($account = '')
     {
-       if(empty($account)) $account = $this->app->user->account;
-       $user = $this->getByAccount($account);
-       if(empty($user)) return 0;
-       return $user->score;
+        if(empty($account)) $account = $this->app->user->account;
+        $user = $this->getByAccount($account);
+        if(empty($user)) return 0;
+        return $user->score;
     }
 
     /**
@@ -1696,10 +1730,10 @@ class userModel extends model
         $data['data']->email    = $user->email;
         $data['data']->realname = $user->realname;
         $data['data']->gender   = $user->gender;
-    
+
         return $data;
     }
-    
+
     /**
      * Check if the user has certificated the require option
      *
@@ -1711,20 +1745,20 @@ class userModel extends model
     public function checkCertification($account, $options = '')
     {
         if($account == 'guest') return false;
-    
+
         $options = explode(',', $options);
         if(empty($options)) return true;
-    
+
         $user = $this->getByAccount($account);
         if(!$user) return false;
-        
+
         foreach($options as $option)
         {
             $option = trim($option);
             if($option == 'email')  if(!$user->emailCertified) return false;
             if($option == 'mobile') if(!$user->mobileCertified) return false;
         }
-    
+
         return true;
     }
 
@@ -1759,7 +1793,7 @@ class userModel extends model
         $this->dao->delete()->from(TABLE_USER)->where('account')->eq($oldUser->account)->exec();
         $this->dao->delete()->from(TABLE_OAUTH)->where('account')->eq($oldUser->account)->exec();
         return true;
-        
+
     }
 
     /**
@@ -1769,12 +1803,26 @@ class userModel extends model
      * @access public
      * @return void
      */
-    public function updateOpenIDAndUnionID($userInfo)
+    public function updateOpenIDAndUnionID($userInfo, $account = '')
     {
         $user = $this->dao->select('*')->from(TABLE_OAUTH)->where('openID')->eq($userInfo->unionid)->fetch();
-        if(!$user) return false;
+        if($user) $this->dao->update(TABLE_OAUTH)->set('openID')->eq($userInfo->openid)->set('unionID')->eq($userInfo->unionid)->where('openID')->eq($user->unionid)->exec();
 
-        $this->dao->update(TABLE_OAUTH)->set('openID')->eq($userInfo->openid)->set('unionID')->eq($userInfo->unionid)->where('openID')->eq($userInfo->unionid)->exec();
+        if($account)
+        {
+            $oauthUser = $this->dao->select('*')->from(TABLE_OAUTH)->where('account')->eq($account)->andWhere('openID')->eq($userInfo->openid)->andWhere('unionID')->eq($userInfo->unionid)->fetch();
+            if(!$oauthUser)
+            {
+                $oauthInfo = new stdclass();
+                $oauthInfo->provider = 'wechat';
+                $oauthInfo->account  = $account;
+                $oauthInfo->openID   = $userInfo->openid;
+                $oauthInfo->unionID  = $userInfo->unionid;
+                $oauthInfo->lang     = 'all';
+
+                $this->dao->replace(TABLE_OAUTH)->data($oauthInfo)->exec();
+            }
+        }
 
         return !dao::isError();
     }

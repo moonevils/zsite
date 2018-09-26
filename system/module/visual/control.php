@@ -77,10 +77,20 @@ class visual extends control
         $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region, $object);
 
-        $blocks   = json_decode($layout->blocks);
+        $blocks = json_decode($layout->blocks);
         foreach($blocks as $block)
         {
-            if($block->id == $blockID) $this->view->block = $block;
+            if($block->id == $blockID) 
+            {
+                $this->view->block = $block;
+            }
+            elseif(!empty($block->children))
+            {
+                foreach($block->children as $children)
+                {
+                    if($children->id == $blockID) $this->view->block = $children;
+                }
+            }
         }
 
         if($_POST)
@@ -120,7 +130,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock($page, $region, $parent = 0, $allowregionblock = false, $object = '')
+    public function appendBlock($page, $region, $parent = 0, $allowregionblock = false, $object = '', $isRandom = false)
     {
         $blockModel = $this->loadModel('block');
 
@@ -130,7 +140,7 @@ class visual extends control
         if($_POST)
         {
             $block  = $this->post->block;
-            $result = $blockModel->appendBlock($template, $theme, $page, $region, $object, $parent, $block);
+            $result = $blockModel->appendBlock($template, $theme, $page, $region, $object, $parent, $block, $isRandom);
             $this->send($result);
         }
 

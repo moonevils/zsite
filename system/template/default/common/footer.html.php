@@ -48,11 +48,8 @@
   {/foreach}
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='{$lang->back2Top}'></a>
 </div>{* end "div.page-container" in "header.html.php" *}
-{$qrcode=isset($config->ui->QRCode) ? $config->ui->QRCode : 1}
-{if($qrcode)} 
-  {$qrcodeTpl=$control->loadModel('ui')->getEffectViewFile('default', 'common', 'qrcode')}
-  {include $qrcodeTpl}
-{/if}
+{$qrcodeTpl=$control->loadModel('ui')->getEffectViewFile('default', 'common', 'qrcode')}
+{include $qrcodeTpl}
 <div class='hide'>{!$control->loadModel('block')->printRegion($layouts, 'all', 'footer')}</div>
 {if(commonModel::isAvailable('shop'))}
   {$cartTpl=TPL_ROOT . 'common/cart.html.php'}
