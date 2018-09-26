@@ -77,14 +77,14 @@ class visual extends control
         $theme    = $this->config->template->{$this->app->clientDevice}->theme;
         $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region, $object);
 
-        $blocks   = json_decode($layout->blocks);
+        $blocks = json_decode($layout->blocks);
         foreach($blocks as $block)
         {
             if($block->id == $blockID) 
             {
                 $this->view->block = $block;
             }
-            else
+            elseif(!empty($block->children))
             {
                 foreach($block->children as $children)
                 {
