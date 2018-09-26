@@ -60,6 +60,8 @@ $config->site->menu              = json_encode(array());
 $config->site->execInfo          = 'show';
 $config->site->updatedTime       = '';
 
+$config->bear = new stdclass();
+
 $config->company          = new stdclass();
 $config->company->name    = '';
 $config->company->desc    = '';
