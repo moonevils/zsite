@@ -64,7 +64,7 @@
           commonModel::printLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=1", $lang->product->images, "data-toggle='modal' data-width='1000'");
           commonModel::printLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=0", $lang->product->files, "data-toggle='modal' data-width='1000'");
           commonModel::printLink('product', 'changeStatus', "productID=$product->id&status=$changeStatus", $lang->product->statusList[$changeStatus], "class='changeStatus'");
-          echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias"), $lang->preview, "target='_blank'");
+          echo html::a($this->product->createPreviewLink($product->id), $lang->preview, "target='_blank'");
           ?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->product->layout;?><span class='caret'></span></a>

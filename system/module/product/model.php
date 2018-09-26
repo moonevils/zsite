@@ -499,4 +499,28 @@ class productModel extends model
         $this->loadModel('setting')->setItems('system.common.product', $setting);
         return !dao::isError();
     }
+
+    /**
+     * createPreviewLink 
+     * 
+     * @param  int    $productID 
+     * @param  string $viewType 
+     * @access public
+     * @return string
+     */
+    public function createPreviewLink($productID, $viewType = '')
+    {
+        $product = $this->getByID($productID);
+        if(empty($product)) return null;
+
+        $categories    = $product->categories;
+        $categoryAlias = !empty($categories) ? current($categories)->alias : '';
+        $alias         = "category=$categoryAlias&name=$product->alias";
+
+        $link = commonModel::createFrontLink('product', 'view', "productID=$productID", $alias, $viewType);
+        if(!empty($product->link)) $link = $product->link;
+
+        return $link;
+    }
+
 }
