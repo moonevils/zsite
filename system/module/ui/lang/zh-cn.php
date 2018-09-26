@@ -302,8 +302,8 @@ $lang->js->importTip     = "只导入主题的风格和样式";
 $lang->js->fullImportTip = "将会导入测试数据以及替换站点文章、产品等数据";
 
 $lang->ui->importTypes = new stdclass();
-$lang->ui->importTypes->theme = '只导入主题';
-$lang->ui->importTypes->full  = '完整导入';
+$lang->ui->importTypes->theme = '导入样式';
+$lang->ui->importTypes->full  = '导入样式和数据';
 
 $lang->ui->theme->encryptTip = new stdclass();
 $lang->ui->theme->encryptTip->common    = '提示：';

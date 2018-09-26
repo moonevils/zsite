@@ -34,7 +34,6 @@
         <li data-type='internal'><?php echo html::a('#packageSection', $lang->ui->themePackage, "data-toggle='tab'");?></li>
         <?php endif;?>
         <li data-type='internal'><?php echo html::a(inlink('themestore'), $lang->ui->addTheme . " <i class='icon-plus-sign'></i>", "class=''");?></li>
-        <li data-type='internal'><?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . " <i class='icon icon-download'></i>", "data-toggle='modal'");?></li>
       </ul>
       <div class='panel-actions'>
         <form method='post' class='search-form'>
