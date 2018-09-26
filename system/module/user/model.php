@@ -1438,6 +1438,20 @@ class userModel extends model
     }
 
     /**
+     * Check user is bind email
+     *
+     * @return bool
+     */
+    public function checkIsBindEmail()
+    {
+        if(isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open')
+        {
+            return $this->app->user->emailCertified;
+        } 
+        return true;
+    }
+
+    /**
      * Get user history by user account. 
      * 
      * @param  int    $account 
