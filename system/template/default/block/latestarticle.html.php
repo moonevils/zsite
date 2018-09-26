@@ -166,7 +166,7 @@
 var currentBlockID = {$block->id};
 
 {noparse}
-if(typeof($('#block' + currentBlockID).parent('.col').data('grid')) === 'undefined')
+if(typeof($('#block' + currentBlockID).parent('.col').data('grid')) === 'undefined' && $('#block' + currentBlockID).parent('.col').data('probability') === 'undefined')
 {
     var grid = $('#block' + currentBlockID).parents('.blocks').data('grid');
     grid = typeof(grid) == 'undefined' ? 12 : grid;

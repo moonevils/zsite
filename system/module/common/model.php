@@ -524,7 +524,7 @@ class commonModel extends model
     }
 
     /**
-     * Check  has wechat public.
+     * Check has wechat public.
      * 
      * @static
      * @access public
@@ -1629,5 +1629,31 @@ class commonModel extends model
         if($app->clientLang == 'en') $icon = 'icon-zsite';
         if($app->clientLang == 'en' && $isProVersion) $icon = 'icon-zsite-pro';
         printf($lang->poweredBy, $config->version, k(), "<span class='" . $icon . "'></span> <span class='name'>" . $lang->chanzhiEPSx . '</span>' . $chanzhiVersion);
+    }
+
+    /**
+     * Check cache need cache or not.
+     * 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function needClearCache()
+    {
+        global $app;
+
+        $overdueSticks = $app->loadClass('dao')->select('id')->from(TABLE_ARTICLE)->where('stickTime')->lt(helper::now())->andWhere('stickTime')->ne('0000-00-00 00:00:00')->fetchPairs();
+
+        if(!empty($overdueSticks))
+        {
+            $app->loadClass('dao')->update(TABLE_ARTICLE)
+                ->set('sticky')->eq('0')
+                ->set('stickTime')->eq('0000-00-00 00:00:00')
+                ->where('id')->in($overdueSticks)
+                ->exec();
+
+            return true;
+        }
+        return false;
     }
 }
