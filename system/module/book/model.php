@@ -236,7 +236,7 @@ class bookModel extends model
         $catalogLink = commonModel::hasPriv('book', 'catalog') ? html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog) : '';
         $moveLink    = commonModel::hasPriv('book', 'sort') ? html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'") : '';
 
-        if($node->type == 'article') $previewLink = commonModel::hasPriv('book', 'read') ? html::a($this->loadModel('article')->createPreviewLink($node->id, '', 'book'), $this->lang->preview, "target='_blank'") : '';
+        if($node->type == 'article') $previewLink = commonModel::hasPriv('book', 'read') ? html::a($this->createPreviewLink($node->id), $this->lang->preview, "target='_blank'") : '';
 
         $childrenHtml = '';
         if($children) 
@@ -923,7 +923,23 @@ class bookModel extends model
             $chapter = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($chapterID)->fetch('title'); 
             $path .= $chapter.'/';
         }
-        
         return $path;
     }
+    
+    /**
+     * Create preview link. 
+     * 
+     * @param  int    $articleID 
+     * @param  string $viewType 
+     * @access public
+     * @return string
+     */
+    public function createPreviewLink($articleID, $viewType = '')
+    {
+        $bookNode = $this->getNodeByID($articleID);
+        $link = commonModel::createFrontLink('book', 'read', "articleID=$bookNode->id", "book={$bookNode->book->alias}&node={$bookNode->alias}", $viewType);
+        return $link;
+    }
+
+    
 }
