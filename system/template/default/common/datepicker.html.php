@@ -24,7 +24,6 @@ $(function()
     };
     {/noparse}
     
-    var startDate = new Date(2000, 1, 1);
     var options = 
     {
         language: '{$clientLang}',
@@ -35,8 +34,7 @@ $(function()
         startView: 2,
         forceParse: 0,
         showMeridian: 1,
-        format: 'yyyy-mm-dd hh:ii',
-        startDate: startDate
+        format: 'yyyy-mm-dd hh:ii'
     };
 
     {noparse}
