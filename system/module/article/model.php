@@ -454,6 +454,12 @@ class articleModel extends model
             $this->loadModel('search')->save($type, $article);
         }
 
+        $this->loadModel('bear');
+        if(isset($this->config->bear->autoSync) and strpos($this->config->bear->autoSync, 'article') !== false)
+        {
+            $this->bear->submit('article', $articleID, 'realtime', 'yes');
+        }
+
         return $articleID;
     }
 
@@ -661,20 +667,13 @@ class articleModel extends model
      * Create preview link. 
      * 
      * @param  int    $articleID 
+     * @param  string $viewType 
+     * @param  string $articleType 
      * @access public
-     * @return string
+     * @return void
      */
     public function createPreviewLink($articleID, $viewType = '', $articleType = '')
     {
-        if($articleType == 'book')
-        {
-            $this->loadModel('book');
-            $bookNode = $this->book->getNodeByID($articleID);
-
-            $link = commonModel::createFrontLink('book', 'read', "articleID=$bookNode->id", "book={$bookNode->book->alias}&node={$bookNode->alias}", $viewType);
-            return $link;
-        }
-
         $article = $this->getByID($articleID);
         if(empty($article)) return null;
         $module  = $article->type;
