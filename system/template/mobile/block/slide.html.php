@@ -33,7 +33,7 @@
       {if($height == 0 and $slide->height)} {$height = $slide->height} {/if}
       {if($slide->backgroundType == 'image')}
         <div class='item{!echo ($index === 0) ? ' active' : ''}' {!echo $url . ' ' . $target}>
-        {!print(html::image($slide->image))}
+        {!print(html::image($slide->image,"alt= '$slide->title' title='$slide->title'"))}
       {else}
         <div class='item{!echo ($index === 0) ? ' active' : ''}' {!echo $url . ' ' . $target} style='{!echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px'}'>
       {/if}
