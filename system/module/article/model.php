@@ -448,6 +448,9 @@ class articleModel extends model
             $this->loadModel('search')->save($type, $article);
         }
 
+        /* If article has redirect setting return without submission to baidu. */
+        if(!empty($article->link)) return $articleID;
+
         $this->loadModel('bear');
         if(isset($this->config->bear->autoSync) and strpos($this->config->bear->autoSync, 'article') !== false)
         {
