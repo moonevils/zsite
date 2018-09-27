@@ -339,7 +339,8 @@ body {padding-left: 50px;}
 #primaryNavbar .nav > li {padding: 0;}
 #primaryNavbar .nav > li > a {text-align: center; line-height: 20px; height: 40px; padding: 10px 0; color: #fff; display: block; background-color: transparent; border-bottom: 0px solid #3571CE; font-size:13px;}
 #primaryNavbar .nav > li.active, #primaryNavbar .nav > li:hover, #primaryNavbar .nav > li:focus, #primaryNavbar .nav > li:active {background-color: #3280fc; background-color: rgba(255,255,255,.2)}
-#primaryNavbar .nav li.active a.active{background: #22d3b6}
+#primaryNavbar .nav li.active a.active{color: #ffffff}
+#primaryNavbar .nav li.active a{color: rgba(255,255,255,0.7)}
 #primaryNavbar + .navbar-fixed-top {left: 50px}
 .navbar-fixed-bottom {left: 50px; border-top: 1px solid #ddd; border-bottom: none}
 .navbar-fixed-bottom .navbar-text {line-height: 20px;}
@@ -353,8 +354,8 @@ body {padding-left: 50px;}
 #primaryNavbar .dropdown-menu > li > a {padding: 3px 15px;}
 #primaryNavbar .dropdown-menu > .heading > .icon {display: inline-block; width: 30px; height: 30px; text-align: center; border-radius: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.2); color: #fff; background-color: #3280fc; line-height: 28px; margin-right: 5px;}
 #primaryNavbar  ul.nav-sub > li{margin-top: 0;}
-#primaryNavbar .nav > li.design  a{ background: #2b2c3b; }
-#primaryNavbar .nav > li.design > a{ background: #2b2c3b; }
+#primaryNavbar .nav > li.design  a{ background: #0e66a7; }
+#primaryNavbar .nav > li.design > a{ background: #2286d2; }
 
 #mainNavbar {font-size: 13px; background-color: #EEE; border-bottom: 1px solid #d5d5d5;}
 #mainNavbar .navbar-nav > li > a {padding: 10px 12px;}

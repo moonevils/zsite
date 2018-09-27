@@ -20,6 +20,13 @@ class thread extends control
      */
     public function post($boardID = 0)
     {
+        /*check member is bing email? if not bind go to bind email*/
+        $isBindEmailResult = $this->loadModel('user')->checkIsBindEmail();
+        if($isBindEmailResult === '0')
+        {
+            die(js::error('请先绑定邮箱') . js::locate($this->createLink('user', 'setemail', 'referer=' . helper::safe64Encode($this->app->getURI()))));
+        }
+
         $this->loadModel('forum');
         if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login', "referer=" . helper::safe64Encode($this->app->getURI()))));
 

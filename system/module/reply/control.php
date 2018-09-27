@@ -19,7 +19,15 @@ class reply extends control
      * @return void
      */
     public function post($threadID)
-    {
+    {  
+        /*check member is bing email? if not bind please go to bind email*/
+        $isBindEmailResult = $this->loadModel('user')->checkIsBindEmail();
+        if($isBindEmailResult == '0')
+        {  
+            $this->send(array('result'=>'fail','message'=>'请先绑定邮箱'));
+            die(js::locate($this->createLink('user', 'setemail', 'referer=' . helper::safe64Encode($this->app->getURI()))));
+        }
+
         if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
 
         if($_POST)
