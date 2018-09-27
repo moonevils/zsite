@@ -132,7 +132,7 @@ class commonModel extends model
         {
             if($this->server->request_method == 'post') $inBlackList = $this->loadModel('guarder')->logOperation('ip', 'post');
             $inList = $this->loadModel('guarder')->inList();
-            if(!$inList)
+            if($inList)
             {
                 $contact = json_decode($this->config->company->contact);
                 $this->app->moduleName == 'user' ? die(sprintf(strip_tags($this->lang->badrequestTips), $contact->phone, $contact->email)) : die(sprintf($this->lang->badrequestTips, $contact->phone, $contact->email));
