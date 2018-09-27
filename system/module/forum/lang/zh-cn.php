@@ -27,6 +27,7 @@ $lang->forum->setting    = '论坛设置';
 $lang->forum->postReview = '发帖审核';
 $lang->forum->allBoards  = '所有版块';
 $lang->forum->index      = '首页';
+$lang->forum->bindWechat = '发帖绑定微信';
 
 $lang->forum->updateDesc    = '该更新操作会重新计算每个版块的发帖数据。';
 $lang->forum->successUpdate = '更新数据成功';
@@ -35,6 +36,10 @@ $lang->forum->indexModeOptions = array();
 $lang->forum->indexModeOptions['board']  = '版块浏览';
 $lang->forum->indexModeOptions['latest'] = '最新主题';
 $lang->forum->indexModeOptions['stick']  = '置顶主题';
+
+$lang->forum->bindWechatOptions = array();
+$lang->forum->bindWechatOptions['open']  = '开启';
+$lang->forum->bindWechatOptions['close'] = '关闭';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';

@@ -12,6 +12,12 @@
           <th><?php echo $lang->forum->index;?></th> 
           <td><?php echo html::radio('indexMode', $lang->forum->indexModeOptions, isset($config->forum->indexMode) ? $config->forum->indexMode : 'board', "class='checkbox'");?></td><td></td>
         </tr>
+        <?php if(isset($config->oauth->wechat)):?>
+        <tr>
+          <th><?php echo $lang->forum->bindWechat;?></th> 
+          <td><?php echo html::radio('bindWechat', $lang->forum->bindWechatOptions, isset($config->forum->bindWechat) ? $config->forum->bindWechat : 'close', "class='checkbox'");?></td><td></td>
+        </tr>
+        <?php endif;?>
         <tr>
           <th></th>
           <td colspan='2'>
