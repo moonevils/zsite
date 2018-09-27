@@ -940,8 +940,16 @@ class user extends control
      * @access public
      * @return void
      */
-    public function oauthBind()
+    public function oauthBind($referer = '')
     {
+        if($this->app->user->account != 'guest' && (strpos($this->app->user->account, $this->session->oauthProvider . '_') === false))
+        {
+            if($this->user->bindOAuthAccount($this->app->user->account, $this->session->oauthProvider, $this->session->openID, $this->session->unionID))
+            {
+                die(js::locate(urldecode(helper::safe64Decode($referer))));
+            }
+        }
+
         if($_POST)
         {
             if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
@@ -1010,6 +1018,9 @@ class user extends control
      */
     public function oauthUnbind($account, $provider, $openID, $unionID = '')
     {
+        $openID  = helper::safe64Decode($openID); 
+        $unionID = helper::safe64Decode($unionID); 
+
         $result = $this->user->unbindOAuthAccount($account, $provider, $openID, $unionID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblUnbindFailed));
 

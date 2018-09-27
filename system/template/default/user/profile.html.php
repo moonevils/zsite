@@ -54,7 +54,9 @@
               {!html::a(inlink('setemail'), $lang->user->setEmail, "class='btn'")}
               {if(isset($user->provider) and isset($user->openID))}
                 {if(strpos($user->account, "{$user->provider}_") === false)}
-                  {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID&unionID=$user->unionID"), $lang->user->oauth->lblUnbind, "class='btn unbind'")}
+                  {$openID  = helper::safe64Encode($user->openID)} 
+                  {$unionID = helper::safe64Encode($user->unionID)} 
+                  {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$openID&unionID=$unionID"), $lang->user->oauth->lblUnbind, "class='btn unbind'")}
                 {else}
                   {!html::a(inlink('oauthRegister'), $lang->user->oauth->lblProfile, "class='btn'")}
                   {!html::a(inlink('oauthBind'), $lang->user->oauth->lblBind, "class='btn'")}

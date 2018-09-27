@@ -10,13 +10,20 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
+{if(isset($oauthLoginLink))}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header.lite')}
+{!js::set('oauthLoginLink', $oauthLoginLink)}
+{!js::set('backLink', $backLink)}
+{!js::set('bindWechatTip',  $lang->forum->bindWechatTip)}
+{!js::execute($pageJS);}
+{else}
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 {include TPL_ROOT . 'common/kindeditor.html.php'}
 
 {$common->printPositionBar($board)}
 {$colorPlates = ''}
 {foreach(explode('|', $lang->colorPlates) as $value)}
-    {$colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>"}
+  {$colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>"}
 {/foreach}
 
 <div class='panel panel-form'>
@@ -98,3 +105,4 @@
   </div>
 </div>
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}
+{/if}
