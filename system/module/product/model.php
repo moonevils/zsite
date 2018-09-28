@@ -305,6 +305,12 @@ class productModel extends model
         $product->attributes = $attributes; 
         $this->loadModel('search')->save('product', $product);
 
+        $this->loadModel('bear');
+        if(isset($this->config->bear->autoSync) and strpos($this->config->bear->autoSync, 'product') !== false)
+        {
+            $this->bear->submit('product', $productID, 'realtime', 'yes');
+        }
+
         return $productID;
     }
 
@@ -519,7 +525,6 @@ class productModel extends model
 
         $link = commonModel::createFrontLink('product', 'view', "productID=$productID", $alias, $viewType);
         if(!empty($product->link)) $link = $product->link;
-
         return $link;
     }
 
