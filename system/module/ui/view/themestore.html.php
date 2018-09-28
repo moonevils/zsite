@@ -25,7 +25,7 @@
 </div>
 <div id='main' class='container'>
   <div id='mainHeader'>
-    <ul class='nav nav-dots pull-left' id='typeNav'>
+    <ul class='nav nav-dots' id='typeNav'>
       <li data-type='internal' <?php echo ($type == 'byindustry' and $param == 'all') ? "class='active'" : '';?>><?php echo html::a(inlink('themestore'), $lang->ui->theme->all, "id='theme-all'");?></li>
       <?php foreach($lang->ui->theme->searchLabels as $code => $label):?>
       <li data-type='internal' <?php echo $type == $code ? "class='active'" : '';?>>
@@ -56,17 +56,16 @@
             <?php endif;?>
           </div>
           <div class='theme-info'>
+            <div class='theme-desc text-ellipsis'>
+              <?php echo html::a($theme->viewLink, $theme->name, "target='_blank' title='{$theme->name}' class='theme-name'");?>
+              <div class='pull-right text-muted'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?> &nbsp; <i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></div>
+            </div>
             <div class='theme-price'>
               <?php if($theme->latestRelease->lifePrice):?>
-              <?php echo "<strong class='price'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
+              <?php echo "<strong class='price text-info'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
               <?php elseif($theme->latestRelease->score):?>
-                  <?php echo "<strong class='price'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
+                  <?php echo "<strong class='price text-info'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
               <?php endif;?>
-              <span class='pull-right'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp;
-              <span class='pull-right'><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
-            </div>
-            <div class='theme-desc'>
-              <?php echo html::a($theme->viewLink, $theme->name, "target='_blank' title='{$theme->name}'");?>
               <div class="actions">
                   <?php
                   if($theme->type != 'computer' and $theme->type != 'mobile' and isset($installeds[$theme->code]))
@@ -173,12 +172,19 @@
 <script>
 $(function()
 {
+    var $industryBox = $('#industryBox');
+    var toggleIndustryBox = function(toggle)
+    {
+      if (toggle === undefined) toggle = $industryBox.hasClass('hide');
+      $industryBox.toggleClass('hide', !toggle);
+      $('#byindustry').toggleClass('open', !!toggle);
+    }
     <?php if($type == 'byindustry' and $param != 'all'):?>
-    $('#industryBox').toggleClass('hide');
+    toggleIndustryBox(true);
     <?php endif;?>
     $('#byindustry').click(function()
     {
-        $('#industryBox').toggleClass('hide');
+      toggleIndustryBox();
     })
 })
 </script>
