@@ -203,6 +203,13 @@ class visual extends control
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
         $templates = $this->ui->getTemplates();
 
+        $categoryList = array_reverse((array) $this->config->block->categoryList);
+        $allBlockList = ',';
+        foreach($categoryList as $blockList) $allBlockList .= ltrim($blockList, ',');
+        $categoryList = array('all' => $allBlockList) + $categoryList;
+
+        $this->lang->block->categoryList['all'] = $this->lang->block->all;
+
         $this->view->title           = $this->lang->visual->customTheme;
         $this->view->blockData       = $blockData;
         $this->view->templateData    = $templates[$template];
@@ -211,7 +218,7 @@ class visual extends control
         $this->view->page            = $page;
         $this->view->isPageAll       = $page == 'all';
         $this->view->blocks          = $this->block->getList($template);;
-        $this->view->categoryList    = array_reverse((array) $this->config->block->categoryList);
+        $this->view->categoryList    = $categoryList;
         $this->view->typeList        = $this->lang->block->{$template}->typeList;
 
         $this->view->setting         = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();

@@ -69,6 +69,7 @@ $lang->block->saveLayoutAs    = '复制布局：%s';
 $lang->block->defaultPlan     = '默认方案';
 $lang->block->image           = '图片';
 $lang->block->uploadImage     = '上传图片';
+$lang->block->all             = '所有区块';
 
 $lang->block->layout            = '布局';
 $lang->block->logoPosition      = 'Logo';
