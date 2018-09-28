@@ -3,17 +3,22 @@
   {if($this->app->user->account != 'guest')}
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading clearfix'>
+      <div class='panel-heading'>
         <strong>{$lang->user->oauth->bindUser}</strong>
       </div>
-      <div class='panel-body text-center'>
-        {!printf($lang->user->oauth->lblBindCurrent, $this->app->user->realname, inlink('oauthBind', "referer=$referer"))}  
+      <div class='panel-body text-center text-middle'>
+        <div class='form-group'>
+          {!printf($lang->user->oauth->lblBindCurrent, $this->app->user->realname, $realname)}  
+        </div>
+        <div class='form-group'>
+          {!html::a(inlink('oauthBind', "referer=$referer"), $lang->user->oauth->directBind, "class='btn btn-primary'")}
+        </div>
       </div>
     </div>
   </div>
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading clearfix'>
+      <div class='panel-heading'>
         <strong>{!echo $lang->user->oauth->lblProfile}</strong>
       </div>
       <div class='panel-body'>
