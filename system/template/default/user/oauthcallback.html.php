@@ -1,8 +1,19 @@
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'header')}
 <div class='row'>
+  {if($this->app->user->account != 'guest')}
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading'>
+      <div class='panel-heading clearfix'>
+        <strong>{$lang->user->oauth->bindUser}</strong>
+      </div>
+      <div class='panel-body text-center'>
+        {!printf($lang->user->oauth->lblBindCurrent, $this->app->user->realname, inlink('oauthBind', "referer=$referer"))}  
+      </div>
+    </div>
+  </div>
+  <div class='col-md-6'>
+    <div class='panel panel-default'>
+      <div class='panel-heading clearfix'>
         <strong>{!echo $lang->user->oauth->lblProfile}</strong>
       </div>
       <div class='panel-body'>
@@ -37,6 +48,8 @@
       </div>
     </div>
   </div>
+  {/if}
+  {if($this->app->user->account == 'guest')}
   <div class='col-md-6'>
     <div class='panel panel-default'>
       <div class='panel-heading'>
@@ -60,5 +73,6 @@
       </div>
     </div>
   </div>
+  {/if}
 </div>
 {include $control->loadModel('ui')->getEffectViewFile('default', 'common', 'footer')}

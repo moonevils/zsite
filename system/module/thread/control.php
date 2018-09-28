@@ -67,6 +67,17 @@ class thread extends control
             $result = $this->thread->post($boardID);
             $this->send($result);
         }
+        
+        if(isset($this->config->forum->bindWechat) && $this->config->forum->bindWechat == 'open')
+        {
+            $user = $this->loadModel('user')->getByAccount($this->app->user->account);
+            if(!isset($user->provider) || $user->provider != 'wechat')
+            {
+                $referer = helper::safe64Encode($this->createLink('thread', 'post', "boardID=$boardID"));
+                $this->view->oauthLoginLink = $this->createLink('user', 'oauthLogin', "provider=wechat&fingerprint={$this->app->user->fingerprint}&referer={$referer}");
+                $this->view->backLink       = $this->createLink('forum', 'board', "boardID=$boardID");
+            }
+        }
 
         $titleInput   = helper::createRandomStr(6, $skip='A-Z'); 
         $contentInput = helper::createRandomStr(7, $skip='A-Z'); 
