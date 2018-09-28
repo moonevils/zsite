@@ -454,7 +454,7 @@ class articleModel extends model
         $this->loadModel('bear');
         if(isset($this->config->bear->autoSync) and strpos($this->config->bear->autoSync, 'article') !== false)
         {
-            $this->bear->submit('article', $articleID, 'realtime', 'yes');
+            $this->bear->submit($type, $articleID, 'realtime', 'yes');
         }
 
         return $articleID;
