@@ -1,20 +1,22 @@
-#internalSection {padding: 0;}
+#internalSection {padding: 0; margin: 0 -15px;}
 
-.themes .col-theme {float: left; width:20%}
-.themes .theme {width: 90%; float: left; cursor: pointer; margin:0 auto 20px; border: 1px solid #ccc; border-radius: 2px; min-width: 200px; position: relative; opacity: 0.9; overflow: hidden;}
-.themes .theme-name {padding: 5px 30px 4px; background-color: #f1f1f1;}
-.themes .theme > .actions {position: absolute; bottom: 2px; right: 2px}
-.themes .theme > .actions > a:hover {background-color: #ddd}
-.themes .theme-img {height: 170px; overflow: hidden; opacity: 0.9}
+.themes .col-theme {float: left; width:25%; padding: 0 15px;}
+.themes .theme {cursor: pointer; margin:0 auto 20px; border: 1px solid #ccc; border-radius: 2px; min-width: 200px; position: relative; opacity: 0.9; overflow: hidden; background: #fff;}
+.themes .theme-name {padding: 9px 70px 7px 10px; font-weight: bold;}
+.themes .theme > .actions {position: absolute; bottom: 6px; right: 6px}
+.themes .theme-img {height: 170px; overflow: hidden; opacity: 0.9; border-bottom: 1px solid #ddd;}
 .themes .theme:hover .theme-img {opacity: 1;}
 .theme > .btn-custom {position: absolute; display: none; opacity: 0; width: 90px; left: 20px; top: 23px; z-index: 10; color: #fff!important}
 .themes .theme.current > .btn-custom {opacity: 1; display: block;}
 .themes .theme > .icon {position: absolute; right: 0; top: 0; display: none; z-index: 10}
-.themes .theme.current > .actions {display: none}
 .themes .theme.current > .icon {position: absolute; right: 0; top: 0; display: block; color: #fff; background: none; width: 0; height: 0; border: 20px solid #229F24; border-left-color: transparent; border-bottom-color: transparent;}
 .themes .theme.current > .icon:before {position: absolute; right: -15px; top: -15px}
 .themes .theme:hover {border-color: #145ccd; -moz-box-shadow:0px 0px 6px #145ccd; -webkit-box-shadow:0px 0px 6px #145ccd; box-shadow:0px 0px 6px #145ccd;}
 .themes .theme.current {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
+
+#mainHeader > .actions {width: 200px;}
+#packageSection {padding: 10px; background: #fff; border: 1px solid #ddd; min-height: 60px; position: relative;}
+#packageSectionActions {position: absolute; top: -55px; right: 210px;}
 
 #mainArea {position: relative; border: none; box-shadow: none; margin-bottom: 0;}
 #mainArea .cards {padding-top: 0;}
@@ -49,10 +51,6 @@
 .messagers-holder.top{top: 0; left: 0; right: 0;}
 .messagers-holder.top .messager{position: static; display: table; margin: 10px auto; overflow: hidden;}
 
-#mainMenu{padding:20px; text-align:left; background:#fff; margin-bottom:20px; margin-top:-20px;}
-#mainMenu #navMenu{font-size:16px; padding:0 20px;text-align:center}
-#mainMenu #navMenu a{font-size:16px; padding:0 20px; color:#010101;text-decoration: none;}
-#mainMenu #navMenu a.active{font-weight: bold;}
 .panel{margin:0 40px;}
 .panel .panel-heading{background-color:#fff;border-bottom: 2px solid #efefef; width: 98%; margin-left: 10px;margin-top:5px;padding: 8px 0px;}
 .panel .panel-heading a{text-decoration: none;font-size:16px;color:#000;}
@@ -70,6 +68,4 @@
 .input-control-icon-left, .input-control-icon-right{width: 30px; text-align: center;}
 .input-control-icon-left, .input-control-icon-right, .input-control-label-left, .input-control-label-right{position: absolute; top: 1px; z-index: 5; height: 30px; line-height: 30px; opacity: .5;}
 input:placeholder-shown + .search-clear-btn, input:placeholder-shown + .search-icon + .search-clear-btn{opacity: 0!important;}
-.theme #currentTheme{float:left}
-.theme #custom{float:right}
-.theme #custom a{text-decoration:none; color:#000}
+

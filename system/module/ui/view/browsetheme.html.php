@@ -27,9 +27,9 @@
 </div>
 <div class='div-tip text-danger'>
   <?php printf($lang->ui->packagePathTip, $packagePath);?>
-  <div class="panel-actions">
-    <?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . " <i class='icon icon-upload'></i>", "data-toggle='modal' class='btn btn-primary'");?>
-  </div>
+</div>
+<div id="packageSectionActions">
+  <?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . " <i class='icon icon-upload'></i>", "data-toggle='modal' class='btn btn-primary'");?>
 </div>
 <style>
 .theme-panel > .panel-body{padding-top:4px !important; cursor:pointer;}
