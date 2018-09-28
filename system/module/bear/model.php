@@ -13,6 +13,7 @@ class bearModel extends model
 {
     const API_REALTIME = 'reatime';
     const API_BATECH   = 'bactch';
+
     /**
      * Save setting function.
      * 
@@ -77,12 +78,16 @@ class bearModel extends model
         $urlInfo = parse_url($url);
         $query   = !empty($urlInfo['query']) ? "?{$urlInfo['query']}" : '';
         $url     = $scheme . "://" . $domain . $urlInfo['path'] . $query;
-        $api = sprintf($this->config->bear->apiList->posturl, $this->config->bear->appID, $this->config->bear->token, $type);
+        if($this->hasSubmited($url)) 
+        {
+            $result = new stdclass;
+            $result->success = 1;
+            return $result;
+        }
 
 		$curl = curl_init();
-
 		$options =  array();
-		$options[CURLOPT_URL]		     = $api;
+		$options[CURLOPT_URL]		     = sprintf($this->config->bear->apiList->posturl, $this->config->bear->appID, $this->config->bear->token, $type);
 		$options[CURLOPT_POST]           = true;
 		$options[CURLOPT_RETURNTRANSFER] = true;
 		$options[CURLOPT_POSTFIELDS]     = $url;
@@ -122,11 +127,134 @@ class bearModel extends model
         $data->account    = $this->app->user->account;
         $data->objectType = $objectType;
         $data->objectID   = $objectID;
+        $data->url        = $url;
         $data->status     = $result->status;
         $data->auto       = 'yes';
         $data->response   = json_encode($result);
         $data->time       = helper::now();
         $this->dao->insert(TABLE_BEARLOG)->data($data)->exec();
         return dao::isError();
+    }
+
+    /**
+     * Batch submit function.
+     * 
+     * @param  string    $type 
+     * @param  int       $last 
+     * @access public
+     * @return array
+     */
+    public function batchSubmit($type, $lastID = 0)
+    {
+        if(!commonModel::isAvailable($type))
+        {
+            if(isset($this->config->bear->submitOrder[$type])) $type = $this->config->bear->submitOrder[$type];
+            if(!isset($this->config->bear->submitOrder[$type])) return array('finished' => true);
+        }
+
+        $limit = 100;
+        if($type == 'article')
+        {
+            $articles = $this->dao->select('id,type')->from(TABLE_ARTICLE)
+                ->where('type')->in('article,blog,page')
+                ->andWhere('status')->eq('normal')
+                ->andWhere('addedDate')->le(helper::now())
+                ->andWhere('id')->gt($lastID)
+                ->orderBy('id')
+                ->limit($limit)
+                ->fetchAll('id');
+
+            if(empty($articles))
+            {
+                $type   = $this->config->bear->submitOrder[$type];
+                $lastID = 0;
+            }
+            else
+            {
+                foreach($articles as $article) $this->submit($article->type, $article->id);
+                $lastID = max(array_keys($articles));
+                return array('type' => $type, 'count' => count($articles), 'lastID' => $lastID);
+            }
+        }
+
+        if($type == 'product')
+        {
+            $products = $this->dao->select('id')->from(TABLE_PRODUCT)
+                ->where('status')->eq('normal')
+                ->andWhere('id')->gt($lastID)
+                ->orderBy('id')
+                ->limit($limit)
+                ->fetchAll('id');
+
+            if(empty($products))
+            {
+                $type   = $this->config->bear->submitOrder[$type];
+                $lastID = 0;
+            }
+            else
+            {
+                foreach($products as $product) $this->submit('product', $product->id);
+                $lastID = max(array_keys($products));
+                return array('type' => $type, 'count' => count($products), 'lastID' => $lastID);
+            }
+        }
+
+        if($type == 'thread')
+        {
+            $threads = $this->dao->select('id')->from(TABLE_THREAD)
+                ->where('id')->gt($lastID)
+                ->beginIf(RUN_MODE == 'front' and $this->config->forum->postReview == 'open')->andWhere('status')->eq('approved')->fi()
+                ->orderBy('id')
+                ->limit($limit)
+                ->fetchAll('id');
+
+            if(empty($threads))
+            {
+                $type   = $this->config->bear->submitOrder[$type];
+                $lastID = 0;
+            }
+            else
+            {
+                foreach($threads as $thread) $this->submit('thread', $thread->id);
+                $lastID = max(array_keys($threads));
+                return array('type' => $type, 'count' => count($threads), 'lastID' => $lastID);
+            }
+        }
+
+        if($type == 'book')
+        {
+            $books = $this->dao->select('id,type')->from(TABLE_BOOK)
+                ->where('type')->eq('article')
+                ->andWhere('id')->gt($lastID)
+                ->orderBy('id')
+                ->limit($limit)
+                ->fetchAll('id');
+
+            if(empty($books))
+            {
+                $type   = $this->config->bear->submitOrder[$type];
+                $lastID = 0;
+            }
+            else
+            {
+                foreach($books as $book) $this->submit('book', $book->id);
+                $lastID = max(array_keys($books));
+                return array('type' => $type, 'count' => count($books), 'lastID' => $lastID);
+            }
+        }
+        return array('finished' => true);
+    }
+
+    /**
+     * Check resouce has submited.
+     * 
+     * @param  string    $url 
+     * @access public
+     * @return bool
+     */
+    public function hasSubmited($url)
+    {
+        $record = $this->dao->select('*')->from(TABLE_BEARLOG)->where('url')->eq($url)->andWhere('status')->eq('success')->fetch();   
+        return !empty($record);
     }
 }

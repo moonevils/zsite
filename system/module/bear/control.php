@@ -56,4 +56,31 @@ class bear extends control
         $this->display();
     }
 
+    /**
+     * Batch history content.
+     * 
+     * @param  string   $type 
+     * @param  int      $lastID 
+     * @access public
+     * @return void
+     */
+    public function batchSubmit($type = 'article', $lastID = '')
+    {
+        if(helper::isAjaxRequest())
+        {
+            $result = $this->bear->batchSubmit($type, $lastID);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->bear->submitFail));
+            if(isset($result['finished']) and $result['finished'])
+            {
+                $this->send(array('result' => 'finished', 'message' => $this->lang->bear->submitSuccess));
+            }
+            else
+            {
+                $this->send(array('result' => 'unfinished', 'message' => sprintf($this->lang->bear->submitResult, $result['count']),'next' => inlink('batchSubmit', "type={$result['type']}&lastID={$result['lastID']}") ));
+            }
+        }
+
+        $this->view->title = $this->lang->bear->submit;
+        $this->display();
+    }
 }
