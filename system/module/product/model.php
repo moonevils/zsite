@@ -525,7 +525,6 @@ class productModel extends model
 
         $link = commonModel::createFrontLink('product', 'view', "productID=$productID", $alias, $viewType);
         if(!empty($product->link)) $link = $product->link;
-
         return $link;
     }
 

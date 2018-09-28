@@ -68,6 +68,7 @@ $lang->product->setting      = '设置';
 $lang->product->soldout      = '已售罄';
 $lang->product->layout       = '布局';
 $lang->product->contact      = '联系我们';
+$lang->product->forward2Baidu = '提交到百度';
 
 $lang->product->orderBy = new stdclass();
 $lang->product->orderBy->time = '时间';

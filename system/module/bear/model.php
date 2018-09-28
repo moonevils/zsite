@@ -49,6 +49,7 @@ class bearModel extends model
      */
     public function submit($objectType, $objectID, $type = 'batch', $auto = 'no')
     {
+
         switch($objectType)
         {
             case 'article':
@@ -60,7 +61,7 @@ class bearModel extends model
             case 'page':
                 $url = $this->loadModel('article')->createPreviewLink($objectID, 'html', $objectType);
                 break;
-            case 'proudct':
+            case 'product':
                 $url = $this->loadModel('product')->createPreviewLink($objectID); 
                 break;
             case 'book':
@@ -98,7 +99,6 @@ class bearModel extends model
         $result->type = $type;
         $result->remain  = zget($result, "remain_{$type}", 0);
         $result->success = zget($result, "success_{$type}", 0);
-        $result->success = 1;
         $result->status  = $result->success == 1 ? 'success' : 'fail';
 
         $this->log($type, $objectType, $objectID, $url, $result, $auto);

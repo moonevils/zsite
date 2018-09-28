@@ -139,7 +139,7 @@
               <li><?php commonmodel::printlink('article', 'forward2blog', "articleid=$article->id", $lang->article->forward2Blog, "data-toggle='modal'");?></li>
               <li><?php commonmodel::printlink('article', 'forward2forum', "articleid=$article->id", $lang->article->forward2Forum, "data-toggle='modal'");?></li>
               <?php endif;?>
-              <li><?php commonmodel::printlink('bear', 'submit', "objectType={$article->type}&articleid={$article->id}", $lang->article->forward2Baidu, "data-toggle='modal'");?></li>
+              <li><?php commonmodel::printlink('bear', 'submit', "objectType={$article->type}&objectID={$article->id}", $lang->article->forward2Baidu, "data-toggle='modal'");?></li>
             </ul>
           </span>
         </td>
