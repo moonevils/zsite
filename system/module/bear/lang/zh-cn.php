@@ -8,9 +8,11 @@ $lang->bear->token      = 'Token';
 $lang->bear->autoSync   = '自动同步';
 $lang->bear->submitType = '推送类型';
 
-$lang->bear->submit = '提交资源到百度';
+$lang->bear->submit        = '提交资源';
+$lang->bear->batchSubmit   = '批量提交资源';
 $lang->bear->submitSuccess = '资源提交成功';
 $lang->bear->submitFail    = '资源提交失败';
+$lang->bear->submitResult  = "提交成功，新提交<span class='text-success'> %s </span> 条记录；";
 
 $lang->bear->notices = array();
 $lang->bear->notices['not_same_site'] = "%s不是本站的url。";
