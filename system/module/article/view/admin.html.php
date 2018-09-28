@@ -130,10 +130,16 @@
               <li><?php commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');?></li>
               <li><?php commonModel::printLink('article', 'setcss', "articleID=$article->id", $lang->article->css, "data-toggle='modal'");?></li>
               <li><?php commonModel::printLink('article', 'setjs',  "articleID=$article->id", $lang->article->js, "data-toggle='modal'");?></li>
+            </ul>
+          </span>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->transfer;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
               <?php if($type == 'article'):?>
               <li><?php commonmodel::printlink('article', 'forward2blog', "articleid=$article->id", $lang->article->forward2Blog, "data-toggle='modal'");?></li>
               <li><?php commonmodel::printlink('article', 'forward2forum', "articleid=$article->id", $lang->article->forward2Forum, "data-toggle='modal'");?></li>
               <?php endif;?>
+              <li><?php commonmodel::printlink('bear', 'submit', "objectType={$article->type}&articleid={$article->id}", $lang->article->forward2Baidu, "data-toggle='modal'");?></li>
             </ul>
           </span>
         </td>

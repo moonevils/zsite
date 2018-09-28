@@ -79,6 +79,7 @@ $lang->custom           = '自定义';
 $lang->productMenu      = '产品';
 $lang->history          = '历史记录';
 $lang->reverse          = '切换顺序';
+$lang->transfer         = '转发';
 
 /* Global action items. */
 $lang->reset          = '重置';
