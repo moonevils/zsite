@@ -51,6 +51,18 @@
   </ul>
   <?php echo commonModel::createManagerMenu('nav nav-stacked fixed-bottom');?>
 </nav>
+<?php if($this->session->currentGroup == 'design'):?>
+<style> body{ padding-top: 20px !important;} </style>
+<?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
+<?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
+<?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
+<?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
+<ul class='nav navbar-nav navbar-right'>
+  <li><?php echo html::a(getHomeRoot(zget($this->config->langsShortcuts, $this->app->getClientLang())), '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'");?></li>
+  <li class='dropdown'><?php include 'selectlang.html.php';?></li>
+</ul>
+<?php endif;?>
+<?php if($this->session->currentGroup != 'design'):?>
 <nav class='navbar navbar-fixed-top' role='navigation' id='mainNavbar'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#mainNavbarCollapse'>
@@ -60,12 +72,6 @@
     </button>
   </div>
   <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
-    <?php if($this->session->currentGroup == 'design'):?>
-    <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
-    <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
-    <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
-    <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
-    <?php endif;?>
     <?php echo $mainMenu;?>
     <ul class='nav navbar-nav navbar-right'>
       <li><?php echo html::a(getHomeRoot(zget($this->config->langsShortcuts, $this->app->getClientLang())), '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'");?></li>
@@ -73,6 +79,7 @@
     </ul>
   </div>
 </nav>
+<?php endif;?>
 <div class="clearfix row-main">
   <?php if($this->session->currentGroup == 'home' and strpos('forum,reply', $this->moduleName) !== false and $this->methodName == 'admin'):?>
   <div class='col-md-12'>
