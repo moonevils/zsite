@@ -48,7 +48,7 @@
 
       $themeImages = array();
       ?>
-      <div class="col-theme col-md-2">
+      <div class="col-lg-1_5 col-md-3 col-sm-6">
         <div class="card theme">
           <div class='media-wrapper theme-img'>
             <?php if(!empty($theme->images)):?>
