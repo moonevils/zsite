@@ -36,6 +36,7 @@ $lang->ui->execInfo        = "运行信息";
 $lang->ui->templateName    = "模板";
 $lang->ui->currentTheme    = '当前主题';
 $lang->ui->internalTheme   = '内置主题';
+$lang->ui->uploadPackage   = '上传主题包';
 $lang->ui->uploadTheme     = '导入主题';
 $lang->ui->installTheme    = '导入主题';
 $lang->ui->importedBlocks  = '导入区块';
@@ -88,13 +89,13 @@ $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
 $lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i> 移动";
 
-$lang->ui->productViewList[1] = '显示'; 
-$lang->ui->productViewList[0] = '不显示'; 
+$lang->ui->productViewList[1] = '显示';
+$lang->ui->productViewList[0] = '不显示';
 
-$lang->ui->QRCodeList[1] = '显示'; 
-$lang->ui->QRCodeList[0] = '不显示'; 
+$lang->ui->QRCodeList[1] = '显示';
+$lang->ui->QRCodeList[0] = '不显示';
 
-$lang->ui->execInfoOptions['show'] = '显示'; 
+$lang->ui->execInfoOptions['show'] = '显示';
 $lang->ui->execInfoOptions['hide'] = '不显示';
 
 $lang->ui->logoList['current'] = '当前主题';

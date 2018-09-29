@@ -49,9 +49,9 @@ class ui extends control
 
     /**
      * Edit template files.
-     * 
-     * @param  string $module 
-     * @param  string $file 
+     *
+     * @param  string $module
+     * @param  string $file
      * @access public
      * @return void
      */
@@ -84,7 +84,7 @@ class ui extends control
 
     /**
      * Manage component. Such as logo, slide and setting.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -207,7 +207,7 @@ class ui extends control
         {
             $setNameResult = false;
             if(!empty($_POST['name'])) $setNameResult = $this->loadModel('setting')->setItem('system.common.site.name', $this->post->name);
-            
+
             if(isset($_FILES['logo']))    $logoReturn    = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
             if(isset($_FILES['favicon'])) $faviconReturn = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
 
@@ -271,7 +271,7 @@ class ui extends control
                 if(!file_exists($fontPath))
                 {
                     if(!is_writable($fontRoot)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->unWritable));
-                    if(!copy($this->config->cdn->host . 'fonts/wqy-zenhei.ttc', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload)); 
+                    if(!copy($this->config->cdn->host . 'fonts/wqy-zenhei.ttc', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload));
                 }
             }
 
@@ -284,7 +284,7 @@ class ui extends control
             if(!$_POST['product']['namePosition']) $_POST['product']['namePosition'] = 'left';
             $result = $this->loadModel('setting')->setItems('system.product', $this->post->product);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-                
+
             $thumbs = helper::jsonEncode($this->post->thumbs);
             $result = $this->loadModel('setting')->setItem('system.common.file.thumbs', $thumbs);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
@@ -360,7 +360,7 @@ class ui extends control
     public function uploadTheme()
     {
         $this->app->loadLang('file');
-        
+
         set_time_limit(0);
         $canManage = array('result' => 'success');
         if(!$this->loadModel('guarder')->verify()) $canManage = $this->loadModel('common')->verifyAdmin();
@@ -378,7 +378,7 @@ class ui extends control
             $packagePath = $this->app->getTmpRoot() . "package";
             if(!is_dir($packagePath)) mkdir($packagePath, 0777, true);
             if(!is_writeable($packagePath)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->packagePathUnwriteable, $packagePath)));
-            $packageFile = $this->app->getTmpRoot() . "package/$fileName"; 
+            $packageFile = $this->app->getTmpRoot() . "package/$fileName";
             if(file_exists($packageFile)) @unlink($packageFile);
             $result = move_uploaded_file($tmpName, $packageFile);
 
@@ -386,13 +386,13 @@ class ui extends control
             $this->app->loadLang('package');
             $this->send(array('result' => 'success', 'message' => $this->lang->package->successUploadedPackage, 'locate' => $link));
         }
-        
+
         $this->view->files          = array();
         $this->view->showSetPrimary = false;
-        $this->view->objectType     = 'themePackage'; 
-        $this->view->objectID       = 'theme'; 
+        $this->view->objectType     = 'themePackage';
+        $this->view->objectID       = 'theme';
         $this->view->canManage      = $canManage;
-        $this->view->title          = $this->lang->ui->uploadTheme;
+        $this->view->title          = $this->lang->ui->uploadPackage;
         $this->display();
     }
 
@@ -412,17 +412,17 @@ class ui extends control
 
         $this->view->error = '';
         $this->view->title = $this->lang->ui->installTheme;
-        
+
         if($type == 'full')
         {
             $backup = $this->loadModel('backup')->backupAll();
             if($backup['result'] != 'success')
             {
-                $this->view->error = $backup['message'];       
+                $this->view->error = $backup['message'];
                 die($this->display());
             }
         }
-        
+
         /* Ignore merge blocks before blocks imported. */
         $this->view->blocksMerged = true;
 
@@ -444,7 +444,7 @@ class ui extends control
         foreach($licenseFiles as $licenseFile)
         {
             if($licenseFile['folder']) continue;
-            if(strpos($licenseFile['filename'], '.txt') === false) 
+            if(strpos($licenseFile['filename'], '.txt') === false)
             {
                 $zendEncrypt = true;
                 break;
@@ -546,10 +546,10 @@ class ui extends control
 
     /**
      * Import full site.
-     * 
-     * @param  string    $package 
-     * @param  string    $downLink 
-     * @param  string    $md5 
+     *
+     * @param  string    $package
+     * @param  string    $downLink
+     * @param  string    $md5
      * @access public
      * @return void
      */
@@ -689,12 +689,12 @@ class ui extends control
 
     /**
      * Theme store page.
-     * 
-     * @param  string $industry 
-     * @param  string $color 
-     * @param  int    $recTotal 
-     * @param  int    $recPerPage 
-     * @param  int    $pageID 
+     *
+     * @param  string $industry
+     * @param  string $color
+     * @param  int    $recTotal
+     * @param  int    $recPerPage
+     * @param  int    $pageID
      * @access public
      * @return void
      */
@@ -702,9 +702,9 @@ class ui extends control
     {
         $this->loadModel('package');
         $pager = null;
-    
+
         $installedThemes = $this->ui->getInstalledThemes();
-        
+
         $codes = array();
         if($type == 'installed')
         {
@@ -741,7 +741,7 @@ class ui extends control
 
     /**
      * Browse theme page.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -755,10 +755,10 @@ class ui extends control
 
     /**
      * Get encrypt css and js.
-     * 
-     * @param  int    $type 
-     * @param  int    $template 
-     * @param  int    $theme 
+     *
+     * @param  int    $type
+     * @param  int    $template
+     * @param  int    $theme
      * @access public
      * @return void
      */
@@ -782,7 +782,7 @@ class ui extends control
 
         if($type == 'js')
         {
-            header('Content-type: text/javascript');  
+            header('Content-type: text/javascript');
             $jsFun = "get{$theme}js";
             if(!function_exists($jsFun)) die('');
             $js = $jsFun();
@@ -793,8 +793,8 @@ class ui extends control
 
     /**
      * Set js and css code for pages.
-     * 
-     * @param  string $page 
+     *
+     * @param  string $page
      * @access public
      * @return void
      */
@@ -837,8 +837,8 @@ class ui extends control
 
     /**
      * Admin effect page.
-     * 
-     * @param  int    $pageID 
+     *
+     * @param  int    $pageID
      * @access public
      * @return void
      */
@@ -847,7 +847,7 @@ class ui extends control
         $community = $this->loadModel('admin')->getRegisterInfo();
         if(!$community)
         {
-            $this->lang->redirecting = $this->lang->effect->redirecting; 
+            $this->lang->redirecting = $this->lang->effect->redirecting;
 
             $this->view->reason = $this->lang->effect->bindCommunity;
             $this->view->locate = helper::createLink('admin', 'register');
@@ -877,8 +877,8 @@ class ui extends control
 
     /**
      * Import one effect.
-     * 
-     * @param  int    $id 
+     *
+     * @param  int    $id
      * @access public
      * @return void
      */
