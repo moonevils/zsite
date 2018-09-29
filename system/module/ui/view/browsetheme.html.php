@@ -2,7 +2,7 @@
   <?php foreach($themes as $theme):?>
   <?php $link      = inlink('installtheme', "package={$theme->name}&downLink=&md5=");?>
   <?php $installed = (isset($installedThemes['default'][$theme->name]) or isset($installedThemes['mobile'][$theme->name]));?>
-  <div class='col-md-3'>
+  <div class='col-lg-1_5 col-md-3 col-sm-6'>
     <div class='card'>
       <div class='card-heading' title='<?php echo $theme->name . '.zip'?>'>
         <h5 class='text-ellipsis'><?php echo $theme->name . '.zip';?></h5>

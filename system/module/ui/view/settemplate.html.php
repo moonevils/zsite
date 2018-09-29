@@ -48,7 +48,7 @@
       <?php $url = $this->createLink('ui', 'setTemplate', "template={$template['code']}&theme={$code}&custom=1");?>
       <?php $templateRoot = $webRoot . 'template/' . $template['code'] . '/';?>
       <?php $isCurrent =  $currentTheme === $code; ?>
-      <div class='col-theme'>
+      <div class='col-lg-1_5 col-md-3 col-sm-6'>
         <div class='card theme <?php if($isCurrent) echo 'current';?>' data-url='<?php echo $url?>'>
           <i class='icon-ok icon'></i>
           <?php echo html::a($url, html::image($webRoot . 'theme/' . $template['code'] . '/' . $code . '/preview.png'), "class='media-wrapper theme-img' data-url=$url");?>
