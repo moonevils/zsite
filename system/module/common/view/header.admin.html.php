@@ -4,9 +4,9 @@
 <nav id='primaryNavbar'>
   <ul class='nav nav-stacked'>
   <?php
-  if(!commonModel::isAvailable('shop')) 
+  if(!commonModel::isAvailable('shop'))
   {
-    if(!commonModel::isAvailable('product'))  
+    if(!commonModel::isAvailable('product'))
     {
       unset($lang->groups->shop);
     }
@@ -23,7 +23,7 @@
   {
       $print = false;
       $groupMenus = explode(',', $this->config->menus->$menuGroup);
-      
+
       list($module, $method, $params) = explode('|', $groupSetting['link']);
       $groupClass = $menuGroup == $this->session->currentGroup ? 'active' : '';
       if($menuGroup == 'design' and $this->session->currentGroup == 'design') $groupClass = 'design';
@@ -38,7 +38,7 @@
               $active = '';
               list($title, $module, $method) = explode('|', $submenu['link']);
               if((strtolower($method) == strtolower($this->app->methodName) && strtolower($module == $this->app->moduleName)) || (isset($submenu['alias']) && strpos($submenu['alias'], strtolower($this->app->methodName)) !== false)) $active = 'active';
-              
+
               echo "<li class='active'>";
               echo html::a(helper::createLink($module, $method), $title, "class=$active");
               echo "</li>";
@@ -135,15 +135,10 @@ $(document).ready(function()
         bootbox.confirm('<?php echo $lang->ui->openMobileTemplate ?>', function(result)
         {
             if(result) location.href = url;
-            return true; 
+            return true;
         });
         return false;
     });
 });
-</script>  
-<?php endif;?>
-<?php if($this->session->currentGroup == 'design'):?>
-<style>
-body{background-color: #efefef;}
-</style>
+</script>
 <?php endif;?>
