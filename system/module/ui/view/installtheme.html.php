@@ -82,7 +82,7 @@
   <div><?php echo html::submitButton() . html::hidden('package', $package)?></div>
 </form>
 <?php elseif($error):?>
-  <div class='alert alert-default'>
+  <div class='alert alert-default with-icon'>
     <i class='icon-remove-sign'></i>
     <div class='content'>
       <h4><?php sprintf($lang->package->installFailed, 'install');?></h4>

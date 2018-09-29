@@ -44,6 +44,7 @@ css::import($jsRoot . 'uploader/min.css');
 #uploader {margin-bottom: 0}
 .file-label-id {display: inline-block; padding: 0 2px; border: 1px solid #ccc; line-height: 14px; font-size: 12px; color: #999; margin-right: 5px;}
 #typeCheckBox {margin-bottom: 5px;}
+#uploader {min-height: 75px}
 </style>
 <script>
 if(!$.zui.strCode)
@@ -193,7 +194,7 @@ $('#uploader').uploader(
     {
         this.plupload.setOption(
         {
-            'multipart_params' : 
+            'multipart_params' :
             {
               label: file.ext ? file.name.substr(0, file.name.length - file.ext.length - 1) : file.name,
               uuid: file.id,
