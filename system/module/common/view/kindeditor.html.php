@@ -51,11 +51,11 @@ var full =
 
 $.extend(KindEditor, {getOptions: function(K, editorID)
 {
-    return { 
+    return {
         width:'100%',
         items:editorTool,
         cssPath:[v.webRoot + 'zui/css/min.css'],
-        cssData: '.article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial;} .article-content table.ke-zeroborder.table-kindeditor td {border: 1px dotted #AAA;}',
+        cssData: '.article-content, .article-content table td, .article-content table th {line-height: 1.4285714286} .article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial; padding: 5px 8px;} .article-content table.ke-zeroborder.table-kindeditor td {border: 1px dotted #AAA;}',
         bodyClass:'article-content',
         urlType:'absolute',
         uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
@@ -136,6 +136,9 @@ $.extend(KindEditor, {getOptions: function(K, editorID)
                 });
             }
             /* End */
+
+            // Disable spellcheck
+            cmd.doc.documentElement.setAttribute('spellcheck', 'false');
         },
         afterTab: function(id)
         {
@@ -160,7 +163,7 @@ function initKindeditor(afterInit)
         if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
         editorTool = eval(v.editors.tools);
         var K = KindEditor, $editor = $('#' + editorID);
-        
+
         keEditor = K.create('#' + editorID, K.getOptions(K, editorID));
 
         try
