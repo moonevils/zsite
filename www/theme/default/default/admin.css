@@ -777,7 +777,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 
 #mainMenu {text-align:left; background:#eee; margin: -20px -10px 20px; box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.04), 0px 7px 10px 1px rgba(0, 0, 0, 0.02), 0px 2px 16px 1px rgba(0, 0, 0, 0.02); text-align: center; height: 41px; border-bottom: 1px solid #d5d5d5;}
 #mainMenu > .container {position: relative;}
-@media (min-width: 1200px) {#mainMenu > .container, #main.container {max-width: 1500px;}}
+@media (min-width: 1200px) {#mainMenu > .container, #main.container {max-width: 98%;}}
 #navMenu {display: inline-block; font-size: 15px;}
 #navMenu > li > a {padding: 10px 60px; line-height: 20px;}
 #navMenu > li.active > a:before {left: 60px; right: 60px;}

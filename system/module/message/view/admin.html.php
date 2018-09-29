@@ -45,11 +45,10 @@
         {
             echo '<br />';
             commonModel::printLink('message', 'pass', "messageID=$message->id&type=single", $lang->message->pass, "class='pass'");
-            commonModel::printLink('message', 'pass', "messageID=$message->id&type=pre", $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
-            echo '<br />';
+        if($message->id != $maxNewId) commonModel::printLink('message', 'pass', "messageID=$message->id&type=pre&maxNewId=$maxNewId", $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
         }
         commonModel::printLink('message', 'delete', "messageID=$message->id&type=single&status=$status", $lang->message->delete, "class='deleter'");
-        if($status == 0) commonModel::printLink('message', 'delete', "messageID=$message->id&type=pre&status=$status", $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
+        if($status == 0 and $message->id != $maxNewId) commonModel::printLink('message', 'delete', "messageID=$message->id&type=pre&maxNewId=$maxNewId", $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
         ?>
       </div>
     </div>
