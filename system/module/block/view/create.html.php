@@ -244,7 +244,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
       </div>
       <?php endif;?>
     </div>
-    <div class='form-footer'>
+        <div class='form-footer'<?php if($type == 'tabs'){?> style="margin-bottom:150px" <?php }?>>
       <?php echo html::submitButton();?>
       <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
       <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
