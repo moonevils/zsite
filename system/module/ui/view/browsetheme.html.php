@@ -5,22 +5,20 @@
   <div class='col-md-3'>
     <div class='panel theme-panel'>
       <div class='panel-body'>
-      <div class='theme-title' title="<?php echo $theme->name . '.zip'?>">
+        <div class='theme-title' title="<?php echo $theme->name . '.zip'?>">
           <?php echo $theme->name . ".zip";?>
         </div>
-        <div class='text-muted'>
-          <i class='span-time'><?php echo "<i class='icon icon-time'> </i>" . $theme->time;?></i>
-          <i class='span-size'><?php echo "<i class='icon icon-file'> </i>" . helper::formatKB($theme->size / 1024);?></i>
-        </div>
       </div>
-      <p class='text-right p-actions'>
+      <div class='actions'>
+        <i class='span-time'><?php echo "<i class='icon icon-time'> </i>" . $theme->time;?></i>
+        <i class='span-size'><?php echo "<i class='icon icon-file'> </i>" . helper::formatKB($theme->size / 1024);?></i>
         <?php if($installed) echo "<i class='text-muted icon icon-check'>{$lang->ui->installed}</i>";?>
         <?php if(!$installed):?>
         <?php echo html::a($link . '&type=theme', $lang->ui->importTypes->theme, "class='btn btn-xs btn-install' data-toggle='modal'");?>
         <?php echo html::a($link . "&type=full",  $lang->ui->importTypes->full, "class='btn btn-xs btn-install btn-full'");?>
         <?php echo html::a($link . "&type=full",  '', "class='hide' data-toggle='modal'");?>
         <?php endif;?>
-      </p>
+      </div>
     </div>
   </div>
   <?php endforeach;?>
@@ -38,6 +36,7 @@
 .p-actions{margin-right:10px; padding-left:12px;}
 .p-actions > i {font-size:13px; padding:4px; font-weight:bold;}
 .panel-actions{margin-right: 0px}
+.panel .actions{margin-top: 40px; background-color: #efefef; border-top: 1px solid #ccc;}
 </style>
 <script>
 $().ready(function()
