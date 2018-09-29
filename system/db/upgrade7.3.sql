@@ -17,3 +17,16 @@ CREATE TABLE IF NOT EXISTS `eps_bearlog` (
   KEY `time` (`time`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+ALTER TABLE `eps_article`
+CHANGE `views` `views` int(11) unsigned NOT NULL DEFAULT '0' AFTER `submission`,
+COMMENT='';
+ALTER TABLE `eps_book`
+CHANGE `views` `views` int(11) unsigned NOT NULL DEFAULT '0' AFTER `status`,
+COMMENT='';
+ALTER TABLE `eps_product`
+CHANGE `views` `views` int(11) unsigned NOT NULL DEFAULT '0' AFTER `status`,
+COMMENT='';
+ALTER TABLE `eps_thread`
+CHANGE `views` `views` int(11) unsigned NOT NULL DEFAULT '0' AFTER `readonly`,
+COMMENT='';
