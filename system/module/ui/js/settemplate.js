@@ -51,16 +51,12 @@ $(document).ready(function()
         {
             if(response.result == 'success')
             {
-                new $.zui.Messager(response.message, {type: 'success', placement: 'top', time: 2000}).show();
+                $.zui.messager.show(response.message, {type: 'success', placement: 'top', time: 2000});
 
                 var $themes = $this.closest('.themes');
-                $themes.attr('data-theme', $this.data('theme')).find('.theme-name').find('#custom').remove();
                 $themes.attr('data-theme', $this.data('theme'))
                        .find('.theme.current').removeClass('current');
                 $this.addClass('current');
-
-                url = createLink('visual', 'design');
-                $this.find('.theme-name').append("<span id='custom'><a href=" + url + ">" + '<i class="icon icon-cog"> </i>' + v.custom + "</a></span>");
 
                 var $menu = $('#menu');
                 $menu.find('.menu-theme-img').attr('src', $this.find('.theme-img img').attr('src'));

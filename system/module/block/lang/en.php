@@ -69,6 +69,7 @@ $lang->block->saveLayoutAs    = 'Copy Layout %s';
 $lang->block->defaultPlan     = 'Default';
 $lang->block->image           = 'Image';
 $lang->block->uploadImage     = 'Upload image';
+$lang->block->all             = 'All Blocks';
 
 $lang->block->layout            = 'Layout';
 $lang->block->logoPosition      = 'Logo';

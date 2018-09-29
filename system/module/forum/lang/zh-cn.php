@@ -31,6 +31,7 @@ $lang->forum->bindWechat = '发帖绑定微信';
 
 $lang->forum->updateDesc    = '该更新操作会重新计算每个版块的发帖数据。';
 $lang->forum->successUpdate = '更新数据成功';
+$lang->forum->bindWechatTip = '发帖功能设置了绑定微信的限制，请先绑定微信会员。';
 
 $lang->forum->indexModeOptions = array();
 $lang->forum->indexModeOptions['board']  = '版块浏览';

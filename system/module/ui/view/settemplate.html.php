@@ -14,39 +14,36 @@
 <?php js::set('custom', $lang->ui->custom);?>
 <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
 <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
-<div id='mainMenu' class='clearfix'>
-  <div id='navMenu'>
-    <?php echo html::a('#internalSection', $lang->ui->files->default->user['thread'], "data-toggle='tab' class='active'");?>
-    <?php echo html::a(inlink('themestore'), $lang->ui->themeStore);?>
-  </div>
-  <div id='deviceMenu' class='btn-toolbar pull-right'>
-    <?php
-    echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
-    echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
-    ?>
+<div id='mainMenu'>
+  <div class='container'>
+    <ul class='nav nav-underline' id='navMenu'>
+      <li class='active'><?php echo html::a(inlink('setTemplate'), $lang->ui->files->default->user['thread']);?></li>
+      <li><?php echo html::a(inlink('themestore'), $lang->ui->themeStore);?></li>
+    </ul>
+    <ul class='nav nav-pills' id='deviceMenu'>
+      <li<?php if($this->session->device != 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), '<i class="icon icon-desktop"></i> ' . $lang->ui->clientDesktop);?></li>
+      <li<?php if($this->session->device == 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), '<i class="icon icon-tablet"></i> ' . $lang->ui->clientMobile);?></li>
+    </ul>
   </div>
 </div>
-<div class='panel' id='mainPanel'>
-    <div class='panel-heading clearfix'>
-      <ul class='nav nav-tabs pull-left' id='typeNav'>
-        <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->installedThemes, "data-toggle='tab' class='active'");?></li>
-        <?php if($app->clientLang != 'en'):?>
-        <li data-type='internal'><?php echo html::a('#packageSection', $lang->ui->installTheme, "data-toggle='tab'");?></li>
-        <?php endif;?>
-      </ul>
-      <div class='panel-actions'>
-        <form method='post' class='search-form'>
-          <div class='input-control search-box search-box-circle has-icon-left has-icon-right'>
-            <input id='searchTheme' type='search' class='form-control search-input' name='searchTheme' value='<?php echo $this->post->searchTheme;?>' placeholder='<?php echo $lang->ui->searchTheme;?>'>
-            <label for='inputSearchTheme' class='input-control-icon-left search-icon'><i class='icon icon-search'></i></label>
-            <a href='javascript:;' class='input-control-icon-right search-clear-btn'><i class='icon icon-remove'></i></a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </form>
-  <div class='panel-body tab-content'>
+<div id='main' class='container'>
+  <div id='mainHeader'>
+    <ul class='nav nav-dots pull-left' id='typeNav'>
+      <li data-type='internal' class='active'><?php echo html::a('#internalSection', $lang->ui->installedThemes, "data-toggle='tab' class='active'");?></li>
+      <?php if($app->clientLang != 'en'):?>
+      <li data-type='internal'><?php echo html::a('#packageSection', $lang->ui->installTheme, "data-toggle='tab'");?></li>
+      <?php endif;?>
+    </ul>
+  </div>
+  <div id='mainContent' class='tab-content'>
     <section class='cards cards-borderless themes tab-pane active' id='internalSection'>
+      <form method='post' class='actions search-form'>
+        <div class='input-control search-box search-box-circle has-icon-left has-icon-right'>
+          <input id='searchTheme' type='search' class='form-control search-input' name='searchTheme' value='<?php echo $this->post->searchTheme;?>' placeholder='<?php echo $lang->ui->searchTheme;?>'>
+          <label for='inputSearchTheme' class='input-control-icon-left search-icon'><i class='icon icon-search'></i></label>
+          <a href='javascript:;' class='input-control-icon-right search-clear-btn'><i class='icon icon-remove'></i></a>
+        </div>
+      </form>
       <?php foreach($template['themes'] as $code => $theme):?>
       <?php $url = $this->createLink('ui', 'setTemplate', "template={$template['code']}&theme={$code}&custom=1");?>
       <?php $templateRoot = $webRoot . 'template/' . $template['code'] . '/';?>
@@ -55,11 +52,11 @@
         <div class='card theme <?php if($isCurrent) echo 'current';?>' data-url='<?php echo $url?>'>
           <i class='icon-ok icon'></i>
           <?php echo html::a($url, html::image($webRoot . 'theme/' . $template['code'] . '/' . $code . '/preview.png'), "class='media-wrapper theme-img' data-url=$url");?>
-          <div class='text-center theme-name text-ellipsis'>
-            <span id='currentTheme'><?php echo $theme;?></span>
-            <span id='custom'><?php if($isCurrent) echo html::a($this->createLink('visual', 'design'), '<i class="icon icon-cog"> </i>' . $lang->ui->custom)?></span>
+          <div class='theme-name text-ellipsis'>
+            <?php echo $theme;?>
           </div>
           <div class='actions'>
+            <?php echo html::a($this->createLink('visual', 'design'), '<i class="icon icon-cog"> </i>' . $lang->ui->custom, 'class="btn btn-success btn-mini btn-custom"')?>
             <?php if(!in_array("$currentTemplate.$code", $this->config->ui->systemThemes)) commonModel::printLink('ui', 'deleteTheme', "template={$currentTemplate}&theme={$code}", "<span class='icon-trash'></span>", "title='{$lang->delete}' class='deleter btn btn-link btn-mini' data-type='ajax' data-backdrop='true'") ?>
           </div>
         </div>

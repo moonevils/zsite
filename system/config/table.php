@@ -44,3 +44,4 @@ define('TABLE_OPERATIONLOG',   $config->db->prefix . 'operationlog');
 define('TABLE_WIDGET',         $config->db->prefix . 'widget');
 define('TABLE_ACTION',         $config->db->prefix . 'action');
 define('TABLE_HISTORY',        $config->db->prefix . 'history');
+define('TABLE_BEARLOG',        $config->db->prefix . 'bearlog');

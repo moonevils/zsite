@@ -11,21 +11,21 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div id='mainMenu' class='clearfix'>
-  <div id='navMenu'>
-    <?php echo html::a(inlink('setTemplate'), $lang->ui->files->default->user['thread']);?>
-    <?php echo html::a(inlink('themestore'), $lang->ui->themeStore, "class='active'");?>
-  </div>
-  <div id='deviceMenu' class='btn-toolbar pull-right'>
-    <?php
-    echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
-    echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
-    ?>
+<div id='mainMenu'>
+  <div class='container'>
+    <ul class='nav nav-underline' id='navMenu'>
+      <li><?php echo html::a(inlink('setTemplate'), $lang->ui->files->default->user['thread']);?></li>
+      <li class='active'><?php echo html::a(inlink('themestore'), $lang->ui->themeStore);?></li>
+    </ul>
+    <ul class='nav nav-pills' id='deviceMenu'>
+      <li<?php if($this->session->device != 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), '<i class="icon icon-desktop"></i> ' . $lang->ui->clientDesktop);?></li>
+      <li<?php if($this->session->device == 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), '<i class="icon icon-tablet"></i> ' . $lang->ui->clientMobile);?></li>
+    </ul>
   </div>
 </div>
-<div class='panel' id='mainPanel'>
-  <div class='panel-heading'>
-    <ul id='typeNav' class='nav nav-tabs'>
+<div id='main' class='container'>
+  <div id='mainHeader'>
+    <ul class='nav nav-dots' id='typeNav'>
       <li data-type='internal' <?php echo ($type == 'byindustry' and $param == 'all') ? "class='active'" : '';?>><?php echo html::a(inlink('themestore'), $lang->ui->theme->all, "id='theme-all'");?></li>
       <?php foreach($lang->ui->theme->searchLabels as $code => $label):?>
       <li data-type='internal' <?php echo $type == $code ? "class='active'" : '';?>>
@@ -33,16 +33,16 @@
       </li>
       <?php endforeach;?>
       <li data-type='internal' <?php echo ($type == 'byindustry' and $param != 'all') ? "class='active'" : '';?>>
-        <?php echo html::a('javascript:;', "<i class='icon icon-cog'></i> " . $lang->ui->byIndustry, "id='byindustry'");?>
+        <?php echo html::a('javascript:;', "<i class='icon icon-angle-down'></i> " . $lang->ui->byIndustry, "id='byindustry'");?>
       </li>
-    </ul> 
-  </div>
-  <div id='mainArea'>
+    </ul>
     <div id='industryBox' class='hide'><?php echo $industryTree;?></div>
+  </div>
+  <div id='mainContent'>
     <?php if($themes):?>
     <div id='storeThemes' class='cards cards-borderless themes row' data-param='<?php echo $param ?>'>
       <?php foreach($themes as $theme):?>
-      <?php 
+      <?php
       $currentRelease = $theme->currentRelease;
       $latestRelease  = isset($theme->latestRelease) ? $theme->latestRelease : '';
 
@@ -56,17 +56,16 @@
             <?php endif;?>
           </div>
           <div class='theme-info'>
+            <div class='theme-desc text-ellipsis'>
+              <?php echo html::a($theme->viewLink, $theme->name, "target='_blank' title='{$theme->name}' class='theme-name'");?>
+              <div class='pull-right text-muted'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?> &nbsp; <i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></div>
+            </div>
             <div class='theme-price'>
               <?php if($theme->latestRelease->lifePrice):?>
-              <?php echo "<strong class='price'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
+              <?php echo "<strong class='price text-info'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
               <?php elseif($theme->latestRelease->score):?>
-                  <?php echo "<strong class='price'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
+                  <?php echo "<strong class='price text-info'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
               <?php endif;?>
-              <span class='pull-right'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
-              <span class='pull-right'><i class='icon icon-download-alt'></i> <?php echo $theme->downloads?></span>
-            </div>
-            <div class='theme-desc'>
-              <?php echo html::a($theme->viewLink, $theme->name, "target='_blank' title='{$theme->name}'");?>
               <div class="actions">
                   <?php
                   if($theme->type != 'computer' and $theme->type != 'mobile' and isset($installeds[$theme->code]))
@@ -97,7 +96,7 @@
               <div class='modal-header'>
                 <strong><?php echo $theme->name . "($currentRelease->releaseVersion)";?></strong>
                 <div class='pull-right'>
-                  <span class='text-muted'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp; 
+                  <span class='text-muted'><i class='icon icon-thumbs-o-up'></i> <?php echo $theme->stars?></span> &nbsp;
                   <span class='text-muted'><i class='icon icon-download-alt'></i> <?php echo $theme->stars?></span>
                 </div>
               </div>
@@ -107,7 +106,7 @@
                 <?php
                 echo "{$lang->package->author}:     {$theme->author} ";
                 echo "{$lang->package->compatible}: {$lang->package->compatibleList[$currentRelease->compatible]} ";
-                
+
                 echo " {$lang->package->depends}: ";
                 if(!empty($currentRelease->depends))
                 {
@@ -166,22 +165,26 @@
     <div class='clearfix'>
       <?php $pager->show('right', 'lite')?>
     </div>
+    <?php endif; ?>
+    <?php endif;?>
   </div>
-  <?php endif; ?>
-  <?php else:?>
-  <div class='panel-body'>
-  </div>
-  <?php endif;?>
 </div>
 <script>
 $(function()
 {
+    var $industryBox = $('#industryBox');
+    var toggleIndustryBox = function(toggle)
+    {
+      if (toggle === undefined) toggle = $industryBox.hasClass('hide');
+      $industryBox.toggleClass('hide', !toggle);
+      $('#byindustry').toggleClass('open', !!toggle);
+    }
     <?php if($type == 'byindustry' and $param != 'all'):?>
-    $('#industryBox').toggleClass('hide');
+    toggleIndustryBox(true);
     <?php endif;?>
     $('#byindustry').click(function()
     {
-        $('#industryBox').toggleClass('hide');
+      toggleIndustryBox();
     })
 })
 </script>

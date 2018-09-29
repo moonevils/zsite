@@ -82,6 +82,7 @@
               <li><?php commonModel::printLink('product', 'delete', "productID=$product->id", $lang->delete, "class='deleter'");?></li>
               <li><?php commonModel::printLink('product', 'setcss', "productID=$product->id", $lang->product->css, "data-toggle='modal'");?></li>
               <li><?php commonModel::printLink('product', 'setjs',  "productID=$product->id", $lang->product->js, "data-toggle='modal'");?></li>
+              <li><?php commonmodel::printlink('bear', 'submit', "objectType=product&objectID={$product->id}", $lang->product->forward2Baidu, "data-toggle='modal'");?></li>
             </ul>
           </span>
         </td>

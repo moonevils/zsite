@@ -1,35 +1,33 @@
-<div id="mainArea" class='row'>
+<div id="mainArea" class='cards'>
   <?php foreach($themes as $theme):?>
   <?php $link      = inlink('installtheme', "package={$theme->name}&downLink=&md5=");?>
   <?php $installed = (isset($installedThemes['default'][$theme->name]) or isset($installedThemes['mobile'][$theme->name]));?>
   <div class='col-md-3'>
-    <div class='panel theme-panel'>
-      <div class='panel-body'>
-      <div class='theme-title' title="<?php echo $theme->name . '.zip'?>">
-          <?php echo $theme->name . ".zip";?>
-        </div>
-        <div class='text-muted'>
-          <i class='span-time'><?php echo "<i class='icon icon-time'> </i>" . $theme->time;?></i>
-          <i class='span-size'><?php echo "<i class='icon icon-file'> </i>" . helper::formatKB($theme->size / 1024);?></i>
-        </div>
+    <div class='card'>
+      <div class='card-heading' title='<?php echo $theme->name . '.zip'?>'>
+        <h5 class='text-ellipsis'><?php echo $theme->name . '.zip';?></h5>
       </div>
-      <p class='text-right p-actions'>
-        <?php if($installed) echo "<i class='text-muted icon icon-check'>{$lang->ui->installed}</i>";?>
+      <div class='card-content text-muted small'>
+        <span class='span-time'><?php echo "<i class='icon icon-time'> </i>" . $theme->time;?></span> &nbsp;
+        <span class='span-size'><?php echo "<i class='icon icon-file'> </i>" . helper::formatKB($theme->size / 1024);?></span>
+      </div>
+      <div class='card-actions'>
+        <?php if($installed) echo "<span class='text-success'><i class='icon icon-ok-sign'></i> {$lang->ui->theme->installed}</span>";?>
         <?php if(!$installed):?>
-        <?php echo html::a($link . '&type=theme', $lang->ui->importTypes->theme, "class='btn btn-xs btn-install' data-toggle='modal'");?>
+        <?php echo html::a($link . '&type=theme', $lang->ui->importTypes->theme, "class='btn btn-xs btn-install' data-toggle='modal'");?> &nbsp;
         <?php echo html::a($link . "&type=full",  $lang->ui->importTypes->full, "class='btn btn-xs btn-install btn-full'");?>
         <?php echo html::a($link . "&type=full",  '', "class='hide' data-toggle='modal'");?>
         <?php endif;?>
-      </p>
+      </div>
     </div>
   </div>
   <?php endforeach;?>
 </div>
-<div class='div-tip text-danger'>
-  <?php printf($lang->ui->packagePathTip, $packagePath);?>
-  <div class="panel-actions">
-    <?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadTheme . " <i class='icon icon-upload'></i>", "data-toggle='modal' class='btn btn-primary'");?>
-  </div>
+<div class='div-tip alert alert-info'>
+  <div class='content'><i class="icon icon-info-sign"></i> <?php printf($lang->ui->packagePathTip, $packagePath);?></div>
+</div>
+<div id="packageSectionActions">
+  <?php echo html::a(inlink('uploadTheme'), $lang->ui->uploadPackage . " <i class='icon icon-upload'></i>", "data-toggle='modal' class='btn btn-primary' data-position='80'");?>
 </div>
 <style>
 .theme-panel > .panel-body{padding-top:4px !important; cursor:pointer;}

@@ -90,7 +90,7 @@ js::set('visualLang', $lang->visual->js);
               <?php foreach($blocks as $block):?>
                 <?php
                 if(strpos($blockList, ",$block->type,") === false) continue;
-                if(strpos($block->type, 'code') === false) $block->content = json_decode($block->content);
+                if(strpos($block->type, 'code') === false && !is_object($block)) $block->content = json_decode($block->content);
                 $isCategoryEmpty = false;
                 ?>
                 <div class='block-item' data-type='<?php echo $block->type;?>' data-id='<?php echo $block->id;?>' data-title='<?php echo $block->title;?>'>
