@@ -2,13 +2,15 @@
 <?php js::import($jsRoot . 'zeroclipboard/zeroclipboard.min.js');?>
 <?php js::set('copySuccess', $lang->file->copySuccess);?>
 <?php js::set('noFlashTip', $lang->file->noFlashTip);?>
-<div id='mainMenu' class='clearfix'>
-  <div id='navMenu'>
-    <?php
-    echo html::a($this->createLink('ui', 'component'), $lang->ui->component);
-    echo html::a($this->createLink('ui', 'effect'), $lang->effect->common);
-    echo html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList, "class='active'");
-    ?>
+<div id='mainMenu'>
+  <div class='container'>
+    <ul class='nav nav-underline' id='navMenu'>
+      <?php
+      echo "<li>" . html::a($this->createLink('ui', 'component'), $lang->ui->component) . '</li>';
+      echo '<li>' . html::a($this->createLink('ui', 'effect'), $lang->effect->common) . '</li>';
+      echo "<li class='active'>" . html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList) . '</li>';
+      ?>  
+    </ul>
   </div>
 </div>
 <div class='panel'>
