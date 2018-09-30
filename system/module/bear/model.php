@@ -257,4 +257,14 @@ class bearModel extends model
         $record = $this->dao->select('*')->from(TABLE_BEARLOG)->where('url')->eq($url)->andWhere('status')->eq('success')->fetch();   
         return !empty($record);
     }
+
+    public function getLogs($begin, $end, $orderBy, $pager)
+    {
+        return $this->dao->select('*')->from(TABLE_BEARLOG)
+            ->where('time')->ge($begin)
+            ->andWhere('time')->le($end)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll();
+    }
 }
