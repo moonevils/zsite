@@ -12,6 +12,12 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div id='mainMenu'>
+  <div class='container'>
+    <ul class='nav nav-pills' id='deviceMenu'>
+      <li<?php if($this->session->device != 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), '<i class="icon icon-desktop"></i> ' . $lang->ui->clientDesktop);?></li>
+      <li<?php if($this->session->device == 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), '<i class="icon icon-tablet"></i> ' . $lang->ui->clientMobile);?></li>
+    </ul>
+  </div>
 </div>
 <div class='row'>
   <?php foreach($config->block->categoryList as $category => $blockList):?>

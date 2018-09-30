@@ -11,19 +11,19 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div id='mainMenu' class='clearfix'>
-  <div id='navMenu'>
-    <?php
-    echo html::a($this->createLink('ui', 'component'), $lang->ui->component, "class='active'");
-    echo html::a($this->createLink('ui', 'effect'), $lang->effect->common);
-    echo html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList);
-    ?>
-  </div>
-  <div id='deviceMenu' class='btn-toolbar pull-right'>
-    <?php
-    echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
-    echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
-    ?>
+<div id='mainMenu'>
+  <div class='container'>
+    <ul class='nav nav-underline' id='navMenu'>
+      <?php
+      echo "<li class='active'>" . html::a($this->createLink('ui', 'component'), $lang->ui->component, "class='active'") . '</li>';
+      echo '<li>' . html::a($this->createLink('ui', 'effect'), $lang->effect->common) . '</li>';
+      echo '<li>' . html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList) . '</li>';
+      ?>
+    </ul>
+    <ul class='nav nav-pills' id='deviceMenu'>
+      <li<?php if($this->session->device != 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), '<i class="icon icon-desktop"></i> ' . $lang->ui->clientDesktop);?></li>
+      <li<?php if($this->session->device == 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), '<i class="icon icon-tablet"></i> ' . $lang->ui->clientMobile);?></li>
+    </ul>
   </div>
 </div>
 <div id='setLogo' class='component'>
