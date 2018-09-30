@@ -25,15 +25,14 @@ $editorLang  = isset($editorLangs[$app->getClientLang()]) ? $editorLangs[$app->g
 js::set('editorLang', $editorLang);
 
 /* Import css and js for kindeditor. */
-css::import($jsRoot . 'kindeditor/themes/default/default.css');
 js::import($jsRoot  . 'kindeditor/kindeditor-min.js');
 js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js');
+js::import($jsRoot  . 'kindeditor/plugins/table/tablex.js');
 
 /* set uid for upload. */
 $uid = uniqid('');
 js::set('uid', $uid);
 ?>
-
 <script>
 var simple =
 [ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|',
@@ -45,15 +44,16 @@ var full =
 'justifyleft', 'justifycenter', 'justifyright', '|',
 'emoticons', 'image', '|', 'link', 'unlink', 'anchor', 'flash', 'media', 'baidumap', '/',
 'undo', 'redo', '|', 'cut', 'copy', '|', 'plainpaste', 'wordpaste', '|', 'removeformat', 'clearhtml','quickformat', '|',
-'indent', 'outdent', 'subscript', 'superscript', 'insertorderedlist', 'insertunorderedlist', '|',
-'table', 'code', 'hr', '|',
+'indent', 'outdent', 'subscript', 'superscript', 'insertorderedlist', 'insertunorderedlist', '|', 'table', 'code', 'hr', '|',
 'fullscreen', 'source', 'about'];
+
+var editorTool = v.editors.tools === 'full' ? full : simple;
 
 $.extend(KindEditor, {getOptions: function(K, editorID)
 {
     return {
         width:'100%',
-        items:editorTool,
+        items: editorTool,
         cssPath:[v.webRoot + 'zui/css/min.css'],
         cssData: '.article-content, .article-content table td, .article-content table th {line-height: 1.4285714286} .article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial; padding: 5px 8px;} .article-content table.ke-zeroborder.table-kindeditor td {border: 1px dotted #AAA;}',
         bodyClass:'article-content',
@@ -161,10 +161,9 @@ function initKindeditor(afterInit)
     $.each(v.editors.id, function(key, editorID)
     {
         if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
-        editorTool = eval(v.editors.tools);
-        var K = KindEditor, $editor = $('#' + editorID);
 
-        keEditor = K.create('#' + editorID, K.getOptions(K, editorID));
+        var K = KindEditor, $editor = $('#' + editorID);
+        var keEditor = K.create('#' + editorID, K.getOptions(K, editorID));
 
         try
         {
