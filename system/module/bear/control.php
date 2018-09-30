@@ -83,4 +83,26 @@ class bear extends control
         $this->view->title = $this->lang->bear->submit;
         $this->display();
     }
+
+    public function log($mode = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1, $begin = '', $end = '')
+    {
+        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        $begin = $this->get->begin;
+        $end   = $this->get->end;
+        $date  = $this->loadModel('stat')->parseDate($mode, $begin, $end);
+        $begin = date('Y-m-d', strtotime($date->begin));
+        $end   = date('Y-m-d', strtotime($date->end));
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+    
+        $this->view->title   = $this->lang->bear->log;
+        $this->view->records = $this->bear->getLogs($begin, $end, $orderBy, $pager);
+        $this->view->mode    = $mode;
+        $this->view->begin   = $begin;
+        $this->view->pager   = $pager;
+        $this->view->orderBy = $orderBy;
+        $this->view->end     = $end;
+        $this->display();
+    }
 }
