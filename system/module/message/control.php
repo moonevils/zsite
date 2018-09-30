@@ -113,7 +113,9 @@ class message extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->title    = $this->lang->message->common;
-        $this->view->messages = $this->message->getList($type, $status, $pager);
+        $messages = $this->message->getList($type, $status, $pager);
+        $this->view->messages = $messages; 
+        $this->view->maxNewId = array_shift($messages)->id;
         $this->view->pager    = $pager;
         $this->view->type     = $type;
         $this->view->status   = $status;
@@ -214,12 +216,13 @@ class message extends control
      * 
      * @param  int    $messageID 
      * @param  string $type 
+     * @param  int $maxNewId
      * @access public
      * @return void
      */
-    public function pass($messageID, $type)
+    public function pass($messageID, $type, $maxNewId = 0)
     {
-        $this->message->pass($messageID, $type);
+        $this->message->pass($messageID, $type, $maxNewId);
         if(!dao::isError()) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
@@ -229,12 +232,13 @@ class message extends control
      *
      * @param int    $messageID 
      * @param string $type          single|pre
+     * @param int $maxNewId
      * @access public
      * @return void
      */
-    public function delete($messageID, $type)
+    public function delete($messageID, $type, $maxNewId = 0)
     {
-        $this->message->deleteMessage($messageID, $type);
+        $this->message->deleteMessage($messageID, $type, $maxNewId);
         if(!dao::isError()) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }

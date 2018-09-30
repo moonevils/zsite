@@ -30,3 +30,4 @@ $lang->reply->noReply['readonly'] = '板块状态为只读，禁止回帖';
 $lang->reply->noEdit = array();
 $lang->reply->noEdit['readonly']  = '板块状态为只读，禁止编辑';
 
+$lang->reply->bindEmail = '请先绑定邮箱';

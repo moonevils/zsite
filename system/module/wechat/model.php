@@ -49,7 +49,16 @@ class wechatModel extends model
     {
         $public = $this->dao->findByID($id)->from(TABLE_WX_PUBLIC)->fetch();
         if(empty($public)) return false;
-        $public->url = 'http://' . $this->server->http_host . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
+        $scheme = 'http';
+        if(isset($this->config->site->scheme))
+        {
+          $scheme = $this->config->site->scheme;
+        }
+        else if(isset($_SERVER['REQUEST_SCHEME'])) 
+        {
+          $scheme = $_SERVER['REQUEST_SCHEME'];
+        }
+        $public->url = $scheme . '://' . $this->server->http_host . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
         return $public;
     }
 

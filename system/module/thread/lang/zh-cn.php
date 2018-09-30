@@ -76,6 +76,7 @@ $lang->thread->viewReplies     = '查看回帖内容';
 $lang->thread->stayCurrent     = '留在当前页面';
 $lang->thread->quoteTitle      = "<div class='quote-title'>原帖由 %s 于 %s 发表</div>";    
 $lang->thread->replyFloor      = "回复<strong>#%s</strong>";    
+$lang->thread->bindEmail       = '请绑定邮箱';
 
 $lang->thread->score    = '奖励积分';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";
@@ -93,3 +94,4 @@ if(!isset($lang->pager->settedInForum))
     $lang->pager->noRecord = '';
     $lang->pager->digest   = str_replace('记录', '回帖', $lang->pager->digest);
 }
+

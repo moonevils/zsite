@@ -484,16 +484,17 @@ class messageModel extends model
      *
      * @param string $messageID
      * @param string $mode
+     * @param int    $maxNewId
      * @access public
      * @return void
      */
-    public function deleteMessage($messageID, $mode)
+    public function deleteMessage($messageID, $mode, $maxNewId = 0)
     {
         $this->dao->delete()
             ->from(TABLE_MESSAGE)
             ->where(1)
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
-            ->beginIF($mode == 'pre')->andWhere('id')->le($messageID)->andWhere('status')->ne('1')->fi()
+            ->beginIF($mode == 'pre')->andWhere('id')->le($maxNewId)->andWhere('id')->ge($messageID)->andWhere('status')->ne('1')->fi()
             ->exec();
 
         return !dao::isError();
@@ -504,16 +505,17 @@ class messageModel extends model
      *
      * @param string $messageID
      * @param string $type          single|pr
+     * @param  int $maxNewId   
      * @access public
      * @return void
      */
-    public function pass($messageID, $type)
+    public function pass($messageID, $type, $maxNewId = 0)
     {
         $this->dao->update(TABLE_MESSAGE)
             ->set('status')->eq(1)
             ->where('status')->eq(0)
             ->beginIF($type == 'single')->andWhere('id')->eq($messageID)->fi()
-            ->beginIF($type == 'pre')->andWhere('id')->le($messageID)->fi()
+            ->beginIF($type == 'pre')->andWhere('id')->ge($messageID)->andWhere('id')->le($maxNewId)->fi()
             ->exec();
 
         return !dao::isError();

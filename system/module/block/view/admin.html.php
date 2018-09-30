@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<div id='mainMenu'>
+</div>
 <div class='row'>
   <?php foreach($config->block->categoryList as $category => $blockList):?>
   <div class='col-sm-3'>

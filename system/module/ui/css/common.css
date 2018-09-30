@@ -50,3 +50,5 @@ dd.selected{border:4px solid #AAA;}
 #storeSection .theme-price .pull-right {margin-right:10px;}
 
 .pager {margin: 0 5px 5px 0}
+
+body > .navbar-nav {position: absolute; right: 0; top: 0; z-index: 10;}
