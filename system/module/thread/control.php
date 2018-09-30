@@ -22,9 +22,9 @@ class thread extends control
     {
         /*check member is bing email? if not bind go to bind email*/
         $isBindEmailResult = $this->loadModel('user')->checkIsBindEmail();
-        if($isBindEmailResult === '0')
+        if($isBindEmailResult == '0')
         {
-            die(js::error('请先绑定邮箱') . js::locate($this->createLink('user', 'setemail', 'referer=' . helper::safe64Encode($this->app->getURI()))));
+            die(js::error($this->lang->thread->bindEmail) . js::locate($this->createLink('user', 'setemail', 'referer=' . helper::safe64Encode($this->app->getURI()))));
         }
 
         $this->loadModel('forum');
