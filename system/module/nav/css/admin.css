@@ -21,12 +21,11 @@ label{font-weight:500;font-size:13px;}
 #navList li.drag-shadow {border: 1px solid #ddd; box-shadow:0 1px 8px rgba(0,0,0,.15); background-color: #fff; z-index: 9999}
 
 .row-main{background:#efefef;padding:0px;}
-#mainMenu{padding:20px; text-align:center; background:#fff; margin-bottom:20px; margin-top:-20px;}
-#mainMenu #navMenu a{font-size:16px; padding:0 20px; color:#010101;text-decoration: none;}
-#mainMenu #navMenu a.active{font-weight: bold;}
 .row-main .panel{margin:0 20px;}
 .row-main .panel .panel-heading{background:#fff; font-weight:bold;}
 #navList .options{padding-left:10px;}
 #navList .showBox .options{opacity:0;}
 .opacity{opacity:1 !important;}
 #submitBox{height:35px;}
+
+body > .navbar-nav {position: absolute; right: 0; top: 0; z-index: 10;}
