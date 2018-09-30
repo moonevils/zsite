@@ -13,30 +13,35 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('type', $type);?>
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
-<div id='mainMenu' class='clearfix'>
-  <div id='navMenu'>
-    <?php
-    if(empty($_SESSION['device']) or $this->session->device == 'desktop')
-    {
-        if($this->config->site->type != 'blog') echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop, $type == 'desktop_top' ? "class='active'" : '');
-        echo html::a(helper::createLink('nav', 'admin', "type=desktop_blog"), $lang->nav->desktop_blog, $type == 'desktop_blog' ? "class='active'" : '');
-    }
-    elseif($this->session->device == 'mobile')
-    {
-        if($this->config->site->type != 'blog')
-        {
-            echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $type == 'mobile_top' ? "class='active'" : '');
-            echo html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom, $type == 'mobile_bottom' ? "class='active'" : '');
-        }
-        echo html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog, $type == 'mobile_blog' ? "class='active'" : '');
-    }
-    ?>
-  </div>
-  <div id='deviceMenu' class='btn-toolbar pull-right'>
-    <?php
-    echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), $lang->ui->clientDesktop, $this->session->device != 'mobile' ? "class='active'" : '');
-    echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), $lang->ui->clientMobile, $this->session->device == 'mobile' ? "class='active'" : '');
-    ?>
+<div id='mainMenu'>
+  <div class='container'>
+    <ul class='nav nav-underline' id='navMenu'>
+      <?php
+      if(empty($_SESSION['device']) or $this->session->device == 'desktop')
+      {
+          $class = $type == 'desktop_top' ? "class='active'" : '';
+          if($this->config->site->type != 'blog') echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop, $class) . '</li>';
+          $class = $type == 'desktop_blog' ? "class='active'" : '';
+          echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=desktop_blog"), $lang->nav->desktop_blog, $class) . '</li>';
+      }
+      elseif($this->session->device == 'mobile')
+      {
+          if($this->config->site->type != 'blog')
+          {
+              $class = $type == 'mobile_top' ? "class='active'" : '';
+              echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $class) . '</li>';
+              $class = $type == 'mobile_bottom' ? "class='active'" : '';
+              echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom, $class) . '</li>';
+          }
+          $class = $type == 'mobile_blog' ? "class='active'" : '';
+          echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog, $class) . '</li>';
+      }
+      ?>
+    </ul>
+    <ul class='nav nav-pills' id='deviceMenu'>
+      <li<?php if($this->session->device != 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=desktop"), '<i class="icon icon-desktop"></i> ' . $lang->ui->clientDesktop);?></li>
+      <li<?php if($this->session->device == 'mobile') echo " class='active'";?>><?php echo html::a($this->createLink('ui', 'setDevice', "device=mobile"), '<i class="icon icon-tablet"></i> ' . $lang->ui->clientMobile);?></li>
+    </ul>
   </div>
 </div>
 <div class='panel'>

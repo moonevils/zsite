@@ -286,7 +286,7 @@ class wechatModel extends model
 
         if(empty($fan) or !isset($fan->openid)) return false;
 
-        $user = $this->loadModel('user')->getUserByOpenID('wechat', $openID, $fan->unionid);
+        $user = $this->dao->setAutoLang(false)->select('*')->from(TABLE_OAUTH)->where('openID')->eq($openID)->andWhere('unionID')->eq($fan->unionid)->fetch();
         if($user) return true;
 
         return $this->loadModel('user')->createWechatUser($fan, $public->account);

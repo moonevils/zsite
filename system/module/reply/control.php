@@ -24,7 +24,7 @@ class reply extends control
         $isBindEmailResult = $this->loadModel('user')->checkIsBindEmail();
         if($isBindEmailResult == '0')
         {  
-            $this->send(array('result'=>'fail','message'=>'请先绑定邮箱'));
+            $this->send(array('result' => 'fail','message' => $this->lang->reply->bindEmail));
             die(js::locate($this->createLink('user', 'setemail', 'referer=' . helper::safe64Encode($this->app->getURI()))));
         }
 
