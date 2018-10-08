@@ -44,6 +44,7 @@ $lang->ui->matchedBlock    = 'Match Widget';
 $lang->ui->createBlock     = 'Add Widget';
 $lang->ui->useOldBlock     = 'Use existing Widget';
 $lang->ui->themeStore      = 'Theme Store';
+$lang->ui->themeList       = 'Theme List';
 $lang->ui->help            = "Help";
 $lang->ui->deleteLogo      = "Delete Logo";
 $lang->ui->setCode         = "Code";
