@@ -31,10 +31,10 @@ class bear extends control
     }
 
     /**
-     * Submit 
+     * Submit an object.
      * 
-     * @param  int    $objectType 
-     * @param  int    $objectID 
+     * @param  string    $objectType 
+     * @param  int       $objectID 
      * @access public
      * @return void
      */
@@ -84,6 +84,19 @@ class bear extends control
         $this->display();
     }
 
+    /**
+     * log page.
+     * 
+     * @param  string $mode 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @param  string $begin 
+     * @param  string $end 
+     * @access public
+     * @return void
+     */
     public function log($mode = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1, $begin = '', $end = '')
     {
         if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
