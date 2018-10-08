@@ -10,7 +10,7 @@
     </tr>
     <tr>
       <th></td>
-      <td colspan='2'><?php echo html::submitButton($lang->submit);?></td>
+      <td colspan='2'><?php echo html::submitButton();?></td>
     </tr>
   </table>
 </form>
