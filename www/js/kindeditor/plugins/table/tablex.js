@@ -15,7 +15,19 @@ KindEditor.plugin('table', function (K) {
             name: '表格',
             xRxC: '{0}行 × {1}列',
             headerRow: '标题行',
-            headerCol: '标题列'
+            headerCol: '标题列',
+            tableStyle: '表格样式',
+            addHeaderRow: '添加表格标题行',
+            stripedRows: '隔行变色效果',
+            hoverRows: '鼠标悬停效果',
+            autoChangeTableWidth: '自动调整表格尺寸',
+            tableWidthFixed: '按表格文字自适应',
+            tableWidthFull: '按页面宽度自适应',
+            tableBorder: '表格边框',
+            tableHead: '标题',
+            tableContent: '内容',
+            preview: '预览',
+
         },
         zh_tw: {
              name: '表格',
@@ -27,23 +39,28 @@ KindEditor.plugin('table', function (K) {
             name: 'Table',
             xRxC: '{0} Rows × {1} Columns',
             headerRow: 'Header Row',
-            headerCol: 'Header Column'
+            headerCol: 'Header Column',
+            tableStyle: 'Table Style'
         }
     };
     var zeroborder = 'ke-zeroborder';
     var $elements = [];
     var lang = $.extend({}, self.lang('table.'), allLangs[$.clientLang()]);
 
+    console.log('table', self, lang);
+
     // 设置颜色
     function _setColor(box, color) {
-        color = color.toUpperCase();
+        color = color.toLowerCase();
         box.css('background-color', color);
-        box.css('color', color === '#000000' ? '#FFFFFF' : '#000000');
-        box.html(color);
+        if (color) {
+            box.css('color', color === '#000000' ? '#FFFFFF' : '#000000');
+        }
+        box.name === 'input' ? box.val(color) : box.html(color);
     }
     // 初始化取色器
     var pickerList = [];
-    function _initColorPicker(dialogDiv, colorBox) {
+    function _initColorPicker(dialogDiv, colorBox, onSetColor) {
         colorBox.bind('click,mousedown', function (e) {
             e.stopPropagation();
         });
@@ -70,6 +87,7 @@ KindEditor.plugin('table', function (K) {
                 click: function (color) {
                     _setColor(box, color);
                     removePicker();
+                    onSetColor && onSetColor(color);
                 }
             });
             pickerList.push(picker);
@@ -95,6 +113,59 @@ KindEditor.plugin('table', function (K) {
         });
     }
 
+    function updateTable(setting, $table, onUpdateSetting) {
+        if (!$table) {
+            var table = self.plugin.getSelectedTable();
+            $table = $(table[0]);
+        }
+        console.log('updateTable', {setting, $table, onUpdateSetting});
+        if (!$table || !$table.length) return;
+        if (setting.header !== undefined) {
+            if ($table.is('.ke-plugin-table-example')) {
+                $table.find('thead').toggleClass('hidden', !setting.header);
+            } else {
+                var $thead = $table.find('thead');
+                if (setting.header) {
+                    if (!$thead.length) {
+                        var theadHtml = ['<thead><tr>'];
+                        var $firstRow = $table.find('tbody>tr:first').children();
+                        var colsCount = 0;
+                        $firstRow.each(function() {
+                           var $cell = $(this);
+                           var cellSpan = $cell.attr('colspan');
+                           colsCount += cellSpan ? parseInt(cellSpan) : 1;
+                        });
+                        for(var i = 0; i < colsCount; ++i) {
+                            theadHtml.push('<th></th>');
+                        }
+                        theadHtml.push('</tr></thead>');
+                        $thead = $(theadHtml.join(''));
+                        $table.prepend($thead);
+                    }
+                } else {
+                    $thead.remove();
+                }
+            }
+            onUpdateSetting && onUpdateSetting('header', setting.header);
+        }
+        if (setting.stripedRows !== undefined) {
+            $table.toggleClass('table-striped', !!setting.stripedRows);
+            onUpdateSetting && onUpdateSetting('stripedRows', setting.stripedRows);
+        }
+        if (setting.hoverRows !== undefined) {
+            $table.toggleClass('table-hover', !!setting.hoverRows);
+            onUpdateSetting && onUpdateSetting('hoverRows', setting.hoverRows);
+        }
+        if (setting.autoWidth !== undefined) {
+            $table.toggleClass('table-auto', !!setting.autoWidth);
+            onUpdateSetting && onUpdateSetting('autoWidth', setting.autoWidth);
+        }
+        if (setting.borderColor !== undefined) {
+            $table.find('td,th').css('borderColor', setting.borderColor);
+            onUpdateSetting && onUpdateSetting('borderColor', setting.borderColor);
+        }
+    }
+
     function insertTable(row, col, headerRow, headerCol) {
         if (!(row * col)) {
             return;
@@ -115,6 +186,179 @@ KindEditor.plugin('table', function (K) {
             html += '<br />';
         }
         self.insertHtml(html);
+        return $table;
+    }
+
+    function modifyTable(table) {
+        var $table = $(table[0]);
+        console.log('modifyTable', $table);
+        var theadHtml = ['<thead><tr>'];
+        var tbodyHtml = ['<tbody>'];
+        for(var i = 0; i < 6; ++i) {
+            theadHtml.push('<th style="padding:4px">{tableHead}</th>');
+            tbodyHtml.push('<tr>');
+            for(var j = 0; j < 6; ++j) {
+                tbodyHtml.push('<td style="padding:4px">{tableContent}</td>');
+            }
+            tbodyHtml.push('</tr>');
+        }
+        theadHtml.push('</tr></thead>');
+        tbodyHtml.push('</tbody>');
+        var dialogHtml = [
+'<div class="container" style="padding: 15px">',
+    '<div class="row">',
+        '<div class="col-xs-5 col-left">',
+            '<div class="form-group">',
+                '<label>{tableStyle}</label>',
+                '<div class="checkbox" style="margin: 0 0 5px"><label><input type="checkbox" name="header"> {addHeaderRow}</label></div>',
+                '<div class="checkbox" style="margin: 0 0 5px"><label><input type="checkbox" name="stripedRows"> {stripedRows}</label></div>',
+                '<div class="checkbox" style="margin: 0 0 5px"><label><input type="checkbox" name="hoverRows"> {hoverRows}</label></div>',
+            '</div>',
+            '<div class="form-group">',
+                '<label>{autoChangeTableWidth}</label>',
+                '<div class="radio" style="margin: 0 0 5px"><label><input type="radio" name="autoWidth" value="auto"> {tableWidthFixed}</label></div>',
+                '<div class="radio" style="margin: 0 0 5px"><label><input type="radio" name="autoWidth" value=""> {tableWidthFull}</label></div>',
+            '</div>',
+            '<div class="form-group" style="margin: 0">',
+                '<label>{tableBorder}</label>',
+                '<div class="input-group" style="width: 180px">',
+                    '<span class="input-group-addon">{borderColor}</span>',
+                    '<input class="form-control ke-plugin-table-input-color" readonly style="background: #dddddd; color: #333; font-size: 12px" value="#dddddd" name="borderColor" />',
+                '</div>',
+            '</div>',
+        '</div>',
+        '<div class="col-xs-7 col-right">',
+            '<table class="table table-bordered table-kindeditor ke-plugin-table-example">',
+                theadHtml.join(''),
+                tbodyHtml.join(''),
+            '<table>',
+        '</div>',
+    '</div>',
+'</div>'].join('').format(lang);
+        var $dialog = $(dialogHtml);
+        var $exampleTable = $dialog.find('.ke-plugin-table-example');
+        var bookmark = self.cmd.range.createBookmark();
+        var $colorBox = $dialog.find('.ke-plugin-table-input-color');
+        var colorBox = K($colorBox[0]);
+        // var updateTable = function(setting, $theTable, updateControls) {
+        //     console.log('updateTable', {setting, $theTable, updateControls});
+        //     $theTable = $theTable || $exampleTable;
+        //     if (setting.header !== undefined) {
+        //         if ($theTable.is('.ke-plugin-table-example')) {
+        //             $theTable.find('thead').toggleClass('hidden', !setting.header);
+        //         } else {
+        //             var $thead = $theTable.find('thead');
+        //             if (setting.header) {
+        //                 if (!$thead.length) {
+        //                     var theadHtml = ['<thead><tr>'];
+        //                     var $firstRow = $theTable.find('tbody>tr:first').children();
+        //                     var colsCount = 0;
+        //                     $firstRow.each(function() {
+        //                        var $cell = $(this);
+        //                        var cellSpan = $cell.attr('colspan');
+        //                        colsCount += cellSpan ? parseInt(cellSpan) : 1;
+        //                     });
+        //                     for(var i = 0; i < colsCount; ++i) {
+        //                         theadHtml.push('<th></th>');
+        //                     }
+        //                     theadHtml.push('</tr></thead>');
+        //                     $thead = $(theadHtml.join(''));
+        //                     $theTable.prepend($thead);
+        //                 }
+        //             } else {
+        //                 $thead.remove();
+        //             }
+        //         }
+        //         if (updateControls) {
+        //             $dialog.find('[name="header"]').prop('checked', !!setting.header);
+        //         }
+        //     }
+        //     if (setting.stripedRows !== undefined) {
+        //         $theTable.toggleClass('table-striped', !!setting.stripedRows);
+        //         if (updateControls) {
+        //             $dialog.find('[name="stripedRows"]').prop('checked', !!setting.stripedRows);
+        //         }
+        //     }
+        //     if (setting.hoverRows !== undefined) {
+        //         $theTable.toggleClass('table-hover', !!setting.hoverRows);
+        //         if (updateControls) {
+        //             $dialog.find('[name="hoverRows"]').prop('checked', !!setting.hoverRows);
+        //         }
+        //     }
+        //     if (setting.autoWidth !== undefined) {
+        //         $theTable.toggleClass('table-auto', !!setting.autoWidth);
+        //         if (updateControls) {
+        //             $dialog.find('[name="autoWidth"][value="' + (setting.autoWidth ? 'auto' : '') + '"]').prop('checked', true);
+        //         }
+        //     }
+        //     if (setting.borderColor !== undefined) {
+        //         $theTable.find('td,th').css('borderColor', setting.borderColor);
+        //         if (updateControls) {
+        //             _setColor(colorBox, setting.borderColor || '#dddddd');
+        //         }
+        //     }
+        // };
+        $dialog.on('change.kTable', 'input[name]', function() {
+            var $input = $(this);
+            var updateSetting = {};
+            updateSetting[$input.attr('name')] = $input.is('[type="checkbox"]') ? $input.is(':checked') : $input.val();
+            updateTable(updateSetting, $exampleTable);
+        });
+
+        var dialog = self.createDialog({
+            name: name,
+            width: 500,
+            title: self.lang(name),
+            body: $dialog[0],
+            beforeRemove: function () {
+                $dialog.off('.kTable');
+            },
+            yesBtn: {
+                name: self.lang('yes'),
+                click: function (e) {
+                    updateTable({
+                        borderColor: $dialog.find('[name="borderColor"]').val(),
+                        header: $dialog.find('[name="header"]').is(':checked'),
+                        stripedRows: $dialog.find('[name="stripedRows"]').is(':checked'),
+                        hoverRows: $dialog.find('[name="hoverRows"]').is(':checked'),
+                        autoWidth: $dialog.find('[name="autoWidth"]:checked').val(),
+                    }, $table);
+                    self.hideDialog().focus();
+                    self.cmd.range.moveToBookmark(bookmark);
+                    self.cmd.select();
+                    self.addBookmark();
+                }
+            }
+        });
+        _initColorPicker(dialog.div, colorBox, function(color) {
+            updateTable({borderColor: color}, $exampleTable);
+        });
+
+        updateTable({
+            borderColor: $table.find('td,th').first().css('borderColor'),
+            header: $table.find('thead').length,
+            stripedRows: $table.hasClass('table-striped'),
+            hoverRows: $table.hasClass('table-hover'),
+            autoWidth: $table.hasClass('table-auto'),
+        }, $exampleTable, function(name, value) {
+            switch (name) {
+            case 'borderColor':
+                _setColor(colorBox, value || '#dddddd');
+                break;
+            case 'header':
+                $dialog.find('[name="header"]').prop('checked', !!value);
+                break;
+            case 'stripedRows':
+                $dialog.find('[name="stripedRows"]').prop('checked', !!value);
+                break;
+            case 'hoverRows':
+                $dialog.find('[name="hoverRows"]').prop('checked', !!value);
+                break;
+            case 'autoWidth':
+                $dialog.find('[name="autoWidth"][value="' + (value ? 'auto' : '') + '"]').prop('checked', true);
+                break;
+            }
+        });
     }
 
     self.clickToolbar(name, function () {
@@ -172,283 +416,10 @@ KindEditor.plugin('table', function (K) {
 
     self.plugin.table = {
         // modify table
-        prop: function (isInsert) {
-            var html = [
-                '<div style="padding:20px;">',
-                //rows, cols
-                '<div class="ke-dialog-row">',
-                '<label for="keRows" style="width:90px;">' + lang.cells + '</label>',
-                lang.rows + ' <input type="text" id="keRows" class="ke-input-text ke-input-number" name="rows" value="" maxlength="4" /> &nbsp; ',
-                lang.cols + ' <input type="text" class="ke-input-text ke-input-number" name="cols" value="" maxlength="4" />',
-                '</div>',
-                //width, height
-                '<div class="ke-dialog-row">',
-                '<label for="keWidth" style="width:90px;">' + lang.size + '</label>',
-                lang.width + ' <input type="text" id="keWidth" class="ke-input-text ke-input-number" name="width" value="" maxlength="4" /> &nbsp; ',
-                '<select name="widthType">',
-                '<option value="%">' + lang.percent + '</option>',
-                '<option value="px">' + lang.px + '</option>',
-                '</select> &nbsp; ',
-                lang.height + ' <input type="text" class="ke-input-text ke-input-number" name="height" value="" maxlength="4" /> &nbsp; ',
-                '<select name="heightType">',
-                '<option value="%">' + lang.percent + '</option>',
-                '<option value="px">' + lang.px + '</option>',
-                '</select>',
-                '</div>',
-                //space, padding
-                '<div class="ke-dialog-row">',
-                '<label for="kePadding" style="width:90px;">' + lang.space + '</label>',
-                lang.padding + ' <input type="text" id="kePadding" class="ke-input-text ke-input-number" name="padding" value="" maxlength="4" /> &nbsp; ',
-                lang.spacing + ' <input type="text" class="ke-input-text ke-input-number" name="spacing" value="" maxlength="4" />',
-                '</div>',
-                //align
-                '<div class="ke-dialog-row">',
-                '<label for="keAlign" style="width:90px;">' + lang.align + '</label>',
-                '<select id="keAlign" name="align">',
-                '<option value="">' + lang.alignDefault + '</option>',
-                '<option value="left">' + lang.alignLeft + '</option>',
-                '<option value="center">' + lang.alignCenter + '</option>',
-                '<option value="right">' + lang.alignRight + '</option>',
-                '</select>',
-                '</div>',
-                //border
-                '<div class="ke-dialog-row">',
-                '<label for="keBorder" style="width:90px;">' + lang.border + '</label>',
-                lang.borderWidth + ' <input type="text" id="keBorder" class="ke-input-text ke-input-number" name="border" value="" maxlength="4" /> &nbsp; ',
-                lang.borderColor + ' <span class="ke-inline-block ke-input-color"></span>',
-                '</div>',
-                //background color
-                '<div class="ke-dialog-row">',
-                '<label for="keBgColor" style="width:90px;">' + lang.backgroundColor + '</label>',
-                '<span class="ke-inline-block ke-input-color"></span>',
-                '</div>',
-                '</div>'
-            ].join('');
-            var bookmark = self.cmd.range.createBookmark();
-            var dialog = self.createDialog({
-                name: name,
-                width: 500,
-                title: self.lang(name),
-                body: html,
-                beforeRemove: function () {
-                    colorBox.unbind();
-                },
-                yesBtn: {
-                    name: self.lang('yes'),
-                    click: function (e) {
-                        var rows = rowsBox.val(),
-                            cols = colsBox.val(),
-                            width = widthBox.val(),
-                            height = heightBox.val(),
-                            widthType = widthTypeBox.val(),
-                            heightType = heightTypeBox.val(),
-                            padding = paddingBox.val(),
-                            spacing = spacingBox.val(),
-                            align = alignBox.val(),
-                            border = borderBox.val(),
-                            borderColor = K(colorBox[0]).html() || '',
-                            bgColor = K(colorBox[1]).html() || '';
-                        if (rows == 0 || !/^\d+$/.test(rows)) {
-                            alert(self.lang('invalidRows'));
-                            rowsBox[0].focus();
-                            return;
-                        }
-                        if (cols == 0 || !/^\d+$/.test(cols)) {
-                            alert(self.lang('invalidRows'));
-                            colsBox[0].focus();
-                            return;
-                        }
-                        if (!/^\d*$/.test(width)) {
-                            alert(self.lang('invalidWidth'));
-                            widthBox[0].focus();
-                            return;
-                        }
-                        if (!/^\d*$/.test(height)) {
-                            alert(self.lang('invalidHeight'));
-                            heightBox[0].focus();
-                            return;
-                        }
-                        if (!/^\d*$/.test(padding)) {
-                            alert(self.lang('invalidPadding'));
-                            paddingBox[0].focus();
-                            return;
-                        }
-                        if (!/^\d*$/.test(spacing)) {
-                            alert(self.lang('invalidSpacing'));
-                            spacingBox[0].focus();
-                            return;
-                        }
-                        if (!/^\d*$/.test(border)) {
-                            alert(self.lang('invalidBorder'));
-                            borderBox[0].focus();
-                            return;
-                        }
-                        //modify table
-                        if (table) {
-                            if (width !== '') {
-                                table.width(width + widthType);
-                            } else {
-                                table.css('width', '');
-                            }
-                            if (table[0].width !== undefined) {
-                                table.removeAttr('width');
-                            }
-                            if (height !== '') {
-                                table.height(height + heightType);
-                            } else {
-                                table.css('height', '');
-                            }
-                            if (table[0].height !== undefined) {
-                                table.removeAttr('height');
-                            }
-                            table.css('background-color', bgColor);
-                            if (table[0].bgColor !== undefined) {
-                                table.removeAttr('bgColor');
-                            }
-                            if (padding !== '') {
-                                table[0].cellPadding = padding;
-                            } else {
-                                table.removeAttr('cellPadding');
-                            }
-                            if (spacing !== '') {
-                                table[0].cellSpacing = spacing;
-                            } else {
-                                table.removeAttr('cellSpacing');
-                            }
-                            if (align !== '') {
-                                table[0].align = align;
-                            } else {
-                                table.removeAttr('align');
-                            }
-                            if (border !== '') {
-                                table.attr('border', border);
-                            } else {
-                                table.removeAttr('border');
-                            }
-                            if (border === '' || border === '0') {
-                                table.addClass(zeroborder);
-                            } else {
-                                table.removeClass(zeroborder);
-                            }
-                            if (borderColor !== '') {
-                                table.attr('borderColor', borderColor);
-                            } else {
-                                table.removeAttr('borderColor');
-                            }
-                            self.hideDialog().focus();
-                            self.cmd.range.moveToBookmark(bookmark);
-                            self.cmd.select();
-                            self.addBookmark();
-                            return;
-                        }
-                        //insert new table
-                        var style = '';
-                        if (width !== '') {
-                            style += 'width:' + width + widthType + ';';
-                        }
-                        if (height !== '') {
-                            style += 'height:' + height + heightType + ';';
-                        }
-                        if (bgColor !== '') {
-                            style += 'background-color:' + bgColor + ';';
-                        }
-                        var cssClass = 'table table-kindeditor ';
-                        if (border === '' || border === '0') {
-                            cssClass += zeroborder + ' table-borderless ';
-                        } else if (borderColor === null || borderColor === '') {
-                            cssClass += 'table-bordered ';
-                        }
-                        var html = '<table ';
-                        if (style !== '') {
-                            html += ' style="' + style + '"';
-                        }
-                        if (padding !== '') {
-                            html += ' cellpadding="' + padding + '"';
-                        }
-                        if (spacing !== '') {
-                            html += ' cellspacing="' + spacing + '"';
-                        }
-                        if (align !== '') {
-                            html += ' align="' + align + '"';
-                        }
-                        if (border !== '') {
-                            html += ' border="' + border + '"';
-                        }
-                        if (cssClass) {
-                            html += ' class="' + cssClass + '"';
-                        }
-                        if (borderColor !== '') {
-                            html += ' bordercolor="' + borderColor + '"';
-                        }
-                        html += '>';
-                        for (var i = 0; i < rows; i++) {
-                            html += '<tr>';
-                            for (var j = 0; j < cols; j++) {
-                                html += '<td>' + (K.IE ? '&nbsp;' : '<br />') + '</td>';
-                            }
-                            html += '</tr>';
-                        }
-                        html += '</table>';
-                        if (!K.IE) {
-                            html += '<br />';
-                        }
-                        self.insertHtml(html);
-                        self.select().hideDialog().focus();
-                        self.addBookmark();
-                    }
-                }
-            });
-            var div = dialog.div;
-            var rowsBox = K('[name="rows"]', div).val(3);
-            var colsBox = K('[name="cols"]', div).val(2);
-            var widthBox = K('[name="width"]', div).val(100);
-            var heightBox = K('[name="height"]', div);
-            var widthTypeBox = K('[name="widthType"]', div);
-            var heightTypeBox = K('[name="heightType"]', div);
-            var paddingBox = K('[name="padding"]', div).val(2);
-            var spacingBox = K('[name="spacing"]', div).val(0);
-            var alignBox = K('[name="align"]', div);
-            var borderBox = K('[name="border"]', div).val(1);
-            var colorBox = K('.ke-input-color', div);
-            _initColorPicker(div, colorBox.eq(0));
-            _initColorPicker(div, colorBox.eq(1));
-            _setColor(colorBox.eq(0), '');
-            _setColor(colorBox.eq(1), '');
-            // foucs and select
-            rowsBox[0].focus();
-            rowsBox[0].select();
-            var table;
-            if (isInsert) {
-                return;
-            }
-            //get selected table node
-            table = self.plugin.getSelectedTable();
-            if (table) {
-                rowsBox.val(table[0].rows.length);
-                colsBox.val(table[0].rows.length > 0 ? table[0].rows[0].cells.length : 0);
-                rowsBox.attr('disabled', true);
-                colsBox.attr('disabled', true);
-                var match,
-                    tableWidth = table[0].style.width || table[0].width,
-                    tableHeight = table[0].style.height || table[0].height;
-                if (tableWidth !== undefined && (match = /^(\d+)((?:px|%)*)$/.exec(tableWidth))) {
-                    widthBox.val(match[1]);
-                    widthTypeBox.val(match[2]);
-                } else {
-                    widthBox.val('');
-                }
-                if (tableHeight !== undefined && (match = /^(\d+)((?:px|%)*)$/.exec(tableHeight))) {
-                    heightBox.val(match[1]);
-                    heightTypeBox.val(match[2]);
-                }
-                paddingBox.val(table[0].cellPadding || '');
-                spacingBox.val(table[0].cellSpacing || '');
-                alignBox.val(table[0].align || '');
-                borderBox.val(table[0].border === undefined ? '' : table[0].border);
-                _setColor(colorBox.eq(0), K.toHex(table.attr('borderColor') || ''));
-                _setColor(colorBox.eq(1), K.toHex(table[0].style.backgroundColor || table[0].bgColor || ''));
-                widthBox[0].focus();
-                widthBox[0].select();
+        prop: function () {
+            var table = self.plugin.getSelectedTable();
+            if (table && table.length) {
+                modifyTable(table);
             }
         },
         //modify cell

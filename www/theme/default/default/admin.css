@@ -118,6 +118,7 @@ ol {padding-left: 20px;}
 .table td > a {display: inline-block;}
 .table-data td, .table-data th {border: none; padding: 3px;}
 .table-data th {font-weight: bold; white-space:nowrap; text-align: right; font-size: 12px}
+.table-auto {width: auto; max-width: 100%;}
 
 /* thumbnail */
 .thumbnail {padding: 4px; border: 1px solid #ddd; background-color: #fff; border-radius: 0}
