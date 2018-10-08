@@ -181,6 +181,7 @@ class searchModel extends model
     public function decode($string)
     {
         if(strpos($string, ' ') === false and !is_numeric($string)) return $string;
+        if(preg_match('/^[a-zA-z]+[0-9]*[a-zA-z]$/', trim($string))) return $string;
         static $dict;
         if(empty($dict))
         {
@@ -213,6 +214,7 @@ class searchModel extends model
         $needle  = '';
         foreach($matches as $matched) 
         {
+            /* Use matched words length as score. */
             if(strlen($matched) > $score) 
             {
                 $content = str_replace($needle, strip_tags($needle), $content);
@@ -222,9 +224,11 @@ class searchModel extends model
         }
 
         $content = str_replace('<span class', '<spanclass', $content);
+        $content = str_replace('/span>', '/span> ', $content);
         $content = explode(' ', $content);
 
-        $pos     = array_search(str_replace('<span class', '<spanclass', $needle), $content);
+        foreach($content as $key => $item) $content[$key] = str_replace("<spanclass", "<span class", $item);
+        $pos     = array_search($needle, $content);
 
         $start   = max(0, $pos - ($length / 2));
         $summary = join(' ', array_slice($content, $start, $length));
@@ -289,15 +293,15 @@ class searchModel extends model
             else
             {
                 $words[$key] = strlen($word) == 5 ? str_replace('_', '', $word) : $word;
+                $words[$key] .= ' ';
             }
-
             $markedWords[] = "[" . $this->decode($words[$key]) . "] ";
         }
 
         $content = str_replace($words, $markedWords, $content . ' ');
-        $content = str_replace("] [", '', $content);
+        $content = str_replace(" ] [", '', $content);
         $content = str_replace("[", "<span class='text-danger'>", $content);
-        $content = str_replace("] ", '</span>', $content);
+        $content = str_replace(" ] ", '</span>', $content);
 
         return $content;
     }
