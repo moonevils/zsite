@@ -120,7 +120,7 @@ class bearModel extends model
      * @access public
      * @return void
      */
-    public function log($type, $objectType, $objectID, $url, $result)
+    public function log($type, $objectType, $objectID, $url, $result, $auto)
     {
         $data = new stdclass();
         $data->type       = $type;
@@ -129,7 +129,7 @@ class bearModel extends model
         $data->objectID   = $objectID;
         $data->url        = $url;
         $data->status     = $result->status;
-        $data->auto       = 'yes';
+        $data->auto       = $auto;
         $data->response   = json_encode($result);
         $data->time       = helper::now();
         $this->dao->insert(TABLE_BEARLOG)->data($data)->exec();
@@ -258,8 +258,19 @@ class bearModel extends model
         return !empty($record);
     }
 
+    /**
+     * Get logs list.
+     * 
+     * @param  string    $begin 
+     * @param  string    $end 
+     * @param  string    $orderBy 
+     * @param  object    $pager 
+     * @access public
+     * @return array
+     */
     public function getLogs($begin, $end, $orderBy, $pager)
     {
+        $end .= " 23:59:59";
         return $this->dao->select('*')->from(TABLE_BEARLOG)
             ->where('time')->ge($begin)
             ->andWhere('time')->le($end)
