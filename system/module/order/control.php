@@ -94,8 +94,8 @@ class order extends control
         $order = $this->order->getByID($orderID);
         if($order->account != $this->app->user->account) die(js::locate('back'));
 
-        $isWechat = false;
-        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) $isWechat = true;
+        $inWechat = false;
+        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) $inWechat = true;
 
         $this->app->loadModuleConfig('product');
 
@@ -105,12 +105,12 @@ class order extends control
             $paymentOptions[$payment] = $this->lang->order->paymentList[$payment];
         }
 
-        if($isWechat && $paymentOptions['alipay']) unset($paymentOptions['alipay']);
+        if($inWechat && $paymentOptions['alipay']) unset($paymentOptions['alipay']);
         if($order->type != 'shop') unset($paymentOptions['COD']);
 
         $this->view->title          = $this->lang->order->check;
         $this->view->order          = $order;
-        $this->view->isWechat       = $isWechat;
+        $this->view->inWechat       = $inWechat;
         $this->view->products       = $this->order->getOrderProducts($orderID);
         $this->view->paymentList    = $paymentOptions;
         $this->view->currencySymbol = $this->config->product->currencySymbol;
