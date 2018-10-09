@@ -94,4 +94,3 @@ if(!isset($lang->pager->settedInForum))
     $lang->pager->noRecord = '';
     $lang->pager->digest   = str_replace('记录', '回帖', $lang->pager->digest);
 }
-

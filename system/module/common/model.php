@@ -1222,18 +1222,17 @@ class commonModel extends model
     public static function getSysURL()
     {
         global $config;
-        $httpType = 'http';
+        $scheme = 'http';
         if(isset($config->site->scheme))
         {
-            $httpType = $config->site->scheme;
-        
+            $scheme = $config->site->scheme;
         }
         else if(isset($_SERVER['REQUEST_SCHEME']))
         {
-            $httpType = $_SERVER['REQUEST_SCHEME'];
+            $scheme = $_SERVER['REQUEST_SCHEME'];
         }
         $httpHost = rtrim($_SERVER['HTTP_HOST'], '/');
-        return "$httpType://$httpHost";
+        return "$scheme://$httpHost";
     }
 
     /**

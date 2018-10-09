@@ -26,7 +26,7 @@
       <div class="form-group">
         {!html::radio('payment', $paymentList)}
       </div>
-      {if($isWechat)} <div class='alert bg-primary-pale'>{$lang->order->isWechat}</div> {/if}
+      {if($inWechat)}<div class='alert bg-primary-pale'>{$lang->order->inWechatTip}</div>{/if}
     </div>
     <div class='panel-body'>
       <div class='alert bg-primary-pale'>
