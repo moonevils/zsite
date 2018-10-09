@@ -51,7 +51,7 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 #dsTool > header .nav > li.active > a:before {content: ' '; display: block; position: absolute; left: 25px; right: 25px; bottom: 0; background: #3280fc; height: 2px;}
 @media (max-width: 991px) {#dsBox {bottom: 10px}}
 
-#dsPageList {top: 40px; background: #fff; width: 180px; overflow: visible; transition: left .2s;}
+#dsPageList {top: 40px; background: #fff; width: 180px; overflow: visible; transition: left .2s; border-right: 1px solid #ddd;}
 #dsPageList ul {list-style: none; padding: 0;}
 #dsPageList li.item > a {padding: 6px 10px 6px 15px; display: block}
 #dsPageList li.item > a:hover {text-decoration: none; background: #eff7ff; color: #347aeb;}
