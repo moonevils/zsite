@@ -54,7 +54,7 @@ $.extend(KindEditor, {getOptions: function(K, editorID)
         width:'100%',
         items: editorTool,
         cssPath:[v.webRoot + 'zui/css/min.css'],
-        cssData: '.article-content, .article-content table td, .article-content table th {line-height: 1.3846153846; font-size: 13px;} .article-content table.table-kindeditor th, .article-content table.table-kindeditor td {padding: 5px 8px;} .article-content table.ke-zeroborder.table-kindeditor td {border: 1px dotted #AAA;} .article-content .table-auto {width: auto; max-width: 100%;}',
+        cssData: '.article-content, .article-content table td, .article-content table th {line-height: 1.3846153846; font-size: 13px;} .article-content table.table-kindeditor th, .article-content table.table-kindeditor td {padding: 5px 8px;} .article-content table.ke-zeroborder.table-kindeditor td {border: 1px dotted #AAA;} .article-content .table-auto {width: auto!important; max-width: 100%;}',
         bodyClass:'article-content',
         urlType:'absolute',
         uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
