@@ -22,7 +22,7 @@
 
 {* Import css and js for kindeditor. *}
 {!css::import($jsRoot . 'kindeditor/themes/default/default.css')}
-{!js::import($jsRoot  . 'kindeditor/kindeditor-min.js')}
+{!js::import($jsRoot  . 'kindeditor/kindeditor.min.js')}
 {!js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js')}
 
 {* set uid for upload. *}
@@ -31,12 +31,12 @@
 
 <script>
 {noparse}
-var simple = 
-[ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|', 
+var simple =
+[ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|',
 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|',
 'emoticons', 'image', 'media', 'link', '|', 'removeformat','undo', 'redo', 'source' ];
 
-var full = 
+var full =
 [ 'formatblock', 'fontsize', 'lineheight', '|', 'forecolor', 'hilitecolor', '|', 'bold', 'italic','underline', 'strikethrough', '|',
 'justifyleft', 'justifycenter', 'justifyright', '|',
 'emoticons', 'image', '|', 'link', 'unlink', 'anchor', 'flash', 'media', 'baidumap', '/',
@@ -87,8 +87,8 @@ function initKindeditor(afterInit)
             {noparse}
             afterCreate : function()
             {
-                var doc = this.edit.doc; 
-                var cmd = this.edit.cmd; 
+                var doc = this.edit.doc;
+                var cmd = this.edit.cmd;
                 /* Paste in chrome. */
                 /* Code reference from http://www.foliotek.com/devblog/copy-images-from-clipboard-in-javascript/. */
                 if(K.WEBKIT)
@@ -99,9 +99,9 @@ function initKindeditor(afterInit)
                         var original =  ev.originalEvent;
                         var file =  original.clipboardData.items[0].getAsFile();
                         var reader = new FileReader();
-                        reader.onload = function (evt) 
+                        reader.onload = function (evt)
                         {
-                            var result = evt.target.result; 
+                            var result = evt.target.result;
                             var result = evt.target.result;
                             var arr = result.split(",");
                             var data = arr[1]; // raw base64
