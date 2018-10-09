@@ -11,42 +11,36 @@ js::set('visualLang', $lang->visual->js);
 ?>
 
 <div id='dsBox' class='dock fade'>
-  <div id='dsMenu' class='box dock-left'>
-    <header class='dock-top text-right'>
-      <div class='dock-left scroll-none'>
-        <?php commonModel::printLink('ui', 'setTemplate', '', $lang->ui->themeList, "class='btn btn-link' title='{$lang->ui->setTheme}' id='backBtn'");?>
-        <i class='icon icon-angle-right'> </i>
-        <?php echo html::a('', $templateData['themes'][$theme], "class='btn btn-link'");?>
-      </div>
-    </header>
-    <div class='content dock box'>
-      <ul class='nav' id='pageList'>
-        <li class="heading"><?php echo $lang->visual->design->pageTemplate;?></li>
-        <?php foreach($config->block->pageGroupList as $group => $pageList):?>
-        <li class='group'>
-          <ul>
-            <?php foreach($pageList as $thisPage):?>
-            <li class='item<?php if($thisPage == $page) echo ' active';?>'>
-              <?php commonModel::printLink('visual', 'design', "page={$thisPage}", $lang->block->{$template}->pages[$thisPage]);?>
-            </li>
-            <?php endforeach;?>
-          </ul>
-        </li>
-        <?php endforeach;?>
-      </ul>
+  <div class='box dock-left' id='dsPageList'>
+    <ul class='nav dock'>
+      <li class="heading"><?php echo $lang->visual->design->pageTemplate;?></li>
+      <?php foreach($config->block->pageGroupList as $group => $pageList):?>
+      <li class='group'>
+        <ul>
+          <?php foreach($pageList as $thisPage):?>
+          <li class='item<?php if($thisPage == $page) echo ' active';?>'>
+            <?php commonModel::printLink('visual', 'design', "page={$thisPage}", $lang->block->{$template}->pages[$thisPage]);?>
+          </li>
+          <?php endforeach;?>
+        </ul>
+      </li>
+      <?php endforeach;?>
+    </ul>
+    <button title='<?php echo $lang->visual->design->hidePageTmpl?>' type='button' id='dsMenuToggle' class='ds-menu-toggle btn btn-link'><i class='icon icon-double-angle-left'></i></button>
+  </div>
+  <div id='dsMenu' class='dock dock-top'>
+    <ol class='breadcrumb'>
+      <li><?php commonModel::printLink('ui', 'setTemplate', '', $lang->ui->themeList, "title='{$lang->ui->setTheme}' id='backBtn'");?></li>
+      <li><?php echo html::a('', $lang->visual->design->currentTheme . $templateData['themes'][$theme]);?></li>
+      <li><?php commonModel::printLink('visual', 'design', "page={$page}", $lang->visual->design->pageTemplate . $lang->colon . $lang->block->{$template}->pages[$page]);?></li>
+      <li><strong><?php echo $lang->visual->design->layout;?></strong></li>
+    </ol>
+    <div class='actions dock-right'>
+      <?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon icon-download"></i> ' . $lang->ui->exportTheme, "class='btn btn-sm btn-link' data-toggle='modal' data-width='600'");?>
     </div>
   </div>
   <div id='dsPreview' class='dock box'>
-    <header class='dock-top'>
-      <div class='actions dock-left'>
-        <button data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->visual->design->hidePageTmpl?>' type='button' class='ds-menu-toggle btn btn-link'><i class='icon icon-double-angle-left'></i></button>
-      </div>
-      <strong><?php echo $lang->visual->design->layout;?></strong>
-      <div class='actions dock-right'>
-        <?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon icon-download"></i> ' . $lang->ui->exportTheme, "class='btn btn-sm btn-link' data-toggle='modal' data-width='600'");?>
-      </div>
-    </header>
-    <div class='content dock' id='preview'>
+    <div class='dock' id='preview'>
       <div class='preview-page'>
         <?php
         foreach ($layout as $layoutItem)
@@ -97,7 +91,12 @@ js::set('visualLang', $lang->visual->js);
                 $isCategoryEmpty = false;
                 ?>
                 <div class='block-item' data-type='<?php echo $block->type;?>' data-id='<?php echo $block->id;?>' data-title='<?php echo $block->title;?>'>
-                  <div class='title' title='<?php echo $block->title;?>'><?php echo $block->title;?>&nbsp; <small class='text-muted nobr'><?php echo $typeList[$block->type] ?></small></div>
+                  <div class='title' title='<?php echo $block->title;?>'>
+                    <?php echo $block->title;?>&nbsp;
+                    <?php if($typeList[$block->type] != $block->title):?>
+                    <small class='text-muted nobr'><?php echo $typeList[$block->type] ?></small>
+                    <?php endif; ?>
+                  </div>
                   <div class='actions'>
                     <?php commonModel::printLink('block', 'edit', "block={$block->id}", '<i class="icon icon-pencil"></i>', "class='btn btn-link' data-toggle='modal' data-width='80%' data-type='iframe' title='$lang->edit'");?>
                     <?php commonModel::printLink('block', 'delete', "block={$block->id}", '<i class="icon icon-remove"></i>', "class='btn btn-link deleter' title='$lang->delete'");?>

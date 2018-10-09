@@ -1,4 +1,5 @@
 body {background: #f1f1f1;}
+body > .navbar-nav {position: absolute; right: 0; top: 0; z-index: 10;}
 .dock, .dock-right, .dock-left, .dock-top, .dock-bottom {position: absolute; overflow: auto; left: 0; right: 0; bottom: 0; top: 0;}
 .dock-right {left: auto}
 .dock-left {right: auto}
@@ -36,66 +37,41 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .color .btn{text-shadow: none;}
 .dropdown-menu.colors {padding: 5px; width: 205px}
 
-#dsBox {top: 50px; right: 10px; left: 60px; bottom: 50px; background: #fff; border: #ddd 1px solid;}
-#dsMenu {width: 200px; border-right: 1px solid #ddd; z-index: 2;}
-#backBtn {padding: 9px 10px;}
-#backBtn > .icon {font-size: 18px;}
-#dsPreview {left: 200px; right: 360px; border-right: 1px solid #ddd; transition: left .2s; background: #eee;}
-#dsPreview > header {transition: padding .2s; padding: 10px 15px 10px 40px; border: none;}
+#dsBox {top: 40px; right: 10px; left: 60px; bottom: 50px; border: #ddd 1px solid;}
+#dsMenu {border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; right: 360px; z-index: 2; height: 40px; background: #fff;}
+#dsMenu > .breadcrumb {margin: 9px 0 0 10px; padding: 0; color: #333;}
+#dsMenu > .breadcrumb > li + li:before {content: '\e6e1'; font-family: ZenIcon;     -webkit-font-smoothing: antialiased; font-size: 14px;}
+#dsMenu > .breadcrumb:after {display: none}
+#dsMenu > .actions {top: 7px; right: 7px;}
+#dsPreview {top: 40px; left: 190px; right: 360px; border-right: 1px solid #ddd; transition: left .2s;}
 #dsTool {width: 360px;}
-#dsPreview > header > .actions.dock-left,
-#dsPreview > header > .actions.dock-right {right: 5px; top: 2px; overflow: visible;}
-#dsPreview > header > .actions.dock-left {left: 0; right: auto;}
-#dsTool > header {padding: 0; border-bottom: none;}
+#dsTool > .content {background: #fff;}
+#dsTool > header {padding: 0; border-bottom: none; background: #fff;}
 #dsTool > header .nav > li > a {padding: 10px 10px 9px 10px; border-bottom: 1px solid #e5e5e5; position: relative;}
 #dsTool > header .nav > li.active > a:before {content: ' '; display: block; position: absolute; left: 25px; right: 25px; bottom: 0; background: #3280fc; height: 2px;}
 @media (max-width: 991px) {#dsBox {bottom: 10px}}
 
-#pageList, #pageList ul {list-style: none; padding: 0;}
-#pageList li.item > a {padding: 8px 10px 8px 15px; display: block}
-#pageList li.item > a:hover {text-decoration: none; background: #eff7ff; color: #347aeb;}
-#pageList li.item.active > a {background: #3571CE; color: #fff;}
-#pageList li.item.active > a:hover {background: #347aeb;}
-#pageList li.heading {padding: 5px 10px; font-weight: bold; background: #f5f5f5;}
-#pageList li.group {padding: 0 0;}
-#pageList li.group + li.group {border-top: 1px solid #e5e5e5;}
+#dsPageList {top: 40px; background: #fff; width: 180px; overflow: visible;}
+#dsPageList ul {list-style: none; padding: 0;}
+#dsPageList li.item > a {padding: 6px 10px 6px 15px; display: block}
+#dsPageList li.item > a:hover {text-decoration: none; background: #eff7ff; color: #347aeb;}
+#dsPageList li.item.active > a {background: #3571CE; color: #fff;}
+#dsPageList li.item.active > a:hover {background: #347aeb;}
+#dsPageList li.heading {padding: 5px 10px; font-weight: bold; background: #f5f5f5;}
+#dsPageList li.group {padding: 0 0;}
+#dsPageList li.group + li.group {border-top: 1px solid #e5e5e5;}
+#dsMenuToggle {position: absolute; right: -20px; top: 0; padding: 0; width: 20px; bottom: 0; outline: none; z-index: 111;}
 
-.ds-hide-menu #dsPreview {left: 0;}
-.ds-hide-menu #dsPreview > header {padding-left: 380px; border-bottom: 1px solid #ddd;}
-.ds-hide-menu #dsMenu {bottom: auto; height: 40px; border-right: none; overflow: visible;}
-.ds-hide-menu #dsPreview > header > .actions.dock-left {left: 200px; right: auto; width: 160px; z-index: 10; padding: 0; top: 0;}
-.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn {display: block; width: 100%; height: 40px;}
-.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn:focus,
-.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn:active,
-.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn:hover {background: rgba(0,0,0,.1)}
-.ds-hide-menu #dsPreview > header > .actions.dock-left > .btn > .icon {display: none;}
-.ds-hide-menu #dsMenu > header {overflow: hidden; border-bottom: 1px solid #ddd;}
-.ds-hide-menu #dsMenu > header:before,
-.ds-hide-menu #dsMenu > header:after {position: absolute; top: 1px; right: 0; display: block; width: 0; height: 0; content: ' '; border-color: transparent transparent transparent #ccc; border-style: solid; border-width: 19px 0 19px 9px;}
-.ds-hide-menu #dsMenu > header:after {right: 1px; border-color: transparent transparent transparent #eee; border-width: 19px 0 19px 9px;}
-.ds-hide-menu #dsMenu > header > .actions {position: static;}
-.ds-hide-menu #dsMenu > header .ds-menu-toggle {position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: block; width: 100%; z-index: 10;}
-.ds-hide-menu #dsMenu > header .ds-menu-toggle:focus,
-.ds-hide-menu #dsMenu > header .ds-menu-toggle:hover {background: rgba(0,0,0,.05)}
-.ds-hide-menu #dsMenu > header .ds-menu-toggle > .icon {visibility: hidden;}
-.ds-hide-menu #dsMenu > .content {position: static; overflow: visible;}
-.ds-hide-menu #dsMenu > .content .group {border: none}
-.ds-hide-menu #pageList .heading {display: block; position: absolute; left: 200px; width: 80px; text-align: right; background: none; top: 5px; font-weight: normal;}
-.ds-hide-menu #pageList .heading:after {content: ':'}
-.ds-hide-menu #pageList .item {display: none}
-.ds-hide-menu #pageList .item.active {display: block; position: absolute; top: 0; left: 270px; padding: 9px 0;}
-.ds-hide-menu #pageList .item.active:before,
-.ds-hide-menu #pageList .item.active:after {position: absolute; top: 1px; right: 0; display: block; width: 0; height: 0; content: ' '; border-color: transparent transparent transparent #ccc; border-style: solid; border-width: 19px 0 19px 9px;}
-.ds-hide-menu #pageList .item.active:after {right: 1px; border-color: transparent transparent transparent #eee; border-width: 19px 0 19px 9px;}
-.ds-hide-menu #pageList .item.active > a {width: 100px; text-align: left; padding: 0 5px; line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: transparent; color: #333; font-weight: bold; transition: none;}
-.ds-hide-menu #pageList .item.active > a:hover {background: none;}
+.ds-hide-menu #dsPreview {left: 10px;}
+.ds-hide-menu #dsPageList {left: -180px;}
+.ds-hide-menu #dsMenuToggle > .icon:before {content: '\e6dd'}
 
-#blocks > header {background: #f5f5f5; border: none;}
+#blocks > header {background: #f1f1f1;}
 #blocks > header > .form-group {width: 100px; margin-top: -6px; margin-left: -5px;}
 #blocks > header > .form-group > .form-control {background: transparent; box-shadow: none;}
 .block-list {padding: 5px;}
 .block-item {float: left; width: 100%; padding: 5px 50px 5px 5px; position: relative;}
-.block-item:before {content: ' '; background: #fafafa; position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px; border: 1px solid #ddd; z-index: 1; pointer-events: none;}
+.block-item:before {content: ' '; background: #f1f1f1; position: absolute; left: 5px; top: 5px; right: 5px; bottom: 5px; border: 1px solid #ddd; z-index: 1; pointer-events: none;}
 .block-item:hover {cursor: move;}
 .block-item:hover:before {border-color: #3280fc; background: #eff7ff;}
 .block-item > .title {line-height: 20px; padding: 8px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; position: relative; z-index: 2;}
@@ -119,7 +95,7 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 #customThemeForm .theme-group-name {font-weight: bold; color: #808080; margin-bottom: 4px;}
 #customThemeForm .theme-item + .theme-item {margin-top: 4px;}
 
-#preview {padding: 5px 15px 15px; background: #eeeeee;}
+#preview {padding: 15px;}
 #preview .col {float: left; width: 100%}
 #preview .col[data-grid='1'], #preview .col-1 {width: 8.33333333%}
 #preview .col[data-grid='2'], #preview .col-2 {width: 16.66666667%}
