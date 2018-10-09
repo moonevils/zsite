@@ -38,13 +38,13 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 .dropdown-menu.colors {padding: 5px; width: 205px}
 
 #dsBox {top: 40px; right: 10px; left: 60px; bottom: 50px; border: #ddd 1px solid;}
-#dsMenu {border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; right: 360px; z-index: 2; height: 40px; background: #fff;}
+#dsMenu {border-bottom: 1px solid #ddd; right: 0; z-index: 2; height: 40px; background: #fff;}
 #dsMenu > .breadcrumb {margin: 9px 0 0 10px; padding: 0; color: #333;}
 #dsMenu > .breadcrumb > li + li:before {content: '\e6e1'; font-family: ZenIcon;     -webkit-font-smoothing: antialiased; font-size: 14px;}
 #dsMenu > .breadcrumb:after {display: none}
 #dsMenu > .actions {top: 7px; right: 7px;}
 #dsPreview {top: 40px; left: 190px; right: 360px; border-right: 1px solid #ddd; transition: left .2s;}
-#dsTool {width: 360px;}
+#dsTool {width: 360px; top: 40px}
 #dsTool > .content {background: #fff;}
 #dsTool > header {padding: 0; border-bottom: none; background: #fff;}
 #dsTool > header .nav > li > a {padding: 10px 10px 9px 10px; border-bottom: 1px solid #e5e5e5; position: relative;}
