@@ -243,10 +243,13 @@ $lang->user->oauth->typeList['github'] = 'Github';
 $lang->user->oauth->typeList['facebook'] = 'Facebook';
 #$lang->user->oauth->typeList['google'] = 'Google';
 
+$lang->user->oauth->bindUser         = '绑定用户';
 $lang->user->oauth->lblWelcome       = 'Open Login';
 $lang->user->oauth->lblOtherLogin    = 'Other Login';
 $lang->user->oauth->lblProfile       = "Register a User";
 $lang->user->oauth->lblBind          = "User Binding";
+$lang->user->oauth->directBind       = "Direct Bind";
+$lang->user->oauth->lblBindCurrent   = "The current login user is %s，wechat user is %s";
 $lang->user->oauth->lblUnbind        = "Remove Binding";
 $lang->user->oauth->lblUnbindSuccess = "Binding removed!";
 $lang->user->oauth->lblUnbindFailed  = "Remove bnding failed!";

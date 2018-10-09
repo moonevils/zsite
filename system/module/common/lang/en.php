@@ -79,6 +79,7 @@ $lang->custom           = 'Custom';
 $lang->productMenu      = 'Product';
 $lang->history          = 'History';
 $lang->reverse          = 'Reverse';
+$lang->transfer         = 'Transfer';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
@@ -180,7 +181,7 @@ $lang->groups->shop     = array('title' => 'Mall', 'link' => 'order|admin|',    
 $lang->groups->user     = array('title' => 'User', 'link' => 'user|admin|',                'icon' => 'group');
 $lang->groups->promote  = array('title' => 'SEO', 'link' => 'stat|traffic|',              'icon' => 'volume-up');
 $lang->groups->design   = array('title' => 'UI', 'link' => 'ui|settemplate|',            'icon' => 'paint-brush');
-//$lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',            'icon' => 'cloud');
+$lang->groups->open     = array('title' => 'Open', 'link' => 'package|browse|',            'icon' => 'cloud');
 $lang->groups->setting  = array('title' => 'Set', 'link' => 'site|setbasic|',             'icon' => 'cog');
 
 /* The main menus. */
@@ -224,6 +225,7 @@ $lang->menu->company       = 'Company|company|setbasic|';
 $lang->menu->score         = 'Points|score|setcounts|';
 $lang->menu->interface     = 'API|site|setoauth|';
 $lang->menu->wechatSetting = 'Wechat Setting|wechat|admin|';
+$lang->menu->bear          = 'Bear|bear|setting|';
 
 $lang->menu->package    = 'Extensions|package|browse|';
 $lang->menu->themestore = 'Themes|ui|themestore|';
@@ -336,6 +338,7 @@ $lang->security->menu->log         = 'Login Log|user|adminlog|';
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
 $lang->interface->menu->oauth = 'Social Login|site|setoauth|';
+$lang->interface->menu->bear  = array('link' => 'Bear|bear|setting|', 'alias' => 'log,sync');
 $lang->interface->menu->mail  = array('link' => 'Email|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of score module. */
@@ -378,6 +381,13 @@ $lang->stat->menu->keywords = 'Keywords|stat|keywords|';
 $lang->stat->menu->client   = 'Clients|stat|client|type=browser';
 $lang->stat->menu->page     = 'Page Clicks|stat|page|';
 $lang->stat->menu->setStat  = 'Settings|stat|setting|';
+
+/* Menu of bear module. */
+$lang->bear = new stdclass();
+$lang->bear->menu = new stdclass;
+$lang->bear->menu->setting     = 'Setting|bear|setting|';
+$lang->bear->menu->batchSubmit = 'Batch Submit|bear|batchsubmit|';
+$lang->bear->menu->log         = 'Log|bear|log|';
 
 /* Error info. */
 $lang->error = new stdclass();

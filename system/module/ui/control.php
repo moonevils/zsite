@@ -261,15 +261,38 @@ class ui extends control
      * @return void
      */
     public function others()
-    {
+    {   
+        /* Get configs of list number. */
+        $this->app->loadModuleConfig('file');
+        $this->app->loadLang('file');
+        if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadModuleConfig('blog');
+        if(strpos($this->config->site->modules, 'book') !== false)    $this->app->loadModuleConfig('book');
+        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadModuleConfig('message');
+
+        if(strpos($this->config->site->modules, 'article') !== false)
+        {   
+            $this->app->loadModuleConfig('article');
+            $this->app->loadLang('article');
+        }
+        if(strpos($this->config->site->modules, 'forum') !== false)
+        {   
+            $this->app->loadModuleConfig('forum');
+            $this->app->loadModuleConfig('reply');
+        }
+        if(strpos($this->config->site->modules, 'product') !== false)
+        {   
+            $this->app->loadModuleConfig('product');
+            $this->app->loadLang('product');
+        }
+
         if(!empty($_POST))
-        {
+        {   
             if($this->post->files['watermark'] == 'open')
-            {
+            {   
                 $fontRoot = $this->app->getTmpRoot() . 'fonts/';
                 $fontPath = $fontRoot . 'wqy-zenhei.ttc';
                 if(!file_exists($fontPath))
-                {
+                {   
                     if(!is_writable($fontRoot)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->unWritable));
                     if(!copy($this->config->cdn->host . 'fonts/wqy-zenhei.ttc', $fontPath)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->fontNotDownload));
                 }
@@ -301,6 +324,11 @@ class ui extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
+
+        $this->view->fontsPath = $this->app->getTmpRoot() . 'fonts';
+        $this->lang->menuGroups->ui = 'others';
+        $this->view->title = $this->lang->ui->others;
+        $this->display();
     }
 
     /**

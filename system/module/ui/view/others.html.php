@@ -23,6 +23,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
 $gdInstalled = extension_loaded('gd') ? 1 : 0;
 js::set('gdInstalled', $gdInstalled);
 ?>
+<div id='mainMenu' class='clearfix'>
+  <div class='container'>
+  </div>
+</div>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
