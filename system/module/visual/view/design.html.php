@@ -12,7 +12,7 @@ js::set('visualLang', $lang->visual->js);
 <div id='dsBox' class='dock fade'>
   <div class='box dock-left' id='dsPageList'>
     <ul class='nav dock'>
-      <li class="heading"><?php echo $lang->visual->design->pageTemplate;?></li>
+      <li>&nbsp; </li>
       <?php foreach($config->block->pageGroupList as $group => $pageList):?>
       <li class='group'>
         <ul>
