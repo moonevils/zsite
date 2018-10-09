@@ -11,14 +11,16 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div id='mainMenu' class='clearfix'>
-  <div id='navMenu'>
+<div id='mainMenu'>
+  <div class='container'>
+    <ul class='nav nav-underline' id='navMenu'>
     <?php
-    echo html::a($this->createLink('ui', 'component'), $lang->ui->component);
-    echo html::a($this->createLink('ui', 'effect'), $lang->effect->common, "class='active'");
+    echo '<li>' . html::a($this->createLink('ui', 'component'), $lang->ui->component) . '</li>';
+    echo '<li class="active">' . html::a($this->createLink('ui', 'effect'), $lang->effect->common, "class='active'") . '</li>';
     $this->app->loadLang('file');
-    echo html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList);
+    echo '<li>' . html::a($this->createLink('file', 'browsesource'), $lang->file->sourceList) . '</li>';
     ?>
+    </ul>
   </div>
 </div>
 <div class='panel'>

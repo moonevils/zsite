@@ -44,6 +44,7 @@ $lang->ui->matchedBlock    = '对应区块';
 $lang->ui->createBlock     = '导入新区块';
 $lang->ui->useOldBlock     = '使用已有区块';
 $lang->ui->themeStore      = '主题市场';
+$lang->ui->themeList       = '主题列表';
 $lang->ui->help            = "帮助";
 $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->setCode         = "代码";

@@ -1,11 +1,11 @@
 <?php
 /**
- * The create view file of article module of chanzhiEPS.
+ * The build index view file of article module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1.2 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     article
+ * @package     search
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */

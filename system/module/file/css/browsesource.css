@@ -28,9 +28,6 @@
 .noflashTip > .popover-content{z-index:1000;width:205px;}
 
 .row-main{background-color:#e2e2e2;padding:0}
-#mainMenu{padding:20px; text-align:center; background:#fff; margin-bottom:20px; margin-top:-20px;}
-#mainMenu #navMenu a{font-size:16px; padding:0 50px;color:#010101;text-decoration: none;}
-#mainMenu #navMenu a.active{font-weight:bold;}
 .panel {margin:0 40px;}
 .panel #listView{margin:15px;}
 .panel table th{background-color:#fff !important;border-top:1px solid #ddd}
@@ -43,3 +40,5 @@
 .panel .radius-btn{text-decoration:none;border:1px solid #ccc;border-radius:6px;font-size:14px;color:#000;margin-left:8px}
 
 #imageView .pager{margin:0px;}
+
+body > .navbar-nav {position: absolute; right: 0; top: 0; z-index: 10;}

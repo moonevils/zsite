@@ -514,7 +514,11 @@ class control extends baseControl
             }
         }
 
-        if(RUN_MODE == 'front') $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
+        if(RUN_MODE == 'front')
+        {
+            $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
+            $this->output = preg_replace('/[\r\n]{2,}/', "\n", $this->output);
+        }
 
         if(!headers_sent()
             && isset($this->config->site->gzipOutput) && $this->config->site->gzipOutput == 'open'

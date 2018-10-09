@@ -13,8 +13,11 @@ js::set('visualLang', $lang->visual->js);
 <div id='dsBox' class='dock fade'>
   <div id='dsMenu' class='box dock-left'>
     <header class='dock-top text-right'>
-      <div class='dock-left scroll-none'><?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon icon-remove-circle"></i>', "class='btn btn-link' title='{$lang->ui->setTheme}' id='backBtn'");?></div>
-      <?php echo $lang->visual->design->currentTheme;?><?php echo $templateData['themes'][$theme];?>
+      <div class='dock-left scroll-none'>
+        <?php commonModel::printLink('ui', 'setTemplate', '', $lang->ui->themeList, "class='btn btn-link' title='{$lang->ui->setTheme}' id='backBtn'");?>
+        <i class='icon icon-angle-right'> </i>
+        <?php echo html::a('', $templateData['themes'][$theme], "class='btn btn-link'");?>
+      </div>
     </header>
     <div class='content dock box'>
       <ul class='nav' id='pageList'>
