@@ -214,7 +214,7 @@ class searchModel extends model
         $needle  = '';
         foreach($matches as $matched) 
         {
-            /* Use matched words length as score. */
+            /* Use length of matched words as score. */
             if(strlen($matched) > $score) 
             {
                 $content = str_replace($needle, strip_tags($needle), $content);
