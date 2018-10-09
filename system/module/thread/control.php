@@ -20,7 +20,7 @@ class thread extends control
      */
     public function post($boardID = 0)
     {
-        /*check member is bing email? if not bind go to bind email*/
+        /* If user email is not certified, then locate to bind email page  */
         $isBindEmailResult = $this->loadModel('user')->checkIsBindEmail();
         if($isBindEmailResult == '0')
         {
