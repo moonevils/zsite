@@ -35,6 +35,7 @@ $lang->moduelGroups->promote = array();
 $lang->moduelGroups->promote[] = 'stat';
 $lang->moduelGroups->promote[] = 'tag';
 $lang->moduelGroups->promote[] = 'links';
+$lang->moduelGroups->promote[] = 'bear';
 
 $lang->moduelGroups->design = array();
 $lang->moduelGroups->design[] = 'ui';
@@ -267,6 +268,7 @@ $lang->resource->ui->browseSource  = array('module' => 'file', 'method' => 'sour
 $lang->resource->ui->deleteSource  = array('module' => 'file', 'method' => 'deleteSource');
 $lang->resource->ui->editSource    = array('module' => 'file', 'method' => 'editSource');
 $lang->resource->ui->selectImage   = array('module' => 'file', 'method' => 'selectImage');
+$lang->resource->ui->component     = array('module' => 'ui', 'method' => 'component');
 
 /* User module. */
 $lang->resource->user = new stdclass();
@@ -291,6 +293,11 @@ $lang->resource->wechat->commitMenu     = 'commitMenu';
 $lang->resource->wechat->deleteMenu     = 'deleteMenu';
 $lang->resource->wechat->message        = 'messageList';
 $lang->resource->wechat->qrcode         = 'qrcode';
+
+$lang->resource->bear = new stdclass();
+$lang->resource->bear->setting     = 'setting';
+$lang->resource->bear->batchsubmit = 'batchSubmit';
+$lang->resource->bear->log         = 'log';
 
 /* Order module. */
 if(!isset($lang->resource->order))$lang->resource->order = new stdclass();
