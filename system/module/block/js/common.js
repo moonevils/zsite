@@ -134,7 +134,7 @@ $(function()
         }
         else 
         {
-            $(this).parents('.liGrade1').remove();
+            $(this).parent().parent().parent().remove();
         }
     });
 
