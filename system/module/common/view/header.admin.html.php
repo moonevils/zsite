@@ -57,7 +57,7 @@
 <?php $currentTemplate = $this->config->template->{$this->app->clientDevice}->name; ?>
 <?php $currentTheme    = $this->config->template->{$this->app->clientDevice}->theme; ?>
 <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
-<ul class='nav navbar-nav navbar-right'>
+<ul class='nav navbar-nav navbar-right' id='mainNavbar'>
   <li><?php echo html::a(getHomeRoot(zget($this->config->langsShortcuts, $this->app->getClientLang())), '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'");?></li>
   <li class='dropdown'><?php include 'selectlang.html.php';?></li>
 </ul>
