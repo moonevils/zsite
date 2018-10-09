@@ -4,9 +4,9 @@ $config->menus->home    = 'admin,order,message,comment,reply,thread,forumreply,w
 $config->menus->content = 'article,page,blog,book,submission,attachment';
 $config->menus->shop    = 'order,product,orderSetting';
 $config->menus->user    = 'user,message,comment,reply,forum,wechat,submission';
-$config->menus->promote = 'stat,tag,links';
+$config->menus->promote = 'stat,tag,links,bear';
 $config->menus->design  = '';
-$config->menus->setting = 'site,company,score,interface,security,wechatSetting,bear';
+$config->menus->setting = 'site,company,score,interface,security,wechatSetting';
 $config->menus->open    = 'package,themestore,effect,community,';
 
 $designMenus = array('ui', 'logo', 'slide', 'nav', 'block', 'visual', 'others', 'edit');

@@ -338,7 +338,6 @@ $lang->security->menu->log         = '登录日志|user|adminlog|';
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
 $lang->interface->menu->oauth = '开放登录|site|setoauth|';
-$lang->interface->menu->bear  = array('link' => '熊掌号|bear|setting|', 'alias' => 'log,sync');
 $lang->interface->menu->mail  = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of score module. */
