@@ -55,10 +55,11 @@ $(document).ready(function()
 
     $('.books dl').append('<dd class="catalog catalog-empty">&nbsp;</dd>');
 
-    $('.books > .catalog .catalog, .books > dl .catalog').not('.catalog-empty').droppable(
+    $('.books').droppable(
     {
-        trigger: function($e){return $e.children('.actions').find('.sort-handle')},
+        handle: '.sort-handle',
         target: function($e){return $e.siblings('.catalog');},
+        selector: '.catalog',
         container: '.books',
         nested: true,
         flex: true,
