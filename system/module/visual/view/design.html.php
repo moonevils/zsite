@@ -36,7 +36,7 @@ js::set('visualLang', $lang->visual->js);
       <li><strong><?php echo $lang->visual->design->layout;?></strong></li>
     </ol>
     <div class='actions dock-right'>
-      <?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon icon-download"></i> ' . $lang->ui->exportTheme, "class='btn btn-sm btn-link' data-toggle='modal' data-width='600'");?>
+      <?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon icon-download"></i> ' . $lang->ui->exportTheme, "class='btn btn-sm btn-primary' data-toggle='modal' data-width='600'");?>
     </div>
   </div>
   <div id='dsPreview' class='dock box'>
