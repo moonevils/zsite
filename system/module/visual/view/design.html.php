@@ -9,7 +9,6 @@ js::set('region', $region);
 js::set('page', $page);
 js::set('visualLang', $lang->visual->js);
 ?>
-
 <div id='dsBox' class='dock fade'>
   <div class='box dock-left' id='dsPageList'>
     <ul class='nav dock'>
@@ -31,9 +30,8 @@ js::set('visualLang', $lang->visual->js);
   <div id='dsMenu' class='dock dock-top'>
     <ol class='breadcrumb'>
       <li><?php commonModel::printLink('ui', 'setTemplate', '', $lang->ui->themeList, "title='{$lang->ui->setTheme}' id='backBtn'");?></li>
-      <li><?php echo html::a('', $lang->visual->design->currentTheme . $templateData['themes'][$theme]);?></li>
-      <li><?php commonModel::printLink('visual', 'design', "page={$page}", $lang->visual->design->pageTemplate . $lang->colon . $lang->block->{$template}->pages[$page]);?></li>
-      <li><strong><?php echo $lang->visual->design->layout;?></strong></li>
+      <li><?php echo html::a('', $templateData['themes'][$theme]);?></li>
+      <li><?php commonModel::printLink('visual', 'design', "page={$page}", $lang->block->{$template}->pages[$page]);?></li>
     </ol>
     <div class='actions dock-right'>
       <?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon icon-download"></i> ' . $lang->ui->exportTheme, "class='btn btn-sm btn-link' data-toggle='modal' data-width='600'");?>
