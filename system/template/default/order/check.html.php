@@ -1,4 +1,3 @@
-{if(!defined("RUN_MODE"))} {!die()} {/if}
 {*php
 /**
  * The check view of order module of chanzhiEPS.
