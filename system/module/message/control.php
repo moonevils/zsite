@@ -115,7 +115,7 @@ class message extends control
         $this->view->title    = $this->lang->message->common;
         $messages = $this->message->getList($type, $status, $pager);
         $this->view->messages = $messages; 
-        $this->view->maxNewId = array_shift($messages)->id;
+        $this->view->maxId    = !empty($messages) ? array_shift($messages)->id : 0; 
         $this->view->pager    = $pager;
         $this->view->type     = $type;
         $this->view->status   = $status;
@@ -216,13 +216,13 @@ class message extends control
      * 
      * @param  int    $messageID 
      * @param  string $type 
-     * @param  int $maxNewId
+     * @param  int    $maxId
      * @access public
      * @return void
      */
-    public function pass($messageID, $type, $maxNewId = 0)
+    public function pass($messageID, $type, $maxId = 0)
     {
-        $this->message->pass($messageID, $type, $maxNewId);
+        $this->message->pass($messageID, $type, $maxId);
         if(!dao::isError()) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
@@ -232,13 +232,13 @@ class message extends control
      *
      * @param int    $messageID 
      * @param string $type          single|pre
-     * @param int $maxNewId
+     * @param int    $maxId
      * @access public
      * @return void
      */
-    public function delete($messageID, $type, $maxNewId = 0)
+    public function delete($messageID, $type, $maxId = 0)
     {
-        $this->message->deleteMessage($messageID, $type, $maxNewId);
+        $this->message->deleteMessage($messageID, $type, $maxId);
         if(!dao::isError()) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }

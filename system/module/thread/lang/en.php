@@ -76,6 +76,7 @@ $lang->thread->viewReplies     = 'View your reply';
 $lang->thread->stayCurrent     = 'Stay on the current page';
 $lang->thread->quoteTitle      = "<div class='quote-title'>Post by %s on %s</div>";    
 $lang->thread->replyFloor      = "Reply <strong>#%s</strong>";    
+$lang->thread->bindEmail       = 'Please bind Email';
 
 $lang->thread->score    = 'Points';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";

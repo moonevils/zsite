@@ -248,6 +248,7 @@ $lang->designMenus->block     = array('link' => '区块|block|admin|', 'alias' =
 $lang->designMenus->nav       = array('link' => '导航|nav|admin|');
 $lang->designMenus->component = array('link' => '组件|ui|component|', 'alias' => 'effect,browsesource');
 $lang->designMenus->senior    = array('link' => '高级|ui|editTemplate|');
+$lang->designMenus->others    = array('link' => '设置|ui|others|');
 
 /* Menu of article module. */
 $lang->article = new stdclass();

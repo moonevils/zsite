@@ -45,6 +45,7 @@ $lang->article->layout     = 'Layout';
 
 $lang->article->forward2Blog     = 'To Blog';
 $lang->article->forward2Forum    = 'To Forum';
+$lang->article->forward2Baidu    = 'To Baidu';
 $lang->article->selectCategories = 'Select Category';
 $lang->article->selectBoard      = 'Select Board';
 $lang->article->confirmReject    = 'Do you want to reject it?';

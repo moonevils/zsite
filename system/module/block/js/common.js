@@ -134,7 +134,7 @@ $(function()
         }
         else 
         {
-            $(this).parent().remove();
+            $(this).parent().parent().parent().remove();
         }
     });
 

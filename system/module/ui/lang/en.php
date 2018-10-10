@@ -36,7 +36,6 @@ $lang->ui->execInfo        = "Operating Information";
 $lang->ui->templateName    = "Template";
 $lang->ui->currentTheme    = 'Current Theme';
 $lang->ui->internalTheme   = 'Built-in Theme';
-$lang->ui->uploadTheme     = 'Import Theme';
 $lang->ui->uploadPackage   = 'Upload Theme';
 $lang->ui->installTheme    = 'Install Theme';
 $lang->ui->importedBlocks  = 'Import Widget';

@@ -1,6 +1,6 @@
 <tr>
   <th><?php echo $lang->block->navPosition;?></th>
-  <td class='form-inline'>
+  <td class='form-inline' colspan='2'>
     <ul class='navList ulGrade1' id='navList'>
       <?php
       $navs = isset($block->content->nav) ? $block->content->nav : $this->loadModel('nav')->getDefault('desktop_bottom');

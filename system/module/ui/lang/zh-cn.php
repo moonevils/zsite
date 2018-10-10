@@ -37,7 +37,6 @@ $lang->ui->templateName    = "模板";
 $lang->ui->currentTheme    = '当前主题';
 $lang->ui->internalTheme   = '内置主题';
 $lang->ui->uploadPackage   = '上传主题包';
-$lang->ui->uploadTheme     = '导入主题';
 $lang->ui->installTheme    = '导入主题';
 $lang->ui->importedBlocks  = '导入区块';
 $lang->ui->matchedBlock    = '对应区块';
