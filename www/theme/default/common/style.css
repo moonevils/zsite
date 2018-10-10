@@ -495,7 +495,6 @@ body.body-modal {padding: 20px;}
   .ke-toolbar {display: none !important;}
   .page {color :transparent; white-space:nowrap; overflow:hidden;}
 }
-.article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial;}
 
 /* Search bar */
 #searchbar {max-width: 200px;}
