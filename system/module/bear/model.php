@@ -28,10 +28,11 @@ class bearModel extends model
             ->get();
 
         $errors = array();
-        if(empty(trim($bear->type))) $errors['type'][] = sprintf($this->lang->error->notempty, $this->lang->bear->type);
-        if(empty(trim($bear->name))) $errors['name'][] = sprintf($this->lang->error->notempty, $this->lang->bear->name);
-        if(empty(trim($bear->appID))) $errors['appID'][] = sprintf($this->lang->error->notempty, $this->lang->bear->appID);
-        if(empty(trim($bear->token))) $errors['token'][] = sprintf($this->lang->error->notempty, $this->lang->bear->token);
+        foreach($bear as $key => $value) $bear->$key = trim($value);
+        if(empty($bear->type))  $errors['type'][] = sprintf($this->lang->error->notempty, $this->lang->bear->type);
+        if(empty($bear->name))  $errors['name'][] = sprintf($this->lang->error->notempty, $this->lang->bear->name);
+        if(empty($bear->appID)) $errors['appID'][] = sprintf($this->lang->error->notempty, $this->lang->bear->appID);
+        if(empty($bear->token)) $errors['token'][] = sprintf($this->lang->error->notempty, $this->lang->bear->token);
 
         if(!empty($errors)) return array('result' => 'fail', 'message' => $errors);
 
