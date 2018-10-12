@@ -677,6 +677,8 @@ class ui extends control
      */
     public function setDevice($device)
     {
+        $fromVisual = false;
+        if(strpos($this->sever->http_referer, 'm=visual&f=index') !== false) $fromVisual = true;
         if($device == 'mobile')
         {
             $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';
@@ -692,6 +694,13 @@ class ui extends control
         }
 
         $this->session->set('device', $device);
+
+        if($fromVisual) 
+        {
+            $deviceCookieVar = 'frontDevice';
+            setcookie($deviceCookieVar, $device, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
+            $this->cookie->set($deviceCookieVar, $device);
+        }
 
         $template = $this->config->template->{$device};
         if(isset($this->config->template->{$device}) and !is_object($this->config->template->{$device})) $template = json_decode($this->config->template->{$device});
