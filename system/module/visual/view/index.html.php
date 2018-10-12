@@ -100,7 +100,6 @@ js::set('device', $this->app->clientDevice);
           <div class='theme-picker-toolbar clearfix'>
             <ul class='nav'>
               <li><?php commonModel::printLink('ui', 'themestore',  '', '<i class="icon-th-large"></i> ' . $lang->ui->themeStore, "target='_blank'")?></li>
-              <li><?php commonModel::printLink('ui', 'uploadTheme', '', '<i class="icon-download-alt"></i> ' . $lang->ui->uploadTheme, "data-toggle='modal' data-width='600'")?></li>
               <li><?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon-upload-alt"></i> ' . $lang->ui->exportTheme, "data-toggle='modal' data-width='600'")?></li>
             </ul>
             <ul class='nav pull-right'>
