@@ -248,6 +248,7 @@ $lang->designMenus->block     = array('link' => 'Widget|block|admin|', 'alias' =
 $lang->designMenus->nav       = array('link' => 'Nav|nav|admin|');
 $lang->designMenus->component = array('link' => 'CMPT|ui|component|', 'alias' => 'effect,browsesource');
 $lang->designMenus->senior    = array('link' => 'Senior|ui|editTemplate|');
+$lang->designMenus->others    = array('link' => 'Setting|ui|others|');
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -338,7 +339,6 @@ $lang->security->menu->log         = 'Login Log|user|adminlog|';
 $lang->interface = new stdclass();
 $lang->interface->menu = new stdclass();
 $lang->interface->menu->oauth = 'Social Login|site|setoauth|';
-$lang->interface->menu->bear  = array('link' => 'Bear|bear|setting|', 'alias' => 'log,sync');
 $lang->interface->menu->mail  = array('link' => 'Email|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of score module. */

@@ -29,3 +29,5 @@ $lang->reply->noReply['readonly'] = 'Can not reply in readonly board';
 
 $lang->reply->noEdit = array();
 $lang->reply->noEdit['readonly']  = 'Can not edit in readonly board';
+
+$lang->reply->bindEmail = 'Please bind email first.';
