@@ -50,7 +50,7 @@
             }
             nodeHead.appendChild(nodeScript);
         }
-        else 
+        else
         {
             if(callback != null)
             {
@@ -326,7 +326,8 @@
 
             var blockID = $veMain.data('id');
             var isCarousel = $veMain.children('.carousel').length;
-            var isRow = $veMain.hasClass('row');
+            var isRandom = $veMain.hasClass('random-block-list');
+            var isRow = !isRandom && $veMain.hasClass('row');
             var title = $veMain.attr('data-title');
 
             if(!blockID)
@@ -338,8 +339,14 @@
             if(!title)
             {
                 if(isCarousel) title = lang.carousel;
+                else if(isRandom) title = lang.randomRegion + '#' + blockID;
                 else if(isRow) title = lang.subRegion + '#' + blockID;
                 else title = '';
+            }
+
+            if(isRandom)
+            {
+                $veMain.children('.col').attr('data-grid', 12).find('.panel-block').css('height', 'auto');
             }
 
             $veMain.data(
@@ -978,8 +985,8 @@
         var updateQuerySelector = function()
         {
             var selector = querySelector;
-            var queryText = selector.name 
-                + (selector.id ? ('#' + selector.id) : '') 
+            var queryText = selector.name
+                + (selector.id ? ('#' + selector.id) : '')
                 + (selector['class'] ? ('.' + selector['class'].join('.')) : '');
 
             var queryHtml = '';
@@ -998,14 +1005,14 @@
                         queryHtml += '<span class="text-name">>' + parentName + '</span>';
                     });
                 }
-                queryHtml += '<span class="text-name">>' + selector.name + '</span>' 
-                + (selector.id ? ('<span class="text-id">#' + selector.id + '</span>') : '') 
+                queryHtml += '<span class="text-name">>' + selector.name + '</span>'
+                + (selector.id ? ('<span class="text-id">#' + selector.id + '</span>') : '')
                 + (selector['class'] ? ('<span class="text-class">.' + selector['class'].join('.') + '</span>') : '');
             }
             else
             {
-                queryHtml = '<span class="text-name">' + selector.name + '</span>' 
-                + (selector.id ? ('<span class="text-id">#' + selector.id + '</span>') : '') 
+                queryHtml = '<span class="text-name">' + selector.name + '</span>'
+                + (selector.id ? ('<span class="text-id">#' + selector.id + '</span>') : '')
                 + (selector['class'] ? ('<span class="text-class">.' + selector['class'].join('.') + '</span>') : '');
             }
             $querySelectorName.attr('title', queryText).html(queryHtml).attr('contenteditable', null);

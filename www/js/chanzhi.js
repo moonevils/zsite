@@ -786,7 +786,7 @@ function setGo2Top()
                 row.cols.each(function()
                 {
                     var $child = $(this).children().not('style, script').first().css('height', row.height);
-                    if($child.hasClass('random-block-list')) $child.find('[data-random]').children().not('style, script').first().css('height', row.height);
+                    if(!$('body').hasClass('ve-mode') && $child.hasClass('random-block-list')) $child.find('[data-random]').children().not('style, script').first().css('height', row.height);
                 });
             }
         });
