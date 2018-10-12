@@ -675,10 +675,8 @@ class ui extends control
      * @access public
      * @return void
      */
-    public function setDevice($device)
+    public function setDevice($device, $fromVisual = 0)
     {
-        $fromVisual = false;
-        if(strpos($this->sever->http_referer, 'm=visual&f=index') !== false) $fromVisual = true;
         if($device == 'mobile')
         {
             $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';
