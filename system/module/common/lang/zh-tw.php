@@ -79,6 +79,7 @@ $lang->custom           = '自定義';
 $lang->productMenu      = '產品';
 $lang->history          = '歷史記錄';
 $lang->reverse          = '切換順序';
+$lang->transfer         = '轉發';
 
 /* Global action items. */
 $lang->reset          = '重置';
@@ -224,6 +225,7 @@ $lang->menu->company       = '公司|company|setbasic|';
 $lang->menu->score         = '積分|score|setcounts|';
 $lang->menu->interface     = '介面|site|setoauth|';
 $lang->menu->wechatSetting = '微信設置|wechat|admin|';
+$lang->menu->bear          = '熊掌號|bear|setting|';
 
 $lang->menu->package    = '插件|package|browse|';
 $lang->menu->themestore = '主題|ui|themestore|';
@@ -241,10 +243,12 @@ $lang->menuGroups->score   = 'score';
 $lang->menuGroups->guarder = 'security';
 
 $lang->designMenus = new stdclass();
-$lang->designMenus->theme     = '主題|ui|settemplate|';
-$lang->designMenus->nav       = '導航|nav|admin|';
-$lang->designMenus->component = '組件|ui|component|';
-$lang->designMenus->senior    = '高級|ui|editTemplate|';
+$lang->designMenus->theme     = array('link' => '主題|ui|settemplate|', 'alias' => 'themestore');
+$lang->designMenus->block     = array('link' => '區塊|block|admin|', 'alias' => 'create');
+$lang->designMenus->nav       = array('link' => '導航|nav|admin|');
+$lang->designMenus->component = array('link' => '組件|ui|component|', 'alias' => 'effect,browsesource');
+$lang->designMenus->senior    = array('link' => '高級|ui|editTemplate|');
+$lang->designMenus->others    = array('link' => '設置|ui|others|');
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -377,6 +381,13 @@ $lang->stat->menu->keywords = '關鍵詞|stat|keywords|';
 $lang->stat->menu->client   = '用戶終端|stat|client|type=browser';
 $lang->stat->menu->page     = '點擊排行|stat|page|';
 $lang->stat->menu->setStat  = '設置|stat|setting|';
+
+/* Menu of bear module. */
+$lang->bear = new stdclass();
+$lang->bear->menu = new stdclass;
+$lang->bear->menu->setting     = '設置|bear|setting|';
+$lang->bear->menu->batchSubmit = '批量提交|bear|batchsubmit|';
+$lang->bear->menu->log         = '日誌|bear|log|';
 
 /* The error messages. */
 $lang->error = new stdclass();

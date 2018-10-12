@@ -43,8 +43,9 @@ $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 $lang->article->layout     = '佈局';
 
-$lang->article->forward2Blog     = '轉至博客';
-$lang->article->forward2Forum    = '轉至論壇';
+$lang->article->forward2Blog     = '博客';
+$lang->article->forward2Forum    = '論壇';
+$lang->article->forward2Baidu    = '百度';
 $lang->article->selectCategories = '選擇類目';
 $lang->article->selectBoard      = '選擇版塊';
 $lang->article->confirmReject    = '確認駁回這篇投稿？';

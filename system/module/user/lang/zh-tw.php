@@ -243,10 +243,13 @@ $lang->user->oauth->typeList['github'] = 'Github';
 $lang->user->oauth->typeList['facebook'] = 'Facebook';
 #$lang->user->oauth->typeList['google'] = 'Google';
 
+$lang->user->oauth->bindUser         = '綁定用戶';
 $lang->user->oauth->lblWelcome       = '開放登錄，快捷方便';
 $lang->user->oauth->lblOtherLogin    = '其他方式 : ';
 $lang->user->oauth->lblProfile       = "註冊新用戶";
 $lang->user->oauth->lblBind          = "綁定已有用戶";
+$lang->user->oauth->directBind       = "直接綁定";
+$lang->user->oauth->lblBindCurrent   = "當前登錄蟬知用戶為 %s，微信用戶為 %s";
 $lang->user->oauth->lblUnbind        = "解除綁定";
 $lang->user->oauth->lblUnbindSuccess = "解除綁定成功！";
 $lang->user->oauth->lblUnbindFailed  = "解除綁定失敗！";

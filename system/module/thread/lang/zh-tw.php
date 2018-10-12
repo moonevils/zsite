@@ -76,6 +76,7 @@ $lang->thread->viewReplies     = '查看回帖內容';
 $lang->thread->stayCurrent     = '留在當前頁面';
 $lang->thread->quoteTitle      = "<div class='quote-title'>原帖由 %s 于 %s 發表</div>";    
 $lang->thread->replyFloor      = "回覆<strong>#%s</strong>";    
+$lang->thread->bindEmail       = '請綁定郵箱';
 
 $lang->thread->score    = '獎勵積分';
 $lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";

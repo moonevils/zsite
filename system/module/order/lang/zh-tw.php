@@ -78,6 +78,7 @@ $lang->order->applyRefund    = '申請退款';
 $lang->order->wechatpay      = '微信支付';
 $lang->order->scanCode       = '微信掃碼支付';
 $lang->order->wechatScan     = '請使用微信掃一掃<br>掃瞄二維碼支付';
+$lang->order->inWechatTip    = '提示：微信瀏覽器不支持支付寶支付，如需使用支付寶支付，請複製本頁網址到其他瀏覽器進行操作';
 
 $lang->order->confirmLimit         = '確認收貨周期';
 $lang->order->expireLimit          = '訂單過期時間';

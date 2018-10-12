@@ -36,13 +36,14 @@ $lang->ui->execInfo        = "運行信息";
 $lang->ui->templateName    = "模板";
 $lang->ui->currentTheme    = '當前主題';
 $lang->ui->internalTheme   = '內置主題';
-$lang->ui->uploadTheme     = '導入主題';
+$lang->ui->uploadPackage   = '上傳主題包';
 $lang->ui->installTheme    = '導入主題';
 $lang->ui->importedBlocks  = '導入區塊';
 $lang->ui->matchedBlock    = '對應區塊';
 $lang->ui->createBlock     = '導入新區塊';
 $lang->ui->useOldBlock     = '使用已有區塊';
 $lang->ui->themeStore      = '主題市場';
+$lang->ui->themeList       = '主題列表';
 $lang->ui->help            = "幫助";
 $lang->ui->deleteLogo      = "刪除Logo";
 $lang->ui->setCode         = "代碼";
@@ -88,13 +89,13 @@ $lang->ui->deviceList = new stdclass();
 $lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i> 桌面";
 $lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i> 移動";
 
-$lang->ui->productViewList[1] = '顯示'; 
-$lang->ui->productViewList[0] = '不顯示'; 
+$lang->ui->productViewList[1] = '顯示';
+$lang->ui->productViewList[0] = '不顯示';
 
-$lang->ui->QRCodeList[1] = '顯示'; 
-$lang->ui->QRCodeList[0] = '不顯示'; 
+$lang->ui->QRCodeList[1] = '顯示';
+$lang->ui->QRCodeList[0] = '不顯示';
 
-$lang->ui->execInfoOptions['show'] = '顯示'; 
+$lang->ui->execInfoOptions['show'] = '顯示';
 $lang->ui->execInfoOptions['hide'] = '不顯示';
 
 $lang->ui->logoList['current'] = '當前主題';
@@ -302,8 +303,8 @@ $lang->js->importTip     = "只導入主題的風格和樣式";
 $lang->js->fullImportTip = "將會導入測試數據以及替換站點文章、產品等數據";
 
 $lang->ui->importTypes = new stdclass();
-$lang->ui->importTypes->theme = '只導入主題';
-$lang->ui->importTypes->full  = '完整導入';
+$lang->ui->importTypes->theme = '導入樣式';
+$lang->ui->importTypes->full  = '導入樣式和數據';
 
 $lang->ui->theme->encryptTip = new stdclass();
 $lang->ui->theme->encryptTip->common    = '提示：';
@@ -334,6 +335,12 @@ $lang->ui->folderList->order   = '訂單';
 $lang->ui->folderList->user    = '會員';
 $lang->ui->folderList->message = '評論留言';
 $lang->ui->folderList->forum   = '論壇';
+
+$lang->ui->folderAlias = new stdclass();
+$lang->ui->folderAlias->blog   = 'article';
+$lang->ui->folderAlias->page   = 'article';
+$lang->ui->folderAlias->thread = 'forum';
+$lang->ui->folderAlias->reply  = 'forum';
 
 $lang->ui->settingList['display']   = '顯示設置';
 $lang->ui->settingList['browse']    = '列表設置';

@@ -27,14 +27,20 @@ $lang->forum->setting    = '論壇設置';
 $lang->forum->postReview = '發帖審核';
 $lang->forum->allBoards  = '所有版塊';
 $lang->forum->index      = '首頁';
+$lang->forum->bindWechat = '發帖綁定微信';
 
 $lang->forum->updateDesc    = '該更新操作會重新計算每個版塊的發帖數據。';
 $lang->forum->successUpdate = '更新數據成功';
+$lang->forum->bindWechatTip = '發帖功能設置了綁定微信的限制，請先綁定微信會員。';
 
 $lang->forum->indexModeOptions = array();
 $lang->forum->indexModeOptions['board']  = '版塊瀏覽';
 $lang->forum->indexModeOptions['latest'] = '最新主題';
 $lang->forum->indexModeOptions['stick']  = '置頂主題';
+
+$lang->forum->bindWechatOptions = array();
+$lang->forum->bindWechatOptions['open']  = '開啟';
+$lang->forum->bindWechatOptions['close'] = '關閉';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';

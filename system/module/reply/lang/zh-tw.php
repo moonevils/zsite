@@ -30,3 +30,4 @@ $lang->reply->noReply['readonly'] = '板塊狀態為只讀，禁止回帖';
 $lang->reply->noEdit = array();
 $lang->reply->noEdit['readonly']  = '板塊狀態為只讀，禁止編輯';
 
+$lang->reply->bindEmail = '請先綁定郵箱';
