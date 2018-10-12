@@ -6,8 +6,8 @@
   <footer id='footer' class='clearfix'>
     <div class='wrapper'>
       <div id='footNav'>
-        {!html::a(helper::createLink('sitemap', 'index'), '<i class=\'icon-sitemap\'></i>' . $lang->sitemap->common, "class='text-linki'")}
-        {if(empty($config->links->index) && !empty($config->links->all))} 
+        {!html::a(helper::createLink('sitemap', 'index'), '<i class=\'icon-sitemap\'></i> ' . $lang->sitemap->common, "class='text-linki'")}
+        {if(empty($config->links->index) && !empty($config->links->all))}
         {!html::a(helper::createLink('links', 'index'), "<i class='icon-link'></i> " . $lang->link)}
         {/if}
       </div>
