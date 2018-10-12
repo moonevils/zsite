@@ -105,8 +105,7 @@ class router extends baseRouter
     public function setClientDevice()
     {
         $deviceCookieVar = RUN_MODE . 'Device';
-
-        if(empty($this->cookie->{$deviceCookieVar}) || strpos('mobile,desktop', $this->cookie->{$deviceCookieVar}) === false) 
+        if(!$this->cookie->{$deviceCookieVar} || (strpos('mobile,desktop', $this->cookie->{$deviceCookieVar}) === false)) 
         {
             $mobile = new mobile();
             $device = ($mobile->isMobile() and !$mobile->isTablet()) ? 'mobile' : 'desktop';
