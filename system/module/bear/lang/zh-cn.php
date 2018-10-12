@@ -11,7 +11,7 @@ $lang->bear->submitType = '推送类型';
 $lang->bear->id       = '编号';
 $lang->bear->time     = '提交时间';
 $lang->bear->url      = '资源地址';
-$lang->bear->auto     = '资源地址';
+$lang->bear->auto     = '自动同步';
 $lang->bear->status   = '状态';
 $lang->bear->response = '提交结果';
 $lang->bear->account  = '提交人';
@@ -51,7 +51,7 @@ $lang->bear->typeList[4] = '政府';
 $lang->bear->typeList[5] = '其他组织';
 
 $lang->bear->logModes = new stdclass();
-$lang->bear->logModes->yestoday = '昨日';
+$lang->bear->logModes->yesterday = '昨日';
 $lang->bear->logModes->today    = '今日';
 $lang->bear->logModes->weekly   = '最近一周';
 $lang->bear->logModes->monthly  = '最近30天';

@@ -47,7 +47,7 @@ $lang->stat->itemList->desktop = 'Desktop';
 $lang->stat->itemList->mobile  = 'Mobile';
 
 $lang->stat->trafficModes = new stdclass();
-$lang->stat->trafficModes->yestoday = 'Yesterday';
+$lang->stat->trafficModes->yesterday = 'Yesterday';
 $lang->stat->trafficModes->today    = 'Today';
 $lang->stat->trafficModes->weekly   = 'Last 7 Days';
 $lang->stat->trafficModes->monthly  = 'Last 30 Days';

@@ -20,7 +20,7 @@ class stat extends control
      */
     public function traffic($mode = '', $begin = '', $end = '')
     {
-        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        if(!$mode) $mode = date("H") < 10 ? 'yesterday' : 'today';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
@@ -56,7 +56,7 @@ class stat extends control
      */
     public function from($mode = '', $begin = '', $end = '')
     {
-        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        if(!$mode) $mode = date("H") < 10 ? 'yesterday' : 'today';
         $type = 'from';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
@@ -94,7 +94,7 @@ class stat extends control
      */
     public function search($mode = '', $begin = '', $end = '')
     {
-        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        if(!$mode) $mode = date("H") < 10 ? 'yesterday' : 'today';
         $type  = 'search';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
@@ -132,7 +132,7 @@ class stat extends control
      */
     public function client($type = 'browser', $mode = '', $begin = '', $end = '')
     {
-        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        if(!$mode) $mode = date("H") < 10 ? 'yesterday' : 'today';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
@@ -261,7 +261,7 @@ class stat extends control
      */
     public function domainList($mode = '', $begin = '', $end = '', $orderBy = 'pv_desc',  $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
-        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        if(!$mode) $mode = date("H") < 10 ? 'yesterday' : 'today';
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -354,7 +354,7 @@ class stat extends control
      */
     public function page($mode = '', $begin = '', $end = '')
     {
-        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        if(!$mode) $mode = date("H") < 10 ? 'yesterday' : 'today';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;

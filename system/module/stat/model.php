@@ -361,7 +361,7 @@ class statModel extends model
         {
             $begin = $end = date("Ymd");
         }
-        elseif($mode == 'yestoday')
+        elseif($mode == 'yesterday')
         {
             $begin = $end = date("Ymd", strtotime("-1 day"));
         }
@@ -491,13 +491,13 @@ class statModel extends model
      */
     public function getYesterdayReport()
     {
-        $yestodayReport = $this->dao->select('*')->from(TABLE_STATREPORT)
+        $yesterdayReport = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('timeType')->eq('day')
             ->andWhere('type')->eq('basic') 
             ->andWhere('item')->eq('total')
             ->andWhere('timeValue')->eq(date('Ymd', strtotime("-1 day")))
             ->fetch();
 
-        return $yestodayReport;
+        return $yesterdayReport;
     }
 }

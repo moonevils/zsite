@@ -99,7 +99,7 @@ class bear extends control
      */
     public function log($mode = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1, $begin = '', $end = '')
     {
-        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
+        if(!$mode) $mode = date("H") < 10 ? 'yesterday' : 'today';
         $begin = $this->get->begin;
         $end   = $this->get->end;
         $date  = $this->loadModel('stat')->parseDate($mode, $begin, $end);

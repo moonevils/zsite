@@ -51,7 +51,7 @@ $lang->bear->typeList[4] = '政府';
 $lang->bear->typeList[5] = '其他組織';
 
 $lang->bear->logModes = new stdclass();
-$lang->bear->logModes->yestoday = '昨日';
+$lang->bear->logModes->yesterday = '昨日';
 $lang->bear->logModes->today    = '今日';
 $lang->bear->logModes->weekly   = '最近一周';
 $lang->bear->logModes->monthly  = '最近30天';
