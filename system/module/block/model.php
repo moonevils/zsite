@@ -290,8 +290,8 @@ class blockModel extends model
 
     /**
      * Get view file  of a block.
-     * 
-     * @param  object    $block 
+     *
+     * @param  object    $block
      * @access public
      * @return string
      */
@@ -405,7 +405,7 @@ class blockModel extends model
 
         $entry    = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
         $readonly = !empty($block->children) ? "readonly='readonly'" : '';
-        if(!empty($block->children)) 
+        if(!empty($block->children))
         {
             $entry .= "<div class='col col-type text-center'>" . html::hidden("blocks[{$key}]", $blockID) . html::input('', $this->lang->block->subRegion, "class='form-control text-center' readonly") . "</div>";
             $entry .= html::hidden('isRegion', 1);
@@ -417,7 +417,7 @@ class blockModel extends model
             $entry .= html::hidden('isRegion', 0);
             $entry .= html::hidden("isRandom[$key]", 0);
         }
-        
+
         if($template != 'mobile' and !$random and !$probability and $region != 'side') $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
         if($random or $probability) $entry .= "<div class='col col-probability'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->probability}</span>" . html::select("probability[{$key}]", $this->lang->block->probabilityOptions, $probability, "class='form-control'") . '</div></div>';
 
@@ -561,7 +561,7 @@ class blockModel extends model
 
         if($data->params['top']['left'] != 'custom') $data->params['topLeftContent'] = '';
         if($data->params['top']['right'] != 'custom') $data->params['topRightContent'] = '';
-        
+
         if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc());
@@ -715,7 +715,7 @@ class blockModel extends model
         if(!isset($blocks[$method][$region])) return '';
         $blocks = $blocks[$method][$region];
 
-        foreach($blocks as $block) 
+        foreach($blocks as $block)
         {
             if($this->config->cache->type != 'close')
             {
@@ -771,7 +771,7 @@ class blockModel extends model
         $blockFile = $this->getViewFile($block);
 
         $withGrid = ($withGrid and isset($block->grid));
-        $isRegion = (zget($block, 'type') != 'tabs') && !empty($block->children);
+        $isRegion = (zget($block, 'type') != 'tabs') && (!empty($block->children) || $block->type == 'region');
         $this->view = new stdclass();
 
         if($isRegion)
@@ -780,6 +780,7 @@ class blockModel extends model
         }
         else
         {
+
             $probability = !empty($block->probability) ? "data-probability={$block->probability}" : '';
             if($withGrid)
             {
@@ -837,10 +838,10 @@ class blockModel extends model
     }
 
     /**
-     * Parse css code of a block. 
-     * 
-     * @param  object    $block 
-     * @param  string    $theme 
+     * Parse css code of a block.
+     *
+     * @param  object    $block
+     * @param  string    $theme
      * @access public
      * @return string
      */
@@ -893,17 +894,17 @@ class blockModel extends model
 
     /**
      * Parse region block
-     * 
-     * @param  object    $block 
-     * @param  bool      $withGrid 
-     * @param  string    $containerHeader 
-     * @param  string    $containerFooter 
+     *
+     * @param  object    $block
+     * @param  bool      $withGrid
+     * @param  string    $containerHeader
+     * @param  string    $containerFooter
      * @access public
      * @return string
      */
     public function parseRegion($block, $withGrid, $containerHeader, $containerFooter)
     {
-        $randomClass = !empty($block->isRandom) ? 'random-block-list' : '';
+        $randomClass = !empty($block->isRandom)  ? 'random-block-list' : '';
         if(!empty($block->isRandom) && $this->app->clientDevice == 'mobile') echo "<div class='$randomClass' data-id='{$block->id}'>";
 
         if($withGrid)
@@ -924,8 +925,8 @@ class blockModel extends model
 
     /**
      * Parse group block
-     * 
-     * @param  object    $block 
+     *
+     * @param  object    $block
      * @access public
      * @return string
      */
@@ -973,12 +974,12 @@ class blockModel extends model
 
     /**
      * Get layout of one region.
-     * 
-     * @param  string   $template 
-     * @param  string   $theme 
-     * @param  string   $page 
-     * @param  string   $region 
-     * @param  int      $object 
+     *
+     * @param  string   $template
+     * @param  string   $theme
+     * @param  string   $page
+     * @param  string   $region
+     * @param  int      $object
      * @access public
      * @return object
      */
@@ -1006,13 +1007,13 @@ class blockModel extends model
 
     /**
      * Remove a block from on region or from one subRegion.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
-     * @param  string    $page 
-     * @param  string    $region 
-     * @param  int       $blockID 
-     * @param  int       $object 
+     *
+     * @param  string    $template
+     * @param  string    $theme
+     * @param  string    $page
+     * @param  string    $region
+     * @param  int       $blockID
+     * @param  int       $object
      * @access public
      * @return void
      */
@@ -1024,7 +1025,7 @@ class blockModel extends model
         $blocks = json_decode($layout->blocks);
 
         $newBlocks = array();
-        foreach($blocks as $block) 
+        foreach($blocks as $block)
         {
             if(isset($block->children))
             {
@@ -1050,14 +1051,14 @@ class blockModel extends model
 
     /**
      * Append a block to region.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
-     * @param  string    $page 
-     * @param  string    $region 
-     * @param  string    $parent 
-     * @param  int       $block 
-     * @param  int       $object 
+     *
+     * @param  string    $template
+     * @param  string    $theme
+     * @param  string    $page
+     * @param  string    $region
+     * @param  string    $parent
+     * @param  int       $block
+     * @param  int       $object
      * @access public
      * @return array     result for send
      */
@@ -1106,8 +1107,8 @@ class blockModel extends model
                         $newBlock->grid = 0;
                     }
 
-                    $block->children[] = $newBlock; 
-                } 
+                    $block->children[] = $newBlock;
+                }
             }
         }
         else
@@ -1128,9 +1129,9 @@ class blockModel extends model
 
     /**
      * Fix block attribute in one layout.
-     * 
-     * @param  obvject    $layout 
-     * @param  object     $setting 
+     *
+     * @param  obvject    $layout
+     * @param  object     $setting
      * @access public
      * @return array
      */
@@ -1173,13 +1174,13 @@ class blockModel extends model
 
     /**
      * Sort blocks.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
-     * @param  string    $page 
-     * @param  string    $region 
-     * @param  int       $parent 
-     * @param  string    $orders 
+     *
+     * @param  string    $template
+     * @param  string    $theme
+     * @param  string    $page
+     * @param  string    $region
+     * @param  int       $parent
+     * @param  string    $orders
      * @access public
      * @return bool
      */
@@ -1226,10 +1227,10 @@ class blockModel extends model
 
     /**
      * Create a region block for one region.
-     * 
-     * @param  string $template 
-     * @param  string $page 
-     * @param  string $region 
+     *
+     * @param  string $template
+     * @param  string $page
+     * @param  string $region
      * @access public
      * @return int $blockID
      */
@@ -1248,11 +1249,11 @@ class blockModel extends model
 
     /**
      * Check a region is exisits.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
-     * @param  string    $page 
-     * @param  string    $region 
+     *
+     * @param  string    $template
+     * @param  string    $theme
+     * @param  string    $page
+     * @param  string    $region
      * @access public
      * @return bool
      */
@@ -1266,9 +1267,9 @@ class blockModel extends model
 
     /**
      * Get layout setting's scope.
-     * 
-     * @param  string   $page 
-     * @param  int      $object 
+     *
+     * @param  string   $page
+     * @param  int      $object
      * @access public
      * @return void
      */
@@ -1286,8 +1287,8 @@ class blockModel extends model
 
     /**
      * Use raintpl engin to draw one block.
-     * 
-     * @param  string    $viewFile 
+     *
+     * @param  string    $viewFile
      * @access public
      * @return string
      */
@@ -1319,7 +1320,7 @@ class blockModel extends model
 
     /**
      * Assign common variables.
-     * 
+     *
      * @access private
      * @return void
      */
@@ -1358,7 +1359,7 @@ class blockModel extends model
 
         $this->tpl->assign('thisModuleName', $this->app->getModuleName());
         $this->tpl->assign('thisMethodName', $this->app->getMethodName());
-        
+
         $defaultFavicon =  file_exists($this->app->getWwwRoot() . 'favicon.ico') ? $this->config->webRoot . 'favicon.ico' : '';
         $favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon)->webPath : $defaultFavicon;
         $this->tpl->assign('favicon', $favicon);
