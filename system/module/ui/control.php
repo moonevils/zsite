@@ -71,13 +71,15 @@ class ui extends control
         $this->lang->menuGroups->ui = 'edit';
 
         $this->view->title         = $this->lang->ui->editTemplate;
-        $this->view->currentModule = $module;
-        $this->view->currentFile   = $file;
+        $this->view->currentModule = zget($this->lang->ui->folderAlias, $module);
         $this->view->uiHeader      = false;
         $this->view->files         = $this->lang->ui->files->$template;
         $this->view->realFile      = $this->ui->getExtFile($template, $module, $file);
         $this->view->content       = file_get_contents($this->ui->getEffectViewFile($template, $module, $file));
         $this->view->rawContent    = file_get_contents($this->app->getAppRoot() . 'template' . DS . $template . DS . $module . DS . $file . '.html.php');
+
+        if(isset($this->lang->ui->folderAlias->$module)) $file = $module . '/' . $file;
+        $this->view->currentFile   = $file;
 
         $this->display();
     }

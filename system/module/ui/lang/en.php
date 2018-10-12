@@ -336,6 +336,12 @@ $lang->ui->folderList->user    = 'User';
 $lang->ui->folderList->message = 'Message';
 $lang->ui->folderList->forum   = 'Forum';
 
+$lang->ui->folderAlias = new stdclass();
+$lang->ui->folderAlias->blog   = 'article';
+$lang->ui->folderAlias->page   = 'article';
+$lang->ui->folderAlias->thread = 'forum';
+$lang->ui->folderAlias->reply  = 'forum';
+
 $lang->ui->settingList['display']   = 'Display';
 $lang->ui->settingList['browse']    = 'Browse Page';
 $lang->ui->settingList['thumb']     = 'Thumb';

@@ -336,6 +336,12 @@ $lang->ui->folderList->user    = '会员';
 $lang->ui->folderList->message = '评论留言';
 $lang->ui->folderList->forum   = '论坛';
 
+$lang->ui->folderAlias = new stdclass();
+$lang->ui->folderAlias->blog   = 'article';
+$lang->ui->folderAlias->page   = 'article';
+$lang->ui->folderAlias->thread = 'forum';
+$lang->ui->folderAlias->reply  = 'forum';
+
 $lang->ui->settingList['display']   = '显示设置';
 $lang->ui->settingList['browse']    = '列表设置';
 $lang->ui->settingList['thumb']     = '缩略图设置';

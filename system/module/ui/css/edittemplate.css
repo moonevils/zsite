@@ -7,7 +7,7 @@ a.btn-file.active{font-weight:bold;}
 .editor-wrapper pre {border: none}
 
 .row-main{background:#efefef;}
-#navMenu{font-size:16px; padding:0 20px; font-weight:bold;}
+#navMenu{font-size:13px; font-weight:bold; padding-right:20px}
 #navMenu .dropdown{display:inline-block; margin-left:10px;}
 #navMenu #fileBox .dropdown-menu{max-height:600px; overflow:auto;}
 #navMenu a{color:#010101;text-decoration: none;}
