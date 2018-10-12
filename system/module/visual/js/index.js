@@ -973,12 +973,13 @@
             if(!$queryElement) return;
 
             var offset = $queryElement.offset();
+            var $$window = $$($$.iframe);
             $querySelector.toggleClass('ve-sm-offset-top', offset.top < 18).css(
             {
                 width: $queryElement.outerWidth(),
                 height: $queryElement.outerHeight(),
-                top:  offset.top - $$body.scrollTop(),
-                left: offset.left - $$body.scrollLeft()
+                top:  offset.top - $$window.scrollTop(),
+                left: offset.left - $$window.scrollLeft()
             });
         };
 
