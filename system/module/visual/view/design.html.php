@@ -34,7 +34,7 @@ js::set('visualLang', $lang->visual->js);
       <li><?php commonModel::printLink('visual', 'design', "page={$page}", $lang->block->{$template}->pages[$page]);?></li>
     </ol>
     <div class='actions dock-right'>
-      <?php commonModel::printLink('visual', 'index', '', '<i class="icon icon-magic"></i> ' . $lang->visual->common, "class='btn btn-sm btn-success'");?>
+      <?php commonModel::printLink('visual', 'index', '', '<i class="icon icon-magic"></i> ' . $lang->visual->common, "class='btn btn-sm btn-success' target='_blank'");?>
       <?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon icon-download"></i> ' . $lang->ui->exportTheme, "class='btn btn-sm btn-primary' data-toggle='modal' data-width='600'");?>
     </div>
   </div>
