@@ -693,11 +693,9 @@ class ui extends control
 
         $this->session->set('device', $device);
 
-        if($fromVisual) 
+        if($fromVisual)
         {
-            $deviceCookieVar = 'frontDevice';
-            setcookie($deviceCookieVar, $device, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
-            $this->cookie->set($deviceCookieVar, $device);
+            setcookie('visualDevice', $device, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
         }
 
         $template = $this->config->template->{$device};
@@ -706,6 +704,7 @@ class ui extends control
         $setting['theme'] = $template->theme;
         $setting = helper::jsonEncode($setting);
         $result = $this->loadModel('setting')->setItems('system.common.template', array($device => $setting));
+
         $this->locate($this->server->http_referer);
     }
 
