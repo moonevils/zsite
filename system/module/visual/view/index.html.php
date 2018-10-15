@@ -13,7 +13,8 @@ js::set('zuiAdminJsUrl', $jsRoot . 'zui/admin.min.js');
 js::set('jQueryUrl', $jsRoot . 'jquery/min.js');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
-js::set('device', $this->app->clientDevice);
+$frontDevice = $this->cookie->visualDevice ? $this->cookie->visualDevice : $this->app->clientDevice;
+js::set('device', $frontDevice);
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
   <div class='container' id='menu'>
