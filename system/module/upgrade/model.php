@@ -217,6 +217,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('7.2'));
             case '7_3':
                 $this->execSQL($this->getUpgradeFile('7.3'));
+            case '7_3':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
