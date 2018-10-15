@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of visual module of chanzhiEPS.
@@ -26,6 +25,7 @@ class visual extends control
         $this->view->referer = helper::safe64decode($referer);
         $this->view->title   = $this->lang->visual->common;
         $this->view->blocks  = $this->lang->block->{$template};
+        if(!$this->cookie->visualDevice) setcookie('visualDevice', $this->app->clientDevice, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
 
         if($referer == '') $this->view->referer = getWebRoot();
         $this->display();
