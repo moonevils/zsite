@@ -115,8 +115,8 @@ class router extends baseRouter
             $device = $this->cookie->{$deviceCookieVar};
         }
 
-        if(RUN_MODE == 'admin' && strpos('mobile,desktop', $this->session->device) !== false)  $device = $this->session->device;
-        
+        if(RUN_MODE == 'admin' && strpos('mobile,desktop', $this->session->device) !== false) $device = $this->session->device;
+
         setcookie($deviceCookieVar, $device, $this->config->cookieLife, $this->config->cookiePath, '', false, true);
         $this->cookie->set($deviceCookieVar, $device);
 
@@ -130,6 +130,7 @@ class router extends baseRouter
             $this->cookie->set($deviceCookieVar, '');
         }
 
+        if($this->cookie->visualDevice and RUN_MODE == 'front') $device = $this->cookie->visualDevice;
         $this->clientDevice = $device;
 
         return $this->clientDevice;
