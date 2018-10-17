@@ -338,7 +338,7 @@ class installModel extends model
             $table = trim($table);
             if(empty($table)) continue;
   
-            $table = str_replace('`eps_', $this->config->db->name . '.`eps_', $table);
+            $table = str_replace('`eps_', '`' . $this->config->db->name . '`.`eps_', $table);
             $table = str_replace('eps_', $this->config->db->prefix, $table);
             if(!$this->dbh->query($table)) return false;
         }
