@@ -1648,7 +1648,10 @@ class commonModel extends model
      */
     public static function needClearCache()
     {
-        global $app;
+        global $app, $config;
+
+        /* The field stickTime of TABLE_ARTICLE was added in version 6.7.1. */
+        if(version_compare($config->global->version, '6.7.1', '<')) return false;
 
         $overdueSticks = $app->loadClass('dao')->select('id')->from(TABLE_ARTICLE)->where('stickTime')->lt(helper::now())->andWhere('stickTime')->ne('0000-00-00 00:00:00')->fetchPairs();
 
