@@ -62,7 +62,8 @@ class blockModel extends model
             $layoutsInCurrent = $this->dao->select('*')->from(TABLE_LAYOUT)
                 ->where('page')->eq("{$module}_{$method}")
                 ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-                ->andWhere('theme')->in("all,$theme")
+                ->beginIF(version_compare($this->config->global->version, '7.1', '>='))->andWhere('theme')->in("all,$theme")->fi()
+                ->beginIF(version_compare($this->config->global->version, '7.1', '<'))->andWhere('plan')->in("all,$theme")->fi()
                 ->andWhere('object')->eq($object)
                 ->fetchAll('region');
         }
@@ -70,7 +71,8 @@ class blockModel extends model
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
-            ->andWhere('theme')->eq($theme)
+            ->beginIF(version_compare($this->config->global->version, '7.1', '>='))->andWhere('theme')->eq($theme)->fi()
+            ->beginIF(version_compare($this->config->global->version, '7.1', '<'))->andWhere('plan')->eq($theme)->fi()
             ->andWhere('object')->eq('')
             ->fetchGroup('page', 'region');
 

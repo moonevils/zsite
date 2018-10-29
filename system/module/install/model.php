@@ -247,6 +247,8 @@ class installModel extends model
      */
     public function setDBParam()
     {
+        if(!$this->post->dbPrefix) $_POST['dbPrefix'] = 'eps_';
+
         $this->config->db->host     = $this->post->dbHost;
         $this->config->db->name     = $this->post->dbName;
         $this->config->db->user     = $this->post->dbUser;
@@ -336,7 +338,7 @@ class installModel extends model
             $table = trim($table);
             if(empty($table)) continue;
   
-            $table = str_replace('`eps_', $this->config->db->name . '.`eps_', $table);
+            $table = str_replace('`eps_', '`' . $this->config->db->name . '`.`eps_', $table);
             $table = str_replace('eps_', $this->config->db->prefix, $table);
             if(!$this->dbh->query($table)) return false;
         }

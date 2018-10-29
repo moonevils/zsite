@@ -217,7 +217,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('7.2'));
             case '7_3':
                 $this->execSQL($this->getUpgradeFile('7.3'));
-            case '7_3':
+            case '7_4':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -255,30 +255,30 @@ class upgradeModel extends model
             case '2_5_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.beta'));
             case '2_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.2'));
             case '2_5_3'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.3'));
-            case '3_0'      ;
-            case '3_0_1'    ;
-            case '3_1'      ;
-            case '3_2'      ;
+            case '3_0'      :
+            case '3_0_1'    :
+            case '3_1'      :
+            case '3_2'      :
             case '3_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('3.3'));
-            case '4_0'      ;
+            case '4_0'      :
             case '4_1_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.1.beta'));
-            case '4_2'      ;
+            case '4_2'      :
             case '4_2_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
             case '4_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.3.beta'));
             case '4_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4'));
             case '4_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4.1'));
-            case '4_5'      ;     
+            case '4_5'      :
             case '4_5_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.1'));
             case '4_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.2'));
             case '4_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.6'));
-            case '5_0'      ;
+            case '5_0'      :
             case '5_0_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.0.1'));
             case '5_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.1'));
             case '5_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.2'));
-            case '5_3'      ;
+            case '5_3'      :
             case '5_3_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.1'));
-            case '5_3_2'    ; 
-            case '5_3_3'    ; 
+            case '5_3_2'    :
+            case '5_3_3'    :
             case '5_3_4'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.3.4'));
             case '5_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('5.4.1'));
             case '5_5'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.5'));
@@ -286,8 +286,12 @@ class upgradeModel extends model
             case '5_7'      : $confirmContent .= file_get_contents($this->getUpgradeFile('5.7'));
             case '6_0'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.0'));
             case '6_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.1'));
-            case '6_2'      ;
+            case '6_2'      :
             case '6_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('6.3.beta'));
+            case '6_4'      :
+            case '6_4_1'    :
+            case '6_5'      :
+            case '6_6'      :
             case '6_6_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('6.6.1'));
             case '6_7'      : $confirmContent .= file_get_contents($this->getUpgradeFile('6.7'));
             case '6_7_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('6.7.1'));
@@ -296,6 +300,7 @@ class upgradeModel extends model
             case '7_1'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.1'));
             case '7_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.2'));
             case '7_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.3'));
+            case '7_4'      :
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
