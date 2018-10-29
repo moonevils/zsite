@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     if(v.oauthLoginLink !== 'undefined')
     {
-        bootbox.confirm(v.bindWechatTip, function(result)
+        bootbox.confirm(v.lang.bindWechatTip, function(result)
         {
             if(result)
             {
