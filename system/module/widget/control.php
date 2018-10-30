@@ -96,7 +96,7 @@ class widget extends control
         {
             $block = $blockList[$blockID];
             if(!isset($block)) continue;
-            $block->order = $order;
+            $block->order = $order + 1;
             $this->dao->replace(TABLE_WIDGET)->data($block)->exec();
         }
 
