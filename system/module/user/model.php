@@ -607,7 +607,7 @@ class userModel extends model
                 if($user->maxLogin > 0)
                 {
                     $this->app->loadModuleConfig('score');
-                    $login = $this->config->score->counts->login;
+                    $login = (int) $this->config->score->counts->login;
                     $this->dao->update(TABLE_USER)->set('maxLogin = maxLogin - '. $login)->where('account')->eq($account)->exec();
                     $this->loadModel('score')->earn('login', '', '', 'LOGIN');
                 }
@@ -1661,7 +1661,7 @@ class userModel extends model
         $this->checkOldPassword();
         $data = fixer::input('post')->get();
 
-        $data->security = json_encode(array('question' => $data->question, 'answer' => md5(trim($data->answer))));
+        $data->security = helper::jsonEncode(array('question' => $data->question, 'answer' => md5(trim($data->answer))));
         $this->dao->setAutoLang(false)->update(TABLE_USER)
             ->data($data, $skip = 'question, answer, fingerprint, oldPwd')
             ->batchCheck($this->config->user->require->setSecurity, 'notempty')
