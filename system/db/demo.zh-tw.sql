@@ -37,7 +37,7 @@ INSERT INTO `eps_category` (`id`, `name`, `alias`, `desc`, `keywords`, `parent`,
 (14,	'七八九',	'',	'',	'',	11,	',11,14,',	2,	30,	'article',	'0',	'',	0,	0,	'',	'2014-10-08 17:43:03',	0,	0,	'',	'zh-tw'),
 (15,	'預設分組',	'',	'',	'',	0,	',15,',	1,	10,	'slide',	'0',	'',	0,	0,	'',	'2015-07-16 15:23:56',	0,	0,	'',	'zh-tw');
 
-INSERT INTO `eps_config` (`id`, `owner`, `module`, `section`, `key`, `value`, `lang`) VALUES
+REPLACE INTO `eps_config` (`id`, `owner`, `module`, `section`, `key`, `value`, `lang`) VALUES
 (351,	'system',	'common',	'site',	'lang',	'zh-tw',	'zh-tw'),
 (460,	'system',	'common',	'site',	'type',	'portal',	'zh-tw'),
 (461,	'system',	'common',	'site',	'name',	'蟬知企業門戶',	'zh-tw'),
