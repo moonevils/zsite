@@ -30,7 +30,7 @@
       <tr class='text-center'>
         <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='col-xs-3'> <?php commonModel::printOrderLink('tag',  $orderBy, $vars, $lang->tag->common);?></th>
-        <th class='col-xs-1'><?php commonModel::printOrderLink('rank', $orderBy, $vars, $lang->tag->rank);?></th>
+        <th class='col-xs-1'><?php commonModel::printOrderLink('rank_asc,id', $orderBy, $vars, $lang->tag->rank);?></th>
         <th>               <?php commonModel::printOrderLink('link', $orderBy, $vars, $lang->tag->link);?></th>
         <th class='col-xs-2'><?php echo $lang->actions;?></th>
       </tr>
