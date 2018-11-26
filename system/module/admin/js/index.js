@@ -61,6 +61,7 @@ function sortWidgets(orders)
     $.getJSON(createLink('widget', 'sort', 'orders=' + newOrders.join(',')), function(data)
     {
         // if(data.result == 'success') $.zui.messager.success(config.ordersSaved);
+        location.reload();
     });
 }
 
