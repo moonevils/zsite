@@ -509,14 +509,20 @@ class control extends baseControl
 
             if($this->moduleName != 'source' and in_array($this->viewType, array('html', 'mhtml'))) 
             {
-                $this->mergeCSS();
-                $this->mergeJS();
+                if($this->moduleName != 'chat' or $this->methodName != 'registercomponent')
+                {
+                    $this->mergeCSS();
+                    $this->mergeJS();
+                }
             }
         }
 
         if(RUN_MODE == 'front')
         {
-            $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
+            if($this->moduleName != 'chat' or $this->methodName != 'registercomponent')
+            {
+                $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
+            }
             $this->output = preg_replace('/[\r\n]{2,}/', "\n", $this->output);
         }
 

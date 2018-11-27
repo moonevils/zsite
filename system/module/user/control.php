@@ -691,6 +691,13 @@ class user extends control
 
         if(!empty($referer)) $this->referer = htmlspecialchars((helper::safe64Decode($referer)));
 
+        if($this->referer && strpos($this->referer, '#loginXuanxuan') !== false)
+        {
+            $this->referer = rtrim($this->referer, '#loginXuanxuan');
+
+            $this->session->set('loginXuanxuan', true);
+        }
+
         return true;
     }
 

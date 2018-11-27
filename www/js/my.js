@@ -69,6 +69,7 @@ $(document).ready(function()
         });
         $dockerBtn.addClass('showed').popover('show');
         $("#rightDockerBtn:not('.showed')").popover('hide');
+        $('#xuanxuanBtn').popover('hide').removeClass('showed');
         e.stopPropagation();
     });
     $(window).scroll(function()

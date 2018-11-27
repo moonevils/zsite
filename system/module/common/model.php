@@ -296,7 +296,15 @@ class commonModel extends model
      */
     public function deny($module, $method)
     {
-        if(helper::isAjaxRequest()) exit;
+        if(helper::isAjaxRequest())
+        {
+            $this->app->loadLang($module);
+            $this->app->loadLang('user');
+            $moduleName = isset($this->lang->$module->common)  ? $this->lang->$module->common:  $module;
+            $methodName = isset($this->lang->$module->$method) ? $this->lang->$module->$method: $method;
+            $data = sprintf(substr($this->lang->user->errorDeny, 0, strpos($this->lang->user->errorDeny, '<br/>')), $moduleName, $methodName);
+            print(json_encode($data)) and die(helper::removeUTF8Bom(ob_get_clean()));
+        }
 
         /* Get authorize again. */
         $user = $this->app->user;
