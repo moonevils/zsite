@@ -998,6 +998,13 @@ class baseDAO
         {
             $table = strtolower($this->table);
         }
+
+        if(strpos($table, '.') !== false)
+        {
+            $trimedTable = substr($table, strpos($table, '.') + 1); 
+            if(isset($lang->$trimedTable) and isset($lang->$trimedTable->$fieldName)) $table = $trimedTable;
+        }
+
         $fieldLabel = isset($lang->$table->$fieldName) ? $lang->$table->$fieldName : $fieldName;
         $value = isset($this->sqlobj->data->$fieldName) ? $this->sqlobj->data->$fieldName : null;
 
