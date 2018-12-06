@@ -558,3 +558,10 @@ body.body-modal {padding: 20px;}
 .reply-panel {background-color: #ebf2f9;}
 .reply-panel .reply-panel {background-color: rgba(50,128,252,.08); margin-top: 8px;}
 .replies > .reply-panel:first-child{margin-top: 0;}
+
+/**xuanxuan**/
+.xxc-mini-toolbar-btn i:before{content:'\e662';}
+.xxc-mini-close-confirm-dialog .xxc-mini-close-confirm-content{text-align:center;}
+.xxc-mini-close-confirm-dialog .xxc-mini-dialog-btn{padding: 2px 15px;border-radius:4px;}
+.xxc-mini-close-confirm-dialog .xxc-mini-close-confirm-btn{background: #37d2cf; color: #fff;}
+.xxc-mini-close-confirm-dialog .xxc-mini-close-confirm-btn:hover{background: #37d2cf; color: #fff;}
