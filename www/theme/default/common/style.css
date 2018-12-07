@@ -560,7 +560,6 @@ body.body-modal {padding: 20px;}
 .replies > .reply-panel:first-child{margin-top: 0;}
 
 /**xuanxuan**/
-.xxc-mini-toolbar-btn i:before{content:'\e662' !important;}
 .xxc-mini-close-confirm-content p{margin-top:6px;}
 .xxc-mini-close-confirm-dialog .xxc-mini-close-confirm-content{text-align:center !important;}
 .xxc-mini-close-confirm-dialog .xxc-mini-dialog-btn{padding: 2px 15px !important;border-radius:4px !important;}
