@@ -358,6 +358,7 @@ class userModel extends model
         $user = fixer::input('post')
             ->cleanInt('imobile, qq, zipcode')
             ->setDefault('admin', 'no')
+            ->remove('token')
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
             ->removeif(RUN_MODE != 'admin', $this->config->user->skipedFields->update)
             ->removeif(RUN_MODE == 'admin', $this->config->user->skipedFields->adminUpdate)
