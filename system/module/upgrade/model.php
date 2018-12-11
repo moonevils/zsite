@@ -218,6 +218,7 @@ class upgradeModel extends model
             case '7_3':
                 $this->execSQL($this->getUpgradeFile('7.3'));
             case '7_4':
+            case '7_4_1':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -301,6 +302,7 @@ class upgradeModel extends model
             case '7_2'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.2'));
             case '7_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('7.3'));
             case '7_4'      :
+            case '7_4_1'    :
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
