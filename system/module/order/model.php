@@ -365,7 +365,7 @@ class orderModel extends model
     public function getOrderFromWechatpay($mode)
     {
         $this->app->loadClass('wechatpay', true);
-        $wechatpay = new wechatpay($this->getWechatConfig());
+        $wechatpay = new wechatpay($this->getWechatpayConfig());
         $data      = $wechatpay->get_back_data();
 
         if($data['return_code'] == 'SUCCESS')
@@ -373,7 +373,7 @@ class orderModel extends model
             $orderID = $data['out_trade_no'];
             if(!$orderID) return false;
 
-            $orderID = $this->getRawOrder($orderID);
+            $orderID = (int)substr($orderID, 5, stripos($orderID,'wechat') - 5);
             $order = $this->getByID($orderID);                                                                                                           
 
             if(!$order) return false;

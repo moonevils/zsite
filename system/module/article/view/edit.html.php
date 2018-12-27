@@ -94,9 +94,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <td colspan='2'>
           <div class='input-group'>
             <?php if($type == 'page'):?>
-            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
+            <span class="input-group-addon"><?php echo isset($this->config->site->scheme) ? $this->config->site->scheme: "http"?>://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
             <?php else:?>
-            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot . $type?>/</span>
+            <span class="input-group-addon"><?php echo isset($this->config->site->scheme) ? $this->config->site->scheme: "http"?>://<?php echo $this->server->http_host . $config->webRoot . $type?>/</span>
             <?php endif;?>
             <?php echo html::input('alias', $article->alias, "class='form-control' placeholder='{$lang->alias}'");?>
             <span class='input-group-addon w-70px'>-<?php echo $article->id?>.html</span>

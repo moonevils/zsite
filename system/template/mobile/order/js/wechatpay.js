@@ -26,6 +26,15 @@ else
 {
     onBridgeReady();
 }
+
+if(window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) != 'micromessenger')
+{
+    if(v.type != 'referer')
+    {
+        window.location.href = v.openLink;
+    }
+}
+
 $('.paid').click(checkPay());
 
 function checkPay()

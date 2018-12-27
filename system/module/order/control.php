@@ -250,25 +250,49 @@ class order extends control
             else
             {
                 //$this->view->url = $wechatpay->getWAPPayUrl($subject, 'order' . $orderID, $order->amount * 100, 0);
-
-                $openID = $this->loadModel('user')->getOpenID($this->app->user->account, 'wechat');
-                if(!$openID)
+                
+                if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false)
                 {
-                    $currentURL = helper::createLink('order', 'wechatpay', "orderID=$orderID&type=$type");
-                    $currentURL = base64_encode($currentURL);
+                    $openID = $this->loadModel('user')->getOpenID($this->app->user->account, 'wechat');
+                    if(!$openID)
+                    {
+                        $currentURL = helper::createLink('order', 'wechatpay', "orderID=$orderID&type=$type");
+                        $currentURL = base64_encode($currentURL);
 
-                    $redirectURL = getWebRoot(true) .  ltrim(helper::createLink('user', 'wechatbind', "url=$currentURL"), '/');
-                    $this->locate($wechatpay->getAuthURL($redirectURL));
+                        $redirectURL = getWebRoot(true) .  ltrim(helper::createLink('user', 'wechatbind', "url=$currentURL"), '/');
+                        $this->locate($wechatpay->getAuthURL($redirectURL));
+                    }
+                    $config = $wechatpay->getJSAPIConfig($subject, $tradeID, $order->amount * 100, $openID);
+                    $this->view->payConfig = $config;
                 }
-                $config = $wechatpay->getJSAPIConfig($subject, $tradeID, $order->amount * 100, $openID);
-                $this->view->payConfig = $config;
+                else
+                {
+                    $tradeID = 'order' . $orderID . 'wechat';
+
+                    $params['device_info'] = '';
+                    $params['body'] = $subject;
+                    $params['out_trade_no'] = $tradeID;
+                    $params['total_fee'] = $order->amount * 100;
+                    $params['spbill_create_ip'] = $_SERVER['REMOTE_ADDR']; 
+                    $params['notify_url'] = getwebroot(true) .  ltrim(inlink('processorder', "type=wechat&mode=notify"), '/');
+                    $params['trade_type'] = 'MWEB';
+
+                    $result = $wechatpay->unifiedOrder($params);
+                    if($result['return_code'] == 'SUCCESS')
+                    {   
+                        $mwebUrl = $result['mweb_url'] . '&redirect_url=' . getwebroot(true) .  ltrim(inlink('wechatpay', "orderID=$orderID&type=referer"), '/');
+                    }
+                }
             }
 
             $notifyURL = empty($type) ? inlink('processorder', "type=wechatpay&mode=notify") : helper::createLink($type, 'processorder', "type=wechat&mode=notify");
 
             $this->app->loadModuleConfig('product');
-            $this->view->order   = $order;
-            $this->view->tradeID = $tradeID;
+
+            $this->view->order          = $order;
+            $this->view->tradeID        = $tradeID;
+            $this->view->openLink       = !empty($mwebUrl) ? $mwebUrl : '';
+            $this->view->type           = $type;
             $this->view->currencySymbol = $this->config->product->currencySymbol;
 
             $this->display();
