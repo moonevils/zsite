@@ -267,7 +267,7 @@ class order extends control
                 }
                 else
                 {
-                    $tradeID = 'order' . $orderID . 'wechat';
+                    $tradeID = $this->order->getHumanOrder($orderID);
 
                     $params['device_info']      = '';
                     $params['body']             = $subject;

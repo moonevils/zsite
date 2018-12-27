@@ -373,8 +373,8 @@ class orderModel extends model
             $orderID = $data['out_trade_no'];
             if(!$orderID) return false;
 
-            $orderID = (int)substr($orderID, 5, stripos($orderID,'wechat') - 5);
-            $order = $this->getByID($orderID);                                                                                                           
+            $orderID = $this->getRawOrder($orderID);
+            $order = $this->getByID($orderID);
 
             if(!$order) return false;
 
