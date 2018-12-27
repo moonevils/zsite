@@ -271,18 +271,18 @@ class order extends control
                 {
                     $tradeID = $this->order->getHumanOrder($orderID);
 
-                    $params['device_info']      = '';
                     $params['body']             = $subject;
                     $params['out_trade_no']     = $tradeID;
                     $params['total_fee']        = $order->amount * 100;
                     $params['spbill_create_ip'] = $_SERVER['REMOTE_ADDR']; 
-                    $params['notify_url']       = getwebroot(true) . ltrim(inlink('processorder', "type=wechat&mode=notify"), '/');
+                    $params['notify_url']       = commonModel::getSysUrl() . inlink('processorder', "type=wechat&mode=notify");
                     $params['trade_type']       = 'MWEB';
 
                     $result = $wechatpay->unifiedOrder($params);
                     if($result['return_code'] == 'SUCCESS')
                     {   
-                        $mwebUrl = $result['mweb_url'] . '&redirect_url=' . getwebroot(true) . ltrim(inlink('wechatpay', "orderID=$orderID&type=referer"), '/');
+                        $redirectURL = urlencode(commonModel::getSysUrl() . inlink('wechatpay', "orderID=$orderID&type=referer"));
+                        $mwebUrl = $result['mweb_url'] . '&redirect_url=' . $redirectURL;
                     }
                 }
             }
