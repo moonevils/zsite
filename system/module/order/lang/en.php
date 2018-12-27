@@ -105,6 +105,7 @@ $lang->order->wechatpayAppid     = 'APPID of wechat public';
 $lang->order->wechatpayMchid     = "Merchant's id";
 $lang->order->wechatpayApiKey    = "wechatpay's key";
 $lang->order->wechatpayAppSecret = "wechat public's key";
+$lang->order->wechatpayH5Status  = 'wechat H5 payment';
 $lang->order->wechatpayNote      = 'Please return and pay by other method, if wechat timeout';
 
 $lang->order->placeholder = new stdclass();
