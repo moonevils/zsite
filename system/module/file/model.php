@@ -516,7 +516,6 @@ class fileModel extends model
         $this->app->loadClass('purifier', true);
         $config = HTMLPurifier_Config::createDefault();
         $purifier = new HTMLPurifier($config);
-
         /* The tag if an array. */
         if(is_array($_FILES[$htmlTagName]['name']))
         {
@@ -579,11 +578,13 @@ class fileModel extends model
      * Get save name.
      * 
      * @param  string    $pathName 
+     * @param  string    $ext 
      * @access public
      * @return string
      */
-    public function getSaveName($pathName)
+    public function getSaveName($pathName, $ext = null)
     {
+        if(in_array($ext,$this->config->file->videoExtensions)) return $pathName;
         $saveName = strpos($pathName, '.') === false ? $pathName : substr($pathName, 0, strpos($pathName, '.'));
         return $saveName;
     }
@@ -1160,7 +1161,6 @@ class fileModel extends model
         extract($_FILES[$htmlTagName]);
         if(!validater::checkFileName($name)) return;
         if($this->post->name) $name = $this->post->name;
-
         $file = array();
         $file['id'] = 0;
         $file['extension'] = $this->getExtension($name);
@@ -1196,7 +1196,7 @@ class fileModel extends model
         {
             $file['pathname'] .= '.txt';
         }
-        $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
+        $realPathName = $this->savePath . $this->getSaveName($file['pathname'], $file['extension']);
         if($file['chunks'] > 1)
         {
             $fileSavePath = $this->savePath . $file['chunkpath'];
