@@ -972,9 +972,8 @@ class fileModel extends model
 
             /* Build file url information */
             $fileURL = array();
-            $fileURL['pathname']   = $this->getSaveName($file['pathname']);
-            $fileURL['extension']  = $file['extension'];
-            $fileURL['objectType'] = $data; 
+            $fileURL['pathname']  = $this->getSaveName($file['pathname']);
+            $fileURL['extension'] = $file['extension'];
 
             $data = str_replace($out[1][$key], $this->printFileURL($fileURL), $data);
         }
