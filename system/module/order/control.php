@@ -190,7 +190,7 @@ class order extends control
             {
                 if($this->app->clientDevice == 'mobile')
                 {
-                    $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'payment' => 'COD'));
+                    $this->send(array('result' => 'success', 'locate' => inlink('browse'), 'payment' => 'COD'));
                 }
                 else
                 {
@@ -202,7 +202,7 @@ class order extends control
                 $order->payment = $payment;
                 if($this->app->clientDevice == 'mobile')
                 {
-                    $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
+                    $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
                 }
                 else
                 {
