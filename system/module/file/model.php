@@ -584,7 +584,7 @@ class fileModel extends model
      */
     public function getSaveName($pathName, $ext = null)
     {
-        if(in_array($ext, $this->config->file->videoExtensions)) return $pathName;
+        if(in_array($ext, $this->config->file-ivideoExtensions)) return $pathName;
         $saveName = strpos($pathName, '.') === false ? $pathName : substr($pathName, 0, strpos($pathName, '.'));
         return $saveName;
     }
@@ -1450,6 +1450,12 @@ class fileModel extends model
         if(!is_array($file) and !is_object($file)) return false;
         $file = (array)$file;
         if(empty($file['pathname']) or empty($file['extension'])) return false;
+
+        if(in_array($file['extension'], $this->config->file->videoExtensions))
+        {
+            return getWebRoot(true) . 'data/upload/'  . $file['pathname'];  
+        }
+
         $objectType = isset($file['objectType']) ? $file['objectType'] : '';
         $version    = isset($this->config->site->lastUpload) ? $this->config->site->lastUpload : '';
         return $this->config->webRoot . "file.php?f={$file['pathname']}&t={$file['extension']}&o={$objectType}&s={$size}&v={$version}";
