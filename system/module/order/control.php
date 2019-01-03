@@ -1,4 +1,3 @@
-<?php if(!defined("RUN_MODE")) die();?>
 <?php
 /**
  * The control file of order of chanzhiEPS.
@@ -191,7 +190,7 @@ class order extends control
             {
                 if($this->app->clientDevice == 'mobile')
                 {
-                    $this->send(array('result' => 'success', 'locate' => inlink('browse'), 'payment' => 'COD'));
+                    $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse'), 'payment' => 'COD'));
                 }
                 else
                 {
@@ -203,7 +202,7 @@ class order extends control
                 $order->payment = $payment;
                 if($this->app->clientDevice == 'mobile')
                 {
-                    $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
+                    $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->order->createPayLink($order), 'payment' => $payment));
                 }
                 else
                 {
@@ -251,9 +250,9 @@ class order extends control
             {
                 //$this->view->url = $wechatpay->getWAPPayUrl($subject, 'order' . $orderID, $order->amount * 100, 0);
 
-                $H5PayStatus =  isset($this->config->wechatpay->h5pay_status) ? $this->config->wechatpay->h5pay_status : '1';
+                $h5api = isset($this->config->wechatpay->h5api) ? $this->config->wechatpay->h5api : 'close';
 
-                if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false || $H5PayStatus == '1')
+                if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false || $h5api == 'close')
                 {
                     $openID = $this->loadModel('user')->getOpenID($this->app->user->account, 'wechat');
                     if(!$openID)

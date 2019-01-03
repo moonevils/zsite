@@ -94,8 +94,8 @@
             <div class='input-group'>
               <span class='input-group-addon w-110px'><?php echo $lang->order->wechatpayH5Status;?></span>
               <div class="form-control">
-                <?php echo html::radio('wechat[h5pay_status]', $lang->product->h5payStatus, isset($this->config->wechatpay->h5pay_status) ? $this->config->wechatpay->h5pay_status : 1, "class='checkbox'");?>
-                <?php echo html::hidden('wechat_h5pay_status');?>
+                <?php echo html::radio('wechat[h5api]', $lang->product->h5api, isset($this->config->wechatpay->h5api) ? $this->config->wechatpay->h5api : 'close', "class='checkbox'");?>
+                <?php echo html::hidden('wechat_h5api');?>
               </div>
             </div>
           </td>

@@ -10,8 +10,13 @@ $config->menus->setting = 'site,company,score,interface,security,wechatSetting';
 $config->menus->open    = 'package,themestore,effect,community,';
 
 $designMenus = array('ui', 'logo', 'slide', 'nav', 'block', 'visual', 'others', 'edit');
-
 $config->menuGroups = new stdclass();
+foreach($designMenus as $menu)
+{
+    $config->menuGroups->$menu = 'design';
+    $config->menus->design .= ",$menu";
+}
+
 foreach($config->menus as $group => $modules)
 {
     $menus = explode(',', $modules);
@@ -20,7 +25,6 @@ foreach($config->menus as $group => $modules)
         if($menu) $config->menuGroups->$menu = $group;
     }
 
-    foreach($designMenus as $menu) $config->menuGroups->$menu = 'design';
 }
 
 $config->multiEntrances = array();
