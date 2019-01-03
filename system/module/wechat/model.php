@@ -506,7 +506,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseArticleTree($content)
+    public static function parseArticleTree($content)
     {
         return $this->parseTree($content, 'article');
     }
@@ -518,7 +518,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseProductTree($content)
+    public static function parseProductTree($content)
     {
         return $this->parseTree($content, 'product');
     }
@@ -531,7 +531,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseTree($content, $type)
+    public static function parseTree($content, $type)
     {
         $categories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->in($content->category)->fetchAll('id');
 
@@ -565,7 +565,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseLatestArticle($content)
+    public static function parseLatestArticle($content)
     {
         return $this->parseArticles($content);
     }
@@ -577,7 +577,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseHotArticle($content)
+    public static function parseHotArticle($content)
     {
         return $this->parseArticles($content);
     }
@@ -589,7 +589,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseArticles($content)
+    public static function parseArticles($content)
     {
         $orderByList = array('latestArticle' => 'id_desc', 'hotArticle' => 'views_desc');
 
@@ -628,7 +628,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseLatestProduct($content)
+    public static function parseLatestProduct($content)
     {
         return $this->parseProducts($content);
     }
@@ -640,7 +640,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseHotProduct($content)
+    public static function parseHotProduct($content)
     {
         return $this->parseProducts($content);
     }
@@ -652,7 +652,7 @@ class wechatModel extends model
      * @access public
      * @return object
      */
-    public function parseProducts($content)
+    public static function parseProducts($content)
     {
         $orderByList = array('latestProduct' => 'id_desc', 'hotProduct' => 'views_desc');
 
