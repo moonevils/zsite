@@ -251,9 +251,9 @@ class order extends control
             {
                 //$this->view->url = $wechatpay->getWAPPayUrl($subject, 'order' . $orderID, $order->amount * 100, 0);
 
-                $H5PayStatus =  isset($this->config->wechatpay->h5pay_status) ? $this->config->wechatpay->h5pay_status : '1';
+                $h5api = isset($this->config->wechatpay->h5api) ? $this->config->wechatpay->h5api : 'close';
 
-                if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false || $H5PayStatus == '1')
+                if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false || $h5api == 'close')
                 {
                     $openID = $this->loadModel('user')->getOpenID($this->app->user->account, 'wechat');
                     if(!$openID)
