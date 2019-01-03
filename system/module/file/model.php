@@ -584,7 +584,7 @@ class fileModel extends model
      */
     public function getSaveName($pathName, $ext = null)
     {
-        if(in_array($ext, $this->config->file-ivideoExtensions)) return $pathName;
+        if(in_array($ext, $this->config->file->videoExtensions)) return $pathName;
         $saveName = strpos($pathName, '.') === false ? $pathName : substr($pathName, 0, strpos($pathName, '.'));
         return $saveName;
     }
