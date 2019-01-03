@@ -117,7 +117,7 @@
     {else}
       {$attributeHtml}
     {/if}
-    {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate)}
+    {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}
       {if(!$stockOpened or $product->amount > 0)}
       <tr>
         <th>{$lang->product->count}</th>
@@ -147,7 +147,7 @@
         </td>
       </tr>
     {/if}
-    {if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall and !$product->negotiate)}
+    {if(!$product->unsaleable and $product->mall and !$product->negotiate)}
       <tr>
         <td colspan='2'>
           {!html::a(inlink('redirect', "id={{$product->id}}"), $lang->product->buyNow . ' <i class="icon icon-external-link"></i>', "class='btn block primary' target='_blank'")}

@@ -106,7 +106,7 @@
               {$attributeHtml}
             </ul>
             {if(empty($attributeHtml))} <div class="product-summary">{$product->desc}</div> {/if}
-            {if(!$product->unsaleable and commonModel::isAvailable('shop'))}
+            {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->mall)}
               {if($product->negotiate)}
               <span id='buyBtnBox'>
                 {!html::a(helper::createLink('company', 'contact'), $lang->product->contact, "class='btn btn-primary'")}
@@ -136,7 +136,7 @@
               </span>
               {/if}
             {/if}
-            {if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall and !$product->negotiate)}
+            {if(!$product->unsaleable and $product->mall and !$product->negotiate)}
               <hr>
               <div class='btn-gobuy'>
                 {!html::a(inlink('redirect', "id={{$product->id}}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'")}
