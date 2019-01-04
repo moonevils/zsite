@@ -52,7 +52,7 @@ $(function()
     {
         onSuccess: function(response)
         {
-            $.messager.success(response.message);
+            if(response.result != 'success') $.messager.success(response.message);
             if(response.locate) window.location.href = response.locate;
         }
     });
