@@ -1453,7 +1453,7 @@ class fileModel extends model
 
         if(in_array($file['extension'], $this->config->file->videoExtensions))
         {
-            return getWebRoot(true) . 'data/upload/'  . $file['pathname'];  
+            return '/data/upload/'  . $file['pathname']; 
         }
 
         $objectType = isset($file['objectType']) ? $file['objectType'] : '';
