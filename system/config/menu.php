@@ -24,7 +24,6 @@ foreach($config->menus as $group => $modules)
     {
         if($menu) $config->menuGroups->$menu = $group;
     }
-
 }
 
 $config->multiEntrances = array();

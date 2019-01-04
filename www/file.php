@@ -30,18 +30,19 @@ else
 }
 
 $realPath = realpath($savePath . $pathname);
+
 if(!file_exists($realPath) and strpos($pathname, '.php.')) 
 {
     $basename = substr($savePath . $pathname, 0, strpos($savePath . $pathname, '.php')) . ".php";
     $realPath = realpath($basename);
-    $fileURL  = str_replace(dirname($savePath), '', $realPath);
+    $fileURL  = str_replace(realpath(dirname($savePath)), '', $realPath);
     header("Location: $fileURL");
 }
+
 if(!file_exists($realPath))
 {
     $realPath = realpath($savePath . (strpos($pathname, '.') === false ? $pathname : substr($pathname, 0, strpos($pathname, '.'))));
 }
-
 
 if(strpos($realPath, realpath($dataRoot)) === false) die('The file does not exist!');
 
