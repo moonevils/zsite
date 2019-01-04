@@ -248,8 +248,6 @@ class order extends control
             }
             else
             {
-                //$this->view->url = $wechatpay->getWAPPayUrl($subject, 'order' . $orderID, $order->amount * 100, 0);
-
                 $h5api = isset($this->config->wechatpay->h5api) ? $this->config->wechatpay->h5api : 'close';
 
                 if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false || $h5api == 'close')
@@ -270,10 +268,11 @@ class order extends control
                 {
                     $tradeID = $this->order->getHumanOrder($orderID);
 
+                    $params = array();
                     $params['body']             = $subject;
                     $params['out_trade_no']     = $tradeID;
                     $params['total_fee']        = $order->amount * 100;
-                    $params['spbill_create_ip'] = $_SERVER['REMOTE_ADDR']; 
+                    $params['spbill_create_ip'] = $this->server->remote_addr; 
                     $params['notify_url']       = commonModel::getSysUrl() . inlink('processorder', "type=wechat&mode=notify");
                     $params['trade_type']       = 'MWEB';
 
