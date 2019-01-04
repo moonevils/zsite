@@ -145,6 +145,10 @@ $lang->product->stockOptions = array();
 $lang->product->stockOptions[0] = '關閉';
 $lang->product->stockOptions[1] = '開啟';
 
+$lang->product->h5api = array();
+$lang->product->h5api['close'] = '關閉';
+$lang->product->h5api['open']  = '開啟';
+
 $lang->product->viewsOptions = array();
 $lang->product->viewsOptions[1] = '顯示';
 $lang->product->viewsOptions[0] = '不顯示';

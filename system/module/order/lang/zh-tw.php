@@ -105,6 +105,7 @@ $lang->order->wechatpayAppid     = '公眾號APPID';
 $lang->order->wechatpayMchid     = '商戶號';
 $lang->order->wechatpayApiKey    = '支付密鑰';
 $lang->order->wechatpayAppSecret = '公眾號密鑰';
+$lang->order->wechatpayH5Status  = 'H5支付';
 $lang->order->wechatpayNote      = '如果微信長時間未打開，建議您返回選擇其他方式';
 
 $lang->order->placeholder = new stdclass();
