@@ -1195,7 +1195,8 @@ class fileModel extends model
         {
             $file['pathname'] .= '.txt';
         }
-        $realPathName = $this->savePath . $this->getSaveName($file['pathname'], $file['extension']);
+        $file['pathname'] = $this->getSaveName($file['pathname'], $file['extension']);
+        $realPathName = $this->savePath . $file['pathname'];
         if($file['chunks'] > 1)
         {
             $fileSavePath = $this->savePath . $file['chunkpath'];
@@ -1252,7 +1253,6 @@ class fileModel extends model
             unset($file['chunks']);
             unset($file['chunk']);
             unset($file['chunkpath']);
-            
             if($objectType != 'themePackage')
             {
                 $this->dao->insert(TABLE_FILE)->data($file)->exec();
