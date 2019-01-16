@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.view')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {include TPL_ROOT . 'common/files.html.php'}
 
 {* Set categoryPath for topNav highlight. *}
