@@ -268,6 +268,7 @@ class product extends control
         $category = $this->loadModel('tree')->getByID($category, 'product');
 
         $this->view->title       = $product->name . ' - ' . $category->name;
+        $this->view->mobileTitle = $this->lang->product->view;
         $this->view->keywords    = trim(trim($product->keywords . ' - ' . $category->keywords), '-');
         $this->view->desc        = strip_tags($product->desc);
         $this->view->product     = $product;

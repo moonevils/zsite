@@ -60,7 +60,7 @@ $lang->product->setcss       = '設置CSS';
 $lang->product->setjs        = '設置JS';
 $lang->product->files        = '附件';
 $lang->product->images       = '圖片';
-$lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入購物車";
+$lang->product->addToCart    = '加入購物車';
 $lang->product->count        = '數量';
 $lang->product->comments     = '評論';
 $lang->product->detail       = '查看詳情';
