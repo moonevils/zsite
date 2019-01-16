@@ -10,42 +10,56 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
+{*include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')*}
 
-<div class='panel-section'>
-  <div class='panel-heading'>
-    <button type='button' class='btn primary block' data-toggle='modal' data-remote='{!inlink('create')}'><i class='icon icon-plus'></i>{$lang->address->create}</button>
-  </div>
-  <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-map-marker'></i>{$lang->address->browse}</div>
-  </div>
-  <div id='addressListWrapper'>
-    <div class='cards condensed cards-list' id='addressList'>
-      {foreach($addresses as $address)}
-        {$checked = isset($checked) ? '' : 'checked'}
-        <div class='card'>
-          <div class='card-heading'>
-            {if(helper::isAjaxRequest())} <input type='radio' {$checked} name='deliveryAddress' value='{$address->id}'/> {/if}
-            <strong class='lead'>{$address->contact}</strong>
-            &nbsp;&nbsp;<span class='text-special'><i class='icon icon-phone'></i>{!str2Entity($address->phone)}</span>
+<div class='manage'>
+  <p name="operate" current="manage">{$lang->address->manage}</p>
+  <input type="hidden" name="manage" value="{$lang->address->manage}">
+  <input type="hidden" name="manageDone" value="{$lang->address->manageDone}">
+</div>
+<div class='panel'>
+  <div class="panel-body">
+    <div class='title strong vertical-center'>
+        <span class="vertical-line"></span><span class="address">{$lang->address->browse}</span>
+    </div>
+    <div id='addressListWrapper'>
+      <div class='list' id='addressList'>
+        {@$i=0}
+        {foreach($addresses as $address)}
+          {@$i++}
+          {$checked = isset($checked) ? '' : 'checked'}
+          <div class='item'>
+            <div class='card-heading'>
+              <label class="checkbox-circle" style="display: none;">
+                  <input type="checkbox" id="checkbox{$i}" name='delAddresses'  value='{$address->id}'>
+                  <label for="checkbox{$i}"></label>
+              </label>
+              <strong class='lead' style="position: absolute;">{$address->contact}</strong>
+              <span class='text' style="margin-left: 7rem;">{!substr($address->phone, 0, 3) . '****' . substr($address->phone, -4)}</span>
+              {if(!$address->isDefault)}
+              <label class="label-default text-primary">{$lang->address->default}</label>
+              {/if}
+            </div>
+            <div class='card-content'>
+              {$address->address}
+              <span class="edit-button">
+                {!html::a(helper::createLink('address', 'edit', "id={{$address->id}}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}
+              </span>
+            </div>
+            <div class='card-footer'>
+              {*!html::a(helper::createLink('address', 'delete', "id={{$address->id}}"), $lang->delete, "class='deleter text-danger'")*}
+            </div>
           </div>
-          <div class='card-content'>
-            {$address->address}<span class='text-muted'>({$lang->address->zipcode} : {$address->zipcode})</span>
-          </div>
-          <div class='card-footer'>
-            {!html::a(helper::createLink('address', 'edit', "id={{$address->id}}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}&nbsp;&nbsp
-            {!html::a(helper::createLink('address', 'delete', "id={{$address->id}}"), $lang->delete, "class='deleter text-danger'")}
-          </div>
-        </div>
-      {/foreach}
+          {if($i < count($addresses))}
+          <div class="divider"></div>
+          {/if}
+        {/foreach}
+          <button id="create" type='button' class='btn primary outline' data-toggle='modal' data-remote='{!inlink('create')}'>{$lang->address->create}</button>
+          {!html::a(helper::createLink('address', 'delete', "id={{$address->id}}"), $lang->delete, "class='deleter text-danger'")}
+      </div>
     </div>
   </div>
-  {if(count($addresses) >= 5)}
-    <div class='panel-footer'>
-      <button type='button' class='btn primary block' data-toggle='modal' data-remote='{!inlink('create')}'><i class='icon icon-plus'></i> {$lang->address->create}</button>
-    </div>
-  {/if}
 </div>
 <script>
 $(function()
