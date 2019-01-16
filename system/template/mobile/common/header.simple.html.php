@@ -23,7 +23,7 @@
   .both-sides.left {float:left}
   .both-sides.right {float:right}
   .both-sides .icon-block {padding:5px 10px;float:left}
-  .both-sides .icon-block > img {width:24px;height:24px}
+  .both-sides .icon-block img {width:24px;height:24px}
   .both-sides .divider-line {margin:10px 0px 10px 0px;border-left:1px solid #ddd;float:left;height:18px}
   .middle-title {width:50%;margin:0 auto;line-height:38px;font-size:2rem;text-align:center}
   </style>
