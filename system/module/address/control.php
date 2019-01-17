@@ -76,6 +76,9 @@ class address extends control
      */
     public function delete($ids)
     {
+        if (empty($ids)) {
+            $this->send(array('result' => 'fail', 'message' => $this->lang->address->deleteEmptyIDs));
+        }
         $ids = explode(',', $ids);
         $this->dao->delete()->from(TABLE_ADDRESS)->where('id')->in($ids)->andWhere('account')->eq($this->app->user->account)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));

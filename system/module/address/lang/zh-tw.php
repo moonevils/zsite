@@ -11,4 +11,6 @@ $lang->address->edit       = '編輯地址';
 $lang->address->default    = '默認';
 $lang->address->manage     = '管理';
 $lang->address->manageDone = '完成';
+$lang->address->allDelete  = '全選';
+$lang->address->deleteEmptyIDs  = '未選擇刪除項';
 
