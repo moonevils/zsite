@@ -267,7 +267,23 @@ class product extends control
         }
         $category = $this->loadModel('tree')->getByID($category, 'product');
 
+        /* Get info from cookie. */
+        $cart  = $this->loadModel('cart')->getListByCookie();
+        $cartCount = count((array) $cart);
+
+        /* Save cookie's cart info. */
+        if($this->app->user->account != 'guest')
+        {
+            if(count($cart) > 0)
+            {
+                foreach($cart as $product) $this->cart->add($product->product, $product->count);
+                setcookie('cart', '[]', time() + 60 * 60 * 24, '', '', false, true);
+            }
+            $cartCount = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->fetch('count');
+        }
+
         $this->view->title       = $product->name . ' - ' . $category->name;
+        $this->view->mobileTitle = $this->lang->product->view;
         $this->view->keywords    = trim(trim($product->keywords . ' - ' . $category->keywords), '-');
         $this->view->desc        = strip_tags($product->desc);
         $this->view->product     = $product;
@@ -280,6 +296,7 @@ class product extends control
         $this->view->layouts     = $this->loadModel('block')->getPageBlocks('product', 'view', $product->id);
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
+        $this->view->cartCount   = $cartCount;
         
         if($this->app->clientDevice == 'desktop') 
         {

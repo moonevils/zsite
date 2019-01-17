@@ -68,15 +68,16 @@ class address extends control
     }
 
     /**
-     * Delete an address.
+     * Delete address.
      * 
-     * @param  int    $id 
+     * @param  string    $ids
      * @access public
      * @return void
      */
-    public function delete($id)
+    public function delete($ids)
     {
-        $this->dao->delete()->from(TABLE_ADDRESS)->where('id')->eq($id)->andWhere('account')->eq($this->app->user->account)->exec();
+        $ids = explode(',', $ids);
+        $this->dao->delete()->from(TABLE_ADDRESS)->where('id')->in($ids)->andWhere('account')->eq($this->app->user->account)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess, 'locate' => inlink('browse')));
     }

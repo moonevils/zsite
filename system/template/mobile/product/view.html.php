@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {include TPL_ROOT . 'common/files.html.php'}
 
 {* Set categoryPath for topNav highlight. *}
@@ -110,7 +110,8 @@
     {$attributeHtml .= "<td>" . $attribute->value . "</td></tr>"}
   {/if}
 {/foreach}
-<table class='table table-layout small'>
+<hr class='space'>
+<table class='table table-layout small' style='background:#fff'>
   <tbody>
     {if(empty($attributeHtml))}
       <tr><td colspan='2' class='small'>{$product->desc}</td></tr>
@@ -134,25 +135,6 @@
         </td>
       </tr>
       {/if}
-      <tr>
-        <td colspan='2'>
-          {if($stockOpened and $product->amount < 1)}
-            <button type='button' class='btn block  btn-soldout'>{$lang->product->soldout}</button></div>
-          {else}
-            <div class='row'>
-              <div class='col-6'><button type='button' class='btn block primary btn-buy' data-url='{!$control->createLink('order', 'confirm', "product={{$product->id}}&count=productcount")}'>{$lang->product->buyNow}</button></div>
-              <div class='col-6'><button type='button' class='btn block warning btn-cart' data-url='{!$control->createLink('cart', 'add', "product={{$product->id}}&count=productcount")}'>{$lang->product->addToCart}</button></div>
-            </div>
-          {/if}
-        </td>
-      </tr>
-    {/if}
-    {if(!$product->unsaleable and $product->mall and !$product->negotiate)}
-      <tr>
-        <td colspan='2'>
-          {!html::a(inlink('redirect', "id={{$product->id}}"), $lang->product->buyNow . ' <i class="icon icon-external-link"></i>', "class='btn block primary' target='_blank'")}
-        </td>
-      </tr>
     {/if}
   </tbody>
 </table>
@@ -167,15 +149,53 @@
   {if(!empty($product->files))} <section class='article-files'> {$control->loadModel('file')->printFiles($product->files)} </section> {/if}
 </div>
 </div>
+<!--
 {if(commonModel::isAvailable('message'))}
   <div id='commentBox'> {$control->fetch('message', 'comment', "objectType=product&objectID={{$product->id}}")} </div>
 {/if}
-
+-->
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_view', 'bottom')}</div>
 {noparse}
 <style>
-  #productSlide{height:320px;text-align:center;}
+  #product {background:#ddd}
+  #productSlide{height:320px;text-align:center;background:#fff}
   #productSlide .carousel-inner{width:320px;height:320px;display:inline-block;}
+  .red {color:#fff!important;border-color:#ea644a!important;background-color:#ea644a!important;}
+  .col-6 .label {position:absolute;z-index:1;top:-.8rem;right:-.8rem;width:20px}
 </style>
 {/noparse}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+<footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
+<ul class="nav">
+    <li>
+      <div class='col-6'>
+        {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/cart.png',"style='width:30px;height:29px'")."<span class='label badge red circle'>$cartCount</span>" , "style='position:relative'")}
+        
+      </div>
+      <div class='col-6'>{!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/comment.png',"style='width:30px;height:29px'"))}</div>
+    </li>
+    <li>
+      <div class='col-2'></div>
+      {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}
+        {if($stockOpened and $product->amount < 1)}
+        <div class='col-4'></div>
+        <div class='col-6'>
+          <button type='button' class='btn block  btn-soldout'>{$lang->product->soldout}</button>
+        </div>
+        {else}
+        <div class='col-6'><button type='button' class='btn block light btn-cart' data-url='{!$control->createLink('cart', 'add', "product={{$product->id}}&count=productcount")}'>{$lang->product->addToCart}</button></div>
+        <div class='col-4'><button type='button' class='btn block primary btn-buy' data-url='{!$control->createLink('order', 'confirm', "product={{$product->id}}&count=productcount")}'>{$lang->product->buyNow}</button></div>
+        {/if}
+      {/if}
+      {if(!$product->unsaleable and $product->mall and !$product->negotiate)}
+      <div class='col-4'></div>
+      <div class='col-6'>
+        <button type='button' class='btn block primary btn-buy' data-url='{!$control->createLink('product', 'redirect', "id={{$product->id}}")}'>{$lang->product->buyNow}</button>
+      </div>
+      {/if}
+    </li>
+</ul>
+</footer>
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
+<div class='block-region region-footer hidden blocks' data-region='all-footer'>{$control->loadModel('block')->printRegion($layouts, 'all', 'footer')}</div>
+</body>
+</html>
