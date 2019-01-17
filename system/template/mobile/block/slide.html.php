@@ -49,7 +49,7 @@
               {/if}
             {/foreach}
           {/foreach}
-      
+
           {foreach($slide->label as $key => $label)}
             {if(!empty($globalButtons[$slide->id][$key]))} {continue} {/if}
             {if(trim($label) != '')}
@@ -64,6 +64,13 @@
       {if($slideStyle == 'carousel')}
         </div>
         {if(count($slides) > 1)}
+          <ol class="carousel-indicators">
+          {@$index = 0}
+          {foreach($slides as $slide)}
+            <li data-target="#{$slideID}" data-slide-to="{$index}"{!echo ($index === 0) ? '  class="active"' : ''}></li>
+            {@$index++}
+          {/foreach}
+          </ol>
           <a class='left carousel-control' href='#{$slideID}' data-slide='prev'> <i class='icon icon-chevron-left'></i> </a>
           <a class='right carousel-control' href='#{$slideID}' data-slide='next'> <i class='icon icon-chevron-right'></i> </a>
         {/if}

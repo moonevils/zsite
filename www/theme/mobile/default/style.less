@@ -157,8 +157,6 @@
 }
 
 .text-price {color: @color-danger;}
-.text-muted,
-input::placeholder {color: #CBCBCB;}
 
 .icon-arrow-up::before{content: '\e65c'}
 
@@ -183,6 +181,9 @@ input::placeholder {color: #CBCBCB;}
 body {
   font-family: 'Helvetica Neue',Helvetica,'Microsoft Yahei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei',sans-serif;
 }
+
+.text-muted,
+input::placeholder {color: #CBCBCB;}
 
 .m-index body {background: @color-canvas;}
 
@@ -223,3 +224,13 @@ body.with-appbar-top.scroll-down-in .appbar.fix-top {top: 0;}
 .appnav > .subnavs > .nav > li {padding: 4px;}
 .appnav > .subnavs > .nav > li > a {line-height: 18px; padding: 3px 8px; border-radius: 12px; color: #9a9a9a;}
 .appnav > .subnavs > .nav > li.active > a {background: @color-pale; box-shadow: none;}
+
+.carousel-inner {border-radius: 4px}
+.carousel-indicators {left: 24px; margin: 0; bottom: 14px; text-align: left;}
+.carousel-indicators li {width: 4px; height: 3px; background: rgba(150,150,150,.85); border-radius: 1px; border: none; transition: all .4s; cursor: pointer;}
+.carousel-indicators li.active {width: 12px; background: @color-primary;}
+.carousel-caption {left: 24px; text-align: left; font-size: 12px; text-shadow: none; bottom: 35px; right: 24px;}
+.carousel-caption > h2 {font-size: 14px;}
+.carousel-caption p {margin: 0 0 5px 0;}
+.carousel-caption ul {padding-left: 16px; margin-bottom: 5px;}
+.carousel-control {display: none;}
