@@ -1,7 +1,13 @@
+// mixins
+
+
 //vars
 @color-danger:        #ea644a;
+@color-secondary:     darken(@color-primary, 10%);
 @color-pale:          mix(#fff, @color-primary, 90%);
-@color-priamry-hover: lighten(@color-primary, 5%);
+@color-priamry-hover: @color-secondary;
+@color-canvas:        #F3F3F3;
+@img-gradient:        linear-gradient(90deg, darken(@color-primary, 6.5%) 10%, lighten(@color-primary, 10.3%) 100%);
 
 .override-colorset(@color) when not(@color = #3280FC)
 {
@@ -151,6 +157,8 @@
 }
 
 .text-price {color: @color-danger;}
+.text-muted,
+input::placeholder {color: #CBCBCB;}
 
 .icon-arrow-up::before{content: '\e65c'}
 
@@ -171,3 +179,37 @@
 .details-tree summary + ul > li:before {content: ' '; display: block; position: absolute; left: -14px; top: 15px; width: 15px; border-top: 1px dashed #ccc;}
 .details-tree summary + ul > li:after {content: ' '; display: block; position: absolute; left: -14px; top: -8px; bottom: -15px; border-left: 1px dashed #ccc;}
 .details-tree summary + ul > li:last-child:after {display: none;}
+
+body {
+  font-family: 'Helvetica Neue',Helvetica,'Microsoft Yahei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei',sans-serif;
+}
+
+.m-index body {background: @color-canvas;}
+
+.appbar {height: 40px;}
+.appbar-actions, .appbar-title {padding: 0 4px;}
+.appbar-title {text-align: center; padding: 0;}
+.appbar-title > a {line-height: 40px; height: 40px; display: block;}
+.appbar-title h4 {font-weight: bold; margin: 0; display: inline;}
+.appbar-actions {height: 40px;}
+.appbar-actions .btn {min-width: 30px; height: 40px; line-height: 38px; padding: 0;}
+
+.appbar .search-bar {position: fixed; left: 0; top: 0; right: 0; z-index: 5000; bottom: 0; display: none;}
+.appbar .search-bar.show {display: block;}
+.search-bar-back {position: absolute; top: 40px; left: 0; right: 0; bottom: 0;}
+.search-bar-control {display: block; position: relative; margin: 0 10px; padding: 10px 0;}
+.search-bar-control > .form-control {box-shadow: 0 0 5px rgba(0,0,0,.1); height: 30px; line-height: 20px; padding: 5px 8px 5px 30px; border-radius: 6px; box-sizing: border-box; border-color: #f1f1f1; transition: all .2s;}
+.search-bar-control > .form-control:focus {box-shadow: 0 0 12px rgba(0,0,0,.15); border-color: #eee;}
+.search-bar-control > .icon-search {position: absolute; left: 2px; top: 10px; width: 28px; height: 28px; line-height: 28px; text-align: center;}
+.search-bar-control > .btn-clear {position: absolute; right: 0; top: 9px; width: 28px; height: 28px; line-height: 26px; text-align: center; opacity: 0; transition: opacity .2s;}
+.search-bar-control > .btn-clear > .icon {display: inline-block; width: 18px; height: 18px; border-radius: 50%; line-height: 16px; background: #CBCBCB; color: #fff;}
+.search-bar-control > .form-control:valid + .btn-clear {opacity: 1;}
+
+body.with-appnav.with-appbar-top {padding-top: 80px;}
+body.with-appnav.with-appbar-top .appnav {top: 40px;}
+
+.appnav {background: #fff; border: none;}
+.appnav > .mainnav {margin: 0; padding: 0 4px;}
+.appnav .nav > li > a {box-shadow: none; color: #999999;}
+.appnav .nav > li.active > a {box-shadow: none; position: relative; color: @color-primary;}
+.appnav .nav > li.active > a:before {content: ' '; display: block; position: absolute; right: 15px;; left: 15px; bottom: 6px; background-color: @color-primary; height: 2px; border-radius: 2px; box-shadow: 0 2px 4px 0 rgba(78,129,254,0.20); background-image: @img-gradient;}

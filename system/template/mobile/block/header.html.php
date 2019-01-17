@@ -18,24 +18,19 @@
   </div>
   <div class='appbar-actions'>
     {if(commonModel::isAvailable('search'))}
-      <div class='dropdown'>
-        <button type='button' class='btn' data-toggle='dropdown' id='searchToggle'><i class='icon-search'></i></button>
-        <div class='dropdown-menu fade search-bar' id='searchbar'>
-          <form action='{!helper::createLink('search')}' method='get' role='search'>
-            <div class='input-group'>
-              {$keywords = ($model->app->getModuleName() == 'search') ? $model->session->serachIngWord : ''}
-              {!html::input('words', $keywords, "class='form-model' placeholder=''")}
-              {if($model->config->requestType == 'GET')} {!html::hidden($model->config->moduleVar, 'search') . html::hidden($model->config->methodVar, 'index')} {/if}
-                <div class='input-group-btn'>
-                  <button class='btn default' type='submit'><i class='icon icon-search'></i></button>
-                </div>
-            </div>
-          </form>
+    <button type='button' class='btn' id='searchToggle' onclick="$('#searchbar').toggleClass('show').find('#words').focus()"><i class='icon-search text-muted'></i></button>
+    <div class='search-bar' id='searchbar'>
+      <form action='{!helper::createLink('search')}' method='get' role='search'>
+        <div class='search-bar-control'>
+          <i class="icon-search text-muted"></i>
+          {$keywords = ($model->app->getModuleName() == 'search') ? $model->session->serachIngWord : ''}
+          <input type="search" name="words" id="words" value="{$keywords}" required="required" class="form-control" placeholder="{$lang->search->common}">
+          {if($model->config->requestType == 'GET')} {!html::hidden($model->config->moduleVar, 'search') . html::hidden($model->config->methodVar, 'index')} {/if}
+          <button class='btn btn-clear' type='button' onclick="$('#words').val('').focus()"><i class='icon'>&times;</i></button>
         </div>
-      </div>
-    {/if}
-    {if(commonModel::isAvailable('shop'))}
-      <a class='btn with-badge' href='{!helper::createLink('cart', 'browse')}'><i class='icon icon-shopping-cart'></i><strong class='cart-count badge small text-danger circle hide'>12</strong></a>
+      </form>
+      <div class="search-bar-back" onclick="$('#searchbar').removeClass('show')"></div>
+    </div>
     {/if}
     {$isMultiLangAvailable = count(explode(',', $model->config->enabledLangs)) > 1}
     {$isUserAvailable = commonModel::isAvailable('user')}
