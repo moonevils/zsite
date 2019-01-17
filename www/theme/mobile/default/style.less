@@ -4,7 +4,7 @@
 //vars
 @color-danger:        #ea644a;
 @color-secondary:     darken(@color-primary, 10%);
-@color-pale:          mix(#fff, @color-primary, 90%);
+@color-pale:          mix(#fff, @color-primary, 84%); // #E0E9FF;
 @color-priamry-hover: @color-secondary;
 @color-canvas:        #F3F3F3;
 @img-gradient:        linear-gradient(90deg, darken(@color-primary, 6.5%) 10%, lighten(@color-primary, 10.3%) 100%);
@@ -186,7 +186,7 @@ body {
 
 .m-index body {background: @color-canvas;}
 
-.appbar {height: 40px;}
+.appbar {height: 40px; transition: all .4s;}
 .appbar-actions, .appbar-title {padding: 0 4px;}
 .appbar-title {text-align: center; padding: 0;}
 .appbar-title > a {line-height: 40px; height: 40px; display: block;}
@@ -198,8 +198,8 @@ body {
 .appbar .search-bar.show {display: block;}
 .search-bar-back {position: absolute; top: 40px; left: 0; right: 0; bottom: 0;}
 .search-bar-control {display: block; position: relative; margin: 0 10px; padding: 10px 0;}
-.search-bar-control > .form-control {box-shadow: 0 0 5px rgba(0,0,0,.1); height: 30px; line-height: 20px; padding: 5px 8px 5px 30px; border-radius: 6px; box-sizing: border-box; border-color: #f1f1f1; transition: all .2s;}
-.search-bar-control > .form-control:focus {box-shadow: 0 0 12px rgba(0,0,0,.15); border-color: #eee;}
+.search-bar-control > .form-control {box-shadow: 0 0 5px rgba(0,0,0,.1); height: 30px; line-height: 20px; padding: 5px 8px 5px 30px; border-radius: 6px; box-sizing: border-box; border-color: #f1f1f1; transition: box-shadow .2s;}
+.search-bar-control > .form-control:focus {box-shadow: 0 4px 20px 0 rgba(153,153,153,0.20); border-color: #eee;}
 .search-bar-control > .icon-search {position: absolute; left: 2px; top: 10px; width: 28px; height: 28px; line-height: 28px; text-align: center;}
 .search-bar-control > .btn-clear {position: absolute; right: 0; top: 9px; width: 28px; height: 28px; line-height: 26px; text-align: center; opacity: 0; transition: opacity .2s;}
 .search-bar-control > .btn-clear > .icon {display: inline-block; width: 18px; height: 18px; border-radius: 50%; line-height: 16px; background: #CBCBCB; color: #fff;}
@@ -207,9 +207,19 @@ body {
 
 body.with-appnav.with-appbar-top {padding-top: 80px;}
 body.with-appnav.with-appbar-top .appnav {top: 40px;}
+body.with-appnav.with-appbar-top.scroll-down-in .appnav.fix-top {top: 40px;}
+body.with-appbar-top.scroll-down-in .appbar.fix-top {top: 0;}
 
 .appnav {background: #fff; border: none;}
-.appnav > .mainnav {margin: 0; padding: 0 4px;}
-.appnav .nav > li > a {box-shadow: none; color: #999999;}
-.appnav .nav > li.active > a {box-shadow: none; position: relative; color: @color-primary;}
-.appnav .nav > li.active > a:before {content: ' '; display: block; position: absolute; right: 15px;; left: 15px; bottom: 6px; background-color: @color-primary; height: 2px; border-radius: 2px; box-shadow: 0 2px 4px 0 rgba(78,129,254,0.20); background-image: @img-gradient;}
+.appnav > .mainnav {margin: 0; padding: 0 4px; background: #fff;}
+.appnav > .mainnav > .nav > li > a.sub-open {background: none;}
+.appnav > .mainnav > .nav > li > a.sub-open > .icon-caret-down {color: @color-primary;}
+.appnav > .mainnav > .nav > li > a {box-shadow: none; color: #999999; border-radius: 6px;}
+.appnav > .mainnav > .nav > li.active > a {box-shadow: none; position: relative; color: @color-primary;}
+.appnav > .mainnav > .nav > li.active > a:before {content: ' '; display: block; position: absolute; right: 15px;; left: 15px; bottom: 6px; background-color: @color-primary; height: 2px; border-radius: 2px; box-shadow: 0 2px 4px 0 rgba(78,129,254,0.20); background-image: @img-gradient;}
+.appnav.show-sub .mainnav {box-shadow: 0 4px 8px 0 rgba(228,228,228,0.50), 0 1px 0 0 rgba(0,0,0,.02); position: relative; z-index: 10;}
+.appnav > .subnavs {background: #fff; border: none; margin: 0; font-size: 12px; padding: 5px 0; overflow-y: auto; box-shadow: 0 4px 8px 0 rgba(228,228,228,0.50), 0 1px 0 0 rgba(0,0,0,.02);}
+.appnav > .subnavs > .nav { display: flex!important; flex-wrap: nowrap; white-space: nowrap;}
+.appnav > .subnavs > .nav > li {padding: 4px;}
+.appnav > .subnavs > .nav > li > a {line-height: 18px; padding: 3px 8px; border-radius: 12px; color: #9a9a9a;}
+.appnav > .subnavs > .nav > li.active > a {background: @color-pale; box-shadow: none;}

@@ -244,6 +244,21 @@ $(function()
         }
     }
     $appNav.find(activedNav).addClass('active');
+    var scrollToActiveItemTimer;
+    $appNav.find('.mainnav>.nav').on('click', 'a.with-sub', function()
+    {
+        var $item = $(this);
+        if(scrollToActiveItemTimer) clearTimeout(scrollToActiveItemTimer);
+        scrollToActiveItemTimer = setTimeout(function()
+        {
+            if($item.hasClass('sub-open'))
+            {
+                var activeItem = $appNav.find('.subnavs>.nav>li.active')[0];
+                if(activeItem) activeItem.scrollIntoView();
+            }
+            scrollToActiveItemTimer = null;
+        }, 250);
+    });
 
     // init deleter
     $(document).on('click', '.deleter', function(e)
