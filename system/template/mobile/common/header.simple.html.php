@@ -18,7 +18,6 @@
   <style>
   body.with-appnav.with-appbar-top {padding-top:58px;}
   .appnav {border-bottom:0px}
-  .mainnav {padding:10px 0px} 
   .both-sides {border:0.4px solid #ddd;border-radius:20px}
   .both-sides.left {float:left}
   .both-sides.right {float:right}
@@ -29,7 +28,7 @@
   </style>
   <div class='block-region region-all-top blocks' data-region='all-top'>
   <nav class='appnav fix-top appnav-auto' id='appnav' data-ve='navbar' data-type='mobile_top' style='top:0px;background:#fff;box-shadow: 0 0px 0px;'>
-  <div class='mainnav'>
+  <div class='mainnav' style='padding:10px 0px'>
     <div class='both-sides left'>
       <div class='icon-block'><a href='javascript:history.back();'><img src='/theme/mobile/common/img/left.png'></img></a></div>
       <div class='divider-line'></div>
