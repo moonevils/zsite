@@ -42,7 +42,7 @@
           {@$imgIndex++}
         {/foreach}
       </div>
-      <ol class='carousel-indicators fix-top-right'>{$indicators}</ol>
+      <ol class='carousel-indicators'>{$indicators}</ol>
       <a class='left carousel-control' href='#productSlide' data-slide='prev'>
         <i class='icon icon-chevron-left'></i>
       </a>
