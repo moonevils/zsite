@@ -158,8 +158,8 @@
 {noparse}
 <style>
   #product {background:#ddd}
-  #productSlide{height:320px;text-align:center;background:#fff}
-  #productSlide .carousel-inner{width:320px;height:320px;display:inline-block;}
+  #productSlide{text-align:center;background:#fff}
+  #productSlide .carousel-inner{width:320px;display:inline-block;}
   .red {color:#fff!important;border-color:#ea644a!important;background-color:#ea644a!important;}
   .col-6 .label {position:absolute;z-index:1;top:-.8rem;right:-.8rem;width:20px}
   .carousel-inner > .item > img {height:100%;width:auto}
