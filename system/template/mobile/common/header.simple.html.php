@@ -35,11 +35,6 @@
       <div class='divider-line'></div>
       <div class='icon-block'><a href='{$control->config->webRoot}'><img src='/theme/mobile/common/img/home.png'></img></a></div>
     </div>
-    <div class='both-sides right'>
-      <div class='icon-block'><img src='/theme/mobile/common/img/ellipsis.png'></img></div>
-      <div class='divider-line'></div>
-      <div class='icon-block'><img src='/theme/mobile/common/img/circle.png'></img></div>
-    </div>
     <div class='middle-title'>{$mobileTitle}</div>
   </div>
   <div class='subnavs fade'>
