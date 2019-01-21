@@ -372,16 +372,14 @@ $(function()
     {
         var scrollTop = $(window).scrollTop();
 
-        console.log('> scrollTop', scrollTop);
         if((!lastScrollTop && scrollTop) || (!scrollTop && lastScrollTop))
         {
             var isScrollDownIn = !!scrollTop;
             $('body').toggleClass('scroll-down-in', isScrollDownIn);
-            console.log('isScrollDownIn', isScrollDownIn, isScrollDownIn);
         }
         if ((scrollTop < 10 && lastScrollTop >= 10) || (scrollTop >= 10 && lastScrollTop < 10))
         {
-            $logo.css({left: scrollTop < 10 ? 0 : -1 * Math.floor(($(window).width() - $logo.width()) / 2 - 10)});
+            $logo.css({left: scrollTop < 10 ? 0 : -1 * Math.floor(($(window).width() - $logo.width()) / 2 - 8)});
         }
         lastScrollTop = scrollTop;
     });
