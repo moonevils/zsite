@@ -178,9 +178,7 @@
 .details-tree summary + ul > li:after {content: ' '; display: block; position: absolute; left: -14px; top: -8px; bottom: -15px; border-left: 1px dashed #ccc;}
 .details-tree summary + ul > li:last-child:after {display: none;}
 
-body {
-  font-family: 'Helvetica Neue',Helvetica,'Microsoft Yahei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei',sans-serif;
-}
+body {font-family: 'Helvetica Neue',Helvetica,'Microsoft Yahei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei',sans-serif;}
 
 .text-muted,
 input::placeholder {color: #CBCBCB;}
@@ -198,7 +196,7 @@ input::placeholder {color: #CBCBCB;}
 .appbar .search-bar {position: fixed; left: 0; top: 0; right: 0; z-index: 5000; bottom: 0; display: none;}
 .appbar .search-bar.show {display: block;}
 .search-bar-back {position: absolute; top: 40px; left: 0; right: 0; bottom: 0;}
-.search-bar-control {display: block; position: relative; margin: 0 10px; padding: 10px 0;}
+.search-bar-control {display: block; position: relative; margin: 0 10px; padding: 10px 0; background: #fff;}
 .search-bar-control > .form-control {box-shadow: 0 0 5px rgba(0,0,0,.1); height: 30px; line-height: 20px; padding: 5px 8px 5px 30px; border-radius: 6px; box-sizing: border-box; border-color: #f1f1f1; transition: box-shadow .2s;}
 .search-bar-control > .form-control:focus {box-shadow: 0 4px 20px 0 rgba(153,153,153,0.20); border-color: #eee;}
 .search-bar-control > .icon-search {position: absolute; left: 2px; top: 10px; width: 28px; height: 28px; line-height: 28px; text-align: center;}
@@ -210,6 +208,7 @@ body.with-appnav.with-appbar-top {padding-top: 80px;}
 body.with-appnav.with-appbar-top .appnav {top: 40px;}
 body.with-appnav.with-appbar-top.scroll-down-in .appnav.fix-top {top: 40px;}
 body.with-appbar-top.scroll-down-in .appbar.fix-top {top: 0;}
+body.with-appbar-bottom {padding-bottom: 51px;}
 
 .appnav {background: #fff; border: none;}
 .appnav > .mainnav {margin: 0; padding: 0 4px; background: #fff;}

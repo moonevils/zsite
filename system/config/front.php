@@ -80,6 +80,7 @@ $config->rights->guest['search']['index'] = 'index';
 
 $config->rights->guest['cart']['add']           = 'add';
 $config->rights->guest['cart']['delete']        = 'delete';
+$config->rights->guest['cart']['deletes']       = 'deletes';
 $config->rights->guest['cart']['browse']        = 'browse';
 $config->rights->guest['cart']['count']         = 'count';
 
