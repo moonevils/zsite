@@ -27,21 +27,32 @@
 {if((isset($control->config->site->mobileBottomNav) and ($control->config->site->mobileBottomNav == 'hide')) or helper::isAjaxRequest())}
 {else}
   {$bottomNavs = $control->loadModel('nav')->getNavs('mobile_bottom')}
-  <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
-    <ul class="nav">
-      {foreach($bottomNavs as $nav)}
-        {$icon  = ''}
-        {$class = ''}
-        {if($nav->system == 'contact')}
-          {$icon = "<i class='icon icon-comments-alt'></i> "}
-          {$class = "class='text-primary'"}
-        {/if}
-        {if($nav->system == 'company')}
-          {$icon = "<i class='icon icon-group'></i> "}
-          {$class = "class='text-important'"}
-        {/if}
-        <li>{!html::a($nav->url, $icon . $nav->title, ($nav->target != 'modal') ? "target='$nav->target' $class" : "data-toggle='modal' $class")}</li>
-      {/foreach}
+  <footer class='appbar fix-bottom' id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
+    <ul class='nav nav-icons'>
+      <li{!echo $thisModuleName == 'index' && $thisMethodName == 'index' ? ' class="active"' : ''}>
+        <a href='{$config->webRoot}'>
+          <i class='img-icon img-icon-home'></i>
+          <span>{$lang->mobile->bottomNav['home']}</span>
+        </a>
+      </li>
+      <li{!echo $thisModuleName == 'user' && $thisMethodName == 'message' ? ' class="active"' : ''}>
+        <a href="{!helper::createLink('user', 'message')}">
+          <i class='img-icon img-icon-message'></i>
+          <span>{$lang->mobile->bottomNav['message']}</span>
+        </a>
+      </li>
+      <li{!echo $thisModuleName == 'user' && $thisMethodName == 'cart' ? ' class="active"' : ''}>
+        <a href="{!helper::createLink('user', 'cart')}">
+          <i class='img-icon img-icon-cart'></i>
+          <span>{$lang->mobile->bottomNav['cart']}</span>
+        </a>
+      </li>
+      <li{!echo $thisModuleName == 'user' && $thisMethodName == 'control' ? ' class="active"' : ''}>
+        <a href="{!helper::createLink('user', 'control')}">
+          <i class='img-icon img-icon-user'></i>
+          <span>{$lang->mobile->bottomNav['userControl']}</span>
+        </a>
+      </li>
     </ul>
   </footer>
 {/if}
@@ -52,7 +63,7 @@
 {$extHookRule  = $extPath . 'footer.front.*.hook.php'}
 {$extHookFiles = glob($extHookRule)}
 {if($extHookFiles)}
-  {foreach($extHookFiles as $extHookFile)} 
+  {foreach($extHookFiles as $extHookFile)}
     {include $extHookFile}
   {/foreach}
 {/if}

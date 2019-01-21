@@ -5,7 +5,7 @@
  *
  * The author disclaims copyright to this source code.  In place of
  * a legal notice, here is a blessing:
- * 
+ *
  *  May you do good and not evil.
  *  May you find forgiveness for yourself and forgive others.
  *  May you share freely, never taking more than you give.
@@ -15,7 +15,7 @@ helper::import(dirname(dirname(__FILE__)) . '/base/pager/pager.class.php');
 /**
  * pager类.
  * Pager class.
- * 
+ *
  * @package framework
  */
 class pager extends basePager
@@ -23,13 +23,13 @@ class pager extends basePager
     /**
      * 创建每页显示记录数的select标签。
      * Create the select object of record perpage.
-     * 
+     *
      * @access public
      * @return string
      */
     public function createRecPerPageJS()
     {
-        /* 
+        /*
          * 替换recTotal, recPerPage, pageID为特殊的字符串，然后用js代码替换掉。
          * Replace the recTotal, recPerPage, pageID to special string, and then replace them with values by JS.
          **/
@@ -72,6 +72,32 @@ class pager extends basePager
             location.href=createLink('$this->moduleName', '$this->methodName', vars);
         }
         </script>
+EOT;
+        return $js;
+    }
+
+    /**
+     * 创建下拉刷新插件及相关 JS。
+     * Create 'pull-up-load-more' component js code.
+     *
+     * @param string $listEle
+     * @param string $hintText
+     * @access public
+     * @return string
+     */
+    public function createPullUpJS($listEle, $hintText = '')
+    {
+        $pageUrl = $this->createUrl('$ID');
+        $hintDiv = $this->pageID < $this->pageTotal ? "<div class='pager-pull-up-hint'><i class='icon-spinner-indicator icon icon-spin'></i><span>$hintText</span></div>" : '';
+        $js      = <<<EOT
+        <div class='pager-pull-up' data-url='$pageUrl' data-pageID='$this->pageID' data-pageTotal='$this->pageTotal' data-list='$listEle'>
+        $hintDiv
+          <div class="pager-pull-up-fixed">
+            <div class='pager-pull-up-label'>
+                <span class='pager-pull-up-pageID'>$this->pageID</span>&#47;<span class='pager-pull-up-pageTotal'>$this->pageTotal</span>
+            </div>
+          </div>
+        </div>
 EOT;
         return $js;
     }

@@ -42,7 +42,7 @@
           {@$imgIndex++}
         {/foreach}
       </div>
-      <ol class='carousel-indicators fix-top-right'>{$indicators}</ol>
+      <ol class='carousel-indicators'>{$indicators}</ol>
       <a class='left carousel-control' href='#productSlide' data-slide='prev'>
         <i class='icon icon-chevron-left'></i>
       </a>
@@ -158,18 +158,18 @@
 {noparse}
 <style>
   #product {background:#ddd}
-  #productSlide{height:320px;text-align:center;background:#fff}
+  #productSlide{text-align:center;height:320px;background:#fff}
   #productSlide .carousel-inner{width:320px;height:320px;display:inline-block;}
   .red {color:#fff!important;border-color:#ea644a!important;background-color:#ea644a!important;}
   .col-6 .label {position:absolute;z-index:1;top:-.8rem;right:-.8rem;width:20px}
+  .carousel-inner > .item > img {height:100%;width:auto}
 </style>
 {/noparse}
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
 <ul class="nav">
     <li>
       <div class='col-6'>
-        {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/cart.png',"style='width:30px;height:29px'")."<span class='label badge red circle'>$cartCount</span>" , "style='position:relative'")}
-        
+        {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/cart.png',"style='width:30px;height:29px'") . "<span class='label badge red circle'>$cartCount</span>", "style='position:relative'")}
       </div>
       <div class='col-6'>{!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/comment.png',"style='width:30px;height:29px'"))}</div>
     </li>

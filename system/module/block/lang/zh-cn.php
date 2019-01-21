@@ -80,24 +80,24 @@ $lang->block->childBlock        = '子区块';
 
 $lang->block->header = new stdclass();
 
-$lang->block->header->top = new stdclass();
+$lang->block->header->top         = new stdclass();
 $lang->block->header->top->common = '页眉';
 $lang->block->header->top->left   = '左栏';
 $lang->block->header->top->center = '中间';
 $lang->block->header->top->right  = '右栏';
 
-$lang->block->header->middle = new stdclass();
+$lang->block->header->middle         = new stdclass();
 $lang->block->header->middle->common = '中间';
 $lang->block->header->middle->left   = '左栏';
 $lang->block->header->middle->center = '中间';
 $lang->block->header->middle->right  = '右栏';
 
-$lang->block->header->bottom = new stdclass();
+$lang->block->header->bottom         = new stdclass();
 $lang->block->header->bottom->common = '下栏';
 
-$lang->block->header->top->leftOptions['']         = '不显示';
-$lang->block->header->top->leftOptions['slogan']   = '站点口号';
-$lang->block->header->top->leftOptions['custom']   = '自定义';
+$lang->block->header->top->leftOptions['']       = '不显示';
+$lang->block->header->top->leftOptions['slogan'] = '站点口号';
+$lang->block->header->top->leftOptions['custom'] = '自定义';
 
 $lang->block->header->top->rightOptions['']               = '不显示';
 $lang->block->header->top->rightOptions['login']          = '登录注册 + 语言切换';
@@ -147,7 +147,7 @@ $lang->block->paddingBottom = '下';
 $lang->block->paddingLeft   = '左';
 $lang->block->paddingRight  = '右';
 
-$lang->block->placeholder = new stdclass();
+$lang->block->placeholder                         = new stdclass();
 $lang->block->placeholder->moreText               = '区块右上角文字';
 $lang->block->placeholder->moreUrl                = '区块右上角链接地址';
 $lang->block->placeholder->padding                = '0';
@@ -194,7 +194,7 @@ $lang->block->imageSizeList['small']  = '小图';
 $lang->block->imagePositionList['left']  = '居左';
 $lang->block->imagePositionList['right'] = '居右';
 
-$lang->block->category = new stdclass();
+$lang->block->category                = new stdclass();
 $lang->block->category->showChildren  = '显示子分类';
 $lang->block->category->fromCurrent   = '当前类目开始';
 $lang->block->category->initialExpand = '子分类默认展开';
@@ -211,18 +211,18 @@ $lang->block->category->initialExpandList[0] = '否';
 $lang->block->category->showCategoryList['abbr'] = '简称';
 $lang->block->category->showCategoryList['name'] = '全称';
 
-$lang->block->slideStyle = '展示形式';
+$lang->block->slideStyle                 = '展示形式';
 $lang->block->slideStyleList['carousel'] = '横向轮播';
 $lang->block->slideStyleList['tile']     = '竖向展开';
 
-$lang->block->navTypeList = new stdclass();
+$lang->block->navTypeList                = new stdclass();
 $lang->block->navTypeList->desktop_top   = '桌面';
 $lang->block->navTypeList->desktop_blog  = '博客';
 $lang->block->navTypeList->mobile_top    = '移动版顶部';
 $lang->block->navTypeList->mobile_bottom = '移动版底部';
 $lang->block->navTypeList->mobile_blog   = '移动版博客';
 
-$lang->block->book = new stdclass();
+$lang->block->book           = new stdclass();
 $lang->block->book->showType = '显示';
 
 $lang->block->book->sortList['order'] = '排序';
@@ -234,16 +234,17 @@ $lang->block->book->showTypeList['list']  = '列表';
 $lang->block->sideGrid  = '侧边栏宽度';
 $lang->block->sideFloat = '侧边栏位置';
 
-$lang->block->alignList = array();
+$lang->block->alignList           = array();
 $lang->block->alignList['left']   = '居左';
 $lang->block->alignList['middle'] = '居中';
 
-$lang->block->imageTypeList = array();
+$lang->block->imageTypeList           = array();
 $lang->block->imageTypeList['wechat'] = '微信二维码';
 $lang->block->imageTypeList['custom'] = '自定义图片';
 
-$lang->block->subscribe = new stdclass();
-$lang->block->subscribe->fixInNav = '固定到导航';
-$lang->block->subscribe->fixInNavList = array();
+$lang->block->subscribe                  = new stdclass();
+$lang->block->subscribe->fixInNav        = '固定到导航';
+$lang->block->subscribe->fixInNavList    = array();
 $lang->block->subscribe->fixInNavList[1] = '是';
 $lang->block->subscribe->fixInNavList[0] = '否';
+

@@ -6,7 +6,7 @@
 @color-secondary:     darken(@color-primary, 10%);
 @color-pale:          mix(#fff, @color-primary, 84%); // #E0E9FF;
 @color-priamry-hover: @color-secondary;
-@color-canvas:        #F3F3F3;
+@color-canvas:        #f5f5f5;
 @img-gradient:        linear-gradient(90deg, darken(@color-primary, 6.5%) 10%, lighten(@color-primary, 10.3%) 100%);
 
 .override-colorset(@color) when not(@color = #3280FC)
@@ -178,59 +178,12 @@
 .details-tree summary + ul > li:after {content: ' '; display: block; position: absolute; left: -14px; top: -8px; bottom: -15px; border-left: 1px dashed #ccc;}
 .details-tree summary + ul > li:last-child:after {display: none;}
 
-body {
-  font-family: 'Helvetica Neue',Helvetica,'Microsoft Yahei','PingFang SC','Hiragino Sans GB','WenQuanYi Micro Hei',sans-serif;
-}
-
-.text-muted,
-input::placeholder {color: #CBCBCB;}
-
 .m-index body {background: @color-canvas;}
 
-.appbar {height: 40px; transition: all .4s;}
-.appbar-actions, .appbar-title {padding: 0 4px;}
-.appbar-title {text-align: center; padding: 0;}
-.appbar-title > a {line-height: 40px; height: 40px; display: block;}
-.appbar-title h4 {font-weight: bold; margin: 0; display: inline;}
-.appbar-actions {height: 40px;}
-.appbar-actions .btn {min-width: 30px; height: 40px; line-height: 38px; padding: 0;}
-
-.appbar .search-bar {position: fixed; left: 0; top: 0; right: 0; z-index: 5000; bottom: 0; display: none;}
-.appbar .search-bar.show {display: block;}
-.search-bar-back {position: absolute; top: 40px; left: 0; right: 0; bottom: 0;}
-.search-bar-control {display: block; position: relative; margin: 0 10px; padding: 10px 0;}
-.search-bar-control > .form-control {box-shadow: 0 0 5px rgba(0,0,0,.1); height: 30px; line-height: 20px; padding: 5px 8px 5px 30px; border-radius: 6px; box-sizing: border-box; border-color: #f1f1f1; transition: box-shadow .2s;}
-.search-bar-control > .form-control:focus {box-shadow: 0 4px 20px 0 rgba(153,153,153,0.20); border-color: #eee;}
-.search-bar-control > .icon-search {position: absolute; left: 2px; top: 10px; width: 28px; height: 28px; line-height: 28px; text-align: center;}
-.search-bar-control > .btn-clear {position: absolute; right: 0; top: 9px; width: 28px; height: 28px; line-height: 26px; text-align: center; opacity: 0; transition: opacity .2s;}
-.search-bar-control > .btn-clear > .icon {display: inline-block; width: 18px; height: 18px; border-radius: 50%; line-height: 16px; background: #CBCBCB; color: #fff;}
-.search-bar-control > .form-control:valid + .btn-clear {opacity: 1;}
-
-body.with-appnav.with-appbar-top {padding-top: 80px;}
-body.with-appnav.with-appbar-top .appnav {top: 40px;}
-body.with-appnav.with-appbar-top.scroll-down-in .appnav.fix-top {top: 40px;}
-body.with-appbar-top.scroll-down-in .appbar.fix-top {top: 0;}
-
-.appnav {background: #fff; border: none;}
-.appnav > .mainnav {margin: 0; padding: 0 4px; background: #fff;}
-.appnav > .mainnav > .nav > li > a.sub-open {background: none;}
 .appnav > .mainnav > .nav > li > a.sub-open > .icon-caret-down {color: @color-primary;}
-.appnav > .mainnav > .nav > li > a {box-shadow: none; color: #999999; border-radius: 6px;}
-.appnav > .mainnav > .nav > li.active > a {box-shadow: none; position: relative; color: @color-primary;}
-.appnav > .mainnav > .nav > li.active > a:before {content: ' '; display: block; position: absolute; right: 15px;; left: 15px; bottom: 6px; background-color: @color-primary; height: 2px; border-radius: 2px; box-shadow: 0 2px 4px 0 rgba(78,129,254,0.20); background-image: @img-gradient;}
-.appnav.show-sub .mainnav {box-shadow: 0 4px 8px 0 rgba(228,228,228,0.50), 0 1px 0 0 rgba(0,0,0,.02); position: relative; z-index: 10;}
-.appnav > .subnavs {background: #fff; border: none; margin: 0; font-size: 12px; padding: 5px 0; overflow-y: auto; box-shadow: 0 4px 8px 0 rgba(228,228,228,0.50), 0 1px 0 0 rgba(0,0,0,.02);}
-.appnav > .subnavs > .nav { display: flex!important; flex-wrap: nowrap; white-space: nowrap;}
-.appnav > .subnavs > .nav > li {padding: 4px;}
-.appnav > .subnavs > .nav > li > a {line-height: 18px; padding: 3px 8px; border-radius: 12px; color: #9a9a9a;}
-.appnav > .subnavs > .nav > li.active > a {background: @color-pale; box-shadow: none;}
+.appnav > .mainnav > .nav > li.active > a {color: @color-primary;}
+.appnav > .mainnav > .nav > li.active > a:before {background-color: @color-primary; background-image: @img-gradient;}
+.appnav > .subnavs > .nav > li.active > a {background: @color-pale;}
+.appbar .nav-icons > li.active > a {color: @color-primary;}
 
-.carousel-inner {border-radius: 4px}
-.carousel-indicators {left: 24px; margin: 0; bottom: 14px; text-align: left;}
-.carousel-indicators li {width: 4px; height: 3px; background: rgba(150,150,150,.85); border-radius: 1px; border: none; transition: all .4s; cursor: pointer;}
-.carousel-indicators li.active {width: 12px; background: @color-primary;}
-.carousel-caption {left: 24px; text-align: left; font-size: 12px; text-shadow: none; bottom: 35px; right: 24px;}
-.carousel-caption > h2 {font-size: 14px;}
-.carousel-caption p {margin: 0 0 5px 0;}
-.carousel-caption ul {padding-left: 16px; margin-bottom: 5px;}
-.carousel-control {display: none;}
+.carousel-indicators li.active {background: @color-primary;}

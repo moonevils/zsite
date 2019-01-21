@@ -365,4 +365,88 @@ $(function()
             $modal[0].appendChild(scriptEle);
         });
     });
+
+    // Listen scroll position and change logo position when user scroll page
+    var lastScrollTop = 0;
+    var $logo = $('#logo>h4,#logo>img');
+    var isScrollInBottom = false;
+    $(window).on('scroll', function()
+    {
+        var $window = $(window);
+        var scrollTop = $window.scrollTop();
+
+        if((!lastScrollTop && scrollTop) || (!scrollTop && lastScrollTop))
+        {
+            var isScrollDownIn = !!scrollTop;
+            $('body').toggleClass('scroll-down-in', isScrollDownIn);
+        }
+        if((scrollTop < 10 && lastScrollTop >= 10) || (scrollTop >= 10 && lastScrollTop < 10))
+        {
+            $logo.css({left: scrollTop < 10 ? 0 : -1 * Math.floor(($window.width() - $logo.width()) / 2 - 8)});
+        }
+        lastScrollTop = scrollTop;
+        var isInBottom = $window.scrollTop() + $window.height() == $(document).height();
+        if(isInBottom !== isScrollInBottom)
+        {
+            $('body').toggleClass('scroll-in-bottom', isInBottom);
+            isScrollInBottom = isInBottom;
+        }
+    }).scroll();
+
+    // Init pull-up-load-more component
+    var $pager = $('.pager-pull-up');
+    if($pager.length)
+    {
+        var pagerInfo = $pager.data();
+        var pageTotal = pagerInfo.pagetotal;
+        var pageID = pagerInfo.pageid;
+        if(pageTotal && pageTotal > 1 && pageID && pageID < pageTotal)
+        {
+            var $info = $pager.find('.pager-pull-up-hint');
+            var triggerDistance = 150;
+            var tryLoadNextPage = function()
+            {
+                if($pager.hasClass('page-loading') || pageID >= pageTotal) return;
+
+                var $tmpDiv = $('<div>');
+                $tmpDiv.load(pagerInfo.url.replace('$ID', pageID + 1) + ' ' + pagerInfo.list, function(response, status)
+                {
+                    if(status === 'success')
+                    {
+                        $(pagerInfo.list).append($tmpDiv.children(pagerInfo.list).children());
+                        pageID += 1;
+                        $pager.find('.pager-pull-up-pageID').text(pageID);
+                        if(pageID >= pageTotal) $info.hide();
+                    }
+                    else alert(v.lang.timeout);
+                    $pager.removeClass('page-loading');
+                });
+                $pager.addClass('page-loading');
+            };
+
+            var touchStartX, touchStartY;
+            $(document).on('touchstart', function(e)
+            {
+                touchStartX = e.touches[0].pageX;
+                touchStartY = e.touches[0].pageY;
+            }).on('touchmove', function(e)
+            {
+                var distanceX = e.changedTouches[0].pageX - touchStartX;
+                var distanceY = e.changedTouches[0].pageY - touchStartY;
+                if(Math.abs(distanceY) > Math.abs(distanceX) && distanceY < 0 && distanceY >= -triggerDistance)
+                {
+                    $info.css('transform', 'scaleY(' + (1 - Math.abs(distanceY/(triggerDistance * 1.1))) + ')');
+                }
+            }).on('touchend', function(e)
+            {
+                var distanceX = e.changedTouches[0].pageX - touchStartX;
+                var distanceY = e.changedTouches[0].pageY - touchStartY;
+                $info.css('transform', 'scaleY(1)');
+                if(Math.abs(distanceY) > Math.abs(distanceX) && distanceY < -triggerDistance)
+                {
+                    tryLoadNextPage();
+                }
+            });
+        }
+    }
 });
