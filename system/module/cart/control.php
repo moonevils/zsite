@@ -51,11 +51,13 @@ class cart extends control
         $this->app->loadLang('product');
         $this->app->loadModuleConfig('product');
         $this->app->loadLang('order');
+
         $this->view->currencySymbol = $this->config->product->currencySymbol;
-        $this->view->title      = $this->lang->cart->browse;
-        $this->view->products   = $this->cart->getListByAccount($this->app->user->account);
-        $this->view->mobileURL  = helper::createLink('cart', 'browse', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('cart', 'browse', '', '', 'html');
+        $this->view->title          = $this->lang->cart->browse;
+        $this->view->mobileTitle    = $this->lang->cart->browse;
+        $this->view->products       = $this->cart->getListByAccount($this->app->user->account);
+        $this->view->mobileURL      = helper::createLink('cart', 'browse', '', '', 'mhtml');
+        $this->view->desktopURL     = helper::createLink('cart', 'browse', '', '', 'html');
         $this->display();
     }
 
@@ -97,5 +99,23 @@ class cart extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->cart->deleteInCookie($product);
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess, 'locate' => inlink('browse')));
+    }
+
+    /**
+     * Delete products from cart.
+     * 
+     * @param  string $products 
+     * @access public
+     * @return void
+     */
+    public function deletes($products)
+    {
+        $products = explode(',', rtrim($products, ','));
+        foreach($products as $product)
+        {
+            $this->dao->delete()->from(TABLE_CART)->where('product')->eq($product)->andWhere('account')->eq($this->app->user->account)->exec();
+            $this->cart->deleteInCookie($product);
+        }
+        return true;
     }
 }

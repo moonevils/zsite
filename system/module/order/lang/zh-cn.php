@@ -61,6 +61,8 @@ $lang->order->finish         = '完成';
 $lang->order->confirm        = '确认订单信息';
 $lang->order->selectProducts = "选择了 <strong class='text-danger'>%s</strong> 件商品，";
 $lang->order->totalToPay     = "共计：<strong id='amount' class='text-lg text-danger'>%s</strong>";
+$lang->order->cartProducts   = "共<strong>%s</strong> 件商品";
+$lang->order->statistics     = "<strong class='text-danger'>%s</strong> 件商品共计:<strong id='amount' class='text-lg text-danger'>%s</strong>";
 $lang->order->payInfo        = "%s %s 商品订单";
 $lang->order->goToBank       = "请在线支付您的订单。";
 $lang->order->track          = '物流';
