@@ -143,64 +143,64 @@
 </div>
 
 <style>
-  .{$blockClass} {
+  .{$blockClass}  {
     border-radius: 7px;
     padding: 13px 10px;
   }
 
-  .{$blockClass}.panel-body {
+  .{$blockClass} .panel-body {
     padding: 0 0;
   }
 
-  .{$blockClass}.vertical-center {
+  .{$blockClass} .vertical-center {
     display: flex;
     display: -webkit-flex;
     align-items: center;
   }
 
-  .{$blockClass}.vertical-start {
+  .{$blockClass} .vertical-start {
     display: flex;
     display: -webkit-flex;
     align-items: flex-start;
   }
 
-  .{$blockClass}.vertical-line {
+  .{$blockClass} .vertical-line {
     float: left;
     width: 2px;
     height: 14px;
     background: #3C77FE;
   }
 
-  .{$blockClass}.block-title-text {
+  .{$blockClass} .block-title-text {
     font-size: 16px;
     margin-left: 3px;
   }
 
-  .{$blockClass}.block-title-align {
+  .{$blockClass} .block-title-align {
     justify-content: flex-start;
   }
 
-  .{$blockClass}.article-item {
+  .{$blockClass} .article-item {
     margin: 12px 0 12px 0;
     line-height: 30px;
   }
 
-  .{$blockClass}.divider {
+  .{$blockClass} .divider {
     height: 1px;
     width: 100%;
     background-color: #e5e5e5;
   }
 
-  .{$blockClass}.article-align {
+  .{$blockClass} .article-align {
     justify-content: space-between;
   }
 
-  .{$blockClass}.article-title {
+  .{$blockClass} .article-title {
     margin: -7px 7px 0 0;
     font-size: 14px;
   }
 
-  .{$blockClass}.article-content {
+  .{$blockClass} .article-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -208,18 +208,18 @@
     width: 100%;
   }
 
-  .{$blockClass}.article-ext {
+  .{$blockClass} .article-ext {
     margin-bottom: -8px;
   }
 
-  .{$blockClass}.article-img img{
+  .{$blockClass} .article-img img{
     max-width: unset;
     width: 104px;
     height: 78px;
     border-radius: 3px;
   }
 
-  .{$blockClass}.label-hot {
+  .{$blockClass} .label-hot {
     width: 14px;
     height: 14px;
     border-radius: 2px;
@@ -230,23 +230,23 @@
     display: inline-flex;
   }
 
-  .{$blockClass}.views {
+  .{$blockClass} .views {
     font-size: 12px;
     color: #EF7340;
   }
 
-  .{$blockClass}.comments {
+  .{$blockClass} .comments {
     margin-left: 19px;
     font-size: 12px;
   }
 
-  .{$blockClass}.comments img {
+  .{$blockClass} .comments img {
     width: 12px;
     height: 12px;
     margin-bottom: 2px;
   }
 
-  .{$blockClass}.category {
+  .{$blockClass} .category {
     padding: 2px 3px;
     border-radius: 2px;
     background-color: #E0E9FF;
@@ -256,7 +256,7 @@
     text-align: center;
   }
 
-  .{$blockClass}.category a{
+  .{$blockClass} .category a{
     color: #0049FF;
   }
 </style>
