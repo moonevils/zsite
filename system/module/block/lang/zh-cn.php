@@ -248,6 +248,7 @@ $lang->block->subscribe->fixInNavList    = array();
 $lang->block->subscribe->fixInNavList[1] = '是';
 $lang->block->subscribe->fixInNavList[0] = '否';
 
+$lang->block->article        = new stdclass();
 $lang->block->article->hot   = '热';
 $lang->block->article->views = '阅读';
 
