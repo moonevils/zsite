@@ -23,39 +23,36 @@
 <div class='block-region blocks region-top' data-region='article_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'article_browse', 'top')}</div>
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
-    <div class='title'><strong>{$category->name}</strong></div>
+    <strong>{$category->name}</strong>
   </div>
-  <div class='cards condensed cards-list bordered' id='articles'>
+  <div class='cards condensed cards-list' id='articles'>
     {foreach($articles as $article)}
       {$url = inlink('view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
       <a class='card' href='{$url}' id="article{{$article->id}}" data-ve='article'>
-        <div class='card-heading'>
-          {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}
-            <div class='pull-right'>
-              <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
-            </div>
-          {/if}
-          <h5 style='color:{$article->titleColor}'>{$article->title}</h5>
-        </div>
-        <div class='table-layout'>
-          <div class='table-cell'>
-            <div class='card-content text-muted small'>
-              {!helper::substr($article->summary, 40, '...')}
-              <div>
-                <span title="{!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}"> <i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder} </span>
-                {if(isset($article->comments))} &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp; {/if}
-                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span>
+        <div class='card-wrapper'>
+          <div class='card-heading'>
+            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}
+              <div class='pull-right'>
+                <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
               </div>
+            {/if}
+            <h5 style='color:{$article->titleColor}'>{$article->title}</h5>
+          </div>
+          <div class='card-content small'>
+            <div>
+              <span title="{!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}"> <i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder} </span>
+              {if(isset($article->comments))} &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp; {/if}
+              &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span>
             </div>
           </div>
-          {if(!empty($article->image))}
-            <div class='table-cell thumbnail-cell'>
-              {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {$article->image->primary->objectType = 'article'}
-              {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
-            </div>
-          {/if}
         </div>
+        {if(!empty($article->image))}
+          <div class='card-thumbnail'>
+            {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+            {$article->image->primary->objectType = 'article'}
+            {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+          </div>
+        {/if}
       </a>
     {/foreach}
   </div>
