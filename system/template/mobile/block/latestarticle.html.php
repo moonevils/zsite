@@ -16,6 +16,7 @@
 {$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit)}
 {$articles = $model->loadModel('article')->computeComments($articles)}
 {if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'article')} {/if}
+{include $this->app->loadLang('article')}
 {noparse}
 <style>
 #block{$block->id} .card .thumbnail-cell {padding-left: 8px; padding-right: 0}
@@ -59,14 +60,14 @@
           <div class="article-content">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->block->article->hot}</label>
+                <label class="label-hot vertical-center">{$lang->article->hot}</label>
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
             </div>
             <div class='article-ext'>
               <span class='views'>
-                {$article->views}{$lang->block->article->views}
+                {$article->views}{$lang->article->views}
               </span>
               <span class='comments'>
                 {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
@@ -108,14 +109,14 @@
           <div class="article-content" style="min-height: 0;">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->block->article->hot}</label>
+                <label class="label-hot vertical-center">{$lang->rticle->hot}</label>
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
             </div>
             <div class='article-ext'>
                 <span class='views'>
-                  {$article->views}{$lang->block->article->views}
+                  {$article->views}{$lang->article->views}
                 </span>
               <span class='comments'>
                   {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
@@ -182,7 +183,7 @@
 
   .block{$block->id} .article-item {
     margin: 12px 0 12px 0;
-    line-height: 30px;
+    line-height: 22px;
   }
 
   .block{$block->id} .divider {
@@ -196,7 +197,7 @@
   }
 
   .block{$block->id} .article-title {
-    margin: -7px 7px 0 0;
+    margin: -4px 7px 0 0;
     font-size: 14px;
   }
 
@@ -209,7 +210,7 @@
   }
 
   .block{$block->id} .article-ext {
-    margin-bottom: -8px;
+    margin-bottom: -6px;
   }
 
   .block{$block->id} .article-img img{
