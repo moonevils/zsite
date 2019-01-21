@@ -15,3 +15,5 @@ $lang->mobile->bottomNav['home']        = 'Home';
 $lang->mobile->bottomNav['message']     = 'Message';
 $lang->mobile->bottomNav['cart']        = 'Cart';
 $lang->mobile->bottomNav['userControl'] = 'My';
+
+$lang->mobile->pullUpHint = 'Pull up to load next page';
