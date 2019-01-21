@@ -14,6 +14,7 @@
 {$content  = json_decode($block->content)}
 {$method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)))}
 {$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit)}
+{$articles = $model->loadModel('article')->computeComments($articles)}
 {if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'article')} {/if}
 {noparse}
 <style>
@@ -22,52 +23,79 @@
 </style>
 {/noparse}
 <div id="block{$block->id}" class='panel panel-block {$blockClass}'>
-  <div class='panel-heading'>
-    <strong>{!echo $icon . $block->title}</strong>
-    {if(isset($content->moreText) and isset($content->moreUrl))}
-      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
-    {/if}
-  </div>
   {if(isset($content->image))}
     {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
-    <div class='panel-body no-padding'>
-      <div class='cards condensed cards-list'>
+    <div class='panel-body'>
+      <div class='block-title'>
+        <strong class="vertical-center block-title-align">
+          {if(empty($icon))}
+          <span class='vertical-line'></span>
+          {else}
+          {!$icon}
+          {/if}
+          <span class="block-title-text">{!$block->title}</span>
+        </strong>
+        {if(isset($content->moreText) and isset($content->moreUrl))}
+        <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
+        {/if}
+      </div>
+
+      <div class='list'>
       {foreach($articles as $article)}
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
-        <div class='card'>
-          <div class='card-heading'>
-            {if(isset($content->showCategory) and $content->showCategory == 1)}
-              {if($content->categoryName == 'abbr')}
-                {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
-              {else}
-                <span class="text-special">{[' . $article->category->name . ']}</span>
-              {/if}
-            {/if}
-            <strong>{!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}</strong>
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
-          </div>
-          <div class='table-layout'>
+        <div class='item vertical-center article-align'>
+          {if($content->imagePosition == 'left')}
+          <div class='article-img' style="margin-right: 10px">
             {if(!empty($article->image))}
-              {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {$article->image->primary->objectType = 'article'}
-              {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
-              {$thumbnailMaxWidth = !empty($content->imageWidth) ? $content->imageWidth . 'px' : '60px'}
-              {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: {{$thumbnailMaxWidth}};'>{{$thumbnailLink}}</div>"}
-              {if($content->imagePosition == 'left')} {$thumbnail} {/if}
+            {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
+            {$article->image->primary->objectType = 'article'}
+            {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
+            {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: 100%;'>{{$thumbnailLink}}</div>"}
+            {$thumbnail}
             {/if}
-            <div class='table-cell'>
-              <div class='card-content text-muted small'>
-                <strong class='text-important'>
-                  {if(isset($content->time))} <i class='icon-time'></i> {!formatTime($article->addedDate, DT_DATE4)} {/if}
-                </strong>
-                &nbsp;{$article->summary}
-              </div>
-            </div>
-            {if(!empty($article->image) && isset($thumbnail) && $content->imagePosition == 'right')} {$thumbnail} {/if}
           </div>
+          {/if}
+          <div class="article-content">
+            <div class='vertical-start'>
+              <strong class="article-title">
+                <label class="label-hot vertical-center">{$lang->block->article->hot}</label>
+                {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
+                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
+              </strong>
+            </div>
+            <div class='article-ext'>
+              <span class='views'>
+                {$article->views}{$lang->block->article->views}
+              </span>
+              <span class='comments'>
+                <i class="icon-chat-dot"></i>&nbsp;{$article->comments}
+              </span>
+              <span class="category">
+                {if(isset($content->showCategory) and $content->showCategory == 1)}
+                  {if($content->categoryName == 'abbr')}
+                    {$categoryName = $article->category->abbr ? $article->category->abbr : $article->category->name}
+                    {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+                  {else}
+                    {$article->category->name}
+                  {/if}
+                {/if}
+              </span>
+            </div>
+          </div>
+          {if($content->imagePosition == 'right')}
+          <div class='article-img'>
+            {if(!empty($article->image))}
+            {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
+            {$article->image->primary->objectType = 'article'}
+            {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
+            {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: 100%;'>{{$thumbnailLink}}</div>"}
+            {$thumbnail}
+            {/if}
+          </div>
+          {/if}
         </div>
-      {/foreach}
+        <div class='divider'></div>
+        {/foreach}
       </div>
     </div>
   {else}
