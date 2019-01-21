@@ -22,7 +22,7 @@
 #block{$block->id} .card .table-cell + .thumbnail-cell {padding-right: 8px; padding-left: 0}
 </style>
 {/noparse}
-<div id="block{$block->id}" class='panel panel-block {$blockClass}'>
+<div id="block{$block->id}" class='panel panel-block {$blockClass} block{$block->id}'>
   <div class='panel-body'>
     <div class='block-title'>
       <strong class="vertical-center block-title-align">
@@ -38,7 +38,7 @@
       {/if}
     </div>
     <div class='list'>
-    {if(!isset($content->image))}
+    {if(isset($content->image))}
       {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
       {@$i=0}
       {foreach($articles as $article)}
@@ -143,64 +143,64 @@
 </div>
 
 <style>
-  .{$blockClass}  {
+  .block{$block->id} {
     border-radius: 7px;
     padding: 13px 10px;
   }
 
-  .{$blockClass} .panel-body {
+  .block{$block->id} .panel-body {
     padding: 0 0;
   }
 
-  .{$blockClass} .vertical-center {
+  .block{$block->id} .vertical-center {
     display: flex;
     display: -webkit-flex;
     align-items: center;
   }
 
-  .{$blockClass} .vertical-start {
+  .block{$block->id} .vertical-start {
     display: flex;
     display: -webkit-flex;
     align-items: flex-start;
   }
 
-  .{$blockClass} .vertical-line {
+  .block{$block->id} .vertical-line {
     float: left;
     width: 2px;
     height: 14px;
     background: #3C77FE;
   }
 
-  .{$blockClass} .block-title-text {
+  .block{$block->id} .block-title-text {
     font-size: 16px;
     margin-left: 3px;
   }
 
-  .{$blockClass} .block-title-align {
+  .block{$block->id} .block-title-align {
     justify-content: flex-start;
   }
 
-  .{$blockClass} .article-item {
+  .block{$block->id} .article-item {
     margin: 12px 0 12px 0;
     line-height: 30px;
   }
 
-  .{$blockClass} .divider {
+  .block{$block->id} .divider {
     height: 1px;
     width: 100%;
     background-color: #e5e5e5;
   }
 
-  .{$blockClass} .article-align {
+  .block{$block->id} .article-align {
     justify-content: space-between;
   }
 
-  .{$blockClass} .article-title {
+  .block{$block->id} .article-title {
     margin: -7px 7px 0 0;
     font-size: 14px;
   }
 
-  .{$blockClass} .article-content {
+  .block{$block->id} .article-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -208,18 +208,18 @@
     width: 100%;
   }
 
-  .{$blockClass} .article-ext {
+  .block{$block->id} .article-ext {
     margin-bottom: -8px;
   }
 
-  .{$blockClass} .article-img img{
+  .block{$block->id} .article-img img{
     max-width: unset;
     width: 104px;
     height: 78px;
     border-radius: 3px;
   }
 
-  .{$blockClass} .label-hot {
+  .block{$block->id} .label-hot {
     width: 14px;
     height: 14px;
     border-radius: 2px;
@@ -230,23 +230,23 @@
     display: inline-flex;
   }
 
-  .{$blockClass} .views {
+  .block{$block->id} .views {
     font-size: 12px;
     color: #EF7340;
   }
 
-  .{$blockClass} .comments {
+  .block{$block->id} .comments {
     margin-left: 19px;
     font-size: 12px;
   }
 
-  .{$blockClass} .comments img {
+  .block{$block->id} .comments img {
     width: 12px;
     height: 12px;
     margin-bottom: 2px;
   }
 
-  .{$blockClass} .category {
+  .block{$block->id} .category {
     padding: 2px 3px;
     border-radius: 2px;
     background-color: #E0E9FF;
@@ -256,7 +256,7 @@
     text-align: center;
   }
 
-  .{$blockClass} .category a{
+  .block{$block->id} .category a{
     color: #0049FF;
   }
 </style>
