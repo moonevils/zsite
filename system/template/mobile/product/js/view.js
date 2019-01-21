@@ -41,6 +41,10 @@ $(function()
                     }
                     else if(window.v && window.v.addToCartSuccess)
                     {
+                        $.getJSON(createLink('cart', 'count'), function(data)
+                        {
+                            $('.label.badge.red.circle').text(data.count);
+                        })
                         $.messager.success(window.v.addToCartSuccess);
                     }
                 }
