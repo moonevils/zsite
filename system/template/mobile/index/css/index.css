@@ -101,6 +101,12 @@
     font-size: 12px;
 }
 
+.comments img {
+    width: 12px;
+    height: 12px;
+    margin-bottom: 2px;
+}
+
 .category {
     padding: 2px 3px;
     border-radius: 2px;

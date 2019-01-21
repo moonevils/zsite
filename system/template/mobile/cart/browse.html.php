@@ -10,11 +10,38 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {!js::set('currencySymbol', $currencySymbol)}
+<style>
+  body {background:#f6f6f6}
+  .panel.panel-section {border:0px}
+  .panel-section .panel-heading.page-header {margin-top:0px} 
+  .cards.condensed {background:#f6f6f6;padding-bottom:1px} 
+  .cards.condensed .card {margin:10px}
+  .input-group.input-group-sm.input-number {width:100px;float:right}
+  .input-group input {text-align:center;height:32px}
+  .media-placeholder {line-height:120px;padding:0px}
+  .showcase {height:120px;;overflow:hidden;width:30%;text-align:center;float:left}
+  .showcase img {height:100%;}
+  .table-cell {float:left;width:62%;padding-left:10px;padding-right:10px}
+  .table-layout > tbody > tr > th {width:30px;color:#999999}
+  .table-layout > tbody > tr > td, .table-layout > tbody > tr > th, .table-layout > tfoot > tr > td, .table-layout > tfoot > tr > th, .table-layout > thead > tr >t d, .table-layout > thead > tr > th {padding-right:0px;padding-left:0px}
+  .text-danger {color:#D0021B}
+  .input-group-btn .btn.default {padding:5px 10px}
+  .checkarea {float:left;width:8%;text-align:center;margin-top:50px;position: relative}
+  .opt {float:right;font-size:1.5rem}
+  .total {display: table-cell;vertical-align: middle;height:40px}
+  .checkarea > label {position: relative;z-index: 0;padding: .25rem 0 .25rem 1.8rem}
+  .checkarea > label:after, .checkarea > label:before {position: absolute;top: .3rem;left: 0;display: -ms-flexbox;display: flex;width: 1.5rem;height: 1.5rem;content: ' ';transition: .2s cubic-bezier(.175,.885,.32,1);color: transparent;border: .1rem solid rgba(0,0,0,.5);-ms-flex-align: center;align-items: center;-ms-flex-pack: center;justify-content: center;border-radius: 1.5rem}
+  .checkarea > input:checked + label:after, .checkarea > input:checked + label:before {color: #fff;border-radius: .1rem;background-color: #3280fc;border-radius: 1.5rem}
+  .checkarea > label:after {font-family: ZenIcon;font-size: 1.5rem;font-weight: 400;font-style: normal;font-variant: normal;content: '\e60d';text-transform: none;border: none;speak: none;-webkit-font-smoothing: antialiased}
+  .checkarea > input {position: absolute;z-index: 1;top: 0;left: 0;display: block;width: 100%;height: 100%;opacity: 0;}
+</style>
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
-    <div class='title'><i class='icon icon-shopping-cart'></i> <strong>{$lang->cart->browse}</strong>{if(!empty($products))} {!echo ' (' . count($products) . ')' } {/if}</div>
+    <div class='title'>{if(!empty($products))} {$cartProducts = count($products)}{else}{$cartProducts = 0}{/if}{!printf($lang->order->cartProducts, $cartProducts)}</div>
+    <div class='opt admin'>管理</div>
+    <div class='opt complete hide'>完成</div>
   </div>
   {if(!empty($products))}
     <form action='{!helper::createLink('order', 'confirm')}' method='post'>
@@ -24,7 +51,11 @@
         {$productLink = helper::createLink('product', 'view', "id=$productID", "category={{$product->categories[$product->category]->alias}}&name=$product->alias")}
         <div class='card'>
           <div class='table-layout'>
-            <div class='table-cell thumbnail-cell'>
+            <div class='checkarea'>
+              <input class='check-product' type='checkbox' name='product[]' value='{$product->id}'>
+              <label for='buyMethod'></label>
+            </div>
+            <div class='showcase'>
               {if(empty($product->image))}
                 {$productName = helper::substr($product->name, 10, '...')}
                 {$imgColor = $product->id * 57 % 360}
@@ -42,17 +73,19 @@
               <table class='table table-layout table-condensed'>
                 <tbody>
                   <tr>
-                    <td colspan='2'>
-                      <strong>{!html::a($productLink, $product->name)}</strong>
-                      <div class='pull-right'>
+                    <td colspan='3'>
+                      <div style='height:40px;overflow:hidden;'>
+                        <strong>{!html::a($productLink, $product->name)}</strong>
+                      </div>
+                      <!--<div class='pull-right'>
                         {!html::a(inlink('delete', "product={{$product->id}}"), $lang->delete, "class='deleter text-primary'")}
                         {!html::hidden("product[]", $product->id)}
-                      </div>
+                      </div>-->
                     </td>
                   </tr>
                   <tr>
                     <th class='small'>{$lang->order->price}</th>
-                    <td>
+                    <td colspan='2'>
                       {if($product->promotion != 0)}
                         {$price = $product->promotion}
                         <span>{!echo $currencySymbol . $product->promotion}</span>&nbsp;
@@ -68,10 +101,9 @@
                   </tr>
                   <tr>
                     <th class='small'>{$lang->order->amount}</th>
-                    <td><strong class='text-danger'>{$currencySymbol} <span class='product-amount'>{$amount}</span></strong></td>
-                  </tr>
-                  <tr>
-                    <th class='small'>{$lang->order->count}</th>
+                    <td style='line-height:38px'>
+                      <strong class='text-danger'>{$currencySymbol}<span class='product-amount'>{$amount}</span></strong>
+                    </td>
                     <td>
                       <div class='input-group input-group-sm input-number'>
                         <span class='input-group-btn'>
@@ -91,13 +123,31 @@
         </div>
       {/foreach}
       </div>
-      <div class='panel-footer'>
-        <div class='bg-primary-pale alert text-center'>
-        {!printf($lang->order->selectProducts, count($products))}
-        {!printf($lang->order->totalToPay, $currencySymbol . $total)}
-        </div>
-        {!html::submitButton($lang->cart->goAccount, 'btn-order-submit btn block danger')}
-      </div>
+      <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
+      <ul class="nav">
+          <li style='top:-6px'>
+            <div class='col-12'>
+              <div class='checkarea' style='margin-top:0px;padding-left:5%;width:100%;text-align:left'>
+                <input type='checkbox' id='checkAll'>
+                <label style='width:50px'>{$lang->selectAll}</label>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class='col-8'>
+              <div style='float:right'>
+                <div class='total'>
+                  <span>{!printf($lang->order->statistics, 0, $currencySymbol . '0')}</span>
+                </div>
+              </div>
+            </div>
+            <div class='col-4'>
+              {!html::submitButton($lang->cart->goAccount, 'btn-order-submit btn block primary')}
+              <input type='button' class='btn-order-delete btn block light' style='display:none;margin-top:0px' value='{$lang->delete}'></input>
+            </div>
+          </li>
+      </ul>
+      </footer>
     </form>
   {else}
     <div class='panel-body'>
@@ -142,21 +192,18 @@ $(function()
 {
     var caculateTotal = function()
     {
-        var total = 0;
-        $('.product-amount').each(function()
-        {
-            total += parseFloat($(this).text());
-        });
-        $('#amount').text(window.v.currencySymbol + total);
+        statAll();
     };
 
     $('.form-control-number').on('change', function()
     {
-        var $input = $(this);
-        $input.closest('.card').find('.product-amount').text($input.val() * $input.data('price'));
         caculateTotal();
     });
 });
 </script>
 {include TPL_ROOT . 'common/form.html.php'}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
+<div class='block-region region-footer hidden blocks' data-region='all-footer'>{$control->loadModel('block')->printRegion($layouts, 'all', 'footer')}</div>
+</body>
+</html>

@@ -68,7 +68,7 @@
                 {$article->views}{$lang->block->article->views}
               </span>
               <span class='comments'>
-                <i class="icon-chat-dot"></i>&nbsp;{$article->comments}
+                {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
               </span>
               <span class="category">
                 {if(isset($content->showCategory) and $content->showCategory == 1)}
