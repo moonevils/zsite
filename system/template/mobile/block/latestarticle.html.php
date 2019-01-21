@@ -23,25 +23,26 @@
 </style>
 {/noparse}
 <div id="block{$block->id}" class='panel panel-block {$blockClass}'>
-  {if(isset($content->image))}
-    {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
-    <div class='panel-body'>
-      <div class='block-title'>
-        <strong class="vertical-center block-title-align">
-          {if(empty($icon))}
-          <span class='vertical-line'></span>
-          {else}
-          {!$icon}
-          {/if}
-          <span class="block-title-text">{!$block->title}</span>
-        </strong>
-        {if(isset($content->moreText) and isset($content->moreUrl))}
-        <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
+  <div class='panel-body'>
+    <div class='block-title'>
+      <strong class="vertical-center block-title-align">
+        {if(empty($icon))}
+        <span class='vertical-line'></span>
+        {else}
+        {!$icon}
         {/if}
-      </div>
-
-      <div class='list'>
+        <span class="block-title-text">{!$block->title}</span>
+      </strong>
+      {if(isset($content->moreText) and isset($content->moreUrl))}
+      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
+      {/if}
+    </div>
+    <div class='list'>
+    {if(!isset($content->image))}
+      {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
+      {@$i=0}
       {foreach($articles as $article)}
+        {@$i++}
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
         <div class='item vertical-center article-align'>
           {if($content->imagePosition == 'left')}
@@ -94,50 +95,49 @@
           </div>
           {/if}
         </div>
+        {if($i < count($articles))}
         <div class='divider'></div>
-        {/foreach}
-      </div>
-    </div>
-  {else}
-    <div class='panel-body no-padding'>
-      <div class='list-group simple'>
-        {foreach($articles as $article)}
-          {$alias = "category={{$article->category->alias}}&name={{$article->alias}}"}
-          {$url   = helper::createLink('article', 'view', "id={{$article->id}}", $alias)}
-          {if(isset($content->time))}
-          <div class='list-group-item'>
-            {if(isset($content->showCategory) and $content->showCategory == 1)}
-              {if($content->categoryName == 'abbr')}
-                {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
-              {else}
-                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
-              {/if}
-            {/if}
-            {$bold = ''}
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}{$bold = 'font-weight:bold;'}{/if}
-            {!html::a($url, $article->title, "title='{{$article->title}}' style='{{$bold}}color:{{$article->titleColor}}'")}
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
-            <span class='pull-right text-muted'>{!substr($article->addedDate, 0, 10)}</span>
+        {/if}
+      {/foreach}
+    {else}
+      {@$i=0}
+      {foreach($articles as $article)}
+        {@$i++}
+        {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
+        <div class='item vertical-center article-align'>
+          <div class="article-content" style="min-height: 0;">
+            <div class='vertical-start'>
+              <strong class="article-title">
+                <label class="label-hot vertical-center">{$lang->block->article->hot}</label>
+                {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
+                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
+              </strong>
+            </div>
+            <div class='article-ext'>
+                <span class='views'>
+                  {$article->views}{$lang->block->article->views}
+                </span>
+              <span class='comments'>
+                  {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
+                </span>
+              <span class="category">
+                  {if(isset($content->showCategory) and $content->showCategory == 1)}
+                    {if($content->categoryName == 'abbr')}
+                      {$categoryName = $article->category->abbr ? $article->category->abbr : $article->category->name}
+                      {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+                    {else}
+                      {$article->category->name}
+                    {/if}
+                  {/if}
+                </span>
+            </div>
           </div>
-          {else}
-          <div class='list-group-item'>
-            {if(isset($content->showCategory) and $content->showCategory == 1)}
-              {if($content->categoryName == 'abbr')}
-                {$categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] '}
-                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName, "class='text-special'")}
-              {else}
-                {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), '[' . $article->category->name . '] ', "class='text-special'")}
-              {/if}
-            {/if}
-            {$bold = ''}
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')) and $article->stickBold)}{$bold = 'font-weight:bold;'}{/if}
-            {!html::a($url, $article->title, "title='{{$article->title}}' style='{{$bold}}color:{{$article->titleColor}}'")}
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span>{/if}
-          </div>
-          {/if}
-        {/foreach}
-      </div>
+        </div>
+        {if($i < count($articles))}
+        <div class='divider'></div>
+        {/if}
+      {/foreach}
+    {/if}
     </div>
-  {/if}
+  </div>
 </div>
