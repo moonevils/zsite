@@ -571,7 +571,6 @@ class fileModel extends model
         }
         if(stripos(",{$this->config->file->dangers},", ",{$extension},") !== false) return 'txt';
         if(stripos(",{$this->config->file->allowed},", ",{$extension},") === false) return 'txt';
-        if($extension == '') return 'txt';
         return $extension;
     }
 
@@ -579,13 +578,13 @@ class fileModel extends model
      * Get save name.
      * 
      * @param  string    $pathName 
-     * @param  string    $ext 
      * @access public
      * @return string
      */
-    public function getSaveName($pathName, $ext = null)
+    public function getSaveName($pathName)
     {
-        if(in_array($ext, $this->config->file->videoExtensions)) return $pathName;
+        $fileInfo = pathinfo($pathName);
+        if(isset($fileInfo['extension']) and in_array($fileInfo['extension'], $this->config->file->videoExtensions)) return $pathName;
         $saveName = strpos($pathName, '.') === false ? $pathName : substr($pathName, 0, strpos($pathName, '.'));
         return $saveName;
     }
@@ -1196,8 +1195,8 @@ class fileModel extends model
         {
             $file['pathname'] .= '.txt';
         }
-        $file['pathname'] = $this->getSaveName($file['pathname'], $file['extension']);
-        $realPathName = $this->savePath . $file['pathname'];
+
+        $realPathName = $this->savePath . $this->getSaveName($file['pathname']);
         if($file['chunks'] > 1)
         {
             $fileSavePath = $this->savePath . $file['chunkpath'];
