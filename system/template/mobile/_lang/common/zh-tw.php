@@ -16,3 +16,5 @@ $lang->mobile->bottomNav['home']        = '主頁';
 $lang->mobile->bottomNav['message']     = '消息';
 $lang->mobile->bottomNav['cart']        = '購物車';
 $lang->mobile->bottomNav['userControl'] = '用戶中心';
+
+$lang->mobile->pullUpHint = '上拉顯示下一頁';

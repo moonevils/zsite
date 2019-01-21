@@ -59,10 +59,9 @@
       </a>
     {/foreach}
   </div>
-  <div class='panel-footer'>
-    {$pager->show('justify')}
-  </div>
 </div>
+
+{$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
 
 <div class='block-region blocks region-bottom' data-region='article_browse-bottom'>{$control->loadModel('block')->printRegion($layouts, 'article_browse', 'bottom')}</div>
 
