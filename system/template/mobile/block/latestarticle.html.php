@@ -44,7 +44,7 @@
       {foreach($articles as $article)}
         {@$i++}
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
-        <div class='item vertical-center article-align'>
+        <div class='article-item vertical-center article-align'>
           {if($content->imagePosition == 'left')}
           <div class='article-img' style="margin-right: 10px">
             {if(!empty($article->image))}
@@ -104,7 +104,7 @@
       {foreach($articles as $article)}
         {@$i++}
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
-        <div class='item vertical-center article-align'>
+        <div class='article-item vertical-center article-align'>
           <div class="article-content" style="min-height: 0;">
             <div class='vertical-start'>
               <strong class="article-title">
@@ -143,11 +143,6 @@
 </div>
 
 <style>
-
-  .icon-chat-dot:before {
-    content: '\e750';
-  }
-
   .panel {
     border-radius: 3px;
     padding: 13px 10px;
@@ -184,7 +179,7 @@
     justify-content: flex-start;
   }
 
-  .item {
+  .article-item {
     margin: 12px 0 12px 0;
     line-height: 30px;
   }
