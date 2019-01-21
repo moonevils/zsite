@@ -261,7 +261,3 @@ $lang->block->sideGridOptions[9]  = '3/4';
 $lang->block->sideGridOptions[2]  = '1/6';
 $lang->block->sideGridOptions[10] = '5/6';
 $lang->block->sideGridOptions[0]  = 'Hidden';
-
-$lang->block->article        = new stdclass();
-$lang->block->article->hot   = 'Hot';
-$lang->block->article->views = 'Views';
