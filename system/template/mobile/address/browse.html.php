@@ -11,7 +11,6 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
-{*include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')*}
 
 <div class='manage vertical-center'>
   <p name='operate' current='manage' style='{if(count($addresses) == 0)}display:none;{/if}'>{$lang->address->manage}</p>

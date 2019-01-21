@@ -563,6 +563,24 @@ class baseHelper
         return '';
     }
 
+	/**
+	 * 检查当前是否使用https协议访问。
+	 * Check is https request.
+	 * 
+	 * @static
+	 * @access public
+	 * @return bool
+	 */
+	public static function isHttps()
+	{
+		if(zget($_SERVER, 'HTTPS', '') == 'off') return false;
+		if(isset($_SERVER['HTTPS']) and $_SERVER['HTTPS']) return true;
+		if(zget($_SERVER, 'SERVER_PORT', '') == 443) return true;
+		if(zget($_SERVER, 'HTTP_X_FORWARDED_SSL', '') == 'on') return true;
+		if(zget($_SERVER, 'HTTP_X_FORWARDED_PROTO', '') == 'https') return true;
+		return false;
+	}
+
     /**
      * 检查是否是AJAX请求。
      * Check is ajax request.

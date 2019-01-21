@@ -80,24 +80,24 @@ $lang->block->childBlock        = 'Blocks';
 
 $lang->block->header = new stdclass();
 
-$lang->block->header->top = new stdclass();
+$lang->block->header->top         = new stdclass();
 $lang->block->header->top->common = 'Header';
 $lang->block->header->top->left   = 'Left';
 $lang->block->header->top->center = 'Center';
 $lang->block->header->top->right  = 'Right';
 
-$lang->block->header->middle = new stdclass();
+$lang->block->header->middle         = new stdclass();
 $lang->block->header->middle->common = 'Center';
 $lang->block->header->middle->left   = 'Left';
 $lang->block->header->middle->center = 'Center';
 $lang->block->header->middle->right  = 'Right';
 
-$lang->block->header->bottom = new stdclass();
+$lang->block->header->bottom         = new stdclass();
 $lang->block->header->bottom->common = 'Bottom';
 
-$lang->block->header->top->leftOptions['']         = 'Hide';
-$lang->block->header->top->leftOptions['slogan']   = 'Slogan';
-$lang->block->header->top->leftOptions['custom']   = 'Custom';
+$lang->block->header->top->leftOptions['']       = 'Hide';
+$lang->block->header->top->leftOptions['slogan'] = 'Slogan';
+$lang->block->header->top->leftOptions['custom'] = 'Custom';
 
 $lang->block->header->top->rightOptions['']               = 'Hide';
 $lang->block->header->top->rightOptions['login']          = 'Login/Register + Switch Language';
@@ -147,7 +147,7 @@ $lang->block->paddingBottom = 'Bottom';
 $lang->block->paddingLeft   = 'Left';
 $lang->block->paddingRight  = 'Right';
 
-$lang->block->placeholder = new stdclass();
+$lang->block->placeholder                         = new stdclass();
 $lang->block->placeholder->moreText               = 'Text shown at the upper right of the widget.';
 $lang->block->placeholder->moreUrl                = 'Link shown at the upper right of the widget.';
 $lang->block->placeholder->padding                = '0';
@@ -194,7 +194,7 @@ $lang->block->imageSizeList['small']  = 'Small';
 $lang->block->imagePositionList['left']  = 'Left';
 $lang->block->imagePositionList['right'] = 'Right';
 
-$lang->block->category = new stdclass();
+$lang->block->category                = new stdclass();
 $lang->block->category->showChildren  = 'Display Subcategory';
 $lang->block->category->fromCurrent   = 'Start from current category';
 $lang->block->category->initialExpand = 'Expand subcategory by default';
@@ -211,18 +211,18 @@ $lang->block->category->initialExpandList[0] = 'No';
 $lang->block->category->showCategoryList['abbr'] = 'Abbreviation';
 $lang->block->category->showCategoryList['name'] = 'Full Name';
 
-$lang->block->slideStyle = 'Display Style';
+$lang->block->slideStyle                 = 'Display Style';
 $lang->block->slideStyleList['carousel'] = 'Horizontal';
 $lang->block->slideStyleList['tile']     = 'Vertical';
 
-$lang->block->navTypeList = new stdclass();
+$lang->block->navTypeList                = new stdclass();
 $lang->block->navTypeList->desktop_top   = 'Desktop';
 $lang->block->navTypeList->desktop_blog  = 'Blog';
 $lang->block->navTypeList->mobile_top    = 'Mobile Top';
 $lang->block->navTypeList->mobile_bottom = 'Mobile Bottom';
 $lang->block->navTypeList->mobile_blog   = 'Mobile Blog';
 
-$lang->block->book = new stdclass();
+$lang->block->book           = new stdclass();
 $lang->block->book->showType = 'Show';
 
 $lang->block->book->sortList['order'] = 'Order';
@@ -234,17 +234,17 @@ $lang->block->book->showTypeList['list']  = 'List';
 $lang->block->sideGrid  = 'Sidebar Width';
 $lang->block->sideFloat = 'Sidebar Position ';
 
-$lang->block->alignList = array();
+$lang->block->alignList           = array();
 $lang->block->alignList['left']   = 'Left';
 $lang->block->alignList['middle'] = 'Middle';
 
-$lang->block->imageTypeList = array();
+$lang->block->imageTypeList           = array();
 $lang->block->imageTypeList['wechat'] = 'Wechat qrcode';
 $lang->block->imageTypeList['custom'] = 'Custom Image';
 
-$lang->block->subscribe = new stdclass();
-$lang->block->subscribe->fixInNav = 'Fix in nav';
-$lang->block->subscribe->fixInNavList = array();
+$lang->block->subscribe                  = new stdclass();
+$lang->block->subscribe->fixInNav        = 'Fix in nav';
+$lang->block->subscribe->fixInNavList    = array();
 $lang->block->subscribe->fixInNavList[1] = 'Yes';
 $lang->block->subscribe->fixInNavList[0] = 'No';
 
@@ -261,3 +261,6 @@ $lang->block->sideGridOptions[9]  = '3/4';
 $lang->block->sideGridOptions[2]  = '1/6';
 $lang->block->sideGridOptions[10] = '5/6';
 $lang->block->sideGridOptions[0]  = 'Hidden';
+
+$lang->block->article->hot   = 'Hot';
+$lang->block->article->views = 'Views';
