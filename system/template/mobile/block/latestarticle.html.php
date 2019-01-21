@@ -143,63 +143,64 @@
 </div>
 
 <style>
-  .panel {
-    border-radius: 3px;
+  .{$blockClass}  {
+    border-radius: 7px;
     padding: 13px 10px;
   }
-  .panel-body {
+
+  .{$blockClass} .panel-body {
     padding: 0 0;
   }
 
-  .vertical-center {
+  .{$blockClass} .vertical-center {
     display: flex;
     display: -webkit-flex;
     align-items: center;
   }
 
-  .vertical-start {
+  .{$blockClass} .vertical-start {
     display: flex;
     display: -webkit-flex;
     align-items: flex-start;
   }
 
-  .vertical-line {
+  .{$blockClass} .vertical-line {
     float: left;
     width: 2px;
     height: 14px;
     background: #3C77FE;
   }
 
-  .block-title-text {
+  .{$blockClass} .block-title-text {
     font-size: 16px;
     margin-left: 3px;
   }
 
-  .block-title-align {
+  .{$blockClass} .block-title-align {
     justify-content: flex-start;
   }
 
-  .article-item {
+  .{$blockClass} .article-item {
     margin: 12px 0 12px 0;
     line-height: 30px;
   }
 
-  .divider {
+  .{$blockClass} .divider {
     height: 1px;
     width: 100%;
     background-color: #e5e5e5;
   }
 
-  .article-align {
+  .{$blockClass} .article-align {
     justify-content: space-between;
   }
 
-  .article-title {
+  .{$blockClass} .article-title {
     margin: -7px 7px 0 0;
     font-size: 14px;
   }
 
-  .article-content {
+  .{$blockClass} .article-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -207,18 +208,18 @@
     width: 100%;
   }
 
-  .article-ext {
+  .{$blockClass} .article-ext {
     margin-bottom: -8px;
   }
 
-  .article-img img{
+  .{$blockClass} .article-img img{
     max-width: unset;
     width: 104px;
     height: 78px;
     border-radius: 3px;
   }
 
-  .label-hot {
+  .{$blockClass} .label-hot {
     width: 14px;
     height: 14px;
     border-radius: 2px;
@@ -229,23 +230,23 @@
     display: inline-flex;
   }
 
-  .views {
+  .{$blockClass} .views {
     font-size: 12px;
     color: #EF7340;
   }
 
-  .comments {
+  .{$blockClass} .comments {
     margin-left: 19px;
     font-size: 12px;
   }
 
-  .comments img {
+  .{$blockClass} .comments img {
     width: 12px;
     height: 12px;
     margin-bottom: 2px;
   }
 
-  .category {
+  .{$blockClass} .category {
     padding: 2px 3px;
     border-radius: 2px;
     background-color: #E0E9FF;
@@ -255,7 +256,7 @@
     text-align: center;
   }
 
-  .category a{
+  .{$blockClass} .category a{
     color: #0049FF;
   }
 </style>
