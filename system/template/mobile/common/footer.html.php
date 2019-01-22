@@ -41,12 +41,14 @@
           <span>{$lang->mobile->bottomNav['message']}</span>
         </a>
       </li>
-      <li{!echo $thisModuleName == 'user' && $thisMethodName == 'cart' ? ' class="active"' : ''}>
-        <a href="{!helper::createLink('user', 'cart')}">
+      {if(commonModel::isAvailable('shop'))}
+      <li{!echo $thisModuleName == 'cart' && $thisMethodName == 'browse' ? ' class="active"' : ''}>
+        <a href="{!helper::createLink('cart', 'browse')}">
           <i class='img-icon img-icon-cart'></i>
           <span>{$lang->mobile->bottomNav['cart']}</span>
         </a>
       </li>
+      {/if}
       <li{!echo $thisModuleName == 'user' && $thisMethodName == 'control' ? ' class="active"' : ''}>
         <a href="{!helper::createLink('user', 'control')}">
           <i class='img-icon img-icon-user'></i>
