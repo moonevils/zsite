@@ -19,66 +19,40 @@
 {!js::execute($article->js)}
 {!js::set('pageLayout', $control->block->getLayoutScope('article_view', $article->id))}
 <div class='block-region region-article-view-top blocks' data-region='article_view-top'>{$control->loadModel('block')->printRegion($layouts, 'article_view', 'top')}</div>
-<div class='appheader'>
-  <div class='heading'>
-    <h2>{$article->title}</h2>
-    <div class='caption text-muted'>
-      <small><i class='icon-time icon-large'></i> {!formatTime($article->addedDate)}</small> &nbsp;&nbsp;
-      <small><i class='icon-user icon-large'></i> {$article->author}</small> &nbsp;&nbsp;
-      <small><i class='icon-eye-open'></i> {$config->viewsPlaceholder}</small> &nbsp;&nbsp;
-      {if($article->source != 'original' and $article->copyURL != '')}
-        <small>
-          {!echo $lang->article->sourceList[$article->source] . $lang->colon}
-          {!$article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite)}
-        </small>
-      {else}
-        <small class='text-success bg-success-pale'>{$lang->article->sourceList[$article->source]}</small>
-      {/if}
+<div class="panel article-detail">
+  <div class='article-heading'>
+    <div class='article-title horizontal-center'>
+      <h2>{$article->title}</h2>
     </div>
+    <div class='caption text-muted vertical-center article-author'>
+      <div class="avatar vertical-center">
+        {if(empty($author->avatar))}
+        <i class="icon icon-user icon-10x"></i>
+        {else}
+        <img src="{$author->avatar}" alt="">
+        {/if}
+      </div>
+      <div class="article-ext">
+        <span class="authorName">{$article->author}</span>
+        <span class="addedDate">{!formatTime($article->addedDate)}</span>
+      </div>
+    </div>
+  </div>
+  <div class='article' id="article{$article->id}" data-ve='article'>
+    {if($article->summary)}
+      <section class='abstract hide bg-gray-pale small with-padding'><strong>{$lang->article->summary}</strong>{$lang->colon} {$article->summary}</section>
+    {/if}
+    <div class='article-content-section'>
+      <section class='article-content'> {$article->content} </section>
+    </div>
+    {if(!empty($article->files))}
+      <section class="article-files"> {$control->loadModel('file')->printFiles($article->files)} </section>
+    {/if}
   </div>
 </div>
 
-<div class='panel-section article' id="article{$article->id}" data-ve='article'>
-  {if($article->summary)}
-    <section class='abstract hide bg-gray-pale small with-padding'><strong>{$lang->article->summary}</strong>{$lang->colon} {$article->summary}</section>
-  {/if}
-  <div class='panel-body'>
-    <hr class="space">
-    <section class='article-content'> {$article->content} </section>
-  </div>
-  {if(!empty($article->files))}
-    <section class="article-files"> {$control->loadModel('file')->printFiles($article->files)} </section>
-  {/if}
-  <div class='panel-footer'>
-    <div class='article-moreinfo clearfix hide'>
-      {if($article->editor)}
-        {$editor = $control->loadModel('user')->getByAccount($article->editor)}
-      {/if}
-      {if(!empty($editor))}
-        <p class='text-right pull-right'>{!printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate))}</p>
-      {/if}
-      {if($article->keywords)}
-        <p class='small'><strong class="text-muted">{$lang->article->keywords}</strong><span class="article-keywords">{!$lang->colon . $article->keywords}</span></p>
-      {/if}
-    </div>
-    {@extract($prevAndNext)}
-    <ul class='pager pager-justify'>
-      {if($prev)}
-        <li class='previous'>{!html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> ' . $lang->article->previous, "title='{{$prev->title}}'")}</li>
-      {else}
-        <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> {!print($lang->article->none)}</a></li>
-      {/if}
-      {if($next)}
-        <li class='next'>{!html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), $lang->article->next . ' <i class="icon-arrow-right"></i>', "title='{{$next->title}}'")}</li>
-      {else}
-        <li class='next disabled'><a href='###'>{!print($lang->article->none)}<i class='icon-arrow-right'></i></a></li>
-      {/if}
-    </ul>
-  </div>
-</div> 
-
 {if(commonModel::isAvailable('message'))}
-  <div id='commentBox'>
+  <div class='commentBox' id='commentBox'>
     {$control->fetch('message', 'comment', "objectType=article&objectID={{$article->id}}")}
   </div>
 {/if}

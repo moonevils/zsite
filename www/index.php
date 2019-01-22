@@ -10,8 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 /* Turn off error reporting first. */
-error_reporting(E_ALL);
-ini_set('display_errors', 'ON');
+error_reporting(0);
 
 /* Start output buffer. */
 ob_start();

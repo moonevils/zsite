@@ -16,7 +16,6 @@
 {$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit)}
 {$articles = $model->loadModel('article')->computeComments($articles)}
 {if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'article')} {/if}
-{include $this->app->loadLang('article')}
 {noparse}
 <style>
 #block{$block->id} .card .thumbnail-cell {padding-left: 8px; padding-right: 0}
@@ -39,7 +38,7 @@
       {/if}
     </div>
     <div class='list'>
-    {if(isset($content->image))}
+    {if(!isset($content->image))}
       {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
       {@$i=0}
       {foreach($articles as $article)}
@@ -109,7 +108,7 @@
           <div class="article-content" style="min-height: 0;">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->rticle->hot}</label>
+                <label class="label-hot vertical-center">{$lang->article->hot}</label>
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>

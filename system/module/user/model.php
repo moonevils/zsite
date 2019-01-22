@@ -99,7 +99,7 @@ class userModel extends model
      */
     public function getBasicInfo($users)
     {
-        $users = $this->dao->setAutolang(false)->select('account, admin, realnames, realname, `join`, last, visits, rank, score')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
+        $users = $this->dao->setAutolang(false)->select('account, admin, realnames, realname, avatar, `join`, last, visits, `rank`, score')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();
 
         foreach($users as $account => $user)

@@ -363,6 +363,9 @@ class article extends control
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
+        $this->view->author         = $this->loadModel('user')->getBasicInfo([$article->author])[$article->author];
+        $this->view->author->avatar = '/file.php?f=201901/f_21e65fddc933cd4548574947d53ddb54&t=jpeg&o=&s=&v=1547540249';
+
         if($this->app->clientDevice == 'desktop') 
         {
             $this->view->canonicalURL = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'html'); 

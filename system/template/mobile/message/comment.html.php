@@ -16,10 +16,6 @@
 {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
 <hr>
 <div class='panel panel-section'>
-  <div class='panel-heading'>
-    <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> {$lang->message->post}</a>
-  </div>
-
   <div id='commentsListWrapper'><div id='commentsList'>
     {if(isset($comments) and $comments)}
       <div class='panel-heading'>
@@ -49,49 +45,15 @@
         {/if}
       </div>
     {/if}
-  </div></div>
-</div>
-<hr class='space'>
-
-<div class='modal fade' id='commentDialog'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-        <h5 class='modal-title'><i class='icon-comment-alt'></i> {$lang->message->post}</h5>
-      </div>
-      <div class='modal-body'>
-        <form method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
+  </div>
+  <div class='panel-footer '>
+      <div class='comment-post'>
+        <form class='commentForm' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
           <div class='form-group required'>
             {!html::textarea('content', '', "class='form-control' rows='3' placeholder='{{$lang->message->content}}'")}
             {!html::hidden('objectType', $objectType)}
             {!html::hidden('objectID', $objectID)}
           </div>
-          {if($control->session->user->account == 'guest')}
-            <div class='form-group required'>
-              {!html::input('from', '', "class='form-control' placeholder='{{$lang->message->from}}'")}
-            </div>
-            <div class='form-group'>
-              {!html::input('email', '', "class='form-control' placeholder='{{$lang->message->email}}'")}
-            </div>
-            <div class='form-group'>
-              <div class='checkbox'>
-                <label><input type='checkbox' name='receiveEmail' value='1' checked /> {$lang->comment->receiveEmail}</label>
-              </div>
-            </div>
-          {else}
-            <div class='form-group'>
-              <span class='signed-user-info'>
-                <i class='icon-user text-muted'></i> <strong>{$control->session->user->realname }</strong>
-                {!html::hidden('from', $control->session->user->realname)}
-                {if($control->session->user->email != '')}
-                  <span class='text-muted'>&nbsp;({!str2Entity($control->session->user->email)})</span>
-                  {!html::hidden('email', $control->session->user->email)}
-                {/if}
-              </span>&nbsp;
-              <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> {$lang->comment->receiveEmail}</label>
-            </div>
-          {/if}
           <div class='form-group hide captcha-box'></div>
           <div class='form-group'>
             {!html::submitButton('', 'btn primary')}&nbsp;
@@ -99,9 +61,59 @@
           </div>
         </form>
       </div>
-    </div>
   </div>
 </div>
+<hr class='space'>
+
+<!--<div class='modal fade' id='commentDialog'>-->
+<!--  <div class='modal-dialog'>-->
+<!--    <div class='modal-content'>-->
+<!--      <div class='modal-header'>-->
+<!--        <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>-->
+<!--        <h5 class='modal-title'><i class='icon-comment-alt'></i> {$lang->message->post}</h5>-->
+<!--      </div>-->
+<!--      <div class='modal-body'>-->
+<!--        <form method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">-->
+<!--          <div class='form-group required'>-->
+<!--            {!html::textarea('content', '', "class='form-control' rows='3' placeholder='{{$lang->message->content}}'")}-->
+<!--            {!html::hidden('objectType', $objectType)}-->
+<!--            {!html::hidden('objectID', $objectID)}-->
+<!--          </div>-->
+<!--          {if($control->session->user->account == 'guest')}-->
+<!--            <div class='form-group required'>-->
+<!--              {!html::input('from', '', "class='form-control' placeholder='{{$lang->message->from}}'")}-->
+<!--            </div>-->
+<!--            <div class='form-group'>-->
+<!--              {!html::input('email', '', "class='form-control' placeholder='{{$lang->message->email}}'")}-->
+<!--            </div>-->
+<!--            <div class='form-group'>-->
+<!--              <div class='checkbox'>-->
+<!--                <label><input type='checkbox' name='receiveEmail' value='1' checked /> {$lang->comment->receiveEmail}</label>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          {else}-->
+<!--            <div class='form-group'>-->
+<!--              <span class='signed-user-info'>-->
+<!--                <i class='icon-user text-muted'></i> <strong>{$control->session->user->realname }</strong>-->
+<!--                {!html::hidden('from', $control->session->user->realname)}-->
+<!--                {if($control->session->user->email != '')}-->
+<!--                  <span class='text-muted'>&nbsp;({!str2Entity($control->session->user->email)})</span>-->
+<!--                  {!html::hidden('email', $control->session->user->email)}-->
+<!--                {/if}-->
+<!--              </span>&nbsp;-->
+<!--              <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> {$lang->comment->receiveEmail}</label>-->
+<!--            </div>-->
+<!--          {/if}-->
+<!--          <div class='form-group hide captcha-box'></div>-->
+<!--          <div class='form-group'>-->
+<!--            {!html::submitButton('', 'btn primary')}&nbsp;-->
+<!--            <small class="text-important">{$lang->comment->needCheck}</small>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 {include TPL_ROOT . 'common/form.html.php'}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
