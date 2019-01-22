@@ -157,7 +157,7 @@
   #productSlide .carousel-inner{max-width:350px;height:226px;display:inline-block;}
   .red {color:#fff!important;border-color:#ea644a!important;background-color:#ea644a!important;}
   .carousel-inner > .item {height:100%;width:100%;overflow:hidden;position:relative}
-  .carousel-inner > .item > img {position: relative;max-height:100%;width:auto;;left:0px;top:0px;right:0px;bottom:0px;margin:auto}
+  .carousel-inner > .item > img {position: absolute;max-height:100%;width:auto;left:0px;top:0px;right:0px;bottom:0px;margin:auto}
   #footerNav {line-height:49px;height:49px}
   .footer-left {width:10%;float:left;padding-left:12px}
   .footer-left > a > img {width:20px;height:20px}
