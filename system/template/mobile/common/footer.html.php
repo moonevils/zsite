@@ -27,6 +27,7 @@
 {if((isset($control->config->site->mobileBottomNav) and ($control->config->site->mobileBottomNav == 'hide')) or helper::isAjaxRequest())}
 {else}
   {$bottomNavs = $control->loadModel('nav')->getNavs('mobile_bottom')}
+  {if(commonModel::isAvailable('user'))}
   <footer class='appbar fix-bottom' id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
     <ul class='nav nav-icons'>
       <li{!echo $thisModuleName == 'index' && $thisMethodName == 'index' ? ' class="active"' : ''}>
@@ -35,12 +36,14 @@
           <span>{$lang->mobile->bottomNav['home']}</span>
         </a>
       </li>
+      {if(commonModel::isAvailable('message'))}
       <li{!echo $thisModuleName == 'user' && $thisMethodName == 'message' ? ' class="active"' : ''}>
         <a href="{!helper::createLink('user', 'message')}">
           <i class='img-icon img-icon-message'></i>
           <span>{$lang->mobile->bottomNav['message']}</span>
         </a>
       </li>
+      {/if}
       {if(commonModel::isAvailable('shop'))}
       <li{!echo $thisModuleName == 'cart' && $thisMethodName == 'browse' ? ' class="active"' : ''}>
         <a href="{!helper::createLink('cart', 'browse')}">
@@ -57,6 +60,7 @@
       </li>
     </ul>
   </footer>
+  {/if}
 {/if}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 
