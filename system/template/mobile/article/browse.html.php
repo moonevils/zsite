@@ -11,7 +11,9 @@
  */
 *}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $this->app->loadLang('article')}
 {$path = array_keys($category->pathNames)}
+{!js::import($jsRoot . 'cookie.js')}
 {!js::set('path', $path)}
 {!js::set('categoryID', $category->id)}
 {!js::set('pageLayout', $control->block->getLayoutScope('article_browse', $category->id))}
@@ -21,39 +23,80 @@
   <script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {/if}
 <div class='block-region blocks region-top' data-region='article_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'article_browse', 'top')}</div>
-<div class='panel panel-section'>
-  <div class='panel-heading page-header'>
-    <strong>{$category->name}</strong>
+<div class='panel panel-section panel-category-article'>
+  <div class='block-title vertical-center'>
+    <strong class="vertical-center block-title-align">
+      <span class='vertical-line'></span>
+      <span class="block-title-text">{!$category->name}</span>
+    </strong>
+    <div class="order-time vertical-center">
+      时间&nbsp;
+      <div class="order-triangle">
+        <span class="up-triangle"></span>
+        <span class="down-triangle"></span>
+      </div>
+    </div>
+    <div class="order-hot vertical-center">
+      热度&nbsp;
+      <div class="order-triangle">
+        <span class="up-triangle"></span>
+        <span class="down-triangle"></span>
+      </div>
+    </div>
   </div>
-  <div class='cards condensed cards-list' id='articles'>
+  <div class='list' id='articles'>
+    {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
+    {@$i=0}
     {foreach($articles as $article)}
-      {$url = inlink('view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
-      <a class='card' href='{$url}' id="article{{$article->id}}" data-ve='article'>
-        <div class='card-wrapper'>
-          <div class='card-heading'>
-            {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}
-              <div class='pull-right'>
-                <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
-              </div>
-            {/if}
-            <h5 style='color:{$article->titleColor}'>{$article->title}</h5>
+      {if($pageID > 1)}
+      <div class='divider'></div>
+      {/if}
+      {@$i++}
+      {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
+      <div class='article-item vertical-center article-align'>
+        <div class="article-content">
+          <div class='vertical-start'>
+            <strong class="article-title">
+              <label class="label-hot vertical-center">{$lang->article->hot}</label>
+              {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
+              {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
+            </strong>
           </div>
-          <div class='card-content small'>
-            <div>
-              <span title="{!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}"> <i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder} </span>
-              {if(isset($article->comments))} &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp; {/if}
-              &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($article->addedDate, 0, 10)}</span>
-            </div>
+          <div class='article-ext'>
+            <span class='views'>
+              {$article->views}{$lang->article->views}
+            </span>
+            <span class='comments'>
+              {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
+            </span>
+            <span class='pub-time'>
+              {$pubTime = strtotime($article->addedDate)}
+              {$pubTimeLen = time() - $pubTime}
+              {if($pubTimeLen > 86400)}
+                {!substr($article->addedDate, 0, 10)}
+              {else}
+                {$minute = floor($pubTimeLen / 60)}
+                {$hour = floor($pubTimeLen / 3600)}
+                {if($hour == 0)}
+                  {!$minute == 1 ? $lang->article->oneMinuteAgo : $minute . $lang->article->minutesAgo}
+                {else}
+                  {!$hour == 1 ? $lang->article->oneHourAgo : $hour . $lang->article->hoursAgo}
+                {/if}
+              {/if}
+            </span>
           </div>
         </div>
-        {if(!empty($article->image))}
-          <div class='card-thumbnail'>
-            {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-            {$article->image->primary->objectType = 'article'}
-            {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
-          </div>
-        {/if}
-      </a>
+        <div class='article-img'>
+          {if(!empty($article->image))}
+          {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+          {$article->image->primary->objectType = 'article'}
+          {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+          {/if}
+        </div>
+      </div>
+      {if($i < count($articles))}
+      <div class='divider'></div>
+      {/if}
     {/foreach}
   </div>
 </div>
