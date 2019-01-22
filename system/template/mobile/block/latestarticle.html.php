@@ -72,16 +72,16 @@
               <span class='comments'>
                 {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
               </span>
+              {if(isset($content->showCategory) and $content->showCategory == 1)}
               <span class="category">
-                {if(isset($content->showCategory) and $content->showCategory == 1)}
-                  {if($content->categoryName == 'abbr')}
-                    {$categoryName = $article->category->abbr ? $article->category->abbr : $article->category->name}
-                    {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
-                  {else}
-                    {$article->category->name}
-                  {/if}
+                {if($content->categoryName == 'abbr')}
+                  {$categoryName = $article->category->abbr ? $article->category->abbr : $article->category->name}
+                  {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+                {else}
+                  {$article->category->name}
                 {/if}
               </span>
+              {/if}
             </div>
           </div>
           {if($content->imagePosition == 'right')}
