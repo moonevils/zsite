@@ -158,42 +158,46 @@
 {noparse}
 <style>
   #product {background:#ddd}
-  #productSlide{text-align:center;height:320px;background:#fff}
-  #productSlide .carousel-inner{width:320px;height:320px;display:inline-block;}
+  #productSlide{text-align:center;height:226px;background:#fff}
+  #productSlide .carousel-inner{max-width:350px;height:226px;display:inline-block;}
   .red {color:#fff!important;border-color:#ea644a!important;background-color:#ea644a!important;}
-  .col-6 .label {position:absolute;z-index:1;top:-.8rem;right:-.8rem;width:20px}
-  .carousel-inner > .item > img {height:100%;width:auto}
+  .carousel-inner > .item {height:100%;width:100%;overflow:hidden;position:relative}
+  .carousel-inner > .item > img {position: relative;max-height:100%;width:auto;;left:0px;top:0px;right:0px;bottom:0px;margin:auto}
+  #footerNav {line-height:49px;height:49px}
+  .footer-left {width:10%;float:left;padding-left:12px}
+  .footer-left > a > img {width:20px;height:20px}
+  .footer-left > a > span {position:absolute;z-index:1;top:-.8rem;right:-.8rem;width:18px;height:18px;text-align:center;line-height:18px}
+  .footer-right {width:54%;float:right;}
+  .footer-right > .right-btn {width:41.5%;float:right;margin-right:12px}
+  .footer-right > .right-btn > button {width:100%;line-height:28px;height:30px;border-radius:4px;padding:0px;outline:none}
+  .footer-right > .right-btn > .btn-cart {border:1px solid #6F9AFE;color:#6F9AFE;background-color:#fff}
+  .footer-right > .right-btn > .btn-buy {border:1px solid #6F9AFE;color:#fff;background:linear-gradient(to right,#709BFE,#1B5AFF)}
+  .footer-right > .right-btn > .btn-soldout {border:0px;color:#333;background-color:#ddd}
+  .table-layout > tbody > tr > th {color:#999}
+  .panel-section {margin:0px}
+  .article-content {border:0px}
 </style>
 {/noparse}
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
-<ul class="nav">
-    <li>
-      <div class='col-6'>
-        {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/cart.png',"style='width:30px;height:29px'") . "<span class='label badge red circle'>$cartCount</span>", "style='position:relative'")}
-      </div>
-      <div class='col-6'>{!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/comment.png',"style='width:30px;height:29px'"))}</div>
-    </li>
-    <li>
-      <div class='col-2'></div>
-      {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}
-        {if($stockOpened and $product->amount < 1)}
-        <div class='col-4'></div>
-        <div class='col-6'>
-          <button type='button' class='btn block  btn-soldout'>{$lang->product->soldout}</button>
-        </div>
-        {else}
-        <div class='col-6'><button type='button' class='btn block light btn-cart' data-url='{!$control->createLink('cart', 'add', "product={{$product->id}}&count=productcount")}'>{$lang->product->addToCart}</button></div>
-        <div class='col-4'><button type='button' class='btn block primary btn-buy' data-url='{!$control->createLink('order', 'confirm', "product={{$product->id}}&count=productcount")}'>{$lang->product->buyNow}</button></div>
-        {/if}
-      {/if}
-      {if(!$product->unsaleable and $product->mall and !$product->negotiate)}
-      <div class='col-4'></div>
-      <div class='col-6'>
-        <button type='button' class='btn block primary btn-buy' data-url='{!$control->createLink('product', 'redirect', "id={{$product->id}}")}'>{$lang->product->buyNow}</button>
-      </div>
-      {/if}
-    </li>
-</ul>
+<div class='footer-left'>
+    {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/cart.png') . "<span class='label badge red circle'>$cartCount</span>", "style='position:relative'")}
+</div>
+<div class='footer-left'>
+    {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/comment.png'))}
+</div>
+<div class='footer-right'>
+{if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}
+  {if($stockOpened and $product->amount < 1)}
+    <div class='right-btn'><button type='button' class='btn-soldout'>{$lang->product->soldout}</button></div>
+  {else}
+    <div class='right-btn' style='float:left'><button type='button' class='btn-cart' data-url='{!$control->createLink('cart', 'add', "product={{$product->id}}&count=productcount")}'>{$lang->product->addToCart}</button></div>
+    <div class='right-btn'><button type='button' class='btn-buy' data-url='{!$control->createLink('order', 'confirm', "product={{$product->id}}&count=productcount")}'>{$lang->product->buyNow}</button></div>
+  {/if}
+{/if}
+{if(!$product->unsaleable and $product->mall and !$product->negotiate)}
+    <div class='right-btn'><button type='button' class='btn-buy' data-url='{!$control->createLink('product', 'redirect', "id={{$product->id}}")}'>{$lang->product->buyNow}</button></div>
+{/if}
+</div>
 </footer>
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 <div class='block-region region-footer hidden blocks' data-region='all-footer'>{$control->loadModel('block')->printRegion($layouts, 'all', 'footer')}</div>
