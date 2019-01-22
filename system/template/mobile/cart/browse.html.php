@@ -34,7 +34,7 @@
   .total {display: table-cell;vertical-align: middle;height:40px}
   .checkarea > label {position: relative;z-index: 0;padding: .25rem 0 .25rem 1.8rem}
   .checkarea > label:after, .checkarea > label:before {position: absolute;top: .3rem;left: 0;display: -ms-flexbox;display: flex;width: 1.5rem;height: 1.5rem;content: ' ';transition: .2s cubic-bezier(.175,.885,.32,1);color: transparent;border: .1rem solid rgba(0,0,0,.5);-ms-flex-align: center;align-items: center;-ms-flex-pack: center;justify-content: center;border-radius: 1.5rem}
-  .footer-left > .checkarea > label:after, .footer-left > .checkarea > label:before {top:16px}
+  .footer-left > .checkarea > label:after, .footer-left > .checkarea > label:before {top:18px}
   .checkarea > input:checked + label:after, .checkarea > input:checked + label:before {color: #fff;border-radius: .1rem;background-color: #3280fc;border-radius: 1.5rem}
   .checkarea > label:after {font-family: ZenIcon;font-size: 1.5rem;font-weight: 400;font-style: normal;font-variant: normal;content: '\e60d';text-transform: none;border: none;speak: none;-webkit-font-smoothing: antialiased}
   .checkarea > input {position: absolute;z-index: 1;top: 0;left: 0;display: block;width: 100%;height: 100%;opacity: 0;}
