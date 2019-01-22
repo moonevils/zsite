@@ -713,8 +713,11 @@ class commonModel extends model
         {
             if($app->clientDevice == 'mobile')
             {
-                $topBar .= '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
-                $topBar .= '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
+                if(self::isAvailable('user'))
+                {
+                    $topBar .= '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
+                    $topBar .= '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
+                }
             }
             else
             {
@@ -743,7 +746,6 @@ class commonModel extends model
         {
             if(commonModel::isAvailable('user')) $languagebar .= "<li class='divider'></li>";
             $clientLang = $app->getClientLang();
-            $languagebar .= "<li class='dropdown-header'>{$app->lang->language}</li>";
             foreach($langs as $lang)
             {
                 $a = html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
