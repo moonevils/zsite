@@ -65,9 +65,11 @@
             <span class='views'>
               {$article->views}{$lang->article->views}
             </span>
+            {if(commonModel::isAvailable('message'))}
             <span class='comments'>
               {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
             </span>
+            {/if}
             <span class='pub-time'>
               {$pubTime = strtotime($article->addedDate)}
               {$pubTimeLen = time() - $pubTime}
