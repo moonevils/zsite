@@ -149,11 +149,6 @@
   {if(!empty($product->files))} <section class='article-files'> {$control->loadModel('file')->printFiles($product->files)} </section> {/if}
 </div>
 </div>
-<!--
-{if(commonModel::isAvailable('message'))}
-  <div id='commentBox'> {$control->fetch('message', 'comment', "objectType=product&objectID={{$product->id}}")} </div>
-{/if}
--->
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_view', 'bottom')}</div>
 {noparse}
 <style>
