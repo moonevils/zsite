@@ -11,7 +11,6 @@
  */
 *}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-{include $this->app->loadLang('article')}
 {$path = array_keys($category->pathNames)}
 {!js::import($jsRoot . 'cookie.js')}
 {!js::set('path', $path)}
