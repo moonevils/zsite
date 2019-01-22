@@ -38,7 +38,7 @@
   .checkarea > input:checked + label:after, .checkarea > input:checked + label:before {color: #fff;border-radius: .1rem;background-color: #3280fc;border-radius: 1.5rem}
   .checkarea > label:after {font-family: ZenIcon;font-size: 1.5rem;font-weight: 400;font-style: normal;font-variant: normal;content: '\e60d';text-transform: none;border: none;speak: none;-webkit-font-smoothing: antialiased}
   .checkarea > input {position: absolute;z-index: 1;top: 0;left: 0;display: block;width: 100%;height: 100%;opacity: 0;}
-  #footerNav {line-height:49px;height:49px}
+  #footer {line-height:49px;height:49px}
   .footer-left {width:20%;float:left;padding-left:12px}
   .footer-left > a > img {width:20px;height:20px}
   .footer-left > a > span {position:absolute;z-index:1;top:-.8rem;right:-.8rem;width:18px;height:18px;text-align:center;line-height:18px}
@@ -49,6 +49,11 @@
   .footer-right > .right-btn > .btn-order-delete {border:1px solid #6F9AFE;color:#6F9AFE;background-color:#fff}
   .footer-right > .right-btn > .btn-order-submit {border:1px solid #6F9AFE;color:#fff;background:linear-gradient(to right,#709BFE,#1B5AFF)}
 </style>
+{if($source == 'bottom')}
+<style>
+  #footer {bottom:51px}
+</style>
+{/if}
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
     <div class='title'>{if(!empty($products))} {$cartProducts = count($products)}{else}{$cartProducts = 0}{/if}{!printf($lang->order->cartProducts, $cartProducts)}</div>
@@ -135,7 +140,7 @@
         </div>
       {/foreach}
       </div>
-      <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
+      <footer class="appbar fix-bottom" id='footer' data-ve='navbar' data-type='mobile_bottom'>
       <div class='footer-left'>
         <div class='checkarea' style='margin-top:0px;padding-left:0px;width:100%;text-align:left'>
             <input type='checkbox' id='checkAll'>
@@ -276,8 +281,6 @@ function statAll()
 }
 </script>
 {include TPL_ROOT . 'common/form.html.php'}
-
-{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
-<div class='block-region region-footer hidden blocks' data-region='all-footer'>{$control->loadModel('block')->printRegion($layouts, 'all', 'footer')}</div>
-</body>
-</html>
+{if($source == 'bottom')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{/if}

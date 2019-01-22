@@ -46,7 +46,7 @@ class cart extends control
      * @access public
      * @return void
      */
-    public function browse()
+    public function browse($source = 'bottom')
     {
         $this->app->loadLang('product');
         $this->app->loadModuleConfig('product');
@@ -55,6 +55,7 @@ class cart extends control
         $this->view->currencySymbol = $this->config->product->currencySymbol;
         $this->view->title          = $this->lang->cart->browse;
         $this->view->mobileTitle    = $this->lang->cart->browse;
+        $this->view->source         = $source;
         $this->view->products       = $this->cart->getListByAccount($this->app->user->account);
         $this->view->mobileURL      = helper::createLink('cart', 'browse', '', '', 'mhtml');
         $this->view->desktopURL     = helper::createLink('cart', 'browse', '', '', 'html');

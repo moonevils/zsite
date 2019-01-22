@@ -175,7 +175,7 @@
 {/noparse}
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
 <div class='footer-left'>
-    {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/cart.png') . "<span class='label badge red circle'>$cartCount</span>", "style='position:relative'")}
+    {!html::a(helper::createLink('cart', 'browse', 'source=product'), html::image('/theme/mobile/product/cart.png') . "<span class='label badge red circle'>$cartCount</span>", "style='position:relative'")}
 </div>
 <div class='footer-left'>
     {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/comment.png'))}
