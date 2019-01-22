@@ -30,14 +30,14 @@
       <span class="block-title-text">{!$category->name}</span>
     </strong>
     <div class="order-time vertical-center">
-      时间&nbsp;
+      {$lang->article->orderBy->time}&nbsp;
       <div class="order-triangle">
         <span class="up-triangle"></span>
         <span class="down-triangle"></span>
       </div>
     </div>
     <div class="order-hot vertical-center">
-      热度&nbsp;
+      {$lang->article->orderBy->hot}&nbsp;
       <div class="order-triangle">
         <span class="up-triangle"></span>
         <span class="down-triangle"></span>
