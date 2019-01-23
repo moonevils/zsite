@@ -20,12 +20,10 @@
 <div class='block-region blocks region-top' data-region='blogbrowse-top'>{$control->loadModel('block')->printRegion($layouts, 'blog_index', 'top')}</div>
 <div class='panel panel-section panel-category-article'>
   <div class='block-title vertical-center'>
-    {if(isset($category))}
     <strong class="vertical-center block-title-align">
       <span class='vertical-line'></span>
-      <span class="block-title-text">{!$category->name}</span>
+      <span class="block-title-text">{! isset($category) ? $category->name : $lang->blog->common}</span>
     </strong>
-    {/if}
     <div class="order-time vertical-center">
       {$lang->article->orderBy->time}&nbsp;
       <div class="order-triangle">
