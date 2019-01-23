@@ -27,12 +27,12 @@
         if(isset($files->$currentModule))
         {
             echo "<div class='dropdown' id='fileBox'>";
-            echo "<a href='###' data-toggle='dropdown'>" . zget($files->$currentModule, $currentFile) . " <span class='icon-angle-down'></span></a>";
+            echo "<a href='###' data-toggle='dropdown'>" . zget($files->$fileModule, $currentFile) . " <span class='icon-angle-down'></span></a>";
             echo "<ul class='dropdown-menu'>";
             foreach($files->$currentModule as $file => $name)
             {
                 if(strpos($file, '/') !== false) list($currentModule, $file) = explode('/', $file);
-                $active = $currentFile == $file ? "class='active'" : '';
+                $active = ($currentFile == $file and $currentModule == $fileModule)  ? "class='active'" : '';
                 echo "<li $active>" . html::a($this->createLink('ui', 'editTemplate', "module=$currentModule&file=$file"), $name) . "</li>";
             }
             echo '</ul></div>';
@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="panel-footer text-right">
-      <?php echo html::submitButton() . html::hidden('module', $currentModule) .html::hidden('file', $currentFile);?>
+      <?php echo html::submitButton() . html::hidden('module', $fileModule) . html::hidden('file', $currentFile);?>
     </div>
   </div>
 </form>

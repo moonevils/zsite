@@ -96,6 +96,10 @@ $lang->comment->confirmPassPre      = '您确定要通过之前的评论吗？';
 $lang->comment->statusList[0] = '未审核';
 $lang->comment->statusList[1] = '已审核';
 
+$lang->comment->defaultNickname = '匿名';
+$lang->comment->submit = '发表评论';
+$lang->comment->submitting = '稍后';
+
 $lang->message->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回复：%s</dd>";
 $lang->comment->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回复：%s</dd>";
 $lang->message->messageItem = "<dd><strong>%s</strong> 于 <em>%s</em> 发表：%s</dd>";

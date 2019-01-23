@@ -44,7 +44,7 @@
         <a href='{$control->config->webRoot}'>{!html::image('/theme/mobile/common/img/home.png')}</a>
       </div>
     </div>
-    <div class='middle-title'>{$mobileTitle}</div>
+    <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>
   </div>
   <div class='subnavs fade'>
     {$subnavs}

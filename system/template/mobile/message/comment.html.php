@@ -16,126 +16,61 @@
 {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
 <hr>
 <div class='panel panel-section'>
-  <div class='comment-list'>
+  <div class='comment-list' id="commentsListWrapper">
     {if(isset($comments) and $comments)}
       <div class='title vertical-center'>
         <span class='vertical-line'></span>
         <span class="list-text">{$lang->message->list}</span>
       </div>
-      <div class='cards condensed bordered'>
+      <div class='condensed bordered' id="commentsList">
         {foreach($comments as $number => $comment)}
-          <div class='card comment'>
-            <div class='card-heading'>
-              <span class='text-special name'>{$comment->from}</span> &nbsp; <small class='text-muted time'>{!formatTime($comment->date, 'Y/m/d H:m')}</small>
-              <div class='actions'>
+          <div class='comment'>
+            <div class='comment-heading vertical-center'>
+              <div class="avatar vertical-center text-muted">
+                {if(empty($author->avatar))}
+                <i class="icon icon-user icon-10x"></i>
+                {else}
+                <img src="{$comment->avatar}" alt="">
+                {/if}
+              </div>
+              <div class="comment-ext">
+                <span class="authorName">
+                  {if(!empty($comment->nickname))}
+                    {$comment->nickname}
+                  {elseif(!empty($comment->from))}
+                    {$comment->from}
+                  {else}
+                    {$lang->comment->defaultNickname}
+                  {/if}
+                </span>
+                <span class="addedDate">{!formatTime($comment->date)}</span>
+              </div>
+              <div class='actions reply-text'>
                 {!html::a($control->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='ajax' data-icon='reply' data-title='{{$lang->comment->reply}}'")}
               </div>
             </div>
-            <div class='card-content'>{!nl2br($comment->content)}</div>
-            {$control->message->getFrontReplies($comment, 'simple')}
+            <div class="comment-content">{!nl2br($comment->content)}</div>
+            {$control->message->getFrontReplies($comment)}
           </div>
         {/foreach}
       </div>
     {/if}
   </div>
-  <div class='comment-post'>
+  <div class='comment-post vertical-center'>
     <form class='comment-form vertical-center' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
       <div class='form-group required'>
-        <input class="comment-input" type="text" name="content" id="content" value="" rows="5" placeholder="   {$lang->message->content}">
+        <input class="comment-input" type="text" name="content" id="commentContent" value="" rows="5" placeholder="   {$lang->message->content}">
         {!html::hidden('objectType', $objectType)}
         {!html::hidden('objectID', $objectID)}
       </div>
       <div class='form-group'>
-        <input type="submit" id="submit" value="发表评论" data-loading="稍候...">
+        <input type="submit" id="submitComment" value="{$lang->comment->submit}" data-loading="{$lang->comment->submitting}...">
       </div>
     </form>
   </div>
 </div>
-<hr class='space'>
 
-<!--<div class='modal fade' id='commentDialog'>-->
-<!--  <div class='modal-dialog'>-->
-<!--    <div class='modal-content'>-->
-<!--      <div class='modal-header'>-->
-<!--        <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>-->
-<!--        <h5 class='modal-title'><i class='icon-comment-alt'></i> {$lang->message->post}</h5>-->
-<!--      </div>-->
-<!--      <div class='modal-body'>-->
-<!--        <form method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">-->
-<!--          <div class='form-group required'>-->
-<!--            {!html::textarea('content', '', "class='form-control' rows='3' placeholder='{{$lang->message->content}}'")}-->
-<!--            {!html::hidden('objectType', $objectType)}-->
-<!--            {!html::hidden('objectID', $objectID)}-->
-<!--          </div>-->
-<!--          {if($control->session->user->account == 'guest')}-->
-<!--            <div class='form-group required'>-->
-<!--              {!html::input('from', '', "class='form-control' placeholder='{{$lang->message->from}}'")}-->
-<!--            </div>-->
-<!--            <div class='form-group'>-->
-<!--              {!html::input('email', '', "class='form-control' placeholder='{{$lang->message->email}}'")}-->
-<!--            </div>-->
-<!--            <div class='form-group'>-->
-<!--              <div class='checkbox'>-->
-<!--                <label><input type='checkbox' name='receiveEmail' value='1' checked /> {$lang->comment->receiveEmail}</label>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          {else}-->
-<!--            <div class='form-group'>-->
-<!--              <span class='signed-user-info'>-->
-<!--                <i class='icon-user text-muted'></i> <strong>{$control->session->user->realname }</strong>-->
-<!--                {!html::hidden('from', $control->session->user->realname)}-->
-<!--                {if($control->session->user->email != '')}-->
-<!--                  <span class='text-muted'>&nbsp;({!str2Entity($control->session->user->email)})</span>-->
-<!--                  {!html::hidden('email', $control->session->user->email)}-->
-<!--                {/if}-->
-<!--              </span>&nbsp;-->
-<!--              <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> {$lang->comment->receiveEmail}</label>-->
-<!--            </div>-->
-<!--          {/if}-->
-<!--          <div class='form-group hide captcha-box'></div>-->
-<!--          <div class='form-group'>-->
-<!--            {!html::submitButton('', 'btn primary')}&nbsp;-->
-<!--            <small class="text-important">{$lang->comment->needCheck}</small>-->
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+{$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint)}
 
 {include TPL_ROOT . 'common/form.html.php'}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
-{noparse}
-<script>
-$(function()
-{
-    $.refreshCommentList = function()
-    {
-        $('#commentsListWrapper').load(window.location.href + ' #commentsList');
-    };
-
-    var $commentForm = $('#commentForm'),
-        $commentBox = $('#commentBox');
-
-    $commentBox.find('.pager').on('click', 'a', function()
-    {
-        $commentBox.load($(this).attr('href'));
-        return false;
-    });
-
-    $commentForm.ajaxform({onSuccess: function(response)
-    {
-        if(response.result == 'success')
-        {
-            $('#commentDialog').modal('hide');
-            $commentForm.find('#content').val('');
-            setTimeout($.refreshCommentList, 200)
-        }
-        if(response.reason == 'needChecking')
-        {
-            $commentForm.find('.captcha-box').html(Base64.decode(response.captcha)).removeClass('hide');
-        }
-    } });
-});
-</script>
-{/noparse}

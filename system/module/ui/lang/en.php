@@ -401,6 +401,15 @@ $lang->ui->files->default->article['blog/footer'] = 'Blog Bottom';
 
 $lang->ui->files->default->article['page/view'] = 'Pages';
 
+$lang->ui->files->default->blog = array();
+$lang->ui->files->default->blog['header'] = 'Blog Header';
+$lang->ui->files->default->blog['index']  = 'Blog List';
+$lang->ui->files->default->blog['view']   = 'Blog Details';
+$lang->ui->files->default->blog['footer'] = 'Blog Bottom';
+
+$lang->ui->files->default->page = array();
+$lang->ui->files->default->page['view'] = 'Pages';
+
 $lang->ui->files->default->product = array();
 $lang->ui->files->default->product['browse']      = 'Products';
 $lang->ui->files->default->product['browse.card'] = 'View Card';

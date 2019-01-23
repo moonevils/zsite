@@ -61,13 +61,14 @@ class messageModel extends model
             if(!is_numeric($id)) $userMessages = '0';
         }
 
-        return  $this->dao->select('*')->from(TABLE_MESSAGE)
-            ->where('type')->eq($type)
-            ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('public')->eq(1)->fi()
-            ->andWhere('objectType')->eq($objectType)
-            ->andWhere('objectID')->eq($objectID)
-            ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere("(id in ({$userMessages}) or (status = '1'))")->fi()
-            ->orderBy('id_desc')
+        return  $this->dao->select('u.nickname, u.avatar, m.id, m.from, m.content, m.date')->from(TABLE_MESSAGE)->alias('m')
+            ->leftJoin(TABLE_USER)->alias('u')->on('m.account=u.account')
+            ->where('m.type')->eq($type)
+            ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('m.public')->eq(1)->fi()
+            ->andWhere('m.objectType')->eq($objectType)
+            ->andWhere('m.objectID')->eq($objectID)
+            ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere("(m.id in ({$userMessages}) or (m.status = '1'))")->fi()
+            ->orderBy('m.id_desc')
             ->page($pager)
             ->fetchAll();
     }
@@ -91,12 +92,14 @@ class messageModel extends model
                 foreach($replies as $reply)
                 {
                     echo "<div class='reply-panel'>";
-                    echo "<div class='panel-heading reply-heading'>";
-                    echo "<span class='text-primary'><i class='icon icon-reply'> {$reply->from}</i> </span>";
+                    echo "<div class='reply-heading vertical-center'>";
+                    echo "<div class='reply-ext'>";
+                    echo "<span class='text-primary'>{$reply->from}</i> </span>";
                     echo "<span class='text-muted'>" . $reply->date . "</span>";
+                    echo "</div>";
                     echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' class='pull-right' id='reply{$reply->id}' data-icon='reply' data-title='{$this->lang->message->reply}'");
                     echo '</div>';
-                    echo "<div class='panel-body'>";
+                    echo "<div class='reply-body'>";
                     echo nl2br($reply->content);
                     echo '</div>';
                     $this->getFrontReplies($reply);

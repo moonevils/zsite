@@ -1,10 +1,10 @@
 $(function () {
     $('.item').on('click', function () {
         if ($('.manage').children('p[name="operate"]').attr('current') === 'manageDone') {
-            if ($(this).find('input[name="delAddresses"]').attr('checked') === false) {
-                $(this).find('input[name="delAddresses"]').attr('checked', true);
+            if ($(this).find('input[name="deliveryAddress"]').attr('checked') === false) {
+                $(this).find('input[name="deliveryAddress"]').attr('checked', true);
             } else {
-                $(this).find('input[name="delAddresses"]').removeAttr('checked');
+                $(this).find('input[name="deliveryAddress"]').removeAttr('checked');
             }
             setDelHref();
         }
@@ -30,16 +30,16 @@ $(function () {
 
     $('#allDelete').on('click', function () {
         if ($(this).attr('checked') === true) {
-            $('input[name="delAddresses"]').attr('checked', true);
+            $('input[name="deliveryAddress"]').attr('checked', true);
         } else {
-            $('input[name="delAddresses"]').removeAttr('checked');
+            $('input[name="deliveryAddress"]').removeAttr('checked');
         }
         setDelHref();
     });
 
     function setDelHref() {
         var delIDs = [];
-        $('input[name="delAddresses"]:checked').each(function (i) {
+        $('input[name="deliveryAddress"]:checked').each(function (i) {
             delIDs[i] = $(this).val();
         });
         var delHref = $('.deleter').attr('href');
