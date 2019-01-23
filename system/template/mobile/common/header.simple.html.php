@@ -35,7 +35,7 @@
       <div class='divider-line'></div>
       <div class='icon-block home'><a href='{$control->config->webRoot}'><img src='/theme/mobile/common/img/home.png'></img></a></div>
     </div>
-    <div class='middle-title'>{$mobileTitle}</div>
+    <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>
   </div>
   <div class='subnavs fade'>
     {$subnavs}
