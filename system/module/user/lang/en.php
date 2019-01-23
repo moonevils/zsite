@@ -100,6 +100,13 @@ $lang->user->messages    = 'Message';
 $lang->user->reply       = 'Reply';
 $lang->user->submission  = 'Submission';
 
+$lang->user->noLogged       = "NO LOGIN";
+$lang->user->clickLogin     = "click login";
+$lang->user->myScore        = "my score";
+$lang->user->totalScore     = "total score";
+$lang->user->levelScore     = "level score";
+$lang->user->scoreRecharge  = "score recharge";
+
 $lang->user->userHistory       = "User History";
 $lang->user->threadHistory     = "Post";
 $lang->user->replyHistory      = "Reply";

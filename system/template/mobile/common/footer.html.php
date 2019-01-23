@@ -46,14 +46,14 @@
       {/if}
       {if(commonModel::isAvailable('shop'))}
       <li{!echo $thisModuleName == 'cart' && $thisMethodName == 'browse' ? ' class="active"' : ''}>
-        <a href="{!helper::createLink('cart', 'browse')}">
+        <a href="{!helper::createLink('cart', 'browse', 'source=bottom')}">
           <i class='img-icon img-icon-cart'></i>
           <span>{$lang->mobile->bottomNav['cart']}</span>
         </a>
       </li>
       {/if}
       <li{!echo $thisModuleName == 'user' && $thisMethodName == 'control' ? ' class="active"' : ''}>
-        <a href="{!helper::createLink('user', 'control')}">
+        <a href="{!helper::createLink('user', 'control', 'source=bottom')}">
           <i class='img-icon img-icon-user'></i>
           <span>{$lang->mobile->bottomNav['userControl']}</span>
         </a>

@@ -46,7 +46,7 @@ class cart extends control
      * @access public
      * @return void
      */
-    public function browse($source = 'bottom')
+    public function browse($source = '')
     {
         $this->app->loadLang('product');
         $this->app->loadModuleConfig('product');

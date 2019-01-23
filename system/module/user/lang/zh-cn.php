@@ -92,13 +92,19 @@ $lang->user->certifyNow      = '立即认证';
 $lang->user->checkMobile        = '手机认证';
 $lang->user->checkMobileSuccess = '手机认证成功';
 
-$lang->user->type        = '账户类型';
-$lang->user->profile     = '个人信息';
-$lang->user->editProfile = '编辑信息';
-$lang->user->thread      = '我的主题';
-$lang->user->messages    = '我的消息';
-$lang->user->reply       = '我的回贴';
-$lang->user->submission  = '我的投稿';
+$lang->user->type           = '账户类型';
+$lang->user->profile        = '个人信息';
+$lang->user->editProfile    = '编辑信息';
+$lang->user->thread         = '我的主题';
+$lang->user->messages       = '我的消息';
+$lang->user->reply          = '我的回贴';
+$lang->user->submission     = '我的投稿';
+$lang->user->noLogged       = "未登录";
+$lang->user->clickLogin     = "点击登录";
+$lang->user->myScore        = "我的积分";
+$lang->user->totalScore     = "共有消耗积分";
+$lang->user->levelScore     = "等级积分";
+$lang->user->scoreRecharge  = "积分充值";
 
 $lang->user->userHistory       = "用户历史数据";
 $lang->user->threadHistory     = "发帖";
