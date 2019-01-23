@@ -37,7 +37,7 @@
           <div class='col col-custom-{$recPerRow}' data-rowIndex='{$rowIndex}' data-index='{$index}'>
           {$url = helper::createLink('product', 'view', "id=$product->id", "category={{$product->category->alias}}&name=$product->alias")}
             <div class='card'>
-              <a class='card-img' href='{$url}'>
+              <a class='card-img-fixed' href='{$url}'>
                 {if(empty($product->image))}
                   {$imgColor = $product->id * 57 % 360}
                   <div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>

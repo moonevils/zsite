@@ -127,7 +127,7 @@
             <span class='input-group-btn'>
               <button class='btn default btn-minus' type='button'><i class='icon icon-minus'></i></button>
             </span>
-            <input type='number' class='form-control text-center' value='1' id='count' name='count'>
+            <input type='number' class='btn-number text-center' value='1' id='count' name='count'>
             <span class='input-group-btn'>
               <button class='btn default btn-plus' type='button'><i class='icon icon-plus'></i></button>
             </span>
@@ -152,6 +152,7 @@
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_view', 'bottom')}</div>
 {noparse}
 <style>
+  .btn-number {width:100%;height:38px;border:1px solid #ddd;border-radius:0px}
   #product {background:#ddd}
   #productSlide{text-align:center;height:226px;background:#fff}
   #productSlide .carousel-inner{max-width:350px;height:226px;display:inline-block;}
