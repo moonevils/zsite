@@ -16,24 +16,33 @@
 {else}
   {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
   <style>
-  body.with-appnav.with-appbar-top {padding-top:48px}
-  .appnav {border-bottom:0px}
-  .both-sides {border: 1px solid rgba(0,0,0,0.08);border-radius:20px}
-  .both-sides.left {float:left;height:32px;width:87px;line-height:28px}
-  .both-sides.right {float:right}
-  .both-sides .icon-block {float:left;width:42px;text-align:center}
-  .both-sides .icon-block.left img {width:10px;height:17.5px}
-  .both-sides .icon-block.home img {width:17px;height:17px}
-  .both-sides .divider-line {margin:6.75px 0px;border-left:1px solid #ddd;float:left;height:18.5px}
-  .middle-title {width:50%;margin:0 auto;line-height:32px;font-size:2rem;text-align:center}
+    body.with-appnav.with-appbar-top {padding-top:48px}
+    .appnav {border-bottom:0px}
+    .both-sides {border: 1px solid rgba(0,0,0,0.08);border-radius:20px}
+    .both-sides.left {float:left;height:32px;width:87px;line-height:28px}
+    .both-sides.right {float:right}
+    .both-sides .icon-block {float:left;width:42px;text-align:center}
+    .both-sides .icon-block.left img {width:10px;height:17.5px}
+    .both-sides .icon-block.home img {width:17px;height:17px}
+    .both-sides .divider-line {margin:6.75px 0px;border-left:1px solid #ddd;float:left;height:18.5px}
+    .middle-title {width:50%;margin:0 auto;line-height:32px;font-size:2rem;text-align:center;font-weight:600}
   </style>
+  {if($source == 'bottom')}
+  <style>
+    .both-sides.left{display:none}
+  </style>
+  {/if} 
   <div class='block-region region-all-top blocks' data-region='all-top'>
   <nav class='appnav fix-top appnav-auto' id='appnav' data-ve='navbar' data-type='mobile_top' style='top:0px;background:#fff;box-shadow: 0 0px 0px;height:48px'>
   <div class='mainnav' style='padding:8px 7px'>
     <div class='both-sides left'>
-      <div class='icon-block left'><a href='javascript:history.back();'><img src='/theme/mobile/common/img/left.png'></img></a></div>
+      <div class='icon-block left'>
+        <a href='javascript:history.back();'>{!html::image('/theme/mobile/common/img/left.png')}</a>
+      </div>
       <div class='divider-line'></div>
-      <div class='icon-block home'><a href='{$control->config->webRoot}'><img src='/theme/mobile/common/img/home.png'></img></a></div>
+      <div class='icon-block home'>
+        <a href='{$control->config->webRoot}'>{!html::image('/theme/mobile/common/img/home.png')}</a>
+      </div>
     </div>
     <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>
   </div>

@@ -52,6 +52,7 @@ $lang->order->submit         = 'Submit';
 $lang->order->cancel         = 'Cancel';
 $lang->order->pay            = 'Checkout';
 $lang->order->goToPay        = 'Order has been placed. If paid, please go to My Order/My License to find your license.';
+$lang->order->goToCart       = 'Back to cart';
 $lang->order->editPrice      = 'Edit Price';
 $lang->order->return         = 'Collect';
 $lang->order->refund         = 'Refund';

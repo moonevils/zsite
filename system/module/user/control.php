@@ -325,14 +325,16 @@ class user extends control
      * @access public
      * @return void
      */
-    public function control()
+    public function control($source = '')
     {
-        if($this->app->user->account == 'guest') $this->locate(inlink('login'));
-        $this->view->mobileURL  = helper::createLink('user', 'control', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'control', '', '', 'html');
-        $this->view->realname   = $this->user->getRealnameByID($this->app->user->id);
+        if($this->app->user->account == 'guest' && $this->app->clientDevice == 'desktop') $this->locate(inlink('login'));
 
-        $this->view->title = $this->lang->user->control->common;
+        $this->view->mobileURL   = helper::createLink('user', 'control', '', '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('user', 'control', '', '', 'html');
+        $this->view->realname    = $this->user->getRealnameByID($this->app->user->id);
+        $this->view->title       = $this->lang->user->control->common;
+        $this->view->mobileTitle = $this->lang->user->control->common;
+        $this->view->source      = $source;
         $this->display();
     }
 
