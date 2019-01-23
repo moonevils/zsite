@@ -401,6 +401,15 @@ $lang->ui->files->default->article['blog/footer'] = '博客底部';
 
 $lang->ui->files->default->article['page/view'] = '单页';
 
+$lang->ui->files->default->blog = array();
+$lang->ui->files->default->blog['header'] = '博客头部';
+$lang->ui->files->default->blog['index']  = '博客列表';
+$lang->ui->files->default->blog['view']   = '博客详情';
+$lang->ui->files->default->blog['footer'] = '博客底部';
+
+$lang->ui->files->default->page = array();
+$lang->ui->files->default->page['view'] = '单页';
+
 $lang->ui->files->default->product = array();
 $lang->ui->files->default->product['browse']      = '产品列表';
 $lang->ui->files->default->product['browse.card'] = '卡片视图';
