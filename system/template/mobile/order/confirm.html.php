@@ -111,12 +111,12 @@
     <div class='panel-body'>
       <div class='alert bg-warning-pale text-center'>
         <p><i class='icon-smile icon-x3'></i></p>
-        {$lang->cart->noProducts}
+        {$lang->order->noProducts}
       </div>
       <hr class='space'>
       <div class='row'>
         <div class='col-6'>
-          {!html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn primary block'")}
+          {!html::a(helper::createLink('cart', 'browse', 'source=product'), $lang->order->goToCart, "class='btn primary block'")}
         </div>
         <div class='col-6'>
           {!html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn default block'")}

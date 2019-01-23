@@ -268,7 +268,7 @@ function statAll()
     {
         var price = $(this).parent().parent().find('.form-control-number').data('price');
         var number = $(this).parent().parent().find('.form-control-number').val();
-        $(this).parent().parent().find('.product-amount').text(price*number); 
+        $(this).parent().parent().find('.product-amount').text(parseFloat(price*number).toFixed(2)); 
         if($(this).prop("checked"))
         {
             amount += 1;
