@@ -351,6 +351,7 @@ class article extends control
 
         
         $this->view->title       = $article->title . ' - ' . $category->name;
+        $this->view->mobileTitle = '详情';
         $this->view->keywords    = trim(trim($article->keywords . ' - ' . $category->keywords), '-');
         $this->view->desc        = strip_tags($article->summary);
         $this->view->article     = $article;
@@ -364,7 +365,6 @@ class article extends control
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
         $this->view->author         = $this->loadModel('user')->getBasicInfo([$article->author])[$article->author];
-        $this->view->author->avatar = '/file.php?f=201901/f_21e65fddc933cd4548574947d53ddb54&t=jpeg&o=&s=&v=1547540249';
 
         if($this->app->clientDevice == 'desktop') 
         {

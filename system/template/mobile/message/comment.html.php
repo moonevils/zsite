@@ -16,10 +16,11 @@
 {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
 <hr>
 <div class='panel panel-section'>
-  <div id='commentsListWrapper'><div id='commentsList'>
+  <div class='comment-list'>
     {if(isset($comments) and $comments)}
-      <div class='panel-heading'>
-        <div class='title'><i class='icon-comments'></i> {$lang->message->list}</div>
+      <div class='title vertical-center'>
+        <span class='vertical-line'></span>
+        <span class="list-text">{$lang->message->list}</span>
       </div>
       <div class='cards condensed bordered'>
         {foreach($comments as $number => $comment)}
@@ -35,32 +36,19 @@
           </div>
         {/foreach}
       </div>
-      <div class='panel-body'>
-        <hr class='space'>
-        {$pager->show('justify')}
-      </div>
-      <div class='panel-footer'>
-        {if(count($comments) > 5)}
-          <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> {$lang->message->post}</a>
-        {/if}
-      </div>
     {/if}
   </div>
-  <div class='panel-footer '>
-      <div class='comment-post'>
-        <form class='commentForm' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
-          <div class='form-group required'>
-            {!html::textarea('content', '', "class='form-control' rows='3' placeholder='{{$lang->message->content}}'")}
-            {!html::hidden('objectType', $objectType)}
-            {!html::hidden('objectID', $objectID)}
-          </div>
-          <div class='form-group hide captcha-box'></div>
-          <div class='form-group'>
-            {!html::submitButton('', 'btn primary')}&nbsp;
-            <small class="text-important">{$lang->comment->needCheck}</small>
-          </div>
-        </form>
+  <div class='comment-post'>
+    <form class='comment-form vertical-center' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
+      <div class='form-group required'>
+        <input class="comment-input" type="text" name="content" id="content" value="" rows="5" placeholder="   {$lang->message->content}">
+        {!html::hidden('objectType', $objectType)}
+        {!html::hidden('objectID', $objectID)}
       </div>
+      <div class='form-group'>
+        <input type="submit" id="submit" value="发表评论" data-loading="稍候...">
+      </div>
+    </form>
   </div>
 </div>
 <hr class='space'>

@@ -1,3 +1,62 @@
-.commentForm {
+input:focus, textarea:focus {
+    outline: none;
+}
+
+.comment {
+    height: 30px;
+}
+
+.comment-input {
+    border-radius: 3px;
+    border: 1px solid #979797;
+    background-color: #F3F3F3;
+    height: 30px;
     width: 243px;
+}
+
+.comment-post {
+    height: 50px;
+    border: 1px solid #f8f8f8;
+    padding: 0 10px;
+}
+
+.comment-form {
+    justify-content: space-between;
+}
+
+.comment-form #submit {
+    border-radius: 3px;
+    background: linear-gradient(to left, #1B5AFF, #709BFE);;
+    height: 30px;
+    font-size: 14px;
+    margin: auto;
+    color: white;
+    font-weight: bold;
+}
+
+.vertical-line {
+    float: left;
+    width: 2px;
+    height: 14px;
+    background: #3C77FE;
+}
+
+.vertical-center {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.comment-list {
+    padding: 13px 12px;
+    border-radius: 5px;
+}
+
+.list-text {
+    margin-left: 4px;
+    font-size: 16px;
 }
