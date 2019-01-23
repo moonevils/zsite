@@ -1,6 +1,6 @@
-{*php
+{*
 /**
- * The blog index view file for mobile template of chanzhiEPS.
+ * The browse view file of blog for mobile template of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
@@ -9,80 +9,99 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-/php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'header')}
+*}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {if(!empty($category->id))} {!js::set('pageLayout', $control->block->getLayoutScope('blog_index', $category->id))} {/if}
 {if(isset($articleIdList))}
   <script>{!echo "place" . md5(time()). "='" . $config->idListPlaceHolder . $articleIdList . $config->idListPlaceHolder . "';"}</script>
 {else}
   <script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {/if}
-<div class='block-region region-top blocks' data-region='blog_index-top'>{$control->loadModel('block')->printRegion($layouts, 'blog_index', 'top')}</div>
-<hr class='space'>
-<div class='panel panel-section'>
-  <div class='cards condensed cards-list bordered' id='blogList'>
-    {foreach($sticks as $stick)}
-      {if(!isset($category))} {$category = array_shift($stick->categories)} {/if}
-      {$url = inlink('view', "id=$stick->id", "category={{$category->alias}}&name=$stick->alias")}
-      <a class='card' href='{$url}' id="blog{$stick->id}" data-ve='blog'>
-        <div class='card-heading'>
-          <div class='pull-right'>
-            <small class='bg-danger-pale text-danger'>{$lang->article->stick}</small>
-          </div>
-          <h5 style='color:{$stick->titleColor}'>{$stick->title}</h5>
-        </div>
-        <div class='table-layout'>
-          <div class='table-cell'>
-            <div class='card-content text-muted small'>
-              {$stick->summary}
-              <div><span title="{$lang->article->views}"><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $stick->id . $config->viewsPlaceholder}</span>
-                {if(commonModel::isAvailable('message') and isset($stick->comments) and $stick->comments)}&nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$stick->comments}</span> &nbsp; {/if}
-                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i> {!substr($stick->addedDate, 0, 10)}</span></div>
-            </div>
-          </div>
-          {if(!empty($stick->image))}
-            <div class='table-cell thumbnail-cell'>
-              {$title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title}
-              {$stick->image->primary->objectType = 'article'}
-              {!html::image($control->loadModel('file')->printFileURL($stick->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
-            </div>
-          {/if}
-        </div>
-      </a>
-      {@unset($articles[$stick->id])}
-    {/foreach}
-
-    {foreach($articles as $article)}
-      {if(!isset($category))} {$category = array_shift($article->categories)} {/if}
-      {$url = inlink('view', "id=$article->id", "category={{$category->alias}}&name=$article->alias")}
-      <a class='card' href='{$url}' id="blog{$article->id}" data-ve='blog'>
-        <div class='card-heading'>
-          <h5 style='color:{$article->titleColor}'>{$article->title}</h5>
-        </div>
-        <div class='table-layout'>
-          <div class='table-cell'>
-            <div class='card-content text-muted small'>
-              {$article->summary}
-              <div><span title="{$lang->article->views}"><i class='icon-eye-open'></i> {!echo $config->viewsPlaceholder . $article->id . $config->viewsPlaceholder}</span>
-                {if(commonModel::isAvailable('message') and $article->comments)} &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$article->comments}</span> &nbsp; {/if}
-                &nbsp;&nbsp; <span title="{$lang->article->addedDate}"><i class='icon-time'></i>{!substr($article->addedDate, 0, 10)}</span></div>
-            </div>
-          </div>
-          {if(!empty($article->image))}
-            <div class='table-cell thumbnail-cell'>
-              {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
-              {$article->image->primary->objectType = 'article'}
-              {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
-            </div>
-          {/if}
-        </div>
-      </a>
-    {/foreach}
+<div class='block-region blocks region-top' data-region='blogbrowse-top'>{$control->loadModel('block')->printRegion($layouts, 'blog_index', 'top')}</div>
+<div class='panel panel-section panel-category-article'>
+  <div class='block-title vertical-center'>
+    {if(isset($category))}
+    <strong class="vertical-center block-title-align">
+      <span class='vertical-line'></span>
+      <span class="block-title-text">{!$category->name}</span>
+    </strong>
+    {/if}
+    <div class="order-time vertical-center">
+      {$lang->article->orderBy->time}&nbsp;
+      <div class="order-triangle">
+        <span class="up-triangle"></span>
+        <span class="down-triangle"></span>
+      </div>
+    </div>
+    <div class="order-hot vertical-center">
+      {$lang->article->orderBy->hot}&nbsp;
+      <div class="order-triangle">
+        <span class="up-triangle"></span>
+        <span class="down-triangle"></span>
+      </div>
+    </div>
   </div>
-  <div class='panel-footer'>
-    {$pager->show('justify')}
+  <div class='list' id='articles'>
+    {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
+    {@$i=0}
+    {foreach($articles as $article)}
+      {if(isset($pageID) and $pageID > 1)}
+      <div class='divider'></div>
+      {/if}
+      {@$i++}
+      {$url = helper::createLink('blog', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
+      <div class='article-item vertical-center article-align'>
+        <div class="article-content">
+          <div class='vertical-start'>
+            <strong class="article-title">
+              <label class="label-hot vertical-center">{$lang->article->hot}</label>
+              {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
+              {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
+            </strong>
+          </div>
+          <div class='article-ext'>
+            <span class='views'>
+              {$article->views}{$lang->article->views}
+            </span>
+            {if(commonModel::isAvailable('message'))}
+            <span class='comments'>
+              {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
+            </span>
+            {/if}
+            <span class='pub-time'>
+              {$pubTime = strtotime($article->addedDate)}
+              {$pubTimeLen = time() - $pubTime}
+              {if($pubTimeLen > 86400)}
+                {!substr($article->addedDate, 0, 10)}
+              {else}
+                {$minute = floor($pubTimeLen / 60)}
+                {$hour = floor($pubTimeLen / 3600)}
+                {if($hour == 0)}
+                  {!$minute == 1 ? $lang->article->oneMinuteAgo : $minute . $lang->article->minutesAgo}
+                {else}
+                  {!$hour == 1 ? $lang->article->oneHourAgo : $hour . $lang->article->hoursAgo}
+                {/if}
+              {/if}
+            </span>
+          </div>
+        </div>
+        <div class='article-img'>
+          {if(!empty($article->image))}
+          {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+          {$article->image->primary->objectType = 'article'}
+          {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+          {/if}
+        </div>
+      </div>
+      {if($i < count($articles))}
+      <div class='divider'></div>
+      {/if}
+    {/foreach}
   </div>
 </div>
 
-<div class='block-region region-bottom blocks' data-region='blog_index-bottom'>{$control->loadModel('block')->printRegion($layouts, 'blog_index', 'bottom')}</div>
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'blog', 'footer')}
+{$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
+
+<div class='block-region blocks region-bottom' data-region='blogbrowse-bottom'>{$control->loadModel('block')->printRegion($layouts, 'blog_index', 'bottom')}</div>
+
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
