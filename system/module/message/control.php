@@ -131,21 +131,10 @@ class message extends control
      */
     public function post($type, $block = '')
     {
+        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
         $this->lang->message = $this->lang->$type;
         if($_POST)
         {
-            $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
-            $needCaptcha   = false;
-            if(($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content)) or $captchaConfig == 'open') $needCaptcha = true;
-
-            /* If no captcha but is garbage, return the error info. */
-            $captchaInput = $this->session->captchaInput;
-            if($this->post->{$captchaInput} === false and $needCaptcha)
-            {
-                $boolBlock = ($block != "block");
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Comment($boolBlock))));
-            }
-
             $result = $this->message->post($type, $block);
             $this->send($result);
         }
@@ -160,6 +149,8 @@ class message extends control
      */
     public function reply($messageID)
     {
+        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
+
         if($_POST)
         {
             if(RUN_MODE == 'front')
