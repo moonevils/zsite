@@ -17,13 +17,9 @@
   .text-danger {color:#D0021B}
   .text-muted.text-line-through {color:#999999}
   .card:active, .card:hover {box-shadow:0 0px 0px}
-  .cards > .row {margin-right:-10px;margin-left:-10px}
-  .cards > .row > .col {padding-right:10px;padding-left:10px}
-  .cards > .row > .col > .card {display:block;border:0px;box-shadow:0 0px 0px}
+  .cards > .row {margin-right:-10px;margin-left:-10px;float:none;width:100%}
   .cards > .row > .col > .card .card-img-fixed{height:208px;display:block;overflow:hidden;background-color:#f1f1f1;position:relative}
   .cards > .row > .col > .card .card-img-fixed img,.media-placeholder {position:absolute;max-width:100%;margin:auto;left:0px;top:0px;right:0px;bottom:0px}
-  .cards > .row > .col > .card .card-content{padding:12px 0px}
-  .cards > .row > .col > .card .card-content > .card-title{height:40px;overflow:hidden}
 </style>
 <div class='block-region region-top blocks' data-region='product_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'product_browse', 'top')}</div>
 <div class='panel-section'>
