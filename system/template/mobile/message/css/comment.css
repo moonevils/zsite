@@ -60,3 +60,32 @@ input:focus, textarea:focus {
     margin-left: 4px;
     font-size: 16px;
 }
+
+.avatar img {
+    border-radius: 3px;
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+}
+
+.avatar i {
+    border-radius: 3px;
+    margin-right: 10px;
+    font-size: 40px;
+}
+
+.comment-ext {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.authorName {
+    color: #333333;
+    font-size: 16px;
+}
+
+.addedDate {
+    color: #999999;
+    font-size: 13px;
+}

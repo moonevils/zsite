@@ -24,9 +24,26 @@
       </div>
       <div class='cards condensed bordered'>
         {foreach($comments as $number => $comment)}
-          <div class='card comment'>
-            <div class='card-heading'>
-              <span class='text-special name'>{$comment->from}</span> &nbsp; <small class='text-muted time'>{!formatTime($comment->date, 'Y/m/d H:m')}</small>
+          <div class='comment'>
+            <div class='comment-heading'>
+              <div class="avatar vertical-center">
+                {if(empty($author->avatar))}
+                <i class="icon icon-user icon-10x"></i>
+                {else}
+                <img src="{$comment->avatar}" alt="">
+                {/if}
+              </div>
+              <div class="article-ext">
+                <span class="authorName">
+                  {if(!empty($comment->nickname))}
+                    {$comment->nickname}
+                  {elseif(!empty($comment->from))}
+                    {$comment->nickname}
+                  {else}
+                  {/if}
+                </span>
+                <span class="addedDate">{!formatTime($article->addedDate)}</span>
+              </div>
               <div class='actions'>
                 {!html::a($control->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='ajax' data-icon='reply' data-title='{{$lang->comment->reply}}'")}
               </div>

@@ -61,13 +61,14 @@ class messageModel extends model
             if(!is_numeric($id)) $userMessages = '0';
         }
 
-        return  $this->dao->select('*')->from(TABLE_MESSAGE)
-            ->where('type')->eq($type)
-            ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('public')->eq(1)->fi()
-            ->andWhere('objectType')->eq($objectType)
-            ->andWhere('objectID')->eq($objectID)
-            ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere("(id in ({$userMessages}) or (status = '1'))")->fi()
-            ->orderBy('id_desc')
+        return  $this->dao->select('u.nickname, u.avatar, m.id, m.from, m.content, m.date')->from(TABLE_MESSAGE)->alias('m')
+            ->leftJoin(TABLE_USER)->alias('u')->on('m.account=u.account')
+            ->where('m.type')->eq($type)
+            ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('m.public')->eq(1)->fi()
+            ->andWhere('m.objectType')->eq($objectType)
+            ->andWhere('m.objectID')->eq($objectID)
+            ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere("(m.id in ({$userMessages}) or (m.status = '1'))")->fi()
+            ->orderBy('m.id_desc')
             ->page($pager)
             ->fetchAll();
     }
