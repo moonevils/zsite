@@ -174,9 +174,9 @@ $lang->article->browseImage->sizeList['small']  = 'Small';
 $lang->article->browseImage->sizeList['middle'] = 'Middle';
 
 $lang->article->oneMinuteAgo = '1 minute ago';
-$lang->article->minutesAgo = 'minutes ago';
-$lang->article->oneHourAgo = '1 hour ago';
-$lang->article->hoursAgo = 'hours ago';
+$lang->article->minutesAgo   = 'minutes ago';
+$lang->article->oneHourAgo   = '1 hour ago';
+$lang->article->hoursAgo     = 'hours ago';
 
 $lang->article->hot   = 'Hot';
 $lang->article->views = 'Views';
