@@ -31,7 +31,7 @@
         {else}
           <div class='form-group'>
             <span class='signed-user-info'>
-              <i class='icon-user text-muted'></i> <strong>{$control->session->user->realname }</strong>
+              <i class='icon-user text-muted'></i> <strong>{$control->session->user->realname}</strong>
               {!html::hidden('from', $control->session->user->realname)}
               {if($control->session->user->email != '')}
                 <span class='text-muted'>&nbsp;({!str2Entity($control->session->user->email)})</span>
