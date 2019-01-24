@@ -9,7 +9,7 @@ $lang->bear->autoSync   = 'Auto Submit';
 $lang->bear->submitType = 'Submit type';
 
 $lang->bear->id       = 'ID';
-$lang->bear->time     = 'Submit Time';
+$lang->bear->time     = 'Submit on';
 $lang->bear->url      = 'Url';
 $lang->bear->auto     = 'Auto';
 $lang->bear->status   = 'Status';
@@ -21,13 +21,13 @@ $lang->bear->end           = 'End Date';
 $lang->bear->submit        = 'Submit';
 $lang->bear->log           = 'Submit log';
 $lang->bear->batchSubmit   = 'Batch Submit';
-$lang->bear->submitSuccess = 'Successfully Submit';
-$lang->bear->submitFail    = 'Submit Fail';
-$lang->bear->submitResult  = "Success，Add <span class='text-success'> %s </span> records；";
+$lang->bear->submitSuccess = 'Submitted.';
+$lang->bear->submitFail    = 'Submitting failed.';
+$lang->bear->submitResult  = "Dine. Added <span class='text-success'> %s </span> records；";
 
 $lang->bear->notices = array();
 $lang->bear->notices['not_same_site'] = " %s domain error.";
-$lang->bear->notices['not_valid']     = "Not valid url.";
+$lang->bear->notices['not_valid']     = "Not valid URL.";
 
 $lang->bear->submitTypes = array();
 $lang->bear->submitTypes['realtime'] = 'New';

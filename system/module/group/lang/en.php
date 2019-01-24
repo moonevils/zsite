@@ -12,7 +12,7 @@
 $lang->group->common             = 'Privilege';
 $lang->group->allGroups          = 'All Privileges';
 $lang->group->browse             = 'Group List';
-$lang->group->create             = 'Create a Group';
+$lang->group->create             = 'Create Group';
 $lang->group->edit               = 'Edit';
 $lang->group->copy               = 'Copy';
 $lang->group->delete             = 'Delete';

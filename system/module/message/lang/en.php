@@ -80,14 +80,14 @@ $lang->comment->inputPlaceholder        = 'Add Comment';
 $lang->comment->submit                  = 'Submit';
 $lang->comment->pass                    = 'Pass';
 $lang->comment->reply                   = 'Reply';
-$lang->comment->replyAt                 = 'Replied on';
-$lang->comment->manage                  = 'Manange Comments';
+$lang->comment->replyAt                 = 'Reply on';
+$lang->comment->manage                  = 'Manange Comment';
 $lang->comment->delete                  = 'Delete';
 $lang->comment->passPre                 = 'Pass Prev';
 $lang->comment->deletePre               = 'Delete Prev';
-$lang->comment->commentTo               = 'Commented on';
-$lang->comment->commentAt               = 'Commented on';
-$lang->comment->deletedObject           = 'Deleted Comments';
+$lang->comment->commentTo               = 'Comment on';
+$lang->comment->commentAt               = 'Comment on';
+$lang->comment->deletedObject           = 'Deleted Comment';
 
 $lang->comment->confirmDeleteSingle = 'Do you want to delete this comment?';
 $lang->comment->confirmDeletePre    = 'Do you want to delete previous comments?';
@@ -97,7 +97,7 @@ $lang->comment->confirmPassPre      = 'Do you want to pass previous comments? ';
 $lang->comment->statusList[0] = 'Not Reviewed';
 $lang->comment->statusList[1] = 'Reviewed';
 
-$lang->comment->defaultNickname = 'Anonymity';
+$lang->comment->defaultNickname = 'Anonymous';
 $lang->comment->submit          = 'Submit';
 $lang->comment->submitting      = 'Submitting';
 

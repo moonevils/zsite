@@ -36,7 +36,7 @@ $lang->thanks = 'Thanks';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = 'Zsite';
 $lang->chanzhiEPSx    = 'ZSite';
-$lang->agreement      = "I have read and understood<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE 1.2》</a>. <span class='text-danger'>If not authorized, any signs/links of Zsite shouldn't be removed, hidden or covered.</span>";
+$lang->agreement      = "I have read and agreed tod<a href='http://zpl.pub/page/zplv12.html' target='_blank'> Z PUBLIC LICENSE 1.2</a>. <span class='text-danger'>If not authorized, any signs/links of Zsite shouldn't be removed, hidden or covered.</span>";
 $lang->poweredBy      = "<a href='http://www.zsite.net/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'> is powered by <a href='http://www.zsite.net/?v=%s' target='_blank' title='%s'>Zsite CMS %s</a></span>";
 $lang->newVersion     = "Note: Zsite has released <span id='version'></span> on <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>Download it NOW!</a>";
@@ -110,8 +110,8 @@ $lang->sendSuccess    = 'Done';
 $lang->deleteSuccess  = 'Deleted';
 $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No match found!';
-$lang->alias          = 'For SEO, use letters and numbers.';
-$lang->keywordsHolder = 'Use commas to separate keywords.';
+$lang->alias          = 'For SEO, enter letters and numbers.';
+$lang->keywordsHolder = 'Use commas to separate tags.';
 $lang->autoUpgrade    = 'Auto upgrade';
 
 $lang->setOkFile = <<<EOT
@@ -157,7 +157,7 @@ $lang->js->continue         = 'Continue';
 /* Contact fields*/
 $lang->company = new stdclass();
 $lang->company->contactUs = 'Contact Us';
-$lang->company->contacts  = 'Contacts';
+$lang->company->contacts  = 'Contact';
 $lang->company->address   = 'Address';
 $lang->company->phone     = 'Phone';
 $lang->company->email     = 'Email';
@@ -206,7 +206,7 @@ $lang->menu->submission   = 'Submission|article|admin|type=submission&tab=user';
 $lang->menu->wechat       = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->menu->stat    = 'Stats|stat|traffic|';
-$lang->menu->tag     = 'Keywords|tag|admin|';
+$lang->menu->tag     = 'Tags|tag|admin|';
 $lang->menu->links   = 'Links|links|admin|';
 
 $lang->menu->ui       = 'UI|ui|settemplate|';
@@ -227,8 +227,8 @@ $lang->menu->interface     = 'API|site|setoauth|';
 $lang->menu->wechatSetting = 'Wechat Setting|wechat|admin|';
 $lang->menu->bear          = 'Bear|bear|setting|';
 
-$lang->menu->package    = 'Extensions|package|browse|';
-$lang->menu->themestore = 'Themes|ui|themestore|';
+$lang->menu->package    = 'Extension|package|browse|';
+$lang->menu->themestore = 'Theme|ui|themestore|';
 $lang->menu->community  = 'Community|admin|register|';
 
 /* Menu groups setting. */
@@ -253,12 +253,12 @@ $lang->designMenus->others    = array('link' => 'Setting|ui|others|');
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse       = 'Articles|article|admin|';
+$lang->article->menu->browse       = 'Article|article|admin|';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse       = 'Blogs|article|admin|type=blog';
+$lang->blog->menu->browse       = 'Blog|article|admin|type=blog';
 
 $lang->page = new stdclass();
 
@@ -377,7 +377,7 @@ $lang->stat->menu->traffic  = 'Traffic|stat|traffic|';
 $lang->stat->menu->from     = 'Source|stat|from|';
 $lang->stat->menu->domains  = array('link' => 'Domain|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
 $lang->stat->menu->search   = 'Search Engine|stat|search|';
-$lang->stat->menu->keywords = 'Keywords|stat|keywords|';
+$lang->stat->menu->keywords = 'Tags|stat|keywords|';
 $lang->stat->menu->client   = 'Clients|stat|client|type=browser';
 $lang->stat->menu->page     = 'Page Clicks|stat|page|';
 $lang->stat->menu->setStat  = 'Settings|stat|setting|';

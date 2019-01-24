@@ -31,10 +31,10 @@ $lang->forum->bindWechat = 'Bind Wechat';
 
 $lang->forum->updateDesc    = 'Number of threads on each board will be updated.';
 $lang->forum->successUpdate = 'Done!';
-$lang->forum->bindWechatTip = 'Posting function sets the limit for binding WeChat, please bind to WeChat member first.';
+$lang->forum->bindWechatTip = 'Posting sets the limit for binding WeChat. Please bind WeChat user first.';
 
 $lang->forum->indexModeOptions = array();
-$lang->forum->indexModeOptions['board']  = 'Boards';
+$lang->forum->indexModeOptions['board']  = 'Board';
 $lang->forum->indexModeOptions['latest'] = 'Latest Thread';
 $lang->forum->indexModeOptions['stick']  = 'Sticky Thread';
 

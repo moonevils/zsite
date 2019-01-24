@@ -66,11 +66,11 @@ $lang->file->size      = 'Size';
 $lang->file->addedBy   = 'Uploaded By';
 $lang->file->addedDate = 'Uploaded On';
 $lang->file->public    = 'Anonymous Download';
-$lang->file->downloads = 'Downloads';
+$lang->file->downloads = 'Download';
 $lang->file->score     = 'Points Required';
 $lang->file->setScore  = 'Points Settings';
 $lang->file->lblInfo   = 'Your points is <strong class="red">%s</strong>';
-$lang->file->confirm   = 'It costs you %s points to download this Plug-in.';
+$lang->file->confirm   = 'It costs you %s points to download this plug-in.';
 
 $lang->file->publics[0] = 'Please login';
 $lang->file->publics[1] = 'Enable';
@@ -94,13 +94,13 @@ $lang->file->nameEmpty        = "File name should not be blank.";
 $lang->file->copySuccess      = "Copy to clipboard";
 $lang->file->evilChar         = "Invalid Character";
 $lang->file->rebuildThumbs    = "%s has been finished.";
-$lang->file->noFlashTip       = "Flash extension is forbidden，please do the paste manually";
+$lang->file->noFlashTip       = "Flash extension is forbidden. Please do the paste manually";
 $lang->file->fontNotDownload  = "Download Font faild";
-$lang->file->fontPosition     = 'To build watermark need font file in %s path。';
+$lang->file->fontPosition     = 'To build watermark requires font file in %s path。';
 
 $lang->file->updateInvalidFiles = 'Update Invalid List';
 $lang->file->clearAllInvalid    = 'Delete All Invalid Files';
-$lang->file->fileTip            = 'Tips: Red represent the file has been deleted while there is data in database';
+$lang->file->fileTip            = 'Tips: Red means the file has been deleted with data in database';
 $lang->file->productTip         = 'Please upload the images they have the same aspect ratio.';
 
 $lang->file->dragFile      = 'Please drag files here';
