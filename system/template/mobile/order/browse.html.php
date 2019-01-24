@@ -11,7 +11,7 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <div class='panel-section'>
   <div class='panel-heading'>
     <div class='title strong'><i class='icon icon-shopping-cart'></i> {$lang->order->admin}</div>
@@ -19,7 +19,7 @@
   <div class='panel-body' id='orderListWrapper'>
     <div class='cards' id='orderList'>
       {foreach($orders as $order)}
-        <div class='card'>
+        <div class='card card-block'>
           <div class='card-heading bg-gray-pale'>
             #{$order->id} &nbsp; &nbsp;
             <span>{$lang->order->amount}: 
