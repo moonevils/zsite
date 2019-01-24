@@ -399,11 +399,12 @@ class user extends control
         /* Load the thread lang thus to rewrite the page lang items. */
         $this->app->loadLang('thread');    
 
-        $this->view->title      = $this->lang->user->reply;
-        $this->view->replies    = $this->loadModel('reply')->getByUser($this->app->user->account, $pager);
-        $this->view->pager      = $pager;
-        $this->view->mobileURL  = helper::createLink('user', 'reply', "pageID=$pageID", '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'reply', "pageID=$pageID", '', 'html');
+        $this->view->title       = $this->lang->user->reply;
+        $this->view->mobileTitle = $this->lang->user->reply;
+        $this->view->replies     = $this->loadModel('reply')->getByUser($this->app->user->account, $pager);
+        $this->view->pager       = $pager;
+        $this->view->mobileURL   = helper::createLink('user', 'reply', "pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('user', 'reply', "pageID=$pageID", '', 'html');
 
         $this->display();
     }

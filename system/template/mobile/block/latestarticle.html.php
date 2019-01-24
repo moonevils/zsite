@@ -45,15 +45,13 @@
         {@$i++}
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
         <div class='article-item vertical-center article-align'>
-          {if($content->imagePosition == 'left')}
+          {if($content->imagePosition == 'left' && !empty($article->image))}
           <div class='article-img'>
-            {if(!empty($article->image))}
             {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
             {$article->image->primary->objectType = 'article'}
             {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
             {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: 100%;'>{{$thumbnailLink}}</div>"}
             {$thumbnail}
-            {/if}
           </div>
           {/if}
           <div class="{if(empty($article->image))}article-content-height{else}article-content{/if}">
@@ -91,15 +89,13 @@
               {/if}
             </div>
           </div>
-          {if($content->imagePosition == 'right')}
+          {if($content->imagePosition == 'right' && !empty($article->image))}
           <div class='article-img'>
-            {if(!empty($article->image))}
             {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
             {$article->image->primary->objectType = 'article'}
             {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
             {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: 100%;'>{{$thumbnailLink}}</div>"}
             {$thumbnail}
-            {/if}
           </div>
           {/if}
         </div>
