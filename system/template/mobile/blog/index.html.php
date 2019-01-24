@@ -52,7 +52,7 @@
         <div class="article-content">
           <div class='vertical-start'>
             <strong class="article-title">
-              <label class="label-hot vertical-center">{$lang->article->hot}</label>
+              <label class="label-hot vertical-center">{$lang->label->hot}</label>
               {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
               {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
             </strong>
@@ -75,9 +75,9 @@
                 {$minute = floor($pubTimeLen / 60)}
                 {$hour = floor($pubTimeLen / 3600)}
                 {if($hour == 0)}
-                  {!$minute == 1 ? $lang->article->oneMinuteAgo : $minute . $lang->article->minutesAgo}
+                  {!$minute == 1 ? $lang->date->oneMinuteAgo : $minute . $lang->date->minutesAgo}
                 {else}
-                  {!$hour == 1 ? $lang->article->oneHourAgo : $hour . $lang->article->hoursAgo}
+                  {!$hour == 1 ? $lang->date->oneHourAgo : $hour . $lang->date->hoursAgo}
                 {/if}
               {/if}
             </span>

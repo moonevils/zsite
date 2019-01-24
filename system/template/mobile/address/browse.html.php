@@ -30,16 +30,22 @@
           {$checked = isset($checked) ? '' : 'checked'}
           <div class='item'>
             <div class='vertical-center'>
-              <label class='checkbox-circle item-checkbox'>
-                <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>
-                <label for='checkbox{$i}'></label>
-              </label>
+                <label class='checkbox-circle item-checkbox'>
+                  <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}' disabled>
+                  <label for='checkbox{$i}'></label>
+                </label>
             </div>
             <div class='address-edit'>
               <div class='card-heading vertical-center'>
+<<<<<<< HEAD
                 <strong class='lead' style='position: absolute;'>{$address->contact}</strong>
                 <span class='text' style='margin-left: 90px;'>{!substr($address->phone, 0, 3) . '****' . substr($address->phone, -4)}</span>
                 {if(zget($address, 'isDefault', 0))}
+=======
+                <strong class='name'>{$address->contact}</strong>
+                <span class='phone'>{!substr($address->phone, 0, 3) . '****' . substr($address->phone, -4)}</span>
+                {if(!$address->isDefault)}
+>>>>>>> ab21d9025308e3fdb1a753b0e798113c94cf2055
                 <span class='address-default text-primary'>{$lang->address->default}</span>
                 {/if}
               </div>

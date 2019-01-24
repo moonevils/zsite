@@ -97,8 +97,8 @@ $lang->comment->statusList[0] = 'Not Reviewed';
 $lang->comment->statusList[1] = 'Reviewed';
 
 $lang->comment->defaultNickname = 'Anonymity';
-$lang->comment->submit = 'Submit';
-$lang->comment->submitting = 'Submitting';
+$lang->comment->submit          = 'Submit';
+$lang->comment->submitting      = 'Submitting';
 
 $lang->message->replyItem   = "<dd><strong>%s</strong> replied on <em>%s</em> about %s</dd>";
 $lang->comment->replyItem   = "<dd><strong>%s</strong> replied on <em>%s</em> about %s</dd>";

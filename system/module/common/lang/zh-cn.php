@@ -436,9 +436,14 @@ $lang->pager->previousPage = "上一页";
 $lang->pager->nextPage     = "下一页";
 $lang->pager->summery      = "第 <strong>%s-%s</strong> 项，共 <strong>%s</strong> 项";
 
+/* The date unit*/
 $lang->date = new stdclass();
-$lang->date->minute = '分钟';
-$lang->date->day    = '天';
+$lang->date->minute       = '分钟';
+$lang->date->day          = '天';
+$lang->date->oneMinuteAgo = '1分钟前';
+$lang->date->minutesAgo   = '分钟前';
+$lang->date->oneHourAgo   = '1小时前';
+$lang->date->hoursAgo     = '小时前';
 
 /* The datetime settings. */
 if(!defined('DT_DATETIME1'))  define('DT_DATETIME1',  'Y-m-d H:i:s');
@@ -458,3 +463,6 @@ $lang->k .= '蝉知建站系统，开源免费的CMS系统;';
 $lang->k .= 'cms系统，首选蝉知cms;';
 $lang->k .= '企业建站，就用蝉知cms;';
 $lang->k .= '蝉知企业建站系统，开源免费的php CMS系统';
+
+/* Labels */
+$lang->label->hot   = '热';

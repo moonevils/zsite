@@ -435,9 +435,14 @@ $lang->pager->previousPage = "Previous";
 $lang->pager->nextPage     = "Next";
 $lang->pager->summery      = "<strong>%s-%s</strong> of <strong>%s</strong>.";
 
+/* The date unit*/
 $lang->date = new stdclass();
-$lang->date->minute = 'min';
-$lang->date->day    = 'day';
+$lang->date->minute       = 'min';
+$lang->date->day          = 'day';
+$lang->date->oneMinuteAgo = '1 minute ago';
+$lang->date->minutesAgo   = 'minutes ago';
+$lang->date->oneHourAgo   = '1 hour ago';
+$lang->date->hoursAgo     = 'hours ago';
 
 /* Date times. */
 if(!defined('DT_DATETIME1'))  define('DT_DATETIME1',  'Y-m-d H:i:s');
@@ -457,3 +462,6 @@ $lang->k .= 'Zsite, free and open source CMS;';
 $lang->k .= 'Zsite, your #1 Choice;';
 $lang->k .= 'Website building, choose Zsite;';
 $lang->k .= 'Zsite, free and open source php CMS.';
+
+/* Labels */
+$lang->label->hot   = 'Hot';

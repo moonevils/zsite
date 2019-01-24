@@ -1,3 +1,9 @@
+.panel {
+    margin: 12px;
+    border-radius: 3px;
+    padding: 13px 10px;
+}
+
 .manage {
     width: 100%;
     background-color: #ffffff;
@@ -9,11 +15,12 @@
 
 .browse {
     margin-left: 3px;
-    font-size: 19px;
+    font-size: 16px;
 }
 
 .address {
-    font-size: 14px;
+    color: #333333;
+    font-size: 12px;
 }
 
 .vertical-center {
@@ -34,21 +41,20 @@
 .vertical-line {
     float: left;
     width: 2px;
-    height: 17px;
+    height: 12px;
     background: #3C77FE;
 }
 
 .divider {
-    margin-left: 7px;
     height: 1px;
     width: 100%;
     background-color: #e5e5e5;
 }
 
 .edit-button a {
-    margin-right: -22px;
+    margin-right: -26px;
     float: right;
-    font-size: 17px;
+    font-size: 14px;
     color: #666666;
     width: 40px;
 }
@@ -62,18 +68,8 @@
     background-color: #E0E9FF;
 }
 
-.panel {
-    margin: 10px;
-    border-radius: 5px;
-    padding: 8px 10px;
-}
-
 .with-appbar-top {
     background-color: #F4F3F4;
-}
-
-.list {
-    margin-left: -10px;
 }
 
 .checkbox-circle {
@@ -134,7 +130,7 @@
 
 .item-checkbox {
     display: none;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .create-btn {
@@ -145,6 +141,7 @@
     height: 31px;
     width: 35%;
     border-radius: 3px;
+    font-size: 14px;
 }
 
 .delete-btn {
@@ -159,5 +156,18 @@
 }
 
 .address-edit {
-    width: 100%;
+    margin: 12px 0;
+    width: 95%;
+}
+
+.address-edit .name {
+    display: block;
+    width: 66px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.address-edit .phone {
+    font-size: 14px;
+    color: #333333;
 }

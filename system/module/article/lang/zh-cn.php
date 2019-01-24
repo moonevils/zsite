@@ -172,11 +172,3 @@ $lang->article->browseImage->positionList['right'] = '居右';
 
 $lang->article->browseImage->sizeList['small']  = '小图';
 $lang->article->browseImage->sizeList['middle'] = '中图';
-
-$lang->article->hot   = '热';
-$lang->article->views = '阅读';
-
-$lang->article->oneMinuteAgo = '1分钟前';
-$lang->article->minutesAgo = '分钟前';
-$lang->article->oneHourAgo = '1小时前';
-$lang->article->hoursAgo = '小时前';
