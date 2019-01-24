@@ -362,8 +362,8 @@ class article extends control
         $this->view->layouts     = $this->loadModel('block')->getPageBlocks('article', 'view', $article->id);
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
-        $authorInfo              = $this->loadModel('user')->getBasicInfo([$article->addedBy]);
-        $this->view->author      = $authorInfo[$article->addedBy];
+        $authorInfo              = $this->loadModel('user')->getBasicInfo($article->addedBy);
+        $this->view->author      = zget($authorInfo, $article->addedBy, '');
 
         if($this->app->clientDevice == 'desktop') 
         {
