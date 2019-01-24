@@ -38,7 +38,7 @@
       {/if}
     </div>
     <div class='list'>
-    {if(!isset($content->image))}
+    {if(isset($content->image))}
       {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
       {@$i=0}
       {foreach($articles as $article)}
@@ -46,7 +46,7 @@
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
         <div class='article-item vertical-center article-align'>
           {if($content->imagePosition == 'left')}
-          <div class='article-img' style="margin-right: 10px">
+          <div class='article-img'>
             {if(!empty($article->image))}
             {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
             {$article->image->primary->objectType = 'article'}
@@ -56,7 +56,7 @@
             {/if}
           </div>
           {/if}
-          <div class="article-content">
+          <div class="{if(empty($article->image))}article-content-height{else}article-content{/if}">
             <div class='vertical-start'>
               <strong class="article-title">
                 {if($i==1)}
@@ -113,7 +113,7 @@
         {@$i++}
         {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
         <div class='article-item vertical-center article-align'>
-          <div class="article-content" style="min-height: 0;">
+          <div class="article-content-height">
             <div class='vertical-start'>
               <strong class="article-title">
                 {if($i==1)}
@@ -160,7 +160,7 @@
 
 <style>
   .block{$block->id} {
-    border-radius: 7px;
+    border-radius: 4px;
     padding: 13px 10px;
   }
 
@@ -223,9 +223,20 @@
     min-height: 78px;
     width: 100%;
   }
+  .block{$block->id} .article-content-height {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 40px;
+  }
 
   .block{$block->id} .article-ext {
     margin-bottom: -6px;
+  }
+
+  .block{$block->id} .article-img {
+    margin-right: 10px;
   }
 
   .block{$block->id} .article-img img{
@@ -264,7 +275,6 @@
   .block{$block->id} .category {
     padding: 2px 3px;
     border-radius: 2px;
-    background-color: #E0E9FF;
     margin-left: 15px;
     color: #0049FF;
     font-size: 12px;
