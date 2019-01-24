@@ -5,13 +5,11 @@ $lang->address->phone   = 'Phone';
 $lang->address->zipcode = 'zip code';
 $lang->address->contact = 'Contact';
 
-$lang->address->browse     = 'Address';
-$lang->address->create     = 'Add';
-$lang->address->edit       = 'Edit';
-$lang->address->default    = 'Default';
-$lang->address->manage     = 'Manage';
-$lang->address->manageDone = 'Done';
-$lang->address->allDelete  = 'All';
-$lang->address->deleteEmptyIDs  = 'No Selected';
-
-
+$lang->address->browse         = 'Address';
+$lang->address->create         = 'Add';
+$lang->address->edit           = 'Edit';
+$lang->address->default        = 'Default';
+$lang->address->manage         = 'Manage';
+$lang->address->manageDone     = 'Done';
+$lang->address->allDelete      = 'All';
+$lang->address->deleteEmptyIDs = 'No Selected';
