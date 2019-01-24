@@ -109,7 +109,7 @@ class cart extends control
      * @access public
      * @return void
      */
-    public function deletes($products)
+    public function batchdelete($products)
     {
         $products = explode(',', rtrim($products, ','));
         foreach($products as $product)

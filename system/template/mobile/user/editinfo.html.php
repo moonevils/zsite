@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class='form-group'>
-          {!html::submitButton('', 'btn primary block') . html::hidden('token', $token)}
+          {!html::submitButton('', 'btn primary block')}
         </div>
       </form>
     </div>
