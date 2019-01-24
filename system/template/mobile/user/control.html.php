@@ -50,7 +50,7 @@
     {!html::image('/theme/mobile/common/img/default-head.png')}
     <div class='tag-body' data-url='{$control->createLink('user', 'login')}'>
       <div class='tag-title'>
-        <div>{$lang->user->noLogged}</div>
+        <div>{$lang->user->unlogin}</div>
         <div>{$lang->user->clickLogin}</div>
       </div> 
     {else}
