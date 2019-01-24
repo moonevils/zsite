@@ -1,6 +1,7 @@
 {$templateName = CHANZHI_TEMPLATE}
 {$themeName    = CHANZHI_THEME}
-{$topNavs = $model->loadModel('nav')->getNavs('mobile_top')}
+{$navType = $thisModuleName == 'blog' ? 'mobile_blog' : 'mobile_top'}
+{$topNavs = $model->loadModel('nav')->getNavs($navType)}
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
     <a href='{$model->config->webRoot}' id='logo'>
