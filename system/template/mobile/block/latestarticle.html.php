@@ -29,7 +29,7 @@
         {if(empty($icon))}
         <span class='vertical-line'></span>
         {else}
-        {!$icon}
+        {$icon}
         {/if}
         <span class="block-title-text">{!$block->title}</span>
       </strong>
