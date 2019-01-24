@@ -372,11 +372,12 @@ class user extends control
         /* Load the forum lang to change the pager lang items. */
         $this->app->loadLang('forum');
 
-        $this->view->title      = $this->lang->user->thread;
-        $this->view->threads    = $this->loadModel('thread')->getByUser($this->app->user->account, $pager);
-        $this->view->pager      = $pager;
-        $this->view->mobileURL  = helper::createLink('user', 'thread', "pageID=$pageID", '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'thread', "pageID=$pageID", '', 'html');
+        $this->view->title       = $this->lang->user->thread;
+        $this->view->mobileTitle = $this->lang->user->thread;
+        $this->view->threads     = $this->loadModel('thread')->getByUser($this->app->user->account, $pager);
+        $this->view->pager       = $pager;
+        $this->view->mobileURL   = helper::createLink('user', 'thread', "pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('user', 'thread', "pageID=$pageID", '', 'html');
 
         $this->display();
     }

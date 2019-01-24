@@ -1,10 +1,4 @@
-.panel {
-    margin: 12px;
-    border-radius: 3px;
-    padding: 13px 10px;
-}
-
-.manage {
+.address-manage {
     width: 100%;
     background-color: #ffffff;
     text-align: right;
@@ -13,45 +7,55 @@
     justify-content: flex-end;
 }
 
-.browse {
+.address-list {
+    margin: 12px;
+    border-radius: 3px;
+    padding: 13px 10px;
+}
+
+.address-list .panel-body {
+    padding: 0;
+}
+
+.address-list .browse {
     margin-left: 3px;
     font-size: 16px;
 }
 
-.address {
+.address-list .address {
     color: #333333;
     font-size: 12px;
 }
 
-.vertical-center {
+.address-list .vertical-center {
     display: flex;
     display: -webkit-flex;
     align-items: center;
 }
 
-.alignment-address {
+.address-list .alignment-address {
     justify-content: space-between;
 }
 
-.alignment-delete {
+.address-list .alignment-delete {
     margin-top: 8px;
     justify-content: space-between;
 }
 
-.vertical-line {
+.address-list .vertical-line {
     float: left;
     width: 2px;
     height: 12px;
     background: #3C77FE;
 }
 
-.divider {
+.address-list .divider {
     height: 1px;
     width: 100%;
     background-color: #e5e5e5;
 }
 
-.edit-button a {
+.address-list .edit-button a {
     margin-right: -26px;
     float: right;
     font-size: 14px;
@@ -59,7 +63,7 @@
     width: 40px;
 }
 
-.address-default {
+.address-list .address-default {
     text-align: center;
     font-size: 12px;
     width: 35px;
@@ -68,15 +72,15 @@
     background-color: #E0E9FF;
 }
 
-.with-appbar-top {
+.address-list .with-appbar-top {
     background-color: #F4F3F4;
 }
 
-.checkbox-circle {
+.address-list .checkbox-circle {
     position: relative;
 }
 
-.checkbox-circle label {
+.address-list .checkbox-circle label {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 50%;
@@ -89,7 +93,7 @@
     position: absolute;
 }
 
-.checkbox-circle label:after {
+.address-list .checkbox-circle label:after {
     border: 2px solid #ffffff;
     border-top: none;
     border-right: none;
@@ -103,37 +107,37 @@
     transform: rotate(-45deg);
 }
 
-.checkbox-circle input[type="checkbox"] {
+.address-list .checkbox-circle input[type="checkbox"] {
     visibility: hidden;
 }
 
-.checkbox-circle input[type="checkbox"]:checked + label {
+.address-list .checkbox-circle input[type="checkbox"]:checked + label {
     background-color: #1e74fc;
     border-color: #1e74fc;
 }
 
-.checkbox-circle input[type="checkbox"]:checked + label:after {
+.address-list .checkbox-circle input[type="checkbox"]:checked + label:after {
     opacity: 1;
 }
 
-.all-delete span {
+.address-list .all-delete span {
     margin: 1px 0 0 10px;
 }
 
-.create-center {
+.address-list .create-center {
     text-align: center;
 }
 
-.item {
+.address-list .item {
     display: flex;
 }
 
-.item-checkbox {
+.address-list .item-checkbox {
     display: none;
     margin-right: 10px;
 }
 
-.create-btn {
+.address-list .create-btn {
     margin-top: 8px;
     color: #3280fc;
     border:1px solid #3280fc;
@@ -144,7 +148,7 @@
     font-size: 14px;
 }
 
-.delete-btn {
+.address-list .delete-btn {
     color: #3280fc;
     border: 1px solid #3280fc;
     background: white;
@@ -155,19 +159,20 @@
     justify-content: center;
 }
 
-.address-edit {
+.address-list .address-edit {
     margin: 12px 0;
     width: 95%;
+    line-height: 30px;
 }
 
-.address-edit .name {
+.address-list .address-edit .name {
     display: block;
     width: 66px;
     font-size: 14px;
     font-weight: 400;
 }
 
-.address-edit .phone {
+.address-list .address-edit .phone {
     font-size: 14px;
     color: #333333;
 }

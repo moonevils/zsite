@@ -383,9 +383,10 @@ class order extends control
         $this->app->loadModuleConfig('product');
         $this->view->currencySymbol = $this->config->product->currencySymbol;
 
-        $this->view->title      = $this->lang->order->browse;
-        $this->view->mobileURL  = helper::createLink('order', 'browse', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('order', 'browse', '', '', 'html');
+        $this->view->title       = $this->lang->order->browse;
+        $this->view->mobileTitle = $this->lang->order->browse;
+        $this->view->mobileURL   = helper::createLink('order', 'browse', '', '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('order', 'browse', '', '', 'html');
         $this->display();
     }
    
