@@ -150,7 +150,8 @@ class fileModel extends model
             if($file->isVideo and $file->editor) continue;
 
             $file->title = $file->title . ".$file->extension";
-            $fileMD5  = md5_file(rtrim($this->app->getWwwRoot(), '/') . $file->fullURL);
+            $realPath = rtrim($this->app->getWwwRoot(), '/') . $file->fullURL;
+            $fileMD5  = file_exists($realPath) ? md5_file($realPath) : '';
             $fileName = explode('.', basename($file->fullURL));
             $fileName = $fileName[0];
             if($file->isImage)
