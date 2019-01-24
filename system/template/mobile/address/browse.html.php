@@ -39,7 +39,7 @@
               <div class='card-heading vertical-center'>
                 <strong class='lead' style='position: absolute;'>{$address->contact}</strong>
                 <span class='text' style='margin-left: 90px;'>{!substr($address->phone, 0, 3) . '****' . substr($address->phone, -4)}</span>
-                {if(!$address->isDefault)}
+                {if(zget($address, 'isDefault', 0))}
                 <span class='address-default text-primary'>{$lang->address->default}</span>
                 {/if}
               </div>
