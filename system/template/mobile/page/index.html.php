@@ -27,7 +27,7 @@
           <div class='table-cell'>
             <div class='card-content text-muted small'>{!helper::substr($page->summary, 60, '...')}</div>
             <div class='card-footer small text-muted'>
-              <span title="{$lang->article->views}"><i class='icon-eye-open'></i> {$page->views}</span>
+              <span title="{$lang->label->views}"><i class='icon-eye-open'></i> {$page->views}</span>
               {if(!empty($page->comments))}
                 &nbsp;&nbsp; <span title="{$lang->article->comments}"><i class='icon-comments-alt'></i> {$page->comments}</span> &nbsp;
               {/if}

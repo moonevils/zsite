@@ -33,7 +33,7 @@ $lang->article->addedDate  = '發佈時間';
 $lang->article->editedDate = '編輯時間';
 $lang->article->status     = '狀態';
 $lang->article->type       = '類型';
-$lang->article->views      = '閲讀';
+$lang->label->views      = '閲讀';
 $lang->article->comments   = '評論';
 $lang->article->stick      = '置頂';
 $lang->article->order      = '排序';
@@ -172,11 +172,3 @@ $lang->article->browseImage->positionList['right'] = '居右';
 
 $lang->article->browseImage->sizeList['small']  = '小圖';
 $lang->article->browseImage->sizeList['middle'] = '中圖';
-
-$lang->article->hot   = '熱';
-$lang->article->views = '閱讀';
-
-$lang->article->oneMinuteAgo = '1分鐘前';
-$lang->article->minutesAgo = '分鐘前';
-$lang->article->oneHourAgo = '1小時前';
-$lang->article->hoursAgo = '小時前';

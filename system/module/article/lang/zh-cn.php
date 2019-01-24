@@ -33,7 +33,7 @@ $lang->article->addedDate  = '发布时间';
 $lang->article->editedDate = '编辑时间';
 $lang->article->status     = '状态';
 $lang->article->type       = '类型';
-$lang->article->views      = '阅读';
+$lang->label->views      = '阅读';
 $lang->article->comments   = '评论';
 $lang->article->stick      = '置顶';
 $lang->article->order      = '排序';
@@ -172,11 +172,3 @@ $lang->article->browseImage->positionList['right'] = '居右';
 
 $lang->article->browseImage->sizeList['small']  = '小图';
 $lang->article->browseImage->sizeList['middle'] = '中图';
-
-$lang->article->hot   = '热';
-$lang->article->views = '阅读';
-
-$lang->article->oneMinuteAgo = '1分钟前';
-$lang->article->minutesAgo = '分钟前';
-$lang->article->oneHourAgo = '1小时前';
-$lang->article->hoursAgo = '小时前';

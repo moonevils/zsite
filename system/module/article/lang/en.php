@@ -33,7 +33,7 @@ $lang->article->addedDate  = 'Publish On';
 $lang->article->editedDate = 'Edit On';
 $lang->article->status     = 'Status';
 $lang->article->type       = 'Type';
-$lang->article->views      = 'Views';
+$lang->label->views      = 'Views';
 $lang->article->comments   = 'Comment';
 $lang->article->stick      = 'Sticky';
 $lang->article->order      = 'Ranking';
@@ -172,11 +172,3 @@ $lang->article->browseImage->positionList['right'] = 'Right';
 
 $lang->article->browseImage->sizeList['small']  = 'Small';
 $lang->article->browseImage->sizeList['middle'] = 'Middle';
-
-$lang->article->oneMinuteAgo = '1 minute ago';
-$lang->article->minutesAgo = 'minutes ago';
-$lang->article->oneHourAgo = '1 hour ago';
-$lang->article->hoursAgo = 'hours ago';
-
-$lang->article->hot   = 'Hot';
-$lang->article->views = 'Views';

@@ -59,14 +59,14 @@
           <div class="article-content">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->article->hot}</label>
+                <label class="label-hot vertical-center">{$lang->label->hot}</label>
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
             </div>
             <div class='article-ext'>
               <span class='views'>
-                {$article->views}{$lang->article->views}
+                {$article->views}{$lang->label->views}
               </span>
               <span class='comments'>
                 {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
@@ -108,14 +108,14 @@
           <div class="article-content" style="min-height: 0;">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->article->hot}</label>
+                <label class="label-hot vertical-center">{$lang->label->hot}</label>
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
             </div>
             <div class='article-ext'>
                 <span class='views'>
-                  {$article->views}{$lang->article->views}
+                  {$article->views}{$lang->label->views}
                 </span>
               <span class='comments'>
                   {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
