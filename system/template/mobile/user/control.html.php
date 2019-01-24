@@ -33,6 +33,7 @@
  .tag-block.user-recharge {margin:0px;height:74px;padding:12px 0px}
  .tag-block.user-recharge > .tag {height:50px;line-height:50px}
  .tag-block.user-recharge .btn-recharge {width:87px;height:30px;line-height:30px;border:1px solid #6F9AFE;color:#fff;background:linear-gradient(to right,#709BFE,#1B5AFF);float:right;text-align:center;margin-top:10px;margin-right:15px}
+
  .tag-score {width:90px;float:left;text-align:center}
  .score-number {height:30px;line-height:30px;font-size:3rem;font-weight:600}
  .score-title {height:20px;line-height:20px;color:#999}
@@ -41,7 +42,7 @@
  .user-control-nav > li {border:none;}
  .user-control-nav > li > a {font-size:1.7rem; border:none; text-align:left;}
  .user-control-nav > li > a > i {margin-right:0.5rem}
- .user-control-nav > li > a > .icon-chevron-right {float:right;color:#ddd}
+ .user-control-nav > li > a > .icon-chevron-right {float:right;color:#ddd;margin-top:2px}
 </style>
 <div class='tag-block user-image'>
   <div class='tag'>
@@ -69,7 +70,7 @@
 {if(commonModel::isAvailable('score'))}
 <div class='tag-block user-score'>
   <div class='tag'>
-    <div class='tag-body'>
+    <div class='tag-body' data-url='{$control->createLink('user', 'score')}'>
       <div class='tag-title'>
         <div>
           {$lang->user->myScore}

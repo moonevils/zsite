@@ -40,6 +40,11 @@ $config->user->navGroups->mobile = new stdclass();
 $config->user->navGroups->mobile->user    = 'order,address,cart';
 $config->user->navGroups->mobile->message = 'message,thread,reply,submission';
 
+$config->user->infoGroups->mobile = new stdclass();
+$config->user->infoGroups->mobile->name    = 'avatar,realname';
+$config->user->infoGroups->mobile->address = 'email,company,address';
+$config->user->infoGroups->mobile->contact = 'zipcode,mobile,phone,qq,gtalk';
+
 $config->user->relatedTables = array();
 $config->user->relatedTables[TABLE_MESSAGE][]  = 'account';
 $config->user->relatedTables[TABLE_MESSAGE][]  = '`to`';

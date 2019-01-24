@@ -10,75 +10,32 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {!js::import($control->config->webRoot . 'js/fingerprint/fingerprint.js')}
-<table class="table table-layout">
-  <tbody>
-    <tr>
-      <td colspan='2'><strong><i class='icon icon-user'></i> {$lang->user->profile}</strong></td>
-    </tr>
-    <tr>
-      <th>{$lang->user->realname}</th>
-      <td>
-        {$user->realname}
-        {if(isset($user->provider) and isset($user->openID) and strpos($user->account, "{$user->provider}}_") === false)}
-          <span class='bg-info-pale text-info'>{$lang->user->oauth->typeList[$user->provider]}</span>
-        {/if}
-      </td>
-    </tr>
-    <tr>
-      <th>{$lang->user->email}</th>
-      <td>{if(!empty($user->email))} {!str2Entity($user->email)} {/if}</td>
-    </tr>
-    <tr>
-      <th>{$lang->user->company}</th>
-      <td>{$user->company}</td>
-    </tr>
-    <tr>
-      <th>{$lang->user->address}</th>
-      <td>{$user->address}</td>
-    </tr>
-    <tr>
-      <th>{$lang->user->zipcode}</th>
-      <td>{$user->zipcode}</td>
-    </tr>
-    <tr>
-      <th>{$lang->user->mobile}</th>
-      <td>{!str2Entity($user->mobile)}</td>
-    </tr>
-    <tr>
-      <th>{$lang->user->phone}</th>
-      <td>{!str2Entity($user->phone)}</td>
-    </tr>
-    <tr>
-      <th>{$lang->user->qq}</th>
-      <td>{!str2Entity($user->qq)}</td>
-    </tr>
-    <tr>
-      <th>{$lang->user->gtalk}</th>
-      <td>{$user->gtalk}</td>
-    </tr>
-    <tr>
-      <td colspan='2'>
-        <div class='row'>
-          <div class='col-6'>{!html::a(inlink('edit'), "<i class='icon-pencil'></i> " . $lang->user->editProfile, "class='btn block primary' data-toggle='modal'")}</div>
-          <div class='col-6'>{!html::a(inlink('setemail'), "<i class='icon-envelope'></i> " . $lang->user->setEmail, "class='btn block primary' data-toggle='modal'")}</div>
-          {if(isset($user->provider) and isset($user->openID))}
-            {if(strpos($user->account, "{{$user->provider}}_") === false)}
-              <div class='col-6'>
-                {!html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID&unionID=$user->unionID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn block primary ajaxaction jsoner'")}
-              </div>
-            {else}
-              <br>
-              <div class='col-6'>{!html::a(inlink('oauthRegister'), "<i class='icon-link'></i> " . $lang->user->oauth->lblProfile, "class='btn block primary'")}</div>
-              <div class='col-6'>{!html::a(inlink('oauthBind'), "<i class='icon-link'></i> " . $lang->user->oauth->lblBind, "class='btn block primary'")}</div>
-            {/if}
-          {/if}
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+<style>
+  .user-control-nav {margin-bottom:1.2rem;}
+ .user-control-nav > li {border:none;}
+ .user-control-nav > li > a {font-size:1.7rem; border:none; text-align:left;}
+ .user-control-nav > li > a.avatar {height:80px;line-height:60px}
+ .user-control-nav > li > a > span {float:right;margin-right:16px}
+ .user-control-nav > li > a > img {float:right;margin-right:16px;width:60px;height:60px}
+ .user-control-nav > li > a > i {margin-right:0.5rem}
+ .user-control-nav > li > a > .icon-chevron-right {float:right;color:#ddd;margin-top:2px}
+</style>
+{foreach($control->config->user->infoGroups->mobile as $group => $items)}
+<ul class='nav nav-primary user-control-nav nav-stacked'>
+  {$navs = explode(',', $items)}
+  {foreach($navs as $nav)}
+  {if($nav == 'avatar')}
+    {$html = html::image('/theme/mobile/common/img/default-head.png')}
+    {$class = 'btn avatar default'} 
+  {else}
+    {$html = '<span>' . $user->$nav . '</span>'}
+    {$class = 'btn default'} 
+  {/if}
+  <li>{!html::a($control->createLink('user', 'editInfo', 'field=' . $nav), $lang->user->$nav . '<i class="icon-chevron-right"></i>' . $html, "class='" . $class . "'")}</li>
+  {/foreach}
+</ul>
+{/foreach}
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

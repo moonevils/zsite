@@ -347,10 +347,11 @@ class user extends control
     public function profile()
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
-        $this->view->title      = $this->lang->user->profile;
-        $this->view->user       = $this->user->getByAccount($this->app->user->account);
-        $this->view->mobileURL  = helper::createLink('user', 'profile', '', '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'profile', '', '', 'html');
+        $this->view->title       = $this->lang->user->profile;
+        $this->view->mobileTitle = $this->lang->user->profile;
+        $this->view->user        = $this->user->getByAccount($this->app->user->account);
+        $this->view->mobileURL   = helper::createLink('user', 'profile', '', '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('user', 'profile', '', '', 'html');
         $this->display();
     }
 
@@ -484,7 +485,32 @@ class user extends control
             $this->display('user', 'edit.front');
         }
     }
+    
+    /**
+     * Edit a user info. 
+     * 
+     * @param  string    $field 
+     * @access public
+     * @return void
+     */
+    public function editInfo($field = '')
+    {
+        $account = $this->app->user->account;
+        $user = $this->user->getByAccount($account);
 
+        if(!empty($_POST))
+        {
+            $this->user->update($account);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => inlink('profile')));
+        }
+
+        $this->view->user        = $user;
+        $this->view->title       = $this->lang->user->update;
+        $this->view->mobileTitle = $this->lang->user->update;
+        $this->view->field       = $field;
+        $this->display();
+    }
     /**
      * Set email. 
      * 
