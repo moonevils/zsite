@@ -463,4 +463,5 @@ $lang->k .= '企業建站，就用蟬知cms;';
 $lang->k .= '蟬知企業建站系統，開源免費的php CMS系統';
 
 /* Labels */
+$lang->label = new stdclass();
 $lang->label->hot   = '熱';

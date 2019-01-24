@@ -59,7 +59,7 @@
   <div class='comment-post vertical-center'>
     <form class='comment-form vertical-center' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
       <div class='form-group required'>
-        <input class="comment-input" type="text" name="content" id="commentContent" value="" rows="5" placeholder="   {$lang->message->content}">
+        <input class="comment-input" type="text" name="content" id="commentContent" value="" rows="5" placeholder="   {$lang->comment->inputPlaceholder}">
         {!html::hidden('objectType', $objectType)}
         {!html::hidden('objectID', $objectID)}
       </div>

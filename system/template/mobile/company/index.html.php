@@ -18,9 +18,8 @@
     <div class='block-title vertical-center'>
       <strong class="vertical-center block-title-align">
         <span class='vertical-line'></span>
-        <span class="block-title-text">公司简介</span>
+        <span class="block-title-text">{$lang->company->desc}</span>
       </strong>
-      <span class="more">更多</span>
     </div>
     <div class='company-desc'>
       <div class="title">
@@ -38,9 +37,8 @@
   <div class='block-title vertical-center'>
     <strong class="vertical-center block-title-align">
       <span class='vertical-line'></span>
-      <span class="block-title-text">联系我们</span>
+      <span class="block-title-text">{$lang->company->contactUs}</span>
     </strong>
-    <span class="more">更多</span>
   </div>
   <div class='contact'>
     <div class="vertical-center">

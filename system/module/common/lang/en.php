@@ -464,4 +464,5 @@ $lang->k .= 'Website building, choose Zsite;';
 $lang->k .= 'Zsite, free and open source php CMS.';
 
 /* Labels */
+$lang->label = new stdclass();
 $lang->label->hot   = 'Hot';
