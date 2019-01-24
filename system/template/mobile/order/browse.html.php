@@ -12,7 +12,6 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 <div class='panel-section'>
   <div class='panel-heading'>
     <div class='title strong'><i class='icon icon-shopping-cart'></i> {$lang->order->admin}</div>

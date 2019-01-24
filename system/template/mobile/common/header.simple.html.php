@@ -25,7 +25,7 @@
     .both-sides .icon-block.left img {width:10px;height:17.5px}
     .both-sides .icon-block.home img {width:17px;height:17px}
     .both-sides .divider-line {margin:6.75px 0px;border-left:1px solid #ddd;float:left;height:18.5px}
-    .middle-title {width:50%;margin:0 auto;line-height:32px;font-size:2rem;text-align:center;font-weight:600}
+    .middle-title {width:50%;margin:0 auto;line-height:32px;font-size:1.8rem;text-align:center;font-weight:600}
   </style>
   {if($source == 'bottom')}
   <style>

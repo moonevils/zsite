@@ -1677,4 +1677,21 @@ class commonModel extends model
         }
         return false;
     }
+
+    /**
+     * check has online payment.
+     * 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function hasOnlinePayment()
+    {
+        global $config;
+        if(!self::isAvailable('shop')) return false;
+        if(strpos($config->shop->payment, 'alipay') !== false) return true;
+        if(strpos($config->shop->payment, 'wechatpay') !== false) return true;
+        return false;
+    }
+
 }

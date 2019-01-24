@@ -6,7 +6,9 @@
       <div class='panel-heading'>
         <strong class='red'>{!printf($lang->score->lblTotal, $user->score, $user->rank)}</strong>
         <div class='panel-actions'>
-          {if(strpos($control->config->shop->payment, 'alipay') !== false)} {!html::a($control->createLink('score', 'buyScore'), $control->lang->user->buyScore, "class='btn btn-primary'")} {/if}
+          {if(commonModel::hasOnlinePayment())}
+            {!html::a($control->createLink('score', 'buyScore'), $control->lang->user->buyScore, "class='btn btn-primary'")}
+          {/if}
         </div>
       </div>
       <table class='table table-hover table-striped'>

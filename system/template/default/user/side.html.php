@@ -21,7 +21,13 @@ ul.user-control-nav > li.nav-icon:last-child > a{ border-bottom:1px solid #DDD;}
 {@return helper::cd()}
 {/if}
 <div class='col-md-2'>
-  {foreach($control->config->user->navGroups as $group => $items)}
+  {if(!commonModel::isAvailable('shop'))}
+    {@unset($control->config->user->navGroups->desktop->order)}
+  {/if}
+  {if(!commonModel::hasOnlinePayment())}
+    {@unset($lang->user->control->menus['recharge'])}
+  {/if}
+  {foreach($control->config->user->navGroups->desktop as $group => $items)}
   <ul class='nav nav-primary nav-stacked user-control-nav'>
     {if(isset($lang->user->navGroups->$group))}
       <li class='nav-heading'> {$lang->user->navGroups->$group}</li>

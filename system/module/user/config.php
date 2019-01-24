@@ -31,9 +31,14 @@ $config->user->level[6] = 50000;
 $config->user->level[7] = 200000;
 
 $config->user->navGroups = new stdclass();
-$config->user->navGroups->user    = 'profile,message,score,recharge';
-$config->user->navGroups->order   = 'order,address';
-$config->user->navGroups->message = 'thread,reply,submission';
+$config->user->navGroups->desktop = new stdclass();
+$config->user->navGroups->desktop->user    = 'profile,message,score,recharge';
+$config->user->navGroups->desktop->order   = 'order,address';
+$config->user->navGroups->desktop->message = 'thread,reply,submission';
+
+$config->user->navGroups->mobile = new stdclass();
+$config->user->navGroups->mobile->user    = 'order,address,cart';
+$config->user->navGroups->mobile->message = 'message,thread,reply,submission';
 
 $config->user->relatedTables = array();
 $config->user->relatedTables[TABLE_MESSAGE][]  = 'account';

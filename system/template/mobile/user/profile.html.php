@@ -12,7 +12,6 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 {!js::import($control->config->webRoot . 'js/fingerprint/fingerprint.js')}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
 <table class="table table-layout">
   <tbody>
     <tr>

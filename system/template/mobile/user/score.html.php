@@ -1,9 +1,12 @@
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <div class='row'>
-  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
   <div class='col-md-10'>
     <div class='panel-section'>
-      <div class='panel-heading'>{!html::a($control->createLink('score', 'buyScore'), $lang->user->buyScore, "class='btn primary block' data-toggle='modal'")}</div>
+      <div class='panel-heading'>
+        {if(commonModel::hasOnlinePayment())}
+        {!html::a($control->createLink('score', 'buyScore'), $lang->user->buyScore, "class='btn primary block' data-toggle='modal'")}   
+        {/if}
+      </div>
       <div class='panel-heading'>
         <strong class='red'>{!printf($lang->score->lblTotal, $user->score, $user->rank)}</strong>
       </div>
