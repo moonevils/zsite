@@ -12,12 +12,12 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 
-<div class='manage vertical-center'>
+<div class='address-manage vertical-center'>
   <p name='operate' current='manage' style='{if(count($addresses) == 0)}display:none;{/if}'>{$lang->address->manage}</p>
   <input type='hidden' name='manage' value='{$lang->address->manage}'>
   <input type='hidden' name='manageDone' value='{$lang->address->manageDone}'>
 </div>
-<div class='panel'>
+<div class='panel address-list'>
   <div class='panel-body'>
     <div class='title strong vertical-center'>
         <span class='vertical-line'></span><span class='browse'>{$lang->address->browse}</span>

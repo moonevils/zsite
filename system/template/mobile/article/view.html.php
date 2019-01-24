@@ -26,7 +26,7 @@
     </div>
     <div class='caption text-muted vertical-center article-author'>
       <div class="avatar vertical-center">
-        {if(isset($author->avatar))}
+        {if(!empty($author->avatar))}
         <img src="{$author->avatar}" alt="">
         {else}
         <i class="icon icon-user icon-10x"></i>
