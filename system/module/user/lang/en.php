@@ -101,11 +101,11 @@ $lang->user->reply       = 'Reply';
 $lang->user->submission  = 'Submission';
 
 $lang->user->noLogged       = "NO LOGIN";
-$lang->user->clickLogin     = "click login";
-$lang->user->myScore        = "my score";
-$lang->user->totalScore     = "total score";
-$lang->user->levelScore     = "level score";
-$lang->user->scoreRecharge  = "score recharge";
+$lang->user->clickLogin     = "Click to login";
+$lang->user->myScore        = "My Score";
+$lang->user->totalScore     = "Total score";
+$lang->user->levelScore     = "Level score";
+$lang->user->scoreRecharge  = "Buy Score";
 
 $lang->user->userHistory       = "User History";
 $lang->user->threadHistory     = "Post";
