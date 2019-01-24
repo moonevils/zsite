@@ -1,6 +1,6 @@
 $(function () {
     $('.item').on('click', function () {
-        if ($('.manage').children('p[name="operate"]').attr('current') === 'manageDone') {
+        if ($('.address-manage').children('p[name="operate"]').attr('current') === 'manageDone') {
             if ($(this).find('input[name="deliveryAddress"]').attr('checked') === false) {
                 $(this).find('input[name="deliveryAddress"]').attr('checked', true);
             } else {
@@ -10,7 +10,7 @@ $(function () {
         }
     });
 
-    $('.manage').on('click', function () {
+    $('.address-manage').on('click', function () {
         if ($(this).children('p[name="operate"]').attr('current') === 'manage') {
             $(this).children('p[name="operate"]').html($(this).children('input[name="manageDone"]').val());
             $(this).children('p[name="operate"]').attr('current', 'manageDone');

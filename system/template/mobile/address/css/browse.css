@@ -162,6 +162,7 @@
 .address-list .address-edit {
     margin: 12px 0;
     width: 95%;
+    line-height: 30px;
 }
 
 .address-list .address-edit .name {
