@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 
 <div class='panel-section'>
   <div class='panel-heading'>
@@ -28,8 +28,6 @@
       </a>
     {/foreach}
   </div>
-  <div class='panel-footer'>
-    {$pager->show('justify')}
-  </div>
+  {$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
 </div>
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
