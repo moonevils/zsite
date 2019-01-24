@@ -11,20 +11,20 @@
  */
 $lang->install->common  = 'Install';
 $lang->install->next    = 'Next';
-$lang->install->pre     = 'Return';
+$lang->install->pre     = 'Back';
 $lang->install->reload  = 'Refresh';
 $lang->install->error   = 'Error';
 
 $lang->install->start            = 'Install';
 $lang->install->keepInstalling   = 'Continue installation';
-$lang->install->welcome          = 'Thank you for choosing Zsite, the most powerful portal system!';
+$lang->install->welcome          = 'Thank you for choosing Zsite, the powerful CMS!';
 $lang->install->license          = 'License';
 $lang->install->desc             = <<<EOT
 <p>With Zsite, you can do</p>
 <blockquote>
   <ul>
     <li><strong>Branding</strong>: build official website and promote your brand to the world.</li>
-    <li><strong>Marketing</strong>: SEO, email, wechat, weibo, etc.</li>
+    <li><strong>Marketing</strong>: SEO, Email, Wechat, weibo, etc.</li>
     <li><strong>E-commerce</strong>: product demonstration and online sales.</li>
     <li><strong>CRM</strong>: aftersales support and maintain clients.</li>
   </ul>
@@ -63,20 +63,20 @@ $lang->install->chmod        = '"%s" must be writable. Command for Linux: <br />
 
 $lang->install->settingDB      = 'Database Settings';
 $lang->install->dbHost         = 'Database Host';
-$lang->install->dbHostNote     = 'If you have no access to 127.0.0.1, please try localhost.';
+$lang->install->dbHostNote     = 'If you have no access to 127.0.0.1, try localhost.';
 $lang->install->dbPort         = 'Database Port';
 $lang->install->dbUser         = 'Database User';
 $lang->install->dbPassword     = 'Database Password';
 $lang->install->dbName         = 'Database Name';
 $lang->install->dbPrefix       = 'Table Prefix';
 $lang->install->createDB       = 'Auto Create Database';
-$lang->install->clearDB        = 'Clear data if tables already exist.';
+$lang->install->clearDB        = 'Clear data if tables exist.';
 $lang->install->importDemoData = 'Import demo data';
 
 $lang->install->errorDBName        = "'.' is not allowed in database name.";
 $lang->install->errorConnectDB     = 'Database connection failed. ';
 $lang->install->errorCreateDB      = 'Database creation failed.';
-$lang->install->errorDBExists      = 'Database exists.  Go back and check the "Clear Data", then try it again.';
+$lang->install->errorDBExists      = 'Database exists. Go back and check the "Clear Data", then try it again.';
 $lang->install->errorCreateTable   = 'Table creation failed.';
 
 $lang->install->setConfig  = 'Database Config';

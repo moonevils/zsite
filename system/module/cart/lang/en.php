@@ -2,7 +2,7 @@
 $lang->cart->common = 'Shopping Cart';
 $lang->cart->browse = 'My Cart';
 
-$lang->cart->noProducts     = "Your shopping cart is Empty.";
+$lang->cart->noProducts     = "Your shopping cart is empty.";
 $lang->cart->pickProducts   = "Keep Shopping";
 $lang->cart->goAccount      = "Check Out";
 $lang->cart->goHome         = "Homepage";

@@ -31,9 +31,9 @@ $lang->guarder->placeholder    = 'numbers/letters';
 $lang->guarder->password       = 'Password';
 $lang->guarder->passwordHolder = 'Enter current account password';
 $lang->guarder->identityTip    = 'Enter IP, Email, account, or sensitive words.';
-$lang->guarder->captchaTip     = 'Once security qyestions are set, the front will only call those questions at random.';
+$lang->guarder->captchaTip     = 'Once security questions are set, the front will only call those questions at random.';
 
-$lang->guarder->verify        = 'Current action requires admin verification for securities.';
+$lang->guarder->verify        = 'Current action requires admin verification for security reasons.';
 $lang->guarder->okFile        = 'File Mode';
 $lang->guarder->created       = 'Created and Continue';
 $lang->guarder->email         = 'Email verification';
@@ -42,19 +42,19 @@ $lang->guarder->captcha       = 'Verification Code';
 $lang->guarder->needVerify    = 'Admin verification is required.';
 $lang->guarder->emailFail     = 'Please enter correct verification code.';
 $lang->guarder->questionFail  = 'Please enter correct answers to security question.';
-$lang->guarder->verifySuccess = 'Verified! Please continue.';
+$lang->guarder->verifySuccess = 'Verified! Continue.';
 $lang->guarder->noConfigure   = "Email settings cannot be found.";
 $lang->guarder->noEmail       = "No Email address entered";
 $lang->guarder->noQuestion    = "No security questions set up.";
 $lang->guarder->noCaptcha     = "Email verification is disabled.";
-$lang->guarder->okFileVerify  = "Please create <span class='red'>%s</span> on your server. If this file exists already, reopen it and save again.";
+$lang->guarder->okFileVerify  = "Please create <span class='red'>%s</span> on your server. If this file exists, reopen it and save again.";
 $lang->guarder->sendSuccess   = 'Verification code has been sent to %s';
 $lang->guarder->options       = 'Verification';
 
 $lang->guarder->blacklistModes['all']      = 'All';
 $lang->guarder->blacklistModes['ip']       = 'IP';
 $lang->guarder->blacklistModes['account']  = 'Account';
-$lang->guarder->blacklistModes['keywords'] = 'Keywords';
+$lang->guarder->blacklistModes['keywords'] = 'Tags';
 $lang->guarder->blacklistModes['guard']    = 'Website';
 $lang->guarder->blacklistModes['email']    = 'Email';
 

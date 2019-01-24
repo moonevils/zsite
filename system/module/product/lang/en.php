@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->product->common = 'Products';
-$lang->product->home   = 'Products';
+$lang->product->common = 'Product';
+$lang->product->home   = 'Product';
 
 $lang->product->id         = 'ID';
 $lang->product->category   = 'Category';
@@ -27,7 +27,7 @@ $lang->product->unit       = 'Unit';
 $lang->product->price      = 'Price';
 $lang->product->promotion  = 'On Sale';
 $lang->product->amount     = 'Quantity';
-$lang->product->keywords   = 'Keywords';
+$lang->product->keywords   = 'Tags';
 $lang->product->desc       = 'Introduction';
 $lang->product->content    = 'Details';
 $lang->product->author     = 'Author';
@@ -41,7 +41,7 @@ $lang->product->stick      = 'Sticky';
 $lang->product->order      = 'ID';
 $lang->product->unsaleable = 'Not for sale';
 $lang->product->attribute  = 'More';
-$lang->product->custom     = 'Keywords';
+$lang->product->custom     = 'Tags';
 $lang->product->sales      = 'Price';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
@@ -50,7 +50,7 @@ $lang->product->currency  = 'Currency';
 $lang->product->stock     = 'Inventory';
 $lang->product->negotiate = 'Negotiate';
 
-$lang->product->list         = 'Products';
+$lang->product->list         = 'Product';
 $lang->product->view         = 'View';
 $lang->product->hot          = 'Hot';
 $lang->product->admin        = 'Manage';
@@ -162,4 +162,4 @@ $lang->product->namePositionOptions = array();
 $lang->product->namePositionOptions['left']   = 'Left';
 $lang->product->namePositionOptions['center'] = 'Center';
 
-$lang->product->noCategoriesTip = 'You have not added the categories, please add the categories at first.';
+$lang->product->noCategoriesTip = 'You have not added any categories. Please add a category at first.';

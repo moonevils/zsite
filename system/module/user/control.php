@@ -333,6 +333,7 @@ class user extends control
         $this->view->desktopURL  = helper::createLink('user', 'control', '', '', 'html');
         $this->view->title       = $this->lang->user->control->common;
         $this->view->mobileTitle = $this->lang->user->control->common;
+        $this->view->user        = $this->user->getByAccount($this->app->user->account);
         $this->view->source      = $source;
         $this->display();
     }
@@ -425,6 +426,7 @@ class user extends control
         $this->view->title      = $this->lang->user->messages;
         $this->view->messages   = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
         $this->view->pager      = $pager;
+        $this->view->source     = 'bottom';
         $this->view->mobileURL  = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'html');
 
