@@ -254,7 +254,7 @@ $(document).ready(function()
         {
             products += $(this).val() + ',';
         });
-        $.getJSON(createLink('cart', 'deletes', 'products=' + products), function(data) 
+        $.getJSON(createLink('cart', 'batchdelete', 'products=' + products), function(data) 
         {
             window.location.reload();
         });
