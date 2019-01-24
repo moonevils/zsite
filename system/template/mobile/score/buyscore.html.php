@@ -20,8 +20,7 @@
       </div>
       <div class='modal-body'>
 {else}
-  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
+  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
   <div class='panel panel-section'>
     <div class='panel-heading'><strong>{$lang->user->buyScore}</strong></div>
     <div class='panel-body'>

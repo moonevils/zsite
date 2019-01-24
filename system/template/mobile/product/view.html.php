@@ -148,6 +148,14 @@
   </div>
   {if(!empty($product->files))} <section class='article-files'> {$control->loadModel('file')->printFiles($product->files)} </section> {/if}
 </div>
+{if(commonModel::isAvailable('message'))}
+<div id='comments'>
+  <div id='commentBox'>
+    {!echo $control->fetch('message', 'comment', "objectType=product&objectID={{$product->id}}")}
+  </div>
+  {!html::a('', '', "name='comment'")}
+</div>
+{/if}
 </div>
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_view', 'bottom')}</div>
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>

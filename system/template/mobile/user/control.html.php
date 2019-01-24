@@ -59,7 +59,7 @@
       <div class='score-number'>{$user->rank}</div>
       <div class='score-title'>{$lang->user->levelScore}</div>
     </div> 
-    <div class='btn-recharge'>{$lang->user->scoreRecharge}</div>
+    <div class='btn-recharge' data-url='{$control->createLink('score', 'buyscore')}'>{$lang->user->scoreRecharge}</div>
   </div>
 </div>
 {/if}
@@ -85,7 +85,7 @@
 <script>
 $(function()
 {
-    $(document).on('click', '.tag-body', function()
+    $(document).on('click', '.tag-body, .btn-recharge', function()
     {
         window.location.href= $(this).attr('data-url');
     });
