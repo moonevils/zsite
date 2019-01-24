@@ -59,7 +59,15 @@
           <div class="article-content">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->label->hot}</label>
+                {if($i==1)}
+                <label class="label-hot vertical-center">
+                  {if($method == 'getLatest')}
+                    {$lang->label->hot}
+                  {else}
+                    {$lang->label->latest}
+                  {/if}
+                </label>
+                {/if}
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
@@ -108,7 +116,15 @@
           <div class="article-content" style="min-height: 0;">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->label->hot}</label>
+                {if($i==1)}
+                <label class="label-hot vertical-center">
+                  {if($method == 'getLatest')}
+                    {$lang->label->hot}
+                  {else}
+                    {$lang->label->latest}
+                  {/if}
+                </label>
+                {/if}
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
@@ -220,7 +236,6 @@
   }
 
   .block{$block->id} .label-hot {
-    width: 14px;
     height: 14px;
     border-radius: 2px;
     background-color: #F73035;

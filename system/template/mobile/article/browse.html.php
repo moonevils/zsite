@@ -56,7 +56,9 @@
         <div class="article-content">
           <div class='vertical-start'>
             <strong class="article-title">
+              {if($i==1)}
               <label class="label-hot vertical-center">{$lang->label->hot}</label>
+              {/if}
               {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
               {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
             </strong>

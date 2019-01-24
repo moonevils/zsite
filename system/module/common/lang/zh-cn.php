@@ -466,4 +466,5 @@ $lang->k .= '蝉知企业建站系统，开源免费的php CMS系统';
 
 /* Labels */
 $lang->label = new stdclass();
-$lang->label->hot   = '热';
+$lang->label->hot    = '热';
+$lang->label->latest = '新';
