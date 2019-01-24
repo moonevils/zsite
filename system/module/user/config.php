@@ -40,6 +40,7 @@ $config->user->navGroups->mobile = new stdclass();
 $config->user->navGroups->mobile->user    = 'order,address,cart';
 $config->user->navGroups->mobile->message = 'message,thread,reply,submission';
 
+$config->user->infoGroups = new stdclass();
 $config->user->infoGroups->mobile = new stdclass();
 $config->user->infoGroups->mobile->name    = 'avatar,realname';
 $config->user->infoGroups->mobile->address = 'email,company,address';
