@@ -59,7 +59,7 @@ $config->rights->guest['user']['ignorebind']    = 'ignorebind';
 $config->rights->guest['user']['message']       = 'message';
 $config->rights->guest['user']['agreement']     = 'agreement';
 $config->rights->guest['user']['wechatbind']    = 'wechatbind';
-$config->rights->guest['user']['control']    = 'control';
+$config->rights->guest['user']['control']       = 'control';
 
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';
