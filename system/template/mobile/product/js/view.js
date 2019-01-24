@@ -18,6 +18,14 @@
     $(function(){$('.input-number').numberInput();});
 }(Zepto));
 
+function setCartCount()
+{
+    $.getJSON(createLink('cart', 'count'), function(data)
+    {
+        $('.label.badge.red.circle').text(data.count);
+    })
+}
+setCartCount();
 $(function()
 {
     $(document).on('click', '.btn-buy', function()
@@ -41,10 +49,7 @@ $(function()
                     }
                     else if(window.v && window.v.addToCartSuccess)
                     {
-                        $.getJSON(createLink('cart', 'count'), function(data)
-                        {
-                            $('.label.badge.red.circle').text(data.count);
-                        })
+                        setCartCount();
                         $.messager.success(window.v.addToCartSuccess);
                     }
                 }
