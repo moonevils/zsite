@@ -30,8 +30,6 @@
           {
               $class = $type == 'mobile_top' ? "class='active'" : '';
               echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $class) . '</li>';
-              $class = $type == 'mobile_bottom' ? "class='active'" : '';
-              echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom, $class) . '</li>';
           }
           $class = $type == 'mobile_blog' ? "class='active'" : '';
           echo "<li $class>" . html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog, $class) . '</li>';
