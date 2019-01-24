@@ -25,7 +25,7 @@ $lang->article->content    = 'Text';
 $lang->article->source     = 'Source';
 $lang->article->copySite   = 'Site';
 $lang->article->copyURL    = 'URL';
-$lang->article->keywords   = 'Keywords';
+$lang->article->keywords   = 'Tags';
 $lang->article->summary    = 'Summary';
 $lang->article->author     = 'Author';
 $lang->article->editor     = 'Edit';
@@ -33,7 +33,7 @@ $lang->article->addedDate  = 'Publish On';
 $lang->article->editedDate = 'Edit On';
 $lang->article->status     = 'Status';
 $lang->article->type       = 'Type';
-$lang->article->views      = 'Views';
+$lang->article->views      = 'View';
 $lang->article->comments   = 'Comment';
 $lang->article->stick      = 'Sticky';
 $lang->article->order      = 'Ranking';
@@ -53,7 +53,7 @@ $lang->article->confirmReject    = 'Do you want to reject it?';
 $lang->submission= new stdclass();
 $lang->submission->common  = 'Submit';
 $lang->submission->check   = 'Review';
-$lang->submission->list    = 'Submissions';
+$lang->submission->list    = 'Submission';
 $lang->submission->publish = 'Pass';
 $lang->submission->reject  = 'Reject';
 
@@ -70,7 +70,7 @@ $lang->submission->typeList['book']    = 'Book';
 $lang->article->onlyBody = 'Display body only (for custom).';
 
 $lang->article->list          = 'List';
-$lang->article->admin         = 'Maintain';
+$lang->article->admin         = 'Manage';
 $lang->article->create        = 'Add Article';
 $lang->article->setcss        = 'CSS Settings';
 $lang->article->setjs         = 'JS Settings';
@@ -80,7 +80,7 @@ $lang->article->images        = 'Image';
 
 $lang->article->submission     = 'Submit';
 $lang->article->submissionTime = 'Submit On';
-$lang->article->noSubmission   = 'You have no submissions yet. Submit and earn points NOW!';
+$lang->article->noSubmission   = 'You have no submissions yet. Submit and earn points!';
 
 $lang->article->orderBy = new stdclass();
 $lang->article->orderBy->time = 'Time';
@@ -148,9 +148,9 @@ $lang->article->forwardFrom = 'Repost from';
 $lang->article->noCategoriesTip = 'You have not added the categories, please add the categories at first';
 
 $lang->article->noCategories = array();
-$lang->article->noCategories['article'] = 'You have not added the categories for article, please add the categories at first.';
-$lang->article->noCategories['blog']    = 'You have not added the categories for blog, please add the categories at first.';
-$lang->article->noCategories['video']   = 'You have not added the categories for video, please add the categories at first.';
+$lang->article->noCategories['article'] = 'You have not added the categories for article. Please add the categories at first.';
+$lang->article->noCategories['blog']    = 'You have not added the categories for blog. Please add the categories at first.';
+$lang->article->noCategories['video']   = 'You have not added the categories for video. Please add the categories at first.';
 
 $lang->article->blog = new stdclass();
 $lang->article->blog->category                   = 'Category';

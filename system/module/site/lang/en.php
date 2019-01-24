@@ -12,7 +12,7 @@
 $lang->site->common        = "Site";
 
 $lang->site->type            = 'Site Type';
-$lang->site->tidy            = 'Tiny Html';
+$lang->site->tidy            = 'Tidy Html';
 $lang->site->requestType     = 'Request Type';
 $lang->site->status          = 'Site Status';
 $lang->site->pauseTip        = 'Message';
@@ -22,8 +22,8 @@ $lang->site->lang            = 'Site Language';
 $lang->site->defaultLang     = 'Default Language';
 $lang->site->domain          = 'Domain';
 $lang->site->allowedDomain   = 'Allowed Domain';
-$lang->site->keywords        = 'Keywords';
-$lang->site->indexKeywords   = 'Homepage Keywords';
+$lang->site->keywords        = 'Tags';
+$lang->site->indexKeywords   = 'Homepage Tags';
 $lang->site->meta            = 'Meta Tags';
 $lang->site->desc            = 'Description';
 $lang->site->icpSN           = 'ICP SN';

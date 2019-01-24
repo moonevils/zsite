@@ -11,8 +11,8 @@
 $lang->score->back        = 'Back';
 $lang->score->rankingList = 'Ranking';
 $lang->score->rule        = 'Rules';
-$lang->score->statement   = 'Points Statement';
-$lang->score->stateDesc   = 'Point Statement is generated per user based on the total points acquired in last month.';
+$lang->score->statement   = 'Point Statement';
+$lang->score->stateDesc   = 'Point Statement is generated per user and based on the total points acquired in last month.';
 
 $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
