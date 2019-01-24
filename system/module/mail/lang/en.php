@@ -43,7 +43,7 @@ $lang->mail->sending        = "Sending an Email to %s. Please wait...";
 $lang->mail->successSended  = 'Email has been sent to %s.';
 $lang->mail->needConfigure  = 'Eamil configuration is not found. Please configure first.';
 $lang->mail->error          = 'Email address error. Please enter your Email address correcrly.'; 
-$lang->mail->trySendlater   = 'Try to send it again 3 mins later.'; 
+$lang->mail->trySendlater   = 'Try to send it again 3 minutes later.'; 
 
 $lang->mail->captcha     = 'Verification Code';
 $lang->mail->sendContent = <<<EOT
