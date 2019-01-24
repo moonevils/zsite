@@ -26,9 +26,9 @@ $(function()
         },
         onSuccess: function(response)
         {
-            localStorage.setItem('commentContent', '');
             if(response.result == 'success')
             {
+                localStorage.setItem('commentContent', '');
                 $commentForm.find('#commentContent').val('');
                 setTimeout($.refreshCommentList, 200)
             }
