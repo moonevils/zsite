@@ -61,7 +61,7 @@
                 {else}
                   <div><a href='{$url}'>{$product->name}</a></div>
                 {/if}
-                <div>
+                <div class='card-price'>
                 {if(!$product->unsaleable)}
                   {if($product->negotiate)}
                     <strong class='text-danger'>{$model->lang->product->negotiate}</strong>

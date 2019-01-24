@@ -13,12 +13,6 @@
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
 <script>{!echo "place" . md5(time()) . "='" . $config->idListPlaceHolder . '' . $config->idListPlaceHolder . "';"}</script>
 {!js::set('pageLayout', $control->block->getLayoutScope('product_browse', $category->id))}
-<style>
-  .text-danger {color:#D0021B}
-  .text-muted.text-line-through {color:#999999}
-  .card:active, .card:hover {box-shadow:0 0px 0px}
-  .cards > .row {margin-right:-10px;margin-left:-10px;float:none;width:100%}
-</style>
 <div class='block-region region-top blocks' data-region='product_browse-top'>{$control->loadModel('block')->printRegion($layouts, 'product_browse', 'top')}</div>
 <div class='panel-section'>
   <div class='panel-heading page-header'>
@@ -56,16 +50,16 @@
               </div>
               {if(!$product->unsaleable)}
                 {if($product->negotiate)}
-                  <div style='margin-top:6px'><strong class='text-danger'>{$lang->product->negotiate}</strong></div>'
+                  <div class='card-price'><strong class='text-danger'>{$lang->product->negotiate}</strong></div>'
                 {else}
                   {if($product->promotion != 0)}
-                    <div style='margin-top:6px'><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->promotion}</strong>
+                    <div class='card-price'><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->promotion}</strong>
                       {if($product->price != 0)}
                       <small class='text-muted text-line-through'>{!echo $control->config->product->currencySymbol . $product->price}</small>
                       {/if}
                     </div>
                   {elseif($product->price != 0)}
-                    <div style='margin-top:6px'><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->price}</strong></div>
+                    <div class='card-price'><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->price}</strong></div>
                   {/if}
                 {/if}
               {/if}

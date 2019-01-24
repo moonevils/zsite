@@ -118,3 +118,4 @@ body.with-appbar-bottom {padding-bottom: 51px;}
 .cards-products > .row > .col > .card .card-img-fixed img {position:absolute;max-width:100%;margin:auto;left:0px;top:0px;right:0px;bottom:0px}
 .cards-products > .row > .col > .card .card-content{padding:12px 0px}
 .cards-products > .row > .col > .card .card-content > div:first-child{height:40px;overflow:hidden}
+.cards-products > .row > .col > .card .card-price{margin-top:6px}
