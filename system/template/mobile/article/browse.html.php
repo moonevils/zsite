@@ -56,7 +56,9 @@
         <div class="article-content">
           <div class='vertical-start'>
             <strong class="article-title">
+              {if($i==1)}
               <label class="label-hot vertical-center">{$lang->label->hot}</label>
+              {/if}
               {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
               {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
             </strong>
@@ -71,19 +73,7 @@
             </span>
             {/if}
             <span class='pub-time'>
-              {$pubTime = strtotime($article->addedDate)}
-              {$pubTimeLen = time() - $pubTime}
-              {if($pubTimeLen > 86400)}
-                {!substr($article->addedDate, 0, 10)}
-              {else}
-                {$minute = floor($pubTimeLen / 60)}
-                {$hour = floor($pubTimeLen / 3600)}
-                {if($hour == 0)}
-                  {!$minute == 1 ? $lang->date->oneMinuteAgo : $minute . $lang->date->minutesAgo}
-                {else}
-                  {!$hour == 1 ? $lang->date->oneHourAgo : $hour . $lang->date->hoursAgo}
-                {/if}
-              {/if}
+              {!formatTime($article->addedDate ,'publish')}
             </span>
           </div>
         </div>

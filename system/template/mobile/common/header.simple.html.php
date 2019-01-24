@@ -26,12 +26,10 @@
     .both-sides .icon-block.home img {width:17px;height:17px}
     .both-sides .divider-line {margin:6.75px 0px;border-left:1px solid #ddd;float:left;height:18.5px}
     .middle-title {width:50%;margin:0 auto;line-height:32px;font-size:1.8rem;text-align:center;font-weight:600}
-  </style>
-  {if($source == 'bottom')}
-  <style>
+  {if(!empty($source) && $source == 'bottom')}
     .both-sides.left{display:none}
-  </style>
   {/if} 
+  </style>
   <div class='block-region region-all-top blocks' data-region='all-top'>
   <nav class='appnav fix-top appnav-auto' id='appnav' data-ve='navbar' data-type='mobile_top' style='top:0px;background:#fff;box-shadow: 0 0px 0px;height:48px'>
   <div class='mainnav' style='padding:8px 7px'>

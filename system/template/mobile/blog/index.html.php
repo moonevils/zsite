@@ -1,6 +1,6 @@
 {*
 /**
- * The browse view file of blog for mobile template of chanzhiEPS.
+ * The index view file of blog for mobile template of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
@@ -91,9 +91,7 @@
           {/if}
         </div>
       </div>
-      {if($i < count($articles))}
-      <div class='divider'></div>
-      {/if}
+      {if($i < count($articles))} <div class='divider'></div> {/if}
     {/foreach}
   </div>
 </div>

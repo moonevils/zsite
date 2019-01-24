@@ -86,7 +86,7 @@ class messageModel extends model
 
         if(!empty($replies))
         {
-            if($type !== 'simple')
+            if($this->app->clientDevice == 'mobile')
             {
                 echo "<div class='replies'>";
                 foreach($replies as $reply)
@@ -100,6 +100,25 @@ class messageModel extends model
                     echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' class='pull-right' id='reply{$reply->id}' data-icon='reply' data-title='{$this->lang->message->reply}'");
                     echo '</div>';
                     echo "<div class='reply-body'>";
+                    echo nl2br($reply->content);
+                    echo '</div>';
+                    $this->getFrontReplies($reply);
+                    echo "</div>";
+                }
+                echo "</div>";
+            }
+            elseif($type !== 'simple')
+            {
+                echo "<div class='replies'>";
+                foreach($replies as $reply)
+                {
+                    echo "<div class='reply-panel'>";
+                    echo "<div class='panel-heading reply-heading'>";
+                    echo "<span class='text-primary'><i class='icon icon-reply'> {$reply->from}</i> </span>";
+                    echo "<span class='text-muted'>" . $reply->date . "</span>";
+                    echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' class='pull-right' id='reply{$reply->id}' data-icon='reply' data-title='{$this->lang->message->reply}'");
+                    echo '</div>';
+                    echo "<div class='panel-body'>";
                     echo nl2br($reply->content);
                     echo '</div>';
                     $this->getFrontReplies($reply);

@@ -49,6 +49,20 @@
       <section class="article-files"> {$control->loadModel('file')->printFiles($article->files)} </section>
     {/if}
   </div>
+  {@extract($prevAndNext)}
+  <ul class='pager pager-justify'>
+    {if($prev)}
+      <li class='previous'>{!html::a(inlink('view', "id=$prev->id", "category={{$category->alias}}&name={{$prev->alias}}"), '<i class="icon-arrow-left"></i> ' . $lang->article->previous, "title='{{$prev->title}}'")}</li>
+    {else}
+      <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> {!print($lang->article->none)}</a></li>
+    {/if}
+    {if($next)}
+      <li class='next'>{!html::a(inlink('view', "id=$next->id", "category={{$category->alias}}&name={{$next->alias}}"), $lang->article->next . ' <i class="icon-arrow-right"></i>', "title='{{$next->title}}'")}</li>
+    {else}
+      <li class='next disabled'><a href='###'>{!print($lang->article->none)}<i class='icon-arrow-right'></i></a></li>
+    {/if}
+  </ul>
+
 </div>
 
 {if(commonModel::isAvailable('message'))}

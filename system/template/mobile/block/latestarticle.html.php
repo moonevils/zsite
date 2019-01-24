@@ -59,7 +59,15 @@
           <div class="article-content">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->label->hot}</label>
+                {if($i==1)}
+                <label class="label-hot vertical-center">
+                  {if($method == 'getLatest')}
+                    {$lang->label->hot}
+                  {else}
+                    {$lang->label->latest}
+                  {/if}
+                </label>
+                {/if}
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
@@ -108,28 +116,36 @@
           <div class="article-content" style="min-height: 0;">
             <div class='vertical-start'>
               <strong class="article-title">
-                <label class="label-hot vertical-center">{$lang->label->hot}</label>
+                {if($i==1)}
+                <label class="label-hot vertical-center">
+                  {if($method == 'getLatest')}
+                    {$lang->label->hot}
+                  {else}
+                    {$lang->label->latest}
+                  {/if}
+                </label>
+                {/if}
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
                 {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
               </strong>
             </div>
             <div class='article-ext'>
-                <span class='views'>
-                  {$article->views}{$lang->article->views}
-                </span>
+              <span class='views'>
+                {$article->views}{$lang->article->views}
+              </span>
               <span class='comments'>
-                  {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
-                </span>
+                {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
+              </span>
+              {if(isset($content->showCategory) and $content->showCategory == 1)}
               <span class="category">
-                  {if(isset($content->showCategory) and $content->showCategory == 1)}
-                    {if($content->categoryName == 'abbr')}
-                      {$categoryName = $article->category->abbr ? $article->category->abbr : $article->category->name}
-                      {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
-                    {else}
-                      {$article->category->name}
-                    {/if}
-                  {/if}
-                </span>
+                {if($content->categoryName == 'abbr')}
+                  {$categoryName = $article->category->abbr ? $article->category->abbr : $article->category->name}
+                  {!html::a(helper::createLink('article', 'browse', "categoryID={{$article->category->id}}", "category={{$article->category->alias}}"), $categoryName)}
+                {else}
+                  {$article->category->name}
+                {/if}
+              </span>
+              {/if}
             </div>
           </div>
         </div>
@@ -220,7 +236,6 @@
   }
 
   .block{$block->id} .label-hot {
-    width: 14px;
     height: 14px;
     border-radius: 2px;
     background-color: #F73035;

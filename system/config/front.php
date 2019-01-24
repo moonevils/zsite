@@ -60,6 +60,7 @@ $config->rights->guest['user']['message']       = 'message';
 $config->rights->guest['user']['agreement']     = 'agreement';
 $config->rights->guest['user']['wechatbind']    = 'wechatbind';
 $config->rights->guest['user']['control']       = 'control';
+$config->rights->guest['user']['editinfo']      = 'editinfo';
 
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';
@@ -81,7 +82,7 @@ $config->rights->guest['search']['index'] = 'index';
 
 $config->rights->guest['cart']['add']           = 'add';
 $config->rights->guest['cart']['delete']        = 'delete';
-$config->rights->guest['cart']['deletes']       = 'deletes';
+$config->rights->guest['cart']['batchdelete']   = 'batchdelete';
 $config->rights->guest['cart']['browse']        = 'browse';
 $config->rights->guest['cart']['count']         = 'count';
 

@@ -100,7 +100,7 @@ $lang->user->messages    = 'Message';
 $lang->user->reply       = 'Reply';
 $lang->user->submission  = 'Submission';
 
-$lang->user->noLogged       = "NO LOGIN";
+$lang->user->unlogin        = "UN LOGIN";
 $lang->user->clickLogin     = "Click to login";
 $lang->user->myScore        = "My Point";
 $lang->user->totalScore     = "Total Point";
