@@ -17,7 +17,7 @@
               <th class='text-center'>{$lang->article->title}</th>
               <th class='text-center w-160px'>{$lang->article->submissionTime}</th>
               <th class='text-center w-60px'>{$lang->article->status}</th>
-              <th class='text-center w-60px'>{$lang->label->views}</th>
+              <th class='text-center w-60px'>{$lang->article->views}</th>
               <th class="text-center w-120px">{$lang->actions}</th>
             </tr>
           </thead>

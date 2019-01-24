@@ -32,7 +32,7 @@
                 {/if}
               </div>
               <div class='text-muted small'>
-                <span title="{$lang->label->views}"><i class='icon-eye-open'></i> {$article->views}</span>
+                <span title="{$lang->article->views}"><i class='icon-eye-open'></i> {$article->views}</span>
                 &nbsp;&nbsp; <span title="{$lang->article->submissionTime}"><i class='icon-time'></i> {$article->editedDate}</span>
               </div>
             </div>

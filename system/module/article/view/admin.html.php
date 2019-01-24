@@ -52,7 +52,7 @@
         <th class='text-center w-80px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->article->author);?></th>
         <?php endif;?>
         <th class='text-center w-150px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
-        <th class='text-center w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->label->views);?></th>
+        <th class='text-center w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
         <?php if($type == 'submission'):?>
         <th class='text-center w-60px'> <?php commonModel::printOrderLink('submission', $orderBy, $vars, $lang->article->status);?></th>
         <?php endif;?>

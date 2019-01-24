@@ -465,4 +465,3 @@ $lang->k .= 'Zsite, free and open source php CMS.';
 
 /* Labels */
 $lang->label->hot   = 'Hot';
-$lang->label->views = 'Views';

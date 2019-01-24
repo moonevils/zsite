@@ -464,4 +464,3 @@ $lang->k .= '蟬知企業建站系統，開源免費的php CMS系統';
 
 /* Labels */
 $lang->label->hot   = '熱';
-$lang->label->views = '閱讀';

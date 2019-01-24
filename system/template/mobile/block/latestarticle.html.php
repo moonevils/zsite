@@ -66,7 +66,7 @@
             </div>
             <div class='article-ext'>
               <span class='views'>
-                {$article->views}{$lang->label->views}
+                {$article->views}{$lang->article->views}
               </span>
               <span class='comments'>
                 {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
@@ -115,7 +115,7 @@
             </div>
             <div class='article-ext'>
                 <span class='views'>
-                  {$article->views}{$lang->label->views}
+                  {$article->views}{$lang->article->views}
                 </span>
               <span class='comments'>
                   {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}

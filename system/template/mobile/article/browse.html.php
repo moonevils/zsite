@@ -63,7 +63,7 @@
           </div>
           <div class='article-ext'>
             <span class='views'>
-              {$article->views}{$lang->label->views}
+              {$article->views}{$lang->article->views}
             </span>
             {if(commonModel::isAvailable('message'))}
             <span class='comments'>
