@@ -22,6 +22,7 @@
         <div class='form-group form-pad-list'>
           <div class='form-group pad-label-left'>
             {!html::input($field, $user->$field, "class='form-control'")}
+            {!html::input('field', $field, "class='hide'")}
             <label for='{$field}'>{$lang->user->$field}</label>
           </div>
         </div>
