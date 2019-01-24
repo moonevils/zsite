@@ -41,28 +41,11 @@
     </strong>
   </div>
   <div class='contact'>
+    {foreach($contact as $k => $v)}
     <div class="vertical-center">
-      <strong>联系人</strong><span>{$contact->contacts}</span>
+      <strong>{$lang->company->$k}</strong><span>{$v}</span>
     </div>
-    <div class="vertical-center">
-      <strong>电话</strong><span>{$contact->phone}</span>
-    </div>
-    <div class="vertical-center">
-      <strong>Email</strong><span>{$contact->email}</span>
-    </div>
-    <div class="vertical-center">
-      <strong>QQ</strong><span>{$contact->qq}</span>
-    </div>
-    <div class="vertical-center">
-      <strong>微信</strong><span>{$contact->weixin}</span>
-    </div>
-    <div class="vertical-center">
-      <strong>网址</strong><span>{$contact->site}</span>
-    </div>
-    <div class="vertical-center">
-      <strong>地址</strong><span>{$contact->address}</span>
-    </div>
-  </div>
+    {/foreach}
 </div>
 
 <div class='block-region region-bottom no-padding blocks' data-region='company_index-bottom'>{$control->block->printRegion($layouts, 'company_index', 'bottom')}</div>

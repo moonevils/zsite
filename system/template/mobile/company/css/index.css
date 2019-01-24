@@ -16,6 +16,7 @@ body{
 
 .panel-company .block-title {
     justify-content: space-between;
+    margin-bottom: 8px;
 }
 
 .panel-company .vertical-center {
@@ -43,7 +44,6 @@ body{
 }
 
 .panel-company .company-desc .title {
-    margin-top: 12px;
     font-size: 14px;
 }
 
@@ -56,5 +56,5 @@ body{
 .panel-company .contact strong {
     display: block;
     width: 54px;
-    line-height: 30px;
+    line-height: 27px;
 }

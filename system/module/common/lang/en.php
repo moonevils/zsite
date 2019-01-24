@@ -465,4 +465,5 @@ $lang->k .= 'Zsite, free and open source php CMS.';
 
 /* Labels */
 $lang->label = new stdclass();
-$lang->label->hot   = 'Hot';
+$lang->label->hot    = 'Hot';
+$lang->label->latest = 'New';
