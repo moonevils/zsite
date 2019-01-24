@@ -21,7 +21,7 @@ class address extends control
     {
         $this->app->loadLang('user');
         $this->view->title       = $this->lang->address->browse;
-        $this->view->mobiletitle = $this->lang->address->browse;
+        $this->view->mobileTitle = $this->lang->address->browse;
         $this->view->addresses   = $this->address->getListByAccount($this->app->user->account);
         $this->view->mobileURL   = helper::createLink('address', 'browse', '', '', 'mhtml');
         $this->view->desktopURL  = helper::createLink('address', 'browse', '', '', 'html');
