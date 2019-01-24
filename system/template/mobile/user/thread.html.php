@@ -42,8 +42,6 @@
       </a>
     {/foreach}
   </div>
-  <div class='panel-footer'>
-    {$pager->show('justify')}
-  </div>
+  {$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
 </div>
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

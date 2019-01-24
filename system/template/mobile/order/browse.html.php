@@ -76,9 +76,7 @@
       {/foreach}
     </div>
   </div>
-  <div class='panel-footer'>
-    {$pager->show('justify')}
-  </div>
+  {$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
 </div>
 <script>
 $(function()
