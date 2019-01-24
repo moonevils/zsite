@@ -26,10 +26,10 @@
     </div>
     <div class='caption text-muted vertical-center article-author'>
       <div class="avatar vertical-center">
-        {if(empty($author->avatar))}
-        <i class="icon icon-user icon-10x"></i>
-        {else}
+        {if(isset($author->avatar))}
         <img src="{$author->avatar}" alt="">
+        {else}
+        <i class="icon icon-user icon-10x"></i>
         {/if}
       </div>
       <div class="article-ext">
