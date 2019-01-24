@@ -57,8 +57,8 @@
     {!html::image('/theme/mobile/common/img/default-head.png')}
     <div class='tag-body' data-url='{$control->createLink('user', 'profile')}'>
       <div class='tag-title'>
-        <div>{$app->user->realname}</div>
-        <div>{$app->user->email}</div>
+        <div>{$user->realname}</div>
+        <div>{$user->email}</div>
       </div>
     {/if}
       <div class='tag-right'>
@@ -85,11 +85,11 @@
 <div class='tag-block user-recharge'>
   <div class='tag'>
     <div class='tag-score' style='margin-right:10px'>
-      <div class='score-number'>0</div>
+      <div class='score-number'>{$user->score}</div>
       <div class='score-title'>{$lang->user->totalScore}</div>
     </div> 
     <div class='tag-score'>
-      <div class='score-number'>0</div>
+      <div class='score-number'>{$user->rank}</div>
       <div class='score-title'>{$lang->user->levelScore}</div>
     </div> 
     <div class='btn-recharge'>{$lang->user->scoreRecharge}</div>

@@ -333,6 +333,7 @@ class user extends control
         $this->view->desktopURL  = helper::createLink('user', 'control', '', '', 'html');
         $this->view->title       = $this->lang->user->control->common;
         $this->view->mobileTitle = $this->lang->user->control->common;
+        $this->view->user        = $this->user->getByAccount($this->app->user->account);
         $this->view->source      = $source;
         $this->display();
     }
