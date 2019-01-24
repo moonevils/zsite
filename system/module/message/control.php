@@ -131,7 +131,8 @@ class message extends control
      */
     public function post($type, $block = '')
     {
-        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
+        if($this->app->clientDevice == 'mobile') if ($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
+
         $this->lang->message = $this->lang->$type;
         if($_POST)
         {
@@ -162,10 +163,7 @@ class message extends control
      */
     public function reply($messageID)
     {
-        if($this->clientDevice != 'mobile')
-        {
-            if ($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
-        }
+        if($this->app->clientDevice == 'mobile') if ($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
 
         if($_POST)
         {

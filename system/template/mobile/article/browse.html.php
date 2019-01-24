@@ -71,19 +71,7 @@
             </span>
             {/if}
             <span class='pub-time'>
-              {$pubTime = strtotime($article->addedDate)}
-              {$pubTimeLen = time() - $pubTime}
-              {if($pubTimeLen > 86400)}
-                {!substr($article->addedDate, 0, 10)}
-              {else}
-                {$minute = floor($pubTimeLen / 60)}
-                {$hour = floor($pubTimeLen / 3600)}
-                {if($hour == 0)}
-                  {!$minute == 1 ? $lang->date->oneMinuteAgo : $minute . $lang->date->minutesAgo}
-                {else}
-                  {!$hour == 1 ? $lang->date->oneHourAgo : $hour . $lang->date->hoursAgo}
-                {/if}
-              {/if}
+              {!formatTime($article->addedDate ,'publish')}
             </span>
           </div>
         </div>

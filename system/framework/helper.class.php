@@ -341,9 +341,35 @@ function checkAdminEntry()
  */
 function formatTime($time, $format = '')
 {
+    global $lang;
 	$time = str_replace('0000-00-00', '', $time);
 	$time = str_replace('00:00:00', '', $time);
-	if($format) return date($format, strtotime($time));
+	if($format == 'publish')
+    {
+        $pubTime = strtotime($time);
+        $pubTimeLen = time() - $pubTime;
+        if($pubTimeLen > 86400)
+        {
+            return substr($time, 0, 10);
+        }
+        else
+        {
+            $minute = floor($pubTimeLen / 60);
+            $hour = floor($pubTimeLen / 3600);
+            if($hour == 0)
+            {
+                return $minute == 1 ? $lang->date->oneMinuteAgo : $minute . $lang->date->minutesAgo;
+            }
+            else
+            {
+                return $hour == 1 ? $lang->date->oneHourAgo : $hour . $lang->date->hoursAgo;
+            }
+        }
+    }
+    elseif($format)
+    {
+        return date($format, strtotime($time));
+    }
 	return trim($time);
 }
 
