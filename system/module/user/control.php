@@ -512,6 +512,7 @@ class user extends control
             {
                 $this->user->update($account);
             }
+
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => inlink('profile')));
         }
