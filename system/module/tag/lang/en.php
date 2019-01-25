@@ -1,13 +1,13 @@
 <?php
-$lang->tag->common = 'Keywords';
+$lang->tag->common = 'Tag';
 $lang->tag->rank   = 'Weight';
 $lang->tag->link   = 'Links';
 
-$lang->tag->admin         = 'Manage Keywords';
+$lang->tag->admin         = 'Manage Tag';
 $lang->tag->editLink      = 'Link';
 $lang->tag->source        = 'Source';
 $lang->tag->inputLink     = 'Enter a Link';
-$lang->tag->inputTag      = 'Enter a Keyword';
+$lang->tag->inputTag      = 'Enter a Tag';
 $lang->tag->linkFormatTip = 'When the link inputed is external, the link should start with http or https';
 $lang->tag->search        = 'Search';
 $lang->tag->delete        = 'Delete';
