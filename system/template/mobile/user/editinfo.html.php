@@ -20,7 +20,7 @@
       <form id='editProfileForm' method='post' action="{!inlink('editInfo')}" data-checkfingerprint='1'>
         <div class='form-group form-pad-list'>
           <div class='form-group pad-label-left'>
-            {!html::input($field, $user->$field, "class='form-control' autofocus='autofocus'")}
+            {!html::input($field, $user->$field, "class='form-control')}
             {!html::input('field', $field, "class='hide'")}
             <label for='{$field}'>{$lang->user->$field}</label>
           </div>
@@ -45,7 +45,6 @@ $(function()
         }
     }
     });
-    $('input .form-control').trigger("click").focus();
 });
 </script>
 {/noparse}
