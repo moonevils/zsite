@@ -596,7 +596,7 @@ EOT;
      * 创建链接。
      * Create link url.
      *
-     * @param  string    $pageID
+     * @param  string    $pageID Page ID of link 链接指向的页码，如果留空使用当前页码
      * @access public
      * @return string
      */
@@ -619,6 +619,10 @@ EOT;
             if(strpos($link, '.') === false) $link .= "/p{$pageID}.{$viewType}";
             if($config->requestType == 'PATH_INFO2') $link =  str_replace('index_php/', 'index.php/', $link);
             return $link;
+        }
+        else
+        {
+            $this->params['pageID'] = $pageID;
         }
         return helper::createLink($this->moduleName, $this->methodName, $this->params);
     }

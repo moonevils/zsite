@@ -46,17 +46,17 @@
   <div class='list' id='articles'>
     {$imageURL = !empty($content->imageSize) ? $content->imageSize . 'URL' : 'smallURL'}
     {@$i=0}
+    {if($pageID > 1)}
+    <div class='divider'></div>
+    {/if}
     {foreach($articles as $article)}
-      {if($pageID > 1)}
-      <div class='divider'></div>
-      {/if}
       {@$i++}
       {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
       <div class='article-item vertical-center article-align'>
         <div class="{if(empty($article->image))}article-content-height{else}article-content{/if}">
           <div class='vertical-start'>
             <strong class="article-title">
-              {if($i==1)}
+              {if($pageID == 1 && $i==1)}
               <label class="label-hot vertical-center">{$lang->label->hot}</label>
               {/if}
               {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}

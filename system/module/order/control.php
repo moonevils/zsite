@@ -34,6 +34,7 @@ class order extends control
         $this->view->products = $this->order->getPostedProducts($product, $count);
 
         $this->view->title          = $this->lang->order->confirm;
+        $this->view->mobileTitle          = $this->lang->order->confirm;
         $this->view->addresses      = $this->loadModel('address')->getListByAccount($this->app->user->account);
         $this->view->currencySymbol = $this->config->product->currencySymbol;
         $this->view->mobileURL      = $mobileURL;
@@ -108,6 +109,7 @@ class order extends control
         if($order->type != 'shop') unset($paymentOptions['COD']);
 
         $this->view->title          = $this->lang->order->check;
+        $this->view->mobileTitle    = $this->lang->order->check;
         $this->view->order          = $order;
         $this->view->inWechat       = $inWechat;
         $this->view->products       = $this->order->getOrderProducts($orderID);
