@@ -12,6 +12,7 @@ $(function()
     $.refreshCommentList = function()
     {
         $('#commentsListAsync').load(window.location.href + ' #commentsListWrapper');
+        $('#paginator').load(window.location.href + ' #paginator');
     };
 
     $commentBox.find('.pager').on('click', 'a', function()
@@ -21,7 +22,8 @@ $(function()
     });
 
     $commentForm.ajaxform({
-        onSubmit: function () {
+        onSubmit: function () 
+        {
             localStorage.setItem('commentContent', $commentForm.find('#commentContent').val());
         },
         onSuccess: function(response)
