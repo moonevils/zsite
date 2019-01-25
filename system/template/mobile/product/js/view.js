@@ -27,7 +27,7 @@ function setCartCount()
 }
 function hideMessage()
 {
-    $('.comment-post.vertical-center').hide();
+    $('div .comment-post.vertical-center').hide();
 }
 setCartCount();
 hideMessage();
@@ -35,12 +35,19 @@ $(function()
 {
     $(document).on('click', '#message', function()
     {
-        $('.comment-post.vertical-center').show();    
+        if($('div .comment-post.vertical-center').css('display') != 'none')
+        {
+            $('div .comment-post.vertical-center').hide(); 
+        }
+        else
+        {
+            $('div .comment-post.vertical-center').show(); 
+        }
     })
 
     $(document).on('click', '#submitComment', function()
     {
-        $('.comment-post.vertical-center').hide();    
+        $('div .comment-post.vertical-center').hide();    
     })
     $(document).on('click', '.btn-buy', function()
     {
