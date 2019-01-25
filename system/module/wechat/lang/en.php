@@ -19,7 +19,7 @@ $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
 $lang->wechat->url       = 'URL';
-$lang->wechat->certified = 'Certified';
+$lang->wechat->certified = 'Verified';
 $lang->wechat->users     = 'WeChat User';
 $lang->wechat->content   = 'Content';
 $lang->wechat->qrcode    = 'QR Code';
@@ -48,9 +48,9 @@ $lang->wechat->certifiedList[0] = 'No';
 
 $lang->wechat->response = new stdclass();
 
-$lang->wechat->response->keywords  = 'Keyword';
+$lang->wechat->response->keywords  = 'Tag';
 $lang->wechat->response->set       = 'Settings';
-$lang->wechat->response->create    = 'Add a keyword';
+$lang->wechat->response->create    = 'Add Tag';
 $lang->wechat->response->default   = 'Default';
 $lang->wechat->response->subscribe = 'Subscribe';
 
@@ -118,7 +118,7 @@ $lang->wechat->message->tabList[] = 'mode=type&type=subscribe|Subscribed';
 $lang->wechat->message->tabList[] = 'mode=type&type=unsubscribe|Unsubscribed';
 $lang->wechat->message->tabList[] = 'mode=replied&replied=1|Replied';
 
-$lang->wechat->noSelectedFile  = "No Image is selected!";
+$lang->wechat->noSelectedFile  = "No image is selected!";
 $lang->wechat->noAppID         = "No AppID";
 $lang->wechat->qrcodeType      = "Please upload QR code in .jpg";
 
@@ -131,12 +131,12 @@ $lang->wechat->placeholder->token    = 'English letter or number, length of 3-32
 
 $lang->wechat->mailSubject     = "From %s wechat";
 $lang->wechat->remindUsers     = "Mail to selected";
-$lang->wechat->remindNotice    = "Note: The site sending function must be configured successfully, and the selected staff's mailbox has been set, or can not receive mail.";
-$lang->wechat->remindNoMail    = "The site sending function is not enabled. Configure in the Set -> API -> Email page.";
-$lang->wechat->curlSSLRequired = "This function requires curl module with ssl encryption transmission supports.";
-$lang->wechat->opensslRequired = "This function requires openssl module. Please open the PHP module";
-$lang->wechat->needCertified   = "This feature needs the account to be certified.";
-$lang->wechat->integrateInfo   = "Please interate in the wechat control panel.";
-$lang->wechat->integrateDone   = "I have interated with wechat server";
-$lang->wechat->openUserModule  = "You should open user module first, open?";
-$lang->wechat->userDisabled    = "Wechat needs to open uesr module.";
+$lang->wechat->remindNotice    = "Note: Email notification has to be configured, or they cannot receive notifications.";
+$lang->wechat->remindNoMail    = "Email notification is not enabled. Configure in the Set->API-> Email.";
+$lang->wechat->curlSSLRequired = "This feature requires curl module with ssl encryption transmission.";
+$lang->wechat->opensslRequired = "This feature requires openssl module. Please open the PHP module";
+$lang->wechat->needCertified   = "This feature requires the account to be verified.";
+$lang->wechat->integrateInfo   = "Please integrate in the wechat control panel.";
+$lang->wechat->integrateDone   = "I have integrated with wechat server";
+$lang->wechat->openUserModule  = "You should switch on User module first. Switch it on now?";
+$lang->wechat->userDisabled    = "Wechat requires to open uesr module.";

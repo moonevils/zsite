@@ -18,12 +18,12 @@
   <div class='panel-body' id='cardListWarpper'>
     <div class='cards cards-list' id='cardList'>
     {foreach($messages as $message)}
-      <div class='card'>
+      <div class='card card-block'>
         <div class='card-heading'>
           <strong class='{!echo $control->app->user->account === $message->from ? 'text-danger' : 'text-special' }'>{$message->from}</strong> &nbsp; 
           <small class='text-muted'>{!substr($message->date, 5)}</small>
         </div>
-        <div class='card-content'>
+        <div class='card-content message-content'>
           {$message->content}
         </div>
         <div class='card-footer'>
