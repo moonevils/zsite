@@ -238,6 +238,7 @@ function statAll()
             total += parseFloat($(this).parent().parent().find('.product-amount').html()); 
         }
     });
+    total = total.toFixed(2);
     $('#amount').prev().html(amount);
     $('#amount').html($('#amount').html().substr(0,1) + total);
 

@@ -31,7 +31,7 @@
           <div class='item'>
             <div class='vertical-center'>
                 <label class='checkbox-circle item-checkbox'>
-                  <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}' disabled>
+                  {if(helper::isAjaxRequest())}<input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>{/if}
                   <label for='checkbox{$i}'></label>
                 </label>
             </div>
@@ -76,16 +76,5 @@
     </div>
   </div>
 </div>
-<script>
-$(function()
-{
-    $.refreshAddressList = function()
-    {
-        $('#addressListWrapper').load(window.location.href + ' #addressList');
-        $('p[name="operate"]').show();
-        $('#create').parent().removeClass('create-center');
-    };
-});
-</script>
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

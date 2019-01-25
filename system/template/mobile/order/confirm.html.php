@@ -139,7 +139,7 @@ $(function()
     {
         $('#addressListWrapper').load(addressBrowseLink, function()
         {
-            if($('#addressList').find('.card').size() == 0)
+            if($('#addressList').find('.item').size() == 0)
             {
                 $('#createAddress').val(1);
                 $('[name=address]').prop('checked', false);
