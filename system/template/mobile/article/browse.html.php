@@ -56,7 +56,7 @@
         <div class="{if(empty($article->image))}article-content-height{else}article-content{/if}">
           <div class='vertical-start'>
             <strong class="article-title">
-              {if($i==1)}
+              {if($pageID == 1 && $i==1)}
               <label class="label-hot vertical-center">{$lang->label->hot}</label>
               {/if}
               {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
