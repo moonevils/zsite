@@ -80,17 +80,18 @@ EOT;
      * 创建下拉刷新插件及相关 JS。
      * Create 'pull-up-load-more' component js code.
      *
-     * @param string $listEle
-     * @param string $hintText
+     * @param string $listEle       list element selector 列表元素选择器
+     * @param string $hintText      hint text 下拉提示文本
+     * @param string $pageUrlFormat page url template 页码链接模版，例如 /message-comment-article-$ID.html
      * @access public
      * @return string
      */
-    public function createPullUpJS($listEle, $hintText = '')
+    public function createPullUpJS($listEle, $hintText = '', $pageUrlFormat = '')
     {
-        $pageUrl = $this->createUrl('$ID');
+        if(!$pageUrlFormat) $pageUrlFormat = $this->createUrl('$ID');
         $hintDiv = $this->pageID < $this->pageTotal ? "<div class='pager-pull-up-hint'><i class='icon-spinner-indicator icon icon-spin'></i><span>$hintText</span></div>" : '';
         $js      = <<<EOT
-        <div class='pager-pull-up' data-url='$pageUrl' data-pageID='$this->pageID' data-pageTotal='$this->pageTotal' data-list='$listEle'>
+        <div class='pager-pull-up' data-url='$pageUrlFormat' data-pageID='$this->pageID' data-pageTotal='$this->pageTotal' data-list='$listEle'>
         $hintDiv
           <div class="pager-pull-up-fixed">
             <div class='pager-pull-up-label'>
