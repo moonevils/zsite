@@ -1,4 +1,4 @@
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <div class='row'>
   <div class='col-md-10'>
     <div class='panel-section'>
