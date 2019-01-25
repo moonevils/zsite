@@ -16,12 +16,10 @@
 {$articles = $model->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit)}
 {$articles = $model->loadModel('article')->computeComments($articles)}
 {if(isset($content->image))} {$articles = $model->loadModel('file')->processImages($articles, 'article')} {/if}
-{noparse}
 <style>
 #block{$block->id} .card .thumbnail-cell {padding-left: 8px; padding-right: 0}
 #block{$block->id} .card .table-cell + .thumbnail-cell {padding-right: 8px; padding-left: 0}
 </style>
-{/noparse}
 <div id="block{$block->id}" class='panel panel-block {$blockClass} block{$block->id}'>
   <div class='panel-body'>
     <div class='block-title'>
