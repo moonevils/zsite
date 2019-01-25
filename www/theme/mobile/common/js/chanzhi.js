@@ -435,11 +435,11 @@ $(function()
             };
 
             var touchStartX, touchStartY;
-            $(document).on('touchstart.' + pullUpPager, function(e)
+            $(document).on('touchstart.' + id, function(e)
             {
                 touchStartX = e.touches[0].pageX;
                 touchStartY = e.touches[0].pageY;
-            }).on('touchmove.' + pullUpPager, function(e)
+            }).on('touchmove.' + id, function(e)
             {
                 var distanceX = e.changedTouches[0].pageX - touchStartX;
                 var distanceY = e.changedTouches[0].pageY - touchStartY;
@@ -447,7 +447,7 @@ $(function()
                 {
                     $info.css('transform', 'scaleY(' + (1 - Math.abs(distanceY/(triggerDistance * 1.1))) + ')');
                 }
-            }).on('touchend.' + pullUpPager, function(e)
+            }).on('touchend.' + id, function(e)
             {
                 var distanceX = e.changedTouches[0].pageX - touchStartX;
                 var distanceY = e.changedTouches[0].pageY - touchStartY;
