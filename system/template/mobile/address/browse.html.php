@@ -76,16 +76,5 @@
     </div>
   </div>
 </div>
-<script>
-$(function()
-{
-    $.refreshAddressList = function()
-    {
-        $('#addressListWrapper').load(window.location.href + ' #addressList');
-        $('p[name="operate"]').show();
-        $('#create').parent().removeClass('create-center');
-    };
-});
-</script>
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
