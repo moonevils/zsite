@@ -22,8 +22,9 @@
     {$count = count($products)}
     {if($count == 0)} {$count = 1} {/if}
     {$recPerRow = min($count, 2)}
+    {@$percent  = 100/$recPerRow}
     <div class='cards cards-products' data-cols='{$recPerRow}' id='products'>
-      <style>{!echo ".col-custom-{{$recPerRow}} {{width: " . (100/$recPerRow) . "%}}"}</style>
+      <style>.col-custom-{$recPerRow} {width: {$percent} % }</style>
       {$index = 0}
       {foreach($products as $product)}
         {$rowIndex = $index % $recPerRow}

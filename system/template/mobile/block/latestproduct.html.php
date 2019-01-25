@@ -28,8 +28,9 @@
       {$count = count($products)}
       {if($count == 0)} {$count = 1} {/if}
       {$recPerRow = min($count, max(1, zget($content, 'recPerRow', 1)))}
+      {@$percent  = 100 / $recPerRow}
       <div class='cards cards-products' data-cols='{$recPerRow}'>
-        <style>.col-custom-{$recPerRow} { width: (100/{$recPerRow}) %}</style>
+        <style>.col-custom-{$recPerRow} { width: {$percent} %}</style>
         {$index = 0}
         {foreach($products as $product)}
           {$rowIndex = $index % $recPerRow}
