@@ -83,7 +83,7 @@ EOT;
      * @param string $listEle       list element selector 列表元素选择器
      * @param string $hintText      hint text 下拉提示文本
      * @param string $pageUrlFormat page url template 页码链接模版，例如 /message-comment-article-$ID.html
-     * @param string $showPageTag   if set to ture, then show a pager tag element and fixed on page bottom 如果设置为 true，则在页面底部固定显示当前页面信息标签
+     * @param bool   $showPageTag   if set to true, then show a pager tag element and fixed on page bottom 如果设置为 true，则在页面底部固定显示当前页面信息标签
      * @access public
      * @return string
      */

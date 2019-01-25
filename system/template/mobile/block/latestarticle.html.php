@@ -58,9 +58,9 @@
                 {if($i==1)}
                 <label class="label-hot vertical-center">
                   {if($method == 'getLatest')}
-                    {$lang->label->hot}
-                  {else}
                     {$lang->label->latest}
+                  {else}
+                    {$lang->label->hot}
                   {/if}
                 </label>
                 {/if}
@@ -113,9 +113,9 @@
                 {if($i==1)}
                 <label class="label-hot vertical-center">
                   {if($method == 'getLatest')}
-                    {$lang->label->hot}
-                  {else}
                     {$lang->label->latest}
+                  {else}
+                    {$lang->label->hot}
                   {/if}
                 </label>
                 {/if}
