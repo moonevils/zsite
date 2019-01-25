@@ -371,7 +371,7 @@ class messageModel extends model
      * Post a message.
      *
      * @access public
-     * @return void
+     * @return array
      */
     public function post($type, $block = '')
     {

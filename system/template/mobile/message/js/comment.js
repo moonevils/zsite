@@ -3,6 +3,7 @@ $(function()
     var $commentForm = $('#commentForm'),
         $commentBox = $('#commentBox'),
         $commentContent = localStorage.getItem('commentContent');
+
     if($commentContent)
     {
         $commentForm.find('#commentContent').val($commentContent);
