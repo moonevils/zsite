@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    if(v.oauthLoginLink !== 'undefined')
+    if(typeof(v.oauthLoginLink) !== 'undefined')
     {
         bootbox.confirm(v.lang.bindWechatTip, function(result)
         {
