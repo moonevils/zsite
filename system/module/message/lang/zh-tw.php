@@ -105,4 +105,6 @@ $lang->message->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：
 $lang->comment->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
 $lang->message->messageItem = "<dd><strong>%s</strong> 于 <em>%s</em> 發表：%s</dd>";
 
-$lang->message->replySubject = '%s管理員的回覆';
+$lang->message->replySubject            = '%s管理員的回覆';
+$lang->message->submit                  = '發表留言';
+$lang->message->inputPlaceholder        = '添加你的留言';
