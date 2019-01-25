@@ -56,9 +56,6 @@
         <div class="{if(empty($article->image))}article-content-height{else}article-content{/if}">
           <div class='vertical-start'>
             <strong class="article-title">
-              {if($pageID == 1 && $i==1)}
-              <label class="label-hot vertical-center">{$lang->label->hot}</label>
-              {/if}
               {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
               {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
             </strong>
