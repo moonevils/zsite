@@ -87,7 +87,7 @@
                     <td>
                       <div class='input-group input-group-sm input-number'>
                         <div class='btn-update btn-minus'><i class='icon icon-minus'></i></div>
-                        <input type='number' class='btn-number text-center' value='{$product->count}' data-price='{$price}' id='count[$product->id]' name='count[$product->id]'>
+                        <input type='number' class='btn-number text-center' value='{$product->count}' data-price='{$price}' id='count[{$product->id}]' name='count[{$product->id}]'>
                         <div class='btn-update btn-plus'><i class='icon icon-plus'></i></div>
                       </div>
                     </td>
