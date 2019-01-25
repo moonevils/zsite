@@ -403,9 +403,10 @@ $(function()
     }).scroll();
 
     // Init pull-up-load-more component
-    var $pager = $('.pager-pull-up');
-    if($pager.length)
+    var initPullUpPager = function($pager)
     {
+        if($pager.data('initPullUpPager')) return;
+        var id = 'pullUpPager' + ($.uuid++);
         var pagerInfo = $pager.data();
         var pageTotal = pagerInfo.pagetotal;
         var pageID = pagerInfo.pageid;
@@ -434,11 +435,11 @@ $(function()
             };
 
             var touchStartX, touchStartY;
-            $(document).on('touchstart', function(e)
+            $(document).on('touchstart.' + pullUpPager, function(e)
             {
                 touchStartX = e.touches[0].pageX;
                 touchStartY = e.touches[0].pageY;
-            }).on('touchmove', function(e)
+            }).on('touchmove.' + pullUpPager, function(e)
             {
                 var distanceX = e.changedTouches[0].pageX - touchStartX;
                 var distanceY = e.changedTouches[0].pageY - touchStartY;
@@ -446,7 +447,7 @@ $(function()
                 {
                     $info.css('transform', 'scaleY(' + (1 - Math.abs(distanceY/(triggerDistance * 1.1))) + ')');
                 }
-            }).on('touchend', function(e)
+            }).on('touchend.' + pullUpPager, function(e)
             {
                 var distanceX = e.changedTouches[0].pageX - touchStartX;
                 var distanceY = e.changedTouches[0].pageY - touchStartY;
@@ -457,5 +458,27 @@ $(function()
                 }
             });
         }
-    }
+        $pager.data('initPullUpPager', id);
+    };
+
+    $.fn.removePullUpPager = function()
+    {
+        return $(this).each(function() {
+            var $pager = $(this);
+            var id = $pager.data('initPullUpPager');
+            if(id)
+            {
+                $(document).off('.' + id);
+                $pager.data('initPullUpPager', null);
+            }
+        });
+    };
+
+    $.fn.initPullUpPager = function()
+    {
+        return $(this).each(function() {
+            initPullUpPager($(this));
+        });
+    };
+    $('.pager-pull-up').initPullUpPager();
 });
