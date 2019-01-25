@@ -154,10 +154,11 @@ $config->rights->member['order']['delete']          = 'delete';
 $config->rights->member['order']['view']            = 'view';
 $config->rights->member['order']['applyrefund']     = 'applyrefund';
 
-$config->rights->member['address']['create'] = 'create';
-$config->rights->member['address']['edit']   = 'edit';
-$config->rights->member['address']['delete'] = 'delete';
-$config->rights->member['address']['browse'] = 'browse';
+$config->rights->member['address']['create']        = 'create';
+$config->rights->member['address']['edit']          = 'edit';
+$config->rights->member['address']['delete']        = 'delete';
+$config->rights->member['address']['browse']        = 'browse';
+$config->rights->member['address']['addresslist']   = 'addresslist';
 
 $config->rights->member['score']['buyscore']      = 'buyscore';
 $config->rights->member['score']['payorder']      = 'payorder';

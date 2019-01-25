@@ -126,7 +126,7 @@
 <script>
 $(function()
 {
-    var addressBrowseLink = createLink('address', 'browse') + ' #addressList';
+    var addressBrowseLink = createLink('address', 'addressList') + ' #addressList';
     var orderBrowseLink   = createLink('order', 'browse'); 
     $('[name=payment]').first().prop('checked', true);
 

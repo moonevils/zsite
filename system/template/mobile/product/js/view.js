@@ -25,9 +25,23 @@ function setCartCount()
         $('.label.badge.red.circle').text(data.count);
     })
 }
+function hideMessage()
+{
+    $('.comment-post.vertical-center').hide();
+}
 setCartCount();
+hideMessage();
 $(function()
 {
+    $(document).on('click', '#message', function()
+    {
+        $('.comment-post.vertical-center').show();    
+    })
+
+    $(document).on('click', '#submitComment', function()
+    {
+        $('.comment-post.vertical-center').hide();    
+    })
     $(document).on('click', '.btn-buy', function()
     {
         window.location.href = $(this).data('url').replace('productcount', $('#count').val());
