@@ -425,13 +425,13 @@ class user extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title      = $this->lang->user->messages;
-        $this->view->mobiletitle      = $this->lang->user->messages;
-        $this->view->messages   = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
-        $this->view->pager      = $pager;
-        $this->view->source     = 'bottom';
-        $this->view->mobileURL  = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'html');
+        $this->view->title        = $this->lang->user->messages;
+        $this->view->mobileTitle  = $this->lang->user->messages;
+        $this->view->messages     = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
+        $this->view->pager        = $pager;
+        $this->view->source       = 'bottom';
+        $this->view->mobileURL    = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL   = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'html');
 
         $this->display();
     }
