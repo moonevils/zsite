@@ -15,7 +15,7 @@
   {if($app->user->account == 'guest')}
   <div class='tag' data-url='{$control->createLink('user', 'login')}'>
     {!html::image('/theme/mobile/common/img/default-head.png')}
-    <a class='tag-body' data-url='{$control->createLink('user', 'login')}'>
+    <a class='tag-body' href="{$control->createLink('user', 'login')}">
       <div class='tag-title'>
         <div>{$lang->user->unlogin}</div>
         <div>{$lang->user->clickLogin}</div>
@@ -23,7 +23,7 @@
   {else}
   <div class='tag' data-url='{$control->createLink('user', 'profile')}'>
     {!html::image('/theme/mobile/common/img/default-head.png')}
-    <a class='tag-body' data-url='{$control->createLink('user', 'profile')}'>
+    <a class='tag-body' href="{$control->createLink('user', 'profile')}">
       <div class='tag-title'>
         <div>{$user->realname}</div>
         <div>{$user->email}</div>
@@ -94,7 +94,7 @@
 <script>
 $(function()
 {
-    $(document).on('click', '.tag, .tag-body, .btn-recharge', function()
+    $(document).on('click', '.tag, .btn-recharge', function()
     {
         window.location.href= $(this).attr('data-url');
     });
