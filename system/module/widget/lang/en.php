@@ -21,18 +21,18 @@ $lang->widget->message = 'Message';
 $lang->widget->comment = 'Comment';
 $lang->widget->reply   = 'Reply';
 
-$lang->widget->create    = 'Add a Widget';
+$lang->widget->create    = 'Add Widget';
 $lang->widget->hidden    = 'Hide';
 $lang->widget->lblWidget = 'Widgets';
 $lang->widget->lblRss    = 'RSS';
-$lang->widget->lblNum    = 'No. of Entries';
+$lang->widget->lblNum    = 'Entry';
 $lang->widget->content   = 'Content';
 
 $lang->widget->params = new stdclass();
 $lang->widget->params->name  = 'Parameter';
 $lang->widget->params->value = 'Value';
 
-$lang->widget->createWidget        = 'Add a Widget';
+$lang->widget->createWidget        = 'Add Widget';
 $lang->widget->editWidget          = 'Edit';
 $lang->widget->ordersSaved         = 'Ranking saved!';
 $lang->widget->confirmRemoveWidget = 'Do you want to remove【{0}】?';
