@@ -220,10 +220,10 @@ $(function()
     // Set required feilds in form
     setRequiredFields();
 
-    // make company links on app navbar as modalTrigger to open content with modal
-    $('#appnav .nav-system-company a, #appnav a[data-toggle="modal"]').modalTrigger();
+    // Make links on app navbar as modalTrigger to open with modal
+    $('#appnav a[data-toggle="modal"]').modalTrigger();
 
-    // set active item on #appnav
+    // Set active item on #appnav
     var $appNav = $('#appnav');
     var activedNav = v.activedNav;
     if(!activedNav)
