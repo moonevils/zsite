@@ -26,7 +26,8 @@ $(function()
             {
                 localStorage.setItem('commentContent', '');
                 $commentForm.find('#commentContent').val('');
-                setTimeout($.refreshCommentList, 200)
+                setTimeout($.refreshCommentList, 200);
+                $('.comment-list').show();
             }
         }
     });

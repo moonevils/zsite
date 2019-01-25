@@ -14,8 +14,7 @@
 {* TODO: check follow methods: showDetail and hideDetail *}
 <div class='block-region region-top blocks' data-region='message_index-top'>{$control->loadModel('block')->printRegion($layouts, 'message_index', 'top')}</div>
 <div class='messages panel'>
-  <div class='comment-list'>
-    {if(isset($messages) and $messages)}
+  <div class='comment-list' style="{if(!isset($messages) || !$messages)}display:none;{/if}">
     <div id="commentsListAsync">
       <div id="commentsListWrapper">
         <div class='condensed bordered' id="commentsList">
@@ -55,7 +54,6 @@
         </div>
       </div>
     </div>
-    {/if}
   </div>
   <div class='comment-post vertical-center'>
     <form class='comment-form vertical-center' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=message')}">

@@ -16,8 +16,7 @@
 {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
 <hr>
 <div class='comments panel'>
-  <div class='comment-list'>
-    {if(isset($comments) and $comments)}
+  <div class='comment-list' style="{if(!isset($comments) || !$comments)}display:none;{/if}">
       <div class='title vertical-center'>
         <span class='vertical-line'></span>
         <span class="list-text">{$lang->message->list}</span>
@@ -61,7 +60,6 @@
           </div>
         </div>
       </div>
-    {/if}
   </div>
   <div class='comment-post vertical-center'>
     <form class='comment-form vertical-center' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
