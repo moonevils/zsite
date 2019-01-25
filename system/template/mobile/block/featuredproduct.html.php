@@ -18,7 +18,7 @@
   {$url      = helper::createLink('product', 'view', "id=$product->id", "category=$alias&name={{$product->alias}}")}
   <div id="block{$block->id}" class='panel panel-block {$blockClass} with-cards'>
     <div class='panel-body no-padding'>
-      <div class='card'>
+      <div class='card card-block'>
         <a href='{$url}' class='card-img'>
           <img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$product->image->primary->middleURL}'>
         </a>
