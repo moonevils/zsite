@@ -131,7 +131,8 @@ class message extends control
      */
     public function post($type, $block = '')
     {
-        if($this->app->clientDevice == 'mobile') if ($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login', "referer={$_SERVER['HTTP_REFERER']}")));
+        $referer = helper::safe64Encode($_SERVER['HTTP_REFERER']);
+        if($this->app->clientDevice == 'mobile') if ($this->app->user->account == 'guest') die(js::locate(helper::createLink('user', 'login', "referer={$referer}")));
 
         $this->lang->message = $this->lang->$type;
         if($_POST)
