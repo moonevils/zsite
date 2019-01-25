@@ -52,11 +52,19 @@
 <div class='tag-block user-recharge'>
   <div class='tag'>
     <div class='tag-score keepleft'>
+      {if($app->user->account == 'guest')}
+      <div class='score-number'>0</div>
+      {else}
       <div class='score-number'>{$user->score}</div>
+      {/if}
       <div class='score-title'>{$lang->user->totalScore}</div>
     </div> 
     <div class='tag-score'>
+      {if($app->user->account == 'guest')}
+      <div class='score-number'>0</div>
+      {else}
       <div class='score-number'>{$user->rank}</div>
+      {/if}
       <div class='score-title'>{$lang->user->levelScore}</div>
     </div> 
     <div class='btn-recharge' data-url='{$control->createLink('score', 'buyscore')}'>{$lang->user->scoreRecharge}</div>
