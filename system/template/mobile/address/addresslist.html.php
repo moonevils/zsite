@@ -23,7 +23,7 @@
         <span class='vertical-line'></span><span class='browse'>{$lang->address->browse}</span>
     </div>
     <div id='addressListWrapper'>
-      <div class='list container' id='addressList'>
+      <div class='list container address-list' id='addressList'>
         {@$i=0}
         {foreach($addresses as $address)}
           {@$i++}
@@ -31,7 +31,7 @@
           <div class='item'>
             <div class='vertical-center'>
                 <label class='checkbox-circle item-checkbox'>
-                  <input type='radio' id='checkbox{$i}' {$checked} name='deliveryAddress'  value='{$address->id}'>
+                  <input type='radio' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>
                   <label for='checkbox{$i}'></label>
                 </label>
             </div>
