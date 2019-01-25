@@ -358,7 +358,7 @@ class userModel extends model
         $user = fixer::input('post')
             ->cleanInt('imobile, qq, zipcode')
             ->setDefault('admin', 'no')
-            ->remove('token')
+            ->remove('token,field')
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
             ->removeif(RUN_MODE != 'admin', $this->config->user->skipedFields->update)
             ->removeif(RUN_MODE == 'admin', $this->config->user->skipedFields->adminUpdate)
@@ -420,7 +420,7 @@ class userModel extends model
     public function updateEmail($account)
     {
         $this->checkOldPassword();
-        $data = fixer::input('post')->remove('oldPwd, captcha, token, fingerprint')->get();
+        $data = fixer::input('post')->remove('oldPwd, captcha, token, fingerprint,field')->get();
         $data->emailCertified = 0;
 
         $this->dao->update(TABLE_USER)->setAutolang(false)
