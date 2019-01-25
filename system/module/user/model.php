@@ -397,6 +397,7 @@ class userModel extends model
             ->data($user, $skip = 'token,oldPwd,password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
+            ->check('mobile', 'phone')
             ->checkIF($this->post->gtalk != false, 'gtalk', 'email')
 
             ->beginIF(RUN_MODE == 'admin')
@@ -1432,6 +1433,7 @@ class userModel extends model
         $this->dao->update(TABLE_USER)
             ->data($user)
             ->check('email', 'notempty')
+            ->check('email', 'email')
             ->where('account')->eq($this->app->user->account)
             ->exec();
 

@@ -85,7 +85,7 @@ input:focus, textarea:focus {
 }
 
 .comments .comment-ext {
-    margin-left: -138px;
+    margin-left: -162px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

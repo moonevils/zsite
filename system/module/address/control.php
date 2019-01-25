@@ -29,6 +29,22 @@ class address extends control
     }
 
     /**
+     * Browse products in order confirm.
+     * 
+     * @access public
+     * @return void
+     */
+    public function addressList()
+    {
+        $this->app->loadLang('user');
+        $this->view->title       = $this->lang->address->browse;
+        $this->view->addresses   = $this->address->getListByAccount($this->app->user->account);
+        $this->view->mobileURL   = helper::createLink('address', 'browse', '', '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('address', 'browse', '', '', 'html');
+        $this->display();
+    }
+
+    /**
      * Create an address.
      * 
      * @access public

@@ -12,7 +12,6 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <style>
-  .modal-dialog {position:static;}
   .modal-content {border:0px}
 </style>
 <div class='modal-dialog'>
@@ -46,6 +45,7 @@ $(function()
         }
     }
     });
+    $('.form-control').focus();
 });
 </script>
 {/noparse}

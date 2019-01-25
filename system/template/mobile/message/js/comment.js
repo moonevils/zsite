@@ -3,6 +3,7 @@ $(function()
     var $commentForm = $('#commentForm'),
         $commentBox = $('#commentBox'),
         $commentContent = localStorage.getItem('commentContent');
+
     if($commentContent)
     {
         $commentForm.find('#commentContent').val($commentContent);
@@ -10,7 +11,7 @@ $(function()
 
     $.refreshCommentList = function()
     {
-        $('#commentsListWrapper').load(window.location.href + ' #commentsList');
+        $('#commentsListAsync').load(window.location.href + ' #commentsListWrapper');
     };
 
     $commentBox.find('.pager').on('click', 'a', function()
