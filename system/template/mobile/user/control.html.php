@@ -15,14 +15,14 @@
   <div class='tag'>
     {if($app->user->account == 'guest')}
     {!html::image('/theme/mobile/common/img/default-head.png')}
-    <div class='tag-body' data-url='{$control->createLink('user', 'login')}'>
+    <a class='tag-body' data-url='{$control->createLink('user', 'login')}'>
       <div class='tag-title'>
         <div>{$lang->user->unlogin}</div>
         <div>{$lang->user->clickLogin}</div>
       </div> 
     {else}
     {!html::image('/theme/mobile/common/img/default-head.png')}
-    <div class='tag-body' data-url='{$control->createLink('user', 'profile')}'>
+    <a class='tag-body' data-url='{$control->createLink('user', 'profile')}'>
       <div class='tag-title'>
         <div>{$user->realname}</div>
         <div>{$user->email}</div>
@@ -31,13 +31,13 @@
       <div class='tag-right'>
       {!html::image('/theme/mobile/common/img/right.png')}
       </div>
-    </div>
+    </a>
   </div>
 </div>
 {if(commonModel::isAvailable('score'))}
 <div class='tag-block user-score'>
   <div class='tag'>
-    <div class='tag-body' data-url='{$control->createLink('user', 'score')}'>
+    <a class='tag-body' data-url='{$control->createLink('user', 'score')}'>
       <div class='tag-title'>
         <div>
           {$lang->user->myScore}
@@ -46,7 +46,7 @@
       <div class='tag-right'>
         {!html::image('/theme/mobile/common/img/right.png')}
       </div>
-    </div>
+    </a>
   </div>
 </div>
 <div class='tag-block user-recharge'>
