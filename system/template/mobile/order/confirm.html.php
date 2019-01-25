@@ -11,15 +11,11 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {!js::set('currencySymbol', $currencySymbol)}
 {!js::set('createdSuccess', $lang->order->createdSuccess)}
 {!js::set('goToPay', $lang->order->goToPay)}
-
 <div class='panel panel-section'>
-  <div class='panel-heading page-header'>
-    <div class='title'><i class='icon icon-shopping-cart'></i> <strong>{$lang->order->confirm}</strong></div>
-  </div>
   {if(!empty($products))}
     <form id='confirmOrderForm' action='{!helper::createLink('order', 'create')}' method='post'>
       <div class='panel-body'>
@@ -36,14 +32,14 @@
             {$productLink = helper::createLink('product', 'view', "id=$productID", "category={{$product->categories[$product->category]->alias}}&name=$product->alias")}
             <div class='card card-block'>
               <div class='table-layout'>
-                <div class='table-cell thumbnail-cell'>
+                <div class='card-image'>
                   {if(empty($product->image))}
                     {$productName = helper::substr($product->name, 10, '...')}
                     {$imgColor = $product->id * 57 % 360}
                     <div class='media-holder'>
                       <div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>
                         {$productName}
-                      <div>
+                      </div>
                     </div>
                   {else}
                     {!html::image($control->loadModel('file')->printFileURL($product->image->primary, 'middleURL'), "title='{{$product->name}}' alt='{{$product->name}}'")}
@@ -96,7 +92,6 @@
         <div class='alert bg-primary-pale'>
           {!printf($lang->order->selectProducts, count($products))}
           {!printf($lang->order->totalToPay, $currencySymbol . $total)}
-          {!html::a(helper::createLink('cart', 'browse'), "<i class='icon icon-shopping-cart'></i> " . $lang->order->backToCart, "class='text-primary pull-right'")}
         </div>
       </div>
       <div class='panel-body'>

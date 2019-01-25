@@ -80,7 +80,7 @@ body.with-appbar-bottom {padding-bottom: 51px;}
 .pager-pull-up-hint > .icon {transition: transform .2s; transform: scale(0); opacity: 0;}
 .page-loading .pager-pull-up-hint > .icon {transform: scale(1); opacity: 1;}
 .page-loading .pager-pull-up-hint > span {display: none;}
-.pager-pull-up-fixed {position: fixed; bottom: 60px; width: 100%; text-align: center;}
+.pager-pull-up-fixed {position: fixed; bottom: 60px; width: 100%; text-align: center; pointer-events: none;}
 .pager-pull-up-label {display: inline-block; border-radius: 3px; background: rgba(0,0,0,.5); color: #fff; line-height: 20px; padding: 2px 8px; font-size: 12px;}
 
 /* Panel */
