@@ -1,5 +1,5 @@
 .tag-block {margin:12px;background:#fff}
-.tag-block > .tag {width:100%;height:40px;line-height:40px;padding:0px 12px;position:relative} 
+.tag-block > .tag {width:100%;height:40px;line-height:40px;padding:0px 12px} 
 .tag-block > .tag > img {float:left}
 .tag-block > .tag > .tag-body {width:100%;height:40px;padding-left:12px;display:block}
 .tag-block > .tag > .tag-body > .tag-title {float:left}

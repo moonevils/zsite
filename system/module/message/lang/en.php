@@ -105,4 +105,6 @@ $lang->message->replyItem   = "<dd><strong>%s</strong> replied on <em>%s</em> ab
 $lang->comment->replyItem   = "<dd><strong>%s</strong> replied on <em>%s</em> about %s</dd>";
 $lang->message->messageItem = "<dd><strong>%s</strong> posted on <em>%s</em> about %s</dd>";
 
-$lang->message->replySubject = 'Admin %s replied.';
+$lang->message->replySubject            = 'Admin %s replied.';
+$lang->message->submit                  = 'Submit';
+$lang->message->inputPlaceholder        = 'Add Message';

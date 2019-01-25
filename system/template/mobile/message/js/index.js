@@ -16,7 +16,7 @@ $(function()
     });
 
     $commentForm.ajaxform({
-        onSubmit: function () 
+        onSubmit: function ()
         {
             localStorage.setItem('commentContent', $commentForm.find('#commentContent').val());
         },

@@ -16,8 +16,7 @@
 {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
 <hr>
 <div class='comments panel'>
-  <div class='comment-list'>
-    {if(isset($comments) and $comments)}
+  <div class='comment-list' style="{if(!isset($comments) || !$comments)}display:none;{/if}">
       <div class='title vertical-center'>
         <span class='vertical-line'></span>
         <span class="list-text">{$lang->message->list}</span>
@@ -29,7 +28,7 @@
               <div class='comment'>
                 <div class='comment-heading vertical-center'>
                   <div class="avatar vertical-center text-muted">
-                    {if(empty($author->avatar))}
+                    {if(empty($comment->avatar))}
                     <i class="icon icon-user icon-10x"></i>
                     {else}
                     <img src="{$comment->avatar}" alt="">
@@ -37,8 +36,8 @@
                   </div>
                   <div class="comment-ext">
                     <span class="authorName">
-                      {if(!empty($comment->nickname))}
-                        {$comment->nickname}
+                      {if(!empty($comment->realname))}
+                        {$comment->realname}
                       {elseif(!empty($comment->from))}
                         {$comment->from}
                       {else}
@@ -61,7 +60,6 @@
           </div>
         </div>
       </div>
-    {/if}
   </div>
   <div class='comment-post vertical-center'>
     <form class='comment-form vertical-center' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
@@ -79,3 +77,19 @@
 
 {include TPL_ROOT . 'common/form.html.php'}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
+
+{noparse}
+<script>
+    $(function()
+    {
+        $.refreshCommentList = function ()
+        {
+            $('.pager-pull-up').removePullUpPager();
+            $('#commentsListAsync').load(window.location.href + ' #commentsListWrapper', function ()
+            {
+                $('.pager-pull-up').initPullUpPager();
+            });
+        };
+    });
+</script>
+{/noparse}

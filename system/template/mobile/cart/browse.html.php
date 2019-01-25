@@ -86,13 +86,9 @@
                     </td>
                     <td>
                       <div class='input-group input-group-sm input-number'>
-                        <span class='input-group-btn'>
-                          <button class='btn default btn-minus' type='button'><i class='icon icon-minus'></i></button>
-                        </span>
-                        {!html::input("count[$product->id]", $product->count, "class='form-control-number form-control' data-price='{{$price}}'")}
-                        <span class='input-group-btn'>
-                          <button class='btn default btn-plus' type='button'><i class='icon icon-plus'></i></button>
-                        </span>
+                        <div class='btn-update btn-minus'><i class='icon icon-minus'></i></div>
+                        <input type='number' class='btn-number text-center' value='{$product->count}' data-price='{$price}' id='count[{$product->id}]' name='count[{$product->id}]'>
+                        <div class='btn-update btn-plus'><i class='icon icon-plus'></i></div>
                       </div>
                     </td>
                   </tr>
@@ -151,7 +147,7 @@
         return $(this).each(function(){
             var $input = $(this);
             $input.on('click', '.btn-minus, .btn-plus', function(){
-                var $val = $input.find('.form-control-number, [type="number"]');
+                var $val = $input.find('.btn-number, [type="number"]');
                 var val = parseInt($val.val());
                 val = Math.max(1, $(this).hasClass('btn-minus') ? (val - 1) : (val + 1));
                 $val.val(val).trigger('change');
@@ -169,7 +165,7 @@ $(function()
         statAll();
     };
 
-    $('.form-control-number').on('change', function()
+    $('.btn-number').on('change', function()
     {
         caculateTotal();
     });
@@ -229,8 +225,8 @@ function statAll()
     var total = 0;
     $('.check-product').each(function()
     {
-        var price = $(this).parent().parent().find('.form-control-number').data('price');
-        var number = $(this).parent().parent().find('.form-control-number').val();
+        var price = $(this).parent().parent().find('.btn-number').data('price');
+        var number = $(this).parent().parent().find('.btn-number').val();
         $(this).parent().parent().find('.product-amount').text(parseFloat(price*number).toFixed(2)); 
         if($(this).prop("checked"))
         {

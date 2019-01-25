@@ -33,7 +33,7 @@
         {/if}
       </div>
       <div class="article-ext">
-        <span class="authorName">{$article->author}</span>
+        <span class="authorName">{$author->realname}</span>
         <span class="addedDate">{!formatTime($article->addedDate)}</span>
       </div>
     </div>
