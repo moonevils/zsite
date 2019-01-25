@@ -41,7 +41,7 @@ $lang->slide->sourceImage = 'Source Library';
 
 $lang->slide->sort        = 'Ranking';
 $lang->slide->admin       = 'Slide Settings';
-$lang->slide->browse      = 'View Slides';
+$lang->slide->browse      = 'Slides';
 $lang->slide->create      = 'Create a Slide';
 $lang->slide->edit        = 'Edit';
 $lang->slide->createGroup = 'Create a Group';
@@ -53,7 +53,7 @@ $lang->slide->removeGroup = 'Delete a Group';
 
 $lang->slide->successSort     = 'Done!';
 $lang->slide->noImageSelected = 'Select an Image';
-$lang->slide->suitableSize    = 'Sizes of images should be the same.';
+$lang->slide->suitableSize    = 'Image size should be the same.';
 $lang->slide->noChange        = 'Nothing changed.';
 $lang->slide->groupNotEmpty   = 'Group name should not be empty.';
 

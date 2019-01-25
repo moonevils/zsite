@@ -100,7 +100,7 @@ $lang->user->messages    = 'Message';
 $lang->user->reply       = 'Reply';
 $lang->user->submission  = 'Submission';
 
-$lang->user->unlogin        = "UN LOGIN";
+$lang->user->unlogin        = "Not Login";
 $lang->user->clickLogin     = "Click to login";
 $lang->user->myScore        = "My Point";
 $lang->user->totalScore     = "Total Point";
@@ -126,7 +126,7 @@ $lang->user->inputPassword       = 'Enter Password';
 $lang->user->searchUser          = 'Search';
 
 $lang->user->errorDeny         = "Sorry, you have no access to『<b>%s</b>』->『<b>%s</b>』. Please contact your Admin. <br/> You will be directed to Homepage in 5 seconds...";
-$lang->user->noModuleDeny      = "Sorry, the site which you are visiting has not been enabled 『<b>%s</b>』module. Please contact your Admin. <br/> You will be directed to Homepage in 5 seconds...";
+$lang->user->noModuleDeny      = "Sorry, the site you are visiting has not been enabled 『<b>%s</b>』module. Please contact your Admin. <br/> You will be directed to Homepage in 5 seconds...";
 $lang->user->loginFailed       = "Login failed. Please check your username and password.";
 $lang->user->identifyFailed    = "Verification failed. Please check your password.";
 $lang->user->locked            = "Account has been locked. Please try to login in %s.";
