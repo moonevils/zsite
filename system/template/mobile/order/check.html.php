@@ -11,7 +11,7 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {!js::set('currencySymbol', $currencySymbol)}
 {!js::set('createdSuccess', $lang->order->createdSuccess)}
 {!js::set('goToPay', $lang->order->goToPay)}

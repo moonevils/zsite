@@ -1,5 +1,4 @@
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'user', 'side')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <div class='panel-section'>
   <div class='panel-heading'>
     <button type='button' class='btn primary block' data-toggle='modal' data-remote="{!inlink('post')}"><i class='icon-plus'></i> {$lang->article->post}</button>

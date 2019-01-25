@@ -333,6 +333,7 @@ class user extends control
         $this->view->desktopURL  = helper::createLink('user', 'control', '', '', 'html');
         $this->view->title       = $this->lang->user->control->common;
         $this->view->mobileTitle = $this->lang->user->control->common;
+        $this->view->user        = $this->user->getByAccount($this->app->user->account);
         $this->view->source      = $source;
         $this->display();
     }
@@ -371,11 +372,12 @@ class user extends control
         /* Load the forum lang to change the pager lang items. */
         $this->app->loadLang('forum');
 
-        $this->view->title      = $this->lang->user->thread;
-        $this->view->threads    = $this->loadModel('thread')->getByUser($this->app->user->account, $pager);
-        $this->view->pager      = $pager;
-        $this->view->mobileURL  = helper::createLink('user', 'thread', "pageID=$pageID", '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'thread', "pageID=$pageID", '', 'html');
+        $this->view->title       = $this->lang->user->thread;
+        $this->view->mobileTitle = $this->lang->user->thread;
+        $this->view->threads     = $this->loadModel('thread')->getByUser($this->app->user->account, $pager);
+        $this->view->pager       = $pager;
+        $this->view->mobileURL   = helper::createLink('user', 'thread', "pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('user', 'thread', "pageID=$pageID", '', 'html');
 
         $this->display();
     }
@@ -397,11 +399,12 @@ class user extends control
         /* Load the thread lang thus to rewrite the page lang items. */
         $this->app->loadLang('thread');    
 
-        $this->view->title      = $this->lang->user->reply;
-        $this->view->replies    = $this->loadModel('reply')->getByUser($this->app->user->account, $pager);
-        $this->view->pager      = $pager;
-        $this->view->mobileURL  = helper::createLink('user', 'reply', "pageID=$pageID", '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'reply', "pageID=$pageID", '', 'html');
+        $this->view->title       = $this->lang->user->reply;
+        $this->view->mobileTitle = $this->lang->user->reply;
+        $this->view->replies     = $this->loadModel('reply')->getByUser($this->app->user->account, $pager);
+        $this->view->pager       = $pager;
+        $this->view->mobileURL   = helper::createLink('user', 'reply', "pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('user', 'reply', "pageID=$pageID", '', 'html');
 
         $this->display();
     }
@@ -422,12 +425,13 @@ class user extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title      = $this->lang->user->messages;
-        $this->view->messages   = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
-        $this->view->pager      = $pager;
-        $this->view->source     = 'bottom';
-        $this->view->mobileURL  = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'html');
+        $this->view->title        = $this->lang->user->messages;
+        $this->view->mobileTitle  = $this->lang->user->messages;
+        $this->view->messages     = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
+        $this->view->pager        = $pager;
+        $this->view->source       = 'bottom';
+        $this->view->mobileURL    = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL   = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'html');
 
         $this->display();
     }
@@ -1189,10 +1193,11 @@ class user extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title  = $this->lang->user->score;
-        $this->view->scores = $this->loadModel('score')->getByUser($this->app->user->account, $pager);
-        $this->view->user   = $this->user->getByAccount($this->app->user->account);
-        $this->view->pager  = $pager;
+        $this->view->title        = $this->lang->user->score;
+        $this->view->mobileTitle  = $this->lang->user->myScore;
+        $this->view->scores       = $this->loadModel('score')->getByUser($this->app->user->account, $pager);
+        $this->view->user         = $this->user->getByAccount($this->app->user->account);
+        $this->view->pager        = $pager;
         $this->display();
     }
 

@@ -53,7 +53,7 @@
       {@$i++}
       {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
       <div class='article-item vertical-center article-align'>
-        <div class="article-content">
+        <div class="{if(empty($article->image))}article-content-height{else}article-content{/if}">
           <div class='vertical-start'>
             <strong class="article-title">
               {if($i==1)}

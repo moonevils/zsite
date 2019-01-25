@@ -12,16 +12,6 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {!js::import($control->config->webRoot . 'js/fingerprint/fingerprint.js')}
-<style>
-  .user-control-nav {margin-bottom:1.2rem;}
- .user-control-nav > li {border:none;}
- .user-control-nav > li > a {font-size:1.7rem; border:none; text-align:left;}
- .user-control-nav > li > a.avatar {height:80px;line-height:60px}
- .user-control-nav > li > a > span {float:right;margin-right:16px}
- .user-control-nav > li > a > img {float:right;margin-right:16px;width:60px;height:60px}
- .user-control-nav > li > a > i {margin-right:0.5rem}
- .user-control-nav > li > a > .icon-chevron-right {float:right;color:#ddd;margin-top:2px}
-</style>
 {foreach($control->config->user->infoGroups->mobile as $group => $items)}
 <ul class='nav nav-primary user-control-nav nav-stacked'>
   {$navs = explode(',', $items)}

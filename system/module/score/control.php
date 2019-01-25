@@ -56,6 +56,7 @@ class score extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $payLink));
         }
         $this->view->title = $this->lang->user->buyScore;
+        $this->view->mobileTitle = $this->lang->user->buyScore;
         $this->display();
     }
 

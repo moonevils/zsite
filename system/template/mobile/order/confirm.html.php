@@ -34,7 +34,7 @@
           {$total = 0}
           {foreach($products as $productID => $product)}
             {$productLink = helper::createLink('product', 'view', "id=$productID", "category={{$product->categories[$product->category]->alias}}&name=$product->alias")}
-            <div class='card'>
+            <div class='card card-block'>
               <div class='table-layout'>
                 <div class='table-cell thumbnail-cell'>
                   {if(empty($product->image))}
@@ -65,7 +65,7 @@
                             <span>{!echo $currencySymbol . $product->promotion}</span>&nbsp;
                             <small class='text-muted text-line-through'>{!echo $currencySymbol . $product->price}</small>
                           {else}
-                            {$price  = $product->price}
+                            {$price = $product->price}
                             <span>{!echo $currencySymbol . $product->price}</span>
                           {/if}
                           {!html::hidden("price[$product->id]", $price)}
@@ -139,7 +139,7 @@ $(function()
     {
         $('#addressListWrapper').load(addressBrowseLink, function()
         {
-            if($('#addressList').find('.card').size() == 0)
+            if($('#addressList').find('.item').size() == 0)
             {
                 $('#createAddress').val(1);
                 $('[name=address]').prop('checked', false);

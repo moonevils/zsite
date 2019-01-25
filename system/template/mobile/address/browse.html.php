@@ -12,12 +12,12 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 
-<div class='manage vertical-center'>
+<div class='address-manage vertical-center'>
   <p name='operate' current='manage' style='{if(count($addresses) == 0)}display:none;{/if}'>{$lang->address->manage}</p>
   <input type='hidden' name='manage' value='{$lang->address->manage}'>
   <input type='hidden' name='manageDone' value='{$lang->address->manageDone}'>
 </div>
-<div class='panel'>
+<div class='panel address-list'>
   <div class='panel-body'>
     <div class='title strong vertical-center'>
         <span class='vertical-line'></span><span class='browse'>{$lang->address->browse}</span>
@@ -31,19 +31,19 @@
           <div class='item'>
             <div class='vertical-center'>
                 <label class='checkbox-circle item-checkbox'>
-                  <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}' disabled>
+                  {if(helper::isAjaxRequest())}<input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>{/if}
                   <label for='checkbox{$i}'></label>
                 </label>
             </div>
             <div class='address-edit'>
-              <div class='card-heading vertical-center'>
+              <div class='vertical-center'>
                 <strong class='name'>{$address->contact}</strong>
                 <span class='phone'>{!substr($address->phone, 0, 3) . '****' . substr($address->phone, -4)}</span>
                 {if(zget($address, 'isDefault', 0))}
                 <span class='address-default text-primary'>{$lang->address->default}</span>
                 {/if}
               </div>
-              <div class='card-content vertical-center alignment-address'>
+              <div class='vertical-center alignment-address'>
                 <span class='address'>
                   {$address->address}
                 </span>
@@ -76,16 +76,5 @@
     </div>
   </div>
 </div>
-<script>
-$(function()
-{
-    $.refreshAddressList = function()
-    {
-        $('#addressListWrapper').load(window.location.href + ' #addressList');
-        $('p[name="operate"]').show();
-        $('#create').parent().removeClass('create-center');
-    };
-});
-</script>
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

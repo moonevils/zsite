@@ -539,6 +539,7 @@ class article extends control
             ->fetchAll('id'); 
 
         $this->view->title        = $this->lang->user->submission;
+        $this->view->mobileTitle  = $this->lang->user->submission;
         $this->view->articles     = $articles;
         $this->view->pager        = $pager;
         $this->view->orderBy      = $orderBy;
