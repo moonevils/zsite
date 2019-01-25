@@ -70,7 +70,7 @@
   </div>
 </div>
 
-{$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'comment', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'))}
+{$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'comment', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'), false)}
 
 {include TPL_ROOT . 'common/form.html.php'}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}

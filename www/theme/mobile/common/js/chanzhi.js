@@ -412,7 +412,7 @@ $(function()
         if(pageTotal && pageTotal > 1 && pageID && pageID < pageTotal)
         {
             var $info = $pager.find('.pager-pull-up-hint');
-            var triggerDistance = 150;
+            var triggerDistance = 100;
             var tryLoadNextPage = function()
             {
                 if($pager.hasClass('page-loading') || pageID >= pageTotal) return;

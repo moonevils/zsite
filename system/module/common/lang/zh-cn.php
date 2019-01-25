@@ -154,6 +154,7 @@ $lang->js->continueShopping = '继续购物';
 $lang->js->required         = '必填';
 $lang->js->back             = '返回';
 $lang->js->continue         = '继续';
+$lang->js->bindWechatTip    = '发帖功能设置了绑定微信的限制，请先绑定微信会员。';
 
 /* Contact fields*/
 $lang->company = new stdclass();
