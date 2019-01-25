@@ -15,7 +15,7 @@
 {!js::set('messageRefreshUrl', $control->createLink('message', 'comment', "objecType=$objectType&objectID=$objectID"))}
 {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
 <hr>
-<div class='comments panel panel-section'>
+<div class='comments panel'>
   <div class='comment-list' id="commentsListWrapper">
     {if(isset($comments) and $comments)}
       <div class='title vertical-center'>
