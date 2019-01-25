@@ -158,13 +158,14 @@
 {/if}
 </div>
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_view', 'bottom')}</div>
-{if(commonModel::isAvailable('shop'))}
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
+  {if(commonModel::isAvailable('shop'))}
   <div class='footer-left'>
     {!html::a(helper::createLink('cart', 'browse', 'source=product'), html::image('/theme/mobile/product/cart.png') . "<span class='label badge red circle'>0</span>")}
   </div>
+  {/if}
   <div class='footer-left'>
-    {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/comment.png'))}
+    {!html::a('#commentBox', html::image('/theme/mobile/product/comment.png'), "id='message'")}
   </div>
   <div class='footer-right'>
   {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}
@@ -180,7 +181,6 @@
   {/if}
   </div>
 </footer>
-{/if}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 <div class='block-region region-footer hidden blocks' data-region='all-footer'>{$control->loadModel('block')->printRegion($layouts, 'all', 'footer')}</div>
 </body>
