@@ -11,7 +11,7 @@ $(function()
 
     $.refreshCommentList = function()
     {
-        $('#commentsListWrapper').load(window.location.href + ' #commentsList');
+        $('#commentsListAsync').load(window.location.href + ' #commentsListWrapper');
     };
 
     $commentBox.find('.pager').on('click', 'a', function()
