@@ -124,13 +124,9 @@
         <th>{$lang->product->count}</th>
         <td>
           <div class='input-group input-group-sm input-number'>
-            <span class='input-group-btn'>
-              <button class='btn default btn-minus' type='button'><i class='icon icon-minus'></i></button>
-            </span>
+            <div class='btn-update btn-minus'><i class='icon icon-minus'></i></div>
             <input type='number' class='btn-number text-center' value='1' id='count' name='count'>
-            <span class='input-group-btn'>
-              <button class='btn default btn-plus' type='button'><i class='icon icon-plus'></i></button>
-            </span>
+            <div class='btn-update btn-plus'><i class='icon icon-plus'></i></div>
           </div>
         </td>
       </tr>
