@@ -158,27 +158,29 @@
 {/if}
 </div>
 <div class='block-region region-bottom blocks' data-region='product_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_view', 'bottom')}</div>
+{if(commonModel::isAvailable('shop'))}
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
-<div class='footer-left'>
+  <div class='footer-left'>
     {!html::a(helper::createLink('cart', 'browse', 'source=product'), html::image('/theme/mobile/product/cart.png') . "<span class='label badge red circle'>0</span>")}
-</div>
-<div class='footer-left'>
+  </div>
+  <div class='footer-left'>
     {!html::a(helper::createLink('cart', 'browse'), html::image('/theme/mobile/product/comment.png'))}
-</div>
-<div class='footer-right'>
-{if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}
-  {if($stockOpened and $product->amount < 1)}
-    <div class='right-btn'><button type='button' class='btn-soldout'>{$lang->product->soldout}</button></div>
-  {else}
-    <div class='right-btn left'><button type='button' class='btn-cart' data-url='{!$control->createLink('cart', 'add', "product={{$product->id}}&count=productcount")}'>{$lang->product->addToCart}</button></div>
-    <div class='right-btn'><button type='button' class='btn-buy' data-url='{!$control->createLink('order', 'confirm', "product={{$product->id}}&count=productcount")}'>{$lang->product->buyNow}</button></div>
+  </div>
+  <div class='footer-right'>
+  {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}
+    {if($stockOpened and $product->amount < 1)}
+      <div class='right-btn'><button type='button' class='btn-soldout'>{$lang->product->soldout}</button></div>
+    {else}
+      <div class='right-btn left'><button type='button' class='btn-cart' data-url='{!$control->createLink('cart', 'add', "product={{$product->id}}&count=productcount")}'>{$lang->product->addToCart}</button></div>
+      <div class='right-btn'><button type='button' class='btn-buy' data-url='{!$control->createLink('order', 'confirm', "product={{$product->id}}&count=productcount")}'>{$lang->product->buyNow}</button></div>
+    {/if}
   {/if}
-{/if}
-{if(!$product->unsaleable and $product->mall and !$product->negotiate)}
+  {if(!$product->unsaleable and $product->mall and !$product->negotiate)}
     <div class='right-btn'><button type='button' class='btn-buy' data-url='{!$control->createLink('product', 'redirect', "id={{$product->id}}")}'>{$lang->product->buyNow}</button></div>
-{/if}
-</div>
+  {/if}
+  </div>
 </footer>
+{/if}
 {if(isset($pageJS))} {!js::execute($pageJS)} {/if}
 <div class='block-region region-footer hidden blocks' data-region='all-footer'>{$control->loadModel('block')->printRegion($layouts, 'all', 'footer')}</div>
 </body>
