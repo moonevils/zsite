@@ -48,6 +48,7 @@
     {!js::import($templateCommonRoot . 'js/mzui.all.min.js')}
     {!js::import($templateCommonRoot . 'js/chanzhi.js')}
     {!css::import($templateCommonRoot . 'css/mzui.min.css')}
+    {!css::import($templateCommonRoot . 'css/chanzhi.css')}
   {/if}
 
   {* Import customed css file if it exists. *}
