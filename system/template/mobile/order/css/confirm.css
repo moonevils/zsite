@@ -35,6 +35,7 @@
 .address-list .address-default { text-align: center; font-size: 12px; width: 35px; margin-left: 20px; border-radius: 3px; background-color: #E0E9FF; }
 
 .address-list .with-appbar-top { background-color: #F4F3F4; } 
+.address-list .checkbox-circle input[type="radio"] { visibility: hidden; }
 .address-list .checkbox-circle { position: relative; } 
 .address-list .checkbox-circle label { background-color: #fff; border: 1px solid #ccc; border-radius: 50%; cursor: pointer; height: 15px; width: 15px; right: 0px; left: -3px; top: 3px; position: absolute; }
 
