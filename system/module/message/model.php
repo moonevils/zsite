@@ -61,7 +61,7 @@ class messageModel extends model
             if(!is_numeric($id)) $userMessages = '0';
         }
 
-        return  $this->dao->select('u.nickname, u.avatar, m.id, m.from, m.content, m.date')->from(TABLE_MESSAGE)->alias('m')
+        return  $this->dao->select('u.realname, u.nickname, u.avatar, m.id, m.from, m.content, m.date')->from(TABLE_MESSAGE)->alias('m')
             ->leftJoin(TABLE_USER)->alias('u')->on('m.account=u.account')
             ->where('m.type')->eq($type)
             ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('m.public')->eq(1)->fi()

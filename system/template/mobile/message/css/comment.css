@@ -123,7 +123,6 @@ input:focus, textarea:focus {
 }
 
 .comments .reply-panel {
-    margin: 5px 0 5px 0;
     justify-content: space-between;
 }
 
@@ -146,10 +145,12 @@ input:focus, textarea:focus {
 .comments .reply-panel .reply-heading {
     margin: 0 12px 0 12px;
     justify-content: space-between;
+    height: 30px;
 }
 
 .comments .reply-panel .reply-body {
     color: #676767;
     font-size: 12px;
-    margin-left: 12px;
+    margin: 0 12px 0 12px;
+    height: 25px;
 }

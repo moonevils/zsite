@@ -9,12 +9,6 @@ $(function()
         $commentForm.find('#commentContent').val($commentContent);
     }
 
-    $.refreshCommentList = function()
-    {
-        $('#commentsListAsync').load(window.location.href + ' #commentsListWrapper');
-        $('#paginator').load(window.location.href + ' #paginator');
-    };
-
     $commentBox.find('.pager').on('click', 'a', function()
     {
         $commentBox.load($(this).attr('href'));
