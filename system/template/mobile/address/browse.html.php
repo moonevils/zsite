@@ -31,7 +31,7 @@
           <div class='item'>
             <div class='vertical-center'>
                 <label class='checkbox-circle item-checkbox'>
-                  {if(helper::isAjaxRequest())}<input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>{/if}
+                  <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>
                   <label for='checkbox{$i}'></label>
                 </label>
             </div>
