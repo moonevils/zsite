@@ -77,7 +77,7 @@ EOT;
     }
 
     /**
-     * 创建下拉刷新插件及相关 JS。
+     * 创建下拉刷新插件代码。
      * Create 'pull-up-load-more' component js code.
      *
      * @param string $listEle       list element selector 列表元素选择器
@@ -90,7 +90,7 @@ EOT;
     public function createPullUpJS($listEle, $hintText = '', $pageUrlFormat = '', $showPageTag = true)
     {
         if(!$pageUrlFormat) $pageUrlFormat = $this->createUrl('$ID');
-        $hintDiv = $this->pageID < $this->pageTotal ? "<div class='pager-pull-up-hint'><i class='icon-spinner-indicator icon icon-spin'></i><span>$hintText</span></div>" : '';
+        $hintDiv     = $this->pageID < $this->pageTotal ? "<div class='pager-pull-up-hint'><i class='icon-spinner-indicator icon icon-spin'></i><span>$hintText</span></div>" : '';
         $pageTagHtml = '';
         if($showPageTag)
         {
@@ -102,7 +102,7 @@ EOT;
             </div>
 EOT;
         }
-        $js      = <<<EOT
+        $js = <<<EOT
         <div class='pager-pull-up' data-url='$pageUrlFormat' data-pageID='$this->pageID' data-pageTotal='$this->pageTotal' data-list='$listEle'>
             $hintDiv
             $pageTagHtml
