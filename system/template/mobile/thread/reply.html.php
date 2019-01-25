@@ -2,7 +2,7 @@
   <div id='repliesList' class='panel-body cards cards-list'>
     {foreach($replies as $reply)}
     {$floor = $floors[$reply->id]}
-    <div class='card thread reply' id='{$reply->id}'>
+    <div class='card card-block  thread reply' id='{$reply->id}'>
       <div class='card-heading'>
         <div class='pull-right'>
           {if($floor > 2)}

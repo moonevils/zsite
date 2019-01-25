@@ -1,5 +1,5 @@
 <div class='panel panel-section panel-body cards cards-list'>
-  <div class='card thread'>
+  <div class='card card-block thread'>
     <div class='card-heading with-icon'>
       <i class='icon-comment-alt icon'></i>
       <div class='pull-right'>
