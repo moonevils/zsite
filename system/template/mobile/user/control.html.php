@@ -13,7 +13,7 @@
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <div class='tag-block user-image'>
   {if($app->user->account == 'guest')}
-  <div class='tag' data-url='{$control->createLink('user', 'login')}'>
+  <div class='tag' data-url="{$control->createLink('user', 'login')}">
     {!html::image('/theme/mobile/common/img/default-head.png')}
     <a class='tag-body' href="{$control->createLink('user', 'login')}">
       <div class='tag-title'>
@@ -21,7 +21,7 @@
         <div>{$lang->user->clickLogin}</div>
       </div> 
   {else}
-  <div class='tag' data-url='{$control->createLink('user', 'profile')}'>
+  <div class='tag' data-url="{$control->createLink('user', 'profile')}">
     {!html::image('/theme/mobile/common/img/default-head.png')}
     <a class='tag-body' href="{$control->createLink('user', 'profile')}">
       <div class='tag-title'>
@@ -37,8 +37,8 @@
 </div>
 {if(commonModel::isAvailable('score'))}
 <div class='tag-block user-score'>
-  <div class='tag' data-url='{$control->createLink('user', 'score')}'>
-    <a class='tag-body' data-url='{$control->createLink('user', 'score')}'>
+  <div class='tag' data-url="{$control->createLink('user', 'score')}">
+    <a class='tag-body' href="{$control->createLink('user', 'score')}">
       <div class='tag-title'>
         <div>
           {$lang->user->myScore}
