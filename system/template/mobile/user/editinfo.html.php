@@ -45,6 +45,7 @@ $(function()
         }
     }
     });
+    $('input .form-control').trigger("click").focus();
 });
 </script>
 {/noparse}
