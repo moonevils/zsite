@@ -153,6 +153,7 @@ $lang->js->continueShopping = 'Continue shopping';
 $lang->js->required         = 'Required';
 $lang->js->back             = 'Back';
 $lang->js->continue         = 'Continue';
+$lang->js->bindWechatTip    = 'Posting sets the limit for binding WeChat. Please bind WeChat user first.';
 
 /* Contact fields*/
 $lang->company = new stdclass();
