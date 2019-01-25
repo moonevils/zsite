@@ -83,21 +83,29 @@ EOT;
      * @param string $listEle       list element selector 列表元素选择器
      * @param string $hintText      hint text 下拉提示文本
      * @param string $pageUrlFormat page url template 页码链接模版，例如 /message-comment-article-$ID.html
+     * @param string $showPageTag   if set to ture, then show a pager tag element and fixed on page bottom 如果设置为 true，则在页面底部固定显示当前页面信息标签
      * @access public
      * @return string
      */
-    public function createPullUpJS($listEle, $hintText = '', $pageUrlFormat = '')
+    public function createPullUpJS($listEle, $hintText = '', $pageUrlFormat = '', $showPageTag = true)
     {
         if(!$pageUrlFormat) $pageUrlFormat = $this->createUrl('$ID');
         $hintDiv = $this->pageID < $this->pageTotal ? "<div class='pager-pull-up-hint'><i class='icon-spinner-indicator icon icon-spin'></i><span>$hintText</span></div>" : '';
+        $pageTagHtml = '';
+        if($showPageTag)
+        {
+            $pageTagHtml = <<<EOT
+            <div class="pager-pull-up-fixed">
+                <div class='pager-pull-up-label'>
+                    <span class='pager-pull-up-pageID'>$this->pageID</span>&#47;<span class='pager-pull-up-pageTotal'>$this->pageTotal</span>
+                </div>
+            </div>
+EOT;
+        }
         $js      = <<<EOT
         <div class='pager-pull-up' data-url='$pageUrlFormat' data-pageID='$this->pageID' data-pageTotal='$this->pageTotal' data-list='$listEle'>
-        $hintDiv
-          <div class="pager-pull-up-fixed">
-            <div class='pager-pull-up-label'>
-                <span class='pager-pull-up-pageID'>$this->pageID</span>&#47;<span class='pager-pull-up-pageTotal'>$this->pageTotal</span>
-            </div>
-          </div>
+            $hintDiv
+            $pageTagHtml
         </div>
 EOT;
         return $js;
