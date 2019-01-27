@@ -63,7 +63,7 @@ class blockModel extends model
                 ->where('page')->eq("{$module}_{$method}")
                 ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
                 ->beginIF(version_compare($this->config->global->version, '7.1', '>='))->andWhere('theme')->in("all,$theme")->fi()
-                ->beginIF(version_compare($this->config->global->version, '7.1', '<'))->andWhere('plan')->in("all,$theme")->fi()
+                ->beginIF(version_compare($this->config->global->version, '7.1', '<'))->andWhere('theme')->in("all,$theme")->fi()
                 ->andWhere('object')->eq($object)
                 ->fetchAll('region');
         }
@@ -72,7 +72,7 @@ class blockModel extends model
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
             ->beginIF(version_compare($this->config->global->version, '7.1', '>='))->andWhere('theme')->eq($theme)->fi()
-            ->beginIF(version_compare($this->config->global->version, '7.1', '<'))->andWhere('plan')->eq($theme)->fi()
+            ->beginIF(version_compare($this->config->global->version, '7.1', '<'))->andWhere('theme')->eq($theme)->fi()
             ->andWhere('object')->eq('')
             ->fetchGroup('page', 'region');
 
