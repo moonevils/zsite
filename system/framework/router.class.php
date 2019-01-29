@@ -368,7 +368,7 @@ class router extends baseRouter
                     $searchHtml = html::input('words', $keywords, "class='form-control' placeholder=''");
                     $cache      = str_replace($this->config->searchWordPlaceHolder, $searchHtml, $cache);
 
-                    if(is_callable(array('extcommonModel', 'processCache'))) $this->output = extcommonModel::processCache($this->output);
+                    if(is_callable(array('extcommonModel', 'processCache'))) $cache = extcommonModel::processCache($cache);
                     die($cache);
                 }
             }
