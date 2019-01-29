@@ -537,6 +537,7 @@ class control extends baseControl
             header('Content-Length: ' . strlen($this->output));
         }
 
+        if(is_callable(array('extcommonModel', 'processOutput'))) $this->output = extcommonModel::processOutput($this->output);
 		echo $this->output;
     }
 
