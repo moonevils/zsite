@@ -490,7 +490,7 @@ class userModel extends model
 
         $user = fixer::input('post')
             ->setIF($this->post->password1 != false, 'password', $this->createPassword($this->post->password1, $account))
-            ->remove('password1, password2, ip, account, admin, join, visits')
+            ->remove('password1, password2, ip, account, admin, join, visits,token')
             ->get();
 
         $this->dao->setAutolang(false)->update(TABLE_USER)->data($user, 'token,fingerprint')->autoCheck()->where('account')->eq($account)->exec();
