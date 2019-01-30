@@ -4,9 +4,9 @@ $config->user->resetExpired = 3*86400;
 
 $config->user->skipedFields = new stdclass();
 $config->user->skipedFields->create = 'ip,fingerprint,private,emailCertified,mobileCertified,registerAgreement,token';
-$config->user->skipedFields->update = 'ip,admin,email,groups,account,join,visits,fingerprint,locked,token,private,emailCertified,mobileCertified,bindSite';
+$config->user->skipedFields->update = 'ip,admin,email,groups,account,join,visits,fingerprint,locked,token,private,emailCertified,mobileCertified,bindSite,token';
 
-$config->user->skipedFields->adminUpdate = 'groups,fingerprint';
+$config->user->skipedFields->adminUpdate = 'groups,fingerprint,token';
 
 $config->user->require = new stdclass();
 $config->user->require->create      = 'account,realname,email,password1';
