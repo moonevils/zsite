@@ -280,12 +280,10 @@
 .appbar.fix-bottom {background-color: @color-primary; border: none;}
 .appbar-actions .icon-search,
 .appbar .nav-icons > li > a > span {color: @color-inverse;}
-.set-bottomnavbar-style() when (@color-inverse = #333) {
-  filter: brightness(0);
-}
-.set-bottomnavbar-style() when (@color-inverse = #fff) {
-  filter: brightness(10);
-}
+.set-bottomnavbar-style() when (@color-inverse = #333) {filter: brightness(0);}
+.set-bottomnavbar-style() when (@color-inverse = #fff) {filter: brightness(10);}
 .appbar .nav-icons > li > a > .img-icon {.set-bottomnavbar-style()}
+
+.panel > .panel-heading > strong {border-left-color: @color-primary;}
 
 .carousel-indicators li.active {background: @color-primary;}
