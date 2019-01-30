@@ -4,6 +4,7 @@
 @color-inverse:      contrast(@color-primary, #333, #fff, 60%);
 @color-inverse-dark: darken(@color-primary, 60%);
 @color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 60%);
+@img-gradient:       linear-gradient(90deg, darken(@color-primary, 6.5%) 10%, lighten(@color-primary, 10.3%) 100%);
 
 .override-colorset(@color) when not(@color = #3280FC)
 {
@@ -158,11 +159,6 @@
   }
 }
 
-.appbar.fix-bottom {
-  background-color: @color-pale;
-  border: none;
-}
-
 .appnav.fix-top {
   background-color: @color-primary;
   color: @color-inverse;
@@ -170,13 +166,8 @@
 
   .nav > li {
     > a {
-      color: @color-inverse;
       opacity: .8;
       box-shadow: none;
-
-      &:hover, &.focus, &:active {
-        background-color: lighten(@color-primary, 8%);
-      }
 
       &.sub-open {
         &, &:hover, &.focus, &:active {
@@ -279,3 +270,22 @@
 .details-tree summary + ul > li:before {content: ' '; display: block; position: absolute; left: -14px; top: 15px; width: 15px; border-top: 1px dashed #ccc;}
 .details-tree summary + ul > li:after {content: ' '; display: block; position: absolute; left: -14px; top: -8px; bottom: -15px; border-left: 1px dashed #ccc;}
 .details-tree summary + ul > li:last-child:after {display: none;}
+
+.appbar .nav-icons > li > a:focus {background: rgba(255,255,255,.1)}
+.appnav > .mainnav > .nav > li > a.sub-open > .icon-caret-down {color: @color-primary;}
+.appnav > .mainnav > .nav > li.active > a {color: @color-primary; box-shadow: none; background: none;}
+.appnav > .mainnav > .nav > li.active > a:before {background-color: @color-primary; background-image: @img-gradient;}
+.appnav > .subnavs > .nav > li.active > a {background: @color-pale;}
+.appbar .nav-icons > li.active > a {color: @color-primary;}
+.appbar.fix-bottom {background-color: @color-primary; border: none;}
+.appbar-actions .icon-search,
+.appbar .nav-icons > li > a > span {color: @color-inverse;}
+.set-bottomnavbar-style() when (@color-inverse = #333) {
+  filter: brightness(0);
+}
+.set-bottomnavbar-style() when (@color-inverse = #fff) {
+  filter: brightness(10);
+}
+.appbar .nav-icons > li > a > .img-icon {.set-bottomnavbar-style()}
+
+.carousel-indicators li.active {background: @color-primary;}
