@@ -37,10 +37,10 @@ class address extends control
     public function addressList()
     {
         $this->app->loadLang('user');
-        $this->view->title       = $this->lang->address->browse;
-        $this->view->addresses   = $this->address->getListByAccount($this->app->user->account);
-        $this->view->mobileURL   = helper::createLink('address', 'browse', '', '', 'mhtml');
-        $this->view->desktopURL  = helper::createLink('address', 'browse', '', '', 'html');
+        $this->view->title      = $this->lang->address->browse;
+        $this->view->addresses  = $this->address->getListByAccount($this->app->user->account);
+        $this->view->mobileURL  = helper::createLink('address', 'addresslist', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('address', 'addresslist', '', '', 'html');
         $this->display();
     }
 
