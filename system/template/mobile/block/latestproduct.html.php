@@ -10,17 +10,17 @@
  * @link        http://www.chanzhi.org
 */
 /php*}
-{$content  = json_decode($block->content)}
-{$type     = str_replace('product', '', strtolower($block->type))}
-{$method   = 'get' . $type}
+{$content = json_decode($block->content)}
+{$type    = str_replace('product', '', strtolower($block->type))}
+{$method  = 'get' . $type}
 {if(empty($content->category))} {$content->category = 0} {/if}
 {$showImage = isset($content->image) ? true : false}
-{$products = $model->loadModel('product')->$method($content->category, $content->limit, $showImage)}
+{$products  = $model->loadModel('product')->$method($content->category, $content->limit, $showImage)}
 <div id="block{$block->id}" class="{!echo $showImage ? 'panel-cards with-cards ' : ''} panel panel-block {$blockClass}">
   <div class='panel-heading'>
     <strong>{$icon} {$block->title}</strong>
     {if(isset($content->moreText) and isset($content->moreUrl))}
-      <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
+    <div class='pull-right'>{!html::a($content->moreUrl, $content->moreText)}</div>
     {/if}
   </div>
   {if($showImage)}
