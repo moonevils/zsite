@@ -103,13 +103,13 @@ class cart extends control
     }
 
     /**
-     * Delete products from cart.
+     * Batch delete products from cart.
      * 
      * @param  string $products 
      * @access public
      * @return void
      */
-    public function batchdelete($products)
+    public function batchDelete($products)
     {
         $products = explode(',', rtrim($products, ','));
         foreach($products as $product)
