@@ -54,22 +54,21 @@
                   <div class='card-price'><strong class='text-danger'>{$lang->product->negotiate}</strong></div>'
                 {else}
                   {if($product->promotion != 0)}
-                    <div class='card-price'><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->promotion}</strong>
+                    <div class='card-price'><strong class='text-danger'>{$control->config->product->currencySymbol}{$product->promotion}</strong>
                       {if($product->price != 0)}
-                      <small class='text-muted text-line-through'>{!echo $control->config->product->currencySymbol . $product->price}</small>
+                      <small class='text-muted text-line-through'>{$control->config->product->currencySymbol}{$product->price}</small>
                       {/if}
                     </div>
                   {elseif($product->price != 0)}
-                    <div class='card-price'><strong class='text-danger'>{!echo $control->config->product->currencySymbol . $product->price}</strong></div>
+                    <div class='card-price'><strong class='text-danger'>{$control->config->product->currencySymbol}{$product->price}</strong></div>
                   {/if}
                 {/if}
               {/if}
             </div>
           </div>
         </div>
-
         {if($recPerRow === 1 || $rowIndex === ($recPerRow - 1))}
-          </div>
+        </div>
         {/if}
         {@$index++}
       {/foreach}
