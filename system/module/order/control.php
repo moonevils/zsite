@@ -34,7 +34,7 @@ class order extends control
         $this->view->products = $this->order->getPostedProducts($product, $count);
 
         $this->view->title          = $this->lang->order->confirm;
-        $this->view->mobileTitle          = $this->lang->order->confirm;
+        $this->view->mobileTitle    = $this->lang->order->confirm;
         $this->view->addresses      = $this->loadModel('address')->getListByAccount($this->app->user->account);
         $this->view->currencySymbol = $this->config->product->currencySymbol;
         $this->view->mobileURL      = $mobileURL;
