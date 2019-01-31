@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php $urlScheme = isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'http';?>
+<?php $urlScheme = helper::isHttps() ? 'https' : 'http';?>
 <div class='container' id='shortcutBox'>
   <div id='dashboardWrapper'>
     <div class='panels-container dashboard' id='dashboard'>
