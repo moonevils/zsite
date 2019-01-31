@@ -49,7 +49,7 @@ class article extends control
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
         $families = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
-        $sticks   = $pageID > 1 ? [] : $this->article->getSticks($families, 'article');
+        $sticks   = $pageID > 1 ? array() : $this->article->getSticks($families, 'article');
         $articles = $this->article->getList('article', $families, $orderBy, $pager);
         $articles = $sticks + $articles;
 
