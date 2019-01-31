@@ -45,9 +45,9 @@
         <div class='article-item vertical-center article-align'>
           {if($content->imagePosition == 'left' && !empty($article->image))}
           <div class='article-img'>
-            {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
+            {$thumbnailTitle = $article->image->primary->title ? $article->image->primary->title : $article->title}
             {$article->image->primary->objectType = 'article'}
-            {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
+            {$thumbnailLink = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
             {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: 100%;'>{{$thumbnailLink}}</div>"}
             {$thumbnail}
           </div>
@@ -65,7 +65,9 @@
                 </label>
                 {/if}
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
-                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
+                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}
+                  <span class='text-danger'><i class="icon icon-arrow-up"></i></span>
+                {/if}
               </strong>
             </div>
             <div class='article-ext'>
@@ -89,17 +91,14 @@
           </div>
           {if($content->imagePosition == 'right' && !empty($article->image))}
           <div class='article-img'>
-            {$thumbnailTitle    = $article->image->primary->title ? $article->image->primary->title : $article->title}
+            {$thumbnailTitle = $article->image->primary->title ? $article->image->primary->title : $article->title}
             {$article->image->primary->objectType = 'article'}
-            {$thumbnailLink     = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
-            {$thumbnail = "<div class='table-cell thumbnail-cell' style='max-width: 100%;'>{{$thumbnailLink}}</div>"}
-            {$thumbnail}
+            {$thumbnailLink = html::a($url, html::image($model->loadModel('file')->printFileURL($article->image->primary, $imageURL), "title='{{$thumbnailTitle}}' class='thumbnail'" ))}
+            <div class='table-cell thumbnail-cell' style='max-width: 100%;'>{$thumbnailLink}</div>
           </div>
           {/if}
         </div>
-        {if($i < count($articles))}
-        <div class='divider'></div>
-        {/if}
+        {if($i < count($articles))} <div class='divider'></div> {/if}
       {/foreach}
     {else}
       {@$i=0}
@@ -120,7 +119,9 @@
                 </label>
                 {/if}
                 {!html::a($url, $article->title, "style='color:{{$article->titleColor}}'")}
-                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}<span class='text-danger'><i class="icon icon-arrow-up"></i></span> {/if}
+                {if($article->sticky && (!formatTime($article->stickTime) || $article->stickTime > date('Y-m-d H:i:s')))}
+                <span class='text-danger'><i class="icon icon-arrow-up"></i></span>
+                {/if}
               </strong>
             </div>
             <div class='article-ext'>
