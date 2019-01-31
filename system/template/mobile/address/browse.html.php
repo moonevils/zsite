@@ -11,7 +11,6 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
-
 <div class='address-manage vertical-center'>
   <p name='operate' current='manage' style='{if(count($addresses) == 0)}display:none;{/if}'>{$lang->address->manage}</p>
   <input type='hidden' name='manage' value='{$lang->address->manage}'>
@@ -20,7 +19,7 @@
 <div class='panel address-list'>
   <div class='panel-body'>
     <div class='title strong vertical-center'>
-        <span class='vertical-line'></span><span class='browse'>{$lang->address->browse}</span>
+      <span class='vertical-line'></span><span class='browse'>{$lang->address->browse}</span>
     </div>
     <div id='addressListWrapper'>
       <div class='list container' id='addressList'>
@@ -30,10 +29,10 @@
           {$checked = isset($checked) ? '' : 'checked'}
           <div class='item'>
             <div class='vertical-center'>
-                <label class='checkbox-circle item-checkbox'>
-                  <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>
-                  <label for='checkbox{$i}'></label>
-                </label>
+              <label class='checkbox-circle item-checkbox'>
+                <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>
+                <label for='checkbox{$i}'></label>
+              </label>
             </div>
             <div class='address-edit'>
               <div class='vertical-center'>
@@ -44,9 +43,7 @@
                 {/if}
               </div>
               <div class='vertical-center alignment-address'>
-                <span class='address'>
-                  {$address->address}
-                </span>
+                <span class='address'> {$address->address} </span>
                 <span class='edit-button'>
                   {!html::a(helper::createLink('address', 'edit', "id={{$address->id}}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}
                 </span>
@@ -61,9 +58,7 @@
     </div>
     <div class='bottom-operator'>
       <div class='{if(count($addresses) == 0)}create-center{/if}'>
-        <button id='create' type='button' class='create-btn' data-toggle='modal' data-remote="{!inlink('create')}">
-        {$lang->address->create}
-        </button>
+        <button id='create' type='button' class='create-btn' data-toggle='modal' data-remote="{!inlink('create')}"> {$lang->address->create} </button>
       </div>
       <div id='delete' class='vertical-center alignment-delete' style='display: none;'>
         <label class='all-delete checkbox-circle vertical-center'>
