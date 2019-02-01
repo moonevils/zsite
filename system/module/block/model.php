@@ -1064,7 +1064,7 @@ class blockModel extends model
      * @access public
      * @return array     result for send
      */
-    public function appendBlock($template, $theme, $page, $region, $object, $parent, $block, $isRandom)
+    public function appendBlock($template, $theme, $page, $region, $object, $parent, $block, $isRandom = false)
     {
         if(!$this->checkRegion($template, $theme, $page, $region)) return array('result' => 'fail', 'message' => 'region not exisits.');
 
