@@ -68,7 +68,7 @@
           }
           else
           {
-            $actionClass = 'w-300px';
+            $actionClass = 'w-400px';
           }
         ?>
         <th class="text-center <?php echo $actionClass;?>"><?php echo $lang->actions;?></th>
