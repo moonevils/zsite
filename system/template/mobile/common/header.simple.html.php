@@ -16,7 +16,7 @@
 {else}
   {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
   <style>
-    body.with-appnav.with-appbar-top {padding-top:48px}
+    body {padding-top:48px}
     .appnav {border-bottom:0px}
     .both-sides {border: 1px solid rgba(0,0,0,0.08);border-radius:20px}
     .both-sides.left {float:left;height:32px;width:87px;line-height:28px}

@@ -15,7 +15,7 @@
 {!js::set('currencySymbol', $currencySymbol)}
 {!js::set('createdSuccess', $lang->order->createdSuccess)}
 {!js::set('goToPay', $lang->order->goToPay)}
-<div class='panel panel-section'>
+<div class='panel'>
   {if(!empty($products))}
     <form id='confirmOrderForm' action='{!helper::createLink('order', 'create')}' method='post'>
       <div class='panel-body'>

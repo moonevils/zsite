@@ -31,7 +31,7 @@
           <div class='item'>
             <div class='vertical-center'>
                 <label class='checkbox-circle item-checkbox'>
-                  <input type='radio' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>
+                  <input type='radio' id='checkbox{$i}' name='deliveryAddress' {$checked}  value='{$address->id}'>
                   <label for='checkbox{$i}'></label>
                 </label>
             </div>
