@@ -83,8 +83,20 @@ class orderModel extends model
         
         $products = $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
 
-        foreach($orders as $order) $order->products = isset($products[$order->id]) ? $products[$order->id] : array();
-        
+        foreach($orders as $order)
+        {
+            if(isset($products[$order->id]))
+            {
+                foreach($products[$order->id] as $product)
+                {
+                    $images = $this->loadModel('file')->getByObject('product', $product->productID, $isImage = true);
+                    if(empty($images[0])) continue;
+                    $product->image = new stdclass();
+                    if(!empty($images[0])) $product->image->primary = $images[0];
+                }
+            }
+            $order->products = isset($products[$order->id]) ? $products[$order->id] : array();
+        }
         return $orders;
     }
 

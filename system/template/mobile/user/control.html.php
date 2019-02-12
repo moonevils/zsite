@@ -68,7 +68,9 @@
       {/if}
       <div class='score-title'>{$lang->user->levelScore}</div>
     </div> 
+    {if(commonModel::hasOnlinePayment())}
     <div class='btn-recharge' data-url='{$control->createLink('score', 'buyscore')}'>{$lang->user->scoreRecharge}</div>
+    {/if}
   </div>
 </div>
 {/if}
@@ -96,7 +98,10 @@ $(function()
 {
     $(document).on('click', '.tag, .btn-recharge', function()
     {
-        window.location.href= $(this).attr('data-url');
+        if($(this).attr('data-url'))
+        {
+            window.location.href= $(this).attr('data-url');
+        }
     });
 });
 </script>

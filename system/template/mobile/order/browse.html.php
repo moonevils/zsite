@@ -12,20 +12,40 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
+<style>
+.card {border:0px}
+.bg-gray-pale {background-color:#fff}
+.text-danger {color:#D0021B}
+.card .showcase {height:120px;;overflow:hidden;width:35%;text-align:center;float:left}
+.card .showcase img {height:100%;}
+.card .table-cell {float:left;width:65%;padding-left:10px;padding-right:10px}
+.card .table-layout > tbody > tr > th {width:40px;color:#999999}
+.card .table-layout > tbody > tr > td, .table-layout > tbody > tr > th, .table-layout > tfoot > tr > td, .table-layout > tfoot > tr > th, .table-layout > thead > tr >t d, .table-layout > thead > tr > th {padding-right:0px;padding-left:0px}
+.media-placeholder {display: block; width: 100%; height: 100%; color: #fff; font-weight: bold; padding: 20px 10px; font-size: 16px; word-spacing:normal; word-break:break-all; text-align: center; text-shadow: 1px 1px 0 rgba(255,255,255,.5), 4px 4px 0 rgba(0,0,0,.2); display: table-cell; vertical-align: middle; max-height: 100px; min-height: 70px;line-height:120px;padding:0px}
+.media-holder {display: table; width: 100%;}
+.table .product-title {height:40px;overflow:hidden}
+.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {padding:3px 5px 3px 5px}
+li {list-style:none}
+.order-track-list {padding-left:0px}
+.btn {height:30px;line-height:28px;width:23%;padding:0px;text-align:center;border-radius:4px;outline:none;color:#6F9AFE;border:1px solid #6F9AFE}
+.btn-goToPay {color:#fff;background:linear-gradient(to right,#709BFE,#1B5AFF);border:0px}
+.btn-link:focus, .btn-link:hover{color:#6F9AFE;background:#fff;border:1px solid #6F9AFE}
+.btn-goToPay.btn-link:focus, .btn-goToPay.btn-link:hover{color:#fff;background:linear-gradient(to right,#709BFE,#1B5AFF);border:0px}
+</style>
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-shopping-cart'></i> {$lang->order->admin}</div>
+    <div class='title strong'></i> {$lang->order->admin}</div>
   </div>
   <div class='panel-body' id='orderListWrapper'>
     <div class='cards' id='orderList'>
       {foreach($orders as $order)}
-        <div class='card card-block'>
+        <div class='card card-block' style='box-shadow:0 0px 0px'>
           <div class='card-heading bg-gray-pale'>
-            #{$order->id} &nbsp; &nbsp;
-            <span>{$lang->order->amount}: 
+            {$amount = isset($order->balance) ? $order->amount + $order->balance : $order->amount}
+            {$currencySymbol = isset($control->config->product->currencySymbol) ? $control->config->product->currencySymbol : ''}
+            <span>{!printf($lang->order->orderProducts, count($order->products), $currencySymbol, $amount)}</span>
+            <span>
               <strong class='text-danger'>
-                {!echo isset($order->balance) ? $order->amount + $order->balance : $order->amount}
-                {!echo isset($control->config->product->currencySymbol) ? $control->config->product->currencySymbol : ''}
               </strong>
             </span> 
             <div class='pull-right'>
@@ -41,13 +61,58 @@
           </div>
           <div class='list-group simple'>
           {foreach($order->products as $product)}
-            <div class='list-group-item'>
-              {!html::a(helper::createLink('product', 'view', "id={{$product->productID}}", "target='_blank'"), $product->productName, "class='text-primary'")}
-              <div class='pull-right'>
-                <small class="text-muted">{$lang->order->price}{$lang->colon}</small>{$product->price} &nbsp;
-                <small class="text-muted">{$lang->order->count}{$lang->colon}</small>{$product->count}
+          {$productLink = helper::createLink('product', 'view', "id={{$product->productID}}")}
+          <div class='card' style='box-shadow:0 0px 0px'>
+            <div class='table-layout'>
+              <div class='showcase'>
+                {if(empty($product->image))}
+                  {$imgColor = $product->id * 57 % 360}
+                  <div class='media-holder'>
+                    <div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>
+                      {$product->productName}
+                    </div>
+                  </div>
+                {else}
+                  {$product->image->primary->objectType = 'product'}
+                  {!html::image($control->loadModel('file')->printFileURL($product->image->primary, 'middleURL'), "title='{{$product->productName}}' alt='{{$product->productName}}'")}
+                {/if}
+              </div>
+              <div class='table-cell'>
+                <table class='table table-layout table-condensed'>
+                  <tbody>
+                    <tr>
+                      <td colspan='3'>
+                        <div class='product-title'>
+                          <strong>{!html::a($productLink, $product->productName)}</strong>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class='small'>{$lang->order->price}</th>
+                      <td colspan='2'>
+                        {$price  = $product->price}
+                        <span>{!echo $currencySymbol . $product->price}</span>
+                        {!html::hidden("price[$product->productID]", $price)}
+                        {$amount = $product->count * $price}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class='small'>{$lang->order->amount}</th>
+                      <td class='product-price'>
+                        <strong class='text-danger'>{$currencySymbol}{$amount}</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class='small'>{$lang->order->count}</th>
+                      <td>
+                        <span>{$product->count}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
+          </div>
           {/foreach}
           </div>
           <div class='card-footer'>
