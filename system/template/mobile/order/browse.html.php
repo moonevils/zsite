@@ -19,13 +19,13 @@
 .card .showcase {height:80px;;overflow:hidden;width:80px;text-align:center;float:left}
 .card .showcase img {height:100%;}
 .card .table-cell {width:100%;padding-left:10px;padding-right:10px}
-.card .table-layout > tbody > tr > th {width:40px;color:#999999}
+.card .table-layout > tbody > tr > th {width:40px;color:#999999;font-weight:400}
 .card .table-layout > tbody > tr > td, .table-layout > tbody > tr > th, .table-layout > tfoot > tr > td, .table-layout > tfoot > tr > th, .table-layout > thead > tr >t d, .table-layout > thead > tr > th {padding-right:0px;padding-left:0px}
-.media-placeholder {display: block; width: 100%; height: 100%; color: #fff; font-weight: bold; padding: 20px 10px; font-size: 16px; word-spacing:normal; word-break:break-all; text-align: center; text-shadow: 1px 1px 0 rgba(255,255,255,.5), 4px 4px 0 rgba(0,0,0,.2); display: table-cell; vertical-align: middle; max-height: 100px; min-height: 70px;line-height:120px;padding:0px}
+.media-placeholder {display: block; width: 100%; height: 100%; color: #fff; font-weight: bold; padding: 0px; font-size: 12px; word-spacing:normal; word-break:break-all; text-align: center; text-shadow: 1px 1px 0 rgba(255,255,255,.5), 4px 4px 0 rgba(0,0,0,.2); display: table-cell; vertical-align: middle; max-height: 80px; min-height: 80px;line-height:80px;padding:0px}
 .media-holder {display: table; width: 100%;}
 .table .product-title {height:20px;overflow:hidden;margin-bottom:5px}
 .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {padding:0px}
-li {list-style:none}
+li {list-style:none;color:#999999}
 .order-track-list {padding-left:0px}
 .btn {height:30px;line-height:28px;width:23%;padding:0px;text-align:center;border-radius:4px;outline:none;color:#6F9AFE;border:1px solid #6F9AFE}
 .btn-goToPay {color:#fff;background:linear-gradient(to right,#709BFE,#1B5AFF);border:0px}
@@ -134,7 +134,7 @@ li {list-style:none}
             {/if}
             <ul class='order-track-list text-muted'>{$history}</ul>
           </div>
-          <div class='card-footer order-actions text-right'>
+          <div class='order-actions text-right'>
             {$control->order->printActions($order)}
           </div>
         </div>
