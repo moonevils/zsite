@@ -11,31 +11,42 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
+<style>
+.panel-section {margin:0px;background-color:#f1f1f1}
+.panel-heading {margin-bottom:12px}
+.panel-body {padding:0px}
+.cards-list .card {border:0px;box-shadow:0 0px 0px;margin-bottom:6px}
+.card .avatar {float:left;height:40px;width:40px;margin-top:12px;margin-left:10px;position:relative}
+.card .avatar > img {height:100%;width:100%}
+.card .content {margin-left:52px;padding:12px}
+.card .symbol > strong {font-size:1.6rem}
+.card .symbol > .text-muted {float:right}
+.card .text-body {max-height:40px;overflow:hidden;color:#999999;text-overflow:ellipsis}
+.card .dot {width:10px;height:10px;background-color:red;position:absolute;top:-3px;right:-3px;border-radius:50%}
+</style>
 <div class='panel-section'>
   <div class='panel-heading'>
-    <div class='title strong'><i class='icon icon-comments-alt'></i> {$lang->user->messages} <span>({!count($messages)})</span> </div>
+    {$unreadCount} {$lang->user->message->unread}
   </div>
+  <!--<div class='panel-heading' style='margin-bottom:12px'>
+    通知 订单 互动
+  </div>-->
   <div class='panel-body' id='cardListWarpper'>
     <div class='cards cards-list' id='cardList'>
     {foreach($messages as $message)}
-      <div class='card card-block'>
-        <div class='card-heading'>
-          <strong class='{!echo $control->app->user->account === $message->from ? 'text-danger' : 'text-special' }'>{$message->from}</strong> &nbsp; 
-          <small class='text-muted'>{!substr($message->date, 5)}</small>
+      <div class='card card-block' {if(!$message->readed)} href='{$control->createLink("message", "view", "message=$message->id")}'{/if}>
+        <div class='avatar'>
+        {!html::image('/theme/mobile/common/img/default-head.png')}
+        {if(!$message->readed)}
+          <div class='dot'></div>
+        {/if}
         </div>
-        <div class='card-content message-content'>
-          {$message->content}
-        </div>
-        <div class='card-footer'>
-          <span class='{!echo $message->readed ? 'text-muted' : 'text-success'}'>{$lang->message->readedStatus[$message->readed]}</span>
-          <div class="pull-right">
-            {if(!$message->readed)}
-              {!html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed, "class='text-primary markread'")}
-            {else}
-              {!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : ''}
-            {/if}
-            &nbsp; {!html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{{$message->id}}'")}
+        <div class='content'>
+          <div class='symbol'>
+            <strong>{$message->from}</strong> &nbsp;
+            <small class='text-muted'>{!substr($message->date, 5)}</small>
           </div>
+          <div class='text-body'>{$message->content}</div>
         </div>
       </div>
     {/foreach}
@@ -49,14 +60,15 @@ $(function()
     var deleteSuccess = '{$lang->deleteSuccess}';
 
     {noparse}
-    $(document).on('click', '.markread', function(e) {
-
+    $(document).on('click', '.card.card-block', function(e) {
         var $this   = $(this);
+        if(!$this.attr('href')) return false;
         var options = $.extend({url: $this.attr('href'), onSuccess: function(response)
         {
-            var $response = $(response);
-            $('#cardList').html($response.find('#cardList').html());
-            $.messager.success(readed);
+            //var $response = $(response);
+            window.location.reload();
+            //$('#cardList').html($response.find('#cardList').html());
+            //$.messager.success(readed);
         }
         }, $this.data());
         e.preventDefault();
