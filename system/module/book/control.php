@@ -100,6 +100,22 @@ class book extends control
             $this->view->allCatalog = $this->book->getFrontCatalog($book->id, $serials);
             $this->view->mobileURL  = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'mhtml');
             $this->view->desktopURL = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'html');
+
+            if($node->grade > 1 && $this->app->clientDevice == 'mobile')
+            {
+                $this->viewType = 'json';
+                $this->send(array(
+                    'title'      => $book->title,
+                    'keywords'   => trim(trim($node->keywords . ' - ' . $book->keywords), '-'),
+                    'node'       => $node,
+                    'book'       => $book,
+                    'serials'    => $serials,
+                    'books'      => $this->book->getBookList(),
+                    'catalog'    => $this->book->getFrontCatalog($node->id, $serials),
+                    'allCatalog' => $this->book->getFrontCatalog($book->id, $serials),
+                    'mobileURL'  => helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'mhtml'),
+                ), 'json');
+            }
         }
         $this->display();
     }
