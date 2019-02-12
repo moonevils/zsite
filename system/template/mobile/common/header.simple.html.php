@@ -35,7 +35,7 @@
   <div class='mainnav' style='padding:8px 7px'>
     <div class='both-sides left'>
       <div class='icon-block left'>
-        <a href='javascript:history.back();'>{!html::image('/theme/mobile/common/img/left.png')}</a>
+        <a href='javascript:history.go(-1);'>{!html::image('/theme/mobile/common/img/left.png')}</a>
       </div>
       <div class='divider-line'></div>
       <div class='icon-block home'>
