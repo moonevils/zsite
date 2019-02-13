@@ -17,9 +17,11 @@
 .card .card-top {width:100%;overflow:hidden;margin-bottom:8px}
 .card .card-body {width:100%;overflow:hidden;margin-bottom:8px}
 .card-fix .card-title {float:left;max-width:55%;margin-right:10%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:1.6rem;font-weight:600;color:#333}
-.card-fix .card-theard {float:left;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#676767}
+.card-fix .card-theard {float:right;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#676767}
 .card-fix .text-muted {font-size:1.4rem}
 .card-content, .card-footer {padding:0px}
+.card-fix .card-content.content {float:left;width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#666}
+.card-fix .card-content.text-muted {float:right;}
 </style>
 <div class='panel-section'>
   <div class='panel-heading'>
@@ -33,9 +35,11 @@
             <div class='card-title'>{$reply->title}</div>
             <div class='card-theard'>{$reply->boardName}</div>
           </div>
-          <div class='card-body'>{$reply->content}</div>
-          <div class='card-content text-muted'>
-            {$lang->reply->addedDate} {!substr($reply->addedDate, 2, -3)}
+          <div class='card-body'>
+            <div class='card-content content'>{$reply->content}</div>
+            <div class='card-content text-muted'>
+              {!substr($reply->addedDate, 5, -3)}
+            </div>
           </div>
         </div>
       </a>

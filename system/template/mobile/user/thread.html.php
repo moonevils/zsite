@@ -17,7 +17,7 @@
 .card-fix .card-top {width:100%;overflow:hidden;margin-bottom:12px}
 .card-fix .card-left {float:left;width:80%}
 .card-fix .card-title{float:left;max-width:55%;margin-right:15%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:1.6rem;font-weight:600;color:#333}
-.card-fix .card-theard{float:left;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#676767}
+.card-fix .card-theard{float:right;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#676767}
 .card-fix .card-body {width:100%;overflow:hidden;position:relative}
 .card-fix .pub-time {float:left}
 .card-fix .reply {float:right;position:absolute;bottom:0px;right:0px;padding:0px}
