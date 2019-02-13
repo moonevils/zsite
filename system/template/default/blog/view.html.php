@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 *}
-{include TPL_ROOT . 'blog/header.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'blog', 'header')}
 {$path = !empty($category->pathNames) ? array_keys($category->pathNames) : array()}
 {!js::set('path', $path)}
 {!js::set('categoryID', $category->id)}
@@ -100,4 +100,4 @@
 </div>
 <div class='row'>{$control->block->printRegion($layouts, 'blog_view', 'bottomBanner', true)}</div>
 {if(strpos($article->content, '<embed ') !== false)} {!include TPL_ROOT . 'common/video.html.php'} {/if}
-{include TPL_ROOT . 'blog/footer.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'blog', 'footer')}
