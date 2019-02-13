@@ -39,7 +39,7 @@
             <div class='card-left'>
               <div class='card-top'>
                 <div class='card-title'>{$thread->title}</div>
-                <div class='card-theard'>{$thread->title}</div>
+                <div class='card-theard'>{$thread->boardName}</div>
               </div>
               <div class='pub-time'>
                 <div class='card-content text-muted'>

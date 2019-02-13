@@ -30,4 +30,3 @@
   </div>
   {$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
 </div>
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
