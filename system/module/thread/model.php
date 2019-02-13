@@ -207,6 +207,11 @@ class threadModel extends model
 
         $this->setRealNames($threads);
 
+        foreach($threads as $thread)
+        {
+            $thread->boardName = $this->dao->select('name')->from(TABLE_CATEGORY)->where('type')->eq('forum')->AndWhere('id')->eq($thread->board)->fetch('name');
+        }
+
         return $this->process($threads);
     }
 
