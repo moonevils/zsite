@@ -13,6 +13,7 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <style>
+body.with-appbar-bottom {padding-bottom:0px}
 .card {border:0px}
 .bg-gray-pale {background-color:#fff}
 .text-danger {color:#D0021B}
@@ -172,4 +173,3 @@ $(function()
 });
 </script>
 {include TPL_ROOT . 'common/form.html.php'}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

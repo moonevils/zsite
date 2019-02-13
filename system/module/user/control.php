@@ -415,10 +415,11 @@ class user extends control
      * @param  int    $recTotal 
      * @param  int    $recPerPage 
      * @param  int    $pageID 
+     * @param  string $source
      * @access public
      * @return void
      */
-    public function message($recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function message($recTotal = 0, $recPerPage = 10, $pageID = 1, $source = 'bottom')
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
@@ -430,7 +431,7 @@ class user extends control
         $this->view->messages     = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
         $this->view->unreadCount  = $this->loadModel('message')->getUnreadByAccount($this->app->user->account, $pager);
         $this->view->pager        = $pager;
-        $this->view->source       = 'bottom';
+        $this->view->source       = $source;
         $this->view->mobileURL    = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
         $this->view->desktopURL   = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'html');
 

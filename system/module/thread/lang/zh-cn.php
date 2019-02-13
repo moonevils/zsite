@@ -19,6 +19,7 @@ $lang->thread->content     = '内容';
 $lang->thread->file        = '附件: ';
 $lang->thread->postedDate  = '发表于';
 $lang->thread->replies     = '回帖';
+$lang->thread->number      = '回帖数';
 $lang->thread->views       = '阅读';
 $lang->thread->lastReply   = '最后回帖';
 $lang->thread->isLink      = '跳转';

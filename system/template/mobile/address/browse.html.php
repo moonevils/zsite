@@ -72,4 +72,3 @@
   </div>
 </div>
 {include TPL_ROOT . 'common/form.html.php'}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

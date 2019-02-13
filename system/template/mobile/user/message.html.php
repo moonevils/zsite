@@ -12,6 +12,7 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <style>
+body.with-appbar-bottom {padding-bottom:0px}
 .panel-section {margin:0px;background-color:#f1f1f1}
 .panel-heading {margin-bottom:12px}
 .panel-body {padding:0px}
@@ -96,4 +97,6 @@ $(function()
     {/noparse}
 });
 </script>
+{if($source == 'bottom')}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{/if}
