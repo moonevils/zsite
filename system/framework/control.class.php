@@ -509,7 +509,10 @@ class control extends baseControl
 
             if($this->moduleName != 'source' and in_array($this->viewType, array('html', 'mhtml'))) 
             {
-                if($this->moduleName != 'chat' or $this->methodName != 'registercomponent')
+                $unmergedPages[] = 'chat.registercomponent';
+                $unmergedPages[] = 'theme.viewsnap';
+                $page = strtolower($this->moduleName . '.' .  $this->methodName);
+                if(!in_array($page, $unmergedPages))
                 {
                     $this->mergeCSS();
                     $this->mergeJS();
@@ -519,7 +522,7 @@ class control extends baseControl
 
         if(RUN_MODE == 'front')
         {
-            if($this->moduleName != 'chat' or $this->methodName != 'registercomponent')
+			if(!in_array($this->moduleName, array('chat', 'registercomponent')))
             {
                 $this->output = $this->app->loadClass('cleanoutput')->clean($this->output);
             }
