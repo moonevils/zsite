@@ -24,7 +24,7 @@
     {$recPerRow = min($count, 2)}
     {@$percent  = 100/$recPerRow}
     <div class='cards cards-products' data-cols='{$recPerRow}' id='products'>
-      <style>.col-custom-{$recPerRow} {width: {$percent} % }</style>
+      <style>.col-custom-{$recPerRow} {width: {$percent}%}</style>
       {$index = 0}
       {foreach($products as $product)}
         {$rowIndex = $index % $recPerRow}
@@ -42,7 +42,7 @@
               {else}
                 {$product->image->primary->objectType = 'product'}
                 {$imgsrc = $control->loadModel('file')->printFileURL($product->image->primary, 'middleURL')}
-                <img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$imgsrc}'>
+                <img alt='{$product->name}' title='{$product->name}' src='{$imgsrc}'>
               {/if}
             </a>
             <div class='card-content'>
@@ -74,7 +74,7 @@
       {/foreach}
     </div>
   </div>
-  <div class='panel-footer'>{$pager->show('justify')}</div>
+  <div class='panel-footer'>{$pager->createPullUpJS('#products', $lang->mobile->pullUpHint)}</div>
 </div>
 <div class='block-region region-bottom blocks' data-region='product_browse-bottom'>{$control->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom')}</div>
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

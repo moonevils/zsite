@@ -31,7 +31,7 @@
   <div class='panel-heading'>
     <div class='title strong'>{$lang->user->thread}</div>
   </div>
-  <div class='cards condensed cards-list'>
+  <div class='cards condensed cards-list' id='thread'>
     {foreach($threads as $thread)}
       <a href='{!$control->createLink('thread', 'view', "id=$thread->id")}' class='card'>
         <div class='card-fix'>
@@ -60,5 +60,5 @@
       </a>
     {/foreach}
   </div>
-  {$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
+  {$pager->createPullUpJS('#thread', $lang->mobile->pullUpHint)}
 </div>

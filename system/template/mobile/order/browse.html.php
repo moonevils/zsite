@@ -142,7 +142,7 @@ li {list-style:none;color:#999999}
       {/foreach}
     </div>
   </div>
-  {$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
+  {$pager->createPullUpJS('#orderListWrapper', $lang->mobile->pullUpHint, helper::createLink('order', 'browse', "recTotal=$pager->recTotal&recPerPage=$pager->recPerPage&pageID=\$ID"))}
 </div>
 <script>
 $(function()

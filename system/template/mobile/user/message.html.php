@@ -52,17 +52,13 @@ body.with-appbar-bottom {padding-bottom:0px}
         </div>
         <div class='card-footer'>
           <div class="pull-right">
-            {if(!$message->readed)}
-              {!html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed, "class='text-primary markread'")}
-            {else}
-              {!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : ''}
-            {/if}
-            &nbsp; {!html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{{$message->id}}'")}
+            {!html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{{$message->id}}'")}
           </div>
         </div>
       </div>
     {/foreach}
     </div>
+    {$pager->createPullUpJS('#cardList', $lang->mobile->pullUpHint, helper::createLink('user', 'message', "recTotal=$pager->recTotal&recPerPage=$pager->recPerPage&pageID=\$ID"))}
   </div>
 </div>
 <script>
