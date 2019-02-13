@@ -19,11 +19,12 @@ body.with-appbar-bottom {padding-bottom:0px}
 .cards-list .card {border:0px;box-shadow:0 0px 0px;margin-bottom:6px}
 .card .avatar {float:left;height:40px;width:40px;margin-top:12px;margin-left:10px;position:relative}
 .card .avatar > img {height:100%;width:100%}
-.card .content {margin-left:52px;padding:12px}
+.card .content {margin-left:52px;padding:12px 12px 2px 12px}
 .card .symbol > strong {font-size:1.6rem}
 .card .symbol > .text-muted {float:right}
 .card .text-body {max-height:40px;overflow:hidden;color:#999999;text-overflow:ellipsis}
 .card .dot {width:10px;height:10px;background-color:red;position:absolute;top:-3px;right:-3px;border-radius:50%}
+.card .card-footer {height:20px;padding:0px 12px 0px 0px;}
 </style>
 <div class='panel-section'>
   <div class='panel-heading'>
@@ -48,6 +49,16 @@ body.with-appbar-bottom {padding-bottom:0px}
             <small class='text-muted'>{!substr($message->date, 5)}</small>
           </div>
           <div class='text-body'>{$message->content}</div>
+        </div>
+        <div class='card-footer'>
+          <div class="pull-right">
+            {if(!$message->readed)}
+              {!html::a($control->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed, "class='text-primary markread'")}
+            {else}
+              {!echo $message->link ? html::a($control->createLink('message', 'view', "message=$message->id"), $lang->message->view) : ''}
+            {/if}
+            &nbsp; {!html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{{$message->id}}'")}
+          </div>
         </div>
       </div>
     {/foreach}
