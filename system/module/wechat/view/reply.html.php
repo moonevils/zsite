@@ -15,8 +15,12 @@
   <?php foreach($records as $record):?>
     <div class='comment' id="record<?php echo $record->id?>">
       <div class='content'>
-        <div class='author text-primary'><span><?php echo $user->nickname;?></span> <small>[<?php echo $record->time;?>]</small></div>
+        <div class='author text-primary'><span><?php echo zget($user, 'nickname', '');?></span> <small>[<?php echo $record->time;?>]</small></div>
+        <?php if(!is_object($record->content)):?>
         <div class='text'><span class='text-important'><?php echo $lang->wechat->message->typeList[$record->type] ?></span> &nbsp; <?php echo nl2br($record->content);?></div>
+        <?php else:?>
+        <div class='text'><span class='text-muted'><?php printf($lang->wechat->unsupported, $lang->wechat->message->typeList[$record->type]) ?></span></div>
+        <?php endif;?>
       </div>
     </div>
     <?php if(isset($record->replies)):?>

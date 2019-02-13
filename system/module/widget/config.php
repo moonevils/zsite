@@ -33,7 +33,7 @@ $config->widget->moreLinkList = new stdclass();
 $config->widget->moreLinkList->latestOrder    = 'order|admin|';
 $config->widget->moreLinkList->latestThread   = 'forum|admin|';
 $config->widget->moreLinkList->message        = '';
-$config->widget->moreLinkList->chanzhiDynamic = 'http://www.chanzhi.org/dynamic.html';
+$config->widget->moreLinkList->chanzhiDynamic = 'https://www.chanzhi.org/dynamic.html';
 $config->widget->moreLinkList->html           = '';
 $config->widget->moreLinkList->submission     = 'article|admin|type=submission&tab=user';
 $config->widget->moreLinkList->wechatMessage  = 'wechat|message|mode=replied&replied=0';
