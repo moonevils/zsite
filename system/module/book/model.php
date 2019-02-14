@@ -211,6 +211,81 @@ class bookModel extends model
     }
 
     /**
+     * Get book catalog for mobile front.
+     *
+     * @param  int    $nodeID
+     * @param  array  $serials  the serial number list for all nodes.
+     * @access public
+     * @return void
+     */
+    public function getFrontCatalogForMobile($nodeID, $serials)
+    {
+        $node = $this->getNodeByID($nodeID);
+        if(!$node) return '';
+
+        $nodeList = $this->dao->select('id,alias,type,path,`order`,parent,grade,title,link')->from(TABLE_BOOK)
+            ->where('path')->like("{$node->path}%")
+            ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
+            ->orderBy('grade_desc,`order`, id')
+            ->fetchGroup('parent');
+
+        $book = $node->type == 'book' ? zget(end($nodeList), '0', '') : $this->getBookByNode($node);
+        foreach($nodeList as $parent => $nodes)
+        {
+            if($parent === 'catalog') continue;
+
+            $catalog = '';
+
+            foreach($nodes as $node)
+            {
+                $serial = $node->type != 'book' ? $serials[$node->id] : '';
+                if($node->type == 'chapter')
+                {
+                    $catalog .= '<li>';
+                    $catalog .= '  <details>';
+                    $catalog .= '    <summary class="chapter vertical-center">';
+                    $catalog .= '      <span class="chapter-left">';
+                    $catalog .= '        <span class="tag-chapter">' . $this->lang->book->typeList['chapter'] . '</span>';
+                    $catalog .= '        <span class="title">' . $serial . ' ' . $node->title . '</span>';
+                    $catalog .= '      </span>';
+                    $catalog .= '      <span class="down-triangle"></span>';
+                    $catalog .= '    </summary>';
+                    $catalog .= '    <ul class="chapter-content"><li></li>';
+                }
+                elseif($node->type == 'article')
+                {
+                    $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+                    $target = '';
+                    if($node->link != '')
+                    {
+                        $target = "target='_blank'";
+                        $link   =  $node->link;
+                    }
+                    $catalog .= '<li class="chapter vertical-center">';
+                    $catalog .= '  <a href="' . $link . '" title=' . $node->title . ' ' .  $target . '>';
+                    $catalog .= '    <span class="chapter-left">';
+                    $catalog .= '      <span class="tag-article">' . $this->lang->book->typeList['article'] . '</span>';
+                    $catalog .= '      <span class="title">' . $serial . ' ' . $node->title . '</span>';
+                    $catalog .= '    </span>';
+                    $catalog .= '   </a>';
+                    $catalog .= $node->grade == 2 ? '</li><div class="divider"></div>' : '</li>';
+                }
+                if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog']))
+                {
+                    $catalog .= $node->grade == 2 ?
+                        $nodeList[$node->id]['catalog'] . '</details></li><div class="divider"></div>' :
+                        $nodeList[$node->id]['catalog'] . '</details></li>';
+                }
+            }
+            $catalog .= '</ul>';
+            $nodeList[$parent]['catalog'] = $catalog;
+        }
+
+        return zget(end($nodeList), 'catalog', '');
+    }
+
+    /**
      * Get book catalog for admin.
      * 
      * @param  int    $nodeID 

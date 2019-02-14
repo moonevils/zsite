@@ -82,16 +82,18 @@ class forum extends control
         $pager   = new pager(0, $recPerPage, $pageID);
         $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
-        $this->view->title      = $board->name;
-        $this->view->keywords   = trim($board->keywords);
-        $this->view->desc       = strip_tags($board->desc);
-        $this->view->board      = $board;
-        $this->view->sticks     = $this->thread->getSticks($board->id);
-        $this->view->threads    = $threads;
-        $this->view->boards     = $this->forum->getBoards();
-        $this->view->pager      = $pager;
-        $this->view->mobileURL  = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'mhtml');
-        $this->view->desktopURL = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'html');
+        $this->view->title        = $board->name;
+        $this->view->mobileTitle  = $board->name;
+        $this->view->mobileTitle .= $board->moderators ? sprintf("<small class='text-muted'>{$this->lang->forum->lblOwner}</small>", $board->moderators) : '';
+        $this->view->keywords     = trim($board->keywords);
+        $this->view->desc         = strip_tags($board->desc);
+        $this->view->board        = $board;
+        $this->view->sticks       = $this->thread->getSticks($board->id);
+        $this->view->threads      = $threads;
+        $this->view->boards       = $this->forum->getBoards();
+        $this->view->pager        = $pager;
+        $this->view->mobileURL    = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'mhtml');
+        $this->view->desktopURL   = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'html');
 
         if($this->app->clientDevice == 'desktop') 
         {
