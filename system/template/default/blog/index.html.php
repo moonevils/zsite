@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include TPL_ROOT . 'blog/header.html.php';}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'blog', 'header')}
 {if(isset($category))}      {$path = array_keys($category->pathNames)} {/if} 
 {if(!empty($path))}         {!js::set('path', $path)} {/if}
 {if(!empty($category->id))} {!js::set('categoryID', $category->id)} {/if}
@@ -116,4 +116,4 @@
   {/if}
 </div>
 <div class='row'>{$control->block->printRegion($layouts, 'blog_index', 'bottomBanner', true)}</div>
-{include TPL_ROOT . 'blog/footer.html.php'}
+{include $control->loadModel('ui')->getEffectViewFile('default', 'blog', 'footer')}

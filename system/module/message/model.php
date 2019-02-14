@@ -35,9 +35,24 @@ class messageModel extends model
     {
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('`to`')->eq($account)
-            ->orderBy('id_desc')
+            ->orderby('id_desc')
             ->page($pager)
-            ->fetchAll('id');
+            ->fetchall('id');
+    }
+
+    /**
+     * Get unread By Account
+     *
+     * @param  string    $account
+     * @access public
+     * @return int
+     */
+    public function getUnreadByAccount($account)
+    {
+        return $this->dao->select('1')->from(TABLE_MESSAGE)
+            ->where('`to`')->eq($account)
+            ->AndWhere('readed')->eq(0)
+            ->count();
     }
 
     /**

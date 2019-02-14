@@ -65,7 +65,7 @@
             <th>{$lang->score->note}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id='score'>
           {foreach($scores as $score)}
             <tr>
               {$score->time = substr($score->time,0,10)}
@@ -78,7 +78,9 @@
           {/foreach}
         </tbody>
         <tfoot>
-          <tr><td colspan='8' class='a-right'>{$pager->show('justify')}</td></tr>
+          <tr><td colspan='8' class='a-right'>
+            {$pager->createPullUpJS('#score', $lang->mobile->pullUpHint, helper::createLink('user', 'score', "recTotal=$pager->recTotal&recPerPage=$pager->recPerPage&pageID=\$ID"))}
+          </td></tr>
         </tfoot>
       </table>
       </div>

@@ -258,12 +258,18 @@ class replyModel extends model
      */
     public function getByUser($account, $pager = null)
     {
-        $replies = $this->dao->select('t1.*, t2.title')->from(TABLE_REPLY)->alias('t1')
+        $replies = $this->dao->select('t1.*, t2.title, t2.board')->from(TABLE_REPLY)->alias('t1')
             ->leftJoin(TABLE_THREAD)->alias('t2')->on('t1.thread = t2.id')
             ->where('t1.author')->eq($account)
             ->orderBy('id desc')
             ->page($pager)
             ->fetchAll('id');
+
+        foreach($replies as $reply)
+        {
+            $reply->boardName = $this->dao->select('name')->from(TABLE_CATEGORY)->where('type')->eq('forum')->AndWhere('id')->eq($reply->board)->fetch('name');
+        }
+
         return $replies;
     }
 

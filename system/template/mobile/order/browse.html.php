@@ -13,6 +13,7 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <style>
+body.with-appbar-bottom {padding-bottom:0px}
 .card {border:0px}
 .bg-gray-pale {background-color:#fff}
 .text-danger {color:#D0021B}
@@ -141,7 +142,7 @@ li {list-style:none;color:#999999}
       {/foreach}
     </div>
   </div>
-  {$pager->createPullUpJS('#articles', $lang->mobile->pullUpHint)}
+  {$pager->createPullUpJS('#orderListWrapper', $lang->mobile->pullUpHint, helper::createLink('order', 'browse', "recTotal=$pager->recTotal&recPerPage=$pager->recPerPage&pageID=\$ID"))}
 </div>
 <script>
 $(function()
@@ -172,4 +173,3 @@ $(function()
 });
 </script>
 {include TPL_ROOT . 'common/form.html.php'}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
