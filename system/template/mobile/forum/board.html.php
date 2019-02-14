@@ -27,65 +27,70 @@
       {$style .= $thread->stickBold ? "font-weight:bold;" : ''}
       {$style .= ($thread->color or $thread->stickBold) ? "'" : ''}
       <div class='thread'>
-        <div class='header'>
-          <span class='title' {$style}>
-             <span class='text-danger'>[{$lang->thread->stick}]</span>
-            {$thread->title}
-          </span>
-          <span class='options'>
-            <i class="icon icon-2x icon-circle"></i>
-            <i class="icon icon-2x icon-circle"></i>
-            <i class="icon icon-2x icon-circle"></i>
-          </span>
-        </div>
-        <div class='{if(!empty($thread->image))}content{else}content-no-img{/if}'>
-          <div class='left'>
-            <span class='{if(!empty($thread->image))}desc{else}desc-no-img{/if}'>{!strip_tags($thread->content)}</span>
-            <div class='ext'>
-              <span class='views'>{!html::image('/theme/mobile/default/comments.png')} {$thread->views}</span>
-              <span class='pub-time'>{!substr($thread->addedDate, 0, 10)}</span>
-            </div>
-          </div>
-          {if(!empty($thread->image))}
-          <div class='img'>
-            {$title = $thread->image->primary->title ? $thread->image->primary->title : $thread->title}
-            {$thread->image->primary->objectType = 'thread'}
-            {!html::image($control->loadModel('file')->printFileURL($thread->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
-          </div>
-          {/if}
-        </div>
-      </div>
-      {@unset($threads[$thread->id])}
-    {/foreach}
-    </div>
-    <div class='threads'>
-    {foreach($threads as $thread)}
-      {$style = $thread->color ? " style='color:{{$thread->color}}'" : ''}
-      <div class='thread'>
-        <div class='header'>
-            <span class='title' {$style}>{$thread->title}</span>
-          <span class='options'>
+        <a href='{$control->createLink("thread", "view", "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
+          <div class='header'>
+            <span class='title' {$style}>
+               <span class='text-danger'>[{$lang->thread->stick}]</span>
+              {$thread->title}
+            </span>
+            <span class='options'>
               <i class="icon icon-2x icon-circle"></i>
               <i class="icon icon-2x icon-circle"></i>
               <i class="icon icon-2x icon-circle"></i>
             </span>
-        </div>
-        <div class='{if(!empty($thread->image))}content{else}content-no-img{/if}'>
-          <div class='left'>
-            <span class='{if(!empty($thread->image))}desc{else}desc-no-img{/if}'>{!strip_tags($thread->content)}</span>
-            <div class='ext'>
-              <span class='views'>{!html::image('/theme/mobile/default/comments.png')} {$thread->views}</span>
-              <span class='pub-time'>{!substr($thread->addedDate, 0, 10)}</span>
+          </div>
+          <div class='{if(!empty($thread->image))}content{else}content-no-img{/if}'>
+            <div class='left'>
+              <span class='{if(!empty($thread->image))}desc{else}desc-no-img{/if}'>{!strip_tags($thread->content)}</span>
+              <div class='ext'>
+                <span class='views'>{!html::image('/theme/mobile/default/comments.png')} {$thread->views}</span>
+                <span class='pub-time'>{!substr($thread->addedDate, 0, 10)}</span>
+              </div>
             </div>
+            {if(!empty($thread->image))}
+            <div class='img'>
+              {$title = $thread->image->primary->title ? $thread->image->primary->title : $thread->title}
+              {$thread->image->primary->objectType = 'thread'}
+              {!html::image($control->loadModel('file')->printFileURL($thread->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+            </div>
+            {/if}
           </div>
-          {if(!empty($thread->image))}
-          <div class='img'>
-            {$title = $thread->image->primary->title ? $thread->image->primary->title : $thread->title}
-            {$thread->image->primary->objectType = 'thread'}
-            {!html::image($control->loadModel('file')->printFileURL($thread->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+        </a>
+      </div>
+      {@unset($threads[$thread->id])}
+    {/foreach}
+    </div>
+
+    <div class='threads'>
+    {foreach($threads as $thread)}
+      {$style = $thread->color ? " style='color:{{$thread->color}}'" : ''}
+      <div class='thread'>
+        <a href='{$control->createLink("thread", "view", "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
+          <div class='header'>
+              <span class='title' {$style}>{$thread->title}</span>
+            <span class='options'>
+                <i class="icon icon-2x icon-circle"></i>
+                <i class="icon icon-2x icon-circle"></i>
+                <i class="icon icon-2x icon-circle"></i>
+              </span>
           </div>
-          {/if}
-        </div>
+          <div class='{if(!empty($thread->image))}content{else}content-no-img{/if}'>
+            <div class='left'>
+              <span class='{if(!empty($thread->image))}desc{else}desc-no-img{/if}'>{!strip_tags($thread->content)}</span>
+              <div class='ext'>
+                <span class='views'>{!html::image('/theme/mobile/default/comments.png')} {$thread->views}</span>
+                <span class='pub-time'>{!substr($thread->addedDate, 0, 10)}</span>
+              </div>
+            </div>
+            {if(!empty($thread->image))}
+            <div class='img'>
+              {$title = $thread->image->primary->title ? $thread->image->primary->title : $thread->title}
+              {$thread->image->primary->objectType = 'thread'}
+              {!html::image($control->loadModel('file')->printFileURL($thread->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+            </div>
+            {/if}
+          </div>
+        </a>
       </div>
     {/foreach}
     </div>
