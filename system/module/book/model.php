@@ -271,7 +271,12 @@ class bookModel extends model
                     $catalog .= '   </a>';
                     $catalog .= '</li>';
                 }
-                if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog'])) $catalog .= $nodeList[$node->id]['catalog'] . '</details></li>';
+                if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog']))
+                {
+                    $catalog .= $node->grade == 2 ?
+                        $nodeList[$node->id]['catalog'] . '</details></li><div class="divider"></div>' :
+                        $nodeList[$node->id]['catalog'] . '</details></li>';
+                }
             }
             $catalog .= '</ul>';
             $nodeList[$parent]['catalog'] = $catalog;
