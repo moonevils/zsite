@@ -19,19 +19,26 @@ class rss extends control
      */
     public function index()
     {
-        $type = $this->get->type != false ? $this->get->type : 'blog';
         $this->loadModel('tree');
         $this->loadModel('article');
 
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, isset($this->config->rss->items) ? $this->config->rss->items : 10, 1);
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
+            ->where('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
+            ->orderBy('addedDate_desc')
+            ->limit(50)
+            ->fetchAll();
 
-        $articles = $this->article->getList($type, $this->tree->getFamily(0, $type), 'id_desc', $pager);
+        $articles = $this->rss->processArticles($articles);
         $latestArticle = current((array)$articles);
+
+        $products = $this->loadModel('product')->getLatest(0, 20, $image = false);
+        $products = $this->rss->processProducts($products);
+
+        $this->view->products = $products;
 
         $this->view->title    = $this->config->site->name;
         $this->view->desc     = $this->config->site->desc;
-        $this->view->siteLink = $this->inlink('browse', "type={$type}");
         $this->view->siteLink = commonModel::getSysURL();
 
         $this->view->articles = $articles;

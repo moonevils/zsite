@@ -20,8 +20,8 @@
 <div class='panel panel-section'>
   <div class='panel-heading page-header'>
     <div class='title'>{if(!empty($products))} {$cartProducts = count($products)}{else}{$cartProducts = 0}{/if}{!printf($lang->order->cartProducts, $cartProducts)}</div>
-    <div class='opt admin'>管理</div>
-    <div class='opt complete hide'>完成</div>
+    <div class='opt admin'>{$lang->order->manage}</div>
+    <div class='opt complete hide'>{$lang->order->finish}</div>
   </div>
   {if(!empty($products))}
     <form action='{!helper::createLink('order', 'confirm')}' method='post'>

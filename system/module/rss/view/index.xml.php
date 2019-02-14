@@ -7,17 +7,12 @@
   <copyright><?php echo $config->company->name . $config->site->copyright . '-' . date('Y');?></copyright>
   <lastBuildDate><?php echo $lastDate;?></lastBuildDate>
   
-  <?php 
-  foreach($articles as $article):
-    $category = current($article->categories);
-    $article->content = str_replace('src="/data/upload/', 'src="' . getWebRoot(true) . 'data/upload/', $article->content);
-    $article->content = str_replace("src='/data/upload/", "src='" . getWebRoot(true) . 'data/upload/', $article->content);
-  ?>
+  <?php foreach($articles as $article): ?>
   <item>
     <title><?php echo $article->title?></title>
     <description><![CDATA[  <?php echo $article->content;?>]]></description>
-    <link><?php echo str_replace('&', '&amp;', $siteLink . $this->createLink('blog', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias", 'html'));?></link>
-    <category><?php echo $category->name; ?></category>
+    <link><?php echo str_replace('&', '&amp;', $article->url);?></link>
+    <category><?php echo $article->categoryName; ?></category>
     <pubDate><?php echo $article->addedDate . ' +0800';?></pubDate>
   </item>
   <?php endforeach;?>
