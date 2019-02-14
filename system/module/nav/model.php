@@ -126,7 +126,7 @@ class navModel extends model
         }
 
         $childGrade  = $grade + 1;
-        $articleTree = $this->loadModel('tree')->getOptionMenu('article');
+        $articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, true);
         $blogTree    = $this->loadModel('tree')->getOptionMenu('blog');
         $productTree = $this->loadModel('tree')->getOptionMenu('product');
         $pages       = $this->loadModel('article')->getPagePairs();
