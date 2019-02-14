@@ -33,7 +33,7 @@
                <span class='text-danger'>[{$lang->thread->stick}]</span>
               {$thread->title}
             </span>
-            <span class='options'>
+            <span class='operations'>
               <i class="icon icon-2x icon-circle"></i>
               <i class="icon icon-2x icon-circle"></i>
               <i class="icon icon-2x icon-circle"></i>
@@ -67,12 +67,12 @@
       <div class='thread'>
         <a href='{$control->createLink("thread", "view", "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
           <div class='header'>
-              <span class='title' {$style}>{$thread->title}</span>
-            <span class='options'>
+            <span class='title' {$style}>{$thread->title}</span>
+            <span class='operations'>
                 <i class="icon icon-2x icon-circle"></i>
                 <i class="icon icon-2x icon-circle"></i>
                 <i class="icon icon-2x icon-circle"></i>
-              </span>
+            </span>
           </div>
           <div class='{if(!empty($thread->image))}content{else}content-no-img{/if}'>
             <div class='left'>

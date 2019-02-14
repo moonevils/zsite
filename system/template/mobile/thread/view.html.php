@@ -10,14 +10,13 @@
  * @link        http://www.chanzhi.org
  */
 /php*}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header')}
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 {include TPL_ROOT . 'common/files.html.php'}
 
 {!js::set('quoteTitle', $lang->thread->quoteTitle)}
 {!js::set('discussion', $thread->discussion)}
 
 <div class='block-region region-top blocks' data-region='thread_view-top'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'top')}</div>
-<hr class='space'>
 {if($pager->pageID == 1)} {include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'thread')} {/if}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'reply')}
 <div class='block-region region-bottom blocks' data-region='thread_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'bottom')}</div>
