@@ -49,7 +49,7 @@
         <?php echo html::textarea('content', $content, "rows='20' class='form-control codeeditor' data-mode='php' data-height='550'");?>
       </div>
     </div>
-    <div class="panel-footer text-right">
+    <div class="panel-footer">
       <?php echo html::submitButton() . html::hidden('module', $fileModule) . html::hidden('file', $currentFile);?>
     </div>
   </div>
