@@ -1,15 +1,15 @@
 <div class='thread'>
   <div class='header'>
-    <div class='title vertical-center'>
-      <div class='tag'>
+    <div class='title'>
+      <h2 class="vertical-center">
+        {$thread->title}
         {if($thread->stick)}
-        <small class='bg-danger-pale text-danger stick'>{$lang->thread->stick}</small>
+        <span class='bg-danger-pale text-danger stick'>{$lang->thread->stick}</span>
         {/if}
         {if($thread->readonly)}
-        <small class='bg-info-pale text-info readonly'>{$lang->thread->readonly}</small>
+        <span class='bg-info-pale text-info readonly'>{$lang->thread->readonly}</span>
         {/if}
-      </div>
-      <h2>{$thread->title}</h2>
+      </h2>
     </div>
     <div class='sub-content vertical-center'>
       <div class='author vertical-center'>
