@@ -113,6 +113,7 @@ $lang->noResultsMatch = '沒有匹配的選項';
 $lang->alias          = '搜索引擎優化使用，可使用英文或數字';
 $lang->keywordsHolder = '多個關鍵字中間用逗號隔開';
 $lang->autoUpgrade    = '自動升級';
+$lang->detail         = '詳情';
 
 $lang->setOkFile = <<<EOT
 <h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
@@ -153,6 +154,7 @@ $lang->js->continueShopping = '繼續購物';
 $lang->js->required         = '必填';
 $lang->js->back             = '返回';
 $lang->js->continue         = '繼續';
+$lang->js->bindWechatTip    = '發帖功能設置了綁定微信的限制，請先綁定微信會員。';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -435,6 +437,7 @@ $lang->pager->previousPage = "上一頁";
 $lang->pager->nextPage     = "下一頁";
 $lang->pager->summery      = "第 <strong>%s-%s</strong> 項，共 <strong>%s</strong> 項";
 
+/* The date unit*/
 $lang->date = new stdclass();
 $lang->date->minute       = '分鐘';
 $lang->date->day          = '天';
