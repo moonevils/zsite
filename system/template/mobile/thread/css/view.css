@@ -9,9 +9,9 @@
 .thread .hidden {display: none;}
 .thread .vertical-center {display: flex; display: -webkit-flex; align-items: center;}
 .thread .horizontal-center {display: flex; flex-direction: column; justify-content: center;}
-.thread .header .title .tag {display: flex; flex-direction: column; width: 20px;}
-.thread .header .title .stick {text-align: center; font-size: 7px;}
-.thread .header .title .readonly {text-align: center; font-size: 7px;}
+.thread .header .title {display: flex; align-items: flex-start;}
+.thread .header .title .stick {text-align: center; font-size: 12px; margin-left: 2px;}
+.thread .header .title .readonly {text-align: center; font-size: 12px; margin-left: 2px;}
 .thread .header .title h2 {margin: auto; width: 331px;}
 .thread .header .sub-content {display: flex; justify-content: space-between;}
 .thread .header .sub-content .author {margin-top: 12px;height: 32px;}
