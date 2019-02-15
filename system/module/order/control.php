@@ -102,7 +102,7 @@ class order extends control
         $paymentList = explode(',', $this->config->shop->payment);
         foreach($paymentList as $payment)
         {
-            $paymentOptions[$payment] = $this->lang->order->paymentList[$payment];
+            $paymentOptions[$payment] = $this->lang->order->paymentList[$payment] . "<label for='buyMethod' class='redio-label'></label>";
         }
 
         if($inWechat && $paymentOptions['alipay']) unset($paymentOptions['alipay']);
