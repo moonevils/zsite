@@ -23,7 +23,14 @@ class blog extends control
     {   
         $category = $this->loadModel('tree')->getByID($categoryID, 'blog');
 
-        $recPerPage = !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->blogMobileRec) ? $this->config->site->blogMobileRec : $this->config->blog->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $recPerPage, $pageID);
 

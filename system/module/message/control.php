@@ -20,7 +20,14 @@ class message extends control
      */
     public function index($pageID = 1)
     {
-        $recPerPage = !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->messageMobileRec) ? $this->config->site->messageMobileRec : $this->config->message->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
@@ -46,7 +53,14 @@ class message extends control
      */
     public function comment($objectType, $objectID, $pageID = 1)
     {
-        $recPerPage = !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->commentMobileRec) ? $this->config->site->commentMobileRec : $this->config->message->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
