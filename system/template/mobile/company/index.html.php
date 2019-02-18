@@ -27,25 +27,9 @@
       </div>
       <div class="desc">
         <p>
-          {$company->desc}
+          {$company->content}
         </p>
       </div>
     </div>
 </div>
-
-<div class='panel panel-section panel-company'>
-  <div class='block-title vertical-center'>
-    <strong class="vertical-center block-title-align">
-      <span class='vertical-line'></span>
-      <span class="block-title-text">{$lang->company->contactUs}</span>
-    </strong>
-  </div>
-  <div class='contact'>
-    {foreach($contact as $k => $v)}
-    <div class="vertical-center">
-      <strong>{$lang->company->$k}</strong><span>{$v}</span>
-    </div>
-    {/foreach}
-</div>
-
 <div class='block-region region-bottom no-padding blocks' data-region='company_index-bottom'>{$control->block->printRegion($layouts, 'company_index', 'bottom')}</div>
