@@ -20,7 +20,11 @@
       <form id='editProfileForm' method='post' action="{!inlink('editInfo')}" data-checkfingerprint='1'>
         <div class='form-group form-pad-list'>
           <div class='form-group pad-label-left'>
+            {if($field == 'qq' || $field == 'zipcode' || $field == 'phone')}
+            <input type='number' id='{$field}' name='{$field}' value='{$user->$field}' class='form_control'/>
+            {else}
             {!html::input($field, $user->$field, "class='form-control'")}
+            {/if}
             {!html::input('field', $field, "class='hide'")}
             <label for='{$field}'>{$lang->user->$field}</label>
           </div>

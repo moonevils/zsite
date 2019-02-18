@@ -217,10 +217,6 @@ $(function()
 });
 
 statAll();
-$(document).ready(function()
-{
-    
-})
 function statAll()
 {
     var amount = 0;
