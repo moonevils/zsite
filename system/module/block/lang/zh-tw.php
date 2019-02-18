@@ -248,4 +248,3 @@ $lang->block->subscribe->fixInNavList    = array();
 $lang->block->subscribe->fixInNavList[1] = '是';
 $lang->block->subscribe->fixInNavList[0] = '否';
 
-

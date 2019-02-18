@@ -52,7 +52,7 @@
         <div class="card theme">
           <div class='media-wrapper theme-img'>
             <?php if(!empty($theme->images)):?>
-            <?php echo html::a('http://www.chanzhi.org/theme-viewsnap-0-' . $theme->code . '.html', html::image($theme->images[0]), "title='{$theme->name}' data-size='fullscreen' data-toggle='modal' data-type='ajax' data-show-header='false'");?>
+            <?php echo html::a('https://www.chanzhi.org/theme-viewsnap-0-' . $theme->code . '.html', html::image($theme->images[0]), "title='{$theme->name}' data-size='fullscreen' data-toggle='modal' data-show-header='false'");?>
             <?php endif;?>
           </div>
           <div class='theme-info'>
@@ -64,7 +64,9 @@
               <?php if($theme->latestRelease->lifePrice):?>
               <?php echo "<strong class='price text-info'>￥" . number_format($theme->latestRelease->lifePrice, 2) . '</strong>'; ?>
               <?php elseif($theme->latestRelease->score):?>
-                  <?php echo "<strong class='price text-info'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
+              <?php echo "<strong class='price text-info'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
+              <?php else:?>
+              <strong class='label label-success'>FREE </strong>
               <?php endif;?>
               <div class="actions">
                   <?php

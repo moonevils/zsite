@@ -51,6 +51,7 @@ $lang->product->stock     = '庫存';
 $lang->product->negotiate = '面議';
 
 $lang->product->list         = '產品列表';
+$lang->product->view         = '詳情';
 $lang->product->hot          = '熱門產品';
 $lang->product->admin        = '維護產品';
 $lang->product->create       = '添加產品';

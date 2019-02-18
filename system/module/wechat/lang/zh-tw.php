@@ -39,6 +39,7 @@ $lang->wechat->commitMenu     = '菜單';
 $lang->wechat->deleteMenu     = '刪除菜單';
 $lang->wechat->messageList    = '消息';
 $lang->wechat->remind         = '消息提醒';
+$lang->wechat->unsupported    = '暫不支持 %s 消息顯示';
 
 $lang->wechat->typeList['subscribe'] = '訂閲號';
 $lang->wechat->typeList['service']   = '服務號';
