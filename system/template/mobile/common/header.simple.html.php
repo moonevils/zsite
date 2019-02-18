@@ -17,6 +17,7 @@
   {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
   <style>
     body {padding-top:48px}
+    body.with-appnav.with-appbar-top {padding-top:48px}
     .appnav {border-bottom:0px}
     .appbar.fix-top {border-bottom:0px}
     .both-sides {border: 1px solid rgba(0,0,0,0.08);border-radius:20px}
@@ -36,7 +37,7 @@
       <div class='mainnav' style='padding:8px 7px'>
         <div class='both-sides left'>
           <div class='icon-block left'>
-            <a href='javascript:history.go(-1);'>{!html::image('/theme/mobile/common/img/left.png')}</a>
+            <a href='javascript:window.location.href=document.referrer'>{!html::image('/theme/mobile/common/img/left.png')}</a>
           </div>
           <div class='divider-line'></div>
           <div class='icon-block home'>

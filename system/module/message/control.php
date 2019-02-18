@@ -71,7 +71,9 @@ class message extends control
         $this->view->comments    = $this->message->getByObject($type = 'comment', $objectType, $objectID, $pager);
         $this->view->pager       = $pager;
         $this->view->startNumber = ($pageID - 1) * 10;
-        $this->lang->message     = $this->lang->comment;
+
+        if($this->app->clientDevice == 'desktop') $this->lang->message = $this->lang->comment;
+
         $this->display();
     }
 
