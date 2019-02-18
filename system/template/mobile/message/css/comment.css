@@ -11,10 +11,11 @@ input:focus, textarea:focus {outline: none;}
 .comments .vertical-center {display: flex; display: -webkit-flex; align-items: center;}
 .comments .form-group {margin-bottom: 0;}
 .comments .comment-list {padding: 13px 12px; background-color: #FFFFFF;}
+.comments .message-list {padding: 1px 12px; background-color: #FFFFFF;}
 .comments .list-text {margin-left: 4px; font-size: 16px;}
-.comments .avatar img {border-radius: 3px; margin-right: 10px; width: 32px; height: 32px;}
-.comments .avatar i {border-radius: 3px; margin-right: 10px; font-size: 40px;}
-.comments .comment-ext {margin-left: -162px; display: flex; flex-direction: column; justify-content: space-between;}
+.comments .avatar img {border-radius: 3px; width: 32px; height: 32px;}
+.comments .avatar i {border-radius: 3px; font-size: 40px;}
+.comments .comment-ext {margin-left: 10px; display: flex; flex-direction: column; justify-content: space-between;}
 .comments .authorName {color: #333333; font-size: 14px;}
 .comments .addedDate {color: #999999; font-size: 13px;}
 .comments .reply-text {margin-top: -20px;}

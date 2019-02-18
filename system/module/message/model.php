@@ -124,7 +124,7 @@ class messageModel extends model
                     $this->getFrontReplies($reply, '', $level);
                     echo "</div>";
                 }
-                echo $level == 1 ? '<div class="more-replies">' . $this->lang->threadReply->moreReplies . '</div>' : '';
+                echo $level == 1 ? '<div class="more-replies">' . $this->lang->thread->moreReplies . '</div>' : '';
                 echo '</div>';
             }
             elseif($type !== 'simple')
