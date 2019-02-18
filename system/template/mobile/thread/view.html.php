@@ -18,7 +18,11 @@
 
 <div class='block-region region-top blocks' data-region='thread_view-top'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'top')}</div>
 {if($pager->pageID == 1)} {include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'thread')} {/if}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'reply')}
+{if(commonModel::isAvailable('message') && !$thread->readonly)}
+<div class='commentBox' id='commentBox'>
+  {$control->fetch('message', 'comment', "objectType=thread&objectID={{$thread->id}}")}
+</div>
+{/if}
 <div class='block-region region-bottom blocks' data-region='thread_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'bottom')}</div>
 {include TPL_ROOT . 'common/form.html.php'}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

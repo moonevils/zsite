@@ -66,7 +66,7 @@
               <?php elseif($theme->latestRelease->score):?>
               <?php echo "<strong class='price text-info'>" . $theme->latestRelease->score . $lang->ui->score. '</strong>'; ?>
               <?php else:?>
-              <strong class='price text-info'> &nbsp;</strong>
+              <strong class='label label-success'>FREE </strong>
               <?php endif;?>
               <div class="actions">
                   <?php

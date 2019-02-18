@@ -14,6 +14,7 @@ $lang->score->rule        = '積分規則';
 $lang->score->statement   = '積分結算';
 $lang->score->stateDesc   = '積分結算會將一個月之前的所有收入積分按照每個用戶結算為總積分。以減少記錄數。';
 
+$lang->score->score   = '積分';
 $lang->score->id      = '編號';
 $lang->score->account = '用戶';
 $lang->score->method  = '方式';

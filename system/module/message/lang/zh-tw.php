@@ -63,7 +63,7 @@ $lang->comment->common       = '評論';
 $lang->comment->id           = '編號';
 $lang->comment->type         = '類型';
 $lang->comment->from         = '稱呼';
-$lang->comment->content      = '内容';
+$lang->comment->content      = '內容';
 $lang->comment->phone        = '電話';
 $lang->comment->mobile       = '手機';
 $lang->comment->qq           = 'QQ';
@@ -108,3 +108,5 @@ $lang->message->messageItem = "<dd><strong>%s</strong> 于 <em>%s</em> 發表：
 $lang->message->replySubject            = '%s管理員的回覆';
 $lang->message->submit                  = '發表留言';
 $lang->message->inputPlaceholder        = '添加你的留言';
+
+

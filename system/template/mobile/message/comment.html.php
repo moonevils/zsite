@@ -14,12 +14,17 @@
 {!js::set('objectID',   $objectID)}
 {!js::set('messageRefreshUrl', $control->createLink('message', 'comment', "objecType=$objectType&objectID=$objectID"))}
 {if(isset($pageCSS))} {!css::internal($pageCSS)} {/if}
-<hr>
 <div class='comments panel'>
   <div class='comment-list' style="{if(!isset($comments) || !$comments)}display:none;{/if}">
       <div class='title vertical-center'>
         <span class='vertical-line'></span>
-        <span class="list-text">{$lang->message->list}</span>
+        <span class="list-text">
+          {if($objectType == 'thread')}
+            {$lang->threadReply->list}
+          {else}
+            {$lang->message->list}
+          {/if}
+        </span>
       </div>
       <div id="commentsListAsync">
         <div id="commentsListWrapper">
@@ -64,12 +69,12 @@
   <div class='comment-post vertical-center'>
     <form class='comment-form vertical-center' method='post' id='commentForm' action="{$control->createLink('message', 'post', 'type=comment')}">
       <div class='form-group required'>
-        <input class="comment-input" type="text" name="content" id="commentContent" value="" rows="5" placeholder="   {$lang->comment->inputPlaceholder}">
+        <input class="comment-input" type="text" name="content" id="commentContent" value="" rows="5" placeholder="&nbsp&nbsp{if($objectType == 'thread')}{$lang->threadReply->inputPlaceholder}{else}{$lang->comment->inputPlaceholder}{/if}">
         {!html::hidden('objectType', $objectType)}
         {!html::hidden('objectID', $objectID)}
       </div>
       <div class='form-group'>
-        <input type="submit" id="submitComment" value="{$lang->comment->submit}" data-loading="{$lang->comment->submitting}...">
+        <input type="submit" id="submitComment" value="{if($objectType == 'thread')}{$lang->threadReply->submit}{else}{$lang->comment->submit}{/if}" data-loading="{if($objectType == 'thread')}{$lang->threadReply->submitting}{else}{$lang->comment->submitting}{/if}...">
       </div>
     </form>
   </div>

@@ -109,4 +109,12 @@ $lang->message->replySubject            = '%s管理员的回复';
 $lang->message->submit                  = '发表留言';
 $lang->message->inputPlaceholder        = '添加你的留言';
 
+$lang->threadReply = new stdclass();
+$lang->threadReply->list             = '回帖列表';
+$lang->threadReply->submit           = '发表回帖';
+$lang->threadReply->submitting       = '稍后';
+$lang->threadReply->inputPlaceholder = '添加你的回帖';
+$lang->threadReply->moreReplies      = '查看全部<span class="more-replies-amount"></span>条评论';
+
+
 
