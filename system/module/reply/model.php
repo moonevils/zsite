@@ -47,7 +47,14 @@ class replyModel extends model
             ->andWhere('hidden')->eq('0')
             ->fetch('id');
 
-        $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->replyMobileRec) ? $this->config->site->replyMobileRec : $this->config->reply->recPerPage;
+        }
         $pageID     = (int)($replies / $recPerPage);
         
         if($mode == 'anchor') return array('pageID' => $pageID + 1, 'anchorID' => $reply->id);

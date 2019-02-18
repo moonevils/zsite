@@ -370,7 +370,12 @@ class baseValidater
     public static function checkCaptcha($var)
     {
         if(!isset($_SESSION['captcha'])) return false;
-        return $var == $_SESSION['captcha'];
+        if($var == $_SESSION['captcha'])
+        {
+            unset($_SESSION['captcha']);
+            return true;   
+        }
+        return false;
     }
 
     /**

@@ -70,7 +70,7 @@ class thread extends control
         
         if(isset($this->config->forum->bindWechat) && $this->config->forum->bindWechat == 'open')
         {
-            $user = $this->loadModel('user')->getByAccount($this->app->user->account);
+            $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('account')->eq($this->app->user->account)->fetch();
             if(!isset($user->provider) || $user->provider != 'wechat')
             {
                 $referer = helper::safe64Encode($this->createLink('thread', 'post', "boardID=$boardID"));
@@ -173,7 +173,15 @@ class thread extends control
 
         /* Get replies. */
         $this->app->loadModuleConfig('reply');
-        $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
+
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->replyMobileRec) ? $this->config->site->replyMobileRec : $this->config->reply->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, $recPerPage, $pageID);
         $replies = $this->loadModel('reply')->getByThread($threadID, $pager);

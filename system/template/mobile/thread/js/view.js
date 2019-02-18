@@ -40,7 +40,7 @@ $(function()
         }
 
         $('#content').focus().val(quoteContent);
-    })
+    });
 
     $(document).on('click', 'input[name=stick]', function()
     {
@@ -53,4 +53,19 @@ $(function()
             $(this).parents('.form-group').next(".form-group").show().next('.form-group').show();
         }
     });
+
+    $('.operations .trigger').on('click', function ()
+    {
+        var options = $('.operations .options');
+        if (options.hasClass('hidden'))
+        {
+            $(this).addClass('active');
+            options.removeClass('hidden');
+        }
+        else
+        {
+            $(this).removeClass('active');
+            options.addClass('hidden');
+        }
+    })
 });

@@ -62,45 +62,109 @@ js::set('gdInstalled', $gdInstalled);
             <?php if(strpos($this->config->site->modules, 'article') !== false):?>
             <tr>
               <th class='w-120px'><?php echo $lang->site->customizableList->article;?></th> 
-              <td class='w-p30'><?php echo html::input('articleRec', !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage, "class='form-control'");?></td><td></td>
+              <td class='w-p30'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('articleRec', !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('articleMobileRec', !empty($this->config->site->articleMobileRec) ? $this->config->site->articleMobileRec : $this->config->article->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <?php endif;?>
             <?php if(strpos($this->config->site->modules, 'product') !== false):?>
             <tr>
               <th class='w-120px'><?php echo $lang->site->customizableList->product;?></th> 
-              <td class='w-p30'><?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?></td><td></td>
+              <td class='w-p30'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('productMobileRec', !empty($this->config->site->productMobileRec) ? $this->config->site->productMobileRec : $this->config->product->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <?php endif;?>
             <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
             <tr>
               <th class='w-120px'><?php echo $lang->site->customizableList->blog;?></th> 
-              <td class='w-p30'><?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?></td><td></td>
+              <td class='w-p30'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('blogMobileRec', !empty($this->config->site->blogMobileRec) ? $this->config->site->blogMobileRec : $this->config->blog->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <?php endif;?>
             <?php if(strpos($this->config->site->modules, 'book') !== false):?>
             <tr>
               <th class='w-120px'><?php echo $lang->site->customizableList->book;?></th> 
-              <td class='w-p30'><?php echo html::input('bookRec', !empty($this->config->site->bookRec) ? $this->config->site->bookRec : $this->config->book->recPerPage, "class='form-control'");?></td><td></td>
+              <td class='w-p30'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('bookRec', !empty($this->config->site->bookRec) ? $this->config->site->bookRec : $this->config->book->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('bookMobileRec', !empty($this->config->site->bookMobileRec) ? $this->config->site->bookMobileRec : $this->config->book->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <?php endif;?>
             <?php if(strpos($this->config->site->modules, 'message') !== false):?>
             <tr>
               <th class='w-120px'><?php echo $lang->site->customizableList->message;?></th> 
-              <td class='w-p30'><?php echo html::input('messageRec', !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
+              <td class='w-p30'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('messageRec', !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('messageMobileRec', !empty($this->config->site->messageMobileRec) ? $this->config->site->messageMobileRec : $this->config->message->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->site->customizableList->comment;?></th> 
-              <td><?php echo html::input('commentRec', !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
+              <td>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('commentRec', !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('commentMobileRec', !empty($this->config->site->commentMobileRec) ? $this->config->site->commentMobileRec : $this->config->message->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <?php endif;?>
             <?php if(strpos($this->config->site->modules, 'forum') !== false):?>
             <tr>
               <th class='w-120px'><?php echo $lang->site->customizableList->forum;?></th> 
-              <td class='w-p30'><?php echo html::input('forumRec', !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage, "class='form-control'");?></td><td></td>
+              <td class='w-p30'>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('forumRec', !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('forumMobileRec', !empty($this->config->site->forumMobileRec) ? $this->config->site->forumMobileRec : $this->config->forum->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->site->customizableList->reply;?></th> 
-              <td><?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?></td><td></td>
+              <td>
+                <div class='input-group'>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
+                  <?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?>
+                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('replyMobileRec', !empty($this->config->site->replyMobileRec) ? $this->config->site->replyMobileRec : $this->config->reply->recPerPage, "class='form-control'");?>
+                </div>
+              </td>
+              <td></td>
             </tr>
             <?php endif;?>
             <?php if(strpos($this->config->site->modules, 'blog') !== false):?>

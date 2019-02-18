@@ -49,7 +49,15 @@ class product extends control
         $categoryID = is_numeric($categoryID) ? $categoryID : zget($category, 'id', 0);
         if($category && $category->link) helper::header301($category->link);
 
-        $recPerPage = !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage;
+        if($this->app->clientDevice == 'desktop') 
+        {
+            $recPerPage = !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->productMobileRec) ? $this->config->site->productMobileRec : $this->config->product->recPerPage;
+        }
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $recPerPage, $pageID);
 

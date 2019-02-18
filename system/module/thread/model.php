@@ -183,9 +183,11 @@ class threadModel extends model
 
             ->orderBy('id desc')
             ->page($pager)
-            ->fetchAll();
+            ->fetchAll('id');
 
-        return $this->setRealNames($sticks);
+        $sticks = $this->setRealNames($sticks);
+
+        return $this->process($sticks);
     }
 
     /**
@@ -232,6 +234,8 @@ class threadModel extends model
             /* Judge the thread is new or not.*/
             $thread->isNew = (time() - strtotime($thread->repliedDate)) < 24 * 60 * 60 * $this->config->thread->newDays;
         }
+
+        $threads = $this->loadModel('file')->processImages($threads, 'thread');
 
         return $threads;
     }

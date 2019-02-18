@@ -13,22 +13,15 @@
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 
 <div class="book-nav">
-  <div class="book">手册1</div>
-  <div class="book">手册2</div>
-  <div class="book">手册3</div>
-  <div class="book">手册4</div>
-  <div class="book">手册5</div>
-  <div class="book">手册6</div>
-  <div class="book">手册7</div>
-  <div class="book">手册8</div>
-  <div class="book">手册9</div>
-  <div class="book">手册10</div>
-  <div class="book">手册11</div>
-  <div class="book">手册12</div>
+  {foreach($books as $row)}
+  <span class="book {if($row->id == $book->id)}active{/if}">{!html::a($control->createLink('book', 'browse', "nodeID=$row->id", "book=$row->alias"), $row->title)}</span>
+  {/foreach}
 </div>
 
 <div class="book-chapters">
-
+  <ul class="chapter-tree">
+    {$allCatalog}
+  </ul>
 </div>
 
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}

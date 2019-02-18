@@ -1237,9 +1237,9 @@ class commonModel extends model
         {
             $scheme = $config->site->scheme;
         }
-        else if(isset($_SERVER['REQUEST_SCHEME']))
+        else
         {
-            $scheme = $_SERVER['REQUEST_SCHEME'];
+            $scheme = helper::isHttps() ? 'https' : 'http';
         }
         $httpHost = rtrim($_SERVER['HTTP_HOST'], '/');
         return "$scheme://$httpHost";

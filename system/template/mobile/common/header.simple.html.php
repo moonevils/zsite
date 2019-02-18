@@ -18,6 +18,7 @@
   <style>
     body {padding-top:48px}
     .appnav {border-bottom:0px}
+    .appbar.fix-top {border-bottom:0px}
     .both-sides {border: 1px solid rgba(0,0,0,0.08);border-radius:20px}
     .both-sides.left {float:left;height:32px;width:87px;line-height:28px}
     .both-sides.right {float:right}
@@ -31,23 +32,25 @@
   {/if} 
   </style>
   <div class='block-region region-all-top blocks' data-region='all-top'>
-  <nav class='appnav fix-top appnav-auto' id='appnav' data-ve='navbar' data-type='mobile_top' style='top:0px;background:#fff;box-shadow: 0 0px 0px;height:48px'>
-  <div class='mainnav' style='padding:8px 7px'>
-    <div class='both-sides left'>
-      <div class='icon-block left'>
-        <a href='javascript:history.go(-1);'>{!html::image('/theme/mobile/common/img/left.png')}</a>
+    <nav class='appbar fix-top appnav-auto' id='appnav' data-ve='navbar' data-type='mobile_top' style='top:0px;box-shadow: 0 0px 0px;height:48px'>
+      <div class='mainnav' style='padding:8px 7px'>
+        <div class='both-sides left'>
+          <div class='icon-block left'>
+            <a href='javascript:history.go(-1);'>{!html::image('/theme/mobile/common/img/left.png')}</a>
+          </div>
+          <div class='divider-line'></div>
+          <div class='icon-block home'>
+            <a href='{$control->config->webRoot}'>{!html::image('/theme/mobile/common/img/home.png')}</a>
+          </div>
+        </div>
+        <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>
       </div>
-      <div class='divider-line'></div>
-      <div class='icon-block home'>
-        <a href='{$control->config->webRoot}'>{!html::image('/theme/mobile/common/img/home.png')}</a>
+      {if(!empty($subnavs))}
+      <div class='subnavs fade'>
+        {$subnavs}
       </div>
-    </div>
-    <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>
-  </div>
-  <div class='subnavs fade'>
-    {$subnavs}
-  </div>
-</nav>
+      {/if}
+    </nav>
   </div>
   <div class='block-region region-all-banner blocks' data-region='all-banner'>
     {$control->block->printRegion($layouts, 'all', 'banner')}
