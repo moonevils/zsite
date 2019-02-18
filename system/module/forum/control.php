@@ -22,7 +22,14 @@ class forum extends control
         $mode = $mode ? $mode : $this->config->forum->indexMode;
         $this->forum->updateStats();
 
-        $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->forumMobileRec) ? $this->config->site->forumMobileRec : $this->config->forum->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $recPerPage, $pageID);
 
@@ -77,7 +84,14 @@ class forum extends control
         $board->moderators = implode(',', $board->moderators);
 
         /* Get common threads. */
-        $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->forumMobileRec) ? $this->config->site->forumMobileRec : $this->config->forum->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, $recPerPage, $pageID);
         $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);

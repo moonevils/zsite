@@ -43,8 +43,14 @@ class article extends control
         if($category && $category->link) helper::header301($category->link);
 
         $orderBy = isset($_COOKIE['articleOrderBy'][$categoryID]) ? $_COOKIE['articleOrderBy'][$categoryID] : 'addedDate_desc';
-
-        $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->articleMobileRec) ? $this->config->site->articleMobileRec : $this->config->article->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 

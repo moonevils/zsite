@@ -173,7 +173,15 @@ class thread extends control
 
         /* Get replies. */
         $this->app->loadModuleConfig('reply');
-        $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
+
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->replyMobileRec) ? $this->config->site->replyMobileRec : $this->config->reply->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, $recPerPage, $pageID);
         $replies = $this->loadModel('reply')->getByThread($threadID, $pager);

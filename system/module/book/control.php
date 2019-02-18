@@ -24,7 +24,14 @@ class book extends control
      */
     public function index($pageID = 1)
     {
-        $recPerPage = !empty($this->config->site->bookRec) ? $this->config->site->bookRec : $this->config->book->recPerPage;
+        if($this->app->clientDevice == 'desktop')
+        {
+            $recPerPage = !empty($this->config->site->bookRec) ? $this->config->site->bookRec : $this->config->book->recPerPage;
+        }
+        else
+        {
+            $recPerPage = !empty($this->config->site->bookMobileRec) ? $this->config->site->bookMobileRec : $this->config->book->recPerPage;
+        }
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
