@@ -576,13 +576,16 @@
                           dragCssClass: '',
                           finish: function(e)
                           {
-                              var orders = [];
-                              $.each(e.list, function()
+                              if(e.list && e.list.length)
                               {
-                                  orders.push($$(this).find('.ve').data('id'));
-                              });
+                                  var orders = [];
+                                  $.each(e.list, function()
+                                  {
+                                      orders.push($$(this.item).find('.ve').data('id'));
+                                  });
 
-                              sortBlocks($row, orders);
+                                  sortBlocks($row, orders);
+                              }
                           }
                     });
                 });
@@ -621,15 +624,18 @@
                   },
                   finish: function(e)
                   {
-                      var orders = [];
-                      $.each(e.list, function()
+                      if(e.list && e.list.length)
                       {
-                          var $item = $$(this);
-                          if(withGrid) $item = $item.children('.ve');
-                          orders.push($item.data('id'));
-                      });
+                          var orders = [];
+                          $.each(e.list, function()
+                          {
+                              var $item = $$(this.item);
+                              if(withGrid) $item = $item.children('.ve');
+                              orders.push($item.data('id'));
+                          });
 
-                      sortBlocks($blocksHolder, orders);
+                          sortBlocks($blocksHolder, orders);
+                      }
                   }
             });
 
