@@ -92,10 +92,12 @@ class messageModel extends model
      * Get all replies of a message for front.
      *
      * @param  object  $message
+     * @param  string  $type
+     * @param  int     $level
      * @access public
-     * @return array
+     * @return null
      */
-    public function getFrontReplies($message, $type = '')
+    public function getFrontReplies($message, $type = '', $level = 0)
     {
         $replies = $this->getReplies($message);
 
@@ -103,13 +105,15 @@ class messageModel extends model
         {
             if($this->app->clientDevice == 'mobile')
             {
+                $level++;
                 echo "<div class='replies'>";
                 foreach($replies as $reply)
                 {
+                    $replyTo = $level > 1 ? '<div class="arrow"></div>' . $reply->to : '';
                     echo "<div class='reply-panel'>";
                     echo "<div class='reply-heading vertical-center'>";
                     echo "<div class='reply-ext'>";
-                    echo "<span class='text-primary'>{$reply->from}</i> </span>";
+                    echo "<span class='text-primary'>{$reply->from}{$replyTo}</i> </span>";
                     echo "<span class='text-muted'>" . $reply->date . "</span>";
                     echo "</div>";
                     echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' class='pull-right' id='reply{$reply->id}' data-icon='reply' data-title='{$this->lang->message->reply}'");
@@ -117,10 +121,11 @@ class messageModel extends model
                     echo "<div class='reply-body'>";
                     echo nl2br($reply->content);
                     echo '</div>';
-                    $this->getFrontReplies($reply);
+                    $this->getFrontReplies($reply, '', $level);
                     echo "</div>";
                 }
-                echo "</div>";
+                echo $level == 1 ? '<div class="more-replies">' . $this->lang->threadReply->moreReplies . '</div>' : '';
+                echo '</div>';
             }
             elseif($type !== 'simple')
             {

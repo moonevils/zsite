@@ -108,3 +108,10 @@ $lang->message->messageItem = "<dd><strong>%s</strong> posted on <em>%s</em> abo
 $lang->message->replySubject            = 'Admin %s replied.';
 $lang->message->submit                  = 'Submit';
 $lang->message->inputPlaceholder        = 'Add Message';
+
+$lang->threadReply = new stdclass();
+$lang->threadReply->list             = 'Reply List';
+$lang->threadReply->submit           = 'Reply';
+$lang->threadReply->submitting       = 'Replying';
+$lang->threadReply->inputPlaceholder = 'Add Reply';
+$lang->threadReply->moreReplies      = 'More <span class="more-replies-amount"></span> Replies';

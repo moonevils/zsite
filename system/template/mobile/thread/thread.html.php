@@ -60,9 +60,3 @@
     {/if}
   </div>
 </div>
-
-{if(commonModel::isAvailable('message'))}
-<div class='commentBox' id='commentBox'>
-  {$control->fetch('message', 'comment', "objectType=thread&objectID={{$thread->id}}")}
-</div>
-{/if}
