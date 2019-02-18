@@ -21,7 +21,7 @@
         <div class='form-group form-pad-list'>
           <div class='form-group pad-label-left'>
             {if($field == 'qq' || $field == 'zipcode' || $field == 'phone')}
-            <input type='number' id='{$field}' name='{$field}' value='{$user->$field}' class='form_control'/>
+            <input type='number' id='{$field}' name='{$field}' value='{$user->$field}' class='form-control'/>
             {else}
             {!html::input($field, $user->$field, "class='form-control'")}
             {/if}
