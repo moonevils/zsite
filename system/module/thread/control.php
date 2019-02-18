@@ -70,7 +70,7 @@ class thread extends control
         
         if(isset($this->config->forum->bindWechat) && $this->config->forum->bindWechat == 'open')
         {
-            $user = $this->loadModel('user')->getByAccount($this->app->user->account);
+            $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('account')->eq($this->app->user->account)->fetch();
             if(!isset($user->provider) || $user->provider != 'wechat')
             {
                 $referer = helper::safe64Encode($this->createLink('thread', 'post', "boardID=$boardID"));
