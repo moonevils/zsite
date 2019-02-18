@@ -36,7 +36,8 @@
 .text-muted, input::placeholder {color:#666}
 .text-time {color:#999}
 .text-danger {color:#D0021B}
-.counter {margin-top:6px}
+.table-cell.middle.thumbnail-cell.text-right {float:right}
+.counter {margin-top:6px;}
 </style>
 <div class='block-region region-top blocks' data-region='forum_index-top'>{$control->loadModel('block')->printRegion($layouts, 'forum_index', 'top')}</div>
 <div class='block-top'>

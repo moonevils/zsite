@@ -17,6 +17,7 @@
   {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.lite')}
   <style>
     body {padding-top:48px}
+    body.with-appnav.with-appbar-top {padding-top:48px}
     .appnav {border-bottom:0px}
     .appbar.fix-top {border-bottom:0px}
     .both-sides {border: 1px solid rgba(0,0,0,0.08);border-radius:20px}
