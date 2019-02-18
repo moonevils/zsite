@@ -24,7 +24,7 @@
 .cards-list {padding:0px;overflow:hidden}
 .cards.bordered {margin:0px}
 .cards .card-fix {overflow:hidden;border-bottom:1px solid #D8D8D8}
-.cards .card-fix.white {background-color:#fff;padding:0px 10px}
+.cards .card-fix.white {background-color:#fff;padding:8px 10px;border:0px;margin-bottom:12px}
 .cards .card-fix:last-child {border:none}
 .cards .card-heading {padding:8px 0px}
 .cards .card-content, .card-footer {padding: 8px 0px}
@@ -36,6 +36,7 @@
 .text-muted, input::placeholder {color:#666}
 .text-time {color:#999}
 .text-danger {color:#D0021B}
+.counter {margin-top:6px}
 </style>
 <div class='block-region region-top blocks' data-region='forum_index-top'>{$control->loadModel('block')->printRegion($layouts, 'forum_index', 'top')}</div>
 <div class='block-top'>
