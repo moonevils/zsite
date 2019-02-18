@@ -430,6 +430,7 @@ $(function()
                     }
                     else alert(v.lang.timeout);
                     $pager.removeClass('page-loading');
+                    $pager.trigger('pupLoad');
                 });
                 $pager.addClass('page-loading');
             };
@@ -463,7 +464,8 @@ $(function()
 
     $.fn.removePullUpPager = function()
     {
-        return $(this).each(function() {
+        return $(this).each(function()
+        {
             var $pager = $(this);
             var id = $pager.data('initPullUpPager');
             if(id)
@@ -476,7 +478,8 @@ $(function()
 
     $.fn.initPullUpPager = function()
     {
-        return $(this).each(function() {
+        return $(this).each(function()
+        {
             initPullUpPager($(this));
         });
     };
