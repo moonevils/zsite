@@ -181,6 +181,19 @@ $(function()
 
     $('.check-product').on('click', function()
     {
+        var status = true;
+        $('.check-product').each(function()
+        {
+            if(!$(this).prop("checked"))
+            {
+                $('#checkAll').prop("checked", false);
+                status = false;
+            }
+        })
+        if(status)
+        {
+            $('#checkAll').prop("checked", true);
+        }
         statAll();
     });
 
