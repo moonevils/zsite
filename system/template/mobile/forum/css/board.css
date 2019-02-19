@@ -1,4 +1,4 @@
-.panel-section {margin-top: -20px; background: #f5f5f5;}
+.panel-section {background: #f5f5f5;}
 .thread-list .thread {padding: 16px 10px; border-radius: 3px; margin: 12px 0; background: #ffffff;}
 .thread-list .thread span {word-break: break-all;}
 .thread-list .thread .header {display: flex; display: -webkit-flex; align-items: flex-start; justify-content: space-between;}
