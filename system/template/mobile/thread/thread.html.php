@@ -25,7 +25,7 @@
           <span class='addedDate'>{!formatTime($thread->addedDate)}</span>
         </div>
       </div>
-      {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id))}
+      {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id, $thread->author))}
       <div class='operations'>
         <span class='trigger'>
           <i class='circle'></i>
