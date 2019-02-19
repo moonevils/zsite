@@ -37,7 +37,8 @@
 .text-muted, input::placeholder {color:#666}
 .text-time {color:#999}
 .text-danger {color:#D0021B}
-.table-cell.middle.thumbnail-cell.text-right {float:right;width:100px;height:80px;margin-top:40px}
+.table-cell.middle.thumbnail-cell.text-right {float:right;width:20%}
+.table-cell.middle.thumbnail-cell.text-right.special {width:100px;height:80px}
 .counter {margin-top:6px;}
 </style>
 <div class='block-region region-top blocks' data-region='forum_index-top'>{$control->loadModel('block')->printRegion($layouts, 'forum_index', 'top')}</div>
@@ -56,13 +57,13 @@
         {$style = $thread->color ? " color:{{$thread->color}}" : ''}
         <div class='card-fix white'>
           <a href='{$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
+            <div class='card-heading'><h5 class='title' style='{$style}'>{$thread->title}</h5></div>
             <div class='card-body-special {if(!empty($thread->image->list[0]))}card-all{/if}'>
-              <div class='card-heading'><h5 class='title' style='{$style}'>{$thread->title}</h5></div>
               <div class='card-content text-muted'>{$thread->content}</div>
               <div class='card-content text-time'><i class="icon icon-comment-alt"></i> {$thread->replies} &nbsp; {!substr($thread->addedDate, 0, -8)}</div>
             </div>
             {if(!empty($thread->image->list[0]))}
-            <div class='table-cell middle thumbnail-cell text-right'>
+            <div class='table-cell middle thumbnail-cell text-right special'>
               {!html::image($control->loadModel('file')->printFileURL($thread->image->list[0]))}
             </div>
             {/if}
@@ -77,8 +78,8 @@
         {$style = $thread->color ? " color:{{$thread->color}}" : ''}
         <div class='card-fix white'>
           <a href='{$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
+            <div class='card-heading'><h5 class='title' style='{$style}'>{$thread->title}</h5></div>
             <div class='card-body-special {if(!empty($thread->image->list[0]))}card-all{/if}'>
-              <div class='card-heading'><h5 class='title' style='{$style}'>{$thread->title}</h5></div>
               <div class='card-content text-muted'>{$thread->content}</div>
               <div class='card-content text-time'><i class="icon icon-comment-alt"></i> {$thread->replies} &nbsp; {!substr($thread->addedDate, 0, -8)}</div>
             </div>
