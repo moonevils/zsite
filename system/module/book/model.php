@@ -74,7 +74,30 @@ class bookModel extends model
      */
     public function getBookList($pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`, id')->page($pager)->fetchAll('id');
+        $books = $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`, id')->page($pager)->fetchAll('id');
+        foreach($books as $k => $book)
+        {
+            $book->articleAmount = $this->getArticleAmount($book->id);
+            $books[$k] = $book;
+        }
+        return $books;
+    }
+
+    /**
+     * Get article amount of book.
+     *
+     * @param $bookID
+     * @access public
+     * @return int
+     */
+    public function getArticleAmount($bookID)
+    {
+        return $this->dao->select('count(*) amount')->from(TABLE_BOOK)
+            ->where('type')->eq('article')
+            ->andWhere('status')->eq('normal')
+            ->andWhere('path')->like("%,{$bookID},%")
+            ->fetch()
+            ->amount;
     }
 
     /**
