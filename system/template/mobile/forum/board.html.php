@@ -33,7 +33,7 @@
                <span class='text-danger'>[{$lang->thread->stick}]</span>
               {$thread->title}
             </span>
-            {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id))}
+            {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id, $thread->author))}
           </a>
           <div class='operations'>
             <span class='trigger'>
@@ -43,18 +43,18 @@
             </span>
             <div class='options hidden'>
               {if($control->thread->canManage($board->id))}
-              {!html::a($control->createLink('thread', 'stick', "thread=$thread->id"), "{{$lang->thread->sticks[$thread->stick]}}", "data-toggle='modal'")}
-              {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
-              {@$account = helper::safe64Encode($thread->author)}
-              {!html::a($control->createLink('thread', 'addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal class='text-muted'")}
-              {/if}
-              {if($thread->hidden)}
-              {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->show, "class='switcher ajaxaction'")}
-              {else}
-              {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->hide, "class='switcher ajaxaction'")}
-              {/if}
-              {!html::a($control->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'")}
-              {!html::a($control->createLink('thread', 'transfer',   "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'")}
+                {!html::a($control->createLink('thread', 'stick', "thread=$thread->id"), "{{$lang->thread->sticks[$thread->stick]}}", "data-toggle='modal'")}
+                {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
+                  {@$account = helper::safe64Encode($thread->author)}
+                  {!html::a($control->createLink('thread', 'addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal class='text-muted'")}
+                {/if}
+                {if($thread->hidden)}
+                  {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->show, "class='switcher ajaxaction'")}
+                {else}
+                  {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->hide, "class='switcher ajaxaction'")}
+                {/if}
+                {!html::a($control->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'")}
+                {!html::a($control->createLink('thread', 'transfer',   "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'")}
               {/if}
               {if($control->thread->canManage($board->id, $thread->author))} {!html::a($control->createLink('thread', 'edit', "threadID=$thread->id"), $lang->edit, 'data-toggle="modal"')} {/if}
             </div>
@@ -92,7 +92,7 @@
           <a href='{$control->createLink("thread", "view", "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
             <span class='title' {$style}>{$thread->title}</span>
           </a>
-          {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id))}
+          {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id, $thread->author))}
           <div class='operations'>
             <span class='trigger'>
               <i class='circle'></i>
@@ -101,18 +101,18 @@
             </span>
             <div class='options hidden'>
               {if($control->thread->canManage($board->id))}
-              {!html::a($control->createLink('thread', 'stick', "thread=$thread->id"), "{{$lang->thread->sticks[$thread->stick]}}", "data-toggle='modal'")}
-              {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
-              {@$account = helper::safe64Encode($thread->author)}
-              {!html::a($control->createLink('thread', 'addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal class='text-muted'")}
-              {/if}
-              {if($thread->hidden)}
-              {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->show, "class='switcher ajaxaction'")}
-              {else}
-              {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->hide, "class='switcher ajaxaction'")}
-              {/if}
-              {!html::a($control->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'")}
-              {!html::a($control->createLink('thread', 'transfer',   "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'")}
+                {!html::a($control->createLink('thread', 'stick', "thread=$thread->id"), "{{$lang->thread->sticks[$thread->stick]}}", "data-toggle='modal'")}
+                {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
+                  {@$account = helper::safe64Encode($thread->author)}
+                  {!html::a($control->createLink('thread', 'addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal class='text-muted'")}
+                {/if}
+                {if($thread->hidden)}
+                  {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->show, "class='switcher ajaxaction'")}
+                {else}
+                  {!html::a($control->createLink('thread', 'switchstatus',   "threadID=$thread->id"), $lang->thread->hide, "class='switcher ajaxaction'")}
+                {/if}
+                {!html::a($control->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'")}
+                {!html::a($control->createLink('thread', 'transfer',   "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'")}
               {/if}
               {if($control->thread->canManage($board->id, $thread->author))} {!html::a($control->createLink('thread', 'edit', "threadID=$thread->id"), $lang->edit, 'data-toggle="modal"')} {/if}
             </div>
