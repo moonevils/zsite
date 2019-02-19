@@ -36,7 +36,7 @@ body.with-appbar-bottom {padding-bottom:0px}
   <div class='panel-body' id='cardListWarpper'>
     <div class='cards cards-list' id='cardList'>
     {foreach($messages as $message)}
-      <div class='card card-block' {if(!$message->readed)} href='{$control->createLink("message", "view", "message=$message->id")}'{/if}>
+      <div class='card card-block' {if(!$message->readed)} href='{$control->createLink("message", "view", "message=$message->id")}'{/if} onclick='cardClick(this)'>
         <div class='avatar'>
         {!html::image('/theme/mobile/common/img/default-head.png')}
         {if(!$message->readed)}
@@ -52,7 +52,7 @@ body.with-appbar-bottom {padding-bottom:0px}
         </div>
         <div class='card-footer'>
           <div class="pull-right">
-            {!html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' data-id='{{$message->id}}'")}
+            {!html::a($control->createLink('message', 'batchDelete'), $lang->delete, "class='delete text-danger' onclick='delCard(this);return false;' data-id='{{$message->id}}'")}
           </div>
         </div>
       </div>
@@ -62,47 +62,44 @@ body.with-appbar-bottom {padding-bottom:0px}
   </div>
 </div>
 <script>
-$(function()
+function cardClick(obj)
+{  
+    var $this   = $(obj);
+    $this.find('.dot').hide();
+    if($this.find('.text-body').css('max-height') == '40px')
+    {
+        $this.find('.text-body').css('max-height','200px');
+    }
+    else
+    {
+        $this.find('.text-body').css('max-height','40px');
+    }
+    if(!$this.attr('href')) return false;
+    var options = $.extend({url: $this.attr('href'), onSuccess: function(response)
+    {}
+    }, $this.data());
+    $.ajaxaction(options, $this);
+}
+function delCard(obj)
 {
-    var readed        = '{$lang->message->readed}';
     var deleteSuccess = '{$lang->deleteSuccess}';
-
-    {noparse}
-    $('.card.card-block').on('click', function(e) {
-        var $this   = $(this);
-        if(!$this.attr('href')) return false;
-        var options = $.extend({url: $this.attr('href'), onSuccess: function(response)
+    var $this   = $(obj);
+    var options = $.extend(
+    {
+        method: 'post',
+        url: $this.attr('href'), 
+        confirm: window.v.lang.confirmDelete,
+        data: "messages[]=" + $this.data('id'),
+        onResultSuccess: function(response)
         {
-            //var $response = $(response);
-            window.location.reload();
-            //$('#cardList').html($response.find('#cardList').html());
-            //$.messager.success(readed);
+            response.locate = null;
+            var $card = $this.closest('.card').addClass('fade');
+            setTimeout($card.remove(), 300);
+            $.messager.success(deleteSuccess);
         }
-        }, $this.data());
-        e.preventDefault();
-        $.ajaxaction(options, $this);
-    }).on('click', '.delete', function(e) {
-
-        var $this   = $(this);
-        var options = $.extend(
-        {
-            method: 'post',
-            url: $this.attr('href'), 
-            confirm: window.v.lang.confirmDelete,
-            data: "messages[]=" + $this.data('id'),
-            onResultSuccess: function(response)
-            {
-                response.locate = null;
-                var $card = $this.closest('.card').addClass('fade');
-                setTimeout(function(){$card.remove();}, 300);
-                $.messager.success(deleteSuccess)
-            }
-         }, $this.data());
-        e.preventDefault();
-        $.ajaxaction(options, $this);
-    });
-    {/noparse}
-});
+    }, $this.data());
+    $.ajaxaction(options, $this);
+}
 </script>
 {if($source == 'bottom')}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
