@@ -444,8 +444,9 @@ class threadModel extends model
         $this->dao->insert(TABLE_THREAD)->data($newThread, 'scoreSum')->autoCheck()->exec();
         $newThreadID = $this->dao->lastInsertID();
 
-        $oldThread->board = $oldBoard;
-        $oldThread->link  = commonModel::createFrontLink('thread', 'view', "threadID=$newThreadID");
+        $oldThread->hidden = 1;
+        $oldThread->board  = $oldBoard;
+        $oldThread->link   = commonModel::createFrontLink('thread', 'view', "threadID=$newThreadID");
         $this->dao->update(TABLE_THREAD)->data($oldThread, 'scoreSum')->where('id')->eq($threadID)->exec();
 
         if(dao::isError()) return false;
