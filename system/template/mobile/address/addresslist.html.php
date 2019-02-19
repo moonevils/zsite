@@ -11,7 +11,6 @@
  */
 /php*}
 <style>
-body.with-appbar-bottom {padding-bottom:0px}
 .address-manage {
     width: 100%;
     background-color: #ffffff;
