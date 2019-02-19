@@ -30,7 +30,7 @@
           <div class='item'>
             <div class='vertical-center'>
               <label class='checkbox-circle item-checkbox'>
-                <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}'>
+                <input type='checkbox' id='checkbox{$i}' name='deliveryAddress'  value='{$address->id}' disabled>
                 <label for='checkbox{$i}'></label>
               </label>
             </div>
