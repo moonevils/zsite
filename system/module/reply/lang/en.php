@@ -10,16 +10,21 @@
  * @link        http://www.chanzhi.org
  */
 $lang->reply = new stdclass();
-$lang->reply->common    = 'Reply';
-$lang->reply->id        = 'ID';
-$lang->reply->list      = 'List';
-$lang->reply->content   = 'Text';
-$lang->reply->author    = 'Author';
-$lang->reply->files     = 'File：';
-$lang->reply->addedDate = 'Replied on';
-$lang->reply->admin     = 'Manage Reply';
-$lang->reply->sofa      = ' ';
-$lang->reply->stool     = ' ';
+$lang->reply->common           = 'Reply';
+$lang->reply->reply            = 'Reply';
+$lang->reply->id               = 'ID';
+$lang->reply->list             = 'List';
+$lang->reply->content          = 'Text';
+$lang->reply->author           = 'Author';
+$lang->reply->files            = 'File：';
+$lang->reply->addedDate        = 'Replied on';
+$lang->reply->admin            = 'Manage Reply';
+$lang->reply->sofa             = ' ';
+$lang->reply->stool            = ' ';
+$lang->reply->post             = 'Reply';
+$lang->reply->submitting       = 'Replying';
+$lang->reply->inputPlaceholder = 'Add Reply';
+$lang->reply->moreReplies      = 'More <span class="more-replies-amount"></span> Replies';
 
 $lang->reply->edit       = 'Edit';
 $lang->reply->deleteFile = 'Delete File';

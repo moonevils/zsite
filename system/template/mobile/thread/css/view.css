@@ -5,7 +5,7 @@
 .alert-replies .reply-content{display: inline;}
 .alert-replies > .second-replies{margin-left: 10px; margin-bottom: 10px; padding: 10px 10px 0; background: #fff;}
 .alert-replies .files-list > li.files-list-heading {display:none;}
-.thread {padding: 14px 12px; background-color: #ffffff; margin-top: -32px;}
+.thread {padding: 14px 12px; background-color: #ffffff;}
 .thread .hidden {display: none;}
 .thread .vertical-center {display: flex; display: -webkit-flex; align-items: center;}
 .thread .horizontal-center {display: flex; flex-direction: column; justify-content: center;}

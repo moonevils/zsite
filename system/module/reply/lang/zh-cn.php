@@ -10,16 +10,21 @@
  * @link        http://www.chanzhi.org
  */
 $lang->reply = new stdclass();
-$lang->reply->common    = '回贴';
-$lang->reply->id        = '编号';
-$lang->reply->list      = '回帖列表';
-$lang->reply->content   = '内容';
-$lang->reply->author    = '作者';
-$lang->reply->files     = '附件：';
-$lang->reply->addedDate = '回复时间';
-$lang->reply->admin     = '回帖列表';
-$lang->reply->sofa      = '沙发';
-$lang->reply->stool     = '板凳';
+$lang->reply->common           = '回贴';
+$lang->reply->reply            = '回复';
+$lang->reply->id               = '编号';
+$lang->reply->list             = '回帖列表';
+$lang->reply->content          = '内容';
+$lang->reply->author           = '作者';
+$lang->reply->files            = '附件：';
+$lang->reply->addedDate        = '回复时间';
+$lang->reply->admin            = '回帖列表';
+$lang->reply->sofa             = '沙发';
+$lang->reply->stool            = '板凳';
+$lang->reply->post             = '发表回帖';
+$lang->reply->submitting       = '稍后';
+$lang->reply->inputPlaceholder = '添加你的回帖';
+$lang->reply->moreReplies      = '查看全部<span class="more-replies-amount"></span>条评论';
 
 $lang->reply->edit       = '编辑回帖';
 $lang->reply->deleteFile = '删除附件';

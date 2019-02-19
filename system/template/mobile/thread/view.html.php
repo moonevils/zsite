@@ -18,9 +18,9 @@
 
 <div class='block-region region-top blocks' data-region='thread_view-top'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'top')}</div>
 {if($pager->pageID == 1)} {include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'thread')} {/if}
-{if(commonModel::isAvailable('message') && !$thread->readonly)}
+{if(!$thread->readonly)}
 <div class='commentBox' id='commentBox'>
-  {$control->fetch('message', 'comment', "objectType=thread&objectID={{$thread->id}}")}
+  {$control->fetch('reply', 'replies', "threadID={{$thread->id}}")}
 </div>
 {/if}
 <div class='block-region region-bottom blocks' data-region='thread_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'bottom')}</div>

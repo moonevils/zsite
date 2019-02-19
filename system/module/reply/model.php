@@ -256,6 +256,70 @@ class replyModel extends model
     }
 
     /**
+     * Get replies of one thread.
+     *
+     * @param  int $threadID  the thread id
+     * @access public
+     * @return array
+     */
+    public function getRepliesByThread($threadID, $pager = null)
+    {
+        return  $this->dao->select('u.realname, u.nickname, u.avatar, r.id, r.author, r.content, r.addedDate')->from(TABLE_REPLY)->alias('r')
+            ->leftJoin(TABLE_USER)->alias('u')->on('r.author=u.account')
+            ->where('r.thread')->eq($threadID)
+            ->andWhere('r.reply')->eq(0)
+            ->andWhere('r.hidden')->eq(0)
+            ->orderBy('r.id_desc')
+            ->page($pager)
+            ->fetchAll();
+    }
+
+    /**
+     * Get all replies of a reply for thread.
+     *
+     * @param  object  $reply
+     * @param  int     $level
+     * @access public
+     * @return null
+     */
+    public function getRepliesByReply($reply, $level = 0)
+    {
+        $replies = $this->dao->select('*')->from(TABLE_REPLY)
+            ->where('reply')->eq($reply->id)
+            ->andWhere('hidden')->eq(0)
+            ->orderby('id_asc')
+            ->fetchAll();
+
+        if(!empty($replies))
+        {
+            $threadIDs = array_column($replies, 'thread');
+            $thread = $this->loadModel('thread')->getByID(array_pop($threadIDs));
+
+            $level++;
+            echo "<div class='replies'>";
+            foreach($replies as $row)
+            {
+                $replyTo = $level > 1 ? '<div class="arrow"></div>' . $reply->author : '';
+                echo "<div class='reply-panel'>";
+                echo "<div class='reply-heading vertical-center'>";
+                echo "<div class='reply-ext'>";
+                echo "<span class='text-primary'>{$row->author}{$replyTo}</i> </span>";
+                echo "<span class='text-muted'>" . $row->addedDate . "</span>";
+                echo "</div>";
+                if(!$thread->readonly) echo '<a href="#replyDialog" data-toggle="modal" data-reply-id="' . $row->id . '" class="text-muted thread-reply-btn">' . $this->lang->reply->reply . '</a>';
+                echo '</div>';
+                echo "<div class='reply-body'>";
+                echo nl2br($row->content);
+                echo '</div>';
+                $this->getRepliesByReply($row, $level);
+                echo "</div>";
+            }
+            echo $level == 1 ? '<div class="more-replies">' . $this->lang->reply->moreReplies . '</div>' : '';
+            echo '</div>';
+        }
+    }
+
+    /**
      * Get replies of a user.
      * 
      * @param string $account       the account
@@ -283,7 +347,7 @@ class replyModel extends model
     /**
      * Reply a thread.
      * 
-     * @param  int      $threadID 
+     * @param  int      $threadID
      * @access public
      * @return void
      */

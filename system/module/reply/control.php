@@ -12,9 +12,34 @@
 class reply extends control
 {
     /**
+     * Show the replies of one thread, and print the reply form.
+     *
+     * @param int $threadID
+     * @param int $pageID
+     * @access public
+     * @return void
+     */
+    public function replies($threadID, $pageID = 1)
+    {
+        $recPerPage = !empty($this->config->site->replyMobileRec) ? $this->config->site->replyMobileRec : $this->config->reply->recPerPage;
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal = 0, $recPerPage, $pageID);
+
+        $this->loadModel('thread');
+        $thread = $this->thread->getByID($threadID);
+
+        $this->view->thread      = $thread;
+        $this->view->replies     = $this->reply->getRepliesByThread($threadID, $pager);
+        $this->view->pager       = $pager;
+        $this->view->startNumber = ($pageID - 1) * 10;
+
+        $this->display();
+    }
+
+    /**
      * Reply a thread.
      * 
-     * @param  int      $threadID 
+     * @param  int      $threadID
      * @access public
      * @return void
      */
@@ -34,18 +59,24 @@ class reply extends control
         {
             if(!$this->loadModel('thread')->canReply($threadID)) $this->send(array('result' => 'fail', 'message' => $this->lang->reply->noReply['readonly'])); 
 
-            $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
-            $needCaptcha   = false;
-            if($captchaConfig == 'open' or ($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content))) $needCaptcha = true;
-
-            /* If no captcha but is garbage, return the error info. */
-            $captchaInput = $this->session->captchaInput;
-            if($this->post->$captchaInput === false and $needCaptcha)
+            if ($this->clientDevice != 'mobile')
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Reply())));
+                $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
+                $needCaptcha   = false;
+                if($captchaConfig == 'open' or ($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content))) $needCaptcha = true;
+
+                /* If no captcha but is garbage, return the error info. */
+                $captchaInput = $this->session->captchaInput;
+                if($this->post->$captchaInput === false and $needCaptcha)
+                {
+                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => base64_encode($this->loadModel('guarder')->create4Reply())));
+                }
             }
 
             $result = $this->reply->post($threadID);
+
+            if($this->clientDevice == 'mobile') unset($result['locate']);
+
             $this->send($result);
         }
     }

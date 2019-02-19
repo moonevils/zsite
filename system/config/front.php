@@ -106,6 +106,8 @@ $config->rights->guest['ui']['getencrypt'] = 'getencrypt';
 $config->rights->guest['source']['css'] = 'css';
 $config->rights->guest['source']['js']  = 'js';
 
+$config->rights->guest['reply']['replies'] = 'replies';
+
 /* For logged member. */
 $config->rights->member['article']['submission'] = 'submission';
 $config->rights->member['article']['post']       = 'post';
@@ -122,6 +124,7 @@ $config->rights->member['thread']['transfer']     = 'transfer';
 $config->rights->member['thread']['deletefile']   = 'deletefile';
 $config->rights->member['thread']['addscore']     = 'addscore';
 
+$config->rights->member['reply']['replies']    = 'replies';
 $config->rights->member['reply']['post']       = 'post';
 $config->rights->member['reply']['eidt']       = 'edit';
 $config->rights->member['reply']['hide']       = 'hide';
