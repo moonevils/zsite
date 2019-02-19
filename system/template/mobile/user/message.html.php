@@ -68,7 +68,7 @@ $(function()
     var deleteSuccess = '{$lang->deleteSuccess}';
 
     {noparse}
-    $(document).on('click', '.card.card-block', function(e) {
+    $('.card.card-block').on('click', function(e) {
         var $this   = $(this);
         if(!$this.attr('href')) return false;
         var options = $.extend({url: $this.attr('href'), onSuccess: function(response)
