@@ -1017,8 +1017,19 @@ class baseFixer
                     $this->data->$fieldName = preg_replace('/<[^>]+</', '<', $this->data->$fieldName);
                     $this->data->$fieldName = preg_replace('/>[^<]+>/', '>', $this->data->$fieldName);
                     if($usePurifier) $this->data->$fieldName = str_replace('&nbsp;', '&spnb;', $this->data->$fieldName);
+
+                    if(strpos($this->data->$fieldName, 'video') !== false)
+                    {
+                        $this->data->$fieldName = str_replace("<video", "<img class=\"VIDEO\"", $this->data->$fieldName);
+                    }
+
                     $this->data->$fieldName = $usePurifier ? $purifier->purify($this->data->$fieldName) : strip_tags($this->data->$fieldName, $allowedTags);
                     if($usePurifier) $this->data->$fieldName = str_replace('&amp;spnb;', '&nbsp;', $this->data->$fieldName);
+
+                    if(strpos($this->data->$fieldName, '<img class="VIDEO"') !== false)
+                    {
+                        $this->data->$fieldName = str_replace("<img class=\"VIDEO\"", '<video  controls="controls"', $this->data->$fieldName);
+                    }
                 }
             }
             $this->stripedFields[] = $fieldName;
