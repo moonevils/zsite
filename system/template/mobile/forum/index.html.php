@@ -29,11 +29,13 @@
 .cards .card-heading {padding:8px 0px}
 .cards .card-content, .card-footer {padding: 8px 0px}
 .cards .card-content.text-muted {margin-top:0px;line-height: 1.6rem;padding:0px;font-size:1.4rem;color:#4c4c4c;max-height:60px;overflow:hidden}
+.cards .card-content.text-muted.text-smail {max-height:40px;margin-bottom:5px}
 .cards .card-body {float:left;width:80%}
 .cards .card-body-special{float:left;width:100%}
 .cards .card-body-special.card-all {width:60%}
-.cards .card-heading > h5 {text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
-.cards .card-heading > h5.title {font-size:1.6rem;font-weight:600}
+.cards .card-heading > h5 {text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-weight:600}
+.cards .card-heading > h5.title {font-size:1.6rem}
+.cards .card-heading > h5 > span {margin-left:10px}
 .text-muted, input::placeholder {color:#666}
 .text-time {color:#999}
 .text-danger {color:#D0021B}
@@ -113,12 +115,13 @@
                     <h5>
                       {$childBoard->name}
                       {if(!empty($moderators))} {!printf('<small>' . $lang->forum->lblOwner . '</small>', $moderators)} {/if}
+                      {if($childBoard->postedBy)}
+                        <span class='card-footer small text-muted'>{!substr($childBoard->postedDate, 5, -3) . " {{$childBoard->postedByRealname}}"}</span>
+                      {/if}
                     </h5>
                   </div>
-                  {if($childBoard->postedBy)}
-                    <div class='card-footer small text-muted'>{$lang->forum->lastPost . ':'}
-                      {!substr($childBoard->postedDate, 5, -3) . " {{$childBoard->postedByRealname}}"}
-                    </div>
+                  {if($childBoard->desc)}
+                  <div class='card-content text-muted text-smail'>{$childBoard->desc}</div>
                   {/if}
                 </div>
                 <div class='table-cell middle thumbnail-cell text-right'>
