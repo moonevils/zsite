@@ -11,5 +11,5 @@ $lang->address->edit           = 'Edit';
 $lang->address->default        = 'Default';
 $lang->address->manage         = 'Manage';
 $lang->address->manageDone     = 'Done';
-$lang->address->allDelete      = 'All';
+$lang->address->allSelect      = 'All';
 $lang->address->deleteEmptyIDs = 'None Selected';

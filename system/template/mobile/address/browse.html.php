@@ -61,88 +61,94 @@
         <button id='create' type='button' class='create-btn' data-toggle='modal' data-remote="{!inlink('create')}"> {$lang->address->create} </button>
       </div>
       <div id='delete' class='vertical-center alignment-delete' style='display: none;'>
-        <label class='all-delete checkbox-circle vertical-center'>
-          <input type='checkbox' id='allDelete'>
-          <label for='allDelete'></label>
-          <span>{$lang->address->allDelete}</span>
+        <label class='all-select checkbox-circle vertical-center'>
+          <input type='checkbox' id='allSelect' name='allSelect' disabled>
+          <label for='allSelect'></label>
+          <span>{$lang->address->allSelect}</span>
         </label>
         {!html::a(helper::createLink('address', 'delete', "id="), $lang->delete, 'class="delete-btn vertical-center deleter"')}
       </div>
     </div>
   </div>
 </div>
+{include TPL_ROOT . 'common/form.html.php'}
+
+{noparse}
 <script>
-$(function ()
-{
-    var setDelHref = function ()
+    $(function ()
     {
-        var delIDs = [];
-        $('input[name="deliveryAddress"]:checked').each(function (i)
+        var setDelHref = function ()
         {
-            delIDs[i] = $(this).val();
-        });
-        var delHref = $('.deleter').attr('href');
-        delHref = delHref.replace(/(.*-).*(\..*)/, '$1' + delIDs.join(',') + '$2');
-        $('.deleter').attr('href', delHref);
-    };
-
-    $.refreshAddressList = function ()
-    {
-        $('#addressListWrapper').load(window.location.href + ' #addressList');
-        $('p[name="operate"]').show();
-        $('#create').parent().removeClass('create-center');
-    };
-
-    $(document).on('click', '.item', function ()
-    {
-        if($('.address-manage').children('p[name="operate"]').attr('current') === 'manageDone')
-        {
-            if($(this).find('input[name="deliveryAddress"]').attr('checked') === false)
+            var delIDs = [];
+            $('input[name="deliveryAddress"]:checked').each(function (i)
             {
-                $(this).find('input[name="deliveryAddress"]').attr('checked', true);
+                delIDs[i] = $(this).val();
+            });
+            var delHref = $('.deleter').attr('href');
+            delHref = delHref.replace(/(.*-).*(\..*)/, '$1' + delIDs.join(',') + '$2');
+            $('.deleter').attr('href', delHref);
+        };
+
+        $.refreshAddressList = function ()
+        {
+            $('#addressListWrapper').load(window.location.href + ' #addressList');
+            $('p[name="operate"]').show();
+            $('#create').parent().removeClass('create-center');
+        };
+
+        $(document).on('click', '.item', function ()
+        {
+            if($('.address-manage').children('p[name="operate"]').attr('current') === 'manageDone')
+            {
+                if($(this).find('input[name="deliveryAddress"]').attr('checked') === false)
+                {
+                    $(this).find('input[name="deliveryAddress"]').attr('checked', true);
+                }
+                else
+                {
+                    $(this).find('input[name="deliveryAddress"]').removeAttr('checked');
+                    $('#allSelect').removeAttr('checked');
+                }
+                setDelHref();
+            }
+        });
+
+        $(document).on('click', '.address-manage', function ()
+        {
+            if($(this).children('p[name="operate"]').attr('current') === 'manage')
+            {
+                $(this).children('p[name="operate"]').html($(this).children('input[name="manageDone"]').val());
+                $(this).children('p[name="operate"]').attr('current', 'manageDone');
+                $('.checkbox-circle').show();
+                $('#create').hide();
+                $('#delete').show();
+                $('.edit-button').hide();
             }
             else
             {
-                $(this).find('input[name="deliveryAddress"]').removeAttr('checked');
+                $(this).children('p[name="operate"]').html($(this).children('input[name="manage"]').val());
+                $(this).children('p[name="operate"]').attr('current', 'manage');
+                $('.checkbox-circle').hide();
+                $('#create').show();
+                $('#delete').hide();
+                $('.edit-button').show();
+            }
+        });
+
+        $(document).on('click', '.all-select', function ()
+        {
+            if($(this).find('input[name="allSelect"]').attr('checked') === false)
+            {
+                $(this).find('input[name="allSelect"]').attr('checked', true);
+                $('input[name="deliveryAddress"]').attr('checked', true);
+            }
+            else
+            {
+                $(this).find('input[name="allSelect"]').removeAttr('checked');
+                $('input[name="deliveryAddress"]').removeAttr('checked');
             }
             setDelHref();
-        }
+        });
     });
-
-    $('.address-manage').on('click', function ()
-    {
-        if($(this).children('p[name="operate"]').attr('current') === 'manage')
-        {
-            $(this).children('p[name="operate"]').html($(this).children('input[name="manageDone"]').val());
-            $(this).children('p[name="operate"]').attr('current', 'manageDone');
-            $('.checkbox-circle').show();
-            $('#create').hide();
-            $('#delete').show();
-            $('.edit-button').hide();
-        }
-        else
-        {
-            $(this).children('p[name="operate"]').html($(this).children('input[name="manage"]').val());
-            $(this).children('p[name="operate"]').attr('current', 'manage');
-            $('.checkbox-circle').hide();
-            $('#create').show();
-            $('#delete').hide();
-            $('.edit-button').show();
-        }
-    });
-
-    $('#allDelete').on('click', function ()
-    {
-        if($(this).attr('checked') === true)
-        {
-            $('input[name="deliveryAddress"]').attr('checked', true);
-        }
-        else
-        {
-            $('input[name="deliveryAddress"]').removeAttr('checked');
-        }
-        setDelHref();
-    });
-});
 </script>
-{include TPL_ROOT . 'common/form.html.php'}
+{/noparse}

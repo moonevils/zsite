@@ -13,5 +13,5 @@ $lang->address->default        = '預設';
 $lang->address->manage         = '管理';
 $lang->address->manageBtn      = '管理收貨地址';
 $lang->address->manageDone     = '完成';
-$lang->address->allDelete      = '全選';
+$lang->address->allSelect      = '全選';
 $lang->address->deleteEmptyIDs = '未選擇刪除項';
