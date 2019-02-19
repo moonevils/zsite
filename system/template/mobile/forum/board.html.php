@@ -92,7 +92,7 @@
           <a href='{$control->createLink("thread", "view", "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
             <span class='title' {$style}>{$thread->title}</span>
           </a>
-          {if($control->app->user->account != 'guest')}
+          {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id))}
           <div class='operations'>
             <span class='trigger'>
               <i class='circle'></i>

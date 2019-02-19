@@ -33,6 +33,7 @@
           <i class='circle'></i>
         </span>
         <div class='options hidden'>
+          {if($control->thread->canManage($board->id))}
           {!html::a(inlink('stick', "thread=$thread->id"), "{{$lang->thread->sticks[$thread->stick]}}", "data-toggle='modal'")}
           {if(commonModel::isAvailable('score') and $control->thread->canManage($board->id))}
           {@$account = helper::safe64Encode($thread->author)}
@@ -45,6 +46,7 @@
           {/if}
           {!html::a(inlink('delete', "threadID=$thread->id"), $lang->delete, "class='deleter'")}
           {!html::a(inlink('transfer',   "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'")}
+          {/if}
           {if($control->thread->canManage($board->id, $thread->author))} {!html::a(inlink('edit', "threadID=$thread->id"), $lang->edit, 'data-toggle="modal"')} {/if}
         </div>
       </div>
