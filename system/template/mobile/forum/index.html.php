@@ -29,7 +29,7 @@
 .cards .card-heading {padding:8px 0px}
 .cards .card-content, .card-footer {padding: 8px 0px}
 .cards .card-content.text-muted {margin-top:0px;line-height: 1.6rem;padding:0px;font-size:1.4rem;color:#4c4c4c;max-height:60px;overflow:hidden}
-.cards .card-content.text-muted.text-smail {max-height:40px;margin-bottom:5px}
+.cards .card-content.text-muted.text-smail {max-height:3rem;margin-bottom:5px}
 .cards .card-body {float:left;width:80%}
 .cards .card-body-special{float:left;width:100%}
 .cards .card-body-special.card-all {width:60%}
