@@ -271,7 +271,12 @@ class bookModel extends model
                     $catalog .= '   </a>';
                     $catalog .= $node->grade == 2 ? '</li><div class="divider"></div>' : '</li>';
                 }
-                if(isset($nodeList[$node->id]) and isset($nodeList[$node->id]['catalog']))
+
+                if($node->type == 'chapter' && !isset($nodeList[$node->id]['catalog']))
+                {
+                    $catalog .= $node->grade == 2 ? '</details></li><div class="divider"></div>' : '</details></li>';
+                }
+                elseif(isset($nodeList[$node->id]) && isset($nodeList[$node->id]['catalog']))
                 {
                     $catalog .= $node->grade == 2 ?
                         $nodeList[$node->id]['catalog'] . '</details></li><div class="divider"></div>' :
