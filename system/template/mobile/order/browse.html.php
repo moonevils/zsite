@@ -139,6 +139,7 @@ li {list-style:none;color:#999999}
             {$control->order->printActions($order)}
           </div>
         </div>
+        <hr>
       {/foreach}
     </div>
   </div>
