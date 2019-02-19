@@ -33,7 +33,7 @@
                <span class='text-danger'>[{$lang->thread->stick}]</span>
               {$thread->title}
             </span>
-            {if($control->app->user->account != 'guest')}
+            {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id))}
           </a>
           <div class='operations'>
             <span class='trigger'>
