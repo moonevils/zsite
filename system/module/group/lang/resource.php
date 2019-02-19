@@ -48,7 +48,7 @@ $lang->moduelGroups->open = array();
 $lang->moduelGroups->open[] = 'package';
 $lang->moduelGroups->open[] = 'theme';
 
-$lang->moduelGroups->community[] = 'community';
+$lang->moduelGroups->open[] = 'community';
 
 $lang->moduelGroups->setting = array();
 $lang->moduelGroups->setting[] = 'site';
