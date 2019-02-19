@@ -33,3 +33,5 @@
     </div>
 </div>
 <div class='block-region region-bottom no-padding blocks' data-region='company_index-bottom'>{$control->block->printRegion($layouts, 'company_index', 'bottom')}</div>
+
+{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
