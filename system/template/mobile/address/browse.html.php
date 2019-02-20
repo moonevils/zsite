@@ -14,7 +14,7 @@
 <div class='address-manage vertical-center'>
   <p name='operate' current='manage' style='{if(count($addresses) == 0)}display:none;{/if}'>{$lang->address->manage}</p>
   <input type='hidden' name='manage' value='{$lang->address->manage}'>
-  <input type='hidden' name='manageDone' value='{$lang->address->manageDone}'>
+  <input type='hidden' name='manageDone' value='{$lang->address->complete}'>
 </div>
 <div class='panel address-list'>
   <div class='panel-body'>

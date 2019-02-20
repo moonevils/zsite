@@ -12,6 +12,6 @@ $lang->address->edit           = '编辑地址';
 $lang->address->default        = '默认';
 $lang->address->manage         = '管理';
 $lang->address->manageBtn      = '管理收货地址';
-$lang->address->manageDone     = '完成';
+$lang->address->complete       = '完成';
 $lang->address->allSelect      = '全选';
 $lang->address->deleteEmptyIDs = '未选择删除项';
