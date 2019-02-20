@@ -247,7 +247,7 @@
     </div>
     <div class='bottom-operator'>
       <div class='{if(count($addresses) == 0)}create-center{/if}'>
-        {!html::a(helper::createLink('address', 'browse', "id={{$address->id}}"), $lang->address->manageBtn, "class='btn create-btn'")}
+        {!html::a(helper::createLink('address', 'browse', "id={{$address->id}}"), $lang->address->manageAddress, "class='btn create-btn'")}
       </div>
     </div>
   </div>
