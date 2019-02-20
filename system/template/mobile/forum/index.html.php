@@ -29,11 +29,11 @@
 .cards .card-heading {padding:8px 0px}
 .cards .card-content, .card-footer {padding: 8px 0px}
 .cards .card-content.text-muted {margin-top:0px;line-height: 1.6rem;padding:0px;font-size:1.4rem;color:#4c4c4c;max-height:60px;overflow:hidden}
-.cards .card-content.text-muted.text-smail {max-height:3rem;margin-bottom:5px}
+.cards .card-content.text-muted.text-smail {max-height:3rem;margin-bottom:10px;color:#999;font-size:1.2rem}
 .cards .card-body {float:left;width:80%}
 .cards .card-body-special{float:left;width:100%}
 .cards .card-body-special.card-all {width:60%}
-.cards .card-heading > h5 {text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-weight:600}
+.cards .card-heading > h5 {text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-weight:600;font-size:1.4rem}
 .cards .card-heading > h5.title {font-size:1.6rem}
 .cards .card-heading > h5 > span {margin-left:10px}
 .text-muted, input::placeholder {color:#666}
