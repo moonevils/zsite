@@ -335,11 +335,9 @@ class replyModel extends model
             ->orderBy('id desc')
             ->page($pager)
             ->fetchAll('id');
-
-        foreach($replies as $reply)
-        {
-            $reply->boardName = $this->dao->select('name')->from(TABLE_CATEGORY)->where('type')->eq('forum')->AndWhere('id')->eq($reply->board)->fetch('name');
-        }
+    
+        $boards = $this->loadModel('tree')->getPairs(0, 'forum');
+        foreach($replies as $reply) $reply->boardName = zget($boards, $reply->board);
 
         return $replies;
     }
