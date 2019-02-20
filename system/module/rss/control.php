@@ -34,6 +34,7 @@ class rss extends control
 
         $products = $this->loadModel('product')->getLatest(0, 20, $image = false);
         $products = $this->rss->processProducts($products);
+        $latestProduct = current((array)$products);
 
         $this->view->products = $products;
 
@@ -42,8 +43,13 @@ class rss extends control
         $this->view->siteLink = commonModel::getSysURL();
 
         $this->view->articles = $articles;
-        $this->view->lastDate = $latestArticle ? $latestArticle->addedDate : date('Y-m-d H:i:s') . ' +0800';
-         
+
+        $this->view->lastDate = date('Y-m-d H:i:s');
+        if($latestArticle) $this->view->lastDate = $latestArticle->addedDate;
+        if($latestProduct and $latestProduct->addedDate > $latestArticle->addedDate)
+        {
+            $this->view->lastDate = $latestProduct->addedDate;
+        }
         echo '<?xml version="1.0" encoding="UTF-8" ?>';
         if($this->app->clientDevice == 'mobile') echo '<?xml-stylesheet type="text/css" href="' . $this->config->webRoot . 'theme/mobile/common/css/rss.css" ?>';
         $this->display();
