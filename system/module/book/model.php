@@ -259,7 +259,6 @@ class bookModel extends model
             if($parent === 'catalog') continue;
 
             $catalog = '';
-
             foreach($nodes as $node)
             {
                 $serial = $node->type != 'book' ? $serials[$node->id] : '';
@@ -278,15 +277,15 @@ class bookModel extends model
                 }
                 elseif($node->type == 'article')
                 {
-                    $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias") . ($this->get->fullScreen ? "?fullScreen={$this->get->fullScreen}" : '');
+                    $link   = helper::createLink('book', 'read', "articleID={$node->id}", "book={$book->alias}&node={$node->alias}");
                     $target = '';
                     if($node->link != '')
                     {
                         $target = "target='_blank'";
-                        $link   =  $node->link;
+                        $link   = $node->link;
                     }
                     $catalog .= '<li class="chapter vertical-center">';
-                    $catalog .= '  <a href="' . $link . '" title=' . $node->title . ' ' .  $target . '>';
+                    $catalog .= "  <a href='$link' title='{$node->title}' {$target}>";
                     $catalog .= '    <span class="chapter-left">';
                     $catalog .= '      <span class="tag-article">' . $this->lang->book->typeList['article'] . '</span>';
                     $catalog .= '      <span class="title">' . $serial . ' ' . $node->title . '</span>';
@@ -301,9 +300,8 @@ class bookModel extends model
                 }
                 elseif(isset($nodeList[$node->id]) && isset($nodeList[$node->id]['catalog']))
                 {
-                    $catalog .= $node->grade == 2 ?
-                        $nodeList[$node->id]['catalog'] . '</details></li><div class="divider"></div>' :
-                        $nodeList[$node->id]['catalog'] . '</details></li>';
+                    $closeTag = $node->grade == 2 ? '</details></li><div class="divider"></div>' : '</details></li>';
+                    $catalog .= $nodeList[$node->id]['catalog'] . $closeTag;
                 }
             }
             $catalog .= '</ul>';
