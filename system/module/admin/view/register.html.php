@@ -52,7 +52,7 @@
         <th></th>
         <td>
           <?php echo html::a(inlink('unbind'), $lang->admin->rebind, "id='rebindBtn' class='btn'");?>
-          <?php echo html::a(inlink('getUserByApi'), $lang->admin->register->update, "id='rebindBtn' class='btn'");?>
+          <?php echo html::a(inlink('getUserByApi'), $lang->admin->community->update, "id='rebindBtn' class='btn'");?>
         </td>
       </tr>
     </table>
@@ -66,7 +66,7 @@
 <div class='col-md-6'>
   <div class='panel' id='registerPanel'>
     <div class='panel-heading'>
-      <strong><?php echo $lang->admin->register->caption;?></strong>
+      <strong><?php echo $lang->admin->community->caption;?></strong>
     </div>
     <div class='panel-body'>
       <form method="post" id='registerForm'>
@@ -75,7 +75,7 @@
             <th class='w-120px'><?php echo $lang->user->account;?></th>
             <td colspan='2'>
               <div class="required required-wrapper"></div>
-              <?php echo html::input('account', '', "class='form-control' placeholder='{$lang->admin->register->lblAccount}'");?>
+              <?php echo html::input('account', '', "class='form-control' placeholder='{$lang->admin->community->lblAccount}'");?>
             </td>
           </tr>
           <tr>
@@ -125,7 +125,7 @@
             <th><?php echo $lang->user->password;?></th>
             <td colspan='2'>
               <div class="required required-wrapper"></div>
-              <?php echo html::password('password1', '', "class='form-control' placeholder='{$lang->admin->register->lblPasswd}'");?>
+              <?php echo html::password('password1', '', "class='form-control' placeholder='{$lang->admin->community->lblPasswd}'");?>
             </td>
           </tr>  
           <tr>
@@ -135,7 +135,7 @@
           <tr>
             <th></th>
             <td colspan="4">
-              <?php echo html::submitButton($lang->admin->register->submit);?>
+              <?php echo html::submitButton($lang->admin->community->submit);?>
             </td>
           </tr>
         </table>
