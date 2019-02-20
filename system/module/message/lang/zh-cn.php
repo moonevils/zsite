@@ -107,10 +107,3 @@ $lang->comment->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回复：
 $lang->message->messageItem = "<dd><strong>%s</strong> 于 <em>%s</em> 发表：%s</dd>";
 
 $lang->message->replySubject = '%s管理员的回复';
-
-$lang->thread = new stdclass();
-$lang->thread->list             = '回帖列表';
-$lang->thread->post             = '发表回帖';
-$lang->thread->submitting       = '稍后';
-$lang->thread->inputPlaceholder = '添加你的回帖';
-$lang->thread->moreReplies      = '查看全部<span class="more-replies-amount"></span>条评论';

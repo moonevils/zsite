@@ -107,10 +107,3 @@ $lang->comment->replyItem   = "<dd><strong>%s</strong> replied on <em>%s</em> ab
 $lang->message->messageItem = "<dd><strong>%s</strong> posted on <em>%s</em> about %s</dd>";
 
 $lang->message->replySubject = 'Admin %s replied.';
-
-$lang->thread = new stdclass();
-$lang->thread->list             = 'Reply List';
-$lang->thread->submit           = 'Reply';
-$lang->thread->submitting       = 'Replying';
-$lang->thread->inputPlaceholder = 'Add Reply';
-$lang->thread->moreReplies      = 'More <span class="more-replies-amount"></span> Replies';
