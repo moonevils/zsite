@@ -37,6 +37,8 @@ class message extends control
         $this->view->startNumber = ($pageID - 1) * 10;
         $this->view->mobileURL   = helper::createLink('message', 'index', "pageID=$pageID", '', 'mhtml');
         $this->view->desktopURL  = helper::createLink('message', 'index', "pageID=$pageID", '', 'html');
+        $this->view->objectType  = 'message';
+        $this->view->objectID    = 0;
         $this->view->sideGrid    = $this->loadModel('ui')->getThemeSetting('sideGrid', 3);
         $this->view->sideFloat   = $this->ui->getThemeSetting('sideFloat', 'right');
 
@@ -71,8 +73,7 @@ class message extends control
         $this->view->comments    = $this->message->getByObject($type = 'comment', $objectType, $objectID, $pager);
         $this->view->pager       = $pager;
         $this->view->startNumber = ($pageID - 1) * 10;
-
-        if($this->app->clientDevice == 'desktop') $this->lang->message = $this->lang->comment;
+        $this->lang->message     = $this->lang->comment;
 
         $this->display();
     }
