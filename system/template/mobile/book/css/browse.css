@@ -1,7 +1,7 @@
 .chapter-tree {padding: 4px 0; border-radius: 3px;}
 .chapter-tree li {list-style: none; position: relative;}
 .chapter-tree li > a,
-.chapter-tree summary {display: flex; display: -webkit-flex; align-items: center; justify-content: space-between; position: relative; cursor: pointer; height: 31px;}
+.chapter-tree summary {display: flex; display: -webkit-flex; align-items: center; justify-content: space-between; cursor: pointer; height: 31px;}
 .chapter-tree summary:focus {outline: none}
 .chapter-tree summary::-webkit-details-marker {display: none;}
 .chapter-tree summary + ul:before,
@@ -25,7 +25,7 @@
 .book-chapters .chapter .tag-article{display: inline-block; text-align: center; line-height: 15px; height: 15px; width: 30px; background-color: #FFE0E0; font-size: 12px; color: #DE8504;}
 .book-chapters .chapter .title{font-size: 14px; font-weight: bold; margin-left: 5px;}
 .book-chapters .chapter-content .title{font-size: 12px; font-weight: bold; margin-left: 5px; color: #666666}
-.book-chapters .chapter .down-triangle{width: 0;height: 0; border-top: 8px solid #999999; border-right: 5px solid transparent; border-left: 5px solid transparent; border-radius: 2px;}
+.book-chapters .chapter .down-triangle{display: block; width: 0;height: 0; border-top: 8px solid #999999; border-right: 5px solid transparent; border-left: 5px solid transparent; border-radius: 2px;}
 .book-chapters .chapter .down-triangle.active{width: 0; height: 0; border-top: 8px solid #0049FF; border-right: 5px solid transparent; border-left: 5px solid transparent; border-radius: 2px;}
 .book-chapters .divider {margin:4px auto; height: 1px; width: 95%; background-color: #e5e5e5;}
 .book-chapters .divider:last-child {display: none;}
