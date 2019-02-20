@@ -18,7 +18,7 @@
 .chapter.active {background-color: #E0E9FF;}
 .chapter-content {margin-left: -30px;}
 .chapter-content summary {height: 31px;}
-.chapter-left {display: flex;display: -webkit-flex; align-items: center;}
+.chapter-left {display: flex;display: -webkit-flex; align-items: center; width: 200px;}
 .book-chapters {margin: 12px 12px 0 12px; background-color: #ffffff; border-radius: 3px}
 .book-chapters .chapter {padding: 0 10px;}
 .book-chapters .chapter .tag-chapter{display: inline-block; text-align: center; line-height: 15px; height: 15px; width: 30px; background-color: #E0E9FF; font-size: 12px; color: #0049FF;}
