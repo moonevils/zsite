@@ -73,6 +73,8 @@ class replyModel extends model
      */
     public function getByThread($threadID, $pager = null)
     {
+        if($this->app->clientDevice == 'mobile') return $this->getRepliesByThread($threadID, $pager);
+
         $thread = $this->loadModel('thread')->getByID($threadID);
 
         $replies = $this->dao->select('*')->from(TABLE_REPLY)
