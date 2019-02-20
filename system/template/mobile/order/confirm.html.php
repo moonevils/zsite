@@ -93,7 +93,7 @@
       </div>
       <div class='panel-body'>
         <div class='alert bg-gray-pale'><strong>{!$lang->order->note}</strong></div>
-        <div>{!html::textarea('note', '', "class='form-control' rows=1 placeholder='{{$lang->order->notePlaceholder}}'")}</div>
+        <div>{!html::textarea('note', '', "class='form-control' rows=1 placeholder='{{$lang->order->placeholder->note}}'")}</div>
       </div>
       <footer class="appbar fix-bottom" id='footer' data-ve='navbar' data-type='mobile_bottom'>
         <div class='footer-right'>
