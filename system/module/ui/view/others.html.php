@@ -59,114 +59,26 @@ js::set('gdInstalled', $gdInstalled);
 
         <div class='tab-pane setting-control-tab-pane' id='browseTab'>
           <table class='table table-form w-p60 table-fixed'>
-            <?php if(strpos($this->config->site->modules, 'article') !== false):?>
+            <?php foreach($lang->site->customizableList as $type => $name):?>
+            <?php if(strpos($this->config->site->modules, $type) !== false):?>
+            <?php $siteRecPerPage   = zget($this->config->site, $type . 'Rec', '');?>
+            <?php $mobileRecPerPage = zget($this->config->site, $type . 'MobileRec', '');?>
+            <?php $moduleSetting    = $this->config->$type;?>
+            <?php $moduleRecPerPage = $moduleSetting->recPerPage;?>
             <tr>
-              <th class='w-120px'><?php echo $lang->site->customizableList->article;?></th> 
+              <th class='w-120px'><?php echo zget($lang->site->customizableList, $type);?></th> 
               <td class='w-p30'>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('articleRec', !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('articleMobileRec', !empty($this->config->site->articleMobileRec) ? $this->config->site->articleMobileRec : $this->config->article->recPerPage, "class='form-control'");?>
+                  <?php echo html::input('articleRec', $siteRecPerPage ? $siteRecPerPage : $moduleRecPerPage, "class='form-control'");?>
+                  <span class='input-group-addon fix-border'><?php echo $lang->ui->clientMobile;?></span>
+                  <?php echo html::input('articleMobileRec', $mobileRecPerPage ? $mobileRecPerPage : $moduleRecPerPage, "class='form-control'");?>
                 </div>
               </td>
               <td></td>
             </tr>
             <?php endif;?>
-            <?php if(strpos($this->config->site->modules, 'product') !== false):?>
-            <tr>
-              <th class='w-120px'><?php echo $lang->site->customizableList->product;?></th> 
-              <td class='w-p30'>
-                <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('productMobileRec', !empty($this->config->site->productMobileRec) ? $this->config->site->productMobileRec : $this->config->product->recPerPage, "class='form-control'");?>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <?php endif;?>
-            <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
-            <tr>
-              <th class='w-120px'><?php echo $lang->site->customizableList->blog;?></th> 
-              <td class='w-p30'>
-                <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('blogMobileRec', !empty($this->config->site->blogMobileRec) ? $this->config->site->blogMobileRec : $this->config->blog->recPerPage, "class='form-control'");?>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <?php endif;?>
-            <?php if(strpos($this->config->site->modules, 'book') !== false):?>
-            <tr>
-              <th class='w-120px'><?php echo $lang->site->customizableList->book;?></th> 
-              <td class='w-p30'>
-                <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('bookRec', !empty($this->config->site->bookRec) ? $this->config->site->bookRec : $this->config->book->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('bookMobileRec', !empty($this->config->site->bookMobileRec) ? $this->config->site->bookMobileRec : $this->config->book->recPerPage, "class='form-control'");?>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <?php endif;?>
-            <?php if(strpos($this->config->site->modules, 'message') !== false):?>
-            <tr>
-              <th class='w-120px'><?php echo $lang->site->customizableList->message;?></th> 
-              <td class='w-p30'>
-                <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('messageRec', !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('messageMobileRec', !empty($this->config->site->messageMobileRec) ? $this->config->site->messageMobileRec : $this->config->message->recPerPage, "class='form-control'");?>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->site->customizableList->comment;?></th> 
-              <td>
-                <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('commentRec', !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('commentMobileRec', !empty($this->config->site->commentMobileRec) ? $this->config->site->commentMobileRec : $this->config->message->recPerPage, "class='form-control'");?>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <?php endif;?>
-            <?php if(strpos($this->config->site->modules, 'forum') !== false):?>
-            <tr>
-              <th class='w-120px'><?php echo $lang->site->customizableList->forum;?></th> 
-              <td class='w-p30'>
-                <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('forumRec', !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('forumMobileRec', !empty($this->config->site->forumMobileRec) ? $this->config->site->forumMobileRec : $this->config->forum->recPerPage, "class='form-control'");?>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->site->customizableList->reply;?></th> 
-              <td>
-                <div class='input-group'>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('replyMobileRec', !empty($this->config->site->replyMobileRec) ? $this->config->site->replyMobileRec : $this->config->reply->recPerPage, "class='form-control'");?>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-            <?php endif;?>
+            <?php endforeach;?>
             <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
             <tr>
               <th><?php echo $lang->article->blog->category;?></th>
@@ -178,7 +90,7 @@ js::set('gdInstalled', $gdInstalled);
               <td>
                 <div class='input-group'>
                   <?php echo html::select('blog[categoryName]', $lang->article->blog->categoryNameList, isset($this->config->blog->categoryName) ? $this->config->blog->categoryName : '', "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->article->blog->categoryLevel;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->article->blog->categoryLevel;?></span>
                   <?php echo html::select('blog[categoryLevel]', $lang->article->blog->categoryLevelList, isset($this->config->blog->categoryLevel) ? $this->config->blog->categoryLevel : '', "class='form-control'");?>
                 </div>
               </td>
@@ -189,9 +101,9 @@ js::set('gdInstalled', $gdInstalled);
               <td colspan='2'>
                 <div class='input-group'>
                   <?php echo html::select('blog[imagePosition]', $lang->article->browseImage->positionList, isset($this->config->blog->imagePosition) ? $this->config->blog->imagePosition : 'right', "class='form-control'");?>
-                  <span class='input-group-addon'></span>
+                  <span class='input-group-addon fix-border'></span>
                   <?php echo html::select('blog[imageSize]', $lang->article->browseImage->sizeList, isset($this->config->blog->imageSize) ? $this->config->blog->imageSize : 'small', "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->article->browseImage->maxWidth;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->article->browseImage->maxWidth;?></span>
                   <?php echo html::input('blog[imageWidth]', isset($this->config->blog->imageWidth) ? $this->config->blog->imageWidth : '100', "class='form-control'");?>
                   <span class='input-group-addon'>px</span>
                 </div>
@@ -204,9 +116,9 @@ js::set('gdInstalled', $gdInstalled);
               <td colspan='2'>
                 <div class='input-group'>
                   <?php echo html::select('article[imagePosition]', $lang->article->browseImage->positionList, isset($this->config->article->imagePosition) ? $this->config->article->imagePosition : 'right', "class='form-control'");?>
-                  <span class='input-group-addon'></span>
+                  <span class='input-group-addon fix-border'></span>
                   <?php echo html::select('article[imageSize]', $lang->article->browseImage->sizeList, isset($this->config->article->imageSize) ? $this->config->article->imageSize : 'small', "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->article->browseImage->maxWidth;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->article->browseImage->maxWidth;?></span>
                   <?php echo html::input('article[imageWidth]', isset($this->config->article->imageWidth) ? $this->config->article->imageWidth : '100', "class='form-control'");?>
                   <span class='input-group-addon'>px</span>
                 </div>
@@ -220,11 +132,11 @@ js::set('gdInstalled', $gdInstalled);
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->ui->viewMode;?></span>
                   <?php echo html::select('product[browseType]', $lang->product->browseOptions, isset($this->config->product->browseType) ? $this->config->product->browseType : 'card', "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->ui->productView;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->ui->productView;?></span>
                   <?php echo html::select('product[showViews]', $lang->product->viewsOptions, isset($this->config->product->showViews) ? $this->config->product->showViews : '1', "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->product->price;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->product->price;?></span>
                   <?php echo html::select('product[showPrice]', $lang->product->priceOptions, isset($this->config->product->showPrice) ? $this->config->product->showPrice : '1', "class='form-control'");?>
-                  <span class='input-group-addon'><?php echo $lang->product->name;?></span>
+                  <span class='input-group-addon fix-border'><?php echo $lang->product->name;?></span>
                   <?php echo html::select('product[namePosition]', $lang->product->namePositionOptions, isset($this->config->product->namePosition) ? $this->config->product->namePosition : 'left', "class='form-control'");?>
                 </div>
               </td>
