@@ -100,7 +100,7 @@
         <td class='text-center nofixed'>
           <?php if($type == 'submission'):?>
           <?php
-          if($article->submission != 2) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->submission->check); 
+          if($article->submission != articleModel::SUBMISSION_STATUS_APPROVED) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->submission->check); 
           else commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
           commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');
           ?>

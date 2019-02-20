@@ -27,7 +27,7 @@
             <tr>
               <td class='text-center'>{$article->id}</td>
               <td>
-                {if($article->submission == 2)}
+                {if($article->submission == articleModel::SUBMISSION_STATUS_APPROVED)}
                   {if($article->type == 'book')}
                       {!html::a($control->article->createPreviewLink($article->bookID, '', $article->type), $article->title, "target='_blank'")}
                   {else}
@@ -41,7 +41,7 @@
               <td class='text-center'>{!echo $lang->submission->status[$article->submission]}</td>
               <td class='text-center'>{!echo $article->views}</td>
               <td class='text-center'>
-              {if($article->submission != 2)}
+              {if($article->submission != articleModel::SUBMISSION_STATUS_APPROVED)}
                  {@commonModel::printLink('article', 'modify', "articleID=$article->id", $lang->edit)}
                  {@commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"')}
               {else}

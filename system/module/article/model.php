@@ -11,6 +11,11 @@
  */
 class articleModel extends model
 {
+    /* Define submission status const.*/
+    const SUBMISSION_STATUS_WAIT     = 1;
+    const SUBMISSION_STATUS_APPROVED = 2;
+    const SUBMISSION_STATUS_REJECTED = 3;
+
     /** 
      * Get an article by id.
      * 
@@ -386,7 +391,7 @@ class articleModel extends model
             ->add('type', $type)
             ->add('addedBy', $this->app->user->account)
             ->setIF(!$this->post->isLink, 'link', '')
-            ->setIF(RUN_MODE == 'front', 'submission', 1)
+            ->setIF(RUN_MODE == 'front', 'submission', self::SUBMISSION_STATUS_WAIT)
             ->setIF($type == 'page' and !$this->post->onlyBody, 'onlyBody', 0)
             ->stripTags('content,link,videoLink', $this->config->allowedTags->admin)
             ->removeIF($type == 'video', 'videoLink, width, height, autoplay')
@@ -620,7 +625,7 @@ class articleModel extends model
         if(!$article) return false;
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) die();
         /* If this article is a submission and has been adopt, front cannot delete it.*/
-        if(RUN_MODE == 'front' and $article->submission == 2) die();
+        if(RUN_MODE == 'front' and $article->submission == self::SUBMISSION_STATUS_APPROVED) die();
 
         $this->dao->delete()->from(TABLE_RELATION)->where('id')->eq($articleID)->andWhere('type')->eq($article->type)->exec();
         $this->dao->delete()->from(TABLE_ARTICLE)->where('id')->eq($articleID)->exec();
@@ -817,7 +822,7 @@ class articleModel extends model
             $this->processCategories($articleID, $type, $categories);
         }
 
-        $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submission')->eq(2)->where('id')->eq($articleID)->exec();
+        $this->dao->update(TABLE_ARTICLE)->set('type')->eq($type)->set('submission')->eq(self::SUBMISSION_STATUS_APPROVED)->where('id')->eq($articleID)->exec();
 
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveSubmission', 'article', $articleID, '', $article->addedBy);
         $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveSubmission));
@@ -834,7 +839,7 @@ class articleModel extends model
      */
     public function reject($articleID)
     {
-        $this->dao->update(TABLE_ARTICLE)->set('submission')->eq(3)->where('id')->eq($articleID)->exec();
+        $this->dao->update(TABLE_ARTICLE)->set('submission')->eq(self::SUBMISSION_STATUS_REJECTED)->where('id')->eq($articleID)->exec();
         $article = $this->getByID($articleID);
         $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->rejectMessage, $article->title));
 
@@ -851,7 +856,7 @@ class articleModel extends model
     {
         return $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('type')->eq('submission')
-            ->andWhere('submission')->ne(3)
+            ->andWhere('submission')->ne(self::SUBMISSION_STATUS_REJECTED)
             ->andWhere('editedDate')->like(date("Y-m-d") . '%')
             ->fetchAll('id');
     }

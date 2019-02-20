@@ -27,15 +27,15 @@
             <div class='bg-danger-pale text-danger'>{$lang->submission->status[$article->submission]}</div>
           </div>
           <div class='card-title'>
-            {if($article->submission == 2)} {!html::a($control->article->createPreviewLink($article->id), $article->title, "target='_blank'")} {/if}
-            {if($article->submission != 2)} {$article->title} {/if}
+            {if($article->submission == articleModel::SUBMISSION_STATUS_APPROVED)} {!html::a($control->article->createPreviewLink($article->id), $article->title, "target='_blank'")} {/if}
+            {if($article->submission != articleModel::SUBMISSION_STATUS_APPROVED)} {$article->title} {/if}
           </div>
         </div>
         <div class='table-layout'>
           <div class='table-cell'>
             <div class='card-content'>
               <div class='pull-right'>
-                {if($article->submission != 2)}
+                {if($article->submission != articleModel::SUBMISSION_STATUS_APPROVED)}
                   {!html::a(helper::createLink('article', 'modify', "articleID={{$article->id}}"), $lang->edit, "class='editor' data-toggle='modal'")}&nbsp;&nbsp;
                   {!html::a(helper::createLink('article', 'delete', "articleID={{$article->id}}"), $lang->delete, "class='deleter' data-locate='self'")}
                 {else}
