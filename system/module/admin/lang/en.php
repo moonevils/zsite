@@ -28,14 +28,14 @@ $lang->admin->bindedInfo     = 'ZSite Account';
 
 $lang->js->confirmRebind = "Are you sure to rebind the account of Zsite?";
 
-$lang->admin->register = new stdclass();
-$lang->admin->register->common     = 'The page is to register in Zsite.';
-$lang->admin->register->caption    = 'Register';
-$lang->admin->register->lblAccount = 'letters and numbers only ';
-$lang->admin->register->lblPasswd  = 'letters and numbers only ';
-$lang->admin->register->submit     = 'Submit';
-$lang->admin->register->success    = "Submitted";
-$lang->admin->register->update     = "Update information";
+$lang->admin->community = new stdclass();
+$lang->admin->community->common     = 'The page is to register in Zsite.';
+$lang->admin->community->caption    = 'Register';
+$lang->admin->community->lblAccount = 'letters and numbers only ';
+$lang->admin->community->lblPasswd  = 'letters and numbers only ';
+$lang->admin->community->submit     = 'Submit';
+$lang->admin->community->success    = "Submitted";
+$lang->admin->community->update     = "Update information";
 
 $lang->admin->bind = new stdclass();
 $lang->admin->bind->caption = 'Zsite Account';

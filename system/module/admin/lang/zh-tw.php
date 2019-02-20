@@ -21,21 +21,21 @@ $lang->admin->feedback     = '最新反饋';
 $lang->admin->adminEntry     = '警告：您現在的管理入口還是預設的admin.php，建議將admin.php改名以增強系統安全!';
 
 $lang->admin->connectApiFail = "不能連接到蟬知社區，請檢查您的網絡設置後 <a href='javascritp:loaction.reload()'>重試</a>。";
-$lang->admin->registerInfo   = "站點已經綁定到蟬知賬號%s，%s";
-$lang->admin->registerPage   = '登記頁面';
+$lang->admin->communityInfo   = "站點已經綁定到蟬知賬號%s，%s";
+$lang->admin->communityPage   = '登記頁面';
 $lang->admin->rebind         = "重新綁定";
 $lang->admin->bindedInfo     = '蟬知社區賬號信息';
 
 $lang->js->confirmRebind = "確認要重新綁定蟬知賬號？";
 
-$lang->admin->register = new stdclass();
-$lang->admin->register->common     = '蟬知社區';
-$lang->admin->register->caption    = '沒有蟬知社區賬號？馬上註冊一個!';
-$lang->admin->register->lblAccount = '請設置您的用戶名，英文字母和數字的組合，三位以上。';
-$lang->admin->register->lblPasswd  = '請設置您的密碼。數字和字母的組合，六位以上。';
-$lang->admin->register->submit     = '註冊';
-$lang->admin->register->success    = "註冊賬戶成功";
-$lang->admin->register->update     = "更新資料";
+$lang->admin->community = new stdclass();
+$lang->admin->community->common     = '蟬知社區';
+$lang->admin->community->caption    = '沒有蟬知社區賬號？馬上註冊一個!';
+$lang->admin->community->lblAccount = '請設置您的用戶名，英文字母和數字的組合，三位以上。';
+$lang->admin->community->lblPasswd  = '請設置您的密碼。數字和字母的組合，六位以上。';
+$lang->admin->community->submit     = '註冊';
+$lang->admin->community->success    = "註冊賬戶成功";
+$lang->admin->community->update     = "更新資料";
 
 $lang->admin->bind = new stdclass();
 $lang->admin->bind->caption = '已有蟬知社區賬號，輸入用戶名密碼進行綁定！';

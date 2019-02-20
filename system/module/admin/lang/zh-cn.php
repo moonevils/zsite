@@ -3,6 +3,9 @@ $lang->admin->common        = '后台管理';
 $lang->admin->index         = '首页';
 $lang->admin->checked       = '已认证';
 
+$lang->admin->getEmailCodeByApi  = '获取邮箱验证码';
+$lang->admin->getMobileCodeByApi = '获取手机验证码';
+
 $lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->common             = '快捷入口';
 $lang->admin->shortcuts->articleCategories  = '文章类目';
@@ -28,14 +31,14 @@ $lang->admin->bindedInfo     = '蝉知社区账号信息';
 
 $lang->js->confirmRebind = "确认要重新绑定蝉知账号？";
 
-$lang->admin->register = new stdclass();
-$lang->admin->register->common     = '蝉知社区';
-$lang->admin->register->caption    = '没有蝉知社区账号？马上注册一个!';
-$lang->admin->register->lblAccount = '请设置您的用户名，英文字母和数字的组合，三位以上。';
-$lang->admin->register->lblPasswd  = '请设置您的密码。数字和字母的组合，六位以上。';
-$lang->admin->register->submit     = '注册';
-$lang->admin->register->success    = "注册账户成功";
-$lang->admin->register->update     = "更新资料";
+$lang->admin->community = new stdclass();
+$lang->admin->community->common     = '蝉知社区';
+$lang->admin->community->caption    = '没有蝉知社区账号？马上注册一个!';
+$lang->admin->community->lblAccount = '请设置您的用户名，英文字母和数字的组合，三位以上。';
+$lang->admin->community->lblPasswd  = '请设置您的密码。数字和字母的组合，六位以上。';
+$lang->admin->community->submit     = '注册';
+$lang->admin->community->success    = "注册账户成功";
+$lang->admin->community->update     = "更新资料";
 
 $lang->admin->bind = new stdclass();
 $lang->admin->bind->caption = '已有蝉知社区账号，输入用户名密码进行绑定！';
