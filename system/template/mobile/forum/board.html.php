@@ -143,7 +143,7 @@
   </div>
 
   <div class='panel-footer'>
-    {$pager->createPullUpJS('.threads', $lang->mobile->pullUpHint, '', false)}
+    {$pager->createPullUpJS('.threads', $lang->mobile->pullUpHint)}
     <hr class='space'>
     {if($control->forum->canPost($board))} {!html::a($control->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn primary block' data-toggle='modal'")} {/if}
   </div>

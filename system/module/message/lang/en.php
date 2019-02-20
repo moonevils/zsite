@@ -39,6 +39,7 @@ $lang->message->submitting        = 'Submitting';
 $lang->message->admin          = 'Backend Home';
 $lang->message->pass           = 'Pass';
 $lang->message->reply          = 'Reply';
+$lang->message->moreReplies    = 'More <span class="more-replies-amount"></span> Replies';
 $lang->message->view           = 'View';
 $lang->message->manage         = 'Message Admin';
 $lang->message->delete         = 'Delete';
@@ -78,19 +79,20 @@ $lang->comment->viewComment  = 'Comment';
 $lang->comment->needCheck    = 'Comment will be posted once reviewed.';
 $lang->comment->receiveEmail = 'Email notification';
 
-$lang->comment->inputPlaceholder        = 'Add Comment';
-$lang->comment->submit                  = 'Submit';
-$lang->comment->submitting              = 'Submitting';
-$lang->comment->pass                    = 'Pass';
-$lang->comment->reply                   = 'Reply';
-$lang->comment->replyAt                 = 'Reply on';
-$lang->comment->manage                  = 'Manange Comment';
-$lang->comment->delete                  = 'Delete';
-$lang->comment->passPre                 = 'Pass Prev';
-$lang->comment->deletePre               = 'Delete Prev';
-$lang->comment->commentTo               = 'Comment on';
-$lang->comment->commentAt               = 'Comment on';
-$lang->comment->deletedObject           = 'Deleted Comment';
+$lang->comment->inputPlaceholder = 'Add Comment';
+$lang->comment->submit           = 'Submit';
+$lang->comment->submitting       = 'Submitting';
+$lang->comment->pass             = 'Pass';
+$lang->comment->reply            = 'Reply';
+$lang->comment->moreReplies      = 'More <span class="more-replies-amount"></span> Replies';
+$lang->comment->replyAt          = 'Reply on';
+$lang->comment->manage           = 'Manange Comment';
+$lang->comment->delete           = 'Delete';
+$lang->comment->passPre          = 'Pass Prev';
+$lang->comment->deletePre        = 'Delete Prev';
+$lang->comment->commentTo        = 'Comment on';
+$lang->comment->commentAt        = 'Comment on';
+$lang->comment->deletedObject    = 'Deleted Comment';
 
 $lang->comment->confirmDeleteSingle = 'Do you want to delete this comment?';
 $lang->comment->confirmDeletePre    = 'Do you want to delete previous comments?';
@@ -107,10 +109,3 @@ $lang->comment->replyItem   = "<dd><strong>%s</strong> replied on <em>%s</em> ab
 $lang->message->messageItem = "<dd><strong>%s</strong> posted on <em>%s</em> about %s</dd>";
 
 $lang->message->replySubject = 'Admin %s replied.';
-
-$lang->thread = new stdclass();
-$lang->thread->list             = 'Reply List';
-$lang->thread->submit           = 'Reply';
-$lang->thread->submitting       = 'Replying';
-$lang->thread->inputPlaceholder = 'Add Reply';
-$lang->thread->moreReplies      = 'More <span class="more-replies-amount"></span> Replies';

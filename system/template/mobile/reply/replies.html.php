@@ -52,7 +52,7 @@
           {/foreach}
         </div>
         <div id="paginator">
-          {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('reply', 'replies', 'threadID=' . $thread->id . '&pageID=$ID'), false)}
+          {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('reply', 'replies', 'threadID=' . $thread->id . '&pageID=$ID'))}
         </div>
       </div>
     </div>

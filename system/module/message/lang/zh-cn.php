@@ -39,6 +39,7 @@ $lang->message->submitting        = '稍后';
 $lang->message->admin          = '后台首页';
 $lang->message->pass           = '通过';
 $lang->message->reply          = '回复';
+$lang->message->moreReplies    = '查看全部<span class="more-replies-amount"></span>条评论';
 $lang->message->view           = '查看';
 $lang->message->manage         = '留言管理';
 $lang->message->delete         = '删除';
@@ -78,19 +79,20 @@ $lang->comment->viewComment  = '评论';
 $lang->comment->needCheck    = '评论通过审核后显示。';
 $lang->comment->receiveEmail = '接收邮件提醒';
 
-$lang->comment->inputPlaceholder        = '添加你的评论';
-$lang->comment->submit                  = '提交';
-$lang->comment->submitting              = '稍后';
-$lang->comment->pass                    = '通过';
-$lang->comment->reply                   = '回复';
-$lang->comment->replyAt                 = '回复于';
-$lang->comment->manage                  = '评论管理';
-$lang->comment->delete                  = '删除';
-$lang->comment->passPre                 = '通过之前';
-$lang->comment->deletePre               = '删除之前';
-$lang->comment->commentTo               = '发表于';
-$lang->comment->commentAt               = '发表于';
-$lang->comment->deletedObject           = '已删除项目';
+$lang->comment->inputPlaceholder = '添加你的评论';
+$lang->comment->submit           = '提交';
+$lang->comment->submitting       = '稍后';
+$lang->comment->pass             = '通过';
+$lang->comment->reply            = '回复';
+$lang->comment->moreReplies      = '查看全部<span class="more-replies-amount"></span>条评论';
+$lang->comment->replyAt          = '回复于';
+$lang->comment->manage           = '评论管理';
+$lang->comment->delete           = '删除';
+$lang->comment->passPre          = '通过之前';
+$lang->comment->deletePre        = '删除之前';
+$lang->comment->commentTo        = '发表于';
+$lang->comment->commentAt        = '发表于';
+$lang->comment->deletedObject    = '已删除项目';
 
 $lang->comment->confirmDeleteSingle = '您确定要删除该评论吗？';
 $lang->comment->confirmDeletePre    = '您确定要删除之前的评论吗？';
@@ -107,10 +109,3 @@ $lang->comment->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回复：
 $lang->message->messageItem = "<dd><strong>%s</strong> 于 <em>%s</em> 发表：%s</dd>";
 
 $lang->message->replySubject = '%s管理员的回复';
-
-$lang->thread = new stdclass();
-$lang->thread->list             = '回帖列表';
-$lang->thread->post             = '发表回帖';
-$lang->thread->submitting       = '稍后';
-$lang->thread->inputPlaceholder = '添加你的回帖';
-$lang->thread->moreReplies      = '查看全部<span class="more-replies-amount"></span>条评论';

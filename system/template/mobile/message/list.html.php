@@ -53,7 +53,7 @@
             {/foreach}
           </div>
           <div id="paginator">
-            {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'comment', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'), false)}
+            {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'comment', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'))}
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 <?php
-$lang->book->common             = '手册';
-$lang->book->list               = '手册列表';
-$lang->book->articles           = '文档导航';
-$lang->book->backtolist         = '返回手册列表';
-$lang->book->articleAmount      = '文章';
+$lang->book->common        = '手册';
+$lang->book->list          = '手册列表';
+$lang->book->articles      = '文档导航';
+$lang->book->backtolist    = '返回手册列表';
+$lang->book->articleAmount = '%d文章';
 
 $lang->book->admin      = '手册列表';
 $lang->book->info       = '手册介绍';

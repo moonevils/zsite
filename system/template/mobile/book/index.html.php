@@ -5,7 +5,7 @@
       <p class='book-header'>{!html::a($control->createLink('book', 'browse', "nodeID=$book->id", "book=$book->alias") . ($control->get->fullScreen ? "?fullScreen={{$control->get->fullScreen}}" : ''), $book->title)}</p>
       <div class='book-summary'>{$book->summary}</div>
       <div class='book-footer'>
-        <span class='article-amount'>{$book->articleAmount}{$lang->book->articleAmount}</span>
+        <span class='article-amount'>{!printf($lang->book->articleAmount,$book->articleAmount)}</span>
         <span class='article-added-date'>{!formatTime($book->addedDate, 'Y-m-d')}</span>
       </div>
     </div>
