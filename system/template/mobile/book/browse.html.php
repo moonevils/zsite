@@ -11,17 +11,14 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
-
 <div class="book-nav">
   {foreach($books as $row)}
   <span class="book {if($row->id == $book->id)}active{/if}">{!html::a($control->createLink('book', 'browse', "nodeID=$row->id", "book=$row->alias"), $row->title)}</span>
   {/foreach}
 </div>
-
 <div class="book-chapters">
   <ul class="chapter-tree">
     {$allCatalog}
   </ul>
 </div>
-
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}
