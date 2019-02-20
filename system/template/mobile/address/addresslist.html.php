@@ -202,9 +202,7 @@
       </div>
       <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>
     </div>
-    <div class='subnavs fade'>
-      {$subnavs}
-    </div>
+    <div class='subnavs fade'> {$subnavs} </div>
   </nav>
 </div>
 <div class='block-region region-all-banner blocks' data-region='all-banner'>
@@ -231,16 +229,13 @@
             <div class='address-edit'>
               <div class='vertical-center'>
                 <strong class='name'>{$address->contact}</strong>
-                <span class='phone'>{!substr($address->phone, 0, 3) . '****' . substr($address->phone, -4)}</span>
+                <span class='phone'>{!substr_replace($address->phone, '****', 3, 4)}</span>
                 {if(zget($address, 'isDefault', 0))}
                 <span class='address-default text-primary'>{$lang->address->default}</span>
                 {/if}
               </div>
               <div class='vertical-center alignment-address'>
                 <span class='address'> {$address->address} </span>
-                <!--<span class='edit-button'>
-                  {!html::a(helper::createLink('address', 'edit', "id={{$address->id}}"), $lang->edit, "class='editor text-primary' data-toggle='modal'")}
-                </span>-->
               </div>
             </div>
           </div>
@@ -270,4 +265,3 @@ $(function()
     })
 });
 </script>
-{include TPL_ROOT . 'common/form.html.php'}
