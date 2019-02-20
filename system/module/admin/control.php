@@ -98,14 +98,14 @@ class admin extends control
             if($response->result == 'success') 
             {
                 $this->admin->setCommunity($response->data->account, $response->data->private, $response->certifiedEmail, $response->certifiedMobile);
-                $response->message = $this->lang->admin->register->success;
+                $response->message = $this->lang->admin->community->success;
                 $response->locate  = inlink('register');
             }
             $this->send($response);
 		}
 
         $this->lang->menuGroups->admin = 'community';
-        $this->view->title             = $this->lang->admin->register->common;
+        $this->view->title             = $this->lang->admin->community->common;
 	    $this->view->apiConnected      = !empty($apiConfig);
         $this->view->register          = $registerInfo;
 
