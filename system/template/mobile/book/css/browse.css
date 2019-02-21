@@ -1,7 +1,7 @@
 .chapter-tree {padding: 4px 0; border-radius: 3px;}
 .chapter-tree li {list-style: none; position: relative;}
 .chapter-tree li > a,
-.chapter-tree summary {display: flex; display: -webkit-flex; align-items: center; justify-content: space-between; cursor: pointer; height: 31px;}
+.chapter-tree summary {display: flex; align-items: center; justify-content: space-between; cursor: pointer; height: 31px; display: -webkit-flex; -webkit-align-items: center; -webkit-justify-content: space-between; display: -webkit-box; -webkit-box-align: center;}
 .chapter-tree summary:focus {outline: none}
 .chapter-tree summary::-webkit-details-marker {display: none;}
 .chapter-tree summary + ul:before,
