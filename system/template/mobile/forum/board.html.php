@@ -30,7 +30,7 @@
         <div class='header'>
           <a href='{$control->createLink("thread", "view", "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
             <span class='title' {$style}>
-               <span class='text-danger'>[{$lang->thread->stick}]</span>
+              <span class='text-danger'>[{$lang->thread->stick}]</span>
               {$thread->title}
             </span>
           </a>
@@ -150,4 +150,4 @@
 </div>
 <div class='block-region region-bottom blocks' data-region='forum_board-bottom'>{$control->loadModel('block')->printRegion($layouts, 'forum_board', 'bottom')}</div>
 {include TPL_ROOT . 'common/form.html.php'}
-{include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'footer')}
+{if(isset($pageJS))} {!js::execute($pageJS)} {/if}

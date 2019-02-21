@@ -48,7 +48,7 @@
   <div class='row'>
     {foreach($lang->forum->indexModeOptions as $modeCode => $modeName)}
       {$class=($modeCode == $mode) ? 'primary' : ''}
-      <div class='col-4'>{!html::a(inlink('index', "mode=$modeCode"),  $modeName,  "class='btn $class'")}</div>
+      <div class='col-4'>{!html::a(inlink('index', "mode=$modeCode"), $modeName, "class='btn $class'")}</div>
     {/foreach}
   </div>
 </div>

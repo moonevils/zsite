@@ -25,7 +25,7 @@
           <span class='addedDate'>{!formatTime($thread->addedDate)}</span>
         </div>
       </div>
-      {if($control->app->user->account != 'guest' && $control->thread->canManage($board->id, $thread->author))}
+      {if($control->thread->canManage($board->id, $thread->author))}
       <div class='operations'>
         <span class='trigger'>
           <i class='circle'></i>
@@ -40,9 +40,9 @@
               {!html::a(inlink('addScore', "account={{$account}}&objectType=thread&objectID={{$thread->id}}"), $lang->thread->score, "data-toggle=modal class='text-muted'")}
             {/if}
             {if($thread->hidden)}
-              {!html::a(inlink('switchstatus',   "threadID=$thread->id"), $lang->thread->show, "class='switcher ajaxaction'")}
+              {!html::a(inlink('switchstatus', "threadID=$thread->id"), $lang->thread->show, "class='switcher ajaxaction'")}
             {else}
-              {!html::a(inlink('switchstatus',   "threadID=$thread->id"), $lang->thread->hide, "class='switcher ajaxaction'")}
+              {!html::a(inlink('switchstatus', "threadID=$thread->id"), $lang->thread->hide, "class='switcher ajaxaction'")}
             {/if}
             {!html::a(inlink('delete', "threadID=$thread->id"), $lang->delete, "class='deleter'")}
             {!html::a(inlink('transfer', "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'")}

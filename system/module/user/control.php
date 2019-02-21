@@ -445,8 +445,13 @@ class user extends control
      * @access public
      * @return void
      */
-    public function edit($account = '')
+    public function edit($account = '', $field = '')
     {
+        if($this->app->clientDevice == 'mobile')
+        {
+            $this->editInfo($field);
+            exit;
+        }
         if(!$account or RUN_MODE == 'front') $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
         if(RUN_MODE == 'admin') $this->config->user->require->edit = 'realname, email';
@@ -523,7 +528,7 @@ class user extends control
         $this->view->title       = $this->lang->user->update;
         $this->view->mobileTitle = $this->lang->user->update;
         $this->view->field       = $field;
-        $this->display();
+        $this->display('user', 'editinfo');
     }
     /**
      * Set email. 
