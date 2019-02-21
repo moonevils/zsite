@@ -20,7 +20,7 @@
 {if($pager->pageID == 1)} {include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'thread')} {/if}
 {if(!$thread->readonly)}
 <div class='commentBox' id='commentBox'>
-  {$control->fetch('reply', 'replies', "threadID={{$thread->id}}")}
+  {include $control->loadModel('ui')->getEffectViewFile('mobile', 'thread', 'reply')}
 </div>
 {/if}
 <div class='block-region region-bottom blocks' data-region='thread_view-bottom'>{$control->loadModel('block')->printRegion($layouts, 'thread_view', 'bottom')}</div>

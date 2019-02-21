@@ -48,6 +48,18 @@ class thread extends control
         /* Set editor for current user. */
         $this->thread->setEditor($board->id, 'post');
 
+        if(isset($this->config->forum->bindWechat) && $this->config->forum->bindWechat == 'open')
+        {
+            $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('account')->eq($this->app->user->account)->fetch();
+            if(!isset($user->provider) || $user->provider != 'wechat')
+            {
+                $referer = helper::safe64Encode($this->createLink('thread', 'post', "boardID=$boardID"));
+                $this->view->oauthLoginLink = $this->createLink('user', 'oauthLogin', "provider=wechat&fingerprint={$this->app->user->fingerprint}&referer={$referer}");
+                $this->view->backLink       = $this->createLink('forum', 'board', "boardID=$boardID");
+                if($_POST) $this->loacate($this->view->oauthLoginLink);
+            }
+        }
+
         /* User posted a thread, try to save it to database. */
         if($_POST)
         {
@@ -68,17 +80,6 @@ class thread extends control
             $this->send($result);
         }
         
-        if(isset($this->config->forum->bindWechat) && $this->config->forum->bindWechat == 'open')
-        {
-            $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('account')->eq($this->app->user->account)->fetch();
-            if(!isset($user->provider) || $user->provider != 'wechat')
-            {
-                $referer = helper::safe64Encode($this->createLink('thread', 'post', "boardID=$boardID"));
-                $this->view->oauthLoginLink = $this->createLink('user', 'oauthLogin', "provider=wechat&fingerprint={$this->app->user->fingerprint}&referer={$referer}");
-                $this->view->backLink       = $this->createLink('forum', 'board', "boardID=$boardID");
-            }
-        }
-
         $titleInput   = helper::createRandomStr(6, $skip='A-Z'); 
         $contentInput = helper::createRandomStr(7, $skip='A-Z'); 
         $this->session->set('titleInput', $titleInput);

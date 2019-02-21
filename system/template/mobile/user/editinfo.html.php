@@ -12,7 +12,7 @@
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <style>
-  .modal-content {border:0px}
+.modal-content {border:0px}
 </style>
 <div class='modal-dialog'>
   <div class='modal-content'>
@@ -20,7 +20,7 @@
       <form id='editProfileForm' method='post' action="{!inlink('editInfo')}" data-checkfingerprint='1'>
         <div class='form-group form-pad-list'>
           <div class='form-group pad-label-left'>
-            {if($field == 'qq' || $field == 'zipcode' || $field == 'phone')}
+            {if(strpos('qq,phone,zipcode', $field) !== false)}
             <input type='number' id='{$field}' name='{$field}' value='{$user->$field}' class='form-control'/>
             {else}
             {!html::input($field, $user->$field, "class='form-control'")}

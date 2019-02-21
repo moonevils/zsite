@@ -11,28 +11,10 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
-<style>
-body.with-appbar-bottom {padding-bottom:0px}
-.panel-section {margin:0px;background-color:#f1f1f1}
-.panel-heading {margin-bottom:12px}
-.panel-body {padding:0px}
-.cards-list .card {border:0px;box-shadow:0 0px 0px;margin-bottom:6px}
-.card .avatar {float:left;height:40px;width:40px;margin-top:12px;margin-left:10px;position:relative}
-.card .avatar > img {height:100%;width:100%}
-.card .content {margin-left:52px;padding:12px 12px 2px 12px}
-.card .symbol > strong {font-size:1.6rem}
-.card .symbol > .text-muted {float:right}
-.card .text-body {max-height:40px;overflow:hidden;color:#999999;text-overflow:ellipsis}
-.card .dot {width:10px;height:10px;background-color:red;position:absolute;top:-3px;right:-3px;border-radius:50%}
-.card .card-footer {height:20px;padding:0px 12px 0px 0px;}
-</style>
 <div class='panel-section'>
   <div class='panel-heading'>
-    {$unreadCount} {$lang->user->message->unread}
+    {!printf($lang->user->message->unread, $unreadCount)}
   </div>
-  <!--<div class='panel-heading' style='margin-bottom:12px'>
-    通知 订单 互动
-  </div>-->
   <div class='panel-body' id='cardListWarpper'>
     <div class='cards cards-list' id='cardList'>
     {foreach($messages as $message)}
@@ -75,9 +57,7 @@ function cardClick(obj)
         $this.find('.text-body').css('max-height','40px');
     }
     if(!$this.attr('href')) return false;
-    var options = $.extend({url: $this.attr('href'), onSuccess: function(response)
-    {}
-    }, $this.data());
+    var options = $.extend({url: $this.attr('href'), onSuccess: function(response){}}, $this.data());
     $.ajaxaction(options, $this);
 }
 function delCard(obj)

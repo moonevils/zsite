@@ -86,7 +86,6 @@ $lang->order->wechatpay       = '微信支付';
 $lang->order->scanCode        = '微信扫码支付';
 $lang->order->wechatScan      = '请使用微信扫一扫<br>扫描二维码支付';
 $lang->order->inWechatTip     = '提示：微信浏览器不支持支付宝支付，如需使用支付宝支付，请复制本页网址到其他浏览器进行操作';
-$lang->order->notePlaceholder = '选填：填写内容已和卖家协商确认';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->expireLimit          = '订单过期时间';
@@ -124,6 +123,7 @@ $lang->order->placeholder->appid     = '微信分配的公众账号ID';
 $lang->order->placeholder->mchid     = '微信支付分配的商户号';
 $lang->order->placeholder->apikey    = '微信支付API安全密钥';
 $lang->order->placeholder->appsecret = '微信公众号密钥';
+$lang->order->placeholder->note      = '选填：填写内容已和卖家协商确认';
 
 $lang->order->paymentList = array();
 $lang->order->paymentList['alipay']        = '支付宝即时到帐';

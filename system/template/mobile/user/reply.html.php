@@ -11,18 +11,6 @@
  */
 /php*}
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
-<style>
-.panel > .panel-heading, .panel-section > .panel-heading {padding:12px 10px 0px 10px}
-.cards.condensed .card-fix {width:100%}
-.card .card-top {width:100%;overflow:hidden;margin-bottom:8px}
-.card .card-body {width:100%;overflow:hidden;margin-bottom:8px}
-.card-fix .card-title {float:left;max-width:55%;margin-right:10%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:1.6rem;font-weight:600;color:#333}
-.card-fix .card-theard {float:right;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#676767}
-.card-fix .text-muted {font-size:1.4rem}
-.card-content, .card-footer {padding:0px}
-.card-fix .card-content.content {float:left;width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#666}
-.card-fix .card-content.text-muted {float:right;}
-</style>
 <div class='panel-section'>
   <div class='panel-heading'>
     <div class='title strong'>{$lang->user->reply}</div>

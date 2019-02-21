@@ -12,31 +12,6 @@
 class reply extends control
 {
     /**
-     * Show the replies of one thread, and print the reply form.
-     *
-     * @param int $threadID
-     * @param int $pageID
-     * @access public
-     * @return void
-     */
-    public function replies($threadID, $pageID = 1)
-    {
-        $recPerPage = !empty($this->config->site->replyMobileRec) ? $this->config->site->replyMobileRec : $this->config->reply->recPerPage;
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage, $pageID);
-
-        $this->loadModel('thread');
-        $thread = $this->thread->getByID($threadID);
-
-        $this->view->thread      = $thread;
-        $this->view->replies     = $this->reply->getRepliesByThread($threadID, $pager);
-        $this->view->pager       = $pager;
-        $this->view->startNumber = ($pageID - 1) * 10;
-
-        $this->display();
-    }
-
-    /**
      * Reply a thread.
      * 
      * @param  int      $threadID
