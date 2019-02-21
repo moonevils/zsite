@@ -17,7 +17,7 @@
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-body'>
-      <form id='editProfileForm' method='post' action="{!inlink('editInfo')}" data-checkfingerprint='1'>
+      <form id='editProfileForm' method='post' action="{!inlink('edit')}" data-checkfingerprint='1'>
         <div class='form-group form-pad-list'>
           <div class='form-group pad-label-left'>
             {if($field == 'qq' || $field == 'zipcode' || $field == 'phone')}
