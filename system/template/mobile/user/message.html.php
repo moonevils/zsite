@@ -13,7 +13,7 @@
 {include $control->loadModel('ui')->getEffectViewFile('mobile', 'common', 'header.simple')}
 <div class='panel-section'>
   <div class='panel-heading'>
-    {$unreadCount} {$lang->user->message->unread}
+    {!printf($lang->user->message->unread, $unreadCount)}
   </div>
   <div class='panel-body' id='cardListWarpper'>
     <div class='cards cards-list' id='cardList'>

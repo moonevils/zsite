@@ -118,7 +118,7 @@ $lang->user->submissionHistory = "投稿";
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
 $lang->user->message->from = '来自';
-$lang->user->message->unread = '条未读消息';
+$lang->user->message->unread = '%s条未读消息';
 
 $lang->user->inputUserName       = '请输入用户名';
 $lang->user->inputAccountOrEmail = '请输入用户名或Email';
