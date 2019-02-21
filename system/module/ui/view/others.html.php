@@ -70,9 +70,9 @@ js::set('gdInstalled', $gdInstalled);
               <td class='w-p30'>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->ui->clientDesktop;?></span>
-                  <?php echo html::input('articleRec', $siteRecPerPage ? $siteRecPerPage : $moduleRecPerPage, "class='form-control'");?>
+                  <?php echo html::input($type . 'Rec', $siteRecPerPage ? $siteRecPerPage : $moduleRecPerPage, "class='form-control'");?>
                   <span class='input-group-addon fix-border'><?php echo $lang->ui->clientMobile;?></span>
-                  <?php echo html::input('articleMobileRec', $mobileRecPerPage ? $mobileRecPerPage : $moduleRecPerPage, "class='form-control'");?>
+                  <?php echo html::input($type . 'MobileRec', $mobileRecPerPage ? $mobileRecPerPage : $moduleRecPerPage, "class='form-control'");?>
                 </div>
               </td>
               <td></td>

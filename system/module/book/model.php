@@ -266,14 +266,16 @@ class bookModel extends model
                 {
                     $catalog .= '<li>';
                     $catalog .= '  <details>';
-                    $catalog .= '    <summary class="chapter vertical-center">';
+                    $catalog .= '    <summary>';
+                    $catalog .= '    <section class="chapter">';
                     $catalog .= '      <span class="chapter-left">';
                     $catalog .= '        <span class="tag-chapter">' . $this->lang->book->typeList['chapter'] . '</span>';
                     $catalog .= '        <span class="title">' . $serial . ' ' . $node->title . '</span>';
                     $catalog .= '      </span>';
                     $catalog .= '      <span class="down-triangle"></span>';
+                    $catalog .= '    </section>';
                     $catalog .= '    </summary>';
-                    $catalog .= '    <ul class="chapter-content"><li></li>';
+                    $catalog .= '    <ul class="chapter-content">';
                 }
                 elseif($node->type == 'article')
                 {
@@ -284,14 +286,14 @@ class bookModel extends model
                         $target = "target='_blank'";
                         $link   = $node->link;
                     }
-                    $catalog .= '<li class="chapter vertical-center">';
-                    $catalog .= "  <a href='$link' title='{$node->title}' {$target}>";
-                    $catalog .= '    <span class="chapter-left">';
+                    $catalog .= "<li></li>";
+                    $catalog .= "<a href='$link' title='{$node->title}' {$target}>";
+                    $catalog .= '  <li class="article">';
+                    $catalog .= '    <span class="article-left">';
                     $catalog .= '      <span class="tag-article">' . $this->lang->book->typeList['article'] . '</span>';
                     $catalog .= '      <span class="title">' . $serial . ' ' . $node->title . '</span>';
                     $catalog .= '    </span>';
-                    $catalog .= '   </a>';
-                    $catalog .= $node->grade == 2 ? '</li><div class="divider"></div>' : '</li>';
+                    $catalog .= $node->grade == 2 ? '</li></a><li></li><div class="divider"></div>' : '</li></a><li></li>';
                 }
 
                 if($node->type == 'chapter' && !isset($nodeList[$node->id]['catalog']))

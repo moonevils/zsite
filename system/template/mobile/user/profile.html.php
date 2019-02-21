@@ -23,7 +23,7 @@
     {$html = '<span>' . $user->$nav . '</span>'}
     {$class = 'btn default'} 
   {/if}
-  <li>{!html::a($control->createLink('user', 'editInfo', 'field=' . $nav), $lang->user->$nav . '<i class="icon-chevron-right"></i>' . $html, "class='" . $class . "'")}</li>
+  <li>{!html::a($control->createLink('user', 'edit', 'account=&field=' . $nav), $lang->user->$nav . '<i class="icon-chevron-right"></i>' . $html, "class='" . $class . "'")}</li>
   {/foreach}
 </ul>
 {/foreach}
