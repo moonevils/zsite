@@ -54,7 +54,7 @@
           </div>
           <div id="paginator">
             {if($objectType == 'message')}
-              {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'index', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'))}
+              {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint)}
             {else}
               {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'comment', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'))}
             {/if}
