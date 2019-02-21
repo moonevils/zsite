@@ -53,6 +53,13 @@
       {@$i++}
       {$url = helper::createLink('article', 'view', "id=$article->id", "category={{$article->category->alias}}&name=$article->alias")}
       <div class='article-item vertical-center article-align'>
+        {if($config->article->imagePosition == 'left' && !empty($article->image))}
+        <div class='article-img left'>
+          {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
+          {$article->image->primary->objectType = 'article'}
+          {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
+        </div>
+        {/if}
         <div class="{if(empty($article->image))}article-content-height{else}article-content{/if}">
           <div class='vertical-start'>
             <strong class="article-title">
@@ -74,13 +81,13 @@
             </span>
           </div>
         </div>
+        {if((empty($config->article->imagePosition) || $config->article->imagePosition == 'right') && !empty($article->image))}
         <div class='article-img'>
-          {if(!empty($article->image))}
           {$title = $article->image->primary->title ? $article->image->primary->title : $article->title}
           {$article->image->primary->objectType = 'article'}
           {!html::image($control->loadModel('file')->printFileURL($article->image->primary, 'smallURL'), "title='{{$title}}' class='thumbnail'")}
-          {/if}
         </div>
+        {/if}
       </div>
       {if($i < count($articles))}
       <div class='divider'></div>
