@@ -61,7 +61,7 @@
           <a href='{$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
             <div class='card-heading'><h5 class='title' style='{$style}'>{$thread->title}</h5></div>
             <div class='card-body-special {if(!empty($thread->image->list[0]))}card-all{/if}'>
-              <div class='card-content text-muted'>{$thread->content}</div>
+              <div class='card-content text-muted'>{!echo strip_tags($thread->content)}</div>
               <div class='card-content text-time'><i class="icon icon-comment-alt"></i> {$thread->replies} &nbsp; {!substr($thread->addedDate, 0, -8)}</div>
             </div>
             {if(!empty($thread->image->list[0]))}
@@ -82,7 +82,7 @@
           <a href='{$control->createLink('thread', 'view', "id=$thread->id")}' data-ve='thread' id='thread{$thread->id}'>
             <div class='card-heading'><h5 class='title' style='{$style}'>{$thread->title}</h5></div>
             <div class='card-body-special {if(!empty($thread->image->list[0]))}card-all{/if}'>
-              <div class='card-content text-muted'>{$thread->content}</div>
+              <div class='card-content text-muted'>{!echo strip_tags($thread->content)}</div>
               <div class='card-content text-time'><i class="icon icon-comment-alt"></i> {$thread->replies} &nbsp; {!substr($thread->addedDate, 0, -8)}</div>
             </div>
             <div class='table-cell middle thumbnail-cell text-right'>
