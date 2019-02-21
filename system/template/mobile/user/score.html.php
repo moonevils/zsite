@@ -37,7 +37,7 @@
             <th class='w-100px'>{$lang->score->time}</th>
             <th class='w-150px'>{$lang->score->method}</th>
             <th class='w-150px'>{$lang->score->count}</th>
-            <th class='w-150px'>{$lang->score->score}</th>
+            <th class='w-150px'>{$lang->score->common}</th>
             <th>{$lang->score->note}</th>
           </tr>
         </thead>
