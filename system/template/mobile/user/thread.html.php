@@ -37,7 +37,7 @@
               </div>
             </div>
             <div class='reply middle thumbnail-cell text-right'>
-              <div class='counter text-center'><div class='title text-danger'>{$thread->replies}</div><div class='caption text-muted small'>{$lang->thread->number}</div></div>
+              <div class='counter text-center'><div class='title text-danger'>{$thread->replies}</div><div class='caption text-muted small'>{$lang->thread->replyCount}</div></div>
               </div>
           </div>
         </div>
