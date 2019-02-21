@@ -7,12 +7,19 @@ $(document).ready(function()
     }
     scrollCenter();
 
-    $('.chapter').on('click', function()
+    $(document).on('click', '.chapter', function()
     {
         $('.chapter').removeClass('active');
-        $('.chapter .down-triangle').removeClass('active');
+        $('.down-triangle').removeClass('active');
+        $('.article').removeClass('active');
         $(this).addClass('active');
-        $(this).find('.down-triangle').addClass('active');
-        if($(this).parent().attr('open') === true) $(this).find('.down-triangle').removeClass('active');;
+        $(this).parent().parent().parent().siblings().children('details').removeAttr('open');
+        if($(this).parent().parent().attr('open') === false) $(this).find('.down-triangle').addClass('active');
+    });
+
+    $(document).on('click', '.article', function()
+    {
+        $('.article').removeClass('active');
+        $(this).addClass('active');
     });
 });
