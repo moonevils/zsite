@@ -53,7 +53,11 @@
             {/foreach}
           </div>
           <div id="paginator">
-            {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'comment', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'))}
+            {if($objectType == 'message')}
+              {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint)}
+            {else}
+              {$pager->createPullUpJS('#commentsList', $lang->mobile->pullUpHint, helper::createLink('message', 'comment', 'objectType=' . $objectType . '&objectID=' . $objectID . '&pageID=$ID'))}
+            {/if}
           </div>
         </div>
       </div>
