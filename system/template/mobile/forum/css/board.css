@@ -24,3 +24,6 @@
 .thread-list .thread .content-no-img .ext {height: 12px; font-size: 12px}
 .thread-list .thread .content-no-img .ext .views img {height: 12px; width: 12px}
 .thread-list .thread .content-no-img .ext .pub-time {margin-left: 20px;}
+
+.appbar.fix-right {position:fixed;right:30px;bottom:140px;z-index:120;height:0px}
+.appbar.fix-right > a > img {width:60px;height:60px}
