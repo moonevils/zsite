@@ -197,7 +197,7 @@
     <div class='mainnav' style='padding:8px 7px'>
       <div class='both-sides left' style='width:43px'>
         <div class='icon-block left'>
-          <a href='javascript:#' data-dismiss="modal">{!html::image('/theme/mobile/common/img/left.png')}</a>
+          <a href='javascript:#' data-dismiss="modal">{!html::image($config->webRoot . 'theme/mobile/common/img/left.png')}</a>
         </div>
       </div>
       <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>
