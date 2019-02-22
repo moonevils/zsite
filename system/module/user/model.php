@@ -418,9 +418,9 @@ class userModel extends model
      * @access public
      * @return void
      */
-    public function updateEmail($account)
+    public function updateEmail($account, $check = 'true')
     {
-        $this->checkOldPassword();
+        if($check) $this->checkOldPassword();
         $data = fixer::input('post')->remove('oldPwd, captcha, token, fingerprint,field')->get();
         $data->emailCertified = 0;
 
