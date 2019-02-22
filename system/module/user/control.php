@@ -513,7 +513,7 @@ class user extends control
         {
             if($this->post->field == 'email')
             {
-                $this->user->checkEmail($this->post->email);
+                $this->user->updateEmail($account, false);
             }
             else
             {
