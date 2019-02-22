@@ -144,9 +144,12 @@
 
   <div class='panel-footer'>
     {$pager->createPullUpJS('.threads', $lang->mobile->pullUpHint)}
-    <hr class='space'>
-    {if($control->forum->canPost($board))} {!html::a($control->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn primary block' data-toggle='modal'")} {/if}
   </div>
+  {if($control->forum->canPost($board))}
+    <footer class="appbar fix-right" id='footer' data-ve='navbar' data-type='mobile_bottom'>
+      {!html::a($control->createLink('thread', 'post', "boardID=$board->id"), html::image('/theme/mobile/default/posting.png'), "data-toggle='modal'")}
+    </footer>
+  {/if}
 </div>
 <div class='block-region region-bottom blocks' data-region='forum_board-bottom'>{$control->loadModel('block')->printRegion($layouts, 'forum_board', 'bottom')}</div>
 {include TPL_ROOT . 'common/form.html.php'}
