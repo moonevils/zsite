@@ -66,7 +66,7 @@
             <div class='left'>
               <span class='{if(!empty($thread->image))}desc{else}desc-no-img{/if}'>{!strip_tags($thread->content)}</span>
               <div class='ext'>
-                <span class='views'>{!html::image('/theme/mobile/default/comments.png')} {$thread->replies}</span>
+                <span class='views'>{!html::image($config->webRoot . 'theme/mobile/default/comments.png')} {$thread->replies}</span>
                 <span class='pub-time'>{!substr($thread->addedDate, 0, 10)}</span>
               </div>
             </div>
@@ -124,7 +124,7 @@
             <div class='left'>
               <span class='{if(!empty($thread->image))}desc{else}desc-no-img{/if}'>{!strip_tags($thread->content)}</span>
               <div class='ext'>
-                <span class='views'>{!html::image('/theme/mobile/default/comments.png')} {$thread->replies}</span>
+                <span class='views'>{!html::image($config->webRoot . 'theme/mobile/default/comments.png')} {$thread->replies}</span>
                 <span class='pub-time'>{!substr($thread->addedDate, 0, 10)}</span>
               </div>
             </div>
@@ -147,7 +147,7 @@
   </div>
   {if($control->forum->canPost($board))}
     <footer class="appbar fix-right" id='footer' data-ve='navbar' data-type='mobile_bottom'>
-      {!html::a($control->createLink('thread', 'post', "boardID=$board->id"), html::image('/theme/mobile/default/posting.png'), "data-toggle='modal'")}
+      {!html::a($control->createLink('thread', 'post', "boardID=$board->id"), html::image($config->webRoot . 'theme/mobile/default/posting.png'), "data-toggle='modal'")}
     </footer>
   {/if}
 </div>

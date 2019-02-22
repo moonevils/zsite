@@ -20,7 +20,7 @@
     {foreach($messages as $message)}
       <div class='card card-block' {if(!$message->readed)} href='{$control->createLink("message", "view", "message=$message->id")}'{/if} onclick='cardClick(this)'>
         <div class='avatar'>
-        {!html::image('/theme/mobile/common/img/default-head.png')}
+        {!html::image($config->webRoot . 'theme/mobile/common/img/default-head.png')}
         {if(!$message->readed)}
           <div class='dot'></div>
         {/if}

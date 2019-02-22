@@ -37,11 +37,11 @@
       <div class='mainnav' style='padding:8px 7px'>
         <div class='both-sides left'>
           <div class='icon-block left'>
-            <a href='javascript:window.history.back();'>{!html::image('/theme/mobile/common/img/left.png')}</a>
+            <a href='javascript:window.history.back();'>{!html::image($config->webRoot . 'theme/mobile/common/img/left.png')}</a>
           </div>
           <div class='divider-line'></div>
           <div class='icon-block home'>
-            <a href='{$control->config->webRoot}'>{!html::image('/theme/mobile/common/img/home.png')}</a>
+            <a href='{$control->config->webRoot}'>{!html::image($config->webRoot . 'theme/mobile/common/img/home.png')}</a>
           </div>
         </div>
         <div class='middle-title'>{!isset($mobileTitle) ? $mobileTitle : $lang->detail}</div>

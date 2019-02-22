@@ -17,7 +17,7 @@
   {$navs = explode(',', $items)}
   {foreach($navs as $nav)}
   {if($nav == 'avatar')}
-    {$html = html::image('/theme/mobile/common/img/default-head.png')}
+    {$html = html::image($config->webRoot . 'theme/mobile/common/img/default-head.png')}
     {$class = 'btn avatar default'} 
   {else}
     {$html = '<span>' . $user->$nav . '</span>'}

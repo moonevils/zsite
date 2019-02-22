@@ -157,11 +157,11 @@
 <footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
   {if(commonModel::isAvailable('shop'))}
   <div class='footer-left'>
-    {!html::a(helper::createLink('cart', 'browse', 'source=product'), html::image('/theme/mobile/product/cart.png') . "<span class='label badge red circle'>0</span>")}
+    {!html::a(helper::createLink('cart', 'browse', 'source=product'), html::image($config->webRoot . 'theme/mobile/product/cart.png') . "<span class='label badge red circle'>0</span>")}
   </div>
   {/if}
   <div class='footer-left'>
-    {!html::a('#commentBox', html::image('/theme/mobile/product/comment.png'), "id='message'")}
+    {!html::a('#commentBox', html::image($config->webRoot . 'theme/mobile/product/comment.png'), "id='message'")}
   </div>
   <div class='footer-right'>
   {if(!$product->unsaleable and commonModel::isAvailable('shop') and !$product->negotiate and !$product->mall)}

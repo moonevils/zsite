@@ -14,7 +14,7 @@
 <div class='tag-block user-image'>
   {if($app->user->account == 'guest')}
   <div class='tag' data-url="{$control->createLink('user', 'login')}">
-    {!html::image('/theme/mobile/common/img/default-head.png')}
+    {!html::image($config->webRoot . 'theme/mobile/common/img/default-head.png')}
     <a class='tag-body' href="{$control->createLink('user', 'login')}">
       <div class='tag-title'>
         <div>{$lang->user->unlogin}</div>
@@ -22,7 +22,7 @@
       </div> 
   {else}
   <div class='tag' data-url="{$control->createLink('user', 'profile')}">
-    {!html::image('/theme/mobile/common/img/default-head.png')}
+    {!html::image($config->webRoot . 'theme/mobile/common/img/default-head.png')}
     <a class='tag-body' href="{$control->createLink('user', 'profile')}">
       <div class='tag-title'>
         <div>{$user->realname}</div>
@@ -30,7 +30,7 @@
       </div>
   {/if}
       <div class='tag-right'>
-      {!html::image('/theme/mobile/common/img/right.png')}
+      {!html::image($config->webRoot . 'theme/mobile/common/img/right.png')}
       </div>
     </a>
   </div>
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class='tag-right'>
-        {!html::image('/theme/mobile/common/img/right.png')}
+        {!html::image($config->webRoot . 'theme/mobile/common/img/right.png')}
       </div>
     </a>
   </div>

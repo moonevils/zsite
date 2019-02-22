@@ -75,7 +75,7 @@
                 {$article->views}{$lang->article->views}
               </span>
               <span class='comments'>
-                {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
+                {!html::a($url, html::image($config->webRoot . 'theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
               </span>
               {if(isset($content->showCategory) and $content->showCategory == 1)}
               <span class="category">
@@ -129,7 +129,7 @@
                 {$article->views}{$lang->article->views}
               </span>
               <span class='comments'>
-                {!html::a($url, html::image('/theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
+                {!html::a($url, html::image($config->webRoot . 'theme/mobile/default/comments.png'))}&nbsp;{$article->comments}
               </span>
               {if(isset($content->showCategory) and $content->showCategory == 1)}
               <span class="category">
