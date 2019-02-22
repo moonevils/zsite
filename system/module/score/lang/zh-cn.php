@@ -14,7 +14,7 @@ $lang->score->rule        = '积分规则';
 $lang->score->statement   = '积分结算';
 $lang->score->stateDesc   = '积分结算会将一个月之前的所有收入积分按照每个用户结算为总积分。以减少记录数。';
 
-$lang->score->common   = '积分';
+$lang->score->common  = '积分';
 $lang->score->id      = '编号';
 $lang->score->account = '用户';
 $lang->score->method  = '方式';

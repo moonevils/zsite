@@ -92,12 +92,11 @@ class bookModel extends model
      */
     public function getArticleAmount($bookID)
     {
-        return $this->dao->select('count(*) amount')->from(TABLE_BOOK)
+        return $this->dao->select('count(*) as amount')->from(TABLE_BOOK)
             ->where('type')->eq('article')
             ->andWhere('status')->eq('normal')
             ->andWhere('path')->like("%,{$bookID},%")
-            ->fetch()
-            ->amount;
+            ->fetch('amount');
     }
 
     /**
