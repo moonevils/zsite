@@ -123,7 +123,7 @@ $lang->order->placeholder->appid     = '微信分配的公众账号ID';
 $lang->order->placeholder->mchid     = '微信支付分配的商户号';
 $lang->order->placeholder->apikey    = '微信支付API安全密钥';
 $lang->order->placeholder->appsecret = '微信公众号密钥';
-$lang->order->placeholder->note      = '选填：填写内容已和卖家协商确认';
+$lang->order->placeholder->note      = '选填，给卖家留言';
 
 $lang->order->paymentList = array();
 $lang->order->paymentList['alipay']        = '支付宝即时到帐';
