@@ -222,7 +222,7 @@ class upgradeModel extends model
             case '7_5':
             case '7_6':
             case '7_6_1':
-            case '7_6_2':
+            case '7_7':
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -310,7 +310,7 @@ class upgradeModel extends model
             case '7_5'      :
             case '7_6'      :
             case '7_6_1'    :
-            case '7_6_2'    :
+            case '7_7'      :
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
