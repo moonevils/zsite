@@ -113,6 +113,7 @@ $lang->noResultsMatch = 'No match found!';
 $lang->alias          = 'For SEO, enter letters and numbers.';
 $lang->keywordsHolder = 'Use commas to separate tags.';
 $lang->autoUpgrade    = 'Auto upgrade';
+$lang->detail         = 'Detail';
 
 $lang->setOkFile = <<<EOT
 <h5>Please confirm your admin account by following steps below.</h5>

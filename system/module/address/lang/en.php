@@ -7,9 +7,11 @@ $lang->address->contact = 'Contact';
 
 $lang->address->browse         = 'Address';
 $lang->address->create         = 'Add';
+$lang->address->selected       = 'Select';
 $lang->address->edit           = 'Edit';
 $lang->address->default        = 'Default';
 $lang->address->manage         = 'Manage';
-$lang->address->complete     = 'Done';
+$lang->address->manageAddress  = 'Manage Address';
+$lang->address->complete       = 'Done';
 $lang->address->allSelect      = 'All';
 $lang->address->deleteEmptyIDs = 'None Selected';

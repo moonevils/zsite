@@ -36,6 +36,8 @@ $lang->order->zipcode           = 'Zipcode';
 $lang->order->deliveryStatus    = 'Status';
 $lang->order->last              = 'Last Action';
 $lang->order->comment           = 'Comment';
+$lang->order->manage            = 'Manage';
+$lang->order->finish            = 'Done';
 
 $lang->order->deliverList['not_send']  = 'Pending';
 $lang->order->deliverList['send']      = 'Delivered';
@@ -62,6 +64,10 @@ $lang->order->finish         = 'Finish';
 $lang->order->confirm        = 'Confirmation';
 $lang->order->selectProducts = "You have <strong class='text-danger'>%s</strong> in your cart. ";
 $lang->order->totalToPay     = "Total <strong id='amount' class='text-danger'>%s</strong>";
+$lang->order->amountToPay     = "Total：<strong id='total' class='text-lg text-danger'>%s</strong>";
+$lang->order->cartProducts    = "<strong>%s</strong> products";
+$lang->order->statistics      = "<strong class='text-danger'>%s</strong> products, total:<strong id='amount' class='text-lg text-danger'>%s</strong>";
+$lang->order->orderProducts   = "<strong class='text-danger'>%s</strong> products, total: <strong class='text-danger'>%s%s</strong>";
 $lang->order->payInfo        = "%s %s order";
 $lang->order->goToBank       = "Please pay online.";
 $lang->order->track          = 'View Shipment';
@@ -117,6 +123,7 @@ $lang->order->placeholder->appid     = 'ID of wechat public';
 $lang->order->placeholder->mchid     = 'Merchant id assigned by wechatpay';
 $lang->order->placeholder->apikey    = 'Key of wechatpay API';
 $lang->order->placeholder->appsecret = "wechat public's key";
+$lang->order->placeholder->note      = 'Optional，leave a message for seller.';
 
 $lang->order->paymentList = array();
 $lang->order->paymentList['alipay']        = 'Alipay Payment';

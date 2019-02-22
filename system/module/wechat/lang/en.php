@@ -140,4 +140,3 @@ $lang->wechat->needCertified   = "This feature requires the account to be verifi
 $lang->wechat->integrateInfo   = "Please integrate in the wechat control panel.";
 $lang->wechat->integrateDone   = "I have integrated with wechat server";
 $lang->wechat->openUserModule  = "You should switch on User module first. Switch it on now?";
-$lang->wechat->userDisabled    = "Wechat requires to open uesr module.";
