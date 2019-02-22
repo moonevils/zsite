@@ -47,7 +47,7 @@ $lang->message->deleteSelected = 'Delete';
 $lang->message->passPre        = 'Pass Prev';
 $lang->message->deletePre      = 'Delete Prev';
 $lang->message->commentAt      = 'Posted on';
-$lang->message->deletedObject  = 'Deleted';
+$lang->message->deletedObject  = 'Deleted object';
 $lang->message->contactHidden  = "such as phone and email. Only Admin can see your contact.";
 
 $lang->message->confirmDeleteSingle = 'Do you want to delete this message?';
@@ -92,7 +92,7 @@ $lang->comment->passPre          = 'Pass Prev';
 $lang->comment->deletePre        = 'Delete Prev';
 $lang->comment->commentTo        = 'Comment on';
 $lang->comment->commentAt        = 'Comment on';
-$lang->comment->deletedObject    = 'Deleted Comment';
+$lang->comment->deletedObject    = 'Deleted object';
 
 $lang->comment->confirmDeleteSingle = 'Do you want to delete this comment?';
 $lang->comment->confirmDeletePre    = 'Do you want to delete previous comments?';
