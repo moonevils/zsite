@@ -3,6 +3,9 @@ $lang->admin->common        = 'Admin';
 $lang->admin->index         = 'Home';
 $lang->admin->checked       = 'Checked';
 
+$lang->admin->getEmailCodeByApi  = 'Get email code';
+$lang->admin->getMobileCodeByApi = 'Get mobile code';
+
 $lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->common             = 'Shortcuts';
 $lang->admin->shortcuts->articleCategories  = 'Category';

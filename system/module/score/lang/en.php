@@ -14,6 +14,7 @@ $lang->score->rule        = 'Rules';
 $lang->score->statement   = 'Point Statement';
 $lang->score->stateDesc   = 'Point Statement is generated per user and based on the total points acquired in last month.';
 
+$lang->score->common  = 'Score';
 $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
 $lang->score->method  = 'How';

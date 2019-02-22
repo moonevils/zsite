@@ -19,6 +19,7 @@ $lang->thread->content     = 'Text';
 $lang->thread->file        = 'File: ';
 $lang->thread->postedDate  = 'Created On';
 $lang->thread->replies     = 'Reply';
+$lang->thread->replyCount  = 'Replies';
 $lang->thread->views       = 'View';
 $lang->thread->lastReply   = 'Last Reply';
 $lang->thread->isLink      = 'Link';
